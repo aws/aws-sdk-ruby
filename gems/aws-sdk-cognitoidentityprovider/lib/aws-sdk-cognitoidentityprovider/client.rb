@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,14 +155,18 @@ module Aws
       # @!group API Operations
 
       # Adds additional user attributes to the user pool schema.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to add custom
       #   attributes.
+      #
       # @option params [required, Array<Types::SchemaAttributeType>] :custom_attributes
       #   An array of custom attributes, such as Mutable and Name.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_custom_attributes({
       #     user_pool_id: "UserPoolIdType", # required
       #     custom_attributes: [ # required
@@ -168,6 +187,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_custom_attributes(params = {})
       # @param [Hash] params ({})
       def add_custom_attributes(params = {}, options = {})
@@ -177,17 +197,22 @@ module Aws
 
       # Confirms user registration as an admin without using a confirmation
       # code. Works on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for which you want to confirm user registration.
+      #
       # @option params [required, String] :username
       #   The user name for which you want to confirm user registration.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_confirm_sign_up({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      #
       # @overload admin_confirm_sign_up(params = {})
       # @param [Hash] params ({})
       def admin_confirm_sign_up(params = {}, options = {})
@@ -202,12 +227,15 @@ module Aws
       # placeholders for user name and temporary password.
       #
       # Requires developer credentials.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where the user will be created.
+      #
       # @option params [required, String] :username
       #   The username for the user. Must be unique within the user pool. Must
       #   be a UTF-8 string between 1 and 128 characters. After the user is
       #   created, the username cannot be changed.
+      #
       # @option params [Array<Types::AttributeType>] :user_attributes
       #   An array of name-value pairs that contain user attributes and
       #   attribute values to be set for the user to be created. You can create
@@ -236,6 +264,7 @@ module Aws
       #     that contains the code and username will be sent. Required if the
       #     phone\_number\_verified attribute is set to True, or if "SMS" is
       #     specified in the DesiredDeliveryMediums parameter.
+      #
       # @option params [Array<Types::AttributeType>] :validation_data
       #   The user's validation data. This is an array of name-value pairs that
       #   contain user attributes and attribute values that you can use for
@@ -249,6 +278,7 @@ module Aws
       #   the validation process.
       #
       #   The user's validation data is not persisted.
+      #
       # @option params [String] :temporary_password
       #   The user's temporary password. This password must conform to the
       #   password policy that you specified when you created the user pool.
@@ -265,6 +295,7 @@ module Aws
       #   expiration limit that you specified when you created the user pool. To
       #   reset the account after that time limit, you must call AdminCreateUser
       #   again, specifying "RESEND" for the MessageAction parameter.
+      #
       # @option params [Boolean] :force_alias_creation
       #   This parameter is only used if the phone\_number\_verified or
       #   email\_verified attribute is set to True. Otherwise, it is ignored.
@@ -278,20 +309,24 @@ module Aws
       #   If this parameter is set to False, the API throws an
       #   AliasExistsException error if the alias already exists. The default
       #   value is False.
+      #
       # @option params [String] :message_action
       #   Set to "RESEND" to resend the invitation message to a user that
       #   already exists and reset the expiration limit on the user's account.
       #   Set to "SUPPRESS" to suppress sending the message. Only one value
       #   can be specified.
+      #
       # @option params [Array<String>] :desired_delivery_mediums
       #   Specify "EMAIL" if email will be used to send the welcome message.
       #   Specify "SMS" if the phone number will be used. The default value is
       #   "SMS". More than one value can be specified.
+      #
       # @return [Types::AdminCreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AdminCreateUserResponse#user #User} => Types::UserType
+      #   * {Types::AdminCreateUserResponse#user #user} => Types::UserType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_create_user({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
@@ -314,6 +349,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user.username #=> String
       #   resp.user.attributes #=> Array
       #   resp.user.attributes[0].name #=> String
@@ -325,6 +361,7 @@ module Aws
       #   resp.user.mfa_options #=> Array
       #   resp.user.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.user.mfa_options[0].attribute_name #=> String
+      #
       # @overload admin_create_user(params = {})
       # @param [Hash] params ({})
       def admin_create_user(params = {}, options = {})
@@ -333,17 +370,22 @@ module Aws
       end
 
       # Deletes a user as an administrator. Works on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to delete the user.
+      #
       # @option params [required, String] :username
       #   The user name of the user you wish to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_delete_user({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      #
       # @overload admin_delete_user(params = {})
       # @param [Hash] params ({})
       def admin_delete_user(params = {}, options = {})
@@ -353,23 +395,29 @@ module Aws
 
       # Deletes the user attributes in a user pool as an administrator. Works
       # on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to delete user
       #   attributes.
+      #
       # @option params [required, String] :username
       #   The user name of the user from which you would like to delete
       #   attributes.
+      #
       # @option params [required, Array<String>] :user_attribute_names
       #   An array of strings representing the user attribute names you wish to
       #   delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_delete_user_attributes({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #     user_attribute_names: ["AttributeNameType"], # required
       #   })
+      #
       # @overload admin_delete_user_attributes(params = {})
       # @param [Hash] params ({})
       def admin_delete_user_attributes(params = {}, options = {})
@@ -378,17 +426,22 @@ module Aws
       end
 
       # Disables the specified user as an administrator. Works on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to disable the user.
+      #
       # @option params [required, String] :username
       #   The user name of the user you wish to disable.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_disable_user({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      #
       # @overload admin_disable_user(params = {})
       # @param [Hash] params ({})
       def admin_disable_user(params = {}, options = {})
@@ -397,17 +450,22 @@ module Aws
       end
 
       # Enables the specified user as an administrator. Works on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to enable the user.
+      #
       # @option params [required, String] :username
       #   The user name of the user you wish to ebable.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_enable_user({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      #
       # @overload admin_enable_user(params = {})
       # @param [Hash] params ({})
       def admin_enable_user(params = {}, options = {})
@@ -416,20 +474,26 @@ module Aws
       end
 
       # Forgets the device, as an administrator.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID.
+      #
       # @option params [required, String] :username
       #   The user name.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_forget_device({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #     device_key: "DeviceKeyType", # required
       #   })
+      #
       # @overload admin_forget_device(params = {})
       # @param [Hash] params ({})
       def admin_forget_device(params = {}, options = {})
@@ -438,17 +502,22 @@ module Aws
       end
 
       # Gets the device, as an administrator.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID.
+      #
       # @option params [required, String] :username
       #   The user name.
+      #
       # @return [Types::AdminGetDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AdminGetDeviceResponse#device #Device} => Types::DeviceType
+      #   * {Types::AdminGetDeviceResponse#device #device} => Types::DeviceType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_get_device({
       #     device_key: "DeviceKeyType", # required
       #     user_pool_id: "UserPoolIdType", # required
@@ -456,6 +525,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.device.device_key #=> String
       #   resp.device.device_attributes #=> Array
       #   resp.device.device_attributes[0].name #=> String
@@ -463,6 +533,7 @@ module Aws
       #   resp.device.device_create_date #=> Time
       #   resp.device.device_last_modified_date #=> Time
       #   resp.device.device_last_authenticated_date #=> Time
+      #
       # @overload admin_get_device(params = {})
       # @param [Hash] params ({})
       def admin_get_device(params = {}, options = {})
@@ -472,28 +543,33 @@ module Aws
 
       # Gets the specified user by user name in a user pool as an
       # administrator. Works on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to get information
       #   about the user.
+      #
       # @option params [required, String] :username
       #   The user name of the user you wish to retrieve.
+      #
       # @return [Types::AdminGetUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AdminGetUserResponse#username #Username} => String
-      #   * {Types::AdminGetUserResponse#user_attributes #UserAttributes} => Array&lt;Types::AttributeType&gt;
-      #   * {Types::AdminGetUserResponse#user_create_date #UserCreateDate} => Time
-      #   * {Types::AdminGetUserResponse#user_last_modified_date #UserLastModifiedDate} => Time
-      #   * {Types::AdminGetUserResponse#enabled #Enabled} => Boolean
-      #   * {Types::AdminGetUserResponse#user_status #UserStatus} => String
-      #   * {Types::AdminGetUserResponse#mfa_options #MFAOptions} => Array&lt;Types::MFAOptionType&gt;
+      #   * {Types::AdminGetUserResponse#username #username} => String
+      #   * {Types::AdminGetUserResponse#user_attributes #user_attributes} => Array&lt;Types::AttributeType&gt;
+      #   * {Types::AdminGetUserResponse#user_create_date #user_create_date} => Time
+      #   * {Types::AdminGetUserResponse#user_last_modified_date #user_last_modified_date} => Time
+      #   * {Types::AdminGetUserResponse#enabled #enabled} => Boolean
+      #   * {Types::AdminGetUserResponse#user_status #user_status} => String
+      #   * {Types::AdminGetUserResponse#mfa_options #mfa_options} => Array&lt;Types::MFAOptionType&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_get_user({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.username #=> String
       #   resp.user_attributes #=> Array
       #   resp.user_attributes[0].name #=> String
@@ -505,6 +581,7 @@ module Aws
       #   resp.mfa_options #=> Array
       #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.mfa_options[0].attribute_name #=> String
+      #
       # @overload admin_get_user(params = {})
       # @param [Hash] params ({})
       def admin_get_user(params = {}, options = {})
@@ -513,24 +590,31 @@ module Aws
       end
 
       # Initiates the authentication flow, as an administrator.
+      #
       # @option params [required, String] :user_pool_id
       #   The ID of the Amazon Cognito user pool.
+      #
       # @option params [required, String] :client_id
       #   The client app ID.
+      #
       # @option params [required, String] :auth_flow
       #   The authentication flow.
+      #
       # @option params [Hash<String,String>] :auth_parameters
       #   The authentication parameters.
+      #
       # @option params [Hash<String,String>] :client_metadata
       #   The client app metadata.
+      #
       # @return [Types::AdminInitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AdminInitiateAuthResponse#challenge_name #ChallengeName} => String
-      #   * {Types::AdminInitiateAuthResponse#session #Session} => String
-      #   * {Types::AdminInitiateAuthResponse#challenge_parameters #ChallengeParameters} => Hash&lt;String,String&gt;
-      #   * {Types::AdminInitiateAuthResponse#authentication_result #AuthenticationResult} => Types::AuthenticationResultType
+      #   * {Types::AdminInitiateAuthResponse#challenge_name #challenge_name} => String
+      #   * {Types::AdminInitiateAuthResponse#session #session} => String
+      #   * {Types::AdminInitiateAuthResponse#challenge_parameters #challenge_parameters} => Hash&lt;String,String&gt;
+      #   * {Types::AdminInitiateAuthResponse#authentication_result #authentication_result} => Types::AuthenticationResultType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_initiate_auth({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
@@ -544,6 +628,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
@@ -555,6 +640,7 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      #
       # @overload admin_initiate_auth(params = {})
       # @param [Hash] params ({})
       def admin_initiate_auth(params = {}, options = {})
@@ -563,20 +649,26 @@ module Aws
       end
 
       # Lists devices, as an administrator.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID.
+      #
       # @option params [required, String] :username
       #   The user name.
+      #
       # @option params [Integer] :limit
       #   The limit of the devices request.
+      #
       # @option params [String] :pagination_token
       #   The pagination token.
+      #
       # @return [Types::AdminListDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AdminListDevicesResponse#devices #Devices} => Array&lt;Types::DeviceType&gt;
-      #   * {Types::AdminListDevicesResponse#pagination_token #PaginationToken} => String
+      #   * {Types::AdminListDevicesResponse#devices #devices} => Array&lt;Types::DeviceType&gt;
+      #   * {Types::AdminListDevicesResponse#pagination_token #pagination_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_list_devices({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
@@ -585,6 +677,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.devices #=> Array
       #   resp.devices[0].device_key #=> String
       #   resp.devices[0].device_attributes #=> Array
@@ -594,6 +687,7 @@ module Aws
       #   resp.devices[0].device_last_modified_date #=> Time
       #   resp.devices[0].device_last_authenticated_date #=> Time
       #   resp.pagination_token #=> String
+      #
       # @overload admin_list_devices(params = {})
       # @param [Hash] params ({})
       def admin_list_devices(params = {}, options = {})
@@ -614,18 +708,23 @@ module Aws
       # verified email exists for the user, calling this API will also result
       # in sending a message to the end user with the code to change their
       # password.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to reset the user's
       #   password.
+      #
       # @option params [required, String] :username
       #   The user name of the user whose password you wish to reset.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_reset_user_password({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      #
       # @overload admin_reset_user_password(params = {})
       # @param [Hash] params ({})
       def admin_reset_user_password(params = {}, options = {})
@@ -634,24 +733,31 @@ module Aws
       end
 
       # Responds to an authentication challenge, as an administrator.
+      #
       # @option params [required, String] :user_pool_id
       #   The ID of the Amazon Cognito user pool.
+      #
       # @option params [required, String] :client_id
       #   The client ID.
+      #
       # @option params [required, String] :challenge_name
       #   The name of the challenge.
+      #
       # @option params [Hash<String,String>] :challenge_responses
       #   The challenge response.
+      #
       # @option params [String] :session
       #   The session.
+      #
       # @return [Types::AdminRespondToAuthChallengeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AdminRespondToAuthChallengeResponse#challenge_name #ChallengeName} => String
-      #   * {Types::AdminRespondToAuthChallengeResponse#session #Session} => String
-      #   * {Types::AdminRespondToAuthChallengeResponse#challenge_parameters #ChallengeParameters} => Hash&lt;String,String&gt;
-      #   * {Types::AdminRespondToAuthChallengeResponse#authentication_result #AuthenticationResult} => Types::AuthenticationResultType
+      #   * {Types::AdminRespondToAuthChallengeResponse#challenge_name #challenge_name} => String
+      #   * {Types::AdminRespondToAuthChallengeResponse#session #session} => String
+      #   * {Types::AdminRespondToAuthChallengeResponse#challenge_parameters #challenge_parameters} => Hash&lt;String,String&gt;
+      #   * {Types::AdminRespondToAuthChallengeResponse#authentication_result #authentication_result} => Types::AuthenticationResultType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_respond_to_auth_challenge({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
@@ -663,6 +769,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
@@ -674,6 +781,7 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      #
       # @overload admin_respond_to_auth_challenge(params = {})
       # @param [Hash] params ({})
       def admin_respond_to_auth_challenge(params = {}, options = {})
@@ -683,16 +791,21 @@ module Aws
 
       # Sets all the user settings for a specified user name. Works on any
       # user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to set the user's
       #   settings, such as MFA options.
+      #
       # @option params [required, String] :username
       #   The user name of the user for whom you wish to set user settings.
+      #
       # @option params [required, Array<Types::MFAOptionType>] :mfa_options
       #   Specifies the options for MFA (e.g., email or phone number).
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_set_user_settings({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
@@ -703,6 +816,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload admin_set_user_settings(params = {})
       # @param [Hash] params ({})
       def admin_set_user_settings(params = {}, options = {})
@@ -711,23 +825,30 @@ module Aws
       end
 
       # Updates the device status as an administrator.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID&gt;
+      #
       # @option params [required, String] :username
       #   The user name.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @option params [String] :device_remembered_status
       #   The status indicating whether a device has been remembered or not.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_update_device_status({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #     device_key: "DeviceKeyType", # required
       #     device_remembered_status: "remembered", # accepts remembered, not_remembered
       #   })
+      #
       # @overload admin_update_device_status(params = {})
       # @param [Hash] params ({})
       def admin_update_device_status(params = {}, options = {})
@@ -737,16 +858,21 @@ module Aws
 
       # Updates the specified user's attributes, including developer
       # attributes, as an administrator. Works on any user.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to update user
       #   attributes.
+      #
       # @option params [required, String] :username
       #   The user name of the user for whom you want to update user attributes.
+      #
       # @option params [required, Array<Types::AttributeType>] :user_attributes
       #   An array of name-value pairs representing user attributes.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_update_user_attributes({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
@@ -757,6 +883,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload admin_update_user_attributes(params = {})
       # @param [Hash] params ({})
       def admin_update_user_attributes(params = {}, options = {})
@@ -765,17 +892,22 @@ module Aws
       end
 
       # Signs out users from all devices, as an administrator.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID.
+      #
       # @option params [required, String] :username
       #   The user name.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.admin_user_global_sign_out({
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      #
       # @overload admin_user_global_sign_out(params = {})
       # @param [Hash] params ({})
       def admin_user_global_sign_out(params = {}, options = {})
@@ -784,20 +916,26 @@ module Aws
       end
 
       # Changes the password for a specified user in a user pool.
+      #
       # @option params [required, String] :previous_password
       #   The old password in the change password request.
+      #
       # @option params [required, String] :proposed_password
       #   The new password in the change password request.
+      #
       # @option params [String] :access_token
       #   The access token in the change password request.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.change_password({
       #     previous_password: "PasswordType", # required
       #     proposed_password: "PasswordType", # required
       #     access_token: "TokenModelType",
       #   })
+      #
       # @overload change_password(params = {})
       # @param [Hash] params ({})
       def change_password(params = {}, options = {})
@@ -807,19 +945,25 @@ module Aws
 
       # Confirms tracking of the device. This API call is the call that beings
       # device tracking.
+      #
       # @option params [required, String] :access_token
       #   The access token.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @option params [Types::DeviceSecretVerifierConfigType] :device_secret_verifier_config
       #   The configuration of the device secret verifier.
+      #
       # @option params [String] :device_name
       #   The device name.
+      #
       # @return [Types::ConfirmDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfirmDeviceResponse#user_confirmation_necessary #UserConfirmationNecessary} => Boolean
+      #   * {Types::ConfirmDeviceResponse#user_confirmation_necessary #user_confirmation_necessary} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.confirm_device({
       #     access_token: "TokenModelType", # required
       #     device_key: "DeviceKeyType", # required
@@ -831,7 +975,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_confirmation_necessary #=> Boolean
+      #
       # @overload confirm_device(params = {})
       # @param [Hash] params ({})
       def confirm_device(params = {}, options = {})
@@ -841,24 +987,31 @@ module Aws
 
       # Allows a user to enter a code provided when they reset their password
       # to update their password.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @option params [String] :secret_hash
       #   A keyed-hash message authentication code (HMAC) calculated using the
       #   secret key of a user pool client and username plus the client ID in
       #   the message.
+      #
       # @option params [required, String] :username
       #   The user name of the user for whom you want to enter a code to
       #   retrieve a forgotten password.
+      #
       # @option params [required, String] :confirmation_code
       #   The confirmation code sent by a user's request to retrieve a
       #   forgotten password.
+      #
       # @option params [required, String] :password
       #   The password sent by sent by a user's request to retrieve a forgotten
       #   password.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.confirm_forgot_password({
       #     client_id: "ClientIdType", # required
       #     secret_hash: "SecretHashType",
@@ -866,6 +1019,7 @@ module Aws
       #     confirmation_code: "ConfirmationCodeType", # required
       #     password: "PasswordType", # required
       #   })
+      #
       # @overload confirm_forgot_password(params = {})
       # @param [Hash] params ({})
       def confirm_forgot_password(params = {}, options = {})
@@ -875,17 +1029,22 @@ module Aws
 
       # Confirms registration of a user and handles the existing alias from a
       # previous user.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @option params [String] :secret_hash
       #   A keyed-hash message authentication code (HMAC) calculated using the
       #   secret key of a user pool client and username plus the client ID in
       #   the message.
+      #
       # @option params [required, String] :username
       #   The user name of the user whose registration you wish to confirm.
+      #
       # @option params [required, String] :confirmation_code
       #   The confirmation code sent by a user's request to confirm
       #   registration.
+      #
       # @option params [Boolean] :force_alias_creation
       #   Boolean to be specified to force user confirmation irrespective of
       #   existing alias. By default set to False. If this parameter is set to
@@ -894,9 +1053,11 @@ module Aws
       #   the alias from the previous user to the newly created user being
       #   confirmed. If set to False, the API will throw an
       #   **AliasExistsException** error.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.confirm_sign_up({
       #     client_id: "ClientIdType", # required
       #     secret_hash: "SecretHashType",
@@ -904,6 +1065,7 @@ module Aws
       #     confirmation_code: "ConfirmationCodeType", # required
       #     force_alias_creation: false,
       #   })
+      #
       # @overload confirm_sign_up(params = {})
       # @param [Hash] params ({})
       def confirm_sign_up(params = {}, options = {})
@@ -912,19 +1074,24 @@ module Aws
       end
 
       # Creates the user import job.
+      #
       # @option params [required, String] :job_name
       #   The job name for the user import job.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool that the users are being imported
       #   into.
+      #
       # @option params [required, String] :cloud_watch_logs_role_arn
       #   The role ARN for the Amazon CloudWatch Logging role for the user
       #   import job.
+      #
       # @return [Types::CreateUserImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateUserImportJobResponse#user_import_job #UserImportJob} => Types::UserImportJobType
+      #   * {Types::CreateUserImportJobResponse#user_import_job #user_import_job} => Types::UserImportJobType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_user_import_job({
       #     job_name: "UserImportJobNameType", # required
       #     user_pool_id: "UserPoolIdType", # required
@@ -932,6 +1099,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_import_job.job_name #=> String
       #   resp.user_import_job.job_id #=> String
       #   resp.user_import_job.user_pool_id #=> String
@@ -945,6 +1113,7 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      #
       # @overload create_user_import_job(params = {})
       # @param [Hash] params ({})
       def create_user_import_job(params = {}, options = {})
@@ -954,44 +1123,61 @@ module Aws
 
       # Creates a new Amazon Cognito user pool and sets the password policy
       # for the pool.
+      #
       # @option params [required, String] :pool_name
       #   A string used to name the user pool.
+      #
       # @option params [Types::UserPoolPolicyType] :policies
       #   The policies associated with the new user pool.
+      #
       # @option params [Types::LambdaConfigType] :lambda_config
       #   The Lambda trigger configuration information for the new user pool.
+      #
       # @option params [Array<String>] :auto_verified_attributes
       #   The attributes to be auto-verified. Possible values: **email**,
       #   **phone\_number**.
+      #
       # @option params [Array<String>] :alias_attributes
       #   Attributes supported as an alias for this user pool. Possible values:
       #   **phone\_number**, **email**, or **preferred\_username**.
+      #
       # @option params [String] :sms_verification_message
       #   A string representing the SMS verification message.
+      #
       # @option params [String] :email_verification_message
       #   A string representing the email verification message.
+      #
       # @option params [String] :email_verification_subject
       #   A string representing the email verification subject.
+      #
       # @option params [String] :sms_authentication_message
       #   A string representing the SMS authentication message.
+      #
       # @option params [String] :mfa_configuration
       #   Specifies MFA configuration details.
+      #
       # @option params [Types::DeviceConfigurationType] :device_configuration
       #   The device configuration.
+      #
       # @option params [Types::EmailConfigurationType] :email_configuration
       #   The email configuration.
+      #
       # @option params [Types::SmsConfigurationType] :sms_configuration
       #   The SMS configuration.
+      #
       # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
       #   The configuration for AdminCreateUser requests.
+      #
       # @option params [Array<Types::SchemaAttributeType>] :schema
       #   An array of schema attributes for the new user pool. These attributes
       #   can be standard or custom attributes.
+      #
       # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateUserPoolResponse#user_pool #UserPool} => Types::UserPoolType
+      #   * {Types::CreateUserPoolResponse#user_pool #user_pool} => Types::UserPoolType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_user_pool({
       #     pool_name: "UserPoolNameType", # required
       #     policies: {
@@ -1061,6 +1247,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool.id #=> String
       #   resp.user_pool.name #=> String
       #   resp.user_pool.policies.password_policy.minimum_length #=> Integer
@@ -1112,6 +1299,7 @@ module Aws
       #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
       #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
       #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
+      #
       # @overload create_user_pool(params = {})
       # @param [Hash] params ({})
       def create_user_pool(params = {}, options = {})
@@ -1120,27 +1308,36 @@ module Aws
       end
 
       # Creates the user pool client.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to create a user
       #   pool client.
+      #
       # @option params [required, String] :client_name
       #   The client name for the user pool client you would like to create.
+      #
       # @option params [Boolean] :generate_secret
       #   Boolean to specify whether you want to generate a secret for the user
       #   pool client being created.
+      #
       # @option params [Integer] :refresh_token_validity
       #   Refreshes the token validity.
+      #
       # @option params [Array<String>] :read_attributes
       #   The read attributes.
+      #
       # @option params [Array<String>] :write_attributes
       #   The write attributes.
+      #
       # @option params [Array<String>] :explicit_auth_flows
       #   The explicit authentication flows.
+      #
       # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateUserPoolClientResponse#user_pool_client #UserPoolClient} => Types::UserPoolClientType
+      #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_user_pool_client({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_name: "ClientNameType", # required
@@ -1152,6 +1349,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool_client.user_pool_id #=> String
       #   resp.user_pool_client.client_name #=> String
       #   resp.user_pool_client.client_id #=> String
@@ -1165,6 +1363,7 @@ module Aws
       #   resp.user_pool_client.write_attributes[0] #=> String
       #   resp.user_pool_client.explicit_auth_flows #=> Array
       #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+      #
       # @overload create_user_pool_client(params = {})
       # @param [Hash] params ({})
       def create_user_pool_client(params = {}, options = {})
@@ -1173,14 +1372,18 @@ module Aws
       end
 
       # Allows a user to delete one's self.
+      #
       # @option params [String] :access_token
       #   The access token from a request to delete a user.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_user({
       #     access_token: "TokenModelType",
       #   })
+      #
       # @overload delete_user(params = {})
       # @param [Hash] params ({})
       def delete_user(params = {}, options = {})
@@ -1189,18 +1392,23 @@ module Aws
       end
 
       # Deletes the attributes for a user.
+      #
       # @option params [required, Array<String>] :user_attribute_names
       #   An array of strings representing the user attribute names you wish to
       #   delete.
+      #
       # @option params [String] :access_token
       #   The access token used in the request to delete user attributes.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_user_attributes({
       #     user_attribute_names: ["AttributeNameType"], # required
       #     access_token: "TokenModelType",
       #   })
+      #
       # @overload delete_user_attributes(params = {})
       # @param [Hash] params ({})
       def delete_user_attributes(params = {}, options = {})
@@ -1209,14 +1417,18 @@ module Aws
       end
 
       # Deletes the specified Amazon Cognito user pool.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool you want to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_user_pool({
       #     user_pool_id: "UserPoolIdType", # required
       #   })
+      #
       # @overload delete_user_pool(params = {})
       # @param [Hash] params ({})
       def delete_user_pool(params = {}, options = {})
@@ -1225,18 +1437,23 @@ module Aws
       end
 
       # Allows the developer to delete the user pool client.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to delete the
       #   client.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_user_pool_client({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
       #   })
+      #
       # @overload delete_user_pool_client(params = {})
       # @param [Hash] params ({})
       def delete_user_pool_client(params = {}, options = {})
@@ -1245,22 +1462,27 @@ module Aws
       end
 
       # Describes the user import job.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool that the users are being imported
       #   into.
+      #
       # @option params [required, String] :job_id
       #   The job ID for the user import job.
+      #
       # @return [Types::DescribeUserImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeUserImportJobResponse#user_import_job #UserImportJob} => Types::UserImportJobType
+      #   * {Types::DescribeUserImportJobResponse#user_import_job #user_import_job} => Types::UserImportJobType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_user_import_job({
       #     user_pool_id: "UserPoolIdType", # required
       #     job_id: "UserImportJobIdType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_import_job.job_name #=> String
       #   resp.user_import_job.job_id #=> String
       #   resp.user_import_job.user_pool_id #=> String
@@ -1274,6 +1496,7 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      #
       # @overload describe_user_import_job(params = {})
       # @param [Hash] params ({})
       def describe_user_import_job(params = {}, options = {})
@@ -1283,18 +1506,22 @@ module Aws
 
       # Returns the configuration information and metadata of the specified
       # user pool.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool you want to describe.
+      #
       # @return [Types::DescribeUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeUserPoolResponse#user_pool #UserPool} => Types::UserPoolType
+      #   * {Types::DescribeUserPoolResponse#user_pool #user_pool} => Types::UserPoolType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_user_pool({
       #     user_pool_id: "UserPoolIdType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool.id #=> String
       #   resp.user_pool.name #=> String
       #   resp.user_pool.policies.password_policy.minimum_length #=> Integer
@@ -1346,6 +1573,7 @@ module Aws
       #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
       #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
       #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
+      #
       # @overload describe_user_pool(params = {})
       # @param [Hash] params ({})
       def describe_user_pool(params = {}, options = {})
@@ -1355,21 +1583,26 @@ module Aws
 
       # Client method for returning the configuration information and metadata
       # of the specified user pool client.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool you want to describe.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @return [Types::DescribeUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeUserPoolClientResponse#user_pool_client #UserPoolClient} => Types::UserPoolClientType
+      #   * {Types::DescribeUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_user_pool_client({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool_client.user_pool_id #=> String
       #   resp.user_pool_client.client_name #=> String
       #   resp.user_pool_client.client_id #=> String
@@ -1383,6 +1616,7 @@ module Aws
       #   resp.user_pool_client.write_attributes[0] #=> String
       #   resp.user_pool_client.explicit_auth_flows #=> Array
       #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+      #
       # @overload describe_user_pool_client(params = {})
       # @param [Hash] params ({})
       def describe_user_pool_client(params = {}, options = {})
@@ -1391,17 +1625,22 @@ module Aws
       end
 
       # Forgets the specified device.
+      #
       # @option params [String] :access_token
       #   The access token for the forgotten device request.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.forget_device({
       #     access_token: "TokenModelType",
       #     device_key: "DeviceKeyType", # required
       #   })
+      #
       # @overload forget_device(params = {})
       # @param [Hash] params ({})
       def forget_device(params = {}, options = {})
@@ -1410,20 +1649,25 @@ module Aws
       end
 
       # Retrieves the password for the specified client ID or username.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @option params [String] :secret_hash
       #   A keyed-hash message authentication code (HMAC) calculated using the
       #   secret key of a user pool client and username plus the client ID in
       #   the message.
+      #
       # @option params [required, String] :username
       #   The user name of the user for whom you want to enter a code to reset a
       #   forgotten password.
+      #
       # @return [Types::ForgotPasswordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ForgotPasswordResponse#code_delivery_details #CodeDeliveryDetails} => Types::CodeDeliveryDetailsType
+      #   * {Types::ForgotPasswordResponse#code_delivery_details #code_delivery_details} => Types::CodeDeliveryDetailsType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.forgot_password({
       #     client_id: "ClientIdType", # required
       #     secret_hash: "SecretHashType",
@@ -1431,9 +1675,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      #
       # @overload forgot_password(params = {})
       # @param [Hash] params ({})
       def forgot_password(params = {}, options = {})
@@ -1443,23 +1689,28 @@ module Aws
 
       # Gets the header information for the .csv file to be used as input for
       # the user import job.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool that the users are to be imported
       #   into.
+      #
       # @return [Types::GetCSVHeaderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCSVHeaderResponse#user_pool_id #UserPoolId} => String
-      #   * {Types::GetCSVHeaderResponse#csv_header #CSVHeader} => Array&lt;String&gt;
+      #   * {Types::GetCSVHeaderResponse#user_pool_id #user_pool_id} => String
+      #   * {Types::GetCSVHeaderResponse#csv_header #csv_header} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_csv_header({
       #     user_pool_id: "UserPoolIdType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool_id #=> String
       #   resp.csv_header #=> Array
       #   resp.csv_header[0] #=> String
+      #
       # @overload get_csv_header(params = {})
       # @param [Hash] params ({})
       def get_csv_header(params = {}, options = {})
@@ -1468,21 +1719,26 @@ module Aws
       end
 
       # Gets the device.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @option params [String] :access_token
       #   The access token.
+      #
       # @return [Types::GetDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDeviceResponse#device #Device} => Types::DeviceType
+      #   * {Types::GetDeviceResponse#device #device} => Types::DeviceType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_device({
       #     device_key: "DeviceKeyType", # required
       #     access_token: "TokenModelType",
       #   })
       #
       # @example Response structure
+      #
       #   resp.device.device_key #=> String
       #   resp.device.device_attributes #=> Array
       #   resp.device.device_attributes[0].name #=> String
@@ -1490,6 +1746,7 @@ module Aws
       #   resp.device.device_create_date #=> Time
       #   resp.device.device_last_modified_date #=> Time
       #   resp.device.device_last_authenticated_date #=> Time
+      #
       # @overload get_device(params = {})
       # @param [Hash] params ({})
       def get_device(params = {}, options = {})
@@ -1498,21 +1755,25 @@ module Aws
       end
 
       # Gets the user attributes and metadata for a user.
+      #
       # @option params [String] :access_token
       #   The access token returned by the server response to get information
       #   about the user.
+      #
       # @return [Types::GetUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetUserResponse#username #Username} => String
-      #   * {Types::GetUserResponse#user_attributes #UserAttributes} => Array&lt;Types::AttributeType&gt;
-      #   * {Types::GetUserResponse#mfa_options #MFAOptions} => Array&lt;Types::MFAOptionType&gt;
+      #   * {Types::GetUserResponse#username #username} => String
+      #   * {Types::GetUserResponse#user_attributes #user_attributes} => Array&lt;Types::AttributeType&gt;
+      #   * {Types::GetUserResponse#mfa_options #mfa_options} => Array&lt;Types::MFAOptionType&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_user({
       #     access_token: "TokenModelType",
       #   })
       #
       # @example Response structure
+      #
       #   resp.username #=> String
       #   resp.user_attributes #=> Array
       #   resp.user_attributes[0].name #=> String
@@ -1520,6 +1781,7 @@ module Aws
       #   resp.mfa_options #=> Array
       #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.mfa_options[0].attribute_name #=> String
+      #
       # @overload get_user(params = {})
       # @param [Hash] params ({})
       def get_user(params = {}, options = {})
@@ -1529,26 +1791,32 @@ module Aws
 
       # Gets the user attribute verification code for the specified attribute
       # name.
+      #
       # @option params [String] :access_token
       #   The access token returned by the server response to get the user
       #   attribute verification code.
+      #
       # @option params [required, String] :attribute_name
       #   The attribute name returned by the server response to get the user
       #   attribute verification code.
+      #
       # @return [Types::GetUserAttributeVerificationCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetUserAttributeVerificationCodeResponse#code_delivery_details #CodeDeliveryDetails} => Types::CodeDeliveryDetailsType
+      #   * {Types::GetUserAttributeVerificationCodeResponse#code_delivery_details #code_delivery_details} => Types::CodeDeliveryDetailsType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_user_attribute_verification_code({
       #     access_token: "TokenModelType",
       #     attribute_name: "AttributeNameType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      #
       # @overload get_user_attribute_verification_code(params = {})
       # @param [Hash] params ({})
       def get_user_attribute_verification_code(params = {}, options = {})
@@ -1557,14 +1825,18 @@ module Aws
       end
 
       # Signs out users from all devices.
+      #
       # @option params [String] :access_token
       #   The access token.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.global_sign_out({
       #     access_token: "TokenModelType",
       #   })
+      #
       # @overload global_sign_out(params = {})
       # @param [Hash] params ({})
       def global_sign_out(params = {}, options = {})
@@ -1573,22 +1845,28 @@ module Aws
       end
 
       # Initiates the authentication flow.
+      #
       # @option params [required, String] :auth_flow
       #   The authentication flow.
+      #
       # @option params [Hash<String,String>] :auth_parameters
       #   The authentication parameters.
+      #
       # @option params [Hash<String,String>] :client_metadata
       #   The client app's metadata.
+      #
       # @option params [required, String] :client_id
       #   The client ID.
+      #
       # @return [Types::InitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::InitiateAuthResponse#challenge_name #ChallengeName} => String
-      #   * {Types::InitiateAuthResponse#session #Session} => String
-      #   * {Types::InitiateAuthResponse#challenge_parameters #ChallengeParameters} => Hash&lt;String,String&gt;
-      #   * {Types::InitiateAuthResponse#authentication_result #AuthenticationResult} => Types::AuthenticationResultType
+      #   * {Types::InitiateAuthResponse#challenge_name #challenge_name} => String
+      #   * {Types::InitiateAuthResponse#session #session} => String
+      #   * {Types::InitiateAuthResponse#challenge_parameters #challenge_parameters} => Hash&lt;String,String&gt;
+      #   * {Types::InitiateAuthResponse#authentication_result #authentication_result} => Types::AuthenticationResultType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.initiate_auth({
       #     auth_flow: "USER_SRP_AUTH", # required, accepts USER_SRP_AUTH, REFRESH_TOKEN_AUTH, REFRESH_TOKEN, CUSTOM_AUTH, ADMIN_NO_SRP_AUTH
       #     auth_parameters: {
@@ -1601,6 +1879,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
@@ -1612,6 +1891,7 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      #
       # @overload initiate_auth(params = {})
       # @param [Hash] params ({})
       def initiate_auth(params = {}, options = {})
@@ -1620,18 +1900,23 @@ module Aws
       end
 
       # Lists the devices.
+      #
       # @option params [required, String] :access_token
       #   The access tokens for the request to list devices.
+      #
       # @option params [Integer] :limit
       #   The limit of the device request.
+      #
       # @option params [String] :pagination_token
       #   The pagination token for the list request.
+      #
       # @return [Types::ListDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDevicesResponse#devices #Devices} => Array&lt;Types::DeviceType&gt;
-      #   * {Types::ListDevicesResponse#pagination_token #PaginationToken} => String
+      #   * {Types::ListDevicesResponse#devices #devices} => Array&lt;Types::DeviceType&gt;
+      #   * {Types::ListDevicesResponse#pagination_token #pagination_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_devices({
       #     access_token: "TokenModelType", # required
       #     limit: 1,
@@ -1639,6 +1924,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.devices #=> Array
       #   resp.devices[0].device_key #=> String
       #   resp.devices[0].device_attributes #=> Array
@@ -1648,6 +1934,7 @@ module Aws
       #   resp.devices[0].device_last_modified_date #=> Time
       #   resp.devices[0].device_last_authenticated_date #=> Time
       #   resp.pagination_token #=> String
+      #
       # @overload list_devices(params = {})
       # @param [Hash] params ({})
       def list_devices(params = {}, options = {})
@@ -1656,21 +1943,26 @@ module Aws
       end
 
       # Lists the user import jobs.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool that the users are being imported
       #   into.
+      #
       # @option params [required, Integer] :max_results
       #   The maximum number of import jobs you want the request to return.
+      #
       # @option params [String] :pagination_token
       #   An identifier that was returned from the previous call to
       #   ListUserImportJobs, which can be used to return the next set of import
       #   jobs in the list.
+      #
       # @return [Types::ListUserImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListUserImportJobsResponse#user_import_jobs #UserImportJobs} => Array&lt;Types::UserImportJobType&gt;
-      #   * {Types::ListUserImportJobsResponse#pagination_token #PaginationToken} => String
+      #   * {Types::ListUserImportJobsResponse#user_import_jobs #user_import_jobs} => Array&lt;Types::UserImportJobType&gt;
+      #   * {Types::ListUserImportJobsResponse#pagination_token #pagination_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_user_import_jobs({
       #     user_pool_id: "UserPoolIdType", # required
       #     max_results: 1, # required
@@ -1678,6 +1970,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_import_jobs #=> Array
       #   resp.user_import_jobs[0].job_name #=> String
       #   resp.user_import_jobs[0].job_id #=> String
@@ -1693,6 +1986,7 @@ module Aws
       #   resp.user_import_jobs[0].failed_users #=> Integer
       #   resp.user_import_jobs[0].completion_message #=> String
       #   resp.pagination_token #=> String
+      #
       # @overload list_user_import_jobs(params = {})
       # @param [Hash] params ({})
       def list_user_import_jobs(params = {}, options = {})
@@ -1701,22 +1995,27 @@ module Aws
       end
 
       # Lists the clients that have been created for the specified user pool.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to list user pool
       #   clients.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results you want the request to return when
       #   listing the user pool clients.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListUserPoolClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListUserPoolClientsResponse#user_pool_clients #UserPoolClients} => Array&lt;Types::UserPoolClientDescription&gt;
-      #   * {Types::ListUserPoolClientsResponse#next_token #NextToken} => String
+      #   * {Types::ListUserPoolClientsResponse#user_pool_clients #user_pool_clients} => Array&lt;Types::UserPoolClientDescription&gt;
+      #   * {Types::ListUserPoolClientsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_user_pool_clients({
       #     user_pool_id: "UserPoolIdType", # required
       #     max_results: 1,
@@ -1724,11 +2023,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool_clients #=> Array
       #   resp.user_pool_clients[0].client_id #=> String
       #   resp.user_pool_clients[0].user_pool_id #=> String
       #   resp.user_pool_clients[0].client_name #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_user_pool_clients(params = {})
       # @param [Hash] params ({})
       def list_user_pool_clients(params = {}, options = {})
@@ -1737,25 +2038,30 @@ module Aws
       end
 
       # Lists the user pools associated with an AWS account.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @option params [required, Integer] :max_results
       #   The maximum number of results you want the request to return when
       #   listing the user pools.
+      #
       # @return [Types::ListUserPoolsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListUserPoolsResponse#user_pools #UserPools} => Array&lt;Types::UserPoolDescriptionType&gt;
-      #   * {Types::ListUserPoolsResponse#next_token #NextToken} => String
+      #   * {Types::ListUserPoolsResponse#user_pools #user_pools} => Array&lt;Types::UserPoolDescriptionType&gt;
+      #   * {Types::ListUserPoolsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_user_pools({
       #     next_token: "PaginationKeyType",
       #     max_results: 1, # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pools #=> Array
       #   resp.user_pools[0].id #=> String
       #   resp.user_pools[0].name #=> String
@@ -1771,6 +2077,7 @@ module Aws
       #   resp.user_pools[0].last_modified_date #=> Time
       #   resp.user_pools[0].creation_date #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_user_pools(params = {})
       # @param [Hash] params ({})
       def list_user_pools(params = {}, options = {})
@@ -1779,24 +2086,31 @@ module Aws
       end
 
       # Lists the users in the Amazon Cognito user pool.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for which you want to list users.
+      #
       # @option params [Array<String>] :attributes_to_get
       #   The attributes to get from the request to list users.
+      #
       # @option params [Integer] :limit
       #   The limit of the request to list users.
+      #
       # @option params [String] :pagination_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @option params [String] :filter
       #   The filter for the list users request.
+      #
       # @return [Types::ListUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListUsersResponse#users #Users} => Array&lt;Types::UserType&gt;
-      #   * {Types::ListUsersResponse#pagination_token #PaginationToken} => String
+      #   * {Types::ListUsersResponse#users #users} => Array&lt;Types::UserType&gt;
+      #   * {Types::ListUsersResponse#pagination_token #pagination_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_users({
       #     user_pool_id: "UserPoolIdType", # required
       #     attributes_to_get: ["AttributeNameType"],
@@ -1806,6 +2120,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.users #=> Array
       #   resp.users[0].username #=> String
       #   resp.users[0].attributes #=> Array
@@ -1819,6 +2134,7 @@ module Aws
       #   resp.users[0].mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.users[0].mfa_options[0].attribute_name #=> String
       #   resp.pagination_token #=> String
+      #
       # @overload list_users(params = {})
       # @param [Hash] params ({})
       def list_users(params = {}, options = {})
@@ -1828,20 +2144,25 @@ module Aws
 
       # Resends the confirmation (for confirmation of registration) to a
       # specific user in the user pool.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @option params [String] :secret_hash
       #   A keyed-hash message authentication code (HMAC) calculated using the
       #   secret key of a user pool client and username plus the client ID in
       #   the message.
+      #
       # @option params [required, String] :username
       #   The user name of the user to whom you wish to resend a confirmation
       #   code.
+      #
       # @return [Types::ResendConfirmationCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ResendConfirmationCodeResponse#code_delivery_details #CodeDeliveryDetails} => Types::CodeDeliveryDetailsType
+      #   * {Types::ResendConfirmationCodeResponse#code_delivery_details #code_delivery_details} => Types::CodeDeliveryDetailsType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.resend_confirmation_code({
       #     client_id: "ClientIdType", # required
       #     secret_hash: "SecretHashType",
@@ -1849,9 +2170,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      #
       # @overload resend_confirmation_code(params = {})
       # @param [Hash] params ({})
       def resend_confirmation_code(params = {}, options = {})
@@ -1860,22 +2183,28 @@ module Aws
       end
 
       # Responds to the authentication challenge.
+      #
       # @option params [required, String] :client_id
       #   The client ID.
+      #
       # @option params [required, String] :challenge_name
       #   The name of the challenge.
+      #
       # @option params [String] :session
       #   The session.
+      #
       # @option params [Hash<String,String>] :challenge_responses
       #   The responses to the authentication challenge.
+      #
       # @return [Types::RespondToAuthChallengeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RespondToAuthChallengeResponse#challenge_name #ChallengeName} => String
-      #   * {Types::RespondToAuthChallengeResponse#session #Session} => String
-      #   * {Types::RespondToAuthChallengeResponse#challenge_parameters #ChallengeParameters} => Hash&lt;String,String&gt;
-      #   * {Types::RespondToAuthChallengeResponse#authentication_result #AuthenticationResult} => Types::AuthenticationResultType
+      #   * {Types::RespondToAuthChallengeResponse#challenge_name #challenge_name} => String
+      #   * {Types::RespondToAuthChallengeResponse#session #session} => String
+      #   * {Types::RespondToAuthChallengeResponse#challenge_parameters #challenge_parameters} => Hash&lt;String,String&gt;
+      #   * {Types::RespondToAuthChallengeResponse#authentication_result #authentication_result} => Types::AuthenticationResultType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.respond_to_auth_challenge({
       #     client_id: "ClientIdType", # required
       #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
@@ -1886,6 +2215,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
@@ -1897,6 +2227,7 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      #
       # @overload respond_to_auth_challenge(params = {})
       # @param [Hash] params ({})
       def respond_to_auth_challenge(params = {}, options = {})
@@ -1908,13 +2239,17 @@ module Aws
       # is to be removed for a particular attribute pass the attribute with
       # code delivery as null. If null list is passed, all MFA options are
       # removed.
+      #
       # @option params [required, String] :access_token
       #   The access token for the set user settings request.
+      #
       # @option params [required, Array<Types::MFAOptionType>] :mfa_options
       #   Specifies the options for MFA (e.g., email or phone number).
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_user_settings({
       #     access_token: "TokenModelType", # required
       #     mfa_options: [ # required
@@ -1924,6 +2259,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload set_user_settings(params = {})
       # @param [Hash] params ({})
       def set_user_settings(params = {}, options = {})
@@ -1933,26 +2269,34 @@ module Aws
 
       # Registers the user in the specified user pool and creates a user name,
       # password, and user attributes.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @option params [String] :secret_hash
       #   A keyed-hash message authentication code (HMAC) calculated using the
       #   secret key of a user pool client and username plus the client ID in
       #   the message.
+      #
       # @option params [required, String] :username
       #   The user name of the user you wish to register.
+      #
       # @option params [required, String] :password
       #   The password of the user you wish to register.
+      #
       # @option params [Array<Types::AttributeType>] :user_attributes
       #   An array of name-value pairs representing user attributes.
+      #
       # @option params [Array<Types::AttributeType>] :validation_data
       #   The validation data in the request to register a user.
+      #
       # @return [Types::SignUpResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SignUpResponse#user_confirmed #UserConfirmed} => Boolean
-      #   * {Types::SignUpResponse#code_delivery_details #CodeDeliveryDetails} => Types::CodeDeliveryDetailsType
+      #   * {Types::SignUpResponse#user_confirmed #user_confirmed} => Boolean
+      #   * {Types::SignUpResponse#code_delivery_details #code_delivery_details} => Types::CodeDeliveryDetailsType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.sign_up({
       #     client_id: "ClientIdType", # required
       #     secret_hash: "SecretHashType",
@@ -1973,10 +2317,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_confirmed #=> Boolean
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      #
       # @overload sign_up(params = {})
       # @param [Hash] params ({})
       def sign_up(params = {}, options = {})
@@ -1985,22 +2331,27 @@ module Aws
       end
 
       # Starts the user import.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool that the users are being imported
       #   into.
+      #
       # @option params [required, String] :job_id
       #   The job ID for the user import job.
+      #
       # @return [Types::StartUserImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartUserImportJobResponse#user_import_job #UserImportJob} => Types::UserImportJobType
+      #   * {Types::StartUserImportJobResponse#user_import_job #user_import_job} => Types::UserImportJobType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_user_import_job({
       #     user_pool_id: "UserPoolIdType", # required
       #     job_id: "UserImportJobIdType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_import_job.job_name #=> String
       #   resp.user_import_job.job_id #=> String
       #   resp.user_import_job.user_pool_id #=> String
@@ -2014,6 +2365,7 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      #
       # @overload start_user_import_job(params = {})
       # @param [Hash] params ({})
       def start_user_import_job(params = {}, options = {})
@@ -2022,22 +2374,27 @@ module Aws
       end
 
       # Stops the user import job.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool that the users are being imported
       #   into.
+      #
       # @option params [required, String] :job_id
       #   The job ID for the user import job.
+      #
       # @return [Types::StopUserImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StopUserImportJobResponse#user_import_job #UserImportJob} => Types::UserImportJobType
+      #   * {Types::StopUserImportJobResponse#user_import_job #user_import_job} => Types::UserImportJobType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_user_import_job({
       #     user_pool_id: "UserPoolIdType", # required
       #     job_id: "UserImportJobIdType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_import_job.job_name #=> String
       #   resp.user_import_job.job_id #=> String
       #   resp.user_import_job.user_pool_id #=> String
@@ -2051,6 +2408,7 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      #
       # @overload stop_user_import_job(params = {})
       # @param [Hash] params ({})
       def stop_user_import_job(params = {}, options = {})
@@ -2059,20 +2417,26 @@ module Aws
       end
 
       # Updates the device status.
+      #
       # @option params [required, String] :access_token
       #   The access token.
+      #
       # @option params [required, String] :device_key
       #   The device key.
+      #
       # @option params [String] :device_remembered_status
       #   The status of whether a device is remembered.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_device_status({
       #     access_token: "TokenModelType", # required
       #     device_key: "DeviceKeyType", # required
       #     device_remembered_status: "remembered", # accepts remembered, not_remembered
       #   })
+      #
       # @overload update_device_status(params = {})
       # @param [Hash] params ({})
       def update_device_status(params = {}, options = {})
@@ -2081,15 +2445,19 @@ module Aws
       end
 
       # Allows a user to update a specific attribute (one at a time).
+      #
       # @option params [required, Array<Types::AttributeType>] :user_attributes
       #   An array of name-value pairs representing user attributes.
+      #
       # @option params [String] :access_token
       #   The access token for the request to update user attributes.
+      #
       # @return [Types::UpdateUserAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateUserAttributesResponse#code_delivery_details_list #CodeDeliveryDetailsList} => Array&lt;Types::CodeDeliveryDetailsType&gt;
+      #   * {Types::UpdateUserAttributesResponse#code_delivery_details_list #code_delivery_details_list} => Array&lt;Types::CodeDeliveryDetailsType&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_user_attributes({
       #     user_attributes: [ # required
       #       {
@@ -2101,10 +2469,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.code_delivery_details_list #=> Array
       #   resp.code_delivery_details_list[0].destination #=> String
       #   resp.code_delivery_details_list[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details_list[0].attribute_name #=> String
+      #
       # @overload update_user_attributes(params = {})
       # @param [Hash] params ({})
       def update_user_attributes(params = {}, options = {})
@@ -2113,24 +2483,33 @@ module Aws
       end
 
       # Updates the specified user pool with the specified attributes.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool you want to update.
+      #
       # @option params [Types::UserPoolPolicyType] :policies
       #   A container with the policies you wish to update in a user pool.
+      #
       # @option params [Types::LambdaConfigType] :lambda_config
       #   The AWS Lambda configuration information from the request to update
       #   the user pool.
+      #
       # @option params [Array<String>] :auto_verified_attributes
       #   The attributes that are automatically verified when the Amazon Cognito
       #   service makes a request to update user pools.
+      #
       # @option params [String] :sms_verification_message
       #   A container with information about the SMS verification message.
+      #
       # @option params [String] :email_verification_message
       #   The contents of the email verification message.
+      #
       # @option params [String] :email_verification_subject
       #   The subject of the email verfication message.
+      #
       # @option params [String] :sms_authentication_message
       #   The contents of the SMS authentication message.
+      #
       # @option params [String] :mfa_configuration
       #   Can be one of the following values:
       #
@@ -2142,17 +2521,23 @@ module Aws
       #
       #   * `OPTIONAL` - Users have the option when registering to create an MFA
       #     token.
+      #
       # @option params [Types::DeviceConfigurationType] :device_configuration
       #   Device configuration.
+      #
       # @option params [Types::EmailConfigurationType] :email_configuration
       #   Email configuration.
+      #
       # @option params [Types::SmsConfigurationType] :sms_configuration
       #   SMS configuration.
+      #
       # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
       #   The configuration for AdminCreateUser requests.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_user_pool({
       #     user_pool_id: "UserPoolIdType", # required
       #     policies: {
@@ -2202,6 +2587,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload update_user_pool(params = {})
       # @param [Hash] params ({})
       def update_user_pool(params = {}, options = {})
@@ -2211,26 +2597,35 @@ module Aws
 
       # Allows the developer to update the specified user pool client and
       # password policy.
+      #
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to update the user
       #   pool client.
+      #
       # @option params [required, String] :client_id
       #   The ID of the client associated with the user pool.
+      #
       # @option params [String] :client_name
       #   The client name from the update user pool client request.
+      #
       # @option params [Integer] :refresh_token_validity
       #   The validity of the refresh token.
+      #
       # @option params [Array<String>] :read_attributes
       #   The read-only attributes of the user pool.
+      #
       # @option params [Array<String>] :write_attributes
       #   The writeable attributes of the user pool.
+      #
       # @option params [Array<String>] :explicit_auth_flows
       #   Explicit authentication flows.
+      #
       # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateUserPoolClientResponse#user_pool_client #UserPoolClient} => Types::UserPoolClientType
+      #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_user_pool_client({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
@@ -2242,6 +2637,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_pool_client.user_pool_id #=> String
       #   resp.user_pool_client.client_name #=> String
       #   resp.user_pool_client.client_id #=> String
@@ -2255,6 +2651,7 @@ module Aws
       #   resp.user_pool_client.write_attributes[0] #=> String
       #   resp.user_pool_client.explicit_auth_flows #=> Array
       #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+      #
       # @overload update_user_pool_client(params = {})
       # @param [Hash] params ({})
       def update_user_pool_client(params = {}, options = {})
@@ -2263,20 +2660,26 @@ module Aws
       end
 
       # Verifies the specified user attributes in the user pool.
+      #
       # @option params [String] :access_token
       #   Represents the access token of the request to verify user attributes.
+      #
       # @option params [required, String] :attribute_name
       #   The attribute name in the request to verify user attributes.
+      #
       # @option params [required, String] :code
       #   The verification code in the request to verify user attributes.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.verify_user_attribute({
       #     access_token: "TokenModelType",
       #     attribute_name: "AttributeNameType", # required
       #     code: "ConfirmationCodeType", # required
       #   })
+      #
       # @overload verify_user_attribute(params = {})
       # @param [Hash] params ({})
       def verify_user_attribute(params = {}, options = {})

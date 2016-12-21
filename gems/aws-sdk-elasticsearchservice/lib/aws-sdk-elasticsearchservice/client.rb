@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -138,13 +152,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging
+      #
       # @option params [required, String] :arn
       #   Specify the `ARN` for which you want to add the tags.
+      #
       # @option params [required, Array<Types::Tag>] :tag_list
       #   List of `Tag` that need to be added for the Elasticsearch domain.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags({
       #     arn: "ARN", # required
       #     tag_list: [ # required
@@ -154,6 +172,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags(params = {})
       # @param [Hash] params ({})
       def add_tags(params = {}, options = {})
@@ -168,12 +187,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains
+      #
       # @option params [required, String] :domain_name
       #   The name of the Elasticsearch domain that you are creating. Domain
       #   names are unique across the domains owned by an account within an AWS
       #   region. Domain names must start with a letter or number and can
       #   contain the following characters: a-z (lowercase), 0-9, and -
       #   (hyphen).
+      #
       # @option params [String] :elasticsearch_version
       #   String of format X.Y to specify version for the Elasticsearch domain
       #   eg. "1.5" or "2.3". For more information, see [Creating
@@ -183,17 +204,22 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains
+      #
       # @option params [Types::ElasticsearchClusterConfig] :elasticsearch_cluster_config
       #   Configuration options for an Elasticsearch domain. Specifies the
       #   instance type and number of instances in the domain cluster.
+      #
       # @option params [Types::EBSOptions] :ebs_options
       #   Options to enable, disable and specify the type and size of EBS
       #   storage volumes.
+      #
       # @option params [String] :access_policies
       #   IAM access policy as a JSON-formatted string.
+      #
       # @option params [Types::SnapshotOptions] :snapshot_options
       #   Option to set time, in UTC format, of the daily automated snapshot.
       #   Default value is 0 hours.
+      #
       # @option params [Hash<String,String>] :advanced_options
       #   Option to allow references to indices in an HTTP request body. Must be
       #   `false` when configuring access to individual sub-resources. By
@@ -203,11 +229,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
+      #
       # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateElasticsearchDomainResponse#domain_status #DomainStatus} => Types::ElasticsearchDomainStatus
+      #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_elasticsearch_domain({
       #     domain_name: "DomainName", # required
       #     elasticsearch_version: "ElasticsearchVersionString",
@@ -235,6 +263,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_status.domain_id #=> String
       #   resp.domain_status.domain_name #=> String
       #   resp.domain_status.arn #=> String
@@ -257,6 +286,7 @@ module Aws
       #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status.advanced_options #=> Hash
       #   resp.domain_status.advanced_options["String"] #=> String
+      #
       # @overload create_elasticsearch_domain(params = {})
       # @param [Hash] params ({})
       def create_elasticsearch_domain(params = {}, options = {})
@@ -266,19 +296,23 @@ module Aws
 
       # Permanently deletes the specified Elasticsearch domain and all of its
       # data. Once a domain is deleted, it cannot be recovered.
+      #
       # @option params [required, String] :domain_name
       #   The name of the Elasticsearch domain that you want to permanently
       #   delete.
+      #
       # @return [Types::DeleteElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteElasticsearchDomainResponse#domain_status #DomainStatus} => Types::ElasticsearchDomainStatus
+      #   * {Types::DeleteElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_elasticsearch_domain({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_status.domain_id #=> String
       #   resp.domain_status.domain_name #=> String
       #   resp.domain_status.arn #=> String
@@ -301,6 +335,7 @@ module Aws
       #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status.advanced_options #=> Hash
       #   resp.domain_status.advanced_options["String"] #=> String
+      #
       # @overload delete_elasticsearch_domain(params = {})
       # @param [Hash] params ({})
       def delete_elasticsearch_domain(params = {}, options = {})
@@ -311,18 +346,22 @@ module Aws
       # Returns domain configuration information about the specified
       # Elasticsearch domain, including the domain ID, domain endpoint, and
       # domain ARN.
+      #
       # @option params [required, String] :domain_name
       #   The name of the Elasticsearch domain for which you want information.
+      #
       # @return [Types::DescribeElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeElasticsearchDomainResponse#domain_status #DomainStatus} => Types::ElasticsearchDomainStatus
+      #   * {Types::DescribeElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_elasticsearch_domain({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_status.domain_id #=> String
       #   resp.domain_status.domain_name #=> String
       #   resp.domain_status.arn #=> String
@@ -345,6 +384,7 @@ module Aws
       #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status.advanced_options #=> Hash
       #   resp.domain_status.advanced_options["String"] #=> String
+      #
       # @overload describe_elasticsearch_domain(params = {})
       # @param [Hash] params ({})
       def describe_elasticsearch_domain(params = {}, options = {})
@@ -355,18 +395,22 @@ module Aws
       # Provides cluster configuration information about the specified
       # Elasticsearch domain, such as the state, creation date, update
       # version, and update date for cluster options.
+      #
       # @option params [required, String] :domain_name
       #   The Elasticsearch domain that you want to get information about.
+      #
       # @return [Types::DescribeElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeElasticsearchDomainConfigResponse#domain_config #DomainConfig} => Types::ElasticsearchDomainConfig
+      #   * {Types::DescribeElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_elasticsearch_domain_config({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_config.elasticsearch_version.options #=> String
       #   resp.domain_config.elasticsearch_version.status.creation_date #=> Time
       #   resp.domain_config.elasticsearch_version.status.update_date #=> Time
@@ -412,6 +456,7 @@ module Aws
       #   resp.domain_config.advanced_options.status.update_version #=> Integer
       #   resp.domain_config.advanced_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
       #   resp.domain_config.advanced_options.status.pending_deletion #=> Boolean
+      #
       # @overload describe_elasticsearch_domain_config(params = {})
       # @param [Hash] params ({})
       def describe_elasticsearch_domain_config(params = {}, options = {})
@@ -422,18 +467,22 @@ module Aws
       # Returns domain configuration information about the specified
       # Elasticsearch domains, including the domain ID, domain endpoint, and
       # domain ARN.
+      #
       # @option params [required, Array<String>] :domain_names
       #   The Elasticsearch domains for which you want information.
+      #
       # @return [Types::DescribeElasticsearchDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeElasticsearchDomainsResponse#domain_status_list #DomainStatusList} => Array&lt;Types::ElasticsearchDomainStatus&gt;
+      #   * {Types::DescribeElasticsearchDomainsResponse#domain_status_list #domain_status_list} => Array&lt;Types::ElasticsearchDomainStatus&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_elasticsearch_domains({
       #     domain_names: ["DomainName"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_status_list #=> Array
       #   resp.domain_status_list[0].domain_id #=> String
       #   resp.domain_status_list[0].domain_name #=> String
@@ -457,6 +506,7 @@ module Aws
       #   resp.domain_status_list[0].snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status_list[0].advanced_options #=> Hash
       #   resp.domain_status_list[0].advanced_options["String"] #=> String
+      #
       # @overload describe_elasticsearch_domains(params = {})
       # @param [Hash] params ({})
       def describe_elasticsearch_domains(params = {}, options = {})
@@ -466,13 +516,16 @@ module Aws
 
       # Returns the name of all Elasticsearch domains owned by the current
       # user's account.
+      #
       # @return [Types::ListDomainNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDomainNamesResponse#domain_names #DomainNames} => Array&lt;Types::DomainInfo&gt;
+      #   * {Types::ListDomainNamesResponse#domain_names #domain_names} => Array&lt;Types::DomainInfo&gt;
       #
       # @example Response structure
+      #
       #   resp.domain_names #=> Array
       #   resp.domain_names[0].domain_name #=> String
+      #
       # @overload list_domain_names(params = {})
       # @param [Hash] params ({})
       def list_domain_names(params = {}, options = {})
@@ -481,22 +534,27 @@ module Aws
       end
 
       # Returns all tags for the given Elasticsearch domain.
+      #
       # @option params [required, String] :arn
       #   Specify the `ARN` for the Elasticsearch domain to which the tags are
       #   attached that you want to view.
+      #
       # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsResponse#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags({
       #     arn: "ARN", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload list_tags(params = {})
       # @param [Hash] params ({})
       def list_tags(params = {}, options = {})
@@ -506,19 +564,24 @@ module Aws
 
       # Removes the specified set of tags from the specified Elasticsearch
       # domain.
+      #
       # @option params [required, String] :arn
       #   Specifies the `ARN` for the Elasticsearch domain from which you want
       #   to delete the specified tags.
+      #
       # @option params [required, Array<String>] :tag_keys
       #   Specifies the `TagKey` list which you want to remove from the
       #   Elasticsearch domain.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags({
       #     arn: "ARN", # required
       #     tag_keys: ["String"], # required
       #   })
+      #
       # @overload remove_tags(params = {})
       # @param [Hash] params ({})
       def remove_tags(params = {}, options = {})
@@ -529,16 +592,21 @@ module Aws
       # Modifies the cluster configuration of the specified Elasticsearch
       # domain, setting as setting the instance type and the number of
       # instances.
+      #
       # @option params [required, String] :domain_name
       #   The name of the Elasticsearch domain that you are updating.
+      #
       # @option params [Types::ElasticsearchClusterConfig] :elasticsearch_cluster_config
       #   The type and number of instances to instantiate for the domain
       #   cluster.
+      #
       # @option params [Types::EBSOptions] :ebs_options
       #   Specify the type and size of the EBS volume that you want to use.
+      #
       # @option params [Types::SnapshotOptions] :snapshot_options
       #   Option to set the time, in UTC format, for the daily automated
       #   snapshot. Default value is `0` hours.
+      #
       # @option params [Hash<String,String>] :advanced_options
       #   Modifies the advanced option to allow references to indices in an HTTP
       #   request body. Must be `false` when configuring access to individual
@@ -548,13 +616,16 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
+      #
       # @option params [String] :access_policies
       #   IAM access policy as a JSON-formatted string.
+      #
       # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #DomainConfig} => Types::ElasticsearchDomainConfig
+      #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_elasticsearch_domain_config({
       #     domain_name: "DomainName", # required
       #     elasticsearch_cluster_config: {
@@ -581,6 +652,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_config.elasticsearch_version.options #=> String
       #   resp.domain_config.elasticsearch_version.status.creation_date #=> Time
       #   resp.domain_config.elasticsearch_version.status.update_date #=> Time
@@ -626,6 +698,7 @@ module Aws
       #   resp.domain_config.advanced_options.status.update_version #=> Integer
       #   resp.domain_config.advanced_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
       #   resp.domain_config.advanced_options.status.pending_deletion #=> Boolean
+      #
       # @overload update_elasticsearch_domain_config(params = {})
       # @param [Hash] params ({})
       def update_elasticsearch_domain_config(params = {}, options = {})

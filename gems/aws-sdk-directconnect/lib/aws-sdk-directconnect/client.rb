@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -147,6 +162,7 @@ module Aws
       # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
       #
       #  </note>
+      #
       # @option params [required, String] :bandwidth
       #   Bandwidth of the connection.
       #
@@ -155,12 +171,14 @@ module Aws
       #   Default: None
       #
       #   Values: 50M, 100M, 200M, 300M, 400M, or 500M
+      #
       # @option params [required, String] :connection_name
       #   Name of the provisioned connection.
       #
       #   Example: "*500M Connection to AWS*"
       #
       #   Default: None
+      #
       # @option params [required, String] :owner_account
       #   Numeric account Id of the customer for whom the connection will be
       #   provisioned.
@@ -168,32 +186,36 @@ module Aws
       #   Example: 123443215678
       #
       #   Default: None
+      #
       # @option params [required, String] :interconnect_id
       #   ID of the interconnect on which the connection will be provisioned.
       #
       #   Example: dxcon-456abc78
       #
       #   Default: None
+      #
       # @option params [required, Integer] :vlan
       #   The dedicated VLAN provisioned to the connection.
       #
       #   Example: 101
       #
       #   Default: None
+      #
       # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::Connection#owner_account #ownerAccount} => String
-      #   * {Types::Connection#connection_id #connectionId} => String
-      #   * {Types::Connection#connection_name #connectionName} => String
-      #   * {Types::Connection#connection_state #connectionState} => String
+      #   * {Types::Connection#owner_account #owner_account} => String
+      #   * {Types::Connection#connection_id #connection_id} => String
+      #   * {Types::Connection#connection_name #connection_name} => String
+      #   * {Types::Connection#connection_state #connection_state} => String
       #   * {Types::Connection#region #region} => String
       #   * {Types::Connection#location #location} => String
       #   * {Types::Connection#bandwidth #bandwidth} => String
       #   * {Types::Connection#vlan #vlan} => Integer
-      #   * {Types::Connection#partner_name #partnerName} => String
-      #   * {Types::Connection#loa_issue_time #loaIssueTime} => Time
+      #   * {Types::Connection#partner_name #partner_name} => String
+      #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.allocate_connection_on_interconnect({
       #     bandwidth: "Bandwidth", # required
       #     connection_name: "ConnectionName", # required
@@ -203,6 +225,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.connection_id #=> String
       #   resp.connection_name #=> String
@@ -213,6 +236,7 @@ module Aws
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
       #   resp.loa_issue_time #=> Time
+      #
       # @overload allocate_connection_on_interconnect(params = {})
       # @param [Hash] params ({})
       def allocate_connection_on_interconnect(params = {}, options = {})
@@ -230,41 +254,46 @@ module Aws
       # the virtual interface owner by calling ConfirmPrivateVirtualInterface.
       # Until this step has been completed, the virtual interface will be in
       # 'Confirming' state, and will not be available for handling traffic.
+      #
       # @option params [required, String] :connection_id
       #   The connection ID on which the private virtual interface is
       #   provisioned.
       #
       #   Default: None
+      #
       # @option params [required, String] :owner_account
       #   The AWS account that will own the new private virtual interface.
       #
       #   Default: None
+      #
       # @option params [required, Types::NewPrivateVirtualInterfaceAllocation] :new_private_virtual_interface_allocation
       #   Detailed information for the private virtual interface to be
       #   provisioned.
       #
       #   Default: None
+      #
       # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
-      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#owner_account #owner_account} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtual_interface_id} => String
       #   * {Types::VirtualInterface#location #location} => String
-      #   * {Types::VirtualInterface#connection_id #connectionId} => String
-      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
-      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#connection_id #connection_id} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtual_interface_type} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
       #   * {Types::VirtualInterface#vlan #vlan} => Integer
       #   * {Types::VirtualInterface#asn #asn} => Integer
-      #   * {Types::VirtualInterface#auth_key #authKey} => String
-      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
-      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
-      #   * {Types::VirtualInterface#address_family #addressFamily} => String
-      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
-      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
-      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
-      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
-      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
+      #   * {Types::VirtualInterface#auth_key #auth_key} => String
+      #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
+      #   * {Types::VirtualInterface#customer_address #customer_address} => String
+      #   * {Types::VirtualInterface#address_family #address_family} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
+      #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.allocate_private_virtual_interface({
       #     connection_id: "ConnectionId", # required
       #     owner_account: "OwnerAccount", # required
@@ -280,6 +309,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.virtual_interface_id #=> String
       #   resp.location #=> String
@@ -305,6 +335,7 @@ module Aws
       #   resp.bgp_peers[0].customer_address #=> String
       #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload allocate_private_virtual_interface(params = {})
       # @param [Hash] params ({})
       def allocate_private_virtual_interface(params = {}, options = {})
@@ -327,41 +358,46 @@ module Aws
       # 'ipv6'), the customer and amazon address fields should be left blank
       # to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently
       # not supported.
+      #
       # @option params [required, String] :connection_id
       #   The connection ID on which the public virtual interface is
       #   provisioned.
       #
       #   Default: None
+      #
       # @option params [required, String] :owner_account
       #   The AWS account that will own the new public virtual interface.
       #
       #   Default: None
+      #
       # @option params [required, Types::NewPublicVirtualInterfaceAllocation] :new_public_virtual_interface_allocation
       #   Detailed information for the public virtual interface to be
       #   provisioned.
       #
       #   Default: None
+      #
       # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
-      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#owner_account #owner_account} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtual_interface_id} => String
       #   * {Types::VirtualInterface#location #location} => String
-      #   * {Types::VirtualInterface#connection_id #connectionId} => String
-      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
-      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#connection_id #connection_id} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtual_interface_type} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
       #   * {Types::VirtualInterface#vlan #vlan} => Integer
       #   * {Types::VirtualInterface#asn #asn} => Integer
-      #   * {Types::VirtualInterface#auth_key #authKey} => String
-      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
-      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
-      #   * {Types::VirtualInterface#address_family #addressFamily} => String
-      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
-      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
-      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
-      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
-      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
+      #   * {Types::VirtualInterface#auth_key #auth_key} => String
+      #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
+      #   * {Types::VirtualInterface#customer_address #customer_address} => String
+      #   * {Types::VirtualInterface#address_family #address_family} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
+      #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.allocate_public_virtual_interface({
       #     connection_id: "ConnectionId", # required
       #     owner_account: "OwnerAccount", # required
@@ -382,6 +418,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.virtual_interface_id #=> String
       #   resp.location #=> String
@@ -407,6 +444,7 @@ module Aws
       #   resp.bgp_peers[0].customer_address #=> String
       #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload allocate_public_virtual_interface(params = {})
       # @param [Hash] params ({})
       def allocate_public_virtual_interface(params = {}, options = {})
@@ -419,23 +457,28 @@ module Aws
       # Upon creation, the hosted connection is initially in the 'Ordering'
       # state, and will remain in this state until the owner calls
       # ConfirmConnection to confirm creation of the hosted connection.
+      #
       # @option params [required, String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @return [Types::ConfirmConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfirmConnectionResponse#connection_state #connectionState} => String
+      #   * {Types::ConfirmConnectionResponse#connection_state #connection_state} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.confirm_connection({
       #     connection_id: "ConnectionId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #
       # @overload confirm_connection(params = {})
       # @param [Hash] params ({})
       def confirm_connection(params = {}, options = {})
@@ -449,12 +492,14 @@ module Aws
       # After the virtual interface owner calls this function, the virtual
       # interface will be created and attached to the given virtual private
       # gateway, and will be available for handling traffic.
+      #
       # @option params [required, String] :virtual_interface_id
       #   ID of the virtual interface.
       #
       #   Example: dxvif-123dfg56
       #
       #   Default: None
+      #
       # @option params [required, String] :virtual_gateway_id
       #   ID of the virtual private gateway that will be attached to the virtual
       #   interface.
@@ -467,18 +512,22 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
+      #
       # @return [Types::ConfirmPrivateVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfirmPrivateVirtualInterfaceResponse#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::ConfirmPrivateVirtualInterfaceResponse#virtual_interface_state #virtual_interface_state} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.confirm_private_virtual_interface({
       #     virtual_interface_id: "VirtualInterfaceId", # required
       #     virtual_gateway_id: "VirtualGatewayId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #
       # @overload confirm_private_virtual_interface(params = {})
       # @param [Hash] params ({})
       def confirm_private_virtual_interface(params = {}, options = {})
@@ -492,23 +541,28 @@ module Aws
       # After the virtual interface owner calls this function, the specified
       # virtual interface will be created and made available for handling
       # traffic.
+      #
       # @option params [required, String] :virtual_interface_id
       #   ID of the virtual interface.
       #
       #   Example: dxvif-123dfg56
       #
       #   Default: None
+      #
       # @return [Types::ConfirmPublicVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfirmPublicVirtualInterfaceResponse#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::ConfirmPublicVirtualInterfaceResponse#virtual_interface_state #virtual_interface_state} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.confirm_public_virtual_interface({
       #     virtual_interface_id: "VirtualInterfaceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #
       # @overload confirm_public_virtual_interface(params = {})
       # @param [Hash] params ({})
       def confirm_public_virtual_interface(params = {}, options = {})
@@ -530,6 +584,7 @@ module Aws
       #
       # For a public virtual interface, the Autonomous System Number (ASN)
       # must be private or already whitelisted for the virtual interface.
+      #
       # @option params [String] :virtual_interface_id
       #   The ID of the virtual interface on which the BGP peer will be
       #   provisioned.
@@ -537,15 +592,18 @@ module Aws
       #   Example: dxvif-456abc78
       #
       #   Default: None
+      #
       # @option params [Types::NewBGPPeer] :new_bgp_peer
       #   Detailed information for the BGP peer to be created.
       #
       #   Default: None
+      #
       # @return [Types::CreateBGPPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateBGPPeerResponse#virtual_interface #virtualInterface} => Types::VirtualInterface
+      #   * {Types::CreateBGPPeerResponse#virtual_interface #virtual_interface} => Types::VirtualInterface
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_bgp_peer({
       #     virtual_interface_id: "VirtualInterfaceId",
       #     new_bgp_peer: {
@@ -558,6 +616,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.virtual_interface.owner_account #=> String
       #   resp.virtual_interface.virtual_interface_id #=> String
       #   resp.virtual_interface.location #=> String
@@ -583,6 +642,7 @@ module Aws
       #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
       #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload create_bgp_peer(params = {})
       # @param [Hash] params ({})
       def create_bgp_peer(params = {}, options = {})
@@ -601,38 +661,43 @@ module Aws
       # can establish connections with AWS Direct Connect locations in
       # multiple regions, but a connection in one region does not provide
       # connectivity to other regions.
+      #
       # @option params [required, String] :location
       #   Where the connection is located.
       #
       #   Example: EqSV5
       #
       #   Default: None
+      #
       # @option params [required, String] :bandwidth
       #   Bandwidth of the connection.
       #
       #   Example: 1Gbps
       #
       #   Default: None
+      #
       # @option params [required, String] :connection_name
       #   The name of the connection.
       #
       #   Example: "*My Connection to AWS*"
       #
       #   Default: None
+      #
       # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::Connection#owner_account #ownerAccount} => String
-      #   * {Types::Connection#connection_id #connectionId} => String
-      #   * {Types::Connection#connection_name #connectionName} => String
-      #   * {Types::Connection#connection_state #connectionState} => String
+      #   * {Types::Connection#owner_account #owner_account} => String
+      #   * {Types::Connection#connection_id #connection_id} => String
+      #   * {Types::Connection#connection_name #connection_name} => String
+      #   * {Types::Connection#connection_state #connection_state} => String
       #   * {Types::Connection#region #region} => String
       #   * {Types::Connection#location #location} => String
       #   * {Types::Connection#bandwidth #bandwidth} => String
       #   * {Types::Connection#vlan #vlan} => Integer
-      #   * {Types::Connection#partner_name #partnerName} => String
-      #   * {Types::Connection#loa_issue_time #loaIssueTime} => Time
+      #   * {Types::Connection#partner_name #partner_name} => String
+      #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_connection({
       #     location: "LocationCode", # required
       #     bandwidth: "Bandwidth", # required
@@ -640,6 +705,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.connection_id #=> String
       #   resp.connection_name #=> String
@@ -650,6 +716,7 @@ module Aws
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
       #   resp.loa_issue_time #=> Time
+      #
       # @overload create_connection(params = {})
       # @param [Hash] params ({})
       def create_connection(params = {}, options = {})
@@ -678,12 +745,14 @@ module Aws
       # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
       #
       #  </note>
+      #
       # @option params [required, String] :interconnect_name
       #   The name of the interconnect.
       #
       #   Example: "*1G Interconnect to AWS*"
       #
       #   Default: None
+      #
       # @option params [required, String] :bandwidth
       #   The port bandwidth
       #
@@ -692,23 +761,26 @@ module Aws
       #   Default: None
       #
       #   Available values: 1Gbps,10Gbps
+      #
       # @option params [required, String] :location
       #   Where the interconnect is located
       #
       #   Example: EqSV5
       #
       #   Default: None
+      #
       # @return [Types::Interconnect] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::Interconnect#interconnect_id #interconnectId} => String
-      #   * {Types::Interconnect#interconnect_name #interconnectName} => String
-      #   * {Types::Interconnect#interconnect_state #interconnectState} => String
+      #   * {Types::Interconnect#interconnect_id #interconnect_id} => String
+      #   * {Types::Interconnect#interconnect_name #interconnect_name} => String
+      #   * {Types::Interconnect#interconnect_state #interconnect_state} => String
       #   * {Types::Interconnect#region #region} => String
       #   * {Types::Interconnect#location #location} => String
       #   * {Types::Interconnect#bandwidth #bandwidth} => String
-      #   * {Types::Interconnect#loa_issue_time #loaIssueTime} => Time
+      #   * {Types::Interconnect#loa_issue_time #loa_issue_time} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_interconnect({
       #     interconnect_name: "InterconnectName", # required
       #     bandwidth: "Bandwidth", # required
@@ -716,6 +788,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.interconnect_id #=> String
       #   resp.interconnect_name #=> String
       #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
@@ -723,6 +796,7 @@ module Aws
       #   resp.location #=> String
       #   resp.bandwidth #=> String
       #   resp.loa_issue_time #=> Time
+      #
       # @overload create_interconnect(params = {})
       # @param [Hash] params ({})
       def create_interconnect(params = {}, options = {})
@@ -734,37 +808,41 @@ module Aws
       # VLAN that transports AWS Direct Connect traffic. A private virtual
       # interface supports sending traffic to a single virtual private cloud
       # (VPC).
+      #
       # @option params [required, String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @option params [required, Types::NewPrivateVirtualInterface] :new_private_virtual_interface
       #   Detailed information for the private virtual interface to be created.
       #
       #   Default: None
+      #
       # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
-      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#owner_account #owner_account} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtual_interface_id} => String
       #   * {Types::VirtualInterface#location #location} => String
-      #   * {Types::VirtualInterface#connection_id #connectionId} => String
-      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
-      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#connection_id #connection_id} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtual_interface_type} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
       #   * {Types::VirtualInterface#vlan #vlan} => Integer
       #   * {Types::VirtualInterface#asn #asn} => Integer
-      #   * {Types::VirtualInterface#auth_key #authKey} => String
-      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
-      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
-      #   * {Types::VirtualInterface#address_family #addressFamily} => String
-      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
-      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
-      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
-      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
-      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
+      #   * {Types::VirtualInterface#auth_key #auth_key} => String
+      #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
+      #   * {Types::VirtualInterface#customer_address #customer_address} => String
+      #   * {Types::VirtualInterface#address_family #address_family} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
+      #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_private_virtual_interface({
       #     connection_id: "ConnectionId", # required
       #     new_private_virtual_interface: { # required
@@ -780,6 +858,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.virtual_interface_id #=> String
       #   resp.location #=> String
@@ -805,6 +884,7 @@ module Aws
       #   resp.bgp_peers[0].customer_address #=> String
       #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload create_private_virtual_interface(params = {})
       # @param [Hash] params ({})
       def create_private_virtual_interface(params = {}, options = {})
@@ -821,37 +901,41 @@ module Aws
       # 'ipv6'), the customer and amazon address fields should be left blank
       # to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently
       # not supported.
+      #
       # @option params [required, String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @option params [required, Types::NewPublicVirtualInterface] :new_public_virtual_interface
       #   Detailed information for the public virtual interface to be created.
       #
       #   Default: None
+      #
       # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
-      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#owner_account #owner_account} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtual_interface_id} => String
       #   * {Types::VirtualInterface#location #location} => String
-      #   * {Types::VirtualInterface#connection_id #connectionId} => String
-      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
-      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#connection_id #connection_id} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtual_interface_type} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
       #   * {Types::VirtualInterface#vlan #vlan} => Integer
       #   * {Types::VirtualInterface#asn #asn} => Integer
-      #   * {Types::VirtualInterface#auth_key #authKey} => String
-      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
-      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
-      #   * {Types::VirtualInterface#address_family #addressFamily} => String
-      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
-      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
-      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
-      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
-      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
+      #   * {Types::VirtualInterface#auth_key #auth_key} => String
+      #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
+      #   * {Types::VirtualInterface#customer_address #customer_address} => String
+      #   * {Types::VirtualInterface#address_family #address_family} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
+      #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_public_virtual_interface({
       #     connection_id: "ConnectionId", # required
       #     new_public_virtual_interface: { # required
@@ -871,6 +955,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.virtual_interface_id #=> String
       #   resp.location #=> String
@@ -896,6 +981,7 @@ module Aws
       #   resp.bgp_peers[0].customer_address #=> String
       #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload create_public_virtual_interface(params = {})
       # @param [Hash] params ({})
       def create_public_virtual_interface(params = {}, options = {})
@@ -906,6 +992,7 @@ module Aws
       # Deletes a BGP peer on the specified virtual interface that matches the
       # specified customer address and ASN. You cannot delete the last BGP
       # peer from a virtual interface.
+      #
       # @option params [String] :virtual_interface_id
       #   The ID of the virtual interface from which the BGP peer will be
       #   deleted.
@@ -913,20 +1000,24 @@ module Aws
       #   Example: dxvif-456abc78
       #
       #   Default: None
+      #
       # @option params [Integer] :asn
       #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
       #   configuration.
       #
       #   Example: 65000
+      #
       # @option params [String] :customer_address
       #   IP address assigned to the customer interface.
       #
       #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #
       # @return [Types::DeleteBGPPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteBGPPeerResponse#virtual_interface #virtualInterface} => Types::VirtualInterface
+      #   * {Types::DeleteBGPPeerResponse#virtual_interface #virtual_interface} => Types::VirtualInterface
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_bgp_peer({
       #     virtual_interface_id: "VirtualInterfaceId",
       #     asn: 1,
@@ -934,6 +1025,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.virtual_interface.owner_account #=> String
       #   resp.virtual_interface.virtual_interface_id #=> String
       #   resp.virtual_interface.location #=> String
@@ -959,6 +1051,7 @@ module Aws
       #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
       #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload delete_bgp_peer(params = {})
       # @param [Hash] params ({})
       def delete_bgp_peer(params = {}, options = {})
@@ -972,31 +1065,35 @@ module Aws
       # data transfer charges. You need to cancel separately with the
       # providers any services or charges for cross-connects or network
       # circuits that connect you to the AWS Direct Connect location.
+      #
       # @option params [required, String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::Connection#owner_account #ownerAccount} => String
-      #   * {Types::Connection#connection_id #connectionId} => String
-      #   * {Types::Connection#connection_name #connectionName} => String
-      #   * {Types::Connection#connection_state #connectionState} => String
+      #   * {Types::Connection#owner_account #owner_account} => String
+      #   * {Types::Connection#connection_id #connection_id} => String
+      #   * {Types::Connection#connection_name #connection_name} => String
+      #   * {Types::Connection#connection_state #connection_state} => String
       #   * {Types::Connection#region #region} => String
       #   * {Types::Connection#location #location} => String
       #   * {Types::Connection#bandwidth #bandwidth} => String
       #   * {Types::Connection#vlan #vlan} => Integer
-      #   * {Types::Connection#partner_name #partnerName} => String
-      #   * {Types::Connection#loa_issue_time #loaIssueTime} => Time
+      #   * {Types::Connection#partner_name #partner_name} => String
+      #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_connection({
       #     connection_id: "ConnectionId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.owner_account #=> String
       #   resp.connection_id #=> String
       #   resp.connection_name #=> String
@@ -1007,6 +1104,7 @@ module Aws
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
       #   resp.loa_issue_time #=> Time
+      #
       # @overload delete_connection(params = {})
       # @param [Hash] params ({})
       def delete_connection(params = {}, options = {})
@@ -1019,21 +1117,26 @@ module Aws
       # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
       #
       #  </note>
+      #
       # @option params [required, String] :interconnect_id
       #   The ID of the interconnect.
       #
       #   Example: dxcon-abc123
+      #
       # @return [Types::DeleteInterconnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteInterconnectResponse#interconnect_state #interconnectState} => String
+      #   * {Types::DeleteInterconnectResponse#interconnect_state #interconnect_state} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_interconnect({
       #     interconnect_id: "InterconnectId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+      #
       # @overload delete_interconnect(params = {})
       # @param [Hash] params ({})
       def delete_interconnect(params = {}, options = {})
@@ -1042,23 +1145,28 @@ module Aws
       end
 
       # Deletes a virtual interface.
+      #
       # @option params [required, String] :virtual_interface_id
       #   ID of the virtual interface.
       #
       #   Example: dxvif-123dfg56
       #
       #   Default: None
+      #
       # @return [Types::DeleteVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteVirtualInterfaceResponse#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::DeleteVirtualInterfaceResponse#virtual_interface_state #virtual_interface_state} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_virtual_interface({
       #     virtual_interface_id: "VirtualInterfaceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #
       # @overload delete_virtual_interface(params = {})
       # @param [Hash] params ({})
       def delete_virtual_interface(params = {}, options = {})
@@ -1077,12 +1185,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+      #
       # @option params [required, String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @option params [String] :provider_name
       #   The name of the APN partner or service provider who establishes
       #   connectivity on your behalf. If you supply this parameter, the LOA-CFA
@@ -1090,16 +1200,19 @@ module Aws
       #   of the cross connect.
       #
       #   Default: None
+      #
       # @option params [String] :loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
       #   document. Currently, the only supported value is "application/pdf".
       #
       #   Default: application/pdf
+      #
       # @return [Types::DescribeConnectionLoaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeConnectionLoaResponse#loa #loa} => Types::Loa
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_connection_loa({
       #     connection_id: "ConnectionId", # required
       #     provider_name: "ProviderName",
@@ -1107,8 +1220,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.loa.loa_content #=> String
       #   resp.loa.loa_content_type #=> String, one of "application/pdf"
+      #
       # @overload describe_connection_loa(params = {})
       # @param [Hash] params ({})
       def describe_connection_loa(params = {}, options = {})
@@ -1120,22 +1235,26 @@ module Aws
       #
       # If a connection ID is provided, the call returns only that particular
       # connection.
+      #
       # @option params [String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_connections({
       #     connection_id: "ConnectionId",
       #   })
       #
       # @example Response structure
+      #
       #   resp.connections #=> Array
       #   resp.connections[0].owner_account #=> String
       #   resp.connections[0].connection_id #=> String
@@ -1147,6 +1266,7 @@ module Aws
       #   resp.connections[0].vlan #=> Integer
       #   resp.connections[0].partner_name #=> String
       #   resp.connections[0].loa_issue_time #=> Time
+      #
       # @overload describe_connections(params = {})
       # @param [Hash] params ({})
       def describe_connections(params = {}, options = {})
@@ -1160,22 +1280,26 @@ module Aws
       # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
       #
       #  </note>
+      #
       # @option params [required, String] :interconnect_id
       #   ID of the interconnect on which a list of connection is provisioned.
       #
       #   Example: dxcon-abc123
       #
       #   Default: None
+      #
       # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_connections_on_interconnect({
       #     interconnect_id: "InterconnectId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.connections #=> Array
       #   resp.connections[0].owner_account #=> String
       #   resp.connections[0].connection_id #=> String
@@ -1187,6 +1311,7 @@ module Aws
       #   resp.connections[0].vlan #=> Integer
       #   resp.connections[0].partner_name #=> String
       #   resp.connections[0].loa_issue_time #=> Time
+      #
       # @overload describe_connections_on_interconnect(params = {})
       # @param [Hash] params ({})
       def describe_connections_on_interconnect(params = {}, options = {})
@@ -1205,10 +1330,12 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+      #
       # @option params [required, String] :interconnect_id
       #   The ID of the interconnect.
       #
       #   Example: dxcon-abc123
+      #
       # @option params [String] :provider_name
       #   The name of the service provider who establishes connectivity on your
       #   behalf. If you supply this parameter, the LOA-CFA lists the provider
@@ -1216,16 +1343,19 @@ module Aws
       #   connect.
       #
       #   Default: None
+      #
       # @option params [String] :loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
       #   document. Currently, the only supported value is "application/pdf".
       #
       #   Default: application/pdf
+      #
       # @return [Types::DescribeInterconnectLoaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeInterconnectLoaResponse#loa #loa} => Types::Loa
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_interconnect_loa({
       #     interconnect_id: "InterconnectId", # required
       #     provider_name: "ProviderName",
@@ -1233,8 +1363,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.loa.loa_content #=> String
       #   resp.loa.loa_content_type #=> String, one of "application/pdf"
+      #
       # @overload describe_interconnect_loa(params = {})
       # @param [Hash] params ({})
       def describe_interconnect_loa(params = {}, options = {})
@@ -1246,20 +1378,24 @@ module Aws
       #
       # If an interconnect ID is provided, it will only return this particular
       # interconnect.
+      #
       # @option params [String] :interconnect_id
       #   The ID of the interconnect.
       #
       #   Example: dxcon-abc123
+      #
       # @return [Types::Interconnects] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Interconnects#interconnects #interconnects} => Array&lt;Types::Interconnect&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_interconnects({
       #     interconnect_id: "InterconnectId",
       #   })
       #
       # @example Response structure
+      #
       #   resp.interconnects #=> Array
       #   resp.interconnects[0].interconnect_id #=> String
       #   resp.interconnects[0].interconnect_name #=> String
@@ -1268,6 +1404,7 @@ module Aws
       #   resp.interconnects[0].location #=> String
       #   resp.interconnects[0].bandwidth #=> String
       #   resp.interconnects[0].loa_issue_time #=> Time
+      #
       # @overload describe_interconnects(params = {})
       # @param [Hash] params ({})
       def describe_interconnects(params = {}, options = {})
@@ -1278,14 +1415,17 @@ module Aws
       # Returns the list of AWS Direct Connect locations in the current AWS
       # region. These are the locations that may be selected when calling
       # CreateConnection or CreateInterconnect.
+      #
       # @return [Types::Locations] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Locations#locations #locations} => Array&lt;Types::Location&gt;
       #
       # @example Response structure
+      #
       #   resp.locations #=> Array
       #   resp.locations[0].location_code #=> String
       #   resp.locations[0].location_name #=> String
+      #
       # @overload describe_locations(params = {})
       # @param [Hash] params ({})
       def describe_locations(params = {}, options = {})
@@ -1295,23 +1435,28 @@ module Aws
 
       # Describes the tags associated with the specified Direct Connect
       # resources.
+      #
       # @option params [required, Array<String>] :resource_arns
       #   The Amazon Resource Names (ARNs) of the Direct Connect resources.
+      #
       # @return [Types::DescribeTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTagsResponse#resource_tags #resourceTags} => Array&lt;Types::ResourceTag&gt;
+      #   * {Types::DescribeTagsResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_tags({
       #     resource_arns: ["ResourceArn"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.resource_tags #=> Array
       #   resp.resource_tags[0].resource_arn #=> String
       #   resp.resource_tags[0].tags #=> Array
       #   resp.resource_tags[0].tags[0].key #=> String
       #   resp.resource_tags[0].tags[0].value #=> String
+      #
       # @overload describe_tags(params = {})
       # @param [Hash] params ({})
       def describe_tags(params = {}, options = {})
@@ -1329,14 +1474,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
+      #
       # @return [Types::VirtualGateways] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VirtualGateways#virtual_gateways #virtualGateways} => Array&lt;Types::VirtualGateway&gt;
+      #   * {Types::VirtualGateways#virtual_gateways #virtual_gateways} => Array&lt;Types::VirtualGateway&gt;
       #
       # @example Response structure
+      #
       #   resp.virtual_gateways #=> Array
       #   resp.virtual_gateways[0].virtual_gateway_id #=> String
       #   resp.virtual_gateways[0].virtual_gateway_state #=> String
+      #
       # @overload describe_virtual_gateways(params = {})
       # @param [Hash] params ({})
       def describe_virtual_gateways(params = {}, options = {})
@@ -1357,29 +1505,34 @@ module Aws
       # If a connection ID is provided, only virtual interfaces provisioned on
       # the specified connection will be returned. If a virtual interface ID
       # is provided, only this particular virtual interface will be returned.
+      #
       # @option params [String] :connection_id
       #   ID of the connection.
       #
       #   Example: dxcon-fg5678gh
       #
       #   Default: None
+      #
       # @option params [String] :virtual_interface_id
       #   ID of the virtual interface.
       #
       #   Example: dxvif-123dfg56
       #
       #   Default: None
+      #
       # @return [Types::VirtualInterfaces] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VirtualInterfaces#virtual_interfaces #virtualInterfaces} => Array&lt;Types::VirtualInterface&gt;
+      #   * {Types::VirtualInterfaces#virtual_interfaces #virtual_interfaces} => Array&lt;Types::VirtualInterface&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_virtual_interfaces({
       #     connection_id: "ConnectionId",
       #     virtual_interface_id: "VirtualInterfaceId",
       #   })
       #
       # @example Response structure
+      #
       #   resp.virtual_interfaces #=> Array
       #   resp.virtual_interfaces[0].owner_account #=> String
       #   resp.virtual_interfaces[0].virtual_interface_id #=> String
@@ -1406,6 +1559,7 @@ module Aws
       #   resp.virtual_interfaces[0].bgp_peers[0].customer_address #=> String
       #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
       #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      #
       # @overload describe_virtual_interfaces(params = {})
       # @param [Hash] params ({})
       def describe_virtual_interfaces(params = {}, options = {})
@@ -1419,16 +1573,20 @@ module Aws
       # Each tag consists of a key and an optional value. If a tag with the
       # same key is already associated with the Direct Connect resource, this
       # action updates its value.
+      #
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) of the Direct Connect resource.
       #
       #   Example:
       #   arn:aws:directconnect:us-east-1:123456789012:dxcon/dxcon-fg5678gh
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The list of tags to add.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.tag_resource({
       #     resource_arn: "ResourceArn", # required
       #     tags: [ # required
@@ -1438,6 +1596,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload tag_resource(params = {})
       # @param [Hash] params ({})
       def tag_resource(params = {}, options = {})
@@ -1446,17 +1605,22 @@ module Aws
       end
 
       # Removes one or more tags from the specified Direct Connect resource.
+      #
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) of the Direct Connect resource.
+      #
       # @option params [required, Array<String>] :tag_keys
       #   The list of tag keys to remove.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.untag_resource({
       #     resource_arn: "ResourceArn", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      #
       # @overload untag_resource(params = {})
       # @param [Hash] params ({})
       def untag_resource(params = {}, options = {})

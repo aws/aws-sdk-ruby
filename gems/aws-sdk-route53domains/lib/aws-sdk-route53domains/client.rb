@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -142,6 +157,7 @@ module Aws
       # This operation checks the availability of one domain name. Note that
       # if the availability status of a domain is pending, you must submit
       # another request to determine the availability of the domain name.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -154,20 +170,25 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @option params [String] :idn_lang_code
       #   Reserved for future use.
+      #
       # @return [Types::CheckDomainAvailabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CheckDomainAvailabilityResponse#availability #Availability} => String
+      #   * {Types::CheckDomainAvailabilityResponse#availability #availability} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.check_domain_availability({
       #     domain_name: "DomainName", # required
       #     idn_lang_code: "LangCode",
       #   })
       #
       # @example Response structure
+      #
       #   resp.availability #=> String, one of "AVAILABLE", "AVAILABLE_RESERVED", "AVAILABLE_PREORDER", "UNAVAILABLE", "UNAVAILABLE_PREMIUM", "UNAVAILABLE_RESTRICTED", "RESERVED", "DONT_KNOW"
+      #
       # @overload check_domain_availability(params = {})
       # @param [Hash] params ({})
       def check_domain_availability(params = {}, options = {})
@@ -179,6 +200,7 @@ module Aws
       #
       # All tag operations are eventually consistent; subsequent operations
       # may not immediately represent all issued operations.
+      #
       # @option params [required, String] :domain_name
       #   The domain for which you want to delete one or more tags.
       #
@@ -195,6 +217,7 @@ module Aws
       #   Internationalized Domain Name, you must convert the name to Punycode.
       #
       #   Required: Yes
+      #
       # @option params [required, Array<String>] :tags_to_delete
       #   A list of tag keys to delete.
       #
@@ -206,13 +229,16 @@ module Aws
       #   Required: No
       #
       #   '>
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_tags_for_domain({
       #     domain_name: "DomainName", # required
       #     tags_to_delete: ["TagKey"], # required
       #   })
+      #
       # @overload delete_tags_for_domain(params = {})
       # @param [Hash] params ({})
       def delete_tags_for_domain(params = {}, options = {})
@@ -222,13 +248,17 @@ module Aws
 
       # This operation disables automatic renewal of domain registration for
       # the specified domain.
+      #
       # @option params [required, String] :domain_name
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_domain_auto_renew({
       #     domain_name: "DomainName", # required
       #   })
+      #
       # @overload disable_domain_auto_renew(params = {})
       # @param [Hash] params ({})
       def disable_domain_auto_renew(params = {}, options = {})
@@ -243,6 +273,7 @@ module Aws
       # returns an operation ID that you can use to track the progress and
       # completion of the action. If the request is not completed
       # successfully, the domain registrant will be notified by email.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -255,17 +286,21 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @return [Types::DisableDomainTransferLockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DisableDomainTransferLockResponse#operation_id #OperationId} => String
+      #   * {Types::DisableDomainTransferLockResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_domain_transfer_lock({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload disable_domain_transfer_lock(params = {})
       # @param [Hash] params ({})
       def disable_domain_transfer_lock(params = {}, options = {})
@@ -287,13 +322,17 @@ module Aws
       #
       #
       # [1]: http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times
+      #
       # @option params [required, String] :domain_name
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_domain_auto_renew({
       #     domain_name: "DomainName", # required
       #   })
+      #
       # @overload enable_domain_auto_renew(params = {})
       # @param [Hash] params ({})
       def enable_domain_auto_renew(params = {}, options = {})
@@ -307,6 +346,7 @@ module Aws
       # track the progress and completion of the action. If the request is not
       # completed successfully, the domain registrant will be notified by
       # email.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -319,17 +359,21 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @return [Types::EnableDomainTransferLockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnableDomainTransferLockResponse#operation_id #OperationId} => String
+      #   * {Types::EnableDomainTransferLockResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_domain_transfer_lock({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload enable_domain_transfer_lock(params = {})
       # @param [Hash] params ({})
       def enable_domain_transfer_lock(params = {}, options = {})
@@ -344,6 +388,7 @@ module Aws
       #
       # If you want us to resend the email, use the
       # `ResendContactReachabilityEmail` operation.
+      #
       # @option params [String] :domain_name
       #   The name of the domain for which you want to know whether the
       #   registrant contact has confirmed that the email address is valid.
@@ -353,19 +398,23 @@ module Aws
       #   Default: None
       #
       #   Required: Yes
+      #
       # @return [Types::GetContactReachabilityStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetContactReachabilityStatusResponse#domain_name #domainName} => String
+      #   * {Types::GetContactReachabilityStatusResponse#domain_name #domain_name} => String
       #   * {Types::GetContactReachabilityStatusResponse#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_contact_reachability_status({
       #     domain_name: "DomainName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_name #=> String
       #   resp.status #=> String, one of "PENDING", "DONE", "EXPIRED"
+      #
       # @overload get_contact_reachability_status(params = {})
       # @param [Hash] params ({})
       def get_contact_reachability_status(params = {}, options = {})
@@ -375,6 +424,7 @@ module Aws
 
       # This operation returns detailed information about the domain. The
       # domain's contact information is also returned as part of the output.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -387,36 +437,39 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @return [Types::GetDomainDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDomainDetailResponse#domain_name #DomainName} => String
-      #   * {Types::GetDomainDetailResponse#nameservers #Nameservers} => Array&lt;Types::Nameserver&gt;
-      #   * {Types::GetDomainDetailResponse#auto_renew #AutoRenew} => Boolean
-      #   * {Types::GetDomainDetailResponse#admin_contact #AdminContact} => Types::ContactDetail
-      #   * {Types::GetDomainDetailResponse#registrant_contact #RegistrantContact} => Types::ContactDetail
-      #   * {Types::GetDomainDetailResponse#tech_contact #TechContact} => Types::ContactDetail
-      #   * {Types::GetDomainDetailResponse#admin_privacy #AdminPrivacy} => Boolean
-      #   * {Types::GetDomainDetailResponse#registrant_privacy #RegistrantPrivacy} => Boolean
-      #   * {Types::GetDomainDetailResponse#tech_privacy #TechPrivacy} => Boolean
-      #   * {Types::GetDomainDetailResponse#registrar_name #RegistrarName} => String
-      #   * {Types::GetDomainDetailResponse#who_is_server #WhoIsServer} => String
-      #   * {Types::GetDomainDetailResponse#registrar_url #RegistrarUrl} => String
-      #   * {Types::GetDomainDetailResponse#abuse_contact_email #AbuseContactEmail} => String
-      #   * {Types::GetDomainDetailResponse#abuse_contact_phone #AbuseContactPhone} => String
-      #   * {Types::GetDomainDetailResponse#registry_domain_id #RegistryDomainId} => String
-      #   * {Types::GetDomainDetailResponse#creation_date #CreationDate} => Time
-      #   * {Types::GetDomainDetailResponse#updated_date #UpdatedDate} => Time
-      #   * {Types::GetDomainDetailResponse#expiration_date #ExpirationDate} => Time
-      #   * {Types::GetDomainDetailResponse#reseller #Reseller} => String
-      #   * {Types::GetDomainDetailResponse#dns_sec #DnsSec} => String
-      #   * {Types::GetDomainDetailResponse#status_list #StatusList} => Array&lt;String&gt;
+      #   * {Types::GetDomainDetailResponse#domain_name #domain_name} => String
+      #   * {Types::GetDomainDetailResponse#nameservers #nameservers} => Array&lt;Types::Nameserver&gt;
+      #   * {Types::GetDomainDetailResponse#auto_renew #auto_renew} => Boolean
+      #   * {Types::GetDomainDetailResponse#admin_contact #admin_contact} => Types::ContactDetail
+      #   * {Types::GetDomainDetailResponse#registrant_contact #registrant_contact} => Types::ContactDetail
+      #   * {Types::GetDomainDetailResponse#tech_contact #tech_contact} => Types::ContactDetail
+      #   * {Types::GetDomainDetailResponse#admin_privacy #admin_privacy} => Boolean
+      #   * {Types::GetDomainDetailResponse#registrant_privacy #registrant_privacy} => Boolean
+      #   * {Types::GetDomainDetailResponse#tech_privacy #tech_privacy} => Boolean
+      #   * {Types::GetDomainDetailResponse#registrar_name #registrar_name} => String
+      #   * {Types::GetDomainDetailResponse#who_is_server #who_is_server} => String
+      #   * {Types::GetDomainDetailResponse#registrar_url #registrar_url} => String
+      #   * {Types::GetDomainDetailResponse#abuse_contact_email #abuse_contact_email} => String
+      #   * {Types::GetDomainDetailResponse#abuse_contact_phone #abuse_contact_phone} => String
+      #   * {Types::GetDomainDetailResponse#registry_domain_id #registry_domain_id} => String
+      #   * {Types::GetDomainDetailResponse#creation_date #creation_date} => Time
+      #   * {Types::GetDomainDetailResponse#updated_date #updated_date} => Time
+      #   * {Types::GetDomainDetailResponse#expiration_date #expiration_date} => Time
+      #   * {Types::GetDomainDetailResponse#reseller #reseller} => String
+      #   * {Types::GetDomainDetailResponse#dns_sec #dns_sec} => String
+      #   * {Types::GetDomainDetailResponse#status_list #status_list} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_domain_detail({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_name #=> String
       #   resp.nameservers #=> Array
       #   resp.nameservers[0].name #=> String
@@ -487,6 +540,7 @@ module Aws
       #   resp.dns_sec #=> String
       #   resp.status_list #=> Array
       #   resp.status_list[0] #=> String
+      #
       # @overload get_domain_detail(params = {})
       # @param [Hash] params ({})
       def get_domain_detail(params = {}, options = {})
@@ -509,14 +563,19 @@ module Aws
       #   domain is actually available, and caller will have to call
       #   checkDomainAvailability for each suggestion to determine
       #   availability for registration.
+      #
       # @option params [required, String] :domain_name
+      #
       # @option params [required, Integer] :suggestion_count
+      #
       # @option params [required, Boolean] :only_available
+      #
       # @return [Types::GetDomainSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDomainSuggestionsResponse#suggestions_list #SuggestionsList} => Array&lt;Types::DomainSuggestion&gt;
+      #   * {Types::GetDomainSuggestionsResponse#suggestions_list #suggestions_list} => Array&lt;Types::DomainSuggestion&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_domain_suggestions({
       #     domain_name: "DomainName", # required
       #     suggestion_count: 1, # required
@@ -524,9 +583,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.suggestions_list #=> Array
       #   resp.suggestions_list[0].domain_name #=> String
       #   resp.suggestions_list[0].availability #=> String
+      #
       # @overload get_domain_suggestions(params = {})
       # @param [Hash] params ({})
       def get_domain_suggestions(params = {}, options = {})
@@ -536,6 +597,7 @@ module Aws
 
       # This operation returns the current status of an operation that is not
       # completed.
+      #
       # @option params [required, String] :operation_id
       #   The identifier for the operation for which you want to get the status.
       #   Amazon Route 53 returned the identifier in the response to the
@@ -546,27 +608,31 @@ module Aws
       #   Default: None
       #
       #   Required: Yes
+      #
       # @return [Types::GetOperationDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetOperationDetailResponse#operation_id #OperationId} => String
-      #   * {Types::GetOperationDetailResponse#status #Status} => String
-      #   * {Types::GetOperationDetailResponse#message #Message} => String
-      #   * {Types::GetOperationDetailResponse#domain_name #DomainName} => String
-      #   * {Types::GetOperationDetailResponse#type #Type} => String
-      #   * {Types::GetOperationDetailResponse#submitted_date #SubmittedDate} => Time
+      #   * {Types::GetOperationDetailResponse#operation_id #operation_id} => String
+      #   * {Types::GetOperationDetailResponse#status #status} => String
+      #   * {Types::GetOperationDetailResponse#message #message} => String
+      #   * {Types::GetOperationDetailResponse#domain_name #domain_name} => String
+      #   * {Types::GetOperationDetailResponse#type #type} => String
+      #   * {Types::GetOperationDetailResponse#submitted_date #submitted_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_operation_detail({
       #     operation_id: "OperationId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
       #   resp.status #=> String, one of "SUBMITTED", "IN_PROGRESS", "ERROR", "SUCCESSFUL", "FAILED"
       #   resp.message #=> String
       #   resp.domain_name #=> String
       #   resp.type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK"
       #   resp.submitted_date #=> Time
+      #
       # @overload get_operation_detail(params = {})
       # @param [Hash] params ({})
       def get_operation_detail(params = {}, options = {})
@@ -576,6 +642,7 @@ module Aws
 
       # This operation returns all the domain names registered with Amazon
       # Route 53 for the current AWS account.
+      #
       # @option params [String] :marker
       #   For an initial request for a list of domains, omit this element. If
       #   the number of domains that are associated with the current AWS account
@@ -593,6 +660,7 @@ module Aws
       #   request.
       #
       #   Required: No
+      #
       # @option params [Integer] :max_items
       #   Number of domains to be returned.
       #
@@ -603,24 +671,28 @@ module Aws
       #   Constraints: A numeral between 1 and 100.
       #
       #   Required: No
+      #
       # @return [Types::ListDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDomainsResponse#domains #Domains} => Array&lt;Types::DomainSummary&gt;
-      #   * {Types::ListDomainsResponse#next_page_marker #NextPageMarker} => String
+      #   * {Types::ListDomainsResponse#domains #domains} => Array&lt;Types::DomainSummary&gt;
+      #   * {Types::ListDomainsResponse#next_page_marker #next_page_marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_domains({
       #     marker: "PageMarker",
       #     max_items: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.domains #=> Array
       #   resp.domains[0].domain_name #=> String
       #   resp.domains[0].auto_renew #=> Boolean
       #   resp.domains[0].transfer_lock #=> Boolean
       #   resp.domains[0].expiry #=> Time
       #   resp.next_page_marker #=> String
+      #
       # @overload list_domains(params = {})
       # @param [Hash] params ({})
       def list_domains(params = {}, options = {})
@@ -630,6 +702,7 @@ module Aws
 
       # This operation returns the operation IDs of operations that are not
       # yet complete.
+      #
       # @option params [String] :marker
       #   For an initial request for a list of operations, omit this element. If
       #   the number of operations that are not yet complete is greater than the
@@ -643,6 +716,7 @@ module Aws
       #   Default: None
       #
       #   Required: No
+      #
       # @option params [Integer] :max_items
       #   Number of domains to be returned.
       #
@@ -653,24 +727,28 @@ module Aws
       #   Constraints: A value between 1 and 100.
       #
       #   Required: No
+      #
       # @return [Types::ListOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListOperationsResponse#operations #Operations} => Array&lt;Types::OperationSummary&gt;
-      #   * {Types::ListOperationsResponse#next_page_marker #NextPageMarker} => String
+      #   * {Types::ListOperationsResponse#operations #operations} => Array&lt;Types::OperationSummary&gt;
+      #   * {Types::ListOperationsResponse#next_page_marker #next_page_marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_operations({
       #     marker: "PageMarker",
       #     max_items: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.operations #=> Array
       #   resp.operations[0].operation_id #=> String
       #   resp.operations[0].status #=> String, one of "SUBMITTED", "IN_PROGRESS", "ERROR", "SUCCESSFUL", "FAILED"
       #   resp.operations[0].type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK"
       #   resp.operations[0].submitted_date #=> Time
       #   resp.next_page_marker #=> String
+      #
       # @overload list_operations(params = {})
       # @param [Hash] params ({})
       def list_operations(params = {}, options = {})
@@ -683,21 +761,26 @@ module Aws
       #
       # All tag operations are eventually consistent; subsequent operations
       # may not immediately represent all issued operations.
+      #
       # @option params [required, String] :domain_name
       #   The domain for which you want to get a list of tags.
+      #
       # @return [Types::ListTagsForDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsForDomainResponse#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsForDomainResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_domain({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload list_tags_for_domain(params = {})
       # @param [Hash] params ({})
       def list_tags_for_domain(params = {}, options = {})
@@ -731,6 +814,7 @@ module Aws
       #
       #
       # [1]: http://aws.amazon.com/route53/pricing/
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -743,8 +827,10 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @option params [String] :idn_lang_code
       #   Reserved for future use.
+      #
       # @option params [required, Integer] :duration_in_years
       #   The number of years the domain will be registered. Domains are
       #   registered for a minimum of one year. The maximum period depends on
@@ -757,6 +843,7 @@ module Aws
       #   Valid values: Integer from 1 to 10
       #
       #   Required: Yes
+      #
       # @option params [Boolean] :auto_renew
       #   Indicates whether the domain will be automatically renewed (`true`) or
       #   not (`false`). Autorenewal only takes effect after the account is
@@ -769,6 +856,7 @@ module Aws
       #   Default: `true`
       #
       #   Required: No
+      #
       # @option params [required, Types::ContactDetail] :admin_contact
       #   Provides detailed contact information.
       #
@@ -779,6 +867,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [required, Types::ContactDetail] :registrant_contact
       #   Provides detailed contact information.
       #
@@ -789,6 +878,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [required, Types::ContactDetail] :tech_contact
       #   Provides detailed contact information.
       #
@@ -799,6 +889,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [Boolean] :privacy_protect_admin_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -812,6 +903,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @option params [Boolean] :privacy_protect_registrant_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -825,6 +917,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @option params [Boolean] :privacy_protect_tech_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -838,11 +931,13 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @return [Types::RegisterDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterDomainResponse#operation_id #OperationId} => String
+      #   * {Types::RegisterDomainResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_domain({
       #     domain_name: "DomainName", # required
       #     idn_lang_code: "LangCode",
@@ -917,7 +1012,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload register_domain(params = {})
       # @param [Hash] params ({})
       def register_domain(params = {}, options = {})
@@ -937,7 +1034,9 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/console/route53/domain-renew
+      #
       # @option params [required, String] :domain_name
+      #
       # @option params [Integer] :duration_in_years
       #   The number of years that you want to renew the domain for. The maximum
       #   number of years depends on the top-level domain. For the range of
@@ -955,6 +1054,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/console/route53/domain-tld-list
+      #
       # @option params [required, Integer] :current_expiry_year
       #   The year when the registration for the domain is set to expire. This
       #   value must match the current expiration date for the domain.
@@ -966,11 +1066,13 @@ module Aws
       #   Valid values: Integer
       #
       #   Required: Yes
+      #
       # @return [Types::RenewDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RenewDomainResponse#operation_id #OperationId} => String
+      #   * {Types::RenewDomainResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.renew_domain({
       #     domain_name: "DomainName", # required
       #     duration_in_years: 1,
@@ -978,7 +1080,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload renew_domain(params = {})
       # @param [Hash] params ({})
       def renew_domain(params = {}, options = {})
@@ -990,6 +1094,7 @@ module Aws
       # the registrant contact is valid, such as registering a new domain,
       # this operation resends the confirmation email to the current email
       # address for the registrant contact.
+      #
       # @option params [String] :domain_name
       #   The name of the domain for which you want Amazon Route 53 to resend a
       #   confirmation email to the registrant contact.
@@ -999,21 +1104,25 @@ module Aws
       #   Default: None
       #
       #   Required: Yes
+      #
       # @return [Types::ResendContactReachabilityEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ResendContactReachabilityEmailResponse#domain_name #domainName} => String
-      #   * {Types::ResendContactReachabilityEmailResponse#email_address #emailAddress} => String
-      #   * {Types::ResendContactReachabilityEmailResponse#is_already_verified #isAlreadyVerified} => Boolean
+      #   * {Types::ResendContactReachabilityEmailResponse#domain_name #domain_name} => String
+      #   * {Types::ResendContactReachabilityEmailResponse#email_address #email_address} => String
+      #   * {Types::ResendContactReachabilityEmailResponse#is_already_verified #is_already_verified} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.resend_contact_reachability_email({
       #     domain_name: "DomainName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_name #=> String
       #   resp.email_address #=> String
       #   resp.is_already_verified #=> Boolean
+      #
       # @overload resend_contact_reachability_email(params = {})
       # @param [Hash] params ({})
       def resend_contact_reachability_email(params = {}, options = {})
@@ -1024,6 +1133,7 @@ module Aws
       # This operation returns the AuthCode for the domain. To transfer a
       # domain to another registrar, you provide this value to the new
       # registrar.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -1036,17 +1146,21 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @return [Types::RetrieveDomainAuthCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RetrieveDomainAuthCodeResponse#auth_code #AuthCode} => String
+      #   * {Types::RetrieveDomainAuthCodeResponse#auth_code #auth_code} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.retrieve_domain_auth_code({
       #     domain_name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.auth_code #=> String
+      #
       # @overload retrieve_domain_auth_code(params = {})
       # @param [Hash] params ({})
       def retrieve_domain_auth_code(params = {}, options = {})
@@ -1081,6 +1195,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -1093,8 +1208,10 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @option params [String] :idn_lang_code
       #   Reserved for future use.
+      #
       # @option params [required, Integer] :duration_in_years
       #   The number of years the domain will be registered. Domains are
       #   registered for a minimum of one year. The maximum period depends on
@@ -1107,6 +1224,7 @@ module Aws
       #   Valid values: Integer from 1 to 10
       #
       #   Required: Yes
+      #
       # @option params [Array<Types::Nameserver>] :nameservers
       #   Contains details for the host and glue IP addresses.
       #
@@ -1115,6 +1233,7 @@ module Aws
       #   Children: `GlueIps`, `Name`
       #
       #   Required: No
+      #
       # @option params [String] :auth_code
       #   The authorization code for the domain. You get this value from the
       #   current registrar.
@@ -1122,6 +1241,7 @@ module Aws
       #   Type: String
       #
       #   Required: Yes
+      #
       # @option params [Boolean] :auto_renew
       #   Indicates whether the domain will be automatically renewed (true) or
       #   not (false). Autorenewal only takes effect after the account is
@@ -1134,6 +1254,7 @@ module Aws
       #   Default: true
       #
       #   Required: No
+      #
       # @option params [required, Types::ContactDetail] :admin_contact
       #   Provides detailed contact information.
       #
@@ -1144,6 +1265,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [required, Types::ContactDetail] :registrant_contact
       #   Provides detailed contact information.
       #
@@ -1154,6 +1276,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [required, Types::ContactDetail] :tech_contact
       #   Provides detailed contact information.
       #
@@ -1164,6 +1287,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [Boolean] :privacy_protect_admin_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -1177,6 +1301,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @option params [Boolean] :privacy_protect_registrant_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -1190,6 +1315,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @option params [Boolean] :privacy_protect_tech_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -1203,11 +1329,13 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @return [Types::TransferDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TransferDomainResponse#operation_id #OperationId} => String
+      #   * {Types::TransferDomainResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.transfer_domain({
       #     domain_name: "DomainName", # required
       #     idn_lang_code: "LangCode",
@@ -1289,7 +1417,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload transfer_domain(params = {})
       # @param [Hash] params ({})
       def transfer_domain(params = {}, options = {})
@@ -1305,6 +1435,7 @@ module Aws
       # you can use to track the progress and completion of the action. If the
       # request is not completed successfully, the domain registrant will be
       # notified by email.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -1317,6 +1448,7 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @option params [Types::ContactDetail] :admin_contact
       #   Provides detailed contact information.
       #
@@ -1327,6 +1459,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [Types::ContactDetail] :registrant_contact
       #   Provides detailed contact information.
       #
@@ -1337,6 +1470,7 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @option params [Types::ContactDetail] :tech_contact
       #   Provides detailed contact information.
       #
@@ -1347,11 +1481,13 @@ module Aws
       #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
       #
       #   Required: Yes
+      #
       # @return [Types::UpdateDomainContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateDomainContactResponse#operation_id #OperationId} => String
+      #   * {Types::UpdateDomainContactResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_domain_contact({
       #     domain_name: "DomainName", # required
       #     admin_contact: {
@@ -1420,7 +1556,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload update_domain_contact(params = {})
       # @param [Hash] params ({})
       def update_domain_contact(params = {}, options = {})
@@ -1443,6 +1581,7 @@ module Aws
       #
       #
       # [1]: http://www.gandi.net/domain/whois/?currency=USD&amp;amp;lang=en
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -1455,6 +1594,7 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @option params [Boolean] :admin_privacy
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -1468,6 +1608,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @option params [Boolean] :registrant_privacy
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -1481,6 +1622,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @option params [Boolean] :tech_privacy
       #   Whether you want to conceal contact information from WHOIS queries. If
       #   you specify true, WHOIS ("who is") queries will return contact
@@ -1494,11 +1636,13 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Required: No
+      #
       # @return [Types::UpdateDomainContactPrivacyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateDomainContactPrivacyResponse#operation_id #OperationId} => String
+      #   * {Types::UpdateDomainContactPrivacyResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_domain_contact_privacy({
       #     domain_name: "DomainName", # required
       #     admin_privacy: false,
@@ -1507,7 +1651,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload update_domain_contact_privacy(params = {})
       # @param [Hash] params ({})
       def update_domain_contact_privacy(params = {}, options = {})
@@ -1524,6 +1670,7 @@ module Aws
       # to track the progress and completion of the action. If the request is
       # not completed successfully, the domain registrant will be notified by
       # email.
+      #
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -1536,8 +1683,10 @@ module Aws
       #   Names are not supported.
       #
       #   Required: Yes
+      #
       # @option params [String] :fi_auth_key
       #   The authorization key for .fi domains
+      #
       # @option params [required, Array<Types::Nameserver>] :nameservers
       #   A list of new name servers for the domain.
       #
@@ -1546,11 +1695,13 @@ module Aws
       #   Children: `Name`, `GlueIps`
       #
       #   Required: Yes
+      #
       # @return [Types::UpdateDomainNameserversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateDomainNameserversResponse#operation_id #OperationId} => String
+      #   * {Types::UpdateDomainNameserversResponse#operation_id #operation_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_domain_nameservers({
       #     domain_name: "DomainName", # required
       #     fi_auth_key: "FIAuthKey",
@@ -1563,7 +1714,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.operation_id #=> String
+      #
       # @overload update_domain_nameservers(params = {})
       # @param [Hash] params ({})
       def update_domain_nameservers(params = {}, options = {})
@@ -1575,6 +1728,7 @@ module Aws
       #
       # All tag operations are eventually consistent; subsequent operations
       # may not immediately represent all issued operations.
+      #
       # @option params [required, String] :domain_name
       #   The domain for which you want to add or update tags.
       #
@@ -1591,6 +1745,7 @@ module Aws
       #   Internationalized Domain Name, you must convert the name to Punycode.
       #
       #   Required: Yes
+      #
       # @option params [Array<Types::Tag>] :tags_to_update
       #   A list of the tag keys and values that you want to add or update. If
       #   you specify a key that already exists, the corresponding value will be
@@ -1633,9 +1788,11 @@ module Aws
       #     Constraints: Each value can be 0-256 characters long.
       #
       #     Required: Yes
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_tags_for_domain({
       #     domain_name: "DomainName", # required
       #     tags_to_update: [
@@ -1645,6 +1802,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload update_tags_for_domain(params = {})
       # @param [Hash] params ({})
       def update_tags_for_domain(params = {}, options = {})
@@ -1654,6 +1812,7 @@ module Aws
 
       # This operation returns all the domain-related billing records for the
       # current AWS account for a specified period
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start
       #   The beginning date and time for the time period for which you want a
       #   list of billing records. Specify the date in Unix time format.
@@ -1663,6 +1822,7 @@ module Aws
       #   Default: None
       #
       #   Required: Yes
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end
       #   The end date and time for the time period for which you want a list of
       #   billing records. Specify the date in Unix time format.
@@ -1672,6 +1832,7 @@ module Aws
       #   Default: None
       #
       #   Required: Yes
+      #
       # @option params [String] :marker
       #   For an initial request for a list of billing records, omit this
       #   element. If the number of billing records that are associated with the
@@ -1689,6 +1850,7 @@ module Aws
       #   was returned in the previous response.
       #
       #   Required: No
+      #
       # @option params [Integer] :max_items
       #   The number of billing records to be returned.
       #
@@ -1699,12 +1861,14 @@ module Aws
       #   Constraints: A value between 1 and 100.
       #
       #   Required: No
+      #
       # @return [Types::ViewBillingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ViewBillingResponse#next_page_marker #NextPageMarker} => String
-      #   * {Types::ViewBillingResponse#billing_records #BillingRecords} => Array&lt;Types::BillingRecord&gt;
+      #   * {Types::ViewBillingResponse#next_page_marker #next_page_marker} => String
+      #   * {Types::ViewBillingResponse#billing_records #billing_records} => Array&lt;Types::BillingRecord&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.view_billing({
       #     start: Time.now,
       #     end: Time.now,
@@ -1713,6 +1877,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_page_marker #=> String
       #   resp.billing_records #=> Array
       #   resp.billing_records[0].domain_name #=> String
@@ -1720,6 +1885,7 @@ module Aws
       #   resp.billing_records[0].invoice_id #=> String
       #   resp.billing_records[0].bill_date #=> Time
       #   resp.billing_records[0].price #=> Float
+      #
       # @overload view_billing(params = {})
       # @param [Hash] params ({})
       def view_billing(params = {}, options = {})

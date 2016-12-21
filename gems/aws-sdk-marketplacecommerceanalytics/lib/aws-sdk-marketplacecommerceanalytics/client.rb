@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -151,6 +166,7 @@ module Aws
       # with an attached permissions policy providing Allow permissions for
       # the following actions: s3:PutObject, s3:GetBucketLocation,
       # sns:GetTopicAttributes, sns:Publish, iam:GetRolePolicy.
+      #
       # @option params [required, String] :data_set_type
       #   The desired data set type.
       #
@@ -194,6 +210,7 @@ module Aws
       #     Pacific Time since 2015-10-01.
       #   * *customer\_profile\_by\_geography* - Available daily by 5:00 PM
       #     Pacific Time since 2015-10-01.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :data_set_publication_date
       #   The date a data set was published. For daily data sets, provide a date
       #   with day-level granularity for the desired day. For weekly data sets,
@@ -201,11 +218,14 @@ module Aws
       #   day value will be ignored). For monthly data sets, provide a date with
       #   month-level granularity for the desired month (the day value will be
       #   ignored).
+      #
       # @option params [required, String] :role_name_arn
       #   The Amazon Resource Name (ARN) of the Role with an attached
       #   permissions policy to interact with the provided AWS services.
+      #
       # @option params [required, String] :destination_s3_bucket_name
       #   The name (friendly name, not ARN) of the destination S3 bucket.
+      #
       # @option params [String] :destination_s3_prefix
       #   (Optional) The desired S3 prefix for the published data set, similar
       #   to a directory path in standard file systems. For example, if given
@@ -214,19 +234,23 @@ module Aws
       #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
       #   directory structure does not exist, it will be created. If no prefix
       #   is provided, the data set will be published to the S3 bucket root.
+      #
       # @option params [required, String] :sns_topic_arn
       #   Amazon Resource Name (ARN) for the SNS Topic that will be notified
       #   when the data set has been published or if an error has occurred.
+      #
       # @option params [Hash<String,String>] :customer_defined_values
       #   (Optional) Key-value pairs which will be returned, unmodified, in the
       #   Amazon SNS notification message and the data set metadata file. These
       #   key-value pairs can be used to correlated responses with tracking
       #   information from other systems.
+      #
       # @return [Types::GenerateDataSetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GenerateDataSetResult#data_set_request_id #dataSetRequestId} => String
+      #   * {Types::GenerateDataSetResult#data_set_request_id #data_set_request_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.generate_data_set({
       #     data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography
       #     data_set_publication_date: Time.now, # required
@@ -240,7 +264,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.data_set_request_id #=> String
+      #
       # @overload generate_data_set(params = {})
       # @param [Hash] params ({})
       def generate_data_set(params = {}, options = {})
@@ -261,6 +287,7 @@ module Aws
       # Allow permissions for the following actions: s3:PutObject,
       # s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
       # iam:GetRolePolicy.
+      #
       # @option params [required, String] :data_set_type
       #   Specifies the data set type to be written to the output csv file. The
       #   data set types customer\_support\_contacts\_data and
@@ -278,14 +305,18 @@ module Aws
       #   * *test\_customer\_support\_contacts\_data* An example data set
       #     containing static test data in the same format as
       #     customer\_support\_contacts\_data
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :from_date
       #   The start date from which to retrieve the data set. This parameter
       #   only affects the customer\_support\_contacts\_data data set type.
+      #
       # @option params [required, String] :role_name_arn
       #   The Amazon Resource Name (ARN) of the Role with an attached
       #   permissions policy to interact with the provided AWS services.
+      #
       # @option params [required, String] :destination_s3_bucket_name
       #   The name (friendly name, not ARN) of the destination S3 bucket.
+      #
       # @option params [String] :destination_s3_prefix
       #   (Optional) The desired S3 prefix for the published data set, similar
       #   to a directory path in standard file systems. For example, if given
@@ -294,17 +325,21 @@ module Aws
       #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
       #   directory structure does not exist, it will be created. If no prefix
       #   is provided, the data set will be published to the S3 bucket root.
+      #
       # @option params [required, String] :sns_topic_arn
       #   Amazon Resource Name (ARN) for the SNS Topic that will be notified
       #   when the data set has been published or if an error has occurred.
+      #
       # @option params [Hash<String,String>] :customer_defined_values
       #   (Optional) Key-value pairs which will be returned, unmodified, in the
       #   Amazon SNS notification message and the data set metadata file.
+      #
       # @return [Types::StartSupportDataExportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartSupportDataExportResult#data_set_request_id #dataSetRequestId} => String
+      #   * {Types::StartSupportDataExportResult#data_set_request_id #data_set_request_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_support_data_export({
       #     data_set_type: "customer_support_contacts_data", # required, accepts customer_support_contacts_data, test_customer_support_contacts_data
       #     from_date: Time.now, # required
@@ -318,7 +353,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.data_set_request_id #=> String
+      #
       # @overload start_support_data_export(params = {})
       # @param [Hash] params ({})
       def start_support_data_export(params = {}, options = {})

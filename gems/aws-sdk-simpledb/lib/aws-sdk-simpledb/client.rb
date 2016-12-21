@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -137,13 +151,17 @@ module Aws
       # The following limitations are enforced for this operation: * 1 MB
       # request size
       # * 25 item limit per BatchDeleteAttributes operation
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain in which the attributes are being deleted.
+      #
       # @option params [required, Array<Types::DeletableItem>] :items
       #   A list of items on which to perform the operation.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_delete_attributes({
       #     domain_name: "String", # required
       #     items: [ # required
@@ -160,6 +178,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload batch_delete_attributes(params = {})
       # @param [Hash] params ({})
       def batch_delete_attributes(params = {}, options = {})
@@ -214,13 +233,17 @@ module Aws
       # * 1 billion attributes per domain
       # * 10 GB of total user data storage per domain
       # * 25 item limit per `BatchPutAttributes` operation
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain in which the attributes are being stored.
+      #
       # @option params [required, Array<Types::ReplaceableItem>] :items
       #   A list of items on which to perform the operation.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_put_attributes({
       #     domain_name: "String", # required
       #     items: [ # required
@@ -236,6 +259,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload batch_put_attributes(params = {})
       # @param [Hash] params ({})
       def batch_put_attributes(params = {}, options = {})
@@ -256,16 +280,20 @@ module Aws
       #
       #
       # [1]: http://aws.amazon.com/contact-us/simpledb-limit-request/
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain to create. The name can range between 3 and 255
       #   characters and can contain the following characters: a-z, A-Z, 0-9,
       #   '\_', '-', and '.'.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_domain({
       #     domain_name: "String", # required
       #   })
+      #
       # @overload create_domain(params = {})
       # @param [Hash] params ({})
       def create_domain(params = {}, options = {})
@@ -284,23 +312,29 @@ module Aws
       # eventual consistency update model, performing a GetAttributes or
       # Select operation (read) immediately after a `DeleteAttributes` or
       # PutAttributes operation (write) might not return updated item data.
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain in which to perform the operation.
+      #
       # @option params [required, String] :item_name
       #   The name of the item. Similar to rows on a spreadsheet, items
       #   represent individual objects that contain one or more value-attribute
       #   pairs.
+      #
       # @option params [Array<Types::Attribute>] :attributes
       #   A list of Attributes. Similar to columns on a spreadsheet, attributes
       #   represent categories of data that can be assigned to items.
+      #
       # @option params [Types::UpdateCondition] :expected
       #   The update condition which, if specified, determines whether the
       #   specified attributes will be deleted or not. The update condition must
       #   be satisfied in order for this request to be processed and the
       #   attributes to be deleted.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_attributes({
       #     domain_name: "String", # required
       #     item_name: "String", # required
@@ -318,6 +352,7 @@ module Aws
       #       exists: false,
       #     },
       #   })
+      #
       # @overload delete_attributes(params = {})
       # @param [Hash] params ({})
       def delete_attributes(params = {}, options = {})
@@ -328,14 +363,18 @@ module Aws
       # The `DeleteDomain` operation deletes a domain. Any items (and their
       # attributes) in the domain are deleted as well. The `DeleteDomain`
       # operation might take 10 or more seconds to complete.
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_domain({
       #     domain_name: "String", # required
       #   })
+      #
       # @overload delete_domain(params = {})
       # @param [Hash] params ({})
       def delete_domain(params = {}, options = {})
@@ -346,24 +385,28 @@ module Aws
       # Returns information about the domain, including when the domain was
       # created, the number of items and attributes in the domain, and the
       # size of the attribute names and values.
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain for which to display the metadata of.
+      #
       # @return [Types::DomainMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DomainMetadataResult#item_count #ItemCount} => Integer
-      #   * {Types::DomainMetadataResult#item_names_size_bytes #ItemNamesSizeBytes} => Integer
-      #   * {Types::DomainMetadataResult#attribute_name_count #AttributeNameCount} => Integer
-      #   * {Types::DomainMetadataResult#attribute_names_size_bytes #AttributeNamesSizeBytes} => Integer
-      #   * {Types::DomainMetadataResult#attribute_value_count #AttributeValueCount} => Integer
-      #   * {Types::DomainMetadataResult#attribute_values_size_bytes #AttributeValuesSizeBytes} => Integer
-      #   * {Types::DomainMetadataResult#timestamp #Timestamp} => Integer
+      #   * {Types::DomainMetadataResult#item_count #item_count} => Integer
+      #   * {Types::DomainMetadataResult#item_names_size_bytes #item_names_size_bytes} => Integer
+      #   * {Types::DomainMetadataResult#attribute_name_count #attribute_name_count} => Integer
+      #   * {Types::DomainMetadataResult#attribute_names_size_bytes #attribute_names_size_bytes} => Integer
+      #   * {Types::DomainMetadataResult#attribute_value_count #attribute_value_count} => Integer
+      #   * {Types::DomainMetadataResult#attribute_values_size_bytes #attribute_values_size_bytes} => Integer
+      #   * {Types::DomainMetadataResult#timestamp #timestamp} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.domain_metadata({
       #     domain_name: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.item_count #=> Integer
       #   resp.item_names_size_bytes #=> Integer
       #   resp.attribute_name_count #=> Integer
@@ -371,6 +414,7 @@ module Aws
       #   resp.attribute_value_count #=> Integer
       #   resp.attribute_values_size_bytes #=> Integer
       #   resp.timestamp #=> Integer
+      #
       # @overload domain_metadata(params = {})
       # @param [Hash] params ({})
       def domain_metadata(params = {}, options = {})
@@ -386,19 +430,25 @@ module Aws
       # operation, an empty set is returned. The system does not return an
       # error as it cannot guarantee the item does not exist on other
       # replicas.
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain in which to perform the operation.
+      #
       # @option params [required, String] :item_name
       #   The name of the item.
+      #
       # @option params [Array<String>] :attribute_names
       #   The names of the attributes.
+      #
       # @option params [Boolean] :consistent_read
       #   Determines whether or not strong consistency should be enforced when data is read from SimpleDB. If `true`, any data previously written to SimpleDB will be returned. Otherwise, results will be consistent eventually, and the client may not see data that was written immediately before your read.
+      #
       # @return [Types::GetAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetAttributesResult#attributes #Attributes} => Array&lt;Types::Attribute&gt;
+      #   * {Types::GetAttributesResult#attributes #attributes} => Array&lt;Types::Attribute&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_attributes({
       #     domain_name: "String", # required
       #     item_name: "String", # required
@@ -407,11 +457,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.attributes #=> Array
       #   resp.attributes[0].name #=> String
       #   resp.attributes[0].alternate_name_encoding #=> String
       #   resp.attributes[0].value #=> String
       #   resp.attributes[0].alternate_value_encoding #=> String
+      #
       # @overload get_attributes(params = {})
       # @param [Hash] params ({})
       def get_attributes(params = {}, options = {})
@@ -426,27 +478,33 @@ module Aws
       # Calling `ListDomains` successive times with the `NextToken` provided
       # by the operation returns up to `MaxNumberOfDomains` more domain names
       # with each successive operation call.
+      #
       # @option params [Integer] :max_number_of_domains
       #   The maximum number of domain names you want returned. The range is 1
       #   to 100. The default setting is 100.
+      #
       # @option params [String] :next_token
       #   A string informing Amazon SimpleDB where to start the next list of
       #   domain names.
+      #
       # @return [Types::ListDomainsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDomainsResult#domain_names #DomainNames} => Array&lt;String&gt;
-      #   * {Types::ListDomainsResult#next_token #NextToken} => String
+      #   * {Types::ListDomainsResult#domain_names #domain_names} => Array&lt;String&gt;
+      #   * {Types::ListDomainsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_domains({
       #     max_number_of_domains: 1,
       #     next_token: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_names #=> Array
       #   resp.domain_names[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_domains(params = {})
       # @param [Hash] params ({})
       def list_domains(params = {}, options = {})
@@ -488,20 +546,26 @@ module Aws
       # attribute name-value pairs per item
       # * One billion attributes per domain
       # * 10 GB of total user data storage per domain
+      #
       # @option params [required, String] :domain_name
       #   The name of the domain in which to perform the operation.
+      #
       # @option params [required, String] :item_name
       #   The name of the item.
+      #
       # @option params [required, Array<Types::ReplaceableAttribute>] :attributes
       #   The list of attributes.
+      #
       # @option params [Types::UpdateCondition] :expected
       #   The update condition which, if specified, determines whether the
       #   specified attributes will be updated or not. The update condition must
       #   be satisfied in order for this request to be processed and the
       #   attributes to be updated.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_attributes({
       #     domain_name: "String", # required
       #     item_name: "String", # required
@@ -518,6 +582,7 @@ module Aws
       #       exists: false,
       #     },
       #   })
+      #
       # @overload put_attributes(params = {})
       # @param [Hash] params ({})
       def put_attributes(params = {}, options = {})
@@ -538,18 +603,23 @@ module Aws
       #
       # For information on how to construct select expressions, see Using
       # Select to Create Amazon SimpleDB Queries in the Developer Guide.
+      #
       # @option params [required, String] :select_expression
       #   The expression used to query the domain.
+      #
       # @option params [String] :next_token
       #   A string informing Amazon SimpleDB where to start the next list of `ItemNames`.
+      #
       # @option params [Boolean] :consistent_read
       #   Determines whether or not strong consistency should be enforced when data is read from SimpleDB. If `true`, any data previously written to SimpleDB will be returned. Otherwise, results will be consistent eventually, and the client may not see data that was written immediately before your read.
+      #
       # @return [Types::SelectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SelectResult#items #Items} => Array&lt;Types::Item&gt;
-      #   * {Types::SelectResult#next_token #NextToken} => String
+      #   * {Types::SelectResult#items #items} => Array&lt;Types::Item&gt;
+      #   * {Types::SelectResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.select({
       #     select_expression: "String", # required
       #     next_token: "String",
@@ -557,6 +627,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.items #=> Array
       #   resp.items[0].name #=> String
       #   resp.items[0].alternate_name_encoding #=> String
@@ -566,6 +637,7 @@ module Aws
       #   resp.items[0].attributes[0].value #=> String
       #   resp.items[0].attributes[0].alternate_value_encoding #=> String
       #   resp.next_token #=> String
+      #
       # @overload select(params = {})
       # @param [Hash] params ({})
       def select(params = {}, options = {})

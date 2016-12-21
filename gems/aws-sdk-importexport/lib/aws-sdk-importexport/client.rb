@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -132,22 +146,28 @@ module Aws
 
       # This operation cancels a specified job. Only the job owner can cancel
       # it. The operation fails if the job has already started or is complete.
+      #
       # @option params [required, String] :job_id
       #   A unique identifier which refers to a particular job.
+      #
       # @option params [String] :api_version
       #   Specifies the version of the client tool.
+      #
       # @return [Types::CancelJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CancelJobOutput#success #Success} => Boolean
+      #   * {Types::CancelJobOutput#success #success} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.cancel_job({
       #     job_id: "JobId", # required
       #     api_version: "APIVersion",
       #   })
       #
       # @example Response structure
+      #
       #   resp.success #=> Boolean
+      #
       # @overload cancel_job(params = {})
       # @param [Hash] params ({})
       def cancel_job(params = {}, options = {})
@@ -161,27 +181,34 @@ module Aws
       # includes a job ID, which you can use in other operations, a signature
       # that you use to identify your storage device, and the address where
       # you should ship your storage device.
+      #
       # @option params [required, String] :job_type
       #   Specifies whether the job to initiate is an import or export job.
+      #
       # @option params [required, String] :manifest
       #   The UTF-8 encoded text of the manifest file.
+      #
       # @option params [String] :manifest_addendum
       #   For internal use only.
+      #
       # @option params [required, Boolean] :validate_only
       #   Validate the manifest and parameter values in the request but do not
       #   actually create a job.
+      #
       # @option params [String] :api_version
       #   Specifies the version of the client tool.
+      #
       # @return [Types::CreateJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateJobOutput#job_id #JobId} => String
-      #   * {Types::CreateJobOutput#job_type #JobType} => String
-      #   * {Types::CreateJobOutput#signature #Signature} => String
-      #   * {Types::CreateJobOutput#signature_file_contents #SignatureFileContents} => String
-      #   * {Types::CreateJobOutput#warning_message #WarningMessage} => String
-      #   * {Types::CreateJobOutput#artifact_list #ArtifactList} => Array&lt;Types::Artifact&gt;
+      #   * {Types::CreateJobOutput#job_id #job_id} => String
+      #   * {Types::CreateJobOutput#job_type #job_type} => String
+      #   * {Types::CreateJobOutput#signature #signature} => String
+      #   * {Types::CreateJobOutput#signature_file_contents #signature_file_contents} => String
+      #   * {Types::CreateJobOutput#warning_message #warning_message} => String
+      #   * {Types::CreateJobOutput#artifact_list #artifact_list} => Array&lt;Types::Artifact&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_job({
       #     job_type: "Import", # required, accepts Import, Export
       #     manifest: "Manifest", # required
@@ -191,6 +218,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_id #=> String
       #   resp.job_type #=> String, one of "Import", "Export"
       #   resp.signature #=> String
@@ -199,6 +227,7 @@ module Aws
       #   resp.artifact_list #=> Array
       #   resp.artifact_list[0].description #=> String
       #   resp.artifact_list[0].url #=> String
+      #
       # @overload create_job(params = {})
       # @param [Hash] params ({})
       def create_job(params = {}, options = {})
@@ -208,41 +237,55 @@ module Aws
 
       # This operation generates a pre-paid UPS shipping label that you will
       # use to ship your device to AWS for processing.
+      #
       # @option params [required, Array<String>] :job_ids
+      #
       # @option params [String] :name
       #   Specifies the name of the person responsible for shipping this
       #   package.
+      #
       # @option params [String] :company
       #   Specifies the name of the company that will ship this package.
+      #
       # @option params [String] :phone_number
       #   Specifies the phone number of the person responsible for shipping this
       #   package.
+      #
       # @option params [String] :country
       #   Specifies the name of your country for the return address.
+      #
       # @option params [String] :state_or_province
       #   Specifies the name of your state or your province for the return
       #   address.
+      #
       # @option params [String] :city
       #   Specifies the name of your city for the return address.
+      #
       # @option params [String] :postal_code
       #   Specifies the postal code for the return address.
+      #
       # @option params [String] :street1
       #   Specifies the first part of the street address for the return address,
       #   for example 1234 Main Street.
+      #
       # @option params [String] :street2
       #   Specifies the optional second part of the street address for the
       #   return address, for example Suite 100.
+      #
       # @option params [String] :street3
       #   Specifies the optional third part of the street address for the return
       #   address, for example c/o Jane Doe.
+      #
       # @option params [String] :api_version
       #   Specifies the version of the client tool.
+      #
       # @return [Types::GetShippingLabelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetShippingLabelOutput#shipping_label_url #ShippingLabelURL} => String
-      #   * {Types::GetShippingLabelOutput#warning #Warning} => String
+      #   * {Types::GetShippingLabelOutput#shipping_label_url #shipping_label_url} => String
+      #   * {Types::GetShippingLabelOutput#warning #warning} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_shipping_label({
       #     job_ids: ["GenericString"], # required
       #     name: "name",
@@ -259,8 +302,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.shipping_label_url #=> String
       #   resp.warning #=> String
+      #
       # @overload get_shipping_label(params = {})
       # @param [Hash] params ({})
       def get_shipping_label(params = {}, options = {})
@@ -272,36 +317,41 @@ module Aws
       # job is in the processing pipeline, the status of the results, and the
       # signature value associated with the job. You can only return
       # information about jobs you own.
+      #
       # @option params [required, String] :job_id
       #   A unique identifier which refers to a particular job.
+      #
       # @option params [String] :api_version
       #   Specifies the version of the client tool.
+      #
       # @return [Types::GetStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetStatusOutput#job_id #JobId} => String
-      #   * {Types::GetStatusOutput#job_type #JobType} => String
-      #   * {Types::GetStatusOutput#location_code #LocationCode} => String
-      #   * {Types::GetStatusOutput#location_message #LocationMessage} => String
-      #   * {Types::GetStatusOutput#progress_code #ProgressCode} => String
-      #   * {Types::GetStatusOutput#progress_message #ProgressMessage} => String
-      #   * {Types::GetStatusOutput#carrier #Carrier} => String
-      #   * {Types::GetStatusOutput#tracking_number #TrackingNumber} => String
-      #   * {Types::GetStatusOutput#log_bucket #LogBucket} => String
-      #   * {Types::GetStatusOutput#log_key #LogKey} => String
-      #   * {Types::GetStatusOutput#error_count #ErrorCount} => Integer
-      #   * {Types::GetStatusOutput#signature #Signature} => String
-      #   * {Types::GetStatusOutput#signature_file_contents #SignatureFileContents} => String
-      #   * {Types::GetStatusOutput#current_manifest #CurrentManifest} => String
-      #   * {Types::GetStatusOutput#creation_date #CreationDate} => Time
-      #   * {Types::GetStatusOutput#artifact_list #ArtifactList} => Array&lt;Types::Artifact&gt;
+      #   * {Types::GetStatusOutput#job_id #job_id} => String
+      #   * {Types::GetStatusOutput#job_type #job_type} => String
+      #   * {Types::GetStatusOutput#location_code #location_code} => String
+      #   * {Types::GetStatusOutput#location_message #location_message} => String
+      #   * {Types::GetStatusOutput#progress_code #progress_code} => String
+      #   * {Types::GetStatusOutput#progress_message #progress_message} => String
+      #   * {Types::GetStatusOutput#carrier #carrier} => String
+      #   * {Types::GetStatusOutput#tracking_number #tracking_number} => String
+      #   * {Types::GetStatusOutput#log_bucket #log_bucket} => String
+      #   * {Types::GetStatusOutput#log_key #log_key} => String
+      #   * {Types::GetStatusOutput#error_count #error_count} => Integer
+      #   * {Types::GetStatusOutput#signature #signature} => String
+      #   * {Types::GetStatusOutput#signature_file_contents #signature_file_contents} => String
+      #   * {Types::GetStatusOutput#current_manifest #current_manifest} => String
+      #   * {Types::GetStatusOutput#creation_date #creation_date} => Time
+      #   * {Types::GetStatusOutput#artifact_list #artifact_list} => Array&lt;Types::Artifact&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_status({
       #     job_id: "JobId", # required
       #     api_version: "APIVersion",
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_id #=> String
       #   resp.job_type #=> String, one of "Import", "Export"
       #   resp.location_code #=> String
@@ -320,6 +370,7 @@ module Aws
       #   resp.artifact_list #=> Array
       #   resp.artifact_list[0].description #=> String
       #   resp.artifact_list[0].url #=> String
+      #
       # @overload get_status(params = {})
       # @param [Hash] params ({})
       def get_status(params = {}, options = {})
@@ -332,23 +383,28 @@ module Aws
       # the date of creation. For example if Job Test1 was created 2009Dec30
       # and Test2 was created 2010Feb05, the ListJobs operation would return
       # Test2 followed by Test1.
+      #
       # @option params [Integer] :max_jobs
       #   Sets the maximum number of jobs returned in the response. If there are
       #   additional jobs that were not returned because MaxJobs was exceeded,
       #   the response contains &lt;IsTruncated&gt;true&lt;/IsTruncated&gt;. To
       #   return the additional jobs, see Marker.
+      #
       # @option params [String] :marker
       #   Specifies the JOBID to start after when listing the jobs created with
       #   your account. AWS Import/Export lists your jobs in reverse
       #   chronological order. See MaxJobs.
+      #
       # @option params [String] :api_version
       #   Specifies the version of the client tool.
+      #
       # @return [Types::ListJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListJobsOutput#jobs #Jobs} => Array&lt;Types::Job&gt;
-      #   * {Types::ListJobsOutput#is_truncated #IsTruncated} => Boolean
+      #   * {Types::ListJobsOutput#jobs #jobs} => Array&lt;Types::Job&gt;
+      #   * {Types::ListJobsOutput#is_truncated #is_truncated} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_jobs({
       #     max_jobs: 1,
       #     marker: "Marker",
@@ -356,12 +412,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.jobs #=> Array
       #   resp.jobs[0].job_id #=> String
       #   resp.jobs[0].creation_date #=> Time
       #   resp.jobs[0].is_canceled #=> Boolean
       #   resp.jobs[0].job_type #=> String, one of "Import", "Export"
       #   resp.is_truncated #=> Boolean
+      #
       # @overload list_jobs(params = {})
       # @param [Hash] params ({})
       def list_jobs(params = {}, options = {})
@@ -374,24 +432,31 @@ module Aws
       # file attached to this request replaces the original manifest file. You
       # can only use the operation after a CreateJob request but before the
       # data transfer starts and you can only use it on jobs you own.
+      #
       # @option params [required, String] :job_id
       #   A unique identifier which refers to a particular job.
+      #
       # @option params [required, String] :manifest
       #   The UTF-8 encoded text of the manifest file.
+      #
       # @option params [required, String] :job_type
       #   Specifies whether the job to initiate is an import or export job.
+      #
       # @option params [required, Boolean] :validate_only
       #   Validate the manifest and parameter values in the request but do not
       #   actually create a job.
+      #
       # @option params [String] :api_version
       #   Specifies the version of the client tool.
+      #
       # @return [Types::UpdateJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateJobOutput#success #Success} => Boolean
-      #   * {Types::UpdateJobOutput#warning_message #WarningMessage} => String
-      #   * {Types::UpdateJobOutput#artifact_list #ArtifactList} => Array&lt;Types::Artifact&gt;
+      #   * {Types::UpdateJobOutput#success #success} => Boolean
+      #   * {Types::UpdateJobOutput#warning_message #warning_message} => String
+      #   * {Types::UpdateJobOutput#artifact_list #artifact_list} => Array&lt;Types::Artifact&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_job({
       #     job_id: "JobId", # required
       #     manifest: "Manifest", # required
@@ -401,11 +466,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.success #=> Boolean
       #   resp.warning_message #=> String
       #   resp.artifact_list #=> Array
       #   resp.artifact_list[0].description #=> String
       #   resp.artifact_list[0].url #=> String
+      #
       # @overload update_job(params = {})
       # @param [Hash] params ({})
       def update_job(params = {}, options = {})

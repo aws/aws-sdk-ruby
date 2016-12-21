@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -149,19 +164,23 @@ module Aws
       # repository description on a web page.
       #
       # </note>
+      #
       # @option params [required, Array<String>] :repository_names
       #   The names of the repositories to get information about.
+      #
       # @return [Types::BatchGetRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::BatchGetRepositoriesOutput#repositories #repositories} => Array&lt;Types::RepositoryMetadata&gt;
-      #   * {Types::BatchGetRepositoriesOutput#repositories_not_found #repositoriesNotFound} => Array&lt;String&gt;
+      #   * {Types::BatchGetRepositoriesOutput#repositories_not_found #repositories_not_found} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_get_repositories({
       #     repository_names: ["RepositoryName"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.repositories #=> Array
       #   resp.repositories[0].account_id #=> String
       #   resp.repositories[0].repository_id #=> String
@@ -175,6 +194,7 @@ module Aws
       #   resp.repositories[0].arn #=> String
       #   resp.repositories_not_found #=> Array
       #   resp.repositories_not_found[0] #=> String
+      #
       # @overload batch_get_repositories(params = {})
       # @param [Hash] params ({})
       def batch_get_repositories(params = {}, options = {})
@@ -189,20 +209,26 @@ module Aws
       # default branch. To do this, call the update default branch operation.
       #
       # </note>
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository in which you want to create the new branch.
+      #
       # @option params [required, String] :branch_name
       #   The name of the new branch to create.
+      #
       # @option params [required, String] :commit_id
       #   The ID of the commit to point the new branch to.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_branch({
       #     repository_name: "RepositoryName", # required
       #     branch_name: "BranchName", # required
       #     commit_id: "CommitId", # required
       #   })
+      #
       # @overload create_branch(params = {})
       # @param [Hash] params ({})
       def create_branch(params = {}, options = {})
@@ -211,6 +237,7 @@ module Aws
       end
 
       # Creates a new, empty repository.
+      #
       # @option params [required, String] :repository_name
       #   The name of the new repository to be created.
       #
@@ -225,6 +252,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+      #
       # @option params [String] :repository_description
       #   A comment or description about the new repository.
       #
@@ -236,17 +264,20 @@ module Aws
       #   repository description on a web page.
       #
       #   </note>
+      #
       # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateRepositoryOutput#repository_metadata #repositoryMetadata} => Types::RepositoryMetadata
+      #   * {Types::CreateRepositoryOutput#repository_metadata #repository_metadata} => Types::RepositoryMetadata
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_repository({
       #     repository_name: "RepositoryName", # required
       #     repository_description: "RepositoryDescription",
       #   })
       #
       # @example Response structure
+      #
       #   resp.repository_metadata.account_id #=> String
       #   resp.repository_metadata.repository_id #=> String
       #   resp.repository_metadata.repository_name #=> String
@@ -257,6 +288,7 @@ module Aws
       #   resp.repository_metadata.clone_url_http #=> String
       #   resp.repository_metadata.clone_url_ssh #=> String
       #   resp.repository_metadata.arn #=> String
+      #
       # @overload create_repository(params = {})
       # @param [Hash] params ({})
       def create_repository(params = {}, options = {})
@@ -270,19 +302,24 @@ module Aws
       # Deleting a repository also deletes all associated objects and
       # metadata. After a repository is deleted, all future push calls to the
       # deleted repository will fail.
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository to delete.
+      #
       # @return [Types::DeleteRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteRepositoryOutput#repository_id #repositoryId} => String
+      #   * {Types::DeleteRepositoryOutput#repository_id #repository_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_repository({
       #     repository_name: "RepositoryName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.repository_id #=> String
+      #
       # @overload delete_repository(params = {})
       # @param [Hash] params ({})
       def delete_repository(params = {}, options = {})
@@ -292,24 +329,30 @@ module Aws
 
       # Returns information about a repository branch, including its name and
       # the last commit ID.
+      #
       # @option params [String] :repository_name
       #   The name of the repository that contains the branch for which you want
       #   to retrieve information.
+      #
       # @option params [String] :branch_name
       #   The name of the branch for which you want to retrieve information.
+      #
       # @return [Types::GetBranchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetBranchOutput#branch #branch} => Types::BranchInfo
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_branch({
       #     repository_name: "RepositoryName",
       #     branch_name: "BranchName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.branch.branch_name #=> String
       #   resp.branch.commit_id #=> String
+      #
       # @overload get_branch(params = {})
       # @param [Hash] params ({})
       def get_branch(params = {}, options = {})
@@ -319,21 +362,26 @@ module Aws
 
       # Returns information about a commit, including commit message and
       # committer information.
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository to which the commit was made.
+      #
       # @option params [required, String] :commit_id
       #   The commit ID.
+      #
       # @return [Types::GetCommitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetCommitOutput#commit #commit} => Types::Commit
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_commit({
       #     repository_name: "RepositoryName", # required
       #     commit_id: "ObjectId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.commit.tree_id #=> String
       #   resp.commit.parents #=> Array
       #   resp.commit.parents[0] #=> String
@@ -345,6 +393,7 @@ module Aws
       #   resp.commit.committer.email #=> String
       #   resp.commit.committer.date #=> String
       #   resp.commit.additional_data #=> String
+      #
       # @overload get_commit(params = {})
       # @param [Hash] params ({})
       def get_commit(params = {}, options = {})
@@ -362,18 +411,22 @@ module Aws
       # repository description on a web page.
       #
       # </note>
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository to get information about.
+      #
       # @return [Types::GetRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetRepositoryOutput#repository_metadata #repositoryMetadata} => Types::RepositoryMetadata
+      #   * {Types::GetRepositoryOutput#repository_metadata #repository_metadata} => Types::RepositoryMetadata
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_repository({
       #     repository_name: "RepositoryName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.repository_metadata.account_id #=> String
       #   resp.repository_metadata.repository_id #=> String
       #   resp.repository_metadata.repository_name #=> String
@@ -384,6 +437,7 @@ module Aws
       #   resp.repository_metadata.clone_url_http #=> String
       #   resp.repository_metadata.clone_url_ssh #=> String
       #   resp.repository_metadata.arn #=> String
+      #
       # @overload get_repository(params = {})
       # @param [Hash] params ({})
       def get_repository(params = {}, options = {})
@@ -392,19 +446,23 @@ module Aws
       end
 
       # Gets information about triggers configured for a repository.
+      #
       # @option params [String] :repository_name
       #   The name of the repository for which the trigger is configured.
+      #
       # @return [Types::GetRepositoryTriggersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetRepositoryTriggersOutput#configuration_id #configurationId} => String
+      #   * {Types::GetRepositoryTriggersOutput#configuration_id #configuration_id} => String
       #   * {Types::GetRepositoryTriggersOutput#triggers #triggers} => Array&lt;Types::RepositoryTrigger&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_repository_triggers({
       #     repository_name: "RepositoryName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.configuration_id #=> String
       #   resp.triggers #=> Array
       #   resp.triggers[0].name #=> String
@@ -414,6 +472,7 @@ module Aws
       #   resp.triggers[0].branches[0] #=> String
       #   resp.triggers[0].events #=> Array
       #   resp.triggers[0].events[0] #=> String, one of "all", "updateReference", "createReference", "deleteReference"
+      #
       # @overload get_repository_triggers(params = {})
       # @param [Hash] params ({})
       def get_repository_triggers(params = {}, options = {})
@@ -422,25 +481,31 @@ module Aws
       end
 
       # Gets information about one or more branches in a repository.
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository that contains the branches.
+      #
       # @option params [String] :next_token
       #   An enumeration token that allows the operation to batch the results.
+      #
       # @return [Types::ListBranchesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListBranchesOutput#branches #branches} => Array&lt;String&gt;
-      #   * {Types::ListBranchesOutput#next_token #nextToken} => String
+      #   * {Types::ListBranchesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_branches({
       #     repository_name: "RepositoryName", # required
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.branches #=> Array
       #   resp.branches[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_branches(params = {})
       # @param [Hash] params ({})
       def list_branches(params = {}, options = {})
@@ -449,23 +514,28 @@ module Aws
       end
 
       # Gets information about one or more repositories.
+      #
       # @option params [String] :next_token
       #   An enumeration token that allows the operation to batch the results of
       #   the operation. Batch sizes are 1,000 for list repository operations.
       #   When the client sends the token back to AWS CodeCommit, another page
       #   of 1,000 records is retrieved.
+      #
       # @option params [String] :sort_by
       #   The criteria used to sort the results of a list repositories
       #   operation.
+      #
       # @option params [String] :order
       #   The order in which to sort the results of a list repositories
       #   operation.
+      #
       # @return [Types::ListRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListRepositoriesOutput#repositories #repositories} => Array&lt;Types::RepositoryNameIdPair&gt;
-      #   * {Types::ListRepositoriesOutput#next_token #nextToken} => String
+      #   * {Types::ListRepositoriesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_repositories({
       #     next_token: "NextToken",
       #     sort_by: "repositoryName", # accepts repositoryName, lastModifiedDate
@@ -473,10 +543,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.repositories #=> Array
       #   resp.repositories[0].repository_name #=> String
       #   resp.repositories[0].repository_id #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_repositories(params = {})
       # @param [Hash] params ({})
       def list_repositories(params = {}, options = {})
@@ -486,16 +558,20 @@ module Aws
 
       # Replaces all triggers for a repository. This can be used to create or
       # delete triggers.
+      #
       # @option params [String] :repository_name
       #   The name of the repository where you want to create or update the
       #   trigger.
+      #
       # @option params [Array<Types::RepositoryTrigger>] :triggers
       #   The JSON block of configuration information for each trigger.
+      #
       # @return [Types::PutRepositoryTriggersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutRepositoryTriggersOutput#configuration_id #configurationId} => String
+      #   * {Types::PutRepositoryTriggersOutput#configuration_id #configuration_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_repository_triggers({
       #     repository_name: "RepositoryName",
       #     triggers: [
@@ -510,7 +586,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.configuration_id #=> String
+      #
       # @overload put_repository_triggers(params = {})
       # @param [Hash] params ({})
       def put_repository_triggers(params = {}, options = {})
@@ -522,16 +600,20 @@ module Aws
       # to the trigger target. If real data is available in the repository,
       # the test will send data from the last commit. If no data is available,
       # sample data will be generated.
+      #
       # @option params [String] :repository_name
       #   The name of the repository in which to test the triggers.
+      #
       # @option params [Array<Types::RepositoryTrigger>] :triggers
       #   The list of triggers to test.
+      #
       # @return [Types::TestRepositoryTriggersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TestRepositoryTriggersOutput#successful_executions #successfulExecutions} => Array&lt;String&gt;
-      #   * {Types::TestRepositoryTriggersOutput#failed_executions #failedExecutions} => Array&lt;Types::RepositoryTriggerExecutionFailure&gt;
+      #   * {Types::TestRepositoryTriggersOutput#successful_executions #successful_executions} => Array&lt;String&gt;
+      #   * {Types::TestRepositoryTriggersOutput#failed_executions #failed_executions} => Array&lt;Types::RepositoryTriggerExecutionFailure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.test_repository_triggers({
       #     repository_name: "RepositoryName",
       #     triggers: [
@@ -546,11 +628,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.successful_executions #=> Array
       #   resp.successful_executions[0] #=> String
       #   resp.failed_executions #=> Array
       #   resp.failed_executions[0].trigger #=> String
       #   resp.failed_executions[0].failure_message #=> String
+      #
       # @overload test_repository_triggers(params = {})
       # @param [Hash] params ({})
       def test_repository_triggers(params = {}, options = {})
@@ -565,17 +649,22 @@ module Aws
       # the default branch did not change.
       #
       # </note>
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository to set or change the default branch for.
+      #
       # @option params [required, String] :default_branch_name
       #   The name of the branch to set as the default.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_default_branch({
       #     repository_name: "RepositoryName", # required
       #     default_branch_name: "BranchName", # required
       #   })
+      #
       # @overload update_default_branch(params = {})
       # @param [Hash] params ({})
       def update_default_branch(params = {}, options = {})
@@ -593,19 +682,24 @@ module Aws
       # repository description on a web page.
       #
       # </note>
+      #
       # @option params [required, String] :repository_name
       #   The name of the repository to set or change the comment or description
       #   for.
+      #
       # @option params [String] :repository_description
       #   The new comment or description for the specified repository.
       #   Repository descriptions are limited to 1,000 characters.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_repository_description({
       #     repository_name: "RepositoryName", # required
       #     repository_description: "RepositoryDescription",
       #   })
+      #
       # @overload update_repository_description(params = {})
       # @param [Hash] params ({})
       def update_repository_description(params = {}, options = {})
@@ -623,17 +717,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
+      #
       # @option params [required, String] :old_name
       #   The existing name of the repository.
+      #
       # @option params [required, String] :new_name
       #   The new name for the repository.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_repository_name({
       #     old_name: "RepositoryName", # required
       #     new_name: "RepositoryName", # required
       #   })
+      #
       # @overload update_repository_name(params = {})
       # @param [Hash] params ({})
       def update_repository_name(params = {}, options = {})

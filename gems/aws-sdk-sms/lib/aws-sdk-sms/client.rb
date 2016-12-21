@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -144,25 +159,33 @@ module Aws
       # ReplicationJob, which will then schedule periodic ReplicationRuns to
       # replicate your server to AWS. Each ReplicationRun will result in the
       # creation of an AWS AMI.
+      #
       # @option params [required, String] :server_id
       #   Unique Identifier for a server
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :seed_replication_time
       #   Timestamp of an operation
+      #
       # @option params [required, Integer] :frequency
       #   Interval between Replication Runs. This value is specified in hours,
       #   and represents the time between consecutive Replication Runs.
+      #
       # @option params [String] :license_type
       #   The license type to be used for the Amazon Machine Image (AMI) created
       #   after a successful ReplicationRun.
+      #
       # @option params [String] :role_name
       #   Name of service role in customer's account to be used by SMS service.
+      #
       # @option params [String] :description
       #   The description for a Replication Job/Run.
+      #
       # @return [Types::CreateReplicationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateReplicationJobResponse#replication_job_id #replicationJobId} => String
+      #   * {Types::CreateReplicationJobResponse#replication_job_id #replication_job_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_replication_job({
       #     server_id: "ServerId", # required
       #     seed_replication_time: Time.now, # required
@@ -173,7 +196,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_job_id #=> String
+      #
       # @overload create_replication_job(params = {})
       # @param [Hash] params ({})
       def create_replication_job(params = {}, options = {})
@@ -185,14 +210,18 @@ module Aws
       # resulting in no further ReplicationRuns. This will delete the contents
       # of the S3 bucket used to store SMS artifacts, but will not delete any
       # AMIs created by the SMS service.
+      #
       # @option params [required, String] :replication_job_id
       #   The unique identifier for a Replication Job.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_replication_job({
       #     replication_job_id: "ReplicationJobId", # required
       #   })
+      #
       # @overload delete_replication_job(params = {})
       # @param [Hash] params ({})
       def delete_replication_job(params = {}, options = {})
@@ -203,10 +232,13 @@ module Aws
       # The DeleteServerCatalog API clears all servers from your server
       # catalog. This means that these servers will no longer be accessible to
       # the Server Migration Service.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_server_catalog()
+      #
       # @overload delete_server_catalog(params = {})
       # @param [Hash] params ({})
       def delete_server_catalog(params = {}, options = {})
@@ -217,14 +249,18 @@ module Aws
       # The DisassociateConnector API will disassociate a connector from the
       # Server Migration Service, rendering it unavailable to support
       # replication jobs.
+      #
       # @option params [required, String] :connector_id
       #   Unique Identifier for Connector
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disassociate_connector({
       #     connector_id: "ConnectorId", # required
       #   })
+      #
       # @overload disassociate_connector(params = {})
       # @param [Hash] params ({})
       def disassociate_connector(params = {}, options = {})
@@ -234,23 +270,28 @@ module Aws
 
       # The GetConnectors API returns a list of connectors that are registered
       # with the Server Migration Service.
+      #
       # @option params [String] :next_token
       #   Pagination token to pass as input to API call
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to return in one API call. If left
       #   empty, this will default to 50.
+      #
       # @return [Types::GetConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetConnectorsResponse#connector_list #connectorList} => Array&lt;Types::Connector&gt;
-      #   * {Types::GetConnectorsResponse#next_token #nextToken} => String
+      #   * {Types::GetConnectorsResponse#connector_list #connector_list} => Array&lt;Types::Connector&gt;
+      #   * {Types::GetConnectorsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_connectors({
       #     next_token: "NextToken",
       #     max_results: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.connector_list #=> Array
       #   resp.connector_list[0].connector_id #=> String
       #   resp.connector_list[0].version #=> String
@@ -264,6 +305,7 @@ module Aws
       #   resp.connector_list[0].mac_address #=> String
       #   resp.connector_list[0].associated_on #=> Time
       #   resp.next_token #=> String
+      #
       # @overload get_connectors(params = {})
       # @param [Hash] params ({})
       def get_connectors(params = {}, options = {})
@@ -274,19 +316,24 @@ module Aws
       # The GetReplicationJobs API will return all of your ReplicationJobs and
       # their details. This API returns a paginated list, that may be
       # consecutively called with nextToken to retrieve all ReplicationJobs.
+      #
       # @option params [String] :replication_job_id
       #   The unique identifier for a Replication Job.
+      #
       # @option params [String] :next_token
       #   Pagination token to pass as input to API call
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to return in one API call. If left
       #   empty, this will default to 50.
+      #
       # @return [Types::GetReplicationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetReplicationJobsResponse#replication_job_list #replicationJobList} => Array&lt;Types::ReplicationJob&gt;
-      #   * {Types::GetReplicationJobsResponse#next_token #nextToken} => String
+      #   * {Types::GetReplicationJobsResponse#replication_job_list #replication_job_list} => Array&lt;Types::ReplicationJob&gt;
+      #   * {Types::GetReplicationJobsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_replication_jobs({
       #     replication_job_id: "ReplicationJobId",
       #     next_token: "NextToken",
@@ -294,6 +341,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_job_list #=> Array
       #   resp.replication_job_list[0].replication_job_id #=> String
       #   resp.replication_job_list[0].server_id #=> String
@@ -323,6 +371,7 @@ module Aws
       #   resp.replication_job_list[0].replication_run_list[0].completed_time #=> Time
       #   resp.replication_job_list[0].replication_run_list[0].description #=> String
       #   resp.next_token #=> String
+      #
       # @overload get_replication_jobs(params = {})
       # @param [Hash] params ({})
       def get_replication_jobs(params = {}, options = {})
@@ -334,20 +383,25 @@ module Aws
       # ReplicationJob. This API returns a paginated list, that may be
       # consecutively called with nextToken to retrieve all ReplicationRuns
       # for a ReplicationJob.
+      #
       # @option params [required, String] :replication_job_id
       #   The unique identifier for a Replication Job.
+      #
       # @option params [String] :next_token
       #   Pagination token to pass as input to API call
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to return in one API call. If left
       #   empty, this will default to 50.
+      #
       # @return [Types::GetReplicationRunsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetReplicationRunsResponse#replication_job #replicationJob} => Types::ReplicationJob
-      #   * {Types::GetReplicationRunsResponse#replication_run_list #replicationRunList} => Array&lt;Types::ReplicationRun&gt;
-      #   * {Types::GetReplicationRunsResponse#next_token #nextToken} => String
+      #   * {Types::GetReplicationRunsResponse#replication_job #replication_job} => Types::ReplicationJob
+      #   * {Types::GetReplicationRunsResponse#replication_run_list #replication_run_list} => Array&lt;Types::ReplicationRun&gt;
+      #   * {Types::GetReplicationRunsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_replication_runs({
       #     replication_job_id: "ReplicationJobId", # required
       #     next_token: "NextToken",
@@ -355,6 +409,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_job.replication_job_id #=> String
       #   resp.replication_job.server_id #=> String
       #   resp.replication_job.server_type #=> String, one of "VIRTUAL_MACHINE"
@@ -392,6 +447,7 @@ module Aws
       #   resp.replication_run_list[0].completed_time #=> Time
       #   resp.replication_run_list[0].description #=> String
       #   resp.next_token #=> String
+      #
       # @overload get_replication_runs(params = {})
       # @param [Hash] params ({})
       def get_replication_runs(params = {}, options = {})
@@ -402,25 +458,30 @@ module Aws
       # The GetServers API returns a list of all servers in your server
       # catalog. For this call to succeed, you must previously have called
       # ImportServerCatalog.
+      #
       # @option params [String] :next_token
       #   Pagination token to pass as input to API call
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to return in one API call. If left
       #   empty, this will default to 50.
+      #
       # @return [Types::GetServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetServersResponse#last_modified_on #lastModifiedOn} => Time
-      #   * {Types::GetServersResponse#server_catalog_status #serverCatalogStatus} => String
-      #   * {Types::GetServersResponse#server_list #serverList} => Array&lt;Types::Server&gt;
-      #   * {Types::GetServersResponse#next_token #nextToken} => String
+      #   * {Types::GetServersResponse#last_modified_on #last_modified_on} => Time
+      #   * {Types::GetServersResponse#server_catalog_status #server_catalog_status} => String
+      #   * {Types::GetServersResponse#server_list #server_list} => Array&lt;Types::Server&gt;
+      #   * {Types::GetServersResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_servers({
       #     next_token: "NextToken",
       #     max_results: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.last_modified_on #=> Time
       #   resp.server_catalog_status #=> String, one of "NOT_IMPORTED", "IMPORTING", "AVAILABLE", "DELETED", "EXPIRED"
       #   resp.server_list #=> Array
@@ -435,6 +496,7 @@ module Aws
       #   resp.server_list[0].replication_job_id #=> String
       #   resp.server_list[0].replication_job_terminated #=> Boolean
       #   resp.next_token #=> String
+      #
       # @overload get_servers(params = {})
       # @param [Hash] params ({})
       def get_servers(params = {}, options = {})
@@ -447,10 +509,13 @@ module Aws
       # connectors to be installed and monitoring all servers you would like
       # imported. This API call returns immediately, but may take some time to
       # retrieve all of the servers.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.import_server_catalog()
+      #
       # @overload import_server_catalog(params = {})
       # @param [Hash] params ({})
       def import_server_catalog(params = {}, options = {})
@@ -463,22 +528,28 @@ module Aws
       # frequency). This ReplicationRun will start immediately.
       # StartOnDemandReplicationRun is subject to limits on how many on demand
       # ReplicationRuns you may call per 24-hour period.
+      #
       # @option params [required, String] :replication_job_id
       #   The unique identifier for a Replication Job.
+      #
       # @option params [String] :description
       #   The description for a Replication Job/Run.
+      #
       # @return [Types::StartOnDemandReplicationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartOnDemandReplicationRunResponse#replication_run_id #replicationRunId} => String
+      #   * {Types::StartOnDemandReplicationRunResponse#replication_run_id #replication_run_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_on_demand_replication_run({
       #     replication_job_id: "ReplicationJobId", # required
       #     description: "Description",
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_run_id #=> String
+      #
       # @overload start_on_demand_replication_run(params = {})
       # @param [Hash] params ({})
       def start_on_demand_replication_run(params = {}, options = {})
@@ -489,23 +560,31 @@ module Aws
       # The UpdateReplicationJob API is used to change the settings of your
       # existing ReplicationJob created using CreateReplicationJob. Calling
       # this API will affect the next scheduled ReplicationRun.
+      #
       # @option params [required, String] :replication_job_id
       #   The unique identifier for a Replication Job.
+      #
       # @option params [Integer] :frequency
       #   Interval between Replication Runs. This value is specified in hours,
       #   and represents the time between consecutive Replication Runs.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :next_replication_run_start_time
       #   Timestamp of an operation
+      #
       # @option params [String] :license_type
       #   The license type to be used for the Amazon Machine Image (AMI) created
       #   after a successful ReplicationRun.
+      #
       # @option params [String] :role_name
       #   Name of service role in customer's account to be used by SMS service.
+      #
       # @option params [String] :description
       #   The description for a Replication Job/Run.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_replication_job({
       #     replication_job_id: "ReplicationJobId", # required
       #     frequency: 1,
@@ -514,6 +593,7 @@ module Aws
       #     role_name: "RoleName",
       #     description: "Description",
       #   })
+      #
       # @overload update_replication_job(params = {})
       # @param [Hash] params ({})
       def update_replication_job(params = {}, options = {})

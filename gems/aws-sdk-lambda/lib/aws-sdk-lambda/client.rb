@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -153,6 +167,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html
       # [2]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   Name of the Lambda function whose resource policy you are updating by
       #   adding a new permission.
@@ -164,13 +179,16 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [required, String] :statement_id
       #   A unique statement identifier.
+      #
       # @option params [required, String] :action
       #   The AWS Lambda action you want to allow in this statement. Each Lambda
       #   action is a string starting with `lambda:` followed by the API name .
       #   For example, `lambda:CreateFunction`. You can use wildcard
       #   (`lambda:*`) to grant permission for all AWS Lambda actions.
+      #
       # @option params [required, String] :principal
       #   The principal who is getting this permission. It can be Amazon S3
       #   service Principal (`s3.amazonaws.com`) if you want Amazon S3 to invoke
@@ -179,6 +197,7 @@ module Aws
       #   `sns.amazonaws.com`. For example, you might want to allow a custom
       #   application in another AWS account to push events to AWS Lambda by
       #   invoking your function.
+      #
       # @option params [String] :source_arn
       #   This is optional; however, when granting Amazon S3 permission to
       #   invoke your function, you should specify this field with the Amazon
@@ -189,6 +208,7 @@ module Aws
       #   the source ARN, any AWS account that creates a mapping to your
       #   function ARN can send events to invoke your Lambda function from
       #   Amazon S3.
+      #
       # @option params [String] :source_account
       #   This parameter is used for S3, SES, CloudWatch Logs and CloudWatch
       #   Rules only. The AWS account ID (without a hyphen) of the source owner.
@@ -199,9 +219,11 @@ module Aws
       #   account created the bucket). You can also use this condition to
       #   specify all sources (that is, you don't specify the `SourceArn`)
       #   owned by a specific account.
+      #
       # @option params [String] :event_source_token
       #   A unique token that must be supplied by the principal invoking the
       #   function. This is currently only used for Alexa Smart Home functions.
+      #
       # @option params [String] :qualifier
       #   You can use this optional query parameter to describe a qualified ARN
       #   using a function version or an alias name. The permission will then
@@ -220,11 +242,13 @@ module Aws
       #   requests is made using unqualified function ARN.
       #
       #   `arn:aws:lambda:aws-region:acct-id:function:function-name`
+      #
       # @return [Types::AddPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AddPermissionResponse#statement #Statement} => String
+      #   * {Types::AddPermissionResponse#statement #statement} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_permission({
       #     function_name: "FunctionName", # required
       #     statement_id: "StatementId", # required
@@ -237,7 +261,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.statement #=> String
+      #
       # @overload add_permission(params = {})
       # @param [Hash] params ({})
       def add_permission(params = {}, options = {})
@@ -254,22 +280,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+      #
       # @option params [required, String] :function_name
       #   Name of the Lambda function for which you want to create an alias.
+      #
       # @option params [required, String] :name
       #   Name for the alias you are creating.
+      #
       # @option params [required, String] :function_version
       #   Lambda function version for which you are creating the alias.
+      #
       # @option params [String] :description
       #   Description of the alias.
+      #
       # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AliasConfiguration#alias_arn #AliasArn} => String
-      #   * {Types::AliasConfiguration#name #Name} => String
-      #   * {Types::AliasConfiguration#function_version #FunctionVersion} => String
-      #   * {Types::AliasConfiguration#description #Description} => String
+      #   * {Types::AliasConfiguration#alias_arn #alias_arn} => String
+      #   * {Types::AliasConfiguration#name #name} => String
+      #   * {Types::AliasConfiguration#function_version #function_version} => String
+      #   * {Types::AliasConfiguration#description #description} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_alias({
       #     function_name: "FunctionName", # required
       #     name: "Alias", # required
@@ -278,10 +310,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.alias_arn #=> String
       #   resp.name #=> String
       #   resp.function_version #=> String
       #   resp.description #=> String
+      #
       # @overload create_alias(params = {})
       # @param [Hash] params ({})
       def create_alias(params = {}, options = {})
@@ -320,12 +354,14 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html
       # [2]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :event_source_arn
       #   The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon
       #   DynamoDB stream that is the event source. Any record added to this
       #   stream could cause AWS Lambda to invoke your Lambda function, it
       #   depends on the `BatchSize`. AWS Lambda POSTs the Amazon Kinesis event,
       #   containing records, to your Lambda function as JSON.
+      #
       # @option params [required, String] :function_name
       #   The Lambda function to invoke when AWS Lambda detects an event on the
       #   stream.
@@ -349,14 +385,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [Boolean] :enabled
       #   Indicates whether AWS Lambda should begin polling the event source. By
       #   default, `Enabled` is true.
+      #
       # @option params [Integer] :batch_size
       #   The largest number of records that AWS Lambda will retrieve from your
       #   event source at the time of invoking your function. Your function
       #   receives an event with all the retrieved records. The default is 100
       #   records.
+      #
       # @option params [required, String] :starting_position
       #   The position in the stream where AWS Lambda should start reading.
       #   Valid only for Kinesis streams. For more information, go to
@@ -365,6 +404,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+      #
       # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
       #   The timestamp of the data record from which to start reading. Used
       #   with [shard iterator type][1] AT\_TIMESTAMP. If a record with this
@@ -376,18 +416,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+      #
       # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventSourceMappingConfiguration#uuid #UUID} => String
-      #   * {Types::EventSourceMappingConfiguration#batch_size #BatchSize} => Integer
-      #   * {Types::EventSourceMappingConfiguration#event_source_arn #EventSourceArn} => String
-      #   * {Types::EventSourceMappingConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::EventSourceMappingConfiguration#last_modified #LastModified} => Time
-      #   * {Types::EventSourceMappingConfiguration#last_processing_result #LastProcessingResult} => String
-      #   * {Types::EventSourceMappingConfiguration#state #State} => String
-      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #StateTransitionReason} => String
+      #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+      #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+      #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
+      #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
+      #   * {Types::EventSourceMappingConfiguration#state #state} => String
+      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_event_source_mapping({
       #     event_source_arn: "Arn", # required
       #     function_name: "FunctionName", # required
@@ -398,6 +440,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.uuid #=> String
       #   resp.batch_size #=> Integer
       #   resp.event_source_arn #=> String
@@ -406,6 +449,7 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      #
       # @overload create_event_source_mapping(params = {})
       # @param [Hash] params ({})
       def create_event_source_mapping(params = {}, options = {})
@@ -430,11 +474,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The name you want to assign to the function you are uploading. The
       #   function names appear in the console and are returned in the
       #   ListFunctions API. Function names are used to specify functions to
       #   other AWS Lambda APIs, such as Invoke.
+      #
       # @option params [required, String] :runtime
       #   The runtime environment for the Lambda function you are uploading.
       #
@@ -447,6 +493,7 @@ module Aws
       #   soon as possible.
       #
       #    </note>
+      #
       # @option params [required, String] :role
       #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
       #   when it executes your function to access any other Amazon Web Services
@@ -456,6 +503,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html
+      #
       # @option params [required, String] :handler
       #   The function within your code that Lambda calls to begin execution.
       #   For Node.js, it is the *module-name*.*export* value in your function.
@@ -466,16 +514,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/java-programming-model-handler-types.html
+      #
       # @option params [required, Types::FunctionCode] :code
       #   The code for the Lambda function.
+      #
       # @option params [String] :description
       #   A short, user-defined function description. Lambda does not use this
       #   value. Assign a meaningful description as you see fit.
+      #
       # @option params [Integer] :timeout
       #   The function execution time at which Lambda should terminate the
       #   function. Because the execution time has cost implications, we
       #   recommend you set this value based on your expected execution time.
       #   The default is 3 seconds.
+      #
       # @option params [Integer] :memory_size
       #   The amount of memory, in MB, your Lambda function is given. Lambda
       #   uses this memory size to infer the amount of CPU and memory allocated
@@ -483,44 +535,51 @@ module Aws
       #   memory requirements. For example, a database operation might need less
       #   memory compared to an image processing function. The default value is
       #   128 MB. The value must be a multiple of 64 MB.
+      #
       # @option params [Boolean] :publish
       #   This boolean parameter can be used to request AWS Lambda to create the
       #   Lambda function and publish a version as an atomic operation.
+      #
       # @option params [Types::VpcConfig] :vpc_config
       #   If your Lambda function accesses resources in a VPC, you provide this
       #   parameter identifying the list of security group IDs and subnet IDs.
       #   These must belong to the same VPC. You must provide at least one
       #   security group and one subnet ID.
+      #
       # @option params [Types::DeadLetterConfig] :dead_letter_config
       #   The parent object that contains the target ARN (Amazon Resource Name)
       #   of an Amazon SQS queue or Amazon SNS topic.
+      #
       # @option params [Types::Environment] :environment
       #   The parent object that contains your environment's configuration
       #   settings.
+      #
       # @option params [String] :kms_key_arn
       #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
       #   function's environment variables. If not provided, AWS Lambda will
       #   use a default service key.
+      #
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
-      #   * {Types::FunctionConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::FunctionConfiguration#runtime #Runtime} => String
-      #   * {Types::FunctionConfiguration#role #Role} => String
-      #   * {Types::FunctionConfiguration#handler #Handler} => String
-      #   * {Types::FunctionConfiguration#code_size #CodeSize} => Integer
-      #   * {Types::FunctionConfiguration#description #Description} => String
-      #   * {Types::FunctionConfiguration#timeout #Timeout} => Integer
-      #   * {Types::FunctionConfiguration#memory_size #MemorySize} => Integer
-      #   * {Types::FunctionConfiguration#last_modified #LastModified} => Time
-      #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
-      #   * {Types::FunctionConfiguration#version #Version} => String
-      #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
-      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
-      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
-      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
+      #   * {Types::FunctionConfiguration#function_name #function_name} => String
+      #   * {Types::FunctionConfiguration#function_arn #function_arn} => String
+      #   * {Types::FunctionConfiguration#runtime #runtime} => String
+      #   * {Types::FunctionConfiguration#role #role} => String
+      #   * {Types::FunctionConfiguration#handler #handler} => String
+      #   * {Types::FunctionConfiguration#code_size #code_size} => Integer
+      #   * {Types::FunctionConfiguration#description #description} => String
+      #   * {Types::FunctionConfiguration#timeout #timeout} => Integer
+      #   * {Types::FunctionConfiguration#memory_size #memory_size} => Integer
+      #   * {Types::FunctionConfiguration#last_modified #last_modified} => Time
+      #   * {Types::FunctionConfiguration#code_sha_256 #code_sha_256} => String
+      #   * {Types::FunctionConfiguration#version #version} => String
+      #   * {Types::FunctionConfiguration#vpc_config #vpc_config} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+      #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_function({
       #     function_name: "FunctionName", # required
       #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
@@ -552,6 +611,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
       #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
@@ -575,6 +635,7 @@ module Aws
       #   resp.environment.error.error_code #=> String
       #   resp.environment.error.message #=> String
       #   resp.kms_key_arn #=> String
+      #
       # @overload create_function(params = {})
       # @param [Hash] params ({})
       def create_function(params = {}, options = {})
@@ -590,18 +651,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+      #
       # @option params [required, String] :function_name
       #   The Lambda function name for which the alias is created. Deleting an
       #   alias does not delete the function version to which it is pointing.
+      #
       # @option params [required, String] :name
       #   Name of the alias to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_alias({
       #     function_name: "FunctionName", # required
       #     name: "Alias", # required
       #   })
+      #
       # @overload delete_alias(params = {})
       # @param [Hash] params ({})
       def delete_alias(params = {}, options = {})
@@ -614,25 +680,29 @@ module Aws
       #
       # This operation requires permission for the
       # `lambda:DeleteEventSourceMapping` action.
+      #
       # @option params [required, String] :uuid
       #   The event source mapping ID.
+      #
       # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventSourceMappingConfiguration#uuid #UUID} => String
-      #   * {Types::EventSourceMappingConfiguration#batch_size #BatchSize} => Integer
-      #   * {Types::EventSourceMappingConfiguration#event_source_arn #EventSourceArn} => String
-      #   * {Types::EventSourceMappingConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::EventSourceMappingConfiguration#last_modified #LastModified} => Time
-      #   * {Types::EventSourceMappingConfiguration#last_processing_result #LastProcessingResult} => String
-      #   * {Types::EventSourceMappingConfiguration#state #State} => String
-      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #StateTransitionReason} => String
+      #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+      #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+      #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
+      #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
+      #   * {Types::EventSourceMappingConfiguration#state #state} => String
+      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_event_source_mapping({
       #     uuid: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.uuid #=> String
       #   resp.batch_size #=> Integer
       #   resp.event_source_arn #=> String
@@ -641,6 +711,7 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      #
       # @overload delete_event_source_mapping(params = {})
       # @param [Hash] params ({})
       def delete_event_source_mapping(params = {}, options = {})
@@ -667,6 +738,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The Lambda function to delete.
       #
@@ -679,6 +751,7 @@ module Aws
       #   account ID qualifier (for example, `account-id:Thumbnail`). Note that
       #   the length constraint applies only to the ARN. If you specify only the
       #   function name, it is limited to 64 character in length.
+      #
       # @option params [String] :qualifier
       #   Using this optional parameter you can specify a function version (but
       #   not the `$LATEST` version) to direct AWS Lambda to delete a specific
@@ -694,13 +767,16 @@ module Aws
       #
       #   If you don't specify this parameter, AWS Lambda will delete the
       #   function, including all of its versions and aliases.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_function({
       #     function_name: "FunctionName", # required
       #     qualifier: "Qualifier",
       #   })
+      #
       # @overload delete_function(params = {})
       # @param [Hash] params ({})
       def delete_function(params = {}, options = {})
@@ -718,21 +794,25 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/limits.html
+      #
       # @return [Types::GetAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetAccountSettingsResponse#account_limit #AccountLimit} => Types::AccountLimit
-      #   * {Types::GetAccountSettingsResponse#account_usage #AccountUsage} => Types::AccountUsage
+      #   * {Types::GetAccountSettingsResponse#account_limit #account_limit} => Types::AccountLimit
+      #   * {Types::GetAccountSettingsResponse#account_usage #account_usage} => Types::AccountUsage
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_account_settings()
       #
       # @example Response structure
+      #
       #   resp.account_limit.total_code_size #=> Integer
       #   resp.account_limit.code_size_unzipped #=> Integer
       #   resp.account_limit.code_size_zipped #=> Integer
       #   resp.account_limit.concurrent_executions #=> Integer
       #   resp.account_usage.total_code_size #=> Integer
       #   resp.account_usage.function_count #=> Integer
+      #
       # @overload get_account_settings(params = {})
       # @param [Hash] params ({})
       def get_account_settings(params = {}, options = {})
@@ -749,30 +829,36 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+      #
       # @option params [required, String] :function_name
       #   Function name for which the alias is created. An alias is a
       #   subresource that exists only in the context of an existing Lambda
       #   function so you must specify the function name.
+      #
       # @option params [required, String] :name
       #   Name of the alias for which you want to retrieve information.
+      #
       # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AliasConfiguration#alias_arn #AliasArn} => String
-      #   * {Types::AliasConfiguration#name #Name} => String
-      #   * {Types::AliasConfiguration#function_version #FunctionVersion} => String
-      #   * {Types::AliasConfiguration#description #Description} => String
+      #   * {Types::AliasConfiguration#alias_arn #alias_arn} => String
+      #   * {Types::AliasConfiguration#name #name} => String
+      #   * {Types::AliasConfiguration#function_version #function_version} => String
+      #   * {Types::AliasConfiguration#description #description} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_alias({
       #     function_name: "FunctionName", # required
       #     name: "Alias", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.alias_arn #=> String
       #   resp.name #=> String
       #   resp.function_version #=> String
       #   resp.description #=> String
+      #
       # @overload get_alias(params = {})
       # @param [Hash] params ({})
       def get_alias(params = {}, options = {})
@@ -785,25 +871,29 @@ module Aws
       #
       # This operation requires permission for the
       # `lambda:GetEventSourceMapping` action.
+      #
       # @option params [required, String] :uuid
       #   The AWS Lambda assigned ID of the event source mapping.
+      #
       # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventSourceMappingConfiguration#uuid #UUID} => String
-      #   * {Types::EventSourceMappingConfiguration#batch_size #BatchSize} => Integer
-      #   * {Types::EventSourceMappingConfiguration#event_source_arn #EventSourceArn} => String
-      #   * {Types::EventSourceMappingConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::EventSourceMappingConfiguration#last_modified #LastModified} => Time
-      #   * {Types::EventSourceMappingConfiguration#last_processing_result #LastProcessingResult} => String
-      #   * {Types::EventSourceMappingConfiguration#state #State} => String
-      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #StateTransitionReason} => String
+      #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+      #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+      #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
+      #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
+      #   * {Types::EventSourceMappingConfiguration#state #state} => String
+      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_event_source_mapping({
       #     uuid: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.uuid #=> String
       #   resp.batch_size #=> Integer
       #   resp.event_source_arn #=> String
@@ -812,6 +902,7 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      #
       # @overload get_event_source_mapping(params = {})
       # @param [Hash] params ({})
       def get_event_source_mapping(params = {}, options = {})
@@ -838,6 +929,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The Lambda function name.
       #
@@ -848,6 +940,7 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String] :qualifier
       #   Using this optional parameter to specify a function version or an
       #   alias name. If you specify function version, the API uses qualified
@@ -857,18 +950,21 @@ module Aws
       #   version to which the alias points. If you don't provide this
       #   parameter, the API uses unqualified function ARN and returns
       #   information about the `$LATEST` version of the Lambda function.
+      #
       # @return [Types::GetFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetFunctionResponse#configuration #Configuration} => Types::FunctionConfiguration
-      #   * {Types::GetFunctionResponse#code #Code} => Types::FunctionCodeLocation
+      #   * {Types::GetFunctionResponse#configuration #configuration} => Types::FunctionConfiguration
+      #   * {Types::GetFunctionResponse#code #code} => Types::FunctionCodeLocation
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_function({
       #     function_name: "FunctionName", # required
       #     qualifier: "Qualifier",
       #   })
       #
       # @example Response structure
+      #
       #   resp.configuration.function_name #=> String
       #   resp.configuration.function_arn #=> String
       #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
@@ -894,6 +990,7 @@ module Aws
       #   resp.configuration.kms_key_arn #=> String
       #   resp.code.repository_type #=> String
       #   resp.code.location #=> String
+      #
       # @overload get_function(params = {})
       # @param [Hash] params ({})
       def get_function(params = {}, options = {})
@@ -919,6 +1016,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The name of the Lambda function for which you want to retrieve the
       #   configuration information.
@@ -930,6 +1028,7 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String] :qualifier
       #   Using this optional parameter you can specify a function version or an
       #   alias name. If you specify function version, the API uses qualified
@@ -941,32 +1040,35 @@ module Aws
       #   If you don't specify this parameter, the API uses unqualified
       #   function ARN, and returns information about the `$LATEST` function
       #   version.
+      #
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
-      #   * {Types::FunctionConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::FunctionConfiguration#runtime #Runtime} => String
-      #   * {Types::FunctionConfiguration#role #Role} => String
-      #   * {Types::FunctionConfiguration#handler #Handler} => String
-      #   * {Types::FunctionConfiguration#code_size #CodeSize} => Integer
-      #   * {Types::FunctionConfiguration#description #Description} => String
-      #   * {Types::FunctionConfiguration#timeout #Timeout} => Integer
-      #   * {Types::FunctionConfiguration#memory_size #MemorySize} => Integer
-      #   * {Types::FunctionConfiguration#last_modified #LastModified} => Time
-      #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
-      #   * {Types::FunctionConfiguration#version #Version} => String
-      #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
-      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
-      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
-      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
+      #   * {Types::FunctionConfiguration#function_name #function_name} => String
+      #   * {Types::FunctionConfiguration#function_arn #function_arn} => String
+      #   * {Types::FunctionConfiguration#runtime #runtime} => String
+      #   * {Types::FunctionConfiguration#role #role} => String
+      #   * {Types::FunctionConfiguration#handler #handler} => String
+      #   * {Types::FunctionConfiguration#code_size #code_size} => Integer
+      #   * {Types::FunctionConfiguration#description #description} => String
+      #   * {Types::FunctionConfiguration#timeout #timeout} => Integer
+      #   * {Types::FunctionConfiguration#memory_size #memory_size} => Integer
+      #   * {Types::FunctionConfiguration#last_modified #last_modified} => Time
+      #   * {Types::FunctionConfiguration#code_sha_256 #code_sha_256} => String
+      #   * {Types::FunctionConfiguration#version #version} => String
+      #   * {Types::FunctionConfiguration#vpc_config #vpc_config} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+      #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_function_configuration({
       #     function_name: "FunctionName", # required
       #     qualifier: "Qualifier",
       #   })
       #
       # @example Response structure
+      #
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
       #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
@@ -990,6 +1092,7 @@ module Aws
       #   resp.environment.error.error_code #=> String
       #   resp.environment.error.message #=> String
       #   resp.kms_key_arn #=> String
+      #
       # @overload get_function_configuration(params = {})
       # @param [Hash] params ({})
       def get_function_configuration(params = {}, options = {})
@@ -1013,6 +1116,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   Function name whose resource policy you want to retrieve.
       #
@@ -1025,24 +1129,29 @@ module Aws
       #   account ID qualifier (for example, `account-id:Thumbnail`). Note that
       #   the length constraint applies only to the ARN. If you specify only the
       #   function name, it is limited to 64 character in length.
+      #
       # @option params [String] :qualifier
       #   You can specify this optional query parameter to specify a function
       #   version or an alias name in which case this API will return all
       #   permissions associated with the specific qualified ARN. If you don't
       #   provide this parameter, the API will return permissions that apply to
       #   the unqualified function ARN.
+      #
       # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetPolicyResponse#policy #Policy} => String
+      #   * {Types::GetPolicyResponse#policy #policy} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_policy({
       #     function_name: "FunctionName", # required
       #     qualifier: "Qualifier",
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy #=> String
+      #
       # @overload get_policy(params = {})
       # @param [Hash] params ({})
       def get_policy(params = {}, options = {})
@@ -1069,6 +1178,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually
       # [2]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The Lambda function name.
       #
@@ -1079,6 +1189,7 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String] :invocation_type
       #   By default, the `Invoke` API assumes `RequestResponse` invocation
       #   type. You can optionally request asynchronous execution by specifying
@@ -1089,12 +1200,14 @@ module Aws
       #   `DryRun` as the `InvocationType`. This is useful in a cross-account
       #   scenario when you want to verify access to a function without running
       #   it.
+      #
       # @option params [String] :log_type
       #   You can set this optional parameter to `Tail` in the request only if
       #   you specify the `InvocationType` parameter with value
       #   `RequestResponse`. In this case, AWS Lambda returns the base64-encoded
       #   last 4 KB of log data produced by your Lambda function in the
       #   `x-amz-log-result` header.
+      #
       # @option params [String] :client_context
       #   Using the `ClientContext` you can pass client-specific information to
       #   the Lambda function you are invoking. You can then process the client
@@ -1107,8 +1220,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/mobileanalytics/latest/ug/PutEvents.html
+      #
       # @option params [String, IO] :payload
       #   JSON that you want to provide to your Lambda function as input.
+      #
       # @option params [String] :qualifier
       #   You can use this optional parameter to specify a Lambda function
       #   version or alias name. If you specify a function version, the API uses
@@ -1118,14 +1233,16 @@ module Aws
       #
       #   If you don't provide this parameter, then the API uses unqualified
       #   function ARN which results in invocation of the `$LATEST` version.
+      #
       # @return [Types::InvocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::InvocationResponse#status_code #StatusCode} => Integer
-      #   * {Types::InvocationResponse#function_error #FunctionError} => String
-      #   * {Types::InvocationResponse#log_result #LogResult} => String
-      #   * {Types::InvocationResponse#payload #Payload} => String
+      #   * {Types::InvocationResponse#status_code #status_code} => Integer
+      #   * {Types::InvocationResponse#function_error #function_error} => String
+      #   * {Types::InvocationResponse#log_result #log_result} => String
+      #   * {Types::InvocationResponse#payload #payload} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.invoke({
       #     function_name: "FunctionName", # required
       #     invocation_type: "Event", # accepts Event, RequestResponse, DryRun
@@ -1136,10 +1253,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.status_code #=> Integer
       #   resp.function_error #=> String
       #   resp.log_result #=> String
       #   resp.payload #=> String
+      #
       # @overload invoke(params = {})
       # @param [Hash] params ({})
       def invoke(params = {}, options = {})
@@ -1157,22 +1276,28 @@ module Aws
       #
       # This operation requires permission for the `lambda:InvokeFunction`
       # action.
+      #
       # @option params [required, String] :function_name
       #   The Lambda function name.
+      #
       # @option params [required, String, IO] :invoke_args
       #   JSON that you want to provide to your Lambda function as input.
+      #
       # @return [Types::InvokeAsyncResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::InvokeAsyncResponse#status #Status} => Integer
+      #   * {Types::InvokeAsyncResponse#status #status} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.invoke_async({
       #     function_name: "FunctionName", # required
       #     invoke_args: "data", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> Integer
+      #
       # @overload invoke_async(params = {})
       # @param [Hash] params ({})
       def invoke_async(params = {}, options = {})
@@ -1190,26 +1315,32 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+      #
       # @option params [required, String] :function_name
       #   Lambda function name for which the alias is created.
+      #
       # @option params [String] :function_version
       #   If you specify this optional parameter, the API returns only the
       #   aliases that are pointing to the specific Lambda function version,
       #   otherwise the API returns all of the aliases created for the Lambda
       #   function.
+      #
       # @option params [String] :marker
       #   Optional string. An opaque pagination token returned from a previous
       #   `ListAliases` operation. If present, indicates where to continue the
       #   listing.
+      #
       # @option params [Integer] :max_items
       #   Optional integer. Specifies the maximum number of aliases to return in
       #   response. This parameter value must be greater than 0.
+      #
       # @return [Types::ListAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListAliasesResponse#next_marker #NextMarker} => String
-      #   * {Types::ListAliasesResponse#aliases #Aliases} => Array&lt;Types::AliasConfiguration&gt;
+      #   * {Types::ListAliasesResponse#next_marker #next_marker} => String
+      #   * {Types::ListAliasesResponse#aliases #aliases} => Array&lt;Types::AliasConfiguration&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_aliases({
       #     function_name: "FunctionName", # required
       #     function_version: "Version",
@@ -1218,12 +1349,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.aliases #=> Array
       #   resp.aliases[0].alias_arn #=> String
       #   resp.aliases[0].name #=> String
       #   resp.aliases[0].function_version #=> String
       #   resp.aliases[0].description #=> String
+      #
       # @overload list_aliases(params = {})
       # @param [Hash] params ({})
       def list_aliases(params = {}, options = {})
@@ -1249,9 +1382,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [String] :event_source_arn
       #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream. (This
       #   parameter is optional.)
+      #
       # @option params [String] :function_name
       #   The name of the Lambda function.
       #
@@ -1264,19 +1399,23 @@ module Aws
       #   account ID qualifier (for example, `account-id:Thumbnail`). Note that
       #   the length constraint applies only to the ARN. If you specify only the
       #   function name, it is limited to 64 character in length.
+      #
       # @option params [String] :marker
       #   Optional string. An opaque pagination token returned from a previous
       #   `ListEventSourceMappings` operation. If present, specifies to continue
       #   the list from where the returning call left off.
+      #
       # @option params [Integer] :max_items
       #   Optional integer. Specifies the maximum number of event sources to
       #   return in response. This value must be greater than 0.
+      #
       # @return [Types::ListEventSourceMappingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListEventSourceMappingsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListEventSourceMappingsResponse#event_source_mappings #EventSourceMappings} => Array&lt;Types::EventSourceMappingConfiguration&gt;
+      #   * {Types::ListEventSourceMappingsResponse#next_marker #next_marker} => String
+      #   * {Types::ListEventSourceMappingsResponse#event_source_mappings #event_source_mappings} => Array&lt;Types::EventSourceMappingConfiguration&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_event_source_mappings({
       #     event_source_arn: "Arn",
       #     function_name: "FunctionName",
@@ -1285,6 +1424,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.event_source_mappings #=> Array
       #   resp.event_source_mappings[0].uuid #=> String
@@ -1295,6 +1435,7 @@ module Aws
       #   resp.event_source_mappings[0].last_processing_result #=> String
       #   resp.event_source_mappings[0].state #=> String
       #   resp.event_source_mappings[0].state_transition_reason #=> String
+      #
       # @overload list_event_source_mappings(params = {})
       # @param [Hash] params ({})
       def list_event_source_mappings(params = {}, options = {})
@@ -1317,25 +1458,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [String] :marker
       #   Optional string. An opaque pagination token returned from a previous
       #   `ListFunctions` operation. If present, indicates where to continue the
       #   listing.
+      #
       # @option params [Integer] :max_items
       #   Optional integer. Specifies the maximum number of AWS Lambda functions
       #   to return in response. This parameter value must be greater than 0.
+      #
       # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListFunctionsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListFunctionsResponse#functions #Functions} => Array&lt;Types::FunctionConfiguration&gt;
+      #   * {Types::ListFunctionsResponse#next_marker #next_marker} => String
+      #   * {Types::ListFunctionsResponse#functions #functions} => Array&lt;Types::FunctionConfiguration&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_functions({
       #     marker: "String",
       #     max_items: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.functions #=> Array
       #   resp.functions[0].function_name #=> String
@@ -1361,6 +1507,7 @@ module Aws
       #   resp.functions[0].environment.error.error_code #=> String
       #   resp.functions[0].environment.error.message #=> String
       #   resp.functions[0].kms_key_arn #=> String
+      #
       # @overload list_functions(params = {})
       # @param [Hash] params ({})
       def list_functions(params = {}, options = {})
@@ -1374,6 +1521,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   Function name whose versions to list. You can specify a function name
       #   (for example, `Thumbnail`) or you can specify Amazon Resource Name
@@ -1383,20 +1531,24 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String] :marker
       #   Optional string. An opaque pagination token returned from a previous
       #   `ListVersionsByFunction` operation. If present, indicates where to
       #   continue the listing.
+      #
       # @option params [Integer] :max_items
       #   Optional integer. Specifies the maximum number of AWS Lambda function
       #   versions to return in response. This parameter value must be greater
       #   than 0.
+      #
       # @return [Types::ListVersionsByFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListVersionsByFunctionResponse#next_marker #NextMarker} => String
-      #   * {Types::ListVersionsByFunctionResponse#versions #Versions} => Array&lt;Types::FunctionConfiguration&gt;
+      #   * {Types::ListVersionsByFunctionResponse#next_marker #next_marker} => String
+      #   * {Types::ListVersionsByFunctionResponse#versions #versions} => Array&lt;Types::FunctionConfiguration&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_versions_by_function({
       #     function_name: "FunctionName", # required
       #     marker: "String",
@@ -1404,6 +1556,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.versions #=> Array
       #   resp.versions[0].function_name #=> String
@@ -1429,6 +1582,7 @@ module Aws
       #   resp.versions[0].environment.error.error_code #=> String
       #   resp.versions[0].environment.error.message #=> String
       #   resp.versions[0].kms_key_arn #=> String
+      #
       # @overload list_versions_by_function(params = {})
       # @param [Hash] params ({})
       def list_versions_by_function(params = {}, options = {})
@@ -1446,6 +1600,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The Lambda function name. You can specify a function name (for
       #   example, `Thumbnail`) or you can specify Amazon Resource Name (ARN) of
@@ -1455,34 +1610,38 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String] :code_sha_256
       #   The SHA256 hash of the deployment package you want to publish. This
       #   provides validation on the code you are publishing. If you provide
       #   this parameter value must match the SHA256 of the $LATEST version for
       #   the publication to succeed.
+      #
       # @option params [String] :description
       #   The description for the version you are publishing. If not provided,
       #   AWS Lambda copies the description from the $LATEST version.
+      #
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
-      #   * {Types::FunctionConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::FunctionConfiguration#runtime #Runtime} => String
-      #   * {Types::FunctionConfiguration#role #Role} => String
-      #   * {Types::FunctionConfiguration#handler #Handler} => String
-      #   * {Types::FunctionConfiguration#code_size #CodeSize} => Integer
-      #   * {Types::FunctionConfiguration#description #Description} => String
-      #   * {Types::FunctionConfiguration#timeout #Timeout} => Integer
-      #   * {Types::FunctionConfiguration#memory_size #MemorySize} => Integer
-      #   * {Types::FunctionConfiguration#last_modified #LastModified} => Time
-      #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
-      #   * {Types::FunctionConfiguration#version #Version} => String
-      #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
-      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
-      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
-      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
+      #   * {Types::FunctionConfiguration#function_name #function_name} => String
+      #   * {Types::FunctionConfiguration#function_arn #function_arn} => String
+      #   * {Types::FunctionConfiguration#runtime #runtime} => String
+      #   * {Types::FunctionConfiguration#role #role} => String
+      #   * {Types::FunctionConfiguration#handler #handler} => String
+      #   * {Types::FunctionConfiguration#code_size #code_size} => Integer
+      #   * {Types::FunctionConfiguration#description #description} => String
+      #   * {Types::FunctionConfiguration#timeout #timeout} => Integer
+      #   * {Types::FunctionConfiguration#memory_size #memory_size} => Integer
+      #   * {Types::FunctionConfiguration#last_modified #last_modified} => Time
+      #   * {Types::FunctionConfiguration#code_sha_256 #code_sha_256} => String
+      #   * {Types::FunctionConfiguration#version #version} => String
+      #   * {Types::FunctionConfiguration#vpc_config #vpc_config} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+      #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.publish_version({
       #     function_name: "FunctionName", # required
       #     code_sha_256: "String",
@@ -1490,6 +1649,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
       #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
@@ -1513,6 +1673,7 @@ module Aws
       #   resp.environment.error.error_code #=> String
       #   resp.environment.error.message #=> String
       #   resp.kms_key_arn #=> String
+      #
       # @overload publish_version(params = {})
       # @param [Hash] params ({})
       def publish_version(params = {}, options = {})
@@ -1538,6 +1699,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   Lambda function whose resource policy you want to remove a permission
       #   from.
@@ -1549,21 +1711,26 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [required, String] :statement_id
       #   Statement ID of the permission to remove.
+      #
       # @option params [String] :qualifier
       #   You can specify this optional parameter to remove permission
       #   associated with a specific function version or function alias. If you
       #   don't specify this parameter, the API removes permission associated
       #   with the unqualified function ARN.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_permission({
       #     function_name: "FunctionName", # required
       #     statement_id: "StatementId", # required
       #     qualifier: "Qualifier",
       #   })
+      #
       # @overload remove_permission(params = {})
       # @param [Hash] params ({})
       def remove_permission(params = {}, options = {})
@@ -1580,23 +1747,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+      #
       # @option params [required, String] :function_name
       #   The function name for which the alias is created.
+      #
       # @option params [required, String] :name
       #   The alias name.
+      #
       # @option params [String] :function_version
       #   Using this parameter you can change the Lambda function version to
       #   which the alias points.
+      #
       # @option params [String] :description
       #   You can change the description of the alias using this parameter.
+      #
       # @return [Types::AliasConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AliasConfiguration#alias_arn #AliasArn} => String
-      #   * {Types::AliasConfiguration#name #Name} => String
-      #   * {Types::AliasConfiguration#function_version #FunctionVersion} => String
-      #   * {Types::AliasConfiguration#description #Description} => String
+      #   * {Types::AliasConfiguration#alias_arn #alias_arn} => String
+      #   * {Types::AliasConfiguration#name #name} => String
+      #   * {Types::AliasConfiguration#function_version #function_version} => String
+      #   * {Types::AliasConfiguration#description #description} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_alias({
       #     function_name: "FunctionName", # required
       #     name: "Alias", # required
@@ -1605,10 +1778,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.alias_arn #=> String
       #   resp.name #=> String
       #   resp.function_version #=> String
       #   resp.description #=> String
+      #
       # @overload update_alias(params = {})
       # @param [Hash] params ({})
       def update_alias(params = {}, options = {})
@@ -1639,8 +1814,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :uuid
       #   The event source mapping identifier.
+      #
       # @option params [String] :function_name
       #   The Lambda function to which you want the stream records sent.
       #
@@ -1662,24 +1839,28 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [Boolean] :enabled
       #   Specifies whether AWS Lambda should actively poll the stream or not.
       #   If disabled, AWS Lambda will not poll the stream.
+      #
       # @option params [Integer] :batch_size
       #   The maximum number of stream records that can be sent to your Lambda
       #   function for a single invocation.
+      #
       # @return [Types::EventSourceMappingConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventSourceMappingConfiguration#uuid #UUID} => String
-      #   * {Types::EventSourceMappingConfiguration#batch_size #BatchSize} => Integer
-      #   * {Types::EventSourceMappingConfiguration#event_source_arn #EventSourceArn} => String
-      #   * {Types::EventSourceMappingConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::EventSourceMappingConfiguration#last_modified #LastModified} => Time
-      #   * {Types::EventSourceMappingConfiguration#last_processing_result #LastProcessingResult} => String
-      #   * {Types::EventSourceMappingConfiguration#state #State} => String
-      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #StateTransitionReason} => String
+      #   * {Types::EventSourceMappingConfiguration#uuid #uuid} => String
+      #   * {Types::EventSourceMappingConfiguration#batch_size #batch_size} => Integer
+      #   * {Types::EventSourceMappingConfiguration#event_source_arn #event_source_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#function_arn #function_arn} => String
+      #   * {Types::EventSourceMappingConfiguration#last_modified #last_modified} => Time
+      #   * {Types::EventSourceMappingConfiguration#last_processing_result #last_processing_result} => String
+      #   * {Types::EventSourceMappingConfiguration#state #state} => String
+      #   * {Types::EventSourceMappingConfiguration#state_transition_reason #state_transition_reason} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_event_source_mapping({
       #     uuid: "String", # required
       #     function_name: "FunctionName",
@@ -1688,6 +1869,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.uuid #=> String
       #   resp.batch_size #=> Integer
       #   resp.event_source_arn #=> String
@@ -1696,6 +1878,7 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      #
       # @overload update_event_source_mapping(params = {})
       # @param [Hash] params ({})
       def update_event_source_mapping(params = {}, options = {})
@@ -1718,6 +1901,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The existing Lambda function name whose code you want to replace.
       #
@@ -1728,6 +1912,7 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String, IO] :zip_file
       #   The contents of your zip file containing your deployment package. If
       #   you are using the web API directly, the contents of the zip file must
@@ -1739,39 +1924,45 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html
+      #
       # @option params [String] :s3_bucket
       #   Amazon S3 bucket name where the .zip file containing your deployment
       #   package is stored. This bucket must reside in the same AWS region
       #   where you are creating the Lambda function.
+      #
       # @option params [String] :s3_key
       #   The Amazon S3 object (the deployment package) key name you want to
       #   upload.
+      #
       # @option params [String] :s3_object_version
       #   The Amazon S3 object (the deployment package) version you want to
       #   upload.
+      #
       # @option params [Boolean] :publish
       #   This boolean parameter can be used to request AWS Lambda to update the
       #   Lambda function and publish a version as an atomic operation.
+      #
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
-      #   * {Types::FunctionConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::FunctionConfiguration#runtime #Runtime} => String
-      #   * {Types::FunctionConfiguration#role #Role} => String
-      #   * {Types::FunctionConfiguration#handler #Handler} => String
-      #   * {Types::FunctionConfiguration#code_size #CodeSize} => Integer
-      #   * {Types::FunctionConfiguration#description #Description} => String
-      #   * {Types::FunctionConfiguration#timeout #Timeout} => Integer
-      #   * {Types::FunctionConfiguration#memory_size #MemorySize} => Integer
-      #   * {Types::FunctionConfiguration#last_modified #LastModified} => Time
-      #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
-      #   * {Types::FunctionConfiguration#version #Version} => String
-      #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
-      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
-      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
-      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
+      #   * {Types::FunctionConfiguration#function_name #function_name} => String
+      #   * {Types::FunctionConfiguration#function_arn #function_arn} => String
+      #   * {Types::FunctionConfiguration#runtime #runtime} => String
+      #   * {Types::FunctionConfiguration#role #role} => String
+      #   * {Types::FunctionConfiguration#handler #handler} => String
+      #   * {Types::FunctionConfiguration#code_size #code_size} => Integer
+      #   * {Types::FunctionConfiguration#description #description} => String
+      #   * {Types::FunctionConfiguration#timeout #timeout} => Integer
+      #   * {Types::FunctionConfiguration#memory_size #memory_size} => Integer
+      #   * {Types::FunctionConfiguration#last_modified #last_modified} => Time
+      #   * {Types::FunctionConfiguration#code_sha_256 #code_sha_256} => String
+      #   * {Types::FunctionConfiguration#version #version} => String
+      #   * {Types::FunctionConfiguration#vpc_config #vpc_config} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+      #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_function_code({
       #     function_name: "FunctionName", # required
       #     zip_file: "data",
@@ -1782,6 +1973,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
       #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
@@ -1805,6 +1997,7 @@ module Aws
       #   resp.environment.error.error_code #=> String
       #   resp.environment.error.message #=> String
       #   resp.kms_key_arn #=> String
+      #
       # @overload update_function_code(params = {})
       # @param [Hash] params ({})
       def update_function_code(params = {}, options = {})
@@ -1829,6 +2022,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      #
       # @option params [required, String] :function_name
       #   The name of the Lambda function.
       #
@@ -1839,20 +2033,25 @@ module Aws
       #   `account-id:Thumbnail`). Note that the length constraint applies only
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
+      #
       # @option params [String] :role
       #   The Amazon Resource Name (ARN) of the IAM role that Lambda will assume
       #   when it executes your function.
+      #
       # @option params [String] :handler
       #   The function that Lambda calls to begin executing your function. For
       #   Node.js, it is the `module-name.export` value in your function.
+      #
       # @option params [String] :description
       #   A short user-defined function description. AWS Lambda does not use
       #   this value. Assign a meaningful description as you see fit.
+      #
       # @option params [Integer] :timeout
       #   The function execution time at which AWS Lambda should terminate the
       #   function. Because the execution time has cost implications, we
       #   recommend you set this value based on your expected execution time.
       #   The default is 3 seconds.
+      #
       # @option params [Integer] :memory_size
       #   The amount of memory, in MB, your Lambda function is given. AWS Lambda
       #   uses this memory size to infer the amount of CPU allocated to your
@@ -1860,14 +2059,17 @@ module Aws
       #   requirements. For example, a database operation might need less memory
       #   compared to an image processing function. The default value is 128 MB.
       #   The value must be a multiple of 64 MB.
+      #
       # @option params [Types::VpcConfig] :vpc_config
       #   If your Lambda function accesses resources in a VPC, you provide this
       #   parameter identifying the list of security group IDs and subnet IDs.
       #   These must belong to the same VPC. You must provide at least one
       #   security group and one subnet ID.
+      #
       # @option params [Types::Environment] :environment
       #   The parent object that contains your environment's configuration
       #   settings.
+      #
       # @option params [String] :runtime
       #   The runtime environment for the Lambda function.
       #
@@ -1878,34 +2080,38 @@ module Aws
       #   version will no longer be supported as of early 2017.
       #
       #    </note>
+      #
       # @option params [Types::DeadLetterConfig] :dead_letter_config
       #   The parent object that contains the target ARN (Amazon Resource Name)
       #   of an Amazon SQS queue or Amazon SNS topic.
+      #
       # @option params [String] :kms_key_arn
       #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
       #   function's environment variables. If you elect to use the AWS Lambda
       #   default service key, pass in an empty string ("") for this
       #   parameter.
+      #
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
-      #   * {Types::FunctionConfiguration#function_arn #FunctionArn} => String
-      #   * {Types::FunctionConfiguration#runtime #Runtime} => String
-      #   * {Types::FunctionConfiguration#role #Role} => String
-      #   * {Types::FunctionConfiguration#handler #Handler} => String
-      #   * {Types::FunctionConfiguration#code_size #CodeSize} => Integer
-      #   * {Types::FunctionConfiguration#description #Description} => String
-      #   * {Types::FunctionConfiguration#timeout #Timeout} => Integer
-      #   * {Types::FunctionConfiguration#memory_size #MemorySize} => Integer
-      #   * {Types::FunctionConfiguration#last_modified #LastModified} => Time
-      #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
-      #   * {Types::FunctionConfiguration#version #Version} => String
-      #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
-      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
-      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
-      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
+      #   * {Types::FunctionConfiguration#function_name #function_name} => String
+      #   * {Types::FunctionConfiguration#function_arn #function_arn} => String
+      #   * {Types::FunctionConfiguration#runtime #runtime} => String
+      #   * {Types::FunctionConfiguration#role #role} => String
+      #   * {Types::FunctionConfiguration#handler #handler} => String
+      #   * {Types::FunctionConfiguration#code_size #code_size} => Integer
+      #   * {Types::FunctionConfiguration#description #description} => String
+      #   * {Types::FunctionConfiguration#timeout #timeout} => Integer
+      #   * {Types::FunctionConfiguration#memory_size #memory_size} => Integer
+      #   * {Types::FunctionConfiguration#last_modified #last_modified} => Time
+      #   * {Types::FunctionConfiguration#code_sha_256 #code_sha_256} => String
+      #   * {Types::FunctionConfiguration#version #version} => String
+      #   * {Types::FunctionConfiguration#vpc_config #vpc_config} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #dead_letter_config} => Types::DeadLetterConfig
+      #   * {Types::FunctionConfiguration#environment #environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #kms_key_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_function_configuration({
       #     function_name: "FunctionName", # required
       #     role: "RoleArn",
@@ -1930,6 +2136,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
       #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
@@ -1953,6 +2160,7 @@ module Aws
       #   resp.environment.error.error_code #=> String
       #   resp.environment.error.message #=> String
       #   resp.kms_key_arn #=> String
+      #
       # @overload update_function_configuration(params = {})
       # @param [Hash] params ({})
       def update_function_configuration(params = {}, options = {})

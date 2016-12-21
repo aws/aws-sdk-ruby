@@ -18,7 +18,7 @@ module AwsSdkCodeGenerator
     def compute_plugins(options)
       plugins = {}
       plugins.update(default_plugins)
-      plugins.update(signature_plugins)
+      plugins.update(signature_plugins(options.fetch(:signature_version)))
       plugins.update(protocol_plugins(options.fetch(:protocol)))
       plugins.update(options.fetch(:add_plugins))
       options.fetch(:remove_plugins).each do |plugin_name|
@@ -63,8 +63,8 @@ module AwsSdkCodeGenerator
       }[protocol]
     end
 
-    def signature_plugins
-      case @signatureVersion
+    def signature_plugins(signature_version)
+      case signature_version
       when 'v4'
         { 'Aws::Plugins::SignatureV4' => "#{core_plugins}/signature_v4.rb" }
       when 'v2'

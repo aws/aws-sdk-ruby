@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,19 +155,23 @@ module Aws
       # @!group API Operations
 
       # Gets information about one or more builds.
+      #
       # @option params [required, Array<String>] :ids
       #   The IDs of the builds to get information about.
+      #
       # @return [Types::BatchGetBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::BatchGetBuildsOutput#builds #builds} => Array&lt;Types::Build&gt;
-      #   * {Types::BatchGetBuildsOutput#builds_not_found #buildsNotFound} => Array&lt;String&gt;
+      #   * {Types::BatchGetBuildsOutput#builds_not_found #builds_not_found} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_get_builds({
       #     ids: ["NonEmptyString"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.builds #=> Array
       #   resp.builds[0].id #=> String
       #   resp.builds[0].arn #=> String
@@ -193,6 +212,7 @@ module Aws
       #   resp.builds[0].initiator #=> String
       #   resp.builds_not_found #=> Array
       #   resp.builds_not_found[0] #=> String
+      #
       # @overload batch_get_builds(params = {})
       # @param [Hash] params ({})
       def batch_get_builds(params = {}, options = {})
@@ -201,19 +221,23 @@ module Aws
       end
 
       # Gets information about one or more build projects.
+      #
       # @option params [required, Array<String>] :names
       #   The names of the build projects to get information about.
+      #
       # @return [Types::BatchGetProjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::BatchGetProjectsOutput#projects #projects} => Array&lt;Types::Project&gt;
-      #   * {Types::BatchGetProjectsOutput#projects_not_found #projectsNotFound} => Array&lt;String&gt;
+      #   * {Types::BatchGetProjectsOutput#projects_not_found #projects_not_found} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_get_projects({
       #     names: ["NonEmptyString"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.projects #=> Array
       #   resp.projects[0].name #=> String
       #   resp.projects[0].arn #=> String
@@ -245,6 +269,7 @@ module Aws
       #   resp.projects[0].last_modified #=> Time
       #   resp.projects_not_found #=> Array
       #   resp.projects_not_found[0] #=> String
+      #
       # @overload batch_get_projects(params = {})
       # @param [Hash] params ({})
       def batch_get_projects(params = {}, options = {})
@@ -253,40 +278,51 @@ module Aws
       end
 
       # Creates a build project.
+      #
       # @option params [required, String] :name
       #   The build project's name.
+      #
       # @option params [String] :description
       #   A meaningful description of the build project.
+      #
       # @option params [required, Types::ProjectSource] :source
       #   Information about the build project's build input source code.
+      #
       # @option params [required, Types::ProjectArtifacts] :artifacts
       #   Information about the build project's build output artifacts.
+      #
       # @option params [required, Types::ProjectEnvironment] :environment
       #   Information about the build project's build environment.
+      #
       # @option params [String] :service_role
       #   The Amazon Resource Name (ARN) of the AWS Identity and Access
       #   Management (IAM) role that enables AWS CodeBuild to interact with
       #   dependent AWS services on behalf of the AWS account.
+      #
       # @option params [Integer] :timeout_in_minutes
       #   How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
       #   wait until timing out any related build that does not get marked as
       #   completed. The default is 60 minutes.
+      #
       # @option params [String] :encryption_key
       #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
       #   be used for encrypting the build project's build output artifacts.
       #
       #   You can specify either the CMK's Amazon Resource Name (ARN) or, if
       #   available, the CMK's alias (using the format `alias/alias-name `).
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A set of tags for this build project.
       #
       #   These tags are available for use by AWS services that support AWS
       #   CodeBuild build project tags.
+      #
       # @return [Types::CreateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateProjectOutput#project #project} => Types::Project
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_project({
       #     name: "ProjectName", # required
       #     description: "ProjectDescription",
@@ -330,6 +366,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.project.name #=> String
       #   resp.project.arn #=> String
       #   resp.project.description #=> String
@@ -358,6 +395,7 @@ module Aws
       #   resp.project.tags[0].value #=> String
       #   resp.project.created #=> Time
       #   resp.project.last_modified #=> Time
+      #
       # @overload create_project(params = {})
       # @param [Hash] params ({})
       def create_project(params = {}, options = {})
@@ -366,14 +404,18 @@ module Aws
       end
 
       # Deletes a build project.
+      #
       # @option params [required, String] :name
       #   The name of the build project to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_project({
       #     name: "NonEmptyString", # required
       #   })
+      #
       # @overload delete_project(params = {})
       # @param [Hash] params ({})
       def delete_project(params = {}, options = {})
@@ -383,12 +425,14 @@ module Aws
 
       # Gets a list of build IDs, with each build ID representing a single
       # build.
+      #
       # @option params [String] :sort_order
       #   The order to list build IDs. Valid values include:
       #
       #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
       #
       #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+      #
       # @option params [String] :next_token
       #   During a previous call, if there are more than 100 items in the list,
       #   only the first 100 items are returned, along with a unique string
@@ -397,21 +441,25 @@ module Aws
       #   all of the items in the list, keep calling this operation with each
       #   subsequent next token that is returned, until no more next tokens are
       #   returned.
+      #
       # @return [Types::ListBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListBuildsOutput#ids #ids} => Array&lt;String&gt;
-      #   * {Types::ListBuildsOutput#next_token #nextToken} => String
+      #   * {Types::ListBuildsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_builds({
       #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
       #     next_token: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.ids #=> Array
       #   resp.ids[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_builds(params = {})
       # @param [Hash] params ({})
       def list_builds(params = {}, options = {})
@@ -421,14 +469,17 @@ module Aws
 
       # Gets a list of build IDs for the specified build project, with each
       # build ID representing a single build.
+      #
       # @option params [required, String] :project_name
       #   The name of the build project to get a list of build IDs for.
+      #
       # @option params [String] :sort_order
       #   The order to list build IDs. Valid values include:
       #
       #   * `ASCENDING`\: List the build IDs in ascending order by build ID.
       #
       #   * `DESCENDING`\: List the build IDs in descending order by build ID.
+      #
       # @option params [String] :next_token
       #   During a previous call, if there are more than 100 items in the list,
       #   only the first 100 items are returned, along with a unique string
@@ -437,12 +488,14 @@ module Aws
       #   all of the items in the list, keep calling this operation with each
       #   subsequent next token that is returned, until no more next tokens are
       #   returned.
+      #
       # @return [Types::ListBuildsForProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListBuildsForProjectOutput#ids #ids} => Array&lt;String&gt;
-      #   * {Types::ListBuildsForProjectOutput#next_token #nextToken} => String
+      #   * {Types::ListBuildsForProjectOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_builds_for_project({
       #     project_name: "NonEmptyString", # required
       #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
@@ -450,9 +503,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.ids #=> Array
       #   resp.ids[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_builds_for_project(params = {})
       # @param [Hash] params ({})
       def list_builds_for_project(params = {}, options = {})
@@ -462,14 +517,17 @@ module Aws
 
       # Gets information about Docker images that are managed by AWS
       # CodeBuild.
+      #
       # @return [Types::ListCuratedEnvironmentImagesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListCuratedEnvironmentImagesOutput#platforms #platforms} => Array&lt;Types::EnvironmentPlatform&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_curated_environment_images()
       #
       # @example Response structure
+      #
       #   resp.platforms #=> Array
       #   resp.platforms[0].platform #=> String, one of "DEBIAN", "AMAZON_LINUX", "UBUNTU"
       #   resp.platforms[0].languages #=> Array
@@ -477,6 +535,7 @@ module Aws
       #   resp.platforms[0].languages[0].images #=> Array
       #   resp.platforms[0].languages[0].images[0].name #=> String
       #   resp.platforms[0].languages[0].images[0].description #=> String
+      #
       # @overload list_curated_environment_images(params = {})
       # @param [Hash] params ({})
       def list_curated_environment_images(params = {}, options = {})
@@ -486,6 +545,7 @@ module Aws
 
       # Gets a list of build project names, with each build project name
       # representing a single build project.
+      #
       # @option params [String] :sort_by
       #   The criterion to be used to list build project names. Valid values
       #   include:
@@ -501,6 +561,7 @@ module Aws
       #
       #   Use `sortOrder` to specify in what order to list the build project
       #   names based on the preceding criteria.
+      #
       # @option params [String] :sort_order
       #   The order in which to list build projects. Valid values include:
       #
@@ -510,6 +571,7 @@ module Aws
       #
       #   Use `sortBy` to specify the criterion to be used to list build project
       #   names.
+      #
       # @option params [String] :next_token
       #   During a previous call, if there are more than 100 items in the list,
       #   only the first 100 items are returned, along with a unique string
@@ -518,12 +580,14 @@ module Aws
       #   all of the items in the list, keep calling this operation with each
       #   subsequent next token that is returned, until no more next tokens are
       #   returned.
+      #
       # @return [Types::ListProjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListProjectsOutput#next_token #nextToken} => String
+      #   * {Types::ListProjectsOutput#next_token #next_token} => String
       #   * {Types::ListProjectsOutput#projects #projects} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_projects({
       #     sort_by: "NAME", # accepts NAME, CREATED_TIME, LAST_MODIFIED_TIME
       #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
@@ -531,9 +595,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_token #=> String
       #   resp.projects #=> Array
       #   resp.projects[0] #=> String
+      #
       # @overload list_projects(params = {})
       # @param [Hash] params ({})
       def list_projects(params = {}, options = {})
@@ -542,8 +608,10 @@ module Aws
       end
 
       # Starts running a build.
+      #
       # @option params [required, String] :project_name
       #   The name of the build project to start running a build.
+      #
       # @option params [String] :source_version
       #   A version of the build input to be built, for this build only. If not
       #   specified, the latest version will be used. If specified, must be one
@@ -553,24 +621,30 @@ module Aws
       #
       #   * For Amazon Simple Storage Service (Amazon S3): the version ID of the
       #     object representing the build input ZIP file to use.
+      #
       # @option params [Types::ProjectArtifacts] :artifacts_override
       #   Build output artifact settings that override, for this build only, the
       #   latest ones already defined in the corresponding build project.
+      #
       # @option params [Array<Types::EnvironmentVariable>] :environment_variables_override
       #   A set of environment variables that overrides, for this build only,
       #   the latest ones already defined in the corresponding build project.
+      #
       # @option params [String] :buildspec_override
       #   A build spec declaration that overrides, for this build only, the
       #   latest one already defined in the corresponding build project.
+      #
       # @option params [Integer] :timeout_in_minutes_override
       #   The number of build timeout minutes, from 5 to 480 (8 hours) that
       #   overrides, for this build only, the latest setting already defined in
       #   the corresponding build project.
+      #
       # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::StartBuildOutput#build #build} => Types::Build
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_build({
       #     project_name: "NonEmptyString", # required
       #     source_version: "String",
@@ -593,6 +667,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.build.id #=> String
       #   resp.build.arn #=> String
       #   resp.build.start_time #=> Time
@@ -630,6 +705,7 @@ module Aws
       #   resp.build.timeout_in_minutes #=> Integer
       #   resp.build.build_complete #=> Boolean
       #   resp.build.initiator #=> String
+      #
       # @overload start_build(params = {})
       # @param [Hash] params ({})
       def start_build(params = {}, options = {})
@@ -642,18 +718,22 @@ module Aws
       # <note markdown="1"> Completed builds cannot be stopped.
       #
       #  </note>
+      #
       # @option params [required, String] :id
       #   The ID of the build to attempt to stop running.
+      #
       # @return [Types::StopBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::StopBuildOutput#build #build} => Types::Build
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_build({
       #     id: "NonEmptyString", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.build.id #=> String
       #   resp.build.arn #=> String
       #   resp.build.start_time #=> Time
@@ -691,6 +771,7 @@ module Aws
       #   resp.build.timeout_in_minutes #=> Integer
       #   resp.build.build_complete #=> Boolean
       #   resp.build.initiator #=> String
+      #
       # @overload stop_build(params = {})
       # @param [Hash] params ({})
       def stop_build(params = {}, options = {})
@@ -699,31 +780,39 @@ module Aws
       end
 
       # Changes the settings of an existing build project.
+      #
       # @option params [required, String] :name
       #   The name of the existing build project to change settings.
       #
       #   <note markdown="1"> You cannot change an existing build project's name.
       #
       #    </note>
+      #
       # @option params [String] :description
       #   A new or replacement description of the build project.
+      #
       # @option params [Types::ProjectSource] :source
       #   Information to be changed about the build project's build input
       #   source code.
+      #
       # @option params [Types::ProjectArtifacts] :artifacts
       #   Information to be changed about the build project's build output
       #   artifacts.
+      #
       # @option params [Types::ProjectEnvironment] :environment
       #   Information to be changed about the build project's build
       #   environment.
+      #
       # @option params [String] :service_role
       #   The replacement Amazon Resource Name (ARN) of the AWS Identity and
       #   Access Management (IAM) role that enables AWS CodeBuild to interact
       #   with dependent AWS services on behalf of the AWS account.
+      #
       # @option params [Integer] :timeout_in_minutes
       #   The replacement value in minutes, from 5 to 480 (8 hours), for AWS
       #   CodeBuild to wait to timeout any related build that did not get marked
       #   as completed.
+      #
       # @option params [String] :encryption_key
       #   The replacement AWS Key Management Service (AWS KMS) customer master
       #   key (CMK) to be used for encrypting the build project's build output
@@ -731,16 +820,19 @@ module Aws
       #
       #   You can specify either the CMK's Amazon Resource Name (ARN) or, if
       #   available, the CMK's alias (using the format `alias/alias-name `).
+      #
       # @option params [Array<Types::Tag>] :tags
       #   The replacement set of tags for this build project.
       #
       #   These tags are available for use by AWS services that support AWS
       #   CodeBuild build project tags.
+      #
       # @return [Types::UpdateProjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateProjectOutput#project #project} => Types::Project
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_project({
       #     name: "NonEmptyString", # required
       #     description: "ProjectDescription",
@@ -784,6 +876,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.project.name #=> String
       #   resp.project.arn #=> String
       #   resp.project.description #=> String
@@ -812,6 +905,7 @@ module Aws
       #   resp.project.tags[0].value #=> String
       #   resp.project.created #=> Time
       #   resp.project.last_modified #=> Time
+      #
       # @overload update_project(params = {})
       # @param [Hash] params ({})
       def update_project(params = {}, options = {})

@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -173,19 +188,24 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:CompareFaces` action.
+      #
       # @option params [required, Types::Image] :source_image
       #   Source image either as bytes or an Amazon S3 object
+      #
       # @option params [required, Types::Image] :target_image
       #   Target image either as bytes or an Amazon S3 object
+      #
       # @option params [Float] :similarity_threshold
       #   The minimum level of confidence in the match you want included in the
       #   result.
+      #
       # @return [Types::CompareFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CompareFacesResponse#source_image_face #SourceImageFace} => Types::ComparedSourceImageFace
-      #   * {Types::CompareFacesResponse#face_matches #FaceMatches} => Array&lt;Types::CompareFacesMatch&gt;
+      #   * {Types::CompareFacesResponse#source_image_face #source_image_face} => Types::ComparedSourceImageFace
+      #   * {Types::CompareFacesResponse#face_matches #face_matches} => Array&lt;Types::CompareFacesMatch&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.compare_faces({
       #     source_image: { # required
       #       bytes: "data",
@@ -207,6 +227,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.source_image_face.bounding_box.width #=> Float
       #   resp.source_image_face.bounding_box.height #=> Float
       #   resp.source_image_face.bounding_box.left #=> Float
@@ -219,6 +240,7 @@ module Aws
       #   resp.face_matches[0].face.bounding_box.left #=> Float
       #   resp.face_matches[0].face.bounding_box.top #=> Float
       #   resp.face_matches[0].face.confidence #=> Float
+      #
       # @overload compare_faces(params = {})
       # @param [Hash] params ({})
       def compare_faces(params = {}, options = {})
@@ -238,21 +260,26 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:CreateCollection` action.
+      #
       # @option params [required, String] :collection_id
       #   ID for the collection that you are creating.
+      #
       # @return [Types::CreateCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateCollectionResponse#status_code #StatusCode} => Integer
-      #   * {Types::CreateCollectionResponse#collection_arn #CollectionArn} => String
+      #   * {Types::CreateCollectionResponse#status_code #status_code} => Integer
+      #   * {Types::CreateCollectionResponse#collection_arn #collection_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_collection({
       #     collection_id: "CollectionId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status_code #=> Integer
       #   resp.collection_arn #=> String
+      #
       # @overload create_collection(params = {})
       # @param [Hash] params ({})
       def create_collection(params = {}, options = {})
@@ -265,19 +292,24 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:DeleteCollection` action.
+      #
       # @option params [required, String] :collection_id
       #   ID of the collection to delete.
+      #
       # @return [Types::DeleteCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteCollectionResponse#status_code #StatusCode} => Integer
+      #   * {Types::DeleteCollectionResponse#status_code #status_code} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_collection({
       #     collection_id: "CollectionId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status_code #=> Integer
+      #
       # @overload delete_collection(params = {})
       # @param [Hash] params ({})
       def delete_collection(params = {}, options = {})
@@ -290,23 +322,29 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:DeleteFaces` action.
+      #
       # @option params [required, String] :collection_id
       #   Collection from which to remove the specific faces.
+      #
       # @option params [required, Array<String>] :face_ids
       #   An array of face IDs to delete.
+      #
       # @return [Types::DeleteFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteFacesResponse#deleted_faces #DeletedFaces} => Array&lt;String&gt;
+      #   * {Types::DeleteFacesResponse#deleted_faces #deleted_faces} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_faces({
       #     collection_id: "CollectionId", # required
       #     face_ids: ["FaceId"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.deleted_faces #=> Array
       #   resp.deleted_faces[0] #=> String
+      #
       # @overload delete_faces(params = {})
       # @param [Hash] params ({})
       def delete_faces(params = {}, options = {})
@@ -335,9 +373,11 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:DetectFaces` action.
+      #
       # @option params [required, Types::Image] :image
       #   The image in which you want to detect faces. You can specify a blob or
       #   an S3 object.
+      #
       # @option params [Array<String>] :attributes
       #   A list of facial attributes you would like to be returned. By default,
       #   the API returns subset of facial attributes.
@@ -347,12 +387,14 @@ module Aws
       #   service uses a logical AND operator to determine which attributes to
       #   return (in this case, it is all attributes). If you specify all
       #   attributes, Rekognition performs additional detection.
+      #
       # @return [Types::DetectFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DetectFacesResponse#face_details #FaceDetails} => Array&lt;Types::FaceDetail&gt;
-      #   * {Types::DetectFacesResponse#orientation_correction #OrientationCorrection} => String
+      #   * {Types::DetectFacesResponse#face_details #face_details} => Array&lt;Types::FaceDetail&gt;
+      #   * {Types::DetectFacesResponse#orientation_correction #orientation_correction} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detect_faces({
       #     image: { # required
       #       bytes: "data",
@@ -366,6 +408,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.face_details #=> Array
       #   resp.face_details[0].bounding_box.width #=> Float
       #   resp.face_details[0].bounding_box.height #=> Float
@@ -401,6 +444,7 @@ module Aws
       #   resp.face_details[0].quality.sharpness #=> Float
       #   resp.face_details[0].confidence #=> Float
       #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+      #
       # @overload detect_faces(params = {})
       # @param [Hash] params ({})
       def detect_faces(params = {}, options = {})
@@ -458,13 +502,16 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:DetectLabels` action.
+      #
       # @option params [required, Types::Image] :image
       #   The input image. You can provide a blob of image bytes or an S3
       #   object.
+      #
       # @option params [Integer] :max_labels
       #   Maximum number of labels you want the service to return in the
       #   response. The service returns the specified number of highest
       #   confidence labels.
+      #
       # @option params [Float] :min_confidence
       #   Specifies the minimum confidence level for the labels to return.
       #   Amazon Rekognition doesn't return any labels with confidence lower
@@ -472,12 +519,14 @@ module Aws
       #
       #   If `minConfidence` is not specified, the operation returns labels with
       #   a confidence values greater than or equal to 50 percent.
+      #
       # @return [Types::DetectLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DetectLabelsResponse#labels #Labels} => Array&lt;Types::Label&gt;
-      #   * {Types::DetectLabelsResponse#orientation_correction #OrientationCorrection} => String
+      #   * {Types::DetectLabelsResponse#labels #labels} => Array&lt;Types::Label&gt;
+      #   * {Types::DetectLabelsResponse#orientation_correction #orientation_correction} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detect_labels({
       #     image: { # required
       #       bytes: "data",
@@ -492,10 +541,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.labels #=> Array
       #   resp.labels[0].name #=> String
       #   resp.labels[0].confidence #=> Float
       #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+      #
       # @overload detect_labels(params = {})
       # @param [Hash] params ({})
       def detect_labels(params = {}, options = {})
@@ -536,13 +587,17 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:IndexFaces` action.
+      #
       # @option params [required, String] :collection_id
       #   ID of an existing collection to which you want to add the faces that
       #   are detected in the input images.
+      #
       # @option params [required, Types::Image] :image
       #   Provides the source image either as bytes or an S3 object.
+      #
       # @option params [String] :external_image_id
       #   ID you want to assign to all the faces detected in the image.
+      #
       # @option params [Array<String>] :detection_attributes
       #   (Optional) Returns detailed attributes of indexed faces. By default,
       #   the operation returns a subset of the facial attributes.
@@ -553,12 +608,14 @@ module Aws
       #   attributes to return (in this case, it is all attributes). If you
       #   specify all attributes, the service performs additional detection, in
       #   addition to the default.
+      #
       # @return [Types::IndexFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::IndexFacesResponse#face_records #FaceRecords} => Array&lt;Types::FaceRecord&gt;
-      #   * {Types::IndexFacesResponse#orientation_correction #OrientationCorrection} => String
+      #   * {Types::IndexFacesResponse#face_records #face_records} => Array&lt;Types::FaceRecord&gt;
+      #   * {Types::IndexFacesResponse#orientation_correction #orientation_correction} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.index_faces({
       #     collection_id: "CollectionId", # required
       #     image: { # required
@@ -574,6 +631,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.face_records #=> Array
       #   resp.face_records[0].face.face_id #=> String
       #   resp.face_records[0].face.bounding_box.width #=> Float
@@ -617,6 +675,7 @@ module Aws
       #   resp.face_records[0].face_detail.quality.sharpness #=> Float
       #   resp.face_records[0].face_detail.confidence #=> Float
       #   resp.orientation_correction #=> String, one of "ROTATE_0", "ROTATE_90", "ROTATE_180", "ROTATE_270"
+      #
       # @overload index_faces(params = {})
       # @param [Hash] params ({})
       def index_faces(params = {}, options = {})
@@ -632,25 +691,31 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:ListCollections` action.
+      #
       # @option params [String] :next_token
       #   Pagination token from the previous response.
+      #
       # @option params [Integer] :max_results
       #   Maximum number of collection IDs to return.
+      #
       # @return [Types::ListCollectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListCollectionsResponse#collection_ids #CollectionIds} => Array&lt;String&gt;
-      #   * {Types::ListCollectionsResponse#next_token #NextToken} => String
+      #   * {Types::ListCollectionsResponse#collection_ids #collection_ids} => Array&lt;String&gt;
+      #   * {Types::ListCollectionsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_collections({
       #     next_token: "PaginationToken",
       #     max_results: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.collection_ids #=> Array
       #   resp.collection_ids[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_collections(params = {})
       # @param [Hash] params ({})
       def list_collections(params = {}, options = {})
@@ -665,21 +730,26 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:ListFaces` action.
+      #
       # @option params [required, String] :collection_id
       #   ID of the collection from which to list the faces.
+      #
       # @option params [String] :next_token
       #   If the previous response was incomplete (because there is more data to
       #   retrieve), Amazon Rekognition returns a pagination token in the
       #   response. You can use this pagination token to retrieve the next set
       #   of faces.
+      #
       # @option params [Integer] :max_results
       #   Maximum number of faces to return.
+      #
       # @return [Types::ListFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListFacesResponse#faces #Faces} => Array&lt;Types::Face&gt;
-      #   * {Types::ListFacesResponse#next_token #NextToken} => String
+      #   * {Types::ListFacesResponse#faces #faces} => Array&lt;Types::Face&gt;
+      #   * {Types::ListFacesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_faces({
       #     collection_id: "CollectionId", # required
       #     next_token: "PaginationToken",
@@ -687,6 +757,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.faces #=> Array
       #   resp.faces[0].face_id #=> String
       #   resp.faces[0].bounding_box.width #=> Float
@@ -697,6 +768,7 @@ module Aws
       #   resp.faces[0].external_image_id #=> String
       #   resp.faces[0].confidence #=> Float
       #   resp.next_token #=> String
+      #
       # @overload list_faces(params = {})
       # @param [Hash] params ({})
       def list_faces(params = {}, options = {})
@@ -725,23 +797,29 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:SearchFaces` action.
+      #
       # @option params [required, String] :collection_id
       #   ID of the collection to search.
+      #
       # @option params [required, String] :face_id
       #   ID of a face to find matches for in the collection.
+      #
       # @option params [Integer] :max_faces
       #   Maximum number of faces to return. The API will return the maximum
       #   number of faces with the highest confidence in the match.
+      #
       # @option params [Float] :face_match_threshold
       #   Optional value specifying the minimum confidence in the face match to
       #   return. For example, don't return any matches where confidence in
       #   matches is less than 70%.
+      #
       # @return [Types::SearchFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SearchFacesResponse#searched_face_id #SearchedFaceId} => String
-      #   * {Types::SearchFacesResponse#face_matches #FaceMatches} => Array&lt;Types::FaceMatch&gt;
+      #   * {Types::SearchFacesResponse#searched_face_id #searched_face_id} => String
+      #   * {Types::SearchFacesResponse#face_matches #face_matches} => Array&lt;Types::FaceMatch&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.search_faces({
       #     collection_id: "CollectionId", # required
       #     face_id: "FaceId", # required
@@ -750,6 +828,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.searched_face_id #=> String
       #   resp.face_matches #=> Array
       #   resp.face_matches[0].similarity #=> Float
@@ -761,6 +840,7 @@ module Aws
       #   resp.face_matches[0].face.image_id #=> String
       #   resp.face_matches[0].face.external_image_id #=> String
       #   resp.face_matches[0].face.confidence #=> Float
+      #
       # @overload search_faces(params = {})
       # @param [Hash] params ({})
       def search_faces(params = {}, options = {})
@@ -796,24 +876,30 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `rekognition:SearchFacesByImage` action.
+      #
       # @option params [required, String] :collection_id
       #   ID of the collection to search.
+      #
       # @option params [required, Types::Image] :image
       #   Provides the source image either as bytes or an S3 object.
+      #
       # @option params [Integer] :max_faces
       #   Maximum number of faces to return. The operation returns the maximum
       #   number of faces with the highest confidence in the match.
+      #
       # @option params [Float] :face_match_threshold
       #   (Optional) Specifies the minimum confidence in the face match to
       #   return. For example, don't return any matches where confidence in
       #   matches is less than 70%.
+      #
       # @return [Types::SearchFacesByImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SearchFacesByImageResponse#searched_face_bounding_box #SearchedFaceBoundingBox} => Types::BoundingBox
-      #   * {Types::SearchFacesByImageResponse#searched_face_confidence #SearchedFaceConfidence} => Float
-      #   * {Types::SearchFacesByImageResponse#face_matches #FaceMatches} => Array&lt;Types::FaceMatch&gt;
+      #   * {Types::SearchFacesByImageResponse#searched_face_bounding_box #searched_face_bounding_box} => Types::BoundingBox
+      #   * {Types::SearchFacesByImageResponse#searched_face_confidence #searched_face_confidence} => Float
+      #   * {Types::SearchFacesByImageResponse#face_matches #face_matches} => Array&lt;Types::FaceMatch&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.search_faces_by_image({
       #     collection_id: "CollectionId", # required
       #     image: { # required
@@ -829,6 +915,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.searched_face_bounding_box.width #=> Float
       #   resp.searched_face_bounding_box.height #=> Float
       #   resp.searched_face_bounding_box.left #=> Float
@@ -844,6 +931,7 @@ module Aws
       #   resp.face_matches[0].face.image_id #=> String
       #   resp.face_matches[0].face.external_image_id #=> String
       #   resp.face_matches[0].face.confidence #=> Float
+      #
       # @overload search_faces_by_image(params = {})
       # @param [Hash] params ({})
       def search_faces_by_image(params = {}, options = {})

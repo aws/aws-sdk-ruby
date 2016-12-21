@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -132,19 +146,24 @@ module Aws
 
       # Cancels in-progress environment configuration update or application
       # version deployment.
+      #
       # @option params [String] :environment_id
       #   This specifies the ID of the environment with the in-progress update
       #   that you want to cancel.
+      #
       # @option params [String] :environment_name
       #   This specifies the name of the environment with the in-progress update
       #   that you want to cancel.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.abort_environment_update({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
+      #
       # @overload abort_environment_update(params = {})
       # @param [Hash] params ({})
       def abort_environment_update(params = {}, options = {})
@@ -155,20 +174,25 @@ module Aws
       # Applies a scheduled managed action immediately. A managed action can
       # be applied only if its status is `Scheduled`. Get the status and
       # action ID of a managed action with DescribeEnvironmentManagedActions.
+      #
       # @option params [String] :environment_name
       #   The name of the target environment.
+      #
       # @option params [String] :environment_id
       #   The environment ID of the target environment.
+      #
       # @option params [required, String] :action_id
       #   The action ID of the scheduled managed action to execute.
+      #
       # @return [Types::ApplyEnvironmentManagedActionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplyEnvironmentManagedActionResult#action_id #ActionId} => String
-      #   * {Types::ApplyEnvironmentManagedActionResult#action_description #ActionDescription} => String
-      #   * {Types::ApplyEnvironmentManagedActionResult#action_type #ActionType} => String
-      #   * {Types::ApplyEnvironmentManagedActionResult#status #Status} => String
+      #   * {Types::ApplyEnvironmentManagedActionResult#action_id #action_id} => String
+      #   * {Types::ApplyEnvironmentManagedActionResult#action_description #action_description} => String
+      #   * {Types::ApplyEnvironmentManagedActionResult#action_type #action_type} => String
+      #   * {Types::ApplyEnvironmentManagedActionResult#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.apply_environment_managed_action({
       #     environment_name: "String",
       #     environment_id: "String",
@@ -176,10 +200,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.action_id #=> String
       #   resp.action_description #=> String
       #   resp.action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
       #   resp.status #=> String
+      #
       # @overload apply_environment_managed_action(params = {})
       # @param [Hash] params ({})
       def apply_environment_managed_action(params = {}, options = {})
@@ -188,21 +214,26 @@ module Aws
       end
 
       # Checks if the specified CNAME is available.
+      #
       # @option params [required, String] :cname_prefix
       #   The prefix used when this CNAME is reserved.
+      #
       # @return [Types::CheckDNSAvailabilityResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CheckDNSAvailabilityResultMessage#available #Available} => Boolean
-      #   * {Types::CheckDNSAvailabilityResultMessage#fully_qualified_cname #FullyQualifiedCNAME} => String
+      #   * {Types::CheckDNSAvailabilityResultMessage#available #available} => Boolean
+      #   * {Types::CheckDNSAvailabilityResultMessage#fully_qualified_cname #fully_qualified_cname} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.check_dns_availability({
       #     cname_prefix: "DNSCnamePrefix", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.available #=> Boolean
       #   resp.fully_qualified_cname #=> String
+      #
       # @overload check_dns_availability(params = {})
       # @param [Hash] params ({})
       def check_dns_availability(params = {}, options = {})
@@ -220,9 +251,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
+      #
       # @option params [String] :application_name
       #   The name of the application to which the specified source bundles
       #   belong.
+      #
       # @option params [String] :group_name
       #   The name of the group to which the target environments belong. Specify
       #   a group name only if the environment name defined in each target
@@ -232,17 +265,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+      #
       # @option params [Array<String>] :version_labels
       #   A list of version labels, specifying one or more application source
       #   bundles that belong to the target application. Each source bundle must
       #   include an environment manifest that specifies the name of the
       #   environment and the name of the solution stack to use, and optionally
       #   can specify environment links to create.
+      #
       # @return [Types::EnvironmentDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnvironmentDescriptionsMessage#environments #Environments} => Array&lt;Types::EnvironmentDescription&gt;
+      #   * {Types::EnvironmentDescriptionsMessage#environments #environments} => Array&lt;Types::EnvironmentDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.compose_environments({
       #     application_name: "ApplicationName",
       #     group_name: "GroupName",
@@ -250,6 +286,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environments #=> Array
       #   resp.environments[0].environment_name #=> String
       #   resp.environments[0].environment_id #=> String
@@ -277,6 +314,7 @@ module Aws
       #   resp.environments[0].environment_links #=> Array
       #   resp.environments[0].environment_links[0].link_name #=> String
       #   resp.environments[0].environment_links[0].environment_name #=> String
+      #
       # @overload compose_environments(params = {})
       # @param [Hash] params ({})
       def compose_environments(params = {}, options = {})
@@ -286,25 +324,30 @@ module Aws
 
       # Creates an application that has one configuration template named
       # `default` and no application versions.
+      #
       # @option params [required, String] :application_name
       #   The name of the application.
       #
       #   Constraint: This name must be unique within your account. If the
       #   specified name already exists, the action returns an
       #   `InvalidParameterValue` error.
+      #
       # @option params [String] :description
       #   Describes the application.
+      #
       # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplicationDescriptionMessage#application #Application} => Types::ApplicationDescription
+      #   * {Types::ApplicationDescriptionMessage#application #application} => Types::ApplicationDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_application({
       #     application_name: "ApplicationName", # required
       #     description: "Description",
       #   })
       #
       # @example Response structure
+      #
       #   resp.application.application_name #=> String
       #   resp.application.description #=> String
       #   resp.application.date_created #=> Time
@@ -313,6 +356,7 @@ module Aws
       #   resp.application.versions[0] #=> String
       #   resp.application.configuration_templates #=> Array
       #   resp.application.configuration_templates[0] #=> String
+      #
       # @overload create_application(params = {})
       # @param [Hash] params ({})
       def create_application(params = {}, options = {})
@@ -328,18 +372,22 @@ module Aws
       # attempt to launch an environment from the application version.
       #
       #  </note>
+      #
       # @option params [required, String] :application_name
       #   The name of the application. If no application is found with this
       #   name, and `AutoCreateApplication` is `false`, returns an
       #   `InvalidParameterValue` error.
+      #
       # @option params [required, String] :version_label
       #   A label identifying this version.
       #
       #   Constraint: Must be unique per application. If an application version
       #   already exists with this label for the specified application, AWS
       #   Elastic Beanstalk returns an `InvalidParameterValue` error.
+      #
       # @option params [String] :description
       #   Describes this version.
+      #
       # @option params [Types::SourceBuildInformation] :source_build_information
       #   Specify a commit in an AWS CodeCommit Git repository to use as the
       #   source code for the application version.
@@ -348,6 +396,7 @@ module Aws
       #   S3 (with `SourceBundle`), but not both. If neither `SourceBundle` nor
       #   `SourceBuildInformation` are provided, Elastic Beanstalk uses a sample
       #   application.
+      #
       # @option params [Types::S3Location] :source_bundle
       #   The Amazon S3 bucket and key that identify the location of the source
       #   bundle for this version.
@@ -356,20 +405,25 @@ module Aws
       #   repository (with `SourceBuildInformation`), but not both. If neither
       #   `SourceBundle` nor `SourceBuildInformation` are provided, Elastic
       #   Beanstalk uses a sample application.
+      #
       # @option params [Types::BuildConfiguration] :build_configuration
+      #
       # @option params [Boolean] :auto_create_application
       #   Set to `true` to create an application with the specified name if it
       #   doesn't already exist.
+      #
       # @option params [Boolean] :process
       #   Preprocesses and validates the environment manifest and configuration
       #   files in the source bundle. Validating configuration files can
       #   identify issues prior to deploying the application version to an
       #   environment.
+      #
       # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplicationVersionDescriptionMessage#application_version #ApplicationVersion} => Types::ApplicationVersionDescription
+      #   * {Types::ApplicationVersionDescriptionMessage#application_version #application_version} => Types::ApplicationVersionDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_application_version({
       #     application_name: "ApplicationName", # required
       #     version_label: "VersionLabel", # required
@@ -395,6 +449,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_version.application_name #=> String
       #   resp.application_version.description #=> String
       #   resp.application_version.version_label #=> String
@@ -407,6 +462,7 @@ module Aws
       #   resp.application_version.date_created #=> Time
       #   resp.application_version.date_updated #=> Time
       #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
+      #
       # @overload create_application_version(params = {})
       # @param [Hash] params ({})
       def create_application_version(params = {}, options = {})
@@ -425,10 +481,12 @@ module Aws
       # * DescribeConfigurationSettings
       #
       # * ListAvailableSolutionStacks
+      #
       # @option params [required, String] :application_name
       #   The name of the application to associate with this configuration
       #   template. If no application is found with this name, AWS Elastic
       #   Beanstalk returns an `InvalidParameterValue` error.
+      #
       # @option params [required, String] :template_name
       #   The name of the configuration template.
       #
@@ -436,6 +494,7 @@ module Aws
       #
       #   Default: If a configuration template already exists with this name,
       #   AWS Elastic Beanstalk returns an `InvalidParameterValue` error.
+      #
       # @option params [String] :solution_stack_name
       #   The name of the solution stack used by this configuration. The
       #   solution stack specifies the operating system, architecture, and
@@ -452,6 +511,7 @@ module Aws
       #   If a solution stack name is not specified and the source configuration
       #   parameter is specified, AWS Elastic Beanstalk uses the same solution
       #   stack as the source configuration template.
+      #
       # @option params [Types::SourceConfiguration] :source_configuration
       #   If specified, AWS Elastic Beanstalk uses the configuration values from
       #   the specified configuration template to create a new configuration.
@@ -467,27 +527,32 @@ module Aws
       #   source configuration template must match the specified solution stack
       #   name or else AWS Elastic Beanstalk returns an
       #   `InvalidParameterCombination` error.
+      #
       # @option params [String] :environment_id
       #   The ID of the environment used with this configuration template.
+      #
       # @option params [String] :description
       #   Describes this configuration.
+      #
       # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
       #   If specified, AWS Elastic Beanstalk sets the specified configuration
       #   option to the requested value. The new value overrides the value
       #   obtained from the solution stack or the source configuration template.
+      #
       # @return [Types::ConfigurationSettingsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfigurationSettingsDescription#solution_stack_name #SolutionStackName} => String
-      #   * {Types::ConfigurationSettingsDescription#application_name #ApplicationName} => String
-      #   * {Types::ConfigurationSettingsDescription#template_name #TemplateName} => String
-      #   * {Types::ConfigurationSettingsDescription#description #Description} => String
-      #   * {Types::ConfigurationSettingsDescription#environment_name #EnvironmentName} => String
-      #   * {Types::ConfigurationSettingsDescription#deployment_status #DeploymentStatus} => String
-      #   * {Types::ConfigurationSettingsDescription#date_created #DateCreated} => Time
-      #   * {Types::ConfigurationSettingsDescription#date_updated #DateUpdated} => Time
-      #   * {Types::ConfigurationSettingsDescription#option_settings #OptionSettings} => Array&lt;Types::ConfigurationOptionSetting&gt;
+      #   * {Types::ConfigurationSettingsDescription#solution_stack_name #solution_stack_name} => String
+      #   * {Types::ConfigurationSettingsDescription#application_name #application_name} => String
+      #   * {Types::ConfigurationSettingsDescription#template_name #template_name} => String
+      #   * {Types::ConfigurationSettingsDescription#description #description} => String
+      #   * {Types::ConfigurationSettingsDescription#environment_name #environment_name} => String
+      #   * {Types::ConfigurationSettingsDescription#deployment_status #deployment_status} => String
+      #   * {Types::ConfigurationSettingsDescription#date_created #date_created} => Time
+      #   * {Types::ConfigurationSettingsDescription#date_updated #date_updated} => Time
+      #   * {Types::ConfigurationSettingsDescription#option_settings #option_settings} => Array&lt;Types::ConfigurationOptionSetting&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_configuration_template({
       #     application_name: "ApplicationName", # required
       #     template_name: "ConfigurationTemplateName", # required
@@ -509,6 +574,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.solution_stack_name #=> String
       #   resp.application_name #=> String
       #   resp.template_name #=> String
@@ -522,6 +588,7 @@ module Aws
       #   resp.option_settings[0].namespace #=> String
       #   resp.option_settings[0].option_name #=> String
       #   resp.option_settings[0].value #=> String
+      #
       # @overload create_configuration_template(params = {})
       # @param [Hash] params ({})
       def create_configuration_template(params = {}, options = {})
@@ -531,11 +598,13 @@ module Aws
 
       # Launches an environment for the specified application using the
       # specified configuration.
+      #
       # @option params [required, String] :application_name
       #   The name of the application that contains the version to be deployed.
       #
       #   If no application is found with this name, `CreateEnvironment` returns
       #   an `InvalidParameterValue` error.
+      #
       # @option params [String] :environment_name
       #   A unique name for the deployment environment. Used in the application
       #   URL.
@@ -549,6 +618,7 @@ module Aws
       #   Default: If the CNAME parameter is not specified, the environment name
       #   becomes part of the CNAME, and therefore part of the visible URL for
       #   your application.
+      #
       # @option params [String] :group_name
       #   The name of the group to which the target environment belongs. Specify
       #   a group name only if the environment's name is specified in an
@@ -558,16 +628,21 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+      #
       # @option params [String] :description
       #   Describes this environment.
+      #
       # @option params [String] :cname_prefix
       #   If specified, the environment attempts to use this value as the prefix
       #   for the CNAME. If not specified, the CNAME is generated automatically
       #   by appending a random alphanumeric string to the environment name.
+      #
       # @option params [Types::EnvironmentTier] :tier
       #   This specifies the tier to use for creating this environment.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   This specifies the tags applied to resources in the environment.
+      #
       # @option params [String] :version_label
       #   The name of the application version to deploy.
       #
@@ -577,6 +652,7 @@ module Aws
       #
       #   Default: If not specified, AWS Elastic Beanstalk attempts to launch
       #   the sample application in the container.
+      #
       # @option params [String] :template_name
       #   The name of the configuration template to use in deployment. If no
       #   configuration template is found with this name, AWS Elastic Beanstalk
@@ -587,6 +663,7 @@ module Aws
       #   Beanstalk returns an `InvalidParameterCombination` error. If you do
       #   not specify either, AWS Elastic Beanstalk returns a
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :solution_stack_name
       #   This is an alternative to specifying a template name. If specified,
       #   AWS Elastic Beanstalk sets the configuration values to the default
@@ -596,36 +673,40 @@ module Aws
       #   both. If you specify both, AWS Elastic Beanstalk returns an
       #   `InvalidParameterCombination` error. If you do not specify either, AWS
       #   Elastic Beanstalk returns a `MissingRequiredParameter` error.
+      #
       # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
       #   If specified, AWS Elastic Beanstalk sets the specified configuration
       #   options to the requested value in the configuration set for the new
       #   environment. These override the values obtained from the solution
       #   stack or the configuration template.
+      #
       # @option params [Array<Types::OptionSpecification>] :options_to_remove
       #   A list of custom user-defined configuration options to remove from the
       #   configuration set for this new environment.
+      #
       # @return [Types::EnvironmentDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnvironmentDescription#environment_name #EnvironmentName} => String
-      #   * {Types::EnvironmentDescription#environment_id #EnvironmentId} => String
-      #   * {Types::EnvironmentDescription#application_name #ApplicationName} => String
-      #   * {Types::EnvironmentDescription#version_label #VersionLabel} => String
-      #   * {Types::EnvironmentDescription#solution_stack_name #SolutionStackName} => String
-      #   * {Types::EnvironmentDescription#template_name #TemplateName} => String
-      #   * {Types::EnvironmentDescription#description #Description} => String
-      #   * {Types::EnvironmentDescription#endpoint_url #EndpointURL} => String
-      #   * {Types::EnvironmentDescription#cname #CNAME} => String
-      #   * {Types::EnvironmentDescription#date_created #DateCreated} => Time
-      #   * {Types::EnvironmentDescription#date_updated #DateUpdated} => Time
-      #   * {Types::EnvironmentDescription#status #Status} => String
-      #   * {Types::EnvironmentDescription#abortable_operation_in_progress #AbortableOperationInProgress} => Boolean
-      #   * {Types::EnvironmentDescription#health #Health} => String
-      #   * {Types::EnvironmentDescription#health_status #HealthStatus} => String
-      #   * {Types::EnvironmentDescription#resources #Resources} => Types::EnvironmentResourcesDescription
-      #   * {Types::EnvironmentDescription#tier #Tier} => Types::EnvironmentTier
-      #   * {Types::EnvironmentDescription#environment_links #EnvironmentLinks} => Array&lt;Types::EnvironmentLink&gt;
+      #   * {Types::EnvironmentDescription#environment_name #environment_name} => String
+      #   * {Types::EnvironmentDescription#environment_id #environment_id} => String
+      #   * {Types::EnvironmentDescription#application_name #application_name} => String
+      #   * {Types::EnvironmentDescription#version_label #version_label} => String
+      #   * {Types::EnvironmentDescription#solution_stack_name #solution_stack_name} => String
+      #   * {Types::EnvironmentDescription#template_name #template_name} => String
+      #   * {Types::EnvironmentDescription#description #description} => String
+      #   * {Types::EnvironmentDescription#endpoint_url #endpoint_url} => String
+      #   * {Types::EnvironmentDescription#cname #cname} => String
+      #   * {Types::EnvironmentDescription#date_created #date_created} => Time
+      #   * {Types::EnvironmentDescription#date_updated #date_updated} => Time
+      #   * {Types::EnvironmentDescription#status #status} => String
+      #   * {Types::EnvironmentDescription#abortable_operation_in_progress #abortable_operation_in_progress} => Boolean
+      #   * {Types::EnvironmentDescription#health #health} => String
+      #   * {Types::EnvironmentDescription#health_status #health_status} => String
+      #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
+      #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
+      #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_environment({
       #     application_name: "ApplicationName", # required
       #     environment_name: "EnvironmentName",
@@ -664,6 +745,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environment_name #=> String
       #   resp.environment_id #=> String
       #   resp.application_name #=> String
@@ -690,6 +772,7 @@ module Aws
       #   resp.environment_links #=> Array
       #   resp.environment_links[0].link_name #=> String
       #   resp.environment_links[0].environment_name #=> String
+      #
       # @overload create_environment(params = {})
       # @param [Hash] params ({})
       def create_environment(params = {}, options = {})
@@ -700,12 +783,15 @@ module Aws
       # Creates the Amazon S3 storage location for the account.
       #
       # This location is used to store user log files.
+      #
       # @return [Types::CreateStorageLocationResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateStorageLocationResultMessage#s3_bucket #S3Bucket} => String
+      #   * {Types::CreateStorageLocationResultMessage#s3_bucket #s3_bucket} => String
       #
       # @example Response structure
+      #
       #   resp.s3_bucket #=> String
+      #
       # @overload create_storage_location(params = {})
       # @param [Hash] params ({})
       def create_storage_location(params = {}, options = {})
@@ -720,18 +806,23 @@ module Aws
       # <note markdown="1"> You cannot delete an application that has a running environment.
       #
       #  </note>
+      #
       # @option params [required, String] :application_name
       #   The name of the application to delete.
+      #
       # @option params [Boolean] :terminate_env_by_force
       #   When set to true, running environments will be terminated before
       #   deleting the application.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_application({
       #     application_name: "ApplicationName", # required
       #     terminate_env_by_force: false,
       #   })
+      #
       # @overload delete_application(params = {})
       # @param [Hash] params ({})
       def delete_application(params = {}, options = {})
@@ -745,22 +836,28 @@ module Aws
       # running environment.
       #
       #  </note>
+      #
       # @option params [required, String] :application_name
       #   The name of the application to which the version belongs.
+      #
       # @option params [required, String] :version_label
       #   The label of the version to delete.
+      #
       # @option params [Boolean] :delete_source_bundle
       #   Set to `true` to delete the source bundle from your storage bucket.
       #   Otherwise, the application version is deleted only from Elastic
       #   Beanstalk and the source bundle remains in Amazon S3.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_application_version({
       #     application_name: "ApplicationName", # required
       #     version_label: "VersionLabel", # required
       #     delete_source_bundle: false,
       #   })
+      #
       # @overload delete_application_version(params = {})
       # @param [Hash] params ({})
       def delete_application_version(params = {}, options = {})
@@ -776,17 +873,22 @@ module Aws
       # environment.
       #
       #  </note>
+      #
       # @option params [required, String] :application_name
       #   The name of the application to delete the configuration template from.
+      #
       # @option params [required, String] :template_name
       #   The name of the configuration template to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_configuration_template({
       #     application_name: "ApplicationName", # required
       #     template_name: "ConfigurationTemplateName", # required
       #   })
+      #
       # @overload delete_configuration_template(params = {})
       # @param [Hash] params ({})
       def delete_configuration_template(params = {}, options = {})
@@ -804,17 +906,22 @@ module Aws
       # indicates whether the deployment is in process or has failed. The
       # draft configuration remains in existence until it is deleted with this
       # action.
+      #
       # @option params [required, String] :application_name
       #   The name of the application the environment is associated with.
+      #
       # @option params [required, String] :environment_name
       #   The name of the environment to delete the draft configuration from.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_environment_configuration({
       #     application_name: "ApplicationName", # required
       #     environment_name: "EnvironmentName", # required
       #   })
+      #
       # @overload delete_environment_configuration(params = {})
       # @param [Hash] params ({})
       def delete_environment_configuration(params = {}, options = {})
@@ -823,22 +930,28 @@ module Aws
       end
 
       # Retrieve a list of application versions.
+      #
       # @option params [String] :application_name
       #   Specify an application name to show only application versions for that
       #   application.
+      #
       # @option params [Array<String>] :version_labels
       #   Specify a version label to show a specific application version.
+      #
       # @option params [Integer] :max_records
       #   Specify a maximum number of application versions to paginate in the
       #   request.
+      #
       # @option params [String] :next_token
       #   Specify a next token to retrieve the next page in a paginated request.
+      #
       # @return [Types::ApplicationVersionDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplicationVersionDescriptionsMessage#application_versions #ApplicationVersions} => Array&lt;Types::ApplicationVersionDescription&gt;
-      #   * {Types::ApplicationVersionDescriptionsMessage#next_token #NextToken} => String
+      #   * {Types::ApplicationVersionDescriptionsMessage#application_versions #application_versions} => Array&lt;Types::ApplicationVersionDescription&gt;
+      #   * {Types::ApplicationVersionDescriptionsMessage#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_application_versions({
       #     application_name: "ApplicationName",
       #     version_labels: ["VersionLabel"],
@@ -847,6 +960,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_versions #=> Array
       #   resp.application_versions[0].application_name #=> String
       #   resp.application_versions[0].description #=> String
@@ -861,6 +975,7 @@ module Aws
       #   resp.application_versions[0].date_updated #=> Time
       #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
       #   resp.next_token #=> String
+      #
       # @overload describe_application_versions(params = {})
       # @param [Hash] params ({})
       def describe_application_versions(params = {}, options = {})
@@ -869,19 +984,23 @@ module Aws
       end
 
       # Returns the descriptions of existing applications.
+      #
       # @option params [Array<String>] :application_names
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to only include those with the specified names.
+      #
       # @return [Types::ApplicationDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplicationDescriptionsMessage#applications #Applications} => Array&lt;Types::ApplicationDescription&gt;
+      #   * {Types::ApplicationDescriptionsMessage#applications #applications} => Array&lt;Types::ApplicationDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_applications({
       #     application_names: ["ApplicationName"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.applications #=> Array
       #   resp.applications[0].application_name #=> String
       #   resp.applications[0].description #=> String
@@ -891,6 +1010,7 @@ module Aws
       #   resp.applications[0].versions[0] #=> String
       #   resp.applications[0].configuration_templates #=> Array
       #   resp.applications[0].configuration_templates[0] #=> String
+      #
       # @overload describe_applications(params = {})
       # @param [Hash] params ({})
       def describe_applications(params = {}, options = {})
@@ -903,29 +1023,36 @@ module Aws
       # stack defines. The description includes the values the options, their
       # default values, and an indication of the required action on a running
       # environment if an option value is changed.
+      #
       # @option params [String] :application_name
       #   The name of the application associated with the configuration template
       #   or environment. Only needed if you want to describe the configuration
       #   options associated with either the configuration template or
       #   environment.
+      #
       # @option params [String] :template_name
       #   The name of the configuration template whose configuration options you
       #   want to describe.
+      #
       # @option params [String] :environment_name
       #   The name of the environment whose configuration options you want to
       #   describe.
+      #
       # @option params [String] :solution_stack_name
       #   The name of the solution stack whose configuration options you want to
       #   describe.
+      #
       # @option params [Array<Types::OptionSpecification>] :options
       #   If specified, restricts the descriptions to only the specified
       #   options.
+      #
       # @return [Types::ConfigurationOptionsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfigurationOptionsDescription#solution_stack_name #SolutionStackName} => String
-      #   * {Types::ConfigurationOptionsDescription#options #Options} => Array&lt;Types::ConfigurationOptionDescription&gt;
+      #   * {Types::ConfigurationOptionsDescription#solution_stack_name #solution_stack_name} => String
+      #   * {Types::ConfigurationOptionsDescription#options #options} => Array&lt;Types::ConfigurationOptionDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_configuration_options({
       #     application_name: "ApplicationName",
       #     template_name: "ConfigurationTemplateName",
@@ -941,6 +1068,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.solution_stack_name #=> String
       #   resp.options #=> Array
       #   resp.options[0].namespace #=> String
@@ -956,6 +1084,7 @@ module Aws
       #   resp.options[0].max_length #=> Integer
       #   resp.options[0].regex.pattern #=> String
       #   resp.options[0].regex.label #=> String
+      #
       # @overload describe_configuration_options(params = {})
       # @param [Hash] params ({})
       def describe_configuration_options(params = {}, options = {})
@@ -978,8 +1107,10 @@ module Aws
       # * DeleteEnvironmentConfiguration
       #
       # ^
+      #
       # @option params [required, String] :application_name
       #   The application for the environment or configuration template.
+      #
       # @option params [String] :template_name
       #   The name of the configuration template to describe.
       #
@@ -988,6 +1119,7 @@ module Aws
       #   Beanstalk returns an `InvalidParameterCombination` error. If you do
       #   not specify either, AWS Elastic Beanstalk returns a
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to describe.
       #
@@ -995,11 +1127,13 @@ module Aws
       #   both. If you specify both, AWS Elastic Beanstalk returns an
       #   `InvalidParameterCombination` error. If you do not specify either, AWS
       #   Elastic Beanstalk returns `MissingRequiredParameter` error.
+      #
       # @return [Types::ConfigurationSettingsDescriptions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfigurationSettingsDescriptions#configuration_settings #ConfigurationSettings} => Array&lt;Types::ConfigurationSettingsDescription&gt;
+      #   * {Types::ConfigurationSettingsDescriptions#configuration_settings #configuration_settings} => Array&lt;Types::ConfigurationSettingsDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_configuration_settings({
       #     application_name: "ApplicationName", # required
       #     template_name: "ConfigurationTemplateName",
@@ -1007,6 +1141,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.configuration_settings #=> Array
       #   resp.configuration_settings[0].solution_stack_name #=> String
       #   resp.configuration_settings[0].application_name #=> String
@@ -1021,6 +1156,7 @@ module Aws
       #   resp.configuration_settings[0].option_settings[0].namespace #=> String
       #   resp.configuration_settings[0].option_settings[0].option_name #=> String
       #   resp.configuration_settings[0].option_settings[0].value #=> String
+      #
       # @overload describe_configuration_settings(params = {})
       # @param [Hash] params ({})
       def describe_configuration_settings(params = {}, options = {})
@@ -1031,30 +1167,35 @@ module Aws
       # Returns information about the overall health of the specified
       # environment. The **DescribeEnvironmentHealth** operation is only
       # available with AWS Elastic Beanstalk Enhanced Health.
+      #
       # @option params [String] :environment_name
       #   Specify the environment by name.
       #
       #   You must specify either this or an EnvironmentName, or both.
+      #
       # @option params [String] :environment_id
       #   Specify the environment by ID.
       #
       #   You must specify either this or an EnvironmentName, or both.
+      #
       # @option params [Array<String>] :attribute_names
       #   Specify the response elements to return. To retrieve all attributes,
       #   set to `All`. If no attribute names are specified, returns the name of
       #   the environment.
+      #
       # @return [Types::DescribeEnvironmentHealthResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEnvironmentHealthResult#environment_name #EnvironmentName} => String
-      #   * {Types::DescribeEnvironmentHealthResult#health_status #HealthStatus} => String
-      #   * {Types::DescribeEnvironmentHealthResult#status #Status} => String
-      #   * {Types::DescribeEnvironmentHealthResult#color #Color} => String
-      #   * {Types::DescribeEnvironmentHealthResult#causes #Causes} => Array&lt;String&gt;
-      #   * {Types::DescribeEnvironmentHealthResult#application_metrics #ApplicationMetrics} => Types::ApplicationMetrics
-      #   * {Types::DescribeEnvironmentHealthResult#instances_health #InstancesHealth} => Types::InstanceHealthSummary
-      #   * {Types::DescribeEnvironmentHealthResult#refreshed_at #RefreshedAt} => Time
+      #   * {Types::DescribeEnvironmentHealthResult#environment_name #environment_name} => String
+      #   * {Types::DescribeEnvironmentHealthResult#health_status #health_status} => String
+      #   * {Types::DescribeEnvironmentHealthResult#status #status} => String
+      #   * {Types::DescribeEnvironmentHealthResult#color #color} => String
+      #   * {Types::DescribeEnvironmentHealthResult#causes #causes} => Array&lt;String&gt;
+      #   * {Types::DescribeEnvironmentHealthResult#application_metrics #application_metrics} => Types::ApplicationMetrics
+      #   * {Types::DescribeEnvironmentHealthResult#instances_health #instances_health} => Types::InstanceHealthSummary
+      #   * {Types::DescribeEnvironmentHealthResult#refreshed_at #refreshed_at} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_environment_health({
       #     environment_name: "EnvironmentName",
       #     environment_id: "EnvironmentId",
@@ -1062,6 +1203,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environment_name #=> String
       #   resp.health_status #=> String
       #   resp.status #=> String, one of "Green", "Yellow", "Red", "Grey"
@@ -1091,6 +1233,7 @@ module Aws
       #   resp.instances_health.degraded #=> Integer
       #   resp.instances_health.severe #=> Integer
       #   resp.refreshed_at #=> Time
+      #
       # @overload describe_environment_health(params = {})
       # @param [Hash] params ({})
       def describe_environment_health(params = {}, options = {})
@@ -1099,20 +1242,26 @@ module Aws
       end
 
       # Lists an environment's completed and failed managed actions.
+      #
       # @option params [String] :environment_id
       #   The environment ID of the target environment.
+      #
       # @option params [String] :environment_name
       #   The name of the target environment.
+      #
       # @option params [String] :next_token
       #   The pagination token returned by a previous request.
+      #
       # @option params [Integer] :max_items
       #   The maximum number of items to return for a single request.
+      #
       # @return [Types::DescribeEnvironmentManagedActionHistoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEnvironmentManagedActionHistoryResult#managed_action_history_items #ManagedActionHistoryItems} => Array&lt;Types::ManagedActionHistoryItem&gt;
-      #   * {Types::DescribeEnvironmentManagedActionHistoryResult#next_token #NextToken} => String
+      #   * {Types::DescribeEnvironmentManagedActionHistoryResult#managed_action_history_items #managed_action_history_items} => Array&lt;Types::ManagedActionHistoryItem&gt;
+      #   * {Types::DescribeEnvironmentManagedActionHistoryResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_environment_managed_action_history({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
@@ -1121,6 +1270,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.managed_action_history_items #=> Array
       #   resp.managed_action_history_items[0].action_id #=> String
       #   resp.managed_action_history_items[0].action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
@@ -1131,6 +1281,7 @@ module Aws
       #   resp.managed_action_history_items[0].executed_time #=> Time
       #   resp.managed_action_history_items[0].finished_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload describe_environment_managed_action_history(params = {})
       # @param [Hash] params ({})
       def describe_environment_managed_action_history(params = {}, options = {})
@@ -1139,17 +1290,22 @@ module Aws
       end
 
       # Lists an environment's upcoming and in-progress managed actions.
+      #
       # @option params [String] :environment_name
       #   The name of the target environment.
+      #
       # @option params [String] :environment_id
       #   The environment ID of the target environment.
+      #
       # @option params [String] :status
       #   To show only actions with a particular status, specify a status.
+      #
       # @return [Types::DescribeEnvironmentManagedActionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEnvironmentManagedActionsResult#managed_actions #ManagedActions} => Array&lt;Types::ManagedAction&gt;
+      #   * {Types::DescribeEnvironmentManagedActionsResult#managed_actions #managed_actions} => Array&lt;Types::ManagedAction&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_environment_managed_actions({
       #     environment_name: "String",
       #     environment_id: "String",
@@ -1157,12 +1313,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.managed_actions #=> Array
       #   resp.managed_actions[0].action_id #=> String
       #   resp.managed_actions[0].action_description #=> String
       #   resp.managed_actions[0].action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
       #   resp.managed_actions[0].status #=> String, one of "Scheduled", "Pending", "Running", "Unknown"
       #   resp.managed_actions[0].window_start_time #=> Time
+      #
       # @overload describe_environment_managed_actions(params = {})
       # @param [Hash] params ({})
       def describe_environment_managed_actions(params = {}, options = {})
@@ -1171,29 +1329,34 @@ module Aws
       end
 
       # Returns AWS resources for this environment.
+      #
       # @option params [String] :environment_id
       #   The ID of the environment to retrieve AWS resource usage data.
       #
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to retrieve AWS resource usage data.
       #
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @return [Types::EnvironmentResourceDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnvironmentResourceDescriptionsMessage#environment_resources #EnvironmentResources} => Types::EnvironmentResourceDescription
+      #   * {Types::EnvironmentResourceDescriptionsMessage#environment_resources #environment_resources} => Types::EnvironmentResourceDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_environment_resources({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.environment_resources.environment_name #=> String
       #   resp.environment_resources.auto_scaling_groups #=> Array
       #   resp.environment_resources.auto_scaling_groups[0].name #=> String
@@ -1208,6 +1371,7 @@ module Aws
       #   resp.environment_resources.queues #=> Array
       #   resp.environment_resources.queues[0].name #=> String
       #   resp.environment_resources.queues[0].url #=> String
+      #
       # @overload describe_environment_resources(params = {})
       # @param [Hash] params ({})
       def describe_environment_resources(params = {}, options = {})
@@ -1216,20 +1380,25 @@ module Aws
       end
 
       # Returns descriptions for existing environments.
+      #
       # @option params [String] :application_name
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to include only those that are associated with this
       #   application.
+      #
       # @option params [String] :version_label
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to include only those that are associated with this
       #   application version.
+      #
       # @option params [Array<String>] :environment_ids
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to include only those that have the specified IDs.
+      #
       # @option params [Array<String>] :environment_names
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to include only those that have the specified names.
+      #
       # @option params [Boolean] :include_deleted
       #   Indicates whether to include deleted environments:
       #
@@ -1237,14 +1406,17 @@ module Aws
       #   `IncludedDeletedBackTo` are displayed.
       #
       #   `false`\: Do not include deleted environments.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :included_deleted_back_to
       #   If specified when `IncludeDeleted` is set to `true`, then environments
       #   deleted after this date are displayed.
+      #
       # @return [Types::EnvironmentDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnvironmentDescriptionsMessage#environments #Environments} => Array&lt;Types::EnvironmentDescription&gt;
+      #   * {Types::EnvironmentDescriptionsMessage#environments #environments} => Array&lt;Types::EnvironmentDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_environments({
       #     application_name: "ApplicationName",
       #     version_label: "VersionLabel",
@@ -1255,6 +1427,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environments #=> Array
       #   resp.environments[0].environment_name #=> String
       #   resp.environments[0].environment_id #=> String
@@ -1282,6 +1455,7 @@ module Aws
       #   resp.environments[0].environment_links #=> Array
       #   resp.environments[0].environment_links[0].link_name #=> String
       #   resp.environments[0].environment_links[0].environment_name #=> String
+      #
       # @overload describe_environments(params = {})
       # @param [Hash] params ({})
       def describe_environments(params = {}, options = {})
@@ -1296,47 +1470,60 @@ module Aws
       # `NextToken`.
       #
       #  </note>
+      #
       # @option params [String] :application_name
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to include only those associated with this application.
+      #
       # @option params [String] :version_label
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to those associated with this application version.
+      #
       # @option params [String] :template_name
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to those that are associated with this environment
       #   configuration.
+      #
       # @option params [String] :environment_id
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to those associated with this environment.
+      #
       # @option params [String] :environment_name
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to those associated with this environment.
+      #
       # @option params [String] :request_id
       #   If specified, AWS Elastic Beanstalk restricts the described events to
       #   include only those associated with this request ID.
+      #
       # @option params [String] :severity
       #   If specified, limits the events returned from this call to include
       #   only those with the specified severity or higher.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to those that occur on or after this time.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to those that occur up to, but not including, the
       #   `EndTime`.
+      #
       # @option params [Integer] :max_records
       #   Specifies the maximum number of events that can be returned, beginning
       #   with the most recent event.
+      #
       # @option params [String] :next_token
       #   Pagination token. If specified, the events return the next batch of
       #   results.
+      #
       # @return [Types::EventDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventDescriptionsMessage#events #Events} => Array&lt;Types::EventDescription&gt;
-      #   * {Types::EventDescriptionsMessage#next_token #NextToken} => String
+      #   * {Types::EventDescriptionsMessage#events #events} => Array&lt;Types::EventDescription&gt;
+      #   * {Types::EventDescriptionsMessage#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_events({
       #     application_name: "ApplicationName",
       #     version_label: "VersionLabel",
@@ -1352,6 +1539,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Array
       #   resp.events[0].event_date #=> Time
       #   resp.events[0].message #=> String
@@ -1362,6 +1550,7 @@ module Aws
       #   resp.events[0].request_id #=> String
       #   resp.events[0].severity #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
       #   resp.next_token #=> String
+      #
       # @overload describe_events(params = {})
       # @param [Hash] params ({})
       def describe_events(params = {}, options = {})
@@ -1376,23 +1565,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
+      #
       # @option params [String] :environment_name
       #   Specify the AWS Elastic Beanstalk environment by name.
+      #
       # @option params [String] :environment_id
       #   Specify the AWS Elastic Beanstalk environment by ID.
+      #
       # @option params [Array<String>] :attribute_names
       #   Specifies the response elements you wish to receive. To retrieve all
       #   attributes, set to `All`. If no attribute names are specified, returns
       #   a list of instances.
+      #
       # @option params [String] :next_token
       #   Specify the pagination token returned by a previous call.
+      #
       # @return [Types::DescribeInstancesHealthResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeInstancesHealthResult#instance_health_list #InstanceHealthList} => Array&lt;Types::SingleInstanceHealth&gt;
-      #   * {Types::DescribeInstancesHealthResult#refreshed_at #RefreshedAt} => Time
-      #   * {Types::DescribeInstancesHealthResult#next_token #NextToken} => String
+      #   * {Types::DescribeInstancesHealthResult#instance_health_list #instance_health_list} => Array&lt;Types::SingleInstanceHealth&gt;
+      #   * {Types::DescribeInstancesHealthResult#refreshed_at #refreshed_at} => Time
+      #   * {Types::DescribeInstancesHealthResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_instances_health({
       #     environment_name: "EnvironmentName",
       #     environment_id: "EnvironmentId",
@@ -1401,6 +1596,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instance_health_list #=> Array
       #   resp.instance_health_list[0].instance_id #=> String
       #   resp.instance_health_list[0].health_status #=> String
@@ -1439,6 +1635,7 @@ module Aws
       #   resp.instance_health_list[0].instance_type #=> String
       #   resp.refreshed_at #=> Time
       #   resp.next_token #=> String
+      #
       # @overload describe_instances_health(params = {})
       # @param [Hash] params ({})
       def describe_instances_health(params = {}, options = {})
@@ -1447,18 +1644,21 @@ module Aws
       end
 
       # Returns a list of the available solution stack names.
+      #
       # @return [Types::ListAvailableSolutionStacksResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListAvailableSolutionStacksResultMessage#solution_stacks #SolutionStacks} => Array&lt;String&gt;
-      #   * {Types::ListAvailableSolutionStacksResultMessage#solution_stack_details #SolutionStackDetails} => Array&lt;Types::SolutionStackDescription&gt;
+      #   * {Types::ListAvailableSolutionStacksResultMessage#solution_stacks #solution_stacks} => Array&lt;String&gt;
+      #   * {Types::ListAvailableSolutionStacksResultMessage#solution_stack_details #solution_stack_details} => Array&lt;Types::SolutionStackDescription&gt;
       #
       # @example Response structure
+      #
       #   resp.solution_stacks #=> Array
       #   resp.solution_stacks[0] #=> String
       #   resp.solution_stack_details #=> Array
       #   resp.solution_stack_details[0].solution_stack_name #=> String
       #   resp.solution_stack_details[0].permitted_file_types #=> Array
       #   resp.solution_stack_details[0].permitted_file_types[0] #=> String
+      #
       # @overload list_available_solution_stacks(params = {})
       # @param [Hash] params ({})
       def list_available_solution_stacks(params = {}, options = {})
@@ -1469,25 +1669,30 @@ module Aws
       # Deletes and recreates all of the AWS resources (for example: the Auto
       # Scaling group, load balancer, etc.) for a specified environment and
       # forces a restart.
+      #
       # @option params [String] :environment_id
       #   The ID of the environment to rebuild.
       #
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to rebuild.
       #
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.rebuild_environment({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
+      #
       # @overload rebuild_environment(params = {})
       # @param [Hash] params ({})
       def rebuild_environment(params = {}, options = {})
@@ -1513,6 +1718,7 @@ module Aws
       # * RetrieveEnvironmentInfo
       #
       # ^
+      #
       # @option params [String] :environment_id
       #   The ID of the environment of the requested data.
       #
@@ -1522,6 +1728,7 @@ module Aws
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment of the requested data.
       #
@@ -1531,16 +1738,20 @@ module Aws
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [required, String] :info_type
       #   The type of information to request.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.request_environment_info({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #     info_type: "tail", # required, accepts tail, bundle
       #   })
+      #
       # @overload request_environment_info(params = {})
       # @param [Hash] params ({})
       def request_environment_info(params = {}, options = {})
@@ -1550,25 +1761,30 @@ module Aws
 
       # Causes the environment to restart the application container server
       # running on each Amazon EC2 instance.
+      #
       # @option params [String] :environment_id
       #   The ID of the environment to restart the server for.
       #
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to restart the server for.
       #
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restart_app_server({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
+      #
       # @overload restart_app_server(params = {})
       # @param [Hash] params ({})
       def restart_app_server(params = {}, options = {})
@@ -1584,6 +1800,7 @@ module Aws
       # * RequestEnvironmentInfo
       #
       # ^
+      #
       # @option params [String] :environment_id
       #   The ID of the data's environment.
       #
@@ -1593,6 +1810,7 @@ module Aws
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the data's environment.
       #
@@ -1602,13 +1820,16 @@ module Aws
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [required, String] :info_type
       #   The type of information to retrieve.
+      #
       # @return [Types::RetrieveEnvironmentInfoResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RetrieveEnvironmentInfoResultMessage#environment_info #EnvironmentInfo} => Array&lt;Types::EnvironmentInfoDescription&gt;
+      #   * {Types::RetrieveEnvironmentInfoResultMessage#environment_info #environment_info} => Array&lt;Types::EnvironmentInfoDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.retrieve_environment_info({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
@@ -1616,11 +1837,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environment_info #=> Array
       #   resp.environment_info[0].info_type #=> String, one of "tail", "bundle"
       #   resp.environment_info[0].ec2_instance_id #=> String
       #   resp.environment_info[0].sample_timestamp #=> Time
       #   resp.environment_info[0].message #=> String
+      #
       # @overload retrieve_environment_info(params = {})
       # @param [Hash] params ({})
       def retrieve_environment_info(params = {}, options = {})
@@ -1629,6 +1852,7 @@ module Aws
       end
 
       # Swaps the CNAMEs of two environments.
+      #
       # @option params [String] :source_environment_id
       #   The ID of the source environment.
       #
@@ -1636,6 +1860,7 @@ module Aws
       #   `SourceEnvironmentName`. You may also specify both. If you specify the
       #   `SourceEnvironmentId`, you must specify the
       #   `DestinationEnvironmentId`.
+      #
       # @option params [String] :source_environment_name
       #   The name of the source environment.
       #
@@ -1643,12 +1868,14 @@ module Aws
       #   `SourceEnvironmentName`. You may also specify both. If you specify the
       #   `SourceEnvironmentName`, you must specify the
       #   `DestinationEnvironmentName`.
+      #
       # @option params [String] :destination_environment_id
       #   The ID of the destination environment.
       #
       #   Condition: You must specify at least the `DestinationEnvironmentID` or
       #   the `DestinationEnvironmentName`. You may also specify both. You must
       #   specify the `SourceEnvironmentId` with the `DestinationEnvironmentId`.
+      #
       # @option params [String] :destination_environment_name
       #   The name of the destination environment.
       #
@@ -1656,15 +1883,18 @@ module Aws
       #   the `DestinationEnvironmentName`. You may also specify both. You must
       #   specify the `SourceEnvironmentName` with the
       #   `DestinationEnvironmentName`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.swap_environment_cnames({
       #     source_environment_id: "EnvironmentId",
       #     source_environment_name: "EnvironmentName",
       #     destination_environment_id: "EnvironmentId",
       #     destination_environment_name: "EnvironmentName",
       #   })
+      #
       # @overload swap_environment_cnames(params = {})
       # @param [Hash] params ({})
       def swap_environment_cnames(params = {}, options = {})
@@ -1673,18 +1903,21 @@ module Aws
       end
 
       # Terminates the specified environment.
+      #
       # @option params [String] :environment_id
       #   The ID of the environment to terminate.
       #
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to terminate.
       #
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [Boolean] :terminate_resources
       #   Indicates whether the associated AWS resources should shut down when
       #   the environment is terminated:
@@ -1705,31 +1938,34 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/ug/
+      #
       # @option params [Boolean] :force_terminate
       #   Terminates the target environment even if another environment in the
       #   same group is dependent on it.
+      #
       # @return [Types::EnvironmentDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnvironmentDescription#environment_name #EnvironmentName} => String
-      #   * {Types::EnvironmentDescription#environment_id #EnvironmentId} => String
-      #   * {Types::EnvironmentDescription#application_name #ApplicationName} => String
-      #   * {Types::EnvironmentDescription#version_label #VersionLabel} => String
-      #   * {Types::EnvironmentDescription#solution_stack_name #SolutionStackName} => String
-      #   * {Types::EnvironmentDescription#template_name #TemplateName} => String
-      #   * {Types::EnvironmentDescription#description #Description} => String
-      #   * {Types::EnvironmentDescription#endpoint_url #EndpointURL} => String
-      #   * {Types::EnvironmentDescription#cname #CNAME} => String
-      #   * {Types::EnvironmentDescription#date_created #DateCreated} => Time
-      #   * {Types::EnvironmentDescription#date_updated #DateUpdated} => Time
-      #   * {Types::EnvironmentDescription#status #Status} => String
-      #   * {Types::EnvironmentDescription#abortable_operation_in_progress #AbortableOperationInProgress} => Boolean
-      #   * {Types::EnvironmentDescription#health #Health} => String
-      #   * {Types::EnvironmentDescription#health_status #HealthStatus} => String
-      #   * {Types::EnvironmentDescription#resources #Resources} => Types::EnvironmentResourcesDescription
-      #   * {Types::EnvironmentDescription#tier #Tier} => Types::EnvironmentTier
-      #   * {Types::EnvironmentDescription#environment_links #EnvironmentLinks} => Array&lt;Types::EnvironmentLink&gt;
+      #   * {Types::EnvironmentDescription#environment_name #environment_name} => String
+      #   * {Types::EnvironmentDescription#environment_id #environment_id} => String
+      #   * {Types::EnvironmentDescription#application_name #application_name} => String
+      #   * {Types::EnvironmentDescription#version_label #version_label} => String
+      #   * {Types::EnvironmentDescription#solution_stack_name #solution_stack_name} => String
+      #   * {Types::EnvironmentDescription#template_name #template_name} => String
+      #   * {Types::EnvironmentDescription#description #description} => String
+      #   * {Types::EnvironmentDescription#endpoint_url #endpoint_url} => String
+      #   * {Types::EnvironmentDescription#cname #cname} => String
+      #   * {Types::EnvironmentDescription#date_created #date_created} => Time
+      #   * {Types::EnvironmentDescription#date_updated #date_updated} => Time
+      #   * {Types::EnvironmentDescription#status #status} => String
+      #   * {Types::EnvironmentDescription#abortable_operation_in_progress #abortable_operation_in_progress} => Boolean
+      #   * {Types::EnvironmentDescription#health #health} => String
+      #   * {Types::EnvironmentDescription#health_status #health_status} => String
+      #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
+      #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
+      #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.terminate_environment({
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
@@ -1738,6 +1974,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environment_name #=> String
       #   resp.environment_id #=> String
       #   resp.application_name #=> String
@@ -1764,6 +2001,7 @@ module Aws
       #   resp.environment_links #=> Array
       #   resp.environment_links[0].link_name #=> String
       #   resp.environment_links[0].environment_name #=> String
+      #
       # @overload terminate_environment(params = {})
       # @param [Hash] params ({})
       def terminate_environment(params = {}, options = {})
@@ -1777,25 +2015,30 @@ module Aws
       # remains unchanged. To clear these properties, specify an empty string.
       #
       #  </note>
+      #
       # @option params [required, String] :application_name
       #   The name of the application to update. If no such application is
       #   found, `UpdateApplication` returns an `InvalidParameterValue` error.
+      #
       # @option params [String] :description
       #   A new description for the application.
       #
       #   Default: If not specified, AWS Elastic Beanstalk does not update the
       #   description.
+      #
       # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplicationDescriptionMessage#application #Application} => Types::ApplicationDescription
+      #   * {Types::ApplicationDescriptionMessage#application #application} => Types::ApplicationDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_application({
       #     application_name: "ApplicationName", # required
       #     description: "Description",
       #   })
       #
       # @example Response structure
+      #
       #   resp.application.application_name #=> String
       #   resp.application.description #=> String
       #   resp.application.date_created #=> Time
@@ -1804,6 +2047,7 @@ module Aws
       #   resp.application.versions[0] #=> String
       #   resp.application.configuration_templates #=> Array
       #   resp.application.configuration_templates[0] #=> String
+      #
       # @overload update_application(params = {})
       # @param [Hash] params ({})
       def update_application(params = {}, options = {})
@@ -1818,23 +2062,28 @@ module Aws
       # remains unchanged. To clear properties, specify an empty string.
       #
       #  </note>
+      #
       # @option params [required, String] :application_name
       #   The name of the application associated with this version.
       #
       #   If no application is found with this name, `UpdateApplication` returns
       #   an `InvalidParameterValue` error.
+      #
       # @option params [required, String] :version_label
       #   The name of the version to update.
       #
       #   If no application version is found with this label,
       #   `UpdateApplication` returns an `InvalidParameterValue` error.
+      #
       # @option params [String] :description
       #   A new description for this version.
+      #
       # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplicationVersionDescriptionMessage#application_version #ApplicationVersion} => Types::ApplicationVersionDescription
+      #   * {Types::ApplicationVersionDescriptionMessage#application_version #application_version} => Types::ApplicationVersionDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_application_version({
       #     application_name: "ApplicationName", # required
       #     version_label: "VersionLabel", # required
@@ -1842,6 +2091,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_version.application_name #=> String
       #   resp.application_version.description #=> String
       #   resp.application_version.version_label #=> String
@@ -1854,6 +2104,7 @@ module Aws
       #   resp.application_version.date_created #=> Time
       #   resp.application_version.date_updated #=> Time
       #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
+      #
       # @overload update_application_version(params = {})
       # @param [Hash] params ({})
       def update_application_version(params = {}, options = {})
@@ -1875,6 +2126,7 @@ module Aws
       # * DescribeConfigurationOptions
       #
       # ^
+      #
       # @option params [required, String] :application_name
       #   The name of the application associated with the configuration template
       #   to update.
@@ -1882,34 +2134,40 @@ module Aws
       #   If no application is found with this name,
       #   `UpdateConfigurationTemplate` returns an `InvalidParameterValue`
       #   error.
+      #
       # @option params [required, String] :template_name
       #   The name of the configuration template to update.
       #
       #   If no configuration template is found with this name,
       #   `UpdateConfigurationTemplate` returns an `InvalidParameterValue`
       #   error.
+      #
       # @option params [String] :description
       #   A new description for the configuration.
+      #
       # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
       #   A list of configuration option settings to update with the new
       #   specified option value.
+      #
       # @option params [Array<Types::OptionSpecification>] :options_to_remove
       #   A list of configuration options to remove from the configuration set.
       #
       #   Constraint: You can remove only `UserDefined` configuration options.
+      #
       # @return [Types::ConfigurationSettingsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfigurationSettingsDescription#solution_stack_name #SolutionStackName} => String
-      #   * {Types::ConfigurationSettingsDescription#application_name #ApplicationName} => String
-      #   * {Types::ConfigurationSettingsDescription#template_name #TemplateName} => String
-      #   * {Types::ConfigurationSettingsDescription#description #Description} => String
-      #   * {Types::ConfigurationSettingsDescription#environment_name #EnvironmentName} => String
-      #   * {Types::ConfigurationSettingsDescription#deployment_status #DeploymentStatus} => String
-      #   * {Types::ConfigurationSettingsDescription#date_created #DateCreated} => Time
-      #   * {Types::ConfigurationSettingsDescription#date_updated #DateUpdated} => Time
-      #   * {Types::ConfigurationSettingsDescription#option_settings #OptionSettings} => Array&lt;Types::ConfigurationOptionSetting&gt;
+      #   * {Types::ConfigurationSettingsDescription#solution_stack_name #solution_stack_name} => String
+      #   * {Types::ConfigurationSettingsDescription#application_name #application_name} => String
+      #   * {Types::ConfigurationSettingsDescription#template_name #template_name} => String
+      #   * {Types::ConfigurationSettingsDescription#description #description} => String
+      #   * {Types::ConfigurationSettingsDescription#environment_name #environment_name} => String
+      #   * {Types::ConfigurationSettingsDescription#deployment_status #deployment_status} => String
+      #   * {Types::ConfigurationSettingsDescription#date_created #date_created} => Time
+      #   * {Types::ConfigurationSettingsDescription#date_updated #date_updated} => Time
+      #   * {Types::ConfigurationSettingsDescription#option_settings #option_settings} => Array&lt;Types::ConfigurationOptionSetting&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_configuration_template({
       #     application_name: "ApplicationName", # required
       #     template_name: "ConfigurationTemplateName", # required
@@ -1932,6 +2190,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.solution_stack_name #=> String
       #   resp.application_name #=> String
       #   resp.template_name #=> String
@@ -1945,6 +2204,7 @@ module Aws
       #   resp.option_settings[0].namespace #=> String
       #   resp.option_settings[0].option_name #=> String
       #   resp.option_settings[0].value #=> String
+      #
       # @overload update_configuration_template(params = {})
       # @param [Hash] params ({})
       def update_configuration_template(params = {}, options = {})
@@ -1965,8 +2225,10 @@ module Aws
       # individual settings, a draft configuration is created and
       # DescribeConfigurationSettings for this environment returns two setting
       # descriptions with different `DeploymentStatus` values.
+      #
       # @option params [String] :application_name
       #   The name of the application with which the environment is associated.
+      #
       # @option params [String] :environment_id
       #   The ID of the environment to update.
       #
@@ -1976,6 +2238,7 @@ module Aws
       #   Condition: You must specify either this or an EnvironmentName, or
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to update. If no environment with this
       #   name exists, AWS Elastic Beanstalk returns an `InvalidParameterValue`
@@ -1984,6 +2247,7 @@ module Aws
       #   Condition: You must specify either this or an EnvironmentId, or both.
       #   If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
+      #
       # @option params [String] :group_name
       #   The name of the group to which the target environment belongs. Specify
       #   a group name only if the environment's name is specified in an
@@ -1993,55 +2257,64 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
+      #
       # @option params [String] :description
       #   If this parameter is specified, AWS Elastic Beanstalk updates the
       #   description of this environment.
+      #
       # @option params [Types::EnvironmentTier] :tier
       #   This specifies the tier to use to update the environment.
       #
       #   Condition: At this time, if you change the tier version, name, or
       #   type, AWS Elastic Beanstalk returns `InvalidParameterValue` error.
+      #
       # @option params [String] :version_label
       #   If this parameter is specified, AWS Elastic Beanstalk deploys the
       #   named application version to the environment. If no such application
       #   version is found, returns an `InvalidParameterValue` error.
+      #
       # @option params [String] :template_name
       #   If this parameter is specified, AWS Elastic Beanstalk deploys this
       #   configuration template to the environment. If no such configuration
       #   template is found, AWS Elastic Beanstalk returns an
       #   `InvalidParameterValue` error.
+      #
       # @option params [String] :solution_stack_name
       #   This specifies the platform version that the environment will run
       #   after the environment is updated.
+      #
       # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
       #   If specified, AWS Elastic Beanstalk updates the configuration set
       #   associated with the running environment and sets the specified
       #   configuration options to the requested value.
+      #
       # @option params [Array<Types::OptionSpecification>] :options_to_remove
       #   A list of custom user-defined configuration options to remove from the
       #   configuration set for this environment.
+      #
       # @return [Types::EnvironmentDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnvironmentDescription#environment_name #EnvironmentName} => String
-      #   * {Types::EnvironmentDescription#environment_id #EnvironmentId} => String
-      #   * {Types::EnvironmentDescription#application_name #ApplicationName} => String
-      #   * {Types::EnvironmentDescription#version_label #VersionLabel} => String
-      #   * {Types::EnvironmentDescription#solution_stack_name #SolutionStackName} => String
-      #   * {Types::EnvironmentDescription#template_name #TemplateName} => String
-      #   * {Types::EnvironmentDescription#description #Description} => String
-      #   * {Types::EnvironmentDescription#endpoint_url #EndpointURL} => String
-      #   * {Types::EnvironmentDescription#cname #CNAME} => String
-      #   * {Types::EnvironmentDescription#date_created #DateCreated} => Time
-      #   * {Types::EnvironmentDescription#date_updated #DateUpdated} => Time
-      #   * {Types::EnvironmentDescription#status #Status} => String
-      #   * {Types::EnvironmentDescription#abortable_operation_in_progress #AbortableOperationInProgress} => Boolean
-      #   * {Types::EnvironmentDescription#health #Health} => String
-      #   * {Types::EnvironmentDescription#health_status #HealthStatus} => String
-      #   * {Types::EnvironmentDescription#resources #Resources} => Types::EnvironmentResourcesDescription
-      #   * {Types::EnvironmentDescription#tier #Tier} => Types::EnvironmentTier
-      #   * {Types::EnvironmentDescription#environment_links #EnvironmentLinks} => Array&lt;Types::EnvironmentLink&gt;
+      #   * {Types::EnvironmentDescription#environment_name #environment_name} => String
+      #   * {Types::EnvironmentDescription#environment_id #environment_id} => String
+      #   * {Types::EnvironmentDescription#application_name #application_name} => String
+      #   * {Types::EnvironmentDescription#version_label #version_label} => String
+      #   * {Types::EnvironmentDescription#solution_stack_name #solution_stack_name} => String
+      #   * {Types::EnvironmentDescription#template_name #template_name} => String
+      #   * {Types::EnvironmentDescription#description #description} => String
+      #   * {Types::EnvironmentDescription#endpoint_url #endpoint_url} => String
+      #   * {Types::EnvironmentDescription#cname #cname} => String
+      #   * {Types::EnvironmentDescription#date_created #date_created} => Time
+      #   * {Types::EnvironmentDescription#date_updated #date_updated} => Time
+      #   * {Types::EnvironmentDescription#status #status} => String
+      #   * {Types::EnvironmentDescription#abortable_operation_in_progress #abortable_operation_in_progress} => Boolean
+      #   * {Types::EnvironmentDescription#health #health} => String
+      #   * {Types::EnvironmentDescription#health_status #health_status} => String
+      #   * {Types::EnvironmentDescription#resources #resources} => Types::EnvironmentResourcesDescription
+      #   * {Types::EnvironmentDescription#tier #tier} => Types::EnvironmentTier
+      #   * {Types::EnvironmentDescription#environment_links #environment_links} => Array&lt;Types::EnvironmentLink&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_environment({
       #     application_name: "ApplicationName",
       #     environment_id: "EnvironmentId",
@@ -2074,6 +2347,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.environment_name #=> String
       #   resp.environment_id #=> String
       #   resp.application_name #=> String
@@ -2100,6 +2374,7 @@ module Aws
       #   resp.environment_links #=> Array
       #   resp.environment_links[0].link_name #=> String
       #   resp.environment_links[0].environment_name #=> String
+      #
       # @overload update_environment(params = {})
       # @param [Hash] params ({})
       def update_environment(params = {}, options = {})
@@ -2113,26 +2388,32 @@ module Aws
       #
       # This action returns a list of messages indicating any errors or
       # warnings associated with the selection of option values.
+      #
       # @option params [required, String] :application_name
       #   The name of the application that the configuration template or
       #   environment belongs to.
+      #
       # @option params [String] :template_name
       #   The name of the configuration template to validate the settings
       #   against.
       #
       #   Condition: You cannot specify both this and an environment name.
+      #
       # @option params [String] :environment_name
       #   The name of the environment to validate the settings against.
       #
       #   Condition: You cannot specify both this and a configuration template
       #   name.
+      #
       # @option params [required, Array<Types::ConfigurationOptionSetting>] :option_settings
       #   A list of the options and desired values to evaluate.
+      #
       # @return [Types::ConfigurationSettingsValidationMessages] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfigurationSettingsValidationMessages#messages #Messages} => Array&lt;Types::ValidationMessage&gt;
+      #   * {Types::ConfigurationSettingsValidationMessages#messages #messages} => Array&lt;Types::ValidationMessage&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.validate_configuration_settings({
       #     application_name: "ApplicationName", # required
       #     template_name: "ConfigurationTemplateName",
@@ -2148,11 +2429,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.messages #=> Array
       #   resp.messages[0].message #=> String
       #   resp.messages[0].severity #=> String, one of "error", "warning"
       #   resp.messages[0].namespace #=> String
       #   resp.messages[0].option_name #=> String
+      #
       # @overload validate_configuration_settings(params = {})
       # @param [Hash] params ({})
       def validate_configuration_settings(params = {}, options = {})

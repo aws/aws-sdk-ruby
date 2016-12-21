@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -143,13 +157,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
+      #
       # @option params [required, Array<String>] :load_balancer_names
       #   The name of the load balancer. You can specify one load balancer only.
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The tags.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags({
       #     load_balancer_names: ["AccessPointName"], # required
       #     tags: [ # required
@@ -159,6 +177,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags(params = {})
       # @param [Hash] params ({})
       def add_tags(params = {}, options = {})
@@ -176,24 +195,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<String>] :security_groups
       #   The IDs of the security groups to associate with the load balancer.
       #   Note that you cannot specify the name of the security group.
+      #
       # @return [Types::ApplySecurityGroupsToLoadBalancerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplySecurityGroupsToLoadBalancerOutput#security_groups #SecurityGroups} => Array&lt;String&gt;
+      #   * {Types::ApplySecurityGroupsToLoadBalancerOutput#security_groups #security_groups} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.apply_security_groups_to_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #     security_groups: ["SecurityGroupId"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.security_groups #=> Array
       #   resp.security_groups[0] #=> String
+      #
       # @overload apply_security_groups_to_load_balancer(params = {})
       # @param [Hash] params ({})
       def apply_security_groups_to_load_balancer(params = {}, options = {})
@@ -211,24 +236,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<String>] :subnets
       #   The IDs of the subnets to add. You can add only one subnet per
       #   Availability Zone.
+      #
       # @return [Types::AttachLoadBalancerToSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AttachLoadBalancerToSubnetsOutput#subnets #Subnets} => Array&lt;String&gt;
+      #   * {Types::AttachLoadBalancerToSubnetsOutput#subnets #subnets} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.attach_load_balancer_to_subnets({
       #     load_balancer_name: "AccessPointName", # required
       #     subnets: ["SubnetId"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.subnets #=> Array
       #   resp.subnets[0] #=> String
+      #
       # @overload attach_load_balancer_to_subnets(params = {})
       # @param [Hash] params ({})
       def attach_load_balancer_to_subnets(params = {}, options = {})
@@ -245,15 +276,19 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Types::HealthCheck] :health_check
       #   The configuration information.
+      #
       # @return [Types::ConfigureHealthCheckOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConfigureHealthCheckOutput#health_check #HealthCheck} => Types::HealthCheck
+      #   * {Types::ConfigureHealthCheckOutput#health_check #health_check} => Types::HealthCheck
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.configure_health_check({
       #     load_balancer_name: "AccessPointName", # required
       #     health_check: { # required
@@ -266,11 +301,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.health_check.target #=> String
       #   resp.health_check.interval #=> Integer
       #   resp.health_check.timeout #=> Integer
       #   resp.health_check.unhealthy_threshold #=> Integer
       #   resp.health_check.healthy_threshold #=> Integer
+      #
       # @overload configure_health_check(params = {})
       # @param [Hash] params ({})
       def configure_health_check(params = {}, options = {})
@@ -298,22 +335,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, String] :policy_name
       #   The name of the policy being created. Policy names must consist of
       #   alphanumeric characters and dashes (-). This name must be unique
       #   within the set of policies for this load balancer.
+      #
       # @option params [required, String] :cookie_name
       #   The name of the application cookie used for stickiness.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_app_cookie_stickiness_policy({
       #     load_balancer_name: "AccessPointName", # required
       #     policy_name: "PolicyName", # required
       #     cookie_name: "CookieName", # required
       #   })
+      #
       # @overload create_app_cookie_stickiness_policy(params = {})
       # @param [Hash] params ({})
       def create_app_cookie_stickiness_policy(params = {}, options = {})
@@ -344,25 +387,31 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, String] :policy_name
       #   The name of the policy being created. Policy names must consist of
       #   alphanumeric characters and dashes (-). This name must be unique
       #   within the set of policies for this load balancer.
+      #
       # @option params [Integer] :cookie_expiration_period
       #   The time period, in seconds, after which the cookie should be
       #   considered stale. If you do not specify this parameter, the default
       #   value is 0, which indicates that the sticky session should last for
       #   the duration of the browser session.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_lb_cookie_stickiness_policy({
       #     load_balancer_name: "AccessPointName", # required
       #     policy_name: "PolicyName", # required
       #     cookie_expiration_period: 1,
       #   })
+      #
       # @overload create_lb_cookie_stickiness_policy(params = {})
       # @param [Hash] params ({})
       def create_lb_cookie_stickiness_policy(params = {}, options = {})
@@ -389,6 +438,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       #
@@ -396,6 +446,7 @@ module Aws
       #   region, must have a maximum of 32 characters, must contain only
       #   alphanumeric characters or hyphens, and cannot begin or end with a
       #   hyphen.
+      #
       # @option params [required, Array<Types::Listener>] :listeners
       #   The listeners.
       #
@@ -405,6 +456,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+      #
       # @option params [Array<String>] :availability_zones
       #   One or more Availability Zones from the same region as the load
       #   balancer.
@@ -413,12 +465,15 @@ module Aws
       #
       #   You can add more Availability Zones after you create the load balancer
       #   using EnableAvailabilityZonesForLoadBalancer.
+      #
       # @option params [Array<String>] :subnets
       #   The IDs of the subnets in your VPC to attach to the load balancer.
       #   Specify one subnet per Availability Zone specified in
       #   `AvailabilityZones`.
+      #
       # @option params [Array<String>] :security_groups
       #   The IDs of the security groups to assign to the load balancer.
+      #
       # @option params [String] :scheme
       #   The type of a load balancer. Valid only for load balancers in a VPC.
       #
@@ -434,6 +489,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags to assign to the load balancer.
       #
@@ -443,11 +499,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
+      #
       # @return [Types::CreateAccessPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateAccessPointOutput#dns_name #DNSName} => String
+      #   * {Types::CreateAccessPointOutput#dns_name #dns_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #     listeners: [ # required
@@ -472,7 +530,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.dns_name #=> String
+      #
       # @overload create_load_balancer(params = {})
       # @param [Hash] params ({})
       def create_load_balancer(params = {}, options = {})
@@ -491,13 +551,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<Types::Listener>] :listeners
       #   The listeners.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_load_balancer_listeners({
       #     load_balancer_name: "AccessPointName", # required
       #     listeners: [ # required
@@ -510,6 +574,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload create_load_balancer_listeners(params = {})
       # @param [Hash] params ({})
       def create_load_balancer_listeners(params = {}, options = {})
@@ -523,19 +588,25 @@ module Aws
       # Policies are settings that are saved for your load balancer and that
       # can be applied to the listener or the application server, depending on
       # the policy type.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, String] :policy_name
       #   The name of the load balancer policy to be created. This name must be
       #   unique within the set of policies for this load balancer.
+      #
       # @option params [required, String] :policy_type_name
       #   The name of the base policy type. To get the list of policy types, use
       #   DescribeLoadBalancerPolicyTypes.
+      #
       # @option params [Array<Types::PolicyAttribute>] :policy_attributes
       #   The policy attributes.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_load_balancer_policy({
       #     load_balancer_name: "AccessPointName", # required
       #     policy_name: "PolicyName", # required
@@ -547,6 +618,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload create_load_balancer_policy(params = {})
       # @param [Hash] params ({})
       def create_load_balancer_policy(params = {}, options = {})
@@ -564,14 +636,18 @@ module Aws
       #
       # If the load balancer does not exist or has already been deleted, the
       # call to `DeleteLoadBalancer` still succeeds.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #   })
+      #
       # @overload delete_load_balancer(params = {})
       # @param [Hash] params ({})
       def delete_load_balancer(params = {}, options = {})
@@ -580,17 +656,22 @@ module Aws
       end
 
       # Deletes the specified listeners from the specified load balancer.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<Integer>] :load_balancer_ports
       #   The client port numbers of the listeners.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_load_balancer_listeners({
       #     load_balancer_name: "AccessPointName", # required
       #     load_balancer_ports: [1], # required
       #   })
+      #
       # @overload delete_load_balancer_listeners(params = {})
       # @param [Hash] params ({})
       def delete_load_balancer_listeners(params = {}, options = {})
@@ -600,17 +681,22 @@ module Aws
 
       # Deletes the specified policy from the specified load balancer. This
       # policy must not be enabled for any listeners.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, String] :policy_name
       #   The name of the policy.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_load_balancer_policy({
       #     load_balancer_name: "AccessPointName", # required
       #     policy_name: "PolicyName", # required
       #   })
+      #
       # @overload delete_load_balancer_policy(params = {})
       # @param [Hash] params ({})
       def delete_load_balancer_policy(params = {}, options = {})
@@ -631,15 +717,19 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<Types::Instance>] :instances
       #   The IDs of the instances.
+      #
       # @return [Types::DeregisterEndPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeregisterEndPointsOutput#instances #Instances} => Array&lt;Types::Instance&gt;
+      #   * {Types::DeregisterEndPointsOutput#instances #instances} => Array&lt;Types::Instance&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_instances_from_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #     instances: [ # required
@@ -650,8 +740,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instances #=> Array
       #   resp.instances[0].instance_id #=> String
+      #
       # @overload deregister_instances_from_load_balancer(params = {})
       # @param [Hash] params ({})
       def deregister_instances_from_load_balancer(params = {}, options = {})
@@ -665,15 +757,19 @@ module Aws
       # with the load balancer. If instances are specified, their state is
       # returned even if they are no longer registered with the load balancer.
       # The state of terminated instances is not returned.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [Array<Types::Instance>] :instances
       #   The IDs of the instances.
+      #
       # @return [Types::DescribeEndPointStateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEndPointStateOutput#instance_states #InstanceStates} => Array&lt;Types::InstanceState&gt;
+      #   * {Types::DescribeEndPointStateOutput#instance_states #instance_states} => Array&lt;Types::InstanceState&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_instance_health({
       #     load_balancer_name: "AccessPointName", # required
       #     instances: [
@@ -684,11 +780,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instance_states #=> Array
       #   resp.instance_states[0].instance_id #=> String
       #   resp.instance_states[0].state #=> String
       #   resp.instance_states[0].reason_code #=> String
       #   resp.instance_states[0].description #=> String
+      #
       # @overload describe_instance_health(params = {})
       # @param [Hash] params ({})
       def describe_instance_health(params = {}, options = {})
@@ -697,18 +795,22 @@ module Aws
       end
 
       # Describes the attributes for the specified load balancer.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @return [Types::DescribeLoadBalancerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLoadBalancerAttributesOutput#load_balancer_attributes #LoadBalancerAttributes} => Types::LoadBalancerAttributes
+      #   * {Types::DescribeLoadBalancerAttributesOutput#load_balancer_attributes #load_balancer_attributes} => Types::LoadBalancerAttributes
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_balancer_attributes({
       #     load_balancer_name: "AccessPointName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.load_balancer_attributes.cross_zone_load_balancing.enabled #=> Boolean
       #   resp.load_balancer_attributes.access_log.enabled #=> Boolean
       #   resp.load_balancer_attributes.access_log.s3_bucket_name #=> String
@@ -720,6 +822,7 @@ module Aws
       #   resp.load_balancer_attributes.additional_attributes #=> Array
       #   resp.load_balancer_attributes.additional_attributes[0].key #=> String
       #   resp.load_balancer_attributes.additional_attributes[0].value #=> String
+      #
       # @overload describe_load_balancer_attributes(params = {})
       # @param [Hash] params ({})
       def describe_load_balancer_attributes(params = {}, options = {})
@@ -736,27 +839,33 @@ module Aws
       # balancer name, the action returns descriptions of the specified sample
       # policies, or descriptions of all sample policies. The names of the
       # sample policies have the `ELBSample-` prefix.
+      #
       # @option params [String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [Array<String>] :policy_names
       #   The names of the policies.
+      #
       # @return [Types::DescribeLoadBalancerPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLoadBalancerPoliciesOutput#policy_descriptions #PolicyDescriptions} => Array&lt;Types::PolicyDescription&gt;
+      #   * {Types::DescribeLoadBalancerPoliciesOutput#policy_descriptions #policy_descriptions} => Array&lt;Types::PolicyDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_balancer_policies({
       #     load_balancer_name: "AccessPointName",
       #     policy_names: ["PolicyName"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy_descriptions #=> Array
       #   resp.policy_descriptions[0].policy_name #=> String
       #   resp.policy_descriptions[0].policy_type_name #=> String
       #   resp.policy_descriptions[0].policy_attribute_descriptions #=> Array
       #   resp.policy_descriptions[0].policy_attribute_descriptions[0].attribute_name #=> String
       #   resp.policy_descriptions[0].policy_attribute_descriptions[0].attribute_value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #
       # @overload describe_load_balancer_policies(params = {})
       # @param [Hash] params ({})
       def describe_load_balancer_policies(params = {}, options = {})
@@ -776,19 +885,23 @@ module Aws
       # for any of these policy types. Then, depending on the policy type, use
       # either SetLoadBalancerPoliciesOfListener or
       # SetLoadBalancerPoliciesForBackendServer to set the policy.
+      #
       # @option params [Array<String>] :policy_type_names
       #   The names of the policy types. If no names are specified, describes
       #   all policy types defined by Elastic Load Balancing.
+      #
       # @return [Types::DescribeLoadBalancerPolicyTypesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLoadBalancerPolicyTypesOutput#policy_type_descriptions #PolicyTypeDescriptions} => Array&lt;Types::PolicyTypeDescription&gt;
+      #   * {Types::DescribeLoadBalancerPolicyTypesOutput#policy_type_descriptions #policy_type_descriptions} => Array&lt;Types::PolicyTypeDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_balancer_policy_types({
       #     policy_type_names: ["PolicyTypeName"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy_type_descriptions #=> Array
       #   resp.policy_type_descriptions[0].policy_type_name #=> String
       #   resp.policy_type_descriptions[0].description #=> String
@@ -798,6 +911,7 @@ module Aws
       #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].description #=> String
       #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].default_value #=> String
       #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].cardinality #=> String
+      #
       # @overload describe_load_balancer_policy_types(params = {})
       # @param [Hash] params ({})
       def describe_load_balancer_policy_types(params = {}, options = {})
@@ -807,20 +921,25 @@ module Aws
 
       # Describes the specified the load balancers. If no load balancers are
       # specified, the call describes all of your load balancers.
+      #
       # @option params [Array<String>] :load_balancer_names
       #   The names of the load balancers.
+      #
       # @option params [String] :marker
       #   The marker for the next set of results. (You received this marker from
       #   a previous call.)
+      #
       # @option params [Integer] :page_size
       #   The maximum number of results to return with this call (a number from
       #   1 to 400). The default is 400.
+      #
       # @return [Types::DescribeAccessPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAccessPointsOutput#load_balancer_descriptions #LoadBalancerDescriptions} => Array&lt;Types::LoadBalancerDescription&gt;
-      #   * {Types::DescribeAccessPointsOutput#next_marker #NextMarker} => String
+      #   * {Types::DescribeAccessPointsOutput#load_balancer_descriptions #load_balancer_descriptions} => Array&lt;Types::LoadBalancerDescription&gt;
+      #   * {Types::DescribeAccessPointsOutput#next_marker #next_marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_balancers({
       #     load_balancer_names: ["AccessPointName"],
       #     marker: "Marker",
@@ -828,6 +947,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.load_balancer_descriptions #=> Array
       #   resp.load_balancer_descriptions[0].load_balancer_name #=> String
       #   resp.load_balancer_descriptions[0].dns_name #=> String
@@ -872,6 +992,7 @@ module Aws
       #   resp.load_balancer_descriptions[0].created_time #=> Time
       #   resp.load_balancer_descriptions[0].scheme #=> String
       #   resp.next_marker #=> String
+      #
       # @overload describe_load_balancers(params = {})
       # @param [Hash] params ({})
       def describe_load_balancers(params = {}, options = {})
@@ -880,23 +1001,28 @@ module Aws
       end
 
       # Describes the tags associated with the specified load balancers.
+      #
       # @option params [required, Array<String>] :load_balancer_names
       #   The names of the load balancers.
+      #
       # @return [Types::DescribeTagsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTagsOutput#tag_descriptions #TagDescriptions} => Array&lt;Types::TagDescription&gt;
+      #   * {Types::DescribeTagsOutput#tag_descriptions #tag_descriptions} => Array&lt;Types::TagDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_tags({
       #     load_balancer_names: ["AccessPointName"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_descriptions #=> Array
       #   resp.tag_descriptions[0].load_balancer_name #=> String
       #   resp.tag_descriptions[0].tags #=> Array
       #   resp.tag_descriptions[0].tags[0].key #=> String
       #   resp.tag_descriptions[0].tags[0].value #=> String
+      #
       # @overload describe_tags(params = {})
       # @param [Hash] params ({})
       def describe_tags(params = {}, options = {})
@@ -911,23 +1037,29 @@ module Aws
       # balancer in the removed subnet go into the `OutOfService` state. Then,
       # the load balancer balances the traffic among the remaining routable
       # subnets.
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<String>] :subnets
       #   The IDs of the subnets.
+      #
       # @return [Types::DetachLoadBalancerFromSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DetachLoadBalancerFromSubnetsOutput#subnets #Subnets} => Array&lt;String&gt;
+      #   * {Types::DetachLoadBalancerFromSubnetsOutput#subnets #subnets} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detach_load_balancer_from_subnets({
       #     load_balancer_name: "AccessPointName", # required
       #     subnets: ["SubnetId"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.subnets #=> Array
       #   resp.subnets[0] #=> String
+      #
       # @overload detach_load_balancer_from_subnets(params = {})
       # @param [Hash] params ({})
       def detach_load_balancer_from_subnets(params = {}, options = {})
@@ -951,23 +1083,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<String>] :availability_zones
       #   The Availability Zones.
+      #
       # @return [Types::RemoveAvailabilityZonesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RemoveAvailabilityZonesOutput#availability_zones #AvailabilityZones} => Array&lt;String&gt;
+      #   * {Types::RemoveAvailabilityZonesOutput#availability_zones #availability_zones} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_availability_zones_for_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #     availability_zones: ["AvailabilityZone"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.availability_zones #=> Array
       #   resp.availability_zones[0] #=> String
+      #
       # @overload disable_availability_zones_for_load_balancer(params = {})
       # @param [Hash] params ({})
       def disable_availability_zones_for_load_balancer(params = {}, options = {})
@@ -987,24 +1125,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<String>] :availability_zones
       #   The Availability Zones. These must be in the same region as the load
       #   balancer.
+      #
       # @return [Types::AddAvailabilityZonesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AddAvailabilityZonesOutput#availability_zones #AvailabilityZones} => Array&lt;String&gt;
+      #   * {Types::AddAvailabilityZonesOutput#availability_zones #availability_zones} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_availability_zones_for_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #     availability_zones: ["AvailabilityZone"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.availability_zones #=> Array
       #   resp.availability_zones[0] #=> String
+      #
       # @overload enable_availability_zones_for_load_balancer(params = {})
       # @param [Hash] params ({})
       def enable_availability_zones_for_load_balancer(params = {}, options = {})
@@ -1037,16 +1181,20 @@ module Aws
       # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
       # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html
       # [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Types::LoadBalancerAttributes] :load_balancer_attributes
       #   The attributes of the load balancer.
+      #
       # @return [Types::ModifyLoadBalancerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyLoadBalancerAttributesOutput#load_balancer_name #LoadBalancerName} => String
-      #   * {Types::ModifyLoadBalancerAttributesOutput#load_balancer_attributes #LoadBalancerAttributes} => Types::LoadBalancerAttributes
+      #   * {Types::ModifyLoadBalancerAttributesOutput#load_balancer_name #load_balancer_name} => String
+      #   * {Types::ModifyLoadBalancerAttributesOutput#load_balancer_attributes #load_balancer_attributes} => Types::LoadBalancerAttributes
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_load_balancer_attributes({
       #     load_balancer_name: "AccessPointName", # required
       #     load_balancer_attributes: { # required
@@ -1076,6 +1224,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.load_balancer_name #=> String
       #   resp.load_balancer_attributes.cross_zone_load_balancing.enabled #=> Boolean
       #   resp.load_balancer_attributes.access_log.enabled #=> Boolean
@@ -1088,6 +1237,7 @@ module Aws
       #   resp.load_balancer_attributes.additional_attributes #=> Array
       #   resp.load_balancer_attributes.additional_attributes[0].key #=> String
       #   resp.load_balancer_attributes.additional_attributes[0].value #=> String
+      #
       # @overload modify_load_balancer_attributes(params = {})
       # @param [Hash] params ({})
       def modify_load_balancer_attributes(params = {}, options = {})
@@ -1124,15 +1274,19 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Array<Types::Instance>] :instances
       #   The IDs of the instances.
+      #
       # @return [Types::RegisterEndPointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterEndPointsOutput#instances #Instances} => Array&lt;Types::Instance&gt;
+      #   * {Types::RegisterEndPointsOutput#instances #instances} => Array&lt;Types::Instance&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_instances_with_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #     instances: [ # required
@@ -1143,8 +1297,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instances #=> Array
       #   resp.instances[0].instance_id #=> String
+      #
       # @overload register_instances_with_load_balancer(params = {})
       # @param [Hash] params ({})
       def register_instances_with_load_balancer(params = {}, options = {})
@@ -1153,14 +1309,18 @@ module Aws
       end
 
       # Removes one or more tags from the specified load balancer.
+      #
       # @option params [required, Array<String>] :load_balancer_names
       #   The name of the load balancer. You can specify a maximum of one load
       #   balancer name.
+      #
       # @option params [required, Array<Types::TagKeyOnly>] :tags
       #   The list of tag keys to remove.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags({
       #     load_balancer_names: ["AccessPointName"], # required
       #     tags: [ # required
@@ -1169,6 +1329,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload remove_tags(params = {})
       # @param [Hash] params ({})
       def remove_tags(params = {}, options = {})
@@ -1187,20 +1348,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Integer] :load_balancer_port
       #   The port that uses the specified SSL certificate.
+      #
       # @option params [required, String] :ssl_certificate_id
       #   The Amazon Resource Name (ARN) of the SSL certificate.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_load_balancer_listener_ssl_certificate({
       #     load_balancer_name: "AccessPointName", # required
       #     load_balancer_port: 1, # required
       #     ssl_certificate_id: "SSLCertificateId", # required
       #   })
+      #
       # @overload set_load_balancer_listener_ssl_certificate(params = {})
       # @param [Hash] params ({})
       def set_load_balancer_listener_ssl_certificate(params = {}, options = {})
@@ -1231,21 +1398,27 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt
       # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Integer] :instance_port
       #   The port number associated with the EC2 instance.
+      #
       # @option params [required, Array<String>] :policy_names
       #   The names of the policies. If the list is empty, then all current
       #   polices are removed from the EC2 instance.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_load_balancer_policies_for_backend_server({
       #     load_balancer_name: "AccessPointName", # required
       #     instance_port: 1, # required
       #     policy_names: ["PolicyName"], # required
       #   })
+      #
       # @overload set_load_balancer_policies_for_backend_server(params = {})
       # @param [Hash] params ({})
       def set_load_balancer_policies_for_backend_server(params = {}, options = {})
@@ -1269,22 +1442,28 @@ module Aws
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html
       # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
       # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
+      #
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
+      #
       # @option params [required, Integer] :load_balancer_port
       #   The external port of the load balancer.
+      #
       # @option params [required, Array<String>] :policy_names
       #   The names of the policies. This list must include all policies to be
       #   enabled. If you omit a policy that is currently enabled, it is
       #   disabled. If the list is empty, all current policies are disabled.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_load_balancer_policies_of_listener({
       #     load_balancer_name: "AccessPointName", # required
       #     load_balancer_port: 1, # required
       #     policy_names: ["PolicyName"], # required
       #   })
+      #
       # @overload set_load_balancer_policies_of_listener(params = {})
       # @param [Hash] params ({})
       def set_load_balancer_policies_of_listener(params = {}, options = {})
@@ -1426,8 +1605,8 @@ module Aws
 
       def waiters
         {
-          instance_deregistered: Waiters::InstanceDeregistered,
           any_instance_in_service: Waiters::AnyInstanceInService,
+          instance_deregistered: Waiters::InstanceDeregistered,
           instance_in_service: Waiters::InstanceInService
         }
       end

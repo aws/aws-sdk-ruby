@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -146,6 +160,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Tagging.html
+      #
       # @option params [required, String] :resource_name
       #   The Amazon Resource Name (ARN) of the resource to which the tags are
       #   to be added, for example
@@ -158,14 +173,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   A list of cost allocation tags to be added to this resource. A tag is
       #   a key-value pair. A tag key must be accompanied by a tag value.
+      #
       # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TagListMessage#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_resource({
       #     resource_name: "String", # required
       #     tags: [ # required
@@ -177,9 +195,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
       def add_tags_to_resource(params = {}, options = {})
@@ -195,20 +215,25 @@ module Aws
       # region to an ElastiCache cluster in another region.
       #
       #  </note>
+      #
       # @option params [required, String] :cache_security_group_name
       #   The cache security group that allows network ingress.
+      #
       # @option params [required, String] :ec2_security_group_name
       #   The Amazon EC2 security group to be authorized for ingress to the
       #   cache security group.
+      #
       # @option params [required, String] :ec2_security_group_owner_id
       #   The AWS account number of the Amazon EC2 security group owner. Note
       #   that this is not the same thing as an AWS access key ID - you must
       #   provide a valid AWS account number for this parameter.
+      #
       # @return [Types::AuthorizeCacheSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AuthorizeCacheSecurityGroupIngressResult#cache_security_group #CacheSecurityGroup} => Types::CacheSecurityGroup
+      #   * {Types::AuthorizeCacheSecurityGroupIngressResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.authorize_cache_security_group_ingress({
       #     cache_security_group_name: "String", # required
       #     ec2_security_group_name: "String", # required
@@ -216,6 +241,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_security_group.owner_id #=> String
       #   resp.cache_security_group.cache_security_group_name #=> String
       #   resp.cache_security_group.description #=> String
@@ -223,6 +249,7 @@ module Aws
       #   resp.cache_security_group.ec2_security_groups[0].status #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      #
       # @overload authorize_cache_security_group_ingress(params = {})
       # @param [Hash] params ({})
       def authorize_cache_security_group_ingress(params = {}, options = {})
@@ -249,54 +276,54 @@ module Aws
       # **Error Messages**
       #
       # * **Error Message:** The S3 bucket %s is outside of the region.
-      # 
+      #
       #   **Solution:** Create an Amazon S3 bucket in the same region as your
       #   snapshot. For more information, see [Step 1: Create an Amazon S3
       #   Bucket][3] in the ElastiCache User Guide.
       #
       # * **Error Message:** The S3 bucket %s does not exist.
-      # 
+      #
       #   **Solution:** Create an Amazon S3 bucket in the same region as your
       #   snapshot. For more information, see [Step 1: Create an Amazon S3
       #   Bucket][3] in the ElastiCache User Guide.
       #
       # * **Error Message:** The S3 bucket %s is not owned by the
       #   authenticated user.
-      # 
+      #
       #   **Solution:** Create an Amazon S3 bucket in the same region as your
       #   snapshot. For more information, see [Step 1: Create an Amazon S3
       #   Bucket][3] in the ElastiCache User Guide.
       #
       # * **Error Message:** The authenticated user does not have sufficient
       #   permissions to perform the desired activity.
-      # 
+      #
       #   **Solution:** Contact your system administrator to get the needed
       #   permissions.
       #
       # * **Error Message:** The S3 bucket %s already contains an object with
       #   key %s.
-      # 
+      #
       #   **Solution:** Give the `TargetSnapshotName` a new and unique value.
       #   If exporting a snapshot, you could alternatively create a new Amazon
       #   S3 bucket and use this same value for `TargetSnapshotName`.
       #
       # * <b>Error Message: </b> ElastiCache has not been granted READ
       #   permissions %s on the S3 Bucket.
-      # 
+      #
       #   **Solution:** Add List and Read permissions on the bucket. For more
       #   information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
       #   Bucket][4] in the ElastiCache User Guide.
       #
       # * <b>Error Message: </b> ElastiCache has not been granted WRITE
       #   permissions %s on the S3 Bucket.
-      # 
+      #
       #   **Solution:** Add Upload/Delete permissions on the bucket. For more
       #   information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
       #   Bucket][4] in the ElastiCache User Guide.
       #
       # * <b>Error Message: </b> ElastiCache has not been granted READ\_ACP
       #   permissions %s on the S3 Bucket.
-      # 
+      #
       #   **Solution:** Add View Permissions on the bucket. For more
       #   information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
       #   Bucket][4] in the ElastiCache User Guide.
@@ -307,12 +334,15 @@ module Aws
       # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/IAM.html
       # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket
       # [4]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
+      #
       # @option params [required, String] :source_snapshot_name
       #   The name of an existing snapshot from which to make a copy.
+      #
       # @option params [required, String] :target_snapshot_name
       #   A name for the snapshot copy. ElastiCache does not permit overwriting
       #   a snapshot, therefore this name must be unique within its context -
       #   ElastiCache or an Amazon S3 bucket if exporting.
+      #
       # @option params [String] :target_bucket
       #   The Amazon S3 bucket to which the snapshot is exported. This parameter
       #   is used only when exporting a snapshot for external access.
@@ -329,11 +359,13 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
       #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
+      #
       # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CopySnapshotResult#snapshot #Snapshot} => Types::Snapshot
+      #   * {Types::CopySnapshotResult#snapshot #snapshot} => Types::Snapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.copy_snapshot({
       #     source_snapshot_name: "String", # required
       #     target_snapshot_name: "String", # required
@@ -341,6 +373,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshot.snapshot_name #=> String
       #   resp.snapshot.replication_group_id #=> String
       #   resp.snapshot.replication_group_description #=> String
@@ -376,6 +409,7 @@ module Aws
       #   resp.snapshot.node_snapshots[0].cache_size #=> String
       #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+      #
       # @overload copy_snapshot(params = {})
       # @param [Hash] params ({})
       def copy_snapshot(params = {}, options = {})
@@ -389,6 +423,7 @@ module Aws
       # Due to current limitations on Redis (cluster mode disabled), this
       # operation or parameter is not supported on Redis (cluster mode
       # enabled) replication groups.
+      #
       # @option params [required, String] :cache_cluster_id
       #   The node group (shard) identifier. This parameter is stored as a
       #   lowercase string.
@@ -400,6 +435,7 @@ module Aws
       #   * The first character must be a letter.
       #
       #   * A name cannot end with a hyphen or contain two consecutive hyphens.
+      #
       # @option params [String] :replication_group_id
       #   Due to current limitations on Redis (cluster mode disabled), this
       #   operation or parameter is not supported on Redis (cluster mode
@@ -419,6 +455,7 @@ module Aws
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
       #    </note>
+      #
       # @option params [String] :az_mode
       #   Specifies whether the nodes in this Memcached cluster are created in a
       #   single Availability Zone or created across multiple Availability Zones
@@ -428,6 +465,7 @@ module Aws
       #
       #   If the `AZMode` and `PreferredAvailabilityZones` are not specified,
       #   ElastiCache assumes `single-az` mode.
+      #
       # @option params [String] :preferred_availability_zone
       #   The EC2 Availability Zone in which the cache cluster is created.
       #
@@ -436,6 +474,7 @@ module Aws
       #   multiple Availability Zones, use `PreferredAvailabilityZones`.
       #
       #   Default: System chosen Availability Zone.
+      #
       # @option params [Array<String>] :preferred_availability_zones
       #   A list of the Availability Zones in which cache nodes are created. The
       #   order of the zones in the list is not important.
@@ -456,6 +495,7 @@ module Aws
       #   multiple times in the list.
       #
       #   Default: System chosen Availability Zones.
+      #
       # @option params [Integer] :num_cache_nodes
       #   The initial number of cache nodes that the cache cluster has.
       #
@@ -469,6 +509,7 @@ module Aws
       #
       #
       #   [1]: http://aws.amazon.com/contact-us/elasticache-node-limit-request/
+      #
       # @option params [String] :cache_node_type
       #   The compute and memory capacity of the nodes in the node group
       #   (shard).
@@ -518,10 +559,12 @@ module Aws
       #   [1]: http://aws.amazon.com/elasticache/details
       #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
       #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+      #
       # @option params [String] :engine
       #   The name of the cache engine to be used for this cache cluster.
       #
       #   Valid values for this parameter are: `memcached` \| `redis`
+      #
       # @option params [String] :engine_version
       #   The version number of the cache engine to be used for this cache
       #   cluster. To view the supported cache engine versions, use the
@@ -536,11 +579,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+      #
       # @option params [String] :cache_parameter_group_name
       #   The name of the parameter group to associate with this cache cluster.
       #   If this argument is omitted, the default parameter group for the
       #   specified engine is used. You cannot use any parameter group which has
       #   `cluster-enabled='yes'` when creating a cluster.
+      #
       # @option params [String] :cache_subnet_group_name
       #   The name of the subnet group to be used for the cache cluster.
       #
@@ -554,19 +599,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
+      #
       # @option params [Array<String>] :cache_security_group_names
       #   A list of security group names to associate with this cache cluster.
       #
       #   Use this parameter only when you are creating a cache cluster outside
       #   of an Amazon Virtual Private Cloud (Amazon VPC).
+      #
       # @option params [Array<String>] :security_group_ids
       #   One or more VPC security groups associated with the cache cluster.
       #
       #   Use this parameter only when you are creating a cache cluster in an
       #   Amazon Virtual Private Cloud (Amazon VPC).
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of cost allocation tags to be added to this resource. A tag is
       #   a key-value pair. A tag key must be accompanied by a tag value.
+      #
       # @option params [Array<String>] :snapshot_arns
       #   A single-element string list containing an Amazon Resource Name (ARN)
       #   that uniquely identifies a Redis RDB snapshot file stored in Amazon
@@ -578,6 +627,7 @@ module Aws
       #    </note>
       #
       #   Example of an Amazon S3 ARN: `arn:aws:s3:::my_bucket/snapshot1.rdb`
+      #
       # @option params [String] :snapshot_name
       #   The name of a Redis snapshot from which to restore data into the new
       #   node group (shard). The snapshot status changes to `restoring` while
@@ -586,6 +636,7 @@ module Aws
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
       #    </note>
+      #
       # @option params [String] :preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the cache
       #   cluster is performed. It is specified as a range in the format
@@ -614,8 +665,10 @@ module Aws
       #   * `sat`
       #
       #   Example: `sun:23:00-mon:01:30`
+      #
       # @option params [Integer] :port
       #   The port number on which each of the cache nodes accepts connections.
+      #
       # @option params [String] :notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
       #   Service (SNS) topic to which notifications are sent.
@@ -624,8 +677,10 @@ module Aws
       #   owner.
       #
       #    </note>
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   This parameter is currently disabled.
+      #
       # @option params [Integer] :snapshot_retention_limit
       #   The number of days for which ElastiCache retains automatic snapshots
       #   before deleting them. For example, if you set `SnapshotRetentionLimit`
@@ -638,6 +693,7 @@ module Aws
       #
       #   Default: 0 (i.e., automatic backups are disabled for this cache
       #   cluster).
+      #
       # @option params [String] :snapshot_window
       #   The daily time range (in UTC) during which ElastiCache begins taking a
       #   daily snapshot of your node group (shard).
@@ -649,6 +705,7 @@ module Aws
       #
       #   **Note:** This parameter is only valid if the `Engine` parameter is
       #   `redis`.
+      #
       # @option params [String] :auth_token
       #   The password used to access a password protected server.
       #
@@ -667,11 +724,13 @@ module Aws
       #
       #
       #   [1]: http://redis.io/commands/AUTH
+      #
       # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateCacheClusterResult#cache_cluster #CacheCluster} => Types::CacheCluster
+      #   * {Types::CreateCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_cache_cluster({
       #     cache_cluster_id: "String", # required
       #     replication_group_id: "String",
@@ -704,6 +763,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_cluster.cache_cluster_id #=> String
       #   resp.cache_cluster.configuration_endpoint.address #=> String
       #   resp.cache_cluster.configuration_endpoint.port #=> Integer
@@ -747,6 +807,7 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      #
       # @overload create_cache_cluster(params = {})
       # @param [Hash] params ({})
       def create_cache_cluster(params = {}, options = {})
@@ -757,21 +818,26 @@ module Aws
       # Creates a new cache parameter group. A cache parameter group is a
       # collection of parameters that you apply to all of the nodes in a cache
       # cluster.
+      #
       # @option params [required, String] :cache_parameter_group_name
       #   A user-specified name for the cache parameter group.
+      #
       # @option params [required, String] :cache_parameter_group_family
       #   The name of the cache parameter group family that the cache parameter
       #   group can be used with.
       #
       #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
       #   `redis3.2`
+      #
       # @option params [required, String] :description
       #   A user-specified description for the cache parameter group.
+      #
       # @return [Types::CreateCacheParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateCacheParameterGroupResult#cache_parameter_group #CacheParameterGroup} => Types::CacheParameterGroup
+      #   * {Types::CreateCacheParameterGroupResult#cache_parameter_group #cache_parameter_group} => Types::CacheParameterGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_cache_parameter_group({
       #     cache_parameter_group_name: "String", # required
       #     cache_parameter_group_family: "String", # required
@@ -779,9 +845,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_parameter_group.cache_parameter_group_name #=> String
       #   resp.cache_parameter_group.cache_parameter_group_family #=> String
       #   resp.cache_parameter_group.description #=> String
+      #
       # @overload create_cache_parameter_group(params = {})
       # @param [Hash] params ({})
       def create_cache_parameter_group(params = {}, options = {})
@@ -800,6 +868,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html
+      #
       # @option params [required, String] :cache_security_group_name
       #   A name for the cache security group. This value is stored as a
       #   lowercase string.
@@ -808,19 +877,23 @@ module Aws
       #   Cannot be the word "Default".
       #
       #   Example: `mysecuritygroup`
+      #
       # @option params [required, String] :description
       #   A description for the cache security group.
+      #
       # @return [Types::CreateCacheSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateCacheSecurityGroupResult#cache_security_group #CacheSecurityGroup} => Types::CacheSecurityGroup
+      #   * {Types::CreateCacheSecurityGroupResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_cache_security_group({
       #     cache_security_group_name: "String", # required
       #     description: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_security_group.owner_id #=> String
       #   resp.cache_security_group.cache_security_group_name #=> String
       #   resp.cache_security_group.description #=> String
@@ -828,6 +901,7 @@ module Aws
       #   resp.cache_security_group.ec2_security_groups[0].status #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      #
       # @overload create_cache_security_group(params = {})
       # @param [Hash] params ({})
       def create_cache_security_group(params = {}, options = {})
@@ -839,6 +913,7 @@ module Aws
       #
       # Use this parameter only when you are creating a cluster in an Amazon
       # Virtual Private Cloud (Amazon VPC).
+      #
       # @option params [required, String] :cache_subnet_group_name
       #   A name for the cache subnet group. This value is stored as a lowercase
       #   string.
@@ -847,15 +922,19 @@ module Aws
       #   hyphens.
       #
       #   Example: `mysubnetgroup`
+      #
       # @option params [required, String] :cache_subnet_group_description
       #   A description for the cache subnet group.
+      #
       # @option params [required, Array<String>] :subnet_ids
       #   A list of VPC subnet IDs for the cache subnet group.
+      #
       # @return [Types::CreateCacheSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateCacheSubnetGroupResult#cache_subnet_group #CacheSubnetGroup} => Types::CacheSubnetGroup
+      #   * {Types::CreateCacheSubnetGroupResult#cache_subnet_group #cache_subnet_group} => Types::CacheSubnetGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_cache_subnet_group({
       #     cache_subnet_group_name: "String", # required
       #     cache_subnet_group_description: "String", # required
@@ -863,12 +942,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_subnet_group.cache_subnet_group_name #=> String
       #   resp.cache_subnet_group.cache_subnet_group_description #=> String
       #   resp.cache_subnet_group.vpc_id #=> String
       #   resp.cache_subnet_group.subnets #=> Array
       #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+      #
       # @overload create_cache_subnet_group(params = {})
       # @param [Hash] params ({})
       def create_cache_subnet_group(params = {}, options = {})
@@ -899,6 +980,7 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [required, String] :replication_group_id
       #   The replication group identifier. This parameter is stored as a
       #   lowercase string.
@@ -910,8 +992,10 @@ module Aws
       #   * The first character must be a letter.
       #
       #   * A name cannot end with a hyphen or contain two consecutive hyphens.
+      #
       # @option params [required, String] :replication_group_description
       #   A user-created description for the replication group.
+      #
       # @option params [String] :primary_cluster_id
       #   The identifier of the cache cluster that serves as the primary for
       #   this replication group. This cache cluster must already exist and have
@@ -919,6 +1003,7 @@ module Aws
       #
       #   This parameter is not required if `NumCacheClusters`, `NumNodeGroups`,
       #   or `ReplicasPerNodeGroup` is specified.
+      #
       # @option params [Boolean] :automatic_failover_enabled
       #   Specifies whether a read-only replica is automatically promoted to
       #   read/write primary if the existing primary fails.
@@ -940,6 +1025,7 @@ module Aws
       #     Redis (cluster mode enabled): T2 node types.
       #
       #    </note>
+      #
       # @option params [Integer] :num_cache_clusters
       #   The number of clusters this replication group initially has.
       #
@@ -951,6 +1037,7 @@ module Aws
       #
       #   The maximum permitted value for `NumCacheClusters` is 6 (primary plus
       #   5 replicas).
+      #
       # @option params [Array<String>] :preferred_cache_cluster_a_zs
       #   A list of EC2 Availability Zones in which the replication group's
       #   cache clusters are created. The order of the Availability Zones in the
@@ -970,6 +1057,7 @@ module Aws
       #    </note>
       #
       #   Default: system chosen Availability Zones.
+      #
       # @option params [Integer] :num_node_groups
       #   An optional parameter that specifies the number of node groups
       #   (shards) for this Redis (cluster mode enabled) replication group. For
@@ -977,9 +1065,11 @@ module Aws
       #   1.
       #
       #   Default: 1
+      #
       # @option params [Integer] :replicas_per_node_group
       #   An optional parameter that specifies the number of replica nodes in
       #   each node group (shard). Valid values are 0 to 5.
+      #
       # @option params [Array<Types::NodeGroupConfiguration>] :node_group_configuration
       #   A list of node group (shard) configuration options. Each node group
       #   (shard) configuration has the following: Slots,
@@ -988,6 +1078,7 @@ module Aws
       #   If you're creating a Redis (cluster mode disabled) or a Redis
       #   (cluster mode enabled) replication group, you can use this parameter
       #   to configure one node group (shard) or you can omit this parameter.
+      #
       # @option params [String] :cache_node_type
       #   The compute and memory capacity of the nodes in the node group
       #   (shard).
@@ -1037,9 +1128,11 @@ module Aws
       #   [1]: http://aws.amazon.com/elasticache/details
       #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
       #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+      #
       # @option params [String] :engine
       #   The name of the cache engine to be used for the cache clusters in this
       #   replication group.
+      #
       # @option params [String] :engine_version
       #   The version number of the cache engine to be used for the cache
       #   clusters in this replication group. To view the supported cache engine
@@ -1055,6 +1148,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+      #
       # @option params [String] :cache_parameter_group_name
       #   The name of the parameter group to associate with this replication
       #   group. If this argument is omitted, the default cache parameter group
@@ -1069,6 +1163,7 @@ module Aws
       #
       #   * To create a Redis (cluster mode enabled) replication group, use
       #     `CacheParameterGroupName=default.redis3.2.cluster.on`.
+      #
       # @option params [String] :cache_subnet_group_name
       #   The name of the cache subnet group to be used for the replication
       #   group.
@@ -1080,18 +1175,22 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
+      #
       # @option params [Array<String>] :cache_security_group_names
       #   A list of cache security group names to associate with this
       #   replication group.
+      #
       # @option params [Array<String>] :security_group_ids
       #   One or more Amazon VPC security groups associated with this
       #   replication group.
       #
       #   Use this parameter only when you are creating a replication group in
       #   an Amazon Virtual Private Cloud (Amazon VPC).
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of cost allocation tags to be added to this resource. A tag is
       #   a key-value pair. A tag key must be accompanied by a tag value.
+      #
       # @option params [Array<String>] :snapshot_arns
       #   A list of Amazon Resource Names (ARN) that uniquely identify the Redis
       #   RDB snapshot files stored in Amazon S3. The snapshot files are used to
@@ -1105,6 +1204,7 @@ module Aws
       #    </note>
       #
       #   Example of an Amazon S3 ARN: `arn:aws:s3:::my_bucket/snapshot1.rdb`
+      #
       # @option params [String] :snapshot_name
       #   The name of a snapshot from which to restore data into the new
       #   replication group. The snapshot status changes to `restoring` while
@@ -1113,6 +1213,7 @@ module Aws
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
       #    </note>
+      #
       # @option params [String] :preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the cache
       #   cluster is performed. It is specified as a range in the format
@@ -1141,9 +1242,11 @@ module Aws
       #   * `sat`
       #
       #   Example: `sun:23:00-mon:01:30`
+      #
       # @option params [Integer] :port
       #   The port number on which each member of the replication group accepts
       #   connections.
+      #
       # @option params [String] :notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
       #   Service (SNS) topic to which notifications are sent.
@@ -1152,8 +1255,10 @@ module Aws
       #   owner.
       #
       #    </note>
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   This parameter is currently disabled.
+      #
       # @option params [Integer] :snapshot_retention_limit
       #   The number of days for which ElastiCache retains automatic snapshots
       #   before deleting them. For example, if you set `SnapshotRetentionLimit`
@@ -1166,6 +1271,7 @@ module Aws
       #
       #   Default: 0 (i.e., automatic backups are disabled for this cache
       #   cluster).
+      #
       # @option params [String] :snapshot_window
       #   The daily time range (in UTC) during which ElastiCache begins taking a
       #   daily snapshot of your node group (shard).
@@ -1178,6 +1284,7 @@ module Aws
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
       #    </note>
+      #
       # @option params [String] :auth_token
       #   The password used to access a password protected server.
       #
@@ -1196,11 +1303,13 @@ module Aws
       #
       #
       #   [1]: http://redis.io/commands/AUTH
+      #
       # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateReplicationGroupResult#replication_group #ReplicationGroup} => Types::ReplicationGroup
+      #   * {Types::CreateReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_replication_group({
       #     replication_group_id: "String", # required
       #     replication_group_description: "String", # required
@@ -1243,6 +1352,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_group.replication_group_id #=> String
       #   resp.replication_group.description #=> String
       #   resp.replication_group.status #=> String
@@ -1269,6 +1379,7 @@ module Aws
       #   resp.replication_group.configuration_endpoint.port #=> Integer
       #   resp.replication_group.snapshot_retention_limit #=> Integer
       #   resp.replication_group.snapshot_window #=> String
+      #
       # @overload create_replication_group(params = {})
       # @param [Hash] params ({})
       def create_replication_group(params = {}, options = {})
@@ -1282,19 +1393,24 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [String] :replication_group_id
       #   The identifier of an existing replication group. The snapshot is
       #   created from this replication group.
+      #
       # @option params [String] :cache_cluster_id
       #   The identifier of an existing cache cluster. The snapshot is created
       #   from this cache cluster.
+      #
       # @option params [required, String] :snapshot_name
       #   A name for the snapshot being created.
+      #
       # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateSnapshotResult#snapshot #Snapshot} => Types::Snapshot
+      #   * {Types::CreateSnapshotResult#snapshot #snapshot} => Types::Snapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_snapshot({
       #     replication_group_id: "String",
       #     cache_cluster_id: "String",
@@ -1302,6 +1418,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshot.snapshot_name #=> String
       #   resp.snapshot.replication_group_id #=> String
       #   resp.snapshot.replication_group_description #=> String
@@ -1337,6 +1454,7 @@ module Aws
       #   resp.snapshot.node_snapshots[0].cache_size #=> String
       #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+      #
       # @overload create_snapshot(params = {})
       # @param [Hash] params ({})
       def create_snapshot(params = {}, options = {})
@@ -1358,24 +1476,29 @@ module Aws
       # Due to current limitations on Redis (cluster mode disabled), this
       # operation or parameter is not supported on Redis (cluster mode
       # enabled) replication groups.
+      #
       # @option params [required, String] :cache_cluster_id
       #   The cache cluster identifier for the cluster to be deleted. This
       #   parameter is not case sensitive.
+      #
       # @option params [String] :final_snapshot_identifier
       #   The user-supplied name of a final cache cluster snapshot. This is the
       #   unique name that identifies the snapshot. ElastiCache creates the
       #   snapshot, and then deletes the cache cluster immediately afterward.
+      #
       # @return [Types::DeleteCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteCacheClusterResult#cache_cluster #CacheCluster} => Types::CacheCluster
+      #   * {Types::DeleteCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_cache_cluster({
       #     cache_cluster_id: "String", # required
       #     final_snapshot_identifier: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_cluster.cache_cluster_id #=> String
       #   resp.cache_cluster.configuration_endpoint.address #=> String
       #   resp.cache_cluster.configuration_endpoint.port #=> Integer
@@ -1419,6 +1542,7 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      #
       # @overload delete_cache_cluster(params = {})
       # @param [Hash] params ({})
       def delete_cache_cluster(params = {}, options = {})
@@ -1428,6 +1552,7 @@ module Aws
 
       # Deletes the specified cache parameter group. You cannot delete a cache
       # parameter group if it is associated with any cache clusters.
+      #
       # @option params [required, String] :cache_parameter_group_name
       #   The name of the cache parameter group to delete.
       #
@@ -1435,12 +1560,15 @@ module Aws
       #   cache clusters.
       #
       #    </note>
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_cache_parameter_group({
       #     cache_parameter_group_name: "String", # required
       #   })
+      #
       # @overload delete_cache_parameter_group(params = {})
       # @param [Hash] params ({})
       def delete_cache_parameter_group(params = {}, options = {})
@@ -1454,18 +1582,22 @@ module Aws
       # cache clusters.
       #
       #  </note>
+      #
       # @option params [required, String] :cache_security_group_name
       #   The name of the cache security group to delete.
       #
       #   <note markdown="1"> You cannot delete the default security group.
       #
       #    </note>
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_cache_security_group({
       #     cache_security_group_name: "String", # required
       #   })
+      #
       # @overload delete_cache_security_group(params = {})
       # @param [Hash] params ({})
       def delete_cache_security_group(params = {}, options = {})
@@ -1479,17 +1611,21 @@ module Aws
       # cache clusters.
       #
       #  </note>
+      #
       # @option params [required, String] :cache_subnet_group_name
       #   The name of the cache subnet group to delete.
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters or
       #   hyphens.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_cache_subnet_group({
       #     cache_subnet_group_name: "String", # required
       #   })
+      #
       # @overload delete_cache_subnet_group(params = {})
       # @param [Hash] params ({})
       def delete_cache_subnet_group(params = {}, options = {})
@@ -1510,23 +1646,28 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [required, String] :replication_group_id
       #   The identifier for the cluster to be deleted. This parameter is not
       #   case sensitive.
+      #
       # @option params [Boolean] :retain_primary_cluster
       #   If set to `true`, all of the read replicas are deleted, but the
       #   primary node is retained.
+      #
       # @option params [String] :final_snapshot_identifier
       #   The name of a final node group (shard) snapshot. ElastiCache creates
       #   the snapshot from the primary node in the cluster, rather than one of
       #   the replicas; this is to ensure that it captures the freshest data.
       #   After the final snapshot is taken, the replication group is
       #   immediately deleted.
+      #
       # @return [Types::DeleteReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteReplicationGroupResult#replication_group #ReplicationGroup} => Types::ReplicationGroup
+      #   * {Types::DeleteReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_replication_group({
       #     replication_group_id: "String", # required
       #     retain_primary_cluster: false,
@@ -1534,6 +1675,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_group.replication_group_id #=> String
       #   resp.replication_group.description #=> String
       #   resp.replication_group.status #=> String
@@ -1560,6 +1702,7 @@ module Aws
       #   resp.replication_group.configuration_endpoint.port #=> Integer
       #   resp.replication_group.snapshot_retention_limit #=> Integer
       #   resp.replication_group.snapshot_window #=> String
+      #
       # @overload delete_replication_group(params = {})
       # @param [Hash] params ({})
       def delete_replication_group(params = {}, options = {})
@@ -1574,18 +1717,22 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [required, String] :snapshot_name
       #   The name of the snapshot to be deleted.
+      #
       # @return [Types::DeleteSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteSnapshotResult#snapshot #Snapshot} => Types::Snapshot
+      #   * {Types::DeleteSnapshotResult#snapshot #snapshot} => Types::Snapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_snapshot({
       #     snapshot_name: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshot.snapshot_name #=> String
       #   resp.snapshot.replication_group_id #=> String
       #   resp.snapshot.replication_group_description #=> String
@@ -1621,6 +1768,7 @@ module Aws
       #   resp.snapshot.node_snapshots[0].cache_size #=> String
       #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+      #
       # @overload delete_snapshot(params = {})
       # @param [Hash] params ({})
       def delete_snapshot(params = {}, options = {})
@@ -1652,10 +1800,12 @@ module Aws
       #
       # If cache nodes are currently being removed from the cache cluster, no
       # endpoint information for the removed nodes is displayed.
+      #
       # @option params [String] :cache_cluster_id
       #   The user-supplied cluster identifier. If this parameter is specified,
       #   only information about that specific cache cluster is returned. This
       #   parameter isn't case sensitive.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1665,20 +1815,24 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @option params [Boolean] :show_cache_node_info
       #   An optional flag that can be included in the DescribeCacheCluster
       #   request to retrieve information about the individual cache nodes.
+      #
       # @return [Types::CacheClusterMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheClusterMessage#marker #Marker} => String
-      #   * {Types::CacheClusterMessage#cache_clusters #CacheClusters} => Array&lt;Types::CacheCluster&gt;
+      #   * {Types::CacheClusterMessage#marker #marker} => String
+      #   * {Types::CacheClusterMessage#cache_clusters #cache_clusters} => Array&lt;Types::CacheCluster&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cache_clusters({
       #     cache_cluster_id: "String",
       #     max_records: 1,
@@ -1687,6 +1841,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.cache_clusters #=> Array
       #   resp.cache_clusters[0].cache_cluster_id #=> String
@@ -1732,6 +1887,7 @@ module Aws
       #   resp.cache_clusters[0].replication_group_id #=> String
       #   resp.cache_clusters[0].snapshot_retention_limit #=> Integer
       #   resp.cache_clusters[0].snapshot_window #=> String
+      #
       # @overload describe_cache_clusters(params = {})
       # @param [Hash] params ({})
       def describe_cache_clusters(params = {}, options = {})
@@ -1740,12 +1896,15 @@ module Aws
       end
 
       # Returns a list of the available cache engines and their versions.
+      #
       # @option params [String] :engine
       #   The cache engine to return. Valid values: `memcached` \| `redis`
+      #
       # @option params [String] :engine_version
       #   The cache engine version to return.
       #
       #   Example: `1.4.14`
+      #
       # @option params [String] :cache_parameter_group_family
       #   The name of a specific cache parameter group family to return details
       #   for.
@@ -1760,6 +1919,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1769,20 +1929,24 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @option params [Boolean] :default_only
       #   If `true`, specifies that only the default version of the specified
       #   engine or engine and major version combination is to be returned.
+      #
       # @return [Types::CacheEngineVersionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheEngineVersionMessage#marker #Marker} => String
-      #   * {Types::CacheEngineVersionMessage#cache_engine_versions #CacheEngineVersions} => Array&lt;Types::CacheEngineVersion&gt;
+      #   * {Types::CacheEngineVersionMessage#marker #marker} => String
+      #   * {Types::CacheEngineVersionMessage#cache_engine_versions #cache_engine_versions} => Array&lt;Types::CacheEngineVersion&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cache_engine_versions({
       #     engine: "String",
       #     engine_version: "String",
@@ -1793,6 +1957,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.cache_engine_versions #=> Array
       #   resp.cache_engine_versions[0].engine #=> String
@@ -1800,6 +1965,7 @@ module Aws
       #   resp.cache_engine_versions[0].cache_parameter_group_family #=> String
       #   resp.cache_engine_versions[0].cache_engine_description #=> String
       #   resp.cache_engine_versions[0].cache_engine_version_description #=> String
+      #
       # @overload describe_cache_engine_versions(params = {})
       # @param [Hash] params ({})
       def describe_cache_engine_versions(params = {}, options = {})
@@ -1810,8 +1976,10 @@ module Aws
       # Returns a list of cache parameter group descriptions. If a cache
       # parameter group name is specified, the list contains only the
       # descriptions for that group.
+      #
       # @option params [String] :cache_parameter_group_name
       #   The name of a specific cache parameter group to return details for.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1821,17 +1989,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::CacheParameterGroupsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheParameterGroupsMessage#marker #Marker} => String
-      #   * {Types::CacheParameterGroupsMessage#cache_parameter_groups #CacheParameterGroups} => Array&lt;Types::CacheParameterGroup&gt;
+      #   * {Types::CacheParameterGroupsMessage#marker #marker} => String
+      #   * {Types::CacheParameterGroupsMessage#cache_parameter_groups #cache_parameter_groups} => Array&lt;Types::CacheParameterGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cache_parameter_groups({
       #     cache_parameter_group_name: "String",
       #     max_records: 1,
@@ -1839,11 +2010,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.cache_parameter_groups #=> Array
       #   resp.cache_parameter_groups[0].cache_parameter_group_name #=> String
       #   resp.cache_parameter_groups[0].cache_parameter_group_family #=> String
       #   resp.cache_parameter_groups[0].description #=> String
+      #
       # @overload describe_cache_parameter_groups(params = {})
       # @param [Hash] params ({})
       def describe_cache_parameter_groups(params = {}, options = {})
@@ -1853,12 +2026,15 @@ module Aws
 
       # Returns the detailed parameter list for a particular cache parameter
       # group.
+      #
       # @option params [required, String] :cache_parameter_group_name
       #   The name of a specific cache parameter group to return details for.
+      #
       # @option params [String] :source
       #   The parameter types to return.
       #
       #   Valid values: `user` \| `system` \| `engine-default`
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1868,18 +2044,21 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::CacheParameterGroupDetails] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheParameterGroupDetails#marker #Marker} => String
-      #   * {Types::CacheParameterGroupDetails#parameters #Parameters} => Array&lt;Types::Parameter&gt;
-      #   * {Types::CacheParameterGroupDetails#cache_node_type_specific_parameters #CacheNodeTypeSpecificParameters} => Array&lt;Types::CacheNodeTypeSpecificParameter&gt;
+      #   * {Types::CacheParameterGroupDetails#marker #marker} => String
+      #   * {Types::CacheParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
+      #   * {Types::CacheParameterGroupDetails#cache_node_type_specific_parameters #cache_node_type_specific_parameters} => Array&lt;Types::CacheNodeTypeSpecificParameter&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cache_parameters({
       #     cache_parameter_group_name: "String", # required
       #     source: "String",
@@ -1888,6 +2067,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.parameters #=> Array
       #   resp.parameters[0].parameter_name #=> String
@@ -1911,6 +2091,7 @@ module Aws
       #   resp.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].cache_node_type #=> String
       #   resp.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].value #=> String
       #   resp.cache_node_type_specific_parameters[0].change_type #=> String, one of "immediate", "requires-reboot"
+      #
       # @overload describe_cache_parameters(params = {})
       # @param [Hash] params ({})
       def describe_cache_parameters(params = {}, options = {})
@@ -1921,8 +2102,10 @@ module Aws
       # Returns a list of cache security group descriptions. If a cache
       # security group name is specified, the list contains only the
       # description of that group.
+      #
       # @option params [String] :cache_security_group_name
       #   The name of the cache security group to return details for.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1932,17 +2115,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::CacheSecurityGroupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheSecurityGroupMessage#marker #Marker} => String
-      #   * {Types::CacheSecurityGroupMessage#cache_security_groups #CacheSecurityGroups} => Array&lt;Types::CacheSecurityGroup&gt;
+      #   * {Types::CacheSecurityGroupMessage#marker #marker} => String
+      #   * {Types::CacheSecurityGroupMessage#cache_security_groups #cache_security_groups} => Array&lt;Types::CacheSecurityGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cache_security_groups({
       #     cache_security_group_name: "String",
       #     max_records: 1,
@@ -1950,6 +2136,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.cache_security_groups #=> Array
       #   resp.cache_security_groups[0].owner_id #=> String
@@ -1959,6 +2146,7 @@ module Aws
       #   resp.cache_security_groups[0].ec2_security_groups[0].status #=> String
       #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      #
       # @overload describe_cache_security_groups(params = {})
       # @param [Hash] params ({})
       def describe_cache_security_groups(params = {}, options = {})
@@ -1969,8 +2157,10 @@ module Aws
       # Returns a list of cache subnet group descriptions. If a subnet group
       # name is specified, the list contains only the description of that
       # group.
+      #
       # @option params [String] :cache_subnet_group_name
       #   The name of the cache subnet group to return details for.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1980,17 +2170,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::CacheSubnetGroupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheSubnetGroupMessage#marker #Marker} => String
-      #   * {Types::CacheSubnetGroupMessage#cache_subnet_groups #CacheSubnetGroups} => Array&lt;Types::CacheSubnetGroup&gt;
+      #   * {Types::CacheSubnetGroupMessage#marker #marker} => String
+      #   * {Types::CacheSubnetGroupMessage#cache_subnet_groups #cache_subnet_groups} => Array&lt;Types::CacheSubnetGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cache_subnet_groups({
       #     cache_subnet_group_name: "String",
       #     max_records: 1,
@@ -1998,6 +2191,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.cache_subnet_groups #=> Array
       #   resp.cache_subnet_groups[0].cache_subnet_group_name #=> String
@@ -2006,6 +2200,7 @@ module Aws
       #   resp.cache_subnet_groups[0].subnets #=> Array
       #   resp.cache_subnet_groups[0].subnets[0].subnet_identifier #=> String
       #   resp.cache_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+      #
       # @overload describe_cache_subnet_groups(params = {})
       # @param [Hash] params ({})
       def describe_cache_subnet_groups(params = {}, options = {})
@@ -2015,11 +2210,13 @@ module Aws
 
       # Returns the default engine and system parameter information for the
       # specified cache engine.
+      #
       # @option params [required, String] :cache_parameter_group_family
       #   The name of the cache parameter group family.
       #
       #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
       #   `redis3.2`
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -2029,16 +2226,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::DescribeEngineDefaultParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #EngineDefaults} => Types::EngineDefaults
+      #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_engine_default_parameters({
       #     cache_parameter_group_family: "String", # required
       #     max_records: 1,
@@ -2046,6 +2246,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.engine_defaults.cache_parameter_group_family #=> String
       #   resp.engine_defaults.marker #=> String
       #   resp.engine_defaults.parameters #=> Array
@@ -2070,6 +2271,7 @@ module Aws
       #   resp.engine_defaults.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].cache_node_type #=> String
       #   resp.engine_defaults.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].value #=> String
       #   resp.engine_defaults.cache_node_type_specific_parameters[0].change_type #=> String, one of "immediate", "requires-reboot"
+      #
       # @overload describe_engine_default_parameters(params = {})
       # @param [Hash] params ({})
       def describe_engine_default_parameters(params = {}, options = {})
@@ -2085,20 +2287,26 @@ module Aws
       # By default, only the events occurring within the last hour are
       # returned; however, you can retrieve up to 14 days' worth of events if
       # necessary.
+      #
       # @option params [String] :source_identifier
       #   The identifier of the event source for which events are returned. If
       #   not specified, all sources are included in the response.
+      #
       # @option params [String] :source_type
       #   The event source to retrieve events for. If no value is specified, all
       #   events are returned.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified
       #   in ISO 8601 format.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   The end of the time interval for which to retrieve events, specified
       #   in ISO 8601 format.
+      #
       # @option params [Integer] :duration
       #   The number of minutes' worth of events to retrieve.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -2108,17 +2316,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::EventsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventsMessage#marker #Marker} => String
-      #   * {Types::EventsMessage#events #Events} => Array&lt;Types::Event&gt;
+      #   * {Types::EventsMessage#marker #marker} => String
+      #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_events({
       #     source_identifier: "String",
       #     source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group
@@ -2130,12 +2341,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.events #=> Array
       #   resp.events[0].source_identifier #=> String
       #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group", "replication-group"
       #   resp.events[0].message #=> String
       #   resp.events[0].date #=> Time
+      #
       # @overload describe_events(params = {})
       # @param [Hash] params ({})
       def describe_events(params = {}, options = {})
@@ -2150,12 +2363,14 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [String] :replication_group_id
       #   The identifier for the replication group to be described. This
       #   parameter is not case sensitive.
       #
       #   If you do not specify this parameter, information about all
       #   replication groups is returned.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -2165,17 +2380,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::ReplicationGroupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReplicationGroupMessage#marker #Marker} => String
-      #   * {Types::ReplicationGroupMessage#replication_groups #ReplicationGroups} => Array&lt;Types::ReplicationGroup&gt;
+      #   * {Types::ReplicationGroupMessage#marker #marker} => String
+      #   * {Types::ReplicationGroupMessage#replication_groups #replication_groups} => Array&lt;Types::ReplicationGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_replication_groups({
       #     replication_group_id: "String",
       #     max_records: 1,
@@ -2183,6 +2401,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.replication_groups #=> Array
       #   resp.replication_groups[0].replication_group_id #=> String
@@ -2211,6 +2430,7 @@ module Aws
       #   resp.replication_groups[0].configuration_endpoint.port #=> Integer
       #   resp.replication_groups[0].snapshot_retention_limit #=> Integer
       #   resp.replication_groups[0].snapshot_window #=> String
+      #
       # @overload describe_replication_groups(params = {})
       # @param [Hash] params ({})
       def describe_replication_groups(params = {}, options = {})
@@ -2220,12 +2440,15 @@ module Aws
 
       # Returns information about reserved cache nodes for this account, or
       # about a specified reserved cache node.
+      #
       # @option params [String] :reserved_cache_node_id
       #   The reserved cache node identifier filter value. Use this parameter to
       #   show only the reservation that matches the specified reservation ID.
+      #
       # @option params [String] :reserved_cache_nodes_offering_id
       #   The offering identifier filter value. Use this parameter to show only
       #   purchased reservations matching the specified offering identifier.
+      #
       # @option params [String] :cache_node_type
       #   The cache node type filter value. Use this parameter to show only
       #   those reservations matching the specified cache node type.
@@ -2275,20 +2498,24 @@ module Aws
       #   [1]: http://aws.amazon.com/elasticache/details
       #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
       #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+      #
       # @option params [String] :duration
       #   The duration filter value, specified in years or seconds. Use this
       #   parameter to show only reservations for this duration.
       #
       #   Valid Values: `1 | 3 | 31536000 | 94608000`
+      #
       # @option params [String] :product_description
       #   The product description filter value. Use this parameter to show only
       #   those reservations matching the specified product description.
+      #
       # @option params [String] :offering_type
       #   The offering type filter value. Use this parameter to show only the
       #   available offerings matching the specified offering type.
       #
       #   Valid values: `"Light Utilization"|"Medium Utilization"|"Heavy
       #   Utilization"`
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -2298,17 +2525,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::ReservedCacheNodeMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReservedCacheNodeMessage#marker #Marker} => String
-      #   * {Types::ReservedCacheNodeMessage#reserved_cache_nodes #ReservedCacheNodes} => Array&lt;Types::ReservedCacheNode&gt;
+      #   * {Types::ReservedCacheNodeMessage#marker #marker} => String
+      #   * {Types::ReservedCacheNodeMessage#reserved_cache_nodes #reserved_cache_nodes} => Array&lt;Types::ReservedCacheNode&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_reserved_cache_nodes({
       #     reserved_cache_node_id: "String",
       #     reserved_cache_nodes_offering_id: "String",
@@ -2321,6 +2551,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.reserved_cache_nodes #=> Array
       #   resp.reserved_cache_nodes[0].reserved_cache_node_id #=> String
@@ -2337,6 +2568,7 @@ module Aws
       #   resp.reserved_cache_nodes[0].recurring_charges #=> Array
       #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
+      #
       # @overload describe_reserved_cache_nodes(params = {})
       # @param [Hash] params ({})
       def describe_reserved_cache_nodes(params = {}, options = {})
@@ -2345,12 +2577,14 @@ module Aws
       end
 
       # Lists available reserved cache node offerings.
+      #
       # @option params [String] :reserved_cache_nodes_offering_id
       #   The offering identifier filter value. Use this parameter to show only
       #   the available offering that matches the specified reservation
       #   identifier.
       #
       #   Example: `438012d3-4052-4cc7-b2e3-8d3372e0e706`
+      #
       # @option params [String] :cache_node_type
       #   The cache node type filter value. Use this parameter to show only the
       #   available offerings matching the specified cache node type.
@@ -2400,20 +2634,24 @@ module Aws
       #   [1]: http://aws.amazon.com/elasticache/details
       #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
       #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
+      #
       # @option params [String] :duration
       #   Duration filter value, specified in years or seconds. Use this
       #   parameter to show only reservations for a given duration.
       #
       #   Valid Values: `1 | 3 | 31536000 | 94608000`
+      #
       # @option params [String] :product_description
       #   The product description filter value. Use this parameter to show only
       #   the available offerings matching the specified product description.
+      #
       # @option params [String] :offering_type
       #   The offering type filter value. Use this parameter to show only the
       #   available offerings matching the specified offering type.
       #
       #   Valid Values: `"Light Utilization"|"Medium Utilization"|"Heavy
       #   Utilization"`
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -2423,17 +2661,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: minimum 20; maximum 100.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::ReservedCacheNodesOfferingMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReservedCacheNodesOfferingMessage#marker #Marker} => String
-      #   * {Types::ReservedCacheNodesOfferingMessage#reserved_cache_nodes_offerings #ReservedCacheNodesOfferings} => Array&lt;Types::ReservedCacheNodesOffering&gt;
+      #   * {Types::ReservedCacheNodesOfferingMessage#marker #marker} => String
+      #   * {Types::ReservedCacheNodesOfferingMessage#reserved_cache_nodes_offerings #reserved_cache_nodes_offerings} => Array&lt;Types::ReservedCacheNodesOffering&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_reserved_cache_nodes_offerings({
       #     reserved_cache_nodes_offering_id: "String",
       #     cache_node_type: "String",
@@ -2445,6 +2686,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.reserved_cache_nodes_offerings #=> Array
       #   resp.reserved_cache_nodes_offerings[0].reserved_cache_nodes_offering_id #=> String
@@ -2457,6 +2699,7 @@ module Aws
       #   resp.reserved_cache_nodes_offerings[0].recurring_charges #=> Array
       #   resp.reserved_cache_nodes_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_cache_nodes_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+      #
       # @overload describe_reserved_cache_nodes_offerings(params = {})
       # @param [Hash] params ({})
       def describe_reserved_cache_nodes_offerings(params = {}, options = {})
@@ -2472,27 +2715,33 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [String] :replication_group_id
       #   A user-supplied replication group identifier. If this parameter is
       #   specified, only snapshots associated with that specific replication
       #   group are described.
+      #
       # @option params [String] :cache_cluster_id
       #   A user-supplied cluster identifier. If this parameter is specified,
       #   only snapshots associated with that specific cache cluster are
       #   described.
+      #
       # @option params [String] :snapshot_name
       #   A user-supplied name of the snapshot. If this parameter is specified,
       #   only this snapshot are described.
+      #
       # @option params [String] :snapshot_source
       #   If set to `system`, the output shows snapshots that were automatically
       #   created by ElastiCache. If set to `user` the output shows snapshots
       #   that were manually created. If omitted, the output shows both
       #   automatically and manually created snapshots.
+      #
       # @option params [String] :marker
       #   An optional marker returned from a prior request. Use this marker for
       #   pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -2502,15 +2751,18 @@ module Aws
       #   Default: 50
       #
       #   Constraints: minimum 20; maximum 50.
+      #
       # @option params [Boolean] :show_node_group_config
       #   A Boolean value which if true, the node group (shard) configuration is
       #   included in the snapshot description.
+      #
       # @return [Types::DescribeSnapshotsListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeSnapshotsListMessage#marker #Marker} => String
-      #   * {Types::DescribeSnapshotsListMessage#snapshots #Snapshots} => Array&lt;Types::Snapshot&gt;
+      #   * {Types::DescribeSnapshotsListMessage#marker #marker} => String
+      #   * {Types::DescribeSnapshotsListMessage#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_snapshots({
       #     replication_group_id: "String",
       #     cache_cluster_id: "String",
@@ -2522,6 +2774,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.snapshots #=> Array
       #   resp.snapshots[0].snapshot_name #=> String
@@ -2559,6 +2812,7 @@ module Aws
       #   resp.snapshots[0].node_snapshots[0].cache_size #=> String
       #   resp.snapshots[0].node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
+      #
       # @overload describe_snapshots(params = {})
       # @param [Hash] params ({})
       def describe_snapshots(params = {}, options = {})
@@ -2573,6 +2827,7 @@ module Aws
       # operations to scale up your cluster or replication group, the value of
       # the `CacheNodeType` parameter must be one of the node types returned
       # by this operation.
+      #
       # @option params [String] :cache_cluster_id
       #   The name of the cache cluster you want to scale up to a larger node
       #   instanced type. ElastiCache uses the cluster id to identify the
@@ -2581,6 +2836,7 @@ module Aws
       #
       #   You must provide a value for either the `CacheClusterId` or the
       #   `ReplicationGroupId`.
+      #
       # @option params [String] :replication_group_id
       #   The name of the replication group want to scale up to a larger node
       #   type. ElastiCache uses the replication group id to identify the
@@ -2589,19 +2845,23 @@ module Aws
       #
       #   You must provide a value for either the `CacheClusterId` or the
       #   `ReplicationGroupId`.
+      #
       # @return [Types::AllowedNodeTypeModificationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AllowedNodeTypeModificationsMessage#scale_up_modifications #ScaleUpModifications} => Array&lt;String&gt;
+      #   * {Types::AllowedNodeTypeModificationsMessage#scale_up_modifications #scale_up_modifications} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_allowed_node_type_modifications({
       #     cache_cluster_id: "String",
       #     replication_group_id: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.scale_up_modifications #=> Array
       #   resp.scale_up_modifications[0] #=> String
+      #
       # @overload list_allowed_node_type_modifications(params = {})
       # @param [Hash] params ({})
       def list_allowed_node_type_modifications(params = {}, options = {})
@@ -2621,6 +2881,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/BestPractices.html
+      #
       # @option params [required, String] :resource_name
       #   The Amazon Resource Name (ARN) of the resource for which you want the
       #   list of tags, for example
@@ -2633,19 +2894,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TagListMessage#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_resource({
       #     resource_name: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
       def list_tags_for_resource(params = {}, options = {})
@@ -2656,9 +2921,11 @@ module Aws
       # Modifies the settings for a cache cluster. You can use this operation
       # to change one or more cluster configuration parameters by specifying
       # the parameters and the new values.
+      #
       # @option params [required, String] :cache_cluster_id
       #   The cache cluster identifier. This value is stored as a lowercase
       #   string.
+      #
       # @option params [Integer] :num_cache_nodes
       #   The number of cache nodes that the cache cluster should have. If the
       #   value for `NumCacheNodes` is greater than the sum of the number of
@@ -2697,6 +2964,7 @@ module Aws
       #   the number of cache nodes currently in the cache cluster.
       #
       #    </note>
+      #
       # @option params [Array<String>] :cache_node_ids_to_remove
       #   A list of cache node IDs to be removed. A node ID is a numeric
       #   identifier (0001, 0002, etc.). This parameter is only valid when
@@ -2709,6 +2977,7 @@ module Aws
       #   For example: If you have 3 active cache nodes, 7 pending cache nodes,
       #   and the number of cache nodes in this `ModifyCacheCluser` call is 5,
       #   you must list 2 (7 - 5) cache node IDs to remove.
+      #
       # @option params [String] :az_mode
       #   Specifies whether the new nodes in this Memcached cache cluster are
       #   all created in a single Availability Zone or created across multiple
@@ -2733,6 +3002,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
+      #
       # @option params [Array<String>] :new_availability_zones
       #   The list of Availability Zones where the new Memcached cache nodes are
       #   created.
@@ -2814,6 +3084,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
+      #
       # @option params [Array<String>] :cache_security_group_names
       #   A list of cache security group names to authorize on this cache
       #   cluster. This change is asynchronously applied as soon as possible.
@@ -2823,11 +3094,13 @@ module Aws
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
       #   Must not be "Default".
+      #
       # @option params [Array<String>] :security_group_ids
       #   Specifies the VPC Security Groups associated with the cache cluster.
       #
       #   This parameter can be used only with clusters that are created in an
       #   Amazon Virtual Private Cloud (Amazon VPC).
+      #
       # @option params [String] :preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the
       #   cluster is performed. It is specified as a range in the format
@@ -2851,6 +3124,7 @@ module Aws
       #   * `sat`
       #
       #   Example: `sun:23:00-mon:01:30`
+      #
       # @option params [String] :notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
       #   notifications are sent.
@@ -2858,16 +3132,19 @@ module Aws
       #   <note markdown="1"> The Amazon SNS topic owner must be same as the cache cluster owner.
       #
       #    </note>
+      #
       # @option params [String] :cache_parameter_group_name
       #   The name of the cache parameter group to apply to this cache cluster.
       #   This change is asynchronously applied as soon as possible for
       #   parameters when the `ApplyImmediately` parameter is specified as
       #   `true` for this request.
+      #
       # @option params [String] :notification_topic_status
       #   The status of the Amazon SNS notification topic. Notifications are
       #   sent only if the status is `active`.
       #
       #   Valid values: `active` \| `inactive`
+      #
       # @option params [Boolean] :apply_immediately
       #   If `true`, this parameter causes the modifications in this request and
       #   any pending modifications to be applied, asynchronously and as soon as
@@ -2885,6 +3162,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Default: `false`
+      #
       # @option params [String] :engine_version
       #   The upgraded version of the cache engine to be run on the cache nodes.
       #
@@ -2897,8 +3175,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   This parameter is currently disabled.
+      #
       # @option params [Integer] :snapshot_retention_limit
       #   The number of days for which ElastiCache retains automatic cache
       #   cluster snapshots before deleting them. For example, if you set
@@ -2909,17 +3189,21 @@ module Aws
       #   are turned off.
       #
       #    </note>
+      #
       # @option params [String] :snapshot_window
       #   The daily time range (in UTC) during which ElastiCache begins taking a
       #   daily snapshot of your cache cluster.
+      #
       # @option params [String] :cache_node_type
       #   A valid cache node type that you want to scale this cache cluster up
       #   to.
+      #
       # @return [Types::ModifyCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyCacheClusterResult#cache_cluster #CacheCluster} => Types::CacheCluster
+      #   * {Types::ModifyCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_cache_cluster({
       #     cache_cluster_id: "String", # required
       #     num_cache_nodes: 1,
@@ -2941,6 +3225,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_cluster.cache_cluster_id #=> String
       #   resp.cache_cluster.configuration_endpoint.address #=> String
       #   resp.cache_cluster.configuration_endpoint.port #=> Integer
@@ -2984,6 +3269,7 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      #
       # @overload modify_cache_cluster(params = {})
       # @param [Hash] params ({})
       def modify_cache_cluster(params = {}, options = {})
@@ -2994,18 +3280,22 @@ module Aws
       # Modifies the parameters of a cache parameter group. You can modify up
       # to 20 parameters in a single request by submitting a list parameter
       # name and value pairs.
+      #
       # @option params [required, String] :cache_parameter_group_name
       #   The name of the cache parameter group to modify.
+      #
       # @option params [required, Array<Types::ParameterNameValue>] :parameter_name_values
       #   An array of parameter names and values for the parameter update. You
       #   must supply at least one parameter name and value; subsequent
       #   arguments are optional. A maximum of 20 parameters may be modified per
       #   request.
+      #
       # @return [Types::CacheParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheParameterGroupNameMessage#cache_parameter_group_name #CacheParameterGroupName} => String
+      #   * {Types::CacheParameterGroupNameMessage#cache_parameter_group_name #cache_parameter_group_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_cache_parameter_group({
       #     cache_parameter_group_name: "String", # required
       #     parameter_name_values: [ # required
@@ -3017,7 +3307,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_parameter_group_name #=> String
+      #
       # @overload modify_cache_parameter_group(params = {})
       # @param [Hash] params ({})
       def modify_cache_parameter_group(params = {}, options = {})
@@ -3026,6 +3318,7 @@ module Aws
       end
 
       # Modifies an existing cache subnet group.
+      #
       # @option params [required, String] :cache_subnet_group_name
       #   The name for the cache subnet group. This value is stored as a
       #   lowercase string.
@@ -3034,15 +3327,19 @@ module Aws
       #   hyphens.
       #
       #   Example: `mysubnetgroup`
+      #
       # @option params [String] :cache_subnet_group_description
       #   A description of the cache subnet group.
+      #
       # @option params [Array<String>] :subnet_ids
       #   The EC2 subnet IDs for the cache subnet group.
+      #
       # @return [Types::ModifyCacheSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyCacheSubnetGroupResult#cache_subnet_group #CacheSubnetGroup} => Types::CacheSubnetGroup
+      #   * {Types::ModifyCacheSubnetGroupResult#cache_subnet_group #cache_subnet_group} => Types::CacheSubnetGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_cache_subnet_group({
       #     cache_subnet_group_name: "String", # required
       #     cache_subnet_group_description: "String",
@@ -3050,12 +3347,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_subnet_group.cache_subnet_group_name #=> String
       #   resp.cache_subnet_group.cache_subnet_group_description #=> String
       #   resp.cache_subnet_group.vpc_id #=> String
       #   resp.cache_subnet_group.subnets #=> Array
       #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+      #
       # @overload modify_cache_subnet_group(params = {})
       # @param [Hash] params ({})
       def modify_cache_subnet_group(params = {}, options = {})
@@ -3072,20 +3371,25 @@ module Aws
       # <note markdown="1"> This operation is valid for Redis only.
       #
       #  </note>
+      #
       # @option params [required, String] :replication_group_id
       #   The identifier of the replication group to modify.
+      #
       # @option params [String] :replication_group_description
       #   A description for the replication group. Maximum length is 255
       #   characters.
+      #
       # @option params [String] :primary_cluster_id
       #   For replication groups with a single primary, if this parameter is
       #   specified, ElastiCache promotes the specified cluster in the specified
       #   replication group to the primary role. The nodes of all other clusters
       #   in the replication group are read replicas.
+      #
       # @option params [String] :snapshotting_cluster_id
       #   The cache cluster ID that is used as the daily snapshot source for the
       #   replication group. This parameter cannot be set for Redis (cluster
       #   mode enabled) replication groups.
+      #
       # @option params [Boolean] :automatic_failover_enabled
       #   Determines whether a read replica is automatically promoted to
       #   read/write primary if the existing primary encounters a failure.
@@ -3101,6 +3405,7 @@ module Aws
       #     Redis (cluster mode enabled): T1 node types.
       #
       #    </note>
+      #
       # @option params [Array<String>] :cache_security_group_names
       #   A list of cache security group names to authorize for the clusters in
       #   this replication group. This change is asynchronously applied as soon
@@ -3112,6 +3417,7 @@ module Aws
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
       #   Must not be `Default`.
+      #
       # @option params [Array<String>] :security_group_ids
       #   Specifies the VPC Security Groups associated with the cache clusters
       #   in the replication group.
@@ -3119,6 +3425,7 @@ module Aws
       #   This parameter can be used only with replication group containing
       #   cache clusters running in an Amazon Virtual Private Cloud (Amazon
       #   VPC).
+      #
       # @option params [String] :preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the
       #   cluster is performed. It is specified as a range in the format
@@ -3142,6 +3449,7 @@ module Aws
       #   * `sat`
       #
       #   Example: `sun:23:00-mon:01:30`
+      #
       # @option params [String] :notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
       #   notifications are sent.
@@ -3150,16 +3458,19 @@ module Aws
       #   owner.
       #
       #    </note>
+      #
       # @option params [String] :cache_parameter_group_name
       #   The name of the cache parameter group to apply to all of the clusters
       #   in this replication group. This change is asynchronously applied as
       #   soon as possible for parameters when the `ApplyImmediately` parameter
       #   is specified as `true` for this request.
+      #
       # @option params [String] :notification_topic_status
       #   The status of the Amazon SNS notification topic for the replication
       #   group. Notifications are sent only if the status is `active`.
       #
       #   Valid values: `active` \| `inactive`
+      #
       # @option params [Boolean] :apply_immediately
       #   If `true`, this parameter causes the modifications in this request and
       #   any pending modifications to be applied, asynchronously and as soon as
@@ -3173,6 +3484,7 @@ module Aws
       #   Valid values: `true` \| `false`
       #
       #   Default: `false`
+      #
       # @option params [String] :engine_version
       #   The upgraded version of the cache engine to be run on the cache
       #   clusters in the replication group.
@@ -3186,8 +3498,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   This parameter is currently disabled.
+      #
       # @option params [Integer] :snapshot_retention_limit
       #   The number of days for which ElastiCache retains automatic node group
       #   (shard) snapshots before deleting them. For example, if you set
@@ -3196,6 +3510,7 @@ module Aws
       #
       #   **Important** If the value of SnapshotRetentionLimit is set to zero
       #   (0), backups are turned off.
+      #
       # @option params [String] :snapshot_window
       #   The daily time range (in UTC) during which ElastiCache begins taking a
       #   daily snapshot of the node group (shard) specified by
@@ -3205,14 +3520,17 @@ module Aws
       #
       #   If you do not specify this parameter, ElastiCache automatically
       #   chooses an appropriate time range.
+      #
       # @option params [String] :cache_node_type
       #   A valid cache node type that you want to scale this replication group
       #   to.
+      #
       # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyReplicationGroupResult#replication_group #ReplicationGroup} => Types::ReplicationGroup
+      #   * {Types::ModifyReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_replication_group({
       #     replication_group_id: "String", # required
       #     replication_group_description: "String",
@@ -3234,6 +3552,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.replication_group.replication_group_id #=> String
       #   resp.replication_group.description #=> String
       #   resp.replication_group.status #=> String
@@ -3260,6 +3579,7 @@ module Aws
       #   resp.replication_group.configuration_endpoint.port #=> Integer
       #   resp.replication_group.snapshot_retention_limit #=> Integer
       #   resp.replication_group.snapshot_window #=> String
+      #
       # @overload modify_replication_group(params = {})
       # @param [Hash] params ({})
       def modify_replication_group(params = {}, options = {})
@@ -3268,10 +3588,12 @@ module Aws
       end
 
       # Allows you to purchase a reserved cache node offering.
+      #
       # @option params [required, String] :reserved_cache_nodes_offering_id
       #   The ID of the reserved cache node offering to purchase.
       #
       #   Example: `438012d3-4052-4cc7-b2e3-8d3372e0e706`
+      #
       # @option params [String] :reserved_cache_node_id
       #   A customer-specified identifier to track this reservation.
       #
@@ -3282,15 +3604,18 @@ module Aws
       #    </note>
       #
       #   Example: myreservationID
+      #
       # @option params [Integer] :cache_node_count
       #   The number of cache node instances to reserve.
       #
       #   Default: `1`
+      #
       # @return [Types::PurchaseReservedCacheNodesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PurchaseReservedCacheNodesOfferingResult#reserved_cache_node #ReservedCacheNode} => Types::ReservedCacheNode
+      #   * {Types::PurchaseReservedCacheNodesOfferingResult#reserved_cache_node #reserved_cache_node} => Types::ReservedCacheNode
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.purchase_reserved_cache_nodes_offering({
       #     reserved_cache_nodes_offering_id: "String", # required
       #     reserved_cache_node_id: "String",
@@ -3298,6 +3623,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.reserved_cache_node.reserved_cache_node_id #=> String
       #   resp.reserved_cache_node.reserved_cache_nodes_offering_id #=> String
       #   resp.reserved_cache_node.cache_node_type #=> String
@@ -3312,6 +3638,7 @@ module Aws
       #   resp.reserved_cache_node.recurring_charges #=> Array
       #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_frequency #=> String
+      #
       # @overload purchase_reserved_cache_nodes_offering(params = {})
       # @param [Hash] params ({})
       def purchase_reserved_cache_nodes_offering(params = {}, options = {})
@@ -3329,24 +3656,29 @@ module Aws
       # rebooted) to be lost.
       #
       # When the reboot is complete, a cache cluster event is created.
+      #
       # @option params [required, String] :cache_cluster_id
       #   The cache cluster identifier. This parameter is stored as a lowercase
       #   string.
+      #
       # @option params [required, Array<String>] :cache_node_ids_to_reboot
       #   A list of cache node IDs to reboot. A node ID is a numeric identifier
       #   (0001, 0002, etc.). To reboot an entire cache cluster, specify all of
       #   the cache node IDs.
+      #
       # @return [Types::RebootCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RebootCacheClusterResult#cache_cluster #CacheCluster} => Types::CacheCluster
+      #   * {Types::RebootCacheClusterResult#cache_cluster #cache_cluster} => Types::CacheCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reboot_cache_cluster({
       #     cache_cluster_id: "String", # required
       #     cache_node_ids_to_reboot: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_cluster.cache_cluster_id #=> String
       #   resp.cache_cluster.configuration_endpoint.address #=> String
       #   resp.cache_cluster.configuration_endpoint.port #=> Integer
@@ -3390,6 +3722,7 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      #
       # @overload reboot_cache_cluster(params = {})
       # @param [Hash] params ({})
       def reboot_cache_cluster(params = {}, options = {})
@@ -3399,6 +3732,7 @@ module Aws
 
       # Removes the tags identified by the `TagKeys` list from the named
       # resource.
+      #
       # @option params [required, String] :resource_name
       #   The Amazon Resource Name (ARN) of the resource from which you want the
       #   tags removed, for example
@@ -3411,23 +3745,28 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @option params [required, Array<String>] :tag_keys
       #   A list of `TagKeys` identifying the tags you want removed from the
       #   named resource.
+      #
       # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TagListMessage#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_resource({
       #     resource_name: "String", # required
       #     tag_keys: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_resource(params = {}, options = {})
@@ -3440,24 +3779,29 @@ module Aws
       # a list of parameter names. To reset the entire cache parameter group,
       # specify the `ResetAllParameters` and `CacheParameterGroupName`
       # parameters.
+      #
       # @option params [required, String] :cache_parameter_group_name
       #   The name of the cache parameter group to reset.
+      #
       # @option params [Boolean] :reset_all_parameters
       #   If `true`, all parameters in the cache parameter group are reset to
       #   their default values. If `false`, only the parameters listed by
       #   `ParameterNameValues` are reset to their default values.
       #
       #   Valid values: `true` \| `false`
+      #
       # @option params [Array<Types::ParameterNameValue>] :parameter_name_values
       #   An array of parameter names to reset to their default values. If
       #   `ResetAllParameters` is `true`, do not use `ParameterNameValues`. If
       #   `ResetAllParameters` is `false`, you must specify the name of at least
       #   one parameter to reset.
+      #
       # @return [Types::CacheParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CacheParameterGroupNameMessage#cache_parameter_group_name #CacheParameterGroupName} => String
+      #   * {Types::CacheParameterGroupNameMessage#cache_parameter_group_name #cache_parameter_group_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reset_cache_parameter_group({
       #     cache_parameter_group_name: "String", # required
       #     reset_all_parameters: false,
@@ -3470,7 +3814,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_parameter_group_name #=> String
+      #
       # @overload reset_cache_parameter_group(params = {})
       # @param [Hash] params ({})
       def reset_cache_parameter_group(params = {}, options = {})
@@ -3481,19 +3827,24 @@ module Aws
       # Revokes ingress from a cache security group. Use this operation to
       # disallow access from an Amazon EC2 security group that had been
       # previously authorized.
+      #
       # @option params [required, String] :cache_security_group_name
       #   The name of the cache security group to revoke ingress from.
+      #
       # @option params [required, String] :ec2_security_group_name
       #   The name of the Amazon EC2 security group to revoke access from.
+      #
       # @option params [required, String] :ec2_security_group_owner_id
       #   The AWS account number of the Amazon EC2 security group owner. Note
       #   that this is not the same thing as an AWS access key ID - you must
       #   provide a valid AWS account number for this parameter.
+      #
       # @return [Types::RevokeCacheSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RevokeCacheSecurityGroupIngressResult#cache_security_group #CacheSecurityGroup} => Types::CacheSecurityGroup
+      #   * {Types::RevokeCacheSecurityGroupIngressResult#cache_security_group #cache_security_group} => Types::CacheSecurityGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.revoke_cache_security_group_ingress({
       #     cache_security_group_name: "String", # required
       #     ec2_security_group_name: "String", # required
@@ -3501,6 +3852,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cache_security_group.owner_id #=> String
       #   resp.cache_security_group.cache_security_group_name #=> String
       #   resp.cache_security_group.description #=> String
@@ -3508,6 +3860,7 @@ module Aws
       #   resp.cache_security_group.ec2_security_groups[0].status #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      #
       # @overload revoke_cache_security_group_ingress(params = {})
       # @param [Hash] params ({})
       def revoke_cache_security_group_ingress(params = {}, options = {})

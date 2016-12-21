@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -158,18 +173,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @option params [required, Array<String>] :layer_ids
       #   The layer ID, which must correspond to a custom layer. You cannot
       #   assign a registered instance to a built-in layer.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.assign_instance({
       #     instance_id: "String", # required
       #     layer_ids: ["String"], # required
       #   })
+      #
       # @overload assign_instance(params = {})
       # @param [Hash] params ({})
       def assign_instance(params = {}, options = {})
@@ -192,17 +212,22 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :volume_id
       #   The volume ID.
+      #
       # @option params [String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.assign_volume({
       #     volume_id: "String", # required
       #     instance_id: "String",
       #   })
+      #
       # @overload assign_volume(params = {})
       # @param [Hash] params ({})
       def assign_volume(params = {}, options = {})
@@ -224,17 +249,22 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_ip
       #   The Elastic IP address.
+      #
       # @option params [String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.associate_elastic_ip({
       #     elastic_ip: "String", # required
       #     instance_id: "String",
       #   })
+      #
       # @overload associate_elastic_ip(params = {})
       # @param [Hash] params ({})
       def associate_elastic_ip(params = {}, options = {})
@@ -261,18 +291,23 @@ module Aws
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/load-balancer-elb.html
       # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
       # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_load_balancer_name
       #   The Elastic Load Balancing instance's name.
+      #
       # @option params [required, String] :layer_id
       #   The ID of the layer that the Elastic Load Balancing instance is to be
       #   attached to.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.attach_elastic_load_balancer({
       #     elastic_load_balancer_name: "String", # required
       #     layer_id: "String", # required
       #   })
+      #
       # @overload attach_elastic_load_balancer(params = {})
       # @param [Hash] params ({})
       def attach_elastic_load_balancer(params = {}, options = {})
@@ -292,10 +327,13 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-cloning.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :source_stack_id
       #   The source stack ID.
+      #
       # @option params [String] :name
       #   The cloned stack name.
+      #
       # @option params [String] :region
       #   The cloned stack AWS region, such as "ap-northeast-2". For more
       #   information about AWS regions, see [Regions and Endpoints][1].
@@ -303,6 +341,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+      #
       # @option params [String] :vpc_id
       #   The ID of the VPC that the cloned stack is to be launched into. It
       #   must be in the specified region. All instances are launched into this
@@ -335,9 +374,11 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
       #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+      #
       # @option params [Hash<String,String>] :attributes
       #   A list of stack attributes and values as key/value pairs to be added
       #   to the cloned stack.
+      #
       # @option params [required, String] :service_role_arn
       #   The stack AWS Identity and Access Management (IAM) role, which allows
       #   AWS OpsWorks to work with AWS resources on your behalf. You must set
@@ -357,6 +398,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
       #   profile for all of the stack's EC2 instances. For more information
@@ -365,6 +407,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :default_os
       #   The stack's operating system, which must be set to one of the
       #   following.
@@ -403,6 +446,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+      #
       # @option params [String] :hostname_theme
       #   The stack's host name theme, with spaces are replaced by underscores.
       #   The theme is used to generate host names for the stack's instances.
@@ -434,6 +478,7 @@ module Aws
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
+      #
       # @option params [String] :default_availability_zone
       #   The cloned stack's default Availability Zone, which must be in the
       #   specified region. For more information, see [Regions and
@@ -444,6 +489,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+      #
       # @option params [String] :default_subnet_id
       #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
@@ -452,6 +498,7 @@ module Aws
       #   the subnet must be in that zone. For information on default values and
       #   when this parameter is required, see the `VpcId` parameter
       #   description.
+      #
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
@@ -465,11 +512,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+      #
       # @option params [Types::StackConfigurationManager] :configuration_manager
       #   The configuration manager. When you clone a stack we recommend that
       #   you use the configuration manager to specify the Chef version: 12,
       #   11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
       #   default value for Linux stacks is currently 12.
+      #
       # @option params [Types::ChefConfiguration] :chef_configuration
       #   A `ChefConfiguration` object that specifies whether to enable
       #   Berkshelf and the Berkshelf version on Chef 11.10 stacks. For more
@@ -478,8 +527,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+      #
       # @option params [Boolean] :use_custom_cookbooks
       #   Whether to use custom cookbooks.
+      #
       # @option params [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
       #   the stack's layers.
@@ -508,6 +559,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+      #
       # @option params [Types::Source] :custom_cookbooks_source
       #   Contains the information required to retrieve an app or cookbook from
       #   a repository. For more information, see [Creating Apps][1] or [Custom
@@ -517,6 +569,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+      #
       # @option params [String] :default_ssh_key_name
       #   A default Amazon EC2 key pair name. The default value is none. If you
       #   specify a key pair name, AWS OpsWorks installs the public key on the
@@ -531,10 +584,13 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
       #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+      #
       # @option params [Boolean] :clone_permissions
       #   Whether to clone the source stack's permissions.
+      #
       # @option params [Array<String>] :clone_app_ids
       #   A list of source stack app IDs to be included in the cloned stack.
+      #
       # @option params [String] :default_root_device_type
       #   The default root device type. This value is used by default for all
       #   instances in the cloned stack, but you can override it when you create
@@ -544,6 +600,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+      #
       # @option params [String] :agent_version
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
@@ -566,11 +623,13 @@ module Aws
       #   instance, which overrides the stack's default setting.
       #
       #    </note>
+      #
       # @return [Types::CloneStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CloneStackResult#stack_id #StackId} => String
+      #   * {Types::CloneStackResult#stack_id #stack_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.clone_stack({
       #     source_stack_id: "String", # required
       #     name: "String",
@@ -612,7 +671,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_id #=> String
+      #
       # @overload clone_stack(params = {})
       # @param [Hash] params ({})
       def clone_stack(params = {}, options = {})
@@ -632,16 +693,22 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @option params [String] :shortname
       #   The app's short name.
+      #
       # @option params [required, String] :name
       #   The app name.
+      #
       # @option params [String] :description
       #   A description of the app.
+      #
       # @option params [Array<Types::DataSource>] :data_sources
       #   The app's data source.
+      #
       # @option params [required, String] :type
       #   The app type. Each supported type is associated with a particular
       #   layer. For example, PHP applications are associated with a PHP layer.
@@ -649,18 +716,24 @@ module Aws
       #   members of the corresponding layer. If your app isn't one of the
       #   standard types, or you prefer to implement your own Deploy recipes,
       #   specify `other`.
+      #
       # @option params [Types::Source] :app_source
       #   A `Source` object that specifies the app repository.
+      #
       # @option params [Array<String>] :domains
       #   The app virtual host settings, with multiple domains separated by
       #   commas. For example: `'www.example.com, example.com'`
+      #
       # @option params [Boolean] :enable_ssl
       #   Whether to enable SSL for the app.
+      #
       # @option params [Types::SslConfiguration] :ssl_configuration
       #   An `SslConfiguration` object with the SSL configuration.
+      #
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key/value pairs to be added to the stack
       #   attributes.
+      #
       # @option params [Array<Types::EnvironmentVariable>] :environment
       #   An array of `EnvironmentVariable` objects that specify environment
       #   variables to be associated with the app. After you deploy the app,
@@ -683,11 +756,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+      #
       # @return [Types::CreateAppResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateAppResult#app_id #AppId} => String
+      #   * {Types::CreateAppResult#app_id #app_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_app({
       #     stack_id: "String", # required
       #     shortname: "String",
@@ -729,7 +804,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.app_id #=> String
+      #
       # @overload create_app(params = {})
       # @param [Hash] params ({})
       def create_app(params = {}, options = {})
@@ -750,20 +827,27 @@ module Aws
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html
       # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @option params [String] :app_id
       #   The app ID. This parameter is required for app deployments, but not
       #   for other deployment commands.
+      #
       # @option params [Array<String>] :instance_ids
       #   The instance IDs for the deployment targets.
+      #
       # @option params [Array<String>] :layer_ids
       #   The layer IDs for the deployment targets.
+      #
       # @option params [required, Types::DeploymentCommand] :command
       #   A `DeploymentCommand` object that specifies the deployment command and
       #   any associated arguments.
+      #
       # @option params [String] :comment
       #   A user-defined comment.
+      #
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
@@ -777,11 +861,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+      #
       # @return [Types::CreateDeploymentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDeploymentResult#deployment_id #DeploymentId} => String
+      #   * {Types::CreateDeploymentResult#deployment_id #deployment_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_deployment({
       #     stack_id: "String", # required
       #     app_id: "String",
@@ -798,7 +884,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.deployment_id #=> String
+      #
       # @overload create_deployment(params = {})
       # @param [Hash] params ({})
       def create_deployment(params = {}, options = {})
@@ -818,10 +906,13 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @option params [required, Array<String>] :layer_ids
       #   An array that contains the instance's layer IDs.
+      #
       # @option params [required, String] :instance_type
       #   The instance type, such as `t2.micro`. For a list of supported
       #   instance types, open the stack in the console, choose **Instances**,
@@ -834,11 +925,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+      #
       # @option params [String] :auto_scaling_type
       #   For load-based or time-based instances, the type. Windows stacks can
       #   use only time-based instances.
+      #
       # @option params [String] :hostname
       #   The instance host name.
+      #
       # @option params [String] :os
       #   The instance's operating system, which must be set to one of the
       #   following.
@@ -877,6 +971,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+      #
       # @option params [String] :ami_id
       #   A custom AMI ID to be used to create the instance. The AMI should be
       #   based on one of the supported operating systems. For more information,
@@ -889,8 +984,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+      #
       # @option params [String] :ssh_key_name
       #   The instance's Amazon EC2 key-pair name.
+      #
       # @option params [String] :availability_zone
       #   The instance Availability Zone. For more information, see [Regions and
       #   Endpoints][1].
@@ -898,13 +995,16 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+      #
       # @option params [String] :virtualization_type
       #   The instance's virtualization type, `paravirtual` or `hvm`.
+      #
       # @option params [String] :subnet_id
       #   The ID of the instance's subnet. If the stack is running in a VPC,
       #   you can use this parameter to override the stack's default subnet ID
       #   value and direct AWS OpsWorks to launch the instance in a different
       #   subnet.
+      #
       # @option params [String] :architecture
       #   The instance architecture. The default option is `x86_64`. Instance
       #   types do not necessarily support both architectures. For a list of the
@@ -914,6 +1014,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+      #
       # @option params [String] :root_device_type
       #   The instance root device type. For more information, see [Storage for
       #   the Root Device][1].
@@ -921,6 +1022,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+      #
       # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   An array of `BlockDeviceMapping` objects that specify the instance's
       #   block devices. For more information, see [Block Device Mapping][1].
@@ -929,6 +1031,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
+      #
       # @option params [Boolean] :install_updates_on_boot
       #   Whether to install operating system and package updates when the
       #   instance boots. The default value is `true`. To control when updates
@@ -941,8 +1044,10 @@ module Aws
       #   your instances have the latest security updates.
       #
       #    </note>
+      #
       # @option params [Boolean] :ebs_optimized
       #   Whether to create an Amazon EBS-optimized instance.
+      #
       # @option params [String] :agent_version
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
@@ -958,6 +1063,7 @@ module Aws
       #   must use the complete version number, not the abbreviated number shown
       #   on the console. For a list of available agent version numbers, call
       #   DescribeAgentVersions.
+      #
       # @option params [String] :tenancy
       #   The instance's tenancy option. The default option is no tenancy, or
       #   if the instance is running in a VPC, inherit tenancy settings from the
@@ -974,11 +1080,13 @@ module Aws
       #   [1]: http://aws.amazon.com/ec2/dedicated-hosts/
       #   [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
       #   [3]: http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
+      #
       # @return [Types::CreateInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateInstanceResult#instance_id #InstanceId} => String
+      #   * {Types::CreateInstanceResult#instance_id #instance_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_instance({
       #     stack_id: "String", # required
       #     layer_ids: ["String"], # required
@@ -1014,7 +1122,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instance_id #=> String
+      #
       # @overload create_instance(params = {})
       # @param [Hash] params ({})
       def create_instance(params = {}, options = {})
@@ -1042,14 +1152,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-create.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The layer stack ID.
+      #
       # @option params [required, String] :type
       #   The layer type. A stack cannot have more than one built-in layer of
       #   the same type. It can have any number of custom layers. Built-in
       #   layers are not available in Chef 12 stacks.
+      #
       # @option params [required, String] :name
       #   The layer name, which is used by the console.
+      #
       # @option params [required, String] :shortname
       #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorks and by Chef
@@ -1064,12 +1178,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+      #
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key-value pairs to be added to the stack
       #   attributes.
       #
       #   To create a cluster layer, set the `EcsClusterArn` attribute to the
       #   cluster's ARN.
+      #
       # @option params [String] :custom_instance_profile_arn
       #   The ARN of an IAM profile to be used for the layer's EC2 instances.
       #   For more information about IAM ARNs, see [Using Identifiers][1].
@@ -1077,6 +1193,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :custom_json
       #   A JSON-formatted string containing custom stack configuration and
       #   deployment attributes to be installed on the layer's instances. For
@@ -1086,15 +1203,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+      #
       # @option params [Array<String>] :custom_security_group_ids
       #   An array containing the layer custom security group IDs.
+      #
       # @option params [Array<String>] :packages
       #   An array of `Package` objects that describes the layer packages.
+      #
       # @option params [Array<Types::VolumeConfiguration>] :volume_configurations
       #   A `VolumeConfigurations` object that describes the layer's Amazon EBS
       #   volumes.
+      #
       # @option params [Boolean] :enable_auto_healing
       #   Whether to disable auto healing for the layer.
+      #
       # @option params [Boolean] :auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
       #   layer's instances. For more information, see [How to Edit a
@@ -1104,6 +1226,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+      #
       # @option params [Boolean] :auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically assign
       #   a public IP address to the layer's instances. For more information,
@@ -1112,8 +1235,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+      #
       # @option params [Types::Recipes] :custom_recipes
       #   A `LayerCustomRecipes` object that specifies the layer custom recipes.
+      #
       # @option params [Boolean] :install_updates_on_boot
       #   Whether to install operating system and package updates when the
       #   instance boots. The default value is `true`. To control when updates
@@ -1126,17 +1251,21 @@ module Aws
       #   strongly recommend using the default value of `true`.
       #
       #    </note>
+      #
       # @option params [Boolean] :use_ebs_optimized_instances
       #   Whether to use Amazon EBS-optimized instances.
+      #
       # @option params [Types::LifecycleEventConfiguration] :lifecycle_event_configuration
       #   A `LifeCycleEventConfiguration` object that you can use to configure
       #   the Shutdown event to specify an execution timeout and enable or
       #   disable Elastic Load Balancer connection draining.
+      #
       # @return [Types::CreateLayerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateLayerResult#layer_id #LayerId} => String
+      #   * {Types::CreateLayerResult#layer_id #layer_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_layer({
       #     stack_id: "String", # required
       #     type: "aws-flow-ruby", # required, accepts aws-flow-ruby, ecs-cluster, java-app, lb, web, php-app, rails-app, nodejs-app, memcached, db-master, monitoring-master, custom
@@ -1180,7 +1309,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.layer_id #=> String
+      #
       # @overload create_layer(params = {})
       # @param [Hash] params ({})
       def create_layer(params = {}, options = {})
@@ -1199,8 +1330,10 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-edit.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :name
       #   The stack name.
+      #
       # @option params [required, String] :region
       #   The stack's AWS region, such as "ap-south-1". For more information
       #   about Amazon regions, see [Regions and Endpoints][1].
@@ -1208,6 +1341,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+      #
       # @option params [String] :vpc_id
       #   The ID of the VPC that the stack is to be launched into. The VPC must
       #   be in the stack's region. All instances are launched into this VPC.
@@ -1240,9 +1374,11 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html
       #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+      #
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key-value pairs to be added to the stack
       #   attributes.
+      #
       # @option params [required, String] :service_role_arn
       #   The stack's AWS Identity and Access Management (IAM) role, which
       #   allows AWS OpsWorks to work with AWS resources on your behalf. You
@@ -1253,6 +1389,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [required, String] :default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
       #   profile for all of the stack's EC2 instances. For more information
@@ -1261,6 +1398,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :default_os
       #   The stack's default operating system, which is installed on every
       #   instance unless you specify a different operating system when you
@@ -1295,6 +1433,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+      #
       # @option params [String] :hostname_theme
       #   The stack's host name theme, with spaces replaced by underscores. The
       #   theme is used to generate host names for the stack's instances. By
@@ -1326,6 +1465,7 @@ module Aws
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
+      #
       # @option params [String] :default_availability_zone
       #   The stack's default Availability Zone, which must be in the specified
       #   region. For more information, see [Regions and Endpoints][1]. If you
@@ -1336,6 +1476,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+      #
       # @option params [String] :default_subnet_id
       #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
@@ -1344,6 +1485,7 @@ module Aws
       #   the subnet must be in that zone. For information on default values and
       #   when this parameter is required, see the `VpcId` parameter
       #   description.
+      #
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
@@ -1358,11 +1500,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+      #
       # @option params [Types::StackConfigurationManager] :configuration_manager
       #   The configuration manager. When you create a stack we recommend that
       #   you use the configuration manager to specify the Chef version: 12,
       #   11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
       #   default value for Linux stacks is currently 11.4.
+      #
       # @option params [Types::ChefConfiguration] :chef_configuration
       #   A `ChefConfiguration` object that specifies whether to enable
       #   Berkshelf and the Berkshelf version on Chef 11.10 stacks. For more
@@ -1371,8 +1515,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+      #
       # @option params [Boolean] :use_custom_cookbooks
       #   Whether the stack uses custom cookbooks.
+      #
       # @option params [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
       #   the stack's layers.
@@ -1400,6 +1546,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+      #
       # @option params [Types::Source] :custom_cookbooks_source
       #   Contains the information required to retrieve an app or cookbook from
       #   a repository. For more information, see [Creating Apps][1] or [Custom
@@ -1409,6 +1556,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+      #
       # @option params [String] :default_ssh_key_name
       #   A default Amazon EC2 key pair name. The default value is none. If you
       #   specify a key pair name, AWS OpsWorks installs the public key on the
@@ -1423,6 +1571,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
       #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+      #
       # @option params [String] :default_root_device_type
       #   The default root device type. This value is the default for all
       #   instances in the stack, but you can override it when you create an
@@ -1432,6 +1581,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+      #
       # @option params [String] :agent_version
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
@@ -1454,11 +1604,13 @@ module Aws
       #   instance, which overrides the stack's default setting.
       #
       #    </note>
+      #
       # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateStackResult#stack_id #StackId} => String
+      #   * {Types::CreateStackResult#stack_id #stack_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_stack({
       #     name: "String", # required
       #     region: "String", # required
@@ -1497,7 +1649,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_id #=> String
+      #
       # @overload create_stack(params = {})
       # @param [Hash] params ({})
       def create_stack(params = {}, options = {})
@@ -1514,16 +1668,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :iam_user_arn
       #   The user's IAM ARN; this can also be a federated user's ARN.
+      #
       # @option params [String] :ssh_username
       #   The user's SSH user name. The allowable characters are \[a-z\],
       #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
       #   other punctuation marks, AWS OpsWorks removes them. For example,
       #   `my.name` will be changed to `myname`. If you do not specify an SSH
       #   user name, AWS OpsWorks generates one from the IAM user name.
+      #
       # @option params [String] :ssh_public_key
       #   The user's public SSH key.
+      #
       # @option params [Boolean] :allow_self_management
       #   Whether users can specify their own SSH public key through the My
       #   Settings page. For more information, see [Setting an IAM User's
@@ -1532,11 +1690,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+      #
       # @return [Types::CreateUserProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateUserProfileResult#iam_user_arn #IamUserArn} => String
+      #   * {Types::CreateUserProfileResult#iam_user_arn #iam_user_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_user_profile({
       #     iam_user_arn: "String", # required
       #     ssh_username: "String",
@@ -1545,7 +1705,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.iam_user_arn #=> String
+      #
       # @overload create_user_profile(params = {})
       # @param [Hash] params ({})
       def create_user_profile(params = {}, options = {})
@@ -1563,14 +1725,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :app_id
       #   The app ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_app({
       #     app_id: "String", # required
       #   })
+      #
       # @overload delete_app(params = {})
       # @param [Hash] params ({})
       def delete_app(params = {}, options = {})
@@ -1592,20 +1758,26 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-delete.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @option params [Boolean] :delete_elastic_ip
       #   Whether to delete the instance Elastic IP address.
+      #
       # @option params [Boolean] :delete_volumes
       #   Whether to delete the instance's Amazon EBS volumes.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_instance({
       #     instance_id: "String", # required
       #     delete_elastic_ip: false,
       #     delete_volumes: false,
       #   })
+      #
       # @overload delete_instance(params = {})
       # @param [Hash] params ({})
       def delete_instance(params = {}, options = {})
@@ -1626,14 +1798,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-delete.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :layer_id
       #   The layer ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_layer({
       #     layer_id: "String", # required
       #   })
+      #
       # @overload delete_layer(params = {})
       # @param [Hash] params ({})
       def delete_layer(params = {}, options = {})
@@ -1654,14 +1830,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-shutting.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_stack({
       #     stack_id: "String", # required
       #   })
+      #
       # @overload delete_stack(params = {})
       # @param [Hash] params ({})
       def delete_stack(params = {}, options = {})
@@ -1678,14 +1858,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :iam_user_arn
       #   The user's IAM ARN. This can also be a federated user's ARN.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_user_profile({
       #     iam_user_arn: "String", # required
       #   })
+      #
       # @overload delete_user_profile(params = {})
       # @param [Hash] params ({})
       def delete_user_profile(params = {}, options = {})
@@ -1706,14 +1890,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :ecs_cluster_arn
       #   The cluster's ARN.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_ecs_cluster({
       #     ecs_cluster_arn: "String", # required
       #   })
+      #
       # @overload deregister_ecs_cluster(params = {})
       # @param [Hash] params ({})
       def deregister_ecs_cluster(params = {}, options = {})
@@ -1734,14 +1922,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_ip
       #   The Elastic IP address.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_elastic_ip({
       #     elastic_ip: "String", # required
       #   })
+      #
       # @overload deregister_elastic_ip(params = {})
       # @param [Hash] params ({})
       def deregister_elastic_ip(params = {}, options = {})
@@ -1762,14 +1954,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_instance({
       #     instance_id: "String", # required
       #   })
+      #
       # @overload deregister_instance(params = {})
       # @param [Hash] params ({})
       def deregister_instance(params = {}, options = {})
@@ -1787,14 +1983,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :rds_db_instance_arn
       #   The Amazon RDS instance's ARN.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_rds_db_instance({
       #     rds_db_instance_arn: "String", # required
       #   })
+      #
       # @overload deregister_rds_db_instance(params = {})
       # @param [Hash] params ({})
       def deregister_rds_db_instance(params = {}, options = {})
@@ -1814,16 +2014,20 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :volume_id
       #   The AWS OpsWorks volume ID, which is the GUID that AWS OpsWorks
       #   assigned to the instance when you registered the volume with the
       #   stack, not the Amazon EC2 volume ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_volume({
       #     volume_id: "String", # required
       #   })
+      #
       # @overload deregister_volume(params = {})
       # @param [Hash] params ({})
       def deregister_volume(params = {}, options = {})
@@ -1835,15 +2039,19 @@ module Aws
       # a stack ID or a configuration manager. `DescribeAgentVersions` returns
       # a list of available agent versions for the specified stack or
       # configuration manager.
+      #
       # @option params [String] :stack_id
       #   The stack ID.
+      #
       # @option params [Types::StackConfigurationManager] :configuration_manager
       #   The configuration manager.
+      #
       # @return [Types::DescribeAgentVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAgentVersionsResult#agent_versions #AgentVersions} => Array&lt;Types::AgentVersion&gt;
+      #   * {Types::DescribeAgentVersionsResult#agent_versions #agent_versions} => Array&lt;Types::AgentVersion&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_agent_versions({
       #     stack_id: "String",
       #     configuration_manager: {
@@ -1853,10 +2061,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.agent_versions #=> Array
       #   resp.agent_versions[0].version #=> String
       #   resp.agent_versions[0].configuration_manager.name #=> String
       #   resp.agent_versions[0].configuration_manager.version #=> String
+      #
       # @overload describe_agent_versions(params = {})
       # @param [Hash] params ({})
       def describe_agent_versions(params = {}, options = {})
@@ -1878,24 +2088,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :stack_id
       #   The app stack ID. If you use this parameter, `DescribeApps` returns a
       #   description of the apps in the specified stack.
+      #
       # @option params [Array<String>] :app_ids
       #   An array of app IDs for the apps to be described. If you use this
       #   parameter, `DescribeApps` returns a description of the specified apps.
       #   Otherwise, it returns a description of every app.
+      #
       # @return [Types::DescribeAppsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAppsResult#apps #Apps} => Array&lt;Types::App&gt;
+      #   * {Types::DescribeAppsResult#apps #apps} => Array&lt;Types::App&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_apps({
       #     stack_id: "String",
       #     app_ids: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.apps #=> Array
       #   resp.apps[0].app_id #=> String
       #   resp.apps[0].stack_id #=> String
@@ -1926,6 +2141,7 @@ module Aws
       #   resp.apps[0].environment[0].key #=> String
       #   resp.apps[0].environment[0].value #=> String
       #   resp.apps[0].environment[0].secure #=> Boolean
+      #
       # @overload describe_apps(params = {})
       # @param [Hash] params ({})
       def describe_apps(params = {}, options = {})
@@ -1947,23 +2163,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :deployment_id
       #   The deployment ID. If you include this parameter, `DescribeCommands`
       #   returns a description of the commands associated with the specified
       #   deployment.
+      #
       # @option params [String] :instance_id
       #   The instance ID. If you include this parameter, `DescribeCommands`
       #   returns a description of the commands associated with the specified
       #   instance.
+      #
       # @option params [Array<String>] :command_ids
       #   An array of command IDs. If you include this parameter,
       #   `DescribeCommands` returns a description of the specified commands.
       #   Otherwise, it returns a description of every command.
+      #
       # @return [Types::DescribeCommandsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeCommandsResult#commands #Commands} => Array&lt;Types::Command&gt;
+      #   * {Types::DescribeCommandsResult#commands #commands} => Array&lt;Types::Command&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_commands({
       #     deployment_id: "String",
       #     instance_id: "String",
@@ -1971,6 +2192,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.commands #=> Array
       #   resp.commands[0].command_id #=> String
       #   resp.commands[0].instance_id #=> String
@@ -1982,6 +2204,7 @@ module Aws
       #   resp.commands[0].exit_code #=> Integer
       #   resp.commands[0].log_url #=> String
       #   resp.commands[0].type #=> String
+      #
       # @overload describe_commands(params = {})
       # @param [Hash] params ({})
       def describe_commands(params = {}, options = {})
@@ -2003,24 +2226,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :stack_id
       #   The stack ID. If you include this parameter, `DescribeDeployments`
       #   returns a description of the commands associated with the specified
       #   stack.
+      #
       # @option params [String] :app_id
       #   The app ID. If you include this parameter, `DescribeDeployments`
       #   returns a description of the commands associated with the specified
       #   app.
+      #
       # @option params [Array<String>] :deployment_ids
       #   An array of deployment IDs to be described. If you include this
       #   parameter, `DescribeDeployments` returns a description of the
       #   specified deployments. Otherwise, it returns a description of every
       #   deployment.
+      #
       # @return [Types::DescribeDeploymentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDeploymentsResult#deployments #Deployments} => Array&lt;Types::Deployment&gt;
+      #   * {Types::DescribeDeploymentsResult#deployments #deployments} => Array&lt;Types::Deployment&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_deployments({
       #     stack_id: "String",
       #     app_id: "String",
@@ -2028,6 +2256,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.deployments #=> Array
       #   resp.deployments[0].deployment_id #=> String
       #   resp.deployments[0].stack_id #=> String
@@ -2045,6 +2274,7 @@ module Aws
       #   resp.deployments[0].custom_json #=> String
       #   resp.deployments[0].instance_ids #=> Array
       #   resp.deployments[0].instance_ids[0] #=> String
+      #
       # @overload describe_deployments(params = {})
       # @param [Hash] params ({})
       def describe_deployments(params = {}, options = {})
@@ -2066,11 +2296,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [Array<String>] :ecs_cluster_arns
       #   A list of ARNs, one for each cluster to be described.
+      #
       # @option params [String] :stack_id
       #   A stack ID. `DescribeEcsClusters` returns a description of the cluster
       #   that is registered with the stack.
+      #
       # @option params [String] :next_token
       #   If the previous paginated request did not return all of the remaining
       #   results, the response object's`NextToken` parameter value is set to a
@@ -2078,18 +2311,21 @@ module Aws
       #   again and assign that token to the request object's `NextToken`
       #   parameter. If there are no remaining results, the previous response
       #   object's `NextToken` parameter is set to `null`.
+      #
       # @option params [Integer] :max_results
       #   To receive a paginated response, use this parameter to specify the
       #   maximum number of results to be returned with a single call. If the
       #   number of available results exceeds this maximum, the response
       #   includes a `NextToken` value that you can assign to the `NextToken`
       #   request parameter to get the next set of results.
+      #
       # @return [Types::DescribeEcsClustersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEcsClustersResult#ecs_clusters #EcsClusters} => Array&lt;Types::EcsCluster&gt;
-      #   * {Types::DescribeEcsClustersResult#next_token #NextToken} => String
+      #   * {Types::DescribeEcsClustersResult#ecs_clusters #ecs_clusters} => Array&lt;Types::EcsCluster&gt;
+      #   * {Types::DescribeEcsClustersResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_ecs_clusters({
       #     ecs_cluster_arns: ["String"],
       #     stack_id: "String",
@@ -2098,12 +2334,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.ecs_clusters #=> Array
       #   resp.ecs_clusters[0].ecs_cluster_arn #=> String
       #   resp.ecs_clusters[0].ecs_cluster_name #=> String
       #   resp.ecs_clusters[0].stack_id #=> String
       #   resp.ecs_clusters[0].registered_at #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_ecs_clusters(params = {})
       # @param [Hash] params ({})
       def describe_ecs_clusters(params = {}, options = {})
@@ -2126,24 +2364,29 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :instance_id
       #   The instance ID. If you include this parameter, `DescribeElasticIps`
       #   returns a description of the Elastic IP addresses associated with the
       #   specified instance.
+      #
       # @option params [String] :stack_id
       #   A stack ID. If you include this parameter, `DescribeElasticIps`
       #   returns a description of the Elastic IP addresses that are registered
       #   with the specified stack.
+      #
       # @option params [Array<String>] :ips
       #   An array of Elastic IP addresses to be described. If you include this
       #   parameter, `DescribeElasticIps` returns a description of the specified
       #   Elastic IP addresses. Otherwise, it returns a description of every
       #   Elastic IP address.
+      #
       # @return [Types::DescribeElasticIpsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeElasticIpsResult#elastic_ips #ElasticIps} => Array&lt;Types::ElasticIp&gt;
+      #   * {Types::DescribeElasticIpsResult#elastic_ips #elastic_ips} => Array&lt;Types::ElasticIp&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_elastic_ips({
       #     instance_id: "String",
       #     stack_id: "String",
@@ -2151,12 +2394,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.elastic_ips #=> Array
       #   resp.elastic_ips[0].ip #=> String
       #   resp.elastic_ips[0].name #=> String
       #   resp.elastic_ips[0].domain #=> String
       #   resp.elastic_ips[0].region #=> String
       #   resp.elastic_ips[0].instance_id #=> String
+      #
       # @overload describe_elastic_ips(params = {})
       # @param [Hash] params ({})
       def describe_elastic_ips(params = {}, options = {})
@@ -2178,23 +2423,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :stack_id
       #   A stack ID. The action describes the stack's Elastic Load Balancing
       #   instances.
+      #
       # @option params [Array<String>] :layer_ids
       #   A list of layer IDs. The action describes the Elastic Load Balancing
       #   instances for the specified layers.
+      #
       # @return [Types::DescribeElasticLoadBalancersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeElasticLoadBalancersResult#elastic_load_balancers #ElasticLoadBalancers} => Array&lt;Types::ElasticLoadBalancer&gt;
+      #   * {Types::DescribeElasticLoadBalancersResult#elastic_load_balancers #elastic_load_balancers} => Array&lt;Types::ElasticLoadBalancer&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_elastic_load_balancers({
       #     stack_id: "String",
       #     layer_ids: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.elastic_load_balancers #=> Array
       #   resp.elastic_load_balancers[0].elastic_load_balancer_name #=> String
       #   resp.elastic_load_balancers[0].region #=> String
@@ -2208,6 +2458,7 @@ module Aws
       #   resp.elastic_load_balancers[0].subnet_ids[0] #=> String
       #   resp.elastic_load_balancers[0].ec2_instance_ids #=> Array
       #   resp.elastic_load_balancers[0].ec2_instance_ids[0] #=> String
+      #
       # @overload describe_elastic_load_balancers(params = {})
       # @param [Hash] params ({})
       def describe_elastic_load_balancers(params = {}, options = {})
@@ -2229,21 +2480,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :stack_id
       #   A stack ID. If you use this parameter, `DescribeInstances` returns
       #   descriptions of the instances associated with the specified stack.
+      #
       # @option params [String] :layer_id
       #   A layer ID. If you use this parameter, `DescribeInstances` returns
       #   descriptions of the instances associated with the specified layer.
+      #
       # @option params [Array<String>] :instance_ids
       #   An array of instance IDs to be described. If you use this parameter,
       #   `DescribeInstances` returns a description of the specified instances.
       #   Otherwise, it returns a description of every instance.
+      #
       # @return [Types::DescribeInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeInstancesResult#instances #Instances} => Array&lt;Types::Instance&gt;
+      #   * {Types::DescribeInstancesResult#instances #instances} => Array&lt;Types::Instance&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_instances({
       #     stack_id: "String",
       #     layer_id: "String",
@@ -2251,6 +2507,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instances #=> Array
       #   resp.instances[0].agent_version #=> String
       #   resp.instances[0].ami_id #=> String
@@ -2304,6 +2561,7 @@ module Aws
       #   resp.instances[0].subnet_id #=> String
       #   resp.instances[0].tenancy #=> String
       #   resp.instances[0].virtualization_type #=> String, one of "paravirtual", "hvm"
+      #
       # @overload describe_instances(params = {})
       # @param [Hash] params ({})
       def describe_instances(params = {}, options = {})
@@ -2325,23 +2583,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :stack_id
       #   The stack ID.
+      #
       # @option params [Array<String>] :layer_ids
       #   An array of layer IDs that specify the layers to be described. If you
       #   omit this parameter, `DescribeLayers` returns a description of every
       #   layer in the specified stack.
+      #
       # @return [Types::DescribeLayersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLayersResult#layers #Layers} => Array&lt;Types::Layer&gt;
+      #   * {Types::DescribeLayersResult#layers #layers} => Array&lt;Types::Layer&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_layers({
       #     stack_id: "String",
       #     layer_ids: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.layers #=> Array
       #   resp.layers[0].stack_id #=> String
       #   resp.layers[0].layer_id #=> String
@@ -2393,6 +2656,7 @@ module Aws
       #   resp.layers[0].use_ebs_optimized_instances #=> Boolean
       #   resp.layers[0].lifecycle_event_configuration.shutdown.execution_timeout #=> Integer
       #   resp.layers[0].lifecycle_event_configuration.shutdown.delay_until_elb_connections_drained #=> Boolean
+      #
       # @overload describe_layers(params = {})
       # @param [Hash] params ({})
       def describe_layers(params = {}, options = {})
@@ -2414,18 +2678,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, Array<String>] :layer_ids
       #   An array of layer IDs.
+      #
       # @return [Types::DescribeLoadBasedAutoScalingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLoadBasedAutoScalingResult#load_based_auto_scaling_configurations #LoadBasedAutoScalingConfigurations} => Array&lt;Types::LoadBasedAutoScalingConfiguration&gt;
+      #   * {Types::DescribeLoadBasedAutoScalingResult#load_based_auto_scaling_configurations #load_based_auto_scaling_configurations} => Array&lt;Types::LoadBasedAutoScalingConfiguration&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_based_auto_scaling({
       #     layer_ids: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.load_based_auto_scaling_configurations #=> Array
       #   resp.load_based_auto_scaling_configurations[0].layer_id #=> String
       #   resp.load_based_auto_scaling_configurations[0].enable #=> Boolean
@@ -2445,6 +2713,7 @@ module Aws
       #   resp.load_based_auto_scaling_configurations[0].down_scaling.load_threshold #=> Float
       #   resp.load_based_auto_scaling_configurations[0].down_scaling.alarms #=> Array
       #   resp.load_based_auto_scaling_configurations[0].down_scaling.alarms[0] #=> String
+      #
       # @overload describe_load_based_auto_scaling(params = {})
       # @param [Hash] params ({})
       def describe_load_based_auto_scaling(params = {}, options = {})
@@ -2462,15 +2731,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @return [Types::DescribeMyUserProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeMyUserProfileResult#user_profile #UserProfile} => Types::SelfUserProfile
+      #   * {Types::DescribeMyUserProfileResult#user_profile #user_profile} => Types::SelfUserProfile
       #
       # @example Response structure
+      #
       #   resp.user_profile.iam_user_arn #=> String
       #   resp.user_profile.name #=> String
       #   resp.user_profile.ssh_username #=> String
       #   resp.user_profile.ssh_public_key #=> String
+      #
       # @overload describe_my_user_profile(params = {})
       # @param [Hash] params ({})
       def describe_my_user_profile(params = {}, options = {})
@@ -2488,6 +2760,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :iam_user_arn
       #   The user's IAM ARN. This can also be a federated user's ARN. For
       #   more information about IAM ARNs, see [Using Identifiers][1].
@@ -2495,25 +2768,30 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :stack_id
       #   The stack ID.
+      #
       # @return [Types::DescribePermissionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribePermissionsResult#permissions #Permissions} => Array&lt;Types::Permission&gt;
+      #   * {Types::DescribePermissionsResult#permissions #permissions} => Array&lt;Types::Permission&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_permissions({
       #     iam_user_arn: "String",
       #     stack_id: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.permissions #=> Array
       #   resp.permissions[0].stack_id #=> String
       #   resp.permissions[0].iam_user_arn #=> String
       #   resp.permissions[0].allow_ssh #=> Boolean
       #   resp.permissions[0].allow_sudo #=> Boolean
       #   resp.permissions[0].level #=> String
+      #
       # @overload describe_permissions(params = {})
       # @param [Hash] params ({})
       def describe_permissions(params = {}, options = {})
@@ -2535,21 +2813,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :instance_id
       #   The instance ID. If you use this parameter, `DescribeRaidArrays`
       #   returns descriptions of the RAID arrays associated with the specified
       #   instance.
+      #
       # @option params [String] :stack_id
       #   The stack ID.
+      #
       # @option params [Array<String>] :raid_array_ids
       #   An array of RAID array IDs. If you use this parameter,
       #   `DescribeRaidArrays` returns descriptions of the specified arrays.
       #   Otherwise, it returns a description of every array.
+      #
       # @return [Types::DescribeRaidArraysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeRaidArraysResult#raid_arrays #RaidArrays} => Array&lt;Types::RaidArray&gt;
+      #   * {Types::DescribeRaidArraysResult#raid_arrays #raid_arrays} => Array&lt;Types::RaidArray&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_raid_arrays({
       #     instance_id: "String",
       #     stack_id: "String",
@@ -2557,6 +2840,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.raid_arrays #=> Array
       #   resp.raid_arrays[0].raid_array_id #=> String
       #   resp.raid_arrays[0].instance_id #=> String
@@ -2571,6 +2855,7 @@ module Aws
       #   resp.raid_arrays[0].stack_id #=> String
       #   resp.raid_arrays[0].volume_type #=> String
       #   resp.raid_arrays[0].iops #=> Integer
+      #
       # @overload describe_raid_arrays(params = {})
       # @param [Hash] params ({})
       def describe_raid_arrays(params = {}, options = {})
@@ -2588,22 +2873,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID that the instances are registered with. The operation
       #   returns descriptions of all registered Amazon RDS instances.
+      #
       # @option params [Array<String>] :rds_db_instance_arns
       #   An array containing the ARNs of the instances to be described.
+      #
       # @return [Types::DescribeRdsDbInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeRdsDbInstancesResult#rds_db_instances #RdsDbInstances} => Array&lt;Types::RdsDbInstance&gt;
+      #   * {Types::DescribeRdsDbInstancesResult#rds_db_instances #rds_db_instances} => Array&lt;Types::RdsDbInstance&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_rds_db_instances({
       #     stack_id: "String", # required
       #     rds_db_instance_arns: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.rds_db_instances #=> Array
       #   resp.rds_db_instances[0].rds_db_instance_arn #=> String
       #   resp.rds_db_instances[0].db_instance_identifier #=> String
@@ -2614,6 +2904,7 @@ module Aws
       #   resp.rds_db_instances[0].engine #=> String
       #   resp.rds_db_instances[0].stack_id #=> String
       #   resp.rds_db_instances[0].missing_on_rds #=> Boolean
+      #
       # @overload describe_rds_db_instances(params = {})
       # @param [Hash] params ({})
       def describe_rds_db_instances(params = {}, options = {})
@@ -2631,23 +2922,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :stack_id
       #   The stack ID. If you use this parameter, `DescribeServiceErrors`
       #   returns descriptions of the errors associated with the specified
       #   stack.
+      #
       # @option params [String] :instance_id
       #   The instance ID. If you use this parameter, `DescribeServiceErrors`
       #   returns descriptions of the errors associated with the specified
       #   instance.
+      #
       # @option params [Array<String>] :service_error_ids
       #   An array of service error IDs. If you use this parameter,
       #   `DescribeServiceErrors` returns descriptions of the specified errors.
       #   Otherwise, it returns a description of every error.
+      #
       # @return [Types::DescribeServiceErrorsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeServiceErrorsResult#service_errors #ServiceErrors} => Array&lt;Types::ServiceError&gt;
+      #   * {Types::DescribeServiceErrorsResult#service_errors #service_errors} => Array&lt;Types::ServiceError&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_service_errors({
       #     stack_id: "String",
       #     instance_id: "String",
@@ -2655,6 +2951,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.service_errors #=> Array
       #   resp.service_errors[0].service_error_id #=> String
       #   resp.service_errors[0].stack_id #=> String
@@ -2662,6 +2959,7 @@ module Aws
       #   resp.service_errors[0].type #=> String
       #   resp.service_errors[0].message #=> String
       #   resp.service_errors[0].created_at #=> String
+      #
       # @overload describe_service_errors(params = {})
       # @param [Hash] params ({})
       def describe_service_errors(params = {}, options = {})
@@ -2679,22 +2977,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID
+      #
       # @return [Types::DescribeStackProvisioningParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStackProvisioningParametersResult#agent_installer_url #AgentInstallerUrl} => String
-      #   * {Types::DescribeStackProvisioningParametersResult#parameters #Parameters} => Hash&lt;String,String&gt;
+      #   * {Types::DescribeStackProvisioningParametersResult#agent_installer_url #agent_installer_url} => String
+      #   * {Types::DescribeStackProvisioningParametersResult#parameters #parameters} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stack_provisioning_parameters({
       #     stack_id: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.agent_installer_url #=> String
       #   resp.parameters #=> Hash
       #   resp.parameters["String"] #=> String
+      #
       # @overload describe_stack_provisioning_parameters(params = {})
       # @param [Hash] params ({})
       def describe_stack_provisioning_parameters(params = {}, options = {})
@@ -2714,18 +3017,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Types::DescribeStackSummaryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStackSummaryResult#stack_summary #StackSummary} => Types::StackSummary
+      #   * {Types::DescribeStackSummaryResult#stack_summary #stack_summary} => Types::StackSummary
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stack_summary({
       #     stack_id: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_summary.stack_id #=> String
       #   resp.stack_summary.name #=> String
       #   resp.stack_summary.arn #=> String
@@ -2750,6 +3057,7 @@ module Aws
       #   resp.stack_summary.instances_count.terminated #=> Integer
       #   resp.stack_summary.instances_count.terminating #=> Integer
       #   resp.stack_summary.instances_count.unassigning #=> Integer
+      #
       # @overload describe_stack_summary(params = {})
       # @param [Hash] params ({})
       def describe_stack_summary(params = {}, options = {})
@@ -2767,20 +3075,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [Array<String>] :stack_ids
       #   An array of stack IDs that specify the stacks to be described. If you
       #   omit this parameter, `DescribeStacks` returns a description of every
       #   stack.
+      #
       # @return [Types::DescribeStacksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStacksResult#stacks #Stacks} => Array&lt;Types::Stack&gt;
+      #   * {Types::DescribeStacksResult#stacks #stacks} => Array&lt;Types::Stack&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stacks({
       #     stack_ids: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.stacks #=> Array
       #   resp.stacks[0].stack_id #=> String
       #   resp.stacks[0].name #=> String
@@ -2812,6 +3124,7 @@ module Aws
       #   resp.stacks[0].created_at #=> String
       #   resp.stacks[0].default_root_device_type #=> String, one of "ebs", "instance-store"
       #   resp.stacks[0].agent_version #=> String
+      #
       # @overload describe_stacks(params = {})
       # @param [Hash] params ({})
       def describe_stacks(params = {}, options = {})
@@ -2834,18 +3147,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, Array<String>] :instance_ids
       #   An array of instance IDs.
+      #
       # @return [Types::DescribeTimeBasedAutoScalingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTimeBasedAutoScalingResult#time_based_auto_scaling_configurations #TimeBasedAutoScalingConfigurations} => Array&lt;Types::TimeBasedAutoScalingConfiguration&gt;
+      #   * {Types::DescribeTimeBasedAutoScalingResult#time_based_auto_scaling_configurations #time_based_auto_scaling_configurations} => Array&lt;Types::TimeBasedAutoScalingConfiguration&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_time_based_auto_scaling({
       #     instance_ids: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.time_based_auto_scaling_configurations #=> Array
       #   resp.time_based_auto_scaling_configurations[0].instance_id #=> String
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.monday #=> Hash
@@ -2862,6 +3179,7 @@ module Aws
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.saturday["Hour"] #=> String
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.sunday #=> Hash
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.sunday["Hour"] #=> String
+      #
       # @overload describe_time_based_auto_scaling(params = {})
       # @param [Hash] params ({})
       def describe_time_based_auto_scaling(params = {}, options = {})
@@ -2878,25 +3196,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [Array<String>] :iam_user_arns
       #   An array of IAM or federated user ARNs that identify the users to be
       #   described.
+      #
       # @return [Types::DescribeUserProfilesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeUserProfilesResult#user_profiles #UserProfiles} => Array&lt;Types::UserProfile&gt;
+      #   * {Types::DescribeUserProfilesResult#user_profiles #user_profiles} => Array&lt;Types::UserProfile&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_user_profiles({
       #     iam_user_arns: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.user_profiles #=> Array
       #   resp.user_profiles[0].iam_user_arn #=> String
       #   resp.user_profiles[0].name #=> String
       #   resp.user_profiles[0].ssh_username #=> String
       #   resp.user_profiles[0].ssh_public_key #=> String
       #   resp.user_profiles[0].allow_self_management #=> Boolean
+      #
       # @overload describe_user_profiles(params = {})
       # @param [Hash] params ({})
       def describe_user_profiles(params = {}, options = {})
@@ -2918,25 +3241,31 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :instance_id
       #   The instance ID. If you use this parameter, `DescribeVolumes` returns
       #   descriptions of the volumes associated with the specified instance.
+      #
       # @option params [String] :stack_id
       #   A stack ID. The action describes the stack's registered Amazon EBS
       #   volumes.
+      #
       # @option params [String] :raid_array_id
       #   The RAID array ID. If you use this parameter, `DescribeVolumes`
       #   returns descriptions of the volumes associated with the specified RAID
       #   array.
+      #
       # @option params [Array<String>] :volume_ids
       #   Am array of volume IDs. If you use this parameter, `DescribeVolumes`
       #   returns descriptions of the specified volumes. Otherwise, it returns a
       #   description of every volume.
+      #
       # @return [Types::DescribeVolumesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeVolumesResult#volumes #Volumes} => Array&lt;Types::Volume&gt;
+      #   * {Types::DescribeVolumesResult#volumes #volumes} => Array&lt;Types::Volume&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_volumes({
       #     instance_id: "String",
       #     stack_id: "String",
@@ -2945,6 +3274,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.volumes #=> Array
       #   resp.volumes[0].volume_id #=> String
       #   resp.volumes[0].ec2_volume_id #=> String
@@ -2959,6 +3289,7 @@ module Aws
       #   resp.volumes[0].availability_zone #=> String
       #   resp.volumes[0].volume_type #=> String
       #   resp.volumes[0].iops #=> Integer
+      #
       # @overload describe_volumes(params = {})
       # @param [Hash] params ({})
       def describe_volumes(params = {}, options = {})
@@ -2976,18 +3307,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_load_balancer_name
       #   The Elastic Load Balancing instance's name.
+      #
       # @option params [required, String] :layer_id
       #   The ID of the layer that the Elastic Load Balancing instance is
       #   attached to.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detach_elastic_load_balancer({
       #     elastic_load_balancer_name: "String", # required
       #     layer_id: "String", # required
       #   })
+      #
       # @overload detach_elastic_load_balancer(params = {})
       # @param [Hash] params ({})
       def detach_elastic_load_balancer(params = {}, options = {})
@@ -3008,14 +3344,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_ip
       #   The Elastic IP address.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disassociate_elastic_ip({
       #     elastic_ip: "String", # required
       #   })
+      #
       # @overload disassociate_elastic_ip(params = {})
       # @param [Hash] params ({})
       def disassociate_elastic_ip(params = {}, options = {})
@@ -3034,21 +3374,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :layer_id
       #   The layer ID.
+      #
       # @return [Types::GetHostnameSuggestionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetHostnameSuggestionResult#layer_id #LayerId} => String
-      #   * {Types::GetHostnameSuggestionResult#hostname #Hostname} => String
+      #   * {Types::GetHostnameSuggestionResult#layer_id #layer_id} => String
+      #   * {Types::GetHostnameSuggestionResult#hostname #hostname} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_hostname_suggestion({
       #     layer_id: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.layer_id #=> String
       #   resp.hostname #=> String
+      #
       # @overload get_hostname_suggestion(params = {})
       # @param [Hash] params ({})
       def get_hostname_suggestion(params = {}, options = {})
@@ -3061,28 +3406,34 @@ module Aws
       #  </note>
       #
       # Grants RDP access to a Windows instance for a specified time period.
+      #
       # @option params [required, String] :instance_id
       #   The instance's AWS OpsWorks ID.
+      #
       # @option params [Integer] :valid_for_in_minutes
       #   The length of time (in minutes) that the grant is valid. When the
       #   grant expires at the end of this period, the user will no longer be
       #   able to use the credentials to log in. If the user is logged in at the
       #   time, he or she automatically will be logged out.
+      #
       # @return [Types::GrantAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GrantAccessResult#temporary_credential #TemporaryCredential} => Types::TemporaryCredential
+      #   * {Types::GrantAccessResult#temporary_credential #temporary_credential} => Types::TemporaryCredential
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.grant_access({
       #     instance_id: "String", # required
       #     valid_for_in_minutes: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.temporary_credential.username #=> String
       #   resp.temporary_credential.password #=> String
       #   resp.temporary_credential.valid_for_in_minutes #=> Integer
       #   resp.temporary_credential.instance_id #=> String
+      #
       # @overload grant_access(params = {})
       # @param [Hash] params ({})
       def grant_access(params = {}, options = {})
@@ -3102,14 +3453,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reboot_instance({
       #     instance_id: "String", # required
       #   })
+      #
       # @overload reboot_instance(params = {})
       # @param [Hash] params ({})
       def reboot_instance(params = {}, options = {})
@@ -3131,22 +3486,28 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :ecs_cluster_arn
       #   The cluster's ARN.
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Types::RegisterEcsClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterEcsClusterResult#ecs_cluster_arn #EcsClusterArn} => String
+      #   * {Types::RegisterEcsClusterResult#ecs_cluster_arn #ecs_cluster_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_ecs_cluster({
       #     ecs_cluster_arn: "String", # required
       #     stack_id: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.ecs_cluster_arn #=> String
+      #
       # @overload register_ecs_cluster(params = {})
       # @param [Hash] params ({})
       def register_ecs_cluster(params = {}, options = {})
@@ -3169,22 +3530,28 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_ip
       #   The Elastic IP address.
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Types::RegisterElasticIpResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterElasticIpResult#elastic_ip #ElasticIp} => String
+      #   * {Types::RegisterElasticIpResult#elastic_ip #elastic_ip} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_elastic_ip({
       #     elastic_ip: "String", # required
       #     stack_id: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.elastic_ip #=> String
+      #
       # @overload register_elastic_ip(params = {})
       # @param [Hash] params ({})
       def register_elastic_ip(params = {}, options = {})
@@ -3214,26 +3581,35 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The ID of the stack that the instance is to be registered with.
+      #
       # @option params [String] :hostname
       #   The instance's hostname.
+      #
       # @option params [String] :public_ip
       #   The instance's public IP address.
+      #
       # @option params [String] :private_ip
       #   The instance's private IP address.
+      #
       # @option params [String] :rsa_public_key
       #   The instances public RSA key. This key is used to encrypt
       #   communication between the instance and the service.
+      #
       # @option params [String] :rsa_public_key_fingerprint
       #   The instances public RSA key fingerprint.
+      #
       # @option params [Types::InstanceIdentity] :instance_identity
       #   An InstanceIdentity object that contains the instance's identity.
+      #
       # @return [Types::RegisterInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterInstanceResult#instance_id #InstanceId} => String
+      #   * {Types::RegisterInstanceResult#instance_id #instance_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_instance({
       #     stack_id: "String", # required
       #     hostname: "String",
@@ -3248,7 +3624,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instance_id #=> String
+      #
       # @overload register_instance(params = {})
       # @param [Hash] params ({})
       def register_instance(params = {}, options = {})
@@ -3266,23 +3644,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @option params [required, String] :rds_db_instance_arn
       #   The Amazon RDS instance's ARN.
+      #
       # @option params [required, String] :db_user
       #   The database's master user name.
+      #
       # @option params [required, String] :db_password
       #   The database password.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_rds_db_instance({
       #     stack_id: "String", # required
       #     rds_db_instance_arn: "String", # required
       #     db_user: "String", # required
       #     db_password: "String", # required
       #   })
+      #
       # @overload register_rds_db_instance(params = {})
       # @param [Hash] params ({})
       def register_rds_db_instance(params = {}, options = {})
@@ -3304,22 +3689,28 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :ec2_volume_id
       #   The Amazon EBS volume ID.
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Types::RegisterVolumeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterVolumeResult#volume_id #VolumeId} => String
+      #   * {Types::RegisterVolumeResult#volume_id #volume_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_volume({
       #     ec2_volume_id: "String",
       #     stack_id: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.volume_id #=> String
+      #
       # @overload register_volume(params = {})
       # @param [Hash] params ({})
       def register_volume(params = {}, options = {})
@@ -3347,22 +3738,28 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :layer_id
       #   The layer ID.
+      #
       # @option params [Boolean] :enable
       #   Enables load-based auto scaling for the layer.
+      #
       # @option params [Types::AutoScalingThresholds] :up_scaling
       #   An `AutoScalingThresholds` object with the upscaling threshold
       #   configuration. If the load exceeds these thresholds for a specified
       #   amount of time, AWS OpsWorks starts a specified number of instances.
+      #
       # @option params [Types::AutoScalingThresholds] :down_scaling
       #   An `AutoScalingThresholds` object with the downscaling threshold
       #   configuration. If the load falls below these thresholds for a
       #   specified amount of time, AWS OpsWorks stops a specified number of
       #   instances.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_load_based_auto_scaling({
       #     layer_id: "String", # required
       #     enable: false,
@@ -3385,6 +3782,7 @@ module Aws
       #       alarms: ["String"],
       #     },
       #   })
+      #
       # @overload set_load_based_auto_scaling(params = {})
       # @param [Hash] params ({})
       def set_load_based_auto_scaling(params = {}, options = {})
@@ -3404,14 +3802,19 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingsecurity.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @option params [required, String] :iam_user_arn
       #   The user's IAM ARN. This can also be a federated user's ARN.
+      #
       # @option params [Boolean] :allow_ssh
       #   The user is allowed to use SSH to communicate with the instance.
+      #
       # @option params [Boolean] :allow_sudo
       #   The user is allowed to use **sudo** to elevate privileges.
+      #
       # @option params [String] :level
       #   The user's permission level, which must be set to one of the
       #   following strings. You cannot set your own permissions level.
@@ -3432,9 +3835,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_permission({
       #     stack_id: "String", # required
       #     iam_user_arn: "String", # required
@@ -3442,6 +3847,7 @@ module Aws
       #     allow_sudo: false,
       #     level: "String",
       #   })
+      #
       # @overload set_permission(params = {})
       # @param [Hash] params ({})
       def set_permission(params = {}, options = {})
@@ -3462,13 +3868,17 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-autoscaling.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @option params [Types::WeeklyAutoScalingSchedule] :auto_scaling_schedule
       #   An `AutoScalingSchedule` with the instance schedule.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_time_based_auto_scaling({
       #     instance_id: "String", # required
       #     auto_scaling_schedule: {
@@ -3495,6 +3905,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload set_time_based_auto_scaling(params = {})
       # @param [Hash] params ({})
       def set_time_based_auto_scaling(params = {}, options = {})
@@ -3514,14 +3925,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_instance({
       #     instance_id: "String", # required
       #   })
+      #
       # @overload start_instance(params = {})
       # @param [Hash] params ({})
       def start_instance(params = {}, options = {})
@@ -3539,14 +3954,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_stack({
       #     stack_id: "String", # required
       #   })
+      #
       # @overload start_stack(params = {})
       # @param [Hash] params ({})
       def start_stack(params = {}, options = {})
@@ -3569,14 +3988,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-starting.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_instance({
       #     instance_id: "String", # required
       #   })
+      #
       # @overload stop_instance(params = {})
       # @param [Hash] params ({})
       def stop_instance(params = {}, options = {})
@@ -3594,14 +4017,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_stack({
       #     stack_id: "String", # required
       #   })
+      #
       # @overload stop_stack(params = {})
       # @param [Hash] params ({})
       def stop_stack(params = {}, options = {})
@@ -3622,14 +4049,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.unassign_instance({
       #     instance_id: "String", # required
       #   })
+      #
       # @overload unassign_instance(params = {})
       # @param [Hash] params ({})
       def unassign_instance(params = {}, options = {})
@@ -3649,14 +4080,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :volume_id
       #   The volume ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.unassign_volume({
       #     volume_id: "String", # required
       #   })
+      #
       # @overload unassign_volume(params = {})
       # @param [Hash] params ({})
       def unassign_volume(params = {}, options = {})
@@ -3674,28 +4109,39 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :app_id
       #   The app ID.
+      #
       # @option params [String] :name
       #   The app name.
+      #
       # @option params [String] :description
       #   A description of the app.
+      #
       # @option params [Array<Types::DataSource>] :data_sources
       #   The app's data sources.
+      #
       # @option params [String] :type
       #   The app type.
+      #
       # @option params [Types::Source] :app_source
       #   A `Source` object that specifies the app repository.
+      #
       # @option params [Array<String>] :domains
       #   The app's virtual host settings, with multiple domains separated by
       #   commas. For example: `'www.example.com, example.com'`
+      #
       # @option params [Boolean] :enable_ssl
       #   Whether SSL is enabled for the app.
+      #
       # @option params [Types::SslConfiguration] :ssl_configuration
       #   An `SslConfiguration` object with the SSL configuration.
+      #
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key/value pairs to be added to the stack
       #   attributes.
+      #
       # @option params [Array<Types::EnvironmentVariable>] :environment
       #   An array of `EnvironmentVariable` objects that specify environment
       #   variables to be associated with the app. After you deploy the app,
@@ -3718,9 +4164,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_app({
       #     app_id: "String", # required
       #     name: "String",
@@ -3759,6 +4207,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload update_app(params = {})
       # @param [Hash] params ({})
       def update_app(params = {}, options = {})
@@ -3778,17 +4227,22 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :elastic_ip
       #   The address.
+      #
       # @option params [String] :name
       #   The new name.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_elastic_ip({
       #     elastic_ip: "String", # required
       #     name: "String",
       #   })
+      #
       # @overload update_elastic_ip(params = {})
       # @param [Hash] params ({})
       def update_elastic_ip(params = {}, options = {})
@@ -3806,10 +4260,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :instance_id
       #   The instance ID.
+      #
       # @option params [Array<String>] :layer_ids
       #   The instance's layer IDs.
+      #
       # @option params [String] :instance_type
       #   The instance type, such as `t2.micro`. For a list of supported
       #   instance types, open the stack in the console, choose **Instances**,
@@ -3822,11 +4279,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+      #
       # @option params [String] :auto_scaling_type
       #   For load-based or time-based instances, the type. Windows stacks can
       #   use only time-based instances.
+      #
       # @option params [String] :hostname
       #   The instance host name.
+      #
       # @option params [String] :os
       #   The instance's operating system, which must be set to one of the
       #   following. You cannot update an instance that is using a custom AMI.
@@ -3868,14 +4328,17 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+      #
       # @option params [String] :ami_id
       #   The ID of the AMI that was used to create the instance. The value of
       #   this parameter must be the same AMI ID that the instance is already
       #   using. You cannot apply a new AMI to an instance by running
       #   UpdateInstance. UpdateInstance does not work on instances that are
       #   using custom AMIs.
+      #
       # @option params [String] :ssh_key_name
       #   The instance's Amazon EC2 key name.
+      #
       # @option params [String] :architecture
       #   The instance architecture. Instance types do not necessarily support
       #   both architectures. For a list of the architectures that are supported
@@ -3884,6 +4347,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+      #
       # @option params [Boolean] :install_updates_on_boot
       #   Whether to install operating system and package updates when the
       #   instance boots. The default value is `true`. To control when updates
@@ -3896,8 +4360,10 @@ module Aws
       #   that your instances have the latest security updates.
       #
       #    </note>
+      #
       # @option params [Boolean] :ebs_optimized
       #   This property cannot be updated.
+      #
       # @option params [String] :agent_version
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
@@ -3914,9 +4380,11 @@ module Aws
       #   must use the complete version number, not the abbreviated number shown
       #   on the console. For a list of available agent version numbers, call
       #   DescribeAgentVersions.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_instance({
       #     instance_id: "String", # required
       #     layer_ids: ["String"],
@@ -3931,6 +4399,7 @@ module Aws
       #     ebs_optimized: false,
       #     agent_version: "String",
       #   })
+      #
       # @overload update_instance(params = {})
       # @param [Hash] params ({})
       def update_instance(params = {}, options = {})
@@ -3948,10 +4417,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :layer_id
       #   The layer ID.
+      #
       # @option params [String] :name
       #   The layer name, which is used by the console.
+      #
       # @option params [String] :shortname
       #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorksand by Chef. The
@@ -3965,9 +4437,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
+      #
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key/value pairs to be added to the stack
       #   attributes.
+      #
       # @option params [String] :custom_instance_profile_arn
       #   The ARN of an IAM profile to be used for all of the layer's EC2
       #   instances. For more information about IAM ARNs, see [Using
@@ -3976,6 +4450,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :custom_json
       #   A JSON-formatted string containing custom stack configuration and
       #   deployment attributes to be installed on the layer's instances. For
@@ -3984,15 +4459,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+      #
       # @option params [Array<String>] :custom_security_group_ids
       #   An array containing the layer's custom security group IDs.
+      #
       # @option params [Array<String>] :packages
       #   An array of `Package` objects that describe the layer's packages.
+      #
       # @option params [Array<Types::VolumeConfiguration>] :volume_configurations
       #   A `VolumeConfigurations` object that describes the layer's Amazon EBS
       #   volumes.
+      #
       # @option params [Boolean] :enable_auto_healing
       #   Whether to disable auto healing for the layer.
+      #
       # @option params [Boolean] :auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
       #   layer's instances. For more information, see [How to Edit a
@@ -4002,6 +4482,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+      #
       # @option params [Boolean] :auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically assign
       #   a public IP address to the layer's instances. For more information,
@@ -4010,9 +4491,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+      #
       # @option params [Types::Recipes] :custom_recipes
       #   A `LayerCustomRecipes` object that specifies the layer's custom
       #   recipes.
+      #
       # @option params [Boolean] :install_updates_on_boot
       #   Whether to install operating system and package updates when the
       #   instance boots. The default value is `true`. To control when updates
@@ -4025,12 +4508,16 @@ module Aws
       #   that your instances have the latest security updates.
       #
       #    </note>
+      #
       # @option params [Boolean] :use_ebs_optimized_instances
       #   Whether to use Amazon EBS-optimized instances.
+      #
       # @option params [Types::LifecycleEventConfiguration] :lifecycle_event_configuration
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_layer({
       #     layer_id: "String", # required
       #     name: "String",
@@ -4071,6 +4558,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload update_layer(params = {})
       # @param [Hash] params ({})
       def update_layer(params = {}, options = {})
@@ -4088,14 +4576,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [String] :ssh_public_key
       #   The user's SSH public key.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_my_user_profile({
       #     ssh_public_key: "String",
       #   })
+      #
       # @overload update_my_user_profile(params = {})
       # @param [Hash] params ({})
       def update_my_user_profile(params = {}, options = {})
@@ -4113,20 +4605,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :rds_db_instance_arn
       #   The Amazon RDS instance's ARN.
+      #
       # @option params [String] :db_user
       #   The master user name.
+      #
       # @option params [String] :db_password
       #   The database password.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_rds_db_instance({
       #     rds_db_instance_arn: "String", # required
       #     db_user: "String",
       #     db_password: "String",
       #   })
+      #
       # @overload update_rds_db_instance(params = {})
       # @param [Hash] params ({})
       def update_rds_db_instance(params = {}, options = {})
@@ -4144,15 +4642,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :stack_id
       #   The stack ID.
+      #
       # @option params [String] :name
       #   The stack's new name.
+      #
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key-value pairs to be added to the stack
       #   attributes.
+      #
       # @option params [String] :service_role_arn
       #   Do not use this parameter. You cannot update a stack's service role.
+      #
       # @option params [String] :default_instance_profile_arn
       #   The ARN of an IAM profile that is the default profile for all of the
       #   stack's EC2 instances. For more information about IAM ARNs, see
@@ -4161,6 +4664,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
+      #
       # @option params [String] :default_os
       #   The stack's operating system, which must be set to one of the
       #   following:
@@ -4194,6 +4698,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
+      #
       # @option params [String] :hostname_theme
       #   The stack's new host name theme, with spaces replaced by underscores.
       #   The theme is used to generate host names for the stack's instances.
@@ -4225,6 +4730,7 @@ module Aws
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
+      #
       # @option params [String] :default_availability_zone
       #   The stack's default Availability Zone, which must be in the stack's
       #   region. For more information, see [Regions and Endpoints][1]. If you
@@ -4234,6 +4740,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
+      #
       # @option params [String] :default_subnet_id
       #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
@@ -4242,6 +4749,7 @@ module Aws
       #   the subnet must be in that zone. For information on default values and
       #   when this parameter is required, see the `VpcId` parameter
       #   description.
+      #
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration JSON values or
@@ -4255,11 +4763,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
+      #
       # @option params [Types::StackConfigurationManager] :configuration_manager
       #   The configuration manager. When you update a stack, we recommend that
       #   you use the configuration manager to specify the Chef version: 12,
       #   11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
       #   default value for Linux stacks is currently 11.4.
+      #
       # @option params [Types::ChefConfiguration] :chef_configuration
       #   A `ChefConfiguration` object that specifies whether to enable
       #   Berkshelf and the Berkshelf version on Chef 11.10 stacks. For more
@@ -4268,8 +4778,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+      #
       # @option params [Boolean] :use_custom_cookbooks
       #   Whether the stack uses custom cookbooks.
+      #
       # @option params [Types::Source] :custom_cookbooks_source
       #   Contains the information required to retrieve an app or cookbook from
       #   a repository. For more information, see [Creating Apps][1] or [Custom
@@ -4279,6 +4791,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html
+      #
       # @option params [String] :default_ssh_key_name
       #   A default Amazon EC2 key-pair name. The default value is `none`. If
       #   you specify a key-pair name, AWS OpsWorks installs the public key on
@@ -4293,6 +4806,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-ssh.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
       #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
+      #
       # @option params [String] :default_root_device_type
       #   The default root device type. This value is used by default for all
       #   instances in the stack, but you can override it when you create an
@@ -4301,6 +4815,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
+      #
       # @option params [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
       #   the stack's layers.
@@ -4328,6 +4843,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html
+      #
       # @option params [String] :agent_version
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
@@ -4350,9 +4866,11 @@ module Aws
       #   instance, which overrides the stack's default setting.
       #
       #    </note>
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_stack({
       #     stack_id: "String", # required
       #     name: "String",
@@ -4388,6 +4906,7 @@ module Aws
       #     use_opsworks_security_groups: false,
       #     agent_version: "String",
       #   })
+      #
       # @overload update_stack(params = {})
       # @param [Hash] params ({})
       def update_stack(params = {}, options = {})
@@ -4404,16 +4923,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :iam_user_arn
       #   The user IAM ARN. This can also be a federated user's ARN.
+      #
       # @option params [String] :ssh_username
       #   The user's SSH user name. The allowable characters are \[a-z\],
       #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
       #   other punctuation marks, AWS OpsWorks removes them. For example,
       #   `my.name` will be changed to `myname`. If you do not specify an SSH
       #   user name, AWS OpsWorks generates one from the IAM user name.
+      #
       # @option params [String] :ssh_public_key
       #   The user's new SSH public key.
+      #
       # @option params [Boolean] :allow_self_management
       #   Whether users can specify their own SSH public key through the My
       #   Settings page. For more information, see [Managing User
@@ -4422,15 +4945,18 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_user_profile({
       #     iam_user_arn: "String", # required
       #     ssh_username: "String",
       #     ssh_public_key: "String",
       #     allow_self_management: false,
       #   })
+      #
       # @overload update_user_profile(params = {})
       # @param [Hash] params ({})
       def update_user_profile(params = {}, options = {})
@@ -4450,20 +4976,26 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
+      #
       # @option params [required, String] :volume_id
       #   The volume ID.
+      #
       # @option params [String] :name
       #   The new name.
+      #
       # @option params [String] :mount_point
       #   The new mount point.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_volume({
       #     volume_id: "String", # required
       #     name: "String",
       #     mount_point: "String",
       #   })
+      #
       # @overload update_volume(params = {})
       # @param [Hash] params ({})
       def update_volume(params = {}, options = {})

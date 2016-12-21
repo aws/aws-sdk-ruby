@@ -12,19 +12,18 @@ module AwsSdkCodeGenerator
       # @option options [required, String] :signature_version
       # @option options [required, Hash] :add_plugins
       # @option options [required, Array] :remove_plugins
+      # @option options [required, Hash] :api
       # @option options [Hash] :waiters
+      # @option options [Hash] :client_examples
       def initialize(options)
         @service_identifier = options.fetch(:service_identifier)
         @service_name = options.fetch(:service_name)
         @module_name = options.fetch(:module_name)
         @gem_name = options.fetch(:gem_name)
         @gem_version = options.fetch(:gem_version)
-        @plugin_requires = []
-        @plugin_class_names = []
-        PluginList.new(options).each do |plugin|
-          @plugin_requires << plugin.require_path
-          @plugin_class_names << plugin.class_name
-        end
+        @plugins = PluginList.new(options)
+        @client_constructor = ClientConstructor.new(plugins: @plugins)
+        @operations = ClientOperationList.new(options).to_a
         @waiters = WaiterList.new(options[:waiters] || { 'waiters' => {}})
       end
 
@@ -43,11 +42,21 @@ module AwsSdkCodeGenerator
       # @return [String]
       attr_reader :gem_version
 
-      # @return [Array<String>]
-      attr_reader :plugin_requires
+      # @return [ClientConstructor]
+      attr_reader :client_constructor
+
+      # @return [Array<Operation>]
+      attr_reader :operations
 
       # @return [Array<String>]
-      attr_reader :plugin_class_names
+      def plugin_requires
+        @plugins.map(&:require_path)
+      end
+
+      # @return [Array<String>]
+      def plugin_class_names
+        @plugins.map(&:class_name)
+      end
 
       # @return [Array<WaiterList::Waiter>]
       def waiters

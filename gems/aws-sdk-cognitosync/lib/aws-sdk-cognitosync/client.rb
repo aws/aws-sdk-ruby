@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -139,21 +153,26 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @return [Types::BulkPublishResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::BulkPublishResponse#identity_pool_id #IdentityPoolId} => String
+      #   * {Types::BulkPublishResponse#identity_pool_id #identity_pool_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.bulk_publish({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
+      #
       # @overload bulk_publish(params = {})
       # @param [Hash] params ({})
       def bulk_publish(params = {}, options = {})
@@ -168,22 +187,27 @@ module Aws
       #
       # This API can be called with temporary user credentials provided by
       # Cognito Identity or with developer credentials.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :identity_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
       #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
+      #
       # @return [Types::DeleteDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteDatasetResponse#dataset #Dataset} => Types::Dataset
+      #   * {Types::DeleteDatasetResponse#dataset #dataset} => Types::Dataset
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_dataset({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
@@ -191,6 +215,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.dataset.identity_id #=> String
       #   resp.dataset.dataset_name #=> String
       #   resp.dataset.creation_date #=> Time
@@ -198,6 +223,7 @@ module Aws
       #   resp.dataset.last_modified_by #=> String
       #   resp.dataset.data_storage #=> Integer
       #   resp.dataset.num_records #=> Integer
+      #
       # @overload delete_dataset(params = {})
       # @param [Hash] params ({})
       def delete_dataset(params = {}, options = {})
@@ -213,22 +239,27 @@ module Aws
       # This API can be called with temporary user credentials provided by
       # Cognito Identity or with developer credentials. You should use Cognito
       # Identity credentials to make this API call.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :identity_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
       #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
+      #
       # @return [Types::DescribeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDatasetResponse#dataset #Dataset} => Types::Dataset
+      #   * {Types::DescribeDatasetResponse#dataset #dataset} => Types::Dataset
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_dataset({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
@@ -236,6 +267,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.dataset.identity_id #=> String
       #   resp.dataset.dataset_name #=> String
       #   resp.dataset.creation_date #=> Time
@@ -243,6 +275,7 @@ module Aws
       #   resp.dataset.last_modified_by #=> String
       #   resp.dataset.data_storage #=> Integer
       #   resp.dataset.num_records #=> Integer
+      #
       # @overload describe_dataset(params = {})
       # @param [Hash] params ({})
       def describe_dataset(params = {}, options = {})
@@ -256,24 +289,29 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @return [Types::DescribeIdentityPoolUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeIdentityPoolUsageResponse#identity_pool_usage #IdentityPoolUsage} => Types::IdentityPoolUsage
+      #   * {Types::DescribeIdentityPoolUsageResponse#identity_pool_usage #identity_pool_usage} => Types::IdentityPoolUsage
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_identity_pool_usage({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_usage.identity_pool_id #=> String
       #   resp.identity_pool_usage.sync_sessions_count #=> Integer
       #   resp.identity_pool_usage.data_storage #=> Integer
       #   resp.identity_pool_usage.last_modified_date #=> Time
+      #
       # @overload describe_identity_pool_usage(params = {})
       # @param [Hash] params ({})
       def describe_identity_pool_usage(params = {}, options = {})
@@ -286,30 +324,36 @@ module Aws
       #
       # This API can be called with temporary user credentials provided by
       # Cognito Identity or with developer credentials.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :identity_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @return [Types::DescribeIdentityUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeIdentityUsageResponse#identity_usage #IdentityUsage} => Types::IdentityUsage
+      #   * {Types::DescribeIdentityUsageResponse#identity_usage #identity_usage} => Types::IdentityUsage
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_identity_usage({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_usage.identity_id #=> String
       #   resp.identity_usage.identity_pool_id #=> String
       #   resp.identity_usage.last_modified_date #=> Time
       #   resp.identity_usage.dataset_count #=> Integer
       #   resp.identity_usage.data_storage #=> Integer
+      #
       # @overload describe_identity_usage(params = {})
       # @param [Hash] params ({})
       def describe_identity_usage(params = {}, options = {})
@@ -322,29 +366,34 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @return [Types::GetBulkPublishDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetBulkPublishDetailsResponse#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::GetBulkPublishDetailsResponse#bulk_publish_start_time #BulkPublishStartTime} => Time
-      #   * {Types::GetBulkPublishDetailsResponse#bulk_publish_complete_time #BulkPublishCompleteTime} => Time
-      #   * {Types::GetBulkPublishDetailsResponse#bulk_publish_status #BulkPublishStatus} => String
-      #   * {Types::GetBulkPublishDetailsResponse#failure_message #FailureMessage} => String
+      #   * {Types::GetBulkPublishDetailsResponse#identity_pool_id #identity_pool_id} => String
+      #   * {Types::GetBulkPublishDetailsResponse#bulk_publish_start_time #bulk_publish_start_time} => Time
+      #   * {Types::GetBulkPublishDetailsResponse#bulk_publish_complete_time #bulk_publish_complete_time} => Time
+      #   * {Types::GetBulkPublishDetailsResponse#bulk_publish_status #bulk_publish_status} => String
+      #   * {Types::GetBulkPublishDetailsResponse#failure_message #failure_message} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_bulk_publish_details({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.bulk_publish_start_time #=> Time
       #   resp.bulk_publish_complete_time #=> Time
       #   resp.bulk_publish_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FAILED", "SUCCEEDED"
       #   resp.failure_message #=> String
+      #
       # @overload get_bulk_publish_details(params = {})
       # @param [Hash] params ({})
       def get_bulk_publish_details(params = {}, options = {})
@@ -358,20 +407,25 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   The Cognito Identity Pool ID for the request
+      #
       # @return [Types::GetCognitoEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCognitoEventsResponse#events #Events} => Hash&lt;String,String&gt;
+      #   * {Types::GetCognitoEventsResponse#events #events} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_cognito_events({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Hash
       #   resp.events["CognitoEventType"] #=> String
+      #
       # @overload get_cognito_events(params = {})
       # @param [Hash] params ({})
       def get_cognito_events(params = {}, options = {})
@@ -384,23 +438,27 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. This is the ID of the pool for which to return a
       #   configuration.
+      #
       # @return [Types::GetIdentityPoolConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityPoolConfigurationResponse#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::GetIdentityPoolConfigurationResponse#push_sync #PushSync} => Types::PushSync
-      #   * {Types::GetIdentityPoolConfigurationResponse#cognito_streams #CognitoStreams} => Types::CognitoStreams
+      #   * {Types::GetIdentityPoolConfigurationResponse#identity_pool_id #identity_pool_id} => String
+      #   * {Types::GetIdentityPoolConfigurationResponse#push_sync #push_sync} => Types::PushSync
+      #   * {Types::GetIdentityPoolConfigurationResponse#cognito_streams #cognito_streams} => Types::CognitoStreams
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_pool_configuration({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.push_sync.application_arns #=> Array
       #   resp.push_sync.application_arns[0] #=> String
@@ -408,6 +466,7 @@ module Aws
       #   resp.cognito_streams.stream_name #=> String
       #   resp.cognito_streams.role_arn #=> String
       #   resp.cognito_streams.streaming_status #=> String, one of "ENABLED", "DISABLED"
+      #
       # @overload get_identity_pool_configuration(params = {})
       # @param [Hash] params ({})
       def get_identity_pool_configuration(params = {}, options = {})
@@ -422,25 +481,31 @@ module Aws
       # ListDatasets can be called with temporary user credentials provided by
       # Cognito Identity or with developer credentials. You should use the
       # Cognito Identity credentials to make this API call.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :identity_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [String] :next_token
       #   A pagination token for obtaining the next page of results.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to be returned.
+      #
       # @return [Types::ListDatasetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDatasetsResponse#datasets #Datasets} => Array&lt;Types::Dataset&gt;
-      #   * {Types::ListDatasetsResponse#count #Count} => Integer
-      #   * {Types::ListDatasetsResponse#next_token #NextToken} => String
+      #   * {Types::ListDatasetsResponse#datasets #datasets} => Array&lt;Types::Dataset&gt;
+      #   * {Types::ListDatasetsResponse#count #count} => Integer
+      #   * {Types::ListDatasetsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_datasets({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
@@ -449,6 +514,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.datasets #=> Array
       #   resp.datasets[0].identity_id #=> String
       #   resp.datasets[0].dataset_name #=> String
@@ -459,6 +525,7 @@ module Aws
       #   resp.datasets[0].num_records #=> Integer
       #   resp.count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload list_datasets(params = {})
       # @param [Hash] params ({})
       def list_datasets(params = {}, options = {})
@@ -471,24 +538,29 @@ module Aws
       # ListIdentityPoolUsage can only be called with developer credentials.
       # You cannot make this API call with the temporary user credentials
       # provided by Cognito Identity.
+      #
       # @option params [String] :next_token
       #   A pagination token for obtaining the next page of results.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to be returned.
+      #
       # @return [Types::ListIdentityPoolUsageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIdentityPoolUsageResponse#identity_pool_usages #IdentityPoolUsages} => Array&lt;Types::IdentityPoolUsage&gt;
-      #   * {Types::ListIdentityPoolUsageResponse#max_results #MaxResults} => Integer
-      #   * {Types::ListIdentityPoolUsageResponse#count #Count} => Integer
-      #   * {Types::ListIdentityPoolUsageResponse#next_token #NextToken} => String
+      #   * {Types::ListIdentityPoolUsageResponse#identity_pool_usages #identity_pool_usages} => Array&lt;Types::IdentityPoolUsage&gt;
+      #   * {Types::ListIdentityPoolUsageResponse#max_results #max_results} => Integer
+      #   * {Types::ListIdentityPoolUsageResponse#count #count} => Integer
+      #   * {Types::ListIdentityPoolUsageResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_identity_pool_usage({
       #     next_token: "String",
       #     max_results: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_usages #=> Array
       #   resp.identity_pool_usages[0].identity_pool_id #=> String
       #   resp.identity_pool_usages[0].sync_sessions_count #=> Integer
@@ -497,6 +569,7 @@ module Aws
       #   resp.max_results #=> Integer
       #   resp.count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload list_identity_pool_usage(params = {})
       # @param [Hash] params ({})
       def list_identity_pool_usage(params = {}, options = {})
@@ -512,38 +585,47 @@ module Aws
       # ListRecords can be called with temporary user credentials provided by
       # Cognito Identity or with developer credentials. You should use Cognito
       # Identity credentials to make this API call.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :identity_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
       #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
+      #
       # @option params [Integer] :last_sync_count
       #   The last server sync count for this record.
+      #
       # @option params [String] :next_token
       #   A pagination token for obtaining the next page of results.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results to be returned.
+      #
       # @option params [String] :sync_session_token
       #   A token containing a session ID, identity ID, and expiration.
+      #
       # @return [Types::ListRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListRecordsResponse#records #Records} => Array&lt;Types::Record&gt;
-      #   * {Types::ListRecordsResponse#next_token #NextToken} => String
-      #   * {Types::ListRecordsResponse#count #Count} => Integer
-      #   * {Types::ListRecordsResponse#dataset_sync_count #DatasetSyncCount} => Integer
-      #   * {Types::ListRecordsResponse#last_modified_by #LastModifiedBy} => String
-      #   * {Types::ListRecordsResponse#merged_dataset_names #MergedDatasetNames} => Array&lt;String&gt;
-      #   * {Types::ListRecordsResponse#dataset_exists #DatasetExists} => Boolean
-      #   * {Types::ListRecordsResponse#dataset_deleted_after_requested_sync_count #DatasetDeletedAfterRequestedSyncCount} => Boolean
-      #   * {Types::ListRecordsResponse#sync_session_token #SyncSessionToken} => String
+      #   * {Types::ListRecordsResponse#records #records} => Array&lt;Types::Record&gt;
+      #   * {Types::ListRecordsResponse#next_token #next_token} => String
+      #   * {Types::ListRecordsResponse#count #count} => Integer
+      #   * {Types::ListRecordsResponse#dataset_sync_count #dataset_sync_count} => Integer
+      #   * {Types::ListRecordsResponse#last_modified_by #last_modified_by} => String
+      #   * {Types::ListRecordsResponse#merged_dataset_names #merged_dataset_names} => Array&lt;String&gt;
+      #   * {Types::ListRecordsResponse#dataset_exists #dataset_exists} => Boolean
+      #   * {Types::ListRecordsResponse#dataset_deleted_after_requested_sync_count #dataset_deleted_after_requested_sync_count} => Boolean
+      #   * {Types::ListRecordsResponse#sync_session_token #sync_session_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_records({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
@@ -555,6 +637,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.records #=> Array
       #   resp.records[0].key #=> String
       #   resp.records[0].value #=> String
@@ -571,6 +654,7 @@ module Aws
       #   resp.dataset_exists #=> Boolean
       #   resp.dataset_deleted_after_requested_sync_count #=> Boolean
       #   resp.sync_session_token #=> String
+      #
       # @overload list_records(params = {})
       # @param [Hash] params ({})
       def list_records(params = {}, options = {})
@@ -582,21 +666,27 @@ module Aws
       #
       # This API can only be called with temporary credentials provided by
       # Cognito Identity. You cannot call this API with developer credentials.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. Here, the ID of the pool that the identity belongs to.
+      #
       # @option params [required, String] :identity_id
       #   The unique ID for this identity.
+      #
       # @option params [required, String] :platform
       #   The SNS platform type (e.g. GCM, SDM, APNS, APNS\_SANDBOX).
+      #
       # @option params [required, String] :token
       #   The push token.
+      #
       # @return [Types::RegisterDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterDeviceResponse#device_id #DeviceId} => String
+      #   * {Types::RegisterDeviceResponse#device_id #device_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_device({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
@@ -605,7 +695,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.device_id #=> String
+      #
       # @overload register_device(params = {})
       # @param [Hash] params ({})
       def register_device(params = {}, options = {})
@@ -621,19 +713,24 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   The Cognito Identity Pool to use when configuring Cognito Events
+      #
       # @option params [required, Hash<String,String>] :events
       #   The events to configure
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_cognito_events({
       #     identity_pool_id: "IdentityPoolId", # required
       #     events: { # required
       #       "CognitoEventType" => "LambdaFunctionArn",
       #     },
       #   })
+      #
       # @overload set_cognito_events(params = {})
       # @param [Hash] params ({})
       def set_cognito_events(params = {}, options = {})
@@ -646,21 +743,26 @@ module Aws
       # This API can only be called with developer credentials. You cannot
       # call this API with the temporary user credentials provided by Cognito
       # Identity.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. This is the ID of the pool to modify.
+      #
       # @option params [Types::PushSync] :push_sync
       #   Options to apply to this identity pool for push synchronization.
+      #
       # @option params [Types::CognitoStreams] :cognito_streams
       #   Options to apply to this identity pool for Amazon Cognito streams.
+      #
       # @return [Types::SetIdentityPoolConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SetIdentityPoolConfigurationResponse#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::SetIdentityPoolConfigurationResponse#push_sync #PushSync} => Types::PushSync
-      #   * {Types::SetIdentityPoolConfigurationResponse#cognito_streams #CognitoStreams} => Types::CognitoStreams
+      #   * {Types::SetIdentityPoolConfigurationResponse#identity_pool_id #identity_pool_id} => String
+      #   * {Types::SetIdentityPoolConfigurationResponse#push_sync #push_sync} => Types::PushSync
+      #   * {Types::SetIdentityPoolConfigurationResponse#cognito_streams #cognito_streams} => Types::CognitoStreams
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_pool_configuration({
       #     identity_pool_id: "IdentityPoolId", # required
       #     push_sync: {
@@ -675,6 +777,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.push_sync.application_arns #=> Array
       #   resp.push_sync.application_arns[0] #=> String
@@ -682,6 +785,7 @@ module Aws
       #   resp.cognito_streams.stream_name #=> String
       #   resp.cognito_streams.role_arn #=> String
       #   resp.cognito_streams.streaming_status #=> String, one of "ENABLED", "DISABLED"
+      #
       # @overload set_identity_pool_configuration(params = {})
       # @param [Hash] params ({})
       def set_identity_pool_configuration(params = {}, options = {})
@@ -694,25 +798,32 @@ module Aws
       #
       # This API can only be called with temporary credentials provided by
       # Cognito Identity. You cannot call this API with developer credentials.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. The ID of the pool to which the identity belongs.
+      #
       # @option params [required, String] :identity_id
       #   Unique ID for this identity.
+      #
       # @option params [required, String] :dataset_name
       #   The name of the dataset to subcribe to.
+      #
       # @option params [required, String] :device_id
       #   The unique ID generated for this device by Cognito.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.subscribe_to_dataset({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
       #     dataset_name: "DatasetName", # required
       #     device_id: "DeviceId", # required
       #   })
+      #
       # @overload subscribe_to_dataset(params = {})
       # @param [Hash] params ({})
       def subscribe_to_dataset(params = {}, options = {})
@@ -725,25 +836,32 @@ module Aws
       #
       # This API can only be called with temporary credentials provided by
       # Cognito Identity. You cannot call this API with developer credentials.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. The ID of the pool to which this identity belongs.
+      #
       # @option params [required, String] :identity_id
       #   Unique ID for this identity.
+      #
       # @option params [required, String] :dataset_name
       #   The name of the dataset from which to unsubcribe.
+      #
       # @option params [required, String] :device_id
       #   The unique ID generated for this device by Cognito.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.unsubscribe_from_dataset({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
       #     dataset_name: "DatasetName", # required
       #     device_id: "DeviceId", # required
       #   })
+      #
       # @overload unsubscribe_from_dataset(params = {})
       # @param [Hash] params ({})
       def unsubscribe_from_dataset(params = {}, options = {})
@@ -769,33 +887,42 @@ module Aws
       #
       # This API can be called with temporary user credentials provided by
       # Cognito Identity or with developer credentials.
+      #
       # @option params [required, String] :identity_pool_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :identity_id
       #   A name-spaced GUID (for example,
       #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
       #   Cognito. GUID generation is unique within a region.
+      #
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
       #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
+      #
       # @option params [String] :device_id
       #   The unique ID generated for this device by Cognito.
+      #
       # @option params [Array<Types::RecordPatch>] :record_patches
       #   A list of patch operations.
+      #
       # @option params [required, String] :sync_session_token
       #   The SyncSessionToken returned by a previous call to ListRecords for
       #   this dataset and identity.
+      #
       # @option params [String] :client_context
       #   Intended to supply a device ID that will populate the lastModifiedBy
       #   field referenced in other methods. The ClientContext field is not yet
       #   implemented.
+      #
       # @return [Types::UpdateRecordsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateRecordsResponse#records #Records} => Array&lt;Types::Record&gt;
+      #   * {Types::UpdateRecordsResponse#records #records} => Array&lt;Types::Record&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_records({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId", # required
@@ -815,6 +942,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.records #=> Array
       #   resp.records[0].key #=> String
       #   resp.records[0].value #=> String
@@ -822,6 +950,7 @@ module Aws
       #   resp.records[0].last_modified_date #=> Time
       #   resp.records[0].last_modified_by #=> String
       #   resp.records[0].device_last_modified_date #=> Time
+      #
       # @overload update_records(params = {})
       # @param [Hash] params ({})
       def update_records(params = {}, options = {})

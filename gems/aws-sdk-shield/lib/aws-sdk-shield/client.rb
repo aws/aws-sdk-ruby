@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -142,22 +157,28 @@ module Aws
       # Enables AWS Shield Advanced for a specific AWS resource. The resource
       # can be an Amazon CloudFront distribution, Elastic Load Balancing load
       # balancer, or an Amazon Route 53 hosted zone.
+      #
       # @option params [required, String] :name
       #   Friendly name for the `Protection` you are creating.
+      #
       # @option params [required, String] :resource_arn
       #   The ARN (Amazon Resource Name) of the resource to be protected.
+      #
       # @return [Types::CreateProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateProtectionResponse#protection_id #ProtectionId} => String
+      #   * {Types::CreateProtectionResponse#protection_id #protection_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_protection({
       #     name: "ProtectionName", # required
       #     resource_arn: "ResourceArn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.protection_id #=> String
+      #
       # @overload create_protection(params = {})
       # @param [Hash] params ({})
       def create_protection(params = {}, options = {})
@@ -166,10 +187,13 @@ module Aws
       end
 
       # Activates AWS Shield Advanced for an account.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_subscription()
+      #
       # @overload create_subscription(params = {})
       # @param [Hash] params ({})
       def create_subscription(params = {}, options = {})
@@ -178,14 +202,18 @@ module Aws
       end
 
       # Deletes an AWS Shield Advanced Protection.
+      #
       # @option params [required, String] :protection_id
       #   The unique identifier (ID) for the Protection object to be deleted.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_protection({
       #     protection_id: "ProtectionId", # required
       #   })
+      #
       # @overload delete_protection(params = {})
       # @param [Hash] params ({})
       def delete_protection(params = {}, options = {})
@@ -194,10 +222,13 @@ module Aws
       end
 
       # Removes AWS Shield Advanced from an account.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_subscription()
+      #
       # @overload delete_subscription(params = {})
       # @param [Hash] params ({})
       def delete_subscription(params = {}, options = {})
@@ -206,18 +237,22 @@ module Aws
       end
 
       # Describes the details of a DDoS attack.
+      #
       # @option params [required, String] :attack_id
       #   The unique identifier (ID) for the attack that to be described.
+      #
       # @return [Types::DescribeAttackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAttackResponse#attack #Attack} => Types::AttackDetail
+      #   * {Types::DescribeAttackResponse#attack #attack} => Types::AttackDetail
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_attack({
       #     attack_id: "AttackId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.attack.attack_id #=> String
       #   resp.attack.resource_arn #=> String
       #   resp.attack.sub_resources #=> Array
@@ -250,6 +285,7 @@ module Aws
       #   resp.attack.attack_counters[0].unit #=> String
       #   resp.attack.mitigations #=> Array
       #   resp.attack.mitigations[0].mitigation_name #=> String
+      #
       # @overload describe_attack(params = {})
       # @param [Hash] params ({})
       def describe_attack(params = {}, options = {})
@@ -258,22 +294,27 @@ module Aws
       end
 
       # Lists the details of a Protection object.
+      #
       # @option params [required, String] :protection_id
       #   The unique identifier (ID) for the Protection object that is
       #   described.
+      #
       # @return [Types::DescribeProtectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeProtectionResponse#protection #Protection} => Types::Protection
+      #   * {Types::DescribeProtectionResponse#protection #protection} => Types::Protection
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_protection({
       #     protection_id: "ProtectionId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.protection.id #=> String
       #   resp.protection.name #=> String
       #   resp.protection.resource_arn #=> String
+      #
       # @overload describe_protection(params = {})
       # @param [Hash] params ({})
       def describe_protection(params = {}, options = {})
@@ -283,16 +324,20 @@ module Aws
 
       # Provides details about the AWS Shield Advanced subscription for an
       # account.
+      #
       # @return [Types::DescribeSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeSubscriptionResponse#subscription #Subscription} => Types::Subscription
+      #   * {Types::DescribeSubscriptionResponse#subscription #subscription} => Types::Subscription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_subscription()
       #
       # @example Response structure
+      #
       #   resp.subscription.start_time #=> Time
       #   resp.subscription.time_commitment_in_seconds #=> Integer
+      #
       # @overload describe_subscription(params = {})
       # @param [Hash] params ({})
       def describe_subscription(params = {}, options = {})
@@ -302,26 +347,33 @@ module Aws
 
       # Returns all ongoing DDoS attacks or all DDoS attacks during a
       # specified time period.
+      #
       # @option params [Array<String>] :resource_arns
       #   The ARN (Amazon Resource Name) of the resource that was attacked. If
       #   this is left blank, all applicable resources for this account will be
       #   included.
+      #
       # @option params [Types::TimeRange] :start_time
       #   The time period for the attacks.
+      #
       # @option params [Types::TimeRange] :end_time
       #   The end of the time period for the attacks.
+      #
       # @option params [String] :next_token
       #   The `ListAttacksRequest.NextMarker` value from a previous call to
       #   `ListAttacksRequest`. Pass null if this is the first call.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of AttackSummary objects to be returned. If this is
       #   left blank, the first 20 results will be returned.
+      #
       # @return [Types::ListAttacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListAttacksResponse#attack_summaries #AttackSummaries} => Array&lt;Types::AttackSummary&gt;
-      #   * {Types::ListAttacksResponse#next_token #NextToken} => String
+      #   * {Types::ListAttacksResponse#attack_summaries #attack_summaries} => Array&lt;Types::AttackSummary&gt;
+      #   * {Types::ListAttacksResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_attacks({
       #     resource_arns: ["ResourceArn"],
       #     start_time: {
@@ -337,6 +389,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.attack_summaries #=> Array
       #   resp.attack_summaries[0].attack_id #=> String
       #   resp.attack_summaries[0].resource_arn #=> String
@@ -345,6 +398,7 @@ module Aws
       #   resp.attack_summaries[0].attack_vectors #=> Array
       #   resp.attack_summaries[0].attack_vectors[0].vector_type #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_attacks(params = {})
       # @param [Hash] params ({})
       def list_attacks(params = {}, options = {})
@@ -353,29 +407,35 @@ module Aws
       end
 
       # Lists all Protection objects for the account.
+      #
       # @option params [String] :next_token
       #   The `ListProtectionsRequest.NextToken` value from a previous call to
       #   `ListProtections`. Pass null if this is the first call.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of Protection objects to be returned. If this is
       #   left blank the first 20 results will be returned.
+      #
       # @return [Types::ListProtectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListProtectionsResponse#protections #Protections} => Array&lt;Types::Protection&gt;
-      #   * {Types::ListProtectionsResponse#next_token #NextToken} => String
+      #   * {Types::ListProtectionsResponse#protections #protections} => Array&lt;Types::Protection&gt;
+      #   * {Types::ListProtectionsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_protections({
       #     next_token: "Token",
       #     max_results: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.protections #=> Array
       #   resp.protections[0].id #=> String
       #   resp.protections[0].name #=> String
       #   resp.protections[0].resource_arn #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_protections(params = {})
       # @param [Hash] params ({})
       def list_protections(params = {}, options = {})

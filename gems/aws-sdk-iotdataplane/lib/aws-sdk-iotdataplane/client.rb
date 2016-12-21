@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -138,19 +152,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html
+      #
       # @option params [required, String] :thing_name
       #   The name of the thing.
+      #
       # @return [Types::DeleteThingShadowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DeleteThingShadowResponse#payload #payload} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_thing_shadow({
       #     thing_name: "ThingName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.payload #=> String
+      #
       # @overload delete_thing_shadow(params = {})
       # @param [Hash] params ({})
       def delete_thing_shadow(params = {}, options = {})
@@ -166,19 +185,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html
+      #
       # @option params [required, String] :thing_name
       #   The name of the thing.
+      #
       # @return [Types::GetThingShadowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetThingShadowResponse#payload #payload} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_thing_shadow({
       #     thing_name: "ThingName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.payload #=> String
+      #
       # @overload get_thing_shadow(params = {})
       # @param [Hash] params ({})
       def get_thing_shadow(params = {}, options = {})
@@ -194,20 +218,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http
+      #
       # @option params [required, String] :topic
       #   The name of the MQTT topic.
+      #
       # @option params [Integer] :qos
       #   The Quality of Service (QoS) level.
+      #
       # @option params [String, IO] :payload
       #   The state information, in JSON format.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.publish({
       #     topic: "Topic", # required
       #     qos: 1,
       #     payload: "data",
       #   })
+      #
       # @overload publish(params = {})
       # @param [Hash] params ({})
       def publish(params = {}, options = {})
@@ -223,22 +253,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html
+      #
       # @option params [required, String] :thing_name
       #   The name of the thing.
+      #
       # @option params [required, String, IO] :payload
       #   The state information, in JSON format.
+      #
       # @return [Types::UpdateThingShadowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateThingShadowResponse#payload #payload} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_thing_shadow({
       #     thing_name: "ThingName", # required
       #     payload: "data", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.payload #=> String
+      #
       # @overload update_thing_shadow(params = {})
       # @param [Hash] params ({})
       def update_thing_shadow(params = {}, options = {})

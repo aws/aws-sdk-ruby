@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -138,17 +152,21 @@ module Aws
       # pipeline.
       #
       #  </note>
+      #
       # @option params [required, String] :id
       #   The identifier of the job that you want to cancel.
       #
       #   To get a list of the jobs (including their `jobId`) that have a status
       #   of `Submitted`, use the ListJobsByStatus API action.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.cancel_job({
       #     id: "Id", # required
       #   })
+      #
       # @overload cancel_job(params = {})
       # @param [Hash] params ({})
       def cancel_job(params = {}, options = {})
@@ -164,30 +182,37 @@ module Aws
       # one output for the Kindle Fire and another output for the Apple iPhone
       # 4s), you currently must use the Elastic Transcoder API to list the
       # jobs (as opposed to the AWS Console).
+      #
       # @option params [required, String] :pipeline_id
       #   The `Id` of the pipeline that you want Elastic Transcoder to use for
       #   transcoding. The pipeline determines several settings, including the
       #   Amazon S3 bucket from which Elastic Transcoder gets the files to
       #   transcode and the bucket into which Elastic Transcoder puts the
       #   transcoded files.
+      #
       # @option params [Types::JobInput] :input
       #   A section of the request body that provides information about the file
       #   that is being transcoded.
+      #
       # @option params [Array<Types::JobInput>] :inputs
       #   A section of the request body that provides information about the
       #   files that are being transcoded.
+      #
       # @option params [Types::CreateJobOutput] :output
       #   A section of the request body that provides information about the
       #   transcoded (target) file. We strongly recommend that you use the
       #   `Outputs` syntax instead of the `Output` syntax.
+      #
       # @option params [Array<Types::CreateJobOutput>] :outputs
       #   A section of the request body that provides information about the
       #   transcoded (target) files. We recommend that you use the `Outputs`
       #   syntax instead of the `Output` syntax.
+      #
       # @option params [String] :output_key_prefix
       #   The value, if any, that you want Elastic Transcoder to prepend to the
       #   names of all files that this job creates, including output files,
       #   thumbnails, and playlists.
+      #
       # @option params [Array<Types::CreateJobPlaylist>] :playlists
       #   If you specify a preset in `PresetId` for which the value of
       #   `Container` is fmp4 (Fragmented MP4) or ts (MPEG-TS), Playlists
@@ -195,17 +220,20 @@ module Aws
       #   Transcoder to create.
       #
       #   The maximum number of master playlists in a job is 30.
+      #
       # @option params [Hash<String,String>] :user_metadata
       #   User-defined metadata that you want to associate with an Elastic
       #   Transcoder job. You specify metadata in `key/value` pairs, and you can
       #   add up to 10 `key/value` pairs per job. Elastic Transcoder does not
       #   guarantee that `key/value` pairs are returned in the same order in
       #   which you specify them.
+      #
       # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateJobResponse#job #Job} => Types::Job
+      #   * {Types::CreateJobResponse#job #job} => Types::Job
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_job({
       #     pipeline_id: "Id", # required
       #     input: {
@@ -500,6 +528,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job.id #=> String
       #   resp.job.arn #=> String
       #   resp.job.pipeline_id #=> String
@@ -709,6 +738,7 @@ module Aws
       #   resp.job.timing.submit_time_millis #=> Integer
       #   resp.job.timing.start_time_millis #=> Integer
       #   resp.job.timing.finish_time_millis #=> Integer
+      #
       # @overload create_job(params = {})
       # @param [Hash] params ({})
       def create_job(params = {}, options = {})
@@ -718,14 +748,17 @@ module Aws
 
       # The CreatePipeline operation creates a pipeline with settings that you
       # specify.
+      #
       # @option params [required, String] :name
       #   The name of the pipeline. We recommend that the name be unique within
       #   the AWS account, but uniqueness is not enforced.
       #
       #   Constraints: Maximum 40 characters.
+      #
       # @option params [required, String] :input_bucket
       #   The Amazon S3 bucket in which you saved the media files that you want
       #   to transcode.
+      #
       # @option params [String] :output_bucket
       #   The Amazon S3 bucket in which you want Elastic Transcoder to save the
       #   transcoded files. (Use this, or use ContentConfig:Bucket plus
@@ -754,9 +787,11 @@ module Aws
       #   transcoded files or the permissions the users have, or change the
       #   Amazon S3 storage class, omit `OutputBucket` and specify values for
       #   `ContentConfig` and `ThumbnailConfig` instead.
+      #
       # @option params [required, String] :role
       #   The IAM Amazon Resource Name (ARN) for the role that you want Elastic
       #   Transcoder to use to create the pipeline.
+      #
       # @option params [String] :aws_kms_key_arn
       #   The AWS Key Management Service (AWS KMS) key that you want to use with
       #   this pipeline.
@@ -767,6 +802,7 @@ module Aws
       #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
       #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
       #   `AES-CTR`, or `AES-GCM`.
+      #
       # @option params [Types::Notifications] :notifications
       #   The Amazon Simple Notification Service (Amazon SNS) topic that you
       #   want to notify to report job status.
@@ -795,6 +831,7 @@ module Aws
       #     notify when Elastic Transcoder encounters an error condition while
       #     processing a job in this pipeline. This is the ARN that Amazon SNS
       #     returned when you created the topic.
+      #
       # @option params [Types::PipelineOutputConfig] :content_config
       #   The optional `ContentConfig` object specifies information about the
       #   Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -866,6 +903,7 @@ module Aws
       #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
       #     the video files and playlists that it stores in your Amazon S3
       #     bucket.
+      #
       # @option params [Types::PipelineOutputConfig] :thumbnail_config
       #   The `ThumbnailConfig` object specifies several values, including the
       #   Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -932,12 +970,14 @@ module Aws
       #   * **StorageClass**\: The Amazon S3 storage class, `Standard` or
       #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
       #     the thumbnails that it stores in your Amazon S3 bucket.
+      #
       # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreatePipelineResponse#pipeline #Pipeline} => Types::Pipeline
-      #   * {Types::CreatePipelineResponse#warnings #Warnings} => Array&lt;Types::Warning&gt;
+      #   * {Types::CreatePipelineResponse#pipeline #pipeline} => Types::Pipeline
+      #   * {Types::CreatePipelineResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_pipeline({
       #     name: "Name", # required
       #     input_bucket: "BucketName", # required
@@ -975,6 +1015,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.pipeline.id #=> String
       #   resp.pipeline.arn #=> String
       #   resp.pipeline.name #=> String
@@ -1004,6 +1045,7 @@ module Aws
       #   resp.warnings #=> Array
       #   resp.warnings[0].code #=> String
       #   resp.warnings[0].message #=> String
+      #
       # @overload create_pipeline(params = {})
       # @param [Hash] params ({})
       def create_pipeline(params = {}, options = {})
@@ -1030,28 +1072,36 @@ module Aws
       # information, see the International Telecommunication Union publication
       # *Recommendation ITU-T H.264: Advanced video coding for generic
       # audiovisual services*.
+      #
       # @option params [required, String] :name
       #   The name of the preset. We recommend that the name be unique within
       #   the AWS account, but uniqueness is not enforced.
+      #
       # @option params [String] :description
       #   A description of the preset.
+      #
       # @option params [required, String] :container
       #   The container type for the output file. Valid values include `flac`,
       #   `flv`, `fmp4`, `gif`, `mp3`, `mp4`, `mpg`, `mxf`, `oga`, `ogg`, `ts`,
       #   and `webm`.
+      #
       # @option params [Types::VideoParameters] :video
       #   A section of the request body that specifies the video parameters.
+      #
       # @option params [Types::AudioParameters] :audio
       #   A section of the request body that specifies the audio parameters.
+      #
       # @option params [Types::Thumbnails] :thumbnails
       #   A section of the request body that specifies the thumbnail parameters,
       #   if any.
+      #
       # @return [Types::CreatePresetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreatePresetResponse#preset #Preset} => Types::Preset
-      #   * {Types::CreatePresetResponse#warning #Warning} => String
+      #   * {Types::CreatePresetResponse#preset #preset} => Types::Preset
+      #   * {Types::CreatePresetResponse#warning #warning} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_preset({
       #     name: "Name", # required
       #     description: "Description",
@@ -1114,6 +1164,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.preset.id #=> String
       #   resp.preset.arn #=> String
       #   resp.preset.name #=> String
@@ -1164,6 +1215,7 @@ module Aws
       #   resp.preset.thumbnails.padding_policy #=> String
       #   resp.preset.type #=> String
       #   resp.warning #=> String
+      #
       # @overload create_preset(params = {})
       # @param [Hash] params ({})
       def create_preset(params = {}, options = {})
@@ -1176,14 +1228,18 @@ module Aws
       # You can only delete a pipeline that has never been used or that is not
       # currently in use (doesn't contain any active jobs). If the pipeline
       # is currently in use, `DeletePipeline` returns an error.
+      #
       # @option params [required, String] :id
       #   The identifier of the pipeline that you want to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_pipeline({
       #     id: "Id", # required
       #   })
+      #
       # @overload delete_pipeline(params = {})
       # @param [Hash] params ({})
       def delete_pipeline(params = {}, options = {})
@@ -1198,15 +1254,19 @@ module Aws
       # Transcoder.
       #
       #  </note>
+      #
       # @option params [required, String] :id
       #   The identifier of the preset for which you want to get detailed
       #   information.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_preset({
       #     id: "Id", # required
       #   })
+      #
       # @overload delete_preset(params = {})
       # @param [Hash] params ({})
       def delete_preset(params = {}, options = {})
@@ -1220,22 +1280,27 @@ module Aws
       # Elastic Transcoder returns all of the jobs currently in the specified
       # pipeline. The response body contains one element for each job that
       # satisfies the search criteria.
+      #
       # @option params [required, String] :pipeline_id
       #   The ID of the pipeline for which you want to get job information.
+      #
       # @option params [String] :ascending
       #   To list jobs in chronological order by the date and time that they
       #   were submitted, enter `true`. To list jobs in reverse chronological
       #   order, enter `false`.
+      #
       # @option params [String] :page_token
       #   When Elastic Transcoder returns more than one page of results, use
       #   `pageToken` in subsequent `GET` requests to get each successive page
       #   of results.
+      #
       # @return [Types::ListJobsByPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListJobsByPipelineResponse#jobs #Jobs} => Array&lt;Types::Job&gt;
-      #   * {Types::ListJobsByPipelineResponse#next_page_token #NextPageToken} => String
+      #   * {Types::ListJobsByPipelineResponse#jobs #jobs} => Array&lt;Types::Job&gt;
+      #   * {Types::ListJobsByPipelineResponse#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_jobs_by_pipeline({
       #     pipeline_id: "Id", # required
       #     ascending: "Ascending",
@@ -1243,6 +1308,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.jobs #=> Array
       #   resp.jobs[0].id #=> String
       #   resp.jobs[0].arn #=> String
@@ -1454,6 +1520,7 @@ module Aws
       #   resp.jobs[0].timing.start_time_millis #=> Integer
       #   resp.jobs[0].timing.finish_time_millis #=> Integer
       #   resp.next_page_token #=> String
+      #
       # @overload list_jobs_by_pipeline(params = {})
       # @param [Hash] params ({})
       def list_jobs_by_pipeline(params = {}, options = {})
@@ -1464,24 +1531,29 @@ module Aws
       # The ListJobsByStatus operation gets a list of jobs that have a
       # specified status. The response body contains one element for each job
       # that satisfies the search criteria.
+      #
       # @option params [required, String] :status
       #   To get information about all of the jobs associated with the current
       #   AWS account that have a given status, specify the following status:
       #   `Submitted`, `Progressing`, `Complete`, `Canceled`, or `Error`.
+      #
       # @option params [String] :ascending
       #   To list jobs in chronological order by the date and time that they
       #   were submitted, enter `true`. To list jobs in reverse chronological
       #   order, enter `false`.
+      #
       # @option params [String] :page_token
       #   When Elastic Transcoder returns more than one page of results, use
       #   `pageToken` in subsequent `GET` requests to get each successive page
       #   of results.
+      #
       # @return [Types::ListJobsByStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListJobsByStatusResponse#jobs #Jobs} => Array&lt;Types::Job&gt;
-      #   * {Types::ListJobsByStatusResponse#next_page_token #NextPageToken} => String
+      #   * {Types::ListJobsByStatusResponse#jobs #jobs} => Array&lt;Types::Job&gt;
+      #   * {Types::ListJobsByStatusResponse#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_jobs_by_status({
       #     status: "JobStatus", # required
       #     ascending: "Ascending",
@@ -1489,6 +1561,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.jobs #=> Array
       #   resp.jobs[0].id #=> String
       #   resp.jobs[0].arn #=> String
@@ -1700,6 +1773,7 @@ module Aws
       #   resp.jobs[0].timing.start_time_millis #=> Integer
       #   resp.jobs[0].timing.finish_time_millis #=> Integer
       #   resp.next_page_token #=> String
+      #
       # @overload list_jobs_by_status(params = {})
       # @param [Hash] params ({})
       def list_jobs_by_status(params = {}, options = {})
@@ -1709,26 +1783,31 @@ module Aws
 
       # The ListPipelines operation gets a list of the pipelines associated
       # with the current AWS account.
+      #
       # @option params [String] :ascending
       #   To list pipelines in chronological order by the date and time that
       #   they were created, enter `true`. To list pipelines in reverse
       #   chronological order, enter `false`.
+      #
       # @option params [String] :page_token
       #   When Elastic Transcoder returns more than one page of results, use
       #   `pageToken` in subsequent `GET` requests to get each successive page
       #   of results.
+      #
       # @return [Types::ListPipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListPipelinesResponse#pipelines #Pipelines} => Array&lt;Types::Pipeline&gt;
-      #   * {Types::ListPipelinesResponse#next_page_token #NextPageToken} => String
+      #   * {Types::ListPipelinesResponse#pipelines #pipelines} => Array&lt;Types::Pipeline&gt;
+      #   * {Types::ListPipelinesResponse#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_pipelines({
       #     ascending: "Ascending",
       #     page_token: "Id",
       #   })
       #
       # @example Response structure
+      #
       #   resp.pipelines #=> Array
       #   resp.pipelines[0].id #=> String
       #   resp.pipelines[0].arn #=> String
@@ -1757,6 +1836,7 @@ module Aws
       #   resp.pipelines[0].thumbnail_config.permissions[0].access #=> Array
       #   resp.pipelines[0].thumbnail_config.permissions[0].access[0] #=> String
       #   resp.next_page_token #=> String
+      #
       # @overload list_pipelines(params = {})
       # @param [Hash] params ({})
       def list_pipelines(params = {}, options = {})
@@ -1767,26 +1847,31 @@ module Aws
       # The ListPresets operation gets a list of the default presets included
       # with Elastic Transcoder and the presets that you've added in an AWS
       # region.
+      #
       # @option params [String] :ascending
       #   To list presets in chronological order by the date and time that they
       #   were created, enter `true`. To list presets in reverse chronological
       #   order, enter `false`.
+      #
       # @option params [String] :page_token
       #   When Elastic Transcoder returns more than one page of results, use
       #   `pageToken` in subsequent `GET` requests to get each successive page
       #   of results.
+      #
       # @return [Types::ListPresetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListPresetsResponse#presets #Presets} => Array&lt;Types::Preset&gt;
-      #   * {Types::ListPresetsResponse#next_page_token #NextPageToken} => String
+      #   * {Types::ListPresetsResponse#presets #presets} => Array&lt;Types::Preset&gt;
+      #   * {Types::ListPresetsResponse#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_presets({
       #     ascending: "Ascending",
       #     page_token: "Id",
       #   })
       #
       # @example Response structure
+      #
       #   resp.presets #=> Array
       #   resp.presets[0].id #=> String
       #   resp.presets[0].arn #=> String
@@ -1838,6 +1923,7 @@ module Aws
       #   resp.presets[0].thumbnails.padding_policy #=> String
       #   resp.presets[0].type #=> String
       #   resp.next_page_token #=> String
+      #
       # @overload list_presets(params = {})
       # @param [Hash] params ({})
       def list_presets(params = {}, options = {})
@@ -1846,19 +1932,23 @@ module Aws
       end
 
       # The ReadJob operation returns detailed information about a job.
+      #
       # @option params [required, String] :id
       #   The identifier of the job for which you want to get detailed
       #   information.
+      #
       # @return [Types::ReadJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReadJobResponse#job #Job} => Types::Job
+      #   * {Types::ReadJobResponse#job #job} => Types::Job
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.read_job({
       #     id: "Id", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.job.id #=> String
       #   resp.job.arn #=> String
       #   resp.job.pipeline_id #=> String
@@ -2068,6 +2158,7 @@ module Aws
       #   resp.job.timing.submit_time_millis #=> Integer
       #   resp.job.timing.start_time_millis #=> Integer
       #   resp.job.timing.finish_time_millis #=> Integer
+      #
       # @overload read_job(params = {})
       # @param [Hash] params ({})
       def read_job(params = {}, options = {})
@@ -2076,19 +2167,23 @@ module Aws
       end
 
       # The ReadPipeline operation gets detailed information about a pipeline.
+      #
       # @option params [required, String] :id
       #   The identifier of the pipeline to read.
+      #
       # @return [Types::ReadPipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReadPipelineResponse#pipeline #Pipeline} => Types::Pipeline
-      #   * {Types::ReadPipelineResponse#warnings #Warnings} => Array&lt;Types::Warning&gt;
+      #   * {Types::ReadPipelineResponse#pipeline #pipeline} => Types::Pipeline
+      #   * {Types::ReadPipelineResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.read_pipeline({
       #     id: "Id", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.pipeline.id #=> String
       #   resp.pipeline.arn #=> String
       #   resp.pipeline.name #=> String
@@ -2118,6 +2213,7 @@ module Aws
       #   resp.warnings #=> Array
       #   resp.warnings[0].code #=> String
       #   resp.warnings[0].message #=> String
+      #
       # @overload read_pipeline(params = {})
       # @param [Hash] params ({})
       def read_pipeline(params = {}, options = {})
@@ -2126,19 +2222,23 @@ module Aws
       end
 
       # The ReadPreset operation gets detailed information about a preset.
+      #
       # @option params [required, String] :id
       #   The identifier of the preset for which you want to get detailed
       #   information.
+      #
       # @return [Types::ReadPresetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReadPresetResponse#preset #Preset} => Types::Preset
+      #   * {Types::ReadPresetResponse#preset #preset} => Types::Preset
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.read_preset({
       #     id: "Id", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.preset.id #=> String
       #   resp.preset.arn #=> String
       #   resp.preset.name #=> String
@@ -2188,6 +2288,7 @@ module Aws
       #   resp.preset.thumbnails.sizing_policy #=> String
       #   resp.preset.thumbnails.padding_policy #=> String
       #   resp.preset.type #=> String
+      #
       # @overload read_preset(params = {})
       # @param [Hash] params ({})
       def read_preset(params = {}, options = {})
@@ -2203,24 +2304,30 @@ module Aws
       # assume the specified IAM role, checks read access to the input and
       # output buckets, and tries to send a test notification to Amazon SNS
       # topics that you specify.
+      #
       # @option params [required, String] :role
       #   The IAM Amazon Resource Name (ARN) for the role that you want Elastic
       #   Transcoder to test.
+      #
       # @option params [required, String] :input_bucket
       #   The Amazon S3 bucket that contains media files to be transcoded. The
       #   action attempts to read from this bucket.
+      #
       # @option params [required, String] :output_bucket
       #   The Amazon S3 bucket that Elastic Transcoder writes transcoded media
       #   files to. The action attempts to read from this bucket.
+      #
       # @option params [required, Array<String>] :topics
       #   The ARNs of one or more Amazon Simple Notification Service (Amazon
       #   SNS) topics that you want the action to send a test notification to.
+      #
       # @return [Types::TestRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TestRoleResponse#success #Success} => String
-      #   * {Types::TestRoleResponse#messages #Messages} => Array&lt;String&gt;
+      #   * {Types::TestRoleResponse#success #success} => String
+      #   * {Types::TestRoleResponse#messages #messages} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.test_role({
       #     role: "Role", # required
       #     input_bucket: "BucketName", # required
@@ -2229,9 +2336,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.success #=> String
       #   resp.messages #=> Array
       #   resp.messages[0] #=> String
+      #
       # @overload test_role(params = {})
       # @param [Hash] params ({})
       def test_role(params = {}, options = {})
@@ -2245,19 +2354,24 @@ module Aws
       # immediately. Jobs that you have already submitted and that Elastic
       # Transcoder has not started to process are affected in addition to jobs
       # that you submit after you change settings.
+      #
       # @option params [required, String] :id
       #   The ID of the pipeline that you want to update.
+      #
       # @option params [String] :name
       #   The name of the pipeline. We recommend that the name be unique within
       #   the AWS account, but uniqueness is not enforced.
       #
       #   Constraints: Maximum 40 characters
+      #
       # @option params [String] :input_bucket
       #   The Amazon S3 bucket in which you saved the media files that you want
       #   to transcode and the graphics that you want to use as watermarks.
+      #
       # @option params [String] :role
       #   The IAM Amazon Resource Name (ARN) for the role that you want Elastic
       #   Transcoder to use to transcode jobs for this pipeline.
+      #
       # @option params [String] :aws_kms_key_arn
       #   The AWS Key Management Service (AWS KMS) key that you want to use with
       #   this pipeline.
@@ -2268,6 +2382,7 @@ module Aws
       #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
       #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
       #   `AES-CTR`, or `AES-GCM`.
+      #
       # @option params [Types::Notifications] :notifications
       #   The topic ARN for the Amazon Simple Notification Service (Amazon SNS)
       #   topic that you want to notify to report job status.
@@ -2292,6 +2407,7 @@ module Aws
       #   * **Error**\: The topic ARN for the Amazon SNS topic that you want to
       #     notify when Elastic Transcoder encounters an error condition. This
       #     is the ARN that Amazon SNS returned when you created the topic.
+      #
       # @option params [Types::PipelineOutputConfig] :content_config
       #   The optional `ContentConfig` object specifies information about the
       #   Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -2363,6 +2479,7 @@ module Aws
       #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
       #     the video files and playlists that it stores in your Amazon S3
       #     bucket.
+      #
       # @option params [Types::PipelineOutputConfig] :thumbnail_config
       #   The `ThumbnailConfig` object specifies several values, including the
       #   Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -2429,12 +2546,14 @@ module Aws
       #   * **StorageClass**\: The Amazon S3 storage class, `Standard` or
       #     `ReducedRedundancy`, that you want Elastic Transcoder to assign to
       #     the thumbnails that it stores in your Amazon S3 bucket.
+      #
       # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdatePipelineResponse#pipeline #Pipeline} => Types::Pipeline
-      #   * {Types::UpdatePipelineResponse#warnings #Warnings} => Array&lt;Types::Warning&gt;
+      #   * {Types::UpdatePipelineResponse#pipeline #pipeline} => Types::Pipeline
+      #   * {Types::UpdatePipelineResponse#warnings #warnings} => Array&lt;Types::Warning&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_pipeline({
       #     id: "Id", # required
       #     name: "Name",
@@ -2472,6 +2591,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.pipeline.id #=> String
       #   resp.pipeline.arn #=> String
       #   resp.pipeline.name #=> String
@@ -2501,6 +2621,7 @@ module Aws
       #   resp.warnings #=> Array
       #   resp.warnings[0].code #=> String
       #   resp.warnings[0].message #=> String
+      #
       # @overload update_pipeline(params = {})
       # @param [Hash] params ({})
       def update_pipeline(params = {}, options = {})
@@ -2513,9 +2634,11 @@ module Aws
       #
       # When you update notifications for a pipeline, Elastic Transcoder
       # returns the values that you specified in the request.
+      #
       # @option params [required, String] :id
       #   The identifier of the pipeline for which you want to change
       #   notification settings.
+      #
       # @option params [required, Types::Notifications] :notifications
       #   The topic ARN for the Amazon Simple Notification Service (Amazon SNS)
       #   topic that you want to notify to report job status.
@@ -2540,11 +2663,13 @@ module Aws
       #   * **Error**\: The topic ARN for the Amazon SNS topic that you want to
       #     notify when Elastic Transcoder encounters an error condition. This
       #     is the ARN that Amazon SNS returned when you created the topic.
+      #
       # @return [Types::UpdatePipelineNotificationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdatePipelineNotificationsResponse#pipeline #Pipeline} => Types::Pipeline
+      #   * {Types::UpdatePipelineNotificationsResponse#pipeline #pipeline} => Types::Pipeline
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_pipeline_notifications({
       #     id: "Id", # required
       #     notifications: { # required
@@ -2556,6 +2681,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.pipeline.id #=> String
       #   resp.pipeline.arn #=> String
       #   resp.pipeline.name #=> String
@@ -2582,6 +2708,7 @@ module Aws
       #   resp.pipeline.thumbnail_config.permissions[0].grantee #=> String
       #   resp.pipeline.thumbnail_config.permissions[0].access #=> Array
       #   resp.pipeline.thumbnail_config.permissions[0].access[0] #=> String
+      #
       # @overload update_pipeline_notifications(params = {})
       # @param [Hash] params ({})
       def update_pipeline_notifications(params = {}, options = {})
@@ -2597,25 +2724,30 @@ module Aws
       # processing them; if you pause the pipeline to which you submitted the
       # jobs, you have more time to get the job IDs for the jobs that you want
       # to cancel, and to send a CancelJob request.
+      #
       # @option params [required, String] :id
       #   The identifier of the pipeline to update.
+      #
       # @option params [required, String] :status
       #   The desired status of the pipeline:
       #
       #   * `Active`\: The pipeline is processing jobs.
       #
       #   * `Paused`\: The pipeline is not currently processing jobs.
+      #
       # @return [Types::UpdatePipelineStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdatePipelineStatusResponse#pipeline #Pipeline} => Types::Pipeline
+      #   * {Types::UpdatePipelineStatusResponse#pipeline #pipeline} => Types::Pipeline
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_pipeline_status({
       #     id: "Id", # required
       #     status: "PipelineStatus", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.pipeline.id #=> String
       #   resp.pipeline.arn #=> String
       #   resp.pipeline.name #=> String
@@ -2642,6 +2774,7 @@ module Aws
       #   resp.pipeline.thumbnail_config.permissions[0].grantee #=> String
       #   resp.pipeline.thumbnail_config.permissions[0].access #=> Array
       #   resp.pipeline.thumbnail_config.permissions[0].access[0] #=> String
+      #
       # @overload update_pipeline_status(params = {})
       # @param [Hash] params ({})
       def update_pipeline_status(params = {}, options = {})

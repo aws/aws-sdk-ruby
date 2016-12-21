@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -131,13 +145,17 @@ module Aws
       # @!group API Operations
 
       # Creates or updates a campaign.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, Types::WriteCampaignRequest] :write_campaign_request
+      #
       # @return [Types::CreateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateCampaignResponse#campaign_response #CampaignResponse} => Types::CampaignResponse
+      #   * {Types::CreateCampaignResponse#campaign_response #campaign_response} => Types::CampaignResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_campaign({
       #     application_id: "__string", # required
       #     write_campaign_request: { # required
@@ -256,6 +274,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaign_response.additional_treatments #=> Array
       #   resp.campaign_response.additional_treatments[0].id #=> String
       #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -347,6 +366,7 @@ module Aws
       #   resp.campaign_response.treatment_description #=> String
       #   resp.campaign_response.treatment_name #=> String
       #   resp.campaign_response.version #=> Integer
+      #
       # @overload create_campaign(params = {})
       # @param [Hash] params ({})
       def create_campaign(params = {}, options = {})
@@ -355,13 +375,17 @@ module Aws
       end
 
       # Creates or updates an import job.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, Types::ImportJobRequest] :import_job_request
+      #
       # @return [Types::CreateImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateImportJobResponse#import_job_response #ImportJobResponse} => Types::ImportJobResponse
+      #   * {Types::CreateImportJobResponse#import_job_response #import_job_response} => Types::ImportJobResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_import_job({
       #     application_id: "__string", # required
       #     import_job_request: { # required
@@ -377,6 +401,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.import_job_response.application_id #=> String
       #   resp.import_job_response.completed_pieces #=> Integer
       #   resp.import_job_response.completion_date #=> String
@@ -398,6 +423,7 @@ module Aws
       #   resp.import_job_response.total_pieces #=> Integer
       #   resp.import_job_response.total_processed #=> Integer
       #   resp.import_job_response.type #=> String
+      #
       # @overload create_import_job(params = {})
       # @param [Hash] params ({})
       def create_import_job(params = {}, options = {})
@@ -406,13 +432,17 @@ module Aws
       end
 
       # Used to create or update a segment.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, Types::WriteSegmentRequest] :write_segment_request
+      #
       # @return [Types::CreateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateSegmentResponse#segment_response #SegmentResponse} => Types::SegmentResponse
+      #   * {Types::CreateSegmentResponse#segment_response #segment_response} => Types::SegmentResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_segment({
       #     application_id: "__string", # required
       #     write_segment_request: { # required
@@ -463,6 +493,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.segment_response.application_id #=> String
       #   resp.segment_response.creation_date #=> String
       #   resp.segment_response.dimensions.attributes #=> Hash
@@ -499,6 +530,7 @@ module Aws
       #   resp.segment_response.name #=> String
       #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segment_response.version #=> Integer
+      #
       # @overload create_segment(params = {})
       # @param [Hash] params ({})
       def create_segment(params = {}, options = {})
@@ -507,17 +539,21 @@ module Aws
       end
 
       # Deletes the APNs channel for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @return [Types::DeleteApnsChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteApnsChannelResponse#apns_channel_response #APNSChannelResponse} => Types::APNSChannelResponse
+      #   * {Types::DeleteApnsChannelResponse#apns_channel_response #apns_channel_response} => Types::APNSChannelResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_apns_channel({
       #     application_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.apns_channel_response.application_id #=> String
       #   resp.apns_channel_response.creation_date #=> String
       #   resp.apns_channel_response.id #=> String
@@ -526,6 +562,7 @@ module Aws
       #   resp.apns_channel_response.last_modified_date #=> String
       #   resp.apns_channel_response.platform #=> String
       #   resp.apns_channel_response.version #=> Integer
+      #
       # @overload delete_apns_channel(params = {})
       # @param [Hash] params ({})
       def delete_apns_channel(params = {}, options = {})
@@ -534,19 +571,24 @@ module Aws
       end
 
       # Deletes a campaign.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :campaign_id
+      #
       # @return [Types::DeleteCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteCampaignResponse#campaign_response #CampaignResponse} => Types::CampaignResponse
+      #   * {Types::DeleteCampaignResponse#campaign_response #campaign_response} => Types::CampaignResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_campaign({
       #     application_id: "__string", # required
       #     campaign_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaign_response.additional_treatments #=> Array
       #   resp.campaign_response.additional_treatments[0].id #=> String
       #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -638,6 +680,7 @@ module Aws
       #   resp.campaign_response.treatment_description #=> String
       #   resp.campaign_response.treatment_name #=> String
       #   resp.campaign_response.version #=> Integer
+      #
       # @overload delete_campaign(params = {})
       # @param [Hash] params ({})
       def delete_campaign(params = {}, options = {})
@@ -646,17 +689,21 @@ module Aws
       end
 
       # Deletes the GCM channel for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @return [Types::DeleteGcmChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteGcmChannelResponse#gcm_channel_response #GCMChannelResponse} => Types::GCMChannelResponse
+      #   * {Types::DeleteGcmChannelResponse#gcm_channel_response #gcm_channel_response} => Types::GCMChannelResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_gcm_channel({
       #     application_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.gcm_channel_response.application_id #=> String
       #   resp.gcm_channel_response.creation_date #=> String
       #   resp.gcm_channel_response.credential #=> String
@@ -666,6 +713,7 @@ module Aws
       #   resp.gcm_channel_response.last_modified_date #=> String
       #   resp.gcm_channel_response.platform #=> String
       #   resp.gcm_channel_response.version #=> Integer
+      #
       # @overload delete_gcm_channel(params = {})
       # @param [Hash] params ({})
       def delete_gcm_channel(params = {}, options = {})
@@ -674,19 +722,24 @@ module Aws
       end
 
       # Deletes a segment.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :segment_id
+      #
       # @return [Types::DeleteSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteSegmentResponse#segment_response #SegmentResponse} => Types::SegmentResponse
+      #   * {Types::DeleteSegmentResponse#segment_response #segment_response} => Types::SegmentResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_segment({
       #     application_id: "__string", # required
       #     segment_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.segment_response.application_id #=> String
       #   resp.segment_response.creation_date #=> String
       #   resp.segment_response.dimensions.attributes #=> Hash
@@ -723,6 +776,7 @@ module Aws
       #   resp.segment_response.name #=> String
       #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segment_response.version #=> Integer
+      #
       # @overload delete_segment(params = {})
       # @param [Hash] params ({})
       def delete_segment(params = {}, options = {})
@@ -731,17 +785,21 @@ module Aws
       end
 
       # Returns information about the APNs channel for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @return [Types::GetApnsChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetApnsChannelResponse#apns_channel_response #APNSChannelResponse} => Types::APNSChannelResponse
+      #   * {Types::GetApnsChannelResponse#apns_channel_response #apns_channel_response} => Types::APNSChannelResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_apns_channel({
       #     application_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.apns_channel_response.application_id #=> String
       #   resp.apns_channel_response.creation_date #=> String
       #   resp.apns_channel_response.id #=> String
@@ -750,6 +808,7 @@ module Aws
       #   resp.apns_channel_response.last_modified_date #=> String
       #   resp.apns_channel_response.platform #=> String
       #   resp.apns_channel_response.version #=> Integer
+      #
       # @overload get_apns_channel(params = {})
       # @param [Hash] params ({})
       def get_apns_channel(params = {}, options = {})
@@ -758,23 +817,28 @@ module Aws
       end
 
       # Used to request the settings for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @return [Types::GetApplicationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetApplicationSettingsResponse#application_settings_resource #ApplicationSettingsResource} => Types::ApplicationSettingsResource
+      #   * {Types::GetApplicationSettingsResponse#application_settings_resource #application_settings_resource} => Types::ApplicationSettingsResource
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_application_settings({
       #     application_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_settings_resource.application_id #=> String
       #   resp.application_settings_resource.last_modified_date #=> String
       #   resp.application_settings_resource.limits.daily #=> Integer
       #   resp.application_settings_resource.limits.total #=> Integer
       #   resp.application_settings_resource.quiet_time.end #=> String
       #   resp.application_settings_resource.quiet_time.start #=> String
+      #
       # @overload get_application_settings(params = {})
       # @param [Hash] params ({})
       def get_application_settings(params = {}, options = {})
@@ -783,19 +847,24 @@ module Aws
       end
 
       # Returns information about a campaign.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :campaign_id
+      #
       # @return [Types::GetCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCampaignResponse#campaign_response #CampaignResponse} => Types::CampaignResponse
+      #   * {Types::GetCampaignResponse#campaign_response #campaign_response} => Types::CampaignResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_campaign({
       #     application_id: "__string", # required
       #     campaign_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaign_response.additional_treatments #=> Array
       #   resp.campaign_response.additional_treatments[0].id #=> String
       #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -887,6 +956,7 @@ module Aws
       #   resp.campaign_response.treatment_description #=> String
       #   resp.campaign_response.treatment_name #=> String
       #   resp.campaign_response.version #=> Integer
+      #
       # @overload get_campaign(params = {})
       # @param [Hash] params ({})
       def get_campaign(params = {}, options = {})
@@ -895,15 +965,21 @@ module Aws
       end
 
       # Returns information about the activity performed by a campaign.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :campaign_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetCampaignActivitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCampaignActivitiesResponse#activities_response #ActivitiesResponse} => Types::ActivitiesResponse
+      #   * {Types::GetCampaignActivitiesResponse#activities_response #activities_response} => Types::ActivitiesResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_campaign_activities({
       #     application_id: "__string", # required
       #     campaign_id: "__string", # required
@@ -912,6 +988,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.activities_response.item #=> Array
       #   resp.activities_response.item[0].application_id #=> String
       #   resp.activities_response.item[0].campaign_id #=> String
@@ -924,6 +1001,7 @@ module Aws
       #   resp.activities_response.item[0].successful_endpoint_count #=> Integer
       #   resp.activities_response.item[0].total_endpoint_count #=> Integer
       #   resp.activities_response.item[0].treatment_id #=> String
+      #
       # @overload get_campaign_activities(params = {})
       # @param [Hash] params ({})
       def get_campaign_activities(params = {}, options = {})
@@ -932,14 +1010,19 @@ module Aws
       end
 
       # Returns information about your campaign versions.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :campaign_id
+      #
       # @option params [required, String] :version
+      #
       # @return [Types::GetCampaignVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCampaignVersionResponse#campaign_response #CampaignResponse} => Types::CampaignResponse
+      #   * {Types::GetCampaignVersionResponse#campaign_response #campaign_response} => Types::CampaignResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_campaign_version({
       #     application_id: "__string", # required
       #     campaign_id: "__string", # required
@@ -947,6 +1030,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaign_response.additional_treatments #=> Array
       #   resp.campaign_response.additional_treatments[0].id #=> String
       #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -1038,6 +1122,7 @@ module Aws
       #   resp.campaign_response.treatment_description #=> String
       #   resp.campaign_response.treatment_name #=> String
       #   resp.campaign_response.version #=> Integer
+      #
       # @overload get_campaign_version(params = {})
       # @param [Hash] params ({})
       def get_campaign_version(params = {}, options = {})
@@ -1046,15 +1131,21 @@ module Aws
       end
 
       # Returns information about your campaign versions.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :campaign_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetCampaignVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCampaignVersionsResponse#campaigns_response #CampaignsResponse} => Types::CampaignsResponse
+      #   * {Types::GetCampaignVersionsResponse#campaigns_response #campaigns_response} => Types::CampaignsResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_campaign_versions({
       #     application_id: "__string", # required
       #     campaign_id: "__string", # required
@@ -1063,6 +1154,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaigns_response.item #=> Array
       #   resp.campaigns_response.item[0].additional_treatments #=> Array
       #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
@@ -1156,6 +1248,7 @@ module Aws
       #   resp.campaigns_response.item[0].treatment_name #=> String
       #   resp.campaigns_response.item[0].version #=> Integer
       #   resp.campaigns_response.next_token #=> String
+      #
       # @overload get_campaign_versions(params = {})
       # @param [Hash] params ({})
       def get_campaign_versions(params = {}, options = {})
@@ -1164,14 +1257,19 @@ module Aws
       end
 
       # Returns information about your campaigns.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetCampaignsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCampaignsResponse#campaigns_response #CampaignsResponse} => Types::CampaignsResponse
+      #   * {Types::GetCampaignsResponse#campaigns_response #campaigns_response} => Types::CampaignsResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_campaigns({
       #     application_id: "__string", # required
       #     page_size: "__string",
@@ -1179,6 +1277,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaigns_response.item #=> Array
       #   resp.campaigns_response.item[0].additional_treatments #=> Array
       #   resp.campaigns_response.item[0].additional_treatments[0].id #=> String
@@ -1272,6 +1371,7 @@ module Aws
       #   resp.campaigns_response.item[0].treatment_name #=> String
       #   resp.campaigns_response.item[0].version #=> Integer
       #   resp.campaigns_response.next_token #=> String
+      #
       # @overload get_campaigns(params = {})
       # @param [Hash] params ({})
       def get_campaigns(params = {}, options = {})
@@ -1280,19 +1380,24 @@ module Aws
       end
 
       # Returns information about an endpoint.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :endpoint_id
+      #
       # @return [Types::GetEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetEndpointResponse#endpoint_response #EndpointResponse} => Types::EndpointResponse
+      #   * {Types::GetEndpointResponse#endpoint_response #endpoint_response} => Types::EndpointResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_endpoint({
       #     application_id: "__string", # required
       #     endpoint_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.endpoint_response.address #=> String
       #   resp.endpoint_response.application_id #=> String
       #   resp.endpoint_response.attributes #=> Hash
@@ -1327,6 +1432,7 @@ module Aws
       #   resp.endpoint_response.user.user_attributes["__string"] #=> Array
       #   resp.endpoint_response.user.user_attributes["__string"][0] #=> String
       #   resp.endpoint_response.user.user_id #=> String
+      #
       # @overload get_endpoint(params = {})
       # @param [Hash] params ({})
       def get_endpoint(params = {}, options = {})
@@ -1335,17 +1441,21 @@ module Aws
       end
 
       # Returns information about the GCM channel for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @return [Types::GetGcmChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetGcmChannelResponse#gcm_channel_response #GCMChannelResponse} => Types::GCMChannelResponse
+      #   * {Types::GetGcmChannelResponse#gcm_channel_response #gcm_channel_response} => Types::GCMChannelResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_gcm_channel({
       #     application_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.gcm_channel_response.application_id #=> String
       #   resp.gcm_channel_response.creation_date #=> String
       #   resp.gcm_channel_response.credential #=> String
@@ -1355,6 +1465,7 @@ module Aws
       #   resp.gcm_channel_response.last_modified_date #=> String
       #   resp.gcm_channel_response.platform #=> String
       #   resp.gcm_channel_response.version #=> Integer
+      #
       # @overload get_gcm_channel(params = {})
       # @param [Hash] params ({})
       def get_gcm_channel(params = {}, options = {})
@@ -1363,19 +1474,24 @@ module Aws
       end
 
       # Returns information about an import job.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :job_id
+      #
       # @return [Types::GetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetImportJobResponse#import_job_response #ImportJobResponse} => Types::ImportJobResponse
+      #   * {Types::GetImportJobResponse#import_job_response #import_job_response} => Types::ImportJobResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_import_job({
       #     application_id: "__string", # required
       #     job_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.import_job_response.application_id #=> String
       #   resp.import_job_response.completed_pieces #=> Integer
       #   resp.import_job_response.completion_date #=> String
@@ -1397,6 +1513,7 @@ module Aws
       #   resp.import_job_response.total_pieces #=> Integer
       #   resp.import_job_response.total_processed #=> Integer
       #   resp.import_job_response.type #=> String
+      #
       # @overload get_import_job(params = {})
       # @param [Hash] params ({})
       def get_import_job(params = {}, options = {})
@@ -1405,14 +1522,19 @@ module Aws
       end
 
       # Returns information about your import jobs.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetImportJobsResponse#import_jobs_response #ImportJobsResponse} => Types::ImportJobsResponse
+      #   * {Types::GetImportJobsResponse#import_jobs_response #import_jobs_response} => Types::ImportJobsResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_import_jobs({
       #     application_id: "__string", # required
       #     page_size: "__string",
@@ -1420,6 +1542,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.import_jobs_response.item #=> Array
       #   resp.import_jobs_response.item[0].application_id #=> String
       #   resp.import_jobs_response.item[0].completed_pieces #=> Integer
@@ -1443,6 +1566,7 @@ module Aws
       #   resp.import_jobs_response.item[0].total_processed #=> Integer
       #   resp.import_jobs_response.item[0].type #=> String
       #   resp.import_jobs_response.next_token #=> String
+      #
       # @overload get_import_jobs(params = {})
       # @param [Hash] params ({})
       def get_import_jobs(params = {}, options = {})
@@ -1451,19 +1575,24 @@ module Aws
       end
 
       # Returns information about a segment.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :segment_id
+      #
       # @return [Types::GetSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSegmentResponse#segment_response #SegmentResponse} => Types::SegmentResponse
+      #   * {Types::GetSegmentResponse#segment_response #segment_response} => Types::SegmentResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_segment({
       #     application_id: "__string", # required
       #     segment_id: "__string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.segment_response.application_id #=> String
       #   resp.segment_response.creation_date #=> String
       #   resp.segment_response.dimensions.attributes #=> Hash
@@ -1500,6 +1629,7 @@ module Aws
       #   resp.segment_response.name #=> String
       #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segment_response.version #=> Integer
+      #
       # @overload get_segment(params = {})
       # @param [Hash] params ({})
       def get_segment(params = {}, options = {})
@@ -1508,15 +1638,21 @@ module Aws
       end
 
       # Returns a list of import jobs for a specific segment.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [required, String] :segment_id
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetSegmentImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSegmentImportJobsResponse#import_jobs_response #ImportJobsResponse} => Types::ImportJobsResponse
+      #   * {Types::GetSegmentImportJobsResponse#import_jobs_response #import_jobs_response} => Types::ImportJobsResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_segment_import_jobs({
       #     application_id: "__string", # required
       #     page_size: "__string",
@@ -1525,6 +1661,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.import_jobs_response.item #=> Array
       #   resp.import_jobs_response.item[0].application_id #=> String
       #   resp.import_jobs_response.item[0].completed_pieces #=> Integer
@@ -1548,6 +1685,7 @@ module Aws
       #   resp.import_jobs_response.item[0].total_processed #=> Integer
       #   resp.import_jobs_response.item[0].type #=> String
       #   resp.import_jobs_response.next_token #=> String
+      #
       # @overload get_segment_import_jobs(params = {})
       # @param [Hash] params ({})
       def get_segment_import_jobs(params = {}, options = {})
@@ -1556,14 +1694,19 @@ module Aws
       end
 
       # Returns information about a segment version.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :segment_id
+      #
       # @option params [required, String] :version
+      #
       # @return [Types::GetSegmentVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSegmentVersionResponse#segment_response #SegmentResponse} => Types::SegmentResponse
+      #   * {Types::GetSegmentVersionResponse#segment_response #segment_response} => Types::SegmentResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_segment_version({
       #     application_id: "__string", # required
       #     segment_id: "__string", # required
@@ -1571,6 +1714,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.segment_response.application_id #=> String
       #   resp.segment_response.creation_date #=> String
       #   resp.segment_response.dimensions.attributes #=> Hash
@@ -1607,6 +1751,7 @@ module Aws
       #   resp.segment_response.name #=> String
       #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segment_response.version #=> Integer
+      #
       # @overload get_segment_version(params = {})
       # @param [Hash] params ({})
       def get_segment_version(params = {}, options = {})
@@ -1615,15 +1760,21 @@ module Aws
       end
 
       # Returns information about your segment versions.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [required, String] :segment_id
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetSegmentVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSegmentVersionsResponse#segments_response #SegmentsResponse} => Types::SegmentsResponse
+      #   * {Types::GetSegmentVersionsResponse#segments_response #segments_response} => Types::SegmentsResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_segment_versions({
       #     application_id: "__string", # required
       #     page_size: "__string",
@@ -1632,6 +1783,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.segments_response.item #=> Array
       #   resp.segments_response.item[0].application_id #=> String
       #   resp.segments_response.item[0].creation_date #=> String
@@ -1670,6 +1822,7 @@ module Aws
       #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segments_response.item[0].version #=> Integer
       #   resp.segments_response.next_token #=> String
+      #
       # @overload get_segment_versions(params = {})
       # @param [Hash] params ({})
       def get_segment_versions(params = {}, options = {})
@@ -1678,14 +1831,19 @@ module Aws
       end
 
       # Used to get information about your segments.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [String] :page_size
+      #
       # @option params [String] :token
+      #
       # @return [Types::GetSegmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSegmentsResponse#segments_response #SegmentsResponse} => Types::SegmentsResponse
+      #   * {Types::GetSegmentsResponse#segments_response #segments_response} => Types::SegmentsResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_segments({
       #     application_id: "__string", # required
       #     page_size: "__string",
@@ -1693,6 +1851,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.segments_response.item #=> Array
       #   resp.segments_response.item[0].application_id #=> String
       #   resp.segments_response.item[0].creation_date #=> String
@@ -1731,6 +1890,7 @@ module Aws
       #   resp.segments_response.item[0].segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segments_response.item[0].version #=> Integer
       #   resp.segments_response.next_token #=> String
+      #
       # @overload get_segments(params = {})
       # @param [Hash] params ({})
       def get_segments(params = {}, options = {})
@@ -1739,13 +1899,17 @@ module Aws
       end
 
       # Use to update the APNs channel for an app.
+      #
       # @option params [required, Types::APNSChannelRequest] :apns_channel_request
+      #
       # @option params [required, String] :application_id
+      #
       # @return [Types::UpdateApnsChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateApnsChannelResponse#apns_channel_response #APNSChannelResponse} => Types::APNSChannelResponse
+      #   * {Types::UpdateApnsChannelResponse#apns_channel_response #apns_channel_response} => Types::APNSChannelResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_apns_channel({
       #     apns_channel_request: { # required
       #       certificate: "__string",
@@ -1755,6 +1919,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.apns_channel_response.application_id #=> String
       #   resp.apns_channel_response.creation_date #=> String
       #   resp.apns_channel_response.id #=> String
@@ -1763,6 +1928,7 @@ module Aws
       #   resp.apns_channel_response.last_modified_date #=> String
       #   resp.apns_channel_response.platform #=> String
       #   resp.apns_channel_response.version #=> Integer
+      #
       # @overload update_apns_channel(params = {})
       # @param [Hash] params ({})
       def update_apns_channel(params = {}, options = {})
@@ -1771,13 +1937,17 @@ module Aws
       end
 
       # Used to update the settings for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, Types::WriteApplicationSettingsRequest] :write_application_settings_request
+      #
       # @return [Types::UpdateApplicationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateApplicationSettingsResponse#application_settings_resource #ApplicationSettingsResource} => Types::ApplicationSettingsResource
+      #   * {Types::UpdateApplicationSettingsResponse#application_settings_resource #application_settings_resource} => Types::ApplicationSettingsResource
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_application_settings({
       #     application_id: "__string", # required
       #     write_application_settings_request: { # required
@@ -1793,12 +1963,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_settings_resource.application_id #=> String
       #   resp.application_settings_resource.last_modified_date #=> String
       #   resp.application_settings_resource.limits.daily #=> Integer
       #   resp.application_settings_resource.limits.total #=> Integer
       #   resp.application_settings_resource.quiet_time.end #=> String
       #   resp.application_settings_resource.quiet_time.start #=> String
+      #
       # @overload update_application_settings(params = {})
       # @param [Hash] params ({})
       def update_application_settings(params = {}, options = {})
@@ -1807,14 +1979,19 @@ module Aws
       end
 
       # Use to update a campaign.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :campaign_id
+      #
       # @option params [required, Types::WriteCampaignRequest] :write_campaign_request
+      #
       # @return [Types::UpdateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateCampaignResponse#campaign_response #CampaignResponse} => Types::CampaignResponse
+      #   * {Types::UpdateCampaignResponse#campaign_response #campaign_response} => Types::CampaignResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_campaign({
       #     application_id: "__string", # required
       #     campaign_id: "__string", # required
@@ -1934,6 +2111,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.campaign_response.additional_treatments #=> Array
       #   resp.campaign_response.additional_treatments[0].id #=> String
       #   resp.campaign_response.additional_treatments[0].message_configuration.apns_message.action #=> String, one of "OPEN_APP", "DEEP_LINK", "URL"
@@ -2025,6 +2203,7 @@ module Aws
       #   resp.campaign_response.treatment_description #=> String
       #   resp.campaign_response.treatment_name #=> String
       #   resp.campaign_response.version #=> Integer
+      #
       # @overload update_campaign(params = {})
       # @param [Hash] params ({})
       def update_campaign(params = {}, options = {})
@@ -2033,14 +2212,19 @@ module Aws
       end
 
       # Use to update an endpoint.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :endpoint_id
+      #
       # @option params [required, Types::EndpointRequest] :endpoint_request
+      #
       # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateEndpointResponse#message_body #MessageBody} => Types::MessageBody
+      #   * {Types::UpdateEndpointResponse#message_body #message_body} => Types::MessageBody
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_endpoint({
       #     application_id: "__string", # required
       #     endpoint_id: "__string", # required
@@ -2085,8 +2269,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.message_body.message #=> String
       #   resp.message_body.request_id #=> String
+      #
       # @overload update_endpoint(params = {})
       # @param [Hash] params ({})
       def update_endpoint(params = {}, options = {})
@@ -2095,13 +2281,17 @@ module Aws
       end
 
       # Use to update your endpoints.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, Types::EndpointBatchRequest] :endpoint_batch_request
+      #
       # @return [Types::UpdateEndpointsBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateEndpointsBatchResponse#message_body #MessageBody} => Types::MessageBody
+      #   * {Types::UpdateEndpointsBatchResponse#message_body #message_body} => Types::MessageBody
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_endpoints_batch({
       #     application_id: "__string", # required
       #     endpoint_batch_request: { # required
@@ -2150,8 +2340,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.message_body.message #=> String
       #   resp.message_body.request_id #=> String
+      #
       # @overload update_endpoints_batch(params = {})
       # @param [Hash] params ({})
       def update_endpoints_batch(params = {}, options = {})
@@ -2160,13 +2352,17 @@ module Aws
       end
 
       # Use to update the GCM channel for an app.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, Types::GCMChannelRequest] :gcm_channel_request
+      #
       # @return [Types::UpdateGcmChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateGcmChannelResponse#gcm_channel_response #GCMChannelResponse} => Types::GCMChannelResponse
+      #   * {Types::UpdateGcmChannelResponse#gcm_channel_response #gcm_channel_response} => Types::GCMChannelResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_gcm_channel({
       #     application_id: "__string", # required
       #     gcm_channel_request: { # required
@@ -2175,6 +2371,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.gcm_channel_response.application_id #=> String
       #   resp.gcm_channel_response.creation_date #=> String
       #   resp.gcm_channel_response.credential #=> String
@@ -2184,6 +2381,7 @@ module Aws
       #   resp.gcm_channel_response.last_modified_date #=> String
       #   resp.gcm_channel_response.platform #=> String
       #   resp.gcm_channel_response.version #=> Integer
+      #
       # @overload update_gcm_channel(params = {})
       # @param [Hash] params ({})
       def update_gcm_channel(params = {}, options = {})
@@ -2192,14 +2390,19 @@ module Aws
       end
 
       # Use to update a segment.
+      #
       # @option params [required, String] :application_id
+      #
       # @option params [required, String] :segment_id
+      #
       # @option params [required, Types::WriteSegmentRequest] :write_segment_request
+      #
       # @return [Types::UpdateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateSegmentResponse#segment_response #SegmentResponse} => Types::SegmentResponse
+      #   * {Types::UpdateSegmentResponse#segment_response #segment_response} => Types::SegmentResponse
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_segment({
       #     application_id: "__string", # required
       #     segment_id: "__string", # required
@@ -2251,6 +2454,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.segment_response.application_id #=> String
       #   resp.segment_response.creation_date #=> String
       #   resp.segment_response.dimensions.attributes #=> Hash
@@ -2287,6 +2491,7 @@ module Aws
       #   resp.segment_response.name #=> String
       #   resp.segment_response.segment_type #=> String, one of "DIMENSIONAL", "IMPORT"
       #   resp.segment_response.version #=> Integer
+      #
       # @overload update_segment(params = {})
       # @param [Hash] params ({})
       def update_segment(params = {}, options = {})

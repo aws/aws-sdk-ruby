@@ -80,6 +80,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -91,32 +92,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -125,14 +137,17 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       # @option options [Boolean] :verify_checksums (true)
       #   When `true` MD5 checksums will be computed for messages sent to
       #   an SQS queue and matched against MD5 checksums returned by Amazon SQS.
       #   `Aws::Errors::Checksum` errors are raised for cases where checksums do
       #   not match.
+      #
       def initialize(*args)
         super
       end
@@ -169,14 +184,17 @@ module Aws
       # [1]: http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P
       # [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html
       # [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AccessPolicyLanguage.html
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, String] :label
       #   The unique identification of the permission you're setting (e.g.,
       #   `AliceSendMessage`). Constraints: Maximum 80 characters; alphanumeric
       #   characters, hyphens (-), and underscores (\_) are allowed.
+      #
       # @option params [required, Array<String>] :aws_account_ids
       #   The AWS account number of the [principal][1] who will be given
       #   permission. The principal must have an AWS account, but does not need
@@ -188,6 +206,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P
       #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AWSCredentials.html
+      #
       # @option params [required, Array<String>] :actions
       #   The action the client wants to allow for the specified principal. The
       #   following are valid values: `* | SendMessage | ReceiveMessage |
@@ -204,15 +223,18 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html#PermissionTypes
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_permission({
       #     queue_url: "String", # required
       #     label: "String", # required
       #     aws_account_ids: ["String"], # required
       #     actions: ["String"], # required
       #   })
+      #
       # @overload add_permission(params = {})
       # @param [Hash] params ({})
       def add_permission(params = {}, options = {})
@@ -265,25 +287,31 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, String] :receipt_handle
       #   The receipt handle associated with the message whose visibility
       #   timeout should be changed. This parameter is returned by the
       #   ReceiveMessage action.
+      #
       # @option params [required, Integer] :visibility_timeout
       #   The new value (in seconds - from 0 to 43200 - maximum 12 hours) for
       #   the message's visibility timeout.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.change_message_visibility({
       #     queue_url: "String", # required
       #     receipt_handle: "String", # required
       #     visibility_timeout: 1, # required
       #   })
+      #
       # @overload change_message_visibility(params = {})
       # @param [Hash] params ({})
       def change_message_visibility(params = {}, options = {})
@@ -310,19 +338,23 @@ module Aws
       # `&amp;Attribute.1=this`
       #
       # `&amp;Attribute.2=that`
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, Array<Types::ChangeMessageVisibilityBatchRequestEntry>] :entries
       #   A list of receipt handles of the messages for which the visibility
       #   timeout must be changed.
+      #
       # @return [Types::ChangeMessageVisibilityBatchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ChangeMessageVisibilityBatchResult#successful #Successful} => Array&lt;Types::ChangeMessageVisibilityBatchResultEntry&gt;
-      #   * {Types::ChangeMessageVisibilityBatchResult#failed #Failed} => Array&lt;Types::BatchResultErrorEntry&gt;
+      #   * {Types::ChangeMessageVisibilityBatchResult#successful #successful} => Array&lt;Types::ChangeMessageVisibilityBatchResultEntry&gt;
+      #   * {Types::ChangeMessageVisibilityBatchResult#failed #failed} => Array&lt;Types::BatchResultErrorEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.change_message_visibility_batch({
       #     queue_url: "String", # required
       #     entries: [ # required
@@ -335,6 +367,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.successful #=> Array
       #   resp.successful[0].id #=> String
       #   resp.failed #=> Array
@@ -342,6 +375,7 @@ module Aws
       #   resp.failed[0].sender_fault #=> Boolean
       #   resp.failed[0].code #=> String
       #   resp.failed[0].message #=> String
+      #
       # @overload change_message_visibility_batch(params = {})
       # @param [Hash] params ({})
       def change_message_visibility_batch(params = {}, options = {})
@@ -354,14 +388,14 @@ module Aws
       #
       # * If you don't specify the `FifoQueue` attribute, Amazon SQS creates
       #   a standard queue.
-      # 
+      #
       #   <note markdown="1"> You can't change the queue type after you create it and you can't
       #   convert an existing standard queue into a FIFO queue. You must
       #   either create a new FIFO queue for your application or delete your
       #   existing standard queue and recreate it as a FIFO queue. For more
       #   information, see [ Moving From a Standard Queue to a FIFO Queue][1]
       #   in the *Amazon SQS Developer Guide*.
-      # 
+      #
       #    </note>
       #
       # * If you don't provide a value for an attribute, the queue is created
@@ -396,6 +430,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-moving
       # [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html
+      #
       # @option params [required, String] :queue_name
       #   The name of the new queue. The following limits apply to this name:
       #
@@ -407,6 +442,7 @@ module Aws
       #   * A FIFO queue name must end with the `.fifo` suffix.
       #
       #   Queue names are case-sensitive.
+      #
       # @option params [Hash<String,String>] :attributes
       #   A map of attributes with their corresponding values.
       #
@@ -509,11 +545,13 @@ module Aws
       #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
       #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
       #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+      #
       # @return [Types::CreateQueueResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateQueueResult#queue_url #QueueUrl} => String
+      #   * {Types::CreateQueueResult#queue_url #queue_url} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_queue({
       #     queue_name: "String", # required
       #     attributes: {
@@ -522,7 +560,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.queue_url #=> String
+      #
       # @overload create_queue(params = {})
       # @param [Hash] params ({})
       def create_queue(params = {}, options = {})
@@ -554,19 +594,24 @@ module Aws
       # again on a subsequent receive request. You should create your system
       # to be idempotent so that receiving a particular message more than once
       # is not a problem.
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, String] :receipt_handle
       #   The receipt handle associated with the message to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_message({
       #     queue_url: "String", # required
       #     receipt_handle: "String", # required
       #   })
+      #
       # @overload delete_message(params = {})
       # @param [Hash] params ({})
       def delete_message(params = {}, options = {})
@@ -591,18 +636,22 @@ module Aws
       # `&amp;Attribute.1=this`
       #
       # `&amp;Attribute.2=that`
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, Array<Types::DeleteMessageBatchRequestEntry>] :entries
       #   A list of receipt handles for the messages to be deleted.
+      #
       # @return [Types::DeleteMessageBatchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteMessageBatchResult#successful #Successful} => Array&lt;Types::DeleteMessageBatchResultEntry&gt;
-      #   * {Types::DeleteMessageBatchResult#failed #Failed} => Array&lt;Types::BatchResultErrorEntry&gt;
+      #   * {Types::DeleteMessageBatchResult#successful #successful} => Array&lt;Types::DeleteMessageBatchResultEntry&gt;
+      #   * {Types::DeleteMessageBatchResult#failed #failed} => Array&lt;Types::BatchResultErrorEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_message_batch({
       #     queue_url: "String", # required
       #     entries: [ # required
@@ -614,6 +663,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.successful #=> Array
       #   resp.successful[0].id #=> String
       #   resp.failed #=> Array
@@ -621,6 +671,7 @@ module Aws
       #   resp.failed[0].sender_fault #=> Boolean
       #   resp.failed[0].code #=> String
       #   resp.failed[0].message #=> String
+      #
       # @overload delete_message_batch(params = {})
       # @param [Hash] params ({})
       def delete_message_batch(params = {}, options = {})
@@ -649,16 +700,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-how-it-works.html
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_queue({
       #     queue_url: "String", # required
       #   })
+      #
       # @overload delete_queue(params = {})
       # @param [Hash] params ({})
       def delete_queue(params = {}, options = {})
@@ -677,10 +732,12 @@ module Aws
       # `&amp;Attribute.1=this`
       #
       # `&amp;Attribute.2=that`
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [Array<String>] :attribute_names
       #   A list of attributes for which to retrieve information.
       #
@@ -756,19 +813,23 @@ module Aws
       #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
       #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
       #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+      #
       # @return [Types::GetQueueAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetQueueAttributesResult#attributes #Attributes} => Hash&lt;String,String&gt;
+      #   * {Types::GetQueueAttributesResult#attributes #attributes} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_queue_attributes({
       #     queue_url: "String", # required
       #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication
       #   })
       #
       # @example Response structure
+      #
       #   resp.attributes #=> Hash
       #   resp.attributes["QueueAttributeName"] #=> String
+      #
       # @overload get_queue_attributes(params = {})
       # @param [Hash] params ({})
       def get_queue_attributes(params = {}, options = {})
@@ -789,26 +850,32 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html
+      #
       # @option params [required, String] :queue_name
       #   The name of the queue whose URL must be fetched. Maximum 80
       #   characters; alphanumeric characters, hyphens (-), and underscores (\_)
       #   are allowed.
       #
       #   Queue names are case-sensitive.
+      #
       # @option params [String] :queue_owner_aws_account_id
       #   The AWS account ID of the account that created the queue.
+      #
       # @return [Types::GetQueueUrlResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetQueueUrlResult#queue_url #QueueUrl} => String
+      #   * {Types::GetQueueUrlResult#queue_url #queue_url} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_queue_url({
       #     queue_name: "String", # required
       #     queue_owner_aws_account_id: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.queue_url #=> String
+      #
       # @overload get_queue_url(params = {})
       # @param [Hash] params ({})
       def get_queue_url(params = {}, options = {})
@@ -825,22 +892,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+      #
       # @option params [required, String] :queue_url
       #   The queue URL of a dead letter queue.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @return [Types::ListDeadLetterSourceQueuesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDeadLetterSourceQueuesResult#queue_urls #queueUrls} => Array&lt;String&gt;
+      #   * {Types::ListDeadLetterSourceQueuesResult#queue_urls #queue_urls} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_dead_letter_source_queues({
       #     queue_url: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.queue_urls #=> Array
       #   resp.queue_urls[0] #=> String
+      #
       # @overload list_dead_letter_source_queues(params = {})
       # @param [Hash] params ({})
       def list_dead_letter_source_queues(params = {}, options = {})
@@ -852,23 +924,28 @@ module Aws
       # be returned is 1000. If you specify a value for the optional
       # `QueueNamePrefix` parameter, only queues with a name beginning with
       # the specified value are returned.
+      #
       # @option params [String] :queue_name_prefix
       #   A string to use for filtering the list results. Only those queues
       #   whose name begins with the specified string are returned.
       #
       #   Queue names are case-sensitive.
+      #
       # @return [Types::ListQueuesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListQueuesResult#queue_urls #QueueUrls} => Array&lt;String&gt;
+      #   * {Types::ListQueuesResult#queue_urls #queue_urls} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_queues({
       #     queue_name_prefix: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.queue_urls #=> Array
       #   resp.queue_urls[0] #=> String
+      #
       # @overload list_queues(params = {})
       # @param [Hash] params ({})
       def list_queues(params = {}, options = {})
@@ -887,17 +964,21 @@ module Aws
       # might be deleted. While the queue is being purged, messages sent to
       # the queue before `PurgeQueue` was called might be received, but will
       # be deleted within the next minute.
+      #
       # @option params [required, String] :queue_url
       #   The queue URL of the queue to delete the messages from when using the
       #   `PurgeQueue` API.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.purge_queue({
       #     queue_url: "String", # required
       #   })
+      #
       # @overload purge_queue(params = {})
       # @param [Hash] params ({})
       def purge_queue(params = {}, options = {})
@@ -962,10 +1043,12 @@ module Aws
       # [2]: https://www.ietf.org/rfc/rfc1321.txt
       # [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html
       # [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [Array<String>] :attribute_names
       #   A list of attributes that need to be returned along with each message.
       #   These attributes include:
@@ -1030,6 +1113,7 @@ module Aws
       #   * `FifoQueue`
       #
       #   * `VisibilityTimeout`
+      #
       # @option params [Array<String>] :message_attribute_names
       #   The name of the message attribute, where *N* is the index. The message
       #   attribute name can contain the following characters: A-Z, a-z, 0-9,
@@ -1045,20 +1129,24 @@ module Aws
       #   receive, or you can return all of the attributes by specifying "All"
       #   or ".*" in your request. You can also use "bar.*" to return all
       #   message attributes starting with the "bar" prefix.
+      #
       # @option params [Integer] :max_number_of_messages
       #   The maximum number of messages to return. Amazon SQS never returns
       #   more messages than this value but might return fewer. Values can be
       #   from 1 to 10. Default is 1.
       #
       #   All of the messages are not necessarily returned.
+      #
       # @option params [Integer] :visibility_timeout
       #   The duration (in seconds) that the received messages are hidden from
       #   subsequent retrieve requests after being retrieved by a
       #   `ReceiveMessage` request.
+      #
       # @option params [Integer] :wait_time_seconds
       #   The duration (in seconds) for which the call will wait for a message
       #   to arrive in the queue before returning. If a message is available,
       #   the call will return sooner than WaitTimeSeconds.
+      #
       # @option params [String] :receive_request_attempt_id
       #   This parameter applies only to FIFO (first-in-first-out) queues.
       #
@@ -1124,11 +1212,13 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
       #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-receiverequestattemptid-request-parameter
+      #
       # @return [Types::ReceiveMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReceiveMessageResult#messages #Messages} => Array&lt;Types::Message&gt;
+      #   * {Types::ReceiveMessageResult#messages #messages} => Array&lt;Types::Message&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.receive_message({
       #     queue_url: "String", # required
       #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication
@@ -1140,6 +1230,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.messages #=> Array
       #   resp.messages[0].message_id #=> String
       #   resp.messages[0].receipt_handle #=> String
@@ -1156,6 +1247,7 @@ module Aws
       #   resp.messages[0].message_attributes["String"].binary_list_values #=> Array
       #   resp.messages[0].message_attributes["String"].binary_list_values[0] #=> String
       #   resp.messages[0].message_attributes["String"].data_type #=> String
+      #
       # @overload receive_message(params = {})
       # @param [Hash] params ({})
       def receive_message(params = {}, options = {})
@@ -1165,20 +1257,25 @@ module Aws
 
       # Revokes any permissions in the queue policy that matches the specified
       # `Label` parameter. Only the owner of the queue can remove permissions.
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, String] :label
       #   The identification of the permission to remove. This is the label
       #   added with the AddPermission action.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_permission({
       #     queue_url: "String", # required
       #     label: "String", # required
       #   })
+      #
       # @overload remove_permission(params = {})
       # @param [Hash] params ({})
       def remove_permission(params = {}, options = {})
@@ -1200,13 +1297,16 @@ module Aws
       #
       #
       # [1]: https://www.ietf.org/rfc/rfc1321.txt
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, String] :message_body
       #   The message to send. String maximum 256 KB in size. For a list of
       #   allowed characters, see the preceding note.
+      #
       # @option params [Integer] :delay_seconds
       #   The number of seconds (0 to 900 - 15 minutes) to delay a specific
       #   message. Messages with a positive `DelaySeconds` value become
@@ -1217,6 +1317,7 @@ module Aws
       #   You can set this parameter only on a queue level.
       #
       #    </note>
+      #
       # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
       #   Each message attribute consists of a Name, Type, and Value. For more
       #   information, see [Message Attribute Items and Validation][1] in the
@@ -1225,6 +1326,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
+      #
       # @option params [String] :message_deduplication_id
       #   This parameter applies only to FIFO (first-in-first-out) queues.
       #
@@ -1286,6 +1388,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
       #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagededuplicationid-property
+      #
       # @option params [String] :message_group_id
       #   This parameter applies only to FIFO (first-in-first-out) queues.
       #
@@ -1316,14 +1419,16 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagegroupid-property
+      #
       # @return [Types::SendMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SendMessageResult#md5_of_message_body #MD5OfMessageBody} => String
-      #   * {Types::SendMessageResult#md5_of_message_attributes #MD5OfMessageAttributes} => String
-      #   * {Types::SendMessageResult#message_id #MessageId} => String
-      #   * {Types::SendMessageResult#sequence_number #SequenceNumber} => String
+      #   * {Types::SendMessageResult#md5_of_message_body #md5_of_message_body} => String
+      #   * {Types::SendMessageResult#md5_of_message_attributes #md5_of_message_attributes} => String
+      #   * {Types::SendMessageResult#message_id #message_id} => String
+      #   * {Types::SendMessageResult#sequence_number #sequence_number} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_message({
       #     queue_url: "String", # required
       #     message_body: "String", # required
@@ -1342,10 +1447,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.md5_of_message_body #=> String
       #   resp.md5_of_message_attributes #=> String
       #   resp.message_id #=> String
       #   resp.sequence_number #=> String
+      #
       # @overload send_message(params = {})
       # @param [Hash] params ({})
       def send_message(params = {}, options = {})
@@ -1391,18 +1498,22 @@ module Aws
       #
       #
       # [1]: https://www.ietf.org/rfc/rfc1321.txt
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, Array<Types::SendMessageBatchRequestEntry>] :entries
       #   A list of SendMessageBatchRequestEntry items.
+      #
       # @return [Types::SendMessageBatchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SendMessageBatchResult#successful #Successful} => Array&lt;Types::SendMessageBatchResultEntry&gt;
-      #   * {Types::SendMessageBatchResult#failed #Failed} => Array&lt;Types::BatchResultErrorEntry&gt;
+      #   * {Types::SendMessageBatchResult#successful #successful} => Array&lt;Types::SendMessageBatchResultEntry&gt;
+      #   * {Types::SendMessageBatchResult#failed #failed} => Array&lt;Types::BatchResultErrorEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_message_batch({
       #     queue_url: "String", # required
       #     entries: [ # required
@@ -1426,6 +1537,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.successful #=> Array
       #   resp.successful[0].id #=> String
       #   resp.successful[0].message_id #=> String
@@ -1437,6 +1549,7 @@ module Aws
       #   resp.failed[0].sender_fault #=> Boolean
       #   resp.failed[0].code #=> String
       #   resp.failed[0].message #=> String
+      #
       # @overload send_message_batch(params = {})
       # @param [Hash] params ({})
       def send_message_batch(params = {}, options = {})
@@ -1454,10 +1567,12 @@ module Aws
       # handle new attributes gracefully.
       #
       #  </note>
+      #
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
+      #
       # @option params [required, Hash<String,String>] :attributes
       #   A map of attributes to set.
       #
@@ -1551,15 +1666,18 @@ module Aws
       #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
       #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
       #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_queue_attributes({
       #     queue_url: "String", # required
       #     attributes: { # required
       #       "All" => "String",
       #     },
       #   })
+      #
       # @overload set_queue_attributes(params = {})
       # @param [Hash] params ({})
       def set_queue_attributes(params = {}, options = {})

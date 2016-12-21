@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -144,15 +159,19 @@ module Aws
       #
       # Each tag consists of a key and a value. Tag keys must be unique to
       # each resource.
+      #
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
+      #
       # @option params [required, Array<Types::Tag>] :tag_list
       #   One or more tags.
+      #
       # @return [Types::AddTagsToResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AddTagsToResourceResponse#status #Status} => String
+      #   * {Types::AddTagsToResourceResponse#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_resource({
       #     resource_arn: "String", # required
       #     tag_list: [ # required
@@ -164,7 +183,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> String
+      #
       # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
       def add_tags_to_resource(params = {}, options = {})
@@ -175,19 +196,24 @@ module Aws
       # Creates a high-availability partition group. A high-availability
       # partition group is a group of partitions that spans multiple physical
       # HSMs.
+      #
       # @option params [required, String] :label
       #   The label of the new high-availability partition group.
+      #
       # @return [Types::CreateHapgResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateHapgResponse#hapg_arn #HapgArn} => String
+      #   * {Types::CreateHapgResponse#hapg_arn #hapg_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_hapg({
       #     label: "Label", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.hapg_arn #=> String
+      #
       # @overload create_hapg(params = {})
       # @param [Hash] params ({})
       def create_hapg(params = {}, options = {})
@@ -210,36 +236,46 @@ module Aws
       #
       #
       # [1]: https://console.aws.amazon.com/support/home#/
+      #
       # @option params [required, String] :subnet_id
       #   The identifier of the subnet in your VPC in which to place the HSM.
+      #
       # @option params [required, String] :ssh_key
       #   The SSH public key to install on the HSM.
+      #
       # @option params [String] :eni_ip
       #   The IP address to assign to the HSM's ENI.
       #
       #   If an IP address is not specified, an IP address will be randomly
       #   chosen from the CIDR range of the subnet.
+      #
       # @option params [required, String] :iam_role_arn
       #   The ARN of an IAM role to enable the AWS CloudHSM service to allocate
       #   an ENI on your behalf.
+      #
       # @option params [String] :external_id
       #   The external ID from **IamRoleArn**, if present.
+      #
       # @option params [required, String] :subscription_type
       #   Specifies the type of subscription for the HSM.
       #
       #   * **PRODUCTION** - The HSM is being used in a production environment.
       #   * **TRIAL** - The HSM is being used in a product trial.
+      #
       # @option params [String] :client_token
       #   A user-defined token to ensure idempotence. Subsequent calls to this
       #   operation with the same token will be ignored.
+      #
       # @option params [String] :syslog_ip
       #   The IP address for the syslog monitoring server. The AWS CloudHSM
       #   service only supports one syslog monitoring server.
+      #
       # @return [Types::CreateHsmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateHsmResponse#hsm_arn #HsmArn} => String
+      #   * {Types::CreateHsmResponse#hsm_arn #hsm_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_hsm({
       #     subnet_id: "SubnetId", # required
       #     ssh_key: "SshKey", # required
@@ -252,7 +288,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.hsm_arn #=> String
+      #
       # @overload create_hsm(params = {})
       # @param [Hash] params ({})
       def create_hsm(params = {}, options = {})
@@ -261,23 +299,29 @@ module Aws
       end
 
       # Creates an HSM client.
+      #
       # @option params [String] :label
       #   The label for the client.
+      #
       # @option params [required, String] :certificate
       #   The contents of a Base64-Encoded X.509 v3 certificate to be installed
       #   on the HSMs used by this client.
+      #
       # @return [Types::CreateLunaClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateLunaClientResponse#client_arn #ClientArn} => String
+      #   * {Types::CreateLunaClientResponse#client_arn #client_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_luna_client({
       #     label: "ClientLabel",
       #     certificate: "Certificate", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.client_arn #=> String
+      #
       # @overload create_luna_client(params = {})
       # @param [Hash] params ({})
       def create_luna_client(params = {}, options = {})
@@ -286,19 +330,24 @@ module Aws
       end
 
       # Deletes a high-availability partition group.
+      #
       # @option params [required, String] :hapg_arn
       #   The ARN of the high-availability partition group to delete.
+      #
       # @return [Types::DeleteHapgResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteHapgResponse#status #Status} => String
+      #   * {Types::DeleteHapgResponse#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_hapg({
       #     hapg_arn: "HapgArn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> String
+      #
       # @overload delete_hapg(params = {})
       # @param [Hash] params ({})
       def delete_hapg(params = {}, options = {})
@@ -308,19 +357,24 @@ module Aws
 
       # Deletes an HSM. After completion, this operation cannot be undone and
       # your key material cannot be recovered.
+      #
       # @option params [required, String] :hsm_arn
       #   The ARN of the HSM to delete.
+      #
       # @return [Types::DeleteHsmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteHsmResponse#status #Status} => String
+      #   * {Types::DeleteHsmResponse#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_hsm({
       #     hsm_arn: "HsmArn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> String
+      #
       # @overload delete_hsm(params = {})
       # @param [Hash] params ({})
       def delete_hsm(params = {}, options = {})
@@ -329,19 +383,24 @@ module Aws
       end
 
       # Deletes a client.
+      #
       # @option params [required, String] :client_arn
       #   The ARN of the client to delete.
+      #
       # @return [Types::DeleteLunaClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteLunaClientResponse#status #Status} => String
+      #   * {Types::DeleteLunaClientResponse#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_luna_client({
       #     client_arn: "ClientArn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> String
+      #
       # @overload delete_luna_client(params = {})
       # @param [Hash] params ({})
       def delete_luna_client(params = {}, options = {})
@@ -350,26 +409,30 @@ module Aws
       end
 
       # Retrieves information about a high-availability partition group.
+      #
       # @option params [required, String] :hapg_arn
       #   The ARN of the high-availability partition group to describe.
+      #
       # @return [Types::DescribeHapgResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeHapgResponse#hapg_arn #HapgArn} => String
-      #   * {Types::DescribeHapgResponse#hapg_serial #HapgSerial} => String
-      #   * {Types::DescribeHapgResponse#hsms_last_action_failed #HsmsLastActionFailed} => Array&lt;String&gt;
-      #   * {Types::DescribeHapgResponse#hsms_pending_deletion #HsmsPendingDeletion} => Array&lt;String&gt;
-      #   * {Types::DescribeHapgResponse#hsms_pending_registration #HsmsPendingRegistration} => Array&lt;String&gt;
-      #   * {Types::DescribeHapgResponse#label #Label} => String
-      #   * {Types::DescribeHapgResponse#last_modified_timestamp #LastModifiedTimestamp} => String
-      #   * {Types::DescribeHapgResponse#partition_serial_list #PartitionSerialList} => Array&lt;String&gt;
-      #   * {Types::DescribeHapgResponse#state #State} => String
+      #   * {Types::DescribeHapgResponse#hapg_arn #hapg_arn} => String
+      #   * {Types::DescribeHapgResponse#hapg_serial #hapg_serial} => String
+      #   * {Types::DescribeHapgResponse#hsms_last_action_failed #hsms_last_action_failed} => Array&lt;String&gt;
+      #   * {Types::DescribeHapgResponse#hsms_pending_deletion #hsms_pending_deletion} => Array&lt;String&gt;
+      #   * {Types::DescribeHapgResponse#hsms_pending_registration #hsms_pending_registration} => Array&lt;String&gt;
+      #   * {Types::DescribeHapgResponse#label #label} => String
+      #   * {Types::DescribeHapgResponse#last_modified_timestamp #last_modified_timestamp} => String
+      #   * {Types::DescribeHapgResponse#partition_serial_list #partition_serial_list} => Array&lt;String&gt;
+      #   * {Types::DescribeHapgResponse#state #state} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_hapg({
       #     hapg_arn: "HapgArn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.hapg_arn #=> String
       #   resp.hapg_serial #=> String
       #   resp.hsms_last_action_failed #=> Array
@@ -383,6 +446,7 @@ module Aws
       #   resp.partition_serial_list #=> Array
       #   resp.partition_serial_list[0] #=> String
       #   resp.state #=> String, one of "READY", "UPDATING", "DEGRADED"
+      #
       # @overload describe_hapg(params = {})
       # @param [Hash] params ({})
       def describe_hapg(params = {}, options = {})
@@ -392,43 +456,48 @@ module Aws
 
       # Retrieves information about an HSM. You can identify the HSM by its
       # ARN or its serial number.
+      #
       # @option params [String] :hsm_arn
       #   The ARN of the HSM. Either the *HsmArn* or the *SerialNumber*
       #   parameter must be specified.
+      #
       # @option params [String] :hsm_serial_number
       #   The serial number of the HSM. Either the *HsmArn* or the
       #   *HsmSerialNumber* parameter must be specified.
+      #
       # @return [Types::DescribeHsmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeHsmResponse#hsm_arn #HsmArn} => String
-      #   * {Types::DescribeHsmResponse#status #Status} => String
-      #   * {Types::DescribeHsmResponse#status_details #StatusDetails} => String
-      #   * {Types::DescribeHsmResponse#availability_zone #AvailabilityZone} => String
-      #   * {Types::DescribeHsmResponse#eni_id #EniId} => String
-      #   * {Types::DescribeHsmResponse#eni_ip #EniIp} => String
-      #   * {Types::DescribeHsmResponse#subscription_type #SubscriptionType} => String
-      #   * {Types::DescribeHsmResponse#subscription_start_date #SubscriptionStartDate} => String
-      #   * {Types::DescribeHsmResponse#subscription_end_date #SubscriptionEndDate} => String
-      #   * {Types::DescribeHsmResponse#vpc_id #VpcId} => String
-      #   * {Types::DescribeHsmResponse#subnet_id #SubnetId} => String
-      #   * {Types::DescribeHsmResponse#iam_role_arn #IamRoleArn} => String
-      #   * {Types::DescribeHsmResponse#serial_number #SerialNumber} => String
-      #   * {Types::DescribeHsmResponse#vendor_name #VendorName} => String
-      #   * {Types::DescribeHsmResponse#hsm_type #HsmType} => String
-      #   * {Types::DescribeHsmResponse#software_version #SoftwareVersion} => String
-      #   * {Types::DescribeHsmResponse#ssh_public_key #SshPublicKey} => String
-      #   * {Types::DescribeHsmResponse#ssh_key_last_updated #SshKeyLastUpdated} => String
-      #   * {Types::DescribeHsmResponse#server_cert_uri #ServerCertUri} => String
-      #   * {Types::DescribeHsmResponse#server_cert_last_updated #ServerCertLastUpdated} => String
-      #   * {Types::DescribeHsmResponse#partitions #Partitions} => Array&lt;String&gt;
+      #   * {Types::DescribeHsmResponse#hsm_arn #hsm_arn} => String
+      #   * {Types::DescribeHsmResponse#status #status} => String
+      #   * {Types::DescribeHsmResponse#status_details #status_details} => String
+      #   * {Types::DescribeHsmResponse#availability_zone #availability_zone} => String
+      #   * {Types::DescribeHsmResponse#eni_id #eni_id} => String
+      #   * {Types::DescribeHsmResponse#eni_ip #eni_ip} => String
+      #   * {Types::DescribeHsmResponse#subscription_type #subscription_type} => String
+      #   * {Types::DescribeHsmResponse#subscription_start_date #subscription_start_date} => String
+      #   * {Types::DescribeHsmResponse#subscription_end_date #subscription_end_date} => String
+      #   * {Types::DescribeHsmResponse#vpc_id #vpc_id} => String
+      #   * {Types::DescribeHsmResponse#subnet_id #subnet_id} => String
+      #   * {Types::DescribeHsmResponse#iam_role_arn #iam_role_arn} => String
+      #   * {Types::DescribeHsmResponse#serial_number #serial_number} => String
+      #   * {Types::DescribeHsmResponse#vendor_name #vendor_name} => String
+      #   * {Types::DescribeHsmResponse#hsm_type #hsm_type} => String
+      #   * {Types::DescribeHsmResponse#software_version #software_version} => String
+      #   * {Types::DescribeHsmResponse#ssh_public_key #ssh_public_key} => String
+      #   * {Types::DescribeHsmResponse#ssh_key_last_updated #ssh_key_last_updated} => String
+      #   * {Types::DescribeHsmResponse#server_cert_uri #server_cert_uri} => String
+      #   * {Types::DescribeHsmResponse#server_cert_last_updated #server_cert_last_updated} => String
+      #   * {Types::DescribeHsmResponse#partitions #partitions} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_hsm({
       #     hsm_arn: "HsmArn",
       #     hsm_serial_number: "HsmSerialNumber",
       #   })
       #
       # @example Response structure
+      #
       #   resp.hsm_arn #=> String
       #   resp.status #=> String, one of "PENDING", "RUNNING", "UPDATING", "SUSPENDED", "TERMINATING", "TERMINATED", "DEGRADED"
       #   resp.status_details #=> String
@@ -451,6 +520,7 @@ module Aws
       #   resp.server_cert_last_updated #=> String
       #   resp.partitions #=> Array
       #   resp.partitions[0] #=> String
+      #
       # @overload describe_hsm(params = {})
       # @param [Hash] params ({})
       def describe_hsm(params = {}, options = {})
@@ -459,30 +529,36 @@ module Aws
       end
 
       # Retrieves information about an HSM client.
+      #
       # @option params [String] :client_arn
       #   The ARN of the client.
+      #
       # @option params [String] :certificate_fingerprint
       #   The certificate fingerprint.
+      #
       # @return [Types::DescribeLunaClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLunaClientResponse#client_arn #ClientArn} => String
-      #   * {Types::DescribeLunaClientResponse#certificate #Certificate} => String
-      #   * {Types::DescribeLunaClientResponse#certificate_fingerprint #CertificateFingerprint} => String
-      #   * {Types::DescribeLunaClientResponse#last_modified_timestamp #LastModifiedTimestamp} => String
-      #   * {Types::DescribeLunaClientResponse#label #Label} => String
+      #   * {Types::DescribeLunaClientResponse#client_arn #client_arn} => String
+      #   * {Types::DescribeLunaClientResponse#certificate #certificate} => String
+      #   * {Types::DescribeLunaClientResponse#certificate_fingerprint #certificate_fingerprint} => String
+      #   * {Types::DescribeLunaClientResponse#last_modified_timestamp #last_modified_timestamp} => String
+      #   * {Types::DescribeLunaClientResponse#label #label} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_luna_client({
       #     client_arn: "ClientArn",
       #     certificate_fingerprint: "CertificateFingerprint",
       #   })
       #
       # @example Response structure
+      #
       #   resp.client_arn #=> String
       #   resp.certificate #=> String
       #   resp.certificate_fingerprint #=> String
       #   resp.last_modified_timestamp #=> String
       #   resp.label #=> String
+      #
       # @overload describe_luna_client(params = {})
       # @param [Hash] params ({})
       def describe_luna_client(params = {}, options = {})
@@ -492,20 +568,25 @@ module Aws
 
       # Gets the configuration files necessary to connect to all high
       # availability partition groups the client is associated with.
+      #
       # @option params [required, String] :client_arn
       #   The ARN of the client.
+      #
       # @option params [required, String] :client_version
       #   The client version.
+      #
       # @option params [required, Array<String>] :hapg_list
       #   A list of ARNs that identify the high-availability partition groups
       #   that are associated with the client.
+      #
       # @return [Types::GetConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetConfigResponse#config_type #ConfigType} => String
-      #   * {Types::GetConfigResponse#config_file #ConfigFile} => String
-      #   * {Types::GetConfigResponse#config_cred #ConfigCred} => String
+      #   * {Types::GetConfigResponse#config_type #config_type} => String
+      #   * {Types::GetConfigResponse#config_file #config_file} => String
+      #   * {Types::GetConfigResponse#config_cred #config_cred} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_config({
       #     client_arn: "ClientArn", # required
       #     client_version: "5.1", # required, accepts 5.1, 5.3
@@ -513,9 +594,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.config_type #=> String
       #   resp.config_file #=> String
       #   resp.config_cred #=> String
+      #
       # @overload get_config(params = {})
       # @param [Hash] params ({})
       def get_config(params = {}, options = {})
@@ -525,16 +608,20 @@ module Aws
 
       # Lists the Availability Zones that have available AWS CloudHSM
       # capacity.
+      #
       # @return [Types::ListAvailableZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListAvailableZonesResponse#az_list #AZList} => Array&lt;String&gt;
+      #   * {Types::ListAvailableZonesResponse#az_list #az_list} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_available_zones()
       #
       # @example Response structure
+      #
       #   resp.az_list #=> Array
       #   resp.az_list[0] #=> String
+      #
       # @overload list_available_zones(params = {})
       # @param [Hash] params ({})
       def list_available_zones(params = {}, options = {})
@@ -548,23 +635,28 @@ module Aws
       # member. If more results are available, the *NextToken* member of the
       # response contains a token that you pass in the next call to ListHapgs
       # to retrieve the next set of items.
+      #
       # @option params [String] :next_token
       #   The *NextToken* value from a previous call to ListHapgs. Pass null if
       #   this is the first call.
+      #
       # @return [Types::ListHapgsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListHapgsResponse#hapg_list #HapgList} => Array&lt;String&gt;
-      #   * {Types::ListHapgsResponse#next_token #NextToken} => String
+      #   * {Types::ListHapgsResponse#hapg_list #hapg_list} => Array&lt;String&gt;
+      #   * {Types::ListHapgsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_hapgs({
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.hapg_list #=> Array
       #   resp.hapg_list[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_hapgs(params = {})
       # @param [Hash] params ({})
       def list_hapgs(params = {}, options = {})
@@ -579,23 +671,28 @@ module Aws
       # member. If more results are available, the *NextToken* member of the
       # response contains a token that you pass in the next call to ListHsms
       # to retrieve the next set of items.
+      #
       # @option params [String] :next_token
       #   The *NextToken* value from a previous call to ListHsms. Pass null if
       #   this is the first call.
+      #
       # @return [Types::ListHsmsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListHsmsResponse#hsm_list #HsmList} => Array&lt;String&gt;
-      #   * {Types::ListHsmsResponse#next_token #NextToken} => String
+      #   * {Types::ListHsmsResponse#hsm_list #hsm_list} => Array&lt;String&gt;
+      #   * {Types::ListHsmsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_hsms({
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.hsm_list #=> Array
       #   resp.hsm_list[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_hsms(params = {})
       # @param [Hash] params ({})
       def list_hsms(params = {}, options = {})
@@ -609,23 +706,28 @@ module Aws
       # member. If more results are available, the *NextToken* member of the
       # response contains a token that you pass in the next call to
       # ListLunaClients to retrieve the next set of items.
+      #
       # @option params [String] :next_token
       #   The *NextToken* value from a previous call to ListLunaClients. Pass
       #   null if this is the first call.
+      #
       # @return [Types::ListLunaClientsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListLunaClientsResponse#client_list #ClientList} => Array&lt;String&gt;
-      #   * {Types::ListLunaClientsResponse#next_token #NextToken} => String
+      #   * {Types::ListLunaClientsResponse#client_list #client_list} => Array&lt;String&gt;
+      #   * {Types::ListLunaClientsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_luna_clients({
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.client_list #=> Array
       #   resp.client_list[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_luna_clients(params = {})
       # @param [Hash] params ({})
       def list_luna_clients(params = {}, options = {})
@@ -634,21 +736,26 @@ module Aws
       end
 
       # Returns a list of all tags for the specified AWS CloudHSM resource.
+      #
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+      #
       # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsForResourceResponse#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsForResourceResponse#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_resource({
       #     resource_arn: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
       def list_tags_for_resource(params = {}, options = {})
@@ -657,18 +764,23 @@ module Aws
       end
 
       # Modifies an existing high-availability partition group.
+      #
       # @option params [required, String] :hapg_arn
       #   The ARN of the high-availability partition group to modify.
+      #
       # @option params [String] :label
       #   The new label for the high-availability partition group.
+      #
       # @option params [Array<String>] :partition_serial_list
       #   The list of partition serial numbers to make members of the
       #   high-availability partition group.
+      #
       # @return [Types::ModifyHapgResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyHapgResponse#hapg_arn #HapgArn} => String
+      #   * {Types::ModifyHapgResponse#hapg_arn #hapg_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_hapg({
       #     hapg_arn: "HapgArn", # required
       #     label: "Label",
@@ -676,7 +788,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.hapg_arn #=> String
+      #
       # @overload modify_hapg(params = {})
       # @param [Hash] params ({})
       def modify_hapg(params = {}, options = {})
@@ -691,11 +805,14 @@ module Aws
       # modifying a production HSM, you should ensure that your AWS CloudHSM
       # service is configured for high availability, and consider executing
       # this operation during a maintenance window.
+      #
       # @option params [required, String] :hsm_arn
       #   The ARN of the HSM to modify.
+      #
       # @option params [String] :subnet_id
       #   The new identifier of the subnet that the HSM is in. The new subnet
       #   must be in the same Availability Zone as the current subnet.
+      #
       # @option params [String] :eni_ip
       #   The new IP address for the elastic network interface (ENI) attached to
       #   the HSM.
@@ -703,18 +820,23 @@ module Aws
       #   If the HSM is moved to a different subnet, and an IP address is not
       #   specified, an IP address will be randomly chosen from the CIDR range
       #   of the new subnet.
+      #
       # @option params [String] :iam_role_arn
       #   The new IAM role ARN.
+      #
       # @option params [String] :external_id
       #   The new external ID.
+      #
       # @option params [String] :syslog_ip
       #   The new IP address for the syslog monitoring server. The AWS CloudHSM
       #   service only supports one syslog monitoring server.
+      #
       # @return [Types::ModifyHsmResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyHsmResponse#hsm_arn #HsmArn} => String
+      #   * {Types::ModifyHsmResponse#hsm_arn #hsm_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_hsm({
       #     hsm_arn: "HsmArn", # required
       #     subnet_id: "SubnetId",
@@ -725,7 +847,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.hsm_arn #=> String
+      #
       # @overload modify_hsm(params = {})
       # @param [Hash] params ({})
       def modify_hsm(params = {}, options = {})
@@ -737,22 +861,28 @@ module Aws
       #
       # This action can potentially start a workflow to install the new
       # certificate on the client's HSMs.
+      #
       # @option params [required, String] :client_arn
       #   The ARN of the client.
+      #
       # @option params [required, String] :certificate
       #   The new certificate for the client.
+      #
       # @return [Types::ModifyLunaClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyLunaClientResponse#client_arn #ClientArn} => String
+      #   * {Types::ModifyLunaClientResponse#client_arn #client_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_luna_client({
       #     client_arn: "ClientArn", # required
       #     certificate: "Certificate", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.client_arn #=> String
+      #
       # @overload modify_luna_client(params = {})
       # @param [Hash] params ({})
       def modify_luna_client(params = {}, options = {})
@@ -764,25 +894,31 @@ module Aws
       #
       # To remove a tag, specify only the tag key to remove (not the value).
       # To overwrite the value for an existing tag, use AddTagsToResource.
+      #
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+      #
       # @option params [required, Array<String>] :tag_key_list
       #   The tag key or keys to remove.
       #
       #   Specify only the tag key to remove (not the value). To overwrite the
       #   value for an existing tag, use AddTagsToResource.
+      #
       # @return [Types::RemoveTagsFromResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RemoveTagsFromResourceResponse#status #Status} => String
+      #   * {Types::RemoveTagsFromResourceResponse#status #status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_resource({
       #     resource_arn: "String", # required
       #     tag_key_list: ["TagKey"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> String
+      #
       # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_resource(params = {}, options = {})

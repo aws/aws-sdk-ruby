@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -137,14 +151,18 @@ module Aws
       # <note markdown="1"> You can cancel only stacks that are in the UPDATE\_IN\_PROGRESS state.
       #
       #  </note>
+      #
       # @option params [required, String] :stack_name
       #   The name or the unique stack ID that is associated with the stack.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.cancel_update_stack({
       #     stack_name: "StackName", # required
       #   })
+      #
       # @overload cancel_update_stack(params = {})
       # @param [Hash] params ({})
       def cancel_update_stack(params = {}, options = {})
@@ -171,6 +189,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+      #
       # @option params [required, String] :stack_name
       #   The name or the unique ID of the stack that you want to continue
       #   rolling back.
@@ -181,6 +200,7 @@ module Aws
       #   `AWS::CloudFormation::Stack` resource).
       #
       #    </note>
+      #
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes to roll back the
@@ -195,6 +215,7 @@ module Aws
       #   was previously associated with the stack. If no role is available, AWS
       #   CloudFormation uses a temporary session that is generated from your
       #   user credentials.
+      #
       # @option params [Array<String>] :resources_to_skip
       #   A list of the logical IDs of the resources that AWS CloudFormation
       #   skips during the continue update rollback operation. You can specify
@@ -229,14 +250,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.continue_update_rollback({
       #     stack_name: "StackNameOrId", # required
       #     role_arn: "RoleARN",
       #     resources_to_skip: ["ResourceToSkip"],
       #   })
+      #
       # @overload continue_update_rollback(params = {})
       # @param [Hash] params ({})
       def continue_update_rollback(params = {}, options = {})
@@ -259,11 +283,13 @@ module Aws
       # After the call successfully completes, AWS CloudFormation starts
       # creating the change set. To check the status of the change set, use
       # the DescribeChangeSet action.
+      #
       # @option params [required, String] :stack_name
       #   The name or the unique ID of the stack for which you are creating a
       #   change set. AWS CloudFormation generates the change set by comparing
       #   this stack's information with the information that you submit, such
       #   as a modified template or different parameter input values.
+      #
       # @option params [String] :template_body
       #   A structure that contains the body of the revised template, with a
       #   minimum length of 1 byte and a maximum length of 51,200 bytes. AWS
@@ -271,6 +297,7 @@ module Aws
       #   with the template of the stack that you specified.
       #
       #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
+      #
       # @option params [String] :template_url
       #   The location of the file that contains the revised template. The URL
       #   must point to a template (max size: 460,800 bytes) that is located in
@@ -278,9 +305,11 @@ module Aws
       #   this template with the stack that you specified.
       #
       #   Conditional: You must specify only `TemplateBody` or `TemplateURL`.
+      #
       # @option params [Boolean] :use_previous_template
       #   Whether to reuse the template that is associated with the stack to
       #   create the change set.
+      #
       # @option params [Array<Types::Parameter>] :parameters
       #   A list of `Parameter` structures that specify input parameters for the
       #   change set. For more information, see the [Parameter][1] data type.
@@ -288,6 +317,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+      #
       # @option params [Array<String>] :capabilities
       #   A list of values that you must specify before AWS CloudFormation can
       #   update certain stacks. Some stack templates might include resources
@@ -323,6 +353,7 @@ module Aws
       #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
       #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
       #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+      #
       # @option params [Array<String>] :resource_types
       #   The template resource types that you have permissions to work with if
       #   you execute this change set, such as `AWS::EC2::Instance`,
@@ -339,6 +370,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      #
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes when executing
@@ -353,14 +385,17 @@ module Aws
       #   was previously associated with the stack. If no role is available, AWS
       #   CloudFormation uses a temporary session that is generated from your
       #   user credentials.
+      #
       # @option params [Array<String>] :notification_arns
       #   The Amazon Resource Names (ARNs) of Amazon Simple Notification Service
       #   (Amazon SNS) topics that AWS CloudFormation associates with the stack.
       #   To remove all associated notification topics, specify an empty list.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   Key-value pairs to associate with this stack. AWS CloudFormation also
       #   propagates these tags to resources in the stack. You can specify a
       #   maximum of 10 tags.
+      #
       # @option params [required, String] :change_set_name
       #   The name of the change set. The name must be unique among all change
       #   sets that are associated with the specified stack.
@@ -368,14 +403,17 @@ module Aws
       #   A change set name can contain only alphanumeric, case sensitive
       #   characters and hyphens. It must start with an alphabetic character and
       #   cannot exceed 128 characters.
+      #
       # @option params [String] :client_token
       #   A unique identifier for this `CreateChangeSet` request. Specify this
       #   token if you plan to retry requests so that AWS CloudFormation knows
       #   that you're not attempting to create another change set with the same
       #   name. You might retry `CreateChangeSet` requests to ensure that AWS
       #   CloudFormation successfully received them.
+      #
       # @option params [String] :description
       #   A description to help you identify this change set.
+      #
       # @option params [String] :change_set_type
       #   The type of change set operation. To create a change set for a new
       #   stack, specify `CREATE`. To create a change set for an existing stack,
@@ -393,12 +431,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
+      #
       # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateChangeSetOutput#id #Id} => String
-      #   * {Types::CreateChangeSetOutput#stack_id #StackId} => String
+      #   * {Types::CreateChangeSetOutput#id #id} => String
+      #   * {Types::CreateChangeSetOutput#stack_id #stack_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_change_set({
       #     stack_name: "StackNameOrId", # required
       #     template_body: "TemplateBody",
@@ -428,8 +468,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.id #=> String
       #   resp.stack_id #=> String
+      #
       # @overload create_change_set(params = {})
       # @param [Hash] params ({})
       def create_change_set(params = {}, options = {})
@@ -440,6 +482,7 @@ module Aws
       # Creates a stack as specified in the template. After the call completes
       # successfully, the stack creation starts. You can check the status of
       # the stack via the DescribeStacks API.
+      #
       # @option params [required, String] :stack_name
       #   The name that is associated with the stack. The name must be unique in
       #   the region in which you are creating the stack.
@@ -449,6 +492,7 @@ module Aws
       #   longer than 128 characters.
       #
       #    </note>
+      #
       # @option params [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
       #   and a maximum length of 51,200 bytes. For more information, go to
@@ -460,6 +504,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [String] :template_url
       #   Location of file containing the template body. The URL must point to a
       #   template (max size: 460,800 bytes) that is located in an Amazon S3
@@ -472,6 +517,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [Array<Types::Parameter>] :parameters
       #   A list of `Parameter` structures that specify input parameters for the
       #   stack. For more information, see the [Parameter][1] data type.
@@ -479,16 +525,19 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+      #
       # @option params [Boolean] :disable_rollback
       #   Set to `true` to disable rollback of the stack if stack creation
       #   failed. You can specify either `DisableRollback` or `OnFailure`, but
       #   not both.
       #
       #   Default: `false`
+      #
       # @option params [Integer] :timeout_in_minutes
       #   The amount of time that can pass before the stack status becomes
       #   CREATE\_FAILED; if `DisableRollback` is not set or is set to `false`,
       #   the stack will be rolled back.
+      #
       # @option params [Array<String>] :notification_arns
       #   The Simple Notification Service (SNS) topic ARNs to publish stack
       #   related events. You can find your SNS topic ARNs using the [SNS
@@ -497,6 +546,7 @@ module Aws
       #
       #
       #   [1]: https://console.aws.amazon.com/sns
+      #
       # @option params [Array<String>] :capabilities
       #   A list of values that you must specify before AWS CloudFormation can
       #   create certain stacks. Some stack templates might include resources
@@ -532,6 +582,7 @@ module Aws
       #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
       #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
       #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+      #
       # @option params [Array<String>] :resource_types
       #   The template resource types that you have permissions to work with for
       #   this create stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
@@ -552,6 +603,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      #
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes to create the
@@ -566,12 +618,14 @@ module Aws
       #   was previously associated with the stack. If no role is available, AWS
       #   CloudFormation uses a temporary session that is generated from your
       #   user credentials.
+      #
       # @option params [String] :on_failure
       #   Determines what action will be taken if stack creation fails. This
       #   must be one of: DO\_NOTHING, ROLLBACK, or DELETE. You can specify
       #   either `OnFailure` or `DisableRollback`, but not both.
       #
       #   Default: `ROLLBACK`
+      #
       # @option params [String] :stack_policy_body
       #   Structure containing the stack policy body. For more information, go
       #   to [ Prevent Updates to Stack Resources][1] in the *AWS CloudFormation
@@ -581,20 +635,24 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+      #
       # @option params [String] :stack_policy_url
       #   Location of a file containing the stack policy. The URL must point to
       #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
       #   region as the stack. You can specify either the `StackPolicyBody` or
       #   the `StackPolicyURL` parameter, but not both.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   Key-value pairs to associate with this stack. AWS CloudFormation also
       #   propagates these tags to the resources created in the stack. A maximum
       #   number of 10 tags can be specified.
+      #
       # @return [Types::CreateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateStackOutput#stack_id #StackId} => String
+      #   * {Types::CreateStackOutput#stack_id #stack_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_stack({
       #     stack_name: "StackName", # required
       #     template_body: "TemplateBody",
@@ -624,7 +682,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_id #=> String
+      #
       # @overload create_stack(params = {})
       # @param [Hash] params ({})
       def create_stack(params = {}, options = {})
@@ -637,19 +697,24 @@ module Aws
       #
       # If the call successfully completes, AWS CloudFormation successfully
       # deleted the change set.
+      #
       # @option params [required, String] :change_set_name
       #   The name or Amazon Resource Name (ARN) of the change set that you want
       #   to delete.
+      #
       # @option params [String] :stack_name
       #   If you specified the name of a change set to delete, specify the stack
       #   name or ID (ARN) that is associated with it.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_change_set({
       #     change_set_name: "ChangeSetNameOrId", # required
       #     stack_name: "StackNameOrId",
       #   })
+      #
       # @overload delete_change_set(params = {})
       # @param [Hash] params ({})
       def delete_change_set(params = {}, options = {})
@@ -660,8 +725,10 @@ module Aws
       # Deletes a specified stack. Once the call completes successfully, stack
       # deletion starts. Deleted stacks do not show up in the DescribeStacks
       # API if the deletion has been completed successfully.
+      #
       # @option params [required, String] :stack_name
       #   The name or the unique stack ID that is associated with the stack.
+      #
       # @option params [Array<String>] :retain_resources
       #   For stacks in the `DELETE_FAILED` state, a list of resource logical
       #   IDs that are associated with the resources you want to retain. During
@@ -670,6 +737,7 @@ module Aws
       #
       #   Retaining resources is useful when you cannot delete a resource, such
       #   as a non-empty S3 bucket, but you want to delete the stack.
+      #
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes to delete the
@@ -680,14 +748,17 @@ module Aws
       #   was previously associated with the stack. If no role is available, AWS
       #   CloudFormation uses a temporary session that is generated from your
       #   user credentials.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_stack({
       #     stack_name: "StackName", # required
       #     retain_resources: ["LogicalResourceId"],
       #     role_arn: "RoleARN",
       #   })
+      #
       # @overload delete_stack(params = {})
       # @param [Hash] params ({})
       def delete_stack(params = {}, options = {})
@@ -697,24 +768,29 @@ module Aws
 
       # Retrieves your account's AWS CloudFormation limits, such as the
       # maximum number of stacks that you can create in your account.
+      #
       # @option params [String] :next_token
       #   A string that identifies the next page of limits that you want to
       #   retrieve.
+      #
       # @return [Types::DescribeAccountLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAccountLimitsOutput#account_limits #AccountLimits} => Array&lt;Types::AccountLimit&gt;
-      #   * {Types::DescribeAccountLimitsOutput#next_token #NextToken} => String
+      #   * {Types::DescribeAccountLimitsOutput#account_limits #account_limits} => Array&lt;Types::AccountLimit&gt;
+      #   * {Types::DescribeAccountLimitsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_account_limits({
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.account_limits #=> Array
       #   resp.account_limits[0].name #=> String
       #   resp.account_limits[0].value #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_account_limits(params = {})
       # @param [Hash] params ({})
       def describe_account_limits(params = {}, options = {})
@@ -730,34 +806,39 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html
+      #
       # @option params [required, String] :change_set_name
       #   The name or Amazon Resource Name (ARN) of the change set that you want
       #   to describe.
+      #
       # @option params [String] :stack_name
       #   If you specified the name of a change set, specify the stack name or
       #   ID (ARN) of the change set you want to describe.
+      #
       # @option params [String] :next_token
       #   A string (provided by the DescribeChangeSet response output) that
       #   identifies the next page of information that you want to retrieve.
+      #
       # @return [Types::DescribeChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeChangeSetOutput#change_set_name #ChangeSetName} => String
-      #   * {Types::DescribeChangeSetOutput#change_set_id #ChangeSetId} => String
-      #   * {Types::DescribeChangeSetOutput#stack_id #StackId} => String
-      #   * {Types::DescribeChangeSetOutput#stack_name #StackName} => String
-      #   * {Types::DescribeChangeSetOutput#description #Description} => String
-      #   * {Types::DescribeChangeSetOutput#parameters #Parameters} => Array&lt;Types::Parameter&gt;
-      #   * {Types::DescribeChangeSetOutput#creation_time #CreationTime} => Time
-      #   * {Types::DescribeChangeSetOutput#execution_status #ExecutionStatus} => String
-      #   * {Types::DescribeChangeSetOutput#status #Status} => String
-      #   * {Types::DescribeChangeSetOutput#status_reason #StatusReason} => String
-      #   * {Types::DescribeChangeSetOutput#notification_arns #NotificationARNs} => Array&lt;String&gt;
-      #   * {Types::DescribeChangeSetOutput#capabilities #Capabilities} => Array&lt;String&gt;
-      #   * {Types::DescribeChangeSetOutput#tags #Tags} => Array&lt;Types::Tag&gt;
-      #   * {Types::DescribeChangeSetOutput#changes #Changes} => Array&lt;Types::Change&gt;
-      #   * {Types::DescribeChangeSetOutput#next_token #NextToken} => String
+      #   * {Types::DescribeChangeSetOutput#change_set_name #change_set_name} => String
+      #   * {Types::DescribeChangeSetOutput#change_set_id #change_set_id} => String
+      #   * {Types::DescribeChangeSetOutput#stack_id #stack_id} => String
+      #   * {Types::DescribeChangeSetOutput#stack_name #stack_name} => String
+      #   * {Types::DescribeChangeSetOutput#description #description} => String
+      #   * {Types::DescribeChangeSetOutput#parameters #parameters} => Array&lt;Types::Parameter&gt;
+      #   * {Types::DescribeChangeSetOutput#creation_time #creation_time} => Time
+      #   * {Types::DescribeChangeSetOutput#execution_status #execution_status} => String
+      #   * {Types::DescribeChangeSetOutput#status #status} => String
+      #   * {Types::DescribeChangeSetOutput#status_reason #status_reason} => String
+      #   * {Types::DescribeChangeSetOutput#notification_arns #notification_arns} => Array&lt;String&gt;
+      #   * {Types::DescribeChangeSetOutput#capabilities #capabilities} => Array&lt;String&gt;
+      #   * {Types::DescribeChangeSetOutput#tags #tags} => Array&lt;Types::Tag&gt;
+      #   * {Types::DescribeChangeSetOutput#changes #changes} => Array&lt;Types::Change&gt;
+      #   * {Types::DescribeChangeSetOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_change_set({
       #     change_set_name: "ChangeSetNameOrId", # required
       #     stack_name: "StackNameOrId",
@@ -765,6 +846,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_set_name #=> String
       #   resp.change_set_id #=> String
       #   resp.stack_id #=> String
@@ -802,6 +884,7 @@ module Aws
       #   resp.changes[0].resource_change.details[0].change_source #=> String, one of "ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"
       #   resp.changes[0].resource_change.details[0].causing_entity #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_change_set(params = {})
       # @param [Hash] params ({})
       def describe_change_set(params = {}, options = {})
@@ -821,6 +904,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html
+      #
       # @option params [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -831,21 +915,25 @@ module Aws
       #   * Deleted stacks: You must specify the unique stack ID.
       #
       #   Default: There is no default value.
+      #
       # @option params [String] :next_token
       #   A string that identifies the next page of events that you want to
       #   retrieve.
+      #
       # @return [Types::DescribeStackEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStackEventsOutput#stack_events #StackEvents} => Array&lt;Types::StackEvent&gt;
-      #   * {Types::DescribeStackEventsOutput#next_token #NextToken} => String
+      #   * {Types::DescribeStackEventsOutput#stack_events #stack_events} => Array&lt;Types::StackEvent&gt;
+      #   * {Types::DescribeStackEventsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stack_events({
       #     stack_name: "StackName",
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_events #=> Array
       #   resp.stack_events[0].stack_id #=> String
       #   resp.stack_events[0].event_id #=> String
@@ -858,6 +946,7 @@ module Aws
       #   resp.stack_events[0].resource_status_reason #=> String
       #   resp.stack_events[0].resource_properties #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_stack_events(params = {})
       # @param [Hash] params ({})
       def describe_stack_events(params = {}, options = {})
@@ -870,6 +959,7 @@ module Aws
       #
       # For deleted stacks, DescribeStackResource returns resource information
       # for up to 90 days after the stack has been deleted.
+      #
       # @option params [required, String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -880,21 +970,25 @@ module Aws
       #   * Deleted stacks: You must specify the unique stack ID.
       #
       #   Default: There is no default value.
+      #
       # @option params [required, String] :logical_resource_id
       #   The logical name of the resource as specified in the template.
       #
       #   Default: There is no default value.
+      #
       # @return [Types::DescribeStackResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStackResourceOutput#stack_resource_detail #StackResourceDetail} => Types::StackResourceDetail
+      #   * {Types::DescribeStackResourceOutput#stack_resource_detail #stack_resource_detail} => Types::StackResourceDetail
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stack_resource({
       #     stack_name: "StackName", # required
       #     logical_resource_id: "LogicalResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_resource_detail.stack_name #=> String
       #   resp.stack_resource_detail.stack_id #=> String
       #   resp.stack_resource_detail.logical_resource_id #=> String
@@ -905,6 +999,7 @@ module Aws
       #   resp.stack_resource_detail.resource_status_reason #=> String
       #   resp.stack_resource_detail.description #=> String
       #   resp.stack_resource_detail.metadata #=> String
+      #
       # @overload describe_stack_resource(params = {})
       # @param [Hash] params ({})
       def describe_stack_resource(params = {}, options = {})
@@ -940,6 +1035,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/
+      #
       # @option params [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -953,10 +1049,12 @@ module Aws
       #
       #   Required: Conditional. If you do not specify `StackName`, you must
       #   specify `PhysicalResourceId`.
+      #
       # @option params [String] :logical_resource_id
       #   The logical name of the resource as specified in the template.
       #
       #   Default: There is no default value.
+      #
       # @option params [String] :physical_resource_id
       #   The name or unique identifier that corresponds to a physical instance
       #   ID of a resource supported by AWS CloudFormation.
@@ -970,11 +1068,13 @@ module Aws
       #   must specify `StackName`.
       #
       #   Default: There is no default value.
+      #
       # @return [Types::DescribeStackResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStackResourcesOutput#stack_resources #StackResources} => Array&lt;Types::StackResource&gt;
+      #   * {Types::DescribeStackResourcesOutput#stack_resources #stack_resources} => Array&lt;Types::StackResource&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stack_resources({
       #     stack_name: "StackName",
       #     logical_resource_id: "LogicalResourceId",
@@ -982,6 +1082,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_resources #=> Array
       #   resp.stack_resources[0].stack_name #=> String
       #   resp.stack_resources[0].stack_id #=> String
@@ -992,6 +1093,7 @@ module Aws
       #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
       #   resp.stack_resources[0].resource_status_reason #=> String
       #   resp.stack_resources[0].description #=> String
+      #
       # @overload describe_stack_resources(params = {})
       # @param [Hash] params ({})
       def describe_stack_resources(params = {}, options = {})
@@ -1006,6 +1108,7 @@ module Aws
       # returned.
       #
       #  </note>
+      #
       # @option params [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -1016,21 +1119,25 @@ module Aws
       #   * Deleted stacks: You must specify the unique stack ID.
       #
       #   Default: There is no default value.
+      #
       # @option params [String] :next_token
       #   A string that identifies the next page of stacks that you want to
       #   retrieve.
+      #
       # @return [Types::DescribeStacksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStacksOutput#stacks #Stacks} => Array&lt;Types::Stack&gt;
-      #   * {Types::DescribeStacksOutput#next_token #NextToken} => String
+      #   * {Types::DescribeStacksOutput#stacks #stacks} => Array&lt;Types::Stack&gt;
+      #   * {Types::DescribeStacksOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stacks({
       #     stack_name: "StackName",
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.stacks #=> Array
       #   resp.stacks[0].stack_id #=> String
       #   resp.stacks[0].stack_name #=> String
@@ -1059,6 +1166,7 @@ module Aws
       #   resp.stacks[0].tags[0].key #=> String
       #   resp.stacks[0].tags[0].value #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_stacks(params = {})
       # @param [Hash] params ({})
       def describe_stacks(params = {}, options = {})
@@ -1069,6 +1177,7 @@ module Aws
       # Returns the estimated monthly cost of a template. The return value is
       # an AWS Simple Monthly Calculator URL with a query string that
       # describes the resources required to run the template.
+      #
       # @option params [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
       #   and a maximum length of 51,200 bytes. (For more information, go to
@@ -1080,6 +1189,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [String] :template_url
       #   Location of file containing the template body. The URL must point to a
       #   template that is located in an Amazon S3 bucket. For more information,
@@ -1091,13 +1201,16 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [Array<Types::Parameter>] :parameters
       #   A list of `Parameter` structures that specify input parameters.
+      #
       # @return [Types::EstimateTemplateCostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EstimateTemplateCostOutput#url #Url} => String
+      #   * {Types::EstimateTemplateCostOutput#url #url} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.estimate_template_cost({
       #     template_body: "TemplateBody",
       #     template_url: "TemplateURL",
@@ -1111,7 +1224,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.url #=> String
+      #
       # @overload estimate_template_cost(params = {})
       # @param [Hash] params ({})
       def estimate_template_cost(params = {}, options = {})
@@ -1131,19 +1246,24 @@ module Aws
       # If a stack policy is associated with the stack, AWS CloudFormation
       # enforces the policy during the update. You can't specify a temporary
       # stack policy that overrides the current policy.
+      #
       # @option params [required, String] :change_set_name
       #   The name or ARN of the change set that you want use to update the
       #   specified stack.
+      #
       # @option params [String] :stack_name
       #   If you specified the name of a change set, specify the stack name or
       #   ID (ARN) that is associated with the change set you want to execute.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.execute_change_set({
       #     change_set_name: "ChangeSetNameOrId", # required
       #     stack_name: "StackNameOrId",
       #   })
+      #
       # @overload execute_change_set(params = {})
       # @param [Hash] params ({})
       def execute_change_set(params = {}, options = {})
@@ -1153,20 +1273,25 @@ module Aws
 
       # Returns the stack policy for a specified stack. If a stack doesn't
       # have a policy, a null value is returned.
+      #
       # @option params [required, String] :stack_name
       #   The name or unique stack ID that is associated with the stack whose
       #   policy you want to get.
+      #
       # @return [Types::GetStackPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetStackPolicyOutput#stack_policy_body #StackPolicyBody} => String
+      #   * {Types::GetStackPolicyOutput#stack_policy_body #stack_policy_body} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_stack_policy({
       #     stack_name: "StackName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_policy_body #=> String
+      #
       # @overload get_stack_policy(params = {})
       # @param [Hash] params ({})
       def get_stack_policy(params = {}, options = {})
@@ -1183,6 +1308,7 @@ module Aws
       # <note markdown="1"> If the template does not exist, a `ValidationError` is returned.
       #
       #  </note>
+      #
       # @option params [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -1193,10 +1319,12 @@ module Aws
       #   * Deleted stacks: You must specify the unique stack ID.
       #
       #   Default: There is no default value.
+      #
       # @option params [String] :change_set_name
       #   The name or Amazon Resource Name (ARN) of a change set for which AWS
       #   CloudFormation returns the associated template. If you specify a name,
       #   you must also specify the `StackName`.
+      #
       # @option params [String] :template_stage
       #   For templates that include transforms, the stage of the template that
       #   AWS CloudFormation returns. To get the user-submitted template,
@@ -1206,12 +1334,14 @@ module Aws
       #   If the template doesn't include transforms, `Original` and
       #   `Processed` return the same template. By default, AWS CloudFormation
       #   specifies `Original`.
+      #
       # @return [Types::GetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetTemplateOutput#template_body #TemplateBody} => String
-      #   * {Types::GetTemplateOutput#stages_available #StagesAvailable} => Array&lt;String&gt;
+      #   * {Types::GetTemplateOutput#template_body #template_body} => String
+      #   * {Types::GetTemplateOutput#stages_available #stages_available} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_template({
       #     stack_name: "StackName",
       #     change_set_name: "ChangeSetNameOrId",
@@ -1219,9 +1349,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.template_body #=> String
       #   resp.stages_available #=> Array
       #   resp.stages_available[0] #=> String, one of "Original", "Processed"
+      #
       # @overload get_template(params = {})
       # @param [Hash] params ({})
       def get_template(params = {}, options = {})
@@ -1241,6 +1373,7 @@ module Aws
       # For deleted stacks, `GetTemplateSummary` returns the template
       # information for up to 90 days after the stack has been deleted. If the
       # template does not exist, a `ValidationError` is returned.
+      #
       # @option params [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
       #   and a maximum length of 51,200 bytes. For more information about
@@ -1253,6 +1386,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [String] :template_url
       #   Location of file containing the template body. The URL must point to a
       #   template (max size: 460,800 bytes) that is located in an Amazon S3
@@ -1265,6 +1399,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [String] :stack_name
       #   The name or the stack ID that is associated with the stack, which are
       #   not always interchangeable. For running stacks, you can specify either
@@ -1273,18 +1408,20 @@ module Aws
       #
       #   Conditional: You must specify only one of the following parameters:
       #   `StackName`, `TemplateBody`, or `TemplateURL`.
+      #
       # @return [Types::GetTemplateSummaryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetTemplateSummaryOutput#parameters #Parameters} => Array&lt;Types::ParameterDeclaration&gt;
-      #   * {Types::GetTemplateSummaryOutput#description #Description} => String
-      #   * {Types::GetTemplateSummaryOutput#capabilities #Capabilities} => Array&lt;String&gt;
-      #   * {Types::GetTemplateSummaryOutput#capabilities_reason #CapabilitiesReason} => String
-      #   * {Types::GetTemplateSummaryOutput#resource_types #ResourceTypes} => Array&lt;String&gt;
-      #   * {Types::GetTemplateSummaryOutput#version #Version} => String
-      #   * {Types::GetTemplateSummaryOutput#metadata #Metadata} => String
-      #   * {Types::GetTemplateSummaryOutput#declared_transforms #DeclaredTransforms} => Array&lt;String&gt;
+      #   * {Types::GetTemplateSummaryOutput#parameters #parameters} => Array&lt;Types::ParameterDeclaration&gt;
+      #   * {Types::GetTemplateSummaryOutput#description #description} => String
+      #   * {Types::GetTemplateSummaryOutput#capabilities #capabilities} => Array&lt;String&gt;
+      #   * {Types::GetTemplateSummaryOutput#capabilities_reason #capabilities_reason} => String
+      #   * {Types::GetTemplateSummaryOutput#resource_types #resource_types} => Array&lt;String&gt;
+      #   * {Types::GetTemplateSummaryOutput#version #version} => String
+      #   * {Types::GetTemplateSummaryOutput#metadata #metadata} => String
+      #   * {Types::GetTemplateSummaryOutput#declared_transforms #declared_transforms} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_template_summary({
       #     template_body: "TemplateBody",
       #     template_url: "TemplateURL",
@@ -1292,6 +1429,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.parameters #=> Array
       #   resp.parameters[0].parameter_key #=> String
       #   resp.parameters[0].default_value #=> String
@@ -1310,6 +1448,7 @@ module Aws
       #   resp.metadata #=> String
       #   resp.declared_transforms #=> Array
       #   resp.declared_transforms[0] #=> String
+      #
       # @overload get_template_summary(params = {})
       # @param [Hash] params ({})
       def get_template_summary(params = {}, options = {})
@@ -1320,24 +1459,29 @@ module Aws
       # Returns the ID and status of each active change set for a stack. For
       # example, AWS CloudFormation lists change sets that are in the
       # `CREATE_IN_PROGRESS` or `CREATE_PENDING` state.
+      #
       # @option params [required, String] :stack_name
       #   The name or the Amazon Resource Name (ARN) of the stack for which you
       #   want to list change sets.
+      #
       # @option params [String] :next_token
       #   A string (provided by the ListChangeSets response output) that
       #   identifies the next page of change sets that you want to retrieve.
+      #
       # @return [Types::ListChangeSetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListChangeSetsOutput#summaries #Summaries} => Array&lt;Types::ChangeSetSummary&gt;
-      #   * {Types::ListChangeSetsOutput#next_token #NextToken} => String
+      #   * {Types::ListChangeSetsOutput#summaries #summaries} => Array&lt;Types::ChangeSetSummary&gt;
+      #   * {Types::ListChangeSetsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_change_sets({
       #     stack_name: "StackNameOrId", # required
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.summaries #=> Array
       #   resp.summaries[0].stack_id #=> String
       #   resp.summaries[0].stack_name #=> String
@@ -1349,6 +1493,7 @@ module Aws
       #   resp.summaries[0].creation_time #=> Time
       #   resp.summaries[0].description #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_change_sets(params = {})
       # @param [Hash] params ({})
       def list_change_sets(params = {}, options = {})
@@ -1368,25 +1513,30 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
       # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html
+      #
       # @option params [String] :next_token
       #   A string (provided by the ListExports response output) that identifies
       #   the next page of exported output values that you asked to retrieve.
+      #
       # @return [Types::ListExportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListExportsOutput#exports #Exports} => Array&lt;Types::Export&gt;
-      #   * {Types::ListExportsOutput#next_token #NextToken} => String
+      #   * {Types::ListExportsOutput#exports #exports} => Array&lt;Types::Export&gt;
+      #   * {Types::ListExportsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_exports({
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.exports #=> Array
       #   resp.exports[0].exporting_stack_id #=> String
       #   resp.exports[0].name #=> String
       #   resp.exports[0].value #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_exports(params = {})
       # @param [Hash] params ({})
       def list_exports(params = {}, options = {})
@@ -1405,28 +1555,34 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
+      #
       # @option params [required, String] :export_name
       #   The name of the exported output value. AWS CloudFormation returns the
       #   stack names that are importing this value.
+      #
       # @option params [String] :next_token
       #   A string (provided by the ListImports response output) that identifies
       #   the next page of stacks that are importing the specified exported
       #   output value.
+      #
       # @return [Types::ListImportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListImportsOutput#imports #Imports} => Array&lt;String&gt;
-      #   * {Types::ListImportsOutput#next_token #NextToken} => String
+      #   * {Types::ListImportsOutput#imports #imports} => Array&lt;String&gt;
+      #   * {Types::ListImportsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_imports({
       #     export_name: "ExportName", # required
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.imports #=> Array
       #   resp.imports[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_imports(params = {})
       # @param [Hash] params ({})
       def list_imports(params = {}, options = {})
@@ -1438,6 +1594,7 @@ module Aws
       #
       # For deleted stacks, ListStackResources returns resource information
       # for up to 90 days after the stack has been deleted.
+      #
       # @option params [required, String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -1448,21 +1605,25 @@ module Aws
       #   * Deleted stacks: You must specify the unique stack ID.
       #
       #   Default: There is no default value.
+      #
       # @option params [String] :next_token
       #   A string that identifies the next page of stack resources that you
       #   want to retrieve.
+      #
       # @return [Types::ListStackResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListStackResourcesOutput#stack_resource_summaries #StackResourceSummaries} => Array&lt;Types::StackResourceSummary&gt;
-      #   * {Types::ListStackResourcesOutput#next_token #NextToken} => String
+      #   * {Types::ListStackResourcesOutput#stack_resource_summaries #stack_resource_summaries} => Array&lt;Types::StackResourceSummary&gt;
+      #   * {Types::ListStackResourcesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_stack_resources({
       #     stack_name: "StackName", # required
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_resource_summaries #=> Array
       #   resp.stack_resource_summaries[0].logical_resource_id #=> String
       #   resp.stack_resource_summaries[0].physical_resource_id #=> String
@@ -1471,6 +1632,7 @@ module Aws
       #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
       #   resp.stack_resource_summaries[0].resource_status_reason #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_stack_resources(params = {})
       # @param [Hash] params ({})
       def list_stack_resources(params = {}, options = {})
@@ -1484,26 +1646,31 @@ module Aws
       # StackStatusFilter is specified, summary information for all stacks is
       # returned (including existing stacks and stacks that have been
       # deleted).
+      #
       # @option params [String] :next_token
       #   A string that identifies the next page of stacks that you want to
       #   retrieve.
+      #
       # @option params [Array<String>] :stack_status_filter
       #   Stack status to use as a filter. Specify one or more stack status
       #   codes to list only stacks with the specified status codes. For a
       #   complete list of stack status codes, see the `StackStatus` parameter
       #   of the Stack data type.
+      #
       # @return [Types::ListStacksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListStacksOutput#stack_summaries #StackSummaries} => Array&lt;Types::StackSummary&gt;
-      #   * {Types::ListStacksOutput#next_token #NextToken} => String
+      #   * {Types::ListStacksOutput#stack_summaries #stack_summaries} => Array&lt;Types::StackSummary&gt;
+      #   * {Types::ListStacksOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_stacks({
       #     next_token: "NextToken",
       #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_summaries #=> Array
       #   resp.stack_summaries[0].stack_id #=> String
       #   resp.stack_summaries[0].stack_name #=> String
@@ -1514,6 +1681,7 @@ module Aws
       #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
       #   resp.stack_summaries[0].stack_status_reason #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_stacks(params = {})
       # @param [Hash] params ({})
       def list_stacks(params = {}, options = {})
@@ -1522,8 +1690,10 @@ module Aws
       end
 
       # Sets a stack policy for a specified stack.
+      #
       # @option params [required, String] :stack_name
       #   The name or unique stack ID that you want to associate a policy with.
+      #
       # @option params [String] :stack_policy_body
       #   Structure containing the stack policy body. For more information, go
       #   to [ Prevent Updates to Stack Resources][1] in the AWS CloudFormation
@@ -1533,19 +1703,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
+      #
       # @option params [String] :stack_policy_url
       #   Location of a file containing the stack policy. The URL must point to
       #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
       #   region as the stack. You can specify either the `StackPolicyBody` or
       #   the `StackPolicyURL` parameter, but not both.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_stack_policy({
       #     stack_name: "StackName", # required
       #     stack_policy_body: "StackPolicyBody",
       #     stack_policy_url: "StackPolicyURL",
       #   })
+      #
       # @overload set_stack_policy(params = {})
       # @param [Hash] params ({})
       def set_stack_policy(params = {}, options = {})
@@ -1560,31 +1734,38 @@ module Aws
       # number of signals or the timeout period is exceeded. The
       # SignalResource API is useful in cases where you want to send signals
       # from anywhere other than an Amazon EC2 instance.
+      #
       # @option params [required, String] :stack_name
       #   The stack name or unique stack ID that includes the resource that you
       #   want to signal.
+      #
       # @option params [required, String] :logical_resource_id
       #   The logical ID of the resource that you want to signal. The logical ID
       #   is the name of the resource that given in the template.
+      #
       # @option params [required, String] :unique_id
       #   A unique ID of the signal. When you signal Amazon EC2 instances or
       #   Auto Scaling groups, specify the instance ID that you are signaling as
       #   the unique ID. If you send multiple signals to a single resource (such
       #   as signaling a wait condition), each signal requires a different
       #   unique ID.
+      #
       # @option params [required, String] :status
       #   The status of the signal, which is either success or failure. A
       #   failure signal causes AWS CloudFormation to immediately fail the stack
       #   creation or update.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.signal_resource({
       #     stack_name: "StackNameOrId", # required
       #     logical_resource_id: "LogicalResourceId", # required
       #     unique_id: "ResourceSignalUniqueId", # required
       #     status: "SUCCESS", # required, accepts SUCCESS, FAILURE
       #   })
+      #
       # @overload signal_resource(params = {})
       # @param [Hash] params ({})
       def signal_resource(params = {}, options = {})
@@ -1606,8 +1787,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks.html
+      #
       # @option params [required, String] :stack_name
       #   The name or unique stack ID of the stack to update.
+      #
       # @option params [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
       #   and a maximum length of 51,200 bytes. (For more information, go to
@@ -1619,6 +1802,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [String] :template_url
       #   Location of file containing the template body. The URL must point to a
       #   template that is located in an Amazon S3 bucket. For more information,
@@ -1630,9 +1814,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [Boolean] :use_previous_template
       #   Reuse the existing template that is associated with the stack that you
       #   are updating.
+      #
       # @option params [String] :stack_policy_during_update_body
       #   Structure containing the temporary overriding stack policy body. You
       #   can specify either the `StackPolicyDuringUpdateBody` or the
@@ -1642,6 +1828,7 @@ module Aws
       #   overriding stack policy during this update. If you do not specify a
       #   stack policy, the current policy that is associated with the stack
       #   will be used.
+      #
       # @option params [String] :stack_policy_during_update_url
       #   Location of a file containing the temporary overriding stack policy.
       #   The URL must point to a policy (max size: 16KB) located in an S3
@@ -1653,6 +1840,7 @@ module Aws
       #   overriding stack policy during this update. If you do not specify a
       #   stack policy, the current policy that is associated with the stack
       #   will be used.
+      #
       # @option params [Array<Types::Parameter>] :parameters
       #   A list of `Parameter` structures that specify input parameters for the
       #   stack. For more information, see the [Parameter][1] data type.
@@ -1660,6 +1848,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
+      #
       # @option params [Array<String>] :capabilities
       #   A list of values that you must specify before AWS CloudFormation can
       #   update certain stacks. Some stack templates might include resources
@@ -1695,6 +1884,7 @@ module Aws
       #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
       #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
       #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
+      #
       # @option params [Array<String>] :resource_types
       #   The template resource types that you have permissions to work with for
       #   this update stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
@@ -1710,6 +1900,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      #
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes to update the
@@ -1724,6 +1915,7 @@ module Aws
       #   was previously associated with the stack. If no role is available, AWS
       #   CloudFormation uses a temporary session that is generated from your
       #   user credentials.
+      #
       # @option params [String] :stack_policy_body
       #   Structure containing a new stack policy body. You can specify either
       #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
@@ -1732,6 +1924,7 @@ module Aws
       #   new resource that you created during a stack update. If you do not
       #   specify a stack policy, the current policy that is associated with the
       #   stack is unchanged.
+      #
       # @option params [String] :stack_policy_url
       #   Location of a file containing the updated stack policy. The URL must
       #   point to a policy (max size: 16KB) located in an S3 bucket in the same
@@ -1742,10 +1935,12 @@ module Aws
       #   new resource that you created during a stack update. If you do not
       #   specify a stack policy, the current policy that is associated with the
       #   stack is unchanged.
+      #
       # @option params [Array<String>] :notification_arns
       #   Amazon Simple Notification Service topic Amazon Resource Names (ARNs)
       #   that AWS CloudFormation associates with the stack. Specify an empty
       #   list to remove all notification topics.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   Key-value pairs to associate with this stack. AWS CloudFormation also
       #   propagates these tags to supported resources in the stack. You can
@@ -1754,11 +1949,13 @@ module Aws
       #   If you don't specify this parameter, AWS CloudFormation doesn't
       #   modify the stack's tags. If you specify an empty value, AWS
       #   CloudFormation removes all associated tags.
+      #
       # @return [Types::UpdateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateStackOutput#stack_id #StackId} => String
+      #   * {Types::UpdateStackOutput#stack_id #stack_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_stack({
       #     stack_name: "StackName", # required
       #     template_body: "TemplateBody",
@@ -1788,7 +1985,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stack_id #=> String
+      #
       # @overload update_stack(params = {})
       # @param [Hash] params ({})
       def update_stack(params = {}, options = {})
@@ -1800,6 +1999,7 @@ module Aws
       # template is valid JSON. If it isn't, AWS CloudFormation checks if the
       # template is valid YAML. If both these checks fail, AWS CloudFormation
       # returns a template validation error.
+      #
       # @option params [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
       #   and a maximum length of 51,200 bytes. For more information, go to
@@ -1811,6 +2011,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @option params [String] :template_url
       #   Location of file containing the template body. The URL must point to a
       #   template (max size: 460,800 bytes) that is located in an Amazon S3
@@ -1823,21 +2024,24 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
+      #
       # @return [Types::ValidateTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ValidateTemplateOutput#parameters #Parameters} => Array&lt;Types::TemplateParameter&gt;
-      #   * {Types::ValidateTemplateOutput#description #Description} => String
-      #   * {Types::ValidateTemplateOutput#capabilities #Capabilities} => Array&lt;String&gt;
-      #   * {Types::ValidateTemplateOutput#capabilities_reason #CapabilitiesReason} => String
-      #   * {Types::ValidateTemplateOutput#declared_transforms #DeclaredTransforms} => Array&lt;String&gt;
+      #   * {Types::ValidateTemplateOutput#parameters #parameters} => Array&lt;Types::TemplateParameter&gt;
+      #   * {Types::ValidateTemplateOutput#description #description} => String
+      #   * {Types::ValidateTemplateOutput#capabilities #capabilities} => Array&lt;String&gt;
+      #   * {Types::ValidateTemplateOutput#capabilities_reason #capabilities_reason} => String
+      #   * {Types::ValidateTemplateOutput#declared_transforms #declared_transforms} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.validate_template({
       #     template_body: "TemplateBody",
       #     template_url: "TemplateURL",
       #   })
       #
       # @example Response structure
+      #
       #   resp.parameters #=> Array
       #   resp.parameters[0].parameter_key #=> String
       #   resp.parameters[0].default_value #=> String
@@ -1849,6 +2053,7 @@ module Aws
       #   resp.capabilities_reason #=> String
       #   resp.declared_transforms #=> Array
       #   resp.declared_transforms[0] #=> String
+      #
       # @overload validate_template(params = {})
       # @param [Hash] params ({})
       def validate_template(params = {}, options = {})
@@ -1991,9 +2196,9 @@ module Aws
 
       def waiters
         {
-          stack_exists: Waiters::StackExists,
           stack_create_complete: Waiters::StackCreateComplete,
           stack_delete_complete: Waiters::StackDeleteComplete,
+          stack_exists: Waiters::StackExists,
           stack_update_complete: Waiters::StackUpdateComplete
         }
       end

@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -142,6 +156,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the rule set to create. The name must:
       #
@@ -151,15 +166,19 @@ module Aws
       #   * Start and end with a letter or number.
       #
       #   * Contain less than 64 characters.
+      #
       # @option params [required, String] :original_rule_set_name
       #   The name of the rule set to clone.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.clone_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     original_rule_set_name: "ReceiptRuleSetName", # required
       #   })
+      #
       # @overload clone_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def clone_receipt_rule_set(params = {}, options = {})
@@ -178,16 +197,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [required, Types::ConfigurationSet] :configuration_set
       #   A data structure that contains the name of the configuration set.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_configuration_set({
       #     configuration_set: { # required
       #       name: "ConfigurationSetName", # required
       #     },
       #   })
+      #
       # @overload create_configuration_set(params = {})
       # @param [Hash] params ({})
       def create_configuration_set(params = {}, options = {})
@@ -213,16 +236,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [required, String] :configuration_set_name
       #   The name of the configuration set to which to apply the event
       #   destination.
+      #
       # @option params [required, Types::EventDestination] :event_destination
       #   An object that describes the AWS service to which Amazon SES will
       #   publish the email sending events associated with the specified
       #   configuration set.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_configuration_set_event_destination({
       #     configuration_set_name: "ConfigurationSetName", # required
       #     event_destination: { # required
@@ -244,6 +271,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload create_configuration_set_event_destination(params = {})
       # @param [Hash] params ({})
       def create_configuration_set_event_destination(params = {}, options = {})
@@ -261,13 +289,16 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-ip-filters.html
+      #
       # @option params [required, Types::ReceiptFilter] :filter
       #   A data structure that describes the IP address filter to create, which
       #   consists of a name, an IP address range, and whether to allow or block
       #   mail from it.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_receipt_filter({
       #     filter: { # required
       #       name: "ReceiptFilterName", # required
@@ -277,6 +308,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload create_receipt_filter(params = {})
       # @param [Hash] params ({})
       def create_receipt_filter(params = {}, options = {})
@@ -294,18 +326,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the rule set to which to add the rule.
+      #
       # @option params [String] :after
       #   The name of an existing rule after which the new rule will be placed.
       #   If this parameter is null, the new rule will be inserted at the
       #   beginning of the rule list.
+      #
       # @option params [required, Types::ReceiptRule] :rule
       #   A data structure that contains the specified rule's name, actions,
       #   recipients, domains, enabled status, scan status, and TLS policy.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_receipt_rule({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     after: "ReceiptRuleName",
@@ -355,6 +392,7 @@ module Aws
       #       scan_enabled: false,
       #     },
       #   })
+      #
       # @overload create_receipt_rule(params = {})
       # @param [Hash] params ({})
       def create_receipt_rule(params = {}, options = {})
@@ -372,6 +410,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the rule set to create. The name must:
       #
@@ -381,12 +420,15 @@ module Aws
       #   * Start and end with a letter or number.
       #
       #   * Contain less than 64 characters.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #   })
+      #
       # @overload create_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def create_receipt_rule_set(params = {}, options = {})
@@ -405,14 +447,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [required, String] :configuration_set_name
       #   The name of the configuration set to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_configuration_set({
       #     configuration_set_name: "ConfigurationSetName", # required
       #   })
+      #
       # @overload delete_configuration_set(params = {})
       # @param [Hash] params ({})
       def delete_configuration_set(params = {}, options = {})
@@ -432,18 +478,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [required, String] :configuration_set_name
       #   The name of the configuration set from which to delete the event
       #   destination.
+      #
       # @option params [required, String] :event_destination_name
       #   The name of the event destination to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_configuration_set_event_destination({
       #     configuration_set_name: "ConfigurationSetName", # required
       #     event_destination_name: "EventDestinationName", # required
       #   })
+      #
       # @overload delete_configuration_set_event_destination(params = {})
       # @param [Hash] params ({})
       def delete_configuration_set_event_destination(params = {}, options = {})
@@ -455,15 +506,19 @@ module Aws
       # list of verified identities.
       #
       # This action is throttled at one request per second.
+      #
       # @option params [required, String] :identity
       #   The identity to be removed from the list of identities for the AWS
       #   Account.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_identity({
       #     identity: "Identity", # required
       #   })
+      #
       # @overload delete_identity(params = {})
       # @param [Hash] params ({})
       def delete_identity(params = {}, options = {})
@@ -489,6 +544,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [required, String] :identity
       #   The identity that is associated with the policy that you want to
       #   delete. You can specify the identity by using its name or by using its
@@ -497,15 +553,19 @@ module Aws
       #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
       #
       #   To successfully call this API, you must own the identity.
+      #
       # @option params [required, String] :policy_name
       #   The name of the policy to be deleted.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_identity_policy({
       #     identity: "Identity", # required
       #     policy_name: "PolicyName", # required
       #   })
+      #
       # @overload delete_identity_policy(params = {})
       # @param [Hash] params ({})
       def delete_identity_policy(params = {}, options = {})
@@ -523,14 +583,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html
+      #
       # @option params [required, String] :filter_name
       #   The name of the IP address filter to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_receipt_filter({
       #     filter_name: "ReceiptFilterName", # required
       #   })
+      #
       # @overload delete_receipt_filter(params = {})
       # @param [Hash] params ({})
       def delete_receipt_filter(params = {}, options = {})
@@ -548,18 +612,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set that contains the receipt rule to
       #   delete.
+      #
       # @option params [required, String] :rule_name
       #   The name of the receipt rule to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_receipt_rule({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule_name: "ReceiptRuleName", # required
       #   })
+      #
       # @overload delete_receipt_rule(params = {})
       # @param [Hash] params ({})
       def delete_receipt_rule(params = {}, options = {})
@@ -582,14 +651,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #   })
+      #
       # @overload delete_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def delete_receipt_rule_set(params = {}, options = {})
@@ -605,14 +678,18 @@ module Aws
       # preferred.
       #
       # This action is throttled at one request per second.
+      #
       # @option params [required, String] :email_address
       #   An email address to be removed from the list of verified addresses.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_verified_email_address({
       #     email_address: "Address", # required
       #   })
+      #
       # @overload delete_verified_email_address(params = {})
       # @param [Hash] params ({})
       def delete_verified_email_address(params = {}, options = {})
@@ -631,15 +708,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
+      #
       # @return [Types::DescribeActiveReceiptRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeActiveReceiptRuleSetResponse#metadata #Metadata} => Types::ReceiptRuleSetMetadata
-      #   * {Types::DescribeActiveReceiptRuleSetResponse#rules #Rules} => Array&lt;Types::ReceiptRule&gt;
+      #   * {Types::DescribeActiveReceiptRuleSetResponse#metadata #metadata} => Types::ReceiptRuleSetMetadata
+      #   * {Types::DescribeActiveReceiptRuleSetResponse#rules #rules} => Array&lt;Types::ReceiptRule&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_active_receipt_rule_set()
       #
       # @example Response structure
+      #
       #   resp.metadata.name #=> String
       #   resp.metadata.created_timestamp #=> Time
       #   resp.rules #=> Array
@@ -670,6 +750,7 @@ module Aws
       #   resp.rules[0].actions[0].sns_action.topic_arn #=> String
       #   resp.rules[0].actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
       #   resp.rules[0].scan_enabled #=> Boolean
+      #
       # @overload describe_active_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def describe_active_receipt_rule_set(params = {}, options = {})
@@ -688,22 +769,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [required, String] :configuration_set_name
       #   The name of the configuration set to describe.
+      #
       # @option params [Array<String>] :configuration_set_attribute_names
       #   A list of configuration set attributes to return.
+      #
       # @return [Types::DescribeConfigurationSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeConfigurationSetResponse#configuration_set #ConfigurationSet} => Types::ConfigurationSet
-      #   * {Types::DescribeConfigurationSetResponse#event_destinations #EventDestinations} => Array&lt;Types::EventDestination&gt;
+      #   * {Types::DescribeConfigurationSetResponse#configuration_set #configuration_set} => Types::ConfigurationSet
+      #   * {Types::DescribeConfigurationSetResponse#event_destinations #event_destinations} => Array&lt;Types::EventDestination&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_configuration_set({
       #     configuration_set_name: "ConfigurationSetName", # required
       #     configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations
       #   })
       #
       # @example Response structure
+      #
       #   resp.configuration_set.name #=> String
       #   resp.event_destinations #=> Array
       #   resp.event_destinations[0].name #=> String
@@ -716,6 +802,7 @@ module Aws
       #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_name #=> String
       #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "messageTag", "emailHeader"
       #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
+      #
       # @overload describe_configuration_set(params = {})
       # @param [Hash] params ({})
       def describe_configuration_set(params = {}, options = {})
@@ -733,21 +820,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rules.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set to which the receipt rule belongs.
+      #
       # @option params [required, String] :rule_name
       #   The name of the receipt rule.
+      #
       # @return [Types::DescribeReceiptRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeReceiptRuleResponse#rule #Rule} => Types::ReceiptRule
+      #   * {Types::DescribeReceiptRuleResponse#rule #rule} => Types::ReceiptRule
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_receipt_rule({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule_name: "ReceiptRuleName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.rule.name #=> String
       #   resp.rule.enabled #=> Boolean
       #   resp.rule.tls_policy #=> String, one of "Require", "Optional"
@@ -775,6 +867,7 @@ module Aws
       #   resp.rule.actions[0].sns_action.topic_arn #=> String
       #   resp.rule.actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
       #   resp.rule.scan_enabled #=> Boolean
+      #
       # @overload describe_receipt_rule(params = {})
       # @param [Hash] params ({})
       def describe_receipt_rule(params = {}, options = {})
@@ -792,19 +885,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set to describe.
+      #
       # @return [Types::DescribeReceiptRuleSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeReceiptRuleSetResponse#metadata #Metadata} => Types::ReceiptRuleSetMetadata
-      #   * {Types::DescribeReceiptRuleSetResponse#rules #Rules} => Array&lt;Types::ReceiptRule&gt;
+      #   * {Types::DescribeReceiptRuleSetResponse#metadata #metadata} => Types::ReceiptRuleSetMetadata
+      #   * {Types::DescribeReceiptRuleSetResponse#rules #rules} => Array&lt;Types::ReceiptRule&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.metadata.name #=> String
       #   resp.metadata.created_timestamp #=> Time
       #   resp.rules #=> Array
@@ -835,6 +932,7 @@ module Aws
       #   resp.rules[0].actions[0].sns_action.topic_arn #=> String
       #   resp.rules[0].actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
       #   resp.rules[0].scan_enabled #=> Boolean
+      #
       # @overload describe_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def describe_receipt_rule_set(params = {}, options = {})
@@ -868,24 +966,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
+      #
       # @option params [required, Array<String>] :identities
       #   A list of one or more verified identities - email addresses, domains,
       #   or both.
+      #
       # @return [Types::GetIdentityDkimAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityDkimAttributesResponse#dkim_attributes #DkimAttributes} => Hash&lt;String,Types::IdentityDkimAttributes&gt;
+      #   * {Types::GetIdentityDkimAttributesResponse#dkim_attributes #dkim_attributes} => Hash&lt;String,Types::IdentityDkimAttributes&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_dkim_attributes({
       #     identities: ["Identity"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.dkim_attributes #=> Hash
       #   resp.dkim_attributes["Identity"].dkim_enabled #=> Boolean
       #   resp.dkim_attributes["Identity"].dkim_verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
       #   resp.dkim_attributes["Identity"].dkim_tokens #=> Array
       #   resp.dkim_attributes["Identity"].dkim_tokens[0] #=> String
+      #
       # @overload get_identity_dkim_attributes(params = {})
       # @param [Hash] params ({})
       def get_identity_dkim_attributes(params = {}, options = {})
@@ -898,22 +1001,27 @@ module Aws
       #
       # This action is throttled at one request per second and can only get
       # custom MAIL FROM attributes for up to 100 identities at a time.
+      #
       # @option params [required, Array<String>] :identities
       #   A list of one or more identities.
+      #
       # @return [Types::GetIdentityMailFromDomainAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityMailFromDomainAttributesResponse#mail_from_domain_attributes #MailFromDomainAttributes} => Hash&lt;String,Types::IdentityMailFromDomainAttributes&gt;
+      #   * {Types::GetIdentityMailFromDomainAttributesResponse#mail_from_domain_attributes #mail_from_domain_attributes} => Hash&lt;String,Types::IdentityMailFromDomainAttributes&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_mail_from_domain_attributes({
       #     identities: ["Identity"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.mail_from_domain_attributes #=> Hash
       #   resp.mail_from_domain_attributes["Identity"].mail_from_domain #=> String
       #   resp.mail_from_domain_attributes["Identity"].mail_from_domain_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure"
       #   resp.mail_from_domain_attributes["Identity"].behavior_on_mx_failure #=> String, one of "UseDefaultValue", "RejectMessage"
+      #
       # @overload get_identity_mail_from_domain_attributes(params = {})
       # @param [Hash] params ({})
       def get_identity_mail_from_domain_attributes(params = {}, options = {})
@@ -933,21 +1041,25 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+      #
       # @option params [required, Array<String>] :identities
       #   A list of one or more identities. You can specify an identity by using
       #   its name or by using its Amazon Resource Name (ARN). Examples:
       #   `user@example.com`, `example.com`,
       #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
+      #
       # @return [Types::GetIdentityNotificationAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityNotificationAttributesResponse#notification_attributes #NotificationAttributes} => Hash&lt;String,Types::IdentityNotificationAttributes&gt;
+      #   * {Types::GetIdentityNotificationAttributesResponse#notification_attributes #notification_attributes} => Hash&lt;String,Types::IdentityNotificationAttributes&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_notification_attributes({
       #     identities: ["Identity"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.notification_attributes #=> Hash
       #   resp.notification_attributes["Identity"].bounce_topic #=> String
       #   resp.notification_attributes["Identity"].complaint_topic #=> String
@@ -956,6 +1068,7 @@ module Aws
       #   resp.notification_attributes["Identity"].headers_in_bounce_notifications_enabled #=> Boolean
       #   resp.notification_attributes["Identity"].headers_in_complaint_notifications_enabled #=> Boolean
       #   resp.notification_attributes["Identity"].headers_in_delivery_notifications_enabled #=> Boolean
+      #
       # @overload get_identity_notification_attributes(params = {})
       # @param [Hash] params ({})
       def get_identity_notification_attributes(params = {}, options = {})
@@ -982,6 +1095,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [required, String] :identity
       #   The identity for which the policies will be retrieved. You can specify
       #   an identity by using its name or by using its Amazon Resource Name
@@ -989,24 +1103,29 @@ module Aws
       #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
       #
       #   To successfully call this API, you must own the identity.
+      #
       # @option params [required, Array<String>] :policy_names
       #   A list of the names of policies to be retrieved. You can retrieve a
       #   maximum of 20 policies at a time. If you do not know the names of the
       #   policies that are attached to the identity, you can use
       #   `ListIdentityPolicies`.
+      #
       # @return [Types::GetIdentityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityPoliciesResponse#policies #Policies} => Hash&lt;String,String&gt;
+      #   * {Types::GetIdentityPoliciesResponse#policies #policies} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_policies({
       #     identity: "Identity", # required
       #     policy_names: ["PolicyName"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.policies #=> Hash
       #   resp.policies["PolicyName"] #=> String
+      #
       # @overload get_identity_policies(params = {})
       # @param [Hash] params ({})
       def get_identity_policies(params = {}, options = {})
@@ -1020,21 +1139,26 @@ module Aws
       #
       # This action is throttled at one request per second and can only get
       # verification attributes for up to 100 identities at a time.
+      #
       # @option params [required, Array<String>] :identities
       #   A list of identities.
+      #
       # @return [Types::GetIdentityVerificationAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityVerificationAttributesResponse#verification_attributes #VerificationAttributes} => Hash&lt;String,Types::IdentityVerificationAttributes&gt;
+      #   * {Types::GetIdentityVerificationAttributesResponse#verification_attributes #verification_attributes} => Hash&lt;String,Types::IdentityVerificationAttributes&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_verification_attributes({
       #     identities: ["Identity"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.verification_attributes #=> Hash
       #   resp.verification_attributes["Identity"].verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
       #   resp.verification_attributes["Identity"].verification_token #=> String
+      #
       # @overload get_identity_verification_attributes(params = {})
       # @param [Hash] params ({})
       def get_identity_verification_attributes(params = {}, options = {})
@@ -1045,16 +1169,19 @@ module Aws
       # Returns the user's current sending limits.
       #
       # This action is throttled at one request per second.
+      #
       # @return [Types::GetSendQuotaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSendQuotaResponse#max_24_hour_send #Max24HourSend} => Float
-      #   * {Types::GetSendQuotaResponse#max_send_rate #MaxSendRate} => Float
-      #   * {Types::GetSendQuotaResponse#sent_last_24_hours #SentLast24Hours} => Float
+      #   * {Types::GetSendQuotaResponse#max_24_hour_send #max_24_hour_send} => Float
+      #   * {Types::GetSendQuotaResponse#max_send_rate #max_send_rate} => Float
+      #   * {Types::GetSendQuotaResponse#sent_last_24_hours #sent_last_24_hours} => Float
       #
       # @example Response structure
+      #
       #   resp.max_24_hour_send #=> Float
       #   resp.max_send_rate #=> Float
       #   resp.sent_last_24_hours #=> Float
+      #
       # @overload get_send_quota(params = {})
       # @param [Hash] params ({})
       def get_send_quota(params = {}, options = {})
@@ -1069,17 +1196,20 @@ module Aws
       # interval.
       #
       # This action is throttled at one request per second.
+      #
       # @return [Types::GetSendStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSendStatisticsResponse#send_data_points #SendDataPoints} => Array&lt;Types::SendDataPoint&gt;
+      #   * {Types::GetSendStatisticsResponse#send_data_points #send_data_points} => Array&lt;Types::SendDataPoint&gt;
       #
       # @example Response structure
+      #
       #   resp.send_data_points #=> Array
       #   resp.send_data_points[0].timestamp #=> Time
       #   resp.send_data_points[0].delivery_attempts #=> Integer
       #   resp.send_data_points[0].bounces #=> Integer
       #   resp.send_data_points[0].complaints #=> Integer
       #   resp.send_data_points[0].rejects #=> Integer
+      #
       # @overload get_send_statistics(params = {})
       # @param [Hash] params ({})
       def get_send_statistics(params = {}, options = {})
@@ -1099,27 +1229,33 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [String] :next_token
       #   A token returned from a previous call to `ListConfigurationSets` to
       #   indicate the position of the configuration set in the configuration
       #   set list.
+      #
       # @option params [Integer] :max_items
       #   The number of configuration sets to return.
+      #
       # @return [Types::ListConfigurationSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListConfigurationSetsResponse#configuration_sets #ConfigurationSets} => Array&lt;Types::ConfigurationSet&gt;
-      #   * {Types::ListConfigurationSetsResponse#next_token #NextToken} => String
+      #   * {Types::ListConfigurationSetsResponse#configuration_sets #configuration_sets} => Array&lt;Types::ConfigurationSet&gt;
+      #   * {Types::ListConfigurationSetsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_configuration_sets({
       #     next_token: "NextToken",
       #     max_items: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.configuration_sets #=> Array
       #   resp.configuration_sets[0].name #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_configuration_sets(params = {})
       # @param [Hash] params ({})
       def list_configuration_sets(params = {}, options = {})
@@ -1131,21 +1267,26 @@ module Aws
       # domains) for your AWS account, regardless of verification status.
       #
       # This action is throttled at one request per second.
+      #
       # @option params [String] :identity_type
       #   The type of the identities to list. Possible values are
       #   "EmailAddress" and "Domain". If this parameter is omitted, then
       #   all identities will be listed.
+      #
       # @option params [String] :next_token
       #   The token to use for pagination.
+      #
       # @option params [Integer] :max_items
       #   The maximum number of identities per page. Possible values are 1-1000
       #   inclusive.
+      #
       # @return [Types::ListIdentitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIdentitiesResponse#identities #Identities} => Array&lt;String&gt;
-      #   * {Types::ListIdentitiesResponse#next_token #NextToken} => String
+      #   * {Types::ListIdentitiesResponse#identities #identities} => Array&lt;String&gt;
+      #   * {Types::ListIdentitiesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_identities({
       #     identity_type: "EmailAddress", # accepts EmailAddress, Domain
       #     next_token: "NextToken",
@@ -1153,9 +1294,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identities #=> Array
       #   resp.identities[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_identities(params = {})
       # @param [Hash] params ({})
       def list_identities(params = {}, options = {})
@@ -1182,6 +1325,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [required, String] :identity
       #   The identity that is associated with the policy for which the policies
       #   will be listed. You can specify an identity by using its name or by
@@ -1190,18 +1334,22 @@ module Aws
       #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
       #
       #   To successfully call this API, you must own the identity.
+      #
       # @return [Types::ListIdentityPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIdentityPoliciesResponse#policy_names #PolicyNames} => Array&lt;String&gt;
+      #   * {Types::ListIdentityPoliciesResponse#policy_names #policy_names} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_identity_policies({
       #     identity: "Identity", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy_names #=> Array
       #   resp.policy_names[0] #=> String
+      #
       # @overload list_identity_policies(params = {})
       # @param [Hash] params ({})
       def list_identity_policies(params = {}, options = {})
@@ -1219,18 +1367,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html
+      #
       # @return [Types::ListReceiptFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListReceiptFiltersResponse#filters #Filters} => Array&lt;Types::ReceiptFilter&gt;
+      #   * {Types::ListReceiptFiltersResponse#filters #filters} => Array&lt;Types::ReceiptFilter&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_receipt_filters()
       #
       # @example Response structure
+      #
       #   resp.filters #=> Array
       #   resp.filters[0].name #=> String
       #   resp.filters[0].ip_filter.policy #=> String, one of "Block", "Allow"
       #   resp.filters[0].ip_filter.cidr #=> String
+      #
       # @overload list_receipt_filters(params = {})
       # @param [Hash] params ({})
       def list_receipt_filters(params = {}, options = {})
@@ -1251,24 +1403,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+      #
       # @option params [String] :next_token
       #   A token returned from a previous call to `ListReceiptRuleSets` to
       #   indicate the position in the receipt rule set list.
+      #
       # @return [Types::ListReceiptRuleSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListReceiptRuleSetsResponse#rule_sets #RuleSets} => Array&lt;Types::ReceiptRuleSetMetadata&gt;
-      #   * {Types::ListReceiptRuleSetsResponse#next_token #NextToken} => String
+      #   * {Types::ListReceiptRuleSetsResponse#rule_sets #rule_sets} => Array&lt;Types::ReceiptRuleSetMetadata&gt;
+      #   * {Types::ListReceiptRuleSetsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_receipt_rule_sets({
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.rule_sets #=> Array
       #   resp.rule_sets[0].name #=> String
       #   resp.rule_sets[0].created_timestamp #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_receipt_rule_sets(params = {})
       # @param [Hash] params ({})
       def list_receipt_rule_sets(params = {}, options = {})
@@ -1284,13 +1441,16 @@ module Aws
       # preferred.
       #
       # This action is throttled at one request per second.
+      #
       # @return [Types::ListVerifiedEmailAddressesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListVerifiedEmailAddressesResponse#verified_email_addresses #VerifiedEmailAddresses} => Array&lt;String&gt;
+      #   * {Types::ListVerifiedEmailAddressesResponse#verified_email_addresses #verified_email_addresses} => Array&lt;String&gt;
       #
       # @example Response structure
+      #
       #   resp.verified_email_addresses #=> Array
       #   resp.verified_email_addresses[0] #=> String
+      #
       # @overload list_verified_email_addresses(params = {})
       # @param [Hash] params ({})
       def list_verified_email_addresses(params = {}, options = {})
@@ -1315,6 +1475,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [required, String] :identity
       #   The identity to which the policy will apply. You can specify an
       #   identity by using its name or by using its Amazon Resource Name (ARN).
@@ -1322,11 +1483,13 @@ module Aws
       #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
       #
       #   To successfully call this API, you must own the identity.
+      #
       # @option params [required, String] :policy_name
       #   The name of the policy.
       #
       #   The policy name cannot exceed 64 characters and can only include
       #   alphanumeric characters, dashes, and underscores.
+      #
       # @option params [required, String] :policy
       #   The text of the policy in JSON format. The policy cannot exceed 4 KB.
       #
@@ -1336,14 +1499,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_identity_policy({
       #     identity: "Identity", # required
       #     policy_name: "PolicyName", # required
       #     policy: "Policy", # required
       #   })
+      #
       # @overload put_identity_policy(params = {})
       # @param [Hash] params ({})
       def put_identity_policy(params = {}, options = {})
@@ -1367,18 +1533,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set to reorder.
+      #
       # @option params [required, Array<String>] :rule_names
       #   A list of the specified receipt rule set's receipt rules in the order
       #   that you want to put them.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reorder_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule_names: ["ReceiptRuleName"], # required
       #   })
+      #
       # @overload reorder_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def reorder_receipt_rule_set(params = {}, options = {})
@@ -1403,23 +1574,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email.html
+      #
       # @option params [required, String] :original_message_id
       #   The message ID of the message to be bounced.
+      #
       # @option params [required, String] :bounce_sender
       #   The address to use in the "From" header of the bounce message. This
       #   must be an identity that you have verified with Amazon SES.
+      #
       # @option params [String] :explanation
       #   Human-readable text for the bounce message to explain the failure. If
       #   not specified, the text will be auto-generated based on the bounced
       #   recipient information.
+      #
       # @option params [Types::MessageDsn] :message_dsn
       #   Message-related DSN fields. If not specified, Amazon SES will choose
       #   the values.
+      #
       # @option params [required, Array<Types::BouncedRecipientInfo>] :bounced_recipient_info_list
       #   A list of recipients of the bounced message, including the information
       #   required to create the Delivery Status Notifications (DSNs) for the
       #   recipients. You must specify at least one `BouncedRecipientInfo` in
       #   the list.
+      #
       # @option params [String] :bounce_sender_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
@@ -1430,11 +1607,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @return [Types::SendBounceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SendBounceResponse#message_id #MessageId} => String
+      #   * {Types::SendBounceResponse#message_id #message_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_bounce({
       #     original_message_id: "MessageId", # required
       #     bounce_sender: "Address", # required
@@ -1474,7 +1653,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.message_id #=> String
+      #
       # @overload send_bounce(params = {})
       # @param [Hash] params ({})
       def send_bounce(params = {}, options = {})
@@ -1514,6 +1695,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
       # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
+      #
       # @option params [required, String] :source
       #   The email address that is sending the email. This email address must
       #   be either individually verified with Amazon SES, or from a domain that
@@ -1536,13 +1718,17 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
       #   [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
       #   [3]: http://tools.ietf.org/html/rfc2047
+      #
       # @option params [required, Types::Destination] :destination
       #   The destination for this email, composed of To:, CC:, and BCC: fields.
+      #
       # @option params [required, Types::Message] :message
       #   The message to be sent.
+      #
       # @option params [Array<String>] :reply_to_addresses
       #   The reply-to email address(es) for the message. If the recipient
       #   replies to the message, each reply-to address will receive the reply.
+      #
       # @option params [String] :return_path
       #   The email address to which bounces and complaints are to be forwarded
       #   when feedback forwarding is enabled. If the message cannot be
@@ -1552,6 +1738,7 @@ module Aws
       #   `ReturnPath` parameter is never overwritten. This email address must
       #   be either individually verified with Amazon SES, or from a domain that
       #   has been verified with Amazon SES.
+      #
       # @option params [String] :source_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
@@ -1571,6 +1758,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [String] :return_path_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
@@ -1590,19 +1778,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [Array<Types::MessageTag>] :tags
       #   A list of tags, in the form of name/value pairs, to apply to an email
       #   that you send using `SendEmail`. Tags correspond to characteristics of
       #   the email that you define, so that you can publish email sending
       #   events.
+      #
       # @option params [String] :configuration_set_name
       #   The name of the configuration set to use when you send an email using
       #   `SendEmail`.
+      #
       # @return [Types::SendEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SendEmailResponse#message_id #MessageId} => String
+      #   * {Types::SendEmailResponse#message_id #message_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_email({
       #     source: "Address", # required
       #     destination: { # required
@@ -1640,7 +1832,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.message_id #=> String
+      #
       # @overload send_email(params = {})
       # @param [Hash] params ({})
       def send_email(params = {}, options = {})
@@ -1690,16 +1884,16 @@ module Aws
       #   parameters in one of two ways: you can pass optional parameters
       #   `SourceArn`, `FromArn`, and/or `ReturnPathArn` to the API, or you
       #   can include the following X-headers in the header of your raw email:
-      # 
+      #
       #   * `X-SES-SOURCE-ARN`
-      # 
+      #
       #   * `X-SES-FROM-ARN`
-      # 
+      #
       #   * `X-SES-RETURN-PATH-ARN`
-      # 
+      #
       #   Do not include these X-headers in the DKIM signature, because they
       #   are removed by Amazon SES before sending the email.
-      # 
+      #
       #   For the most common sending authorization use case, we recommend
       #   that you specify the `SourceIdentityArn` and do not specify either
       #   the `FromIdentityArn` or `ReturnPathIdentityArn`. (The same note
@@ -1714,6 +1908,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html
       # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
       # [3]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      #
       # @option params [String] :source
       #   The identity's email address. If you do not provide a value for this
       #   parameter, you must specify a "From" address in the raw text of the
@@ -1735,9 +1930,11 @@ module Aws
       #
       #
       #   [1]: http://tools.ietf.org/html/rfc2047
+      #
       # @option params [Array<String>] :destinations
       #   A list of destinations for the message, consisting of To:, CC:, and
       #   BCC: addresses.
+      #
       # @option params [required, Types::RawMessage] :raw_message
       #   The raw text of the message. The client is responsible for ensuring
       #   the following:
@@ -1756,6 +1953,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mime-types.html
+      #
       # @option params [String] :from_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
@@ -1776,6 +1974,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+      #
       # @option params [String] :source_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
@@ -1803,6 +2002,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+      #
       # @option params [String] :return_path_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
@@ -1830,19 +2030,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+      #
       # @option params [Array<Types::MessageTag>] :tags
       #   A list of tags, in the form of name/value pairs, to apply to an email
       #   that you send using `SendRawEmail`. Tags correspond to characteristics
       #   of the email that you define, so that you can publish email sending
       #   events.
+      #
       # @option params [String] :configuration_set_name
       #   The name of the configuration set to use when you send an email using
       #   `SendRawEmail`.
+      #
       # @return [Types::SendRawEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SendRawEmailResponse#message_id #MessageId} => String
+      #   * {Types::SendRawEmailResponse#message_id #message_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_raw_email({
       #     source: "Address",
       #     destinations: ["Address"],
@@ -1862,7 +2066,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.message_id #=> String
+      #
       # @overload send_raw_email(params = {})
       # @param [Hash] params ({})
       def send_raw_email(params = {}, options = {})
@@ -1885,15 +2091,19 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html
+      #
       # @option params [String] :rule_set_name
       #   The name of the receipt rule set to make active. Setting this value to
       #   null disables all email receiving.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_active_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName",
       #   })
+      #
       # @overload set_active_receipt_rule_set(params = {})
       # @param [Hash] params ({})
       def set_active_receipt_rule_set(params = {}, options = {})
@@ -1923,18 +2133,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html
+      #
       # @option params [required, String] :identity
       #   The identity for which DKIM signing should be enabled or disabled.
+      #
       # @option params [required, Boolean] :dkim_enabled
       #   Sets whether DKIM signing is enabled for an identity. Set to `true` to
       #   enable DKIM signing for this identity; `false` to disable it.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_dkim_enabled({
       #     identity: "Identity", # required
       #     dkim_enabled: false, # required
       #   })
+      #
       # @overload set_identity_dkim_enabled(params = {})
       # @param [Hash] params ({})
       def set_identity_dkim_enabled(params = {}, options = {})
@@ -1961,9 +2176,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+      #
       # @option params [required, String] :identity
       #   The identity for which to set bounce and complaint notification
       #   forwarding. Examples: `user@example.com`, `example.com`.
+      #
       # @option params [required, Boolean] :forwarding_enabled
       #   Sets whether Amazon SES will forward bounce and complaint
       #   notifications as email. `true` specifies that Amazon SES will forward
@@ -1973,13 +2190,16 @@ module Aws
       #   through Amazon SNS. This value can only be set to `false` when Amazon
       #   SNS topics are set for both `Bounce` and `Complaint` notification
       #   types.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_feedback_forwarding_enabled({
       #     identity: "Identity", # required
       #     forwarding_enabled: false, # required
       #   })
+      #
       # @overload set_identity_feedback_forwarding_enabled(params = {})
       # @param [Hash] params ({})
       def set_identity_feedback_forwarding_enabled(params = {}, options = {})
@@ -1999,12 +2219,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+      #
       # @option params [required, String] :identity
       #   The identity for which to enable or disable headers in notifications.
       #   Examples: `user@example.com`, `example.com`.
+      #
       # @option params [required, String] :notification_type
       #   The notification type for which to enable or disable headers in
       #   notifications.
+      #
       # @option params [required, Boolean] :enabled
       #   Sets whether Amazon SES includes the original email headers in Amazon
       #   SNS notifications of the specified notification type. A value of
@@ -2014,14 +2237,17 @@ module Aws
       #
       #   This value can only be set when `NotificationType` is already set to
       #   use a particular Amazon SNS topic.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_headers_in_notifications_enabled({
       #     identity: "Identity", # required
       #     notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
       #     enabled: false, # required
       #   })
+      #
       # @overload set_identity_headers_in_notifications_enabled(params = {})
       # @param [Hash] params ({})
       def set_identity_headers_in_notifications_enabled(params = {}, options = {})
@@ -2043,9 +2269,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-set.html
+      #
       # @option params [required, String] :identity
       #   The verified identity for which you want to enable or disable the
       #   specified custom MAIL FROM domain.
+      #
       # @option params [String] :mail_from_domain
       #   The custom MAIL FROM domain that you want the verified identity to
       #   use. The MAIL FROM domain must 1) be a subdomain of the verified
@@ -2058,6 +2286,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from.html
+      #
       # @option params [String] :behavior_on_mx_failure
       #   The action that you want Amazon SES to take if it cannot successfully
       #   read the required MX record when you send an email. If you choose
@@ -2069,14 +2298,17 @@ module Aws
       #   The action specified in `BehaviorOnMXFailure` is taken when the custom
       #   MAIL FROM domain setup is in the `Pending`, `Failed`, and
       #   `TemporaryFailure` states.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_mail_from_domain({
       #     identity: "Identity", # required
       #     mail_from_domain: "MailFromDomainName",
       #     behavior_on_mx_failure: "UseDefaultValue", # accepts UseDefaultValue, RejectMessage
       #   })
+      #
       # @overload set_identity_mail_from_domain(params = {})
       # @param [Hash] params ({})
       def set_identity_mail_from_domain(params = {}, options = {})
@@ -2103,26 +2335,32 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications.html
+      #
       # @option params [required, String] :identity
       #   The identity for which the Amazon SNS topic will be set. You can
       #   specify an identity by using its name or by using its Amazon Resource
       #   Name (ARN). Examples: `user@example.com`, `example.com`,
       #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
+      #
       # @option params [required, String] :notification_type
       #   The type of notifications that will be published to the specified
       #   Amazon SNS topic.
+      #
       # @option params [String] :sns_topic
       #   The Amazon Resource Name (ARN) of the Amazon SNS topic. If the
       #   parameter is omitted from the request or a null value is passed,
       #   `SnsTopic` is cleared and publishing is disabled.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_notification_topic({
       #     identity: "Identity", # required
       #     notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
       #     sns_topic: "NotificationTopic",
       #   })
+      #
       # @overload set_identity_notification_topic(params = {})
       # @param [Hash] params ({})
       def set_identity_notification_topic(params = {}, options = {})
@@ -2141,22 +2379,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set that contains the receipt rule to
       #   reposition.
+      #
       # @option params [required, String] :rule_name
       #   The name of the receipt rule to reposition.
+      #
       # @option params [String] :after
       #   The name of the receipt rule after which to place the specified
       #   receipt rule.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_receipt_rule_position({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule_name: "ReceiptRuleName", # required
       #     after: "ReceiptRuleName",
       #   })
+      #
       # @overload set_receipt_rule_position(params = {})
       # @param [Hash] params ({})
       def set_receipt_rule_position(params = {}, options = {})
@@ -2182,14 +2426,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      #
       # @option params [required, String] :configuration_set_name
       #   The name of the configuration set that you want to update.
+      #
       # @option params [required, Types::EventDestination] :event_destination
       #   The event destination object that you want to apply to the specified
       #   configuration set.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_configuration_set_event_destination({
       #     configuration_set_name: "ConfigurationSetName", # required
       #     event_destination: { # required
@@ -2211,6 +2459,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload update_configuration_set_event_destination(params = {})
       # @param [Hash] params ({})
       def update_configuration_set_event_destination(params = {}, options = {})
@@ -2228,13 +2477,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rules.html
+      #
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set to which the receipt rule belongs.
+      #
       # @option params [required, Types::ReceiptRule] :rule
       #   A data structure that contains the updated receipt rule information.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_receipt_rule({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule: { # required
@@ -2283,6 +2536,7 @@ module Aws
       #       scan_enabled: false,
       #     },
       #   })
+      #
       # @overload update_receipt_rule(params = {})
       # @param [Hash] params ({})
       def update_receipt_rule(params = {}, options = {})
@@ -2309,20 +2563,25 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain to be verified for Easy DKIM signing.
+      #
       # @return [Types::VerifyDomainDkimResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VerifyDomainDkimResponse#dkim_tokens #DkimTokens} => Array&lt;String&gt;
+      #   * {Types::VerifyDomainDkimResponse#dkim_tokens #dkim_tokens} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.verify_domain_dkim({
       #     domain: "Domain", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.dkim_tokens #=> Array
       #   resp.dkim_tokens[0] #=> String
+      #
       # @overload verify_domain_dkim(params = {})
       # @param [Hash] params ({})
       def verify_domain_dkim(params = {}, options = {})
@@ -2333,19 +2592,24 @@ module Aws
       # Verifies a domain.
       #
       # This action is throttled at one request per second.
+      #
       # @option params [required, String] :domain
       #   The domain to be verified.
+      #
       # @return [Types::VerifyDomainIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VerifyDomainIdentityResponse#verification_token #VerificationToken} => String
+      #   * {Types::VerifyDomainIdentityResponse#verification_token #verification_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.verify_domain_identity({
       #     domain: "Domain", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.verification_token #=> String
+      #
       # @overload verify_domain_identity(params = {})
       # @param [Hash] params ({})
       def verify_domain_identity(params = {}, options = {})
@@ -2361,14 +2625,18 @@ module Aws
       # preferred.
       #
       # This action is throttled at one request per second.
+      #
       # @option params [required, String] :email_address
       #   The email address to be verified.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.verify_email_address({
       #     email_address: "Address", # required
       #   })
+      #
       # @overload verify_email_address(params = {})
       # @param [Hash] params ({})
       def verify_email_address(params = {}, options = {})
@@ -2380,14 +2648,18 @@ module Aws
       # message to be sent to the specified address.
       #
       # This action is throttled at one request per second.
+      #
       # @option params [required, String] :email_address
       #   The email address to be verified.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.verify_email_identity({
       #     email_address: "Address", # required
       #   })
+      #
       # @overload verify_email_identity(params = {})
       # @param [Hash] params ({})
       def verify_email_identity(params = {}, options = {})

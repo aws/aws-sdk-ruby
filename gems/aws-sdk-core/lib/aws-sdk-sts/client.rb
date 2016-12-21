@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -233,8 +247,10 @@ module Aws
       # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html#sts-introduction
       # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
       # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/MFAProtectedAPI.html
+      #
       # @option params [required, String] :role_arn
       #   The Amazon Resource Name (ARN) of the role to assume.
+      #
       # @option params [required, String] :role_session_name
       #   An identifier for the assumed role session.
       #
@@ -251,6 +267,7 @@ module Aws
       #   string of characters consisting of upper- and lower-case alphanumeric
       #   characters with no spaces. You can also include underscores or any of
       #   the following characters: =,.@-
+      #
       # @option params [String] :policy
       #   An IAM policy in JSON format.
       #
@@ -283,6 +300,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+      #
       # @option params [Integer] :duration_seconds
       #   The duration, in seconds, of the role session. The value can range
       #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
@@ -301,6 +319,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+      #
       # @option params [String] :external_id
       #   A unique identifier that is used by third parties when assuming roles
       #   in their customers' accounts. For each role that the third party can
@@ -321,6 +340,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+      #
       # @option params [String] :serial_number
       #   The identification number of the MFA device that is associated with
       #   the user who is making the `AssumeRole` call. Specify this value if
@@ -334,6 +354,7 @@ module Aws
       #   string of characters consisting of upper- and lower-case alphanumeric
       #   characters with no spaces. You can also include underscores or any of
       #   the following characters: =,.@-
+      #
       # @option params [String] :token_code
       #   The value provided by the MFA device, if the trust policy of the role
       #   being assumed requires MFA (that is, if the policy includes a
@@ -343,13 +364,15 @@ module Aws
       #
       #   The format for this parameter, as described by its regex pattern, is a
       #   sequence of six numeric digits.
+      #
       # @return [Types::AssumeRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AssumeRoleResponse#credentials #Credentials} => Types::Credentials
-      #   * {Types::AssumeRoleResponse#assumed_role_user #AssumedRoleUser} => Types::AssumedRoleUser
-      #   * {Types::AssumeRoleResponse#packed_policy_size #PackedPolicySize} => Integer
+      #   * {Types::AssumeRoleResponse#credentials #credentials} => Types::Credentials
+      #   * {Types::AssumeRoleResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
+      #   * {Types::AssumeRoleResponse#packed_policy_size #packed_policy_size} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.assume_role({
       #     role_arn: "arnType", # required
       #     role_session_name: "roleSessionNameType", # required
@@ -361,6 +384,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.credentials.access_key_id #=> String
       #   resp.credentials.secret_access_key #=> String
       #   resp.credentials.session_token #=> String
@@ -368,6 +392,7 @@ module Aws
       #   resp.assumed_role_user.assumed_role_id #=> String
       #   resp.assumed_role_user.arn #=> String
       #   resp.packed_policy_size #=> Integer
+      #
       # @overload assume_role(params = {})
       # @param [Hash] params ({})
       def assume_role(params = {}, options = {})
@@ -455,12 +480,15 @@ module Aws
       # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml.html
       # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_saml_relying-party.html
       # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_saml.html
+      #
       # @option params [required, String] :role_arn
       #   The Amazon Resource Name (ARN) of the role that the caller is
       #   assuming.
+      #
       # @option params [required, String] :principal_arn
       #   The Amazon Resource Name (ARN) of the SAML provider in IAM that
       #   describes the IdP.
+      #
       # @option params [required, String] :saml_assertion
       #   The base-64 encoded SAML authentication response provided by the IdP.
       #
@@ -470,6 +498,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/create-role-saml-IdP-tasks.html
+      #
       # @option params [String] :policy
       #   An IAM policy in JSON format.
       #
@@ -502,6 +531,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+      #
       # @option params [Integer] :duration_seconds
       #   The duration, in seconds, of the role session. The value can range
       #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
@@ -522,18 +552,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+      #
       # @return [Types::AssumeRoleWithSAMLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AssumeRoleWithSAMLResponse#credentials #Credentials} => Types::Credentials
-      #   * {Types::AssumeRoleWithSAMLResponse#assumed_role_user #AssumedRoleUser} => Types::AssumedRoleUser
-      #   * {Types::AssumeRoleWithSAMLResponse#packed_policy_size #PackedPolicySize} => Integer
-      #   * {Types::AssumeRoleWithSAMLResponse#subject #Subject} => String
-      #   * {Types::AssumeRoleWithSAMLResponse#subject_type #SubjectType} => String
-      #   * {Types::AssumeRoleWithSAMLResponse#issuer #Issuer} => String
-      #   * {Types::AssumeRoleWithSAMLResponse#audience #Audience} => String
-      #   * {Types::AssumeRoleWithSAMLResponse#name_qualifier #NameQualifier} => String
+      #   * {Types::AssumeRoleWithSAMLResponse#credentials #credentials} => Types::Credentials
+      #   * {Types::AssumeRoleWithSAMLResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
+      #   * {Types::AssumeRoleWithSAMLResponse#packed_policy_size #packed_policy_size} => Integer
+      #   * {Types::AssumeRoleWithSAMLResponse#subject #subject} => String
+      #   * {Types::AssumeRoleWithSAMLResponse#subject_type #subject_type} => String
+      #   * {Types::AssumeRoleWithSAMLResponse#issuer #issuer} => String
+      #   * {Types::AssumeRoleWithSAMLResponse#audience #audience} => String
+      #   * {Types::AssumeRoleWithSAMLResponse#name_qualifier #name_qualifier} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.assume_role_with_saml({
       #     role_arn: "arnType", # required
       #     principal_arn: "arnType", # required
@@ -543,6 +575,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.credentials.access_key_id #=> String
       #   resp.credentials.secret_access_key #=> String
       #   resp.credentials.session_token #=> String
@@ -555,6 +588,7 @@ module Aws
       #   resp.issuer #=> String
       #   resp.audience #=> String
       #   resp.name_qualifier #=> String
+      #
       # @overload assume_role_with_saml(params = {})
       # @param [Hash] params ({})
       def assume_role_with_saml(params = {}, options = {})
@@ -668,9 +702,11 @@ module Aws
       # [11]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
       # [12]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
       # [13]: http://aws.amazon.com/articles/4617974389850313
+      #
       # @option params [required, String] :role_arn
       #   The Amazon Resource Name (ARN) of the role that the caller is
       #   assuming.
+      #
       # @option params [required, String] :role_session_name
       #   An identifier for the assumed role session. Typically, you pass the
       #   name or identifier that is associated with the user who is using your
@@ -683,12 +719,14 @@ module Aws
       #   string of characters consisting of upper- and lower-case alphanumeric
       #   characters with no spaces. You can also include underscores or any of
       #   the following characters: =,.@-
+      #
       # @option params [required, String] :web_identity_token
       #   The OAuth 2.0 access token or OpenID Connect ID token that is provided
       #   by the identity provider. Your application must get this token by
       #   authenticating the user who is using your application with a web
       #   identity provider before the application makes an
       #   `AssumeRoleWithWebIdentity` call.
+      #
       # @option params [String] :provider_id
       #   The fully qualified host component of the domain name of the identity
       #   provider.
@@ -699,6 +737,7 @@ module Aws
       #   schemes and port numbers.
       #
       #   Do not specify this value for OpenID Connect ID tokens.
+      #
       # @option params [String] :policy
       #   An IAM policy in JSON format.
       #
@@ -731,6 +770,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
+      #
       # @option params [Integer] :duration_seconds
       #   The duration, in seconds, of the role session. The value can range
       #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
@@ -749,16 +789,18 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
+      #
       # @return [Types::AssumeRoleWithWebIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AssumeRoleWithWebIdentityResponse#credentials #Credentials} => Types::Credentials
-      #   * {Types::AssumeRoleWithWebIdentityResponse#subject_from_web_identity_token #SubjectFromWebIdentityToken} => String
-      #   * {Types::AssumeRoleWithWebIdentityResponse#assumed_role_user #AssumedRoleUser} => Types::AssumedRoleUser
-      #   * {Types::AssumeRoleWithWebIdentityResponse#packed_policy_size #PackedPolicySize} => Integer
-      #   * {Types::AssumeRoleWithWebIdentityResponse#provider #Provider} => String
-      #   * {Types::AssumeRoleWithWebIdentityResponse#audience #Audience} => String
+      #   * {Types::AssumeRoleWithWebIdentityResponse#credentials #credentials} => Types::Credentials
+      #   * {Types::AssumeRoleWithWebIdentityResponse#subject_from_web_identity_token #subject_from_web_identity_token} => String
+      #   * {Types::AssumeRoleWithWebIdentityResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
+      #   * {Types::AssumeRoleWithWebIdentityResponse#packed_policy_size #packed_policy_size} => Integer
+      #   * {Types::AssumeRoleWithWebIdentityResponse#provider #provider} => String
+      #   * {Types::AssumeRoleWithWebIdentityResponse#audience #audience} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.assume_role_with_web_identity({
       #     role_arn: "arnType", # required
       #     role_session_name: "roleSessionNameType", # required
@@ -769,6 +811,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.credentials.access_key_id #=> String
       #   resp.credentials.secret_access_key #=> String
       #   resp.credentials.session_token #=> String
@@ -779,6 +822,7 @@ module Aws
       #   resp.packed_policy_size #=> Integer
       #   resp.provider #=> String
       #   resp.audience #=> String
+      #
       # @overload assume_role_with_web_identity(params = {})
       # @param [Hash] params ({})
       def assume_role_with_web_identity(params = {}, options = {})
@@ -826,19 +870,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-denyallow
+      #
       # @option params [required, String] :encoded_message
       #   The encoded message that was returned with the response.
+      #
       # @return [Types::DecodeAuthorizationMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DecodeAuthorizationMessageResponse#decoded_message #DecodedMessage} => String
+      #   * {Types::DecodeAuthorizationMessageResponse#decoded_message #decoded_message} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.decode_authorization_message({
       #     encoded_message: "encodedMessageType", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.decoded_message #=> String
+      #
       # @overload decode_authorization_message(params = {})
       # @param [Hash] params ({})
       def decode_authorization_message(params = {}, options = {})
@@ -848,19 +897,23 @@ module Aws
 
       # Returns details about the IAM identity whose credentials are used to
       # call the API.
+      #
       # @return [Types::GetCallerIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCallerIdentityResponse#user_id #UserId} => String
-      #   * {Types::GetCallerIdentityResponse#account #Account} => String
-      #   * {Types::GetCallerIdentityResponse#arn #Arn} => String
+      #   * {Types::GetCallerIdentityResponse#user_id #user_id} => String
+      #   * {Types::GetCallerIdentityResponse#account #account} => String
+      #   * {Types::GetCallerIdentityResponse#arn #arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_caller_identity()
       #
       # @example Response structure
+      #
       #   resp.user_id #=> String
       #   resp.account #=> String
       #   resp.arn #=> String
+      #
       # @overload get_caller_identity(params = {})
       # @param [Hash] params ({})
       def get_caller_identity(params = {}, options = {})
@@ -963,6 +1016,7 @@ module Aws
       # [5]: http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html
       # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html
       # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getfederationtoken
+      #
       # @option params [required, String] :name
       #   The name of the federated user. The name is used as an identifier for
       #   the temporary security credentials (such as `Bob`). For example, you
@@ -973,6 +1027,7 @@ module Aws
       #   string of characters consisting of upper- and lower-case alphanumeric
       #   characters with no spaces. You can also include underscores or any of
       #   the following characters: =,.@-
+      #
       # @option params [String] :policy
       #   An IAM policy in JSON format that is passed with the
       #   `GetFederationToken` call and evaluated along with the policy or
@@ -1012,6 +1067,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_getfederationtoken.html
+      #
       # @option params [Integer] :duration_seconds
       #   The duration, in seconds, that the session should last. Acceptable
       #   durations for federation sessions range from 900 seconds (15 minutes)
@@ -1020,13 +1076,15 @@ module Aws
       #   restricted to a maximum of 3600 seconds (one hour). If the specified
       #   duration is longer than one hour, the session obtained by using AWS
       #   account (root) credentials defaults to one hour.
+      #
       # @return [Types::GetFederationTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetFederationTokenResponse#credentials #Credentials} => Types::Credentials
-      #   * {Types::GetFederationTokenResponse#federated_user #FederatedUser} => Types::FederatedUser
-      #   * {Types::GetFederationTokenResponse#packed_policy_size #PackedPolicySize} => Integer
+      #   * {Types::GetFederationTokenResponse#credentials #credentials} => Types::Credentials
+      #   * {Types::GetFederationTokenResponse#federated_user #federated_user} => Types::FederatedUser
+      #   * {Types::GetFederationTokenResponse#packed_policy_size #packed_policy_size} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_federation_token({
       #     name: "userNameType", # required
       #     policy: "sessionPolicyDocumentType",
@@ -1034,6 +1092,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.credentials.access_key_id #=> String
       #   resp.credentials.secret_access_key #=> String
       #   resp.credentials.session_token #=> String
@@ -1041,6 +1100,7 @@ module Aws
       #   resp.federated_user.federated_user_id #=> String
       #   resp.federated_user.arn #=> String
       #   resp.packed_policy_size #=> Integer
+      #
       # @overload get_federation_token(params = {})
       # @param [Hash] params ({})
       def get_federation_token(params = {}, options = {})
@@ -1106,6 +1166,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
       # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#create-iam-users
       # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_getsessiontoken
+      #
       # @option params [Integer] :duration_seconds
       #   The duration, in seconds, that the credentials should remain valid.
       #   Acceptable durations for IAM user sessions range from 900 seconds (15
@@ -1113,6 +1174,7 @@ module Aws
       #   as the default. Sessions for AWS account owners are restricted to a
       #   maximum of 3600 seconds (one hour). If the duration is longer than one
       #   hour, the session for AWS account owners defaults to one hour.
+      #
       # @option params [String] :serial_number
       #   The identification number of the MFA device that is associated with
       #   the IAM user who is making the `GetSessionToken` call. Specify this
@@ -1127,6 +1189,7 @@ module Aws
       #   string of characters consisting of upper- and lower-case alphanumeric
       #   characters with no spaces. You can also include underscores or any of
       #   the following characters: =,.@-
+      #
       # @option params [String] :token_code
       #   The value provided by the MFA device, if MFA is required. If any
       #   policy requires the IAM user to submit an MFA code, specify this
@@ -1137,11 +1200,13 @@ module Aws
       #
       #   The format for this parameter, as described by its regex pattern, is a
       #   sequence of six numeric digits.
+      #
       # @return [Types::GetSessionTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSessionTokenResponse#credentials #Credentials} => Types::Credentials
+      #   * {Types::GetSessionTokenResponse#credentials #credentials} => Types::Credentials
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_session_token({
       #     duration_seconds: 1,
       #     serial_number: "serialNumberType",
@@ -1149,10 +1214,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.credentials.access_key_id #=> String
       #   resp.credentials.secret_access_key #=> String
       #   resp.credentials.session_token #=> String
       #   resp.credentials.expiration #=> Time
+      #
       # @overload get_session_token(params = {})
       # @param [Hash] params ({})
       def get_session_token(params = {}, options = {})

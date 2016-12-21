@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,13 +155,17 @@ module Aws
       # @!group API Operations
 
       # @option params [required, String] :server_name
+      #
       # @option params [required, String] :node_name
+      #
       # @option params [Array<Types::EngineAttribute>] :engine_attributes
+      #
       # @return [Types::AssociateNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AssociateNodeResponse#node_association_status_token #NodeAssociationStatusToken} => String
+      #   * {Types::AssociateNodeResponse#node_association_status_token #node_association_status_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.associate_node({
       #     server_name: "ServerName", # required
       #     node_name: "NodeName", # required
@@ -159,7 +178,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.node_association_status_token #=> String
+      #
       # @overload associate_node(params = {})
       # @param [Hash] params ({})
       def associate_node(params = {}, options = {})
@@ -184,21 +205,26 @@ module Aws
       # `ResourceNotFoundException` is thrown when the server is not found. A
       # `ValidationException` is thrown when parameters of the request are not
       # valid.
+      #
       # @option params [required, String] :server_name
       #   The name of the server that you want to back up.
+      #
       # @option params [String] :description
       #   A user-defined description of the backup.
+      #
       # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateBackupResponse#backup #Backup} => Types::Backup
+      #   * {Types::CreateBackupResponse#backup #backup} => Types::Backup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_backup({
       #     server_name: "ServerName", # required
       #     description: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.backup.backup_arn #=> String
       #   resp.backup.backup_id #=> String
       #   resp.backup.backup_type #=> String, one of "AUTOMATED", "MANUAL"
@@ -225,6 +251,7 @@ module Aws
       #   resp.backup.subnet_ids[0] #=> String
       #   resp.backup.tools_version #=> String
       #   resp.backup.user_arn #=> String
+      #
       # @overload create_backup(params = {})
       # @param [Hash] params ({})
       def create_backup(params = {}, options = {})
@@ -257,17 +284,22 @@ module Aws
       # from known IP addresses and address ranges only. To edit security
       # group rules, open Security Groups in the navigation pane of the EC2
       # management console.
+      #
       # @option params [Boolean] :disable_automated_backup
       #   Enable or disable scheduled backups. Valid values are `true` or
       #   `false`. The default value is `true`.
+      #
       # @option params [String] :engine
       #   The configuration management engine to use. Valid values include
       #   `Chef`.
+      #
       # @option params [String] :engine_model
       #   The engine model, or option. Valid values include `Single`.
+      #
       # @option params [String] :engine_version
       #   The major release version of the engine that you want to use. Values
       #   depend on the engine that you choose.
+      #
       # @option params [Array<Types::EngineAttribute>] :engine_attributes
       #   Engine attributes on a specified server.
       #
@@ -278,15 +310,18 @@ module Aws
       #     required to access the Chef API.
       #
       #   ^
+      #
       # @option params [Integer] :backup_retention_count
       #   The number of automated backups that you want to keep. Whenever a new
       #   backup is created, AWS OpsWorks for Chef Automate deletes the oldest
       #   backups if this number is exceeded. The default value is `1`.
+      #
       # @option params [required, String] :server_name
       #   The name of the server. The server name must be unique within your AWS
       #   account, within each region. Server names must start with a letter;
       #   then letters, numbers, or hyphens (-) are allowed, up to a maximum of
       #   32 characters.
+      #
       # @option params [required, String] :instance_profile_arn
       #   The ARN of the instance profile that your Amazon EC2 instances use.
       #   Although the AWS OpsWorks console typically creates the instance
@@ -296,12 +331,15 @@ module Aws
       #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
       #   This template creates a stack that includes the instance profile you
       #   need.
+      #
       # @option params [String] :instance_type
       #   The Amazon EC2 instance type to use. Valid values must be specified in
       #   the following format: `^([cm][34]|t2).*` For example, `c3.large`.
+      #
       # @option params [String] :key_pair
       #   The Amazon EC2 key pair to set for the instance. You may specify this
       #   parameter to connect to your instances by using SSH.
+      #
       # @option params [String] :preferred_maintenance_window
       #   The start time for a one-hour period each week during which AWS
       #   OpsWorks for Chef Automate performs maintenance on the instance. Valid
@@ -312,6 +350,7 @@ module Aws
       #
       #   **Example:** `Mon:08:00`, which represents a start time of every
       #   Monday at 08:00 UTC. (8:00 a.m.)
+      #
       # @option params [String] :preferred_backup_window
       #   The start time for a one-hour period during which AWS OpsWorks for
       #   Chef Automate backs up application-level data on your server if
@@ -330,6 +369,7 @@ module Aws
       #
       #   **Example:** `Mon:08:00`, which represents a start time of every
       #   Monday at 08:00 UTC. (8:00 a.m.)
+      #
       # @option params [Array<String>] :security_group_ids
       #   A list of security group IDs to attach to the Amazon EC2 instance. If
       #   you add this parameter, the specified security groups must be within
@@ -338,6 +378,7 @@ module Aws
       #   If you do not specify this parameter, AWS OpsWorks for Chef Automate
       #   creates one new security group that uses TCP ports 22 and 443, open to
       #   0.0.0.0/0 (everyone).
+      #
       # @option params [required, String] :service_role_arn
       #   The service role that the AWS OpsWorks for Chef Automate service
       #   backend uses to work with your account. Although the AWS OpsWorks
@@ -347,6 +388,7 @@ module Aws
       #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
       #   This template creates a stack that includes the service role that you
       #   need.
+      #
       # @option params [Array<String>] :subnet_ids
       #   The IDs of subnets in which to launch the server EC2 instance.
       #
@@ -364,14 +406,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+      #
       # @option params [String] :backup_id
       #   If you specify this field, AWS OpsWorks for Chef Automate creates the
       #   server by using the backup represented by BackupId.
+      #
       # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateServerResponse#server #Server} => Types::Server
+      #   * {Types::CreateServerResponse#server #server} => Types::Server
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_server({
       #     disable_automated_backup: false,
       #     engine: "String",
@@ -397,6 +442,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.server.backup_retention_count #=> Integer
       #   resp.server.server_name #=> String
       #   resp.server.created_at #=> Time
@@ -422,6 +468,7 @@ module Aws
       #   resp.server.subnet_ids #=> Array
       #   resp.server.subnet_ids[0] #=> String
       #   resp.server.server_arn #=> String
+      #
       # @overload create_server(params = {})
       # @param [Hash] params ({})
       def create_server(params = {}, options = {})
@@ -437,16 +484,20 @@ module Aws
       # A `ResourceNotFoundException` is thrown when the backup does not
       # exist. A `ValidationException` is thrown when parameters of the
       # request are not valid.
+      #
       # @option params [required, String] :backup_id
       #   The ID of the backup to delete. Run the DescribeBackups command to get
       #   a list of backup IDs. Backup IDs are in the format
       #   `ServerName-yyyyMMddHHmmssSSS`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_backup({
       #     backup_id: "BackupId", # required
       #   })
+      #
       # @overload delete_backup(params = {})
       # @param [Hash] params ({})
       def delete_backup(params = {}, options = {})
@@ -466,14 +517,18 @@ module Aws
       # A `ResourceNotFoundException` is thrown when the server does not
       # exist. A `ValidationException` is raised when parameters of the
       # request are invalid.
+      #
       # @option params [required, String] :server_name
       #   The ID of the server to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_server({
       #     server_name: "ServerName", # required
       #   })
+      #
       # @overload delete_server(params = {})
       # @param [Hash] params ({})
       def delete_server(params = {}, options = {})
@@ -485,18 +540,22 @@ module Aws
       # limits before they are reached or exceeded.
       #
       # This operation is synchronous.
+      #
       # @return [Types::DescribeAccountAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAccountAttributesResponse#attributes #Attributes} => Array&lt;Types::AccountAttribute&gt;
+      #   * {Types::DescribeAccountAttributesResponse#attributes #attributes} => Array&lt;Types::AccountAttribute&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_account_attributes()
       #
       # @example Response structure
+      #
       #   resp.attributes #=> Array
       #   resp.attributes[0].name #=> String
       #   resp.attributes[0].maximum #=> Integer
       #   resp.attributes[0].used #=> Integer
+      #
       # @overload describe_account_attributes(params = {})
       # @param [Hash] params ({})
       def describe_account_attributes(params = {}, options = {})
@@ -513,10 +572,13 @@ module Aws
       # A `ResourceNotFoundException` is thrown when the backup does not
       # exist. A `ValidationException` is raised when parameters of the
       # request are invalid.
+      #
       # @option params [String] :backup_id
       #   Describes a single backup.
+      #
       # @option params [String] :server_name
       #   Returns backups for the server with the specified ServerName.
+      #
       # @option params [String] :next_token
       #   NextToken is a string that is returned in some command responses. It
       #   indicates that not all entries have been returned, and that you must
@@ -526,18 +588,21 @@ module Aws
       #   are no more results, the response object's `nextToken` parameter
       #   value is `null`. Setting a `nextToken` value that was not returned in
       #   your previous results causes an `InvalidNextTokenException` to occur.
+      #
       # @option params [Integer] :max_results
       #   To receive a paginated response, use this parameter to specify the
       #   maximum number of results to be returned with a single call. If the
       #   number of available results exceeds this maximum, the response
       #   includes a `NextToken` value that you can assign to the `NextToken`
       #   request parameter to get the next set of results.
+      #
       # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeBackupsResponse#backups #Backups} => Array&lt;Types::Backup&gt;
-      #   * {Types::DescribeBackupsResponse#next_token #NextToken} => String
+      #   * {Types::DescribeBackupsResponse#backups #backups} => Array&lt;Types::Backup&gt;
+      #   * {Types::DescribeBackupsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_backups({
       #     backup_id: "BackupId",
       #     server_name: "ServerName",
@@ -546,6 +611,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.backups #=> Array
       #   resp.backups[0].backup_arn #=> String
       #   resp.backups[0].backup_id #=> String
@@ -574,6 +640,7 @@ module Aws
       #   resp.backups[0].tools_version #=> String
       #   resp.backups[0].user_arn #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_backups(params = {})
       # @param [Hash] params ({})
       def describe_backups(params = {}, options = {})
@@ -589,8 +656,10 @@ module Aws
       # A `ResourceNotFoundException` is thrown when the server does not
       # exist. A `ValidationException` is raised when parameters of the
       # request are invalid.
+      #
       # @option params [required, String] :server_name
       #   The name of the server for which you want to view events.
+      #
       # @option params [String] :next_token
       #   NextToken is a string that is returned in some command responses. It
       #   indicates that not all entries have been returned, and that you must
@@ -600,18 +669,21 @@ module Aws
       #   are no more results, the response object's `nextToken` parameter
       #   value is `null`. Setting a `nextToken` value that was not returned in
       #   your previous results causes an `InvalidNextTokenException` to occur.
+      #
       # @option params [Integer] :max_results
       #   To receive a paginated response, use this parameter to specify the
       #   maximum number of results to be returned with a single call. If the
       #   number of available results exceeds this maximum, the response
       #   includes a `NextToken` value that you can assign to the `NextToken`
       #   request parameter to get the next set of results.
+      #
       # @return [Types::DescribeEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEventsResponse#server_events #ServerEvents} => Array&lt;Types::ServerEvent&gt;
-      #   * {Types::DescribeEventsResponse#next_token #NextToken} => String
+      #   * {Types::DescribeEventsResponse#server_events #server_events} => Array&lt;Types::ServerEvent&gt;
+      #   * {Types::DescribeEventsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_events({
       #     server_name: "ServerName", # required
       #     next_token: "NextToken",
@@ -619,12 +691,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.server_events #=> Array
       #   resp.server_events[0].created_at #=> Time
       #   resp.server_events[0].server_name #=> String
       #   resp.server_events[0].message #=> String
       #   resp.server_events[0].log_url #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_events(params = {})
       # @param [Hash] params ({})
       def describe_events(params = {}, options = {})
@@ -633,19 +707,24 @@ module Aws
       end
 
       # @option params [required, String] :node_association_status_token
+      #
       # @option params [required, String] :server_name
+      #
       # @return [Types::DescribeNodeAssociationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeNodeAssociationStatusResponse#node_association_status #NodeAssociationStatus} => String
+      #   * {Types::DescribeNodeAssociationStatusResponse#node_association_status #node_association_status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_node_association_status({
       #     node_association_status_token: "NodeAssociationStatusToken", # required
       #     server_name: "ServerName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.node_association_status #=> String, one of "SUCCESS", "FAILED", "IN_PROGRESS"
+      #
       # @overload describe_node_association_status(params = {})
       # @param [Hash] params ({})
       def describe_node_association_status(params = {}, options = {})
@@ -663,8 +742,10 @@ module Aws
       # A `ResourceNotFoundException` is thrown when the server does not
       # exist. A `ValidationException` is raised when parameters of the
       # request are invalid.
+      #
       # @option params [String] :server_name
       #   Describes the server with the specified ServerName.
+      #
       # @option params [String] :next_token
       #   NextToken is a string that is returned in some command responses. It
       #   indicates that not all entries have been returned, and that you must
@@ -674,18 +755,21 @@ module Aws
       #   are no more results, the response object's `nextToken` parameter
       #   value is `null`. Setting a `nextToken` value that was not returned in
       #   your previous results causes an `InvalidNextTokenException` to occur.
+      #
       # @option params [Integer] :max_results
       #   To receive a paginated response, use this parameter to specify the
       #   maximum number of results to be returned with a single call. If the
       #   number of available results exceeds this maximum, the response
       #   includes a `NextToken` value that you can assign to the `NextToken`
       #   request parameter to get the next set of results.
+      #
       # @return [Types::DescribeServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeServersResponse#servers #Servers} => Array&lt;Types::Server&gt;
-      #   * {Types::DescribeServersResponse#next_token #NextToken} => String
+      #   * {Types::DescribeServersResponse#servers #servers} => Array&lt;Types::Server&gt;
+      #   * {Types::DescribeServersResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_servers({
       #     server_name: "ServerName",
       #     next_token: "NextToken",
@@ -693,6 +777,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.servers #=> Array
       #   resp.servers[0].backup_retention_count #=> Integer
       #   resp.servers[0].server_name #=> String
@@ -720,6 +805,7 @@ module Aws
       #   resp.servers[0].subnet_ids[0] #=> String
       #   resp.servers[0].server_arn #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_servers(params = {})
       # @param [Hash] params ({})
       def describe_servers(params = {}, options = {})
@@ -728,13 +814,17 @@ module Aws
       end
 
       # @option params [required, String] :server_name
+      #
       # @option params [required, String] :node_name
+      #
       # @option params [Array<Types::EngineAttribute>] :engine_attributes
+      #
       # @return [Types::DisassociateNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DisassociateNodeResponse#node_association_status_token #NodeAssociationStatusToken} => String
+      #   * {Types::DisassociateNodeResponse#node_association_status_token #node_association_status_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disassociate_node({
       #     server_name: "ServerName", # required
       #     node_name: "NodeName", # required
@@ -747,7 +837,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.node_association_status_token #=> String
+      #
       # @overload disassociate_node(params = {})
       # @param [Hash] params ({})
       def disassociate_node(params = {}, options = {})
@@ -768,28 +860,35 @@ module Aws
       # state. A `ResourceNotFoundException` is thrown when the server does
       # not exist. A `ValidationException` is raised when parameters of the
       # request are invalid.
+      #
       # @option params [required, String] :backup_id
       #   The ID of the backup that you want to use to restore a server.
+      #
       # @option params [required, String] :server_name
       #   The name of the server that you want to restore.
+      #
       # @option params [String] :instance_type
       #   The type of the instance to create. Valid values must be specified in
       #   the following format: `^([cm][34]|t2).*` For example, `c3.large`. If
       #   you do not specify this parameter, RestoreServer uses the instance
       #   type from the specified backup.
+      #
       # @option params [String] :key_pair
       #   The name of the key pair to set on the new EC2 instance. This can be
       #   helpful if any of the administrators who manage the server no longer
       #   have the SSH key.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_server({
       #     backup_id: "BackupId", # required
       #     server_name: "ServerName", # required
       #     instance_type: "String",
       #     key_pair: "KeyPair",
       #   })
+      #
       # @overload restore_server(params = {})
       # @param [Hash] params ({})
       def restore_server(params = {}, options = {})
@@ -807,18 +906,22 @@ module Aws
       # `ResourceNotFoundException` is thrown when the server does not exist.
       # A `ValidationException` is raised when parameters of the request are
       # invalid.
+      #
       # @option params [required, String] :server_name
       #   The name of the server on which to run maintenance.
+      #
       # @return [Types::StartMaintenanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartMaintenanceResponse#server #Server} => Types::Server
+      #   * {Types::StartMaintenanceResponse#server #server} => Types::Server
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_maintenance({
       #     server_name: "ServerName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.server.backup_retention_count #=> Integer
       #   resp.server.server_name #=> String
       #   resp.server.created_at #=> Time
@@ -844,6 +947,7 @@ module Aws
       #   resp.server.subnet_ids #=> Array
       #   resp.server.subnet_ids[0] #=> String
       #   resp.server.server_arn #=> String
+      #
       # @overload start_maintenance(params = {})
       # @param [Hash] params ({})
       def start_maintenance(params = {}, options = {})
@@ -854,13 +958,17 @@ module Aws
       # Updates settings for a server.
       #
       # This operation is synchronous.
+      #
       # @option params [Boolean] :disable_automated_backup
       #   Setting DisableAutomatedBackup to `true` disables automated or
       #   scheduled backups. Automated backups are enabled by default.
+      #
       # @option params [Integer] :backup_retention_count
       #   Sets the number of automated backups that you want to keep.
+      #
       # @option params [required, String] :server_name
       #   The name of the server to update.
+      #
       # @option params [String] :preferred_maintenance_window
       #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
       #
@@ -868,6 +976,7 @@ module Aws
       #
       #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
       #   Sat, Sun.
+      #
       # @option params [String] :preferred_backup_window
       #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
       #
@@ -875,11 +984,13 @@ module Aws
       #
       #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
       #   Sat, Sun.
+      #
       # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateServerResponse#server #Server} => Types::Server
+      #   * {Types::UpdateServerResponse#server #server} => Types::Server
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_server({
       #     disable_automated_backup: false,
       #     backup_retention_count: 1,
@@ -889,6 +1000,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.server.backup_retention_count #=> Integer
       #   resp.server.server_name #=> String
       #   resp.server.created_at #=> Time
@@ -914,6 +1026,7 @@ module Aws
       #   resp.server.subnet_ids #=> Array
       #   resp.server.subnet_ids[0] #=> String
       #   resp.server.server_arn #=> String
+      #
       # @overload update_server(params = {})
       # @param [Hash] params ({})
       def update_server(params = {}, options = {})
@@ -937,17 +1050,22 @@ module Aws
       # `ResourceNotFoundException` is thrown when the server does not exist.
       # A `ValidationException` is raised when parameters of the request are
       # invalid.
+      #
       # @option params [required, String] :server_name
       #   The name of the server to update.
+      #
       # @option params [required, String] :attribute_name
       #   The name of the engine attribute to update.
+      #
       # @option params [String] :attribute_value
       #   The value to set for the attribute.
+      #
       # @return [Types::UpdateServerEngineAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateServerEngineAttributesResponse#server #Server} => Types::Server
+      #   * {Types::UpdateServerEngineAttributesResponse#server #server} => Types::Server
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_server_engine_attributes({
       #     server_name: "ServerName", # required
       #     attribute_name: "AttributeName", # required
@@ -955,6 +1073,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.server.backup_retention_count #=> Integer
       #   resp.server.server_name #=> String
       #   resp.server.created_at #=> Time
@@ -980,6 +1099,7 @@ module Aws
       #   resp.server.subnet_ids #=> Array
       #   resp.server.subnet_ids[0] #=> String
       #   resp.server.server_arn #=> String
+      #
       # @overload update_server_engine_attributes(params = {})
       # @param [Hash] params ({})
       def update_server_engine_attributes(params = {}, options = {})

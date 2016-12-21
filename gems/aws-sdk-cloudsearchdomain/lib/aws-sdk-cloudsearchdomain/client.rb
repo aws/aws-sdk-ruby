@@ -76,31 +76,42 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [String] :sigv4_region
       #   Only needed when sending authenticated/signed requests to a Cloud
       #   Search domain and the endpoint does not contain the region name.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -109,9 +120,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -147,6 +160,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html
+      #
       # @option params [String] :cursor
       #   Retrieves a cursor value you can use to page through large result
       #   sets. Use the `size` parameter to control the number of hits to
@@ -162,6 +176,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html
+      #
       # @option params [String] :expr
       #   Defines one or more numeric expressions that can be used to sort
       #   results or specify search or filter criteria. You can also specify
@@ -180,6 +195,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html#writing-expressions
+      #
       # @option params [String] :facet
       #   Specifies one or more fields for which to get facet information, and
       #   options that control how the facet information is returned. Each
@@ -242,6 +258,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-ranges.html
       #   [2]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/faceting.html
+      #
       # @option params [String] :filter_query
       #   Specifies a structured query that filters the results of a search
       #   without affecting how the results are scored and sorted. You use
@@ -258,6 +275,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/filtering-results.html
+      #
       # @option params [String] :highlight
       #   Retrieves highlights for matches in the specified `text` or
       #   `text-array` fields. Each specified field must be highlight enabled in
@@ -289,6 +307,7 @@ module Aws
       #
       #   `\{ "actors": \{\}, "title": \{"format": "text","max_phrases":
       #   2,"pre_tag": "","post_tag": ""\} \}`
+      #
       # @option params [Boolean] :partial
       #   Enables partial results to be returned if one or more index partitions
       #   are unavailable. When your search index is partitioned across multiple
@@ -302,6 +321,7 @@ module Aws
       #   rather than displaying no results, you could display the partial
       #   results and a message indicating that the results might be incomplete
       #   due to a temporary system outage.
+      #
       # @option params [required, String] :query
       #   Specifies the search criteria for the request. How you specify the
       #   search criteria depends on the query parser used for the request and
@@ -316,6 +336,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching.html
+      #
       # @option params [String] :query_options
       #   Configures options for the query parser specified in the `queryParser`
       #   parameter. You specify the options in JSON using the following form
@@ -412,6 +433,7 @@ module Aws
       #     `"tieBreaker":0`. Set to 1 to sum the scores from all fields (pure
       #     sum): `"tieBreaker":1`. Valid values: 0.0 to 1.0. Default: 0.0.
       #     Valid for: `dismax`.
+      #
       # @option params [String] :query_parser
       #   Specifies which query parser to use to process the request. If
       #   `queryParser` is not specified, Amazon CloudSearch uses the `simple`
@@ -449,6 +471,7 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/searching-compound-queries.html
       #   [3]: http://lucene.apache.org/core/4_6_0/queryparser/org/apache/lucene/queryparser/classic/package-summary.html#package_description
       #   [4]: http://wiki.apache.org/solr/DisMaxQParserPlugin#Query_Syntax
+      #
       # @option params [String] :return
       #   Specifies the field and expression values to include in the response.
       #   Multiple fields or expressions are specified as a comma-separated
@@ -456,9 +479,11 @@ module Aws
       #   (`_all_fields`). To return only the document IDs for the matching
       #   documents, specify `_no_fields`. To retrieve the relevance score
       #   calculated for each document, specify `_score`.
+      #
       # @option params [Integer] :size
       #   Specifies the maximum number of search hits to include in the
       #   response.
+      #
       # @option params [String] :sort
       #   Specifies the fields or custom expressions to use to sort the search
       #   results. Multiple fields or expressions are specified as a
@@ -476,6 +501,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/sorting-results.html
+      #
       # @option params [Integer] :start
       #   Specifies the offset of the first search hit you want to return. Note
       #   that the result set is zero-based; the first result is at index 0. You
@@ -488,12 +514,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/paginating-results.html
+      #
       # @option params [String] :stats
       #   Specifies one or more fields for which to get statistics information.
       #   Each specified field must be facet-enabled in the domain
       #   configuration. The fields are specified in JSON using the form:
       #
       #    `\{"FIELD-A":\{\},"FIELD-B":\{\}\}` There are currently no options supported for statistics.
+      #
       # @return [Types::SearchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SearchResponse#status #status} => Types::SearchStatus
@@ -502,6 +530,7 @@ module Aws
       #   * {Types::SearchResponse#stats #stats} => Hash&lt;String,Types::FieldStats&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.search({
       #     cursor: "Cursor",
       #     expr: "Expr",
@@ -520,6 +549,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.status.timems #=> Integer
       #   resp.status.rid #=> String
       #   resp.hits.found #=> Integer
@@ -547,6 +577,7 @@ module Aws
       #   resp.stats["String"].sum_of_squares #=> Float
       #   resp.stats["String"].mean #=> String
       #   resp.stats["String"].stddev #=> Float
+      #
       # @overload search(params = {})
       # @param [Hash] params ({})
       def search(params = {}, options = {})
@@ -576,18 +607,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html
+      #
       # @option params [required, String] :query
       #   Specifies the string for which you want to get suggestions.
+      #
       # @option params [required, String] :suggester
       #   Specifies the name of the suggester to use to find suggested matches.
+      #
       # @option params [Integer] :size
       #   Specifies the maximum number of suggestions to return.
+      #
       # @return [Types::SuggestResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SuggestResponse#status #status} => Types::SuggestStatus
       #   * {Types::SuggestResponse#suggest #suggest} => Types::SuggestModel
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.suggest({
       #     query: "Query", # required
       #     suggester: "Suggester", # required
@@ -595,6 +631,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.status.timems #=> Integer
       #   resp.status.rid #=> String
       #   resp.suggest.query #=> String
@@ -603,6 +640,7 @@ module Aws
       #   resp.suggest.suggestions[0].suggestion #=> String
       #   resp.suggest.suggestions[0].score #=> Integer
       #   resp.suggest.suggestions[0].id #=> String
+      #
       # @overload suggest(params = {})
       # @param [Hash] params ({})
       def suggest(params = {}, options = {})
@@ -639,14 +677,17 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html
       # [2]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/uploading-data.html
+      #
       # @option params [required, String, IO] :documents
       #   A batch of documents formatted in JSON or HTML.
+      #
       # @option params [required, String] :content_type
       #   The format of the batch you are uploading. Amazon CloudSearch supports
       #   two document batch formats:
       #
       #   * application/json
       #   * application/xml
+      #
       # @return [Types::UploadDocumentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UploadDocumentsResponse#status #status} => String
@@ -655,17 +696,20 @@ module Aws
       #   * {Types::UploadDocumentsResponse#warnings #warnings} => Array&lt;Types::DocumentServiceWarning&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.upload_documents({
       #     documents: "data", # required
       #     content_type: "application/json", # required, accepts application/json, application/xml
       #   })
       #
       # @example Response structure
+      #
       #   resp.status #=> String
       #   resp.adds #=> Integer
       #   resp.deletes #=> Integer
       #   resp.warnings #=> Array
       #   resp.warnings[0].message #=> String
+      #
       # @overload upload_documents(params = {})
       # @param [Hash] params ({})
       def upload_documents(params = {}, options = {})

@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -155,12 +170,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+      #
       # @option params [required, String] :directory_id
       #   Identifier (ID) of the directory to which to add the address block.
+      #
       # @option params [required, Array<Types::IpRoute>] :ip_routes
       #   IP address blocks, using CIDR format, of the traffic to route. This is
       #   often the IP address block of the DNS server used for your on-premises
       #   domain.
+      #
       # @option params [Boolean] :update_security_group_for_directory_controllers
       #   If set to true, updates the inbound and outbound rules of the security
       #   group that has the description: "AWS created security group for
@@ -214,9 +232,11 @@ module Aws
       #
       #   These security rules impact an internal network interface that is not
       #   exposed publicly.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_ip_routes({
       #     directory_id: "DirectoryId", # required
       #     ip_routes: [ # required
@@ -227,6 +247,7 @@ module Aws
       #     ],
       #     update_security_group_for_directory_controllers: false,
       #   })
+      #
       # @overload add_ip_routes(params = {})
       # @param [Hash] params ({})
       def add_ip_routes(params = {}, options = {})
@@ -238,13 +259,17 @@ module Aws
       # Services directory. Each directory can have a maximum of 50 tags. Each
       # tag consists of a key and optional value. Tag keys must be unique to
       # each resource.
+      #
       # @option params [required, String] :resource_id
       #   Identifier (ID) for the directory to which to add the tag.
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The tags to be assigned to the Amazon Directory Services directory.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_resource({
       #     resource_id: "ResourceId", # required
       #     tags: [ # required
@@ -254,6 +279,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
       def add_tags_to_resource(params = {}, options = {})
@@ -266,18 +292,23 @@ module Aws
       # controllers, the task can no longer be canceled. A schema extension
       # can be canceled during any of the following states; `Initializing`,
       # `CreatingSnapshot`, and `UpdatingSchema`.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory whose schema extension will be
       #   canceled.
+      #
       # @option params [required, String] :schema_extension_id
       #   The identifier of the schema extension that will be canceled.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.cancel_schema_extension({
       #     directory_id: "DirectoryId", # required
       #     schema_extension_id: "SchemaExtensionId", # required
       #   })
+      #
       # @overload cancel_schema_extension(params = {})
       # @param [Hash] params ({})
       def cancel_schema_extension(params = {}, options = {})
@@ -296,25 +327,33 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+      #
       # @option params [required, String] :name
       #   The fully-qualified name of the on-premises directory, such as
       #   `corp.example.com`.
+      #
       # @option params [String] :short_name
       #   The NetBIOS name of the on-premises directory, such as `CORP`.
+      #
       # @option params [required, String] :password
       #   The password for the on-premises user account.
+      #
       # @option params [String] :description
       #   A textual description for the directory.
+      #
       # @option params [required, String] :size
       #   The size of the directory.
+      #
       # @option params [required, Types::DirectoryConnectSettings] :connect_settings
       #   A DirectoryConnectSettings object that contains additional information
       #   for the operation.
+      #
       # @return [Types::ConnectDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ConnectDirectoryResult#directory_id #DirectoryId} => String
+      #   * {Types::ConnectDirectoryResult#directory_id #directory_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.connect_directory({
       #     name: "DirectoryName", # required
       #     short_name: "DirectoryShortName",
@@ -330,7 +369,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.directory_id #=> String
+      #
       # @overload connect_directory(params = {})
       # @param [Hash] params ({})
       def connect_directory(params = {}, options = {})
@@ -344,28 +385,34 @@ module Aws
       #
       # After an alias has been created, it cannot be deleted or reused, so
       # this operation should only be used when absolutely necessary.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to create the alias.
+      #
       # @option params [required, String] :alias
       #   The requested alias.
       #
       #   The alias must be unique amongst all aliases in AWS. This operation
       #   throws an `EntityAlreadyExistsException` error if the alias already
       #   exists.
+      #
       # @return [Types::CreateAliasResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateAliasResult#directory_id #DirectoryId} => String
-      #   * {Types::CreateAliasResult#alias #Alias} => String
+      #   * {Types::CreateAliasResult#directory_id #directory_id} => String
+      #   * {Types::CreateAliasResult#alias #alias} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_alias({
       #     directory_id: "DirectoryId", # required
       #     alias: "AliasName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.directory_id #=> String
       #   resp.alias #=> String
+      #
       # @overload create_alias(params = {})
       # @param [Hash] params ({})
       def create_alias(params = {}, options = {})
@@ -375,26 +422,33 @@ module Aws
 
       # Creates a computer account in the specified directory, and joins the
       # computer to the directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory in which to create the computer
       #   account.
+      #
       # @option params [required, String] :computer_name
       #   The name of the computer account.
+      #
       # @option params [required, String] :password
       #   A one-time password that is used to join the computer to the
       #   directory. You should generate a random, strong password to use for
       #   this parameter.
+      #
       # @option params [String] :organizational_unit_distinguished_name
       #   The fully-qualified distinguished name of the organizational unit to
       #   place the computer account in.
+      #
       # @option params [Array<Types::Attribute>] :computer_attributes
       #   An array of Attribute objects that contain any LDAP attributes to
       #   apply to the computer account.
+      #
       # @return [Types::CreateComputerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateComputerResult#computer #Computer} => Types::Computer
+      #   * {Types::CreateComputerResult#computer #computer} => Types::Computer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_computer({
       #     directory_id: "DirectoryId", # required
       #     computer_name: "ComputerName", # required
@@ -409,11 +463,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.computer.computer_id #=> String
       #   resp.computer.computer_name #=> String
       #   resp.computer.computer_attributes #=> Array
       #   resp.computer.computer_attributes[0].name #=> String
       #   resp.computer.computer_attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #
       # @overload create_computer(params = {})
       # @param [Hash] params ({})
       def create_computer(params = {}, options = {})
@@ -425,23 +481,29 @@ module Aws
       # Conditional forwarders are required in order to set up a trust
       # relationship with another domain. The conditional forwarder points to
       # the trusted domain.
+      #
       # @option params [required, String] :directory_id
       #   The directory ID of the AWS directory for which you are creating the
       #   conditional forwarder.
+      #
       # @option params [required, String] :remote_domain_name
       #   The fully qualified domain name (FQDN) of the remote domain with which
       #   you will set up a trust relationship.
+      #
       # @option params [required, Array<String>] :dns_ip_addrs
       #   The IP addresses of the remote DNS server associated with
       #   RemoteDomainName.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_conditional_forwarder({
       #     directory_id: "DirectoryId", # required
       #     remote_domain_name: "RemoteDomainName", # required
       #     dns_ip_addrs: ["IpAddr"], # required
       #   })
+      #
       # @overload create_conditional_forwarder(params = {})
       # @param [Hash] params ({})
       def create_conditional_forwarder(params = {}, options = {})
@@ -460,27 +522,35 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+      #
       # @option params [required, String] :name
       #   The fully qualified name for the directory, such as
       #   `corp.example.com`.
+      #
       # @option params [String] :short_name
       #   The short name of the directory, such as `CORP`.
+      #
       # @option params [required, String] :password
       #   The password for the directory administrator. The directory creation
       #   process creates a directory administrator account with the username
       #   `Administrator` and this password.
+      #
       # @option params [String] :description
       #   A textual description for the directory.
+      #
       # @option params [required, String] :size
       #   The size of the directory.
+      #
       # @option params [Types::DirectoryVpcSettings] :vpc_settings
       #   A DirectoryVpcSettings object that contains additional information for
       #   the operation.
+      #
       # @return [Types::CreateDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDirectoryResult#directory_id #DirectoryId} => String
+      #   * {Types::CreateDirectoryResult#directory_id #directory_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_directory({
       #     name: "DirectoryName", # required
       #     short_name: "DirectoryShortName",
@@ -494,7 +564,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.directory_id #=> String
+      #
       # @overload create_directory(params = {})
       # @param [Hash] params ({})
       def create_directory(params = {}, options = {})
@@ -513,28 +585,35 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+      #
       # @option params [required, String] :name
       #   The fully qualified domain name for the directory, such as
       #   `corp.example.com`. This name will resolve inside your VPC only. It
       #   does not need to be publicly resolvable.
+      #
       # @option params [String] :short_name
       #   The NetBIOS name for your domain. A short identifier for your domain,
       #   such as `CORP`. If you don't specify a NetBIOS name, it will default
       #   to the first part of your directory DNS. For example, `CORP` for the
       #   directory DNS `corp.example.com`.
+      #
       # @option params [required, String] :password
       #   The password for the default administrative user named `Admin`.
+      #
       # @option params [String] :description
       #   A textual description for the directory. This label will appear on the
       #   AWS console `Directory Details` page after the directory is created.
+      #
       # @option params [required, Types::DirectoryVpcSettings] :vpc_settings
       #   Contains VPC information for the CreateDirectory or CreateMicrosoftAD
       #   operation.
+      #
       # @return [Types::CreateMicrosoftADResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateMicrosoftADResult#directory_id #DirectoryId} => String
+      #   * {Types::CreateMicrosoftADResult#directory_id #directory_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_microsoft_ad({
       #     name: "DirectoryName", # required
       #     short_name: "DirectoryShortName",
@@ -547,7 +626,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.directory_id #=> String
+      #
       # @overload create_microsoft_ad(params = {})
       # @param [Hash] params ({})
       def create_microsoft_ad(params = {}, options = {})
@@ -561,22 +642,28 @@ module Aws
       # <note markdown="1"> You cannot take snapshots of AD Connector directories.
       #
       #  </note>
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory of which to take a snapshot.
+      #
       # @option params [String] :name
       #   The descriptive name to apply to the snapshot.
+      #
       # @return [Types::CreateSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateSnapshotResult#snapshot_id #SnapshotId} => String
+      #   * {Types::CreateSnapshotResult#snapshot_id #snapshot_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_snapshot({
       #     directory_id: "DirectoryId", # required
       #     name: "SnapshotName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshot_id #=> String
+      #
       # @overload create_snapshot(params = {})
       # @param [Hash] params ({})
       def create_snapshot(params = {}, options = {})
@@ -594,27 +681,35 @@ module Aws
       # This action initiates the creation of the AWS side of a trust
       # relationship between a Microsoft AD in the AWS cloud and an external
       # domain.
+      #
       # @option params [required, String] :directory_id
       #   The Directory ID of the Microsoft AD in the AWS cloud for which to
       #   establish the trust relationship.
+      #
       # @option params [required, String] :remote_domain_name
       #   The Fully Qualified Domain Name (FQDN) of the external domain for
       #   which to create the trust relationship.
+      #
       # @option params [required, String] :trust_password
       #   The trust password. The must be the same password that was used when
       #   creating the trust relationship on the external domain.
+      #
       # @option params [required, String] :trust_direction
       #   The direction of the trust relationship.
+      #
       # @option params [String] :trust_type
       #   The trust relationship type.
+      #
       # @option params [Array<String>] :conditional_forwarder_ip_addrs
       #   The IP addresses of the remote DNS server associated with
       #   RemoteDomainName.
+      #
       # @return [Types::CreateTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateTrustResult#trust_id #TrustId} => String
+      #   * {Types::CreateTrustResult#trust_id #trust_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_trust({
       #     directory_id: "DirectoryId", # required
       #     remote_domain_name: "RemoteDomainName", # required
@@ -625,7 +720,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.trust_id #=> String
+      #
       # @overload create_trust(params = {})
       # @param [Hash] params ({})
       def create_trust(params = {}, options = {})
@@ -635,18 +732,23 @@ module Aws
 
       # Deletes a conditional forwarder that has been set up for your AWS
       # directory.
+      #
       # @option params [required, String] :directory_id
       #   The directory ID for which you are deleting the conditional forwarder.
+      #
       # @option params [required, String] :remote_domain_name
       #   The fully qualified domain name (FQDN) of the remote domain with which
       #   you are deleting the conditional forwarder.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_conditional_forwarder({
       #     directory_id: "DirectoryId", # required
       #     remote_domain_name: "RemoteDomainName", # required
       #   })
+      #
       # @overload delete_conditional_forwarder(params = {})
       # @param [Hash] params ({})
       def delete_conditional_forwarder(params = {}, options = {})
@@ -665,19 +767,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory to delete.
+      #
       # @return [Types::DeleteDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteDirectoryResult#directory_id #DirectoryId} => String
+      #   * {Types::DeleteDirectoryResult#directory_id #directory_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_directory({
       #     directory_id: "DirectoryId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.directory_id #=> String
+      #
       # @overload delete_directory(params = {})
       # @param [Hash] params ({})
       def delete_directory(params = {}, options = {})
@@ -686,19 +793,24 @@ module Aws
       end
 
       # Deletes a directory snapshot.
+      #
       # @option params [required, String] :snapshot_id
       #   The identifier of the directory snapshot to be deleted.
+      #
       # @return [Types::DeleteSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteSnapshotResult#snapshot_id #SnapshotId} => String
+      #   * {Types::DeleteSnapshotResult#snapshot_id #snapshot_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_snapshot({
       #     snapshot_id: "SnapshotId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshot_id #=> String
+      #
       # @overload delete_snapshot(params = {})
       # @param [Hash] params ({})
       def delete_snapshot(params = {}, options = {})
@@ -708,22 +820,28 @@ module Aws
 
       # Deletes an existing trust relationship between your Microsoft AD in
       # the AWS cloud and an external domain.
+      #
       # @option params [required, String] :trust_id
       #   The Trust ID of the trust relationship to be deleted.
+      #
       # @option params [Boolean] :delete_associated_conditional_forwarder
       #   Delete a conditional forwarder as part of a DeleteTrustRequest.
+      #
       # @return [Types::DeleteTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteTrustResult#trust_id #TrustId} => String
+      #   * {Types::DeleteTrustResult#trust_id #trust_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_trust({
       #     trust_id: "TrustId", # required
       #     delete_associated_conditional_forwarder: false,
       #   })
       #
       # @example Response structure
+      #
       #   resp.trust_id #=> String
+      #
       # @overload delete_trust(params = {})
       # @param [Hash] params ({})
       def delete_trust(params = {}, options = {})
@@ -733,19 +851,24 @@ module Aws
 
       # Removes the specified directory as a publisher to the specified SNS
       # topic.
+      #
       # @option params [required, String] :directory_id
       #   The Directory ID to remove as a publisher. This directory will no
       #   longer send messages to the specified SNS topic.
+      #
       # @option params [required, String] :topic_name
       #   The name of the SNS topic from which to remove the directory as a
       #   publisher.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_event_topic({
       #     directory_id: "DirectoryId", # required
       #     topic_name: "TopicName", # required
       #   })
+      #
       # @overload deregister_event_topic(params = {})
       # @param [Hash] params ({})
       def deregister_event_topic(params = {}, options = {})
@@ -758,29 +881,35 @@ module Aws
       # If no input parameters are provided for RemoteDomainNames, this
       # request describes all conditional forwarders for the specified
       # directory ID.
+      #
       # @option params [required, String] :directory_id
       #   The directory ID for which to get the list of associated conditional
       #   forwarders.
+      #
       # @option params [Array<String>] :remote_domain_names
       #   The fully qualified domain names (FQDN) of the remote domains for
       #   which to get the list of associated conditional forwarders. If this
       #   member is null, all conditional forwarders are returned.
+      #
       # @return [Types::DescribeConditionalForwardersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeConditionalForwardersResult#conditional_forwarders #ConditionalForwarders} => Array&lt;Types::ConditionalForwarder&gt;
+      #   * {Types::DescribeConditionalForwardersResult#conditional_forwarders #conditional_forwarders} => Array&lt;Types::ConditionalForwarder&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_conditional_forwarders({
       #     directory_id: "DirectoryId", # required
       #     remote_domain_names: ["RemoteDomainName"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.conditional_forwarders #=> Array
       #   resp.conditional_forwarders[0].remote_domain_name #=> String
       #   resp.conditional_forwarders[0].dns_ip_addrs #=> Array
       #   resp.conditional_forwarders[0].dns_ip_addrs[0] #=> String
       #   resp.conditional_forwarders[0].replication_scope #=> String, one of "Domain"
+      #
       # @overload describe_conditional_forwarders(params = {})
       # @param [Hash] params ({})
       def describe_conditional_forwarders(params = {}, options = {})
@@ -802,25 +931,30 @@ module Aws
       #
       # You can also specify a maximum number of return results with the
       # *Limit* parameter.
+      #
       # @option params [Array<String>] :directory_ids
       #   A list of identifiers of the directories for which to obtain the
       #   information. If this member is null, all directories that belong to
       #   the current account are returned.
       #
       #   An empty list results in an `InvalidParameterException` being thrown.
+      #
       # @option params [String] :next_token
       #   The *DescribeDirectoriesResult.NextToken* value from a previous call
       #   to DescribeDirectories. Pass null if this is the first call.
+      #
       # @option params [Integer] :limit
       #   The maximum number of items to return. If this value is zero, the
       #   maximum number of items is specified by the limitations of the
       #   operation.
+      #
       # @return [Types::DescribeDirectoriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDirectoriesResult#directory_descriptions #DirectoryDescriptions} => Array&lt;Types::DirectoryDescription&gt;
-      #   * {Types::DescribeDirectoriesResult#next_token #NextToken} => String
+      #   * {Types::DescribeDirectoriesResult#directory_descriptions #directory_descriptions} => Array&lt;Types::DirectoryDescription&gt;
+      #   * {Types::DescribeDirectoriesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_directories({
       #     directory_ids: ["DirectoryId"],
       #     next_token: "NextToken",
@@ -828,6 +962,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.directory_descriptions #=> Array
       #   resp.directory_descriptions[0].directory_id #=> String
       #   resp.directory_descriptions[0].name #=> String
@@ -870,6 +1005,7 @@ module Aws
       #   resp.directory_descriptions[0].stage_reason #=> String
       #   resp.directory_descriptions[0].sso_enabled #=> Boolean
       #   resp.next_token #=> String
+      #
       # @overload describe_directories(params = {})
       # @param [Hash] params ({})
       def describe_directories(params = {}, options = {})
@@ -882,33 +1018,39 @@ module Aws
       #
       # If no input parameters are provided, such as DirectoryId or TopicName,
       # this request describes all of the associations in the account.
+      #
       # @option params [String] :directory_id
       #   The Directory ID for which to get the list of associated SNS topics.
       #   If this member is null, associations for all Directory IDs are
       #   returned.
+      #
       # @option params [Array<String>] :topic_names
       #   A list of SNS topic names for which to obtain the information. If this
       #   member is null, all associations for the specified Directory ID are
       #   returned.
       #
       #   An empty list results in an `InvalidParameterException` being thrown.
+      #
       # @return [Types::DescribeEventTopicsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEventTopicsResult#event_topics #EventTopics} => Array&lt;Types::EventTopic&gt;
+      #   * {Types::DescribeEventTopicsResult#event_topics #event_topics} => Array&lt;Types::EventTopic&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_event_topics({
       #     directory_id: "DirectoryId",
       #     topic_names: ["TopicName"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_topics #=> Array
       #   resp.event_topics[0].directory_id #=> String
       #   resp.event_topics[0].topic_name #=> String
       #   resp.event_topics[0].topic_arn #=> String
       #   resp.event_topics[0].created_date_time #=> Time
       #   resp.event_topics[0].status #=> String, one of "Registered", "Topic not found", "Failed", "Deleted"
+      #
       # @overload describe_event_topics(params = {})
       # @param [Hash] params ({})
       def describe_event_topics(params = {}, options = {})
@@ -926,24 +1068,30 @@ module Aws
       #
       # You can also specify a maximum number of return results with the
       # *Limit* parameter.
+      #
       # @option params [String] :directory_id
       #   The identifier of the directory for which to retrieve snapshot
       #   information.
+      #
       # @option params [Array<String>] :snapshot_ids
       #   A list of identifiers of the snapshots to obtain the information for.
       #   If this member is null or empty, all snapshots are returned using the
       #   *Limit* and *NextToken* members.
+      #
       # @option params [String] :next_token
       #   The *DescribeSnapshotsResult.NextToken* value from a previous call to
       #   DescribeSnapshots. Pass null if this is the first call.
+      #
       # @option params [Integer] :limit
       #   The maximum number of objects to return.
+      #
       # @return [Types::DescribeSnapshotsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeSnapshotsResult#snapshots #Snapshots} => Array&lt;Types::Snapshot&gt;
-      #   * {Types::DescribeSnapshotsResult#next_token #NextToken} => String
+      #   * {Types::DescribeSnapshotsResult#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
+      #   * {Types::DescribeSnapshotsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_snapshots({
       #     directory_id: "DirectoryId",
       #     snapshot_ids: ["SnapshotId"],
@@ -952,6 +1100,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshots #=> Array
       #   resp.snapshots[0].directory_id #=> String
       #   resp.snapshots[0].snapshot_id #=> String
@@ -960,6 +1109,7 @@ module Aws
       #   resp.snapshots[0].status #=> String, one of "Creating", "Completed", "Failed"
       #   resp.snapshots[0].start_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload describe_snapshots(params = {})
       # @param [Hash] params ({})
       def describe_snapshots(params = {}, options = {})
@@ -972,26 +1122,32 @@ module Aws
       # If no input parameters are provided, such as DirectoryId or TrustIds,
       # this request describes all the trust relationships belonging to the
       # account.
+      #
       # @option params [String] :directory_id
       #   The Directory ID of the AWS directory that is a part of the requested
       #   trust relationship.
+      #
       # @option params [Array<String>] :trust_ids
       #   A list of identifiers of the trust relationships for which to obtain
       #   the information. If this member is null, all trust relationships that
       #   belong to the current account are returned.
       #
       #   An empty list results in an `InvalidParameterException` being thrown.
+      #
       # @option params [String] :next_token
       #   The *DescribeTrustsResult.NextToken* value from a previous call to
       #   DescribeTrusts. Pass null if this is the first call.
+      #
       # @option params [Integer] :limit
       #   The maximum number of objects to return.
+      #
       # @return [Types::DescribeTrustsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTrustsResult#trusts #Trusts} => Array&lt;Types::Trust&gt;
-      #   * {Types::DescribeTrustsResult#next_token #NextToken} => String
+      #   * {Types::DescribeTrustsResult#trusts #trusts} => Array&lt;Types::Trust&gt;
+      #   * {Types::DescribeTrustsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_trusts({
       #     directory_id: "DirectoryId",
       #     trust_ids: ["TrustId"],
@@ -1000,6 +1156,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.trusts #=> Array
       #   resp.trusts[0].directory_id #=> String
       #   resp.trusts[0].trust_id #=> String
@@ -1012,6 +1169,7 @@ module Aws
       #   resp.trusts[0].state_last_updated_date_time #=> Time
       #   resp.trusts[0].trust_state_reason #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_trusts(params = {})
       # @param [Hash] params ({})
       def describe_trusts(params = {}, options = {})
@@ -1022,14 +1180,18 @@ module Aws
       # Disables multi-factor authentication (MFA) with the Remote
       # Authentication Dial In User Service (RADIUS) server for an AD
       # Connector directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to disable MFA.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_radius({
       #     directory_id: "DirectoryId", # required
       #   })
+      #
       # @overload disable_radius(params = {})
       # @param [Hash] params ({})
       def disable_radius(params = {}, options = {})
@@ -1038,8 +1200,10 @@ module Aws
       end
 
       # Disables single-sign on for a directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to disable single-sign on.
+      #
       # @option params [String] :user_name
       #   The username of an alternate account to use to disable single-sign on.
       #   This is only used for AD Connector directories. This account must have
@@ -1050,18 +1214,22 @@ module Aws
       #   the *UserName* and *Password* parameters. These credentials are only
       #   used to disable single sign-on and are not stored by the service. The
       #   AD Connector service account is not changed.
+      #
       # @option params [String] :password
       #   The password of an alternate account to use to disable single-sign on.
       #   This is only used for AD Connector directories. For more information,
       #   see the *UserName* parameter.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_sso({
       #     directory_id: "DirectoryId", # required
       #     user_name: "UserName",
       #     password: "ConnectPassword",
       #   })
+      #
       # @overload disable_sso(params = {})
       # @param [Hash] params ({})
       def disable_sso(params = {}, options = {})
@@ -1072,14 +1240,18 @@ module Aws
       # Enables multi-factor authentication (MFA) with the Remote
       # Authentication Dial In User Service (RADIUS) server for an AD
       # Connector directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to enable MFA.
+      #
       # @option params [required, Types::RadiusSettings] :radius_settings
       #   A RadiusSettings object that contains information about the RADIUS
       #   server.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_radius({
       #     directory_id: "DirectoryId", # required
       #     radius_settings: { # required
@@ -1093,6 +1265,7 @@ module Aws
       #       use_same_username: false,
       #     },
       #   })
+      #
       # @overload enable_radius(params = {})
       # @param [Hash] params ({})
       def enable_radius(params = {}, options = {})
@@ -1101,8 +1274,10 @@ module Aws
       end
 
       # Enables single-sign on for a directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to enable single-sign on.
+      #
       # @option params [String] :user_name
       #   The username of an alternate account to use to enable single-sign on.
       #   This is only used for AD Connector directories. This account must have
@@ -1113,18 +1288,22 @@ module Aws
       #   *UserName* and *Password* parameters. These credentials are only used
       #   to enable single sign-on and are not stored by the service. The AD
       #   Connector service account is not changed.
+      #
       # @option params [String] :password
       #   The password of an alternate account to use to enable single-sign on.
       #   This is only used for AD Connector directories. For more information,
       #   see the *UserName* parameter.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_sso({
       #     directory_id: "DirectoryId", # required
       #     user_name: "UserName",
       #     password: "ConnectPassword",
       #   })
+      #
       # @overload enable_sso(params = {})
       # @param [Hash] params ({})
       def enable_sso(params = {}, options = {})
@@ -1133,14 +1312,17 @@ module Aws
       end
 
       # Obtains directory limit information for the current region.
+      #
       # @return [Types::GetDirectoryLimitsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDirectoryLimitsResult#directory_limits #DirectoryLimits} => Types::DirectoryLimits
+      #   * {Types::GetDirectoryLimitsResult#directory_limits #directory_limits} => Types::DirectoryLimits
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_directory_limits()
       #
       # @example Response structure
+      #
       #   resp.directory_limits.cloud_only_directories_limit #=> Integer
       #   resp.directory_limits.cloud_only_directories_current_count #=> Integer
       #   resp.directory_limits.cloud_only_directories_limit_reached #=> Boolean
@@ -1150,6 +1332,7 @@ module Aws
       #   resp.directory_limits.connected_directories_limit #=> Integer
       #   resp.directory_limits.connected_directories_current_count #=> Integer
       #   resp.directory_limits.connected_directories_limit_reached #=> Boolean
+      #
       # @overload get_directory_limits(params = {})
       # @param [Hash] params ({})
       def get_directory_limits(params = {}, options = {})
@@ -1158,21 +1341,26 @@ module Aws
       end
 
       # Obtains the manual snapshot limits for a directory.
+      #
       # @option params [required, String] :directory_id
       #   Contains the identifier of the directory to obtain the limits for.
+      #
       # @return [Types::GetSnapshotLimitsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSnapshotLimitsResult#snapshot_limits #SnapshotLimits} => Types::SnapshotLimits
+      #   * {Types::GetSnapshotLimitsResult#snapshot_limits #snapshot_limits} => Types::SnapshotLimits
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_snapshot_limits({
       #     directory_id: "DirectoryId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.snapshot_limits.manual_snapshots_limit #=> Integer
       #   resp.snapshot_limits.manual_snapshots_current_count #=> Integer
       #   resp.snapshot_limits.manual_snapshots_limit_reached #=> Boolean
+      #
       # @overload get_snapshot_limits(params = {})
       # @param [Hash] params ({})
       def get_snapshot_limits(params = {}, options = {})
@@ -1181,21 +1369,26 @@ module Aws
       end
 
       # Lists the address blocks that you have added to a directory.
+      #
       # @option params [required, String] :directory_id
       #   Identifier (ID) of the directory for which you want to retrieve the IP
       #   addresses.
+      #
       # @option params [String] :next_token
       #   The *ListIpRoutes.NextToken* value from a previous call to
       #   ListIpRoutes. Pass null if this is the first call.
+      #
       # @option params [Integer] :limit
       #   Maximum number of items to return. If this value is zero, the maximum
       #   number of items is specified by the limitations of the operation.
+      #
       # @return [Types::ListIpRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIpRoutesResult#ip_routes_info #IpRoutesInfo} => Array&lt;Types::IpRouteInfo&gt;
-      #   * {Types::ListIpRoutesResult#next_token #NextToken} => String
+      #   * {Types::ListIpRoutesResult#ip_routes_info #ip_routes_info} => Array&lt;Types::IpRouteInfo&gt;
+      #   * {Types::ListIpRoutesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_ip_routes({
       #     directory_id: "DirectoryId", # required
       #     next_token: "NextToken",
@@ -1203,6 +1396,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.ip_routes_info #=> Array
       #   resp.ip_routes_info[0].directory_id #=> String
       #   resp.ip_routes_info[0].cidr_ip #=> String
@@ -1211,6 +1405,7 @@ module Aws
       #   resp.ip_routes_info[0].ip_route_status_reason #=> String
       #   resp.ip_routes_info[0].description #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_ip_routes(params = {})
       # @param [Hash] params ({})
       def list_ip_routes(params = {}, options = {})
@@ -1219,20 +1414,25 @@ module Aws
       end
 
       # Lists all schema extensions applied to a Microsoft AD Directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory from which to retrieve the schema
       #   extension information.
+      #
       # @option params [String] :next_token
       #   The `ListSchemaExtensions.NextToken` value from a previous call to
       #   `ListSchemaExtensions`. Pass null if this is the first call.
+      #
       # @option params [Integer] :limit
       #   The maximum number of items to return.
+      #
       # @return [Types::ListSchemaExtensionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListSchemaExtensionsResult#schema_extensions_info #SchemaExtensionsInfo} => Array&lt;Types::SchemaExtensionInfo&gt;
-      #   * {Types::ListSchemaExtensionsResult#next_token #NextToken} => String
+      #   * {Types::ListSchemaExtensionsResult#schema_extensions_info #schema_extensions_info} => Array&lt;Types::SchemaExtensionInfo&gt;
+      #   * {Types::ListSchemaExtensionsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_schema_extensions({
       #     directory_id: "DirectoryId", # required
       #     next_token: "NextToken",
@@ -1240,6 +1440,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.schema_extensions_info #=> Array
       #   resp.schema_extensions_info[0].directory_id #=> String
       #   resp.schema_extensions_info[0].schema_extension_id #=> String
@@ -1249,6 +1450,7 @@ module Aws
       #   resp.schema_extensions_info[0].start_date_time #=> Time
       #   resp.schema_extensions_info[0].end_date_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_schema_extensions(params = {})
       # @param [Hash] params ({})
       def list_schema_extensions(params = {}, options = {})
@@ -1257,18 +1459,23 @@ module Aws
       end
 
       # Lists all tags on an Amazon Directory Services directory.
+      #
       # @option params [required, String] :resource_id
       #   Identifier (ID) of the directory for which you want to retrieve tags.
+      #
       # @option params [String] :next_token
       #   Reserved for future use.
+      #
       # @option params [Integer] :limit
       #   Reserved for future use.
+      #
       # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsForResourceResult#tags #Tags} => Array&lt;Types::Tag&gt;
-      #   * {Types::ListTagsForResourceResult#next_token #NextToken} => String
+      #   * {Types::ListTagsForResourceResult#tags #tags} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsForResourceResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_resource({
       #     resource_id: "ResourceId", # required
       #     next_token: "NextToken",
@@ -1276,10 +1483,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
       def list_tags_for_resource(params = {}, options = {})
@@ -1293,19 +1502,24 @@ module Aws
       # changes. You get notified if your directory goes from an Active status
       # to an Impaired or Inoperable status. You also receive a notification
       # when the directory returns to an Active status.
+      #
       # @option params [required, String] :directory_id
       #   The Directory ID that will publish status messages to the SNS topic.
+      #
       # @option params [required, String] :topic_name
       #   The SNS topic name to which the directory will publish status
       #   messages. This SNS topic must be in the same region as the specified
       #   Directory ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_event_topic({
       #     directory_id: "DirectoryId", # required
       #     topic_name: "TopicName", # required
       #   })
+      #
       # @overload register_event_topic(params = {})
       # @param [Hash] params ({})
       def register_event_topic(params = {}, options = {})
@@ -1314,18 +1528,23 @@ module Aws
       end
 
       # Removes IP address blocks from a directory.
+      #
       # @option params [required, String] :directory_id
       #   Identifier (ID) of the directory from which you want to remove the IP
       #   addresses.
+      #
       # @option params [required, Array<String>] :cidr_ips
       #   IP address blocks that you want to remove.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_ip_routes({
       #     directory_id: "DirectoryId", # required
       #     cidr_ips: ["CidrIp"], # required
       #   })
+      #
       # @overload remove_ip_routes(params = {})
       # @param [Hash] params ({})
       def remove_ip_routes(params = {}, options = {})
@@ -1334,17 +1553,22 @@ module Aws
       end
 
       # Removes tags from an Amazon Directory Services directory.
+      #
       # @option params [required, String] :resource_id
       #   Identifier (ID) of the directory from which to remove the tag.
+      #
       # @option params [required, Array<String>] :tag_keys
       #   The tag key (name) of the tag to be removed.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_resource({
       #     resource_id: "ResourceId", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      #
       # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_resource(params = {}, options = {})
@@ -1362,14 +1586,18 @@ module Aws
       # DescribeDirectories operation with the directory identifier. When the
       # **DirectoryDescription.Stage** value changes to `Active`, the restore
       # operation is complete.
+      #
       # @option params [required, String] :snapshot_id
       #   The identifier of the snapshot to restore from.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_from_snapshot({
       #     snapshot_id: "SnapshotId", # required
       #   })
+      #
       # @overload restore_from_snapshot(params = {})
       # @param [Hash] params ({})
       def restore_from_snapshot(params = {}, options = {})
@@ -1378,22 +1606,28 @@ module Aws
       end
 
       # Applies a schema extension to a Microsoft AD directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which the schema extension will be
       #   applied to.
+      #
       # @option params [required, Boolean] :create_snapshot_before_schema_extension
       #   If true, creates a snapshot of the directory before applying the
       #   schema extension.
+      #
       # @option params [required, String] :ldif_content
       #   The LDIF file represented as a string. The file size can be no larger
       #   than 1MB.
+      #
       # @option params [required, String] :description
       #   A description of the schema extension.
+      #
       # @return [Types::StartSchemaExtensionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartSchemaExtensionResult#schema_extension_id #SchemaExtensionId} => String
+      #   * {Types::StartSchemaExtensionResult#schema_extension_id #schema_extension_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_schema_extension({
       #     directory_id: "DirectoryId", # required
       #     create_snapshot_before_schema_extension: false, # required
@@ -1402,7 +1636,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.schema_extension_id #=> String
+      #
       # @overload start_schema_extension(params = {})
       # @param [Hash] params ({})
       def start_schema_extension(params = {}, options = {})
@@ -1412,23 +1648,29 @@ module Aws
 
       # Updates a conditional forwarder that has been set up for your AWS
       # directory.
+      #
       # @option params [required, String] :directory_id
       #   The directory ID of the AWS directory for which to update the
       #   conditional forwarder.
+      #
       # @option params [required, String] :remote_domain_name
       #   The fully qualified domain name (FQDN) of the remote domain with which
       #   you will set up a trust relationship.
+      #
       # @option params [required, Array<String>] :dns_ip_addrs
       #   The updated IP addresses of the remote DNS server associated with the
       #   conditional forwarder.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_conditional_forwarder({
       #     directory_id: "DirectoryId", # required
       #     remote_domain_name: "RemoteDomainName", # required
       #     dns_ip_addrs: ["IpAddr"], # required
       #   })
+      #
       # @overload update_conditional_forwarder(params = {})
       # @param [Hash] params ({})
       def update_conditional_forwarder(params = {}, options = {})
@@ -1438,15 +1680,19 @@ module Aws
 
       # Updates the Remote Authentication Dial In User Service (RADIUS) server
       # information for an AD Connector directory.
+      #
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to update the RADIUS server
       #   information.
+      #
       # @option params [required, Types::RadiusSettings] :radius_settings
       #   A RadiusSettings object that contains information about the RADIUS
       #   server.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_radius({
       #     directory_id: "DirectoryId", # required
       #     radius_settings: { # required
@@ -1460,6 +1706,7 @@ module Aws
       #       use_same_username: false,
       #     },
       #   })
+      #
       # @overload update_radius(params = {})
       # @param [Hash] params ({})
       def update_radius(params = {}, options = {})
@@ -1472,19 +1719,24 @@ module Aws
       #
       # This action verifies a trust relationship between your Microsoft AD in
       # the AWS cloud and an external domain.
+      #
       # @option params [required, String] :trust_id
       #   The unique Trust ID of the trust relationship to verify.
+      #
       # @return [Types::VerifyTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::VerifyTrustResult#trust_id #TrustId} => String
+      #   * {Types::VerifyTrustResult#trust_id #trust_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.verify_trust({
       #     trust_id: "TrustId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.trust_id #=> String
+      #
       # @overload verify_trust(params = {})
       # @param [Hash] params ({})
       def verify_trust(params = {}, options = {})

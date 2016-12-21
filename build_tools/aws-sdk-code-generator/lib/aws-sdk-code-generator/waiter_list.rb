@@ -12,7 +12,7 @@ module AwsSdkCodeGenerator
           delay: waiter['delay'].to_i,
           max_attempts: waiter['maxAttempts'].to_i,
         )
-      end
+      end.sort_by(&:name)
       @waiters.last.last = true unless @waiters.empty?
     end
 

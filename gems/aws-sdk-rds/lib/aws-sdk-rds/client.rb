@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -137,19 +151,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The name of the DB cluster to associate the IAM role with.
+      #
       # @option params [required, String] :role_arn
       #   The Amazon Resource Name (ARN) of the IAM role to associate with the
       #   Aurora DB cluster, for example
       #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_role_to_db_cluster({
       #     db_cluster_identifier: "String", # required
       #     role_arn: "String", # required
       #   })
+      #
       # @overload add_role_to_db_cluster(params = {})
       # @param [Hash] params ({})
       def add_role_to_db_cluster(params = {}, options = {})
@@ -159,9 +178,11 @@ module Aws
 
       # Adds a source identifier to an existing RDS event notification
       # subscription.
+      #
       # @option params [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to add a
       #   source identifier to.
+      #
       # @option params [required, String] :source_identifier
       #   The identifier of the event source to be added. An identifier must
       #   begin with a letter and must contain only ASCII letters, digits, and
@@ -181,17 +202,20 @@ module Aws
       #
       #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier` must
       #     be supplied.
+      #
       # @return [Types::AddSourceIdentifierToSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AddSourceIdentifierToSubscriptionResult#event_subscription #EventSubscription} => Types::EventSubscription
+      #   * {Types::AddSourceIdentifierToSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_source_identifier_to_subscription({
       #     subscription_name: "String", # required
       #     source_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_subscription.customer_aws_id #=> String
       #   resp.event_subscription.cust_subscription_id #=> String
       #   resp.event_subscription.sns_topic_arn #=> String
@@ -204,6 +228,7 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      #
       # @overload add_source_identifier_to_subscription(params = {})
       # @param [Hash] params ({})
       def add_source_identifier_to_subscription(params = {}, options = {})
@@ -222,6 +247,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+      #
       # @option params [required, String] :resource_name
       #   The Amazon RDS resource the tags will be added to. This value is an
       #   Amazon Resource Name (ARN). For information about creating an ARN, see
@@ -230,11 +256,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The tags to be assigned to the Amazon RDS resource.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_resource({
       #     resource_name: "String", # required
       #     tags: [ # required
@@ -244,6 +273,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
       def add_tags_to_resource(params = {}, options = {})
@@ -253,6 +283,7 @@ module Aws
 
       # Applies a pending maintenance action to a resource (for example, to a
       # DB instance).
+      #
       # @option params [required, String] :resource_identifier
       #   The RDS Amazon Resource Name (ARN) of the resource that the pending
       #   maintenance action applies to. For information about creating an ARN,
@@ -261,10 +292,12 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [required, String] :apply_action
       #   The pending maintenance action to apply to this resource.
       #
       #   Valid values: `system-update`, `db-upgrade`
+      #
       # @option params [required, String] :opt_in_type
       #   A value that specifies the type of opt-in request, or undoes an opt-in
       #   request. An opt-in request of type `immediate` cannot be undone.
@@ -278,11 +311,13 @@ module Aws
       #
       #   * `undo-opt-in` - Cancel any existing `next-maintenance` opt-in
       #     requests.
+      #
       # @return [Types::ApplyPendingMaintenanceActionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ApplyPendingMaintenanceActionResult#resource_pending_maintenance_actions #ResourcePendingMaintenanceActions} => Types::ResourcePendingMaintenanceActions
+      #   * {Types::ApplyPendingMaintenanceActionResult#resource_pending_maintenance_actions #resource_pending_maintenance_actions} => Types::ResourcePendingMaintenanceActions
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.apply_pending_maintenance_action({
       #     resource_identifier: "String", # required
       #     apply_action: "String", # required
@@ -290,6 +325,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.resource_pending_maintenance_actions.resource_identifier #=> String
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details #=> Array
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].action #=> String
@@ -298,6 +334,7 @@ module Aws
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].opt_in_status #=> String
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].current_apply_date #=> Time
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].description #=> String
+      #
       # @overload apply_pending_maintenance_action(params = {})
       # @param [Hash] params ({})
       def apply_pending_maintenance_action(params = {}, options = {})
@@ -326,31 +363,38 @@ module Aws
       #
       #
       # [1]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+      #
       # @option params [required, String] :db_security_group_name
       #   The name of the DB security group to add authorization to.
+      #
       # @option params [String] :cidrip
       #   The IP range to authorize.
+      #
       # @option params [String] :ec2_security_group_name
       #   Name of the EC2 security group to authorize. For VPC DB security
       #   groups, `EC2SecurityGroupId` must be provided. Otherwise,
       #   `EC2SecurityGroupOwnerId` and either `EC2SecurityGroupName` or
       #   `EC2SecurityGroupId` must be provided.
+      #
       # @option params [String] :ec2_security_group_id
       #   Id of the EC2 security group to authorize. For VPC DB security groups,
       #   `EC2SecurityGroupId` must be provided. Otherwise,
       #   `EC2SecurityGroupOwnerId` and either `EC2SecurityGroupName` or
       #   `EC2SecurityGroupId` must be provided.
+      #
       # @option params [String] :ec2_security_group_owner_id
       #   AWS account number of the owner of the EC2 security group specified in
       #   the `EC2SecurityGroupName` parameter. The AWS Access Key ID is not an
       #   acceptable value. For VPC DB security groups, `EC2SecurityGroupId`
       #   must be provided. Otherwise, `EC2SecurityGroupOwnerId` and either
       #   `EC2SecurityGroupName` or `EC2SecurityGroupId` must be provided.
+      #
       # @return [Types::AuthorizeDBSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AuthorizeDBSecurityGroupIngressResult#db_security_group #DBSecurityGroup} => Types::DBSecurityGroup
+      #   * {Types::AuthorizeDBSecurityGroupIngressResult#db_security_group #db_security_group} => Types::DBSecurityGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.authorize_db_security_group_ingress({
       #     db_security_group_name: "String", # required
       #     cidrip: "String",
@@ -360,6 +404,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_security_group.owner_id #=> String
       #   resp.db_security_group.db_security_group_name #=> String
       #   resp.db_security_group.db_security_group_description #=> String
@@ -373,6 +418,7 @@ module Aws
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
       #   resp.db_security_group.db_security_group_arn #=> String
+      #
       # @overload authorize_db_security_group_ingress(params = {})
       # @param [Hash] params ({})
       def authorize_db_security_group_ingress(params = {}, options = {})
@@ -381,6 +427,7 @@ module Aws
       end
 
       # Copies the specified DB cluster parameter group.
+      #
       # @option params [required, String] :source_db_cluster_parameter_group_identifier
       #   The identifier or Amazon Resource Name (ARN) for the source DB cluster
       #   parameter group. For information about creating an ARN, see [
@@ -401,6 +448,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [required, String] :target_db_cluster_parameter_group_identifier
       #   The identifier for the copied DB cluster parameter group.
       #
@@ -415,15 +463,19 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-cluster-param-group1`
+      #
       # @option params [required, String] :target_db_cluster_parameter_group_description
       #   A description for the copied DB cluster parameter group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CopyDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CopyDBClusterParameterGroupResult#db_cluster_parameter_group #DBClusterParameterGroup} => Types::DBClusterParameterGroup
+      #   * {Types::CopyDBClusterParameterGroupResult#db_cluster_parameter_group #db_cluster_parameter_group} => Types::DBClusterParameterGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.copy_db_cluster_parameter_group({
       #     source_db_cluster_parameter_group_identifier: "String", # required
       #     target_db_cluster_parameter_group_identifier: "String", # required
@@ -437,10 +489,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_name #=> String
       #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_group.description #=> String
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
+      #
       # @overload copy_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
       def copy_db_cluster_parameter_group(params = {}, options = {})
@@ -454,6 +508,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :source_db_cluster_snapshot_identifier
       #   The identifier of the DB cluster snapshot to copy. This parameter is
       #   not case-sensitive.
@@ -467,6 +522,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster-snapshot1`
+      #
       # @option params [required, String] :target_db_cluster_snapshot_identifier
       #   The identifier of the new DB cluster snapshot to create from the
       #   source DB cluster snapshot. This parameter is not case-sensitive.
@@ -480,13 +536,16 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster-snapshot2`
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CopyDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CopyDBClusterSnapshotResult#db_cluster_snapshot #DBClusterSnapshot} => Types::DBClusterSnapshot
+      #   * {Types::CopyDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.copy_db_cluster_snapshot({
       #     source_db_cluster_snapshot_identifier: "String", # required
       #     target_db_cluster_snapshot_identifier: "String", # required
@@ -499,6 +558,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_snapshot.availability_zones #=> Array
       #   resp.db_cluster_snapshot.availability_zones[0] #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_identifier #=> String
@@ -518,6 +578,7 @@ module Aws
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+      #
       # @overload copy_db_cluster_snapshot(params = {})
       # @param [Hash] params ({})
       def copy_db_cluster_snapshot(params = {}, options = {})
@@ -526,6 +587,7 @@ module Aws
       end
 
       # Copies the specified DB parameter group.
+      #
       # @option params [required, String] :source_db_parameter_group_identifier
       #   The identifier or ARN for the source DB parameter group. For
       #   information about creating an ARN, see [ Constructing an RDS Amazon
@@ -541,6 +603,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [required, String] :target_db_parameter_group_identifier
       #   The identifier for the copied DB parameter group.
       #
@@ -555,15 +618,19 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-db-parameter-group`
+      #
       # @option params [required, String] :target_db_parameter_group_description
       #   A description for the copied DB parameter group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CopyDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CopyDBParameterGroupResult#db_parameter_group #DBParameterGroup} => Types::DBParameterGroup
+      #   * {Types::CopyDBParameterGroupResult#db_parameter_group #db_parameter_group} => Types::DBParameterGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.copy_db_parameter_group({
       #     source_db_parameter_group_identifier: "String", # required
       #     target_db_parameter_group_identifier: "String", # required
@@ -577,10 +644,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_parameter_group.db_parameter_group_name #=> String
       #   resp.db_parameter_group.db_parameter_group_family #=> String
       #   resp.db_parameter_group.description #=> String
       #   resp.db_parameter_group.db_parameter_group_arn #=> String
+      #
       # @overload copy_db_parameter_group(params = {})
       # @param [Hash] params ({})
       def copy_db_parameter_group(params = {}, options = {})
@@ -596,6 +665,7 @@ module Aws
       # the shared DB snapshot.
       #
       # You can not copy an encrypted DB snapshot from another AWS region.
+      #
       # @option params [required, String] :source_db_snapshot_identifier
       #   The identifier for the source DB snapshot.
       #
@@ -624,6 +694,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html
+      #
       # @option params [required, String] :target_db_snapshot_identifier
       #   The identifier for the copied snapshot.
       #
@@ -638,6 +709,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-db-snapshot`
+      #
       # @option params [String] :kms_key_id
       #   The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the
       #   Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
@@ -655,16 +727,20 @@ module Aws
       #
       #   If you copy an encrypted DB snapshot that is shared from another AWS
       #   account, then you must specify a value for `KmsKeyId`.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [Boolean] :copy_tags
       #   True to copy all tags from the source DB snapshot to the target DB
       #   snapshot; otherwise false. The default is false.
+      #
       # @return [Types::CopyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CopyDBSnapshotResult#db_snapshot #DBSnapshot} => Types::DBSnapshot
+      #   * {Types::CopyDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.copy_db_snapshot({
       #     source_db_snapshot_identifier: "String", # required
       #     target_db_snapshot_identifier: "String", # required
@@ -679,6 +755,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_snapshot.db_snapshot_identifier #=> String
       #   resp.db_snapshot.db_instance_identifier #=> String
       #   resp.db_snapshot.snapshot_create_time #=> Time
@@ -704,6 +781,7 @@ module Aws
       #   resp.db_snapshot.kms_key_id #=> String
       #   resp.db_snapshot.db_snapshot_arn #=> String
       #   resp.db_snapshot.timezone #=> String
+      #
       # @overload copy_db_snapshot(params = {})
       # @param [Hash] params ({})
       def copy_db_snapshot(params = {}, options = {})
@@ -712,6 +790,7 @@ module Aws
       end
 
       # Copies the specified option group.
+      #
       # @option params [required, String] :source_option_group_identifier
       #   The identifier or ARN for the source option group. For information
       #   about creating an ARN, see [ Constructing an RDS Amazon Resource Name
@@ -732,6 +811,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [required, String] :target_option_group_identifier
       #   The identifier for the copied option group.
       #
@@ -746,15 +826,19 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-option-group`
+      #
       # @option params [required, String] :target_option_group_description
       #   The description for the copied option group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CopyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CopyOptionGroupResult#option_group #OptionGroup} => Types::OptionGroup
+      #   * {Types::CopyOptionGroupResult#option_group #option_group} => Types::OptionGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.copy_option_group({
       #     source_option_group_identifier: "String", # required
       #     target_option_group_identifier: "String", # required
@@ -768,6 +852,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.option_group.option_group_name #=> String
       #   resp.option_group.option_group_description #=> String
       #   resp.option_group.engine_name #=> String
@@ -798,6 +883,7 @@ module Aws
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
       #   resp.option_group.option_group_arn #=> String
+      #
       # @overload copy_option_group(params = {})
       # @param [Hash] params ({})
       def copy_option_group(params = {}, options = {})
@@ -816,6 +902,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [Array<String>] :availability_zones
       #   A list of EC2 Availability Zones that instances in the DB cluster can
       #   be created in. For information on regions and Availability Zones, see
@@ -824,6 +911,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+      #
       # @option params [Integer] :backup_retention_period
       #   The number of days for which automated backups are retained. You must
       #   specify a minimum value of 1.
@@ -835,13 +923,16 @@ module Aws
       #   * Must be a value from 1 to 35
       #
       #   ^
+      #
       # @option params [String] :character_set_name
       #   A value that indicates that the DB cluster should be associated with
       #   the specified CharacterSet.
+      #
       # @option params [String] :database_name
       #   The name for your database of up to 8 alpha-numeric characters. If you
       #   do not provide a name, Amazon RDS will not create a database in the DB
       #   cluster you are creating.
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The DB cluster identifier. This parameter is stored as a lowercase
       #   string.
@@ -855,6 +946,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster1`
+      #
       # @option params [String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to associate with this DB
       #   cluster. If this argument is omitted, `default.aurora5.6` will be
@@ -867,8 +959,10 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to associate with this DB cluster.
+      #
       # @option params [String] :db_subnet_group_name
       #   A DB subnet group to associate with this DB cluster.
       #
@@ -876,21 +970,25 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [required, String] :engine
       #   The name of the database engine to be used for this DB cluster.
       #
       #   Valid Values: `aurora`
+      #
       # @option params [String] :engine_version
       #   The version number of the database engine to use.
       #
       #   **Aurora**
       #
       #   Example: `5.6.10a`
+      #
       # @option params [Integer] :port
       #   The port number on which the instances in the DB cluster accept
       #   connections.
       #
       #   Default: `3306`
+      #
       # @option params [String] :master_username
       #   The name of the master user for the DB cluster.
       #
@@ -901,11 +999,13 @@ module Aws
       #   * First character must be a letter.
       #
       #   * Cannot be a reserved word for the chosen database engine.
+      #
       # @option params [String] :master_user_password
       #   The password for the master database user. This password can contain
       #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
+      #
       # @option params [String] :option_group_name
       #   A value that indicates that the DB cluster should be associated with
       #   the specified option group.
@@ -913,6 +1013,7 @@ module Aws
       #   Permanent options cannot be removed from an option group. The option
       #   group cannot be removed from a DB cluster once it is associated with a
       #   DB cluster.
+      #
       # @option params [String] :preferred_backup_window
       #   The daily time range during which automated backups are created if
       #   automated backups are enabled using the `BackupRetentionPeriod`
@@ -935,6 +1036,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [String] :preferred_maintenance_window
       #   The weekly time range during which system maintenance can occur, in
       #   Universal Coordinated Time (UTC).
@@ -953,13 +1055,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [String] :replication_source_identifier
       #   The Amazon Resource Name (ARN) of the source DB cluster if this DB
       #   cluster is created as a Read Replica.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [Boolean] :storage_encrypted
       #   Specifies whether the DB cluster is encrypted.
+      #
       # @option params [String] :kms_key_id
       #   The KMS key identifier for an encrypted DB cluster.
       #
@@ -974,11 +1080,13 @@ module Aws
       #   default encryption key. AWS KMS creates the default encryption key for
       #   your AWS account. Your AWS account has a different default encryption
       #   key for each AWS region.
+      #
       # @return [Types::CreateDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBClusterResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::CreateDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_cluster({
       #     availability_zones: ["String"],
       #     backup_retention_period: 1,
@@ -1008,6 +1116,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -1053,6 +1162,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload create_db_cluster(params = {})
       # @param [Hash] params ({})
       def create_db_cluster(params = {}, options = {})
@@ -1095,6 +1205,7 @@ module Aws
       #
       # [1]: https://console.aws.amazon.com/rds/
       # [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group.
       #
@@ -1109,21 +1220,26 @@ module Aws
       #   <note markdown="1"> This value is stored as a lowercase string.
       #
       #    </note>
+      #
       # @option params [required, String] :db_parameter_group_family
       #   The DB cluster parameter group family name. A DB cluster parameter
       #   group can be associated with one and only one DB cluster parameter
       #   group family, and can be applied only to a DB cluster running a
       #   database engine and engine version compatible with that DB cluster
       #   parameter group family.
+      #
       # @option params [required, String] :description
       #   The description for the DB cluster parameter group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateDBClusterParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBClusterParameterGroupResult#db_cluster_parameter_group #DBClusterParameterGroup} => Types::DBClusterParameterGroup
+      #   * {Types::CreateDBClusterParameterGroupResult#db_cluster_parameter_group #db_cluster_parameter_group} => Types::DBClusterParameterGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_cluster_parameter_group({
       #     db_cluster_parameter_group_name: "String", # required
       #     db_parameter_group_family: "String", # required
@@ -1137,10 +1253,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_name #=> String
       #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_group.description #=> String
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
+      #
       # @overload create_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
       def create_db_cluster_parameter_group(params = {}, options = {})
@@ -1154,6 +1272,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_snapshot_identifier
       #   The identifier of the DB cluster snapshot. This parameter is stored as
       #   a lowercase string.
@@ -1167,6 +1286,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster1-snapshot1`
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The identifier of the DB cluster to create a snapshot for. This
       #   parameter is not case-sensitive.
@@ -1180,13 +1300,16 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster1`
+      #
       # @option params [Array<Types::Tag>] :tags
       #   The tags to be assigned to the DB cluster snapshot.
+      #
       # @return [Types::CreateDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBClusterSnapshotResult#db_cluster_snapshot #DBClusterSnapshot} => Types::DBClusterSnapshot
+      #   * {Types::CreateDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_cluster_snapshot({
       #     db_cluster_snapshot_identifier: "String", # required
       #     db_cluster_identifier: "String", # required
@@ -1199,6 +1322,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_snapshot.availability_zones #=> Array
       #   resp.db_cluster_snapshot.availability_zones[0] #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_identifier #=> String
@@ -1218,6 +1342,7 @@ module Aws
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+      #
       # @overload create_db_cluster_snapshot(params = {})
       # @param [Hash] params ({})
       def create_db_cluster_snapshot(params = {}, options = {})
@@ -1226,6 +1351,7 @@ module Aws
       end
 
       # Creates a new DB instance.
+      #
       # @option params [String] :db_name
       #   The meaning of this parameter differs according to the database engine
       #   you use.
@@ -1298,6 +1424,7 @@ module Aws
       #   * Must contain 1 to 64 alphanumeric characters
       #
       #   * Cannot be a word reserved by the specified database engine
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier. This parameter is stored as a lowercase
       #   string.
@@ -1312,6 +1439,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `mydbinstance`
+      #
       # @option params [Integer] :allocated_storage
       #   The amount of storage (in gigabytes) to be initially allocated for the
       #   database instance.
@@ -1339,6 +1467,7 @@ module Aws
       #   Constraints: Must be an integer from 200 to 4096 (Standard Edition and
       #   Enterprise Edition) or from 20 to 4096 (Express Edition and Web
       #   Edition)
+      #
       # @option params [required, String] :db_instance_class
       #   The compute and memory capacity of the DB instance.
       #
@@ -1349,6 +1478,7 @@ module Aws
       #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
       #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
       #   db.t2.medium | db.t2.large`
+      #
       # @option params [required, String] :engine
       #   The name of the database engine to be used for this instance.
       #
@@ -1357,6 +1487,7 @@ module Aws
       #   `sqlserver-ex` \| `sqlserver-web` \| `postgres` \| `aurora`
       #
       #   Not every database engine is available for every AWS region.
+      #
       # @option params [String] :master_username
       #   The name of master user for the client DB instance.
       #
@@ -1409,6 +1540,7 @@ module Aws
       #   * First character must be a letter.
       #
       #   * Cannot be a reserved word for the chosen database engine.
+      #
       # @option params [String] :master_user_password
       #   The password for the master database user. Can be any printable ASCII
       #   character except "/", """, or "@".
@@ -1438,15 +1570,18 @@ module Aws
       #   **Amazon Aurora**
       #
       #   Constraints: Must contain from 8 to 41 characters.
+      #
       # @option params [Array<String>] :db_security_groups
       #   A list of DB security groups to associate with this DB instance.
       #
       #   Default: The default DB security group for the database engine.
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to associate with this DB instance.
       #
       #   Default: The default EC2 VPC security group for the DB subnet group's
       #   VPC.
+      #
       # @option params [String] :availability_zone
       #   The EC2 Availability Zone that the database instance will be created
       #   in. For information on regions and Availability Zones, see [Regions
@@ -1464,10 +1599,12 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html
+      #
       # @option params [String] :db_subnet_group_name
       #   A DB subnet group to associate with this DB instance.
       #
       #   If there is no DB subnet group, then it is a non-VPC DB instance.
+      #
       # @option params [String] :preferred_maintenance_window
       #   The weekly time range during which system maintenance can occur, in
       #   Universal Coordinated Time (UTC). For more information, see [DB
@@ -1488,6 +1625,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBMaintenance.html
       #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [String] :db_parameter_group_name
       #   The name of the DB parameter group to associate with this DB instance.
       #   If this argument is omitted, the default DBParameterGroup for the
@@ -1500,6 +1638,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Integer] :backup_retention_period
       #   The number of days for which automated backups are retained. Setting
       #   this parameter to a positive number enables backups. Setting this
@@ -1512,6 +1651,7 @@ module Aws
       #   * Must be a value from 0 to 35
       #
       #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+      #
       # @option params [String] :preferred_backup_window
       #   The daily time range during which automated backups are created if
       #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -1535,6 +1675,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html
       #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [Integer] :port
       #   The port number on which the database accepts connections.
       #
@@ -1582,10 +1723,12 @@ module Aws
       #   Valid Values: `1150-65535`
       #
       #   Type: Integer
+      #
       # @option params [Boolean] :multi_az
       #   Specifies if the DB instance is a Multi-AZ deployment. You cannot set
       #   the AvailabilityZone parameter if the MultiAZ parameter is set to
       #   true.
+      #
       # @option params [String] :engine_version
       #   The version number of the database engine to use.
       #
@@ -1798,16 +1941,19 @@ module Aws
       #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
       #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
       #     us-east-1, us-west-1, us-west-2):** ` 9.3.12 | 9.3.14`
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor engine upgrades will be applied automatically to
       #   the DB instance during the maintenance window.
       #
       #   Default: `true`
+      #
       # @option params [String] :license_model
       #   License model information for this DB instance.
       #
       #   Valid values: `license-included` \| `bring-your-own-license` \|
       #   `general-public-license`
+      #
       # @option params [Integer] :iops
       #   The amount of Provisioned IOPS (input/output operations per second) to
       #   be initially allocated for the DB instance.
@@ -1816,6 +1962,7 @@ module Aws
       #   for the DB instance. Must also be an integer multiple of 1000. For
       #   example, if the size of your DB instance is 500 GB, then your `Iops`
       #   value can be 2000, 3000, 4000, or 5000.
+      #
       # @option params [String] :option_group_name
       #   Indicates that the DB instance should be associated with the specified
       #   option group.
@@ -1824,9 +1971,11 @@ module Aws
       #   TDE, cannot be removed from an option group, and that option group
       #   cannot be removed from a DB instance once it is associated with a DB
       #   instance
+      #
       # @option params [String] :character_set_name
       #   For supported engines, indicates that the DB instance should be
       #   associated with the specified CharacterSet.
+      #
       # @option params [Boolean] :publicly_accessible
       #   Specifies the accessibility options for the DB instance. A value of
       #   true specifies an Internet-facing instance with a publicly resolvable
@@ -1847,14 +1996,17 @@ module Aws
       #   publicly accessible. If a specific DB subnet group has been specified
       #   as part of the request and the PubliclyAccessible value has not been
       #   set, the DB instance will be private.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [String] :db_cluster_identifier
       #   The identifier of the DB cluster that the instance will belong to.
       #
       #   For information on creating a DB cluster, see CreateDBCluster.
       #
       #   Type: String
+      #
       # @option params [String] :storage_type
       #   Specifies the storage type to be associated with the DB instance.
       #
@@ -1865,16 +2017,20 @@ module Aws
       #
       #   Default: `io1` if the `Iops` parameter is specified; otherwise
       #   `standard`
+      #
       # @option params [String] :tde_credential_arn
       #   The ARN from the Key Store with which to associate the instance for
       #   TDE encryption.
+      #
       # @option params [String] :tde_credential_password
       #   The password for the given ARN from the Key Store in order to access
       #   the device.
+      #
       # @option params [Boolean] :storage_encrypted
       #   Specifies whether the DB instance is encrypted.
       #
       #   Default: false
+      #
       # @option params [String] :kms_key_id
       #   The KMS key identifier for an encrypted DB instance.
       #
@@ -1889,11 +2045,14 @@ module Aws
       #   default encryption key. AWS KMS creates the default encryption key for
       #   your AWS account. Your AWS account has a different default encryption
       #   key for each AWS region.
+      #
       # @option params [String] :domain
       #   Specify the Active Directory Domain to create the instance in.
+      #
       # @option params [Boolean] :copy_tags_to_snapshot
       #   True to copy all tags from the DB instance to snapshots of the DB
       #   instance; otherwise false. The default is false.
+      #
       # @option params [Integer] :monitoring_interval
       #   The interval, in seconds, between points when Enhanced Monitoring
       #   metrics are collected for the DB instance. To disable collecting
@@ -1903,6 +2062,7 @@ module Aws
       #   `MonitoringInterval` to a value other than 0.
       #
       #   Valid Values: `0, 1, 5, 10, 15, 30, 60`
+      #
       # @option params [String] :monitoring_role_arn
       #   The ARN for the IAM role that permits RDS to send enhanced monitoring
       #   metrics to CloudWatch Logs. For example,
@@ -1916,9 +2076,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
+      #
       # @option params [String] :domain_iam_role_name
       #   Specify the name of the IAM role to be used when making API calls to
       #   the Directory Service.
+      #
       # @option params [Integer] :promotion_tier
       #   A value that specifies the order in which an Aurora Replica is
       #   promoted to the primary instance after a failure of the existing
@@ -1932,6 +2094,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+      #
       # @option params [String] :timezone
       #   The time zone of the DB instance. The time zone parameter is currently
       #   supported only by [Microsoft SQL Server][1].
@@ -1939,11 +2102,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+      #
       # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBInstanceResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_instance({
       #     db_name: "String",
       #     db_instance_identifier: "String", # required
@@ -1991,6 +2156,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -2077,6 +2243,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload create_db_instance(params = {})
       # @param [Hash] params ({})
       def create_db_instance(params = {}, options = {})
@@ -2093,10 +2260,12 @@ module Aws
       # DB instance, except as specified below.
       #
       # The source DB instance must have backup retention enabled.
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier of the Read Replica. This identifier is the
       #   unique key that identifies a DB instance. This parameter is stored as
       #   a lowercase string.
+      #
       # @option params [required, String] :source_db_instance_identifier
       #   The identifier of the DB instance that will act as the source for the
       #   Read Replica. Each DB instance can have up to five Read Replicas.
@@ -2125,6 +2294,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [String] :db_instance_class
       #   The compute and memory capacity of the Read Replica.
       #
@@ -2137,6 +2307,7 @@ module Aws
       #   db.t2.large`
       #
       #   Default: Inherits from the source DB instance.
+      #
       # @option params [String] :availability_zone
       #   The Amazon EC2 Availability Zone that the Read Replica will be created
       #   in.
@@ -2145,23 +2316,28 @@ module Aws
       #   region.
       #
       #   Example: `us-east-1d`
+      #
       # @option params [Integer] :port
       #   The port number that the DB instance uses for connections.
       #
       #   Default: Inherits from the source DB instance
       #
       #   Valid Values: `1150-65535`
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor engine upgrades will be applied automatically to
       #   the Read Replica during the maintenance window.
       #
       #   Default: Inherits from the source DB instance
+      #
       # @option params [Integer] :iops
       #   The amount of Provisioned IOPS (input/output operations per second) to
       #   be initially allocated for the DB instance.
+      #
       # @option params [String] :option_group_name
       #   The option group the DB instance will be associated with. If omitted,
       #   the default option group for the engine specified will be used.
+      #
       # @option params [Boolean] :publicly_accessible
       #   Specifies the accessibility options for the DB instance. A value of
       #   true specifies an Internet-facing instance with a publicly resolvable
@@ -2182,8 +2358,10 @@ module Aws
       #   publicly accessible. If a specific DB subnet group has been specified
       #   as part of the request and the PubliclyAccessible value has not been
       #   set, the DB instance will be private.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [String] :db_subnet_group_name
       #   Specifies a DB subnet group for the DB instance. The new DB instance
       #   will be created in the VPC associated with the DB subnet group. If no
@@ -2211,6 +2389,7 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [String] :storage_type
       #   Specifies the storage type to be associated with the Read Replica.
       #
@@ -2221,9 +2400,11 @@ module Aws
       #
       #   Default: `io1` if the `Iops` parameter is specified; otherwise
       #   `standard`
+      #
       # @option params [Boolean] :copy_tags_to_snapshot
       #   True to copy all tags from the Read Replica to snapshots of the Read
       #   Replica; otherwise false. The default is false.
+      #
       # @option params [Integer] :monitoring_interval
       #   The interval, in seconds, between points when Enhanced Monitoring
       #   metrics are collected for the Read Replica. To disable collecting
@@ -2233,6 +2414,7 @@ module Aws
       #   `MonitoringInterval` to a value other than 0.
       #
       #   Valid Values: `0, 1, 5, 10, 15, 30, 60`
+      #
       # @option params [String] :monitoring_role_arn
       #   The ARN for the IAM role that permits RDS to send enhanced monitoring
       #   metrics to CloudWatch Logs. For example,
@@ -2246,11 +2428,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
+      #
       # @return [Types::CreateDBInstanceReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBInstanceReadReplicaResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::CreateDBInstanceReadReplicaResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_instance_read_replica({
       #     db_instance_identifier: "String", # required
       #     source_db_instance_identifier: "String", # required
@@ -2275,6 +2459,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -2361,6 +2546,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload create_db_instance_read_replica(params = {})
       # @param [Hash] params ({})
       def create_db_instance_read_replica(params = {}, options = {})
@@ -2395,6 +2581,7 @@ module Aws
       #
       #
       # [1]: https://console.aws.amazon.com/rds/
+      #
       # @option params [required, String] :db_parameter_group_name
       #   The name of the DB parameter group.
       #
@@ -2409,20 +2596,25 @@ module Aws
       #   <note markdown="1"> This value is stored as a lowercase string.
       #
       #    </note>
+      #
       # @option params [required, String] :db_parameter_group_family
       #   The DB parameter group family name. A DB parameter group can be
       #   associated with one and only one DB parameter group family, and can be
       #   applied only to a DB instance running a database engine and engine
       #   version compatible with that DB parameter group family.
+      #
       # @option params [required, String] :description
       #   The description for the DB parameter group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateDBParameterGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBParameterGroupResult#db_parameter_group #DBParameterGroup} => Types::DBParameterGroup
+      #   * {Types::CreateDBParameterGroupResult#db_parameter_group #db_parameter_group} => Types::DBParameterGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_parameter_group({
       #     db_parameter_group_name: "String", # required
       #     db_parameter_group_family: "String", # required
@@ -2436,10 +2628,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_parameter_group.db_parameter_group_name #=> String
       #   resp.db_parameter_group.db_parameter_group_family #=> String
       #   resp.db_parameter_group.description #=> String
       #   resp.db_parameter_group.db_parameter_group_arn #=> String
+      #
       # @overload create_db_parameter_group(params = {})
       # @param [Hash] params ({})
       def create_db_parameter_group(params = {}, options = {})
@@ -2449,6 +2643,7 @@ module Aws
 
       # Creates a new DB security group. DB security groups control access to
       # a DB instance.
+      #
       # @option params [required, String] :db_security_group_name
       #   The name for the DB security group. This value is stored as a
       #   lowercase string.
@@ -2464,15 +2659,19 @@ module Aws
       #   * Must not be "Default"
       #
       #   Example: `mysecuritygroup`
+      #
       # @option params [required, String] :db_security_group_description
       #   The description for the DB security group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateDBSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBSecurityGroupResult#db_security_group #DBSecurityGroup} => Types::DBSecurityGroup
+      #   * {Types::CreateDBSecurityGroupResult#db_security_group #db_security_group} => Types::DBSecurityGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_security_group({
       #     db_security_group_name: "String", # required
       #     db_security_group_description: "String", # required
@@ -2485,6 +2684,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_security_group.owner_id #=> String
       #   resp.db_security_group.db_security_group_name #=> String
       #   resp.db_security_group.db_security_group_description #=> String
@@ -2498,6 +2698,7 @@ module Aws
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
       #   resp.db_security_group.db_security_group_arn #=> String
+      #
       # @overload create_db_security_group(params = {})
       # @param [Hash] params ({})
       def create_db_security_group(params = {}, options = {})
@@ -2507,6 +2708,7 @@ module Aws
 
       # Creates a DBSnapshot. The source DBInstance must be in "available"
       # state.
+      #
       # @option params [required, String] :db_snapshot_identifier
       #   The identifier for the DB snapshot.
       #
@@ -2521,6 +2723,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-snapshot-id`
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier. This is the unique key that identifies a
       #   DB instance.
@@ -2532,13 +2735,16 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBSnapshotResult#db_snapshot #DBSnapshot} => Types::DBSnapshot
+      #   * {Types::CreateDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_snapshot({
       #     db_snapshot_identifier: "String", # required
       #     db_instance_identifier: "String", # required
@@ -2551,6 +2757,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_snapshot.db_snapshot_identifier #=> String
       #   resp.db_snapshot.db_instance_identifier #=> String
       #   resp.db_snapshot.snapshot_create_time #=> Time
@@ -2576,6 +2783,7 @@ module Aws
       #   resp.db_snapshot.kms_key_id #=> String
       #   resp.db_snapshot.db_snapshot_arn #=> String
       #   resp.db_snapshot.timezone #=> String
+      #
       # @overload create_db_snapshot(params = {})
       # @param [Hash] params ({})
       def create_db_snapshot(params = {}, options = {})
@@ -2585,6 +2793,7 @@ module Aws
 
       # Creates a new DB subnet group. DB subnet groups must contain at least
       # one subnet in at least two AZs in the region.
+      #
       # @option params [required, String] :db_subnet_group_name
       #   The name for the DB subnet group. This value is stored as a lowercase
       #   string.
@@ -2593,17 +2802,22 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [required, String] :db_subnet_group_description
       #   The description for the DB subnet group.
+      #
       # @option params [required, Array<String>] :subnet_ids
       #   The EC2 Subnet IDs for the DB subnet group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDBSubnetGroupResult#db_subnet_group #DBSubnetGroup} => Types::DBSubnetGroup
+      #   * {Types::CreateDBSubnetGroupResult#db_subnet_group #db_subnet_group} => Types::DBSubnetGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_db_subnet_group({
       #     db_subnet_group_name: "String", # required
       #     db_subnet_group_description: "String", # required
@@ -2617,6 +2831,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_subnet_group.db_subnet_group_name #=> String
       #   resp.db_subnet_group.db_subnet_group_description #=> String
       #   resp.db_subnet_group.vpc_id #=> String
@@ -2626,6 +2841,7 @@ module Aws
       #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_group.subnets[0].subnet_status #=> String
       #   resp.db_subnet_group.db_subnet_group_arn #=> String
+      #
       # @overload create_db_subnet_group(params = {})
       # @param [Hash] params ({})
       def create_db_subnet_group(params = {}, options = {})
@@ -2654,14 +2870,17 @@ module Aws
       # you do not specify either the SourceType nor the SourceIdentifier, you
       # will be notified of events generated from all RDS sources belonging to
       # your customer account.
+      #
       # @option params [required, String] :subscription_name
       #   The name of the subscription.
       #
       #   Constraints: The name must be less than 255 characters.
+      #
       # @option params [required, String] :sns_topic_arn
       #   The Amazon Resource Name (ARN) of the SNS topic created for event
       #   notification. The ARN is created by Amazon SNS when you create a topic
       #   and subscribe to it.
+      #
       # @option params [String] :source_type
       #   The type of source that will be generating the events. For example, if
       #   you want to be notified of events generated by a DB instance, you
@@ -2670,6 +2889,7 @@ module Aws
       #
       #   Valid values: `db-instance` \| `db-cluster` \| `db-parameter-group` \|
       #   `db-security-group` \| `db-snapshot` \| `db-cluster-snapshot`
+      #
       # @option params [Array<String>] :event_categories
       #   A list of event categories for a SourceType that you want to subscribe
       #   to. You can see a list of the categories for a given SourceType in the
@@ -2679,6 +2899,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+      #
       # @option params [Array<String>] :source_ids
       #   The list of identifiers of the event sources for which events will be
       #   returned. If not specified, then all sources are included in the
@@ -2701,16 +2922,20 @@ module Aws
       #
       #   * If the source type is a DB snapshot, a `DBSnapshotIdentifier` must
       #     be supplied.
+      #
       # @option params [Boolean] :enabled
       #   A Boolean value; set to **true** to activate the subscription, set to
       #   **false** to create the subscription but not active it.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateEventSubscriptionResult#event_subscription #EventSubscription} => Types::EventSubscription
+      #   * {Types::CreateEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_event_subscription({
       #     subscription_name: "String", # required
       #     sns_topic_arn: "String", # required
@@ -2727,6 +2952,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_subscription.customer_aws_id #=> String
       #   resp.event_subscription.cust_subscription_id #=> String
       #   resp.event_subscription.sns_topic_arn #=> String
@@ -2739,6 +2965,7 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      #
       # @overload create_event_subscription(params = {})
       # @param [Hash] params ({})
       def create_event_subscription(params = {}, options = {})
@@ -2747,6 +2974,7 @@ module Aws
       end
 
       # Creates a new option group. You can create up to 20 option groups.
+      #
       # @option params [required, String] :option_group_name
       #   Specifies the name of the option group to be created.
       #
@@ -2759,21 +2987,27 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `myoptiongroup`
+      #
       # @option params [required, String] :engine_name
       #   Specifies the name of the engine that this option group should be
       #   associated with.
+      #
       # @option params [required, String] :major_engine_version
       #   Specifies the major version of the engine that this option group
       #   should be associated with.
+      #
       # @option params [required, String] :option_group_description
       #   The description of the option group.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::CreateOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateOptionGroupResult#option_group #OptionGroup} => Types::OptionGroup
+      #   * {Types::CreateOptionGroupResult#option_group #option_group} => Types::OptionGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_option_group({
       #     option_group_name: "String", # required
       #     engine_name: "String", # required
@@ -2788,6 +3022,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.option_group.option_group_name #=> String
       #   resp.option_group.option_group_description #=> String
       #   resp.option_group.engine_name #=> String
@@ -2818,6 +3053,7 @@ module Aws
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
       #   resp.option_group.option_group_arn #=> String
+      #
       # @overload create_option_group(params = {})
       # @param [Hash] params ({})
       def create_option_group(params = {}, options = {})
@@ -2838,6 +3074,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The DB cluster identifier for the DB cluster to be deleted. This
       #   parameter isn't case-sensitive.
@@ -2849,6 +3086,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Boolean] :skip_final_snapshot
       #   Determines whether a final DB cluster snapshot is created before the
       #   DB cluster is deleted. If `true` is specified, no DB cluster snapshot
@@ -2861,6 +3099,7 @@ module Aws
       #    </note>
       #
       #   Default: `false`
+      #
       # @option params [String] :final_db_snapshot_identifier
       #   The DB cluster snapshot identifier of the new DB cluster snapshot
       #   created when `SkipFinalSnapshot` is set to `false`.
@@ -2877,11 +3116,13 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @return [Types::DeleteDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteDBClusterResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::DeleteDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_cluster({
       #     db_cluster_identifier: "String", # required
       #     skip_final_snapshot: false,
@@ -2889,6 +3130,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -2934,6 +3176,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload delete_db_cluster(params = {})
       # @param [Hash] params ({})
       def delete_db_cluster(params = {}, options = {})
@@ -2951,6 +3194,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group.
       #
@@ -2961,12 +3205,15 @@ module Aws
       #   * You cannot delete a default DB cluster parameter group.
       #
       #   * Cannot be associated with any DB clusters.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_cluster_parameter_group({
       #     db_cluster_parameter_group_name: "String", # required
       #   })
+      #
       # @overload delete_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
       def delete_db_cluster_parameter_group(params = {}, options = {})
@@ -2988,21 +3235,25 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_snapshot_identifier
       #   The identifier of the DB cluster snapshot to delete.
       #
       #   Constraints: Must be the name of an existing DB cluster snapshot in
       #   the `available` state.
+      #
       # @return [Types::DeleteDBClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteDBClusterSnapshotResult#db_cluster_snapshot #DBClusterSnapshot} => Types::DBClusterSnapshot
+      #   * {Types::DeleteDBClusterSnapshotResult#db_cluster_snapshot #db_cluster_snapshot} => Types::DBClusterSnapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_cluster_snapshot({
       #     db_cluster_snapshot_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_snapshot.availability_zones #=> Array
       #   resp.db_cluster_snapshot.availability_zones[0] #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_identifier #=> String
@@ -3022,6 +3273,7 @@ module Aws
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+      #
       # @overload delete_db_cluster_snapshot(params = {})
       # @param [Hash] params ({})
       def delete_db_cluster_snapshot(params = {}, options = {})
@@ -3058,6 +3310,7 @@ module Aws
       # it's no longer a Read Replica. After the promotion completes, then
       # call the `DeleteDBInstance` API action to delete the final instance in
       # the DB cluster.
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier for the DB instance to be deleted. This
       #   parameter isn't case-sensitive.
@@ -3069,6 +3322,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Boolean] :skip_final_snapshot
       #   Determines whether a final DB snapshot is created before the DB
       #   instance is deleted. If `true` is specified, no DBSnapshot is created.
@@ -3088,6 +3342,7 @@ module Aws
       #    </note>
       #
       #   Default: `false`
+      #
       # @option params [String] :final_db_snapshot_identifier
       #   The DBSnapshotIdentifier of the new DBSnapshot created when
       #   SkipFinalSnapshot is set to `false`.
@@ -3106,11 +3361,13 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   * Cannot be specified when deleting a Read Replica.
+      #
       # @return [Types::DeleteDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteDBInstanceResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::DeleteDBInstanceResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_instance({
       #     db_instance_identifier: "String", # required
       #     skip_final_snapshot: false,
@@ -3118,6 +3375,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -3204,6 +3462,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload delete_db_instance(params = {})
       # @param [Hash] params ({})
       def delete_db_instance(params = {}, options = {})
@@ -3213,6 +3472,7 @@ module Aws
 
       # Deletes a specified DBParameterGroup. The DBParameterGroup to be
       # deleted cannot be associated with any DB instances.
+      #
       # @option params [required, String] :db_parameter_group_name
       #   The name of the DB parameter group.
       #
@@ -3223,12 +3483,15 @@ module Aws
       #   * You cannot delete a default DB parameter group
       #
       #   * Cannot be associated with any DB instances
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_parameter_group({
       #     db_parameter_group_name: "String", # required
       #   })
+      #
       # @overload delete_db_parameter_group(params = {})
       # @param [Hash] params ({})
       def delete_db_parameter_group(params = {}, options = {})
@@ -3242,6 +3505,7 @@ module Aws
       # instances.
       #
       #  </note>
+      #
       # @option params [required, String] :db_security_group_name
       #   The name of the DB security group to delete.
       #
@@ -3258,12 +3522,15 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   * Must not be "Default"
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_security_group({
       #     db_security_group_name: "String", # required
       #   })
+      #
       # @overload delete_db_security_group(params = {})
       # @param [Hash] params ({})
       def delete_db_security_group(params = {}, options = {})
@@ -3277,21 +3544,25 @@ module Aws
       # <note markdown="1"> The DBSnapshot must be in the `available` state to be deleted.
       #
       #  </note>
+      #
       # @option params [required, String] :db_snapshot_identifier
       #   The DBSnapshot identifier.
       #
       #   Constraints: Must be the name of an existing DB snapshot in the
       #   `available` state.
+      #
       # @return [Types::DeleteDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteDBSnapshotResult#db_snapshot #DBSnapshot} => Types::DBSnapshot
+      #   * {Types::DeleteDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_snapshot({
       #     db_snapshot_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_snapshot.db_snapshot_identifier #=> String
       #   resp.db_snapshot.db_instance_identifier #=> String
       #   resp.db_snapshot.snapshot_create_time #=> Time
@@ -3317,6 +3588,7 @@ module Aws
       #   resp.db_snapshot.kms_key_id #=> String
       #   resp.db_snapshot.db_snapshot_arn #=> String
       #   resp.db_snapshot.timezone #=> String
+      #
       # @overload delete_db_snapshot(params = {})
       # @param [Hash] params ({})
       def delete_db_snapshot(params = {}, options = {})
@@ -3330,6 +3602,7 @@ module Aws
       # instances.
       #
       #  </note>
+      #
       # @option params [required, String] :db_subnet_group_name
       #   The name of the database subnet group to delete.
       #
@@ -3343,12 +3616,15 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_db_subnet_group({
       #     db_subnet_group_name: "String", # required
       #   })
+      #
       # @overload delete_db_subnet_group(params = {})
       # @param [Hash] params ({})
       def delete_db_subnet_group(params = {}, options = {})
@@ -3357,19 +3633,23 @@ module Aws
       end
 
       # Deletes an RDS event notification subscription.
+      #
       # @option params [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to
       #   delete.
+      #
       # @return [Types::DeleteEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteEventSubscriptionResult#event_subscription #EventSubscription} => Types::EventSubscription
+      #   * {Types::DeleteEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_event_subscription({
       #     subscription_name: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_subscription.customer_aws_id #=> String
       #   resp.event_subscription.cust_subscription_id #=> String
       #   resp.event_subscription.sns_topic_arn #=> String
@@ -3382,6 +3662,7 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      #
       # @overload delete_event_subscription(params = {})
       # @param [Hash] params ({})
       def delete_event_subscription(params = {}, options = {})
@@ -3390,18 +3671,22 @@ module Aws
       end
 
       # Deletes an existing option group.
+      #
       # @option params [required, String] :option_group_name
       #   The name of the option group to be deleted.
       #
       #   <note markdown="1"> You cannot delete default option groups.
       #
       #    </note>
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_option_group({
       #     option_group_name: "String", # required
       #   })
+      #
       # @overload delete_option_group(params = {})
       # @param [Hash] params ({})
       def delete_option_group(params = {}, options = {})
@@ -3415,18 +3700,22 @@ module Aws
       # name, current usage toward that quota, and the quota's maximum value.
       #
       # This command does not take any parameters.
+      #
       # @return [Types::AccountAttributesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AccountAttributesMessage#account_quotas #AccountQuotas} => Array&lt;Types::AccountQuota&gt;
+      #   * {Types::AccountAttributesMessage#account_quotas #account_quotas} => Array&lt;Types::AccountQuota&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_account_attributes()
       #
       # @example Response structure
+      #
       #   resp.account_quotas #=> Array
       #   resp.account_quotas[0].account_quota_name #=> String
       #   resp.account_quotas[0].used #=> Integer
       #   resp.account_quotas[0].max #=> Integer
+      #
       # @overload describe_account_attributes(params = {})
       # @param [Hash] params ({})
       def describe_account_attributes(params = {}, options = {})
@@ -3436,6 +3725,7 @@ module Aws
 
       # Lists the set of CA certificates provided by Amazon RDS for this AWS
       # account.
+      #
       # @option params [String] :certificate_identifier
       #   The user-supplied certificate identifier. If this parameter is
       #   specified, information for only the identified certificate is
@@ -3448,8 +3738,10 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -3459,17 +3751,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   DescribeCertificates request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::CertificateMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CertificateMessage#certificates #Certificates} => Array&lt;Types::Certificate&gt;
-      #   * {Types::CertificateMessage#marker #Marker} => String
+      #   * {Types::CertificateMessage#certificates #certificates} => Array&lt;Types::Certificate&gt;
+      #   * {Types::CertificateMessage#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_certificates({
       #     certificate_identifier: "String",
       #     filters: [
@@ -3483,6 +3778,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.certificates #=> Array
       #   resp.certificates[0].certificate_identifier #=> String
       #   resp.certificates[0].certificate_type #=> String
@@ -3491,6 +3787,7 @@ module Aws
       #   resp.certificates[0].valid_till #=> Time
       #   resp.certificates[0].certificate_arn #=> String
       #   resp.marker #=> String
+      #
       # @overload describe_certificates(params = {})
       # @param [Hash] params ({})
       def describe_certificates(params = {}, options = {})
@@ -3509,6 +3806,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [String] :db_cluster_parameter_group_name
       #   The name of a specific DB cluster parameter group to return details
       #   for.
@@ -3520,8 +3818,10 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -3531,17 +3831,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBClusterParameterGroups` request. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::DBClusterParameterGroupsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBClusterParameterGroupsMessage#marker #Marker} => String
-      #   * {Types::DBClusterParameterGroupsMessage#db_cluster_parameter_groups #DBClusterParameterGroups} => Array&lt;Types::DBClusterParameterGroup&gt;
+      #   * {Types::DBClusterParameterGroupsMessage#marker #marker} => String
+      #   * {Types::DBClusterParameterGroupsMessage#db_cluster_parameter_groups #db_cluster_parameter_groups} => Array&lt;Types::DBClusterParameterGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_cluster_parameter_groups({
       #     db_cluster_parameter_group_name: "String",
       #     filters: [
@@ -3555,12 +3858,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_cluster_parameter_groups #=> Array
       #   resp.db_cluster_parameter_groups[0].db_cluster_parameter_group_name #=> String
       #   resp.db_cluster_parameter_groups[0].db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_groups[0].description #=> String
       #   resp.db_cluster_parameter_groups[0].db_cluster_parameter_group_arn #=> String
+      #
       # @overload describe_db_cluster_parameter_groups(params = {})
       # @param [Hash] params ({})
       def describe_db_cluster_parameter_groups(params = {}, options = {})
@@ -3577,6 +3882,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_parameter_group_name
       #   The name of a specific DB cluster parameter group to return parameter
       #   details for.
@@ -3588,11 +3894,14 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :source
       #   A value that indicates to return only parameters for a specific
       #   source. Parameter sources can be `engine`, `service`, or `customer`.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -3602,17 +3911,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBClusterParameters` request. If this parameter is specified,
       #   the response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::DBClusterParameterGroupDetails] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBClusterParameterGroupDetails#parameters #Parameters} => Array&lt;Types::Parameter&gt;
-      #   * {Types::DBClusterParameterGroupDetails#marker #Marker} => String
+      #   * {Types::DBClusterParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
+      #   * {Types::DBClusterParameterGroupDetails#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_cluster_parameters({
       #     db_cluster_parameter_group_name: "String", # required
       #     source: "String",
@@ -3627,6 +3939,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.parameters #=> Array
       #   resp.parameters[0].parameter_name #=> String
       #   resp.parameters[0].parameter_value #=> String
@@ -3639,6 +3952,7 @@ module Aws
       #   resp.parameters[0].minimum_engine_version #=> String
       #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
       #   resp.marker #=> String
+      #
       # @overload describe_db_cluster_parameters(params = {})
       # @param [Hash] params ({})
       def describe_db_cluster_parameters(params = {}, options = {})
@@ -3659,24 +3973,29 @@ module Aws
       # To add or remove access for an AWS account to copy or restore a manual
       # DB cluster snapshot, or to make the manual DB cluster snapshot public
       # or private, use the ModifyDBClusterSnapshotAttribute API action.
+      #
       # @option params [required, String] :db_cluster_snapshot_identifier
       #   The identifier for the DB cluster snapshot to describe the attributes
       #   for.
+      #
       # @return [Types::DescribeDBClusterSnapshotAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDBClusterSnapshotAttributesResult#db_cluster_snapshot_attributes_result #DBClusterSnapshotAttributesResult} => Types::DBClusterSnapshotAttributesResult
+      #   * {Types::DescribeDBClusterSnapshotAttributesResult#db_cluster_snapshot_attributes_result #db_cluster_snapshot_attributes_result} => Types::DBClusterSnapshotAttributesResult
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_cluster_snapshot_attributes({
       #     db_cluster_snapshot_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_identifier #=> String
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes #=> Array
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values[0] #=> String
+      #
       # @overload describe_db_cluster_snapshot_attributes(params = {})
       # @param [Hash] params ({})
       def describe_db_cluster_snapshot_attributes(params = {}, options = {})
@@ -3693,6 +4012,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [String] :db_cluster_identifier
       #   The ID of the DB cluster to retrieve the list of DB cluster snapshots
       #   for. This parameter cannot be used in conjunction with the
@@ -3706,6 +4026,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :db_cluster_snapshot_identifier
       #   A specific DB cluster snapshot identifier to describe. This parameter
       #   cannot be used in conjunction with the `DBClusterIdentifier`
@@ -3721,6 +4042,7 @@ module Aws
       #
       #   * If this identifier is for an automated snapshot, the `SnapshotType`
       #     parameter must also be specified.
+      #
       # @option params [String] :snapshot_type
       #   The type of DB cluster snapshots to be returned. You can specify one
       #   of the following values:
@@ -3748,8 +4070,10 @@ module Aws
       #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
       #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -3759,11 +4083,13 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBClusterSnapshots` request. If this parameter is specified,
       #   the response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @option params [Boolean] :include_shared
       #   Set this value to `true` to include shared manual DB cluster snapshots
       #   from other AWS accounts that this AWS account has been given
@@ -3773,6 +4099,7 @@ module Aws
       #   You can give an AWS account permission to restore a manual DB cluster
       #   snapshot from another AWS account by the
       #   ModifyDBClusterSnapshotAttribute API action.
+      #
       # @option params [Boolean] :include_public
       #   Set this value to `true` to include manual DB cluster snapshots that
       #   are public and can be copied or restored by any AWS account, otherwise
@@ -3781,12 +4108,14 @@ module Aws
       #
       #   You can share a manual DB cluster snapshot as public by using the
       #   ModifyDBClusterSnapshotAttribute API action.
+      #
       # @return [Types::DBClusterSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBClusterSnapshotMessage#marker #Marker} => String
-      #   * {Types::DBClusterSnapshotMessage#db_cluster_snapshots #DBClusterSnapshots} => Array&lt;Types::DBClusterSnapshot&gt;
+      #   * {Types::DBClusterSnapshotMessage#marker #marker} => String
+      #   * {Types::DBClusterSnapshotMessage#db_cluster_snapshots #db_cluster_snapshots} => Array&lt;Types::DBClusterSnapshot&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_cluster_snapshots({
       #     db_cluster_identifier: "String",
       #     db_cluster_snapshot_identifier: "String",
@@ -3804,6 +4133,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_cluster_snapshots #=> Array
       #   resp.db_cluster_snapshots[0].availability_zones #=> Array
@@ -3825,6 +4155,7 @@ module Aws
       #   resp.db_cluster_snapshots[0].storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshots[0].kms_key_id #=> String
       #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
+      #
       # @overload describe_db_cluster_snapshots(params = {})
       # @param [Hash] params ({})
       def describe_db_cluster_snapshots(params = {}, options = {})
@@ -3841,6 +4172,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [String] :db_cluster_identifier
       #   The user-supplied DB cluster identifier. If this parameter is
       #   specified, information from only the specific DB cluster is returned.
@@ -3853,6 +4185,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Filter>] :filters
       #   A filter that specifies one or more DB clusters to describe.
       #
@@ -3863,6 +4196,7 @@ module Aws
       #     information about the DB clusters identified by these ARNs.
       #
       #   ^
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -3872,16 +4206,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous DescribeDBClusters
       #   request. If this parameter is specified, the response includes only
       #   records beyond the marker, up to the value specified by `MaxRecords`.
+      #
       # @return [Types::DBClusterMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBClusterMessage#marker #Marker} => String
-      #   * {Types::DBClusterMessage#db_clusters #DBClusters} => Array&lt;Types::DBCluster&gt;
+      #   * {Types::DBClusterMessage#marker #marker} => String
+      #   * {Types::DBClusterMessage#db_clusters #db_clusters} => Array&lt;Types::DBCluster&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_clusters({
       #     db_cluster_identifier: "String",
       #     filters: [
@@ -3895,6 +4232,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_clusters #=> Array
       #   resp.db_clusters[0].allocated_storage #=> Integer
@@ -3942,6 +4280,7 @@ module Aws
       #   resp.db_clusters[0].associated_roles[0].role_arn #=> String
       #   resp.db_clusters[0].associated_roles[0].status #=> String
       #   resp.db_clusters[0].cluster_create_time #=> Time
+      #
       # @overload describe_db_clusters(params = {})
       # @param [Hash] params ({})
       def describe_db_clusters(params = {}, options = {})
@@ -3950,12 +4289,15 @@ module Aws
       end
 
       # Returns a list of the available DB engines.
+      #
       # @option params [String] :engine
       #   The database engine to return.
+      #
       # @option params [String] :engine_version
       #   The database engine version to return.
       #
       #   Example: `5.1.49`
+      #
       # @option params [String] :db_parameter_group_family
       #   The name of a specific DB parameter group family to return details
       #   for.
@@ -3967,8 +4309,10 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Filter>] :filters
       #   Not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more than
       #   the `MaxRecords` value is available, a pagination token called a
@@ -3978,27 +4322,33 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous request. If this
       #   parameter is specified, the response includes only records beyond the
       #   marker, up to the value specified by `MaxRecords`.
+      #
       # @option params [Boolean] :default_only
       #   Indicates that only the default version of the specified engine or
       #   engine and major version combination is returned.
+      #
       # @option params [Boolean] :list_supported_character_sets
       #   If this parameter is specified and the requested engine supports the
       #   `CharacterSetName` parameter for `CreateDBInstance`, the response
       #   includes a list of supported character sets for each engine version.
+      #
       # @option params [Boolean] :list_supported_timezones
       #   If this parameter is specified and the requested engine supports the
       #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
       #   list of supported time zones for each engine version.
+      #
       # @return [Types::DBEngineVersionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBEngineVersionMessage#marker #Marker} => String
-      #   * {Types::DBEngineVersionMessage#db_engine_versions #DBEngineVersions} => Array&lt;Types::DBEngineVersion&gt;
+      #   * {Types::DBEngineVersionMessage#marker #marker} => String
+      #   * {Types::DBEngineVersionMessage#db_engine_versions #db_engine_versions} => Array&lt;Types::DBEngineVersion&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_engine_versions({
       #     engine: "String",
       #     engine_version: "String",
@@ -4017,6 +4367,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_engine_versions #=> Array
       #   resp.db_engine_versions[0].engine #=> String
@@ -4037,6 +4388,7 @@ module Aws
       #   resp.db_engine_versions[0].valid_upgrade_target[0].is_major_version_upgrade #=> Boolean
       #   resp.db_engine_versions[0].supported_timezones #=> Array
       #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
+      #
       # @overload describe_db_engine_versions(params = {})
       # @param [Hash] params ({})
       def describe_db_engine_versions(params = {}, options = {})
@@ -4046,6 +4398,7 @@ module Aws
 
       # Returns information about provisioned RDS instances. This API supports
       # pagination.
+      #
       # @option params [String] :db_instance_identifier
       #   The user-supplied instance identifier. If this parameter is specified,
       #   information from only the specific DB instance is returned. This
@@ -4058,6 +4411,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Filter>] :filters
       #   A filter that specifies one or more DB instances to describe.
       #
@@ -4068,6 +4422,7 @@ module Aws
       #     information about the DB instances identified by these ARNs.
       #
       #   ^
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4077,17 +4432,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBInstances` request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::DBInstanceMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBInstanceMessage#marker #Marker} => String
-      #   * {Types::DBInstanceMessage#db_instances #DBInstances} => Array&lt;Types::DBInstance&gt;
+      #   * {Types::DBInstanceMessage#marker #marker} => String
+      #   * {Types::DBInstanceMessage#db_instances #db_instances} => Array&lt;Types::DBInstance&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_instances({
       #     db_instance_identifier: "String",
       #     filters: [
@@ -4101,6 +4459,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_instances #=> Array
       #   resp.db_instances[0].db_instance_identifier #=> String
@@ -4189,6 +4548,7 @@ module Aws
       #   resp.db_instances[0].promotion_tier #=> Integer
       #   resp.db_instances[0].db_instance_arn #=> String
       #   resp.db_instances[0].timezone #=> String
+      #
       # @overload describe_db_instances(params = {})
       # @param [Hash] params ({})
       def describe_db_instances(params = {}, options = {})
@@ -4197,6 +4557,7 @@ module Aws
       end
 
       # Returns a list of DB log files for the DB instance.
+      #
       # @option params [required, String] :db_instance_identifier
       #   The customer-assigned name of the DB instance that contains the log
       #   files you want to list.
@@ -4208,32 +4569,40 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :filename_contains
       #   Filters the available log files for log file names that contain the
       #   specified string.
+      #
       # @option params [Integer] :file_last_written
       #   Filters the available log files for files written since the specified
       #   date, in POSIX timestamp format with milliseconds.
+      #
       # @option params [Integer] :file_size
       #   Filters the available log files for files larger than the specified
       #   size.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified MaxRecords value, a pagination token
       #   called a marker is included in the response so that the remaining
       #   results can be retrieved.
+      #
       # @option params [String] :marker
       #   The pagination token provided in the previous request. If this
       #   parameter is specified the response includes only records beyond the
       #   marker, up to MaxRecords.
+      #
       # @return [Types::DescribeDBLogFilesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDBLogFilesResponse#describe_db_log_files #DescribeDBLogFiles} => Array&lt;Types::DescribeDBLogFilesDetails&gt;
-      #   * {Types::DescribeDBLogFilesResponse#marker #Marker} => String
+      #   * {Types::DescribeDBLogFilesResponse#describe_db_log_files #describe_db_log_files} => Array&lt;Types::DescribeDBLogFilesDetails&gt;
+      #   * {Types::DescribeDBLogFilesResponse#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_log_files({
       #     db_instance_identifier: "String", # required
       #     filename_contains: "String",
@@ -4250,11 +4619,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.describe_db_log_files #=> Array
       #   resp.describe_db_log_files[0].log_file_name #=> String
       #   resp.describe_db_log_files[0].last_written #=> Integer
       #   resp.describe_db_log_files[0].size #=> Integer
       #   resp.marker #=> String
+      #
       # @overload describe_db_log_files(params = {})
       # @param [Hash] params ({})
       def describe_db_log_files(params = {}, options = {})
@@ -4265,6 +4636,7 @@ module Aws
       # Returns a list of `DBParameterGroup` descriptions. If a
       # `DBParameterGroupName` is specified, the list will contain only the
       # description of the specified DB parameter group.
+      #
       # @option params [String] :db_parameter_group_name
       #   The name of a specific DB parameter group to return details for.
       #
@@ -4275,8 +4647,10 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4286,17 +4660,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBParameterGroups` request. If this parameter is specified,
       #   the response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::DBParameterGroupsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBParameterGroupsMessage#marker #Marker} => String
-      #   * {Types::DBParameterGroupsMessage#db_parameter_groups #DBParameterGroups} => Array&lt;Types::DBParameterGroup&gt;
+      #   * {Types::DBParameterGroupsMessage#marker #marker} => String
+      #   * {Types::DBParameterGroupsMessage#db_parameter_groups #db_parameter_groups} => Array&lt;Types::DBParameterGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_parameter_groups({
       #     db_parameter_group_name: "String",
       #     filters: [
@@ -4310,12 +4687,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_parameter_groups #=> Array
       #   resp.db_parameter_groups[0].db_parameter_group_name #=> String
       #   resp.db_parameter_groups[0].db_parameter_group_family #=> String
       #   resp.db_parameter_groups[0].description #=> String
       #   resp.db_parameter_groups[0].db_parameter_group_arn #=> String
+      #
       # @overload describe_db_parameter_groups(params = {})
       # @param [Hash] params ({})
       def describe_db_parameter_groups(params = {}, options = {})
@@ -4325,6 +4704,7 @@ module Aws
 
       # Returns the detailed parameter list for a particular DB parameter
       # group.
+      #
       # @option params [required, String] :db_parameter_group_name
       #   The name of a specific DB parameter group to return details for.
       #
@@ -4335,14 +4715,17 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :source
       #   The parameter types to return.
       #
       #   Default: All parameter types returned
       #
       #   Valid Values: `user | system | engine-default`
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4352,17 +4735,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBParameters` request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::DBParameterGroupDetails] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBParameterGroupDetails#parameters #Parameters} => Array&lt;Types::Parameter&gt;
-      #   * {Types::DBParameterGroupDetails#marker #Marker} => String
+      #   * {Types::DBParameterGroupDetails#parameters #parameters} => Array&lt;Types::Parameter&gt;
+      #   * {Types::DBParameterGroupDetails#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_parameters({
       #     db_parameter_group_name: "String", # required
       #     source: "String",
@@ -4377,6 +4763,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.parameters #=> Array
       #   resp.parameters[0].parameter_name #=> String
       #   resp.parameters[0].parameter_value #=> String
@@ -4389,6 +4776,7 @@ module Aws
       #   resp.parameters[0].minimum_engine_version #=> String
       #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
       #   resp.marker #=> String
+      #
       # @overload describe_db_parameters(params = {})
       # @param [Hash] params ({})
       def describe_db_parameters(params = {}, options = {})
@@ -4399,10 +4787,13 @@ module Aws
       # Returns a list of `DBSecurityGroup` descriptions. If a
       # `DBSecurityGroupName` is specified, the list will contain only the
       # descriptions of the specified DB security group.
+      #
       # @option params [String] :db_security_group_name
       #   The name of the DB security group to return details for.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4412,17 +4803,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBSecurityGroups` request. If this parameter is specified,
       #   the response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::DBSecurityGroupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBSecurityGroupMessage#marker #Marker} => String
-      #   * {Types::DBSecurityGroupMessage#db_security_groups #DBSecurityGroups} => Array&lt;Types::DBSecurityGroup&gt;
+      #   * {Types::DBSecurityGroupMessage#marker #marker} => String
+      #   * {Types::DBSecurityGroupMessage#db_security_groups #db_security_groups} => Array&lt;Types::DBSecurityGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_security_groups({
       #     db_security_group_name: "String",
       #     filters: [
@@ -4436,6 +4830,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_security_groups #=> Array
       #   resp.db_security_groups[0].owner_id #=> String
@@ -4451,6 +4846,7 @@ module Aws
       #   resp.db_security_groups[0].ip_ranges[0].status #=> String
       #   resp.db_security_groups[0].ip_ranges[0].cidrip #=> String
       #   resp.db_security_groups[0].db_security_group_arn #=> String
+      #
       # @overload describe_db_security_groups(params = {})
       # @param [Hash] params ({})
       def describe_db_security_groups(params = {}, options = {})
@@ -4471,23 +4867,28 @@ module Aws
       # To add or remove access for an AWS account to copy or restore a manual
       # DB snapshot, or to make the manual DB snapshot public or private, use
       # the ModifyDBSnapshotAttribute API action.
+      #
       # @option params [required, String] :db_snapshot_identifier
       #   The identifier for the DB snapshot to describe the attributes for.
+      #
       # @return [Types::DescribeDBSnapshotAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDBSnapshotAttributesResult#db_snapshot_attributes_result #DBSnapshotAttributesResult} => Types::DBSnapshotAttributesResult
+      #   * {Types::DescribeDBSnapshotAttributesResult#db_snapshot_attributes_result #db_snapshot_attributes_result} => Types::DBSnapshotAttributesResult
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_snapshot_attributes({
       #     db_snapshot_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_snapshot_attributes_result.db_snapshot_identifier #=> String
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes #=> Array
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values[0] #=> String
+      #
       # @overload describe_db_snapshot_attributes(params = {})
       # @param [Hash] params ({})
       def describe_db_snapshot_attributes(params = {}, options = {})
@@ -4497,6 +4898,7 @@ module Aws
 
       # Returns information about DB snapshots. This API action supports
       # pagination.
+      #
       # @option params [String] :db_instance_identifier
       #   The ID of the DB instance to retrieve the list of DB snapshots for.
       #   This parameter cannot be used in conjunction with
@@ -4509,6 +4911,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :db_snapshot_identifier
       #   A specific DB snapshot identifier to describe. This parameter cannot
       #   be used in conjunction with `DBInstanceIdentifier`. This value is
@@ -4524,6 +4927,7 @@ module Aws
       #
       #   * If this identifier is for an automated snapshot, the `SnapshotType`
       #     parameter must also be specified.
+      #
       # @option params [String] :snapshot_type
       #   The type of snapshots to be returned. You can specify one of the
       #   following values:
@@ -4551,8 +4955,10 @@ module Aws
       #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
       #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4562,11 +4968,13 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeDBSnapshots` request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @option params [Boolean] :include_shared
       #   Set this value to `true` to include shared manual DB snapshots from
       #   other AWS accounts that this AWS account has been given permission to
@@ -4576,6 +4984,7 @@ module Aws
       #   You can give an AWS account permission to restore a manual DB snapshot
       #   from another AWS account by using the ModifyDBSnapshotAttribute API
       #   action.
+      #
       # @option params [Boolean] :include_public
       #   Set this value to `true` to include manual DB snapshots that are
       #   public and can be copied or restored by any AWS account, otherwise set
@@ -4583,12 +4992,14 @@ module Aws
       #
       #   You can share a manual DB snapshot as public by using the
       #   ModifyDBSnapshotAttribute API.
+      #
       # @return [Types::DBSnapshotMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBSnapshotMessage#marker #Marker} => String
-      #   * {Types::DBSnapshotMessage#db_snapshots #DBSnapshots} => Array&lt;Types::DBSnapshot&gt;
+      #   * {Types::DBSnapshotMessage#marker #marker} => String
+      #   * {Types::DBSnapshotMessage#db_snapshots #db_snapshots} => Array&lt;Types::DBSnapshot&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_snapshots({
       #     db_instance_identifier: "String",
       #     db_snapshot_identifier: "String",
@@ -4606,6 +5017,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_snapshots #=> Array
       #   resp.db_snapshots[0].db_snapshot_identifier #=> String
@@ -4633,6 +5045,7 @@ module Aws
       #   resp.db_snapshots[0].kms_key_id #=> String
       #   resp.db_snapshots[0].db_snapshot_arn #=> String
       #   resp.db_snapshots[0].timezone #=> String
+      #
       # @overload describe_db_snapshots(params = {})
       # @param [Hash] params ({})
       def describe_db_snapshots(params = {}, options = {})
@@ -4649,10 +5062,13 @@ module Aws
       #
       #
       # [1]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+      #
       # @option params [String] :db_subnet_group_name
       #   The name of the DB subnet group to return details for.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4662,17 +5078,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   DescribeDBSubnetGroups request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @return [Types::DBSubnetGroupMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBSubnetGroupMessage#marker #Marker} => String
-      #   * {Types::DBSubnetGroupMessage#db_subnet_groups #DBSubnetGroups} => Array&lt;Types::DBSubnetGroup&gt;
+      #   * {Types::DBSubnetGroupMessage#marker #marker} => String
+      #   * {Types::DBSubnetGroupMessage#db_subnet_groups #db_subnet_groups} => Array&lt;Types::DBSubnetGroup&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_db_subnet_groups({
       #     db_subnet_group_name: "String",
       #     filters: [
@@ -4686,6 +5105,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.db_subnet_groups #=> Array
       #   resp.db_subnet_groups[0].db_subnet_group_name #=> String
@@ -4697,6 +5117,7 @@ module Aws
       #   resp.db_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
       #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
+      #
       # @overload describe_db_subnet_groups(params = {})
       # @param [Hash] params ({})
       def describe_db_subnet_groups(params = {}, options = {})
@@ -4713,11 +5134,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_parameter_group_family
       #   The name of the DB cluster parameter group family to return engine
       #   parameter information for.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4727,16 +5151,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeEngineDefaultClusterParameters` request. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::DescribeEngineDefaultClusterParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEngineDefaultClusterParametersResult#engine_defaults #EngineDefaults} => Types::EngineDefaults
+      #   * {Types::DescribeEngineDefaultClusterParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_engine_default_cluster_parameters({
       #     db_parameter_group_family: "String", # required
       #     filters: [
@@ -4750,6 +5177,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.engine_defaults.db_parameter_group_family #=> String
       #   resp.engine_defaults.marker #=> String
       #   resp.engine_defaults.parameters #=> Array
@@ -4763,6 +5191,7 @@ module Aws
       #   resp.engine_defaults.parameters[0].is_modifiable #=> Boolean
       #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
       #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+      #
       # @overload describe_engine_default_cluster_parameters(params = {})
       # @param [Hash] params ({})
       def describe_engine_default_cluster_parameters(params = {}, options = {})
@@ -4772,10 +5201,13 @@ module Aws
 
       # Returns the default engine and system parameter information for the
       # specified database engine.
+      #
       # @option params [required, String] :db_parameter_group_family
       #   The name of the DB parameter group family.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   Not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4785,16 +5217,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribeEngineDefaultParameters` request. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords`.
+      #
       # @return [Types::DescribeEngineDefaultParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #EngineDefaults} => Types::EngineDefaults
+      #   * {Types::DescribeEngineDefaultParametersResult#engine_defaults #engine_defaults} => Types::EngineDefaults
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_engine_default_parameters({
       #     db_parameter_group_family: "String", # required
       #     filters: [
@@ -4808,6 +5243,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.engine_defaults.db_parameter_group_family #=> String
       #   resp.engine_defaults.marker #=> String
       #   resp.engine_defaults.parameters #=> Array
@@ -4821,6 +5257,7 @@ module Aws
       #   resp.engine_defaults.parameters[0].is_modifiable #=> Boolean
       #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
       #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+      #
       # @overload describe_engine_default_parameters(params = {})
       # @param [Hash] params ({})
       def describe_engine_default_parameters(params = {}, options = {})
@@ -4836,18 +5273,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+      #
       # @option params [String] :source_type
       #   The type of source that will be generating the events.
       #
       #   Valid values: db-instance \| db-parameter-group \| db-security-group
       #   \| db-snapshot
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @return [Types::EventCategoriesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventCategoriesMessage#event_categories_map_list #EventCategoriesMapList} => Array&lt;Types::EventCategoriesMap&gt;
+      #   * {Types::EventCategoriesMessage#event_categories_map_list #event_categories_map_list} => Array&lt;Types::EventCategoriesMap&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_event_categories({
       #     source_type: "String",
       #     filters: [
@@ -4859,10 +5300,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_categories_map_list #=> Array
       #   resp.event_categories_map_list[0].source_type #=> String
       #   resp.event_categories_map_list[0].event_categories #=> Array
       #   resp.event_categories_map_list[0].event_categories[0] #=> String
+      #
       # @overload describe_event_categories(params = {})
       # @param [Hash] params ({})
       def describe_event_categories(params = {}, options = {})
@@ -4876,11 +5319,14 @@ module Aws
       #
       # If you specify a SubscriptionName, lists the description for that
       # subscription.
+      #
       # @option params [String] :subscription_name
       #   The name of the RDS event notification subscription you want to
       #   describe.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -4890,17 +5336,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   DescribeOrderableDBInstanceOptions request. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords` .
+      #
       # @return [Types::EventSubscriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventSubscriptionsMessage#marker #Marker} => String
-      #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #EventSubscriptionsList} => Array&lt;Types::EventSubscription&gt;
+      #   * {Types::EventSubscriptionsMessage#marker #marker} => String
+      #   * {Types::EventSubscriptionsMessage#event_subscriptions_list #event_subscriptions_list} => Array&lt;Types::EventSubscription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_event_subscriptions({
       #     subscription_name: "String",
       #     filters: [
@@ -4914,6 +5363,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.event_subscriptions_list #=> Array
       #   resp.event_subscriptions_list[0].customer_aws_id #=> String
@@ -4928,6 +5378,7 @@ module Aws
       #   resp.event_subscriptions_list[0].event_categories_list[0] #=> String
       #   resp.event_subscriptions_list[0].enabled #=> Boolean
       #   resp.event_subscriptions_list[0].event_subscription_arn #=> String
+      #
       # @overload describe_event_subscriptions(params = {})
       # @param [Hash] params ({})
       def describe_event_subscriptions(params = {}, options = {})
@@ -4940,6 +5391,7 @@ module Aws
       # specific to a particular DB instance, DB security group, database
       # snapshot, or DB parameter group can be obtained by providing the name
       # as a parameter. By default, the past hour of events are returned.
+      #
       # @option params [String] :source_identifier
       #   The identifier of the event source for which events will be returned.
       #   If not specified, then all sources are included in the response.
@@ -4961,9 +5413,11 @@ module Aws
       #     supplied.
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       # @option params [String] :source_type
       #   The event source to retrieve events for. If no value is specified, all
       #   events are returned.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified
       #   in ISO 8601 format. For more information about ISO 8601, go to the
@@ -4974,6 +5428,7 @@ module Aws
       #
       #
       #   [1]: http://en.wikipedia.org/wiki/ISO_8601
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   The end of the time interval for which to retrieve events, specified
       #   in ISO 8601 format. For more information about ISO 8601, go to the
@@ -4984,15 +5439,19 @@ module Aws
       #
       #
       #   [1]: http://en.wikipedia.org/wiki/ISO_8601
+      #
       # @option params [Integer] :duration
       #   The number of minutes to retrieve events for.
       #
       #   Default: 60
+      #
       # @option params [Array<String>] :event_categories
       #   A list of event categories that trigger notifications for a event
       #   notification subscription.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -5002,16 +5461,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous DescribeEvents
       #   request. If this parameter is specified, the response includes only
       #   records beyond the marker, up to the value specified by `MaxRecords`.
+      #
       # @return [Types::EventsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EventsMessage#marker #Marker} => String
-      #   * {Types::EventsMessage#events #Events} => Array&lt;Types::Event&gt;
+      #   * {Types::EventsMessage#marker #marker} => String
+      #   * {Types::EventsMessage#events #events} => Array&lt;Types::Event&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_events({
       #     source_identifier: "String",
       #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot
@@ -5030,6 +5492,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.events #=> Array
       #   resp.events[0].source_identifier #=> String
@@ -5039,6 +5502,7 @@ module Aws
       #   resp.events[0].event_categories[0] #=> String
       #   resp.events[0].date #=> Time
       #   resp.events[0].source_arn #=> String
+      #
       # @overload describe_events(params = {})
       # @param [Hash] params ({})
       def describe_events(params = {}, options = {})
@@ -5047,14 +5511,18 @@ module Aws
       end
 
       # Describes all available options.
+      #
       # @option params [required, String] :engine_name
       #   A required parameter. Options available for the given engine name will
       #   be described.
+      #
       # @option params [String] :major_engine_version
       #   If specified, filters the results to include only options for the
       #   specified major engine version.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -5064,16 +5532,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous request. If this
       #   parameter is specified, the response includes only records beyond the
       #   marker, up to the value specified by `MaxRecords`.
+      #
       # @return [Types::OptionGroupOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::OptionGroupOptionsMessage#option_group_options #OptionGroupOptions} => Array&lt;Types::OptionGroupOption&gt;
-      #   * {Types::OptionGroupOptionsMessage#marker #Marker} => String
+      #   * {Types::OptionGroupOptionsMessage#option_group_options #option_group_options} => Array&lt;Types::OptionGroupOption&gt;
+      #   * {Types::OptionGroupOptionsMessage#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_option_group_options({
       #     engine_name: "String", # required
       #     major_engine_version: "String",
@@ -5088,6 +5559,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.option_group_options #=> Array
       #   resp.option_group_options[0].name #=> String
       #   resp.option_group_options[0].description #=> String
@@ -5113,6 +5585,7 @@ module Aws
       #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
       #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
       #   resp.marker #=> String
+      #
       # @overload describe_option_group_options(params = {})
       # @param [Hash] params ({})
       def describe_option_group_options(params = {}, options = {})
@@ -5121,16 +5594,20 @@ module Aws
       end
 
       # Describes the available option groups.
+      #
       # @option params [String] :option_group_name
       #   The name of the option group to describe. Cannot be supplied together
       #   with EngineName or MajorEngineVersion.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   DescribeOptionGroups request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -5140,19 +5617,23 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :engine_name
       #   Filters the list of option groups to only include groups associated
       #   with a specific database engine.
+      #
       # @option params [String] :major_engine_version
       #   Filters the list of option groups to only include groups associated
       #   with a specific database engine version. If specified, then EngineName
       #   must also be specified.
+      #
       # @return [Types::OptionGroups] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::OptionGroups#option_groups_list #OptionGroupsList} => Array&lt;Types::OptionGroup&gt;
-      #   * {Types::OptionGroups#marker #Marker} => String
+      #   * {Types::OptionGroups#option_groups_list #option_groups_list} => Array&lt;Types::OptionGroup&gt;
+      #   * {Types::OptionGroups#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_option_groups({
       #     option_group_name: "String",
       #     filters: [
@@ -5168,6 +5649,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.option_groups_list #=> Array
       #   resp.option_groups_list[0].option_group_name #=> String
       #   resp.option_groups_list[0].option_group_description #=> String
@@ -5200,6 +5682,7 @@ module Aws
       #   resp.option_groups_list[0].vpc_id #=> String
       #   resp.option_groups_list[0].option_group_arn #=> String
       #   resp.marker #=> String
+      #
       # @overload describe_option_groups(params = {})
       # @param [Hash] params ({})
       def describe_option_groups(params = {}, options = {})
@@ -5209,22 +5692,29 @@ module Aws
 
       # Returns a list of orderable DB instance options for the specified
       # engine.
+      #
       # @option params [required, String] :engine
       #   The name of the engine to retrieve DB instance options for.
+      #
       # @option params [String] :engine_version
       #   The engine version filter value. Specify this parameter to show only
       #   the available offerings matching the specified engine version.
+      #
       # @option params [String] :db_instance_class
       #   The DB instance class filter value. Specify this parameter to show
       #   only the available offerings matching the specified DB instance class.
+      #
       # @option params [String] :license_model
       #   The license model filter value. Specify this parameter to show only
       #   the available offerings matching the specified license model.
+      #
       # @option params [Boolean] :vpc
       #   The VPC filter value. Specify this parameter to show only the
       #   available VPC or non-VPC offerings.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -5234,17 +5724,20 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   DescribeOrderableDBInstanceOptions request. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   the value specified by `MaxRecords` .
+      #
       # @return [Types::OrderableDBInstanceOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #OrderableDBInstanceOptions} => Array&lt;Types::OrderableDBInstanceOption&gt;
-      #   * {Types::OrderableDBInstanceOptionsMessage#marker #Marker} => String
+      #   * {Types::OrderableDBInstanceOptionsMessage#orderable_db_instance_options #orderable_db_instance_options} => Array&lt;Types::OrderableDBInstanceOption&gt;
+      #   * {Types::OrderableDBInstanceOptionsMessage#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_orderable_db_instance_options({
       #     engine: "String", # required
       #     engine_version: "String",
@@ -5262,6 +5755,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.orderable_db_instance_options #=> Array
       #   resp.orderable_db_instance_options[0].engine #=> String
       #   resp.orderable_db_instance_options[0].engine_version #=> String
@@ -5277,6 +5771,7 @@ module Aws
       #   resp.orderable_db_instance_options[0].supports_iops #=> Boolean
       #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
       #   resp.marker #=> String
+      #
       # @overload describe_orderable_db_instance_options(params = {})
       # @param [Hash] params ({})
       def describe_orderable_db_instance_options(params = {}, options = {})
@@ -5286,8 +5781,10 @@ module Aws
 
       # Returns a list of resources (for example, DB instances) that have at
       # least one pending maintenance action.
+      #
       # @option params [String] :resource_identifier
       #   The ARN of a resource to return pending maintenance actions for.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   A filter that specifies one or more resources to return pending
       #   maintenance actions for.
@@ -5302,11 +5799,13 @@ module Aws
       #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
       #     ARNs. The results list will only include pending maintenance actions
       #     for the DB instances identified by these ARNs.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribePendingMaintenanceActions` request. If this parameter is
       #   specified, the response includes only records beyond the marker, up to
       #   a number of records specified by `MaxRecords`.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -5316,12 +5815,14 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @return [Types::PendingMaintenanceActionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PendingMaintenanceActionsMessage#pending_maintenance_actions #PendingMaintenanceActions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
-      #   * {Types::PendingMaintenanceActionsMessage#marker #Marker} => String
+      #   * {Types::PendingMaintenanceActionsMessage#pending_maintenance_actions #pending_maintenance_actions} => Array&lt;Types::ResourcePendingMaintenanceActions&gt;
+      #   * {Types::PendingMaintenanceActionsMessage#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_pending_maintenance_actions({
       #     resource_identifier: "String",
       #     filters: [
@@ -5335,6 +5836,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.pending_maintenance_actions #=> Array
       #   resp.pending_maintenance_actions[0].resource_identifier #=> String
       #   resp.pending_maintenance_actions[0].pending_maintenance_action_details #=> Array
@@ -5345,6 +5847,7 @@ module Aws
       #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].current_apply_date #=> Time
       #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].description #=> String
       #   resp.marker #=> String
+      #
       # @overload describe_pending_maintenance_actions(params = {})
       # @param [Hash] params ({})
       def describe_pending_maintenance_actions(params = {}, options = {})
@@ -5354,35 +5857,44 @@ module Aws
 
       # Returns information about reserved DB instances for this account, or
       # about a specified reserved DB instance.
+      #
       # @option params [String] :reserved_db_instance_id
       #   The reserved DB instance identifier filter value. Specify this
       #   parameter to show only the reservation that matches the specified
       #   reservation ID.
+      #
       # @option params [String] :reserved_db_instances_offering_id
       #   The offering identifier filter value. Specify this parameter to show
       #   only purchased reservations matching the specified offering
       #   identifier.
+      #
       # @option params [String] :db_instance_class
       #   The DB instance class filter value. Specify this parameter to show
       #   only those reservations matching the specified DB instances class.
+      #
       # @option params [String] :duration
       #   The duration filter value, specified in years or seconds. Specify this
       #   parameter to show only reservations for this duration.
       #
       #   Valid Values: `1 | 3 | 31536000 | 94608000`
+      #
       # @option params [String] :product_description
       #   The product description filter value. Specify this parameter to show
       #   only those reservations matching the specified product description.
+      #
       # @option params [String] :offering_type
       #   The offering type filter value. Specify this parameter to show only
       #   the available offerings matching the specified offering type.
       #
       #   Valid Values: `"Partial Upfront" | "All Upfront" | "No Upfront" `
+      #
       # @option params [Boolean] :multi_az
       #   The Multi-AZ filter value. Specify this parameter to show only those
       #   reservations matching the specified Multi-AZ parameter.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more than
       #   the `MaxRecords` value is available, a pagination token called a
@@ -5392,16 +5904,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous request. If this
       #   parameter is specified, the response includes only records beyond the
       #   marker, up to the value specified by `MaxRecords`.
+      #
       # @return [Types::ReservedDBInstanceMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReservedDBInstanceMessage#marker #Marker} => String
-      #   * {Types::ReservedDBInstanceMessage#reserved_db_instances #ReservedDBInstances} => Array&lt;Types::ReservedDBInstance&gt;
+      #   * {Types::ReservedDBInstanceMessage#marker #marker} => String
+      #   * {Types::ReservedDBInstanceMessage#reserved_db_instances #reserved_db_instances} => Array&lt;Types::ReservedDBInstance&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_reserved_db_instances({
       #     reserved_db_instance_id: "String",
       #     reserved_db_instances_offering_id: "String",
@@ -5421,6 +5936,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.reserved_db_instances #=> Array
       #   resp.reserved_db_instances[0].reserved_db_instance_id #=> String
@@ -5440,6 +5956,7 @@ module Aws
       #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_frequency #=> String
       #   resp.reserved_db_instances[0].reserved_db_instance_arn #=> String
+      #
       # @overload describe_reserved_db_instances(params = {})
       # @param [Hash] params ({})
       def describe_reserved_db_instances(params = {}, options = {})
@@ -5448,33 +5965,41 @@ module Aws
       end
 
       # Lists available reserved DB instance offerings.
+      #
       # @option params [String] :reserved_db_instances_offering_id
       #   The offering identifier filter value. Specify this parameter to show
       #   only the available offering that matches the specified reservation
       #   identifier.
       #
       #   Example: `438012d3-4052-4cc7-b2e3-8d3372e0e706`
+      #
       # @option params [String] :db_instance_class
       #   The DB instance class filter value. Specify this parameter to show
       #   only the available offerings matching the specified DB instance class.
+      #
       # @option params [String] :duration
       #   Duration filter value, specified in years or seconds. Specify this
       #   parameter to show only reservations for this duration.
       #
       #   Valid Values: `1 | 3 | 31536000 | 94608000`
+      #
       # @option params [String] :product_description
       #   Product description filter value. Specify this parameter to show only
       #   the available offerings matching the specified product description.
+      #
       # @option params [String] :offering_type
       #   The offering type filter value. Specify this parameter to show only
       #   the available offerings matching the specified offering type.
       #
       #   Valid Values: `"Partial Upfront" | "All Upfront" | "No Upfront" `
+      #
       # @option params [Boolean] :multi_az
       #   The Multi-AZ filter value. Specify this parameter to show only the
       #   available offerings matching the specified Multi-AZ parameter.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more than
       #   the `MaxRecords` value is available, a pagination token called a
@@ -5484,16 +6009,19 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous request. If this
       #   parameter is specified, the response includes only records beyond the
       #   marker, up to the value specified by `MaxRecords`.
+      #
       # @return [Types::ReservedDBInstancesOfferingMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ReservedDBInstancesOfferingMessage#marker #Marker} => String
-      #   * {Types::ReservedDBInstancesOfferingMessage#reserved_db_instances_offerings #ReservedDBInstancesOfferings} => Array&lt;Types::ReservedDBInstancesOffering&gt;
+      #   * {Types::ReservedDBInstancesOfferingMessage#marker #marker} => String
+      #   * {Types::ReservedDBInstancesOfferingMessage#reserved_db_instances_offerings #reserved_db_instances_offerings} => Array&lt;Types::ReservedDBInstancesOffering&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_reserved_db_instances_offerings({
       #     reserved_db_instances_offering_id: "String",
       #     db_instance_class: "String",
@@ -5512,6 +6040,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.reserved_db_instances_offerings #=> Array
       #   resp.reserved_db_instances_offerings[0].reserved_db_instances_offering_id #=> String
@@ -5526,6 +6055,7 @@ module Aws
       #   resp.reserved_db_instances_offerings[0].recurring_charges #=> Array
       #   resp.reserved_db_instances_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instances_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+      #
       # @overload describe_reserved_db_instances_offerings(params = {})
       # @param [Hash] params ({})
       def describe_reserved_db_instances_offerings(params = {}, options = {})
@@ -5536,6 +6066,7 @@ module Aws
       # Returns a list of the source AWS regions where the current AWS region
       # can create a Read Replica or copy a DB snapshot from. This API action
       # supports pagination.
+      #
       # @option params [String] :region_name
       #   The source region name. For example, `us-east-1`.
       #
@@ -5544,6 +6075,7 @@ module Aws
       #   * Must specify a valid AWS Region name.
       #
       #   ^
+      #
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -5553,19 +6085,23 @@ module Aws
       #   Default: 100
       #
       #   Constraints: Minimum 20, maximum 100.
+      #
       # @option params [String] :marker
       #   An optional pagination token provided by a previous
       #   DescribeSourceRegions request. If this parameter is specified, the
       #   response includes only records beyond the marker, up to the value
       #   specified by `MaxRecords`.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @return [Types::SourceRegionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SourceRegionMessage#marker #Marker} => String
-      #   * {Types::SourceRegionMessage#source_regions #SourceRegions} => Array&lt;Types::SourceRegion&gt;
+      #   * {Types::SourceRegionMessage#marker #marker} => String
+      #   * {Types::SourceRegionMessage#source_regions #source_regions} => Array&lt;Types::SourceRegion&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_source_regions({
       #     region_name: "String",
       #     max_records: 1,
@@ -5579,11 +6115,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.marker #=> String
       #   resp.source_regions #=> Array
       #   resp.source_regions[0].region_name #=> String
       #   resp.source_regions[0].endpoint #=> String
       #   resp.source_regions[0].status #=> String
+      #
       # @overload describe_source_regions(params = {})
       # @param [Hash] params ({})
       def describe_source_regions(params = {}, options = {})
@@ -5593,6 +6131,7 @@ module Aws
 
       # Downloads all or a portion of the specified log file, up to 1 MB in
       # size.
+      #
       # @option params [required, String] :db_instance_identifier
       #   The customer-assigned name of the DB instance that contains the log
       #   files you want to list.
@@ -5604,12 +6143,15 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [required, String] :log_file_name
       #   The name of the log file to be downloaded.
+      #
       # @option params [String] :marker
       #   The pagination token provided in the previous request or "0". If the
       #   Marker parameter is specified the response includes only records
       #   beyond the marker until the end of the file or up to NumberOfLines.
+      #
       # @option params [Integer] :number_of_lines
       #   The number of lines to download. If the number of lines specified
       #   results in a file over 1 MB in size, the file will be truncated at 1
@@ -5635,13 +6177,15 @@ module Aws
       #     request. Include the Marker value returned in the response as the
       #     Marker value for the next request, continuing until the
       #     AdditionalDataPending response element returns false.
+      #
       # @return [Types::DownloadDBLogFilePortionDetails] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DownloadDBLogFilePortionDetails#log_file_data #LogFileData} => String
-      #   * {Types::DownloadDBLogFilePortionDetails#marker #Marker} => String
-      #   * {Types::DownloadDBLogFilePortionDetails#additional_data_pending #AdditionalDataPending} => Boolean
+      #   * {Types::DownloadDBLogFilePortionDetails#log_file_data #log_file_data} => String
+      #   * {Types::DownloadDBLogFilePortionDetails#marker #marker} => String
+      #   * {Types::DownloadDBLogFilePortionDetails#additional_data_pending #additional_data_pending} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.download_db_log_file_portion({
       #     db_instance_identifier: "String", # required
       #     log_file_name: "String", # required
@@ -5650,9 +6194,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.log_file_data #=> String
       #   resp.marker #=> String
       #   resp.additional_data_pending #=> Boolean
+      #
       # @overload download_db_log_file_portion(params = {})
       # @param [Hash] params ({})
       def download_db_log_file_portion(params = {}, options = {})
@@ -5679,6 +6225,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [String] :db_cluster_identifier
       #   A DB cluster identifier to force a failover for. This parameter is not
       #   case-sensitive.
@@ -5690,22 +6237,26 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :target_db_instance_identifier
       #   The name of the instance to promote to the primary instance.
       #
       #   You must specify the instance identifier for an Aurora Replica in the
       #   DB cluster. For example, `mydbcluster-replica1`.
+      #
       # @return [Types::FailoverDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::FailoverDBClusterResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::FailoverDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.failover_db_cluster({
       #     db_cluster_identifier: "String",
       #     target_db_instance_identifier: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -5751,6 +6302,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload failover_db_cluster(params = {})
       # @param [Hash] params ({})
       def failover_db_cluster(params = {}, options = {})
@@ -5766,6 +6318,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+      #
       # @option params [required, String] :resource_name
       #   The Amazon RDS resource with tags to be listed. This value is an
       #   Amazon Resource Name (ARN). For information about creating an ARN, see
@@ -5774,13 +6327,16 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
+      #
       # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TagListMessage#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::TagListMessage#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_resource({
       #     resource_name: "String", # required
       #     filters: [
@@ -5792,9 +6348,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
       def list_tags_for_resource(params = {}, options = {})
@@ -5811,6 +6369,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The DB cluster identifier for the cluster being modified. This
       #   parameter is not case-sensitive.
@@ -5824,6 +6383,7 @@ module Aws
       #   * First character must be a letter.
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       # @option params [String] :new_db_cluster_identifier
       #   The new DB cluster identifier for the DB cluster when renaming a DB
       #   cluster. This value is stored as a lowercase string.
@@ -5837,6 +6397,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-cluster2`
+      #
       # @option params [Boolean] :apply_immediately
       #   A value that specifies whether the modifications in this request and
       #   any pending modifications are asynchronously applied as soon as
@@ -5853,6 +6414,7 @@ module Aws
       #   parameter.
       #
       #   Default: `false`
+      #
       # @option params [Integer] :backup_retention_period
       #   The number of days for which automated backups are retained. You must
       #   specify a minimum value of 1.
@@ -5864,21 +6426,26 @@ module Aws
       #   * Must be a value from 1 to 35
       #
       #   ^
+      #
       # @option params [String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to use for the DB cluster.
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A lst of VPC security groups that the DB cluster will belong to.
+      #
       # @option params [Integer] :port
       #   The port number on which the DB cluster accepts connections.
       #
       #   Constraints: Value must be `1150-65535`
       #
       #   Default: The same port as the original DB cluster.
+      #
       # @option params [String] :master_user_password
       #   The new password for the master database user. This password can
       #   contain any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
+      #
       # @option params [String] :option_group_name
       #   A value that indicates that the DB cluster should be associated with
       #   the specified option group. Changing this parameter does not result in
@@ -5892,6 +6459,7 @@ module Aws
       #   Permanent options cannot be removed from an option group. The option
       #   group cannot be removed from a DB cluster once it is associated with a
       #   DB cluster.
+      #
       # @option params [String] :preferred_backup_window
       #   The daily time range during which automated backups are created if
       #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -5914,6 +6482,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [String] :preferred_maintenance_window
       #   The weekly time range during which system maintenance can occur, in
       #   Universal Coordinated Time (UTC).
@@ -5932,11 +6501,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyDBClusterResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_cluster({
       #     db_cluster_identifier: "String", # required
       #     new_db_cluster_identifier: "String",
@@ -5952,6 +6523,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -5997,6 +6569,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload modify_db_cluster(params = {})
       # @param [Hash] params ({})
       def modify_db_cluster(params = {}, options = {})
@@ -6034,15 +6607,19 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
       # [2]: https://console.aws.amazon.com/rds/
+      #
       # @option params [required, String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to modify.
+      #
       # @option params [required, Array<Types::Parameter>] :parameters
       #   A list of parameters in the DB cluster parameter group to modify.
+      #
       # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #DBClusterParameterGroupName} => String
+      #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #db_cluster_parameter_group_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_cluster_parameter_group({
       #     db_cluster_parameter_group_name: "String", # required
       #     parameters: [ # required
@@ -6062,7 +6639,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_parameter_group_name #=> String
+      #
       # @overload modify_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
       def modify_db_cluster_parameter_group(params = {}, options = {})
@@ -6087,14 +6666,17 @@ module Aws
       # private, use the DescribeDBClusterSnapshotAttributes API action.
       #
       # If a manual DB cluster snapshot is encrypted, it cannot be shared.
+      #
       # @option params [required, String] :db_cluster_snapshot_identifier
       #   The identifier for the DB cluster snapshot to modify the attributes
       #   for.
+      #
       # @option params [required, String] :attribute_name
       #   The name of the DB cluster snapshot attribute to modify.
       #
       #   To manage authorization for other AWS accounts to copy or restore a
       #   manual DB cluster snapshot, set this value to `restore`.
+      #
       # @option params [Array<String>] :values_to_add
       #   A list of DB cluster snapshot attributes to add to the attribute
       #   specified by `AttributeName`.
@@ -6105,6 +6687,7 @@ module Aws
       #   account. Do not add the `all` value for any manual DB cluster
       #   snapshots that contain private information that you don't want
       #   available to all AWS accounts.
+      #
       # @option params [Array<String>] :values_to_remove
       #   A list of DB cluster snapshot attributes to remove from the attribute
       #   specified by `AttributeName`.
@@ -6116,11 +6699,13 @@ module Aws
       #   `all`, an AWS account whose account ID is explicitly added to the
       #   `restore` attribute can still copy or restore a manual DB cluster
       #   snapshot.
+      #
       # @return [Types::ModifyDBClusterSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyDBClusterSnapshotAttributeResult#db_cluster_snapshot_attributes_result #DBClusterSnapshotAttributesResult} => Types::DBClusterSnapshotAttributesResult
+      #   * {Types::ModifyDBClusterSnapshotAttributeResult#db_cluster_snapshot_attributes_result #db_cluster_snapshot_attributes_result} => Types::DBClusterSnapshotAttributesResult
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_cluster_snapshot_attribute({
       #     db_cluster_snapshot_identifier: "String", # required
       #     attribute_name: "String", # required
@@ -6129,11 +6714,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_identifier #=> String
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes #=> Array
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values[0] #=> String
+      #
       # @overload modify_db_cluster_snapshot_attribute(params = {})
       # @param [Hash] params ({})
       def modify_db_cluster_snapshot_attribute(params = {}, options = {})
@@ -6144,6 +6731,7 @@ module Aws
       # Modifies settings for a DB instance. You can change one or more
       # database configuration parameters by specifying these parameters and
       # the new values in the request.
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier. This value is stored as a lowercase
       #   string.
@@ -6157,6 +6745,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Integer] :allocated_storage
       #   The new storage capacity of the RDS instance. Changing this setting
       #   does not result in an outage and the change is applied during the next
@@ -6232,6 +6821,7 @@ module Aws
       #   the instance, rebooting the instance, deleting the instance, creating
       #   a Read Replica for the instance, and creating a DB snapshot of the
       #   instance.
+      #
       # @option params [String] :db_instance_class
       #   The new compute and memory capacity of the DB instance. To determine
       #   the instance classes that are available for a particular DB engine,
@@ -6250,6 +6840,7 @@ module Aws
       #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
       #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
       #   db.t2.medium | db.t2.large`
+      #
       # @option params [String] :db_subnet_group_name
       #   The new DB subnet group for the DB instance. You can use this
       #   parameter to move your DB instance to a different VPC. If your DB
@@ -6269,6 +6860,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
+      #
       # @option params [Array<String>] :db_security_groups
       #   A list of DB security groups to authorize on this DB instance.
       #   Changing this setting does not result in an outage and the change is
@@ -6281,6 +6873,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to authorize on this DB instance.
       #   This change is asynchronously applied as soon as possible.
@@ -6292,6 +6885,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Boolean] :apply_immediately
       #   Specifies whether the modifications in this request and any pending
       #   modifications are asynchronously applied as soon as possible,
@@ -6312,6 +6906,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
+      #
       # @option params [String] :master_user_password
       #   The new password for the DB instance master user. Can be any printable
       #   ASCII character except "/", """, or "@".
@@ -6334,6 +6929,7 @@ module Aws
       #   been accidentally revoked.
       #
       #    </note>
+      #
       # @option params [String] :db_parameter_group_name
       #   The name of the DB parameter group to apply to the DB instance.
       #   Changing this setting does not result in an outage. The parameter
@@ -6347,6 +6943,7 @@ module Aws
       #
       #   Constraints: The DB parameter group must be in the same DB parameter
       #   group family as this DB instance.
+      #
       # @option params [Integer] :backup_retention_period
       #   The number of days to retain automated backups. Setting this parameter
       #   to a positive number enables backups. Setting this parameter to 0
@@ -6372,6 +6969,7 @@ module Aws
       #     running PostgreSQL 9.3.5
       #
       #   * Cannot be set to 0 if the DB instance is a source to Read Replicas
+      #
       # @option params [String] :preferred_backup_window
       #   The daily time range during which automated backups are created if
       #   automated backups are enabled, as determined by the
@@ -6388,6 +6986,7 @@ module Aws
       #   * Must not conflict with the preferred maintenance window
       #
       #   * Must be at least 30 minutes
+      #
       # @option params [String] :preferred_maintenance_window
       #   The weekly time range (in UTC) during which system maintenance can
       #   occur, which might result in an outage. Changing this parameter does
@@ -6406,6 +7005,7 @@ module Aws
       #   Valid Days: Mon \| Tue \| Wed \| Thu \| Fri \| Sat \| Sun
       #
       #   Constraints: Must be at least 30 minutes
+      #
       # @option params [Boolean] :multi_az
       #   Specifies if the DB instance is a Multi-AZ deployment. Changing this
       #   parameter does not result in an outage and the change is applied
@@ -6413,6 +7013,7 @@ module Aws
       #   parameter is set to `true` for this request.
       #
       #   Constraints: Cannot be specified if the DB instance is a Read Replica.
+      #
       # @option params [String] :engine_version
       #   The version number of the database engine to upgrade to. Changing this
       #   parameter results in an outage and the change is applied during the
@@ -6425,6 +7026,7 @@ module Aws
       #   parameter group can be the default for that DB parameter group family.
       #
       #   For a list of valid engine versions, see CreateDBInstance.
+      #
       # @option params [Boolean] :allow_major_version_upgrade
       #   Indicates that major version upgrades are allowed. Changing this
       #   parameter does not result in an outage and the change is
@@ -6433,6 +7035,7 @@ module Aws
       #   Constraints: This parameter must be set to true when specifying a
       #   value for the EngineVersion parameter that is a different major
       #   version than the DB instance's current version.
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor version upgrades will be applied automatically to
       #   the DB instance during the maintenance window. Changing this parameter
@@ -6441,11 +7044,13 @@ module Aws
       #   result if this parameter is set to `true` during the maintenance
       #   window, and a newer minor version is available, and RDS has enabled
       #   auto patching for that engine version.
+      #
       # @option params [String] :license_model
       #   The license model for the DB instance.
       #
       #   Valid values: `license-included` \| `bring-your-own-license` \|
       #   `general-public-license`
+      #
       # @option params [Integer] :iops
       #   The new Provisioned IOPS (I/O operations per second) value for the RDS
       #   instance. Changing this setting does not result in an outage and the
@@ -6483,6 +7088,7 @@ module Aws
       #   the instance, rebooting the instance, deleting the instance, creating
       #   a Read Replica for the instance, and creating a DB snapshot of the
       #   instance.
+      #
       # @option params [String] :option_group_name
       #   Indicates that the DB instance should be associated with the specified
       #   option group. Changing this parameter does not result in an outage
@@ -6497,6 +7103,7 @@ module Aws
       #   TDE, cannot be removed from an option group, and that option group
       #   cannot be removed from a DB instance once it is associated with a DB
       #   instance
+      #
       # @option params [String] :new_db_instance_identifier
       #   The new DB instance identifier for the DB instance when renaming a DB
       #   instance. When you change the DB instance identifier, an instance
@@ -6511,6 +7118,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [String] :storage_type
       #   Specifies the storage type to be associated with the DB instance.
       #
@@ -6521,23 +7129,29 @@ module Aws
       #
       #   Default: `io1` if the `Iops` parameter is specified; otherwise
       #   `standard`
+      #
       # @option params [String] :tde_credential_arn
       #   The ARN from the Key Store with which to associate the instance for
       #   TDE encryption.
+      #
       # @option params [String] :tde_credential_password
       #   The password for the given ARN from the Key Store in order to access
       #   the device.
+      #
       # @option params [String] :ca_certificate_identifier
       #   Indicates the certificate that needs to be associated with the
       #   instance.
+      #
       # @option params [String] :domain
       #   The Active Directory Domain to move the instance to. Specify `none` to
       #   remove the instance from its current domain. The domain must be
       #   created prior to this operation. Currently only a Microsoft SQL Server
       #   instance can be created in a Active Directory Domain.
+      #
       # @option params [Boolean] :copy_tags_to_snapshot
       #   True to copy all tags from the DB instance to snapshots of the DB
       #   instance; otherwise false. The default is false.
+      #
       # @option params [Integer] :monitoring_interval
       #   The interval, in seconds, between points when Enhanced Monitoring
       #   metrics are collected for the DB instance. To disable collecting
@@ -6547,6 +7161,7 @@ module Aws
       #   `MonitoringInterval` to a value other than 0.
       #
       #   Valid Values: `0, 1, 5, 10, 15, 30, 60`
+      #
       # @option params [Integer] :db_port_number
       #   The port number on which the database accepts connections.
       #
@@ -6595,6 +7210,7 @@ module Aws
       #   Default: `3306`
       #
       #   Valid Values: `1150-65535`
+      #
       # @option params [Boolean] :publicly_accessible
       #   Boolean value that indicates if the DB instance has a publicly
       #   resolvable DNS name. Set to `True` to make the DB instance
@@ -6610,6 +7226,7 @@ module Aws
       #   regardless of the value of the `ApplyImmediately` parameter.
       #
       #   Default: false
+      #
       # @option params [String] :monitoring_role_arn
       #   The ARN for the IAM role that permits RDS to send enhanced monitoring
       #   metrics to CloudWatch Logs. For example,
@@ -6623,9 +7240,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
+      #
       # @option params [String] :domain_iam_role_name
       #   The name of the IAM role to use when making API calls to the Directory
       #   Service.
+      #
       # @option params [Integer] :promotion_tier
       #   A value that specifies the order in which an Aurora Replica is
       #   promoted to the primary instance after a failure of the existing
@@ -6639,11 +7258,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
+      #
       # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyDBInstanceResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_instance({
       #     db_instance_identifier: "String", # required
       #     allocated_storage: 1,
@@ -6680,6 +7301,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -6766,6 +7388,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload modify_db_instance(params = {})
       # @param [Hash] params ({})
       def modify_db_instance(params = {}, options = {})
@@ -6799,6 +7422,7 @@ module Aws
       #
       #
       # [1]: https://console.aws.amazon.com/rds/
+      #
       # @option params [required, String] :db_parameter_group_name
       #   The name of the DB parameter group.
       #
@@ -6811,6 +7435,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [required, Array<Types::Parameter>] :parameters
       #   An array of parameter names, values, and the apply method for the
       #   parameter update. At least one parameter name, value, and apply method
@@ -6826,11 +7451,13 @@ module Aws
       #   failover.
       #
       #    </note>
+      #
       # @return [Types::DBParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #DBParameterGroupName} => String
+      #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #db_parameter_group_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_parameter_group({
       #     db_parameter_group_name: "String", # required
       #     parameters: [ # required
@@ -6850,7 +7477,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_parameter_group_name #=> String
+      #
       # @overload modify_db_parameter_group(params = {})
       # @param [Hash] params ({})
       def modify_db_parameter_group(params = {}, options = {})
@@ -6875,13 +7504,16 @@ module Aws
       # DescribeDBSnapshotAttributes API action.
       #
       # If the manual DB snapshot is encrypted, it cannot be shared.
+      #
       # @option params [required, String] :db_snapshot_identifier
       #   The identifier for the DB snapshot to modify the attributes for.
+      #
       # @option params [required, String] :attribute_name
       #   The name of the DB snapshot attribute to modify.
       #
       #   To manage authorization for other AWS accounts to copy or restore a
       #   manual DB snapshot, set this value to `restore`.
+      #
       # @option params [Array<String>] :values_to_add
       #   A list of DB snapshot attributes to add to the attribute specified by
       #   `AttributeName`.
@@ -6891,6 +7523,7 @@ module Aws
       #   the manual DB snapshot restorable by any AWS account. Do not add the
       #   `all` value for any manual DB snapshots that contain private
       #   information that you don't want available to all AWS accounts.
+      #
       # @option params [Array<String>] :values_to_remove
       #   A list of DB snapshot attributes to remove from the attribute
       #   specified by `AttributeName`.
@@ -6901,11 +7534,13 @@ module Aws
       #   copy or restore the DB snapshot. If you specify `all`, an AWS account
       #   whose account ID is explicitly added to the `restore` attribute can
       #   still copy or restore the manual DB snapshot.
+      #
       # @return [Types::ModifyDBSnapshotAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyDBSnapshotAttributeResult#db_snapshot_attributes_result #DBSnapshotAttributesResult} => Types::DBSnapshotAttributesResult
+      #   * {Types::ModifyDBSnapshotAttributeResult#db_snapshot_attributes_result #db_snapshot_attributes_result} => Types::DBSnapshotAttributesResult
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_snapshot_attribute({
       #     db_snapshot_identifier: "String", # required
       #     attribute_name: "String", # required
@@ -6914,11 +7549,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_snapshot_attributes_result.db_snapshot_identifier #=> String
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes #=> Array
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values[0] #=> String
+      #
       # @overload modify_db_snapshot_attribute(params = {})
       # @param [Hash] params ({})
       def modify_db_snapshot_attribute(params = {}, options = {})
@@ -6928,6 +7565,7 @@ module Aws
 
       # Modifies an existing DB subnet group. DB subnet groups must contain at
       # least one subnet in at least two AZs in the region.
+      #
       # @option params [required, String] :db_subnet_group_name
       #   The name for the DB subnet group. This value is stored as a lowercase
       #   string.
@@ -6936,15 +7574,19 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [String] :db_subnet_group_description
       #   The description for the DB subnet group.
+      #
       # @option params [required, Array<String>] :subnet_ids
       #   The EC2 subnet IDs for the DB subnet group.
+      #
       # @return [Types::ModifyDBSubnetGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyDBSubnetGroupResult#db_subnet_group #DBSubnetGroup} => Types::DBSubnetGroup
+      #   * {Types::ModifyDBSubnetGroupResult#db_subnet_group #db_subnet_group} => Types::DBSubnetGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_db_subnet_group({
       #     db_subnet_group_name: "String", # required
       #     db_subnet_group_description: "String",
@@ -6952,6 +7594,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_subnet_group.db_subnet_group_name #=> String
       #   resp.db_subnet_group.db_subnet_group_description #=> String
       #   resp.db_subnet_group.vpc_id #=> String
@@ -6961,6 +7604,7 @@ module Aws
       #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_group.subnets[0].subnet_status #=> String
       #   resp.db_subnet_group.db_subnet_group_arn #=> String
+      #
       # @overload modify_db_subnet_group(params = {})
       # @param [Hash] params ({})
       def modify_db_subnet_group(params = {}, options = {})
@@ -6981,12 +7625,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+      #
       # @option params [required, String] :subscription_name
       #   The name of the RDS event notification subscription.
+      #
       # @option params [String] :sns_topic_arn
       #   The Amazon Resource Name (ARN) of the SNS topic created for event
       #   notification. The ARN is created by Amazon SNS when you create a topic
       #   and subscribe to it.
+      #
       # @option params [String] :source_type
       #   The type of source that will be generating the events. For example, if
       #   you want to be notified of events generated by a DB instance, you
@@ -6995,6 +7642,7 @@ module Aws
       #
       #   Valid values: db-instance \| db-parameter-group \| db-security-group
       #   \| db-snapshot
+      #
       # @option params [Array<String>] :event_categories
       #   A list of event categories for a SourceType that you want to subscribe
       #   to. You can see a list of the categories for a given SourceType in the
@@ -7004,13 +7652,16 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html
+      #
       # @option params [Boolean] :enabled
       #   A Boolean value; set to **true** to activate the subscription.
+      #
       # @return [Types::ModifyEventSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyEventSubscriptionResult#event_subscription #EventSubscription} => Types::EventSubscription
+      #   * {Types::ModifyEventSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_event_subscription({
       #     subscription_name: "String", # required
       #     sns_topic_arn: "String",
@@ -7020,6 +7671,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_subscription.customer_aws_id #=> String
       #   resp.event_subscription.cust_subscription_id #=> String
       #   resp.event_subscription.sns_topic_arn #=> String
@@ -7032,6 +7684,7 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      #
       # @overload modify_event_subscription(params = {})
       # @param [Hash] params ({})
       def modify_event_subscription(params = {}, options = {})
@@ -7040,6 +7693,7 @@ module Aws
       end
 
       # Modifies an existing option group.
+      #
       # @option params [required, String] :option_group_name
       #   The name of the option group to be modified.
       #
@@ -7047,21 +7701,26 @@ module Aws
       #   TDE, cannot be removed from an option group, and that option group
       #   cannot be removed from a DB instance once it is associated with a DB
       #   instance
+      #
       # @option params [Array<Types::OptionConfiguration>] :options_to_include
       #   Options in this list are added to the option group or, if already
       #   present, the specified configuration is used to update the existing
       #   configuration.
+      #
       # @option params [Array<String>] :options_to_remove
       #   Options in this list are removed from the option group.
+      #
       # @option params [Boolean] :apply_immediately
       #   Indicates whether the changes should be applied immediately, or during
       #   the next maintenance window for each instance associated with the
       #   option group.
+      #
       # @return [Types::ModifyOptionGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ModifyOptionGroupResult#option_group #OptionGroup} => Types::OptionGroup
+      #   * {Types::ModifyOptionGroupResult#option_group #option_group} => Types::OptionGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_option_group({
       #     option_group_name: "String", # required
       #     options_to_include: [
@@ -7091,6 +7750,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.option_group.option_group_name #=> String
       #   resp.option_group.option_group_description #=> String
       #   resp.option_group.engine_name #=> String
@@ -7121,6 +7781,7 @@ module Aws
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
       #   resp.option_group.option_group_arn #=> String
+      #
       # @overload modify_option_group(params = {})
       # @param [Hash] params ({})
       def modify_option_group(params = {}, options = {})
@@ -7136,6 +7797,7 @@ module Aws
       # primary instance, backups are taken based on your backup settings.
       #
       #  </note>
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier. This value is stored as a lowercase
       #   string.
@@ -7151,6 +7813,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `mydbinstance`
+      #
       # @option params [Integer] :backup_retention_period
       #   The number of days to retain automated backups. Setting this parameter
       #   to a positive number enables backups. Setting this parameter to 0
@@ -7163,6 +7826,7 @@ module Aws
       #   * Must be a value from 0 to 8
       #
       #   ^
+      #
       # @option params [String] :preferred_backup_window
       #   The daily time range during which automated backups are created if
       #   automated backups are enabled, using the `BackupRetentionPeriod`
@@ -7185,11 +7849,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @return [Types::PromoteReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PromoteReadReplicaResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::PromoteReadReplicaResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.promote_read_replica({
       #     db_instance_identifier: "String", # required
       #     backup_retention_period: 1,
@@ -7197,6 +7863,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -7283,6 +7950,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload promote_read_replica(params = {})
       # @param [Hash] params ({})
       def promote_read_replica(params = {}, options = {})
@@ -7291,6 +7959,7 @@ module Aws
       end
 
       # Promotes a Read Replica DB cluster to a standalone DB cluster.
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The identifier of the DB cluster Read Replica to promote. This
       #   parameter is not case-sensitive.
@@ -7304,16 +7973,19 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster-replica1`
+      #
       # @return [Types::PromoteReadReplicaDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PromoteReadReplicaDBClusterResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::PromoteReadReplicaDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.promote_read_replica_db_cluster({
       #     db_cluster_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -7359,6 +8031,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload promote_read_replica_db_cluster(params = {})
       # @param [Hash] params ({})
       def promote_read_replica_db_cluster(params = {}, options = {})
@@ -7367,25 +8040,31 @@ module Aws
       end
 
       # Purchases a reserved DB instance offering.
+      #
       # @option params [required, String] :reserved_db_instances_offering_id
       #   The ID of the Reserved DB instance offering to purchase.
       #
       #   Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
+      #
       # @option params [String] :reserved_db_instance_id
       #   Customer-specified identifier to track this reservation.
       #
       #   Example: myreservationID
+      #
       # @option params [Integer] :db_instance_count
       #   The number of instances to reserve.
       #
       #   Default: `1`
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @return [Types::PurchaseReservedDBInstancesOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PurchaseReservedDBInstancesOfferingResult#reserved_db_instance #ReservedDBInstance} => Types::ReservedDBInstance
+      #   * {Types::PurchaseReservedDBInstancesOfferingResult#reserved_db_instance #reserved_db_instance} => Types::ReservedDBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.purchase_reserved_db_instances_offering({
       #     reserved_db_instances_offering_id: "String", # required
       #     reserved_db_instance_id: "String",
@@ -7399,6 +8078,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.reserved_db_instance.reserved_db_instance_id #=> String
       #   resp.reserved_db_instance.reserved_db_instances_offering_id #=> String
       #   resp.reserved_db_instance.db_instance_class #=> String
@@ -7416,6 +8096,7 @@ module Aws
       #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_frequency #=> String
       #   resp.reserved_db_instance.reserved_db_instance_arn #=> String
+      #
       # @overload purchase_reserved_db_instances_offering(params = {})
       # @param [Hash] params ({})
       def purchase_reserved_db_instances_offering(params = {}, options = {})
@@ -7442,6 +8123,7 @@ module Aws
       # recommend that you reduce database activities as much as possible
       # during the reboot process to reduce rollback activity for in-transit
       # transactions.
+      #
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier. This parameter is stored as a lowercase
       #   string.
@@ -7453,22 +8135,26 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Boolean] :force_failover
       #   When `true`, the reboot will be conducted through a MultiAZ failover.
       #
       #   Constraint: You cannot specify `true` if the instance is not
       #   configured for MultiAZ.
+      #
       # @return [Types::RebootDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RebootDBInstanceResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::RebootDBInstanceResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reboot_db_instance({
       #     db_instance_identifier: "String", # required
       #     force_failover: false,
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -7555,6 +8241,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload reboot_db_instance(params = {})
       # @param [Hash] params ({})
       def reboot_db_instance(params = {}, options = {})
@@ -7569,19 +8256,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The name of the DB cluster to disassociate the IAM role rom.
+      #
       # @option params [required, String] :role_arn
       #   The Amazon Resource Name (ARN) of the IAM role to disassociate from
       #   the Aurora DB cluster, for example
       #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_role_from_db_cluster({
       #     db_cluster_identifier: "String", # required
       #     role_arn: "String", # required
       #   })
+      #
       # @overload remove_role_from_db_cluster(params = {})
       # @param [Hash] params ({})
       def remove_role_from_db_cluster(params = {}, options = {})
@@ -7591,24 +8283,29 @@ module Aws
 
       # Removes a source identifier from an existing RDS event notification
       # subscription.
+      #
       # @option params [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to remove
       #   a source identifier from.
+      #
       # @option params [required, String] :source_identifier
       #   The source identifier to be removed from the subscription, such as the
       #   **DB instance identifier** for a DB instance or the name of a security
       #   group.
+      #
       # @return [Types::RemoveSourceIdentifierFromSubscriptionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RemoveSourceIdentifierFromSubscriptionResult#event_subscription #EventSubscription} => Types::EventSubscription
+      #   * {Types::RemoveSourceIdentifierFromSubscriptionResult#event_subscription #event_subscription} => Types::EventSubscription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_source_identifier_from_subscription({
       #     subscription_name: "String", # required
       #     source_identifier: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_subscription.customer_aws_id #=> String
       #   resp.event_subscription.cust_subscription_id #=> String
       #   resp.event_subscription.sns_topic_arn #=> String
@@ -7621,6 +8318,7 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      #
       # @overload remove_source_identifier_from_subscription(params = {})
       # @param [Hash] params ({})
       def remove_source_identifier_from_subscription(params = {}, options = {})
@@ -7636,6 +8334,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html
+      #
       # @option params [required, String] :resource_name
       #   The Amazon RDS resource the tags will be removed from. This value is
       #   an Amazon Resource Name (ARN). For information about creating an ARN,
@@ -7644,15 +8343,19 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
+      #
       # @option params [required, Array<String>] :tag_keys
       #   The tag key (name) of the tag to be removed.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_resource({
       #     resource_name: "String", # required
       #     tag_keys: ["String"], # required
       #   })
+      #
       # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_resource(params = {}, options = {})
@@ -7678,22 +8381,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to reset.
+      #
       # @option params [Boolean] :reset_all_parameters
       #   A value that is set to `true` to reset all parameters in the DB
       #   cluster parameter group to their default values, and `false`
       #   otherwise. You cannot use this parameter if there is a list of
       #   parameter names specified for the `Parameters` parameter.
+      #
       # @option params [Array<Types::Parameter>] :parameters
       #   A list of parameter names in the DB cluster parameter group to reset
       #   to the default values. You cannot use this parameter if the
       #   `ResetAllParameters` parameter is set to `true`.
+      #
       # @return [Types::DBClusterParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #DBClusterParameterGroupName} => String
+      #   * {Types::DBClusterParameterGroupNameMessage#db_cluster_parameter_group_name #db_cluster_parameter_group_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reset_db_cluster_parameter_group({
       #     db_cluster_parameter_group_name: "String", # required
       #     reset_all_parameters: false,
@@ -7714,7 +8422,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster_parameter_group_name #=> String
+      #
       # @overload reset_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
       def reset_db_cluster_parameter_group(params = {}, options = {})
@@ -7730,6 +8440,7 @@ module Aws
       # dynamic parameters are updated immediately and static parameters are
       # set to `pending-reboot` to take effect on the next DB instance restart
       # or `RebootDBInstance` request.
+      #
       # @option params [required, String] :db_parameter_group_name
       #   The name of the DB parameter group.
       #
@@ -7740,11 +8451,13 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Boolean] :reset_all_parameters
       #   Specifies whether (`true`) or not (`false`) to reset all parameters in
       #   the DB parameter group to default values.
       #
       #   Default: `true`
+      #
       # @option params [Array<Types::Parameter>] :parameters
       #   An array of parameter names, values, and the apply method for the
       #   parameter update. At least one parameter name, value, and apply method
@@ -7770,11 +8483,13 @@ module Aws
       #   **Oracle**
       #
       #   Valid Values (for Apply method): `pending-reboot`
+      #
       # @return [Types::DBParameterGroupNameMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #DBParameterGroupName} => String
+      #   * {Types::DBParameterGroupNameMessage#db_parameter_group_name #db_parameter_group_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reset_db_parameter_group({
       #     db_parameter_group_name: "String", # required
       #     reset_all_parameters: false,
@@ -7795,7 +8510,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_parameter_group_name #=> String
+      #
       # @overload reset_db_parameter_group(params = {})
       # @param [Hash] params ({})
       def reset_db_parameter_group(params = {}, options = {})
@@ -7808,9 +8525,11 @@ module Aws
       # and the data must be created using the Percona XtraBackup utility as
       # described in [Migrating Data from MySQL by Using an Amazon S3
       # Bucket](AmazonRDS/latest/UserGuide/Aurora.Migrate.MySQL.html#Aurora.Migrate.MySQL.S3).
+      #
       # @option params [Array<String>] :availability_zones
       #   A list of EC2 Availability Zones that instances in the restored DB
       #   cluster can be created in.
+      #
       # @option params [Integer] :backup_retention_period
       #   The number of days for which automated backups of the restored DB
       #   cluster are retained. You must specify a minimum value of 1.
@@ -7822,11 +8541,14 @@ module Aws
       #   * Must be a value from 1 to 35
       #
       #   ^
+      #
       # @option params [String] :character_set_name
       #   A value that indicates that the restored DB cluster should be
       #   associated with the specified CharacterSet.
+      #
       # @option params [String] :database_name
       #   The database name for the restored DB cluster.
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The name of the DB cluster to create from the source data in the S3
       #   bucket. This parameter is isn't case-sensitive.
@@ -7840,6 +8562,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `my-cluster1`
+      #
       # @option params [String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to associate with the
       #   restored DB cluster. If this argument is omitted, `default.aurora5.6`
@@ -7852,9 +8575,11 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to associate with the restored DB
       #   cluster.
+      #
       # @option params [String] :db_subnet_group_name
       #   A DB subnet group to associate with the restored DB cluster.
       #
@@ -7862,22 +8587,26 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [required, String] :engine
       #   The name of the database engine to be used for the restored DB
       #   cluster.
       #
       #   Valid Values: `aurora`
+      #
       # @option params [String] :engine_version
       #   The version number of the database engine to use.
       #
       #   **Aurora**
       #
       #   Example: `5.6.10a`
+      #
       # @option params [Integer] :port
       #   The port number on which the instances in the restored DB cluster
       #   accept connections.
       #
       #   Default: `3306`
+      #
       # @option params [required, String] :master_username
       #   The name of the master user for the restored DB cluster.
       #
@@ -7888,11 +8617,13 @@ module Aws
       #   * First character must be a letter.
       #
       #   * Cannot be a reserved word for the chosen database engine.
+      #
       # @option params [required, String] :master_user_password
       #   The password for the master database user. This password can contain
       #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
+      #
       # @option params [String] :option_group_name
       #   A value that indicates that the restored DB cluster should be
       #   associated with the specified option group.
@@ -7900,6 +8631,7 @@ module Aws
       #   Permanent options cannot be removed from an option group. An option
       #   group cannot be removed from a DB cluster once it is associated with a
       #   DB cluster.
+      #
       # @option params [String] :preferred_backup_window
       #   The daily time range during which automated backups are created if
       #   automated backups are enabled using the `BackupRetentionPeriod`
@@ -7922,6 +8654,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [String] :preferred_maintenance_window
       #   The weekly time range during which system maintenance can occur, in
       #   Universal Coordinated Time (UTC).
@@ -7940,10 +8673,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [Boolean] :storage_encrypted
       #   Specifies whether the restored DB cluster is encrypted.
+      #
       # @option params [String] :kms_key_id
       #   The KMS key identifier for an encrypted DB cluster.
       #
@@ -7958,34 +8694,41 @@ module Aws
       #   default encryption key. AWS KMS creates the default encryption key for
       #   your AWS account. Your AWS account has a different default encryption
       #   key for each AWS region.
+      #
       # @option params [required, String] :source_engine
       #   The identifier for the database engine that was backed up to create
       #   the files stored in the Amazon S3 bucket.
       #
       #   Valid values: `mysql`
+      #
       # @option params [required, String] :source_engine_version
       #   The version of the database that the backup files were created from.
       #
       #   MySQL version 5.5 and 5.6 are supported.
       #
       #   Example: `5.6.22`
+      #
       # @option params [required, String] :s3_bucket_name
       #   The name of the Amazon S3 bucket that contains the data used to create
       #   the Amazon Aurora DB cluster.
+      #
       # @option params [String] :s3_prefix
       #   The prefix for all of the file names that contain the data used to
       #   create the Amazon Aurora DB cluster. If you do not specify a
       #   **SourceS3Prefix** value, then the Amazon Aurora DB cluster is created
       #   by using all of the files in the Amazon S3 bucket.
+      #
       # @option params [required, String] :s3_ingestion_role_arn
       #   The Amazon Resource Name (ARN) of the AWS Identity and Access
       #   Management (IAM) role that authorizes Amazon RDS to access the Amazon
       #   S3 bucket on your behalf.
+      #
       # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RestoreDBClusterFromS3Result#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::RestoreDBClusterFromS3Result#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_db_cluster_from_s3({
       #     availability_zones: ["String"],
       #     backup_retention_period: 1,
@@ -8019,6 +8762,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -8064,6 +8808,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload restore_db_cluster_from_s3(params = {})
       # @param [Hash] params ({})
       def restore_db_cluster_from_s3(params = {}, options = {})
@@ -8082,9 +8827,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [Array<String>] :availability_zones
       #   Provides the list of EC2 Availability Zones that instances in the
       #   restored DB cluster can be created in.
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The name of the DB cluster to create from the DB cluster snapshot.
       #   This parameter isn't case-sensitive.
@@ -8098,6 +8845,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-snapshot-id`
+      #
       # @option params [required, String] :snapshot_identifier
       #   The identifier for the DB cluster snapshot to restore from.
       #
@@ -8108,20 +8856,24 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [required, String] :engine
       #   The database engine to use for the new DB cluster.
       #
       #   Default: The same as source
       #
       #   Constraint: Must be compatible with the engine of the source
+      #
       # @option params [String] :engine_version
       #   The version of the database engine to use for the new DB cluster.
+      #
       # @option params [Integer] :port
       #   The port number on which the new DB cluster accepts connections.
       #
       #   Constraints: Value must be `1150-65535`
       #
       #   Default: The same port as the original DB cluster.
+      #
       # @option params [String] :db_subnet_group_name
       #   The name of the DB subnet group to use for the new DB cluster.
       #
@@ -8129,14 +8881,19 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [String] :database_name
       #   The database name for the restored DB cluster.
+      #
       # @option params [String] :option_group_name
       #   The name of the option group to use for the restored DB cluster.
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of VPC security groups that the new DB cluster will belong to.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   The tags to be assigned to the restored DB cluster.
+      #
       # @option params [String] :kms_key_id
       #   The KMS key identifier to use when restoring an encrypted DB cluster
       #   from a DB cluster snapshot.
@@ -8156,11 +8913,13 @@ module Aws
       #
       #   * If the DB cluster snapshot is not encrypted, then the restored DB
       #     cluster is encrypted using the specified encryption key.
+      #
       # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_db_cluster_from_snapshot({
       #     availability_zones: ["String"],
       #     db_cluster_identifier: "String", # required
@@ -8182,6 +8941,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -8227,6 +8987,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload restore_db_cluster_from_snapshot(params = {})
       # @param [Hash] params ({})
       def restore_db_cluster_from_snapshot(params = {}, options = {})
@@ -8247,6 +9008,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
+      #
       # @option params [required, String] :db_cluster_identifier
       #   The name of the new DB cluster to be created.
       #
@@ -8257,6 +9019,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [required, String] :source_db_cluster_identifier
       #   The identifier of the source DB cluster from which to restore.
       #
@@ -8269,6 +9032,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Time,DateTime,Date,Integer,String] :restore_to_time
       #   The date and time to restore the DB cluster to.
       #
@@ -8282,6 +9046,7 @@ module Aws
       #   * Cannot be specified if `UseLatestRestorableTime` parameter is true
       #
       #   Example: `2015-03-07T23:45:00Z`
+      #
       # @option params [Boolean] :use_latest_restorable_time
       #   A value that is set to `true` to restore the DB cluster to the latest
       #   restorable backup time, and `false` otherwise.
@@ -8290,12 +9055,14 @@ module Aws
       #
       #   Constraints: Cannot be specified if `RestoreToTime` parameter is
       #   provided.
+      #
       # @option params [Integer] :port
       #   The port number on which the new DB cluster accepts connections.
       #
       #   Constraints: Value must be `1150-65535`
       #
       #   Default: The same port as the original DB cluster.
+      #
       # @option params [String] :db_subnet_group_name
       #   The DB subnet group name to use for the new DB cluster.
       #
@@ -8303,12 +9070,16 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [String] :option_group_name
       #   The name of the option group for the new DB cluster.
+      #
       # @option params [Array<String>] :vpc_security_group_ids
       #   A lst of VPC security groups that the new DB cluster belongs to.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [String] :kms_key_id
       #   The KMS key identifier to use when restoring an encrypted DB cluster
       #   from an encrypted DB cluster.
@@ -8336,11 +9107,13 @@ module Aws
       #
       #   If `DBClusterIdentifier` refers to a DB cluster that is note
       #   encrypted, then the restore request is rejected.
+      #
       # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #DBCluster} => Types::DBCluster
+      #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_db_cluster_to_point_in_time({
       #     db_cluster_identifier: "String", # required
       #     source_db_cluster_identifier: "String", # required
@@ -8360,6 +9133,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_cluster.allocated_storage #=> Integer
       #   resp.db_cluster.availability_zones #=> Array
       #   resp.db_cluster.availability_zones[0] #=> String
@@ -8405,6 +9179,7 @@ module Aws
       #   resp.db_cluster.associated_roles[0].role_arn #=> String
       #   resp.db_cluster.associated_roles[0].status #=> String
       #   resp.db_cluster.cluster_create_time #=> Time
+      #
       # @overload restore_db_cluster_to_point_in_time(params = {})
       # @param [Hash] params ({})
       def restore_db_cluster_to_point_in_time(params = {}, options = {})
@@ -8433,6 +9208,7 @@ module Aws
       #
       # If you are restoring from a shared manual DB snapshot, the
       # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
+      #
       # @option params [required, String] :db_instance_identifier
       #   Name of the DB instance to create from the DB snapshot. This parameter
       #   isn't case-sensitive.
@@ -8447,6 +9223,7 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-snapshot-id`
+      #
       # @option params [required, String] :db_snapshot_identifier
       #   The identifier for the DB snapshot to restore from.
       #
@@ -8460,6 +9237,7 @@ module Aws
       #
       #   If you are restoring from a shared manual DB snapshot, the
       #   `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
+      #
       # @option params [String] :db_instance_class
       #   The compute and memory capacity of the Amazon RDS DB instance.
       #
@@ -8470,12 +9248,14 @@ module Aws
       #   db.r3.large | db.r3.xlarge | db.r3.2xlarge | db.r3.4xlarge |
       #   db.r3.8xlarge | db.t2.micro | db.t2.small | db.t2.medium |
       #   db.t2.large`
+      #
       # @option params [Integer] :port
       #   The port number on which the database accepts connections.
       #
       #   Default: The same port as the original DB instance
       #
       #   Constraints: Value must be `1150-65535`
+      #
       # @option params [String] :availability_zone
       #   The EC2 Availability Zone that the database instance will be created
       #   in.
@@ -8486,6 +9266,7 @@ module Aws
       #   MultiAZ parameter is set to `true`.
       #
       #   Example: `us-east-1a`
+      #
       # @option params [String] :db_subnet_group_name
       #   The DB subnet group name to use for the new instance.
       #
@@ -8493,11 +9274,13 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [Boolean] :multi_az
       #   Specifies if the DB instance is a Multi-AZ deployment.
       #
       #   Constraint: You cannot specify the AvailabilityZone parameter if the
       #   MultiAZ parameter is set to `true`.
+      #
       # @option params [Boolean] :publicly_accessible
       #   Specifies the accessibility options for the DB instance. A value of
       #   true specifies an Internet-facing instance with a publicly resolvable
@@ -8518,9 +9301,11 @@ module Aws
       #   publicly accessible. If a specific DB subnet group has been specified
       #   as part of the request and the PubliclyAccessible value has not been
       #   set, the DB instance will be private.
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor version upgrades will be applied automatically to
       #   the DB instance during the maintenance window.
+      #
       # @option params [String] :license_model
       #   License model information for the restored DB instance.
       #
@@ -8528,6 +9313,7 @@ module Aws
       #
       #   Valid values: `license-included` \| `bring-your-own-license` \|
       #   `general-public-license`
+      #
       # @option params [String] :db_name
       #   The database name for the restored DB instance.
       #
@@ -8535,6 +9321,7 @@ module Aws
       #   engines.
       #
       #    </note>
+      #
       # @option params [String] :engine
       #   The database engine to use for the new instance.
       #
@@ -8545,6 +9332,7 @@ module Aws
       #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
       #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
       #   `sqlserver-web` \| `postgres` \| `aurora`
+      #
       # @option params [Integer] :iops
       #   Specifies the amount of provisioned IOPS for the DB instance,
       #   expressed in I/O operations per second. If this parameter is not
@@ -8560,6 +9348,7 @@ module Aws
       #
       #   Setting the IOPS value for the SQL Server database engine is not
       #   supported.
+      #
       # @option params [String] :option_group_name
       #   The name of the option group to be used for the restored DB instance.
       #
@@ -8567,8 +9356,10 @@ module Aws
       #   TDE, cannot be removed from an option group, and that option group
       #   cannot be removed from a DB instance once it is associated with a DB
       #   instance
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [String] :storage_type
       #   Specifies the storage type to be associated with the DB instance.
       #
@@ -8579,25 +9370,32 @@ module Aws
       #
       #   Default: `io1` if the `Iops` parameter is specified; otherwise
       #   `standard`
+      #
       # @option params [String] :tde_credential_arn
       #   The ARN from the Key Store with which to associate the instance for
       #   TDE encryption.
+      #
       # @option params [String] :tde_credential_password
       #   The password for the given ARN from the Key Store in order to access
       #   the device.
+      #
       # @option params [String] :domain
       #   Specify the Active Directory Domain to restore the instance in.
+      #
       # @option params [Boolean] :copy_tags_to_snapshot
       #   True to copy all tags from the restored DB instance to snapshots of
       #   the DB instance; otherwise false. The default is false.
+      #
       # @option params [String] :domain_iam_role_name
       #   Specify the name of the IAM role to be used when making API calls to
       #   the Directory Service.
+      #
       # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_db_instance_from_db_snapshot({
       #     db_instance_identifier: "String", # required
       #     db_snapshot_identifier: "String", # required
@@ -8628,6 +9426,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -8714,6 +9513,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload restore_db_instance_from_db_snapshot(params = {})
       # @param [Hash] params ({})
       def restore_db_instance_from_db_snapshot(params = {}, options = {})
@@ -8734,6 +9534,7 @@ module Aws
       # that has an option group that is associated with mirroring; in this
       # case, the instance becomes a mirrored deployment and not a single-AZ
       # deployment.
+      #
       # @option params [required, String] :source_db_instance_identifier
       #   The identifier of the source DB instance from which to restore.
       #
@@ -8746,6 +9547,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [required, String] :target_db_instance_identifier
       #   The name of the new database instance to be created.
       #
@@ -8756,6 +9558,7 @@ module Aws
       #   * First character must be a letter
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
+      #
       # @option params [Time,DateTime,Date,Integer,String] :restore_time
       #   The date and time to restore from.
       #
@@ -8769,6 +9572,7 @@ module Aws
       #   * Cannot be specified if UseLatestRestorableTime parameter is true
       #
       #   Example: `2009-09-07T23:45:00Z`
+      #
       # @option params [Boolean] :use_latest_restorable_time
       #   Specifies whether (`true`) or not (`false`) the DB instance is
       #   restored from the latest backup time.
@@ -8776,6 +9580,7 @@ module Aws
       #   Default: `false`
       #
       #   Constraints: Cannot be specified if RestoreTime parameter is provided.
+      #
       # @option params [String] :db_instance_class
       #   The compute and memory capacity of the Amazon RDS DB instance.
       #
@@ -8788,12 +9593,14 @@ module Aws
       #   db.t2.large`
       #
       #   Default: The same DBInstanceClass as the original DB instance.
+      #
       # @option params [Integer] :port
       #   The port number on which the database accepts connections.
       #
       #   Constraints: Value must be `1150-65535`
       #
       #   Default: The same port as the original DB instance.
+      #
       # @option params [String] :availability_zone
       #   The EC2 Availability Zone that the database instance will be created
       #   in.
@@ -8804,6 +9611,7 @@ module Aws
       #   MultiAZ parameter is set to true.
       #
       #   Example: `us-east-1a`
+      #
       # @option params [String] :db_subnet_group_name
       #   The DB subnet group name to use for the new instance.
       #
@@ -8811,11 +9619,13 @@ module Aws
       #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
+      #
       # @option params [Boolean] :multi_az
       #   Specifies if the DB instance is a Multi-AZ deployment.
       #
       #   Constraint: You cannot specify the AvailabilityZone parameter if the
       #   MultiAZ parameter is set to `true`.
+      #
       # @option params [Boolean] :publicly_accessible
       #   Specifies the accessibility options for the DB instance. A value of
       #   true specifies an Internet-facing instance with a publicly resolvable
@@ -8836,9 +9646,11 @@ module Aws
       #   publicly accessible. If a specific DB subnet group has been specified
       #   as part of the request and the PubliclyAccessible value has not been
       #   set, the DB instance will be private.
+      #
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor version upgrades will be applied automatically to
       #   the DB instance during the maintenance window.
+      #
       # @option params [String] :license_model
       #   License model information for the restored DB instance.
       #
@@ -8846,12 +9658,14 @@ module Aws
       #
       #   Valid values: `license-included` \| `bring-your-own-license` \|
       #   `general-public-license`
+      #
       # @option params [String] :db_name
       #   The database name for the restored DB instance.
       #
       #   <note markdown="1"> This parameter is not used for the MySQL or MariaDB engines.
       #
       #    </note>
+      #
       # @option params [String] :engine
       #   The database engine to use for the new instance.
       #
@@ -8862,6 +9676,7 @@ module Aws
       #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
       #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
       #   `sqlserver-web` \| `postgres` \| `aurora`
+      #
       # @option params [Integer] :iops
       #   The amount of Provisioned IOPS (input/output operations per second) to
       #   be initially allocated for the DB instance.
@@ -8872,6 +9687,7 @@ module Aws
       #
       #   Setting the IOPS value for the SQL Server database engine is not
       #   supported.
+      #
       # @option params [String] :option_group_name
       #   The name of the option group to be used for the restored DB instance.
       #
@@ -8879,11 +9695,14 @@ module Aws
       #   TDE, cannot be removed from an option group, and that option group
       #   cannot be removed from a DB instance once it is associated with a DB
       #   instance
+      #
       # @option params [Boolean] :copy_tags_to_snapshot
       #   True to copy all tags from the restored DB instance to snapshots of
       #   the DB instance; otherwise false. The default is false.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags.
+      #
       # @option params [String] :storage_type
       #   Specifies the storage type to be associated with the DB instance.
       #
@@ -8894,22 +9713,28 @@ module Aws
       #
       #   Default: `io1` if the `Iops` parameter is specified; otherwise
       #   `standard`
+      #
       # @option params [String] :tde_credential_arn
       #   The ARN from the Key Store with which to associate the instance for
       #   TDE encryption.
+      #
       # @option params [String] :tde_credential_password
       #   The password for the given ARN from the Key Store in order to access
       #   the device.
+      #
       # @option params [String] :domain
       #   Specify the Active Directory Domain to restore the instance in.
+      #
       # @option params [String] :domain_iam_role_name
       #   Specify the name of the IAM role to be used when making API calls to
       #   the Directory Service.
+      #
       # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #DBInstance} => Types::DBInstance
+      #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.restore_db_instance_to_point_in_time({
       #     source_db_instance_identifier: "String", # required
       #     target_db_instance_identifier: "String", # required
@@ -8942,6 +9767,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_instance.db_instance_identifier #=> String
       #   resp.db_instance.db_instance_class #=> String
       #   resp.db_instance.engine #=> String
@@ -9028,6 +9854,7 @@ module Aws
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
       #   resp.db_instance.timezone #=> String
+      #
       # @overload restore_db_instance_to_point_in_time(params = {})
       # @param [Hash] params ({})
       def restore_db_instance_to_point_in_time(params = {}, options = {})
@@ -9040,22 +9867,27 @@ module Aws
       # are one of CIDRIP, EC2SecurityGroupId for VPC, or
       # (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or
       # EC2SecurityGroupId).
+      #
       # @option params [required, String] :db_security_group_name
       #   The name of the DB security group to revoke ingress from.
+      #
       # @option params [String] :cidrip
       #   The IP range to revoke access from. Must be a valid CIDR range. If
       #   `CIDRIP` is specified, `EC2SecurityGroupName`, `EC2SecurityGroupId`
       #   and `EC2SecurityGroupOwnerId` cannot be provided.
+      #
       # @option params [String] :ec2_security_group_name
       #   The name of the EC2 security group to revoke access from. For VPC DB
       #   security groups, `EC2SecurityGroupId` must be provided. Otherwise,
       #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
       #   `EC2SecurityGroupId` must be provided.
+      #
       # @option params [String] :ec2_security_group_id
       #   The id of the EC2 security group to revoke access from. For VPC DB
       #   security groups, `EC2SecurityGroupId` must be provided. Otherwise,
       #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
       #   `EC2SecurityGroupId` must be provided.
+      #
       # @option params [String] :ec2_security_group_owner_id
       #   The AWS Account Number of the owner of the EC2 security group
       #   specified in the `EC2SecurityGroupName` parameter. The AWS Access Key
@@ -9063,11 +9895,13 @@ module Aws
       #   `EC2SecurityGroupId` must be provided. Otherwise,
       #   EC2SecurityGroupOwnerId and either `EC2SecurityGroupName` or
       #   `EC2SecurityGroupId` must be provided.
+      #
       # @return [Types::RevokeDBSecurityGroupIngressResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RevokeDBSecurityGroupIngressResult#db_security_group #DBSecurityGroup} => Types::DBSecurityGroup
+      #   * {Types::RevokeDBSecurityGroupIngressResult#db_security_group #db_security_group} => Types::DBSecurityGroup
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.revoke_db_security_group_ingress({
       #     db_security_group_name: "String", # required
       #     cidrip: "String",
@@ -9077,6 +9911,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.db_security_group.owner_id #=> String
       #   resp.db_security_group.db_security_group_name #=> String
       #   resp.db_security_group.db_security_group_description #=> String
@@ -9090,6 +9925,7 @@ module Aws
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
       #   resp.db_security_group.db_security_group_arn #=> String
+      #
       # @overload revoke_db_security_group_ingress(params = {})
       # @param [Hash] params ({})
       def revoke_db_security_group_ingress(params = {}, options = {})

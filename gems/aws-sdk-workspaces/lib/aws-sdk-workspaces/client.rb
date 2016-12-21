@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,13 +155,17 @@ module Aws
       # @!group API Operations
 
       # Creates tags for a WorkSpace.
+      #
       # @option params [required, String] :resource_id
       #   The resource ID of the request.
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The tags of the request.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_tags({
       #     resource_id: "NonEmptyString", # required
       #     tags: [ # required
@@ -156,6 +175,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload create_tags(params = {})
       # @param [Hash] params ({})
       def create_tags(params = {}, options = {})
@@ -169,14 +189,17 @@ module Aws
       # created.
       #
       #  </note>
+      #
       # @option params [required, Array<Types::WorkspaceRequest>] :workspaces
       #   An array of structures that specify the WorkSpaces to create.
+      #
       # @return [Types::CreateWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedCreateWorkspaceRequest&gt;
-      #   * {Types::CreateWorkspacesResult#pending_requests #PendingRequests} => Array&lt;Types::Workspace&gt;
+      #   * {Types::CreateWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedCreateWorkspaceRequest&gt;
+      #   * {Types::CreateWorkspacesResult#pending_requests #pending_requests} => Array&lt;Types::Workspace&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_workspaces({
       #     workspaces: [ # required
       #       {
@@ -201,6 +224,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_requests #=> Array
       #   resp.failed_requests[0].workspace_request.directory_id #=> String
       #   resp.failed_requests[0].workspace_request.user_name #=> String
@@ -231,6 +255,7 @@ module Aws
       #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
       #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
       #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
+      #
       # @overload create_workspaces(params = {})
       # @param [Hash] params ({})
       def create_workspaces(params = {}, options = {})
@@ -239,17 +264,22 @@ module Aws
       end
 
       # Deletes tags from a WorkSpace.
+      #
       # @option params [required, String] :resource_id
       #   The resource ID of the request.
+      #
       # @option params [required, Array<String>] :tag_keys
       #   The tag keys of the request.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_tags({
       #     resource_id: "NonEmptyString", # required
       #     tag_keys: ["NonEmptyString"], # required
       #   })
+      #
       # @overload delete_tags(params = {})
       # @param [Hash] params ({})
       def delete_tags(params = {}, options = {})
@@ -258,21 +288,26 @@ module Aws
       end
 
       # Describes tags for a WorkSpace.
+      #
       # @option params [required, String] :resource_id
       #   The resource ID of the request.
+      #
       # @return [Types::DescribeTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTagsResult#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #   * {Types::DescribeTagsResult#tag_list #tag_list} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_tags({
       #     resource_id: "NonEmptyString", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      #
       # @overload describe_tags(params = {})
       # @param [Hash] params ({})
       def describe_tags(params = {}, options = {})
@@ -290,10 +325,12 @@ module Aws
       # request and response parameters. If more results are available, the
       # `NextToken` response member contains a token that you pass in the next
       # call to this operation to retrieve the next set of items.
+      #
       # @option params [Array<String>] :bundle_ids
       #   An array of strings that contains the identifiers of the bundles to
       #   retrieve. This parameter cannot be combined with any other filter
       #   parameter.
+      #
       # @option params [String] :owner
       #   The owner of the bundles to retrieve. This parameter cannot be
       #   combined with any other filter parameter.
@@ -304,15 +341,18 @@ module Aws
       #     call.
       #
       #   * `AMAZON`- Retrieves the bundles that are provided by AWS.
+      #
       # @option params [String] :next_token
       #   The `NextToken` value from a previous call to this operation. Pass
       #   null if this is the first call.
+      #
       # @return [Types::DescribeWorkspaceBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeWorkspaceBundlesResult#bundles #Bundles} => Array&lt;Types::WorkspaceBundle&gt;
-      #   * {Types::DescribeWorkspaceBundlesResult#next_token #NextToken} => String
+      #   * {Types::DescribeWorkspaceBundlesResult#bundles #bundles} => Array&lt;Types::WorkspaceBundle&gt;
+      #   * {Types::DescribeWorkspaceBundlesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_workspace_bundles({
       #     bundle_ids: ["BundleId"],
       #     owner: "BundleOwner",
@@ -320,6 +360,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.bundles #=> Array
       #   resp.bundles[0].bundle_id #=> String
       #   resp.bundles[0].name #=> String
@@ -328,6 +369,7 @@ module Aws
       #   resp.bundles[0].user_storage.capacity #=> String
       #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE"
       #   resp.next_token #=> String
+      #
       # @overload describe_workspace_bundles(params = {})
       # @param [Hash] params ({})
       def describe_workspace_bundles(params = {}, options = {})
@@ -343,25 +385,30 @@ module Aws
       # request and response parameters. If more results are available, the
       # `NextToken` response member contains a token that you pass in the next
       # call to this operation to retrieve the next set of items.
+      #
       # @option params [Array<String>] :directory_ids
       #   An array of strings that contains the directory identifiers to
       #   retrieve information for. If this member is null, all directories are
       #   retrieved.
+      #
       # @option params [String] :next_token
       #   The `NextToken` value from a previous call to this operation. Pass
       #   null if this is the first call.
+      #
       # @return [Types::DescribeWorkspaceDirectoriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeWorkspaceDirectoriesResult#directories #Directories} => Array&lt;Types::WorkspaceDirectory&gt;
-      #   * {Types::DescribeWorkspaceDirectoriesResult#next_token #NextToken} => String
+      #   * {Types::DescribeWorkspaceDirectoriesResult#directories #directories} => Array&lt;Types::WorkspaceDirectory&gt;
+      #   * {Types::DescribeWorkspaceDirectoriesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_workspace_directories({
       #     directory_ids: ["DirectoryId"],
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.directories #=> Array
       #   resp.directories[0].directory_id #=> String
       #   resp.directories[0].alias #=> String
@@ -382,6 +429,7 @@ module Aws
       #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
       #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
       #   resp.next_token #=> String
+      #
       # @overload describe_workspace_directories(params = {})
       # @param [Hash] params ({})
       def describe_workspace_directories(params = {}, options = {})
@@ -398,6 +446,7 @@ module Aws
       # request and response parameters. If more results are available, the
       # `NextToken` response member contains a token that you pass in the next
       # call to this operation to retrieve the next set of items.
+      #
       # @option params [Array<String>] :workspace_ids
       #   An array of strings that contain the identifiers of the WorkSpaces for
       #   which to retrieve information. This parameter cannot be combined with
@@ -406,29 +455,36 @@ module Aws
       #   Because the CreateWorkspaces operation is asynchronous, the identifier
       #   it returns is not immediately available. If you immediately call
       #   DescribeWorkspaces with this identifier, no information is returned.
+      #
       # @option params [String] :directory_id
       #   Specifies the directory identifier to which to limit the WorkSpaces.
       #   Optionally, you can specify a specific directory user with the
       #   `UserName` parameter. This parameter cannot be combined with any other
       #   filter parameter.
+      #
       # @option params [String] :user_name
       #   Used with the `DirectoryId` parameter to specify the directory user
       #   for whom to obtain the WorkSpace.
+      #
       # @option params [String] :bundle_id
       #   The identifier of a bundle to obtain the WorkSpaces for. All
       #   WorkSpaces that are created from this bundle will be retrieved. This
       #   parameter cannot be combined with any other filter parameter.
+      #
       # @option params [Integer] :limit
       #   The maximum number of items to return.
+      #
       # @option params [String] :next_token
       #   The `NextToken` value from a previous call to this operation. Pass
       #   null if this is the first call.
+      #
       # @return [Types::DescribeWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeWorkspacesResult#workspaces #Workspaces} => Array&lt;Types::Workspace&gt;
-      #   * {Types::DescribeWorkspacesResult#next_token #NextToken} => String
+      #   * {Types::DescribeWorkspacesResult#workspaces #workspaces} => Array&lt;Types::Workspace&gt;
+      #   * {Types::DescribeWorkspacesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_workspaces({
       #     workspace_ids: ["WorkspaceId"],
       #     directory_id: "DirectoryId",
@@ -439,6 +495,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.workspaces #=> Array
       #   resp.workspaces[0].workspace_id #=> String
       #   resp.workspaces[0].directory_id #=> String
@@ -456,6 +513,7 @@ module Aws
       #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
       #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_workspaces(params = {})
       # @param [Hash] params ({})
       def describe_workspaces(params = {}, options = {})
@@ -464,28 +522,34 @@ module Aws
       end
 
       # Describes the connection status of a specified WorkSpace.
+      #
       # @option params [Array<String>] :workspace_ids
       #   An array of strings that contain the identifiers of the WorkSpaces.
+      #
       # @option params [String] :next_token
       #   The next token of the request.
+      #
       # @return [Types::DescribeWorkspacesConnectionStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeWorkspacesConnectionStatusResult#workspaces_connection_status #WorkspacesConnectionStatus} => Array&lt;Types::WorkspaceConnectionStatus&gt;
-      #   * {Types::DescribeWorkspacesConnectionStatusResult#next_token #NextToken} => String
+      #   * {Types::DescribeWorkspacesConnectionStatusResult#workspaces_connection_status #workspaces_connection_status} => Array&lt;Types::WorkspaceConnectionStatus&gt;
+      #   * {Types::DescribeWorkspacesConnectionStatusResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_workspaces_connection_status({
       #     workspace_ids: ["WorkspaceId"],
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.workspaces_connection_status #=> Array
       #   resp.workspaces_connection_status[0].workspace_id #=> String
       #   resp.workspaces_connection_status[0].connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "UNKNOWN"
       #   resp.workspaces_connection_status[0].connection_state_check_timestamp #=> Time
       #   resp.workspaces_connection_status[0].last_known_user_connection_timestamp #=> Time
       #   resp.next_token #=> String
+      #
       # @overload describe_workspaces_connection_status(params = {})
       # @param [Hash] params ({})
       def describe_workspaces_connection_status(params = {}, options = {})
@@ -495,13 +559,17 @@ module Aws
 
       # Modifies the WorkSpace properties, including the RunningMode and
       # AutoStop time.
+      #
       # @option params [required, String] :workspace_id
       #   The ID of the WorkSpace.
+      #
       # @option params [required, Types::WorkspaceProperties] :workspace_properties
       #   The WorkSpace properties of the request.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_workspace_properties({
       #     workspace_id: "WorkspaceId", # required
       #     workspace_properties: { # required
@@ -509,6 +577,7 @@ module Aws
       #       running_mode_auto_stop_timeout_in_minutes: 1,
       #     },
       #   })
+      #
       # @overload modify_workspace_properties(params = {})
       # @param [Hash] params ({})
       def modify_workspace_properties(params = {}, options = {})
@@ -525,13 +594,16 @@ module Aws
       # rebooted.
       #
       #  </note>
+      #
       # @option params [required, Array<Types::RebootRequest>] :reboot_workspace_requests
       #   An array of structures that specify the WorkSpaces to reboot.
+      #
       # @return [Types::RebootWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RebootWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #   * {Types::RebootWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.reboot_workspaces({
       #     reboot_workspace_requests: [ # required
       #       {
@@ -541,10 +613,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_requests #=> Array
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      #
       # @overload reboot_workspaces(params = {})
       # @param [Hash] params ({})
       def reboot_workspaces(params = {}, options = {})
@@ -576,13 +650,16 @@ module Aws
       # been completely rebuilt.
       #
       #  </note>
+      #
       # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
       #   An array of structures that specify the WorkSpaces to rebuild.
+      #
       # @return [Types::RebuildWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RebuildWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #   * {Types::RebuildWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.rebuild_workspaces({
       #     rebuild_workspace_requests: [ # required
       #       {
@@ -592,10 +669,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_requests #=> Array
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      #
       # @overload rebuild_workspaces(params = {})
       # @param [Hash] params ({})
       def rebuild_workspaces(params = {}, options = {})
@@ -606,13 +685,16 @@ module Aws
       # Starts the specified WorkSpaces. The API only works with WorkSpaces
       # that have RunningMode configured as AutoStop and the State set to
       # “STOPPED.”
+      #
       # @option params [required, Array<Types::StartRequest>] :start_workspace_requests
       #   The requests.
+      #
       # @return [Types::StartWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #   * {Types::StartWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_workspaces({
       #     start_workspace_requests: [ # required
       #       {
@@ -622,10 +704,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_requests #=> Array
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      #
       # @overload start_workspaces(params = {})
       # @param [Hash] params ({})
       def start_workspaces(params = {}, options = {})
@@ -636,13 +720,16 @@ module Aws
       # Stops the specified WorkSpaces. The API only works with WorkSpaces
       # that have RunningMode configured as AutoStop and the State set to
       # AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+      #
       # @option params [required, Array<Types::StopRequest>] :stop_workspace_requests
       #   The requests.
+      #
       # @return [Types::StopWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StopWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #   * {Types::StopWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_workspaces({
       #     stop_workspace_requests: [ # required
       #       {
@@ -652,10 +739,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_requests #=> Array
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      #
       # @overload stop_workspaces(params = {})
       # @param [Hash] params ({})
       def stop_workspaces(params = {}, options = {})
@@ -676,13 +765,16 @@ module Aws
       # been completely terminated.
       #
       #  </note>
+      #
       # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
       #   An array of structures that specify the WorkSpaces to terminate.
+      #
       # @return [Types::TerminateWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TerminateWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #   * {Types::TerminateWorkspacesResult#failed_requests #failed_requests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.terminate_workspaces({
       #     terminate_workspace_requests: [ # required
       #       {
@@ -692,10 +784,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_requests #=> Array
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      #
       # @overload terminate_workspaces(params = {})
       # @param [Hash] params ({})
       def terminate_workspaces(params = {}, options = {})

@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -132,14 +146,18 @@ module Aws
 
       # Deletes the specified alarms. In the event of an error, no alarms are
       # deleted.
+      #
       # @option params [required, Array<String>] :alarm_names
       #   The alarms to be deleted.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_alarms({
       #     alarm_names: ["AlarmName"], # required
       #   })
+      #
       # @overload delete_alarms(params = {})
       # @param [Hash] params ({})
       def delete_alarms(params = {}, options = {})
@@ -153,25 +171,33 @@ module Aws
       #
       # Note that Amazon CloudWatch retains the history of an alarm even if
       # you delete the alarm.
+      #
       # @option params [String] :alarm_name
       #   The name of the alarm.
+      #
       # @option params [String] :history_item_type
       #   The type of alarm histories to retrieve.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_date
       #   The starting date to retrieve alarm history.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_date
       #   The ending date to retrieve alarm history.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of alarm history records to retrieve.
+      #
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
+      #
       # @return [Types::DescribeAlarmHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAlarmHistoryOutput#alarm_history_items #AlarmHistoryItems} => Array&lt;Types::AlarmHistoryItem&gt;
-      #   * {Types::DescribeAlarmHistoryOutput#next_token #NextToken} => String
+      #   * {Types::DescribeAlarmHistoryOutput#alarm_history_items #alarm_history_items} => Array&lt;Types::AlarmHistoryItem&gt;
+      #   * {Types::DescribeAlarmHistoryOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_alarm_history({
       #     alarm_name: "AlarmName",
       #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
@@ -182,6 +208,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.alarm_history_items #=> Array
       #   resp.alarm_history_items[0].alarm_name #=> String
       #   resp.alarm_history_items[0].timestamp #=> Time
@@ -189,6 +216,7 @@ module Aws
       #   resp.alarm_history_items[0].history_summary #=> String
       #   resp.alarm_history_items[0].history_data #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_alarm_history(params = {})
       # @param [Hash] params ({})
       def describe_alarm_history(params = {}, options = {})
@@ -199,26 +227,34 @@ module Aws
       # Retrieves the specified alarms. If no alarms are specified, all alarms
       # are returned. Alarms can be retrieved by using only a prefix for the
       # alarm name, the alarm state, or a prefix for any action.
+      #
       # @option params [Array<String>] :alarm_names
       #   The names of the alarms.
+      #
       # @option params [String] :alarm_name_prefix
       #   The alarm name prefix. You cannot specify `AlarmNames` if this
       #   parameter is specified.
+      #
       # @option params [String] :state_value
       #   The state value to be used in matching alarms.
+      #
       # @option params [String] :action_prefix
       #   The action name prefix.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of alarm descriptions to retrieve.
+      #
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
+      #
       # @return [Types::DescribeAlarmsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAlarmsOutput#metric_alarms #MetricAlarms} => Array&lt;Types::MetricAlarm&gt;
-      #   * {Types::DescribeAlarmsOutput#next_token #NextToken} => String
+      #   * {Types::DescribeAlarmsOutput#metric_alarms #metric_alarms} => Array&lt;Types::MetricAlarm&gt;
+      #   * {Types::DescribeAlarmsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_alarms({
       #     alarm_names: ["AlarmName"],
       #     alarm_name_prefix: "AlarmNamePrefix",
@@ -229,6 +265,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.metric_alarms #=> Array
       #   resp.metric_alarms[0].alarm_name #=> String
       #   resp.metric_alarms[0].alarm_arn #=> String
@@ -258,6 +295,7 @@ module Aws
       #   resp.metric_alarms[0].threshold #=> Float
       #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
       #   resp.next_token #=> String
+      #
       # @overload describe_alarms(params = {})
       # @param [Hash] params ({})
       def describe_alarms(params = {}, options = {})
@@ -267,29 +305,38 @@ module Aws
 
       # Retrieves the alarms for the specified metric. Specify a statistic,
       # period, or unit to filter the results.
+      #
       # @option params [required, String] :metric_name
       #   The name of the metric.
+      #
       # @option params [required, String] :namespace
       #   The namespace of the metric.
+      #
       # @option params [String] :statistic
       #   The statistic for the metric, other than percentiles. For percentile
       #   statistics, use `ExtendedStatistics`.
+      #
       # @option params [String] :extended_statistic
       #   The percentile statistic for the metric. Specify a value between p0.0
       #   and p100.
+      #
       # @option params [Array<Types::Dimension>] :dimensions
       #   The dimensions associated with the metric. If the metric has any
       #   associated dimensions, you must specify them in order for the call to
       #   succeed.
+      #
       # @option params [Integer] :period
       #   The period, in seconds, over which the statistic is applied.
+      #
       # @option params [String] :unit
       #   The unit for the metric.
+      #
       # @return [Types::DescribeAlarmsForMetricOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAlarmsForMetricOutput#metric_alarms #MetricAlarms} => Array&lt;Types::MetricAlarm&gt;
+      #   * {Types::DescribeAlarmsForMetricOutput#metric_alarms #metric_alarms} => Array&lt;Types::MetricAlarm&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_alarms_for_metric({
       #     metric_name: "MetricName", # required
       #     namespace: "Namespace", # required
@@ -306,6 +353,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.metric_alarms #=> Array
       #   resp.metric_alarms[0].alarm_name #=> String
       #   resp.metric_alarms[0].alarm_arn #=> String
@@ -334,6 +382,7 @@ module Aws
       #   resp.metric_alarms[0].evaluation_periods #=> Integer
       #   resp.metric_alarms[0].threshold #=> Float
       #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+      #
       # @overload describe_alarms_for_metric(params = {})
       # @param [Hash] params ({})
       def describe_alarms_for_metric(params = {}, options = {})
@@ -344,14 +393,18 @@ module Aws
       # Disables the actions for the specified alarms. When an alarm's
       # actions are disabled, the alarm actions do not execute when the alarm
       # state changes.
+      #
       # @option params [required, Array<String>] :alarm_names
       #   The names of the alarms.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_alarm_actions({
       #     alarm_names: ["AlarmName"], # required
       #   })
+      #
       # @overload disable_alarm_actions(params = {})
       # @param [Hash] params ({})
       def disable_alarm_actions(params = {}, options = {})
@@ -360,14 +413,18 @@ module Aws
       end
 
       # Enables the actions for the specified alarms.
+      #
       # @option params [required, Array<String>] :alarm_names
       #   The names of the alarms.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_alarm_actions({
       #     alarm_names: ["AlarmName"], # required
       #   })
+      #
       # @overload enable_alarm_actions(params = {})
       # @param [Hash] params ({})
       def enable_alarm_actions(params = {}, options = {})
@@ -413,10 +470,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html
+      #
       # @option params [required, String] :namespace
       #   The namespace of the metric, with or without spaces.
+      #
       # @option params [required, String] :metric_name
       #   The name of the metric, with or without spaces.
+      #
       # @option params [Array<Types::Dimension>] :dimensions
       #   The dimensions. CloudWatch treats each unique combination of
       #   dimensions as a separate metric. You can't retrieve statistics using
@@ -428,6 +488,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :start_time
       #   The time stamp that determines the first data point to return. Note
       #   that start times are evaluated relative to the time that CloudWatch
@@ -449,12 +510,14 @@ module Aws
       #   * Start time greater than 63 days ago - Round down to the nearest
       #     1-hour clock interval. For example, 12:32:34 is rounded down to
       #     12:00:00.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :end_time
       #   The time stamp that determines the last data point to return.
       #
       #   The value specified is exclusive; results will include data points up
       #   to the specified time stamp. The time stamp must be in ISO 8601 UTC
       #   format (for example, 2016-10-10T23:00:00Z).
+      #
       # @option params [required, Integer] :period
       #   The granularity, in seconds, of the returned data points. A period can
       #   be as short as one minute (60 seconds) and must be a multiple of 60.
@@ -469,22 +532,27 @@ module Aws
       #
       #   * Start time greater than 63 days ago - Use a multiple of 3600 seconds
       #     (1 hour).
+      #
       # @option params [Array<String>] :statistics
       #   The metric statistics, other than percentile. For percentile
       #   statistics, use `ExtendedStatistic`.
+      #
       # @option params [Array<String>] :extended_statistics
       #   The percentile statistics. Specify values between p0.0 and p100.
+      #
       # @option params [String] :unit
       #   The unit for a given metric. Metrics may be reported in multiple
       #   units. Not supplying a unit results in all units being returned. If
       #   the metric only ever reports one unit, specifying a unit has no
       #   effect.
+      #
       # @return [Types::GetMetricStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetMetricStatisticsOutput#label #Label} => String
-      #   * {Types::GetMetricStatisticsOutput#datapoints #Datapoints} => Array&lt;Types::Datapoint&gt;
+      #   * {Types::GetMetricStatisticsOutput#label #label} => String
+      #   * {Types::GetMetricStatisticsOutput#datapoints #datapoints} => Array&lt;Types::Datapoint&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_metric_statistics({
       #     namespace: "Namespace", # required
       #     metric_name: "MetricName", # required
@@ -503,6 +571,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.label #=> String
       #   resp.datapoints #=> Array
       #   resp.datapoints[0].timestamp #=> Time
@@ -514,6 +583,7 @@ module Aws
       #   resp.datapoints[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
       #   resp.datapoints[0].extended_statistics #=> Hash
       #   resp.datapoints[0].extended_statistics["ExtendedStatistic"] #=> Float
+      #
       # @overload get_metric_statistics(params = {})
       # @param [Hash] params ({})
       def get_metric_statistics(params = {}, options = {})
@@ -530,21 +600,27 @@ module Aws
       # After you create a metric, allow up to fifteen minutes before the
       # metric appears. Statistics about the metric, however, are available
       # sooner using GetMetricStatistics.
+      #
       # @option params [String] :namespace
       #   The namespace to filter against.
+      #
       # @option params [String] :metric_name
       #   The name of the metric to filter against.
+      #
       # @option params [Array<Types::DimensionFilter>] :dimensions
       #   The dimensions to filter against.
+      #
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
+      #
       # @return [Types::ListMetricsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListMetricsOutput#metrics #Metrics} => Array&lt;Types::Metric&gt;
-      #   * {Types::ListMetricsOutput#next_token #NextToken} => String
+      #   * {Types::ListMetricsOutput#metrics #metrics} => Array&lt;Types::Metric&gt;
+      #   * {Types::ListMetricsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_metrics({
       #     namespace: "Namespace",
       #     metric_name: "MetricName",
@@ -558,6 +634,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.metrics #=> Array
       #   resp.metrics[0].namespace #=> String
       #   resp.metrics[0].metric_name #=> String
@@ -565,6 +642,7 @@ module Aws
       #   resp.metrics[0].dimensions[0].name #=> String
       #   resp.metrics[0].dimensions[0].value #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_metrics(params = {})
       # @param [Hash] params ({})
       def list_metrics(params = {}, options = {})
@@ -619,14 +697,18 @@ module Aws
       # **EC2ActionsAccess** IAM role. After this IAM role is created, you can
       # create stop, terminate, or reboot alarms using a command-line
       # interface or an API.
+      #
       # @option params [required, String] :alarm_name
       #   The name for the alarm. This name must be unique within the AWS
       #   account.
+      #
       # @option params [String] :alarm_description
       #   The description for the alarm.
+      #
       # @option params [Boolean] :actions_enabled
       #   Indicates whether actions should be executed during any changes to the
       #   alarm state.
+      #
       # @option params [Array<String>] :ok_actions
       #   The actions to execute when this alarm transitions to an `OK` state
       #   from any other state. Each action is specified as an Amazon Resource
@@ -642,6 +724,7 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+      #
       # @option params [Array<String>] :alarm_actions
       #   The actions to execute when this alarm transitions to the `ALARM`
       #   state from any other state. Each action is specified as an Amazon
@@ -657,6 +740,7 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+      #
       # @option params [Array<String>] :insufficient_data_actions
       #   The actions to execute when this alarm transitions to the
       #   `INSUFFICIENT_DATA` state from any other state. Each action is
@@ -672,20 +756,27 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+      #
       # @option params [required, String] :metric_name
       #   The name for the metric associated with the alarm.
+      #
       # @option params [required, String] :namespace
       #   The namespace for the metric associated with the alarm.
+      #
       # @option params [String] :statistic
       #   The statistic for the metric associated with the alarm, other than
       #   percentile. For percentile statistics, use `ExtendedStatistic`.
+      #
       # @option params [String] :extended_statistic
       #   The percentile statistic for the metric associated with the alarm.
       #   Specify a value between p0.0 and p100.
+      #
       # @option params [Array<Types::Dimension>] :dimensions
       #   The dimensions for the metric associated with the alarm.
+      #
       # @option params [required, Integer] :period
       #   The period, in seconds, over which the specified statistic is applied.
+      #
       # @option params [String] :unit
       #   The unit of measure for the statistic. For example, the units for the
       #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
@@ -697,18 +788,23 @@ module Aws
       #   If you specify a unit, you must use a unit that is appropriate for the
       #   metric. Otherwise, the Amazon CloudWatch alarm can get stuck in the
       #   `INSUFFICIENT DATA` state.
+      #
       # @option params [required, Integer] :evaluation_periods
       #   The number of periods over which data is compared to the specified
       #   threshold.
+      #
       # @option params [required, Float] :threshold
       #   The value against which the specified statistic is compared.
+      #
       # @option params [required, String] :comparison_operator
       #   The arithmetic operation to use when comparing the specified statistic
       #   and threshold. The specified statistic value is used as the first
       #   operand.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_metric_alarm({
       #     alarm_name: "AlarmName", # required
       #     alarm_description: "AlarmDescription",
@@ -732,6 +828,7 @@ module Aws
       #     threshold: 1.0, # required
       #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
       #   })
+      #
       # @overload put_metric_alarm(params = {})
       # @param [Hash] params ({})
       def put_metric_alarm(params = {}, options = {})
@@ -757,17 +854,21 @@ module Aws
       # Data points with time stamps from 24 hours ago or longer can take at
       # least 48 hours to become available for GetMetricStatistics from the
       # time they are submitted.
+      #
       # @option params [required, String] :namespace
       #   The namespace for the metric data.
       #
       #   You cannot specify a namespace that begins with "AWS/". Namespaces
       #   that begin with "AWS/" are reserved for use by Amazon Web Services
       #   products.
+      #
       # @option params [required, Array<Types::MetricDatum>] :metric_data
       #   The data for the metric.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_metric_data({
       #     namespace: "Namespace", # required
       #     metric_data: [ # required
@@ -791,6 +892,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload put_metric_data(params = {})
       # @param [Hash] params ({})
       def put_metric_data(params = {}, options = {})
@@ -807,26 +909,33 @@ module Aws
       # Because the alarm state change happens very quickly, it is typically
       # only visible in the alarm's **History** tab in the Amazon CloudWatch
       # console or through DescribeAlarmHistory.
+      #
       # @option params [required, String] :alarm_name
       #   The name for the alarm. This name must be unique within the AWS
       #   account. The maximum length is 255 characters.
+      #
       # @option params [required, String] :state_value
       #   The value of the state.
+      #
       # @option params [required, String] :state_reason
       #   The reason that this alarm is set to this specific state, in text
       #   format.
+      #
       # @option params [String] :state_reason_data
       #   The reason that this alarm is set to this specific state, in JSON
       #   format.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_alarm_state({
       #     alarm_name: "AlarmName", # required
       #     state_value: "OK", # required, accepts OK, ALARM, INSUFFICIENT_DATA
       #     state_reason: "StateReason", # required
       #     state_reason_data: "StateReasonData",
       #   })
+      #
       # @overload set_alarm_state(params = {})
       # @param [Hash] params ({})
       def set_alarm_state(params = {}, options = {})

@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -150,12 +165,16 @@ module Aws
       # * Digits: `www.digits.com`
       #
       #  You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_name
       #   A string that you provide.
+      #
       # @option params [required, Boolean] :allow_unauthenticated_identities
       #   TRUE if the identity pool supports unauthenticated logins.
+      #
       # @option params [Hash<String,String>] :supported_login_providers
       #   Optional key:value pairs mapping provider names to provider app IDs.
+      #
       # @option params [String] :developer_provider_name
       #   The "domain" by which Cognito will refer to your users. This name
       #   acts as a placeholder that allows your backend and the Cognito service
@@ -165,25 +184,30 @@ module Aws
       #
       #   Once you have set a developer provider name, you cannot change it.
       #   Please take care in setting this parameter.
+      #
       # @option params [Array<String>] :open_id_connect_provider_arns
       #   A list of OpendID Connect provider ARNs.
+      #
       # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
       #   An array of Amazon Cognito Identity user pools.
+      #
       # @option params [Array<String>] :saml_provider_arns
       #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
       #   identity pool.
+      #
       # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::IdentityPool#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::IdentityPool#identity_pool_name #IdentityPoolName} => String
-      #   * {Types::IdentityPool#allow_unauthenticated_identities #AllowUnauthenticatedIdentities} => Boolean
-      #   * {Types::IdentityPool#supported_login_providers #SupportedLoginProviders} => Hash&lt;String,String&gt;
-      #   * {Types::IdentityPool#developer_provider_name #DeveloperProviderName} => String
-      #   * {Types::IdentityPool#open_id_connect_provider_arns #OpenIdConnectProviderARNs} => Array&lt;String&gt;
-      #   * {Types::IdentityPool#cognito_identity_providers #CognitoIdentityProviders} => Array&lt;Types::CognitoIdentityProvider&gt;
-      #   * {Types::IdentityPool#saml_provider_arns #SamlProviderARNs} => Array&lt;String&gt;
+      #   * {Types::IdentityPool#identity_pool_id #identity_pool_id} => String
+      #   * {Types::IdentityPool#identity_pool_name #identity_pool_name} => String
+      #   * {Types::IdentityPool#allow_unauthenticated_identities #allow_unauthenticated_identities} => Boolean
+      #   * {Types::IdentityPool#supported_login_providers #supported_login_providers} => Hash&lt;String,String&gt;
+      #   * {Types::IdentityPool#developer_provider_name #developer_provider_name} => String
+      #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
+      #   * {Types::IdentityPool#cognito_identity_providers #cognito_identity_providers} => Array&lt;Types::CognitoIdentityProvider&gt;
+      #   * {Types::IdentityPool#saml_provider_arns #saml_provider_arns} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_identity_pool({
       #     identity_pool_name: "IdentityPoolName", # required
       #     allow_unauthenticated_identities: false, # required
@@ -202,6 +226,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.identity_pool_name #=> String
       #   resp.allow_unauthenticated_identities #=> Boolean
@@ -215,6 +240,7 @@ module Aws
       #   resp.cognito_identity_providers[0].client_id #=> String
       #   resp.saml_provider_arns #=> Array
       #   resp.saml_provider_arns[0] #=> String
+      #
       # @overload create_identity_pool(params = {})
       # @param [Hash] params ({})
       def create_identity_pool(params = {}, options = {})
@@ -226,21 +252,26 @@ module Aws
       # 1-60 identities that you want to delete.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, Array<String>] :identity_ids_to_delete
       #   A list of 1-60 identities that you want to delete.
+      #
       # @return [Types::DeleteIdentitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteIdentitiesResponse#unprocessed_identity_ids #UnprocessedIdentityIds} => Array&lt;Types::UnprocessedIdentityId&gt;
+      #   * {Types::DeleteIdentitiesResponse#unprocessed_identity_ids #unprocessed_identity_ids} => Array&lt;Types::UnprocessedIdentityId&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_identities({
       #     identity_ids_to_delete: ["IdentityId"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.unprocessed_identity_ids #=> Array
       #   resp.unprocessed_identity_ids[0].identity_id #=> String
       #   resp.unprocessed_identity_ids[0].error_code #=> String, one of "AccessDenied", "InternalServerError"
+      #
       # @overload delete_identities(params = {})
       # @param [Hash] params ({})
       def delete_identities(params = {}, options = {})
@@ -252,14 +283,18 @@ module Aws
       # authenticate with the pool.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_identity_pool({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
+      #
       # @overload delete_identity_pool(params = {})
       # @param [Hash] params ({})
       def delete_identity_pool(params = {}, options = {})
@@ -271,26 +306,31 @@ module Aws
       # identity was created and any associated linked logins.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @return [Types::IdentityDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::IdentityDescription#identity_id #IdentityId} => String
-      #   * {Types::IdentityDescription#logins #Logins} => Array&lt;String&gt;
-      #   * {Types::IdentityDescription#creation_date #CreationDate} => Time
-      #   * {Types::IdentityDescription#last_modified_date #LastModifiedDate} => Time
+      #   * {Types::IdentityDescription#identity_id #identity_id} => String
+      #   * {Types::IdentityDescription#logins #logins} => Array&lt;String&gt;
+      #   * {Types::IdentityDescription#creation_date #creation_date} => Time
+      #   * {Types::IdentityDescription#last_modified_date #last_modified_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_identity({
       #     identity_id: "IdentityId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
       #   resp.logins #=> Array
       #   resp.logins[0] #=> String
       #   resp.creation_date #=> Time
       #   resp.last_modified_date #=> Time
+      #
       # @overload describe_identity(params = {})
       # @param [Hash] params ({})
       def describe_identity(params = {}, options = {})
@@ -302,25 +342,29 @@ module Aws
       # name, ID description, creation date, and current number of users.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::IdentityPool#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::IdentityPool#identity_pool_name #IdentityPoolName} => String
-      #   * {Types::IdentityPool#allow_unauthenticated_identities #AllowUnauthenticatedIdentities} => Boolean
-      #   * {Types::IdentityPool#supported_login_providers #SupportedLoginProviders} => Hash&lt;String,String&gt;
-      #   * {Types::IdentityPool#developer_provider_name #DeveloperProviderName} => String
-      #   * {Types::IdentityPool#open_id_connect_provider_arns #OpenIdConnectProviderARNs} => Array&lt;String&gt;
-      #   * {Types::IdentityPool#cognito_identity_providers #CognitoIdentityProviders} => Array&lt;Types::CognitoIdentityProvider&gt;
-      #   * {Types::IdentityPool#saml_provider_arns #SamlProviderARNs} => Array&lt;String&gt;
+      #   * {Types::IdentityPool#identity_pool_id #identity_pool_id} => String
+      #   * {Types::IdentityPool#identity_pool_name #identity_pool_name} => String
+      #   * {Types::IdentityPool#allow_unauthenticated_identities #allow_unauthenticated_identities} => Boolean
+      #   * {Types::IdentityPool#supported_login_providers #supported_login_providers} => Hash&lt;String,String&gt;
+      #   * {Types::IdentityPool#developer_provider_name #developer_provider_name} => String
+      #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
+      #   * {Types::IdentityPool#cognito_identity_providers #cognito_identity_providers} => Array&lt;Types::CognitoIdentityProvider&gt;
+      #   * {Types::IdentityPool#saml_provider_arns #saml_provider_arns} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_identity_pool({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.identity_pool_name #=> String
       #   resp.allow_unauthenticated_identities #=> Boolean
@@ -334,6 +378,7 @@ module Aws
       #   resp.cognito_identity_providers[0].client_id #=> String
       #   resp.saml_provider_arns #=> Array
       #   resp.saml_provider_arns[0] #=> String
+      #
       # @overload describe_identity_pool(params = {})
       # @param [Hash] params ({})
       def describe_identity_pool(params = {}, options = {})
@@ -348,22 +393,27 @@ module Aws
       #
       # This is a public API. You do not need any credentials to call this
       # API.
+      #
       # @option params [required, String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @option params [Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens.
+      #
       # @option params [String] :custom_role_arn
       #   The Amazon Resource Name (ARN) of the role to be assumed when multiple
       #   roles were received in the token from the identity provider. For
       #   example, a SAML-based identity provider. This parameter is optional
       #   for identity providers that do not support role customization.
+      #
       # @return [Types::GetCredentialsForIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCredentialsForIdentityResponse#identity_id #IdentityId} => String
-      #   * {Types::GetCredentialsForIdentityResponse#credentials #Credentials} => Types::Credentials
+      #   * {Types::GetCredentialsForIdentityResponse#identity_id #identity_id} => String
+      #   * {Types::GetCredentialsForIdentityResponse#credentials #credentials} => Types::Credentials
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_credentials_for_identity({
       #     identity_id: "IdentityId", # required
       #     logins: {
@@ -373,11 +423,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
       #   resp.credentials.access_key_id #=> String
       #   resp.credentials.secret_key #=> String
       #   resp.credentials.session_token #=> String
       #   resp.credentials.expiration #=> Time
+      #
       # @overload get_credentials_for_identity(params = {})
       # @param [Hash] params ({})
       def get_credentials_for_identity(params = {}, options = {})
@@ -390,10 +442,13 @@ module Aws
       #
       # This is a public API. You do not need any credentials to call this
       # API.
+      #
       # @option params [String] :account_id
       #   A standard AWS account ID (9+ digits).
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens.
@@ -404,11 +459,13 @@ module Aws
       #   * Amazon: `www.amazon.com`
       #   * Twitter: `api.twitter.com`
       #   * Digits: `www.digits.com`
+      #
       # @return [Types::GetIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdResponse#identity_id #IdentityId} => String
+      #   * {Types::GetIdResponse#identity_id #identity_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_id({
       #     account_id: "AccountId",
       #     identity_pool_id: "IdentityPoolId", # required
@@ -418,7 +475,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
+      #
       # @overload get_id(params = {})
       # @param [Hash] params ({})
       def get_id(params = {}, options = {})
@@ -429,22 +488,27 @@ module Aws
       # Gets the roles for an identity pool.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @return [Types::GetIdentityPoolRolesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIdentityPoolRolesResponse#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::GetIdentityPoolRolesResponse#roles #Roles} => Hash&lt;String,String&gt;
+      #   * {Types::GetIdentityPoolRolesResponse#identity_pool_id #identity_pool_id} => String
+      #   * {Types::GetIdentityPoolRolesResponse#roles #roles} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_identity_pool_roles({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.roles #=> Hash
       #   resp.roles["RoleType"] #=> String
+      #
       # @overload get_identity_pool_roles(params = {})
       # @param [Hash] params ({})
       def get_identity_pool_roles(params = {}, options = {})
@@ -460,20 +524,24 @@ module Aws
       #
       # This is a public API. You do not need any credentials to call this
       # API.
+      #
       # @option params [required, String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @option params [Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens. When using graph.facebook.com and www.amazon.com, supply the
       #   access\_token returned from the provider's authflow. For
       #   accounts.google.com or any other OpenId Connect provider, always
       #   include the id\_token.
+      #
       # @return [Types::GetOpenIdTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetOpenIdTokenResponse#identity_id #IdentityId} => String
-      #   * {Types::GetOpenIdTokenResponse#token #Token} => String
+      #   * {Types::GetOpenIdTokenResponse#identity_id #identity_id} => String
+      #   * {Types::GetOpenIdTokenResponse#token #token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_open_id_token({
       #     identity_id: "IdentityId", # required
       #     logins: {
@@ -482,8 +550,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
       #   resp.token #=> String
+      #
       # @overload get_open_id_token(params = {})
       # @param [Hash] params ({})
       def get_open_id_token(params = {}, options = {})
@@ -508,10 +578,13 @@ module Aws
       # specified `IdentityPoolId`.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @option params [required, Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens. Each name-value pair represents a user from a public provider
@@ -523,6 +596,7 @@ module Aws
       #   identifier is an identifier from your backend that uniquely identifies
       #   a user. When you create an identity pool, you can specify the
       #   supported logins.
+      #
       # @option params [Integer] :token_duration
       #   The expiration time of the token, in seconds. You can specify a custom
       #   expiration time for the token so that you can cache it. If you don't
@@ -533,12 +607,14 @@ module Aws
       #   expiration time for a token, as there are significant security
       #   implications: an attacker could use a leaked token to access your AWS
       #   resources for the token's duration.
+      #
       # @return [Types::GetOpenIdTokenForDeveloperIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetOpenIdTokenForDeveloperIdentityResponse#identity_id #IdentityId} => String
-      #   * {Types::GetOpenIdTokenForDeveloperIdentityResponse#token #Token} => String
+      #   * {Types::GetOpenIdTokenForDeveloperIdentityResponse#identity_id #identity_id} => String
+      #   * {Types::GetOpenIdTokenForDeveloperIdentityResponse#token #token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_open_id_token_for_developer_identity({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId",
@@ -549,8 +625,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
       #   resp.token #=> String
+      #
       # @overload get_open_id_token_for_developer_identity(params = {})
       # @param [Hash] params ({})
       def get_open_id_token_for_developer_identity(params = {}, options = {})
@@ -561,23 +639,29 @@ module Aws
       # Lists the identities in a pool.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [required, Integer] :max_results
       #   The maximum number of identities to return.
+      #
       # @option params [String] :next_token
       #   A pagination token.
+      #
       # @option params [Boolean] :hide_disabled
       #   An optional boolean parameter that allows you to hide disabled
       #   identities. If omitted, the ListIdentities API will include disabled
       #   identities in the response.
+      #
       # @return [Types::ListIdentitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIdentitiesResponse#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::ListIdentitiesResponse#identities #Identities} => Array&lt;Types::IdentityDescription&gt;
-      #   * {Types::ListIdentitiesResponse#next_token #NextToken} => String
+      #   * {Types::ListIdentitiesResponse#identity_pool_id #identity_pool_id} => String
+      #   * {Types::ListIdentitiesResponse#identities #identities} => Array&lt;Types::IdentityDescription&gt;
+      #   * {Types::ListIdentitiesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_identities({
       #     identity_pool_id: "IdentityPoolId", # required
       #     max_results: 1, # required
@@ -586,6 +670,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.identities #=> Array
       #   resp.identities[0].identity_id #=> String
@@ -594,6 +679,7 @@ module Aws
       #   resp.identities[0].creation_date #=> Time
       #   resp.identities[0].last_modified_date #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_identities(params = {})
       # @param [Hash] params ({})
       def list_identities(params = {}, options = {})
@@ -604,26 +690,32 @@ module Aws
       # Lists all of the Cognito identity pools registered for your account.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, Integer] :max_results
       #   The maximum number of identities to return.
+      #
       # @option params [String] :next_token
       #   A pagination token.
+      #
       # @return [Types::ListIdentityPoolsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIdentityPoolsResponse#identity_pools #IdentityPools} => Array&lt;Types::IdentityPoolShortDescription&gt;
-      #   * {Types::ListIdentityPoolsResponse#next_token #NextToken} => String
+      #   * {Types::ListIdentityPoolsResponse#identity_pools #identity_pools} => Array&lt;Types::IdentityPoolShortDescription&gt;
+      #   * {Types::ListIdentityPoolsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_identity_pools({
       #     max_results: 1, # required
       #     next_token: "PaginationKey",
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pools #=> Array
       #   resp.identity_pools[0].identity_pool_id #=> String
       #   resp.identity_pools[0].identity_pool_name #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_identity_pools(params = {})
       # @param [Hash] params ({})
       def list_identity_pools(params = {}, options = {})
@@ -643,16 +735,21 @@ module Aws
       # `ResourceConflictException` is thrown.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @option params [String] :developer_user_identifier
       #   A unique ID used by your backend authentication process to identify a
       #   user. Typically, a developer identity provider would issue many
       #   developer user identifiers, in keeping with the number of users.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of identities to return.
+      #
       # @option params [String] :next_token
       #   A pagination token. The first call you make will have `NextToken` set
       #   to null. After that the service will return `NextToken` values as
@@ -661,13 +758,15 @@ module Aws
       #   return a pagination token as a part of the response. This token can be
       #   used to call the API again and get results starting from the 11th
       #   match.
+      #
       # @return [Types::LookupDeveloperIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::LookupDeveloperIdentityResponse#identity_id #IdentityId} => String
-      #   * {Types::LookupDeveloperIdentityResponse#developer_user_identifier_list #DeveloperUserIdentifierList} => Array&lt;String&gt;
-      #   * {Types::LookupDeveloperIdentityResponse#next_token #NextToken} => String
+      #   * {Types::LookupDeveloperIdentityResponse#identity_id #identity_id} => String
+      #   * {Types::LookupDeveloperIdentityResponse#developer_user_identifier_list #developer_user_identifier_list} => Array&lt;String&gt;
+      #   * {Types::LookupDeveloperIdentityResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.lookup_developer_identity({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_id: "IdentityId",
@@ -677,10 +776,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
       #   resp.developer_user_identifier_list #=> Array
       #   resp.developer_user_identifier_list[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload lookup_developer_identity(params = {})
       # @param [Hash] params ({})
       def lookup_developer_identity(params = {}, options = {})
@@ -699,12 +800,15 @@ module Aws
       # users, an exception will be thrown.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :source_user_identifier
       #   User identifier for the source user. The value should be a
       #   `DeveloperUserIdentifier`.
+      #
       # @option params [required, String] :destination_user_identifier
       #   User identifier for the destination user. The value should be a
       #   `DeveloperUserIdentifier`.
+      #
       # @option params [required, String] :developer_provider_name
       #   The "domain" by which Cognito will refer to your users. This is a
       #   (pseudo) domain name that you provide while creating an identity pool.
@@ -712,13 +816,16 @@ module Aws
       #   Cognito service to communicate about the developer provider. For the
       #   `DeveloperProviderName`, you can use letters as well as period (.),
       #   underscore (\_), and dash (-).
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @return [Types::MergeDeveloperIdentitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::MergeDeveloperIdentitiesResponse#identity_id #IdentityId} => String
+      #   * {Types::MergeDeveloperIdentitiesResponse#identity_id #identity_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.merge_developer_identities({
       #     source_user_identifier: "DeveloperUserIdentifier", # required
       #     destination_user_identifier: "DeveloperUserIdentifier", # required
@@ -727,7 +834,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_id #=> String
+      #
       # @overload merge_developer_identities(params = {})
       # @param [Hash] params ({})
       def merge_developer_identities(params = {}, options = {})
@@ -739,21 +848,26 @@ module Aws
       # calls to `GetCredentialsForIdentity` action.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [required, Hash<String,String>] :roles
       #   The map of roles associated with this pool. For a given role, the key
       #   will be either "authenticated" or "unauthenticated" and the value
       #   will be the Role ARN.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_identity_pool_roles({
       #     identity_pool_id: "IdentityPoolId", # required
       #     roles: { # required
       #       "RoleType" => "ARNString",
       #     },
       #   })
+      #
       # @overload set_identity_pool_roles(params = {})
       # @param [Hash] params ({})
       def set_identity_pool_roles(params = {}, options = {})
@@ -768,24 +882,31 @@ module Aws
       # Cognito identity becomes inaccessible.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [required, String] :developer_provider_name
       #   The "domain" by which Cognito will refer to your users.
+      #
       # @option params [required, String] :developer_user_identifier
       #   A unique ID used by your backend authentication process to identify a
       #   user.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.unlink_developer_identity({
       #     identity_id: "IdentityId", # required
       #     identity_pool_id: "IdentityPoolId", # required
       #     developer_provider_name: "DeveloperProviderName", # required
       #     developer_user_identifier: "DeveloperUserIdentifier", # required
       #   })
+      #
       # @overload unlink_developer_identity(params = {})
       # @param [Hash] params ({})
       def unlink_developer_identity(params = {}, options = {})
@@ -799,16 +920,21 @@ module Aws
       #
       # This is a public API. You do not need any credentials to call this
       # API.
+      #
       # @option params [required, String] :identity_id
       #   A unique identifier in the format REGION:GUID.
+      #
       # @option params [required, Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens.
+      #
       # @option params [required, Array<String>] :logins_to_remove
       #   Provider names to unlink from this identity.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.unlink_identity({
       #     identity_id: "IdentityId", # required
       #     logins: { # required
@@ -816,6 +942,7 @@ module Aws
       #     },
       #     logins_to_remove: ["IdentityProviderName"], # required
       #   })
+      #
       # @overload unlink_identity(params = {})
       # @param [Hash] params ({})
       def unlink_identity(params = {}, options = {})
@@ -826,36 +953,46 @@ module Aws
       # Updates a user pool.
       #
       # You must use AWS Developer credentials to call this API.
+      #
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
+      #
       # @option params [required, String] :identity_pool_name
       #   A string that you provide.
+      #
       # @option params [required, Boolean] :allow_unauthenticated_identities
       #   TRUE if the identity pool supports unauthenticated logins.
+      #
       # @option params [Hash<String,String>] :supported_login_providers
       #   Optional key:value pairs mapping provider names to provider app IDs.
+      #
       # @option params [String] :developer_provider_name
       #   The "domain" by which Cognito will refer to your users.
+      #
       # @option params [Array<String>] :open_id_connect_provider_arns
       #   A list of OpendID Connect provider ARNs.
+      #
       # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
       #   A list representing an Amazon Cognito Identity User Pool and its
       #   client ID.
+      #
       # @option params [Array<String>] :saml_provider_arns
       #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
       #   identity pool.
+      #
       # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::IdentityPool#identity_pool_id #IdentityPoolId} => String
-      #   * {Types::IdentityPool#identity_pool_name #IdentityPoolName} => String
-      #   * {Types::IdentityPool#allow_unauthenticated_identities #AllowUnauthenticatedIdentities} => Boolean
-      #   * {Types::IdentityPool#supported_login_providers #SupportedLoginProviders} => Hash&lt;String,String&gt;
-      #   * {Types::IdentityPool#developer_provider_name #DeveloperProviderName} => String
-      #   * {Types::IdentityPool#open_id_connect_provider_arns #OpenIdConnectProviderARNs} => Array&lt;String&gt;
-      #   * {Types::IdentityPool#cognito_identity_providers #CognitoIdentityProviders} => Array&lt;Types::CognitoIdentityProvider&gt;
-      #   * {Types::IdentityPool#saml_provider_arns #SamlProviderARNs} => Array&lt;String&gt;
+      #   * {Types::IdentityPool#identity_pool_id #identity_pool_id} => String
+      #   * {Types::IdentityPool#identity_pool_name #identity_pool_name} => String
+      #   * {Types::IdentityPool#allow_unauthenticated_identities #allow_unauthenticated_identities} => Boolean
+      #   * {Types::IdentityPool#supported_login_providers #supported_login_providers} => Hash&lt;String,String&gt;
+      #   * {Types::IdentityPool#developer_provider_name #developer_provider_name} => String
+      #   * {Types::IdentityPool#open_id_connect_provider_arns #open_id_connect_provider_arns} => Array&lt;String&gt;
+      #   * {Types::IdentityPool#cognito_identity_providers #cognito_identity_providers} => Array&lt;Types::CognitoIdentityProvider&gt;
+      #   * {Types::IdentityPool#saml_provider_arns #saml_provider_arns} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_identity_pool({
       #     identity_pool_id: "IdentityPoolId", # required
       #     identity_pool_name: "IdentityPoolName", # required
@@ -875,6 +1012,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.identity_pool_id #=> String
       #   resp.identity_pool_name #=> String
       #   resp.allow_unauthenticated_identities #=> Boolean
@@ -888,6 +1026,7 @@ module Aws
       #   resp.cognito_identity_providers[0].client_id #=> String
       #   resp.saml_provider_arns #=> Array
       #   resp.saml_provider_arns[0] #=> String
+      #
       # @overload update_identity_pool(params = {})
       # @param [Hash] params ({})
       def update_identity_pool(params = {}, options = {})

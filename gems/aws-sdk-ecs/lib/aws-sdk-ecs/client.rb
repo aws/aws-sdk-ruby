@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -143,21 +158,25 @@ module Aws
       # `default` cluster when you launch your first container instance.
       # However, you can create your own cluster with a unique name with the
       # `CreateCluster` action.
+      #
       # @option params [String] :cluster_name
       #   The name of your cluster. If you do not specify a name for your
       #   cluster, you create a cluster named `default`. Up to 255 letters
       #   (uppercase and lowercase), numbers, hyphens, and underscores are
       #   allowed.
+      #
       # @return [Types::CreateClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateClusterResponse#cluster #cluster} => Types::Cluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_cluster({
       #     cluster_name: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.cluster.cluster_arn #=> String
       #   resp.cluster.cluster_name #=> String
       #   resp.cluster.status #=> String
@@ -165,6 +184,7 @@ module Aws
       #   resp.cluster.running_tasks_count #=> Integer
       #   resp.cluster.pending_tasks_count #=> Integer
       #   resp.cluster.active_services_count #=> Integer
+      #
       # @overload create_cluster(params = {})
       # @param [Hash] params ({})
       def create_cluster(params = {}, options = {})
@@ -237,19 +257,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to run your service. If you do not specify a cluster, the
       #   default cluster is assumed.
+      #
       # @option params [required, String] :service_name
       #   The name of your service. Up to 255 letters (uppercase and lowercase),
       #   numbers, hyphens, and underscores are allowed. Service names must be
       #   unique within a cluster, but you can have similarly named services in
       #   multiple clusters within a region or across multiple regions.
+      #
       # @option params [required, String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to run in your service. If
       #   a `revision` is not specified, the latest `ACTIVE` revision is used.
+      #
       # @option params [Array<Types::LoadBalancer>] :load_balancers
       #   A load balancer object representing the load balancer to use with your
       #   service. Currently, you are limited to one load balancer per service.
@@ -269,12 +293,15 @@ module Aws
       #   access from the load balancer. When a task from this service is placed
       #   on a container instance, the container instance and port combination
       #   is registered as a target in the target group specified here.
+      #
       # @option params [required, Integer] :desired_count
       #   The number of instantiations of the specified task definition to place
       #   and keep running on your cluster.
+      #
       # @option params [String] :client_token
       #   Unique, case-sensitive identifier you provide to ensure the
       #   idempotency of the request. Up to 32 ASCII characters are allowed.
+      #
       # @option params [String] :role
       #   The name or full Amazon Resource Name (ARN) of the IAM role that
       #   allows Amazon ECS to make calls to your load balancer on your behalf.
@@ -292,14 +319,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names
+      #
       # @option params [Types::DeploymentConfiguration] :deployment_configuration
       #   Optional deployment parameters that control how many tasks run during
       #   the deployment and the ordering of stopping and starting tasks.
+      #
       # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateServiceResponse#service #service} => Types::Service
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_service({
       #     cluster: "String",
       #     service_name: "String", # required
@@ -322,6 +352,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.service.service_arn #=> String
       #   resp.service.service_name #=> String
       #   resp.service.cluster_arn #=> String
@@ -352,6 +383,7 @@ module Aws
       #   resp.service.events[0].created_at #=> Time
       #   resp.service.events[0].message #=> String
       #   resp.service.created_at #=> Time
+      #
       # @overload create_service(params = {})
       # @param [Hash] params ({})
       def create_service(params = {}, options = {})
@@ -363,19 +395,23 @@ module Aws
       # instances from this cluster before you may delete it. You can list the
       # container instances in a cluster with ListContainerInstances and
       # deregister them with DeregisterContainerInstance.
+      #
       # @option params [required, String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster to
       #   delete.
+      #
       # @return [Types::DeleteClusterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DeleteClusterResponse#cluster #cluster} => Types::Cluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_cluster({
       #     cluster: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.cluster.cluster_arn #=> String
       #   resp.cluster.cluster_name #=> String
       #   resp.cluster.status #=> String
@@ -383,6 +419,7 @@ module Aws
       #   resp.cluster.running_tasks_count #=> Integer
       #   resp.cluster.pending_tasks_count #=> Integer
       #   resp.cluster.active_services_count #=> Integer
+      #
       # @overload delete_cluster(params = {})
       # @param [Hash] params ({})
       def delete_cluster(params = {}, options = {})
@@ -408,22 +445,27 @@ module Aws
       # error.
       #
       #  </note>
+      #
       # @option params [String] :cluster
       #   The name of the cluster that hosts the service to delete. If you do
       #   not specify a cluster, the default cluster is assumed.
+      #
       # @option params [required, String] :service
       #   The name of the service to delete.
+      #
       # @return [Types::DeleteServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DeleteServiceResponse#service #service} => Types::Service
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_service({
       #     cluster: "String",
       #     service: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.service.service_arn #=> String
       #   resp.service.service_name #=> String
       #   resp.service.cluster_arn #=> String
@@ -454,6 +496,7 @@ module Aws
       #   resp.service.events[0].created_at #=> Time
       #   resp.service.events[0].message #=> String
       #   resp.service.created_at #=> Time
+      #
       # @overload delete_service(params = {})
       # @param [Hash] params ({})
       def delete_service(params = {}, options = {})
@@ -480,10 +523,12 @@ module Aws
       # automatically deregistered when terminated).
       #
       #  </note>
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the container instance to deregister. If you do not specify a
       #   cluster, the default cluster is assumed.
+      #
       # @option params [required, String] :container_instance
       #   The container instance ID or full Amazon Resource Name (ARN) of the
       #   container instance to deregister. The ARN contains the `arn:aws:ecs`
@@ -492,6 +537,7 @@ module Aws
       #   namespace, and then the container instance ID. For example,
       #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
       #   `.
+      #
       # @option params [Boolean] :force
       #   Forces the deregistration of the container instance. If you have tasks
       #   running on the container instance when you deregister it with the
@@ -506,11 +552,13 @@ module Aws
       #   Classic load balancer or an Application load balancer target group are
       #   deregistered, and they will begin connection draining according to the
       #   settings on the load balancer or target group.
+      #
       # @return [Types::DeregisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeregisterContainerInstanceResponse#container_instance #containerInstance} => Types::ContainerInstance
+      #   * {Types::DeregisterContainerInstanceResponse#container_instance #container_instance} => Types::ContainerInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_container_instance({
       #     cluster: "String",
       #     container_instance: "String", # required
@@ -518,6 +566,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.container_instance.container_instance_arn #=> String
       #   resp.container_instance.ec2_instance_id #=> String
       #   resp.container_instance.version #=> Integer
@@ -548,6 +597,7 @@ module Aws
       #   resp.container_instance.attributes #=> Array
       #   resp.container_instance.attributes[0].name #=> String
       #   resp.container_instance.attributes[0].value #=> String
+      #
       # @overload deregister_container_instance(params = {})
       # @param [Hash] params ({})
       def deregister_container_instance(params = {}, options = {})
@@ -567,20 +617,24 @@ module Aws
       # reference an `INACTIVE` task definition (although there may be up to a
       # 10 minute window following deregistration where these restrictions
       # have not yet taken effect).
+      #
       # @option params [required, String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to deregister. You must
       #   specify a `revision`.
+      #
       # @return [Types::DeregisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeregisterTaskDefinitionResponse#task_definition #taskDefinition} => Types::TaskDefinition
+      #   * {Types::DeregisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deregister_task_definition({
       #     task_definition: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_definition.task_definition_arn #=> String
       #   resp.task_definition.container_definitions #=> Array
       #   resp.task_definition.container_definitions[0].name #=> String
@@ -644,6 +698,7 @@ module Aws
       #   resp.task_definition.requires_attributes #=> Array
       #   resp.task_definition.requires_attributes[0].name #=> String
       #   resp.task_definition.requires_attributes[0].value #=> String
+      #
       # @overload deregister_task_definition(params = {})
       # @param [Hash] params ({})
       def deregister_task_definition(params = {}, options = {})
@@ -652,21 +707,25 @@ module Aws
       end
 
       # Describes one or more of your clusters.
+      #
       # @option params [Array<String>] :clusters
       #   A space-separated list of up to 100 cluster names or full cluster
       #   Amazon Resource Name (ARN) entries. If you do not specify a cluster,
       #   the default cluster is assumed.
+      #
       # @return [Types::DescribeClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeClustersResponse#clusters #clusters} => Array&lt;Types::Cluster&gt;
       #   * {Types::DescribeClustersResponse#failures #failures} => Array&lt;Types::Failure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_clusters({
       #     clusters: ["String"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.clusters #=> Array
       #   resp.clusters[0].cluster_arn #=> String
       #   resp.clusters[0].cluster_name #=> String
@@ -678,6 +737,7 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      #
       # @overload describe_clusters(params = {})
       # @param [Hash] params ({})
       def describe_clusters(params = {}, options = {})
@@ -688,25 +748,30 @@ module Aws
       # Describes Amazon EC2 Container Service container instances. Returns
       # metadata about registered and remaining resources on each container
       # instance requested.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the container instances to describe. If you do not specify a
       #   cluster, the default cluster is assumed.
+      #
       # @option params [required, Array<String>] :container_instances
       #   A space-separated list of container instance IDs or full Amazon
       #   Resource Name (ARN) entries.
+      #
       # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeContainerInstancesResponse#container_instances #containerInstances} => Array&lt;Types::ContainerInstance&gt;
+      #   * {Types::DescribeContainerInstancesResponse#container_instances #container_instances} => Array&lt;Types::ContainerInstance&gt;
       #   * {Types::DescribeContainerInstancesResponse#failures #failures} => Array&lt;Types::Failure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_container_instances({
       #     cluster: "String",
       #     container_instances: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.container_instances #=> Array
       #   resp.container_instances[0].container_instance_arn #=> String
       #   resp.container_instances[0].ec2_instance_id #=> String
@@ -741,6 +806,7 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      #
       # @overload describe_container_instances(params = {})
       # @param [Hash] params ({})
       def describe_container_instances(params = {}, options = {})
@@ -749,24 +815,29 @@ module Aws
       end
 
       # Describes the specified services running in your cluster.
+      #
       # @option params [String] :cluster
       #   The name of the cluster that hosts the service to describe. If you do
       #   not specify a cluster, the default cluster is assumed.
+      #
       # @option params [required, Array<String>] :services
       #   A list of services to describe. You may specify up to 10 services to
       #   describe in a single operation.
+      #
       # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeServicesResponse#services #services} => Array&lt;Types::Service&gt;
       #   * {Types::DescribeServicesResponse#failures #failures} => Array&lt;Types::Failure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_services({
       #     cluster: "String",
       #     services: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.services #=> Array
       #   resp.services[0].service_arn #=> String
       #   resp.services[0].service_name #=> String
@@ -801,6 +872,7 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      #
       # @overload describe_services(params = {})
       # @param [Hash] params ({})
       def describe_services(params = {}, options = {})
@@ -817,20 +889,24 @@ module Aws
       # or service references them.
       #
       #  </note>
+      #
       # @option params [required, String] :task_definition
       #   The `family` for the latest `ACTIVE` revision, `family` and `revision`
       #   (`family:revision`) for a specific revision in the family, or full
       #   Amazon Resource Name (ARN) of the task definition to describe.
+      #
       # @return [Types::DescribeTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTaskDefinitionResponse#task_definition #taskDefinition} => Types::TaskDefinition
+      #   * {Types::DescribeTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_task_definition({
       #     task_definition: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_definition.task_definition_arn #=> String
       #   resp.task_definition.container_definitions #=> Array
       #   resp.task_definition.container_definitions[0].name #=> String
@@ -894,6 +970,7 @@ module Aws
       #   resp.task_definition.requires_attributes #=> Array
       #   resp.task_definition.requires_attributes[0].name #=> String
       #   resp.task_definition.requires_attributes[0].value #=> String
+      #
       # @overload describe_task_definition(params = {})
       # @param [Hash] params ({})
       def describe_task_definition(params = {}, options = {})
@@ -902,25 +979,30 @@ module Aws
       end
 
       # Describes a specified task or tasks.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the task to describe. If you do not specify a cluster, the
       #   default cluster is assumed.
+      #
       # @option params [required, Array<String>] :tasks
       #   A space-separated list of task IDs or full Amazon Resource Name (ARN)
       #   entries.
+      #
       # @return [Types::DescribeTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeTasksResponse#tasks #tasks} => Array&lt;Types::Task&gt;
       #   * {Types::DescribeTasksResponse#failures #failures} => Array&lt;Types::Failure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_tasks({
       #     cluster: "String",
       #     tasks: ["String"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tasks #=> Array
       #   resp.tasks[0].task_arn #=> String
       #   resp.tasks[0].cluster_arn #=> String
@@ -957,6 +1039,7 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      #
       # @overload describe_tasks(params = {})
       # @param [Hash] params ({})
       def describe_tasks(params = {}, options = {})
@@ -971,6 +1054,7 @@ module Aws
       #
       # Returns an endpoint for the Amazon EC2 Container Service agent to poll
       # for updates.
+      #
       # @option params [String] :container_instance
       #   The container instance ID or full Amazon Resource Name (ARN) of the
       #   container instance. The ARN contains the `arn:aws:ecs` namespace,
@@ -979,22 +1063,27 @@ module Aws
       #   and then the container instance ID. For example,
       #   `arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID
       #   `.
+      #
       # @option params [String] :cluster
       #   The cluster that the container instance belongs to.
+      #
       # @return [Types::DiscoverPollEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DiscoverPollEndpointResponse#endpoint #endpoint} => String
-      #   * {Types::DiscoverPollEndpointResponse#telemetry_endpoint #telemetryEndpoint} => String
+      #   * {Types::DiscoverPollEndpointResponse#telemetry_endpoint #telemetry_endpoint} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.discover_poll_endpoint({
       #     container_instance: "String",
       #     cluster: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.endpoint #=> String
       #   resp.telemetry_endpoint #=> String
+      #
       # @overload discover_poll_endpoint(params = {})
       # @param [Hash] params ({})
       def discover_poll_endpoint(params = {}, options = {})
@@ -1003,6 +1092,7 @@ module Aws
       end
 
       # Returns a list of existing clusters.
+      #
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListClusters` request where `maxResults` was used and the results
@@ -1015,6 +1105,7 @@ module Aws
       #   purposes.
       #
       #    </note>
+      #
       # @option params [Integer] :max_results
       #   The maximum number of cluster results returned by `ListClusters` in
       #   paginated output. When this parameter is used, `ListClusters` only
@@ -1024,21 +1115,25 @@ module Aws
       #   `nextToken` value. This value can be between 1 and 100. If this
       #   parameter is not used, then `ListClusters` returns up to 100 results
       #   and a `nextToken` value if applicable.
+      #
       # @return [Types::ListClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListClustersResponse#cluster_arns #clusterArns} => Array&lt;String&gt;
-      #   * {Types::ListClustersResponse#next_token #nextToken} => String
+      #   * {Types::ListClustersResponse#cluster_arns #cluster_arns} => Array&lt;String&gt;
+      #   * {Types::ListClustersResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_clusters({
       #     next_token: "String",
       #     max_results: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.cluster_arns #=> Array
       #   resp.cluster_arns[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_clusters(params = {})
       # @param [Hash] params ({})
       def list_clusters(params = {}, options = {})
@@ -1047,10 +1142,12 @@ module Aws
       end
 
       # Returns a list of container instances in a specified cluster.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the container instances to list. If you do not specify a
       #   cluster, the default cluster is assumed.
+      #
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListContainerInstances` request where `maxResults` was used and the
@@ -1063,6 +1160,7 @@ module Aws
       #   purposes.
       #
       #    </note>
+      #
       # @option params [Integer] :max_results
       #   The maximum number of container instance results returned by
       #   `ListContainerInstances` in paginated output. When this parameter is
@@ -1073,12 +1171,14 @@ module Aws
       #   This value can be between 1 and 100. If this parameter is not used,
       #   then `ListContainerInstances` returns up to 100 results and a
       #   `nextToken` value if applicable.
+      #
       # @return [Types::ListContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListContainerInstancesResponse#container_instance_arns #containerInstanceArns} => Array&lt;String&gt;
-      #   * {Types::ListContainerInstancesResponse#next_token #nextToken} => String
+      #   * {Types::ListContainerInstancesResponse#container_instance_arns #container_instance_arns} => Array&lt;String&gt;
+      #   * {Types::ListContainerInstancesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_container_instances({
       #     cluster: "String",
       #     next_token: "String",
@@ -1086,9 +1186,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.container_instance_arns #=> Array
       #   resp.container_instance_arns[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_container_instances(params = {})
       # @param [Hash] params ({})
       def list_container_instances(params = {}, options = {})
@@ -1097,10 +1199,12 @@ module Aws
       end
 
       # Lists the services that are running in a specified cluster.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the services to list. If you do not specify a cluster, the
       #   default cluster is assumed.
+      #
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListServices` request where `maxResults` was used and the results
@@ -1113,6 +1217,7 @@ module Aws
       #   purposes.
       #
       #    </note>
+      #
       # @option params [Integer] :max_results
       #   The maximum number of container instance results returned by
       #   `ListServices` in paginated output. When this parameter is used,
@@ -1122,12 +1227,14 @@ module Aws
       #   request with the returned `nextToken` value. This value can be between
       #   1 and 10. If this parameter is not used, then `ListServices` returns
       #   up to 10 results and a `nextToken` value if applicable.
+      #
       # @return [Types::ListServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListServicesResponse#service_arns #serviceArns} => Array&lt;String&gt;
-      #   * {Types::ListServicesResponse#next_token #nextToken} => String
+      #   * {Types::ListServicesResponse#service_arns #service_arns} => Array&lt;String&gt;
+      #   * {Types::ListServicesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_services({
       #     cluster: "String",
       #     next_token: "String",
@@ -1135,9 +1242,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.service_arns #=> Array
       #   resp.service_arns[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_services(params = {})
       # @param [Hash] params ({})
       def list_services(params = {}, options = {})
@@ -1153,11 +1262,13 @@ module Aws
       # `ACTIVE` task definition revisions by setting the `status` parameter
       # to `ACTIVE`. You can also filter the results with the `familyPrefix`
       # parameter.
+      #
       # @option params [String] :family_prefix
       #   The `familyPrefix` is a string that is used to filter the results of
       #   `ListTaskDefinitionFamilies`. If you specify a `familyPrefix`, only
       #   task definition family names that begin with the `familyPrefix` string
       #   are returned.
+      #
       # @option params [String] :status
       #   The task definition family status with which to filter the
       #   `ListTaskDefinitionFamilies` results. By default, both `ACTIVE` and
@@ -1168,6 +1279,7 @@ module Aws
       #   `ACTIVE` task definition revisions are returned. If you paginate the
       #   resulting output, be sure to keep the `status` value constant in each
       #   subsequent request.
+      #
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListTaskDefinitionFamilies` request where `maxResults` was used and
@@ -1180,6 +1292,7 @@ module Aws
       #   purposes.
       #
       #    </note>
+      #
       # @option params [Integer] :max_results
       #   The maximum number of task definition family results returned by
       #   `ListTaskDefinitionFamilies` in paginated output. When this parameter
@@ -1190,12 +1303,14 @@ module Aws
       #   value. This value can be between 1 and 100. If this parameter is not
       #   used, then `ListTaskDefinitionFamilies` returns up to 100 results and
       #   a `nextToken` value if applicable.
+      #
       # @return [Types::ListTaskDefinitionFamiliesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListTaskDefinitionFamiliesResponse#families #families} => Array&lt;String&gt;
-      #   * {Types::ListTaskDefinitionFamiliesResponse#next_token #nextToken} => String
+      #   * {Types::ListTaskDefinitionFamiliesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_task_definition_families({
       #     family_prefix: "String",
       #     status: "ACTIVE", # accepts ACTIVE, INACTIVE, ALL
@@ -1204,9 +1319,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.families #=> Array
       #   resp.families[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_task_definition_families(params = {})
       # @param [Hash] params ({})
       def list_task_definition_families(params = {}, options = {})
@@ -1217,10 +1334,12 @@ module Aws
       # Returns a list of task definitions that are registered to your
       # account. You can filter the results by family name with the
       # `familyPrefix` parameter or by status with the `status` parameter.
+      #
       # @option params [String] :family_prefix
       #   The full family name with which to filter the `ListTaskDefinitions`
       #   results. Specifying a `familyPrefix` limits the listed task
       #   definitions to task definition revisions that belong to that family.
+      #
       # @option params [String] :status
       #   The task definition status with which to filter the
       #   `ListTaskDefinitions` results. By default, only `ACTIVE` task
@@ -1229,6 +1348,7 @@ module Aws
       #   task or service still references them. If you paginate the resulting
       #   output, be sure to keep the `status` value constant in each subsequent
       #   request.
+      #
       # @option params [String] :sort
       #   The order in which to sort the results. Valid values are `ASC` and
       #   `DESC`. By default (`ASC`), task definitions are listed
@@ -1237,6 +1357,7 @@ module Aws
       #   last. Setting this parameter to `DESC` reverses the sort order on
       #   family name and revision so that the newest task definitions in a
       #   family are listed first.
+      #
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListTaskDefinitions` request where `maxResults` was used and the
@@ -1249,6 +1370,7 @@ module Aws
       #   purposes.
       #
       #    </note>
+      #
       # @option params [Integer] :max_results
       #   The maximum number of task definition results returned by
       #   `ListTaskDefinitions` in paginated output. When this parameter is
@@ -1259,12 +1381,14 @@ module Aws
       #   This value can be between 1 and 100. If this parameter is not used,
       #   then `ListTaskDefinitions` returns up to 100 results and a `nextToken`
       #   value if applicable.
+      #
       # @return [Types::ListTaskDefinitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTaskDefinitionsResponse#task_definition_arns #taskDefinitionArns} => Array&lt;String&gt;
-      #   * {Types::ListTaskDefinitionsResponse#next_token #nextToken} => String
+      #   * {Types::ListTaskDefinitionsResponse#task_definition_arns #task_definition_arns} => Array&lt;String&gt;
+      #   * {Types::ListTaskDefinitionsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_task_definitions({
       #     family_prefix: "String",
       #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
@@ -1274,9 +1398,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_definition_arns #=> Array
       #   resp.task_definition_arns[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_task_definitions(params = {})
       # @param [Hash] params ({})
       def list_task_definitions(params = {}, options = {})
@@ -1292,19 +1418,23 @@ module Aws
       # Recently-stopped tasks might appear in the returned results.
       # Currently, stopped tasks appear in the returned results for at least
       # one hour.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the tasks to list. If you do not specify a cluster, the default
       #   cluster is assumed.
+      #
       # @option params [String] :container_instance
       #   The container instance ID or full Amazon Resource Name (ARN) of the
       #   container instance with which to filter the `ListTasks` results.
       #   Specifying a `containerInstance` limits the results to tasks that
       #   belong to that container instance.
+      #
       # @option params [String] :family
       #   The name of the family with which to filter the `ListTasks` results.
       #   Specifying a `family` limits the results to tasks that belong to that
       #   family.
+      #
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated `ListTasks`
       #   request where `maxResults` was used and the results exceeded the value
@@ -1317,6 +1447,7 @@ module Aws
       #   purposes.
       #
       #    </note>
+      #
       # @option params [Integer] :max_results
       #   The maximum number of task results returned by `ListTasks` in
       #   paginated output. When this parameter is used, `ListTasks` only
@@ -1326,14 +1457,17 @@ module Aws
       #   `nextToken` value. This value can be between 1 and 100. If this
       #   parameter is not used, then `ListTasks` returns up to 100 results and
       #   a `nextToken` value if applicable.
+      #
       # @option params [String] :started_by
       #   The `startedBy` value with which to filter the task results.
       #   Specifying a `startedBy` value limits the results to tasks that were
       #   started with that value.
+      #
       # @option params [String] :service_name
       #   The name of the service with which to filter the `ListTasks` results.
       #   Specifying a `serviceName` limits the results to tasks that belong to
       #   that service.
+      #
       # @option params [String] :desired_status
       #   The task desired status with which to filter the `ListTasks` results.
       #   Specifying a `desiredStatus` of `STOPPED` limits the results to tasks
@@ -1348,12 +1482,14 @@ module Aws
       #   may have a value of `PENDING`).
       #
       #    </note>
+      #
       # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTasksResponse#task_arns #taskArns} => Array&lt;String&gt;
-      #   * {Types::ListTasksResponse#next_token #nextToken} => String
+      #   * {Types::ListTasksResponse#task_arns #task_arns} => Array&lt;String&gt;
+      #   * {Types::ListTasksResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tasks({
       #     cluster: "String",
       #     container_instance: "String",
@@ -1366,9 +1502,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_arns #=> Array
       #   resp.task_arns[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_tasks(params = {})
       # @param [Hash] params ({})
       def list_tasks(params = {}, options = {})
@@ -1383,36 +1521,45 @@ module Aws
       #
       # Registers an EC2 instance into the specified cluster. This instance
       # becomes available to place containers on.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster with
       #   which to register your container instance. If you do not specify a
       #   cluster, the default cluster is assumed.
+      #
       # @option params [String] :instance_identity_document
       #   The instance identity document for the EC2 instance to register. This
       #   document can be found by running the following command from the
       #   instance: `curl
       #   http://169.254.169.254/latest/dynamic/instance-identity/document/`
+      #
       # @option params [String] :instance_identity_document_signature
       #   The instance identity document signature for the EC2 instance to
       #   register. This signature can be found by running the following command
       #   from the instance: `curl
       #   http://169.254.169.254/latest/dynamic/instance-identity/signature/`
+      #
       # @option params [Array<Types::Resource>] :total_resources
       #   The resources available on the instance.
+      #
       # @option params [Types::VersionInfo] :version_info
       #   The version information for the Amazon ECS container agent and Docker
       #   daemon running on the container instance.
+      #
       # @option params [String] :container_instance_arn
       #   The Amazon Resource Name (ARN) of the container instance (if it was
       #   previously registered).
+      #
       # @option params [Array<Types::Attribute>] :attributes
       #   The container instance attributes that this container instance
       #   supports.
+      #
       # @return [Types::RegisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterContainerInstanceResponse#container_instance #containerInstance} => Types::ContainerInstance
+      #   * {Types::RegisterContainerInstanceResponse#container_instance #container_instance} => Types::ContainerInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_container_instance({
       #     cluster: "String",
       #     instance_identity_document: "String",
@@ -1442,6 +1589,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.container_instance.container_instance_arn #=> String
       #   resp.container_instance.ec2_instance_id #=> String
       #   resp.container_instance.version #=> Integer
@@ -1472,6 +1620,7 @@ module Aws
       #   resp.container_instance.attributes #=> Array
       #   resp.container_instance.attributes[0].name #=> String
       #   resp.container_instance.attributes[0].value #=> String
+      #
       # @overload register_container_instance(params = {})
       # @param [Hash] params ({})
       def register_container_instance(params = {}, options = {})
@@ -1502,11 +1651,13 @@ module Aws
       # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
       # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
       # [3]: https://docs.docker.com/engine/reference/run/#/network-settings
+      #
       # @option params [required, String] :family
       #   You must specify a `family` for a task definition, which allows you to
       #   track multiple versions of the same task definition. The `family` is
       #   used as a name for your task definition. Up to 255 letters (uppercase
       #   and lowercase), numbers, hyphens, and underscores are allowed.
+      #
       # @option params [String] :task_role_arn
       #   The short name or full Amazon Resource Name (ARN) of the IAM role that
       #   containers in this task can assume. All containers in this task are
@@ -1517,6 +1668,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+      #
       # @option params [String] :network_mode
       #   The Docker networking mode to use for the containers in the task. The
       #   valid values are `none`, `bridge`, and `host`.
@@ -1538,17 +1690,21 @@ module Aws
       #
       #
       #   [1]: https://docs.docker.com/engine/reference/run/#network-settings
+      #
       # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
       #   A list of container definitions in JSON format that describe the
       #   different containers that make up your task.
+      #
       # @option params [Array<Types::Volume>] :volumes
       #   A list of volume definitions in JSON format that containers in your
       #   task may use.
+      #
       # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RegisterTaskDefinitionResponse#task_definition #taskDefinition} => Types::TaskDefinition
+      #   * {Types::RegisterTaskDefinitionResponse#task_definition #task_definition} => Types::TaskDefinition
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_task_definition({
       #     family: "String", # required
       #     task_role_arn: "String",
@@ -1634,6 +1790,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_definition.task_definition_arn #=> String
       #   resp.task_definition.container_definitions #=> Array
       #   resp.task_definition.container_definitions[0].name #=> String
@@ -1697,6 +1854,7 @@ module Aws
       #   resp.task_definition.requires_attributes #=> Array
       #   resp.task_definition.requires_attributes[0].name #=> String
       #   resp.task_definition.requires_attributes[0].value #=> String
+      #
       # @overload register_task_definition(params = {})
       # @param [Hash] params ({})
       def register_task_definition(params = {}, options = {})
@@ -1709,14 +1867,17 @@ module Aws
       # container instance, use `StartTask` instead.
       #
       # The `count` parameter is limited to 10 tasks per call.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to run your task. If you do not specify a cluster, the default
       #   cluster is assumed.
+      #
       # @option params [required, String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to run. If a `revision` is
       #   not specified, the latest `ACTIVE` revision is used.
+      #
       # @option params [Types::TaskOverride] :overrides
       #   A list of container overrides in JSON format that specify the name of
       #   a container in the specified task definition and the overrides it
@@ -1731,11 +1892,13 @@ module Aws
       #   includes the JSON formatting characters of the override structure.
       #
       #    </note>
+      #
       # @option params [Integer] :count
       #   The number of instantiations of the specified task to place on your
       #   cluster.
       #
       #   The `count` parameter is limited to 10 tasks per call.
+      #
       # @option params [String] :started_by
       #   An optional tag specified when a task is started. For example if you
       #   automatically trigger a task to run a batch process job, you could
@@ -1747,12 +1910,14 @@ module Aws
       #
       #   If a task is started by an Amazon ECS service, then the `startedBy`
       #   parameter contains the deployment ID of the service that starts it.
+      #
       # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RunTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
       #   * {Types::RunTaskResponse#failures #failures} => Array&lt;Types::Failure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.run_task({
       #     cluster: "String",
       #     task_definition: "String", # required
@@ -1776,6 +1941,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tasks #=> Array
       #   resp.tasks[0].task_arn #=> String
       #   resp.tasks[0].cluster_arn #=> String
@@ -1812,6 +1978,7 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      #
       # @overload run_task(params = {})
       # @param [Hash] params ({})
       def run_task(params = {}, options = {})
@@ -1824,14 +1991,17 @@ module Aws
       # scheduler to place your task, use `RunTask` instead.
       #
       # The list of container instances to start tasks on is limited to 10.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to start your task. If you do not specify a cluster, the default
       #   cluster is assumed.
+      #
       # @option params [required, String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to start. If a `revision`
       #   is not specified, the latest `ACTIVE` revision is used.
+      #
       # @option params [Types::TaskOverride] :overrides
       #   A list of container overrides in JSON format that specify the name of
       #   a container in the specified task definition and the overrides it
@@ -1846,12 +2016,14 @@ module Aws
       #   includes the JSON formatting characters of the override structure.
       #
       #    </note>
+      #
       # @option params [required, Array<String>] :container_instances
       #   The container instance IDs or full Amazon Resource Name (ARN) entries
       #   for the container instances on which you would like to place your
       #   task.
       #
       #   The list of container instances to start tasks on is limited to 10.
+      #
       # @option params [String] :started_by
       #   An optional tag specified when a task is started. For example if you
       #   automatically trigger a task to run a batch process job, you could
@@ -1863,12 +2035,14 @@ module Aws
       #
       #   If a task is started by an Amazon ECS service, then the `startedBy`
       #   parameter contains the deployment ID of the service that starts it.
+      #
       # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::StartTaskResponse#tasks #tasks} => Array&lt;Types::Task&gt;
       #   * {Types::StartTaskResponse#failures #failures} => Array&lt;Types::Failure&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_task({
       #     cluster: "String",
       #     task_definition: "String", # required
@@ -1892,6 +2066,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tasks #=> Array
       #   resp.tasks[0].task_arn #=> String
       #   resp.tasks[0].cluster_arn #=> String
@@ -1928,6 +2103,7 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      #
       # @overload start_task(params = {})
       # @param [Hash] params ({})
       def start_task(params = {}, options = {})
@@ -1943,24 +2119,29 @@ module Aws
       # the containers are forcibly stopped. If the container handles the
       # `SIGTERM` gracefully and exits within 30 seconds from receiving it, no
       # `SIGKILL` is sent.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the task to stop. If you do not specify a cluster, the default
       #   cluster is assumed.
+      #
       # @option params [required, String] :task
       #   The task ID or full Amazon Resource Name (ARN) entry of the task to
       #   stop.
+      #
       # @option params [String] :reason
       #   An optional message specified when a task is stopped. For example, if
       #   you are using a custom scheduler, you can use this parameter to
       #   specify the reason for stopping the task here, and the message will
       #   appear in subsequent DescribeTasks API operations on this task. Up to
       #   255 characters are allowed in this message.
+      #
       # @return [Types::StopTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::StopTaskResponse#task #task} => Types::Task
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_task({
       #     cluster: "String",
       #     task: "String", # required
@@ -1968,6 +2149,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.task.task_arn #=> String
       #   resp.task.cluster_arn #=> String
       #   resp.task.task_definition_arn #=> String
@@ -2000,6 +2182,7 @@ module Aws
       #   resp.task.created_at #=> Time
       #   resp.task.started_at #=> Time
       #   resp.task.stopped_at #=> Time
+      #
       # @overload stop_task(params = {})
       # @param [Hash] params ({})
       def stop_task(params = {}, options = {})
@@ -2013,27 +2196,36 @@ module Aws
       #  </note>
       #
       # Sent to acknowledge that a container changed states.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the container.
+      #
       # @option params [String] :task
       #   The task ID or full Amazon Resource Name (ARN) of the task that hosts
       #   the container.
+      #
       # @option params [String] :container_name
       #   The name of the container.
+      #
       # @option params [String] :status
       #   The status of the state change request.
+      #
       # @option params [Integer] :exit_code
       #   The exit code returned for the state change request.
+      #
       # @option params [String] :reason
       #   The reason for the state change request.
+      #
       # @option params [Array<Types::NetworkBinding>] :network_bindings
       #   The network bindings of the container.
+      #
       # @return [Types::SubmitContainerStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SubmitContainerStateChangeResponse#acknowledgment #acknowledgment} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.submit_container_state_change({
       #     cluster: "String",
       #     task: "String",
@@ -2052,7 +2244,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.acknowledgment #=> String
+      #
       # @overload submit_container_state_change(params = {})
       # @param [Hash] params ({})
       def submit_container_state_change(params = {}, options = {})
@@ -2066,21 +2260,27 @@ module Aws
       #  </note>
       #
       # Sent to acknowledge that a task changed states.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the task.
+      #
       # @option params [String] :task
       #   The task ID or full Amazon Resource Name (ARN) of the task in the
       #   state change request.
+      #
       # @option params [String] :status
       #   The status of the state change request.
+      #
       # @option params [String] :reason
       #   The reason for the state change request.
+      #
       # @return [Types::SubmitTaskStateChangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SubmitTaskStateChangeResponse#acknowledgment #acknowledgment} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.submit_task_state_change({
       #     cluster: "String",
       #     task: "String",
@@ -2089,7 +2289,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.acknowledgment #=> String
+      #
       # @overload submit_task_state_change(params = {})
       # @param [Hash] params ({})
       def submit_task_state_change(params = {}, options = {})
@@ -2113,25 +2315,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   your container instance is running on. If you do not specify a
       #   cluster, the default cluster is assumed.
+      #
       # @option params [required, String] :container_instance
       #   The container instance ID or full Amazon Resource Name (ARN) entries
       #   for the container instance on which you would like to update the
       #   Amazon ECS container agent.
+      #
       # @return [Types::UpdateContainerAgentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateContainerAgentResponse#container_instance #containerInstance} => Types::ContainerInstance
+      #   * {Types::UpdateContainerAgentResponse#container_instance #container_instance} => Types::ContainerInstance
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_container_agent({
       #     cluster: "String",
       #     container_instance: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.container_instance.container_instance_arn #=> String
       #   resp.container_instance.ec2_instance_id #=> String
       #   resp.container_instance.version #=> Integer
@@ -2162,6 +2369,7 @@ module Aws
       #   resp.container_instance.attributes #=> Array
       #   resp.container_instance.attributes[0].name #=> String
       #   resp.container_instance.attributes[0].value #=> String
+      #
       # @overload update_container_agent(params = {})
       # @param [Hash] params ({})
       def update_container_agent(params = {}, options = {})
@@ -2228,15 +2436,19 @@ module Aws
       #   optimal Availability Zone (based on the previous steps), favoring
       #   container instances with the fewest number of running tasks for this
       #   service.
+      #
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   your service is running on. If you do not specify a cluster, the
       #   default cluster is assumed.
+      #
       # @option params [required, String] :service
       #   The name of the service to update.
+      #
       # @option params [Integer] :desired_count
       #   The number of instantiations of the task to place and keep running in
       #   your service.
+      #
       # @option params [String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to run in your service. If
@@ -2244,14 +2456,17 @@ module Aws
       #   If you modify the task definition with `UpdateService`, Amazon ECS
       #   spawns a task with the new version of the task definition and then
       #   stops an old task after the new version is running.
+      #
       # @option params [Types::DeploymentConfiguration] :deployment_configuration
       #   Optional deployment parameters that control how many tasks run during
       #   the deployment and the ordering of stopping and starting tasks.
+      #
       # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateServiceResponse#service #service} => Types::Service
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_service({
       #     cluster: "String",
       #     service: "String", # required
@@ -2264,6 +2479,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.service.service_arn #=> String
       #   resp.service.service_name #=> String
       #   resp.service.cluster_arn #=> String
@@ -2294,6 +2510,7 @@ module Aws
       #   resp.service.events[0].created_at #=> Time
       #   resp.service.events[0].message #=> String
       #   resp.service.created_at #=> Time
+      #
       # @overload update_service(params = {})
       # @param [Hash] params ({})
       def update_service(params = {}, options = {})
@@ -2436,10 +2653,10 @@ module Aws
 
       def waiters
         {
-          tasks_running: Waiters::TasksRunning,
-          tasks_stopped: Waiters::TasksStopped,
+          services_inactive: Waiters::ServicesInactive,
           services_stable: Waiters::ServicesStable,
-          services_inactive: Waiters::ServicesInactive
+          tasks_running: Waiters::TasksRunning,
+          tasks_stopped: Waiters::TasksStopped
         }
       end
 

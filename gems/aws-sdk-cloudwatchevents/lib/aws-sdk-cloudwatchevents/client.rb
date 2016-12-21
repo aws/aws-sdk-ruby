@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -145,14 +160,18 @@ module Aws
       # **Note:** When you delete a rule, incoming events might still continue
       # to match to the deleted rule. Please allow a short period of time for
       # changes to take effect.
+      #
       # @option params [required, String] :name
       #   The name of the rule to be deleted.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_rule({
       #     name: "RuleName", # required
       #   })
+      #
       # @overload delete_rule(params = {})
       # @param [Hash] params ({})
       def delete_rule(params = {}, options = {})
@@ -161,24 +180,28 @@ module Aws
       end
 
       # Describes the details of the specified rule.
+      #
       # @option params [required, String] :name
       #   The name of the rule you want to describe details for.
+      #
       # @return [Types::DescribeRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeRuleResponse#name #Name} => String
-      #   * {Types::DescribeRuleResponse#arn #Arn} => String
-      #   * {Types::DescribeRuleResponse#event_pattern #EventPattern} => String
-      #   * {Types::DescribeRuleResponse#schedule_expression #ScheduleExpression} => String
-      #   * {Types::DescribeRuleResponse#state #State} => String
-      #   * {Types::DescribeRuleResponse#description #Description} => String
-      #   * {Types::DescribeRuleResponse#role_arn #RoleArn} => String
+      #   * {Types::DescribeRuleResponse#name #name} => String
+      #   * {Types::DescribeRuleResponse#arn #arn} => String
+      #   * {Types::DescribeRuleResponse#event_pattern #event_pattern} => String
+      #   * {Types::DescribeRuleResponse#schedule_expression #schedule_expression} => String
+      #   * {Types::DescribeRuleResponse#state #state} => String
+      #   * {Types::DescribeRuleResponse#description #description} => String
+      #   * {Types::DescribeRuleResponse#role_arn #role_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_rule({
       #     name: "RuleName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.name #=> String
       #   resp.arn #=> String
       #   resp.event_pattern #=> String
@@ -186,6 +209,7 @@ module Aws
       #   resp.state #=> String, one of "ENABLED", "DISABLED"
       #   resp.description #=> String
       #   resp.role_arn #=> String
+      #
       # @overload describe_rule(params = {})
       # @param [Hash] params ({})
       def describe_rule(params = {}, options = {})
@@ -199,14 +223,18 @@ module Aws
       # **Note:** When you disable a rule, incoming events might still
       # continue to match to the disabled rule. Please allow a short period of
       # time for changes to take effect.
+      #
       # @option params [required, String] :name
       #   The name of the rule you want to disable.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_rule({
       #     name: "RuleName", # required
       #   })
+      #
       # @overload disable_rule(params = {})
       # @param [Hash] params ({})
       def disable_rule(params = {}, options = {})
@@ -219,14 +247,18 @@ module Aws
       # **Note:** When you enable a rule, incoming events might not
       # immediately start matching to a newly enabled rule. Please allow a
       # short period of time for changes to take effect.
+      #
       # @option params [required, String] :name
       #   The name of the rule that you want to enable.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_rule({
       #     name: "RuleName", # required
       #   })
+      #
       # @overload enable_rule(params = {})
       # @param [Hash] params ({})
       def enable_rule(params = {}, options = {})
@@ -241,20 +273,25 @@ module Aws
       # case, use the next token returned in the response and repeat
       # ListRulesByTarget until the NextToken in the response is returned as
       # null.
+      #
       # @option params [required, String] :target_arn
       #   The Amazon Resource Name (ARN) of the target resource that you want to
       #   list the rules for.
+      #
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
+      #
       # @option params [Integer] :limit
       #   The maximum number of results to return.
+      #
       # @return [Types::ListRuleNamesByTargetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListRuleNamesByTargetResponse#rule_names #RuleNames} => Array&lt;String&gt;
-      #   * {Types::ListRuleNamesByTargetResponse#next_token #NextToken} => String
+      #   * {Types::ListRuleNamesByTargetResponse#rule_names #rule_names} => Array&lt;String&gt;
+      #   * {Types::ListRuleNamesByTargetResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_rule_names_by_target({
       #     target_arn: "TargetArn", # required
       #     next_token: "NextToken",
@@ -262,9 +299,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.rule_names #=> Array
       #   resp.rule_names[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_rule_names_by_target(params = {})
       # @param [Hash] params ({})
       def list_rule_names_by_target(params = {}, options = {})
@@ -278,19 +317,24 @@ module Aws
       # limit, the results will be paginated. In that case, use the next token
       # returned in the response and repeat ListRules until the NextToken in
       # the response is returned as null.
+      #
       # @option params [String] :name_prefix
       #   The prefix matching the rule name.
+      #
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
+      #
       # @option params [Integer] :limit
       #   The maximum number of results to return.
+      #
       # @return [Types::ListRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListRulesResponse#rules #Rules} => Array&lt;Types::Rule&gt;
-      #   * {Types::ListRulesResponse#next_token #NextToken} => String
+      #   * {Types::ListRulesResponse#rules #rules} => Array&lt;Types::Rule&gt;
+      #   * {Types::ListRulesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_rules({
       #     name_prefix: "RuleName",
       #     next_token: "NextToken",
@@ -298,6 +342,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.rules #=> Array
       #   resp.rules[0].name #=> String
       #   resp.rules[0].arn #=> String
@@ -307,6 +352,7 @@ module Aws
       #   resp.rules[0].schedule_expression #=> String
       #   resp.rules[0].role_arn #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_rules(params = {})
       # @param [Hash] params ({})
       def list_rules(params = {}, options = {})
@@ -315,19 +361,24 @@ module Aws
       end
 
       # Lists of targets assigned to the rule.
+      #
       # @option params [required, String] :rule
       #   The name of the rule whose targets you want to list.
+      #
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
+      #
       # @option params [Integer] :limit
       #   The maximum number of results to return.
+      #
       # @return [Types::ListTargetsByRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTargetsByRuleResponse#targets #Targets} => Array&lt;Types::Target&gt;
-      #   * {Types::ListTargetsByRuleResponse#next_token #NextToken} => String
+      #   * {Types::ListTargetsByRuleResponse#targets #targets} => Array&lt;Types::Target&gt;
+      #   * {Types::ListTargetsByRuleResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_targets_by_rule({
       #     rule: "RuleName", # required
       #     next_token: "NextToken",
@@ -335,12 +386,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.targets #=> Array
       #   resp.targets[0].id #=> String
       #   resp.targets[0].arn #=> String
       #   resp.targets[0].input #=> String
       #   resp.targets[0].input_path #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_targets_by_rule(params = {})
       # @param [Hash] params ({})
       def list_targets_by_rule(params = {}, options = {})
@@ -350,16 +403,19 @@ module Aws
 
       # Sends custom events to Amazon CloudWatch Events so that they can be
       # matched to rules.
+      #
       # @option params [required, Array<Types::PutEventsRequestEntry>] :entries
       #   The entry that defines an event in your system. You can specify
       #   several parameters for the entry such as the source and type of the
       #   event, resources associated with the event, and so on.
+      #
       # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutEventsResponse#failed_entry_count #FailedEntryCount} => Integer
-      #   * {Types::PutEventsResponse#entries #Entries} => Array&lt;Types::PutEventsResultEntry&gt;
+      #   * {Types::PutEventsResponse#failed_entry_count #failed_entry_count} => Integer
+      #   * {Types::PutEventsResponse#entries #entries} => Array&lt;Types::PutEventsResultEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_events({
       #     entries: [ # required
       #       {
@@ -373,11 +429,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_entry_count #=> Integer
       #   resp.entries #=> Array
       #   resp.entries[0].event_id #=> String
       #   resp.entries[0].error_code #=> String
       #   resp.entries[0].error_message #=> String
+      #
       # @overload put_events(params = {})
       # @param [Hash] params ({})
       def put_events(params = {}, options = {})
@@ -405,25 +463,33 @@ module Aws
       # match in event patterns and rules. Be sure to use the correct ARN
       # characters when creating event patterns so that they match the ARN
       # syntax in the event you want to match.
+      #
       # @option params [required, String] :name
       #   The name of the rule that you are creating or updating.
+      #
       # @option params [String] :schedule_expression
       #   The scheduling expression. For example, "cron(0 20 * * ? *)",
       #   "rate(5 minutes)".
+      #
       # @option params [String] :event_pattern
       #   The event pattern.
+      #
       # @option params [String] :state
       #   Indicates whether the rule is enabled or disabled.
+      #
       # @option params [String] :description
       #   A description of the rule.
+      #
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of the IAM role associated with the
       #   rule.
+      #
       # @return [Types::PutRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutRuleResponse#rule_arn #RuleArn} => String
+      #   * {Types::PutRuleResponse#rule_arn #rule_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_rule({
       #     name: "RuleName", # required
       #     schedule_expression: "ScheduleExpression",
@@ -434,7 +500,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.rule_arn #=> String
+      #
       # @overload put_rule(params = {})
       # @param [Hash] params ({})
       def put_rule(params = {}, options = {})
@@ -477,16 +545,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/EventsTargetPermissions.html
+      #
       # @option params [required, String] :rule
       #   The name of the rule you want to add targets to.
+      #
       # @option params [required, Array<Types::Target>] :targets
       #   List of targets you want to update or add to the rule.
+      #
       # @return [Types::PutTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutTargetsResponse#failed_entry_count #FailedEntryCount} => Integer
-      #   * {Types::PutTargetsResponse#failed_entries #FailedEntries} => Array&lt;Types::PutTargetsResultEntry&gt;
+      #   * {Types::PutTargetsResponse#failed_entry_count #failed_entry_count} => Integer
+      #   * {Types::PutTargetsResponse#failed_entries #failed_entries} => Array&lt;Types::PutTargetsResultEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_targets({
       #     rule: "RuleName", # required
       #     targets: [ # required
@@ -500,11 +572,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_entry_count #=> Integer
       #   resp.failed_entries #=> Array
       #   resp.failed_entries[0].target_id #=> String
       #   resp.failed_entries[0].error_code #=> String
       #   resp.failed_entries[0].error_message #=> String
+      #
       # @overload put_targets(params = {})
       # @param [Hash] params ({})
       def put_targets(params = {}, options = {})
@@ -518,27 +592,33 @@ module Aws
       # **Note:** When you remove a target, when the associated rule triggers,
       # removed targets might still continue to be invoked. Please allow a
       # short period of time for changes to take effect.
+      #
       # @option params [required, String] :rule
       #   The name of the rule you want to remove targets from.
+      #
       # @option params [required, Array<String>] :ids
       #   The list of target IDs to remove from the rule.
+      #
       # @return [Types::RemoveTargetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RemoveTargetsResponse#failed_entry_count #FailedEntryCount} => Integer
-      #   * {Types::RemoveTargetsResponse#failed_entries #FailedEntries} => Array&lt;Types::RemoveTargetsResultEntry&gt;
+      #   * {Types::RemoveTargetsResponse#failed_entry_count #failed_entry_count} => Integer
+      #   * {Types::RemoveTargetsResponse#failed_entries #failed_entries} => Array&lt;Types::RemoveTargetsResultEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_targets({
       #     rule: "RuleName", # required
       #     ids: ["TargetId"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_entry_count #=> Integer
       #   resp.failed_entries #=> Array
       #   resp.failed_entries[0].target_id #=> String
       #   resp.failed_entries[0].error_code #=> String
       #   resp.failed_entries[0].error_message #=> String
+      #
       # @overload remove_targets(params = {})
       # @param [Hash] params ({})
       def remove_targets(params = {}, options = {})
@@ -553,22 +633,28 @@ module Aws
       # match in event patterns and rules. Be sure to use the correct ARN
       # characters when creating event patterns so that they match the ARN
       # syntax in the event you want to match.
+      #
       # @option params [required, String] :event_pattern
       #   The event pattern you want to test.
+      #
       # @option params [required, String] :event
       #   The event in the JSON format to test against the event pattern.
+      #
       # @return [Types::TestEventPatternResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TestEventPatternResponse#result #Result} => Boolean
+      #   * {Types::TestEventPatternResponse#result #result} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.test_event_pattern({
       #     event_pattern: "EventPattern", # required
       #     event: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.result #=> Boolean
+      #
       # @overload test_event_pattern(params = {})
       # @param [Hash] params ({})
       def test_event_pattern(params = {}, options = {})

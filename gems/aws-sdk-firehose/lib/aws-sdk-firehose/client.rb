@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -201,26 +216,32 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3
+      #
       # @option params [required, String] :delivery_stream_name
       #   The name of the delivery stream.
+      #
       # @option params [Types::S3DestinationConfiguration] :s3_destination_configuration
       #   The destination in Amazon S3. This value must be specified if
       #   **ElasticsearchDestinationConfiguration** or
       #   **RedshiftDestinationConfiguration** is specified (see restrictions
       #   listed above).
+      #
       # @option params [Types::RedshiftDestinationConfiguration] :redshift_destination_configuration
       #   The destination in Amazon Redshift. This value cannot be specified if
       #   Amazon S3 or Amazon Elasticsearch is the desired destination (see
       #   restrictions listed above).
+      #
       # @option params [Types::ElasticsearchDestinationConfiguration] :elasticsearch_destination_configuration
       #   The destination in Amazon ES. This value cannot be specified if Amazon
       #   S3 or Amazon Redshift is the desired destination (see restrictions
       #   listed above).
+      #
       # @return [Types::CreateDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDeliveryStreamOutput#delivery_stream_arn #DeliveryStreamARN} => String
+      #   * {Types::CreateDeliveryStreamOutput#delivery_stream_arn #delivery_stream_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_delivery_stream({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #     s3_destination_configuration: {
@@ -328,7 +349,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.delivery_stream_arn #=> String
+      #
       # @overload create_delivery_stream(params = {})
       # @param [Hash] params ({})
       def create_delivery_stream(params = {}, options = {})
@@ -349,14 +372,18 @@ module Aws
       # guarantees with respect to delivering the data. Therefore, as a best
       # practice, you should first stop any applications that are sending
       # records before deleting a delivery stream.
+      #
       # @option params [required, String] :delivery_stream_name
       #   The name of the delivery stream.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_delivery_stream({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #   })
+      #
       # @overload delete_delivery_stream(params = {})
       # @param [Hash] params ({})
       def delete_delivery_stream(params = {}, options = {})
@@ -368,20 +395,25 @@ module Aws
       # example, after your delivery stream is created, call
       # DescribeDeliveryStream to see if the delivery stream is `ACTIVE` and
       # therefore ready for data to be sent to it.
+      #
       # @option params [required, String] :delivery_stream_name
       #   The name of the delivery stream.
+      #
       # @option params [Integer] :limit
       #   The limit on the number of destinations to return. Currently, you can
       #   have one destination per delivery stream.
+      #
       # @option params [String] :exclusive_start_destination_id
       #   Specifies the destination ID to start returning the destination
       #   information. Currently Firehose supports one destination per delivery
       #   stream.
+      #
       # @return [Types::DescribeDeliveryStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeDeliveryStreamOutput#delivery_stream_description #DeliveryStreamDescription} => Types::DeliveryStreamDescription
+      #   * {Types::DescribeDeliveryStreamOutput#delivery_stream_description #delivery_stream_description} => Types::DeliveryStreamDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_delivery_stream({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #     limit: 1,
@@ -389,6 +421,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.delivery_stream_description.delivery_stream_name #=> String
       #   resp.delivery_stream_description.delivery_stream_arn #=> String
       #   resp.delivery_stream_description.delivery_stream_status #=> String, one of "CREATING", "DELETING", "ACTIVE"
@@ -453,6 +486,7 @@ module Aws
       #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
       #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_stream_name #=> String
       #   resp.delivery_stream_description.has_more_destinations #=> Boolean
+      #
       # @overload describe_delivery_stream(params = {})
       # @param [Hash] params ({})
       def describe_delivery_stream(params = {}, options = {})
@@ -470,25 +504,31 @@ module Aws
       # streams to list, you can request them by specifying the name of the
       # last delivery stream returned in the call in the
       # **ExclusiveStartDeliveryStreamName** parameter of a subsequent call.
+      #
       # @option params [Integer] :limit
       #   The maximum number of delivery streams to list.
+      #
       # @option params [String] :exclusive_start_delivery_stream_name
       #   The name of the delivery stream to start the list with.
+      #
       # @return [Types::ListDeliveryStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDeliveryStreamsOutput#delivery_stream_names #DeliveryStreamNames} => Array&lt;String&gt;
-      #   * {Types::ListDeliveryStreamsOutput#has_more_delivery_streams #HasMoreDeliveryStreams} => Boolean
+      #   * {Types::ListDeliveryStreamsOutput#delivery_stream_names #delivery_stream_names} => Array&lt;String&gt;
+      #   * {Types::ListDeliveryStreamsOutput#has_more_delivery_streams #has_more_delivery_streams} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_delivery_streams({
       #     limit: 1,
       #     exclusive_start_delivery_stream_name: "DeliveryStreamName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.delivery_stream_names #=> Array
       #   resp.delivery_stream_names[0] #=> String
       #   resp.has_more_delivery_streams #=> Boolean
+      #
       # @overload list_delivery_streams(params = {})
       # @param [Hash] params ({})
       def list_delivery_streams(params = {}, options = {})
@@ -537,15 +577,19 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+      #
       # @option params [required, String] :delivery_stream_name
       #   The name of the delivery stream.
+      #
       # @option params [required, Types::Record] :record
       #   The record.
+      #
       # @return [Types::PutRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutRecordOutput#record_id #RecordId} => String
+      #   * {Types::PutRecordOutput#record_id #record_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_record({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #     record: { # required
@@ -554,7 +598,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.record_id #=> String
+      #
       # @overload put_record(params = {})
       # @param [Hash] params ({})
       def put_record(params = {}, options = {})
@@ -630,16 +676,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/firehose/latest/dev/limits.html
+      #
       # @option params [required, String] :delivery_stream_name
       #   The name of the delivery stream.
+      #
       # @option params [required, Array<Types::Record>] :records
       #   One or more records.
+      #
       # @return [Types::PutRecordBatchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutRecordBatchOutput#failed_put_count #FailedPutCount} => Integer
-      #   * {Types::PutRecordBatchOutput#request_responses #RequestResponses} => Array&lt;Types::PutRecordBatchResponseEntry&gt;
+      #   * {Types::PutRecordBatchOutput#failed_put_count #failed_put_count} => Integer
+      #   * {Types::PutRecordBatchOutput#request_responses #request_responses} => Array&lt;Types::PutRecordBatchResponseEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_record_batch({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #     records: [ # required
@@ -650,11 +700,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_put_count #=> Integer
       #   resp.request_responses #=> Array
       #   resp.request_responses[0].record_id #=> String
       #   resp.request_responses[0].error_code #=> String
       #   resp.request_responses[0].error_message #=> String
+      #
       # @overload put_record_batch(params = {})
       # @param [Hash] params ({})
       def put_record_batch(params = {}, options = {})
@@ -697,8 +749,10 @@ module Aws
       # with the DescribeDeliveryStream operation. The new **VersionId**
       # should be uses to set **CurrentDeliveryStreamVersionId** in the next
       # UpdateDestination operation.
+      #
       # @option params [required, String] :delivery_stream_name
       #   The name of the delivery stream.
+      #
       # @option params [required, String] :current_delivery_stream_version_id
       #   Obtain this value from the **VersionId** result of the
       #   DeliveryStreamDescription operation. This value is required, and helps
@@ -707,17 +761,23 @@ module Aws
       #   destination fails. After the update is successful, the **VersionId**
       #   value is updated. The service then performs a merge of the old
       #   configuration with the new configuration.
+      #
       # @option params [required, String] :destination_id
       #   The ID of the destination.
+      #
       # @option params [Types::S3DestinationUpdate] :s3_destination_update
       #   Describes an update for a destination in Amazon S3.
+      #
       # @option params [Types::RedshiftDestinationUpdate] :redshift_destination_update
       #   Describes an update for a destination in Amazon Redshift.
+      #
       # @option params [Types::ElasticsearchDestinationUpdate] :elasticsearch_destination_update
       #   Describes an update for a destination in Amazon ES.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_destination({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #     current_delivery_stream_version_id: "DeliveryStreamVersionId", # required
@@ -824,6 +884,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload update_destination(params = {})
       # @param [Hash] params ({})
       def update_destination(params = {}, options = {})

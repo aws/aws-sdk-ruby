@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -150,19 +165,23 @@ module Aws
       # BatchMeterUsage.
       #
       # BatchMeterUsage can process up to 25 UsageRecords at a time.
+      #
       # @option params [required, Array<Types::UsageRecord>] :usage_records
       #   The set of UsageRecords to submit. BatchMeterUsage accepts up to 25
       #   UsageRecords at a time.
+      #
       # @option params [required, String] :product_code
       #   Product code is used to uniquely identify a product in AWS
       #   Marketplace. The product code should be the same as the one used
       #   during the publishing of a new product.
+      #
       # @return [Types::BatchMeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::BatchMeterUsageResult#results #Results} => Array&lt;Types::UsageRecordResult&gt;
-      #   * {Types::BatchMeterUsageResult#unprocessed_records #UnprocessedRecords} => Array&lt;Types::UsageRecord&gt;
+      #   * {Types::BatchMeterUsageResult#results #results} => Array&lt;Types::UsageRecordResult&gt;
+      #   * {Types::BatchMeterUsageResult#unprocessed_records #unprocessed_records} => Array&lt;Types::UsageRecord&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_meter_usage({
       #     usage_records: [ # required
       #       {
@@ -176,6 +195,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.results #=> Array
       #   resp.results[0].usage_record.timestamp #=> Time
       #   resp.results[0].usage_record.customer_identifier #=> String
@@ -188,6 +208,7 @@ module Aws
       #   resp.unprocessed_records[0].customer_identifier #=> String
       #   resp.unprocessed_records[0].dimension #=> String
       #   resp.unprocessed_records[0].quantity #=> Integer
+      #
       # @overload batch_meter_usage(params = {})
       # @param [Hash] params ({})
       def batch_meter_usage(params = {}, options = {})
@@ -200,27 +221,34 @@ module Aws
       #
       # MeterUsage is authenticated on the buyer's AWS account, generally
       # when running from an EC2 instance on the AWS Marketplace.
+      #
       # @option params [required, String] :product_code
       #   Product code is used to uniquely identify a product in AWS
       #   Marketplace. The product code should be the same as the one used
       #   during the publishing of a new product.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :timestamp
       #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
       #   portions of the timestamp will be ignored.
+      #
       # @option params [required, String] :usage_dimension
       #   It will be one of the fcp dimension name provided during the
       #   publishing of the product.
+      #
       # @option params [required, Integer] :usage_quantity
       #   Consumption value for the hour.
+      #
       # @option params [required, Boolean] :dry_run
       #   Checks whether you have the permissions required for the action, but
       #   does not make the request. If you have the permissions, the request
       #   returns DryRunOperation; otherwise, it returns UnauthorizedException.
+      #
       # @return [Types::MeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::MeterUsageResult#metering_record_id #MeteringRecordId} => String
+      #   * {Types::MeterUsageResult#metering_record_id #metering_record_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.meter_usage({
       #     product_code: "ProductCode", # required
       #     timestamp: Time.now, # required
@@ -230,7 +258,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.metering_record_id #=> String
+      #
       # @overload meter_usage(params = {})
       # @param [Hash] params ({})
       def meter_usage(params = {}, options = {})
@@ -243,24 +273,29 @@ module Aws
       # registration process, the buyer submits a registration token through
       # their browser. The registration token is resolved through this API to
       # obtain a CustomerIdentifier and product code.
+      #
       # @option params [required, String] :registration_token
       #   When a buyer visits your website during the registration process, the
       #   buyer submits a registration token through the browser. The
       #   registration token is resolved to obtain a CustomerIdentifier and
       #   product code.
+      #
       # @return [Types::ResolveCustomerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ResolveCustomerResult#customer_identifier #CustomerIdentifier} => String
-      #   * {Types::ResolveCustomerResult#product_code #ProductCode} => String
+      #   * {Types::ResolveCustomerResult#customer_identifier #customer_identifier} => String
+      #   * {Types::ResolveCustomerResult#product_code #product_code} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.resolve_customer({
       #     registration_token: "NonEmptyString", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.customer_identifier #=> String
       #   resp.product_code #=> String
+      #
       # @overload resolve_customer(params = {})
       # @param [Hash] params ({})
       def resolve_customer(params = {}, options = {})

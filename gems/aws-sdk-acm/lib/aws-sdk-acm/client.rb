@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -162,6 +177,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/acm/latest/userguide/tags.html
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains the ARN of the ACM Certificate to which the tag
       #   is to be applied. This must be of the form:
@@ -174,11 +190,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The key-value pair that defines the tag. The tag value is optional.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_certificate({
       #     certificate_arn: "Arn", # required
       #     tags: [ # required
@@ -188,6 +207,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags_to_certificate(params = {})
       # @param [Hash] params ({})
       def add_tags_to_certificate(params = {}, options = {})
@@ -206,6 +226,7 @@ module Aws
       # association must first be removed.
       #
       #  </note>
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains the ARN of the ACM Certificate to be deleted.
       #   This must be of the form:
@@ -218,12 +239,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_certificate({
       #     certificate_arn: "Arn", # required
       #   })
+      #
       # @overload delete_certificate(params = {})
       # @param [Hash] params ({})
       def delete_certificate(params = {}, options = {})
@@ -237,6 +261,7 @@ module Aws
       # other AWS service, and the date at which the certificate request was
       # created. You specify the ACM Certificate on input by its Amazon
       # Resource Name (ARN).
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains an ACM Certificate ARN. The ARN must be of the
       #   form:
@@ -249,16 +274,19 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @return [Types::DescribeCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeCertificateResponse#certificate #Certificate} => Types::CertificateDetail
+      #   * {Types::DescribeCertificateResponse#certificate #certificate} => Types::CertificateDetail
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_certificate({
       #     certificate_arn: "Arn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.certificate.certificate_arn #=> String
       #   resp.certificate.domain_name #=> String
       #   resp.certificate.subject_alternative_names #=> Array
@@ -285,6 +313,7 @@ module Aws
       #   resp.certificate.in_use_by[0] #=> String
       #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "OTHER"
       #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED"
+      #
       # @overload describe_certificate(params = {})
       # @param [Hash] params ({})
       def describe_certificate(params = {}, options = {})
@@ -304,6 +333,7 @@ module Aws
       # Balancing and Amazon CloudFront.
       #
       #  </note>
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains a certificate ARN in the following format:
       #
@@ -315,19 +345,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @return [Types::GetCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetCertificateResponse#certificate #Certificate} => String
-      #   * {Types::GetCertificateResponse#certificate_chain #CertificateChain} => String
+      #   * {Types::GetCertificateResponse#certificate #certificate} => String
+      #   * {Types::GetCertificateResponse#certificate_chain #certificate_chain} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_certificate({
       #     certificate_arn: "Arn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.certificate #=> String
       #   resp.certificate_chain #=> String
+      #
       # @overload get_certificate(params = {})
       # @param [Hash] params ({})
       def get_certificate(params = {}, options = {})
@@ -372,6 +406,7 @@ module Aws
       # [3]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
       # [4]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html#import-certificate-troubleshooting
       # [5]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @option params [String] :certificate_arn
       #   The [Amazon Resource Name (ARN)][1] of an imported certificate to
       #   replace. To import a new certificate, omit this field.
@@ -379,6 +414,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @option params [required, String, IO] :certificate
       #   The certificate to import. It must meet the following requirements:
       #
@@ -389,6 +425,7 @@ module Aws
       #   * Must be valid at the time of import. You cannot import a certificate
       #     before its validity period begins (the certificate's `NotBefore`
       #     date) or after it expires (the certificate's `NotAfter` date).
+      #
       # @option params [required, String, IO] :private_key
       #   The private key that matches the public key in the certificate. It
       #   must meet the following requirements:
@@ -397,13 +434,16 @@ module Aws
       #
       #   * Must be unencrypted. You cannot import a private key that is
       #     protected by a password or passphrase.
+      #
       # @option params [String, IO] :certificate_chain
       #   The certificate chain. It must be PEM-encoded.
+      #
       # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ImportCertificateResponse#certificate_arn #CertificateArn} => String
+      #   * {Types::ImportCertificateResponse#certificate_arn #certificate_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.import_certificate({
       #     certificate_arn: "Arn",
       #     certificate: "data", # required
@@ -412,7 +452,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.certificate_arn #=> String
+      #
       # @overload import_certificate(params = {})
       # @param [Hash] params ({})
       def import_certificate(params = {}, options = {})
@@ -423,26 +465,31 @@ module Aws
       # Retrieves a list of ACM Certificates and the domain name for each. You
       # can optionally filter the list to return only the certificates that
       # match the specified status.
+      #
       # @option params [Array<String>] :certificate_statuses
       #   The status or statuses on which to filter the list of ACM
       #   Certificates.
+      #
       # @option params [String] :next_token
       #   Use this parameter only when paginating results and only in a
       #   subsequent request after you receive a response with truncated
       #   results. Set it to the value of `NextToken` from the response you just
       #   received.
+      #
       # @option params [Integer] :max_items
       #   Use this parameter when paginating results to specify the maximum
       #   number of items to return in the response. If additional items exist
       #   beyond the number you specify, the `NextToken` element is sent in the
       #   response. Use this `NextToken` value in a subsequent request to
       #   retrieve additional items.
+      #
       # @return [Types::ListCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListCertificatesResponse#next_token #NextToken} => String
-      #   * {Types::ListCertificatesResponse#certificate_summary_list #CertificateSummaryList} => Array&lt;Types::CertificateSummary&gt;
+      #   * {Types::ListCertificatesResponse#next_token #next_token} => String
+      #   * {Types::ListCertificatesResponse#certificate_summary_list #certificate_summary_list} => Array&lt;Types::CertificateSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_certificates({
       #     certificate_statuses: ["PENDING_VALIDATION"], # accepts PENDING_VALIDATION, ISSUED, INACTIVE, EXPIRED, VALIDATION_TIMED_OUT, REVOKED, FAILED
       #     next_token: "NextToken",
@@ -450,10 +497,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_token #=> String
       #   resp.certificate_summary_list #=> Array
       #   resp.certificate_summary_list[0].certificate_arn #=> String
       #   resp.certificate_summary_list[0].domain_name #=> String
+      #
       # @overload list_certificates(params = {})
       # @param [Hash] params ({})
       def list_certificates(params = {}, options = {})
@@ -465,6 +514,7 @@ module Aws
       # certificate ARN to specify the certificate. To add a tag to an ACM
       # Certificate, use the AddTagsToCertificate action. To delete a tag, use
       # the RemoveTagsFromCertificate action.
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains the ARN of the ACM Certificate for which you want
       #   to list the tags. This must be of the form:
@@ -477,19 +527,23 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @return [Types::ListTagsForCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsForCertificateResponse#tags #Tags} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsForCertificateResponse#tags #tags} => Array&lt;Types::Tag&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_certificate({
       #     certificate_arn: "Arn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
+      #
       # @overload list_tags_for_certificate(params = {})
       # @param [Hash] params ({})
       def list_tags_for_certificate(params = {}, options = {})
@@ -506,6 +560,7 @@ module Aws
       # To add tags to a certificate, use the AddTagsToCertificate action. To
       # view all of the tags that have been applied to a specific ACM
       # Certificate, use the ListTagsForCertificate action.
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains the ARN of the ACM Certificate with one or more
       #   tags that you want to remove. This must be of the form:
@@ -518,11 +573,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   The key-value pair that defines the tag to remove.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_certificate({
       #     certificate_arn: "Arn", # required
       #     tags: [ # required
@@ -532,6 +590,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload remove_tags_from_certificate(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_certificate(params = {}, options = {})
@@ -551,17 +610,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/acm/latest/userguide/
+      #
       # @option params [required, String] :domain_name
       #   Fully qualified domain name (FQDN), such as www.example.com, of the
       #   site you want to secure with an ACM Certificate. Use an asterisk (*)
       #   to create a wildcard certificate that protects several sites in the
       #   same domain. For example, *.example.com protects www.example.com,
       #   site.example.com, and images.example.com.
+      #
       # @option params [Array<String>] :subject_alternative_names
       #   Additional FQDNs to be included in the Subject Alternative Name
       #   extension of the ACM Certificate. For example, add the name
       #   www.example.net to a certificate for which the `DomainName` field is
       #   www.example.com if users can reach your site by using either name.
+      #
       # @option params [String] :idempotency_token
       #   Customer chosen string that can be used to distinguish between calls
       #   to `RequestCertificate`. Idempotency tokens time out after one hour.
@@ -570,6 +632,7 @@ module Aws
       #   requesting only one certificate and will issue only one. If you change
       #   the idempotency token for each call, ACM recognizes that you are
       #   requesting multiple certificates.
+      #
       # @option params [Array<Types::DomainValidationOption>] :domain_validation_options
       #   The base validation domain that will act as the suffix of the email
       #   addresses that are used to send the emails. This must be the same as
@@ -588,11 +651,13 @@ module Aws
       #   * postmaster@example.com
       #
       #   * webmaster@example.com
+      #
       # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RequestCertificateResponse#certificate_arn #CertificateArn} => String
+      #   * {Types::RequestCertificateResponse#certificate_arn #certificate_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.request_certificate({
       #     domain_name: "DomainNameString", # required
       #     subject_alternative_names: ["DomainNameString"],
@@ -606,7 +671,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.certificate_arn #=> String
+      #
       # @overload request_certificate(params = {})
       # @param [Hash] params ({})
       def request_certificate(params = {}, options = {})
@@ -624,6 +691,7 @@ module Aws
       # within 72 hours of requesting the ACM Certificate. If more than 72
       # hours have elapsed since your original request or since your last
       # attempt to resend validation mail, you must request a new certificate.
+      #
       # @option params [required, String] :certificate_arn
       #   String that contains the ARN of the requested certificate. The
       #   certificate ARN is generated and returned by the RequestCertificate
@@ -634,9 +702,11 @@ module Aws
       #   The ARN must be of the form:
       #
       #   `arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012`
+      #
       # @option params [required, String] :domain
       #   The Fully Qualified Domain Name (FQDN) of the certificate that needs
       #   to be validated.
+      #
       # @option params [required, String] :validation_domain
       #   The base validation domain that will act as the suffix of the email
       #   addresses that are used to send the emails. This must be the same as
@@ -656,14 +726,17 @@ module Aws
       #   * postmaster@subdomain.example.com
       #
       #   * webmaster@subdomain.example.com
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.resend_validation_email({
       #     certificate_arn: "Arn", # required
       #     domain: "DomainNameString", # required
       #     validation_domain: "DomainNameString", # required
       #   })
+      #
       # @overload resend_validation_email(params = {})
       # @param [Hash] params ({})
       def resend_validation_email(params = {}, options = {})

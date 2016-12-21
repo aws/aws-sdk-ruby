@@ -70,6 +70,10 @@ module AwsSdkCodeGenerator
       #   This option is given to {Docstring.block_comment} when
       #   `:block_comment` is `true`.
       #
+      # @option options [String] :separator (true)
+      #   When `true`, a blank line is inserted between
+      #   each documentation section.
+      #
       # @return [String, nil] If the given `docstrings` is empty,
       #   then a `nil` is returned.
       #
@@ -78,8 +82,11 @@ module AwsSdkCodeGenerator
           if section.nil? || section.size == 0
             sections
           else
-            sections << block_comment(section, options)
-            sections << "\n#\n"
+            sections << (options.fetch(:block_comment, true) ?
+              block_comment(section, options) :
+              section)
+            sections << (options.fetch(:separator, true) ? "\n#\n" : "\n")
+            sections
           end
         end
         if docs.empty?
@@ -88,6 +95,12 @@ module AwsSdkCodeGenerator
           docs[-1] = docs[-1].rstrip
           docs.join
         end
+      end
+
+      # @param [String]
+      # @return [String]
+      def escape_html(string)
+        string.to_s.encode(:xml => :text)
       end
 
       # @param [String<HTML>, nil] html

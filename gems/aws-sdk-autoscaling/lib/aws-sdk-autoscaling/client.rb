@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -149,17 +163,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html
+      #
       # @option params [Array<String>] :instance_ids
       #   One or more instance IDs.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.attach_instances({
       #     instance_ids: ["XmlStringMaxLen19"],
       #     auto_scaling_group_name: "ResourceName", # required
       #   })
+      #
       # @overload attach_instances(params = {})
       # @param [Hash] params ({})
       def attach_instances(params = {}, options = {})
@@ -180,17 +199,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, Array<String>] :target_group_arns
       #   The Amazon Resource Names (ARN) of the target groups.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.attach_load_balancer_target_groups({
       #     auto_scaling_group_name: "ResourceName", # required
       #     target_group_arns: ["XmlStringMaxLen511"], # required
       #   })
+      #
       # @overload attach_load_balancer_target_groups(params = {})
       # @param [Hash] params ({})
       def attach_load_balancer_target_groups(params = {}, options = {})
@@ -214,17 +238,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [required, Array<String>] :load_balancer_names
       #   One or more load balancer names.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.attach_load_balancers({
       #     auto_scaling_group_name: "ResourceName", # required
       #     load_balancer_names: ["XmlStringMaxLen255"], # required
       #   })
+      #
       # @overload attach_load_balancers(params = {})
       # @param [Hash] params ({})
       def attach_load_balancers(params = {}, options = {})
@@ -262,23 +291,30 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+      #
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group for the lifecycle hook.
+      #
       # @option params [String] :lifecycle_action_token
       #   A universally unique identifier (UUID) that identifies a specific
       #   lifecycle action associated with an instance. Auto Scaling sends this
       #   token to the notification target you specified when you created the
       #   lifecycle hook.
+      #
       # @option params [required, String] :lifecycle_action_result
       #   The action for the group to take. This parameter can be either
       #   `CONTINUE` or `ABANDON`.
+      #
       # @option params [String] :instance_id
       #   The ID of the instance.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.complete_lifecycle_action({
       #     lifecycle_hook_name: "AsciiStringMaxLen255", # required
       #     auto_scaling_group_name: "ResourceName", # required
@@ -286,6 +322,7 @@ module Aws
       #     lifecycle_action_result: "LifecycleActionResult", # required
       #     instance_id: "XmlStringMaxLen19",
       #   })
+      #
       # @overload complete_lifecycle_action(params = {})
       # @param [Hash] params ({})
       def complete_lifecycle_action(params = {}, options = {})
@@ -305,12 +342,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group. This name must be unique within the scope of
       #   your AWS account.
+      #
       # @option params [String] :launch_configuration_name
       #   The name of the launch configuration. Alternatively, specify an EC2
       #   instance instead of a launch configuration.
+      #
       # @option params [String] :instance_id
       #   The ID of the instance used to create a launch configuration for the
       #   group. Alternatively, specify a launch configuration instead of an EC2
@@ -327,14 +367,18 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
+      #
       # @option params [required, Integer] :min_size
       #   The minimum size of the group.
+      #
       # @option params [required, Integer] :max_size
       #   The maximum size of the group.
+      #
       # @option params [Integer] :desired_capacity
       #   The number of EC2 instances that should be running in the group. This
       #   number must be greater than or equal to the minimum size of the group
       #   and less than or equal to the maximum size of the group.
+      #
       # @option params [Integer] :default_cooldown
       #   The amount of time, in seconds, after a scaling activity completes
       #   before another scaling activity can start. The default is 300.
@@ -345,9 +389,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+      #
       # @option params [Array<String>] :availability_zones
       #   One or more Availability Zones for the group. This parameter is
       #   optional if you specify one or more subnets.
+      #
       # @option params [Array<String>] :load_balancer_names
       #   One or more Classic load balancers. To specify an Application load
       #   balancer, use `TargetGroupARNs` instead.
@@ -358,8 +404,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
+      #
       # @option params [Array<String>] :target_group_arns
       #   The Amazon Resource Names (ARN) of the target groups.
+      #
       # @option params [String] :health_check_type
       #   The service to use for the health checks. The valid values are `EC2`
       #   and `ELB`.
@@ -371,6 +419,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+      #
       # @option params [Integer] :health_check_grace_period
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
@@ -385,6 +434,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+      #
       # @option params [String] :placement_group
       #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
@@ -393,6 +443,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+      #
       # @option params [String] :vpc_zone_identifier
       #   A comma-separated list of subnet identifiers for your virtual private
       #   cloud (VPC).
@@ -407,6 +458,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+      #
       # @option params [Array<String>] :termination_policies
       #   One or more termination policies used to select the instance to
       #   terminate. These policies are executed in the order that they are
@@ -418,9 +470,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
+      #
       # @option params [Boolean] :new_instances_protected_from_scale_in
       #   Indicates whether newly launched instances are protected from
       #   termination by Auto Scaling when scaling in.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   One or more tags.
       #
@@ -430,9 +484,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_auto_scaling_group({
       #     auto_scaling_group_name: "XmlStringMaxLen255", # required
       #     launch_configuration_name: "ResourceName",
@@ -460,6 +516,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload create_auto_scaling_group(params = {})
       # @param [Hash] params ({})
       def create_auto_scaling_group(params = {}, options = {})
@@ -479,9 +536,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html
+      #
       # @option params [required, String] :launch_configuration_name
       #   The name of the launch configuration. This name must be unique within
       #   the scope of your AWS account.
+      #
       # @option params [String] :image_id
       #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
       #   instances. For more information, see [Finding an AMI][1] in the
@@ -490,6 +549,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html
+      #
       # @option params [String] :key_name
       #   The name of the key pair. For more information, see [Amazon EC2 Key
       #   Pairs][1] in the *Amazon Elastic Compute Cloud User Guide*.
@@ -497,6 +557,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
+      #
       # @option params [Array<String>] :security_groups
       #   One or more security groups with which to associate the instances.
       #
@@ -513,6 +574,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
       #   [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+      #
       # @option params [String] :classic_link_vpc_id
       #   The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
       #   to. This parameter is supported only if you are launching EC2-Classic
@@ -522,6 +584,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+      #
       # @option params [Array<String>] :classic_link_vpc_security_groups
       #   The IDs of one or more security groups for the specified
       #   ClassicLink-enabled VPC. This parameter is required if you specify a
@@ -532,6 +595,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+      #
       # @option params [String] :user_data
       #   The user data to make available to the launched EC2 instances. For
       #   more information, see [Instance Metadata and User Data][1] in the
@@ -540,6 +604,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+      #
       # @option params [String] :instance_id
       #   The ID of the instance to use to create the launch configuration.
       #
@@ -556,6 +621,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
+      #
       # @option params [String] :instance_type
       #   The instance type of the EC2 instance. For information about available
       #   instance types, see [ Available Instance Types][1] in the *Amazon
@@ -564,10 +630,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#AvailableInstanceTypes
+      #
       # @option params [String] :kernel_id
       #   The ID of the kernel associated with the AMI.
+      #
       # @option params [String] :ramdisk_id
       #   The ID of the RAM disk associated with the AMI.
+      #
       # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   One or more mappings that specify how block devices are exposed to the
       #   instance. For more information, see [Block Device Mapping][1] in the
@@ -576,9 +645,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
+      #
       # @option params [Types::InstanceMonitoring] :instance_monitoring
       #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
       #   the Auto Scaling instances.
+      #
       # @option params [String] :spot_price
       #   The maximum hourly price to be paid for any Spot Instance launched to
       #   fulfill the request. Spot Instances are launched when the price you
@@ -589,6 +660,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html
+      #
       # @option params [String] :iam_instance_profile
       #   The name or the Amazon Resource Name (ARN) of the instance profile
       #   associated with the IAM role for the instance.
@@ -603,6 +675,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/us-iam-role.html
+      #
       # @option params [Boolean] :ebs_optimized
       #   Indicates whether the instance is optimized for Amazon EBS I/O. By
       #   default, the instance is not optimized for EBS I/O. The optimization
@@ -615,6 +688,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html
+      #
       # @option params [Boolean] :associate_public_ip_address
       #   Used for groups that launch instances into a virtual private cloud
       #   (VPC). Specifies whether to assign a public IP address to each
@@ -633,6 +707,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+      #
       # @option params [String] :placement_tenancy
       #   The tenancy of the instance. An instance with a tenancy of `dedicated`
       #   runs on single-tenant hardware and can only be launched into a VPC.
@@ -652,9 +727,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_launch_configuration({
       #     launch_configuration_name: "XmlStringMaxLen255", # required
       #     image_id: "XmlStringMaxLen255",
@@ -691,6 +768,7 @@ module Aws
       #     associate_public_ip_address: false,
       #     placement_tenancy: "XmlStringMaxLen64",
       #   })
+      #
       # @overload create_launch_configuration(params = {})
       # @param [Hash] params ({})
       def create_launch_configuration(params = {}, options = {})
@@ -710,11 +788,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   One or more tags.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_or_update_tags({
       #     tags: [ # required
       #       {
@@ -726,6 +807,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload create_or_update_tags(params = {})
       # @param [Hash] params ({})
       def create_or_update_tags(params = {}, options = {})
@@ -750,20 +832,25 @@ module Aws
       # To terminate all instances before deleting the Auto Scaling group,
       # call UpdateAutoScalingGroup and set the minimum size and desired
       # capacity of the Auto Scaling group to zero.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group to delete.
+      #
       # @option params [Boolean] :force_delete
       #   Specifies that the group will be deleted along with all instances
       #   associated with the group, without waiting for all instances to be
       #   terminated. This parameter also deletes any lifecycle actions
       #   associated with the group.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_auto_scaling_group({
       #     auto_scaling_group_name: "ResourceName", # required
       #     force_delete: false,
       #   })
+      #
       # @overload delete_auto_scaling_group(params = {})
       # @param [Hash] params ({})
       def delete_auto_scaling_group(params = {}, options = {})
@@ -776,14 +863,18 @@ module Aws
       # The launch configuration must not be attached to an Auto Scaling
       # group. When this call completes, the launch configuration is no longer
       # available for use.
+      #
       # @option params [required, String] :launch_configuration_name
       #   The name of the launch configuration.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_launch_configuration({
       #     launch_configuration_name: "ResourceName", # required
       #   })
+      #
       # @overload delete_launch_configuration(params = {})
       # @param [Hash] params ({})
       def delete_launch_configuration(params = {}, options = {})
@@ -796,17 +887,22 @@ module Aws
       # If there are any outstanding lifecycle actions, they are completed
       # first (`ABANDON` for launching instances, `CONTINUE` for terminating
       # instances).
+      #
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group for the lifecycle hook.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_lifecycle_hook({
       #     lifecycle_hook_name: "AsciiStringMaxLen255", # required
       #     auto_scaling_group_name: "ResourceName", # required
       #   })
+      #
       # @overload delete_lifecycle_hook(params = {})
       # @param [Hash] params ({})
       def delete_lifecycle_hook(params = {}, options = {})
@@ -815,18 +911,23 @@ module Aws
       end
 
       # Deletes the specified notification.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, String] :topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
       #   Service (SNS) topic.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_notification_configuration({
       #     auto_scaling_group_name: "ResourceName", # required
       #     topic_arn: "ResourceName", # required
       #   })
+      #
       # @overload delete_notification_configuration(params = {})
       # @param [Hash] params ({})
       def delete_notification_configuration(params = {}, options = {})
@@ -838,17 +939,22 @@ module Aws
       #
       # Deleting a policy deletes the underlying alarm action, but does not
       # delete the alarm, even if it no longer has an associated action.
+      #
       # @option params [String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, String] :policy_name
       #   The name or Amazon Resource Name (ARN) of the policy.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_policy({
       #     auto_scaling_group_name: "ResourceName",
       #     policy_name: "ResourceName", # required
       #   })
+      #
       # @overload delete_policy(params = {})
       # @param [Hash] params ({})
       def delete_policy(params = {}, options = {})
@@ -857,17 +963,22 @@ module Aws
       end
 
       # Deletes the specified scheduled action.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, String] :scheduled_action_name
       #   The name of the action to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_scheduled_action({
       #     auto_scaling_group_name: "ResourceName", # required
       #     scheduled_action_name: "ResourceName", # required
       #   })
+      #
       # @overload delete_scheduled_action(params = {})
       # @param [Hash] params ({})
       def delete_scheduled_action(params = {}, options = {})
@@ -876,11 +987,14 @@ module Aws
       end
 
       # Deletes the specified tags.
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   One or more tags.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_tags({
       #     tags: [ # required
       #       {
@@ -892,6 +1006,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload delete_tags(params = {})
       # @param [Hash] params ({})
       def delete_tags(params = {}, options = {})
@@ -908,18 +1023,21 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      #
       # @return [Types::DescribeAccountLimitsAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAccountLimitsAnswer#max_number_of_auto_scaling_groups #MaxNumberOfAutoScalingGroups} => Integer
-      #   * {Types::DescribeAccountLimitsAnswer#max_number_of_launch_configurations #MaxNumberOfLaunchConfigurations} => Integer
-      #   * {Types::DescribeAccountLimitsAnswer#number_of_auto_scaling_groups #NumberOfAutoScalingGroups} => Integer
-      #   * {Types::DescribeAccountLimitsAnswer#number_of_launch_configurations #NumberOfLaunchConfigurations} => Integer
+      #   * {Types::DescribeAccountLimitsAnswer#max_number_of_auto_scaling_groups #max_number_of_auto_scaling_groups} => Integer
+      #   * {Types::DescribeAccountLimitsAnswer#max_number_of_launch_configurations #max_number_of_launch_configurations} => Integer
+      #   * {Types::DescribeAccountLimitsAnswer#number_of_auto_scaling_groups #number_of_auto_scaling_groups} => Integer
+      #   * {Types::DescribeAccountLimitsAnswer#number_of_launch_configurations #number_of_launch_configurations} => Integer
       #
       # @example Response structure
+      #
       #   resp.max_number_of_auto_scaling_groups #=> Integer
       #   resp.max_number_of_launch_configurations #=> Integer
       #   resp.number_of_auto_scaling_groups #=> Integer
       #   resp.number_of_launch_configurations #=> Integer
+      #
       # @overload describe_account_limits(params = {})
       # @param [Hash] params ({})
       def describe_account_limits(params = {}, options = {})
@@ -928,13 +1046,16 @@ module Aws
       end
 
       # Describes the policy adjustment types for use with PutScalingPolicy.
+      #
       # @return [Types::DescribeAdjustmentTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAdjustmentTypesAnswer#adjustment_types #AdjustmentTypes} => Array&lt;Types::AdjustmentType&gt;
+      #   * {Types::DescribeAdjustmentTypesAnswer#adjustment_types #adjustment_types} => Array&lt;Types::AdjustmentType&gt;
       #
       # @example Response structure
+      #
       #   resp.adjustment_types #=> Array
       #   resp.adjustment_types[0].adjustment_type #=> String
+      #
       # @overload describe_adjustment_types(params = {})
       # @param [Hash] params ({})
       def describe_adjustment_types(params = {}, options = {})
@@ -943,20 +1064,25 @@ module Aws
       end
 
       # Describes one or more Auto Scaling groups.
+      #
       # @option params [Array<String>] :auto_scaling_group_names
       #   The group names. If you omit this parameter, all Auto Scaling groups
       #   are described.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @return [Types::AutoScalingGroupsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AutoScalingGroupsType#auto_scaling_groups #AutoScalingGroups} => Array&lt;Types::AutoScalingGroup&gt;
-      #   * {Types::AutoScalingGroupsType#next_token #NextToken} => String
+      #   * {Types::AutoScalingGroupsType#auto_scaling_groups #auto_scaling_groups} => Array&lt;Types::AutoScalingGroup&gt;
+      #   * {Types::AutoScalingGroupsType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_auto_scaling_groups({
       #     auto_scaling_group_names: ["ResourceName"],
       #     next_token: "XmlString",
@@ -964,6 +1090,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.auto_scaling_groups #=> Array
       #   resp.auto_scaling_groups[0].auto_scaling_group_name #=> String
       #   resp.auto_scaling_groups[0].auto_scaling_group_arn #=> String
@@ -1007,6 +1134,7 @@ module Aws
       #   resp.auto_scaling_groups[0].termination_policies[0] #=> String
       #   resp.auto_scaling_groups[0].new_instances_protected_from_scale_in #=> Boolean
       #   resp.next_token #=> String
+      #
       # @overload describe_auto_scaling_groups(params = {})
       # @param [Hash] params ({})
       def describe_auto_scaling_groups(params = {}, options = {})
@@ -1015,21 +1143,26 @@ module Aws
       end
 
       # Describes one or more Auto Scaling instances.
+      #
       # @option params [Array<String>] :instance_ids
       #   The instances to describe; up to 50 instance IDs. If you omit this
       #   parameter, all Auto Scaling instances are described. If you specify an
       #   ID that does not exist, it is ignored with no error.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @return [Types::AutoScalingInstancesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AutoScalingInstancesType#auto_scaling_instances #AutoScalingInstances} => Array&lt;Types::AutoScalingInstanceDetails&gt;
-      #   * {Types::AutoScalingInstancesType#next_token #NextToken} => String
+      #   * {Types::AutoScalingInstancesType#auto_scaling_instances #auto_scaling_instances} => Array&lt;Types::AutoScalingInstanceDetails&gt;
+      #   * {Types::AutoScalingInstancesType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_auto_scaling_instances({
       #     instance_ids: ["XmlStringMaxLen19"],
       #     max_records: 1,
@@ -1037,6 +1170,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.auto_scaling_instances #=> Array
       #   resp.auto_scaling_instances[0].instance_id #=> String
       #   resp.auto_scaling_instances[0].auto_scaling_group_name #=> String
@@ -1046,6 +1180,7 @@ module Aws
       #   resp.auto_scaling_instances[0].launch_configuration_name #=> String
       #   resp.auto_scaling_instances[0].protected_from_scale_in #=> Boolean
       #   resp.next_token #=> String
+      #
       # @overload describe_auto_scaling_instances(params = {})
       # @param [Hash] params ({})
       def describe_auto_scaling_instances(params = {}, options = {})
@@ -1054,13 +1189,16 @@ module Aws
       end
 
       # Describes the notification types that are supported by Auto Scaling.
+      #
       # @return [Types::DescribeAutoScalingNotificationTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAutoScalingNotificationTypesAnswer#auto_scaling_notification_types #AutoScalingNotificationTypes} => Array&lt;String&gt;
+      #   * {Types::DescribeAutoScalingNotificationTypesAnswer#auto_scaling_notification_types #auto_scaling_notification_types} => Array&lt;String&gt;
       #
       # @example Response structure
+      #
       #   resp.auto_scaling_notification_types #=> Array
       #   resp.auto_scaling_notification_types[0] #=> String
+      #
       # @overload describe_auto_scaling_notification_types(params = {})
       # @param [Hash] params ({})
       def describe_auto_scaling_notification_types(params = {}, options = {})
@@ -1069,21 +1207,26 @@ module Aws
       end
 
       # Describes one or more launch configurations.
+      #
       # @option params [Array<String>] :launch_configuration_names
       #   The launch configuration names. If you omit this parameter, all launch
       #   configurations are described.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call. The default is
       #   100.
+      #
       # @return [Types::LaunchConfigurationsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::LaunchConfigurationsType#launch_configurations #LaunchConfigurations} => Array&lt;Types::LaunchConfiguration&gt;
-      #   * {Types::LaunchConfigurationsType#next_token #NextToken} => String
+      #   * {Types::LaunchConfigurationsType#launch_configurations #launch_configurations} => Array&lt;Types::LaunchConfiguration&gt;
+      #   * {Types::LaunchConfigurationsType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_launch_configurations({
       #     launch_configuration_names: ["ResourceName"],
       #     next_token: "XmlString",
@@ -1091,6 +1234,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.launch_configurations #=> Array
       #   resp.launch_configurations[0].launch_configuration_name #=> String
       #   resp.launch_configurations[0].launch_configuration_arn #=> String
@@ -1123,6 +1267,7 @@ module Aws
       #   resp.launch_configurations[0].associate_public_ip_address #=> Boolean
       #   resp.launch_configurations[0].placement_tenancy #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_launch_configurations(params = {})
       # @param [Hash] params ({})
       def describe_launch_configurations(params = {}, options = {})
@@ -1131,13 +1276,16 @@ module Aws
       end
 
       # Describes the available types of lifecycle hooks.
+      #
       # @return [Types::DescribeLifecycleHookTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLifecycleHookTypesAnswer#lifecycle_hook_types #LifecycleHookTypes} => Array&lt;String&gt;
+      #   * {Types::DescribeLifecycleHookTypesAnswer#lifecycle_hook_types #lifecycle_hook_types} => Array&lt;String&gt;
       #
       # @example Response structure
+      #
       #   resp.lifecycle_hook_types #=> Array
       #   resp.lifecycle_hook_types[0] #=> String
+      #
       # @overload describe_lifecycle_hook_types(params = {})
       # @param [Hash] params ({})
       def describe_lifecycle_hook_types(params = {}, options = {})
@@ -1146,22 +1294,27 @@ module Aws
       end
 
       # Describes the lifecycle hooks for the specified Auto Scaling group.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [Array<String>] :lifecycle_hook_names
       #   The names of one or more lifecycle hooks. If you omit this parameter,
       #   all lifecycle hooks are described.
+      #
       # @return [Types::DescribeLifecycleHooksAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLifecycleHooksAnswer#lifecycle_hooks #LifecycleHooks} => Array&lt;Types::LifecycleHook&gt;
+      #   * {Types::DescribeLifecycleHooksAnswer#lifecycle_hooks #lifecycle_hooks} => Array&lt;Types::LifecycleHook&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_lifecycle_hooks({
       #     auto_scaling_group_name: "ResourceName", # required
       #     lifecycle_hook_names: ["AsciiStringMaxLen255"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.lifecycle_hooks #=> Array
       #   resp.lifecycle_hooks[0].lifecycle_hook_name #=> String
       #   resp.lifecycle_hooks[0].auto_scaling_group_name #=> String
@@ -1172,6 +1325,7 @@ module Aws
       #   resp.lifecycle_hooks[0].heartbeat_timeout #=> Integer
       #   resp.lifecycle_hooks[0].global_timeout #=> Integer
       #   resp.lifecycle_hooks[0].default_result #=> String
+      #
       # @overload describe_lifecycle_hooks(params = {})
       # @param [Hash] params ({})
       def describe_lifecycle_hooks(params = {}, options = {})
@@ -1180,19 +1334,24 @@ module Aws
       end
 
       # Describes the target groups for the specified Auto Scaling group.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @return [Types::DescribeLoadBalancerTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLoadBalancerTargetGroupsResponse#load_balancer_target_groups #LoadBalancerTargetGroups} => Array&lt;Types::LoadBalancerTargetGroupState&gt;
-      #   * {Types::DescribeLoadBalancerTargetGroupsResponse#next_token #NextToken} => String
+      #   * {Types::DescribeLoadBalancerTargetGroupsResponse#load_balancer_target_groups #load_balancer_target_groups} => Array&lt;Types::LoadBalancerTargetGroupState&gt;
+      #   * {Types::DescribeLoadBalancerTargetGroupsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_balancer_target_groups({
       #     auto_scaling_group_name: "ResourceName", # required
       #     next_token: "XmlString",
@@ -1200,10 +1359,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.load_balancer_target_groups #=> Array
       #   resp.load_balancer_target_groups[0].load_balancer_target_group_arn #=> String
       #   resp.load_balancer_target_groups[0].state #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_load_balancer_target_groups(params = {})
       # @param [Hash] params ({})
       def describe_load_balancer_target_groups(params = {}, options = {})
@@ -1216,19 +1377,24 @@ module Aws
       # Note that this operation describes only Classic load balancers. If you
       # have Application load balancers, use DescribeLoadBalancerTargetGroups
       # instead.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @return [Types::DescribeLoadBalancersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLoadBalancersResponse#load_balancers #LoadBalancers} => Array&lt;Types::LoadBalancerState&gt;
-      #   * {Types::DescribeLoadBalancersResponse#next_token #NextToken} => String
+      #   * {Types::DescribeLoadBalancersResponse#load_balancers #load_balancers} => Array&lt;Types::LoadBalancerState&gt;
+      #   * {Types::DescribeLoadBalancersResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_load_balancers({
       #     auto_scaling_group_name: "ResourceName", # required
       #     next_token: "XmlString",
@@ -1236,10 +1402,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.load_balancers #=> Array
       #   resp.load_balancers[0].load_balancer_name #=> String
       #   resp.load_balancers[0].state #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_load_balancers(params = {})
       # @param [Hash] params ({})
       def describe_load_balancers(params = {}, options = {})
@@ -1252,16 +1420,19 @@ module Aws
       # Note that the `GroupStandbyInstances` metric is not returned by
       # default. You must explicitly request this metric when calling
       # EnableMetricsCollection.
+      #
       # @return [Types::DescribeMetricCollectionTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeMetricCollectionTypesAnswer#metrics #Metrics} => Array&lt;Types::MetricCollectionType&gt;
-      #   * {Types::DescribeMetricCollectionTypesAnswer#granularities #Granularities} => Array&lt;Types::MetricGranularityType&gt;
+      #   * {Types::DescribeMetricCollectionTypesAnswer#metrics #metrics} => Array&lt;Types::MetricCollectionType&gt;
+      #   * {Types::DescribeMetricCollectionTypesAnswer#granularities #granularities} => Array&lt;Types::MetricGranularityType&gt;
       #
       # @example Response structure
+      #
       #   resp.metrics #=> Array
       #   resp.metrics[0].metric #=> String
       #   resp.granularities #=> Array
       #   resp.granularities[0].granularity #=> String
+      #
       # @overload describe_metric_collection_types(params = {})
       # @param [Hash] params ({})
       def describe_metric_collection_types(params = {}, options = {})
@@ -1271,19 +1442,24 @@ module Aws
 
       # Describes the notification actions associated with the specified Auto
       # Scaling group.
+      #
       # @option params [Array<String>] :auto_scaling_group_names
       #   The name of the group.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @return [Types::DescribeNotificationConfigurationsAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeNotificationConfigurationsAnswer#notification_configurations #NotificationConfigurations} => Array&lt;Types::NotificationConfiguration&gt;
-      #   * {Types::DescribeNotificationConfigurationsAnswer#next_token #NextToken} => String
+      #   * {Types::DescribeNotificationConfigurationsAnswer#notification_configurations #notification_configurations} => Array&lt;Types::NotificationConfiguration&gt;
+      #   * {Types::DescribeNotificationConfigurationsAnswer#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_notification_configurations({
       #     auto_scaling_group_names: ["ResourceName"],
       #     next_token: "XmlString",
@@ -1291,11 +1467,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.notification_configurations #=> Array
       #   resp.notification_configurations[0].auto_scaling_group_name #=> String
       #   resp.notification_configurations[0].topic_arn #=> String
       #   resp.notification_configurations[0].notification_type #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_notification_configurations(params = {})
       # @param [Hash] params ({})
       def describe_notification_configurations(params = {}, options = {})
@@ -1304,28 +1482,35 @@ module Aws
       end
 
       # Describes the policies for the specified Auto Scaling group.
+      #
       # @option params [String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [Array<String>] :policy_names
       #   One or more policy names or policy ARNs to be described. If you omit
       #   this parameter, all policy names are described. If an group name is
       #   provided, the results are limited to that group. This list is limited
       #   to 50 items. If you specify an unknown policy name, it is ignored with
       #   no error.
+      #
       # @option params [Array<String>] :policy_types
       #   One or more policy types. Valid values are `SimpleScaling` and
       #   `StepScaling`.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to be returned with each call.
+      #
       # @return [Types::PoliciesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PoliciesType#scaling_policies #ScalingPolicies} => Array&lt;Types::ScalingPolicy&gt;
-      #   * {Types::PoliciesType#next_token #NextToken} => String
+      #   * {Types::PoliciesType#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
+      #   * {Types::PoliciesType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_policies({
       #     auto_scaling_group_name: "ResourceName",
       #     policy_names: ["ResourceName"],
@@ -1335,6 +1520,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.scaling_policies #=> Array
       #   resp.scaling_policies[0].auto_scaling_group_name #=> String
       #   resp.scaling_policies[0].policy_name #=> String
@@ -1355,6 +1541,7 @@ module Aws
       #   resp.scaling_policies[0].alarms[0].alarm_name #=> String
       #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_policies(params = {})
       # @param [Hash] params ({})
       def describe_policies(params = {}, options = {})
@@ -1364,25 +1551,31 @@ module Aws
 
       # Describes one or more scaling activities for the specified Auto
       # Scaling group.
+      #
       # @option params [Array<String>] :activity_ids
       #   The activity IDs of the desired scaling activities. If you omit this
       #   parameter, all activities for the past six weeks are described. If you
       #   specify an Auto Scaling group, the results are limited to that group.
       #   The list of requested activities cannot contain more than 50 items. If
       #   unknown activities are requested, they are ignored with no error.
+      #
       # @option params [String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @return [Types::ActivitiesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ActivitiesType#activities #Activities} => Array&lt;Types::Activity&gt;
-      #   * {Types::ActivitiesType#next_token #NextToken} => String
+      #   * {Types::ActivitiesType#activities #activities} => Array&lt;Types::Activity&gt;
+      #   * {Types::ActivitiesType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_scaling_activities({
       #     activity_ids: ["XmlString"],
       #     auto_scaling_group_name: "ResourceName",
@@ -1391,6 +1584,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.activities #=> Array
       #   resp.activities[0].activity_id #=> String
       #   resp.activities[0].auto_scaling_group_name #=> String
@@ -1403,6 +1597,7 @@ module Aws
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_scaling_activities(params = {})
       # @param [Hash] params ({})
       def describe_scaling_activities(params = {}, options = {})
@@ -1412,13 +1607,16 @@ module Aws
 
       # Describes the scaling process types for use with ResumeProcesses and
       # SuspendProcesses.
+      #
       # @return [Types::ProcessesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ProcessesType#processes #Processes} => Array&lt;Types::ProcessType&gt;
+      #   * {Types::ProcessesType#processes #processes} => Array&lt;Types::ProcessType&gt;
       #
       # @example Response structure
+      #
       #   resp.processes #=> Array
       #   resp.processes[0].process_name #=> String
+      #
       # @overload describe_scaling_process_types(params = {})
       # @param [Hash] params ({})
       def describe_scaling_process_types(params = {}, options = {})
@@ -1429,8 +1627,10 @@ module Aws
       # Describes the actions scheduled for your Auto Scaling group that
       # haven't run. To describe the actions that have already run, use
       # DescribeScalingActivities.
+      #
       # @option params [String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [Array<String>] :scheduled_action_names
       #   Describes one or more scheduled actions. If you omit this parameter,
       #   all scheduled actions are described. If you specify an unknown
@@ -1439,23 +1639,29 @@ module Aws
       #   You can describe up to a maximum of 50 instances with a single call.
       #   If there are more items to return, the call returns a token. To get
       #   the next set of items, repeat the call with the returned token.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   The earliest scheduled start time to return. If scheduled action names
       #   are provided, this parameter is ignored.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   The latest scheduled start time to return. If scheduled action names
       #   are provided, this parameter is ignored.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @return [Types::ScheduledActionsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ScheduledActionsType#scheduled_update_group_actions #ScheduledUpdateGroupActions} => Array&lt;Types::ScheduledUpdateGroupAction&gt;
-      #   * {Types::ScheduledActionsType#next_token #NextToken} => String
+      #   * {Types::ScheduledActionsType#scheduled_update_group_actions #scheduled_update_group_actions} => Array&lt;Types::ScheduledUpdateGroupAction&gt;
+      #   * {Types::ScheduledActionsType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_scheduled_actions({
       #     auto_scaling_group_name: "ResourceName",
       #     scheduled_action_names: ["ResourceName"],
@@ -1466,6 +1672,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.scheduled_update_group_actions #=> Array
       #   resp.scheduled_update_group_actions[0].auto_scaling_group_name #=> String
       #   resp.scheduled_update_group_actions[0].scheduled_action_name #=> String
@@ -1478,6 +1685,7 @@ module Aws
       #   resp.scheduled_update_group_actions[0].max_size #=> Integer
       #   resp.scheduled_update_group_actions[0].desired_capacity #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_scheduled_actions(params = {})
       # @param [Hash] params ({})
       def describe_scheduled_actions(params = {}, options = {})
@@ -1495,19 +1703,24 @@ module Aws
       # You can also specify multiple filters. The result includes information
       # for a particular tag only if it matches all the filters. If there's
       # no match, no special message is returned.
+      #
       # @option params [Array<Types::Filter>] :filters
       #   A filter used to scope the tags to return.
+      #
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
+      #
       # @option params [Integer] :max_records
       #   The maximum number of items to return with this call.
+      #
       # @return [Types::TagsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::TagsType#tags #Tags} => Array&lt;Types::TagDescription&gt;
-      #   * {Types::TagsType#next_token #NextToken} => String
+      #   * {Types::TagsType#tags #tags} => Array&lt;Types::TagDescription&gt;
+      #   * {Types::TagsType#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_tags({
       #     filters: [
       #       {
@@ -1520,6 +1733,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tags #=> Array
       #   resp.tags[0].resource_id #=> String
       #   resp.tags[0].resource_type #=> String
@@ -1527,6 +1741,7 @@ module Aws
       #   resp.tags[0].value #=> String
       #   resp.tags[0].propagate_at_launch #=> Boolean
       #   resp.next_token #=> String
+      #
       # @overload describe_tags(params = {})
       # @param [Hash] params ({})
       def describe_tags(params = {}, options = {})
@@ -1535,13 +1750,16 @@ module Aws
       end
 
       # Describes the termination policies supported by Auto Scaling.
+      #
       # @return [Types::DescribeTerminationPolicyTypesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTerminationPolicyTypesAnswer#termination_policy_types #TerminationPolicyTypes} => Array&lt;String&gt;
+      #   * {Types::DescribeTerminationPolicyTypesAnswer#termination_policy_types #termination_policy_types} => Array&lt;String&gt;
       #
       # @example Response structure
+      #
       #   resp.termination_policy_types #=> Array
       #   resp.termination_policy_types[0] #=> String
+      #
       # @overload describe_termination_policy_types(params = {})
       # @param [Hash] params ({})
       def describe_termination_policy_types(params = {}, options = {})
@@ -1568,18 +1786,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html
+      #
       # @option params [Array<String>] :instance_ids
       #   One or more instance IDs.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [required, Boolean] :should_decrement_desired_capacity
       #   If `True`, the Auto Scaling group decrements the desired capacity
       #   value by the number of instances detached.
+      #
       # @return [Types::DetachInstancesAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DetachInstancesAnswer#activities #Activities} => Array&lt;Types::Activity&gt;
+      #   * {Types::DetachInstancesAnswer#activities #activities} => Array&lt;Types::Activity&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detach_instances({
       #     instance_ids: ["XmlStringMaxLen19"],
       #     auto_scaling_group_name: "ResourceName", # required
@@ -1587,6 +1810,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.activities #=> Array
       #   resp.activities[0].activity_id #=> String
       #   resp.activities[0].auto_scaling_group_name #=> String
@@ -1598,6 +1822,7 @@ module Aws
       #   resp.activities[0].status_message #=> String
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
+      #
       # @overload detach_instances(params = {})
       # @param [Hash] params ({})
       def detach_instances(params = {}, options = {})
@@ -1607,17 +1832,22 @@ module Aws
 
       # Detaches one or more target groups from the specified Auto Scaling
       # group.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, Array<String>] :target_group_arns
       #   The Amazon Resource Names (ARN) of the target groups.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detach_load_balancer_target_groups({
       #     auto_scaling_group_name: "ResourceName", # required
       #     target_group_arns: ["XmlStringMaxLen511"], # required
       #   })
+      #
       # @overload detach_load_balancer_target_groups(params = {})
       # @param [Hash] params ({})
       def detach_load_balancer_target_groups(params = {}, options = {})
@@ -1636,17 +1866,22 @@ module Aws
       # deregistering the instances in the group. When all instances are
       # deregistered, then you can no longer describe the load balancer using
       # DescribeLoadBalancers. Note that the instances remain running.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, Array<String>] :load_balancer_names
       #   One or more load balancer names.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.detach_load_balancers({
       #     auto_scaling_group_name: "ResourceName", # required
       #     load_balancer_names: ["XmlStringMaxLen255"], # required
       #   })
+      #
       # @overload detach_load_balancers(params = {})
       # @param [Hash] params ({})
       def detach_load_balancers(params = {}, options = {})
@@ -1655,8 +1890,10 @@ module Aws
       end
 
       # Disables group metrics for the specified Auto Scaling group.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the group.
+      #
       # @option params [Array<String>] :metrics
       #   One or more of the following metrics. If you omit this parameter, all
       #   metrics are disabled.
@@ -1676,13 +1913,16 @@ module Aws
       #   * `GroupTerminatingInstances`
       #
       #   * `GroupTotalInstances`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_metrics_collection({
       #     auto_scaling_group_name: "ResourceName", # required
       #     metrics: ["XmlStringMaxLen255"],
       #   })
+      #
       # @overload disable_metrics_collection(params = {})
       # @param [Hash] params ({})
       def disable_metrics_collection(params = {}, options = {})
@@ -1697,8 +1937,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name or ARN of the Auto Scaling group.
+      #
       # @option params [Array<String>] :metrics
       #   One or more of the following metrics. If you omit this parameter, all
       #   metrics are enabled.
@@ -1718,17 +1960,21 @@ module Aws
       #   * `GroupTerminatingInstances`
       #
       #   * `GroupTotalInstances`
+      #
       # @option params [required, String] :granularity
       #   The granularity to associate with the metrics to collect. The only
       #   valid value is `1Minute`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_metrics_collection({
       #     auto_scaling_group_name: "ResourceName", # required
       #     metrics: ["XmlStringMaxLen255"],
       #     granularity: "XmlStringMaxLen255", # required
       #   })
+      #
       # @overload enable_metrics_collection(params = {})
       # @param [Hash] params ({})
       def enable_metrics_collection(params = {}, options = {})
@@ -1744,21 +1990,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+      #
       # @option params [Array<String>] :instance_ids
       #   One or more instances to move into `Standby` mode. You must specify at
       #   least one instance ID.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, Boolean] :should_decrement_desired_capacity
       #   Specifies whether the instances moved to `Standby` mode count as part
       #   of the Auto Scaling group's desired capacity. If set, the desired
       #   capacity for the Auto Scaling group decrements by the number of
       #   instances moved to `Standby` mode.
+      #
       # @return [Types::EnterStandbyAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnterStandbyAnswer#activities #Activities} => Array&lt;Types::Activity&gt;
+      #   * {Types::EnterStandbyAnswer#activities #activities} => Array&lt;Types::Activity&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enter_standby({
       #     instance_ids: ["XmlStringMaxLen19"],
       #     auto_scaling_group_name: "ResourceName", # required
@@ -1766,6 +2017,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.activities #=> Array
       #   resp.activities[0].activity_id #=> String
       #   resp.activities[0].auto_scaling_group_name #=> String
@@ -1777,6 +2029,7 @@ module Aws
       #   resp.activities[0].status_message #=> String
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
+      #
       # @overload enter_standby(params = {})
       # @param [Hash] params ({})
       def enter_standby(params = {}, options = {})
@@ -1785,10 +2038,13 @@ module Aws
       end
 
       # Executes the specified policy.
+      #
       # @option params [String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+      #
       # @option params [required, String] :policy_name
       #   The name or ARN of the policy.
+      #
       # @option params [Boolean] :honor_cooldown
       #   If this parameter is true, Auto Scaling waits for the cooldown period
       #   to complete before executing the policy. Otherwise, Auto Scaling
@@ -1803,6 +2059,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+      #
       # @option params [Float] :metric_value
       #   The metric value to compare to `BreachThreshold`. This enables you to
       #   execute a policy of type `StepScaling` and determine which step
@@ -1815,14 +2072,17 @@ module Aws
       #
       #   This parameter is required if the policy type is `StepScaling` and not
       #   supported otherwise.
+      #
       # @option params [Float] :breach_threshold
       #   The breach threshold for the alarm.
       #
       #   This parameter is required if the policy type is `StepScaling` and not
       #   supported otherwise.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.execute_policy({
       #     auto_scaling_group_name: "ResourceName",
       #     policy_name: "ResourceName", # required
@@ -1830,6 +2090,7 @@ module Aws
       #     metric_value: 1.0,
       #     breach_threshold: 1.0,
       #   })
+      #
       # @overload execute_policy(params = {})
       # @param [Hash] params ({})
       def execute_policy(params = {}, options = {})
@@ -1845,21 +2106,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+      #
       # @option params [Array<String>] :instance_ids
       #   One or more instance IDs. You must specify at least one instance ID.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @return [Types::ExitStandbyAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ExitStandbyAnswer#activities #Activities} => Array&lt;Types::Activity&gt;
+      #   * {Types::ExitStandbyAnswer#activities #activities} => Array&lt;Types::Activity&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.exit_standby({
       #     instance_ids: ["XmlStringMaxLen19"],
       #     auto_scaling_group_name: "ResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.activities #=> Array
       #   resp.activities[0].activity_id #=> String
       #   resp.activities[0].auto_scaling_group_name #=> String
@@ -1871,6 +2137,7 @@ module Aws
       #   resp.activities[0].status_message #=> String
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
+      #
       # @overload exit_standby(params = {})
       # @param [Hash] params ({})
       def exit_standby(params = {}, options = {})
@@ -1918,23 +2185,28 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html
       # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      #
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group to which you want to assign the
       #   lifecycle hook.
+      #
       # @option params [String] :lifecycle_transition
       #   The instance state to which you want to attach the lifecycle hook. For
       #   a list of lifecycle hook types, see DescribeLifecycleHookTypes.
       #
       #   This parameter is required for new lifecycle hooks, but optional when
       #   updating existing hooks.
+      #
       # @option params [String] :role_arn
       #   The ARN of the IAM role that allows the Auto Scaling group to publish
       #   to the specified notification target.
       #
       #   This parameter is required for new lifecycle hooks, but optional when
       #   updating existing hooks.
+      #
       # @option params [String] :notification_target_arn
       #   The ARN of the notification target that Auto Scaling will use to
       #   notify you when an instance is in the transition state for the
@@ -1948,23 +2220,28 @@ module Aws
       #   When you specify a notification target, Auto Scaling sends it a test
       #   message. Test messages contains the following additional key/value
       #   pair: `"Event": "autoscaling:TEST_NOTIFICATION"`.
+      #
       # @option params [String] :notification_metadata
       #   Contains additional information that you want to include any time Auto
       #   Scaling sends a message to the notification target.
+      #
       # @option params [Integer] :heartbeat_timeout
       #   The amount of time, in seconds, that can elapse before the lifecycle
       #   hook times out. When the lifecycle hook times out, Auto Scaling
       #   performs the default action. You can prevent the lifecycle hook from
       #   timing out by calling RecordLifecycleActionHeartbeat. The default is
       #   3600 seconds (1 hour).
+      #
       # @option params [String] :default_result
       #   Defines the action the Auto Scaling group should take when the
       #   lifecycle hook timeout elapses or if an unexpected failure occurs.
       #   This parameter can be either `CONTINUE` or `ABANDON`. The default
       #   value is `ABANDON`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_lifecycle_hook({
       #     lifecycle_hook_name: "AsciiStringMaxLen255", # required
       #     auto_scaling_group_name: "ResourceName", # required
@@ -1975,6 +2252,7 @@ module Aws
       #     heartbeat_timeout: 1,
       #     default_result: "LifecycleActionResult",
       #   })
+      #
       # @overload put_lifecycle_hook(params = {})
       # @param [Hash] params ({})
       def put_lifecycle_hook(params = {}, options = {})
@@ -1995,23 +2273,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/ASGettingNotifications.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, String] :topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
       #   Service (SNS) topic.
+      #
       # @option params [required, Array<String>] :notification_types
       #   The type of event that will cause the notification to be sent. For
       #   details about notification types supported by Auto Scaling, see
       #   DescribeAutoScalingNotificationTypes.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_notification_configuration({
       #     auto_scaling_group_name: "ResourceName", # required
       #     topic_arn: "ResourceName", # required
       #     notification_types: ["XmlStringMaxLen255"], # required
       #   })
+      #
       # @overload put_notification_configuration(params = {})
       # @param [Hash] params ({})
       def put_notification_configuration(params = {}, options = {})
@@ -2032,13 +2316,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name or ARN of the group.
+      #
       # @option params [required, String] :policy_name
       #   The name of the policy.
+      #
       # @option params [String] :policy_type
       #   The policy type. Valid values are `SimpleScaling` and `StepScaling`.
       #   If the policy type is null, the value is treated as `SimpleScaling`.
+      #
       # @option params [required, String] :adjustment_type
       #   The adjustment type. Valid values are `ChangeInCapacity`,
       #   `ExactCapacity`, and `PercentChangeInCapacity`.
@@ -2049,14 +2337,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html
+      #
       # @option params [Integer] :min_adjustment_step
       #   Available for backward compatibility. Use `MinAdjustmentMagnitude`
       #   instead.
+      #
       # @option params [Integer] :min_adjustment_magnitude
       #   The minimum number of instances to scale. If the value of
       #   `AdjustmentType` is `PercentChangeInCapacity`, the scaling policy
       #   changes the `DesiredCapacity` of the Auto Scaling group by at least
       #   this many instances. Otherwise, the error is `ValidationError`.
+      #
       # @option params [Integer] :scaling_adjustment
       #   The amount by which to scale, based on the specified adjustment type.
       #   A positive value adds to the current capacity while a negative number
@@ -2064,6 +2355,7 @@ module Aws
       #
       #   This parameter is required if the policy type is `SimpleScaling` and
       #   not supported otherwise.
+      #
       # @option params [Integer] :cooldown
       #   The amount of time, in seconds, after a scaling activity completes and
       #   before the next scaling activity can start. If this parameter is not
@@ -2078,29 +2370,34 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+      #
       # @option params [String] :metric_aggregation_type
       #   The aggregation type for the CloudWatch metrics. Valid values are
       #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
       #   the value is treated as `Average`.
       #
       #   This parameter is not supported if the policy type is `SimpleScaling`.
+      #
       # @option params [Array<Types::StepAdjustment>] :step_adjustments
       #   A set of adjustments that enable you to scale based on the size of the
       #   alarm breach.
       #
       #   This parameter is required if the policy type is `StepScaling` and not
       #   supported otherwise.
+      #
       # @option params [Integer] :estimated_instance_warmup
       #   The estimated time, in seconds, until a newly launched instance can
       #   contribute to the CloudWatch metrics. The default is to use the value
       #   specified for the default cooldown period for the group.
       #
       #   This parameter is not supported if the policy type is `SimpleScaling`.
+      #
       # @return [Types::PolicyARNType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PolicyARNType#policy_arn #PolicyARN} => String
+      #   * {Types::PolicyARNType#policy_arn #policy_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_scaling_policy({
       #     auto_scaling_group_name: "ResourceName", # required
       #     policy_name: "XmlStringMaxLen255", # required
@@ -2122,7 +2419,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy_arn #=> String
+      #
       # @overload put_scaling_policy(params = {})
       # @param [Hash] params ({})
       def put_scaling_policy(params = {}, options = {})
@@ -2140,12 +2439,16 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+      #
       # @option params [required, String] :scheduled_action_name
       #   The name of this scaling action.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :time
       #   This parameter is deprecated.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format
       #   in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
@@ -2156,9 +2459,11 @@ module Aws
       #
       #   If you try to schedule your action in the past, Auto Scaling returns
       #   an error message.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   The time for the recurring schedule to end. Auto Scaling does not
       #   perform the action after this time.
+      #
       # @option params [String] :recurrence
       #   The recurring schedule for this action, in Unix cron syntax format.
       #   For more information, see [Cron][1] in Wikipedia.
@@ -2166,15 +2471,20 @@ module Aws
       #
       #
       #   [1]: http://en.wikipedia.org/wiki/Cron
+      #
       # @option params [Integer] :min_size
       #   The minimum size for the Auto Scaling group.
+      #
       # @option params [Integer] :max_size
       #   The maximum size for the Auto Scaling group.
+      #
       # @option params [Integer] :desired_capacity
       #   The number of EC2 instances that should be running in the group.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_scheduled_update_group_action({
       #     auto_scaling_group_name: "ResourceName", # required
       #     scheduled_action_name: "XmlStringMaxLen255", # required
@@ -2186,6 +2496,7 @@ module Aws
       #     max_size: 1,
       #     desired_capacity: 1,
       #   })
+      #
       # @overload put_scheduled_update_group_action(params = {})
       # @param [Hash] params ({})
       def put_scheduled_update_group_action(params = {}, options = {})
@@ -2224,25 +2535,32 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+      #
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group for the hook.
+      #
       # @option params [String] :lifecycle_action_token
       #   A token that uniquely identifies a specific lifecycle action
       #   associated with an instance. Auto Scaling sends this token to the
       #   notification target you specified when you created the lifecycle hook.
+      #
       # @option params [String] :instance_id
       #   The ID of the instance.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.record_lifecycle_action_heartbeat({
       #     lifecycle_hook_name: "AsciiStringMaxLen255", # required
       #     auto_scaling_group_name: "ResourceName", # required
       #     lifecycle_action_token: "LifecycleActionToken",
       #     instance_id: "XmlStringMaxLen19",
       #   })
+      #
       # @overload record_lifecycle_action_heartbeat(params = {})
       # @param [Hash] params ({})
       def record_lifecycle_action_heartbeat(params = {}, options = {})
@@ -2259,8 +2577,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+      #
       # @option params [Array<String>] :scaling_processes
       #   One or more of the following processes. If you omit this parameter,
       #   all processes are specified.
@@ -2280,13 +2600,16 @@ module Aws
       #   * `ScheduledActions`
       #
       #   * `AddToLoadBalancer`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.resume_processes({
       #     auto_scaling_group_name: "ResourceName", # required
       #     scaling_processes: ["XmlStringMaxLen255"],
       #   })
+      #
       # @overload resume_processes(params = {})
       # @param [Hash] params ({})
       def resume_processes(params = {}, options = {})
@@ -2302,25 +2625,31 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/WhatIsAutoScaling.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [required, Integer] :desired_capacity
       #   The number of EC2 instances that should be running in the Auto Scaling
       #   group.
+      #
       # @option params [Boolean] :honor_cooldown
       #   By default, `SetDesiredCapacity` overrides any cooldown period
       #   associated with the Auto Scaling group. Specify `True` to make Auto
       #   Scaling to wait for the cool-down period associated with the Auto
       #   Scaling group to complete before initiating a scaling activity to set
       #   your Auto Scaling group to its new capacity.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_desired_capacity({
       #     auto_scaling_group_name: "ResourceName", # required
       #     desired_capacity: 1, # required
       #     honor_cooldown: false,
       #   })
+      #
       # @overload set_desired_capacity(params = {})
       # @param [Hash] params ({})
       def set_desired_capacity(params = {}, options = {})
@@ -2336,13 +2665,16 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+      #
       # @option params [required, String] :instance_id
       #   The ID of the instance.
+      #
       # @option params [required, String] :health_status
       #   The health status of the instance. Set to `Healthy` if you want the
       #   instance to remain in service. Set to `Unhealthy` if you want the
       #   instance to be out of service. Auto Scaling will terminate and replace
       #   the unhealthy instance.
+      #
       # @option params [Boolean] :should_respect_grace_period
       #   If the Auto Scaling group of the specified instance has a
       #   `HealthCheckGracePeriod` specified for the group, by default, this
@@ -2351,14 +2683,17 @@ module Aws
       #
       #   For more information, see the description of the health check grace
       #   period for CreateAutoScalingGroup.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_instance_health({
       #     instance_id: "XmlStringMaxLen19", # required
       #     health_status: "XmlStringMaxLen32", # required
       #     should_respect_grace_period: false,
       #   })
+      #
       # @overload set_instance_health(params = {})
       # @param [Hash] params ({})
       def set_instance_health(params = {}, options = {})
@@ -2374,21 +2709,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection
+      #
       # @option params [required, Array<String>] :instance_ids
       #   One or more instance IDs.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
+      #
       # @option params [required, Boolean] :protected_from_scale_in
       #   Indicates whether the instance is protected from termination by Auto
       #   Scaling when scaling in.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_instance_protection({
       #     instance_ids: ["XmlStringMaxLen19"], # required
       #     auto_scaling_group_name: "ResourceName", # required
       #     protected_from_scale_in: false, # required
       #   })
+      #
       # @overload set_instance_protection(params = {})
       # @param [Hash] params ({})
       def set_instance_protection(params = {}, options = {})
@@ -2410,8 +2751,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
+      #
       # @option params [Array<String>] :scaling_processes
       #   One or more of the following processes. If you omit this parameter,
       #   all processes are specified.
@@ -2431,13 +2774,16 @@ module Aws
       #   * `ScheduledActions`
       #
       #   * `AddToLoadBalancer`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.suspend_processes({
       #     auto_scaling_group_name: "ResourceName", # required
       #     scaling_processes: ["XmlStringMaxLen255"],
       #   })
+      #
       # @overload suspend_processes(params = {})
       # @param [Hash] params ({})
       def suspend_processes(params = {}, options = {})
@@ -2450,22 +2796,27 @@ module Aws
       #
       # This call simply makes a termination request. The instance is not
       # terminated immediately.
+      #
       # @option params [required, String] :instance_id
       #   The ID of the instance.
+      #
       # @option params [required, Boolean] :should_decrement_desired_capacity
       #   If `true`, terminating the instance also decrements the size of the
       #   Auto Scaling group.
+      #
       # @return [Types::ActivityType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ActivityType#activity #Activity} => Types::Activity
+      #   * {Types::ActivityType#activity #activity} => Types::Activity
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.terminate_instance_in_auto_scaling_group({
       #     instance_id: "XmlStringMaxLen19", # required
       #     should_decrement_desired_capacity: false, # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.activity.activity_id #=> String
       #   resp.activity.auto_scaling_group_name #=> String
       #   resp.activity.description #=> String
@@ -2476,6 +2827,7 @@ module Aws
       #   resp.activity.status_message #=> String
       #   resp.activity.progress #=> Integer
       #   resp.activity.details #=> String
+      #
       # @overload terminate_instance_in_auto_scaling_group(params = {})
       # @param [Hash] params ({})
       def terminate_instance_in_auto_scaling_group(params = {}, options = {})
@@ -2509,18 +2861,24 @@ module Aws
       #   set the size of the group to the new value of `MaxSize`.
       #
       # * All other optional parameters are left unchanged if not specified.
+      #
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
+      #
       # @option params [String] :launch_configuration_name
       #   The name of the launch configuration.
+      #
       # @option params [Integer] :min_size
       #   The minimum size of the Auto Scaling group.
+      #
       # @option params [Integer] :max_size
       #   The maximum size of the Auto Scaling group.
+      #
       # @option params [Integer] :desired_capacity
       #   The number of EC2 instances that should be running in the Auto Scaling
       #   group. This number must be greater than or equal to the minimum size
       #   of the group and less than or equal to the maximum size of the group.
+      #
       # @option params [Integer] :default_cooldown
       #   The amount of time, in seconds, after a scaling activity completes
       #   before another scaling activity can start. The default is 300.
@@ -2531,11 +2889,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
+      #
       # @option params [Array<String>] :availability_zones
       #   One or more Availability Zones for the group.
+      #
       # @option params [String] :health_check_type
       #   The service to use for the health checks. The valid values are `EC2`
       #   and `ELB`.
+      #
       # @option params [Integer] :health_check_grace_period
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
@@ -2547,6 +2908,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
+      #
       # @option params [String] :placement_group
       #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
@@ -2555,6 +2917,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html
+      #
       # @option params [String] :vpc_zone_identifier
       #   The ID of the subnet, if you are launching into a VPC. You can specify
       #   several subnets in a comma-separated list.
@@ -2569,6 +2932,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
+      #
       # @option params [Array<String>] :termination_policies
       #   A standalone termination policy or a list of termination policies used
       #   to select the instance to terminate. The policies are executed in the
@@ -2580,12 +2944,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
+      #
       # @option params [Boolean] :new_instances_protected_from_scale_in
       #   Indicates whether newly launched instances are protected from
       #   termination by Auto Scaling when scaling in.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_auto_scaling_group({
       #     auto_scaling_group_name: "ResourceName", # required
       #     launch_configuration_name: "ResourceName",
@@ -2601,6 +2968,7 @@ module Aws
       #     termination_policies: ["XmlStringMaxLen1600"],
       #     new_instances_protected_from_scale_in: false,
       #   })
+      #
       # @overload update_auto_scaling_group(params = {})
       # @param [Hash] params ({})
       def update_auto_scaling_group(params = {}, options = {})

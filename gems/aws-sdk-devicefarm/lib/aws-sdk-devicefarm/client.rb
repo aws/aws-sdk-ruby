@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,19 +155,25 @@ module Aws
       # @!group API Operations
 
       # Creates a device pool.
+      #
       # @option params [required, String] :project_arn
       #   The ARN of the project for the device pool.
+      #
       # @option params [required, String] :name
       #   The device pool's name.
+      #
       # @option params [String] :description
       #   The device pool's description.
+      #
       # @option params [required, Array<Types::Rule>] :rules
       #   The device pool's rules.
+      #
       # @return [Types::CreateDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateDevicePoolResult#device_pool #devicePool} => Types::DevicePool
+      #   * {Types::CreateDevicePoolResult#device_pool #device_pool} => Types::DevicePool
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_device_pool({
       #     project_arn: "AmazonResourceName", # required
       #     name: "Name", # required
@@ -167,6 +188,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.device_pool.arn #=> String
       #   resp.device_pool.name #=> String
       #   resp.device_pool.description #=> String
@@ -175,6 +197,7 @@ module Aws
       #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
+      #
       # @overload create_device_pool(params = {})
       # @param [Hash] params ({})
       def create_device_pool(params = {}, options = {})
@@ -183,21 +206,26 @@ module Aws
       end
 
       # Creates a new project.
+      #
       # @option params [required, String] :name
       #   The project's name.
+      #
       # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateProjectResult#project #project} => Types::Project
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_project({
       #     name: "Name", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.project.arn #=> String
       #   resp.project.name #=> String
       #   resp.project.created #=> Time
+      #
       # @overload create_project(params = {})
       # @param [Hash] params ({})
       def create_project(params = {}, options = {})
@@ -206,21 +234,27 @@ module Aws
       end
 
       # Specifies and starts a remote access session.
+      #
       # @option params [required, String] :project_arn
       #   The Amazon Resource Name (ARN) of the project for which you want to
       #   create a remote access session.
+      #
       # @option params [required, String] :device_arn
       #   The Amazon Resource Name (ARN) of the device for which you want to
       #   create a remote access session.
+      #
       # @option params [String] :name
       #   The name of the remote access session that you wish to create.
+      #
       # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
       #   The configuration information for the remote access session request.
+      #
       # @return [Types::CreateRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateRemoteAccessSessionResult#remote_access_session #remoteAccessSession} => Types::RemoteAccessSession
+      #   * {Types::CreateRemoteAccessSessionResult#remote_access_session #remote_access_session} => Types::RemoteAccessSession
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_remote_access_session({
       #     project_arn: "AmazonResourceName", # required
       #     device_arn: "AmazonResourceName", # required
@@ -231,6 +265,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.remote_access_session.arn #=> String
       #   resp.remote_access_session.name #=> String
       #   resp.remote_access_session.created #=> Time
@@ -264,6 +299,7 @@ module Aws
       #   resp.remote_access_session.device_minutes.metered #=> Float
       #   resp.remote_access_session.device_minutes.unmetered #=> Float
       #   resp.remote_access_session.endpoint #=> String
+      #
       # @overload create_remote_access_session(params = {})
       # @param [Hash] params ({})
       def create_remote_access_session(params = {}, options = {})
@@ -272,14 +308,17 @@ module Aws
       end
 
       # Uploads an app or test scripts.
+      #
       # @option params [required, String] :project_arn
       #   The ARN of the project for the upload.
+      #
       # @option params [required, String] :name
       #   The upload's file name. The name should not contain the '/'
       #   character. If uploading an iOS app, the file name needs to end with
       #   the `.ipa` extension. If uploading an Android app, the file name needs
       #   to end with the `.apk` extension. For all others, the file name must
       #   end with the `.zip` file extension.
+      #
       # @option params [required, String] :type
       #   The upload's upload type.
       #
@@ -324,14 +363,17 @@ module Aws
       #
       #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
       #   Device Farm throws an `ArgumentException` error.
+      #
       # @option params [String] :content_type
       #   The upload's content type (for example,
       #   "application/octet-stream").
+      #
       # @return [Types::CreateUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateUploadResult#upload #upload} => Types::Upload
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_upload({
       #     project_arn: "AmazonResourceName", # required
       #     name: "Name", # required
@@ -340,6 +382,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.upload.arn #=> String
       #   resp.upload.name #=> String
       #   resp.upload.created #=> Time
@@ -349,6 +392,7 @@ module Aws
       #   resp.upload.metadata #=> String
       #   resp.upload.content_type #=> String
       #   resp.upload.message #=> String
+      #
       # @overload create_upload(params = {})
       # @param [Hash] params ({})
       def create_upload(params = {}, options = {})
@@ -358,15 +402,19 @@ module Aws
 
       # Deletes a device pool given the pool ARN. Does not allow deletion of
       # curated pools owned by the system.
+      #
       # @option params [required, String] :arn
       #   Represents the Amazon Resource Name (ARN) of the Device Farm device
       #   pool you wish to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_device_pool({
       #     arn: "AmazonResourceName", # required
       #   })
+      #
       # @overload delete_device_pool(params = {})
       # @param [Hash] params ({})
       def delete_device_pool(params = {}, options = {})
@@ -377,15 +425,19 @@ module Aws
       # Deletes an AWS Device Farm project, given the project ARN.
       #
       # **Note** Deleting this resource does not stop an in-progress run.
+      #
       # @option params [required, String] :arn
       #   Represents the Amazon Resource Name (ARN) of the Device Farm project
       #   you wish to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_project({
       #     arn: "AmazonResourceName", # required
       #   })
+      #
       # @overload delete_project(params = {})
       # @param [Hash] params ({})
       def delete_project(params = {}, options = {})
@@ -394,15 +446,19 @@ module Aws
       end
 
       # Deletes a completed remote access session and its results.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the sesssion for which you want to
       #   delete remote access.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_remote_access_session({
       #     arn: "AmazonResourceName", # required
       #   })
+      #
       # @overload delete_remote_access_session(params = {})
       # @param [Hash] params ({})
       def delete_remote_access_session(params = {}, options = {})
@@ -413,14 +469,18 @@ module Aws
       # Deletes the run, given the run ARN.
       #
       # **Note** Deleting this resource does not stop an in-progress run.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) for the run you wish to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_run({
       #     arn: "AmazonResourceName", # required
       #   })
+      #
       # @overload delete_run(params = {})
       # @param [Hash] params ({})
       def delete_run(params = {}, options = {})
@@ -429,15 +489,19 @@ module Aws
       end
 
       # Deletes an upload given the upload ARN.
+      #
       # @option params [required, String] :arn
       #   Represents the Amazon Resource Name (ARN) of the Device Farm upload
       #   you wish to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_upload({
       #     arn: "AmazonResourceName", # required
       #   })
+      #
       # @overload delete_upload(params = {})
       # @param [Hash] params ({})
       def delete_upload(params = {}, options = {})
@@ -447,19 +511,23 @@ module Aws
 
       # Returns the number of unmetered iOS and/or unmetered Android devices
       # that have been purchased by the account.
+      #
       # @return [Types::GetAccountSettingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetAccountSettingsResult#account_settings #accountSettings} => Types::AccountSettings
+      #   * {Types::GetAccountSettingsResult#account_settings #account_settings} => Types::AccountSettings
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_account_settings()
       #
       # @example Response structure
+      #
       #   resp.account_settings.aws_account_number #=> String
       #   resp.account_settings.unmetered_devices #=> Hash
       #   resp.account_settings.unmetered_devices["DevicePlatform"] #=> Integer
       #   resp.account_settings.unmetered_remote_access_devices #=> Hash
       #   resp.account_settings.unmetered_remote_access_devices["DevicePlatform"] #=> Integer
+      #
       # @overload get_account_settings(params = {})
       # @param [Hash] params ({})
       def get_account_settings(params = {}, options = {})
@@ -468,18 +536,22 @@ module Aws
       end
 
       # Gets information about a unique device type.
+      #
       # @option params [required, String] :arn
       #   The device type's ARN.
+      #
       # @return [Types::GetDeviceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDeviceResult#device #device} => Types::Device
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_device({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.device.arn #=> String
       #   resp.device.name #=> String
       #   resp.device.manufacturer #=> String
@@ -500,6 +572,7 @@ module Aws
       #   resp.device.remote_access_enabled #=> Boolean
       #   resp.device.fleet_type #=> String
       #   resp.device.fleet_name #=> String
+      #
       # @overload get_device(params = {})
       # @param [Hash] params ({})
       def get_device(params = {}, options = {})
@@ -508,18 +581,22 @@ module Aws
       end
 
       # Gets information about a device pool.
+      #
       # @option params [required, String] :arn
       #   The device pool's ARN.
+      #
       # @return [Types::GetDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDevicePoolResult#device_pool #devicePool} => Types::DevicePool
+      #   * {Types::GetDevicePoolResult#device_pool #device_pool} => Types::DevicePool
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_device_pool({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.device_pool.arn #=> String
       #   resp.device_pool.name #=> String
       #   resp.device_pool.description #=> String
@@ -528,6 +605,7 @@ module Aws
       #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
+      #
       # @overload get_device_pool(params = {})
       # @param [Hash] params ({})
       def get_device_pool(params = {}, options = {})
@@ -536,10 +614,13 @@ module Aws
       end
 
       # Gets information about compatibility with a device pool.
+      #
       # @option params [required, String] :device_pool_arn
       #   The device pool's ARN.
+      #
       # @option params [String] :app_arn
       #   The ARN of the app that is associated with the specified device pool.
+      #
       # @option params [String] :test_type
       #   The test type for the specified device pool.
       #
@@ -574,12 +655,14 @@ module Aws
       #   * XCTEST: The XCode test type.
       #
       #   * XCTEST\_UI: The XCode UI test type.
+      #
       # @return [Types::GetDevicePoolCompatibilityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDevicePoolCompatibilityResult#compatible_devices #compatibleDevices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
-      #   * {Types::GetDevicePoolCompatibilityResult#incompatible_devices #incompatibleDevices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
+      #   * {Types::GetDevicePoolCompatibilityResult#compatible_devices #compatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
+      #   * {Types::GetDevicePoolCompatibilityResult#incompatible_devices #incompatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_device_pool_compatibility({
       #     device_pool_arn: "AmazonResourceName", # required
       #     app_arn: "AmazonResourceName",
@@ -587,6 +670,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.compatible_devices #=> Array
       #   resp.compatible_devices[0].device.arn #=> String
       #   resp.compatible_devices[0].device.name #=> String
@@ -637,6 +721,7 @@ module Aws
       #   resp.incompatible_devices[0].incompatibility_messages #=> Array
       #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
       #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
+      #
       # @overload get_device_pool_compatibility(params = {})
       # @param [Hash] params ({})
       def get_device_pool_compatibility(params = {}, options = {})
@@ -645,18 +730,22 @@ module Aws
       end
 
       # Gets information about a job.
+      #
       # @option params [required, String] :arn
       #   The job's ARN.
+      #
       # @return [Types::GetJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetJobResult#job #job} => Types::Job
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_job({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.job.arn #=> String
       #   resp.job.name #=> String
       #   resp.job.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
@@ -696,6 +785,7 @@ module Aws
       #   resp.job.device_minutes.total #=> Float
       #   resp.job.device_minutes.metered #=> Float
       #   resp.job.device_minutes.unmetered #=> Float
+      #
       # @overload get_job(params = {})
       # @param [Hash] params ({})
       def get_job(params = {}, options = {})
@@ -710,22 +800,26 @@ module Aws
       # permitted to invoke the operation. Please contact
       # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
       # if you believe that you should be able to invoke this operation.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::GetOfferingStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetOfferingStatusResult#current #current} => Hash&lt;String,Types::OfferingStatus&gt;
-      #   * {Types::GetOfferingStatusResult#next_period #nextPeriod} => Hash&lt;String,Types::OfferingStatus&gt;
-      #   * {Types::GetOfferingStatusResult#next_token #nextToken} => String
+      #   * {Types::GetOfferingStatusResult#next_period #next_period} => Hash&lt;String,Types::OfferingStatus&gt;
+      #   * {Types::GetOfferingStatusResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_offering_status({
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.current #=> Hash
       #   resp.current["OfferingIdentifier"].type #=> String, one of "PURCHASE", "RENEW", "SYSTEM"
       #   resp.current["OfferingIdentifier"].offering.id #=> String
@@ -751,6 +845,7 @@ module Aws
       #   resp.next_period["OfferingIdentifier"].quantity #=> Integer
       #   resp.next_period["OfferingIdentifier"].effective_on #=> Time
       #   resp.next_token #=> String
+      #
       # @overload get_offering_status(params = {})
       # @param [Hash] params ({})
       def get_offering_status(params = {}, options = {})
@@ -759,21 +854,26 @@ module Aws
       end
 
       # Gets information about a project.
+      #
       # @option params [required, String] :arn
       #   The project's ARN.
+      #
       # @return [Types::GetProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetProjectResult#project #project} => Types::Project
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_project({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.project.arn #=> String
       #   resp.project.name #=> String
       #   resp.project.created #=> Time
+      #
       # @overload get_project(params = {})
       # @param [Hash] params ({})
       def get_project(params = {}, options = {})
@@ -782,19 +882,23 @@ module Aws
       end
 
       # Returns a link to a currently running remote access session.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the remote access session about
       #   which you want to get session information.
+      #
       # @return [Types::GetRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetRemoteAccessSessionResult#remote_access_session #remoteAccessSession} => Types::RemoteAccessSession
+      #   * {Types::GetRemoteAccessSessionResult#remote_access_session #remote_access_session} => Types::RemoteAccessSession
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_remote_access_session({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.remote_access_session.arn #=> String
       #   resp.remote_access_session.name #=> String
       #   resp.remote_access_session.created #=> Time
@@ -828,6 +932,7 @@ module Aws
       #   resp.remote_access_session.device_minutes.metered #=> Float
       #   resp.remote_access_session.device_minutes.unmetered #=> Float
       #   resp.remote_access_session.endpoint #=> String
+      #
       # @overload get_remote_access_session(params = {})
       # @param [Hash] params ({})
       def get_remote_access_session(params = {}, options = {})
@@ -836,18 +941,22 @@ module Aws
       end
 
       # Gets information about a run.
+      #
       # @option params [required, String] :arn
       #   The run's ARN.
+      #
       # @return [Types::GetRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetRunResult#run #run} => Types::Run
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_run({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.run.arn #=> String
       #   resp.run.name #=> String
       #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
@@ -871,6 +980,7 @@ module Aws
       #   resp.run.device_minutes.total #=> Float
       #   resp.run.device_minutes.metered #=> Float
       #   resp.run.device_minutes.unmetered #=> Float
+      #
       # @overload get_run(params = {})
       # @param [Hash] params ({})
       def get_run(params = {}, options = {})
@@ -879,18 +989,22 @@ module Aws
       end
 
       # Gets information about a suite.
+      #
       # @option params [required, String] :arn
       #   The suite's ARN.
+      #
       # @return [Types::GetSuiteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetSuiteResult#suite #suite} => Types::Suite
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_suite({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.suite.arn #=> String
       #   resp.suite.name #=> String
       #   resp.suite.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
@@ -910,6 +1024,7 @@ module Aws
       #   resp.suite.device_minutes.total #=> Float
       #   resp.suite.device_minutes.metered #=> Float
       #   resp.suite.device_minutes.unmetered #=> Float
+      #
       # @overload get_suite(params = {})
       # @param [Hash] params ({})
       def get_suite(params = {}, options = {})
@@ -918,18 +1033,22 @@ module Aws
       end
 
       # Gets information about a test.
+      #
       # @option params [required, String] :arn
       #   The test's ARN.
+      #
       # @return [Types::GetTestResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetTestResult#test #test} => Types::Test
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_test({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.test.arn #=> String
       #   resp.test.name #=> String
       #   resp.test.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
@@ -949,6 +1068,7 @@ module Aws
       #   resp.test.device_minutes.total #=> Float
       #   resp.test.device_minutes.metered #=> Float
       #   resp.test.device_minutes.unmetered #=> Float
+      #
       # @overload get_test(params = {})
       # @param [Hash] params ({})
       def get_test(params = {}, options = {})
@@ -957,18 +1077,22 @@ module Aws
       end
 
       # Gets information about an upload.
+      #
       # @option params [required, String] :arn
       #   The upload's ARN.
+      #
       # @return [Types::GetUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetUploadResult#upload #upload} => Types::Upload
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_upload({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.upload.arn #=> String
       #   resp.upload.name #=> String
       #   resp.upload.created #=> Time
@@ -978,6 +1102,7 @@ module Aws
       #   resp.upload.metadata #=> String
       #   resp.upload.content_type #=> String
       #   resp.upload.message #=> String
+      #
       # @overload get_upload(params = {})
       # @param [Hash] params ({})
       def get_upload(params = {}, options = {})
@@ -988,23 +1113,28 @@ module Aws
       # Installs an application to the device in a remote access session. For
       # Android applications, the file must be in .apk format. For iOS
       # applications, the file must be in .ipa format.
+      #
       # @option params [required, String] :remote_access_session_arn
       #   The Amazon Resource Name (ARN) of the remote access session about
       #   which you are requesting information.
+      #
       # @option params [required, String] :app_arn
       #   The Amazon Resource Name (ARN) of the app about which you are
       #   requesting information.
+      #
       # @return [Types::InstallToRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::InstallToRemoteAccessSessionResult#app_upload #appUpload} => Types::Upload
+      #   * {Types::InstallToRemoteAccessSessionResult#app_upload #app_upload} => Types::Upload
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.install_to_remote_access_session({
       #     remote_access_session_arn: "AmazonResourceName", # required
       #     app_arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.app_upload.arn #=> String
       #   resp.app_upload.name #=> String
       #   resp.app_upload.created #=> Time
@@ -1014,6 +1144,7 @@ module Aws
       #   resp.app_upload.metadata #=> String
       #   resp.app_upload.content_type #=> String
       #   resp.app_upload.message #=> String
+      #
       # @overload install_to_remote_access_session(params = {})
       # @param [Hash] params ({})
       def install_to_remote_access_session(params = {}, options = {})
@@ -1022,8 +1153,10 @@ module Aws
       end
 
       # Gets information about artifacts.
+      #
       # @option params [required, String] :arn
       #   The Run, Job, Suite, or Test ARN.
+      #
       # @option params [required, String] :type
       #   The artifacts' type.
       #
@@ -1034,16 +1167,19 @@ module Aws
       #   * LOG: The artifacts are logs.
       #
       #   * SCREENSHOT: The artifacts are screenshots.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListArtifactsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListArtifactsResult#artifacts #artifacts} => Array&lt;Types::Artifact&gt;
-      #   * {Types::ListArtifactsResult#next_token #nextToken} => String
+      #   * {Types::ListArtifactsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_artifacts({
       #     arn: "AmazonResourceName", # required
       #     type: "SCREENSHOT", # required, accepts SCREENSHOT, FILE, LOG
@@ -1051,6 +1187,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.artifacts #=> Array
       #   resp.artifacts[0].arn #=> String
       #   resp.artifacts[0].name #=> String
@@ -1058,6 +1195,7 @@ module Aws
       #   resp.artifacts[0].extension #=> String
       #   resp.artifacts[0].url #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_artifacts(params = {})
       # @param [Hash] params ({})
       def list_artifacts(params = {}, options = {})
@@ -1066,8 +1204,10 @@ module Aws
       end
 
       # Gets information about device pools.
+      #
       # @option params [required, String] :arn
       #   The project ARN.
+      #
       # @option params [String] :type
       #   The device pools' type.
       #
@@ -1078,16 +1218,19 @@ module Aws
       #
       #   * PRIVATE: A device pool that is created and managed by the device
       #     pool developer.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListDevicePoolsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListDevicePoolsResult#device_pools #devicePools} => Array&lt;Types::DevicePool&gt;
-      #   * {Types::ListDevicePoolsResult#next_token #nextToken} => String
+      #   * {Types::ListDevicePoolsResult#device_pools #device_pools} => Array&lt;Types::DevicePool&gt;
+      #   * {Types::ListDevicePoolsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_device_pools({
       #     arn: "AmazonResourceName", # required
       #     type: "CURATED", # accepts CURATED, PRIVATE
@@ -1095,6 +1238,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.device_pools #=> Array
       #   resp.device_pools[0].arn #=> String
       #   resp.device_pools[0].name #=> String
@@ -1105,6 +1249,7 @@ module Aws
       #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pools[0].rules[0].value #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_device_pools(params = {})
       # @param [Hash] params ({})
       def list_device_pools(params = {}, options = {})
@@ -1113,24 +1258,29 @@ module Aws
       end
 
       # Gets information about unique device types.
+      #
       # @option params [String] :arn
       #   The Amazon Resource Name (ARN) of the project.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListDevicesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListDevicesResult#devices #devices} => Array&lt;Types::Device&gt;
-      #   * {Types::ListDevicesResult#next_token #nextToken} => String
+      #   * {Types::ListDevicesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_devices({
       #     arn: "AmazonResourceName",
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.devices #=> Array
       #   resp.devices[0].arn #=> String
       #   resp.devices[0].name #=> String
@@ -1153,6 +1303,7 @@ module Aws
       #   resp.devices[0].fleet_type #=> String
       #   resp.devices[0].fleet_name #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_devices(params = {})
       # @param [Hash] params ({})
       def list_devices(params = {}, options = {})
@@ -1161,24 +1312,29 @@ module Aws
       end
 
       # Gets information about jobs.
+      #
       # @option params [required, String] :arn
       #   The jobs' ARNs.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListJobsResult#jobs #jobs} => Array&lt;Types::Job&gt;
-      #   * {Types::ListJobsResult#next_token #nextToken} => String
+      #   * {Types::ListJobsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_jobs({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.jobs #=> Array
       #   resp.jobs[0].arn #=> String
       #   resp.jobs[0].name #=> String
@@ -1220,6 +1376,7 @@ module Aws
       #   resp.jobs[0].device_minutes.metered #=> Float
       #   resp.jobs[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      #
       # @overload list_jobs(params = {})
       # @param [Hash] params ({})
       def list_jobs(params = {}, options = {})
@@ -1234,21 +1391,25 @@ module Aws
       # permitted to invoke the operation. Please contact
       # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
       # if you believe that you should be able to invoke this operation.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListOfferingTransactionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListOfferingTransactionsResult#offering_transactions #offeringTransactions} => Array&lt;Types::OfferingTransaction&gt;
-      #   * {Types::ListOfferingTransactionsResult#next_token #nextToken} => String
+      #   * {Types::ListOfferingTransactionsResult#offering_transactions #offering_transactions} => Array&lt;Types::OfferingTransaction&gt;
+      #   * {Types::ListOfferingTransactionsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_offering_transactions({
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.offering_transactions #=> Array
       #   resp.offering_transactions[0].offering_status.type #=> String, one of "PURCHASE", "RENEW", "SYSTEM"
       #   resp.offering_transactions[0].offering_status.offering.id #=> String
@@ -1266,6 +1427,7 @@ module Aws
       #   resp.offering_transactions[0].cost.amount #=> Float
       #   resp.offering_transactions[0].cost.currency_code #=> String, one of "USD"
       #   resp.next_token #=> String
+      #
       # @overload list_offering_transactions(params = {})
       # @param [Hash] params ({})
       def list_offering_transactions(params = {}, options = {})
@@ -1280,21 +1442,25 @@ module Aws
       # operation. Please contact
       # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
       # if you believe that you should be able to invoke this operation.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListOfferingsResult#offerings #offerings} => Array&lt;Types::Offering&gt;
-      #   * {Types::ListOfferingsResult#next_token #nextToken} => String
+      #   * {Types::ListOfferingsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_offerings({
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.offerings #=> Array
       #   resp.offerings[0].id #=> String
       #   resp.offerings[0].description #=> String
@@ -1305,6 +1471,7 @@ module Aws
       #   resp.offerings[0].recurring_charges[0].cost.currency_code #=> String, one of "USD"
       #   resp.offerings[0].recurring_charges[0].frequency #=> String, one of "MONTHLY"
       #   resp.next_token #=> String
+      #
       # @overload list_offerings(params = {})
       # @param [Hash] params ({})
       def list_offerings(params = {}, options = {})
@@ -1313,31 +1480,37 @@ module Aws
       end
 
       # Gets information about projects.
+      #
       # @option params [String] :arn
       #   Optional. If no Amazon Resource Name (ARN) is specified, then AWS
       #   Device Farm returns a list of all projects for the AWS account. You
       #   can also specify a project ARN.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListProjectsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListProjectsResult#projects #projects} => Array&lt;Types::Project&gt;
-      #   * {Types::ListProjectsResult#next_token #nextToken} => String
+      #   * {Types::ListProjectsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_projects({
       #     arn: "AmazonResourceName",
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.projects #=> Array
       #   resp.projects[0].arn #=> String
       #   resp.projects[0].name #=> String
       #   resp.projects[0].created #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_projects(params = {})
       # @param [Hash] params ({})
       def list_projects(params = {}, options = {})
@@ -1346,25 +1519,30 @@ module Aws
       end
 
       # Returns a list of all currently running remote access sessions.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the remote access session about
       #   which you are requesting information.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListRemoteAccessSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListRemoteAccessSessionsResult#remote_access_sessions #remoteAccessSessions} => Array&lt;Types::RemoteAccessSession&gt;
-      #   * {Types::ListRemoteAccessSessionsResult#next_token #nextToken} => String
+      #   * {Types::ListRemoteAccessSessionsResult#remote_access_sessions #remote_access_sessions} => Array&lt;Types::RemoteAccessSession&gt;
+      #   * {Types::ListRemoteAccessSessionsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_remote_access_sessions({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.remote_access_sessions #=> Array
       #   resp.remote_access_sessions[0].arn #=> String
       #   resp.remote_access_sessions[0].name #=> String
@@ -1400,6 +1578,7 @@ module Aws
       #   resp.remote_access_sessions[0].device_minutes.unmetered #=> Float
       #   resp.remote_access_sessions[0].endpoint #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_remote_access_sessions(params = {})
       # @param [Hash] params ({})
       def list_remote_access_sessions(params = {}, options = {})
@@ -1408,25 +1587,30 @@ module Aws
       end
 
       # Gets information about runs, given an AWS Device Farm project ARN.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the project for which you want to
       #   list runs.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListRunsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListRunsResult#runs #runs} => Array&lt;Types::Run&gt;
-      #   * {Types::ListRunsResult#next_token #nextToken} => String
+      #   * {Types::ListRunsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_runs({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.runs #=> Array
       #   resp.runs[0].arn #=> String
       #   resp.runs[0].name #=> String
@@ -1452,6 +1636,7 @@ module Aws
       #   resp.runs[0].device_minutes.metered #=> Float
       #   resp.runs[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      #
       # @overload list_runs(params = {})
       # @param [Hash] params ({})
       def list_runs(params = {}, options = {})
@@ -1460,30 +1645,36 @@ module Aws
       end
 
       # Gets information about samples, given an AWS Device Farm project ARN
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the project for which you want to
       #   list samples.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListSamplesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListSamplesResult#samples #samples} => Array&lt;Types::Sample&gt;
-      #   * {Types::ListSamplesResult#next_token #nextToken} => String
+      #   * {Types::ListSamplesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_samples({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.samples #=> Array
       #   resp.samples[0].arn #=> String
       #   resp.samples[0].type #=> String, one of "CPU", "MEMORY", "THREADS", "RX_RATE", "TX_RATE", "RX", "TX", "NATIVE_FRAMES", "NATIVE_FPS", "NATIVE_MIN_DRAWTIME", "NATIVE_AVG_DRAWTIME", "NATIVE_MAX_DRAWTIME", "OPENGL_FRAMES", "OPENGL_FPS", "OPENGL_MIN_DRAWTIME", "OPENGL_AVG_DRAWTIME", "OPENGL_MAX_DRAWTIME"
       #   resp.samples[0].url #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_samples(params = {})
       # @param [Hash] params ({})
       def list_samples(params = {}, options = {})
@@ -1492,24 +1683,29 @@ module Aws
       end
 
       # Gets information about suites.
+      #
       # @option params [required, String] :arn
       #   The suites' ARNs.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListSuitesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListSuitesResult#suites #suites} => Array&lt;Types::Suite&gt;
-      #   * {Types::ListSuitesResult#next_token #nextToken} => String
+      #   * {Types::ListSuitesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_suites({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.suites #=> Array
       #   resp.suites[0].arn #=> String
       #   resp.suites[0].name #=> String
@@ -1531,6 +1727,7 @@ module Aws
       #   resp.suites[0].device_minutes.metered #=> Float
       #   resp.suites[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      #
       # @overload list_suites(params = {})
       # @param [Hash] params ({})
       def list_suites(params = {}, options = {})
@@ -1539,24 +1736,29 @@ module Aws
       end
 
       # Gets information about tests.
+      #
       # @option params [required, String] :arn
       #   The tests' ARNs.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListTestsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListTestsResult#tests #tests} => Array&lt;Types::Test&gt;
-      #   * {Types::ListTestsResult#next_token #nextToken} => String
+      #   * {Types::ListTestsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tests({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.tests #=> Array
       #   resp.tests[0].arn #=> String
       #   resp.tests[0].name #=> String
@@ -1578,6 +1780,7 @@ module Aws
       #   resp.tests[0].device_minutes.metered #=> Float
       #   resp.tests[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      #
       # @overload list_tests(params = {})
       # @param [Hash] params ({})
       def list_tests(params = {}, options = {})
@@ -1586,24 +1789,29 @@ module Aws
       end
 
       # Gets information about unique problems.
+      #
       # @option params [required, String] :arn
       #   The unique problems' ARNs.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListUniqueProblemsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListUniqueProblemsResult#unique_problems #uniqueProblems} => Hash&lt;String,Array&lt;Types::UniqueProblem&gt;&gt;
-      #   * {Types::ListUniqueProblemsResult#next_token #nextToken} => String
+      #   * {Types::ListUniqueProblemsResult#unique_problems #unique_problems} => Hash&lt;String,Array&lt;Types::UniqueProblem&gt;&gt;
+      #   * {Types::ListUniqueProblemsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_unique_problems({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.unique_problems #=> Hash
       #   resp.unique_problems["ExecutionResult"] #=> Array
       #   resp.unique_problems["ExecutionResult"][0].message #=> String
@@ -1639,6 +1847,7 @@ module Aws
       #   resp.unique_problems["ExecutionResult"][0].problems[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
       #   resp.unique_problems["ExecutionResult"][0].problems[0].message #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_unique_problems(params = {})
       # @param [Hash] params ({})
       def list_unique_problems(params = {}, options = {})
@@ -1647,25 +1856,30 @@ module Aws
       end
 
       # Gets information about uploads, given an AWS Device Farm project ARN.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the project for which you want to
       #   list uploads.
+      #
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
       #   list.
+      #
       # @return [Types::ListUploadsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListUploadsResult#uploads #uploads} => Array&lt;Types::Upload&gt;
-      #   * {Types::ListUploadsResult#next_token #nextToken} => String
+      #   * {Types::ListUploadsResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_uploads({
       #     arn: "AmazonResourceName", # required
       #     next_token: "PaginationToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.uploads #=> Array
       #   resp.uploads[0].arn #=> String
       #   resp.uploads[0].name #=> String
@@ -1677,6 +1891,7 @@ module Aws
       #   resp.uploads[0].content_type #=> String
       #   resp.uploads[0].message #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_uploads(params = {})
       # @param [Hash] params ({})
       def list_uploads(params = {}, options = {})
@@ -1690,22 +1905,27 @@ module Aws
       # user is not permitted to invoke the operation. Please contact
       # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
       # if you believe that you should be able to invoke this operation.
+      #
       # @option params [String] :offering_id
       #   The ID of the offering.
+      #
       # @option params [Integer] :quantity
       #   The number of device slots you wish to purchase in an offering
       #   request.
+      #
       # @return [Types::PurchaseOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PurchaseOfferingResult#offering_transaction #offeringTransaction} => Types::OfferingTransaction
+      #   * {Types::PurchaseOfferingResult#offering_transaction #offering_transaction} => Types::OfferingTransaction
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.purchase_offering({
       #     offering_id: "OfferingIdentifier",
       #     quantity: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.offering_transaction.offering_status.type #=> String, one of "PURCHASE", "RENEW", "SYSTEM"
       #   resp.offering_transaction.offering_status.offering.id #=> String
       #   resp.offering_transaction.offering_status.offering.description #=> String
@@ -1721,6 +1941,7 @@ module Aws
       #   resp.offering_transaction.created_on #=> Time
       #   resp.offering_transaction.cost.amount #=> Float
       #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
+      #
       # @overload purchase_offering(params = {})
       # @param [Hash] params ({})
       def purchase_offering(params = {}, options = {})
@@ -1734,21 +1955,26 @@ module Aws
       # operation. Please contact
       # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
       # if you believe that you should be able to invoke this operation.
+      #
       # @option params [String] :offering_id
       #   The ID of a request to renew an offering.
+      #
       # @option params [Integer] :quantity
       #   The quantity requested in an offering renewal.
+      #
       # @return [Types::RenewOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RenewOfferingResult#offering_transaction #offeringTransaction} => Types::OfferingTransaction
+      #   * {Types::RenewOfferingResult#offering_transaction #offering_transaction} => Types::OfferingTransaction
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.renew_offering({
       #     offering_id: "OfferingIdentifier",
       #     quantity: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.offering_transaction.offering_status.type #=> String, one of "PURCHASE", "RENEW", "SYSTEM"
       #   resp.offering_transaction.offering_status.offering.id #=> String
       #   resp.offering_transaction.offering_status.offering.description #=> String
@@ -1764,6 +1990,7 @@ module Aws
       #   resp.offering_transaction.created_on #=> Time
       #   resp.offering_transaction.cost.amount #=> Float
       #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
+      #
       # @overload renew_offering(params = {})
       # @param [Hash] params ({})
       def renew_offering(params = {}, options = {})
@@ -1772,23 +1999,31 @@ module Aws
       end
 
       # Schedules a run.
+      #
       # @option params [required, String] :project_arn
       #   The ARN of the project for the run to be scheduled.
+      #
       # @option params [String] :app_arn
       #   The ARN of the app to schedule a run.
+      #
       # @option params [required, String] :device_pool_arn
       #   The ARN of the device pool for the run to be scheduled.
+      #
       # @option params [String] :name
       #   The name for the run to be scheduled.
+      #
       # @option params [required, Types::ScheduleRunTest] :test
       #   Information about the test for the run to be scheduled.
+      #
       # @option params [Types::ScheduleRunConfiguration] :configuration
       #   Information about the settings for the run to be scheduled.
+      #
       # @return [Types::ScheduleRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ScheduleRunResult#run #run} => Types::Run
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.schedule_run({
       #     project_arn: "AmazonResourceName", # required
       #     app_arn: "AmazonResourceName",
@@ -1822,6 +2057,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.run.arn #=> String
       #   resp.run.name #=> String
       #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
@@ -1845,6 +2081,7 @@ module Aws
       #   resp.run.device_minutes.total #=> Float
       #   resp.run.device_minutes.metered #=> Float
       #   resp.run.device_minutes.unmetered #=> Float
+      #
       # @overload schedule_run(params = {})
       # @param [Hash] params ({})
       def schedule_run(params = {}, options = {})
@@ -1853,19 +2090,23 @@ module Aws
       end
 
       # Ends a specified remote access session.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the remote access session you wish
       #   to stop.
+      #
       # @return [Types::StopRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StopRemoteAccessSessionResult#remote_access_session #remoteAccessSession} => Types::RemoteAccessSession
+      #   * {Types::StopRemoteAccessSessionResult#remote_access_session #remote_access_session} => Types::RemoteAccessSession
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_remote_access_session({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.remote_access_session.arn #=> String
       #   resp.remote_access_session.name #=> String
       #   resp.remote_access_session.created #=> Time
@@ -1899,6 +2140,7 @@ module Aws
       #   resp.remote_access_session.device_minutes.metered #=> Float
       #   resp.remote_access_session.device_minutes.unmetered #=> Float
       #   resp.remote_access_session.endpoint #=> String
+      #
       # @overload stop_remote_access_session(params = {})
       # @param [Hash] params ({})
       def stop_remote_access_session(params = {}, options = {})
@@ -1913,19 +2155,23 @@ module Aws
       # tests will run to completion before stopping execution on those
       # devices. You will be billed for Setup, Teardown, and any tests that
       # were in progress or already completed.
+      #
       # @option params [required, String] :arn
       #   Represents the Amazon Resource Name (ARN) of the Device Farm run you
       #   wish to stop.
+      #
       # @return [Types::StopRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::StopRunResult#run #run} => Types::Run
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_run({
       #     arn: "AmazonResourceName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.run.arn #=> String
       #   resp.run.name #=> String
       #   resp.run.type #=> String, one of "BUILTIN_FUZZ", "BUILTIN_EXPLORER", "APPIUM_JAVA_JUNIT", "APPIUM_JAVA_TESTNG", "APPIUM_PYTHON", "APPIUM_WEB_JAVA_JUNIT", "APPIUM_WEB_JAVA_TESTNG", "APPIUM_WEB_PYTHON", "CALABASH", "INSTRUMENTATION", "UIAUTOMATION", "UIAUTOMATOR", "XCTEST", "XCTEST_UI"
@@ -1949,6 +2195,7 @@ module Aws
       #   resp.run.device_minutes.total #=> Float
       #   resp.run.device_minutes.metered #=> Float
       #   resp.run.device_minutes.unmetered #=> Float
+      #
       # @overload stop_run(params = {})
       # @param [Hash] params ({})
       def stop_run(params = {}, options = {})
@@ -1959,22 +2206,28 @@ module Aws
       # Modifies the name, description, and rules in a device pool given the
       # attributes and the pool ARN. Rule updates are all-or-nothing, meaning
       # they can only be updated as a whole (or not at all).
+      #
       # @option params [required, String] :arn
       #   The Amazon Resourc Name (ARN) of the Device Farm device pool you wish
       #   to update.
+      #
       # @option params [String] :name
       #   A string representing the name of the device pool you wish to update.
+      #
       # @option params [String] :description
       #   A description of the device pool you wish to update.
+      #
       # @option params [Array<Types::Rule>] :rules
       #   Represents the rules you wish to modify for the device pool. Updating
       #   rules is optional; however, if you choose to update rules for your
       #   request, the update will replace the existing rules.
+      #
       # @return [Types::UpdateDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateDevicePoolResult#device_pool #devicePool} => Types::DevicePool
+      #   * {Types::UpdateDevicePoolResult#device_pool #device_pool} => Types::DevicePool
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_device_pool({
       #     arn: "AmazonResourceName", # required
       #     name: "Name",
@@ -1989,6 +2242,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.device_pool.arn #=> String
       #   resp.device_pool.name #=> String
       #   resp.device_pool.description #=> String
@@ -1997,6 +2251,7 @@ module Aws
       #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
+      #
       # @overload update_device_pool(params = {})
       # @param [Hash] params ({})
       def update_device_pool(params = {}, options = {})
@@ -2006,26 +2261,32 @@ module Aws
 
       # Modifies the specified project name, given the project ARN and a new
       # name.
+      #
       # @option params [required, String] :arn
       #   The Amazon Resource Name (ARN) of the project whose name you wish to
       #   update.
+      #
       # @option params [String] :name
       #   A string representing the new name of the project that you are
       #   updating.
+      #
       # @return [Types::UpdateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateProjectResult#project #project} => Types::Project
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_project({
       #     arn: "AmazonResourceName", # required
       #     name: "Name",
       #   })
       #
       # @example Response structure
+      #
       #   resp.project.arn #=> String
       #   resp.project.name #=> String
       #   resp.project.created #=> Time
+      #
       # @overload update_project(params = {})
       # @param [Hash] params ({})
       def update_project(params = {}, options = {})

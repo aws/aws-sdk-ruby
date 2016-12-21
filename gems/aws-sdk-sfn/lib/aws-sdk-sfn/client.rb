@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,22 +155,27 @@ module Aws
       # @!group API Operations
 
       # Creates an activity.
+      #
       # @option params [required, String] :name
       #   The name of the activity to create. This name must be unique for your
       #   AWS account and region.
+      #
       # @return [Types::CreateActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateActivityOutput#activity_arn #activityArn} => String
-      #   * {Types::CreateActivityOutput#creation_date #creationDate} => Time
+      #   * {Types::CreateActivityOutput#activity_arn #activity_arn} => String
+      #   * {Types::CreateActivityOutput#creation_date #creation_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_activity({
       #     name: "Name", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.activity_arn #=> String
       #   resp.creation_date #=> Time
+      #
       # @overload create_activity(params = {})
       # @param [Hash] params ({})
       def create_activity(params = {}, options = {})
@@ -164,20 +184,25 @@ module Aws
       end
 
       # Creates a state machine.
+      #
       # @option params [required, String] :name
       #   The name of the state machine. This name must be unique for your AWS
       #   account and region.
+      #
       # @option params [required, String] :definition
       #   The Amazon States Language definition of the state machine.
+      #
       # @option params [required, String] :role_arn
       #   The Amazon Resource Name (ARN) of the IAM role to use for this state
       #   machine.
+      #
       # @return [Types::CreateStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateStateMachineOutput#state_machine_arn #stateMachineArn} => String
-      #   * {Types::CreateStateMachineOutput#creation_date #creationDate} => Time
+      #   * {Types::CreateStateMachineOutput#state_machine_arn #state_machine_arn} => String
+      #   * {Types::CreateStateMachineOutput#creation_date #creation_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_state_machine({
       #     name: "Name", # required
       #     definition: "Definition", # required
@@ -185,8 +210,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.state_machine_arn #=> String
       #   resp.creation_date #=> Time
+      #
       # @overload create_state_machine(params = {})
       # @param [Hash] params ({})
       def create_state_machine(params = {}, options = {})
@@ -195,14 +222,18 @@ module Aws
       end
 
       # Deletes an activity.
+      #
       # @option params [required, String] :activity_arn
       #   The Amazon Resource Name (ARN) of the activity to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_activity({
       #     activity_arn: "Arn", # required
       #   })
+      #
       # @overload delete_activity(params = {})
       # @param [Hash] params ({})
       def delete_activity(params = {}, options = {})
@@ -213,14 +244,18 @@ module Aws
       # Deletes a state machine. This is an asynchronous operation-- it sets
       # the state machine's status to "DELETING" and begins the delete
       # process.
+      #
       # @option params [required, String] :state_machine_arn
       #   The Amazon Resource Name (ARN) of the state machine to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_state_machine({
       #     state_machine_arn: "Arn", # required
       #   })
+      #
       # @overload delete_state_machine(params = {})
       # @param [Hash] params ({})
       def delete_state_machine(params = {}, options = {})
@@ -229,23 +264,28 @@ module Aws
       end
 
       # Describes an activity.
+      #
       # @option params [required, String] :activity_arn
       #   The Amazon Resource Name (ARN) of the activity to describe.
+      #
       # @return [Types::DescribeActivityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeActivityOutput#activity_arn #activityArn} => String
+      #   * {Types::DescribeActivityOutput#activity_arn #activity_arn} => String
       #   * {Types::DescribeActivityOutput#name #name} => String
-      #   * {Types::DescribeActivityOutput#creation_date #creationDate} => Time
+      #   * {Types::DescribeActivityOutput#creation_date #creation_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_activity({
       #     activity_arn: "Arn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.activity_arn #=> String
       #   resp.name #=> String
       #   resp.creation_date #=> Time
+      #
       # @overload describe_activity(params = {})
       # @param [Hash] params ({})
       def describe_activity(params = {}, options = {})
@@ -254,25 +294,29 @@ module Aws
       end
 
       # Describes an execution.
+      #
       # @option params [required, String] :execution_arn
       #   The Amazon Resource Name (ARN) of the execution to describe.
+      #
       # @return [Types::DescribeExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeExecutionOutput#execution_arn #executionArn} => String
-      #   * {Types::DescribeExecutionOutput#state_machine_arn #stateMachineArn} => String
+      #   * {Types::DescribeExecutionOutput#execution_arn #execution_arn} => String
+      #   * {Types::DescribeExecutionOutput#state_machine_arn #state_machine_arn} => String
       #   * {Types::DescribeExecutionOutput#name #name} => String
       #   * {Types::DescribeExecutionOutput#status #status} => String
-      #   * {Types::DescribeExecutionOutput#start_date #startDate} => Time
-      #   * {Types::DescribeExecutionOutput#stop_date #stopDate} => Time
+      #   * {Types::DescribeExecutionOutput#start_date #start_date} => Time
+      #   * {Types::DescribeExecutionOutput#stop_date #stop_date} => Time
       #   * {Types::DescribeExecutionOutput#input #input} => String
       #   * {Types::DescribeExecutionOutput#output #output} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_execution({
       #     execution_arn: "Arn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.execution_arn #=> String
       #   resp.state_machine_arn #=> String
       #   resp.name #=> String
@@ -281,6 +325,7 @@ module Aws
       #   resp.stop_date #=> Time
       #   resp.input #=> String
       #   resp.output #=> String
+      #
       # @overload describe_execution(params = {})
       # @param [Hash] params ({})
       def describe_execution(params = {}, options = {})
@@ -289,29 +334,34 @@ module Aws
       end
 
       # Describes a state machine.
+      #
       # @option params [required, String] :state_machine_arn
       #   The Amazon Resource Name (ARN) of the state machine to describe.
+      #
       # @return [Types::DescribeStateMachineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStateMachineOutput#state_machine_arn #stateMachineArn} => String
+      #   * {Types::DescribeStateMachineOutput#state_machine_arn #state_machine_arn} => String
       #   * {Types::DescribeStateMachineOutput#name #name} => String
       #   * {Types::DescribeStateMachineOutput#status #status} => String
       #   * {Types::DescribeStateMachineOutput#definition #definition} => String
-      #   * {Types::DescribeStateMachineOutput#role_arn #roleArn} => String
-      #   * {Types::DescribeStateMachineOutput#creation_date #creationDate} => Time
+      #   * {Types::DescribeStateMachineOutput#role_arn #role_arn} => String
+      #   * {Types::DescribeStateMachineOutput#creation_date #creation_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_state_machine({
       #     state_machine_arn: "Arn", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.state_machine_arn #=> String
       #   resp.name #=> String
       #   resp.status #=> String, one of "ACTIVE", "DELETING"
       #   resp.definition #=> String
       #   resp.role_arn #=> String
       #   resp.creation_date #=> Time
+      #
       # @overload describe_state_machine(params = {})
       # @param [Hash] params ({})
       def describe_state_machine(params = {}, options = {})
@@ -331,26 +381,32 @@ module Aws
       # Workers should set their client side socket timeout to at least 65
       # seconds (5 seconds higher than the maximum time the service may hold
       # the poll request).
+      #
       # @option params [required, String] :activity_arn
       #   The Amazon Resource Name (ARN) of the activity to retrieve tasks from.
+      #
       # @option params [String] :worker_name
       #   An arbitrary name may be provided in order to identify the worker that
       #   the task is assigned to. This name will be used when it is logged in
       #   the execution history.
+      #
       # @return [Types::GetActivityTaskOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetActivityTaskOutput#task_token #taskToken} => String
+      #   * {Types::GetActivityTaskOutput#task_token #task_token} => String
       #   * {Types::GetActivityTaskOutput#input #input} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_activity_task({
       #     activity_arn: "Arn", # required
       #     worker_name: "Name",
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_token #=> String
       #   resp.input #=> String
+      #
       # @overload get_activity_task(params = {})
       # @param [Hash] params ({})
       def get_activity_task(params = {}, options = {})
@@ -364,8 +420,10 @@ module Aws
       # latest events first. The results may be split into multiple pages. To
       # retrieve subsequent pages, make the call again using the `nextToken`
       # returned by the previous call.
+      #
       # @option params [required, String] :execution_arn
       #   The Amazon Resource Name (ARN) of the execution.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results that will be returned per call.
       #   `nextToken` can be used to obtain further pages of results. The
@@ -373,8 +431,10 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   Lists events in descending order of their `timeStamp`.
+      #
       # @option params [String] :next_token
       #   If a `nextToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -383,12 +443,14 @@ module Aws
       #
       #   The configured `maxResults` determines how many results can be
       #   returned in a single call.
+      #
       # @return [Types::GetExecutionHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetExecutionHistoryOutput#events #events} => Array&lt;Types::HistoryEvent&gt;
-      #   * {Types::GetExecutionHistoryOutput#next_token #nextToken} => String
+      #   * {Types::GetExecutionHistoryOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_execution_history({
       #     execution_arn: "Arn", # required
       #     max_results: 1,
@@ -397,6 +459,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Array
       #   resp.events[0].timestamp #=> Time
       #   resp.events[0].type #=> String, one of "ActivityFailed", "ActivityScheduleFailed", "ActivityScheduled", "ActivityStarted", "ActivitySucceeded", "ActivityTimedOut", "ChoiceStateEntered", "ChoiceStateExited", "ExecutionFailed", "ExecutionStarted", "ExecutionSucceeded", "ExecutionAborted", "ExecutionTimedOut", "FailStateEntered", "LambdaFunctionFailed", "LambdaFunctionScheduleFailed", "LambdaFunctionScheduled", "LambdaFunctionStartFailed", "LambdaFunctionStarted", "LambdaFunctionSucceeded", "LambdaFunctionTimedOut", "SucceedStateEntered", "SucceedStateExited", "TaskStateEntered", "TaskStateExited", "PassStateEntered", "PassStateExited", "ParallelStateEntered", "ParallelStateExited", "WaitStateEntered", "WaitStateExited"
@@ -440,6 +503,7 @@ module Aws
       #   resp.events[0].state_exited_event_details.name #=> String
       #   resp.events[0].state_exited_event_details.output #=> String
       #   resp.next_token #=> String
+      #
       # @overload get_execution_history(params = {})
       # @param [Hash] params ({})
       def get_execution_history(params = {}, options = {})
@@ -450,6 +514,7 @@ module Aws
       # Lists the existing activities. The results may be split into multiple
       # pages. To retrieve subsequent pages, make the call again using the
       # `nextToken` returned by the previous call.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results that will be returned per call.
       #   `nextToken` can be used to obtain further pages of results. The
@@ -457,6 +522,7 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [String] :next_token
       #   If a `nextToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -465,23 +531,27 @@ module Aws
       #
       #   The configured `maxResults` determines how many results can be
       #   returned in a single call.
+      #
       # @return [Types::ListActivitiesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListActivitiesOutput#activities #activities} => Array&lt;Types::ActivityListItem&gt;
-      #   * {Types::ListActivitiesOutput#next_token #nextToken} => String
+      #   * {Types::ListActivitiesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_activities({
       #     max_results: 1,
       #     next_token: "PageToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.activities #=> Array
       #   resp.activities[0].activity_arn #=> String
       #   resp.activities[0].name #=> String
       #   resp.activities[0].creation_date #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_activities(params = {})
       # @param [Hash] params ({})
       def list_activities(params = {}, options = {})
@@ -493,12 +563,15 @@ module Aws
       # criteria. The results may be split into multiple pages. To retrieve
       # subsequent pages, make the call again using the `nextToken` returned
       # by the previous call.
+      #
       # @option params [required, String] :state_machine_arn
       #   The Amazon Resource Name (ARN) of the state machine whose executions
       #   will be listed.
+      #
       # @option params [String] :status_filter
       #   If specified, only list the executions whose current execution status
       #   matches the given filter.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results that will be returned per call.
       #   `nextToken` can be used to obtain further pages of results. The
@@ -506,6 +579,7 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [String] :next_token
       #   If a `nextToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -514,12 +588,14 @@ module Aws
       #
       #   The configured `maxResults` determines how many results can be
       #   returned in a single call.
+      #
       # @return [Types::ListExecutionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListExecutionsOutput#executions #executions} => Array&lt;Types::ExecutionListItem&gt;
-      #   * {Types::ListExecutionsOutput#next_token #nextToken} => String
+      #   * {Types::ListExecutionsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_executions({
       #     state_machine_arn: "Arn", # required
       #     status_filter: "RUNNING", # accepts RUNNING, SUCCEEDED, FAILED, TIMED_OUT, ABORTED
@@ -528,6 +604,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.executions #=> Array
       #   resp.executions[0].execution_arn #=> String
       #   resp.executions[0].state_machine_arn #=> String
@@ -536,6 +613,7 @@ module Aws
       #   resp.executions[0].start_date #=> Time
       #   resp.executions[0].stop_date #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_executions(params = {})
       # @param [Hash] params ({})
       def list_executions(params = {}, options = {})
@@ -546,6 +624,7 @@ module Aws
       # Lists the existing state machines. The results may be split into
       # multiple pages. To retrieve subsequent pages, make the call again
       # using the `nextToken` returned by the previous call.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of results that will be returned per call.
       #   `nextToken` can be used to obtain further pages of results. The
@@ -553,6 +632,7 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [String] :next_token
       #   If a `nextToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -561,23 +641,27 @@ module Aws
       #
       #   The configured `maxResults` determines how many results can be
       #   returned in a single call.
+      #
       # @return [Types::ListStateMachinesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListStateMachinesOutput#state_machines #stateMachines} => Array&lt;Types::StateMachineListItem&gt;
-      #   * {Types::ListStateMachinesOutput#next_token #nextToken} => String
+      #   * {Types::ListStateMachinesOutput#state_machines #state_machines} => Array&lt;Types::StateMachineListItem&gt;
+      #   * {Types::ListStateMachinesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_state_machines({
       #     max_results: 1,
       #     next_token: "PageToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.state_machines #=> Array
       #   resp.state_machines[0].state_machine_arn #=> String
       #   resp.state_machines[0].name #=> String
       #   resp.state_machines[0].creation_date #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_state_machines(params = {})
       # @param [Hash] params ({})
       def list_state_machines(params = {}, options = {})
@@ -587,22 +671,28 @@ module Aws
 
       # Used by workers to report that the task identified by the `taskToken`
       # failed.
+      #
       # @option params [required, String] :task_token
       #   The token that represents this task. Task tokens are generated by the
       #   service when the tasks are assigned to a worker (see
       #   GetActivityTask::taskToken).
+      #
       # @option params [String] :error
       #   An arbitrary error code that identifies the cause of the failure.
+      #
       # @option params [String] :cause
       #   A more detailed explanation of the cause of the failure.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_task_failure({
       #     task_token: "TaskToken", # required
       #     error: "Error",
       #     cause: "Cause",
       #   })
+      #
       # @overload send_task_failure(params = {})
       # @param [Hash] params ({})
       def send_task_failure(params = {}, options = {})
@@ -628,16 +718,20 @@ module Aws
       # liveliness of the task.
       #
       #  </note>
+      #
       # @option params [required, String] :task_token
       #   The token that represents this task. Task tokens are generated by the
       #   service when the tasks are assigned to a worker (see
       #   GetActivityTask::taskToken).
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_task_heartbeat({
       #     task_token: "TaskToken", # required
       #   })
+      #
       # @overload send_task_heartbeat(params = {})
       # @param [Hash] params ({})
       def send_task_heartbeat(params = {}, options = {})
@@ -647,19 +741,24 @@ module Aws
 
       # Used by workers to report that the task identified by the `taskToken`
       # completed successfully.
+      #
       # @option params [required, String] :task_token
       #   The token that represents this task. Task tokens are generated by the
       #   service when the tasks are assigned to a worker (see
       #   GetActivityTask::taskToken).
+      #
       # @option params [required, String] :output
       #   The JSON output of the task.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.send_task_success({
       #     task_token: "TaskToken", # required
       #     output: "Data", # required
       #   })
+      #
       # @overload send_task_success(params = {})
       # @param [Hash] params ({})
       def send_task_success(params = {}, options = {})
@@ -668,19 +767,24 @@ module Aws
       end
 
       # Starts a state machine execution.
+      #
       # @option params [required, String] :state_machine_arn
       #   The Amazon Resource Name (ARN) of the state machine to execute.
+      #
       # @option params [String] :name
       #   The name of the execution. This name must be unique for your AWS
       #   account and region.
+      #
       # @option params [String] :input
       #   The JSON input data for the execution.
+      #
       # @return [Types::StartExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StartExecutionOutput#execution_arn #executionArn} => String
-      #   * {Types::StartExecutionOutput#start_date #startDate} => Time
+      #   * {Types::StartExecutionOutput#execution_arn #execution_arn} => String
+      #   * {Types::StartExecutionOutput#start_date #start_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_execution({
       #     state_machine_arn: "Arn", # required
       #     name: "Name",
@@ -688,8 +792,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.execution_arn #=> String
       #   resp.start_date #=> Time
+      #
       # @overload start_execution(params = {})
       # @param [Hash] params ({})
       def start_execution(params = {}, options = {})
@@ -698,17 +804,22 @@ module Aws
       end
 
       # Stops an execution.
+      #
       # @option params [required, String] :execution_arn
       #   The Amazon Resource Name (ARN) of the execution to stop.
+      #
       # @option params [String] :error
       #   An arbitrary error code that identifies the cause of the termination.
+      #
       # @option params [String] :cause
       #   A more detailed explanation of the cause of the termination.
+      #
       # @return [Types::StopExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::StopExecutionOutput#stop_date #stopDate} => Time
+      #   * {Types::StopExecutionOutput#stop_date #stop_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_execution({
       #     execution_arn: "Arn", # required
       #     error: "Error",
@@ -716,7 +827,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stop_date #=> Time
+      #
       # @overload stop_execution(params = {})
       # @param [Hash] params ({})
       def stop_execution(params = {}, options = {})

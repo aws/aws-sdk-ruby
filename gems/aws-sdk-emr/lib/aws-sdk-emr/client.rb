@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,16 +155,20 @@ module Aws
       # @!group API Operations
 
       # Adds one or more instance groups to a running cluster.
+      #
       # @option params [required, Array<Types::InstanceGroupConfig>] :instance_groups
       #   Instance groups to add.
+      #
       # @option params [required, String] :job_flow_id
       #   Job flow in which to add the instance groups.
+      #
       # @return [Types::AddInstanceGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AddInstanceGroupsOutput#job_flow_id #JobFlowId} => String
-      #   * {Types::AddInstanceGroupsOutput#instance_group_ids #InstanceGroupIds} => Array&lt;String&gt;
+      #   * {Types::AddInstanceGroupsOutput#job_flow_id #job_flow_id} => String
+      #   * {Types::AddInstanceGroupsOutput#instance_group_ids #instance_group_ids} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_instance_groups({
       #     instance_groups: [ # required
       #       {
@@ -227,9 +246,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_flow_id #=> String
       #   resp.instance_group_ids #=> Array
       #   resp.instance_group_ids[0] #=> String
+      #
       # @overload add_instance_groups(params = {})
       # @param [Hash] params ({})
       def add_instance_groups(params = {}, options = {})
@@ -265,16 +286,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html
+      #
       # @option params [required, String] :job_flow_id
       #   A string that uniquely identifies the job flow. This identifier is
       #   returned by RunJobFlow and can also be obtained from ListClusters.
+      #
       # @option params [required, Array<Types::StepConfig>] :steps
       #   A list of StepConfig to be executed by the job flow.
+      #
       # @return [Types::AddJobFlowStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::AddJobFlowStepsOutput#step_ids #StepIds} => Array&lt;String&gt;
+      #   * {Types::AddJobFlowStepsOutput#step_ids #step_ids} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_job_flow_steps({
       #     job_flow_id: "XmlStringMaxLen256", # required
       #     steps: [ # required
@@ -297,8 +322,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.step_ids #=> Array
       #   resp.step_ids[0] #=> String
+      #
       # @overload add_job_flow_steps(params = {})
       # @param [Hash] params ({})
       def add_job_flow_steps(params = {}, options = {})
@@ -314,17 +341,21 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+      #
       # @option params [required, String] :resource_id
       #   The Amazon EMR resource identifier to which tags will be added. This
       #   value must be a cluster identifier.
+      #
       # @option params [required, Array<Types::Tag>] :tags
       #   A list of tags to associate with a cluster and propagate to EC2
       #   instances. Tags are user-defined key/value pairs that consist of a
       #   required key string with a maximum of 128 characters, and an optional
       #   value string with a maximum of 256 characters.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags({
       #     resource_id: "ResourceId", # required
       #     tags: [ # required
@@ -334,6 +365,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags(params = {})
       # @param [Hash] params ({})
       def add_tags(params = {}, options = {})
@@ -347,27 +379,33 @@ module Aws
       # CancelSteps is idempotent but asynchronous; it does not guarantee a
       # step will be canceled, even if the request is successfully submitted.
       # You can only cancel steps that are in a `PENDING` state.
+      #
       # @option params [String] :cluster_id
       #   The `ClusterID` for which specified steps will be canceled. Use
       #   RunJobFlow and ListClusters to get ClusterIDs.
+      #
       # @option params [Array<String>] :step_ids
       #   The list of `StepIDs` to cancel. Use ListSteps to get steps and their
       #   states for the specified cluster.
+      #
       # @return [Types::CancelStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CancelStepsOutput#cancel_steps_info_list #CancelStepsInfoList} => Array&lt;Types::CancelStepsInfo&gt;
+      #   * {Types::CancelStepsOutput#cancel_steps_info_list #cancel_steps_info_list} => Array&lt;Types::CancelStepsInfo&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.cancel_steps({
       #     cluster_id: "XmlStringMaxLen256",
       #     step_ids: ["XmlStringMaxLen256"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.cancel_steps_info_list #=> Array
       #   resp.cancel_steps_info_list[0].step_id #=> String
       #   resp.cancel_steps_info_list[0].status #=> String, one of "SUBMITTED", "FAILED"
       #   resp.cancel_steps_info_list[0].reason #=> String
+      #
       # @overload cancel_steps(params = {})
       # @param [Hash] params ({})
       def cancel_steps(params = {}, options = {})
@@ -377,24 +415,30 @@ module Aws
 
       # Creates a security configuration, which is stored in the service and
       # can be specified when a cluster is created.
+      #
       # @option params [required, String] :name
       #   The name of the security configuration.
+      #
       # @option params [required, String] :security_configuration
       #   The security configuration details in JSON format.
+      #
       # @return [Types::CreateSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateSecurityConfigurationOutput#name #Name} => String
-      #   * {Types::CreateSecurityConfigurationOutput#creation_date_time #CreationDateTime} => Time
+      #   * {Types::CreateSecurityConfigurationOutput#name #name} => String
+      #   * {Types::CreateSecurityConfigurationOutput#creation_date_time #creation_date_time} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_security_configuration({
       #     name: "XmlString", # required
       #     security_configuration: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.name #=> String
       #   resp.creation_date_time #=> Time
+      #
       # @overload create_security_configuration(params = {})
       # @param [Hash] params ({})
       def create_security_configuration(params = {}, options = {})
@@ -403,14 +447,18 @@ module Aws
       end
 
       # Deletes a security configuration.
+      #
       # @option params [required, String] :name
       #   The name of the security configuration.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_security_configuration({
       #     name: "XmlString", # required
       #   })
+      #
       # @overload delete_security_configuration(params = {})
       # @param [Hash] params ({})
       def delete_security_configuration(params = {}, options = {})
@@ -421,18 +469,22 @@ module Aws
       # Provides cluster-level details including status, hardware and software
       # configuration, VPC settings, and so on. For information about the
       # cluster steps, see ListSteps.
+      #
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster to describe.
+      #
       # @return [Types::DescribeClusterOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeClusterOutput#cluster #Cluster} => Types::Cluster
+      #   * {Types::DescribeClusterOutput#cluster #cluster} => Types::Cluster
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_cluster({
       #     cluster_id: "ClusterId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.cluster.id #=> String
       #   resp.cluster.name #=> String
       #   resp.cluster.status.state #=> String, one of "STARTING", "BOOTSTRAPPING", "RUNNING", "WAITING", "TERMINATING", "TERMINATED", "TERMINATED_WITH_ERRORS"
@@ -480,6 +532,7 @@ module Aws
       #   resp.cluster.security_configuration #=> String
       #   resp.cluster.auto_scaling_role #=> String
       #   resp.cluster.scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
+      #
       # @overload describe_cluster(params = {})
       # @param [Hash] params ({})
       def describe_cluster(params = {}, options = {})
@@ -508,19 +561,25 @@ module Aws
       #   following states: `RUNNING`, `WAITING`, `SHUTTING_DOWN`, `STARTING`
       #
       # Amazon EMR can return a maximum of 512 job flow descriptions.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :created_after
       #   Return only job flows created after this date and time.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :created_before
       #   Return only job flows created before this date and time.
+      #
       # @option params [Array<String>] :job_flow_ids
       #   Return only job flows whose job flow ID is contained in this list.
+      #
       # @option params [Array<String>] :job_flow_states
       #   Return only job flows whose state is contained in this list.
+      #
       # @return [Types::DescribeJobFlowsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeJobFlowsOutput#job_flows #JobFlows} => Array&lt;Types::JobFlowDetail&gt;
+      #   * {Types::DescribeJobFlowsOutput#job_flows #job_flows} => Array&lt;Types::JobFlowDetail&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_job_flows({
       #     created_after: Time.now,
       #     created_before: Time.now,
@@ -529,6 +588,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_flows #=> Array
       #   resp.job_flows[0].job_flow_id #=> String
       #   resp.job_flows[0].name #=> String
@@ -594,6 +654,7 @@ module Aws
       #   resp.job_flows[0].service_role #=> String
       #   resp.job_flows[0].auto_scaling_role #=> String
       #   resp.job_flows[0].scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
+      #
       # @overload describe_job_flows(params = {})
       # @param [Hash] params ({})
       def describe_job_flows(params = {}, options = {})
@@ -603,23 +664,28 @@ module Aws
 
       # Provides the details of a security configuration by returning the
       # configuration JSON.
+      #
       # @option params [required, String] :name
       #   The name of the security configuration.
+      #
       # @return [Types::DescribeSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeSecurityConfigurationOutput#name #Name} => String
-      #   * {Types::DescribeSecurityConfigurationOutput#security_configuration #SecurityConfiguration} => String
-      #   * {Types::DescribeSecurityConfigurationOutput#creation_date_time #CreationDateTime} => Time
+      #   * {Types::DescribeSecurityConfigurationOutput#name #name} => String
+      #   * {Types::DescribeSecurityConfigurationOutput#security_configuration #security_configuration} => String
+      #   * {Types::DescribeSecurityConfigurationOutput#creation_date_time #creation_date_time} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_security_configuration({
       #     name: "XmlString", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.name #=> String
       #   resp.security_configuration #=> String
       #   resp.creation_date_time #=> Time
+      #
       # @overload describe_security_configuration(params = {})
       # @param [Hash] params ({})
       def describe_security_configuration(params = {}, options = {})
@@ -628,21 +694,26 @@ module Aws
       end
 
       # Provides more detail about the cluster step.
+      #
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster with steps to describe.
+      #
       # @option params [required, String] :step_id
       #   The identifier of the step to describe.
+      #
       # @return [Types::DescribeStepOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStepOutput#step #Step} => Types::Step
+      #   * {Types::DescribeStepOutput#step #step} => Types::Step
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_step({
       #     cluster_id: "ClusterId", # required
       #     step_id: "StepId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.step.id #=> String
       #   resp.step.name #=> String
       #   resp.step.config.jar #=> String
@@ -661,6 +732,7 @@ module Aws
       #   resp.step.status.timeline.creation_date_time #=> Time
       #   resp.step.status.timeline.start_date_time #=> Time
       #   resp.step.status.timeline.end_date_time #=> Time
+      #
       # @overload describe_step(params = {})
       # @param [Hash] params ({})
       def describe_step(params = {}, options = {})
@@ -670,29 +742,35 @@ module Aws
 
       # Provides information about the bootstrap actions associated with a
       # cluster.
+      #
       # @option params [required, String] :cluster_id
       #   The cluster identifier for the bootstrap actions to list.
+      #
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
       #   retrieve.
+      #
       # @return [Types::ListBootstrapActionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListBootstrapActionsOutput#bootstrap_actions #BootstrapActions} => Array&lt;Types::Command&gt;
-      #   * {Types::ListBootstrapActionsOutput#marker #Marker} => String
+      #   * {Types::ListBootstrapActionsOutput#bootstrap_actions #bootstrap_actions} => Array&lt;Types::Command&gt;
+      #   * {Types::ListBootstrapActionsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_bootstrap_actions({
       #     cluster_id: "ClusterId", # required
       #     marker: "Marker",
       #   })
       #
       # @example Response structure
+      #
       #   resp.bootstrap_actions #=> Array
       #   resp.bootstrap_actions[0].name #=> String
       #   resp.bootstrap_actions[0].script_path #=> String
       #   resp.bootstrap_actions[0].args #=> Array
       #   resp.bootstrap_actions[0].args[0] #=> String
       #   resp.marker #=> String
+      #
       # @overload list_bootstrap_actions(params = {})
       # @param [Hash] params ({})
       def list_bootstrap_actions(params = {}, options = {})
@@ -706,22 +784,28 @@ module Aws
       # This call returns a maximum of 50 clusters per call, but returns a
       # marker to track the paging of the cluster list across multiple
       # ListClusters calls.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :created_after
       #   The creation date and time beginning value filter for listing
       #   clusters.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :created_before
       #   The creation date and time end value filter for listing clusters.
+      #
       # @option params [Array<String>] :cluster_states
       #   The cluster state filters to apply when listing clusters.
+      #
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
       #   retrieve.
+      #
       # @return [Types::ListClustersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListClustersOutput#clusters #Clusters} => Array&lt;Types::ClusterSummary&gt;
-      #   * {Types::ListClustersOutput#marker #Marker} => String
+      #   * {Types::ListClustersOutput#clusters #clusters} => Array&lt;Types::ClusterSummary&gt;
+      #   * {Types::ListClustersOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_clusters({
       #     created_after: Time.now,
       #     created_before: Time.now,
@@ -730,6 +814,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.clusters #=> Array
       #   resp.clusters[0].id #=> String
       #   resp.clusters[0].name #=> String
@@ -741,6 +826,7 @@ module Aws
       #   resp.clusters[0].status.timeline.end_date_time #=> Time
       #   resp.clusters[0].normalized_instance_hours #=> Integer
       #   resp.marker #=> String
+      #
       # @overload list_clusters(params = {})
       # @param [Hash] params ({})
       def list_clusters(params = {}, options = {})
@@ -749,23 +835,28 @@ module Aws
       end
 
       # Provides all available details about the instance groups in a cluster.
+      #
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster for which to list the instance groups.
+      #
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
       #   retrieve.
+      #
       # @return [Types::ListInstanceGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListInstanceGroupsOutput#instance_groups #InstanceGroups} => Array&lt;Types::InstanceGroup&gt;
-      #   * {Types::ListInstanceGroupsOutput#marker #Marker} => String
+      #   * {Types::ListInstanceGroupsOutput#instance_groups #instance_groups} => Array&lt;Types::InstanceGroup&gt;
+      #   * {Types::ListInstanceGroupsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_instance_groups({
       #     cluster_id: "ClusterId", # required
       #     marker: "Marker",
       #   })
       #
       # @example Response structure
+      #
       #   resp.instance_groups #=> Array
       #   resp.instance_groups[0].id #=> String
       #   resp.instance_groups[0].name #=> String
@@ -822,6 +913,7 @@ module Aws
       #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
       #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
       #   resp.marker #=> String
+      #
       # @overload list_instance_groups(params = {})
       # @param [Hash] params ({})
       def list_instance_groups(params = {}, options = {})
@@ -834,24 +926,31 @@ module Aws
       # example, this operation indicates when the EC2 instances reach the
       # Ready state, when instances become available to Amazon EMR to use for
       # jobs, and the IP addresses for cluster instances, etc.
+      #
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster for which to list the instances.
+      #
       # @option params [String] :instance_group_id
       #   The identifier of the instance group for which to list the instances.
+      #
       # @option params [Array<String>] :instance_group_types
       #   The type of instance group for which to list the instances.
+      #
       # @option params [Array<String>] :instance_states
       #   A list of instance states that will filter the instances returned with
       #   this request.
+      #
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
       #   retrieve.
+      #
       # @return [Types::ListInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListInstancesOutput#instances #Instances} => Array&lt;Types::Instance&gt;
-      #   * {Types::ListInstancesOutput#marker #Marker} => String
+      #   * {Types::ListInstancesOutput#instances #instances} => Array&lt;Types::Instance&gt;
+      #   * {Types::ListInstancesOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_instances({
       #     cluster_id: "ClusterId", # required
       #     instance_group_id: "InstanceGroupId",
@@ -861,6 +960,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instances #=> Array
       #   resp.instances[0].id #=> String
       #   resp.instances[0].ec2_instance_id #=> String
@@ -879,6 +979,7 @@ module Aws
       #   resp.instances[0].ebs_volumes[0].device #=> String
       #   resp.instances[0].ebs_volumes[0].volume_id #=> String
       #   resp.marker #=> String
+      #
       # @overload list_instances(params = {})
       # @param [Hash] params ({})
       def list_instances(params = {}, options = {})
@@ -891,23 +992,28 @@ module Aws
       # returns a maximum of 50 clusters per call, but returns a marker to
       # track the paging of the cluster list across multiple
       # ListSecurityConfigurations calls.
+      #
       # @option params [String] :marker
       #   The pagination token that indicates the set of results to retrieve.
+      #
       # @return [Types::ListSecurityConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListSecurityConfigurationsOutput#security_configurations #SecurityConfigurations} => Array&lt;Types::SecurityConfigurationSummary&gt;
-      #   * {Types::ListSecurityConfigurationsOutput#marker #Marker} => String
+      #   * {Types::ListSecurityConfigurationsOutput#security_configurations #security_configurations} => Array&lt;Types::SecurityConfigurationSummary&gt;
+      #   * {Types::ListSecurityConfigurationsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_security_configurations({
       #     marker: "Marker",
       #   })
       #
       # @example Response structure
+      #
       #   resp.security_configurations #=> Array
       #   resp.security_configurations[0].name #=> String
       #   resp.security_configurations[0].creation_date_time #=> Time
       #   resp.marker #=> String
+      #
       # @overload list_security_configurations(params = {})
       # @param [Hash] params ({})
       def list_security_configurations(params = {}, options = {})
@@ -917,22 +1023,28 @@ module Aws
 
       # Provides a list of steps for the cluster in reverse order unless you
       # specify stepIds with the request.
+      #
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster for which to list the steps.
+      #
       # @option params [Array<String>] :step_states
       #   The filter to limit the step list based on certain states.
+      #
       # @option params [Array<String>] :step_ids
       #   The filter to limit the step list based on the identifier of the
       #   steps.
+      #
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
       #   retrieve.
+      #
       # @return [Types::ListStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListStepsOutput#steps #Steps} => Array&lt;Types::StepSummary&gt;
-      #   * {Types::ListStepsOutput#marker #Marker} => String
+      #   * {Types::ListStepsOutput#steps #steps} => Array&lt;Types::StepSummary&gt;
+      #   * {Types::ListStepsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_steps({
       #     cluster_id: "ClusterId", # required
       #     step_states: ["PENDING"], # accepts PENDING, CANCEL_PENDING, RUNNING, COMPLETED, CANCELLED, FAILED, INTERRUPTED
@@ -941,6 +1053,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.steps #=> Array
       #   resp.steps[0].id #=> String
       #   resp.steps[0].name #=> String
@@ -961,6 +1074,7 @@ module Aws
       #   resp.steps[0].status.timeline.start_date_time #=> Time
       #   resp.steps[0].status.timeline.end_date_time #=> Time
       #   resp.marker #=> String
+      #
       # @overload list_steps(params = {})
       # @param [Hash] params ({})
       def list_steps(params = {}, options = {})
@@ -972,13 +1086,17 @@ module Aws
       # settings of an instance group. The input parameters include the new
       # target instance count for the group and the instance group ID. The
       # call will either succeed or fail atomically.
+      #
       # @option params [String] :cluster_id
       #   The ID of the cluster to which the instance group belongs.
+      #
       # @option params [Array<Types::InstanceGroupModifyConfig>] :instance_groups
       #   Instance groups to change.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.modify_instance_groups({
       #     cluster_id: "ClusterId",
       #     instance_groups: [
@@ -997,6 +1115,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload modify_instance_groups(params = {})
       # @param [Hash] params ({})
       def modify_instance_groups(params = {}, options = {})
@@ -1009,21 +1128,26 @@ module Aws
       # scaling policy defines how an instance group dynamically adds and
       # terminates EC2 instances in response to the value of a CloudWatch
       # metric.
+      #
       # @option params [required, String] :cluster_id
       #   Specifies the ID of a cluster. The instance group to which the
       #   automatic scaling policy is applied is within this cluster.
+      #
       # @option params [required, String] :instance_group_id
       #   Specifies the ID of the instance group to which the automatic scaling
       #   policy is applied.
+      #
       # @option params [required, Types::AutoScalingPolicy] :auto_scaling_policy
       #   Specifies the definition of the automatic scaling policy.
+      #
       # @return [Types::PutAutoScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutAutoScalingPolicyOutput#cluster_id #ClusterId} => String
-      #   * {Types::PutAutoScalingPolicyOutput#instance_group_id #InstanceGroupId} => String
-      #   * {Types::PutAutoScalingPolicyOutput#auto_scaling_policy #AutoScalingPolicy} => Types::AutoScalingPolicyDescription
+      #   * {Types::PutAutoScalingPolicyOutput#cluster_id #cluster_id} => String
+      #   * {Types::PutAutoScalingPolicyOutput#instance_group_id #instance_group_id} => String
+      #   * {Types::PutAutoScalingPolicyOutput#auto_scaling_policy #auto_scaling_policy} => Types::AutoScalingPolicyDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_auto_scaling_policy({
       #     cluster_id: "ClusterId", # required
       #     instance_group_id: "InstanceGroupId", # required
@@ -1068,6 +1192,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.cluster_id #=> String
       #   resp.instance_group_id #=> String
       #   resp.auto_scaling_policy.status.state #=> String, one of "PENDING", "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "FAILED"
@@ -1093,6 +1218,7 @@ module Aws
       #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions #=> Array
       #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
       #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
+      #
       # @overload put_auto_scaling_policy(params = {})
       # @param [Hash] params ({})
       def put_auto_scaling_policy(params = {}, options = {})
@@ -1102,19 +1228,24 @@ module Aws
 
       # Removes an automatic scaling policy from a specified instance group
       # within an EMR cluster.
+      #
       # @option params [required, String] :cluster_id
       #   Specifies the ID of a cluster. The instance group to which the
       #   automatic scaling policy is applied is within this cluster.
+      #
       # @option params [required, String] :instance_group_id
       #   Specifies the ID of the instance group to which the scaling policy is
       #   applied.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_auto_scaling_policy({
       #     cluster_id: "ClusterId", # required
       #     instance_group_id: "InstanceGroupId", # required
       #   })
+      #
       # @overload remove_auto_scaling_policy(params = {})
       # @param [Hash] params ({})
       def remove_auto_scaling_policy(params = {}, options = {})
@@ -1133,18 +1264,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
+      #
       # @option params [required, String] :resource_id
       #   The Amazon EMR resource identifier from which tags will be removed.
       #   This value must be a cluster identifier.
+      #
       # @option params [required, Array<String>] :tag_keys
       #   A list of tag keys to remove from a resource.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags({
       #     resource_id: "ResourceId", # required
       #     tag_keys: ["String"], # required
       #   })
+      #
       # @overload remove_tags(params = {})
       # @param [Hash] params ({})
       def remove_tags(params = {}, options = {})
@@ -1182,13 +1318,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/Management/Guide/AddMoreThan256Steps.html
+      #
       # @option params [required, String] :name
       #   The name of the job flow.
+      #
       # @option params [String] :log_uri
       #   The location in Amazon S3 to write the log files of the job flow. If a
       #   value is not provided, logs are not created.
+      #
       # @option params [String] :additional_info
       #   A JSON string for selecting additional features.
+      #
       # @option params [String] :ami_version
       #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
       #   greater, use ReleaseLabel.
@@ -1222,6 +1362,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported
+      #
       # @option params [String] :release_label
       #   <note markdown="1"> Amazon EMR releases 4.x or later.
       #
@@ -1229,14 +1370,18 @@ module Aws
       #
       #   The release label for the Amazon EMR release. For Amazon EMR 3.x and
       #   2.x AMIs, use amiVersion instead instead of ReleaseLabel.
+      #
       # @option params [required, Types::JobFlowInstancesConfig] :instances
       #   A specification of the number and type of Amazon EC2 instances on
       #   which to run the job flow.
+      #
       # @option params [Array<Types::StepConfig>] :steps
       #   A list of steps to be executed by the job flow.
+      #
       # @option params [Array<Types::BootstrapActionConfig>] :bootstrap_actions
       #   A list of bootstrap actions that will be run before Hadoop is started
       #   on the cluster nodes.
+      #
       # @option params [Array<String>] :supported_products
       #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
       #   greater, use Applications.
@@ -1254,6 +1399,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html
+      #
       # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
       #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
       #   greater, use Applications.
@@ -1290,6 +1436,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html
+      #
       # @option params [Array<Types::Application>] :applications
       #   <note markdown="1"> Amazon EMR releases 4.x or later.
       #
@@ -1298,6 +1445,7 @@ module Aws
       #   A list of applications for the cluster. Valid values are: "Hadoop",
       #   "Hive", "Mahout", "Pig", and "Spark." They are case
       #   insensitive.
+      #
       # @option params [Array<Types::Configuration>] :configurations
       #   <note markdown="1"> Amazon EMR releases 4.x or later.
       #
@@ -1305,30 +1453,37 @@ module Aws
       #
       #   The list of configurations supplied for the EMR cluster you are
       #   creating.
+      #
       # @option params [Boolean] :visible_to_all_users
       #   Whether the job flow is visible to all IAM users of the AWS account
       #   associated with the job flow. If this value is set to `true`, all IAM
       #   users of that AWS account can view and (if they have the proper policy
       #   permissions set) manage the job flow. If it is set to `false`, only
       #   the IAM user that created the job flow can view and manage it.
+      #
       # @option params [String] :job_flow_role
       #   Also called instance profile and EC2 role. An IAM role for an EMR
       #   cluster. The EC2 instances of the cluster assume this role. The
       #   default role is `EMR_EC2_DefaultRole`. In order to use the default
       #   role, you must have already created it using the CLI or console.
+      #
       # @option params [String] :service_role
       #   The IAM role that will be assumed by the Amazon EMR service to access
       #   AWS resources on your behalf.
+      #
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags to associate with a cluster and propagate to Amazon EC2
       #   instances.
+      #
       # @option params [String] :security_configuration
       #   The name of a security configuration to apply to the cluster.
+      #
       # @option params [String] :auto_scaling_role
       #   An IAM role for automatic scaling policies. The default role is
       #   `EMR_AutoScaling_DefaultRole`. The IAM role provides permissions that
       #   the automatic scaling feature requires to launch and terminate EC2
       #   instances in an instance group.
+      #
       # @option params [String] :scale_down_behavior
       #   Specifies the way that individual Amazon EC2 instances terminate when
       #   an automatic scale-in activity occurs or an instance group is resized.
@@ -1344,11 +1499,13 @@ module Aws
       #   corruption. `TERMINATE_AT_TASK_COMPLETION` available only in Amazon
       #   EMR version 4.1.0 and later, and is the default for versions of Amazon
       #   EMR earlier than 5.1.0.
+      #
       # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RunJobFlowOutput#job_flow_id #JobFlowId} => String
+      #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.run_job_flow({
       #     name: "XmlStringMaxLen256", # required
       #     log_uri: "XmlString",
@@ -1514,7 +1671,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_flow_id #=> String
+      #
       # @overload run_job_flow(params = {})
       # @param [Hash] params ({})
       def run_job_flow(params = {}, options = {})
@@ -1546,21 +1705,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html
+      #
       # @option params [required, Array<String>] :job_flow_ids
       #   A list of strings that uniquely identify the job flows to protect.
       #   This identifier is returned by RunJobFlow and can also be obtained
       #   from DescribeJobFlows .
+      #
       # @option params [required, Boolean] :termination_protected
       #   A Boolean that indicates whether to protect the job flow and prevent
       #   the Amazon EC2 instances in the cluster from shutting down due to API
       #   calls, user intervention, or job-flow error.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_termination_protection({
       #     job_flow_ids: ["XmlString"], # required
       #     termination_protected: false, # required
       #   })
+      #
       # @overload set_termination_protection(params = {})
       # @param [Hash] params ({})
       def set_termination_protection(params = {}, options = {})
@@ -1574,8 +1738,10 @@ module Aws
       # you launch it using the `VisibleToAllUsers` parameter of RunJobFlow.
       # The SetVisibleToAllUsers action can be called only by an IAM user who
       # created the job flow or the AWS account that owns the job flow.
+      #
       # @option params [required, Array<String>] :job_flow_ids
       #   Identifiers of the job flows to receive the new visibility setting.
+      #
       # @option params [required, Boolean] :visible_to_all_users
       #   Whether the specified job flows are visible to all IAM users of the
       #   AWS account associated with the job flow. If this value is set to
@@ -1583,13 +1749,16 @@ module Aws
       #   proper IAM policy permissions set, manage the job flows. If it is set
       #   to False, only the IAM user that created a job flow can view and
       #   manage it.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_visible_to_all_users({
       #     job_flow_ids: ["XmlString"], # required
       #     visible_to_all_users: false, # required
       #   })
+      #
       # @overload set_visible_to_all_users(params = {})
       # @param [Hash] params ({})
       def set_visible_to_all_users(params = {}, options = {})
@@ -1608,14 +1777,18 @@ module Aws
       # the job flow, it may take up to 1-5 minutes for the job flow to
       # completely terminate and release allocated resources, such as Amazon
       # EC2 instances.
+      #
       # @option params [required, Array<String>] :job_flow_ids
       #   A list of job flows to be shutdown.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.terminate_job_flows({
       #     job_flow_ids: ["XmlString"], # required
       #   })
+      #
       # @overload terminate_job_flows(params = {})
       # @param [Hash] params ({})
       def terminate_job_flows(params = {}, options = {})

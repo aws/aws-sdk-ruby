@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -157,13 +172,16 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+      #
       # @option params [required, String] :application_name
       #   Name of your existing Amazon Kinesis Analytics application to which
       #   you want to add the streaming source.
+      #
       # @option params [required, Integer] :current_application_version_id
       #   Current version of your Amazon Kinesis Analytics application. You can
       #   use the DescribeApplication operation to find the current application
       #   version.
+      #
       # @option params [required, Types::Input] :input
       #   When you configure the application input, you specify the streaming
       #   source, the in-application stream name that is created, and the
@@ -173,9 +191,11 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_application_input({
       #     application_name: "ApplicationName", # required
       #     current_application_version_id: 1, # required
@@ -216,6 +236,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload add_application_input(params = {})
       # @param [Hash] params ({})
       def add_application_input(params = {}, options = {})
@@ -254,23 +275,28 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
       # [2]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
+      #
       # @option params [required, String] :application_name
       #   Name of the application to which you want to add the output
       #   configuration.
+      #
       # @option params [required, Integer] :current_application_version_id
       #   Version of the application to which you want add the output
       #   configuration. You can use the DescribeApplication operation to get
       #   the current application version. If the version specified is not the
       #   current version, the `ConcurrentModificationException` is returned.
+      #
       # @option params [required, Types::Output] :output
       #   An array of objects, each describing one output configuration. In the
       #   output configuration, you specify the name of an in-application
       #   stream, a destination (that is, an Amazon Kinesis stream or an Amazon
       #   Kinesis Firehose delivery stream), and record the formation to use
       #   when writing to the destination.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_application_output({
       #     application_name: "ApplicationName", # required
       #     current_application_version_id: 1, # required
@@ -289,6 +315,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload add_application_output(params = {})
       # @param [Hash] params ({})
       def add_application_output(params = {}, options = {})
@@ -316,13 +343,16 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
       # [2]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
+      #
       # @option params [required, String] :application_name
       #   Name of an existing application.
+      #
       # @option params [required, Integer] :current_application_version_id
       #   Version of the application for which you are adding the reference data
       #   source. You can use the DescribeApplication operation to get the
       #   current application version. If the version specified is not the
       #   current version, the `ConcurrentModificationException` is returned.
+      #
       # @option params [required, Types::ReferenceDataSource] :reference_data_source
       #   The reference data source can be an object in your Amazon S3 bucket.
       #   Amazon Kinesis Analytics reads the object and copies the data into the
@@ -331,9 +361,11 @@ module Aws
       #   must also provide an IAM role with the necessary permissions that
       #   Amazon Kinesis Analytics can assume to read the object from your S3
       #   bucket on your behalf.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_application_reference_data_source({
       #     application_name: "ApplicationName", # required
       #     current_application_version_id: 1, # required
@@ -368,6 +400,7 @@ module Aws
       #       },
       #     },
       #   })
+      #
       # @overload add_application_reference_data_source(params = {})
       # @param [Hash] params ({})
       def add_application_reference_data_source(params = {}, options = {})
@@ -409,11 +442,14 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html
       # [2]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html
+      #
       # @option params [required, String] :application_name
       #   Name of your Amazon Kinesis Analytics application (for example,
       #   `sample-app`).
+      #
       # @option params [String] :application_description
       #   Summary description of the application.
+      #
       # @option params [Array<Types::Input>] :inputs
       #   Use this parameter to configure the application input.
       #
@@ -432,6 +468,7 @@ module Aws
       #   transform your data into a schematized version used in SQL. In the
       #   schema, you provide the necessary mapping of the data elements in the
       #   streaming source to record columns in the in-app stream.
+      #
       # @option params [Array<Types::Output>] :outputs
       #   You can configure application output to write data from any of the
       #   in-application streams to up to five destinations.
@@ -449,6 +486,7 @@ module Aws
       #   Resource Name (ARN) and the format of data in the stream (for example,
       #   JSON, CSV). You also must provide an IAM role that Amazon Kinesis
       #   Analytics can assume to write to this stream on your behalf.
+      #
       # @option params [String] :application_code
       #   One or more SQL statements that read input data, transform it, and
       #   generate output. For example, you can write a SQL statement that reads
@@ -463,11 +501,13 @@ module Aws
       #   output streams named `ExampleOutputStream1` and
       #   `ExampleOutputStream2`, then your application code must create these
       #   streams.
+      #
       # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateApplicationResponse#application_summary #ApplicationSummary} => Types::ApplicationSummary
+      #   * {Types::CreateApplicationResponse#application_summary #application_summary} => Types::ApplicationSummary
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_application({
       #     application_name: "ApplicationName", # required
       #     application_description: "ApplicationDescription",
@@ -529,9 +569,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_summary.application_name #=> String
       #   resp.application_summary.application_arn #=> String
       #   resp.application_summary.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
+      #
       # @overload create_application(params = {})
       # @param [Hash] params ({})
       def create_application(params = {}, options = {})
@@ -546,17 +588,22 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `kinesisanalytics:DeleteApplication` action.
+      #
       # @option params [required, String] :application_name
       #   Name of the Amazon Kinesis Analytics application to delete.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :create_timestamp
       #   You can use the `DescribeApplication` operation to get this value.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_application({
       #     application_name: "ApplicationName", # required
       #     create_timestamp: Time.now, # required
       #   })
+      #
       # @overload delete_application(params = {})
       # @param [Hash] params ({})
       def delete_application(params = {}, options = {})
@@ -571,13 +618,16 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `kinesisanalytics:DeleteApplicationOutput` action.
+      #
       # @option params [required, String] :application_name
       #   Amazon Kinesis Analytics application name.
+      #
       # @option params [required, Integer] :current_application_version_id
       #   Amazon Kinesis Analytics application version. You can use the
       #   DescribeApplication operation to get the current application version.
       #   If the version specified is not the current version, the
       #   `ConcurrentModificationException` is returned.
+      #
       # @option params [required, String] :output_id
       #   The ID of the configuration to delete. Each output configuration that
       #   is added to the application, either when the application is created or
@@ -585,14 +635,17 @@ module Aws
       #   need to provide the ID to uniquely identify the output configuration
       #   that you want to delete from the application configuration. You can
       #   use the DescribeApplication operation to get the specific `OutputId`.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_application_output({
       #     application_name: "ApplicationName", # required
       #     current_application_version_id: 1, # required
       #     output_id: "Id", # required
       #   })
+      #
       # @overload delete_application_output(params = {})
       # @param [Hash] params ({})
       def delete_application_output(params = {}, options = {})
@@ -609,26 +662,32 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `kinesisanalytics.DeleteApplicationReferenceDataSource` action.
+      #
       # @option params [required, String] :application_name
       #   Name of an existing application.
+      #
       # @option params [required, Integer] :current_application_version_id
       #   Version of the application. You can use the DescribeApplication
       #   operation to get the current application version. If the version
       #   specified is not the current version, the
       #   `ConcurrentModificationException` is returned.
+      #
       # @option params [required, String] :reference_id
       #   ID of the reference data source. When you add a reference data source
       #   to your application using the AddApplicationReferenceDataSource,
       #   Amazon Kinesis Analytics assigns an ID. You can use the
       #   DescribeApplication operation to get the reference ID.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_application_reference_data_source({
       #     application_name: "ApplicationName", # required
       #     current_application_version_id: 1, # required
       #     reference_id: "Id", # required
       #   })
+      #
       # @overload delete_application_reference_data_source(params = {})
       # @param [Hash] params ({})
       def delete_application_reference_data_source(params = {}, options = {})
@@ -646,18 +705,22 @@ module Aws
       # `kinesisanalytics:DescribeApplication` action. You can use
       # `DescribeApplication` to get the current application versionId, which
       # you need to call other operations such as `Update`.
+      #
       # @option params [required, String] :application_name
       #   Name of the application.
+      #
       # @return [Types::DescribeApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeApplicationResponse#application_detail #ApplicationDetail} => Types::ApplicationDetail
+      #   * {Types::DescribeApplicationResponse#application_detail #application_detail} => Types::ApplicationDetail
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_application({
       #     application_name: "ApplicationName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_detail.application_name #=> String
       #   resp.application_detail.application_description #=> String
       #   resp.application_detail.application_arn #=> String
@@ -709,6 +772,7 @@ module Aws
       #   resp.application_detail.reference_data_source_descriptions[0].reference_schema.record_columns[0].sql_type #=> String
       #   resp.application_detail.application_code #=> String
       #   resp.application_detail.application_version_id #=> Integer
+      #
       # @overload describe_application(params = {})
       # @param [Hash] params ({})
       def describe_application(params = {}, options = {})
@@ -734,21 +798,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
+      #
       # @option params [required, String] :resource_arn
       #   Amazon Resource Name (ARN) of the streaming source.
+      #
       # @option params [required, String] :role_arn
       #   ARN of the IAM role that Amazon Kinesis Analytics can assume to access
       #   the stream on your behalf.
+      #
       # @option params [required, Types::InputStartingPositionConfiguration] :input_starting_position_configuration
       #   Point at which you want Amazon Kinesis Analytics to start reading
       #   records from the specified streaming source discovery purposes.
+      #
       # @return [Types::DiscoverInputSchemaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DiscoverInputSchemaResponse#input_schema #InputSchema} => Types::SourceSchema
-      #   * {Types::DiscoverInputSchemaResponse#parsed_input_records #ParsedInputRecords} => Array&lt;Array&lt;String&gt;&gt;
-      #   * {Types::DiscoverInputSchemaResponse#raw_input_records #RawInputRecords} => Array&lt;String&gt;
+      #   * {Types::DiscoverInputSchemaResponse#input_schema #input_schema} => Types::SourceSchema
+      #   * {Types::DiscoverInputSchemaResponse#parsed_input_records #parsed_input_records} => Array&lt;Array&lt;String&gt;&gt;
+      #   * {Types::DiscoverInputSchemaResponse#raw_input_records #raw_input_records} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.discover_input_schema({
       #     resource_arn: "ResourceARN", # required
       #     role_arn: "RoleARN", # required
@@ -758,6 +827,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.input_schema.record_format.record_format_type #=> String, one of "JSON", "CSV"
       #   resp.input_schema.record_format.mapping_parameters.json_mapping_parameters.record_row_path #=> String
       #   resp.input_schema.record_format.mapping_parameters.csv_mapping_parameters.record_row_delimiter #=> String
@@ -772,6 +842,7 @@ module Aws
       #   resp.parsed_input_records[0][0] #=> String
       #   resp.raw_input_records #=> Array
       #   resp.raw_input_records[0] #=> String
+      #
       # @overload discover_input_schema(params = {})
       # @param [Hash] params ({})
       def discover_input_schema(params = {}, options = {})
@@ -792,31 +863,37 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `kinesisanalytics:ListApplications` action.
+      #
       # @option params [Integer] :limit
       #   Maximum number of applications to list.
+      #
       # @option params [String] :exclusive_start_application_name
       #   Name of the application to start the list with. When using pagination
       #   to retrieve the list, you don't need to specify this parameter in the
       #   first request. However, in subsequent requests, you add the last
       #   application name from the previous response to get the next page of
       #   applications.
+      #
       # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListApplicationsResponse#application_summaries #ApplicationSummaries} => Array&lt;Types::ApplicationSummary&gt;
-      #   * {Types::ListApplicationsResponse#has_more_applications #HasMoreApplications} => Boolean
+      #   * {Types::ListApplicationsResponse#application_summaries #application_summaries} => Array&lt;Types::ApplicationSummary&gt;
+      #   * {Types::ListApplicationsResponse#has_more_applications #has_more_applications} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_applications({
       #     limit: 1,
       #     exclusive_start_application_name: "ApplicationName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.application_summaries #=> Array
       #   resp.application_summaries[0].application_name #=> String
       #   resp.application_summaries[0].application_arn #=> String
       #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
       #   resp.has_more_applications #=> Boolean
+      #
       # @overload list_applications(params = {})
       # @param [Hash] params ({})
       def list_applications(params = {}, options = {})
@@ -840,16 +917,20 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `kinesisanalytics:StartApplication` action.
+      #
       # @option params [required, String] :application_name
       #   Name of the application.
+      #
       # @option params [required, Array<Types::InputConfiguration>] :input_configurations
       #   Identifies the specific input, by ID, that the application starts
       #   consuming. Amazon Kinesis Analytics starts reading the streaming
       #   source associated with the input. You can also specify where in the
       #   streaming source you want Amazon Kinesis Analytics to start reading.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_application({
       #     application_name: "ApplicationName", # required
       #     input_configurations: [ # required
@@ -861,6 +942,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload start_application(params = {})
       # @param [Hash] params ({})
       def start_application(params = {}, options = {})
@@ -877,14 +959,18 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `kinesisanalytics:StopApplication` action.
+      #
       # @option params [required, String] :application_name
       #   Name of the running application to stop.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_application({
       #     application_name: "ApplicationName", # required
       #   })
+      #
       # @overload stop_application(params = {})
       # @param [Hash] params ({})
       def stop_application(params = {}, options = {})
@@ -901,16 +987,21 @@ module Aws
       #
       # This opeation requires permission for the
       # `kinesisanalytics:UpdateApplication` action.
+      #
       # @option params [required, String] :application_name
       #   Name of the Kinesis Analytics application to update.
+      #
       # @option params [required, Integer] :current_application_version_id
       #   The current application version ID. You can use the
       #   DescribeApplication operation to get this value.
+      #
       # @option params [required, Types::ApplicationUpdate] :application_update
       #   Describes application updates.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_application({
       #     application_name: "ApplicationName", # required
       #     current_application_version_id: 1, # required
@@ -1007,6 +1098,7 @@ module Aws
       #       ],
       #     },
       #   })
+      #
       # @overload update_application(params = {})
       # @param [Hash] params ({})
       def update_application(params = {}, options = {})

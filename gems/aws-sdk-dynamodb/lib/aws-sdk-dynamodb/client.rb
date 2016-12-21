@@ -82,6 +82,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -93,43 +94,56 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :compute_checksums (true)
       #   When `true`, a CRC32 checksum is computed of every HTTP
       #   response body and compared against the `X-Amz-Crc32` header.
       #   If the checksums do not match, the request is re-sent.
       #   Failures can be retried up to `:retry_limit` times.
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [Integer] :retry_limit (10)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_attributes (true)
       #   Enables working with DynamoDB attribute values using
       #   hashes, arrays, sets, integers, floats, booleans, and nil.
@@ -137,6 +151,7 @@ module Aws
       #   Disabling this option requires that all attribute values have
       #   their types specified, e.g. `{ s: 'abc' }` instead of simply
       #   `'abc'`.
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -146,6 +161,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -154,9 +170,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -225,6 +243,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
       # [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations
+      #
       # @option params [required, Hash<String,Types::KeysAndAttributes>] :request_items
       #   A map of one or more table names and, for each table, a map that
       #   describes one or more items to retrieve from that table. Each table
@@ -327,6 +346,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -343,13 +363,15 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @return [Types::BatchGetItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::BatchGetItemOutput#responses #Responses} => Hash&lt;String,Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;&gt;
-      #   * {Types::BatchGetItemOutput#unprocessed_keys #UnprocessedKeys} => Hash&lt;String,Types::KeysAndAttributes&gt;
-      #   * {Types::BatchGetItemOutput#consumed_capacity #ConsumedCapacity} => Array&lt;Types::ConsumedCapacity&gt;
+      #   * {Types::BatchGetItemOutput#responses #responses} => Hash&lt;String,Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;&gt;
+      #   * {Types::BatchGetItemOutput#unprocessed_keys #unprocessed_keys} => Hash&lt;String,Types::KeysAndAttributes&gt;
+      #   * {Types::BatchGetItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_get_item({
       #     request_items: { # required
       #       "TableName" => {
@@ -370,6 +392,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.responses #=> Hash
       #   resp.responses["TableName"] #=> Array
       #   resp.responses["TableName"][0] #=> Hash
@@ -392,6 +415,7 @@ module Aws
       #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
       #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+      #
       # @overload batch_get_item(params = {})
       # @param [Hash] params ({})
       def batch_get_item(params = {}, options = {})
@@ -481,6 +505,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations
+      #
       # @option params [required, Hash<String,Array>] :request_items
       #   A map of one or more table names and, for each table, a list of
       #   operations to be performed (*DeleteRequest* or *PutRequest*). Each
@@ -512,6 +537,7 @@ module Aws
       #       If you specify any attributes that are part of an index key, then
       #       the data types for those attributes must match those of the schema
       #       in the table's attribute definition.
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -528,18 +554,21 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [String] :return_item_collection_metrics
       #   Determines whether item collection metrics are returned. If set to
       #   `SIZE`, the response includes statistics about item collections, if
       #   any, that were modified during the operation are returned in the
       #   response. If set to `NONE` (the default), no statistics are returned.
+      #
       # @return [Types::BatchWriteItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::BatchWriteItemOutput#unprocessed_items #UnprocessedItems} => Hash&lt;String,Array&lt;Types::WriteRequest&gt;&gt;
-      #   * {Types::BatchWriteItemOutput#item_collection_metrics #ItemCollectionMetrics} => Hash&lt;String,Array&lt;Types::ItemCollectionMetrics&gt;&gt;
-      #   * {Types::BatchWriteItemOutput#consumed_capacity #ConsumedCapacity} => Array&lt;Types::ConsumedCapacity&gt;
+      #   * {Types::BatchWriteItemOutput#unprocessed_items #unprocessed_items} => Hash&lt;String,Array&lt;Types::WriteRequest&gt;&gt;
+      #   * {Types::BatchWriteItemOutput#item_collection_metrics #item_collection_metrics} => Hash&lt;String,Array&lt;Types::ItemCollectionMetrics&gt;&gt;
+      #   * {Types::BatchWriteItemOutput#consumed_capacity #consumed_capacity} => Array&lt;Types::ConsumedCapacity&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_write_item({
       #     request_items: { # required
       #       "TableName" => [
@@ -562,6 +591,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.unprocessed_items #=> Hash
       #   resp.unprocessed_items["TableName"] #=> Array
       #   resp.unprocessed_items["TableName"][0].put_request.item #=> Hash
@@ -582,6 +612,7 @@ module Aws
       #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
       #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+      #
       # @overload batch_write_item(params = {})
       # @param [Hash] params ({})
       def batch_write_item(params = {}, options = {})
@@ -607,11 +638,14 @@ module Aws
       # `CREATING` state at any given time.
       #
       # You can use the *DescribeTable* API to check the table status.
+      #
       # @option params [required, Array<Types::AttributeDefinition>] :attribute_definitions
       #   An array of attributes that describe the key schema for the table and
       #   indexes.
+      #
       # @option params [required, String] :table_name
       #   The name of the table to create.
+      #
       # @option params [required, Array<Types::KeySchemaElement>] :key_schema
       #   Specifies the attributes that make up the primary key for a table or
       #   an index. The attributes in *KeySchema* must also be defined in the
@@ -655,6 +689,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key
+      #
       # @option params [Array<Types::LocalSecondaryIndex>] :local_secondary_indexes
       #   One or more local secondary indexes (the maximum is five) to be
       #   created on the table. Each index is scoped to a given partition key
@@ -695,6 +730,7 @@ module Aws
       #       the secondary indexes, must not exceed 20. If you project the same
       #       attribute into two different indexes, this counts as two distinct
       #       attributes when determining the total.
+      #
       # @option params [Array<Types::GlobalSecondaryIndex>] :global_secondary_indexes
       #   One or more global secondary indexes (the maximum is five) to be
       #   created on the table. Each global secondary index in the array
@@ -735,6 +771,7 @@ module Aws
       #   * *ProvisionedThroughput* - The provisioned throughput settings for
       #     the global secondary index, consisting of read and write capacity
       #     units.
+      #
       # @option params [required, Types::ProvisionedThroughput] :provisioned_throughput
       #   Represents the provisioned throughput settings for a specified table
       #   or index. The settings can be modified using the *UpdateTable*
@@ -746,6 +783,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+      #
       # @option params [Types::StreamSpecification] :stream_specification
       #   The settings for DynamoDB Streams on the table. These settings consist
       #   of:
@@ -768,11 +806,13 @@ module Aws
       #
       #     * *NEW\_AND\_OLD\_IMAGES* - Both the new and the old item images of
       #       the item are written to the stream.
+      #
       # @return [Types::CreateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateTableOutput#table_description #TableDescription} => Types::TableDescription
+      #   * {Types::CreateTableOutput#table_description #table_description} => Types::TableDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_table({
       #     attribute_definitions: [ # required
       #       {
@@ -832,6 +872,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.table_description.attribute_definitions #=> Array
       #   resp.table_description.attribute_definitions[0].attribute_name #=> String
       #   resp.table_description.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
@@ -882,6 +923,7 @@ module Aws
       #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table_description.latest_stream_label #=> String
       #   resp.table_description.latest_stream_arn #=> String
+      #
       # @overload create_table(params = {})
       # @param [Hash] params ({})
       def create_table(params = {}, options = {})
@@ -904,8 +946,10 @@ module Aws
       # Conditional deletes are useful for deleting items only if specific
       # conditions are met. If those conditions are met, DynamoDB performs the
       # delete. Otherwise, the item is not deleted.
+      #
       # @option params [required, String] :table_name
       #   The name of the table from which to delete the item.
+      #
       # @option params [required, Hash<String,Types::AttributeValue>] :key
       #   A map of attribute names to *AttributeValue* objects, representing the
       #   primary key of the item to delete.
@@ -914,6 +958,7 @@ module Aws
       #   example, with a simple primary key, you only need to provide a value
       #   for the partition key. For a composite primary key, you must provide
       #   values for both the partition key and the sort key.
+      #
       # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
@@ -1160,6 +1205,7 @@ module Aws
       #
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+      #
       # @option params [String] :conditional_operator
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
@@ -1181,6 +1227,7 @@ module Aws
       #   <note markdown="1"> This parameter does not support attributes of type List or Map.
       #
       #    </note>
+      #
       # @option params [String] :return_values
       #   Use *ReturnValues* if you want to get the item attributes as they
       #   appeared before they were deleted. For *DeleteItem*, the valid values
@@ -1197,6 +1244,7 @@ module Aws
       #   or `ALL_OLD`.
       #
       #    </note>
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -1213,11 +1261,13 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [String] :return_item_collection_metrics
       #   Determines whether item collection metrics are returned. If set to
       #   `SIZE`, the response includes statistics about item collections, if
       #   any, that were modified during the operation are returned in the
       #   response. If set to `NONE` (the default), no statistics are returned.
+      #
       # @option params [String] :condition_expression
       #   A condition that must be satisfied in order for a conditional
       #   *DeleteItem* to succeed.
@@ -1245,6 +1295,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @option params [Hash<String,String>] :expression_attribute_names
       #   One or more substitution tokens for attribute names in an expression.
       #   The following are some use cases for using
@@ -1295,6 +1346,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
       #   One or more values that can be substituted in an expression.
       #
@@ -1320,13 +1372,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @return [Types::DeleteItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteItemOutput#attributes #Attributes} => Hash&lt;String,Types::AttributeValue&gt;
-      #   * {Types::DeleteItemOutput#consumed_capacity #ConsumedCapacity} => Types::ConsumedCapacity
-      #   * {Types::DeleteItemOutput#item_collection_metrics #ItemCollectionMetrics} => Types::ItemCollectionMetrics
+      #   * {Types::DeleteItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
+      #   * {Types::DeleteItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+      #   * {Types::DeleteItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_item({
       #     table_name: "TableName", # required
       #     key: { # required
@@ -1354,6 +1408,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.attributes #=> Hash
       #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.consumed_capacity.table_name #=> String
@@ -1367,6 +1422,7 @@ module Aws
       #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
       #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+      #
       # @overload delete_item(params = {})
       # @param [Hash] params ({})
       def delete_item(params = {}, options = {})
@@ -1396,18 +1452,22 @@ module Aws
       # the stream is automatically deleted after 24 hours.
       #
       # Use the *DescribeTable* API to check the status of the table.
+      #
       # @option params [required, String] :table_name
       #   The name of the table to delete.
+      #
       # @return [Types::DeleteTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteTableOutput#table_description #TableDescription} => Types::TableDescription
+      #   * {Types::DeleteTableOutput#table_description #table_description} => Types::TableDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_table({
       #     table_name: "TableName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.table_description.attribute_definitions #=> Array
       #   resp.table_description.attribute_definitions[0].attribute_name #=> String
       #   resp.table_description.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
@@ -1458,6 +1518,7 @@ module Aws
       #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table_description.latest_stream_label #=> String
       #   resp.table_description.latest_stream_arn #=> String
+      #
       # @overload delete_table(params = {})
       # @param [Hash] params ({})
       def delete_table(params = {}, options = {})
@@ -1494,13 +1555,13 @@ module Aws
       # 3.  Call *ListTables* to obtain a list of all your DynamoDB tables.
       #
       # 4.  For each table name listed by *ListTables*, do the following:
-      # 
+      #
       #     * Call *DescribeTable* with the table name.
-      # 
+      #
       #     * Use the data returned by *DescribeTable* to add the read
       #       capacity units and write capacity units provisioned for the
       #       table itself to your variables.
-      # 
+      #
       #     * If the table has one or more global secondary indexes (GSIs),
       #       loop over these GSIs and add their provisioned capacity values
       #       to your variables as well.
@@ -1532,21 +1593,25 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
       # [2]: https://console.aws.amazon.com/support/home#/
+      #
       # @return [Types::DescribeLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLimitsOutput#account_max_read_capacity_units #AccountMaxReadCapacityUnits} => Integer
-      #   * {Types::DescribeLimitsOutput#account_max_write_capacity_units #AccountMaxWriteCapacityUnits} => Integer
-      #   * {Types::DescribeLimitsOutput#table_max_read_capacity_units #TableMaxReadCapacityUnits} => Integer
-      #   * {Types::DescribeLimitsOutput#table_max_write_capacity_units #TableMaxWriteCapacityUnits} => Integer
+      #   * {Types::DescribeLimitsOutput#account_max_read_capacity_units #account_max_read_capacity_units} => Integer
+      #   * {Types::DescribeLimitsOutput#account_max_write_capacity_units #account_max_write_capacity_units} => Integer
+      #   * {Types::DescribeLimitsOutput#table_max_read_capacity_units #table_max_read_capacity_units} => Integer
+      #   * {Types::DescribeLimitsOutput#table_max_write_capacity_units #table_max_write_capacity_units} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_limits()
       #
       # @example Response structure
+      #
       #   resp.account_max_read_capacity_units #=> Integer
       #   resp.account_max_write_capacity_units #=> Integer
       #   resp.table_max_read_capacity_units #=> Integer
       #   resp.table_max_write_capacity_units #=> Integer
+      #
       # @overload describe_limits(params = {})
       # @param [Hash] params ({})
       def describe_limits(params = {}, options = {})
@@ -1566,18 +1631,22 @@ module Aws
       # *DescribeTable* request again.
       #
       #  </note>
+      #
       # @option params [required, String] :table_name
       #   The name of the table to describe.
+      #
       # @return [Types::DescribeTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTableOutput#table #Table} => Types::TableDescription
+      #   * {Types::DescribeTableOutput#table #table} => Types::TableDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_table({
       #     table_name: "TableName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.table.attribute_definitions #=> Array
       #   resp.table.attribute_definitions[0].attribute_name #=> String
       #   resp.table.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
@@ -1628,6 +1697,7 @@ module Aws
       #   resp.table.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table.latest_stream_label #=> String
       #   resp.table.latest_stream_arn #=> String
+      #
       # @overload describe_table(params = {})
       # @param [Hash] params ({})
       def describe_table(params = {}, options = {})
@@ -1644,8 +1714,10 @@ module Aws
       # to `true`. Although a strongly consistent read might take more time
       # than an eventually consistent read, it always returns the last updated
       # value.
+      #
       # @option params [required, String] :table_name
       #   The name of the table containing the requested item.
+      #
       # @option params [required, Hash<String,Types::AttributeValue>] :key
       #   A map of attribute names to *AttributeValue* objects, representing the
       #   primary key of the item to retrieve.
@@ -1654,6 +1726,7 @@ module Aws
       #   example, with a simple primary key, you only need to provide a value
       #   for the partition key. For a composite primary key, you must provide
       #   values for both the partition key and the sort key.
+      #
       # @option params [Array<String>] :attributes_to_get
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ProjectionExpression* instead. Do not combine
@@ -1672,10 +1745,12 @@ module Aws
       #   Note that *AttributesToGet* has no effect on provisioned throughput
       #   consumption. DynamoDB determines capacity units consumed based on item
       #   size, not on the amount of data that is returned to an application.
+      #
       # @option params [Boolean] :consistent_read
       #   Determines the read consistency model: If set to `true`, then the
       #   operation uses strongly consistent reads; otherwise, the operation
       #   uses eventually consistent reads.
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -1692,6 +1767,7 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [String] :projection_expression
       #   A string that identifies one or more attributes to retrieve from the
       #   table. These attributes can include scalars, sets, or elements of a
@@ -1713,6 +1789,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [Hash<String,String>] :expression_attribute_names
       #   One or more substitution tokens for attribute names in an expression.
       #   The following are some use cases for using
@@ -1763,12 +1840,14 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @return [Types::GetItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetItemOutput#item #Item} => Hash&lt;String,Types::AttributeValue&gt;
-      #   * {Types::GetItemOutput#consumed_capacity #ConsumedCapacity} => Types::ConsumedCapacity
+      #   * {Types::GetItemOutput#item #item} => Hash&lt;String,Types::AttributeValue&gt;
+      #   * {Types::GetItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_item({
       #     table_name: "TableName", # required
       #     key: { # required
@@ -1784,6 +1863,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.item #=> Hash
       #   resp.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.consumed_capacity.table_name #=> String
@@ -1793,6 +1873,7 @@ module Aws
       #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity.global_secondary_indexes #=> Hash
       #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+      #
       # @overload get_item(params = {})
       # @param [Hash] params ({})
       def get_item(params = {}, options = {})
@@ -1803,28 +1884,34 @@ module Aws
       # Returns an array of table names associated with the current account
       # and endpoint. The output from *ListTables* is paginated, with each
       # page returning a maximum of 100 table names.
+      #
       # @option params [String] :exclusive_start_table_name
       #   The first table name that this operation will evaluate. Use the value
       #   that was returned for *LastEvaluatedTableName* in a previous
       #   operation, so that you can obtain the next page of results.
+      #
       # @option params [Integer] :limit
       #   A maximum number of table names to return. If this parameter is not
       #   specified, the limit is 100.
+      #
       # @return [Types::ListTablesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTablesOutput#table_names #TableNames} => Array&lt;String&gt;
-      #   * {Types::ListTablesOutput#last_evaluated_table_name #LastEvaluatedTableName} => String
+      #   * {Types::ListTablesOutput#table_names #table_names} => Array&lt;String&gt;
+      #   * {Types::ListTablesOutput#last_evaluated_table_name #last_evaluated_table_name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tables({
       #     exclusive_start_table_name: "TableName",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.table_names #=> Array
       #   resp.table_names[0] #=> String
       #   resp.last_evaluated_table_name #=> String
+      #
       # @overload list_tables(params = {})
       # @param [Hash] params ({})
       def list_tables(params = {}, options = {})
@@ -1869,8 +1956,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html
+      #
       # @option params [required, String] :table_name
       #   The name of the table to contain the item.
+      #
       # @option params [required, Hash<String,Types::AttributeValue>] :item
       #   A map of attribute name/value pairs, one for each attribute. Only the
       #   primary key attributes are required; you can optionally provide other
@@ -1893,6 +1982,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
+      #
       # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
@@ -2139,6 +2229,7 @@ module Aws
       #
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+      #
       # @option params [String] :return_values
       #   Use *ReturnValues* if you want to get the item attributes as they
       #   appeared before they were updated with the *PutItem* request. For
@@ -2156,6 +2247,7 @@ module Aws
       #   `ALL_OLD`.
       #
       #    </note>
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -2172,11 +2264,13 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [String] :return_item_collection_metrics
       #   Determines whether item collection metrics are returned. If set to
       #   `SIZE`, the response includes statistics about item collections, if
       #   any, that were modified during the operation are returned in the
       #   response. If set to `NONE` (the default), no statistics are returned.
+      #
       # @option params [String] :conditional_operator
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
@@ -2198,6 +2292,7 @@ module Aws
       #   <note markdown="1"> This parameter does not support attributes of type List or Map.
       #
       #    </note>
+      #
       # @option params [String] :condition_expression
       #   A condition that must be satisfied in order for a conditional
       #   *PutItem* operation to succeed.
@@ -2225,6 +2320,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @option params [Hash<String,String>] :expression_attribute_names
       #   One or more substitution tokens for attribute names in an expression.
       #   The following are some use cases for using
@@ -2275,6 +2371,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
       #   One or more values that can be substituted in an expression.
       #
@@ -2300,13 +2397,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @return [Types::PutItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutItemOutput#attributes #Attributes} => Hash&lt;String,Types::AttributeValue&gt;
-      #   * {Types::PutItemOutput#consumed_capacity #ConsumedCapacity} => Types::ConsumedCapacity
-      #   * {Types::PutItemOutput#item_collection_metrics #ItemCollectionMetrics} => Types::ItemCollectionMetrics
+      #   * {Types::PutItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
+      #   * {Types::PutItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+      #   * {Types::PutItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_item({
       #     table_name: "TableName", # required
       #     item: { # required
@@ -2334,6 +2433,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.attributes #=> Hash
       #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.consumed_capacity.table_name #=> String
@@ -2347,6 +2447,7 @@ module Aws
       #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
       #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+      #
       # @overload put_item(params = {})
       # @param [Hash] params ({})
       def put_item(params = {}, options = {})
@@ -2383,12 +2484,15 @@ module Aws
       # consistent result. Global secondary indexes support eventually
       # consistent reads only, so do not specify *ConsistentRead* when
       # querying a global secondary index.
+      #
       # @option params [required, String] :table_name
       #   The name of the table containing the requested items.
+      #
       # @option params [String] :index_name
       #   The name of an index to query. This index can be any local secondary
       #   index or global secondary index on the table. Note that if you use the
       #   *IndexName* parameter, you must also provide *TableName.*
+      #
       # @option params [String] :select
       #   The attributes to be returned in the result. You can retrieve all item
       #   attributes, specific item attributes, the count of matching items, or
@@ -2438,6 +2542,7 @@ module Aws
       #   *Select* will return an error.
       #
       #    </note>
+      #
       # @option params [Array<String>] :attributes_to_get
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ProjectionExpression* instead. Do not combine
@@ -2472,6 +2577,7 @@ module Aws
       #   If you query a global secondary index, you can only request attributes
       #   that are projected into the index. Global secondary index queries
       #   cannot fetch attributes from the parent table.
+      #
       # @option params [Integer] :limit
       #   The maximum number of items to evaluate (not necessarily the number of
       #   matching items). If DynamoDB processes the number of items up to the
@@ -2488,6 +2594,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+      #
       # @option params [Boolean] :consistent_read
       #   Determines the read consistency model: If set to `true`, then the
       #   operation uses strongly consistent reads; otherwise, the operation
@@ -2496,6 +2603,7 @@ module Aws
       #   Strongly consistent reads are not supported on global secondary
       #   indexes. If you query a global secondary index with *ConsistentRead*
       #   set to `true`, you will receive a *ValidationException*.
+      #
       # @option params [Hash<String,Types::Condition>] :key_conditions
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *KeyConditionExpression* instead. Do not
@@ -2633,6 +2741,7 @@ module Aws
       #
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+      #
       # @option params [Hash<String,Types::Condition>] :query_filter
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
@@ -2697,6 +2806,7 @@ module Aws
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
       #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Condition.html
+      #
       # @option params [String] :conditional_operator
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
@@ -2718,6 +2828,7 @@ module Aws
       #   <note markdown="1"> This parameter does not support attributes of type List or Map.
       #
       #    </note>
+      #
       # @option params [Boolean] :scan_index_forward
       #   Specifies the order for index traversal: If `true` (default), the
       #   traversal is performed in ascending order; if `false`, the traversal
@@ -2734,6 +2845,7 @@ module Aws
       #   default behavior. If *ScanIndexForward* is `false`, DynamoDB reads the
       #   results in reverse order by sort key value, and then returns the
       #   results to the client.
+      #
       # @option params [Hash<String,Types::AttributeValue>] :exclusive_start_key
       #   The primary key of the first item that this operation will evaluate.
       #   Use the value that was returned for *LastEvaluatedKey* in the previous
@@ -2741,6 +2853,7 @@ module Aws
       #
       #   The data type for *ExclusiveStartKey* must be String, Number or
       #   Binary. No set data types are allowed.
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -2757,6 +2870,7 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [String] :projection_expression
       #   A string that identifies one or more attributes to retrieve from the
       #   table. These attributes can include scalars, sets, or elements of a
@@ -2778,6 +2892,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [String] :filter_expression
       #   A string that contains conditions that DynamoDB applies after the
       #   *Query* operation, but before the data is returned to you. Items that
@@ -2800,6 +2915,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+      #
       # @option params [String] :key_condition_expression
       #   The condition that specifies the key value(s) for items to be
       #   retrieved by the *Query* action.
@@ -2887,6 +3003,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ExpressionPlaceholders.html
+      #
       # @option params [Hash<String,String>] :expression_attribute_names
       #   One or more substitution tokens for attribute names in an expression.
       #   The following are some use cases for using
@@ -2937,6 +3054,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
       #   One or more values that can be substituted in an expression.
       #
@@ -2962,15 +3080,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @return [Types::QueryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::QueryOutput#items #Items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
-      #   * {Types::QueryOutput#count #Count} => Integer
-      #   * {Types::QueryOutput#scanned_count #ScannedCount} => Integer
-      #   * {Types::QueryOutput#last_evaluated_key #LastEvaluatedKey} => Hash&lt;String,Types::AttributeValue&gt;
-      #   * {Types::QueryOutput#consumed_capacity #ConsumedCapacity} => Types::ConsumedCapacity
+      #   * {Types::QueryOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
+      #   * {Types::QueryOutput#count #count} => Integer
+      #   * {Types::QueryOutput#scanned_count #scanned_count} => Integer
+      #   * {Types::QueryOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
+      #   * {Types::QueryOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.query({
       #     table_name: "TableName", # required
       #     index_name: "IndexName",
@@ -3008,6 +3128,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.items #=> Array
       #   resp.items[0] #=> Hash
       #   resp.items[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -3022,6 +3143,7 @@ module Aws
       #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity.global_secondary_indexes #=> Hash
       #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+      #
       # @overload query(params = {})
       # @param [Hash] params ({})
       def query(params = {}, options = {})
@@ -3054,14 +3176,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#QueryAndScanParallelScan
+      #
       # @option params [required, String] :table_name
       #   The name of the table containing the requested items; or, if you
       #   provide `IndexName`, the name of the table to which that index
       #   belongs.
+      #
       # @option params [String] :index_name
       #   The name of a secondary index to scan. This index can be any local
       #   secondary index or global secondary index. Note that if you use the
       #   `IndexName` parameter, you must also provide `TableName`.
+      #
       # @option params [Array<String>] :attributes_to_get
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ProjectionExpression* instead. Do not combine
@@ -3080,6 +3205,7 @@ module Aws
       #   Note that *AttributesToGet* has no effect on provisioned throughput
       #   consumption. DynamoDB determines capacity units consumed based on item
       #   size, not on the amount of data that is returned to an application.
+      #
       # @option params [Integer] :limit
       #   The maximum number of items to evaluate (not necessarily the number of
       #   matching items). If DynamoDB processes the number of items up to the
@@ -3096,6 +3222,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html
+      #
       # @option params [String] :select
       #   The attributes to be returned in the result. You can retrieve all item
       #   attributes, specific item attributes, or the count of matching items.
@@ -3119,6 +3246,7 @@ module Aws
       #   and *Select* together in a single request, unless the value for
       #   *Select* is `SPECIFIC_ATTRIBUTES`. (This usage is equivalent to
       #   specifying *AttributesToGet* without any value for *Select*.)
+      #
       # @option params [Hash<String,Types::Condition>] :scan_filter
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
@@ -3176,6 +3304,7 @@ module Aws
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
       #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Condition.html
+      #
       # @option params [String] :conditional_operator
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
@@ -3197,6 +3326,7 @@ module Aws
       #   <note markdown="1"> This parameter does not support attributes of type List or Map.
       #
       #    </note>
+      #
       # @option params [Hash<String,Types::AttributeValue>] :exclusive_start_key
       #   The primary key of the first item that this operation will evaluate.
       #   Use the value that was returned for *LastEvaluatedKey* in the previous
@@ -3208,6 +3338,7 @@ module Aws
       #   In a parallel scan, a *Scan* request that includes *ExclusiveStartKey*
       #   must specify the same segment whose previous *Scan* returned the
       #   corresponding value of *LastEvaluatedKey*.
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -3224,6 +3355,7 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [Integer] :total_segments
       #   For a parallel *Scan* request, *TotalSegments* represents the total
       #   number of segments into which the *Scan* operation will be divided.
@@ -3237,6 +3369,7 @@ module Aws
       #   of 1, the *Scan* operation will be sequential rather than parallel.
       #
       #   If you specify *TotalSegments*, you must also specify *Segment*.
+      #
       # @option params [Integer] :segment
       #   For a parallel *Scan* request, *Segment* identifies an individual
       #   segment to be scanned by an application worker.
@@ -3254,6 +3387,7 @@ module Aws
       #   than the value provided for *TotalSegments*.
       #
       #   If you provide *Segment*, you must also provide *TotalSegments*.
+      #
       # @option params [String] :projection_expression
       #   A string that identifies one or more attributes to retrieve from the
       #   specified table or index. These attributes can include scalars, sets,
@@ -3275,6 +3409,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [String] :filter_expression
       #   A string that contains conditions that DynamoDB applies after the
       #   *Scan* operation, but before the data is returned to you. Items that
@@ -3297,6 +3432,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults
+      #
       # @option params [Hash<String,String>] :expression_attribute_names
       #   One or more substitution tokens for attribute names in an expression.
       #   The following are some use cases for using
@@ -3347,6 +3483,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
       #   One or more values that can be substituted in an expression.
       #
@@ -3372,6 +3509,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @option params [Boolean] :consistent_read
       #   A Boolean value that determines the read consistency model during the
       #   scan:
@@ -3389,15 +3527,17 @@ module Aws
       #   The *ConsistentRead* parameter is not supported on global secondary
       #   indexes. If you scan a global secondary index with *ConsistentRead*
       #   set to true, you will receive a *ValidationException*.
+      #
       # @return [Types::ScanOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ScanOutput#items #Items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
-      #   * {Types::ScanOutput#count #Count} => Integer
-      #   * {Types::ScanOutput#scanned_count #ScannedCount} => Integer
-      #   * {Types::ScanOutput#last_evaluated_key #LastEvaluatedKey} => Hash&lt;String,Types::AttributeValue&gt;
-      #   * {Types::ScanOutput#consumed_capacity #ConsumedCapacity} => Types::ConsumedCapacity
+      #   * {Types::ScanOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
+      #   * {Types::ScanOutput#count #count} => Integer
+      #   * {Types::ScanOutput#scanned_count #scanned_count} => Integer
+      #   * {Types::ScanOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
+      #   * {Types::ScanOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.scan({
       #     table_name: "TableName", # required
       #     index_name: "IndexName",
@@ -3429,6 +3569,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.items #=> Array
       #   resp.items[0] #=> Hash
       #   resp.items[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
@@ -3443,6 +3584,7 @@ module Aws
       #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity.global_secondary_indexes #=> Hash
       #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+      #
       # @overload scan(params = {})
       # @param [Hash] params ({})
       def scan(params = {}, options = {})
@@ -3459,8 +3601,10 @@ module Aws
       #
       # You can also return the item's attribute values in the same
       # *UpdateItem* operation using the *ReturnValues* parameter.
+      #
       # @option params [required, String] :table_name
       #   The name of the table containing the item to update.
+      #
       # @option params [required, Hash<String,Types::AttributeValue>] :key
       #   The primary key of the item to be updated. Each element consists of an
       #   attribute name and a value for that attribute.
@@ -3469,6 +3613,7 @@ module Aws
       #   example, with a simple primary key, you only need to provide a value
       #   for the partition key. For a composite primary key, you must provide
       #   values for both the partition key and the sort key.
+      #
       # @option params [Hash<String,Types::AttributeValueUpdate>] :attribute_updates
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *UpdateExpression* instead. Do not combine
@@ -3569,6 +3714,7 @@ module Aws
       #   If you provide any attributes that are part of an index key, then the
       #   data types for those attributes must match those of the schema in the
       #   table's attribute definition.
+      #
       # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use <i> ConditionExpression </i> instead. Do not
@@ -3816,6 +3962,7 @@ module Aws
       #
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
+      #
       # @option params [String] :conditional_operator
       #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
@@ -3837,6 +3984,7 @@ module Aws
       #   <note markdown="1"> This parameter does not support attributes of type List or Map.
       #
       #    </note>
+      #
       # @option params [String] :return_values
       #   Use *ReturnValues* if you want to get the item attributes as they
       #   appeared either before or after they were updated. For *UpdateItem*,
@@ -3863,6 +4011,7 @@ module Aws
       #   larger response. No Read Capacity Units are consumed.
       #
       #   Values returned are strongly consistent
+      #
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -3879,11 +4028,13 @@ module Aws
       #     *ConsumedCapacity* for the operation.
       #
       #   * *NONE* - No *ConsumedCapacity* details are included in the response.
+      #
       # @option params [String] :return_item_collection_metrics
       #   Determines whether item collection metrics are returned. If set to
       #   `SIZE`, the response includes statistics about item collections, if
       #   any, that were modified during the operation are returned in the
       #   response. If set to `NONE` (the default), no statistics are returned.
+      #
       # @option params [String] :update_expression
       #   An expression that defines one or more attributes to be updated, the
       #   action to be performed on them, and new value(s) for them.
@@ -3975,6 +4126,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html
+      #
       # @option params [String] :condition_expression
       #   A condition that must be satisfied in order for a conditional update
       #   to succeed.
@@ -4002,6 +4154,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @option params [Hash<String,String>] :expression_attribute_names
       #   One or more substitution tokens for attribute names in an expression.
       #   The following are some use cases for using
@@ -4052,6 +4205,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
+      #
       # @option params [Hash<String,Types::AttributeValue>] :expression_attribute_values
       #   One or more values that can be substituted in an expression.
       #
@@ -4077,13 +4231,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
+      #
       # @return [Types::UpdateItemOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateItemOutput#attributes #Attributes} => Hash&lt;String,Types::AttributeValue&gt;
-      #   * {Types::UpdateItemOutput#consumed_capacity #ConsumedCapacity} => Types::ConsumedCapacity
-      #   * {Types::UpdateItemOutput#item_collection_metrics #ItemCollectionMetrics} => Types::ItemCollectionMetrics
+      #   * {Types::UpdateItemOutput#attributes #attributes} => Hash&lt;String,Types::AttributeValue&gt;
+      #   * {Types::UpdateItemOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+      #   * {Types::UpdateItemOutput#item_collection_metrics #item_collection_metrics} => Types::ItemCollectionMetrics
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_item({
       #     table_name: "TableName", # required
       #     key: { # required
@@ -4118,6 +4274,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.attributes #=> Hash
       #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.consumed_capacity.table_name #=> String
@@ -4131,6 +4288,7 @@ module Aws
       #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
       #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+      #
       # @overload update_item(params = {})
       # @param [Hash] params ({})
       def update_item(params = {}, options = {})
@@ -4158,13 +4316,16 @@ module Aws
       # `UPDATING`, you cannot issue another *UpdateTable* request. When the
       # table returns to the `ACTIVE` state, the *UpdateTable* operation is
       # complete.
+      #
       # @option params [Array<Types::AttributeDefinition>] :attribute_definitions
       #   An array of attributes that describe the key schema for the table and
       #   indexes. If you are adding a new global secondary index to the table,
       #   *AttributeDefinitions* must include the key element(s) of the new
       #   index.
+      #
       # @option params [required, String] :table_name
       #   The name of the table to be updated.
+      #
       # @option params [Types::ProvisionedThroughput] :provisioned_throughput
       #   Represents the provisioned throughput settings for a specified table
       #   or index. The settings can be modified using the *UpdateTable*
@@ -4176,6 +4337,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
+      #
       # @option params [Array<Types::GlobalSecondaryIndexUpdate>] :global_secondary_index_updates
       #   An array of one or more global secondary indexes for the table. For
       #   each index in the array, you can request one action:
@@ -4193,6 +4355,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.OnlineOps.html
+      #
       # @option params [Types::StreamSpecification] :stream_specification
       #   Represents the DynamoDB Streams configuration for the table.
       #
@@ -4201,11 +4364,13 @@ module Aws
       #   disable a stream on a table which does not have a stream.
       #
       #    </note>
+      #
       # @return [Types::UpdateTableOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateTableOutput#table_description #TableDescription} => Types::TableDescription
+      #   * {Types::UpdateTableOutput#table_description #table_description} => Types::TableDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_table({
       #     attribute_definitions: [
       #       {
@@ -4256,6 +4421,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.table_description.attribute_definitions #=> Array
       #   resp.table_description.attribute_definitions[0].attribute_name #=> String
       #   resp.table_description.attribute_definitions[0].attribute_type #=> String, one of "S", "N", "B"
@@ -4306,6 +4472,7 @@ module Aws
       #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table_description.latest_stream_label #=> String
       #   resp.table_description.latest_stream_arn #=> String
+      #
       # @overload update_table(params = {})
       # @param [Hash] params ({})
       def update_table(params = {}, options = {})

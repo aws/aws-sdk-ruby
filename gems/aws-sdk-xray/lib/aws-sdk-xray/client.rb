@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -133,23 +147,28 @@ module Aws
       # Retrieves a list of traces specified by ID. Each trace is a collection
       # of segment documents that originates from a single request. Use
       # `GetTraceSummaries` to get a list of trace IDs.
+      #
       # @option params [required, Array<String>] :trace_ids
       #   Specify the trace IDs of requests for which to retrieve segments.
+      #
       # @option params [String] :next_token
       #   Pagination token. Not used.
+      #
       # @return [Types::BatchGetTracesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::BatchGetTracesResult#traces #Traces} => Array&lt;Types::Trace&gt;
-      #   * {Types::BatchGetTracesResult#unprocessed_trace_ids #UnprocessedTraceIds} => Array&lt;String&gt;
-      #   * {Types::BatchGetTracesResult#next_token #NextToken} => String
+      #   * {Types::BatchGetTracesResult#traces #traces} => Array&lt;Types::Trace&gt;
+      #   * {Types::BatchGetTracesResult#unprocessed_trace_ids #unprocessed_trace_ids} => Array&lt;String&gt;
+      #   * {Types::BatchGetTracesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.batch_get_traces({
       #     trace_ids: ["TraceId"], # required
       #     next_token: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.traces #=> Array
       #   resp.traces[0].id #=> String
       #   resp.traces[0].duration #=> Float
@@ -159,6 +178,7 @@ module Aws
       #   resp.unprocessed_trace_ids #=> Array
       #   resp.unprocessed_trace_ids[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload batch_get_traces(params = {})
       # @param [Hash] params ({})
       def batch_get_traces(params = {}, options = {})
@@ -172,20 +192,25 @@ module Aws
       # services. Root services are applications that use the AWS X-Ray SDK.
       # Downstream services can be other applications, AWS resources, HTTP web
       # APIs, or SQL databases.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :start_time
       #   The start of the time frame for which to generate a graph.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :end_time
       #   The end of the time frame for which to generate a graph.
+      #
       # @option params [String] :next_token
       #   Pagination token. Not used.
+      #
       # @return [Types::GetServiceGraphResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetServiceGraphResult#start_time #StartTime} => Time
-      #   * {Types::GetServiceGraphResult#end_time #EndTime} => Time
-      #   * {Types::GetServiceGraphResult#services #Services} => Array&lt;Types::Service&gt;
-      #   * {Types::GetServiceGraphResult#next_token #NextToken} => String
+      #   * {Types::GetServiceGraphResult#start_time #start_time} => Time
+      #   * {Types::GetServiceGraphResult#end_time #end_time} => Time
+      #   * {Types::GetServiceGraphResult#services #services} => Array&lt;Types::Service&gt;
+      #   * {Types::GetServiceGraphResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_service_graph({
       #     start_time: Time.now, # required
       #     end_time: Time.now, # required
@@ -193,6 +218,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.start_time #=> Time
       #   resp.end_time #=> Time
       #   resp.services #=> Array
@@ -238,6 +264,7 @@ module Aws
       #   resp.services[0].duration_histogram[0].value #=> Float
       #   resp.services[0].duration_histogram[0].count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload get_service_graph(params = {})
       # @param [Hash] params ({})
       def get_service_graph(params = {}, options = {})
@@ -246,22 +273,27 @@ module Aws
       end
 
       # Retrieves a service graph for one or more specific trace IDs.
+      #
       # @option params [required, Array<String>] :trace_ids
       #   Trace IDs of requests for which to generate a service graph.
+      #
       # @option params [String] :next_token
       #   Pagination token. Not used.
+      #
       # @return [Types::GetTraceGraphResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetTraceGraphResult#services #Services} => Array&lt;Types::Service&gt;
-      #   * {Types::GetTraceGraphResult#next_token #NextToken} => String
+      #   * {Types::GetTraceGraphResult#services #services} => Array&lt;Types::Service&gt;
+      #   * {Types::GetTraceGraphResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_trace_graph({
       #     trace_ids: ["TraceId"], # required
       #     next_token: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.services #=> Array
       #   resp.services[0].reference_id #=> Integer
       #   resp.services[0].name #=> String
@@ -305,6 +337,7 @@ module Aws
       #   resp.services[0].duration_histogram[0].value #=> Float
       #   resp.services[0].duration_histogram[0].count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload get_trace_graph(params = {})
       # @param [Hash] params ({})
       def get_trace_graph(params = {}, options = {})
@@ -315,26 +348,33 @@ module Aws
       # Retrieves IDs and metadata for traces available for a specified time
       # frame using an optional filter. To get the full traces, pass the trace
       # IDs to `BatchGetTraces`.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :start_time
       #   The start of the time frame for which to retrieve traces.
+      #
       # @option params [required, Time,DateTime,Date,Integer,String] :end_time
       #   The end of the time frame for which to retrieve traces.
+      #
       # @option params [Boolean] :sampling
       #   Set to `true` to get summaries for only a subset of available traces.
+      #
       # @option params [String] :filter_expression
       #   Specify a filter expression to retrieve trace summaries for services
       #   or requests that meet certain requirements.
+      #
       # @option params [String] :next_token
       #   Specify the pagination token returned by a previous request to
       #   retrieve the next page of results.
+      #
       # @return [Types::GetTraceSummariesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetTraceSummariesResult#trace_summaries #TraceSummaries} => Array&lt;Types::TraceSummary&gt;
-      #   * {Types::GetTraceSummariesResult#approximate_time #ApproximateTime} => Time
-      #   * {Types::GetTraceSummariesResult#traces_processed_count #TracesProcessedCount} => Integer
-      #   * {Types::GetTraceSummariesResult#next_token #NextToken} => String
+      #   * {Types::GetTraceSummariesResult#trace_summaries #trace_summaries} => Array&lt;Types::TraceSummary&gt;
+      #   * {Types::GetTraceSummariesResult#approximate_time #approximate_time} => Time
+      #   * {Types::GetTraceSummariesResult#traces_processed_count #traces_processed_count} => Integer
+      #   * {Types::GetTraceSummariesResult#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_trace_summaries({
       #     start_time: Time.now, # required
       #     end_time: Time.now, # required
@@ -344,6 +384,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.trace_summaries #=> Array
       #   resp.trace_summaries[0].id #=> String
       #   resp.trace_summaries[0].duration #=> Float
@@ -385,6 +426,7 @@ module Aws
       #   resp.approximate_time #=> Time
       #   resp.traces_processed_count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload get_trace_summaries(params = {})
       # @param [Hash] params ({})
       def get_trace_summaries(params = {}, options = {})
@@ -393,13 +435,19 @@ module Aws
       end
 
       # Used by the AWS X-Ray daemon to upload telemetry.
+      #
       # @option params [required, Array<Types::TelemetryRecord>] :telemetry_records
+      #
       # @option params [String] :ec2_instance_id
+      #
       # @option params [String] :hostname
+      #
       # @option params [String] :resource_arn
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_telemetry_records({
       #     telemetry_records: [ # required
       #       {
@@ -422,6 +470,7 @@ module Aws
       #     hostname: "String",
       #     resource_arn: "String",
       #   })
+      #
       # @overload put_telemetry_records(params = {})
       # @param [Hash] params ({})
       def put_telemetry_records(params = {}, options = {})
@@ -433,6 +482,7 @@ module Aws
       # segment documents and sends them to the X-Ray daemon, which uploads
       # them in batches. A segment document can be a completed segment, an
       # in-progress segment, or an array of subsegments.
+      #
       # @option params [required, Array<String>] :trace_segment_documents
       #   A JSON document defining one or more segments or subsegments. Segments
       #   must include the following fields.
@@ -475,20 +525,24 @@ module Aws
       #
       #   * A 96-bit identifier for the trace, globally unique, in 24
       #     hexadecimal digits.
+      #
       # @return [Types::PutTraceSegmentsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutTraceSegmentsResult#unprocessed_trace_segments #UnprocessedTraceSegments} => Array&lt;Types::UnprocessedTraceSegment&gt;
+      #   * {Types::PutTraceSegmentsResult#unprocessed_trace_segments #unprocessed_trace_segments} => Array&lt;Types::UnprocessedTraceSegment&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_trace_segments({
       #     trace_segment_documents: ["TraceSegmentDocument"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.unprocessed_trace_segments #=> Array
       #   resp.unprocessed_trace_segments[0].id #=> String
       #   resp.unprocessed_trace_segments[0].error_code #=> String
       #   resp.unprocessed_trace_segments[0].message #=> String
+      #
       # @overload put_trace_segments(params = {})
       # @param [Hash] params ({})
       def put_trace_segments(params = {}, options = {})

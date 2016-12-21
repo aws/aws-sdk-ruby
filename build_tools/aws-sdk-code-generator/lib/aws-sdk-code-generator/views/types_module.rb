@@ -7,6 +7,7 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
+        @api = @service.api
         @input_shapes = compute_input_shapes(@service.api)
       end
 
@@ -39,7 +40,7 @@ module AwsSdkCodeGenerator
 
       def struct_class_docs(shape_name)
         join_docstrings([
-          html_to_markdown(docstring(shape_name)),
+          html_to_markdown(Api.docstring(shape_name, @api)),
           input_example_docs(shape_name),
           attribute_macros_docs(shape_name),
         ])
@@ -52,7 +53,7 @@ module AwsSdkCodeGenerator
           else
             note = "@note When making an API call, you may pass #{shape_name}\n"
             note += "  data as a hash:\n\n"
-            note += Generators::SyntaxExample.new(
+            note += SyntaxExample.new(
               struct_shape: shape(shape_name),
               api: @service.api,
               indent: ' ' * 6
@@ -63,13 +64,13 @@ module AwsSdkCodeGenerator
 
       def attribute_macros_docs(shape_name)
         shape(shape_name)['members'].map do |member_name, member_ref|
-          docs = docstring(member_ref).to_s
+          docs = Api.docstring(member_ref, @api).to_s
           docs += idempotency_token_msg if idempotency_token?(member_ref)
           docs = html_to_markdown(docs, line_width: 68)
           docs = docs.to_s.lines.to_a.join('  ')
           macro = "@!attribute [rw] #{underscore(member_name)}\n"
           macro += "  #{docs}\n" unless docs == ''
-          macro += "  @return [#{ruby_type(member_ref)}]"
+          macro += "  @return [#{Api.ruby_type(member_ref, @api)}]"
           macro
         end
       end
@@ -111,6 +112,10 @@ module AwsSdkCodeGenerator
           visit_inputs(s['key'], inputs)
           visit_inputs(s['value'], inputs)
         end
+      end
+
+      def shape(shape_ref)
+        Api.resolve(shape_ref, @api)[1]
       end
 
       class StructClass

@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -166,23 +181,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description of the ByteMatchSet. You can't change
       #   `Name` after you create a `ByteMatchSet`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateByteMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateByteMatchSetResponse#byte_match_set #ByteMatchSet} => Types::ByteMatchSet
-      #   * {Types::CreateByteMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateByteMatchSetResponse#byte_match_set #byte_match_set} => Types::ByteMatchSet
+      #   * {Types::CreateByteMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_byte_match_set({
       #     name: "ResourceName", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.byte_match_set.byte_match_set_id #=> String
       #   resp.byte_match_set.name #=> String
       #   resp.byte_match_set.byte_match_tuples #=> Array
@@ -192,6 +212,7 @@ module Aws
       #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.byte_match_set.byte_match_tuples[0].positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
       #   resp.change_token #=> String
+      #
       # @overload create_byte_match_set(params = {})
       # @param [Hash] params ({})
       def create_byte_match_set(params = {}, options = {})
@@ -226,29 +247,35 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description of the IPSet. You can't change `Name`
       #   after you create the `IPSet`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateIPSetResponse#ip_set #IPSet} => Types::IPSet
-      #   * {Types::CreateIPSetResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateIPSetResponse#ip_set #ip_set} => Types::IPSet
+      #   * {Types::CreateIPSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_ip_set({
       #     name: "ResourceName", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.ip_set.ip_set_id #=> String
       #   resp.ip_set.name #=> String
       #   resp.ip_set.ip_set_descriptors #=> Array
       #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4", "IPV6"
       #   resp.ip_set.ip_set_descriptors[0].value #=> String
       #   resp.change_token #=> String
+      #
       # @overload create_ip_set(params = {})
       # @param [Hash] params ({})
       def create_ip_set(params = {}, options = {})
@@ -297,22 +324,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description of the Rule. You can't change the name
       #   of a `Rule` after you create it.
+      #
       # @option params [required, String] :metric_name
       #   A friendly name or description for the metrics for this `Rule`. The
       #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
       #   name can't contain whitespace. You can't change the name of the
       #   metric after you create the `Rule`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateRuleResponse#rule #Rule} => Types::Rule
-      #   * {Types::CreateRuleResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateRuleResponse#rule #rule} => Types::Rule
+      #   * {Types::CreateRuleResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_rule({
       #     name: "ResourceName", # required
       #     metric_name: "MetricName", # required
@@ -320,6 +352,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.rule.rule_id #=> String
       #   resp.rule.name #=> String
       #   resp.rule.metric_name #=> String
@@ -328,6 +361,7 @@ module Aws
       #   resp.rule.predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
       #   resp.rule.predicates[0].data_id #=> String
       #   resp.change_token #=> String
+      #
       # @overload create_rule(params = {})
       # @param [Hash] params ({})
       def create_rule(params = {}, options = {})
@@ -365,23 +399,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description of the SizeConstraintSet. You can't
       #   change `Name` after you create a `SizeConstraintSet`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateSizeConstraintSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateSizeConstraintSetResponse#size_constraint_set #SizeConstraintSet} => Types::SizeConstraintSet
-      #   * {Types::CreateSizeConstraintSetResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateSizeConstraintSetResponse#size_constraint_set #size_constraint_set} => Types::SizeConstraintSet
+      #   * {Types::CreateSizeConstraintSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_size_constraint_set({
       #     name: "ResourceName", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.size_constraint_set.size_constraint_set_id #=> String
       #   resp.size_constraint_set.name #=> String
       #   resp.size_constraint_set.size_constraints #=> Array
@@ -391,6 +430,7 @@ module Aws
       #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
       #   resp.size_constraint_set.size_constraints[0].size #=> Integer
       #   resp.change_token #=> String
+      #
       # @overload create_size_constraint_set(params = {})
       # @param [Hash] params ({})
       def create_size_constraint_set(params = {}, options = {})
@@ -425,24 +465,29 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description for the SqlInjectionMatchSet that
       #   you're creating. You can't change `Name` after you create the
       #   `SqlInjectionMatchSet`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateSqlInjectionMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateSqlInjectionMatchSetResponse#sql_injection_match_set #SqlInjectionMatchSet} => Types::SqlInjectionMatchSet
-      #   * {Types::CreateSqlInjectionMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateSqlInjectionMatchSetResponse#sql_injection_match_set #sql_injection_match_set} => Types::SqlInjectionMatchSet
+      #   * {Types::CreateSqlInjectionMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_sql_injection_match_set({
       #     name: "ResourceName", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.sql_injection_match_set.sql_injection_match_set_id #=> String
       #   resp.sql_injection_match_set.name #=> String
       #   resp.sql_injection_match_set.sql_injection_match_tuples #=> Array
@@ -450,6 +495,7 @@ module Aws
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.change_token #=> String
+      #
       # @overload create_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
       def create_sql_injection_match_set(params = {}, options = {})
@@ -494,26 +540,32 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description of the WebACL. You can't change `Name`
       #   after you create the `WebACL`.
+      #
       # @option params [required, String] :metric_name
       #   A friendly name or description for the metrics for this `WebACL`. The
       #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
       #   name can't contain whitespace. You can't change `MetricName` after
       #   you create the `WebACL`.
+      #
       # @option params [required, Types::WafAction] :default_action
       #   The action that you want AWS WAF to take when a request doesn't match
       #   the criteria specified in any of the `Rule` objects that are
       #   associated with the `WebACL`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateWebACLResponse#web_acl #WebACL} => Types::WebACL
-      #   * {Types::CreateWebACLResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateWebACLResponse#web_acl #web_acl} => Types::WebACL
+      #   * {Types::CreateWebACLResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_web_acl({
       #     name: "ResourceName", # required
       #     metric_name: "MetricName", # required
@@ -524,6 +576,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.web_acl.web_acl_id #=> String
       #   resp.web_acl.name #=> String
       #   resp.web_acl.metric_name #=> String
@@ -533,6 +586,7 @@ module Aws
       #   resp.web_acl.rules[0].rule_id #=> String
       #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
       #   resp.change_token #=> String
+      #
       # @overload create_web_acl(params = {})
       # @param [Hash] params ({})
       def create_web_acl(params = {}, options = {})
@@ -565,23 +619,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :name
       #   A friendly name or description for the XssMatchSet that you're
       #   creating. You can't change `Name` after you create the `XssMatchSet`.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::CreateXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateXssMatchSetResponse#xss_match_set #XssMatchSet} => Types::XssMatchSet
-      #   * {Types::CreateXssMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::CreateXssMatchSetResponse#xss_match_set #xss_match_set} => Types::XssMatchSet
+      #   * {Types::CreateXssMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_xss_match_set({
       #     name: "ResourceName", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.xss_match_set.xss_match_set_id #=> String
       #   resp.xss_match_set.name #=> String
       #   resp.xss_match_set.xss_match_tuples #=> Array
@@ -589,6 +648,7 @@ module Aws
       #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
       #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.change_token #=> String
+      #
       # @overload create_xss_match_set(params = {})
       # @param [Hash] params ({})
       def create_xss_match_set(params = {}, options = {})
@@ -612,24 +672,30 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteByteMatchSet` request.
       #
       # 3.  Submit a `DeleteByteMatchSet` request.
+      #
       # @option params [required, String] :byte_match_set_id
       #   The `ByteMatchSetId` of the ByteMatchSet that you want to delete.
       #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
       #   ListByteMatchSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteByteMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteByteMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteByteMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_byte_match_set({
       #     byte_match_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_byte_match_set(params = {})
       # @param [Hash] params ({})
       def delete_byte_match_set(params = {}, options = {})
@@ -652,23 +718,29 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteIPSet` request.
       #
       # 3.  Submit a `DeleteIPSet` request.
+      #
       # @option params [required, String] :ip_set_id
       #   The `IPSetId` of the IPSet that you want to delete. `IPSetId` is
       #   returned by CreateIPSet and by ListIPSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteIPSetResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteIPSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_ip_set({
       #     ip_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_ip_set(params = {})
       # @param [Hash] params ({})
       def delete_ip_set(params = {}, options = {})
@@ -692,23 +764,29 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteRule` request.
       #
       # 3.  Submit a `DeleteRule` request.
+      #
       # @option params [required, String] :rule_id
       #   The `RuleId` of the Rule that you want to delete. `RuleId` is returned
       #   by CreateRule and by ListRules.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteRuleResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteRuleResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_rule({
       #     rule_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_rule(params = {})
       # @param [Hash] params ({})
       def delete_rule(params = {}, options = {})
@@ -733,24 +811,30 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteSizeConstraintSet` request.
       #
       # 3.  Submit a `DeleteSizeConstraintSet` request.
+      #
       # @option params [required, String] :size_constraint_set_id
       #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
       #   delete. `SizeConstraintSetId` is returned by CreateSizeConstraintSet
       #   and by ListSizeConstraintSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteSizeConstraintSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteSizeConstraintSetResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteSizeConstraintSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_size_constraint_set({
       #     size_constraint_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_size_constraint_set(params = {})
       # @param [Hash] params ({})
       def delete_size_constraint_set(params = {}, options = {})
@@ -775,24 +859,30 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteSqlInjectionMatchSet` request.
       #
       # 3.  Submit a `DeleteSqlInjectionMatchSet` request.
+      #
       # @option params [required, String] :sql_injection_match_set_id
       #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you want
       #   to delete. `SqlInjectionMatchSetId` is returned by
       #   CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteSqlInjectionMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteSqlInjectionMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteSqlInjectionMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_sql_injection_match_set({
       #     sql_injection_match_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
       def delete_sql_injection_match_set(params = {}, options = {})
@@ -812,23 +902,29 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteWebACL` request.
       #
       # 3.  Submit a `DeleteWebACL` request.
+      #
       # @option params [required, String] :web_acl_id
       #   The `WebACLId` of the WebACL that you want to delete. `WebACLId` is
       #   returned by CreateWebACL and by ListWebACLs.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteWebACLResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteWebACLResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_web_acl({
       #     web_acl_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_web_acl(params = {})
       # @param [Hash] params ({})
       def delete_web_acl(params = {}, options = {})
@@ -853,24 +949,30 @@ module Aws
       #     `ChangeToken` parameter of a `DeleteXssMatchSet` request.
       #
       # 3.  Submit a `DeleteXssMatchSet` request.
+      #
       # @option params [required, String] :xss_match_set_id
       #   The `XssMatchSetId` of the XssMatchSet that you want to delete.
       #   `XssMatchSetId` is returned by CreateXssMatchSet and by
       #   ListXssMatchSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @return [Types::DeleteXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DeleteXssMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::DeleteXssMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_xss_match_set({
       #     xss_match_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload delete_xss_match_set(params = {})
       # @param [Hash] params ({})
       def delete_xss_match_set(params = {}, options = {})
@@ -879,20 +981,24 @@ module Aws
       end
 
       # Returns the ByteMatchSet specified by `ByteMatchSetId`.
+      #
       # @option params [required, String] :byte_match_set_id
       #   The `ByteMatchSetId` of the ByteMatchSet that you want to get.
       #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
       #   ListByteMatchSets.
+      #
       # @return [Types::GetByteMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetByteMatchSetResponse#byte_match_set #ByteMatchSet} => Types::ByteMatchSet
+      #   * {Types::GetByteMatchSetResponse#byte_match_set #byte_match_set} => Types::ByteMatchSet
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_byte_match_set({
       #     byte_match_set_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.byte_match_set.byte_match_set_id #=> String
       #   resp.byte_match_set.name #=> String
       #   resp.byte_match_set.byte_match_tuples #=> Array
@@ -901,6 +1007,7 @@ module Aws
       #   resp.byte_match_set.byte_match_tuples[0].target_string #=> String
       #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.byte_match_set.byte_match_tuples[0].positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
+      #
       # @overload get_byte_match_set(params = {})
       # @param [Hash] params ({})
       def get_byte_match_set(params = {}, options = {})
@@ -923,15 +1030,19 @@ module Aws
       # the status of the change token changes to `PENDING`, which indicates
       # that AWS WAF is propagating the change to all AWS WAF servers. Use
       # `GetChangeTokenStatus` to determine the status of your change token.
+      #
       # @return [Types::GetChangeTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetChangeTokenResponse#change_token #ChangeToken} => String
+      #   * {Types::GetChangeTokenResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_change_token()
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload get_change_token(params = {})
       # @param [Hash] params ({})
       def get_change_token(params = {}, options = {})
@@ -950,20 +1061,25 @@ module Aws
       #   request to all AWS WAF servers.
       #
       # * `IN_SYNC`\: Propagation is complete.
+      #
       # @option params [required, String] :change_token
       #   The change token for which you want to get the status. This change
       #   token was previously returned in the `GetChangeToken` response.
+      #
       # @return [Types::GetChangeTokenStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetChangeTokenStatusResponse#change_token_status #ChangeTokenStatus} => String
+      #   * {Types::GetChangeTokenStatusResponse#change_token_status #change_token_status} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_change_token_status({
       #     change_token: "ChangeToken", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token_status #=> String, one of "PROVISIONED", "PENDING", "INSYNC"
+      #
       # @overload get_change_token_status(params = {})
       # @param [Hash] params ({})
       def get_change_token_status(params = {}, options = {})
@@ -972,24 +1088,29 @@ module Aws
       end
 
       # Returns the IPSet that is specified by `IPSetId`.
+      #
       # @option params [required, String] :ip_set_id
       #   The `IPSetId` of the IPSet that you want to get. `IPSetId` is returned
       #   by CreateIPSet and by ListIPSets.
+      #
       # @return [Types::GetIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetIPSetResponse#ip_set #IPSet} => Types::IPSet
+      #   * {Types::GetIPSetResponse#ip_set #ip_set} => Types::IPSet
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_ip_set({
       #     ip_set_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.ip_set.ip_set_id #=> String
       #   resp.ip_set.name #=> String
       #   resp.ip_set.ip_set_descriptors #=> Array
       #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4", "IPV6"
       #   resp.ip_set.ip_set_descriptors[0].value #=> String
+      #
       # @overload get_ip_set(params = {})
       # @param [Hash] params ({})
       def get_ip_set(params = {}, options = {})
@@ -999,19 +1120,23 @@ module Aws
 
       # Returns the Rule that is specified by the `RuleId` that you included
       # in the `GetRule` request.
+      #
       # @option params [required, String] :rule_id
       #   The `RuleId` of the Rule that you want to get. `RuleId` is returned by
       #   CreateRule and by ListRules.
+      #
       # @return [Types::GetRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetRuleResponse#rule #Rule} => Types::Rule
+      #   * {Types::GetRuleResponse#rule #rule} => Types::Rule
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_rule({
       #     rule_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.rule.rule_id #=> String
       #   resp.rule.name #=> String
       #   resp.rule.metric_name #=> String
@@ -1019,6 +1144,7 @@ module Aws
       #   resp.rule.predicates[0].negated #=> Boolean
       #   resp.rule.predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
       #   resp.rule.predicates[0].data_id #=> String
+      #
       # @overload get_rule(params = {})
       # @param [Hash] params ({})
       def get_rule(params = {}, options = {})
@@ -1038,9 +1164,11 @@ module Aws
       # time range elapsed, `GetSampledRequests` returns an updated time
       # range. This new time range indicates the actual period during which
       # AWS WAF selected the requests in the sample.
+      #
       # @option params [required, String] :web_acl_id
       #   The `WebACLId` of the `WebACL` for which you want `GetSampledRequests`
       #   to return a sample of requests.
+      #
       # @option params [required, String] :rule_id
       #   `RuleId` is one of two values:
       #
@@ -1050,25 +1178,29 @@ module Aws
       #   * `Default_Action`, which causes `GetSampledRequests` to return a
       #     sample of the requests that didn't match any of the rules in the
       #     specified `WebACL`.
+      #
       # @option params [required, Types::TimeWindow] :time_window
       #   The start date and time and the end date and time of the range for
       #   which you want `GetSampledRequests` to return a sample of requests.
       #   Specify the date and time in the following format:
       #   `"2016-09-27T14:50Z"`. You can specify any time range in the previous
       #   three hours.
+      #
       # @option params [required, Integer] :max_items
       #   The number of requests that you want AWS WAF to return from among the
       #   first 5,000 requests that your AWS resource received during the time
       #   range. If your resource received fewer requests than the value of
       #   `MaxItems`, `GetSampledRequests` returns information about all of
       #   them.
+      #
       # @return [Types::GetSampledRequestsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSampledRequestsResponse#sampled_requests #SampledRequests} => Array&lt;Types::SampledHTTPRequest&gt;
-      #   * {Types::GetSampledRequestsResponse#population_size #PopulationSize} => Integer
-      #   * {Types::GetSampledRequestsResponse#time_window #TimeWindow} => Types::TimeWindow
+      #   * {Types::GetSampledRequestsResponse#sampled_requests #sampled_requests} => Array&lt;Types::SampledHTTPRequest&gt;
+      #   * {Types::GetSampledRequestsResponse#population_size #population_size} => Integer
+      #   * {Types::GetSampledRequestsResponse#time_window #time_window} => Types::TimeWindow
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_sampled_requests({
       #     web_acl_id: "ResourceId", # required
       #     rule_id: "ResourceId", # required
@@ -1080,6 +1212,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.sampled_requests #=> Array
       #   resp.sampled_requests[0].request.client_ip #=> String
       #   resp.sampled_requests[0].request.country #=> String
@@ -1095,6 +1228,7 @@ module Aws
       #   resp.population_size #=> Integer
       #   resp.time_window.start_time #=> Time
       #   resp.time_window.end_time #=> Time
+      #
       # @overload get_sampled_requests(params = {})
       # @param [Hash] params ({})
       def get_sampled_requests(params = {}, options = {})
@@ -1103,20 +1237,24 @@ module Aws
       end
 
       # Returns the SizeConstraintSet specified by `SizeConstraintSetId`.
+      #
       # @option params [required, String] :size_constraint_set_id
       #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
       #   get. `SizeConstraintSetId` is returned by CreateSizeConstraintSet and
       #   by ListSizeConstraintSets.
+      #
       # @return [Types::GetSizeConstraintSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSizeConstraintSetResponse#size_constraint_set #SizeConstraintSet} => Types::SizeConstraintSet
+      #   * {Types::GetSizeConstraintSetResponse#size_constraint_set #size_constraint_set} => Types::SizeConstraintSet
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_size_constraint_set({
       #     size_constraint_set_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.size_constraint_set.size_constraint_set_id #=> String
       #   resp.size_constraint_set.name #=> String
       #   resp.size_constraint_set.size_constraints #=> Array
@@ -1125,6 +1263,7 @@ module Aws
       #   resp.size_constraint_set.size_constraints[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
       #   resp.size_constraint_set.size_constraints[0].size #=> Integer
+      #
       # @overload get_size_constraint_set(params = {})
       # @param [Hash] params ({})
       def get_size_constraint_set(params = {}, options = {})
@@ -1134,26 +1273,31 @@ module Aws
 
       # Returns the SqlInjectionMatchSet that is specified by
       # `SqlInjectionMatchSetId`.
+      #
       # @option params [required, String] :sql_injection_match_set_id
       #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you want
       #   to get. `SqlInjectionMatchSetId` is returned by
       #   CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
+      #
       # @return [Types::GetSqlInjectionMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetSqlInjectionMatchSetResponse#sql_injection_match_set #SqlInjectionMatchSet} => Types::SqlInjectionMatchSet
+      #   * {Types::GetSqlInjectionMatchSetResponse#sql_injection_match_set #sql_injection_match_set} => Types::SqlInjectionMatchSet
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_sql_injection_match_set({
       #     sql_injection_match_set_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.sql_injection_match_set.sql_injection_match_set_id #=> String
       #   resp.sql_injection_match_set.name #=> String
       #   resp.sql_injection_match_set.sql_injection_match_tuples #=> Array
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
+      #
       # @overload get_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
       def get_sql_injection_match_set(params = {}, options = {})
@@ -1162,19 +1306,23 @@ module Aws
       end
 
       # Returns the WebACL that is specified by `WebACLId`.
+      #
       # @option params [required, String] :web_acl_id
       #   The `WebACLId` of the WebACL that you want to get. `WebACLId` is
       #   returned by CreateWebACL and by ListWebACLs.
+      #
       # @return [Types::GetWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetWebACLResponse#web_acl #WebACL} => Types::WebACL
+      #   * {Types::GetWebACLResponse#web_acl #web_acl} => Types::WebACL
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_web_acl({
       #     web_acl_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.web_acl.web_acl_id #=> String
       #   resp.web_acl.name #=> String
       #   resp.web_acl.metric_name #=> String
@@ -1183,6 +1331,7 @@ module Aws
       #   resp.web_acl.rules[0].priority #=> Integer
       #   resp.web_acl.rules[0].rule_id #=> String
       #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
+      #
       # @overload get_web_acl(params = {})
       # @param [Hash] params ({})
       def get_web_acl(params = {}, options = {})
@@ -1191,26 +1340,31 @@ module Aws
       end
 
       # Returns the XssMatchSet that is specified by `XssMatchSetId`.
+      #
       # @option params [required, String] :xss_match_set_id
       #   The `XssMatchSetId` of the XssMatchSet that you want to get.
       #   `XssMatchSetId` is returned by CreateXssMatchSet and by
       #   ListXssMatchSets.
+      #
       # @return [Types::GetXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetXssMatchSetResponse#xss_match_set #XssMatchSet} => Types::XssMatchSet
+      #   * {Types::GetXssMatchSetResponse#xss_match_set #xss_match_set} => Types::XssMatchSet
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_xss_match_set({
       #     xss_match_set_id: "ResourceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.xss_match_set.xss_match_set_id #=> String
       #   resp.xss_match_set.name #=> String
       #   resp.xss_match_set.xss_match_tuples #=> Array
       #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
       #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
       #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
+      #
       # @overload get_xss_match_set(params = {})
       # @param [Hash] params ({})
       def get_xss_match_set(params = {}, options = {})
@@ -1219,6 +1373,7 @@ module Aws
       end
 
       # Returns an array of ByteMatchSetSummary objects.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more `ByteMatchSets`
       #   than the value of `Limit`, AWS WAF returns a `NextMarker` value in the
@@ -1226,28 +1381,33 @@ module Aws
       #   the second and subsequent `ListByteMatchSets` requests, specify the
       #   value of `NextMarker` from the previous response to get information
       #   about another batch of `ByteMatchSets`.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of `ByteMatchSet` objects that you want AWS WAF
       #   to return for this request. If you have more `ByteMatchSets` objects
       #   than the number you specify for `Limit`, the response includes a
       #   `NextMarker` value that you can use to get another batch of
       #   `ByteMatchSet` objects.
+      #
       # @return [Types::ListByteMatchSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListByteMatchSetsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListByteMatchSetsResponse#byte_match_sets #ByteMatchSets} => Array&lt;Types::ByteMatchSetSummary&gt;
+      #   * {Types::ListByteMatchSetsResponse#next_marker #next_marker} => String
+      #   * {Types::ListByteMatchSetsResponse#byte_match_sets #byte_match_sets} => Array&lt;Types::ByteMatchSetSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_byte_match_sets({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.byte_match_sets #=> Array
       #   resp.byte_match_sets[0].byte_match_set_id #=> String
       #   resp.byte_match_sets[0].name #=> String
+      #
       # @overload list_byte_match_sets(params = {})
       # @param [Hash] params ({})
       def list_byte_match_sets(params = {}, options = {})
@@ -1256,6 +1416,7 @@ module Aws
       end
 
       # Returns an array of IPSetSummary objects in the response.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more `IPSets` than the
       #   value of `Limit`, AWS WAF returns a `NextMarker` value in the response
@@ -1263,27 +1424,32 @@ module Aws
       #   subsequent `ListIPSets` requests, specify the value of `NextMarker`
       #   from the previous response to get information about another batch of
       #   `ByteMatchSets`.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of `IPSet` objects that you want AWS WAF to
       #   return for this request. If you have more `IPSet` objects than the
       #   number you specify for `Limit`, the response includes a `NextMarker`
       #   value that you can use to get another batch of `IPSet` objects.
+      #
       # @return [Types::ListIPSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListIPSetsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListIPSetsResponse#ip_sets #IPSets} => Array&lt;Types::IPSetSummary&gt;
+      #   * {Types::ListIPSetsResponse#next_marker #next_marker} => String
+      #   * {Types::ListIPSetsResponse#ip_sets #ip_sets} => Array&lt;Types::IPSetSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_ip_sets({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.ip_sets #=> Array
       #   resp.ip_sets[0].ip_set_id #=> String
       #   resp.ip_sets[0].name #=> String
+      #
       # @overload list_ip_sets(params = {})
       # @param [Hash] params ({})
       def list_ip_sets(params = {}, options = {})
@@ -1292,6 +1458,7 @@ module Aws
       end
 
       # Returns an array of RuleSummary objects.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more `Rules` than the
       #   value of `Limit`, AWS WAF returns a `NextMarker` value in the response
@@ -1299,27 +1466,32 @@ module Aws
       #   subsequent `ListRules` requests, specify the value of `NextMarker`
       #   from the previous response to get information about another batch of
       #   `Rules`.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of `Rules` that you want AWS WAF to return for
       #   this request. If you have more `Rules` than the number that you
       #   specify for `Limit`, the response includes a `NextMarker` value that
       #   you can use to get another batch of `Rules`.
+      #
       # @return [Types::ListRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListRulesResponse#next_marker #NextMarker} => String
-      #   * {Types::ListRulesResponse#rules #Rules} => Array&lt;Types::RuleSummary&gt;
+      #   * {Types::ListRulesResponse#next_marker #next_marker} => String
+      #   * {Types::ListRulesResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_rules({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.rules #=> Array
       #   resp.rules[0].rule_id #=> String
       #   resp.rules[0].name #=> String
+      #
       # @overload list_rules(params = {})
       # @param [Hash] params ({})
       def list_rules(params = {}, options = {})
@@ -1328,6 +1500,7 @@ module Aws
       end
 
       # Returns an array of SizeConstraintSetSummary objects.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more
       #   `SizeConstraintSets` than the value of `Limit`, AWS WAF returns a
@@ -1336,28 +1509,33 @@ module Aws
       #   `ListSizeConstraintSets` requests, specify the value of `NextMarker`
       #   from the previous response to get information about another batch of
       #   `SizeConstraintSets`.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of `SizeConstraintSet` objects that you want AWS
       #   WAF to return for this request. If you have more `SizeConstraintSets`
       #   objects than the number you specify for `Limit`, the response includes
       #   a `NextMarker` value that you can use to get another batch of
       #   `SizeConstraintSet` objects.
+      #
       # @return [Types::ListSizeConstraintSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListSizeConstraintSetsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListSizeConstraintSetsResponse#size_constraint_sets #SizeConstraintSets} => Array&lt;Types::SizeConstraintSetSummary&gt;
+      #   * {Types::ListSizeConstraintSetsResponse#next_marker #next_marker} => String
+      #   * {Types::ListSizeConstraintSetsResponse#size_constraint_sets #size_constraint_sets} => Array&lt;Types::SizeConstraintSetSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_size_constraint_sets({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.size_constraint_sets #=> Array
       #   resp.size_constraint_sets[0].size_constraint_set_id #=> String
       #   resp.size_constraint_sets[0].name #=> String
+      #
       # @overload list_size_constraint_sets(params = {})
       # @param [Hash] params ({})
       def list_size_constraint_sets(params = {}, options = {})
@@ -1366,6 +1544,7 @@ module Aws
       end
 
       # Returns an array of SqlInjectionMatchSet objects.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more
       #   SqlInjectionMatchSet objects than the value of `Limit`, AWS WAF
@@ -1374,28 +1553,33 @@ module Aws
       #   subsequent `ListSqlInjectionMatchSets` requests, specify the value of
       #   `NextMarker` from the previous response to get information about
       #   another batch of `SqlInjectionMatchSets`.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of SqlInjectionMatchSet objects that you want AWS
       #   WAF to return for this request. If you have more
       #   `SqlInjectionMatchSet` objects than the number you specify for
       #   `Limit`, the response includes a `NextMarker` value that you can use
       #   to get another batch of `Rules`.
+      #
       # @return [Types::ListSqlInjectionMatchSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListSqlInjectionMatchSetsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListSqlInjectionMatchSetsResponse#sql_injection_match_sets #SqlInjectionMatchSets} => Array&lt;Types::SqlInjectionMatchSetSummary&gt;
+      #   * {Types::ListSqlInjectionMatchSetsResponse#next_marker #next_marker} => String
+      #   * {Types::ListSqlInjectionMatchSetsResponse#sql_injection_match_sets #sql_injection_match_sets} => Array&lt;Types::SqlInjectionMatchSetSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_sql_injection_match_sets({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.sql_injection_match_sets #=> Array
       #   resp.sql_injection_match_sets[0].sql_injection_match_set_id #=> String
       #   resp.sql_injection_match_sets[0].name #=> String
+      #
       # @overload list_sql_injection_match_sets(params = {})
       # @param [Hash] params ({})
       def list_sql_injection_match_sets(params = {}, options = {})
@@ -1404,6 +1588,7 @@ module Aws
       end
 
       # Returns an array of WebACLSummary objects in the response.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more `WebACL` objects
       #   than the number that you specify for `Limit`, AWS WAF returns a
@@ -1411,28 +1596,33 @@ module Aws
       #   group of `WebACL` objects. For the second and subsequent `ListWebACLs`
       #   requests, specify the value of `NextMarker` from the previous response
       #   to get information about another batch of `WebACL` objects.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of `WebACL` objects that you want AWS WAF to
       #   return for this request. If you have more `WebACL` objects than the
       #   number that you specify for `Limit`, the response includes a
       #   `NextMarker` value that you can use to get another batch of `WebACL`
       #   objects.
+      #
       # @return [Types::ListWebACLsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListWebACLsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListWebACLsResponse#web_acls #WebACLs} => Array&lt;Types::WebACLSummary&gt;
+      #   * {Types::ListWebACLsResponse#next_marker #next_marker} => String
+      #   * {Types::ListWebACLsResponse#web_acls #web_acls} => Array&lt;Types::WebACLSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_web_acls({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.web_acls #=> Array
       #   resp.web_acls[0].web_acl_id #=> String
       #   resp.web_acls[0].name #=> String
+      #
       # @overload list_web_acls(params = {})
       # @param [Hash] params ({})
       def list_web_acls(params = {}, options = {})
@@ -1441,6 +1631,7 @@ module Aws
       end
 
       # Returns an array of XssMatchSet objects.
+      #
       # @option params [String] :next_marker
       #   If you specify a value for `Limit` and you have more XssMatchSet
       #   objects than the value of `Limit`, AWS WAF returns a `NextMarker`
@@ -1448,27 +1639,32 @@ module Aws
       #   `XssMatchSets`. For the second and subsequent `ListXssMatchSets`
       #   requests, specify the value of `NextMarker` from the previous response
       #   to get information about another batch of `XssMatchSets`.
+      #
       # @option params [Integer] :limit
       #   Specifies the number of XssMatchSet objects that you want AWS WAF to
       #   return for this request. If you have more `XssMatchSet` objects than
       #   the number you specify for `Limit`, the response includes a
       #   `NextMarker` value that you can use to get another batch of `Rules`.
+      #
       # @return [Types::ListXssMatchSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListXssMatchSetsResponse#next_marker #NextMarker} => String
-      #   * {Types::ListXssMatchSetsResponse#xss_match_sets #XssMatchSets} => Array&lt;Types::XssMatchSetSummary&gt;
+      #   * {Types::ListXssMatchSetsResponse#next_marker #next_marker} => String
+      #   * {Types::ListXssMatchSetsResponse#xss_match_sets #xss_match_sets} => Array&lt;Types::XssMatchSetSummary&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_xss_match_sets({
       #     next_marker: "NextMarker",
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.next_marker #=> String
       #   resp.xss_match_sets #=> Array
       #   resp.xss_match_sets[0].xss_match_set_id #=> String
       #   resp.xss_match_sets[0].name #=> String
+      #
       # @overload list_xss_match_sets(params = {})
       # @param [Hash] params ({})
       def list_xss_match_sets(params = {}, options = {})
@@ -1520,12 +1716,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :byte_match_set_id
       #   The `ByteMatchSetId` of the ByteMatchSet that you want to update.
       #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
       #   ListByteMatchSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [required, Array<Types::ByteMatchSetUpdate>] :updates
       #   An array of `ByteMatchSetUpdate` objects that you want to insert into
       #   or delete from a ByteMatchSet. For more information, see the
@@ -1537,11 +1736,13 @@ module Aws
       #     `TargetString`, and `TextTransformation`
       #
       #   * FieldToMatch: Contains `Data` and `Type`
+      #
       # @return [Types::UpdateByteMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateByteMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateByteMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_byte_match_set({
       #     byte_match_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -1562,7 +1763,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_byte_match_set(params = {})
       # @param [Hash] params ({})
       def update_byte_match_set(params = {}, options = {})
@@ -1627,11 +1830,14 @@ module Aws
       #
       # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
       # [2]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :ip_set_id
       #   The `IPSetId` of the IPSet that you want to update. `IPSetId` is
       #   returned by CreateIPSet and by ListIPSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [required, Array<Types::IPSetUpdate>] :updates
       #   An array of `IPSetUpdate` objects that you want to insert into or
       #   delete from an IPSet. For more information, see the applicable data
@@ -1640,11 +1846,13 @@ module Aws
       #   * IPSetUpdate: Contains `Action` and `IPSetDescriptor`
       #
       #   * IPSetDescriptor: Contains `Type` and `Value`
+      #
       # @return [Types::UpdateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateIPSetResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateIPSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_ip_set({
       #     ip_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -1660,7 +1868,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_ip_set(params = {})
       # @param [Hash] params ({})
       def update_ip_set(params = {}, options = {})
@@ -1709,11 +1919,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :rule_id
       #   The `RuleId` of the `Rule` that you want to update. `RuleId` is
       #   returned by `CreateRule` and by ListRules.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [required, Array<Types::RuleUpdate>] :updates
       #   An array of `RuleUpdate` objects that you want to insert into or
       #   delete from a Rule. For more information, see the applicable data
@@ -1724,11 +1937,13 @@ module Aws
       #   * Predicate: Contains `DataId`, `Negated`, and `Type`
       #
       #   * FieldToMatch: Contains `Data` and `Type`
+      #
       # @return [Types::UpdateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateRuleResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateRuleResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_rule({
       #     rule_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -1745,7 +1960,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_rule(params = {})
       # @param [Hash] params ({})
       def update_rule(params = {}, options = {})
@@ -1804,12 +2021,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :size_constraint_set_id
       #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
       #   update. `SizeConstraintSetId` is returned by CreateSizeConstraintSet
       #   and by ListSizeConstraintSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [required, Array<Types::SizeConstraintSetUpdate>] :updates
       #   An array of `SizeConstraintSetUpdate` objects that you want to insert
       #   into or delete from a SizeConstraintSet. For more information, see the
@@ -1821,11 +2041,13 @@ module Aws
       #     `ComparisonOperator`, and `Size`
       #
       #   * FieldToMatch: Contains `Data` and `Type`
+      #
       # @return [Types::UpdateSizeConstraintSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateSizeConstraintSetResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateSizeConstraintSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_size_constraint_set({
       #     size_constraint_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -1846,7 +2068,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_size_constraint_set(params = {})
       # @param [Hash] params ({})
       def update_size_constraint_set(params = {}, options = {})
@@ -1895,12 +2119,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :sql_injection_match_set_id
       #   The `SqlInjectionMatchSetId` of the `SqlInjectionMatchSet` that you
       #   want to update. `SqlInjectionMatchSetId` is returned by
       #   CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [required, Array<Types::SqlInjectionMatchSetUpdate>] :updates
       #   An array of `SqlInjectionMatchSetUpdate` objects that you want to
       #   insert into or delete from a SqlInjectionMatchSet. For more
@@ -1913,11 +2140,13 @@ module Aws
       #     `TextTransformation`
       #
       #   * FieldToMatch: Contains `Data` and `Type`
+      #
       # @return [Types::UpdateSqlInjectionMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateSqlInjectionMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateSqlInjectionMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_sql_injection_match_set({
       #     sql_injection_match_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -1936,7 +2165,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
       def update_sql_injection_match_set(params = {}, options = {})
@@ -1997,11 +2228,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :web_acl_id
       #   The `WebACLId` of the WebACL that you want to update. `WebACLId` is
       #   returned by CreateWebACL and by ListWebACLs.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [Array<Types::WebACLUpdate>] :updates
       #   An array of updates to make to the WebACL.
       #
@@ -2014,15 +2248,18 @@ module Aws
       #   * ActivatedRule: Contains `Action`, `Priority`, and `RuleId`
       #
       #   * WafAction: Contains `Type`
+      #
       # @option params [Types::WafAction] :default_action
       #   A default action for the web ACL, either ALLOW or BLOCK. AWS WAF
       #   performs the default action if a request doesn't match the criteria
       #   in any of the rules in a web ACL.
+      #
       # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateWebACLResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateWebACLResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_web_acl({
       #     web_acl_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -2044,7 +2281,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_web_acl(params = {})
       # @param [Hash] params ({})
       def update_web_acl(params = {}, options = {})
@@ -2091,12 +2330,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
+      #
       # @option params [required, String] :xss_match_set_id
       #   The `XssMatchSetId` of the `XssMatchSet` that you want to update.
       #   `XssMatchSetId` is returned by CreateXssMatchSet and by
       #   ListXssMatchSets.
+      #
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
+      #
       # @option params [required, Array<Types::XssMatchSetUpdate>] :updates
       #   An array of `XssMatchSetUpdate` objects that you want to insert into
       #   or delete from a XssMatchSet. For more information, see the applicable
@@ -2107,11 +2349,13 @@ module Aws
       #   * XssMatchTuple: Contains `FieldToMatch` and `TextTransformation`
       #
       #   * FieldToMatch: Contains `Data` and `Type`
+      #
       # @return [Types::UpdateXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateXssMatchSetResponse#change_token #ChangeToken} => String
+      #   * {Types::UpdateXssMatchSetResponse#change_token #change_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_xss_match_set({
       #     xss_match_set_id: "ResourceId", # required
       #     change_token: "ChangeToken", # required
@@ -2130,7 +2374,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.change_token #=> String
+      #
       # @overload update_xss_match_set(params = {})
       # @param [Hash] params ({})
       def update_xss_match_set(params = {}, options = {})

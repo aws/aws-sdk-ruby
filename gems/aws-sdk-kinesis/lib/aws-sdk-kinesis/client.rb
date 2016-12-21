@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -145,19 +160,24 @@ module Aws
       # If tags have already been assigned to the stream, `AddTagsToStream`
       # overwrites any existing tags that correspond to the specified tag
       # keys.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream.
+      #
       # @option params [required, Hash<String,String>] :tags
       #   The set of key-value pairs to use to create the tags.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_stream({
       #     stream_name: "StreamName", # required
       #     tags: { # required
       #       "TagKey" => "TagValue",
       #     },
       #   })
+      #
       # @overload add_tags_to_stream(params = {})
       # @param [Hash] params ({})
       def add_tags_to_stream(params = {}, options = {})
@@ -212,25 +232,30 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
       # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      #
       # @option params [required, String] :stream_name
       #   A name to identify the stream. The stream name is scoped to the AWS
       #   account used by the application that creates the stream. It is also
       #   scoped by region. That is, two streams in two different AWS accounts
       #   can have the same name, and two streams in the same AWS account but in
       #   two different regions can have the same name.
+      #
       # @option params [required, Integer] :shard_count
       #   The number of shards that the stream will use. The throughput of the
       #   stream is a function of the number of shards; more shards are required
       #   for greater provisioned throughput.
       #
       #   DefaultShardLimit;
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_stream({
       #     stream_name: "StreamName", # required
       #     shard_count: 1, # required
       #   })
+      #
       # @overload create_stream(params = {})
       # @param [Hash] params ({})
       def create_stream(params = {}, options = {})
@@ -245,18 +270,23 @@ module Aws
       # This operation may result in lost data. For example, if the stream's
       # retention period is 48 hours and is decreased to 24 hours, any data
       # already in the stream that is older than 24 hours is inaccessible.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream to modify.
+      #
       # @option params [required, Integer] :retention_period_hours
       #   The new retention period of the stream, in hours. Must be less than
       #   the current retention period.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.decrease_stream_retention_period({
       #     stream_name: "StreamName", # required
       #     retention_period_hours: 1, # required
       #   })
+      #
       # @overload decrease_stream_retention_period(params = {})
       # @param [Hash] params ({})
       def decrease_stream_retention_period(params = {}, options = {})
@@ -284,14 +314,18 @@ module Aws
       # stream, which is returned in `StreamStatus`.
       #
       # DeleteStream has a limit of 5 transactions per second per account.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_stream({
       #     stream_name: "StreamName", # required
       #   })
+      #
       # @overload delete_stream(params = {})
       # @param [Hash] params ({})
       def delete_stream(params = {}, options = {})
@@ -305,17 +339,21 @@ module Aws
       # for a few minutes.
       #
       # This operation has a limit of 1 transaction per second per account.
+      #
       # @return [Types::DescribeLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeLimitsOutput#shard_limit #ShardLimit} => Integer
-      #   * {Types::DescribeLimitsOutput#open_shard_count #OpenShardCount} => Integer
+      #   * {Types::DescribeLimitsOutput#shard_limit #shard_limit} => Integer
+      #   * {Types::DescribeLimitsOutput#open_shard_count #open_shard_count} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_limits()
       #
       # @example Response structure
+      #
       #   resp.shard_limit #=> Integer
       #   resp.open_shard_count #=> Integer
+      #
       # @overload describe_limits(params = {})
       # @param [Hash] params ({})
       def describe_limits(params = {}, options = {})
@@ -347,19 +385,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream to describe.
+      #
       # @option params [Integer] :limit
       #   The maximum number of shards to return in a single call. The default
       #   value is 100. If you specify a value greater than 100, at most 100
       #   shards are returned.
+      #
       # @option params [String] :exclusive_start_shard_id
       #   The shard ID of the shard to start with.
+      #
       # @return [Types::DescribeStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStreamOutput#stream_description #StreamDescription} => Types::StreamDescription
+      #   * {Types::DescribeStreamOutput#stream_description #stream_description} => Types::StreamDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stream({
       #     stream_name: "StreamName", # required
       #     limit: 1,
@@ -367,6 +410,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stream_description.stream_name #=> String
       #   resp.stream_description.stream_arn #=> String
       #   resp.stream_description.stream_status #=> String, one of "CREATING", "DELETING", "ACTIVE", "UPDATING"
@@ -384,6 +428,7 @@ module Aws
       #   resp.stream_description.enhanced_monitoring #=> Array
       #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics #=> Array
       #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+      #
       # @overload describe_stream(params = {})
       # @param [Hash] params ({})
       def describe_stream(params = {}, options = {})
@@ -392,9 +437,11 @@ module Aws
       end
 
       # Disables enhanced monitoring.
+      #
       # @option params [required, String] :stream_name
       #   The name of the Amazon Kinesis stream for which to disable enhanced
       #   monitoring.
+      #
       # @option params [required, Array<String>] :shard_level_metrics
       #   List of shard-level metrics to disable.
       #
@@ -424,24 +471,28 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+      #
       # @return [Types::EnhancedMonitoringOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnhancedMonitoringOutput#stream_name #StreamName} => String
-      #   * {Types::EnhancedMonitoringOutput#current_shard_level_metrics #CurrentShardLevelMetrics} => Array&lt;String&gt;
-      #   * {Types::EnhancedMonitoringOutput#desired_shard_level_metrics #DesiredShardLevelMetrics} => Array&lt;String&gt;
+      #   * {Types::EnhancedMonitoringOutput#stream_name #stream_name} => String
+      #   * {Types::EnhancedMonitoringOutput#current_shard_level_metrics #current_shard_level_metrics} => Array&lt;String&gt;
+      #   * {Types::EnhancedMonitoringOutput#desired_shard_level_metrics #desired_shard_level_metrics} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.disable_enhanced_monitoring({
       #     stream_name: "StreamName", # required
       #     shard_level_metrics: ["IncomingBytes"], # required, accepts IncomingBytes, IncomingRecords, OutgoingBytes, OutgoingRecords, WriteProvisionedThroughputExceeded, ReadProvisionedThroughputExceeded, IteratorAgeMilliseconds, ALL
       #   })
       #
       # @example Response structure
+      #
       #   resp.stream_name #=> String
       #   resp.current_shard_level_metrics #=> Array
       #   resp.current_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
       #   resp.desired_shard_level_metrics #=> Array
       #   resp.desired_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+      #
       # @overload disable_enhanced_monitoring(params = {})
       # @param [Hash] params ({})
       def disable_enhanced_monitoring(params = {}, options = {})
@@ -451,8 +502,10 @@ module Aws
 
       # Enables enhanced Amazon Kinesis stream monitoring for shard-level
       # metrics.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream for which to enable enhanced monitoring.
+      #
       # @option params [required, Array<String>] :shard_level_metrics
       #   List of shard-level metrics to enable.
       #
@@ -482,24 +535,28 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
+      #
       # @return [Types::EnhancedMonitoringOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::EnhancedMonitoringOutput#stream_name #StreamName} => String
-      #   * {Types::EnhancedMonitoringOutput#current_shard_level_metrics #CurrentShardLevelMetrics} => Array&lt;String&gt;
-      #   * {Types::EnhancedMonitoringOutput#desired_shard_level_metrics #DesiredShardLevelMetrics} => Array&lt;String&gt;
+      #   * {Types::EnhancedMonitoringOutput#stream_name #stream_name} => String
+      #   * {Types::EnhancedMonitoringOutput#current_shard_level_metrics #current_shard_level_metrics} => Array&lt;String&gt;
+      #   * {Types::EnhancedMonitoringOutput#desired_shard_level_metrics #desired_shard_level_metrics} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.enable_enhanced_monitoring({
       #     stream_name: "StreamName", # required
       #     shard_level_metrics: ["IncomingBytes"], # required, accepts IncomingBytes, IncomingRecords, OutgoingBytes, OutgoingRecords, WriteProvisionedThroughputExceeded, ReadProvisionedThroughputExceeded, IteratorAgeMilliseconds, ALL
       #   })
       #
       # @example Response structure
+      #
       #   resp.stream_name #=> String
       #   resp.current_shard_level_metrics #=> Array
       #   resp.current_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
       #   resp.desired_shard_level_metrics #=> Array
       #   resp.desired_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+      #
       # @overload enable_enhanced_monitoring(params = {})
       # @param [Hash] params ({})
       def enable_enhanced_monitoring(params = {}, options = {})
@@ -569,27 +626,32 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
       # [2]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring.html
+      #
       # @option params [required, String] :shard_iterator
       #   The position in the shard from which you want to start sequentially
       #   reading data records. A shard iterator specifies this position using
       #   the sequence number of a data record in the shard.
+      #
       # @option params [Integer] :limit
       #   The maximum number of records to return. Specify a value of up to
       #   10,000. If you specify a value that is greater than 10,000, GetRecords
       #   throws `InvalidArgumentException`.
+      #
       # @return [Types::GetRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetRecordsOutput#records #Records} => Array&lt;Types::Record&gt;
-      #   * {Types::GetRecordsOutput#next_shard_iterator #NextShardIterator} => String
-      #   * {Types::GetRecordsOutput#millis_behind_latest #MillisBehindLatest} => Integer
+      #   * {Types::GetRecordsOutput#records #records} => Array&lt;Types::Record&gt;
+      #   * {Types::GetRecordsOutput#next_shard_iterator #next_shard_iterator} => String
+      #   * {Types::GetRecordsOutput#millis_behind_latest #millis_behind_latest} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_records({
       #     shard_iterator: "ShardIterator", # required
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.records #=> Array
       #   resp.records[0].sequence_number #=> String
       #   resp.records[0].approximate_arrival_timestamp #=> Time
@@ -597,6 +659,7 @@ module Aws
       #   resp.records[0].partition_key #=> String
       #   resp.next_shard_iterator #=> String
       #   resp.millis_behind_latest #=> Integer
+      #
       # @overload get_records(params = {})
       # @param [Hash] params ({})
       def get_records(params = {}, options = {})
@@ -649,10 +712,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+      #
       # @option params [required, String] :stream_name
       #   The name of the Amazon Kinesis stream.
+      #
       # @option params [required, String] :shard_id
       #   The shard ID of the Amazon Kinesis shard to get the iterator for.
+      #
       # @option params [required, String] :shard_iterator_type
       #   Determines how the shard iterator is used to start reading data
       #   records from the shard.
@@ -675,10 +741,12 @@ module Aws
       #
       #   * LATEST - Start reading just after the most recent record in the
       #     shard, so that you always read the most recent data in the shard.
+      #
       # @option params [String] :starting_sequence_number
       #   The sequence number of the data record in the shard from which to
       #   start reading. Used with shard iterator type AT\_SEQUENCE\_NUMBER and
       #   AFTER\_SEQUENCE\_NUMBER.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :timestamp
       #   The timestamp of the data record from which to start reading. Used
       #   with shard iterator type AT\_TIMESTAMP. A timestamp is the Unix epoch
@@ -688,11 +756,13 @@ module Aws
       #   next (later) record. If the timestamp is older than the current trim
       #   horizon, the iterator returned is for the oldest untrimmed data record
       #   (TRIM\_HORIZON).
+      #
       # @return [Types::GetShardIteratorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetShardIteratorOutput#shard_iterator #ShardIterator} => String
+      #   * {Types::GetShardIteratorOutput#shard_iterator #shard_iterator} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_shard_iterator({
       #     stream_name: "StreamName", # required
       #     shard_id: "ShardId", # required
@@ -702,7 +772,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.shard_iterator #=> String
+      #
       # @overload get_shard_iterator(params = {})
       # @param [Hash] params ({})
       def get_shard_iterator(params = {}, options = {})
@@ -723,18 +795,23 @@ module Aws
       # period is set to 24 hours and is increased to 168 hours, any data that
       # is older than 24 hours will remain inaccessible to consumer
       # applications.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream to modify.
+      #
       # @option params [required, Integer] :retention_period_hours
       #   The new retention period of the stream, in hours. Must be more than
       #   the current retention period.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.increase_stream_retention_period({
       #     stream_name: "StreamName", # required
       #     retention_period_hours: 1, # required
       #   })
+      #
       # @overload increase_stream_retention_period(params = {})
       # @param [Hash] params ({})
       def increase_stream_retention_period(params = {}, options = {})
@@ -760,25 +837,31 @@ module Aws
       # all the stream names have been collected in the list.
       #
       # ListStreams has a limit of 5 transactions per second per account.
+      #
       # @option params [Integer] :limit
       #   The maximum number of streams to list.
+      #
       # @option params [String] :exclusive_start_stream_name
       #   The name of the stream to start the list with.
+      #
       # @return [Types::ListStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListStreamsOutput#stream_names #StreamNames} => Array&lt;String&gt;
-      #   * {Types::ListStreamsOutput#has_more_streams #HasMoreStreams} => Boolean
+      #   * {Types::ListStreamsOutput#stream_names #stream_names} => Array&lt;String&gt;
+      #   * {Types::ListStreamsOutput#has_more_streams #has_more_streams} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_streams({
       #     limit: 1,
       #     exclusive_start_stream_name: "StreamName",
       #   })
       #
       # @example Response structure
+      #
       #   resp.stream_names #=> Array
       #   resp.stream_names[0] #=> String
       #   resp.has_more_streams #=> Boolean
+      #
       # @overload list_streams(params = {})
       # @param [Hash] params ({})
       def list_streams(params = {}, options = {})
@@ -787,23 +870,28 @@ module Aws
       end
 
       # Lists the tags for the specified Amazon Kinesis stream.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream.
+      #
       # @option params [String] :exclusive_start_tag_key
       #   The key to use as the starting point for the list of tags. If this
       #   parameter is set, `ListTagsForStream` gets all tags that occur after
       #   `ExclusiveStartTagKey`.
+      #
       # @option params [Integer] :limit
       #   The number of tags to return. If this number is less than the total
       #   number of tags associated with the stream, `HasMoreTags` is set to
       #   `true`. To list additional tags, set `ExclusiveStartTagKey` to the
       #   last key in the response.
+      #
       # @return [Types::ListTagsForStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsForStreamOutput#tags #Tags} => Array&lt;Types::Tag&gt;
-      #   * {Types::ListTagsForStreamOutput#has_more_tags #HasMoreTags} => Boolean
+      #   * {Types::ListTagsForStreamOutput#tags #tags} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsForStreamOutput#has_more_tags #has_more_tags} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_stream({
       #     stream_name: "StreamName", # required
       #     exclusive_start_tag_key: "TagKey",
@@ -811,10 +899,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
       #   resp.has_more_tags #=> Boolean
+      #
       # @overload list_tags_for_stream(params = {})
       # @param [Hash] params ({})
       def list_tags_for_stream(params = {}, options = {})
@@ -867,21 +957,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-merge.html
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream for the merge.
+      #
       # @option params [required, String] :shard_to_merge
       #   The shard ID of the shard to combine with the adjacent shard for the
       #   merge.
+      #
       # @option params [required, String] :adjacent_shard_to_merge
       #   The shard ID of the adjacent shard for the merge.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.merge_shards({
       #     stream_name: "StreamName", # required
       #     shard_to_merge: "ShardId", # required
       #     adjacent_shard_to_merge: "ShardId", # required
       #   })
+      #
       # @overload merge_shards(params = {})
       # @param [Hash] params ({})
       def merge_shards(params = {}, options = {})
@@ -937,13 +1033,16 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream to put the data record into.
+      #
       # @option params [required, String, IO] :data
       #   The data blob to put into the record, which is base64-encoded when the
       #   blob is serialized. When the data blob (the payload before
       #   base64-encoding) is added to the partition key size, the total size
       #   must not exceed the maximum record size (1 MB).
+      #
       # @option params [required, String] :partition_key
       #   Determines which shard in the stream the data record is assigned to.
       #   Partition keys are Unicode strings with a maximum length limit of 256
@@ -954,9 +1053,11 @@ module Aws
       #   data records to shards. As a result of this hashing mechanism, all
       #   data records with the same partition key map to the same shard within
       #   the stream.
+      #
       # @option params [String] :explicit_hash_key
       #   The hash value used to explicitly determine the shard the data record
       #   is assigned to by overriding the partition key hash.
+      #
       # @option params [String] :sequence_number_for_ordering
       #   Guarantees strictly increasing sequence numbers, for puts from the
       #   same client and to the same partition key. Usage: set the
@@ -964,12 +1065,14 @@ module Aws
       #   record *n-1* (as returned in the result when putting record *n-1*). If
       #   this parameter is not set, records will be coarsely ordered based on
       #   arrival time.
+      #
       # @return [Types::PutRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutRecordOutput#shard_id #ShardId} => String
-      #   * {Types::PutRecordOutput#sequence_number #SequenceNumber} => String
+      #   * {Types::PutRecordOutput#shard_id #shard_id} => String
+      #   * {Types::PutRecordOutput#sequence_number #sequence_number} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_record({
       #     stream_name: "StreamName", # required
       #     data: "data", # required
@@ -979,8 +1082,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.shard_id #=> String
       #   resp.sequence_number #=> String
+      #
       # @overload put_record(params = {})
       # @param [Hash] params ({})
       def put_record(params = {}, options = {})
@@ -1062,16 +1167,20 @@ module Aws
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream
       # [2]: http://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-putrecords
       # [3]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-add-data-to-stream.html#kinesis-using-sdk-java-putrecords
+      #
       # @option params [required, Array<Types::PutRecordsRequestEntry>] :records
       #   The records associated with the request.
+      #
       # @option params [required, String] :stream_name
       #   The stream name associated with the request.
+      #
       # @return [Types::PutRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutRecordsOutput#failed_record_count #FailedRecordCount} => Integer
-      #   * {Types::PutRecordsOutput#records #Records} => Array&lt;Types::PutRecordsResultEntry&gt;
+      #   * {Types::PutRecordsOutput#failed_record_count #failed_record_count} => Integer
+      #   * {Types::PutRecordsOutput#records #records} => Array&lt;Types::PutRecordsResultEntry&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_records({
       #     records: [ # required
       #       {
@@ -1084,12 +1193,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.failed_record_count #=> Integer
       #   resp.records #=> Array
       #   resp.records[0].sequence_number #=> String
       #   resp.records[0].shard_id #=> String
       #   resp.records[0].error_code #=> String
       #   resp.records[0].error_message #=> String
+      #
       # @overload put_records(params = {})
       # @param [Hash] params ({})
       def put_records(params = {}, options = {})
@@ -1102,17 +1213,22 @@ module Aws
       # completes.
       #
       # If you specify a tag that does not exist, it is ignored.
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream.
+      #
       # @option params [required, Array<String>] :tag_keys
       #   A list of tag keys. Each corresponding tag is removed from the stream.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_stream({
       #     stream_name: "StreamName", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      #
       # @overload remove_tags_from_stream(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_stream(params = {}, options = {})
@@ -1177,10 +1293,13 @@ module Aws
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html
       # [2]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
       # [3]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream for the shard split.
+      #
       # @option params [required, String] :shard_to_split
       #   The shard ID of the shard to split.
+      #
       # @option params [required, String] :new_starting_hash_key
       #   A hash key value for the starting hash key of one of the child shards
       #   created by the split. The hash key range for a given shard constitutes
@@ -1190,14 +1309,17 @@ module Aws
       #   hash key values in hash key range are distributed to one of the child
       #   shards. All the lower hash key values in the range are distributed to
       #   the other child shard.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.split_shard({
       #     stream_name: "StreamName", # required
       #     shard_to_split: "ShardId", # required
       #     new_starting_hash_key: "HashKey", # required
       #   })
+      #
       # @overload split_shard(params = {})
       # @param [Hash] params ({})
       def split_shard(params = {}, options = {})
@@ -1235,19 +1357,24 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
       # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      #
       # @option params [required, String] :stream_name
       #   The name of the stream.
+      #
       # @option params [required, Integer] :target_shard_count
       #   The new number of shards.
+      #
       # @option params [required, String] :scaling_type
       #   The scaling type. Uniform scaling creates shards of equal size.
+      #
       # @return [Types::UpdateShardCountOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateShardCountOutput#stream_name #StreamName} => String
-      #   * {Types::UpdateShardCountOutput#current_shard_count #CurrentShardCount} => Integer
-      #   * {Types::UpdateShardCountOutput#target_shard_count #TargetShardCount} => Integer
+      #   * {Types::UpdateShardCountOutput#stream_name #stream_name} => String
+      #   * {Types::UpdateShardCountOutput#current_shard_count #current_shard_count} => Integer
+      #   * {Types::UpdateShardCountOutput#target_shard_count #target_shard_count} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_shard_count({
       #     stream_name: "StreamName", # required
       #     target_shard_count: 1, # required
@@ -1255,9 +1382,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stream_name #=> String
       #   resp.current_shard_count #=> Integer
       #   resp.target_shard_count #=> Integer
+      #
       # @overload update_shard_count(params = {})
       # @param [Hash] params ({})
       def update_shard_count(params = {}, options = {})

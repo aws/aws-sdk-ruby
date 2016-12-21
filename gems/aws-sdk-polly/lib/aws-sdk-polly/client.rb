@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -121,9 +133,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -140,15 +154,19 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+      #
       # @option params [required, String] :name
       #   The name of the lexicon to delete. Must be an existing lexicon in the
       #   region.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_lexicon({
       #     name: "LexiconName", # required
       #   })
+      #
       # @overload delete_lexicon(params = {})
       # @param [Hash] params ({})
       def delete_lexicon(params = {}, options = {})
@@ -176,26 +194,31 @@ module Aws
       #
       # This operation requires permissions to perform the
       # `polly:DescribeVoices` action.
+      #
       # @option params [String] :language_code
       #   The language identification tag (ISO 639 code for the language
       #   name-ISO 3166 country code) for filtering the list of voices returned.
       #   If you don't specify this optional parameter, all available voices
       #   are returned.
+      #
       # @option params [String] :next_token
       #   An opaque pagination token returned from the previous `DescribeVoices`
       #   operation. If present, this indicates where to continue the listing.
+      #
       # @return [Types::DescribeVoicesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeVoicesOutput#voices #Voices} => Array&lt;Types::Voice&gt;
-      #   * {Types::DescribeVoicesOutput#next_token #NextToken} => String
+      #   * {Types::DescribeVoicesOutput#voices #voices} => Array&lt;Types::Voice&gt;
+      #   * {Types::DescribeVoicesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_voices({
       #     language_code: "cy-GB", # accepts cy-GB, da-DK, de-DE, en-AU, en-GB, en-GB-WLS, en-IN, en-US, es-ES, es-US, fr-CA, fr-FR, is-IS, it-IT, ja-JP, nb-NO, nl-NL, pl-PL, pt-BR, pt-PT, ro-RO, ru-RU, sv-SE, tr-TR
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.voices #=> Array
       #   resp.voices[0].gender #=> String, one of "Female", "Male"
       #   resp.voices[0].id #=> String, one of "Geraint", "Gwyneth", "Mads", "Naja", "Hans", "Marlene", "Nicole", "Russell", "Amy", "Brian", "Emma", "Raveena", "Ivy", "Joanna", "Joey", "Justin", "Kendra", "Kimberly", "Salli", "Conchita", "Enrique", "Miguel", "Penelope", "Chantal", "Celine", "Mathieu", "Dora", "Karl", "Carla", "Giorgio", "Mizuki", "Liv", "Lotte", "Ruben", "Ewa", "Jacek", "Jan", "Maja", "Ricardo", "Vitoria", "Cristiano", "Ines", "Carmen", "Maxim", "Tatyana", "Astrid", "Filiz"
@@ -203,6 +226,7 @@ module Aws
       #   resp.voices[0].language_name #=> String
       #   resp.voices[0].name #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_voices(params = {})
       # @param [Hash] params ({})
       def describe_voices(params = {}, options = {})
@@ -216,19 +240,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+      #
       # @option params [required, String] :name
       #   Name of the lexicon.
+      #
       # @return [Types::GetLexiconOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetLexiconOutput#lexicon #Lexicon} => Types::Lexicon
-      #   * {Types::GetLexiconOutput#lexicon_attributes #LexiconAttributes} => Types::LexiconAttributes
+      #   * {Types::GetLexiconOutput#lexicon #lexicon} => Types::Lexicon
+      #   * {Types::GetLexiconOutput#lexicon_attributes #lexicon_attributes} => Types::LexiconAttributes
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_lexicon({
       #     name: "LexiconName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.lexicon.content #=> String
       #   resp.lexicon.name #=> String
       #   resp.lexicon_attributes.alphabet #=> String
@@ -237,6 +265,7 @@ module Aws
       #   resp.lexicon_attributes.lexicon_arn #=> String
       #   resp.lexicon_attributes.lexemes_count #=> Integer
       #   resp.lexicon_attributes.size #=> Integer
+      #
       # @overload get_lexicon(params = {})
       # @param [Hash] params ({})
       def get_lexicon(params = {}, options = {})
@@ -250,21 +279,25 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+      #
       # @option params [String] :next_token
       #   An opaque pagination token returned from previous `ListLexicons`
       #   operation. If present, indicates where to continue the list of
       #   lexicons.
+      #
       # @return [Types::ListLexiconsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListLexiconsOutput#lexicons #Lexicons} => Array&lt;Types::LexiconDescription&gt;
-      #   * {Types::ListLexiconsOutput#next_token #NextToken} => String
+      #   * {Types::ListLexiconsOutput#lexicons #lexicons} => Array&lt;Types::LexiconDescription&gt;
+      #   * {Types::ListLexiconsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_lexicons({
       #     next_token: "NextToken",
       #   })
       #
       # @example Response structure
+      #
       #   resp.lexicons #=> Array
       #   resp.lexicons[0].name #=> String
       #   resp.lexicons[0].attributes.alphabet #=> String
@@ -274,6 +307,7 @@ module Aws
       #   resp.lexicons[0].attributes.lexemes_count #=> Integer
       #   resp.lexicons[0].attributes.size #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload list_lexicons(params = {})
       # @param [Hash] params ({})
       def list_lexicons(params = {}, options = {})
@@ -292,19 +326,24 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
+      #
       # @option params [required, String] :name
       #   Name of the lexicon. The name must follow the regular express format
       #   \[0-9A-Za-z\]\\\{1,20\\}. That is, the name is a case-sensitive
       #   alphanumeric string up to 20 characters long.
+      #
       # @option params [required, String] :content
       #   Content of the PLS lexicon as string data.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_lexicon({
       #     name: "LexiconName", # required
       #     content: "LexiconContent", # required
       #   })
+      #
       # @overload put_lexicon(params = {})
       # @param [Hash] params ({})
       def put_lexicon(params = {}, options = {})
@@ -321,6 +360,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/polly/latest/dg/how-text-to-speech-works.html
+      #
       # @option params [Array<String>] :lexicon_names
       #   List of one or more pronunciation lexicon names you want the service
       #   to apply during synthesis. Lexicons are applied only if the language
@@ -330,8 +370,10 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html
+      #
       # @option params [required, String] :output_format
       #   The audio format in which the resulting stream will be encoded.
+      #
       # @option params [String] :sample_rate
       #   The audio frequency specified in Hz.
       #
@@ -340,9 +382,11 @@ module Aws
       #
       #   Valid values for `pcm` are "8000" and "16000" The default value is
       #   "16000".
+      #
       # @option params [required, String] :text
       #   Input text to synthesize. If you specify `ssml` as the `TextType`,
       #   follow the SSML format for the input text.
+      #
       # @option params [String] :text_type
       #   Specifies whether the input text is plain text or SSML. The default
       #   value is plain text. For more information, see [Using SSML][1].
@@ -350,6 +394,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/polly/latest/dg/ssml.html
+      #
       # @option params [required, String] :voice_id
       #   Voice ID to use for the synthesis. You can get a list of available
       #   voice IDs by calling the [DescribeVoices][1] operation.
@@ -357,13 +402,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
+      #
       # @return [Types::SynthesizeSpeechOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SynthesizeSpeechOutput#audio_stream #AudioStream} => IO
-      #   * {Types::SynthesizeSpeechOutput#content_type #ContentType} => String
-      #   * {Types::SynthesizeSpeechOutput#request_characters #RequestCharacters} => Integer
+      #   * {Types::SynthesizeSpeechOutput#audio_stream #audio_stream} => IO
+      #   * {Types::SynthesizeSpeechOutput#content_type #content_type} => String
+      #   * {Types::SynthesizeSpeechOutput#request_characters #request_characters} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.synthesize_speech({
       #     lexicon_names: ["LexiconName"],
       #     output_format: "mp3", # required, accepts mp3, ogg_vorbis, pcm
@@ -374,9 +421,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.audio_stream #=> IO
       #   resp.content_type #=> String
       #   resp.request_characters #=> Integer
+      #
       # @overload synthesize_speech(params = {})
       # @param [Hash] params ({})
       def synthesize_speech(params = {}, options = {})

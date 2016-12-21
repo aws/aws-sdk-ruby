@@ -82,6 +82,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -93,36 +94,48 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [String] :account_id ("-")
       #   The default Glacier AWS account ID to use for all glacier
       #   operations. The default value of `-` uses the account
       #   your `:credentials` belong to.
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -131,9 +144,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -166,6 +181,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -173,18 +189,23 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :upload_id
       #   The upload ID of the multipart upload to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.abort_multipart_upload({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #     upload_id: "string", # required
       #   })
+      #
       # @overload abort_multipart_upload(params = {})
       # @param [Hash] params ({})
       def abort_multipart_upload(params = {}, options = {})
@@ -214,6 +235,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -222,15 +244,19 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.abort_vault_lock({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      #
       # @overload abort_vault_lock(params = {})
       # @param [Hash] params ({})
       def abort_vault_lock(params = {}, options = {})
@@ -249,6 +275,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -256,14 +283,18 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Hash<String,String>] :tags
       #   The tags to add to the vault. Each tag is composed of a key and a
       #   value. The value can be an empty string.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags_to_vault({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -271,6 +302,7 @@ module Aws
       #       "TagKey" => "TagValue",
       #     },
       #   })
+      #
       # @overload add_tags_to_vault(params = {})
       # @param [Hash] params ({})
       def add_tags_to_vault(params = {}, options = {})
@@ -330,6 +362,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-complete-upload.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -337,26 +370,32 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :upload_id
       #   The upload ID of the multipart upload.
+      #
       # @option params [Integer] :archive_size
       #   The total size, in bytes, of the entire archive. This value should be
       #   the sum of all the sizes of the individual parts that you uploaded.
+      #
       # @option params [String] :checksum
       #   The SHA256 tree hash of the entire archive. It is the tree hash of
       #   SHA256 tree hash of the individual parts. If the value you specify in
       #   the request does not match the SHA256 tree hash of the final assembled
       #   archive as computed by Amazon Glacier, Amazon Glacier returns an error
       #   and the request fails.
+      #
       # @return [Types::ArchiveCreationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ArchiveCreationOutput#location #location} => String
       #   * {Types::ArchiveCreationOutput#checksum #checksum} => String
-      #   * {Types::ArchiveCreationOutput#archive_id #archiveId} => String
+      #   * {Types::ArchiveCreationOutput#archive_id #archive_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.complete_multipart_upload({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -366,9 +405,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.location #=> String
       #   resp.checksum #=> String
       #   resp.archive_id #=> String
+      #
       # @overload complete_multipart_upload(params = {})
       # @param [Hash] params ({})
       def complete_multipart_upload(params = {}, options = {})
@@ -397,6 +438,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -405,19 +447,24 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :lock_id
       #   The `lockId` value is the lock ID obtained from a InitiateVaultLock
       #   request.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.complete_vault_lock({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #     lock_id: "string", # required
       #   })
+      #
       # @overload complete_vault_lock(params = {})
       # @param [Hash] params ({})
       def complete_vault_lock(params = {}, options = {})
@@ -454,6 +501,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/creating-vaults.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-put.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -462,20 +510,25 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Types::CreateVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateVaultOutput#location #location} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_vault({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.location #=> String
+      #
       # @overload create_vault(params = {})
       # @param [Hash] params ({})
       def create_vault(params = {}, options = {})
@@ -514,6 +567,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-an-archive.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-delete.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -521,18 +575,23 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :archive_id
       #   The ID of the archive to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_archive({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #     archive_id: "string", # required
       #   })
+      #
       # @overload delete_archive(params = {})
       # @param [Hash] params ({})
       def delete_archive(params = {}, options = {})
@@ -570,6 +629,7 @@ module Aws
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/deleting-vaults.html
       # [5]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-delete.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -577,15 +637,19 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_vault({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      #
       # @overload delete_vault(params = {})
       # @param [Hash] params ({})
       def delete_vault(params = {}, options = {})
@@ -607,6 +671,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -614,15 +679,19 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_vault_access_policy({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      #
       # @overload delete_vault_access_policy(params = {})
       # @param [Hash] params ({})
       def delete_vault_access_policy(params = {}, options = {})
@@ -651,6 +720,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -658,15 +728,19 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_vault_notifications({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      #
       # @overload delete_vault_notifications(params = {})
       # @param [Hash] params ({})
       def delete_vault_notifications(params = {}, options = {})
@@ -704,6 +778,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-describe-job-get.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -711,32 +786,36 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :job_id
       #   The ID of the job to describe.
+      #
       # @return [Types::GlacierJobDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GlacierJobDescription#job_id #JobId} => String
-      #   * {Types::GlacierJobDescription#job_description #JobDescription} => String
-      #   * {Types::GlacierJobDescription#action #Action} => String
-      #   * {Types::GlacierJobDescription#archive_id #ArchiveId} => String
-      #   * {Types::GlacierJobDescription#vault_arn #VaultARN} => String
-      #   * {Types::GlacierJobDescription#creation_date #CreationDate} => Time
-      #   * {Types::GlacierJobDescription#completed #Completed} => Boolean
-      #   * {Types::GlacierJobDescription#status_code #StatusCode} => String
-      #   * {Types::GlacierJobDescription#status_message #StatusMessage} => String
-      #   * {Types::GlacierJobDescription#archive_size_in_bytes #ArchiveSizeInBytes} => Integer
-      #   * {Types::GlacierJobDescription#inventory_size_in_bytes #InventorySizeInBytes} => Integer
-      #   * {Types::GlacierJobDescription#sns_topic #SNSTopic} => String
-      #   * {Types::GlacierJobDescription#completion_date #CompletionDate} => Time
-      #   * {Types::GlacierJobDescription#sha256_tree_hash #SHA256TreeHash} => String
-      #   * {Types::GlacierJobDescription#archive_sha256_tree_hash #ArchiveSHA256TreeHash} => String
-      #   * {Types::GlacierJobDescription#retrieval_byte_range #RetrievalByteRange} => String
-      #   * {Types::GlacierJobDescription#tier #Tier} => String
-      #   * {Types::GlacierJobDescription#inventory_retrieval_parameters #InventoryRetrievalParameters} => Types::InventoryRetrievalJobDescription
+      #   * {Types::GlacierJobDescription#job_id #job_id} => String
+      #   * {Types::GlacierJobDescription#job_description #job_description} => String
+      #   * {Types::GlacierJobDescription#action #action} => String
+      #   * {Types::GlacierJobDescription#archive_id #archive_id} => String
+      #   * {Types::GlacierJobDescription#vault_arn #vault_arn} => String
+      #   * {Types::GlacierJobDescription#creation_date #creation_date} => Time
+      #   * {Types::GlacierJobDescription#completed #completed} => Boolean
+      #   * {Types::GlacierJobDescription#status_code #status_code} => String
+      #   * {Types::GlacierJobDescription#status_message #status_message} => String
+      #   * {Types::GlacierJobDescription#archive_size_in_bytes #archive_size_in_bytes} => Integer
+      #   * {Types::GlacierJobDescription#inventory_size_in_bytes #inventory_size_in_bytes} => Integer
+      #   * {Types::GlacierJobDescription#sns_topic #sns_topic} => String
+      #   * {Types::GlacierJobDescription#completion_date #completion_date} => Time
+      #   * {Types::GlacierJobDescription#sha256_tree_hash #sha256_tree_hash} => String
+      #   * {Types::GlacierJobDescription#archive_sha256_tree_hash #archive_sha256_tree_hash} => String
+      #   * {Types::GlacierJobDescription#retrieval_byte_range #retrieval_byte_range} => String
+      #   * {Types::GlacierJobDescription#tier #tier} => String
+      #   * {Types::GlacierJobDescription#inventory_retrieval_parameters #inventory_retrieval_parameters} => Types::InventoryRetrievalJobDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_job({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -744,6 +823,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_id #=> String
       #   resp.job_description #=> String
       #   resp.action #=> String, one of "ArchiveRetrieval", "InventoryRetrieval"
@@ -766,6 +846,7 @@ module Aws
       #   resp.inventory_retrieval_parameters.end_date #=> Time
       #   resp.inventory_retrieval_parameters.limit #=> String
       #   resp.inventory_retrieval_parameters.marker #=> String
+      #
       # @overload describe_job(params = {})
       # @param [Hash] params ({})
       def describe_job(params = {}, options = {})
@@ -801,6 +882,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-get.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -808,30 +890,35 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Types::DescribeVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeVaultOutput#vault_arn #VaultARN} => String
-      #   * {Types::DescribeVaultOutput#vault_name #VaultName} => String
-      #   * {Types::DescribeVaultOutput#creation_date #CreationDate} => Time
-      #   * {Types::DescribeVaultOutput#last_inventory_date #LastInventoryDate} => Time
-      #   * {Types::DescribeVaultOutput#number_of_archives #NumberOfArchives} => Integer
-      #   * {Types::DescribeVaultOutput#size_in_bytes #SizeInBytes} => Integer
+      #   * {Types::DescribeVaultOutput#vault_arn #vault_arn} => String
+      #   * {Types::DescribeVaultOutput#vault_name #vault_name} => String
+      #   * {Types::DescribeVaultOutput#creation_date #creation_date} => Time
+      #   * {Types::DescribeVaultOutput#last_inventory_date #last_inventory_date} => Time
+      #   * {Types::DescribeVaultOutput#number_of_archives #number_of_archives} => Integer
+      #   * {Types::DescribeVaultOutput#size_in_bytes #size_in_bytes} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_vault({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.vault_arn #=> String
       #   resp.vault_name #=> String
       #   resp.creation_date #=> Time
       #   resp.last_inventory_date #=> Time
       #   resp.number_of_archives #=> Integer
       #   resp.size_in_bytes #=> Integer
+      #
       # @overload describe_vault(params = {})
       # @param [Hash] params ({})
       def describe_vault(params = {}, options = {})
@@ -847,6 +934,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -855,19 +943,23 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @return [Types::GetDataRetrievalPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetDataRetrievalPolicyOutput#policy #Policy} => Types::DataRetrievalPolicy
+      #   * {Types::GetDataRetrievalPolicyOutput#policy #policy} => Types::DataRetrievalPolicy
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_data_retrieval_policy({
       #     account_id: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy.rules #=> Array
       #   resp.policy.rules[0].strategy #=> String
       #   resp.policy.rules[0].bytes_per_hour #=> Integer
+      #
       # @overload get_data_retrieval_policy(params = {})
       # @param [Hash] params ({})
       def get_data_retrieval_policy(params = {}, options = {})
@@ -927,6 +1019,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive.html
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-job-output-get.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -934,10 +1027,13 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :job_id
       #   The job ID whose data is downloaded.
+      #
       # @option params [String] :range
       #   The range of bytes to retrieve from the output. For example, if you
       #   want to download the first 1,048,576 bytes, specify the range as
@@ -970,17 +1066,19 @@ module Aws
       #       Amazon Glacier. You compare this value with the checksum you
       #       computed to ensure you have downloaded the entire archive content
       #       with no errors.
+      #
       # @return [Types::GetJobOutputOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetJobOutputOutput#body #body} => IO
       #   * {Types::GetJobOutputOutput#checksum #checksum} => String
       #   * {Types::GetJobOutputOutput#status #status} => Integer
-      #   * {Types::GetJobOutputOutput#content_range #contentRange} => String
-      #   * {Types::GetJobOutputOutput#accept_ranges #acceptRanges} => String
-      #   * {Types::GetJobOutputOutput#content_type #contentType} => String
-      #   * {Types::GetJobOutputOutput#archive_description #archiveDescription} => String
+      #   * {Types::GetJobOutputOutput#content_range #content_range} => String
+      #   * {Types::GetJobOutputOutput#accept_ranges #accept_ranges} => String
+      #   * {Types::GetJobOutputOutput#content_type #content_type} => String
+      #   * {Types::GetJobOutputOutput#archive_description #archive_description} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_job_output({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -989,6 +1087,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.body #=> IO
       #   resp.checksum #=> String
       #   resp.status #=> Integer
@@ -996,6 +1095,7 @@ module Aws
       #   resp.accept_ranges #=> String
       #   resp.content_type #=> String
       #   resp.archive_description #=> String
+      #
       # @overload get_job_output(params = {})
       # @param [Hash] params ({})
       def get_job_output(params = {}, options = {})
@@ -1014,6 +1114,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1021,20 +1122,25 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Types::GetVaultAccessPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetVaultAccessPolicyOutput#policy #policy} => Types::VaultAccessPolicy
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_vault_access_policy({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy.policy #=> String
+      #
       # @overload get_vault_access_policy(params = {})
       # @param [Hash] params ({})
       def get_vault_access_policy(params = {}, options = {})
@@ -1070,6 +1176,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1077,26 +1184,31 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Types::GetVaultLockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetVaultLockOutput#policy #Policy} => String
-      #   * {Types::GetVaultLockOutput#state #State} => String
-      #   * {Types::GetVaultLockOutput#expiration_date #ExpirationDate} => Time
-      #   * {Types::GetVaultLockOutput#creation_date #CreationDate} => Time
+      #   * {Types::GetVaultLockOutput#policy #policy} => String
+      #   * {Types::GetVaultLockOutput#state #state} => String
+      #   * {Types::GetVaultLockOutput#expiration_date #expiration_date} => Time
+      #   * {Types::GetVaultLockOutput#creation_date #creation_date} => Time
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_vault_lock({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.policy #=> String
       #   resp.state #=> String
       #   resp.expiration_date #=> Time
       #   resp.creation_date #=> Time
+      #
       # @overload get_vault_lock(params = {})
       # @param [Hash] params ({})
       def get_vault_lock(params = {}, options = {})
@@ -1128,6 +1240,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1135,22 +1248,27 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Types::GetVaultNotificationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetVaultNotificationsOutput#vault_notification_config #vaultNotificationConfig} => Types::VaultNotificationConfig
+      #   * {Types::GetVaultNotificationsOutput#vault_notification_config #vault_notification_config} => Types::VaultNotificationConfig
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_vault_notifications({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.vault_notification_config.sns_topic #=> String
       #   resp.vault_notification_config.events #=> Array
       #   resp.vault_notification_config.events[0] #=> String
+      #
       # @overload get_vault_notifications(params = {})
       # @param [Hash] params ({})
       def get_vault_notifications(params = {}, options = {})
@@ -1165,13 +1283,13 @@ module Aws
       # Retrieving data from Amazon Glacier is a two-step process:
       #
       # 1.  Initiate a retrieval job.
-      # 
+      #
       #     <note markdown="1"> A data retrieval policy can cause your initiate retrieval job
       #     request to fail with a PolicyEnforcedException exception. For more
       #     information about data retrieval policies, see [Amazon Glacier
       #     Data Retrieval Policies][1]. For more information about the
       #     PolicyEnforcedException exception, see [Error Responses][2].
-      # 
+      #
       #      </note>
       #
       # 2.  After the job completes, download the bytes.
@@ -1316,6 +1434,7 @@ module Aws
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-initiate-job-post.html
       # [5]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-inventory.html
       # [6]: http://docs.aws.amazon.com/amazonglacier/latest/dev/downloading-an-archive-two-steps.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1323,16 +1442,20 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Types::JobParameters] :job_parameters
       #   Provides options for specifying job information.
+      #
       # @return [Types::InitiateJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::InitiateJobOutput#location #location} => String
-      #   * {Types::InitiateJobOutput#job_id #jobId} => String
+      #   * {Types::InitiateJobOutput#job_id #job_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.initiate_job({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -1354,8 +1477,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.location #=> String
       #   resp.job_id #=> String
+      #
       # @overload initiate_job(params = {})
       # @param [Hash] params ({})
       def initiate_job(params = {}, options = {})
@@ -1407,6 +1532,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-initiate-upload.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1414,8 +1540,10 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [String] :archive_description
       #   The archive description that you are uploading in parts.
       #
@@ -1423,15 +1551,18 @@ module Aws
       #   for example 1048576 (1 MB), 2097152 (2 MB), 4194304 (4 MB), 8388608 (8
       #   MB), and so on. The minimum allowable part size is 1 MB, and the
       #   maximum is 4 GB (4096 MB).
+      #
       # @option params [Integer] :part_size
       #   The size of each part except the last, in bytes. The last part can be
       #   smaller than this part size.
+      #
       # @return [Types::InitiateMultipartUploadOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::InitiateMultipartUploadOutput#location #location} => String
-      #   * {Types::InitiateMultipartUploadOutput#upload_id #uploadId} => String
+      #   * {Types::InitiateMultipartUploadOutput#upload_id #upload_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.initiate_multipart_upload({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -1440,8 +1571,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.location #=> String
       #   resp.upload_id #=> String
+      #
       # @overload initiate_multipart_upload(params = {})
       # @param [Hash] params ({})
       def initiate_multipart_upload(params = {}, options = {})
@@ -1488,6 +1621,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -1496,16 +1630,20 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Types::VaultLockPolicy] :policy
       #   The vault lock policy as a JSON string, which uses "\\" as an escape
       #   character.
+      #
       # @return [Types::InitiateVaultLockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::InitiateVaultLockOutput#lock_id #lockId} => String
+      #   * {Types::InitiateVaultLockOutput#lock_id #lock_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.initiate_vault_lock({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -1515,7 +1653,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.lock_id #=> String
+      #
       # @overload initiate_vault_lock(params = {})
       # @param [Hash] params ({})
       def initiate_vault_lock(params = {}, options = {})
@@ -1573,6 +1713,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-jobs-get.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1580,29 +1721,36 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Integer] :limit
       #   The maximum number of jobs to be returned. The default limit is 1000.
       #   The number of jobs returned might be fewer than the specified limit,
       #   but the number of returned jobs never exceeds the limit.
+      #
       # @option params [String] :marker
       #   An opaque string used for pagination. This value specifies the job at
       #   which the listing of jobs should begin. Get the marker value from a
       #   previous List Jobs response. You only need to include the marker if
       #   you are continuing the pagination of results started in a previous
       #   List Jobs request.
+      #
       # @option params [String] :statuscode
       #   The type of job status to return. You can specify the following
       #   values: `InProgress`, `Succeeded`, or `Failed`.
+      #
       # @option params [String] :completed
       #   The state of the jobs to return. You can specify `true` or `false`.
+      #
       # @return [Types::ListJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListJobsOutput#job_list #JobList} => Array&lt;Types::GlacierJobDescription&gt;
-      #   * {Types::ListJobsOutput#marker #Marker} => String
+      #   * {Types::ListJobsOutput#job_list #job_list} => Array&lt;Types::GlacierJobDescription&gt;
+      #   * {Types::ListJobsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_jobs({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -1613,6 +1761,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.job_list #=> Array
       #   resp.job_list[0].job_id #=> String
       #   resp.job_list[0].job_description #=> String
@@ -1637,6 +1786,7 @@ module Aws
       #   resp.job_list[0].inventory_retrieval_parameters.limit #=> String
       #   resp.job_list[0].inventory_retrieval_parameters.marker #=> String
       #   resp.marker #=> String
+      #
       # @overload list_jobs(params = {})
       # @param [Hash] params ({})
       def list_jobs(params = {}, options = {})
@@ -1681,6 +1831,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-uploads.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1688,24 +1839,29 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [String] :marker
       #   An opaque string used for pagination. This value specifies the upload
       #   at which the listing of uploads should begin. Get the marker value
       #   from a previous List Uploads response. You need only include the
       #   marker if you are continuing the pagination of results started in a
       #   previous List Uploads request.
+      #
       # @option params [Integer] :limit
       #   Specifies the maximum number of uploads returned in the response body.
       #   If this value is not specified, the List Uploads operation returns up
       #   to 1,000 uploads.
+      #
       # @return [Types::ListMultipartUploadsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListMultipartUploadsOutput#uploads_list #UploadsList} => Array&lt;Types::UploadListElement&gt;
-      #   * {Types::ListMultipartUploadsOutput#marker #Marker} => String
+      #   * {Types::ListMultipartUploadsOutput#uploads_list #uploads_list} => Array&lt;Types::UploadListElement&gt;
+      #   * {Types::ListMultipartUploadsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_multipart_uploads({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -1714,6 +1870,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.uploads_list #=> Array
       #   resp.uploads_list[0].multipart_upload_id #=> String
       #   resp.uploads_list[0].vault_arn #=> String
@@ -1721,6 +1878,7 @@ module Aws
       #   resp.uploads_list[0].part_size_in_bytes #=> Integer
       #   resp.uploads_list[0].creation_date #=> Time
       #   resp.marker #=> String
+      #
       # @overload list_multipart_uploads(params = {})
       # @param [Hash] params ({})
       def list_multipart_uploads(params = {}, options = {})
@@ -1759,6 +1917,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-list-parts.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1766,31 +1925,37 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :upload_id
       #   The upload ID of the multipart upload.
+      #
       # @option params [String] :marker
       #   An opaque string used for pagination. This value specifies the part at
       #   which the listing of parts should begin. Get the marker value from the
       #   response of a previous List Parts response. You need only include the
       #   marker if you are continuing the pagination of results started in a
       #   previous List Parts request.
+      #
       # @option params [Integer] :limit
       #   The maximum number of parts to be returned. The default limit is 1000.
       #   The number of parts returned might be fewer than the specified limit,
       #   but the number of returned parts never exceeds the limit.
+      #
       # @return [Types::ListPartsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListPartsOutput#multipart_upload_id #MultipartUploadId} => String
-      #   * {Types::ListPartsOutput#vault_arn #VaultARN} => String
-      #   * {Types::ListPartsOutput#archive_description #ArchiveDescription} => String
-      #   * {Types::ListPartsOutput#part_size_in_bytes #PartSizeInBytes} => Integer
-      #   * {Types::ListPartsOutput#creation_date #CreationDate} => Time
-      #   * {Types::ListPartsOutput#parts #Parts} => Array&lt;Types::PartListElement&gt;
-      #   * {Types::ListPartsOutput#marker #Marker} => String
+      #   * {Types::ListPartsOutput#multipart_upload_id #multipart_upload_id} => String
+      #   * {Types::ListPartsOutput#vault_arn #vault_arn} => String
+      #   * {Types::ListPartsOutput#archive_description #archive_description} => String
+      #   * {Types::ListPartsOutput#part_size_in_bytes #part_size_in_bytes} => Integer
+      #   * {Types::ListPartsOutput#creation_date #creation_date} => Time
+      #   * {Types::ListPartsOutput#parts #parts} => Array&lt;Types::PartListElement&gt;
+      #   * {Types::ListPartsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_parts({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -1800,6 +1965,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.multipart_upload_id #=> String
       #   resp.vault_arn #=> String
       #   resp.archive_description #=> String
@@ -1809,6 +1975,7 @@ module Aws
       #   resp.parts[0].range_in_bytes #=> String
       #   resp.parts[0].sha256_tree_hash #=> String
       #   resp.marker #=> String
+      #
       # @overload list_parts(params = {})
       # @param [Hash] params ({})
       def list_parts(params = {}, options = {})
@@ -1818,6 +1985,7 @@ module Aws
 
       # This operation lists the provisioned capacity for the specified AWS
       # account.
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1825,20 +1993,24 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, don't include any hyphens ('-') in the
       #   ID.
+      #
       # @return [Types::ListProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListProvisionedCapacityOutput#provisioned_capacity_list #ProvisionedCapacityList} => Array&lt;Types::ProvisionedCapacityDescription&gt;
+      #   * {Types::ListProvisionedCapacityOutput#provisioned_capacity_list #provisioned_capacity_list} => Array&lt;Types::ProvisionedCapacityDescription&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_provisioned_capacity({
       #     account_id: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.provisioned_capacity_list #=> Array
       #   resp.provisioned_capacity_list[0].capacity_id #=> String
       #   resp.provisioned_capacity_list[0].start_date #=> Time
       #   resp.provisioned_capacity_list[0].expiration_date #=> Time
+      #
       # @overload list_provisioned_capacity(params = {})
       # @param [Hash] params ({})
       def list_provisioned_capacity(params = {}, options = {})
@@ -1853,6 +2025,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1860,21 +2033,26 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @return [Types::ListTagsForVaultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsForVaultOutput#tags #Tags} => Hash&lt;String,String&gt;
+      #   * {Types::ListTagsForVaultOutput#tags #tags} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags_for_vault({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.tags #=> Hash
       #   resp.tags["TagKey"] #=> String
+      #
       # @overload list_tags_for_vault(params = {})
       # @param [Hash] params ({})
       def list_tags_for_vault(params = {}, options = {})
@@ -1910,6 +2088,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -1918,19 +2097,23 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @option params [String] :marker
       #   A string used for pagination. The marker specifies the vault ARN after
       #   which the listing of vaults should begin.
+      #
       # @option params [Integer] :limit
       #   The maximum number of vaults to be returned. The default limit is
       #   1000. The number of vaults returned might be fewer than the specified
       #   limit, but the number of returned vaults never exceeds the limit.
+      #
       # @return [Types::ListVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListVaultsOutput#vault_list #VaultList} => Array&lt;Types::DescribeVaultOutput&gt;
-      #   * {Types::ListVaultsOutput#marker #Marker} => String
+      #   * {Types::ListVaultsOutput#vault_list #vault_list} => Array&lt;Types::DescribeVaultOutput&gt;
+      #   * {Types::ListVaultsOutput#marker #marker} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_vaults({
       #     account_id: "string", # required
       #     marker: "string",
@@ -1938,6 +2121,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.vault_list #=> Array
       #   resp.vault_list[0].vault_arn #=> String
       #   resp.vault_list[0].vault_name #=> String
@@ -1946,6 +2130,7 @@ module Aws
       #   resp.vault_list[0].number_of_archives #=> Integer
       #   resp.vault_list[0].size_in_bytes #=> Integer
       #   resp.marker #=> String
+      #
       # @overload list_vaults(params = {})
       # @param [Hash] params ({})
       def list_vaults(params = {}, options = {})
@@ -1955,23 +2140,28 @@ module Aws
 
       # This operation purchases a provisioned capacity unit for an AWS
       # account.
+      #
       # @option params [required, String] :account_id
       #   The AWS account ID of the account that owns the vault. You can either
       #   specify an AWS account ID or optionally a single '-' (hyphen), in
       #   which case Amazon Glacier uses the AWS account ID associated with the
       #   credentials used to sign the request. If you use an account ID, don't
       #   include any hyphens ('-') in the ID.
+      #
       # @return [Types::PurchaseProvisionedCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PurchaseProvisionedCapacityOutput#capacity_id #capacityId} => String
+      #   * {Types::PurchaseProvisionedCapacityOutput#capacity_id #capacity_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.purchase_provisioned_capacity({
       #     account_id: "string", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.capacity_id #=> String
+      #
       # @overload purchase_provisioned_capacity(params = {})
       # @param [Hash] params ({})
       def purchase_provisioned_capacity(params = {}, options = {})
@@ -1987,6 +2177,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/tagging.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -1994,18 +2185,23 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Array<String>] :tag_keys
       #   A list of tag keys. Each corresponding tag is removed from the vault.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags_from_vault({
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #     tag_keys: ["string"],
       #   })
+      #
       # @overload remove_tags_from_vault(params = {})
       # @param [Hash] params ({})
       def remove_tags_from_vault(params = {}, options = {})
@@ -2026,6 +2222,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID. This value must match the
       #   AWS account ID associated with the credentials used to sign the
@@ -2034,11 +2231,14 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you specify your account ID, do not include any hyphens ('-') in
       #   the ID.
+      #
       # @option params [Types::DataRetrievalPolicy] :policy
       #   The data retrieval policy in JSON format.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_data_retrieval_policy({
       #     account_id: "string", # required
       #     policy: {
@@ -2050,6 +2250,7 @@ module Aws
       #       ],
       #     },
       #   })
+      #
       # @overload set_data_retrieval_policy(params = {})
       # @param [Hash] params ({})
       def set_data_retrieval_policy(params = {}, options = {})
@@ -2069,6 +2270,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -2076,13 +2278,17 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Types::VaultAccessPolicy] :policy
       #   The vault access policy as a JSON string.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_vault_access_policy({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -2090,6 +2296,7 @@ module Aws
       #       policy: "string",
       #     },
       #   })
+      #
       # @overload set_vault_access_policy(params = {})
       # @param [Hash] params ({})
       def set_vault_access_policy(params = {}, options = {})
@@ -2138,6 +2345,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -2145,13 +2353,17 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [Types::VaultNotificationConfig] :vault_notification_config
       #   Provides options for specifying notification configuration.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.set_vault_notifications({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -2160,6 +2372,7 @@ module Aws
       #       events: ["string"],
       #     },
       #   })
+      #
       # @overload set_vault_notifications(params = {})
       # @param [Hash] params ({})
       def set_vault_notifications(params = {}, options = {})
@@ -2213,8 +2426,10 @@ module Aws
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-an-archive.html
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -2222,19 +2437,24 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [String] :archive_description
       #   The optional description of the archive you are uploading.
+      #
       # @option params [String] :checksum
       #   The SHA256 tree hash of the data being uploaded.
+      #
       # @option params [String, IO] :body
       #   The data to upload.
+      #
       # @return [Types::ArchiveCreationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ArchiveCreationOutput#location #location} => String
       #   * {Types::ArchiveCreationOutput#checksum #checksum} => String
-      #   * {Types::ArchiveCreationOutput#archive_id #archiveId} => String
+      #   * {Types::ArchiveCreationOutput#archive_id #archive_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.upload_archive({
       #     vault_name: "string", # required
       #     account_id: "string", # required
@@ -2244,9 +2464,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.location #=> String
       #   resp.checksum #=> String
       #   resp.archive_id #=> String
+      #
       # @overload upload_archive(params = {})
       # @param [Hash] params ({})
       def upload_archive(params = {}, options = {})
@@ -2272,12 +2494,12 @@ module Aws
       #   must match the size specified in the corresponding
       #   InitiateMultipartUpload request. The size of the last part must be
       #   the same size as, or smaller than, the specified size.
-      # 
+      #
       #   <note markdown="1"> If you upload a part whose size is smaller than the part size you
       #   specified in your initiate multipart upload request and that part is
       #   not the last part, then the upload part request will succeed.
       #   However, the subsequent Complete Multipart Upload request will fail.
-      # 
+      #
       #    </note>
       #
       # * **Range does not align**The byte range value in the request does not
@@ -2308,6 +2530,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
       # [3]: http://docs.aws.amazon.com/amazonglacier/latest/dev/uploading-archive-mpu.html
       # [4]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-upload-part.html
+      #
       # @option params [required, String] :account_id
       #   The `AccountId` value is the AWS account ID of the account that owns
       #   the vault. You can either specify an AWS account ID or optionally a
@@ -2315,25 +2538,32 @@ module Aws
       #   account ID associated with the credentials used to sign the request.
       #   If you use an account ID, do not include any hyphens ('-') in the
       #   ID.
+      #
       # @option params [required, String] :vault_name
       #   The name of the vault.
+      #
       # @option params [required, String] :upload_id
       #   The upload ID of the multipart upload.
+      #
       # @option params [String] :checksum
       #   The SHA256 tree hash of the data being uploaded.
+      #
       # @option params [String] :range
       #   Identifies the range of bytes in the assembled archive that will be
       #   uploaded in this part. Amazon Glacier uses this information to
       #   assemble the archive in the proper sequence. The format of this header
       #   follows RFC 2616. An example header is Content-Range:bytes
       #   0-4194303/*.
+      #
       # @option params [String, IO] :body
       #   The data to upload.
+      #
       # @return [Types::UploadMultipartPartOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UploadMultipartPartOutput#checksum #checksum} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.upload_multipart_part({
       #     account_id: "string", # required
       #     vault_name: "string", # required
@@ -2344,7 +2574,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.checksum #=> String
+      #
       # @overload upload_multipart_part(params = {})
       # @param [Hash] params ({})
       def upload_multipart_part(params = {}, options = {})

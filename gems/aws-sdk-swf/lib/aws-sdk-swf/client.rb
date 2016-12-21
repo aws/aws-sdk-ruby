@@ -78,6 +78,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -89,32 +90,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -124,6 +136,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -132,9 +145,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -174,45 +189,54 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the workflow executions to count.
+      #
       # @option params [Types::ExecutionTimeFilter] :start_time_filter
       #   If specified, only workflow executions that meet the start time
       #   criteria of the filter are counted.
       #
       #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+      #
       # @option params [Types::ExecutionTimeFilter] :close_time_filter
       #   If specified, only workflow executions that meet the close time
       #   criteria of the filter are counted.
       #
       #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+      #
       # @option params [Types::WorkflowExecutionFilter] :execution_filter
       #   If specified, only workflow executions matching the `WorkflowId` in
       #   the filter are counted.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::WorkflowTypeFilter] :type_filter
       #   If specified, indicates the type of the workflow executions to be
       #   counted.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::TagFilter] :tag_filter
       #   If specified, only executions that have a tag that matches the filter
       #   are counted.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::CloseStatusFilter] :close_status_filter
       #   If specified, only workflow executions that match this close status
       #   are counted. This filter has an affect only if `executionStatus` is
       #   specified as `CLOSED`.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @return [Types::WorkflowExecutionCount] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::WorkflowExecutionCount#count #count} => Integer
       #   * {Types::WorkflowExecutionCount#truncated #truncated} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.count_closed_workflow_executions({
       #     domain: "DomainName", # required
       #     start_time_filter: {
@@ -239,8 +263,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      #
       # @overload count_closed_workflow_executions(params = {})
       # @param [Hash] params ({})
       def count_closed_workflow_executions(params = {}, options = {})
@@ -281,31 +307,38 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the workflow executions to count.
+      #
       # @option params [required, Types::ExecutionTimeFilter] :start_time_filter
       #   Specifies the start time criteria that workflow executions must meet
       #   in order to be counted.
+      #
       # @option params [Types::WorkflowTypeFilter] :type_filter
       #   Specifies the type of the workflow executions to be counted.
       #
       #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::TagFilter] :tag_filter
       #   If specified, only executions that have a tag that matches the filter
       #   are counted.
       #
       #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::WorkflowExecutionFilter] :execution_filter
       #   If specified, only workflow executions matching the `WorkflowId` in
       #   the filter are counted.
       #
       #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @return [Types::WorkflowExecutionCount] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::WorkflowExecutionCount#count #count} => Integer
       #   * {Types::WorkflowExecutionCount#truncated #truncated} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.count_open_workflow_executions({
       #     domain: "DomainName", # required
       #     start_time_filter: { # required
@@ -325,8 +358,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      #
       # @overload count_open_workflow_executions(params = {})
       # @param [Hash] params ({})
       def count_open_workflow_executions(params = {}, options = {})
@@ -362,16 +397,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain that contains the task list.
+      #
       # @option params [required, Types::TaskList] :task_list
       #   The name of the task list.
+      #
       # @return [Types::PendingTaskCount] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PendingTaskCount#count #count} => Integer
       #   * {Types::PendingTaskCount#truncated #truncated} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.count_pending_activity_tasks({
       #     domain: "DomainName", # required
       #     task_list: { # required
@@ -380,8 +419,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      #
       # @overload count_pending_activity_tasks(params = {})
       # @param [Hash] params ({})
       def count_pending_activity_tasks(params = {}, options = {})
@@ -417,16 +458,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain that contains the task list.
+      #
       # @option params [required, Types::TaskList] :task_list
       #   The name of the task list.
+      #
       # @return [Types::PendingTaskCount] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PendingTaskCount#count #count} => Integer
       #   * {Types::PendingTaskCount#truncated #truncated} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.count_pending_decision_tasks({
       #     domain: "DomainName", # required
       #     task_list: { # required
@@ -435,8 +480,10 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      #
       # @overload count_pending_decision_tasks(params = {})
       # @param [Hash] params ({})
       def count_pending_decision_tasks(params = {}, options = {})
@@ -477,13 +524,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which the activity type is registered.
+      #
       # @option params [required, Types::ActivityType] :activity_type
       #   The activity type to deprecate.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deprecate_activity_type({
       #     domain: "DomainName", # required
       #     activity_type: { # required
@@ -491,6 +542,7 @@ module Aws
       #       version: "Version", # required
       #     },
       #   })
+      #
       # @overload deprecate_activity_type(params = {})
       # @param [Hash] params ({})
       def deprecate_activity_type(params = {}, options = {})
@@ -528,14 +580,18 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :name
       #   The name of the domain to deprecate.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deprecate_domain({
       #     name: "DomainName", # required
       #   })
+      #
       # @overload deprecate_domain(params = {})
       # @param [Hash] params ({})
       def deprecate_domain(params = {}, options = {})
@@ -577,13 +633,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which the workflow type is registered.
+      #
       # @option params [required, Types::WorkflowType] :workflow_type
       #   The workflow type to deprecate.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.deprecate_workflow_type({
       #     domain: "DomainName", # required
       #     workflow_type: { # required
@@ -591,6 +651,7 @@ module Aws
       #       version: "Version", # required
       #     },
       #   })
+      #
       # @overload deprecate_workflow_type(params = {})
       # @param [Hash] params ({})
       def deprecate_workflow_type(params = {}, options = {})
@@ -628,18 +689,22 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which the activity type is registered.
+      #
       # @option params [required, Types::ActivityType] :activity_type
       #   The activity type to get information about. Activity types are
       #   identified by the `name` and `version` that were supplied when the
       #   activity was registered.
+      #
       # @return [Types::ActivityTypeDetail] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ActivityTypeDetail#type_info #typeInfo} => Types::ActivityTypeInfo
+      #   * {Types::ActivityTypeDetail#type_info #type_info} => Types::ActivityTypeInfo
       #   * {Types::ActivityTypeDetail#configuration #configuration} => Types::ActivityTypeConfiguration
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_activity_type({
       #     domain: "DomainName", # required
       #     activity_type: { # required
@@ -649,6 +714,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.type_info.activity_type.name #=> String
       #   resp.type_info.activity_type.version #=> String
       #   resp.type_info.status #=> String, one of "REGISTERED", "DEPRECATED"
@@ -661,6 +727,7 @@ module Aws
       #   resp.configuration.default_task_priority #=> String
       #   resp.configuration.default_task_schedule_to_start_timeout #=> String
       #   resp.configuration.default_task_schedule_to_close_timeout #=> String
+      #
       # @overload describe_activity_type(params = {})
       # @param [Hash] params ({})
       def describe_activity_type(params = {}, options = {})
@@ -692,23 +759,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :name
       #   The name of the domain to describe.
+      #
       # @return [Types::DomainDetail] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DomainDetail#domain_info #domainInfo} => Types::DomainInfo
+      #   * {Types::DomainDetail#domain_info #domain_info} => Types::DomainInfo
       #   * {Types::DomainDetail#configuration #configuration} => Types::DomainConfiguration
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_domain({
       #     name: "DomainName", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_info.name #=> String
       #   resp.domain_info.status #=> String, one of "REGISTERED", "DEPRECATED"
       #   resp.domain_info.description #=> String
       #   resp.configuration.workflow_execution_retention_period_in_days #=> String
+      #
       # @overload describe_domain(params = {})
       # @param [Hash] params ({})
       def describe_domain(params = {}, options = {})
@@ -742,19 +814,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the workflow execution.
+      #
       # @option params [required, Types::WorkflowExecution] :execution
       #   The workflow execution to describe.
+      #
       # @return [Types::WorkflowExecutionDetail] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::WorkflowExecutionDetail#execution_info #executionInfo} => Types::WorkflowExecutionInfo
-      #   * {Types::WorkflowExecutionDetail#execution_configuration #executionConfiguration} => Types::WorkflowExecutionConfiguration
-      #   * {Types::WorkflowExecutionDetail#open_counts #openCounts} => Types::WorkflowExecutionOpenCounts
-      #   * {Types::WorkflowExecutionDetail#latest_activity_task_timestamp #latestActivityTaskTimestamp} => Time
-      #   * {Types::WorkflowExecutionDetail#latest_execution_context #latestExecutionContext} => String
+      #   * {Types::WorkflowExecutionDetail#execution_info #execution_info} => Types::WorkflowExecutionInfo
+      #   * {Types::WorkflowExecutionDetail#execution_configuration #execution_configuration} => Types::WorkflowExecutionConfiguration
+      #   * {Types::WorkflowExecutionDetail#open_counts #open_counts} => Types::WorkflowExecutionOpenCounts
+      #   * {Types::WorkflowExecutionDetail#latest_activity_task_timestamp #latest_activity_task_timestamp} => Time
+      #   * {Types::WorkflowExecutionDetail#latest_execution_context #latest_execution_context} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_workflow_execution({
       #     domain: "DomainName", # required
       #     execution: { # required
@@ -764,6 +840,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.execution_info.execution.workflow_id #=> String
       #   resp.execution_info.execution.run_id #=> String
       #   resp.execution_info.workflow_type.name #=> String
@@ -790,6 +867,7 @@ module Aws
       #   resp.open_counts.open_lambda_functions #=> Integer
       #   resp.latest_activity_task_timestamp #=> Time
       #   resp.latest_execution_context #=> String
+      #
       # @overload describe_workflow_execution(params = {})
       # @param [Hash] params ({})
       def describe_workflow_execution(params = {}, options = {})
@@ -827,16 +905,20 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which this workflow type is registered.
+      #
       # @option params [required, Types::WorkflowType] :workflow_type
       #   The workflow type to describe.
+      #
       # @return [Types::WorkflowTypeDetail] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::WorkflowTypeDetail#type_info #typeInfo} => Types::WorkflowTypeInfo
+      #   * {Types::WorkflowTypeDetail#type_info #type_info} => Types::WorkflowTypeInfo
       #   * {Types::WorkflowTypeDetail#configuration #configuration} => Types::WorkflowTypeConfiguration
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_workflow_type({
       #     domain: "DomainName", # required
       #     workflow_type: { # required
@@ -846,6 +928,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.type_info.workflow_type.name #=> String
       #   resp.type_info.workflow_type.version #=> String
       #   resp.type_info.status #=> String, one of "REGISTERED", "DEPRECATED"
@@ -858,6 +941,7 @@ module Aws
       #   resp.configuration.default_task_priority #=> String
       #   resp.configuration.default_child_policy #=> String, one of "TERMINATE", "REQUEST_CANCEL", "ABANDON"
       #   resp.configuration.default_lambda_role #=> String
+      #
       # @overload describe_workflow_type(params = {})
       # @param [Hash] params ({})
       def describe_workflow_type(params = {}, options = {})
@@ -892,10 +976,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the workflow execution.
+      #
       # @option params [required, Types::WorkflowExecution] :execution
       #   Specifies the workflow execution for which to return the history.
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -904,6 +991,7 @@ module Aws
       #
       #   The configured `maximumPageSize` determines how many results can be
       #   returned in a single call.
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -912,16 +1000,19 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the events in reverse order. By default
       #   the results are returned in ascending order of the `eventTimeStamp` of
       #   the events.
+      #
       # @return [Types::History] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::History#events #events} => Array&lt;Types::HistoryEvent&gt;
-      #   * {Types::History#next_page_token #nextPageToken} => String
+      #   * {Types::History#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_workflow_execution_history({
       #     domain: "DomainName", # required
       #     execution: { # required
@@ -934,6 +1025,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Array
       #   resp.events[0].event_timestamp #=> Time
       #   resp.events[0].event_type #=> String, one of "WorkflowExecutionStarted", "WorkflowExecutionCancelRequested", "WorkflowExecutionCompleted", "CompleteWorkflowExecutionFailed", "WorkflowExecutionFailed", "FailWorkflowExecutionFailed", "WorkflowExecutionTimedOut", "WorkflowExecutionCanceled", "CancelWorkflowExecutionFailed", "WorkflowExecutionContinuedAsNew", "ContinueAsNewWorkflowExecutionFailed", "WorkflowExecutionTerminated", "DecisionTaskScheduled", "DecisionTaskStarted", "DecisionTaskCompleted", "DecisionTaskTimedOut", "ActivityTaskScheduled", "ScheduleActivityTaskFailed", "ActivityTaskStarted", "ActivityTaskCompleted", "ActivityTaskFailed", "ActivityTaskTimedOut", "ActivityTaskCanceled", "ActivityTaskCancelRequested", "RequestCancelActivityTaskFailed", "WorkflowExecutionSignaled", "MarkerRecorded", "RecordMarkerFailed", "TimerStarted", "StartTimerFailed", "TimerFired", "TimerCanceled", "CancelTimerFailed", "StartChildWorkflowExecutionInitiated", "StartChildWorkflowExecutionFailed", "ChildWorkflowExecutionStarted", "ChildWorkflowExecutionCompleted", "ChildWorkflowExecutionFailed", "ChildWorkflowExecutionTimedOut", "ChildWorkflowExecutionCanceled", "ChildWorkflowExecutionTerminated", "SignalExternalWorkflowExecutionInitiated", "SignalExternalWorkflowExecutionFailed", "ExternalWorkflowExecutionSignaled", "RequestCancelExternalWorkflowExecutionInitiated", "RequestCancelExternalWorkflowExecutionFailed", "ExternalWorkflowExecutionCancelRequested", "LambdaFunctionScheduled", "LambdaFunctionStarted", "LambdaFunctionCompleted", "LambdaFunctionFailed", "LambdaFunctionTimedOut", "ScheduleLambdaFunctionFailed", "StartLambdaFunctionFailed"
@@ -1180,6 +1272,7 @@ module Aws
       #   resp.events[0].start_lambda_function_failed_event_attributes.cause #=> String, one of "ASSUME_ROLE_FAILED"
       #   resp.events[0].start_lambda_function_failed_event_attributes.message #=> String
       #   resp.next_page_token #=> String
+      #
       # @overload get_workflow_execution_history(params = {})
       # @param [Hash] params ({})
       def get_workflow_execution_history(params = {}, options = {})
@@ -1215,13 +1308,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which the activity types have been
       #   registered.
+      #
       # @option params [String] :name
       #   If specified, only lists the activity types that have this name.
+      #
       # @option params [required, String] :registration_status
       #   Specifies the registration status of the activity types to list.
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -1230,6 +1327,7 @@ module Aws
       #
       #   The configured `maximumPageSize` determines how many results can be
       #   returned in a single call.
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -1238,16 +1336,19 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the results in reverse order. By default,
       #   the results are returned in ascending alphabetical order by `name` of
       #   the activity types.
+      #
       # @return [Types::ActivityTypeInfos] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ActivityTypeInfos#type_infos #typeInfos} => Array&lt;Types::ActivityTypeInfo&gt;
-      #   * {Types::ActivityTypeInfos#next_page_token #nextPageToken} => String
+      #   * {Types::ActivityTypeInfos#type_infos #type_infos} => Array&lt;Types::ActivityTypeInfo&gt;
+      #   * {Types::ActivityTypeInfos#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_activity_types({
       #     domain: "DomainName", # required
       #     name: "Name",
@@ -1258,6 +1359,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.type_infos #=> Array
       #   resp.type_infos[0].activity_type.name #=> String
       #   resp.type_infos[0].activity_type.version #=> String
@@ -1266,6 +1368,7 @@ module Aws
       #   resp.type_infos[0].creation_date #=> Time
       #   resp.type_infos[0].deprecation_date #=> Time
       #   resp.next_page_token #=> String
+      #
       # @overload list_activity_types(params = {})
       # @param [Hash] params ({})
       def list_activity_types(params = {}, options = {})
@@ -1308,8 +1411,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain that contains the workflow executions to list.
+      #
       # @option params [Types::ExecutionTimeFilter] :start_time_filter
       #   If specified, the workflow executions are included in the returned
       #   results based on whether their start times are within the range
@@ -1317,6 +1422,7 @@ module Aws
       #   returned results are ordered by their start times.
       #
       #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+      #
       # @option params [Types::ExecutionTimeFilter] :close_time_filter
       #   If specified, the workflow executions are included in the returned
       #   results based on whether their close times are within the range
@@ -1324,26 +1430,31 @@ module Aws
       #   returned results are ordered by their close times.
       #
       #   <note>`startTimeFilter` and `closeTimeFilter` are mutually exclusive. You must specify one of these in a request but not both.</note>
+      #
       # @option params [Types::WorkflowExecutionFilter] :execution_filter
       #   If specified, only workflow executions matching the workflow ID
       #   specified in the filter are returned.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::CloseStatusFilter] :close_status_filter
       #   If specified, only workflow executions that match this *close status*
       #   are listed. For example, if TERMINATED is specified, then only
       #   TERMINATED workflow executions are listed.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::WorkflowTypeFilter] :type_filter
       #   If specified, only executions of the type specified in the filter are
       #   returned.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::TagFilter] :tag_filter
       #   If specified, only executions that have the matching tag are listed.
       #
       #   <note>`closeStatusFilter`, `executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -1352,6 +1463,7 @@ module Aws
       #
       #   The configured `maximumPageSize` determines how many results can be
       #   returned in a single call.
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -1360,16 +1472,19 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the results in reverse order. By default
       #   the results are returned in descending order of the start or the close
       #   time of the executions.
+      #
       # @return [Types::WorkflowExecutionInfos] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::WorkflowExecutionInfos#execution_infos #executionInfos} => Array&lt;Types::WorkflowExecutionInfo&gt;
-      #   * {Types::WorkflowExecutionInfos#next_page_token #nextPageToken} => String
+      #   * {Types::WorkflowExecutionInfos#execution_infos #execution_infos} => Array&lt;Types::WorkflowExecutionInfo&gt;
+      #   * {Types::WorkflowExecutionInfos#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_closed_workflow_executions({
       #     domain: "DomainName", # required
       #     start_time_filter: {
@@ -1399,6 +1514,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.execution_infos #=> Array
       #   resp.execution_infos[0].execution.workflow_id #=> String
       #   resp.execution_infos[0].execution.run_id #=> String
@@ -1414,6 +1530,7 @@ module Aws
       #   resp.execution_infos[0].tag_list[0] #=> String
       #   resp.execution_infos[0].cancel_requested #=> Boolean
       #   resp.next_page_token #=> String
+      #
       # @overload list_closed_workflow_executions(params = {})
       # @param [Hash] params ({})
       def list_closed_workflow_executions(params = {}, options = {})
@@ -1450,6 +1567,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -1458,8 +1576,10 @@ module Aws
       #
       #   The configured `maximumPageSize` determines how many results can be
       #   returned in a single call.
+      #
       # @option params [required, String] :registration_status
       #   Specifies the registration status of the domains to list.
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -1468,16 +1588,19 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the results in reverse order. By default,
       #   the results are returned in ascending alphabetical order by `name` of
       #   the domains.
+      #
       # @return [Types::DomainInfos] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DomainInfos#domain_infos #domainInfos} => Array&lt;Types::DomainInfo&gt;
-      #   * {Types::DomainInfos#next_page_token #nextPageToken} => String
+      #   * {Types::DomainInfos#domain_infos #domain_infos} => Array&lt;Types::DomainInfo&gt;
+      #   * {Types::DomainInfos#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_domains({
       #     next_page_token: "PageToken",
       #     registration_status: "REGISTERED", # required, accepts REGISTERED, DEPRECATED
@@ -1486,11 +1609,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.domain_infos #=> Array
       #   resp.domain_infos[0].name #=> String
       #   resp.domain_infos[0].status #=> String, one of "REGISTERED", "DEPRECATED"
       #   resp.domain_infos[0].description #=> String
       #   resp.next_page_token #=> String
+      #
       # @overload list_domains(params = {})
       # @param [Hash] params ({})
       def list_domains(params = {}, options = {})
@@ -1533,21 +1658,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain that contains the workflow executions to list.
+      #
       # @option params [required, Types::ExecutionTimeFilter] :start_time_filter
       #   Workflow executions are included in the returned results based on
       #   whether their start times are within the range specified by this
       #   filter.
+      #
       # @option params [Types::WorkflowTypeFilter] :type_filter
       #   If specified, only executions of the type specified in the filter are
       #   returned.
       #
       #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [Types::TagFilter] :tag_filter
       #   If specified, only executions that have the matching tag are listed.
       #
       #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -1556,6 +1686,7 @@ module Aws
       #
       #   The configured `maximumPageSize` determines how many results can be
       #   returned in a single call.
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -1564,21 +1695,25 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the results in reverse order. By default
       #   the results are returned in descending order of the start time of the
       #   executions.
+      #
       # @option params [Types::WorkflowExecutionFilter] :execution_filter
       #   If specified, only workflow executions matching the workflow ID
       #   specified in the filter are returned.
       #
       #   <note>`executionFilter`, `typeFilter` and `tagFilter` are mutually exclusive. You can specify at most one of these in a request.</note>
+      #
       # @return [Types::WorkflowExecutionInfos] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::WorkflowExecutionInfos#execution_infos #executionInfos} => Array&lt;Types::WorkflowExecutionInfo&gt;
-      #   * {Types::WorkflowExecutionInfos#next_page_token #nextPageToken} => String
+      #   * {Types::WorkflowExecutionInfos#execution_infos #execution_infos} => Array&lt;Types::WorkflowExecutionInfo&gt;
+      #   * {Types::WorkflowExecutionInfos#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_open_workflow_executions({
       #     domain: "DomainName", # required
       #     start_time_filter: { # required
@@ -1601,6 +1736,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.execution_infos #=> Array
       #   resp.execution_infos[0].execution.workflow_id #=> String
       #   resp.execution_infos[0].execution.run_id #=> String
@@ -1616,6 +1752,7 @@ module Aws
       #   resp.execution_infos[0].tag_list[0] #=> String
       #   resp.execution_infos[0].cancel_requested #=> Boolean
       #   resp.next_page_token #=> String
+      #
       # @overload list_open_workflow_executions(params = {})
       # @param [Hash] params ({})
       def list_open_workflow_executions(params = {}, options = {})
@@ -1648,13 +1785,17 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which the workflow types have been
       #   registered.
+      #
       # @option params [String] :name
       #   If specified, lists the workflow type with this name.
+      #
       # @option params [required, String] :registration_status
       #   Specifies the registration status of the workflow types to list.
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -1663,6 +1804,7 @@ module Aws
       #
       #   The configured `maximumPageSize` determines how many results can be
       #   returned in a single call.
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -1671,16 +1813,19 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the results in reverse order. By default
       #   the results are returned in ascending alphabetical order of the `name`
       #   of the workflow types.
+      #
       # @return [Types::WorkflowTypeInfos] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::WorkflowTypeInfos#type_infos #typeInfos} => Array&lt;Types::WorkflowTypeInfo&gt;
-      #   * {Types::WorkflowTypeInfos#next_page_token #nextPageToken} => String
+      #   * {Types::WorkflowTypeInfos#type_infos #type_infos} => Array&lt;Types::WorkflowTypeInfo&gt;
+      #   * {Types::WorkflowTypeInfos#next_page_token #next_page_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_workflow_types({
       #     domain: "DomainName", # required
       #     name: "Name",
@@ -1691,6 +1836,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.type_infos #=> Array
       #   resp.type_infos[0].workflow_type.name #=> String
       #   resp.type_infos[0].workflow_type.version #=> String
@@ -1699,6 +1845,7 @@ module Aws
       #   resp.type_infos[0].creation_date #=> Time
       #   resp.type_infos[0].deprecation_date #=> Time
       #   resp.next_page_token #=> String
+      #
       # @overload list_workflow_types(params = {})
       # @param [Hash] params ({})
       def list_workflow_types(params = {}, options = {})
@@ -1743,8 +1890,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain that contains the task lists being polled.
+      #
       # @option params [required, Types::TaskList] :task_list
       #   Specifies the task list to poll for activity tasks.
       #
@@ -1752,21 +1901,24 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [String] :identity
       #   Identity of the worker making the request, recorded in the
       #   `ActivityTaskStarted` event in the workflow history. This enables
       #   diagnostic tracing when problems arise. The form of this identity is
       #   user defined.
+      #
       # @return [Types::ActivityTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ActivityTask#task_token #taskToken} => String
-      #   * {Types::ActivityTask#activity_id #activityId} => String
-      #   * {Types::ActivityTask#started_event_id #startedEventId} => Integer
-      #   * {Types::ActivityTask#workflow_execution #workflowExecution} => Types::WorkflowExecution
-      #   * {Types::ActivityTask#activity_type #activityType} => Types::ActivityType
+      #   * {Types::ActivityTask#task_token #task_token} => String
+      #   * {Types::ActivityTask#activity_id #activity_id} => String
+      #   * {Types::ActivityTask#started_event_id #started_event_id} => Integer
+      #   * {Types::ActivityTask#workflow_execution #workflow_execution} => Types::WorkflowExecution
+      #   * {Types::ActivityTask#activity_type #activity_type} => Types::ActivityType
       #   * {Types::ActivityTask#input #input} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.poll_for_activity_task({
       #     domain: "DomainName", # required
       #     task_list: { # required
@@ -1776,6 +1928,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_token #=> String
       #   resp.activity_id #=> String
       #   resp.started_event_id #=> Integer
@@ -1784,6 +1937,7 @@ module Aws
       #   resp.activity_type.name #=> String
       #   resp.activity_type.version #=> String
       #   resp.input #=> String
+      #
       # @overload poll_for_activity_task(params = {})
       # @param [Hash] params ({})
       def poll_for_activity_task(params = {}, options = {})
@@ -1839,8 +1993,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the task lists to poll.
+      #
       # @option params [required, Types::TaskList] :task_list
       #   Specifies the task list to poll for decision tasks.
       #
@@ -1848,11 +2004,13 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [String] :identity
       #   Identity of the decider making the request, which is recorded in the
       #   DecisionTaskStarted event in the workflow history. This enables
       #   diagnostic tracing when problems arise. The form of this identity is
       #   user defined.
+      #
       # @option params [String] :next_page_token
       #   If a `NextPageToken` was returned by a previous call, there are more
       #   results available. To retrieve the next page of results, make the call
@@ -1865,6 +2023,7 @@ module Aws
       #   <note>The `nextPageToken` returned by this action cannot be used with GetWorkflowExecutionHistory to get the next page. You must call PollForDecisionTask again (with the `nextPageToken`) to retrieve the next page of history records. Calling PollForDecisionTask with a `nextPageToken` will not return a new decision task.</note>
       #
       #   .
+      #
       # @option params [Integer] :maximum_page_size
       #   The maximum number of results that will be returned per call.
       #   `nextPageToken` can be used to obtain futher pages of results. The
@@ -1873,21 +2032,24 @@ module Aws
       #
       #   This is an upper limit only; the actual number of results returned per
       #   call may be fewer than the specified maximum.
+      #
       # @option params [Boolean] :reverse_order
       #   When set to `true`, returns the events in reverse order. By default
       #   the results are returned in ascending order of the `eventTimestamp` of
       #   the events.
+      #
       # @return [Types::DecisionTask] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DecisionTask#task_token #taskToken} => String
-      #   * {Types::DecisionTask#started_event_id #startedEventId} => Integer
-      #   * {Types::DecisionTask#workflow_execution #workflowExecution} => Types::WorkflowExecution
-      #   * {Types::DecisionTask#workflow_type #workflowType} => Types::WorkflowType
+      #   * {Types::DecisionTask#task_token #task_token} => String
+      #   * {Types::DecisionTask#started_event_id #started_event_id} => Integer
+      #   * {Types::DecisionTask#workflow_execution #workflow_execution} => Types::WorkflowExecution
+      #   * {Types::DecisionTask#workflow_type #workflow_type} => Types::WorkflowType
       #   * {Types::DecisionTask#events #events} => Array&lt;Types::HistoryEvent&gt;
-      #   * {Types::DecisionTask#next_page_token #nextPageToken} => String
-      #   * {Types::DecisionTask#previous_started_event_id #previousStartedEventId} => Integer
+      #   * {Types::DecisionTask#next_page_token #next_page_token} => String
+      #   * {Types::DecisionTask#previous_started_event_id #previous_started_event_id} => Integer
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.poll_for_decision_task({
       #     domain: "DomainName", # required
       #     task_list: { # required
@@ -1900,6 +2062,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.task_token #=> String
       #   resp.started_event_id #=> Integer
       #   resp.workflow_execution.workflow_id #=> String
@@ -2153,6 +2316,7 @@ module Aws
       #   resp.events[0].start_lambda_function_failed_event_attributes.message #=> String
       #   resp.next_page_token #=> String
       #   resp.previous_started_event_id #=> Integer
+      #
       # @overload poll_for_decision_task(params = {})
       # @param [Hash] params ({})
       def poll_for_decision_task(params = {}, options = {})
@@ -2209,6 +2373,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
@@ -2216,20 +2381,25 @@ module Aws
       #   opaque value. If the task is passed to another process, its
       #   `taskToken` must also be passed. This enables it to provide its
       #   progress and respond with results.
+      #
       # @option params [String] :details
       #   If specified, contains details about the progress of the task.
+      #
       # @return [Types::ActivityTaskStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ActivityTaskStatus#cancel_requested #cancelRequested} => Boolean
+      #   * {Types::ActivityTaskStatus#cancel_requested #cancel_requested} => Boolean
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.record_activity_task_heartbeat({
       #     task_token: "TaskToken", # required
       #     details: "LimitedData",
       #   })
       #
       # @example Response structure
+      #
       #   resp.cancel_requested #=> Boolean
+      #
       # @overload record_activity_task_heartbeat(params = {})
       # @param [Hash] params ({})
       def record_activity_task_heartbeat(params = {}, options = {})
@@ -2270,8 +2440,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which this activity is to be registered.
+      #
       # @option params [required, String] :name
       #   The name of the activity type within the domain.
       #
@@ -2279,6 +2451,7 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [required, String] :version
       #   The version of the activity type.
       #
@@ -2288,8 +2461,10 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [String] :description
       #   A textual description of the activity type.
+      #
       # @option params [String] :default_task_start_to_close_timeout
       #   If set, specifies the default maximum duration that a worker can take
       #   to process tasks of this activity type. This default can be overridden
@@ -2298,6 +2473,7 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. The value "NONE" can be used to specify unlimited duration.
+      #
       # @option params [String] :default_task_heartbeat_timeout
       #   If set, specifies the default maximum time before which a worker
       #   processing a task of this type must report progress by calling
@@ -2311,11 +2487,13 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. The value "NONE" can be used to specify unlimited duration.
+      #
       # @option params [Types::TaskList] :default_task_list
       #   If set, specifies the default task list to use for scheduling tasks of
       #   this activity type. This default task list is used if a task list is
       #   not provided when a task is scheduled through the
       #   `ScheduleActivityTask` decision.
+      #
       # @option params [String] :default_task_priority
       #   The default task priority to assign to the activity type. If not
       #   assigned, then "0" will be used. Valid values are integers that
@@ -2329,6 +2507,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+      #
       # @option params [String] :default_task_schedule_to_start_timeout
       #   If set, specifies the default maximum duration that a task of this
       #   activity type can wait before being assigned to a worker. This default
@@ -2337,6 +2516,7 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. The value "NONE" can be used to specify unlimited duration.
+      #
       # @option params [String] :default_task_schedule_to_close_timeout
       #   If set, specifies the default maximum duration for a task of this
       #   activity type. This default can be overridden when scheduling an
@@ -2344,9 +2524,11 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. The value "NONE" can be used to specify unlimited duration.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_activity_type({
       #     domain: "DomainName", # required
       #     name: "Name", # required
@@ -2361,6 +2543,7 @@ module Aws
       #     default_task_schedule_to_start_timeout: "DurationInSecondsOptional",
       #     default_task_schedule_to_close_timeout: "DurationInSecondsOptional",
       #   })
+      #
       # @overload register_activity_type(params = {})
       # @param [Hash] params ({})
       def register_activity_type(params = {}, options = {})
@@ -2392,6 +2575,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :name
       #   Name of the domain to register. The name must be unique in the region
       #   that the domain is registered in.
@@ -2400,8 +2584,10 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [String] :description
       #   A text description of the domain.
+      #
       # @option params [required, String] :workflow_execution_retention_period_in_days
       #   The duration (in days) that records and histories of workflow
       #   executions on the domain should be kept by the service. After the
@@ -2419,14 +2605,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_domain({
       #     name: "DomainName", # required
       #     description: "Description",
       #     workflow_execution_retention_period_in_days: "DurationInDays", # required
       #   })
+      #
       # @overload register_domain(params = {})
       # @param [Hash] params ({})
       def register_domain(params = {}, options = {})
@@ -2470,8 +2659,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which to register the workflow type.
+      #
       # @option params [required, String] :name
       #   The name of the workflow type.
       #
@@ -2479,6 +2670,7 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [required, String] :version
       #   The version of the workflow type.
       #
@@ -2488,8 +2680,10 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [String] :description
       #   Textual description of the workflow type.
+      #
       # @option params [String] :default_task_start_to_close_timeout
       #   If set, specifies the default maximum duration of decision tasks for
       #   this workflow type. This default can be overridden when starting a
@@ -2498,6 +2692,7 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. The value "NONE" can be used to specify unlimited duration.
+      #
       # @option params [String] :default_execution_start_to_close_timeout
       #   If set, specifies the default maximum duration for executions of this
       #   workflow type. You can override this default when starting an
@@ -2510,12 +2705,14 @@ module Aws
       #   `defaultExecutionStartToCloseTimeout`; there is a one-year max limit
       #   on the time that a workflow execution can run. Exceeding this limit
       #   will always cause the workflow execution to time out.
+      #
       # @option params [Types::TaskList] :default_task_list
       #   If set, specifies the default task list to use for scheduling decision
       #   tasks for executions of this workflow type. This default is used only
       #   if a task list is not provided when starting the execution through the
       #   StartWorkflowExecution action or `StartChildWorkflowExecution`
       #   decision.
+      #
       # @option params [String] :default_task_priority
       #   The default task priority to assign to the workflow type. If not
       #   assigned, then "0" will be used. Valid values are integers that
@@ -2529,6 +2726,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+      #
       # @option params [String] :default_child_policy
       #   If set, specifies the default policy to use for the child workflow
       #   executions when a workflow execution of this type is terminated, by
@@ -2546,6 +2744,7 @@ module Aws
       #     actions when it receives an execution history with this event.
       #   * **ABANDON:** no action will be taken. The child executions will
       #     continue to run.
+      #
       # @option params [String] :default_lambda_role
       #   The ARN of the default IAM role to use when a workflow execution of
       #   this type invokes AWS Lambda functions.
@@ -2554,9 +2753,11 @@ module Aws
       #   using the StartWorkflowExecution action or the
       #   `StartChildWorkflowExecution` and `ContinueAsNewWorkflowExecution`
       #   decision.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.register_workflow_type({
       #     domain: "DomainName", # required
       #     name: "Name", # required
@@ -2571,6 +2772,7 @@ module Aws
       #     default_child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #     default_lambda_role: "Arn",
       #   })
+      #
       # @overload register_workflow_type(params = {})
       # @param [Hash] params ({})
       def register_workflow_type(params = {}, options = {})
@@ -2609,20 +2811,26 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the workflow execution to cancel.
+      #
       # @option params [required, String] :workflow_id
       #   The workflowId of the workflow execution to cancel.
+      #
       # @option params [String] :run_id
       #   The runId of the workflow execution to cancel.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.request_cancel_workflow_execution({
       #     domain: "DomainName", # required
       #     workflow_id: "WorkflowId", # required
       #     run_id: "RunIdOptional",
       #   })
+      #
       # @overload request_cancel_workflow_execution(params = {})
       # @param [Hash] params ({})
       def request_cancel_workflow_execution(params = {}, options = {})
@@ -2669,6 +2877,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
       # [2]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
@@ -2676,15 +2885,19 @@ module Aws
       #   opaque value. If the task is passed to another process, its
       #   `taskToken` must also be passed. This enables it to provide its
       #   progress and respond with results.
+      #
       # @option params [String] :details
       #   *Optional.* Information about the cancellation.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.respond_activity_task_canceled({
       #     task_token: "TaskToken", # required
       #     details: "Data",
       #   })
+      #
       # @overload respond_activity_task_canceled(params = {})
       # @param [Hash] params ({})
       def respond_activity_task_canceled(params = {}, options = {})
@@ -2731,6 +2944,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
       # [2]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
@@ -2738,16 +2952,20 @@ module Aws
       #   opaque value. If the task is passed to another process, its
       #   `taskToken` must also be passed. This enables it to provide its
       #   progress and respond with results.
+      #
       # @option params [String] :result
       #   The result of the activity task. It is a free form string that is
       #   implementation specific.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.respond_activity_task_completed({
       #     task_token: "TaskToken", # required
       #     result: "Data",
       #   })
+      #
       # @overload respond_activity_task_completed(params = {})
       # @param [Hash] params ({})
       def respond_activity_task_completed(params = {}, options = {})
@@ -2788,6 +3006,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types
       # [2]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
@@ -2795,18 +3014,23 @@ module Aws
       #   opaque value. If the task is passed to another process, its
       #   `taskToken` must also be passed. This enables it to provide its
       #   progress and respond with results.
+      #
       # @option params [String] :reason
       #   Description of the error that may assist in diagnostics.
+      #
       # @option params [String] :details
       #   *Optional.* Detailed information about the failure.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.respond_activity_task_failed({
       #     task_token: "TaskToken", # required
       #     reason: "FailureReason",
       #     details: "Data",
       #   })
+      #
       # @overload respond_activity_task_failed(params = {})
       # @param [Hash] params ({})
       def respond_activity_task_failed(params = {}, options = {})
@@ -2837,6 +3061,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :task_token
       #   The `taskToken` from the DecisionTask.
       #
@@ -2844,15 +3069,19 @@ module Aws
       #   opaque value. If the task is passed to another process, its
       #   `taskToken` must also be passed. This enables it to provide its
       #   progress and respond with results.
+      #
       # @option params [Array<Types::Decision>] :decisions
       #   The list of decisions (possibly empty) made by the decider while
       #   processing this decision task. See the docs for the decision structure
       #   for details.
+      #
       # @option params [String] :execution_context
       #   User defined context to add to workflow execution.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.respond_decision_task_completed({
       #     task_token: "TaskToken", # required
       #     decisions: [
@@ -2953,6 +3182,7 @@ module Aws
       #     ],
       #     execution_context: "Data",
       #   })
+      #
       # @overload respond_decision_task_completed(params = {})
       # @param [Hash] params ({})
       def respond_decision_task_completed(params = {}, options = {})
@@ -2991,21 +3221,28 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain containing the workflow execution to signal.
+      #
       # @option params [required, String] :workflow_id
       #   The workflowId of the workflow execution to signal.
+      #
       # @option params [String] :run_id
       #   The runId of the workflow execution to signal.
+      #
       # @option params [required, String] :signal_name
       #   The name of the signal. This name must be meaningful to the target
       #   workflow.
+      #
       # @option params [String] :input
       #   Data to attach to the `WorkflowExecutionSignaled` event in the target
       #   workflow execution's history.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.signal_workflow_execution({
       #     domain: "DomainName", # required
       #     workflow_id: "WorkflowId", # required
@@ -3013,6 +3250,7 @@ module Aws
       #     signal_name: "SignalName", # required
       #     input: "Data",
       #   })
+      #
       # @overload signal_workflow_execution(params = {})
       # @param [Hash] params ({})
       def signal_workflow_execution(params = {}, options = {})
@@ -3057,8 +3295,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The name of the domain in which the workflow execution is created.
+      #
       # @option params [required, String] :workflow_id
       #   The user defined identifier associated with the workflow execution.
       #   You can use this to associate a custom identifier with the workflow
@@ -3070,8 +3310,10 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [required, Types::WorkflowType] :workflow_type
       #   The type of the workflow to start.
+      #
       # @option params [Types::TaskList] :task_list
       #   The task list to use for the decision tasks generated for this
       #   workflow execution. This overrides the `defaultTaskList` specified
@@ -3083,6 +3325,7 @@ module Aws
       #   not contain a `:` (colon), `/` (slash), `|` (vertical bar), or any
       #   control characters (\\u0000-\\u001f \| \\u007f - \\u009f). Also, it
       #   must not contain the literal string quotarnquot.
+      #
       # @option params [String] :task_priority
       #   The task priority to use for this workflow execution. This will
       #   override any default priority that was assigned when the workflow type
@@ -3097,11 +3340,13 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html
+      #
       # @option params [String] :input
       #   The input for the workflow execution. This is a free form string which
       #   should be meaningful to the workflow you are starting. This `input` is
       #   made available to the new workflow execution in the
       #   `WorkflowExecutionStarted` history event.
+      #
       # @option params [String] :execution_start_to_close_timeout
       #   The total duration for this workflow execution. This overrides the
       #   defaultExecutionStartToCloseTimeout specified when registering the
@@ -3114,11 +3359,13 @@ module Aws
       #   one-year max limit on the time that a workflow execution can run.
       #
       #   <note> An execution start-to-close timeout must be specified either through this parameter or as a default when the workflow type is registered. If neither this parameter nor a default execution start-to-close timeout is specified, a fault is returned.</note>
+      #
       # @option params [Array<String>] :tag_list
       #   The list of tags to associate with the workflow execution. You can
       #   specify a maximum of 5 tags. You can list workflow executions with a
       #   specific tag by calling ListOpenWorkflowExecutions or
       #   ListClosedWorkflowExecutions and specifying a TagFilter.
+      #
       # @option params [String] :task_start_to_close_timeout
       #   Specifies the maximum duration of decision tasks for this workflow
       #   execution. This parameter overrides the
@@ -3129,6 +3376,7 @@ module Aws
       #   to 0. The value "NONE" can be used to specify unlimited duration.
       #
       #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
+      #
       # @option params [String] :child_policy
       #   If set, specifies the policy to use for the child workflow executions
       #   of this workflow execution if it is terminated, by calling the
@@ -3147,16 +3395,19 @@ module Aws
       #     continue to run.
       #
       #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+      #
       # @option params [String] :lambda_role
       #   The ARN of an IAM role that authorizes Amazon SWF to invoke AWS Lambda
       #   functions.
       #
       #   <note>In order for this workflow execution to invoke AWS Lambda functions, an appropriate IAM role must be specified either as a default for the workflow type or through this field.</note>
+      #
       # @return [Types::Run] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::Run#run_id #runId} => String
+      #   * {Types::Run#run_id #run_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_workflow_execution({
       #     domain: "DomainName", # required
       #     workflow_id: "WorkflowId", # required
@@ -3177,7 +3428,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.run_id #=> String
+      #
       # @overload start_workflow_execution(params = {})
       # @param [Hash] params ({})
       def start_workflow_execution(params = {}, options = {})
@@ -3219,17 +3472,23 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
+      #
       # @option params [required, String] :domain
       #   The domain of the workflow execution to terminate.
+      #
       # @option params [required, String] :workflow_id
       #   The workflowId of the workflow execution to terminate.
+      #
       # @option params [String] :run_id
       #   The runId of the workflow execution to terminate.
+      #
       # @option params [String] :reason
       #   *Optional.* A descriptive reason for terminating the workflow
       #   execution.
+      #
       # @option params [String] :details
       #   *Optional.* Details for terminating the workflow execution.
+      #
       # @option params [String] :child_policy
       #   If set, specifies the policy to use for the child workflow executions
       #   of the workflow execution being terminated. This policy overrides the
@@ -3247,9 +3506,11 @@ module Aws
       #     continue to run.
       #
       #   <note>A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.</note>
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.terminate_workflow_execution({
       #     domain: "DomainName", # required
       #     workflow_id: "WorkflowId", # required
@@ -3258,6 +3519,7 @@ module Aws
       #     details: "Data",
       #     child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #   })
+      #
       # @overload terminate_workflow_execution(params = {})
       # @param [Hash] params ({})
       def terminate_workflow_execution(params = {}, options = {})

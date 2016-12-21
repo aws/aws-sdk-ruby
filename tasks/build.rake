@@ -16,6 +16,7 @@ rule /^build:aws-sdk-\w+$/ do |task|
   files = AwsSdkCodeGenerator::GemBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
     service: service,
+    client_examples: BuildTools.load_client_examples(service.identifier)
   ).each
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/#{service.gem_name}")
   writer.write_files(files)
@@ -30,6 +31,7 @@ task 'build:aws-sdk-sts' do
   generator = AwsSdkCodeGenerator::CodeBuilder.new(
     aws_sdk_core_lib_path: $CORE_LIB,
     service: sts,
+    client_examples: BuildTools.load_client_examples('sts'),
   )
   files = generator.source_files(prefix: 'aws-sdk-sts')
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/aws-sdk-core/lib")

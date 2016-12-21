@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -145,16 +160,20 @@ module Aws
       # value, the tag will be created with the specified key and a value of
       # null. You can tag a trail that applies to all regions only from the
       # region in which the trail was created (that is, from its home region).
+      #
       # @option params [required, String] :resource_id
       #   Specifies the ARN of the trail to which one or more tags will be
       #   added. The format of a trail ARN is:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @option params [Array<Types::Tag>] :tags_list
       #   Contains a list of CloudTrail tags, up to a limit of 50
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.add_tags({
       #     resource_id: "String", # required
       #     tags_list: [
@@ -164,6 +183,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload add_tags(params = {})
       # @param [Hash] params ({})
       def add_tags(params = {}, options = {})
@@ -174,6 +194,7 @@ module Aws
       # Creates a trail that specifies the settings for delivery of log data
       # to an Amazon S3 bucket. A maximum of five trails can exist in a
       # region, irrespective of the region in which they were created.
+      #
       # @option params [required, String] :name
       #   Specifies the name of the trail. The name must meet the following
       #   requirements:
@@ -189,6 +210,7 @@ module Aws
       #     `my-_namespace` and `my--namespace` are invalid.
       #
       #   * Not be in IP address format (for example, 192.168.5.4)
+      #
       # @option params [required, String] :s3_bucket_name
       #   Specifies the name of the Amazon S3 bucket designated for publishing
       #   log files. See [Amazon S3 Bucket Naming Requirements][1].
@@ -196,6 +218,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+      #
       # @option params [String] :s3_key_prefix
       #   Specifies the Amazon S3 key prefix that comes after the name of the
       #   bucket you have designated for log file delivery. For more
@@ -205,15 +228,19 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+      #
       # @option params [String] :sns_topic_name
       #   Specifies the name of the Amazon SNS topic defined for notification of
       #   log file delivery. The maximum length is 256 characters.
+      #
       # @option params [Boolean] :include_global_service_events
       #   Specifies whether the trail is publishing events from global services
       #   such as IAM to the log files.
+      #
       # @option params [Boolean] :is_multi_region_trail
       #   Specifies whether the trail is created in the current region or in all
       #   regions. The default is false.
+      #
       # @option params [Boolean] :enable_log_file_validation
       #   Specifies whether log file integrity validation is enabled. The
       #   default is false.
@@ -229,14 +256,17 @@ module Aws
       #   logging or delete a trail.
       #
       #    </note>
+      #
       # @option params [String] :cloud_watch_logs_log_group_arn
       #   Specifies a log group name using an Amazon Resource Name (ARN), a
       #   unique identifier that represents the log group to which CloudTrail
       #   logs will be delivered. Not required unless you specify
       #   CloudWatchLogsRoleArn.
+      #
       # @option params [String] :cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to write
       #   to a user's log group.
+      #
       # @option params [String] :kms_key_id
       #   Specifies the KMS key ID to use to encrypt the logs delivered by
       #   CloudTrail. The value can be a an alias name prefixed by "alias/", a
@@ -252,22 +282,24 @@ module Aws
       #   * arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
       #
       #   * 12345678-1234-1234-1234-123456789012
+      #
       # @return [Types::CreateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateTrailResponse#name #Name} => String
-      #   * {Types::CreateTrailResponse#s3_bucket_name #S3BucketName} => String
-      #   * {Types::CreateTrailResponse#s3_key_prefix #S3KeyPrefix} => String
-      #   * {Types::CreateTrailResponse#sns_topic_name #SnsTopicName} => String
-      #   * {Types::CreateTrailResponse#sns_topic_arn #SnsTopicARN} => String
-      #   * {Types::CreateTrailResponse#include_global_service_events #IncludeGlobalServiceEvents} => Boolean
-      #   * {Types::CreateTrailResponse#is_multi_region_trail #IsMultiRegionTrail} => Boolean
-      #   * {Types::CreateTrailResponse#trail_arn #TrailARN} => String
-      #   * {Types::CreateTrailResponse#log_file_validation_enabled #LogFileValidationEnabled} => Boolean
-      #   * {Types::CreateTrailResponse#cloud_watch_logs_log_group_arn #CloudWatchLogsLogGroupArn} => String
-      #   * {Types::CreateTrailResponse#cloud_watch_logs_role_arn #CloudWatchLogsRoleArn} => String
-      #   * {Types::CreateTrailResponse#kms_key_id #KmsKeyId} => String
+      #   * {Types::CreateTrailResponse#name #name} => String
+      #   * {Types::CreateTrailResponse#s3_bucket_name #s3_bucket_name} => String
+      #   * {Types::CreateTrailResponse#s3_key_prefix #s3_key_prefix} => String
+      #   * {Types::CreateTrailResponse#sns_topic_name #sns_topic_name} => String
+      #   * {Types::CreateTrailResponse#sns_topic_arn #sns_topic_arn} => String
+      #   * {Types::CreateTrailResponse#include_global_service_events #include_global_service_events} => Boolean
+      #   * {Types::CreateTrailResponse#is_multi_region_trail #is_multi_region_trail} => Boolean
+      #   * {Types::CreateTrailResponse#trail_arn #trail_arn} => String
+      #   * {Types::CreateTrailResponse#log_file_validation_enabled #log_file_validation_enabled} => Boolean
+      #   * {Types::CreateTrailResponse#cloud_watch_logs_log_group_arn #cloud_watch_logs_log_group_arn} => String
+      #   * {Types::CreateTrailResponse#cloud_watch_logs_role_arn #cloud_watch_logs_role_arn} => String
+      #   * {Types::CreateTrailResponse#kms_key_id #kms_key_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_trail({
       #     name: "String", # required
       #     s3_bucket_name: "String", # required
@@ -282,6 +314,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.name #=> String
       #   resp.s3_bucket_name #=> String
       #   resp.s3_key_prefix #=> String
@@ -294,6 +327,7 @@ module Aws
       #   resp.cloud_watch_logs_log_group_arn #=> String
       #   resp.cloud_watch_logs_role_arn #=> String
       #   resp.kms_key_id #=> String
+      #
       # @overload create_trail(params = {})
       # @param [Hash] params ({})
       def create_trail(params = {}, options = {})
@@ -305,16 +339,20 @@ module Aws
       # which the trail was created. `DeleteTrail` cannot be called on the
       # shadow trails (replicated trails in other regions) of a trail that is
       # enabled in all regions.
+      #
       # @option params [required, String] :name
       #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
       #   The format of a trail ARN is:
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_trail({
       #     name: "String", # required
       #   })
+      #
       # @overload delete_trail(params = {})
       # @param [Hash] params ({})
       def delete_trail(params = {}, options = {})
@@ -324,6 +362,7 @@ module Aws
 
       # Retrieves settings for the trail associated with the current region
       # for your account.
+      #
       # @option params [Array<String>] :trail_name_list
       #   Specifies a list of trail names, trail ARNs, or both, of the trails to
       #   describe. The format of a trail ARN is:
@@ -346,21 +385,25 @@ module Aws
       #   must specify its trail ARN.
       #
       #    </note>
+      #
       # @option params [Boolean] :include_shadow_trails
       #   Specifies whether to include shadow trails in the response. A shadow
       #   trail is the replication in a region of a trail that was created in a
       #   different region. The default is true.
+      #
       # @return [Types::DescribeTrailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeTrailsResponse#trail_list #trailList} => Array&lt;Types::Trail&gt;
+      #   * {Types::DescribeTrailsResponse#trail_list #trail_list} => Array&lt;Types::Trail&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_trails({
       #     trail_name_list: ["String"],
       #     include_shadow_trails: false,
       #   })
       #
       # @example Response structure
+      #
       #   resp.trail_list #=> Array
       #   resp.trail_list[0].name #=> String
       #   resp.trail_list[0].s3_bucket_name #=> String
@@ -376,6 +419,7 @@ module Aws
       #   resp.trail_list[0].cloud_watch_logs_role_arn #=> String
       #   resp.trail_list[0].kms_key_id #=> String
       #   resp.trail_list[0].has_custom_event_selectors #=> Boolean
+      #
       # @overload describe_trails(params = {})
       # @param [Hash] params ({})
       def describe_trails(params = {}, options = {})
@@ -400,6 +444,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html
+      #
       # @option params [String] :trail_name
       #   Specifies the name of the trail or trail ARN. If you specify a trail
       #   name, the string must meet the following requirements:
@@ -419,17 +464,20 @@ module Aws
       #   If you specify a trail ARN, it must be in the format:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @return [Types::GetEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetEventSelectorsResponse#trail_arn #TrailARN} => String
-      #   * {Types::GetEventSelectorsResponse#event_selectors #EventSelectors} => Array&lt;Types::EventSelector&gt;
+      #   * {Types::GetEventSelectorsResponse#trail_arn #trail_arn} => String
+      #   * {Types::GetEventSelectorsResponse#event_selectors #event_selectors} => Array&lt;Types::EventSelector&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_event_selectors({
       #     trail_name: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.trail_arn #=> String
       #   resp.event_selectors #=> Array
       #   resp.event_selectors[0].read_write_type #=> String, one of "ReadOnly", "WriteOnly", "All"
@@ -438,6 +486,7 @@ module Aws
       #   resp.event_selectors[0].data_resources[0].type #=> String
       #   resp.event_selectors[0].data_resources[0].values #=> Array
       #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+      #
       # @overload get_event_selectors(params = {})
       # @param [Hash] params ({})
       def get_event_selectors(params = {}, options = {})
@@ -451,6 +500,7 @@ module Aws
       # This operation returns trail status from a single region. To return
       # trail status from all regions, you must call the operation on each
       # region.
+      #
       # @option params [required, String] :name
       #   Specifies the name or the CloudTrail ARN of the trail for which you
       #   are requesting status. To get the status of a shadow trail (a
@@ -458,32 +508,35 @@ module Aws
       #   The format of a trail ARN is:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @return [Types::GetTrailStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetTrailStatusResponse#is_logging #IsLogging} => Boolean
-      #   * {Types::GetTrailStatusResponse#latest_delivery_error #LatestDeliveryError} => String
-      #   * {Types::GetTrailStatusResponse#latest_notification_error #LatestNotificationError} => String
-      #   * {Types::GetTrailStatusResponse#latest_delivery_time #LatestDeliveryTime} => Time
-      #   * {Types::GetTrailStatusResponse#latest_notification_time #LatestNotificationTime} => Time
-      #   * {Types::GetTrailStatusResponse#start_logging_time #StartLoggingTime} => Time
-      #   * {Types::GetTrailStatusResponse#stop_logging_time #StopLoggingTime} => Time
-      #   * {Types::GetTrailStatusResponse#latest_cloud_watch_logs_delivery_error #LatestCloudWatchLogsDeliveryError} => String
-      #   * {Types::GetTrailStatusResponse#latest_cloud_watch_logs_delivery_time #LatestCloudWatchLogsDeliveryTime} => Time
-      #   * {Types::GetTrailStatusResponse#latest_digest_delivery_time #LatestDigestDeliveryTime} => Time
-      #   * {Types::GetTrailStatusResponse#latest_digest_delivery_error #LatestDigestDeliveryError} => String
-      #   * {Types::GetTrailStatusResponse#latest_delivery_attempt_time #LatestDeliveryAttemptTime} => String
-      #   * {Types::GetTrailStatusResponse#latest_notification_attempt_time #LatestNotificationAttemptTime} => String
-      #   * {Types::GetTrailStatusResponse#latest_notification_attempt_succeeded #LatestNotificationAttemptSucceeded} => String
-      #   * {Types::GetTrailStatusResponse#latest_delivery_attempt_succeeded #LatestDeliveryAttemptSucceeded} => String
-      #   * {Types::GetTrailStatusResponse#time_logging_started #TimeLoggingStarted} => String
-      #   * {Types::GetTrailStatusResponse#time_logging_stopped #TimeLoggingStopped} => String
+      #   * {Types::GetTrailStatusResponse#is_logging #is_logging} => Boolean
+      #   * {Types::GetTrailStatusResponse#latest_delivery_error #latest_delivery_error} => String
+      #   * {Types::GetTrailStatusResponse#latest_notification_error #latest_notification_error} => String
+      #   * {Types::GetTrailStatusResponse#latest_delivery_time #latest_delivery_time} => Time
+      #   * {Types::GetTrailStatusResponse#latest_notification_time #latest_notification_time} => Time
+      #   * {Types::GetTrailStatusResponse#start_logging_time #start_logging_time} => Time
+      #   * {Types::GetTrailStatusResponse#stop_logging_time #stop_logging_time} => Time
+      #   * {Types::GetTrailStatusResponse#latest_cloud_watch_logs_delivery_error #latest_cloud_watch_logs_delivery_error} => String
+      #   * {Types::GetTrailStatusResponse#latest_cloud_watch_logs_delivery_time #latest_cloud_watch_logs_delivery_time} => Time
+      #   * {Types::GetTrailStatusResponse#latest_digest_delivery_time #latest_digest_delivery_time} => Time
+      #   * {Types::GetTrailStatusResponse#latest_digest_delivery_error #latest_digest_delivery_error} => String
+      #   * {Types::GetTrailStatusResponse#latest_delivery_attempt_time #latest_delivery_attempt_time} => String
+      #   * {Types::GetTrailStatusResponse#latest_notification_attempt_time #latest_notification_attempt_time} => String
+      #   * {Types::GetTrailStatusResponse#latest_notification_attempt_succeeded #latest_notification_attempt_succeeded} => String
+      #   * {Types::GetTrailStatusResponse#latest_delivery_attempt_succeeded #latest_delivery_attempt_succeeded} => String
+      #   * {Types::GetTrailStatusResponse#time_logging_started #time_logging_started} => String
+      #   * {Types::GetTrailStatusResponse#time_logging_stopped #time_logging_stopped} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_trail_status({
       #     name: "String", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.is_logging #=> Boolean
       #   resp.latest_delivery_error #=> String
       #   resp.latest_notification_error #=> String
@@ -501,6 +554,7 @@ module Aws
       #   resp.latest_delivery_attempt_succeeded #=> String
       #   resp.time_logging_started #=> String
       #   resp.time_logging_stopped #=> String
+      #
       # @overload get_trail_status(params = {})
       # @param [Hash] params ({})
       def get_trail_status(params = {}, options = {})
@@ -519,22 +573,27 @@ module Aws
       # you must look in the same region for its corresponding public key.
       #
       #  </note>
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   Optionally specifies, in UTC, the start of the time range to look up
       #   public keys for CloudTrail digest files. If not specified, the current
       #   time is used, and the current public key is returned.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   Optionally specifies, in UTC, the end of the time range to look up
       #   public keys for CloudTrail digest files. If not specified, the current
       #   time is used.
+      #
       # @option params [String] :next_token
       #   Reserved for future use.
+      #
       # @return [Types::ListPublicKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListPublicKeysResponse#public_key_list #PublicKeyList} => Array&lt;Types::PublicKey&gt;
-      #   * {Types::ListPublicKeysResponse#next_token #NextToken} => String
+      #   * {Types::ListPublicKeysResponse#public_key_list #public_key_list} => Array&lt;Types::PublicKey&gt;
+      #   * {Types::ListPublicKeysResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_public_keys({
       #     start_time: Time.now,
       #     end_time: Time.now,
@@ -542,12 +601,14 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.public_key_list #=> Array
       #   resp.public_key_list[0].value #=> String
       #   resp.public_key_list[0].validity_start_time #=> Time
       #   resp.public_key_list[0].validity_end_time #=> Time
       #   resp.public_key_list[0].fingerprint #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_public_keys(params = {})
       # @param [Hash] params ({})
       def list_public_keys(params = {}, options = {})
@@ -556,31 +617,37 @@ module Aws
       end
 
       # Lists the tags for the trail in the current region.
+      #
       # @option params [required, Array<String>] :resource_id_list
       #   Specifies a list of trail ARNs whose tags will be listed. The list has
       #   a limit of 20 ARNs. The format of a trail ARN is:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @option params [String] :next_token
       #   Reserved for future use.
+      #
       # @return [Types::ListTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListTagsResponse#resource_tag_list #ResourceTagList} => Array&lt;Types::ResourceTag&gt;
-      #   * {Types::ListTagsResponse#next_token #NextToken} => String
+      #   * {Types::ListTagsResponse#resource_tag_list #resource_tag_list} => Array&lt;Types::ResourceTag&gt;
+      #   * {Types::ListTagsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_tags({
       #     resource_id_list: ["String"], # required
       #     next_token: "String",
       #   })
       #
       # @example Response structure
+      #
       #   resp.resource_tag_list #=> Array
       #   resp.resource_tag_list[0].resource_id #=> String
       #   resp.resource_tag_list[0].tags_list #=> Array
       #   resp.resource_tag_list[0].tags_list[0].key #=> String
       #   resp.resource_tag_list[0].tags_list[0].value #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_tags(params = {})
       # @param [Hash] params ({})
       def list_tags(params = {}, options = {})
@@ -614,32 +681,39 @@ module Aws
       # Events that occurred during the selected time range will not be
       # available for lookup if CloudTrail logging was not enabled when the
       # events occurred.
+      #
       # @option params [Array<Types::LookupAttribute>] :lookup_attributes
       #   Contains a list of lookup attributes. Currently the list can contain
       #   only one item.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   Specifies that only events that occur after or at the specified time
       #   are returned. If the specified start time is after the specified end
       #   time, an error is returned.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   Specifies that only events that occur before or at the specified time
       #   are returned. If the specified end time is before the specified start
       #   time, an error is returned.
+      #
       # @option params [Integer] :max_results
       #   The number of events to return. Possible values are 1 through 50. The
       #   default is 10.
+      #
       # @option params [String] :next_token
       #   The token to use to get the next page of results after a previous API
       #   call. This token must be passed in with the same parameters that were
       #   specified in the the original call. For example, if the original call
       #   specified an AttributeKey of 'Username' with a value of 'root',
       #   the call with NextToken should include those same parameters.
+      #
       # @return [Types::LookupEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::LookupEventsResponse#events #Events} => Array&lt;Types::Event&gt;
-      #   * {Types::LookupEventsResponse#next_token #NextToken} => String
+      #   * {Types::LookupEventsResponse#events #events} => Array&lt;Types::Event&gt;
+      #   * {Types::LookupEventsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.lookup_events({
       #     lookup_attributes: [
       #       {
@@ -654,6 +728,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Array
       #   resp.events[0].event_id #=> String
       #   resp.events[0].event_name #=> String
@@ -665,6 +740,7 @@ module Aws
       #   resp.events[0].resources[0].resource_name #=> String
       #   resp.events[0].cloud_trail_event #=> String
       #   resp.next_token #=> String
+      #
       # @overload lookup_events(params = {})
       # @param [Hash] params ({})
       def lookup_events(params = {}, options = {})
@@ -707,6 +783,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html
+      #
       # @option params [String] :trail_name
       #   Specifies the name of the trail or trail ARN. If you specify a trail
       #   name, the string must meet the following requirements:
@@ -726,15 +803,18 @@ module Aws
       #   If you specify a trail ARN, it must be in the format:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @option params [Array<Types::EventSelector>] :event_selectors
       #   Specifies the settings for your event selectors. You can configure up
       #   to five event selectors for a trail.
+      #
       # @return [Types::PutEventSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutEventSelectorsResponse#trail_arn #TrailARN} => String
-      #   * {Types::PutEventSelectorsResponse#event_selectors #EventSelectors} => Array&lt;Types::EventSelector&gt;
+      #   * {Types::PutEventSelectorsResponse#trail_arn #trail_arn} => String
+      #   * {Types::PutEventSelectorsResponse#event_selectors #event_selectors} => Array&lt;Types::EventSelector&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_event_selectors({
       #     trail_name: "String",
       #     event_selectors: [
@@ -752,6 +832,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.trail_arn #=> String
       #   resp.event_selectors #=> Array
       #   resp.event_selectors[0].read_write_type #=> String, one of "ReadOnly", "WriteOnly", "All"
@@ -760,6 +841,7 @@ module Aws
       #   resp.event_selectors[0].data_resources[0].type #=> String
       #   resp.event_selectors[0].data_resources[0].values #=> Array
       #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+      #
       # @overload put_event_selectors(params = {})
       # @param [Hash] params ({})
       def put_event_selectors(params = {}, options = {})
@@ -768,16 +850,20 @@ module Aws
       end
 
       # Removes the specified tags from a trail.
+      #
       # @option params [required, String] :resource_id
       #   Specifies the ARN of the trail from which tags should be removed. The
       #   format of a trail ARN is:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @option params [Array<Types::Tag>] :tags_list
       #   Specifies a list of tags to be removed.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.remove_tags({
       #     resource_id: "String", # required
       #     tags_list: [
@@ -787,6 +873,7 @@ module Aws
       #       },
       #     ],
       #   })
+      #
       # @overload remove_tags(params = {})
       # @param [Hash] params ({})
       def remove_tags(params = {}, options = {})
@@ -799,17 +886,21 @@ module Aws
       # be called from the region in which the trail was created. This
       # operation cannot be called on the shadow trails (replicated trails in
       # other regions) of a trail that is enabled in all regions.
+      #
       # @option params [required, String] :name
       #   Specifies the name or the CloudTrail ARN of the trail for which
       #   CloudTrail logs AWS API calls. The format of a trail ARN is:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.start_logging({
       #     name: "String", # required
       #   })
+      #
       # @overload start_logging(params = {})
       # @param [Hash] params ({})
       def start_logging(params = {}, options = {})
@@ -825,18 +916,22 @@ module Aws
       # trail was created, or an `InvalidHomeRegionException` will occur. This
       # operation cannot be called on the shadow trails (replicated trails in
       # other regions) of a trail enabled in all regions.
+      #
       # @option params [required, String] :name
       #   Specifies the name or the CloudTrail ARN of the trail for which
       #   CloudTrail will stop logging AWS API calls. The format of a trail ARN
       #   is:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.stop_logging({
       #     name: "String", # required
       #   })
+      #
       # @overload stop_logging(params = {})
       # @param [Hash] params ({})
       def stop_logging(params = {}, options = {})
@@ -851,6 +946,7 @@ module Aws
       # policy exists for the bucket. `UpdateTrail` must be called from the
       # region in which the trail was created; otherwise, an
       # `InvalidHomeRegionException` is thrown.
+      #
       # @option params [required, String] :name
       #   Specifies the name of the trail or trail ARN. If `Name` is a trail
       #   name, the string must meet the following requirements:
@@ -870,6 +966,7 @@ module Aws
       #   If `Name` is a trail ARN, it must be in the format:
       #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #
       # @option params [String] :s3_bucket_name
       #   Specifies the name of the Amazon S3 bucket designated for publishing
       #   log files. See [Amazon S3 Bucket Naming Requirements][1].
@@ -877,6 +974,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create_trail_naming_policy.html
+      #
       # @option params [String] :s3_key_prefix
       #   Specifies the Amazon S3 key prefix that comes after the name of the
       #   bucket you have designated for log file delivery. For more
@@ -886,12 +984,15 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html
+      #
       # @option params [String] :sns_topic_name
       #   Specifies the name of the Amazon SNS topic defined for notification of
       #   log file delivery. The maximum length is 256 characters.
+      #
       # @option params [Boolean] :include_global_service_events
       #   Specifies whether the trail is publishing events from global services
       #   such as IAM to the log files.
+      #
       # @option params [Boolean] :is_multi_region_trail
       #   Specifies whether the trail applies only to the current region or to
       #   all regions. The default is false. If the trail exists only in the
@@ -900,6 +1001,7 @@ module Aws
       #   the trail exists in all regions and this value is set to false, the
       #   trail will remain in the region where it was created, and its shadow
       #   trails in other regions will be deleted.
+      #
       # @option params [Boolean] :enable_log_file_validation
       #   Specifies whether log file validation is enabled. The default is
       #   false.
@@ -915,14 +1017,17 @@ module Aws
       #   logging or delete a trail.
       #
       #    </note>
+      #
       # @option params [String] :cloud_watch_logs_log_group_arn
       #   Specifies a log group name using an Amazon Resource Name (ARN), a
       #   unique identifier that represents the log group to which CloudTrail
       #   logs will be delivered. Not required unless you specify
       #   CloudWatchLogsRoleArn.
+      #
       # @option params [String] :cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to write
       #   to a user's log group.
+      #
       # @option params [String] :kms_key_id
       #   Specifies the KMS key ID to use to encrypt the logs delivered by
       #   CloudTrail. The value can be a an alias name prefixed by "alias/", a
@@ -938,22 +1043,24 @@ module Aws
       #   * arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
       #
       #   * 12345678-1234-1234-1234-123456789012
+      #
       # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateTrailResponse#name #Name} => String
-      #   * {Types::UpdateTrailResponse#s3_bucket_name #S3BucketName} => String
-      #   * {Types::UpdateTrailResponse#s3_key_prefix #S3KeyPrefix} => String
-      #   * {Types::UpdateTrailResponse#sns_topic_name #SnsTopicName} => String
-      #   * {Types::UpdateTrailResponse#sns_topic_arn #SnsTopicARN} => String
-      #   * {Types::UpdateTrailResponse#include_global_service_events #IncludeGlobalServiceEvents} => Boolean
-      #   * {Types::UpdateTrailResponse#is_multi_region_trail #IsMultiRegionTrail} => Boolean
-      #   * {Types::UpdateTrailResponse#trail_arn #TrailARN} => String
-      #   * {Types::UpdateTrailResponse#log_file_validation_enabled #LogFileValidationEnabled} => Boolean
-      #   * {Types::UpdateTrailResponse#cloud_watch_logs_log_group_arn #CloudWatchLogsLogGroupArn} => String
-      #   * {Types::UpdateTrailResponse#cloud_watch_logs_role_arn #CloudWatchLogsRoleArn} => String
-      #   * {Types::UpdateTrailResponse#kms_key_id #KmsKeyId} => String
+      #   * {Types::UpdateTrailResponse#name #name} => String
+      #   * {Types::UpdateTrailResponse#s3_bucket_name #s3_bucket_name} => String
+      #   * {Types::UpdateTrailResponse#s3_key_prefix #s3_key_prefix} => String
+      #   * {Types::UpdateTrailResponse#sns_topic_name #sns_topic_name} => String
+      #   * {Types::UpdateTrailResponse#sns_topic_arn #sns_topic_arn} => String
+      #   * {Types::UpdateTrailResponse#include_global_service_events #include_global_service_events} => Boolean
+      #   * {Types::UpdateTrailResponse#is_multi_region_trail #is_multi_region_trail} => Boolean
+      #   * {Types::UpdateTrailResponse#trail_arn #trail_arn} => String
+      #   * {Types::UpdateTrailResponse#log_file_validation_enabled #log_file_validation_enabled} => Boolean
+      #   * {Types::UpdateTrailResponse#cloud_watch_logs_log_group_arn #cloud_watch_logs_log_group_arn} => String
+      #   * {Types::UpdateTrailResponse#cloud_watch_logs_role_arn #cloud_watch_logs_role_arn} => String
+      #   * {Types::UpdateTrailResponse#kms_key_id #kms_key_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_trail({
       #     name: "String", # required
       #     s3_bucket_name: "String",
@@ -968,6 +1075,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.name #=> String
       #   resp.s3_bucket_name #=> String
       #   resp.s3_key_prefix #=> String
@@ -980,6 +1088,7 @@ module Aws
       #   resp.cloud_watch_logs_log_group_arn #=> String
       #   resp.cloud_watch_logs_role_arn #=> String
       #   resp.kms_key_id #=> String
+      #
       # @overload update_trail(params = {})
       # @param [Hash] params ({})
       def update_trail(params = {}, options = {})

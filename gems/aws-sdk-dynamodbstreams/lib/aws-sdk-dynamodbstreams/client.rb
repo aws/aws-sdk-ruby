@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -154,19 +169,24 @@ module Aws
       # more stream records). If both `StartingSequenceNumber` and
       # `EndingSequenceNumber` are present, then that shard is closed and can
       # no longer receive more data.
+      #
       # @option params [required, String] :stream_arn
       #   The Amazon Resource Name (ARN) for the stream.
+      #
       # @option params [Integer] :limit
       #   The maximum number of shard objects to return. The upper limit is 100.
+      #
       # @option params [String] :exclusive_start_shard_id
       #   The shard ID of the first item that this operation will evaluate. Use
       #   the value that was returned for `LastEvaluatedShardId` in the previous
       #   operation.
+      #
       # @return [Types::DescribeStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeStreamOutput#stream_description #StreamDescription} => Types::StreamDescription
+      #   * {Types::DescribeStreamOutput#stream_description #stream_description} => Types::StreamDescription
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_stream({
       #     stream_arn: "StreamArn", # required
       #     limit: 1,
@@ -174,6 +194,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.stream_description.stream_arn #=> String
       #   resp.stream_description.stream_label #=> String
       #   resp.stream_description.stream_status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED"
@@ -189,6 +210,7 @@ module Aws
       #   resp.stream_description.shards[0].sequence_number_range.ending_sequence_number #=> String
       #   resp.stream_description.shards[0].parent_shard_id #=> String
       #   resp.stream_description.last_evaluated_shard_id #=> String
+      #
       # @overload describe_stream(params = {})
       # @param [Hash] params ({})
       def describe_stream(params = {}, options = {})
@@ -210,25 +232,30 @@ module Aws
       # records, whichever comes first.
       #
       #  </note>
+      #
       # @option params [required, String] :shard_iterator
       #   A shard iterator that was retrieved from a previous GetShardIterator
       #   operation. This iterator can be used to access the stream records in
       #   this shard.
+      #
       # @option params [Integer] :limit
       #   The maximum number of records to return from the shard. The upper
       #   limit is 1000.
+      #
       # @return [Types::GetRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetRecordsOutput#records #Records} => Array&lt;Types::Record&gt;
-      #   * {Types::GetRecordsOutput#next_shard_iterator #NextShardIterator} => String
+      #   * {Types::GetRecordsOutput#records #records} => Array&lt;Types::Record&gt;
+      #   * {Types::GetRecordsOutput#next_shard_iterator #next_shard_iterator} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_records({
       #     shard_iterator: "ShardIterator", # required
       #     limit: 1,
       #   })
       #
       # @example Response structure
+      #
       #   resp.records #=> Array
       #   resp.records[0].event_id #=> String
       #   resp.records[0].event_name #=> String, one of "INSERT", "MODIFY", "REMOVE"
@@ -246,6 +273,7 @@ module Aws
       #   resp.records[0].dynamodb.size_bytes #=> Integer
       #   resp.records[0].dynamodb.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.next_shard_iterator #=> String
+      #
       # @overload get_records(params = {})
       # @param [Hash] params ({})
       def get_records(params = {}, options = {})
@@ -262,11 +290,14 @@ module Aws
       # requester.
       #
       #  </note>
+      #
       # @option params [required, String] :stream_arn
       #   The Amazon Resource Name (ARN) for the stream.
+      #
       # @option params [required, String] :shard_id
       #   The identifier of the shard. The iterator will be returned for this
       #   shard ID.
+      #
       # @option params [required, String] :shard_iterator_type
       #   Determines how the shard iterator is used to start reading stream
       #   records from the shard:
@@ -286,14 +317,17 @@ module Aws
       #   * `LATEST` - Start reading just after the most recent stream record in
       #     the shard, so that you always read the most recent data in the
       #     shard.
+      #
       # @option params [String] :sequence_number
       #   The sequence number of a stream record in the shard from which to
       #   start reading.
+      #
       # @return [Types::GetShardIteratorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetShardIteratorOutput#shard_iterator #ShardIterator} => String
+      #   * {Types::GetShardIteratorOutput#shard_iterator #shard_iterator} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_shard_iterator({
       #     stream_arn: "StreamArn", # required
       #     shard_id: "ShardId", # required
@@ -302,7 +336,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.shard_iterator #=> String
+      #
       # @overload get_shard_iterator(params = {})
       # @param [Hash] params ({})
       def get_shard_iterator(params = {}, options = {})
@@ -317,21 +353,26 @@ module Aws
       # <note markdown="1"> You can call *ListStreams* at a maximum rate of 5 times per second.
       #
       #  </note>
+      #
       # @option params [String] :table_name
       #   If this parameter is provided, then only the streams associated with
       #   this table name are returned.
+      #
       # @option params [Integer] :limit
       #   The maximum number of streams to return. The upper limit is 100.
+      #
       # @option params [String] :exclusive_start_stream_arn
       #   The ARN (Amazon Resource Name) of the first item that this operation
       #   will evaluate. Use the value that was returned for
       #   `LastEvaluatedStreamArn` in the previous operation.
+      #
       # @return [Types::ListStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListStreamsOutput#streams #Streams} => Array&lt;Types::Stream&gt;
-      #   * {Types::ListStreamsOutput#last_evaluated_stream_arn #LastEvaluatedStreamArn} => String
+      #   * {Types::ListStreamsOutput#streams #streams} => Array&lt;Types::Stream&gt;
+      #   * {Types::ListStreamsOutput#last_evaluated_stream_arn #last_evaluated_stream_arn} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_streams({
       #     table_name: "TableName",
       #     limit: 1,
@@ -339,11 +380,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.streams #=> Array
       #   resp.streams[0].stream_arn #=> String
       #   resp.streams[0].table_name #=> String
       #   resp.streams[0].stream_label #=> String
       #   resp.last_evaluated_stream_arn #=> String
+      #
       # @overload list_streams(params = {})
       # @param [Hash] params ({})
       def list_streams(params = {}, options = {})

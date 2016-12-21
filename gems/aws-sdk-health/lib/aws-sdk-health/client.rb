@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -148,26 +163,32 @@ module Aws
       #
       # At least one event ARN is required. Results are sorted by the
       # `lastUpdatedTime` of the entity, starting with the most recent.
+      #
       # @option params [required, Types::EntityFilter] :filter
       #   Values to narrow the results returned. At least one event ARN is
       #   required.
+      #
       # @option params [String] :locale
       #   The locale (language) to return information in. The default is
       #   English.
+      #
       # @option params [String] :next_token
       #   If the results of a search are large, only a portion of the results
       #   are returned, and a `nextToken` pagination token is returned in the
       #   response. To retrieve the next batch of results, reissue the search
       #   request and include the returned token. When all results have been
       #   returned, the response does not contain a pagination token value.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of items to return in one batch.
+      #
       # @return [Types::DescribeAffectedEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeAffectedEntitiesResponse#entities #entities} => Array&lt;Types::AffectedEntity&gt;
-      #   * {Types::DescribeAffectedEntitiesResponse#next_token #nextToken} => String
+      #   * {Types::DescribeAffectedEntitiesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_affected_entities({
       #     filter: { # required
       #       event_arns: ["eventArn"], # required
@@ -192,6 +213,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.entities #=> Array
       #   resp.entities[0].entity_arn #=> String
       #   resp.entities[0].event_arn #=> String
@@ -202,6 +224,7 @@ module Aws
       #   resp.entities[0].tags #=> Hash
       #   resp.entities[0].tags["tagKey"] #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_affected_entities(params = {})
       # @param [Hash] params ({})
       def describe_affected_entities(params = {}, options = {})
@@ -212,23 +235,28 @@ module Aws
       # Returns the number of entities that are affected by each of the
       # specified events. If no events are specified, the counts of all
       # affected entities are returned.
+      #
       # @option params [Array<String>] :event_arns
       #   A list of event ARNs (unique identifiers). For example:
       #   `"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
       #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
+      #
       # @return [Types::DescribeEntityAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEntityAggregatesResponse#entity_aggregates #entityAggregates} => Array&lt;Types::EntityAggregate&gt;
+      #   * {Types::DescribeEntityAggregatesResponse#entity_aggregates #entity_aggregates} => Array&lt;Types::EntityAggregate&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_entity_aggregates({
       #     event_arns: ["eventArn"],
       #   })
       #
       # @example Response structure
+      #
       #   resp.entity_aggregates #=> Array
       #   resp.entity_aggregates[0].event_arn #=> String
       #   resp.entity_aggregates[0].count #=> Integer
+      #
       # @overload describe_entity_aggregates(params = {})
       # @param [Hash] params ({})
       def describe_entity_aggregates(params = {}, options = {})
@@ -239,24 +267,30 @@ module Aws
       # Returns the number of events of each event type (issue, scheduled
       # change, and account notification). If no filter is specified, the
       # counts of all events in each category are returned.
+      #
       # @option params [Types::EventFilter] :filter
       #   Values to narrow the results returned.
+      #
       # @option params [required, String] :aggregate_field
       #   The only currently supported value is `eventTypeCategory`.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of items to return in one batch.
+      #
       # @option params [String] :next_token
       #   If the results of a search are large, only a portion of the results
       #   are returned, and a `nextToken` pagination token is returned in the
       #   response. To retrieve the next batch of results, reissue the search
       #   request and include the returned token. When all results have been
       #   returned, the response does not contain a pagination token value.
+      #
       # @return [Types::DescribeEventAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEventAggregatesResponse#event_aggregates #eventAggregates} => Array&lt;Types::EventAggregate&gt;
-      #   * {Types::DescribeEventAggregatesResponse#next_token #nextToken} => String
+      #   * {Types::DescribeEventAggregatesResponse#event_aggregates #event_aggregates} => Array&lt;Types::EventAggregate&gt;
+      #   * {Types::DescribeEventAggregatesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_event_aggregates({
       #     filter: {
       #       event_arns: ["eventArn"],
@@ -298,10 +332,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_aggregates #=> Array
       #   resp.event_aggregates[0].aggregate_value #=> String
       #   resp.event_aggregates[0].count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_event_aggregates(params = {})
       # @param [Hash] params ({})
       def describe_event_aggregates(params = {}, options = {})
@@ -318,25 +354,30 @@ module Aws
       #
       # If a specified event cannot be retrieved, an error message is returned
       # for that event.
+      #
       # @option params [required, Array<String>] :event_arns
       #   A list of event ARNs (unique identifiers). For example:
       #   `"arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331",
       #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
+      #
       # @option params [String] :locale
       #   The locale (language) to return information in. The default is
       #   English.
+      #
       # @return [Types::DescribeEventDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEventDetailsResponse#successful_set #successfulSet} => Array&lt;Types::EventDetails&gt;
-      #   * {Types::DescribeEventDetailsResponse#failed_set #failedSet} => Array&lt;Types::EventDetailsErrorItem&gt;
+      #   * {Types::DescribeEventDetailsResponse#successful_set #successful_set} => Array&lt;Types::EventDetails&gt;
+      #   * {Types::DescribeEventDetailsResponse#failed_set #failed_set} => Array&lt;Types::EventDetailsErrorItem&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_event_details({
       #     event_arns: ["eventArn"], # required
       #     locale: "locale",
       #   })
       #
       # @example Response structure
+      #
       #   resp.successful_set #=> Array
       #   resp.successful_set[0].event.arn #=> String
       #   resp.successful_set[0].event.service #=> String
@@ -355,6 +396,7 @@ module Aws
       #   resp.failed_set[0].event_arn #=> String
       #   resp.failed_set[0].error_name #=> String
       #   resp.failed_set[0].error_message #=> String
+      #
       # @overload describe_event_details(params = {})
       # @param [Hash] params ({})
       def describe_event_details(params = {}, options = {})
@@ -365,25 +407,31 @@ module Aws
       # Returns the event types that meet the specified filter criteria. If no
       # filter criteria are specified, all event types are returned, in no
       # particular order.
+      #
       # @option params [Types::EventTypeFilter] :filter
       #   Values to narrow the results returned.
+      #
       # @option params [String] :locale
       #   The locale (language) to return information in. The default is
       #   English.
+      #
       # @option params [String] :next_token
       #   If the results of a search are large, only a portion of the results
       #   are returned, and a `nextToken` pagination token is returned in the
       #   response. To retrieve the next batch of results, reissue the search
       #   request and include the returned token. When all results have been
       #   returned, the response does not contain a pagination token value.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of items to return in one batch.
+      #
       # @return [Types::DescribeEventTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEventTypesResponse#event_types #eventTypes} => Array&lt;Types::EventType&gt;
-      #   * {Types::DescribeEventTypesResponse#next_token #nextToken} => String
+      #   * {Types::DescribeEventTypesResponse#event_types #event_types} => Array&lt;Types::EventType&gt;
+      #   * {Types::DescribeEventTypesResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_event_types({
       #     filter: {
       #       event_type_codes: ["eventTypeCode"],
@@ -396,11 +444,13 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.event_types #=> Array
       #   resp.event_types[0].service #=> String
       #   resp.event_types[0].code #=> String
       #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange"
       #   resp.next_token #=> String
+      #
       # @overload describe_event_types(params = {})
       # @param [Hash] params ({})
       def describe_event_types(params = {}, options = {})
@@ -416,25 +466,31 @@ module Aws
       #
       # If no filter criteria are specified, all events are returned. Results
       # are sorted by `lastModifiedTime`, starting with the most recent.
+      #
       # @option params [Types::EventFilter] :filter
       #   Values to narrow the results returned.
+      #
       # @option params [String] :next_token
       #   If the results of a search are large, only a portion of the results
       #   are returned, and a `nextToken` pagination token is returned in the
       #   response. To retrieve the next batch of results, reissue the search
       #   request and include the returned token. When all results have been
       #   returned, the response does not contain a pagination token value.
+      #
       # @option params [Integer] :max_results
       #   The maximum number of items to return in one batch.
+      #
       # @option params [String] :locale
       #   The locale (language) to return information in. The default is
       #   English.
+      #
       # @return [Types::DescribeEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeEventsResponse#events #events} => Array&lt;Types::Event&gt;
-      #   * {Types::DescribeEventsResponse#next_token #nextToken} => String
+      #   * {Types::DescribeEventsResponse#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_events({
       #     filter: {
       #       event_arns: ["eventArn"],
@@ -476,6 +532,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Array
       #   resp.events[0].arn #=> String
       #   resp.events[0].service #=> String
@@ -488,6 +545,7 @@ module Aws
       #   resp.events[0].last_updated_time #=> Time
       #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
       #   resp.next_token #=> String
+      #
       # @overload describe_events(params = {})
       # @param [Hash] params ({})
       def describe_events(params = {}, options = {})

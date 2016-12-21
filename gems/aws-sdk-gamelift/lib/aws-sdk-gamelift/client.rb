@@ -76,6 +76,7 @@ module Aws
       #     very aggressive. Construct and pass an instance of
       #     `Aws::InstanceProfileCredentails` to enable retries and extended
       #     timeouts.
+      #
       # @option options [required, String] :region
       #   The AWS region to connect to.  The configured `:region` is
       #   used to determine the service `:endpoint`. When not passed,
@@ -87,32 +88,43 @@ module Aws
       #   * `ENV['AWS_DEFAULT_REGION']`
       #   * `~/.aws/credentials`
       #   * `~/.aws/config`
+      #
       # @option options [String] :access_key_id
+      #
       # @option options [Boolean] :convert_params (true)
       #   When `true`, an attempt is made to coerce request parameters into
       #   the required types.
+      #
       # @option options [String] :endpoint
       #   The client endpoint is normally constructed from the `:region`
       #   option. You should only configure an `:endpoint` when connecting
       #   to test endpoints. This should be avalid HTTP(S) URI.
+      #
       # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
       #   The log formatter.
+      #
       # @option options [Symbol] :log_level (:info)
       #   The log level to send messages to the `:logger` at.
+      #
       # @option options [Logger] :logger
       #   The Logger instance to send log messages to.  If this option
       #   is not set, logging will be disabled.
+      #
       # @option options [String] :profile ("default")
       #   Used when loading credentials from the shared credentials file
       #   at HOME/.aws/credentials.  When not specified, 'default' is used.
+      #
       # @option options [Integer] :retry_limit (3)
       #   The maximum number of times to retry failed requests.  Only
       #   ~ 500 level server errors and certain ~ 400 level client errors
       #   are retried.  Generally, these are throttling errors, data
       #   checksum errors, networking errors, timeout errors and auth
       #   errors from expired credentials.
+      #
       # @option options [String] :secret_access_key
+      #
       # @option options [String] :session_token
+      #
       # @option options [Boolean] :simple_json (false)
       #   Disables request parameter conversion, validation, and formatting.
       #   Also disable response data type conversions. This option is useful
@@ -122,6 +134,7 @@ module Aws
       #
       #   When `:simple_json` is enabled, the request parameters hash must
       #   be formatted exactly as the DynamoDB API expects.
+      #
       # @option options [Boolean] :stub_responses (false)
       #   Causes the client to return stubbed responses. By default
       #   fake responses are generated and returned. You can specify
@@ -130,9 +143,11 @@ module Aws
       #
       #   ** Please note ** When response stubbing is enabled, no HTTP
       #   requests are made, and retries are disabled.
+      #
       # @option options [Boolean] :validate_params (true)
       #   When `true`, request parameters are validated before
       #   sending the request.
+      #
       def initialize(*args)
         super
       end
@@ -152,18 +167,23 @@ module Aws
       # optional description. If successful, a new alias record is returned,
       # including an alias ID, which you can reference when creating a game
       # session. To reassign the alias to another fleet ID, call UpdateAlias.
+      #
       # @option params [required, String] :name
       #   Descriptive label associated with an alias. Alias names do not need to
       #   be unique.
+      #
       # @option params [String] :description
       #   Human-readable description of an alias.
+      #
       # @option params [required, Types::RoutingStrategy] :routing_strategy
       #   Object specifying the fleet and routing type to use for the alias.
+      #
       # @return [Types::CreateAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateAliasOutput#alias #Alias} => Types::Alias
+      #   * {Types::CreateAliasOutput#alias #alias} => Types::Alias
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_alias({
       #     name: "NonBlankAndLengthConstraintString", # required
       #     description: "NonZeroAndMaxString",
@@ -175,6 +195,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.alias.alias_id #=> String
       #   resp.alias.name #=> String
       #   resp.alias.description #=> String
@@ -183,6 +204,7 @@ module Aws
       #   resp.alias.routing_strategy.message #=> String
       #   resp.alias.creation_time #=> Time
       #   resp.alias.last_updated_time #=> Time
+      #
       # @overload create_alias(params = {})
       # @param [Hash] params ({})
       def create_alias(params = {}, options = {})
@@ -214,13 +236,16 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
+      #
       # @option params [String] :name
       #   Descriptive label associated with a build. Build names do not need to
       #   be unique. A build name can be changed later using` UpdateBuild `.
+      #
       # @option params [String] :version
       #   Version associated with this build. Version strings do not need to be
       #   unique to a build. A build version can be changed later using`
       #   UpdateBuild `.
+      #
       # @option params [Types::S3Location] :storage_location
       #   Location in Amazon Simple Storage Service (Amazon S3) where a build's
       #   files are stored. This location is assigned in response to a
@@ -231,17 +256,20 @@ module Aws
       #
       #
       #   [1]: http://aws.amazon.com/documentation/s3/
+      #
       # @option params [String] :operating_system
       #   Operating system that the game server binaries are built to run on.
       #   This value determines the type of fleet resources that you can use for
       #   this build.
+      #
       # @return [Types::CreateBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateBuildOutput#build #Build} => Types::Build
-      #   * {Types::CreateBuildOutput#upload_credentials #UploadCredentials} => Types::AwsCredentials
-      #   * {Types::CreateBuildOutput#storage_location #StorageLocation} => Types::S3Location
+      #   * {Types::CreateBuildOutput#build #build} => Types::Build
+      #   * {Types::CreateBuildOutput#upload_credentials #upload_credentials} => Types::AwsCredentials
+      #   * {Types::CreateBuildOutput#storage_location #storage_location} => Types::S3Location
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_build({
       #     name: "NonZeroAndMaxString",
       #     version: "NonZeroAndMaxString",
@@ -254,6 +282,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.build.build_id #=> String
       #   resp.build.name #=> String
       #   resp.build.version #=> String
@@ -267,6 +296,7 @@ module Aws
       #   resp.storage_location.bucket #=> String
       #   resp.storage_location.key #=> String
       #   resp.storage_location.role_arn #=> String
+      #
       # @overload create_build(params = {})
       # @param [Hash] params ({})
       def create_build(params = {}, options = {})
@@ -329,26 +359,32 @@ module Aws
       #
       #
       # [1]: http://aws.amazon.com/ec2/instance-types/
+      #
       # @option params [required, String] :name
       #   Descriptive label associated with a fleet. Fleet names do not need to
       #   be unique.
+      #
       # @option params [String] :description
       #   Human-readable description of a fleet.
+      #
       # @option params [required, String] :build_id
       #   Unique identifier of the build to be deployed on the new fleet. The
       #   build must have been successfully uploaded to GameLift and be in a
       #   `READY` status. This fleet setting cannot be changed once the fleet is
       #   created.
+      #
       # @option params [String] :server_launch_path
       #   This parameter is no longer used. Instead, specify a server launch
       #   path using the `RuntimeConfiguration` parameter. (Requests that
       #   specify a server launch path and launch parameters instead of a
       #   runtime configuration will continue to work.)
+      #
       # @option params [String] :server_launch_parameters
       #   This parameter is no longer used. Instead, specify server launch
       #   parameters in the `RuntimeConfiguration` parameter. (Requests that
       #   specify a server launch path and launch parameters instead of a
       #   runtime configuration will continue to work.)
+      #
       # @option params [Array<String>] :log_paths
       #   Location of default log files. When a server process is shut down,
       #   Amazon GameLift captures and stores any log files in this location.
@@ -362,6 +398,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code
+      #
       # @option params [required, String] :ec2_instance_type
       #   Name of an EC2 instance type that is supported in Amazon GameLift. A
       #   fleet instance type determines the computing resources of each
@@ -372,12 +409,14 @@ module Aws
       #
       #
       #   [1]: http://aws.amazon.com/ec2/instance-types/
+      #
       # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
       #   Range of IP addresses and port settings that permit inbound traffic to
       #   access server processes running on the fleet. If no inbound
       #   permissions are set, including both IP address range and port range,
       #   the server processes in the fleet cannot accept connections. You can
       #   specify one or more sets of permissions for a fleet.
+      #
       # @option params [String] :new_game_session_protection_policy
       #   Game session protection policy to apply to all instances in this
       #   fleet. If this parameter is not set, instances in this fleet default
@@ -391,6 +430,7 @@ module Aws
       #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
+      #
       # @option params [Types::RuntimeConfiguration] :runtime_configuration
       #   Instructions for launching server processes on each instance in the
       #   fleet. The runtime configuration for a fleet has a collection of
@@ -404,14 +444,17 @@ module Aws
       #   the parameters `ServerLaunchPath` and `ServerLaunchParameters`;
       #   requests that contain values for these parameters instead of a runtime
       #   configuration will continue to work.)
+      #
       # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
       #   Policy that limits the number of game sessions an individual player
       #   can create over a span of time for this fleet.
+      #
       # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateFleetOutput#fleet_attributes #FleetAttributes} => Types::FleetAttributes
+      #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_fleet({
       #     name: "NonZeroAndMaxString", # required
       #     description: "NonZeroAndMaxString",
@@ -445,6 +488,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_attributes.fleet_id #=> String
       #   resp.fleet_attributes.description #=> String
       #   resp.fleet_attributes.name #=> String
@@ -460,6 +504,7 @@ module Aws
       #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
       #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
+      #
       # @overload create_fleet(params = {})
       # @param [Hash] params ({})
       def create_fleet(params = {}, options = {})
@@ -484,26 +529,33 @@ module Aws
       # policy, the request should include a creator ID. If none is provided,
       # GameLift does not evaluate the fleet's resource limit creation
       # policy.
+      #
       # @option params [String] :fleet_id
       #   Unique identifier for a fleet. Each request must reference either a
       #   fleet ID or alias ID, but not both.
+      #
       # @option params [String] :alias_id
       #   Unique identifier for a fleet alias. Each request must reference
       #   either a fleet ID or alias ID, but not both.
+      #
       # @option params [required, Integer] :maximum_player_session_count
       #   Maximum number of players that can be connected simultaneously to the
       #   game session.
+      #
       # @option params [String] :name
       #   Descriptive label associated with a game session. Session names do not
       #   need to be unique.
+      #
       # @option params [Array<Types::GameProperty>] :game_properties
       #   Set of properties used to administer a game session. These properties
       #   are passed to the server process hosting it.
+      #
       # @option params [String] :creator_id
       #   Player ID identifying the person or entity creating the game session.
       #   This ID is used to enforce a resource protection policy (if one
       #   exists) that limits the number of concurrent active game sessions one
       #   player can have.
+      #
       # @option params [String] :game_session_id
       #   Custom string to include in the game session ID, with a maximum length
       #   of 48 characters. If this parameter is set, GameLift creates a game
@@ -515,11 +567,13 @@ module Aws
       #   includes the custom ID string "my-game-session". If this parameter
       #   is not set, GameLift creates a game session ID in the same format with
       #   an autogenerated ID string.
+      #
       # @return [Types::CreateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreateGameSessionOutput#game_session #GameSession} => Types::GameSession
+      #   * {Types::CreateGameSessionOutput#game_session #game_session} => Types::GameSession
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_game_session({
       #     fleet_id: "FleetId",
       #     alias_id: "AliasId",
@@ -536,6 +590,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.game_session.game_session_id #=> String
       #   resp.game_session.name #=> String
       #   resp.game_session.fleet_id #=> String
@@ -551,6 +606,7 @@ module Aws
       #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.game_session.creator_id #=> String
+      #
       # @overload create_game_session(params = {})
       # @param [Hash] params ({})
       def create_game_session(params = {}, options = {})
@@ -566,6 +622,7 @@ module Aws
       # To create a player session, specify a game session ID and player ID.
       # If successful, the player is added to the game session and a new
       # PlayerSession object is returned.
+      #
       # @option params [required, String] :game_session_id
       #   Unique identifier for the game session to add a player to. Game
       #   session ID format is as follows:
@@ -573,19 +630,23 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @option params [required, String] :player_id
       #   Unique identifier for the player to be added.
+      #
       # @return [Types::CreatePlayerSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreatePlayerSessionOutput#player_session #PlayerSession} => Types::PlayerSession
+      #   * {Types::CreatePlayerSessionOutput#player_session #player_session} => Types::PlayerSession
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_player_session({
       #     game_session_id: "ArnStringModel", # required
       #     player_id: "NonZeroAndMaxString", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.player_session.player_session_id #=> String
       #   resp.player_session.player_id #=> String
       #   resp.player_session.game_session_id #=> String
@@ -595,6 +656,7 @@ module Aws
       #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_session.ip_address #=> String
       #   resp.player_session.port #=> Integer
+      #
       # @overload create_player_session(params = {})
       # @param [Hash] params ({})
       def create_player_session(params = {}, options = {})
@@ -612,6 +674,7 @@ module Aws
       # To create player sessions, specify a game session ID and a list of
       # player IDs. If successful, the players are added to the game session
       # and a set of new PlayerSession objects is returned.
+      #
       # @option params [required, String] :game_session_id
       #   Unique identifier for the game session to add players to. Game session
       #   ID format is as follows:
@@ -619,19 +682,23 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @option params [required, Array<String>] :player_ids
       #   List of unique identifiers for the players to be added.
+      #
       # @return [Types::CreatePlayerSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::CreatePlayerSessionsOutput#player_sessions #PlayerSessions} => Array&lt;Types::PlayerSession&gt;
+      #   * {Types::CreatePlayerSessionsOutput#player_sessions #player_sessions} => Array&lt;Types::PlayerSession&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.create_player_sessions({
       #     game_session_id: "ArnStringModel", # required
       #     player_ids: ["NonZeroAndMaxString"], # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.player_sessions #=> Array
       #   resp.player_sessions[0].player_session_id #=> String
       #   resp.player_sessions[0].player_id #=> String
@@ -642,6 +709,7 @@ module Aws
       #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_sessions[0].ip_address #=> String
       #   resp.player_sessions[0].port #=> Integer
+      #
       # @overload create_player_sessions(params = {})
       # @param [Hash] params ({})
       def create_player_sessions(params = {}, options = {})
@@ -653,15 +721,19 @@ module Aws
       # clients attempting to access a server process using the deleted alias
       # receive an error. To delete an alias, specify the alias ID to be
       # deleted.
+      #
       # @option params [required, String] :alias_id
       #   Unique identifier for a fleet alias. Specify the alias you want to
       #   delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_alias({
       #     alias_id: "AliasId", # required
       #   })
+      #
       # @overload delete_alias(params = {})
       # @param [Hash] params ({})
       def delete_alias(params = {}, options = {})
@@ -675,14 +747,18 @@ module Aws
       # To delete a build, specify its ID. Deleting a build does not affect
       # the status of any active fleets using the build, but you can no longer
       # create new fleets with the deleted build.
+      #
       # @option params [required, String] :build_id
       #   Unique identifier for the build you want to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_build({
       #     build_id: "BuildId", # required
       #   })
+      #
       # @overload delete_build(params = {})
       # @param [Hash] params ({})
       def delete_build(params = {}, options = {})
@@ -696,14 +772,18 @@ module Aws
       #
       # This action removes the fleet's resources and the fleet record. Once
       # a fleet is deleted, you can no longer use that fleet.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to delete.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_fleet({
       #     fleet_id: "FleetId", # required
       #   })
+      #
       # @overload delete_fleet(params = {})
       # @param [Hash] params ({})
       def delete_fleet(params = {}, options = {})
@@ -715,18 +795,23 @@ module Aws
       # no longer in force and removes all record of it. To delete a scaling
       # policy, specify both the scaling policy name and the fleet ID it is
       # associated with.
+      #
       # @option params [required, String] :name
       #   Descriptive label associated with a scaling policy. Policy names do
       #   not need to be unique.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for a fleet.
+      #
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.delete_scaling_policy({
       #     name: "NonZeroAndMaxString", # required
       #     fleet_id: "FleetId", # required
       #   })
+      #
       # @overload delete_scaling_policy(params = {})
       # @param [Hash] params ({})
       def delete_scaling_policy(params = {}, options = {})
@@ -736,19 +821,23 @@ module Aws
 
       # Retrieves properties for a specified alias. To get the alias, specify
       # an alias ID. If successful, an Alias object is returned.
+      #
       # @option params [required, String] :alias_id
       #   Unique identifier for a fleet alias. Specify the alias you want to
       #   retrieve.
+      #
       # @return [Types::DescribeAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeAliasOutput#alias #Alias} => Types::Alias
+      #   * {Types::DescribeAliasOutput#alias #alias} => Types::Alias
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_alias({
       #     alias_id: "AliasId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.alias.alias_id #=> String
       #   resp.alias.name #=> String
       #   resp.alias.description #=> String
@@ -757,6 +846,7 @@ module Aws
       #   resp.alias.routing_strategy.message #=> String
       #   resp.alias.creation_time #=> Time
       #   resp.alias.last_updated_time #=> Time
+      #
       # @overload describe_alias(params = {})
       # @param [Hash] params ({})
       def describe_alias(params = {}, options = {})
@@ -767,19 +857,23 @@ module Aws
       # Retrieves properties for a build. To get a build record, specify a
       # build ID. If successful, an object containing the build properties is
       # returned.
+      #
       # @option params [required, String] :build_id
       #   Unique identifier of the build that you want to retrieve properties
       #   for.
+      #
       # @return [Types::DescribeBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeBuildOutput#build #Build} => Types::Build
+      #   * {Types::DescribeBuildOutput#build #build} => Types::Build
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_build({
       #     build_id: "BuildId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.build.build_id #=> String
       #   resp.build.name #=> String
       #   resp.build.version #=> String
@@ -787,6 +881,7 @@ module Aws
       #   resp.build.size_on_disk #=> Integer
       #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.build.creation_time #=> Time
+      #
       # @overload describe_build(params = {})
       # @param [Hash] params ({})
       def describe_build(params = {}, options = {})
@@ -804,6 +899,7 @@ module Aws
       # Service limits vary depending on region. Available regions for
       # GameLift can be found in the AWS Management Console for GameLift (see
       # the drop-down list in the upper right corner).
+      #
       # @option params [String] :ec2_instance_type
       #   Name of an EC2 instance type that is supported in Amazon GameLift. A
       #   fleet instance type determines the computing resources of each
@@ -815,20 +911,24 @@ module Aws
       #
       #
       #   [1]: http://aws.amazon.com/ec2/instance-types/
+      #
       # @return [Types::DescribeEC2InstanceLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeEC2InstanceLimitsOutput#ec2_instance_limits #EC2InstanceLimits} => Array&lt;Types::EC2InstanceLimit&gt;
+      #   * {Types::DescribeEC2InstanceLimitsOutput#ec2_instance_limits #ec2_instance_limits} => Array&lt;Types::EC2InstanceLimit&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_ec2_instance_limits({
       #     ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
       #   })
       #
       # @example Response structure
+      #
       #   resp.ec2_instance_limits #=> Array
       #   resp.ec2_instance_limits[0].ec2_instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
       #   resp.ec2_instance_limits[0].current_instances #=> Integer
       #   resp.ec2_instance_limits[0].instance_limit #=> Integer
+      #
       # @overload describe_ec2_instance_limits(params = {})
       # @param [Hash] params ({})
       def describe_ec2_instance_limits(params = {}, options = {})
@@ -850,27 +950,32 @@ module Aws
       # error message includes the maximum allowed.
       #
       #  </note>
+      #
       # @option params [Array<String>] :fleet_ids
       #   Unique identifiers for the fleet(s) that you want to retrieve
       #   attributes for. To request attributes for all fleets, leave this
       #   parameter empty.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
+      #
       # @return [Types::DescribeFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeFleetAttributesOutput#fleet_attributes #FleetAttributes} => Array&lt;Types::FleetAttributes&gt;
-      #   * {Types::DescribeFleetAttributesOutput#next_token #NextToken} => String
+      #   * {Types::DescribeFleetAttributesOutput#fleet_attributes #fleet_attributes} => Array&lt;Types::FleetAttributes&gt;
+      #   * {Types::DescribeFleetAttributesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_fleet_attributes({
       #     fleet_ids: ["FleetId"],
       #     limit: 1,
@@ -878,6 +983,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_attributes #=> Array
       #   resp.fleet_attributes[0].fleet_id #=> String
       #   resp.fleet_attributes[0].description #=> String
@@ -895,6 +1001,7 @@ module Aws
       #   resp.fleet_attributes[0].resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
       #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_fleet_attributes(params = {})
       # @param [Hash] params ({})
       def describe_fleet_attributes(params = {}, options = {})
@@ -917,27 +1024,32 @@ module Aws
       # error message includes the maximum allowed.
       #
       #  </note>
+      #
       # @option params [Array<String>] :fleet_ids
       #   Unique identifier for the fleet(s) you want to retrieve capacity
       #   information for. To request capacity information for all fleets, leave
       #   this parameter empty.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
+      #
       # @return [Types::DescribeFleetCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeFleetCapacityOutput#fleet_capacity #FleetCapacity} => Array&lt;Types::FleetCapacity&gt;
-      #   * {Types::DescribeFleetCapacityOutput#next_token #NextToken} => String
+      #   * {Types::DescribeFleetCapacityOutput#fleet_capacity #fleet_capacity} => Array&lt;Types::FleetCapacity&gt;
+      #   * {Types::DescribeFleetCapacityOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_fleet_capacity({
       #     fleet_ids: ["FleetId"],
       #     limit: 1,
@@ -945,6 +1057,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_capacity #=> Array
       #   resp.fleet_capacity[0].fleet_id #=> String
       #   resp.fleet_capacity[0].instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
@@ -956,6 +1069,7 @@ module Aws
       #   resp.fleet_capacity[0].instance_counts.idle #=> Integer
       #   resp.fleet_capacity[0].instance_counts.terminating #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_fleet_capacity(params = {})
       # @param [Hash] params ({})
       def describe_fleet_capacity(params = {}, options = {})
@@ -968,31 +1082,38 @@ module Aws
       # parameters to retrieve results as a set of sequential pages. If
       # successful, a collection of event log entries matching the request are
       # returned.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet to get event logs for.
+      #
       # @option params [Time,DateTime,Date,Integer,String] :start_time
       #   Earliest date to retrieve event logs for. If no start time is
       #   specified, this call returns entries starting from when the fleet was
       #   created to the specified end time. Format is a number expressed in
       #   Unix time as milliseconds (ex: "1469498468.057").
+      #
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   Most recent date to retrieve event logs for. If no end time is
       #   specified, this call returns entries from the specified start time up
       #   to the present. Format is a number expressed in Unix time as
       #   milliseconds (ex: "1469498468.057").
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::DescribeFleetEventsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeFleetEventsOutput#events #Events} => Array&lt;Types::Event&gt;
-      #   * {Types::DescribeFleetEventsOutput#next_token #NextToken} => String
+      #   * {Types::DescribeFleetEventsOutput#events #events} => Array&lt;Types::Event&gt;
+      #   * {Types::DescribeFleetEventsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_fleet_events({
       #     fleet_id: "FleetId", # required
       #     start_time: Time.now,
@@ -1002,6 +1123,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.events #=> Array
       #   resp.events[0].event_id #=> String
       #   resp.events[0].resource_id #=> String
@@ -1009,6 +1131,7 @@ module Aws
       #   resp.events[0].message #=> String
       #   resp.events[0].event_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload describe_fleet_events(params = {})
       # @param [Hash] params ({})
       def describe_fleet_events(params = {}, options = {})
@@ -1023,24 +1146,29 @@ module Aws
       # successful, a collection of IpPermission objects is returned for the
       # requested fleet ID. If the requested fleet has been deleted, the
       # result set is empty.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to retrieve port settings
       #   for.
+      #
       # @return [Types::DescribeFleetPortSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeFleetPortSettingsOutput#inbound_permissions #InboundPermissions} => Array&lt;Types::IpPermission&gt;
+      #   * {Types::DescribeFleetPortSettingsOutput#inbound_permissions #inbound_permissions} => Array&lt;Types::IpPermission&gt;
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_fleet_port_settings({
       #     fleet_id: "FleetId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.inbound_permissions #=> Array
       #   resp.inbound_permissions[0].from_port #=> Integer
       #   resp.inbound_permissions[0].to_port #=> Integer
       #   resp.inbound_permissions[0].ip_range #=> String
       #   resp.inbound_permissions[0].protocol #=> String, one of "TCP", "UDP"
+      #
       # @overload describe_fleet_port_settings(params = {})
       # @param [Hash] params ({})
       def describe_fleet_port_settings(params = {}, options = {})
@@ -1061,27 +1189,32 @@ module Aws
       # error message includes the maximum allowed.
       #
       #  </note>
+      #
       # @option params [Array<String>] :fleet_ids
       #   Unique identifier for the fleet(s) you want to retrieve utilization
       #   data for. To request utilization data for all fleets, leave this
       #   parameter empty.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
+      #
       # @return [Types::DescribeFleetUtilizationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeFleetUtilizationOutput#fleet_utilization #FleetUtilization} => Array&lt;Types::FleetUtilization&gt;
-      #   * {Types::DescribeFleetUtilizationOutput#next_token #NextToken} => String
+      #   * {Types::DescribeFleetUtilizationOutput#fleet_utilization #fleet_utilization} => Array&lt;Types::FleetUtilization&gt;
+      #   * {Types::DescribeFleetUtilizationOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_fleet_utilization({
       #     fleet_ids: ["FleetId"],
       #     limit: 1,
@@ -1089,6 +1222,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_utilization #=> Array
       #   resp.fleet_utilization[0].fleet_id #=> String
       #   resp.fleet_utilization[0].active_server_process_count #=> Integer
@@ -1096,6 +1230,7 @@ module Aws
       #   resp.fleet_utilization[0].current_player_session_count #=> Integer
       #   resp.fleet_utilization[0].maximum_player_session_count #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_fleet_utilization(params = {})
       # @param [Hash] params ({})
       def describe_fleet_utilization(params = {}, options = {})
@@ -1114,9 +1249,11 @@ module Aws
       # session status. Use the pagination parameters to retrieve results as a
       # set of sequential pages. If successful, a GameSessionDetail object is
       # returned for each session matching the request.
+      #
       # @option params [String] :fleet_id
       #   Unique identifier for a fleet. Specify a fleet to retrieve information
       #   on all game sessions active on the fleet.
+      #
       # @option params [String] :game_session_id
       #   Unique identifier for the game session to retrieve information on.
       #   Game session ID format is as follows:
@@ -1124,26 +1261,32 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @option params [String] :alias_id
       #   Unique identifier for a fleet alias. Specify an alias to retrieve
       #   information on all game sessions active on the fleet.
+      #
       # @option params [String] :status_filter
       #   Game session status to filter results on. Possible game session
       #   statuses include ACTIVE, `TERMINATED`, `ACTIVATING` and `TERMINATING`
       #   (the last two are transitory).
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::DescribeGameSessionDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeGameSessionDetailsOutput#game_session_details #GameSessionDetails} => Array&lt;Types::GameSessionDetail&gt;
-      #   * {Types::DescribeGameSessionDetailsOutput#next_token #NextToken} => String
+      #   * {Types::DescribeGameSessionDetailsOutput#game_session_details #game_session_details} => Array&lt;Types::GameSessionDetail&gt;
+      #   * {Types::DescribeGameSessionDetailsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_game_session_details({
       #     fleet_id: "FleetId",
       #     game_session_id: "ArnStringModel",
@@ -1154,6 +1297,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.game_session_details #=> Array
       #   resp.game_session_details[0].game_session.game_session_id #=> String
       #   resp.game_session_details[0].game_session.name #=> String
@@ -1172,6 +1316,7 @@ module Aws
       #   resp.game_session_details[0].game_session.creator_id #=> String
       #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.next_token #=> String
+      #
       # @overload describe_game_session_details(params = {})
       # @param [Hash] params ({})
       def describe_game_session_details(params = {}, options = {})
@@ -1194,9 +1339,11 @@ module Aws
       # session status. Use the pagination parameters to retrieve results as a
       # set of sequential pages. If successful, a GameSession object is
       # returned for each session matching the request.
+      #
       # @option params [String] :fleet_id
       #   Unique identifier for a fleet. Specify a fleet to retrieve information
       #   on all game sessions active on the fleet.
+      #
       # @option params [String] :game_session_id
       #   Unique identifier for the game session to retrieve information on.
       #   Game session ID format is as follows:
@@ -1204,26 +1351,32 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @option params [String] :alias_id
       #   Unique identifier for a fleet alias. Specify an alias to retrieve
       #   information on all game sessions active on the fleet.
+      #
       # @option params [String] :status_filter
       #   Game session status to filter results on. Possible game session
       #   statuses include `ACTIVE`, `TERMINATED`, `ACTIVATING`, and
       #   `TERMINATING` (the last two are transitory).
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::DescribeGameSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeGameSessionsOutput#game_sessions #GameSessions} => Array&lt;Types::GameSession&gt;
-      #   * {Types::DescribeGameSessionsOutput#next_token #NextToken} => String
+      #   * {Types::DescribeGameSessionsOutput#game_sessions #game_sessions} => Array&lt;Types::GameSession&gt;
+      #   * {Types::DescribeGameSessionsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_game_sessions({
       #     fleet_id: "FleetId",
       #     game_session_id: "ArnStringModel",
@@ -1234,6 +1387,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.game_sessions #=> Array
       #   resp.game_sessions[0].game_session_id #=> String
       #   resp.game_sessions[0].name #=> String
@@ -1251,6 +1405,7 @@ module Aws
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.game_sessions[0].creator_id #=> String
       #   resp.next_token #=> String
+      #
       # @overload describe_game_sessions(params = {})
       # @param [Hash] params ({})
       def describe_game_sessions(params = {}, options = {})
@@ -1266,26 +1421,32 @@ module Aws
       # all instances in a fleet, specify a fleet ID only. Use the pagination
       # parameters to retrieve results as a set of sequential pages. If
       # successful, an Instance object is returned for each result.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for a fleet. Specify the fleet to retrieve instance
       #   information for.
+      #
       # @option params [String] :instance_id
       #   Unique identifier for an instance. Specify an instance to retrieve
       #   information for or leave blank to get information on all instances in
       #   the fleet.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::DescribeInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeInstancesOutput#instances #Instances} => Array&lt;Types::Instance&gt;
-      #   * {Types::DescribeInstancesOutput#next_token #NextToken} => String
+      #   * {Types::DescribeInstancesOutput#instances #instances} => Array&lt;Types::Instance&gt;
+      #   * {Types::DescribeInstancesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_instances({
       #     fleet_id: "FleetId", # required
       #     instance_id: "InstanceId",
@@ -1294,6 +1455,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.instances #=> Array
       #   resp.instances[0].fleet_id #=> String
       #   resp.instances[0].instance_id #=> String
@@ -1303,6 +1465,7 @@ module Aws
       #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
       #   resp.instances[0].creation_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload describe_instances(params = {})
       # @param [Hash] params ({})
       def describe_instances(params = {}, options = {})
@@ -1324,6 +1487,7 @@ module Aws
       # to retrieve results as a set of sequential pages. If successful, a
       # PlayerSession object is returned for each session matching the
       # request.
+      #
       # @option params [String] :game_session_id
       #   Unique identifier for the game session to get player sessions for.
       #   Game session ID format is as follows:
@@ -1331,10 +1495,13 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @option params [String] :player_id
       #   Unique identifier for a player.
+      #
       # @option params [String] :player_session_id
       #   Unique identifier for a player session.
+      #
       # @option params [String] :player_session_status_filter
       #   Player session status to filter results on.
       #
@@ -1352,21 +1519,25 @@ module Aws
       #   * **TIMEDOUT** – A player session request was received, but the player
       #     did not connect and/or was not validated within the time-out limit
       #     (60 seconds).
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages. If a player
       #   session ID is specified, this parameter is ignored.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value. If a
       #   player session ID is specified, this parameter is ignored.
+      #
       # @return [Types::DescribePlayerSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribePlayerSessionsOutput#player_sessions #PlayerSessions} => Array&lt;Types::PlayerSession&gt;
-      #   * {Types::DescribePlayerSessionsOutput#next_token #NextToken} => String
+      #   * {Types::DescribePlayerSessionsOutput#player_sessions #player_sessions} => Array&lt;Types::PlayerSession&gt;
+      #   * {Types::DescribePlayerSessionsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_player_sessions({
       #     game_session_id: "ArnStringModel",
       #     player_id: "NonZeroAndMaxString",
@@ -1377,6 +1548,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.player_sessions #=> Array
       #   resp.player_sessions[0].player_session_id #=> String
       #   resp.player_sessions[0].player_id #=> String
@@ -1388,6 +1560,7 @@ module Aws
       #   resp.player_sessions[0].ip_address #=> String
       #   resp.player_sessions[0].port #=> Integer
       #   resp.next_token #=> String
+      #
       # @overload describe_player_sessions(params = {})
       # @param [Hash] params ({})
       def describe_player_sessions(params = {}, options = {})
@@ -1398,22 +1571,27 @@ module Aws
       # Retrieves the current runtime configuration for the specified fleet.
       # The runtime configuration tells GameLift how to launch server
       # processes on instances in the fleet.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier of the fleet to get the runtime configuration for.
+      #
       # @return [Types::DescribeRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeRuntimeConfigurationOutput#runtime_configuration #RuntimeConfiguration} => Types::RuntimeConfiguration
+      #   * {Types::DescribeRuntimeConfigurationOutput#runtime_configuration #runtime_configuration} => Types::RuntimeConfiguration
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_runtime_configuration({
       #     fleet_id: "FleetId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.runtime_configuration.server_processes #=> Array
       #   resp.runtime_configuration.server_processes[0].launch_path #=> String
       #   resp.runtime_configuration.server_processes[0].parameters #=> String
       #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+      #
       # @overload describe_runtime_configuration(params = {})
       # @param [Hash] params ({})
       def describe_runtime_configuration(params = {}, options = {})
@@ -1428,9 +1606,11 @@ module Aws
       # scaling policies. Use the pagination parameters to retrieve results as
       # a set of sequential pages. If successful, set of ScalingPolicy objects
       # is returned for the fleet.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for a fleet. Specify the fleet to retrieve scaling
       #   policies for.
+      #
       # @option params [String] :status_filter
       #   Scaling policy status to filter results on. A scaling policy is only
       #   in force when in an `ACTIVE` status.
@@ -1451,19 +1631,23 @@ module Aws
       #
       #   * **ERROR** – An error occurred in creating the policy. It should be
       #     removed and recreated.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::DescribeScalingPoliciesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::DescribeScalingPoliciesOutput#scaling_policies #ScalingPolicies} => Array&lt;Types::ScalingPolicy&gt;
-      #   * {Types::DescribeScalingPoliciesOutput#next_token #NextToken} => String
+      #   * {Types::DescribeScalingPoliciesOutput#scaling_policies #scaling_policies} => Array&lt;Types::ScalingPolicy&gt;
+      #   * {Types::DescribeScalingPoliciesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.describe_scaling_policies({
       #     fleet_id: "FleetId", # required
       #     status_filter: "ACTIVE", # accepts ACTIVE, UPDATE_REQUESTED, UPDATING, DELETE_REQUESTED, DELETING, DELETED, ERROR
@@ -1472,6 +1656,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.scaling_policies #=> Array
       #   resp.scaling_policies[0].fleet_id #=> String
       #   resp.scaling_policies[0].name #=> String
@@ -1483,6 +1668,7 @@ module Aws
       #   resp.scaling_policies[0].evaluation_periods #=> Integer
       #   resp.scaling_policies[0].metric_name #=> String, one of "ActivatingGameSessions", "ActiveGameSessions", "ActiveInstances", "AvailablePlayerSessions", "CurrentPlayerSessions", "IdleInstances"
       #   resp.next_token #=> String
+      #
       # @overload describe_scaling_policies(params = {})
       # @param [Hash] params ({})
       def describe_scaling_policies(params = {}, options = {})
@@ -1503,6 +1689,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift
+      #
       # @option params [required, String] :game_session_id
       #   Unique identifier for the game session to get logs for. Game session
       #   ID format is as follows:
@@ -1510,17 +1697,21 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @return [Types::GetGameSessionLogUrlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetGameSessionLogUrlOutput#pre_signed_url #PreSignedUrl} => String
+      #   * {Types::GetGameSessionLogUrlOutput#pre_signed_url #pre_signed_url} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_game_session_log_url({
       #     game_session_id: "ArnStringModel", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.pre_signed_url #=> String
+      #
       # @overload get_game_session_log_url(params = {})
       # @param [Hash] params ({})
       def get_game_session_log_url(params = {}, options = {})
@@ -1551,31 +1742,37 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-remote-access.html
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for a fleet. Specify the fleet that contain the
       #   instance you want access to. The fleet can be in any of the following
       #   statuses: ACTIVATING, ACTIVE, or ERROR. Fleets with an ERROR status
       #   can be accessed for a few hours before being deleted.
+      #
       # @option params [required, String] :instance_id
       #   Unique identifier for an instance. Specify the instance you want to
       #   get access to. You can access an instance in any status.
+      #
       # @return [Types::GetInstanceAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::GetInstanceAccessOutput#instance_access #InstanceAccess} => Types::InstanceAccess
+      #   * {Types::GetInstanceAccessOutput#instance_access #instance_access} => Types::InstanceAccess
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.get_instance_access({
       #     fleet_id: "FleetId", # required
       #     instance_id: "InstanceId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.instance_access.fleet_id #=> String
       #   resp.instance_access.instance_id #=> String
       #   resp.instance_access.ip_address #=> String
       #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.instance_access.credentials.user_name #=> String
       #   resp.instance_access.credentials.secret #=> String
+      #
       # @overload get_instance_access(params = {})
       # @param [Hash] params ({})
       def get_instance_access(params = {}, options = {})
@@ -1590,6 +1787,7 @@ module Aws
       # <note markdown="1"> Aliases are not listed in any particular order.
       #
       #  </note>
+      #
       # @option params [String] :routing_strategy_type
       #   Type of routing to filter results on. Use this parameter to retrieve
       #   only aliases of a certain type. To retrieve all aliases, leave this
@@ -1604,22 +1802,27 @@ module Aws
       #     be used to display a message to the user. A terminal alias throws a
       #     TerminalRoutingStrategyException with the RoutingStrategy message
       #     embedded.
+      #
       # @option params [String] :name
       #   Descriptive label associated with an alias. Alias names do not need to
       #   be unique.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::ListAliasesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListAliasesOutput#aliases #Aliases} => Array&lt;Types::Alias&gt;
-      #   * {Types::ListAliasesOutput#next_token #NextToken} => String
+      #   * {Types::ListAliasesOutput#aliases #aliases} => Array&lt;Types::Alias&gt;
+      #   * {Types::ListAliasesOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_aliases({
       #     routing_strategy_type: "SIMPLE", # accepts SIMPLE, TERMINAL
       #     name: "NonEmptyString",
@@ -1628,6 +1831,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.aliases #=> Array
       #   resp.aliases[0].alias_id #=> String
       #   resp.aliases[0].name #=> String
@@ -1638,6 +1842,7 @@ module Aws
       #   resp.aliases[0].creation_time #=> Time
       #   resp.aliases[0].last_updated_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_aliases(params = {})
       # @param [Hash] params ({})
       def list_aliases(params = {}, options = {})
@@ -1653,6 +1858,7 @@ module Aws
       # <note markdown="1"> Build records are not listed in any particular order.
       #
       #  </note>
+      #
       # @option params [String] :status
       #   Build status to filter results by. To retrieve all builds, leave this
       #   parameter empty.
@@ -1669,19 +1875,23 @@ module Aws
       #
       #   * **FAILED** – The game build upload failed. You cannot create new
       #     fleets for this build.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::ListBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListBuildsOutput#builds #Builds} => Array&lt;Types::Build&gt;
-      #   * {Types::ListBuildsOutput#next_token #NextToken} => String
+      #   * {Types::ListBuildsOutput#builds #builds} => Array&lt;Types::Build&gt;
+      #   * {Types::ListBuildsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_builds({
       #     status: "INITIALIZED", # accepts INITIALIZED, READY, FAILED
       #     limit: 1,
@@ -1689,6 +1899,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.builds #=> Array
       #   resp.builds[0].build_id #=> String
       #   resp.builds[0].name #=> String
@@ -1698,6 +1909,7 @@ module Aws
       #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.builds[0].creation_time #=> Time
       #   resp.next_token #=> String
+      #
       # @overload list_builds(params = {})
       # @param [Hash] params ({})
       def list_builds(params = {}, options = {})
@@ -1712,23 +1924,28 @@ module Aws
       # <note markdown="1"> Fleet records are not listed in any particular order.
       #
       #  </note>
+      #
       # @option params [String] :build_id
       #   Unique identifier of the build to return fleets for. Use this
       #   parameter to return only fleets using the specified build. To retrieve
       #   all fleets, leave this parameter empty.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::ListFleetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ListFleetsOutput#fleet_ids #FleetIds} => Array&lt;String&gt;
-      #   * {Types::ListFleetsOutput#next_token #NextToken} => String
+      #   * {Types::ListFleetsOutput#fleet_ids #fleet_ids} => Array&lt;String&gt;
+      #   * {Types::ListFleetsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.list_fleets({
       #     build_id: "BuildId",
       #     limit: 1,
@@ -1736,9 +1953,11 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_ids #=> Array
       #   resp.fleet_ids[0] #=> String
       #   resp.next_token #=> String
+      #
       # @overload list_fleets(params = {})
       # @param [Hash] params ({})
       def list_fleets(params = {}, options = {})
@@ -1770,14 +1989,18 @@ module Aws
       # action are required. If successful, the policy name is returned.
       # Scaling policies cannot be suspended or made inactive. To stop
       # enforcing a scaling policy, call DeleteScalingPolicy.
+      #
       # @option params [required, String] :name
       #   Descriptive label associated with a scaling policy. Policy names do
       #   not need to be unique. A fleet can have only one scaling policy with
       #   the same name.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identity for the fleet to scale with this policy.
+      #
       # @option params [required, Integer] :scaling_adjustment
       #   Amount of adjustment to make, based on the scaling adjustment type.
+      #
       # @option params [required, String] :scaling_adjustment_type
       #   Type of adjustment to make to a fleet's instance count (see
       #   FleetCapacity):
@@ -1793,14 +2016,18 @@ module Aws
       #     instance count by the scaling adjustment, read as a percentage.
       #     Positive values scale up while negative values scale down; for
       #     example, a value of "-10" scales the fleet down by 10%.
+      #
       # @option params [required, Float] :threshold
       #   Metric value used to trigger a scaling event.
+      #
       # @option params [required, String] :comparison_operator
       #   Comparison operator to use when measuring the metric against the
       #   threshold value.
+      #
       # @option params [required, Integer] :evaluation_periods
       #   Length of time (in minutes) the metric must be at or beyond the
       #   threshold before a scaling event is triggered.
+      #
       # @option params [required, String] :metric_name
       #   Name of the Amazon GameLift-defined metric that is used to trigger an
       #   adjustment.
@@ -1826,11 +2053,13 @@ module Aws
       #
       #   * **IdleInstances** – number of instances not currently running a game
       #     session.
+      #
       # @return [Types::PutScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::PutScalingPolicyOutput#name #Name} => String
+      #   * {Types::PutScalingPolicyOutput#name #name} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.put_scaling_policy({
       #     name: "NonZeroAndMaxString", # required
       #     fleet_id: "FleetId", # required
@@ -1843,7 +2072,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.name #=> String
+      #
       # @overload put_scaling_policy(params = {})
       # @param [Hash] params ({})
       def put_scaling_policy(params = {}, options = {})
@@ -1864,25 +2095,30 @@ module Aws
       # have a limited lifespan. You can get fresh credentials and use them to
       # re-upload game files until the status of that build changes to
       # `READY`. Once this happens, you must create a brand new build.
+      #
       # @option params [required, String] :build_id
       #   Unique identifier for the build you want to get credentials for.
+      #
       # @return [Types::RequestUploadCredentialsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::RequestUploadCredentialsOutput#upload_credentials #UploadCredentials} => Types::AwsCredentials
-      #   * {Types::RequestUploadCredentialsOutput#storage_location #StorageLocation} => Types::S3Location
+      #   * {Types::RequestUploadCredentialsOutput#upload_credentials #upload_credentials} => Types::AwsCredentials
+      #   * {Types::RequestUploadCredentialsOutput#storage_location #storage_location} => Types::S3Location
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.request_upload_credentials({
       #     build_id: "BuildId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.upload_credentials.access_key_id #=> String
       #   resp.upload_credentials.secret_access_key #=> String
       #   resp.upload_credentials.session_token #=> String
       #   resp.storage_location.bucket #=> String
       #   resp.storage_location.key #=> String
       #   resp.storage_location.role_arn #=> String
+      #
       # @overload request_upload_credentials(params = {})
       # @param [Hash] params ({})
       def request_upload_credentials(params = {}, options = {})
@@ -1892,19 +2128,24 @@ module Aws
 
       # Retrieves the fleet ID that a specified alias is currently pointing
       # to.
+      #
       # @option params [required, String] :alias_id
       #   Unique identifier for the alias you want to resolve.
+      #
       # @return [Types::ResolveAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::ResolveAliasOutput#fleet_id #FleetId} => String
+      #   * {Types::ResolveAliasOutput#fleet_id #fleet_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.resolve_alias({
       #     alias_id: "AliasId", # required
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_id #=> String
+      #
       # @overload resolve_alias(params = {})
       # @param [Hash] params ({})
       def resolve_alias(params = {}, options = {})
@@ -1962,12 +2203,15 @@ module Aws
       # up before a player can join.
       #
       #  </note>
+      #
       # @option params [String] :fleet_id
       #   Unique identifier for a fleet. Each request must reference either a
       #   fleet ID or alias ID, but not both.
+      #
       # @option params [String] :alias_id
       #   Unique identifier for a fleet alias. Each request must reference
       #   either a fleet ID or alias ID, but not both.
+      #
       # @option params [String] :filter_expression
       #   String containing the search criteria for the session search. If no
       #   filter expression is included, the request returns results for all
@@ -2012,6 +2256,7 @@ module Aws
       #   For example, this filter expression retrieves game sessions hosting at
       #   least ten players that have an open player slot: `"maximumSessions>=10
       #   AND hasAvailablePlayerSessions=true"`.
+      #
       # @option params [String] :sort_expression
       #   Instructions on how to sort the search results. If no sort expression
       #   is included, the request returns results in random order. A sort
@@ -2028,21 +2273,25 @@ module Aws
       #   For example, this sort expression returns the oldest active sessions
       #   first: `"SortExpression": "creationTimeMillis ASC"`. Results with a
       #   null value for the sort operand are returned at the end of the list.
+      #
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages. The maximum
       #   number of results returned is 20, even if this value is not set or is
       #   set higher than 20.
+      #
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
       #   specify the start of the result set, do not specify a value.
+      #
       # @return [Types::SearchGameSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::SearchGameSessionsOutput#game_sessions #GameSessions} => Array&lt;Types::GameSession&gt;
-      #   * {Types::SearchGameSessionsOutput#next_token #NextToken} => String
+      #   * {Types::SearchGameSessionsOutput#game_sessions #game_sessions} => Array&lt;Types::GameSession&gt;
+      #   * {Types::SearchGameSessionsOutput#next_token #next_token} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.search_game_sessions({
       #     fleet_id: "FleetId",
       #     alias_id: "AliasId",
@@ -2053,6 +2302,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.game_sessions #=> Array
       #   resp.game_sessions[0].game_session_id #=> String
       #   resp.game_sessions[0].name #=> String
@@ -2070,6 +2320,7 @@ module Aws
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.game_sessions[0].creator_id #=> String
       #   resp.next_token #=> String
+      #
       # @overload search_game_sessions(params = {})
       # @param [Hash] params ({})
       def search_game_sessions(params = {}, options = {})
@@ -2081,21 +2332,27 @@ module Aws
       # alias ID to be updated and provide the information to be changed. To
       # reassign an alias to another fleet, provide an updated routing
       # strategy. If successful, the updated alias record is returned.
+      #
       # @option params [required, String] :alias_id
       #   Unique identifier for a fleet alias. Specify the alias you want to
       #   update.
+      #
       # @option params [String] :name
       #   Descriptive label associated with an alias. Alias names do not need to
       #   be unique.
+      #
       # @option params [String] :description
       #   Human-readable description of an alias.
+      #
       # @option params [Types::RoutingStrategy] :routing_strategy
       #   Object specifying the fleet and routing type to use for the alias.
+      #
       # @return [Types::UpdateAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateAliasOutput#alias #Alias} => Types::Alias
+      #   * {Types::UpdateAliasOutput#alias #alias} => Types::Alias
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_alias({
       #     alias_id: "AliasId", # required
       #     name: "NonBlankAndLengthConstraintString",
@@ -2108,6 +2365,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.alias.alias_id #=> String
       #   resp.alias.name #=> String
       #   resp.alias.description #=> String
@@ -2116,6 +2374,7 @@ module Aws
       #   resp.alias.routing_strategy.message #=> String
       #   resp.alias.creation_time #=> Time
       #   resp.alias.last_updated_time #=> Time
+      #
       # @overload update_alias(params = {})
       # @param [Hash] params ({})
       def update_alias(params = {}, options = {})
@@ -2127,19 +2386,24 @@ module Aws
       # version. To update the metadata, specify the build ID to update and
       # provide the new values. If successful, a build object containing the
       # updated metadata is returned.
+      #
       # @option params [required, String] :build_id
       #   Unique identifier of the build you want to update.
+      #
       # @option params [String] :name
       #   Descriptive label associated with a build. Build names do not need to
       #   be unique.
+      #
       # @option params [String] :version
       #   Version associated with this build. Version strings do not need to be
       #   unique to a build.
+      #
       # @return [Types::UpdateBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateBuildOutput#build #Build} => Types::Build
+      #   * {Types::UpdateBuildOutput#build #build} => Types::Build
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_build({
       #     build_id: "BuildId", # required
       #     name: "NonZeroAndMaxString",
@@ -2147,6 +2411,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.build.build_id #=> String
       #   resp.build.name #=> String
       #   resp.build.version #=> String
@@ -2154,6 +2419,7 @@ module Aws
       #   resp.build.size_on_disk #=> Integer
       #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.build.creation_time #=> Time
+      #
       # @overload update_build(params = {})
       # @param [Hash] params ({})
       def update_build(params = {}, options = {})
@@ -2165,14 +2431,18 @@ module Aws
       # To update metadata, specify the fleet ID and the property values you
       # want to change. If successful, the fleet ID for the updated fleet is
       # returned.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to update attribute metadata
       #   for.
+      #
       # @option params [String] :name
       #   Descriptive label associated with a fleet. Fleet names do not need to
       #   be unique.
+      #
       # @option params [String] :description
       #   Human-readable description of a fleet.
+      #
       # @option params [String] :new_game_session_protection_policy
       #   Game session protection policy to apply to all new instances created
       #   in this fleet. Instances that already exist are not affected. You can
@@ -2183,14 +2453,17 @@ module Aws
       #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
+      #
       # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
       #   Policy that limits the number of game sessions an individual player
       #   can create over a span of time.
+      #
       # @return [Types::UpdateFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateFleetAttributesOutput#fleet_id #FleetId} => String
+      #   * {Types::UpdateFleetAttributesOutput#fleet_id #fleet_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_fleet_attributes({
       #     fleet_id: "FleetId", # required
       #     name: "NonZeroAndMaxString",
@@ -2203,7 +2476,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_id #=> String
+      #
       # @overload update_fleet_attributes(params = {})
       # @param [Hash] params ({})
       def update_fleet_attributes(params = {}, options = {})
@@ -2233,21 +2508,27 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to update capacity for.
+      #
       # @option params [Integer] :desired_instances
       #   Number of EC2 instances you want this fleet to host.
+      #
       # @option params [Integer] :min_size
       #   Minimum value allowed for the fleet's instance count. Default if not
       #   set is 0.
+      #
       # @option params [Integer] :max_size
       #   Maximum value allowed for the fleet's instance count. Default if not
       #   set is 1.
+      #
       # @return [Types::UpdateFleetCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateFleetCapacityOutput#fleet_id #FleetId} => String
+      #   * {Types::UpdateFleetCapacityOutput#fleet_id #fleet_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_fleet_capacity({
       #     fleet_id: "FleetId", # required
       #     desired_instances: 1,
@@ -2256,7 +2537,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_id #=> String
+      #
       # @overload update_fleet_capacity(params = {})
       # @param [Hash] params ({})
       def update_fleet_capacity(params = {}, options = {})
@@ -2271,17 +2554,22 @@ module Aws
       # in `InboundPermissionRevocations`. Permissions to be removed must
       # match existing fleet permissions. If successful, the fleet ID for the
       # updated fleet is returned.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to update port settings for.
+      #
       # @option params [Array<Types::IpPermission>] :inbound_permission_authorizations
       #   Collection of port settings to be added to the fleet record.
+      #
       # @option params [Array<Types::IpPermission>] :inbound_permission_revocations
       #   Collection of port settings to be removed from the fleet record.
+      #
       # @return [Types::UpdateFleetPortSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateFleetPortSettingsOutput#fleet_id #FleetId} => String
+      #   * {Types::UpdateFleetPortSettingsOutput#fleet_id #fleet_id} => String
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_fleet_port_settings({
       #     fleet_id: "FleetId", # required
       #     inbound_permission_authorizations: [
@@ -2303,7 +2591,9 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.fleet_id #=> String
+      #
       # @overload update_fleet_port_settings(params = {})
       # @param [Hash] params ({})
       def update_fleet_port_settings(params = {}, options = {})
@@ -2318,6 +2608,7 @@ module Aws
       # new players can join the session. To update a game session, specify
       # the game session ID and the values you want to change. If successful,
       # an updated GameSession object is returned.
+      #
       # @option params [required, String] :game_session_id
       #   Unique identifier for the game session to update. Game session ID
       #   format is as follows:
@@ -2325,15 +2616,19 @@ module Aws
       #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
       #   custom ID string (if one was specified when the game session was
       #   created) an autogenerated string.
+      #
       # @option params [Integer] :maximum_player_session_count
       #   Maximum number of players that can be simultaneously connected to the
       #   game session.
+      #
       # @option params [String] :name
       #   Descriptive label associated with a game session. Session names do not
       #   need to be unique.
+      #
       # @option params [String] :player_session_creation_policy
       #   Policy determining whether or not the game session accepts new
       #   players.
+      #
       # @option params [String] :protection_policy
       #   Game session protection policy to apply to this game session only.
       #
@@ -2342,11 +2637,13 @@ module Aws
       #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
+      #
       # @return [Types::UpdateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateGameSessionOutput#game_session #GameSession} => Types::GameSession
+      #   * {Types::UpdateGameSessionOutput#game_session #game_session} => Types::GameSession
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_game_session({
       #     game_session_id: "ArnStringModel", # required
       #     maximum_player_session_count: 1,
@@ -2356,6 +2653,7 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.game_session.game_session_id #=> String
       #   resp.game_session.name #=> String
       #   resp.game_session.fleet_id #=> String
@@ -2371,6 +2669,7 @@ module Aws
       #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.game_session.creator_id #=> String
+      #
       # @overload update_game_session(params = {})
       # @param [Hash] params ({})
       def update_game_session(params = {}, options = {})
@@ -2396,8 +2695,10 @@ module Aws
       # configuration. As a result, the runtime configuration changes are
       # applied gradually as existing processes shut down and new processes
       # are launched in GameLift's normal process recycling activity.
+      #
       # @option params [required, String] :fleet_id
       #   Unique identifier of the fleet to update runtime configuration for.
+      #
       # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
       #   Instructions for launching server processes on each instance in the
       #   fleet. The runtime configuration for a fleet has a collection of
@@ -2406,11 +2707,13 @@ module Aws
       #   location of the server executable, launch parameters, and the number
       #   of concurrent processes with that configuration to maintain on each
       #   instance.
+      #
       # @return [Types::UpdateRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      #   * {Types::UpdateRuntimeConfigurationOutput#runtime_configuration #RuntimeConfiguration} => Types::RuntimeConfiguration
+      #   * {Types::UpdateRuntimeConfigurationOutput#runtime_configuration #runtime_configuration} => Types::RuntimeConfiguration
       #
       # @example Request syntax with placeholder values
+      #
       #   resp = client.update_runtime_configuration({
       #     fleet_id: "FleetId", # required
       #     runtime_configuration: { # required
@@ -2425,10 +2728,12 @@ module Aws
       #   })
       #
       # @example Response structure
+      #
       #   resp.runtime_configuration.server_processes #=> Array
       #   resp.runtime_configuration.server_processes[0].launch_path #=> String
       #   resp.runtime_configuration.server_processes[0].parameters #=> String
       #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+      #
       # @overload update_runtime_configuration(params = {})
       # @param [Hash] params ({})
       def update_runtime_configuration(params = {}, options = {})
