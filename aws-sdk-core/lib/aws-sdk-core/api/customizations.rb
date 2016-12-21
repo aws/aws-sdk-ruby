@@ -143,6 +143,22 @@ module Aws
         Aws::Plugins::Route53IdFix
       ))
 
+      plugins('rds', add: %w(
+        Aws::Plugins::RDSCrossRegionCopying
+      ))
+
+      api('rds') do |api|
+        api['shapes']['CopyDBSnapshotMessage']['members']['DestinationRegion'] =
+          {"shape" => "String"}
+      end
+
+      doc('rds') do |docs|
+        docs['shapes']['String']['refs']['CopyDBSnapshotMessage$SourceRegion'] =
+          "<p>The region which you are copying an encrypted snapshot from.</p>" +
+          "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
+          " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
+      end
+
       api('s3') do |api|
         api['metadata'].delete('signatureVersion')
         if ENV['DOCSTRINGS']

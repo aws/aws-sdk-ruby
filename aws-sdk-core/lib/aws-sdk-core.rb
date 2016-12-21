@@ -194,6 +194,7 @@ module Aws
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
     autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'
+    autoload :RDSCrossRegionCopying, 'aws-sdk-core/plugins/rds_cross_region_copying'
     autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
     autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Adds cross-region encrypted snapshot copying, including
+  automatic population of the `:pre_signed_url` parameter for
+  `Aws::RDS::Client#copy_db_snapshot` when the `:source_region` parameter is
+  provided.
+
 2.6.40 (2016-12-20)
 ------------------
 
@@ -12,7 +17,9 @@ Unreleased Changes
 
 2.6.39 (2016-12-19)
 ------------------
-Issue - Aws::CloudTrail - Added missing paginator configuration for `Aws::CloudTrail::Client#lookup_events`.
+
+* Issue - Aws::CloudTrail - Added missing paginator configuration for `Aws::CloudTrail::Client#lookup_events`.
+
 * Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
 
 * Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
