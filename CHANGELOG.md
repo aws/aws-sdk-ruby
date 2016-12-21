@@ -6,6 +6,15 @@ Unreleased Changes
   `Aws::RDS::Client#copy_db_snapshot` when the `:source_region` parameter is
   provided.
 
+2.6.40 (2016-12-20)
+------------------
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
 2.6.39 (2016-12-19)
 ------------------
 
