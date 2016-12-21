@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module MachineLearning
+module Aws::MachineLearning
   module Waiters
 
     class BatchPredictionAvailable

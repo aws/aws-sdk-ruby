@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module S3
+module Aws::S3
   module Waiters
 
     class BucketExists

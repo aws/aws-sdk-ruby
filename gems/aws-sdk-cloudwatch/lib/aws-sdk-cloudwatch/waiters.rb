@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module CloudWatch
+module Aws::CloudWatch
   module Waiters
 
     class AlarmExists

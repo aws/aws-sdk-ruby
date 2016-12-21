@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module ElasticTranscoder
+module Aws::ElasticTranscoder
   module Waiters
 
     class JobComplete

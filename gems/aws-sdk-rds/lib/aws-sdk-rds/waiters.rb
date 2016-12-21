@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module RDS
+module Aws::RDS
   module Waiters
 
     class DBInstanceAvailable

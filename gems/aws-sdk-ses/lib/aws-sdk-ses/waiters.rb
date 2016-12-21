@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module SES
+module Aws::SES
   module Waiters
 
     class IdentityExists

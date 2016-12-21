@@ -7,9 +7,10 @@
 
 require 'aws-sdk-core/waiters'
 
-module CloudFront
+module Aws::CloudFront
   module Waiters
 
+    # Wait until a distribution is deployed.
     class DistributionDeployed
 
       # @param [Hash] options
@@ -46,6 +47,7 @@ module CloudFront
 
     end
 
+    # Wait until an invalidation has completed.
     class InvalidationCompleted
 
       # @param [Hash] options
@@ -82,6 +84,7 @@ module CloudFront
 
     end
 
+    # Wait until a streaming distribution is deployed.
     class StreamingDistributionDeployed
 
       # @param [Hash] options

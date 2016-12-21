@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module EC2
+module Aws::EC2
   module Waiters
 
     class BundleTaskComplete

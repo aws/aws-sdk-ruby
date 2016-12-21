@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module Glacier
+module Aws::Glacier
   module Waiters
 
     class VaultExists

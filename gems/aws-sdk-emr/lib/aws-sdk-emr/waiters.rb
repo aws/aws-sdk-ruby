@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module EMR
+module Aws::EMR
   module Waiters
 
     class ClusterRunning

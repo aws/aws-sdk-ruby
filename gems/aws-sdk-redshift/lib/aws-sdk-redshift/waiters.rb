@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module Redshift
+module Aws::Redshift
   module Waiters
 
     class ClusterAvailable

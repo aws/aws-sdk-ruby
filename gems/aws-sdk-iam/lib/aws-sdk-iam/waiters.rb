@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module IAM
+module Aws::IAM
   module Waiters
 
     class InstanceProfileExists

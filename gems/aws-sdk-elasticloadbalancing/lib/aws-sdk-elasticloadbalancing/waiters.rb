@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module ElasticLoadBalancing
+module Aws::ElasticLoadBalancing
   module Waiters
 
     class AnyInstanceInService

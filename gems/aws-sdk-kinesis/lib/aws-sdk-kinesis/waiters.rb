@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module Kinesis
+module Aws::Kinesis
   module Waiters
 
     class StreamExists

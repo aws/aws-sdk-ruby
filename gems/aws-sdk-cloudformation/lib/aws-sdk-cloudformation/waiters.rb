@@ -7,9 +7,10 @@
 
 require 'aws-sdk-core/waiters'
 
-module CloudFormation
+module Aws::CloudFormation
   module Waiters
 
+    # Wait until stack status is CREATE_COMPLETE.
     class StackCreateComplete
 
       # @param [Hash] options
@@ -83,6 +84,7 @@ module CloudFormation
 
     end
 
+    # Wait until stack status is DELETE_COMPLETE.
     class StackDeleteComplete
 
       # @param [Hash] options
@@ -198,6 +200,7 @@ module CloudFormation
 
     end
 
+    # Wait until stack status is UPDATE_COMPLETE.
     class StackUpdateComplete
 
       # @param [Hash] options

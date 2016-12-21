@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module Route53
+module Aws::Route53
   module Waiters
 
     class ResourceRecordSetsChanged

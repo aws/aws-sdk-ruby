@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module AppStream
+module Aws::AppStream
   module Waiters
 
     class FleetStarted

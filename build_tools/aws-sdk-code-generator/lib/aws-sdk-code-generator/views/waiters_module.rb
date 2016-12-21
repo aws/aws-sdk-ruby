@@ -4,7 +4,6 @@ module AwsSdkCodeGenerator
 
       def initialize(options)
         @module_name = options.fetch(:module_name)
-        @module_name = @module_name.split('::').last
         @waiters = WaiterList.new(options.fetch(:waiters)).to_a
       end
 

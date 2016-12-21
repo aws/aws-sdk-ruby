@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module DynamoDB
+module Aws::DynamoDB
   module Waiters
 
     class TableExists

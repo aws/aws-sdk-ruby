@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module CodeDeploy
+module Aws::CodeDeploy
   module Waiters
 
     class DeploymentSuccessful

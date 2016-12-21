@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module ECS
+module Aws::ECS
   module Waiters
 
     class ServicesInactive

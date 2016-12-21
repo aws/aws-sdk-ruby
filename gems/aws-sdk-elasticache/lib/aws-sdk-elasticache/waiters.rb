@@ -7,9 +7,10 @@
 
 require 'aws-sdk-core/waiters'
 
-module ElastiCache
+module Aws::ElastiCache
   module Waiters
 
+    # Wait until ElastiCache cluster is available.
     class CacheClusterAvailable
 
       # @param [Hash] options
@@ -72,6 +73,7 @@ module ElastiCache
 
     end
 
+    # Wait until ElastiCache cluster is deleted.
     class CacheClusterDeleted
 
       # @param [Hash] options
@@ -151,6 +153,7 @@ module ElastiCache
 
     end
 
+    # Wait until ElastiCache replication group is available.
     class ReplicationGroupAvailable
 
       # @param [Hash] options
@@ -195,6 +198,7 @@ module ElastiCache
 
     end
 
+    # Wait until ElastiCache replication group is deleted.
     class ReplicationGroupDeleted
 
       # @param [Hash] options

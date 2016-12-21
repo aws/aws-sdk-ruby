@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module OpsWorks
+module Aws::OpsWorks
   module Waiters
 
     class AppExists
@@ -52,6 +52,7 @@ module OpsWorks
 
     end
 
+    # Wait until a deployment has completed successfully
     class DeploymentSuccessful
 
       # @param [Hash] options
@@ -96,6 +97,7 @@ module OpsWorks
 
     end
 
+    # Wait until OpsWorks instance is online.
     class InstanceOnline
 
       # @param [Hash] options
@@ -182,6 +184,7 @@ module OpsWorks
 
     end
 
+    # Wait until OpsWorks instance is registered.
     class InstanceRegistered
 
       # @param [Hash] options
@@ -262,6 +265,7 @@ module OpsWorks
 
     end
 
+    # Wait until OpsWorks instance is stopped.
     class InstanceStopped
 
       # @param [Hash] options
@@ -354,6 +358,7 @@ module OpsWorks
 
     end
 
+    # Wait until OpsWorks instance is terminated.
     class InstanceTerminated
 
       # @param [Hash] options

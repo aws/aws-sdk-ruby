@@ -7,7 +7,7 @@
 
 require 'aws-sdk-core/waiters'
 
-module AutoScaling
+module Aws::AutoScaling
   module Waiters
 
     class GroupExists

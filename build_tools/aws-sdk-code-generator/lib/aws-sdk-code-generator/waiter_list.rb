@@ -12,6 +12,7 @@ module AwsSdkCodeGenerator
           delay: waiter['delay'].to_i,
           max_attempts: waiter['maxAttempts'].to_i,
           acceptors: acceptors(waiter['acceptors']),
+          documentation: Docstring.block_comment(waiter['description']),
         )
       end.sort_by(&:name)
       @waiters.last.last = true unless @waiters.empty?
@@ -61,6 +62,9 @@ module AwsSdkCodeGenerator
 
     # @return [String]
     attr_accessor :name
+
+    # @return [String]
+    attr_accessor :documentation
 
     # @return [String]
     attr_accessor :class_name
