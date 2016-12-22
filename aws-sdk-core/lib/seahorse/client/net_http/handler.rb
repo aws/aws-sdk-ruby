@@ -30,7 +30,10 @@ module Seahorse
         end
 
         # @api private
-        DNS_ERROR_MESSAGE = 'getaddrinfo: nodename nor servname provided, or not known'
+        DNS_ERROR_MESSAGES = [
+          'getaddrinfo: nodename nor servname provided, or not known', # MacOS
+          'getaddrinfo: Name or service not known' # GNU
+        ]
 
         # Raised when a {Handler} cannot construct a `Net::HTTP::Request`
         # from the given http verb.
@@ -52,7 +55,7 @@ module Seahorse
         private
 
         def error_message(req, error)
-          if error.is_a?(SocketError) && error.message == DNS_ERROR_MESSAGE
+          if error.is_a?(SocketError) && DNS_ERROR_MESSAGES.include?(error.message)
             host = req.endpoint.host
             "unable to connect to `#{host}`; SocketError: #{error.message}"
           else
