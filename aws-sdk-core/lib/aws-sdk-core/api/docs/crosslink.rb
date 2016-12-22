@@ -17,7 +17,6 @@ module Aws
           "iot-data",
           "machinelearning",
           "rekognition",
-          "s3",
           "sdb",
           "swf"
         ]
