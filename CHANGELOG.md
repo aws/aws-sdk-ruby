@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.42 (2016-12-22)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::DirectoryService - Updated the documentation for AWS Directory Service.
