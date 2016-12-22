@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::DirectoryService - Updated the documentation for AWS Directory Service.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
 2.6.41 (2016-12-21)
 ------------------
 
