@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Added an explicit `require 'aws-sdk-core'` statement to this gem at
+  load time. This is necessary to allow users to interact with `Aws.config`
+  and shared configuration classes prior to loading a service gem.
+
 3.0.0.rc2 (2016-12-09)
 ------------------
 

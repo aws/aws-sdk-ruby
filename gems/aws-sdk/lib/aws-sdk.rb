@@ -1,3 +1,5 @@
+require 'aws-sdk-core'
+
 # Aws module documentation.
 module Aws
   # service gems
