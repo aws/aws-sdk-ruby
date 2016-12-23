@@ -950,7 +950,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   classicaddresses = ec2.classic_addresses({
+      #   classic_addresses = ec2.classic_addresses({
       #     dry_run: false,
       #     public_ips: ["String"],
       #     filters: [
@@ -1029,7 +1029,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dhcpoptionssets = ec2.dhcp_options_sets({
+      #   dhcp_options_sets = ec2.dhcp_options_sets({
       #     dry_run: false,
       #     dhcp_options_ids: ["String"],
       #     filters: [
@@ -1555,7 +1555,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   internetgateways = ec2.internet_gateways({
+      #   internet_gateways = ec2.internet_gateways({
       #     dry_run: false,
       #     internet_gateway_ids: ["String"],
       #     filters: [
@@ -1627,7 +1627,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   keypairs = ec2.key_pairs({
+      #   key_pairs = ec2.key_pairs({
       #     dry_run: false,
       #     key_names: ["String"],
       #     filters: [
@@ -1681,7 +1681,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   networkacls = ec2.network_acls({
+      #   network_acls = ec2.network_acls({
       #     dry_run: false,
       #     network_acl_ids: ["String"],
       #     filters: [
@@ -1787,7 +1787,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   networkinterfaces = ec2.network_interfaces({
+      #   network_interfaces = ec2.network_interfaces({
       #     dry_run: false,
       #     network_interface_ids: ["String"],
       #     filters: [
@@ -1951,7 +1951,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   placementgroups = ec2.placement_groups({
+      #   placement_groups = ec2.placement_groups({
       #     dry_run: false,
       #     group_names: ["String"],
       #     filters: [
@@ -2018,7 +2018,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   routetables = ec2.route_tables({
+      #   route_tables = ec2.route_tables({
       #     dry_run: false,
       #     route_table_ids: ["String"],
       #     filters: [
@@ -2134,7 +2134,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   securitygroups = ec2.security_groups({
+      #   security_groups = ec2.security_groups({
       #     dry_run: false,
       #     group_names: ["String"],
       #     group_ids: ["String"],
@@ -2528,7 +2528,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   vpcaddresses = ec2.vpc_addresses({
+      #   vpc_addresses = ec2.vpc_addresses({
       #     dry_run: false,
       #     public_ips: ["String"],
       #     filters: [
@@ -2607,7 +2607,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   vpcpeeringconnections = ec2.vpc_peering_connections({
+      #   vpc_peering_connections = ec2.vpc_peering_connections({
       #     dry_run: false,
       #     vpc_peering_connection_ids: ["String"],
       #     filters: [

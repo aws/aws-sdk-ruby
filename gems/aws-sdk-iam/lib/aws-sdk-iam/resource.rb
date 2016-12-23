@@ -712,7 +712,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   instanceprofiles = iam.instance_profiles({
+      #   instance_profiles = iam.instance_profiles({
       #     path_prefix: "pathPrefixType",
       #   })
       # @param [Hash] options ({})
@@ -877,7 +877,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   samlproviders = iam.saml_providers()
+      #   iam.saml_providers()
       # @param [Hash] options ({})
       # @return [SamlProvider::Collection]
       def saml_providers(options = {})
@@ -906,7 +906,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   servercertificates = iam.server_certificates({
+      #   server_certificates = iam.server_certificates({
       #     path_prefix: "pathPrefixType",
       #   })
       # @param [Hash] options ({})
@@ -1005,7 +1005,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   virtualmfadevices = iam.virtual_mfa_devices({
+      #   virtual_mfa_devices = iam.virtual_mfa_devices({
       #     assignment_status: "Assigned", # accepts Assigned, Unassigned, Any
       #   })
       # @param [Hash] options ({})

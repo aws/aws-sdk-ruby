@@ -54,7 +54,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   vaults = glacier.vaults()
+      #   glacier.vaults()
       # @param [Hash] options ({})
       # @return [Vault::Collection]
       def vaults(options = {})

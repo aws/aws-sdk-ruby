@@ -1,19 +1,6 @@
 module AwsSdkCodeGenerator
   class CodeBuilder
 
-    # @api private
-    GENERATED_SRC_WARNING = <<-WARNING
-# WARNING ABOUT GENERATED CODE
-#
-# This file is generated. See the contributing for info on making contributions:
-# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
-#
-# WARNING ABOUT GENERATED CODE
-
-    WARNING
-
-    include Helper
-
     # @option options [required, Service] :service
     #
     # @option options [required, String] :aws_sdk_core_lib_path
@@ -59,7 +46,7 @@ module AwsSdkCodeGenerator
     # @return [Enumerable<String<path>, String<code>>]
     def source_files(options = {})
       prefix = options.fetch(:prefix, nil)
-      prefix ||= @module_names.map { |n| underscore(n) }.join('/')
+      prefix ||= @module_names.map { |n| Underscore.underscore(n) }.join('/')
       # prefix should always be the gemname. The service-module (the first
       # item yielded below) should be moved from here into the gem builder
       # The source code builder should simply yield the empty module
@@ -71,10 +58,12 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/client.rb", client_class)
         y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
-        #y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
+        y.yield("#{prefix}/resource.rb", root_resource_class)
         if @resources
           @resources['resources'].keys.sort.each do |name|
-            y.yield("#{prefix}/#{underscore(name)}.rb", resource_class(name, @resources['resources'][name]))
+            path = "#{prefix}/#{Underscore.underscore(name)}.rb",
+            code = resource_class(name, @resources['resources'][name])
+            y.yield(path, code)
           end
         end
       end
@@ -116,19 +105,7 @@ module AwsSdkCodeGenerator
       Views::ErrorsModule.new(service: @service).render
     end
 
-    def new_svc_module
-      @module_names.inject(Dsl::Main.new) do |mod, module_name|
-        mod.module(module_name)
-      end
-    end
-
-    def wrap(mod)
-      svc_mod = new_svc_module
-      svc_mod.add(mod)
-      svc_mod.root.to_s
-    end
-
-    def waiters_module(svc_mod = new_svc_module)
+    def waiters_module
       Views::WaitersModule.new(
         module_name: @service.module_name,
         waiters: @waiters,
@@ -136,12 +113,12 @@ module AwsSdkCodeGenerator
     end
 
     def root_resource_class
-      Generators::RootResourceClass.new({
-        api: @api,
-        resources: @resources,
+      Views::RootResourceClass.new(
+        module_name: @service.module_name,
+        resources: @service.resources,
         paginators: @paginators,
-        var_name: underscore(@module_names.last),
-      })
+        api: @api,
+      ).render
     end
 
     def resource_class(resource_name, resource_definition)

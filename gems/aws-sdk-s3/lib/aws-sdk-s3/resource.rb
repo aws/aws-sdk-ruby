@@ -73,6 +73,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   s3.buckets()
       # @param [Hash] options ({})
       # @return [Bucket::Collection]
       def buckets(options = {})

@@ -89,7 +89,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   platformapplications = sns.platform_applications()
+      #   sns.platform_applications()
       # @param [Hash] options ({})
       # @return [PlatformApplication::Collection]
       def platform_applications(options = {})
@@ -129,7 +129,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   subscriptions = sns.subscriptions()
+      #   sns.subscriptions()
       # @param [Hash] options ({})
       # @return [Subscription::Collection]
       def subscriptions(options = {})
@@ -160,7 +160,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   topics = sns.topics()
+      #   sns.topics()
       # @param [Hash] options ({})
       # @return [Topic::Collection]
       def topics(options = {})

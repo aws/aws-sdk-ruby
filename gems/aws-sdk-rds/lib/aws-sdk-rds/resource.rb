@@ -1296,7 +1296,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   accountquotas = rds.account_quotas()
+      #   rds.account_quotas()
       # @param [Hash] options ({})
       # @return [AccountQuota::Collection]
       def account_quotas(options = {})
@@ -1403,7 +1403,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbclusterparametergroups = rds.db_cluster_parameter_groups({
+      #   db_cluster_parameter_groups = rds.db_cluster_parameter_groups({
       #     db_cluster_parameter_group_name: "String",
       #     filters: [
       #       {
@@ -1461,7 +1461,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbclusters = rds.db_clusters({
+      #   db_clusters = rds.db_clusters({
       #     db_cluster_identifier: "String",
       #     filters: [
       #       {
@@ -1547,7 +1547,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbengineversions = rds.db_engine_versions({
+      #   db_engine_versions = rds.db_engine_versions({
       #     engine: "String",
       #     engine_version: "String",
       #     db_parameter_group_family: "String",
@@ -1623,7 +1623,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbinstances = rds.db_instances({
+      #   db_instances = rds.db_instances({
       #     db_instance_identifier: "String",
       #     filters: [
       #       {
@@ -1694,7 +1694,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbparametergroups = rds.db_parameter_groups({
+      #   db_parameter_groups = rds.db_parameter_groups({
       #     db_parameter_group_name: "String",
       #     filters: [
       #       {
@@ -1746,7 +1746,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbsecuritygroups = rds.db_security_groups({
+      #   db_security_groups = rds.db_security_groups({
       #     db_security_group_name: "String",
       #     filters: [
       #       {
@@ -1781,7 +1781,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbsnapshots = rds.db_snapshots({
+      #   db_snapshots = rds.db_snapshots({
       #     db_instance_identifier: "String",
       #     db_snapshot_identifier: "String",
       #     snapshot_type: "String",
@@ -1898,7 +1898,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbsubnetgroups = rds.db_subnet_groups({
+      #   db_subnet_groups = rds.db_subnet_groups({
       #     db_subnet_group_name: "String",
       #     filters: [
       #       {
@@ -1942,7 +1942,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   eventcategorymaps = rds.event_category_maps({
+      #   event_category_maps = rds.event_category_maps({
       #     source_type: "String",
       #     filters: [
       #       {
@@ -1987,7 +1987,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   eventsubscriptions = rds.event_subscriptions({
+      #   event_subscriptions = rds.event_subscriptions({
       #     subscription_name: "String",
       #     filters: [
       #       {
@@ -2122,7 +2122,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   optiongroups = rds.option_groups({
+      #   option_groups = rds.option_groups({
       #     option_group_name: "String",
       #     filters: [
       #       {
@@ -2187,7 +2187,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   reserveddbinstances = rds.reserved_db_instances({
+      #   reserved_db_instances = rds.reserved_db_instances({
       #     reserved_db_instance_id: "String",
       #     reserved_db_instances_offering_id: "String",
       #     db_instance_class: "String",
@@ -2262,7 +2262,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   reserveddbinstancesofferings = rds.reserved_db_instances_offerings({
+      #   reserved_db_instances_offerings = rds.reserved_db_instances_offerings({
       #     reserved_db_instances_offering_id: "String",
       #     db_instance_class: "String",
       #     duration: "String",
@@ -2334,7 +2334,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   resourceswithpendingmaintenanceactions = rds.resources_with_pending_maintenance_actions({
+      #   resources_with_pending_maintenance_actions = rds.resources_with_pending_maintenance_actions({
       #     resource_identifier: "String",
       #     filters: [
       #       {

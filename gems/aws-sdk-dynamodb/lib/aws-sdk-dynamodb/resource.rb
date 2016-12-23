@@ -492,7 +492,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   tables = dynamo_db.tables()
+      #   dynamo_db.tables()
       # @param [Hash] options ({})
       # @return [Table::Collection]
       def tables(options = {})
