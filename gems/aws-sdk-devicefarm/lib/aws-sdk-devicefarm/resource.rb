@@ -5,21 +5,19 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws
-  module DeviceFarm
-    class Resource
+module Aws::DeviceFarm
+  class Resource
 
-      # @param options ({})
-      # @option options [Client] :client
-      def initialize(options = {})
-        @client = options[:client] || Client.new(options)
-      end
-
-      # @return [Client]
-      def client
-        @client
-      end
-
+    # @param options ({})
+    # @option options [Client] :client
+    def initialize(options = {})
+      @client = options[:client] || Client.new(options)
     end
+
+    # @return [Client]
+    def client
+      @client
+    end
+
   end
 end

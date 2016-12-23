@@ -5,21 +5,19 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws
-  module Route53Domains
-    class Resource
+module Aws::Route53Domains
+  class Resource
 
-      # @param options ({})
-      # @option options [Client] :client
-      def initialize(options = {})
-        @client = options[:client] || Client.new(options)
-      end
-
-      # @return [Client]
-      def client
-        @client
-      end
-
+    # @param options ({})
+    # @option options [Client] :client
+    def initialize(options = {})
+      @client = options[:client] || Client.new(options)
     end
+
+    # @return [Client]
+    def client
+      @client
+    end
+
   end
 end

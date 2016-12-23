@@ -5,21 +5,19 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws
-  module CodePipeline
-    class Resource
+module Aws::CodePipeline
+  class Resource
 
-      # @param options ({})
-      # @option options [Client] :client
-      def initialize(options = {})
-        @client = options[:client] || Client.new(options)
-      end
-
-      # @return [Client]
-      def client
-        @client
-      end
-
+    # @param options ({})
+    # @option options [Client] :client
+    def initialize(options = {})
+      @client = options[:client] || Client.new(options)
     end
+
+    # @return [Client]
+    def client
+      @client
+    end
+
   end
 end

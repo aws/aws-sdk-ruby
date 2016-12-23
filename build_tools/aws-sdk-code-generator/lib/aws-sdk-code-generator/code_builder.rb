@@ -61,7 +61,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/resource.rb", root_resource_class)
         if @resources
           @resources['resources'].keys.sort.each do |name|
-            path = "#{prefix}/#{Underscore.underscore(name)}.rb",
+            path = "#{prefix}/#{Underscore.underscore(name)}.rb"
             code = resource_class(name, @resources['resources'][name])
             y.yield(path, code)
           end
