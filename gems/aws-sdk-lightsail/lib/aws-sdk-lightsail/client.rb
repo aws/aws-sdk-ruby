@@ -892,10 +892,6 @@ module Aws::Lightsail
     #   * {Types::DownloadDefaultKeyPairResult#public_key_base_64 #public_key_base_64} => String
     #   * {Types::DownloadDefaultKeyPairResult#private_key_base_64 #private_key_base_64} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.download_default_key_pair()
-    #
     # @example Response structure
     #
     #   resp.public_key_base_64 #=> String
@@ -1858,10 +1854,6 @@ module Aws::Lightsail
     #
     #   * {Types::IsVpcPeeredResult#is_peered #is_peered} => Boolean
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.is_vpc_peered()
-    #
     # @example Response structure
     #
     #   resp.is_peered #=> Boolean
@@ -1925,10 +1917,6 @@ module Aws::Lightsail
     # @return [Types::PeerVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PeerVpcResult#operation #operation} => Types::Operation
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.peer_vpc()
     #
     # @example Response structure
     #
@@ -2118,10 +2106,6 @@ module Aws::Lightsail
     # @return [Types::UnpeerVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UnpeerVpcResult#operation #operation} => Types::Operation
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.unpeer_vpc()
     #
     # @example Response structure
     #

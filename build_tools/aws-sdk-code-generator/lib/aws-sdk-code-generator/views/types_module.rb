@@ -53,11 +53,10 @@ module AwsSdkCodeGenerator
           else
             note = "@note When making an API call, you may pass #{shape_name}\n"
             note += "  data as a hash:\n\n"
-            note += SyntaxExample.new(
-              struct_shape: shape(shape_name),
+            note += '      ' + SyntaxExampleHash.new(
+              shape: shape(shape_name),
               api: @service.api,
-              indent: ' ' * 6
-            ).format
+            ).format('      ')
           end
         end
       end

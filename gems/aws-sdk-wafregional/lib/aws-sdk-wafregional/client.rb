@@ -1079,10 +1079,6 @@ module Aws::WAFRegional
     #
     #   * {Types::GetChangeTokenResponse#change_token #change_token} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_change_token()
-    #
     # @example Response structure
     #
     #   resp.change_token #=> String

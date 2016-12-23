@@ -1316,10 +1316,6 @@ module Aws::DirectoryService
     #
     #   * {Types::GetDirectoryLimitsResult#directory_limits #directory_limits} => Types::DirectoryLimits
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_directory_limits()
-    #
     # @example Response structure
     #
     #   resp.directory_limits.cloud_only_directories_limit #=> Integer

@@ -521,10 +521,6 @@ module Aws::CodeBuild
     #
     #   * {Types::ListCuratedEnvironmentImagesOutput#platforms #platforms} => Array&lt;Types::EnvironmentPlatform&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_curated_environment_images()
-    #
     # @example Response structure
     #
     #   resp.platforms #=> Array

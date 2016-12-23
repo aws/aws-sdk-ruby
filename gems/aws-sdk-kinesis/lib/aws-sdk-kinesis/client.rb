@@ -344,10 +344,6 @@ module Aws::Kinesis
     #   * {Types::DescribeLimitsOutput#shard_limit #shard_limit} => Integer
     #   * {Types::DescribeLimitsOutput#open_shard_count #open_shard_count} => Integer
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_limits()
-    #
     # @example Response structure
     #
     #   resp.shard_limit #=> Integer

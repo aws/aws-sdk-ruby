@@ -833,10 +833,6 @@ module Aws::Snowball
     #   * {Types::GetSnowballUsageResult#snowball_limit #snowball_limit} => Integer
     #   * {Types::GetSnowballUsageResult#snowballs_in_use #snowballs_in_use} => Integer
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_snowball_usage()
-    #
     # @example Response structure
     #
     #   resp.snowball_limit #=> Integer

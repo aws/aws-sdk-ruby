@@ -234,10 +234,6 @@ module Aws::SMS
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_server_catalog()
-    #
     # @overload delete_server_catalog(params = {})
     # @param [Hash] params ({})
     def delete_server_catalog(params = {}, options = {})
@@ -510,10 +506,6 @@ module Aws::SMS
     # retrieve all of the servers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.import_server_catalog()
     #
     # @overload import_server_catalog(params = {})
     # @param [Hash] params ({})

@@ -1,6 +1,3 @@
-# TODO : Resource#load documentation documents that it raises even when it wont
-#        it should only raise when load is not defined
-
 require_relative 'aws-sdk-code-generator/api'
 require_relative 'aws-sdk-code-generator/apply_docs'
 require_relative 'aws-sdk-code-generator/client_constructor'
@@ -35,6 +32,7 @@ require_relative 'aws-sdk-code-generator/resource_value_source'
 require_relative 'aws-sdk-code-generator/resource_waiter'
 require_relative 'aws-sdk-code-generator/service'
 require_relative 'aws-sdk-code-generator/syntax_example'
+require_relative 'aws-sdk-code-generator/syntax_example_hash'
 require_relative 'aws-sdk-code-generator/underscore'
 require_relative 'aws-sdk-code-generator/view'
 require_relative 'aws-sdk-code-generator/waiter'

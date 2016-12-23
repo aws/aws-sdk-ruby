@@ -799,10 +799,6 @@ module Aws::Lambda
     #   * {Types::GetAccountSettingsResponse#account_limit #account_limit} => Types::AccountLimit
     #   * {Types::GetAccountSettingsResponse#account_usage #account_usage} => Types::AccountUsage
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_account_settings()
-    #
     # @example Response structure
     #
     #   resp.account_limit.total_code_size #=> Integer

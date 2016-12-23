@@ -1600,10 +1600,6 @@ module Aws::DynamoDB
     #   * {Types::DescribeLimitsOutput#table_max_read_capacity_units #table_max_read_capacity_units} => Integer
     #   * {Types::DescribeLimitsOutput#table_max_write_capacity_units #table_max_write_capacity_units} => Integer
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_limits()
-    #
     # @example Response structure
     #
     #   resp.account_max_read_capacity_units #=> Integer

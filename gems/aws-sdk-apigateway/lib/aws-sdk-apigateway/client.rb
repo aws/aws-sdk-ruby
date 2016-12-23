@@ -1517,10 +1517,6 @@ module Aws::APIGateway
     #   * {Types::Account#features #features} => Array&lt;String&gt;
     #   * {Types::Account#api_key_version #api_key_version} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_account()
-    #
     # @example Response structure
     #
     #   resp.cloudwatch_role_arn #=> String

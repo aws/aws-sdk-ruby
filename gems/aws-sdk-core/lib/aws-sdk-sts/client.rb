@@ -903,10 +903,6 @@ module Aws::STS
     #   * {Types::GetCallerIdentityResponse#account #account} => String
     #   * {Types::GetCallerIdentityResponse#arn #arn} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_caller_identity()
-    #
     # @example Response structure
     #
     #   resp.user_id #=> String

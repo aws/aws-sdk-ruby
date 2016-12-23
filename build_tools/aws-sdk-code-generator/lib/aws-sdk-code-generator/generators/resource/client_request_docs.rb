@@ -22,8 +22,8 @@ module AwsSdkCodeGenerator
 
         # @param [Dsl::Method] method
         def apply(method)
-          apply_request_syntax_example(method)
-          apply_option_tags(method)
+          #apply_request_syntax_example(method)
+          #apply_option_tags(method)
         end
 
         private
@@ -42,7 +42,7 @@ module AwsSdkCodeGenerator
         def apply_request_syntax_example(method)
           if input_shape
             syntax = SyntaxExample.new(
-              struct_shape: input_shape,
+              shape: input_shape,
               api: @api,
               indent: '  '
             ).format.strip

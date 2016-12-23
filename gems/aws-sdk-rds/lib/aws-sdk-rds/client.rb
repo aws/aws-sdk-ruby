@@ -3704,10 +3704,6 @@ module Aws::RDS
     #
     #   * {Types::AccountAttributesMessage#account_quotas #account_quotas} => Array&lt;Types::AccountQuota&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_account_attributes()
-    #
     # @example Response structure
     #
     #   resp.account_quotas #=> Array

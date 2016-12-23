@@ -114,7 +114,7 @@ module AwsSdkCodeGenerator
     def request_syntax_example(method_name, operation, api)
       SyntaxExample.new(
         api: api,
-        shape_ref: operation['input'],
+        shape: Api.shape(operation['input'], api),
         method_name: method_name,
         receiver: 'client',
         resp_var: 'resp',

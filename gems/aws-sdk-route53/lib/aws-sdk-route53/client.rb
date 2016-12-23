@@ -1318,10 +1318,6 @@ module Aws::Route53
     #
     #   * {Types::GetCheckerIpRangesResponse#checker_ip_ranges #checker_ip_ranges} => Array&lt;String&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_checker_ip_ranges()
-    #
     # @example Response structure
     #
     #   resp.checker_ip_ranges #=> Array
@@ -1475,10 +1471,6 @@ module Aws::Route53
     # @return [Types::GetHealthCheckCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetHealthCheckCountResponse#health_check_count #health_check_count} => Integer
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_health_check_count()
     #
     # @example Response structure
     #
@@ -1670,10 +1662,6 @@ module Aws::Route53
     #
     #   * {Types::GetHostedZoneCountResponse#hosted_zone_count #hosted_zone_count} => Integer
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_hosted_zone_count()
-    #
     # @example Response structure
     #
     #   resp.hosted_zone_count #=> Integer
@@ -1815,10 +1803,6 @@ module Aws::Route53
     # @return [Types::GetTrafficPolicyInstanceCountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTrafficPolicyInstanceCountResponse#traffic_policy_instance_count #traffic_policy_instance_count} => Integer
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_traffic_policy_instance_count()
     #
     # @example Response structure
     #

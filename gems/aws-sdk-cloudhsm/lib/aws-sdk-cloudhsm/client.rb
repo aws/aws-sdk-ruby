@@ -612,10 +612,6 @@ module Aws::CloudHSM
     #
     #   * {Types::ListAvailableZonesResponse#az_list #az_list} => Array&lt;String&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_available_zones()
-    #
     # @example Response structure
     #
     #   resp.az_list #=> Array

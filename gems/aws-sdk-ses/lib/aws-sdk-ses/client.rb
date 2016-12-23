@@ -713,10 +713,6 @@ module Aws::SES
     #   * {Types::DescribeActiveReceiptRuleSetResponse#metadata #metadata} => Types::ReceiptRuleSetMetadata
     #   * {Types::DescribeActiveReceiptRuleSetResponse#rules #rules} => Array&lt;Types::ReceiptRule&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_active_receipt_rule_set()
-    #
     # @example Response structure
     #
     #   resp.metadata.name #=> String
@@ -1370,10 +1366,6 @@ module Aws::SES
     # @return [Types::ListReceiptFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListReceiptFiltersResponse#filters #filters} => Array&lt;Types::ReceiptFilter&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_receipt_filters()
     #
     # @example Response structure
     #

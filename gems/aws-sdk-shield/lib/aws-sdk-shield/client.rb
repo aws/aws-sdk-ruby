@@ -189,10 +189,6 @@ module Aws::Shield
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_subscription()
-    #
     # @overload create_subscription(params = {})
     # @param [Hash] params ({})
     def create_subscription(params = {}, options = {})
@@ -223,10 +219,6 @@ module Aws::Shield
     # Removes AWS Shield Advanced from an account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_subscription()
     #
     # @overload delete_subscription(params = {})
     # @param [Hash] params ({})
@@ -327,10 +319,6 @@ module Aws::Shield
     # @return [Types::DescribeSubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSubscriptionResponse#subscription #subscription} => Types::Subscription
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_subscription()
     #
     # @example Response structure
     #

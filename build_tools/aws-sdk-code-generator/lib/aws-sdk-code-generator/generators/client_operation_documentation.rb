@@ -141,7 +141,7 @@ module AwsSdkCodeGenerator
       def apply_request_syntax_example(docstring)
         if @operation['input']
           syntax = SyntaxExample.new(
-            struct_shape: shape(@operation['input']),
+            shape: shape(@operation['input']),
             api: @api,
             indent: '  '
           ).format.strip

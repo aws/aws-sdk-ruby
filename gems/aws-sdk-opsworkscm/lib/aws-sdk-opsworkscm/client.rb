@@ -544,10 +544,6 @@ module Aws::OpsWorksCM
     #
     #   * {Types::DescribeAccountAttributesResponse#attributes #attributes} => Array&lt;Types::AccountAttribute&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_account_attributes()
-    #
     # @example Response structure
     #
     #   resp.attributes #=> Array

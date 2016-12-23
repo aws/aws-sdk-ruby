@@ -756,10 +756,6 @@ module Aws::IoT
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_registration_code()
-    #
     # @overload delete_registration_code(params = {})
     # @param [Hash] params ({})
     def delete_registration_code(params = {}, options = {})
@@ -943,10 +939,6 @@ module Aws::IoT
     #
     #   * {Types::DescribeEndpointResponse#endpoint_address #endpoint_address} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_endpoint()
-    #
     # @example Response structure
     #
     #   resp.endpoint_address #=> String
@@ -1127,10 +1119,6 @@ module Aws::IoT
     #   * {Types::GetLoggingOptionsResponse#role_arn #role_arn} => String
     #   * {Types::GetLoggingOptionsResponse#log_level #log_level} => String
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_logging_options()
-    #
     # @example Response structure
     #
     #   resp.role_arn #=> String
@@ -1220,10 +1208,6 @@ module Aws::IoT
     # @return [Types::GetRegistrationCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRegistrationCodeResponse#registration_code #registration_code} => String
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_registration_code()
     #
     # @example Response structure
     #

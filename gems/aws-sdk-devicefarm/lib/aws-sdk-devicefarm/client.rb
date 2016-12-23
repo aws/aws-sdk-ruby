@@ -515,10 +515,6 @@ module Aws::DeviceFarm
     #
     #   * {Types::GetAccountSettingsResult#account_settings #account_settings} => Types::AccountSettings
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.get_account_settings()
-    #
     # @example Response structure
     #
     #   resp.account_settings.aws_account_number #=> String

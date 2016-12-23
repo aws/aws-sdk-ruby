@@ -25,7 +25,7 @@ module AwsSdkCodeGenerator
       if input_ref
         SyntaxExample.new(
           api: @api,
-          shape_ref: input_ref,
+          shape: input_shape,
           method_name: @method_name,
           receiver: @var_name,
           resp_var: nil,

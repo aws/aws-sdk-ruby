@@ -4587,10 +4587,6 @@ module Aws::IAM
     #
     #   * {Types::ListOpenIDConnectProvidersResponse#open_id_connect_provider_list #open_id_connect_provider_list} => Array&lt;Types::OpenIDConnectProviderListEntry&gt;
     #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_open_id_connect_providers()
-    #
     # @example Response structure
     #
     #   resp.open_id_connect_provider_list #=> Array
@@ -4945,10 +4941,6 @@ module Aws::IAM
     # @return [Types::ListSAMLProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListSAMLProvidersResponse#saml_provider_list #saml_provider_list} => Array&lt;Types::SAMLProviderListEntry&gt;
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.list_saml_providers()
     #
     # @example Response structure
     #

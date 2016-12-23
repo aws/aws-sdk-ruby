@@ -29,7 +29,7 @@ module AwsSdkCodeGenerator
       if @shape_ref && Api.shape(@shape_ref, @api)['members'].count  - @skip.count > 0
         SyntaxExample.new(
           api: @api,
-          shape_ref: @shape_ref,
+          shape: input_shape,
           method_name: @method_name,
           receiver: @receiver,
           resp_var: @resp_var,
