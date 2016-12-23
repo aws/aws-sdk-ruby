@@ -14,7 +14,6 @@ module AwsSdkCodeGenerator
     def initialize(options = {})
       @wrap = options.fetch(:wrap, true)
       @inline = options.fetch(:inline, false)
-      @online = options.fetch(:online, false)
       @quote_strings = options.fetch(:quote_strings, false)
     end
 
@@ -22,7 +21,6 @@ module AwsSdkCodeGenerator
       result = hash(obj, i:'', inline:@inline)
       result = unwrap(result, obj.size) if !@wrap
       result = result.strip if @inline && result.lines.to_a.length == 1
-      result = result.gsub(/\s{2,}/, ' ').strip if @oneline
       result
     end
 

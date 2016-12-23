@@ -12,7 +12,7 @@ module AwsSdkCodeGenerator
       @shape = options.fetch(:shape)
     end
 
-    def format(indent)
+    def format(indent = '')
       struct(@shape, indent, [])
     end
 

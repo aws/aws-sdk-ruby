@@ -17,7 +17,7 @@ module AwsSdkCodeGenerator
 
       # @return [Array<ResourceIdentifier>)
       def build_list(resource)
-        resource['identifiers'].each.with_index.map do |i, n|
+        resource.fetch('identifiers', []).each.with_index.map do |i, n|
           ResourceIdentifier.new.tap do |identifier|
             identifier.name = Underscore.underscore(i['name'])
             identifier.type = Docstring.ucfirst(i['type'] || 'String')

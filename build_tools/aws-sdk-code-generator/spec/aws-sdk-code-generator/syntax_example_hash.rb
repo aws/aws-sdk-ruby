@@ -1,26 +1,11 @@
-require_relative '../../spec_helper'
+require_relative '../spec_helper'
 
 module AwsSdkCodeGenerator
-  module Generators
-    describe SyntaxExample do
-
-      let(:operation) { Operation.new }
-
-      let(:example) {
-        SyntaxExample.new('operation_name', operation).to_str
-      }
-
-      it 'supports operations that does not accept input' do
-        example = SyntaxExample.new(
-          struct_shape: nil,
-          api: {}
-        )
-        expect(example.format).to eq('')
-      end
+    describe SyntaxExampleHash do
 
       it 'supports operations that accept hashes of scalars' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'members' => {
               'ParamName' => { 'shape' => 'String' },
               'OtherParam' => { 'shape' => 'String' },
@@ -41,8 +26,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'comments on required entries' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['ParamName'],
             'members' => {
               'ParamName' => { 'shape' => 'String' },
@@ -62,8 +47,8 @@ module AwsSdkCodeGenerator
      end
 
       it 'comments on accepted values for enums' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'members' => {
               'ParamName' => { 'shape' => 'String' },
             }
@@ -85,8 +70,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'combines required and enum comments' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['ParamName'],
             'members' => {
               'ParamName' => { 'shape' => 'String' },
@@ -109,8 +94,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports nested structures' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Nested'],
             'members' => {
               'Nested' => { 'shape' => 'StructShape' },
@@ -139,8 +124,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports list of scalars with enums' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'members' => {
               'Items' => { 'shape' => 'StringList' },
             }
@@ -166,8 +151,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports required list of scalars with enums' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Items'],
             'members' => {
               'Items' => { 'shape' => 'StringList' },
@@ -194,8 +179,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports lists of structures' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Items'],
             'members' => {
               'Items' => { 'shape' => 'StructureList' },
@@ -232,8 +217,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports maps of scalars' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'members' => {
               'Attributes' => { 'shape' => 'StringMap' },
             }
@@ -260,8 +245,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports maps of scalars with enums' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Attributes'],
             'members' => {
               'Attributes' => { 'shape' => 'StringMap' },
@@ -292,8 +277,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports maps of list' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Attributes'],
             'members' => {
               'Attributes' => { 'shape' => 'StringMap' },
@@ -328,8 +313,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports maps of list' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Attributes'],
             'members' => {
               'Attributes' => { 'shape' => 'Map' },
@@ -371,8 +356,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'supports maps of structures' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'required' => ['Attributes'],
             'members' => {
               'Attributes' => { 'shape' => 'Map' },
@@ -416,8 +401,8 @@ module AwsSdkCodeGenerator
             'Recursive' => { 'shape' => 'StructureShape' },
           }
         }
-        example = SyntaxExample.new(
-          struct_shape: struct,
+        example = SyntaxExampleHash.new(
+          shape: struct,
           api: {
             'shapes' => {
               'Integer' => { 'type' => 'integer' },
@@ -507,8 +492,8 @@ module AwsSdkCodeGenerator
       end
 
       it 'documents the simplified dynamodb attribute values' do
-        example = SyntaxExample.new(
-          struct_shape: {
+        example = SyntaxExampleHash.new(
+          shape: {
             'members' => {
               'Recursive' => { 'shape' => 'Structure' },
             }
@@ -551,5 +536,4 @@ module AwsSdkCodeGenerator
       end
 
     end
-  end
 end
