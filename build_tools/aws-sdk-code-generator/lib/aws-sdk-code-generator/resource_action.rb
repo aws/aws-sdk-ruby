@@ -45,7 +45,8 @@ module AwsSdkCodeGenerator
 
       def returns(action, operation)
         if action['resource']
-          action['resource']['type']
+          resource = action['resource']
+          Api.plural?(resource) ? "#{resource['type']}::Collection" : resource['type']
         elsif operation['output']
           "Types::#{operation['output']['shape']}"
         else

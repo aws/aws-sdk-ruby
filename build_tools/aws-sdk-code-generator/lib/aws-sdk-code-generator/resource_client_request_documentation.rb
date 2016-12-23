@@ -11,7 +11,7 @@ module AwsSdkCodeGenerator
       @request = options.fetch(:request)
       @shape_ref = @api['operations'][@request['operation']]['input']
       @returns = options.fetch(:returns, nil)
-      @skip = Set.new(options.fetch(:skip, []) + skip_params)
+      @skip = Set.new(options.fetch(:skip, []) + ResourceSkipParams.compute(input_shape, @request))
     end
 
     def build
@@ -65,24 +65,6 @@ module AwsSdkCodeGenerator
 
     def input_shape
       Api.shape(@shape_ref, @api)
-    end
-
-    def skip_params
-      if input_shape
-        input_shape['members'].inject([]) do |skip, (member_name, member_ref)|
-          skip << member_name if request_param?(member_name)
-          skip
-        end
-      else
-        []
-      end
-    end
-
-    def request_param?(member_name)
-      params = @request['params'] || []
-      params.any? do |param|
-        param['target'].match(/^#{member_name}\b/) && !(param['target'].include?('[') && param['target'].include?('.'))
-      end
     end
 
     def return_tag

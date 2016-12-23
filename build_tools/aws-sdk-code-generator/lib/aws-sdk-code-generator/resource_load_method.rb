@@ -6,6 +6,25 @@ module AwsSdkCodeGenerator
       # @param [Hash] resource
       # @return [ResourceMethod]
       def build(class_name, resource)
+        if resource['load']
+          load_method(class_name, resource)
+        else
+          empty_load_method
+        end
+      end
+
+      private
+
+      def empty_load_method
+        ResourceMethod.new.tap do |m|
+          m.method_name = 'load'
+          m.arguments = nil
+          m.documentation = "# @raise [NotImplementedError]\n# @api private"
+          m.code = "msg = \"#load is not implemented, data only available via enumeration\"\nraise NotImplementedError, msg"
+        end
+      end
+
+      def load_method(class_name, resource)
         ResourceMethod.new.tap do |m|
           m.method_name = 'load'
           m.arguments = nil
@@ -19,13 +38,11 @@ module AwsSdkCodeGenerator
           DOCS
           m.code = <<-CODE.rstrip
 #{request(resource)}
-@data = resp.data#{data_path(resource)}
+@data = resp.#{data_path(resource)}
 self
           CODE
         end
       end
-
-      private
 
       def request(resource)
         ResourceClientRequest.build(
@@ -38,9 +55,38 @@ self
       def data_path(resource)
         path = resource['load']['path']
         if path == '@'
-          ''
+          'data'
         else
-          '.' + Underscore.underscore_jmespath(path)
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          # TODO : fix this before COMMIT!
+          #Underscore.underscore_jmespath(path)
+          path.downcase
         end
       end
 

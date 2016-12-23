@@ -21,8 +21,11 @@ module AwsSdkCodeGenerator
         i = '  ' * n
         code += "#{i}#{loop_expression}\n"
         if n == count - 1
-          code += i + '  ' + indent("batch << #{resource_class}.new(#{constructor_args})\n")
+          code += i + '  ' + Docstring.indent("batch << #{resource_class}.new(#{constructor_args})\n", i + '  ')
         end
+      end
+      (count).times do |n|
+        i = '  ' * (count - n - 1)
         code += "#{i}end\n"
       end
       code.rstrip
@@ -65,7 +68,7 @@ module AwsSdkCodeGenerator
         if @context == :options
           suffix = suffix.gsub(/\.\w+/) { |word| "[:#{word[1..-1]}]" }
         end
-        suffix.length == 0 ? prefix : prefix + '.' + suffix
+        suffix.length == 0 ? prefix : prefix + suffix
       else
         ResourceValueSource.new(identifier).to_s
       end
@@ -198,13 +201,9 @@ module AwsSdkCodeGenerator
     end
 
     def underscore(str)
-      Underscore.underscore(str)
-    end
-
-    def indent(string)
-      string.lines.map do |line|
-        "  #{line}"
-      end.join.lstrip
+      str.split('.').map do |part|
+        Underscore.underscore(part)
+      end.join('.')
     end
 
   end

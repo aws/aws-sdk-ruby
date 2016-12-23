@@ -10,6 +10,9 @@ module AwsSdkCodeGenerator
     # @return [String, nil]
     attr_accessor :offset
 
+    # @return [String, nil]
+    attr_accessor :alias
+
     class << self
 
       # @return [Array<ResourceIdentifier>)
@@ -19,7 +22,18 @@ module AwsSdkCodeGenerator
             identifier.name = Underscore.underscore(i['name'])
             identifier.type = Docstring.ucfirst(i['type'] || 'String')
             identifier.offset = n
+            identifier.alias = identifier_alias(i)
           end
+        end
+      end
+
+      private
+
+      def identifier_alias(identifier)
+        if identifier['memberName'] && identifier['memberName'] != identifier['name']
+          Underscore.underscore(identifier['memberName'])
+        else
+          nil
         end
       end
 

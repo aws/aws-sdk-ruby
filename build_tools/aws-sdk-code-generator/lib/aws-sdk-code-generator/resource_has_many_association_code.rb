@@ -44,7 +44,7 @@ end
     end
 
     def client_request
-      indent(ResourceClientRequest.build(
+      Docstring.indent(ResourceClientRequest.build(
         request: @assoc['request'],
         merge: true,
         resp: true,
@@ -52,7 +52,7 @@ end
     end
 
     def batch_builder(options)
-      indent(
+      Docstring.indent(
         ResourceBatchBuilder.new(
           resource: @assoc['resource'],
           resp_var_name: options.fetch(:resp_var_name, 'resp'),
@@ -68,12 +68,6 @@ end
 
     def operation_name
       @assoc['request']['operation']
-    end
-
-    def indent(string, space)
-      string.lines.map do |line|
-        "#{space}#{line}"
-      end.join.lstrip
     end
 
   end

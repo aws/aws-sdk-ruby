@@ -9,7 +9,7 @@ module AwsSdkCodeGenerator
           @has = options.fetch(:has)
           @data_identifiers = data_identifiers
           @nullable = !@data_identifiers.empty?
-          @plural = plural?
+          @plural = Api.plural?(@has['resource'])
           super(underscore(options.fetch(:name)))
           apply_params
           apply_code
@@ -66,19 +66,6 @@ module AwsSdkCodeGenerator
 
         def builder
           Builder.new(resource: @has['resource'], request_made: false)
-        end
-
-        def plural?
-          plural = false
-          r = @has['resource']
-          (r['identifiers'] || []).each do |i|
-            if i['path'] && i['path'].include?('[]')
-              plural = true
-              break
-            end
-          end
-          plural = true if r['data'] && r['data'].include?('[]')
-          plural
         end
 
         def data_identifiers

@@ -10,13 +10,15 @@ module AwsSdkCodeGenerator
         @identifiers = ResourceIdentifier.build_list(resource)
         @identifiers_method = ResourceIdentifiersMethod.build(@identifiers)
         @data_attributes = ResourceAttribute.build_list(resource, api)
-        @load_method = ResourceLoadMethod.build(@class_name, resource) if resource['load']
+        @load_method = ResourceLoadMethod.build(@class_name, resource)
+        @data_method = ResourceDataMethod.build(@class_name, resource)
         @client_load_method = Underscore.underscore(resource['load']['request']['operation']) if resource['load']
         @data_class = "Types::#{resource['shape']}"
         @waiters = ResourceWaiter.build_list(resource, options[:waiters])
         @actions = ResourceAction.build_list(@class_name, resource, api)
         @associations = build_associations(options)
         @batch_actions = ResourceBatchAction.build_list(@class_name, resource, api)
+        @shape = resource['shape']
       end
 
       # @return [String]
@@ -40,6 +42,9 @@ module AwsSdkCodeGenerator
       # @return [String]
       attr_reader :load_method
 
+      # @return [String]
+      attr_reader :data_method
+
       # @return [String, nil]
       attr_reader :client_load_method
 
@@ -54,6 +59,9 @@ module AwsSdkCodeGenerator
 
       # @return [Array<ResourceBatchAction>]
       attr_reader :batch_actions
+
+      # @return [String, nil]
+      attr_reader :shape
 
       # @return [Boolean]
       def waiters?
@@ -78,6 +86,11 @@ module AwsSdkCodeGenerator
       # @return [Boolean]
       def batch_actions?
         batch_actions.size > 0
+      end
+
+      # @return [Boolean]
+      def identifiers?
+        @identifiers.size > 0
       end
 
       private

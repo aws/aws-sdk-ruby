@@ -74,7 +74,7 @@ module AwsSdkCodeGenerator
         #y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
         if @resources
           @resources['resources'].keys.sort.each do |name|
-            next unless name == 'BucketVersioning'
+            #next unless name == 'Vpc'
             y.yield("#{prefix}/#{underscore(name)}.rb", resource_class(name, @resources['resources'][name]))
           end
         end

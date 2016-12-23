@@ -91,6 +91,18 @@ module AwsSdkCodeGenerator
         ref['streaming'] || shape['streaming']
       end
 
+      def plural?(resource)
+        plural = false
+        (resource['identifiers'] || []).each do |i|
+          if i['path'] && i['path'].include?('[]')
+            plural = true
+            break
+          end
+        end
+        plural = true if resource['data'] && resource['data'].include?('[]')
+        plural
+      end
+
     end
   end
 end

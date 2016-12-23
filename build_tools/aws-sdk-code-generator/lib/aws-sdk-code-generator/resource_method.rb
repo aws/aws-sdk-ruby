@@ -13,5 +13,8 @@ module AwsSdkCodeGenerator
     # @return [String, nil]
     attr_accessor :documentation
 
+    # @return [String, nil]
+    attr_accessor :alias
+
   end
 end

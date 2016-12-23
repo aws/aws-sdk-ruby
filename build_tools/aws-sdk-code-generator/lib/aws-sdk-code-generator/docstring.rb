@@ -175,6 +175,12 @@ module AwsSdkCodeGenerator
         end
       end
 
+      def indent(string, space = '  ')
+        string.lines.map do |line|
+          "#{space}#{line}"
+        end.join.lstrip
+      end
+
     end
   end
 end

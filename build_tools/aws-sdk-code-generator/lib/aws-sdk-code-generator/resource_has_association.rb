@@ -24,7 +24,7 @@ module AwsSdkCodeGenerator
           parts << "#{assoc['resource']['type']}::Collection.new([batch], size: batch.size)"
         elsif nullable?(assoc) # singular association
           parts << "if #{null_checks(assoc)}"
-          parts << "  #{builder(assoc)}"
+          parts << "  #{Docstring.indent(builder(assoc))}"
           parts << 'else'
           parts << '  nil'
           parts << 'end'

@@ -23,39 +23,52 @@ module AwsSdkCodeGenerator
 
     def request_syntax_example
       if input_ref
-        skip = []
-        if @action_prefix
-          skip << @action_prefix
-        else
-          skip += @per_batch.keys
-          skip += @batch_obj.keys
-        end
         SyntaxExample.new(
           api: @api,
           shape_ref: input_ref,
           method_name: @method_name,
           receiver: @var_name,
           resp_var: nil,
-          skip: skip,
+          skip: skip_params
         ).format
       end
     end
 
+    def skip_params
+      skip = []
+      if @action_prefix
+        skip << @action_prefix
+      else
+        skip += @per_batch.keys
+        skip += @batch_obj.keys
+      end
+      skip + ResourceSkipParams.compute(input_shape, @action['request'])
+    end
+
     def option_tags
+      skip = skip_params
       if input_shape = Api.shape(input_ref, @api)
         input_shape['members'].map do |member_name, member_ref|
-          YardOptionTag.new(
-            name: Underscore.underscore(member_name),
-            required: input_shape.fetch('required', []).include?(member_name),
-            ruby_type: Api.ruby_input_type(member_ref, @api),
-            docstring: Docstring.html_to_markdown(Api.docstring(member_ref, @api)),
-          ).to_str
+          if skip.include?(member_name)
+            nil # skipped
+          else
+            YardOptionTag.new(
+              name: Underscore.underscore(member_name),
+              required: input_shape.fetch('required', []).include?(member_name),
+              ruby_type: Api.ruby_input_type(member_ref, @api),
+              docstring: Docstring.html_to_markdown(Api.docstring(member_ref, @api)),
+            ).to_str
+          end
         end
       end
     end
 
     def input_ref
       @api['operations'][@action['request']['operation']]['input']
+    end
+
+    def input_shape
+      Api.shape(input_ref, @api)
     end
 
     def compute_params

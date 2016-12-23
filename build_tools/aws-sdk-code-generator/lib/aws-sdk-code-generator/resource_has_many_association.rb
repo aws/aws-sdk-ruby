@@ -18,7 +18,7 @@ module AwsSdkCodeGenerator
         ResourceClientReqeustDocumentation.new(
           method_name: Underscore.underscore(options.fetch(:name)),
           receiver: Underscore.underscore(options.fetch(:class_name)),
-          resp_var: options.fetch(:name).downcase,
+          resp_var: Underscore.underscore(options.fetch(:name)),
           returns: "#{options.fetch(:assoc)['resource']['type']}::Collection",
           request: options.fetch(:assoc)['request'],
           api: options.fetch(:api),

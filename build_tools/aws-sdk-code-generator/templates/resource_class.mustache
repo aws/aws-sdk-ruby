@@ -16,17 +16,24 @@ module Aws
       #   @param [{{type}}] {{name}}
       {{/identifiers}}
       #   @option options [Client] :client
+      {{#identifiers?}}
       # @overload def initialize(options = {})
       {{#identifiers}}
       #   @option options [required, {{type}}] :{{name}}
       {{/identifiers}}
       #   @option options [Client] :client
+      {{/identifiers?}}
       def initialize(*args)
         options = Hash === args.last ? args.pop.dup : {}
         {{#identifiers}}
         @{{name}} = extract_{{name}}(args, options)
         {{/identifiers}}
+        {{#shape}}
         @data = options.delete(:data)
+        {{/shape}}
+        {{^shape}}
+        @data = Aws::EmptyStructure.new
+        {{/shape}}
         @client = options.delete(:client) || Client.new(options)
       end
 
@@ -37,6 +44,9 @@ module Aws
       def {{name}}
         @{{name}}
       end
+      {{#alias}}
+      alias :{{alias}} :{{name}}
+      {{/alias}}
       {{/identifiers}}
       {{#data_attributes}}
 
@@ -56,30 +66,11 @@ module Aws
       {{#load_method}}
       {{> method}}
       {{/load_method}}
-      {{^load_method}}
-      # @raise [NotImplementedError]
-      # @api private
-      def load
-        msg = "#load is not implemented, data only available via enumeration"
-        raise NotImplementedError, msg
-      end
-      {{/load_method}}
       alias :reload :load
 
-      {{#load_method}}
-      # @return [{{data_class}}]
-      #   Returns the data for this {{=<% %>=}}{<% class_name %>}<%={{ }}=%>. Calls
-      #   {{=<% %>=}}{Client#<% client_load_method %>}<%={{ }}=%> if {#data_loaded?} is `false`.
-      {{/load_method}}
-      {{^load_method}}
-      # @raise [NotImplementedError] Raises when {#data_loaded?} is `false`.
-      # @return [{{data_class}}]
-      #   Returns the data for this {{=<% %>=}}{<% class_name %>}<%={{ }}=%>.
-      {{/load_method}}
-      def data
-        load unless @data
-        @data
-      end
+      {{#data_method}}
+      {{> method}}
+      {{/data_method}}
 
       # @return [Boolean]
       #   Returns `true` if this resource is loaded.  Accessing attributes or
@@ -135,9 +126,9 @@ module Aws
       {{> method}}
       {{/actions}}
       {{/actions?}}
+      {{#associations?}}
 
       # @!group Associations
-      {{#associations?}}
       {{#associations}}
 
       {{> method}}
@@ -148,6 +139,7 @@ module Aws
       {{> method}}
       {{/identifiers_method}}
       deprecated(:identifiers)
+      {{#identifiers?}}
 
       private
       {{#identifiers}}
@@ -163,6 +155,7 @@ module Aws
         end
       end
       {{/identifiers}}
+      {{/identifiers?}}
       {{#waiters?}}
 
       def yield_waiter_and_warn(waiter, &block)

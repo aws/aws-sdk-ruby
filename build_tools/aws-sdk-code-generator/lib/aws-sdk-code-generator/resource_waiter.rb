@@ -50,7 +50,7 @@ module AwsSdkCodeGenerator
         args = ResourceClientRequestParams.new(
           params: waiter['params']
         ).to_s.strip
-        if waiter['resource']
+        if waiter['path']
           "resp = waiter.wait(params.merge(#{args}))"
         else
           "waiter.wait(params.merge(#{args}))"
