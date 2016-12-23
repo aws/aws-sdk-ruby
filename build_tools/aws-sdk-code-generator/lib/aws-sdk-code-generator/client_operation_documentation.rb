@@ -112,15 +112,13 @@ module AwsSdkCodeGenerator
     end
 
     def request_syntax_example(method_name, operation, api)
-      if operation['input']
-        syntax = SyntaxExample.new(
-          struct_shape: Api.shape(operation['input'], api),
-          api: api,
-          indent: '#   '
-        ).format.strip
-        syntax = syntax.sub(/^#\s+/, '')
-        "# @example Request syntax with placeholder values\n#\n#   resp = client.#{method_name}(#{syntax})"
-      end
+      SyntaxExample.new(
+        api: api,
+        shape_ref: operation['input'],
+        method_name: method_name,
+        receiver: 'client',
+        resp_var: 'resp',
+      ).format
     end
 
     def response_structure_example(operation, api)

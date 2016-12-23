@@ -24,7 +24,7 @@ module AwsSdkCodeGenerator
         @plugins = PluginList.new(options)
         @client_constructor = ClientConstructor.new(plugins: @plugins)
         @operations = ClientOperationList.new(options).to_a
-        @waiters = WaiterList.new(options[:waiters] || { 'waiters' => {}})
+        @waiters = Waiter.build_list(options[:waiters])
       end
 
       # @return [String]
@@ -58,19 +58,19 @@ module AwsSdkCodeGenerator
         @plugins.map(&:class_name)
       end
 
-      # @return [Array<WaiterList::Waiter>]
+      # @return [Array<Waiter>]
       def waiters
-        @waiters.to_a
+        @waiters
       end
 
       # @return [Boolean]
       def waiters?
-        @waiters.count > 0
+        @waiters.size > 0
       end
 
       # @return [String<Markdown>]
       def waiters_markdown_table
-        @waiters.markdown_table
+        Waiter.markdown_table(@waiters)
       end
 
     end

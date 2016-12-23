@@ -1,22 +1,29 @@
+require 'set'
+
 module AwsSdkCodeGenerator
   class SyntaxExample
 
     include Helper
 
-    # @option options [required, Hash] :struct_shape
     # @option options [required, Hash] :api
-    # @option options [String] :indent ('')
+    # @option options [required, Hash] :shape_ref
     def initialize(options = {})
-      @indent = options.fetch(:indent, '')
       @api = options.fetch(:api)
-      @struct_shape = options.fetch(:struct_shape)
+      @method_name = options.fetch(:method_name)
+      @receiver = options.fetch(:receiver)
+      @resp_var = options[:resp_var] ? "#{options[:resp_var]} = " : ''
+      @shape = filter_shape(options)
     end
 
     def format
-      if @struct_shape && @struct_shape['members'].length > 0
-        @indent + struct(@struct_shape, @indent, [])
+      if @shape && @shape['members'].length > 0
+        <<-EXAMPLE.strip
+# @example Request syntax with placeholder values
+#
+#   #{@resp_var}#{@receiver}.#{@method_name}(#{struct(@shape, '#   ', [])})
+        EXAMPLE
       else
-        ''
+        nil
       end
     end
 
@@ -161,6 +168,17 @@ module AwsSdkCodeGenerator
       when 'structure' then ref['shape'] == 'AttributeValue'
       else false
       end
+    end
+
+    def filter_shape(options)
+      api = options.fetch(:api)
+      shape = Api.shape(options.fetch(:shape_ref), api)
+      skip = Set.new(options.fetch(:skip, []))
+      shape = Helper.deep_copy(shape)
+      options.fetch(:skip, []).each do |skip|
+        shape['members'].delete(skip)
+      end
+      shape
     end
 
   end

@@ -25,7 +25,7 @@ module AwsSdkCodeGenerator
           options.update(identifiers)
           options[:data] = data_path if @resource['path']
           options[:client] = "@client"
-          HashFormatter.new(wrap:false, inline:true).format(options)
+          HashFormatter.new(wrap:false).format(options)
         end
 
         def identifiers

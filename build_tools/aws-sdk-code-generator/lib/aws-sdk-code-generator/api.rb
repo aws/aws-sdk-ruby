@@ -23,9 +23,12 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def shape(shape_ref, api)
-        if shape_ref
-          api.fetch('shapes').fetch(shape_ref.fetch('shape'))
+      # @param [String, Hash] shape_name_or_ref
+      # @return [Hash]
+      def shape(shape_name_or_ref, api)
+        case shape_name_or_ref
+        when Hash then api.fetch('shapes').fetch(shape_name_or_ref.fetch('shape'))
+        when String then api.fetch('shapes').fetch(shape_name_or_ref)
         end
       end
 

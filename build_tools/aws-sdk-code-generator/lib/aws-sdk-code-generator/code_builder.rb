@@ -64,17 +64,18 @@ module AwsSdkCodeGenerator
       # item yielded below) should be moved from here into the gem builder
       # The source code builder should simply yield the empty module
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", service_module(prefix: prefix))
-        y.yield("#{prefix}/customizations.rb", '')
-        y.yield("#{prefix}/types.rb", types_module)
-        y.yield("#{prefix}/client_api.rb", client_api_module)
-        y.yield("#{prefix}/client.rb", client_class)
-        y.yield("#{prefix}/errors.rb", errors_module)
-        y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
-        y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
+        #y.yield("#{prefix}.rb", service_module(prefix: prefix))
+        #y.yield("#{prefix}/customizations.rb", '')
+        #y.yield("#{prefix}/types.rb", types_module)
+        #y.yield("#{prefix}/client_api.rb", client_api_module)
+        #y.yield("#{prefix}/client.rb", client_class)
+        #y.yield("#{prefix}/errors.rb", errors_module)
+        #y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
+        #y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
         if @resources
           @resources['resources'].keys.sort.each do |name|
-            y.yield("#{prefix}/#{underscore(name)}.rb", GENERATED_SRC_WARNING + wrap(resource_class(name, @resources['resources'][name])))
+            next unless name == 'BucketVersioning'
+            y.yield("#{prefix}/#{underscore(name)}.rb", resource_class(name, @resources['resources'][name]))
           end
         end
       end
@@ -145,45 +146,14 @@ module AwsSdkCodeGenerator
     end
 
     def resource_class(resource_name, resource_definition)
-      Generators::ResourceClass.new(
+      Views::ResourceClass.new(
+        module_name: @service.module_name,
+        class_name: resource_name,
         api: @api,
-        name: resource_name,
-        resource: resource_definition,
         paginators: @paginators,
         waiters: @waiters,
-      )
-    end
-
-    def service_docstring
-      metadata = @api['metadata'] || {}
-      Generators::ServiceDocumentation.new(
-        product_name: metadata['serviceFullName'] || @module_names.last,
-        namespace: @module_names.join('::'),
-        api: @api
-      ).docstring
-    end
-
-    # @api private
-    # This method can be removed if move to used the combined API and
-    # docs JSON document.
-    def apply_docs(api, docs)
-      api['documentation'] = docs['service']
-      docs['operations'].each do |name, docstring|
-        api['operations'][name]['documentation'] = docstring
-      end
-      docs['shapes'].each do |shape_name, shape_docs|
-        api['shapes'][shape_name]['documentation'] = shape_docs['base']
-        shape_docs['refs'].each do |ref, ref_docs|
-          ref_shape, ref_member = ref.split('$')
-          case api['shapes'][ref_shape]['type']
-          when 'structure'
-            api['shapes'][ref_shape]['members'][ref_member]['documentation'] = ref_docs
-          when 'list', 'map'
-            api['shapes'][ref_shape][ref_member]['documentation'] = ref_docs
-          end
-
-        end
-      end
+        resource: resource_definition,
+      ).render
     end
 
   end

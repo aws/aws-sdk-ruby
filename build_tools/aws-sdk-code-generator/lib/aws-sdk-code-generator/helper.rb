@@ -151,6 +151,7 @@ module AwsSdkCodeGenerator
         end
       end
     end
+    module_function :deep_copy
 
   end
 end

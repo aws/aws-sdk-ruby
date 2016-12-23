@@ -169,6 +169,12 @@ module AwsSdkCodeGenerator
         table.map { |row| line % row }.join("\n")
       end
 
+      def ucfirst(string)
+        if string
+          string[0].upcase + string[1..-1]
+        end
+      end
+
     end
   end
 end

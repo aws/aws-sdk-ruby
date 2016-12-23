@@ -76,6 +76,11 @@ nested: {
       CODE
     end
 
+    it 'can inline multiple entries' do
+      str = HashFormatter.new(inline: true, wrap: false).format(abc: { mno: 'xyz'.inspect })
+      expect(str).to eq('abc: { mno: "xyz" }')
+    end
+
     it 'can inline and omit curly braces' do
       str = HashFormatter.new(inline: true, wrap:false).format(abc: 'xyz'.inspect )
       expect(str).to eq('abc: "xyz"')

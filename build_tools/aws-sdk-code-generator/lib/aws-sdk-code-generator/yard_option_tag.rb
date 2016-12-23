@@ -16,14 +16,15 @@ module AwsSdkCodeGenerator
       @option_hash_name = options.fetch(:option_hash_name, 'options')
     end
 
-    def to_str
+    def build
       if @docstring.empty?
         first_line.rstrip
       else
         first_line + Docstring.block_comment(@docstring, gap: '   ')
       end
     end
-    alias to_s to_str
+    alias to_str build
+    alias to_s build
 
     private
 
