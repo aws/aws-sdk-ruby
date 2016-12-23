@@ -63,7 +63,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   optiongroupoptions = db_engine.option_group_options({
+      #   option_group_options = db_engine.option_group_options({
       #     major_engine_version: "String",
       #     filters: [
       #       {
@@ -100,7 +100,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   optiongroups = db_engine.option_groups({
+      #   option_groups = db_engine.option_groups({
       #     option_group_name: "String",
       #     filters: [
       #       {

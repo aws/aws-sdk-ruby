@@ -576,7 +576,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   acceptedvpcpeeringconnections = vpc.accepted_vpc_peering_connections({
+      #   accepted_vpc_peering_connections = vpc.accepted_vpc_peering_connections({
       #     dry_run: false,
       #     vpc_peering_connection_ids: ["String"],
       #     filters: [
@@ -979,7 +979,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   internetgateways = vpc.internet_gateways({
+      #   internet_gateways = vpc.internet_gateways({
       #     dry_run: false,
       #     internet_gateway_ids: ["String"],
       #     filters: [
@@ -1046,7 +1046,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   networkacls = vpc.network_acls({
+      #   network_acls = vpc.network_acls({
       #     dry_run: false,
       #     network_acl_ids: ["String"],
       #     filters: [
@@ -1147,7 +1147,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   networkinterfaces = vpc.network_interfaces({
+      #   network_interfaces = vpc.network_interfaces({
       #     dry_run: false,
       #     network_interface_ids: ["String"],
       #     filters: [
@@ -1306,7 +1306,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   requestedvpcpeeringconnections = vpc.requested_vpc_peering_connections({
+      #   requested_vpc_peering_connections = vpc.requested_vpc_peering_connections({
       #     dry_run: false,
       #     vpc_peering_connection_ids: ["String"],
       #     filters: [
@@ -1393,7 +1393,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   routetables = vpc.route_tables({
+      #   route_tables = vpc.route_tables({
       #     dry_run: false,
       #     route_table_ids: ["String"],
       #     filters: [
@@ -1504,7 +1504,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   securitygroups = vpc.security_groups({
+      #   security_groups = vpc.security_groups({
       #     dry_run: false,
       #     group_names: ["String"],
       #     group_ids: ["String"],

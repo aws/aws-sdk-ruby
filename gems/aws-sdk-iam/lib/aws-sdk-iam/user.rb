@@ -253,7 +253,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   accesskeypair = user.create_access_key_pair()
+      #   user.create_access_key_pair()
       # @param [Hash] options ({})
       # @return [AccessKeyPair]
       def create_access_key_pair(options = {})
@@ -494,7 +494,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   accesskeys = user.access_keys()
+      #   user.access_keys()
       # @param [Hash] options ({})
       # @return [AccessKey::Collection]
       def access_keys(options = {})
@@ -519,7 +519,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attachedpolicies = user.attached_policies({
+      #   attached_policies = user.attached_policies({
       #     path_prefix: "policyPathType",
       #   })
       # @param [Hash] options ({})
@@ -559,7 +559,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   groups = user.groups()
+      #   user.groups()
       # @param [Hash] options ({})
       # @return [Group::Collection]
       def groups(options = {})
@@ -601,7 +601,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   mfadevices = user.mfa_devices()
+      #   user.mfa_devices()
       # @param [Hash] options ({})
       # @return [MfaDevice::Collection]
       def mfa_devices(options = {})
@@ -626,7 +626,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   policies = user.policies()
+      #   user.policies()
       # @param [Hash] options ({})
       # @return [UserPolicy::Collection]
       def policies(options = {})
@@ -670,7 +670,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   signingcertificates = user.signing_certificates()
+      #   user.signing_certificates()
       # @param [Hash] options ({})
       # @return [SigningCertificate::Collection]
       def signing_certificates(options = {})

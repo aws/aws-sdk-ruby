@@ -137,7 +137,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   accesskeys = current_user.access_keys({
+      #   access_keys = current_user.access_keys({
       #     user_name: "existingUserNameType",
       #   })
       # @param [Hash] options ({})
@@ -173,7 +173,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   mfadevices = current_user.mfa_devices({
+      #   mfa_devices = current_user.mfa_devices({
       #     user_name: "existingUserNameType",
       #   })
       # @param [Hash] options ({})
@@ -209,7 +209,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   signingcertificates = current_user.signing_certificates({
+      #   signing_certificates = current_user.signing_certificates({
       #     user_name: "existingUserNameType",
       #   })
       # @param [Hash] options ({})

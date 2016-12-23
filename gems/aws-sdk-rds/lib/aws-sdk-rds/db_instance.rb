@@ -2374,7 +2374,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   logfiles = db_instance.log_files({
+      #   log_files = db_instance.log_files({
       #     filename_contains: "String",
       #     file_last_written: 1,
       #     file_size: 1,
@@ -2444,7 +2444,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   pendingmaintenanceactions = db_instance.pending_maintenance_actions({
+      #   pending_maintenance_actions = db_instance.pending_maintenance_actions({
       #     resource_identifier: "String",
       #     filters: [
       #       {

@@ -210,9 +210,6 @@ module Aws
 
         # @!group Batch Actions
 
-        # @example Request syntax with placeholder values
-        #
-        #   tag.batch_create()
         # @param options ({})
         # @return [void]
         def batch_create(options = {})
@@ -231,9 +228,6 @@ module Aws
           nil
         end
 
-        # @example Request syntax with placeholder values
-        #
-        #   tag.batch_delete!()
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})

@@ -33,6 +33,7 @@ module Aws
       def engine_name
         @engine_name
       end
+      alias :engine :engine_name
 
       # @return [String]
       def version
@@ -137,7 +138,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   optiongroupoptions = db_engine_version.option_group_options({
+      #   option_group_options = db_engine_version.option_group_options({
       #     filters: [
       #       {
       #         name: "String", # required
@@ -173,7 +174,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   optiongroups = db_engine_version.option_groups({
+      #   option_groups = db_engine_version.option_groups({
       #     option_group_name: "String",
       #     filters: [
       #       {

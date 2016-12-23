@@ -189,7 +189,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   activity = instance.exit_standby()
+      #   instance.exit_standby()
       # @param [Hash] options ({})
       # @return [Activity::Collection]
       def exit_standby(options = {})
@@ -316,9 +316,6 @@ module Aws
 
         # @!group Batch Actions
 
-        # @example Request syntax with placeholder values
-        #
-        #   instance.batch_attach()
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
@@ -388,9 +385,6 @@ module Aws
           nil
         end
 
-        # @example Request syntax with placeholder values
-        #
-        #   instance.batch_exit_standby()
         # @param options ({})
         # @return [void]
         def batch_exit_standby(options = {})

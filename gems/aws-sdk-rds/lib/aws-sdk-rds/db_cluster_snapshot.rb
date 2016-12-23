@@ -250,7 +250,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbclustersnapshot = db_cluster_snapshot.delete()
+      #   db_cluster_snapshot.delete()
       # @param [Hash] options ({})
       # @return [DBClusterSnapshot]
       def delete(options = {})

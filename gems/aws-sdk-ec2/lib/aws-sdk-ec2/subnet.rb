@@ -836,7 +836,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   networkinterfaces = subnet.network_interfaces({
+      #   network_interfaces = subnet.network_interfaces({
       #     dry_run: false,
       #     network_interface_ids: ["String"],
       #     filters: [

@@ -94,7 +94,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   job = archive.initiate_archive_retrieval()
+      #   archive.initiate_archive_retrieval()
       # @param [Hash] options ({})
       # @return [Job]
       def initiate_archive_retrieval(options = {})

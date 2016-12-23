@@ -188,7 +188,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attachedpolicies = role.attached_policies({
+      #   attached_policies = role.attached_policies({
       #     path_prefix: "policyPathType",
       #   })
       # @param [Hash] options ({})
@@ -228,7 +228,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   instanceprofiles = role.instance_profiles()
+      #   role.instance_profiles()
       # @param [Hash] options ({})
       # @return [InstanceProfile::Collection]
       def instance_profiles(options = {})
@@ -252,7 +252,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   policies = role.policies()
+      #   role.policies()
       # @param [Hash] options ({})
       # @return [RolePolicy::Collection]
       def policies(options = {})

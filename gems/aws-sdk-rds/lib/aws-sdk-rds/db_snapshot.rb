@@ -319,7 +319,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   dbsnapshot = db_snapshot.delete()
+      #   db_snapshot.delete()
       # @param [Hash] options ({})
       # @return [DBSnapshot]
       def delete(options = {})
@@ -565,7 +565,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attributes = db_snapshot.attributes()
+      #   db_snapshot.attributes()
       # @param [Hash] options ({})
       # @return [DBSnapshotAttribute::Collection]
       def attributes(options = {})

@@ -337,7 +337,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attachedpolicies = group.attached_policies({
+      #   attached_policies = group.attached_policies({
       #     path_prefix: "policyPathType",
       #   })
       # @param [Hash] options ({})
@@ -377,7 +377,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   policies = group.policies()
+      #   group.policies()
       # @param [Hash] options ({})
       # @return [GroupPolicy::Collection]
       def policies(options = {})
@@ -411,7 +411,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   users = group.users()
+      #   group.users()
       # @param [Hash] options ({})
       # @return [User::Collection]
       def users(options = {})

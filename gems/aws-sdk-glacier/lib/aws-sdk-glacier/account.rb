@@ -94,7 +94,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   vaults = account.vaults()
+      #   account.vaults()
       # @param [Hash] options ({})
       # @return [Vault::Collection]
       def vaults(options = {})

@@ -669,7 +669,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   deadlettersourcequeues = queue.dead_letter_source_queues()
+      #   queue.dead_letter_source_queues()
       # @param [Hash] options ({})
       # @return [Queue::Collection]
       def dead_letter_source_queues(options = {})

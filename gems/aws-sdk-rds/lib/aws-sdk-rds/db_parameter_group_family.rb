@@ -63,7 +63,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   enginedefaultclusterparameters = db_parameter_group_family.engine_default_cluster_parameters({
+      #   engine_default_cluster_parameters = db_parameter_group_family.engine_default_cluster_parameters({
       #     filters: [
       #       {
       #         name: "String", # required
@@ -110,7 +110,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   enginedefaultparameters = db_parameter_group_family.engine_default_parameters({
+      #   engine_default_parameters = db_parameter_group_family.engine_default_parameters({
       #     filters: [
       #       {
       #         name: "String", # required

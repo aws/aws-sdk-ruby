@@ -797,7 +797,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   lifecyclehooks = auto_scaling_group.lifecycle_hooks({
+      #   lifecycle_hooks = auto_scaling_group.lifecycle_hooks({
       #     lifecycle_hook_names: ["AsciiStringMaxLen255"],
       #   })
       # @param [Hash] options ({})
@@ -835,7 +835,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   loadbalancers = auto_scaling_group.load_balancers({
+      #   load_balancers = auto_scaling_group.load_balancers({
       #     next_token: "XmlString",
       #     max_records: 1,
       #   })
@@ -866,7 +866,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   notificationconfigurations = auto_scaling_group.notification_configurations()
+      #   auto_scaling_group.notification_configurations()
       # @param [Hash] options ({})
       # @return [NotificationConfiguration::Collection]
       def notification_configurations(options = {})
@@ -928,7 +928,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   scheduledactions = auto_scaling_group.scheduled_actions({
+      #   scheduled_actions = auto_scaling_group.scheduled_actions({
       #     scheduled_action_names: ["ResourceName"],
       #     start_time: Time.now,
       #     end_time: Time.now,

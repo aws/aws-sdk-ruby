@@ -188,7 +188,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   endpoints = platform_application.endpoints()
+      #   platform_application.endpoints()
       # @param [Hash] options ({})
       # @return [PlatformEndpoint::Collection]
       def endpoints(options = {})

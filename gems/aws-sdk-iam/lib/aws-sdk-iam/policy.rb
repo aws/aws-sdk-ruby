@@ -360,7 +360,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attachedgroups = policy.attached_groups({
+      #   attached_groups = policy.attached_groups({
       #     path_prefix: "pathType",
       #   })
       # @param [Hash] options ({})
@@ -404,7 +404,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attachedroles = policy.attached_roles({
+      #   attached_roles = policy.attached_roles({
       #     path_prefix: "pathType",
       #   })
       # @param [Hash] options ({})
@@ -448,7 +448,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   attachedusers = policy.attached_users({
+      #   attached_users = policy.attached_users({
       #     path_prefix: "pathType",
       #   })
       # @param [Hash] options ({})
@@ -505,7 +505,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   versions = policy.versions()
+      #   policy.versions()
       # @param [Hash] options ({})
       # @return [PolicyVersion::Collection]
       def versions(options = {})

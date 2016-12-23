@@ -604,7 +604,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   events = stack.events()
+      #   stack.events()
       # @param [Hash] options ({})
       # @return [Event::Collection]
       def events(options = {})
@@ -638,7 +638,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   resourcesummaries = stack.resource_summaries()
+      #   stack.resource_summaries()
       # @param [Hash] options ({})
       # @return [StackResourceSummary::Collection]
       def resource_summaries(options = {})

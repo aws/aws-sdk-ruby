@@ -249,7 +249,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   eventsubscription = event_subscription.delete()
+      #   event_subscription.delete()
       # @param [Hash] options ({})
       # @return [EventSubscription]
       def delete(options = {})

@@ -372,7 +372,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   subscriptions = topic.subscriptions()
+      #   topic.subscriptions()
       # @param [Hash] options ({})
       # @return [Subscription::Collection]
       def subscriptions(options = {})

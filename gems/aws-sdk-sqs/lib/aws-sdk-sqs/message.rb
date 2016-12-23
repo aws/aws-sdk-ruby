@@ -209,9 +209,6 @@ module Aws
 
         # @!group Batch Actions
 
-        # @example Request syntax with placeholder values
-        #
-        #   message.batch_delete!()
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})

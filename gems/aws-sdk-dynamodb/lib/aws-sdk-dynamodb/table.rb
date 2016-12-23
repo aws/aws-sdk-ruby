@@ -51,21 +51,21 @@ module Aws
       # * *AttributeName* - The name of the attribute.
       #
       # * *KeyType* - The role of the attribute:
-      # 
+      #
       #   * `HASH` - partition key
-      # 
+      #
       #   * `RANGE` - sort key
-      # 
+      #
       #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
       #   The term "hash attribute" derives from DynamoDB' usage of an
       #   internal hash function to evenly distribute data items across
       #   partitions, based on their partition key values.
-      # 
+      #
       #    The sort key of an item is also known as its *range attribute*. The
       #   term "range attribute" derives from the way DynamoDB stores items
       #   with the same partition key physically close together, in sorted
       #   order by the sort key value.
-      # 
+      #
       #    </note>
       #
       # For more information about primary keys, see [Primary Key][1] in the
@@ -151,19 +151,19 @@ module Aws
       #   the table into the index. These are in addition to the primary key
       #   attributes and index key attributes, which are automatically
       #   projected. Each attribute specification is composed of:
-      # 
+      #
       #   * *ProjectionType* - One of the following:
-      # 
+      #
       #     * `KEYS_ONLY` - Only the index and primary keys are projected into
       #       the index.
-      # 
+      #
       #     * `INCLUDE` - Only the specified table attributes are projected
       #       into the index. The list of projected attributes are in
       #       *NonKeyAttributes*.
-      # 
+      #
       #     * `ALL` - All of the table attributes are projected into the
       #       index.
-      # 
+      #
       #   * *NonKeyAttributes* - A list of one or more non-key attribute names
       #     that are projected into the secondary index. The total count of
       #     attributes provided in *NonKeyAttributes*, summed across all of
@@ -203,13 +203,13 @@ module Aws
       #   Recent changes might not be reflected in this value.
       #
       # * *IndexStatus* - The current status of the global secondary index:
-      # 
+      #
       #   * *CREATING* - The index is being created.
-      # 
+      #
       #   * *UPDATING* - The index is being updated.
-      # 
+      #
       #   * *DELETING* - The index is being deleted.
-      # 
+      #
       #   * *ACTIVE* - The index is ready for use.
       #
       # * *ItemCount* - The number of items in the global secondary index.
@@ -225,19 +225,19 @@ module Aws
       #   the table into the index. These are in addition to the primary key
       #   attributes and index key attributes, which are automatically
       #   projected. Each attribute specification is composed of:
-      # 
+      #
       #   * *ProjectionType* - One of the following:
-      # 
+      #
       #     * `KEYS_ONLY` - Only the index and primary keys are projected into
       #       the index.
-      # 
+      #
       #     * `INCLUDE` - Only the specified table attributes are projected
       #       into the index. The list of projected attributes are in
       #       *NonKeyAttributes*.
-      # 
+      #
       #     * `ALL` - All of the table attributes are projected into the
       #       index.
-      # 
+      #
       #   * *NonKeyAttributes* - A list of one or more non-key attribute names
       #     that are projected into the secondary index. The total count of
       #     attributes provided in *NonKeyAttributes*, summed across all of

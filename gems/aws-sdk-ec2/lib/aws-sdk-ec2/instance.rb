@@ -1247,7 +1247,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   vpcaddresses = instance.vpc_addresses({
+      #   vpc_addresses = instance.vpc_addresses({
       #     dry_run: false,
       #     public_ips: ["String"],
       #     filters: [

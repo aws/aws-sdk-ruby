@@ -349,7 +349,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   multipartuploads = bucket.multipart_uploads({
+      #   multipart_uploads = bucket.multipart_uploads({
       #     delimiter: "Delimiter",
       #     encoding_type: "url", # accepts url
       #     key_marker: "KeyMarker",
@@ -418,7 +418,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   objectversions = bucket.object_versions({
+      #   object_versions = bucket.object_versions({
       #     delimiter: "Delimiter",
       #     encoding_type: "url", # accepts url
       #     key_marker: "KeyMarker",

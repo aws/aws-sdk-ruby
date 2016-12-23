@@ -148,7 +148,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   job = vault.initiate_inventory_retrieval()
+      #   vault.initiate_inventory_retrieval()
       # @param [Hash] options ({})
       # @return [Job]
       def initiate_inventory_retrieval(options = {})
@@ -252,7 +252,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   completedjobs = vault.completed_jobs({
+      #   completed_jobs = vault.completed_jobs({
       #     statuscode: "string",
       #   })
       # @param [Hash] options ({})
@@ -287,7 +287,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   failedjobs = vault.failed_jobs({
+      #   failed_jobs = vault.failed_jobs({
       #     completed: "string",
       #   })
       # @param [Hash] options ({})
@@ -369,7 +369,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   jobsinprogress = vault.jobs_in_progress({
+      #   jobs_in_progress = vault.jobs_in_progress({
       #     completed: "string",
       #   })
       # @param [Hash] options ({})
@@ -403,7 +403,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   multipartuplaods = vault.multipart_uplaods()
+      #   vault.multipart_uplaods()
       # @param [Hash] options ({})
       # @return [MultipartUpload::Collection]
       def multipart_uplaods(options = {})
@@ -452,7 +452,7 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   succeededjobs = vault.succeeded_jobs({
+      #   succeeded_jobs = vault.succeeded_jobs({
       #     completed: "string",
       #   })
       # @param [Hash] options ({})
