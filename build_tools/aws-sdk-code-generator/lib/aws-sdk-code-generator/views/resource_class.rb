@@ -3,7 +3,7 @@ module AwsSdkCodeGenerator
     class ResourceClass < View
 
       def initialize(options)
-        @module_name = options.fetch(:module_name).split('::').last
+        @module_name = options.fetch(:module_name)
         @class_name = options.fetch(:class_name)
         api = options.fetch(:api)
         resource = options.fetch(:resource)
