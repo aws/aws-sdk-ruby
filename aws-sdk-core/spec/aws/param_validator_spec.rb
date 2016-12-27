@@ -114,14 +114,24 @@ module Aws
 
       it 'validates map keys' do
         validate({ string_map: { 'abc' => 'mno' }})
-        validate({ string_map: { 123 => 'xyz' }},
-          'expected params[:string_map] 123 key to be a String, got value 123 (class: Fixnum) instead.')
+        if RUBY_VERSION.to_f >= 2.4
+          validate({ string_map: { 123 => 'xyz' }},
+            'expected params[:string_map] 123 key to be a String, got value 123 (class: Integer) instead.')
+        else
+          validate({ string_map: { 123 => 'xyz' }},
+            'expected params[:string_map] 123 key to be a String, got value 123 (class: Fixnum) instead.')
+        end
       end
 
       it 'validates map values' do
         validate({ string_map: { 'foo' => 'bar' }})
-        validate({ string_map: { 'foo' => 123 }},
-          'expected params[:string_map]["foo"] to be a String, got value 123 (class: Fixnum) instead.')
+        if RUBY_VERSION.to_f >= 2.4
+          validate({ string_map: { 'foo' => 123 }},
+            'expected params[:string_map]["foo"] to be a String, got value 123 (class: Integer) instead.')
+        else
+          validate({ string_map: { 'foo' => 123 }},
+            'expected params[:string_map]["foo"] to be a String, got value 123 (class: Fixnum) instead.')
+        end
       end
 
     end
@@ -140,8 +150,13 @@ module Aws
 
       it 'accepts integers' do
         validate(float: 123.0)
-        validate({ float: 123 },
-          'expected params[:float] to be a Float, got value 123 (class: Fixnum) instead.')
+        if RUBY_VERSION.to_f >= 2.4
+          validate({ float: 123 },
+            'expected params[:float] to be a Float, got value 123 (class: Integer) instead.')
+        else
+          validate({ float: 123 },
+            'expected params[:float] to be a Float, got value 123 (class: Fixnum) instead.')
+        end
       end
 
     end
@@ -173,8 +188,13 @@ module Aws
         validate(blob: StringIO.new('abc'))
         validate(blob: double('d', :read => 'abc', :size => 3, :rewind => 0))
         validate({ blob: 'abc' })
-        validate({ blob: 123 },
-          'expected params[:blob] to be a String or IO object, got value 123 (class: Fixnum) instead.')
+        if RUBY_VERSION.to_f >= 2.4
+          validate({ blob: 123 },
+            'expected params[:blob] to be a String or IO object, got value 123 (class: Integer) instead.')
+        else
+          validate({ blob: 123 },
+            'expected params[:blob] to be a String or IO object, got value 123 (class: Fixnum) instead.')
+        end
       end
 
     end
@@ -183,8 +203,13 @@ module Aws
 
       it 'accepts string objects' do
         validate(string: 'john doe')
-        validate({ string: 123 },
-          'expected params[:string] to be a String, got value 123 (class: Fixnum) instead.')
+        if RUBY_VERSION.to_f >= 2.4
+          validate({ string: 123 },
+            'expected params[:string] to be a String, got value 123 (class: Integer) instead.')
+        else
+          validate({ string: 123 },
+            'expected params[:string] to be a String, got value 123 (class: Fixnum) instead.')
+        end
       end
 
     end
