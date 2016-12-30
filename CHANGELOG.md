@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.43 (2016-12-30)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
