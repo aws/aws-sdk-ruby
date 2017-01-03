@@ -54,3 +54,12 @@ Feature: S3 Buckets
     When I create a bucket with the location constraint "us-west-2"
     When I put a large object
     Then the object should exist
+
+  Scenario: Get location of DNS-compatible bucket in nonstandard region
+    Given I am using the S3 "us-west-2" region
+    And I create a DNS compatible bucket
+    When I am using the S3 "us-east-1" region
+    When I get the bucket location
+    Then the bucket name should be in the request path
+    And the bucket name should not be in the request host
+    And the location constraint should be "us-west-2"
