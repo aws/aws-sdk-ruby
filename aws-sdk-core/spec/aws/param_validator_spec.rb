@@ -121,6 +121,7 @@ module Aws
           validate({ string_map: { 123 => 'xyz' }},
             'expected params[:string_map] 123 key to be a String, got value 123 (class: Fixnum) instead.')
         end
+
       end
 
       it 'validates map values' do
@@ -132,6 +133,7 @@ module Aws
           validate({ string_map: { 'foo' => 123 }},
             'expected params[:string_map]["foo"] to be a String, got value 123 (class: Fixnum) instead.')
         end
+
       end
 
     end
@@ -157,6 +159,7 @@ module Aws
           validate({ float: 123 },
             'expected params[:float] to be a Float, got value 123 (class: Fixnum) instead.')
         end
+
       end
 
     end
@@ -195,6 +198,7 @@ module Aws
           validate({ blob: 123 },
             'expected params[:blob] to be a String or IO object, got value 123 (class: Fixnum) instead.')
         end
+
       end
 
     end
@@ -210,6 +214,7 @@ module Aws
           validate({ string: 123 },
             'expected params[:string] to be a String, got value 123 (class: Fixnum) instead.')
         end
+
       end
 
     end
