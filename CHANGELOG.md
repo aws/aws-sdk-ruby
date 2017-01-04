@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.44 (2017-01-04)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
 
 * Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
