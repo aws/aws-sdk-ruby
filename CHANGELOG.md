@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Lambda - Updated the documentation for AWS Lambda.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
+
+* Feature - Aws::Snowball - Updated the documentation for Amazon Import/Export Snowball.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
 2.6.43 (2016-12-30)
 ------------------
 
