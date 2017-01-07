@@ -74,6 +74,19 @@ module Aws
             "&Key-Pair-Id=CF_KEYPAIR_ID"
             expect(url).to eq(expected_url)
         end
+        it 'can generate signed urls with canned policy with 2 query parameters' do
+          url = signer.signed_url(
+            "https://abc.cloudfront.net/images/image.jpg?color=red&size=large",
+            :expires => expires
+          )
+          expected_url = "https://abc.cloudfront.net/images/image.jpg?"\
+            "color=red&size=large&Expires=1357034400&Signature=uPOoo"\
+            "UkzOW8WnmjarLPgzkbwJ~frZqfzej~Avwg53yDLpWshjeWUelkspk1u"\
+            "viR2FkpAbvY-SBI61BCYLUkFWo51Q4YIg2TdywUJJ6KRX-LV2LjPVtw"\
+            "bOKwlS11g48gLuX9d7qjUaTay-dhdGE6Xdj79hUvC5Od0dW4QbGSY_"\
+            "&Key-Pair-Id=CF_KEYPAIR_ID"
+          expect(url).to eq(expected_url)
+        end
         it 'can generate signed rtmp urls' do
           url = signer.signed_url(
             "rtmp://example-distribution.cloudfront.net/videos/example.mp4",
