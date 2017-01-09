@@ -4,6 +4,9 @@ module AwsSdkCodeGenerator
     # @option options [required, Service] :service
     #
     # @option options [required, String] :aws_sdk_core_lib_path
+    #   Path to the lib directory for the source code of the
+    #   AWS SDK for Ruby. This is needed so that documentation
+    #   can be generated for default plugins and their options.
     #
     # @option options [Hash<String, Array<Hash>] :client_examples ({})
     #   A hash of client examples. Hash keys should be API operation method
@@ -17,8 +20,6 @@ module AwsSdkCodeGenerator
       @service = options.fetch(:service)
       @aws_sdk_core_lib_path = options.fetch(:aws_sdk_core_lib_path)
       @client_examples = options.fetch(:client_examples, {})
-
-      # TODO : remove these
       @add_plugins = @service.add_plugins
       @remove_plugins = @service.remove_plugins
       @gem_dependencies = @service.gem_dependencies
