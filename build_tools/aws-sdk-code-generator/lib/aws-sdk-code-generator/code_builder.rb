@@ -42,16 +42,11 @@ module AwsSdkCodeGenerator
       code.join("\n")
     end
 
-    # @option options [String] :prefix
     # @return [Enumerable<String<path>, String<code>>]
-    def source_files(options = {})
-      prefix = options.fetch(:prefix, nil)
-      prefix ||= @module_names.map { |n| Underscore.underscore(n) }.join('/')
-      # prefix should always be the gemname. The service-module (the first
-      # item yielded below) should be moved from here into the gem builder
-      # The source code builder should simply yield the empty module
+    def source_files
+      prefix = Underscore.underscore(@service.gem_name)
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", service_module(prefix))
+        y.yield("#{prefix}.rb", service_module)
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
         y.yield("#{prefix}/client_api.rb", client_api_module)
@@ -71,8 +66,8 @@ module AwsSdkCodeGenerator
 
     private
 
-    def service_module(prefix)
-      Views::ServiceModule.new(service: @service, prefix: prefix).render
+    def service_module
+      Views::ServiceModule.new(service: @service).render
     end
 
     def types_module
