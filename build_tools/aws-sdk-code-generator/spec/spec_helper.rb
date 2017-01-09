@@ -72,6 +72,7 @@ module SpecHelper
       service_opts = {
         gem_version: '1.0.0',
         name: module_names.last,
+        gem_name: module_names.last.downcase,
         module_name: module_names.join('::'),
         api: model_path(:api, api_dir),
         paginators: model_path(:paginators, api_dir),

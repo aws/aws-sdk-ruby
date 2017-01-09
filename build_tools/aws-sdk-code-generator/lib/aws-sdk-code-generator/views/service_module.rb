@@ -7,7 +7,7 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
-        @prefix = options.fetch(:prefix)
+        @gem_path = Underscore.underscore(@service.gem_name)
       end
 
       def full_name
@@ -45,15 +45,15 @@ module AwsSdkCodeGenerator
       # @return [Array<String>]
       def relative_requires
         paths = Set.new
-        paths << "#{prefix}/types"
-        paths << "#{prefix}/client_api"
-        paths << "#{prefix}/client"
-        paths << "#{prefix}/errors"
-        paths << "#{prefix}/waiters" if @service.waiters
-        paths << "#{prefix}/resource"
+        paths << "#{@gem_path}/types"
+        paths << "#{@gem_path}/client_api"
+        paths << "#{@gem_path}/client"
+        paths << "#{@gem_path}/errors"
+        paths << "#{@gem_path}/waiters" if @service.waiters
+        paths << "#{@gem_path}/resource"
         if @service.resources && @service.resources['resources']
           @service.resources['resources'].keys.each do |resource_name|
-            path = "#{prefix}/#{underscore(resource_name)}"
+            path = "#{@gem_path}/#{underscore(resource_name)}"
             if paths.include?(path)
               raise "resource path conflict for `#{resource_name}'"
             else
@@ -61,7 +61,7 @@ module AwsSdkCodeGenerator
             end
           end
         end
-        paths << "#{prefix}/customizations"
+        paths << "#{@gem_path}/customizations"
         paths.to_a
       end
 
@@ -72,12 +72,6 @@ module AwsSdkCodeGenerator
       def example_operation_name
         underscore(@service.api['operations'].keys.first)
         nil
-      end
-
-      private
-
-      def prefix
-        @prefix
       end
 
     end
