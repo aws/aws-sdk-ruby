@@ -138,7 +138,7 @@ module Aws
               }
           ]
         }
-        JSON.dump json_hash
+        JSON.dump(json_hash)
       end
 
       def encode(policy)
