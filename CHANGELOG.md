@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CloudFront::UrlSigner - Fixed an issue where failures could occur
+  when the `UrlSigner` was used in a Rails environment with more than one query
+  parameter. See 
+  [related GitHub issue #1386](https://github.com/aws/aws-sdk-ruby/issues/1386).
+
 2.6.44 (2017-01-04)
 ------------------
 
