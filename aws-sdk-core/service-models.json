@@ -99,7 +99,7 @@
     "endpoint": "config"
   },
   "Cur": {
-    "models": "cur/2017-01-16",
+    "models": "cur/2017-01-06",
     "endpoint": "cur"
   },
   "DatabaseMigrationService": {
