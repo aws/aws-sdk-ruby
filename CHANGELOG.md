@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.45 (2017-01-16)
+------------------
+
 * Feature - Aws:: - Added support for the new 2011-12-05 API version of Amazon DynamoDB.
 
 * Issue - Aws::CloudFront::UrlSigner - Fixed an issue where failures could occur
