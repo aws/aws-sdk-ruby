@@ -98,6 +98,10 @@
     "models": "config/2014-11-12",
     "endpoint": "config"
   },
+  "Cur": {
+    "models": "cur/2017-01-16",
+    "endpoint": "cur"
+  },
   "DatabaseMigrationService": {
     "models": "dms/2016-01-01",
     "endpoint": "dms"
