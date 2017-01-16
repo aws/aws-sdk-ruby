@@ -242,6 +242,7 @@ to be backwards compatible.
 | AWS CodeDeploy                      | CodeDeploy                   | 2014-10-06  |
 | AWS CodePipeline                    | CodePipeline                 | 2015-07-09  |
 | AWS Config                          | ConfigService                | 2014-11-12  |
+| AWS Cost and Usage Report Service   | Cur                          | 2017-01-06  |
 | AWS Data Pipeline                   | DataPipeline                 | 2012-10-29  |
 | AWS Database Migration Service      | DatabaseMigrationService     | 2016-01-01  |
 | AWS Device Farm                     | DeviceFarm                   | 2015-06-23  |
@@ -254,8 +255,8 @@ to be backwards compatible.
 | AWS IoT                             | IoT                          | 2015-05-28  |
 | AWS IoT Data Plane                  | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service          | KMS                          | 2014-11-01  |
-| AWS Lambda                          | Lambda                       | 2015-03-31  |
 | AWS Lambda                          | LambdaPreview                | 2014-11-11  |
+| AWS Lambda                          | Lambda                       | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics | 2015-07-01  |
 | AWS OpsWorks                        | OpsWorks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | OpsWorksCM                   | 2016-11-01  |

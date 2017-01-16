@@ -44,6 +44,7 @@ module Aws
     CognitoIdentityProvider
     CognitoSync
     ConfigService
+    Cur
     DatabaseMigrationService
     DataPipeline
     DeviceFarm
