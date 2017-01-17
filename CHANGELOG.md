@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws:: - Updated the API for Amazon DynamoDB.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
+
+* Feature - Aws::Polly - Updated the documentation for Amazon Polly.
+
+* Feature - Aws::Rekognition - Updated the documentation, and API for Amazon Rekognition.
+
+* Feature - Aws::Route53 - Updated the API for Amazon Route 53.
+
 2.6.46 (2017-01-16)
 ------------------
 
