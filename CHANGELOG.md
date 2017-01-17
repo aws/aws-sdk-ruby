@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.47 (2017-01-17)
+------------------
+
 * Feature - Aws:: - Updated the API for Amazon DynamoDB.
 
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
