@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
 2.6.47 (2017-01-17)
 ------------------
 
