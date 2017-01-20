@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.50 (2017-01-20)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 * Feature - Aws::Health - Updated the documentation for AWS Health APIs and Notifications.
