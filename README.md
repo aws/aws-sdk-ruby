@@ -242,7 +242,7 @@ to be backwards compatible.
 | AWS CodeDeploy                      | CodeDeploy                   | 2014-10-06  |
 | AWS CodePipeline                    | CodePipeline                 | 2015-07-09  |
 | AWS Config                          | ConfigService                | 2014-11-12  |
-| AWS Cost and Usage Report Service   | Cur                          | 2017-01-06  |
+| AWS Cost and Usage Report Service   | CostandUsageReportService    | 2017-01-06  |
 | AWS Data Pipeline                   | DataPipeline                 | 2012-10-29  |
 | AWS Database Migration Service      | DatabaseMigrationService     | 2016-01-01  |
 | AWS Device Farm                     | DeviceFarm                   | 2015-06-23  |
