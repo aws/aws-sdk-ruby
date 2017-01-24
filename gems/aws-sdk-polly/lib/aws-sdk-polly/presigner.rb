@@ -55,7 +55,7 @@ module Aws
           region: @region,
           credentials_provider: @credentials
         )
-        url = Aws::EndpointProvider.resolve(signer.region, 'polly')
+        url = Aws::Partitions::EndpointProvider.resolve(signer.region, 'polly')
         url += "/v1/speech?#{query}"
         pre_signed_url = signer.presign_url(
           http_method: 'GET',
