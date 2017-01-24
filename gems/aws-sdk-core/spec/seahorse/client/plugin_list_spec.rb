@@ -1,4 +1,4 @@
-require_relative '../../spec_helper'
+require 'spec_helper'
 
 module Seahorse
   module Client
@@ -87,6 +87,13 @@ module Seahorse
           prefix = File.dirname(File.dirname(File.dirname(__FILE__)))
           plugins.add("#{prefix}/fixtures/plugin.SeahorseFixtures::Plugin")
           expect(plugins.to_a).to eq([SeahorseFixtures::Plugin])
+        end
+
+        it 'requires prefixes including dot from plugin names when loading' do
+          expect(Kernel.const_defined?(:YellowSeahorseFixtures)).to eq(false)
+          prefix = File.dirname(File.dirname(File.dirname(__FILE__)))
+          plugins.add("#{prefix}/fixtures/example.com/plugin.YellowSeahorseFixtures::Plugin")
+          expect(plugins.to_a).to eq([YellowSeahorseFixtures::Plugin])
         end
 
       end

@@ -5069,7 +5069,10 @@ module Aws::EC2
     #     supported type is `ipsec.1`.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -5142,7 +5145,10 @@ module Aws::EC2
     #   * `value` - The value for one of the options.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -5379,8 +5385,8 @@ module Aws::EC2
     #   * `instance-family` - The instance family of the offering (e.g.,
     #     `m4`).
     #
-    #   * `payment-option` - The payment option (`No Upfront` \| `Partial
-    #     Upfront` \| `All Upfront`).
+    #   * `payment-option` - The payment option (`NoUpfront` \|
+    #     `PartialUpfront` \| `AllUpfront`).
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -5444,8 +5450,8 @@ module Aws::EC2
     #
     #   * `instance-family` - The instance family (e.g., `m4`).
     #
-    #   * `payment-option` - The payment option (`No Upfront` \| `Partial
-    #     Upfront` \| `All Upfront`).
+    #   * `payment-option` - The payment option (`NoUpfront` \|
+    #     `PartialUpfront` \| `AllUpfront`).
     #
     #   * `state` - The state of the reservation (`payment-pending` \|
     #     `payment-failed` \| `active` \| `retired`).
@@ -5792,7 +5798,10 @@ module Aws::EC2
     #   * `state-reason-message` - The message for the state change.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the tag-value filter. For example, if you use
@@ -6406,7 +6415,10 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource, where `tag`\:*key* is the tag's key.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -6508,7 +6520,10 @@ module Aws::EC2
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -6820,7 +6835,10 @@ module Aws::EC2
     #   * `network-acl-id` - The ID of the network ACL.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -7051,7 +7069,10 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet for the network interface.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -7693,7 +7714,10 @@ module Aws::EC2
     #     `active` \| `payment-failed` \| `retired`).
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -7824,7 +7848,10 @@ module Aws::EC2
     #     connection specified in a route in the table.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -8321,7 +8348,10 @@ module Aws::EC2
     #     `error`).
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -8770,7 +8800,10 @@ module Aws::EC2
     #     instance request.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -9050,7 +9083,10 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -9390,7 +9426,10 @@ module Aws::EC2
     #     `in-use` \| `deleting` \| `deleted` \| `error`).
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -9606,7 +9645,10 @@ module Aws::EC2
     #     ClassicLink (`true` \| `false`).
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -9836,7 +9878,10 @@ module Aws::EC2
     #     the status of the VPC peering connection, if applicable.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -9925,7 +9970,10 @@ module Aws::EC2
     #   * `state` - The state of the VPC (`pending` \| `available`).
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -10012,7 +10060,10 @@ module Aws::EC2
     #     a BGP device.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -10098,7 +10149,10 @@ module Aws::EC2
     #     `available` \| `deleting` \| `deleted`).
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for
+    #     the filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -14887,6 +14941,10 @@ module Aws::EC2
     #   specified subnet should be assigned an IPv6 address. This includes a
     #   network interface that's created when launching an instance into
     #   the subnet (the instance therefore receives an IPv6 address).
+    #
+    #   If you enable the IPv6 addressing feature for your subnet, your
+    #   network interface or instance only receives an IPv6 address if it's
+    #   created using version `2016-11-15` or later of the Amazon EC2 API.
     #   @return [Types::AttributeBooleanValue]
     #
     class ModifySubnetAttributeRequest < Struct.new(
@@ -15812,8 +15870,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] host_id
-    #   The ID of the Dedicted host on which the instance resides. This
-    #   parameter is not support for the ImportInstance command.
+    #   The ID of the Dedicated Host on which the instance resides. This
+    #   parameter is not supported for the ImportInstance command.
     #   @return [String]
     #
     # @!attribute [rw] affinity
@@ -17075,6 +17133,7 @@ module Aws::EC2
     #               placement: {
     #                 availability_zone: "String",
     #                 group_name: "String",
+    #                 tenancy: "default", # accepts default, dedicated, host
     #               },
     #               kernel_id: "String",
     #               ramdisk_id: "String",
@@ -17192,6 +17251,7 @@ module Aws::EC2
     #           placement: {
     #             availability_zone: "String",
     #             group_name: "String",
+    #             tenancy: "default", # accepts default, dedicated, host
     #           },
     #           kernel_id: "String",
     #           ramdisk_id: "String",
@@ -17395,6 +17455,7 @@ module Aws::EC2
     #         placement: {
     #           availability_zone: "String",
     #           group_name: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
     #         },
     #         kernel_id: "String",
     #         ramdisk_id: "String",
@@ -20278,6 +20339,7 @@ module Aws::EC2
     #         placement: {
     #           availability_zone: "String",
     #           group_name: "String",
+    #           tenancy: "default", # accepts default, dedicated, host
     #         },
     #         kernel_id: "String",
     #         ramdisk_id: "String",
@@ -20536,6 +20598,7 @@ module Aws::EC2
     #             placement: {
     #               availability_zone: "String",
     #               group_name: "String",
+    #               tenancy: "default", # accepts default, dedicated, host
     #             },
     #             kernel_id: "String",
     #             ramdisk_id: "String",
@@ -20861,6 +20924,7 @@ module Aws::EC2
     #       {
     #         availability_zone: "String",
     #         group_name: "String",
+    #         tenancy: "default", # accepts default, dedicated, host
     #       }
     #
     # @!attribute [rw] availability_zone
@@ -20874,9 +20938,16 @@ module Aws::EC2
     #   The name of the placement group (for cluster instances).
     #   @return [String]
     #
+    # @!attribute [rw] tenancy
+    #   The tenancy of the instance (if the instance is running in a VPC).
+    #   An instance with a tenancy of `dedicated` runs on single-tenant
+    #   hardware. The `host` tenancy is not supported for Spot instances.
+    #   @return [String]
+    #
     class SpotPlacement < Struct.new(
       :availability_zone,
-      :group_name)
+      :group_name,
+      :tenancy)
       include Aws::Structure
     end
 

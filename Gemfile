@@ -23,7 +23,7 @@ group :test do
   # faster xml libraries
   gem 'ox' unless ENV['PURE_RUBY']
   gem 'libxml-ruby' unless ENV['PURE_RUBY']
-  gem 'nokogiri' unless ENV['PURE_RUBY']
+  gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
   gem 'oga'
 
   # faster json libraries

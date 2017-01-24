@@ -625,7 +625,10 @@ module Aws::EC2
     #     the status of the VPC peering connection, if applicable.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -931,7 +934,10 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet for the instance.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource, where `tag`\:*key* is the tag's key.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -1010,7 +1016,10 @@ module Aws::EC2
     #   * `internet-gateway-id` - The ID of the Internet gateway.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -1109,7 +1118,10 @@ module Aws::EC2
     #   * `network-acl-id` - The ID of the network ACL.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -1268,7 +1280,10 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet for the network interface.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -1355,7 +1370,10 @@ module Aws::EC2
     #     the status of the VPC peering connection, if applicable.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -1466,7 +1484,10 @@ module Aws::EC2
     #     connection specified in a route in the table.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use
@@ -1653,7 +1674,10 @@ module Aws::EC2
     #   * `subnet-id` - The ID of the subnet.
     #
     #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-    #     to the resource.
+    #     to the resource. Specify the key of the tag in the filter name and
+    #     the value of the tag in the filter value. For example, for the tag
+    #     Purpose=X, specify `tag:Purpose` for the filter name and `X` for the
+    #     filter value.
     #
     #   * `tag-key` - The key of a tag assigned to the resource. This filter
     #     is independent of the `tag-value` filter. For example, if you use

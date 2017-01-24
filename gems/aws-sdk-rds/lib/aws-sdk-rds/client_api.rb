@@ -309,6 +309,7 @@ module Aws::RDS
     ProvisionedIopsNotAvailableInAZFault = Shapes::StructureShape.new(name: 'ProvisionedIopsNotAvailableInAZFault')
     PurchaseReservedDBInstancesOfferingMessage = Shapes::StructureShape.new(name: 'PurchaseReservedDBInstancesOfferingMessage')
     PurchaseReservedDBInstancesOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedDBInstancesOfferingResult')
+    ReadReplicaDBClusterIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaDBClusterIdentifierList')
     ReadReplicaDBInstanceIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaDBInstanceIdentifierList')
     ReadReplicaIdentifierList = Shapes::ListShape.new(name: 'ReadReplicaIdentifierList')
     RebootDBInstanceMessage = Shapes::StructureShape.new(name: 'RebootDBInstanceMessage')
@@ -480,6 +481,8 @@ module Aws::RDS
     CopyDBSnapshotMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CopyDBSnapshotMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CopyDBSnapshotMessage.add_member(:copy_tags, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyTags"))
+    CopyDBSnapshotMessage.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: String, location_name: "PreSignedUrl"))
+    CopyDBSnapshotMessage.add_member(:destination_region, Shapes::ShapeRef.new(shape: String, location_name: "DestinationRegion"))
     CopyDBSnapshotMessage.struct_class = Types::CopyDBSnapshotMessage
 
     CopyDBSnapshotResult.add_member(:db_snapshot, Shapes::ShapeRef.new(shape: DBSnapshot, location_name: "DBSnapshot"))
@@ -812,6 +815,7 @@ module Aws::RDS
     DBInstance.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
     DBInstance.add_member(:read_replica_source_db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaSourceDBInstanceIdentifier"))
     DBInstance.add_member(:read_replica_db_instance_identifiers, Shapes::ShapeRef.new(shape: ReadReplicaDBInstanceIdentifierList, location_name: "ReadReplicaDBInstanceIdentifiers"))
+    DBInstance.add_member(:read_replica_db_cluster_identifiers, Shapes::ShapeRef.new(shape: ReadReplicaDBClusterIdentifierList, location_name: "ReadReplicaDBClusterIdentifiers"))
     DBInstance.add_member(:license_model, Shapes::ShapeRef.new(shape: String, location_name: "LicenseModel"))
     DBInstance.add_member(:iops, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Iops"))
     DBInstance.add_member(:option_group_memberships, Shapes::ShapeRef.new(shape: OptionGroupMembershipList, location_name: "OptionGroupMemberships"))
@@ -1628,6 +1632,8 @@ module Aws::RDS
 
     PurchaseReservedDBInstancesOfferingResult.add_member(:reserved_db_instance, Shapes::ShapeRef.new(shape: ReservedDBInstance, location_name: "ReservedDBInstance"))
     PurchaseReservedDBInstancesOfferingResult.struct_class = Types::PurchaseReservedDBInstancesOfferingResult
+
+    ReadReplicaDBClusterIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaDBClusterIdentifier")
 
     ReadReplicaDBInstanceIdentifierList.member = Shapes::ShapeRef.new(shape: String, location_name: "ReadReplicaDBInstanceIdentifier")
 

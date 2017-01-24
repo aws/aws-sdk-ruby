@@ -21,6 +21,9 @@
   "AutoScaling": {
     "models": "autoscaling/2011-01-01"
   },
+  "Batch": {
+    "models": "batch/2016-08-10"
+  },
   "Budgets": {
     "models": "budgets/2016-10-20"
   },
@@ -224,7 +227,13 @@
     "models": "polly/2016-06-10"
   },
   "RDS": {
-    "models": "rds/2014-10-31"
+    "models": "rds/2014-10-31",
+    "addPlugins": [
+      "Aws::RDS::Plugins::CrossRegionCopying"
+    ],
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    }
   },
   "Redshift": {
     "models": "redshift/2012-12-01"

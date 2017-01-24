@@ -20,6 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
+require 'aws-sdk-rds/plugins/cross_region_copying.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:rds)
 
@@ -47,6 +48,7 @@ module Aws::RDS
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
+    add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
 
     # @option options [required, Aws::CredentialProvider] :credentials
     #   Your AWS credentials. This can be an instance of any one of the
@@ -663,7 +665,73 @@ module Aws::RDS
     # `SourceDBSnapshotIdentifier` must be the Amazon Resource Name (ARN) of
     # the shared DB snapshot.
     #
-    # You can not copy an encrypted DB snapshot from another AWS region.
+    # You can copy an encrypted DB snapshot from another AWS Region. In that
+    # case, the region where you call the `CopyDBSnapshot` action is the
+    # destination region for the encrypted DB snapshot to be copied to. To
+    # copy an encrypted DB snapshot from another region, you must provide
+    # the following values:
+    #
+    # * `KmsKeyId` - The AWS Key Management System (KMS) key identifier for
+    #   the key to use to encrypt the copy of the DB snapshot in the
+    #   destination region.
+    #
+    # * `PreSignedUrl` - A URL that contains a Signature Version 4 signed
+    #   request for the `CopyDBSnapshot` action to be called in the source
+    #   region where the DB snapshot will be copied from. The presigned URL
+    #   must be a valid request for the `CopyDBSnapshot` API action that can
+    #   be executed in the source region that contains the encrypted DB
+    #   snapshot to be copied.
+    #
+    #   The presigned URL request must contain the following parameter
+    #   values:
+    #
+    #   * `DestinationRegion` - The AWS Region that the encrypted DB
+    #     snapshot will be copied to. This region is the same one where the
+    #     `CopyDBSnapshot` action is called that contains this presigned
+    #     URL.
+    #
+    #     For example, if you copy an encrypted DB snapshot from the
+    #     us-west-2 region to the us-east-1 region, then you will call the
+    #     `CopyDBSnapshot` action in the us-east-1 region and provide a
+    #     presigned URL that contains a call to the `CopyDBSnapshot` action
+    #     in the us-west-2 region. For this example, the `DestinationRegion`
+    #     in the presigned URL must be set to the us-east-1 region.
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the copy of the DB snapshot in the destination region. This
+    #     identifier is the same for both the `CopyDBSnapshot` action that
+    #     is called in the destination region, and the action contained in
+    #     the presigned URL.
+    #
+    #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
+    #     encrypted snapshot to be copied. This identifier must be in the
+    #     Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you copy an encrypted DB snapshot from the us-west-2
+    #     region, then your `SourceDBSnapshotIdentifier` looks like this
+    #     example:
+    #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    # * `TargetDBSnapshotIdentifier` - The identifier for the new copy of
+    #   the DB snapshot in the destination region.
+    #
+    # * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
+    #   encrypted snapshot to be copied. This identifier must be in the ARN
+    #   format for the source region and is the same value as the
+    #   `SourceDBSnapshotIdentifier` in the presigned URL.
+    #
+    # For more information on copying encrypted snapshots from one region to
+    # another, see [ Copying an Encrypted DB Snapshot to Another Region][3]
+    # in the Amazon RDS User Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    # [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # [3]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Encrypted.CrossRegion
     #
     # @option params [required, String] :source_db_snapshot_identifier
     #   The identifier for the source DB snapshot.
@@ -724,8 +792,22 @@ module Aws::RDS
     #   copy of the DB snapshot is encrypted with the same KMS key as the
     #   source DB snapshot.
     #
+    #   If you copy an encrypted DB snapshot from your AWS account, you can
+    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
+    #   encryption key. If you don't specify a value for `KmsKeyId`, then the
+    #   copy of the DB snapshot is encrypted with the same KMS key as the
+    #   source DB snapshot. If you copy an encrypted snapshot to a different
+    #   AWS region, then you must specify a KMS key for the destination AWS
+    #   region.
+    #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
     #   account, then you must specify a value for `KmsKeyId`.
+    #
+    #   To copy an encrypted DB snapshot to another region, you must set
+    #   `KmsKeyId` to the KMS key ID used to encrypt the copy of the DB
+    #   snapshot in the destination region. KMS encryption keys are specific
+    #   to the region that they are created in, and you cannot use encryption
+    #   keys from one region in another region.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags.
@@ -733,6 +815,53 @@ module Aws::RDS
     # @option params [Boolean] :copy_tags
     #   True to copy all tags from the source DB snapshot to the target DB
     #   snapshot; otherwise false. The default is false.
+    #
+    # @option params [String] :pre_signed_url
+    #   The URL that contains a Signature Version 4 signed request for the
+    #   `CopyDBSnapshot` API action in the AWS region that contains the source
+    #   DB snapshot to copy. The `PreSignedUrl` parameter must be used when
+    #   copying an encrypted DB snapshot from another AWS region.
+    #
+    #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
+    #   action that can be executed in the source region that contains the
+    #   encrypted DB snapshot to be copied. The presigned URL request must
+    #   contain the following parameter values:
+    #
+    #   * `DestinationRegion` - The AWS Region that the encrypted DB snapshot
+    #     will be copied to. This region is the same one where the
+    #     `CopyDBSnapshot` action is called that contains this presigned URL.
+    #
+    #     For example, if you copy an encrypted DB snapshot from the us-west-2
+    #     region to the us-east-1 region, then you will call the
+    #     `CopyDBSnapshot` action in the us-east-1 region and provide a
+    #     presigned URL that contains a call to the `CopyDBSnapshot` action in
+    #     the us-west-2 region. For this example, the `DestinationRegion` in
+    #     the presigned URL must be set to the us-east-1 region.
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the copy of the DB snapshot in the destination region. This is the
+    #     same identifier for both the `CopyDBSnapshot` action that is called
+    #     in the destination region, and the action contained in the presigned
+    #     URL.
+    #
+    #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
+    #     encrypted snapshot to be copied. This identifier must be in the
+    #     Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you are copying an encrypted DB snapshot from the
+    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` would look
+    #     like Example:
+    #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
+    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
+    # @option params [String] :destination_region
     #
     # @return [Types::CopyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -751,6 +880,8 @@ module Aws::RDS
     #       },
     #     ],
     #     copy_tags: false,
+    #     pre_signed_url: "String",
+    #     destination_region: "String",
     #   })
     #
     # @example Response structure
@@ -893,7 +1024,8 @@ module Aws::RDS
     # Creates a new Amazon Aurora DB cluster.
     #
     # You can use the `ReplicationSourceIdentifier` parameter to create the
-    # DB cluster as a Read Replica of another DB cluster.
+    # DB cluster as a Read Replica of another DB cluster or Amazon RDS MySQL
+    # DB instance.
     #
     # For more information on Amazon Aurora, see [Aurora on Amazon RDS][1]
     # in the *Amazon RDS User Guide.*
@@ -1056,8 +1188,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
     # @option params [String] :replication_source_identifier
-    #   The Amazon Resource Name (ARN) of the source DB cluster if this DB
-    #   cluster is created as a Read Replica.
+    #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
+    #   if this DB cluster is created as a Read Replica.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags.
@@ -1841,6 +1973,9 @@ module Aws::RDS
     #
     #   **Oracle 12c**
     #
+    #   * `12.1.0.2.v6` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
+    #
     #   * `12.1.0.2.v5` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
     #
@@ -1877,6 +2012,8 @@ module Aws::RDS
     #     except ap-south-1, ap-northeast-2)
     #
     #   **Oracle 11g**
+    #
+    #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v9` (supported for EE, SE1, and SE, in all AWS regions)
     #
@@ -2209,6 +2346,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -2512,6 +2651,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -3428,6 +3569,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -4412,11 +4555,14 @@ module Aws::RDS
     #
     #   Supported filters:
     #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs). The results list will only include
+    #     information about the DB instances associated with the DB Clusters
+    #     identified by these ARNs.
+    #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB instances identified by these ARNs.
-    #
-    #   ^
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -4510,6 +4656,8 @@ module Aws::RDS
     #   resp.db_instances[0].read_replica_source_db_instance_identifier #=> String
     #   resp.db_instances[0].read_replica_db_instance_identifiers #=> Array
     #   resp.db_instances[0].read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instances[0].read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instances[0].read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instances[0].license_model #=> String
     #   resp.db_instances[0].iops #=> Integer
     #   resp.db_instances[0].option_group_memberships #=> Array
@@ -7350,6 +7498,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -7912,6 +8062,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -8203,6 +8355,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -9322,7 +9476,8 @@ module Aws::RDS
     #
     #   Default: The same as source
     #
-    #   Constraint: Must be compatible with the engine of the source
+    #   Constraint: Must be compatible with the engine of the source. You can
+    #   restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
     #
     #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
     #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
@@ -9475,6 +9630,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array
@@ -9816,6 +9973,8 @@ module Aws::RDS
     #   resp.db_instance.read_replica_source_db_instance_identifier #=> String
     #   resp.db_instance.read_replica_db_instance_identifiers #=> Array
     #   resp.db_instance.read_replica_db_instance_identifiers[0] #=> String
+    #   resp.db_instance.read_replica_db_cluster_identifiers #=> Array
+    #   resp.db_instance.read_replica_db_cluster_identifiers[0] #=> String
     #   resp.db_instance.license_model #=> String
     #   resp.db_instance.iops #=> Integer
     #   resp.db_instance.option_group_memberships #=> Array

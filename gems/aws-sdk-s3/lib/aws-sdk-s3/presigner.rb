@@ -149,7 +149,8 @@ module Aws
             'proxy-authorization',
             'from',
             'referer',
-            'user-agent'
+            'user-agent',
+            'x-amzn-trace-id'
           ],
           uri_escape_path: false
         )

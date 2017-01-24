@@ -7,7 +7,7 @@ module AwsSdkCodeGenerator
       # @option options [required, Service] :service
       def initialize(options)
         @service = options.fetch(:service)
-        @gem_path = Underscore.underscore(@service.gem_name)
+        @gem_path = @service.gem_name
       end
 
       def full_name

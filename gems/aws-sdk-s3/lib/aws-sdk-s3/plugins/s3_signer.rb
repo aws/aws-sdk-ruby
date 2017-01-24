@@ -187,7 +187,7 @@ module Aws
               region: options[:region],
               credentials_provider: options[:credentials],
               uri_escape_path: false,
-              unsigned_headers: ['content-length'],
+              unsigned_headers: ['content-length', 'x-amzn-trace-id'],
             })
           end
 

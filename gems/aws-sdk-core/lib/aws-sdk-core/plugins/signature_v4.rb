@@ -80,7 +80,7 @@ module Aws
               service: cfg.sigv4_name,
               region: cfg.sigv4_region,
               credentials_provider: cfg.credentials,
-              unsigned_headers: ['content-length', 'user-agent']
+              unsigned_headers: ['content-length', 'user-agent', 'x-amzn-trace-id']
             )
           elsif cfg.credentials
             raise Errors::MissingRegionError

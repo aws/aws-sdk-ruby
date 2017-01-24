@@ -19,7 +19,7 @@ module AwsSdkCodeGenerator
         y.yield('spec/spec_helper.rb', spec_helper_file)
         y.yield('VERSION', version_file)
         code = CodeBuilder.new(@options)
-        code.source_files(prefix: @service.gem_name).each do |path, code|
+        code.source_files.each do |path, code|
           y.yield("lib/#{path}", code)
         end
       end.each(&block)

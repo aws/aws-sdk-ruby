@@ -189,8 +189,8 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     # @option options [String] :replication_source_identifier
-    #   The Amazon Resource Name (ARN) of the source DB cluster if this DB
-    #   cluster is created as a Read Replica.
+    #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
+    #   if this DB cluster is created as a Read Replica.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [Boolean] :storage_encrypted
@@ -788,6 +788,9 @@ module Aws::RDS
     #
     #   **Oracle 12c**
     #
+    #   * `12.1.0.2.v6` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
+    #
     #   * `12.1.0.2.v5` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
     #
@@ -824,6 +827,8 @@ module Aws::RDS
     #     except ap-south-1, ap-northeast-2)
     #
     #   **Oracle 11g**
+    #
+    #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v9` (supported for EE, SE1, and SE, in all AWS regions)
     #
@@ -1649,11 +1654,14 @@ module Aws::RDS
     #
     #   Supported filters:
     #
+    #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+    #     Amazon Resource Names (ARNs). The results list will only include
+    #     information about the DB instances associated with the DB Clusters
+    #     identified by these ARNs.
+    #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
     #     Amazon Resource Names (ARNs). The results list will only include
     #     information about the DB instances identified by these ARNs.
-    #
-    #   ^
     # @return [DBInstance::Collection]
     def db_instances(options = {})
       batches = Enumerator.new do |y|

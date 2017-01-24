@@ -87,7 +87,9 @@ module Seahorse
             @canonical_name = plugin.name || plugin.object_id
             @plugin = plugin
           when Symbol, String
-            @canonical_name, @gem_name = plugin.to_s.split('.').reverse
+            words = plugin.to_s.split('.')
+            @canonical_name = words.pop
+            @gem_name = words.empty? ? nil : words.join('.')
             @plugin = nil
           else
             @canonical_name = plugin.object_id

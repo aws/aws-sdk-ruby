@@ -266,6 +266,8 @@ module Aws::RDS
     #       },
     #     ],
     #     copy_tags: false,
+    #     pre_signed_url: "String",
+    #     destination_region: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_snapshot_identifier
@@ -297,13 +299,72 @@ module Aws::RDS
     #   copy of the DB snapshot is encrypted with the same KMS key as the
     #   source DB snapshot.
     #
+    #   If you copy an encrypted DB snapshot from your AWS account, you can
+    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
+    #   encryption key. If you don't specify a value for `KmsKeyId`, then the
+    #   copy of the DB snapshot is encrypted with the same KMS key as the
+    #   source DB snapshot. If you copy an encrypted snapshot to a different
+    #   AWS region, then you must specify a KMS key for the destination AWS
+    #   region.
+    #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
     #   account, then you must specify a value for `KmsKeyId`.
+    #
+    #   To copy an encrypted DB snapshot to another region, you must set
+    #   `KmsKeyId` to the KMS key ID used to encrypt the copy of the DB
+    #   snapshot in the destination region. KMS encryption keys are specific
+    #   to the region that they are created in, and you cannot use encryption
+    #   keys from one region in another region.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [Boolean] :copy_tags
     #   True to copy all tags from the source DB snapshot to the target DB
     #   snapshot; otherwise false. The default is false.
+    # @option options [String] :pre_signed_url
+    #   The URL that contains a Signature Version 4 signed request for the
+    #   `CopyDBSnapshot` API action in the AWS region that contains the source
+    #   DB snapshot to copy. The `PreSignedUrl` parameter must be used when
+    #   copying an encrypted DB snapshot from another AWS region.
+    #
+    #   The presigned URL must be a valid request for the `CopyDBSnapshot` API
+    #   action that can be executed in the source region that contains the
+    #   encrypted DB snapshot to be copied. The presigned URL request must
+    #   contain the following parameter values:
+    #
+    #   * `DestinationRegion` - The AWS Region that the encrypted DB snapshot
+    #     will be copied to. This region is the same one where the
+    #     `CopyDBSnapshot` action is called that contains this presigned URL.
+    #
+    #     For example, if you copy an encrypted DB snapshot from the us-west-2
+    #     region to the us-east-1 region, then you will call the
+    #     `CopyDBSnapshot` action in the us-east-1 region and provide a
+    #     presigned URL that contains a call to the `CopyDBSnapshot` action in
+    #     the us-west-2 region. For this example, the `DestinationRegion` in
+    #     the presigned URL must be set to the us-east-1 region.
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the copy of the DB snapshot in the destination region. This is the
+    #     same identifier for both the `CopyDBSnapshot` action that is called
+    #     in the destination region, and the action contained in the presigned
+    #     URL.
+    #
+    #   * `SourceDBSnapshotIdentifier` - The DB snapshot identifier for the
+    #     encrypted snapshot to be copied. This identifier must be in the
+    #     Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you are copying an encrypted DB snapshot from the
+    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` would look
+    #     like Example:
+    #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
+    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # @option options [String] :destination_region
     # @return [DBSnapshot]
     def copy(options = {})
       options = options.merge(source_db_snapshot_identifier: @snapshot_id)
@@ -456,7 +517,8 @@ module Aws::RDS
     #
     #   Default: The same as source
     #
-    #   Constraint: Must be compatible with the engine of the source
+    #   Constraint: Must be compatible with the engine of the source. You can
+    #   restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.
     #
     #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
     #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|

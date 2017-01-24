@@ -4231,6 +4231,7 @@ module Aws::EC2
 
     SpotPlacement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     SpotPlacement.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
+    SpotPlacement.add_member(:tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "tenancy"))
     SpotPlacement.struct_class = Types::SpotPlacement
 
     SpotPrice.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))

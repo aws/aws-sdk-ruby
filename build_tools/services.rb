@@ -39,7 +39,6 @@ module BuildTools
 
     def build_service(svc_name, config)
       api = load_api(svc_name, config['models'])
-      docs = load_docs(svc_name, config['models'])
       AwsSdkCodeGenerator::Service.new(
         name: svc_name,
         gem_version: gem_version(config['gemName'] || "aws-sdk-#{svc_name.downcase}"),
@@ -90,7 +89,12 @@ module BuildTools
     end
 
     def gem_version(gem_name)
-      File.read("#{$GEMS_DIR}/#{gem_name}/VERSION").strip
+      path = "#{$GEMS_DIR}/#{gem_name}/VERSION"
+      if File.exists?(path)
+        File.read(path).rstrip
+      else
+        "1.0.0.rc1"
+      end
     end
 
     def gem_dependencies(api, dependencies)

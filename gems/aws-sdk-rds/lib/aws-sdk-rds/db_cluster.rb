@@ -451,8 +451,8 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     # @option options [String] :replication_source_identifier
-    #   The Amazon Resource Name (ARN) of the source DB cluster if this DB
-    #   cluster is created as a Read Replica.
+    #   The Amazon Resource Name (ARN) of the source DB instance or DB cluster
+    #   if this DB cluster is created as a Read Replica.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [Boolean] :storage_encrypted

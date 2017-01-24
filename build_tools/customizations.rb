@@ -89,6 +89,15 @@ module BuildTools
 
     end
 
+    api('RDS') do |api|
+      api['shapes']['CopyDBSnapshotMessage']['members']['DestinationRegion'] = {"shape" => "String"}
+    end
+
+    #doc('RDS') do |docs|
+    #  docs['shapes']['String']['refs']['CopyDBSnapshotMessage$SourceRegion'] =
+    #    "<p>The region which you are copying a snapshot from. If the snapshot is encrypted, this parameter is required.</p>"
+    #end
+
     api('Route53') do |api|
       api['shapes']['PageMaxItems']['type'] = 'integer'
     end

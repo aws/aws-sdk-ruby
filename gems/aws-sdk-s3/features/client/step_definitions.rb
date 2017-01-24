@@ -278,3 +278,11 @@ end
 Given(/^I have a bucket configured with a virtual hosted CNAME$/) do
   @bucket_name = cfg_value('s3', 'virtual_hosted_bucket')
 end
+
+When(/^I get the bucket location$/) do
+  @response = @client.get_bucket_location(bucket: @bucket_name)
+end
+
+Then(/^the location constraint should be "([^"]*)"$/) do |lc|
+  expect(@response.location_constraint).to eq(lc)
+end

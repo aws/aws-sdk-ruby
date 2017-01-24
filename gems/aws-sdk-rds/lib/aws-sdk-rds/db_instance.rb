@@ -202,6 +202,13 @@ module Aws::RDS
       data.read_replica_db_instance_identifiers
     end
 
+    # Contains one or more identifiers of Aurora DB clusters that are read
+    # replicas of this DB instance.
+    # @return [Array<String>]
+    def read_replica_db_cluster_identifiers
+      data.read_replica_db_cluster_identifiers
+    end
+
     # License model information for this DB instance.
     # @return [String]
     def license_model
@@ -926,6 +933,9 @@ module Aws::RDS
     #
     #   **Oracle 12c**
     #
+    #   * `12.1.0.2.v6` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
+    #
     #   * `12.1.0.2.v5` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
     #
@@ -962,6 +972,8 @@ module Aws::RDS
     #     except ap-south-1, ap-northeast-2)
     #
     #   **Oracle 11g**
+    #
+    #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v9` (supported for EE, SE1, and SE, in all AWS regions)
     #
