@@ -320,8 +320,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | Aws::WorkSpaces                   | aws-sdk-workspaces                   | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling       | aws-sdk-applicationautoscaling       | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                  | aws-sdk-autoscaling                  | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancing         | aws-sdk-elasticloadbalancing         | 2012-06-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancingV2       | aws-sdk-elasticloadbalancingv2       | 2015-12-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancing         | aws-sdk-elasticloadbalancing         | 2012-06-01  |
 
 ## License
 

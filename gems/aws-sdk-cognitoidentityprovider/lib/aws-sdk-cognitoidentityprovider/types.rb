@@ -54,6 +54,34 @@ module Aws::CognitoIdentityProvider
     #
     class AddCustomAttributesResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass AdminAddUserToGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         username: "UsernameType", # required
+    #         group_name: "GroupNameType", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The group name.
+    #   @return [String]
+    #
+    class AdminAddUserToGroupRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :group_name)
+      include Aws::Structure
+    end
+
     # Represents the request to confirm user registration.
     #
     # @note When making an API call, you may pass AdminConfirmSignUpRequest
@@ -107,7 +135,7 @@ module Aws::CognitoIdentityProvider
     #   The user account expiration limit, in days, after which the account
     #   is no longer usable. To reset the account after that time limit, you
     #   must call AdminCreateUser again, specifying "RESEND" for the
-    #   MessageAction parameter.
+    #   MessageAction parameter. The default value for this paameter is 7.
     #   @return [Integer]
     #
     # @!attribute [rw] invite_message_template
@@ -669,6 +697,86 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AdminListGroupsForUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         username: "UsernameType", # required
+    #         user_pool_id: "UserPoolIdType", # required
+    #         limit: 1,
+    #         next_token: "PaginationKey",
+    #       }
+    #
+    # @!attribute [rw] username
+    #   The username for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The limit of the request to list groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    class AdminListGroupsForUserRequest < Struct.new(
+      :username,
+      :user_pool_id,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups
+    #   The groups that the user belongs to.
+    #   @return [Array<Types::GroupType>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    class AdminListGroupsForUserResponse < Struct.new(
+      :groups,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AdminRemoveUserFromGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         username: "UsernameType", # required
+    #         group_name: "GroupNameType", # required
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The group name.
+    #   @return [String]
+    #
+    class AdminRemoveUserFromGroupRequest < Struct.new(
+      :user_pool_id,
+      :username,
+      :group_name)
+      include Aws::Structure
+    end
+
     # Represents the request to reset a user's password as an
     # administrator.
     #
@@ -1199,6 +1307,71 @@ module Aws::CognitoIdentityProvider
     #
     class ConfirmSignUpResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass CreateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupNameType", # required
+    #         user_pool_id: "UserPoolIdType", # required
+    #         description: "DescriptionType",
+    #         role_arn: "ArnType",
+    #         precedence: 1,
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group. Must be unique.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string containing the description of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN for the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] precedence
+    #   A nonnegative integer value that specifies the precedence of this
+    #   group relative to the other groups that a user can belong to in the
+    #   user pool. Zero is the highest precedence value. Groups with lower
+    #   `Precedence` values take precedence over groups with higher or null
+    #   `Precedence` values. If a user belongs to two or more groups, it is
+    #   the group with the lowest precedence value whose role ARN will be
+    #   used in the `cognito:roles` and `cognito:preferred_role` claims in
+    #   the user's tokens.
+    #
+    #   Two groups can have the same `Precedence` value. If this happens,
+    #   neither group takes precedence over the other. If two groups with
+    #   the same `Precedence` have the same role ARN, that role is used in
+    #   the `cognito:preferred_role` claim in tokens for users in each
+    #   group. If the two groups have different role ARNs, the
+    #   `cognito:preferred_role` claim is not set in users' tokens.
+    #
+    #   The default `Precedence` value is null.
+    #   @return [Integer]
+    #
+    class CreateGroupRequest < Struct.new(
+      :group_name,
+      :user_pool_id,
+      :description,
+      :role_arn,
+      :precedence)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The group object for the group.
+    #   @return [Types::GroupType]
+    #
+    class CreateGroupResponse < Struct.new(
+      :group)
+      include Aws::Structure
+    end
+
     # Represents the request to create the user import job.
     #
     # @note When making an API call, you may pass CreateUserImportJobRequest
@@ -1273,7 +1446,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     #
     # @!attribute [rw] refresh_token_validity
-    #   Refreshes the token validity.
+    #   The validity of the refresh token, in days.
     #   @return [Integer]
     #
     # @!attribute [rw] read_attributes
@@ -1354,6 +1527,9 @@ module Aws::CognitoIdentityProvider
     #         sms_configuration: {
     #           sns_caller_arn: "ArnType", # required
     #           external_id: "StringType",
+    #         },
+    #         user_pool_tags: {
+    #           "StringType" => "StringType",
     #         },
     #         admin_create_user_config: {
     #           allow_admin_create_user_only: false,
@@ -1437,6 +1613,15 @@ module Aws::CognitoIdentityProvider
     #   The SMS configuration.
     #   @return [Types::SmsConfigurationType]
     #
+    # @!attribute [rw] user_pool_tags
+    #   The cost allocation tags for the user pool. For more information,
+    #   see [Adding Cost Allocation Tags to Your User Pool][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] admin_create_user_config
     #   The configuration for AdminCreateUser requests.
     #   @return [Types::AdminCreateUserConfigType]
@@ -1460,6 +1645,7 @@ module Aws::CognitoIdentityProvider
       :device_configuration,
       :email_configuration,
       :sms_configuration,
+      :user_pool_tags,
       :admin_create_user_config,
       :schema)
       include Aws::Structure
@@ -1474,6 +1660,28 @@ module Aws::CognitoIdentityProvider
     #
     class CreateUserPoolResponse < Struct.new(
       :user_pool)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupNameType", # required
+    #         user_pool_id: "UserPoolIdType", # required
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    class DeleteGroupRequest < Struct.new(
+      :group_name,
+      :user_pool_id)
       include Aws::Structure
     end
 
@@ -1918,6 +2126,37 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupNameType", # required
+    #         user_pool_id: "UserPoolIdType", # required
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    class GetGroupRequest < Struct.new(
+      :group_name,
+      :user_pool_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The group object for the group.
+    #   @return [Types::GroupType]
+    #
+    class GetGroupResponse < Struct.new(
+      :group)
+      include Aws::Structure
+    end
+
     # Represents the request to get user attribute verification.
     #
     # @note When making an API call, you may pass GetUserAttributeVerificationCodeRequest
@@ -2020,6 +2259,63 @@ module Aws::CognitoIdentityProvider
     # The response to the request to sign out all devices.
     #
     class GlobalSignOutResponse < Aws::EmptyStructure; end
+
+    # The group type.
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string containing the description of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN for the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] precedence
+    #   A nonnegative integer value that specifies the precedence of this
+    #   group relative to the other groups that a user can belong to in the
+    #   user pool. If a user belongs to two or more groups, it is the group
+    #   with the highest precedence whose role ARN will be used in the
+    #   `cognito:roles` and `cognito:preferred_role` claims in the user's
+    #   tokens. Groups with higher `Precedence` values take precedence over
+    #   groups with lower `Precedence` values or with null `Precedence`
+    #   values.
+    #
+    #   Two groups can have the same `Precedence` value. If this happens,
+    #   neither group takes precedence over the other. If two groups with
+    #   the same `Precedence` have the same role ARN, that role is used in
+    #   the `cognito:preferred_role` claim in tokens for users in each
+    #   group. If the two groups have different role ARNs, the
+    #   `cognito:preferred_role` claim is not set in users' tokens.
+    #
+    #   The default `Precedence` value is null.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date the group was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creation_date
+    #   The date the group was created.
+    #   @return [Time]
+    #
+    class GroupType < Struct.new(
+      :group_name,
+      :user_pool_id,
+      :description,
+      :role_arn,
+      :precedence,
+      :last_modified_date,
+      :creation_date)
+      include Aws::Structure
+    end
 
     # Initiates the authentication request.
     #
@@ -2194,6 +2490,52 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         limit: 1,
+    #         next_token: "PaginationKey",
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The limit of the request to list groups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    class ListGroupsRequest < Struct.new(
+      :user_pool_id,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] groups
+    #   The group objects for the groups.
+    #   @return [Array<Types::GroupType>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    class ListGroupsResponse < Struct.new(
+      :groups,
+      :next_token)
+      include Aws::Structure
+    end
+
     # Represents the request to list the user import jobs.
     #
     # @note When making an API call, you may pass ListUserImportJobsRequest
@@ -2338,6 +2680,58 @@ module Aws::CognitoIdentityProvider
     #
     class ListUserPoolsResponse < Struct.new(
       :user_pools,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListUsersInGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_pool_id: "UserPoolIdType", # required
+    #         group_name: "GroupNameType", # required
+    #         limit: 1,
+    #         next_token: "PaginationKey",
+    #       }
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The limit of the request to list users.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    class ListUsersInGroupRequest < Struct.new(
+      :user_pool_id,
+      :group_name,
+      :limit,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   The users returned in the request to list users.
+    #   @return [Array<Types::UserType>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    class ListUsersInGroupResponse < Struct.new(
+      :users,
       :next_token)
       include Aws::Structure
     end
@@ -2993,6 +3387,58 @@ module Aws::CognitoIdentityProvider
     #
     class UpdateDeviceStatusResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass UpdateGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         group_name: "GroupNameType", # required
+    #         user_pool_id: "UserPoolIdType", # required
+    #         description: "DescriptionType",
+    #         role_arn: "ArnType",
+    #         precedence: 1,
+    #       }
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_pool_id
+    #   The user pool ID for the user pool.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string containing the new description of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The new role ARN for the group. This is used for setting the
+    #   `cognito:roles` and `cognito:preferred_role` claims in the token.
+    #   @return [String]
+    #
+    # @!attribute [rw] precedence
+    #   The new precedence value for the group. For more information about
+    #   this parameter, see
+    #   [CreateGroupRequest](API_CreateGroupRequeste.html).
+    #   @return [Integer]
+    #
+    class UpdateGroupRequest < Struct.new(
+      :group_name,
+      :user_pool_id,
+      :description,
+      :role_arn,
+      :precedence)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group
+    #   The group object for the group.
+    #   @return [Types::GroupType]
+    #
+    class UpdateGroupResponse < Struct.new(
+      :group)
+      include Aws::Structure
+    end
+
     # Represents the request to update user attributes.
     #
     # @note When making an API call, you may pass UpdateUserAttributesRequest
@@ -3064,7 +3510,7 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] refresh_token_validity
-    #   The validity of the refresh token.
+    #   The validity of the refresh token, in days.
     #   @return [Integer]
     #
     # @!attribute [rw] read_attributes
@@ -3147,6 +3593,9 @@ module Aws::CognitoIdentityProvider
     #           sns_caller_arn: "ArnType", # required
     #           external_id: "StringType",
     #         },
+    #         user_pool_tags: {
+    #           "StringType" => "StringType",
+    #         },
     #         admin_create_user_config: {
     #           allow_admin_create_user_only: false,
     #           unused_account_validity_days: 1,
@@ -3217,6 +3666,15 @@ module Aws::CognitoIdentityProvider
     #   SMS configuration.
     #   @return [Types::SmsConfigurationType]
     #
+    # @!attribute [rw] user_pool_tags
+    #   The cost allocation tags for the user pool. For more information,
+    #   see [Adding Cost Allocation Tags to Your User Pool][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] admin_create_user_config
     #   The configuration for AdminCreateUser requests.
     #   @return [Types::AdminCreateUserConfigType]
@@ -3234,6 +3692,7 @@ module Aws::CognitoIdentityProvider
       :device_configuration,
       :email_configuration,
       :sms_configuration,
+      :user_pool_tags,
       :admin_create_user_config)
       include Aws::Structure
     end
@@ -3338,7 +3797,7 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The description of the user poool client.
+    # The description of the user pool client.
     #
     # @!attribute [rw] client_id
     #   The ID of the client associated with the user pool.
@@ -3388,7 +3847,7 @@ module Aws::CognitoIdentityProvider
     #   @return [Time]
     #
     # @!attribute [rw] refresh_token_validity
-    #   The validity of the refresh token.
+    #   The validity of the refresh token, in days.
     #   @return [Integer]
     #
     # @!attribute [rw] read_attributes
@@ -3565,6 +4024,15 @@ module Aws::CognitoIdentityProvider
     #   The SMS configuration.
     #   @return [Types::SmsConfigurationType]
     #
+    # @!attribute [rw] user_pool_tags
+    #   The cost allocation tags for the user pool. For more information,
+    #   see [Adding Cost Allocation Tags to Your User Pool][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] sms_configuration_failure
     #   The reason why the SMS configuration cannot send the message(s) to
     #   your users.
@@ -3599,6 +4067,7 @@ module Aws::CognitoIdentityProvider
       :estimated_number_of_users,
       :email_configuration,
       :sms_configuration,
+      :user_pool_tags,
       :sms_configuration_failure,
       :email_configuration_failure,
       :admin_create_user_config)

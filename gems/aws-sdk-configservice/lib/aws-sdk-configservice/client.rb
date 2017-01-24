@@ -336,7 +336,7 @@ module Aws::ConfigService
     #   `INSUFFICIENT_DATA`.
     #
     # @option params [String] :next_token
-    #   The `nextToken` string returned on a previous page that you use to get
+    #   The `NextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeComplianceByConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -418,7 +418,7 @@ module Aws::ConfigService
     #   specify 0, AWS Config uses the default.
     #
     # @option params [String] :next_token
-    #   The `nextToken` string returned on a previous page that you use to get
+    #   The `NextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeComplianceByResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -524,7 +524,7 @@ module Aws::ConfigService
     #   rules.
     #
     # @option params [String] :next_token
-    #   The `nextToken` string returned on a previous page that you use to get
+    #   The `NextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::DescribeConfigRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -555,7 +555,7 @@ module Aws::ConfigService
     #   resp.config_rules[0].source.source_identifier #=> String
     #   resp.config_rules[0].source.source_details #=> Array
     #   resp.config_rules[0].source.source_details[0].event_source #=> String, one of "aws.config"
-    #   resp.config_rules[0].source.source_details[0].message_type #=> String, one of "ConfigurationItemChangeNotification", "ConfigurationSnapshotDeliveryCompleted", "ScheduledNotification"
+    #   resp.config_rules[0].source.source_details[0].message_type #=> String, one of "ConfigurationItemChangeNotification", "ConfigurationSnapshotDeliveryCompleted", "ScheduledNotification", "OversizedConfigurationItemChangeNotification"
     #   resp.config_rules[0].source.source_details[0].maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
     #   resp.config_rules[0].input_parameters #=> String
     #   resp.config_rules[0].maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
@@ -760,7 +760,7 @@ module Aws::ConfigService
     #   specify 0, AWS Config uses the default.
     #
     # @option params [String] :next_token
-    #   The `nextToken` string returned on a previous page that you use to get
+    #   The `NextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::GetComplianceDetailsByConfigRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -817,7 +817,7 @@ module Aws::ConfigService
     #   `NOT_APPLICABLE`.
     #
     # @option params [String] :next_token
-    #   The `nextToken` string returned on a previous page that you use to get
+    #   The `NextToken` string returned on a previous page that you use to get
     #   the next page of results in a paginated response.
     #
     # @return [Types::GetComplianceDetailsByResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1185,7 +1185,7 @@ module Aws::ConfigService
     #         source_details: [
     #           {
     #             event_source: "aws.config", # accepts aws.config
-    #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+    #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
     #             maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #           },
     #         ],

@@ -143,9 +143,10 @@ module Aws::IAM
     # @option options [String] :user_name
     #   The name of the user.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   =,.@-
     #
     #
     #
@@ -179,9 +180,10 @@ module Aws::IAM
     # @option options [String] :user_name
     #   The name of the user whose MFA devices you want to list.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   =,.@-
     #
     #
     #
@@ -216,9 +218,10 @@ module Aws::IAM
     #   The name of the IAM user whose signing certificates you want to
     #   examine.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   =,.@-
     #
     #
     #

@@ -21,6 +21,8 @@ module Aws::SSM
     AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
     AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
     AgentErrorCode = Shapes::StringShape.new(name: 'AgentErrorCode')
+    AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    ApproveAfterDays = Shapes::IntegerShape.new(name: 'ApproveAfterDays')
     AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
     Association = Shapes::StructureShape.new(name: 'Association')
     AssociationAlreadyExists = Shapes::StructureShape.new(name: 'AssociationAlreadyExists')
@@ -59,6 +61,9 @@ module Aws::SSM
     AutomationParameterMap = Shapes::MapShape.new(name: 'AutomationParameterMap')
     AutomationParameterValue = Shapes::StringShape.new(name: 'AutomationParameterValue')
     AutomationParameterValueList = Shapes::ListShape.new(name: 'AutomationParameterValueList')
+    BaselineDescription = Shapes::StringShape.new(name: 'BaselineDescription')
+    BaselineId = Shapes::StringShape.new(name: 'BaselineId')
+    BaselineName = Shapes::StringShape.new(name: 'BaselineName')
     BatchErrorMessage = Shapes::StringShape.new(name: 'BatchErrorMessage')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelCommandRequest = Shapes::StructureShape.new(name: 'CancelCommandRequest')
@@ -96,9 +101,12 @@ module Aws::SSM
     CreateDocumentResult = Shapes::StructureShape.new(name: 'CreateDocumentResult')
     CreateMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'CreateMaintenanceWindowRequest')
     CreateMaintenanceWindowResult = Shapes::StructureShape.new(name: 'CreateMaintenanceWindowResult')
+    CreatePatchBaselineRequest = Shapes::StructureShape.new(name: 'CreatePatchBaselineRequest')
+    CreatePatchBaselineResult = Shapes::StructureShape.new(name: 'CreatePatchBaselineResult')
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     CustomSchemaCountLimitExceededException = Shapes::StructureShape.new(name: 'CustomSchemaCountLimitExceededException')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+    DefaultBaseline = Shapes::BooleanShape.new(name: 'DefaultBaseline')
     DefaultInstanceName = Shapes::StringShape.new(name: 'DefaultInstanceName')
     DeleteActivationRequest = Shapes::StructureShape.new(name: 'DeleteActivationRequest')
     DeleteActivationResult = Shapes::StructureShape.new(name: 'DeleteActivationResult')
@@ -110,8 +118,12 @@ module Aws::SSM
     DeleteMaintenanceWindowResult = Shapes::StructureShape.new(name: 'DeleteMaintenanceWindowResult')
     DeleteParameterRequest = Shapes::StructureShape.new(name: 'DeleteParameterRequest')
     DeleteParameterResult = Shapes::StructureShape.new(name: 'DeleteParameterResult')
+    DeletePatchBaselineRequest = Shapes::StructureShape.new(name: 'DeletePatchBaselineRequest')
+    DeletePatchBaselineResult = Shapes::StructureShape.new(name: 'DeletePatchBaselineResult')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
+    DeregisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'DeregisterPatchBaselineForPatchGroupRequest')
+    DeregisterPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'DeregisterPatchBaselineForPatchGroupResult')
     DeregisterTargetFromMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'DeregisterTargetFromMaintenanceWindowRequest')
     DeregisterTargetFromMaintenanceWindowResult = Shapes::StructureShape.new(name: 'DeregisterTargetFromMaintenanceWindowResult')
     DeregisterTaskFromMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'DeregisterTaskFromMaintenanceWindowRequest')
@@ -125,16 +137,26 @@ module Aws::SSM
     DescribeAssociationResult = Shapes::StructureShape.new(name: 'DescribeAssociationResult')
     DescribeAutomationExecutionsRequest = Shapes::StructureShape.new(name: 'DescribeAutomationExecutionsRequest')
     DescribeAutomationExecutionsResult = Shapes::StructureShape.new(name: 'DescribeAutomationExecutionsResult')
+    DescribeAvailablePatchesRequest = Shapes::StructureShape.new(name: 'DescribeAvailablePatchesRequest')
+    DescribeAvailablePatchesResult = Shapes::StructureShape.new(name: 'DescribeAvailablePatchesResult')
     DescribeDocumentPermissionRequest = Shapes::StructureShape.new(name: 'DescribeDocumentPermissionRequest')
     DescribeDocumentPermissionResponse = Shapes::StructureShape.new(name: 'DescribeDocumentPermissionResponse')
     DescribeDocumentRequest = Shapes::StructureShape.new(name: 'DescribeDocumentRequest')
     DescribeDocumentResult = Shapes::StructureShape.new(name: 'DescribeDocumentResult')
     DescribeEffectiveInstanceAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeEffectiveInstanceAssociationsRequest')
     DescribeEffectiveInstanceAssociationsResult = Shapes::StructureShape.new(name: 'DescribeEffectiveInstanceAssociationsResult')
+    DescribeEffectivePatchesForPatchBaselineRequest = Shapes::StructureShape.new(name: 'DescribeEffectivePatchesForPatchBaselineRequest')
+    DescribeEffectivePatchesForPatchBaselineResult = Shapes::StructureShape.new(name: 'DescribeEffectivePatchesForPatchBaselineResult')
     DescribeInstanceAssociationsStatusRequest = Shapes::StructureShape.new(name: 'DescribeInstanceAssociationsStatusRequest')
     DescribeInstanceAssociationsStatusResult = Shapes::StructureShape.new(name: 'DescribeInstanceAssociationsStatusResult')
     DescribeInstanceInformationRequest = Shapes::StructureShape.new(name: 'DescribeInstanceInformationRequest')
     DescribeInstanceInformationResult = Shapes::StructureShape.new(name: 'DescribeInstanceInformationResult')
+    DescribeInstancePatchStatesForPatchGroupRequest = Shapes::StructureShape.new(name: 'DescribeInstancePatchStatesForPatchGroupRequest')
+    DescribeInstancePatchStatesForPatchGroupResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchStatesForPatchGroupResult')
+    DescribeInstancePatchStatesRequest = Shapes::StructureShape.new(name: 'DescribeInstancePatchStatesRequest')
+    DescribeInstancePatchStatesResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchStatesResult')
+    DescribeInstancePatchesRequest = Shapes::StructureShape.new(name: 'DescribeInstancePatchesRequest')
+    DescribeInstancePatchesResult = Shapes::StructureShape.new(name: 'DescribeInstancePatchesResult')
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTaskInvocationsRequest')
     DescribeMaintenanceWindowExecutionTaskInvocationsResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTaskInvocationsResult')
     DescribeMaintenanceWindowExecutionTasksRequest = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowExecutionTasksRequest')
@@ -149,6 +171,12 @@ module Aws::SSM
     DescribeMaintenanceWindowsResult = Shapes::StructureShape.new(name: 'DescribeMaintenanceWindowsResult')
     DescribeParametersRequest = Shapes::StructureShape.new(name: 'DescribeParametersRequest')
     DescribeParametersResult = Shapes::StructureShape.new(name: 'DescribeParametersResult')
+    DescribePatchBaselinesRequest = Shapes::StructureShape.new(name: 'DescribePatchBaselinesRequest')
+    DescribePatchBaselinesResult = Shapes::StructureShape.new(name: 'DescribePatchBaselinesResult')
+    DescribePatchGroupStateRequest = Shapes::StructureShape.new(name: 'DescribePatchGroupStateRequest')
+    DescribePatchGroupStateResult = Shapes::StructureShape.new(name: 'DescribePatchGroupStateResult')
+    DescribePatchGroupsRequest = Shapes::StructureShape.new(name: 'DescribePatchGroupsRequest')
+    DescribePatchGroupsResult = Shapes::StructureShape.new(name: 'DescribePatchGroupsResult')
     DescriptionInDocument = Shapes::StringShape.new(name: 'DescriptionInDocument')
     DocumentARN = Shapes::StringShape.new(name: 'DocumentARN')
     DocumentAlreadyExists = Shapes::StructureShape.new(name: 'DocumentAlreadyExists')
@@ -187,6 +215,8 @@ module Aws::SSM
     DuplicateDocumentContent = Shapes::StructureShape.new(name: 'DuplicateDocumentContent')
     DuplicateInstanceId = Shapes::StructureShape.new(name: 'DuplicateInstanceId')
     EffectiveInstanceAssociationMaxResults = Shapes::IntegerShape.new(name: 'EffectiveInstanceAssociationMaxResults')
+    EffectivePatch = Shapes::StructureShape.new(name: 'EffectivePatch')
+    EffectivePatchList = Shapes::ListShape.new(name: 'EffectivePatchList')
     ErrorCount = Shapes::IntegerShape.new(name: 'ErrorCount')
     ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
     FailedCreateAssociation = Shapes::StructureShape.new(name: 'FailedCreateAssociation')
@@ -196,6 +226,10 @@ module Aws::SSM
     GetAutomationExecutionResult = Shapes::StructureShape.new(name: 'GetAutomationExecutionResult')
     GetCommandInvocationRequest = Shapes::StructureShape.new(name: 'GetCommandInvocationRequest')
     GetCommandInvocationResult = Shapes::StructureShape.new(name: 'GetCommandInvocationResult')
+    GetDefaultPatchBaselineRequest = Shapes::StructureShape.new(name: 'GetDefaultPatchBaselineRequest')
+    GetDefaultPatchBaselineResult = Shapes::StructureShape.new(name: 'GetDefaultPatchBaselineResult')
+    GetDeployablePatchSnapshotForInstanceRequest = Shapes::StructureShape.new(name: 'GetDeployablePatchSnapshotForInstanceRequest')
+    GetDeployablePatchSnapshotForInstanceResult = Shapes::StructureShape.new(name: 'GetDeployablePatchSnapshotForInstanceResult')
     GetDocumentRequest = Shapes::StructureShape.new(name: 'GetDocumentRequest')
     GetDocumentResult = Shapes::StructureShape.new(name: 'GetDocumentResult')
     GetInventoryRequest = Shapes::StructureShape.new(name: 'GetInventoryRequest')
@@ -213,6 +247,10 @@ module Aws::SSM
     GetParameterHistoryResult = Shapes::StructureShape.new(name: 'GetParameterHistoryResult')
     GetParametersRequest = Shapes::StructureShape.new(name: 'GetParametersRequest')
     GetParametersResult = Shapes::StructureShape.new(name: 'GetParametersResult')
+    GetPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupRequest')
+    GetPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'GetPatchBaselineForPatchGroupResult')
+    GetPatchBaselineRequest = Shapes::StructureShape.new(name: 'GetPatchBaselineRequest')
+    GetPatchBaselineResult = Shapes::StructureShape.new(name: 'GetPatchBaselineResult')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IamRole = Shapes::StringShape.new(name: 'IamRole')
     IdempotentParameterMismatch = Shapes::StructureShape.new(name: 'IdempotentParameterMismatch')
@@ -238,7 +276,17 @@ module Aws::SSM
     InstanceInformationStringFilter = Shapes::StructureShape.new(name: 'InstanceInformationStringFilter')
     InstanceInformationStringFilterKey = Shapes::StringShape.new(name: 'InstanceInformationStringFilterKey')
     InstanceInformationStringFilterList = Shapes::ListShape.new(name: 'InstanceInformationStringFilterList')
+    InstancePatchState = Shapes::StructureShape.new(name: 'InstancePatchState')
+    InstancePatchStateFilter = Shapes::StructureShape.new(name: 'InstancePatchStateFilter')
+    InstancePatchStateFilterKey = Shapes::StringShape.new(name: 'InstancePatchStateFilterKey')
+    InstancePatchStateFilterList = Shapes::ListShape.new(name: 'InstancePatchStateFilterList')
+    InstancePatchStateFilterValue = Shapes::StringShape.new(name: 'InstancePatchStateFilterValue')
+    InstancePatchStateFilterValues = Shapes::ListShape.new(name: 'InstancePatchStateFilterValues')
+    InstancePatchStateList = Shapes::ListShape.new(name: 'InstancePatchStateList')
+    InstancePatchStateOperatorType = Shapes::StringShape.new(name: 'InstancePatchStateOperatorType')
+    InstancePatchStatesList = Shapes::ListShape.new(name: 'InstancePatchStatesList')
     InstanceTagName = Shapes::StringShape.new(name: 'InstanceTagName')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidActivation = Shapes::StructureShape.new(name: 'InvalidActivation')
     InvalidActivationId = Shapes::StructureShape.new(name: 'InvalidActivationId')
@@ -402,6 +450,58 @@ module Aws::SSM
     ParametersFilterList = Shapes::ListShape.new(name: 'ParametersFilterList')
     ParametersFilterValue = Shapes::StringShape.new(name: 'ParametersFilterValue')
     ParametersFilterValueList = Shapes::ListShape.new(name: 'ParametersFilterValueList')
+    Patch = Shapes::StructureShape.new(name: 'Patch')
+    PatchBaselineIdentity = Shapes::StructureShape.new(name: 'PatchBaselineIdentity')
+    PatchBaselineIdentityList = Shapes::ListShape.new(name: 'PatchBaselineIdentityList')
+    PatchBaselineMaxResults = Shapes::IntegerShape.new(name: 'PatchBaselineMaxResults')
+    PatchClassification = Shapes::StringShape.new(name: 'PatchClassification')
+    PatchComplianceData = Shapes::StructureShape.new(name: 'PatchComplianceData')
+    PatchComplianceDataList = Shapes::ListShape.new(name: 'PatchComplianceDataList')
+    PatchComplianceDataState = Shapes::StringShape.new(name: 'PatchComplianceDataState')
+    PatchComplianceMaxResults = Shapes::IntegerShape.new(name: 'PatchComplianceMaxResults')
+    PatchContentUrl = Shapes::StringShape.new(name: 'PatchContentUrl')
+    PatchDeploymentStatus = Shapes::StringShape.new(name: 'PatchDeploymentStatus')
+    PatchDescription = Shapes::StringShape.new(name: 'PatchDescription')
+    PatchFailedCount = Shapes::IntegerShape.new(name: 'PatchFailedCount')
+    PatchFilter = Shapes::StructureShape.new(name: 'PatchFilter')
+    PatchFilterGroup = Shapes::StructureShape.new(name: 'PatchFilterGroup')
+    PatchFilterKey = Shapes::StringShape.new(name: 'PatchFilterKey')
+    PatchFilterList = Shapes::ListShape.new(name: 'PatchFilterList')
+    PatchFilterValue = Shapes::StringShape.new(name: 'PatchFilterValue')
+    PatchFilterValueList = Shapes::ListShape.new(name: 'PatchFilterValueList')
+    PatchGroup = Shapes::StringShape.new(name: 'PatchGroup')
+    PatchGroupList = Shapes::ListShape.new(name: 'PatchGroupList')
+    PatchGroupPatchBaselineMapping = Shapes::StructureShape.new(name: 'PatchGroupPatchBaselineMapping')
+    PatchGroupPatchBaselineMappingList = Shapes::ListShape.new(name: 'PatchGroupPatchBaselineMappingList')
+    PatchId = Shapes::StringShape.new(name: 'PatchId')
+    PatchIdList = Shapes::ListShape.new(name: 'PatchIdList')
+    PatchInstalledCount = Shapes::IntegerShape.new(name: 'PatchInstalledCount')
+    PatchInstalledOtherCount = Shapes::IntegerShape.new(name: 'PatchInstalledOtherCount')
+    PatchInstalledTime = Shapes::TimestampShape.new(name: 'PatchInstalledTime')
+    PatchKbNumber = Shapes::StringShape.new(name: 'PatchKbNumber')
+    PatchLanguage = Shapes::StringShape.new(name: 'PatchLanguage')
+    PatchList = Shapes::ListShape.new(name: 'PatchList')
+    PatchMissingCount = Shapes::IntegerShape.new(name: 'PatchMissingCount')
+    PatchMsrcNumber = Shapes::StringShape.new(name: 'PatchMsrcNumber')
+    PatchMsrcSeverity = Shapes::StringShape.new(name: 'PatchMsrcSeverity')
+    PatchNotApplicableCount = Shapes::IntegerShape.new(name: 'PatchNotApplicableCount')
+    PatchOperationEndTime = Shapes::TimestampShape.new(name: 'PatchOperationEndTime')
+    PatchOperationStartTime = Shapes::TimestampShape.new(name: 'PatchOperationStartTime')
+    PatchOperationType = Shapes::StringShape.new(name: 'PatchOperationType')
+    PatchOrchestratorFilter = Shapes::StructureShape.new(name: 'PatchOrchestratorFilter')
+    PatchOrchestratorFilterKey = Shapes::StringShape.new(name: 'PatchOrchestratorFilterKey')
+    PatchOrchestratorFilterList = Shapes::ListShape.new(name: 'PatchOrchestratorFilterList')
+    PatchOrchestratorFilterValue = Shapes::StringShape.new(name: 'PatchOrchestratorFilterValue')
+    PatchOrchestratorFilterValues = Shapes::ListShape.new(name: 'PatchOrchestratorFilterValues')
+    PatchProduct = Shapes::StringShape.new(name: 'PatchProduct')
+    PatchProductFamily = Shapes::StringShape.new(name: 'PatchProductFamily')
+    PatchRule = Shapes::StructureShape.new(name: 'PatchRule')
+    PatchRuleGroup = Shapes::StructureShape.new(name: 'PatchRuleGroup')
+    PatchRuleList = Shapes::ListShape.new(name: 'PatchRuleList')
+    PatchSeverity = Shapes::StringShape.new(name: 'PatchSeverity')
+    PatchStatus = Shapes::StructureShape.new(name: 'PatchStatus')
+    PatchTitle = Shapes::StringShape.new(name: 'PatchTitle')
+    PatchVendor = Shapes::StringShape.new(name: 'PatchVendor')
     PingStatus = Shapes::StringShape.new(name: 'PingStatus')
     PlatformType = Shapes::StringShape.new(name: 'PlatformType')
     PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
@@ -409,6 +509,10 @@ module Aws::SSM
     PutInventoryResult = Shapes::StructureShape.new(name: 'PutInventoryResult')
     PutParameterRequest = Shapes::StructureShape.new(name: 'PutParameterRequest')
     PutParameterResult = Shapes::StructureShape.new(name: 'PutParameterResult')
+    RegisterDefaultPatchBaselineRequest = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineRequest')
+    RegisterDefaultPatchBaselineResult = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineResult')
+    RegisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'RegisterPatchBaselineForPatchGroupRequest')
+    RegisterPatchBaselineForPatchGroupResult = Shapes::StructureShape.new(name: 'RegisterPatchBaselineForPatchGroupResult')
     RegisterTargetWithMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'RegisterTargetWithMaintenanceWindowRequest')
     RegisterTargetWithMaintenanceWindowResult = Shapes::StructureShape.new(name: 'RegisterTargetWithMaintenanceWindowResult')
     RegisterTaskWithMaintenanceWindowRequest = Shapes::StructureShape.new(name: 'RegisterTaskWithMaintenanceWindowRequest')
@@ -418,6 +522,7 @@ module Aws::SSM
     RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
     RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeForTagging = Shapes::StringShape.new(name: 'ResourceTypeForTagging')
@@ -433,6 +538,8 @@ module Aws::SSM
     SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
     SendCommandResult = Shapes::StructureShape.new(name: 'SendCommandResult')
     ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
+    SnapshotDownloadUrl = Shapes::StringShape.new(name: 'SnapshotDownloadUrl')
+    SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
     StandardErrorContent = Shapes::StringShape.new(name: 'StandardErrorContent')
     StandardOutputContent = Shapes::StringShape.new(name: 'StandardOutputContent')
     StartAutomationExecutionRequest = Shapes::StructureShape.new(name: 'StartAutomationExecutionRequest')
@@ -478,6 +585,8 @@ module Aws::SSM
     UpdateMaintenanceWindowResult = Shapes::StructureShape.new(name: 'UpdateMaintenanceWindowResult')
     UpdateManagedInstanceRoleRequest = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleRequest')
     UpdateManagedInstanceRoleResult = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleResult')
+    UpdatePatchBaselineRequest = Shapes::StructureShape.new(name: 'UpdatePatchBaselineRequest')
+    UpdatePatchBaselineResult = Shapes::StructureShape.new(name: 'UpdatePatchBaselineResult')
     Url = Shapes::StringShape.new(name: 'Url')
     VelocityConstraint = Shapes::StringShape.new(name: 'VelocityConstraint')
     Version = Shapes::StringShape.new(name: 'Version')
@@ -722,6 +831,18 @@ module Aws::SSM
     CreateMaintenanceWindowResult.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, location_name: "WindowId"))
     CreateMaintenanceWindowResult.struct_class = Types::CreateMaintenanceWindowResult
 
+    CreatePatchBaselineRequest.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, required: true, location_name: "Name"))
+    CreatePatchBaselineRequest.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
+    CreatePatchBaselineRequest.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
+    CreatePatchBaselineRequest.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    CreatePatchBaselineRequest.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
+    CreatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
+    CreatePatchBaselineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePatchBaselineRequest.struct_class = Types::CreatePatchBaselineRequest
+
+    CreatePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    CreatePatchBaselineResult.struct_class = Types::CreatePatchBaselineResult
+
     DeleteActivationRequest.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, required: true, location_name: "ActivationId"))
     DeleteActivationRequest.struct_class = Types::DeleteActivationRequest
 
@@ -750,10 +871,24 @@ module Aws::SSM
 
     DeleteParameterResult.struct_class = Types::DeleteParameterResult
 
+    DeletePatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    DeletePatchBaselineRequest.struct_class = Types::DeletePatchBaselineRequest
+
+    DeletePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    DeletePatchBaselineResult.struct_class = Types::DeletePatchBaselineResult
+
     DeregisterManagedInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
     DeregisterManagedInstanceRequest.struct_class = Types::DeregisterManagedInstanceRequest
 
     DeregisterManagedInstanceResult.struct_class = Types::DeregisterManagedInstanceResult
+
+    DeregisterPatchBaselineForPatchGroupRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    DeregisterPatchBaselineForPatchGroupRequest.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    DeregisterPatchBaselineForPatchGroupRequest.struct_class = Types::DeregisterPatchBaselineForPatchGroupRequest
+
+    DeregisterPatchBaselineForPatchGroupResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    DeregisterPatchBaselineForPatchGroupResult.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, location_name: "PatchGroup"))
+    DeregisterPatchBaselineForPatchGroupResult.struct_class = Types::DeregisterPatchBaselineForPatchGroupResult
 
     DeregisterTargetFromMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     DeregisterTargetFromMaintenanceWindowRequest.add_member(:window_target_id, Shapes::ShapeRef.new(shape: MaintenanceWindowTargetId, required: true, location_name: "WindowTargetId"))
@@ -803,6 +938,15 @@ module Aws::SSM
     DescribeAutomationExecutionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeAutomationExecutionsResult.struct_class = Types::DescribeAutomationExecutionsResult
 
+    DescribeAvailablePatchesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterList, location_name: "Filters"))
+    DescribeAvailablePatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeAvailablePatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAvailablePatchesRequest.struct_class = Types::DescribeAvailablePatchesRequest
+
+    DescribeAvailablePatchesResult.add_member(:patches, Shapes::ShapeRef.new(shape: PatchList, location_name: "Patches"))
+    DescribeAvailablePatchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeAvailablePatchesResult.struct_class = Types::DescribeAvailablePatchesResult
+
     DescribeDocumentPermissionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
     DescribeDocumentPermissionRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: DocumentPermissionType, required: true, location_name: "PermissionType"))
     DescribeDocumentPermissionRequest.struct_class = Types::DescribeDocumentPermissionRequest
@@ -826,6 +970,15 @@ module Aws::SSM
     DescribeEffectiveInstanceAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeEffectiveInstanceAssociationsResult.struct_class = Types::DescribeEffectiveInstanceAssociationsResult
 
+    DescribeEffectivePatchesForPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    DescribeEffectivePatchesForPatchBaselineRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeEffectivePatchesForPatchBaselineRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeEffectivePatchesForPatchBaselineRequest.struct_class = Types::DescribeEffectivePatchesForPatchBaselineRequest
+
+    DescribeEffectivePatchesForPatchBaselineResult.add_member(:effective_patches, Shapes::ShapeRef.new(shape: EffectivePatchList, location_name: "EffectivePatches"))
+    DescribeEffectivePatchesForPatchBaselineResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeEffectivePatchesForPatchBaselineResult.struct_class = Types::DescribeEffectivePatchesForPatchBaselineResult
+
     DescribeInstanceAssociationsStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     DescribeInstanceAssociationsStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
     DescribeInstanceAssociationsStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -844,6 +997,35 @@ module Aws::SSM
     DescribeInstanceInformationResult.add_member(:instance_information_list, Shapes::ShapeRef.new(shape: InstanceInformationList, location_name: "InstanceInformationList"))
     DescribeInstanceInformationResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInstanceInformationResult.struct_class = Types::DescribeInstanceInformationResult
+
+    DescribeInstancePatchStatesForPatchGroupRequest.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    DescribeInstancePatchStatesForPatchGroupRequest.add_member(:filters, Shapes::ShapeRef.new(shape: InstancePatchStateFilterList, location_name: "Filters"))
+    DescribeInstancePatchStatesForPatchGroupRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePatchStatesForPatchGroupRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchComplianceMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeInstancePatchStatesForPatchGroupRequest.struct_class = Types::DescribeInstancePatchStatesForPatchGroupRequest
+
+    DescribeInstancePatchStatesForPatchGroupResult.add_member(:instance_patch_states, Shapes::ShapeRef.new(shape: InstancePatchStatesList, location_name: "InstancePatchStates"))
+    DescribeInstancePatchStatesForPatchGroupResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePatchStatesForPatchGroupResult.struct_class = Types::DescribeInstancePatchStatesForPatchGroupResult
+
+    DescribeInstancePatchStatesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, required: true, location_name: "InstanceIds"))
+    DescribeInstancePatchStatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePatchStatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchComplianceMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeInstancePatchStatesRequest.struct_class = Types::DescribeInstancePatchStatesRequest
+
+    DescribeInstancePatchStatesResult.add_member(:instance_patch_states, Shapes::ShapeRef.new(shape: InstancePatchStateList, location_name: "InstancePatchStates"))
+    DescribeInstancePatchStatesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePatchStatesResult.struct_class = Types::DescribeInstancePatchStatesResult
+
+    DescribeInstancePatchesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    DescribeInstancePatchesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterList, location_name: "Filters"))
+    DescribeInstancePatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePatchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchComplianceMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribeInstancePatchesRequest.struct_class = Types::DescribeInstancePatchesRequest
+
+    DescribeInstancePatchesResult.add_member(:patches, Shapes::ShapeRef.new(shape: PatchComplianceDataList, location_name: "Patches"))
+    DescribeInstancePatchesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeInstancePatchesResult.struct_class = Types::DescribeInstancePatchesResult
 
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, required: true, location_name: "WindowExecutionId"))
     DescribeMaintenanceWindowExecutionTaskInvocationsRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionTaskId, required: true, location_name: "TaskId"))
@@ -914,6 +1096,34 @@ module Aws::SSM
     DescribeParametersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeParametersResult.struct_class = Types::DescribeParametersResult
 
+    DescribePatchBaselinesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterList, location_name: "Filters"))
+    DescribePatchBaselinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribePatchBaselinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePatchBaselinesRequest.struct_class = Types::DescribePatchBaselinesRequest
+
+    DescribePatchBaselinesResult.add_member(:baseline_identities, Shapes::ShapeRef.new(shape: PatchBaselineIdentityList, location_name: "BaselineIdentities"))
+    DescribePatchBaselinesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePatchBaselinesResult.struct_class = Types::DescribePatchBaselinesResult
+
+    DescribePatchGroupStateRequest.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    DescribePatchGroupStateRequest.struct_class = Types::DescribePatchGroupStateRequest
+
+    DescribePatchGroupStateResult.add_member(:instances, Shapes::ShapeRef.new(shape: Integer, location_name: "Instances"))
+    DescribePatchGroupStateResult.add_member(:instances_with_installed_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithInstalledPatches"))
+    DescribePatchGroupStateResult.add_member(:instances_with_installed_other_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithInstalledOtherPatches"))
+    DescribePatchGroupStateResult.add_member(:instances_with_missing_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithMissingPatches"))
+    DescribePatchGroupStateResult.add_member(:instances_with_failed_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithFailedPatches"))
+    DescribePatchGroupStateResult.add_member(:instances_with_not_applicable_patches, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancesWithNotApplicablePatches"))
+    DescribePatchGroupStateResult.struct_class = Types::DescribePatchGroupStateResult
+
+    DescribePatchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PatchBaselineMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    DescribePatchGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePatchGroupsRequest.struct_class = Types::DescribePatchGroupsRequest
+
+    DescribePatchGroupsResult.add_member(:mappings, Shapes::ShapeRef.new(shape: PatchGroupPatchBaselineMappingList, location_name: "Mappings"))
+    DescribePatchGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribePatchGroupsResult.struct_class = Types::DescribePatchGroupsResult
+
     DocumentDefaultVersionDescription.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
     DocumentDefaultVersionDescription.add_member(:default_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DefaultVersion"))
     DocumentDefaultVersionDescription.struct_class = Types::DocumentDefaultVersionDescription
@@ -967,6 +1177,12 @@ module Aws::SSM
 
     DocumentVersionList.member = Shapes::ShapeRef.new(shape: DocumentVersionInfo)
 
+    EffectivePatch.add_member(:patch, Shapes::ShapeRef.new(shape: Patch, location_name: "Patch"))
+    EffectivePatch.add_member(:patch_status, Shapes::ShapeRef.new(shape: PatchStatus, location_name: "PatchStatus"))
+    EffectivePatch.struct_class = Types::EffectivePatch
+
+    EffectivePatchList.member = Shapes::ShapeRef.new(shape: EffectivePatch)
+
     FailedCreateAssociation.add_member(:entry, Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntry, location_name: "Entry"))
     FailedCreateAssociation.add_member(:message, Shapes::ShapeRef.new(shape: BatchErrorMessage, location_name: "Message"))
     FailedCreateAssociation.add_member(:fault, Shapes::ShapeRef.new(shape: Fault, location_name: "Fault"))
@@ -1001,6 +1217,20 @@ module Aws::SSM
     GetCommandInvocationResult.add_member(:standard_error_content, Shapes::ShapeRef.new(shape: StandardErrorContent, location_name: "StandardErrorContent"))
     GetCommandInvocationResult.add_member(:standard_error_url, Shapes::ShapeRef.new(shape: Url, location_name: "StandardErrorUrl"))
     GetCommandInvocationResult.struct_class = Types::GetCommandInvocationResult
+
+    GetDefaultPatchBaselineRequest.struct_class = Types::GetDefaultPatchBaselineRequest
+
+    GetDefaultPatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    GetDefaultPatchBaselineResult.struct_class = Types::GetDefaultPatchBaselineResult
+
+    GetDeployablePatchSnapshotForInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    GetDeployablePatchSnapshotForInstanceRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
+    GetDeployablePatchSnapshotForInstanceRequest.struct_class = Types::GetDeployablePatchSnapshotForInstanceRequest
+
+    GetDeployablePatchSnapshotForInstanceResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+    GetDeployablePatchSnapshotForInstanceResult.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    GetDeployablePatchSnapshotForInstanceResult.add_member(:snapshot_download_url, Shapes::ShapeRef.new(shape: SnapshotDownloadUrl, location_name: "SnapshotDownloadUrl"))
+    GetDeployablePatchSnapshotForInstanceResult.struct_class = Types::GetDeployablePatchSnapshotForInstanceResult
 
     GetDocumentRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "Name"))
     GetDocumentRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
@@ -1093,6 +1323,28 @@ module Aws::SSM
     GetParametersResult.add_member(:invalid_parameters, Shapes::ShapeRef.new(shape: ParameterNameList, location_name: "InvalidParameters"))
     GetParametersResult.struct_class = Types::GetParametersResult
 
+    GetPatchBaselineForPatchGroupRequest.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    GetPatchBaselineForPatchGroupRequest.struct_class = Types::GetPatchBaselineForPatchGroupRequest
+
+    GetPatchBaselineForPatchGroupResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    GetPatchBaselineForPatchGroupResult.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, location_name: "PatchGroup"))
+    GetPatchBaselineForPatchGroupResult.struct_class = Types::GetPatchBaselineForPatchGroupResult
+
+    GetPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    GetPatchBaselineRequest.struct_class = Types::GetPatchBaselineRequest
+
+    GetPatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    GetPatchBaselineResult.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "Name"))
+    GetPatchBaselineResult.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
+    GetPatchBaselineResult.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
+    GetPatchBaselineResult.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    GetPatchBaselineResult.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
+    GetPatchBaselineResult.add_member(:patch_groups, Shapes::ShapeRef.new(shape: PatchGroupList, location_name: "PatchGroups"))
+    GetPatchBaselineResult.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
+    GetPatchBaselineResult.add_member(:modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedDate"))
+    GetPatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
+    GetPatchBaselineResult.struct_class = Types::GetPatchBaselineResult
+
     InstanceAggregatedAssociationOverview.add_member(:detailed_status, Shapes::ShapeRef.new(shape: StatusName, location_name: "DetailedStatus"))
     InstanceAggregatedAssociationOverview.add_member(:instance_association_status_aggregated_count, Shapes::ShapeRef.new(shape: InstanceAssociationStatusAggregatedCount, location_name: "InstanceAssociationStatusAggregatedCount"))
     InstanceAggregatedAssociationOverview.struct_class = Types::InstanceAggregatedAssociationOverview
@@ -1165,6 +1417,34 @@ module Aws::SSM
     InstanceInformationStringFilter.struct_class = Types::InstanceInformationStringFilter
 
     InstanceInformationStringFilterList.member = Shapes::ShapeRef.new(shape: InstanceInformationStringFilter, location_name: "InstanceInformationStringFilter")
+
+    InstancePatchState.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    InstancePatchState.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    InstancePatchState.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    InstancePatchState.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
+    InstancePatchState.add_member(:owner_information, Shapes::ShapeRef.new(shape: OwnerInformation, location_name: "OwnerInformation"))
+    InstancePatchState.add_member(:installed_count, Shapes::ShapeRef.new(shape: PatchInstalledCount, location_name: "InstalledCount"))
+    InstancePatchState.add_member(:installed_other_count, Shapes::ShapeRef.new(shape: PatchInstalledOtherCount, location_name: "InstalledOtherCount"))
+    InstancePatchState.add_member(:missing_count, Shapes::ShapeRef.new(shape: PatchMissingCount, location_name: "MissingCount"))
+    InstancePatchState.add_member(:failed_count, Shapes::ShapeRef.new(shape: PatchFailedCount, location_name: "FailedCount"))
+    InstancePatchState.add_member(:not_applicable_count, Shapes::ShapeRef.new(shape: PatchNotApplicableCount, location_name: "NotApplicableCount"))
+    InstancePatchState.add_member(:operation_start_time, Shapes::ShapeRef.new(shape: PatchOperationStartTime, required: true, location_name: "OperationStartTime"))
+    InstancePatchState.add_member(:operation_end_time, Shapes::ShapeRef.new(shape: PatchOperationEndTime, required: true, location_name: "OperationEndTime"))
+    InstancePatchState.add_member(:operation, Shapes::ShapeRef.new(shape: PatchOperationType, required: true, location_name: "Operation"))
+    InstancePatchState.struct_class = Types::InstancePatchState
+
+    InstancePatchStateFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstancePatchStateFilterKey, required: true, location_name: "Key"))
+    InstancePatchStateFilter.add_member(:values, Shapes::ShapeRef.new(shape: InstancePatchStateFilterValues, required: true, location_name: "Values"))
+    InstancePatchStateFilter.add_member(:type, Shapes::ShapeRef.new(shape: InstancePatchStateOperatorType, required: true, location_name: "Type"))
+    InstancePatchStateFilter.struct_class = Types::InstancePatchStateFilter
+
+    InstancePatchStateFilterList.member = Shapes::ShapeRef.new(shape: InstancePatchStateFilter)
+
+    InstancePatchStateFilterValues.member = Shapes::ShapeRef.new(shape: InstancePatchStateFilterValue)
+
+    InstancePatchStateList.member = Shapes::ShapeRef.new(shape: InstancePatchState)
+
+    InstancePatchStatesList.member = Shapes::ShapeRef.new(shape: InstancePatchState)
 
     InventoryFilter.add_member(:key, Shapes::ShapeRef.new(shape: InventoryFilterKey, required: true, location_name: "Key"))
     InventoryFilter.add_member(:values, Shapes::ShapeRef.new(shape: InventoryFilterValueList, required: true, location_name: "Values"))
@@ -1448,6 +1728,83 @@ module Aws::SSM
 
     ParametersFilterValueList.member = Shapes::ShapeRef.new(shape: ParametersFilterValue)
 
+    Patch.add_member(:id, Shapes::ShapeRef.new(shape: PatchId, location_name: "Id"))
+    Patch.add_member(:release_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ReleaseDate"))
+    Patch.add_member(:title, Shapes::ShapeRef.new(shape: PatchTitle, location_name: "Title"))
+    Patch.add_member(:description, Shapes::ShapeRef.new(shape: PatchDescription, location_name: "Description"))
+    Patch.add_member(:content_url, Shapes::ShapeRef.new(shape: PatchContentUrl, location_name: "ContentUrl"))
+    Patch.add_member(:vendor, Shapes::ShapeRef.new(shape: PatchVendor, location_name: "Vendor"))
+    Patch.add_member(:product_family, Shapes::ShapeRef.new(shape: PatchProductFamily, location_name: "ProductFamily"))
+    Patch.add_member(:product, Shapes::ShapeRef.new(shape: PatchProduct, location_name: "Product"))
+    Patch.add_member(:classification, Shapes::ShapeRef.new(shape: PatchClassification, location_name: "Classification"))
+    Patch.add_member(:msrc_severity, Shapes::ShapeRef.new(shape: PatchMsrcSeverity, location_name: "MsrcSeverity"))
+    Patch.add_member(:kb_number, Shapes::ShapeRef.new(shape: PatchKbNumber, location_name: "KbNumber"))
+    Patch.add_member(:msrc_number, Shapes::ShapeRef.new(shape: PatchMsrcNumber, location_name: "MsrcNumber"))
+    Patch.add_member(:language, Shapes::ShapeRef.new(shape: PatchLanguage, location_name: "Language"))
+    Patch.struct_class = Types::Patch
+
+    PatchBaselineIdentity.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    PatchBaselineIdentity.add_member(:baseline_name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "BaselineName"))
+    PatchBaselineIdentity.add_member(:baseline_description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "BaselineDescription"))
+    PatchBaselineIdentity.add_member(:default_baseline, Shapes::ShapeRef.new(shape: DefaultBaseline, location_name: "DefaultBaseline"))
+    PatchBaselineIdentity.struct_class = Types::PatchBaselineIdentity
+
+    PatchBaselineIdentityList.member = Shapes::ShapeRef.new(shape: PatchBaselineIdentity)
+
+    PatchComplianceData.add_member(:title, Shapes::ShapeRef.new(shape: PatchTitle, required: true, location_name: "Title"))
+    PatchComplianceData.add_member(:kb_id, Shapes::ShapeRef.new(shape: PatchKbNumber, required: true, location_name: "KBId"))
+    PatchComplianceData.add_member(:classification, Shapes::ShapeRef.new(shape: PatchClassification, required: true, location_name: "Classification"))
+    PatchComplianceData.add_member(:severity, Shapes::ShapeRef.new(shape: PatchSeverity, required: true, location_name: "Severity"))
+    PatchComplianceData.add_member(:state, Shapes::ShapeRef.new(shape: PatchComplianceDataState, required: true, location_name: "State"))
+    PatchComplianceData.add_member(:installed_time, Shapes::ShapeRef.new(shape: PatchInstalledTime, required: true, location_name: "InstalledTime"))
+    PatchComplianceData.struct_class = Types::PatchComplianceData
+
+    PatchComplianceDataList.member = Shapes::ShapeRef.new(shape: PatchComplianceData)
+
+    PatchFilter.add_member(:key, Shapes::ShapeRef.new(shape: PatchFilterKey, required: true, location_name: "Key"))
+    PatchFilter.add_member(:values, Shapes::ShapeRef.new(shape: PatchFilterValueList, required: true, location_name: "Values"))
+    PatchFilter.struct_class = Types::PatchFilter
+
+    PatchFilterGroup.add_member(:patch_filters, Shapes::ShapeRef.new(shape: PatchFilterList, required: true, location_name: "PatchFilters"))
+    PatchFilterGroup.struct_class = Types::PatchFilterGroup
+
+    PatchFilterList.member = Shapes::ShapeRef.new(shape: PatchFilter)
+
+    PatchFilterValueList.member = Shapes::ShapeRef.new(shape: PatchFilterValue)
+
+    PatchGroupList.member = Shapes::ShapeRef.new(shape: PatchGroup)
+
+    PatchGroupPatchBaselineMapping.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, location_name: "PatchGroup"))
+    PatchGroupPatchBaselineMapping.add_member(:baseline_identity, Shapes::ShapeRef.new(shape: PatchBaselineIdentity, location_name: "BaselineIdentity"))
+    PatchGroupPatchBaselineMapping.struct_class = Types::PatchGroupPatchBaselineMapping
+
+    PatchGroupPatchBaselineMappingList.member = Shapes::ShapeRef.new(shape: PatchGroupPatchBaselineMapping)
+
+    PatchIdList.member = Shapes::ShapeRef.new(shape: PatchId)
+
+    PatchList.member = Shapes::ShapeRef.new(shape: Patch)
+
+    PatchOrchestratorFilter.add_member(:key, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterKey, location_name: "Key"))
+    PatchOrchestratorFilter.add_member(:values, Shapes::ShapeRef.new(shape: PatchOrchestratorFilterValues, location_name: "Values"))
+    PatchOrchestratorFilter.struct_class = Types::PatchOrchestratorFilter
+
+    PatchOrchestratorFilterList.member = Shapes::ShapeRef.new(shape: PatchOrchestratorFilter)
+
+    PatchOrchestratorFilterValues.member = Shapes::ShapeRef.new(shape: PatchOrchestratorFilterValue)
+
+    PatchRule.add_member(:patch_filter_group, Shapes::ShapeRef.new(shape: PatchFilterGroup, required: true, location_name: "PatchFilterGroup"))
+    PatchRule.add_member(:approve_after_days, Shapes::ShapeRef.new(shape: ApproveAfterDays, required: true, location_name: "ApproveAfterDays", metadata: {"box"=>true}))
+    PatchRule.struct_class = Types::PatchRule
+
+    PatchRuleGroup.add_member(:patch_rules, Shapes::ShapeRef.new(shape: PatchRuleList, required: true, location_name: "PatchRules"))
+    PatchRuleGroup.struct_class = Types::PatchRuleGroup
+
+    PatchRuleList.member = Shapes::ShapeRef.new(shape: PatchRule)
+
+    PatchStatus.add_member(:deployment_status, Shapes::ShapeRef.new(shape: PatchDeploymentStatus, location_name: "DeploymentStatus"))
+    PatchStatus.add_member(:approval_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ApprovalDate"))
+    PatchStatus.struct_class = Types::PatchStatus
+
     PlatformTypeList.member = Shapes::ShapeRef.new(shape: PlatformType, location_name: "PlatformType")
 
     PutInventoryRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -1465,6 +1822,20 @@ module Aws::SSM
     PutParameterRequest.struct_class = Types::PutParameterRequest
 
     PutParameterResult.struct_class = Types::PutParameterResult
+
+    RegisterDefaultPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    RegisterDefaultPatchBaselineRequest.struct_class = Types::RegisterDefaultPatchBaselineRequest
+
+    RegisterDefaultPatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    RegisterDefaultPatchBaselineResult.struct_class = Types::RegisterDefaultPatchBaselineResult
+
+    RegisterPatchBaselineForPatchGroupRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    RegisterPatchBaselineForPatchGroupRequest.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, required: true, location_name: "PatchGroup"))
+    RegisterPatchBaselineForPatchGroupRequest.struct_class = Types::RegisterPatchBaselineForPatchGroupRequest
+
+    RegisterPatchBaselineForPatchGroupResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    RegisterPatchBaselineForPatchGroupResult.add_member(:patch_group, Shapes::ShapeRef.new(shape: PatchGroup, location_name: "PatchGroup"))
+    RegisterPatchBaselineForPatchGroupResult.struct_class = Types::RegisterPatchBaselineForPatchGroupResult
 
     RegisterTargetWithMaintenanceWindowRequest.add_member(:window_id, Shapes::ShapeRef.new(shape: MaintenanceWindowId, required: true, location_name: "WindowId"))
     RegisterTargetWithMaintenanceWindowRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: MaintenanceWindowResourceType, required: true, location_name: "ResourceType"))
@@ -1532,7 +1903,7 @@ module Aws::SSM
     SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))
     SendCommandResult.struct_class = Types::SendCommandResult
 
-    StartAutomationExecutionRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "DocumentName"))
+    StartAutomationExecutionRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "DocumentName"))
     StartAutomationExecutionRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion", metadata: {"box"=>true}))
     StartAutomationExecutionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
     StartAutomationExecutionRequest.struct_class = Types::StartAutomationExecutionRequest
@@ -1631,6 +2002,26 @@ module Aws::SSM
     UpdateManagedInstanceRoleRequest.struct_class = Types::UpdateManagedInstanceRoleRequest
 
     UpdateManagedInstanceRoleResult.struct_class = Types::UpdateManagedInstanceRoleResult
+
+    UpdatePatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
+    UpdatePatchBaselineRequest.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "Name"))
+    UpdatePatchBaselineRequest.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
+    UpdatePatchBaselineRequest.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
+    UpdatePatchBaselineRequest.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    UpdatePatchBaselineRequest.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
+    UpdatePatchBaselineRequest.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
+    UpdatePatchBaselineRequest.struct_class = Types::UpdatePatchBaselineRequest
+
+    UpdatePatchBaselineResult.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, location_name: "BaselineId"))
+    UpdatePatchBaselineResult.add_member(:name, Shapes::ShapeRef.new(shape: BaselineName, location_name: "Name"))
+    UpdatePatchBaselineResult.add_member(:global_filters, Shapes::ShapeRef.new(shape: PatchFilterGroup, location_name: "GlobalFilters"))
+    UpdatePatchBaselineResult.add_member(:approval_rules, Shapes::ShapeRef.new(shape: PatchRuleGroup, location_name: "ApprovalRules"))
+    UpdatePatchBaselineResult.add_member(:approved_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "ApprovedPatches"))
+    UpdatePatchBaselineResult.add_member(:rejected_patches, Shapes::ShapeRef.new(shape: PatchIdList, location_name: "RejectedPatches"))
+    UpdatePatchBaselineResult.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "CreatedDate"))
+    UpdatePatchBaselineResult.add_member(:modified_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "ModifiedDate"))
+    UpdatePatchBaselineResult.add_member(:description, Shapes::ShapeRef.new(shape: BaselineDescription, location_name: "Description"))
+    UpdatePatchBaselineResult.struct_class = Types::UpdatePatchBaselineResult
 
 
     # @api private
@@ -1743,6 +2134,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:create_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatch)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:delete_activation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteActivation"
         o.http_method = "POST"
@@ -1798,6 +2200,16 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ParameterNotFound)
       end)
 
+      api.add_operation(:delete_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeregisterManagedInstance"
         o.http_method = "POST"
@@ -1805,6 +2217,16 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: DeregisterManagedInstanceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterManagedInstanceResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:deregister_patch_baseline_for_patch_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterPatchBaselineForPatchGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterPatchBaselineForPatchGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterPatchBaselineForPatchGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -1867,6 +2289,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_available_patches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAvailablePatches"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAvailablePatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAvailablePatchesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_document, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDocument"
         o.http_method = "POST"
@@ -1900,6 +2331,17 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
+      api.add_operation(:describe_effective_patches_for_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEffectivePatchesForPatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEffectivePatchesForPatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEffectivePatchesForPatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_instance_associations_status, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInstanceAssociationsStatus"
         o.http_method = "POST"
@@ -1928,6 +2370,39 @@ module Aws::SSM
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_instance_patch_states, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstancePatchStates"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstancePatchStatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstancePatchStatesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
+      api.add_operation(:describe_instance_patch_states_for_patch_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstancePatchStatesForPatchGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstancePatchStatesForPatchGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstancePatchStatesForPatchGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
+      api.add_operation(:describe_instance_patches, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeInstancePatches"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeInstancePatchesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeInstancePatchesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
       api.add_operation(:describe_maintenance_window_execution_task_invocations, Seahorse::Model::Operation.new.tap do |o|
@@ -1999,6 +2474,34 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
       end)
 
+      api.add_operation(:describe_patch_baselines, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePatchBaselines"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePatchBaselinesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePatchBaselinesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_patch_group_state, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePatchGroupState"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePatchGroupStateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePatchGroupStateResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
+      api.add_operation(:describe_patch_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePatchGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePatchGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePatchGroupsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:get_automation_execution, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAutomationExecution"
         o.http_method = "POST"
@@ -2020,6 +2523,24 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
         o.errors << Shapes::ShapeRef.new(shape: InvalidPluginName)
         o.errors << Shapes::ShapeRef.new(shape: InvocationDoesNotExist)
+      end)
+
+      api.add_operation(:get_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDefaultPatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDefaultPatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDefaultPatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_deployable_patch_snapshot_for_instance, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDeployablePatchSnapshotForInstance"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDeployablePatchSnapshotForInstanceRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDeployablePatchSnapshotForInstanceResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:get_document, Seahorse::Model::Operation.new.tap do |o|
@@ -2104,6 +2625,26 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetParametersRequest)
         o.output = Shapes::ShapeRef.new(shape: GetParametersResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:get_patch_baseline_for_patch_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPatchBaselineForPatchGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetPatchBaselineForPatchGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPatchBaselineForPatchGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
@@ -2257,6 +2798,30 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedParameterType)
       end)
 
+      api.add_operation(:register_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterDefaultPatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterDefaultPatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterDefaultPatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:register_patch_baseline_for_patch_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterPatchBaselineForPatchGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterPatchBaselineForPatchGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterPatchBaselineForPatchGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:register_target_with_maintenance_window, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RegisterTargetWithMaintenanceWindow"
         o.http_method = "POST"
@@ -2408,6 +2973,16 @@ module Aws::SSM
         o.input = Shapes::ShapeRef.new(shape: UpdateManagedInstanceRoleRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateManagedInstanceRoleResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_patch_baseline, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePatchBaseline"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePatchBaselineRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePatchBaselineResult)
+        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
     end

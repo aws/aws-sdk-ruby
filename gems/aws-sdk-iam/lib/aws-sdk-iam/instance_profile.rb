@@ -149,9 +149,10 @@ module Aws::IAM
     # @option options [required, String] :role_name
     #   The name of the role to add.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   =,.@-
     #
     #
     #
@@ -183,9 +184,10 @@ module Aws::IAM
     # @option options [required, String] :role_name
     #   The name of the role to remove.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following characters:
+    #   =,.@-
     #
     #
     #

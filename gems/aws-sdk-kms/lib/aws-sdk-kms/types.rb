@@ -19,7 +19,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] target_key_id
-    #   String that contains the key identifier pointed to by the alias.
+    #   String that contains the key identifier referred to by the alias.
     #   @return [String]
     #
     class AliasListEntry < Struct.new(
@@ -46,7 +46,7 @@ module Aws::KMS
     #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   To obtain the unique key ID and key ARN for a given CMK, use
     #   ListKeys or DescribeKey.
@@ -167,30 +167,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] operations
-    #   A list of operations that the grant permits. The list can contain
-    #   any combination of one or more of the following values:
-    #
-    #   * Decrypt
-    #
-    #   * Encrypt
-    #
-    #   * GenerateDataKey
-    #
-    #   * GenerateDataKeyWithoutPlaintext
-    #
-    #   * [ReEncryptFrom][1]
-    #
-    #   * [ReEncryptTo][1]
-    #
-    #   * CreateGrant
-    #
-    #   * RetireGrant
-    #
-    #   * DescribeKey
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_ReEncrypt.html
+    #   A list of operations that the grant permits.
     #   @return [Array<String>]
     #
     # @!attribute [rw] constraints
@@ -482,7 +459,7 @@ module Aws::KMS
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #   @return [String]
     #
     class DeleteImportedKeyMaterialRequest < Struct.new(
@@ -557,7 +534,7 @@ module Aws::KMS
     #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #   @return [String]
     #
     class DisableKeyRequest < Struct.new(
@@ -730,17 +707,17 @@ module Aws::KMS
     #   data encryption key.
     #
     #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK, or the alias name or ARN of an alias that points
+    #   (ARN) of the CMK, or the alias name or ARN of an alias that refers
     #   to the CMK. Examples:
     #
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * CMK ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Alias name: `alias/ExampleAlias`
     #
-    #   * Alias ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
@@ -827,17 +804,17 @@ module Aws::KMS
     #   data encryption key.
     #
     #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK, or the alias name or ARN of an alias that points
+    #   (ARN) of the CMK, or the alias name or ARN of an alias that refers
     #   to the CMK. Examples:
     #
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * CMK ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Alias name: `alias/ExampleAlias`
     #
-    #   * Alias ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #   @return [String]
     #
     # @!attribute [rw] encryption_context
@@ -1016,7 +993,7 @@ module Aws::KMS
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] wrapping_algorithm
@@ -1194,7 +1171,7 @@ module Aws::KMS
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] import_token
@@ -1484,20 +1461,14 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier, a fully specified ARN to either an alias
-    #   or a key, or an alias name prefixed by "alias/".
+    #   A unique identifier for the customer master key (CMK). You can use
+    #   the unique key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   Examples:
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Alias ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-    #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
-    #
-    #   * Alias Name Example - alias/MyAliasName
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -1674,7 +1645,7 @@ module Aws::KMS
     #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #   @return [String]
     #
     # @!attribute [rw] policy_name
@@ -1758,7 +1729,7 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] ciphertext_blob
-    #   Ciphertext of the data to re-encrypt.
+    #   Ciphertext of the data to reencrypt.
     #   @return [String]
     #
     # @!attribute [rw] source_encryption_context
@@ -1767,10 +1738,9 @@ module Aws::KMS
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] destination_key_id
-    #   A unique identifier for the customer master key used to re-encrypt
-    #   the data. This value can be a globally unique identifier, a fully
-    #   specified ARN to either an alias or a key, or an alias name prefixed
-    #   by "alias/".
+    #   A unique identifier for the CMK to use to reencrypt the data. This
+    #   value can be a globally unique identifier, a fully specified ARN to
+    #   either an alias or a key, or an alias name prefixed by "alias/".
     #
     #   * Key ARN Example -
     #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1785,7 +1755,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] destination_encryption_context
-    #   Encryption context to be used when the data is re-encrypted.
+    #   Encryption context to use when the data is reencrypted.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] grant_tokens
@@ -1809,16 +1779,15 @@ module Aws::KMS
     end
 
     # @!attribute [rw] ciphertext_blob
-    #   The re-encrypted data. If you are using the CLI, the value is Base64
-    #   encoded. Otherwise, it is not encoded.
+    #   The reencrypted data.
     #   @return [String]
     #
     # @!attribute [rw] source_key_id
-    #   Unique identifier of the key used to originally encrypt the data.
+    #   Unique identifier of the CMK used to originally encrypt the data.
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   Unique identifier of the key used to re-encrypt the data.
+    #   Unique identifier of the CMK used to reencrypt the data.
     #   @return [String]
     #
     class ReEncryptResponse < Struct.new(
@@ -1842,20 +1811,17 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key associated with the
-    #   grant. This value can be a globally unique identifier or a fully
-    #   specified ARN of the key.
+    #   The Amazon Resource Name of the CMK associated with the grant.
+    #   Example:
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   ^
     #   @return [String]
     #
     # @!attribute [rw] grant_id
-    #   Unique identifier of the grant to be retired. The grant ID is
-    #   returned by the `CreateGrant` function.
+    #   Unique identifier of the grant to retire. The grant ID is returned
+    #   in the response to a `CreateGrant` operation.
     #
     #   * Grant ID Example -
     #     0123456789012345678901234567890123456789012345678901234567890123
@@ -1917,7 +1883,7 @@ module Aws::KMS
     #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   To obtain the unique key ID and key ARN for a given CMK, use
     #   ListKeys or DescribeKey.
@@ -1997,8 +1963,8 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the CMK. This value can be a globally unique
+    #   identifier or the fully specified ARN to a key.
     #
     #   * Key ARN Example -
     #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -2008,7 +1974,7 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   New description for the key.
+    #   New description for the CMK.
     #   @return [String]
     #
     class UpdateKeyDescriptionRequest < Struct.new(

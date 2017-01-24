@@ -175,7 +175,7 @@ module Aws::KMS
     #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   To obtain the unique key ID and key ARN for a given CMK, use ListKeys
     #   or DescribeKey.
@@ -303,30 +303,7 @@ module Aws::KMS
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #
     # @option params [Array<String>] :operations
-    #   A list of operations that the grant permits. The list can contain any
-    #   combination of one or more of the following values:
-    #
-    #   * Decrypt
-    #
-    #   * Encrypt
-    #
-    #   * GenerateDataKey
-    #
-    #   * GenerateDataKeyWithoutPlaintext
-    #
-    #   * [ReEncryptFrom][1]
-    #
-    #   * [ReEncryptTo][1]
-    #
-    #   * CreateGrant
-    #
-    #   * RetireGrant
-    #
-    #   * DescribeKey
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_ReEncrypt.html
+    #   A list of operations that the grant permits.
     #
     # @option params [Types::GrantConstraints] :constraints
     #   The conditions under which the operations permitted by the grant are
@@ -654,7 +631,7 @@ module Aws::KMS
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -751,7 +728,7 @@ module Aws::KMS
     #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -996,17 +973,17 @@ module Aws::KMS
     #   encryption key.
     #
     #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK, or the alias name or ARN of an alias that points to
+    #   (ARN) of the CMK, or the alias name or ARN of an alias that refers to
     #   the CMK. Examples:
     #
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * CMK ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Alias name: `alias/ExampleAlias`
     #
-    #   * Alias ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #
     # @option params [Hash<String,String>] :encryption_context
     #   A set of key-value pairs that represents additional authenticated
@@ -1094,17 +1071,17 @@ module Aws::KMS
     #   encryption key.
     #
     #   A valid identifier is the unique key ID or the Amazon Resource Name
-    #   (ARN) of the CMK, or the alias name or ARN of an alias that points to
+    #   (ARN) of the CMK, or the alias name or ARN of an alias that refers to
     #   the CMK. Examples:
     #
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * CMK ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Alias name: `alias/ExampleAlias`
     #
-    #   * Alias ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
     #
     # @option params [Hash<String,String>] :encryption_context
     #   A set of key-value pairs that represents additional authenticated
@@ -1299,7 +1276,7 @@ module Aws::KMS
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @option params [required, String] :wrapping_algorithm
     #   The algorithm you will use to encrypt the key material before
@@ -1382,7 +1359,7 @@ module Aws::KMS
     #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     #   * Key ARN:
-    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @option params [required, String, IO] :import_token
     #   The import token that you received in the response to a previous
@@ -1541,20 +1518,13 @@ module Aws::KMS
     # Retrieves a list of policies attached to a key.
     #
     # @option params [required, String] :key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier, a fully specified ARN to either an alias
-    #   or a key, or an alias name prefixed by "alias/".
+    #   A unique identifier for the customer master key (CMK). You can use the
+    #   unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
     #
-    #   * Alias ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-    #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
-    #
-    #   * Alias Name Example - alias/MyAliasName
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @option params [Integer] :limit
     #   When paginating results, specify the maximum number of items to return
@@ -1739,7 +1709,7 @@ module Aws::KMS
     #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
     # @option params [required, String] :policy_name
     #   The name of the key policy.
@@ -1812,32 +1782,35 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Encrypts data on the server side with a new customer master key
+    # Encrypts data on the server side with a new customer master key (CMK)
     # without exposing the plaintext of the data on the client side. The
-    # data is first decrypted and then encrypted. This operation can also be
-    # used to change the encryption context of a ciphertext.
+    # data is first decrypted and then reencrypted. You can also use this
+    # operation to change the encryption context of a ciphertext.
     #
-    # Unlike other actions, `ReEncrypt` is authorized twice - once as
-    # `ReEncryptFrom` on the source key and once as `ReEncryptTo` on the
-    # destination key. We therefore recommend that you include the
-    # `"action":"kms:ReEncrypt*"` statement in your key policies to permit
-    # re-encryption from or to the key. The statement is included
-    # automatically when you authorize use of the key through the console
-    # but must be included manually when you set a policy by using the
-    # PutKeyPolicy function.
+    # Unlike other operations, `ReEncrypt` is authorized twice, once as
+    # `ReEncryptFrom` on the source CMK and once as `ReEncryptTo` on the
+    # destination CMK. We recommend that you include the `"kms:ReEncrypt*"`
+    # permission in your [key policies][1] to permit reencryption from or to
+    # the CMK. This permission is automatically included in the key policy
+    # when you create a CMK through the console, but you must include it
+    # manually when you create a CMK programmatically or when you set a key
+    # policy with the PutKeyPolicy operation.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #
     # @option params [required, String, IO] :ciphertext_blob
-    #   Ciphertext of the data to re-encrypt.
+    #   Ciphertext of the data to reencrypt.
     #
     # @option params [Hash<String,String>] :source_encryption_context
     #   Encryption context used to encrypt and decrypt the data specified in
     #   the `CiphertextBlob` parameter.
     #
     # @option params [required, String] :destination_key_id
-    #   A unique identifier for the customer master key used to re-encrypt the
-    #   data. This value can be a globally unique identifier, a fully
-    #   specified ARN to either an alias or a key, or an alias name prefixed
-    #   by "alias/".
+    #   A unique identifier for the CMK to use to reencrypt the data. This
+    #   value can be a globally unique identifier, a fully specified ARN to
+    #   either an alias or a key, or an alias name prefixed by "alias/".
     #
     #   * Key ARN Example -
     #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1851,7 +1824,7 @@ module Aws::KMS
     #   * Alias Name Example - alias/MyAliasName
     #
     # @option params [Hash<String,String>] :destination_encryption_context
-    #   Encryption context to be used when the data is re-encrypted.
+    #   Encryption context to use when the data is reencrypted.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -1896,40 +1869,38 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Retires a grant. You can retire a grant when you're done using it to
-    # clean up. You should revoke a grant when you intend to actively deny
+    # Retires a grant. To clean up, you can retire a grant when you're done
+    # using it. You should revoke a grant when you intend to actively deny
     # operations that depend on it. The following are permitted to call this
     # API:
     #
-    # * The account that created the grant
+    # * The AWS account (root user) under which the grant was created
     #
-    # * The `RetiringPrincipal`, if present
+    # * The `RetiringPrincipal`, if present in the grant
     #
-    # * The `GranteePrincipal`, if `RetireGrant` is a grantee operation
+    # * The `GranteePrincipal`, if `RetireGrant` is an operation specified
+    #   in the grant
     #
-    # The grant to retire must be identified by its grant token or by a
-    # combination of the key ARN and the grant ID. A grant token is a unique
-    # variable-length base64-encoded string. A grant ID is a 64 character
-    # unique identifier of a grant. Both are returned by the `CreateGrant`
-    # function.
+    # You must identify the grant to retire by its grant token or by a
+    # combination of the grant ID and the Amazon Resource Name (ARN) of the
+    # customer master key (CMK). A grant token is a unique variable-length
+    # base64-encoded string. A grant ID is a 64 character unique identifier
+    # of a grant. The CreateGrant operation returns both.
     #
     # @option params [String] :grant_token
     #   Token that identifies the grant to be retired.
     #
     # @option params [String] :key_id
-    #   A unique identifier for the customer master key associated with the
-    #   grant. This value can be a globally unique identifier or a fully
-    #   specified ARN of the key.
+    #   The Amazon Resource Name of the CMK associated with the grant.
+    #   Example:
     #
-    #   * Key ARN Example -
-    #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+    #   * arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
-    #   * Globally Unique Key ID Example -
-    #     12345678-1234-1234-1234-123456789012
+    #   ^
     #
     # @option params [String] :grant_id
-    #   Unique identifier of the grant to be retired. The grant ID is returned
-    #   by the `CreateGrant` function.
+    #   Unique identifier of the grant to retire. The grant ID is returned in
+    #   the response to a `CreateGrant` operation.
     #
     #   * Grant ID Example -
     #     0123456789012345678901234567890123456789012345678901234567890123
@@ -1993,7 +1964,7 @@ module Aws::KMS
     # `PendingDeletion`. Before the waiting period ends, you can use
     # CancelKeyDeletion to cancel the deletion of the CMK. After the waiting
     # period ends, AWS KMS deletes the CMK and all AWS KMS data associated
-    # with it, including all aliases that point to it.
+    # with it, including all aliases that refer to it.
     #
     # Deleting a CMK is a destructive and potentially dangerous operation.
     # When a CMK is deleted, all data that was encrypted under the CMK is
@@ -2017,7 +1988,7 @@ module Aws::KMS
     #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   * Key ARN:
-    #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+    #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #
     #   To obtain the unique key ID and key ARN for a given CMK, use ListKeys
     #   or DescribeKey.
@@ -2103,11 +2074,11 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Updates the description of a key.
+    # Updates the description of a customer master key (CMK).
     #
     # @option params [required, String] :key_id
-    #   A unique identifier for the customer master key. This value can be a
-    #   globally unique identifier or the fully specified ARN to a key.
+    #   A unique identifier for the CMK. This value can be a globally unique
+    #   identifier or the fully specified ARN to a key.
     #
     #   * Key ARN Example -
     #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -2116,7 +2087,7 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #
     # @option params [required, String] :description
-    #   New description for the key.
+    #   New description for the CMK.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #

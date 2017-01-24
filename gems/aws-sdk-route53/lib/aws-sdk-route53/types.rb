@@ -16,7 +16,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+    #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
     #         name: "AlarmName", # required
     #       }
     #
@@ -106,24 +106,30 @@ module Aws::Route53
     #
     #     * AWS Management Console: Go to the Amazon EC2 page, click **Load
     #       Balancers** in the navigation pane, select the load balancer,
-    #       and get the value of the **Hosted Zone ID** field on the
+    #       and get the value of the **Hosted zone** field on the
     #       **Description** tab. Use the same process to get the value of
-    #       **DNS Name**. See HostedZone$Name.
+    #       **DNS name**. (You specify the value of **DNS name** for
+    #       AliasTarget$DNSName.)
     #
-    #     * Elastic Load Balancing API: Use `DescribeLoadBalancers` to get
-    #       the value of `CanonicalHostedZoneNameID`. Use the same process
-    #       to get the `CanonicalHostedZoneName`. See HostedZone$Name.
+    #     * *Elastic Load Balancing API*\: Use `DescribeLoadBalancers` to
+    #       get the value of `CanonicalHostedZoneNameId` and `DNSName`. (You
+    #       specify the value of `DNSName` for AliasTarget$DNSName.) For
+    #       more information, see the applicable guide:
+    #
+    #       * Classic Load Balancer: [DescribeLoadBalancers][2]
+    #
+    #       * Application Load Balancer: [DescribeLoadBalancers][3]
     #
     #     * AWS CLI: Use ` describe-load-balancers ` to get the value of
-    #       `CanonicalHostedZoneNameID`. Use the same process to get the
-    #       `CanonicalHostedZoneName`. See HostedZone$Name.
+    #       `CanonicalHostedZoneNameID` and `DNSName`. (You specify the
+    #       value of `DNSName` for AliasTarget$DNSName.)
     #
     #   An Amazon S3 bucket configured as a static website
     #
-    #   : Specify the hosted zone ID for the Amazon S3 website endpoint in
-    #     which you created the bucket. For more information about valid
-    #     values, see the table [ Amazon S3 (S3) Website Endpoints][2] in
-    #     the *Amazon Web Services General Reference*.
+    #   : Specify the hosted zone ID for the region that you created the
+    #     bucket in. For more information about valid values, see the table
+    #     [Amazon Simple Storage Service Website Endpoints][4] in the
+    #     *Amazon Web Services General Reference*.
     #
     #   Another Amazon Route 53 resource record set in your hosted zone
     #
@@ -134,7 +140,9 @@ module Aws::Route53
     #
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
-    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [2]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [4]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] dns_name
@@ -157,51 +165,60 @@ module Aws::Route53
     #     domain name.) You can use the following methods to get the value
     #     of the CNAME attribute:
     #
-    #     * *AWS Managment Console*\: For information about how to get the
+    #     * *AWS Management Console*\: For information about how to get the
     #       value by using the console, see [Using Custom Domains with AWS
     #       Elastic Beanstalk][2] in the *AWS Elastic Beanstalk Developer
     #       Guide*.
     #
-    #     * *Elastic Load Balancing API*\: Use the `DescribeEnvironments`
-    #       action to get the value of the `CNAME` attribute. For more
-    #       information, see [DescribeEnvironments][3] in the *AWS Elastic
-    #       Beanstalk API Reference*.
+    #     * *Elastic Beanstalk API*\: Use the `DescribeEnvironments` action
+    #       to get the value of the `CNAME` attribute. For more information,
+    #       see [DescribeEnvironments][3] in the *AWS Elastic Beanstalk API
+    #       Reference*.
     #
-    #     * *AWS CLI*\: Use the describe-environments command to get the
+    #     * *AWS CLI*\: Use the `describe-environments` command to get the
     #       value of the `CNAME` attribute. For more information, see
     #       [describe-environments][4] in the *AWS Command Line Interface
     #       Reference*.
     #
-    #   * **An ELB load balancer:** Specify the DNS name associated with the
-    #     load balancer. Get the DNS name by using the AWS Management
-    #     Console, the ELB API, or the AWS CLI. Use the same method to get
-    #     values for `HostedZoneId` and `DNSName`. If you get one value from
-    #     the console and the other value from the API or the CLI, creating
-    #     the resource record set will fail.
+    #   * **An ELB load balancer:** Specify the DNS name that is associated
+    #     with the load balancer. Get the DNS name by using the AWS
+    #     Management Console, the ELB API, or the AWS CLI. Use the same
+    #     method to get values for `HostedZoneId` and `DNSName`. If you get
+    #     one value from the console and the other value from the API or the
+    #     CLI, creating the resource record set will fail.
     #
     #     * *AWS Management Console*\: Go to the EC2 page, click **Load
     #       Balancers** in the navigation pane, choose the load balancer,
     #       choose the **Description** tab, and get the value of the **DNS
-    #       Name** field that begins with dualstack. Use the same process to
-    #       get the **Hosted Zone ID**. See HostedZone$Id.
+    #       name** field. (If you're routing traffic to a Classic Load
+    #       Balancer, get the value that begins with **dualstack**.) Use the
+    #       same process to get the value of the **Hosted zone** field. See
+    #       AliasTarget$HostedZoneId.
     #
-    #     * *Elastic Load Balancing API*\: Use ` DescribeLoadBalancers ` to
-    #       get the value of `CanonicalHostedZoneName`. Use the same process
-    #       to get the `CanonicalHostedZoneNameId`. See HostedZone$Id.
+    #     * *Elastic Load Balancing API*\: Use `DescribeLoadBalancers` to
+    #       get the value of `DNSName` and `CanonicalHostedZoneNameId`. (You
+    #       specify the value of `CanonicalHostedZoneNameId` for
+    #       AliasTarget$HostedZoneId.) For more information, see the
+    #       applicable guide:
+    #
+    #       * Classic Load Balancer: [DescribeLoadBalancers][5]
+    #
+    #       * Application Load Balancer: [DescribeLoadBalancers][6]
     #
     #     * *AWS CLI*\: Use ` describe-load-balancers ` to get the value of
-    #       `CanonicalHostedZoneName`. Use the same process to get the
-    #       `CanonicalHostedZoneNameId`. See HostedZoneId.
+    #       `DNSName` and `CanonicalHostedZoneNameId`. (You specify the
+    #       value of `CanonicalHostedZoneNameId` for
+    #       AliasTarget$HostedZoneId.)
     #
     #   * **An Amazon S3 bucket that is configured as a static website:**
     #     Specify the domain name of the Amazon S3 website endpoint in which
-    #     you created the bucket; for example,
+    #     you created the bucket, for example,
     #     `s3-website-us-east-1.amazonaws.com`. For more information about
     #     valid values, see the table [Amazon Simple Storage Service (S3)
-    #     Website Endpoints][5] in the *Amazon Web Services General
+    #     Website Endpoints][7] in the *Amazon Web Services General
     #     Reference*. For more information about using S3 buckets for
-    #     websites, see [Hosting a Static Website on Amazon S3][6] in the
-    #     *Amazon S3 Developer Guide.*
+    #     websites, see [Getting Started with Amazon Route 53][8] in the
+    #     *Amazon Route 53 Developer Guide.*
     #
     #   * **Another Amazon Route 53 resource record set**\: Specify the
     #     value of the `Name` element for a resource record set in the
@@ -211,10 +228,12 @@ module Aws::Route53
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
     #   [2]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html
-    #   [3]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/API_DescribeEnvironments.html
+    #   [3]: http://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html
     #   [4]: http://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html
-    #   [5]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-    #   [6]: http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
+    #   [5]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [6]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [7]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [8]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/getting-started.html
     #   @return [String]
     #
     # @!attribute [rw] evaluate_target_health
@@ -327,7 +346,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "AssociateVPCComment",
@@ -381,7 +400,7 @@ module Aws::Route53
     #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
     #           set_identifier: "ResourceRecordSetIdentifier",
     #           weight: 1,
-    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+    #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
     #           geo_location: {
     #             continent_code: "GeoLocationContinentCode",
     #             country_code: "GeoLocationCountryCode",
@@ -488,7 +507,7 @@ module Aws::Route53
     #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
     #               set_identifier: "ResourceRecordSetIdentifier",
     #               weight: 1,
-    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+    #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
     #               geo_location: {
     #                 continent_code: "GeoLocationContinentCode",
     #                 country_code: "GeoLocationCountryCode",
@@ -584,7 +603,7 @@ module Aws::Route53
     #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
     #                 set_identifier: "ResourceRecordSetIdentifier",
     #                 weight: 1,
-    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+    #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
     #                 geo_location: {
     #                   continent_code: "GeoLocationContinentCode",
     #                   country_code: "GeoLocationCountryCode",
@@ -784,7 +803,7 @@ module Aws::Route53
     #           enable_sni: false,
     #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #           alarm_identifier: {
-    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+    #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
     #             name: "AlarmName", # required
     #           },
     #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -835,7 +854,7 @@ module Aws::Route53
     #       {
     #         name: "DNSName", # required
     #         vpc: {
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         caller_reference: "Nonce", # required
@@ -1175,7 +1194,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1382,7 +1401,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #       }
@@ -1438,7 +1457,7 @@ module Aws::Route53
     #       {
     #         hosted_zone_id: "ResourceId", # required
     #         vpc: { # required
-    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+    #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, ca-central-1, cn-north-1
     #           vpc_id: "VPCId",
     #         },
     #         comment: "DisassociateVPCComment",
@@ -2130,7 +2149,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -4025,7 +4044,7 @@ module Aws::Route53
     #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
     #         set_identifier: "ResourceRecordSetIdentifier",
     #         weight: 1,
-    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+    #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
     #         geo_location: {
     #           continent_code: "GeoLocationContinentCode",
     #           country_code: "GeoLocationCountryCode",
@@ -4932,7 +4951,7 @@ module Aws::Route53
     #         enable_sni: false,
     #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
     #         alarm_identifier: {
-    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+    #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, ca-central-1, eu-central-1, eu-west-1, eu-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
     #           name: "AlarmName", # required
     #         },
     #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -5380,7 +5399,7 @@ module Aws::Route53
     #   data as a hash:
     #
     #       {
-    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+    #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, ca-central-1, cn-north-1
     #         vpc_id: "VPCId",
     #       }
     #

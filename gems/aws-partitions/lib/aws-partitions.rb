@@ -227,6 +227,7 @@ module Aws
             'ApplicationAutoScaling' => 'application-autoscaling',
             'ApplicationDiscoveryService' => 'discovery',
             'AutoScaling' => 'autoscaling',
+            'Batch' => 'batch',
             'Budgets' => 'budgets',
             'CloudFormation' => 'cloudformation',
             'CloudFront' => 'cloudfront',

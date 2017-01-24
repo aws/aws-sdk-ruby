@@ -199,18 +199,18 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :engine_name
     #   The type of engine for the endpoint. Valid values include MYSQL,
-    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
+    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
     #
-    # @option params [required, String] :username
+    # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
     #
-    # @option params [required, String] :password
+    # @option params [String] :password
     #   The password to be used to login to the endpoint database.
     #
-    # @option params [required, String] :server_name
+    # @option params [String] :server_name
     #   The name of the server where the endpoint database resides.
     #
-    # @option params [required, Integer] :port
+    # @option params [Integer] :port
     #   The port used by the endpoint database.
     #
     # @option params [String] :database_name
@@ -250,10 +250,10 @@ module Aws::DatabaseMigrationService
     #     endpoint_identifier: "String", # required
     #     endpoint_type: "source", # required, accepts source, target
     #     engine_name: "String", # required
-    #     username: "String", # required
-    #     password: "SecretString", # required
-    #     server_name: "String", # required
-    #     port: 1, # required
+    #     username: "String",
+    #     password: "SecretString",
+    #     server_name: "String",
+    #     port: 1,
     #     database_name: "String",
     #     extra_connection_attributes: "String",
     #     kms_key_id: "String",
@@ -441,6 +441,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
+    #   resp.replication_instance.secondary_availability_zone #=> String
     #
     # @overload create_replication_instance(params = {})
     # @param [Hash] params ({})
@@ -540,7 +541,13 @@ module Aws::DatabaseMigrationService
     #   For example, --table-mappings file://mappingfile.json
     #
     # @option params [String] :replication_task_settings
-    #   Settings for the task, such as target metadata settings.
+    #   Settings for the task, such as target metadata settings. For a
+    #   complete list of task settings, see [Task Settings for AWS Database
+    #   Migration Service Tasks][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
     #   The start time for the Change Data Capture (CDC) operation.
@@ -582,6 +589,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_settings #=> String
     #   resp.replication_task.status #=> String
     #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
     #   resp.replication_task.replication_task_arn #=> String
@@ -602,7 +610,7 @@ module Aws::DatabaseMigrationService
     # Deletes the specified certificate.
     #
     # @option params [required, String] :certificate_arn
-    #   the Amazon Resource Name (ARN) of the deleted certificate.
+    #   The Amazon Resource Name (ARN) of the deleted certificate.
     #
     # @return [Types::DeleteCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -619,6 +627,7 @@ module Aws::DatabaseMigrationService
     #   resp.certificate.certificate_identifier #=> String
     #   resp.certificate.certificate_creation_date #=> Time
     #   resp.certificate.certificate_pem #=> String
+    #   resp.certificate.certificate_wallet #=> String
     #   resp.certificate.certificate_arn #=> String
     #   resp.certificate.certificate_owner #=> String
     #   resp.certificate.valid_from_date #=> Time
@@ -734,6 +743,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
+    #   resp.replication_instance.secondary_availability_zone #=> String
     #
     # @overload delete_replication_instance(params = {})
     # @param [Hash] params ({})
@@ -788,6 +798,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_settings #=> String
     #   resp.replication_task.status #=> String
     #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
     #   resp.replication_task.replication_task_arn #=> String
@@ -875,6 +886,7 @@ module Aws::DatabaseMigrationService
     #   resp.certificates[0].certificate_identifier #=> String
     #   resp.certificates[0].certificate_creation_date #=> Time
     #   resp.certificates[0].certificate_pem #=> String
+    #   resp.certificates[0].certificate_wallet #=> String
     #   resp.certificates[0].certificate_arn #=> String
     #   resp.certificates[0].certificate_owner #=> String
     #   resp.certificates[0].valid_from_date #=> Time
@@ -1232,6 +1244,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instances[0].replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instances[0].publicly_accessible #=> Boolean
+    #   resp.replication_instances[0].secondary_availability_zone #=> String
     #
     # @overload describe_replication_instances(params = {})
     # @param [Hash] params ({})
@@ -1353,6 +1366,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_settings #=> String
     #   resp.replication_tasks[0].status #=> String
     #   resp.replication_tasks[0].last_failure_message #=> String
+    #   resp.replication_tasks[0].stop_reason #=> String
     #   resp.replication_tasks[0].replication_task_creation_date #=> Time
     #   resp.replication_tasks[0].replication_task_start_date #=> Time
     #   resp.replication_tasks[0].replication_task_arn #=> String
@@ -1478,10 +1492,14 @@ module Aws::DatabaseMigrationService
     #
     # @option params [required, String] :certificate_identifier
     #   The customer-assigned name of the certificate. Valid characters are
-    #   \[A-z\_0-9\].
+    #   A-z and 0-9.
     #
     # @option params [String] :certificate_pem
-    #   The contents of the .pem X.509 certificate file.
+    #   The contents of the .pem X.509 certificate file for the certificate.
+    #
+    # @option params [String, IO] :certificate_wallet
+    #   The location of the imported Oracle Wallet certificate for use with
+    #   SSL.
     #
     # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1492,6 +1510,7 @@ module Aws::DatabaseMigrationService
     #   resp = client.import_certificate({
     #     certificate_identifier: "String", # required
     #     certificate_pem: "String",
+    #     certificate_wallet: "data",
     #   })
     #
     # @example Response structure
@@ -1499,6 +1518,7 @@ module Aws::DatabaseMigrationService
     #   resp.certificate.certificate_identifier #=> String
     #   resp.certificate.certificate_creation_date #=> Time
     #   resp.certificate.certificate_pem #=> String
+    #   resp.certificate.certificate_wallet #=> String
     #   resp.certificate.certificate_arn #=> String
     #   resp.certificate.certificate_owner #=> String
     #   resp.certificate.valid_from_date #=> Time
@@ -1558,7 +1578,7 @@ module Aws::DatabaseMigrationService
     #
     # @option params [String] :engine_name
     #   The type of engine for the endpoint. Valid values include MYSQL,
-    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
+    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
     #
     # @option params [String] :username
     #   The user name to be used to login to the endpoint database.
@@ -1766,6 +1786,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
     #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
     #   resp.replication_instance.publicly_accessible #=> Boolean
+    #   resp.replication_instance.secondary_availability_zone #=> String
     #
     # @overload modify_replication_instance(params = {})
     # @param [Hash] params ({})
@@ -1812,6 +1833,87 @@ module Aws::DatabaseMigrationService
     # @param [Hash] params ({})
     def modify_replication_subnet_group(params = {}, options = {})
       req = build_request(:modify_replication_subnet_group, params)
+      req.send_request(options)
+    end
+
+    # Modifies the specified replication task.
+    #
+    # You can't modify the task endpoints. The task must be stopped before
+    # you can modify it.
+    #
+    # @option params [required, String] :replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication task.
+    #
+    # @option params [String] :replication_task_identifier
+    #   The replication task identifier.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #
+    # @option params [String] :migration_type
+    #   The migration type.
+    #
+    #   Valid values: full-load \| cdc \| full-load-and-cdc
+    #
+    # @option params [String] :table_mappings
+    #   The path of the JSON file that contains the table mappings. Preceed
+    #   the path with "file://".
+    #
+    #   For example, --table-mappings file://mappingfile.json
+    #
+    # @option params [String] :replication_task_settings
+    #   JSON file that contains settings for the task, such as target metadata
+    #   settings.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
+    #   The start time for the Change Data Capture (CDC) operation.
+    #
+    # @return [Types::ModifyReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyReplicationTaskResponse#replication_task #replication_task} => Types::ReplicationTask
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_replication_task({
+    #     replication_task_arn: "String", # required
+    #     replication_task_identifier: "String",
+    #     migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
+    #     table_mappings: "String",
+    #     replication_task_settings: "String",
+    #     cdc_start_time: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_task.replication_task_identifier #=> String
+    #   resp.replication_task.source_endpoint_arn #=> String
+    #   resp.replication_task.target_endpoint_arn #=> String
+    #   resp.replication_task.replication_instance_arn #=> String
+    #   resp.replication_task.migration_type #=> String, one of "full-load", "cdc", "full-load-and-cdc"
+    #   resp.replication_task.table_mappings #=> String
+    #   resp.replication_task.replication_task_settings #=> String
+    #   resp.replication_task.status #=> String
+    #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
+    #   resp.replication_task.replication_task_creation_date #=> Time
+    #   resp.replication_task.replication_task_start_date #=> Time
+    #   resp.replication_task.replication_task_arn #=> String
+    #   resp.replication_task.replication_task_stats.full_load_progress_percent #=> Integer
+    #   resp.replication_task.replication_task_stats.elapsed_time_millis #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loaded #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
+    #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+    #
+    # @overload modify_replication_task(params = {})
+    # @param [Hash] params ({})
+    def modify_replication_task(params = {}, options = {})
+      req = build_request(:modify_replication_task, params)
       req.send_request(options)
     end
 
@@ -1913,6 +2015,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_settings #=> String
     #   resp.replication_task.status #=> String
     #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
     #   resp.replication_task.replication_task_arn #=> String
@@ -1956,6 +2059,7 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_settings #=> String
     #   resp.replication_task.status #=> String
     #   resp.replication_task.last_failure_message #=> String
+    #   resp.replication_task.stop_reason #=> String
     #   resp.replication_task.replication_task_creation_date #=> Time
     #   resp.replication_task.replication_task_start_date #=> Time
     #   resp.replication_task.replication_task_arn #=> String

@@ -155,14 +155,14 @@ module Aws::CodeCommit
 
     # Returns information about one or more repositories.
     #
-    # <note markdown="1">The description field for a repository accepts all HTML characters and
+    # <note markdown="1"> The description field for a repository accepts all HTML characters and
     # all valid Unicode characters. Applications that do not HTML-encode the
     # description and display it in a web page could expose users to
     # potentially malicious code. Make sure that you HTML-encode the
     # description field in any application that uses this API to display the
     # repository description on a web page.
     #
-    # </note>
+    #  </note>
     #
     # @option params [required, Array<String>] :repository_names
     #   The names of the repositories to get information about.
@@ -204,10 +204,10 @@ module Aws::CodeCommit
     # Creates a new branch in a repository and points the branch to a
     # commit.
     #
-    # <note markdown="1">Calling the create branch operation does not set a repository's
+    # <note markdown="1"> Calling the create branch operation does not set a repository's
     # default branch. To do this, call the update default branch operation.
     #
-    # </note>
+    #  </note>
     #
     # @option params [required, String] :repository_name
     #   The name of the repository in which you want to create the new branch.
@@ -240,13 +240,13 @@ module Aws::CodeCommit
     # @option params [required, String] :repository_name
     #   The name of the new repository to be created.
     #
-    #   <note markdown="1">The repository name must be unique across the calling AWS account. In
+    #   <note markdown="1"> The repository name must be unique across the calling AWS account. In
     #   addition, repository names are limited to 100 alphanumeric, dash, and
     #   underscore characters, and cannot include certain characters. For a
     #   full description of the limits on repository names, see [Limits][1] in
     #   the AWS CodeCommit User Guide. The suffix ".git" is prohibited.
     #
-    #   </note>
+    #    </note>
     #
     #
     #
@@ -255,14 +255,14 @@ module Aws::CodeCommit
     # @option params [String] :repository_description
     #   A comment or description about the new repository.
     #
-    #   <note markdown="1">The description field for a repository accepts all HTML characters and
+    #   <note markdown="1"> The description field for a repository accepts all HTML characters and
     #   all valid Unicode characters. Applications that do not HTML-encode the
     #   description and display it in a web page could expose users to
     #   potentially malicious code. Make sure that you HTML-encode the
     #   description field in any application that uses this API to display the
     #   repository description on a web page.
     #
-    #   </note>
+    #    </note>
     #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -323,6 +323,37 @@ module Aws::CodeCommit
     # @param [Hash] params ({})
     def delete_repository(params = {}, options = {})
       req = build_request(:delete_repository, params)
+      req.send_request(options)
+    end
+
+    # Returns the base-64 encoded content of an individual blob within a
+    # repository.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository that contains the blob.
+    #
+    # @option params [required, String] :blob_id
+    #   The ID of the blob, which is its SHA-1 pointer.
+    #
+    # @return [Types::GetBlobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBlobOutput#content #content} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_blob({
+    #     repository_name: "RepositoryName", # required
+    #     blob_id: "ObjectId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.content #=> String
+    #
+    # @overload get_blob(params = {})
+    # @param [Hash] params ({})
+    def get_blob(params = {}, options = {})
+      req = build_request(:get_blob, params)
       req.send_request(options)
     end
 
@@ -400,16 +431,89 @@ module Aws::CodeCommit
       req.send_request(options)
     end
 
+    # Returns information about the differences in a valid commit specifier
+    # (such as a branch, tag, HEAD, commit ID or other fully qualified
+    # reference). Results can be limited to a specified path.
+    #
+    # @option params [required, String] :repository_name
+    #   The name of the repository where you want to get differences.
+    #
+    # @option params [String] :before_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, the full commit ID. Optional. If not
+    #   specified, all changes prior to the `afterCommitSpecifier` value will
+    #   be shown. If you do not use `beforeCommitSpecifier` in your request,
+    #   consider limiting the results with `maxResults`.
+    #
+    # @option params [required, String] :after_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit.
+    #
+    # @option params [String] :before_path
+    #   The file path in which to check for differences. Limits the results to
+    #   this path. Can also be used to specify the previous name of a
+    #   directory or folder. If `beforePath` and `afterPath` are not
+    #   specified, differences will be shown for all paths.
+    #
+    # @option params [String] :after_path
+    #   The file path in which to check differences. Limits the results to
+    #   this path. Can also be used to specify the changed name of a directory
+    #   or folder, if it has changed. If not specified, differences will be
+    #   shown for all paths.
+    #
+    # @option params [Integer] :max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #
+    # @option params [String] :next_token
+    #   An enumeration token that when provided in a request, returns the next
+    #   batch of the results.
+    #
+    # @return [Types::GetDifferencesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDifferencesOutput#differences #differences} => Array&lt;Types::Difference&gt;
+    #   * {Types::GetDifferencesOutput#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_differences({
+    #     repository_name: "RepositoryName", # required
+    #     before_commit_specifier: "CommitName",
+    #     after_commit_specifier: "CommitName", # required
+    #     before_path: "Path",
+    #     after_path: "Path",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.differences #=> Array
+    #   resp.differences[0].before_blob.blob_id #=> String
+    #   resp.differences[0].before_blob.path #=> String
+    #   resp.differences[0].before_blob.mode #=> String
+    #   resp.differences[0].after_blob.blob_id #=> String
+    #   resp.differences[0].after_blob.path #=> String
+    #   resp.differences[0].after_blob.mode #=> String
+    #   resp.differences[0].change_type #=> String, one of "A", "M", "D"
+    #   resp.next_token #=> String
+    #
+    # @overload get_differences(params = {})
+    # @param [Hash] params ({})
+    def get_differences(params = {}, options = {})
+      req = build_request(:get_differences, params)
+      req.send_request(options)
+    end
+
     # Returns information about a repository.
     #
-    # <note markdown="1">The description field for a repository accepts all HTML characters and
+    # <note markdown="1"> The description field for a repository accepts all HTML characters and
     # all valid Unicode characters. Applications that do not HTML-encode the
     # description and display it in a web page could expose users to
     # potentially malicious code. Make sure that you HTML-encode the
     # description field in any application that uses this API to display the
     # repository description on a web page.
     #
-    # </note>
+    #  </note>
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to get information about.
@@ -446,7 +550,7 @@ module Aws::CodeCommit
 
     # Gets information about triggers configured for a repository.
     #
-    # @option params [String] :repository_name
+    # @option params [required, String] :repository_name
     #   The name of the repository for which the trigger is configured.
     #
     # @return [Types::GetRepositoryTriggersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -457,7 +561,7 @@ module Aws::CodeCommit
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_repository_triggers({
-    #     repository_name: "RepositoryName",
+    #     repository_name: "RepositoryName", # required
     #   })
     #
     # @example Response structure
@@ -558,11 +662,11 @@ module Aws::CodeCommit
     # Replaces all triggers for a repository. This can be used to create or
     # delete triggers.
     #
-    # @option params [String] :repository_name
+    # @option params [required, String] :repository_name
     #   The name of the repository where you want to create or update the
     #   trigger.
     #
-    # @option params [Array<Types::RepositoryTrigger>] :triggers
+    # @option params [required, Array<Types::RepositoryTrigger>] :triggers
     #   The JSON block of configuration information for each trigger.
     #
     # @return [Types::PutRepositoryTriggersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -572,14 +676,14 @@ module Aws::CodeCommit
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_repository_triggers({
-    #     repository_name: "RepositoryName",
-    #     triggers: [
+    #     repository_name: "RepositoryName", # required
+    #     triggers: [ # required
     #       {
-    #         name: "RepositoryTriggerName",
-    #         destination_arn: "Arn",
+    #         name: "RepositoryTriggerName", # required
+    #         destination_arn: "Arn", # required
     #         custom_data: "RepositoryTriggerCustomData",
     #         branches: ["BranchName"],
-    #         events: ["all"], # accepts all, updateReference, createReference, deleteReference
+    #         events: ["all"], # required, accepts all, updateReference, createReference, deleteReference
     #       },
     #     ],
     #   })
@@ -600,10 +704,10 @@ module Aws::CodeCommit
     # the test will send data from the last commit. If no data is available,
     # sample data will be generated.
     #
-    # @option params [String] :repository_name
+    # @option params [required, String] :repository_name
     #   The name of the repository in which to test the triggers.
     #
-    # @option params [Array<Types::RepositoryTrigger>] :triggers
+    # @option params [required, Array<Types::RepositoryTrigger>] :triggers
     #   The list of triggers to test.
     #
     # @return [Types::TestRepositoryTriggersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -614,14 +718,14 @@ module Aws::CodeCommit
     # @example Request syntax with placeholder values
     #
     #   resp = client.test_repository_triggers({
-    #     repository_name: "RepositoryName",
-    #     triggers: [
+    #     repository_name: "RepositoryName", # required
+    #     triggers: [ # required
     #       {
-    #         name: "RepositoryTriggerName",
-    #         destination_arn: "Arn",
+    #         name: "RepositoryTriggerName", # required
+    #         destination_arn: "Arn", # required
     #         custom_data: "RepositoryTriggerCustomData",
     #         branches: ["BranchName"],
-    #         events: ["all"], # accepts all, updateReference, createReference, deleteReference
+    #         events: ["all"], # required, accepts all, updateReference, createReference, deleteReference
     #       },
     #     ],
     #   })
@@ -643,11 +747,11 @@ module Aws::CodeCommit
 
     # Sets or changes the default branch name for the specified repository.
     #
-    # <note markdown="1">If you use this operation to change the default branch name to the
+    # <note markdown="1"> If you use this operation to change the default branch name to the
     # current default branch name, a success message is returned even though
     # the default branch did not change.
     #
-    # </note>
+    #  </note>
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to set or change the default branch for.
@@ -673,14 +777,14 @@ module Aws::CodeCommit
 
     # Sets or changes the comment or description for a repository.
     #
-    # <note markdown="1">The description field for a repository accepts all HTML characters and
+    # <note markdown="1"> The description field for a repository accepts all HTML characters and
     # all valid Unicode characters. Applications that do not HTML-encode the
     # description and display it in a web page could expose users to
     # potentially malicious code. Make sure that you HTML-encode the
     # description field in any application that uses this API to display the
     # repository description on a web page.
     #
-    # </note>
+    #  </note>
     #
     # @option params [required, String] :repository_name
     #   The name of the repository to set or change the comment or description

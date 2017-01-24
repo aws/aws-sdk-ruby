@@ -84,7 +84,7 @@ module Aws::CognitoIdentity
     #   @return [Array<String>]
     #
     # @!attribute [rw] cognito_identity_providers
-    #   An array of Amazon Cognito Identity user pools.
+    #   An array of Amazon Cognito Identity user pools and their client IDs.
     #   @return [Array<Types::CognitoIdentityProvider>]
     #
     # @!attribute [rw] saml_provider_arns
@@ -290,13 +290,20 @@ module Aws::CognitoIdentity
     #
     # @!attribute [rw] logins
     #   A set of optional name-value pairs that map provider names to
-    #   provider tokens.
+    #   provider tokens. The available provider names for `Logins` are as
+    #   follows:
     #
-    #   The available provider names for `Logins` are as follows: *
-    #   Facebook: `graph.facebook.com`
+    #   * Facebook: `graph.facebook.com`
+    #
+    #   * Amazon Cognito Identity Provider:
+    #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`
+    #
     #   * Google: `accounts.google.com`
+    #
     #   * Amazon: `www.amazon.com`
+    #
     #   * Twitter: `api.twitter.com`
+    #
     #   * Digits: `www.digits.com`
     #   @return [Hash<String,String>]
     #
@@ -347,9 +354,17 @@ module Aws::CognitoIdentity
     #   authenticated and unauthenticated roles are supported.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] role_mappings
+    #   How users for a specific identity provider are to mapped to roles.
+    #   This is a String-to-RoleMapping object map. The string identifies
+    #   the identity provider, for example, "graph.facebook.com" or
+    #   "cognito-idp-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
+    #   @return [Hash<String,Types::RoleMapping>]
+    #
     class GetIdentityPoolRolesResponse < Struct.new(
       :identity_pool_id,
-      :roles)
+      :roles,
+      :role_mappings)
       include Aws::Structure
     end
 
@@ -445,8 +460,8 @@ module Aws::CognitoIdentity
     #   A set of optional name-value pairs that map provider names to
     #   provider tokens. When using graph.facebook.com and www.amazon.com,
     #   supply the access\_token returned from the provider's authflow. For
-    #   accounts.google.com or any other OpenId Connect provider, always
-    #   include the id\_token.
+    #   accounts.google.com, an Amazon Cognito Identity Provider, or any
+    #   other OpenId Connect provider, always include the `id_token`.
     #   @return [Hash<String,String>]
     #
     class GetOpenIdTokenInput < Struct.new(
@@ -499,7 +514,7 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
-    # An object representing a Cognito identity pool.
+    # An object representing an Amazon Cognito identity pool.
     #
     # @note When making an API call, you may pass IdentityPool
     #   data as a hash:
@@ -762,6 +777,46 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
+    # A rule that maps a claim name, a claim value, and a match type to a
+    # role ARN.
+    #
+    # @note When making an API call, you may pass MappingRule
+    #   data as a hash:
+    #
+    #       {
+    #         claim: "ClaimName", # required
+    #         match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
+    #         value: "ClaimValue", # required
+    #         role_arn: "ARNString", # required
+    #       }
+    #
+    # @!attribute [rw] claim
+    #   The claim name that must be present in the token, for example,
+    #   "isAdmin" or "paid".
+    #   @return [String]
+    #
+    # @!attribute [rw] match_type
+    #   The match condition that specifies how closely the claim value in
+    #   the IdP token must match `Value`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A brief string that the claim must match, for example, "paid" or
+    #   "yes".
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The role ARN.
+    #   @return [String]
+    #
+    class MappingRule < Struct.new(
+      :claim,
+      :match_type,
+      :value,
+      :role_arn)
+      include Aws::Structure
+    end
+
     # Input to the `MergeDeveloperIdentities` action.
     #
     # @note When making an API call, you may pass MergeDeveloperIdentitiesInput
@@ -817,6 +872,86 @@ module Aws::CognitoIdentity
       include Aws::Structure
     end
 
+    # A role mapping.
+    #
+    # @note When making an API call, you may pass RoleMapping
+    #   data as a hash:
+    #
+    #       {
+    #         type: "Token", # required, accepts Token, Rules
+    #         ambiguous_role_resolution: "AuthenticatedRole", # accepts AuthenticatedRole, Deny
+    #         rules_configuration: {
+    #           rules: [ # required
+    #             {
+    #               claim: "ClaimName", # required
+    #               match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
+    #               value: "ClaimValue", # required
+    #               role_arn: "ARNString", # required
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The role mapping type. Token will use `cognito:roles` and
+    #   `cognito:preferred_role` claims from the Cognito identity provider
+    #   token to map groups to roles. Rules will attempt to match claims
+    #   from the token to map to a role.
+    #   @return [String]
+    #
+    # @!attribute [rw] ambiguous_role_resolution
+    #   If you specify Token or Rules as the `Type`,
+    #   `AmbiguousRoleResolution` is required.
+    #
+    #   Specifies the action to be taken if either no rules match the claim
+    #   value for the `Rules` type, or there is no `cognito:preferred_role`
+    #   claim and there are multiple `cognito:roles` matches for the `Token`
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] rules_configuration
+    #   The rules to be used for mapping users to roles.
+    #
+    #   If you specify Rules as the role mapping type, `RulesConfiguration`
+    #   is required.
+    #   @return [Types::RulesConfigurationType]
+    #
+    class RoleMapping < Struct.new(
+      :type,
+      :ambiguous_role_resolution,
+      :rules_configuration)
+      include Aws::Structure
+    end
+
+    # A container for rules.
+    #
+    # @note When making an API call, you may pass RulesConfigurationType
+    #   data as a hash:
+    #
+    #       {
+    #         rules: [ # required
+    #           {
+    #             claim: "ClaimName", # required
+    #             match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
+    #             value: "ClaimValue", # required
+    #             role_arn: "ARNString", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rules
+    #   An array of rules. You can specify up to 25 rules per identity
+    #   provider.
+    #
+    #   Rules are evaluated in order. The first one to match specifies the
+    #   role.
+    #   @return [Array<Types::MappingRule>]
+    #
+    class RulesConfigurationType < Struct.new(
+      :rules)
+      include Aws::Structure
+    end
+
     # Input to the `SetIdentityPoolRoles` action.
     #
     # @note When making an API call, you may pass SetIdentityPoolRolesInput
@@ -826,6 +961,22 @@ module Aws::CognitoIdentity
     #         identity_pool_id: "IdentityPoolId", # required
     #         roles: { # required
     #           "RoleType" => "ARNString",
+    #         },
+    #         role_mappings: {
+    #           "IdentityProviderName" => {
+    #             type: "Token", # required, accepts Token, Rules
+    #             ambiguous_role_resolution: "AuthenticatedRole", # accepts AuthenticatedRole, Deny
+    #             rules_configuration: {
+    #               rules: [ # required
+    #                 {
+    #                   claim: "ClaimName", # required
+    #                   match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
+    #                   value: "ClaimValue", # required
+    #                   role_arn: "ARNString", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -839,9 +990,19 @@ module Aws::CognitoIdentity
     #   value will be the Role ARN.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] role_mappings
+    #   How users for a specific identity provider are to mapped to roles.
+    #   This is a string to RoleMapping object map. The string identifies
+    #   the identity provider, for example, "graph.facebook.com" or
+    #   "cognito-idp-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
+    #
+    #   Up to 25 rules can be specified per identity provider.
+    #   @return [Hash<String,Types::RoleMapping>]
+    #
     class SetIdentityPoolRolesInput < Struct.new(
       :identity_pool_id,
-      :roles)
+      :roles,
+      :role_mappings)
       include Aws::Structure
     end
 

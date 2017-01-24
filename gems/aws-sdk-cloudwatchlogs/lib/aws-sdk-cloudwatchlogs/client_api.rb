@@ -45,6 +45,7 @@ module Aws::CloudWatchLogs
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationName = Shapes::StringShape.new(name: 'DestinationName')
     Destinations = Shapes::ListShape.new(name: 'Destinations')
+    Distribution = Shapes::StringShape.new(name: 'Distribution')
     EventId = Shapes::StringShape.new(name: 'EventId')
     EventMessage = Shapes::StringShape.new(name: 'EventMessage')
     EventNumber = Shapes::IntegerShape.new(name: 'EventNumber')
@@ -77,6 +78,8 @@ module Aws::CloudWatchLogs
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidSequenceTokenException = Shapes::StructureShape.new(name: 'InvalidSequenceTokenException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListTagsLogGroupRequest = Shapes::StructureShape.new(name: 'ListTagsLogGroupRequest')
+    ListTagsLogGroupResponse = Shapes::StructureShape.new(name: 'ListTagsLogGroupResponse')
     LogEventIndex = Shapes::IntegerShape.new(name: 'LogEventIndex')
     LogGroup = Shapes::StructureShape.new(name: 'LogGroup')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
@@ -119,12 +122,18 @@ module Aws::CloudWatchLogs
     StoredBytes = Shapes::IntegerShape.new(name: 'StoredBytes')
     SubscriptionFilter = Shapes::StructureShape.new(name: 'SubscriptionFilter')
     SubscriptionFilters = Shapes::ListShape.new(name: 'SubscriptionFilters')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagLogGroupRequest = Shapes::StructureShape.new(name: 'TagLogGroupRequest')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     TargetArn = Shapes::StringShape.new(name: 'TargetArn')
     TestEventMessages = Shapes::ListShape.new(name: 'TestEventMessages')
     TestMetricFilterRequest = Shapes::StructureShape.new(name: 'TestMetricFilterRequest')
     TestMetricFilterResponse = Shapes::StructureShape.new(name: 'TestMetricFilterResponse')
     Timestamp = Shapes::IntegerShape.new(name: 'Timestamp')
     Token = Shapes::StringShape.new(name: 'Token')
+    UntagLogGroupRequest = Shapes::StructureShape.new(name: 'UntagLogGroupRequest')
     Value = Shapes::StringShape.new(name: 'Value')
 
     CancelExportTaskRequest.add_member(:task_id, Shapes::ShapeRef.new(shape: ExportTaskId, required: true, location_name: "taskId"))
@@ -143,6 +152,7 @@ module Aws::CloudWatchLogs
     CreateExportTaskResponse.struct_class = Types::CreateExportTaskResponse
 
     CreateLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    CreateLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateLogGroupRequest.struct_class = Types::CreateLogGroupRequest
 
     CreateLogStreamRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
@@ -312,6 +322,12 @@ module Aws::CloudWatchLogs
 
     InputLogStreamNames.member = Shapes::ShapeRef.new(shape: LogStreamName)
 
+    ListTagsLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    ListTagsLogGroupRequest.struct_class = Types::ListTagsLogGroupRequest
+
+    ListTagsLogGroupResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsLogGroupResponse.struct_class = Types::ListTagsLogGroupResponse
+
     LogGroup.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
     LogGroup.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     LogGroup.add_member(:retention_in_days, Shapes::ShapeRef.new(shape: Days, location_name: "retentionInDays"))
@@ -402,6 +418,7 @@ module Aws::CloudWatchLogs
     PutSubscriptionFilterRequest.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, required: true, location_name: "filterPattern"))
     PutSubscriptionFilterRequest.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, required: true, location_name: "destinationArn"))
     PutSubscriptionFilterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    PutSubscriptionFilterRequest.add_member(:distribution, Shapes::ShapeRef.new(shape: Distribution, location_name: "distribution"))
     PutSubscriptionFilterRequest.struct_class = Types::PutSubscriptionFilterRequest
 
     RejectedLogEventsInfo.add_member(:too_new_log_event_start_index, Shapes::ShapeRef.new(shape: LogEventIndex, location_name: "tooNewLogEventStartIndex"))
@@ -420,10 +437,20 @@ module Aws::CloudWatchLogs
     SubscriptionFilter.add_member(:filter_pattern, Shapes::ShapeRef.new(shape: FilterPattern, location_name: "filterPattern"))
     SubscriptionFilter.add_member(:destination_arn, Shapes::ShapeRef.new(shape: DestinationArn, location_name: "destinationArn"))
     SubscriptionFilter.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    SubscriptionFilter.add_member(:distribution, Shapes::ShapeRef.new(shape: Distribution, location_name: "distribution"))
     SubscriptionFilter.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationTime"))
     SubscriptionFilter.struct_class = Types::SubscriptionFilter
 
     SubscriptionFilters.member = Shapes::ShapeRef.new(shape: SubscriptionFilter)
+
+    TagList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    TagLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    TagLogGroupRequest.struct_class = Types::TagLogGroupRequest
+
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
 
     TestEventMessages.member = Shapes::ShapeRef.new(shape: EventMessage)
 
@@ -433,6 +460,10 @@ module Aws::CloudWatchLogs
 
     TestMetricFilterResponse.add_member(:matches, Shapes::ShapeRef.new(shape: MetricFilterMatches, location_name: "matches"))
     TestMetricFilterResponse.struct_class = Types::TestMetricFilterResponse
+
+    UntagLogGroupRequest.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, required: true, location_name: "logGroupName"))
+    UntagLogGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+    UntagLogGroupRequest.struct_class = Types::UntagLogGroupRequest
 
 
     # @api private
@@ -699,6 +730,16 @@ module Aws::CloudWatchLogs
         )
       end)
 
+      api.add_operation(:list_tags_log_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsLogGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsLogGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsLogGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
       api.add_operation(:put_destination, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutDestination"
         o.http_method = "POST"
@@ -772,6 +813,16 @@ module Aws::CloudWatchLogs
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
+      api.add_operation(:tag_log_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagLogGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagLogGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
       api.add_operation(:test_metric_filter, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TestMetricFilter"
         o.http_method = "POST"
@@ -780,6 +831,15 @@ module Aws::CloudWatchLogs
         o.output = Shapes::ShapeRef.new(shape: TestMetricFilterResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:untag_log_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagLogGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagLogGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
     end
 

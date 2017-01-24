@@ -672,6 +672,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].authorization_type #=> String
     #   resp.resource_methods["String"].authorizer_id #=> String
     #   resp.resource_methods["String"].api_key_required #=> Boolean
+    #   resp.resource_methods["String"].operation_name #=> String
     #   resp.resource_methods["String"].request_parameters #=> Hash
     #   resp.resource_methods["String"].request_parameters["String"] #=> Boolean
     #   resp.resource_methods["String"].request_models #=> Hash
@@ -2416,6 +2417,7 @@ module Aws::APIGateway
     #   * {Types::Method#authorization_type #authorization_type} => String
     #   * {Types::Method#authorizer_id #authorizer_id} => String
     #   * {Types::Method#api_key_required #api_key_required} => Boolean
+    #   * {Types::Method#operation_name #operation_name} => String
     #   * {Types::Method#request_parameters #request_parameters} => Hash&lt;String,Boolean&gt;
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
     #   * {Types::Method#method_responses #method_responses} => Hash&lt;String,Types::MethodResponse&gt;
@@ -2435,6 +2437,7 @@ module Aws::APIGateway
     #   resp.authorization_type #=> String
     #   resp.authorizer_id #=> String
     #   resp.api_key_required #=> Boolean
+    #   resp.operation_name #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> Boolean
     #   resp.request_models #=> Hash
@@ -2671,6 +2674,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].authorization_type #=> String
     #   resp.resource_methods["String"].authorizer_id #=> String
     #   resp.resource_methods["String"].api_key_required #=> Boolean
+    #   resp.resource_methods["String"].operation_name #=> String
     #   resp.resource_methods["String"].request_parameters #=> Hash
     #   resp.resource_methods["String"].request_parameters["String"] #=> Boolean
     #   resp.resource_methods["String"].request_models #=> Hash
@@ -2750,6 +2754,7 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].authorization_type #=> String
     #   resp.items[0].resource_methods["String"].authorizer_id #=> String
     #   resp.items[0].resource_methods["String"].api_key_required #=> Boolean
+    #   resp.items[0].resource_methods["String"].operation_name #=> String
     #   resp.items[0].resource_methods["String"].request_parameters #=> Hash
     #   resp.items[0].resource_methods["String"].request_parameters["String"] #=> Boolean
     #   resp.items[0].resource_methods["String"].request_models #=> Hash
@@ -2919,6 +2924,80 @@ module Aws::APIGateway
     # @param [Hash] params ({})
     def get_sdk(params = {}, options = {})
       req = build_request(:get_sdk, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :id
+    #   The identifier of the queried SdkType instance.
+    #
+    # @return [Types::SdkType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SdkType#id #id} => String
+    #   * {Types::SdkType#friendly_name #friendly_name} => String
+    #   * {Types::SdkType#description #description} => String
+    #   * {Types::SdkType#configuration_properties #configuration_properties} => Array&lt;Types::SdkConfigurationProperty&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sdk_type({
+    #     id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.friendly_name #=> String
+    #   resp.description #=> String
+    #   resp.configuration_properties #=> Array
+    #   resp.configuration_properties[0].name #=> String
+    #   resp.configuration_properties[0].friendly_name #=> String
+    #   resp.configuration_properties[0].description #=> String
+    #   resp.configuration_properties[0].required #=> Boolean
+    #   resp.configuration_properties[0].default_value #=> String
+    #
+    # @overload get_sdk_type(params = {})
+    # @param [Hash] params ({})
+    def get_sdk_type(params = {}, options = {})
+      req = build_request(:get_sdk_type, params)
+      req.send_request(options)
+    end
+
+    # @option params [String] :position
+    #   The position of the last fetched element in the SdkTypes collection.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of SdkType instances to be returned.
+    #
+    # @return [Types::SdkTypes] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SdkTypes#position #position} => String
+    #   * {Types::SdkTypes#items #items} => Array&lt;Types::SdkType&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_sdk_types({
+    #     position: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].friendly_name #=> String
+    #   resp.items[0].description #=> String
+    #   resp.items[0].configuration_properties #=> Array
+    #   resp.items[0].configuration_properties[0].name #=> String
+    #   resp.items[0].configuration_properties[0].friendly_name #=> String
+    #   resp.items[0].configuration_properties[0].description #=> String
+    #   resp.items[0].configuration_properties[0].required #=> Boolean
+    #   resp.items[0].configuration_properties[0].default_value #=> String
+    #
+    # @overload get_sdk_types(params = {})
+    # @param [Hash] params ({})
+    def get_sdk_types(params = {}, options = {})
+      req = build_request(:get_sdk_types, params)
       req.send_request(options)
     end
 
@@ -3688,6 +3767,15 @@ module Aws::APIGateway
     # @option params [Boolean] :api_key_required
     #   Specifies whether the method required a valid ApiKey.
     #
+    # @option params [String] :operation_name
+    #   A human-friendly operation identifier for the method. For example, you
+    #   can assign the `operationName` of `ListPets` for the `GET /pets`
+    #   method in [PetStore][1] example.
+    #
+    #
+    #
+    #   [1]: http://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #
     # @option params [Hash<String,Boolean>] :request_parameters
     #   A key-value map defining required or optional method request
     #   parameters that can be accepted by Amazon API Gateway. A key defines a
@@ -3711,6 +3799,7 @@ module Aws::APIGateway
     #   * {Types::Method#authorization_type #authorization_type} => String
     #   * {Types::Method#authorizer_id #authorizer_id} => String
     #   * {Types::Method#api_key_required #api_key_required} => Boolean
+    #   * {Types::Method#operation_name #operation_name} => String
     #   * {Types::Method#request_parameters #request_parameters} => Hash&lt;String,Boolean&gt;
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
     #   * {Types::Method#method_responses #method_responses} => Hash&lt;String,Types::MethodResponse&gt;
@@ -3725,6 +3814,7 @@ module Aws::APIGateway
     #     authorization_type: "String", # required
     #     authorizer_id: "String",
     #     api_key_required: false,
+    #     operation_name: "String",
     #     request_parameters: {
     #       "String" => false,
     #     },
@@ -3739,6 +3829,7 @@ module Aws::APIGateway
     #   resp.authorization_type #=> String
     #   resp.authorizer_id #=> String
     #   resp.api_key_required #=> Boolean
+    #   resp.operation_name #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> Boolean
     #   resp.request_models #=> Hash
@@ -4682,6 +4773,7 @@ module Aws::APIGateway
     #   * {Types::Method#authorization_type #authorization_type} => String
     #   * {Types::Method#authorizer_id #authorizer_id} => String
     #   * {Types::Method#api_key_required #api_key_required} => Boolean
+    #   * {Types::Method#operation_name #operation_name} => String
     #   * {Types::Method#request_parameters #request_parameters} => Hash&lt;String,Boolean&gt;
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
     #   * {Types::Method#method_responses #method_responses} => Hash&lt;String,Types::MethodResponse&gt;
@@ -4709,6 +4801,7 @@ module Aws::APIGateway
     #   resp.authorization_type #=> String
     #   resp.authorizer_id #=> String
     #   resp.api_key_required #=> Boolean
+    #   resp.operation_name #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> Boolean
     #   resp.request_models #=> Hash
@@ -4900,6 +4993,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].authorization_type #=> String
     #   resp.resource_methods["String"].authorizer_id #=> String
     #   resp.resource_methods["String"].api_key_required #=> Boolean
+    #   resp.resource_methods["String"].operation_name #=> String
     #   resp.resource_methods["String"].request_parameters #=> Hash
     #   resp.resource_methods["String"].request_parameters["String"] #=> Boolean
     #   resp.resource_methods["String"].request_models #=> Hash

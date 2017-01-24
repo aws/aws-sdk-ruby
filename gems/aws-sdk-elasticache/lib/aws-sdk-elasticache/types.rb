@@ -1193,7 +1193,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auth_token
-    #   The password used to access a password protected server.
+    #   **Reserved parameter.** The password used to access a password
+    #   protected server.
     #
     #   Password constraints:
     #
@@ -1763,7 +1764,8 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] auth_token
-    #   The password used to access a password protected server.
+    #   **Reserved parameter.** The password used to access a password
+    #   protected server.
     #
     #   Password constraints:
     #

@@ -474,6 +474,12 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: InvalidTimeRangeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_event_selectors, Seahorse::Model::Operation.new.tap do |o|

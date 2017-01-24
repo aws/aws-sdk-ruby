@@ -254,16 +254,15 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Adds or overwrites one or more tags for the specified Amazon Directory
-    # Services directory. Each directory can have a maximum of 50 tags. Each
-    # tag consists of a key and optional value. Tag keys must be unique to
-    # each resource.
+    # Adds or overwrites one or more tags for the specified directory. Each
+    # directory can have a maximum of 50 tags. Each tag consists of a key
+    # and optional value. Tag keys must be unique to each resource.
     #
     # @option params [required, String] :resource_id
     #   Identifier (ID) for the directory to which to add the tag.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   The tags to be assigned to the Amazon Directory Services directory.
+    #   The tags to be assigned to the directory.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1272,7 +1271,7 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Enables single-sign on for a directory.
+    # Enables single sign-on for a directory.
     #
     # @option params [required, String] :directory_id
     #   The identifier of the directory for which to enable single-sign on.
@@ -1453,7 +1452,7 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Lists all tags on an Amazon Directory Services directory.
+    # Lists all tags on a directory.
     #
     # @option params [required, String] :resource_id
     #   Identifier (ID) of the directory for which you want to retrieve tags.
@@ -1547,7 +1546,7 @@ module Aws::DirectoryService
       req.send_request(options)
     end
 
-    # Removes tags from an Amazon Directory Services directory.
+    # Removes tags from a directory.
     #
     # @option params [required, String] :resource_id
     #   Identifier (ID) of the directory from which to remove the tag.
@@ -1611,8 +1610,10 @@ module Aws::DirectoryService
     #   schema extension.
     #
     # @option params [required, String] :ldif_content
-    #   The LDIF file represented as a string. The file size can be no larger
-    #   than 1MB.
+    #   The LDIF file represented as a string. To construct the LdifContent
+    #   string, precede each line as it would be formatted in an ldif file
+    #   with \\n. See the example request below for more details. The file
+    #   size can be no larger than 1MB.
     #
     # @option params [required, String] :description
     #   A description of the schema extension.

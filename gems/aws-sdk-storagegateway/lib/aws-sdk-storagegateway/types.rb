@@ -113,7 +113,7 @@ module Aws::StorageGateway
     # gateway in other API operations as well as resource-based
     # authorization.
     #
-    # <note markdown="1">For gateways activated prior to September 02, 2015 the gateway ARN
+    # <note markdown="1"> For gateways activated prior to September 02, 2015 the gateway ARN
     # contains the gateway name rather than the gateway id. Changing the
     # name of the gateway has no effect on the gateway ARN.
     #
@@ -286,30 +286,50 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Describes an iSCSI cached volume.
+    #
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the storage volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
+    #   The unique identifier of the volume, e.g. vol-AE4B946D.
     #   @return [String]
     #
     # @!attribute [rw] volume_type
+    #   One of the VolumeType enumeration values that describes the type of
+    #   the volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_status
+    #   One of the VolumeStatus values that indicates the state of the
+    #   storage volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
+    #   The size of the volume in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_progress
+    #   Represents the percentage complete if the volume is restoring or
+    #   bootstrapping that represents the percent of data transferred. This
+    #   field does not appear in the response if the cached volume is not
+    #   restoring or bootstrapping.
     #   @return [Float]
     #
     # @!attribute [rw] source_snapshot_id
+    #   If the cached volume was created from a snapshot, this field
+    #   contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this
+    #   field is not included.
     #   @return [String]
     #
     # @!attribute [rw] volume_iscsi_attributes
-    #   Lists iSCSI information about a volume.
+    #   An VolumeiSCSIAttributes object that represents a collection of
+    #   iSCSI attributes for one stored volume.
     #   @return [Types::VolumeiSCSIAttributes]
+    #
+    # @!attribute [rw] created_date
+    #   @return [Time]
     #
     class CachediSCSIVolume < Struct.new(
       :volume_arn,
@@ -319,7 +339,8 @@ module Aws::StorageGateway
       :volume_size_in_bytes,
       :volume_progress,
       :source_snapshot_id,
-      :volume_iscsi_attributes)
+      :volume_iscsi_attributes,
+      :created_date)
       include Aws::Structure
     end
 
@@ -440,6 +461,7 @@ module Aws::StorageGateway
     #         volume_size_in_bytes: 1, # required
     #         snapshot_id: "SnapshotId",
     #         target_name: "TargetName", # required
+    #         source_volume_arn: "VolumeARN",
     #         network_interface_id: "NetworkInterfaceId", # required
     #         client_token: "ClientToken", # required
     #       }
@@ -458,6 +480,14 @@ module Aws::StorageGateway
     # @!attribute [rw] target_name
     #   @return [String]
     #
+    # @!attribute [rw] source_volume_arn
+    #   The ARN for an existing volume. Specifying this ARN makes the new
+    #   volume into an exact copy of the specified existing volume's latest
+    #   recovery point. The `VolumeSizeInBytes` value for this new volume
+    #   must be equal to or larger than the size of the existing volume, in
+    #   bytes.
+    #   @return [String]
+    #
     # @!attribute [rw] network_interface_id
     #   @return [String]
     #
@@ -469,6 +499,7 @@ module Aws::StorageGateway
       :volume_size_in_bytes,
       :snapshot_id,
       :target_name,
+      :source_volume_arn,
       :network_interface_id,
       :client_token)
       include Aws::Structure
@@ -483,6 +514,90 @@ module Aws::StorageGateway
     class CreateCachediSCSIVolumeOutput < Struct.new(
       :volume_arn,
       :target_arn)
+      include Aws::Structure
+    end
+
+    # CreateNFSFileShareInput
+    #
+    # @note When making an API call, you may pass CreateNFSFileShareInput
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken", # required
+    #         nfs_file_share_defaults: {
+    #           file_mode: "PermissionMode",
+    #           directory_mode: "PermissionMode",
+    #           group_id: 1,
+    #           owner_id: 1,
+    #         },
+    #         gateway_arn: "GatewayARN", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
+    #         role: "Role", # required
+    #         location_arn: "LocationARN", # required
+    #         default_storage_class: "StorageClass",
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   A unique string value that you supply that is used by file gateway
+    #   to ensure idempotent file share creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] nfs_file_share_defaults
+    #   File share default values. Optional.
+    #   @return [Types::NFSFileShareDefaults]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the file gateway on which you want
+    #   to create a file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The KMS key used for Amazon S3 server side encryption. This value
+    #   can only be set when KmsEncrypted is true. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The ARN of the AWS Identity and Access Management (IAM) role that a
+    #   file gateway assumes when it accesses the underlying storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_arn
+    #   The ARN of the backend storage used for storing file data.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket
+    #   by file gateway. Possible values are S3\_STANDARD or
+    #   S3\_STANDARD\_IA. If this field is not populated, the default value
+    #   S3\_STANDARD is used. Optional.
+    #   @return [String]
+    #
+    class CreateNFSFileShareInput < Struct.new(
+      :client_token,
+      :nfs_file_share_defaults,
+      :gateway_arn,
+      :kms_encrypted,
+      :kms_key,
+      :role,
+      :location_arn,
+      :default_storage_class)
+      include Aws::Structure
+    end
+
+    # CreateNFSFileShareOutput
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the newly created file share.
+    #   @return [String]
+    #
+    class CreateNFSFileShareOutput < Struct.new(
+      :file_share_arn)
       include Aws::Structure
     end
 
@@ -703,7 +818,7 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_size_in_bytes
     #   The size, in bytes, of the virtual tape that you want to create.
     #
-    #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
+    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 byte).
     #
     #    </note>
     #   @return [Integer]
@@ -753,7 +868,7 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_size_in_bytes
     #   The size, in bytes, of the virtual tapes that you want to create.
     #
-    #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
+    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 byte).
     #
     #    </note>
     #   @return [Integer]
@@ -763,7 +878,7 @@ module Aws::StorageGateway
     #   request, use the same `ClientToken` you specified in the initial
     #   request.
     #
-    #   <note markdown="1">Using the same `ClientToken` prevents creating the tape multiple
+    #   <note markdown="1"> Using the same `ClientToken` prevents creating the tape multiple
     #   times.
     #
     #    </note>
@@ -777,7 +892,7 @@ module Aws::StorageGateway
     #   A prefix that you append to the barcode of the virtual tape you are
     #   creating. This prefix makes the barcode unique.
     #
-    #   <note markdown="1">The prefix must be 1 to 4 characters in length and must be one of
+    #   <note markdown="1"> The prefix must be 1 to 4 characters in length and must be one of
     #   the uppercase letters from A to Z.
     #
     #    </note>
@@ -804,6 +919,12 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # A JSON object containing the following fields:
+    #
+    # * DeleteBandwidthRateLimitInput$BandwidthType
+    #
+    # ^
+    #
     # @note When making an API call, you may pass DeleteBandwidthRateLimitInput
     #   data as a hash:
     #
@@ -818,6 +939,10 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] bandwidth_type
+    #   One of the BandwidthType values that indicates the gateway bandwidth
+    #   rate limit to delete.
+    #
+    #   Valid Values: `Upload`, `Download`, `All`.
     #   @return [String]
     #
     class DeleteBandwidthRateLimitInput < Struct.new(
@@ -882,6 +1007,35 @@ module Aws::StorageGateway
     class DeleteChapCredentialsOutput < Struct.new(
       :target_arn,
       :initiator_name)
+      include Aws::Structure
+    end
+
+    # DeleteFileShareInput
+    #
+    # @note When making an API call, you may pass DeleteFileShareInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn: "FileShareARN", # required
+    #       }
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share to be deleted.
+    #   @return [String]
+    #
+    class DeleteFileShareInput < Struct.new(
+      :file_share_arn)
+      include Aws::Structure
+    end
+
+    # DeleteFileShareOutput
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the deleted file share.
+    #   @return [String]
+    #
+    class DeleteFileShareOutput < Struct.new(
+      :file_share_arn)
       include Aws::Structure
     end
 
@@ -1308,18 +1462,37 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # A JSON object containing the following fields:
+    #
+    # * DescribeMaintenanceStartTimeOutput$DayOfWeek
+    #
+    # * DescribeMaintenanceStartTimeOutput$HourOfDay
+    #
+    # * DescribeMaintenanceStartTimeOutput$MinuteOfHour
+    #
+    # * DescribeMaintenanceStartTimeOutput$Timezone
+    #
     # @!attribute [rw] gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
     # @!attribute [rw] hour_of_day
+    #   The hour component of the maintenance start time represented as
+    #   *hh*, where *hh* is the hour (0 to 23). The hour of the day is in
+    #   the time zone of the gateway.
     #   @return [Integer]
     #
     # @!attribute [rw] minute_of_hour
+    #   The minute component of the maintenance start time represented as
+    #   *mm*, where *mm* is the minute (0 to 59). The minute of the hour is
+    #   in the time zone of the gateway.
     #   @return [Integer]
     #
     # @!attribute [rw] day_of_week
+    #   An ordinal number between 0 and 6 that represents the day of the
+    #   week, where 0 represents Sunday and 6 represents Saturday. The day
+    #   of week is in the time zone of the gateway.
     #   @return [Integer]
     #
     # @!attribute [rw] timezone
@@ -1331,6 +1504,36 @@ module Aws::StorageGateway
       :minute_of_hour,
       :day_of_week,
       :timezone)
+      include Aws::Structure
+    end
+
+    # DescribeNFSFileSharesInput
+    #
+    # @note When making an API call, you may pass DescribeNFSFileSharesInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn_list: ["FileShareARN"], # required
+    #       }
+    #
+    # @!attribute [rw] file_share_arn_list
+    #   An array containing the Amazon Resource Name (ARN) of each file
+    #   share to be described.
+    #   @return [Array<String>]
+    #
+    class DescribeNFSFileSharesInput < Struct.new(
+      :file_share_arn_list)
+      include Aws::Structure
+    end
+
+    # DescribeNFSFileSharesOutput
+    #
+    # @!attribute [rw] nfs_file_share_info_list
+    #   An array containing a description for each requested file share.
+    #   @return [Array<Types::NFSFileShareInfo>]
+    #
+    class DescribeNFSFileSharesOutput < Struct.new(
+      :nfs_file_share_info_list)
       include Aws::Structure
     end
 
@@ -1561,7 +1764,7 @@ module Aws::StorageGateway
     #   Specifies that the number of virtual tapes described be limited to
     #   the specified number.
     #
-    #   <note markdown="1">Amazon Web Services may impose its own limit, if this field is not
+    #   <note markdown="1"> Amazon Web Services may impose its own limit, if this field is not
     #   set.
     #
     #    </note>
@@ -1655,7 +1858,7 @@ module Aws::StorageGateway
     #   An array of strings, where each string represents the Amazon
     #   Resource Name (ARN) of a VTL device.
     #
-    #   <note markdown="1">All of the specified VTL devices must be from the same gateway. If
+    #   <note markdown="1"> All of the specified VTL devices must be from the same gateway. If
     #   no VTL devices are specified, the result will contain all devices on
     #   the specified gateway.
     #
@@ -1847,6 +2050,34 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Describes a file share.
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_id
+    #   The ID of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_status
+    #   The status of the file share. Possible values are CREATING,
+    #   UPDATING, AVAILABLE and DELETING.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    class FileShareInfo < Struct.new(
+      :file_share_arn,
+      :file_share_id,
+      :file_share_status,
+      :gateway_arn)
+      include Aws::Structure
+    end
+
     # Describes a gateway object.
     #
     # @!attribute [rw] gateway_id
@@ -1880,6 +2111,65 @@ module Aws::StorageGateway
       :gateway_type,
       :gateway_operational_state,
       :gateway_name)
+      include Aws::Structure
+    end
+
+    # ListFileShareInput
+    #
+    # @note When making an API call, you may pass ListFileSharesInput
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_arn: "GatewayARN",
+    #         limit: 1,
+    #         marker: "Marker",
+    #       }
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon resource Name (ARN) of the gateway whose file shares you
+    #   want to list. If this field is not present, all file shares under
+    #   your account are listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of file shares to return in the response. The
+    #   value must be an integer with a value greater than zero. Optional.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Opaque pagination token returned from a previous ListFileShares
+    #   operation. If present, `Marker` specifies where to continue the list
+    #   from after a previous call to ListFileShares. Optional.
+    #   @return [String]
+    #
+    class ListFileSharesInput < Struct.new(
+      :gateway_arn,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # ListFileShareOutput
+    #
+    # @!attribute [rw] marker
+    #   If the request includes `Marker`, the response returns that value in
+    #   this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If a value is present, there are more file shares to return. In a
+    #   subsequent request, use `NextMarker` as the value for `Marker` to
+    #   retrieve the next set of file shares.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_info_list
+    #   An array of information about the file gateway's file shares.
+    #   @return [Array<Types::FileShareInfo>]
+    #
+    class ListFileSharesOutput < Struct.new(
+      :marker,
+      :next_marker,
+      :file_share_info_list)
       include Aws::Structure
     end
 
@@ -2197,6 +2487,127 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Describes file share default values. Files and folders stored as
+    # Amazon S3 objects in S3 buckets don't, by default, have Unix file
+    # permissions assigned to them. Upon discovery in an S3 bucket by
+    # Storage Gateway, the S3 objects that represent files and folders are
+    # assigned these default Unix permissions.
+    #
+    # @note When making an API call, you may pass NFSFileShareDefaults
+    #   data as a hash:
+    #
+    #       {
+    #         file_mode: "PermissionMode",
+    #         directory_mode: "PermissionMode",
+    #         group_id: 1,
+    #         owner_id: 1,
+    #       }
+    #
+    # @!attribute [rw] file_mode
+    #   The Unix file mode in the form "nnnn". For example, "0666"
+    #   represents the default file mode inside the file share. The default
+    #   value is 0666.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_mode
+    #   The Unix directory mode in the form "nnnn". For example, "0666"
+    #   represents the default access mode for all directories inside the
+    #   file share. The default value is 0777.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_id
+    #   The default group ID for the file share (unless the files have
+    #   another group ID specified). The default value is nfsnobody.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner_id
+    #   The default owner ID for files in the file share (unless the files
+    #   have another owner ID specified). The default value is nfsnobody.
+    #   @return [Integer]
+    #
+    class NFSFileShareDefaults < Struct.new(
+      :file_mode,
+      :directory_mode,
+      :group_id,
+      :owner_id)
+      include Aws::Structure
+    end
+
+    # The Unix file permissions and ownership information assigned, by
+    # default, to native S3 objects when Storage Gateway discovers them in
+    # S3 buckets.
+    #
+    # @!attribute [rw] nfs_file_share_defaults
+    #   Describes file share default values. Files and folders stored as
+    #   Amazon S3 objects in S3 buckets don't, by default, have Unix file
+    #   permissions assigned to them. Upon discovery in an S3 bucket by
+    #   Storage Gateway, the S3 objects that represent files and folders are
+    #   assigned these default Unix permissions.
+    #   @return [Types::NFSFileShareDefaults]
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_id
+    #   The ID of the file share.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_share_status
+    #   The status of the file share. Possible values are CREATING,
+    #   UPDATING, AVAILABLE and DELETING.
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_arn
+    #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
+    #   operation to return a list of gateways for your account and region.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own KMS key,
+    #   or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The ARN of the KMS key used for Amazon S3 server side encryption.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The file share path used by the NFS client to identify the mount
+    #   point.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The ARN of the IAM role that file gateway assumes when it accesses
+    #   the underlying storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_arn
+    #   The ARN of the backend storage used for storing file data.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket
+    #   by file gateway. Possible values are S3\_STANDARD or
+    #   S3\_STANDARD\_IA. If this field is not populated, the default value
+    #   S3\_STANDARD is used. Optional.
+    #   @return [String]
+    #
+    class NFSFileShareInfo < Struct.new(
+      :nfs_file_share_defaults,
+      :file_share_arn,
+      :file_share_id,
+      :file_share_status,
+      :gateway_arn,
+      :kms_encrypted,
+      :kms_key,
+      :path,
+      :role,
+      :location_arn,
+      :default_storage_class)
+      include Aws::Structure
+    end
+
     # Describes a gateway's network interface.
     #
     # @!attribute [rw] ipv_4_address
@@ -2206,7 +2617,7 @@ module Aws::StorageGateway
     # @!attribute [rw] mac_address
     #   The Media Access Control (MAC) address of the interface.
     #
-    #   <note markdown="1">This is currently unsupported and will not be returned in output.
+    #   <note markdown="1"> This is currently unsupported and will not be returned in output.
     #
     #    </note>
     #   @return [String]
@@ -2483,36 +2894,62 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
+    # Describes an iSCSI stored volume.
+    #
     # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the storage volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_id
+    #   The unique identifier of the volume, e.g. vol-AE4B946D.
     #   @return [String]
     #
     # @!attribute [rw] volume_type
+    #   One of the VolumeType enumeration values describing the type of the
+    #   volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_status
+    #   One of the VolumeStatus values that indicates the state of the
+    #   storage volume.
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
+    #   The size of the volume in bytes.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_progress
+    #   Represents the percentage complete if the volume is restoring or
+    #   bootstrapping that represents the percent of data transferred. This
+    #   field does not appear in the response if the stored volume is not
+    #   restoring or bootstrapping.
     #   @return [Float]
     #
     # @!attribute [rw] volume_disk_id
+    #   The ID of the local disk that was specified in the
+    #   CreateStorediSCSIVolume operation.
     #   @return [String]
     #
     # @!attribute [rw] source_snapshot_id
+    #   If the stored volume was created from a snapshot, this field
+    #   contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this
+    #   field is not included.
     #   @return [String]
     #
     # @!attribute [rw] preserved_existing_data
+    #   Indicates if when the stored volume was created, existing data on
+    #   the underlying local disk was preserved.
+    #
+    #   Valid Values: true, false
     #   @return [Boolean]
     #
     # @!attribute [rw] volume_iscsi_attributes
-    #   Lists iSCSI information about a volume.
+    #   An VolumeiSCSIAttributes object that represents a collection of
+    #   iSCSI attributes for one stored volume.
     #   @return [Types::VolumeiSCSIAttributes]
+    #
+    # @!attribute [rw] created_date
+    #   @return [Time]
     #
     class StorediSCSIVolume < Struct.new(
       :volume_arn,
@@ -2524,7 +2961,8 @@ module Aws::StorageGateway
       :volume_disk_id,
       :source_snapshot_id,
       :preserved_existing_data,
-      :volume_iscsi_attributes)
+      :volume_iscsi_attributes,
+      :created_date)
       include Aws::Structure
     end
 
@@ -2558,6 +2996,9 @@ module Aws::StorageGateway
     #   The barcode that identifies a specific virtual tape.
     #   @return [String]
     #
+    # @!attribute [rw] tape_created_date
+    #   @return [Time]
+    #
     # @!attribute [rw] tape_size_in_bytes
     #   The size, in bytes, of the virtual tape.
     #   @return [Integer]
@@ -2581,6 +3022,7 @@ module Aws::StorageGateway
     class Tape < Struct.new(
       :tape_arn,
       :tape_barcode,
+      :tape_created_date,
       :tape_size_in_bytes,
       :tape_status,
       :vtl_device,
@@ -2598,6 +3040,9 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_barcode
     #   The barcode that identifies the archived virtual tape.
     #   @return [String]
+    #
+    # @!attribute [rw] tape_created_date
+    #   @return [Time]
     #
     # @!attribute [rw] tape_size_in_bytes
     #   The size, in bytes, of the archived virtual tape.
@@ -2624,6 +3069,7 @@ module Aws::StorageGateway
     class TapeArchive < Struct.new(
       :tape_arn,
       :tape_barcode,
+      :tape_created_date,
       :tape_size_in_bytes,
       :completion_time,
       :retrieved_to,
@@ -2770,7 +3216,7 @@ module Aws::StorageGateway
     #   The secret key that the initiator (for example, the Windows client)
     #   must provide to participate in mutual CHAP with the target.
     #
-    #   <note markdown="1">The secret key must be between 12 and 16 bytes when encoded in
+    #   <note markdown="1"> The secret key must be between 12 and 16 bytes when encoded in
     #   UTF-8.
     #
     #    </note>
@@ -2786,7 +3232,7 @@ module Aws::StorageGateway
     #
     #   Byte constraints: Minimum bytes of 12. Maximum bytes of 16.
     #
-    #   <note markdown="1">The secret key must be between 12 and 16 bytes when encoded in
+    #   <note markdown="1"> The secret key must be between 12 and 16 bytes when encoded in
     #   UTF-8.
     #
     #    </note>
@@ -2929,7 +3375,8 @@ module Aws::StorageGateway
     #   @return [Integer]
     #
     # @!attribute [rw] day_of_week
-    #   The maintenance start time day of the week.
+    #   The maintenance start time day of the week represented as an ordinal
+    #   number from 0 to 6, where 0 represents Sunday and 6 Saturday.
     #   @return [Integer]
     #
     class UpdateMaintenanceStartTimeInput < Struct.new(
@@ -2950,6 +3397,69 @@ module Aws::StorageGateway
     #
     class UpdateMaintenanceStartTimeOutput < Struct.new(
       :gateway_arn)
+      include Aws::Structure
+    end
+
+    # UpdateNFSFileShareInput
+    #
+    # @note When making an API call, you may pass UpdateNFSFileShareInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn: "FileShareARN", # required
+    #         kms_encrypted: false,
+    #         kms_key: "KMSKey",
+    #         nfs_file_share_defaults: {
+    #           file_mode: "PermissionMode",
+    #           directory_mode: "PermissionMode",
+    #           group_id: 1,
+    #           owner_id: 1,
+    #         },
+    #         default_storage_class: "StorageClass",
+    #       }
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key
+    #   The KMS key used for Amazon S3 server side encryption. This value
+    #   can only be set when KmsEncrypted is true. Optional.
+    #   @return [String]
+    #
+    # @!attribute [rw] nfs_file_share_defaults
+    #   The default values for the file share. Optional.
+    #   @return [Types::NFSFileShareDefaults]
+    #
+    # @!attribute [rw] default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket
+    #   by a file gateway. Possible values are S3\_STANDARD or
+    #   S3\_STANDARD\_IA. If this field is not populated, the default value
+    #   S3\_STANDARD is used. Optional.
+    #   @return [String]
+    #
+    class UpdateNFSFileShareInput < Struct.new(
+      :file_share_arn,
+      :kms_encrypted,
+      :kms_key,
+      :nfs_file_share_defaults,
+      :default_storage_class)
+      include Aws::Structure
+    end
+
+    # UpdateNFSFileShareOutput
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the updated file share.
+    #   @return [String]
+    #
+    class UpdateNFSFileShareOutput < Struct.new(
+      :file_share_arn)
       include Aws::Structure
     end
 
@@ -3117,7 +3627,7 @@ module Aws::StorageGateway
     #   @return [String]
     #
     # @!attribute [rw] volume_size_in_bytes
-    #   The size, in bytes, of the volume.
+    #   The size of the volume in bytes.
     #
     #   Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and
     #   hyphens (-).

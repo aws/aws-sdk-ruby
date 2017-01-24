@@ -332,7 +332,8 @@ module Aws::Polly
     #     `ContentType` returned is audio/ogg.
     #
     #   * If you request `pcm` as the `OutputFormat`, the `ContentType`
-    #     returned is audio/pcm.
+    #     returned is audio/pcm in a signed 16-bit, 1 channel (mono),
+    #     little-endian format.
     #   @return [String]
     #
     # @!attribute [rw] request_characters

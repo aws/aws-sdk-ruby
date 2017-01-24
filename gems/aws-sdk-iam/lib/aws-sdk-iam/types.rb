@@ -175,9 +175,10 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -187,9 +188,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to add.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -213,9 +215,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -225,9 +228,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to add.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -252,9 +256,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the group to attach the policy
     #   to.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -290,9 +295,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the role to attach the policy
     #   to.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -328,9 +334,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to attach the
     #   policy to.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -406,13 +413,13 @@ module Aws::IAM
     #   The new password. The new password must conform to the AWS
     #   account's password policy, if one exists.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of almost any printable ASCII character from the space
-    #   (\\u0020) through the end of the ASCII character range (\\u00FF).
-    #   You can also include the tab (\\u0009), line feed (\\u000A), and
-    #   carriage return (\\u000D) characters. Although any of these
-    #   characters are valid in a password, note that many tools, such as
-    #   the AWS Management Console, might restrict the ability to enter
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of almost any printable ASCII character
+    #   from the space (\\u0020) through the end of the ASCII character
+    #   range (\\u00FF). You can also include the tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D) characters. Although any of
+    #   these characters are valid in a password, note that many tools, such
+    #   as the AWS Management Console, might restrict the ability to enter
     #   certain characters because they have special meaning within that
     #   tool.
     #
@@ -478,9 +485,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user that the new key will belong to.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -513,9 +521,10 @@ module Aws::IAM
     # @!attribute [rw] account_alias
     #   The account alias to create.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of lowercase letters, digits, and dashes. You cannot
-    #   start or finish with a dash, nor can you have two dashes in a row.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of lowercase letters, digits, and dashes. You
+    #   cannot start or finish with a dash, nor can you have two dashes in a
+    #   row.
     #
     #
     #
@@ -542,12 +551,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   The [regex pattern][2] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -559,12 +568,12 @@ module Aws::IAM
     #   The name of the group to create. Do not include the path in this
     #   value.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-.
-    #   The group name must be unique within the account. Group names are
-    #   not distinguished by case. For example, you cannot create groups
-    #   named both "ADMINS" and "admins".
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-. The group name must be unique within the account.
+    #   Group names are not distinguished by case. For example, you cannot
+    #   create groups named both "ADMINS" and "admins".
     #
     #
     #
@@ -599,9 +608,10 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to create.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -615,12 +625,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   The [regex pattern][2] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -658,9 +668,10 @@ module Aws::IAM
     #   The name of the IAM user to create a password for. The user must
     #   already exist.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -670,13 +681,13 @@ module Aws::IAM
     # @!attribute [rw] password
     #   The new password for the user.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of almost any printable ASCII character from the space
-    #   (\\u0020) through the end of the ASCII character range (\\u00FF).
-    #   You can also include the tab (\\u0009), line feed (\\u000A), and
-    #   carriage return (\\u000D) characters. Although any of these
-    #   characters are valid in a password, note that many tools, such as
-    #   the AWS Management Console, might restrict the ability to enter
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of almost any printable ASCII character
+    #   from the space (\\u0020) through the end of the ASCII character
+    #   range (\\u00FF). You can also include the tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D) characters. Although any of
+    #   these characters are valid in a password, note that many tools, such
+    #   as the AWS Management Console, might restrict the ability to enter
     #   certain characters because they have special meaning within that
     #   tool.
     #
@@ -809,9 +820,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The friendly name of the policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -827,12 +839,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   The [regex pattern][2] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -844,11 +856,13 @@ module Aws::IAM
     #   The JSON policy document that you want to use as the content for the
     #   new policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -910,11 +924,13 @@ module Aws::IAM
     #   The JSON policy document that you want to use as the content for
     #   this new version of the policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -971,12 +987,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   The [regex pattern][2] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -987,11 +1003,12 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to create.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-.
-    #   Role names are not distinguished by case. For example, you cannot
-    #   create roles named both "PRODROLE" and "prodrole".
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-. Role names are not distinguished by case. For
+    #   example, you cannot create roles named both "PRODROLE" and
+    #   "prodrole".
     #
     #
     #
@@ -1002,11 +1019,13 @@ module Aws::IAM
     #   The trust relationship policy document that grants an entity
     #   permission to assume the role.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -1058,9 +1077,10 @@ module Aws::IAM
     # @!attribute [rw] name
     #   The name of the provider to create.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1085,6 +1105,56 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateServiceSpecificCredentialRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType", # required
+    #         service_name: "serviceName", # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user that is to be associated with the
+    #   credentials. The new service-specific credentials have the same
+    #   permissions as the associated user except that they can be used only
+    #   to access the specified service.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the AWS service that is to be associated with the
+    #   credentials. The service you specify here is the only service that
+    #   can be accessed using these credentials.
+    #   @return [String]
+    #
+    class CreateServiceSpecificCredentialRequest < Struct.new(
+      :user_name,
+      :service_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_specific_credential
+    #   A structure that contains information about the newly created
+    #   service-specific credential.
+    #
+    #   This is the only time that the password for this credential set is
+    #   available. It cannot be recovered later. Instead, you will have to
+    #   reset the password with ResetServiceSpecificCredential.
+    #   @return [Types::ServiceSpecificCredential]
+    #
+    class CreateServiceSpecificCredentialResponse < Struct.new(
+      :service_specific_credential)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUserRequest
     #   data as a hash:
     #
@@ -1100,12 +1170,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   The [regex pattern][2] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -1116,11 +1186,12 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to create.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-.
-    #   User names are not distinguished by case. For example, you cannot
-    #   create users named both "TESTUSER" and "testuser".
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-. User names are not distinguished by case. For
+    #   example, you cannot create users named both "TESTUSER" and
+    #   "testuser".
     #
     #
     #
@@ -1159,12 +1230,12 @@ module Aws::IAM
     #   This parameter is optional. If it is not included, it defaults to a
     #   slash (/).
     #
-    #   The [regex pattern][2] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][2]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -1176,9 +1247,10 @@ module Aws::IAM
     #   The name of the virtual MFA device. Use with path to uniquely
     #   identify a virtual MFA device.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1213,9 +1285,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to deactivate.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1226,10 +1299,10 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the device ARN.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =/:,.@-
     #
     #
     #
@@ -1253,9 +1326,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose access key pair you want to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1266,8 +1340,9 @@ module Aws::IAM
     #   The access key ID for the access key ID and secret access key you
     #   want to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -1290,9 +1365,10 @@ module Aws::IAM
     # @!attribute [rw] account_alias
     #   The name of the account alias to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of lowercase letters, digits, and dashes. You cannot
-    #   start or finish with a dash, nor can you have two dashes in a row.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of lowercase letters, digits, and dashes. You
+    #   cannot start or finish with a dash, nor can you have two dashes in a
+    #   row.
     #
     #
     #
@@ -1316,9 +1392,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) identifying the group that the
     #   policy is embedded in.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1328,9 +1405,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name identifying the policy document to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1353,9 +1431,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the IAM group to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1377,9 +1456,10 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1401,9 +1481,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1480,10 +1561,10 @@ module Aws::IAM
     # @!attribute [rw] version_id
     #   The policy version to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that consists of the lowercase letter 'v' followed by one or two
-    #   digits, and optionally followed by a period '.' and a string of
-    #   letters and digits.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that consists of the lowercase letter 'v' followed by
+    #   one or two digits, and optionally followed by a period '.' and a
+    #   string of letters and digits.
     #
     #   For more information about managed policy versions, see [Versioning
     #   for Managed Policies][2] in the *IAM User Guide*.
@@ -1512,9 +1593,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) identifying the role that the
     #   policy is embedded in.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1524,9 +1606,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the inline policy to delete from the specified IAM role.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1549,9 +1632,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1590,9 +1674,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1602,8 +1687,9 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key_id
     #   The unique identifier for the SSH public key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -1626,9 +1712,10 @@ module Aws::IAM
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate you want to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1637,6 +1724,48 @@ module Aws::IAM
     #
     class DeleteServerCertificateRequest < Struct.new(
       :server_certificate_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteServiceSpecificCredentialRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType",
+    #         service_specific_credential_id: "serviceSpecificCredentialId", # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user associated with the service-specific
+    #   credential. If this value is not specified, then the operation
+    #   assumes the user whose credentials are used to call the operation.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] service_specific_credential_id
+    #   The unique identifier of the service-specific credential. You can
+    #   get this value by calling ListServiceSpecificCredentials.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    class DeleteServiceSpecificCredentialRequest < Struct.new(
+      :user_name,
+      :service_specific_credential_id)
       include Aws::Structure
     end
 
@@ -1651,9 +1780,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate belongs to.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1690,9 +1820,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) identifying the user that the
     #   policy is embedded in.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1702,9 +1833,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name identifying the policy document to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1727,9 +1859,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to delete.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1752,10 +1885,10 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the same as the ARN.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =/:,.@-
     #
     #
     #
@@ -1779,9 +1912,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM group to detach the
     #   policy from.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1817,9 +1951,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM role to detach the
     #   policy from.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1855,9 +1990,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the IAM user to detach the
     #   policy from.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1894,9 +2030,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user for whom you want to enable the MFA device.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -1907,10 +2044,10 @@ module Aws::IAM
     #   The serial number that uniquely identifies the MFA device. For
     #   virtual MFA devices, the serial number is the device ARN.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =/:,.@-
     #
     #
     #
@@ -2030,8 +2167,9 @@ module Aws::IAM
     # @!attribute [rw] access_key_id
     #   The identifier of an access key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -2081,16 +2219,16 @@ module Aws::IAM
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -2157,9 +2295,6 @@ module Aws::IAM
     #
     # @!attribute [rw] password_policy
     #   Contains information about the account password policy.
-    #
-    #   This data type is used as a response element in the
-    #   GetAccountPasswordPolicy action.
     #   @return [Types::PasswordPolicy]
     #
     class GetAccountPasswordPolicyResponse < Struct.new(
@@ -2191,11 +2326,13 @@ module Aws::IAM
     #   referenced in those policies. Each document is specified as a string
     #   containing the complete, valid JSON text of an IAM policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -2249,11 +2386,13 @@ module Aws::IAM
     #   An optional list of additional policies for which you want the list
     #   of context keys that are referenced.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -2303,9 +2442,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group the policy is associated with.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2315,9 +2455,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document to get.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2363,9 +2504,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2380,16 +2522,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class GetGroupRequest < Struct.new(
@@ -2443,9 +2585,10 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to get information about.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2478,9 +2621,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose login profile you want to retrieve.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2620,10 +2764,10 @@ module Aws::IAM
     # @!attribute [rw] version_id
     #   Identifies the policy version to retrieve.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that consists of the lowercase letter 'v' followed by one or two
-    #   digits, and optionally followed by a period '.' and a string of
-    #   letters and digits.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that consists of the lowercase letter 'v' followed by
+    #   one or two digits, and optionally followed by a period '.' and a
+    #   string of letters and digits.
     #
     #
     #
@@ -2658,9 +2802,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role associated with the policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2670,9 +2815,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document to get.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2716,9 +2862,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the IAM role to get information about.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2799,9 +2946,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2811,8 +2959,9 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key_id
     #   The unique identifier for the SSH public key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -2854,9 +3003,10 @@ module Aws::IAM
     #   The name of the server certificate you want to retrieve information
     #   about.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2890,9 +3040,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user who the policy is associated with.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2902,9 +3053,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document to get.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -2949,8 +3101,8 @@ module Aws::IAM
     #   The name of the user to get information about.
     #
     #   This parameter is optional. If it is not included, it defaults to
-    #   the user making the request. The [regex pattern][1] for this
-    #   parameter is a string of characters consisting of upper and
+    #   the user making the request. This parameter allows (per its [regex
+    #   pattern][1]) a string of characters consisting of upper and
     #   lowercase alphanumeric characters with no spaces. You can also
     #   include any of the following characters: =,.@-
     #
@@ -3180,9 +3332,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3197,16 +3350,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListAccessKeysRequest < Struct.new(
@@ -3261,16 +3414,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListAccountAliasesRequest < Struct.new(
@@ -3323,9 +3476,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the group to list attached
     #   policies for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3337,12 +3491,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -3357,16 +3511,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListAttachedGroupPoliciesRequest < Struct.new(
@@ -3421,9 +3575,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the role to list attached
     #   policies for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3435,12 +3590,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -3455,16 +3610,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListAttachedRolePoliciesRequest < Struct.new(
@@ -3519,9 +3674,10 @@ module Aws::IAM
     #   The name (friendly name, not ARN) of the user to list attached
     #   policies for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3533,12 +3689,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all policies.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -3553,16 +3709,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListAttachedUserPoliciesRequest < Struct.new(
@@ -3641,12 +3797,12 @@ module Aws::IAM
     #   optional. If it is not included, it defaults to a slash (/), listing
     #   all entities.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -3661,16 +3817,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListEntitiesForPolicyRequest < Struct.new(
@@ -3733,9 +3889,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to list policies for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3750,16 +3907,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListGroupPoliciesRequest < Struct.new(
@@ -3810,9 +3967,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to list groups for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3827,16 +3985,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListGroupsForUserRequest < Struct.new(
@@ -3890,8 +4048,8 @@ module Aws::IAM
     #   with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all groups. The [regex pattern][1] for this
-    #   parameter is a string of characters consisting of either a forward
+    #   slash (/), listing all groups. This paramater allows (per its [regex
+    #   pattern][1]) a string of characters consisting of either a forward
     #   slash (/) by itself or a string that must begin and end with forward
     #   slashes, containing any ASCII character from the ! (\\u0021) thru
     #   the DEL character (\\u007F), including most punctuation characters,
@@ -3910,16 +4068,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListGroupsRequest < Struct.new(
@@ -3970,9 +4128,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to list instance profiles for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -3987,16 +4146,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListInstanceProfilesForRoleRequest < Struct.new(
@@ -4051,12 +4210,12 @@ module Aws::IAM
     #   path starts with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all instance profiles. The [regex pattern][1] for
-    #   this parameter is a string of characters consisting of either a
-    #   forward slash (/) by itself or a string that must begin and end with
-    #   forward slashes, containing any ASCII character from the ! (\\u0021)
-    #   thru the DEL character (\\u007F), including most punctuation
-    #   characters, digits, and upper and lowercased letters.
+    #   slash (/), listing all instance profiles. This paramater allows (per
+    #   its [regex pattern][1]) a string of characters consisting of either
+    #   a forward slash (/) by itself or a string that must begin and end
+    #   with forward slashes, containing any ASCII character from the !
+    #   (\\u0021) thru the DEL character (\\u007F), including most
+    #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
     #
@@ -4071,16 +4230,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListInstanceProfilesRequest < Struct.new(
@@ -4131,9 +4290,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA devices you want to list.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -4148,16 +4308,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListMFADevicesRequest < Struct.new(
@@ -4247,12 +4407,12 @@ module Aws::IAM
     # @!attribute [rw] path_prefix
     #   The path prefix for filtering the results. This parameter is
     #   optional. If it is not included, it defaults to a slash (/), listing
-    #   all policies. The [regex pattern][1] for this parameter is a string
-    #   of characters consisting of either a forward slash (/) by itself or
-    #   a string that must begin and end with forward slashes, containing
-    #   any ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   all policies. This paramater allows (per its [regex pattern][1]) a
+    #   string of characters consisting of either a forward slash (/) by
+    #   itself or a string that must begin and end with forward slashes,
+    #   containing any ASCII character from the ! (\\u0021) thru the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #
     #
@@ -4267,16 +4427,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListPoliciesRequest < Struct.new(
@@ -4346,16 +4506,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListPolicyVersionsRequest < Struct.new(
@@ -4413,9 +4573,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to list policies for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -4430,16 +4591,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListRolePoliciesRequest < Struct.new(
@@ -4493,8 +4654,8 @@ module Aws::IAM
     #   with `/application_abc/component_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all roles. The [regex pattern][1] for this
-    #   parameter is a string of characters consisting of either a forward
+    #   slash (/), listing all roles. This paramater allows (per its [regex
+    #   pattern][1]) a string of characters consisting of either a forward
     #   slash (/) by itself or a string that must begin and end with forward
     #   slashes, containing any ASCII character from the ! (\\u0021) thru
     #   the DEL character (\\u007F), including most punctuation characters,
@@ -4513,16 +4674,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListRolesRequest < Struct.new(
@@ -4591,9 +4752,10 @@ module Aws::IAM
     #   specified, the UserName field is determined implicitly based on the
     #   AWS access key used to sign the request.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -4608,16 +4770,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListSSHPublicKeysRequest < Struct.new(
@@ -4671,12 +4833,12 @@ module Aws::IAM
     #   the path starts with `/company/servercerts`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all server certificates. The [regex pattern][1]
-    #   for this parameter is a string of characters consisting of either a
-    #   forward slash (/) by itself or a string that must begin and end with
-    #   forward slashes, containing any ASCII character from the ! (\\u0021)
-    #   thru the DEL character (\\u007F), including most punctuation
-    #   characters, digits, and upper and lowercased letters.
+    #   slash (/), listing all server certificates. This paramater allows
+    #   (per its [regex pattern][1]) a string of characters consisting of
+    #   either a forward slash (/) by itself or a string that must begin and
+    #   end with forward slashes, containing any ASCII character from the !
+    #   (\\u0021) thru the DEL character (\\u007F), including most
+    #   punctuation characters, digits, and upper and lowercased letters.
     #
     #
     #
@@ -4691,16 +4853,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListServerCertificatesRequest < Struct.new(
@@ -4739,6 +4901,51 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListServiceSpecificCredentialsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType",
+    #         service_name: "serviceName",
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the user whose service-specific credentials you want
+    #   information about. If this value is not specified then the operation
+    #   assumes the user whose credentials are used to call the operation.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   Filters the returned results to only those for the specified AWS
+    #   service. If not specified, then AWS returns service-specific
+    #   credentials for all services.
+    #   @return [String]
+    #
+    class ListServiceSpecificCredentialsRequest < Struct.new(
+      :user_name,
+      :service_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_specific_credentials
+    #   A list of structures that each contain details about a
+    #   service-specific credential.
+    #   @return [Array<Types::ServiceSpecificCredentialMetadata>]
+    #
+    class ListServiceSpecificCredentialsResponse < Struct.new(
+      :service_specific_credentials)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSigningCertificatesRequest
     #   data as a hash:
     #
@@ -4752,9 +4959,10 @@ module Aws::IAM
     #   The name of the IAM user whose signing certificates you want to
     #   examine.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -4769,16 +4977,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListSigningCertificatesRequest < Struct.new(
@@ -4829,9 +5037,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to list policies for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -4846,16 +5055,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListUserPoliciesRequest < Struct.new(
@@ -4909,12 +5118,12 @@ module Aws::IAM
     #   whose path starts with `/division_abc/subdivision_xyz/`.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/), listing all user names. The [regex pattern][1] for this
-    #   parameter is a string of characters consisting of either a forward
-    #   slash (/) by itself or a string that must begin and end with forward
-    #   slashes, containing any ASCII character from the ! (\\u0021) thru
-    #   the DEL character (\\u007F), including most punctuation characters,
-    #   digits, and upper and lowercased letters.
+    #   slash (/), listing all user names. This paramater allows (per its
+    #   [regex pattern][1]) a string of characters consisting of either a
+    #   forward slash (/) by itself or a string that must begin and end with
+    #   forward slashes, containing any ASCII character from the ! (\\u0021)
+    #   thru the DEL character (\\u007F), including most punctuation
+    #   characters, digits, and upper and lowercased letters.
     #
     #
     #
@@ -4929,16 +5138,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListUsersRequest < Struct.new(
@@ -5000,16 +5209,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     class ListVirtualMFADevicesRequest < Struct.new(
@@ -5617,9 +5826,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to associate the policy with.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5629,9 +5839,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5641,11 +5852,13 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -5671,9 +5884,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to associate the policy with.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5683,9 +5897,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5695,11 +5910,13 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -5725,9 +5942,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to associate the policy with.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5737,9 +5955,10 @@ module Aws::IAM
     # @!attribute [rw] policy_name
     #   The name of the policy document.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5749,11 +5968,13 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -5811,9 +6032,10 @@ module Aws::IAM
     # @!attribute [rw] instance_profile_name
     #   The name of the instance profile to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5823,9 +6045,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to remove.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5849,9 +6072,10 @@ module Aws::IAM
     # @!attribute [rw] group_name
     #   The name of the group to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5861,9 +6085,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user to remove.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5873,6 +6098,60 @@ module Aws::IAM
     class RemoveUserFromGroupRequest < Struct.new(
       :group_name,
       :user_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ResetServiceSpecificCredentialRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType",
+    #         service_specific_credential_id: "serviceSpecificCredentialId", # required
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user associated with the service-specific
+    #   credential. If this value is not specified, then the operation
+    #   assumes the user whose credentials are used to call the operation.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] service_specific_credential_id
+    #   The unique identifier of the service-specific credential.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    class ResetServiceSpecificCredentialRequest < Struct.new(
+      :user_name,
+      :service_specific_credential_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_specific_credential
+    #   A structure with details about the updated service-specific
+    #   credential, including the new password.
+    #
+    #   This is the **only** time that you can access the password. You
+    #   cannot recover the password later, but you can reset it again.
+    #   @return [Types::ServiceSpecificCredential]
+    #
+    class ResetServiceSpecificCredentialResponse < Struct.new(
+      :service_specific_credential)
       include Aws::Structure
     end
 
@@ -5943,9 +6222,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose MFA device you want to resynchronize.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -5955,9 +6235,10 @@ module Aws::IAM
     # @!attribute [rw] serial_number
     #   Serial number that uniquely identifies the MFA device.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -6105,7 +6386,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_list
-    #   Contains a list of instance profiles.
+    #   A list of instance profiles that contain this role.
     #   @return [Array<Types::InstanceProfile>]
     #
     # @!attribute [rw] role_policy_list
@@ -6317,6 +6598,102 @@ module Aws::IAM
       include Aws::Structure
     end
 
+    # Contains the details of a service specific credential.
+    #
+    # @!attribute [rw] create_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   service-specific credential were created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service associated with the service-specific
+    #   credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_user_name
+    #   The generated user name for the service-specific credential. This
+    #   value is generated by combining the IAM user's name combined with
+    #   the ID number of the AWS account, as in `jane-at-123456789012`, for
+    #   example. This value cannot be configured by the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_password
+    #   The generated password for the service-specific credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_specific_credential_id
+    #   The unique identifier for the service-specific credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user associated with the service-specific
+    #   credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the service-specific credential. `Active` means the
+    #   key is valid for API calls, while `Inactive` means it is not.
+    #   @return [String]
+    #
+    class ServiceSpecificCredential < Struct.new(
+      :create_date,
+      :service_name,
+      :service_user_name,
+      :service_password,
+      :service_specific_credential_id,
+      :user_name,
+      :status)
+      include Aws::Structure
+    end
+
+    # Contains additional details about a service-specific credential.
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user associated with the service-specific
+    #   credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the service-specific credential. `Active` means the
+    #   key is valid for API calls, while `Inactive` means it is not.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_user_name
+    #   The generated user name for the service-specific credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_date
+    #   The date and time, in [ISO 8601 date-time format][1], when the
+    #   service-specific credential were created.
+    #
+    #
+    #
+    #   [1]: http://www.iso.org/iso/iso8601
+    #   @return [Time]
+    #
+    # @!attribute [rw] service_specific_credential_id
+    #   The unique identifier for the service-specific credential.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_name
+    #   The name of the service associated with the service-specific
+    #   credential.
+    #   @return [String]
+    #
+    class ServiceSpecificCredentialMetadata < Struct.new(
+      :user_name,
+      :status,
+      :service_user_name,
+      :create_date,
+      :service_specific_credential_id,
+      :service_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SetDefaultPolicyVersionRequest
     #   data as a hash:
     #
@@ -6421,11 +6798,13 @@ module Aws::IAM
     #   [GetFederationToken][1] or one of the [AssumeRole][2] APIs to
     #   restrict what a user can do while using the temporary credentials.
     #
-    #   The [regex pattern][3] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][3] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -6471,11 +6850,13 @@ module Aws::IAM
     #   policy attached. You can include only one resource-based policy in a
     #   simulation.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -6559,16 +6940,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -6666,11 +7047,13 @@ module Aws::IAM
     #   simulation. Each document is specified as a string containing the
     #   complete, valid JSON text of an IAM policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -6710,11 +7093,13 @@ module Aws::IAM
     #   policy attached. You can include only one resource-based policy in a
     #   simulation.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -6814,16 +7199,16 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] max_items
-    #   Use this only when paginating results to indicate the maximum number
-    #   of items you want in the response. If additional items exist beyond
-    #   the maximum you specify, the `IsTruncated` response element is
-    #   `true`.
+    #   (Optional) Use this only when paginating results to indicate the
+    #   maximum number of items you want in the response. If additional
+    #   items exist beyond the maximum you specify, the `IsTruncated`
+    #   response element is `true`.
     #
-    #   This parameter is optional. If you do not include it, it defaults to
-    #   100. Note that IAM might return fewer results, even when there are
-    #   more results available. In that case, the `IsTruncated` response
-    #   element returns `true` and `Marker` contains a value to include in
-    #   the subsequent call that tells the service where to continue from.
+    #   If you do not include this parameter, it defaults to 100. Note that
+    #   IAM might return fewer results, even when there are more results
+    #   available. In that case, the `IsTruncated` response element returns
+    #   `true` and `Marker` contains a value to include in the subsequent
+    #   call that tells the service where to continue from.
     #   @return [Integer]
     #
     # @!attribute [rw] marker
@@ -6891,9 +7276,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose key you want to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -6903,8 +7289,9 @@ module Aws::IAM
     # @!attribute [rw] access_key_id
     #   The access key ID of the secret access key you want to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -7034,9 +7421,10 @@ module Aws::IAM
     # @!attribute [rw] role_name
     #   The name of the role to update with the new policy.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7046,11 +7434,13 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy that grants an entity permission to assume the role.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -7076,9 +7466,10 @@ module Aws::IAM
     #   Name of the IAM group to update. If you're changing the name of the
     #   group, this is the original name.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7089,12 +7480,12 @@ module Aws::IAM
     #   New path for the IAM group. Only include this if changing the
     #   group's path.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -7105,9 +7496,10 @@ module Aws::IAM
     #   New name for the IAM group. Only include this if changing the
     #   group's name.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7133,9 +7525,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user whose password you want to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7145,14 +7538,16 @@ module Aws::IAM
     # @!attribute [rw] password
     #   The new password for the specified IAM user.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D). However, the
-    #   format can be further restricted by the account administrator by
-    #   setting a password policy on the AWS account. For more information,
-    #   see UpdateAccountPasswordPolicy.
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D). However, the format can be
+    #   further restricted by the account administrator by setting a
+    #   password policy on the AWS account. For more information, see
+    #   UpdateAccountPasswordPolicy.
     #
     #
     #
@@ -7263,9 +7658,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user associated with the SSH public key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7275,8 +7671,9 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key_id
     #   The unique identifier for the SSH public key.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -7308,9 +7705,10 @@ module Aws::IAM
     # @!attribute [rw] server_certificate_name
     #   The name of the server certificate that you want to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7321,12 +7719,12 @@ module Aws::IAM
     #   The new path for the server certificate. Include this only if you
     #   are updating the server certificate's path.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -7338,9 +7736,10 @@ module Aws::IAM
     #   are updating the server certificate's name. The name of the
     #   certificate cannot contain any spaces.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7351,6 +7750,53 @@ module Aws::IAM
       :server_certificate_name,
       :new_path,
       :new_server_certificate_name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateServiceSpecificCredentialRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_name: "userNameType",
+    #         service_specific_credential_id: "serviceSpecificCredentialId", # required
+    #         status: "Active", # required, accepts Active, Inactive
+    #       }
+    #
+    # @!attribute [rw] user_name
+    #   The name of the IAM user associated with the service-specific
+    #   credential. If you do not specify this value, then the operation
+    #   assumes the user whose credentials are used to call the operation.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] service_specific_credential_id
+    #   The unique identifier of the service-specific credential.
+    #
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status to be assigned to the service-specific credential.
+    #   @return [String]
+    #
+    class UpdateServiceSpecificCredentialRequest < Struct.new(
+      :user_name,
+      :service_specific_credential_id,
+      :status)
       include Aws::Structure
     end
 
@@ -7366,9 +7812,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user the signing certificate belongs to.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7378,8 +7825,9 @@ module Aws::IAM
     # @!attribute [rw] certificate_id
     #   The ID of the signing certificate you want to update.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   that can consist of any upper or lowercased letter or digit.
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters that can consist of any upper or lowercased letter or
+    #   digit.
     #
     #
     #
@@ -7412,9 +7860,10 @@ module Aws::IAM
     #   Name of the user to update. If you're changing the name of the
     #   user, this is the original user name.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7425,12 +7874,12 @@ module Aws::IAM
     #   New path for the IAM user. Include this parameter only if you're
     #   changing the user's path.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of either a forward slash (/) by itself or a string that
-    #   must begin and end with forward slashes, containing any ASCII
-    #   character from the ! (\\u0021) thru the DEL character (\\u007F),
-    #   including most punctuation characters, digits, and upper and
-    #   lowercased letters.
+    #   This paramater allows (per its [regex pattern][1]) a string of
+    #   characters consisting of either a forward slash (/) by itself or a
+    #   string that must begin and end with forward slashes, containing any
+    #   ASCII character from the ! (\\u0021) thru the DEL character
+    #   (\\u007F), including most punctuation characters, digits, and upper
+    #   and lowercased letters.
     #
     #
     #
@@ -7441,9 +7890,10 @@ module Aws::IAM
     #   New name for the user. Include this parameter only if you're
     #   changing the user's name.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7468,9 +7918,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the IAM user to associate the SSH public key with.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7481,11 +7932,13 @@ module Aws::IAM
     #   The SSH public key. The public key must be encoded in ssh-rsa format
     #   or PEM format.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -7525,12 +7978,12 @@ module Aws::IAM
     #   paths, see [IAM Identifiers][1] in the *IAM User Guide*.
     #
     #   This parameter is optional. If it is not included, it defaults to a
-    #   slash (/). The [regex pattern][2] for this parameter is a string of
-    #   characters consisting of either a forward slash (/) by itself or a
-    #   string that must begin and end with forward slashes, containing any
-    #   ASCII character from the ! (\\u0021) thru the DEL character
-    #   (\\u007F), including most punctuation characters, digits, and upper
-    #   and lowercased letters.
+    #   slash (/). This paramater allows (per its [regex pattern][2]) a
+    #   string of characters consisting of either a forward slash (/) by
+    #   itself or a string that must begin and end with forward slashes,
+    #   containing any ASCII character from the ! (\\u0021) thru the DEL
+    #   character (\\u007F), including most punctuation characters, digits,
+    #   and upper and lowercased letters.
     #
     #   <note markdown="1"> If you are uploading a server certificate specifically for use with
     #   Amazon CloudFront distributions, you must specify a path using the
@@ -7549,9 +8002,10 @@ module Aws::IAM
     #   The name for the server certificate. Do not include the path in this
     #   value. The name of the certificate cannot contain any spaces.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7561,11 +8015,13 @@ module Aws::IAM
     # @!attribute [rw] certificate_body
     #   The contents of the public key certificate in PEM-encoded format.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -7575,11 +8031,13 @@ module Aws::IAM
     # @!attribute [rw] private_key
     #   The contents of the private key in PEM-encoded format.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -7591,11 +8049,13 @@ module Aws::IAM
     #   concatenation of the PEM-encoded public key certificates of the
     #   chain.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -7634,9 +8094,10 @@ module Aws::IAM
     # @!attribute [rw] user_name
     #   The name of the user the signing certificate is for.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of upper and lowercase alphanumeric characters with no
-    #   spaces. You can also include any of the following characters: =,.@-
+    #   This parameter allows (per its [regex pattern][1]) a string of
+    #   characters consisting of upper and lowercase alphanumeric characters
+    #   with no spaces. You can also include any of the following
+    #   characters: =,.@-
     #
     #
     #
@@ -7646,11 +8107,13 @@ module Aws::IAM
     # @!attribute [rw] certificate_body
     #   The contents of the signing certificate.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009),
-    #   line feed (\\u000A), and carriage return (\\u000D).
+    #   The [regex pattern][1] used to validate this parameter is a string
+    #   of characters consisting of any printable ASCII character ranging
+    #   from the space character (\\u0020) through end of the ASCII
+    #   character range as well as the printable characters in the Basic
+    #   Latin and Latin-1 Supplement character set (through \\u00FF). It
+    #   also includes the special characters tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D).
     #
     #
     #
@@ -7847,7 +8310,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: http://www.ietf.org/rfc/rfc3548.txt
+    #   [1]: https://tools.ietf.org/html/rfc3548.txt
     #   @return [String]
     #
     # @!attribute [rw] qr_code_png
@@ -7860,16 +8323,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   Contains information about an IAM user entity.
-    #
-    #   This data type is used as a response element in the following
-    #   actions:
-    #
-    #   * CreateUser
-    #
-    #   * GetUser
-    #
-    #   * ListUsers
+    #   The user to whom the MFA device is assigned.
     #   @return [Types::User]
     #
     # @!attribute [rw] enable_date

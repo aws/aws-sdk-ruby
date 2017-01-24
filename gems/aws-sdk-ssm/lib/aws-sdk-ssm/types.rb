@@ -1362,6 +1362,91 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreatePatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "BaselineName", # required
+    #         global_filters: {
+    #           patch_filters: [ # required
+    #             {
+    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #               values: ["PatchFilterValue"], # required
+    #             },
+    #           ],
+    #         },
+    #         approval_rules: {
+    #           patch_rules: [ # required
+    #             {
+    #               patch_filter_group: { # required
+    #                 patch_filters: [ # required
+    #                   {
+    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                     values: ["PatchFilterValue"], # required
+    #                   },
+    #                 ],
+    #               },
+    #               approve_after_days: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         approved_patches: ["PatchId"],
+    #         rejected_patches: ["PatchId"],
+    #         description: "BaselineDescription",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_filters
+    #   A set of global filters used to exclude patches from the baseline.
+    #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] approval_rules
+    #   A set of rules used to include patches in the baseline.
+    #   @return [Types::PatchRuleGroup]
+    #
+    # @!attribute [rw] approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Caller-provided idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreatePatchBaselineRequest < Struct.new(
+      :name,
+      :global_filters,
+      :approval_rules,
+      :approved_patches,
+      :rejected_patches,
+      :description,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the created patch baseline.
+    #   @return [String]
+    #
+    class CreatePatchBaselineResult < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteActivationRequest
     #   data as a hash:
     #
@@ -1471,6 +1556,31 @@ module Aws::SSM
 
     class DeleteParameterResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeletePatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline to delete.
+    #   @return [String]
+    #
+    class DeletePatchBaselineRequest < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the deleted patch baseline.
+    #   @return [String]
+    #
+    class DeletePatchBaselineResult < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeregisterManagedInstanceRequest
     #   data as a hash:
     #
@@ -1489,6 +1599,43 @@ module Aws::SSM
     end
 
     class DeregisterManagedInstanceResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeregisterPatchBaselineForPatchGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #         patch_group: "PatchGroup", # required
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline to deregister the patch group from.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group that should be deregistered from the
+    #   patch baseline.
+    #   @return [String]
+    #
+    class DeregisterPatchBaselineForPatchGroupRequest < Struct.new(
+      :baseline_id,
+      :patch_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline the patch group was deregistered from.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group deregistered from the patch baseline.
+    #   @return [String]
+    #
+    class DeregisterPatchBaselineForPatchGroupResult < Struct.new(
+      :baseline_id,
+      :patch_group)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeregisterTargetFromMaintenanceWindowRequest
     #   data as a hash:
@@ -1726,6 +1873,55 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAvailablePatchesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "PatchOrchestratorFilterKey",
+    #             values: ["PatchOrchestratorFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Filters used to scope down the returned patches.
+    #   @return [Array<Types::PatchOrchestratorFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of patches to return (per page).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    class DescribeAvailablePatchesRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] patches
+    #   An array of patches. Each entry in the array is a patch structure.
+    #   @return [Array<Types::Patch>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribeAvailablePatchesResult < Struct.new(
+      :patches,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeDocumentPermissionRequest
     #   data as a hash:
     #
@@ -1837,6 +2033,50 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeEffectivePatchesForPatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline to retrieve the effective patches for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of patches to return (per page).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    class DescribeEffectivePatchesForPatchBaselineRequest < Struct.new(
+      :baseline_id,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] effective_patches
+    #   An array of patches and patch status.
+    #   @return [Array<Types::EffectivePatch>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribeEffectivePatchesForPatchBaselineResult < Struct.new(
+      :effective_patches,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeInstanceAssociationsStatusRequest
     #   data as a hash:
     #
@@ -1943,6 +2183,189 @@ module Aws::SSM
     #
     class DescribeInstanceInformationResult < Struct.new(
       :instance_information_list,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstancePatchStatesForPatchGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         patch_group: "PatchGroup", # required
+    #         filters: [
+    #           {
+    #             key: "InstancePatchStateFilterKey", # required
+    #             values: ["InstancePatchStateFilterValue"], # required
+    #             type: "Equal", # required, accepts Equal, NotEqual, LessThan, GreaterThan
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group for which the patch state information
+    #   should be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Each entry in the array is a structure containing:
+    #
+    #   Key (string 1 ≤ length ≤ 200)
+    #
+    #   Values (array containing a single string)
+    #
+    #   Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)
+    #   @return [Array<Types::InstancePatchStateFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of patches to return (per page).
+    #   @return [Integer]
+    #
+    class DescribeInstancePatchStatesForPatchGroupRequest < Struct.new(
+      :patch_group,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_patch_states
+    #   The high-level patch state for the requested instances.
+    #   @return [Array<Types::InstancePatchState>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribeInstancePatchStatesForPatchGroupResult < Struct.new(
+      :instance_patch_states,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstancePatchStatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_ids: ["InstanceId"], # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_ids
+    #   The ID of the instance whose patch state information should be
+    #   retrieved.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of instances to return (per page).
+    #   @return [Integer]
+    #
+    class DescribeInstancePatchStatesRequest < Struct.new(
+      :instance_ids,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_patch_states
+    #   The high-level patch state for the requested instances.
+    #   @return [Array<Types::InstancePatchState>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribeInstancePatchStatesResult < Struct.new(
+      :instance_patch_states,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeInstancePatchesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         filters: [
+    #           {
+    #             key: "PatchOrchestratorFilterKey",
+    #             values: ["PatchOrchestratorFilterValue"],
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance whose patch state information should be
+    #   retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Each entry in the array is a structure containing:
+    #
+    #   Key (string, 1 ≤ length ≤ 128)
+    #
+    #   Values (array of strings 1 ≤ length ≤ 256)
+    #   @return [Array<Types::PatchOrchestratorFilter>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of patches to return (per page).
+    #   @return [Integer]
+    #
+    class DescribeInstancePatchesRequest < Struct.new(
+      :instance_id,
+      :filters,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] patches
+    #   Each entry in the array is a structure containing:
+    #
+    #   Title (string)
+    #
+    #   KBId (string)
+    #
+    #   Classification (string)
+    #
+    #   Severity (string)
+    #
+    #   State (string – “INSTALLED”, “INSTALLED\_OTHER”, “MISSING”,
+    #   “NOT\_APPLICABLE”, “FAILED”)
+    #
+    #   InstalledTime (DateTime)
+    #
+    #   InstalledBy (string)
+    #   @return [Array<Types::PatchComplianceData>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribeInstancePatchesResult < Struct.new(
+      :patches,
       :next_token)
       include Aws::Structure
     end
@@ -2362,6 +2785,156 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePatchBaselinesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filters: [
+    #           {
+    #             key: "PatchOrchestratorFilterKey",
+    #             values: ["PatchOrchestratorFilterValue"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] filters
+    #   Each element in the array is a structure containing:
+    #
+    #   Key: (string, “NAME\_PREFIX” or “OWNER”)
+    #
+    #   Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)
+    #   @return [Array<Types::PatchOrchestratorFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of patch baselines to return (per page).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    class DescribePatchBaselinesRequest < Struct.new(
+      :filters,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_identities
+    #   An array of PatchBaselineIdentity elements.
+    #   @return [Array<Types::PatchBaselineIdentity>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribePatchBaselinesResult < Struct.new(
+      :baseline_identities,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePatchGroupStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         patch_group: "PatchGroup", # required
+    #       }
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group whose patch snapshot should be
+    #   retrieved.
+    #   @return [String]
+    #
+    class DescribePatchGroupStateRequest < Struct.new(
+      :patch_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instances
+    #   The number of instances in the patch group.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_installed_patches
+    #   The number of instances with installed patches.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_installed_other_patches
+    #   The number of instances with patches installed that aren’t defined
+    #   in the patch baseline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_missing_patches
+    #   The number of instances with missing patches from the patch
+    #   baseline.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_failed_patches
+    #   The number of instances with patches from the patch baseline that
+    #   failed to install.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instances_with_not_applicable_patches
+    #   The number of instances with patches that aren’t applicable.
+    #   @return [Integer]
+    #
+    class DescribePatchGroupStateResult < Struct.new(
+      :instances,
+      :instances_with_installed_patches,
+      :instances_with_installed_other_patches,
+      :instances_with_missing_patches,
+      :instances_with_failed_patches,
+      :instances_with_not_applicable_patches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribePatchGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of patch groups to return (per page).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #   @return [String]
+    #
+    class DescribePatchGroupsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mappings
+    #   Each entry in the array contains:
+    #
+    #   PatchGroup: string (1 ≤ length ≤ 256, Regex:
+    #   ^(\[\\p\\\{L\\}\\p\\\{Z\\}\\p\\\{N\\}\_.:/=+\\-@\]*)$)
+    #
+    #   PatchBaselineIdentity: A PatchBaselineIdentity element.
+    #   @return [Array<Types::PatchGroupPatchBaselineMapping>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use when requesting the next set of items. If there are
+    #   no additional items to return, the string is empty.
+    #   @return [String]
+    #
+    class DescribePatchGroupsResult < Struct.new(
+      :mappings,
+      :next_token)
+      include Aws::Structure
+    end
+
     # A default version of a document.
     #
     # @!attribute [rw] name
@@ -2583,6 +3156,31 @@ module Aws::SSM
       :document_version,
       :created_date,
       :is_default_version)
+      include Aws::Structure
+    end
+
+    # The EffectivePatch structure defines metadata about a patch along with
+    # the approval state of the patch in a particular patch baseline. The
+    # approval state includes information about whether the patch is
+    # currently approved, due to be approved by a rule, explicitly approved,
+    # or explicitly rejected and the date the patch was or will be approved.
+    #
+    # @!attribute [rw] patch
+    #   Provides metadata for a patch, including information such as the KB
+    #   ID, severity, classification and a URL for where more information
+    #   can be obtained about the patch.
+    #   @return [Types::Patch]
+    #
+    # @!attribute [rw] patch_status
+    #   The status of the patch in a patch baseline. This includes
+    #   information about whether the patch is currently approved, due to be
+    #   approved by a rule, explicitly approved, or explicitly rejected and
+    #   the date the patch was or will be approved.
+    #   @return [Types::PatchStatus]
+    #
+    class EffectivePatch < Struct.new(
+      :patch,
+      :patch_status)
       include Aws::Structure
     end
 
@@ -2818,6 +3416,62 @@ module Aws::SSM
       :standard_output_url,
       :standard_error_content,
       :standard_error_url)
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    class GetDefaultPatchBaselineRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the default patch baseline.
+    #   @return [String]
+    #
+    class GetDefaultPatchBaselineResult < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDeployablePatchSnapshotForInstanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         snapshot_id: "SnapshotId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance for which the appropriate patch snapshot
+    #   should be retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The user-defined snapshot ID.
+    #   @return [String]
+    #
+    class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
+      :instance_id,
+      :snapshot_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The user-defined snapshot ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_download_url
+    #   A pre-signed Amazon S3 URL that can be used to download the patch
+    #   snapshot.
+    #   @return [String]
+    #
+    class GetDeployablePatchSnapshotForInstanceResult < Struct.new(
+      :instance_id,
+      :snapshot_id,
+      :snapshot_download_url)
       include Aws::Structure
     end
 
@@ -3289,6 +3943,108 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetPatchBaselineForPatchGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         patch_group: "PatchGroup", # required
+    #       }
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group whose patch baseline should be
+    #   retrieved.
+    #   @return [String]
+    #
+    class GetPatchBaselineForPatchGroupRequest < Struct.new(
+      :patch_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline that should be used for the patch
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group.
+    #   @return [String]
+    #
+    class GetPatchBaselineForPatchGroupResult < Struct.new(
+      :baseline_id,
+      :patch_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetPatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline to retrieve.
+    #   @return [String]
+    #
+    class GetPatchBaselineRequest < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the retrieved patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_filters
+    #   A set of global filters used to exclude patches from the baseline.
+    #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] approval_rules
+    #   A set of rules used to include patches in the baseline.
+    #   @return [Types::PatchRuleGroup]
+    #
+    # @!attribute [rw] approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] patch_groups
+    #   Patch groups included in the patch baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_date
+    #   The date the patch baseline was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_date
+    #   The date the patch baseline was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the patch baseline.
+    #   @return [String]
+    #
+    class GetPatchBaselineResult < Struct.new(
+      :baseline_id,
+      :name,
+      :global_filters,
+      :approval_rules,
+      :approved_patches,
+      :rejected_patches,
+      :patch_groups,
+      :created_date,
+      :modified_date,
+      :description)
+      include Aws::Structure
+    end
+
     # Status information about the aggregated associations.
     #
     # @!attribute [rw] detailed_status
@@ -3575,6 +4331,127 @@ module Aws::SSM
     class InstanceInformationStringFilter < Struct.new(
       :key,
       :values)
+      include Aws::Structure
+    end
+
+    # Defines the high-level patch compliance state for a managed instance,
+    # providing information about the number of installed, missing, not
+    # applicable, and failed patches along with metadata about the operation
+    # when this information was gathered for the instance.
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the managed instance the high-level patch compliance
+    #   information was collected for.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group the managed instance belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline used to patch the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the patch baseline snapshot used during the patching
+    #   operation when this compliance data was collected.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_information
+    #   Placeholder information, this field will always be empty in the
+    #   current release of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] installed_count
+    #   The number of patches from the patch baseline that are installed on
+    #   the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] installed_other_count
+    #   The number of patches not specified in the patch baseline that are
+    #   installed on the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] missing_count
+    #   The number of patches from the patch baseline that are applicable
+    #   for the instance but aren’t currently installed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_count
+    #   The number of patches from the patch baseline that were attempted to
+    #   be installed during the last patching operation, but failed to
+    #   install.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] not_applicable_count
+    #   The number of patches from the patch baseline that aren’t applicable
+    #   for the instance and hence aren’t installed on the instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] operation_start_time
+    #   The time the most recent patching operation was started on the
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation_end_time
+    #   The time the most recent patching operation completed on the
+    #   instance.
+    #   @return [Time]
+    #
+    # @!attribute [rw] operation
+    #   The type of patching operation that was performed: SCAN (assess
+    #   patch compliance state) or INSTALL (install missing patches).
+    #   @return [String]
+    #
+    class InstancePatchState < Struct.new(
+      :instance_id,
+      :patch_group,
+      :baseline_id,
+      :snapshot_id,
+      :owner_information,
+      :installed_count,
+      :installed_other_count,
+      :missing_count,
+      :failed_count,
+      :not_applicable_count,
+      :operation_start_time,
+      :operation_end_time,
+      :operation)
+      include Aws::Structure
+    end
+
+    # Defines a filter used in DescribeInstancePatchStatesForPatchGroup used
+    # to scope down the information returned by the API.
+    #
+    # @note When making an API call, you may pass InstancePatchStateFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "InstancePatchStateFilterKey", # required
+    #         values: ["InstancePatchStateFilterValue"], # required
+    #         type: "Equal", # required, accepts Equal, NotEqual, LessThan, GreaterThan
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key for the filter. Supported values are FailedCount,
+    #   InstalledCount, InstalledOtherCount, MissingCount and
+    #   NotApplicableCount.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value for the filter, must be an integer greater than or equal
+    #   to 0.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   The type of comparison that should be performed for the value:
+    #   Equal, NotEqual, LessThan or GreaterThan.
+    #   @return [String]
+    #
+    class InstancePatchStateFilter < Struct.new(
+      :key,
+      :values,
+      :type)
       include Aws::Structure
     end
 
@@ -4747,6 +5624,317 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Represents metadata about a patch.
+    #
+    # @!attribute [rw] id
+    #   The ID of the patch (this is different than the Microsoft Knowledge
+    #   Base ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] release_date
+    #   The date the patch was released.
+    #   @return [Time]
+    #
+    # @!attribute [rw] title
+    #   The title of the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_url
+    #   The URL where more information can be obtained about the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] vendor
+    #   The name of the vendor providing the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] product_family
+    #   The product family the patch is applicable for (for example,
+    #   Windows).
+    #   @return [String]
+    #
+    # @!attribute [rw] product
+    #   The specific product the patch is applicable for (for example,
+    #   WindowsServer2016).
+    #   @return [String]
+    #
+    # @!attribute [rw] classification
+    #   The classification of the patch (for example, SecurityUpdates,
+    #   Updates, CriticalUpdates).
+    #   @return [String]
+    #
+    # @!attribute [rw] msrc_severity
+    #   The severity of the patch (for example Critical, Important,
+    #   Moderate).
+    #   @return [String]
+    #
+    # @!attribute [rw] kb_number
+    #   The Microsoft Knowledge Base ID of the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] msrc_number
+    #   The ID of the MSRC bulletin the patch is related to.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language of the patch if it’s language-specific.
+    #   @return [String]
+    #
+    class Patch < Struct.new(
+      :id,
+      :release_date,
+      :title,
+      :description,
+      :content_url,
+      :vendor,
+      :product_family,
+      :product,
+      :classification,
+      :msrc_severity,
+      :kb_number,
+      :msrc_number,
+      :language)
+      include Aws::Structure
+    end
+
+    # Defines the basic information about a patch baseline.
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_name
+    #   The name of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_description
+    #   The description of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_baseline
+    #   Whether this is the default baseline.
+    #   @return [Boolean]
+    #
+    class PatchBaselineIdentity < Struct.new(
+      :baseline_id,
+      :baseline_name,
+      :baseline_description,
+      :default_baseline)
+      include Aws::Structure
+    end
+
+    # Information about the state of a patch on a particular instance as it
+    # relates to the patch baseline used to patch the instance.
+    #
+    # @!attribute [rw] title
+    #   The title of the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] kb_id
+    #   The Microsoft Knowledge Base ID of the patch.
+    #   @return [String]
+    #
+    # @!attribute [rw] classification
+    #   The classification of the patch (for example, SecurityUpdates,
+    #   Updates, CriticalUpdates).
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity of the patch (for example, Critical, Important,
+    #   Moderate).
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the patch on the instance (INSTALLED, INSTALLED\_OTHER,
+    #   MISSING, NOT\_APPLICABLE or FAILED).
+    #   @return [String]
+    #
+    # @!attribute [rw] installed_time
+    #   The date/time the patch was installed on the instance.
+    #   @return [Time]
+    #
+    class PatchComplianceData < Struct.new(
+      :title,
+      :kb_id,
+      :classification,
+      :severity,
+      :state,
+      :installed_time)
+      include Aws::Structure
+    end
+
+    # Defines a patch filter.
+    #
+    # @note When making an API call, you may pass PatchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #         values: ["PatchFilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key for the filter (PRODUCT, CLASSIFICATION, MSRC\_SEVERITY,
+    #   PATCH\_ID)
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value for the filter key.
+    #   @return [Array<String>]
+    #
+    class PatchFilter < Struct.new(
+      :key,
+      :values)
+      include Aws::Structure
+    end
+
+    # A set of patch filters, typically used for approval rules.
+    #
+    # @note When making an API call, you may pass PatchFilterGroup
+    #   data as a hash:
+    #
+    #       {
+    #         patch_filters: [ # required
+    #           {
+    #             key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #             values: ["PatchFilterValue"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] patch_filters
+    #   The set of patch filters that make up the group.
+    #   @return [Array<Types::PatchFilter>]
+    #
+    class PatchFilterGroup < Struct.new(
+      :patch_filters)
+      include Aws::Structure
+    end
+
+    # The mapping between a patch group and the patch baseline the patch
+    # group is registered with.
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group registered with the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline_identity
+    #   The patch baseline the patch group is registered with.
+    #   @return [Types::PatchBaselineIdentity]
+    #
+    class PatchGroupPatchBaselineMapping < Struct.new(
+      :patch_group,
+      :baseline_identity)
+      include Aws::Structure
+    end
+
+    # Defines a filter used in Patch Manager APIs.
+    #
+    # @note When making an API call, you may pass PatchOrchestratorFilter
+    #   data as a hash:
+    #
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key for the filter.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The value for the filter.
+    #   @return [Array<String>]
+    #
+    class PatchOrchestratorFilter < Struct.new(
+      :key,
+      :values)
+      include Aws::Structure
+    end
+
+    # Defines an approval rule for a patch baseline.
+    #
+    # @note When making an API call, you may pass PatchRule
+    #   data as a hash:
+    #
+    #       {
+    #         patch_filter_group: { # required
+    #           patch_filters: [ # required
+    #             {
+    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #               values: ["PatchFilterValue"], # required
+    #             },
+    #           ],
+    #         },
+    #         approve_after_days: 1, # required
+    #       }
+    #
+    # @!attribute [rw] patch_filter_group
+    #   The patch filter group that defines the criteria for the rule.
+    #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] approve_after_days
+    #   The number of days after the release date of each patch matched by
+    #   the rule the patch is marked as approved in the patch baseline.
+    #   @return [Integer]
+    #
+    class PatchRule < Struct.new(
+      :patch_filter_group,
+      :approve_after_days)
+      include Aws::Structure
+    end
+
+    # A set of rules defining the approval rules for a patch baseline.
+    #
+    # @note When making an API call, you may pass PatchRuleGroup
+    #   data as a hash:
+    #
+    #       {
+    #         patch_rules: [ # required
+    #           {
+    #             patch_filter_group: { # required
+    #               patch_filters: [ # required
+    #                 {
+    #                   key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                   values: ["PatchFilterValue"], # required
+    #                 },
+    #               ],
+    #             },
+    #             approve_after_days: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] patch_rules
+    #   The rules that make up the rule group.
+    #   @return [Array<Types::PatchRule>]
+    #
+    class PatchRuleGroup < Struct.new(
+      :patch_rules)
+      include Aws::Structure
+    end
+
+    # Information about the approval status of a patch.
+    #
+    # @!attribute [rw] deployment_status
+    #   The approval status of a patch (APPROVED, PENDING\_APPROVAL,
+    #   EXPLICIT\_APPROVED, EXPLICIT\_REJECTED).
+    #   @return [String]
+    #
+    # @!attribute [rw] approval_date
+    #   The date the patch was approved (or will be approved if the status
+    #   is PENDING\_APPROVAL).
+    #   @return [Time]
+    #
+    class PatchStatus < Struct.new(
+      :deployment_status,
+      :approval_date)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutInventoryRequest
     #   data as a hash:
     #
@@ -4831,6 +6019,69 @@ module Aws::SSM
     end
 
     class PutParameterResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RegisterDefaultPatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline that should be the default patch
+    #   baseline.
+    #   @return [String]
+    #
+    class RegisterDefaultPatchBaselineRequest < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the default patch baseline.
+    #   @return [String]
+    #
+    class RegisterDefaultPatchBaselineResult < Struct.new(
+      :baseline_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RegisterPatchBaselineForPatchGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #         patch_group: "PatchGroup", # required
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline to register the patch group with.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group that should be registered with the patch
+    #   baseline.
+    #   @return [String]
+    #
+    class RegisterPatchBaselineForPatchGroupRequest < Struct.new(
+      :baseline_id,
+      :patch_group)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline the patch group was registered with.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_group
+    #   The name of the patch group registered with the patch baseline.
+    #   @return [String]
+    #
+    class RegisterPatchBaselineForPatchGroupResult < Struct.new(
+      :baseline_id,
+      :patch_group)
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass RegisterTargetWithMaintenanceWindowRequest
     #   data as a hash:
@@ -5273,7 +6524,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         document_name: "DocumentName", # required
+    #         document_name: "DocumentARN", # required
     #         document_version: "DocumentVersion",
     #         parameters: {
     #           "AutomationParameterKey" => ["AutomationParameterValue"],
@@ -5766,6 +7017,128 @@ module Aws::SSM
     end
 
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdatePatchBaselineRequest
+    #   data as a hash:
+    #
+    #       {
+    #         baseline_id: "BaselineId", # required
+    #         name: "BaselineName",
+    #         global_filters: {
+    #           patch_filters: [ # required
+    #             {
+    #               key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #               values: ["PatchFilterValue"], # required
+    #             },
+    #           ],
+    #         },
+    #         approval_rules: {
+    #           patch_rules: [ # required
+    #             {
+    #               patch_filter_group: { # required
+    #                 patch_filters: [ # required
+    #                   {
+    #                     key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                     values: ["PatchFilterValue"], # required
+    #                   },
+    #                 ],
+    #               },
+    #               approve_after_days: 1, # required
+    #             },
+    #           ],
+    #         },
+    #         approved_patches: ["PatchId"],
+    #         rejected_patches: ["PatchId"],
+    #         description: "BaselineDescription",
+    #       }
+    #
+    # @!attribute [rw] baseline_id
+    #   The ID of the patch baseline to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_filters
+    #   A set of global filters used to exclude patches from the baseline.
+    #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] approval_rules
+    #   A set of rules used to include patches in the baseline.
+    #   @return [Types::PatchRuleGroup]
+    #
+    # @!attribute [rw] approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the patch baseline.
+    #   @return [String]
+    #
+    class UpdatePatchBaselineRequest < Struct.new(
+      :baseline_id,
+      :name,
+      :global_filters,
+      :approval_rules,
+      :approved_patches,
+      :rejected_patches,
+      :description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] baseline_id
+    #   The ID of the deleted patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the patch baseline.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_filters
+    #   A set of global filters used to exclude patches from the baseline.
+    #   @return [Types::PatchFilterGroup]
+    #
+    # @!attribute [rw] approval_rules
+    #   A set of rules used to include patches in the baseline.
+    #   @return [Types::PatchRuleGroup]
+    #
+    # @!attribute [rw] approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_date
+    #   The date when the patch baseline was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_date
+    #   The date when the patch baseline was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the Patch Baseline.
+    #   @return [String]
+    #
+    class UpdatePatchBaselineResult < Struct.new(
+      :baseline_id,
+      :name,
+      :global_filters,
+      :approval_rules,
+      :approved_patches,
+      :rejected_patches,
+      :created_date,
+      :modified_date,
+      :description)
+      include Aws::Structure
+    end
 
   end
 end

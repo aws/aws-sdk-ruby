@@ -156,14 +156,19 @@ module Aws::CognitoIdentity
     # Creates a new identity pool. The identity pool is a store of user
     # identity information that is specific to your AWS account. The limit
     # on identity pools is 60 per account. The keys for
-    # `SupportedLoginProviders` are as follows: * Facebook:
-    # `graph.facebook.com`
+    # `SupportedLoginProviders` are as follows:
+    #
+    # * Facebook: `graph.facebook.com`
+    #
     # * Google: `accounts.google.com`
+    #
     # * Amazon: `www.amazon.com`
+    #
     # * Twitter: `api.twitter.com`
+    #
     # * Digits: `www.digits.com`
     #
-    #  You must use AWS Developer credentials to call this API.
+    # You must use AWS Developer credentials to call this API.
     #
     # @option params [required, String] :identity_pool_name
     #   A string that you provide.
@@ -188,7 +193,7 @@ module Aws::CognitoIdentity
     #   A list of OpendID Connect provider ARNs.
     #
     # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
-    #   An array of Amazon Cognito Identity user pools.
+    #   An array of Amazon Cognito Identity user pools and their client IDs.
     #
     # @option params [Array<String>] :saml_provider_arns
     #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
@@ -450,13 +455,19 @@ module Aws::CognitoIdentity
     #
     # @option params [Hash<String,String>] :logins
     #   A set of optional name-value pairs that map provider names to provider
-    #   tokens.
+    #   tokens. The available provider names for `Logins` are as follows:
     #
-    #   The available provider names for `Logins` are as follows: * Facebook:
-    #   `graph.facebook.com`
+    #   * Facebook: `graph.facebook.com`
+    #
+    #   * Amazon Cognito Identity Provider:
+    #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`
+    #
     #   * Google: `accounts.google.com`
+    #
     #   * Amazon: `www.amazon.com`
+    #
     #   * Twitter: `api.twitter.com`
+    #
     #   * Digits: `www.digits.com`
     #
     # @return [Types::GetIdResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -495,6 +506,7 @@ module Aws::CognitoIdentity
     #
     #   * {Types::GetIdentityPoolRolesResponse#identity_pool_id #identity_pool_id} => String
     #   * {Types::GetIdentityPoolRolesResponse#roles #roles} => Hash&lt;String,String&gt;
+    #   * {Types::GetIdentityPoolRolesResponse#role_mappings #role_mappings} => Hash&lt;String,Types::RoleMapping&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -507,6 +519,14 @@ module Aws::CognitoIdentity
     #   resp.identity_pool_id #=> String
     #   resp.roles #=> Hash
     #   resp.roles["RoleType"] #=> String
+    #   resp.role_mappings #=> Hash
+    #   resp.role_mappings["IdentityProviderName"].type #=> String, one of "Token", "Rules"
+    #   resp.role_mappings["IdentityProviderName"].ambiguous_role_resolution #=> String, one of "AuthenticatedRole", "Deny"
+    #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules #=> Array
+    #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].claim #=> String
+    #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].match_type #=> String, one of "Equals", "Contains", "StartsWith", "NotEqual"
+    #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].value #=> String
+    #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].role_arn #=> String
     #
     # @overload get_identity_pool_roles(params = {})
     # @param [Hash] params ({})
@@ -531,8 +551,8 @@ module Aws::CognitoIdentity
     #   A set of optional name-value pairs that map provider names to provider
     #   tokens. When using graph.facebook.com and www.amazon.com, supply the
     #   access\_token returned from the provider's authflow. For
-    #   accounts.google.com or any other OpenId Connect provider, always
-    #   include the id\_token.
+    #   accounts.google.com, an Amazon Cognito Identity Provider, or any other
+    #   OpenId Connect provider, always include the `id_token`.
     #
     # @return [Types::GetOpenIdTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -844,7 +864,7 @@ module Aws::CognitoIdentity
     end
 
     # Sets the roles for an identity pool. These roles are used when making
-    # calls to `GetCredentialsForIdentity` action.
+    # calls to GetCredentialsForIdentity action.
     #
     # You must use AWS Developer credentials to call this API.
     #
@@ -856,6 +876,14 @@ module Aws::CognitoIdentity
     #   will be either "authenticated" or "unauthenticated" and the value
     #   will be the Role ARN.
     #
+    # @option params [Hash<String,Types::RoleMapping>] :role_mappings
+    #   How users for a specific identity provider are to mapped to roles.
+    #   This is a string to RoleMapping object map. The string identifies the
+    #   identity provider, for example, "graph.facebook.com" or
+    #   "cognito-idp-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
+    #
+    #   Up to 25 rules can be specified per identity provider.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -864,6 +892,22 @@ module Aws::CognitoIdentity
     #     identity_pool_id: "IdentityPoolId", # required
     #     roles: { # required
     #       "RoleType" => "ARNString",
+    #     },
+    #     role_mappings: {
+    #       "IdentityProviderName" => {
+    #         type: "Token", # required, accepts Token, Rules
+    #         ambiguous_role_resolution: "AuthenticatedRole", # accepts AuthenticatedRole, Deny
+    #         rules_configuration: {
+    #           rules: [ # required
+    #             {
+    #               claim: "ClaimName", # required
+    #               match_type: "Equals", # required, accepts Equals, Contains, StartsWith, NotEqual
+    #               value: "ClaimValue", # required
+    #               role_arn: "ARNString", # required
+    #             },
+    #           ],
+    #         },
+    #       },
     #     },
     #   })
     #

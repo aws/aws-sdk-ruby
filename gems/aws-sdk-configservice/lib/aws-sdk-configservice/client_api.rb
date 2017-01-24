@@ -648,6 +648,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeComplianceByConfigRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:describe_compliance_by_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -668,6 +669,7 @@ module Aws::ConfigService
         o.output = Shapes::ShapeRef.new(shape: DescribeConfigRuleEvaluationStatusResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:describe_config_rules, Seahorse::Model::Operation.new.tap do |o|
@@ -677,6 +679,7 @@ module Aws::ConfigService
         o.input = Shapes::ShapeRef.new(shape: DescribeConfigRulesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeConfigRulesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:describe_configuration_recorder_status, Seahorse::Model::Operation.new.tap do |o|

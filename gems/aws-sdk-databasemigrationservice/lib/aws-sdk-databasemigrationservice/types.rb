@@ -75,15 +75,20 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] certificate_identifier
     #   The customer-assigned name of the certificate. Valid characters are
-    #   \[A-z\_0-9\].
+    #   A-z and 0-9.
     #   @return [String]
     #
     # @!attribute [rw] certificate_creation_date
-    #   the date the certificate was created.
+    #   The date that the certificate was created.
     #   @return [Time]
     #
     # @!attribute [rw] certificate_pem
-    #   The contents of the .pem X.509 certificate file.
+    #   The contents of the .pem X.509 certificate file for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_wallet
+    #   The location of the imported Oracle Wallet certificate for use with
+    #   SSL.
     #   @return [String]
     #
     # @!attribute [rw] certificate_arn
@@ -95,11 +100,11 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] valid_from_date
-    #   The beginning date the certificate is valid.
+    #   The beginning date that the certificate is valid.
     #   @return [Time]
     #
     # @!attribute [rw] valid_to_date
-    #   the final date the certificate is valid.
+    #   The final date that the certificate is valid.
     #   @return [Time]
     #
     # @!attribute [rw] signing_algorithm
@@ -114,6 +119,7 @@ module Aws::DatabaseMigrationService
       :certificate_identifier,
       :certificate_creation_date,
       :certificate_pem,
+      :certificate_wallet,
       :certificate_arn,
       :certificate_owner,
       :valid_from_date,
@@ -168,10 +174,10 @@ module Aws::DatabaseMigrationService
     #         endpoint_identifier: "String", # required
     #         endpoint_type: "source", # required, accepts source, target
     #         engine_name: "String", # required
-    #         username: "String", # required
-    #         password: "SecretString", # required
-    #         server_name: "String", # required
-    #         port: 1, # required
+    #         username: "String",
+    #         password: "SecretString",
+    #         server_name: "String",
+    #         port: 1,
     #         database_name: "String",
     #         extra_connection_attributes: "String",
     #         kms_key_id: "String",
@@ -197,7 +203,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values include MYSQL,
-    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
+    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -538,7 +544,13 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] replication_task_settings
-    #   Settings for the task, such as target metadata settings.
+    #   Settings for the task, such as target metadata settings. For a
+    #   complete list of task settings, see [Task Settings for AWS Database
+    #   Migration Service Tasks][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html
     #   @return [String]
     #
     # @!attribute [rw] cdc_start_time
@@ -579,7 +591,7 @@ module Aws::DatabaseMigrationService
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   the Amazon Resource Name (ARN) of the deleted certificate.
+    #   The Amazon Resource Name (ARN) of the deleted certificate.
     #   @return [String]
     #
     class DeleteCertificateMessage < Struct.new(
@@ -588,7 +600,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute [rw] certificate
-    #   The SSL certificate.
+    #   The Secure Sockets Layer (SSL) certificate.
     #   @return [Types::Certificate]
     #
     class DeleteCertificateResponse < Struct.new(
@@ -751,7 +763,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] certificates
-    #   The SSL certificates associated with the replication instance.
+    #   The Secure Sockets Layer (SSL) certificates associated with the
+    #   replication instance.
     #   @return [Array<Types::Certificate>]
     #
     class DescribeCertificatesResponse < Struct.new(
@@ -1318,7 +1331,8 @@ module Aws::DatabaseMigrationService
     #   @return [String]
     #
     # @!attribute [rw] engine_name
-    #   The database engine name.
+    #   The database engine name. Valid values include MYSQL, ORACLE,
+    #   POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1418,20 +1432,27 @@ module Aws::DatabaseMigrationService
     #       {
     #         certificate_identifier: "String", # required
     #         certificate_pem: "String",
+    #         certificate_wallet: "data",
     #       }
     #
     # @!attribute [rw] certificate_identifier
     #   The customer-assigned name of the certificate. Valid characters are
-    #   \[A-z\_0-9\].
+    #   A-z and 0-9.
     #   @return [String]
     #
     # @!attribute [rw] certificate_pem
-    #   The contents of the .pem X.509 certificate file.
+    #   The contents of the .pem X.509 certificate file for the certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_wallet
+    #   The location of the imported Oracle Wallet certificate for use with
+    #   SSL.
     #   @return [String]
     #
     class ImportCertificateMessage < Struct.new(
       :certificate_identifier,
-      :certificate_pem)
+      :certificate_pem,
+      :certificate_wallet)
       include Aws::Structure
     end
 
@@ -1505,7 +1526,7 @@ module Aws::DatabaseMigrationService
     #
     # @!attribute [rw] engine_name
     #   The type of engine for the endpoint. Valid values include MYSQL,
-    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
+    #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
     #   @return [String]
     #
     # @!attribute [rw] username
@@ -1727,6 +1748,75 @@ module Aws::DatabaseMigrationService
     #
     class ModifyReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyReplicationTaskMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_task_arn: "String", # required
+    #         replication_task_identifier: "String",
+    #         migration_type: "full-load", # accepts full-load, cdc, full-load-and-cdc
+    #         table_mappings: "String",
+    #         replication_task_settings: "String",
+    #         cdc_start_time: Time.now,
+    #       }
+    #
+    # @!attribute [rw] replication_task_arn
+    #   The Amazon Resource Name (ARN) of the replication task.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_identifier
+    #   The replication task identifier.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot end with a hyphen or contain two consecutive hyphens.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_type
+    #   The migration type.
+    #
+    #   Valid values: full-load \| cdc \| full-load-and-cdc
+    #   @return [String]
+    #
+    # @!attribute [rw] table_mappings
+    #   The path of the JSON file that contains the table mappings. Preceed
+    #   the path with "file://".
+    #
+    #   For example, --table-mappings file://mappingfile.json
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_task_settings
+    #   JSON file that contains settings for the task, such as target
+    #   metadata settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdc_start_time
+    #   The start time for the Change Data Capture (CDC) operation.
+    #   @return [Time]
+    #
+    class ModifyReplicationTaskMessage < Struct.new(
+      :replication_task_arn,
+      :replication_task_identifier,
+      :migration_type,
+      :table_mappings,
+      :replication_task_settings,
+      :cdc_start_time)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_task
+    #   The replication task that was modified.
+    #   @return [Types::ReplicationTask]
+    #
+    class ModifyReplicationTaskResponse < Struct.new(
+      :replication_task)
       include Aws::Structure
     end
 
@@ -1971,6 +2061,11 @@ module Aws::DatabaseMigrationService
     #   The default value is `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] secondary_availability_zone
+    #   The availability zone of the standby replication instance in a
+    #   Multi-AZ deployment.
+    #   @return [String]
+    #
     class ReplicationInstance < Struct.new(
       :replication_instance_identifier,
       :replication_instance_class,
@@ -1991,7 +2086,8 @@ module Aws::DatabaseMigrationService
       :replication_instance_private_ip_address,
       :replication_instance_public_ip_addresses,
       :replication_instance_private_ip_addresses,
-      :publicly_accessible)
+      :publicly_accessible,
+      :secondary_availability_zone)
       include Aws::Structure
     end
 
@@ -2102,6 +2198,10 @@ module Aws::DatabaseMigrationService
     #   instance.
     #   @return [String]
     #
+    # @!attribute [rw] stop_reason
+    #   The reason the replication task was stopped.
+    #   @return [String]
+    #
     # @!attribute [rw] replication_task_creation_date
     #   The date the replication task was created.
     #   @return [Time]
@@ -2129,6 +2229,7 @@ module Aws::DatabaseMigrationService
       :replication_task_settings,
       :status,
       :last_failure_message,
+      :stop_reason,
       :replication_task_creation_date,
       :replication_task_start_date,
       :replication_task_arn,
@@ -2254,7 +2355,8 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute [rw] engine_name
-    #   The database engine name.
+    #   The database engine name. Valid values include MYSQL, ORACLE,
+    #   POSTGRES, MARIADB, AURORA, REDSHIFT, SYBASE, and SQLSERVER.
     #   @return [String]
     #
     # @!attribute [rw] supports_cdc

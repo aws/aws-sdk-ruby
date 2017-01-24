@@ -487,8 +487,6 @@ module Aws::Inspector
     # the assessment templates.
     #
     # @option params [required, Array<String>] :assessment_template_arns
-    #   The ARN that specifiesthe assessment templates that you want to
-    #   describe.
     #
     # @return [Types::DescribeAssessmentTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1316,9 +1314,9 @@ module Aws::Inspector
     #   to start.
     #
     # @option params [String] :assessment_run_name
-    #   You can specify the name for the assessment run, or you can use the
-    #   auto-generated name that is based on the assessment template name. The
-    #   name must be unique for the assessment template.
+    #   You can specify the name for the assessment run. The name must be
+    #   unique for the assessment template whose ARN is used to start the
+    #   assessment run.
     #
     # @return [Types::StartAssessmentRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

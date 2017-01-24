@@ -157,8 +157,8 @@ module Aws::ECR
     # registry and repository.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers. Use the `docker` CLI to pull, tag, and
-    # push images.
+    # for general use by customers for pulling and pushing images. In most
+    # cases, you should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -193,6 +193,7 @@ module Aws::ECR
     #   resp.layers[0].layer_digest #=> String
     #   resp.layers[0].layer_availability #=> String, one of "AVAILABLE", "UNAVAILABLE"
     #   resp.layers[0].layer_size #=> Integer
+    #   resp.layers[0].media_type #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].layer_digest #=> String
     #   resp.failures[0].failure_code #=> String, one of "InvalidLayerDigest", "MissingLayerDigest"
@@ -207,6 +208,13 @@ module Aws::ECR
 
     # Deletes a list of specified images within a specified repository.
     # Images are specified with either `imageTag` or `imageDigest`.
+    #
+    # You can remove a tag from an image by specifying the image's tag in
+    # your request. When you remove the last tag from an image, the image is
+    # deleted from your repository.
+    #
+    # You can completely delete an image (and all of its tags) by specifying
+    # the image's digest in your request.
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
@@ -274,6 +282,13 @@ module Aws::ECR
     #   The format of the `imageIds` reference is `imageTag=tag` or
     #   `imageDigest=digest`.
     #
+    # @option params [Array<String>] :accepted_media_types
+    #   The accepted media types for the request.
+    #
+    #   Valid values: `application/vnd.docker.distribution.manifest.v1+json`
+    #   \| `application/vnd.docker.distribution.manifest.v2+json` \|
+    #   `application/vnd.oci.image.manifest.v1+json`
+    #
     # @return [Types::BatchGetImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchGetImageResponse#images #images} => Array&lt;Types::Image&gt;
@@ -290,6 +305,7 @@ module Aws::ECR
     #         image_tag: "ImageTag",
     #       },
     #     ],
+    #     accepted_media_types: ["MediaType"],
     #   })
     #
     # @example Response structure
@@ -319,8 +335,8 @@ module Aws::ECR
     # validation purposes.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers. Use the `docker` CLI to pull, tag, and
-    # push images.
+    # for general use by customers for pulling and pushing images. In most
+    # cases, you should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -481,7 +497,7 @@ module Aws::ECR
     end
 
     # Returns metadata about the images in a repository, including image
-    # size and creation date.
+    # size, image tags, and creation date.
     #
     # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
     # layers before pushing them to a V2 Docker registry. The output of the
@@ -493,8 +509,8 @@ module Aws::ECR
     #
     # @option params [String] :registry_id
     #   The AWS account ID associated with the registry that contains the
-    #   repository in which to list images. If you do not specify a registry,
-    #   the default registry is assumed.
+    #   repository in which to describe images. If you do not specify a
+    #   registry, the default registry is assumed.
     #
     # @option params [required, String] :repository_name
     #   A list of repositories to describe. If this parameter is omitted, then
@@ -676,8 +692,8 @@ module Aws::ECR
     # referenced in an image.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers. Use the `docker` CLI to pull, tag, and
-    # push images.
+    # for general use by customers for pulling and pushing images. In most
+    # cases, you should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -757,8 +773,8 @@ module Aws::ECR
     # Notify Amazon ECR that you intend to upload an image layer.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers. Use the `docker` CLI to pull, tag, and
-    # push images.
+    # for general use by customers for pulling and pushing images. In most
+    # cases, you should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -869,11 +885,12 @@ module Aws::ECR
       req.send_request(options)
     end
 
-    # Creates or updates the image manifest associated with an image.
+    # Creates or updates the image manifest and tags associated with an
+    # image.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers. Use the `docker` CLI to pull, tag, and
-    # push images.
+    # for general use by customers for pulling and pushing images. In most
+    # cases, you should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #
@@ -888,6 +905,10 @@ module Aws::ECR
     # @option params [required, String] :image_manifest
     #   The image manifest corresponding to the image to be uploaded.
     #
+    # @option params [String] :image_tag
+    #   The tag to associate with the image. This parameter is required for
+    #   images that use the Docker Image Manifest V2 Schema 2 or OCI formats.
+    #
     # @return [Types::PutImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutImageResponse#image #image} => Types::Image
@@ -898,6 +919,7 @@ module Aws::ECR
     #     registry_id: "RegistryId",
     #     repository_name: "RepositoryName", # required
     #     image_manifest: "ImageManifest", # required
+    #     image_tag: "ImageTag",
     #   })
     #
     # @example Response structure
@@ -966,8 +988,8 @@ module Aws::ECR
     # Uploads an image layer part to Amazon ECR.
     #
     # <note markdown="1"> This operation is used by the Amazon ECR proxy, and it is not intended
-    # for general use by customers. Use the `docker` CLI to pull, tag, and
-    # push images.
+    # for general use by customers for pulling and pushing images. In most
+    # cases, you should use the `docker` CLI to pull, tag, and push images.
     #
     #  </note>
     #

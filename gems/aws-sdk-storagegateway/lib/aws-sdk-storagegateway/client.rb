@@ -161,7 +161,7 @@ module Aws::StorageGateway
     # your gateway. The activation process also associates your gateway with
     # your account; for more information, see UpdateGatewayInformation.
     #
-    # <note markdown="1">You must turn on the gateway VM before you can activate your gateway.
+    # <note markdown="1"> You must turn on the gateway VM before you can activate your gateway.
     #
     #  </note>
     #
@@ -506,7 +506,7 @@ module Aws::StorageGateway
     # Creates a cached volume on a specified cached gateway. This operation
     # is supported only for the gateway-cached volume architecture.
     #
-    # <note markdown="1">Cache storage must be allocated to the gateway before you can create a
+    # <note markdown="1"> Cache storage must be allocated to the gateway before you can create a
     # cached volume. Use the AddCache operation to add cache storage to a
     # gateway.
     #
@@ -515,9 +515,16 @@ module Aws::StorageGateway
     # In the request, you must specify the gateway, size of the volume in
     # bytes, the iSCSI target name, an IP address on which to expose the
     # target, and a unique client token. In response, AWS Storage Gateway
-    # creates the volume and returns information about it such as the volume
-    # Amazon Resource Name (ARN), its size, and the iSCSI target ARN that
-    # initiators can use to connect to the volume target.
+    # creates the volume and returns information about it. This information
+    # includes the volume Amazon Resource Name (ARN), its size, and the
+    # iSCSI target ARN that initiators can use to connect to the volume
+    # target.
+    #
+    # Optionally, you can provide the ARN for an existing volume as the
+    # `SourceVolumeARN` for this cached volume, which creates an exact copy
+    # of the existing volume’s latest recovery point. The
+    # `VolumeSizeInBytes` value must be equal to or larger than the size of
+    # the copied volume, in bytes.
     #
     # @option params [required, String] :gateway_arn
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -528,6 +535,12 @@ module Aws::StorageGateway
     # @option params [String] :snapshot_id
     #
     # @option params [required, String] :target_name
+    #
+    # @option params [String] :source_volume_arn
+    #   The ARN for an existing volume. Specifying this ARN makes the new
+    #   volume into an exact copy of the specified existing volume's latest
+    #   recovery point. The `VolumeSizeInBytes` value for this new volume must
+    #   be equal to or larger than the size of the existing volume, in bytes.
     #
     # @option params [required, String] :network_interface_id
     #
@@ -545,6 +558,7 @@ module Aws::StorageGateway
     #     volume_size_in_bytes: 1, # required
     #     snapshot_id: "SnapshotId",
     #     target_name: "TargetName", # required
+    #     source_volume_arn: "VolumeARN",
     #     network_interface_id: "NetworkInterfaceId", # required
     #     client_token: "ClientToken", # required
     #   })
@@ -558,6 +572,76 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def create_cached_iscsi_volume(params = {}, options = {})
       req = build_request(:create_cached_iscsi_volume, params)
+      req.send_request(options)
+    end
+
+    # Creates a file share on an existing file gateway. In Storage Gateway,
+    # a file share is a file system mount point backed by Amazon S3 cloud
+    # storage. Storage Gateway exposes file shares using a Network File
+    # System (NFS) interface.
+    #
+    # @option params [required, String] :client_token
+    #   A unique string value that you supply that is used by file gateway to
+    #   ensure idempotent file share creation.
+    #
+    # @option params [Types::NFSFileShareDefaults] :nfs_file_share_defaults
+    #   File share default values. Optional.
+    #
+    # @option params [required, String] :gateway_arn
+    #   The Amazon Resource Name (ARN) of the file gateway on which you want
+    #   to create a file share.
+    #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The KMS key used for Amazon S3 server side encryption. This value can
+    #   only be set when KmsEncrypted is true. Optional.
+    #
+    # @option params [required, String] :role
+    #   The ARN of the AWS Identity and Access Management (IAM) role that a
+    #   file gateway assumes when it accesses the underlying storage.
+    #
+    # @option params [required, String] :location_arn
+    #   The ARN of the backend storage used for storing file data.
+    #
+    # @option params [String] :default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket by
+    #   file gateway. Possible values are S3\_STANDARD or S3\_STANDARD\_IA. If
+    #   this field is not populated, the default value S3\_STANDARD is used.
+    #   Optional.
+    #
+    # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNFSFileShareOutput#file_share_arn #file_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_nfs_file_share({
+    #     client_token: "ClientToken", # required
+    #     nfs_file_share_defaults: {
+    #       file_mode: "PermissionMode",
+    #       directory_mode: "PermissionMode",
+    #       group_id: 1,
+    #       owner_id: 1,
+    #     },
+    #     gateway_arn: "GatewayARN", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
+    #     role: "Role", # required
+    #     location_arn: "LocationARN", # required
+    #     default_storage_class: "StorageClass",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_share_arn #=> String
+    #
+    # @overload create_nfs_file_share(params = {})
+    # @param [Hash] params ({})
+    def create_nfs_file_share(params = {}, options = {})
+      req = build_request(:create_nfs_file_share, params)
       req.send_request(options)
     end
 
@@ -581,7 +665,7 @@ module Aws::StorageGateway
     # progress or later use it when you want to create a volume from a
     # snapshot.
     #
-    # <note markdown="1">To list or delete a snapshot, you must use the Amazon EC2 API. For
+    # <note markdown="1"> To list or delete a snapshot, you must use the Amazon EC2 API. For
     # more information, see DescribeSnapshots or DeleteSnapshot in the [EC2
     # API reference][2].
     #
@@ -777,7 +861,7 @@ module Aws::StorageGateway
     # Creates a virtual tape by using your own barcode. You write data to
     # the virtual tape and then archive the tape.
     #
-    # <note markdown="1">Cache storage must be allocated to the gateway before you can create a
+    # <note markdown="1"> Cache storage must be allocated to the gateway before you can create a
     # virtual tape. Use the AddCache operation to add cache storage to a
     # gateway.
     #
@@ -791,7 +875,7 @@ module Aws::StorageGateway
     # @option params [required, Integer] :tape_size_in_bytes
     #   The size, in bytes, of the virtual tape that you want to create.
     #
-    #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
+    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 byte).
     #
     #    </note>
     #
@@ -824,7 +908,7 @@ module Aws::StorageGateway
     # Creates one or more virtual tapes. You write data to the virtual tapes
     # and then archive the tapes.
     #
-    # <note markdown="1">Cache storage must be allocated to the gateway before you can create
+    # <note markdown="1"> Cache storage must be allocated to the gateway before you can create
     # virtual tapes. Use the AddCache operation to add cache storage to a
     # gateway.
     #
@@ -838,7 +922,7 @@ module Aws::StorageGateway
     # @option params [required, Integer] :tape_size_in_bytes
     #   The size, in bytes, of the virtual tapes that you want to create.
     #
-    #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
+    #   <note markdown="1"> The size must be aligned by gigabyte (1024*1024*1024 byte).
     #
     #    </note>
     #
@@ -847,7 +931,7 @@ module Aws::StorageGateway
     #   request, use the same `ClientToken` you specified in the initial
     #   request.
     #
-    #   <note markdown="1">Using the same `ClientToken` prevents creating the tape multiple
+    #   <note markdown="1"> Using the same `ClientToken` prevents creating the tape multiple
     #   times.
     #
     #    </note>
@@ -859,7 +943,7 @@ module Aws::StorageGateway
     #   A prefix that you append to the barcode of the virtual tape you are
     #   creating. This prefix makes the barcode unique.
     #
-    #   <note markdown="1">The prefix must be 1 to 4 characters in length and must be one of the
+    #   <note markdown="1"> The prefix must be 1 to 4 characters in length and must be one of the
     #   uppercase letters from A to Z.
     #
     #    </note>
@@ -901,6 +985,10 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #
     # @option params [required, String] :bandwidth_type
+    #   One of the BandwidthType values that indicates the gateway bandwidth
+    #   rate limit to delete.
+    #
+    #   Valid Values: `Upload`, `Download`, `All`.
     #
     # @return [Types::DeleteBandwidthRateLimitOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -956,6 +1044,32 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def delete_chap_credentials(params = {}, options = {})
       req = build_request(:delete_chap_credentials, params)
+      req.send_request(options)
+    end
+
+    # Deletes a file share from a file gateway.
+    #
+    # @option params [required, String] :file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share to be deleted.
+    #
+    # @return [Types::DeleteFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteFileShareOutput#file_share_arn #file_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_file_share({
+    #     file_share_arn: "FileShareARN", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_share_arn #=> String
+    #
+    # @overload delete_file_share(params = {})
+    # @param [Hash] params ({})
+    def delete_file_share(params = {}, options = {})
+      req = build_request(:delete_file_share, params)
       req.send_request(options)
     end
 
@@ -1271,6 +1385,7 @@ module Aws::StorageGateway
     #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.network_interface_port #=> Integer
     #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.lun_number #=> Integer
     #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
+    #   resp.cached_iscsi_volumes[0].created_date #=> Time
     #
     # @overload describe_cached_iscsi_volumes(params = {})
     # @param [Hash] params ({})
@@ -1399,6 +1514,47 @@ module Aws::StorageGateway
       req.send_request(options)
     end
 
+    # Gets a description for one or more file shares from a file gateway.
+    #
+    # @option params [required, Array<String>] :file_share_arn_list
+    #   An array containing the Amazon Resource Name (ARN) of each file share
+    #   to be described.
+    #
+    # @return [Types::DescribeNFSFileSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeNFSFileSharesOutput#nfs_file_share_info_list #nfs_file_share_info_list} => Array&lt;Types::NFSFileShareInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_nfs_file_shares({
+    #     file_share_arn_list: ["FileShareARN"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.nfs_file_share_info_list #=> Array
+    #   resp.nfs_file_share_info_list[0].nfs_file_share_defaults.file_mode #=> String
+    #   resp.nfs_file_share_info_list[0].nfs_file_share_defaults.directory_mode #=> String
+    #   resp.nfs_file_share_info_list[0].nfs_file_share_defaults.group_id #=> Integer
+    #   resp.nfs_file_share_info_list[0].nfs_file_share_defaults.owner_id #=> Integer
+    #   resp.nfs_file_share_info_list[0].file_share_arn #=> String
+    #   resp.nfs_file_share_info_list[0].file_share_id #=> String
+    #   resp.nfs_file_share_info_list[0].file_share_status #=> String
+    #   resp.nfs_file_share_info_list[0].gateway_arn #=> String
+    #   resp.nfs_file_share_info_list[0].kms_encrypted #=> Boolean
+    #   resp.nfs_file_share_info_list[0].kms_key #=> String
+    #   resp.nfs_file_share_info_list[0].path #=> String
+    #   resp.nfs_file_share_info_list[0].role #=> String
+    #   resp.nfs_file_share_info_list[0].location_arn #=> String
+    #   resp.nfs_file_share_info_list[0].default_storage_class #=> String
+    #
+    # @overload describe_nfs_file_shares(params = {})
+    # @param [Hash] params ({})
+    def describe_nfs_file_shares(params = {}, options = {})
+      req = build_request(:describe_nfs_file_shares, params)
+      req.send_request(options)
+    end
+
     # Describes the snapshot schedule for the specified gateway volume. The
     # snapshot schedule information includes intervals at which snapshots
     # are automatically initiated on the volume.
@@ -1474,6 +1630,7 @@ module Aws::StorageGateway
     #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.network_interface_port #=> Integer
     #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.lun_number #=> Integer
     #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
+    #   resp.stored_iscsi_volumes[0].created_date #=> Time
     #
     # @overload describe_stored_iscsi_volumes(params = {})
     # @param [Hash] params ({})
@@ -1519,6 +1676,7 @@ module Aws::StorageGateway
     #   resp.tape_archives #=> Array
     #   resp.tape_archives[0].tape_arn #=> String
     #   resp.tape_archives[0].tape_barcode #=> String
+    #   resp.tape_archives[0].tape_created_date #=> Time
     #   resp.tape_archives[0].tape_size_in_bytes #=> Integer
     #   resp.tape_archives[0].completion_time #=> Time
     #   resp.tape_archives[0].retrieved_to #=> String
@@ -1607,7 +1765,7 @@ module Aws::StorageGateway
     #   Specifies that the number of virtual tapes described be limited to the
     #   specified number.
     #
-    #   <note markdown="1">Amazon Web Services may impose its own limit, if this field is not
+    #   <note markdown="1"> Amazon Web Services may impose its own limit, if this field is not
     #   set.
     #
     #    </note>
@@ -1631,6 +1789,7 @@ module Aws::StorageGateway
     #   resp.tapes #=> Array
     #   resp.tapes[0].tape_arn #=> String
     #   resp.tapes[0].tape_barcode #=> String
+    #   resp.tapes[0].tape_created_date #=> Time
     #   resp.tapes[0].tape_size_in_bytes #=> Integer
     #   resp.tapes[0].tape_status #=> String
     #   resp.tapes[0].vtl_device #=> String
@@ -1698,7 +1857,7 @@ module Aws::StorageGateway
     #   An array of strings, where each string represents the Amazon Resource
     #   Name (ARN) of a VTL device.
     #
-    #   <note markdown="1">All of the specified VTL devices must be from the same gateway. If no
+    #   <note markdown="1"> All of the specified VTL devices must be from the same gateway. If no
     #   VTL devices are specified, the result will contain all devices on the
     #   specified gateway.
     #
@@ -1825,6 +1984,54 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def disable_gateway(params = {}, options = {})
       req = build_request(:disable_gateway, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of the file shares for a specific file gateway, or the
+    # list of file shares that belong to the calling user account.
+    #
+    # @option params [String] :gateway_arn
+    #   The Amazon resource Name (ARN) of the gateway whose file shares you
+    #   want to list. If this field is not present, all file shares under your
+    #   account are listed.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of file shares to return in the response. The value
+    #   must be an integer with a value greater than zero. Optional.
+    #
+    # @option params [String] :marker
+    #   Opaque pagination token returned from a previous ListFileShares
+    #   operation. If present, `Marker` specifies where to continue the list
+    #   from after a previous call to ListFileShares. Optional.
+    #
+    # @return [Types::ListFileSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFileSharesOutput#marker #marker} => String
+    #   * {Types::ListFileSharesOutput#next_marker #next_marker} => String
+    #   * {Types::ListFileSharesOutput#file_share_info_list #file_share_info_list} => Array&lt;Types::FileShareInfo&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_file_shares({
+    #     gateway_arn: "GatewayARN",
+    #     limit: 1,
+    #     marker: "Marker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.next_marker #=> String
+    #   resp.file_share_info_list #=> Array
+    #   resp.file_share_info_list[0].file_share_arn #=> String
+    #   resp.file_share_info_list[0].file_share_id #=> String
+    #   resp.file_share_info_list[0].file_share_status #=> String
+    #   resp.file_share_info_list[0].gateway_arn #=> String
+    #
+    # @overload list_file_shares(params = {})
+    # @param [Hash] params ({})
+    def list_file_shares(params = {}, options = {})
+      req = build_request(:list_file_shares, params)
       req.send_request(options)
     end
 
@@ -2094,7 +2301,8 @@ module Aws::StorageGateway
 
     # Lists the iSCSI stored volumes of a gateway. Results are sorted by
     # volume ARN. The response includes only the volume ARNs. If you want
-    # additional volume information, use the DescribeStorediSCSIVolumes API.
+    # additional volume information, use the DescribeStorediSCSIVolumes or
+    # the DescribeCachediSCSIVolumes API.
     #
     # The operation supports pagination. By default, the operation returns a
     # maximum of up to 100 volumes. You can optionally specify the `Limit`
@@ -2270,7 +2478,7 @@ module Aws::StorageGateway
     # virtual tapes that have recovery points can be recovered to a new
     # gateway.
     #
-    # <note markdown="1">The virtual tape can be retrieved to only one gateway. The retrieved
+    # <note markdown="1"> The virtual tape can be retrieved to only one gateway. The retrieved
     # tape is read-only. The virtual tape can be retrieved to only a
     # gateway-VTL. There is no charge for retrieving recovery points.
     #
@@ -2346,7 +2554,7 @@ module Aws::StorageGateway
     # The operation shuts down the gateway service component running in the
     # storage gateway's virtual machine (VM) and not the VM.
     #
-    # <note markdown="1">If you want to shut down the VM, it is recommended that you first shut
+    # <note markdown="1"> If you want to shut down the VM, it is recommended that you first shut
     # down the gateway component in the VM to avoid unpredictable
     # conditions.
     #
@@ -2358,7 +2566,7 @@ module Aws::StorageGateway
     # or write to the gateway's storage volumes, and there are no snapshots
     # taken.
     #
-    # <note markdown="1">When you make a shutdown request, you will get a `200 OK` success
+    # <note markdown="1"> When you make a shutdown request, you will get a `200 OK` success
     # response immediately. However, it might take some time for the gateway
     # to shut down. You can call the DescribeGatewayInformation API to check
     # the status. For more information, see ActivateGateway.
@@ -2399,7 +2607,7 @@ module Aws::StorageGateway
     # applications can read from or write to the gateway's storage volumes
     # and you will be able to take snapshot backups.
     #
-    # <note markdown="1">When you make a request, you will get a 200 OK success response
+    # <note markdown="1"> When you make a request, you will get a 200 OK success response
     # immediately. However, it might take some time for the gateway to be
     # ready. You should call DescribeGatewayInformation and check the status
     # before making any additional API calls. For more information, see
@@ -2498,7 +2706,7 @@ module Aws::StorageGateway
     #   The secret key that the initiator (for example, the Windows client)
     #   must provide to participate in mutual CHAP with the target.
     #
-    #   <note markdown="1">The secret key must be between 12 and 16 bytes when encoded in UTF-8.
+    #   <note markdown="1"> The secret key must be between 12 and 16 bytes when encoded in UTF-8.
     #
     #    </note>
     #
@@ -2511,7 +2719,7 @@ module Aws::StorageGateway
     #
     #   Byte constraints: Minimum bytes of 12. Maximum bytes of 16.
     #
-    #   <note markdown="1">The secret key must be between 12 and 16 bytes when encoded in UTF-8.
+    #   <note markdown="1"> The secret key must be between 12 and 16 bytes when encoded in UTF-8.
     #
     #    </note>
     #
@@ -2545,7 +2753,7 @@ module Aws::StorageGateway
     # time zone. To specify which gateway to update, use the Amazon Resource
     # Name (ARN) of the gateway in your request.
     #
-    # <note markdown="1">For Gateways activated after September 2, 2015, the gateway's ARN
+    # <note markdown="1"> For Gateways activated after September 2, 2015, the gateway's ARN
     # contains the gateway ID rather than the gateway name. However,
     # changing the name of the gateway has no effect on the gateway's ARN.
     #
@@ -2588,7 +2796,7 @@ module Aws::StorageGateway
     # Updates the gateway virtual machine (VM) software. The request
     # immediately triggers the software update.
     #
-    # <note markdown="1">When you make this request, you get a `200 OK` success response
+    # <note markdown="1"> When you make this request, you get a `200 OK` success response
     # immediately. However, it might take some time for the update to
     # complete. You can call DescribeGatewayInformation to verify the
     # gateway is in the `STATE_RUNNING` state.
@@ -2651,7 +2859,8 @@ module Aws::StorageGateway
     #   in the time zone of the gateway.
     #
     # @option params [required, Integer] :day_of_week
-    #   The maintenance start time day of the week.
+    #   The maintenance start time day of the week represented as an ordinal
+    #   number from 0 to 6, where 0 represents Sunday and 6 Saturday.
     #
     # @return [Types::UpdateMaintenanceStartTimeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2674,6 +2883,63 @@ module Aws::StorageGateway
     # @param [Hash] params ({})
     def update_maintenance_start_time(params = {}, options = {})
       req = build_request(:update_maintenance_start_time, params)
+      req.send_request(options)
+    end
+
+    # Updates a file share.
+    #
+    # <note markdown="1"> To leave a file share field unchanged, set the corresponding input
+    # field to null.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share to be updated.
+    #
+    # @option params [Boolean] :kms_encrypted
+    #   True to use Amazon S3 server side encryption with your own AWS KMS
+    #   key, or false to use a key managed by Amazon S3. Optional.
+    #
+    # @option params [String] :kms_key
+    #   The KMS key used for Amazon S3 server side encryption. This value can
+    #   only be set when KmsEncrypted is true. Optional.
+    #
+    # @option params [Types::NFSFileShareDefaults] :nfs_file_share_defaults
+    #   The default values for the file share. Optional.
+    #
+    # @option params [String] :default_storage_class
+    #   The default storage class for objects put into an Amazon S3 bucket by
+    #   a file gateway. Possible values are S3\_STANDARD or S3\_STANDARD\_IA.
+    #   If this field is not populated, the default value S3\_STANDARD is
+    #   used. Optional.
+    #
+    # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNFSFileShareOutput#file_share_arn #file_share_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_nfs_file_share({
+    #     file_share_arn: "FileShareARN", # required
+    #     kms_encrypted: false,
+    #     kms_key: "KMSKey",
+    #     nfs_file_share_defaults: {
+    #       file_mode: "PermissionMode",
+    #       directory_mode: "PermissionMode",
+    #       group_id: 1,
+    #       owner_id: 1,
+    #     },
+    #     default_storage_class: "StorageClass",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_share_arn #=> String
+    #
+    # @overload update_nfs_file_share(params = {})
+    # @param [Hash] params ({})
+    def update_nfs_file_share(params = {}, options = {})
+      req = build_request(:update_nfs_file_share, params)
       req.send_request(options)
     end
 

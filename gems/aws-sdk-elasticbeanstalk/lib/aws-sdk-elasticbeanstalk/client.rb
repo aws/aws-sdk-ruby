@@ -334,6 +334,10 @@ module Aws::ElasticBeanstalk
     # @option params [String] :description
     #   Describes the application.
     #
+    # @option params [Types::ApplicationResourceLifecycleConfig] :resource_lifecycle_config
+    #   Specify an application resource lifecycle configuration to prevent
+    #   your application from accumulating too many versions.
+    #
     # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ApplicationDescriptionMessage#application #application} => Types::ApplicationDescription
@@ -343,6 +347,21 @@ module Aws::ElasticBeanstalk
     #   resp = client.create_application({
     #     application_name: "ApplicationName", # required
     #     description: "Description",
+    #     resource_lifecycle_config: {
+    #       service_role: "String",
+    #       version_lifecycle_config: {
+    #         max_count_rule: {
+    #           enabled: false, # required
+    #           max_count: 1,
+    #           delete_source_from_s3: false,
+    #         },
+    #         max_age_rule: {
+    #           enabled: false, # required
+    #           max_age_in_days: 1,
+    #           delete_source_from_s3: false,
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -355,6 +374,13 @@ module Aws::ElasticBeanstalk
     #   resp.application.versions[0] #=> String
     #   resp.application.configuration_templates #=> Array
     #   resp.application.configuration_templates[0] #=> String
+    #   resp.application.resource_lifecycle_config.service_role #=> String
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_count_rule.enabled #=> Boolean
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_count_rule.max_count #=> Integer
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_count_rule.delete_source_from_s3 #=> Boolean
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
     #
     # @overload create_application(params = {})
     # @param [Hash] params ({})
@@ -363,7 +389,21 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Creates an application version for the specified application.
+    # Creates an application version for the specified application. You can
+    # create an application version from a source bundle in Amazon S3, a
+    # commit in AWS CodeCommit, or the output of an AWS CodeBuild build as
+    # follows:
+    #
+    # Specify a commit in an AWS CodeCommit repository with
+    # `SourceBuildInformation`.
+    #
+    # Specify a build in an AWS CodeBuild with `SourceBuildInformation` and
+    # `BuildConfiguration`.
+    #
+    # Specify a source bundle in S3 with `SourceBundle`
+    #
+    # Omit both `SourceBuildInformation` and `SourceBundle` to use the
+    # default sample application.
     #
     # <note markdown="1"> Once you create an application version with a specified Amazon S3
     # bucket and key location, you cannot change that Amazon S3 location. If
@@ -391,14 +431,13 @@ module Aws::ElasticBeanstalk
     #   Specify a commit in an AWS CodeCommit Git repository to use as the
     #   source code for the application version.
     #
-    #   Specify a commit in an AWS CodeCommit repository or a source bundle in
-    #   S3 (with `SourceBundle`), but not both. If neither `SourceBundle` nor
-    #   `SourceBuildInformation` are provided, Elastic Beanstalk uses a sample
-    #   application.
-    #
     # @option params [Types::S3Location] :source_bundle
     #   The Amazon S3 bucket and key that identify the location of the source
     #   bundle for this version.
+    #
+    #   <note markdown="1"> The Amazon S3 bucket must be in the same region as the environment.
+    #
+    #    </note>
     #
     #   Specify a source bundle in S3 or a commit in an AWS CodeCommit
     #   repository (with `SourceBuildInformation`), but not both. If neither
@@ -406,6 +445,7 @@ module Aws::ElasticBeanstalk
     #   Beanstalk uses a sample application.
     #
     # @option params [Types::BuildConfiguration] :build_configuration
+    #   Settings for an AWS CodeBuild build.
     #
     # @option params [Boolean] :auto_create_application
     #   Set to `true` to create an application with the specified name if it
@@ -1009,6 +1049,13 @@ module Aws::ElasticBeanstalk
     #   resp.applications[0].versions[0] #=> String
     #   resp.applications[0].configuration_templates #=> Array
     #   resp.applications[0].configuration_templates[0] #=> String
+    #   resp.applications[0].resource_lifecycle_config.service_role #=> String
+    #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_count_rule.enabled #=> Boolean
+    #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_count_rule.max_count #=> Integer
+    #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_count_rule.delete_source_from_s3 #=> Boolean
+    #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
+    #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
+    #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
     #
     # @overload describe_applications(params = {})
     # @param [Hash] params ({})
@@ -2046,11 +2093,70 @@ module Aws::ElasticBeanstalk
     #   resp.application.versions[0] #=> String
     #   resp.application.configuration_templates #=> Array
     #   resp.application.configuration_templates[0] #=> String
+    #   resp.application.resource_lifecycle_config.service_role #=> String
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_count_rule.enabled #=> Boolean
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_count_rule.max_count #=> Integer
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_count_rule.delete_source_from_s3 #=> Boolean
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
+    #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
     #
     # @overload update_application(params = {})
     # @param [Hash] params ({})
     def update_application(params = {}, options = {})
       req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
+    # Modifies lifecycle settings for an application.
+    #
+    # @option params [required, String] :application_name
+    #   The name of the application.
+    #
+    # @option params [required, Types::ApplicationResourceLifecycleConfig] :resource_lifecycle_config
+    #   The lifecycle configuration.
+    #
+    # @return [Types::ApplicationResourceLifecycleDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ApplicationResourceLifecycleDescriptionMessage#application_name #application_name} => String
+    #   * {Types::ApplicationResourceLifecycleDescriptionMessage#resource_lifecycle_config #resource_lifecycle_config} => Types::ApplicationResourceLifecycleConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application_resource_lifecycle({
+    #     application_name: "ApplicationName", # required
+    #     resource_lifecycle_config: { # required
+    #       service_role: "String",
+    #       version_lifecycle_config: {
+    #         max_count_rule: {
+    #           enabled: false, # required
+    #           max_count: 1,
+    #           delete_source_from_s3: false,
+    #         },
+    #         max_age_rule: {
+    #           enabled: false, # required
+    #           max_age_in_days: 1,
+    #           delete_source_from_s3: false,
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.application_name #=> String
+    #   resp.resource_lifecycle_config.service_role #=> String
+    #   resp.resource_lifecycle_config.version_lifecycle_config.max_count_rule.enabled #=> Boolean
+    #   resp.resource_lifecycle_config.version_lifecycle_config.max_count_rule.max_count #=> Integer
+    #   resp.resource_lifecycle_config.version_lifecycle_config.max_count_rule.delete_source_from_s3 #=> Boolean
+    #   resp.resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
+    #   resp.resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
+    #   resp.resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
+    #
+    # @overload update_application_resource_lifecycle(params = {})
+    # @param [Hash] params ({})
+    def update_application_resource_lifecycle(params = {}, options = {})
+      req = build_request(:update_application_resource_lifecycle, params)
       req.send_request(options)
     end
 

@@ -35,7 +35,7 @@ module Aws::IAM
     #
     #
     #
-    # [1]: http://www.ietf.org/rfc/rfc3548.txt
+    # [1]: https://tools.ietf.org/html/rfc3548.txt
     # @return [String]
     def base_32_string_seed
       data.base_32_string_seed

@@ -59,13 +59,18 @@ module Aws::ElasticBeanstalk
     #   application.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] resource_lifecycle_config
+    #   The lifecycle settings for the application.
+    #   @return [Types::ApplicationResourceLifecycleConfig]
+    #
     class ApplicationDescription < Struct.new(
       :application_name,
       :description,
       :date_created,
       :date_updated,
       :versions,
-      :configuration_templates)
+      :configuration_templates,
+      :resource_lifecycle_config)
       include Aws::Structure
     end
 
@@ -123,6 +128,60 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # The resource lifecycle configuration for an application. Defines
+    # lifecycle settings for resources that belong to the application, and
+    # the service role that Elastic Beanstalk assumes in order to apply
+    # lifecycle settings. The version lifecycle configuration defines
+    # lifecycle settings for application versions.
+    #
+    # @note When making an API call, you may pass ApplicationResourceLifecycleConfig
+    #   data as a hash:
+    #
+    #       {
+    #         service_role: "String",
+    #         version_lifecycle_config: {
+    #           max_count_rule: {
+    #             enabled: false, # required
+    #             max_count: 1,
+    #             delete_source_from_s3: false,
+    #           },
+    #           max_age_rule: {
+    #             enabled: false, # required
+    #             max_age_in_days: 1,
+    #             delete_source_from_s3: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] service_role
+    #   The ARN of an IAM service role that Elastic Beanstalk has permission
+    #   to assume.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_lifecycle_config
+    #   The application version lifecycle configuration.
+    #   @return [Types::ApplicationVersionLifecycleConfig]
+    #
+    class ApplicationResourceLifecycleConfig < Struct.new(
+      :service_role,
+      :version_lifecycle_config)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_lifecycle_config
+    #   The lifecycle configuration.
+    #   @return [Types::ApplicationResourceLifecycleConfig]
+    #
+    class ApplicationResourceLifecycleDescriptionMessage < Struct.new(
+      :application_name,
+      :resource_lifecycle_config)
+      include Aws::Structure
+    end
+
     # Describes the properties of an application version.
     #
     # @!attribute [rw] application_name
@@ -144,6 +203,7 @@ module Aws::ElasticBeanstalk
     #   @return [Types::SourceBuildInformation]
     #
     # @!attribute [rw] build_arn
+    #   Reference to the artifact from the AWS CodeBuild build.
     #   @return [String]
     #
     # @!attribute [rw] source_bundle
@@ -203,6 +263,48 @@ module Aws::ElasticBeanstalk
     class ApplicationVersionDescriptionsMessage < Struct.new(
       :application_versions,
       :next_token)
+      include Aws::Structure
+    end
+
+    # The application version lifecycle settings for an application. Defines
+    # the rules that Elastic Beanstalk applies to an application's versions
+    # in order to avoid hitting the per-region limit for application
+    # versions.
+    #
+    # When Elastic Beanstalk deletes an application version from its
+    # database, you can no longer deploy that version to an environment. The
+    # source bundle remains in S3 unless you configure the rule to delete
+    # it.
+    #
+    # @note When making an API call, you may pass ApplicationVersionLifecycleConfig
+    #   data as a hash:
+    #
+    #       {
+    #         max_count_rule: {
+    #           enabled: false, # required
+    #           max_count: 1,
+    #           delete_source_from_s3: false,
+    #         },
+    #         max_age_rule: {
+    #           enabled: false, # required
+    #           max_age_in_days: 1,
+    #           delete_source_from_s3: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] max_count_rule
+    #   Specify a max count rule to restrict the number of application
+    #   versions that are retained for an application.
+    #   @return [Types::MaxCountRule]
+    #
+    # @!attribute [rw] max_age_rule
+    #   Specify a max age rule to restrict the length of time that
+    #   application versions are retained for an application.
+    #   @return [Types::MaxAgeRule]
+    #
+    class ApplicationVersionLifecycleConfig < Struct.new(
+      :max_count_rule,
+      :max_age_rule)
       include Aws::Structure
     end
 
@@ -273,6 +375,8 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # Settings for an AWS CodeBuild build.
+    #
     # @note When making an API call, you may pass BuildConfiguration
     #   data as a hash:
     #
@@ -285,18 +389,41 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] artifact_name
+    #   The name of the artifact of the CodeBuild build. If provided,
+    #   Elastic Beanstalk stores the build artifact in the S3 location
+    #   *S3-bucket*/resources/*application-name*/codebuild/codebuild-*version-label*-*artifact-name*.zip.
+    #   If not provided, Elastic Beanstalk stores the build artifact in the
+    #   S3 location
+    #   *S3-bucket*/resources/*application-name*/codebuild/codebuild-*version-label*.zip.
     #   @return [String]
     #
     # @!attribute [rw] code_build_service_role
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that enables AWS CodeBuild to interact with
+    #   dependent AWS services on behalf of the AWS account.
     #   @return [String]
     #
     # @!attribute [rw] compute_type
+    #   Information about the compute resources the build project will use.
+    #
+    #   * `BUILD_GENERAL1_SMALL: Use up to 3 GB memory and 2 vCPUs for
+    #     builds`
+    #
+    #   * `BUILD_GENERAL1_MEDIUM: Use up to 7 GB memory and 4 vCPUs for
+    #     builds`
+    #
+    #   * `BUILD_GENERAL1_LARGE: Use up to 15 GB memory and 8 vCPUs for
+    #     builds`
     #   @return [String]
     #
     # @!attribute [rw] image
+    #   The ID of the Docker image to use for this build project.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
+    #   How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
+    #   wait until timing out any related build that does not get marked as
+    #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
     class BuildConfiguration < Struct.new(
@@ -702,6 +829,21 @@ module Aws::ElasticBeanstalk
     #       {
     #         application_name: "ApplicationName", # required
     #         description: "Description",
+    #         resource_lifecycle_config: {
+    #           service_role: "String",
+    #           version_lifecycle_config: {
+    #             max_count_rule: {
+    #               enabled: false, # required
+    #               max_count: 1,
+    #               delete_source_from_s3: false,
+    #             },
+    #             max_age_rule: {
+    #               enabled: false, # required
+    #               max_age_in_days: 1,
+    #               delete_source_from_s3: false,
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] application_name
@@ -716,9 +858,15 @@ module Aws::ElasticBeanstalk
     #   Describes the application.
     #   @return [String]
     #
+    # @!attribute [rw] resource_lifecycle_config
+    #   Specify an application resource lifecycle configuration to prevent
+    #   your application from accumulating too many versions.
+    #   @return [Types::ApplicationResourceLifecycleConfig]
+    #
     class CreateApplicationMessage < Struct.new(
       :application_name,
-      :description)
+      :description,
+      :resource_lifecycle_config)
       include Aws::Structure
     end
 
@@ -771,16 +919,15 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] source_build_information
     #   Specify a commit in an AWS CodeCommit Git repository to use as the
     #   source code for the application version.
-    #
-    #   Specify a commit in an AWS CodeCommit repository or a source bundle
-    #   in S3 (with `SourceBundle`), but not both. If neither `SourceBundle`
-    #   nor `SourceBuildInformation` are provided, Elastic Beanstalk uses a
-    #   sample application.
     #   @return [Types::SourceBuildInformation]
     #
     # @!attribute [rw] source_bundle
     #   The Amazon S3 bucket and key that identify the location of the
     #   source bundle for this version.
+    #
+    #   <note markdown="1"> The Amazon S3 bucket must be in the same region as the environment.
+    #
+    #    </note>
     #
     #   Specify a source bundle in S3 or a commit in an AWS CodeCommit
     #   repository (with `SourceBuildInformation`), but not both. If neither
@@ -789,6 +936,7 @@ module Aws::ElasticBeanstalk
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] build_configuration
+    #   Settings for an AWS CodeBuild build.
     #   @return [Types::BuildConfiguration]
     #
     # @!attribute [rw] auto_create_application
@@ -2451,6 +2599,70 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # A lifecycle rule that deletes application versions after the specified
+    # number of days.
+    #
+    # @note When making an API call, you may pass MaxAgeRule
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         max_age_in_days: 1,
+    #         delete_source_from_s3: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specify `true` to apply the rule, or `false` to disable it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_age_in_days
+    #   Specify the number of days to retain an application versions.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_source_from_s3
+    #   Set to `true` to delete a version's source bundle from Amazon S3
+    #   when Elastic Beanstalk deletes the application version.
+    #   @return [Boolean]
+    #
+    class MaxAgeRule < Struct.new(
+      :enabled,
+      :max_age_in_days,
+      :delete_source_from_s3)
+      include Aws::Structure
+    end
+
+    # A lifecycle rule that deletes the oldest application version when the
+    # maximum count is exceeded.
+    #
+    # @note When making an API call, you may pass MaxCountRule
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         max_count: 1,
+    #         delete_source_from_s3: false,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specify `true` to apply the rule, or `false` to disable it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_count
+    #   Specify the maximum number of application versions to retain.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] delete_source_from_s3
+    #   Set to `true` to delete a version's source bundle from Amazon S3
+    #   when Elastic Beanstalk deletes the application version.
+    #   @return [Boolean]
+    #
+    class MaxCountRule < Struct.new(
+      :enabled,
+      :max_count,
+      :delete_source_from_s3)
+      include Aws::Structure
+    end
+
     # A regular expression representing a restriction on a string
     # configuration option value.
     #
@@ -2799,16 +3011,32 @@ module Aws::ElasticBeanstalk
     #       }
     #
     # @!attribute [rw] source_type
-    #   The type of repository, such as `Git`.
+    #   The type of repository.
+    #
+    #   * `Git`
+    #
+    #   * `Zip`
     #   @return [String]
     #
     # @!attribute [rw] source_repository
-    #   Location where the repository is stored, such as `CodeCommit`.
+    #   Location where the repository is stored.
+    #
+    #   * `CodeCommit`
+    #
+    #   * `S3`
     #   @return [String]
     #
     # @!attribute [rw] source_location
-    #   The repository name and commit ID, separated by a forward slash. For
-    #   example, `my-repo/265cfa0cf6af46153527f55d6503ec030551f57a`.
+    #   The location of the source code, as a formatted string, depending on
+    #   the value of `SourceRepository`
+    #
+    #   * For `CodeCommit`, the format is the repository name and commit ID,
+    #     separated by a forward slash. For example,
+    #     `my-git-repo/265cfa0cf6af46153527f55d6503ec030551f57a`.
+    #
+    #   * For `S3`, the format is the S3 bucket name and object key,
+    #     separated by a forward slash. For example,
+    #     `my-s3-bucket/Folders/my-source-file`.
     #   @return [String]
     #
     class SourceBuildInformation < Struct.new(
@@ -3079,6 +3307,42 @@ module Aws::ElasticBeanstalk
     class UpdateApplicationMessage < Struct.new(
       :application_name,
       :description)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateApplicationResourceLifecycleMessage
+    #   data as a hash:
+    #
+    #       {
+    #         application_name: "ApplicationName", # required
+    #         resource_lifecycle_config: { # required
+    #           service_role: "String",
+    #           version_lifecycle_config: {
+    #             max_count_rule: {
+    #               enabled: false, # required
+    #               max_count: 1,
+    #               delete_source_from_s3: false,
+    #             },
+    #             max_age_rule: {
+    #               enabled: false, # required
+    #               max_age_in_days: 1,
+    #               delete_source_from_s3: false,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_name
+    #   The name of the application.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_lifecycle_config
+    #   The lifecycle configuration.
+    #   @return [Types::ApplicationResourceLifecycleConfig]
+    #
+    class UpdateApplicationResourceLifecycleMessage < Struct.new(
+      :application_name,
+      :resource_lifecycle_config)
       include Aws::Structure
     end
 

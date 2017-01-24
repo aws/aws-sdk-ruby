@@ -254,16 +254,11 @@ module Aws::ACM
       req.send_request(options)
     end
 
-    # Returns a list of the fields contained in the specified ACM
-    # Certificate. For example, this action returns the certificate status,
-    # a flag that indicates whether the certificate is associated with any
-    # other AWS service, and the date at which the certificate request was
-    # created. You specify the ACM Certificate on input by its Amazon
-    # Resource Name (ARN).
+    # Returns detailed metadata about the specified ACM Certificate.
     #
     # @option params [required, String] :certificate_arn
-    #   String that contains an ACM Certificate ARN. The ARN must be of the
-    #   form:
+    #   The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must
+    #   have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
@@ -295,6 +290,7 @@ module Aws::ACM
     #   resp.certificate.domain_validation_options[0].validation_emails #=> Array
     #   resp.certificate.domain_validation_options[0].validation_emails[0] #=> String
     #   resp.certificate.domain_validation_options[0].validation_domain #=> String
+    #   resp.certificate.domain_validation_options[0].validation_status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #   resp.certificate.serial #=> String
     #   resp.certificate.subject #=> String
     #   resp.certificate.issuer #=> String
@@ -312,6 +308,13 @@ module Aws::ACM
     #   resp.certificate.in_use_by[0] #=> String
     #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "OTHER"
     #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED"
+    #   resp.certificate.renewal_summary.renewal_status #=> String, one of "PENDING_AUTO_RENEWAL", "PENDING_VALIDATION", "SUCCESS", "FAILED"
+    #   resp.certificate.renewal_summary.domain_validation_options #=> Array
+    #   resp.certificate.renewal_summary.domain_validation_options[0].domain_name #=> String
+    #   resp.certificate.renewal_summary.domain_validation_options[0].validation_emails #=> Array
+    #   resp.certificate.renewal_summary.domain_validation_options[0].validation_emails[0] #=> String
+    #   resp.certificate.renewal_summary.domain_validation_options[0].validation_domain #=> String
+    #   resp.certificate.renewal_summary.domain_validation_options[0].validation_status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
@@ -510,13 +513,13 @@ module Aws::ACM
     end
 
     # Lists the tags that have been applied to the ACM Certificate. Use the
-    # certificate ARN to specify the certificate. To add a tag to an ACM
-    # Certificate, use the AddTagsToCertificate action. To delete a tag, use
-    # the RemoveTagsFromCertificate action.
+    # certificate's Amazon Resource Name (ARN) to specify the certificate.
+    # To add a tag to an ACM Certificate, use the AddTagsToCertificate
+    # action. To delete a tag, use the RemoveTagsFromCertificate action.
     #
     # @option params [required, String] :certificate_arn
     #   String that contains the ARN of the ACM Certificate for which you want
-    #   to list the tags. This must be of the form:
+    #   to list the tags. This has the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
@@ -612,9 +615,9 @@ module Aws::ACM
     #
     # @option params [required, String] :domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, of the
-    #   site you want to secure with an ACM Certificate. Use an asterisk (*)
-    #   to create a wildcard certificate that protects several sites in the
-    #   same domain. For example, *.example.com protects www.example.com,
+    #   site that you want to secure with an ACM Certificate. Use an asterisk
+    #   (*) to create a wildcard certificate that protects several sites in
+    #   the same domain. For example, *.example.com protects www.example.com,
     #   site.example.com, and images.example.com.
     #
     # @option params [Array<String>] :subject_alternative_names
@@ -633,23 +636,8 @@ module Aws::ACM
     #   requesting multiple certificates.
     #
     # @option params [Array<Types::DomainValidationOption>] :domain_validation_options
-    #   The base validation domain that will act as the suffix of the email
-    #   addresses that are used to send the emails. This must be the same as
-    #   the `Domain` value or a superdomain of the `Domain` value. For
-    #   example, if you requested a certificate for `test.example.com` and
-    #   specify **DomainValidationOptions** of `example.com`, ACM sends email
-    #   to the domain registrant, technical contact, and administrative
-    #   contact in WHOIS and the following five addresses:
-    #
-    #   * admin@example.com
-    #
-    #   * administrator@example.com
-    #
-    #   * hostmaster@example.com
-    #
-    #   * postmaster@example.com
-    #
-    #   * webmaster@example.com
+    #   The domain name that you want ACM to use to send you emails to
+    #   validate your ownership of the domain.
     #
     # @return [Types::RequestCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -703,7 +691,7 @@ module Aws::ACM
     #   `arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
     # @option params [required, String] :domain
-    #   The Fully Qualified Domain Name (FQDN) of the certificate that needs
+    #   The fully qualified domain name (FQDN) of the certificate that needs
     #   to be validated.
     #
     # @option params [required, String] :validation_domain

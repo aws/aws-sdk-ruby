@@ -38,7 +38,7 @@ module Aws::SQS
       @receipt_handle
     end
 
-    # A unique identifier for the message. Message IDs are considered unique
+    # A unique identifier for the message. A `MessageId`is considered unique
     # across all AWS accounts for an extended period of time.
     # @return [String]
     def message_id
@@ -70,10 +70,10 @@ module Aws::SQS
       data.attributes
     end
 
-    # An MD5 digest of the non-URL-encoded message attribute string. This
-    # can be used to verify that Amazon SQS received the message correctly.
-    # Amazon SQS first URL decodes the message before creating the MD5
-    # digest. For information about MD5, see [RFC1321][1].
+    # An MD5 digest of the non-URL-encoded message attribute string. You can
+    # use this attribute to verify that Amazon SQS received the message
+    # correctly. Amazon SQS URL-decodes the message before creating the MD5
+    # digest. For information on MD5, see [RFC1321][1].
     #
     #
     #
@@ -83,9 +83,9 @@ module Aws::SQS
       data.md5_of_message_attributes
     end
 
-    # Each message attribute consists of a Name, Type, and Value. For more
-    # information, see [Message Attribute Items and Validation][1] in the
-    # *Amazon SQS Developer Guide*.
+    # Each message attribute consists of a `Name`, `Type`, and `Value`. For
+    # more information, see [Message Attribute Items and Validation][1] in
+    # the *Amazon SQS Developer Guide*.
     #
     #
     #
@@ -134,8 +134,8 @@ module Aws::SQS
     #   })
     # @param [Hash] options ({})
     # @option options [required, Integer] :visibility_timeout
-    #   The new value (in seconds - from 0 to 43200 - maximum 12 hours) for
-    #   the message's visibility timeout.
+    #   The new value for the message's visibility timeout (in seconds).
+    #   Values values: `0` to `43200`. Maximum: 12 hours.
     # @return [EmptyStructure]
     def change_visibility(options = {})
       options = options.merge(

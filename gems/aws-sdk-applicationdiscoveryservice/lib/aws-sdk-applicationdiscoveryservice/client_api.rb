@@ -20,8 +20,13 @@ module Aws::ApplicationDiscoveryService
     AgentNetworkInfoList = Shapes::ListShape.new(name: 'AgentNetworkInfoList')
     AgentStatus = Shapes::StringShape.new(name: 'AgentStatus')
     AgentsInfo = Shapes::ListShape.new(name: 'AgentsInfo')
+    ApplicationId = Shapes::StringShape.new(name: 'ApplicationId')
+    ApplicationIdsList = Shapes::ListShape.new(name: 'ApplicationIdsList')
+    AssociateConfigurationItemsToApplicationRequest = Shapes::StructureShape.new(name: 'AssociateConfigurationItemsToApplicationRequest')
+    AssociateConfigurationItemsToApplicationResponse = Shapes::StructureShape.new(name: 'AssociateConfigurationItemsToApplicationResponse')
     AuthorizationErrorException = Shapes::StructureShape.new(name: 'AuthorizationErrorException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoxedInteger = Shapes::IntegerShape.new(name: 'BoxedInteger')
     Condition = Shapes::StringShape.new(name: 'Condition')
     Configuration = Shapes::MapShape.new(name: 'Configuration')
     ConfigurationId = Shapes::StringShape.new(name: 'ConfigurationId')
@@ -32,8 +37,14 @@ module Aws::ApplicationDiscoveryService
     Configurations = Shapes::ListShape.new(name: 'Configurations')
     ConfigurationsDownloadUrl = Shapes::StringShape.new(name: 'ConfigurationsDownloadUrl')
     ConfigurationsExportId = Shapes::StringShape.new(name: 'ConfigurationsExportId')
+    CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
+    CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
     CreateTagsRequest = Shapes::StructureShape.new(name: 'CreateTagsRequest')
     CreateTagsResponse = Shapes::StructureShape.new(name: 'CreateTagsResponse')
+    CustomerAgentInfo = Shapes::StructureShape.new(name: 'CustomerAgentInfo')
+    CustomerConnectorInfo = Shapes::StructureShape.new(name: 'CustomerConnectorInfo')
+    DeleteApplicationsRequest = Shapes::StructureShape.new(name: 'DeleteApplicationsRequest')
+    DeleteApplicationsResponse = Shapes::StructureShape.new(name: 'DeleteApplicationsResponse')
     DeleteTagsRequest = Shapes::StructureShape.new(name: 'DeleteTagsRequest')
     DeleteTagsResponse = Shapes::StructureShape.new(name: 'DeleteTagsResponse')
     DescribeAgentsRequest = Shapes::StructureShape.new(name: 'DescribeAgentsRequest')
@@ -46,6 +57,8 @@ module Aws::ApplicationDiscoveryService
     DescribeExportConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeExportConfigurationsResponse')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
     DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
+    DisassociateConfigurationItemsFromApplicationRequest = Shapes::StructureShape.new(name: 'DisassociateConfigurationItemsFromApplicationRequest')
+    DisassociateConfigurationItemsFromApplicationResponse = Shapes::StructureShape.new(name: 'DisassociateConfigurationItemsFromApplicationResponse')
     ExportConfigurationsResponse = Shapes::StructureShape.new(name: 'ExportConfigurationsResponse')
     ExportIds = Shapes::ListShape.new(name: 'ExportIds')
     ExportInfo = Shapes::StructureShape.new(name: 'ExportInfo')
@@ -58,14 +71,23 @@ module Aws::ApplicationDiscoveryService
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     Filters = Shapes::ListShape.new(name: 'Filters')
+    GetDiscoverySummaryRequest = Shapes::StructureShape.new(name: 'GetDiscoverySummaryRequest')
+    GetDiscoverySummaryResponse = Shapes::StructureShape.new(name: 'GetDiscoverySummaryResponse')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
     ListConfigurationsRequest = Shapes::StructureShape.new(name: 'ListConfigurationsRequest')
     ListConfigurationsResponse = Shapes::StructureShape.new(name: 'ListConfigurationsResponse')
+    ListServerNeighborsRequest = Shapes::StructureShape.new(name: 'ListServerNeighborsRequest')
+    ListServerNeighborsResponse = Shapes::StructureShape.new(name: 'ListServerNeighborsResponse')
+    Long = Shapes::IntegerShape.new(name: 'Long')
     Message = Shapes::StringShape.new(name: 'Message')
+    NeighborConnectionDetail = Shapes::StructureShape.new(name: 'NeighborConnectionDetail')
+    NeighborDetailsList = Shapes::ListShape.new(name: 'NeighborDetailsList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
+    OrderByElement = Shapes::StructureShape.new(name: 'OrderByElement')
+    OrderByList = Shapes::ListShape.new(name: 'OrderByList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ServerInternalErrorException = Shapes::StructureShape.new(name: 'ServerInternalErrorException')
     StartDataCollectionByAgentIdsRequest = Shapes::StructureShape.new(name: 'StartDataCollectionByAgentIdsRequest')
@@ -80,6 +102,9 @@ module Aws::ApplicationDiscoveryService
     TagSet = Shapes::ListShape.new(name: 'TagSet')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
+    UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
+    UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
+    orderString = Shapes::StringShape.new(name: 'orderString')
 
     AgentConfigurationStatus.add_member(:agent_id, Shapes::ShapeRef.new(shape: String, location_name: "agentId"))
     AgentConfigurationStatus.add_member(:operation_succeeded, Shapes::ShapeRef.new(shape: Boolean, location_name: "operationSucceeded"))
@@ -96,6 +121,10 @@ module Aws::ApplicationDiscoveryService
     AgentInfo.add_member(:connector_id, Shapes::ShapeRef.new(shape: String, location_name: "connectorId"))
     AgentInfo.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     AgentInfo.add_member(:health, Shapes::ShapeRef.new(shape: AgentStatus, location_name: "health"))
+    AgentInfo.add_member(:last_health_ping_time, Shapes::ShapeRef.new(shape: String, location_name: "lastHealthPingTime"))
+    AgentInfo.add_member(:collection_status, Shapes::ShapeRef.new(shape: String, location_name: "collectionStatus"))
+    AgentInfo.add_member(:agent_type, Shapes::ShapeRef.new(shape: String, location_name: "agentType"))
+    AgentInfo.add_member(:registered_time, Shapes::ShapeRef.new(shape: String, location_name: "registeredTime"))
     AgentInfo.struct_class = Types::AgentInfo
 
     AgentNetworkInfo.add_member(:ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ipAddress"))
@@ -105,6 +134,14 @@ module Aws::ApplicationDiscoveryService
     AgentNetworkInfoList.member = Shapes::ShapeRef.new(shape: AgentNetworkInfo)
 
     AgentsInfo.member = Shapes::ShapeRef.new(shape: AgentInfo)
+
+    ApplicationIdsList.member = Shapes::ShapeRef.new(shape: ApplicationId)
+
+    AssociateConfigurationItemsToApplicationRequest.add_member(:application_configuration_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationConfigurationId"))
+    AssociateConfigurationItemsToApplicationRequest.add_member(:configuration_ids, Shapes::ShapeRef.new(shape: ConfigurationIdList, required: true, location_name: "configurationIds"))
+    AssociateConfigurationItemsToApplicationRequest.struct_class = Types::AssociateConfigurationItemsToApplicationRequest
+
+    AssociateConfigurationItemsToApplicationResponse.struct_class = Types::AssociateConfigurationItemsToApplicationResponse
 
     Configuration.key = Shapes::ShapeRef.new(shape: String)
     Configuration.value = Shapes::ShapeRef.new(shape: String)
@@ -122,11 +159,41 @@ module Aws::ApplicationDiscoveryService
 
     Configurations.member = Shapes::ShapeRef.new(shape: Configuration)
 
+    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+    CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
+
+    CreateApplicationResponse.add_member(:configuration_id, Shapes::ShapeRef.new(shape: String, location_name: "configurationId"))
+    CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
+
     CreateTagsRequest.add_member(:configuration_ids, Shapes::ShapeRef.new(shape: ConfigurationIdList, required: true, location_name: "configurationIds"))
     CreateTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, required: true, location_name: "tags"))
     CreateTagsRequest.struct_class = Types::CreateTagsRequest
 
     CreateTagsResponse.struct_class = Types::CreateTagsResponse
+
+    CustomerAgentInfo.add_member(:active_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "activeAgents"))
+    CustomerAgentInfo.add_member(:healthy_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "healthyAgents"))
+    CustomerAgentInfo.add_member(:black_listed_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "blackListedAgents"))
+    CustomerAgentInfo.add_member(:shutdown_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shutdownAgents"))
+    CustomerAgentInfo.add_member(:unhealthy_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unhealthyAgents"))
+    CustomerAgentInfo.add_member(:total_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalAgents"))
+    CustomerAgentInfo.add_member(:unknown_agents, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unknownAgents"))
+    CustomerAgentInfo.struct_class = Types::CustomerAgentInfo
+
+    CustomerConnectorInfo.add_member(:active_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "activeConnectors"))
+    CustomerConnectorInfo.add_member(:healthy_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "healthyConnectors"))
+    CustomerConnectorInfo.add_member(:black_listed_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "blackListedConnectors"))
+    CustomerConnectorInfo.add_member(:shutdown_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shutdownConnectors"))
+    CustomerConnectorInfo.add_member(:unhealthy_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unhealthyConnectors"))
+    CustomerConnectorInfo.add_member(:total_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalConnectors"))
+    CustomerConnectorInfo.add_member(:unknown_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unknownConnectors"))
+    CustomerConnectorInfo.struct_class = Types::CustomerConnectorInfo
+
+    DeleteApplicationsRequest.add_member(:configuration_ids, Shapes::ShapeRef.new(shape: ApplicationIdsList, required: true, location_name: "configurationIds"))
+    DeleteApplicationsRequest.struct_class = Types::DeleteApplicationsRequest
+
+    DeleteApplicationsResponse.struct_class = Types::DeleteApplicationsResponse
 
     DeleteTagsRequest.add_member(:configuration_ids, Shapes::ShapeRef.new(shape: ConfigurationIdList, required: true, location_name: "configurationIds"))
     DeleteTagsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "tags"))
@@ -135,6 +202,7 @@ module Aws::ApplicationDiscoveryService
     DeleteTagsResponse.struct_class = Types::DeleteTagsResponse
 
     DescribeAgentsRequest.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, location_name: "agentIds"))
+    DescribeAgentsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     DescribeAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     DescribeAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeAgentsRequest.struct_class = Types::DescribeAgentsRequest
@@ -172,6 +240,12 @@ module Aws::ApplicationDiscoveryService
     DescribeTagsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeTagsResponse.struct_class = Types::DescribeTagsResponse
 
+    DisassociateConfigurationItemsFromApplicationRequest.add_member(:application_configuration_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationConfigurationId"))
+    DisassociateConfigurationItemsFromApplicationRequest.add_member(:configuration_ids, Shapes::ShapeRef.new(shape: ConfigurationIdList, required: true, location_name: "configurationIds"))
+    DisassociateConfigurationItemsFromApplicationRequest.struct_class = Types::DisassociateConfigurationItemsFromApplicationRequest
+
+    DisassociateConfigurationItemsFromApplicationResponse.struct_class = Types::DisassociateConfigurationItemsFromApplicationResponse
+
     ExportConfigurationsResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
     ExportConfigurationsResponse.struct_class = Types::ExportConfigurationsResponse
 
@@ -195,15 +269,53 @@ module Aws::ApplicationDiscoveryService
 
     Filters.member = Shapes::ShapeRef.new(shape: Filter)
 
+    GetDiscoverySummaryRequest.struct_class = Types::GetDiscoverySummaryRequest
+
+    GetDiscoverySummaryResponse.add_member(:servers, Shapes::ShapeRef.new(shape: Long, location_name: "servers"))
+    GetDiscoverySummaryResponse.add_member(:applications, Shapes::ShapeRef.new(shape: Long, location_name: "applications"))
+    GetDiscoverySummaryResponse.add_member(:servers_mapped_to_applications, Shapes::ShapeRef.new(shape: Long, location_name: "serversMappedToApplications"))
+    GetDiscoverySummaryResponse.add_member(:servers_mappedto_tags, Shapes::ShapeRef.new(shape: Long, location_name: "serversMappedtoTags"))
+    GetDiscoverySummaryResponse.add_member(:agent_summary, Shapes::ShapeRef.new(shape: CustomerAgentInfo, location_name: "agentSummary"))
+    GetDiscoverySummaryResponse.add_member(:connector_summary, Shapes::ShapeRef.new(shape: CustomerConnectorInfo, location_name: "connectorSummary"))
+    GetDiscoverySummaryResponse.struct_class = Types::GetDiscoverySummaryResponse
+
     ListConfigurationsRequest.add_member(:configuration_type, Shapes::ShapeRef.new(shape: ConfigurationItemType, required: true, location_name: "configurationType"))
     ListConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "filters"))
     ListConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     ListConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListConfigurationsRequest.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderByList, location_name: "orderBy"))
     ListConfigurationsRequest.struct_class = Types::ListConfigurationsRequest
 
     ListConfigurationsResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: Configurations, location_name: "configurations"))
     ListConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListConfigurationsResponse.struct_class = Types::ListConfigurationsResponse
+
+    ListServerNeighborsRequest.add_member(:configuration_id, Shapes::ShapeRef.new(shape: ConfigurationId, required: true, location_name: "configurationId"))
+    ListServerNeighborsRequest.add_member(:port_information_needed, Shapes::ShapeRef.new(shape: Boolean, location_name: "portInformationNeeded"))
+    ListServerNeighborsRequest.add_member(:neighbor_configuration_ids, Shapes::ShapeRef.new(shape: ConfigurationIdList, location_name: "neighborConfigurationIds"))
+    ListServerNeighborsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    ListServerNeighborsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServerNeighborsRequest.struct_class = Types::ListServerNeighborsRequest
+
+    ListServerNeighborsResponse.add_member(:neighbors, Shapes::ShapeRef.new(shape: NeighborDetailsList, required: true, location_name: "neighbors"))
+    ListServerNeighborsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListServerNeighborsResponse.add_member(:known_dependency_count, Shapes::ShapeRef.new(shape: Long, location_name: "knownDependencyCount"))
+    ListServerNeighborsResponse.struct_class = Types::ListServerNeighborsResponse
+
+    NeighborConnectionDetail.add_member(:source_server_id, Shapes::ShapeRef.new(shape: ConfigurationId, required: true, location_name: "sourceServerId"))
+    NeighborConnectionDetail.add_member(:destination_server_id, Shapes::ShapeRef.new(shape: ConfigurationId, required: true, location_name: "destinationServerId"))
+    NeighborConnectionDetail.add_member(:destination_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "destinationPort"))
+    NeighborConnectionDetail.add_member(:transport_protocol, Shapes::ShapeRef.new(shape: String, location_name: "transportProtocol"))
+    NeighborConnectionDetail.add_member(:connections_count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "connectionsCount"))
+    NeighborConnectionDetail.struct_class = Types::NeighborConnectionDetail
+
+    NeighborDetailsList.member = Shapes::ShapeRef.new(shape: NeighborConnectionDetail)
+
+    OrderByElement.add_member(:field_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fieldName"))
+    OrderByElement.add_member(:sort_order, Shapes::ShapeRef.new(shape: orderString, location_name: "sortOrder"))
+    OrderByElement.struct_class = Types::OrderByElement
+
+    OrderByList.member = Shapes::ShapeRef.new(shape: OrderByElement)
 
     StartDataCollectionByAgentIdsRequest.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, required: true, location_name: "agentIds"))
     StartDataCollectionByAgentIdsRequest.struct_class = Types::StartDataCollectionByAgentIdsRequest
@@ -229,6 +341,13 @@ module Aws::ApplicationDiscoveryService
 
     TagSet.member = Shapes::ShapeRef.new(shape: Tag, location_name: "item")
 
+    UpdateApplicationRequest.add_member(:configuration_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "configurationId"))
+    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
+
+    UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -244,6 +363,30 @@ module Aws::ApplicationDiscoveryService
         "targetPrefix" => "AWSPoseidonService_V2015_11_01",
       }
 
+      api.add_operation(:associate_configuration_items_to_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateConfigurationItemsToApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateConfigurationItemsToApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateConfigurationItemsToApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
       api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTags"
         o.http_method = "POST"
@@ -252,6 +395,18 @@ module Aws::ApplicationDiscoveryService
         o.output = Shapes::ShapeRef.new(shape: CreateTagsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:delete_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteApplicationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
@@ -320,6 +475,18 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
       end)
 
+      api.add_operation(:disassociate_configuration_items_from_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateConfigurationItemsFromApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateConfigurationItemsFromApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateConfigurationItemsFromApplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
       api.add_operation(:export_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ExportConfigurations"
         o.http_method = "POST"
@@ -333,6 +500,18 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
+      api.add_operation(:get_discovery_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDiscoverySummary"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDiscoverySummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDiscoverySummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
       api.add_operation(:list_configurations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListConfigurations"
         o.http_method = "POST"
@@ -341,6 +520,18 @@ module Aws::ApplicationDiscoveryService
         o.output = Shapes::ShapeRef.new(shape: ListConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:list_server_neighbors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServerNeighbors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServerNeighborsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServerNeighborsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
@@ -364,6 +555,18 @@ module Aws::ApplicationDiscoveryService
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: StopDataCollectionByAgentIdsRequest)
         o.output = Shapes::ShapeRef.new(shape: StopDataCollectionByAgentIdsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)

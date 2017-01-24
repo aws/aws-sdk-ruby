@@ -125,7 +125,7 @@ module Aws::DirectoryService
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to be assigned to the Amazon Directory Services directory.
+    #   The tags to be assigned to the directory.
     #   @return [Array<Types::Tag>]
     #
     class AddTagsToResourceRequest < Struct.new(
@@ -2140,8 +2140,10 @@ module Aws::DirectoryService
     #   @return [Boolean]
     #
     # @!attribute [rw] ldif_content
-    #   The LDIF file represented as a string. The file size can be no
-    #   larger than 1MB.
+    #   The LDIF file represented as a string. To construct the LdifContent
+    #   string, precede each line as it would be formatted in an ldif file
+    #   with \\n. See the example request below for more details. The file
+    #   size can be no larger than 1MB.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -2165,8 +2167,7 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
-    # Metadata assigned to an Amazon Directory Services directory consisting
-    # of a key-value pair.
+    # Metadata assigned to a directory consisting of a key-value pair.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:

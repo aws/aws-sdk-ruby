@@ -35,8 +35,8 @@ module Aws::SQS
     #
     #   * A queue name can have up to 80 characters.
     #
-    #   * The following are accepted: alphanumeric chatacters, hyphens (`-`),
-    #     and underscores (`_`).
+    #   * Valid values: alphanumeric characters, hyphens (`-`), and
+    #     underscores (`_`).
     #
     #   * A FIFO queue name must end with the `.fifo` suffix.
     #
@@ -48,25 +48,26 @@ module Aws::SQS
     #   request parameters that the `CreateQueue` action uses:
     #
     #   * `DelaySeconds` - The number of seconds for which the delivery of all
-    #     messages in the queue is delayed. An integer from 0 to 900 (15
-    #     minutes). The default is 0 (zero).
+    #     messages in the queue is delayed. Valid values: An integer from 0 to
+    #     900 seconds (15 minutes). The default is 0 (zero).
     #
     #   * `MaximumMessageSize` - The limit of how many bytes a message can
-    #     contain before Amazon SQS rejects it. An integer from 1,024 bytes (1
-    #     KiB) up to 262,144 bytes (256 KiB). The default is 262,144 (256
-    #     KiB).
+    #     contain before Amazon SQS rejects it. Valid values: An integer from
+    #     1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default is
+    #     262,144 (256 KiB).
     #
     #   * `MessageRetentionPeriod` - The number of seconds for which Amazon
-    #     SQS retains a message. An integer representing seconds, from 60 (1
-    #     minute) to 120,9600 (14 days). The default is 345,600 (4 days).
+    #     SQS retains a message. Valid values: An integer from 60 seconds (1
+    #     minute) to 1,209,600 seconds (14 days). The default is 345,600 (4
+    #     days).
     #
     #   * `Policy` - The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
     #     Policies][1] in the *Amazon IAM User Guide*.
     #
     #   * `ReceiveMessageWaitTimeSeconds` - The number of seconds for which a
-    #     ReceiveMessage action will wait for a message to arrive. An integer
-    #     from 0 to 20 (seconds). The default is 0.
+    #     ` ReceiveMessage ` action waits for a message to arrive. Valid
+    #     values: An integer from 0 to 20 (seconds). The default is 0 (zero).
     #
     #   * `RedrivePolicy` - The parameters for the dead letter queue
     #     functionality of the source queue. For more information about the
@@ -79,16 +80,16 @@ module Aws::SQS
     #
     #      </note>
     #
-    #   * `VisibilityTimeout` - The visibility timeout for the queue. An
-    #     integer from 0 to 43200 (12 hours). The default is 30. For more
-    #     information about the visibility timeout, see [Visibility
+    #   * `VisibilityTimeout` - The visibility timeout for the queue. Valid
+    #     values: An integer from 0 to 43,200 (12 hours). The default is 30.
+    #     For more information about the visibility timeout, see [Visibility
     #     Timeout][3] in the *Amazon SQS Developer Guide*.
     #
     #   The following attributes apply only to [FIFO (first-in-first-out)
     #   queues][4]\:
     #
     #   * `FifoQueue` - Designates a queue as FIFO. You can provide this
-    #     attribute only during queue creation; you can't change it for an
+    #     attribute only during queue creation. You can't change it for an
     #     existing queue. When you set this attribute, you must provide a
     #     `MessageGroupId` explicitly.
     #
@@ -130,10 +131,20 @@ module Aws::SQS
     #       `MessageDeduplicationId`, the two messages are treated as
     #       duplicates and only one copy of the message is delivered.
     #
-    #   Any other valid special request parameters that are specified (such as
-    #   `ApproximateNumberOfMessages`, `ApproximateNumberOfMessagesDelayed`,
-    #   `ApproximateNumberOfMessagesNotVisible`, `CreatedTimestamp`,
-    #   `LastModifiedTimestamp`, and `QueueArn`) will be ignored.
+    #   Any other valid special request parameters (such as the following) are
+    #   ignored:
+    #
+    #   * `ApproximateNumberOfMessages`
+    #
+    #   * `ApproximateNumberOfMessagesDelayed`
+    #
+    #   * `ApproximateNumberOfMessagesNotVisible`
+    #
+    #   * `CreatedTimestamp`
+    #
+    #   * `LastModifiedTimestamp`
+    #
+    #   * `QueueArn`
     #
     #
     #
@@ -161,8 +172,8 @@ module Aws::SQS
     # @param [Hash] options ({})
     # @option options [required, String] :queue_name
     #   The name of the queue whose URL must be fetched. Maximum 80
-    #   characters; alphanumeric characters, hyphens (-), and underscores (\_)
-    #   are allowed.
+    #   characters. Valid values: alphanumeric characters, hyphens (`-`), and
+    #   underscores (`_`).
     #
     #   Queue names are case-sensitive.
     # @option options [String] :queue_owner_aws_account_id

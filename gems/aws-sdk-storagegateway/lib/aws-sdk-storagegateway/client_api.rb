@@ -25,6 +25,7 @@ module Aws::StorageGateway
     BandwidthDownloadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthDownloadRateLimit')
     BandwidthType = Shapes::StringShape.new(name: 'BandwidthType')
     BandwidthUploadRateLimit = Shapes::IntegerShape.new(name: 'BandwidthUploadRateLimit')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CachediSCSIVolume = Shapes::StructureShape.new(name: 'CachediSCSIVolume')
     CachediSCSIVolumes = Shapes::ListShape.new(name: 'CachediSCSIVolumes')
     CancelArchivalInput = Shapes::StructureShape.new(name: 'CancelArchivalInput')
@@ -37,6 +38,8 @@ module Aws::StorageGateway
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CreateCachediSCSIVolumeInput = Shapes::StructureShape.new(name: 'CreateCachediSCSIVolumeInput')
     CreateCachediSCSIVolumeOutput = Shapes::StructureShape.new(name: 'CreateCachediSCSIVolumeOutput')
+    CreateNFSFileShareInput = Shapes::StructureShape.new(name: 'CreateNFSFileShareInput')
+    CreateNFSFileShareOutput = Shapes::StructureShape.new(name: 'CreateNFSFileShareOutput')
     CreateSnapshotFromVolumeRecoveryPointInput = Shapes::StructureShape.new(name: 'CreateSnapshotFromVolumeRecoveryPointInput')
     CreateSnapshotFromVolumeRecoveryPointOutput = Shapes::StructureShape.new(name: 'CreateSnapshotFromVolumeRecoveryPointOutput')
     CreateSnapshotInput = Shapes::StructureShape.new(name: 'CreateSnapshotInput')
@@ -47,11 +50,14 @@ module Aws::StorageGateway
     CreateTapeWithBarcodeOutput = Shapes::StructureShape.new(name: 'CreateTapeWithBarcodeOutput')
     CreateTapesInput = Shapes::StructureShape.new(name: 'CreateTapesInput')
     CreateTapesOutput = Shapes::StructureShape.new(name: 'CreateTapesOutput')
+    CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     DayOfWeek = Shapes::IntegerShape.new(name: 'DayOfWeek')
     DeleteBandwidthRateLimitInput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitInput')
     DeleteBandwidthRateLimitOutput = Shapes::StructureShape.new(name: 'DeleteBandwidthRateLimitOutput')
     DeleteChapCredentialsInput = Shapes::StructureShape.new(name: 'DeleteChapCredentialsInput')
     DeleteChapCredentialsOutput = Shapes::StructureShape.new(name: 'DeleteChapCredentialsOutput')
+    DeleteFileShareInput = Shapes::StructureShape.new(name: 'DeleteFileShareInput')
+    DeleteFileShareOutput = Shapes::StructureShape.new(name: 'DeleteFileShareOutput')
     DeleteGatewayInput = Shapes::StructureShape.new(name: 'DeleteGatewayInput')
     DeleteGatewayOutput = Shapes::StructureShape.new(name: 'DeleteGatewayOutput')
     DeleteSnapshotScheduleInput = Shapes::StructureShape.new(name: 'DeleteSnapshotScheduleInput')
@@ -74,6 +80,8 @@ module Aws::StorageGateway
     DescribeGatewayInformationOutput = Shapes::StructureShape.new(name: 'DescribeGatewayInformationOutput')
     DescribeMaintenanceStartTimeInput = Shapes::StructureShape.new(name: 'DescribeMaintenanceStartTimeInput')
     DescribeMaintenanceStartTimeOutput = Shapes::StructureShape.new(name: 'DescribeMaintenanceStartTimeOutput')
+    DescribeNFSFileSharesInput = Shapes::StructureShape.new(name: 'DescribeNFSFileSharesInput')
+    DescribeNFSFileSharesOutput = Shapes::StructureShape.new(name: 'DescribeNFSFileSharesOutput')
     DescribeSnapshotScheduleInput = Shapes::StructureShape.new(name: 'DescribeSnapshotScheduleInput')
     DescribeSnapshotScheduleOutput = Shapes::StructureShape.new(name: 'DescribeSnapshotScheduleOutput')
     DescribeStorediSCSIVolumesInput = Shapes::StructureShape.new(name: 'DescribeStorediSCSIVolumesInput')
@@ -102,6 +110,12 @@ module Aws::StorageGateway
     Disks = Shapes::ListShape.new(name: 'Disks')
     DoubleObject = Shapes::FloatShape.new(name: 'DoubleObject')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
+    FileShareARN = Shapes::StringShape.new(name: 'FileShareARN')
+    FileShareARNList = Shapes::ListShape.new(name: 'FileShareARNList')
+    FileShareId = Shapes::StringShape.new(name: 'FileShareId')
+    FileShareInfo = Shapes::StructureShape.new(name: 'FileShareInfo')
+    FileShareInfoList = Shapes::ListShape.new(name: 'FileShareInfoList')
+    FileShareStatus = Shapes::StringShape.new(name: 'FileShareStatus')
     GatewayARN = Shapes::StringShape.new(name: 'GatewayARN')
     GatewayId = Shapes::StringShape.new(name: 'GatewayId')
     GatewayInfo = Shapes::StructureShape.new(name: 'GatewayInfo')
@@ -118,7 +132,10 @@ module Aws::StorageGateway
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InvalidGatewayRequestException = Shapes::StructureShape.new(name: 'InvalidGatewayRequestException')
     IqnName = Shapes::StringShape.new(name: 'IqnName')
+    KMSKey = Shapes::StringShape.new(name: 'KMSKey')
     LastSoftwareUpdate = Shapes::StringShape.new(name: 'LastSoftwareUpdate')
+    ListFileSharesInput = Shapes::StructureShape.new(name: 'ListFileSharesInput')
+    ListFileSharesOutput = Shapes::StructureShape.new(name: 'ListFileSharesOutput')
     ListGatewaysInput = Shapes::StructureShape.new(name: 'ListGatewaysInput')
     ListGatewaysOutput = Shapes::StructureShape.new(name: 'ListGatewaysOutput')
     ListLocalDisksInput = Shapes::StructureShape.new(name: 'ListLocalDisksInput')
@@ -134,13 +151,20 @@ module Aws::StorageGateway
     ListVolumesInput = Shapes::StructureShape.new(name: 'ListVolumesInput')
     ListVolumesOutput = Shapes::StructureShape.new(name: 'ListVolumesOutput')
     LocalConsolePassword = Shapes::StringShape.new(name: 'LocalConsolePassword')
+    LocationARN = Shapes::StringShape.new(name: 'LocationARN')
     Marker = Shapes::StringShape.new(name: 'Marker')
     MediumChangerType = Shapes::StringShape.new(name: 'MediumChangerType')
     MinuteOfHour = Shapes::IntegerShape.new(name: 'MinuteOfHour')
+    NFSFileShareDefaults = Shapes::StructureShape.new(name: 'NFSFileShareDefaults')
+    NFSFileShareInfo = Shapes::StructureShape.new(name: 'NFSFileShareInfo')
+    NFSFileShareInfoList = Shapes::ListShape.new(name: 'NFSFileShareInfoList')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NextUpdateAvailabilityDate = Shapes::StringShape.new(name: 'NextUpdateAvailabilityDate')
     NumTapesToCreate = Shapes::IntegerShape.new(name: 'NumTapesToCreate')
+    Path = Shapes::StringShape.new(name: 'Path')
+    PermissionId = Shapes::IntegerShape.new(name: 'PermissionId')
+    PermissionMode = Shapes::StringShape.new(name: 'PermissionMode')
     PositiveIntObject = Shapes::IntegerShape.new(name: 'PositiveIntObject')
     RecurrenceInHours = Shapes::IntegerShape.new(name: 'RecurrenceInHours')
     RegionId = Shapes::StringShape.new(name: 'RegionId')
@@ -153,6 +177,8 @@ module Aws::StorageGateway
     RetrieveTapeArchiveOutput = Shapes::StructureShape.new(name: 'RetrieveTapeArchiveOutput')
     RetrieveTapeRecoveryPointInput = Shapes::StructureShape.new(name: 'RetrieveTapeRecoveryPointInput')
     RetrieveTapeRecoveryPointOutput = Shapes::StructureShape.new(name: 'RetrieveTapeRecoveryPointOutput')
+    Role = Shapes::StringShape.new(name: 'Role')
+    ServiceUnavailableError = Shapes::StructureShape.new(name: 'ServiceUnavailableError')
     SetLocalConsolePasswordInput = Shapes::StructureShape.new(name: 'SetLocalConsolePasswordInput')
     SetLocalConsolePasswordOutput = Shapes::StructureShape.new(name: 'SetLocalConsolePasswordOutput')
     ShutdownGatewayInput = Shapes::StructureShape.new(name: 'ShutdownGatewayInput')
@@ -161,6 +187,7 @@ module Aws::StorageGateway
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
     StartGatewayInput = Shapes::StructureShape.new(name: 'StartGatewayInput')
     StartGatewayOutput = Shapes::StructureShape.new(name: 'StartGatewayOutput')
+    StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageGatewayError = Shapes::StructureShape.new(name: 'StorageGatewayError')
     StorediSCSIVolume = Shapes::StructureShape.new(name: 'StorediSCSIVolume')
     StorediSCSIVolumes = Shapes::ListShape.new(name: 'StorediSCSIVolumes')
@@ -199,6 +226,8 @@ module Aws::StorageGateway
     UpdateGatewaySoftwareNowOutput = Shapes::StructureShape.new(name: 'UpdateGatewaySoftwareNowOutput')
     UpdateMaintenanceStartTimeInput = Shapes::StructureShape.new(name: 'UpdateMaintenanceStartTimeInput')
     UpdateMaintenanceStartTimeOutput = Shapes::StructureShape.new(name: 'UpdateMaintenanceStartTimeOutput')
+    UpdateNFSFileShareInput = Shapes::StructureShape.new(name: 'UpdateNFSFileShareInput')
+    UpdateNFSFileShareOutput = Shapes::StructureShape.new(name: 'UpdateNFSFileShareOutput')
     UpdateSnapshotScheduleInput = Shapes::StructureShape.new(name: 'UpdateSnapshotScheduleInput')
     UpdateSnapshotScheduleOutput = Shapes::StructureShape.new(name: 'UpdateSnapshotScheduleOutput')
     UpdateVTLDeviceTypeInput = Shapes::StructureShape.new(name: 'UpdateVTLDeviceTypeInput')
@@ -275,6 +304,7 @@ module Aws::StorageGateway
     CachediSCSIVolume.add_member(:volume_progress, Shapes::ShapeRef.new(shape: DoubleObject, location_name: "VolumeProgress"))
     CachediSCSIVolume.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SourceSnapshotId"))
     CachediSCSIVolume.add_member(:volume_iscsi_attributes, Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
+    CachediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
     CachediSCSIVolume.struct_class = Types::CachediSCSIVolume
 
     CachediSCSIVolumes.member = Shapes::ShapeRef.new(shape: CachediSCSIVolume)
@@ -305,6 +335,7 @@ module Aws::StorageGateway
     CreateCachediSCSIVolumeInput.add_member(:volume_size_in_bytes, Shapes::ShapeRef.new(shape: long, required: true, location_name: "VolumeSizeInBytes"))
     CreateCachediSCSIVolumeInput.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
     CreateCachediSCSIVolumeInput.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "TargetName"))
+    CreateCachediSCSIVolumeInput.add_member(:source_volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "SourceVolumeARN"))
     CreateCachediSCSIVolumeInput.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
     CreateCachediSCSIVolumeInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
     CreateCachediSCSIVolumeInput.struct_class = Types::CreateCachediSCSIVolumeInput
@@ -312,6 +343,19 @@ module Aws::StorageGateway
     CreateCachediSCSIVolumeOutput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, location_name: "VolumeARN"))
     CreateCachediSCSIVolumeOutput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
     CreateCachediSCSIVolumeOutput.struct_class = Types::CreateCachediSCSIVolumeOutput
+
+    CreateNFSFileShareInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, required: true, location_name: "ClientToken"))
+    CreateNFSFileShareInput.add_member(:nfs_file_share_defaults, Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
+    CreateNFSFileShareInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
+    CreateNFSFileShareInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
+    CreateNFSFileShareInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    CreateNFSFileShareInput.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
+    CreateNFSFileShareInput.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, required: true, location_name: "LocationARN"))
+    CreateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
+
+    CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    CreateNFSFileShareOutput.struct_class = Types::CreateNFSFileShareOutput
 
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     CreateSnapshotFromVolumeRecoveryPointInput.add_member(:snapshot_description, Shapes::ShapeRef.new(shape: SnapshotDescription, required: true, location_name: "SnapshotDescription"))
@@ -375,6 +419,12 @@ module Aws::StorageGateway
     DeleteChapCredentialsOutput.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "TargetARN"))
     DeleteChapCredentialsOutput.add_member(:initiator_name, Shapes::ShapeRef.new(shape: IqnName, location_name: "InitiatorName"))
     DeleteChapCredentialsOutput.struct_class = Types::DeleteChapCredentialsOutput
+
+    DeleteFileShareInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    DeleteFileShareInput.struct_class = Types::DeleteFileShareInput
+
+    DeleteFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    DeleteFileShareOutput.struct_class = Types::DeleteFileShareOutput
 
     DeleteGatewayInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, required: true, location_name: "GatewayARN"))
     DeleteGatewayInput.struct_class = Types::DeleteGatewayInput
@@ -462,6 +512,12 @@ module Aws::StorageGateway
     DescribeMaintenanceStartTimeOutput.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     DescribeMaintenanceStartTimeOutput.add_member(:timezone, Shapes::ShapeRef.new(shape: GatewayTimezone, location_name: "Timezone"))
     DescribeMaintenanceStartTimeOutput.struct_class = Types::DescribeMaintenanceStartTimeOutput
+
+    DescribeNFSFileSharesInput.add_member(:file_share_arn_list, Shapes::ShapeRef.new(shape: FileShareARNList, required: true, location_name: "FileShareARNList"))
+    DescribeNFSFileSharesInput.struct_class = Types::DescribeNFSFileSharesInput
+
+    DescribeNFSFileSharesOutput.add_member(:nfs_file_share_info_list, Shapes::ShapeRef.new(shape: NFSFileShareInfoList, location_name: "NFSFileShareInfoList"))
+    DescribeNFSFileSharesOutput.struct_class = Types::DescribeNFSFileSharesOutput
 
     DescribeSnapshotScheduleInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     DescribeSnapshotScheduleInput.struct_class = Types::DescribeSnapshotScheduleInput
@@ -562,6 +618,16 @@ module Aws::StorageGateway
 
     Disks.member = Shapes::ShapeRef.new(shape: Disk)
 
+    FileShareARNList.member = Shapes::ShapeRef.new(shape: FileShareARN)
+
+    FileShareInfo.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    FileShareInfo.add_member(:file_share_id, Shapes::ShapeRef.new(shape: FileShareId, location_name: "FileShareId"))
+    FileShareInfo.add_member(:file_share_status, Shapes::ShapeRef.new(shape: FileShareStatus, location_name: "FileShareStatus"))
+    FileShareInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    FileShareInfo.struct_class = Types::FileShareInfo
+
+    FileShareInfoList.member = Shapes::ShapeRef.new(shape: FileShareInfo)
+
     GatewayInfo.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, location_name: "GatewayId"))
     GatewayInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     GatewayInfo.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
@@ -574,6 +640,16 @@ module Aws::StorageGateway
     Gateways.member = Shapes::ShapeRef.new(shape: GatewayInfo)
 
     Initiators.member = Shapes::ShapeRef.new(shape: Initiator)
+
+    ListFileSharesInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    ListFileSharesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
+    ListFileSharesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListFileSharesInput.struct_class = Types::ListFileSharesInput
+
+    ListFileSharesOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListFileSharesOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
+    ListFileSharesOutput.add_member(:file_share_info_list, Shapes::ShapeRef.new(shape: FileShareInfoList, location_name: "FileShareInfoList"))
+    ListFileSharesOutput.struct_class = Types::ListFileSharesOutput
 
     ListGatewaysInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListGatewaysInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveIntObject, location_name: "Limit"))
@@ -631,6 +707,27 @@ module Aws::StorageGateway
     ListVolumesOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListVolumesOutput.add_member(:volume_infos, Shapes::ShapeRef.new(shape: VolumeInfos, location_name: "VolumeInfos"))
     ListVolumesOutput.struct_class = Types::ListVolumesOutput
+
+    NFSFileShareDefaults.add_member(:file_mode, Shapes::ShapeRef.new(shape: PermissionMode, location_name: "FileMode"))
+    NFSFileShareDefaults.add_member(:directory_mode, Shapes::ShapeRef.new(shape: PermissionMode, location_name: "DirectoryMode"))
+    NFSFileShareDefaults.add_member(:group_id, Shapes::ShapeRef.new(shape: PermissionId, location_name: "GroupId"))
+    NFSFileShareDefaults.add_member(:owner_id, Shapes::ShapeRef.new(shape: PermissionId, location_name: "OwnerId"))
+    NFSFileShareDefaults.struct_class = Types::NFSFileShareDefaults
+
+    NFSFileShareInfo.add_member(:nfs_file_share_defaults, Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
+    NFSFileShareInfo.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    NFSFileShareInfo.add_member(:file_share_id, Shapes::ShapeRef.new(shape: FileShareId, location_name: "FileShareId"))
+    NFSFileShareInfo.add_member(:file_share_status, Shapes::ShapeRef.new(shape: FileShareStatus, location_name: "FileShareStatus"))
+    NFSFileShareInfo.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
+    NFSFileShareInfo.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: boolean, location_name: "KMSEncrypted"))
+    NFSFileShareInfo.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    NFSFileShareInfo.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "Path"))
+    NFSFileShareInfo.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    NFSFileShareInfo.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
+    NFSFileShareInfo.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
+
+    NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
 
     NetworkInterface.add_member(:ipv_4_address, Shapes::ShapeRef.new(shape: string, location_name: "Ipv4Address"))
     NetworkInterface.add_member(:mac_address, Shapes::ShapeRef.new(shape: string, location_name: "MacAddress"))
@@ -697,6 +794,7 @@ module Aws::StorageGateway
     StorediSCSIVolume.add_member(:source_snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SourceSnapshotId"))
     StorediSCSIVolume.add_member(:preserved_existing_data, Shapes::ShapeRef.new(shape: boolean, location_name: "PreservedExistingData"))
     StorediSCSIVolume.add_member(:volume_iscsi_attributes, Shapes::ShapeRef.new(shape: VolumeiSCSIAttributes, location_name: "VolumeiSCSIAttributes"))
+    StorediSCSIVolume.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
     StorediSCSIVolume.struct_class = Types::StorediSCSIVolume
 
     StorediSCSIVolumes.member = Shapes::ShapeRef.new(shape: StorediSCSIVolume)
@@ -711,6 +809,7 @@ module Aws::StorageGateway
 
     Tape.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
     Tape.add_member(:tape_barcode, Shapes::ShapeRef.new(shape: TapeBarcode, location_name: "TapeBarcode"))
+    Tape.add_member(:tape_created_date, Shapes::ShapeRef.new(shape: Time, location_name: "TapeCreatedDate"))
     Tape.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
     Tape.add_member(:tape_status, Shapes::ShapeRef.new(shape: TapeStatus, location_name: "TapeStatus"))
     Tape.add_member(:vtl_device, Shapes::ShapeRef.new(shape: VTLDeviceARN, location_name: "VTLDevice"))
@@ -721,6 +820,7 @@ module Aws::StorageGateway
 
     TapeArchive.add_member(:tape_arn, Shapes::ShapeRef.new(shape: TapeARN, location_name: "TapeARN"))
     TapeArchive.add_member(:tape_barcode, Shapes::ShapeRef.new(shape: TapeBarcode, location_name: "TapeBarcode"))
+    TapeArchive.add_member(:tape_created_date, Shapes::ShapeRef.new(shape: Time, location_name: "TapeCreatedDate"))
     TapeArchive.add_member(:tape_size_in_bytes, Shapes::ShapeRef.new(shape: TapeSize, location_name: "TapeSizeInBytes"))
     TapeArchive.add_member(:completion_time, Shapes::ShapeRef.new(shape: Time, location_name: "CompletionTime"))
     TapeArchive.add_member(:retrieved_to, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "RetrievedTo"))
@@ -789,6 +889,16 @@ module Aws::StorageGateway
 
     UpdateMaintenanceStartTimeOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayARN, location_name: "GatewayARN"))
     UpdateMaintenanceStartTimeOutput.struct_class = Types::UpdateMaintenanceStartTimeOutput
+
+    UpdateNFSFileShareInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    UpdateNFSFileShareInput.add_member(:kms_encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "KMSEncrypted"))
+    UpdateNFSFileShareInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    UpdateNFSFileShareInput.add_member(:nfs_file_share_defaults, Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
+    UpdateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
+
+    UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    UpdateNFSFileShareOutput.struct_class = Types::UpdateNFSFileShareOutput
 
     UpdateSnapshotScheduleInput.add_member(:volume_arn, Shapes::ShapeRef.new(shape: VolumeARN, required: true, location_name: "VolumeARN"))
     UpdateSnapshotScheduleInput.add_member(:start_at, Shapes::ShapeRef.new(shape: HourOfDay, required: true, location_name: "StartAt"))
@@ -942,6 +1052,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:create_nfs_file_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNFSFileShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateNFSFileShareInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateNFSFileShareOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:create_snapshot, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateSnapshot"
         o.http_method = "POST"
@@ -950,6 +1070,7 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: CreateSnapshotOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:create_snapshot_from_volume_recovery_point, Seahorse::Model::Operation.new.tap do |o|
@@ -960,6 +1081,7 @@ module Aws::StorageGateway
         o.output = Shapes::ShapeRef.new(shape: CreateSnapshotFromVolumeRecoveryPointOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableError)
       end)
 
       api.add_operation(:create_stored_iscsi_volume, Seahorse::Model::Operation.new.tap do |o|
@@ -1008,6 +1130,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteChapCredentialsInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteChapCredentialsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:delete_file_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFileShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFileShareInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFileShareOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1122,6 +1254,16 @@ module Aws::StorageGateway
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_nfs_file_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeNFSFileShares"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeNFSFileSharesInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeNFSFileSharesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:describe_snapshot_schedule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSnapshotSchedule"
         o.http_method = "POST"
@@ -1232,6 +1374,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisableGatewayInput)
         o.output = Shapes::ShapeRef.new(shape: DisableGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:list_file_shares, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFileShares"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListFileSharesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListFileSharesOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -1434,6 +1586,16 @@ module Aws::StorageGateway
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateMaintenanceStartTimeInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateMaintenanceStartTimeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_nfs_file_share, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNFSFileShare"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNFSFileShareInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNFSFileShareOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)

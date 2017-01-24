@@ -1,5 +1,7 @@
-Unreleased Changes
+3.0.0.rc3 (2017-01-24)
 ------------------
+
+* Feature - Added a dependency on the new `aws-sdk-batch` gem.
 
 * Issue - Added an explicit `require 'aws-sdk-core'` statement to this gem at
   load time. This is necessary to allow users to interact with `Aws.config`

@@ -97,14 +97,22 @@ module Aws::CloudWatchLogs
     #
     #       {
     #         log_group_name: "LogGroupName", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The key-value pairs to use for the tags.
+    #   @return [Hash<String,String>]
+    #
     class CreateLogGroupRequest < Struct.new(
-      :log_group_name)
+      :log_group_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -630,13 +638,15 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] from
-    #   The start time. Events with a timestamp prior to this time are not
-    #   exported.
+    #   The start time, expressed as the number of milliseconds since Jan 1,
+    #   1970 00:00:00 UTC. Events with a timestamp prior to this time are
+    #   not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] to
-    #   The end time. Events with a timestamp later than this time are not
-    #   exported.
+    #   The end time, expressed as the number of milliseconds since Jan 1,
+    #   1970 00:00:00 UTC. Events with a timestamp later than this time are
+    #   not exported.
     #   @return [Integer]
     #
     # @!attribute [rw] destination
@@ -724,13 +734,15 @@ module Aws::CloudWatchLogs
     #   @return [Array<String>]
     #
     # @!attribute [rw] start_time
-    #   The start of the time range. Events with a timestamp prior to this
-    #   time are not returned.
+    #   The start of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to
+    #   this time are not returned.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
-    #   The end of the time range. Events with a timestamp later than this
-    #   time are not returned.
+    #   The end of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   this time are not returned.
     #   @return [Integer]
     #
     # @!attribute [rw] filter_pattern
@@ -797,7 +809,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The time the event occurred.
+    #   The time the event occurred, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -843,13 +856,15 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   The start of the time range. Events with a timestamp earlier than
+    #   The start of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than
     #   this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] end_time
-    #   The end of the time range. Events with a timestamp later than this
-    #   time are not included.
+    #   The end of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   this time are not included.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -913,7 +928,8 @@ module Aws::CloudWatchLogs
     #       }
     #
     # @!attribute [rw] timestamp
-    #   The time the event occurred.
+    #   The time the event occurred, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -923,6 +939,31 @@ module Aws::CloudWatchLogs
     class InputLogEvent < Struct.new(
       :timestamp,
       :message)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListTagsLogGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName", # required
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    class ListTagsLogGroupRequest < Struct.new(
+      :log_group_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags.
+    #   @return [Hash<String,String>]
+    #
+    class ListTagsLogGroupResponse < Struct.new(
+      :tags)
       include Aws::Structure
     end
 
@@ -976,11 +1017,13 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] first_event_timestamp
-    #   The time of the first event.
+    #   The time of the first event, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] last_event_timestamp
-    #   The time of the last event.
+    #   The time of the last event, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] last_ingestion_time
@@ -1110,7 +1153,8 @@ module Aws::CloudWatchLogs
     # Represents a log event.
     #
     # @!attribute [rw] timestamp
-    #   The time the event occurred.
+    #   The time the event occurred, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] message
@@ -1319,6 +1363,7 @@ module Aws::CloudWatchLogs
     #         filter_pattern: "FilterPattern", # required
     #         destination_arn: "DestinationArn", # required
     #         role_arn: "RoleArn",
+    #         distribution: "Random", # accepts Random, ByLogStream
     #       }
     #
     # @!attribute [rw] log_group_name
@@ -1357,12 +1402,20 @@ module Aws::CloudWatchLogs
     #   destination for cross-account delivery.
     #   @return [String]
     #
+    # @!attribute [rw] distribution
+    #   The method used to distribute log data to the destination, when the
+    #   destination is an Amazon Kinesis stream. By default, log data is
+    #   grouped by log stream. For a more even distribution, you can group
+    #   log data randomly.
+    #   @return [String]
+    #
     class PutSubscriptionFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
       :filter_pattern,
       :destination_arn,
-      :role_arn)
+      :role_arn,
+      :distribution)
       include Aws::Structure
     end
 
@@ -1427,6 +1480,11 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] role_arn
     #   @return [String]
     #
+    # @!attribute [rw] distribution
+    #   The method used to distribute log data to the destination, when the
+    #   destination is an Amazon Kinesis stream.
+    #   @return [String]
+    #
     # @!attribute [rw] creation_time
     #   The creation time of the subscription filter.
     #   @return [Integer]
@@ -1437,7 +1495,32 @@ module Aws::CloudWatchLogs
       :filter_pattern,
       :destination_arn,
       :role_arn,
+      :distribution,
       :creation_time)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagLogGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pairs to use for the tags.
+    #   @return [Hash<String,String>]
+    #
+    class TagLogGroupRequest < Struct.new(
+      :log_group_name,
+      :tags)
       include Aws::Structure
     end
 
@@ -1472,6 +1555,28 @@ module Aws::CloudWatchLogs
     #
     class TestMetricFilterResponse < Struct.new(
       :matches)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagLogGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         log_group_name: "LogGroupName", # required
+    #         tags: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag keys. The corresponding tags are removed from the log group.
+    #   @return [Array<String>]
+    #
+    class UntagLogGroupRequest < Struct.new(
+      :log_group_name,
+      :tags)
       include Aws::Structure
     end
 

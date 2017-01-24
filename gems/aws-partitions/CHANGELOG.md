@@ -1,5 +1,7 @@
-Unreleased Changes
+1.2.0 (2017-01-24)
 ------------------
+
+* Feature - Added support for enumerating regions for `Aws::Batch`.
 
 1.1.0 (2016-12-09)
 ------------------

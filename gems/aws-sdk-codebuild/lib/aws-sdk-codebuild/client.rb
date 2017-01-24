@@ -153,10 +153,10 @@ module Aws::CodeBuild
 
     # @!group API Operations
 
-    # Gets information about one or more builds.
+    # Gets information about builds.
     #
     # @option params [required, Array<String>] :ids
-    #   The IDs of the builds to get information about.
+    #   The IDs of the builds.
     #
     # @return [Types::BatchGetBuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -219,10 +219,10 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Gets information about one or more build projects.
+    # Gets information about build projects.
     #
     # @option params [required, Array<String>] :names
-    #   The names of the build projects to get information about.
+    #   The names of the build projects.
     #
     # @return [Types::BatchGetProjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -279,33 +279,33 @@ module Aws::CodeBuild
     # Creates a build project.
     #
     # @option params [required, String] :name
-    #   The build project's name.
+    #   The name of the build project.
     #
     # @option params [String] :description
-    #   A meaningful description of the build project.
+    #   A description that makes the build project easy to identify.
     #
     # @option params [required, Types::ProjectSource] :source
-    #   Information about the build project's build input source code.
+    #   Information about the build input source code for the build project.
     #
     # @option params [required, Types::ProjectArtifacts] :artifacts
-    #   Information about the build project's build output artifacts.
+    #   Information about the build output artifacts for the build project.
     #
     # @option params [required, Types::ProjectEnvironment] :environment
-    #   Information about the build project's build environment.
+    #   Information about the build environment for the build project.
     #
     # @option params [String] :service_role
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that enables AWS CodeBuild to interact with
-    #   dependent AWS services on behalf of the AWS account.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   enables AWS CodeBuild to interact with dependent AWS services on
+    #   behalf of the AWS account.
     #
     # @option params [Integer] :timeout_in_minutes
-    #   How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
-    #   wait until timing out any related build that does not get marked as
-    #   completed. The default is 60 minutes.
+    #   How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
+    #   wait until timing out any build that has not been marked as completed.
+    #   The default is 60 minutes.
     #
     # @option params [String] :encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK) to
-    #   be used for encrypting the build project's build output artifacts.
+    #   be used for encrypting the build output artifacts.
     #
     #   You can specify either the CMK's Amazon Resource Name (ARN) or, if
     #   available, the CMK's alias (using the format `alias/alias-name `).
@@ -405,7 +405,7 @@ module Aws::CodeBuild
     # Deletes a build project.
     #
     # @option params [required, String] :name
-    #   The name of the build project to delete.
+    #   The name of the build project.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -470,7 +470,7 @@ module Aws::CodeBuild
     # build ID representing a single build.
     #
     # @option params [required, String] :project_name
-    #   The name of the build project to get a list of build IDs for.
+    #   The name of the build project.
     #
     # @option params [String] :sort_order
     #   The order to list build IDs. Valid values include:
@@ -619,20 +619,20 @@ module Aws::CodeBuild
     #
     # @option params [Types::ProjectArtifacts] :artifacts_override
     #   Build output artifact settings that override, for this build only, the
-    #   latest ones already defined in the corresponding build project.
+    #   latest ones already defined in the build project.
     #
     # @option params [Array<Types::EnvironmentVariable>] :environment_variables_override
     #   A set of environment variables that overrides, for this build only,
-    #   the latest ones already defined in the corresponding build project.
+    #   the latest ones already defined in the build project.
     #
     # @option params [String] :buildspec_override
     #   A build spec declaration that overrides, for this build only, the
-    #   latest one already defined in the corresponding build project.
+    #   latest one already defined in the build project.
     #
     # @option params [Integer] :timeout_in_minutes_override
-    #   The number of build timeout minutes, from 5 to 480 (8 hours) that
+    #   The number of build timeout minutes, from 5 to 480 (8 hours), that
     #   overrides, for this build only, the latest setting already defined in
-    #   the corresponding build project.
+    #   the build project.
     #
     # @return [Types::StartBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -710,12 +710,8 @@ module Aws::CodeBuild
 
     # Attempts to stop running a build.
     #
-    # <note markdown="1"> Completed builds cannot be stopped.
-    #
-    #  </note>
-    #
     # @option params [required, String] :id
-    #   The ID of the build to attempt to stop running.
+    #   The ID of the build.
     #
     # @return [Types::StopBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -774,12 +770,12 @@ module Aws::CodeBuild
       req.send_request(options)
     end
 
-    # Changes the settings of an existing build project.
+    # Changes the settings of a build project.
     #
     # @option params [required, String] :name
-    #   The name of the existing build project to change settings.
+    #   The name of the build project.
     #
-    #   <note markdown="1"> You cannot change an existing build project's name.
+    #   <note markdown="1"> You cannot change a build project's name.
     #
     #    </note>
     #
@@ -787,31 +783,30 @@ module Aws::CodeBuild
     #   A new or replacement description of the build project.
     #
     # @option params [Types::ProjectSource] :source
-    #   Information to be changed about the build project's build input
-    #   source code.
+    #   Information to be changed about the build input source code for the
+    #   build project.
     #
     # @option params [Types::ProjectArtifacts] :artifacts
-    #   Information to be changed about the build project's build output
-    #   artifacts.
+    #   Information to be changed about the build output artifacts for the
+    #   build project.
     #
     # @option params [Types::ProjectEnvironment] :environment
-    #   Information to be changed about the build project's build
-    #   environment.
+    #   Information to be changed about the build environment for the build
+    #   project.
     #
     # @option params [String] :service_role
-    #   The replacement Amazon Resource Name (ARN) of the AWS Identity and
-    #   Access Management (IAM) role that enables AWS CodeBuild to interact
-    #   with dependent AWS services on behalf of the AWS account.
+    #   The replacement ARN of the AWS Identity and Access Management (IAM)
+    #   role that enables AWS CodeBuild to interact with dependent AWS
+    #   services on behalf of the AWS account.
     #
     # @option params [Integer] :timeout_in_minutes
     #   The replacement value in minutes, from 5 to 480 (8 hours), for AWS
-    #   CodeBuild to wait to timeout any related build that did not get marked
-    #   as completed.
+    #   CodeBuild to wait before timing out any related build that did not get
+    #   marked as completed.
     #
     # @option params [String] :encryption_key
     #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build project's build output
-    #   artifacts.
+    #   key (CMK) to be used for encrypting the build output artifacts.
     #
     #   You can specify either the CMK's Amazon Resource Name (ARN) or, if
     #   available, the CMK's alias (using the format `alias/alias-name `).

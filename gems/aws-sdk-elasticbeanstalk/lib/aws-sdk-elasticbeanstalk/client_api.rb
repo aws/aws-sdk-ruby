@@ -23,10 +23,13 @@ module Aws::ElasticBeanstalk
     ApplicationMetrics = Shapes::StructureShape.new(name: 'ApplicationMetrics')
     ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
     ApplicationNamesList = Shapes::ListShape.new(name: 'ApplicationNamesList')
+    ApplicationResourceLifecycleConfig = Shapes::StructureShape.new(name: 'ApplicationResourceLifecycleConfig')
+    ApplicationResourceLifecycleDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationResourceLifecycleDescriptionMessage')
     ApplicationVersionDescription = Shapes::StructureShape.new(name: 'ApplicationVersionDescription')
     ApplicationVersionDescriptionList = Shapes::ListShape.new(name: 'ApplicationVersionDescriptionList')
     ApplicationVersionDescriptionMessage = Shapes::StructureShape.new(name: 'ApplicationVersionDescriptionMessage')
     ApplicationVersionDescriptionsMessage = Shapes::StructureShape.new(name: 'ApplicationVersionDescriptionsMessage')
+    ApplicationVersionLifecycleConfig = Shapes::StructureShape.new(name: 'ApplicationVersionLifecycleConfig')
     ApplicationVersionProccess = Shapes::BooleanShape.new(name: 'ApplicationVersionProccess')
     ApplicationVersionStatus = Shapes::StringShape.new(name: 'ApplicationVersionStatus')
     ApplyEnvironmentManagedActionRequest = Shapes::StructureShape.new(name: 'ApplyEnvironmentManagedActionRequest')
@@ -36,6 +39,7 @@ module Aws::ElasticBeanstalk
     AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
     AvailableSolutionStackDetailsList = Shapes::ListShape.new(name: 'AvailableSolutionStackDetailsList')
     AvailableSolutionStackNamesList = Shapes::ListShape.new(name: 'AvailableSolutionStackNamesList')
+    BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInt = Shapes::IntegerShape.new(name: 'BoxedInt')
     BuildConfiguration = Shapes::StructureShape.new(name: 'BuildConfiguration')
     CPUUtilization = Shapes::StructureShape.new(name: 'CPUUtilization')
@@ -161,6 +165,8 @@ module Aws::ElasticBeanstalk
     ManagedActionHistoryItems = Shapes::ListShape.new(name: 'ManagedActionHistoryItems')
     ManagedActionInvalidStateException = Shapes::StructureShape.new(name: 'ManagedActionInvalidStateException')
     ManagedActions = Shapes::ListShape.new(name: 'ManagedActions')
+    MaxAgeRule = Shapes::StructureShape.new(name: 'MaxAgeRule')
+    MaxCountRule = Shapes::StructureShape.new(name: 'MaxCountRule')
     MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
     Message = Shapes::StringShape.new(name: 'Message')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -229,6 +235,7 @@ module Aws::ElasticBeanstalk
     Trigger = Shapes::StructureShape.new(name: 'Trigger')
     TriggerList = Shapes::ListShape.new(name: 'TriggerList')
     UpdateApplicationMessage = Shapes::StructureShape.new(name: 'UpdateApplicationMessage')
+    UpdateApplicationResourceLifecycleMessage = Shapes::StructureShape.new(name: 'UpdateApplicationResourceLifecycleMessage')
     UpdateApplicationVersionMessage = Shapes::StructureShape.new(name: 'UpdateApplicationVersionMessage')
     UpdateConfigurationTemplateMessage = Shapes::StructureShape.new(name: 'UpdateConfigurationTemplateMessage')
     UpdateDate = Shapes::TimestampShape.new(name: 'UpdateDate')
@@ -253,6 +260,7 @@ module Aws::ElasticBeanstalk
     ApplicationDescription.add_member(:date_updated, Shapes::ShapeRef.new(shape: UpdateDate, location_name: "DateUpdated"))
     ApplicationDescription.add_member(:versions, Shapes::ShapeRef.new(shape: VersionLabelsList, location_name: "Versions"))
     ApplicationDescription.add_member(:configuration_templates, Shapes::ShapeRef.new(shape: ConfigurationTemplateNamesList, location_name: "ConfigurationTemplates"))
+    ApplicationDescription.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, location_name: "ResourceLifecycleConfig"))
     ApplicationDescription.struct_class = Types::ApplicationDescription
 
     ApplicationDescriptionList.member = Shapes::ShapeRef.new(shape: ApplicationDescription)
@@ -270,6 +278,14 @@ module Aws::ElasticBeanstalk
     ApplicationMetrics.struct_class = Types::ApplicationMetrics
 
     ApplicationNamesList.member = Shapes::ShapeRef.new(shape: ApplicationName)
+
+    ApplicationResourceLifecycleConfig.add_member(:service_role, Shapes::ShapeRef.new(shape: String, location_name: "ServiceRole"))
+    ApplicationResourceLifecycleConfig.add_member(:version_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationVersionLifecycleConfig, location_name: "VersionLifecycleConfig"))
+    ApplicationResourceLifecycleConfig.struct_class = Types::ApplicationResourceLifecycleConfig
+
+    ApplicationResourceLifecycleDescriptionMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
+    ApplicationResourceLifecycleDescriptionMessage.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, location_name: "ResourceLifecycleConfig"))
+    ApplicationResourceLifecycleDescriptionMessage.struct_class = Types::ApplicationResourceLifecycleDescriptionMessage
 
     ApplicationVersionDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ApplicationVersionDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -290,6 +306,10 @@ module Aws::ElasticBeanstalk
     ApplicationVersionDescriptionsMessage.add_member(:application_versions, Shapes::ShapeRef.new(shape: ApplicationVersionDescriptionList, location_name: "ApplicationVersions"))
     ApplicationVersionDescriptionsMessage.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ApplicationVersionDescriptionsMessage.struct_class = Types::ApplicationVersionDescriptionsMessage
+
+    ApplicationVersionLifecycleConfig.add_member(:max_count_rule, Shapes::ShapeRef.new(shape: MaxCountRule, location_name: "MaxCountRule"))
+    ApplicationVersionLifecycleConfig.add_member(:max_age_rule, Shapes::ShapeRef.new(shape: MaxAgeRule, location_name: "MaxAgeRule"))
+    ApplicationVersionLifecycleConfig.struct_class = Types::ApplicationVersionLifecycleConfig
 
     ApplyEnvironmentManagedActionRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, location_name: "EnvironmentName"))
     ApplyEnvironmentManagedActionRequest.add_member(:environment_id, Shapes::ShapeRef.new(shape: String, location_name: "EnvironmentId"))
@@ -393,6 +413,7 @@ module Aws::ElasticBeanstalk
 
     CreateApplicationMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateApplicationMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateApplicationMessage.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, location_name: "ResourceLifecycleConfig"))
     CreateApplicationMessage.struct_class = Types::CreateApplicationMessage
 
     CreateApplicationVersionMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -702,6 +723,16 @@ module Aws::ElasticBeanstalk
 
     ManagedActions.member = Shapes::ShapeRef.new(shape: ManagedAction)
 
+    MaxAgeRule.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "Enabled"))
+    MaxAgeRule.add_member(:max_age_in_days, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "MaxAgeInDays"))
+    MaxAgeRule.add_member(:delete_source_from_s3, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "DeleteSourceFromS3"))
+    MaxAgeRule.struct_class = Types::MaxAgeRule
+
+    MaxCountRule.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "Enabled"))
+    MaxCountRule.add_member(:max_count, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "MaxCount"))
+    MaxCountRule.add_member(:delete_source_from_s3, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "DeleteSourceFromS3"))
+    MaxCountRule.struct_class = Types::MaxCountRule
+
     OptionRestrictionRegex.add_member(:pattern, Shapes::ShapeRef.new(shape: RegexPattern, location_name: "Pattern"))
     OptionRestrictionRegex.add_member(:label, Shapes::ShapeRef.new(shape: RegexLabel, location_name: "Label"))
     OptionRestrictionRegex.struct_class = Types::OptionRestrictionRegex
@@ -807,6 +838,10 @@ module Aws::ElasticBeanstalk
     UpdateApplicationMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     UpdateApplicationMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateApplicationMessage.struct_class = Types::UpdateApplicationMessage
+
+    UpdateApplicationResourceLifecycleMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
+    UpdateApplicationResourceLifecycleMessage.add_member(:resource_lifecycle_config, Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleConfig, required: true, location_name: "ResourceLifecycleConfig"))
+    UpdateApplicationResourceLifecycleMessage.struct_class = Types::UpdateApplicationResourceLifecycleMessage
 
     UpdateApplicationVersionMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     UpdateApplicationVersionMessage.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, required: true, location_name: "VersionLabel"))
@@ -1161,6 +1196,15 @@ module Aws::ElasticBeanstalk
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateApplicationMessage)
         o.output = Shapes::ShapeRef.new(shape: ApplicationDescriptionMessage)
+      end)
+
+      api.add_operation(:update_application_resource_lifecycle, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateApplicationResourceLifecycle"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateApplicationResourceLifecycleMessage)
+        o.output = Shapes::ShapeRef.new(shape: ApplicationResourceLifecycleDescriptionMessage)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
       end)
 
       api.add_operation(:update_application_version, Seahorse::Model::Operation.new.tap do |o|

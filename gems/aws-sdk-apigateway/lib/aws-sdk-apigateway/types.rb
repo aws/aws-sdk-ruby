@@ -2966,6 +2966,48 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Get an SdkType instance.
+    #
+    # @note When making an API call, you may pass GetSdkTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identifier of the queried SdkType instance.
+    #   @return [String]
+    #
+    class GetSdkTypeRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # Get the SdkTypes collection.
+    #
+    # @note When making an API call, you may pass GetSdkTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         position: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] position
+    #   The position of the last fetched element in the SdkTypes collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of SdkType instances to be returned.
+    #   @return [Integer]
+    #
+    class GetSdkTypesRequest < Struct.new(
+      :position,
+      :limit)
+      include Aws::Structure
+    end
+
     # Requests Amazon API Gateway to get information about a Stage resource.
     #
     # @note When making an API call, you may pass GetStageRequest
@@ -3309,13 +3351,12 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso">
-    # [Creating an API][1], [][2]
+    # [Creating an API][1]
     # </div>
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/.html
     #
     # @!attribute [rw] type
     #   Specifies the integration's type. The valid value is `HTTP` for
@@ -3345,7 +3386,7 @@ module Aws::APIGateway
     #
     #
     #
-    #   [1]: https://www.ietf.org/rfc/rfc3986.txt
+    #   [1]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
     #   @return [String]
     #
     # @!attribute [rw] credentials
@@ -3624,6 +3665,16 @@ module Aws::APIGateway
     #   invoke this method.
     #   @return [Boolean]
     #
+    # @!attribute [rw] operation_name
+    #   A human-friendly operation identifier for the method. For example,
+    #   you can assign the `operationName` of `ListPets` for the `GET /pets`
+    #   method in [PetStore][1] example.
+    #
+    #
+    #
+    #   [1]: http://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   @return [String]
+    #
     # @!attribute [rw] request_parameters
     #   A key-value map defining required or optional method request
     #   parameters that can be accepted by Amazon API Gateway. A key is a
@@ -3721,6 +3772,7 @@ module Aws::APIGateway
       :authorization_type,
       :authorizer_id,
       :api_key_required,
+      :operation_name,
       :request_parameters,
       :request_models,
       :method_responses,
@@ -4283,6 +4335,7 @@ module Aws::APIGateway
     #         authorization_type: "String", # required
     #         authorizer_id: "String",
     #         api_key_required: false,
+    #         operation_name: "String",
     #         request_parameters: {
     #           "String" => false,
     #         },
@@ -4316,6 +4369,16 @@ module Aws::APIGateway
     #   Specifies whether the method required a valid ApiKey.
     #   @return [Boolean]
     #
+    # @!attribute [rw] operation_name
+    #   A human-friendly operation identifier for the method. For example,
+    #   you can assign the `operationName` of `ListPets` for the `GET /pets`
+    #   method in [PetStore][1] example.
+    #
+    #
+    #
+    #   [1]: http://petstore-demo-endpoint.execute-api.com/petstore/pets
+    #   @return [String]
+    #
     # @!attribute [rw] request_parameters
     #   A key-value map defining required or optional method request
     #   parameters that can be accepted by Amazon API Gateway. A key defines
@@ -4342,6 +4405,7 @@ module Aws::APIGateway
       :authorization_type,
       :authorizer_id,
       :api_key_required,
+      :operation_name,
       :request_parameters,
       :request_models)
       include Aws::Structure
@@ -4667,6 +4731,39 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # A configuration property of an SDK type.
+    #
+    # @!attribute [rw] name
+    #   The name of a an SdkType configuration property.
+    #   @return [String]
+    #
+    # @!attribute [rw] friendly_name
+    #   The user-friendly name of an SdkType configuration property.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of an SdkType configuration property.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   A boolean flag of an SdkType configuration property to indicate if
+    #   the associated SDK configuration property is required (`true`) or
+    #   not (`false`).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of an SdkType configuration property.
+    #   @return [String]
+    #
+    class SdkConfigurationProperty < Struct.new(
+      :name,
+      :friendly_name,
+      :description,
+      :required,
+      :default_value)
+      include Aws::Structure
+    end
+
     # The binary blob response to GetSdk, which contains the generated SDK.
     #
     # @!attribute [rw] content_type
@@ -4686,6 +4783,48 @@ module Aws::APIGateway
       :content_type,
       :content_disposition,
       :body)
+      include Aws::Structure
+    end
+
+    # A type of SDK that API Gateway can generate.
+    #
+    # @!attribute [rw] id
+    #   The identifier of an SdkType instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] friendly_name
+    #   The user-friendly name of an SdkType instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of an SdkType.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration_properties
+    #   A list of configuration properties of an SdkType.
+    #   @return [Array<Types::SdkConfigurationProperty>]
+    #
+    class SdkType < Struct.new(
+      :id,
+      :friendly_name,
+      :description,
+      :configuration_properties)
+      include Aws::Structure
+    end
+
+    # The collection of SdkType instances.
+    #
+    # @!attribute [rw] position
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The set of SdkType items that comprise this view of the SdkTypes
+    #   collection.
+    #   @return [Array<Types::SdkType>]
+    #
+    class SdkTypes < Struct.new(
+      :position,
+      :items)
       include Aws::Structure
     end
 

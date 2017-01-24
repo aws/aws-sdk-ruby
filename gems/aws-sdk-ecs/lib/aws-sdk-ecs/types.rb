@@ -8,8 +8,14 @@
 module Aws::ECS
   module Types
 
-    # The attributes applicable to a container instance when it is
-    # registered.
+    # An attribute is a name-value pair associated with an Amazon ECS
+    # object. Attributes enable you to extend the Amazon ECS data model by
+    # adding custom metadata to your resources. For more information, see
+    # [Attributes][1] in the *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
     #
     # @note When making an API call, you may pass Attribute
     #   data as a hash:
@@ -17,21 +23,37 @@ module Aws::ECS
     #       {
     #         name: "String", # required
     #         value: "String",
+    #         target_type: "container-instance", # accepts container-instance
+    #         target_id: "String",
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the container instance attribute.
+    #   The name of the attribute. Up to 128 letters (uppercase and
+    #   lowercase), numbers, hyphens, underscores, and periods are allowed.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The value of the container instance attribute (at this time, the
-    #   value here is `Null`, but this could change in future revisions for
-    #   expandability).
+    #   The value of the attribute. Up to 128 letters (uppercase and
+    #   lowercase), numbers, hyphens, underscores, periods, at signs (@),
+    #   forward slashes, colons, and spaces are allowed.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the target with which to attach the attribute. This
+    #   parameter is required if you use the short form ID for a resource
+    #   instead of the full Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_id
+    #   The ID of the target. You can specify the short form ID for a
+    #   resource or the full Amazon Resource Name (ARN).
     #   @return [String]
     #
     class Attribute < Struct.new(
       :name,
-      :value)
+      :value,
+      :target_type,
+      :target_id)
       include Aws::Structure
     end
 
@@ -112,7 +134,7 @@ module Aws::ECS
     #
     # @!attribute [rw] reason
     #   A short (255 max characters) human-readable string to provide
-    #   additional detail about a running or stopped container.
+    #   additional details about a running or stopped container.
     #   @return [String]
     #
     # @!attribute [rw] network_bindings
@@ -230,6 +252,16 @@ module Aws::ECS
     #   slashes, and number signs are allowed. This parameter maps to
     #   `Image` in the [Create a container][1] section of the [Docker Remote
     #   API][2] and the `IMAGE` parameter of [docker run][3].
+    #
+    #   <note markdown="1"> Amazon ECS task definitions currently only support tags as image
+    #   identifiers within a specified repository (and not `sha256`
+    #   digests).
+    #
+    #    </note>
+    #
+    #   * Images in Amazon ECR repositories use the full registry and
+    #     repository URI (for example,
+    #     `012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>`).
     #
     #   * Images in official repositories on Docker Hub use a single name
     #     (for example, `ubuntu` or `mongo`).
@@ -690,8 +722,8 @@ module Aws::ECS
     #
     #   <note markdown="1"> Amazon ECS currently supports a subset of the logging drivers
     #   available to the Docker daemon (shown in the LogConfiguration data
-    #   type). Currently unsupported log drivers may be available in future
-    #   releases of the Amazon ECS container agent.
+    #   type). Additional log drivers may be available in future releases of
+    #   the Amazon ECS container agent.
     #
     #    </note>
     #
@@ -829,8 +861,9 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The attributes set for the container instance by the Amazon ECS
-    #   container agent at instance registration.
+    #   The attributes set for the container instance, either by the Amazon
+    #   ECS container agent at instance registration or manually with the
+    #   PutAttributes operation.
     #   @return [Array<Types::Attribute>]
     #
     class ContainerInstance < Struct.new(
@@ -938,6 +971,18 @@ module Aws::ECS
     #           maximum_percent: 1,
     #           minimum_healthy_percent: 1,
     #         },
+    #         placement_constraints: [
+    #           {
+    #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "String",
+    #           },
+    #         ],
+    #         placement_strategy: [
+    #           {
+    #             type: "random", # accepts random, spread, binpack
+    #             field: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cluster
@@ -963,10 +1008,10 @@ module Aws::ECS
     #
     # @!attribute [rw] load_balancers
     #   A load balancer object representing the load balancer to use with
-    #   your service. Currently, you are limited to one load balancer per
-    #   service. After you create a service, the load balancer name,
-    #   container name, and container port specified in the service
-    #   definition are immutable.
+    #   your service. Currently, you are limited to one load balancer or
+    #   target group per service. After you create a service, the load
+    #   balancer name or target group ARN, container name, and container
+    #   port specified in the service definition are immutable.
     #
     #   For Elastic Load Balancing Classic load balancers, this object must
     #   contain the load balancer name, the container name (as it appears in
@@ -1020,6 +1065,18 @@ module Aws::ECS
     #   tasks.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @!attribute [rw] placement_constraints
+    #   An array of placement constraint objects to use for tasks in your
+    #   service. You can specify a maximum of 10 constraints per task (this
+    #   limit includes constraints in the task definition and those
+    #   specified at run time).
+    #   @return [Array<Types::PlacementConstraint>]
+    #
+    # @!attribute [rw] placement_strategy
+    #   The placement strategy objects to use for tasks in your service. You
+    #   can specify a maximum of 5 strategy rules per service.
+    #   @return [Array<Types::PlacementStrategy>]
+    #
     class CreateServiceRequest < Struct.new(
       :cluster,
       :service_name,
@@ -1028,7 +1085,9 @@ module Aws::ECS
       :desired_count,
       :client_token,
       :role,
-      :deployment_configuration)
+      :deployment_configuration,
+      :placement_constraints,
+      :placement_strategy)
       include Aws::Structure
     end
 
@@ -1038,6 +1097,51 @@ module Aws::ECS
     #
     class CreateServiceResponse < Struct.new(
       :service)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String",
+    #         attributes: [ # required
+    #           {
+    #             name: "String", # required
+    #             value: "String",
+    #             target_type: "container-instance", # accepts container-instance
+    #             target_id: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that contains the resource to apply attributes. If you do not
+    #   specify a cluster, the default cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes to delete from your resource. You can specify up to
+    #   10 attributes per request. For custom attributes, specify the
+    #   attribute name and target ID, but do not specify the value. If you
+    #   specify the target ID using the short form, you must also specify
+    #   the target type.
+    #   @return [Array<Types::Attribute>]
+    #
+    class DeleteAttributesRequest < Struct.new(
+      :cluster,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   A list of attribute objects that were successfully deleted from your
+    #   resource.
+    #   @return [Array<Types::Attribute>]
+    #
+    class DeleteAttributesResponse < Struct.new(
+      :attributes)
       include Aws::Structure
     end
 
@@ -1168,7 +1272,7 @@ module Aws::ECS
     #   The upper limit (as a percentage of the service's `desiredCount`)
     #   of the number of tasks that are allowed in the `RUNNING` or
     #   `PENDING` state in a service during a deployment. The maximum number
-    #   of tasks during a deployment is the `desiredCount` multiplied by the
+    #   of tasks during a deployment is the `desiredCount` multiplied by
     #   `maximumPercent`/100, rounded down to the nearest integer value.
     #   @return [Integer]
     #
@@ -1176,7 +1280,7 @@ module Aws::ECS
     #   The lower limit (as a percentage of the service's `desiredCount`)
     #   of the number of running tasks that must remain in the `RUNNING`
     #   state in a service during a deployment. The minimum healthy tasks
-    #   during a deployment is the `desiredCount` multiplied by the
+    #   during a deployment is the `desiredCount` multiplied by
     #   `minimumHealthyPercent`/100, rounded up to the nearest integer
     #   value.
     #   @return [Integer]
@@ -1582,6 +1686,90 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String",
+    #         target_type: "container-instance", # required, accepts container-instance
+    #         attribute_name: "String",
+    #         attribute_value: "String",
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   list attributes. If you do not specify a cluster, the default
+    #   cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of the target with which to list attributes.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the attribute with which to filter the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value of the attribute with which to filter results. You must
+    #   also specify an attribute name to use this parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListAttributes` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value.
+    #   This value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of cluster results returned by `ListAttributes`
+    #   in paginated output. When this parameter is used, `ListAttributes`
+    #   only returns `maxResults` results in a single page along with a
+    #   `nextToken` response element. The remaining results of the initial
+    #   request can be seen by sending another `ListAttributes` request with
+    #   the returned `nextToken` value. This value can be between 1 and 100.
+    #   If this parameter is not used, then `ListAttributes` returns up to
+    #   100 results and a `nextToken` value if applicable.
+    #   @return [Integer]
+    #
+    class ListAttributesRequest < Struct.new(
+      :cluster,
+      :target_type,
+      :attribute_name,
+      :attribute_value,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   A list of attribute objects that meet the criteria of the request.
+    #   @return [Array<Types::Attribute>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `ListAttributes`
+    #   request. When the results of a `ListAttributes` request exceed
+    #   `maxResults`, this value can be used to retrieve the next page of
+    #   results. This value is `null` when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    class ListAttributesResponse < Struct.new(
+      :attributes,
+      :next_token)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListClustersRequest
     #   data as a hash:
     #
@@ -1644,14 +1832,27 @@ module Aws::ECS
     #
     #       {
     #         cluster: "String",
+    #         filter: "String",
     #         next_token: "String",
     #         max_results: 1,
+    #         status: "ACTIVE", # accepts ACTIVE, DRAINING
     #       }
     #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
     #   that hosts the container instances to list. If you do not specify a
     #   cluster, the default cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   You can filter the results of a `ListContainerInstances` operation
+    #   with cluster query language statements. For more information, see
+    #   [Cluster Query Language][1] in the *Amazon EC2 Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -1681,10 +1882,20 @@ module Aws::ECS
     #   100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
+    # @!attribute [rw] status
+    #   The container instance status with which to filter the
+    #   `ListContainerInstances` results. Specifying a container instance
+    #   status of `DRAINING` limits the results to container instances that
+    #   have been set to drain with the UpdateContainerInstancesState
+    #   operation.
+    #   @return [String]
+    #
     class ListContainerInstancesRequest < Struct.new(
       :cluster,
+      :filter,
       :next_token,
-      :max_results)
+      :max_results,
+      :status)
       include Aws::Structure
     end
 
@@ -2233,6 +2444,91 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # An object representing a constraint on task placement. For more
+    # information, see [Task Placement Constraints][1] in the *Amazon EC2
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
+    #
+    # @note When making an API call, you may pass PlacementConstraint
+    #   data as a hash:
+    #
+    #       {
+    #         type: "distinctInstance", # accepts distinctInstance, memberOf
+    #         expression: "String",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of constraint. Use `distinctInstance` to ensure that each
+    #   task in a particular group is running on a different container
+    #   instance. Use `memberOf` to restrict selection to a group of valid
+    #   candidates. Note that `distinctInstance` is not supported in task
+    #   definitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   A cluster query language expression to apply to the constraint. Note
+    #   you cannot specify an expression if the constraint type is
+    #   `distinctInstance`. For more information, see [Cluster Query
+    #   Language][1] in the *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   @return [String]
+    #
+    class PlacementConstraint < Struct.new(
+      :type,
+      :expression)
+      include Aws::Structure
+    end
+
+    # The task placement strategy for a task or service. For more
+    # information, see [Task Placement Strategies][1] in the *Amazon EC2
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
+    #
+    # @note When making an API call, you may pass PlacementStrategy
+    #   data as a hash:
+    #
+    #       {
+    #         type: "random", # accepts random, spread, binpack
+    #         field: "String",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of placement strategy. The `random` placement strategy
+    #   randomly places tasks on available candidates. The `spread`
+    #   placement strategy spreads placement across available candidates
+    #   evenly based on the `field` parameter. The `binpack` strategy places
+    #   tasks on available candidates that have the least available amount
+    #   of the resource that is specified with the `field` parameter. For
+    #   example, if you binpack on memory, a task is placed on the instance
+    #   with the least amount of remaining memory (but still enough to run
+    #   the task).
+    #   @return [String]
+    #
+    # @!attribute [rw] field
+    #   The field to apply the placement strategy against. For the `spread`
+    #   placement strategy, valid values are `instanceId` (or `host`, which
+    #   has the same effect), or any platform or custom attribute that is
+    #   applied to a container instance, such as
+    #   `attribute:ecs.availability-zone`. For the `binpack` placement
+    #   strategy, valid values are `cpu` and `memory`. For the `random`
+    #   placement strategy, this field is not used.
+    #   @return [String]
+    #
+    class PlacementStrategy < Struct.new(
+      :type,
+      :field)
+      include Aws::Structure
+    end
+
     # Port mappings allow containers to access ports on the host container
     # instance to send or receive traffic. Port mappings are specified as
     # part of the container definition. After a task reaches the `RUNNING`
@@ -2299,6 +2595,48 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String",
+    #         attributes: [ # required
+    #           {
+    #             name: "String", # required
+    #             value: "String",
+    #             target_type: "container-instance", # accepts container-instance
+    #             target_id: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that contains the resource to apply attributes. If you do not
+    #   specify a cluster, the default cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes to apply to your resource. You can specify up to 10
+    #   custom attributes per resource. You can specify up to 10 attributes
+    #   in a single call.
+    #   @return [Array<Types::Attribute>]
+    #
+    class PutAttributesRequest < Struct.new(
+      :cluster,
+      :attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attributes
+    #   The attributes applied to your resource.
+    #   @return [Array<Types::Attribute>]
+    #
+    class PutAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterContainerInstanceRequest
     #   data as a hash:
     #
@@ -2326,6 +2664,8 @@ module Aws::ECS
     #           {
     #             name: "String", # required
     #             value: "String",
+    #             target_type: "container-instance", # accepts container-instance
+    #             target_id: "String",
     #           },
     #         ],
     #       }
@@ -2474,6 +2814,12 @@ module Aws::ECS
     #             },
     #           },
     #         ],
+    #         placement_constraints: [
+    #           {
+    #             type: "memberOf", # accepts memberOf
+    #             expression: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] family
@@ -2529,12 +2875,20 @@ module Aws::ECS
     #   task may use.
     #   @return [Array<Types::Volume>]
     #
+    # @!attribute [rw] placement_constraints
+    #   An array of placement constraint objects to use for the task. You
+    #   can specify a maximum of 10 constraints per task (this limit
+    #   includes constraints in the task definition and those specified at
+    #   run time).
+    #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
+    #
     class RegisterTaskDefinitionRequest < Struct.new(
       :family,
       :task_role_arn,
       :network_mode,
       :container_definitions,
-      :volumes)
+      :volumes,
+      :placement_constraints)
       include Aws::Structure
     end
 
@@ -2562,7 +2916,7 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the resource, such as `CPU`, `MEMORY`, `PORTS`, or a
+    #   The name of the resource, such as `cpu`, `memory`, `ports`, or a
     #   user-defined resource.
     #   @return [String]
     #
@@ -2624,6 +2978,19 @@ module Aws::ECS
     #         },
     #         count: 1,
     #         started_by: "String",
+    #         group: "String",
+    #         placement_constraints: [
+    #           {
+    #             type: "distinctInstance", # accepts distinctInstance, memberOf
+    #             expression: "String",
+    #           },
+    #         ],
+    #         placement_strategy: [
+    #           {
+    #             type: "random", # accepts random, spread, binpack
+    #             field: "String",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] cluster
@@ -2656,9 +3023,7 @@ module Aws::ECS
     #
     # @!attribute [rw] count
     #   The number of instantiations of the specified task to place on your
-    #   cluster.
-    #
-    #   The `count` parameter is limited to 10 tasks per call.
+    #   cluster. You can specify up to 10 tasks per call.
     #   @return [Integer]
     #
     # @!attribute [rw] started_by
@@ -2674,12 +3039,32 @@ module Aws::ECS
     #   parameter contains the deployment ID of the service that starts it.
     #   @return [String]
     #
+    # @!attribute [rw] group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
+    #   @return [String]
+    #
+    # @!attribute [rw] placement_constraints
+    #   An array of placement constraint objects to use for the task. You
+    #   can specify up to 10 constraints per task (including constraints in
+    #   the task definition and those specified at run time).
+    #   @return [Array<Types::PlacementConstraint>]
+    #
+    # @!attribute [rw] placement_strategy
+    #   The placement strategy objects to use for the task. You can specify
+    #   a maximum of 5 strategy rules per task.
+    #   @return [Array<Types::PlacementStrategy>]
+    #
     class RunTaskRequest < Struct.new(
       :cluster,
       :task_definition,
       :overrides,
       :count,
-      :started_by)
+      :started_by,
+      :group,
+      :placement_constraints,
+      :placement_strategy)
       include Aws::Structure
     end
 
@@ -2779,6 +3164,15 @@ module Aws::ECS
     #   The Unix timestamp for when the service was created.
     #   @return [Time]
     #
+    # @!attribute [rw] placement_constraints
+    #   The placement constraints for the tasks in the service.
+    #   @return [Array<Types::PlacementConstraint>]
+    #
+    # @!attribute [rw] placement_strategy
+    #   The placement strategy that determines how tasks for the service are
+    #   placed.
+    #   @return [Array<Types::PlacementStrategy>]
+    #
     class Service < Struct.new(
       :service_arn,
       :service_name,
@@ -2793,7 +3187,9 @@ module Aws::ECS
       :deployments,
       :role_arn,
       :events,
-      :created_at)
+      :created_at,
+      :placement_constraints,
+      :placement_strategy)
       include Aws::Structure
     end
 
@@ -2841,6 +3237,7 @@ module Aws::ECS
     #         },
     #         container_instances: ["String"], # required
     #         started_by: "String",
+    #         group: "String",
     #       }
     #
     # @!attribute [rw] cluster
@@ -2874,9 +3271,7 @@ module Aws::ECS
     # @!attribute [rw] container_instances
     #   The container instance IDs or full Amazon Resource Name (ARN)
     #   entries for the container instances on which you would like to place
-    #   your task.
-    #
-    #   The list of container instances to start tasks on is limited to 10.
+    #   your task. You can specify up to 10 container instances.
     #   @return [Array<String>]
     #
     # @!attribute [rw] started_by
@@ -2892,12 +3287,19 @@ module Aws::ECS
     #   parameter contains the deployment ID of the service that starts it.
     #   @return [String]
     #
+    # @!attribute [rw] group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
+    #   @return [String]
+    #
     class StartTaskRequest < Struct.new(
       :cluster,
       :task_definition,
       :overrides,
       :container_instances,
-      :started_by)
+      :started_by,
+      :group)
       include Aws::Structure
     end
 
@@ -3147,6 +3549,10 @@ module Aws::ECS
     #   transitioned from the `RUNNING` state to the `STOPPED` state).
     #   @return [Time]
     #
+    # @!attribute [rw] group
+    #   The name of the task group associated with the task.
+    #   @return [String]
+    #
     class Task < Struct.new(
       :task_arn,
       :cluster_arn,
@@ -3161,7 +3567,8 @@ module Aws::ECS
       :stopped_reason,
       :created_at,
       :started_at,
-      :stopped_at)
+      :stopped_at,
+      :group)
       include Aws::Structure
     end
 
@@ -3239,6 +3646,10 @@ module Aws::ECS
     #   The container instance attributes required by your task.
     #   @return [Array<Types::Attribute>]
     #
+    # @!attribute [rw] placement_constraints
+    #   An array of placement constraint objects to use for tasks.
+    #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
+    #
     class TaskDefinition < Struct.new(
       :task_definition_arn,
       :container_definitions,
@@ -3248,7 +3659,47 @@ module Aws::ECS
       :revision,
       :volumes,
       :status,
-      :requires_attributes)
+      :requires_attributes,
+      :placement_constraints)
+      include Aws::Structure
+    end
+
+    # An object representing a constraint on task placement in the task
+    # definition. For more information, see [Task Placement Constraints][1]
+    # in the *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
+    #
+    # @note When making an API call, you may pass TaskDefinitionPlacementConstraint
+    #   data as a hash:
+    #
+    #       {
+    #         type: "memberOf", # accepts memberOf
+    #         expression: "String",
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of constraint. The `DistinctInstance` constraint ensures
+    #   that each task in a particular group is running on a different
+    #   container instance. The `MemberOf` constraint restricts selection to
+    #   be from a group of valid candidates.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   A cluster query language expression to apply to the constraint. For
+    #   more information, see [Cluster Query Language][1] in the *Amazon EC2
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
+    #   @return [String]
+    #
+    class TaskDefinitionPlacementConstraint < Struct.new(
+      :type,
+      :expression)
       include Aws::Structure
     end
 
@@ -3351,6 +3802,52 @@ module Aws::ECS
     #
     class UpdateContainerAgentResponse < Struct.new(
       :container_instance)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateContainerInstancesStateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cluster: "String",
+    #         container_instances: ["String"], # required
+    #         status: "ACTIVE", # required, accepts ACTIVE, DRAINING
+    #       }
+    #
+    # @!attribute [rw] cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the container instance to update. If you do not specify a
+    #   cluster, the default cluster is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] container_instances
+    #   A space-separated list of container instance IDs or full Amazon
+    #   Resource Name (ARN) entries.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The container instance state with which to update the container
+    #   instance.
+    #   @return [String]
+    #
+    class UpdateContainerInstancesStateRequest < Struct.new(
+      :cluster,
+      :container_instances,
+      :status)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] container_instances
+    #   The list of container instances.
+    #   @return [Array<Types::ContainerInstance>]
+    #
+    # @!attribute [rw] failures
+    #   Any failures associated with the call.
+    #   @return [Array<Types::Failure>]
+    #
+    class UpdateContainerInstancesStateResponse < Struct.new(
+      :container_instances,
+      :failures)
       include Aws::Structure
     end
 

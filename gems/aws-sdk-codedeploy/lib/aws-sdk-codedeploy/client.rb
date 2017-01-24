@@ -280,7 +280,7 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Get information about one or more deployment groups.
+    # Gets information about one or more deployment groups.
     #
     # @option params [required, String] :application_name
     #   The name of an AWS CodeDeploy application associated with the
@@ -473,6 +473,7 @@ module Aws::CodeDeploy
     #
     #   resp.instance_infos #=> Array
     #   resp.instance_infos[0].instance_name #=> String
+    #   resp.instance_infos[0].iam_session_arn #=> String
     #   resp.instance_infos[0].iam_user_arn #=> String
     #   resp.instance_infos[0].instance_arn #=> String
     #   resp.instance_infos[0].register_time #=> Time
@@ -670,61 +671,17 @@ module Aws::CodeDeploy
     #   deployment configuration that you create by calling the create
     #   deployment configuration operation.
     #
-    #   <note markdown="1"> CodeDeployDefault.OneAtATime is the default deployment configuration.
+    #   CodeDeployDefault.OneAtATime is the default deployment configuration.
     #   It is used if a configuration isn't specified for the deployment or
     #   the deployment group.
     #
-    #    </note>
+    #   For more information about the predefined deployment configurations in
+    #   AWS CodeDeploy, see see [Working with Deployment Groups in AWS
+    #   CodeDeploy][1] in the AWS CodeDeploy User Guide.
     #
-    #   The predefined deployment configurations include the following:
     #
-    #   * **CodeDeployDefault.AllAtOnce** attempts to deploy an application
-    #     revision to as many instances as possible at once. The status of the
-    #     overall deployment will be displayed as **Succeeded** if the
-    #     application revision is deployed to one or more of the instances.
-    #     The status of the overall deployment will be displayed as **Failed**
-    #     if the application revision is not deployed to any of the instances.
-    #     Using an example of nine instances, CodeDeployDefault.AllAtOnce will
-    #     attempt to deploy to all nine instances at once. The overall
-    #     deployment will succeed if deployment to even a single instance is
-    #     successful; it will fail only if deployments to all nine instances
-    #     fail.
     #
-    #   * **CodeDeployDefault.HalfAtATime** deploys to up to half of the
-    #     instances at a time (with fractions rounded down). The overall
-    #     deployment succeeds if the application revision is deployed to at
-    #     least half of the instances (with fractions rounded up); otherwise,
-    #     the deployment fails. In the example of nine instances, it will
-    #     deploy to up to four instances at a time. The overall deployment
-    #     succeeds if deployment to five or more instances succeed; otherwise,
-    #     the deployment fails. The deployment may be successfully deployed to
-    #     some instances even if the overall deployment fails.
-    #
-    #   * **CodeDeployDefault.OneAtATime** deploys the application revision to
-    #     only one instance at a time.
-    #
-    #     For deployment groups that contain more than one instance:
-    #
-    #     * The overall deployment succeeds if the application revision is
-    #       deployed to all of the instances. The exception to this rule is if
-    #       deployment to the last instance fails, the overall deployment
-    #       still succeeds. This is because AWS CodeDeploy allows only one
-    #       instance at a time to be taken offline with the
-    #       CodeDeployDefault.OneAtATime configuration.
-    #
-    #     * The overall deployment fails as soon as the application revision
-    #       fails to be deployed to any but the last instance. The deployment
-    #       may be successfully deployed to some instances even if the overall
-    #       deployment fails.
-    #
-    #     * In an example using nine instances, it will deploy to one instance
-    #       at a time. The overall deployment succeeds if deployment to the
-    #       first eight instances is successful; the overall deployment fails
-    #       if deployment to any of the first eight instances fails.
-    #
-    #     For deployment groups that contain only one instance, the overall
-    #     deployment is successful only if deployment to the single instance
-    #     is successful
+    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
     #
     # @option params [Array<Types::EC2TagFilter>] :ec2_tag_filters
     #   The Amazon EC2 tags on which to filter.
@@ -1223,6 +1180,7 @@ module Aws::CodeDeploy
     # @example Response structure
     #
     #   resp.instance_info.instance_name #=> String
+    #   resp.instance_info.iam_session_arn #=> String
     #   resp.instance_info.iam_user_arn #=> String
     #   resp.instance_info.instance_arn #=> String
     #   resp.instance_info.register_time #=> Time
@@ -1657,10 +1615,18 @@ module Aws::CodeDeploy
 
     # Registers an on-premises instance.
     #
+    # <note markdown="1"> Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in
+    # the request. You cannot use both.
+    #
+    #  </note>
+    #
     # @option params [required, String] :instance_name
     #   The name of the on-premises instance to register.
     #
-    # @option params [required, String] :iam_user_arn
+    # @option params [String] :iam_session_arn
+    #   The ARN of the IAM session to associate with the on-premises instance.
+    #
+    # @option params [String] :iam_user_arn
     #   The ARN of the IAM user to associate with the on-premises instance.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1669,7 +1635,8 @@ module Aws::CodeDeploy
     #
     #   resp = client.register_on_premises_instance({
     #     instance_name: "InstanceName", # required
-    #     iam_user_arn: "IamUserArn", # required
+    #     iam_session_arn: "IamSessionArn",
+    #     iam_user_arn: "IamUserArn",
     #   })
     #
     # @overload register_on_premises_instance(params = {})

@@ -706,7 +706,8 @@ module Aws::ElastiCache
     #   `redis`.
     #
     # @option params [String] :auth_token
-    #   The password used to access a password protected server.
+    #   **Reserved parameter.** The password used to access a password
+    #   protected server.
     #
     #   Password constraints:
     #
@@ -1285,7 +1286,8 @@ module Aws::ElastiCache
     #    </note>
     #
     # @option params [String] :auth_token
-    #   The password used to access a password protected server.
+    #   **Reserved parameter.** The password used to access a password
+    #   protected server.
     #
     #   Password constraints:
     #

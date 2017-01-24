@@ -9,6 +9,7 @@ module Aws
   autoload :ApplicationAutoScaling, 'aws-sdk-applicationautoscaling'
   autoload :ApplicationDiscoveryService, 'aws-sdk-applicationdiscoveryservice'
   autoload :AutoScaling, 'aws-sdk-autoscaling'
+  autoload :Batch, 'aws-sdk-batch'
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :CloudFormation, 'aws-sdk-cloudformation'
   autoload :CloudFront, 'aws-sdk-cloudfront'

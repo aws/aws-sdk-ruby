@@ -623,6 +623,80 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Creates a patch baseline.
+    #
+    # @option params [required, String] :name
+    #   The name of the patch baseline.
+    #
+    # @option params [Types::PatchFilterGroup] :global_filters
+    #   A set of global filters used to exclude patches from the baseline.
+    #
+    # @option params [Types::PatchRuleGroup] :approval_rules
+    #   A set of rules used to include patches in the baseline.
+    #
+    # @option params [Array<String>] :approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #
+    # @option params [Array<String>] :rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #
+    # @option params [String] :description
+    #   A description of the patch baseline.
+    #
+    # @option params [String] :client_token
+    #   Caller-provided idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePatchBaselineResult#baseline_id #baseline_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_patch_baseline({
+    #     name: "BaselineName", # required
+    #     global_filters: {
+    #       patch_filters: [ # required
+    #         {
+    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #           values: ["PatchFilterValue"], # required
+    #         },
+    #       ],
+    #     },
+    #     approval_rules: {
+    #       patch_rules: [ # required
+    #         {
+    #           patch_filter_group: { # required
+    #             patch_filters: [ # required
+    #               {
+    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                 values: ["PatchFilterValue"], # required
+    #               },
+    #             ],
+    #           },
+    #           approve_after_days: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     approved_patches: ["PatchId"],
+    #     rejected_patches: ["PatchId"],
+    #     description: "BaselineDescription",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #
+    # @overload create_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def create_patch_baseline(params = {}, options = {})
+      req = build_request(:create_patch_baseline, params)
+      req.send_request(options)
+    end
+
     # Deletes an activation. You are not required to delete an activation.
     # If you delete an activation, you can no longer use it to register
     # additional managed instances. Deleting an activation does not
@@ -752,6 +826,32 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Deletes a patch baseline.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline to delete.
+    #
+    # @return [Types::DeletePatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePatchBaselineResult#baseline_id #baseline_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_patch_baseline({
+    #     baseline_id: "BaselineId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #
+    # @overload delete_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def delete_patch_baseline(params = {}, options = {})
+      req = build_request(:delete_patch_baseline, params)
+      req.send_request(options)
+    end
+
     # Removes the server or virtual machine from the list of registered
     # servers. You can reregister the instance again at any time. If you
     # don’t plan to use Run Command on the server, we suggest uninstalling
@@ -773,6 +873,39 @@ module Aws::SSM
     # @param [Hash] params ({})
     def deregister_managed_instance(params = {}, options = {})
       req = build_request(:deregister_managed_instance, params)
+      req.send_request(options)
+    end
+
+    # Removes a patch group from a patch baseline.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline to deregister the patch group from.
+    #
+    # @option params [required, String] :patch_group
+    #   The name of the patch group that should be deregistered from the patch
+    #   baseline.
+    #
+    # @return [Types::DeregisterPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterPatchBaselineForPatchGroupResult#baseline_id #baseline_id} => String
+    #   * {Types::DeregisterPatchBaselineForPatchGroupResult#patch_group #patch_group} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_patch_baseline_for_patch_group({
+    #     baseline_id: "BaselineId", # required
+    #     patch_group: "PatchGroup", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #   resp.patch_group #=> String
+    #
+    # @overload deregister_patch_baseline_for_patch_group(params = {})
+    # @param [Hash] params ({})
+    def deregister_patch_baseline_for_patch_group(params = {}, options = {})
+      req = build_request(:deregister_patch_baseline_for_patch_group, params)
       req.send_request(options)
     end
 
@@ -1012,6 +1145,61 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Lists all patches that could possibly be included in a patch baseline.
+    #
+    # @option params [Array<Types::PatchOrchestratorFilter>] :filters
+    #   Filters used to scope down the returned patches.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of patches to return (per page).
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeAvailablePatchesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAvailablePatchesResult#patches #patches} => Array&lt;Types::Patch&gt;
+    #   * {Types::DescribeAvailablePatchesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_available_patches({
+    #     filters: [
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.patches #=> Array
+    #   resp.patches[0].id #=> String
+    #   resp.patches[0].release_date #=> Time
+    #   resp.patches[0].title #=> String
+    #   resp.patches[0].description #=> String
+    #   resp.patches[0].content_url #=> String
+    #   resp.patches[0].vendor #=> String
+    #   resp.patches[0].product_family #=> String
+    #   resp.patches[0].product #=> String
+    #   resp.patches[0].classification #=> String
+    #   resp.patches[0].msrc_severity #=> String
+    #   resp.patches[0].kb_number #=> String
+    #   resp.patches[0].msrc_number #=> String
+    #   resp.patches[0].language #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_available_patches(params = {})
+    # @param [Hash] params ({})
+    def describe_available_patches(params = {}, options = {})
+      req = build_request(:describe_available_patches, params)
+      req.send_request(options)
+    end
+
     # Describes the specified SSM document.
     #
     # @option params [required, String] :name
@@ -1136,6 +1324,59 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_effective_instance_associations(params = {}, options = {})
       req = build_request(:describe_effective_instance_associations, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current effective patches (the patch and the approval
+    # state) for the specified patch baseline.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline to retrieve the effective patches for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of patches to return (per page).
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribeEffectivePatchesForPatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEffectivePatchesForPatchBaselineResult#effective_patches #effective_patches} => Array&lt;Types::EffectivePatch&gt;
+    #   * {Types::DescribeEffectivePatchesForPatchBaselineResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_effective_patches_for_patch_baseline({
+    #     baseline_id: "BaselineId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.effective_patches #=> Array
+    #   resp.effective_patches[0].patch.id #=> String
+    #   resp.effective_patches[0].patch.release_date #=> Time
+    #   resp.effective_patches[0].patch.title #=> String
+    #   resp.effective_patches[0].patch.description #=> String
+    #   resp.effective_patches[0].patch.content_url #=> String
+    #   resp.effective_patches[0].patch.vendor #=> String
+    #   resp.effective_patches[0].patch.product_family #=> String
+    #   resp.effective_patches[0].patch.product #=> String
+    #   resp.effective_patches[0].patch.classification #=> String
+    #   resp.effective_patches[0].patch.msrc_severity #=> String
+    #   resp.effective_patches[0].patch.kb_number #=> String
+    #   resp.effective_patches[0].patch.msrc_number #=> String
+    #   resp.effective_patches[0].patch.language #=> String
+    #   resp.effective_patches[0].patch_status.deployment_status #=> String, one of "APPROVED", "PENDING_APPROVAL", "EXPLICIT_APPROVED", "EXPLICIT_REJECTED"
+    #   resp.effective_patches[0].patch_status.approval_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload describe_effective_patches_for_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def describe_effective_patches_for_patch_baseline(params = {}, options = {})
+      req = build_request(:describe_effective_patches_for_patch_baseline, params)
       req.send_request(options)
     end
 
@@ -1267,6 +1508,184 @@ module Aws::SSM
     # @param [Hash] params ({})
     def describe_instance_information(params = {}, options = {})
       req = build_request(:describe_instance_information, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the high-level patch state of one or more instances.
+    #
+    # @option params [required, Array<String>] :instance_ids
+    #   The ID of the instance whose patch state information should be
+    #   retrieved.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of instances to return (per page).
+    #
+    # @return [Types::DescribeInstancePatchStatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstancePatchStatesResult#instance_patch_states #instance_patch_states} => Array&lt;Types::InstancePatchState&gt;
+    #   * {Types::DescribeInstancePatchStatesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_patch_states({
+    #     instance_ids: ["InstanceId"], # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_patch_states #=> Array
+    #   resp.instance_patch_states[0].instance_id #=> String
+    #   resp.instance_patch_states[0].patch_group #=> String
+    #   resp.instance_patch_states[0].baseline_id #=> String
+    #   resp.instance_patch_states[0].snapshot_id #=> String
+    #   resp.instance_patch_states[0].owner_information #=> String
+    #   resp.instance_patch_states[0].installed_count #=> Integer
+    #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].missing_count #=> Integer
+    #   resp.instance_patch_states[0].failed_count #=> Integer
+    #   resp.instance_patch_states[0].not_applicable_count #=> Integer
+    #   resp.instance_patch_states[0].operation_start_time #=> Time
+    #   resp.instance_patch_states[0].operation_end_time #=> Time
+    #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
+    #   resp.next_token #=> String
+    #
+    # @overload describe_instance_patch_states(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_patch_states(params = {}, options = {})
+      req = build_request(:describe_instance_patch_states, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the high-level patch state for the instances in the
+    # specified patch group.
+    #
+    # @option params [required, String] :patch_group
+    #   The name of the patch group for which the patch state information
+    #   should be retrieved.
+    #
+    # @option params [Array<Types::InstancePatchStateFilter>] :filters
+    #   Each entry in the array is a structure containing:
+    #
+    #   Key (string 1 ≤ length ≤ 200)
+    #
+    #   Values (array containing a single string)
+    #
+    #   Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of patches to return (per page).
+    #
+    # @return [Types::DescribeInstancePatchStatesForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstancePatchStatesForPatchGroupResult#instance_patch_states #instance_patch_states} => Array&lt;Types::InstancePatchState&gt;
+    #   * {Types::DescribeInstancePatchStatesForPatchGroupResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_patch_states_for_patch_group({
+    #     patch_group: "PatchGroup", # required
+    #     filters: [
+    #       {
+    #         key: "InstancePatchStateFilterKey", # required
+    #         values: ["InstancePatchStateFilterValue"], # required
+    #         type: "Equal", # required, accepts Equal, NotEqual, LessThan, GreaterThan
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_patch_states #=> Array
+    #   resp.instance_patch_states[0].instance_id #=> String
+    #   resp.instance_patch_states[0].patch_group #=> String
+    #   resp.instance_patch_states[0].baseline_id #=> String
+    #   resp.instance_patch_states[0].snapshot_id #=> String
+    #   resp.instance_patch_states[0].owner_information #=> String
+    #   resp.instance_patch_states[0].installed_count #=> Integer
+    #   resp.instance_patch_states[0].installed_other_count #=> Integer
+    #   resp.instance_patch_states[0].missing_count #=> Integer
+    #   resp.instance_patch_states[0].failed_count #=> Integer
+    #   resp.instance_patch_states[0].not_applicable_count #=> Integer
+    #   resp.instance_patch_states[0].operation_start_time #=> Time
+    #   resp.instance_patch_states[0].operation_end_time #=> Time
+    #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
+    #   resp.next_token #=> String
+    #
+    # @overload describe_instance_patch_states_for_patch_group(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_patch_states_for_patch_group(params = {}, options = {})
+      req = build_request(:describe_instance_patch_states_for_patch_group, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about the patches on the specified instance and
+    # their state relative to the patch baseline being used for the
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance whose patch state information should be
+    #   retrieved.
+    #
+    # @option params [Array<Types::PatchOrchestratorFilter>] :filters
+    #   Each entry in the array is a structure containing:
+    #
+    #   Key (string, 1 ≤ length ≤ 128)
+    #
+    #   Values (array of strings 1 ≤ length ≤ 256)
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of patches to return (per page).
+    #
+    # @return [Types::DescribeInstancePatchesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeInstancePatchesResult#patches #patches} => Array&lt;Types::PatchComplianceData&gt;
+    #   * {Types::DescribeInstancePatchesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_instance_patches({
+    #     instance_id: "InstanceId", # required
+    #     filters: [
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.patches #=> Array
+    #   resp.patches[0].title #=> String
+    #   resp.patches[0].kb_id #=> String
+    #   resp.patches[0].classification #=> String
+    #   resp.patches[0].severity #=> String
+    #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "MISSING", "NOT_APPLICABLE", "FAILED"
+    #   resp.patches[0].installed_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload describe_instance_patches(params = {})
+    # @param [Hash] params ({})
+    def describe_instance_patches(params = {}, options = {})
+      req = build_request(:describe_instance_patches, params)
       req.send_request(options)
     end
 
@@ -1688,6 +2107,131 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Lists the patch baselines in your AWS account.
+    #
+    # @option params [Array<Types::PatchOrchestratorFilter>] :filters
+    #   Each element in the array is a structure containing:
+    #
+    #   Key: (string, “NAME\_PREFIX” or “OWNER”)
+    #
+    #   Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of patch baselines to return (per page).
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribePatchBaselinesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePatchBaselinesResult#baseline_identities #baseline_identities} => Array&lt;Types::PatchBaselineIdentity&gt;
+    #   * {Types::DescribePatchBaselinesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_patch_baselines({
+    #     filters: [
+    #       {
+    #         key: "PatchOrchestratorFilterKey",
+    #         values: ["PatchOrchestratorFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_identities #=> Array
+    #   resp.baseline_identities[0].baseline_id #=> String
+    #   resp.baseline_identities[0].baseline_name #=> String
+    #   resp.baseline_identities[0].baseline_description #=> String
+    #   resp.baseline_identities[0].default_baseline #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @overload describe_patch_baselines(params = {})
+    # @param [Hash] params ({})
+    def describe_patch_baselines(params = {}, options = {})
+      req = build_request(:describe_patch_baselines, params)
+      req.send_request(options)
+    end
+
+    # Returns high-level aggregated patch compliance state for a patch
+    # group.
+    #
+    # @option params [required, String] :patch_group
+    #   The name of the patch group whose patch snapshot should be retrieved.
+    #
+    # @return [Types::DescribePatchGroupStateResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePatchGroupStateResult#instances #instances} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_installed_patches #instances_with_installed_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_installed_other_patches #instances_with_installed_other_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_missing_patches #instances_with_missing_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_failed_patches #instances_with_failed_patches} => Integer
+    #   * {Types::DescribePatchGroupStateResult#instances_with_not_applicable_patches #instances_with_not_applicable_patches} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_patch_group_state({
+    #     patch_group: "PatchGroup", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instances #=> Integer
+    #   resp.instances_with_installed_patches #=> Integer
+    #   resp.instances_with_installed_other_patches #=> Integer
+    #   resp.instances_with_missing_patches #=> Integer
+    #   resp.instances_with_failed_patches #=> Integer
+    #   resp.instances_with_not_applicable_patches #=> Integer
+    #
+    # @overload describe_patch_group_state(params = {})
+    # @param [Hash] params ({})
+    def describe_patch_group_state(params = {}, options = {})
+      req = build_request(:describe_patch_group_state, params)
+      req.send_request(options)
+    end
+
+    # Lists all patch groups that have been registered with patch baselines.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of patch groups to return (per page).
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of items to return. (You received this
+    #   token from a previous call.)
+    #
+    # @return [Types::DescribePatchGroupsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePatchGroupsResult#mappings #mappings} => Array&lt;Types::PatchGroupPatchBaselineMapping&gt;
+    #   * {Types::DescribePatchGroupsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_patch_groups({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mappings #=> Array
+    #   resp.mappings[0].patch_group #=> String
+    #   resp.mappings[0].baseline_identity.baseline_id #=> String
+    #   resp.mappings[0].baseline_identity.baseline_name #=> String
+    #   resp.mappings[0].baseline_identity.baseline_description #=> String
+    #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @overload describe_patch_groups(params = {})
+    # @param [Hash] params ({})
+    def describe_patch_groups(params = {}, options = {})
+      req = build_request(:describe_patch_groups, params)
+      req.send_request(options)
+    end
+
     # Get detailed information about a particular Automation execution.
     #
     # @option params [required, String] :automation_execution_id
@@ -1806,6 +2350,60 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_command_invocation(params = {}, options = {})
       req = build_request(:get_command_invocation, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the default patch baseline.
+    #
+    # @return [Types::GetDefaultPatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDefaultPatchBaselineResult#baseline_id #baseline_id} => String
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #
+    # @overload get_default_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def get_default_patch_baseline(params = {}, options = {})
+      req = build_request(:get_default_patch_baseline, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current snapshot for the patch baseline the instance
+    # uses. This API is primarily used by the AWS-ApplyPatchBaseline Systems
+    # Manager document.
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance for which the appropriate patch snapshot should
+    #   be retrieved.
+    #
+    # @option params [required, String] :snapshot_id
+    #   The user-defined snapshot ID.
+    #
+    # @return [Types::GetDeployablePatchSnapshotForInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDeployablePatchSnapshotForInstanceResult#instance_id #instance_id} => String
+    #   * {Types::GetDeployablePatchSnapshotForInstanceResult#snapshot_id #snapshot_id} => String
+    #   * {Types::GetDeployablePatchSnapshotForInstanceResult#snapshot_download_url #snapshot_download_url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_deployable_patch_snapshot_for_instance({
+    #     instance_id: "InstanceId", # required
+    #     snapshot_id: "SnapshotId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.snapshot_id #=> String
+    #   resp.snapshot_download_url #=> String
+    #
+    # @overload get_deployable_patch_snapshot_for_instance(params = {})
+    # @param [Hash] params ({})
+    def get_deployable_patch_snapshot_for_instance(params = {}, options = {})
+      req = build_request(:get_deployable_patch_snapshot_for_instance, params)
       req.send_request(options)
     end
 
@@ -2178,6 +2776,90 @@ module Aws::SSM
     # @param [Hash] params ({})
     def get_parameters(params = {}, options = {})
       req = build_request(:get_parameters, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a patch baseline.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline to retrieve.
+    #
+    # @return [Types::GetPatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPatchBaselineResult#baseline_id #baseline_id} => String
+    #   * {Types::GetPatchBaselineResult#name #name} => String
+    #   * {Types::GetPatchBaselineResult#global_filters #global_filters} => Types::PatchFilterGroup
+    #   * {Types::GetPatchBaselineResult#approval_rules #approval_rules} => Types::PatchRuleGroup
+    #   * {Types::GetPatchBaselineResult#approved_patches #approved_patches} => Array&lt;String&gt;
+    #   * {Types::GetPatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
+    #   * {Types::GetPatchBaselineResult#patch_groups #patch_groups} => Array&lt;String&gt;
+    #   * {Types::GetPatchBaselineResult#created_date #created_date} => Time
+    #   * {Types::GetPatchBaselineResult#modified_date #modified_date} => Time
+    #   * {Types::GetPatchBaselineResult#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_patch_baseline({
+    #     baseline_id: "BaselineId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #   resp.name #=> String
+    #   resp.global_filters.patch_filters #=> Array
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.global_filters.patch_filters[0].values #=> Array
+    #   resp.global_filters.patch_filters[0].values[0] #=> String
+    #   resp.approval_rules.patch_rules #=> Array
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
+    #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
+    #   resp.approved_patches #=> Array
+    #   resp.approved_patches[0] #=> String
+    #   resp.rejected_patches #=> Array
+    #   resp.rejected_patches[0] #=> String
+    #   resp.patch_groups #=> Array
+    #   resp.patch_groups[0] #=> String
+    #   resp.created_date #=> Time
+    #   resp.modified_date #=> Time
+    #   resp.description #=> String
+    #
+    # @overload get_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def get_patch_baseline(params = {}, options = {})
+      req = build_request(:get_patch_baseline, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the patch baseline that should be used for the specified
+    # patch group.
+    #
+    # @option params [required, String] :patch_group
+    #   The name of the patch group whose patch baseline should be retrieved.
+    #
+    # @return [Types::GetPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPatchBaselineForPatchGroupResult#baseline_id #baseline_id} => String
+    #   * {Types::GetPatchBaselineForPatchGroupResult#patch_group #patch_group} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_patch_baseline_for_patch_group({
+    #     patch_group: "PatchGroup", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #   resp.patch_group #=> String
+    #
+    # @overload get_patch_baseline_for_patch_group(params = {})
+    # @param [Hash] params ({})
+    def get_patch_baseline_for_patch_group(params = {}, options = {})
+      req = build_request(:get_patch_baseline_for_patch_group, params)
       req.send_request(options)
     end
 
@@ -2725,6 +3407,66 @@ module Aws::SSM
       req.send_request(options)
     end
 
+    # Defines the default patch baseline.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline that should be the default patch
+    #   baseline.
+    #
+    # @return [Types::RegisterDefaultPatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterDefaultPatchBaselineResult#baseline_id #baseline_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_default_patch_baseline({
+    #     baseline_id: "BaselineId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #
+    # @overload register_default_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def register_default_patch_baseline(params = {}, options = {})
+      req = build_request(:register_default_patch_baseline, params)
+      req.send_request(options)
+    end
+
+    # Registers a patch baseline for a patch group.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline to register the patch group with.
+    #
+    # @option params [required, String] :patch_group
+    #   The name of the patch group that should be registered with the patch
+    #   baseline.
+    #
+    # @return [Types::RegisterPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterPatchBaselineForPatchGroupResult#baseline_id #baseline_id} => String
+    #   * {Types::RegisterPatchBaselineForPatchGroupResult#patch_group #patch_group} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_patch_baseline_for_patch_group({
+    #     baseline_id: "BaselineId", # required
+    #     patch_group: "PatchGroup", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #   resp.patch_group #=> String
+    #
+    # @overload register_patch_baseline_for_patch_group(params = {})
+    # @param [Hash] params ({})
+    def register_patch_baseline_for_patch_group(params = {}, options = {})
+      req = build_request(:register_patch_baseline_for_patch_group, params)
+      req.send_request(options)
+    end
+
     # Registers a target with a Maintenance Window.
     #
     # @option params [required, String] :window_id
@@ -3085,7 +3827,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_automation_execution({
-    #     document_name: "DocumentName", # required
+    #     document_name: "DocumentARN", # required
     #     document_version: "DocumentVersion",
     #     parameters: {
     #       "AutomationParameterKey" => ["AutomationParameterValue"],
@@ -3452,6 +4194,104 @@ module Aws::SSM
     # @param [Hash] params ({})
     def update_managed_instance_role(params = {}, options = {})
       req = build_request(:update_managed_instance_role, params)
+      req.send_request(options)
+    end
+
+    # Modifies an existing patch baseline. Fields not specified in the
+    # request are left unchanged.
+    #
+    # @option params [required, String] :baseline_id
+    #   The ID of the patch baseline to update.
+    #
+    # @option params [String] :name
+    #   The name of the patch baseline.
+    #
+    # @option params [Types::PatchFilterGroup] :global_filters
+    #   A set of global filters used to exclude patches from the baseline.
+    #
+    # @option params [Types::PatchRuleGroup] :approval_rules
+    #   A set of rules used to include patches in the baseline.
+    #
+    # @option params [Array<String>] :approved_patches
+    #   A list of explicitly approved patches for the baseline.
+    #
+    # @option params [Array<String>] :rejected_patches
+    #   A list of explicitly rejected patches for the baseline.
+    #
+    # @option params [String] :description
+    #   A description of the patch baseline.
+    #
+    # @return [Types::UpdatePatchBaselineResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePatchBaselineResult#baseline_id #baseline_id} => String
+    #   * {Types::UpdatePatchBaselineResult#name #name} => String
+    #   * {Types::UpdatePatchBaselineResult#global_filters #global_filters} => Types::PatchFilterGroup
+    #   * {Types::UpdatePatchBaselineResult#approval_rules #approval_rules} => Types::PatchRuleGroup
+    #   * {Types::UpdatePatchBaselineResult#approved_patches #approved_patches} => Array&lt;String&gt;
+    #   * {Types::UpdatePatchBaselineResult#rejected_patches #rejected_patches} => Array&lt;String&gt;
+    #   * {Types::UpdatePatchBaselineResult#created_date #created_date} => Time
+    #   * {Types::UpdatePatchBaselineResult#modified_date #modified_date} => Time
+    #   * {Types::UpdatePatchBaselineResult#description #description} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_patch_baseline({
+    #     baseline_id: "BaselineId", # required
+    #     name: "BaselineName",
+    #     global_filters: {
+    #       patch_filters: [ # required
+    #         {
+    #           key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #           values: ["PatchFilterValue"], # required
+    #         },
+    #       ],
+    #     },
+    #     approval_rules: {
+    #       patch_rules: [ # required
+    #         {
+    #           patch_filter_group: { # required
+    #             patch_filters: [ # required
+    #               {
+    #                 key: "PRODUCT", # required, accepts PRODUCT, CLASSIFICATION, MSRC_SEVERITY, PATCH_ID
+    #                 values: ["PatchFilterValue"], # required
+    #               },
+    #             ],
+    #           },
+    #           approve_after_days: 1, # required
+    #         },
+    #       ],
+    #     },
+    #     approved_patches: ["PatchId"],
+    #     rejected_patches: ["PatchId"],
+    #     description: "BaselineDescription",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.baseline_id #=> String
+    #   resp.name #=> String
+    #   resp.global_filters.patch_filters #=> Array
+    #   resp.global_filters.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.global_filters.patch_filters[0].values #=> Array
+    #   resp.global_filters.patch_filters[0].values[0] #=> String
+    #   resp.approval_rules.patch_rules #=> Array
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters #=> Array
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].key #=> String, one of "PRODUCT", "CLASSIFICATION", "MSRC_SEVERITY", "PATCH_ID"
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values #=> Array
+    #   resp.approval_rules.patch_rules[0].patch_filter_group.patch_filters[0].values[0] #=> String
+    #   resp.approval_rules.patch_rules[0].approve_after_days #=> Integer
+    #   resp.approved_patches #=> Array
+    #   resp.approved_patches[0] #=> String
+    #   resp.rejected_patches #=> Array
+    #   resp.rejected_patches[0] #=> String
+    #   resp.created_date #=> Time
+    #   resp.modified_date #=> Time
+    #   resp.description #=> String
+    #
+    # @overload update_patch_baseline(params = {})
+    # @param [Hash] params ({})
+    def update_patch_baseline(params = {}, options = {})
+      req = build_request(:update_patch_baseline, params)
       req.send_request(options)
     end
 

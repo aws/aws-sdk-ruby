@@ -19,6 +19,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-applicationautoscaling', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-applicationdiscoveryservice', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-autoscaling', '1.0.0.rc1')
+  spec.add_dependency('aws-sdk-batch', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-budgets', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-cloudformation', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-cloudfront', '1.0.0.rc2')

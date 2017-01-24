@@ -168,8 +168,8 @@ module Aws::Health
     #   required.
     #
     # @option params [String] :locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #
     # @option params [String] :next_token
     #   If the results of a search are large, only a portion of the results
@@ -179,7 +179,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #
     # @return [Types::DescribeAffectedEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -274,7 +275,8 @@ module Aws::Health
     #   The only currently supported value is `eventTypeCategory`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #
     # @option params [String] :next_token
     #   If the results of a search are large, only a portion of the results
@@ -360,8 +362,8 @@ module Aws::Health
     #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
     #
     # @option params [String] :locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #
     # @return [Types::DescribeEventDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -411,8 +413,8 @@ module Aws::Health
     #   Values to narrow the results returned.
     #
     # @option params [String] :locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #
     # @option params [String] :next_token
     #   If the results of a search are large, only a portion of the results
@@ -422,7 +424,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #
     # @return [Types::DescribeEventTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -477,11 +480,12 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #
     # @option params [String] :locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #
     # @return [Types::DescribeEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #

@@ -90,6 +90,8 @@ module Aws::ECR
     ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
     ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MediaType = Shapes::StringShape.new(name: 'MediaType')
+    MediaTypeList = Shapes::ListShape.new(name: 'MediaTypeList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PartSize = Shapes::IntegerShape.new(name: 'PartSize')
     ProxyEndpoint = Shapes::StringShape.new(name: 'ProxyEndpoint')
@@ -144,6 +146,7 @@ module Aws::ECR
     BatchGetImageRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     BatchGetImageRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     BatchGetImageRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdentifierList, required: true, location_name: "imageIds"))
+    BatchGetImageRequest.add_member(:accepted_media_types, Shapes::ShapeRef.new(shape: MediaTypeList, location_name: "acceptedMediaTypes"))
     BatchGetImageRequest.struct_class = Types::BatchGetImageRequest
 
     BatchGetImageResponse.add_member(:images, Shapes::ShapeRef.new(shape: ImageList, location_name: "images"))
@@ -282,6 +285,7 @@ module Aws::ECR
     Layer.add_member(:layer_digest, Shapes::ShapeRef.new(shape: LayerDigest, location_name: "layerDigest"))
     Layer.add_member(:layer_availability, Shapes::ShapeRef.new(shape: LayerAvailability, location_name: "layerAvailability"))
     Layer.add_member(:layer_size, Shapes::ShapeRef.new(shape: LayerSizeInBytes, location_name: "layerSize"))
+    Layer.add_member(:media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "mediaType"))
     Layer.struct_class = Types::Layer
 
     LayerDigestList.member = Shapes::ShapeRef.new(shape: LayerDigest)
@@ -309,9 +313,12 @@ module Aws::ECR
     ListImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListImagesResponse.struct_class = Types::ListImagesResponse
 
+    MediaTypeList.member = Shapes::ShapeRef.new(shape: MediaType)
+
     PutImageRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     PutImageRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     PutImageRequest.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, required: true, location_name: "imageManifest"))
+    PutImageRequest.add_member(:image_tag, Shapes::ShapeRef.new(shape: ImageTag, location_name: "imageTag"))
     PutImageRequest.struct_class = Types::PutImageRequest
 
     PutImageResponse.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))

@@ -28,6 +28,7 @@ module Aws::ACM
     DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainNameString = Shapes::StringShape.new(name: 'DomainNameString')
+    DomainStatus = Shapes::StringShape.new(name: 'DomainStatus')
     DomainValidation = Shapes::StructureShape.new(name: 'DomainValidation')
     DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
     DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
@@ -53,6 +54,8 @@ module Aws::ACM
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
     RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
+    RenewalStatus = Shapes::StringShape.new(name: 'RenewalStatus')
+    RenewalSummary = Shapes::StructureShape.new(name: 'RenewalSummary')
     RequestCertificateRequest = Shapes::StructureShape.new(name: 'RequestCertificateRequest')
     RequestCertificateResponse = Shapes::StructureShape.new(name: 'RequestCertificateResponse')
     RequestInProgressException = Shapes::StructureShape.new(name: 'RequestInProgressException')
@@ -93,6 +96,7 @@ module Aws::ACM
     CertificateDetail.add_member(:in_use_by, Shapes::ShapeRef.new(shape: InUseList, location_name: "InUseBy"))
     CertificateDetail.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     CertificateDetail.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
+    CertificateDetail.add_member(:renewal_summary, Shapes::ShapeRef.new(shape: RenewalSummary, location_name: "RenewalSummary"))
     CertificateDetail.struct_class = Types::CertificateDetail
 
     CertificateStatuses.member = Shapes::ShapeRef.new(shape: CertificateStatus)
@@ -117,6 +121,7 @@ module Aws::ACM
     DomainValidation.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
     DomainValidation.add_member(:validation_emails, Shapes::ShapeRef.new(shape: ValidationEmailList, location_name: "ValidationEmails"))
     DomainValidation.add_member(:validation_domain, Shapes::ShapeRef.new(shape: DomainNameString, location_name: "ValidationDomain"))
+    DomainValidation.add_member(:validation_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "ValidationStatus"))
     DomainValidation.struct_class = Types::DomainValidation
 
     DomainValidationList.member = Shapes::ShapeRef.new(shape: DomainValidation)
@@ -163,6 +168,10 @@ module Aws::ACM
     RemoveTagsFromCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateArn"))
     RemoveTagsFromCertificateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     RemoveTagsFromCertificateRequest.struct_class = Types::RemoveTagsFromCertificateRequest
+
+    RenewalSummary.add_member(:renewal_status, Shapes::ShapeRef.new(shape: RenewalStatus, required: true, location_name: "RenewalStatus"))
+    RenewalSummary.add_member(:domain_validation_options, Shapes::ShapeRef.new(shape: DomainValidationList, required: true, location_name: "DomainValidationOptions"))
+    RenewalSummary.struct_class = Types::RenewalSummary
 
     RequestCertificateRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainNameString, required: true, location_name: "DomainName"))
     RequestCertificateRequest.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: DomainList, location_name: "SubjectAlternativeNames"))

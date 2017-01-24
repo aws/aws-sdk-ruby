@@ -56,6 +56,9 @@ module Aws::Firehose
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ExtendedS3DestinationConfiguration = Shapes::StructureShape.new(name: 'ExtendedS3DestinationConfiguration')
+    ExtendedS3DestinationDescription = Shapes::StructureShape.new(name: 'ExtendedS3DestinationDescription')
+    ExtendedS3DestinationUpdate = Shapes::StructureShape.new(name: 'ExtendedS3DestinationUpdate')
     IntervalInSeconds = Shapes::IntegerShape.new(name: 'IntervalInSeconds')
     InvalidArgumentException = Shapes::StructureShape.new(name: 'InvalidArgumentException')
     KMSEncryptionConfig = Shapes::StructureShape.new(name: 'KMSEncryptionConfig')
@@ -69,6 +72,14 @@ module Aws::Firehose
     NonNegativeIntegerObject = Shapes::IntegerShape.new(name: 'NonNegativeIntegerObject')
     Password = Shapes::StringShape.new(name: 'Password')
     Prefix = Shapes::StringShape.new(name: 'Prefix')
+    ProcessingConfiguration = Shapes::StructureShape.new(name: 'ProcessingConfiguration')
+    Processor = Shapes::StructureShape.new(name: 'Processor')
+    ProcessorList = Shapes::ListShape.new(name: 'ProcessorList')
+    ProcessorParameter = Shapes::StructureShape.new(name: 'ProcessorParameter')
+    ProcessorParameterList = Shapes::ListShape.new(name: 'ProcessorParameterList')
+    ProcessorParameterName = Shapes::StringShape.new(name: 'ProcessorParameterName')
+    ProcessorParameterValue = Shapes::StringShape.new(name: 'ProcessorParameterValue')
+    ProcessorType = Shapes::StringShape.new(name: 'ProcessorType')
     PutRecordBatchInput = Shapes::StructureShape.new(name: 'PutRecordBatchInput')
     PutRecordBatchOutput = Shapes::StructureShape.new(name: 'PutRecordBatchOutput')
     PutRecordBatchRequestEntryList = Shapes::ListShape.new(name: 'PutRecordBatchRequestEntryList')
@@ -83,9 +94,11 @@ module Aws::Firehose
     RedshiftDestinationUpdate = Shapes::StructureShape.new(name: 'RedshiftDestinationUpdate')
     RedshiftRetryDurationInSeconds = Shapes::IntegerShape.new(name: 'RedshiftRetryDurationInSeconds')
     RedshiftRetryOptions = Shapes::StructureShape.new(name: 'RedshiftRetryOptions')
+    RedshiftS3BackupMode = Shapes::StringShape.new(name: 'RedshiftS3BackupMode')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleARN = Shapes::StringShape.new(name: 'RoleARN')
+    S3BackupMode = Shapes::StringShape.new(name: 'S3BackupMode')
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3DestinationDescription = Shapes::StructureShape.new(name: 'S3DestinationDescription')
     S3DestinationUpdate = Shapes::StructureShape.new(name: 'S3DestinationUpdate')
@@ -111,7 +124,8 @@ module Aws::Firehose
     CopyCommand.struct_class = Types::CopyCommand
 
     CreateDeliveryStreamInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
-    CreateDeliveryStreamInput.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3DestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:s3_destination_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, deprecated: true, location_name: "S3DestinationConfiguration"))
+    CreateDeliveryStreamInput.add_member(:extended_s3_destination_configuration, Shapes::ShapeRef.new(shape: ExtendedS3DestinationConfiguration, location_name: "ExtendedS3DestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:redshift_destination_configuration, Shapes::ShapeRef.new(shape: RedshiftDestinationConfiguration, location_name: "RedshiftDestinationConfiguration"))
     CreateDeliveryStreamInput.add_member(:elasticsearch_destination_configuration, Shapes::ShapeRef.new(shape: ElasticsearchDestinationConfiguration, location_name: "ElasticsearchDestinationConfiguration"))
     CreateDeliveryStreamInput.struct_class = Types::CreateDeliveryStreamInput
@@ -146,6 +160,7 @@ module Aws::Firehose
 
     DestinationDescription.add_member(:destination_id, Shapes::ShapeRef.new(shape: DestinationId, required: true, location_name: "DestinationId"))
     DestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    DestinationDescription.add_member(:extended_s3_destination_description, Shapes::ShapeRef.new(shape: ExtendedS3DestinationDescription, location_name: "ExtendedS3DestinationDescription"))
     DestinationDescription.add_member(:redshift_destination_description, Shapes::ShapeRef.new(shape: RedshiftDestinationDescription, location_name: "RedshiftDestinationDescription"))
     DestinationDescription.add_member(:elasticsearch_destination_description, Shapes::ShapeRef.new(shape: ElasticsearchDestinationDescription, location_name: "ElasticsearchDestinationDescription"))
     DestinationDescription.struct_class = Types::DestinationDescription
@@ -165,6 +180,7 @@ module Aws::Firehose
     ElasticsearchDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: ElasticsearchRetryOptions, location_name: "RetryOptions"))
     ElasticsearchDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: ElasticsearchS3BackupMode, location_name: "S3BackupMode"))
     ElasticsearchDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    ElasticsearchDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     ElasticsearchDestinationConfiguration.struct_class = Types::ElasticsearchDestinationConfiguration
 
@@ -177,6 +193,7 @@ module Aws::Firehose
     ElasticsearchDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: ElasticsearchRetryOptions, location_name: "RetryOptions"))
     ElasticsearchDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: ElasticsearchS3BackupMode, location_name: "S3BackupMode"))
     ElasticsearchDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3DestinationDescription"))
+    ElasticsearchDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     ElasticsearchDestinationDescription.struct_class = Types::ElasticsearchDestinationDescription
 
@@ -188,6 +205,7 @@ module Aws::Firehose
     ElasticsearchDestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: ElasticsearchBufferingHints, location_name: "BufferingHints"))
     ElasticsearchDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: ElasticsearchRetryOptions, location_name: "RetryOptions"))
     ElasticsearchDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    ElasticsearchDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
     ElasticsearchDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     ElasticsearchDestinationUpdate.struct_class = Types::ElasticsearchDestinationUpdate
 
@@ -197,6 +215,42 @@ module Aws::Firehose
     EncryptionConfiguration.add_member(:no_encryption_config, Shapes::ShapeRef.new(shape: NoEncryptionConfig, location_name: "NoEncryptionConfig"))
     EncryptionConfiguration.add_member(:kms_encryption_config, Shapes::ShapeRef.new(shape: KMSEncryptionConfig, location_name: "KMSEncryptionConfig"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    ExtendedS3DestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    ExtendedS3DestinationConfiguration.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    ExtendedS3DestinationConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ExtendedS3DestinationConfiguration.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
+    ExtendedS3DestinationConfiguration.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
+    ExtendedS3DestinationConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    ExtendedS3DestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    ExtendedS3DestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    ExtendedS3DestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
+    ExtendedS3DestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
+    ExtendedS3DestinationConfiguration.struct_class = Types::ExtendedS3DestinationConfiguration
+
+    ExtendedS3DestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+    ExtendedS3DestinationDescription.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, required: true, location_name: "BucketARN"))
+    ExtendedS3DestinationDescription.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ExtendedS3DestinationDescription.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, required: true, location_name: "BufferingHints"))
+    ExtendedS3DestinationDescription.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, required: true, location_name: "CompressionFormat"))
+    ExtendedS3DestinationDescription.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "EncryptionConfiguration"))
+    ExtendedS3DestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    ExtendedS3DestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    ExtendedS3DestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
+    ExtendedS3DestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
+    ExtendedS3DestinationDescription.struct_class = Types::ExtendedS3DestinationDescription
+
+    ExtendedS3DestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    ExtendedS3DestinationUpdate.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: BucketARN, location_name: "BucketARN"))
+    ExtendedS3DestinationUpdate.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+    ExtendedS3DestinationUpdate.add_member(:buffering_hints, Shapes::ShapeRef.new(shape: BufferingHints, location_name: "BufferingHints"))
+    ExtendedS3DestinationUpdate.add_member(:compression_format, Shapes::ShapeRef.new(shape: CompressionFormat, location_name: "CompressionFormat"))
+    ExtendedS3DestinationUpdate.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    ExtendedS3DestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
+    ExtendedS3DestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    ExtendedS3DestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: S3BackupMode, location_name: "S3BackupMode"))
+    ExtendedS3DestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
+    ExtendedS3DestinationUpdate.struct_class = Types::ExtendedS3DestinationUpdate
 
     KMSEncryptionConfig.add_member(:awskms_key_arn, Shapes::ShapeRef.new(shape: AWSKMSKeyARN, required: true, location_name: "AWSKMSKeyARN"))
     KMSEncryptionConfig.struct_class = Types::KMSEncryptionConfig
@@ -208,6 +262,22 @@ module Aws::Firehose
     ListDeliveryStreamsOutput.add_member(:delivery_stream_names, Shapes::ShapeRef.new(shape: DeliveryStreamNameList, required: true, location_name: "DeliveryStreamNames"))
     ListDeliveryStreamsOutput.add_member(:has_more_delivery_streams, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreDeliveryStreams"))
     ListDeliveryStreamsOutput.struct_class = Types::ListDeliveryStreamsOutput
+
+    ProcessingConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "Enabled"))
+    ProcessingConfiguration.add_member(:processors, Shapes::ShapeRef.new(shape: ProcessorList, location_name: "Processors"))
+    ProcessingConfiguration.struct_class = Types::ProcessingConfiguration
+
+    Processor.add_member(:type, Shapes::ShapeRef.new(shape: ProcessorType, required: true, location_name: "Type"))
+    Processor.add_member(:parameters, Shapes::ShapeRef.new(shape: ProcessorParameterList, location_name: "Parameters"))
+    Processor.struct_class = Types::Processor
+
+    ProcessorList.member = Shapes::ShapeRef.new(shape: Processor)
+
+    ProcessorParameter.add_member(:parameter_name, Shapes::ShapeRef.new(shape: ProcessorParameterName, required: true, location_name: "ParameterName"))
+    ProcessorParameter.add_member(:parameter_value, Shapes::ShapeRef.new(shape: ProcessorParameterValue, required: true, location_name: "ParameterValue"))
+    ProcessorParameter.struct_class = Types::ProcessorParameter
+
+    ProcessorParameterList.member = Shapes::ShapeRef.new(shape: ProcessorParameter)
 
     PutRecordBatchInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     PutRecordBatchInput.add_member(:records, Shapes::ShapeRef.new(shape: PutRecordBatchRequestEntryList, required: true, location_name: "Records"))
@@ -243,6 +313,9 @@ module Aws::Firehose
     RedshiftDestinationConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
     RedshiftDestinationConfiguration.add_member(:retry_options, Shapes::ShapeRef.new(shape: RedshiftRetryOptions, location_name: "RetryOptions"))
     RedshiftDestinationConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, required: true, location_name: "S3Configuration"))
+    RedshiftDestinationConfiguration.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    RedshiftDestinationConfiguration.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: RedshiftS3BackupMode, location_name: "S3BackupMode"))
+    RedshiftDestinationConfiguration.add_member(:s3_backup_configuration, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "S3BackupConfiguration"))
     RedshiftDestinationConfiguration.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     RedshiftDestinationConfiguration.struct_class = Types::RedshiftDestinationConfiguration
 
@@ -252,6 +325,9 @@ module Aws::Firehose
     RedshiftDestinationDescription.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
     RedshiftDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: RedshiftRetryOptions, location_name: "RetryOptions"))
     RedshiftDestinationDescription.add_member(:s3_destination_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, required: true, location_name: "S3DestinationDescription"))
+    RedshiftDestinationDescription.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    RedshiftDestinationDescription.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: RedshiftS3BackupMode, location_name: "S3BackupMode"))
+    RedshiftDestinationDescription.add_member(:s3_backup_description, Shapes::ShapeRef.new(shape: S3DestinationDescription, location_name: "S3BackupDescription"))
     RedshiftDestinationDescription.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     RedshiftDestinationDescription.struct_class = Types::RedshiftDestinationDescription
 
@@ -262,6 +338,9 @@ module Aws::Firehose
     RedshiftDestinationUpdate.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     RedshiftDestinationUpdate.add_member(:retry_options, Shapes::ShapeRef.new(shape: RedshiftRetryOptions, location_name: "RetryOptions"))
     RedshiftDestinationUpdate.add_member(:s3_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3Update"))
+    RedshiftDestinationUpdate.add_member(:processing_configuration, Shapes::ShapeRef.new(shape: ProcessingConfiguration, location_name: "ProcessingConfiguration"))
+    RedshiftDestinationUpdate.add_member(:s3_backup_mode, Shapes::ShapeRef.new(shape: RedshiftS3BackupMode, location_name: "S3BackupMode"))
+    RedshiftDestinationUpdate.add_member(:s3_backup_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3BackupUpdate"))
     RedshiftDestinationUpdate.add_member(:cloud_watch_logging_options, Shapes::ShapeRef.new(shape: CloudWatchLoggingOptions, location_name: "CloudWatchLoggingOptions"))
     RedshiftDestinationUpdate.struct_class = Types::RedshiftDestinationUpdate
 
@@ -298,7 +377,8 @@ module Aws::Firehose
     UpdateDestinationInput.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "DeliveryStreamName"))
     UpdateDestinationInput.add_member(:current_delivery_stream_version_id, Shapes::ShapeRef.new(shape: DeliveryStreamVersionId, required: true, location_name: "CurrentDeliveryStreamVersionId"))
     UpdateDestinationInput.add_member(:destination_id, Shapes::ShapeRef.new(shape: DestinationId, required: true, location_name: "DestinationId"))
-    UpdateDestinationInput.add_member(:s3_destination_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, location_name: "S3DestinationUpdate"))
+    UpdateDestinationInput.add_member(:s3_destination_update, Shapes::ShapeRef.new(shape: S3DestinationUpdate, deprecated: true, location_name: "S3DestinationUpdate"))
+    UpdateDestinationInput.add_member(:extended_s3_destination_update, Shapes::ShapeRef.new(shape: ExtendedS3DestinationUpdate, location_name: "ExtendedS3DestinationUpdate"))
     UpdateDestinationInput.add_member(:redshift_destination_update, Shapes::ShapeRef.new(shape: RedshiftDestinationUpdate, location_name: "RedshiftDestinationUpdate"))
     UpdateDestinationInput.add_member(:elasticsearch_destination_update, Shapes::ShapeRef.new(shape: ElasticsearchDestinationUpdate, location_name: "ElasticsearchDestinationUpdate"))
     UpdateDestinationInput.struct_class = Types::UpdateDestinationInput

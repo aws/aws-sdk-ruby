@@ -117,8 +117,8 @@ module Aws::Health
     #   @return [Types::EntityFilter]
     #
     # @!attribute [rw] locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -130,7 +130,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #   @return [Integer]
     #
     class DescribeAffectedEntitiesRequest < Struct.new(
@@ -239,7 +240,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -292,8 +294,8 @@ module Aws::Health
     #   @return [Array<String>]
     #
     # @!attribute [rw] locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #   @return [String]
     #
     class DescribeEventDetailsRequest < Struct.new(
@@ -335,8 +337,8 @@ module Aws::Health
     #   @return [Types::EventTypeFilter]
     #
     # @!attribute [rw] locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -348,7 +350,8 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #   @return [Integer]
     #
     class DescribeEventTypesRequest < Struct.new(
@@ -360,7 +363,12 @@ module Aws::Health
     end
 
     # @!attribute [rw] event_types
-    #   List of event types to be matched with.
+    #   A list of event types that match the filter criteria. Event types
+    #   have a category (`issue`, `accountNotification`, or
+    #   `scheduledChange`), a service (for example, `EC2`, `RDS`,
+    #   `DATAPIPELINE`, `BILLING`), and a code (in the format
+    #   `AWS_SERVICE_DESCRIPTION `; for example,
+    #   `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`).
     #   @return [Array<Types::EventType>]
     #
     # @!attribute [rw] next_token
@@ -433,12 +441,13 @@ module Aws::Health
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return in one batch.
+    #   The maximum number of items to return in one batch, between 10 and
+    #   100, inclusive.
     #   @return [Integer]
     #
     # @!attribute [rw] locale
-    #   The locale (language) to return information in. The default is
-    #   English.
+    #   The locale (language) to return information in. English (en) is the
+    #   default and the only supported value at this time.
     #   @return [String]
     #
     class DescribeEventsRequest < Struct.new(
@@ -807,7 +816,7 @@ module Aws::Health
     end
 
     # Metadata about a type of event that is reported by AWS Health. Data
-    # consists of the category (for example, `issue`, the service (for
+    # consists of the category (for example, `issue`), the service (for
     # example, `EC2`), and the event type code (for example,
     # `AWS_EC2_SYSTEM_MAINTENANCE_EVENT`).
     #

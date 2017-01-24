@@ -16,12 +16,16 @@ module Aws::CodeCommit
     Arn = Shapes::StringShape.new(name: 'Arn')
     BatchGetRepositoriesInput = Shapes::StructureShape.new(name: 'BatchGetRepositoriesInput')
     BatchGetRepositoriesOutput = Shapes::StructureShape.new(name: 'BatchGetRepositoriesOutput')
+    BlobIdDoesNotExistException = Shapes::StructureShape.new(name: 'BlobIdDoesNotExistException')
+    BlobIdRequiredException = Shapes::StructureShape.new(name: 'BlobIdRequiredException')
+    BlobMetadata = Shapes::StructureShape.new(name: 'BlobMetadata')
     BranchDoesNotExistException = Shapes::StructureShape.new(name: 'BranchDoesNotExistException')
     BranchInfo = Shapes::StructureShape.new(name: 'BranchInfo')
     BranchName = Shapes::StringShape.new(name: 'BranchName')
     BranchNameExistsException = Shapes::StructureShape.new(name: 'BranchNameExistsException')
     BranchNameList = Shapes::ListShape.new(name: 'BranchNameList')
     BranchNameRequiredException = Shapes::StructureShape.new(name: 'BranchNameRequiredException')
+    ChangeTypeEnum = Shapes::StringShape.new(name: 'ChangeTypeEnum')
     CloneUrlHttp = Shapes::StringShape.new(name: 'CloneUrlHttp')
     CloneUrlSsh = Shapes::StringShape.new(name: 'CloneUrlSsh')
     Commit = Shapes::StructureShape.new(name: 'Commit')
@@ -29,6 +33,8 @@ module Aws::CodeCommit
     CommitId = Shapes::StringShape.new(name: 'CommitId')
     CommitIdDoesNotExistException = Shapes::StructureShape.new(name: 'CommitIdDoesNotExistException')
     CommitIdRequiredException = Shapes::StructureShape.new(name: 'CommitIdRequiredException')
+    CommitName = Shapes::StringShape.new(name: 'CommitName')
+    CommitRequiredException = Shapes::StructureShape.new(name: 'CommitRequiredException')
     CreateBranchInput = Shapes::StructureShape.new(name: 'CreateBranchInput')
     CreateRepositoryInput = Shapes::StructureShape.new(name: 'CreateRepositoryInput')
     CreateRepositoryOutput = Shapes::StructureShape.new(name: 'CreateRepositoryOutput')
@@ -36,24 +42,35 @@ module Aws::CodeCommit
     Date = Shapes::StringShape.new(name: 'Date')
     DeleteRepositoryInput = Shapes::StructureShape.new(name: 'DeleteRepositoryInput')
     DeleteRepositoryOutput = Shapes::StructureShape.new(name: 'DeleteRepositoryOutput')
+    Difference = Shapes::StructureShape.new(name: 'Difference')
+    DifferenceList = Shapes::ListShape.new(name: 'DifferenceList')
     Email = Shapes::StringShape.new(name: 'Email')
     EncryptionIntegrityChecksFailedException = Shapes::StructureShape.new(name: 'EncryptionIntegrityChecksFailedException')
     EncryptionKeyAccessDeniedException = Shapes::StructureShape.new(name: 'EncryptionKeyAccessDeniedException')
     EncryptionKeyDisabledException = Shapes::StructureShape.new(name: 'EncryptionKeyDisabledException')
     EncryptionKeyNotFoundException = Shapes::StructureShape.new(name: 'EncryptionKeyNotFoundException')
     EncryptionKeyUnavailableException = Shapes::StructureShape.new(name: 'EncryptionKeyUnavailableException')
+    FileTooLargeException = Shapes::StructureShape.new(name: 'FileTooLargeException')
+    GetBlobInput = Shapes::StructureShape.new(name: 'GetBlobInput')
+    GetBlobOutput = Shapes::StructureShape.new(name: 'GetBlobOutput')
     GetBranchInput = Shapes::StructureShape.new(name: 'GetBranchInput')
     GetBranchOutput = Shapes::StructureShape.new(name: 'GetBranchOutput')
     GetCommitInput = Shapes::StructureShape.new(name: 'GetCommitInput')
     GetCommitOutput = Shapes::StructureShape.new(name: 'GetCommitOutput')
+    GetDifferencesInput = Shapes::StructureShape.new(name: 'GetDifferencesInput')
+    GetDifferencesOutput = Shapes::StructureShape.new(name: 'GetDifferencesOutput')
     GetRepositoryInput = Shapes::StructureShape.new(name: 'GetRepositoryInput')
     GetRepositoryOutput = Shapes::StructureShape.new(name: 'GetRepositoryOutput')
     GetRepositoryTriggersInput = Shapes::StructureShape.new(name: 'GetRepositoryTriggersInput')
     GetRepositoryTriggersOutput = Shapes::StructureShape.new(name: 'GetRepositoryTriggersOutput')
+    InvalidBlobIdException = Shapes::StructureShape.new(name: 'InvalidBlobIdException')
     InvalidBranchNameException = Shapes::StructureShape.new(name: 'InvalidBranchNameException')
+    InvalidCommitException = Shapes::StructureShape.new(name: 'InvalidCommitException')
     InvalidCommitIdException = Shapes::StructureShape.new(name: 'InvalidCommitIdException')
     InvalidContinuationTokenException = Shapes::StructureShape.new(name: 'InvalidContinuationTokenException')
+    InvalidMaxResultsException = Shapes::StructureShape.new(name: 'InvalidMaxResultsException')
     InvalidOrderException = Shapes::StructureShape.new(name: 'InvalidOrderException')
+    InvalidPathException = Shapes::StructureShape.new(name: 'InvalidPathException')
     InvalidRepositoryDescriptionException = Shapes::StructureShape.new(name: 'InvalidRepositoryDescriptionException')
     InvalidRepositoryNameException = Shapes::StructureShape.new(name: 'InvalidRepositoryNameException')
     InvalidRepositoryTriggerBranchNameException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerBranchNameException')
@@ -64,6 +81,7 @@ module Aws::CodeCommit
     InvalidRepositoryTriggerRegionException = Shapes::StructureShape.new(name: 'InvalidRepositoryTriggerRegionException')
     InvalidSortByException = Shapes::StructureShape.new(name: 'InvalidSortByException')
     LastModifiedDate = Shapes::TimestampShape.new(name: 'LastModifiedDate')
+    Limit = Shapes::IntegerShape.new(name: 'Limit')
     ListBranchesInput = Shapes::StructureShape.new(name: 'ListBranchesInput')
     ListBranchesOutput = Shapes::StructureShape.new(name: 'ListBranchesOutput')
     ListRepositoriesInput = Shapes::StructureShape.new(name: 'ListRepositoriesInput')
@@ -72,11 +90,14 @@ module Aws::CodeCommit
     MaximumRepositoryNamesExceededException = Shapes::StructureShape.new(name: 'MaximumRepositoryNamesExceededException')
     MaximumRepositoryTriggersExceededException = Shapes::StructureShape.new(name: 'MaximumRepositoryTriggersExceededException')
     Message = Shapes::StringShape.new(name: 'Message')
+    Mode = Shapes::StringShape.new(name: 'Mode')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ObjectId = Shapes::StringShape.new(name: 'ObjectId')
     OrderEnum = Shapes::StringShape.new(name: 'OrderEnum')
     ParentList = Shapes::ListShape.new(name: 'ParentList')
+    Path = Shapes::StringShape.new(name: 'Path')
+    PathDoesNotExistException = Shapes::StructureShape.new(name: 'PathDoesNotExistException')
     PutRepositoryTriggersInput = Shapes::StructureShape.new(name: 'PutRepositoryTriggersInput')
     PutRepositoryTriggersOutput = Shapes::StructureShape.new(name: 'PutRepositoryTriggersOutput')
     RepositoryDescription = Shapes::StringShape.new(name: 'RepositoryDescription')
@@ -116,6 +137,7 @@ module Aws::CodeCommit
     UpdateRepositoryDescriptionInput = Shapes::StructureShape.new(name: 'UpdateRepositoryDescriptionInput')
     UpdateRepositoryNameInput = Shapes::StructureShape.new(name: 'UpdateRepositoryNameInput')
     UserInfo = Shapes::StructureShape.new(name: 'UserInfo')
+    blob = Shapes::BlobShape.new(name: 'blob')
 
     BatchGetRepositoriesInput.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, required: true, location_name: "repositoryNames"))
     BatchGetRepositoriesInput.struct_class = Types::BatchGetRepositoriesInput
@@ -123,6 +145,11 @@ module Aws::CodeCommit
     BatchGetRepositoriesOutput.add_member(:repositories, Shapes::ShapeRef.new(shape: RepositoryMetadataList, location_name: "repositories"))
     BatchGetRepositoriesOutput.add_member(:repositories_not_found, Shapes::ShapeRef.new(shape: RepositoryNotFoundList, location_name: "repositoriesNotFound"))
     BatchGetRepositoriesOutput.struct_class = Types::BatchGetRepositoriesOutput
+
+    BlobMetadata.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, location_name: "blobId"))
+    BlobMetadata.add_member(:path, Shapes::ShapeRef.new(shape: Path, location_name: "path"))
+    BlobMetadata.add_member(:mode, Shapes::ShapeRef.new(shape: Mode, location_name: "mode"))
+    BlobMetadata.struct_class = Types::BlobMetadata
 
     BranchInfo.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
     BranchInfo.add_member(:commit_id, Shapes::ShapeRef.new(shape: CommitId, location_name: "commitId"))
@@ -156,6 +183,20 @@ module Aws::CodeCommit
     DeleteRepositoryOutput.add_member(:repository_id, Shapes::ShapeRef.new(shape: RepositoryId, location_name: "repositoryId"))
     DeleteRepositoryOutput.struct_class = Types::DeleteRepositoryOutput
 
+    Difference.add_member(:before_blob, Shapes::ShapeRef.new(shape: BlobMetadata, location_name: "beforeBlob"))
+    Difference.add_member(:after_blob, Shapes::ShapeRef.new(shape: BlobMetadata, location_name: "afterBlob"))
+    Difference.add_member(:change_type, Shapes::ShapeRef.new(shape: ChangeTypeEnum, location_name: "changeType"))
+    Difference.struct_class = Types::Difference
+
+    DifferenceList.member = Shapes::ShapeRef.new(shape: Difference)
+
+    GetBlobInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    GetBlobInput.add_member(:blob_id, Shapes::ShapeRef.new(shape: ObjectId, required: true, location_name: "blobId"))
+    GetBlobInput.struct_class = Types::GetBlobInput
+
+    GetBlobOutput.add_member(:content, Shapes::ShapeRef.new(shape: blob, required: true, location_name: "content"))
+    GetBlobOutput.struct_class = Types::GetBlobOutput
+
     GetBranchInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
     GetBranchInput.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
     GetBranchInput.struct_class = Types::GetBranchInput
@@ -170,13 +211,26 @@ module Aws::CodeCommit
     GetCommitOutput.add_member(:commit, Shapes::ShapeRef.new(shape: Commit, required: true, location_name: "commit"))
     GetCommitOutput.struct_class = Types::GetCommitOutput
 
+    GetDifferencesInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    GetDifferencesInput.add_member(:before_commit_specifier, Shapes::ShapeRef.new(shape: CommitName, location_name: "beforeCommitSpecifier"))
+    GetDifferencesInput.add_member(:after_commit_specifier, Shapes::ShapeRef.new(shape: CommitName, required: true, location_name: "afterCommitSpecifier"))
+    GetDifferencesInput.add_member(:before_path, Shapes::ShapeRef.new(shape: Path, location_name: "beforePath"))
+    GetDifferencesInput.add_member(:after_path, Shapes::ShapeRef.new(shape: Path, location_name: "afterPath"))
+    GetDifferencesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    GetDifferencesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetDifferencesInput.struct_class = Types::GetDifferencesInput
+
+    GetDifferencesOutput.add_member(:differences, Shapes::ShapeRef.new(shape: DifferenceList, location_name: "differences"))
+    GetDifferencesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetDifferencesOutput.struct_class = Types::GetDifferencesOutput
+
     GetRepositoryInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetRepositoryInput.struct_class = Types::GetRepositoryInput
 
     GetRepositoryOutput.add_member(:repository_metadata, Shapes::ShapeRef.new(shape: RepositoryMetadata, location_name: "repositoryMetadata"))
     GetRepositoryOutput.struct_class = Types::GetRepositoryOutput
 
-    GetRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+    GetRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
     GetRepositoryTriggersInput.struct_class = Types::GetRepositoryTriggersInput
 
     GetRepositoryTriggersOutput.add_member(:configuration_id, Shapes::ShapeRef.new(shape: RepositoryTriggersConfigurationId, location_name: "configurationId"))
@@ -202,8 +256,8 @@ module Aws::CodeCommit
 
     ParentList.member = Shapes::ShapeRef.new(shape: ObjectId)
 
-    PutRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    PutRepositoryTriggersInput.add_member(:triggers, Shapes::ShapeRef.new(shape: RepositoryTriggersList, location_name: "triggers"))
+    PutRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    PutRepositoryTriggersInput.add_member(:triggers, Shapes::ShapeRef.new(shape: RepositoryTriggersList, required: true, location_name: "triggers"))
     PutRepositoryTriggersInput.struct_class = Types::PutRepositoryTriggersInput
 
     PutRepositoryTriggersOutput.add_member(:configuration_id, Shapes::ShapeRef.new(shape: RepositoryTriggersConfigurationId, location_name: "configurationId"))
@@ -233,11 +287,11 @@ module Aws::CodeCommit
 
     RepositoryNotFoundList.member = Shapes::ShapeRef.new(shape: RepositoryName)
 
-    RepositoryTrigger.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryTriggerName, location_name: "name"))
-    RepositoryTrigger.add_member(:destination_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "destinationArn"))
+    RepositoryTrigger.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryTriggerName, required: true, location_name: "name"))
+    RepositoryTrigger.add_member(:destination_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "destinationArn"))
     RepositoryTrigger.add_member(:custom_data, Shapes::ShapeRef.new(shape: RepositoryTriggerCustomData, location_name: "customData"))
     RepositoryTrigger.add_member(:branches, Shapes::ShapeRef.new(shape: BranchNameList, location_name: "branches"))
-    RepositoryTrigger.add_member(:events, Shapes::ShapeRef.new(shape: RepositoryTriggerEventList, location_name: "events"))
+    RepositoryTrigger.add_member(:events, Shapes::ShapeRef.new(shape: RepositoryTriggerEventList, required: true, location_name: "events"))
     RepositoryTrigger.struct_class = Types::RepositoryTrigger
 
     RepositoryTriggerEventList.member = Shapes::ShapeRef.new(shape: RepositoryTriggerEventEnum)
@@ -252,8 +306,8 @@ module Aws::CodeCommit
 
     RepositoryTriggersList.member = Shapes::ShapeRef.new(shape: RepositoryTrigger)
 
-    TestRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
-    TestRepositoryTriggersInput.add_member(:triggers, Shapes::ShapeRef.new(shape: RepositoryTriggersList, location_name: "triggers"))
+    TestRepositoryTriggersInput.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    TestRepositoryTriggersInput.add_member(:triggers, Shapes::ShapeRef.new(shape: RepositoryTriggersList, required: true, location_name: "triggers"))
     TestRepositoryTriggersInput.struct_class = Types::TestRepositoryTriggersInput
 
     TestRepositoryTriggersOutput.add_member(:successful_executions, Shapes::ShapeRef.new(shape: RepositoryTriggerNameList, location_name: "successfulExecutions"))
@@ -363,6 +417,26 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
       end)
 
+      api.add_operation(:get_blob, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetBlob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetBlobInput)
+        o.output = Shapes::ShapeRef.new(shape: GetBlobOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: BlobIdRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidBlobIdException)
+        o.errors << Shapes::ShapeRef.new(shape: BlobIdDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: FileTooLargeException)
+      end)
+
       api.add_operation(:get_branch, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetBranch"
         o.http_method = "POST"
@@ -399,6 +473,36 @@ module Aws::CodeCommit
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+      end)
+
+      api.add_operation(:get_differences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDifferences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetDifferencesInput)
+        o.output = Shapes::ShapeRef.new(shape: GetDifferencesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryNameRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: RepositoryDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRepositoryNameException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMaxResultsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCommitIdException)
+        o.errors << Shapes::ShapeRef.new(shape: CommitRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCommitException)
+        o.errors << Shapes::ShapeRef.new(shape: CommitDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidPathException)
+        o.errors << Shapes::ShapeRef.new(shape: PathDoesNotExistException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionIntegrityChecksFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyAccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyDisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_repository, Seahorse::Model::Operation.new.tap do |o|

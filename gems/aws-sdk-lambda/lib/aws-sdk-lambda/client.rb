@@ -331,8 +331,8 @@ module Aws::Lambda
     # called the event source mapping.
     #
     # This event source mapping is relevant only in the AWS Lambda pull
-    # model, where AWS Lambda invokes the function. For more information, go
-    # to [AWS Lambda: How it Works][1] in the *AWS Lambda Developer Guide*.
+    # model, where AWS Lambda invokes the function. For more information,
+    # see [AWS Lambda: How it Works][1] in the *AWS Lambda Developer Guide*.
     #
     # You provide mapping information (for example, which stream to read
     # from and which Lambda function to invoke) in the request body.
@@ -397,7 +397,7 @@ module Aws::Lambda
     #
     # @option params [required, String] :starting_position
     #   The position in the stream where AWS Lambda should start reading.
-    #   Valid only for Kinesis streams. For more information, go to
+    #   Valid only for Kinesis streams. For more information, see
     #   [ShardIteratorType][1] in the *Amazon Kinesis API Reference*.
     #
     #
@@ -478,7 +478,7 @@ module Aws::Lambda
     #   The name you want to assign to the function you are uploading. The
     #   function names appear in the console and are returned in the
     #   ListFunctions API. Function names are used to specify functions to
-    #   other AWS Lambda APIs, such as Invoke.
+    #   other AWS Lambda API operations, such as Invoke.
     #
     # @option params [required, String] :runtime
     #   The runtime environment for the Lambda function you are uploading.
@@ -488,8 +488,8 @@ module Aws::Lambda
     #
     #   <note markdown="1"> You can no longer create functions using the v0.10.42 runtime version
     #   as of November, 2016. Existing functions will be supported until early
-    #   2017 but we recommend you migrate them to nodejs4.3 runtime version as
-    #   soon as possible.
+    #   2017, but we recommend you migrate them to nodejs4.3 runtime version
+    #   as soon as possible.
     #
     #    </note>
     #
@@ -546,7 +546,7 @@ module Aws::Lambda
     #   security group and one subnet ID.
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource Name)
+    #   The parent object that contains the target Amazon Resource Name (ARN)
     #   of an Amazon SQS queue or Amazon SNS topic.
     #
     # @option params [Types::Environment] :environment
@@ -785,10 +785,10 @@ module Aws::Lambda
 
     # Returns a customer's account settings.
     #
-    # You can use this operation to retrieve Lambda limit information such
-    # as code size and concurrency limits. For more information on limits,
-    # see [AWS Lambda Limits][1]. You can also retrieve resource usage
-    # statistics such as code storage usage and function count.
+    # You can use this operation to retrieve Lambda limits information, such
+    # as code size and concurrency limits. For more information about
+    # limits, see [AWS Lambda Limits][1]. You can also retrieve resource
+    # usage statistics, such as code storage usage and function count.
     #
     #
     #
@@ -1913,7 +1913,7 @@ module Aws::Lambda
     #   you are using the web API directly, the contents of the zip file must
     #   be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the
     #   SDKs or CLI will do the encoding for you. For more information about
-    #   creating a .zip file, go to [Execution Permissions][1] in the *AWS
+    #   creating a .zip file, see [Execution Permissions][1] in the *AWS
     #   Lambda Developer Guide*.
     #
     #
@@ -1922,7 +1922,7 @@ module Aws::Lambda
     #
     # @option params [String] :s3_bucket
     #   Amazon S3 bucket name where the .zip file containing your deployment
-    #   package is stored. This bucket must reside in the same AWS region
+    #   package is stored. This bucket must reside in the same AWS Region
     #   where you are creating the Lambda function.
     #
     # @option params [String] :s3_key
@@ -2077,7 +2077,7 @@ module Aws::Lambda
     #    </note>
     #
     # @option params [Types::DeadLetterConfig] :dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource Name)
+    #   The parent object that contains the target Amazon Resource Name (ARN)
     #   of an Amazon SQS queue or Amazon SNS topic.
     #
     # @option params [String] :kms_key_arn

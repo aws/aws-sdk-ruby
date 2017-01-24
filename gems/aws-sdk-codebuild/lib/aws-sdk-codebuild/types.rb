@@ -16,7 +16,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] ids
-    #   The IDs of the builds to get information about.
+    #   The IDs of the builds.
     #   @return [Array<String>]
     #
     class BatchGetBuildsInput < Struct.new(
@@ -46,7 +46,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] names
-    #   The names of the build projects to get information about.
+    #   The names of the build projects.
     #   @return [Array<String>]
     #
     class BatchGetProjectsInput < Struct.new(
@@ -72,11 +72,11 @@ module Aws::CodeBuild
     # Information about a build.
     #
     # @!attribute [rw] id
-    #   The build's unique ID.
+    #   The unique ID for the build.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The build's Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the build.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -88,11 +88,11 @@ module Aws::CodeBuild
     #   @return [Time]
     #
     # @!attribute [rw] current_phase
-    #   The build's current build phase.
+    #   The current build phase.
     #   @return [String]
     #
     # @!attribute [rw] build_status
-    #   The build's current status. Valid values include:
+    #   The current status of the build. Valid values include:
     #
     #   * `FAILED`\: The build failed.
     #
@@ -113,13 +113,12 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] project_name
-    #   The build project's name.
+    #   The name of the build project.
     #   @return [String]
     #
     # @!attribute [rw] phases
-    #   Information about all previous build phases that have completed, and
-    #   information about any current build phase that has not yet
-    #   completed.
+    #   Information about all previous build phases that are completed and
+    #   information about any current build phase that is not yet complete.
     #   @return [Array<Types::BuildPhase>]
     #
     # @!attribute [rw] source
@@ -127,7 +126,7 @@ module Aws::CodeBuild
     #   @return [Types::ProjectSource]
     #
     # @!attribute [rw] artifacts
-    #   Information about the build's output artifacts.
+    #   Information about the output artifacts for the build.
     #   @return [Types::BuildArtifacts]
     #
     # @!attribute [rw] environment
@@ -139,23 +138,22 @@ module Aws::CodeBuild
     #   @return [Types::LogsLocation]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long in minutes for AWS CodeBuild to wait to timeout this build
-    #   if it does not get marked as completed.
+    #   How long, in minutes, for AWS CodeBuild to wait before timing out
+    #   this build if it does not get marked as completed.
     #   @return [Integer]
     #
     # @!attribute [rw] build_complete
-    #   Whether the build has finished. Valid values include true if
-    #   completed; otherwise, false.
+    #   Whether the build has finished. True if completed; otherwise, false.
     #   @return [Boolean]
     #
     # @!attribute [rw] initiator
     #   The entity that started the build. Valid values include:
     #
-    #   * If AWS CodePipeline started the build, the pipeline's name, for
-    #     example `codepipeline/my-demo-pipeline`.
+    #   * If AWS CodePipeline started the build, the pipeline's name (for
+    #     example, `codepipeline/my-demo-pipeline`).
     #
     #   * If an AWS Identity and Access Management (IAM) user started the
-    #     build, the user's name, for example `MyUserName`.
+    #     build, the user's name (for example `MyUserName`).
     #
     #   * If the Jenkins plugin for AWS CodeBuild started the build, the
     #     string `CodeBuild-Jenkins-Plugin`.
@@ -184,7 +182,7 @@ module Aws::CodeBuild
     # Information about build output artifacts.
     #
     # @!attribute [rw] location
-    #   Information about the build artifacts' location.
+    #   Information about the location of the build artifacts.
     #   @return [String]
     #
     # @!attribute [rw] sha256sum
@@ -193,8 +191,8 @@ module Aws::CodeBuild
     #   You can use this hash along with a checksum tool to confirm both
     #   file integrity and authenticity.
     #
-    #   <note markdown="1"> This value is available only if the related build project's
-    #   `packaging` value is set to `ZIP`.
+    #   <note markdown="1"> This value is available only if the build project's `packaging`
+    #   value is set to `ZIP`.
     #
     #    </note>
     #   @return [String]
@@ -205,8 +203,8 @@ module Aws::CodeBuild
     #   You can use this hash along with a checksum tool to confirm both
     #   file integrity and authenticity.
     #
-    #   <note markdown="1"> This value is available only if the related build project's
-    #   `packaging` value is set to `ZIP`.
+    #   <note markdown="1"> This value is available only if the build project's `packaging`
+    #   value is set to `ZIP`.
     #
     #    </note>
     #   @return [String]
@@ -221,12 +219,12 @@ module Aws::CodeBuild
     # Information about a stage for a build.
     #
     # @!attribute [rw] phase_type
-    #   The build phase's name. Valid values include:
+    #   The name of the build phase. Valid values include:
     #
     #   * `BUILD`\: Core build activities typically occur in this build
     #     phase.
     #
-    #   * `COMPLETED`\: The build has completed.
+    #   * `COMPLETED`\: The build has been completed.
     #
     #   * `DOWNLOAD_SOURCE`\: Source code is being downloaded in this build
     #     phase.
@@ -248,11 +246,11 @@ module Aws::CodeBuild
     #   * `SUBMITTED`\: The build has been submitted.
     #
     #   * `UPLOAD_ARTIFACTS`\: Build output artifacts are being uploaded to
-    #     output location.
+    #     the output location.
     #   @return [String]
     #
     # @!attribute [rw] phase_status
-    #   The build phase's current status. Valid values include:
+    #   The current status of the build phase. Valid values include:
     #
     #   * `FAILED`\: The build phase failed.
     #
@@ -276,8 +274,8 @@ module Aws::CodeBuild
     #   @return [Time]
     #
     # @!attribute [rw] duration_in_seconds
-    #   How long, in seconds, between the build's phase starting and ending
-    #   times.
+    #   How long, in seconds, between the starting and ending times of the
+    #   build's phase.
     #   @return [Integer]
     #
     # @!attribute [rw] contexts
@@ -341,41 +339,40 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] name
-    #   The build project's name.
+    #   The name of the build project.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A meaningful description of the build project.
+    #   A description that makes the build project easy to identify.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   Information about the build project's build input source code.
+    #   Information about the build input source code for the build project.
     #   @return [Types::ProjectSource]
     #
     # @!attribute [rw] artifacts
-    #   Information about the build project's build output artifacts.
+    #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
     #
     # @!attribute [rw] environment
-    #   Information about the build project's build environment.
+    #   Information about the build environment for the build project.
     #   @return [Types::ProjectEnvironment]
     #
     # @!attribute [rw] service_role
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that enables AWS CodeBuild to interact with
-    #   dependent AWS services on behalf of the AWS account.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   enables AWS CodeBuild to interact with dependent AWS services on
+    #   behalf of the AWS account.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
-    #   wait until timing out any related build that does not get marked as
+    #   How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
+    #   wait until timing out any build that has not been marked as
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
-    #   to be used for encrypting the build project's build output
-    #   artifacts.
+    #   to be used for encrypting the build output artifacts.
     #
     #   You can specify either the CMK's Amazon Resource Name (ARN) or, if
     #   available, the CMK's alias (using the format `alias/alias-name `).
@@ -418,7 +415,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the build project to delete.
+    #   The name of the build project.
     #   @return [String]
     #
     class DeleteProjectInput < Struct.new(
@@ -431,11 +428,11 @@ module Aws::CodeBuild
     # Information about a Docker image that is managed by AWS CodeBuild.
     #
     # @!attribute [rw] name
-    #   The Docker image's name.
+    #   The name of the Docker image.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The Docker image's description.
+    #   The description of the Docker image.
     #   @return [String]
     #
     class EnvironmentImage < Struct.new(
@@ -448,7 +445,7 @@ module Aws::CodeBuild
     # are managed by AWS CodeBuild.
     #
     # @!attribute [rw] language
-    #   The programming language for the related set of Docker images.
+    #   The programming language for the Docker images.
     #   @return [String]
     #
     # @!attribute [rw] images
@@ -492,11 +489,11 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] name
-    #   The environment variable's name or key.
+    #   The name or key of the environment variable.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The environment variable's value.
+    #   The value of the environment variable.
     #   @return [String]
     #
     class EnvironmentVariable < Struct.new(
@@ -515,7 +512,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] project_name
-    #   The name of the build project to get a list of build IDs for.
+    #   The name of the build project.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -699,13 +696,11 @@ module Aws::CodeBuild
     # Information about build logs in Amazon CloudWatch Logs.
     #
     # @!attribute [rw] group_name
-    #   The name of the Amazon CloudWatch Logs group for the associated
-    #   build logs.
+    #   The name of the Amazon CloudWatch Logs group for the build logs.
     #   @return [String]
     #
     # @!attribute [rw] stream_name
-    #   The name of the Amazon CloudWatch Logs stream for the associated
-    #   build logs.
+    #   The name of the Amazon CloudWatch Logs stream for the build logs.
     #   @return [String]
     #
     # @!attribute [rw] deep_link
@@ -719,15 +714,15 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Additional information about a build phase that has an error, which
-    # you can use to help troubleshoot a failed build.
+    # Additional information about a build phase that has an error. You can
+    # use this information to help troubleshoot a failed build.
     #
     # @!attribute [rw] status_code
     #   The status code for the context of the build phase.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   An explanation of the build phase's context. This explanation may
+    #   An explanation of the build phase's context. This explanation might
     #   include a command ID and an exit code.
     #   @return [String]
     #
@@ -740,23 +735,24 @@ module Aws::CodeBuild
     # Information about a build project.
     #
     # @!attribute [rw] name
-    #   The build project's name.
+    #   The name of the build project.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The build project's Amazon Resource Name (ARN).
+    #   The Amazon Resource Name (ARN) of the build project.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A meaningful description of the build project.
+    #   A description that makes the build project easy to identify.
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   Information about the build project's build input source code.
+    #   Information about the build input source code for this build
+    #   project.
     #   @return [Types::ProjectSource]
     #
     # @!attribute [rw] artifacts
-    #   Information about the build project's build output artifacts.
+    #   Information about the build output artifacts for the build project.
     #   @return [Types::ProjectArtifacts]
     #
     # @!attribute [rw] environment
@@ -764,21 +760,20 @@ module Aws::CodeBuild
     #   @return [Types::ProjectEnvironment]
     #
     # @!attribute [rw] service_role
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that enables AWS CodeBuild to interact with
-    #   dependent AWS services on behalf of the AWS account.
+    #   The ARN of the AWS Identity and Access Management (IAM) role that
+    #   enables AWS CodeBuild to interact with dependent AWS services on
+    #   behalf of the AWS account.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
-    #   wait to timeout any related build that did not get marked as
+    #   How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
+    #   wait before timing out any related build that did not get marked as
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
     #   The AWS Key Management Service (AWS KMS) customer master key (CMK)
-    #   to be used for encrypting the build project's build output
-    #   artifacts.
+    #   to be used for encrypting the build output artifacts.
     #
     #   This is expressed either as the CMK's Amazon Resource Name (ARN)
     #   or, if specified, the CMK's alias (using the format
@@ -817,7 +812,7 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about the build project's build output artifacts.
+    # Information about the build output artifacts for the build project.
     #
     # @note When making an API call, you may pass ProjectArtifacts
     #   data as a hash:
@@ -832,9 +827,9 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] type
-    #   The build output artifact's type. Valid values include:
+    #   The type of build output artifact. Valid values include:
     #
-    #   * `CODEPIPELINE`\: The build project with have build output
+    #   * `CODEPIPELINE`\: The build project will have build output
     #     generated through AWS CodePipeline.
     #
     #   * `NO_ARTIFACTS`\: The build project will not produce any build
@@ -855,8 +850,6 @@ module Aws::CodeBuild
     #     ignored if specified, because no build output will be produced.
     #
     #   * If `type` is set to `S3`, this is the name of the output bucket.
-    #     If `path` is not also specified, then `location` can also specify
-    #     the path of the output artifact in the output bucket.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -957,7 +950,7 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about the build project's build environment.
+    # Information about the build environment of the build project.
     #
     # @note When making an API call, you may pass ProjectEnvironment
     #   data as a hash:
@@ -976,9 +969,6 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] type
     #   The type of build environment to use for related builds.
-    #
-    #   The only valid value is `LINUX_CONTAINER`, which represents a
-    #   Linux-based build environment.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -1012,7 +1002,7 @@ module Aws::CodeBuild
       include Aws::Structure
     end
 
-    # Information about the build project's build input source code.
+    # Information about the build input source code for the build project.
     #
     # @note When making an API call, you may pass ProjectSource
     #   data as a hash:
@@ -1062,22 +1052,20 @@ module Aws::CodeBuild
     #     input bucket, the path to the ZIP file that contains the source
     #     code (for example, ` bucket-name/path/to/object-name.zip`)
     #
-    #   * For source code in a GitHub repository, the HTTPS clone URL,
-    #     including the user name and personal access token, to the
-    #     repository that contains the source code and the build spec (for
-    #     example,
-    #     `https://login-user-name:personal-access-token@github.com/repo-owner-name/repo-name.git`).
-    #     For more information, see [Creating an Access Token for
-    #     Command-Line Use][1] on the GitHub Help website.
-    #
-    #
-    #
-    #   [1]: https://help.github.com/articles/creating-an-access-token-for-command-line-use/
+    #   * For source code in a GitHub repository, instead of specifying a
+    #     value here, you connect your AWS account to your GitHub account.
+    #     To do this, use the AWS CodeBuild console to begin creating a
+    #     build project, and follow the on-screen instructions to complete
+    #     the connection. (After you have connected to your GitHub account,
+    #     you do not need to finish creating the build project, and you may
+    #     then leave the AWS CodeBuild console.) To instruct AWS CodeBuild
+    #     to then use this connection, in the `source` object, set the
+    #     `auth` object's `type` value to `OAUTH`.
     #   @return [String]
     #
     # @!attribute [rw] buildspec
-    #   The build spec declaration to use for this build project's related
-    #   builds.
+    #   The build spec declaration to use for the builds in this build
+    #   project.
     #
     #   If this value is not specified, a build spec must be included along
     #   with the source code to be built.
@@ -1087,8 +1075,9 @@ module Aws::CodeBuild
     #   Information about the authorization settings for AWS CodeBuild to
     #   access the source code to be built.
     #
-    #   This information is only for the AWS CodeBuild console's use. Your
-    #   code should not get or set this information directly.
+    #   This information is for the AWS CodeBuild console's use only. Your
+    #   code should not get or set this information directly (unless the
+    #   build project's source `type` value is `GITHUB`).
     #   @return [Types::SourceAuth]
     #
     class ProjectSource < Struct.new(
@@ -1102,8 +1091,9 @@ module Aws::CodeBuild
     # Information about the authorization settings for AWS CodeBuild to
     # access the source code to be built.
     #
-    # This information is only for the AWS CodeBuild console's use. Your
-    # code should not get or set this information directly.
+    # This information is for the AWS CodeBuild console's use only. Your
+    # code should not get or set this information directly (unless the build
+    # project's source `type` value is `GITHUB`).
     #
     # @note When making an API call, you may pass SourceAuth
     #   data as a hash:
@@ -1169,23 +1159,23 @@ module Aws::CodeBuild
     #
     # @!attribute [rw] artifacts_override
     #   Build output artifact settings that override, for this build only,
-    #   the latest ones already defined in the corresponding build project.
+    #   the latest ones already defined in the build project.
     #   @return [Types::ProjectArtifacts]
     #
     # @!attribute [rw] environment_variables_override
     #   A set of environment variables that overrides, for this build only,
-    #   the latest ones already defined in the corresponding build project.
+    #   the latest ones already defined in the build project.
     #   @return [Array<Types::EnvironmentVariable>]
     #
     # @!attribute [rw] buildspec_override
     #   A build spec declaration that overrides, for this build only, the
-    #   latest one already defined in the corresponding build project.
+    #   latest one already defined in the build project.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes_override
-    #   The number of build timeout minutes, from 5 to 480 (8 hours) that
+    #   The number of build timeout minutes, from 5 to 480 (8 hours), that
     #   overrides, for this build only, the latest setting already defined
-    #   in the corresponding build project.
+    #   in the build project.
     #   @return [Integer]
     #
     class StartBuildInput < Struct.new(
@@ -1215,7 +1205,7 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] id
-    #   The ID of the build to attempt to stop running.
+    #   The ID of the build.
     #   @return [String]
     #
     class StopBuildInput < Struct.new(
@@ -1224,7 +1214,7 @@ module Aws::CodeBuild
     end
 
     # @!attribute [rw] build
-    #   Information about the build that was attempted to be stopped.
+    #   Information about the build.
     #   @return [Types::Build]
     #
     class StopBuildOutput < Struct.new(
@@ -1305,9 +1295,9 @@ module Aws::CodeBuild
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the existing build project to change settings.
+    #   The name of the build project.
     #
-    #   <note markdown="1"> You cannot change an existing build project's name.
+    #   <note markdown="1"> You cannot change a build project's name.
     #
     #    </note>
     #   @return [String]
@@ -1317,36 +1307,35 @@ module Aws::CodeBuild
     #   @return [String]
     #
     # @!attribute [rw] source
-    #   Information to be changed about the build project's build input
-    #   source code.
+    #   Information to be changed about the build input source code for the
+    #   build project.
     #   @return [Types::ProjectSource]
     #
     # @!attribute [rw] artifacts
-    #   Information to be changed about the build project's build output
-    #   artifacts.
+    #   Information to be changed about the build output artifacts for the
+    #   build project.
     #   @return [Types::ProjectArtifacts]
     #
     # @!attribute [rw] environment
-    #   Information to be changed about the build project's build
-    #   environment.
+    #   Information to be changed about the build environment for the build
+    #   project.
     #   @return [Types::ProjectEnvironment]
     #
     # @!attribute [rw] service_role
-    #   The replacement Amazon Resource Name (ARN) of the AWS Identity and
-    #   Access Management (IAM) role that enables AWS CodeBuild to interact
-    #   with dependent AWS services on behalf of the AWS account.
+    #   The replacement ARN of the AWS Identity and Access Management (IAM)
+    #   role that enables AWS CodeBuild to interact with dependent AWS
+    #   services on behalf of the AWS account.
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
     #   The replacement value in minutes, from 5 to 480 (8 hours), for AWS
-    #   CodeBuild to wait to timeout any related build that did not get
-    #   marked as completed.
+    #   CodeBuild to wait before timing out any related build that did not
+    #   get marked as completed.
     #   @return [Integer]
     #
     # @!attribute [rw] encryption_key
     #   The replacement AWS Key Management Service (AWS KMS) customer master
-    #   key (CMK) to be used for encrypting the build project's build
-    #   output artifacts.
+    #   key (CMK) to be used for encrypting the build output artifacts.
     #
     #   You can specify either the CMK's Amazon Resource Name (ARN) or, if
     #   available, the CMK's alias (using the format `alias/alias-name `).

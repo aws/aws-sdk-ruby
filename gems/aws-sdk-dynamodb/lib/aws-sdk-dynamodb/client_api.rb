@@ -99,12 +99,15 @@ module Aws::DynamoDB
     ListTablesInput = Shapes::StructureShape.new(name: 'ListTablesInput')
     ListTablesInputLimit = Shapes::IntegerShape.new(name: 'ListTablesInputLimit')
     ListTablesOutput = Shapes::StructureShape.new(name: 'ListTablesOutput')
+    ListTagsOfResourceInput = Shapes::StructureShape.new(name: 'ListTagsOfResourceInput')
+    ListTagsOfResourceOutput = Shapes::StructureShape.new(name: 'ListTagsOfResourceOutput')
     LocalSecondaryIndex = Shapes::StructureShape.new(name: 'LocalSecondaryIndex')
     LocalSecondaryIndexDescription = Shapes::StructureShape.new(name: 'LocalSecondaryIndexDescription')
     LocalSecondaryIndexDescriptionList = Shapes::ListShape.new(name: 'LocalSecondaryIndexDescriptionList')
     LocalSecondaryIndexList = Shapes::ListShape.new(name: 'LocalSecondaryIndexList')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapAttributeValue = Shapes::MapShape.new(name: 'MapAttributeValue')
+    NextTokenString = Shapes::StringShape.new(name: 'NextTokenString')
     NonKeyAttributeName = Shapes::StringShape.new(name: 'NonKeyAttributeName')
     NonKeyAttributeNameList = Shapes::ListShape.new(name: 'NonKeyAttributeNameList')
     NullAttributeValue = Shapes::BooleanShape.new(name: 'NullAttributeValue')
@@ -124,6 +127,7 @@ module Aws::DynamoDB
     PutRequest = Shapes::StructureShape.new(name: 'PutRequest')
     QueryInput = Shapes::StructureShape.new(name: 'QueryInput')
     QueryOutput = Shapes::StructureShape.new(name: 'QueryOutput')
+    ResourceArnString = Shapes::StringShape.new(name: 'ResourceArnString')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ReturnConsumedCapacity = Shapes::StringShape.new(name: 'ReturnConsumedCapacity')
@@ -147,6 +151,13 @@ module Aws::DynamoDB
     TableName = Shapes::StringShape.new(name: 'TableName')
     TableNameList = Shapes::ListShape.new(name: 'TableNameList')
     TableStatus = Shapes::StringShape.new(name: 'TableStatus')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagKeyString = Shapes::StringShape.new(name: 'TagKeyString')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
+    TagValueString = Shapes::StringShape.new(name: 'TagValueString')
+    UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateExpression = Shapes::StringShape.new(name: 'UpdateExpression')
     UpdateGlobalSecondaryIndexAction = Shapes::StructureShape.new(name: 'UpdateGlobalSecondaryIndexAction')
     UpdateItemInput = Shapes::StructureShape.new(name: 'UpdateItemInput')
@@ -401,6 +412,14 @@ module Aws::DynamoDB
     ListTablesOutput.add_member(:last_evaluated_table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "LastEvaluatedTableName"))
     ListTablesOutput.struct_class = Types::ListTablesOutput
 
+    ListTagsOfResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    ListTagsOfResourceInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListTagsOfResourceInput.struct_class = Types::ListTagsOfResourceInput
+
+    ListTagsOfResourceOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListTagsOfResourceOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
+    ListTagsOfResourceOutput.struct_class = Types::ListTagsOfResourceOutput
+
     LocalSecondaryIndex.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     LocalSecondaryIndex.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, required: true, location_name: "KeySchema"))
     LocalSecondaryIndex.add_member(:projection, Shapes::ShapeRef.new(shape: Projection, required: true, location_name: "Projection"))
@@ -540,6 +559,22 @@ module Aws::DynamoDB
     TableDescription.struct_class = Types::TableDescription
 
     TableNameList.member = Shapes::ShapeRef.new(shape: TableName)
+
+    Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKeyString, required: true, location_name: "Key"))
+    Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValueString, required: true, location_name: "Value"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKeyString)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceInput.struct_class = Types::TagResourceInput
+
+    UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
+    UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceInput.struct_class = Types::UntagResourceInput
 
     UpdateGlobalSecondaryIndexAction.add_member(:index_name, Shapes::ShapeRef.new(shape: IndexName, required: true, location_name: "IndexName"))
     UpdateGlobalSecondaryIndexAction.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, required: true, location_name: "ProvisionedThroughput"))
@@ -704,6 +739,16 @@ module Aws::DynamoDB
         )
       end)
 
+      api.add_operation(:list_tags_of_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsOfResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsOfResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsOfResourceOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:put_item, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PutItem"
         o.http_method = "POST"
@@ -749,6 +794,30 @@ module Aws::DynamoDB
             "last_evaluated_key" => "exclusive_start_key"
           }
         )
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:update_item, Seahorse::Model::Operation.new.tap do |o|

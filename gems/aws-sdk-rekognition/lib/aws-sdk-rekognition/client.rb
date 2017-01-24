@@ -189,10 +189,10 @@ module Aws::Rekognition
     # `rekognition:CompareFaces` action.
     #
     # @option params [required, Types::Image] :source_image
-    #   Source image either as bytes or an Amazon S3 object
+    #   Source image either as bytes or an S3 object
     #
     # @option params [required, Types::Image] :target_image
-    #   Target image either as bytes or an Amazon S3 object
+    #   Target image either as bytes or an S3 object
     #
     # @option params [Float] :similarity_threshold
     #   The minimum level of confidence in the match you want included in the
@@ -247,7 +247,7 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # Creates a collection in an AWS region. You can add faces to the
+    # Creates a collection in an AWS Region. You can add faces to the
     # collection using the operation.
     #
     # For example, you might create collections, one for each of your
@@ -385,7 +385,7 @@ module Aws::Rekognition
     #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\], the
     #   service uses a logical AND operator to determine which attributes to
     #   return (in this case, it is all attributes). If you specify all
-    #   attributes, Rekognition performs additional detection.
+    #   attributes, Amazon Rekognition performs additional detection.
     #
     # @return [Types::DetectFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -576,11 +576,11 @@ module Aws::Rekognition
     # ID assigned by the service for each face that is detected and stored,
     # and an image ID assigned by the service for the input image If you
     # request all facial attributes (using the `detectionAttributes`
-    # parameter, Rekognition returns detailed facial attributes such as
-    # facial landmarks (for example, location of eye and mount) and other
+    # parameter, Amazon Rekognition returns detailed facial attributes such
+    # as facial landmarks (for example, location of eye and mount) and other
     # facial attributes such gender. If you provide the same image, specify
     # the same collection, and use the same external ID in the `IndexFaces`
-    # operation, Rekognition doesn't save duplicate face metadata.
+    # operation, Amazon Rekognition doesn't save duplicate face metadata.
     #
     # For an example, see example2.
     #
@@ -594,6 +594,22 @@ module Aws::Rekognition
     # @option params [required, Types::Image] :image
     #   Provides the source image either as bytes or an S3 object.
     #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   You may need to Base64-encode the image bytes depending on the
+    #   language you are using and whether or not you are using the AWS SDK.
+    #   For more information, see example4.
+    #
+    #   If you use the Amazon CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   manage-access-resource-policies.
+    #
     # @option params [String] :external_image_id
     #   ID you want to assign to all the faces detected in the image.
     #
@@ -602,7 +618,7 @@ module Aws::Rekognition
     #   the operation returns a subset of the facial attributes.
     #
     #   For example, you can specify the value as, \["ALL"\] or
-    #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\],
+    #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\], Amazon
     #   Rekognition uses the logical AND operator to determine which
     #   attributes to return (in this case, it is all attributes). If you
     #   specify all attributes, the service performs additional detection, in
@@ -775,10 +791,11 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
-    # For a given input face ID, searches the specified collection for
-    # matching faces. You get a face ID when you add a face to the
-    # collection using the IndexFaces operation. The operation compares the
-    # features of the input face with faces in the specified collection.
+    # For a given input face ID, searches for matching faces in the
+    # collection the face belongs to. You get a face ID when you add a face
+    # to the collection using the IndexFaces operation. The operation
+    # compares the features of the input face with faces in the specified
+    # collection.
     #
     # <note markdown="1"> You can also search faces without indexing faces by using the
     # `SearchFacesByImage` operation.
@@ -798,13 +815,13 @@ module Aws::Rekognition
     # `rekognition:SearchFaces` action.
     #
     # @option params [required, String] :collection_id
-    #   ID of the collection to search.
+    #   ID of the collection the face belongs to.
     #
     # @option params [required, String] :face_id
     #   ID of a face to find matches for in the collection.
     #
     # @option params [Integer] :max_faces
-    #   Maximum number of faces to return. The API will return the maximum
+    #   Maximum number of faces to return. The operation returns the maximum
     #   number of faces with the highest confidence in the match.
     #
     # @option params [Float] :face_match_threshold
@@ -853,12 +870,12 @@ module Aws::Rekognition
     # specified collection.
     #
     # <note markdown="1"> To search for all faces in an input image, you might first call the
-    # API, and then use the face IDs returned in subsequent calls to the
-    # API.
+    # operation, and then use the face IDs returned in subsequent calls to
+    # the operation.
     #
-    #  You can also call the `DetectFaces` API and use the bounding boxes in
-    # the response to make face crops, which then you can pass in to the
-    # `SearchFacesByImage` API.
+    #  You can also call the `DetectFaces` operation and use the bounding
+    # boxes in the response to make face crops, which then you can pass in
+    # to the `SearchFacesByImage` operation.
     #
     #  </note>
     #
@@ -866,10 +883,10 @@ module Aws::Rekognition
     # similarity score with the highest similarity first. More specifically,
     # it is an array of metadata for each face match found. Along with the
     # metadata, the response also includes a `similarity` indicating how
-    # similar the face is to the input face. In the response, the API also
-    # returns the bounding box (and a confidence level that the bounding box
-    # contains a face) of the face that Rekognition used for the input
-    # image.
+    # similar the face is to the input face. In the response, the operation
+    # also returns the bounding box (and a confidence level that the
+    # bounding box contains a face) of the face that Amazon Rekognition used
+    # for the input image.
     #
     # For an example, see example3.
     #
@@ -881,6 +898,22 @@ module Aws::Rekognition
     #
     # @option params [required, Types::Image] :image
     #   Provides the source image either as bytes or an S3 object.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   You may need to Base64-encode the image bytes depending on the
+    #   language you are using and whether or not you are using the AWS SDK.
+    #   For more information, see example4.
+    #
+    #   If you use the Amazon CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   manage-access-resource-policies.
     #
     # @option params [Integer] :max_faces
     #   Maximum number of faces to return. The operation returns the maximum

@@ -194,8 +194,40 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Adds the specified user to the specified group.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, String] :username
+    #   The username for the user.
+    #
+    # @option params [required, String] :group_name
+    #   The group name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_add_user_to_group({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     group_name: "GroupNameType", # required
+    #   })
+    #
+    # @overload admin_add_user_to_group(params = {})
+    # @param [Hash] params ({})
+    def admin_add_user_to_group(params = {}, options = {})
+      req = build_request(:admin_add_user_to_group, params)
+      req.send_request(options)
+    end
+
     # Confirms user registration as an admin without using a confirmation
     # code. Works on any user.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for which you want to confirm user registration.
@@ -370,6 +402,8 @@ module Aws::CognitoIdentityProvider
 
     # Deletes a user as an administrator. Works on any user.
     #
+    # Requires developer credentials.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to delete the user.
     #
@@ -394,6 +428,8 @@ module Aws::CognitoIdentityProvider
 
     # Deletes the user attributes in a user pool as an administrator. Works
     # on any user.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to delete user
@@ -426,6 +462,8 @@ module Aws::CognitoIdentityProvider
 
     # Disables the specified user as an administrator. Works on any user.
     #
+    # Requires developer credentials.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to disable the user.
     #
@@ -450,6 +488,8 @@ module Aws::CognitoIdentityProvider
 
     # Enables the specified user as an administrator. Works on any user.
     #
+    # Requires developer credentials.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to enable the user.
     #
@@ -473,6 +513,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Forgets the device, as an administrator.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
@@ -501,6 +543,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Gets the device, as an administrator.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :device_key
     #   The device key.
@@ -542,6 +586,8 @@ module Aws::CognitoIdentityProvider
 
     # Gets the specified user by user name in a user pool as an
     # administrator. Works on any user.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to get information
@@ -589,6 +635,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Initiates the authentication flow, as an administrator.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The ID of the Amazon Cognito user pool.
@@ -649,6 +697,8 @@ module Aws::CognitoIdentityProvider
 
     # Lists devices, as an administrator.
     #
+    # Requires developer credentials.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
     #
@@ -694,6 +744,87 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Lists the groups that the user belongs to.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :username
+    #   The username for the user.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [Integer] :limit
+    #   The limit of the request to list groups.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::AdminListGroupsForUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AdminListGroupsForUserResponse#groups #groups} => Array&lt;Types::GroupType&gt;
+    #   * {Types::AdminListGroupsForUserResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_list_groups_for_user({
+    #     username: "UsernameType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #     limit: 1,
+    #     next_token: "PaginationKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].group_name #=> String
+    #   resp.groups[0].user_pool_id #=> String
+    #   resp.groups[0].description #=> String
+    #   resp.groups[0].role_arn #=> String
+    #   resp.groups[0].precedence #=> Integer
+    #   resp.groups[0].last_modified_date #=> Time
+    #   resp.groups[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload admin_list_groups_for_user(params = {})
+    # @param [Hash] params ({})
+    def admin_list_groups_for_user(params = {}, options = {})
+      req = build_request(:admin_list_groups_for_user, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified user from the specified group.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, String] :username
+    #   The username for the user.
+    #
+    # @option params [required, String] :group_name
+    #   The group name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.admin_remove_user_from_group({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     username: "UsernameType", # required
+    #     group_name: "GroupNameType", # required
+    #   })
+    #
+    # @overload admin_remove_user_from_group(params = {})
+    # @param [Hash] params ({})
+    def admin_remove_user_from_group(params = {}, options = {})
+      req = build_request(:admin_remove_user_from_group, params)
+      req.send_request(options)
+    end
+
     # Resets the specified user's password in a user pool as an
     # administrator. Works on any user.
     #
@@ -707,6 +838,8 @@ module Aws::CognitoIdentityProvider
     # verified email exists for the user, calling this API will also result
     # in sending a message to the end user with the code to change their
     # password.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to reset the user's
@@ -732,6 +865,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Responds to an authentication challenge, as an administrator.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The ID of the Amazon Cognito user pool.
@@ -791,6 +926,8 @@ module Aws::CognitoIdentityProvider
     # Sets all the user settings for a specified user name. Works on any
     # user.
     #
+    # Requires developer credentials.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to set the user's
     #   settings, such as MFA options.
@@ -825,6 +962,8 @@ module Aws::CognitoIdentityProvider
 
     # Updates the device status as an administrator.
     #
+    # Requires developer credentials.
+    #
     # @option params [required, String] :user_pool_id
     #   The user pool ID&gt;
     #
@@ -857,6 +996,8 @@ module Aws::CognitoIdentityProvider
 
     # Updates the specified user's attributes, including developer
     # attributes, as an administrator. Works on any user.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID for the user pool where you want to update user
@@ -891,6 +1032,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Signs out users from all devices, as an administrator.
+    #
+    # Requires developer credentials.
     #
     # @option params [required, String] :user_pool_id
     #   The user pool ID.
@@ -1072,6 +1215,72 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Creates a new group in the specified user pool.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group. Must be unique.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [String] :description
+    #   A string containing the description of the group.
+    #
+    # @option params [String] :role_arn
+    #   The role ARN for the group.
+    #
+    # @option params [Integer] :precedence
+    #   A nonnegative integer value that specifies the precedence of this
+    #   group relative to the other groups that a user can belong to in the
+    #   user pool. Zero is the highest precedence value. Groups with lower
+    #   `Precedence` values take precedence over groups with higher or null
+    #   `Precedence` values. If a user belongs to two or more groups, it is
+    #   the group with the lowest precedence value whose role ARN will be used
+    #   in the `cognito:roles` and `cognito:preferred_role` claims in the
+    #   user's tokens.
+    #
+    #   Two groups can have the same `Precedence` value. If this happens,
+    #   neither group takes precedence over the other. If two groups with the
+    #   same `Precedence` have the same role ARN, that role is used in the
+    #   `cognito:preferred_role` claim in tokens for users in each group. If
+    #   the two groups have different role ARNs, the `cognito:preferred_role`
+    #   claim is not set in users' tokens.
+    #
+    #   The default `Precedence` value is null.
+    #
+    # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateGroupResponse#group #group} => Types::GroupType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_group({
+    #     group_name: "GroupNameType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #     description: "DescriptionType",
+    #     role_arn: "ArnType",
+    #     precedence: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.group_name #=> String
+    #   resp.group.user_pool_id #=> String
+    #   resp.group.description #=> String
+    #   resp.group.role_arn #=> String
+    #   resp.group.precedence #=> Integer
+    #   resp.group.last_modified_date #=> Time
+    #   resp.group.creation_date #=> Time
+    #
+    # @overload create_group(params = {})
+    # @param [Hash] params ({})
+    def create_group(params = {}, options = {})
+      req = build_request(:create_group, params)
+      req.send_request(options)
+    end
+
     # Creates the user import job.
     #
     # @option params [required, String] :job_name
@@ -1164,6 +1373,14 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::SmsConfigurationType] :sms_configuration
     #   The SMS configuration.
     #
+    # @option params [Hash<String,String>] :user_pool_tags
+    #   The cost allocation tags for the user pool. For more information, see
+    #   [Adding Cost Allocation Tags to Your User Pool][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #
     # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
     #   The configuration for AdminCreateUser requests.
     #
@@ -1216,6 +1433,9 @@ module Aws::CognitoIdentityProvider
     #     sms_configuration: {
     #       sns_caller_arn: "ArnType", # required
     #       external_id: "StringType",
+    #     },
+    #     user_pool_tags: {
+    #       "StringType" => "StringType",
     #     },
     #     admin_create_user_config: {
     #       allow_admin_create_user_only: false,
@@ -1291,6 +1511,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.email_configuration.reply_to_email_address #=> String
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
+    #   resp.user_pool.user_pool_tags #=> Hash
+    #   resp.user_pool.user_pool_tags["StringType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
@@ -1320,7 +1542,7 @@ module Aws::CognitoIdentityProvider
     #   pool client being created.
     #
     # @option params [Integer] :refresh_token_validity
-    #   Refreshes the token validity.
+    #   The validity of the refresh token, in days.
     #
     # @option params [Array<String>] :read_attributes
     #   The read attributes.
@@ -1367,6 +1589,32 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def create_user_pool_client(params = {}, options = {})
       req = build_request(:create_user_pool_client, params)
+      req.send_request(options)
+    end
+
+    # Deletes a group. Currently only groups with no members can be deleted.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_group({
+    #     group_name: "GroupNameType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #   })
+    #
+    # @overload delete_group(params = {})
+    # @param [Hash] params ({})
+    def delete_group(params = {}, options = {})
+      req = build_request(:delete_group, params)
       req.send_request(options)
     end
 
@@ -1565,6 +1813,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.email_configuration.reply_to_email_address #=> String
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
+    #   resp.user_pool.user_pool_tags #=> Hash
+    #   resp.user_pool.user_pool_tags["StringType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
     #   resp.user_pool.email_configuration_failure #=> String
     #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
@@ -1753,6 +2003,44 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Gets a group.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @return [Types::GetGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetGroupResponse#group #group} => Types::GroupType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_group({
+    #     group_name: "GroupNameType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.group_name #=> String
+    #   resp.group.user_pool_id #=> String
+    #   resp.group.description #=> String
+    #   resp.group.role_arn #=> String
+    #   resp.group.precedence #=> Integer
+    #   resp.group.last_modified_date #=> Time
+    #   resp.group.creation_date #=> Time
+    #
+    # @overload get_group(params = {})
+    # @param [Hash] params ({})
+    def get_group(params = {}, options = {})
+      req = build_request(:get_group, params)
+      req.send_request(options)
+    end
+
     # Gets the user attributes and metadata for a user.
     #
     # @option params [String] :access_token
@@ -1938,6 +2226,53 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def list_devices(params = {}, options = {})
       req = build_request(:list_devices, params)
+      req.send_request(options)
+    end
+
+    # Lists the groups associated with a user pool.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [Integer] :limit
+    #   The limit of the request to list groups.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListGroupsResponse#groups #groups} => Array&lt;Types::GroupType&gt;
+    #   * {Types::ListGroupsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_groups({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     limit: 1,
+    #     next_token: "PaginationKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.groups #=> Array
+    #   resp.groups[0].group_name #=> String
+    #   resp.groups[0].user_pool_id #=> String
+    #   resp.groups[0].description #=> String
+    #   resp.groups[0].role_arn #=> String
+    #   resp.groups[0].precedence #=> Integer
+    #   resp.groups[0].last_modified_date #=> Time
+    #   resp.groups[0].creation_date #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload list_groups(params = {})
+    # @param [Hash] params ({})
+    def list_groups(params = {}, options = {})
+      req = build_request(:list_groups, params)
       req.send_request(options)
     end
 
@@ -2138,6 +2473,61 @@ module Aws::CognitoIdentityProvider
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
       req = build_request(:list_users, params)
+      req.send_request(options)
+    end
+
+    # Lists the users in the specified group.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group.
+    #
+    # @option params [Integer] :limit
+    #   The limit of the request to list users.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListUsersInGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListUsersInGroupResponse#users #users} => Array&lt;Types::UserType&gt;
+    #   * {Types::ListUsersInGroupResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_users_in_group({
+    #     user_pool_id: "UserPoolIdType", # required
+    #     group_name: "GroupNameType", # required
+    #     limit: 1,
+    #     next_token: "PaginationKey",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].username #=> String
+    #   resp.users[0].attributes #=> Array
+    #   resp.users[0].attributes[0].name #=> String
+    #   resp.users[0].attributes[0].value #=> String
+    #   resp.users[0].user_create_date #=> Time
+    #   resp.users[0].user_last_modified_date #=> Time
+    #   resp.users[0].enabled #=> Boolean
+    #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+    #   resp.users[0].mfa_options #=> Array
+    #   resp.users[0].mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
+    #   resp.users[0].mfa_options[0].attribute_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_users_in_group(params = {})
+    # @param [Hash] params ({})
+    def list_users_in_group(params = {}, options = {})
+      req = build_request(:list_users_in_group, params)
       req.send_request(options)
     end
 
@@ -2443,6 +2833,59 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
+    # Updates the specified group with the specified attributes.
+    #
+    # Requires developer credentials.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group.
+    #
+    # @option params [required, String] :user_pool_id
+    #   The user pool ID for the user pool.
+    #
+    # @option params [String] :description
+    #   A string containing the new description of the group.
+    #
+    # @option params [String] :role_arn
+    #   The new role ARN for the group. This is used for setting the
+    #   `cognito:roles` and `cognito:preferred_role` claims in the token.
+    #
+    # @option params [Integer] :precedence
+    #   The new precedence value for the group. For more information about
+    #   this parameter, see
+    #   [CreateGroupRequest](API_CreateGroupRequeste.html).
+    #
+    # @return [Types::UpdateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateGroupResponse#group #group} => Types::GroupType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_group({
+    #     group_name: "GroupNameType", # required
+    #     user_pool_id: "UserPoolIdType", # required
+    #     description: "DescriptionType",
+    #     role_arn: "ArnType",
+    #     precedence: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group.group_name #=> String
+    #   resp.group.user_pool_id #=> String
+    #   resp.group.description #=> String
+    #   resp.group.role_arn #=> String
+    #   resp.group.precedence #=> Integer
+    #   resp.group.last_modified_date #=> Time
+    #   resp.group.creation_date #=> Time
+    #
+    # @overload update_group(params = {})
+    # @param [Hash] params ({})
+    def update_group(params = {}, options = {})
+      req = build_request(:update_group, params)
+      req.send_request(options)
+    end
+
     # Allows a user to update a specific attribute (one at a time).
     #
     # @option params [required, Array<Types::AttributeType>] :user_attributes
@@ -2530,6 +2973,14 @@ module Aws::CognitoIdentityProvider
     # @option params [Types::SmsConfigurationType] :sms_configuration
     #   SMS configuration.
     #
+    # @option params [Hash<String,String>] :user_pool_tags
+    #   The cost allocation tags for the user pool. For more information, see
+    #   [Adding Cost Allocation Tags to Your User Pool][1]
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html
+    #
     # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
     #   The configuration for AdminCreateUser requests.
     #
@@ -2576,6 +3027,9 @@ module Aws::CognitoIdentityProvider
     #       sns_caller_arn: "ArnType", # required
     #       external_id: "StringType",
     #     },
+    #     user_pool_tags: {
+    #       "StringType" => "StringType",
+    #     },
     #     admin_create_user_config: {
     #       allow_admin_create_user_only: false,
     #       unused_account_validity_days: 1,
@@ -2608,7 +3062,7 @@ module Aws::CognitoIdentityProvider
     #   The client name from the update user pool client request.
     #
     # @option params [Integer] :refresh_token_validity
-    #   The validity of the refresh token.
+    #   The validity of the refresh token, in days.
     #
     # @option params [Array<String>] :read_attributes
     #   The read-only attributes of the user pool.

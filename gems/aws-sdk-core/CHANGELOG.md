@@ -1,5 +1,11 @@
-Unreleased Changes
+3.0.0.rc3 (2017-01-24)
 ------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated the list of parameters to filter when logging.
 
 3.0.0.rc2 (2016-12-09)
 ------------------

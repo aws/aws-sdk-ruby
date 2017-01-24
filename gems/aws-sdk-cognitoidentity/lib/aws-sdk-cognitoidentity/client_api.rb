@@ -14,6 +14,9 @@ module Aws::CognitoIdentity
     ARNString = Shapes::StringShape.new(name: 'ARNString')
     AccessKeyString = Shapes::StringShape.new(name: 'AccessKeyString')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AmbiguousRoleResolutionType = Shapes::StringShape.new(name: 'AmbiguousRoleResolutionType')
+    ClaimName = Shapes::StringShape.new(name: 'ClaimName')
+    ClaimValue = Shapes::StringShape.new(name: 'ClaimValue')
     CognitoIdentityProvider = Shapes::StructureShape.new(name: 'CognitoIdentityProvider')
     CognitoIdentityProviderClientId = Shapes::StringShape.new(name: 'CognitoIdentityProviderClientId')
     CognitoIdentityProviderList = Shapes::ListShape.new(name: 'CognitoIdentityProviderList')
@@ -70,6 +73,9 @@ module Aws::CognitoIdentity
     LoginsMap = Shapes::MapShape.new(name: 'LoginsMap')
     LookupDeveloperIdentityInput = Shapes::StructureShape.new(name: 'LookupDeveloperIdentityInput')
     LookupDeveloperIdentityResponse = Shapes::StructureShape.new(name: 'LookupDeveloperIdentityResponse')
+    MappingRule = Shapes::StructureShape.new(name: 'MappingRule')
+    MappingRuleMatchType = Shapes::StringShape.new(name: 'MappingRuleMatchType')
+    MappingRulesList = Shapes::ListShape.new(name: 'MappingRulesList')
     MergeDeveloperIdentitiesInput = Shapes::StructureShape.new(name: 'MergeDeveloperIdentitiesInput')
     MergeDeveloperIdentitiesResponse = Shapes::StructureShape.new(name: 'MergeDeveloperIdentitiesResponse')
     NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
@@ -79,8 +85,12 @@ module Aws::CognitoIdentity
     QueryLimit = Shapes::IntegerShape.new(name: 'QueryLimit')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RoleMapping = Shapes::StructureShape.new(name: 'RoleMapping')
+    RoleMappingMap = Shapes::MapShape.new(name: 'RoleMappingMap')
+    RoleMappingType = Shapes::StringShape.new(name: 'RoleMappingType')
     RoleType = Shapes::StringShape.new(name: 'RoleType')
     RolesMap = Shapes::MapShape.new(name: 'RolesMap')
+    RulesConfigurationType = Shapes::StructureShape.new(name: 'RulesConfigurationType')
     SAMLProviderList = Shapes::ListShape.new(name: 'SAMLProviderList')
     SecretKeyString = Shapes::StringShape.new(name: 'SecretKeyString')
     SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
@@ -153,6 +163,7 @@ module Aws::CognitoIdentity
 
     GetIdentityPoolRolesResponse.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
     GetIdentityPoolRolesResponse.add_member(:roles, Shapes::ShapeRef.new(shape: RolesMap, location_name: "Roles"))
+    GetIdentityPoolRolesResponse.add_member(:role_mappings, Shapes::ShapeRef.new(shape: RoleMappingMap, location_name: "RoleMappings"))
     GetIdentityPoolRolesResponse.struct_class = Types::GetIdentityPoolRolesResponse
 
     GetOpenIdTokenForDeveloperIdentityInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
@@ -238,6 +249,14 @@ module Aws::CognitoIdentity
     LookupDeveloperIdentityResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationKey, location_name: "NextToken"))
     LookupDeveloperIdentityResponse.struct_class = Types::LookupDeveloperIdentityResponse
 
+    MappingRule.add_member(:claim, Shapes::ShapeRef.new(shape: ClaimName, required: true, location_name: "Claim"))
+    MappingRule.add_member(:match_type, Shapes::ShapeRef.new(shape: MappingRuleMatchType, required: true, location_name: "MatchType"))
+    MappingRule.add_member(:value, Shapes::ShapeRef.new(shape: ClaimValue, required: true, location_name: "Value"))
+    MappingRule.add_member(:role_arn, Shapes::ShapeRef.new(shape: ARNString, required: true, location_name: "RoleARN"))
+    MappingRule.struct_class = Types::MappingRule
+
+    MappingRulesList.member = Shapes::ShapeRef.new(shape: MappingRule)
+
     MergeDeveloperIdentitiesInput.add_member(:source_user_identifier, Shapes::ShapeRef.new(shape: DeveloperUserIdentifier, required: true, location_name: "SourceUserIdentifier"))
     MergeDeveloperIdentitiesInput.add_member(:destination_user_identifier, Shapes::ShapeRef.new(shape: DeveloperUserIdentifier, required: true, location_name: "DestinationUserIdentifier"))
     MergeDeveloperIdentitiesInput.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, required: true, location_name: "DeveloperProviderName"))
@@ -249,13 +268,25 @@ module Aws::CognitoIdentity
 
     OIDCProviderList.member = Shapes::ShapeRef.new(shape: ARNString)
 
+    RoleMapping.add_member(:type, Shapes::ShapeRef.new(shape: RoleMappingType, required: true, location_name: "Type"))
+    RoleMapping.add_member(:ambiguous_role_resolution, Shapes::ShapeRef.new(shape: AmbiguousRoleResolutionType, location_name: "AmbiguousRoleResolution"))
+    RoleMapping.add_member(:rules_configuration, Shapes::ShapeRef.new(shape: RulesConfigurationType, location_name: "RulesConfiguration"))
+    RoleMapping.struct_class = Types::RoleMapping
+
+    RoleMappingMap.key = Shapes::ShapeRef.new(shape: IdentityProviderName)
+    RoleMappingMap.value = Shapes::ShapeRef.new(shape: RoleMapping)
+
     RolesMap.key = Shapes::ShapeRef.new(shape: RoleType)
     RolesMap.value = Shapes::ShapeRef.new(shape: ARNString)
+
+    RulesConfigurationType.add_member(:rules, Shapes::ShapeRef.new(shape: MappingRulesList, required: true, location_name: "Rules"))
+    RulesConfigurationType.struct_class = Types::RulesConfigurationType
 
     SAMLProviderList.member = Shapes::ShapeRef.new(shape: ARNString)
 
     SetIdentityPoolRolesInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
     SetIdentityPoolRolesInput.add_member(:roles, Shapes::ShapeRef.new(shape: RolesMap, required: true, location_name: "Roles"))
+    SetIdentityPoolRolesInput.add_member(:role_mappings, Shapes::ShapeRef.new(shape: RoleMappingMap, location_name: "RoleMappings"))
     SetIdentityPoolRolesInput.struct_class = Types::SetIdentityPoolRolesInput
 
     UnlinkDeveloperIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "IdentityId"))

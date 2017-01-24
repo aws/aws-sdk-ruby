@@ -148,6 +148,7 @@ module Aws::ECR
     #             image_tag: "ImageTag",
     #           },
     #         ],
+    #         accepted_media_types: ["MediaType"],
     #       }
     #
     # @!attribute [rw] registry_id
@@ -166,10 +167,19 @@ module Aws::ECR
     #   `imageDigest=digest`.
     #   @return [Array<Types::ImageIdentifier>]
     #
+    # @!attribute [rw] accepted_media_types
+    #   The accepted media types for the request.
+    #
+    #   Valid values: `application/vnd.docker.distribution.manifest.v1+json`
+    #   \| `application/vnd.docker.distribution.manifest.v2+json` \|
+    #   `application/vnd.oci.image.manifest.v1+json`
+    #   @return [Array<String>]
+    #
     class BatchGetImageRequest < Struct.new(
       :registry_id,
       :repository_name,
-      :image_ids)
+      :image_ids,
+      :accepted_media_types)
       include Aws::Structure
     end
 
@@ -400,7 +410,7 @@ module Aws::ECR
     #
     # @!attribute [rw] registry_id
     #   The AWS account ID associated with the registry that contains the
-    #   repository in which to list images. If you do not specify a
+    #   repository in which to describe images. If you do not specify a
     #   registry, the default registry is assumed.
     #   @return [String]
     #
@@ -823,18 +833,24 @@ module Aws::ECR
     #   @return [String]
     #
     # @!attribute [rw] layer_availability
-    #   The availability status of the image layer. Valid values are
-    #   `AVAILABLE` and `UNAVAILABLE`.
+    #   The availability status of the image layer.
     #   @return [String]
     #
     # @!attribute [rw] layer_size
     #   The size, in bytes, of the image layer.
     #   @return [Integer]
     #
+    # @!attribute [rw] media_type
+    #   The media type of the layer, such as
+    #   `application/vnd.docker.image.rootfs.diff.tar.gzip` or
+    #   `application/vnd.oci.image.layer.v1.tar+gzip`.
+    #   @return [String]
+    #
     class Layer < Struct.new(
       :layer_digest,
       :layer_availability,
-      :layer_size)
+      :layer_size,
+      :media_type)
       include Aws::Structure
     end
 
@@ -964,6 +980,7 @@ module Aws::ECR
     #         registry_id: "RegistryId",
     #         repository_name: "RepositoryName", # required
     #         image_manifest: "ImageManifest", # required
+    #         image_tag: "ImageTag",
     #       }
     #
     # @!attribute [rw] registry_id
@@ -980,10 +997,17 @@ module Aws::ECR
     #   The image manifest corresponding to the image to be uploaded.
     #   @return [String]
     #
+    # @!attribute [rw] image_tag
+    #   The tag to associate with the image. This parameter is required for
+    #   images that use the Docker Image Manifest V2 Schema 2 or OCI
+    #   formats.
+    #   @return [String]
+    #
     class PutImageRequest < Struct.new(
       :registry_id,
       :repository_name,
-      :image_manifest)
+      :image_manifest,
+      :image_tag)
       include Aws::Structure
     end
 

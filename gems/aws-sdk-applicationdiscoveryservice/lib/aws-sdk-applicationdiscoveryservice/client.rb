@@ -153,6 +153,62 @@ module Aws::ApplicationDiscoveryService
 
     # @!group API Operations
 
+    # Associates one or more configuration items with an application.
+    #
+    # @option params [required, String] :application_configuration_id
+    #   The configuration ID of an application with which items are to be
+    #   associated.
+    #
+    # @option params [required, Array<String>] :configuration_ids
+    #   The ID of each configuration item to be associated with an
+    #   application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_configuration_items_to_application({
+    #     application_configuration_id: "ApplicationId", # required
+    #     configuration_ids: ["ConfigurationId"], # required
+    #   })
+    #
+    # @overload associate_configuration_items_to_application(params = {})
+    # @param [Hash] params ({})
+    def associate_configuration_items_to_application(params = {}, options = {})
+      req = build_request(:associate_configuration_items_to_application, params)
+      req.send_request(options)
+    end
+
+    # Creates an application with the given name and description.
+    #
+    # @option params [required, String] :name
+    #   Name of the application to be created.
+    #
+    # @option params [String] :description
+    #   Description of the application to be created.
+    #
+    # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateApplicationResponse#configuration_id #configuration_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_application({
+    #     name: "String", # required
+    #     description: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration_id #=> String
+    #
+    # @overload create_application(params = {})
+    # @param [Hash] params ({})
+    def create_application(params = {}, options = {})
+      req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
     # Creates one or more tags for configuration items. Tags are metadata
     # that help you categorize IT assets. This API accepts a list of
     # multiple configuration items.
@@ -185,6 +241,27 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def create_tags(params = {}, options = {})
       req = build_request(:create_tags, params)
+      req.send_request(options)
+    end
+
+    # Deletes a list of applications and their associations with
+    # configuration items.
+    #
+    # @option params [required, Array<String>] :configuration_ids
+    #   Configuration ID of an application to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_applications({
+    #     configuration_ids: ["ApplicationId"], # required
+    #   })
+    #
+    # @overload delete_applications(params = {})
+    # @param [Hash] params ({})
+    def delete_applications(params = {}, options = {})
+      req = build_request(:delete_applications, params)
       req.send_request(options)
     end
 
@@ -222,20 +299,38 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Lists AWS agents by ID or lists all agents associated with your user
-    # account if you did not specify an agent ID.
+    # Lists agents or the Connector by ID or lists all agents/Connectors
+    # associated with your user account if you did not specify an ID.
     #
     # @option params [Array<String>] :agent_ids
-    #   The agent IDs for which you want information. If you specify no IDs,
-    #   the system returns information about all agents associated with your
-    #   AWS user account.
+    #   The agent or the Connector IDs for which you want information. If you
+    #   specify no IDs, the system returns information about all
+    #   agents/Connectors associated with your AWS user account.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   You can filter the request using various logical operators and a
+    #   *key*-*value* format. For example:
+    #
+    #   `\{"key": "collectionStatus", "value": "STARTED"\}`
+    #
+    #   For a complete list of filter options and guidance about using them
+    #   with this action, see [Managing AWS Application Discovery Service
+    #   Agents and the AWS Application Discovery Connector ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/managing-agent.html
     #
     # @option params [Integer] :max_results
-    #   The total number of agents to return. The maximum value is 100.
+    #   The total number of agents/Connectors to return in a single page of
+    #   output. The maximum value is 100.
     #
     # @option params [String] :next_token
-    #   A token to start the list. Use this token to get the next set of
-    #   results.
+    #   Token to retrieve the next set of results. For example, if you
+    #   previously specified 100 IDs for `DescribeAgentsRequest$agentIds` but
+    #   set `DescribeAgentsRequest$maxResults` to 10, you received a set of 10
+    #   results along with a token. Use that token in this query to get the
+    #   next set of 10.
     #
     # @return [Types::DescribeAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -246,6 +341,13 @@ module Aws::ApplicationDiscoveryService
     #
     #   resp = client.describe_agents({
     #     agent_ids: ["AgentId"],
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["FilterValue"], # required
+    #         condition: "Condition", # required
+    #       },
+    #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -261,6 +363,10 @@ module Aws::ApplicationDiscoveryService
     #   resp.agents_info[0].connector_id #=> String
     #   resp.agents_info[0].version #=> String
     #   resp.agents_info[0].health #=> String, one of "HEALTHY", "UNHEALTHY", "RUNNING", "UNKNOWN", "BLACKLISTED", "SHUTDOWN"
+    #   resp.agents_info[0].last_health_ping_time #=> String
+    #   resp.agents_info[0].collection_status #=> String
+    #   resp.agents_info[0].agent_type #=> String
+    #   resp.agents_info[0].registered_time #=> String
     #   resp.next_token #=> String
     #
     # @overload describe_agents(params = {})
@@ -270,10 +376,19 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of attributes for a specific configuration ID. For
-    # example, the output for a *server* configuration item includes a list
-    # of attributes about the server, including host name, operating system,
-    # number of network cards, etc.
+    # Retrieves attributes for a list of configuration item IDs. All of the
+    # supplied IDs must be for the same asset type (server, application,
+    # process, or connection). Output fields are specific to the asset type
+    # selected. For example, the output for a *server* configuration item
+    # includes a list of attributes about the server, such as host name,
+    # operating system, and number of network cards.
+    #
+    # For a complete list of outputs for each asset type, see [Querying
+    # Discovered Configuration Items][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#DescribeConfigurations
     #
     # @option params [required, Array<String>] :configuration_ids
     #   One or more configuration IDs.
@@ -313,7 +428,7 @@ module Aws::ApplicationDiscoveryService
     #
     # @option params [String] :next_token
     #   A token to get the next set of results. For example, if you specified
-    #   100 IDs for `DescribeConfigurationsRequest$configurationIds` but set
+    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
     #   `DescribeExportConfigurationsRequest$maxResults` to 10, you will get
     #   results in a set of 10. Use the token in the query to get the next set
     #   of 10.
@@ -357,8 +472,17 @@ module Aws::ApplicationDiscoveryService
     #   these items by using logical operators. Allowed filters include
     #   `tagKey`, `tagValue`, and `configurationId`.
     #
+    #   For a complete list of filter options and guidance about using them
+    #   with this action, see [Managing AWS Application Discovery Service
+    #   Agents and the AWS Application Discovery Connector ][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/managing-agents.html
+    #
     # @option params [Integer] :max_results
-    #   The total number of items to return. The maximum value is 100.
+    #   The total number of items to return in a single page of output. The
+    #   maximum value is 100.
     #
     # @option params [String] :next_token
     #   A token to start the list. Use this token to get the next set of
@@ -385,7 +509,7 @@ module Aws::ApplicationDiscoveryService
     # @example Response structure
     #
     #   resp.tags #=> Array
-    #   resp.tags[0].configuration_type #=> String, one of "SERVER", "PROCESS", "CONNECTION"
+    #   resp.tags[0].configuration_type #=> String, one of "SERVER", "PROCESS", "CONNECTION", "APPLICATION"
     #   resp.tags[0].configuration_id #=> String
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -399,12 +523,37 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Disassociates one or more configuration items from an application.
+    #
+    # @option params [required, String] :application_configuration_id
+    #   Configuration ID of an application from which each item will be
+    #   disassociated.
+    #
+    # @option params [required, Array<String>] :configuration_ids
+    #   Configuration ID of each item be be disassociated from an application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_configuration_items_from_application({
+    #     application_configuration_id: "ApplicationId", # required
+    #     configuration_ids: ["ConfigurationId"], # required
+    #   })
+    #
+    # @overload disassociate_configuration_items_from_application(params = {})
+    # @param [Hash] params ({})
+    def disassociate_configuration_items_from_application(params = {}, options = {})
+      req = build_request(:disassociate_configuration_items_from_application, params)
+      req.send_request(options)
+    end
+
     # Exports all discovered configuration data to an Amazon S3 bucket or an
     # application that enables you to view and evaluate the data. Data
     # includes tags and tag associations, processes, connections, servers,
     # and system performance. This API returns an export ID which you can
-    # query using the *GetExportStatus* API. The system imposes a limit of
-    # two configuration exports in six hours.
+    # query using the *DescribeExportConfigurations* API. The system imposes
+    # a limit of two configuration exports in six hours.
     #
     # @return [Types::ExportConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -421,7 +570,46 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of configurations items according to the criteria you
+    # Retrieves a short summary of discovered assets.
+    #
+    # @return [Types::GetDiscoverySummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDiscoverySummaryResponse#servers #servers} => Integer
+    #   * {Types::GetDiscoverySummaryResponse#applications #applications} => Integer
+    #   * {Types::GetDiscoverySummaryResponse#servers_mapped_to_applications #servers_mapped_to_applications} => Integer
+    #   * {Types::GetDiscoverySummaryResponse#servers_mappedto_tags #servers_mappedto_tags} => Integer
+    #   * {Types::GetDiscoverySummaryResponse#agent_summary #agent_summary} => Types::CustomerAgentInfo
+    #   * {Types::GetDiscoverySummaryResponse#connector_summary #connector_summary} => Types::CustomerConnectorInfo
+    #
+    # @example Response structure
+    #
+    #   resp.servers #=> Integer
+    #   resp.applications #=> Integer
+    #   resp.servers_mapped_to_applications #=> Integer
+    #   resp.servers_mappedto_tags #=> Integer
+    #   resp.agent_summary.active_agents #=> Integer
+    #   resp.agent_summary.healthy_agents #=> Integer
+    #   resp.agent_summary.black_listed_agents #=> Integer
+    #   resp.agent_summary.shutdown_agents #=> Integer
+    #   resp.agent_summary.unhealthy_agents #=> Integer
+    #   resp.agent_summary.total_agents #=> Integer
+    #   resp.agent_summary.unknown_agents #=> Integer
+    #   resp.connector_summary.active_connectors #=> Integer
+    #   resp.connector_summary.healthy_connectors #=> Integer
+    #   resp.connector_summary.black_listed_connectors #=> Integer
+    #   resp.connector_summary.shutdown_connectors #=> Integer
+    #   resp.connector_summary.unhealthy_connectors #=> Integer
+    #   resp.connector_summary.total_connectors #=> Integer
+    #   resp.connector_summary.unknown_connectors #=> Integer
+    #
+    # @overload get_discovery_summary(params = {})
+    # @param [Hash] params ({})
+    def get_discovery_summary(params = {}, options = {})
+      req = build_request(:get_discovery_summary, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of configuration items according to criteria you
     # specify in a filter. The filter criteria identify relationship
     # requirements.
     #
@@ -429,18 +617,36 @@ module Aws::ApplicationDiscoveryService
     #   A valid configuration identified by the Discovery Service.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   You can filter the list using a *key*-*value* format. For example:
+    #   You can filter the request using various logical operators and a
+    #   *key*-*value* format. For example:
     #
     #   `\{"key": "serverType", "value": "webServer"\}`
     #
-    #   You can separate these items by using logical operators.
+    #   For a complete list of filter options and guidance about using them
+    #   with this action, see [Querying Discovered Configuration Items][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#ListConfigurations
     #
     # @option params [Integer] :max_results
     #   The total number of items to return. The maximum value is 100.
     #
     # @option params [String] :next_token
-    #   A token to start the list. Use this token to get the next set of
-    #   results.
+    #   Token to retrieve the next set of results. For example, if a previous
+    #   call to ListConfigurations returned 100 items, but you set
+    #   `ListConfigurationsRequest$maxResults` to 10, you received a set of 10
+    #   results along with a token. Use that token in this query to get the
+    #   next set of 10.
+    #
+    # @option params [Array<Types::OrderByElement>] :order_by
+    #   Certain filter criteria return output that can be sorted in ascending
+    #   or descending order. For a list of output characteristics for each
+    #   filter, see [Querying Discovered Configuration Items][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#ListConfigurations
     #
     # @return [Types::ListConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -450,7 +656,7 @@ module Aws::ApplicationDiscoveryService
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configurations({
-    #     configuration_type: "SERVER", # required, accepts SERVER, PROCESS, CONNECTION
+    #     configuration_type: "SERVER", # required, accepts SERVER, PROCESS, CONNECTION, APPLICATION
     #     filters: [
     #       {
     #         name: "String", # required
@@ -460,6 +666,12 @@ module Aws::ApplicationDiscoveryService
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     order_by: [
+    #       {
+    #         field_name: "String", # required
+    #         sort_order: "ASC", # accepts ASC, DESC
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -476,18 +688,75 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Instructs the specified agents to start collecting data. Agents can
-    # reside on host servers or virtual machines in your data center.
+    # Retrieves a list of servers which are one network hop away from a
+    # specified server.
+    #
+    # @option params [required, String] :configuration_id
+    #   Configuration ID of the server for which neighbors are being listed.
+    #
+    # @option params [Boolean] :port_information_needed
+    #   Flag to indicate if port and protocol information is needed as part of
+    #   the response.
+    #
+    # @option params [Array<String>] :neighbor_configuration_ids
+    #   List of configuration IDs to test for one-hop-away.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single page of output.
+    #
+    # @option params [String] :next_token
+    #   Token to retrieve the next set of results. For example, if you
+    #   previously specified 100 IDs for
+    #   `ListServerNeighborsRequest$neighborConfigurationIds` but set
+    #   `ListServerNeighborsRequest$maxResults` to 10, you received a set of
+    #   10 results along with a token. Use that token in this query to get the
+    #   next set of 10.
+    #
+    # @return [Types::ListServerNeighborsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListServerNeighborsResponse#neighbors #neighbors} => Array&lt;Types::NeighborConnectionDetail&gt;
+    #   * {Types::ListServerNeighborsResponse#next_token #next_token} => String
+    #   * {Types::ListServerNeighborsResponse#known_dependency_count #known_dependency_count} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_server_neighbors({
+    #     configuration_id: "ConfigurationId", # required
+    #     port_information_needed: false,
+    #     neighbor_configuration_ids: ["ConfigurationId"],
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.neighbors #=> Array
+    #   resp.neighbors[0].source_server_id #=> String
+    #   resp.neighbors[0].destination_server_id #=> String
+    #   resp.neighbors[0].destination_port #=> Integer
+    #   resp.neighbors[0].transport_protocol #=> String
+    #   resp.neighbors[0].connections_count #=> Integer
+    #   resp.next_token #=> String
+    #   resp.known_dependency_count #=> Integer
+    #
+    # @overload list_server_neighbors(params = {})
+    # @param [Hash] params ({})
+    def list_server_neighbors(params = {}, options = {})
+      req = build_request(:list_server_neighbors, params)
+      req.send_request(options)
+    end
+
+    # Instructs the specified agents or Connectors to start collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
-    #   The IDs of the agents that you want to start collecting data. If you
-    #   send a request to an AWS agent ID that you do not have permission to
-    #   contact, according to your AWS account, the service does not throw an
-    #   exception. Instead, it returns the error in the *Description* field.
-    #   If you send a request to multiple agents and you do not have
-    #   permission to contact some of those agents, the system does not throw
-    #   an exception. Instead, the system shows `Failed` in the *Description*
-    #   field.
+    #   The IDs of the agents or Connectors that you want to start collecting
+    #   data. If you send a request to an agent/Connector ID that you do not
+    #   have permission to contact, according to your AWS account, the service
+    #   does not throw an exception. Instead, it returns the error in the
+    #   *Description* field. If you send a request to multiple
+    #   agents/Connectors and you do not have permission to contact some of
+    #   those agents/Connectors, the system does not throw an exception.
+    #   Instead, the system shows `Failed` in the *Description* field.
     #
     # @return [Types::StartDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -513,10 +782,11 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Instructs the specified agents to stop collecting data.
+    # Instructs the specified agents or Connectors to stop collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
-    #   The IDs of the agents that you want to stop collecting data.
+    #   The IDs of the agents or Connectors that you want to stop collecting
+    #   data.
     #
     # @return [Types::StopDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -539,6 +809,34 @@ module Aws::ApplicationDiscoveryService
     # @param [Hash] params ({})
     def stop_data_collection_by_agent_ids(params = {}, options = {})
       req = build_request(:stop_data_collection_by_agent_ids, params)
+      req.send_request(options)
+    end
+
+    # Updates metadata about an application.
+    #
+    # @option params [required, String] :configuration_id
+    #   Configuration ID of the application to be updated.
+    #
+    # @option params [String] :name
+    #   New name of the application to be updated.
+    #
+    # @option params [String] :description
+    #   New description of the application to be updated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application({
+    #     configuration_id: "ApplicationId", # required
+    #     name: "String",
+    #     description: "String",
+    #   })
+    #
+    # @overload update_application(params = {})
+    # @param [Hash] params ({})
+    def update_application(params = {}, options = {})
+      req = build_request(:update_application, params)
       req.send_request(options)
     end
 

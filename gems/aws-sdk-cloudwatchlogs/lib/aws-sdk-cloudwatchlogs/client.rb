@@ -262,12 +262,18 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The key-value pairs to use for the tags.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_log_group({
     #     log_group_name: "LogGroupName", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @overload create_log_group(params = {})
@@ -672,7 +678,7 @@ module Aws::CloudWatchLogs
     end
 
     # Lists the specified metric filters. You can list all the metric
-    # filters or filter the results by log name, prefix, metric name, or
+    # filters or filter the results by log name, prefix, metric name, and
     # metric namespace. The results are ASCII-sorted by filter name.
     #
     # @option params [String] :log_group_name
@@ -773,6 +779,7 @@ module Aws::CloudWatchLogs
     #   resp.subscription_filters[0].filter_pattern #=> String
     #   resp.subscription_filters[0].destination_arn #=> String
     #   resp.subscription_filters[0].role_arn #=> String
+    #   resp.subscription_filters[0].distribution #=> String, one of "Random", "ByLogStream"
     #   resp.subscription_filters[0].creation_time #=> Integer
     #   resp.next_token #=> String
     #
@@ -800,12 +807,14 @@ module Aws::CloudWatchLogs
     #   Optional list of log stream names.
     #
     # @option params [Integer] :start_time
-    #   The start of the time range. Events with a timestamp prior to this
+    #   The start of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this
     #   time are not returned.
     #
     # @option params [Integer] :end_time
-    #   The end of the time range. Events with a timestamp later than this
-    #   time are not returned.
+    #   The end of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   this time are not returned.
     #
     # @option params [String] :filter_pattern
     #   The filter pattern to use. If not provided, all the events are
@@ -879,12 +888,14 @@ module Aws::CloudWatchLogs
     #   The name of the log stream.
     #
     # @option params [Integer] :start_time
-    #   The start of the time range. Events with a timestamp earlier than this
-    #   time are not included.
+    #   The start of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than
+    #   this time are not included.
     #
     # @option params [Integer] :end_time
-    #   The end of the time range. Events with a timestamp later than this
-    #   time are not included.
+    #   The end of the time range, expressed as the number of milliseconds
+    #   since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
+    #   this time are not included.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -931,6 +942,35 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def get_log_events(params = {}, options = {})
       req = build_request(:get_log_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the tags for the specified log group.
+    #
+    # To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group.
+    #
+    # @return [Types::ListTagsLogGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsLogGroupResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_log_group({
+    #     log_group_name: "LogGroupName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @overload list_tags_log_group(params = {})
+    # @param [Hash] params ({})
+    def list_tags_log_group(params = {}, options = {})
+      req = build_request(:list_tags_log_group, params)
       req.send_request(options)
     end
 
@@ -1038,12 +1078,13 @@ module Aws::CloudWatchLogs
     #   retention period of the log group.
     #
     # * The log events in the batch must be in chronological ordered by
-    #   their timestamp.
+    #   their timestamp (the time the event occurred, expressed as the
+    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC).
     #
     # * The maximum number of log events in a batch is 10,000.
     #
-    # * A batch of log events in a single PutLogEvents request cannot span
-    #   more than 24 hours. Otherwise, the PutLogEvents operation will fail.
+    # * A batch of log events in a single request cannot span more than 24
+    #   hours. Otherwise, the operation fails.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
@@ -1215,6 +1256,12 @@ module Aws::CloudWatchLogs
     #   to provide the ARN when you are working with a logical destination for
     #   cross-account delivery.
     #
+    # @option params [String] :distribution
+    #   The method used to distribute log data to the destination, when the
+    #   destination is an Amazon Kinesis stream. By default, log data is
+    #   grouped by log stream. For a more even distribution, you can group log
+    #   data randomly.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1225,12 +1272,49 @@ module Aws::CloudWatchLogs
     #     filter_pattern: "FilterPattern", # required
     #     destination_arn: "DestinationArn", # required
     #     role_arn: "RoleArn",
+    #     distribution: "Random", # accepts Random, ByLogStream
     #   })
     #
     # @overload put_subscription_filter(params = {})
     # @param [Hash] params ({})
     def put_subscription_filter(params = {}, options = {})
       req = build_request(:put_subscription_filter, params)
+      req.send_request(options)
+    end
+
+    # Adds or updates the specified tags for the specified log group.
+    #
+    # To list the tags for a log group, use ListTagsLogGroup. To remove
+    # tags, use UntagLogGroup.
+    #
+    # For more information about tags, see [Tag Log Groups in Amazon
+    # CloudWatch Logs][1] in the *Amazon CloudWatch Logs User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/log-group-tagging.html
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The key-value pairs to use for the tags.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_log_group({
+    #     log_group_name: "LogGroupName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @overload tag_log_group(params = {})
+    # @param [Hash] params ({})
+    def tag_log_group(params = {}, options = {})
+      req = build_request(:tag_log_group, params)
       req.send_request(options)
     end
 
@@ -1270,6 +1354,33 @@ module Aws::CloudWatchLogs
     # @param [Hash] params ({})
     def test_metric_filter(params = {}, options = {})
       req = build_request(:test_metric_filter, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tags from the specified log group.
+    #
+    # To list the tags for a log group, use ListTagsLogGroup. To add tags,
+    # use UntagLogGroup.
+    #
+    # @option params [required, String] :log_group_name
+    #   The name of the log group.
+    #
+    # @option params [required, Array<String>] :tags
+    #   The tag keys. The corresponding tags are removed from the log group.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_log_group({
+    #     log_group_name: "LogGroupName", # required
+    #     tags: ["TagKey"], # required
+    #   })
+    #
+    # @overload untag_log_group(params = {})
+    # @param [Hash] params ({})
+    def untag_log_group(params = {}, options = {})
+      req = build_request(:untag_log_group, params)
       req.send_request(options)
     end
 

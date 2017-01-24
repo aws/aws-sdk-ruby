@@ -44,6 +44,36 @@ module Aws::CodeCommit
       include Aws::Structure
     end
 
+    # Returns information about a specific Git blob object.
+    #
+    # @!attribute [rw] blob_id
+    #   The full ID of the blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The path to the blob and any associated file name, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The file mode permissions of the blob. File mode permission codes
+    #   include:
+    #
+    #   * `100644` indicates read/write
+    #
+    #   * `100755` indicates read/write/execute
+    #
+    #   * `160000` indicates a submodule
+    #
+    #   * `120000` indicates a symlink
+    #   @return [String]
+    #
+    class BlobMetadata < Struct.new(
+      :blob_id,
+      :path,
+      :mode)
+      include Aws::Structure
+    end
+
     # Returns information about a branch.
     #
     # @!attribute [rw] branch_name
@@ -71,18 +101,25 @@ module Aws::CodeCommit
     #   @return [Array<String>]
     #
     # @!attribute [rw] message
-    #   The message associated with the specified commit.
+    #   The commit message associated with the specified commit.
     #   @return [String]
     #
     # @!attribute [rw] author
-    #   Information about the author of the specified commit.
+    #   Information about the author of the specified commit. Information
+    #   includes the date in timestamp format with GMT offset, the name of
+    #   the author, and the email address for the author, as configured in
+    #   Git.
     #   @return [Types::UserInfo]
     #
     # @!attribute [rw] committer
     #   Information about the person who committed the specified commit,
-    #   also known as the committer. For more information about the
-    #   difference between an author and a committer in Git, see [Viewing
-    #   the Commit History][1] in Pro Git by Scott Chacon and Ben Straub.
+    #   also known as the committer. Information includes the date in
+    #   timestamp format with GMT offset, the name of the committer, and the
+    #   email address for the committer, as configured in Git.
+    #
+    #   For more information about the difference between an author and a
+    #   committer in Git, see [Viewing the Commit History][1] in Pro Git by
+    #   Scott Chacon and Ben Straub.
     #
     #
     #
@@ -147,14 +184,14 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_name
     #   The name of the new repository to be created.
     #
-    #   <note markdown="1">The repository name must be unique across the calling AWS account.
+    #   <note markdown="1"> The repository name must be unique across the calling AWS account.
     #   In addition, repository names are limited to 100 alphanumeric, dash,
     #   and underscore characters, and cannot include certain characters.
     #   For a full description of the limits on repository names, see
     #   [Limits][1] in the AWS CodeCommit User Guide. The suffix ".git" is
     #   prohibited.
     #
-    #   </note>
+    #    </note>
     #
     #
     #
@@ -164,14 +201,14 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_description
     #   A comment or description about the new repository.
     #
-    #   <note markdown="1">The description field for a repository accepts all HTML characters
+    #   <note markdown="1"> The description field for a repository accepts all HTML characters
     #   and all valid Unicode characters. Applications that do not
     #   HTML-encode the description and display it in a web page could
     #   expose users to potentially malicious code. Make sure that you
     #   HTML-encode the description field in any application that uses this
     #   API to display the repository description on a web page.
     #
-    #   </note>
+    #    </note>
     #   @return [String]
     #
     class CreateRepositoryInput < Struct.new(
@@ -217,6 +254,65 @@ module Aws::CodeCommit
     #
     class DeleteRepositoryOutput < Struct.new(
       :repository_id)
+      include Aws::Structure
+    end
+
+    # Returns information about a set of differences for a commit specifier.
+    #
+    # @!attribute [rw] before_blob
+    #   Information about a `beforeBlob` data type object, including the ID,
+    #   the file mode permission code, and the path.
+    #   @return [Types::BlobMetadata]
+    #
+    # @!attribute [rw] after_blob
+    #   Information about an `afterBlob` data type object, including the ID,
+    #   the file mode permission code, and the path.
+    #   @return [Types::BlobMetadata]
+    #
+    # @!attribute [rw] change_type
+    #   Whether the change type of the difference is an addition (A),
+    #   deletion (D), or modification (M).
+    #   @return [String]
+    #
+    class Difference < Struct.new(
+      :before_blob,
+      :after_blob,
+      :change_type)
+      include Aws::Structure
+    end
+
+    # Represents the input of a get blob operation.
+    #
+    # @note When making an API call, you may pass GetBlobInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         blob_id: "ObjectId", # required
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the blob.
+    #   @return [String]
+    #
+    # @!attribute [rw] blob_id
+    #   The ID of the blob, which is its SHA-1 pointer.
+    #   @return [String]
+    #
+    class GetBlobInput < Struct.new(
+      :repository_name,
+      :blob_id)
+      include Aws::Structure
+    end
+
+    # Represents the output of a get blob operation.
+    #
+    # @!attribute [rw] content
+    #   The content of the blob, usually a file.
+    #   @return [String]
+    #
+    class GetBlobOutput < Struct.new(
+      :content)
       include Aws::Structure
     end
 
@@ -283,11 +379,93 @@ module Aws::CodeCommit
     # Represents the output of a get commit operation.
     #
     # @!attribute [rw] commit
-    #   Information about the specified commit.
+    #   A commit data type object that contains information about the
+    #   specified commit.
     #   @return [Types::Commit]
     #
     class GetCommitOutput < Struct.new(
       :commit)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDifferencesInput
+    #   data as a hash:
+    #
+    #       {
+    #         repository_name: "RepositoryName", # required
+    #         before_commit_specifier: "CommitName",
+    #         after_commit_specifier: "CommitName", # required
+    #         before_path: "Path",
+    #         after_path: "Path",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository where you want to get differences.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit. For example, the full commit ID. Optional. If not
+    #   specified, all changes prior to the `afterCommitSpecifier` value
+    #   will be shown. If you do not use `beforeCommitSpecifier` in your
+    #   request, consider limiting the results with `maxResults`.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_commit_specifier
+    #   The branch, tag, HEAD, or other fully qualified reference used to
+    #   identify a commit.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_path
+    #   The file path in which to check for differences. Limits the results
+    #   to this path. Can also be used to specify the previous name of a
+    #   directory or folder. If `beforePath` and `afterPath` are not
+    #   specified, differences will be shown for all paths.
+    #   @return [String]
+    #
+    # @!attribute [rw] after_path
+    #   The file path in which to check differences. Limits the results to
+    #   this path. Can also be used to specify the changed name of a
+    #   directory or folder, if it has changed. If not specified,
+    #   differences will be shown for all paths.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   A non-negative integer used to limit the number of returned results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that when provided in a request, returns the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    class GetDifferencesInput < Struct.new(
+      :repository_name,
+      :before_commit_specifier,
+      :after_commit_specifier,
+      :before_path,
+      :after_path,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] differences
+    #   A differences data type object that contains information about the
+    #   differences, including whether the difference is added, modified, or
+    #   deleted (A, D, M).
+    #   @return [Array<Types::Difference>]
+    #
+    # @!attribute [rw] next_token
+    #   An enumeration token that can be used in a request to return the
+    #   next batch of the results.
+    #   @return [String]
+    #
+    class GetDifferencesOutput < Struct.new(
+      :differences,
+      :next_token)
       include Aws::Structure
     end
 
@@ -326,7 +504,7 @@ module Aws::CodeCommit
     #   data as a hash:
     #
     #       {
-    #         repository_name: "RepositoryName",
+    #         repository_name: "RepositoryName", # required
     #       }
     #
     # @!attribute [rw] repository_name
@@ -454,14 +632,14 @@ module Aws::CodeCommit
     #   data as a hash:
     #
     #       {
-    #         repository_name: "RepositoryName",
-    #         triggers: [
+    #         repository_name: "RepositoryName", # required
+    #         triggers: [ # required
     #           {
-    #             name: "RepositoryTriggerName",
-    #             destination_arn: "Arn",
+    #             name: "RepositoryTriggerName", # required
+    #             destination_arn: "Arn", # required
     #             custom_data: "RepositoryTriggerCustomData",
     #             branches: ["BranchName"],
-    #             events: ["all"], # accepts all, updateReference, createReference, deleteReference
+    #             events: ["all"], # required, accepts all, updateReference, createReference, deleteReference
     #           },
     #         ],
     #       }
@@ -571,11 +749,11 @@ module Aws::CodeCommit
     #   data as a hash:
     #
     #       {
-    #         name: "RepositoryTriggerName",
-    #         destination_arn: "Arn",
+    #         name: "RepositoryTriggerName", # required
+    #         destination_arn: "Arn", # required
     #         custom_data: "RepositoryTriggerCustomData",
     #         branches: ["BranchName"],
-    #         events: ["all"], # accepts all, updateReference, createReference, deleteReference
+    #         events: ["all"], # required, accepts all, updateReference, createReference, deleteReference
     #       }
     #
     # @!attribute [rw] name
@@ -601,8 +779,11 @@ module Aws::CodeCommit
     # @!attribute [rw] events
     #   The repository events that will cause the trigger to run actions in
     #   another service, such as sending a notification through Amazon
-    #   Simple Notification Service (SNS). If no events are specified, the
-    #   trigger will run for all repository events.
+    #   Simple Notification Service (SNS).
+    #
+    #   <note markdown="1"> The valid value "all" cannot be used with any other values.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     class RepositoryTrigger < Struct.new(
@@ -636,14 +817,14 @@ module Aws::CodeCommit
     #   data as a hash:
     #
     #       {
-    #         repository_name: "RepositoryName",
-    #         triggers: [
+    #         repository_name: "RepositoryName", # required
+    #         triggers: [ # required
     #           {
-    #             name: "RepositoryTriggerName",
-    #             destination_arn: "Arn",
+    #             name: "RepositoryTriggerName", # required
+    #             destination_arn: "Arn", # required
     #             custom_data: "RepositoryTriggerCustomData",
     #             branches: ["BranchName"],
-    #             events: ["all"], # accepts all, updateReference, createReference, deleteReference
+    #             events: ["all"], # required, accepts all, updateReference, createReference, deleteReference
     #           },
     #         ],
     #       }

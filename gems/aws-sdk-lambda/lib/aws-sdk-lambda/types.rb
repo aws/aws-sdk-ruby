@@ -24,7 +24,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] code_size_zipped
     #   Size, in bytes, of a single zipped code/dependencies package you can
-    #   upload for your Lambda function(.zip/.jar file). Try using AWS S3
+    #   upload for your Lambda function(.zip/.jar file). Try using Amazon S3
     #   for uploading larger files. Default limit is 50 MB.
     #   @return [Integer]
     #
@@ -51,7 +51,7 @@ module Aws::Lambda
     # current account and region.
     #
     # @!attribute [rw] total_code_size
-    #   Total size, in megabytes, of the account's deployment packages per
+    #   Total size, in bytes, of the account's deployment packages per
     #   region.
     #   @return [Integer]
     #
@@ -310,7 +310,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] starting_position
     #   The position in the stream where AWS Lambda should start reading.
-    #   Valid only for Kinesis streams. For more information, go to
+    #   Valid only for Kinesis streams. For more information, see
     #   [ShardIteratorType][1] in the *Amazon Kinesis API Reference*.
     #
     #
@@ -378,7 +378,7 @@ module Aws::Lambda
     #   The name you want to assign to the function you are uploading. The
     #   function names appear in the console and are returned in the
     #   ListFunctions API. Function names are used to specify functions to
-    #   other AWS Lambda APIs, such as Invoke.
+    #   other AWS Lambda API operations, such as Invoke.
     #   @return [String]
     #
     # @!attribute [rw] runtime
@@ -389,7 +389,7 @@ module Aws::Lambda
     #
     #   <note markdown="1"> You can no longer create functions using the v0.10.42 runtime
     #   version as of November, 2016. Existing functions will be supported
-    #   until early 2017 but we recommend you migrate them to nodejs4.3
+    #   until early 2017, but we recommend you migrate them to nodejs4.3
     #   runtime version as soon as possible.
     #
     #    </note>
@@ -456,8 +456,8 @@ module Aws::Lambda
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic.
+    #   The parent object that contains the target Amazon Resource Name
+    #   (ARN) of an Amazon SQS queue or Amazon SNS topic.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -488,7 +488,7 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    # The parent object that contains the target ARN (Amazon Resource Name)
+    # The parent object that contains the target Amazon Resource Name (ARN)
     # of an Amazon SQS queue or Amazon SNS topic.
     #
     # @note When making an API call, you may pass DeadLetterConfig
@@ -499,7 +499,7 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The ARN (Amazon Resource Value) of an Amazon SQS queue or Amazon SNS
+    #   The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
     #   topic you specify as your Dead Letter Queue (DLQ).
     #   @return [String]
     #
@@ -726,7 +726,7 @@ module Aws::Lambda
     #   you are using the web API directly, the contents of the zip file
     #   must be base64-encoded. If you are using the AWS SDKs or the AWS
     #   CLI, the SDKs or CLI will do the encoding for you. For more
-    #   information about creating a .zip file, go to [Execution
+    #   information about creating a .zip file, see [Execution
     #   Permissions][1] in the *AWS Lambda Developer Guide*.
     #
     #
@@ -839,8 +839,8 @@ module Aws::Lambda
     #   @return [Types::VpcConfigResponse]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic.
+    #   The parent object that contains the target Amazon Resource Name
+    #   (ARN) of an Amazon SQS queue or Amazon SNS topic.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -1657,7 +1657,7 @@ module Aws::Lambda
     #   you are using the web API directly, the contents of the zip file
     #   must be base64-encoded. If you are using the AWS SDKs or the AWS
     #   CLI, the SDKs or CLI will do the encoding for you. For more
-    #   information about creating a .zip file, go to [Execution
+    #   information about creating a .zip file, see [Execution
     #   Permissions][1] in the *AWS Lambda Developer Guide*.
     #
     #
@@ -1667,7 +1667,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] s3_bucket
     #   Amazon S3 bucket name where the .zip file containing your deployment
-    #   package is stored. This bucket must reside in the same AWS region
+    #   package is stored. This bucket must reside in the same AWS Region
     #   where you are creating the Lambda function.
     #   @return [String]
     #
@@ -1790,8 +1790,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target ARN (Amazon Resource
-    #   Name) of an Amazon SQS queue or Amazon SNS topic.
+    #   The parent object that contains the target Amazon Resource Name
+    #   (ARN) of an Amazon SQS queue or Amazon SNS topic.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn

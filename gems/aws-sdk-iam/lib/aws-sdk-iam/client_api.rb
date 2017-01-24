@@ -52,6 +52,8 @@ module Aws::IAM
     CreateRoleResponse = Shapes::StructureShape.new(name: 'CreateRoleResponse')
     CreateSAMLProviderRequest = Shapes::StructureShape.new(name: 'CreateSAMLProviderRequest')
     CreateSAMLProviderResponse = Shapes::StructureShape.new(name: 'CreateSAMLProviderResponse')
+    CreateServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'CreateServiceSpecificCredentialRequest')
+    CreateServiceSpecificCredentialResponse = Shapes::StructureShape.new(name: 'CreateServiceSpecificCredentialResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     CreateVirtualMFADeviceRequest = Shapes::StructureShape.new(name: 'CreateVirtualMFADeviceRequest')
@@ -75,6 +77,7 @@ module Aws::IAM
     DeleteSAMLProviderRequest = Shapes::StructureShape.new(name: 'DeleteSAMLProviderRequest')
     DeleteSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'DeleteSSHPublicKeyRequest')
     DeleteServerCertificateRequest = Shapes::StructureShape.new(name: 'DeleteServerCertificateRequest')
+    DeleteServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'DeleteServiceSpecificCredentialRequest')
     DeleteSigningCertificateRequest = Shapes::StructureShape.new(name: 'DeleteSigningCertificateRequest')
     DeleteUserPolicyRequest = Shapes::StructureShape.new(name: 'DeleteUserPolicyRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
@@ -182,6 +185,8 @@ module Aws::IAM
     ListSSHPublicKeysResponse = Shapes::StructureShape.new(name: 'ListSSHPublicKeysResponse')
     ListServerCertificatesRequest = Shapes::StructureShape.new(name: 'ListServerCertificatesRequest')
     ListServerCertificatesResponse = Shapes::StructureShape.new(name: 'ListServerCertificatesResponse')
+    ListServiceSpecificCredentialsRequest = Shapes::StructureShape.new(name: 'ListServiceSpecificCredentialsRequest')
+    ListServiceSpecificCredentialsResponse = Shapes::StructureShape.new(name: 'ListServiceSpecificCredentialsResponse')
     ListSigningCertificatesRequest = Shapes::StructureShape.new(name: 'ListSigningCertificatesRequest')
     ListSigningCertificatesResponse = Shapes::StructureShape.new(name: 'ListSigningCertificatesResponse')
     ListUserPoliciesRequest = Shapes::StructureShape.new(name: 'ListUserPoliciesRequest')
@@ -226,6 +231,8 @@ module Aws::IAM
     ReportFormatType = Shapes::StringShape.new(name: 'ReportFormatType')
     ReportStateDescriptionType = Shapes::StringShape.new(name: 'ReportStateDescriptionType')
     ReportStateType = Shapes::StringShape.new(name: 'ReportStateType')
+    ResetServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'ResetServiceSpecificCredentialRequest')
+    ResetServiceSpecificCredentialResponse = Shapes::StructureShape.new(name: 'ResetServiceSpecificCredentialResponse')
     ResourceHandlingOptionType = Shapes::StringShape.new(name: 'ResourceHandlingOptionType')
     ResourceNameListType = Shapes::ListShape.new(name: 'ResourceNameListType')
     ResourceNameType = Shapes::StringShape.new(name: 'ResourceNameType')
@@ -244,6 +251,10 @@ module Aws::IAM
     ServerCertificate = Shapes::StructureShape.new(name: 'ServerCertificate')
     ServerCertificateMetadata = Shapes::StructureShape.new(name: 'ServerCertificateMetadata')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
+    ServiceNotSupportedException = Shapes::StructureShape.new(name: 'ServiceNotSupportedException')
+    ServiceSpecificCredential = Shapes::StructureShape.new(name: 'ServiceSpecificCredential')
+    ServiceSpecificCredentialMetadata = Shapes::StructureShape.new(name: 'ServiceSpecificCredentialMetadata')
+    ServiceSpecificCredentialsListType = Shapes::ListShape.new(name: 'ServiceSpecificCredentialsListType')
     SetDefaultPolicyVersionRequest = Shapes::StructureShape.new(name: 'SetDefaultPolicyVersionRequest')
     SigningCertificate = Shapes::StructureShape.new(name: 'SigningCertificate')
     SimulateCustomPolicyRequest = Shapes::StructureShape.new(name: 'SimulateCustomPolicyRequest')
@@ -263,6 +274,7 @@ module Aws::IAM
     UpdateSAMLProviderResponse = Shapes::StructureShape.new(name: 'UpdateSAMLProviderResponse')
     UpdateSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'UpdateSSHPublicKeyRequest')
     UpdateServerCertificateRequest = Shapes::StructureShape.new(name: 'UpdateServerCertificateRequest')
+    UpdateServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'UpdateServiceSpecificCredentialRequest')
     UpdateSigningCertificateRequest = Shapes::StructureShape.new(name: 'UpdateSigningCertificateRequest')
     UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
     UploadSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'UploadSSHPublicKeyRequest')
@@ -353,6 +365,11 @@ module Aws::IAM
     serverCertificateMetadataListType = Shapes::ListShape.new(name: 'serverCertificateMetadataListType')
     serverCertificateNameType = Shapes::StringShape.new(name: 'serverCertificateNameType')
     serviceFailureExceptionMessage = Shapes::StringShape.new(name: 'serviceFailureExceptionMessage')
+    serviceName = Shapes::StringShape.new(name: 'serviceName')
+    serviceNotSupportedMessage = Shapes::StringShape.new(name: 'serviceNotSupportedMessage')
+    servicePassword = Shapes::StringShape.new(name: 'servicePassword')
+    serviceSpecificCredentialId = Shapes::StringShape.new(name: 'serviceSpecificCredentialId')
+    serviceUserName = Shapes::StringShape.new(name: 'serviceUserName')
     statusType = Shapes::StringShape.new(name: 'statusType')
     stringType = Shapes::StringShape.new(name: 'stringType')
     summaryKeyType = Shapes::StringShape.new(name: 'summaryKeyType')
@@ -501,6 +518,13 @@ module Aws::IAM
     CreateSAMLProviderResponse.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "SAMLProviderArn"))
     CreateSAMLProviderResponse.struct_class = Types::CreateSAMLProviderResponse
 
+    CreateServiceSpecificCredentialRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    CreateServiceSpecificCredentialRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceName, required: true, location_name: "ServiceName"))
+    CreateServiceSpecificCredentialRequest.struct_class = Types::CreateServiceSpecificCredentialRequest
+
+    CreateServiceSpecificCredentialResponse.add_member(:service_specific_credential, Shapes::ShapeRef.new(shape: ServiceSpecificCredential, location_name: "ServiceSpecificCredential"))
+    CreateServiceSpecificCredentialResponse.struct_class = Types::CreateServiceSpecificCredentialResponse
+
     CreateUserRequest.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
     CreateUserRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     CreateUserRequest.struct_class = Types::CreateUserRequest
@@ -565,6 +589,10 @@ module Aws::IAM
 
     DeleteServerCertificateRequest.add_member(:server_certificate_name, Shapes::ShapeRef.new(shape: serverCertificateNameType, required: true, location_name: "ServerCertificateName"))
     DeleteServerCertificateRequest.struct_class = Types::DeleteServerCertificateRequest
+
+    DeleteServiceSpecificCredentialRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
+    DeleteServiceSpecificCredentialRequest.add_member(:service_specific_credential_id, Shapes::ShapeRef.new(shape: serviceSpecificCredentialId, required: true, location_name: "ServiceSpecificCredentialId"))
+    DeleteServiceSpecificCredentialRequest.struct_class = Types::DeleteServiceSpecificCredentialRequest
 
     DeleteSigningCertificateRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     DeleteSigningCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: certificateIdType, required: true, location_name: "CertificateId"))
@@ -985,6 +1013,13 @@ module Aws::IAM
     ListServerCertificatesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListServerCertificatesResponse.struct_class = Types::ListServerCertificatesResponse
 
+    ListServiceSpecificCredentialsRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
+    ListServiceSpecificCredentialsRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceName, location_name: "ServiceName"))
+    ListServiceSpecificCredentialsRequest.struct_class = Types::ListServiceSpecificCredentialsRequest
+
+    ListServiceSpecificCredentialsResponse.add_member(:service_specific_credentials, Shapes::ShapeRef.new(shape: ServiceSpecificCredentialsListType, location_name: "ServiceSpecificCredentials"))
+    ListServiceSpecificCredentialsResponse.struct_class = Types::ListServiceSpecificCredentialsResponse
+
     ListSigningCertificatesRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     ListSigningCertificatesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: markerType, location_name: "Marker"))
     ListSigningCertificatesRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: maxItemsType, location_name: "MaxItems"))
@@ -1138,6 +1173,13 @@ module Aws::IAM
     RemoveUserFromGroupRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, required: true, location_name: "UserName"))
     RemoveUserFromGroupRequest.struct_class = Types::RemoveUserFromGroupRequest
 
+    ResetServiceSpecificCredentialRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
+    ResetServiceSpecificCredentialRequest.add_member(:service_specific_credential_id, Shapes::ShapeRef.new(shape: serviceSpecificCredentialId, required: true, location_name: "ServiceSpecificCredentialId"))
+    ResetServiceSpecificCredentialRequest.struct_class = Types::ResetServiceSpecificCredentialRequest
+
+    ResetServiceSpecificCredentialResponse.add_member(:service_specific_credential, Shapes::ShapeRef.new(shape: ServiceSpecificCredential, location_name: "ServiceSpecificCredential"))
+    ResetServiceSpecificCredentialResponse.struct_class = Types::ResetServiceSpecificCredentialResponse
+
     ResourceNameListType.member = Shapes::ShapeRef.new(shape: ResourceNameType)
 
     ResourceSpecificResult.add_member(:eval_resource_name, Shapes::ShapeRef.new(shape: ResourceNameType, required: true, location_name: "EvalResourceName"))
@@ -1209,6 +1251,25 @@ module Aws::IAM
     ServerCertificateMetadata.add_member(:upload_date, Shapes::ShapeRef.new(shape: dateType, location_name: "UploadDate"))
     ServerCertificateMetadata.add_member(:expiration, Shapes::ShapeRef.new(shape: dateType, location_name: "Expiration"))
     ServerCertificateMetadata.struct_class = Types::ServerCertificateMetadata
+
+    ServiceSpecificCredential.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
+    ServiceSpecificCredential.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceName, required: true, location_name: "ServiceName"))
+    ServiceSpecificCredential.add_member(:service_user_name, Shapes::ShapeRef.new(shape: serviceUserName, required: true, location_name: "ServiceUserName"))
+    ServiceSpecificCredential.add_member(:service_password, Shapes::ShapeRef.new(shape: servicePassword, required: true, location_name: "ServicePassword"))
+    ServiceSpecificCredential.add_member(:service_specific_credential_id, Shapes::ShapeRef.new(shape: serviceSpecificCredentialId, required: true, location_name: "ServiceSpecificCredentialId"))
+    ServiceSpecificCredential.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    ServiceSpecificCredential.add_member(:status, Shapes::ShapeRef.new(shape: statusType, required: true, location_name: "Status"))
+    ServiceSpecificCredential.struct_class = Types::ServiceSpecificCredential
+
+    ServiceSpecificCredentialMetadata.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
+    ServiceSpecificCredentialMetadata.add_member(:status, Shapes::ShapeRef.new(shape: statusType, required: true, location_name: "Status"))
+    ServiceSpecificCredentialMetadata.add_member(:service_user_name, Shapes::ShapeRef.new(shape: serviceUserName, required: true, location_name: "ServiceUserName"))
+    ServiceSpecificCredentialMetadata.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
+    ServiceSpecificCredentialMetadata.add_member(:service_specific_credential_id, Shapes::ShapeRef.new(shape: serviceSpecificCredentialId, required: true, location_name: "ServiceSpecificCredentialId"))
+    ServiceSpecificCredentialMetadata.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceName, required: true, location_name: "ServiceName"))
+    ServiceSpecificCredentialMetadata.struct_class = Types::ServiceSpecificCredentialMetadata
+
+    ServiceSpecificCredentialsListType.member = Shapes::ShapeRef.new(shape: ServiceSpecificCredentialMetadata)
 
     SetDefaultPolicyVersionRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "PolicyArn"))
     SetDefaultPolicyVersionRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: policyVersionIdType, required: true, location_name: "VersionId"))
@@ -1311,6 +1372,11 @@ module Aws::IAM
     UpdateServerCertificateRequest.add_member(:new_path, Shapes::ShapeRef.new(shape: pathType, location_name: "NewPath"))
     UpdateServerCertificateRequest.add_member(:new_server_certificate_name, Shapes::ShapeRef.new(shape: serverCertificateNameType, location_name: "NewServerCertificateName"))
     UpdateServerCertificateRequest.struct_class = Types::UpdateServerCertificateRequest
+
+    UpdateServiceSpecificCredentialRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, location_name: "UserName"))
+    UpdateServiceSpecificCredentialRequest.add_member(:service_specific_credential_id, Shapes::ShapeRef.new(shape: serviceSpecificCredentialId, required: true, location_name: "ServiceSpecificCredentialId"))
+    UpdateServiceSpecificCredentialRequest.add_member(:status, Shapes::ShapeRef.new(shape: statusType, required: true, location_name: "Status"))
+    UpdateServiceSpecificCredentialRequest.struct_class = Types::UpdateServiceSpecificCredentialRequest
 
     UpdateSigningCertificateRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: existingUserNameType, location_name: "UserName"))
     UpdateSigningCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: certificateIdType, required: true, location_name: "CertificateId"))
@@ -1637,6 +1703,17 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
+      api.add_operation(:create_service_specific_credential, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServiceSpecificCredential"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateServiceSpecificCredentialRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateServiceSpecificCredentialResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotSupportedException)
+      end)
+
       api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateUser"
         o.http_method = "POST"
@@ -1843,6 +1920,15 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:delete_service_specific_credential, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServiceSpecificCredential"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServiceSpecificCredentialRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
       end)
 
       api.add_operation(:delete_signing_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -2499,6 +2585,16 @@ module Aws::IAM
         )
       end)
 
+      api.add_operation(:list_service_specific_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceSpecificCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceSpecificCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceSpecificCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceNotSupportedException)
+      end)
+
       api.add_operation(:list_signing_certificates, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSigningCertificates"
         o.http_method = "POST"
@@ -2631,6 +2727,15 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:reset_service_specific_credential, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetServiceSpecificCredential"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ResetServiceSpecificCredentialRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetServiceSpecificCredentialResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
       end)
 
       api.add_operation(:resync_mfa_device, Seahorse::Model::Operation.new.tap do |o|
@@ -2794,6 +2899,15 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_service_specific_credential, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateServiceSpecificCredential"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateServiceSpecificCredentialRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
       end)
 
       api.add_operation(:update_signing_certificate, Seahorse::Model::Operation.new.tap do |o|

@@ -212,46 +212,47 @@ module Aws::ECS
     # your service's tasks that must remain in the `RUNNING` state during a
     # deployment, as a percentage of the `desiredCount` (rounded up to the
     # nearest integer). This parameter enables you to deploy without using
-    # additional cluster capacity. For example, if your service has a
-    # `desiredCount` of four tasks and a `minimumHealthyPercent` of 50%, the
-    # scheduler may stop two existing tasks to free up cluster capacity
-    # before starting two new tasks. Tasks for services that *do not* use a
-    # load balancer are considered healthy if they are in the `RUNNING`
-    # state; tasks for services that *do* use a load balancer are considered
-    # healthy if they are in the `RUNNING` state and the container instance
-    # it is hosted on is reported as healthy by the load balancer. The
-    # default value for `minimumHealthyPercent` is 50% in the console and
-    # 100% for the AWS CLI, the AWS SDKs, and the APIs.
+    # additional cluster capacity. For example, if `desiredCount` is four
+    # tasks and the minimum is 50%, the scheduler can stop two existing
+    # tasks to free up cluster capacity before starting two new tasks. Tasks
+    # for services that do not use a load balancer are considered healthy if
+    # they are in the `RUNNING` state. Tasks for services that use a load
+    # balancer are considered healthy if they are in the `RUNNING` state and
+    # the container instance they are hosted on is reported as healthy by
+    # the load balancer. The default value is 50% in the console and 100%
+    # for the AWS CLI, the AWS SDKs, and the APIs.
     #
     # The `maximumPercent` parameter represents an upper limit on the number
     # of your service's tasks that are allowed in the `RUNNING` or
     # `PENDING` state during a deployment, as a percentage of the
     # `desiredCount` (rounded down to the nearest integer). This parameter
-    # enables you to define the deployment batch size. For example, if your
-    # service has a `desiredCount` of four tasks and a `maximumPercent`
-    # value of 200%, the scheduler may start four new tasks before stopping
-    # the four older tasks (provided that the cluster resources required to
-    # do this are available). The default value for `maximumPercent` is
-    # 200%.
+    # enables you to define the deployment batch size. For example, if
+    # `desiredCount` is four tasks and the maximum is 200%, the scheduler
+    # can start four new tasks before stopping the four older tasks
+    # (provided that the cluster resources required to do this are
+    # available). The default value is 200%.
     #
-    # When the service scheduler launches new tasks, it attempts to balance
-    # them across the Availability Zones in your cluster with the following
-    # logic:
+    # When the service scheduler launches new tasks, it determines task
+    # placement in your cluster using the following logic:
     #
     # * Determine which of the container instances in your cluster can
     #   support your service's task definition (for example, they have the
     #   required CPU, memory, ports, and container instance attributes).
     #
-    # * Sort the valid container instances by the fewest number of running
-    #   tasks for this service in the same Availability Zone as the
-    #   instance. For example, if zone A has one running service task and
-    #   zones B and C each have zero, valid container instances in either
-    #   zone B or C are considered optimal for placement.
+    # * By default, the service scheduler attempts to balance tasks across
+    #   Availability Zones in this manner (although you can choose a
+    #   different placement strategy):
     #
-    # * Place the new service task on a valid container instance in an
-    #   optimal Availability Zone (based on the previous steps), favoring
-    #   container instances with the fewest number of running tasks for this
-    #   service.
+    #   * Sort the valid container instances by the fewest number of running
+    #     tasks for this service in the same Availability Zone as the
+    #     instance. For example, if zone A has one running service task and
+    #     zones B and C each have zero, valid container instances in either
+    #     zone B or C are considered optimal for placement.
+    #
+    #   * Place the new service task on a valid container instance in an
+    #     optimal Availability Zone (based on the previous steps), favoring
+    #     container instances with the fewest number of running tasks for
+    #     this service.
     #
     #
     #
@@ -275,9 +276,10 @@ module Aws::ECS
     #
     # @option params [Array<Types::LoadBalancer>] :load_balancers
     #   A load balancer object representing the load balancer to use with your
-    #   service. Currently, you are limited to one load balancer per service.
-    #   After you create a service, the load balancer name, container name,
-    #   and container port specified in the service definition are immutable.
+    #   service. Currently, you are limited to one load balancer or target
+    #   group per service. After you create a service, the load balancer name
+    #   or target group ARN, container name, and container port specified in
+    #   the service definition are immutable.
     #
     #   For Elastic Load Balancing Classic load balancers, this object must
     #   contain the load balancer name, the container name (as it appears in a
@@ -323,6 +325,16 @@ module Aws::ECS
     #   Optional deployment parameters that control how many tasks run during
     #   the deployment and the ordering of stopping and starting tasks.
     #
+    # @option params [Array<Types::PlacementConstraint>] :placement_constraints
+    #   An array of placement constraint objects to use for tasks in your
+    #   service. You can specify a maximum of 10 constraints per task (this
+    #   limit includes constraints in the task definition and those specified
+    #   at run time).
+    #
+    # @option params [Array<Types::PlacementStrategy>] :placement_strategy
+    #   The placement strategy objects to use for tasks in your service. You
+    #   can specify a maximum of 5 strategy rules per service.
+    #
     # @return [Types::CreateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServiceResponse#service #service} => Types::Service
@@ -348,6 +360,18 @@ module Aws::ECS
     #       maximum_percent: 1,
     #       minimum_healthy_percent: 1,
     #     },
+    #     placement_constraints: [
+    #       {
+    #         type: "distinctInstance", # accepts distinctInstance, memberOf
+    #         expression: "String",
+    #       },
+    #     ],
+    #     placement_strategy: [
+    #       {
+    #         type: "random", # accepts random, spread, binpack
+    #         field: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -382,11 +406,63 @@ module Aws::ECS
     #   resp.service.events[0].created_at #=> Time
     #   resp.service.events[0].message #=> String
     #   resp.service.created_at #=> Time
+    #   resp.service.placement_constraints #=> Array
+    #   resp.service.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.service.placement_constraints[0].expression #=> String
+    #   resp.service.placement_strategy #=> Array
+    #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.service.placement_strategy[0].field #=> String
     #
     # @overload create_service(params = {})
     # @param [Hash] params ({})
     def create_service(params = {}, options = {})
       req = build_request(:create_service, params)
+      req.send_request(options)
+    end
+
+    # Deletes one or more custom attributes from an Amazon ECS resource.
+    #
+    # @option params [String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   contains the resource to apply attributes. If you do not specify a
+    #   cluster, the default cluster is assumed.
+    #
+    # @option params [required, Array<Types::Attribute>] :attributes
+    #   The attributes to delete from your resource. You can specify up to 10
+    #   attributes per request. For custom attributes, specify the attribute
+    #   name and target ID, but do not specify the value. If you specify the
+    #   target ID using the short form, you must also specify the target type.
+    #
+    # @return [Types::DeleteAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAttributesResponse#attributes #attributes} => Array&lt;Types::Attribute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_attributes({
+    #     cluster: "String",
+    #     attributes: [ # required
+    #       {
+    #         name: "String", # required
+    #         value: "String",
+    #         target_type: "container-instance", # accepts container-instance
+    #         target_id: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].name #=> String
+    #   resp.attributes[0].value #=> String
+    #   resp.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.attributes[0].target_id #=> String
+    #
+    # @overload delete_attributes(params = {})
+    # @param [Hash] params ({})
+    def delete_attributes(params = {}, options = {})
+      req = build_request(:delete_attributes, params)
       req.send_request(options)
     end
 
@@ -495,6 +571,12 @@ module Aws::ECS
     #   resp.service.events[0].created_at #=> Time
     #   resp.service.events[0].message #=> String
     #   resp.service.created_at #=> Time
+    #   resp.service.placement_constraints #=> Array
+    #   resp.service.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.service.placement_constraints[0].expression #=> String
+    #   resp.service.placement_strategy #=> Array
+    #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.service.placement_strategy[0].field #=> String
     #
     # @overload delete_service(params = {})
     # @param [Hash] params ({})
@@ -596,6 +678,8 @@ module Aws::ECS
     #   resp.container_instance.attributes #=> Array
     #   resp.container_instance.attributes[0].name #=> String
     #   resp.container_instance.attributes[0].value #=> String
+    #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.container_instance.attributes[0].target_id #=> String
     #
     # @overload deregister_container_instance(params = {})
     # @param [Hash] params ({})
@@ -697,6 +781,11 @@ module Aws::ECS
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
     #   resp.task_definition.requires_attributes[0].value #=> String
+    #   resp.task_definition.requires_attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.task_definition.requires_attributes[0].target_id #=> String
+    #   resp.task_definition.placement_constraints #=> Array
+    #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
+    #   resp.task_definition.placement_constraints[0].expression #=> String
     #
     # @overload deregister_task_definition(params = {})
     # @param [Hash] params ({})
@@ -802,6 +891,8 @@ module Aws::ECS
     #   resp.container_instances[0].attributes #=> Array
     #   resp.container_instances[0].attributes[0].name #=> String
     #   resp.container_instances[0].attributes[0].value #=> String
+    #   resp.container_instances[0].attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.container_instances[0].attributes[0].target_id #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -868,6 +959,12 @@ module Aws::ECS
     #   resp.services[0].events[0].created_at #=> Time
     #   resp.services[0].events[0].message #=> String
     #   resp.services[0].created_at #=> Time
+    #   resp.services[0].placement_constraints #=> Array
+    #   resp.services[0].placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.services[0].placement_constraints[0].expression #=> String
+    #   resp.services[0].placement_strategy #=> Array
+    #   resp.services[0].placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.services[0].placement_strategy[0].field #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -969,6 +1066,11 @@ module Aws::ECS
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
     #   resp.task_definition.requires_attributes[0].value #=> String
+    #   resp.task_definition.requires_attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.task_definition.requires_attributes[0].target_id #=> String
+    #   resp.task_definition.placement_constraints #=> Array
+    #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
+    #   resp.task_definition.placement_constraints[0].expression #=> String
     #
     # @overload describe_task_definition(params = {})
     # @param [Hash] params ({})
@@ -1035,6 +1137,7 @@ module Aws::ECS
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].group #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1090,6 +1193,85 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Lists the attributes for Amazon ECS resources within a specified
+    # target type and cluster. When you specify a target type and cluster,
+    # `LisAttributes` returns a list of attribute objects, one for each
+    # attribute on each resource. You can filter the list of results to a
+    # single attribute name to only return results that have that name. You
+    # can also filter the results by attribute name and value, for example,
+    # to see which container instances in a cluster are running a Linux AMI
+    # (`ecs.os-type=linux`).
+    #
+    # @option params [String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster to
+    #   list attributes. If you do not specify a cluster, the default cluster
+    #   is assumed.
+    #
+    # @option params [required, String] :target_type
+    #   The type of the target with which to list attributes.
+    #
+    # @option params [String] :attribute_name
+    #   The name of the attribute with which to filter the results.
+    #
+    # @option params [String] :attribute_value
+    #   The value of the attribute with which to filter results. You must also
+    #   specify an attribute name to use this parameter.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListAttributes` request where `maxResults` was used and the results
+    #   exceeded the value of that parameter. Pagination continues from the
+    #   end of the previous results that returned the `nextToken` value. This
+    #   value is `null` when there are no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+    #   to retrieve the next items in a list and not for other programmatic
+    #   purposes.
+    #
+    #    </note>
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of cluster results returned by `ListAttributes` in
+    #   paginated output. When this parameter is used, `ListAttributes` only
+    #   returns `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can be
+    #   seen by sending another `ListAttributes` request with the returned
+    #   `nextToken` value. This value can be between 1 and 100. If this
+    #   parameter is not used, then `ListAttributes` returns up to 100 results
+    #   and a `nextToken` value if applicable.
+    #
+    # @return [Types::ListAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttributesResponse#attributes #attributes} => Array&lt;Types::Attribute&gt;
+    #   * {Types::ListAttributesResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attributes({
+    #     cluster: "String",
+    #     target_type: "container-instance", # required, accepts container-instance
+    #     attribute_name: "String",
+    #     attribute_value: "String",
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].name #=> String
+    #   resp.attributes[0].value #=> String
+    #   resp.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.attributes[0].target_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_attributes(params = {})
+    # @param [Hash] params ({})
+    def list_attributes(params = {}, options = {})
+      req = build_request(:list_attributes, params)
+      req.send_request(options)
+    end
+
     # Returns a list of existing clusters.
     #
     # @option params [String] :next_token
@@ -1140,12 +1322,30 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Returns a list of container instances in a specified cluster.
+    # Returns a list of container instances in a specified cluster. You can
+    # filter the results of a `ListContainerInstances` operation with
+    # cluster query language statements inside the `filter` parameter. For
+    # more information, see [Cluster Query Language][1] in the *Amazon EC2
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
     #   hosts the container instances to list. If you do not specify a
     #   cluster, the default cluster is assumed.
+    #
+    # @option params [String] :filter
+    #   You can filter the results of a `ListContainerInstances` operation
+    #   with cluster query language statements. For more information, see
+    #   [Cluster Query Language][1] in the *Amazon EC2 Container Service
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #
     # @option params [String] :next_token
     #   The `nextToken` value returned from a previous paginated
@@ -1171,6 +1371,13 @@ module Aws::ECS
     #   then `ListContainerInstances` returns up to 100 results and a
     #   `nextToken` value if applicable.
     #
+    # @option params [String] :status
+    #   The container instance status with which to filter the
+    #   `ListContainerInstances` results. Specifying a container instance
+    #   status of `DRAINING` limits the results to container instances that
+    #   have been set to drain with the UpdateContainerInstancesState
+    #   operation.
+    #
     # @return [Types::ListContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListContainerInstancesResponse#container_instance_arns #container_instance_arns} => Array&lt;String&gt;
@@ -1180,8 +1387,10 @@ module Aws::ECS
     #
     #   resp = client.list_container_instances({
     #     cluster: "String",
+    #     filter: "String",
     #     next_token: "String",
     #     max_results: 1,
+    #     status: "ACTIVE", # accepts ACTIVE, DRAINING
     #   })
     #
     # @example Response structure
@@ -1513,6 +1722,59 @@ module Aws::ECS
       req.send_request(options)
     end
 
+    # Create or update an attribute on an Amazon ECS resource. If the
+    # attribute does not exist, it is created. If the attribute exists, its
+    # value is replaced with the specified value. To delete an attribute,
+    # use DeleteAttributes. For more information, see [Attributes][1] in the
+    # *Amazon EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes
+    #
+    # @option params [String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   contains the resource to apply attributes. If you do not specify a
+    #   cluster, the default cluster is assumed.
+    #
+    # @option params [required, Array<Types::Attribute>] :attributes
+    #   The attributes to apply to your resource. You can specify up to 10
+    #   custom attributes per resource. You can specify up to 10 attributes in
+    #   a single call.
+    #
+    # @return [Types::PutAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAttributesResponse#attributes #attributes} => Array&lt;Types::Attribute&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_attributes({
+    #     cluster: "String",
+    #     attributes: [ # required
+    #       {
+    #         name: "String", # required
+    #         value: "String",
+    #         target_type: "container-instance", # accepts container-instance
+    #         target_id: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attributes #=> Array
+    #   resp.attributes[0].name #=> String
+    #   resp.attributes[0].value #=> String
+    #   resp.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.attributes[0].target_id #=> String
+    #
+    # @overload put_attributes(params = {})
+    # @param [Hash] params ({})
+    def put_attributes(params = {}, options = {})
+      req = build_request(:put_attributes, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This action is only used by the Amazon EC2 Container Service agent,
     # and it is not intended for use outside of the agent.
     #
@@ -1583,6 +1845,8 @@ module Aws::ECS
     #       {
     #         name: "String", # required
     #         value: "String",
+    #         target_type: "container-instance", # accepts container-instance
+    #         target_id: "String",
     #       },
     #     ],
     #   })
@@ -1619,6 +1883,8 @@ module Aws::ECS
     #   resp.container_instance.attributes #=> Array
     #   resp.container_instance.attributes[0].name #=> String
     #   resp.container_instance.attributes[0].value #=> String
+    #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.container_instance.attributes[0].target_id #=> String
     #
     # @overload register_container_instance(params = {})
     # @param [Hash] params ({})
@@ -1697,6 +1963,11 @@ module Aws::ECS
     # @option params [Array<Types::Volume>] :volumes
     #   A list of volume definitions in JSON format that containers in your
     #   task may use.
+    #
+    # @option params [Array<Types::TaskDefinitionPlacementConstraint>] :placement_constraints
+    #   An array of placement constraint objects to use for the task. You can
+    #   specify a maximum of 10 constraints per task (this limit includes
+    #   constraints in the task definition and those specified at run time).
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1786,6 +2057,12 @@ module Aws::ECS
     #         },
     #       },
     #     ],
+    #     placement_constraints: [
+    #       {
+    #         type: "memberOf", # accepts memberOf
+    #         expression: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1853,6 +2130,11 @@ module Aws::ECS
     #   resp.task_definition.requires_attributes #=> Array
     #   resp.task_definition.requires_attributes[0].name #=> String
     #   resp.task_definition.requires_attributes[0].value #=> String
+    #   resp.task_definition.requires_attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.task_definition.requires_attributes[0].target_id #=> String
+    #   resp.task_definition.placement_constraints #=> Array
+    #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
+    #   resp.task_definition.placement_constraints[0].expression #=> String
     #
     # @overload register_task_definition(params = {})
     # @param [Hash] params ({})
@@ -1861,11 +2143,19 @@ module Aws::ECS
       req.send_request(options)
     end
 
-    # Start a task using random placement and the default Amazon ECS
-    # scheduler. To use your own scheduler or place a task on a specific
-    # container instance, use `StartTask` instead.
+    # Starts a new task using the specified task definition.
     #
-    # The `count` parameter is limited to 10 tasks per call.
+    # You can allow Amazon ECS to place tasks for you, or you can customize
+    # how Amazon ECS places tasks using placement constraints and placement
+    # strategies. For more information, see [Scheduling Tasks][1] in the
+    # *Amazon EC2 Container Service Developer Guide*.
+    #
+    # Alternatively, you can use StartTask to use your own scheduler or
+    # place tasks manually on specific container instances.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -1894,9 +2184,7 @@ module Aws::ECS
     #
     # @option params [Integer] :count
     #   The number of instantiations of the specified task to place on your
-    #   cluster.
-    #
-    #   The `count` parameter is limited to 10 tasks per call.
+    #   cluster. You can specify up to 10 tasks per call.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example if you
@@ -1909,6 +2197,20 @@ module Aws::ECS
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
+    #
+    # @option params [String] :group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
+    #
+    # @option params [Array<Types::PlacementConstraint>] :placement_constraints
+    #   An array of placement constraint objects to use for the task. You can
+    #   specify up to 10 constraints per task (including constraints in the
+    #   task definition and those specified at run time).
+    #
+    # @option params [Array<Types::PlacementStrategy>] :placement_strategy
+    #   The placement strategy objects to use for the task. You can specify a
+    #   maximum of 5 strategy rules per task.
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1937,6 +2239,19 @@ module Aws::ECS
     #     },
     #     count: 1,
     #     started_by: "String",
+    #     group: "String",
+    #     placement_constraints: [
+    #       {
+    #         type: "distinctInstance", # accepts distinctInstance, memberOf
+    #         expression: "String",
+    #       },
+    #     ],
+    #     placement_strategy: [
+    #       {
+    #         type: "random", # accepts random, spread, binpack
+    #         field: "String",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1974,6 +2289,7 @@ module Aws::ECS
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].group #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -1986,10 +2302,15 @@ module Aws::ECS
     end
 
     # Starts a new task from the specified task definition on the specified
-    # container instance or instances. To use the default Amazon ECS
-    # scheduler to place your task, use `RunTask` instead.
+    # container instance or instances.
     #
-    # The list of container instances to start tasks on is limited to 10.
+    # Alternatively, you can use RunTask to place tasks for you. For more
+    # information, see [Scheduling Tasks][1] in the *Amazon EC2 Container
+    # Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -2019,9 +2340,7 @@ module Aws::ECS
     # @option params [required, Array<String>] :container_instances
     #   The container instance IDs or full Amazon Resource Name (ARN) entries
     #   for the container instances on which you would like to place your
-    #   task.
-    #
-    #   The list of container instances to start tasks on is limited to 10.
+    #   task. You can specify up to 10 container instances.
     #
     # @option params [String] :started_by
     #   An optional tag specified when a task is started. For example if you
@@ -2034,6 +2353,11 @@ module Aws::ECS
     #
     #   If a task is started by an Amazon ECS service, then the `startedBy`
     #   parameter contains the deployment ID of the service that starts it.
+    #
+    # @option params [String] :group
+    #   The name of the task group to associate with the task. The default
+    #   value is the family name of the task definition (for example,
+    #   family:my-family-name).
     #
     # @return [Types::StartTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2062,6 +2386,7 @@ module Aws::ECS
     #     },
     #     container_instances: ["String"], # required
     #     started_by: "String",
+    #     group: "String",
     #   })
     #
     # @example Response structure
@@ -2099,6 +2424,7 @@ module Aws::ECS
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].started_at #=> Time
     #   resp.tasks[0].stopped_at #=> Time
+    #   resp.tasks[0].group #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -2181,6 +2507,7 @@ module Aws::ECS
     #   resp.task.created_at #=> Time
     #   resp.task.started_at #=> Time
     #   resp.task.stopped_at #=> Time
+    #   resp.task.group #=> String
     #
     # @overload stop_task(params = {})
     # @param [Hash] params ({})
@@ -2368,11 +2695,135 @@ module Aws::ECS
     #   resp.container_instance.attributes #=> Array
     #   resp.container_instance.attributes[0].name #=> String
     #   resp.container_instance.attributes[0].value #=> String
+    #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.container_instance.attributes[0].target_id #=> String
     #
     # @overload update_container_agent(params = {})
     # @param [Hash] params ({})
     def update_container_agent(params = {}, options = {})
       req = build_request(:update_container_agent, params)
+      req.send_request(options)
+    end
+
+    # Modifies the status of an Amazon ECS container instance.
+    #
+    # You can change the status of a container instance to `DRAINING` to
+    # manually remove an instance from a cluster, for example to perform
+    # system updates, update the Docker daemon, or scale down the cluster
+    # size.
+    #
+    # When you set a container instance to `DRAINING`, Amazon ECS prevents
+    # new tasks from being scheduled for placement on the container instance
+    # and replacement service tasks are started on other container instances
+    # in the cluster if the resources are available. Service tasks on the
+    # container instance that are in the `PENDING` state are stopped
+    # immediately.
+    #
+    # Service tasks on the container instance that are in the `RUNNING`
+    # state are stopped and replaced according the service's deployment
+    # configuration parameters, `minimumHealthyPercent` and
+    # `maximumPercent`. Note that you can change the deployment
+    # configuration of your service using UpdateService.
+    #
+    # * If `minimumHealthyPercent` is below 100%, the scheduler can ignore
+    #   `desiredCount` temporarily during task replacement. For example,
+    #   `desiredCount` is four tasks, a minimum of 50% allows the scheduler
+    #   to stop two existing tasks before starting two new tasks. If the
+    #   minimum is 100%, the service scheduler can't remove existing tasks
+    #   until the replacement tasks are considered healthy. Tasks for
+    #   services that do not use a load balancer are considered healthy if
+    #   they are in the `RUNNING` state. Tasks for services that use a load
+    #   balancer are considered healthy if they are in the `RUNNING` state
+    #   and the container instance they are hosted on is reported as healthy
+    #   by the load balancer.
+    #
+    # * The `maximumPercent` parameter represents an upper limit on the
+    #   number of running tasks during task replacement, which enables you
+    #   to define the replacement batch size. For example, if `desiredCount`
+    #   of four tasks, a maximum of 200% starts four new tasks before
+    #   stopping the four tasks to be drained (provided that the cluster
+    #   resources required to do this are available). If the maximum is
+    #   100%, then replacement tasks can't start until the draining tasks
+    #   have stopped.
+    #
+    # Any `PENDING` or `RUNNING` tasks that do not belong to a service are
+    # not affected; you must wait for them to finish or stop them manually.
+    #
+    # A container instance has completed draining when it has no more
+    # `RUNNING` tasks. You can verify this using ListTasks.
+    #
+    # When you set a container instance to `ACTIVE`, the Amazon ECS
+    # scheduler can begin scheduling tasks on the instance again.
+    #
+    # @option params [String] :cluster
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the container instance to update. If you do not specify a
+    #   cluster, the default cluster is assumed.
+    #
+    # @option params [required, Array<String>] :container_instances
+    #   A space-separated list of container instance IDs or full Amazon
+    #   Resource Name (ARN) entries.
+    #
+    # @option params [required, String] :status
+    #   The container instance state with which to update the container
+    #   instance.
+    #
+    # @return [Types::UpdateContainerInstancesStateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateContainerInstancesStateResponse#container_instances #container_instances} => Array&lt;Types::ContainerInstance&gt;
+    #   * {Types::UpdateContainerInstancesStateResponse#failures #failures} => Array&lt;Types::Failure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_container_instances_state({
+    #     cluster: "String",
+    #     container_instances: ["String"], # required
+    #     status: "ACTIVE", # required, accepts ACTIVE, DRAINING
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.container_instances #=> Array
+    #   resp.container_instances[0].container_instance_arn #=> String
+    #   resp.container_instances[0].ec2_instance_id #=> String
+    #   resp.container_instances[0].version #=> Integer
+    #   resp.container_instances[0].version_info.agent_version #=> String
+    #   resp.container_instances[0].version_info.agent_hash #=> String
+    #   resp.container_instances[0].version_info.docker_version #=> String
+    #   resp.container_instances[0].remaining_resources #=> Array
+    #   resp.container_instances[0].remaining_resources[0].name #=> String
+    #   resp.container_instances[0].remaining_resources[0].type #=> String
+    #   resp.container_instances[0].remaining_resources[0].double_value #=> Float
+    #   resp.container_instances[0].remaining_resources[0].long_value #=> Integer
+    #   resp.container_instances[0].remaining_resources[0].integer_value #=> Integer
+    #   resp.container_instances[0].remaining_resources[0].string_set_value #=> Array
+    #   resp.container_instances[0].remaining_resources[0].string_set_value[0] #=> String
+    #   resp.container_instances[0].registered_resources #=> Array
+    #   resp.container_instances[0].registered_resources[0].name #=> String
+    #   resp.container_instances[0].registered_resources[0].type #=> String
+    #   resp.container_instances[0].registered_resources[0].double_value #=> Float
+    #   resp.container_instances[0].registered_resources[0].long_value #=> Integer
+    #   resp.container_instances[0].registered_resources[0].integer_value #=> Integer
+    #   resp.container_instances[0].registered_resources[0].string_set_value #=> Array
+    #   resp.container_instances[0].registered_resources[0].string_set_value[0] #=> String
+    #   resp.container_instances[0].status #=> String
+    #   resp.container_instances[0].agent_connected #=> Boolean
+    #   resp.container_instances[0].running_tasks_count #=> Integer
+    #   resp.container_instances[0].pending_tasks_count #=> Integer
+    #   resp.container_instances[0].agent_update_status #=> String, one of "PENDING", "STAGING", "STAGED", "UPDATING", "UPDATED", "FAILED"
+    #   resp.container_instances[0].attributes #=> Array
+    #   resp.container_instances[0].attributes[0].name #=> String
+    #   resp.container_instances[0].attributes[0].value #=> String
+    #   resp.container_instances[0].attributes[0].target_type #=> String, one of "container-instance"
+    #   resp.container_instances[0].attributes[0].target_id #=> String
+    #   resp.failures #=> Array
+    #   resp.failures[0].arn #=> String
+    #   resp.failures[0].reason #=> String
+    #
+    # @overload update_container_instances_state(params = {})
+    # @param [Hash] params ({})
+    def update_container_instances_state(params = {}, options = {})
+      req = build_request(:update_container_instances_state, params)
       req.send_request(options)
     end
 
@@ -2392,23 +2843,22 @@ module Aws::ECS
     # `minimumHealthyPercent` and `maximumPercent`, to determine the
     # deployment strategy.
     #
-    # If the `minimumHealthyPercent` is below 100%, the scheduler can ignore
-    # the `desiredCount` temporarily during a deployment. For example, if
-    # your service has a `desiredCount` of four tasks, a
-    # `minimumHealthyPercent` of 50% allows the scheduler to stop two
-    # existing tasks before starting two new tasks. Tasks for services that
-    # *do not* use a load balancer are considered healthy if they are in the
-    # `RUNNING` state; tasks for services that *do* use a load balancer are
-    # considered healthy if they are in the `RUNNING` state and the
-    # container instance it is hosted on is reported as healthy by the load
-    # balancer.
+    # * If `minimumHealthyPercent` is below 100%, the scheduler can ignore
+    #   `desiredCount` temporarily during a deployment. For example, if
+    #   `desiredCount` is four tasks, a minimum of 50% allows the scheduler
+    #   to stop two existing tasks before starting two new tasks. Tasks for
+    #   services that do not use a load balancer are considered healthy if
+    #   they are in the `RUNNING` state. Tasks for services that use a load
+    #   balancer are considered healthy if they are in the `RUNNING` state
+    #   and the container instance they are hosted on is reported as healthy
+    #   by the load balancer.
     #
-    # The `maximumPercent` parameter represents an upper limit on the number
-    # of running tasks during a deployment, which enables you to define the
-    # deployment batch size. For example, if your service has a
-    # `desiredCount` of four tasks, a `maximumPercent` value of 200% starts
-    # four new tasks before stopping the four older tasks (provided that the
-    # cluster resources required to do this are available).
+    # * The `maximumPercent` parameter represents an upper limit on the
+    #   number of running tasks during a deployment, which enables you to
+    #   define the deployment batch size. For example, if `desiredCount` is
+    #   four tasks, a maximum of 200% starts four new tasks before stopping
+    #   the four older tasks (provided that the cluster resources required
+    #   to do this are available).
     #
     # When UpdateService stops a task during a deployment, the equivalent of
     # `docker stop` is issued to the containers running in the task. This
@@ -2417,24 +2867,41 @@ module Aws::ECS
     # handles the `SIGTERM` gracefully and exits within 30 seconds from
     # receiving it, no `SIGKILL` is sent.
     #
-    # When the service scheduler launches new tasks, it attempts to balance
-    # them across the Availability Zones in your cluster with the following
-    # logic:
+    # When the service scheduler launches new tasks, it determines task
+    # placement in your cluster with the following logic:
     #
     # * Determine which of the container instances in your cluster can
     #   support your service's task definition (for example, they have the
     #   required CPU, memory, ports, and container instance attributes).
     #
-    # * Sort the valid container instances by the fewest number of running
-    #   tasks for this service in the same Availability Zone as the
-    #   instance. For example, if zone A has one running service task and
-    #   zones B and C each have zero, valid container instances in either
-    #   zone B or C are considered optimal for placement.
+    # * By default, the service scheduler attempts to balance tasks across
+    #   Availability Zones in this manner (although you can choose a
+    #   different placement strategy):
     #
-    # * Place the new service task on a valid container instance in an
-    #   optimal Availability Zone (based on the previous steps), favoring
-    #   container instances with the fewest number of running tasks for this
-    #   service.
+    #   * Sort the valid container instances by the fewest number of running
+    #     tasks for this service in the same Availability Zone as the
+    #     instance. For example, if zone A has one running service task and
+    #     zones B and C each have zero, valid container instances in either
+    #     zone B or C are considered optimal for placement.
+    #
+    #   * Place the new service task on a valid container instance in an
+    #     optimal Availability Zone (based on the previous steps), favoring
+    #     container instances with the fewest number of running tasks for
+    #     this service.
+    #
+    # When the service scheduler stops running tasks, it attempts to
+    # maintain balance across the Availability Zones in your cluster using
+    # the following logic:
+    #
+    # * Sort the container instances by the largest number of running tasks
+    #   for this service in the same Availability Zone as the instance. For
+    #   example, if zone A has one running service task and zones B and C
+    #   each have two, container instances in either zone B or C are
+    #   considered optimal for termination.
+    #
+    # * Stop the task on a container instance in an optimal Availability
+    #   Zone (based on the previous steps), favoring container instances
+    #   with the largest number of running tasks for this service.
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -2509,6 +2976,12 @@ module Aws::ECS
     #   resp.service.events[0].created_at #=> Time
     #   resp.service.events[0].message #=> String
     #   resp.service.created_at #=> Time
+    #   resp.service.placement_constraints #=> Array
+    #   resp.service.placement_constraints[0].type #=> String, one of "distinctInstance", "memberOf"
+    #   resp.service.placement_constraints[0].expression #=> String
+    #   resp.service.placement_strategy #=> Array
+    #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
+    #   resp.service.placement_strategy[0].field #=> String
     #
     # @overload update_service(params = {})
     # @param [Hash] params ({})

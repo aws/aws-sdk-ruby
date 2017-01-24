@@ -225,7 +225,7 @@ module Aws::ConfigService
     #           source_details: [
     #             {
     #               event_source: "aws.config", # accepts aws.config
-    #               message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+    #               message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
     #               maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #             },
     #           ],
@@ -495,11 +495,6 @@ module Aws::ConfigService
     end
 
     # A list that contains detailed configurations of a specified resource.
-    #
-    # <note markdown="1"> Currently, the list does not contain information about non-AWS
-    # components (for example, applications on your Amazon EC2 instances).
-    #
-    #  </note>
     #
     # @!attribute [rw] version
     #   The version number of the resource configuration.
@@ -972,7 +967,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` string returned on a previous page that you use to
+    #   The `NextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1037,7 +1032,7 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` string returned on a previous page that you use to
+    #   The `NextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1137,7 +1132,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` string returned on a previous page that you use to
+    #   The `NextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1462,7 +1457,7 @@ module Aws::ConfigService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` string returned on a previous page that you use to
+    #   The `NextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1518,7 +1513,7 @@ module Aws::ConfigService
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   The `nextToken` string returned on a previous page that you use to
+    #   The `NextToken` string returned on a previous page that you use to
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
@@ -1763,7 +1758,7 @@ module Aws::ConfigService
     #             source_details: [
     #               {
     #                 event_source: "aws.config", # accepts aws.config
-    #                 message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+    #                 message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
     #                 maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #               },
     #             ],
@@ -2126,7 +2121,7 @@ module Aws::ConfigService
     #         source_details: [
     #           {
     #             event_source: "aws.config", # accepts aws.config
-    #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+    #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
     #             maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #           },
     #         ],
@@ -2174,7 +2169,7 @@ module Aws::ConfigService
     #
     #       {
     #         event_source: "aws.config", # accepts aws.config
-    #         message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+    #         message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification, OversizedConfigurationItemChangeNotification
     #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
     #       }
     #
@@ -2185,16 +2180,28 @@ module Aws::ConfigService
     #
     # @!attribute [rw] message_type
     #   The type of notification that triggers AWS Config to run an
-    #   evaluation. You can specify the following notification types:
+    #   evaluation for a rule. You can specify the following notification
+    #   types:
     #
-    #   `ConfigurationItemChangeNotification` - Triggers an evaluation when
-    #   AWS Config delivers a configuration item change notification.
+    #   * `ConfigurationItemChangeNotification` - Triggers an evaluation
+    #     when AWS Config delivers a configuration item as a result of a
+    #     resource change.
     #
-    #   `ScheduledNotification` - Triggers a periodic evaluation at the
-    #   frequency specified for `MaximumExecutionFrequency`.
+    #   * `OversizedConfigurationItemChangeNotification` - Triggers an
+    #     evaluation when AWS Config delivers an oversized configuration
+    #     item. AWS Config may generate this notification type when a
+    #     resource changes and the notification exceeds the maximum size
+    #     allowed by Amazon SNS.
     #
-    #   `ConfigurationSnapshotDeliveryCompleted` - Triggers a periodic
-    #   evaluation when AWS Config delivers a configuration snapshot.
+    #   * `ScheduledNotification` - Triggers a periodic evaluation at the
+    #     frequency specified for `MaximumExecutionFrequency`.
+    #
+    #   * `ConfigurationSnapshotDeliveryCompleted` - Triggers a periodic
+    #     evaluation when AWS Config delivers a configuration snapshot.
+    #
+    #   If you want your custom rule to be triggered by configuration
+    #   changes, specify both `ConfigurationItemChangeNotification` and
+    #   `OversizedConfigurationItemChangeNotification`.
     #   @return [String]
     #
     # @!attribute [rw] maximum_execution_frequency

@@ -76,9 +76,9 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Provide the bounding box, confidence that the bounding box actually
-    # contains a face, and the similarity between the face in the bounding
-    # box and the face in the source image.
+    # For the provided the bounding box, confidence level that the bounding
+    # box actually contains a face, and the similarity between the face in
+    # the bounding box and the face in the source image.
     #
     # @!attribute [rw] similarity
     #   Level of confidence that the faces match.
@@ -119,11 +119,11 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] source_image
-    #   Source image either as bytes or an Amazon S3 object
+    #   Source image either as bytes or an S3 object
     #   @return [Types::Image]
     #
     # @!attribute [rw] target_image
-    #   Target image either as bytes or an Amazon S3 object
+    #   Target image either as bytes or an S3 object
     #   @return [Types::Image]
     #
     # @!attribute [rw] similarity_threshold
@@ -143,7 +143,7 @@ module Aws::Rekognition
     #   @return [Types::ComparedSourceImageFace]
     #
     # @!attribute [rw] face_matches
-    #   Provides an array of `CompareFacesMatch ` objects. Each object
+    #   Provides an array of `CompareFacesMatch` objects. Each object
     #   provides the bounding box, confidence that the bounding box contains
     #   a face, and the similarity between the face in the bounding box and
     #   the face in the source image.
@@ -229,7 +229,7 @@ module Aws::Rekognition
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] confidence
-    #   Confidence that the selected bounding box contains a face.
+    #   Confidence level that the selected bounding box contains a face.
     #   @return [Float]
     #
     class ComparedSourceImageFace < Struct.new(
@@ -353,7 +353,7 @@ module Aws::Rekognition
     #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\], the
     #   service uses a logical AND operator to determine which attributes to
     #   return (in this case, it is all attributes). If you specify all
-    #   attributes, Rekognition performs additional detection.
+    #   attributes, Amazon Rekognition performs additional detection.
     #   @return [Array<String>]
     #
     class DetectFacesRequest < Struct.new(
@@ -376,6 +376,12 @@ module Aws::Rekognition
     #   by 90 degrees, it corrects orientation, performs face detection, and
     #   then returns the faces. That is, the bounding box coordinates in the
     #   response are based on the corrected orientation.
+    #
+    #   <note markdown="1"> If the source image Exif metadata populates the orientation field,
+    #   Amazon Rekognition does not perform orientation correction and the
+    #   value of OrientationCorrection will be nil.
+    #
+    #    </note>
     #   @return [String]
     #
     class DetectFacesResponse < Struct.new(
@@ -434,10 +440,16 @@ module Aws::Rekognition
     # @!attribute [rw] orientation_correction
     #   Amazon Rekognition returns the orientation of the input image that
     #   was detected (clockwise direction). If your application displays the
-    #   image, you can use this value to correct the orientation. If
+    #   image, you can use this value to correct the orientation. If Amazon
     #   Rekognition detects that the input image was rotated (for example,
     #   by 90 degrees), it first corrects the orientation before detecting
     #   the labels.
+    #
+    #   <note markdown="1"> If the source image Exif metadata populates the orientation field,
+    #   Amazon Rekognition does not perform orientation correction and the
+    #   value of OrientationCorrection will be nil.
+    #
+    #    </note>
     #   @return [String]
     #
     class DetectLabelsResponse < Struct.new(
@@ -700,6 +712,22 @@ module Aws::Rekognition
 
     # Provides the source image either as bytes or an S3 object.
     #
+    # The region for the S3 bucket containing the S3 object must match the
+    # region you use for Amazon Rekognition operations.
+    #
+    # You may need to Base64-encode the image bytes depending on the
+    # language you are using and whether or not you are using the AWS SDK.
+    # For more information, see example4.
+    #
+    # If you use the Amazon CLI to call Amazon Rekognition operations,
+    # passing image bytes using the Bytes property is not supported. You
+    # must first upload the image to an Amazon S3 bucket and then call the
+    # operation using the S3Object property.
+    #
+    # For Amazon Rekognition to process an S3 object, the user must have
+    # permission to access the S3 object. For more information, see
+    # manage-access-resource-policies.
+    #
     # @note When making an API call, you may pass Image
     #   data as a hash:
     #
@@ -767,6 +795,22 @@ module Aws::Rekognition
     #
     # @!attribute [rw] image
     #   Provides the source image either as bytes or an S3 object.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   You may need to Base64-encode the image bytes depending on the
+    #   language you are using and whether or not you are using the AWS SDK.
+    #   For more information, see example4.
+    #
+    #   If you use the Amazon CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   manage-access-resource-policies.
     #   @return [Types::Image]
     #
     # @!attribute [rw] external_image_id
@@ -779,7 +823,7 @@ module Aws::Rekognition
     #
     #   For example, you can specify the value as, \["ALL"\] or
     #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\],
-    #   Rekognition uses the logical AND operator to determine which
+    #   Amazon Rekognition uses the logical AND operator to determine which
     #   attributes to return (in this case, it is all attributes). If you
     #   specify all attributes, the service performs additional detection,
     #   in addition to the default.
@@ -803,6 +847,12 @@ module Aws::Rekognition
     #   image was rotated, it returns the degree of rotation. You can use
     #   this value to correct the orientation and also appropriately analyze
     #   the bounding box coordinates that are returned.
+    #
+    #   <note markdown="1"> If the source image Exif metadata populates the orientation field,
+    #   Amazon Rekognition does not perform orientation correction and the
+    #   value of OrientationCorrection will be nil.
+    #
+    #    </note>
     #   @return [String]
     #
     class IndexFacesResponse < Struct.new(
@@ -811,8 +861,8 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Structure containing details about the detected label, including
-    # bounding box, name, and level of confidence.
+    # Structure containing details about the detected label, including name,
+    # and level of confidence.
     #
     # @!attribute [rw] name
     #   The name (label) of the object.
@@ -837,15 +887,15 @@ module Aws::Rekognition
     # @!attribute [rw] x
     #   x-coordinate from the top left of the landmark expressed as the
     #   ration of the width of the image. For example, if the images is
-    #   700x200 and the x-coordinate of the landmark is at 350 pixels, then
-    #   this value is 0.5.
+    #   700x200 and the x-coordinate of the landmark is at 350 pixels, this
+    #   value is 0.5.
     #   @return [Float]
     #
     # @!attribute [rw] y
     #   y-coordinate from the top left of the landmark expressed as the
     #   ration of the height of the image. For example, if the images is
-    #   700x200 and the y-coordinate of the landmark is at 100 pixels, then
-    #   this value is 0.5.
+    #   700x200 and the y-coordinate of the landmark is at 100 pixels, this
+    #   value is 0.5.
     #   @return [Float]
     #
     class Landmark < Struct.new(
@@ -999,6 +1049,13 @@ module Aws::Rekognition
 
     # Provides the S3 bucket name and object name.
     #
+    # The region for the S3 bucket containing the S3 object must match the
+    # region you use for Amazon Rekognition operations.
+    #
+    # For Amazon Rekognition to process an S3 object, the user must have
+    # permission to access the S3 object. For more information, see
+    # manage-access-resource-policies.
+    #
     # @note When making an API call, you may pass S3Object
     #   data as a hash:
     #
@@ -1051,6 +1108,22 @@ module Aws::Rekognition
     #
     # @!attribute [rw] image
     #   Provides the source image either as bytes or an S3 object.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   You may need to Base64-encode the image bytes depending on the
+    #   language you are using and whether or not you are using the AWS SDK.
+    #   For more information, see example4.
+    #
+    #   If you use the Amazon CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   manage-access-resource-policies.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_faces
@@ -1073,8 +1146,8 @@ module Aws::Rekognition
     end
 
     # @!attribute [rw] searched_face_bounding_box
-    #   The bounding box around the face in the input image that Rekognition
-    #   used for the search.
+    #   The bounding box around the face in the input image that Amazon
+    #   Rekognition used for the search.
     #   @return [Types::BoundingBox]
     #
     # @!attribute [rw] searched_face_confidence
@@ -1105,7 +1178,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] collection_id
-    #   ID of the collection to search.
+    #   ID of the collection the face belongs to.
     #   @return [String]
     #
     # @!attribute [rw] face_id
@@ -1113,7 +1186,7 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] max_faces
-    #   Maximum number of faces to return. The API will return the maximum
+    #   Maximum number of faces to return. The operation returns the maximum
     #   number of faces with the highest confidence in the match.
     #   @return [Integer]
     #

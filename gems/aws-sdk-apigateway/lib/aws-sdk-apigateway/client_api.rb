@@ -109,6 +109,8 @@ module Aws::APIGateway
     GetRestApiRequest = Shapes::StructureShape.new(name: 'GetRestApiRequest')
     GetRestApisRequest = Shapes::StructureShape.new(name: 'GetRestApisRequest')
     GetSdkRequest = Shapes::StructureShape.new(name: 'GetSdkRequest')
+    GetSdkTypeRequest = Shapes::StructureShape.new(name: 'GetSdkTypeRequest')
+    GetSdkTypesRequest = Shapes::StructureShape.new(name: 'GetSdkTypesRequest')
     GetStageRequest = Shapes::StructureShape.new(name: 'GetStageRequest')
     GetStagesRequest = Shapes::StructureShape.new(name: 'GetStagesRequest')
     GetUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'GetUsagePlanKeyRequest')
@@ -139,6 +141,8 @@ module Aws::APIGateway
     ListOfPatchOperation = Shapes::ListShape.new(name: 'ListOfPatchOperation')
     ListOfResource = Shapes::ListShape.new(name: 'ListOfResource')
     ListOfRestApi = Shapes::ListShape.new(name: 'ListOfRestApi')
+    ListOfSdkConfigurationProperty = Shapes::ListShape.new(name: 'ListOfSdkConfigurationProperty')
+    ListOfSdkType = Shapes::ListShape.new(name: 'ListOfSdkType')
     ListOfStage = Shapes::ListShape.new(name: 'ListOfStage')
     ListOfStageKeys = Shapes::ListShape.new(name: 'ListOfStageKeys')
     ListOfString = Shapes::ListShape.new(name: 'ListOfString')
@@ -181,7 +185,10 @@ module Aws::APIGateway
     Resources = Shapes::StructureShape.new(name: 'Resources')
     RestApi = Shapes::StructureShape.new(name: 'RestApi')
     RestApis = Shapes::StructureShape.new(name: 'RestApis')
+    SdkConfigurationProperty = Shapes::StructureShape.new(name: 'SdkConfigurationProperty')
     SdkResponse = Shapes::StructureShape.new(name: 'SdkResponse')
+    SdkType = Shapes::StructureShape.new(name: 'SdkType')
+    SdkTypes = Shapes::StructureShape.new(name: 'SdkTypes')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Stage = Shapes::StructureShape.new(name: 'Stage')
     StageKey = Shapes::StructureShape.new(name: 'StageKey')
@@ -664,6 +671,13 @@ module Aws::APIGateway
     GetSdkRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location: "querystring", location_name: "parameters"))
     GetSdkRequest.struct_class = Types::GetSdkRequest
 
+    GetSdkTypeRequest.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "sdktype_id"))
+    GetSdkTypeRequest.struct_class = Types::GetSdkTypeRequest
+
+    GetSdkTypesRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+    GetSdkTypesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetSdkTypesRequest.struct_class = Types::GetSdkTypesRequest
+
     GetStageRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     GetStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "stage_name"))
     GetStageRequest.struct_class = Types::GetStageRequest
@@ -770,6 +784,10 @@ module Aws::APIGateway
 
     ListOfRestApi.member = Shapes::ShapeRef.new(shape: RestApi)
 
+    ListOfSdkConfigurationProperty.member = Shapes::ShapeRef.new(shape: SdkConfigurationProperty)
+
+    ListOfSdkType.member = Shapes::ShapeRef.new(shape: SdkType)
+
     ListOfStage.member = Shapes::ShapeRef.new(shape: Stage)
 
     ListOfStageKeys.member = Shapes::ShapeRef.new(shape: StageKey)
@@ -816,6 +834,7 @@ module Aws::APIGateway
     Method.add_member(:authorization_type, Shapes::ShapeRef.new(shape: String, location_name: "authorizationType"))
     Method.add_member(:authorizer_id, Shapes::ShapeRef.new(shape: String, location_name: "authorizerId"))
     Method.add_member(:api_key_required, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "apiKeyRequired"))
+    Method.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, location_name: "operationName"))
     Method.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToBoolean, location_name: "requestParameters"))
     Method.add_member(:request_models, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestModels"))
     Method.add_member(:method_responses, Shapes::ShapeRef.new(shape: MapOfMethodResponse, location_name: "methodResponses"))
@@ -894,6 +913,7 @@ module Aws::APIGateway
     PutMethodRequest.add_member(:authorization_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "authorizationType"))
     PutMethodRequest.add_member(:authorizer_id, Shapes::ShapeRef.new(shape: String, location_name: "authorizerId"))
     PutMethodRequest.add_member(:api_key_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "apiKeyRequired"))
+    PutMethodRequest.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, location_name: "operationName"))
     PutMethodRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToBoolean, location_name: "requestParameters"))
     PutMethodRequest.add_member(:request_models, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestModels"))
     PutMethodRequest.struct_class = Types::PutMethodRequest
@@ -944,12 +964,29 @@ module Aws::APIGateway
     RestApis.add_member(:items, Shapes::ShapeRef.new(shape: ListOfRestApi, location_name: "item"))
     RestApis.struct_class = Types::RestApis
 
+    SdkConfigurationProperty.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    SdkConfigurationProperty.add_member(:friendly_name, Shapes::ShapeRef.new(shape: String, location_name: "friendlyName"))
+    SdkConfigurationProperty.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SdkConfigurationProperty.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "required"))
+    SdkConfigurationProperty.add_member(:default_value, Shapes::ShapeRef.new(shape: String, location_name: "defaultValue"))
+    SdkConfigurationProperty.struct_class = Types::SdkConfigurationProperty
+
     SdkResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     SdkResponse.add_member(:content_disposition, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Disposition"))
     SdkResponse.add_member(:body, Shapes::ShapeRef.new(shape: Blob, location_name: "body"))
     SdkResponse.struct_class = Types::SdkResponse
     SdkResponse[:payload] = :body
     SdkResponse[:payload_member] = SdkResponse.member(:body)
+
+    SdkType.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    SdkType.add_member(:friendly_name, Shapes::ShapeRef.new(shape: String, location_name: "friendlyName"))
+    SdkType.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    SdkType.add_member(:configuration_properties, Shapes::ShapeRef.new(shape: ListOfSdkConfigurationProperty, location_name: "configurationProperties"))
+    SdkType.struct_class = Types::SdkType
+
+    SdkTypes.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+    SdkTypes.add_member(:items, Shapes::ShapeRef.new(shape: ListOfSdkType, location_name: "item"))
+    SdkTypes.struct_class = Types::SdkTypes
 
     Stage.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, location_name: "deploymentId"))
     Stage.add_member(:client_certificate_id, Shapes::ShapeRef.new(shape: String, location_name: "clientCertificateId"))
@@ -1969,6 +2006,27 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_sdk_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSdkType"
+        o.http_method = "GET"
+        o.http_request_uri = "/sdktypes/{sdktype_id}"
+        o.input = Shapes::ShapeRef.new(shape: GetSdkTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: SdkType)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_sdk_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSdkTypes"
+        o.http_method = "GET"
+        o.http_request_uri = "/sdktypes"
+        o.input = Shapes::ShapeRef.new(shape: GetSdkTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SdkTypes)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 

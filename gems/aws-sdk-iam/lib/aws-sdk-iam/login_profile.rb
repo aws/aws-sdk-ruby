@@ -90,14 +90,14 @@ module Aws::IAM
     # @option options [required, String] :password
     #   The new password for the user.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of almost any printable ASCII character from the space
-    #   (\\u0020) through the end of the ASCII character range (\\u00FF). You
-    #   can also include the tab (\\u0009), line feed (\\u000A), and carriage
-    #   return (\\u000D) characters. Although any of these characters are
-    #   valid in a password, note that many tools, such as the AWS Management
-    #   Console, might restrict the ability to enter certain characters
-    #   because they have special meaning within that tool.
+    #   The [regex pattern][1] used to validate this parameter is a string of
+    #   characters consisting of almost any printable ASCII character from the
+    #   space (\\u0020) through the end of the ASCII character range
+    #   (\\u00FF). You can also include the tab (\\u0009), line feed
+    #   (\\u000A), and carriage return (\\u000D) characters. Although any of
+    #   these characters are valid in a password, note that many tools, such
+    #   as the AWS Management Console, might restrict the ability to enter
+    #   certain characters because they have special meaning within that tool.
     #
     #
     #
@@ -137,14 +137,15 @@ module Aws::IAM
     # @option options [String] :password
     #   The new password for the specified IAM user.
     #
-    #   The [regex pattern][1] for this parameter is a string of characters
-    #   consisting of any printable ASCII character ranging from the space
-    #   character (\\u0020) through end of the ASCII character range
-    #   (\\u00FF). It also includes the special characters tab (\\u0009), line
-    #   feed (\\u000A), and carriage return (\\u000D). However, the format can
-    #   be further restricted by the account administrator by setting a
-    #   password policy on the AWS account. For more information, see
-    #   UpdateAccountPasswordPolicy.
+    #   The [regex pattern][1] used to validate this parameter is a string of
+    #   characters consisting of any printable ASCII character ranging from
+    #   the space character (\\u0020) through end of the ASCII character range
+    #   as well as the printable characters in the Basic Latin and Latin-1
+    #   Supplement character set (through \\u00FF). It also includes the
+    #   special characters tab (\\u0009), line feed (\\u000A), and carriage
+    #   return (\\u000D). However, the format can be further restricted by the
+    #   account administrator by setting a password policy on the AWS account.
+    #   For more information, see UpdateAccountPasswordPolicy.
     #
     #
     #

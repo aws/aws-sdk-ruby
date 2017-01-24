@@ -25,10 +25,10 @@ module Aws::Firehose
     #   Buffer incoming data to the specified size, in MBs, before
     #   delivering it to the destination. The default value is 5.
     #
-    #   We recommend setting SizeInMBs to a value greater than the amount of
-    #   data you typically ingest into the delivery stream in 10 seconds.
-    #   For example, if you typically ingest data at 1 MB/sec set SizeInMBs
-    #   to be 10 MB or higher.
+    #   We recommend setting this parameter to a value greater than the
+    #   amount of data you typically ingest into the delivery stream in 10
+    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
+    #   value should be 10 MB or higher.
     #   @return [Integer]
     #
     # @!attribute [rw] interval_in_seconds
@@ -42,7 +42,7 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Describes CloudWatch logging options for your delivery stream.
+    # Describes the CloudWatch logging options for your delivery stream.
     #
     # @note When making an API call, you may pass CloudWatchLoggingOptions
     #   data as a hash:
@@ -59,12 +59,12 @@ module Aws::Firehose
     #
     # @!attribute [rw] log_group_name
     #   The CloudWatch group name for logging. This value is required if
-    #   Enabled is true.
+    #   CloudWatch logging is enabled.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
     #   The CloudWatch log stream name for logging. This value is required
-    #   if Enabled is true.
+    #   if CloudWatch logging is enabled.
     #   @return [String]
     #
     class CloudWatchLoggingOptions < Struct.new(
@@ -98,7 +98,7 @@ module Aws::Firehose
     #   Optional parameters to use with the Amazon Redshift `COPY` command.
     #   For more information, see the "Optional Parameters" section of
     #   [Amazon Redshift COPY command][1]. Some possible examples that would
-    #   apply to Firehose are as follows.
+    #   apply to Firehose are as follows:
     #
     #   `delimiter '\t' lzop;` - fields are delimited with "\\t" (TAB
     #   character) and compressed using lzop.
@@ -131,8 +131,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateDeliveryStream.
-    #
     # @note When making an API call, you may pass CreateDeliveryStreamInput
     #   data as a hash:
     #
@@ -159,6 +157,63 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         extended_s3_destination_configuration: {
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #           s3_backup_configuration: {
+    #             role_arn: "RoleARN", # required
+    #             bucket_arn: "BucketARN", # required
+    #             prefix: "Prefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #         },
     #         redshift_destination_configuration: {
     #           role_arn: "RoleARN", # required
     #           cluster_jdbcurl: "ClusterJDBCURL", # required
@@ -173,6 +228,42 @@ module Aws::Firehose
     #             duration_in_seconds: 1,
     #           },
     #           s3_configuration: { # required
+    #             role_arn: "RoleARN", # required
+    #             bucket_arn: "BucketARN", # required
+    #             prefix: "Prefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #           s3_backup_configuration: {
     #             role_arn: "RoleARN", # required
     #             bucket_arn: "BucketARN", # required
     #             prefix: "Prefix",
@@ -234,6 +325,20 @@ module Aws::Firehose
     #               log_stream_name: "LogStreamName",
     #             },
     #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #           cloud_watch_logging_options: {
     #             enabled: false,
     #             log_group_name: "LogGroupName",
@@ -243,38 +348,39 @@ module Aws::Firehose
     #       }
     #
     # @!attribute [rw] delivery_stream_name
-    #   The name of the delivery stream.
+    #   The name of the delivery stream. This name must be unique per AWS
+    #   account in the same region. You can have multiple delivery streams
+    #   with the same name if they are in different accounts or different
+    #   regions.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_configuration
-    #   The destination in Amazon S3. This value must be specified if
-    #   **ElasticsearchDestinationConfiguration** or
-    #   **RedshiftDestinationConfiguration** is specified (see restrictions
-    #   listed above).
+    #   \[Deprecated\] The destination in Amazon S3. You can specify only
+    #   one destination.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @!attribute [rw] extended_s3_destination_configuration
+    #   The destination in Amazon S3. You can specify only one destination.
+    #   @return [Types::ExtendedS3DestinationConfiguration]
+    #
     # @!attribute [rw] redshift_destination_configuration
-    #   The destination in Amazon Redshift. This value cannot be specified
-    #   if Amazon S3 or Amazon Elasticsearch is the desired destination (see
-    #   restrictions listed above).
+    #   The destination in Amazon Redshift. You can specify only one
+    #   destination.
     #   @return [Types::RedshiftDestinationConfiguration]
     #
     # @!attribute [rw] elasticsearch_destination_configuration
-    #   The destination in Amazon ES. This value cannot be specified if
-    #   Amazon S3 or Amazon Redshift is the desired destination (see
-    #   restrictions listed above).
+    #   The destination in Amazon ES. You can specify only one destination.
     #   @return [Types::ElasticsearchDestinationConfiguration]
     #
     class CreateDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :s3_destination_configuration,
+      :extended_s3_destination_configuration,
       :redshift_destination_configuration,
       :elasticsearch_destination_configuration)
       include Aws::Structure
     end
 
-    # Contains the output of CreateDeliveryStream.
-    #
     # @!attribute [rw] delivery_stream_arn
     #   The ARN of the delivery stream.
     #   @return [String]
@@ -284,8 +390,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteDeliveryStream.
-    #
     # @note When making an API call, you may pass DeleteDeliveryStreamInput
     #   data as a hash:
     #
@@ -302,8 +406,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the output of DeleteDeliveryStream.
-    #
     class DeleteDeliveryStreamOutput < Aws::EmptyStructure; end
 
     # Contains information about a delivery stream.
@@ -321,11 +423,10 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   Used when calling the UpdateDestination operation. Each time the
-    #   destination is updated for the delivery stream, the VersionId is
-    #   changed, and the current VersionId is required when updating the
-    #   destination. This is so that the service knows it is applying the
-    #   changes to the correct version of the delivery stream.
+    #   Each time the destination is updated for a delivery stream, the
+    #   version ID is changed, and the current version ID is required when
+    #   updating the destination. This is so that the service knows it is
+    #   applying the changes to the correct version of the delivery stream.
     #   @return [String]
     #
     # @!attribute [rw] create_timestamp
@@ -356,8 +457,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeDeliveryStream.
-    #
     # @note When making an API call, you may pass DescribeDeliveryStreamInput
     #   data as a hash:
     #
@@ -377,7 +476,7 @@ module Aws::Firehose
     #   @return [Integer]
     #
     # @!attribute [rw] exclusive_start_destination_id
-    #   Specifies the destination ID to start returning the destination
+    #   The ID of the destination to start returning the destination
     #   information. Currently Firehose supports one destination per
     #   delivery stream.
     #   @return [String]
@@ -389,8 +488,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the output of DescribeDeliveryStream.
-    #
     # @!attribute [rw] delivery_stream_description
     #   Information about the delivery stream.
     #   @return [Types::DeliveryStreamDescription]
@@ -407,8 +504,12 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_description
-    #   The Amazon S3 destination.
+    #   \[Deprecated\] The destination in Amazon S3.
     #   @return [Types::S3DestinationDescription]
+    #
+    # @!attribute [rw] extended_s3_destination_description
+    #   The destination in Amazon S3.
+    #   @return [Types::ExtendedS3DestinationDescription]
     #
     # @!attribute [rw] redshift_destination_description
     #   The destination in Amazon Redshift.
@@ -421,6 +522,7 @@ module Aws::Firehose
     class DestinationDescription < Struct.new(
       :destination_id,
       :s3_destination_description,
+      :extended_s3_destination_description,
       :redshift_destination_description,
       :elasticsearch_destination_description)
       include Aws::Structure
@@ -447,10 +549,10 @@ module Aws::Firehose
     #   Buffer incoming data to the specified size, in MBs, before
     #   delivering it to the destination. The default value is 5.
     #
-    #   We recommend setting **SizeInMBs** to a value greater than the
+    #   We recommend setting this parameter to a value greater than the
     #   amount of data you typically ingest into the delivery stream in 10
-    #   seconds. For example, if you typically ingest data at 1 MB/sec, set
-    #   **SizeInMBs** to be 10 MB or higher.
+    #   seconds. For example, if you typically ingest data at 1 MB/sec, the
+    #   value should be 10 MB or higher.
     #   @return [Integer]
     #
     class ElasticsearchBufferingHints < Struct.new(
@@ -499,6 +601,20 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
     #         cloud_watch_logging_options: {
     #           enabled: false,
     #           log_group_name: "LogGroupName",
@@ -517,9 +633,10 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
-    #   The ARN of the Amazon ES domain. The IAM role must have permission
-    #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains` ,
-    #   and `DescribeElasticsearchDomainConfig` after assuming **RoleARN**.
+    #   The ARN of the Amazon ES domain. The IAM role must have permissions
+    #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
+    #   and `DescribeElasticsearchDomainConfig` after assuming the role
+    #   specified in **RoleARN**.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -534,7 +651,7 @@ module Aws::Firehose
     #   The Elasticsearch index rotation period. Index rotation appends a
     #   timestamp to the IndexName to facilitate expiration of old data. For
     #   more information, see [Index Rotation for Amazon Elasticsearch
-    #   Service Destination][1]. Default value is `OneDay`.
+    #   Service Destination][1]. The default value is `OneDay`.
     #
     #
     #
@@ -542,13 +659,13 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
-    #   Buffering options. If no value is specified,
-    #   **ElasticsearchBufferingHints** object default values are used.
+    #   The buffering options. If no value is specified, the default values
+    #   for **ElasticsearchBufferingHints** are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
-    #   Configures retry behavior in the event that Firehose is unable to
-    #   deliver documents to Amazon ES. Default value is 300 (5 minutes).
+    #   The retry behavior in the event that Firehose is unable to deliver
+    #   documents to Amazon ES. The default value is 300 (5 minutes).
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
@@ -568,11 +685,16 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] s3_configuration
-    #   Describes the configuration of a destination in Amazon S3.
+    #   The configuration for the intermediate Amazon S3 location from which
+    #   Amazon ES obtains data.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class ElasticsearchDestinationConfiguration < Struct.new(
@@ -585,6 +707,7 @@ module Aws::Firehose
       :retry_options,
       :s3_backup_mode,
       :s3_configuration,
+      :processing_configuration,
       :cloud_watch_logging_options)
       include Aws::Structure
     end
@@ -612,23 +735,27 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
-    #   Buffering options.
+    #   The buffering options.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
-    #   Elasticsearch retry options.
+    #   The Amazon ES retry options.
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_backup_mode
-    #   Amazon S3 backup mode.
+    #   The Amazon S3 backup mode.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_description
-    #   Describes a destination in Amazon S3.
+    #   The Amazon S3 destination.
     #   @return [Types::S3DestinationDescription]
     #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
     # @!attribute [rw] cloud_watch_logging_options
-    #   CloudWatch logging options.
+    #   The CloudWatch logging options.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class ElasticsearchDestinationDescription < Struct.new(
@@ -641,6 +768,7 @@ module Aws::Firehose
       :retry_options,
       :s3_backup_mode,
       :s3_destination_description,
+      :processing_configuration,
       :cloud_watch_logging_options)
       include Aws::Structure
     end
@@ -684,6 +812,20 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
     #         cloud_watch_logging_options: {
     #           enabled: false,
     #           log_group_name: "LogGroupName",
@@ -702,9 +844,10 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] domain_arn
-    #   The ARN of the Amazon ES domain. The IAM role must have permission
-    #   for DescribeElasticsearchDomain, DescribeElasticsearchDomains , and
-    #   DescribeElasticsearchDomainConfig after assuming **RoleARN**.
+    #   The ARN of the Amazon ES domain. The IAM role must have permissions
+    #   for `DescribeElasticsearchDomain`, `DescribeElasticsearchDomains`,
+    #   and `DescribeElasticsearchDomainConfig` after assuming the IAM role
+    #   specified in **RoleARN**.
     #   @return [String]
     #
     # @!attribute [rw] index_name
@@ -717,8 +860,8 @@ module Aws::Firehose
     #
     # @!attribute [rw] index_rotation_period
     #   The Elasticsearch index rotation period. Index rotation appends a
-    #   timestamp to the IndexName to facilitate the expiration of old data.
-    #   For more information, see [Index Rotation for Amazon Elasticsearch
+    #   timestamp to IndexName to facilitate the expiration of old data. For
+    #   more information, see [Index Rotation for Amazon Elasticsearch
     #   Service Destination][1]. Default value is `OneDay`.
     #
     #
@@ -727,21 +870,25 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
-    #   Buffering options. If no value is specified,
+    #   The buffering options. If no value is specified,
     #   **ElasticsearchBufferingHints** object default values are used.
     #   @return [Types::ElasticsearchBufferingHints]
     #
     # @!attribute [rw] retry_options
-    #   Configures retry behavior in the event that Firehose is unable to
-    #   deliver documents to Amazon ES. Default value is 300 (5 minutes).
+    #   The retry behavior in the event that Firehose is unable to deliver
+    #   documents to Amazon ES. Default value is 300 (5 minutes).
     #   @return [Types::ElasticsearchRetryOptions]
     #
     # @!attribute [rw] s3_update
-    #   Describes an update for a destination in Amazon S3.
+    #   The Amazon S3 destination.
     #   @return [Types::S3DestinationUpdate]
     #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class ElasticsearchDestinationUpdate < Struct.new(
@@ -753,6 +900,7 @@ module Aws::Firehose
       :buffering_hints,
       :retry_options,
       :s3_update,
+      :processing_configuration,
       :cloud_watch_logging_options)
       include Aws::Structure
     end
@@ -807,6 +955,329 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # Describes the configuration of a destination in Amazon S3.
+    #
+    # @note When making an API call, you may pass ExtendedS3DestinationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN", # required
+    #         bucket_arn: "BucketARN", # required
+    #         prefix: "Prefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #         s3_backup_configuration: {
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   The ARN of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
+    #   delivered S3 files. You can specify an extra prefix to be added in
+    #   front of the time format prefix. Note that if the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Firehose Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering option.
+    #   @return [Types::BufferingHints]
+    #
+    # @!attribute [rw] compression_format
+    #   The compression format. If no value is specified, the default is
+    #   UNCOMPRESSED.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration. If no value is specified, the default
+    #   is no encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   The CloudWatch logging options for your delivery stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_backup_configuration
+    #   The configuration for backup in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
+    class ExtendedS3DestinationConfiguration < Struct.new(
+      :role_arn,
+      :bucket_arn,
+      :prefix,
+      :buffering_hints,
+      :compression_format,
+      :encryption_configuration,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :s3_backup_mode,
+      :s3_backup_configuration)
+      include Aws::Structure
+    end
+
+    # Describes a destination in Amazon S3.
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   The ARN of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
+    #   delivered S3 files. You can specify an extra prefix to be added in
+    #   front of the time format prefix. Note that if the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Firehose Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering option.
+    #   @return [Types::BufferingHints]
+    #
+    # @!attribute [rw] compression_format
+    #   The compression format. If no value is specified, the default is
+    #   `UNCOMPRESSED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration. If no value is specified, the default
+    #   is no encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   The CloudWatch logging options for your delivery stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_backup_description
+    #   The configuration for backup in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
+    class ExtendedS3DestinationDescription < Struct.new(
+      :role_arn,
+      :bucket_arn,
+      :prefix,
+      :buffering_hints,
+      :compression_format,
+      :encryption_configuration,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :s3_backup_mode,
+      :s3_backup_description)
+      include Aws::Structure
+    end
+
+    # Describes an update for a destination in Amazon S3.
+    #
+    # @note When making an API call, you may pass ExtendedS3DestinationUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "RoleARN",
+    #         bucket_arn: "BucketARN",
+    #         prefix: "Prefix",
+    #         buffering_hints: {
+    #           size_in_m_bs: 1,
+    #           interval_in_seconds: 1,
+    #         },
+    #         compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #         encryption_configuration: {
+    #           no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #           kms_encryption_config: {
+    #             awskms_key_arn: "AWSKMSKeyARN", # required
+    #           },
+    #         },
+    #         cloud_watch_logging_options: {
+    #           enabled: false,
+    #           log_group_name: "LogGroupName",
+    #           log_stream_name: "LogStreamName",
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #         s3_backup_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the AWS credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_arn
+    #   The ARN of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
+    #   delivered S3 files. You can specify an extra prefix to be added in
+    #   front of the time format prefix. Note that if the prefix ends with a
+    #   slash, it appears as a folder in the S3 bucket. For more
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Firehose Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
+    #   @return [String]
+    #
+    # @!attribute [rw] buffering_hints
+    #   The buffering option.
+    #   @return [Types::BufferingHints]
+    #
+    # @!attribute [rw] compression_format
+    #   The compression format. If no value is specified, the default is
+    #   `UNCOMPRESSED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration. If no value is specified, the default
+    #   is no encryption.
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] cloud_watch_logging_options
+    #   The CloudWatch logging options for your delivery stream.
+    #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   Enables or disables Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_backup_update
+    #   The Amazon S3 destination for backup.
+    #   @return [Types::S3DestinationUpdate]
+    #
+    class ExtendedS3DestinationUpdate < Struct.new(
+      :role_arn,
+      :bucket_arn,
+      :prefix,
+      :buffering_hints,
+      :compression_format,
+      :encryption_configuration,
+      :cloud_watch_logging_options,
+      :processing_configuration,
+      :s3_backup_mode,
+      :s3_backup_update)
+      include Aws::Structure
+    end
+
     # Describes an encryption key for a destination in Amazon S3.
     #
     # @note When making an API call, you may pass KMSEncryptionConfig
@@ -826,8 +1297,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for ListDeliveryStreams.
-    #
     # @note When making an API call, you may pass ListDeliveryStreamsInput
     #   data as a hash:
     #
@@ -850,8 +1319,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the output of ListDeliveryStreams.
-    #
     # @!attribute [rw] delivery_stream_names
     #   The names of the delivery streams.
     #   @return [Array<String>]
@@ -866,8 +1333,93 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for PutRecordBatch.
+    # Describes a data processing configuration.
     #
+    # @note When making an API call, you may pass ProcessingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         processors: [
+    #           {
+    #             type: "Lambda", # required, accepts Lambda
+    #             parameters: [
+    #               {
+    #                 parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                 parameter_value: "ProcessorParameterValue", # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Enables or disables data processing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] processors
+    #   The data processors.
+    #   @return [Array<Types::Processor>]
+    #
+    class ProcessingConfiguration < Struct.new(
+      :enabled,
+      :processors)
+      include Aws::Structure
+    end
+
+    # Describes a data processor.
+    #
+    # @note When making an API call, you may pass Processor
+    #   data as a hash:
+    #
+    #       {
+    #         type: "Lambda", # required, accepts Lambda
+    #         parameters: [
+    #           {
+    #             parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #             parameter_value: "ProcessorParameterValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of processor.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The processor parameters.
+    #   @return [Array<Types::ProcessorParameter>]
+    #
+    class Processor < Struct.new(
+      :type,
+      :parameters)
+      include Aws::Structure
+    end
+
+    # Describes the processor parameter.
+    #
+    # @note When making an API call, you may pass ProcessorParameter
+    #   data as a hash:
+    #
+    #       {
+    #         parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #         parameter_value: "ProcessorParameterValue", # required
+    #       }
+    #
+    # @!attribute [rw] parameter_name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameter_value
+    #   The parameter value.
+    #   @return [String]
+    #
+    class ProcessorParameter < Struct.new(
+      :parameter_name,
+      :parameter_value)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutRecordBatchInput
     #   data as a hash:
     #
@@ -894,15 +1446,13 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the output of PutRecordBatch.
-    #
     # @!attribute [rw] failed_put_count
-    #   The number of unsuccessfully written records.
+    #   The number of records that might have failed processing.
     #   @return [Integer]
     #
     # @!attribute [rw] request_responses
-    #   The results for the individual records. The index of each element
-    #   matches the same index in which records were sent.
+    #   The results array. For each record, the index of the response
+    #   element is the same as the index used in the request array.
     #   @return [Array<Types::PutRecordBatchResponseEntry>]
     #
     class PutRecordBatchOutput < Struct.new(
@@ -936,8 +1486,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for PutRecord.
-    #
     # @note When making an API call, you may pass PutRecordInput
     #   data as a hash:
     #
@@ -962,8 +1510,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the output of PutRecord.
-    #
     # @!attribute [rw] record_id
     #   The ID of the record.
     #   @return [String]
@@ -1032,6 +1578,42 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #         s3_backup_configuration: {
+    #           role_arn: "RoleARN", # required
+    #           bucket_arn: "BucketARN", # required
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
     #         cloud_watch_logging_options: {
     #           enabled: false,
     #           log_group_name: "LogGroupName",
@@ -1060,15 +1642,14 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   Configures retry behavior in the event that Firehose is unable to
-    #   deliver documents to Amazon Redshift. Default value is 3600 (60
-    #   minutes).
+    #   The retry behavior in the event that Firehose is unable to deliver
+    #   documents to Amazon Redshift. Default value is 3600 (60 minutes).
     #   @return [Types::RedshiftRetryOptions]
     #
     # @!attribute [rw] s3_configuration
-    #   The S3 configuration for the intermediate location from which Amazon
-    #   Redshift obtains data. Restrictions are described in the topic for
-    #   CreateDeliveryStream.
+    #   The configuration for the intermediate Amazon S3 location from which
+    #   Amazon Redshift obtains data. Restrictions are described in the
+    #   topic for CreateDeliveryStream.
     #
     #   The compression formats `SNAPPY` or `ZIP` cannot be specified in
     #   **RedshiftDestinationConfiguration.S3Configuration** because the
@@ -1076,8 +1657,20 @@ module Aws::Firehose
     #   doesn't support these compression formats.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_backup_configuration
+    #   The configuration for backup in Amazon S3.
+    #   @return [Types::S3DestinationConfiguration]
+    #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class RedshiftDestinationConfiguration < Struct.new(
@@ -1088,6 +1681,9 @@ module Aws::Firehose
       :password,
       :retry_options,
       :s3_configuration,
+      :processing_configuration,
+      :s3_backup_mode,
+      :s3_backup_configuration,
       :cloud_watch_logging_options)
       include Aws::Structure
     end
@@ -1111,17 +1707,28 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   Configures retry behavior in the event that Firehose is unable to
-    #   deliver documents to Amazon Redshift. Default value is 3600 (60
-    #   minutes).
+    #   The retry behavior in the event that Firehose is unable to deliver
+    #   documents to Amazon Redshift. Default value is 3600 (60 minutes).
     #   @return [Types::RedshiftRetryOptions]
     #
     # @!attribute [rw] s3_destination_description
     #   The Amazon S3 destination.
     #   @return [Types::S3DestinationDescription]
     #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_backup_description
+    #   The configuration for backup in Amazon S3.
+    #   @return [Types::S3DestinationDescription]
+    #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class RedshiftDestinationDescription < Struct.new(
@@ -1131,6 +1738,9 @@ module Aws::Firehose
       :username,
       :retry_options,
       :s3_destination_description,
+      :processing_configuration,
+      :s3_backup_mode,
+      :s3_backup_description,
       :cloud_watch_logging_options)
       include Aws::Structure
     end
@@ -1154,6 +1764,42 @@ module Aws::Firehose
     #           duration_in_seconds: 1,
     #         },
     #         s3_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #         },
+    #         processing_configuration: {
+    #           enabled: false,
+    #           processors: [
+    #             {
+    #               type: "Lambda", # required, accepts Lambda
+    #               parameters: [
+    #                 {
+    #                   parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                   parameter_value: "ProcessorParameterValue", # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #         s3_backup_update: {
     #           role_arn: "RoleARN",
     #           bucket_arn: "BucketARN",
     #           prefix: "Prefix",
@@ -1202,9 +1848,8 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] retry_options
-    #   Configures retry behavior in the event that Firehose is unable to
-    #   deliver documents to Amazon Redshift. Default value is 3600 (60
-    #   minutes).
+    #   The retry behavior in the event that Firehose is unable to deliver
+    #   documents to Amazon Redshift. Default value is 3600 (60 minutes).
     #   @return [Types::RedshiftRetryOptions]
     #
     # @!attribute [rw] s3_update
@@ -1216,8 +1861,20 @@ module Aws::Firehose
     #   these compression formats.
     #   @return [Types::S3DestinationUpdate]
     #
+    # @!attribute [rw] processing_configuration
+    #   The data processing configuration.
+    #   @return [Types::ProcessingConfiguration]
+    #
+    # @!attribute [rw] s3_backup_mode
+    #   The Amazon S3 backup mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_backup_update
+    #   The Amazon S3 destination for backup.
+    #   @return [Types::S3DestinationUpdate]
+    #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class RedshiftDestinationUpdate < Struct.new(
@@ -1228,6 +1885,9 @@ module Aws::Firehose
       :password,
       :retry_options,
       :s3_update,
+      :processing_configuration,
+      :s3_backup_mode,
+      :s3_backup_update,
       :cloud_watch_logging_options)
       include Aws::Structure
     end
@@ -1295,13 +1955,12 @@ module Aws::Firehose
     #   delivered S3 files. You can specify an extra prefix to be added in
     #   front of the time format prefix. Note that if the prefix ends with a
     #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the [Amazon
-    #   Kinesis Firehose Developer Guide][2].
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Firehose Developer Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
-    #   [2]: http://docs.aws.amazon.com/firehose/latest/dev/
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1324,7 +1983,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class S3DestinationConfiguration < Struct.new(
@@ -1353,13 +2012,12 @@ module Aws::Firehose
     #   delivered S3 files. You can specify an extra prefix to be added in
     #   front of the time format prefix. Note that if the prefix ends with a
     #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the [Amazon
-    #   Kinesis Firehose Developer Guide][2].
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Firehose Developer Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
-    #   [2]: http://docs.aws.amazon.com/firehose/latest/dev/
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1369,7 +2027,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] compression_format
     #   The compression format. If no value is specified, the default is
-    #   `NOCOMPRESSION`.
+    #   `UNCOMPRESSED`.
     #   @return [String]
     #
     # @!attribute [rw] encryption_configuration
@@ -1378,7 +2036,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class S3DestinationDescription < Struct.new(
@@ -1432,13 +2090,12 @@ module Aws::Firehose
     #   delivered S3 files. You can specify an extra prefix to be added in
     #   front of the time format prefix. Note that if the prefix ends with a
     #   slash, it appears as a folder in the S3 bucket. For more
-    #   information, see [Amazon S3 Object Name Format][1] in the [Amazon
-    #   Kinesis Firehose Developer Guide][2].
+    #   information, see [Amazon S3 Object Name Format][1] in the *Amazon
+    #   Kinesis Firehose Developer Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html
-    #   [2]: http://docs.aws.amazon.com/firehose/latest/dev/
     #   @return [String]
     #
     # @!attribute [rw] buffering_hints
@@ -1448,7 +2105,7 @@ module Aws::Firehose
     #
     # @!attribute [rw] compression_format
     #   The compression format. If no value is specified, the default is
-    #   `NOCOMPRESSION`.
+    #   `UNCOMPRESSED`.
     #
     #   The compression formats `SNAPPY` or `ZIP` cannot be specified for
     #   Amazon Redshift destinations because they are not supported by the
@@ -1461,7 +2118,7 @@ module Aws::Firehose
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] cloud_watch_logging_options
-    #   Describes CloudWatch logging options for your delivery stream.
+    #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
     class S3DestinationUpdate < Struct.new(
@@ -1475,8 +2132,6 @@ module Aws::Firehose
       include Aws::Structure
     end
 
-    # Contains the parameters for UpdateDestination.
-    #
     # @note When making an API call, you may pass UpdateDestinationInput
     #   data as a hash:
     #
@@ -1505,6 +2160,63 @@ module Aws::Firehose
     #             log_stream_name: "LogStreamName",
     #           },
     #         },
+    #         extended_s3_destination_update: {
+    #           role_arn: "RoleARN",
+    #           bucket_arn: "BucketARN",
+    #           prefix: "Prefix",
+    #           buffering_hints: {
+    #             size_in_m_bs: 1,
+    #             interval_in_seconds: 1,
+    #           },
+    #           compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #           encryption_configuration: {
+    #             no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #             kms_encryption_config: {
+    #               awskms_key_arn: "AWSKMSKeyARN", # required
+    #             },
+    #           },
+    #           cloud_watch_logging_options: {
+    #             enabled: false,
+    #             log_group_name: "LogGroupName",
+    #             log_stream_name: "LogStreamName",
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #           s3_backup_update: {
+    #             role_arn: "RoleARN",
+    #             bucket_arn: "BucketARN",
+    #             prefix: "Prefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #         },
     #         redshift_destination_update: {
     #           role_arn: "RoleARN",
     #           cluster_jdbcurl: "ClusterJDBCURL",
@@ -1519,6 +2231,42 @@ module Aws::Firehose
     #             duration_in_seconds: 1,
     #           },
     #           s3_update: {
+    #             role_arn: "RoleARN",
+    #             bucket_arn: "BucketARN",
+    #             prefix: "Prefix",
+    #             buffering_hints: {
+    #               size_in_m_bs: 1,
+    #               interval_in_seconds: 1,
+    #             },
+    #             compression_format: "UNCOMPRESSED", # accepts UNCOMPRESSED, GZIP, ZIP, Snappy
+    #             encryption_configuration: {
+    #               no_encryption_config: "NoEncryption", # accepts NoEncryption
+    #               kms_encryption_config: {
+    #                 awskms_key_arn: "AWSKMSKeyARN", # required
+    #               },
+    #             },
+    #             cloud_watch_logging_options: {
+    #               enabled: false,
+    #               log_group_name: "LogGroupName",
+    #               log_stream_name: "LogStreamName",
+    #             },
+    #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
+    #           s3_backup_mode: "Disabled", # accepts Disabled, Enabled
+    #           s3_backup_update: {
     #             role_arn: "RoleARN",
     #             bucket_arn: "BucketARN",
     #             prefix: "Prefix",
@@ -1579,6 +2327,20 @@ module Aws::Firehose
     #               log_stream_name: "LogStreamName",
     #             },
     #           },
+    #           processing_configuration: {
+    #             enabled: false,
+    #             processors: [
+    #               {
+    #                 type: "Lambda", # required, accepts Lambda
+    #                 parameters: [
+    #                   {
+    #                     parameter_name: "LambdaArn", # required, accepts LambdaArn, NumberOfRetries
+    #                     parameter_value: "ProcessorParameterValue", # required
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #           cloud_watch_logging_options: {
     #             enabled: false,
     #             log_group_name: "LogGroupName",
@@ -1592,13 +2354,13 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] current_delivery_stream_version_id
-    #   Obtain this value from the **VersionId** result of the
-    #   DeliveryStreamDescription operation. This value is required, and
-    #   helps the service to perform conditional operations. For example, if
-    #   there is a interleaving update and this value is null, then the
-    #   update destination fails. After the update is successful, the
-    #   **VersionId** value is updated. The service then performs a merge of
-    #   the old configuration with the new configuration.
+    #   Obtain this value from the **VersionId** result of
+    #   DeliveryStreamDescription. This value is required, and helps the
+    #   service to perform conditional operations. For example, if there is
+    #   a interleaving update and this value is null, then the update
+    #   destination fails. After the update is successful, the **VersionId**
+    #   value is updated. The service then performs a merge of the old
+    #   configuration with the new configuration.
     #   @return [String]
     #
     # @!attribute [rw] destination_id
@@ -1606,8 +2368,12 @@ module Aws::Firehose
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_update
-    #   Describes an update for a destination in Amazon S3.
+    #   \[Deprecated\] Describes an update for a destination in Amazon S3.
     #   @return [Types::S3DestinationUpdate]
+    #
+    # @!attribute [rw] extended_s3_destination_update
+    #   Describes an update for a destination in Amazon S3.
+    #   @return [Types::ExtendedS3DestinationUpdate]
     #
     # @!attribute [rw] redshift_destination_update
     #   Describes an update for a destination in Amazon Redshift.
@@ -1622,13 +2388,12 @@ module Aws::Firehose
       :current_delivery_stream_version_id,
       :destination_id,
       :s3_destination_update,
+      :extended_s3_destination_update,
       :redshift_destination_update,
       :elasticsearch_destination_update)
       include Aws::Structure
     end
 
-    # Contains the output of UpdateDestination.
-    #
     class UpdateDestinationOutput < Aws::EmptyStructure; end
 
   end

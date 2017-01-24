@@ -11,7 +11,7 @@ module Aws
       #
       # @api private
       # begin
-      SENSITIVE = [:access_token, :admin_contact, :artifact_credentials, :auth_code, :base_32_string_seed, :client_id, :client_secret, :copy_source_sse_customer_key, :credentials, :id_token, :local_console_password, :message, :name, :new_password, :old_password, :owner_information, :parameters, :password, :payload, :plaintext, :previous_password, :private_key, :proposed_password, :public_key, :qr_code_png, :refresh_token, :registrant_contact, :secret_access_key, :secret_hash, :shared_secret, :sse_customer_key, :ssekms_key_id, :task_parameters, :tech_contact, :temporary_password, :trust_password, :upload_credentials, :username, :value, :values, :variables, :zip_file]
+      SENSITIVE = [:access_token, :admin_contact, :artifact_credentials, :auth_code, :base_32_string_seed, :client_id, :client_secret, :copy_source_sse_customer_key, :credentials, :id_token, :local_console_password, :message, :name, :new_password, :old_password, :owner_information, :parameters, :password, :payload, :plaintext, :previous_password, :private_key, :proposed_password, :public_key, :qr_code_png, :refresh_token, :registrant_contact, :secret_access_key, :secret_hash, :service_password, :shared_secret, :sse_customer_key, :ssekms_key_id, :task_parameters, :tech_contact, :temporary_password, :trust_password, :upload_credentials, :username, :value, :values, :variables, :zip_file]
       # end
 
       def initialize(options = {})

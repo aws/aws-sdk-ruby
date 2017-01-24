@@ -14,7 +14,7 @@ module Aws::MarketplaceCommerceAnalytics
     #   data as a hash:
     #
     #       {
-    #         data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography
+    #         data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue
     #         data_set_publication_date: Time.now, # required
     #         role_name_arn: "RoleNameArn", # required
     #         destination_s3_bucket_name: "DestinationS3BucketName", # required
@@ -57,6 +57,8 @@ module Aws::MarketplaceCommerceAnalytics
     #     disbursed\_amount\_by\_product,
     #     disbursed\_amount\_by\_age\_of\_uncollected\_funds, and
     #     disbursed\_amount\_by\_age\_of\_disbursed\_funds.
+    #   * *disbursed\_amount\_by\_instance\_hours* - Available every 30 days
+    #     by 5:00 PM Pacific Time since 2012-09-04.
     #   * *disbursed\_amount\_by\_customer\_geo* - Available every 30 days
     #     by 5:00 PM Pacific Time since 2012-04-19.
     #   * *disbursed\_amount\_by\_age\_of\_uncollected\_funds* - Available
@@ -69,6 +71,8 @@ module Aws::MarketplaceCommerceAnalytics
     #     Pacific Time since 2015-10-01.
     #   * *customer\_profile\_by\_geography* - Available daily by 5:00 PM
     #     Pacific Time since 2015-10-01.
+    #   * *sales\_compensation\_billed\_revenue* - Available monthly on the
+    #     4th day of the month by 5:00 PM Pacific Time since 2016-12.
     #   @return [String]
     #
     # @!attribute [rw] data_set_publication_date
@@ -156,12 +160,10 @@ module Aws::MarketplaceCommerceAnalytics
     #   Specifies the data set type to be written to the output csv file.
     #   The data set types customer\_support\_contacts\_data and
     #   test\_customer\_support\_contacts\_data both result in a csv file
-    #   containing the following fields: Product Id, Customer Guid,
-    #   Subscription Guid, Subscription Start Date, Organization, AWS
+    #   containing the following fields: Product Id, Product Code, Customer
+    #   Guid, Subscription Guid, Subscription Start Date, Organization, AWS
     #   Account Id, Given Name, Surname, Telephone Number, Email, Title,
     #   Country Code, ZIP Code, Operation Type, and Operation Time.
-    #   Currently, only the test\_customer\_support\_contacts\_data value is
-    #   supported
     #
     #   * *customer\_support\_contacts\_data* Customer support contact data.
     #     The data set will contain all changes (Creates, Updates, and
@@ -173,8 +175,9 @@ module Aws::MarketplaceCommerceAnalytics
     #   @return [String]
     #
     # @!attribute [rw] from_date
-    #   The start date from which to retrieve the data set. This parameter
-    #   only affects the customer\_support\_contacts\_data data set type.
+    #   The start date from which to retrieve the data set in UTC. This
+    #   parameter only affects the customer\_support\_contacts\_data data
+    #   set type.
     #   @return [Time]
     #
     # @!attribute [rw] role_name_arn

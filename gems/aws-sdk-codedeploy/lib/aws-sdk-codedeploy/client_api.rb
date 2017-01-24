@@ -122,6 +122,9 @@ module Aws::CodeDeploy
     GetOnPremisesInstanceInput = Shapes::StructureShape.new(name: 'GetOnPremisesInstanceInput')
     GetOnPremisesInstanceOutput = Shapes::StructureShape.new(name: 'GetOnPremisesInstanceOutput')
     GitHubLocation = Shapes::StructureShape.new(name: 'GitHubLocation')
+    IamArnRequiredException = Shapes::StructureShape.new(name: 'IamArnRequiredException')
+    IamSessionArn = Shapes::StringShape.new(name: 'IamSessionArn')
+    IamSessionArnAlreadyRegisteredException = Shapes::StructureShape.new(name: 'IamSessionArnAlreadyRegisteredException')
     IamUserArn = Shapes::StringShape.new(name: 'IamUserArn')
     IamUserArnAlreadyRegisteredException = Shapes::StructureShape.new(name: 'IamUserArnAlreadyRegisteredException')
     IamUserArnRequiredException = Shapes::StructureShape.new(name: 'IamUserArnRequiredException')
@@ -154,6 +157,7 @@ module Aws::CodeDeploy
     InvalidDeploymentIdException = Shapes::StructureShape.new(name: 'InvalidDeploymentIdException')
     InvalidDeploymentStatusException = Shapes::StructureShape.new(name: 'InvalidDeploymentStatusException')
     InvalidEC2TagException = Shapes::StructureShape.new(name: 'InvalidEC2TagException')
+    InvalidIamSessionArnException = Shapes::StructureShape.new(name: 'InvalidIamSessionArnException')
     InvalidIamUserArnException = Shapes::StructureShape.new(name: 'InvalidIamUserArnException')
     InvalidInstanceNameException = Shapes::StructureShape.new(name: 'InvalidInstanceNameException')
     InvalidInstanceStatusException = Shapes::StructureShape.new(name: 'InvalidInstanceStatusException')
@@ -198,6 +202,7 @@ module Aws::CodeDeploy
     MinimumHealthyHosts = Shapes::StructureShape.new(name: 'MinimumHealthyHosts')
     MinimumHealthyHostsType = Shapes::StringShape.new(name: 'MinimumHealthyHostsType')
     MinimumHealthyHostsValue = Shapes::IntegerShape.new(name: 'MinimumHealthyHostsValue')
+    MultipleIamArnsProvidedException = Shapes::StructureShape.new(name: 'MultipleIamArnsProvidedException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     RegisterApplicationRevisionInput = Shapes::StructureShape.new(name: 'RegisterApplicationRevisionInput')
@@ -517,6 +522,7 @@ module Aws::CodeDeploy
     GitHubLocation.struct_class = Types::GitHubLocation
 
     InstanceInfo.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, location_name: "instanceName"))
+    InstanceInfo.add_member(:iam_session_arn, Shapes::ShapeRef.new(shape: IamSessionArn, location_name: "iamSessionArn"))
     InstanceInfo.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: IamUserArn, location_name: "iamUserArn"))
     InstanceInfo.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))
     InstanceInfo.add_member(:register_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "registerTime"))
@@ -625,7 +631,8 @@ module Aws::CodeDeploy
     RegisterApplicationRevisionInput.struct_class = Types::RegisterApplicationRevisionInput
 
     RegisterOnPremisesInstanceInput.add_member(:instance_name, Shapes::ShapeRef.new(shape: InstanceName, required: true, location_name: "instanceName"))
-    RegisterOnPremisesInstanceInput.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: IamUserArn, required: true, location_name: "iamUserArn"))
+    RegisterOnPremisesInstanceInput.add_member(:iam_session_arn, Shapes::ShapeRef.new(shape: IamSessionArn, location_name: "iamSessionArn"))
+    RegisterOnPremisesInstanceInput.add_member(:iam_user_arn, Shapes::ShapeRef.new(shape: IamUserArn, location_name: "iamUserArn"))
     RegisterOnPremisesInstanceInput.struct_class = Types::RegisterOnPremisesInstanceInput
 
     RemoveTagsFromOnPremisesInstancesInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
@@ -1164,11 +1171,15 @@ module Aws::CodeDeploy
         o.input = Shapes::ShapeRef.new(shape: RegisterOnPremisesInstanceInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InstanceNameAlreadyRegisteredException)
+        o.errors << Shapes::ShapeRef.new(shape: IamArnRequiredException)
+        o.errors << Shapes::ShapeRef.new(shape: IamSessionArnAlreadyRegisteredException)
         o.errors << Shapes::ShapeRef.new(shape: IamUserArnAlreadyRegisteredException)
         o.errors << Shapes::ShapeRef.new(shape: InstanceNameRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: IamUserArnRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceNameException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidIamSessionArnException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidIamUserArnException)
+        o.errors << Shapes::ShapeRef.new(shape: MultipleIamArnsProvidedException)
       end)
 
       api.add_operation(:remove_tags_from_on_premises_instances, Seahorse::Model::Operation.new.tap do |o|

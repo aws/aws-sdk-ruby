@@ -21,6 +21,7 @@ module Aws::DatabaseMigrationService
     BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
     CertificateList = Shapes::ListShape.new(name: 'CertificateList')
+    CertificateWallet = Shapes::BlobShape.new(name: 'CertificateWallet')
     Connection = Shapes::StructureShape.new(name: 'Connection')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
     CreateEndpointMessage = Shapes::StructureShape.new(name: 'CreateEndpointMessage')
@@ -92,6 +93,8 @@ module Aws::DatabaseMigrationService
     ModifyReplicationInstanceResponse = Shapes::StructureShape.new(name: 'ModifyReplicationInstanceResponse')
     ModifyReplicationSubnetGroupMessage = Shapes::StructureShape.new(name: 'ModifyReplicationSubnetGroupMessage')
     ModifyReplicationSubnetGroupResponse = Shapes::StructureShape.new(name: 'ModifyReplicationSubnetGroupResponse')
+    ModifyReplicationTaskMessage = Shapes::StructureShape.new(name: 'ModifyReplicationTaskMessage')
+    ModifyReplicationTaskResponse = Shapes::StructureShape.new(name: 'ModifyReplicationTaskResponse')
     OrderableReplicationInstance = Shapes::StructureShape.new(name: 'OrderableReplicationInstance')
     OrderableReplicationInstanceList = Shapes::ListShape.new(name: 'OrderableReplicationInstanceList')
     RefreshSchemasMessage = Shapes::StructureShape.new(name: 'RefreshSchemasMessage')
@@ -161,6 +164,7 @@ module Aws::DatabaseMigrationService
     Certificate.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
     Certificate.add_member(:certificate_creation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CertificateCreationDate"))
     Certificate.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
+    Certificate.add_member(:certificate_wallet, Shapes::ShapeRef.new(shape: CertificateWallet, location_name: "CertificateWallet"))
     Certificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
     Certificate.add_member(:certificate_owner, Shapes::ShapeRef.new(shape: String, location_name: "CertificateOwner"))
     Certificate.add_member(:valid_from_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidFromDate"))
@@ -184,10 +188,10 @@ module Aws::DatabaseMigrationService
     CreateEndpointMessage.add_member(:endpoint_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointIdentifier"))
     CreateEndpointMessage.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: ReplicationEndpointTypeValue, required: true, location_name: "EndpointType"))
     CreateEndpointMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
-    CreateEndpointMessage.add_member(:username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Username"))
-    CreateEndpointMessage.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, required: true, location_name: "Password"))
-    CreateEndpointMessage.add_member(:server_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ServerName"))
-    CreateEndpointMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, required: true, location_name: "Port"))
+    CreateEndpointMessage.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "Username"))
+    CreateEndpointMessage.add_member(:password, Shapes::ShapeRef.new(shape: SecretString, location_name: "Password"))
+    CreateEndpointMessage.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
+    CreateEndpointMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
     CreateEndpointMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
     CreateEndpointMessage.add_member(:extra_connection_attributes, Shapes::ShapeRef.new(shape: String, location_name: "ExtraConnectionAttributes"))
     CreateEndpointMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
@@ -397,6 +401,7 @@ module Aws::DatabaseMigrationService
 
     ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
     ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
+    ImportCertificateMessage.add_member(:certificate_wallet, Shapes::ShapeRef.new(shape: CertificateWallet, location_name: "CertificateWallet"))
     ImportCertificateMessage.struct_class = Types::ImportCertificateMessage
 
     ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
@@ -451,6 +456,17 @@ module Aws::DatabaseMigrationService
     ModifyReplicationSubnetGroupResponse.add_member(:replication_subnet_group, Shapes::ShapeRef.new(shape: ReplicationSubnetGroup, location_name: "ReplicationSubnetGroup"))
     ModifyReplicationSubnetGroupResponse.struct_class = Types::ModifyReplicationSubnetGroupResponse
 
+    ModifyReplicationTaskMessage.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationTaskArn"))
+    ModifyReplicationTaskMessage.add_member(:replication_task_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskIdentifier"))
+    ModifyReplicationTaskMessage.add_member(:migration_type, Shapes::ShapeRef.new(shape: MigrationTypeValue, location_name: "MigrationType"))
+    ModifyReplicationTaskMessage.add_member(:table_mappings, Shapes::ShapeRef.new(shape: String, location_name: "TableMappings"))
+    ModifyReplicationTaskMessage.add_member(:replication_task_settings, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskSettings"))
+    ModifyReplicationTaskMessage.add_member(:cdc_start_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CdcStartTime"))
+    ModifyReplicationTaskMessage.struct_class = Types::ModifyReplicationTaskMessage
+
+    ModifyReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
+    ModifyReplicationTaskResponse.struct_class = Types::ModifyReplicationTaskResponse
+
     OrderableReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
     OrderableReplicationInstance.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
     OrderableReplicationInstance.add_member(:storage_type, Shapes::ShapeRef.new(shape: String, location_name: "StorageType"))
@@ -502,6 +518,7 @@ module Aws::DatabaseMigrationService
     ReplicationInstance.add_member(:replication_instance_public_ip_addresses, Shapes::ShapeRef.new(shape: ReplicationInstancePublicIpAddressList, location_name: "ReplicationInstancePublicIpAddresses"))
     ReplicationInstance.add_member(:replication_instance_private_ip_addresses, Shapes::ShapeRef.new(shape: ReplicationInstancePrivateIpAddressList, location_name: "ReplicationInstancePrivateIpAddresses"))
     ReplicationInstance.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
+    ReplicationInstance.add_member(:secondary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SecondaryAvailabilityZone"))
     ReplicationInstance.struct_class = Types::ReplicationInstance
 
     ReplicationInstanceList.member = Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance")
@@ -534,6 +551,7 @@ module Aws::DatabaseMigrationService
     ReplicationTask.add_member(:replication_task_settings, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskSettings"))
     ReplicationTask.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
     ReplicationTask.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: String, location_name: "LastFailureMessage"))
+    ReplicationTask.add_member(:stop_reason, Shapes::ShapeRef.new(shape: String, location_name: "StopReason"))
     ReplicationTask.add_member(:replication_task_creation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationTaskCreationDate"))
     ReplicationTask.add_member(:replication_task_start_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ReplicationTaskStartDate"))
     ReplicationTask.add_member(:replication_task_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationTaskArn"))
@@ -651,6 +669,7 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
       end)
 
       api.add_operation(:create_replication_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -913,6 +932,18 @@ module Aws::DatabaseMigrationService
         o.errors << Shapes::ShapeRef.new(shape: SubnetAlreadyInUse)
         o.errors << Shapes::ShapeRef.new(shape: ReplicationSubnetGroupDoesNotCoverEnoughAZs)
         o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+      end)
+
+      api.add_operation(:modify_replication_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyReplicationTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyReplicationTaskMessage)
+        o.output = Shapes::ShapeRef.new(shape: ModifyReplicationTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
       api.add_operation(:refresh_schemas, Seahorse::Model::Operation.new.tap do |o|

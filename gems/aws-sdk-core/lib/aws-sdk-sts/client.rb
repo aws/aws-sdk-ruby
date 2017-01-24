@@ -262,10 +262,10 @@ module Aws::STS
     #   credentials will expose the role session name to the external account
     #   in their CloudTrail logs.
     #
-    #   The format for this parameter, as described by its regex pattern, is a
-    #   string of characters consisting of upper- and lower-case alphanumeric
-    #   characters with no spaces. You can also include underscores or any of
-    #   the following characters: =,.@-
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format.
@@ -331,10 +331,10 @@ module Aws::STS
     #   When Granting Access to Your AWS Resources to a Third Party][1] in the
     #   *IAM User Guide*.
     #
-    #   The format for this parameter, as described by its regex pattern, is a
-    #   string of characters consisting of upper- and lower-case alphanumeric
-    #   characters with no spaces. You can also include underscores or any of
-    #   the following characters: =,.@:\\/-
+    #   The regex used to validated this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@:\\/-
     #
     #
     #
@@ -349,10 +349,10 @@ module Aws::STS
     #   (ARN) for a virtual device (such as
     #   `arn:aws:iam::123456789012:mfa/user`).
     #
-    #   The format for this parameter, as described by its regex pattern, is a
-    #   string of characters consisting of upper- and lower-case alphanumeric
-    #   characters with no spaces. You can also include underscores or any of
-    #   the following characters: =,.@-
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
     #
     # @option params [String] :token_code
     #   The value provided by the MFA device, if the trust policy of the role
@@ -714,10 +714,10 @@ module Aws::STS
     #   is included as part of the ARN and assumed role ID in the
     #   `AssumedRoleUser` response element.
     #
-    #   The format for this parameter, as described by its regex pattern, is a
-    #   string of characters consisting of upper- and lower-case alphanumeric
-    #   characters with no spaces. You can also include underscores or any of
-    #   the following characters: =,.@-
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
     #
     # @option params [required, String] :web_identity_token
     #   The OAuth 2.0 access token or OpenID Connect ID token that is provided
@@ -1018,10 +1018,10 @@ module Aws::STS
     #   can reference the federated user name in a resource-based policy, such
     #   as in an Amazon S3 bucket policy.
     #
-    #   The format for this parameter, as described by its regex pattern, is a
-    #   string of characters consisting of upper- and lower-case alphanumeric
-    #   characters with no spaces. You can also include underscores or any of
-    #   the following characters: =,.@-
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
     #
     # @option params [String] :policy
     #   An IAM policy in JSON format that is passed with the
@@ -1180,10 +1180,10 @@ module Aws::STS
     #   device for an IAM user by going to the AWS Management Console and
     #   viewing the user's security credentials.
     #
-    #   The format for this parameter, as described by its regex pattern, is a
-    #   string of characters consisting of upper- and lower-case alphanumeric
-    #   characters with no spaces. You can also include underscores or any of
-    #   the following characters: =,.@-
+    #   The regex used to validate this parameter is a string of characters
+    #   consisting of upper- and lower-case alphanumeric characters with no
+    #   spaces. You can also include underscores or any of the following
+    #   characters: =,.@-
     #
     # @option params [String] :token_code
     #   The value provided by the MFA device, if MFA is required. If any

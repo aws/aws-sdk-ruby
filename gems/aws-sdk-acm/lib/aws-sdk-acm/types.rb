@@ -45,8 +45,8 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # Contains detailed metadata about an ACM Certificate. This structure is
-    # returned in the response to a DescribeCertificate request.
+    # Contains metadata about an ACM certificate. This structure is returned
+    # in the response to a DescribeCertificate request.
     #
     # @!attribute [rw] certificate_arn
     #   The Amazon Resource Name (ARN) of the certificate. For more
@@ -73,9 +73,9 @@ module Aws::ACM
     #   @return [Array<String>]
     #
     # @!attribute [rw] domain_validation_options
-    #   Contains information about the email address or addresses used for
-    #   domain validation. This field exists only when the certificate type
-    #   is `AMAZON_ISSUED`.
+    #   Contains information about the initial validation of each domain
+    #   name that occurs as a result of the RequestCertificate request. This
+    #   field exists only when the certificate type is `AMAZON_ISSUED`.
     #   @return [Array<Types::DomainValidation>]
     #
     # @!attribute [rw] serial
@@ -169,6 +169,16 @@ module Aws::ACM
     #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
     #   @return [String]
     #
+    # @!attribute [rw] renewal_summary
+    #   Contains information about the status of ACM's [managed renewal][1]
+    #   for the certificate. This field exists only when the certificate
+    #   type is `AMAZON_ISSUED`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   @return [Types::RenewalSummary]
+    #
     class CertificateDetail < Struct.new(
       :certificate_arn,
       :domain_name,
@@ -189,7 +199,8 @@ module Aws::ACM
       :signature_algorithm,
       :in_use_by,
       :failure_reason,
-      :type)
+      :type,
+      :renewal_summary)
       include Aws::Structure
     end
 
@@ -254,8 +265,8 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] certificate_arn
-    #   String that contains an ACM Certificate ARN. The ARN must be of the
-    #   form:
+    #   The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must
+    #   have the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
@@ -273,8 +284,7 @@ module Aws::ACM
     end
 
     # @!attribute [rw] certificate
-    #   Contains a CertificateDetail structure that lists the fields of an
-    #   ACM Certificate.
+    #   Metadata about an ACM certificate.
     #   @return [Types::CertificateDetail]
     #
     class DescribeCertificateResponse < Struct.new(
@@ -282,33 +292,37 @@ module Aws::ACM
       include Aws::Structure
     end
 
-    # Structure that contains the domain name, the base validation domain to
-    # which validation email is sent, and the email addresses used to
-    # validate the domain identity.
+    # Contains information about the validation of each domain name in the
+    # certificate.
     #
     # @!attribute [rw] domain_name
-    #   Fully Qualified Domain Name (FQDN) of the form `www.example.com or `
-    #   `example.com`.
+    #   A fully qualified domain name (FQDN) in the certificate. For
+    #   example, `www.example.com` or `example.com`.
     #   @return [String]
     #
     # @!attribute [rw] validation_emails
-    #   A list of contact address for the domain registrant.
+    #   A list of email addresses that ACM used to send domain validation
+    #   emails.
     #   @return [Array<String>]
     #
     # @!attribute [rw] validation_domain
-    #   The base validation domain that acts as the suffix of the email
-    #   addresses that are used to send the emails.
+    #   The domain name that ACM used to send domain validation emails.
+    #   @return [String]
+    #
+    # @!attribute [rw] validation_status
+    #   The validation status of the domain name.
     #   @return [String]
     #
     class DomainValidation < Struct.new(
       :domain_name,
       :validation_emails,
-      :validation_domain)
+      :validation_domain,
+      :validation_status)
       include Aws::Structure
     end
 
-    # This structure is used in the request object of the RequestCertificate
-    # action.
+    # Contains information about the domain names that you want ACM to use
+    # to send you emails to validate your ownership of the domain.
     #
     # @note When making an API call, you may pass DomainValidationOption
     #   data as a hash:
@@ -319,29 +333,27 @@ module Aws::ACM
     #       }
     #
     # @!attribute [rw] domain_name
-    #   Fully Qualified Domain Name (FQDN) of the certificate being
-    #   requested.
+    #   A fully qualified domain name (FQDN) in the certificate request.
     #   @return [String]
     #
     # @!attribute [rw] validation_domain
-    #   The domain to which validation email is sent. This is the base
-    #   validation domain that will act as the suffix of the email
-    #   addresses. This must be the same as the `DomainName` value or a
-    #   superdomain of the `DomainName` value. For example, if you requested
-    #   a certificate for `site.subdomain.example.com` and specify a
-    #   **ValidationDomain** of `subdomain.example.com`, ACM sends email to
-    #   the domain registrant, technical contact, and administrative contact
-    #   in WHOIS for the base domain and the following five addresses:
+    #   The domain name that you want ACM to use to send you validation
+    #   emails. This domain name is the suffix of the email addresses that
+    #   you want ACM to use. This must be the same as the `DomainName` value
+    #   or a superdomain of the `DomainName` value. For example, if you
+    #   request a certificate for `testing.example.com`, you can specify
+    #   `example.com` for this value. In that case, ACM sends domain
+    #   validation emails to the following five addresses:
     #
-    #   * admin@subdomain.example.com
+    #   * admin@example.com
     #
-    #   * administrator@subdomain.example.com
+    #   * administrator@example.com
     #
-    #   * hostmaster@subdomain.example.com
+    #   * hostmaster@example.com
     #
-    #   * postmaster@subdomain.example.com
+    #   * postmaster@example.com
     #
-    #   * webmaster@subdomain.example.com
+    #   * webmaster@example.com
     #   @return [String]
     #
     class DomainValidationOption < Struct.new(
@@ -519,7 +531,7 @@ module Aws::ACM
     #
     # @!attribute [rw] certificate_arn
     #   String that contains the ARN of the ACM Certificate for which you
-    #   want to list the tags. This must be of the form:
+    #   want to list the tags. This has the following form:
     #
     #   `arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #
@@ -582,6 +594,40 @@ module Aws::ACM
       include Aws::Structure
     end
 
+    # Contains information about the status of ACM's [managed renewal][1]
+    # for the certificate. This structure exists only when the certificate
+    # type is `AMAZON_ISSUED`.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #
+    # @!attribute [rw] renewal_status
+    #   The status of ACM's [managed renewal][1] of the certificate.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_validation_options
+    #   Contains information about the validation of each domain name in the
+    #   certificate, as it pertains to ACM's [managed renewal][1]. This is
+    #   different from the initial validation that occurs as a result of the
+    #   RequestCertificate request. This field exists only when the
+    #   certificate type is `AMAZON_ISSUED`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+    #   @return [Array<Types::DomainValidation>]
+    #
+    class RenewalSummary < Struct.new(
+      :renewal_status,
+      :domain_validation_options)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RequestCertificateRequest
     #   data as a hash:
     #
@@ -599,9 +645,9 @@ module Aws::ACM
     #
     # @!attribute [rw] domain_name
     #   Fully qualified domain name (FQDN), such as www.example.com, of the
-    #   site you want to secure with an ACM Certificate. Use an asterisk
-    #   (*) to create a wildcard certificate that protects several sites in
-    #   the same domain. For example, *.example.com protects
+    #   site that you want to secure with an ACM Certificate. Use an
+    #   asterisk (*) to create a wildcard certificate that protects several
+    #   sites in the same domain. For example, *.example.com protects
     #   www.example.com, site.example.com, and images.example.com.
     #   @return [String]
     #
@@ -623,23 +669,8 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] domain_validation_options
-    #   The base validation domain that will act as the suffix of the email
-    #   addresses that are used to send the emails. This must be the same as
-    #   the `Domain` value or a superdomain of the `Domain` value. For
-    #   example, if you requested a certificate for `test.example.com` and
-    #   specify **DomainValidationOptions** of `example.com`, ACM sends
-    #   email to the domain registrant, technical contact, and
-    #   administrative contact in WHOIS and the following five addresses:
-    #
-    #   * admin@example.com
-    #
-    #   * administrator@example.com
-    #
-    #   * hostmaster@example.com
-    #
-    #   * postmaster@example.com
-    #
-    #   * webmaster@example.com
+    #   The domain name that you want ACM to use to send you emails to
+    #   validate your ownership of the domain.
     #   @return [Array<Types::DomainValidationOption>]
     #
     class RequestCertificateRequest < Struct.new(
@@ -684,7 +715,7 @@ module Aws::ACM
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   The Fully Qualified Domain Name (FQDN) of the certificate that needs
+    #   The fully qualified domain name (FQDN) of the certificate that needs
     #   to be validated.
     #   @return [String]
     #
