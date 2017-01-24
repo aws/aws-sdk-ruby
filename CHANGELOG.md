@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.1 (2017-01-24)
+------------------
+
 * Feature - Aws::CodeBuild - Updated the documentation, and API for AWS CodeBuild.
 
 * Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
