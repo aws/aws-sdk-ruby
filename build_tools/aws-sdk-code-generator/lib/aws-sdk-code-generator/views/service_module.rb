@@ -5,9 +5,10 @@ module AwsSdkCodeGenerator
     class ServiceModule < View
 
       # @option options [required, Service] :service
+      # @option options [required, String] :prefix
       def initialize(options)
         @service = options.fetch(:service)
-        @gem_path = @service.gem_name
+        @prefix = options.fetch(:prefix)
       end
 
       def full_name
@@ -45,15 +46,15 @@ module AwsSdkCodeGenerator
       # @return [Array<String>]
       def relative_requires
         paths = Set.new
-        paths << "#{@gem_path}/types"
-        paths << "#{@gem_path}/client_api"
-        paths << "#{@gem_path}/client"
-        paths << "#{@gem_path}/errors"
-        paths << "#{@gem_path}/waiters" if @service.waiters
-        paths << "#{@gem_path}/resource"
+        paths << "#{@prefix}/types"
+        paths << "#{@prefix}/client_api"
+        paths << "#{@prefix}/client"
+        paths << "#{@prefix}/errors"
+        paths << "#{@prefix}/waiters" if @service.waiters
+        paths << "#{@prefix}/resource"
         if @service.resources && @service.resources['resources']
           @service.resources['resources'].keys.each do |resource_name|
-            path = "#{@gem_path}/#{underscore(resource_name)}"
+            path = "#{@prefix}/#{underscore(resource_name)}"
             if paths.include?(path)
               raise "resource path conflict for `#{resource_name}'"
             else
@@ -61,7 +62,7 @@ module AwsSdkCodeGenerator
             end
           end
         end
-        paths << "#{@gem_path}/customizations"
+        paths << "#{@prefix}/customizations"
         paths.to_a
       end
 

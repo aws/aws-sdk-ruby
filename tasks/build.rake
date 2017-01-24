@@ -17,7 +17,7 @@ rule /^build:aws-sdk-\w+$/ do |task|
     aws_sdk_core_lib_path: $CORE_LIB,
     service: service,
     client_examples: BuildTools.load_client_examples(service.identifier)
-  ).each
+  )
   writer = BuildTools::FileWriter.new(directory: "#{$GEMS_DIR}/#{service.gem_name}")
   writer.write_files(files)
 end

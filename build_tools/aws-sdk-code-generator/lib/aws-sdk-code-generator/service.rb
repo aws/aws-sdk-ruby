@@ -70,6 +70,9 @@ module AwsSdkCodeGenerator
     # @return [String]
     attr_reader :gem_version
 
+    # @return [String] The gem name, e.g. "aws-sdk-s3"
+    attr_reader :gem_name
+
     # @return [String, nil]
     attr_reader :endpoints_key
 
@@ -81,9 +84,6 @@ module AwsSdkCodeGenerator
 
     # @return [String] The service identifier, e.g. "s3"
     attr_reader :identifier
-
-    # @return [String] The gem name, e.g. "aws-sdk-s3"
-    attr_reader :gem_name
 
     # @return [String] The service protocol, e.g. "json", "query", etc.
     attr_reader :protocol

@@ -47,7 +47,7 @@ module AwsSdkCodeGenerator
     def source_files(options = {})
       prefix = options.fetch(:prefix, @service.gem_name)
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", service_module)
+        y.yield("#{prefix}.rb", service_module(prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
         y.yield("#{prefix}/client_api.rb", client_api_module)
@@ -67,8 +67,8 @@ module AwsSdkCodeGenerator
 
     private
 
-    def service_module
-      Views::ServiceModule.new(service: @service).render
+    def service_module(prefix)
+      Views::ServiceModule.new(service: @service, prefix: prefix).render
     end
 
     def types_module
