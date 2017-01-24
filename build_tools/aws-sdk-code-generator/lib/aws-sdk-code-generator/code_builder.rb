@@ -44,8 +44,8 @@ module AwsSdkCodeGenerator
     end
 
     # @return [Enumerable<String<path>, String<code>>]
-    def source_files
-      prefix = @service.gem_name
+    def source_files(options = {})
+      prefix = options.fetch(:prefix, @service.gem_name)
       Enumerator.new do |y|
         y.yield("#{prefix}.rb", service_module)
         y.yield("#{prefix}/customizations.rb", '')
