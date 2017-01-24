@@ -10,10 +10,6 @@ module Aws
       # This parameter is required by RDS when copying an encrypted snapshot
       # across regions. This plugin will be skipped if the `:pre_signed_url`
       # parameter is provided by the user.
-      #
-      # @seahorse.client.option [String] :source_region The region which you are
-      #  copying an encrypted snapshot from. This parameter must be present to
-      #  have the plugin compute a presigned URL on your behalf.
       class CrossRegionCopying < Seahorse::Client::Plugin
 
         # @api private
