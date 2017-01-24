@@ -11,7 +11,7 @@ task 'update-readme' do
   # header row
   table.unshift(['Service Name', 'Service Module', 'gem_name', 'API Version'])
 
-  lines = AwsSdkCodeGenerator::Helper.markdown_table(table).lines
+  lines = AwsSdkCodeGenerator::Docstring.markdown_table(table).lines
   lines.unshift("\n")
   lines.push("\n\n")
 

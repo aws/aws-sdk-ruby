@@ -234,6 +234,7 @@ to be backwards compatible.
 | Service Name                        | Service Module                    | gem_name                             | API Version |
 | ----------------------------------- | --------------------------------- | ------------------------------------ | ----------- |
 | AWS Application Discovery Service   | Aws::ApplicationDiscoveryService  | aws-sdk-applicationdiscoveryservice  | 2015-11-01  |
+| AWS Batch                           | Aws::Batch                        | aws-sdk-batch                        | 2016-08-10  |
 | AWS Budgets                         | Aws::Budgets                      | aws-sdk-budgets                      | 2016-10-20  |
 | AWS Certificate Manager             | Aws::ACM                          | aws-sdk-acm                          | 2015-12-08  |
 | AWS CloudFormation                  | Aws::CloudFormation               | aws-sdk-cloudformation               | 2010-05-15  |
@@ -255,8 +256,8 @@ to be backwards compatible.
 | AWS IoT                             | Aws::IoT                          | aws-sdk-iot                          | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                 | aws-sdk-iotdataplane                 | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                          | aws-sdk-kms                          | 2014-11-01  |
-| AWS Lambda                          | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
 | AWS Lambda                          | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
+| AWS Lambda                          | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics | aws-sdk-marketplacecommerceanalytics | 2015-07-01  |
 | AWS OpsWorks                        | Aws::OpsWorks                     | aws-sdk-opsworks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | Aws::OpsWorksCM                   | aws-sdk-opsworkscm                   | 2016-11-01  |
@@ -319,8 +320,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | Aws::WorkSpaces                   | aws-sdk-workspaces                   | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling       | aws-sdk-applicationautoscaling       | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                  | aws-sdk-autoscaling                  | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancingV2       | aws-sdk-elasticloadbalancingv2       | 2015-12-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancing         | aws-sdk-elasticloadbalancing         | 2012-06-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancingV2       | aws-sdk-elasticloadbalancingv2       | 2015-12-01  |
 
 ## License
 
