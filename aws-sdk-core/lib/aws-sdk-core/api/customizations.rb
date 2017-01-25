@@ -150,10 +150,16 @@ module Aws
       api('rds') do |api|
         api['shapes']['CopyDBSnapshotMessage']['members']['DestinationRegion'] =
           {"shape" => "String"}
+        api['shapes']['CreateDBInstanceReadReplicaMessage']['members']['DestinationRegion'] =
+          {"shape" => "String"}
       end
 
       doc('rds') do |docs|
         docs['shapes']['String']['refs']['CopyDBSnapshotMessage$SourceRegion'] =
+          "<p>The region which you are copying an encrypted snapshot from.</p>" +
+          "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
+          " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
+        docs['shapes']['String']['refs']['CreateDBInstanceReadReplicaMessage$SourceRegion'] =
           "<p>The region which you are copying an encrypted snapshot from.</p>" +
           "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
           " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
