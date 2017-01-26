@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::CloudDirectory - Added support for a new service, Amazon CloudDirectory.
+
 2.7.2 (2017-01-25)
 ------------------
 
