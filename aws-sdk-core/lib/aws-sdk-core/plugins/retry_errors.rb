@@ -9,11 +9,44 @@ module Aws
     #   are retried.  Generally, these are throttling errors, data
     #   checksum errors, networking errors, timeout errors and auth
     #   errors from expired credentials.
+    # @seahorse.client.option [Number] : retry_max_delay (20)
+    #   The maximum number of seconds to delay between retries for capped backoff strategies
+    # @seahorse.client.option [Number] : retry_base_delay (0.3)
+    #   The base delay in seconds for exponential backoff functions - all are based on ((2 ** attempt) * retry_base_delay))
     class RetryErrors < Seahorse::Client::Plugin
 
-      option(:retry_limit, 3)
+      # Sources
+      # http://docs.aws.amazon.com/general/latest/gr/api-retries.html
+      # https://www.awsarchitectureblog.com/2015/03/backoff.html
+      #
+      # Java SDK
+      #    https://github.com/aws/aws-sdk-java/blob/master/aws-java-sdk-core/src/main/java/com/amazonaws/retry/PredefinedBackoffStrategies.java
+      #    20s max delay. Equal Jitter for throttled events, full jitter for everything else, max retries defaults to 30!
+      #
+      # NodeJS SDK
+      #    https://github.com/aws/aws-sdk-js/blob/d0aa9db29be01cd909eec4780dffb9d182cde5e4/lib/util.js#L822
+      #    Default Full Jitter 3 retries, 100ms base, no cap
+      #
 
-      option(:retry_backoff, lambda { |c| Kernel.sleep(2 ** c.retries * 0.3) })
+      # Original uncapped, exponential backoff
+      EXPONENTIAL_BACKOFF = lambda { |c| Kernel.sleep(2 ** c.retries * c.config.retry_base_delay) }
+
+      # Exponential backoff capped to :max_delay
+      CAPPED_BACKOFF = lambda { |c| Kernel.sleep([c.config.retry_max_delay, (2 ** c.retries * c.config.retry_base_delay)].min) }
+
+      # Retain at least half of the capped backoff, + random the other half.
+      EQUAL_JITTER_BACKOFF = lambda { |c| delay = ([c.config.retry_max_delay, (2 ** c.retries * c.config.retry_base_delay)].min)/2.0 ; Kernel.sleep((delay + Kernel.rand(0..delay))) }
+
+      # Full Jitter, random between no delay and the capped exponential backoff
+      FULL_JITTER_BACKOFF = lambda { |c| Kernel.sleep(Kernel.rand(0..[c.config.retry_max_delay,(2 ** c.retries * c.config.retry_base_delay)].min))}
+
+      DEFAULT_BACKOFF = EXPONENTIAL_BACKOFF  # EQUAL_JITTER might be a better default option
+
+      option(:retry_limit, 3)
+      option(:retry_max_delay,20) # same as the java sdk, caps exponential backoff after 6 retries.
+      option(:retry_base_delay,0.3)
+      option(:retry_backoff, DEFAULT_BACKOFF)
+
 
       # @api private
       class ErrorInspector

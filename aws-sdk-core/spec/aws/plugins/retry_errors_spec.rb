@@ -11,6 +11,20 @@ module Aws
         expect(config.retry_limit).to eq(3)
       end
 
+      it 'defaults config.retry_max_delay to 20' do
+        config = Seahorse::Client::Configuration.new
+        RetryErrors.new.add_options(config)
+        config = config.build!
+        expect(config.retry_max_delay).to eq(20)
+      end
+
+      it 'defaults config.retry_base_delay to 0.3' do
+        config = Seahorse::Client::Configuration.new
+        RetryErrors.new.add_options(config)
+        config = config.build!
+        expect(config.retry_base_delay).to eq(0.3)
+      end
+
       describe 'ErrorInspector' do
 
         def inspector(error, http_status_code = 404)
@@ -202,10 +216,60 @@ module Aws
           handle(send_handler)
         end
 
-        it 'backs off exponentially between each retry attempt' do
+        it 'backs off according to custom retry_backoff proc'  do
+          config.retry_backoff = lambda { |c| Kernel.sleep([0.4, 0.2, 1.7][c.retries]) }
+          expect(Kernel).to receive(:sleep).with(0.4).ordered
+          expect(Kernel).to receive(:sleep).with(0.2).ordered
+          expect(Kernel).to receive(:sleep).with(1.7).ordered
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'backs off exponentially between each retry attempt with EXPONENTIAL_BACKOFF strategy' do
+          config.retry_backoff = RetryErrors::EXPONENTIAL_BACKOFF
           expect(Kernel).to receive(:sleep).with(0.3).ordered
           expect(Kernel).to receive(:sleep).with(0.6).ordered
           expect(Kernel).to receive(:sleep).with(1.2).ordered
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'caps backs off delay attempt with CAPPED_BACKOFF strategy' do
+          config.retry_backoff = RetryErrors::CAPPED_BACKOFF
+          config.retry_max_delay = 4.0
+          config.retry_limit = 6
+          expect(Kernel).to receive(:sleep).with(0.3).ordered
+          expect(Kernel).to receive(:sleep).with(0.6).ordered
+          expect(Kernel).to receive(:sleep).with(1.2).ordered
+          expect(Kernel).to receive(:sleep).with(2.4).ordered
+          expect(Kernel).to receive(:sleep).with(4.0).ordered
+          expect(Kernel).to receive(:sleep).with(4.0).ordered
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'randomises the backoff delay with FULL_JITTER_BACKOFF strategy' do
+          config.retry_backoff = RetryErrors::FULL_JITTER_BACKOFF
+          config.retry_max_delay = 2.0
+          config.retry_limit = 4
+          # TODO: should we control Kernel.rand to get a proper repeatable test?
+          expect(Kernel).to receive(:sleep).with(be_between(0,0.3)).ordered
+          expect(Kernel).to receive(:sleep).with(be_between(0,0.6)).ordered
+          expect(Kernel).to receive(:sleep).with(be_between(0,1.2)).ordered
+          expect(Kernel).to receive(:sleep).with(be_between(0,2.0)).ordered
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
+          handle { |context| resp }
+        end
+
+        it 'randomises the backoff delay with EQUAL_JITTER_BACKOFF strategy' do
+          config.retry_backoff = RetryErrors::EQUAL_JITTER_BACKOFF
+          config.retry_max_delay = 2.0
+          config.retry_limit = 4
+          # TODO: should we control Kernel.rand to get a proper repeatable test?
+          expect(Kernel).to receive(:sleep).with(be_between(0.15,0.3)).ordered
+          expect(Kernel).to receive(:sleep).with(be_between(0.3,0.6)).ordered
+          expect(Kernel).to receive(:sleep).with(be_between(0.6,1.2)).ordered
+          expect(Kernel).to receive(:sleep).with(be_between(1.0,2.0)).ordered
           resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
         end
