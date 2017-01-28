@@ -109,6 +109,16 @@ module Aws
           expect(url).to match(/^http:/)
         end
 
+        it 'can generate virtual hosted url' do
+          signer = Presigner.new(client: client)
+          url = signer.presigned_url(:get_object,
+            bucket:'virtual.hosted.com',
+            key:'foo',
+            virtual_host: true
+          )
+          expect(url).to match(/^http:\/\/virtual.hosted.com\/foo/)
+        end
+
       end
     end
   end
