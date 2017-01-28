@@ -119,6 +119,18 @@ module Aws
           expect(url).to match(/^http:\/\/virtual.hosted.com\/foo/)
         end
 
+        it 'returns same url when called twice' do
+          signer = Presigner.new(client: client)
+          params = {
+            bucket:'virtual.hosted.com',
+            key:'foo',
+            virtual_host: true
+          }
+          signer.presigned_url(:get_object, params)
+          url = signer.presigned_url(:get_object, params)
+          expect(url).to match(/^http:\/\/virtual.hosted.com\/foo/)
+        end
+
       end
     end
   end
