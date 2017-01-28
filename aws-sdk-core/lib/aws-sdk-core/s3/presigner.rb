@@ -42,6 +42,7 @@ module Aws
         if params[:key].nil? or params[:key] == ''
           raise ArgumentError, ":key must not be blank"
         end
+        params = params.dup
         virtual_host = !!params.delete(:virtual_host)
         scheme = http_scheme(params, virtual_host)
 
