@@ -28,6 +28,7 @@ module Aws
     Batch
     Budgets
     CodeBuild
+    CloudDirectory
     CloudFormation
     CloudFront
     CloudHSM

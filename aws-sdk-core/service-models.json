@@ -35,6 +35,10 @@
     "models": "codebuild/2016-10-06",
     "endpoint": "codebuild"
   },
+  "CloudDirectory": {
+    "models": "clouddirectory/2016-05-10",
+    "endpoint": "clouddirectory"
+  },
   "CloudFormation": {
     "models": "cloudformation/2010-05-15",
     "endpoint": "cloudformation"
