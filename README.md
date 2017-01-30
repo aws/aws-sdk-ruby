@@ -39,7 +39,7 @@ Please use these community resources for getting help. We use the GitHub issues 
 * Ask a question on StackOverflow and tag it with `aws-sdk-ruby`
 * Come join the AWS Ruby community chat on gitter: `aws/aws-sdk-ruby`
 * Articulate your feature request or upvote existing ones
-* Open a support ticket with AWS Support[https://console.aws.amazon.com/support/home], if it turns out that you may have found a bug, please open an issue
+* Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home), if it turns out that you may have found a bug, please open an issue
 
 ##Opening Issues
 
@@ -47,7 +47,7 @@ If you encounter a bug with `aws-sdk-ruby` we would like to hear about it. Searc
 
 The GitHub issues are intended for bug reports and feature requests. For help and questions with using `aws-sdk-ruby` please make use of the resources listed in the Getting Help section.
 
-`FEATURE_REQUEST.md`[https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE\_REQUESTS.md] in particular is a good way to signal your interest in a feature or issue. There are limited resources available for handling issues and by keeping the list of open issues lean we can respond in a timely manner.
+[`FEATURE_REQUEST.md`](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE\_REQUESTS.md) in particular is a good way to signal your interest in a feature or issue. There are limited resources available for handling issues and by keeping the list of open issues lean we can respond in a timely manner.
 
 ## Configuration
 
