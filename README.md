@@ -36,9 +36,8 @@ gem 'aws-sdk', '~> 2'
 
 Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
 
-* Ask a question on StackOverflow and tag it with `aws-sdk-ruby`
-* Come join the AWS Ruby community chat on gitter: `aws/aws-sdk-ruby`
-* Articulate your feature request or upvote existing ones
+* Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`
+* Come join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home), if it turns out that you may have found a bug, please open an issue
 
 ##Opening Issues
