@@ -76,11 +76,12 @@ module Aws
       def use_bucket_as_hostname(req)
         req.handlers.remove(Plugins::S3BucketDns::Handler)
         req.handle do |context|
-          uri = context.http_request.endpoint
+          uri = context.http_request.endpoint.dup
           uri.host = context.params[:bucket]
           uri.path.sub!("/#{context.params[:bucket]}", '')
           uri.scheme = 'http'
           uri.port = 80
+          context.http_request.endpoint = URI.parse(uri.to_s)
           @handler.call(context)
         end
       end
