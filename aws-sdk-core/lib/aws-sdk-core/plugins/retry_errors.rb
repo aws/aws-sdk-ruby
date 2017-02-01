@@ -47,7 +47,7 @@ module Aws
           full: FULL_JITTER
       }
 
-      JITTERS.default_proc = lambda { |h,k| "#{k} is not a named jitter function. Must be one of #{h.keys}"}
+      JITTERS.default_proc = lambda { |h,k| raise KeyError, "#{k} is not a named jitter function. Must be one of #{h.keys}"}
 
       option(:retry_limit, 3)
 

@@ -249,7 +249,7 @@ module Aws
           handle { |context| resp }
         end
 
-        it 'caps backs off delay to :retry_max_delay 'do
+        it 'caps backoff delay to :retry_max_delay 'do
           config.retry_max_delay = 4.0
           config.retry_limit = 6
           expect(Kernel).to receive(:sleep).with(0.3).ordered
@@ -302,6 +302,12 @@ module Aws
 
           resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
           handle { |context| resp }
+        end
+
+        it 'raises KeyError with invalid jitter function' do
+          config.retry_jitter = :unknown
+          resp.error = EC2::Errors::RequestLimitExceeded.new(nil,nil)
+          expect(-> { handle { |context| resp } }).to raise_error(KeyError)
         end
 
         it 'adjusts delay with custom jitter'  do
