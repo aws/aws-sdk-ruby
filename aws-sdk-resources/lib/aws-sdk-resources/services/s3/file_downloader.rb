@@ -54,16 +54,20 @@ module Aws
         elsif resp.parts_count.nil? || resp.parts_count <= 1
           get_range(construct_chunks(file_size))
         else
-          chunk_size = compute_chunk(file_size)
-          part_size = (file_size.to_f / resp.parts_count.to_f).ceil
-          if chunk_size < part_size
-            get_range(construct_chunks(file_size))
-          else
-            get_part(resp.parts_count)
-          end
+          compute_mode(file_size, resp.parts_count)
         end
       end
  
+      def compute_mode(file_size, count)
+        chunk_size = compute_chunk(file_size)
+        part_size = (file_size.to_f / count.to_f).ceil
+        if chunk_size < part_size
+          get_range(construct_chunks(file_size))
+        else
+          get_part(count)
+        end
+      end
+
       def construct_chunks(file_size)
         offset = 0
         default_chunk_size = compute_chunk(file_size)
@@ -96,17 +100,15 @@ module Aws
           cnt = @thread_count < remains_count ? @thread_count : remains_count
           cnt.times do
             thread = Thread.new(chunks.shift) do |chunk|
-              @client.get_object(bucket: @bucket, key: @key, range: chunk)
+              resp = @client.get_object(bucket: @bucket, key: @key, range: chunk)
+              File.open(@path, 'ab') do |f|
+                f.write(resp.body.read)
+              end
             end
-            threads << thread.value
+            threads << thread.join
           end
           count += cnt
         end
-
-        File.open(@path, 'wb') do |f|
-          threads.each {|resp| f.write(resp.body.read)}
-        end
-        @path
       end
 
       def get_part(parts)
@@ -115,13 +117,12 @@ module Aws
         # partNumber starts from 1
           part = i + 1
           thread = Thread.new(part) do
-            @client.get_object(bucket: @bucket, key: @key, part_number: part)
+            resp = @client.get_object(bucket: @bucket, key: @key, part_number: part)
+            File.open(@path, 'ab') do |f|
+              f.write(resp.body.read)
+            end
           end
-          threads << thread.value
-        end
-
-        File.open(@path, 'wb') do |f|
-          threads.each {|resp| f.write(resp.body.read)}
+          threads << thread.join
         end
       end
 
