@@ -1,6 +1,8 @@
+require 'delegate'
+
 module Seahorse
   module Client
-    class Response
+    class Response < Delegator
 
       # @option options [RequestContext] :context (nil)
       # @option options [Integer] :status_code (nil)
@@ -63,29 +65,16 @@ module Seahorse
         self
       end
 
+      # Necessary to define as a subclass of Delegator
       # @api private
-      def inspect
-        @data.inspect
+      def __getobj__
+        @data
       end
 
+      # Necessary to define as a subclass of Delegator
       # @api private
-      def pretty_print(q)
-        @data.pretty_print(q)
-      end
-
-      # @api private
-      def respond_to?(*args)
-        @data.respond_to?(args.first, false) || super
-      end
-
-      private
-
-      def method_missing(*args, &block)
-        if @data.respond_to?(args.first, false)
-          @data.send(*args, &block)
-        else
-          super
-        end
+      def __setobj__(obj)
+        @data = obj
       end
 
     end

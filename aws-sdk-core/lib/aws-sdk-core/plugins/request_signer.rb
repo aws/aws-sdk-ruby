@@ -37,6 +37,10 @@ module Aws
         CredentialProviderChain.new(config).resolve
       end
 
+      option(:instance_profile_credentials_retries, 0)
+
+      option(:instance_profile_credentials_timeout, 1)
+
       # Intentionally not documented - this should go away when all
       # services support signature version 4 in every region.
       option(:signature_version) do |cfg|

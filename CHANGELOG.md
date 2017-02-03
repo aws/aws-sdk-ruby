@@ -1,6 +1,406 @@
 Unreleased Changes
 ------------------
 
+2.7.3 (2017-01-26)
+------------------
+
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::CloudDirectory - Added support for a new service, Amazon CloudDirectory.
+
+2.7.2 (2017-01-25)
+------------------
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.7.1 (2017-01-24)
+------------------
+
+* Feature - Aws::CodeBuild - Updated the documentation, and API for AWS CodeBuild.
+
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+2.7.0 (2017-01-20)
+------------------
+
+2.6.50 (2017-01-20)
+------------------
+
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::Health - Updated the documentation for AWS Health APIs and Notifications.
+
+2.6.49 (2017-01-19)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+2.6.48 (2017-01-18)
+------------------
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+2.6.47 (2017-01-17)
+------------------
+
+* Feature - Aws:: - Updated the API for Amazon DynamoDB.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
+
+* Feature - Aws::Polly - Updated the documentation for Amazon Polly.
+
+* Feature - Aws::Rekognition - Updated the documentation, and API for Amazon Rekognition.
+
+* Feature - Aws::Route53 - Updated the API for Amazon Route 53.
+
+2.6.46 (2017-01-16)
+------------------
+
+2.6.45 (2017-01-16)
+------------------
+
+* Feature - Aws:: - Added support for the new 2011-12-05 API version of Amazon DynamoDB.
+
+* Issue - Aws::CloudFront::UrlSigner - Fixed an issue where failures could occur
+  when the `UrlSigner` was used in a Rails environment with more than one query
+  parameter. See 
+  [related GitHub issue #1386](https://github.com/aws/aws-sdk-ruby/issues/1386).
+
+2.6.44 (2017-01-04)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Lambda - Updated the documentation for AWS Lambda.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Rekognition - Updated the documentation for Amazon Rekognition.
+
+* Feature - Aws::Snowball - Updated the documentation for Amazon Import/Export Snowball.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
+2.6.43 (2016-12-30)
+------------------
+
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+2.6.42 (2016-12-22)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::DirectoryService - Updated the documentation for AWS Directory Service.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+2.6.41 (2016-12-21)
+------------------
+
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::RDS - Adds cross-region encrypted snapshot copying, including
+  automatic population of the `:pre_signed_url` parameter for
+  `Aws::RDS::Client#copy_db_snapshot` when the `:source_region` parameter is
+  provided.
+
+2.6.40 (2016-12-20)
+------------------
+
+* Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+2.6.39 (2016-12-19)
+------------------
+
+* Issue - Aws::CloudTrail - Added missing paginator configuration for `Aws::CloudTrail::Client#lookup_events`.
+
+* Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
+
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
+
+* Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
+
+* Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
+
+
+ See related [GitHub issue #1365](https://github.com/aws/aws-sdk-ruby/issues/1365).
+
+
+
+2.6.38 (2016-12-15)
+------------------
+
+2.6.37 (2016-12-15)
+------------------
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+2.6.36 (2016-12-14)
+------------------
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::ElasticBeanstalk - Updated the documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
+* Feature - Aws::Batch - Added support for a new service, AWS Batch.
+
+2.6.35 (2016-12-08)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-11-25 API version of Amazon CloudFront.
+
+* Feature - Aws::WAFRegional - Added support for a new service, AWS WAF Regional.
+
+2.6.34 (2016-12-07)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API for AWS Config.
+
+* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
+
+* Feature - Aws::SQS - Updated the API, and documentation for Amazon Simple Queue Service.
+
+2.6.33 (2016-12-06)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
+
+2.6.32 (2016-12-01)
+------------------
+
+* Feature - Aws::Pinpoint - Updated the API for Amazon Pinpoint.
+
+2.6.31 (2016-12-01)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::AppStream - Added support for a new service, Amazon AppStream.
+
+* Feature - Aws::CodeBuild - Added support for a new service, AWS CodeBuild.
+
+* Feature - Aws::EC2 - Added support for the new 2016-11-15 API version of Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Health - Added support for a new service, AWS Health APIs and Notifications.
+
+* Feature - Aws::OpsWorksCM - Added support for a new service, AWS OpsWorks for Chef Automate.
+
+* Feature - Aws::Pinpoint - Added support for a new service, Amazon Pinpoint.
+
+* Feature - Aws::Shield - Added support for a new service, AWS Shield.
+
+* Feature - Aws::States - Added support for a new service, AWS Step Functions.
+
+* Feature - Aws::XRay - Added support for a new service, AWS X-Ray.
+
+2.6.30 (2016-11-30)
+------------------
+
+* Feature - Aws::Polly - Updated the documentation for Amazon Polly.
+
+* Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
+
+* Feature - Aws::Lightsail - Added support for a new service, Amazon Lightsail.
+
+* Feature - Aws::Rekognition - Added support for a new service, Amazon Rekognition.
+
+* Feature - Aws::Polly - Adds support for Amazon Polly, as well as a presigned URL generation helper `Aws::Polly::Presigner`.
+
+2.6.29 (2016-11-29)
+------------------
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+2.6.28 (2016-11-22)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+2.6.27 (2016-11-22)
+------------------
+
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+2.6.26 (2016-11-18)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+2.6.25 (2016-11-18)
+------------------
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::ElasticTranscoder - Updated the API, and documentation for Amazon Elastic Transcoder.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+2.6.24 (2016-11-17)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::MarketplaceMetering - Updated the API, and documentation for AWSMarketplace Metering.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::SQS - Updated the API, documentation, and resource interfaces for Amazon Simple Queue Service.
+
+* Issue - Aws::AutoScaling - Resolved an issue with loading tags.
+
+  See related [GitHub issue #1313](https://github.com/aws/aws-sdk-ruby/issues/1313).
+
+* Feature - Credentials - Added the ability to configure extended retries
+  when loading credentials from the instance metadata service without needing
+  to construct your own `Aws::InstanceProfileCredentials` object:
+
+  ```ruby
+  s3 = Aws::S3::Client.new(
+    instance_profile_credentials_timeout: 5, # defaults to 1 second
+    instance_profile_credentials_retries: 5, # defaults to 0 retries
+  )
+  ```
+
+  These options are used by the default credential chain.
+
+* Feature - Resources - The `#exists?` method on resources now passes additional
+  arguments to the client waiter.
+
+* Issue - Resources - Resource identifiers passed in as `nil` now correctly
+  raise an `ArgumentError`.
+
+2.6.23 (2016-11-16)
+------------------
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.6.22 (2016-11-15)
+------------------
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.6.21 (2016-11-15)
+------------------
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Kinesis - Updated the API, and documentation for Amazon Kinesis.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.6.20 (2016-11-15)
+------------------
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+2.6.19 (2016-11-10)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+2.6.18 (2016-11-03)
+------------------
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+2.6.17 (2016-11-02)
+------------------
+
+* Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
+
+2.6.16 (2016-11-02)
+------------------
+
+2.6.15 (2016-11-02)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ECR - Updated the API for Amazon EC2 Container Registry.
+
+* Feature - Aws::CloudFormation - Added `Aws::CloudFormation::Stack#create`
+
 2.6.14 (2016-10-25)
 ------------------
 

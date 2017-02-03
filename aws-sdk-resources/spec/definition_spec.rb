@@ -64,6 +64,10 @@ module Aws
             group = namespace::Group.new(id:'group-id')
             expect(group).to be_kind_of(Resource)
             expect(group.identifiers).to eq(id:'group-id')
+
+            expect do
+              namespace::User.new(name: nil)
+            end.to raise_error(ArgumentError, 'missing required option :name')
           end
 
           describe 'actions' do
@@ -1162,6 +1166,31 @@ module Aws
               expect {
                 namespace::OtherThing.new.exists?
               }.to raise_error(NotImplementedError)
+            end
+
+            it 'passes additional params to the client' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'waiters' => {
+                    'Exists' => {
+                      'waiterName' => 'ThingExists',
+                      'params' => [
+                        { 'target' => 'ThingName', 'source' => 'identifier', 'name' => 'Name' }
+                      ]
+                    }
+                  }
+                }
+              }
+
+              expect(client).to receive(:wait_until).
+                with(:thing_exists, { thing_name: 'name', extra: 'param'}).
+                and_return(double('successful-response'))
+
+              apply_definition
+
+              thing = namespace::Thing.new('name')
+              expect(thing.exists?(extra: 'param')).to be(true)
             end
 
           end

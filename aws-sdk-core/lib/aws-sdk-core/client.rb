@@ -16,6 +16,7 @@ module Aws
       'Aws::Plugins::RequestSigner',
       'Aws::Plugins::ResponsePaging',
       'Aws::Plugins::StubResponses',
+      'Aws::Plugins::IdempotencyToken',
     ]
 
     # @api private

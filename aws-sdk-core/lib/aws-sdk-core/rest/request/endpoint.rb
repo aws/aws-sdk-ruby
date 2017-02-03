@@ -5,15 +5,13 @@ module Aws
     module Request
       class Endpoint
 
-        include Seahorse::Model::Shapes
-
         # @param [Seahorse::Model::Shapes::ShapeRef] rules
         # @param [String] request_uri_pattern
         def initialize(rules, request_uri_pattern)
           @rules = rules
           request_uri_pattern.split('?').tap do |path_part, query_part|
             @path_pattern = path_part
-            @query_pattern = query_part
+            @query_prefix = query_part
           end
         end
 
@@ -31,7 +29,7 @@ module Aws
 
         def apply_path_params(uri, params)
           path = uri.path.sub(/\/$/, '') + @path_pattern.split('?')[0]
-          uri.path = path.gsub(/{\w+\+?}/) do |placeholder|
+          uri.path = path.gsub(/{.+?}/) do |placeholder|
             param_value_for_placeholder(placeholder, params)
           end
         end
@@ -50,70 +48,17 @@ module Aws
         end
 
         def apply_querystring_params(uri, params)
-          parts = []
-          parts << @query_pattern if @query_pattern
-          @rules.shape.members.each do |member_name, member|
-            if member.location == 'querystring' && !params[member_name].nil?
-              case member.shape
-
-              # supported scalar types
-              when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape
-                param_name = member.location_name
-                param_value = params[member_name]
-                parts << "#{param_name}=#{escape(param_value.to_s)}"
-
-              # map of strings or map of string-list
-              when MapShape
-                if StringShape === member.shape.value.shape
-                  parts += query_map_of_string(params[member_name])
-                elsif ListShape === member.shape.value.shape
-                  parts += query_map_of_string_list(params[member_name])
-                else
-                  msg = "only map of string and string list supported"
-                  raise NotImplementedError, msg
-                end
-
-              when ListShape
-                if StringShape === member.shape.member.shape
-                  parts += list_of_strings(member.location_name, params[member_name])
-                else
-                  msg = "Only list of strings supported, got "
-                  msg << member.shape.member.shape.class.name
-                  raise NotImplementedError, msg
-                end
-
-              # unsupported querystring shape
-              else
-                raise NotImplementedError
-              end
-
+          # collect params that are supposed to be part of the query string
+          parts = @rules.shape.members.inject([]) do |parts, (member_name, member_ref)|
+            if member_ref.location == 'querystring' && !params[member_name].nil?
+              parts << [member_ref, params[member_name]]
             end
+            parts
           end
-          uri.query = parts.empty? ? nil : parts.join('&')
-        end
-
-        def query_map_of_string(hash)
-          list = []
-          hash.each_pair do |key, value|
-            list << "#{escape(key)}=#{escape(value)}"
-          end
-          list
-        end
-
-        def query_map_of_string_list(hash)
-          list = []
-          hash.each_pair do |key, values|
-            values.each do |value|
-              list << "#{escape(key)}=#{escape(value)}"
-            end
-          end
-          list
-        end
-
-        def list_of_strings(name, values)
-          values.map do |value|
-            "#{name}=#{escape(value)}"
-          end
+          querystring = QuerystringBuilder.new.build(parts)
+          querystring = [@query_prefix, querystring == '' ? nil : querystring].compact.join('&')
+          querystring = nil if querystring == ''
+          uri.query = querystring
         end
 
         def escape(string)

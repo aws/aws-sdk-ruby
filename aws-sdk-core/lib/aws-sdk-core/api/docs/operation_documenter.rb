@@ -6,10 +6,11 @@ module Aws
         include Seahorse::Model
         include Utils
 
-        def initialize(service_name, namespace)
+        def initialize(service_name, namespace, uid)
           @service_name = service_name
           @namespace = namespace
           @optname = 'options'
+          @uid = uid
         end
 
         # @param [Symbol] method_name
@@ -46,6 +47,10 @@ module Aws
             type = input_type(ref)
             docstring = "@option #{@optname} [#{req}#{type}] :#{name}\n"
             docstring += ref.documentation.to_s.lines.map { |line| "  #{line}" }.join
+            if ref['idempotencyToken']
+              docstring << "\n\n  This parameter will be auto-filled on your behalf"\
+                " with a random UUIDv4 when no value is provided.\n"
+            end
             tag(docstring)
           end
         end
@@ -133,7 +138,11 @@ module Aws
         end
 
         def see_also_tags(method_name, operation)
-          []
+          if Crosslink.taggable?(@uid)
+            [tag(Crosslink.tag_string(@uid, operation.name))]
+          else
+            []
+          end
         end
 
       end

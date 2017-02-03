@@ -23,8 +23,12 @@ module Aws
     APIGateway
     ApplicationAutoScaling
     ApplicationDiscoveryService
+    AppStream
     AutoScaling
+    Batch
     Budgets
+    CodeBuild
+    CloudDirectory
     CloudFormation
     CloudFront
     CloudHSM
@@ -41,6 +45,7 @@ module Aws
     CognitoIdentityProvider
     CognitoSync
     ConfigService
+    CostandUsageReportService
     DatabaseMigrationService
     DataPipeline
     DeviceFarm
@@ -62,6 +67,7 @@ module Aws
     Firehose
     GameLift
     Glacier
+    Health
     IAM
     ImportExport
     Inspector
@@ -72,29 +78,38 @@ module Aws
     KMS
     Lambda
     LambdaPreview
+    Lightsail
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
     OpsWorks
+    OpsWorksCM
+    Pinpoint
+    Polly
     RDS
+    Rekognition
     Redshift
     Route53
     Route53Domains
     S3
     ServiceCatalog
     SES
+    Shield
     SimpleDB
     SMS
     SNS
     Snowball
     SQS
     SSM
+    States
     StorageGateway
     STS
     Support
     SWF
     WAF
+    WAFRegional
     WorkSpaces
+    XRay
   )
   # end services
 
@@ -145,6 +160,7 @@ module Aws
     module Docs
       autoload :Builder, 'aws-sdk-core/api/docs/builder'
       autoload :ClientTypeDocumenter, 'aws-sdk-core/api/docs/client_type_documenter'
+      autoload :Crosslink, 'aws-sdk-core/api/docs/crosslink'
       autoload :DocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
       autoload :NullDocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
       autoload :OperationDocumenter, 'aws-sdk-core/api/docs/operation_documenter'
@@ -175,10 +191,12 @@ module Aws
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
+    autoload :IdempotencyToken, 'aws-sdk-core/plugins/idempotency_token'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
     autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'
+    autoload :RDSCrossRegionCopying, 'aws-sdk-core/plugins/rds_cross_region_copying'
     autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
     autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
@@ -230,6 +248,7 @@ module Aws
       autoload :Builder, 'aws-sdk-core/rest/request/builder'
       autoload :Endpoint, 'aws-sdk-core/rest/request/endpoint'
       autoload :Headers, 'aws-sdk-core/rest/request/headers'
+      autoload :QuerystringBuilder, 'aws-sdk-core/rest/request/querystring_builder'
     end
     module Response
       autoload :Body, 'aws-sdk-core/rest/response/body'

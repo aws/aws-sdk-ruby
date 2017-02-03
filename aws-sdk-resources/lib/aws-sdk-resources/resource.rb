@@ -127,8 +127,8 @@ module Aws
       end
 
       # @api private
-      def exists?
-        wait_until_exists { |w| w.max_attempts = 1 }
+      def exists?(options = {})
+        wait_until_exists(options) { |w| w.max_attempts = 1 }
         true
       rescue Waiters::Errors::UnexpectedError => e
         raise e.error
@@ -177,7 +177,7 @@ module Aws
         self.class.identifiers.each.with_index do |name, n|
           if args[n]
             identifiers[name] = args[n]
-          elsif options.key?(name)
+          elsif options[name]
             identifiers[name] = options.delete(name)
           else
             raise ArgumentError, "missing required option #{name.inspect}"

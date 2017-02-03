@@ -72,11 +72,11 @@ module Aws
     # fails, it raises an error. **All errors raised extend from
     # {Aws::Waiters::Errors::WaiterFailed}**.
     #
-    #   begin
-    #     client.wait_until(...)
-    #   rescue Aws::Waiters::Errors::WaiterFailed
-    #     # resource did not enter the desired state in time
-    #   end
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
     #
     # @param [Symbol] waiter_name The name of the waiter. See {#waiter_names}
     #   for a full list of supported waiters.

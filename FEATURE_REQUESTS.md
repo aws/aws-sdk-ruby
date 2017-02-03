@@ -10,6 +10,46 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Lazy Building of Resource Objects from Raw Responses
+
+There are performance/memory questions around some very large responses (such
+as an unfiltered request to `Aws::EC2::Client#DescribeImages` API), especially
+when they are turned into even larger resource objects in memory. One feature
+request is to cut down on this memory usage, perhaps by lazily building resource
+objects, if possible. This feature request has an investigation component.
+
+See [related GitHub issue #1379](https://github.com/aws/aws-sdk-ruby/issues/1379).
+
+### Add a Way to Extract Queue Name from Aws::SQS::Errors::NonExistentQueue
+
+Currently available from `context`, but could some easier way to get this be
+added when exception functionality is enhanced?
+
+See [related GitHub issue #1352](https://github.com/aws/aws-sdk-ruby/issues/1352).
+
+### Add StringIO Support for Aws::S3::Object#upload_file
+
+See [related GitHub issue #1351](https://github.com/aws/aws-sdk-ruby/issues/1351).
+
+### Add JSON Serialization Helper (Related to SNS Client API)
+
+See [related GitHub issue #1299](https://github.com/aws/aws-sdk-ruby/issues/1299).
+
+### Add NatGateways to the Aws::EC2::Vpc Resource Object
+
+See [related GitHub issue #1323](https://github.com/aws/aws-sdk-ruby/issues/1323).
+
+### Add Use of list_objects_v2 to the S3 Resource Object
+
+See [related GitHub issue #1335](https://github.com/aws/aws-sdk-ruby/issues/1335).
+
+### Add Randomness to Retry Backoff
+
+Currently, the default retry algorithm uses exactly the same backoff time for
+every execution. Adding some randomness to this would be accepted as a PR.
+
+See [related GitHub issue #1336](https://github.com/aws/aws-sdk-ruby/issues/1336).
+
 ### Handle S3 #exists? Edge Cases
 
 See [related GitHub issue #1267](https://github.com/aws/aws-sdk-ruby/issues/1267).
@@ -40,6 +80,8 @@ We cannot change the exception classing behavior now, but exposing the raw
 exception response fields could improve the exception handling experience.
 
 See [related GitHub issue #1189](https://github.com/aws/aws-sdk-ruby/issues/1189).
+
+See [related GitHub issue #1376](https://github.com/aws/aws-sdk-ruby/issues/1376).
 
 ### Add Waiters for Aws::SSM
 
@@ -178,12 +220,6 @@ as headers and to not hoist them to querystring of a request URI. This would be 
 functionality in general.
 
 See [related GitHub issue #874](https://github.com/aws/aws-sdk-ruby/issues/874).
-
-### Extract SigV4 Signer into a Gem
-
-More services have interfaces like Amazon Elasticsearch Service where it would be useful to use the signature version 4 interface directly. It is currently marked API private. It should be extracted, polished and released as a separate gem.
-
-See [related GitHub issue #961](https://github.com/aws/aws-sdk-ruby/issues/961).
 
 ### Add Proxy Option to Instance Profile Credentials
 

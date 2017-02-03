@@ -22,7 +22,8 @@ module Aws
         'proxy-authorization',
         'from',
         'referer',
-        'user-agent'
+        'user-agent',
+        'x-amzn-trace-id'
       ]
 
       def self.sign(context)
