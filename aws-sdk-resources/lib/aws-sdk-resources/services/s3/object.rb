@@ -226,6 +226,15 @@ module Aws
       #     # and the parts are uploaded in parallel
       #     obj.upload_file('/path/to/very_large_file')
       #
+      # You can provide a block progress updates as bytes are read from disk
+      # Only applies to multipart uploads.
+      #
+      #     # large files are automatically split into parts
+      #     # and the parts are uploaded in parallel
+      #     obj.upload_file('/path/to/very_large_file') do |bytes_read|
+      #       puts "Read #{bytes_read}"
+      #     end
+      #
       # @param [String,Pathname,File,Tempfile] source A file or path to a file
       #   on the local file system that should be uploaded to this object.
       #   If you pass an open file object, then it is your responsibility
@@ -234,6 +243,8 @@ module Aws
       # @option options [Integer] :multipart_threshold (15728640) Files larger
       #   than `:multipart_threshold` are uploaded using the S3 multipart APIs.
       #   Default threshold is 15MB.
+      #
+      # @yieldparam [Integer] # of bytes read from disk during upload
       #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
@@ -244,11 +255,11 @@ module Aws
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
       #
-      def upload_file(source, options = {})
+      def upload_file(source, options = {}, &block)
         uploader = FileUploader.new(
           multipart_threshold: options.delete(:multipart_threshold),
           client: client)
-        uploader.upload(source, options.merge(bucket: bucket_name, key: key))
+        uploader.upload(source, options.merge(bucket: bucket_name, key: key), &block)
         true
       end
 

@@ -26,10 +26,11 @@ module Aws
       # @param [String,Pathname,File,Tempfile] source
       # @option options [required,String] :bucket
       # @option options [required,String] :key
+      # @yieldparam [Integer] # of bytes read from disk during Multipart upload
       # @return [void]
-      def upload(source, options = {})
+      def upload(source, options = {}, &block)
         if File.size(source) >= multipart_threshold
-          MultipartFileUploader.new(@options).upload(source, options)
+          MultipartFileUploader.new(@options).upload(source, options, &block)
         else
           put_object(source, options)
         end

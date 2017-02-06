@@ -10,12 +10,14 @@ module Aws
       # @option options [required,Integer] :offset The file part will read
       #   starting at this byte offset.
       # @option options [required,Integer] :size The maximum number of bytes to
+      # @yieldparam [Integer] # of bytes read from disk
       #   read from the `:offset`.
-      def initialize(options = {})
+      def initialize(options = {}, &block)
         @source = options[:source]
         @first_byte = options[:offset]
         @last_byte = @first_byte + options[:size]
         @size = options[:size]
+        @read_block = block
         @file = nil
       end
 
@@ -63,6 +65,7 @@ module Aws
           data = @file.read(remaining_bytes)
         end
         @position += data ? data.bytesize : 0
+        @read_block.call data ? data.bytesize : 0 if @read_block
         output_buffer ? output_buffer.replace(data || '') : data
       end
 
