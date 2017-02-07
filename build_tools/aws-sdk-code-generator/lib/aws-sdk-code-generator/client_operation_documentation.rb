@@ -35,6 +35,7 @@ module AwsSdkCodeGenerator
         given_examples(examples),
         request_syntax_example(method_name, operation, api),
         response_structure_example(operation, api),
+        see_also_tag(operation, api),
       ], block_comment: false)
     end
     alias to_s to_str
@@ -131,5 +132,9 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def see_also_tag(operation, api)
+      uid = api['metadata']['uid']
+      "# " + Crosslink.tag_string(uid, operation['name']) unless !Crosslink.taggable?(uid)
+    end
   end
 end
