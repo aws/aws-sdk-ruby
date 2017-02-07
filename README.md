@@ -318,6 +318,7 @@ to be backwards compatible.
 | Amazon Kinesis                      | Kinesis                      | 2013-12-02  |
 | Amazon Kinesis Analytics            | KinesisAnalytics             | 2015-08-14  |
 | Amazon Kinesis Firehose             | Firehose                     | 2015-08-04  |
+| Amazon Lex Runtime Service          | Lex                          | 2016-11-28  |
 | Amazon Lightsail                    | Lightsail                    | 2016-11-28  |
 | Amazon Machine Learning             | MachineLearning              | 2014-12-12  |
 | Amazon Pinpoint                     | Pinpoint                     | 2016-12-01  |
@@ -337,8 +338,9 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | WorkSpaces                   | 2015-04-08  |
 | Application Auto Scaling            | ApplicationAutoScaling       | 2016-02-06  |
 | Auto Scaling                        | AutoScaling                  | 2011-01-01  |
-| Elastic Load Balancing              | ElasticLoadBalancing         | 2012-06-01  |
 | Elastic Load Balancing              | ElasticLoadBalancingV2       | 2015-12-01  |
+| Elastic Load Balancing              | ElasticLoadBalancing         | 2012-06-01  |
+| MTurkRequesterService               | MTurk                        | 2017-01-17  |
 
 ## License
 

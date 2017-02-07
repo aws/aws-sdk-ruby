@@ -80,10 +80,12 @@ module Aws
     KMS
     Lambda
     LambdaPreview
+    Lex
     Lightsail
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
+    MTurk
     OpsWorks
     OpsWorksCM
     Pinpoint

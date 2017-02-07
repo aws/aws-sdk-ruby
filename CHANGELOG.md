@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
+
+* Feature - Aws::MTurk - Added support for a new service, MTurkRequesterService.
+
+* Feature - Aws::Lex - Added support for a new service, Amazon Lex Runtime Service.
+
 2.7.3 (2017-01-26)
 ------------------
 

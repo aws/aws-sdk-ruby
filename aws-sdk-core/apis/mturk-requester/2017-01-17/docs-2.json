@@ -1,0 +1,1136 @@
+{
+  "version": "2.0",
+  "service": "<fullname>Amazon Mechanical Turk API Reference</fullname>",
+  "operations": {
+    "AcceptQualificationRequest": "<p> The <code>AcceptQualificationRequest</code> operation approves a Worker's request for a Qualification. </p> <p> Only the owner of the Qualification type can grant a Qualification request for that type. </p> <p> A successful request for the <code>AcceptQualificationRequest</code> operation returns with no errors and an empty body. </p>",
+    "ApproveAssignment": "<p> The <code>ApproveAssignment</code> operation approves the results of a completed assignment. </p> <p> Approving an assignment initiates two payments from the Requester's Amazon.com account </p> <ul> <li> <p> The Worker who submitted the results is paid the reward specified in the HIT. </p> </li> <li> <p> Amazon Mechanical Turk fees are debited. </p> </li> </ul> <p> If the Requester's account does not have adequate funds for these payments, the call to ApproveAssignment returns an exception, and the approval is not processed. You can include an optional feedback message with the approval, which the Worker can see in the Status section of the web site. </p> <p> You can also call this operation for assignments that were previous rejected and approve them by explicitly overriding the previous rejection. This only works on rejected assignments that were submitted within the previous 30 days and only if the assignment's related HIT has not been deleted. </p>",
+    "AssociateQualificationWithWorker": "<p> The <code>AssociateQualificationWithWorker</code> operation gives a Worker a Qualification. <code>AssociateQualificationWithWorker</code> does not require that the Worker submit a Qualification request. It gives the Qualification directly to the Worker. </p> <p> You can only assign a Qualification of a Qualification type that you created (using the <code>CreateQualificationType</code> operation). </p> <note> <p> Note: <code>AssociateQualificationWithWorker</code> does not affect any pending Qualification requests for the Qualification by the Worker. If you assign a Qualification to a Worker, then later grant a Qualification request made by the Worker, the granting of the request may modify the Qualification score. To resolve a pending Qualification request without affecting the Qualification the Worker already has, reject the request with the <code>RejectQualificationRequest</code> operation. </p> </note>",
+    "CreateAdditionalAssignmentsForHIT": "<p> The <code>CreateAdditionalAssignmentsForHIT</code> operation increases the maximum number of assignments of an existing HIT. </p> <p> To extend the maximum number of assignments, specify the number of additional assignments.</p> <note> <ul> <li> <p>HITs created with fewer than 10 assignments cannot be extended to have 10 or more assignments. Attempting to add assignments in a way that brings the total number of assignments for a HIT from fewer than 10 assignments to 10 or more assignments will result in an <code>AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease</code> exception.</p> </li> <li> <p>HITs that were created before July 22, 2015 cannot be extended. Attempting to extend HITs that were created before July 22, 2015 will result in an <code>AWS.MechanicalTurk.HITTooOldForExtension</code> exception. </p> </li> </ul> </note>",
+    "CreateHIT": "<p>The <code>CreateHIT</code> operation creates a new Human Intelligence Task (HIT). The new HIT is made available for Workers to find and accept on the Amazon Mechanical Turk website. </p> <p> This operation allows you to specify a new HIT by passing in values for the properties of the HIT, such as its title, reward amount and number of assignments. When you pass these values to <code>CreateHIT</code>, a new HIT is created for you, with a new <code>HITTypeID</code>. The HITTypeID can be used to create additional HITs in the future without needing to specify common parameters such as the title, description and reward amount each time.</p> <p> An alternative way to create HITs is to first generate a HITTypeID using the <code>CreateHITType</code> operation and then call the <code>CreateHITWithHITType</code> operation. This is the recommended best practice for Requesters who are creating large numbers of HITs. </p> <p>CreateHIT also supports several ways to provide question data: by providing a value for the <code>Question</code> parameter that fully specifies the contents of the HIT, or by providing a <code>HitLayoutId</code> and associated <code>HitLayoutParameters</code>. </p> <note> <p> If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see <a href=\"https://requester.mturk.com/pricing\">Amazon Mechanical Turk Pricing</a>.</p> </note>",
+    "CreateHITType": "<p> The <code>CreateHITType</code> operation creates a new HIT type. This operation allows you to define a standard set of HIT properties to use when creating HITs. If you register a HIT type with values that match an existing HIT type, the HIT type ID of the existing type will be returned. </p>",
+    "CreateHITWithHITType": "<p> The <code>CreateHITWithHITType</code> operation creates a new Human Intelligence Task (HIT) using an existing HITTypeID generated by the <code>CreateHITType</code> operation. </p> <p> This is an alternative way to create HITs from the <code>CreateHIT</code> operation. This is the recommended best practice for Requesters who are creating large numbers of HITs. </p> <p>CreateHITWithHITType also supports several ways to provide question data: by providing a value for the <code>Question</code> parameter that fully specifies the contents of the HIT, or by providing a <code>HitLayoutId</code> and associated <code>HitLayoutParameters</code>. </p> <note> <p> If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see <a href=\"https://requester.mturk.com/pricing\">Amazon Mechanical Turk Pricing</a>. </p> </note>",
+    "CreateQualificationType": "<p> The <code>CreateQualificationType</code> operation creates a new Qualification type, which is represented by a <code>QualificationType</code> data structure. </p>",
+    "CreateWorkerBlock": "<p>The <code>CreateWorkerBlock</code> operation allows you to prevent a Worker from working on your HITs. For example, you can block a Worker who is producing poor quality work. You can block up to 100,000 Workers.</p>",
+    "DeleteHIT": "<p> The <code>DeleteHIT</code> operation is used to delete HIT that is no longer needed. Only the Requester who created the HIT can delete it. </p> <p> You can only dispose of HITs that are in the <code>Reviewable</code> state, with all of their submitted assignments already either approved or rejected. If you call the DeleteHIT operation on a HIT that is not in the <code>Reviewable</code> state (for example, that has not expired, or still has active assignments), or on a HIT that is Reviewable but without all of its submitted assignments already approved or rejected, the service will return an error. </p> <note> <ul> <li> <p> HITs are automatically disposed of after 120 days. </p> </li> <li> <p> After you dispose of a HIT, you can no longer approve the HIT's rejected assignments. </p> </li> <li> <p> Disposed HITs are not returned in results for the ListHITs operation. </p> </li> <li> <p> Disposing HITs can improve the performance of operations such as ListReviewableHITs and ListHITs. </p> </li> </ul> </note>",
+    "DeleteQualificationType": "<p> The <code>DeleteQualificationType</code> deletes a Qualification type and deletes any HIT types that are associated with the Qualification type. </p> <p>This operation does not revoke Qualifications already assigned to Workers because the Qualifications might be needed for active HITs. If there are any pending requests for the Qualification type, Amazon Mechanical Turk rejects those requests. After you delete a Qualification type, you can no longer use it to create HITs or HIT types.</p> <note> <p>DeleteQualificationType must wait for all the HITs that use the deleted Qualification type to be deleted before completing. It may take up to 48 hours before DeleteQualificationType completes and the unique name of the Qualification type is available for reuse with CreateQualificationType.</p> </note>",
+    "DeleteWorkerBlock": "<p>The <code>DeleteWorkerBlock</code> operation allows you to reinstate a blocked Worker to work on your HITs. This operation reverses the effects of the CreateWorkerBlock operation. You need the Worker ID to use this operation. If the Worker ID is missing or invalid, this operation fails and returns the message “WorkerId is invalid.” If the specified Worker is not blocked, this operation returns successfully.</p>",
+    "DisassociateQualificationFromWorker": "<p> The <code>DisassociateQualificationFromWorker</code> revokes a previously granted Qualification from a user. </p> <p> You can provide a text message explaining why the Qualification was revoked. The user who had the Qualification can see this message. </p>",
+    "GetAccountBalance": "<p>The <code>GetAccountBalance</code> operation retrieves the amount of money in your Amazon Mechanical Turk account.</p>",
+    "GetAssignment": "<p> The <code>GetAssignment</code> operation retrieves the details of the specified Assignment. </p>",
+    "GetFileUploadURL": "<p> The <code>GetFileUploadURL</code> operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. </p>",
+    "GetHIT": "<p> The <code>GetHIT</code> operation retrieves the details of the specified HIT. </p>",
+    "GetQualificationScore": "<p> The <code>GetQualificationScore</code> operation returns the value of a Worker's Qualification for a given Qualification type. </p> <p> To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID is included in the assignment data returned by the <code>ListAssignmentsForHIT</code> operation. </p> <p>Only the owner of a Qualification type can query the value of a Worker's Qualification of that type.</p>",
+    "GetQualificationType": "<p> The <code>GetQualificationType</code>operation retrieves information about a Qualification type using its ID. </p>",
+    "ListAssignmentsForHIT": "<p> The <code>ListAssignmentsForHIT</code> operation retrieves completed assignments for a HIT. You can use this operation to retrieve the results for a HIT. </p> <p> You can get assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a HIT requested multiple assignments, and has received some results but has not yet become Reviewable, you can still retrieve the partial results with this operation. </p> <p> Use the AssignmentStatus parameter to control which set of assignments for a HIT are returned. The ListAssignmentsForHIT operation can return submitted assignments awaiting approval, or it can return assignments that have already been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get assignments that have already been approved and rejected together in one result set. </p> <p> Only the Requester who created the HIT can retrieve the assignments for that HIT. </p> <p> Results are sorted and divided into numbered pages and the operation returns a single page of results. You can use the parameters of the operation to control sorting and pagination. </p>",
+    "ListBonusPayments": "<p> The <code>ListBonusPayments</code> operation retrieves the amounts of bonuses you have paid to Workers for a given HIT or assignment. </p>",
+    "ListHITs": "<p> The <code>ListHITs</code> operation returns all of a Requester's HITs. The operation returns HITs of any status, except for HITs that have been deleted of with the DeleteHIT operation or that have been auto-deleted. </p>",
+    "ListHITsForQualificationType": "<p> The <code>ListHITsForQualificationType</code> operation returns the HITs that use the given Qualification type for a Qualification requirement. The operation returns HITs of any status, except for HITs that have been deleted with the <code>DeleteHIT</code> operation or that have been auto-deleted. </p>",
+    "ListQualificationRequests": "<p> The <code>ListQualificationRequests</code> operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. </p>",
+    "ListQualificationTypes": "<p> The <code>ListQualificationRequests</code> operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. </p>",
+    "ListReviewPolicyResultsForHIT": "<p> The <code>ListReviewPolicyResultsForHIT</code> operation retrieves the computed results and the actions taken in the course of executing your Review Policies for a given HIT. For information about how to specify Review Policies when you call CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both Assignment-level and HIT-level review results. </p>",
+    "ListReviewableHITs": "<p> The <code>ListReviewableHITs</code> operation retrieves the HITs with Status equal to Reviewable or Status equal to Reviewing that belong to the Requester calling the operation. </p>",
+    "ListWorkerBlocks": "<p>The <code>ListWorkersBlocks</code> operation retrieves a list of Workers who are blocked from working on your HITs.</p>",
+    "ListWorkersWithQualificationType": "<p> The <code>ListWorkersWithQualificationType</code> operation returns all of the Workers that have been associated with a given Qualification type. </p>",
+    "NotifyWorkers": "<p> The <code>NotifyWorkers</code> operation sends an email to one or more Workers that you specify with the Worker ID. You can specify up to 100 Worker IDs to send the same message with a single call to the NotifyWorkers operation. The NotifyWorkers operation will send a notification email to a Worker only if you have previously approved or rejected work from the Worker. </p>",
+    "RejectAssignment": "<p> The <code>RejectAssignment</code> operation rejects the results of a completed assignment. </p> <p> You can include an optional feedback message with the rejection, which the Worker can see in the Status section of the web site. When you include a feedback message with the rejection, it helps the Worker understand why the assignment was rejected, and can improve the quality of the results the Worker submits in the future. </p> <p> Only the Requester who created the HIT can reject an assignment for the HIT. </p>",
+    "RejectQualificationRequest": "<p> The <code>RejectQualificationRequest</code> operation rejects a user's request for a Qualification. </p> <p> You can provide a text message explaining why the request was rejected. The Worker who made the request can see this message.</p>",
+    "SendBonus": "<p> The <code>SendBonus</code> operation issues a payment of money from your account to a Worker. This payment happens separately from the reward you pay to the Worker when you approve the Worker's assignment. The SendBonus operation requires the Worker's ID and the assignment ID as parameters to initiate payment of the bonus. You must include a message that explains the reason for the bonus payment, as the Worker may not be expecting the payment. Amazon Mechanical Turk collects a fee for bonus payments, similar to the HIT listing fee. This operation fails if your account does not have enough funds to pay for both the bonus and the fees. </p>",
+    "SendTestEventNotification": "<p> The <code>SendTestEventNotification</code> operation causes Amazon Mechanical Turk to send a notification message as if a HIT event occurred, according to the provided notification specification. This allows you to test notifications without setting up notifications for a real HIT type and trying to trigger them using the website. When you call this operation, the service attempts to send the test notification immediately. </p>",
+    "UpdateExpirationForHIT": "<p> The <code>UpdateExpirationForHIT</code> operation allows you update the expiration time of a HIT. If you update it to a time in the past, the HIT will be immediately expired. </p>",
+    "UpdateHITReviewStatus": "<p> The <code>UpdateHITReviewStatus</code> operation updates the status of a HIT. If the status is Reviewable, this operation can update the status to Reviewing, or it can revert a Reviewing HIT back to the Reviewable status. </p>",
+    "UpdateHITTypeOfHIT": "<p> The <code>UpdateHITTypeOfHIT</code> operation allows you to change the HITType properties of a HIT. This operation disassociates the HIT from its old HITType properties and associates it with the new HITType properties. The HIT takes on the properties of the new HITType in place of the old ones. </p>",
+    "UpdateNotificationSettings": "<p> The <code>UpdateNotificationSettings</code> operation creates, updates, disables or re-enables notifications for a HIT type. If you call the UpdateNotificationSettings operation for a HIT type that already has a notification specification, the operation replaces the old specification with a new one. You can call the UpdateNotificationSettings operation to enable or disable notifications for the HIT type, without having to modify the notification specification itself by providing updates to the Active status without specifying a new notification specification. To change the Active status of a HIT type's notifications, the HIT type must already have a notification specification, or one must be provided in the same call to <code>UpdateNotificationSettings</code>. </p>",
+    "UpdateQualificationType": "<p> The <code>UpdateQualificationType</code> operation modifies the attributes of an existing Qualification type, which is represented by a QualificationType data structure. Only the owner of a Qualification type can modify its attributes. </p> <p> Most attributes of a Qualification type can be changed after the type has been created. However, the Name and Keywords fields cannot be modified. The RetryDelayInSeconds parameter can be modified or added to change the delay or to enable retries, but RetryDelayInSeconds cannot be used to disable retries. </p> <p> You can use this operation to update the test for a Qualification type. The test is updated based on the values specified for the Test, TestDurationInSeconds and AnswerKey parameters. All three parameters specify the updated test. If you are updating the test for a type, you must specify the Test and TestDurationInSeconds parameters. The AnswerKey parameter is optional; omitting it specifies that the updated test does not have an answer key. </p> <p> If you omit the Test parameter, the test for the Qualification type is unchanged. There is no way to remove a test from a Qualification type that has one. If the type already has a test, you cannot update it to be AutoGranted. If the Qualification type does not have a test and one is provided by an update, the type will henceforth have a test. </p> <p> If you want to update the test duration or answer key for an existing test without changing the questions, you must specify a Test parameter with the original questions, along with the updated values. </p> <p> If you provide an updated Test but no AnswerKey, the new test will not have an answer key. Requests for such Qualifications must be granted manually. </p> <p> You can also update the AutoGranted and AutoGrantedValue attributes of the Qualification type.</p>"
+  },
+  "shapes": {
+    "AcceptQualificationRequestRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "AcceptQualificationRequestResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ApproveAssignmentRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ApproveAssignmentResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "Assignment": {
+      "base": null,
+      "refs": {
+        "AssignmentList$member": null,
+        "GetAssignmentResponse$Assignment": null
+      }
+    },
+    "AssignmentList": {
+      "base": null,
+      "refs": {
+        "ListAssignmentsForHITResponse$Assignments": null
+      }
+    },
+    "AssignmentStatus": {
+      "base": null,
+      "refs": {
+        "Assignment$AssignmentStatus": null,
+        "AssignmentStatusList$member": null
+      }
+    },
+    "AssignmentStatusList": {
+      "base": null,
+      "refs": {
+        "ListAssignmentsForHITRequest$AssignmentStatuses": "<p>The status of the assignments to return: Submitted | Approved | Rejected</p>"
+      }
+    },
+    "AssociateQualificationWithWorkerRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "AssociateQualificationWithWorkerResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "BonusPayment": {
+      "base": null,
+      "refs": {
+        "BonusPaymentList$member": null
+      }
+    },
+    "BonusPaymentList": {
+      "base": null,
+      "refs": {
+        "ListBonusPaymentsResponse$BonusPayments": null
+      }
+    },
+    "Boolean": {
+      "base": null,
+      "refs": {
+        "ApproveAssignmentRequest$OverrideRejection": "<p> A flag indicating that an assignment should be approved even if it was previously rejected. Defaults to <code>False</code>. </p>",
+        "AssociateQualificationWithWorkerRequest$SendNotification": "<p> Specifies whether to send a notification email message to the Worker saying that the qualification was assigned to the Worker. Note: this is true by default. </p>",
+        "CreateQualificationTypeRequest$AutoGranted": "<p>Specifies whether requests for the Qualification type are granted immediately, without prompting the Worker with a Qualification test.</p> <p>Constraints: If the Test parameter is specified, this parameter cannot be true.</p>",
+        "ListQualificationTypesRequest$MustBeRequestable": null,
+        "ListQualificationTypesRequest$MustBeOwnedByCaller": null,
+        "ListReviewPolicyResultsForHITRequest$RetrieveActions": "<p> Specify if the operation should retriev a list of the actions taken executing the Review Policies and their outcomes. </p>",
+        "ListReviewPolicyResultsForHITRequest$RetrieveResults": "<p> Specify if the operation should retrieve a list of the results computed by the Review Policies. </p>",
+        "QualificationRequirement$RequiredToPreview": null,
+        "QualificationType$IsRequestable": null,
+        "QualificationType$AutoGranted": null,
+        "UpdateHITReviewStatusRequest$Revert": "<p> Specifies how to update the HIT status. Default is <code>False</code>. </p> <ul> <li> <p> Setting this to false will only transition a HIT from <code>Reviewable</code> to <code>Reviewing</code> </p> </li> <li> <p> Setting this to true will only transition a HIT from <code>Reviewing</code> to <code>Reviewable</code> </p> </li> </ul>",
+        "UpdateNotificationSettingsRequest$Active": "<p> Specifies whether notifications are sent for HITs of this HIT type, according to the notification specification. You must specify either the Notification parameter or the Active parameter for the call to UpdateNotificationSettings to succeed. </p>",
+        "UpdateQualificationTypeRequest$AutoGranted": "<p>Specifies whether requests for the Qualification type are granted immediately, without prompting the Worker with a Qualification test.</p> <p>Constraints: If the Test parameter is specified, this parameter cannot be true.</p>"
+      }
+    },
+    "Comparator": {
+      "base": null,
+      "refs": {
+        "QualificationRequirement$Comparator": null
+      }
+    },
+    "CountryParameters": {
+      "base": null,
+      "refs": {
+        "Locale$Country": null,
+        "Locale$Subdivision": null
+      }
+    },
+    "CreateAdditionalAssignmentsForHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateAdditionalAssignmentsForHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateHITTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateHITTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateHITWithHITTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateHITWithHITTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateQualificationTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateQualificationTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateWorkerBlockRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CreateWorkerBlockResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "CustomerId": {
+      "base": null,
+      "refs": {
+        "Assignment$WorkerId": null,
+        "AssociateQualificationWithWorkerRequest$WorkerId": "<p> The ID of the Worker to whom the Qualification is being assigned. Worker IDs are included with submitted HIT assignments and Qualification requests. </p>",
+        "BonusPayment$WorkerId": null,
+        "CreateWorkerBlockRequest$WorkerId": "<p>The ID of the Worker to block.</p>",
+        "CustomerIdList$member": null,
+        "DeleteWorkerBlockRequest$WorkerId": "<p>The ID of the Worker to unblock.</p>",
+        "DisassociateQualificationFromWorkerRequest$WorkerId": "<p>The ID of the Worker who possesses the Qualification to be revoked.</p>",
+        "GetQualificationScoreRequest$WorkerId": "<p>The ID of the Worker whose Qualification is being updated.</p>",
+        "NotifyWorkersFailureStatus$WorkerId": null,
+        "Qualification$WorkerId": null,
+        "QualificationRequest$WorkerId": null,
+        "SendBonusRequest$WorkerId": "<p>The ID of the Worker being paid the bonus.</p>",
+        "WorkerBlock$WorkerId": null
+      }
+    },
+    "CustomerIdList": {
+      "base": null,
+      "refs": {
+        "NotifyWorkersRequest$WorkerIds": "<p>A list of Worker IDs you wish to notify. You can notify upto 100 Workers at a time.</p>"
+      }
+    },
+    "DeleteHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteQualificationTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteQualificationTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteWorkerBlockRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DeleteWorkerBlockResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DisassociateQualificationFromWorkerRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DisassociateQualificationFromWorkerResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "EntityId": {
+      "base": null,
+      "refs": {
+        "ApproveAssignmentRequest$AssignmentId": "<p> The ID of the assignment. The assignment must correspond to a HIT created by the Requester. </p>",
+        "Assignment$AssignmentId": null,
+        "Assignment$HITId": null,
+        "AssociateQualificationWithWorkerRequest$QualificationTypeId": "<p>The ID of the Qualification type to use for the assigned Qualification.</p>",
+        "BonusPayment$AssignmentId": null,
+        "CreateAdditionalAssignmentsForHITRequest$HITId": "<p>The ID of the HIT to extend.</p>",
+        "CreateHITRequest$HITLayoutId": "<p> The HITLayoutId allows you to use a pre-existing HIT design with placeholder values and create an additional HIT by providing those values as HITLayoutParameters. </p> <p> Constraints: Either a Question parameter or a HITLayoutId parameter must be provided. </p>",
+        "CreateHITTypeResponse$HITTypeId": null,
+        "CreateHITWithHITTypeRequest$HITTypeId": null,
+        "CreateHITWithHITTypeRequest$HITLayoutId": "<p> The HITLayoutId allows you to use a pre-existing HIT design with placeholder values and create an additional HIT by providing those values as HITLayoutParameters. </p> <p> Constraints: Either a Question parameter or a HITLayoutId parameter must be provided. </p>",
+        "DeleteHITRequest$HITId": "<p>The ID of the HIT to be deleted.</p>",
+        "DeleteQualificationTypeRequest$QualificationTypeId": "<p>The ID of the QualificationType to dispose.</p>",
+        "DisassociateQualificationFromWorkerRequest$QualificationTypeId": "<p>The ID of the Qualification type of the Qualification to be revoked.</p>",
+        "GetAssignmentRequest$AssignmentId": "<p>The ID of the Assignment to be retrieved.</p>",
+        "GetFileUploadURLRequest$AssignmentId": "<p>The ID of the assignment that contains the question with a FileUploadAnswer.</p>",
+        "GetHITRequest$HITId": "<p>The ID of the HIT to be retrieved.</p>",
+        "GetQualificationScoreRequest$QualificationTypeId": "<p>The ID of the QualificationType.</p>",
+        "GetQualificationTypeRequest$QualificationTypeId": "<p>The ID of the QualificationType.</p>",
+        "HIT$HITId": null,
+        "HIT$HITTypeId": null,
+        "HIT$HITGroupId": null,
+        "HIT$HITLayoutId": null,
+        "ListAssignmentsForHITRequest$HITId": "<p>The ID of the HIT.</p>",
+        "ListBonusPaymentsRequest$HITId": "<p>The ID of the HIT associated with the bonus payments to retrieve. If not specified, all bonus payments for all assignments for the given HIT are returned. Either the HITId parameter or the AssignmentId parameter must be specified</p>",
+        "ListBonusPaymentsRequest$AssignmentId": "<p>The ID of the assignment associated with the bonus payments to retrieve. If specified, only bonus payments for the given assignment are returned. Either the HITId parameter or the AssignmentId parameter must be specified</p>",
+        "ListHITsForQualificationTypeRequest$QualificationTypeId": "<p> The ID of the Qualification type to use when querying HITs. </p>",
+        "ListQualificationRequestsRequest$QualificationTypeId": "<p>The ID of the QualificationType.</p>",
+        "ListReviewPolicyResultsForHITRequest$HITId": "<p>The unique identifier of the HIT to retrieve review results for.</p>",
+        "ListReviewPolicyResultsForHITResponse$HITId": null,
+        "ListReviewableHITsRequest$HITTypeId": "<p> The ID of the HIT type of the HITs to consider for the query. If not specified, all HITs for the Reviewer are considered </p>",
+        "ListWorkersWithQualificationTypeRequest$QualificationTypeId": null,
+        "Qualification$QualificationTypeId": null,
+        "QualificationRequest$QualificationTypeId": null,
+        "QualificationType$QualificationTypeId": null,
+        "RejectAssignmentRequest$AssignmentId": "<p> The ID of the assignment. The assignment must correspond to a HIT created by the Requester. </p>",
+        "ReviewActionDetail$ActionId": null,
+        "ReviewActionDetail$TargetId": null,
+        "ReviewResultDetail$ActionId": null,
+        "ReviewResultDetail$SubjectId": null,
+        "ReviewResultDetail$QuestionId": null,
+        "SendBonusRequest$AssignmentId": "<p>The ID of the assignment for which this bonus is paid.</p>",
+        "UpdateExpirationForHITRequest$HITId": "<p> The HIT to update. </p>",
+        "UpdateHITReviewStatusRequest$HITId": "<p> The ID of the HIT to update. </p>",
+        "UpdateHITTypeOfHITRequest$HITId": "<p>The HIT to update.</p>",
+        "UpdateHITTypeOfHITRequest$HITTypeId": "<p>The ID of the new HIT type.</p>",
+        "UpdateNotificationSettingsRequest$HITTypeId": "<p> The ID of the HIT type whose notification specification is being updated. </p>",
+        "UpdateQualificationTypeRequest$QualificationTypeId": "<p>The ID of the Qualification type to update.</p>"
+      }
+    },
+    "EventType": {
+      "base": null,
+      "refs": {
+        "EventTypeList$member": null,
+        "SendTestEventNotificationRequest$TestEventType": "<p> The event to simulate to test the notification specification. This event is included in the test message even if the notification specification does not include the event type. The notification specification does not filter out the test event. </p>"
+      }
+    },
+    "EventTypeList": {
+      "base": null,
+      "refs": {
+        "NotificationSpecification$EventTypes": null
+      }
+    },
+    "ExceptionMessage": {
+      "base": null,
+      "refs": {
+        "RequestError$Message": null,
+        "ServiceFault$Message": null
+      }
+    },
+    "GetAccountBalanceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetAccountBalanceResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetAssignmentRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetAssignmentResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetFileUploadURLRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetFileUploadURLResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetQualificationScoreRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetQualificationScoreResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetQualificationTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetQualificationTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "HIT": {
+      "base": null,
+      "refs": {
+        "CreateHITResponse$HIT": null,
+        "CreateHITWithHITTypeResponse$HIT": null,
+        "GetAssignmentResponse$HIT": null,
+        "GetHITResponse$HIT": null,
+        "HITList$member": null
+      }
+    },
+    "HITLayoutParameter": {
+      "base": null,
+      "refs": {
+        "HITLayoutParameterList$member": null
+      }
+    },
+    "HITLayoutParameterList": {
+      "base": null,
+      "refs": {
+        "CreateHITRequest$HITLayoutParameters": "<p> If the HITLayoutId is provided, any placeholder values must be filled in with values using the HITLayoutParameter structure. For more information, see HITLayout. </p>",
+        "CreateHITWithHITTypeRequest$HITLayoutParameters": "<p> If the HITLayoutId is provided, any placeholder values must be filled in with values using the HITLayoutParameter structure. For more information, see HITLayout. </p>"
+      }
+    },
+    "HITList": {
+      "base": null,
+      "refs": {
+        "ListHITsForQualificationTypeResponse$HITs": null,
+        "ListHITsResponse$HITs": null,
+        "ListReviewableHITsResponse$HITs": null
+      }
+    },
+    "HITReviewStatus": {
+      "base": null,
+      "refs": {
+        "HIT$HITReviewStatus": null
+      }
+    },
+    "HITStatus": {
+      "base": null,
+      "refs": {
+        "HIT$HITStatus": null
+      }
+    },
+    "IdempotencyToken": {
+      "base": null,
+      "refs": {
+        "CreateAdditionalAssignmentsForHITRequest$UniqueRequestToken": "<p> A unique identifier for this request, which allows you to retry the call on error without extending the HIT multiple times. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the extend HIT already exists in the system from a previous call using the same <code>UniqueRequestToken</code>, subsequent calls will return an error with a message containing the request ID. </p>",
+        "CreateHITRequest$UniqueRequestToken": "<p> A unique identifier for this request which allows you to retry the call on error without creating duplicate HITs. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the HIT already exists in the system from a previous call using the same UniqueRequestToken, subsequent calls will return a AWS.MechanicalTurk.HitAlreadyExists error with a message containing the HITId. </p> <note> <p> Note: It is your responsibility to ensure uniqueness of the token. The unique token expires after 24 hours. Subsequent calls using the same UniqueRequestToken made after the 24 hour limit could create duplicate HITs. </p> </note>",
+        "CreateHITWithHITTypeRequest$UniqueRequestToken": "<p> A unique identifier for this request which allows you to retry the call on error without creating duplicate HITs. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the HIT already exists in the system from a previous call using the same UniqueRequestToken, subsequent calls will return a AWS.MechanicalTurk.HitAlreadyExists error with a message containing the HITId. </p> <note> <p> Note: It is your responsibility to ensure uniqueness of the token. The unique token expires after 24 hours. Subsequent calls using the same UniqueRequestToken made after the 24 hour limit could create duplicate HITs. </p> </note>",
+        "SendBonusRequest$UniqueRequestToken": "<p>A unique identifier for this request, which allows you to retry the call on error without granting multiple bonuses. This is useful in cases such as network timeouts where it is unclear whether or not the call succeeded on the server. If the bonus already exists in the system from a previous call using the same UniqueRequestToken, subsequent calls will return an error with a message containing the request ID.</p>"
+      }
+    },
+    "Integer": {
+      "base": null,
+      "refs": {
+        "AcceptQualificationRequestRequest$IntegerValue": "<p> The value of the Qualification. You can omit this value if you are using the presence or absence of the Qualification as the basis for a HIT requirement. </p>",
+        "AssociateQualificationWithWorkerRequest$IntegerValue": "<p>The value of the Qualification to assign.</p>",
+        "CreateAdditionalAssignmentsForHITRequest$NumberOfAdditionalAssignments": "<p>The number of additional assignments to request for this HIT.</p>",
+        "CreateHITRequest$MaxAssignments": "<p> The number of times the HIT can be accepted and completed before the HIT becomes unavailable. </p>",
+        "CreateHITWithHITTypeRequest$MaxAssignments": "<p> The number of times the HIT can be accepted and completed before the HIT becomes unavailable. </p>",
+        "CreateQualificationTypeRequest$AutoGrantedValue": "<p>The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.</p>",
+        "HIT$MaxAssignments": null,
+        "HIT$NumberOfAssignmentsPending": null,
+        "HIT$NumberOfAssignmentsAvailable": null,
+        "HIT$NumberOfAssignmentsCompleted": null,
+        "IntegerList$member": null,
+        "ListAssignmentsForHITResponse$NumResults": null,
+        "ListBonusPaymentsResponse$NumResults": null,
+        "ListHITsForQualificationTypeResponse$NumResults": null,
+        "ListHITsResponse$NumResults": null,
+        "ListQualificationRequestsResponse$NumResults": null,
+        "ListQualificationTypesResponse$NumResults": null,
+        "ListReviewableHITsResponse$NumResults": null,
+        "ListWorkerBlocksResponse$NumResults": null,
+        "ListWorkersWithQualificationTypeResponse$NumResults": null,
+        "Qualification$IntegerValue": null,
+        "QualificationType$AutoGrantedValue": null,
+        "UpdateQualificationTypeRequest$AutoGrantedValue": "<p>The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.</p>"
+      }
+    },
+    "IntegerList": {
+      "base": null,
+      "refs": {
+        "QualificationRequirement$IntegerValues": null
+      }
+    },
+    "ListAssignmentsForHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListAssignmentsForHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListAssignmentsForHITSortProperty": {
+      "base": null,
+      "refs": {
+        "ListAssignmentsForHITRequest$SortProperty": null
+      }
+    },
+    "ListBonusPaymentsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListBonusPaymentsResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListHITsForQualificationTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListHITsForQualificationTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListHITsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListHITsResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListHITsSortProperty": {
+      "base": null,
+      "refs": {
+        "ListHITsRequest$SortProperty": "<p>The field on which to sort the results returned by the operation: Title | Reward | Expiration | CreationTime | Enumeration</p>"
+      }
+    },
+    "ListQualificationRequestsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListQualificationRequestsResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListQualificationRequestsSortProperty": {
+      "base": null,
+      "refs": {
+        "ListQualificationRequestsRequest$SortProperty": null
+      }
+    },
+    "ListQualificationTypesRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListQualificationTypesResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListQualificationTypesSortProperty": {
+      "base": null,
+      "refs": {
+        "ListQualificationTypesRequest$SortProperty": null
+      }
+    },
+    "ListReviewPolicyResultsForHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListReviewPolicyResultsForHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListReviewableHITsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListReviewableHITsResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListReviewableHITsSortProperty": {
+      "base": null,
+      "refs": {
+        "ListReviewableHITsRequest$SortProperty": null
+      }
+    },
+    "ListWorkerBlocksRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListWorkerBlocksResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListWorkersWithQualificationTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListWorkersWithQualificationTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "Locale": {
+      "base": "<p>The Locale data structure represents a geographical region or location.</p>",
+      "refs": {
+        "LocaleList$member": null,
+        "Qualification$LocaleValue": null
+      }
+    },
+    "LocaleList": {
+      "base": null,
+      "refs": {
+        "QualificationRequirement$LocaleValues": null
+      }
+    },
+    "Long": {
+      "base": null,
+      "refs": {
+        "CreateHITRequest$AutoApprovalDelayInSeconds": "<p> The number of seconds after an assignment for the HIT has been submitted, after which the assignment is considered Approved automatically unless the Requester explicitly rejects it. </p>",
+        "CreateHITRequest$LifetimeInSeconds": "<p> An amount of time, in seconds, after which the HIT is no longer available for users to accept. After the lifetime of the HIT elapses, the HIT no longer appears in HIT searches, even if not all of the assignments for the HIT have been accepted. </p>",
+        "CreateHITRequest$AssignmentDurationInSeconds": "<p> The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. </p>",
+        "CreateHITTypeRequest$AutoApprovalDelayInSeconds": "<p> The number of seconds after an assignment for the HIT has been submitted, after which the assignment is considered Approved automatically unless the Requester explicitly rejects it. </p>",
+        "CreateHITTypeRequest$AssignmentDurationInSeconds": "<p> The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. </p>",
+        "CreateHITWithHITTypeRequest$LifetimeInSeconds": "<p> An amount of time, in seconds, after which the HIT is no longer available for users to accept. After the lifetime of the HIT elapses, the HIT no longer appears in HIT searches, even if not all of the assignments for the HIT have been accepted. </p>",
+        "CreateQualificationTypeRequest$RetryDelayInSeconds": "<p>The number of seconds that a Worker must wait after requesting a Qualification of the Qualification type before the worker can retry the Qualification request.</p> <p>Constraints: None. If not specified, retries are disabled and Workers can request a Qualification of this type only once, even if the Worker has not been granted the Qualification. It is not possible to disable retries for a Qualification type after it has been created with retries enabled. If you want to disable retries, you must delete existing retry-enabled Qualification type and then create a new Qualification type with retries disabled.</p>",
+        "CreateQualificationTypeRequest$TestDurationInSeconds": "<p>The number of seconds the Worker has to complete the Qualification test, starting from the time the Worker requests the Qualification.</p>",
+        "HIT$AutoApprovalDelayInSeconds": null,
+        "HIT$AssignmentDurationInSeconds": null,
+        "QualificationType$TestDurationInSeconds": null,
+        "QualificationType$RetryDelayInSeconds": null,
+        "UpdateQualificationTypeRequest$TestDurationInSeconds": "<p>The number of seconds the Worker has to complete the Qualification test, starting from the time the Worker requests the Qualification.</p>",
+        "UpdateQualificationTypeRequest$RetryDelayInSeconds": "<p>The amount of time, in seconds, that Workers must wait after requesting a Qualification of the specified Qualification type before they can retry the Qualification request. It is not possible to disable retries for a Qualification type after it has been created with retries enabled. If you want to disable retries, you must dispose of the existing retry-enabled Qualification type using DisposeQualificationType and then create a new Qualification type with retries disabled using CreateQualificationType.</p>"
+      }
+    },
+    "NotificationSpecification": {
+      "base": null,
+      "refs": {
+        "SendTestEventNotificationRequest$Notification": "<p> The notification specification to test. This value is identical to the value you would provide to the UpdateNotificationSettings operation when you establish the notification specification for a HIT type. </p>",
+        "UpdateNotificationSettingsRequest$Notification": "<p> The notification specification for the HIT type. </p>"
+      }
+    },
+    "NotificationTransport": {
+      "base": null,
+      "refs": {
+        "NotificationSpecification$Transport": null
+      }
+    },
+    "NotifyWorkersFailureCode": {
+      "base": null,
+      "refs": {
+        "NotifyWorkersFailureStatus$NotifyWorkersFailureCode": null
+      }
+    },
+    "NotifyWorkersFailureStatus": {
+      "base": null,
+      "refs": {
+        "NotifyWorkersFailureStatusList$member": null
+      }
+    },
+    "NotifyWorkersFailureStatusList": {
+      "base": null,
+      "refs": {
+        "NotifyWorkersResponse$NotifyWorkersFailureStatuses": null
+      }
+    },
+    "NotifyWorkersRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NotifyWorkersResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "NumericValue": {
+      "base": "<p>A string representing a numeric value.</p>",
+      "refs": {
+        "Price$Amount": "<p> The amount of money, as a number. The amount is in the currency specified by the CurrencyCode. For example, if CurrencyCode is USD, the amount will be in United States dollars (e.g. 12.75 is $12.75 US). </p>"
+      }
+    },
+    "PaginationToken": {
+      "base": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk returns a pagination token in the response. You can use this pagination token to retrieve the next set of results. </p>",
+      "refs": {
+        "ListAssignmentsForHITRequest$NextToken": "<p>Pagination token</p>",
+        "ListAssignmentsForHITResponse$NextToken": null,
+        "ListBonusPaymentsRequest$NextToken": "<p>Pagination token</p>",
+        "ListBonusPaymentsResponse$NextToken": null,
+        "ListHITsForQualificationTypeRequest$NextToken": "<p>Pagination Token</p>",
+        "ListHITsForQualificationTypeResponse$NextToken": null,
+        "ListHITsRequest$NextToken": "<p>Pagination token</p>",
+        "ListHITsResponse$NextToken": null,
+        "ListQualificationRequestsRequest$NextToken": null,
+        "ListQualificationRequestsResponse$NextToken": null,
+        "ListQualificationTypesRequest$NextToken": null,
+        "ListQualificationTypesResponse$NextToken": null,
+        "ListReviewPolicyResultsForHITRequest$NextToken": "<p>Pagination token</p>",
+        "ListReviewPolicyResultsForHITResponse$NextToken": null,
+        "ListReviewableHITsRequest$NextToken": "<p>Pagination Token</p>",
+        "ListReviewableHITsResponse$NextToken": null,
+        "ListWorkerBlocksRequest$NextToken": "<p>Pagination token</p>",
+        "ListWorkerBlocksResponse$NextToken": null,
+        "ListWorkersWithQualificationTypeRequest$NextToken": "<p>Pagination Token</p>",
+        "ListWorkersWithQualificationTypeResponse$NextToken": null
+      }
+    },
+    "ParameterMapEntry": {
+      "base": null,
+      "refs": {
+        "ParameterMapEntryList$member": null
+      }
+    },
+    "ParameterMapEntryList": {
+      "base": null,
+      "refs": {
+        "PolicyParameter$MapEntries": null
+      }
+    },
+    "PolicyParameter": {
+      "base": null,
+      "refs": {
+        "PolicyParameterList$member": null
+      }
+    },
+    "PolicyParameterList": {
+      "base": null,
+      "refs": {
+        "ReviewPolicy$Parameters": null
+      }
+    },
+    "Price": {
+      "base": "<p> The Price data structure represents an amount of money in a given currency. When you call the CreateHIT operation, you must specify the Amount and CurrencyCode elements. The FormattedPrice element is only used in responses sent by the service. </p>",
+      "refs": {
+        "BonusPayment$BonusAmount": null,
+        "CreateHITRequest$Reward": "<p> The amount of money the Requester will pay a Worker for successfully completing the HIT. </p>",
+        "CreateHITTypeRequest$Reward": "<p> The amount of money the Requester will pay a Worker for successfully completing the HIT. </p>",
+        "GetAccountBalanceResponse$AvailableBalance": null,
+        "GetAccountBalanceResponse$OnHoldBalance": null,
+        "HIT$Reward": null,
+        "SendBonusRequest$BonusAmount": "<p>the Bonus amount is specified using a Price data structure.</p>"
+      }
+    },
+    "Qualification": {
+      "base": null,
+      "refs": {
+        "GetQualificationScoreResponse$Qualification": null,
+        "QualificationList$member": null
+      }
+    },
+    "QualificationList": {
+      "base": null,
+      "refs": {
+        "ListWorkersWithQualificationTypeResponse$Qualifications": null
+      }
+    },
+    "QualificationRequest": {
+      "base": null,
+      "refs": {
+        "QualificationRequestList$member": null
+      }
+    },
+    "QualificationRequestList": {
+      "base": null,
+      "refs": {
+        "ListQualificationRequestsResponse$QualificationRequests": null
+      }
+    },
+    "QualificationRequirement": {
+      "base": "<p> The QualificationRequirement data structure describes a Qualification that a Worker must have before the Worker is allowed to accept a HIT. A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT. </p>",
+      "refs": {
+        "QualificationRequirementList$member": null
+      }
+    },
+    "QualificationRequirementList": {
+      "base": null,
+      "refs": {
+        "CreateHITRequest$QualificationRequirements": "<p> A condition that a Worker's Qualifications must meet before the Worker is allowed to accept and complete the HIT. </p>",
+        "CreateHITTypeRequest$QualificationRequirements": "<p> A condition that a Worker's Qualifications must meet before the Worker is allowed to accept and complete the HIT. </p>",
+        "HIT$QualificationRequirements": null
+      }
+    },
+    "QualificationStatus": {
+      "base": null,
+      "refs": {
+        "ListWorkersWithQualificationTypeRequest$Status": "<p> The status of the Qualifications to return. Can be <code>Granted | Revoked</code>. </p>",
+        "Qualification$Status": null
+      }
+    },
+    "QualificationType": {
+      "base": null,
+      "refs": {
+        "CreateQualificationTypeResponse$QualificationType": null,
+        "GetQualificationTypeResponse$QualificationType": null,
+        "QualificationTypeList$member": null,
+        "UpdateQualificationTypeResponse$QualificationType": null
+      }
+    },
+    "QualificationTypeList": {
+      "base": null,
+      "refs": {
+        "ListQualificationTypesResponse$QualificationTypes": null
+      }
+    },
+    "QualificationTypeStatus": {
+      "base": null,
+      "refs": {
+        "CreateQualificationTypeRequest$QualificationTypeStatus": "<p>The initial status of the Qualification type.</p> <p>Constraints: Valid values are: Active | Inactive</p>",
+        "QualificationType$QualificationTypeStatus": null,
+        "UpdateQualificationTypeRequest$QualificationTypeStatus": "<p>The new status of the Qualification type - Active | Inactive</p>"
+      }
+    },
+    "RejectAssignmentRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "RejectAssignmentResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "RejectQualificationRequestRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "RejectQualificationRequestResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "RequestError": {
+      "base": "<p>Your request is invalid.</p>",
+      "refs": {
+      }
+    },
+    "ResultSize": {
+      "base": null,
+      "refs": {
+        "ListAssignmentsForHITRequest$MaxResults": null,
+        "ListBonusPaymentsRequest$MaxResults": null,
+        "ListHITsForQualificationTypeRequest$MaxResults": "<p> Limit the number of results returned. </p>",
+        "ListHITsRequest$MaxResults": null,
+        "ListQualificationRequestsRequest$MaxResults": null,
+        "ListQualificationTypesRequest$MaxResults": null,
+        "ListReviewPolicyResultsForHITRequest$MaxResults": "<p>Limit the number of results returned.</p>",
+        "ListReviewableHITsRequest$MaxResults": "<p> Limit the number of results returned. </p>",
+        "ListWorkerBlocksRequest$MaxResults": null,
+        "ListWorkersWithQualificationTypeRequest$MaxResults": "<p> Limit the number of results returned. </p>"
+      }
+    },
+    "ReviewActionDetail": {
+      "base": null,
+      "refs": {
+        "ReviewActionDetailList$member": null
+      }
+    },
+    "ReviewActionDetailList": {
+      "base": null,
+      "refs": {
+        "ReviewReport$ReviewActions": null
+      }
+    },
+    "ReviewActionStatus": {
+      "base": null,
+      "refs": {
+        "ReviewActionDetail$Status": null
+      }
+    },
+    "ReviewPolicy": {
+      "base": null,
+      "refs": {
+        "CreateHITRequest$AssignmentReviewPolicy": "<p> The Assignment-level Review Policy applies to the assignments under the HIT. You can specify for Mechanical Turk to take various actions based on the policy. </p>",
+        "CreateHITRequest$HITReviewPolicy": "<p> The HIT-level Review Policy applies to the HIT. You can specify for Mechanical Turk to take various actions based on the policy. </p>",
+        "CreateHITWithHITTypeRequest$AssignmentReviewPolicy": "<p> The Assignment-level Review Policy applies to the assignments under the HIT. You can specify for Mechanical Turk to take various actions based on the policy. </p>",
+        "CreateHITWithHITTypeRequest$HITReviewPolicy": "<p> The HIT-level Review Policy applies to the HIT. You can specify for Mechanical Turk to take various actions based on the policy. </p>",
+        "ListReviewPolicyResultsForHITResponse$AssignmentReviewPolicy": null,
+        "ListReviewPolicyResultsForHITResponse$HITReviewPolicy": null
+      }
+    },
+    "ReviewPolicyLevel": {
+      "base": null,
+      "refs": {
+        "ReviewPolicyLevelList$member": null
+      }
+    },
+    "ReviewPolicyLevelList": {
+      "base": null,
+      "refs": {
+        "ListReviewPolicyResultsForHITRequest$PolicyLevels": "<p> The Policy Level(s) to retrieve review results for - HIT or Assignment. If omitted, the default behavior is to retrieve all data for both policy levels. For a list of all the described policies, see Review Policies. </p>"
+      }
+    },
+    "ReviewReport": {
+      "base": null,
+      "refs": {
+        "ListReviewPolicyResultsForHITResponse$AssignmentReviewReport": null,
+        "ListReviewPolicyResultsForHITResponse$HITReviewReport": null
+      }
+    },
+    "ReviewResultDetail": {
+      "base": null,
+      "refs": {
+        "ReviewResultDetailList$member": null
+      }
+    },
+    "ReviewResultDetailList": {
+      "base": null,
+      "refs": {
+        "ReviewReport$ReviewResults": null
+      }
+    },
+    "ReviewableHITStatus": {
+      "base": null,
+      "refs": {
+        "ListReviewableHITsRequest$Status": "<p> Can be either <code>Reviewable</code> or <code>Reviewing</code>. Reviewable is the default value. </p>"
+      }
+    },
+    "SendBonusRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "SendBonusResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "SendTestEventNotificationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "SendTestEventNotificationResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ServiceFault": {
+      "base": "<p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>",
+      "refs": {
+      }
+    },
+    "SortDirection": {
+      "base": null,
+      "refs": {
+        "ListAssignmentsForHITRequest$SortDirection": null,
+        "ListHITsRequest$SortDirection": "<p>The direction of the sort used with the field specified by SortProperty. Can only be Ascending | Descending</p>",
+        "ListQualificationRequestsRequest$SortDirection": null,
+        "ListQualificationTypesRequest$SortDirection": null,
+        "ListReviewableHITsRequest$SortDirection": null
+      }
+    },
+    "String": {
+      "base": null,
+      "refs": {
+        "AcceptQualificationRequestRequest$QualificationRequestId": "<p>The ID of the Qualification request, as returned by the <code>GetQualificationRequests</code> operation.</p>",
+        "ApproveAssignmentRequest$RequesterFeedback": "<p> A message for the Worker, which the Worker can see in the Status section of the web site. </p>",
+        "Assignment$Answer": null,
+        "Assignment$RequesterFeedback": null,
+        "BonusPayment$Reason": null,
+        "CreateHITRequest$Title": "<p> The title of the HIT. A title should be short and descriptive about the kind of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title appears in search results, and everywhere the HIT is mentioned. </p>",
+        "CreateHITRequest$Keywords": "<p> One or more words or phrases that describe the HIT, separated by commas. These words are used in searches to find HITs. </p>",
+        "CreateHITRequest$Description": "<p> A general description of the HIT. A description includes detailed information about the kind of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT description appears in the expanded view of search results, and in the HIT and assignment screens. A good description gives the user enough information to evaluate the HIT before accepting it. </p>",
+        "CreateHITRequest$Question": "<p> The data the person completing the HIT uses to produce the results. </p> <p> Constraints: Must be a QuestionForm data structure, an ExternalQuestion data structure, or an HTMLQuestion data structure. The XML question data must not be larger than 64 kilobytes (65,535 bytes) in size, including whitespace. </p> <p>Either a Question parameter or a HITLayoutId parameter must be provided.</p>",
+        "CreateHITRequest$RequesterAnnotation": "<p> An arbitrary data field. The RequesterAnnotation parameter lets your application attach arbitrary data to the HIT for tracking purposes. For example, this parameter could be an identifier internal to the Requester's application that corresponds with the HIT. </p> <p> The RequesterAnnotation parameter for a HIT is only visible to the Requester who created the HIT. It is not shown to the Worker, or any other Requester. </p> <p> The RequesterAnnotation parameter may be different for each HIT you submit. It does not affect how your HITs are grouped. </p>",
+        "CreateHITTypeRequest$Title": "<p> The title of the HIT. A title should be short and descriptive about the kind of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title appears in search results, and everywhere the HIT is mentioned. </p>",
+        "CreateHITTypeRequest$Keywords": "<p> One or more words or phrases that describe the HIT, separated by commas. These words are used in searches to find HITs. </p>",
+        "CreateHITTypeRequest$Description": "<p> A general description of the HIT. A description includes detailed information about the kind of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT description appears in the expanded view of search results, and in the HIT and assignment screens. A good description gives the user enough information to evaluate the HIT before accepting it. </p>",
+        "CreateHITWithHITTypeRequest$Question": "<p> The data the person completing the HIT uses to produce the results. </p> <p> Constraints: Must be a QuestionForm data structure, an ExternalQuestion data structure, or an HTMLQuestion data structure. The XML question data must not be larger than 64 kilobytes (65,535 bytes) in size, including whitespace. </p> <p>Either a Question parameter or a HITLayoutId parameter must be provided.</p>",
+        "CreateHITWithHITTypeRequest$RequesterAnnotation": "<p> An arbitrary data field. The RequesterAnnotation parameter lets your application attach arbitrary data to the HIT for tracking purposes. For example, this parameter could be an identifier internal to the Requester's application that corresponds with the HIT. </p> <p> The RequesterAnnotation parameter for a HIT is only visible to the Requester who created the HIT. It is not shown to the Worker, or any other Requester. </p> <p> The RequesterAnnotation parameter may be different for each HIT you submit. It does not affect how your HITs are grouped. </p>",
+        "CreateQualificationTypeRequest$Name": "<p> The name you give to the Qualification type. The type name is used to represent the Qualification to Workers, and to find the type using a Qualification type search. It must be unique across all of your Qualification types.</p>",
+        "CreateQualificationTypeRequest$Keywords": "<p>One or more words or phrases that describe the Qualification type, separated by commas. The keywords of a type make the type easier to find during a search.</p>",
+        "CreateQualificationTypeRequest$Description": "<p>A long description for the Qualification type. On the Amazon Mechanical Turk website, the long description is displayed when a Worker examines a Qualification type.</p>",
+        "CreateWorkerBlockRequest$Reason": "<p>A message explaining the reason for blocking the Worker. This parameter enables you to keep track of your Workers. The Worker does not see this message.</p>",
+        "DeleteWorkerBlockRequest$Reason": "<p>A message that explains the reason for unblocking the Worker. The Worker does not see this message.</p>",
+        "DisassociateQualificationFromWorkerRequest$Reason": "<p>A text message that explains why the Qualification was revoked. The user who had the Qualification sees this message.</p>",
+        "GetFileUploadURLRequest$QuestionIdentifier": "<p>The identifier of the question with a FileUploadAnswer, as specified in the QuestionForm of the HIT.</p>",
+        "GetFileUploadURLResponse$FileUploadURL": null,
+        "HIT$Title": null,
+        "HIT$Description": null,
+        "HIT$Question": null,
+        "HIT$Keywords": null,
+        "HIT$RequesterAnnotation": null,
+        "HITLayoutParameter$Name": null,
+        "HITLayoutParameter$Value": null,
+        "ListQualificationTypesRequest$Query": null,
+        "NotificationSpecification$Destination": null,
+        "NotificationSpecification$Version": null,
+        "NotifyWorkersFailureStatus$NotifyWorkersFailureMessage": null,
+        "NotifyWorkersRequest$Subject": "<p>The subject line of the email message to send. Can include up to 200 characters.</p>",
+        "NotifyWorkersRequest$MessageText": "<p>The text of the email message to send. Can include up to 4,096 characters</p>",
+        "ParameterMapEntry$Key": null,
+        "PolicyParameter$Key": null,
+        "Price$CurrencyCode": "<p> A code that represents the country and units of the currency. Its value is an ISO 4217 currency code, such as USD for United States dollars. Currently, only USD is supported. </p>",
+        "Price$FormattedPrice": "<p> A textual representation of the price, using symbols and formatting appropriate for the currency. Symbols are represented using the Unicode character set. You do not need to specify FormattedPrice in a request. It is only provided by the service in responses, as a convenience to your application. </p>",
+        "QualificationRequest$QualificationRequestId": null,
+        "QualificationRequest$Test": null,
+        "QualificationRequest$Answer": null,
+        "QualificationRequirement$QualificationTypeId": null,
+        "QualificationType$Name": null,
+        "QualificationType$Description": null,
+        "QualificationType$Keywords": null,
+        "QualificationType$Test": null,
+        "QualificationType$AnswerKey": null,
+        "RejectAssignmentRequest$RequesterFeedback": "<p> A message for the Worker, which the Worker can see in the Status section of the web site. </p>",
+        "RejectQualificationRequestRequest$QualificationRequestId": "<p> The ID of the Qualification request, as returned by the <code>ListQualificationRequests</code> operation. </p>",
+        "RejectQualificationRequestRequest$Reason": "<p>A text message explaining why the request was rejected, to be shown to the Worker who made the request.</p>",
+        "ReviewActionDetail$ActionName": null,
+        "ReviewActionDetail$TargetType": null,
+        "ReviewActionDetail$Result": null,
+        "ReviewActionDetail$ErrorCode": null,
+        "ReviewPolicy$PolicyName": null,
+        "ReviewResultDetail$SubjectType": null,
+        "ReviewResultDetail$Key": null,
+        "ReviewResultDetail$Value": null,
+        "SendBonusRequest$Reason": "<p>A message that explains the reason for the bonus payment. The Worker receiving the bonus can see this message.</p>",
+        "StringList$member": null,
+        "UpdateQualificationTypeRequest$Description": "<p>The new description of the Qualification type.</p>",
+        "WorkerBlock$Reason": null
+      }
+    },
+    "StringList": {
+      "base": null,
+      "refs": {
+        "CreateQualificationTypeRequest$Tests": "<p> The questions for the Qualification test a Worker must answer correctly to obtain a Qualification of this type. If this parameter is specified, <code>TestDurationInSeconds</code> must also be specified. </p> <p>Constraints: Must not be longer than 65535 bytes. Must be a QuestionForm data structure. This parameter cannot be specified if AutoGranted is true.</p> <p>Constraints: None. If not specified, the Worker may request the Qualification without answering any questions.</p>",
+        "CreateQualificationTypeRequest$AnswerKeys": "<p>The answers to the Qualification test specified in the Test parameter, in the form of an AnswerKey data structure.</p> <p>Constraints: Must not be longer than 65535 bytes.</p> <p>Constraints: None. If not specified, you must process Qualification requests manually.</p>",
+        "ParameterMapEntry$Values": null,
+        "PolicyParameter$Values": null,
+        "UpdateQualificationTypeRequest$Tests": "<p>The questions for the Qualification test a Worker must answer correctly to obtain a Qualification of this type. If this parameter is specified, <code>TestDurationInSeconds</code> must also be specified.</p> <p>Constraints: Must not be longer than 65535 bytes. Must be a QuestionForm data structure. This parameter cannot be specified if AutoGranted is true.</p> <p>Constraints: None. If not specified, the Worker may request the Qualification without answering any questions.</p>",
+        "UpdateQualificationTypeRequest$AnswerKeys": "<p>The answers to the Qualification test specified in the Test parameter, in the form of an AnswerKey data structure.</p>"
+      }
+    },
+    "Timestamp": {
+      "base": null,
+      "refs": {
+        "Assignment$AutoApprovalTime": null,
+        "Assignment$AcceptTime": null,
+        "Assignment$SubmitTime": null,
+        "Assignment$ApprovalTime": null,
+        "Assignment$RejectionTime": null,
+        "Assignment$Deadline": null,
+        "BonusPayment$GrantTime": null,
+        "HIT$CreationTime": null,
+        "HIT$Expiration": null,
+        "Qualification$GrantTime": null,
+        "QualificationRequest$SubmitTime": null,
+        "QualificationType$CreationTime": null,
+        "ReviewActionDetail$CompleteTime": null,
+        "UpdateExpirationForHITRequest$ExpireAt": "<p> The date and time at which you want the HIT to expire </p>"
+      }
+    },
+    "TurkErrorCode": {
+      "base": null,
+      "refs": {
+        "RequestError$TurkErrorCode": null,
+        "ServiceFault$TurkErrorCode": null
+      }
+    },
+    "UpdateExpirationForHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateExpirationForHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateHITReviewStatusRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateHITReviewStatusResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateHITTypeOfHITRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateHITTypeOfHITResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateNotificationSettingsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateNotificationSettingsResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateQualificationTypeRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "UpdateQualificationTypeResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "WorkerBlock": {
+      "base": null,
+      "refs": {
+        "WorkerBlockList$member": null
+      }
+    },
+    "WorkerBlockList": {
+      "base": null,
+      "refs": {
+        "ListWorkerBlocksResponse$WorkerBlocks": null
+      }
+    }
+  }
+}
