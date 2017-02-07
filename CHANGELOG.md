@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.4 (2017-02-07)
+------------------
+
 * Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
 
 * Feature - Aws::MTurk - Added support for a new service, MTurkRequesterService.
