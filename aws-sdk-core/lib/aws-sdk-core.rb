@@ -8,6 +8,8 @@ Seahorse::Util.irregular_inflections({
   'ElastiCache' => 'elasticache',
   'iSCSI' => 'iscsi',
   'ACLs' => 'acls',
+  'HIT' => 'hit',
+  'URL' => 'url'
   #'SSEKMS' => 'sse_kms',
 })
 

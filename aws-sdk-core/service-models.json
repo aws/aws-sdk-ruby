@@ -234,6 +234,10 @@
     "models": "lambda/2014-11-11",
     "endpoint": "lambda"
   },
+  "Lex": {
+    "models": "runtime.lex/2016-11-28",
+    "endpoint": "runtime.lex"
+  },
   "Lightsail": {
     "models": "lightsail/2016-11-28",
     "endpoint": "lightsail"
@@ -249,6 +253,10 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
+  },
+  "MTurk": {
+    "models": "mturk-requester/2017-01-17",
+    "endpoint": "mturk-requester"
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18",
