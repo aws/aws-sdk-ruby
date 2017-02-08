@@ -254,10 +254,6 @@
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
   },
-  "MTurk": {
-    "models": "mturk-requester/2017-01-17",
-    "endpoint": "mturk-requester"
-  },
   "OpsWorks": {
     "models": "opsworks/2013-02-18",
     "endpoint": "opsworks"
