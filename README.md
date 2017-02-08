@@ -340,7 +340,6 @@ to be backwards compatible.
 | Auto Scaling                        | AutoScaling                  | 2011-01-01  |
 | Elastic Load Balancing              | ElasticLoadBalancingV2       | 2015-12-01  |
 | Elastic Load Balancing              | ElasticLoadBalancing         | 2012-06-01  |
-| MTurkRequesterService               | MTurk                        | 2017-01-17  |
 
 ## License
 
