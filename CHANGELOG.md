@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.4 (2017-02-08)
+------------------
+
 * Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
 
 * Feature - Aws::Lex - Added support for a new service, Amazon Lex Runtime Service.
