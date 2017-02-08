@@ -85,7 +85,6 @@ module Aws
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
-    MTurk
     OpsWorks
     OpsWorksCM
     Pinpoint
