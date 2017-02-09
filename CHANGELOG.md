@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.5 (2017-02-09)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, documentation, and waiters for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
