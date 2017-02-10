@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.7 (2017-02-10)
+------------------
+
 * Issue - Updated set of valid endpoints.
 
 2.7.6 (2017-02-10)
