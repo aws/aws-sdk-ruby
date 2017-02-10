@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.6 (2017-02-10)
+------------------
+
 * Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
 
 2.7.5 (2017-02-09)
