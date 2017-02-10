@@ -10,6 +10,8 @@ module Aws
   module CloudFront
 
     autoload :UrlSigner, 'aws-sdk-core/cloudfront/url_signer.rb'
+    autoload :Signer, 'aws-sdk-core/cloudfront/signer.rb'
+    autoload :CookieSigner, 'aws-sdk-core/cloudfront/cookie_signer.rb'
 
   end
 end
