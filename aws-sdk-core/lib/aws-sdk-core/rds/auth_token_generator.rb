@@ -43,7 +43,7 @@ module Aws
         param_list.set('DBUser', user_name)
 
         signer = Aws::Sigv4::Signer.new(
-          service: 'rds',
+          service: 'rds-db',
           region: region,
           credentials_provider: @credentials
         )

@@ -64,7 +64,7 @@ module Aws
             endpoint: endpoint,
             user_name: user_name
           )
-          expected_token = /#{endpoint}\/\?Action=connect&DBUser=#{user_name}&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F#{now.strftime('%Y%m%d')}%2F#{region}%2Frds%2Faws4_request&X-Amz-Date=#{now.strftime('%Y%m%dT%H%M%SZ')}&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=.+$/
+          expected_token = /#{endpoint}\/\?Action=connect&DBUser=#{user_name}&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=akid%2F#{now.strftime('%Y%m%d')}%2F#{region}%2Frds-db%2Faws4_request&X-Amz-Date=#{now.strftime('%Y%m%dT%H%M%SZ')}&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=.+$/
           expect(token).to match(expected_token)
         end
 
