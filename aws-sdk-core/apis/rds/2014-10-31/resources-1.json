@@ -354,6 +354,24 @@
                     "path": "DBClusters[]"
                 }
             },
+            "DBClusterSnapshots": {
+                "request": { "operation": "DescribeDBClusterSnapshots" },
+                "resource": {
+                    "type": "DBClusterSnapshot",
+                    "identifiers": [
+                        {
+                            "target": "ClusterId",
+                            "source": "response",
+                            "path": "DBClusterSnapshots[].DBClusterIdentifier"
+                        },
+                        {
+                            "target": "SnapshotId",
+                            "source": "response",
+                            "path": "DBClusterSnapshots[].DBClusterSnapshotIdentifier"
+                      }
+                  ]
+              }
+          },
             "DBClusterParameterGroups": {
                 "request": { "operation": "DescribeDBClusterParameterGroups" },
                 "resource": {
