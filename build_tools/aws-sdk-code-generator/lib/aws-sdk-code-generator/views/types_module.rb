@@ -43,6 +43,7 @@ module AwsSdkCodeGenerator
           html_to_markdown(Api.docstring(shape_name, @api)),
           input_example_docs(shape_name),
           attribute_macros_docs(shape_name),
+          see_also_tag(shape_name),
         ])
       end
 
@@ -72,6 +73,11 @@ module AwsSdkCodeGenerator
           macro += "  @return [#{Api.ruby_type(member_ref, @api)}]"
           macro
         end
+      end
+
+      def see_also_tag(shape_name)
+        uid = @api['metadata']['uid']
+        Crosslink.tag_string(uid, shape_name) unless !Crosslink.taggable?(uid)
       end
 
       def struct_type?(shape)
