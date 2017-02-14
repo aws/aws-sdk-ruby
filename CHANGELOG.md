@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.8 (2017-02-14)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, documentation, and waiters for Amazon Elastic Compute Cloud.
 
 2.7.7 (2017-02-10)
