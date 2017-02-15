@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
 2.7.8 (2017-02-14)
 ------------------
 
