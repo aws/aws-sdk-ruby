@@ -1,6 +1,7 @@
 require 'pathname'
 require 'thread'
 require 'set'
+require 'tmpdir'
 
 module Aws
   module S3
@@ -92,43 +93,70 @@ module Aws
         end
       end
 
+      def sort_files(files)
+        # sort file by start range count or part number
+        files.sort do |a, b|
+          a[/([^\=]+)$/].split('-')[0].to_i <=> b[/([^\=]+)$/].split('-')[0].to_i
+        end
+      end
+
+      def concatenate_files(files)
+        File.open(@path, 'w', encoding: 'UTF-8') do |obj|
+          sort_files(files).each do |file|
+            File.open(file, 'r', encoding: 'UTF-8') do |f|
+              obj.write(f.read)
+            end
+            File.unlink(file)
+          end
+        end
+      end
+
       def get_range(chunks)
         count = 0
         threads = []
+        file_chunks = []
+        dir = Dir.tmpdir
         while count < chunks.size
           remains_count = chunks.size - count
           cnt = @thread_count < remains_count ? @thread_count : remains_count
           cnt.times do
-            thread = Thread.new(chunks.shift) do |chunk|
+            threads << Thread.new(chunks.shift) do |chunk|
               resp = @client.get_object(bucket: @bucket, key: @key, range: chunk)
-              File.open(@path, 'ab') do |f|
+              file_chunks << file = File.join(dir, chunk)
+              File.open(file, 'w', encoding: 'UTF-8') do |f|
                 f.write(resp.body.read)
               end
             end
-            threads << thread.join
           end
+          threads.each(&:join)
           count += cnt
         end
+        concatenate_files(file_chunks)
       end
 
       def get_part(parts)
-        threads = []        
+        threads = []
+        file_parts = []
+        dir = Dir.tmpdir
         parts.times do |i|
         # partNumber starts from 1
           part = i + 1
-          thread = Thread.new(part) do
+          threads << Thread.new(part) do
             resp = @client.get_object(bucket: @bucket, key: @key, part_number: part)
-            File.open(@path, 'ab') do |f|
+            file_parts << file = File.join(dir, 'part_number=' + part.to_s)
+            File.open(file, 'w', encoding: 'UTF-8') do |f|
               f.write(resp.body.read)
             end
           end
-          threads << thread.join
         end
+        threads.each(&:join)
+        concatenate_files(file_parts)
       end
 
       def single_request
         @client.get_object(
-            bucket: @bucket, key: @key, response_target: @path)
+          bucket: @bucket, key: @key, response_target: @path
+        )
       end
     end
   end
