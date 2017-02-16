@@ -48,7 +48,8 @@ module BuildTools
     # @option options [optional, Integer] :pull A related GitHub pull request number.
     #
     def add_entry(options)
-      lines = read.lines
+      add_unreleased_changes_section unless read.lines.to_a[0].strip == 'Unreleased Changes'
+      lines = read.lines.to_a
       lines = lines[0..2] + Entry.new(options).lines + lines[3..-1]
       write(lines.join)
     end
