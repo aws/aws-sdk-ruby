@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
 2.7.9 (2017-02-15)
 ------------------
 
