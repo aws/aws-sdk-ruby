@@ -50,8 +50,18 @@ module Aws
     #       buckets: [{ name: 'my-bucket' }]
     #     })
     #
-    #     client.list_buckets.buckets.map(&:name) #=> ['my-bucket']
-    #     #=> ['aws-sdk']
+    #     client.list_buckets.buckets.map(&:name)
+    #     #=> ['my-bucket']
+    #
+    # With a Resource class {#stub_responses} on the corresponding client:
+    #
+    #     s3 = Aws::S3::Resource.new(stub_responses: true)
+    #     s3.client.stub_responses(:list_buckets, {
+    #       buckets: [{ name: 'my-bucket' }]
+    #     })
+    #
+    #     s3.buckets.map(&:name)
+    #     #=> ['my-bucket']
     #
     # Lastly, default stubs can be configured via `Aws.config`:
     #
@@ -62,6 +72,9 @@ module Aws
     #     }
     #
     #     Aws::S3::Client.new.list_buckets.buckets.map(&:name)
+    #     #=> ['my-bucket']
+    #
+    #     Aws::S3::Resource.new.buckets.map(&:name)
     #     #=> ['my-bucket']
     #
     # ## Stubbing Errors
