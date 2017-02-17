@@ -26,6 +26,8 @@ module Aws::ElasticBeanstalk
     #   update that you want to cancel.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdateMessage AWS API Documentation
+    #
     class AbortEnvironmentUpdateMessage < Struct.new(
       :environment_id,
       :environment_name)
@@ -63,6 +65,8 @@ module Aws::ElasticBeanstalk
     #   The lifecycle settings for the application.
     #   @return [Types::ApplicationResourceLifecycleConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescription AWS API Documentation
+    #
     class ApplicationDescription < Struct.new(
       :application_name,
       :description,
@@ -80,6 +84,8 @@ module Aws::ElasticBeanstalk
     #   The ApplicationDescription of the application.
     #   @return [Types::ApplicationDescription]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescriptionMessage AWS API Documentation
+    #
     class ApplicationDescriptionMessage < Struct.new(
       :application)
       include Aws::Structure
@@ -90,6 +96,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] applications
     #   This parameter contains a list of ApplicationDescription.
     #   @return [Array<Types::ApplicationDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationDescriptionsMessage AWS API Documentation
     #
     class ApplicationDescriptionsMessage < Struct.new(
       :applications)
@@ -119,6 +127,8 @@ module Aws::ElasticBeanstalk
     #   over the last 10 seconds. Latencies are in seconds with one
     #   milisecond resolution.
     #   @return [Types::Latency]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationMetrics AWS API Documentation
     #
     class ApplicationMetrics < Struct.new(
       :duration,
@@ -162,6 +172,8 @@ module Aws::ElasticBeanstalk
     #   The application version lifecycle configuration.
     #   @return [Types::ApplicationVersionLifecycleConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationResourceLifecycleConfig AWS API Documentation
+    #
     class ApplicationResourceLifecycleConfig < Struct.new(
       :service_role,
       :version_lifecycle_config)
@@ -175,6 +187,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] resource_lifecycle_config
     #   The lifecycle configuration.
     #   @return [Types::ApplicationResourceLifecycleConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationResourceLifecycleDescriptionMessage AWS API Documentation
     #
     class ApplicationResourceLifecycleDescriptionMessage < Struct.new(
       :application_name,
@@ -223,6 +237,8 @@ module Aws::ElasticBeanstalk
     #   The processing status of the application version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescription AWS API Documentation
+    #
     class ApplicationVersionDescription < Struct.new(
       :application_name,
       :description,
@@ -243,6 +259,8 @@ module Aws::ElasticBeanstalk
     #   The ApplicationVersionDescription of the application version.
     #   @return [Types::ApplicationVersionDescription]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionMessage AWS API Documentation
+    #
     class ApplicationVersionDescriptionMessage < Struct.new(
       :application_version)
       include Aws::Structure
@@ -259,6 +277,8 @@ module Aws::ElasticBeanstalk
     #   For a paginated request, the token that you can pass in a subsequent
     #   request to get the next page.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionDescriptionsMessage AWS API Documentation
     #
     class ApplicationVersionDescriptionsMessage < Struct.new(
       :application_versions,
@@ -302,6 +322,8 @@ module Aws::ElasticBeanstalk
     #   application versions are retained for an application.
     #   @return [Types::MaxAgeRule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplicationVersionLifecycleConfig AWS API Documentation
+    #
     class ApplicationVersionLifecycleConfig < Struct.new(
       :max_count_rule,
       :max_age_rule)
@@ -331,6 +353,8 @@ module Aws::ElasticBeanstalk
     #   The action ID of the scheduled managed action to execute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedActionRequest AWS API Documentation
+    #
     class ApplyEnvironmentManagedActionRequest < Struct.new(
       :environment_name,
       :environment_id,
@@ -356,6 +380,8 @@ module Aws::ElasticBeanstalk
     #   The status of the managed action.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedActionResult AWS API Documentation
+    #
     class ApplyEnvironmentManagedActionResult < Struct.new(
       :action_id,
       :action_description,
@@ -369,6 +395,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] name
     #   The name of the `AutoScalingGroup` .
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
       :name)
@@ -426,6 +454,8 @@ module Aws::ElasticBeanstalk
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/BuildConfiguration AWS API Documentation
+    #
     class BuildConfiguration < Struct.new(
       :artifact_name,
       :code_build_service_role,
@@ -472,6 +502,8 @@ module Aws::ElasticBeanstalk
     #   over the last 10 seconds.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CPUUtilization AWS API Documentation
+    #
     class CPUUtilization < Struct.new(
       :user,
       :nice,
@@ -496,6 +528,8 @@ module Aws::ElasticBeanstalk
     #   The prefix used when this CNAME is reserved.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailabilityMessage AWS API Documentation
+    #
     class CheckDNSAvailabilityMessage < Struct.new(
       :cname_prefix)
       include Aws::Structure
@@ -515,6 +549,8 @@ module Aws::ElasticBeanstalk
     #   The fully qualified CNAME to reserve when CreateEnvironment is
     #   called with the provided prefix.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailabilityResultMessage AWS API Documentation
     #
     class CheckDNSAvailabilityResultMessage < Struct.new(
       :available,
@@ -556,6 +592,8 @@ module Aws::ElasticBeanstalk
     #   environment and the name of the solution stack to use, and
     #   optionally can specify environment links to create.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironmentsMessage AWS API Documentation
     #
     class ComposeEnvironmentsMessage < Struct.new(
       :application_name,
@@ -653,6 +691,8 @@ module Aws::ElasticBeanstalk
     #   satisfies this regular expression.
     #   @return [Types::OptionRestrictionRegex]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionDescription AWS API Documentation
+    #
     class ConfigurationOptionDescription < Struct.new(
       :namespace,
       :name,
@@ -704,6 +744,8 @@ module Aws::ElasticBeanstalk
     #   The current value for the configuration option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionSetting AWS API Documentation
+    #
     class ConfigurationOptionSetting < Struct.new(
       :resource_name,
       :namespace,
@@ -722,6 +764,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] options
     #   A list of ConfigurationOptionDescription.
     #   @return [Array<Types::ConfigurationOptionDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationOptionsDescription AWS API Documentation
     #
     class ConfigurationOptionsDescription < Struct.new(
       :solution_stack_name,
@@ -785,6 +829,8 @@ module Aws::ElasticBeanstalk
     #   configuration set.
     #   @return [Array<Types::ConfigurationOptionSetting>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescription AWS API Documentation
+    #
     class ConfigurationSettingsDescription < Struct.new(
       :solution_stack_name,
       :application_name,
@@ -805,6 +851,8 @@ module Aws::ElasticBeanstalk
     #   A list of ConfigurationSettingsDescription.
     #   @return [Array<Types::ConfigurationSettingsDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsDescriptions AWS API Documentation
+    #
     class ConfigurationSettingsDescriptions < Struct.new(
       :configuration_settings)
       include Aws::Structure
@@ -815,6 +863,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] messages
     #   A list of ValidationMessage.
     #   @return [Array<Types::ValidationMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ConfigurationSettingsValidationMessages AWS API Documentation
     #
     class ConfigurationSettingsValidationMessages < Struct.new(
       :messages)
@@ -862,6 +912,8 @@ module Aws::ElasticBeanstalk
     #   Specify an application resource lifecycle configuration to prevent
     #   your application from accumulating too many versions.
     #   @return [Types::ApplicationResourceLifecycleConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationMessage AWS API Documentation
     #
     class CreateApplicationMessage < Struct.new(
       :application_name,
@@ -950,6 +1002,8 @@ module Aws::ElasticBeanstalk
     #   files can identify issues prior to deploying the application version
     #   to an environment.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionMessage AWS API Documentation
     #
     class CreateApplicationVersionMessage < Struct.new(
       :application_name,
@@ -1054,6 +1108,8 @@ module Aws::ElasticBeanstalk
     #   obtained from the solution stack or the source configuration
     #   template.
     #   @return [Array<Types::ConfigurationOptionSetting>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplateMessage AWS API Documentation
     #
     class CreateConfigurationTemplateMessage < Struct.new(
       :application_name,
@@ -1205,6 +1261,8 @@ module Aws::ElasticBeanstalk
     #   the configuration set for this new environment.
     #   @return [Array<Types::OptionSpecification>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironmentMessage AWS API Documentation
+    #
     class CreateEnvironmentMessage < Struct.new(
       :application_name,
       :environment_name,
@@ -1226,6 +1284,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] s3_bucket
     #   The name of the Amazon S3 bucket created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocationResultMessage AWS API Documentation
     #
     class CreateStorageLocationResultMessage < Struct.new(
       :s3_bucket)
@@ -1250,6 +1310,8 @@ module Aws::ElasticBeanstalk
     #   When set to true, running environments will be terminated before
     #   deleting the application.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationMessage AWS API Documentation
     #
     class DeleteApplicationMessage < Struct.new(
       :application_name,
@@ -1282,6 +1344,8 @@ module Aws::ElasticBeanstalk
     #   Beanstalk and the source bundle remains in Amazon S3.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersionMessage AWS API Documentation
+    #
     class DeleteApplicationVersionMessage < Struct.new(
       :application_name,
       :version_label,
@@ -1308,6 +1372,8 @@ module Aws::ElasticBeanstalk
     #   The name of the configuration template to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplateMessage AWS API Documentation
+    #
     class DeleteConfigurationTemplateMessage < Struct.new(
       :application_name,
       :template_name)
@@ -1331,6 +1397,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] environment_name
     #   The name of the environment to delete the draft configuration from.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfigurationMessage AWS API Documentation
     #
     class DeleteEnvironmentConfigurationMessage < Struct.new(
       :application_name,
@@ -1365,6 +1433,8 @@ module Aws::ElasticBeanstalk
     #
     #   For completed deployments, the time that the deployment ended.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
       :version_label,
@@ -1405,6 +1475,8 @@ module Aws::ElasticBeanstalk
     #   request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersionsMessage AWS API Documentation
+    #
     class DescribeApplicationVersionsMessage < Struct.new(
       :application_name,
       :version_labels,
@@ -1426,6 +1498,8 @@ module Aws::ElasticBeanstalk
     #   If specified, AWS Elastic Beanstalk restricts the returned
     #   descriptions to only include those with the specified names.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationsMessage AWS API Documentation
     #
     class DescribeApplicationsMessage < Struct.new(
       :application_names)
@@ -1478,6 +1552,8 @@ module Aws::ElasticBeanstalk
     #   options.
     #   @return [Array<Types::OptionSpecification>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptionsMessage AWS API Documentation
+    #
     class DescribeConfigurationOptionsMessage < Struct.new(
       :application_name,
       :template_name,
@@ -1522,6 +1598,8 @@ module Aws::ElasticBeanstalk
     #   AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettingsMessage AWS API Documentation
+    #
     class DescribeConfigurationSettingsMessage < Struct.new(
       :application_name,
       :template_name,
@@ -1557,6 +1635,8 @@ module Aws::ElasticBeanstalk
     #   set to `All`. If no attribute names are specified, returns the name
     #   of the environment.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealthRequest AWS API Documentation
     #
     class DescribeEnvironmentHealthRequest < Struct.new(
       :environment_name,
@@ -1609,6 +1689,8 @@ module Aws::ElasticBeanstalk
     #   The date and time that the health information was retrieved.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealthResult AWS API Documentation
+    #
     class DescribeEnvironmentHealthResult < Struct.new(
       :environment_name,
       :health_status,
@@ -1649,6 +1731,8 @@ module Aws::ElasticBeanstalk
     #   The maximum number of items to return for a single request.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistoryRequest AWS API Documentation
+    #
     class DescribeEnvironmentManagedActionHistoryRequest < Struct.new(
       :environment_id,
       :environment_name,
@@ -1669,6 +1753,8 @@ module Aws::ElasticBeanstalk
     #   DescribeEnvironmentManagedActionHistory to get the next page of
     #   results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistoryResult AWS API Documentation
     #
     class DescribeEnvironmentManagedActionHistoryResult < Struct.new(
       :managed_action_history_items,
@@ -1700,6 +1786,8 @@ module Aws::ElasticBeanstalk
     #   To show only actions with a particular status, specify a status.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionsRequest AWS API Documentation
+    #
     class DescribeEnvironmentManagedActionsRequest < Struct.new(
       :environment_name,
       :environment_id,
@@ -1712,6 +1800,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] managed_actions
     #   A list of upcoming and in-progress managed actions.
     #   @return [Array<Types::ManagedAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionsResult AWS API Documentation
     #
     class DescribeEnvironmentManagedActionsResult < Struct.new(
       :managed_actions)
@@ -1743,6 +1833,8 @@ module Aws::ElasticBeanstalk
     #   both. If you do not specify either, AWS Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentResourcesMessage AWS API Documentation
     #
     class DescribeEnvironmentResourcesMessage < Struct.new(
       :environment_id,
@@ -1799,6 +1891,8 @@ module Aws::ElasticBeanstalk
     #   If specified when `IncludeDeleted` is set to `true`, then
     #   environments deleted after this date are displayed.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentsMessage AWS API Documentation
     #
     class DescribeEnvironmentsMessage < Struct.new(
       :application_name,
@@ -1886,6 +1980,8 @@ module Aws::ElasticBeanstalk
     #   results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEventsMessage AWS API Documentation
+    #
     class DescribeEventsMessage < Struct.new(
       :application_name,
       :version_label,
@@ -1931,6 +2027,8 @@ module Aws::ElasticBeanstalk
     #   Specify the pagination token returned by a previous call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealthRequest AWS API Documentation
+    #
     class DescribeInstancesHealthRequest < Struct.new(
       :environment_name,
       :environment_id,
@@ -1953,6 +2051,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] next_token
     #   Pagination token for the next page of results, if available.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealthResult AWS API Documentation
     #
     class DescribeInstancesHealthResult < Struct.new(
       :instance_health_list,
@@ -2078,6 +2178,8 @@ module Aws::ElasticBeanstalk
     #   A list of links to other environments in the same group.
     #   @return [Array<Types::EnvironmentLink>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription AWS API Documentation
+    #
     class EnvironmentDescription < Struct.new(
       :environment_name,
       :environment_id,
@@ -2106,6 +2208,8 @@ module Aws::ElasticBeanstalk
     #   Returns an EnvironmentDescription list.
     #   @return [Array<Types::EnvironmentDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescriptionsMessage AWS API Documentation
+    #
     class EnvironmentDescriptionsMessage < Struct.new(
       :environments)
       include Aws::Structure
@@ -2128,6 +2232,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] message
     #   The retrieved information.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentInfoDescription AWS API Documentation
     #
     class EnvironmentInfoDescription < Struct.new(
       :info_type,
@@ -2153,6 +2259,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] environment_name
     #   The name of the linked environment (the dependency).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentLink AWS API Documentation
     #
     class EnvironmentLink < Struct.new(
       :link_name,
@@ -2191,6 +2299,8 @@ module Aws::ElasticBeanstalk
     #   The queues used by this environment.
     #   @return [Array<Types::Queue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourceDescription AWS API Documentation
+    #
     class EnvironmentResourceDescription < Struct.new(
       :environment_name,
       :auto_scaling_groups,
@@ -2208,6 +2318,8 @@ module Aws::ElasticBeanstalk
     #   A list of EnvironmentResourceDescription.
     #   @return [Types::EnvironmentResourceDescription]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourceDescriptionsMessage AWS API Documentation
+    #
     class EnvironmentResourceDescriptionsMessage < Struct.new(
       :environment_resources)
       include Aws::Structure
@@ -2219,6 +2331,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] load_balancer
     #   Describes the LoadBalancer.
     #   @return [Types::LoadBalancerDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentResourcesDescription AWS API Documentation
     #
     class EnvironmentResourcesDescription < Struct.new(
       :load_balancer)
@@ -2247,6 +2361,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] version
     #   The version of this environment tier.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentTier AWS API Documentation
     #
     class EnvironmentTier < Struct.new(
       :name,
@@ -2290,6 +2406,8 @@ module Aws::ElasticBeanstalk
     #   The severity level of this event.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EventDescription AWS API Documentation
+    #
     class EventDescription < Struct.new(
       :event_date,
       :message,
@@ -2314,6 +2432,8 @@ module Aws::ElasticBeanstalk
     #   of events.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EventDescriptionsMessage AWS API Documentation
+    #
     class EventDescriptionsMessage < Struct.new(
       :events,
       :next_token)
@@ -2325,6 +2445,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] id
     #   The ID of the Amazon EC2 instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Instance AWS API Documentation
     #
     class Instance < Struct.new(
       :id)
@@ -2376,6 +2498,8 @@ module Aws::ElasticBeanstalk
     #   **Red.** The health agent is reporting a very high number of request
     #   failures or other issues for an instance or environment.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/InstanceHealthSummary AWS API Documentation
     #
     class InstanceHealthSummary < Struct.new(
       :no_data,
@@ -2432,6 +2556,8 @@ module Aws::ElasticBeanstalk
     #   last 10 seconds.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Latency AWS API Documentation
+    #
     class Latency < Struct.new(
       :p999,
       :p99,
@@ -2450,6 +2576,8 @@ module Aws::ElasticBeanstalk
     #   The name of the launch configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LaunchConfiguration AWS API Documentation
+    #
     class LaunchConfiguration < Struct.new(
       :name)
       include Aws::Structure
@@ -2465,6 +2593,8 @@ module Aws::ElasticBeanstalk
     #   A list of available solution stacks and their
     #   SolutionStackDescription.
     #   @return [Array<Types::SolutionStackDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacksResultMessage AWS API Documentation
     #
     class ListAvailableSolutionStacksResultMessage < Struct.new(
       :solution_stacks,
@@ -2482,6 +2612,8 @@ module Aws::ElasticBeanstalk
     #   The port that is used by the Listener.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Listener AWS API Documentation
+    #
     class Listener < Struct.new(
       :protocol,
       :port)
@@ -2493,6 +2625,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] name
     #   The name of the LoadBalancer.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
       :name)
@@ -2512,6 +2646,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] listeners
     #   A list of Listeners used by the LoadBalancer.
     #   @return [Array<Types::Listener>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/LoadBalancerDescription AWS API Documentation
     #
     class LoadBalancerDescription < Struct.new(
       :load_balancer_name,
@@ -2543,6 +2679,8 @@ module Aws::ElasticBeanstalk
     #   The start time of the maintenance window in which the managed action
     #   will execute.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ManagedAction AWS API Documentation
     #
     class ManagedAction < Struct.new(
       :action_id,
@@ -2587,6 +2725,8 @@ module Aws::ElasticBeanstalk
     #   The date and time that the action finished executing.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ManagedActionHistoryItem AWS API Documentation
+    #
     class ManagedActionHistoryItem < Struct.new(
       :action_id,
       :action_type,
@@ -2624,6 +2764,8 @@ module Aws::ElasticBeanstalk
     #   when Elastic Beanstalk deletes the application version.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/MaxAgeRule AWS API Documentation
+    #
     class MaxAgeRule < Struct.new(
       :enabled,
       :max_age_in_days,
@@ -2656,6 +2798,8 @@ module Aws::ElasticBeanstalk
     #   when Elastic Beanstalk deletes the application version.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/MaxCountRule AWS API Documentation
+    #
     class MaxCountRule < Struct.new(
       :enabled,
       :max_count,
@@ -2674,6 +2818,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] label
     #   A unique name representing this regular expression.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/OptionRestrictionRegex AWS API Documentation
     #
     class OptionRestrictionRegex < Struct.new(
       :pattern,
@@ -2706,6 +2852,8 @@ module Aws::ElasticBeanstalk
     #   The name of the configuration option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/OptionSpecification AWS API Documentation
+    #
     class OptionSpecification < Struct.new(
       :resource_name,
       :namespace,
@@ -2722,6 +2870,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] url
     #   The URL of the queue.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Queue AWS API Documentation
     #
     class Queue < Struct.new(
       :name,
@@ -2752,6 +2902,8 @@ module Aws::ElasticBeanstalk
     #   both. If you do not specify either, AWS Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironmentMessage AWS API Documentation
     #
     class RebuildEnvironmentMessage < Struct.new(
       :environment_id,
@@ -2797,6 +2949,8 @@ module Aws::ElasticBeanstalk
     #   The type of information to request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfoMessage AWS API Documentation
+    #
     class RequestEnvironmentInfoMessage < Struct.new(
       :environment_id,
       :environment_name,
@@ -2827,6 +2981,8 @@ module Aws::ElasticBeanstalk
     #   both. If you do not specify either, AWS Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServerMessage AWS API Documentation
     #
     class RestartAppServerMessage < Struct.new(
       :environment_id,
@@ -2871,6 +3027,8 @@ module Aws::ElasticBeanstalk
     #   The type of information to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfoMessage AWS API Documentation
+    #
     class RetrieveEnvironmentInfoMessage < Struct.new(
       :environment_id,
       :environment_name,
@@ -2884,6 +3042,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] environment_info
     #   The EnvironmentInfoDescription of the environment.
     #   @return [Array<Types::EnvironmentInfoDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfoResultMessage AWS API Documentation
     #
     class RetrieveEnvironmentInfoResultMessage < Struct.new(
       :environment_info)
@@ -2907,6 +3067,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] s3_key
     #   The Amazon S3 key where the data is located.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/S3Location AWS API Documentation
     #
     class S3Location < Struct.new(
       :s3_bucket,
@@ -2969,6 +3131,8 @@ module Aws::ElasticBeanstalk
     #   The instance's type.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SingleInstanceHealth AWS API Documentation
+    #
     class SingleInstanceHealth < Struct.new(
       :instance_id,
       :health_status,
@@ -2992,6 +3156,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] permitted_file_types
     #   The permitted file types allowed for a solution stack.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SolutionStackDescription AWS API Documentation
     #
     class SolutionStackDescription < Struct.new(
       :solution_stack_name,
@@ -3039,6 +3205,8 @@ module Aws::ElasticBeanstalk
     #     `my-s3-bucket/Folders/my-source-file`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SourceBuildInformation AWS API Documentation
+    #
     class SourceBuildInformation < Struct.new(
       :source_type,
       :source_repository,
@@ -3063,6 +3231,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] template_name
     #   The name of the configuration template.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SourceConfiguration AWS API Documentation
     #
     class SourceConfiguration < Struct.new(
       :application_name,
@@ -3097,6 +3267,8 @@ module Aws::ElasticBeanstalk
     #   The percentage of requests over the last 10 seconds that resulted in
     #   a 5xx (500, 501, etc.) status code.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/StatusCodes AWS API Documentation
     #
     class StatusCodes < Struct.new(
       :status_2xx,
@@ -3154,6 +3326,8 @@ module Aws::ElasticBeanstalk
     #   `DestinationEnvironmentName`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEsMessage AWS API Documentation
+    #
     class SwapEnvironmentCNAMEsMessage < Struct.new(
       :source_environment_id,
       :source_environment_name,
@@ -3176,6 +3350,8 @@ module Aws::ElasticBeanstalk
     #
     #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os
     #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SystemStatus AWS API Documentation
     #
     class SystemStatus < Struct.new(
       :cpu_utilization,
@@ -3200,6 +3376,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] value
     #   The value of the tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -3263,6 +3441,8 @@ module Aws::ElasticBeanstalk
     #   same group is dependent on it.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironmentMessage AWS API Documentation
+    #
     class TerminateEnvironmentMessage < Struct.new(
       :environment_id,
       :environment_name,
@@ -3276,6 +3456,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] name
     #   The name of the trigger.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Trigger AWS API Documentation
     #
     class Trigger < Struct.new(
       :name)
@@ -3303,6 +3485,8 @@ module Aws::ElasticBeanstalk
     #   Default: If not specified, AWS Elastic Beanstalk does not update the
     #   description.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationMessage AWS API Documentation
     #
     class UpdateApplicationMessage < Struct.new(
       :application_name,
@@ -3340,6 +3524,8 @@ module Aws::ElasticBeanstalk
     #   The lifecycle configuration.
     #   @return [Types::ApplicationResourceLifecycleConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycleMessage AWS API Documentation
+    #
     class UpdateApplicationResourceLifecycleMessage < Struct.new(
       :application_name,
       :resource_lifecycle_config)
@@ -3372,6 +3558,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] description
     #   A new description for this version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersionMessage AWS API Documentation
     #
     class UpdateApplicationVersionMessage < Struct.new(
       :application_name,
@@ -3439,6 +3627,8 @@ module Aws::ElasticBeanstalk
     #
     #   Constraint: You can remove only `UserDefined` configuration options.
     #   @return [Array<Types::OptionSpecification>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplateMessage AWS API Documentation
     #
     class UpdateConfigurationTemplateMessage < Struct.new(
       :application_name,
@@ -3564,6 +3754,8 @@ module Aws::ElasticBeanstalk
     #   the configuration set for this environment.
     #   @return [Array<Types::OptionSpecification>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironmentMessage AWS API Documentation
+    #
     class UpdateEnvironmentMessage < Struct.new(
       :application_name,
       :environment_id,
@@ -3621,6 +3813,8 @@ module Aws::ElasticBeanstalk
     #   A list of the options and desired values to evaluate.
     #   @return [Array<Types::ConfigurationOptionSetting>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettingsMessage AWS API Documentation
+    #
     class ValidateConfigurationSettingsMessage < Struct.new(
       :application_name,
       :template_name,
@@ -3652,6 +3846,8 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] option_name
     #   The name of the option.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidationMessage AWS API Documentation
     #
     class ValidationMessage < Struct.new(
       :message,

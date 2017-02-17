@@ -247,6 +247,8 @@ module Aws::SQS
     #     actions: ["String"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermission AWS API Documentation
+    #
     # @overload add_permission(params = {})
     # @param [Hash] params ({})
     def add_permission(params = {}, options = {})
@@ -325,6 +327,8 @@ module Aws::SQS
     #     visibility_timeout: 1, # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibility AWS API Documentation
+    #
     # @overload change_message_visibility(params = {})
     # @param [Hash] params ({})
     def change_message_visibility(params = {}, options = {})
@@ -389,6 +393,8 @@ module Aws::SQS
     #   resp.failed[0].sender_fault #=> Boolean
     #   resp.failed[0].code #=> String
     #   resp.failed[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatch AWS API Documentation
     #
     # @overload change_message_visibility_batch(params = {})
     # @param [Hash] params ({})
@@ -592,6 +598,8 @@ module Aws::SQS
     #
     #   resp.queue_url #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueue AWS API Documentation
+    #
     # @overload create_queue(params = {})
     # @param [Hash] params ({})
     def create_queue(params = {}, options = {})
@@ -640,6 +648,8 @@ module Aws::SQS
     #     queue_url: "String", # required
     #     receipt_handle: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessage AWS API Documentation
     #
     # @overload delete_message(params = {})
     # @param [Hash] params ({})
@@ -701,6 +711,8 @@ module Aws::SQS
     #   resp.failed[0].code #=> String
     #   resp.failed[0].message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatch AWS API Documentation
+    #
     # @overload delete_message_batch(params = {})
     # @param [Hash] params ({})
     def delete_message_batch(params = {}, options = {})
@@ -735,6 +747,8 @@ module Aws::SQS
     #   resp = client.delete_queue({
     #     queue_url: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueue AWS API Documentation
     #
     # @overload delete_queue(params = {})
     # @param [Hash] params ({})
@@ -854,6 +868,8 @@ module Aws::SQS
     #   resp.attributes #=> Hash
     #   resp.attributes["QueueAttributeName"] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributes AWS API Documentation
+    #
     # @overload get_queue_attributes(params = {})
     # @param [Hash] params ({})
     def get_queue_attributes(params = {}, options = {})
@@ -900,6 +916,8 @@ module Aws::SQS
     #
     #   resp.queue_url #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrl AWS API Documentation
+    #
     # @overload get_queue_url(params = {})
     # @param [Hash] params ({})
     def get_queue_url(params = {}, options = {})
@@ -937,6 +955,8 @@ module Aws::SQS
     #   resp.queue_urls #=> Array
     #   resp.queue_urls[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueues AWS API Documentation
+    #
     # @overload list_dead_letter_source_queues(params = {})
     # @param [Hash] params ({})
     def list_dead_letter_source_queues(params = {}, options = {})
@@ -970,6 +990,8 @@ module Aws::SQS
     #   resp.queue_urls #=> Array
     #   resp.queue_urls[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueues AWS API Documentation
+    #
     # @overload list_queues(params = {})
     # @param [Hash] params ({})
     def list_queues(params = {}, options = {})
@@ -1002,6 +1024,8 @@ module Aws::SQS
     #   resp = client.purge_queue({
     #     queue_url: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueue AWS API Documentation
     #
     # @overload purge_queue(params = {})
     # @param [Hash] params ({})
@@ -1280,6 +1304,8 @@ module Aws::SQS
     #   resp.messages[0].message_attributes["String"].binary_list_values[0] #=> String
     #   resp.messages[0].message_attributes["String"].data_type #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessage AWS API Documentation
+    #
     # @overload receive_message(params = {})
     # @param [Hash] params ({})
     def receive_message(params = {}, options = {})
@@ -1307,6 +1333,8 @@ module Aws::SQS
     #     queue_url: "String", # required
     #     label: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermission AWS API Documentation
     #
     # @overload remove_permission(params = {})
     # @param [Hash] params ({})
@@ -1516,6 +1544,8 @@ module Aws::SQS
     #   resp.message_id #=> String
     #   resp.sequence_number #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessage AWS API Documentation
+    #
     # @overload send_message(params = {})
     # @param [Hash] params ({})
     def send_message(params = {}, options = {})
@@ -1621,6 +1651,8 @@ module Aws::SQS
     #   resp.failed[0].sender_fault #=> Boolean
     #   resp.failed[0].code #=> String
     #   resp.failed[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatch AWS API Documentation
     #
     # @overload send_message_batch(params = {})
     # @param [Hash] params ({})
@@ -1762,6 +1794,8 @@ module Aws::SQS
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributes AWS API Documentation
+    #
     # @overload set_queue_attributes(params = {})
     # @param [Hash] params ({})
     def set_queue_attributes(params = {}, options = {})
@@ -1782,7 +1816,7 @@ module Aws::SQS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sqs'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

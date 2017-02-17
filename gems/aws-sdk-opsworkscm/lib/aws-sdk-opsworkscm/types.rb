@@ -30,6 +30,8 @@ module Aws::OpsWorksCM
     #   with the account.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AccountAttribute AWS API Documentation
+    #
     class AccountAttribute < Struct.new(
       :name,
       :maximum,
@@ -60,6 +62,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] engine_attributes
     #   @return [Array<Types::EngineAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeRequest AWS API Documentation
+    #
     class AssociateNodeRequest < Struct.new(
       :server_name,
       :node_name,
@@ -69,6 +73,8 @@ module Aws::OpsWorksCM
 
     # @!attribute [rw] node_association_status_token
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeResponse AWS API Documentation
     #
     class AssociateNodeResponse < Struct.new(
       :node_association_status_token)
@@ -192,6 +198,8 @@ module Aws::OpsWorksCM
     #   empty for automated backups.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/Backup AWS API Documentation
+    #
     class Backup < Struct.new(
       :backup_arn,
       :backup_id,
@@ -236,6 +244,8 @@ module Aws::OpsWorksCM
     #   A user-defined description of the backup.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupRequest AWS API Documentation
+    #
     class CreateBackupRequest < Struct.new(
       :server_name,
       :description)
@@ -245,6 +255,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] backup
     #   Backup created by request.
     #   @return [Types::Backup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackupResponse AWS API Documentation
     #
     class CreateBackupResponse < Struct.new(
       :backup)
@@ -421,6 +433,8 @@ module Aws::OpsWorksCM
     #   the server by using the backup represented by BackupId.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerRequest AWS API Documentation
+    #
     class CreateServerRequest < Struct.new(
       :disable_automated_backup,
       :engine,
@@ -445,6 +459,8 @@ module Aws::OpsWorksCM
     #   The server that is created by the request.
     #   @return [Types::Server]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerResponse AWS API Documentation
+    #
     class CreateServerResponse < Struct.new(
       :server)
       include Aws::Structure
@@ -463,11 +479,15 @@ module Aws::OpsWorksCM
     #   `ServerName-yyyyMMddHHmmssSSS`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackupRequest AWS API Documentation
+    #
     class DeleteBackupRequest < Struct.new(
       :backup_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackupResponse AWS API Documentation
+    #
     class DeleteBackupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteServerRequest
@@ -481,20 +501,28 @@ module Aws::OpsWorksCM
     #   The ID of the server to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServerRequest AWS API Documentation
+    #
     class DeleteServerRequest < Struct.new(
       :server_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServerResponse AWS API Documentation
+    #
     class DeleteServerResponse < Aws::EmptyStructure; end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributesRequest AWS API Documentation
     #
     class DescribeAccountAttributesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] attributes
     #   The attributes that are currently set for the account.
     #   @return [Array<Types::AccountAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributesResponse AWS API Documentation
     #
     class DescribeAccountAttributesResponse < Struct.new(
       :attributes)
@@ -539,6 +567,8 @@ module Aws::OpsWorksCM
     #   request parameter to get the next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsRequest AWS API Documentation
+    #
     class DescribeBackupsRequest < Struct.new(
       :backup_id,
       :server_name,
@@ -562,6 +592,8 @@ module Aws::OpsWorksCM
     #   that was not returned in your previous results causes an
     #   `InvalidNextTokenException` to occur.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackupsResponse AWS API Documentation
     #
     class DescribeBackupsResponse < Struct.new(
       :backups,
@@ -602,6 +634,8 @@ module Aws::OpsWorksCM
     #   request parameter to get the next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEventsRequest AWS API Documentation
+    #
     class DescribeEventsRequest < Struct.new(
       :server_name,
       :next_token,
@@ -625,6 +659,8 @@ module Aws::OpsWorksCM
     #   `InvalidNextTokenException` to occur.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEventsResponse AWS API Documentation
+    #
     class DescribeEventsResponse < Struct.new(
       :server_events,
       :next_token)
@@ -645,6 +681,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] server_name
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusRequest AWS API Documentation
+    #
     class DescribeNodeAssociationStatusRequest < Struct.new(
       :node_association_status_token,
       :server_name)
@@ -653,6 +691,8 @@ module Aws::OpsWorksCM
 
     # @!attribute [rw] node_association_status
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusResponse AWS API Documentation
     #
     class DescribeNodeAssociationStatusResponse < Struct.new(
       :node_association_status)
@@ -692,6 +732,8 @@ module Aws::OpsWorksCM
     #   request parameter to get the next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersRequest AWS API Documentation
+    #
     class DescribeServersRequest < Struct.new(
       :server_name,
       :next_token,
@@ -714,6 +756,8 @@ module Aws::OpsWorksCM
     #   that was not returned in your previous results causes an
     #   `InvalidNextTokenException` to occur.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServersResponse AWS API Documentation
     #
     class DescribeServersResponse < Struct.new(
       :servers,
@@ -744,6 +788,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] engine_attributes
     #   @return [Array<Types::EngineAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNodeRequest AWS API Documentation
+    #
     class DisassociateNodeRequest < Struct.new(
       :server_name,
       :node_name,
@@ -753,6 +799,8 @@ module Aws::OpsWorksCM
 
     # @!attribute [rw] node_association_status_token
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNodeResponse AWS API Documentation
     #
     class DisassociateNodeResponse < Struct.new(
       :node_association_status_token)
@@ -776,6 +824,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] value
     #   The value of the engine attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/EngineAttribute AWS API Documentation
     #
     class EngineAttribute < Struct.new(
       :name,
@@ -814,6 +864,8 @@ module Aws::OpsWorksCM
     #   have the SSH key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerRequest AWS API Documentation
+    #
     class RestoreServerRequest < Struct.new(
       :backup_id,
       :server_name,
@@ -822,6 +874,8 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerResponse AWS API Documentation
+    #
     class RestoreServerResponse < Aws::EmptyStructure; end
 
     # Describes a configuration management server.
@@ -941,6 +995,8 @@ module Aws::OpsWorksCM
     #   The ARN of the server.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/Server AWS API Documentation
+    #
     class Server < Struct.new(
       :backup_retention_count,
       :server_name,
@@ -985,6 +1041,8 @@ module Aws::OpsWorksCM
     #   The Amazon S3 URL of the event's log file.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/ServerEvent AWS API Documentation
+    #
     class ServerEvent < Struct.new(
       :created_at,
       :server_name,
@@ -1004,6 +1062,8 @@ module Aws::OpsWorksCM
     #   The name of the server on which to run maintenance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceRequest AWS API Documentation
+    #
     class StartMaintenanceRequest < Struct.new(
       :server_name)
       include Aws::Structure
@@ -1012,6 +1072,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] server
     #   Contains the response to a `StartMaintenance` request.
     #   @return [Types::Server]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenanceResponse AWS API Documentation
     #
     class StartMaintenanceResponse < Struct.new(
       :server)
@@ -1039,6 +1101,8 @@ module Aws::OpsWorksCM
     #   The value to set for the attribute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributesRequest AWS API Documentation
+    #
     class UpdateServerEngineAttributesRequest < Struct.new(
       :server_name,
       :attribute_name,
@@ -1049,6 +1113,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] server
     #   Contains the response to an `UpdateServerEngineAttributes` request.
     #   @return [Types::Server]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributesResponse AWS API Documentation
     #
     class UpdateServerEngineAttributesResponse < Struct.new(
       :server)
@@ -1097,6 +1163,8 @@ module Aws::OpsWorksCM
     #   Sat, Sun.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerRequest AWS API Documentation
+    #
     class UpdateServerRequest < Struct.new(
       :disable_automated_backup,
       :backup_retention_count,
@@ -1109,6 +1177,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] server
     #   Contains the response to a `UpdateServer` request.
     #   @return [Types::Server]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerResponse AWS API Documentation
     #
     class UpdateServerResponse < Struct.new(
       :server)

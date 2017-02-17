@@ -180,6 +180,8 @@ module Aws::DatabaseMigrationService
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResource AWS API Documentation
+    #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
     def add_tags_to_resource(params = {}, options = {})
@@ -282,6 +284,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpoint AWS API Documentation
     #
     # @overload create_endpoint(params = {})
     # @param [Hash] params ({})
@@ -443,6 +447,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstance AWS API Documentation
+    #
     # @overload create_replication_instance(params = {})
     # @param [Hash] params ({})
     def create_replication_instance(params = {}, options = {})
@@ -499,6 +505,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroup AWS API Documentation
     #
     # @overload create_replication_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -600,6 +608,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTask AWS API Documentation
+    #
     # @overload create_replication_task(params = {})
     # @param [Hash] params ({})
     def create_replication_task(params = {}, options = {})
@@ -634,6 +644,8 @@ module Aws::DatabaseMigrationService
     #   resp.certificate.valid_to_date #=> Time
     #   resp.certificate.signing_algorithm #=> String
     #   resp.certificate.key_length #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificate AWS API Documentation
     #
     # @overload delete_certificate(params = {})
     # @param [Hash] params ({})
@@ -678,6 +690,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpoint AWS API Documentation
     #
     # @overload delete_endpoint(params = {})
     # @param [Hash] params ({})
@@ -745,6 +759,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstance AWS API Documentation
+    #
     # @overload delete_replication_instance(params = {})
     # @param [Hash] params ({})
     def delete_replication_instance(params = {}, options = {})
@@ -764,6 +780,8 @@ module Aws::DatabaseMigrationService
     #   resp = client.delete_replication_subnet_group({
     #     replication_subnet_group_identifier: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroup AWS API Documentation
     #
     # @overload delete_replication_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -809,6 +827,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTask AWS API Documentation
+    #
     # @overload delete_replication_task(params = {})
     # @param [Hash] params ({})
     def delete_replication_task(params = {}, options = {})
@@ -834,6 +854,8 @@ module Aws::DatabaseMigrationService
     #   resp.account_quotas[0].account_quota_name #=> String
     #   resp.account_quotas[0].used #=> Integer
     #   resp.account_quotas[0].max #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributes AWS API Documentation
     #
     # @overload describe_account_attributes(params = {})
     # @param [Hash] params ({})
@@ -893,6 +915,8 @@ module Aws::DatabaseMigrationService
     #   resp.certificates[0].valid_to_date #=> Time
     #   resp.certificates[0].signing_algorithm #=> String
     #   resp.certificates[0].key_length #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificates AWS API Documentation
     #
     # @overload describe_certificates(params = {})
     # @param [Hash] params ({})
@@ -954,6 +978,8 @@ module Aws::DatabaseMigrationService
     #   resp.connections[0].endpoint_identifier #=> String
     #   resp.connections[0].replication_instance_identifier #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnections AWS API Documentation
+    #
     # @overload describe_connections(params = {})
     # @param [Hash] params ({})
     def describe_connections(params = {}, options = {})
@@ -1008,6 +1034,8 @@ module Aws::DatabaseMigrationService
     #   resp.supported_endpoint_types[0].engine_name #=> String
     #   resp.supported_endpoint_types[0].supports_cdc #=> Boolean
     #   resp.supported_endpoint_types[0].endpoint_type #=> String, one of "source", "target"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypes AWS API Documentation
     #
     # @overload describe_endpoint_types(params = {})
     # @param [Hash] params ({})
@@ -1076,6 +1104,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoints[0].certificate_arn #=> String
     #   resp.endpoints[0].ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpoints AWS API Documentation
+    #
     # @overload describe_endpoints(params = {})
     # @param [Hash] params ({})
     def describe_endpoints(params = {}, options = {})
@@ -1125,6 +1155,8 @@ module Aws::DatabaseMigrationService
     #   resp.orderable_replication_instances[0].included_allocated_storage #=> Integer
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstances AWS API Documentation
+    #
     # @overload describe_orderable_replication_instances(params = {})
     # @param [Hash] params ({})
     def describe_orderable_replication_instances(params = {}, options = {})
@@ -1155,6 +1187,8 @@ module Aws::DatabaseMigrationService
     #   resp.refresh_schemas_status.status #=> String, one of "successful", "failed", "refreshing"
     #   resp.refresh_schemas_status.last_refresh_date #=> Time
     #   resp.refresh_schemas_status.last_failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatus AWS API Documentation
     #
     # @overload describe_refresh_schemas_status(params = {})
     # @param [Hash] params ({})
@@ -1246,6 +1280,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instances[0].publicly_accessible #=> Boolean
     #   resp.replication_instances[0].secondary_availability_zone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstances AWS API Documentation
+    #
     # @overload describe_replication_instances(params = {})
     # @param [Hash] params ({})
     def describe_replication_instances(params = {}, options = {})
@@ -1303,6 +1339,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.replication_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_subnet_groups[0].subnets[0].subnet_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroups AWS API Documentation
     #
     # @overload describe_replication_subnet_groups(params = {})
     # @param [Hash] params ({})
@@ -1377,6 +1415,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_tasks[0].replication_task_stats.tables_queued #=> Integer
     #   resp.replication_tasks[0].replication_task_stats.tables_errored #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasks AWS API Documentation
+    #
     # @overload describe_replication_tasks(params = {})
     # @param [Hash] params ({})
     def describe_replication_tasks(params = {}, options = {})
@@ -1423,6 +1463,8 @@ module Aws::DatabaseMigrationService
     #   resp.marker #=> String
     #   resp.schemas #=> Array
     #   resp.schemas[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemas AWS API Documentation
     #
     # @overload describe_schemas(params = {})
     # @param [Hash] params ({})
@@ -1481,6 +1523,8 @@ module Aws::DatabaseMigrationService
     #   resp.table_statistics[0].table_state #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatistics AWS API Documentation
+    #
     # @overload describe_table_statistics(params = {})
     # @param [Hash] params ({})
     def describe_table_statistics(params = {}, options = {})
@@ -1526,6 +1570,8 @@ module Aws::DatabaseMigrationService
     #   resp.certificate.signing_algorithm #=> String
     #   resp.certificate.key_length #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificate AWS API Documentation
+    #
     # @overload import_certificate(params = {})
     # @param [Hash] params ({})
     def import_certificate(params = {}, options = {})
@@ -1554,6 +1600,8 @@ module Aws::DatabaseMigrationService
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -1646,6 +1694,8 @@ module Aws::DatabaseMigrationService
     #   resp.endpoint.endpoint_arn #=> String
     #   resp.endpoint.certificate_arn #=> String
     #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpoint AWS API Documentation
     #
     # @overload modify_endpoint(params = {})
     # @param [Hash] params ({})
@@ -1788,6 +1838,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_instance.publicly_accessible #=> Boolean
     #   resp.replication_instance.secondary_availability_zone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstance AWS API Documentation
+    #
     # @overload modify_replication_instance(params = {})
     # @param [Hash] params ({})
     def modify_replication_instance(params = {}, options = {})
@@ -1828,6 +1880,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroup AWS API Documentation
     #
     # @overload modify_replication_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -1910,6 +1964,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTask AWS API Documentation
+    #
     # @overload modify_replication_task(params = {})
     # @param [Hash] params ({})
     def modify_replication_task(params = {}, options = {})
@@ -1948,6 +2004,8 @@ module Aws::DatabaseMigrationService
     #   resp.refresh_schemas_status.last_refresh_date #=> Time
     #   resp.refresh_schemas_status.last_failure_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemas AWS API Documentation
+    #
     # @overload refresh_schemas(params = {})
     # @param [Hash] params ({})
     def refresh_schemas(params = {}, options = {})
@@ -1972,6 +2030,8 @@ module Aws::DatabaseMigrationService
     #     resource_arn: "String", # required
     #     tag_keys: ["String"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})
@@ -2026,6 +2086,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTask AWS API Documentation
+    #
     # @overload start_replication_task(params = {})
     # @param [Hash] params ({})
     def start_replication_task(params = {}, options = {})
@@ -2070,6 +2132,8 @@ module Aws::DatabaseMigrationService
     #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
     #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTask AWS API Documentation
+    #
     # @overload stop_replication_task(params = {})
     # @param [Hash] params ({})
     def stop_replication_task(params = {}, options = {})
@@ -2107,6 +2171,8 @@ module Aws::DatabaseMigrationService
     #   resp.connection.endpoint_identifier #=> String
     #   resp.connection.replication_instance_identifier #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnection AWS API Documentation
+    #
     # @overload test_connection(params = {})
     # @param [Hash] params ({})
     def test_connection(params = {}, options = {})
@@ -2127,7 +2193,7 @@ module Aws::DatabaseMigrationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

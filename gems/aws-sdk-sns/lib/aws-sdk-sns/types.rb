@@ -38,6 +38,8 @@ module Aws::SNS
     #   Valid values: any Amazon SNS action name.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionInput AWS API Documentation
+    #
     class AddPermissionInput < Struct.new(
       :topic_arn,
       :label,
@@ -59,6 +61,8 @@ module Aws::SNS
     #   The phone number for which you want to check the opt out status.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOutInput AWS API Documentation
+    #
     class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
       :phone_number)
       include Aws::Structure
@@ -75,6 +79,8 @@ module Aws::SNS
     #   * `false` – The phone number is opted in, meaning you can publish
     #     SMS messages to it.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOutResponse AWS API Documentation
     #
     class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
       :is_opted_out)
@@ -108,6 +114,8 @@ module Aws::SNS
     #   authentication.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionInput AWS API Documentation
+    #
     class ConfirmSubscriptionInput < Struct.new(
       :topic_arn,
       :token,
@@ -121,6 +129,8 @@ module Aws::SNS
     #   The ARN of the created subscription.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscriptionResponse AWS API Documentation
+    #
     class ConfirmSubscriptionResponse < Struct.new(
       :subscription_arn)
       include Aws::Structure
@@ -131,6 +141,8 @@ module Aws::SNS
     # @!attribute [rw] endpoint_arn
     #   EndpointArn returned from CreateEndpoint action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateEndpointResponse AWS API Documentation
     #
     class CreateEndpointResponse < Struct.new(
       :endpoint_arn)
@@ -170,6 +182,8 @@ module Aws::SNS
     #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationInput AWS API Documentation
+    #
     class CreatePlatformApplicationInput < Struct.new(
       :name,
       :platform,
@@ -182,6 +196,8 @@ module Aws::SNS
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn is returned.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplicationResponse AWS API Documentation
     #
     class CreatePlatformApplicationResponse < Struct.new(
       :platform_application_arn)
@@ -230,6 +246,8 @@ module Aws::SNS
     #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetEndpointAttributes.html
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpointInput AWS API Documentation
+    #
     class CreatePlatformEndpointInput < Struct.new(
       :platform_application_arn,
       :token,
@@ -255,6 +273,8 @@ module Aws::SNS
     #   be between 1 and 256 characters long.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicInput AWS API Documentation
+    #
     class CreateTopicInput < Struct.new(
       :name)
       include Aws::Structure
@@ -265,6 +285,8 @@ module Aws::SNS
     # @!attribute [rw] topic_arn
     #   The Amazon Resource Name (ARN) assigned to the created topic.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopicResponse AWS API Documentation
     #
     class CreateTopicResponse < Struct.new(
       :topic_arn)
@@ -284,6 +306,8 @@ module Aws::SNS
     #   EndpointArn of endpoint to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpointInput AWS API Documentation
+    #
     class DeleteEndpointInput < Struct.new(
       :endpoint_arn)
       include Aws::Structure
@@ -302,6 +326,8 @@ module Aws::SNS
     #   PlatformApplicationArn of platform application object to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplicationInput AWS API Documentation
+    #
     class DeletePlatformApplicationInput < Struct.new(
       :platform_application_arn)
       include Aws::Structure
@@ -318,6 +344,8 @@ module Aws::SNS
     #   The ARN of the topic you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopicInput AWS API Documentation
+    #
     class DeleteTopicInput < Struct.new(
       :topic_arn)
       include Aws::Structure
@@ -332,6 +360,8 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   Attributes for endpoint.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :endpoint_arn,
@@ -351,6 +381,8 @@ module Aws::SNS
     # @!attribute [rw] endpoint_arn
     #   EndpointArn for GetEndpointAttributes input.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributesInput AWS API Documentation
     #
     class GetEndpointAttributesInput < Struct.new(
       :endpoint_arn)
@@ -377,6 +409,8 @@ module Aws::SNS
     #     with the notification service.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributesResponse AWS API Documentation
+    #
     class GetEndpointAttributesResponse < Struct.new(
       :attributes)
       include Aws::Structure
@@ -394,6 +428,8 @@ module Aws::SNS
     # @!attribute [rw] platform_application_arn
     #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesInput AWS API Documentation
     #
     class GetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn)
@@ -418,6 +454,8 @@ module Aws::SNS
     #     notifications should be sent upon Direct Publish delivery failure
     #     (permanent) to one of the application's endpoints.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributesResponse AWS API Documentation
     #
     class GetPlatformApplicationAttributesResponse < Struct.new(
       :attributes)
@@ -447,6 +485,8 @@ module Aws::SNS
     #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesInput AWS API Documentation
+    #
     class GetSMSAttributesInput < Struct.new(
       :attributes)
       include Aws::Structure
@@ -457,6 +497,8 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   The SMS attribute names and their values.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributesResponse AWS API Documentation
     #
     class GetSMSAttributesResponse < Struct.new(
       :attributes)
@@ -475,6 +517,8 @@ module Aws::SNS
     # @!attribute [rw] subscription_arn
     #   The ARN of the subscription whose properties you want to get.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesInput AWS API Documentation
     #
     class GetSubscriptionAttributesInput < Struct.new(
       :subscription_arn)
@@ -505,6 +549,8 @@ module Aws::SNS
     #     delivery policy and account system defaults
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributesResponse AWS API Documentation
+    #
     class GetSubscriptionAttributesResponse < Struct.new(
       :attributes)
       include Aws::Structure
@@ -522,6 +568,8 @@ module Aws::SNS
     # @!attribute [rw] topic_arn
     #   The ARN of the topic whose properties you want to get.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesInput AWS API Documentation
     #
     class GetTopicAttributesInput < Struct.new(
       :topic_arn)
@@ -560,6 +608,8 @@ module Aws::SNS
     #     effective delivery policy that takes into account system defaults
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributesResponse AWS API Documentation
+    #
     class GetTopicAttributesResponse < Struct.new(
       :attributes)
       include Aws::Structure
@@ -586,6 +636,8 @@ module Aws::SNS
     #   records that are available after the first page results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationInput AWS API Documentation
+    #
     class ListEndpointsByPlatformApplicationInput < Struct.new(
       :platform_application_arn,
       :next_token)
@@ -603,6 +655,8 @@ module Aws::SNS
     #   ListEndpointsByPlatformApplication action if additional records are
     #   available after the first page results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplicationResponse AWS API Documentation
     #
     class ListEndpointsByPlatformApplicationResponse < Struct.new(
       :endpoints,
@@ -625,6 +679,8 @@ module Aws::SNS
     #   that are available after the first page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOutInput AWS API Documentation
+    #
     class ListPhoneNumbersOptedOutInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -643,6 +699,8 @@ module Aws::SNS
     #   `ListPhoneNumbersOptedOut` action if additional records are
     #   available after the first page of results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOutResponse AWS API Documentation
     #
     class ListPhoneNumbersOptedOutResponse < Struct.new(
       :phone_numbers,
@@ -665,6 +723,8 @@ module Aws::SNS
     #   first page results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsInput AWS API Documentation
+    #
     class ListPlatformApplicationsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -682,6 +742,8 @@ module Aws::SNS
     #   action if additional records are available after the first page
     #   results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplicationsResponse AWS API Documentation
     #
     class ListPlatformApplicationsResponse < Struct.new(
       :platform_applications,
@@ -707,6 +769,8 @@ module Aws::SNS
     #   Token returned by the previous `ListSubscriptionsByTopic` request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopicInput AWS API Documentation
+    #
     class ListSubscriptionsByTopicInput < Struct.new(
       :topic_arn,
       :next_token)
@@ -724,6 +788,8 @@ module Aws::SNS
     #   This element is returned if there are more subscriptions to
     #   retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopicResponse AWS API Documentation
     #
     class ListSubscriptionsByTopicResponse < Struct.new(
       :subscriptions,
@@ -744,6 +810,8 @@ module Aws::SNS
     #   Token returned by the previous `ListSubscriptions` request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsInput AWS API Documentation
+    #
     class ListSubscriptionsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -759,6 +827,8 @@ module Aws::SNS
     #   Token to pass along to the next `ListSubscriptions` request. This
     #   element is returned if there are more subscriptions to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsResponse AWS API Documentation
     #
     class ListSubscriptionsResponse < Struct.new(
       :subscriptions,
@@ -777,6 +847,8 @@ module Aws::SNS
     #   Token returned by the previous `ListTopics` request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopicsInput AWS API Documentation
+    #
     class ListTopicsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -792,6 +864,8 @@ module Aws::SNS
     #   Token to pass along to the next `ListTopics` request. This element
     #   is returned if there are additional topics to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopicsResponse AWS API Documentation
     #
     class ListTopicsResponse < Struct.new(
       :topics,
@@ -848,6 +922,8 @@ module Aws::SNS
     #   compressed data, encrypted data, or images.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/MessageAttributeValue AWS API Documentation
+    #
     class MessageAttributeValue < Struct.new(
       :data_type,
       :string_value,
@@ -868,12 +944,16 @@ module Aws::SNS
     #   The phone number to opt in.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberInput AWS API Documentation
+    #
     class OptInPhoneNumberInput < Struct.new(
       :phone_number)
       include Aws::Structure
     end
 
     # The response for the OptInPhoneNumber action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumberResponse AWS API Documentation
     #
     class OptInPhoneNumberResponse < Aws::EmptyStructure; end
 
@@ -886,6 +966,8 @@ module Aws::SNS
     # @!attribute [rw] attributes
     #   Attributes for platform application object.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PlatformApplication AWS API Documentation
     #
     class PlatformApplication < Struct.new(
       :platform_application_arn,
@@ -1019,6 +1101,8 @@ module Aws::SNS
     #   Message attributes for Publish action.
     #   @return [Hash<String,Types::MessageAttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishInput AWS API Documentation
+    #
     class PublishInput < Struct.new(
       :topic_arn,
       :target_arn,
@@ -1037,6 +1121,8 @@ module Aws::SNS
     #
     #   Length Constraint: Maximum 100 characters
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/PublishResponse AWS API Documentation
     #
     class PublishResponse < Struct.new(
       :message_id)
@@ -1060,6 +1146,8 @@ module Aws::SNS
     # @!attribute [rw] label
     #   The unique label of the statement you want to remove.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermissionInput AWS API Documentation
     #
     class RemovePermissionInput < Struct.new(
       :topic_arn,
@@ -1101,6 +1189,8 @@ module Aws::SNS
     #     notification service when an app and mobile device are registered
     #     with the notification service.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributesInput AWS API Documentation
     #
     class SetEndpointAttributesInput < Struct.new(
       :endpoint_arn,
@@ -1160,6 +1250,8 @@ module Aws::SNS
     #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
     #     successfully delivered messages.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributesInput AWS API Documentation
     #
     class SetPlatformApplicationAttributesInput < Struct.new(
       :platform_application_arn,
@@ -1261,12 +1353,16 @@ module Aws::SNS
     #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesInput AWS API Documentation
+    #
     class SetSMSAttributesInput < Struct.new(
       :attributes)
       include Aws::Structure
     end
 
     # The response for the SetSMSAttributes action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributesResponse AWS API Documentation
     #
     class SetSMSAttributesResponse < Aws::EmptyStructure; end
 
@@ -1295,6 +1391,8 @@ module Aws::SNS
     # @!attribute [rw] attribute_value
     #   The new value for the attribute in JSON format.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributesInput AWS API Documentation
     #
     class SetSubscriptionAttributesInput < Struct.new(
       :subscription_arn,
@@ -1328,6 +1426,8 @@ module Aws::SNS
     # @!attribute [rw] attribute_value
     #   The new value for the attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributesInput AWS API Documentation
     #
     class SetTopicAttributesInput < Struct.new(
       :topic_arn,
@@ -1400,6 +1500,8 @@ module Aws::SNS
     #     Lambda function.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeInput AWS API Documentation
+    #
     class SubscribeInput < Struct.new(
       :topic_arn,
       :protocol,
@@ -1414,6 +1516,8 @@ module Aws::SNS
     #   subscription immediately (without requiring endpoint owner
     #   confirmation).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SubscribeResponse AWS API Documentation
     #
     class SubscribeResponse < Struct.new(
       :subscription_arn)
@@ -1442,6 +1546,8 @@ module Aws::SNS
     #   The ARN of the subscription's topic.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscription AWS API Documentation
+    #
     class Subscription < Struct.new(
       :subscription_arn,
       :owner,
@@ -1457,6 +1563,8 @@ module Aws::SNS
     # @!attribute [rw] topic_arn
     #   The topic's ARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Topic AWS API Documentation
     #
     class Topic < Struct.new(
       :topic_arn)
@@ -1475,6 +1583,8 @@ module Aws::SNS
     # @!attribute [rw] subscription_arn
     #   The ARN of the subscription to be deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/UnsubscribeInput AWS API Documentation
     #
     class UnsubscribeInput < Struct.new(
       :subscription_arn)

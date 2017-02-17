@@ -220,6 +220,8 @@ module Aws::Redshift
     #   resp.cluster_security_group.tags[0].key #=> String
     #   resp.cluster_security_group.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngress AWS API Documentation
+    #
     # @overload authorize_cluster_security_group_ingress(params = {})
     # @param [Hash] params ({})
     def authorize_cluster_security_group_ingress(params = {}, options = {})
@@ -298,6 +300,8 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccess AWS API Documentation
     #
     # @overload authorize_snapshot_access(params = {})
     # @param [Hash] params ({})
@@ -409,6 +413,8 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshot AWS API Documentation
     #
     # @overload copy_cluster_snapshot(params = {})
     # @param [Hash] params ({})
@@ -843,6 +849,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateCluster AWS API Documentation
+    #
     # @overload create_cluster(params = {})
     # @param [Hash] params ({})
     def create_cluster(params = {}, options = {})
@@ -930,6 +938,8 @@ module Aws::Redshift
     #   resp.cluster_parameter_group.tags[0].key #=> String
     #   resp.cluster_parameter_group.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroup AWS API Documentation
+    #
     # @overload create_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
     def create_cluster_parameter_group(params = {}, options = {})
@@ -1006,6 +1016,8 @@ module Aws::Redshift
     #   resp.cluster_security_group.tags #=> Array
     #   resp.cluster_security_group.tags[0].key #=> String
     #   resp.cluster_security_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroup AWS API Documentation
     #
     # @overload create_cluster_security_group(params = {})
     # @param [Hash] params ({})
@@ -1100,6 +1112,8 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshot AWS API Documentation
+    #
     # @overload create_cluster_snapshot(params = {})
     # @param [Hash] params ({})
     def create_cluster_snapshot(params = {}, options = {})
@@ -1174,6 +1188,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_group.tags #=> Array
     #   resp.cluster_subnet_group.tags[0].key #=> String
     #   resp.cluster_subnet_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroup AWS API Documentation
     #
     # @overload create_cluster_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -1306,6 +1322,8 @@ module Aws::Redshift
     #   resp.event_subscription.tags[0].key #=> String
     #   resp.event_subscription.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscription AWS API Documentation
+    #
     # @overload create_event_subscription(params = {})
     # @param [Hash] params ({})
     def create_event_subscription(params = {}, options = {})
@@ -1359,6 +1377,8 @@ module Aws::Redshift
     #   resp.hsm_client_certificate.tags #=> Array
     #   resp.hsm_client_certificate.tags[0].key #=> String
     #   resp.hsm_client_certificate.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificate AWS API Documentation
     #
     # @overload create_hsm_client_certificate(params = {})
     # @param [Hash] params ({})
@@ -1437,6 +1457,8 @@ module Aws::Redshift
     #   resp.hsm_configuration.tags[0].key #=> String
     #   resp.hsm_configuration.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfiguration AWS API Documentation
+    #
     # @overload create_hsm_configuration(params = {})
     # @param [Hash] params ({})
     def create_hsm_configuration(params = {}, options = {})
@@ -1505,6 +1527,8 @@ module Aws::Redshift
     #   resp.snapshot_copy_grant.tags[0].key #=> String
     #   resp.snapshot_copy_grant.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrant AWS API Documentation
+    #
     # @overload create_snapshot_copy_grant(params = {})
     # @param [Hash] params ({})
     def create_snapshot_copy_grant(params = {}, options = {})
@@ -1546,6 +1570,8 @@ module Aws::Redshift
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTags AWS API Documentation
     #
     # @overload create_tags(params = {})
     # @param [Hash] params ({})
@@ -1699,6 +1725,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteCluster AWS API Documentation
+    #
     # @overload delete_cluster(params = {})
     # @param [Hash] params ({})
     def delete_cluster(params = {}, options = {})
@@ -1729,6 +1757,8 @@ module Aws::Redshift
     #   resp = client.delete_cluster_parameter_group({
     #     parameter_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroup AWS API Documentation
     #
     # @overload delete_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -1762,6 +1792,8 @@ module Aws::Redshift
     #   resp = client.delete_cluster_security_group({
     #     cluster_security_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroup AWS API Documentation
     #
     # @overload delete_cluster_security_group(params = {})
     # @param [Hash] params ({})
@@ -1842,6 +1874,8 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshot AWS API Documentation
+    #
     # @overload delete_cluster_snapshot(params = {})
     # @param [Hash] params ({})
     def delete_cluster_snapshot(params = {}, options = {})
@@ -1861,6 +1895,8 @@ module Aws::Redshift
     #   resp = client.delete_cluster_subnet_group({
     #     cluster_subnet_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroup AWS API Documentation
     #
     # @overload delete_cluster_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -1883,6 +1919,8 @@ module Aws::Redshift
     #     subscription_name: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscription AWS API Documentation
+    #
     # @overload delete_event_subscription(params = {})
     # @param [Hash] params ({})
     def delete_event_subscription(params = {}, options = {})
@@ -1902,6 +1940,8 @@ module Aws::Redshift
     #   resp = client.delete_hsm_client_certificate({
     #     hsm_client_certificate_identifier: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificate AWS API Documentation
     #
     # @overload delete_hsm_client_certificate(params = {})
     # @param [Hash] params ({})
@@ -1923,6 +1963,8 @@ module Aws::Redshift
     #     hsm_configuration_identifier: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfiguration AWS API Documentation
+    #
     # @overload delete_hsm_configuration(params = {})
     # @param [Hash] params ({})
     def delete_hsm_configuration(params = {}, options = {})
@@ -1942,6 +1984,8 @@ module Aws::Redshift
     #   resp = client.delete_snapshot_copy_grant({
     #     snapshot_copy_grant_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrant AWS API Documentation
     #
     # @overload delete_snapshot_copy_grant(params = {})
     # @param [Hash] params ({})
@@ -1969,6 +2013,8 @@ module Aws::Redshift
     #     resource_name: "String", # required
     #     tag_keys: ["String"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTags AWS API Documentation
     #
     # @overload delete_tags(params = {})
     # @param [Hash] params ({})
@@ -2072,6 +2118,8 @@ module Aws::Redshift
     #   resp.parameter_groups[0].tags[0].key #=> String
     #   resp.parameter_groups[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroups AWS API Documentation
+    #
     # @overload describe_cluster_parameter_groups(params = {})
     # @param [Hash] params ({})
     def describe_cluster_parameter_groups(params = {}, options = {})
@@ -2156,6 +2204,8 @@ module Aws::Redshift
     #   resp.parameters[0].is_modifiable #=> Boolean
     #   resp.parameters[0].minimum_engine_version #=> String
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameters AWS API Documentation
     #
     # @overload describe_cluster_parameters(params = {})
     # @param [Hash] params ({})
@@ -2272,6 +2322,8 @@ module Aws::Redshift
     #   resp.cluster_security_groups[0].tags #=> Array
     #   resp.cluster_security_groups[0].tags[0].key #=> String
     #   resp.cluster_security_groups[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroups AWS API Documentation
     #
     # @overload describe_cluster_security_groups(params = {})
     # @param [Hash] params ({})
@@ -2437,6 +2489,8 @@ module Aws::Redshift
     #   resp.snapshots[0].restorable_node_types[0] #=> String
     #   resp.snapshots[0].enhanced_vpc_routing #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshots AWS API Documentation
+    #
     # @overload describe_cluster_snapshots(params = {})
     # @param [Hash] params ({})
     def describe_cluster_snapshots(params = {}, options = {})
@@ -2532,6 +2586,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_groups[0].tags[0].key #=> String
     #   resp.cluster_subnet_groups[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroups AWS API Documentation
+    #
     # @overload describe_cluster_subnet_groups(params = {})
     # @param [Hash] params ({})
     def describe_cluster_subnet_groups(params = {}, options = {})
@@ -2606,6 +2662,8 @@ module Aws::Redshift
     #   resp.cluster_versions[0].cluster_version #=> String
     #   resp.cluster_versions[0].cluster_parameter_group_family #=> String
     #   resp.cluster_versions[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersions AWS API Documentation
     #
     # @overload describe_cluster_versions(params = {})
     # @param [Hash] params ({})
@@ -2769,6 +2827,8 @@ module Aws::Redshift
     #   resp.clusters[0].iam_roles[0].iam_role_arn #=> String
     #   resp.clusters[0].iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusters AWS API Documentation
+    #
     # @overload describe_clusters(params = {})
     # @param [Hash] params ({})
     def describe_clusters(params = {}, options = {})
@@ -2837,6 +2897,8 @@ module Aws::Redshift
     #   resp.default_cluster_parameters.parameters[0].is_modifiable #=> Boolean
     #   resp.default_cluster_parameters.parameters[0].minimum_engine_version #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParameters AWS API Documentation
+    #
     # @overload describe_default_cluster_parameters(params = {})
     # @param [Hash] params ({})
     def describe_default_cluster_parameters(params = {}, options = {})
@@ -2879,6 +2941,8 @@ module Aws::Redshift
     #   resp.event_categories_map_list[0].events[0].event_categories[0] #=> String
     #   resp.event_categories_map_list[0].events[0].event_description #=> String
     #   resp.event_categories_map_list[0].events[0].severity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategories AWS API Documentation
     #
     # @overload describe_event_categories(params = {})
     # @param [Hash] params ({})
@@ -2947,6 +3011,8 @@ module Aws::Redshift
     #   resp.event_subscriptions_list[0].tags #=> Array
     #   resp.event_subscriptions_list[0].tags[0].key #=> String
     #   resp.event_subscriptions_list[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptions AWS API Documentation
     #
     # @overload describe_event_subscriptions(params = {})
     # @param [Hash] params ({})
@@ -3079,6 +3145,8 @@ module Aws::Redshift
     #   resp.events[0].date #=> Time
     #   resp.events[0].event_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEvents AWS API Documentation
+    #
     # @overload describe_events(params = {})
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
@@ -3168,6 +3236,8 @@ module Aws::Redshift
     #   resp.hsm_client_certificates[0].tags #=> Array
     #   resp.hsm_client_certificates[0].tags[0].key #=> String
     #   resp.hsm_client_certificates[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmClientCertificates AWS API Documentation
     #
     # @overload describe_hsm_client_certificates(params = {})
     # @param [Hash] params ({})
@@ -3262,6 +3332,8 @@ module Aws::Redshift
     #   resp.hsm_configurations[0].tags[0].key #=> String
     #   resp.hsm_configurations[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurations AWS API Documentation
+    #
     # @overload describe_hsm_configurations(params = {})
     # @param [Hash] params ({})
     def describe_hsm_configurations(params = {}, options = {})
@@ -3300,6 +3372,8 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus AWS API Documentation
     #
     # @overload describe_logging_status(params = {})
     # @param [Hash] params ({})
@@ -3379,6 +3453,8 @@ module Aws::Redshift
     #   resp.orderable_cluster_options[0].availability_zones[0].name #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptions AWS API Documentation
+    #
     # @overload describe_orderable_cluster_options(params = {})
     # @param [Hash] params ({})
     def describe_orderable_cluster_options(params = {}, options = {})
@@ -3452,6 +3528,8 @@ module Aws::Redshift
     #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferings AWS API Documentation
+    #
     # @overload describe_reserved_node_offerings(params = {})
     # @param [Hash] params ({})
     def describe_reserved_node_offerings(params = {}, options = {})
@@ -3515,6 +3593,8 @@ module Aws::Redshift
     #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodes AWS API Documentation
+    #
     # @overload describe_reserved_nodes(params = {})
     # @param [Hash] params ({})
     def describe_reserved_nodes(params = {}, options = {})
@@ -3576,6 +3656,8 @@ module Aws::Redshift
     #   resp.progress_in_mega_bytes #=> Integer
     #   resp.elapsed_time_in_seconds #=> Integer
     #   resp.estimated_time_to_completion_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResize AWS API Documentation
     #
     # @overload describe_resize(params = {})
     # @param [Hash] params ({})
@@ -3662,6 +3744,8 @@ module Aws::Redshift
     #   resp.snapshot_copy_grants[0].tags[0].key #=> String
     #   resp.snapshot_copy_grants[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrants AWS API Documentation
+    #
     # @overload describe_snapshot_copy_grants(params = {})
     # @param [Hash] params ({})
     def describe_snapshot_copy_grants(params = {}, options = {})
@@ -3730,6 +3814,8 @@ module Aws::Redshift
     #   resp.table_restore_status_details[0].target_schema_name #=> String
     #   resp.table_restore_status_details[0].new_table_name #=> String
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatus AWS API Documentation
     #
     # @overload describe_table_restore_status(params = {})
     # @param [Hash] params ({})
@@ -3857,6 +3943,8 @@ module Aws::Redshift
     #   resp.tagged_resources[0].resource_type #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTags AWS API Documentation
+    #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
@@ -3895,6 +3983,8 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging AWS API Documentation
     #
     # @overload disable_logging(params = {})
     # @param [Hash] params ({})
@@ -4000,6 +4090,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopy AWS API Documentation
+    #
     # @overload disable_snapshot_copy(params = {})
     # @param [Hash] params ({})
     def disable_snapshot_copy(params = {}, options = {})
@@ -4071,6 +4163,8 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging AWS API Documentation
     #
     # @overload enable_logging(params = {})
     # @param [Hash] params ({})
@@ -4195,6 +4289,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopy AWS API Documentation
     #
     # @overload enable_snapshot_copy(params = {})
     # @param [Hash] params ({})
@@ -4538,6 +4634,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyCluster AWS API Documentation
+    #
     # @overload modify_cluster(params = {})
     # @param [Hash] params ({})
     def modify_cluster(params = {}, options = {})
@@ -4648,6 +4746,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRoles AWS API Documentation
+    #
     # @overload modify_cluster_iam_roles(params = {})
     # @param [Hash] params ({})
     def modify_cluster_iam_roles(params = {}, options = {})
@@ -4708,6 +4808,8 @@ module Aws::Redshift
     #   resp.parameter_group_name #=> String
     #   resp.parameter_group_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroup AWS API Documentation
+    #
     # @overload modify_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
     def modify_cluster_parameter_group(params = {}, options = {})
@@ -4754,6 +4856,8 @@ module Aws::Redshift
     #   resp.cluster_subnet_group.tags #=> Array
     #   resp.cluster_subnet_group.tags[0].key #=> String
     #   resp.cluster_subnet_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroup AWS API Documentation
     #
     # @overload modify_cluster_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -4842,6 +4946,8 @@ module Aws::Redshift
     #   resp.event_subscription.tags #=> Array
     #   resp.event_subscription.tags[0].key #=> String
     #   resp.event_subscription.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscription AWS API Documentation
     #
     # @overload modify_event_subscription(params = {})
     # @param [Hash] params ({})
@@ -4955,6 +5061,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriod AWS API Documentation
+    #
     # @overload modify_snapshot_copy_retention_period(params = {})
     # @param [Hash] params ({})
     def modify_snapshot_copy_retention_period(params = {}, options = {})
@@ -5012,6 +5120,8 @@ module Aws::Redshift
     #   resp.reserved_node.recurring_charges #=> Array
     #   resp.reserved_node.recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOffering AWS API Documentation
     #
     # @overload purchase_reserved_node_offering(params = {})
     # @param [Hash] params ({})
@@ -5117,6 +5227,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootCluster AWS API Documentation
+    #
     # @overload reboot_cluster(params = {})
     # @param [Hash] params ({})
     def reboot_cluster(params = {}, options = {})
@@ -5175,6 +5287,8 @@ module Aws::Redshift
     #
     #   resp.parameter_group_name #=> String
     #   resp.parameter_group_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroup AWS API Documentation
     #
     # @overload reset_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -5496,6 +5610,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshot AWS API Documentation
+    #
     # @overload restore_from_cluster_snapshot(params = {})
     # @param [Hash] params ({})
     def restore_from_cluster_snapshot(params = {}, options = {})
@@ -5581,6 +5697,8 @@ module Aws::Redshift
     #   resp.table_restore_status.target_schema_name #=> String
     #   resp.table_restore_status.new_table_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshot AWS API Documentation
+    #
     # @overload restore_table_from_cluster_snapshot(params = {})
     # @param [Hash] params ({})
     def restore_table_from_cluster_snapshot(params = {}, options = {})
@@ -5655,6 +5773,8 @@ module Aws::Redshift
     #   resp.cluster_security_group.tags #=> Array
     #   resp.cluster_security_group.tags[0].key #=> String
     #   resp.cluster_security_group.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngress AWS API Documentation
     #
     # @overload revoke_cluster_security_group_ingress(params = {})
     # @param [Hash] params ({})
@@ -5735,6 +5855,8 @@ module Aws::Redshift
     #   resp.snapshot.restorable_node_types #=> Array
     #   resp.snapshot.restorable_node_types[0] #=> String
     #   resp.snapshot.enhanced_vpc_routing #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccess AWS API Documentation
     #
     # @overload revoke_snapshot_access(params = {})
     # @param [Hash] params ({})
@@ -5833,6 +5955,8 @@ module Aws::Redshift
     #   resp.cluster.iam_roles #=> Array
     #   resp.cluster.iam_roles[0].iam_role_arn #=> String
     #   resp.cluster.iam_roles[0].apply_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKey AWS API Documentation
     #
     # @overload rotate_encryption_key(params = {})
     # @param [Hash] params ({})

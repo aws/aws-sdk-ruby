@@ -240,6 +240,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGateway AWS API Documentation
+    #
     # @overload activate_gateway(params = {})
     # @param [Hash] params ({})
     def activate_gateway(params = {}, options = {})
@@ -280,6 +282,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCache AWS API Documentation
     #
     # @overload add_cache(params = {})
     # @param [Hash] params ({})
@@ -347,6 +351,8 @@ module Aws::StorageGateway
     #
     #   resp.resource_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResource AWS API Documentation
+    #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
     def add_tags_to_resource(params = {}, options = {})
@@ -382,6 +388,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBuffer AWS API Documentation
     #
     # @overload add_upload_buffer(params = {})
     # @param [Hash] params ({})
@@ -429,6 +437,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorage AWS API Documentation
+    #
     # @overload add_working_storage(params = {})
     # @param [Hash] params ({})
     def add_working_storage(params = {}, options = {})
@@ -461,6 +471,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.tape_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchival AWS API Documentation
     #
     # @overload cancel_archival(params = {})
     # @param [Hash] params ({})
@@ -495,6 +507,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.tape_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrieval AWS API Documentation
     #
     # @overload cancel_retrieval(params = {})
     # @param [Hash] params ({})
@@ -568,6 +582,8 @@ module Aws::StorageGateway
     #   resp.volume_arn #=> String
     #   resp.target_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolume AWS API Documentation
+    #
     # @overload create_cached_iscsi_volume(params = {})
     # @param [Hash] params ({})
     def create_cached_iscsi_volume(params = {}, options = {})
@@ -638,6 +654,8 @@ module Aws::StorageGateway
     #
     #   resp.file_share_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShare AWS API Documentation
+    #
     # @overload create_nfs_file_share(params = {})
     # @param [Hash] params ({})
     def create_nfs_file_share(params = {}, options = {})
@@ -707,6 +725,8 @@ module Aws::StorageGateway
     #   resp.volume_arn #=> String
     #   resp.snapshot_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshot AWS API Documentation
+    #
     # @overload create_snapshot(params = {})
     # @param [Hash] params ({})
     def create_snapshot(params = {}, options = {})
@@ -759,6 +779,8 @@ module Aws::StorageGateway
     #   resp.snapshot_id #=> String
     #   resp.volume_arn #=> String
     #   resp.volume_recovery_point_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPoint AWS API Documentation
     #
     # @overload create_snapshot_from_volume_recovery_point(params = {})
     # @param [Hash] params ({})
@@ -851,6 +873,8 @@ module Aws::StorageGateway
     #   resp.volume_size_in_bytes #=> Integer
     #   resp.target_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolume AWS API Documentation
+    #
     # @overload create_stored_iscsi_volume(params = {})
     # @param [Hash] params ({})
     def create_stored_iscsi_volume(params = {}, options = {})
@@ -897,6 +921,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.tape_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcode AWS API Documentation
     #
     # @overload create_tape_with_barcode(params = {})
     # @param [Hash] params ({})
@@ -967,6 +993,8 @@ module Aws::StorageGateway
     #   resp.tape_arns #=> Array
     #   resp.tape_arns[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapes AWS API Documentation
+    #
     # @overload create_tapes(params = {})
     # @param [Hash] params ({})
     def create_tapes(params = {}, options = {})
@@ -1005,6 +1033,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimit AWS API Documentation
+    #
     # @overload delete_bandwidth_rate_limit(params = {})
     # @param [Hash] params ({})
     def delete_bandwidth_rate_limit(params = {}, options = {})
@@ -1040,6 +1070,8 @@ module Aws::StorageGateway
     #   resp.target_arn #=> String
     #   resp.initiator_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentials AWS API Documentation
+    #
     # @overload delete_chap_credentials(params = {})
     # @param [Hash] params ({})
     def delete_chap_credentials(params = {}, options = {})
@@ -1065,6 +1097,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.file_share_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShare AWS API Documentation
     #
     # @overload delete_file_share(params = {})
     # @param [Hash] params ({})
@@ -1115,6 +1149,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGateway AWS API Documentation
+    #
     # @overload delete_gateway(params = {})
     # @param [Hash] params ({})
     def delete_gateway(params = {}, options = {})
@@ -1155,6 +1191,8 @@ module Aws::StorageGateway
     #
     #   resp.volume_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotSchedule AWS API Documentation
+    #
     # @overload delete_snapshot_schedule(params = {})
     # @param [Hash] params ({})
     def delete_snapshot_schedule(params = {}, options = {})
@@ -1187,6 +1225,8 @@ module Aws::StorageGateway
     #
     #   resp.tape_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTape AWS API Documentation
+    #
     # @overload delete_tape(params = {})
     # @param [Hash] params ({})
     def delete_tape(params = {}, options = {})
@@ -1213,6 +1253,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.tape_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchive AWS API Documentation
     #
     # @overload delete_tape_archive(params = {})
     # @param [Hash] params ({})
@@ -1260,6 +1302,8 @@ module Aws::StorageGateway
     #
     #   resp.volume_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolume AWS API Documentation
+    #
     # @overload delete_volume(params = {})
     # @param [Hash] params ({})
     def delete_volume(params = {}, options = {})
@@ -1298,6 +1342,8 @@ module Aws::StorageGateway
     #   resp.gateway_arn #=> String
     #   resp.average_upload_rate_limit_in_bits_per_sec #=> Integer
     #   resp.average_download_rate_limit_in_bits_per_sec #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimit AWS API Documentation
     #
     # @overload describe_bandwidth_rate_limit(params = {})
     # @param [Hash] params ({})
@@ -1343,6 +1389,8 @@ module Aws::StorageGateway
     #   resp.cache_hit_percentage #=> Float
     #   resp.cache_miss_percentage #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCache AWS API Documentation
+    #
     # @overload describe_cache(params = {})
     # @param [Hash] params ({})
     def describe_cache(params = {}, options = {})
@@ -1387,6 +1435,8 @@ module Aws::StorageGateway
     #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
     #   resp.cached_iscsi_volumes[0].created_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumes AWS API Documentation
+    #
     # @overload describe_cached_iscsi_volumes(params = {})
     # @param [Hash] params ({})
     def describe_cached_iscsi_volumes(params = {}, options = {})
@@ -1420,6 +1470,8 @@ module Aws::StorageGateway
     #   resp.chap_credentials[0].secret_to_authenticate_initiator #=> String
     #   resp.chap_credentials[0].initiator_name #=> String
     #   resp.chap_credentials[0].secret_to_authenticate_target #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentials AWS API Documentation
     #
     # @overload describe_chap_credentials(params = {})
     # @param [Hash] params ({})
@@ -1470,6 +1522,8 @@ module Aws::StorageGateway
     #   resp.next_update_availability_date #=> String
     #   resp.last_software_update #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
+    #
     # @overload describe_gateway_information(params = {})
     # @param [Hash] params ({})
     def describe_gateway_information(params = {}, options = {})
@@ -1506,6 +1560,8 @@ module Aws::StorageGateway
     #   resp.minute_of_hour #=> Integer
     #   resp.day_of_week #=> Integer
     #   resp.timezone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTime AWS API Documentation
     #
     # @overload describe_maintenance_start_time(params = {})
     # @param [Hash] params ({})
@@ -1548,6 +1604,8 @@ module Aws::StorageGateway
     #   resp.nfs_file_share_info_list[0].location_arn #=> String
     #   resp.nfs_file_share_info_list[0].default_storage_class #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares AWS API Documentation
+    #
     # @overload describe_nfs_file_shares(params = {})
     # @param [Hash] params ({})
     def describe_nfs_file_shares(params = {}, options = {})
@@ -1584,6 +1642,8 @@ module Aws::StorageGateway
     #   resp.recurrence_in_hours #=> Integer
     #   resp.description #=> String
     #   resp.timezone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotSchedule AWS API Documentation
     #
     # @overload describe_snapshot_schedule(params = {})
     # @param [Hash] params ({})
@@ -1631,6 +1691,8 @@ module Aws::StorageGateway
     #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.lun_number #=> Integer
     #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
     #   resp.stored_iscsi_volumes[0].created_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumes AWS API Documentation
     #
     # @overload describe_stored_iscsi_volumes(params = {})
     # @param [Hash] params ({})
@@ -1683,6 +1745,8 @@ module Aws::StorageGateway
     #   resp.tape_archives[0].tape_status #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchives AWS API Documentation
+    #
     # @overload describe_tape_archives(params = {})
     # @param [Hash] params ({})
     def describe_tape_archives(params = {}, options = {})
@@ -1733,6 +1797,8 @@ module Aws::StorageGateway
     #   resp.tape_recovery_point_infos[0].tape_size_in_bytes #=> Integer
     #   resp.tape_recovery_point_infos[0].tape_status #=> String
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPoints AWS API Documentation
     #
     # @overload describe_tape_recovery_points(params = {})
     # @param [Hash] params ({})
@@ -1796,6 +1862,8 @@ module Aws::StorageGateway
     #   resp.tapes[0].progress #=> Float
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapes AWS API Documentation
+    #
     # @overload describe_tapes(params = {})
     # @param [Hash] params ({})
     def describe_tapes(params = {}, options = {})
@@ -1835,6 +1903,8 @@ module Aws::StorageGateway
     #   resp.disk_ids[0] #=> String
     #   resp.upload_buffer_used_in_bytes #=> Integer
     #   resp.upload_buffer_allocated_in_bytes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBuffer AWS API Documentation
     #
     # @overload describe_upload_buffer(params = {})
     # @param [Hash] params ({})
@@ -1900,6 +1970,8 @@ module Aws::StorageGateway
     #   resp.vtl_devices[0].device_iscsi_attributes.chap_enabled #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevices AWS API Documentation
+    #
     # @overload describe_vtl_devices(params = {})
     # @param [Hash] params ({})
     def describe_vtl_devices(params = {}, options = {})
@@ -1946,6 +2018,8 @@ module Aws::StorageGateway
     #   resp.working_storage_used_in_bytes #=> Integer
     #   resp.working_storage_allocated_in_bytes #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorage AWS API Documentation
+    #
     # @overload describe_working_storage(params = {})
     # @param [Hash] params ({})
     def describe_working_storage(params = {}, options = {})
@@ -1979,6 +2053,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGateway AWS API Documentation
     #
     # @overload disable_gateway(params = {})
     # @param [Hash] params ({})
@@ -2027,6 +2103,8 @@ module Aws::StorageGateway
     #   resp.file_share_info_list[0].file_share_id #=> String
     #   resp.file_share_info_list[0].file_share_status #=> String
     #   resp.file_share_info_list[0].gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileShares AWS API Documentation
     #
     # @overload list_file_shares(params = {})
     # @param [Hash] params ({})
@@ -2078,6 +2156,8 @@ module Aws::StorageGateway
     #   resp.gateways[0].gateway_name #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways AWS API Documentation
+    #
     # @overload list_gateways(params = {})
     # @param [Hash] params ({})
     def list_gateways(params = {}, options = {})
@@ -2124,6 +2204,8 @@ module Aws::StorageGateway
     #   resp.disks[0].disk_allocation_type #=> String
     #   resp.disks[0].disk_allocation_resource #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisks AWS API Documentation
+    #
     # @overload list_local_disks(params = {})
     # @param [Hash] params ({})
     def list_local_disks(params = {}, options = {})
@@ -2166,6 +2248,8 @@ module Aws::StorageGateway
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2223,6 +2307,8 @@ module Aws::StorageGateway
     #   resp.tape_infos[0].gateway_arn #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapes AWS API Documentation
+    #
     # @overload list_tapes(params = {})
     # @param [Hash] params ({})
     def list_tapes(params = {}, options = {})
@@ -2251,6 +2337,8 @@ module Aws::StorageGateway
     #
     #   resp.initiators #=> Array
     #   resp.initiators[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiators AWS API Documentation
     #
     # @overload list_volume_initiators(params = {})
     # @param [Hash] params ({})
@@ -2291,6 +2379,8 @@ module Aws::StorageGateway
     #   resp.volume_recovery_point_infos[0].volume_size_in_bytes #=> Integer
     #   resp.volume_recovery_point_infos[0].volume_usage_in_bytes #=> Integer
     #   resp.volume_recovery_point_infos[0].volume_recovery_point_time #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPoints AWS API Documentation
     #
     # @overload list_volume_recovery_points(params = {})
     # @param [Hash] params ({})
@@ -2350,6 +2440,8 @@ module Aws::StorageGateway
     #   resp.volume_infos[0].volume_type #=> String
     #   resp.volume_infos[0].volume_size_in_bytes #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumes AWS API Documentation
+    #
     # @overload list_volumes(params = {})
     # @param [Hash] params ({})
     def list_volumes(params = {}, options = {})
@@ -2381,6 +2473,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})
@@ -2420,6 +2514,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCache AWS API Documentation
     #
     # @overload reset_cache(params = {})
     # @param [Hash] params ({})
@@ -2464,6 +2560,8 @@ module Aws::StorageGateway
     #
     #   resp.tape_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchive AWS API Documentation
+    #
     # @overload retrieve_tape_archive(params = {})
     # @param [Hash] params ({})
     def retrieve_tape_archive(params = {}, options = {})
@@ -2507,6 +2605,8 @@ module Aws::StorageGateway
     #
     #   resp.tape_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPoint AWS API Documentation
+    #
     # @overload retrieve_tape_recovery_point(params = {})
     # @param [Hash] params ({})
     def retrieve_tape_recovery_point(params = {}, options = {})
@@ -2540,6 +2640,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePassword AWS API Documentation
     #
     # @overload set_local_console_password(params = {})
     # @param [Hash] params ({})
@@ -2595,6 +2697,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGateway AWS API Documentation
+    #
     # @overload shutdown_gateway(params = {})
     # @param [Hash] params ({})
     def shutdown_gateway(params = {}, options = {})
@@ -2635,6 +2739,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGateway AWS API Documentation
     #
     # @overload start_gateway(params = {})
     # @param [Hash] params ({})
@@ -2681,6 +2787,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimit AWS API Documentation
     #
     # @overload update_bandwidth_rate_limit(params = {})
     # @param [Hash] params ({})
@@ -2742,6 +2850,8 @@ module Aws::StorageGateway
     #   resp.target_arn #=> String
     #   resp.initiator_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentials AWS API Documentation
+    #
     # @overload update_chap_credentials(params = {})
     # @param [Hash] params ({})
     def update_chap_credentials(params = {}, options = {})
@@ -2785,6 +2895,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #   resp.gateway_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformation AWS API Documentation
     #
     # @overload update_gateway_information(params = {})
     # @param [Hash] params ({})
@@ -2833,6 +2945,8 @@ module Aws::StorageGateway
     #
     #   resp.gateway_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNow AWS API Documentation
+    #
     # @overload update_gateway_software_now(params = {})
     # @param [Hash] params ({})
     def update_gateway_software_now(params = {}, options = {})
@@ -2878,6 +2992,8 @@ module Aws::StorageGateway
     # @example Response structure
     #
     #   resp.gateway_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTime AWS API Documentation
     #
     # @overload update_maintenance_start_time(params = {})
     # @param [Hash] params ({})
@@ -2936,6 +3052,8 @@ module Aws::StorageGateway
     #
     #   resp.file_share_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShare AWS API Documentation
+    #
     # @overload update_nfs_file_share(params = {})
     # @param [Hash] params ({})
     def update_nfs_file_share(params = {}, options = {})
@@ -2987,6 +3105,8 @@ module Aws::StorageGateway
     #
     #   resp.volume_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotSchedule AWS API Documentation
+    #
     # @overload update_snapshot_schedule(params = {})
     # @param [Hash] params ({})
     def update_snapshot_schedule(params = {}, options = {})
@@ -3023,6 +3143,8 @@ module Aws::StorageGateway
     #
     #   resp.vtl_device_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceType AWS API Documentation
+    #
     # @overload update_vtl_device_type(params = {})
     # @param [Hash] params ({})
     def update_vtl_device_type(params = {}, options = {})
@@ -3043,7 +3165,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

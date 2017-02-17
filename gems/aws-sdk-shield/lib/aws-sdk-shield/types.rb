@@ -40,6 +40,8 @@ module Aws::Shield
     #   List of mitigation actions taken for the attack.
     #   @return [Array<Types::Mitigation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackDetail AWS API Documentation
+    #
     class AttackDetail < Struct.new(
       :attack_id,
       :resource_arn,
@@ -73,6 +75,8 @@ module Aws::Shield
     #   The list of attacks for a specified time period.
     #   @return [Array<Types::AttackVectorDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackSummary AWS API Documentation
+    #
     class AttackSummary < Struct.new(
       :attack_id,
       :resource_arn,
@@ -87,6 +91,8 @@ module Aws::Shield
     # @!attribute [rw] vector_type
     #   The attack type, for example, SNMP reflection or SYN flood.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/AttackVectorDescription AWS API Documentation
     #
     class AttackVectorDescription < Struct.new(
       :vector_type)
@@ -109,6 +115,8 @@ module Aws::Shield
     #   The ARN (Amazon Resource Name) of the resource to be protected.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionRequest AWS API Documentation
+    #
     class CreateProtectionRequest < Struct.new(
       :name,
       :resource_arn)
@@ -120,6 +128,8 @@ module Aws::Shield
     #   created.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtectionResponse AWS API Documentation
+    #
     class CreateProtectionResponse < Struct.new(
       :protection_id)
       include Aws::Structure
@@ -127,8 +137,12 @@ module Aws::Shield
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscriptionRequest AWS API Documentation
+    #
     class CreateSubscriptionRequest < Aws::EmptyStructure; end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscriptionResponse AWS API Documentation
+    #
     class CreateSubscriptionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProtectionRequest
@@ -142,17 +156,25 @@ module Aws::Shield
     #   The unique identifier (ID) for the Protection object to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionRequest AWS API Documentation
+    #
     class DeleteProtectionRequest < Struct.new(
       :protection_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtectionResponse AWS API Documentation
+    #
     class DeleteProtectionResponse < Aws::EmptyStructure; end
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscriptionRequest AWS API Documentation
+    #
     class DeleteSubscriptionRequest < Aws::EmptyStructure; end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscriptionResponse AWS API Documentation
+    #
     class DeleteSubscriptionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeAttackRequest
@@ -166,6 +188,8 @@ module Aws::Shield
     #   The unique identifier (ID) for the attack that to be described.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackRequest AWS API Documentation
+    #
     class DescribeAttackRequest < Struct.new(
       :attack_id)
       include Aws::Structure
@@ -174,6 +198,8 @@ module Aws::Shield
     # @!attribute [rw] attack
     #   The attack that is described.
     #   @return [Types::AttackDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttackResponse AWS API Documentation
     #
     class DescribeAttackResponse < Struct.new(
       :attack)
@@ -192,6 +218,8 @@ module Aws::Shield
     #   described.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionRequest AWS API Documentation
+    #
     class DescribeProtectionRequest < Struct.new(
       :protection_id)
       include Aws::Structure
@@ -201,6 +229,8 @@ module Aws::Shield
     #   The Protection object that is described.
     #   @return [Types::Protection]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtectionResponse AWS API Documentation
+    #
     class DescribeProtectionResponse < Struct.new(
       :protection)
       include Aws::Structure
@@ -208,11 +238,15 @@ module Aws::Shield
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscriptionRequest AWS API Documentation
+    #
     class DescribeSubscriptionRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] subscription
     #   The AWS Shield Advanced subscription details for an account.
     #   @return [Types::Subscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscriptionResponse AWS API Documentation
     #
     class DescribeSubscriptionResponse < Struct.new(
       :subscription)
@@ -260,6 +294,8 @@ module Aws::Shield
     #   is left blank, the first 20 results will be returned.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksRequest AWS API Documentation
+    #
     class ListAttacksRequest < Struct.new(
       :resource_arns,
       :start_time,
@@ -279,6 +315,8 @@ module Aws::Shield
     #   value for the `NextMarker` parameter in a subsequent call to
     #   `ListAttacks` to retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacksResponse AWS API Documentation
     #
     class ListAttacksResponse < Struct.new(
       :attack_summaries,
@@ -304,6 +342,8 @@ module Aws::Shield
     #   left blank the first 20 results will be returned.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsRequest AWS API Documentation
+    #
     class ListProtectionsRequest < Struct.new(
       :next_token,
       :max_results)
@@ -324,6 +364,8 @@ module Aws::Shield
     #   Protections.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtectionsResponse AWS API Documentation
+    #
     class ListProtectionsResponse < Struct.new(
       :protections,
       :next_token)
@@ -335,6 +377,8 @@ module Aws::Shield
     # @!attribute [rw] mitigation_name
     #   The name of the mitigation taken for this attack.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Mitigation AWS API Documentation
     #
     class Mitigation < Struct.new(
       :mitigation_name)
@@ -356,6 +400,8 @@ module Aws::Shield
     #   The ARN (Amazon Resource Name) of the AWS resource that is
     #   protected.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Protection AWS API Documentation
     #
     class Protection < Struct.new(
       :id,
@@ -382,6 +428,8 @@ module Aws::Shield
     #   The counters that describe the details of the attack.
     #   @return [Array<Types::SummarizedCounter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SubResourceSummary AWS API Documentation
+    #
     class SubResourceSummary < Struct.new(
       :type,
       :id,
@@ -402,6 +450,8 @@ module Aws::Shield
     #   the account.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/Subscription AWS API Documentation
+    #
     class Subscription < Struct.new(
       :start_time,
       :time_commitment_in_seconds)
@@ -417,6 +467,8 @@ module Aws::Shield
     # @!attribute [rw] vector_counters
     #   The list of counters that describe the details of the attack.
     #   @return [Array<Types::SummarizedCounter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SummarizedAttackVector AWS API Documentation
     #
     class SummarizedAttackVector < Struct.new(
       :vector_type,
@@ -450,6 +502,8 @@ module Aws::Shield
     #   The unit of the counters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/SummarizedCounter AWS API Documentation
+    #
     class SummarizedCounter < Struct.new(
       :name,
       :max,
@@ -477,6 +531,8 @@ module Aws::Shield
     # @!attribute [rw] to_exclusive
     #   The end time, in the format 2016-12-16T15:50Z.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/TimeRange AWS API Documentation
     #
     class TimeRange < Struct.new(
       :from_inclusive,

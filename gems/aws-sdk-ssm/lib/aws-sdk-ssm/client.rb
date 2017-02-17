@@ -204,6 +204,8 @@ module Aws::SSM
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResource AWS API Documentation
+    #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
     def add_tags_to_resource(params = {}, options = {})
@@ -231,6 +233,8 @@ module Aws::SSM
     #     command_id: "CommandId", # required
     #     instance_ids: ["InstanceId"],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommand AWS API Documentation
     #
     # @overload cancel_command(params = {})
     # @param [Hash] params ({})
@@ -291,6 +295,8 @@ module Aws::SSM
     #
     #   resp.activation_id #=> String
     #   resp.activation_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivation AWS API Documentation
     #
     # @overload create_activation(params = {})
     # @param [Hash] params ({})
@@ -404,6 +410,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
+    #
     # @overload create_association(params = {})
     # @param [Hash] params ({})
     def create_association(params = {}, options = {})
@@ -507,6 +515,8 @@ module Aws::SSM
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatch AWS API Documentation
+    #
     # @overload create_association_batch(params = {})
     # @param [Hash] params ({})
     def create_association_batch(params = {}, options = {})
@@ -564,6 +574,8 @@ module Aws::SSM
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocument AWS API Documentation
+    #
     # @overload create_document(params = {})
     # @param [Hash] params ({})
     def create_document(params = {}, options = {})
@@ -615,6 +627,8 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.window_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindow AWS API Documentation
     #
     # @overload create_maintenance_window(params = {})
     # @param [Hash] params ({})
@@ -690,6 +704,8 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaseline AWS API Documentation
+    #
     # @overload create_patch_baseline(params = {})
     # @param [Hash] params ({})
     def create_patch_baseline(params = {}, options = {})
@@ -713,6 +729,8 @@ module Aws::SSM
     #   resp = client.delete_activation({
     #     activation_id: "ActivationId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivation AWS API Documentation
     #
     # @overload delete_activation(params = {})
     # @param [Hash] params ({})
@@ -748,6 +766,8 @@ module Aws::SSM
     #     association_id: "AssociationId",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociation AWS API Documentation
+    #
     # @overload delete_association(params = {})
     # @param [Hash] params ({})
     def delete_association(params = {}, options = {})
@@ -772,6 +792,8 @@ module Aws::SSM
     #   resp = client.delete_document({
     #     name: "DocumentName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocument AWS API Documentation
     #
     # @overload delete_document(params = {})
     # @param [Hash] params ({})
@@ -799,6 +821,8 @@ module Aws::SSM
     #
     #   resp.window_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindow AWS API Documentation
+    #
     # @overload delete_maintenance_window(params = {})
     # @param [Hash] params ({})
     def delete_maintenance_window(params = {}, options = {})
@@ -818,6 +842,8 @@ module Aws::SSM
     #   resp = client.delete_parameter({
     #     name: "PSParameterName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameter AWS API Documentation
     #
     # @overload delete_parameter(params = {})
     # @param [Hash] params ({})
@@ -845,6 +871,8 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaseline AWS API Documentation
+    #
     # @overload delete_patch_baseline(params = {})
     # @param [Hash] params ({})
     def delete_patch_baseline(params = {}, options = {})
@@ -868,6 +896,8 @@ module Aws::SSM
     #   resp = client.deregister_managed_instance({
     #     instance_id: "ManagedInstanceId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstance AWS API Documentation
     #
     # @overload deregister_managed_instance(params = {})
     # @param [Hash] params ({})
@@ -902,6 +932,8 @@ module Aws::SSM
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroup AWS API Documentation
+    #
     # @overload deregister_patch_baseline_for_patch_group(params = {})
     # @param [Hash] params ({})
     def deregister_patch_baseline_for_patch_group(params = {}, options = {})
@@ -934,6 +966,8 @@ module Aws::SSM
     #   resp.window_id #=> String
     #   resp.window_target_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindow AWS API Documentation
+    #
     # @overload deregister_target_from_maintenance_window(params = {})
     # @param [Hash] params ({})
     def deregister_target_from_maintenance_window(params = {}, options = {})
@@ -965,6 +999,8 @@ module Aws::SSM
     #
     #   resp.window_id #=> String
     #   resp.window_task_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindow AWS API Documentation
     #
     # @overload deregister_task_from_maintenance_window(params = {})
     # @param [Hash] params ({})
@@ -1021,6 +1057,8 @@ module Aws::SSM
     #   resp.activation_list[0].expired #=> Boolean
     #   resp.activation_list[0].created_date #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivations AWS API Documentation
     #
     # @overload describe_activations(params = {})
     # @param [Hash] params ({})
@@ -1082,6 +1120,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
+    #
     # @overload describe_association(params = {})
     # @param [Hash] params ({})
     def describe_association(params = {}, options = {})
@@ -1138,6 +1178,8 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].outputs["AutomationParameterKey"][0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutions AWS API Documentation
+    #
     # @overload describe_automation_executions(params = {})
     # @param [Hash] params ({})
     def describe_automation_executions(params = {}, options = {})
@@ -1193,6 +1235,8 @@ module Aws::SSM
     #   resp.patches[0].language #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatches AWS API Documentation
+    #
     # @overload describe_available_patches(params = {})
     # @param [Hash] params ({})
     def describe_available_patches(params = {}, options = {})
@@ -1243,6 +1287,8 @@ module Aws::SSM
     #   resp.document.latest_version #=> String
     #   resp.document.default_version #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocument AWS API Documentation
+    #
     # @overload describe_document(params = {})
     # @param [Hash] params ({})
     def describe_document(params = {}, options = {})
@@ -1277,6 +1323,8 @@ module Aws::SSM
     #
     #   resp.account_ids #=> Array
     #   resp.account_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermission AWS API Documentation
     #
     # @overload describe_document_permission(params = {})
     # @param [Hash] params ({})
@@ -1319,6 +1367,8 @@ module Aws::SSM
     #   resp.associations[0].instance_id #=> String
     #   resp.associations[0].content #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociations AWS API Documentation
     #
     # @overload describe_effective_instance_associations(params = {})
     # @param [Hash] params ({})
@@ -1373,6 +1423,8 @@ module Aws::SSM
     #   resp.effective_patches[0].patch_status.approval_date #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaseline AWS API Documentation
+    #
     # @overload describe_effective_patches_for_patch_baseline(params = {})
     # @param [Hash] params ({})
     def describe_effective_patches_for_patch_baseline(params = {}, options = {})
@@ -1421,6 +1473,8 @@ module Aws::SSM
     #   resp.instance_association_status_infos[0].error_code #=> String
     #   resp.instance_association_status_infos[0].output_url.s3_output_url.output_url #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatus AWS API Documentation
     #
     # @overload describe_instance_associations_status(params = {})
     # @param [Hash] params ({})
@@ -1504,6 +1558,8 @@ module Aws::SSM
     #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformation AWS API Documentation
+    #
     # @overload describe_instance_information(params = {})
     # @param [Hash] params ({})
     def describe_instance_information(params = {}, options = {})
@@ -1554,6 +1610,8 @@ module Aws::SSM
     #   resp.instance_patch_states[0].operation_end_time #=> Time
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStates AWS API Documentation
     #
     # @overload describe_instance_patch_states(params = {})
     # @param [Hash] params ({})
@@ -1623,6 +1681,8 @@ module Aws::SSM
     #   resp.instance_patch_states[0].operation #=> String, one of "Scan", "Install"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroup AWS API Documentation
+    #
     # @overload describe_instance_patch_states_for_patch_group(params = {})
     # @param [Hash] params ({})
     def describe_instance_patch_states_for_patch_group(params = {}, options = {})
@@ -1681,6 +1741,8 @@ module Aws::SSM
     #   resp.patches[0].state #=> String, one of "INSTALLED", "INSTALLED_OTHER", "MISSING", "NOT_APPLICABLE", "FAILED"
     #   resp.patches[0].installed_time #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatches AWS API Documentation
     #
     # @overload describe_instance_patches(params = {})
     # @param [Hash] params ({})
@@ -1749,6 +1811,8 @@ module Aws::SSM
     #   resp.window_execution_task_invocation_identities[0].window_target_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTaskInvocations AWS API Documentation
+    #
     # @overload describe_maintenance_window_execution_task_invocations(params = {})
     # @param [Hash] params ({})
     def describe_maintenance_window_execution_task_invocations(params = {}, options = {})
@@ -1808,6 +1872,8 @@ module Aws::SSM
     #   resp.window_execution_task_identities[0].task_arn #=> String
     #   resp.window_execution_task_identities[0].task_type #=> String, one of "RUN_COMMAND"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasks AWS API Documentation
     #
     # @overload describe_maintenance_window_execution_tasks(params = {})
     # @param [Hash] params ({})
@@ -1873,6 +1939,8 @@ module Aws::SSM
     #   resp.window_executions[0].end_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutions AWS API Documentation
+    #
     # @overload describe_maintenance_window_executions(params = {})
     # @param [Hash] params ({})
     def describe_maintenance_window_executions(params = {}, options = {})
@@ -1930,6 +1998,8 @@ module Aws::SSM
     #   resp.targets[0].targets[0].values[0] #=> String
     #   resp.targets[0].owner_information #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargets AWS API Documentation
     #
     # @overload describe_maintenance_window_targets(params = {})
     # @param [Hash] params ({})
@@ -1999,6 +2069,8 @@ module Aws::SSM
     #   resp.tasks[0].max_errors #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasks AWS API Documentation
+    #
     # @overload describe_maintenance_window_tasks(params = {})
     # @param [Hash] params ({})
     def describe_maintenance_window_tasks(params = {}, options = {})
@@ -2048,6 +2120,8 @@ module Aws::SSM
     #   resp.window_identities[0].duration #=> Integer
     #   resp.window_identities[0].cutoff #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindows AWS API Documentation
     #
     # @overload describe_maintenance_windows(params = {})
     # @param [Hash] params ({})
@@ -2100,6 +2174,8 @@ module Aws::SSM
     #   resp.parameters[0].description #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParameters AWS API Documentation
+    #
     # @overload describe_parameters(params = {})
     # @param [Hash] params ({})
     def describe_parameters(params = {}, options = {})
@@ -2150,6 +2226,8 @@ module Aws::SSM
     #   resp.baseline_identities[0].default_baseline #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselines AWS API Documentation
+    #
     # @overload describe_patch_baselines(params = {})
     # @param [Hash] params ({})
     def describe_patch_baselines(params = {}, options = {})
@@ -2186,6 +2264,8 @@ module Aws::SSM
     #   resp.instances_with_missing_patches #=> Integer
     #   resp.instances_with_failed_patches #=> Integer
     #   resp.instances_with_not_applicable_patches #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupState AWS API Documentation
     #
     # @overload describe_patch_group_state(params = {})
     # @param [Hash] params ({})
@@ -2224,6 +2304,8 @@ module Aws::SSM
     #   resp.mappings[0].baseline_identity.baseline_description #=> String
     #   resp.mappings[0].baseline_identity.default_baseline #=> Boolean
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroups AWS API Documentation
     #
     # @overload describe_patch_groups(params = {})
     # @param [Hash] params ({})
@@ -2278,6 +2360,8 @@ module Aws::SSM
     #   resp.automation_execution.outputs["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.outputs["AutomationParameterKey"][0] #=> String
     #   resp.automation_execution.failure_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecution AWS API Documentation
     #
     # @overload get_automation_execution(params = {})
     # @param [Hash] params ({})
@@ -2346,6 +2430,8 @@ module Aws::SSM
     #   resp.standard_error_content #=> String
     #   resp.standard_error_url #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocation AWS API Documentation
+    #
     # @overload get_command_invocation(params = {})
     # @param [Hash] params ({})
     def get_command_invocation(params = {}, options = {})
@@ -2362,6 +2448,8 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.baseline_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaseline AWS API Documentation
     #
     # @overload get_default_patch_baseline(params = {})
     # @param [Hash] params ({})
@@ -2400,6 +2488,8 @@ module Aws::SSM
     #   resp.snapshot_id #=> String
     #   resp.snapshot_download_url #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstance AWS API Documentation
+    #
     # @overload get_deployable_patch_snapshot_for_instance(params = {})
     # @param [Hash] params ({})
     def get_deployable_patch_snapshot_for_instance(params = {}, options = {})
@@ -2435,6 +2525,8 @@ module Aws::SSM
     #   resp.document_version #=> String
     #   resp.content #=> String
     #   resp.document_type #=> String, one of "Command", "Policy", "Automation"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocument AWS API Documentation
     #
     # @overload get_document(params = {})
     # @param [Hash] params ({})
@@ -2499,6 +2591,8 @@ module Aws::SSM
     #   resp.entities[0].data["InventoryResultItemKey"].content[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventory AWS API Documentation
+    #
     # @overload get_inventory(params = {})
     # @param [Hash] params ({})
     def get_inventory(params = {}, options = {})
@@ -2544,6 +2638,8 @@ module Aws::SSM
     #   resp.schemas[0].attributes[0].data_type #=> String, one of "string", "number"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchema AWS API Documentation
+    #
     # @overload get_inventory_schema(params = {})
     # @param [Hash] params ({})
     def get_inventory_schema(params = {}, options = {})
@@ -2586,6 +2682,8 @@ module Aws::SSM
     #   resp.created_date #=> Time
     #   resp.modified_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindow AWS API Documentation
+    #
     # @overload get_maintenance_window(params = {})
     # @param [Hash] params ({})
     def get_maintenance_window(params = {}, options = {})
@@ -2623,6 +2721,8 @@ module Aws::SSM
     #   resp.status_details #=> String
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecution AWS API Documentation
     #
     # @overload get_maintenance_window_execution(params = {})
     # @param [Hash] params ({})
@@ -2683,6 +2783,8 @@ module Aws::SSM
     #   resp.start_time #=> Time
     #   resp.end_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTask AWS API Documentation
+    #
     # @overload get_maintenance_window_execution_task(params = {})
     # @param [Hash] params ({})
     def get_maintenance_window_execution_task(params = {}, options = {})
@@ -2734,6 +2836,8 @@ module Aws::SSM
     #   resp.parameters[0].value #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistory AWS API Documentation
+    #
     # @overload get_parameter_history(params = {})
     # @param [Hash] params ({})
     def get_parameter_history(params = {}, options = {})
@@ -2771,6 +2875,8 @@ module Aws::SSM
     #   resp.parameters[0].value #=> String
     #   resp.invalid_parameters #=> Array
     #   resp.invalid_parameters[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameters AWS API Documentation
     #
     # @overload get_parameters(params = {})
     # @param [Hash] params ({})
@@ -2827,6 +2933,8 @@ module Aws::SSM
     #   resp.modified_date #=> Time
     #   resp.description #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaseline AWS API Documentation
+    #
     # @overload get_patch_baseline(params = {})
     # @param [Hash] params ({})
     def get_patch_baseline(params = {}, options = {})
@@ -2855,6 +2963,8 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroup AWS API Documentation
     #
     # @overload get_patch_baseline_for_patch_group(params = {})
     # @param [Hash] params ({})
@@ -2914,6 +3024,8 @@ module Aws::SSM
     #   resp.associations[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.associations[0].schedule_expression #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations AWS API Documentation
     #
     # @overload list_associations(params = {})
     # @param [Hash] params ({})
@@ -3007,6 +3119,8 @@ module Aws::SSM
     #   resp.command_invocations[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocations AWS API Documentation
+    #
     # @overload list_command_invocations(params = {})
     # @param [Hash] params ({})
     def list_command_invocations(params = {}, options = {})
@@ -3089,6 +3203,8 @@ module Aws::SSM
     #   resp.commands[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommands AWS API Documentation
+    #
     # @overload list_commands(params = {})
     # @param [Hash] params ({})
     def list_commands(params = {}, options = {})
@@ -3131,6 +3247,8 @@ module Aws::SSM
     #   resp.document_versions[0].created_date #=> Time
     #   resp.document_versions[0].is_default_version #=> Boolean
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersions AWS API Documentation
     #
     # @overload list_document_versions(params = {})
     # @param [Hash] params ({})
@@ -3183,6 +3301,8 @@ module Aws::SSM
     #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation"
     #   resp.document_identifiers[0].schema_version #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocuments AWS API Documentation
     #
     # @overload list_documents(params = {})
     # @param [Hash] params ({})
@@ -3248,6 +3368,8 @@ module Aws::SSM
     #   resp.entries[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntries AWS API Documentation
+    #
     # @overload list_inventory_entries(params = {})
     # @param [Hash] params ({})
     def list_inventory_entries(params = {}, options = {})
@@ -3279,6 +3401,8 @@ module Aws::SSM
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -3321,6 +3445,8 @@ module Aws::SSM
     #     account_ids_to_remove: ["AccountId"],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermission AWS API Documentation
+    #
     # @overload modify_document_permission(params = {})
     # @param [Hash] params ({})
     def modify_document_permission(params = {}, options = {})
@@ -3359,6 +3485,8 @@ module Aws::SSM
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventory AWS API Documentation
     #
     # @overload put_inventory(params = {})
     # @param [Hash] params ({})
@@ -3400,6 +3528,8 @@ module Aws::SSM
     #     overwrite: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameter AWS API Documentation
+    #
     # @overload put_parameter(params = {})
     # @param [Hash] params ({})
     def put_parameter(params = {}, options = {})
@@ -3426,6 +3556,8 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.baseline_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaseline AWS API Documentation
     #
     # @overload register_default_patch_baseline(params = {})
     # @param [Hash] params ({})
@@ -3459,6 +3591,8 @@ module Aws::SSM
     #
     #   resp.baseline_id #=> String
     #   resp.patch_group #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroup AWS API Documentation
     #
     # @overload register_patch_baseline_for_patch_group(params = {})
     # @param [Hash] params ({})
@@ -3513,6 +3647,8 @@ module Aws::SSM
     # @example Response structure
     #
     #   resp.window_target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindow AWS API Documentation
     #
     # @overload register_target_with_maintenance_window(params = {})
     # @param [Hash] params ({})
@@ -3603,6 +3739,8 @@ module Aws::SSM
     #
     #   resp.window_task_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindow AWS API Documentation
+    #
     # @overload register_task_with_maintenance_window(params = {})
     # @param [Hash] params ({})
     def register_task_with_maintenance_window(params = {}, options = {})
@@ -3630,6 +3768,8 @@ module Aws::SSM
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})
@@ -3801,6 +3941,8 @@ module Aws::SSM
     #   resp.command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
     #   resp.command.notification_config.notification_type #=> String, one of "Command", "Invocation"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommand AWS API Documentation
+    #
     # @overload send_command(params = {})
     # @param [Hash] params ({})
     def send_command(params = {}, options = {})
@@ -3838,6 +3980,8 @@ module Aws::SSM
     #
     #   resp.automation_execution_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecution AWS API Documentation
+    #
     # @overload start_automation_execution(params = {})
     # @param [Hash] params ({})
     def start_automation_execution(params = {}, options = {})
@@ -3857,6 +4001,8 @@ module Aws::SSM
     #   resp = client.stop_automation_execution({
     #     automation_execution_id: "AutomationExecutionId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecution AWS API Documentation
     #
     # @overload stop_automation_execution(params = {})
     # @param [Hash] params ({})
@@ -3947,6 +4093,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
+    #
     # @overload update_association(params = {})
     # @param [Hash] params ({})
     def update_association(params = {}, options = {})
@@ -4013,6 +4161,8 @@ module Aws::SSM
     #   resp.association_description.last_execution_date #=> Time
     #   resp.association_description.last_successful_execution_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
+    #
     # @overload update_association_status(params = {})
     # @param [Hash] params ({})
     def update_association_status(params = {}, options = {})
@@ -4066,6 +4216,8 @@ module Aws::SSM
     #   resp.document_description.latest_version #=> String
     #   resp.document_description.default_version #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocument AWS API Documentation
+    #
     # @overload update_document(params = {})
     # @param [Hash] params ({})
     def update_document(params = {}, options = {})
@@ -4098,6 +4250,8 @@ module Aws::SSM
     #
     #   resp.description.name #=> String
     #   resp.description.default_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersion AWS API Documentation
     #
     # @overload update_document_default_version(params = {})
     # @param [Hash] params ({})
@@ -4165,6 +4319,8 @@ module Aws::SSM
     #   resp.allow_unassociated_targets #=> Boolean
     #   resp.enabled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindow AWS API Documentation
+    #
     # @overload update_maintenance_window(params = {})
     # @param [Hash] params ({})
     def update_maintenance_window(params = {}, options = {})
@@ -4189,6 +4345,8 @@ module Aws::SSM
     #     instance_id: "ManagedInstanceId", # required
     #     iam_role: "IamRole", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRole AWS API Documentation
     #
     # @overload update_managed_instance_role(params = {})
     # @param [Hash] params ({})
@@ -4288,6 +4446,8 @@ module Aws::SSM
     #   resp.modified_date #=> Time
     #   resp.description #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaseline AWS API Documentation
+    #
     # @overload update_patch_baseline(params = {})
     # @param [Hash] params ({})
     def update_patch_baseline(params = {}, options = {})
@@ -4308,7 +4468,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

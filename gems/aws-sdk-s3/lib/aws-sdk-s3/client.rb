@@ -231,6 +231,8 @@ module Aws::S3
     #
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUpload AWS API Documentation
+    #
     # @overload abort_multipart_upload(params = {})
     # @param [Hash] params ({})
     def abort_multipart_upload(params = {}, options = {})
@@ -295,6 +297,8 @@ module Aws::S3
     #   resp.version_id #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUpload AWS API Documentation
     #
     # @overload complete_multipart_upload(params = {})
     # @param [Hash] params ({})
@@ -500,6 +504,8 @@ module Aws::S3
     #   resp.ssekms_key_id #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObject AWS API Documentation
+    #
     # @overload copy_object(params = {})
     # @param [Hash] params ({})
     def copy_object(params = {}, options = {})
@@ -555,6 +561,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucket AWS API Documentation
     #
     # @overload create_bucket(params = {})
     # @param [Hash] params ({})
@@ -711,6 +719,8 @@ module Aws::S3
     #   resp.ssekms_key_id #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUpload AWS API Documentation
+    #
     # @overload create_multipart_upload(params = {})
     # @param [Hash] params ({})
     def create_multipart_upload(params = {}, options = {})
@@ -731,6 +741,8 @@ module Aws::S3
     #   resp = client.delete_bucket({
     #     bucket: "BucketName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucket AWS API Documentation
     #
     # @overload delete_bucket(params = {})
     # @param [Hash] params ({})
@@ -758,6 +770,8 @@ module Aws::S3
     #     id: "AnalyticsId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfiguration AWS API Documentation
+    #
     # @overload delete_bucket_analytics_configuration(params = {})
     # @param [Hash] params ({})
     def delete_bucket_analytics_configuration(params = {}, options = {})
@@ -776,6 +790,8 @@ module Aws::S3
     #   resp = client.delete_bucket_cors({
     #     bucket: "BucketName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCors AWS API Documentation
     #
     # @overload delete_bucket_cors(params = {})
     # @param [Hash] params ({})
@@ -803,6 +819,8 @@ module Aws::S3
     #     id: "InventoryId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfiguration AWS API Documentation
+    #
     # @overload delete_bucket_inventory_configuration(params = {})
     # @param [Hash] params ({})
     def delete_bucket_inventory_configuration(params = {}, options = {})
@@ -821,6 +839,8 @@ module Aws::S3
     #   resp = client.delete_bucket_lifecycle({
     #     bucket: "BucketName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycle AWS API Documentation
     #
     # @overload delete_bucket_lifecycle(params = {})
     # @param [Hash] params ({})
@@ -847,6 +867,8 @@ module Aws::S3
     #     id: "MetricsId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfiguration AWS API Documentation
+    #
     # @overload delete_bucket_metrics_configuration(params = {})
     # @param [Hash] params ({})
     def delete_bucket_metrics_configuration(params = {}, options = {})
@@ -865,6 +887,8 @@ module Aws::S3
     #   resp = client.delete_bucket_policy({
     #     bucket: "BucketName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicy AWS API Documentation
     #
     # @overload delete_bucket_policy(params = {})
     # @param [Hash] params ({})
@@ -885,6 +909,8 @@ module Aws::S3
     #     bucket: "BucketName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplication AWS API Documentation
+    #
     # @overload delete_bucket_replication(params = {})
     # @param [Hash] params ({})
     def delete_bucket_replication(params = {}, options = {})
@@ -904,6 +930,8 @@ module Aws::S3
     #     bucket: "BucketName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTagging AWS API Documentation
+    #
     # @overload delete_bucket_tagging(params = {})
     # @param [Hash] params ({})
     def delete_bucket_tagging(params = {}, options = {})
@@ -922,6 +950,8 @@ module Aws::S3
     #   resp = client.delete_bucket_website({
     #     bucket: "BucketName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsite AWS API Documentation
     #
     # @overload delete_bucket_website(params = {})
     # @param [Hash] params ({})
@@ -974,6 +1004,8 @@ module Aws::S3
     #   resp.version_id #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObject AWS API Documentation
+    #
     # @overload delete_object(params = {})
     # @param [Hash] params ({})
     def delete_object(params = {}, options = {})
@@ -1005,6 +1037,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTagging AWS API Documentation
     #
     # @overload delete_object_tagging(params = {})
     # @param [Hash] params ({})
@@ -1068,6 +1102,8 @@ module Aws::S3
     #   resp.errors[0].code #=> String
     #   resp.errors[0].message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjects AWS API Documentation
+    #
     # @overload delete_objects(params = {})
     # @param [Hash] params ({})
     def delete_objects(params = {}, options = {})
@@ -1094,6 +1130,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.status #=> String, one of "Enabled", "Suspended"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfiguration AWS API Documentation
     #
     # @overload get_bucket_accelerate_configuration(params = {})
     # @param [Hash] params ({})
@@ -1128,6 +1166,8 @@ module Aws::S3
     #   resp.grants[0].grantee.type #=> String, one of "CanonicalUser", "AmazonCustomerByEmail", "Group"
     #   resp.grants[0].grantee.uri #=> String
     #   resp.grants[0].permission #=> String, one of "FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAcl AWS API Documentation
     #
     # @overload get_bucket_acl(params = {})
     # @param [Hash] params ({})
@@ -1173,6 +1213,8 @@ module Aws::S3
     #   resp.analytics_configuration.storage_class_analysis.data_export.destination.s3_bucket_destination.bucket #=> String
     #   resp.analytics_configuration.storage_class_analysis.data_export.destination.s3_bucket_destination.prefix #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfiguration AWS API Documentation
+    #
     # @overload get_bucket_analytics_configuration(params = {})
     # @param [Hash] params ({})
     def get_bucket_analytics_configuration(params = {}, options = {})
@@ -1206,6 +1248,8 @@ module Aws::S3
     #   resp.cors_rules[0].expose_headers #=> Array
     #   resp.cors_rules[0].expose_headers[0] #=> String
     #   resp.cors_rules[0].max_age_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCors AWS API Documentation
     #
     # @overload get_bucket_cors(params = {})
     # @param [Hash] params ({})
@@ -1249,6 +1293,8 @@ module Aws::S3
     #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus"
     #   resp.inventory_configuration.schedule.frequency #=> String, one of "Daily", "Weekly"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfiguration AWS API Documentation
+    #
     # @overload get_bucket_inventory_configuration(params = {})
     # @param [Hash] params ({})
     def get_bucket_inventory_configuration(params = {}, options = {})
@@ -1286,6 +1332,8 @@ module Aws::S3
     #   resp.rules[0].noncurrent_version_transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA"
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
     #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycle AWS API Documentation
     #
     # @overload get_bucket_lifecycle(params = {})
     # @param [Hash] params ({})
@@ -1334,6 +1382,8 @@ module Aws::S3
     #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
     #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfiguration AWS API Documentation
+    #
     # @overload get_bucket_lifecycle_configuration(params = {})
     # @param [Hash] params ({})
     def get_bucket_lifecycle_configuration(params = {}, options = {})
@@ -1358,6 +1408,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.location_constraint #=> String, one of "EU", "eu-west-1", "us-west-1", "us-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1", "cn-north-1", "eu-central-1"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocation AWS API Documentation
     #
     # @overload get_bucket_location(params = {})
     # @param [Hash] params ({})
@@ -1393,6 +1445,8 @@ module Aws::S3
     #   resp.logging_enabled.target_grants[0].grantee.uri #=> String
     #   resp.logging_enabled.target_grants[0].permission #=> String, one of "FULL_CONTROL", "READ", "WRITE"
     #   resp.logging_enabled.target_prefix #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLogging AWS API Documentation
     #
     # @overload get_bucket_logging(params = {})
     # @param [Hash] params ({})
@@ -1432,6 +1486,8 @@ module Aws::S3
     #   resp.metrics_configuration.filter.and.tags #=> Array
     #   resp.metrics_configuration.filter.and.tags[0].key #=> String
     #   resp.metrics_configuration.filter.and.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfiguration AWS API Documentation
     #
     # @overload get_bucket_metrics_configuration(params = {})
     # @param [Hash] params ({})
@@ -1475,6 +1531,8 @@ module Aws::S3
     #   resp.cloud_function_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
     #   resp.cloud_function_configuration.cloud_function #=> String
     #   resp.cloud_function_configuration.invocation_role #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotification AWS API Documentation
     #
     # @overload get_bucket_notification(params = {})
     # @param [Hash] params ({})
@@ -1527,6 +1585,8 @@ module Aws::S3
     #   resp.lambda_function_configurations[0].filter.key.filter_rules[0].name #=> String, one of "prefix", "suffix"
     #   resp.lambda_function_configurations[0].filter.key.filter_rules[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfiguration AWS API Documentation
+    #
     # @overload get_bucket_notification_configuration(params = {})
     # @param [Hash] params ({})
     def get_bucket_notification_configuration(params = {}, options = {})
@@ -1551,6 +1611,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicy AWS API Documentation
     #
     # @overload get_bucket_policy(params = {})
     # @param [Hash] params ({})
@@ -1583,6 +1645,8 @@ module Aws::S3
     #   resp.replication_configuration.rules[0].destination.bucket #=> String
     #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplication AWS API Documentation
+    #
     # @overload get_bucket_replication(params = {})
     # @param [Hash] params ({})
     def get_bucket_replication(params = {}, options = {})
@@ -1607,6 +1671,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.payer #=> String, one of "Requester", "BucketOwner"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPayment AWS API Documentation
     #
     # @overload get_bucket_request_payment(params = {})
     # @param [Hash] params ({})
@@ -1635,6 +1701,8 @@ module Aws::S3
     #   resp.tag_set[0].key #=> String
     #   resp.tag_set[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTagging AWS API Documentation
+    #
     # @overload get_bucket_tagging(params = {})
     # @param [Hash] params ({})
     def get_bucket_tagging(params = {}, options = {})
@@ -1661,6 +1729,8 @@ module Aws::S3
     #
     #   resp.status #=> String, one of "Enabled", "Suspended"
     #   resp.mfa_delete #=> String, one of "Enabled", "Disabled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioning AWS API Documentation
     #
     # @overload get_bucket_versioning(params = {})
     # @param [Hash] params ({})
@@ -1700,6 +1770,8 @@ module Aws::S3
     #   resp.routing_rules[0].redirect.protocol #=> String, one of "http", "https"
     #   resp.routing_rules[0].redirect.replace_key_prefix_with #=> String
     #   resp.routing_rules[0].redirect.replace_key_with #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsite AWS API Documentation
     #
     # @overload get_bucket_website(params = {})
     # @param [Hash] params ({})
@@ -1904,6 +1976,8 @@ module Aws::S3
     #   resp.parts_count #=> Integer
     #   resp.tag_count #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObject AWS API Documentation
+    #
     # @overload get_object(params = {})
     # @param [Hash] params ({})
     def get_object(params = {}, options = {})
@@ -1955,6 +2029,8 @@ module Aws::S3
     #   resp.grants[0].permission #=> String, one of "FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAcl AWS API Documentation
+    #
     # @overload get_object_acl(params = {})
     # @param [Hash] params ({})
     def get_object_acl(params = {}, options = {})
@@ -1989,6 +2065,8 @@ module Aws::S3
     #   resp.tag_set #=> Array
     #   resp.tag_set[0].key #=> String
     #   resp.tag_set[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTagging AWS API Documentation
     #
     # @overload get_object_tagging(params = {})
     # @param [Hash] params ({})
@@ -2031,6 +2109,8 @@ module Aws::S3
     #   resp.body #=> IO
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrent AWS API Documentation
+    #
     # @overload get_object_torrent(params = {})
     # @param [Hash] params ({})
     def get_object_torrent(params = {}, options = {})
@@ -2050,6 +2130,8 @@ module Aws::S3
     #   resp = client.head_bucket({
     #     bucket: "BucketName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucket AWS API Documentation
     #
     # @overload head_bucket(params = {})
     # @param [Hash] params ({})
@@ -2197,6 +2279,8 @@ module Aws::S3
     #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
     #   resp.parts_count #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObject AWS API Documentation
+    #
     # @overload head_object(params = {})
     # @param [Hash] params ({})
     def head_object(params = {}, options = {})
@@ -2247,6 +2331,8 @@ module Aws::S3
     #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_account_id #=> String
     #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.bucket #=> String
     #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.prefix #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurations AWS API Documentation
     #
     # @overload list_bucket_analytics_configurations(params = {})
     # @param [Hash] params ({})
@@ -2299,6 +2385,8 @@ module Aws::S3
     #   resp.is_truncated #=> Boolean
     #   resp.next_continuation_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurations AWS API Documentation
+    #
     # @overload list_bucket_inventory_configurations(params = {})
     # @param [Hash] params ({})
     def list_bucket_inventory_configurations(params = {}, options = {})
@@ -2347,6 +2435,8 @@ module Aws::S3
     #   resp.metrics_configuration_list[0].filter.and.tags[0].key #=> String
     #   resp.metrics_configuration_list[0].filter.and.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurations AWS API Documentation
+    #
     # @overload list_bucket_metrics_configurations(params = {})
     # @param [Hash] params ({})
     def list_bucket_metrics_configurations(params = {}, options = {})
@@ -2369,6 +2459,8 @@ module Aws::S3
     #   resp.buckets[0].creation_date #=> Time
     #   resp.owner.display_name #=> String
     #   resp.owner.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBuckets AWS API Documentation
     #
     # @overload list_buckets(params = {})
     # @param [Hash] params ({})
@@ -2460,6 +2552,8 @@ module Aws::S3
     #   resp.common_prefixes #=> Array
     #   resp.common_prefixes[0].prefix #=> String
     #   resp.encoding_type #=> String, one of "url"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploads AWS API Documentation
     #
     # @overload list_multipart_uploads(params = {})
     # @param [Hash] params ({})
@@ -2556,6 +2650,8 @@ module Aws::S3
     #   resp.common_prefixes[0].prefix #=> String
     #   resp.encoding_type #=> String, one of "url"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersions AWS API Documentation
+    #
     # @overload list_object_versions(params = {})
     # @param [Hash] params ({})
     def list_object_versions(params = {}, options = {})
@@ -2640,6 +2736,8 @@ module Aws::S3
     #   resp.common_prefixes #=> Array
     #   resp.common_prefixes[0].prefix #=> String
     #   resp.encoding_type #=> String, one of "url"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjects AWS API Documentation
     #
     # @overload list_objects(params = {})
     # @param [Hash] params ({})
@@ -2742,6 +2840,8 @@ module Aws::S3
     #   resp.next_continuation_token #=> String
     #   resp.start_after #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2 AWS API Documentation
+    #
     # @overload list_objects_v2(params = {})
     # @param [Hash] params ({})
     def list_objects_v2(params = {}, options = {})
@@ -2825,6 +2925,8 @@ module Aws::S3
     #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListParts AWS API Documentation
+    #
     # @overload list_parts(params = {})
     # @param [Hash] params ({})
     def list_parts(params = {}, options = {})
@@ -2850,6 +2952,8 @@ module Aws::S3
     #       status: "Enabled", # accepts Enabled, Suspended
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfiguration AWS API Documentation
     #
     # @overload put_bucket_accelerate_configuration(params = {})
     # @param [Hash] params ({})
@@ -2919,6 +3023,8 @@ module Aws::S3
     #     grant_write_acp: "GrantWriteACP",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAcl AWS API Documentation
+    #
     # @overload put_bucket_acl(params = {})
     # @param [Hash] params ({})
     def put_bucket_acl(params = {}, options = {})
@@ -2979,6 +3085,8 @@ module Aws::S3
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfiguration AWS API Documentation
+    #
     # @overload put_bucket_analytics_configuration(params = {})
     # @param [Hash] params ({})
     def put_bucket_analytics_configuration(params = {}, options = {})
@@ -3013,6 +3121,8 @@ module Aws::S3
     #     },
     #     content_md5: "ContentMD5",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCors AWS API Documentation
     #
     # @overload put_bucket_cors(params = {})
     # @param [Hash] params ({})
@@ -3062,6 +3172,8 @@ module Aws::S3
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfiguration AWS API Documentation
     #
     # @overload put_bucket_inventory_configuration(params = {})
     # @param [Hash] params ({})
@@ -3115,6 +3227,8 @@ module Aws::S3
     #       ],
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycle AWS API Documentation
     #
     # @overload put_bucket_lifecycle(params = {})
     # @param [Hash] params ({})
@@ -3187,6 +3301,8 @@ module Aws::S3
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfiguration AWS API Documentation
+    #
     # @overload put_bucket_lifecycle_configuration(params = {})
     # @param [Hash] params ({})
     def put_bucket_lifecycle_configuration(params = {}, options = {})
@@ -3230,6 +3346,8 @@ module Aws::S3
     #     },
     #     content_md5: "ContentMD5",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLogging AWS API Documentation
     #
     # @overload put_bucket_logging(params = {})
     # @param [Hash] params ({})
@@ -3278,6 +3396,8 @@ module Aws::S3
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfiguration AWS API Documentation
+    #
     # @overload put_bucket_metrics_configuration(params = {})
     # @param [Hash] params ({})
     def put_bucket_metrics_configuration(params = {}, options = {})
@@ -3322,6 +3442,8 @@ module Aws::S3
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotification AWS API Documentation
     #
     # @overload put_bucket_notification(params = {})
     # @param [Hash] params ({})
@@ -3399,6 +3521,8 @@ module Aws::S3
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfiguration AWS API Documentation
+    #
     # @overload put_bucket_notification_configuration(params = {})
     # @param [Hash] params ({})
     def put_bucket_notification_configuration(params = {}, options = {})
@@ -3425,6 +3549,8 @@ module Aws::S3
     #     content_md5: "ContentMD5",
     #     policy: "Policy", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicy AWS API Documentation
     #
     # @overload put_bucket_policy(params = {})
     # @param [Hash] params ({})
@@ -3467,6 +3593,8 @@ module Aws::S3
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplication AWS API Documentation
+    #
     # @overload put_bucket_replication(params = {})
     # @param [Hash] params ({})
     def put_bucket_replication(params = {}, options = {})
@@ -3499,6 +3627,8 @@ module Aws::S3
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPayment AWS API Documentation
+    #
     # @overload put_bucket_request_payment(params = {})
     # @param [Hash] params ({})
     def put_bucket_request_payment(params = {}, options = {})
@@ -3530,6 +3660,8 @@ module Aws::S3
     #       ],
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTagging AWS API Documentation
     #
     # @overload put_bucket_tagging(params = {})
     # @param [Hash] params ({})
@@ -3564,6 +3696,8 @@ module Aws::S3
     #       status: "Enabled", # accepts Enabled, Suspended
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioning AWS API Documentation
     #
     # @overload put_bucket_versioning(params = {})
     # @param [Hash] params ({})
@@ -3615,6 +3749,8 @@ module Aws::S3
     #       ],
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsite AWS API Documentation
     #
     # @overload put_bucket_website(params = {})
     # @param [Hash] params ({})
@@ -3787,6 +3923,8 @@ module Aws::S3
     #   resp.ssekms_key_id #=> String
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObject AWS API Documentation
+    #
     # @overload put_object(params = {})
     # @param [Hash] params ({})
     def put_object(params = {}, options = {})
@@ -3877,6 +4015,8 @@ module Aws::S3
     #
     #   resp.request_charged #=> String, one of "requester"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAcl AWS API Documentation
+    #
     # @overload put_object_acl(params = {})
     # @param [Hash] params ({})
     def put_object_acl(params = {}, options = {})
@@ -3920,6 +4060,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.version_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTagging AWS API Documentation
     #
     # @overload put_object_tagging(params = {})
     # @param [Hash] params ({})
@@ -3967,6 +4109,8 @@ module Aws::S3
     # @example Response structure
     #
     #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObject AWS API Documentation
     #
     # @overload restore_object(params = {})
     # @param [Hash] params ({})
@@ -4065,6 +4209,8 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPart AWS API Documentation
     #
     # @overload upload_part(params = {})
     # @param [Hash] params ({})
@@ -4192,6 +4338,8 @@ module Aws::S3
     #   resp.sse_customer_key_md5 #=> String
     #   resp.ssekms_key_id #=> String
     #   resp.request_charged #=> String, one of "requester"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopy AWS API Documentation
     #
     # @overload upload_part_copy(params = {})
     # @param [Hash] params ({})

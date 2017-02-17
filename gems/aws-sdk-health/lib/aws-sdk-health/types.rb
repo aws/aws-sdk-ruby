@@ -44,6 +44,8 @@ module Aws::Health
     #   A map of entity tags attached to the affected entity.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/AffectedEntity AWS API Documentation
+    #
     class AffectedEntity < Struct.new(
       :entity_arn,
       :event_arn,
@@ -78,6 +80,8 @@ module Aws::Health
     # @!attribute [rw] to
     #   The ending date and time of a time range.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DateTimeRange AWS API Documentation
     #
     class DateTimeRange < Struct.new(
       :from,
@@ -134,6 +138,8 @@ module Aws::Health
     #   100, inclusive.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesRequest AWS API Documentation
+    #
     class DescribeAffectedEntitiesRequest < Struct.new(
       :filter,
       :locale,
@@ -154,6 +160,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntitiesResponse AWS API Documentation
+    #
     class DescribeAffectedEntitiesResponse < Struct.new(
       :entities,
       :next_token)
@@ -173,6 +181,8 @@ module Aws::Health
     #   "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz"`
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesRequest AWS API Documentation
+    #
     class DescribeEntityAggregatesRequest < Struct.new(
       :event_arns)
       include Aws::Structure
@@ -182,6 +192,8 @@ module Aws::Health
     #   The number of entities that are affected by each of the specified
     #   events.
     #   @return [Array<Types::EntityAggregate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregatesResponse AWS API Documentation
     #
     class DescribeEntityAggregatesResponse < Struct.new(
       :entity_aggregates)
@@ -252,6 +264,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregatesRequest AWS API Documentation
+    #
     class DescribeEventAggregatesRequest < Struct.new(
       :filter,
       :aggregate_field,
@@ -272,6 +286,8 @@ module Aws::Health
     #   request and include the returned token. When all results have been
     #   returned, the response does not contain a pagination token value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregatesResponse AWS API Documentation
     #
     class DescribeEventAggregatesResponse < Struct.new(
       :event_aggregates,
@@ -298,6 +314,8 @@ module Aws::Health
     #   default and the only supported value at this time.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsRequest AWS API Documentation
+    #
     class DescribeEventDetailsRequest < Struct.new(
       :event_arns,
       :locale)
@@ -311,6 +329,8 @@ module Aws::Health
     # @!attribute [rw] failed_set
     #   Error messages for any events that could not be retrieved.
     #   @return [Array<Types::EventDetailsErrorItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetailsResponse AWS API Documentation
     #
     class DescribeEventDetailsResponse < Struct.new(
       :successful_set,
@@ -354,6 +374,8 @@ module Aws::Health
     #   100, inclusive.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesRequest AWS API Documentation
+    #
     class DescribeEventTypesRequest < Struct.new(
       :filter,
       :locale,
@@ -378,6 +400,8 @@ module Aws::Health
     #   request and include the returned token. When all results have been
     #   returned, the response does not contain a pagination token value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypesResponse AWS API Documentation
     #
     class DescribeEventTypesResponse < Struct.new(
       :event_types,
@@ -450,6 +474,8 @@ module Aws::Health
     #   default and the only supported value at this time.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsRequest AWS API Documentation
+    #
     class DescribeEventsRequest < Struct.new(
       :filter,
       :next_token,
@@ -470,6 +496,8 @@ module Aws::Health
     #   returned, the response does not contain a pagination token value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventsResponse AWS API Documentation
+    #
     class DescribeEventsResponse < Struct.new(
       :events,
       :next_token)
@@ -489,6 +517,8 @@ module Aws::Health
     #   The number entities that match the criteria for the specified
     #   events.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityAggregate AWS API Documentation
     #
     class EntityAggregate < Struct.new(
       :event_arn,
@@ -547,6 +577,8 @@ module Aws::Health
     #   A list of entity status codes (`IMPAIRED`, `UNIMPAIRED`, or
     #   `UNKNOWN`).
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EntityFilter AWS API Documentation
     #
     class EntityFilter < Struct.new(
       :event_arns,
@@ -609,6 +641,8 @@ module Aws::Health
     #   `closed`, and `upcoming`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/Event AWS API Documentation
+    #
     class Event < Struct.new(
       :arn,
       :service,
@@ -634,6 +668,8 @@ module Aws::Health
     #   The number of events of the associated issue type.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventAggregate AWS API Documentation
+    #
     class EventAggregate < Struct.new(
       :aggregate_value,
       :count)
@@ -646,6 +682,8 @@ module Aws::Health
     # @!attribute [rw] latest_description
     #   The most recent description of the event.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDescription AWS API Documentation
     #
     class EventDescription < Struct.new(
       :latest_description)
@@ -667,6 +705,8 @@ module Aws::Health
     # @!attribute [rw] event_metadata
     #   Additional metadata about the event.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDetails AWS API Documentation
     #
     class EventDetails < Struct.new(
       :event,
@@ -691,6 +731,8 @@ module Aws::Health
     # @!attribute [rw] error_message
     #   A message that describes the error.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventDetailsErrorItem AWS API Documentation
     #
     class EventDetailsErrorItem < Struct.new(
       :event_arn,
@@ -798,6 +840,8 @@ module Aws::Health
     #   A list of event status codes.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventFilter AWS API Documentation
+    #
     class EventFilter < Struct.new(
       :event_arns,
       :event_type_codes,
@@ -836,6 +880,8 @@ module Aws::Health
     #   `accountNotification`).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventType AWS API Documentation
+    #
     class EventType < Struct.new(
       :service,
       :code,
@@ -868,6 +914,8 @@ module Aws::Health
     #   A list of event type category codes (`issue`, `scheduledChange`, or
     #   `accountNotification`).
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/EventTypeFilter AWS API Documentation
     #
     class EventTypeFilter < Struct.new(
       :event_type_codes,

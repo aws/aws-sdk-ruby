@@ -22,6 +22,8 @@ module Aws::KMS
     #   String that contains the key identifier referred to by the alias.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/AliasListEntry AWS API Documentation
+    #
     class AliasListEntry < Struct.new(
       :alias_name,
       :alias_arn,
@@ -52,6 +54,8 @@ module Aws::KMS
     #   ListKeys or DescribeKey.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletionRequest AWS API Documentation
+    #
     class CancelKeyDeletionRequest < Struct.new(
       :key_id)
       include Aws::Structure
@@ -61,6 +65,8 @@ module Aws::KMS
     #   The unique identifier of the master key for which deletion is
     #   canceled.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletionResponse AWS API Documentation
     #
     class CancelKeyDeletionResponse < Struct.new(
       :key_id)
@@ -92,6 +98,8 @@ module Aws::KMS
     #   * Globally Unique Key ID Example -
     #     12345678-1234-1234-1234-123456789012
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAliasRequest AWS API Documentation
     #
     class CreateAliasRequest < Struct.new(
       :alias_name,
@@ -212,6 +220,8 @@ module Aws::KMS
     #   obtained in this way can be used interchangeably.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantRequest AWS API Documentation
+    #
     class CreateGrantRequest < Struct.new(
       :key_id,
       :grantee_principal,
@@ -240,6 +250,8 @@ module Aws::KMS
     #   You can use the `GrantId` in a subsequent RetireGrant or RevokeGrant
     #   operation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantResponse AWS API Documentation
     #
     class CreateGrantResponse < Struct.new(
       :grant_token,
@@ -346,6 +358,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyRequest AWS API Documentation
+    #
     class CreateKeyRequest < Struct.new(
       :policy,
       :description,
@@ -358,6 +372,8 @@ module Aws::KMS
     # @!attribute [rw] key_metadata
     #   Metadata associated with the CMK.
     #   @return [Types::KeyMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyResponse AWS API Documentation
     #
     class CreateKeyResponse < Struct.new(
       :key_metadata)
@@ -400,6 +416,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptRequest AWS API Documentation
+    #
     class DecryptRequest < Struct.new(
       :ciphertext_blob,
       :encryption_context,
@@ -417,6 +435,8 @@ module Aws::KMS
     #   customer master key is not available or if you didn't have
     #   permission to use it.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecryptResponse AWS API Documentation
     #
     class DecryptResponse < Struct.new(
       :key_id,
@@ -436,6 +456,8 @@ module Aws::KMS
     #   followed by a forward slash (alias/). Aliases that begin with
     #   "alias/AWS" are reserved.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAliasRequest AWS API Documentation
     #
     class DeleteAliasRequest < Struct.new(
       :alias_name)
@@ -461,6 +483,8 @@ module Aws::KMS
     #   * Key ARN:
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterialRequest AWS API Documentation
     #
     class DeleteImportedKeyMaterialRequest < Struct.new(
       :key_id)
@@ -503,6 +527,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKeyRequest AWS API Documentation
+    #
     class DescribeKeyRequest < Struct.new(
       :key_id,
       :grant_tokens)
@@ -512,6 +538,8 @@ module Aws::KMS
     # @!attribute [rw] key_metadata
     #   Metadata associated with the key.
     #   @return [Types::KeyMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKeyResponse AWS API Documentation
     #
     class DescribeKeyResponse < Struct.new(
       :key_metadata)
@@ -537,6 +565,8 @@ module Aws::KMS
     #     arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRequest AWS API Documentation
+    #
     class DisableKeyRequest < Struct.new(
       :key_id)
       include Aws::Structure
@@ -559,6 +589,8 @@ module Aws::KMS
     #   * Globally Unique Key ID Example -
     #     12345678-1234-1234-1234-123456789012
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotationRequest AWS API Documentation
     #
     class DisableKeyRotationRequest < Struct.new(
       :key_id)
@@ -583,6 +615,8 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRequest AWS API Documentation
+    #
     class EnableKeyRequest < Struct.new(
       :key_id)
       include Aws::Structure
@@ -605,6 +639,8 @@ module Aws::KMS
     #   * Globally Unique Key ID Example -
     #     12345678-1234-1234-1234-123456789012
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotationRequest AWS API Documentation
     #
     class EnableKeyRotationRequest < Struct.new(
       :key_id)
@@ -666,6 +702,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptRequest AWS API Documentation
+    #
     class EncryptRequest < Struct.new(
       :key_id,
       :plaintext,
@@ -682,6 +720,8 @@ module Aws::KMS
     # @!attribute [rw] key_id
     #   The ID of the key used during encryption.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncryptResponse AWS API Documentation
     #
     class EncryptResponse < Struct.new(
       :ciphertext_blob,
@@ -756,6 +796,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyRequest AWS API Documentation
+    #
     class GenerateDataKeyRequest < Struct.new(
       :key_id,
       :encryption_context,
@@ -778,6 +820,8 @@ module Aws::KMS
     #   The identifier of the CMK under which the data encryption key was
     #   generated and encrypted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyResponse AWS API Documentation
     #
     class GenerateDataKeyResponse < Struct.new(
       :ciphertext_blob,
@@ -853,6 +897,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextRequest AWS API Documentation
+    #
     class GenerateDataKeyWithoutPlaintextRequest < Struct.new(
       :key_id,
       :encryption_context,
@@ -871,6 +917,8 @@ module Aws::KMS
     #   generated and encrypted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintextResponse AWS API Documentation
+    #
     class GenerateDataKeyWithoutPlaintextResponse < Struct.new(
       :ciphertext_blob,
       :key_id)
@@ -888,6 +936,8 @@ module Aws::KMS
     #   The length of the byte string.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomRequest AWS API Documentation
+    #
     class GenerateRandomRequest < Struct.new(
       :number_of_bytes)
       include Aws::Structure
@@ -896,6 +946,8 @@ module Aws::KMS
     # @!attribute [rw] plaintext
     #   The unpredictable byte string.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse AWS API Documentation
     #
     class GenerateRandomResponse < Struct.new(
       :plaintext)
@@ -927,6 +979,8 @@ module Aws::KMS
     #   ListKeyPolicies.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyRequest AWS API Documentation
+    #
     class GetKeyPolicyRequest < Struct.new(
       :key_id,
       :policy_name)
@@ -936,6 +990,8 @@ module Aws::KMS
     # @!attribute [rw] policy
     #   A policy document in JSON format.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicyResponse AWS API Documentation
     #
     class GetKeyPolicyResponse < Struct.new(
       :policy)
@@ -960,6 +1016,8 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusRequest AWS API Documentation
+    #
     class GetKeyRotationStatusRequest < Struct.new(
       :key_id)
       include Aws::Structure
@@ -968,6 +1026,8 @@ module Aws::KMS
     # @!attribute [rw] key_rotation_enabled
     #   A Boolean value that specifies whether key rotation is enabled.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatusResponse AWS API Documentation
     #
     class GetKeyRotationStatusResponse < Struct.new(
       :key_rotation_enabled)
@@ -1012,6 +1072,8 @@ module Aws::KMS
     #   Only 2048-bit RSA public keys are supported.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImportRequest AWS API Documentation
+    #
     class GetParametersForImportRequest < Struct.new(
       :key_id,
       :wrapping_algorithm,
@@ -1040,6 +1102,8 @@ module Aws::KMS
     #   ImportKeyMaterial request and you must send another
     #   `GetParametersForImport` request to retrieve new ones.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImportResponse AWS API Documentation
     #
     class GetParametersForImportResponse < Struct.new(
       :key_id,
@@ -1090,6 +1154,8 @@ module Aws::KMS
     #   operation. Otherwise, the operation is not allowed.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantConstraints AWS API Documentation
+    #
     class GrantConstraints < Struct.new(
       :encryption_context_subset,
       :encryption_context_equals)
@@ -1136,6 +1202,8 @@ module Aws::KMS
     # @!attribute [rw] constraints
     #   The conditions under which the grant's operations are allowed.
     #   @return [Types::GrantConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantListEntry AWS API Documentation
     #
     class GrantListEntry < Struct.new(
       :key_id,
@@ -1204,6 +1272,8 @@ module Aws::KMS
     #   parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialRequest AWS API Documentation
+    #
     class ImportKeyMaterialRequest < Struct.new(
       :key_id,
       :import_token,
@@ -1213,6 +1283,8 @@ module Aws::KMS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterialResponse AWS API Documentation
+    #
     class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
     # Contains information about each entry in the key list.
@@ -1224,6 +1296,8 @@ module Aws::KMS
     # @!attribute [rw] key_arn
     #   ARN of the key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyListEntry AWS API Documentation
     #
     class KeyListEntry < Struct.new(
       :key_id,
@@ -1312,6 +1386,8 @@ module Aws::KMS
     #   omitted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/KeyMetadata AWS API Documentation
+    #
     class KeyMetadata < Struct.new(
       :aws_account_id,
       :key_id,
@@ -1353,6 +1429,8 @@ module Aws::KMS
     #   just received.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesRequest AWS API Documentation
+    #
     class ListAliasesRequest < Struct.new(
       :limit,
       :marker)
@@ -1375,6 +1453,8 @@ module Aws::KMS
     #   make a subsequent pagination request to retrieve more items in the
     #   list.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse AWS API Documentation
     #
     class ListAliasesResponse < Struct.new(
       :aliases,
@@ -1420,6 +1500,8 @@ module Aws::KMS
     #     12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsRequest AWS API Documentation
+    #
     class ListGrantsRequest < Struct.new(
       :limit,
       :marker,
@@ -1443,6 +1525,8 @@ module Aws::KMS
     #   make a subsequent pagination request to retrieve more items in the
     #   list.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse AWS API Documentation
     #
     class ListGrantsResponse < Struct.new(
       :grants,
@@ -1490,6 +1574,8 @@ module Aws::KMS
     #   just received.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesRequest AWS API Documentation
+    #
     class ListKeyPoliciesRequest < Struct.new(
       :key_id,
       :limit,
@@ -1514,6 +1600,8 @@ module Aws::KMS
     #   make a subsequent pagination request to retrieve more items in the
     #   list.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse AWS API Documentation
     #
     class ListKeyPoliciesResponse < Struct.new(
       :policy_names,
@@ -1547,6 +1635,8 @@ module Aws::KMS
     #   just received.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysRequest AWS API Documentation
+    #
     class ListKeysRequest < Struct.new(
       :limit,
       :marker)
@@ -1569,6 +1659,8 @@ module Aws::KMS
     #   make a subsequent pagination request to retrieve more items in the
     #   list.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse AWS API Documentation
     #
     class ListKeysResponse < Struct.new(
       :keys,
@@ -1618,6 +1710,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrantsRequest AWS API Documentation
     #
     class ListRetirableGrantsRequest < Struct.new(
       :limit,
@@ -1705,6 +1799,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicyRequest AWS API Documentation
+    #
     class PutKeyPolicyRequest < Struct.new(
       :key_id,
       :policy_name,
@@ -1769,6 +1865,8 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptRequest AWS API Documentation
+    #
     class ReEncryptRequest < Struct.new(
       :ciphertext_blob,
       :source_encryption_context,
@@ -1789,6 +1887,8 @@ module Aws::KMS
     # @!attribute [rw] key_id
     #   Unique identifier of the CMK used to reencrypt the data.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncryptResponse AWS API Documentation
     #
     class ReEncryptResponse < Struct.new(
       :ciphertext_blob,
@@ -1829,6 +1929,8 @@ module Aws::KMS
     #   ^
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrantRequest AWS API Documentation
+    #
     class RetireGrantRequest < Struct.new(
       :grant_token,
       :key_id,
@@ -1859,6 +1961,8 @@ module Aws::KMS
     # @!attribute [rw] grant_id
     #   Identifier of the grant to be revoked.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrantRequest AWS API Documentation
     #
     class RevokeGrantRequest < Struct.new(
       :key_id,
@@ -1897,6 +2001,8 @@ module Aws::KMS
     #   and 30, inclusive. If you do not include a value, it defaults to 30.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletionRequest AWS API Documentation
+    #
     class ScheduleKeyDeletionRequest < Struct.new(
       :key_id,
       :pending_window_in_days)
@@ -1912,6 +2018,8 @@ module Aws::KMS
     #   The date and time after which AWS KMS deletes the customer master
     #   key (CMK).
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletionResponse AWS API Documentation
     #
     class ScheduleKeyDeletionResponse < Struct.new(
       :key_id,
@@ -1948,6 +2056,8 @@ module Aws::KMS
     #   correct `TargetKeyId`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAliasRequest AWS API Documentation
+    #
     class UpdateAliasRequest < Struct.new(
       :alias_name,
       :target_key_id)
@@ -1976,6 +2086,8 @@ module Aws::KMS
     # @!attribute [rw] description
     #   New description for the CMK.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescriptionRequest AWS API Documentation
     #
     class UpdateKeyDescriptionRequest < Struct.new(
       :key_id,

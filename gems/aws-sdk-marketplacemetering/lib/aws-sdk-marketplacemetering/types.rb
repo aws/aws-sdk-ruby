@@ -37,6 +37,8 @@ module Aws::MarketplaceMetering
     #   during the publishing of a new product.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsageRequest AWS API Documentation
+    #
     class BatchMeterUsageRequest < Struct.new(
       :usage_records,
       :product_code)
@@ -58,6 +60,8 @@ module Aws::MarketplaceMetering
     #   failed request by making another BatchMeterUsage call with this list
     #   as input in the BatchMeterUsageRequest.
     #   @return [Array<Types::UsageRecord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsageResult AWS API Documentation
     #
     class BatchMeterUsageResult < Struct.new(
       :results,
@@ -103,6 +107,8 @@ module Aws::MarketplaceMetering
     #   UnauthorizedException.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest AWS API Documentation
+    #
     class MeterUsageRequest < Struct.new(
       :product_code,
       :timestamp,
@@ -114,6 +120,8 @@ module Aws::MarketplaceMetering
 
     # @!attribute [rw] metering_record_id
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageResult AWS API Documentation
     #
     class MeterUsageResult < Struct.new(
       :metering_record_id)
@@ -136,6 +144,8 @@ module Aws::MarketplaceMetering
     #   product code.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerRequest AWS API Documentation
+    #
     class ResolveCustomerRequest < Struct.new(
       :registration_token)
       include Aws::Structure
@@ -155,6 +165,8 @@ module Aws::MarketplaceMetering
     #   registering for your product. Subsequent BatchMeterUsage calls
     #   should be made using this product code.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerResult AWS API Documentation
     #
     class ResolveCustomerResult < Struct.new(
       :customer_identifier,
@@ -201,6 +213,8 @@ module Aws::MarketplaceMetering
     #   dimension and time.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecord AWS API Documentation
+    #
     class UsageRecord < Struct.new(
       :timestamp,
       :customer_identifier,
@@ -236,6 +250,8 @@ module Aws::MarketplaceMetering
     #     not honored. A previously metered UsageRecord had the same
     #     customer, dimension, and time, but a different quantity.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecordResult AWS API Documentation
     #
     class UsageRecordResult < Struct.new(
       :usage_record,

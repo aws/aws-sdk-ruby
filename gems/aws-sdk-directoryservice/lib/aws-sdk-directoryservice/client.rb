@@ -247,6 +247,8 @@ module Aws::DirectoryService
     #     update_security_group_for_directory_controllers: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutes AWS API Documentation
+    #
     # @overload add_ip_routes(params = {})
     # @param [Hash] params ({})
     def add_ip_routes(params = {}, options = {})
@@ -278,6 +280,8 @@ module Aws::DirectoryService
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResource AWS API Documentation
+    #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
     def add_tags_to_resource(params = {}, options = {})
@@ -306,6 +310,8 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     schema_extension_id: "SchemaExtensionId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtension AWS API Documentation
     #
     # @overload cancel_schema_extension(params = {})
     # @param [Hash] params ({})
@@ -370,6 +376,8 @@ module Aws::DirectoryService
     #
     #   resp.directory_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectory AWS API Documentation
+    #
     # @overload connect_directory(params = {})
     # @param [Hash] params ({})
     def connect_directory(params = {}, options = {})
@@ -410,6 +418,8 @@ module Aws::DirectoryService
     #
     #   resp.directory_id #=> String
     #   resp.alias #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAlias AWS API Documentation
     #
     # @overload create_alias(params = {})
     # @param [Hash] params ({})
@@ -468,6 +478,8 @@ module Aws::DirectoryService
     #   resp.computer.computer_attributes[0].name #=> String
     #   resp.computer.computer_attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputer AWS API Documentation
+    #
     # @overload create_computer(params = {})
     # @param [Hash] params ({})
     def create_computer(params = {}, options = {})
@@ -501,6 +513,8 @@ module Aws::DirectoryService
     #     remote_domain_name: "RemoteDomainName", # required
     #     dns_ip_addrs: ["IpAddr"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarder AWS API Documentation
     #
     # @overload create_conditional_forwarder(params = {})
     # @param [Hash] params ({})
@@ -565,6 +579,8 @@ module Aws::DirectoryService
     #
     #   resp.directory_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectory AWS API Documentation
+    #
     # @overload create_directory(params = {})
     # @param [Hash] params ({})
     def create_directory(params = {}, options = {})
@@ -627,6 +643,8 @@ module Aws::DirectoryService
     #
     #   resp.directory_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftAD AWS API Documentation
+    #
     # @overload create_microsoft_ad(params = {})
     # @param [Hash] params ({})
     def create_microsoft_ad(params = {}, options = {})
@@ -661,6 +679,8 @@ module Aws::DirectoryService
     # @example Response structure
     #
     #   resp.snapshot_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshot AWS API Documentation
     #
     # @overload create_snapshot(params = {})
     # @param [Hash] params ({})
@@ -721,6 +741,8 @@ module Aws::DirectoryService
     #
     #   resp.trust_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrust AWS API Documentation
+    #
     # @overload create_trust(params = {})
     # @param [Hash] params ({})
     def create_trust(params = {}, options = {})
@@ -746,6 +768,8 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     remote_domain_name: "RemoteDomainName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarder AWS API Documentation
     #
     # @overload delete_conditional_forwarder(params = {})
     # @param [Hash] params ({})
@@ -783,6 +807,8 @@ module Aws::DirectoryService
     #
     #   resp.directory_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectory AWS API Documentation
+    #
     # @overload delete_directory(params = {})
     # @param [Hash] params ({})
     def delete_directory(params = {}, options = {})
@@ -808,6 +834,8 @@ module Aws::DirectoryService
     # @example Response structure
     #
     #   resp.snapshot_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteSnapshot AWS API Documentation
     #
     # @overload delete_snapshot(params = {})
     # @param [Hash] params ({})
@@ -840,6 +868,8 @@ module Aws::DirectoryService
     #
     #   resp.trust_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrust AWS API Documentation
+    #
     # @overload delete_trust(params = {})
     # @param [Hash] params ({})
     def delete_trust(params = {}, options = {})
@@ -866,6 +896,8 @@ module Aws::DirectoryService
     #     directory_id: "DirectoryId", # required
     #     topic_name: "TopicName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopic AWS API Documentation
     #
     # @overload deregister_event_topic(params = {})
     # @param [Hash] params ({})
@@ -907,6 +939,8 @@ module Aws::DirectoryService
     #   resp.conditional_forwarders[0].dns_ip_addrs #=> Array
     #   resp.conditional_forwarders[0].dns_ip_addrs[0] #=> String
     #   resp.conditional_forwarders[0].replication_scope #=> String, one of "Domain"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwarders AWS API Documentation
     #
     # @overload describe_conditional_forwarders(params = {})
     # @param [Hash] params ({})
@@ -1004,6 +1038,8 @@ module Aws::DirectoryService
     #   resp.directory_descriptions[0].sso_enabled #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectories AWS API Documentation
+    #
     # @overload describe_directories(params = {})
     # @param [Hash] params ({})
     def describe_directories(params = {}, options = {})
@@ -1048,6 +1084,8 @@ module Aws::DirectoryService
     #   resp.event_topics[0].topic_arn #=> String
     #   resp.event_topics[0].created_date_time #=> Time
     #   resp.event_topics[0].status #=> String, one of "Registered", "Topic not found", "Failed", "Deleted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopics AWS API Documentation
     #
     # @overload describe_event_topics(params = {})
     # @param [Hash] params ({})
@@ -1107,6 +1145,8 @@ module Aws::DirectoryService
     #   resp.snapshots[0].status #=> String, one of "Creating", "Completed", "Failed"
     #   resp.snapshots[0].start_time #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshots AWS API Documentation
     #
     # @overload describe_snapshots(params = {})
     # @param [Hash] params ({})
@@ -1168,6 +1208,8 @@ module Aws::DirectoryService
     #   resp.trusts[0].trust_state_reason #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrusts AWS API Documentation
+    #
     # @overload describe_trusts(params = {})
     # @param [Hash] params ({})
     def describe_trusts(params = {}, options = {})
@@ -1189,6 +1231,8 @@ module Aws::DirectoryService
     #   resp = client.disable_radius({
     #     directory_id: "DirectoryId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadius AWS API Documentation
     #
     # @overload disable_radius(params = {})
     # @param [Hash] params ({})
@@ -1228,6 +1272,8 @@ module Aws::DirectoryService
     #     password: "ConnectPassword",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSso AWS API Documentation
+    #
     # @overload disable_sso(params = {})
     # @param [Hash] params ({})
     def disable_sso(params = {}, options = {})
@@ -1263,6 +1309,8 @@ module Aws::DirectoryService
     #       use_same_username: false,
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadius AWS API Documentation
     #
     # @overload enable_radius(params = {})
     # @param [Hash] params ({})
@@ -1302,6 +1350,8 @@ module Aws::DirectoryService
     #     password: "ConnectPassword",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSso AWS API Documentation
+    #
     # @overload enable_sso(params = {})
     # @param [Hash] params ({})
     def enable_sso(params = {}, options = {})
@@ -1326,6 +1376,8 @@ module Aws::DirectoryService
     #   resp.directory_limits.connected_directories_limit #=> Integer
     #   resp.directory_limits.connected_directories_current_count #=> Integer
     #   resp.directory_limits.connected_directories_limit_reached #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimits AWS API Documentation
     #
     # @overload get_directory_limits(params = {})
     # @param [Hash] params ({})
@@ -1354,6 +1406,8 @@ module Aws::DirectoryService
     #   resp.snapshot_limits.manual_snapshots_limit #=> Integer
     #   resp.snapshot_limits.manual_snapshots_current_count #=> Integer
     #   resp.snapshot_limits.manual_snapshots_limit_reached #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimits AWS API Documentation
     #
     # @overload get_snapshot_limits(params = {})
     # @param [Hash] params ({})
@@ -1400,6 +1454,8 @@ module Aws::DirectoryService
     #   resp.ip_routes_info[0].description #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutes AWS API Documentation
+    #
     # @overload list_ip_routes(params = {})
     # @param [Hash] params ({})
     def list_ip_routes(params = {}, options = {})
@@ -1445,6 +1501,8 @@ module Aws::DirectoryService
     #   resp.schema_extensions_info[0].end_date_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensions AWS API Documentation
+    #
     # @overload list_schema_extensions(params = {})
     # @param [Hash] params ({})
     def list_schema_extensions(params = {}, options = {})
@@ -1483,6 +1541,8 @@ module Aws::DirectoryService
     #   resp.tags[0].value #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListTagsForResource AWS API Documentation
+    #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
@@ -1514,6 +1574,8 @@ module Aws::DirectoryService
     #     topic_name: "TopicName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopic AWS API Documentation
+    #
     # @overload register_event_topic(params = {})
     # @param [Hash] params ({})
     def register_event_topic(params = {}, options = {})
@@ -1539,6 +1601,8 @@ module Aws::DirectoryService
     #     cidr_ips: ["CidrIp"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutes AWS API Documentation
+    #
     # @overload remove_ip_routes(params = {})
     # @param [Hash] params ({})
     def remove_ip_routes(params = {}, options = {})
@@ -1562,6 +1626,8 @@ module Aws::DirectoryService
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})
@@ -1591,6 +1657,8 @@ module Aws::DirectoryService
     #   resp = client.restore_from_snapshot({
     #     snapshot_id: "SnapshotId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshot AWS API Documentation
     #
     # @overload restore_from_snapshot(params = {})
     # @param [Hash] params ({})
@@ -1635,6 +1703,8 @@ module Aws::DirectoryService
     #
     #   resp.schema_extension_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtension AWS API Documentation
+    #
     # @overload start_schema_extension(params = {})
     # @param [Hash] params ({})
     def start_schema_extension(params = {}, options = {})
@@ -1666,6 +1736,8 @@ module Aws::DirectoryService
     #     remote_domain_name: "RemoteDomainName", # required
     #     dns_ip_addrs: ["IpAddr"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarder AWS API Documentation
     #
     # @overload update_conditional_forwarder(params = {})
     # @param [Hash] params ({})
@@ -1703,6 +1775,8 @@ module Aws::DirectoryService
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadius AWS API Documentation
+    #
     # @overload update_radius(params = {})
     # @param [Hash] params ({})
     def update_radius(params = {}, options = {})
@@ -1733,6 +1807,8 @@ module Aws::DirectoryService
     #
     #   resp.trust_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrust AWS API Documentation
+    #
     # @overload verify_trust(params = {})
     # @param [Hash] params ({})
     def verify_trust(params = {}, options = {})
@@ -1753,7 +1829,7 @@ module Aws::DirectoryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directoryservice'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

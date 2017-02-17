@@ -175,6 +175,8 @@ module Aws::ConfigService
     #     config_rule_name: "StringWithCharLimit64", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRule AWS API Documentation
+    #
     # @overload delete_config_rule(params = {})
     # @param [Hash] params ({})
     def delete_config_rule(params = {}, options = {})
@@ -207,6 +209,8 @@ module Aws::ConfigService
     #     configuration_recorder_name: "RecorderName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorder AWS API Documentation
+    #
     # @overload delete_configuration_recorder(params = {})
     # @param [Hash] params ({})
     def delete_configuration_recorder(params = {}, options = {})
@@ -229,6 +233,8 @@ module Aws::ConfigService
     #   resp = client.delete_delivery_channel({
     #     delivery_channel_name: "ChannelName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannel AWS API Documentation
     #
     # @overload delete_delivery_channel(params = {})
     # @param [Hash] params ({})
@@ -253,6 +259,8 @@ module Aws::ConfigService
     #   resp = client.delete_evaluation_results({
     #     config_rule_name: "StringWithCharLimit64", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResults AWS API Documentation
     #
     # @overload delete_evaluation_results(params = {})
     # @param [Hash] params ({})
@@ -291,6 +299,8 @@ module Aws::ConfigService
     # @example Response structure
     #
     #   resp.config_snapshot_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshot AWS API Documentation
     #
     # @overload deliver_config_snapshot(params = {})
     # @param [Hash] params ({})
@@ -360,6 +370,8 @@ module Aws::ConfigService
     #   resp.compliance_by_config_rules[0].compliance.compliance_contributor_count.capped_count #=> Integer
     #   resp.compliance_by_config_rules[0].compliance.compliance_contributor_count.cap_exceeded #=> Boolean
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRule AWS API Documentation
     #
     # @overload describe_compliance_by_config_rule(params = {})
     # @param [Hash] params ({})
@@ -446,6 +458,8 @@ module Aws::ConfigService
     #   resp.compliance_by_resources[0].compliance.compliance_contributor_count.cap_exceeded #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResource AWS API Documentation
+    #
     # @overload describe_compliance_by_resource(params = {})
     # @param [Hash] params ({})
     def describe_compliance_by_resource(params = {}, options = {})
@@ -509,6 +523,8 @@ module Aws::ConfigService
     #   resp.config_rules_evaluation_status[0].first_evaluation_started #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatus AWS API Documentation
+    #
     # @overload describe_config_rule_evaluation_status(params = {})
     # @param [Hash] params ({})
     def describe_config_rule_evaluation_status(params = {}, options = {})
@@ -562,6 +578,8 @@ module Aws::ConfigService
     #   resp.config_rules[0].config_rule_state #=> String, one of "ACTIVE", "DELETING", "DELETING_RESULTS", "EVALUATING"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRules AWS API Documentation
+    #
     # @overload describe_config_rules(params = {})
     # @param [Hash] params ({})
     def describe_config_rules(params = {}, options = {})
@@ -605,6 +623,8 @@ module Aws::ConfigService
     #   resp.configuration_recorders_status[0].last_error_message #=> String
     #   resp.configuration_recorders_status[0].last_status_change_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatus AWS API Documentation
+    #
     # @overload describe_configuration_recorder_status(params = {})
     # @param [Hash] params ({})
     def describe_configuration_recorder_status(params = {}, options = {})
@@ -643,6 +663,8 @@ module Aws::ConfigService
     #   resp.configuration_recorders[0].recording_group.include_global_resource_types #=> Boolean
     #   resp.configuration_recorders[0].recording_group.resource_types #=> Array
     #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket", "AWS::SSM::ManagedInstanceInventory", "AWS::Redshift::Cluster", "AWS::Redshift::ClusterSnapshot", "AWS::Redshift::ClusterParameterGroup", "AWS::Redshift::ClusterSecurityGroup", "AWS::Redshift::ClusterSubnetGroup", "AWS::Redshift::EventSubscription"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorders AWS API Documentation
     #
     # @overload describe_configuration_recorders(params = {})
     # @param [Hash] params ({})
@@ -694,6 +716,8 @@ module Aws::ConfigService
     #   resp.delivery_channels_status[0].config_stream_delivery_info.last_error_message #=> String
     #   resp.delivery_channels_status[0].config_stream_delivery_info.last_status_change_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatus AWS API Documentation
+    #
     # @overload describe_delivery_channel_status(params = {})
     # @param [Hash] params ({})
     def describe_delivery_channel_status(params = {}, options = {})
@@ -731,6 +755,8 @@ module Aws::ConfigService
     #   resp.delivery_channels[0].s3_key_prefix #=> String
     #   resp.delivery_channels[0].sns_topic_arn #=> String
     #   resp.delivery_channels[0].config_snapshot_delivery_properties.delivery_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannels AWS API Documentation
     #
     # @overload describe_delivery_channels(params = {})
     # @param [Hash] params ({})
@@ -791,6 +817,8 @@ module Aws::ConfigService
     #   resp.evaluation_results[0].result_token #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRule AWS API Documentation
+    #
     # @overload get_compliance_details_by_config_rule(params = {})
     # @param [Hash] params ({})
     def get_compliance_details_by_config_rule(params = {}, options = {})
@@ -848,6 +876,8 @@ module Aws::ConfigService
     #   resp.evaluation_results[0].result_token #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResource AWS API Documentation
+    #
     # @overload get_compliance_details_by_resource(params = {})
     # @param [Hash] params ({})
     def get_compliance_details_by_resource(params = {}, options = {})
@@ -869,6 +899,8 @@ module Aws::ConfigService
     #   resp.compliance_summary.non_compliant_resource_count.capped_count #=> Integer
     #   resp.compliance_summary.non_compliant_resource_count.cap_exceeded #=> Boolean
     #   resp.compliance_summary.compliance_summary_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRule AWS API Documentation
     #
     # @overload get_compliance_summary_by_config_rule(params = {})
     # @param [Hash] params ({})
@@ -910,6 +942,8 @@ module Aws::ConfigService
     #   resp.compliance_summaries_by_resource_type[0].compliance_summary.non_compliant_resource_count.capped_count #=> Integer
     #   resp.compliance_summaries_by_resource_type[0].compliance_summary.non_compliant_resource_count.cap_exceeded #=> Boolean
     #   resp.compliance_summaries_by_resource_type[0].compliance_summary.compliance_summary_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceType AWS API Documentation
     #
     # @overload get_compliance_summary_by_resource_type(params = {})
     # @param [Hash] params ({})
@@ -1010,6 +1044,8 @@ module Aws::ConfigService
     #   resp.configuration_items[0].supplementary_configuration["SupplementaryConfigurationName"] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistory AWS API Documentation
+    #
     # @overload get_resource_config_history(params = {})
     # @param [Hash] params ({})
     def get_resource_config_history(params = {}, options = {})
@@ -1087,6 +1123,8 @@ module Aws::ConfigService
     #   resp.resource_identifiers[0].resource_name #=> String
     #   resp.resource_identifiers[0].resource_deletion_time #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResources AWS API Documentation
     #
     # @overload list_discovered_resources(params = {})
     # @param [Hash] params ({})
@@ -1196,6 +1234,8 @@ module Aws::ConfigService
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRule AWS API Documentation
+    #
     # @overload put_config_rule(params = {})
     # @param [Hash] params ({})
     def put_config_rule(params = {}, options = {})
@@ -1238,6 +1278,8 @@ module Aws::ConfigService
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorder AWS API Documentation
     #
     # @overload put_configuration_recorder(params = {})
     # @param [Hash] params ({})
@@ -1283,6 +1325,8 @@ module Aws::ConfigService
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannel AWS API Documentation
     #
     # @overload put_delivery_channel(params = {})
     # @param [Hash] params ({})
@@ -1331,6 +1375,8 @@ module Aws::ConfigService
     #   resp.failed_evaluations[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
     #   resp.failed_evaluations[0].annotation #=> String
     #   resp.failed_evaluations[0].ordering_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluations AWS API Documentation
     #
     # @overload put_evaluations(params = {})
     # @param [Hash] params ({})
@@ -1389,6 +1435,8 @@ module Aws::ConfigService
     #     config_rule_names: ["StringWithCharLimit64"],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluation AWS API Documentation
+    #
     # @overload start_config_rules_evaluation(params = {})
     # @param [Hash] params ({})
     def start_config_rules_evaluation(params = {}, options = {})
@@ -1414,6 +1462,8 @@ module Aws::ConfigService
     #     configuration_recorder_name: "RecorderName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorder AWS API Documentation
+    #
     # @overload start_configuration_recorder(params = {})
     # @param [Hash] params ({})
     def start_configuration_recorder(params = {}, options = {})
@@ -1436,6 +1486,8 @@ module Aws::ConfigService
     #     configuration_recorder_name: "RecorderName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorder AWS API Documentation
+    #
     # @overload stop_configuration_recorder(params = {})
     # @param [Hash] params ({})
     def stop_configuration_recorder(params = {}, options = {})
@@ -1456,7 +1508,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

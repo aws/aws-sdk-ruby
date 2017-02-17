@@ -204,6 +204,8 @@ module Aws::GameLift
     #   resp.alias.creation_time #=> Time
     #   resp.alias.last_updated_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateAlias AWS API Documentation
+    #
     # @overload create_alias(params = {})
     # @param [Hash] params ({})
     def create_alias(params = {}, options = {})
@@ -295,6 +297,8 @@ module Aws::GameLift
     #   resp.storage_location.bucket #=> String
     #   resp.storage_location.key #=> String
     #   resp.storage_location.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateBuild AWS API Documentation
     #
     # @overload create_build(params = {})
     # @param [Hash] params ({})
@@ -504,6 +508,8 @@ module Aws::GameLift
     #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
+    #
     # @overload create_fleet(params = {})
     # @param [Hash] params ({})
     def create_fleet(params = {}, options = {})
@@ -606,6 +612,8 @@ module Aws::GameLift
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSession AWS API Documentation
+    #
     # @overload create_game_session(params = {})
     # @param [Hash] params ({})
     def create_game_session(params = {}, options = {})
@@ -655,6 +663,8 @@ module Aws::GameLift
     #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
     #   resp.player_session.ip_address #=> String
     #   resp.player_session.port #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSession AWS API Documentation
     #
     # @overload create_player_session(params = {})
     # @param [Hash] params ({})
@@ -709,6 +719,8 @@ module Aws::GameLift
     #   resp.player_sessions[0].ip_address #=> String
     #   resp.player_sessions[0].port #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreatePlayerSessions AWS API Documentation
+    #
     # @overload create_player_sessions(params = {})
     # @param [Hash] params ({})
     def create_player_sessions(params = {}, options = {})
@@ -732,6 +744,8 @@ module Aws::GameLift
     #   resp = client.delete_alias({
     #     alias_id: "AliasId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteAlias AWS API Documentation
     #
     # @overload delete_alias(params = {})
     # @param [Hash] params ({})
@@ -758,6 +772,8 @@ module Aws::GameLift
     #     build_id: "BuildId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteBuild AWS API Documentation
+    #
     # @overload delete_build(params = {})
     # @param [Hash] params ({})
     def delete_build(params = {}, options = {})
@@ -782,6 +798,8 @@ module Aws::GameLift
     #   resp = client.delete_fleet({
     #     fleet_id: "FleetId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteFleet AWS API Documentation
     #
     # @overload delete_fleet(params = {})
     # @param [Hash] params ({})
@@ -810,6 +828,8 @@ module Aws::GameLift
     #     name: "NonZeroAndMaxString", # required
     #     fleet_id: "FleetId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DeleteScalingPolicy AWS API Documentation
     #
     # @overload delete_scaling_policy(params = {})
     # @param [Hash] params ({})
@@ -846,6 +866,8 @@ module Aws::GameLift
     #   resp.alias.creation_time #=> Time
     #   resp.alias.last_updated_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeAlias AWS API Documentation
+    #
     # @overload describe_alias(params = {})
     # @param [Hash] params ({})
     def describe_alias(params = {}, options = {})
@@ -880,6 +902,8 @@ module Aws::GameLift
     #   resp.build.size_on_disk #=> Integer
     #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.build.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeBuild AWS API Documentation
     #
     # @overload describe_build(params = {})
     # @param [Hash] params ({})
@@ -927,6 +951,8 @@ module Aws::GameLift
     #   resp.ec2_instance_limits[0].ec2_instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
     #   resp.ec2_instance_limits[0].current_instances #=> Integer
     #   resp.ec2_instance_limits[0].instance_limit #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeEC2InstanceLimits AWS API Documentation
     #
     # @overload describe_ec2_instance_limits(params = {})
     # @param [Hash] params ({})
@@ -1001,6 +1027,8 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
+    #
     # @overload describe_fleet_attributes(params = {})
     # @param [Hash] params ({})
     def describe_fleet_attributes(params = {}, options = {})
@@ -1069,6 +1097,8 @@ module Aws::GameLift
     #   resp.fleet_capacity[0].instance_counts.terminating #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetCapacity AWS API Documentation
+    #
     # @overload describe_fleet_capacity(params = {})
     # @param [Hash] params ({})
     def describe_fleet_capacity(params = {}, options = {})
@@ -1131,6 +1161,8 @@ module Aws::GameLift
     #   resp.events[0].event_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetEvents AWS API Documentation
+    #
     # @overload describe_fleet_events(params = {})
     # @param [Hash] params ({})
     def describe_fleet_events(params = {}, options = {})
@@ -1167,6 +1199,8 @@ module Aws::GameLift
     #   resp.inbound_permissions[0].to_port #=> Integer
     #   resp.inbound_permissions[0].ip_range #=> String
     #   resp.inbound_permissions[0].protocol #=> String, one of "TCP", "UDP"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetPortSettings AWS API Documentation
     #
     # @overload describe_fleet_port_settings(params = {})
     # @param [Hash] params ({})
@@ -1229,6 +1263,8 @@ module Aws::GameLift
     #   resp.fleet_utilization[0].current_player_session_count #=> Integer
     #   resp.fleet_utilization[0].maximum_player_session_count #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetUtilization AWS API Documentation
     #
     # @overload describe_fleet_utilization(params = {})
     # @param [Hash] params ({})
@@ -1315,6 +1351,8 @@ module Aws::GameLift
     #   resp.game_session_details[0].game_session.creator_id #=> String
     #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessionDetails AWS API Documentation
     #
     # @overload describe_game_session_details(params = {})
     # @param [Hash] params ({})
@@ -1405,6 +1443,8 @@ module Aws::GameLift
     #   resp.game_sessions[0].creator_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeGameSessions AWS API Documentation
+    #
     # @overload describe_game_sessions(params = {})
     # @param [Hash] params ({})
     def describe_game_sessions(params = {}, options = {})
@@ -1464,6 +1504,8 @@ module Aws::GameLift
     #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
     #   resp.instances[0].creation_time #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeInstances AWS API Documentation
     #
     # @overload describe_instances(params = {})
     # @param [Hash] params ({})
@@ -1560,6 +1602,8 @@ module Aws::GameLift
     #   resp.player_sessions[0].port #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribePlayerSessions AWS API Documentation
+    #
     # @overload describe_player_sessions(params = {})
     # @param [Hash] params ({})
     def describe_player_sessions(params = {}, options = {})
@@ -1590,6 +1634,8 @@ module Aws::GameLift
     #   resp.runtime_configuration.server_processes[0].launch_path #=> String
     #   resp.runtime_configuration.server_processes[0].parameters #=> String
     #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration AWS API Documentation
     #
     # @overload describe_runtime_configuration(params = {})
     # @param [Hash] params ({})
@@ -1668,6 +1714,8 @@ module Aws::GameLift
     #   resp.scaling_policies[0].metric_name #=> String, one of "ActivatingGameSessions", "ActiveGameSessions", "ActiveInstances", "AvailablePlayerSessions", "CurrentPlayerSessions", "IdleInstances"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies AWS API Documentation
+    #
     # @overload describe_scaling_policies(params = {})
     # @param [Hash] params ({})
     def describe_scaling_policies(params = {}, options = {})
@@ -1710,6 +1758,8 @@ module Aws::GameLift
     # @example Response structure
     #
     #   resp.pre_signed_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetGameSessionLogUrl AWS API Documentation
     #
     # @overload get_game_session_log_url(params = {})
     # @param [Hash] params ({})
@@ -1771,6 +1821,8 @@ module Aws::GameLift
     #   resp.instance_access.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.instance_access.credentials.user_name #=> String
     #   resp.instance_access.credentials.secret #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GetInstanceAccess AWS API Documentation
     #
     # @overload get_instance_access(params = {})
     # @param [Hash] params ({})
@@ -1842,6 +1894,8 @@ module Aws::GameLift
     #   resp.aliases[0].last_updated_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListAliases AWS API Documentation
+    #
     # @overload list_aliases(params = {})
     # @param [Hash] params ({})
     def list_aliases(params = {}, options = {})
@@ -1909,6 +1963,8 @@ module Aws::GameLift
     #   resp.builds[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListBuilds AWS API Documentation
+    #
     # @overload list_builds(params = {})
     # @param [Hash] params ({})
     def list_builds(params = {}, options = {})
@@ -1956,6 +2012,8 @@ module Aws::GameLift
     #   resp.fleet_ids #=> Array
     #   resp.fleet_ids[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ListFleets AWS API Documentation
     #
     # @overload list_fleets(params = {})
     # @param [Hash] params ({})
@@ -2074,6 +2132,8 @@ module Aws::GameLift
     #
     #   resp.name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PutScalingPolicy AWS API Documentation
+    #
     # @overload put_scaling_policy(params = {})
     # @param [Hash] params ({})
     def put_scaling_policy(params = {}, options = {})
@@ -2118,6 +2178,8 @@ module Aws::GameLift
     #   resp.storage_location.key #=> String
     #   resp.storage_location.role_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RequestUploadCredentials AWS API Documentation
+    #
     # @overload request_upload_credentials(params = {})
     # @param [Hash] params ({})
     def request_upload_credentials(params = {}, options = {})
@@ -2144,6 +2206,8 @@ module Aws::GameLift
     # @example Response structure
     #
     #   resp.fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ResolveAlias AWS API Documentation
     #
     # @overload resolve_alias(params = {})
     # @param [Hash] params ({})
@@ -2320,6 +2384,8 @@ module Aws::GameLift
     #   resp.game_sessions[0].creator_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/SearchGameSessions AWS API Documentation
+    #
     # @overload search_game_sessions(params = {})
     # @param [Hash] params ({})
     def search_game_sessions(params = {}, options = {})
@@ -2374,6 +2440,8 @@ module Aws::GameLift
     #   resp.alias.creation_time #=> Time
     #   resp.alias.last_updated_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateAlias AWS API Documentation
+    #
     # @overload update_alias(params = {})
     # @param [Hash] params ({})
     def update_alias(params = {}, options = {})
@@ -2418,6 +2486,8 @@ module Aws::GameLift
     #   resp.build.size_on_disk #=> Integer
     #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.build.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateBuild AWS API Documentation
     #
     # @overload update_build(params = {})
     # @param [Hash] params ({})
@@ -2477,6 +2547,8 @@ module Aws::GameLift
     # @example Response structure
     #
     #   resp.fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributes AWS API Documentation
     #
     # @overload update_fleet_attributes(params = {})
     # @param [Hash] params ({})
@@ -2539,6 +2611,8 @@ module Aws::GameLift
     #
     #   resp.fleet_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetCapacity AWS API Documentation
+    #
     # @overload update_fleet_capacity(params = {})
     # @param [Hash] params ({})
     def update_fleet_capacity(params = {}, options = {})
@@ -2592,6 +2666,8 @@ module Aws::GameLift
     # @example Response structure
     #
     #   resp.fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetPortSettings AWS API Documentation
     #
     # @overload update_fleet_port_settings(params = {})
     # @param [Hash] params ({})
@@ -2669,6 +2745,8 @@ module Aws::GameLift
     #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
     #   resp.game_session.creator_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSession AWS API Documentation
+    #
     # @overload update_game_session(params = {})
     # @param [Hash] params ({})
     def update_game_session(params = {}, options = {})
@@ -2732,6 +2810,8 @@ module Aws::GameLift
     #   resp.runtime_configuration.server_processes[0].launch_path #=> String
     #   resp.runtime_configuration.server_processes[0].parameters #=> String
     #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration AWS API Documentation
     #
     # @overload update_runtime_configuration(params = {})
     # @param [Hash] params ({})

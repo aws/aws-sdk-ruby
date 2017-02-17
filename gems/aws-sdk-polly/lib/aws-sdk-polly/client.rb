@@ -166,6 +166,8 @@ module Aws::Polly
     #     name: "LexiconName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexicon AWS API Documentation
+    #
     # @overload delete_lexicon(params = {})
     # @param [Hash] params ({})
     def delete_lexicon(params = {}, options = {})
@@ -226,6 +228,8 @@ module Aws::Polly
     #   resp.voices[0].name #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoices AWS API Documentation
+    #
     # @overload describe_voices(params = {})
     # @param [Hash] params ({})
     def describe_voices(params = {}, options = {})
@@ -264,6 +268,8 @@ module Aws::Polly
     #   resp.lexicon_attributes.lexicon_arn #=> String
     #   resp.lexicon_attributes.lexemes_count #=> Integer
     #   resp.lexicon_attributes.size #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexicon AWS API Documentation
     #
     # @overload get_lexicon(params = {})
     # @param [Hash] params ({})
@@ -307,6 +313,8 @@ module Aws::Polly
     #   resp.lexicons[0].attributes.size #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexicons AWS API Documentation
+    #
     # @overload list_lexicons(params = {})
     # @param [Hash] params ({})
     def list_lexicons(params = {}, options = {})
@@ -342,6 +350,8 @@ module Aws::Polly
     #     name: "LexiconName", # required
     #     content: "LexiconContent", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon AWS API Documentation
     #
     # @overload put_lexicon(params = {})
     # @param [Hash] params ({})
@@ -425,6 +435,8 @@ module Aws::Polly
     #   resp.content_type #=> String
     #   resp.request_characters #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeech AWS API Documentation
+    #
     # @overload synthesize_speech(params = {})
     # @param [Hash] params ({})
     def synthesize_speech(params = {}, options = {})
@@ -445,7 +457,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

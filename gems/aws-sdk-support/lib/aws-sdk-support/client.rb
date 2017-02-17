@@ -197,6 +197,8 @@ module Aws::Support
     #   resp.attachment_set_id #=> String
     #   resp.expiry_time #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSet AWS API Documentation
+    #
     # @overload add_attachments_to_set(params = {})
     # @param [Hash] params ({})
     def add_attachments_to_set(params = {}, options = {})
@@ -247,6 +249,8 @@ module Aws::Support
     # @example Response structure
     #
     #   resp.result #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCase AWS API Documentation
     #
     # @overload add_communication_to_case(params = {})
     # @param [Hash] params ({})
@@ -373,6 +377,8 @@ module Aws::Support
     #
     #   resp.case_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCase AWS API Documentation
+    #
     # @overload create_case(params = {})
     # @param [Hash] params ({})
     def create_case(params = {}, options = {})
@@ -404,6 +410,8 @@ module Aws::Support
     #
     #   resp.attachment.file_name #=> String
     #   resp.attachment.data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachment AWS API Documentation
     #
     # @overload describe_attachment(params = {})
     # @param [Hash] params ({})
@@ -511,6 +519,8 @@ module Aws::Support
     #   resp.cases[0].language #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCases AWS API Documentation
+    #
     # @overload describe_cases(params = {})
     # @param [Hash] params ({})
     def describe_cases(params = {}, options = {})
@@ -580,6 +590,8 @@ module Aws::Support
     #   resp.communications[0].attachment_set[0].file_name #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunications AWS API Documentation
+    #
     # @overload describe_communications(params = {})
     # @param [Hash] params ({})
     def describe_communications(params = {}, options = {})
@@ -634,6 +646,8 @@ module Aws::Support
     #   resp.services[0].categories[0].code #=> String
     #   resp.services[0].categories[0].name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServices AWS API Documentation
+    #
     # @overload describe_services(params = {})
     # @param [Hash] params ({})
     def describe_services(params = {}, options = {})
@@ -666,6 +680,8 @@ module Aws::Support
     #   resp.severity_levels #=> Array
     #   resp.severity_levels[0].code #=> String
     #   resp.severity_levels[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevels AWS API Documentation
     #
     # @overload describe_severity_levels(params = {})
     # @param [Hash] params ({})
@@ -706,6 +722,8 @@ module Aws::Support
     #   resp.statuses[0].check_id #=> String
     #   resp.statuses[0].status #=> String
     #   resp.statuses[0].millis_until_next_refreshable #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatuses AWS API Documentation
     #
     # @overload describe_trusted_advisor_check_refresh_statuses(params = {})
     # @param [Hash] params ({})
@@ -775,6 +793,8 @@ module Aws::Support
     #   resp.result.flagged_resources[0].metadata #=> Array
     #   resp.result.flagged_resources[0].metadata[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResult AWS API Documentation
+    #
     # @overload describe_trusted_advisor_check_result(params = {})
     # @param [Hash] params ({})
     def describe_trusted_advisor_check_result(params = {}, options = {})
@@ -815,6 +835,8 @@ module Aws::Support
     #   resp.summaries[0].category_specific_summary.cost_optimizing.estimated_monthly_savings #=> Float
     #   resp.summaries[0].category_specific_summary.cost_optimizing.estimated_percent_monthly_savings #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummaries AWS API Documentation
+    #
     # @overload describe_trusted_advisor_check_summaries(params = {})
     # @param [Hash] params ({})
     def describe_trusted_advisor_check_summaries(params = {}, options = {})
@@ -853,6 +875,8 @@ module Aws::Support
     #   resp.checks[0].category #=> String
     #   resp.checks[0].metadata #=> Array
     #   resp.checks[0].metadata[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecks AWS API Documentation
     #
     # @overload describe_trusted_advisor_checks(params = {})
     # @param [Hash] params ({})
@@ -903,6 +927,8 @@ module Aws::Support
     #   resp.status.status #=> String
     #   resp.status.millis_until_next_refreshable #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheck AWS API Documentation
+    #
     # @overload refresh_trusted_advisor_check(params = {})
     # @param [Hash] params ({})
     def refresh_trusted_advisor_check(params = {}, options = {})
@@ -933,6 +959,8 @@ module Aws::Support
     #
     #   resp.initial_case_status #=> String
     #   resp.final_case_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCase AWS API Documentation
     #
     # @overload resolve_case(params = {})
     # @param [Hash] params ({})

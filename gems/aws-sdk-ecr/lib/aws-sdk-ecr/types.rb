@@ -29,6 +29,8 @@ module Aws::ECR
     #   `https://012345678910.dkr.ecr.us-east-1.amazonaws.com`..
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/AuthorizationData AWS API Documentation
+    #
     class AuthorizationData < Struct.new(
       :authorization_token,
       :expires_at,
@@ -60,6 +62,8 @@ module Aws::ECR
     #   The digests of the image layers to check.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailabilityRequest AWS API Documentation
+    #
     class BatchCheckLayerAvailabilityRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -75,6 +79,8 @@ module Aws::ECR
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::LayerFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailabilityResponse AWS API Documentation
     #
     class BatchCheckLayerAvailabilityResponse < Struct.new(
       :layers,
@@ -115,6 +121,8 @@ module Aws::ECR
     #   `imageDigest=digest`.
     #   @return [Array<Types::ImageIdentifier>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImageRequest AWS API Documentation
+    #
     class BatchDeleteImageRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -129,6 +137,8 @@ module Aws::ECR
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::ImageFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImageResponse AWS API Documentation
     #
     class BatchDeleteImageResponse < Struct.new(
       :image_ids,
@@ -175,6 +185,8 @@ module Aws::ECR
     #   `application/vnd.oci.image.manifest.v1+json`
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImageRequest AWS API Documentation
+    #
     class BatchGetImageRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -191,6 +203,8 @@ module Aws::ECR
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::ImageFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImageResponse AWS API Documentation
     #
     class BatchGetImageResponse < Struct.new(
       :images,
@@ -227,6 +241,8 @@ module Aws::ECR
     #   The `sha256` digest of the image layer.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUploadRequest AWS API Documentation
+    #
     class CompleteLayerUploadRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -251,6 +267,8 @@ module Aws::ECR
     #   The `sha256` digest of the image layer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUploadResponse AWS API Documentation
+    #
     class CompleteLayerUploadResponse < Struct.new(
       :registry_id,
       :repository_name,
@@ -273,6 +291,8 @@ module Aws::ECR
     #   (such as `project-a/nginx-web-app`).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryRequest AWS API Documentation
+    #
     class CreateRepositoryRequest < Struct.new(
       :repository_name)
       include Aws::Structure
@@ -281,6 +301,8 @@ module Aws::ECR
     # @!attribute [rw] repository
     #   The repository that was created.
     #   @return [Types::Repository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepositoryResponse AWS API Documentation
     #
     class CreateRepositoryResponse < Struct.new(
       :repository)
@@ -306,6 +328,8 @@ module Aws::ECR
     #   policy to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicyRequest AWS API Documentation
+    #
     class DeleteRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name)
@@ -323,6 +347,8 @@ module Aws::ECR
     # @!attribute [rw] policy_text
     #   The JSON repository policy that was deleted from the repository.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicyResponse AWS API Documentation
     #
     class DeleteRepositoryPolicyResponse < Struct.new(
       :registry_id,
@@ -354,6 +380,8 @@ module Aws::ECR
     #   Force the deletion of the repository if it contains images.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryRequest AWS API Documentation
+    #
     class DeleteRepositoryRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -364,6 +392,8 @@ module Aws::ECR
     # @!attribute [rw] repository
     #   The repository that was deleted.
     #   @return [Types::Repository]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryResponse AWS API Documentation
     #
     class DeleteRepositoryResponse < Struct.new(
       :repository)
@@ -383,6 +413,8 @@ module Aws::ECR
     #   The tag status with which to filter your DescribeImages results. You
     #   can filter results based on whether they are `TAGGED` or `UNTAGGED`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesFilter AWS API Documentation
     #
     class DescribeImagesFilter < Struct.new(
       :tag_status)
@@ -448,6 +480,8 @@ module Aws::ECR
     #   results.
     #   @return [Types::DescribeImagesFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesRequest AWS API Documentation
+    #
     class DescribeImagesRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -469,6 +503,8 @@ module Aws::ECR
     #   results. This value is `null` when there are no more results to
     #   return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImagesResponse AWS API Documentation
     #
     class DescribeImagesResponse < Struct.new(
       :image_details,
@@ -524,6 +560,8 @@ module Aws::ECR
     #   `nextToken` value, if applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoriesRequest AWS API Documentation
+    #
     class DescribeRepositoriesRequest < Struct.new(
       :registry_id,
       :repository_names,
@@ -544,6 +582,8 @@ module Aws::ECR
     #   return.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositoriesResponse AWS API Documentation
+    #
     class DescribeRepositoriesResponse < Struct.new(
       :repositories,
       :next_token)
@@ -563,6 +603,8 @@ module Aws::ECR
     #   registry, the default registry is assumed.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenRequest AWS API Documentation
+    #
     class GetAuthorizationTokenRequest < Struct.new(
       :registry_ids)
       include Aws::Structure
@@ -572,6 +614,8 @@ module Aws::ECR
     #   A list of authorization token data objects that correspond to the
     #   `registryIds` values in the request.
     #   @return [Array<Types::AuthorizationData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationTokenResponse AWS API Documentation
     #
     class GetAuthorizationTokenResponse < Struct.new(
       :authorization_data)
@@ -602,6 +646,8 @@ module Aws::ECR
     #   The digest of the image layer to download.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayerRequest AWS API Documentation
+    #
     class GetDownloadUrlForLayerRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -616,6 +662,8 @@ module Aws::ECR
     # @!attribute [rw] layer_digest
     #   The digest of the image layer to download.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayerResponse AWS API Documentation
     #
     class GetDownloadUrlForLayerResponse < Struct.new(
       :download_url,
@@ -641,6 +689,8 @@ module Aws::ECR
     #   The name of the repository whose policy you want to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicyRequest AWS API Documentation
+    #
     class GetRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name)
@@ -658,6 +708,8 @@ module Aws::ECR
     # @!attribute [rw] policy_text
     #   The JSON repository policy text associated with the repository.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicyResponse AWS API Documentation
     #
     class GetRepositoryPolicyResponse < Struct.new(
       :registry_id,
@@ -685,6 +737,8 @@ module Aws::ECR
     # @!attribute [rw] image_manifest
     #   The image manifest associated with the image.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Image AWS API Documentation
     #
     class Image < Struct.new(
       :registry_id,
@@ -731,6 +785,8 @@ module Aws::ECR
     #   which the current image was pushed to the repository.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageDetail AWS API Documentation
+    #
     class ImageDetail < Struct.new(
       :registry_id,
       :repository_name,
@@ -754,6 +810,8 @@ module Aws::ECR
     # @!attribute [rw] failure_reason
     #   The reason for the failure.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageFailure AWS API Documentation
     #
     class ImageFailure < Struct.new(
       :image_id,
@@ -780,6 +838,8 @@ module Aws::ECR
     #   The tag used for the image.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ImageIdentifier AWS API Documentation
+    #
     class ImageIdentifier < Struct.new(
       :image_digest,
       :image_tag)
@@ -804,6 +864,8 @@ module Aws::ECR
     #   The name of the repository that you intend to upload layers to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUploadRequest AWS API Documentation
+    #
     class InitiateLayerUploadRequest < Struct.new(
       :registry_id,
       :repository_name)
@@ -819,6 +881,8 @@ module Aws::ECR
     #   The size, in bytes, that Amazon ECR expects future layer part
     #   uploads to be.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUploadResponse AWS API Documentation
     #
     class InitiateLayerUploadResponse < Struct.new(
       :upload_id,
@@ -846,6 +910,8 @@ module Aws::ECR
     #   `application/vnd.oci.image.layer.v1.tar+gzip`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Layer AWS API Documentation
+    #
     class Layer < Struct.new(
       :layer_digest,
       :layer_availability,
@@ -868,6 +934,8 @@ module Aws::ECR
     #   The reason for the failure.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/LayerFailure AWS API Documentation
+    #
     class LayerFailure < Struct.new(
       :layer_digest,
       :failure_code,
@@ -888,6 +956,8 @@ module Aws::ECR
     #   The tag status with which to filter your ListImages results. You can
     #   filter results based on whether they are `TAGGED` or `UNTAGGED`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesFilter AWS API Documentation
     #
     class ListImagesFilter < Struct.new(
       :tag_status)
@@ -947,6 +1017,8 @@ module Aws::ECR
     #   results.
     #   @return [Types::ListImagesFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesRequest AWS API Documentation
+    #
     class ListImagesRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -966,6 +1038,8 @@ module Aws::ECR
     #   value can be used to retrieve the next page of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImagesResponse AWS API Documentation
     #
     class ListImagesResponse < Struct.new(
       :image_ids,
@@ -1003,6 +1077,8 @@ module Aws::ECR
     #   formats.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageRequest AWS API Documentation
+    #
     class PutImageRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -1014,6 +1090,8 @@ module Aws::ECR
     # @!attribute [rw] image
     #   Details of the image uploaded.
     #   @return [Types::Image]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImageResponse AWS API Documentation
     #
     class PutImageResponse < Struct.new(
       :image)
@@ -1048,6 +1126,8 @@ module Aws::ECR
     #   The date and time, in JavaScript date/time format, when the
     #   repository was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/Repository AWS API Documentation
     #
     class Repository < Struct.new(
       :repository_arn,
@@ -1089,6 +1169,8 @@ module Aws::ECR
     #   accidental repository lock outs.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicyRequest AWS API Documentation
+    #
     class SetRepositoryPolicyRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -1108,6 +1190,8 @@ module Aws::ECR
     # @!attribute [rw] policy_text
     #   The JSON repository policy text applied to the repository.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicyResponse AWS API Documentation
     #
     class SetRepositoryPolicyResponse < Struct.new(
       :registry_id,
@@ -1155,6 +1239,8 @@ module Aws::ECR
     #   The base64-encoded layer part payload.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPartRequest AWS API Documentation
+    #
     class UploadLayerPartRequest < Struct.new(
       :registry_id,
       :repository_name,
@@ -1180,6 +1266,8 @@ module Aws::ECR
     # @!attribute [rw] last_byte_received
     #   The integer value of the last byte received in the request.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPartResponse AWS API Documentation
     #
     class UploadLayerPartResponse < Struct.new(
       :registry_id,

@@ -19,6 +19,8 @@ module Aws::CloudWatchLogs
     #   The ID of the export task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTaskRequest AWS API Documentation
+    #
     class CancelExportTaskRequest < Struct.new(
       :task_id)
       include Aws::Structure
@@ -72,6 +74,8 @@ module Aws::CloudWatchLogs
     #   If you don't specify a value, the default is `exportedlogs`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTaskRequest AWS API Documentation
+    #
     class CreateExportTaskRequest < Struct.new(
       :task_name,
       :log_group_name,
@@ -86,6 +90,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] task_id
     #   The ID of the export task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTaskResponse AWS API Documentation
     #
     class CreateExportTaskResponse < Struct.new(
       :task_id)
@@ -110,6 +116,8 @@ module Aws::CloudWatchLogs
     #   The key-value pairs to use for the tags.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroupRequest AWS API Documentation
+    #
     class CreateLogGroupRequest < Struct.new(
       :log_group_name,
       :tags)
@@ -132,6 +140,8 @@ module Aws::CloudWatchLogs
     #   The name of the log stream.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStreamRequest AWS API Documentation
+    #
     class CreateLogStreamRequest < Struct.new(
       :log_group_name,
       :log_stream_name)
@@ -149,6 +159,8 @@ module Aws::CloudWatchLogs
     #   The name of the destination.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestinationRequest AWS API Documentation
+    #
     class DeleteDestinationRequest < Struct.new(
       :destination_name)
       include Aws::Structure
@@ -164,6 +176,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroupRequest AWS API Documentation
     #
     class DeleteLogGroupRequest < Struct.new(
       :log_group_name)
@@ -185,6 +199,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_stream_name
     #   The name of the log stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStreamRequest AWS API Documentation
     #
     class DeleteLogStreamRequest < Struct.new(
       :log_group_name,
@@ -208,6 +224,8 @@ module Aws::CloudWatchLogs
     #   The name of the metric filter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilterRequest AWS API Documentation
+    #
     class DeleteMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name)
@@ -224,6 +242,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] log_group_name
     #   The name of the log group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicyRequest AWS API Documentation
     #
     class DeleteRetentionPolicyRequest < Struct.new(
       :log_group_name)
@@ -245,6 +265,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] filter_name
     #   The name of the subscription filter.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilterRequest AWS API Documentation
     #
     class DeleteSubscriptionFilterRequest < Struct.new(
       :log_group_name,
@@ -276,6 +298,8 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinationsRequest AWS API Documentation
+    #
     class DescribeDestinationsRequest < Struct.new(
       :destination_name_prefix,
       :next_token,
@@ -291,6 +315,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinationsResponse AWS API Documentation
     #
     class DescribeDestinationsResponse < Struct.new(
       :destinations,
@@ -328,6 +354,8 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasksRequest AWS API Documentation
+    #
     class DescribeExportTasksRequest < Struct.new(
       :task_id,
       :status_code,
@@ -344,6 +372,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasksResponse AWS API Documentation
     #
     class DescribeExportTasksResponse < Struct.new(
       :export_tasks,
@@ -374,6 +404,8 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroupsRequest AWS API Documentation
+    #
     class DescribeLogGroupsRequest < Struct.new(
       :log_group_name_prefix,
       :next_token,
@@ -389,6 +421,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroupsResponse AWS API Documentation
     #
     class DescribeLogGroupsResponse < Struct.new(
       :log_groups,
@@ -443,6 +477,8 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreamsRequest AWS API Documentation
+    #
     class DescribeLogStreamsRequest < Struct.new(
       :log_group_name,
       :log_stream_name_prefix,
@@ -461,6 +497,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreamsResponse AWS API Documentation
     #
     class DescribeLogStreamsResponse < Struct.new(
       :log_streams,
@@ -506,6 +544,8 @@ module Aws::CloudWatchLogs
     #   The namespace of the CloudWatch metric.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFiltersRequest AWS API Documentation
+    #
     class DescribeMetricFiltersRequest < Struct.new(
       :log_group_name,
       :filter_name_prefix,
@@ -524,6 +564,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFiltersResponse AWS API Documentation
     #
     class DescribeMetricFiltersResponse < Struct.new(
       :metric_filters,
@@ -560,6 +602,8 @@ module Aws::CloudWatchLogs
     #   the default is up to 50 items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFiltersRequest AWS API Documentation
+    #
     class DescribeSubscriptionFiltersRequest < Struct.new(
       :log_group_name,
       :filter_name_prefix,
@@ -576,6 +620,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items to return. The token expires
     #   after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFiltersResponse AWS API Documentation
     #
     class DescribeSubscriptionFiltersResponse < Struct.new(
       :subscription_filters,
@@ -612,6 +658,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] creation_time
     #   The creation time of the destination.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Destination AWS API Documentation
     #
     class Destination < Struct.new(
       :destination_name,
@@ -666,6 +714,8 @@ module Aws::CloudWatchLogs
     #   Execution info about the export task.
     #   @return [Types::ExportTaskExecutionInfo]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTask AWS API Documentation
+    #
     class ExportTask < Struct.new(
       :task_id,
       :task_name,
@@ -689,6 +739,8 @@ module Aws::CloudWatchLogs
     #   The completion time of the export task.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskExecutionInfo AWS API Documentation
+    #
     class ExportTaskExecutionInfo < Struct.new(
       :creation_time,
       :completion_time)
@@ -704,6 +756,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] message
     #   The status message related to the status code.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskStatus AWS API Documentation
     #
     class ExportTaskStatus < Struct.new(
       :code,
@@ -769,6 +823,8 @@ module Aws::CloudWatchLogs
     #   false.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsRequest AWS API Documentation
+    #
     class FilterLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_names,
@@ -794,6 +850,8 @@ module Aws::CloudWatchLogs
     #   The token to use when requesting the next set of items. The token
     #   expires after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEventsResponse AWS API Documentation
     #
     class FilterLogEventsResponse < Struct.new(
       :events,
@@ -824,6 +882,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] event_id
     #   The ID of the event.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilteredLogEvent AWS API Documentation
     #
     class FilteredLogEvent < Struct.new(
       :log_stream_name,
@@ -884,6 +944,8 @@ module Aws::CloudWatchLogs
     #   default value is false.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsRequest AWS API Documentation
+    #
     class GetLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_name,
@@ -908,6 +970,8 @@ module Aws::CloudWatchLogs
     #   The token for the next set of items in the backward direction. The
     #   token expires after 24 hours.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEventsResponse AWS API Documentation
     #
     class GetLogEventsResponse < Struct.new(
       :events,
@@ -936,6 +1000,8 @@ module Aws::CloudWatchLogs
     #   The raw event message.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/InputLogEvent AWS API Documentation
+    #
     class InputLogEvent < Struct.new(
       :timestamp,
       :message)
@@ -953,6 +1019,8 @@ module Aws::CloudWatchLogs
     #   The name of the log group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroupRequest AWS API Documentation
+    #
     class ListTagsLogGroupRequest < Struct.new(
       :log_group_name)
       include Aws::Structure
@@ -961,6 +1029,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] tags
     #   The tags.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroupResponse AWS API Documentation
     #
     class ListTagsLogGroupResponse < Struct.new(
       :tags)
@@ -994,6 +1064,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] stored_bytes
     #   The number of bytes stored.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
       :log_group_name,
@@ -1042,6 +1114,8 @@ module Aws::CloudWatchLogs
     #   The number of bytes stored.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogStream AWS API Documentation
+    #
     class LogStream < Struct.new(
       :log_stream_name,
       :creation_time,
@@ -1081,6 +1155,8 @@ module Aws::CloudWatchLogs
     #   The name of the log group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricFilter AWS API Documentation
+    #
     class MetricFilter < Struct.new(
       :filter_name,
       :filter_pattern,
@@ -1103,6 +1179,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] extracted_values
     #   The values extracted from the event data by the filter.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricFilterMatchRecord AWS API Documentation
     #
     class MetricFilterMatchRecord < Struct.new(
       :event_number,
@@ -1142,6 +1220,8 @@ module Aws::CloudWatchLogs
     #   log event. This value can be null.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/MetricTransformation AWS API Documentation
+    #
     class MetricTransformation < Struct.new(
       :metric_name,
       :metric_namespace,
@@ -1164,6 +1244,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] ingestion_time
     #   The time the event was ingested.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OutputLogEvent AWS API Documentation
     #
     class OutputLogEvent < Struct.new(
       :timestamp,
@@ -1188,6 +1270,8 @@ module Aws::CloudWatchLogs
     #   An IAM policy document that authorizes cross-account users to
     #   deliver their log events to the associated destination.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicyRequest AWS API Documentation
     #
     class PutDestinationPolicyRequest < Struct.new(
       :destination_name,
@@ -1218,6 +1302,8 @@ module Aws::CloudWatchLogs
     #   call Amazon Kinesis PutRecord on the destination stream.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationRequest AWS API Documentation
+    #
     class PutDestinationRequest < Struct.new(
       :destination_name,
       :target_arn,
@@ -1228,6 +1314,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] destination
     #   The destination.
     #   @return [Types::Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationResponse AWS API Documentation
     #
     class PutDestinationResponse < Struct.new(
       :destination)
@@ -1265,6 +1353,8 @@ module Aws::CloudWatchLogs
     #   The sequence token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsRequest AWS API Documentation
+    #
     class PutLogEventsRequest < Struct.new(
       :log_group_name,
       :log_stream_name,
@@ -1280,6 +1370,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] rejected_log_events_info
     #   The rejected events.
     #   @return [Types::RejectedLogEventsInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEventsResponse AWS API Documentation
     #
     class PutLogEventsResponse < Struct.new(
       :next_sequence_token,
@@ -1322,6 +1414,8 @@ module Aws::CloudWatchLogs
     #   emitted.
     #   @return [Array<Types::MetricTransformation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilterRequest AWS API Documentation
+    #
     class PutMetricFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
@@ -1347,6 +1441,8 @@ module Aws::CloudWatchLogs
     #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
     #   180, 365, 400, 545, 731, 1827, and 3653.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicyRequest AWS API Documentation
     #
     class PutRetentionPolicyRequest < Struct.new(
       :log_group_name,
@@ -1409,6 +1505,8 @@ module Aws::CloudWatchLogs
     #   log data randomly.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilterRequest AWS API Documentation
+    #
     class PutSubscriptionFilterRequest < Struct.new(
       :log_group_name,
       :filter_name,
@@ -1433,6 +1531,8 @@ module Aws::CloudWatchLogs
     #   The expired log events.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/RejectedLogEventsInfo AWS API Documentation
+    #
     class RejectedLogEventsInfo < Struct.new(
       :too_new_log_event_start_index,
       :too_old_log_event_end_index,
@@ -1449,6 +1549,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] searched_completely
     #   Indicates whether all the events in this log stream were searched.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SearchedLogStream AWS API Documentation
     #
     class SearchedLogStream < Struct.new(
       :log_stream_name,
@@ -1489,6 +1591,8 @@ module Aws::CloudWatchLogs
     #   The creation time of the subscription filter.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter AWS API Documentation
+    #
     class SubscriptionFilter < Struct.new(
       :filter_name,
       :log_group_name,
@@ -1518,6 +1622,8 @@ module Aws::CloudWatchLogs
     #   The key-value pairs to use for the tags.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroupRequest AWS API Documentation
+    #
     class TagLogGroupRequest < Struct.new(
       :log_group_name,
       :tags)
@@ -1543,6 +1649,8 @@ module Aws::CloudWatchLogs
     #   The log event messages to test.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilterRequest AWS API Documentation
+    #
     class TestMetricFilterRequest < Struct.new(
       :filter_pattern,
       :log_event_messages)
@@ -1552,6 +1660,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] matches
     #   The matched events.
     #   @return [Array<Types::MetricFilterMatchRecord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilterResponse AWS API Documentation
     #
     class TestMetricFilterResponse < Struct.new(
       :matches)
@@ -1573,6 +1683,8 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] tags
     #   The tag keys. The corresponding tags are removed from the log group.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroupRequest AWS API Documentation
     #
     class UntagLogGroupRequest < Struct.new(
       :log_group_name,

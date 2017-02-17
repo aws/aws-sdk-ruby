@@ -34,6 +34,8 @@ module Aws::CloudTrail
     #   Contains a list of CloudTrail tags, up to a limit of 50
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTagsRequest AWS API Documentation
+    #
     class AddTagsRequest < Struct.new(
       :resource_id,
       :tags_list)
@@ -42,6 +44,8 @@ module Aws::CloudTrail
 
     # Returns the objects or data listed below if successful. Otherwise,
     # returns an error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTagsResponse AWS API Documentation
     #
     class AddTagsResponse < Aws::EmptyStructure; end
 
@@ -161,6 +165,8 @@ module Aws::CloudTrail
     #   * 12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailRequest AWS API Documentation
+    #
     class CreateTrailRequest < Struct.new(
       :name,
       :s3_bucket_name,
@@ -247,6 +253,8 @@ module Aws::CloudTrail
     #   `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrailResponse AWS API Documentation
+    #
     class CreateTrailResponse < Struct.new(
       :name,
       :s3_bucket_name,
@@ -312,6 +320,8 @@ module Aws::CloudTrail
     #   prefix.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DataResource AWS API Documentation
+    #
     class DataResource < Struct.new(
       :type,
       :values)
@@ -333,6 +343,8 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailRequest AWS API Documentation
+    #
     class DeleteTrailRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -340,6 +352,8 @@ module Aws::CloudTrail
 
     # Returns the objects or data listed below if successful. Otherwise,
     # returns an error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailResponse AWS API Documentation
     #
     class DeleteTrailResponse < Aws::EmptyStructure; end
 
@@ -383,6 +397,8 @@ module Aws::CloudTrail
     #   a different region. The default is true.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsRequest AWS API Documentation
+    #
     class DescribeTrailsRequest < Struct.new(
       :trail_name_list,
       :include_shadow_trails)
@@ -395,6 +411,8 @@ module Aws::CloudTrail
     # @!attribute [rw] trail_list
     #   The list of trail objects.
     #   @return [Array<Types::Trail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrailsResponse AWS API Documentation
     #
     class DescribeTrailsResponse < Struct.new(
       :trail_list)
@@ -432,6 +450,8 @@ module Aws::CloudTrail
     # @!attribute [rw] cloud_trail_event
     #   A JSON string that contains a representation of the event returned.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Event AWS API Documentation
     #
     class Event < Struct.new(
       :event_id,
@@ -503,6 +523,8 @@ module Aws::CloudTrail
     #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html#data-events-resources
     #   @return [Array<Types::DataResource>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
+    #
     class EventSelector < Struct.new(
       :read_write_type,
       :include_management_events,
@@ -538,6 +560,8 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectorsRequest AWS API Documentation
+    #
     class GetEventSelectorsRequest < Struct.new(
       :trail_name)
       include Aws::Structure
@@ -550,6 +574,8 @@ module Aws::CloudTrail
     # @!attribute [rw] event_selectors
     #   The event selectors that are configured for the trail.
     #   @return [Array<Types::EventSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectorsResponse AWS API Documentation
     #
     class GetEventSelectorsResponse < Struct.new(
       :trail_arn,
@@ -574,6 +600,8 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusRequest AWS API Documentation
     #
     class GetTrailStatusRequest < Struct.new(
       :name)
@@ -695,6 +723,8 @@ module Aws::CloudTrail
     #   This field is deprecated.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatusResponse AWS API Documentation
+    #
     class GetTrailStatusResponse < Struct.new(
       :is_logging,
       :latest_delivery_error,
@@ -743,6 +773,8 @@ module Aws::CloudTrail
     #   Reserved for future use.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListPublicKeysRequest AWS API Documentation
+    #
     class ListPublicKeysRequest < Struct.new(
       :start_time,
       :end_time,
@@ -764,6 +796,8 @@ module Aws::CloudTrail
     # @!attribute [rw] next_token
     #   Reserved for future use.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListPublicKeysResponse AWS API Documentation
     #
     class ListPublicKeysResponse < Struct.new(
       :public_key_list,
@@ -792,6 +826,8 @@ module Aws::CloudTrail
     #   Reserved for future use.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTagsRequest AWS API Documentation
+    #
     class ListTagsRequest < Struct.new(
       :resource_id_list,
       :next_token)
@@ -808,6 +844,8 @@ module Aws::CloudTrail
     # @!attribute [rw] next_token
     #   Reserved for future use.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTagsResponse AWS API Documentation
     #
     class ListTagsResponse < Struct.new(
       :resource_tag_list,
@@ -832,6 +870,8 @@ module Aws::CloudTrail
     # @!attribute [rw] attribute_value
     #   Specifies a value for the specified AttributeKey.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupAttribute AWS API Documentation
     #
     class LookupAttribute < Struct.new(
       :attribute_key,
@@ -888,6 +928,8 @@ module Aws::CloudTrail
     #   parameters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEventsRequest AWS API Documentation
+    #
     class LookupEventsRequest < Struct.new(
       :lookup_attributes,
       :start_time,
@@ -914,6 +956,8 @@ module Aws::CloudTrail
     #   NextToken should include those same parameters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEventsResponse AWS API Documentation
+    #
     class LookupEventsResponse < Struct.new(
       :events,
       :next_token)
@@ -937,6 +981,8 @@ module Aws::CloudTrail
     # @!attribute [rw] fingerprint
     #   The fingerprint of the public key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PublicKey AWS API Documentation
     #
     class PublicKey < Struct.new(
       :value,
@@ -991,6 +1037,8 @@ module Aws::CloudTrail
     #   up to five event selectors for a trail.
     #   @return [Array<Types::EventSelector>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectorsRequest AWS API Documentation
+    #
     class PutEventSelectorsRequest < Struct.new(
       :trail_name,
       :event_selectors)
@@ -1007,6 +1055,8 @@ module Aws::CloudTrail
     # @!attribute [rw] event_selectors
     #   Specifies the event selectors configured for your trail.
     #   @return [Array<Types::EventSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectorsResponse AWS API Documentation
     #
     class PutEventSelectorsResponse < Struct.new(
       :trail_arn,
@@ -1040,6 +1090,8 @@ module Aws::CloudTrail
     #   Specifies a list of tags to be removed.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTagsRequest AWS API Documentation
+    #
     class RemoveTagsRequest < Struct.new(
       :resource_id,
       :tags_list)
@@ -1048,6 +1100,8 @@ module Aws::CloudTrail
 
     # Returns the objects or data listed below if successful. Otherwise,
     # returns an error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTagsResponse AWS API Documentation
     #
     class RemoveTagsResponse < Aws::EmptyStructure; end
 
@@ -1073,6 +1127,8 @@ module Aws::CloudTrail
     #   an Auto Scaling Group or "i-1234567" for an EC2 Instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Resource AWS API Documentation
+    #
     class Resource < Struct.new(
       :resource_type,
       :resource_name)
@@ -1088,6 +1144,8 @@ module Aws::CloudTrail
     # @!attribute [rw] tags_list
     #   A list of tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ResourceTag AWS API Documentation
     #
     class ResourceTag < Struct.new(
       :resource_id,
@@ -1112,6 +1170,8 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLoggingRequest AWS API Documentation
+    #
     class StartLoggingRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -1119,6 +1179,8 @@ module Aws::CloudTrail
 
     # Returns the objects or data listed below if successful. Otherwise,
     # returns an error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLoggingResponse AWS API Documentation
     #
     class StartLoggingResponse < Aws::EmptyStructure; end
 
@@ -1140,6 +1202,8 @@ module Aws::CloudTrail
     #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLoggingRequest AWS API Documentation
+    #
     class StopLoggingRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -1147,6 +1211,8 @@ module Aws::CloudTrail
 
     # Returns the objects or data listed below if successful. Otherwise,
     # returns an error.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLoggingResponse AWS API Documentation
     #
     class StopLoggingResponse < Aws::EmptyStructure; end
 
@@ -1171,6 +1237,8 @@ module Aws::CloudTrail
     #   The value in a key-value pair of a tag. The value must be no longer
     #   than 256 Unicode characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -1262,6 +1330,8 @@ module Aws::CloudTrail
     # @!attribute [rw] has_custom_event_selectors
     #   Specifies if the trail has custom event selectors.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Trail AWS API Documentation
     #
     class Trail < Struct.new(
       :name,
@@ -1406,6 +1476,8 @@ module Aws::CloudTrail
     #   * 12345678-1234-1234-1234-123456789012
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailRequest AWS API Documentation
+    #
     class UpdateTrailRequest < Struct.new(
       :name,
       :s3_bucket_name,
@@ -1491,6 +1563,8 @@ module Aws::CloudTrail
     #
     #   `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrailResponse AWS API Documentation
     #
     class UpdateTrailResponse < Struct.new(
       :name,

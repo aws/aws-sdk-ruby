@@ -28,6 +28,8 @@ module Aws::Kinesis
     #   The set of key-value pairs to use to create the tags.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStreamInput AWS API Documentation
+    #
     class AddTagsToStreamInput < Struct.new(
       :stream_name,
       :tags)
@@ -60,6 +62,8 @@ module Aws::Kinesis
     #   DefaultShardLimit;
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStreamInput AWS API Documentation
+    #
     class CreateStreamInput < Struct.new(
       :stream_name,
       :shard_count)
@@ -85,6 +89,8 @@ module Aws::Kinesis
     #   the current retention period.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriodInput AWS API Documentation
+    #
     class DecreaseStreamRetentionPeriodInput < Struct.new(
       :stream_name,
       :retention_period_hours)
@@ -104,12 +110,16 @@ module Aws::Kinesis
     #   The name of the stream to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStreamInput AWS API Documentation
+    #
     class DeleteStreamInput < Struct.new(
       :stream_name)
       include Aws::Structure
     end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsInput AWS API Documentation
     #
     class DescribeLimitsInput < Aws::EmptyStructure; end
 
@@ -120,6 +130,8 @@ module Aws::Kinesis
     # @!attribute [rw] open_shard_count
     #   The number of open shards.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimitsOutput AWS API Documentation
     #
     class DescribeLimitsOutput < Struct.new(
       :shard_limit,
@@ -152,6 +164,8 @@ module Aws::Kinesis
     #   The shard ID of the shard to start with.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamInput AWS API Documentation
+    #
     class DescribeStreamInput < Struct.new(
       :stream_name,
       :limit,
@@ -166,6 +180,8 @@ module Aws::Kinesis
     #   objects that comprise the stream, and whether there are more shards
     #   available.
     #   @return [Types::StreamDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStreamOutput AWS API Documentation
     #
     class DescribeStreamOutput < Struct.new(
       :stream_description)
@@ -218,6 +234,8 @@ module Aws::Kinesis
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoringInput AWS API Documentation
+    #
     class DisableEnhancedMonitoringInput < Struct.new(
       :stream_name,
       :shard_level_metrics)
@@ -269,6 +287,8 @@ module Aws::Kinesis
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoringInput AWS API Documentation
+    #
     class EnableEnhancedMonitoringInput < Struct.new(
       :stream_name,
       :shard_level_metrics)
@@ -308,6 +328,8 @@ module Aws::Kinesis
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/dev/monitoring-with-cloudwatch.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMetrics AWS API Documentation
+    #
     class EnhancedMetrics < Struct.new(
       :shard_level_metrics)
       include Aws::Structure
@@ -329,6 +351,8 @@ module Aws::Kinesis
     #   Represents the list of all the metrics that would be in the enhanced
     #   state after the operation.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnhancedMonitoringOutput AWS API Documentation
     #
     class EnhancedMonitoringOutput < Struct.new(
       :stream_name,
@@ -359,6 +383,8 @@ module Aws::Kinesis
     #   GetRecords throws `InvalidArgumentException`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsInput AWS API Documentation
+    #
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :limit)
@@ -383,6 +409,8 @@ module Aws::Kinesis
     #   is. A value of zero indicates record processing is caught up, and
     #   there are no new records to process at this moment.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsOutput AWS API Documentation
     #
     class GetRecordsOutput < Struct.new(
       :records,
@@ -453,6 +481,8 @@ module Aws::Kinesis
     #   untrimmed data record (TRIM\_HORIZON).
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIteratorInput AWS API Documentation
+    #
     class GetShardIteratorInput < Struct.new(
       :stream_name,
       :shard_id,
@@ -470,6 +500,8 @@ module Aws::Kinesis
     #   sequence number of a data record in a shard.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIteratorOutput AWS API Documentation
+    #
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator)
       include Aws::Structure
@@ -485,6 +517,8 @@ module Aws::Kinesis
     # @!attribute [rw] ending_hash_key
     #   The ending hash key of the hash key range.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/HashKeyRange AWS API Documentation
     #
     class HashKeyRange < Struct.new(
       :starting_hash_key,
@@ -511,6 +545,8 @@ module Aws::Kinesis
     #   the current retention period.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriodInput AWS API Documentation
+    #
     class IncreaseStreamRetentionPeriodInput < Struct.new(
       :stream_name,
       :retention_period_hours)
@@ -535,6 +571,8 @@ module Aws::Kinesis
     #   The name of the stream to start the list with.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamsInput AWS API Documentation
+    #
     class ListStreamsInput < Struct.new(
       :limit,
       :exclusive_start_stream_name)
@@ -551,6 +589,8 @@ module Aws::Kinesis
     # @!attribute [rw] has_more_streams
     #   If set to `true`, there are more streams available to list.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreamsOutput AWS API Documentation
     #
     class ListStreamsOutput < Struct.new(
       :stream_names,
@@ -586,6 +626,8 @@ module Aws::Kinesis
     #   last key in the response.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStreamInput AWS API Documentation
+    #
     class ListTagsForStreamInput < Struct.new(
       :stream_name,
       :exclusive_start_tag_key,
@@ -605,6 +647,8 @@ module Aws::Kinesis
     #   tags, set `ExclusiveStartTagKey` to the key of the last tag
     #   returned.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStreamOutput AWS API Documentation
     #
     class ListTagsForStreamOutput < Struct.new(
       :tags,
@@ -635,6 +679,8 @@ module Aws::Kinesis
     # @!attribute [rw] adjacent_shard_to_merge
     #   The shard ID of the adjacent shard for the merge.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShardsInput AWS API Documentation
     #
     class MergeShardsInput < Struct.new(
       :stream_name,
@@ -693,6 +739,8 @@ module Aws::Kinesis
     #   on arrival time.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordInput AWS API Documentation
+    #
     class PutRecordInput < Struct.new(
       :stream_name,
       :data,
@@ -714,6 +762,8 @@ module Aws::Kinesis
     #   records in the stream. A sequence number is the identifier
     #   associated with every record put into the stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordOutput AWS API Documentation
     #
     class PutRecordOutput < Struct.new(
       :shard_id,
@@ -745,6 +795,8 @@ module Aws::Kinesis
     #   The stream name associated with the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsInput AWS API Documentation
+    #
     class PutRecordsInput < Struct.new(
       :records,
       :stream_name)
@@ -765,6 +817,8 @@ module Aws::Kinesis
     #   `ShardId` in the result. A record that fails to be added to a stream
     #   includes `ErrorCode` and `ErrorMessage` in the result.
     #   @return [Array<Types::PutRecordsResultEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsOutput AWS API Documentation
     #
     class PutRecordsOutput < Struct.new(
       :failed_record_count,
@@ -807,6 +861,8 @@ module Aws::Kinesis
     #   to the same shard within the stream.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsRequestEntry AWS API Documentation
+    #
     class PutRecordsRequestEntry < Struct.new(
       :data,
       :explicit_hash_key,
@@ -842,6 +898,8 @@ module Aws::Kinesis
     #   `"Internal Service Failure"`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsResultEntry AWS API Documentation
+    #
     class PutRecordsResultEntry < Struct.new(
       :sequence_number,
       :shard_id,
@@ -873,6 +931,8 @@ module Aws::Kinesis
     #   Identifies which shard in the stream the data record is assigned to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Record AWS API Documentation
+    #
     class Record < Struct.new(
       :sequence_number,
       :approximate_arrival_timestamp,
@@ -900,6 +960,8 @@ module Aws::Kinesis
     #   stream.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStreamInput AWS API Documentation
+    #
     class RemoveTagsFromStreamInput < Struct.new(
       :stream_name,
       :tag_keys)
@@ -916,6 +978,8 @@ module Aws::Kinesis
     #   The ending sequence number for the range. Shards that are in the
     #   OPEN state have an ending sequence number of `null`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SequenceNumberRange AWS API Documentation
     #
     class SequenceNumberRange < Struct.new(
       :starting_sequence_number,
@@ -946,6 +1010,8 @@ module Aws::Kinesis
     # @!attribute [rw] sequence_number_range
     #   The range of possible sequence numbers for the shard.
     #   @return [Types::SequenceNumberRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Shard AWS API Documentation
     #
     class Shard < Struct.new(
       :shard_id,
@@ -985,6 +1051,8 @@ module Aws::Kinesis
     #   of the child shards. All the lower hash key values in the range are
     #   distributed to the other child shard.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShardInput AWS API Documentation
     #
     class SplitShardInput < Struct.new(
       :stream_name,
@@ -1044,6 +1112,8 @@ module Aws::Kinesis
     #   Represents the current enhanced monitoring settings of the stream.
     #   @return [Array<Types::EnhancedMetrics>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/StreamDescription AWS API Documentation
+    #
     class StreamDescription < Struct.new(
       :stream_name,
       :stream_arn,
@@ -1069,6 +1139,8 @@ module Aws::Kinesis
     #   Maximum length: 256 characters. Valid characters: Unicode letters,
     #   digits, white space, \_ . / = + - % @
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -1097,6 +1169,8 @@ module Aws::Kinesis
     #   The scaling type. Uniform scaling creates shards of equal size.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCountInput AWS API Documentation
+    #
     class UpdateShardCountInput < Struct.new(
       :stream_name,
       :target_shard_count,
@@ -1115,6 +1189,8 @@ module Aws::Kinesis
     # @!attribute [rw] target_shard_count
     #   The updated number of shards.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCountOutput AWS API Documentation
     #
     class UpdateShardCountOutput < Struct.new(
       :stream_name,

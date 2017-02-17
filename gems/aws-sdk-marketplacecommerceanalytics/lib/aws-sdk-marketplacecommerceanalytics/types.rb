@@ -115,6 +115,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   tracking information from other systems.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSetRequest AWS API Documentation
+    #
     class GenerateDataSetRequest < Struct.new(
       :data_set_type,
       :data_set_publication_date,
@@ -133,6 +135,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   GenerateDataSet operation. This identifier can be used to correlate
     #   a request with notifications from the SNS topic.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSetResult AWS API Documentation
     #
     class GenerateDataSetResult < Struct.new(
       :data_set_request_id)
@@ -209,6 +213,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   the Amazon SNS notification message and the data set metadata file.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExportRequest AWS API Documentation
+    #
     class StartSupportDataExportRequest < Struct.new(
       :data_set_type,
       :from_date,
@@ -227,6 +233,8 @@ module Aws::MarketplaceCommerceAnalytics
     #   StartSupportDataExport operation. This identifier can be used to
     #   correlate a request with notifications from the SNS topic.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExportResult AWS API Documentation
     #
     class StartSupportDataExportResult < Struct.new(
       :data_set_request_id)

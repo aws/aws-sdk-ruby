@@ -199,6 +199,8 @@ module Aws::ECR
     #   resp.failures[0].failure_code #=> String, one of "InvalidLayerDigest", "MissingLayerDigest"
     #   resp.failures[0].failure_reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchCheckLayerAvailability AWS API Documentation
+    #
     # @overload batch_check_layer_availability(params = {})
     # @param [Hash] params ({})
     def batch_check_layer_availability(params = {}, options = {})
@@ -257,6 +259,8 @@ module Aws::ECR
     #   resp.failures[0].image_id.image_tag #=> String
     #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag"
     #   resp.failures[0].failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchDeleteImage AWS API Documentation
     #
     # @overload batch_delete_image(params = {})
     # @param [Hash] params ({})
@@ -322,6 +326,8 @@ module Aws::ECR
     #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag"
     #   resp.failures[0].failure_reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/BatchGetImage AWS API Documentation
+    #
     # @overload batch_get_image(params = {})
     # @param [Hash] params ({})
     def batch_get_image(params = {}, options = {})
@@ -378,6 +384,8 @@ module Aws::ECR
     #   resp.upload_id #=> String
     #   resp.layer_digest #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CompleteLayerUpload AWS API Documentation
+    #
     # @overload complete_layer_upload(params = {})
     # @param [Hash] params ({})
     def complete_layer_upload(params = {}, options = {})
@@ -410,6 +418,8 @@ module Aws::ECR
     #   resp.repository.repository_name #=> String
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/CreateRepository AWS API Documentation
     #
     # @overload create_repository(params = {})
     # @param [Hash] params ({})
@@ -452,6 +462,8 @@ module Aws::ECR
     #   resp.repository.repository_uri #=> String
     #   resp.repository.created_at #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepository AWS API Documentation
+    #
     # @overload delete_repository(params = {})
     # @param [Hash] params ({})
     def delete_repository(params = {}, options = {})
@@ -488,6 +500,8 @@ module Aws::ECR
     #   resp.registry_id #=> String
     #   resp.repository_name #=> String
     #   resp.policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DeleteRepositoryPolicy AWS API Documentation
     #
     # @overload delete_repository_policy(params = {})
     # @param [Hash] params ({})
@@ -575,6 +589,8 @@ module Aws::ECR
     #   resp.image_details[0].image_pushed_at #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
+    #
     # @overload describe_images(params = {})
     # @param [Hash] params ({})
     def describe_images(params = {}, options = {})
@@ -641,6 +657,8 @@ module Aws::ECR
     #   resp.repositories[0].created_at #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeRepositories AWS API Documentation
+    #
     # @overload describe_repositories(params = {})
     # @param [Hash] params ({})
     def describe_repositories(params = {}, options = {})
@@ -679,6 +697,8 @@ module Aws::ECR
     #   resp.authorization_data[0].authorization_token #=> String
     #   resp.authorization_data[0].expires_at #=> Time
     #   resp.authorization_data[0].proxy_endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetAuthorizationToken AWS API Documentation
     #
     # @overload get_authorization_token(params = {})
     # @param [Hash] params ({})
@@ -727,6 +747,8 @@ module Aws::ECR
     #   resp.download_url #=> String
     #   resp.layer_digest #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetDownloadUrlForLayer AWS API Documentation
+    #
     # @overload get_download_url_for_layer(params = {})
     # @param [Hash] params ({})
     def get_download_url_for_layer(params = {}, options = {})
@@ -762,6 +784,8 @@ module Aws::ECR
     #   resp.registry_id #=> String
     #   resp.repository_name #=> String
     #   resp.policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/GetRepositoryPolicy AWS API Documentation
     #
     # @overload get_repository_policy(params = {})
     # @param [Hash] params ({})
@@ -802,6 +826,8 @@ module Aws::ECR
     #
     #   resp.upload_id #=> String
     #   resp.part_size #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/InitiateLayerUpload AWS API Documentation
     #
     # @overload initiate_layer_upload(params = {})
     # @param [Hash] params ({})
@@ -878,6 +904,8 @@ module Aws::ECR
     #   resp.image_ids[0].image_tag #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListImages AWS API Documentation
+    #
     # @overload list_images(params = {})
     # @param [Hash] params ({})
     def list_images(params = {}, options = {})
@@ -930,6 +958,8 @@ module Aws::ECR
     #   resp.image.image_id.image_tag #=> String
     #   resp.image.image_manifest #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/PutImage AWS API Documentation
+    #
     # @overload put_image(params = {})
     # @param [Hash] params ({})
     def put_image(params = {}, options = {})
@@ -977,6 +1007,8 @@ module Aws::ECR
     #   resp.registry_id #=> String
     #   resp.repository_name #=> String
     #   resp.policy_text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/SetRepositoryPolicy AWS API Documentation
     #
     # @overload set_repository_policy(params = {})
     # @param [Hash] params ({})
@@ -1039,6 +1071,8 @@ module Aws::ECR
     #   resp.upload_id #=> String
     #   resp.last_byte_received #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/UploadLayerPart AWS API Documentation
+    #
     # @overload upload_layer_part(params = {})
     # @param [Hash] params ({})
     def upload_layer_part(params = {}, options = {})
@@ -1059,7 +1093,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

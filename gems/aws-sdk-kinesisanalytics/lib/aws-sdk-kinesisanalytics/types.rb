@@ -74,6 +74,8 @@ module Aws::KinesisAnalytics
     #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
     #   @return [Types::Input]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputRequest AWS API Documentation
+    #
     class AddApplicationInputRequest < Struct.new(
       :application_name,
       :current_application_version_id,
@@ -81,6 +83,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInputResponse AWS API Documentation
+    #
     class AddApplicationInputResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AddApplicationOutputRequest
@@ -125,6 +129,8 @@ module Aws::KinesisAnalytics
     #   to use when writing to the destination.
     #   @return [Types::Output]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutputRequest AWS API Documentation
+    #
     class AddApplicationOutputRequest < Struct.new(
       :application_name,
       :current_application_version_id,
@@ -132,6 +138,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutputResponse AWS API Documentation
+    #
     class AddApplicationOutputResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AddApplicationReferenceDataSourceRequest
@@ -193,6 +201,8 @@ module Aws::KinesisAnalytics
     #   object from your S3 bucket on your behalf.
     #   @return [Types::ReferenceDataSource]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSourceRequest AWS API Documentation
+    #
     class AddApplicationReferenceDataSourceRequest < Struct.new(
       :application_name,
       :current_application_version_id,
@@ -200,6 +210,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSourceResponse AWS API Documentation
+    #
     class AddApplicationReferenceDataSourceResponse < Aws::EmptyStructure; end
 
     # Provides a description of the application, including the application
@@ -266,6 +278,8 @@ module Aws::KinesisAnalytics
     #   Provides the current application version.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationDetail AWS API Documentation
+    #
     class ApplicationDetail < Struct.new(
       :application_name,
       :application_description,
@@ -295,6 +309,8 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] application_status
     #   Status of the application.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationSummary AWS API Documentation
     #
     class ApplicationSummary < Struct.new(
       :application_name,
@@ -418,6 +434,8 @@ module Aws::KinesisAnalytics
     #   Describes application reference data source updates.
     #   @return [Array<Types::ReferenceDataSourceUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ApplicationUpdate AWS API Documentation
+    #
     class ApplicationUpdate < Struct.new(
       :input_updates,
       :application_code_update,
@@ -452,6 +470,8 @@ module Aws::KinesisAnalytics
     #   Column delimiter. For example, in a CSV format, a comma (",") is
     #   the typical column delimiter.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CSVMappingParameters AWS API Documentation
     #
     class CSVMappingParameters < Struct.new(
       :record_row_delimiter,
@@ -588,6 +608,8 @@ module Aws::KinesisAnalytics
     #   streams.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationRequest AWS API Documentation
+    #
     class CreateApplicationRequest < Struct.new(
       :application_name,
       :application_description,
@@ -605,6 +627,8 @@ module Aws::KinesisAnalytics
     #   created, including the application Amazon Resource Name (ARN), name,
     #   and status.
     #   @return [Types::ApplicationSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplicationResponse AWS API Documentation
     #
     class CreateApplicationResponse < Struct.new(
       :application_summary)
@@ -641,6 +665,8 @@ module Aws::KinesisAnalytics
     #   the specific `OutputId`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutputRequest AWS API Documentation
+    #
     class DeleteApplicationOutputRequest < Struct.new(
       :application_name,
       :current_application_version_id,
@@ -648,6 +674,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutputResponse AWS API Documentation
+    #
     class DeleteApplicationOutputResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteApplicationReferenceDataSourceRequest
@@ -678,6 +706,8 @@ module Aws::KinesisAnalytics
     #   reference ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSourceRequest AWS API Documentation
+    #
     class DeleteApplicationReferenceDataSourceRequest < Struct.new(
       :application_name,
       :current_application_version_id,
@@ -685,6 +715,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSourceResponse AWS API Documentation
+    #
     class DeleteApplicationReferenceDataSourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteApplicationRequest
@@ -703,12 +735,16 @@ module Aws::KinesisAnalytics
     #   You can use the `DescribeApplication` operation to get this value.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationRequest AWS API Documentation
+    #
     class DeleteApplicationRequest < Struct.new(
       :application_name,
       :create_timestamp)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationResponse AWS API Documentation
+    #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeApplicationRequest
@@ -722,6 +758,8 @@ module Aws::KinesisAnalytics
     #   Name of the application.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplicationRequest AWS API Documentation
+    #
     class DescribeApplicationRequest < Struct.new(
       :application_name)
       include Aws::Structure
@@ -732,6 +770,8 @@ module Aws::KinesisAnalytics
     #   Amazon Resource Name (ARN), status, latest version, and input and
     #   output configuration details.
     #   @return [Types::ApplicationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplicationResponse AWS API Documentation
     #
     class DescribeApplicationResponse < Struct.new(
       :application_detail)
@@ -755,6 +795,8 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] record_format_type
     #   Specifies the format of the records on the output stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DestinationSchema AWS API Documentation
     #
     class DestinationSchema < Struct.new(
       :record_format_type)
@@ -786,6 +828,8 @@ module Aws::KinesisAnalytics
     #   records from the specified streaming source discovery purposes.
     #   @return [Types::InputStartingPositionConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchemaRequest AWS API Documentation
+    #
     class DiscoverInputSchemaRequest < Struct.new(
       :resource_arn,
       :role_arn,
@@ -808,6 +852,8 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] raw_input_records
     #   Raw stream data that was sampled to infer the schema.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchemaResponse AWS API Documentation
     #
     class DiscoverInputSchemaResponse < Struct.new(
       :input_schema,
@@ -908,6 +954,8 @@ module Aws::KinesisAnalytics
     #   Also used to describe the format of the reference data source.
     #   @return [Types::SourceSchema]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Input AWS API Documentation
+    #
     class Input < Struct.new(
       :name_prefix,
       :kinesis_streams_input,
@@ -940,6 +988,8 @@ module Aws::KinesisAnalytics
     #   Point at which you want the application to start processing records
     #   from the streaming source.
     #   @return [Types::InputStartingPositionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputConfiguration AWS API Documentation
     #
     class InputConfiguration < Struct.new(
       :id,
@@ -998,6 +1048,8 @@ module Aws::KinesisAnalytics
     #   stream.
     #   @return [Types::InputStartingPositionConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputDescription AWS API Documentation
+    #
     class InputDescription < Struct.new(
       :input_id,
       :name_prefix,
@@ -1034,6 +1086,8 @@ module Aws::KinesisAnalytics
     #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputParallelism AWS API Documentation
+    #
     class InputParallelism < Struct.new(
       :count)
       include Aws::Structure
@@ -1052,6 +1106,8 @@ module Aws::KinesisAnalytics
     #   Number of in-application streams to create for the specified
     #   streaming source.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputParallelismUpdate AWS API Documentation
     #
     class InputParallelismUpdate < Struct.new(
       :count_update)
@@ -1101,6 +1157,8 @@ module Aws::KinesisAnalytics
     #   in-application stream.
     #   @return [Array<Types::RecordColumn>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputSchemaUpdate AWS API Documentation
+    #
     class InputSchemaUpdate < Struct.new(
       :record_format_update,
       :record_encoding_update,
@@ -1132,6 +1190,8 @@ module Aws::KinesisAnalytics
     #   * `LAST_STOPPED_POINT` - Resume reading from where the application
     #     last stopped reading.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputStartingPositionConfiguration AWS API Documentation
     #
     class InputStartingPositionConfiguration < Struct.new(
       :input_starting_position)
@@ -1213,6 +1273,8 @@ module Aws::KinesisAnalytics
     #   Kinesis Analytics creates for the specific streaming source).
     #   @return [Types::InputParallelismUpdate]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/InputUpdate AWS API Documentation
+    #
     class InputUpdate < Struct.new(
       :input_id,
       :name_prefix_update,
@@ -1243,6 +1305,8 @@ module Aws::KinesisAnalytics
     #   JSON.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/JSONMappingParameters AWS API Documentation
+    #
     class JSONMappingParameters < Struct.new(
       :record_row_path)
       include Aws::Structure
@@ -1271,6 +1335,8 @@ module Aws::KinesisAnalytics
     #   necessary permissions to access the stream.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInput AWS API Documentation
+    #
     class KinesisFirehoseInput < Struct.new(
       :resource_arn,
       :role_arn)
@@ -1290,6 +1356,8 @@ module Aws::KinesisAnalytics
     #   ARN of the IAM role that Amazon Kinesis Analytics assumes to access
     #   the stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInputDescription AWS API Documentation
     #
     class KinesisFirehoseInputDescription < Struct.new(
       :resource_arn,
@@ -1318,6 +1386,8 @@ module Aws::KinesisAnalytics
     #   Analytics can assume to access the stream on your behalf. You need
     #   to grant necessary permissions to this role.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseInputUpdate AWS API Documentation
     #
     class KinesisFirehoseInputUpdate < Struct.new(
       :resource_arn_update,
@@ -1349,6 +1419,8 @@ module Aws::KinesisAnalytics
     #   the necessary permissions to this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutput AWS API Documentation
+    #
     class KinesisFirehoseOutput < Struct.new(
       :resource_arn,
       :role_arn)
@@ -1367,6 +1439,8 @@ module Aws::KinesisAnalytics
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
     #   access the stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutputDescription AWS API Documentation
     #
     class KinesisFirehoseOutputDescription < Struct.new(
       :resource_arn,
@@ -1397,6 +1471,8 @@ module Aws::KinesisAnalytics
     #   permissions to this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisFirehoseOutputUpdate AWS API Documentation
+    #
     class KinesisFirehoseOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update)
@@ -1425,6 +1501,8 @@ module Aws::KinesisAnalytics
     #   permissions to this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsInput AWS API Documentation
+    #
     class KinesisStreamsInput < Struct.new(
       :resource_arn,
       :role_arn)
@@ -1442,6 +1520,8 @@ module Aws::KinesisAnalytics
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
     #   access the stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsInputDescription AWS API Documentation
     #
     class KinesisStreamsInputDescription < Struct.new(
       :resource_arn,
@@ -1470,6 +1550,8 @@ module Aws::KinesisAnalytics
     #   access the stream on your behalf. You need to grant the necessary
     #   permissions to this role.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsInputUpdate AWS API Documentation
     #
     class KinesisStreamsInputUpdate < Struct.new(
       :resource_arn_update,
@@ -1500,6 +1582,8 @@ module Aws::KinesisAnalytics
     #   the necessary permissions to this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutput AWS API Documentation
+    #
     class KinesisStreamsOutput < Struct.new(
       :resource_arn,
       :role_arn)
@@ -1517,6 +1601,8 @@ module Aws::KinesisAnalytics
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to
     #   access the stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutputDescription AWS API Documentation
     #
     class KinesisStreamsOutputDescription < Struct.new(
       :resource_arn,
@@ -1547,6 +1633,8 @@ module Aws::KinesisAnalytics
     #   permissions to this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/KinesisStreamsOutputUpdate AWS API Documentation
+    #
     class KinesisStreamsOutputUpdate < Struct.new(
       :resource_arn_update,
       :role_arn_update)
@@ -1573,6 +1661,8 @@ module Aws::KinesisAnalytics
     #   next page of applications.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplicationsRequest AWS API Documentation
+    #
     class ListApplicationsRequest < Struct.new(
       :limit,
       :exclusive_start_application_name)
@@ -1586,6 +1676,8 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] has_more_applications
     #   Returns true if there are more applications to retrieve.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplicationsResponse AWS API Documentation
     #
     class ListApplicationsResponse < Struct.new(
       :application_summaries,
@@ -1620,6 +1712,8 @@ module Aws::KinesisAnalytics
     #   Provides additional mapping information when the record format uses
     #   delimiters (for example, CSV).
     #   @return [Types::CSVMappingParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/MappingParameters AWS API Documentation
     #
     class MappingParameters < Struct.new(
       :json_mapping_parameters,
@@ -1678,6 +1772,8 @@ module Aws::KinesisAnalytics
     #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Types::DestinationSchema]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/Output AWS API Documentation
+    #
     class Output < Struct.new(
       :name,
       :kinesis_streams_output,
@@ -1712,6 +1808,8 @@ module Aws::KinesisAnalytics
     # @!attribute [rw] destination_schema
     #   Data format used for writing data to the destination.
     #   @return [Types::DestinationSchema]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/OutputDescription AWS API Documentation
     #
     class OutputDescription < Struct.new(
       :output_id,
@@ -1775,6 +1873,8 @@ module Aws::KinesisAnalytics
     #   [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html
     #   @return [Types::DestinationSchema]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/OutputUpdate AWS API Documentation
+    #
     class OutputUpdate < Struct.new(
       :output_id,
       :name_update,
@@ -1813,6 +1913,8 @@ module Aws::KinesisAnalytics
     #   reference table.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/RecordColumn AWS API Documentation
+    #
     class RecordColumn < Struct.new(
       :name,
       :mapping,
@@ -1849,6 +1951,8 @@ module Aws::KinesisAnalytics
     #   specific to the record format (such as JSON, CSV, or record fields
     #   delimited by some delimiter) on the streaming source.
     #   @return [Types::MappingParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/RecordFormat AWS API Documentation
     #
     class RecordFormat < Struct.new(
       :record_format_type,
@@ -1916,6 +2020,8 @@ module Aws::KinesisAnalytics
     #   in-application stream.
     #   @return [Types::SourceSchema]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ReferenceDataSource AWS API Documentation
+    #
     class ReferenceDataSource < Struct.new(
       :table_name,
       :s3_reference_data_source,
@@ -1948,6 +2054,8 @@ module Aws::KinesisAnalytics
     #   each data element maps to corresponding columns created in the
     #   in-application stream.
     #   @return [Types::SourceSchema]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ReferenceDataSourceDescription AWS API Documentation
     #
     class ReferenceDataSourceDescription < Struct.new(
       :reference_id,
@@ -2020,6 +2128,8 @@ module Aws::KinesisAnalytics
     #   in-application stream.
     #   @return [Types::SourceSchema]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ReferenceDataSourceUpdate AWS API Documentation
+    #
     class ReferenceDataSourceUpdate < Struct.new(
       :reference_id,
       :table_name_update,
@@ -2060,6 +2170,8 @@ module Aws::KinesisAnalytics
     #   service principal to assume this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSource AWS API Documentation
+    #
     class S3ReferenceDataSource < Struct.new(
       :bucket_arn,
       :file_key,
@@ -2083,6 +2195,8 @@ module Aws::KinesisAnalytics
     #   the Amazon S3 object on your behalf to populate the in-application
     #   reference table.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSourceDescription AWS API Documentation
     #
     class S3ReferenceDataSourceDescription < Struct.new(
       :bucket_arn,
@@ -2116,6 +2230,8 @@ module Aws::KinesisAnalytics
     #   ARN of the IAM role that Amazon Kinesis Analytics can assume to read
     #   the Amazon S3 object and populate the in-application.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/S3ReferenceDataSourceUpdate AWS API Documentation
     #
     class S3ReferenceDataSourceUpdate < Struct.new(
       :bucket_arn_update,
@@ -2167,6 +2283,8 @@ module Aws::KinesisAnalytics
     #   A list of `RecordColumn` objects.
     #   @return [Array<Types::RecordColumn>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/SourceSchema AWS API Documentation
+    #
     class SourceSchema < Struct.new(
       :record_format,
       :record_encoding,
@@ -2200,12 +2318,16 @@ module Aws::KinesisAnalytics
     #   streaming source you want Amazon Kinesis Analytics to start reading.
     #   @return [Array<Types::InputConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplicationRequest AWS API Documentation
+    #
     class StartApplicationRequest < Struct.new(
       :application_name,
       :input_configurations)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplicationResponse AWS API Documentation
+    #
     class StartApplicationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StopApplicationRequest
@@ -2219,11 +2341,15 @@ module Aws::KinesisAnalytics
     #   Name of the running application to stop.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplicationRequest AWS API Documentation
+    #
     class StopApplicationRequest < Struct.new(
       :application_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplicationResponse AWS API Documentation
+    #
     class StopApplicationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateApplicationRequest
@@ -2339,6 +2465,8 @@ module Aws::KinesisAnalytics
     #   Describes application updates.
     #   @return [Types::ApplicationUpdate]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplicationRequest AWS API Documentation
+    #
     class UpdateApplicationRequest < Struct.new(
       :application_name,
       :current_application_version_id,
@@ -2346,6 +2474,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplicationResponse AWS API Documentation
+    #
     class UpdateApplicationResponse < Aws::EmptyStructure; end
 
   end

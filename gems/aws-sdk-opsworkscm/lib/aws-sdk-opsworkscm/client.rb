@@ -180,6 +180,8 @@ module Aws::OpsWorksCM
     #
     #   resp.node_association_status_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNode AWS API Documentation
+    #
     # @overload associate_node(params = {})
     # @param [Hash] params ({})
     def associate_node(params = {}, options = {})
@@ -250,6 +252,8 @@ module Aws::OpsWorksCM
     #   resp.backup.subnet_ids[0] #=> String
     #   resp.backup.tools_version #=> String
     #   resp.backup.user_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateBackup AWS API Documentation
     #
     # @overload create_backup(params = {})
     # @param [Hash] params ({})
@@ -468,6 +472,8 @@ module Aws::OpsWorksCM
     #   resp.server.subnet_ids[0] #=> String
     #   resp.server.server_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServer AWS API Documentation
+    #
     # @overload create_server(params = {})
     # @param [Hash] params ({})
     def create_server(params = {}, options = {})
@@ -496,6 +502,8 @@ module Aws::OpsWorksCM
     #   resp = client.delete_backup({
     #     backup_id: "BackupId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteBackup AWS API Documentation
     #
     # @overload delete_backup(params = {})
     # @param [Hash] params ({})
@@ -528,6 +536,8 @@ module Aws::OpsWorksCM
     #     server_name: "ServerName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DeleteServer AWS API Documentation
+    #
     # @overload delete_server(params = {})
     # @param [Hash] params ({})
     def delete_server(params = {}, options = {})
@@ -550,6 +560,8 @@ module Aws::OpsWorksCM
     #   resp.attributes[0].name #=> String
     #   resp.attributes[0].maximum #=> Integer
     #   resp.attributes[0].used #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeAccountAttributes AWS API Documentation
     #
     # @overload describe_account_attributes(params = {})
     # @param [Hash] params ({})
@@ -636,6 +648,8 @@ module Aws::OpsWorksCM
     #   resp.backups[0].user_arn #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeBackups AWS API Documentation
+    #
     # @overload describe_backups(params = {})
     # @param [Hash] params ({})
     def describe_backups(params = {}, options = {})
@@ -694,6 +708,8 @@ module Aws::OpsWorksCM
     #   resp.server_events[0].log_url #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeEvents AWS API Documentation
+    #
     # @overload describe_events(params = {})
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
@@ -719,6 +735,8 @@ module Aws::OpsWorksCM
     # @example Response structure
     #
     #   resp.node_association_status #=> String, one of "SUCCESS", "FAILED", "IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatus AWS API Documentation
     #
     # @overload describe_node_association_status(params = {})
     # @param [Hash] params ({})
@@ -801,6 +819,8 @@ module Aws::OpsWorksCM
     #   resp.servers[0].server_arn #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeServers AWS API Documentation
+    #
     # @overload describe_servers(params = {})
     # @param [Hash] params ({})
     def describe_servers(params = {}, options = {})
@@ -834,6 +854,8 @@ module Aws::OpsWorksCM
     # @example Response structure
     #
     #   resp.node_association_status_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNode AWS API Documentation
     #
     # @overload disassociate_node(params = {})
     # @param [Hash] params ({})
@@ -883,6 +905,8 @@ module Aws::OpsWorksCM
     #     instance_type: "String",
     #     key_pair: "KeyPair",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServer AWS API Documentation
     #
     # @overload restore_server(params = {})
     # @param [Hash] params ({})
@@ -942,6 +966,8 @@ module Aws::OpsWorksCM
     #   resp.server.subnet_ids #=> Array
     #   resp.server.subnet_ids[0] #=> String
     #   resp.server.server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/StartMaintenance AWS API Documentation
     #
     # @overload start_maintenance(params = {})
     # @param [Hash] params ({})
@@ -1022,6 +1048,8 @@ module Aws::OpsWorksCM
     #   resp.server.subnet_ids[0] #=> String
     #   resp.server.server_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServer AWS API Documentation
+    #
     # @overload update_server(params = {})
     # @param [Hash] params ({})
     def update_server(params = {}, options = {})
@@ -1094,6 +1122,8 @@ module Aws::OpsWorksCM
     #   resp.server.subnet_ids #=> Array
     #   resp.server.subnet_ids[0] #=> String
     #   resp.server.server_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerEngineAttributes AWS API Documentation
     #
     # @overload update_server_engine_attributes(params = {})
     # @param [Hash] params ({})

@@ -36,6 +36,8 @@ module Aws::Firehose
     #   before delivering it to the destination. The default value is 300.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/BufferingHints AWS API Documentation
+    #
     class BufferingHints < Struct.new(
       :size_in_m_bs,
       :interval_in_seconds)
@@ -66,6 +68,8 @@ module Aws::Firehose
     #   The CloudWatch log stream name for logging. This value is required
     #   if CloudWatch logging is enabled.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CloudWatchLoggingOptions AWS API Documentation
     #
     class CloudWatchLoggingOptions < Struct.new(
       :enabled,
@@ -123,6 +127,8 @@ module Aws::Firehose
     #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html
     #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_COPY_command_examples.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CopyCommand AWS API Documentation
     #
     class CopyCommand < Struct.new(
       :data_table_name,
@@ -372,6 +378,8 @@ module Aws::Firehose
     #   The destination in Amazon ES. You can specify only one destination.
     #   @return [Types::ElasticsearchDestinationConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput AWS API Documentation
+    #
     class CreateDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :s3_destination_configuration,
@@ -384,6 +392,8 @@ module Aws::Firehose
     # @!attribute [rw] delivery_stream_arn
     #   The ARN of the delivery stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamOutput AWS API Documentation
     #
     class CreateDeliveryStreamOutput < Struct.new(
       :delivery_stream_arn)
@@ -401,11 +411,15 @@ module Aws::Firehose
     #   The name of the delivery stream.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamInput AWS API Documentation
+    #
     class DeleteDeliveryStreamInput < Struct.new(
       :delivery_stream_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamOutput AWS API Documentation
+    #
     class DeleteDeliveryStreamOutput < Aws::EmptyStructure; end
 
     # Contains information about a delivery stream.
@@ -445,6 +459,8 @@ module Aws::Firehose
     #   Indicates whether there are more destinations available to list.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeliveryStreamDescription AWS API Documentation
+    #
     class DeliveryStreamDescription < Struct.new(
       :delivery_stream_name,
       :delivery_stream_arn,
@@ -481,6 +497,8 @@ module Aws::Firehose
     #   delivery stream.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamInput AWS API Documentation
+    #
     class DescribeDeliveryStreamInput < Struct.new(
       :delivery_stream_name,
       :limit,
@@ -491,6 +509,8 @@ module Aws::Firehose
     # @!attribute [rw] delivery_stream_description
     #   Information about the delivery stream.
     #   @return [Types::DeliveryStreamDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamOutput AWS API Documentation
     #
     class DescribeDeliveryStreamOutput < Struct.new(
       :delivery_stream_description)
@@ -518,6 +538,8 @@ module Aws::Firehose
     # @!attribute [rw] elasticsearch_destination_description
     #   The destination in Amazon ES.
     #   @return [Types::ElasticsearchDestinationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription AWS API Documentation
     #
     class DestinationDescription < Struct.new(
       :destination_id,
@@ -554,6 +576,8 @@ module Aws::Firehose
     #   seconds. For example, if you typically ingest data at 1 MB/sec, the
     #   value should be 10 MB or higher.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchBufferingHints AWS API Documentation
     #
     class ElasticsearchBufferingHints < Struct.new(
       :interval_in_seconds,
@@ -697,6 +721,8 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationConfiguration AWS API Documentation
+    #
     class ElasticsearchDestinationConfiguration < Struct.new(
       :role_arn,
       :domain_arn,
@@ -757,6 +783,8 @@ module Aws::Firehose
     # @!attribute [rw] cloud_watch_logging_options
     #   The CloudWatch logging options.
     #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription AWS API Documentation
     #
     class ElasticsearchDestinationDescription < Struct.new(
       :role_arn,
@@ -891,6 +919,8 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationUpdate AWS API Documentation
+    #
     class ElasticsearchDestinationUpdate < Struct.new(
       :role_arn,
       :domain_arn,
@@ -923,6 +953,8 @@ module Aws::Firehose
     #   A value of 0 (zero) results in no retries.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchRetryOptions AWS API Documentation
+    #
     class ElasticsearchRetryOptions < Struct.new(
       :duration_in_seconds)
       include Aws::Structure
@@ -948,6 +980,8 @@ module Aws::Firehose
     # @!attribute [rw] kms_encryption_config
     #   The encryption key.
     #   @return [Types::KMSEncryptionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/EncryptionConfiguration AWS API Documentation
     #
     class EncryptionConfiguration < Struct.new(
       :no_encryption_config,
@@ -1069,6 +1103,8 @@ module Aws::Firehose
     #   The configuration for backup in Amazon S3.
     #   @return [Types::S3DestinationConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationConfiguration AWS API Documentation
+    #
     class ExtendedS3DestinationConfiguration < Struct.new(
       :role_arn,
       :bucket_arn,
@@ -1135,6 +1171,8 @@ module Aws::Firehose
     # @!attribute [rw] s3_backup_description
     #   The configuration for backup in Amazon S3.
     #   @return [Types::S3DestinationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationDescription AWS API Documentation
     #
     class ExtendedS3DestinationDescription < Struct.new(
       :role_arn,
@@ -1264,6 +1302,8 @@ module Aws::Firehose
     #   The Amazon S3 destination for backup.
     #   @return [Types::S3DestinationUpdate]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationUpdate AWS API Documentation
+    #
     class ExtendedS3DestinationUpdate < Struct.new(
       :role_arn,
       :bucket_arn,
@@ -1292,6 +1332,8 @@ module Aws::Firehose
     #   destination Amazon S3 bucket.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KMSEncryptionConfig AWS API Documentation
+    #
     class KMSEncryptionConfig < Struct.new(
       :awskms_key_arn)
       include Aws::Structure
@@ -1313,6 +1355,8 @@ module Aws::Firehose
     #   The name of the delivery stream to start the list with.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreamsInput AWS API Documentation
+    #
     class ListDeliveryStreamsInput < Struct.new(
       :limit,
       :exclusive_start_delivery_stream_name)
@@ -1326,6 +1370,8 @@ module Aws::Firehose
     # @!attribute [rw] has_more_delivery_streams
     #   Indicates whether there are more delivery streams available to list.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreamsOutput AWS API Documentation
     #
     class ListDeliveryStreamsOutput < Struct.new(
       :delivery_stream_names,
@@ -1361,6 +1407,8 @@ module Aws::Firehose
     #   The data processors.
     #   @return [Array<Types::Processor>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ProcessingConfiguration AWS API Documentation
+    #
     class ProcessingConfiguration < Struct.new(
       :enabled,
       :processors)
@@ -1390,6 +1438,8 @@ module Aws::Firehose
     #   The processor parameters.
     #   @return [Array<Types::ProcessorParameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Processor AWS API Documentation
+    #
     class Processor < Struct.new(
       :type,
       :parameters)
@@ -1413,6 +1463,8 @@ module Aws::Firehose
     # @!attribute [rw] parameter_value
     #   The parameter value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ProcessorParameter AWS API Documentation
     #
     class ProcessorParameter < Struct.new(
       :parameter_name,
@@ -1440,6 +1492,8 @@ module Aws::Firehose
     #   One or more records.
     #   @return [Array<Types::Record>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatchInput AWS API Documentation
+    #
     class PutRecordBatchInput < Struct.new(
       :delivery_stream_name,
       :records)
@@ -1454,6 +1508,8 @@ module Aws::Firehose
     #   The results array. For each record, the index of the response
     #   element is the same as the index used in the request array.
     #   @return [Array<Types::PutRecordBatchResponseEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatchOutput AWS API Documentation
     #
     class PutRecordBatchOutput < Struct.new(
       :failed_put_count,
@@ -1478,6 +1534,8 @@ module Aws::Firehose
     # @!attribute [rw] error_message
     #   The error message for an individual record result.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatchResponseEntry AWS API Documentation
     #
     class PutRecordBatchResponseEntry < Struct.new(
       :record_id,
@@ -1504,6 +1562,8 @@ module Aws::Firehose
     #   The record.
     #   @return [Types::Record]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordInput AWS API Documentation
+    #
     class PutRecordInput < Struct.new(
       :delivery_stream_name,
       :record)
@@ -1513,6 +1573,8 @@ module Aws::Firehose
     # @!attribute [rw] record_id
     #   The ID of the record.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordOutput AWS API Documentation
     #
     class PutRecordOutput < Struct.new(
       :record_id)
@@ -1533,6 +1595,8 @@ module Aws::Firehose
     #   The maximum size of the data blob, before base64-encoding, is 1,000
     #   KB.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/Record AWS API Documentation
     #
     class Record < Struct.new(
       :data)
@@ -1673,6 +1737,8 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationConfiguration AWS API Documentation
+    #
     class RedshiftDestinationConfiguration < Struct.new(
       :role_arn,
       :cluster_jdbcurl,
@@ -1730,6 +1796,8 @@ module Aws::Firehose
     # @!attribute [rw] cloud_watch_logging_options
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationDescription AWS API Documentation
     #
     class RedshiftDestinationDescription < Struct.new(
       :role_arn,
@@ -1877,6 +1945,8 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationUpdate AWS API Documentation
+    #
     class RedshiftDestinationUpdate < Struct.new(
       :role_arn,
       :cluster_jdbcurl,
@@ -1909,6 +1979,8 @@ module Aws::Firehose
     #   does not retry if the value of `DurationInSeconds` is 0 (zero) or if
     #   the first delivery attempt takes longer than the current value.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftRetryOptions AWS API Documentation
     #
     class RedshiftRetryOptions < Struct.new(
       :duration_in_seconds)
@@ -1986,6 +2058,8 @@ module Aws::Firehose
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationConfiguration AWS API Documentation
+    #
     class S3DestinationConfiguration < Struct.new(
       :role_arn,
       :bucket_arn,
@@ -2038,6 +2112,8 @@ module Aws::Firehose
     # @!attribute [rw] cloud_watch_logging_options
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationDescription AWS API Documentation
     #
     class S3DestinationDescription < Struct.new(
       :role_arn,
@@ -2120,6 +2196,8 @@ module Aws::Firehose
     # @!attribute [rw] cloud_watch_logging_options
     #   The CloudWatch logging options for your delivery stream.
     #   @return [Types::CloudWatchLoggingOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationUpdate AWS API Documentation
     #
     class S3DestinationUpdate < Struct.new(
       :role_arn,
@@ -2383,6 +2461,8 @@ module Aws::Firehose
     #   Describes an update for a destination in Amazon ES.
     #   @return [Types::ElasticsearchDestinationUpdate]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput AWS API Documentation
+    #
     class UpdateDestinationInput < Struct.new(
       :delivery_stream_name,
       :current_delivery_stream_version_id,
@@ -2394,6 +2474,8 @@ module Aws::Firehose
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationOutput AWS API Documentation
+    #
     class UpdateDestinationOutput < Aws::EmptyStructure; end
 
   end

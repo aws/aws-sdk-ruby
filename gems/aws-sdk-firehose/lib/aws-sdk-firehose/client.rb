@@ -454,6 +454,8 @@ module Aws::Firehose
     #
     #   resp.delivery_stream_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStream AWS API Documentation
+    #
     # @overload create_delivery_stream(params = {})
     # @param [Hash] params ({})
     def create_delivery_stream(params = {}, options = {})
@@ -485,6 +487,8 @@ module Aws::Firehose
     #   resp = client.delete_delivery_stream({
     #     delivery_stream_name: "DeliveryStreamName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStream AWS API Documentation
     #
     # @overload delete_delivery_stream(params = {})
     # @param [Hash] params ({})
@@ -642,6 +646,8 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.has_more_destinations #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStream AWS API Documentation
+    #
     # @overload describe_delivery_stream(params = {})
     # @param [Hash] params ({})
     def describe_delivery_stream(params = {}, options = {})
@@ -683,6 +689,8 @@ module Aws::Firehose
     #   resp.delivery_stream_names #=> Array
     #   resp.delivery_stream_names[0] #=> String
     #   resp.has_more_delivery_streams #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreams AWS API Documentation
     #
     # @overload list_delivery_streams(params = {})
     # @param [Hash] params ({})
@@ -755,6 +763,8 @@ module Aws::Firehose
     # @example Response structure
     #
     #   resp.record_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecord AWS API Documentation
     #
     # @overload put_record(params = {})
     # @param [Hash] params ({})
@@ -861,6 +871,8 @@ module Aws::Firehose
     #   resp.request_responses[0].record_id #=> String
     #   resp.request_responses[0].error_code #=> String
     #   resp.request_responses[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatch AWS API Documentation
     #
     # @overload put_record_batch(params = {})
     # @param [Hash] params ({})
@@ -1149,6 +1161,8 @@ module Aws::Firehose
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestination AWS API Documentation
+    #
     # @overload update_destination(params = {})
     # @param [Hash] params ({})
     def update_destination(params = {}, options = {})
@@ -1169,7 +1183,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

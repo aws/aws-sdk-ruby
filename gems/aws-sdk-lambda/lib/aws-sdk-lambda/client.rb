@@ -263,6 +263,8 @@ module Aws::Lambda
     #
     #   resp.statement #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermission AWS API Documentation
+    #
     # @overload add_permission(params = {})
     # @param [Hash] params ({})
     def add_permission(params = {}, options = {})
@@ -314,6 +316,8 @@ module Aws::Lambda
     #   resp.name #=> String
     #   resp.function_version #=> String
     #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAlias AWS API Documentation
     #
     # @overload create_alias(params = {})
     # @param [Hash] params ({})
@@ -448,6 +452,8 @@ module Aws::Lambda
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMapping AWS API Documentation
     #
     # @overload create_event_source_mapping(params = {})
     # @param [Hash] params ({})
@@ -635,6 +641,8 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
+    #
     # @overload create_function(params = {})
     # @param [Hash] params ({})
     def create_function(params = {}, options = {})
@@ -666,6 +674,8 @@ module Aws::Lambda
     #     function_name: "FunctionName", # required
     #     name: "Alias", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAlias AWS API Documentation
     #
     # @overload delete_alias(params = {})
     # @param [Hash] params ({})
@@ -710,6 +720,8 @@ module Aws::Lambda
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMapping AWS API Documentation
     #
     # @overload delete_event_source_mapping(params = {})
     # @param [Hash] params ({})
@@ -776,6 +788,8 @@ module Aws::Lambda
     #     qualifier: "Qualifier",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunction AWS API Documentation
+    #
     # @overload delete_function(params = {})
     # @param [Hash] params ({})
     def delete_function(params = {}, options = {})
@@ -807,6 +821,8 @@ module Aws::Lambda
     #   resp.account_limit.concurrent_executions #=> Integer
     #   resp.account_usage.total_code_size #=> Integer
     #   resp.account_usage.function_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettings AWS API Documentation
     #
     # @overload get_account_settings(params = {})
     # @param [Hash] params ({})
@@ -854,6 +870,8 @@ module Aws::Lambda
     #   resp.function_version #=> String
     #   resp.description #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAlias AWS API Documentation
+    #
     # @overload get_alias(params = {})
     # @param [Hash] params ({})
     def get_alias(params = {}, options = {})
@@ -897,6 +915,8 @@ module Aws::Lambda
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMapping AWS API Documentation
     #
     # @overload get_event_source_mapping(params = {})
     # @param [Hash] params ({})
@@ -985,6 +1005,8 @@ module Aws::Lambda
     #   resp.configuration.kms_key_arn #=> String
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunction AWS API Documentation
     #
     # @overload get_function(params = {})
     # @param [Hash] params ({})
@@ -1088,6 +1110,8 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfiguration AWS API Documentation
+    #
     # @overload get_function_configuration(params = {})
     # @param [Hash] params ({})
     def get_function_configuration(params = {}, options = {})
@@ -1146,6 +1170,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicy AWS API Documentation
     #
     # @overload get_policy(params = {})
     # @param [Hash] params ({})
@@ -1254,6 +1280,8 @@ module Aws::Lambda
     #   resp.log_result #=> String
     #   resp.payload #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Invoke AWS API Documentation
+    #
     # @overload invoke(params = {})
     # @param [Hash] params ({})
     def invoke(params = {}, options = {})
@@ -1292,6 +1320,8 @@ module Aws::Lambda
     # @example Response structure
     #
     #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsync AWS API Documentation
     #
     # @overload invoke_async(params = {})
     # @param [Hash] params ({})
@@ -1351,6 +1381,8 @@ module Aws::Lambda
     #   resp.aliases[0].name #=> String
     #   resp.aliases[0].function_version #=> String
     #   resp.aliases[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliases AWS API Documentation
     #
     # @overload list_aliases(params = {})
     # @param [Hash] params ({})
@@ -1431,6 +1463,8 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].state #=> String
     #   resp.event_source_mappings[0].state_transition_reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappings AWS API Documentation
+    #
     # @overload list_event_source_mappings(params = {})
     # @param [Hash] params ({})
     def list_event_source_mappings(params = {}, options = {})
@@ -1502,6 +1536,8 @@ module Aws::Lambda
     #   resp.functions[0].environment.error.error_code #=> String
     #   resp.functions[0].environment.error.message #=> String
     #   resp.functions[0].kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
     # @overload list_functions(params = {})
     # @param [Hash] params ({})
@@ -1577,6 +1613,8 @@ module Aws::Lambda
     #   resp.versions[0].environment.error.error_code #=> String
     #   resp.versions[0].environment.error.message #=> String
     #   resp.versions[0].kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
     # @overload list_versions_by_function(params = {})
     # @param [Hash] params ({})
@@ -1669,6 +1707,8 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
+    #
     # @overload publish_version(params = {})
     # @param [Hash] params ({})
     def publish_version(params = {}, options = {})
@@ -1726,6 +1766,8 @@ module Aws::Lambda
     #     qualifier: "Qualifier",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermission AWS API Documentation
+    #
     # @overload remove_permission(params = {})
     # @param [Hash] params ({})
     def remove_permission(params = {}, options = {})
@@ -1778,6 +1820,8 @@ module Aws::Lambda
     #   resp.name #=> String
     #   resp.function_version #=> String
     #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAlias AWS API Documentation
     #
     # @overload update_alias(params = {})
     # @param [Hash] params ({})
@@ -1873,6 +1917,8 @@ module Aws::Lambda
     #   resp.last_processing_result #=> String
     #   resp.state #=> String
     #   resp.state_transition_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMapping AWS API Documentation
     #
     # @overload update_event_source_mapping(params = {})
     # @param [Hash] params ({})
@@ -1992,6 +2038,8 @@ module Aws::Lambda
     #   resp.environment.error.error_code #=> String
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
     # @overload update_function_code(params = {})
     # @param [Hash] params ({})
@@ -2156,6 +2204,8 @@ module Aws::Lambda
     #   resp.environment.error.message #=> String
     #   resp.kms_key_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
+    #
     # @overload update_function_configuration(params = {})
     # @param [Hash] params ({})
     def update_function_configuration(params = {}, options = {})
@@ -2176,7 +2226,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

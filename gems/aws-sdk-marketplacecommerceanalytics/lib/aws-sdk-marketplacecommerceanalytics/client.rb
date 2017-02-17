@@ -270,6 +270,8 @@ module Aws::MarketplaceCommerceAnalytics
     #
     #   resp.data_set_request_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/GenerateDataSet AWS API Documentation
+    #
     # @overload generate_data_set(params = {})
     # @param [Hash] params ({})
     def generate_data_set(params = {}, options = {})
@@ -359,6 +361,8 @@ module Aws::MarketplaceCommerceAnalytics
     #
     #   resp.data_set_request_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplacecommerceanalytics-2015-07-01/StartSupportDataExport AWS API Documentation
+    #
     # @overload start_support_data_export(params = {})
     # @param [Hash] params ({})
     def start_support_data_export(params = {}, options = {})
@@ -379,7 +383,7 @@ module Aws::MarketplaceCommerceAnalytics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-marketplacecommerceanalytics'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

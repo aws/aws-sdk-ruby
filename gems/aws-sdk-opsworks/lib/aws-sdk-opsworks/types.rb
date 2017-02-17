@@ -18,6 +18,8 @@ module Aws::OpsWorks
     #   The configuration manager.
     #   @return [Types::StackConfigurationManager]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AgentVersion AWS API Documentation
+    #
     class AgentVersion < Struct.new(
       :version,
       :configuration_manager)
@@ -100,6 +102,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/App AWS API Documentation
+    #
     class App < Struct.new(
       :app_id,
       :stack_id,
@@ -135,6 +139,8 @@ module Aws::OpsWorks
     #   assign a registered instance to a built-in layer.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstanceRequest AWS API Documentation
+    #
     class AssignInstanceRequest < Struct.new(
       :instance_id,
       :layer_ids)
@@ -156,6 +162,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolumeRequest AWS API Documentation
     #
     class AssignVolumeRequest < Struct.new(
       :volume_id,
@@ -179,6 +187,8 @@ module Aws::OpsWorks
     #   The instance ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIpRequest AWS API Documentation
+    #
     class AssociateElasticIpRequest < Struct.new(
       :elastic_ip,
       :instance_id)
@@ -201,6 +211,8 @@ module Aws::OpsWorks
     #   The ID of the layer that the Elastic Load Balancing instance is to
     #   be attached to.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancerRequest AWS API Documentation
     #
     class AttachElasticLoadBalancerRequest < Struct.new(
       :elastic_load_balancer_name,
@@ -284,6 +296,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-servicerole.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AutoScalingThresholds AWS API Documentation
+    #
     class AutoScalingThresholds < Struct.new(
       :instance_count,
       :thresholds_wait_time,
@@ -344,6 +358,8 @@ module Aws::OpsWorks
     #   volume when the instance is launched.
     #   @return [Types::EbsBlockDevice]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/BlockDeviceMapping AWS API Documentation
+    #
     class BlockDeviceMapping < Struct.new(
       :device_name,
       :no_device,
@@ -369,6 +385,8 @@ module Aws::OpsWorks
     # @!attribute [rw] berkshelf_version
     #   The Berkshelf version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ChefConfiguration AWS API Documentation
     #
     class ChefConfiguration < Struct.new(
       :manage_berkshelf,
@@ -737,6 +755,8 @@ module Aws::OpsWorks
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStackRequest AWS API Documentation
+    #
     class CloneStackRequest < Struct.new(
       :source_stack_id,
       :name,
@@ -768,6 +788,8 @@ module Aws::OpsWorks
     # @!attribute [rw] stack_id
     #   The cloned stack ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStackResult AWS API Documentation
     #
     class CloneStackResult < Struct.new(
       :stack_id)
@@ -843,6 +865,8 @@ module Aws::OpsWorks
     #
     #   * `execute_recipes`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Command AWS API Documentation
     #
     class Command < Struct.new(
       :command_id,
@@ -976,6 +1000,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppRequest AWS API Documentation
+    #
     class CreateAppRequest < Struct.new(
       :stack_id,
       :shortname,
@@ -997,6 +1023,8 @@ module Aws::OpsWorks
     # @!attribute [rw] app_id
     #   The app ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppResult AWS API Documentation
     #
     class CreateAppResult < Struct.new(
       :app_id)
@@ -1062,6 +1090,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentRequest AWS API Documentation
+    #
     class CreateDeploymentRequest < Struct.new(
       :stack_id,
       :app_id,
@@ -1079,6 +1109,8 @@ module Aws::OpsWorks
     #   The deployment ID, which can be used with other requests to identify
     #   the deployment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentResult AWS API Documentation
     #
     class CreateDeploymentResult < Struct.new(
       :deployment_id)
@@ -1317,6 +1349,8 @@ module Aws::OpsWorks
     #   [3]: http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstanceRequest AWS API Documentation
+    #
     class CreateInstanceRequest < Struct.new(
       :stack_id,
       :layer_ids,
@@ -1344,6 +1378,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstanceResult AWS API Documentation
     #
     class CreateInstanceResult < Struct.new(
       :instance_id)
@@ -1520,6 +1556,8 @@ module Aws::OpsWorks
     #   disable Elastic Load Balancer connection draining.
     #   @return [Types::LifecycleEventConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayerRequest AWS API Documentation
+    #
     class CreateLayerRequest < Struct.new(
       :stack_id,
       :type,
@@ -1546,6 +1584,8 @@ module Aws::OpsWorks
     # @!attribute [rw] layer_id
     #   The layer ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayerResult AWS API Documentation
     #
     class CreateLayerResult < Struct.new(
       :layer_id)
@@ -1886,6 +1926,8 @@ module Aws::OpsWorks
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStackRequest AWS API Documentation
+    #
     class CreateStackRequest < Struct.new(
       :name,
       :region,
@@ -1915,6 +1957,8 @@ module Aws::OpsWorks
     #   The stack ID, which is an opaque string that you use to identify the
     #   stack when performing actions such as `DescribeStacks`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStackResult AWS API Documentation
     #
     class CreateStackResult < Struct.new(
       :stack_id)
@@ -1957,6 +2001,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfileRequest AWS API Documentation
+    #
     class CreateUserProfileRequest < Struct.new(
       :iam_user_arn,
       :ssh_username,
@@ -1970,6 +2016,8 @@ module Aws::OpsWorks
     # @!attribute [rw] iam_user_arn
     #   The user's IAM ARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfileResult AWS API Documentation
     #
     class CreateUserProfileResult < Struct.new(
       :iam_user_arn)
@@ -2000,6 +2048,8 @@ module Aws::OpsWorks
     #   The database name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DataSource AWS API Documentation
+    #
     class DataSource < Struct.new(
       :type,
       :arn,
@@ -2017,6 +2067,8 @@ module Aws::OpsWorks
     # @!attribute [rw] app_id
     #   The app ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteAppRequest AWS API Documentation
     #
     class DeleteAppRequest < Struct.new(
       :app_id)
@@ -2044,6 +2096,8 @@ module Aws::OpsWorks
     #   Whether to delete the instance's Amazon EBS volumes.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstanceRequest AWS API Documentation
+    #
     class DeleteInstanceRequest < Struct.new(
       :instance_id,
       :delete_elastic_ip,
@@ -2062,6 +2116,8 @@ module Aws::OpsWorks
     #   The layer ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayerRequest AWS API Documentation
+    #
     class DeleteLayerRequest < Struct.new(
       :layer_id)
       include Aws::Structure
@@ -2078,6 +2134,8 @@ module Aws::OpsWorks
     #   The stack ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStackRequest AWS API Documentation
+    #
     class DeleteStackRequest < Struct.new(
       :stack_id)
       include Aws::Structure
@@ -2093,6 +2151,8 @@ module Aws::OpsWorks
     # @!attribute [rw] iam_user_arn
     #   The user's IAM ARN. This can also be a federated user's ARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfileRequest AWS API Documentation
     #
     class DeleteUserProfileRequest < Struct.new(
       :iam_user_arn)
@@ -2166,6 +2226,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instance_ids
     #   The IDs of the target instances.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Deployment AWS API Documentation
     #
     class Deployment < Struct.new(
       :deployment_id,
@@ -2264,6 +2326,8 @@ module Aws::OpsWorks
     #   "allow_reboot":["true"] \} `
     #   @return [Hash<String,Array<String>>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeploymentCommand AWS API Documentation
+    #
     class DeploymentCommand < Struct.new(
       :name,
       :args)
@@ -2281,6 +2345,8 @@ module Aws::OpsWorks
     #   The cluster's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsClusterRequest AWS API Documentation
+    #
     class DeregisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn)
       include Aws::Structure
@@ -2296,6 +2362,8 @@ module Aws::OpsWorks
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIpRequest AWS API Documentation
     #
     class DeregisterElasticIpRequest < Struct.new(
       :elastic_ip)
@@ -2313,6 +2381,8 @@ module Aws::OpsWorks
     #   The instance ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstanceRequest AWS API Documentation
+    #
     class DeregisterInstanceRequest < Struct.new(
       :instance_id)
       include Aws::Structure
@@ -2328,6 +2398,8 @@ module Aws::OpsWorks
     # @!attribute [rw] rds_db_instance_arn
     #   The Amazon RDS instance's ARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstanceRequest AWS API Documentation
     #
     class DeregisterRdsDbInstanceRequest < Struct.new(
       :rds_db_instance_arn)
@@ -2346,6 +2418,8 @@ module Aws::OpsWorks
     #   assigned to the instance when you registered the volume with the
     #   stack, not the Amazon EC2 volume ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolumeRequest AWS API Documentation
     #
     class DeregisterVolumeRequest < Struct.new(
       :volume_id)
@@ -2371,6 +2445,8 @@ module Aws::OpsWorks
     #   The configuration manager.
     #   @return [Types::StackConfigurationManager]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersionsRequest AWS API Documentation
+    #
     class DescribeAgentVersionsRequest < Struct.new(
       :stack_id,
       :configuration_manager)
@@ -2384,6 +2460,8 @@ module Aws::OpsWorks
     #   Note that this value is the complete version number, not the
     #   abbreviated number used by the console.
     #   @return [Array<Types::AgentVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersionsResult AWS API Documentation
     #
     class DescribeAgentVersionsResult < Struct.new(
       :agent_versions)
@@ -2409,6 +2487,8 @@ module Aws::OpsWorks
     #   apps. Otherwise, it returns a description of every app.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAppsRequest AWS API Documentation
+    #
     class DescribeAppsRequest < Struct.new(
       :stack_id,
       :app_ids)
@@ -2420,6 +2500,8 @@ module Aws::OpsWorks
     # @!attribute [rw] apps
     #   An array of `App` objects that describe the specified apps.
     #   @return [Array<Types::App>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAppsResult AWS API Documentation
     #
     class DescribeAppsResult < Struct.new(
       :apps)
@@ -2453,6 +2535,8 @@ module Aws::OpsWorks
     #   Otherwise, it returns a description of every command.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommandsRequest AWS API Documentation
+    #
     class DescribeCommandsRequest < Struct.new(
       :deployment_id,
       :instance_id,
@@ -2466,6 +2550,8 @@ module Aws::OpsWorks
     #   An array of `Command` objects that describe each of the specified
     #   commands.
     #   @return [Array<Types::Command>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommandsResult AWS API Documentation
     #
     class DescribeCommandsResult < Struct.new(
       :commands)
@@ -2500,6 +2586,8 @@ module Aws::OpsWorks
     #   deployment.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeploymentsRequest AWS API Documentation
+    #
     class DescribeDeploymentsRequest < Struct.new(
       :stack_id,
       :app_id,
@@ -2512,6 +2600,8 @@ module Aws::OpsWorks
     # @!attribute [rw] deployments
     #   An array of `Deployment` objects that describe the deployments.
     #   @return [Array<Types::Deployment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeploymentsResult AWS API Documentation
     #
     class DescribeDeploymentsResult < Struct.new(
       :deployments)
@@ -2555,6 +2645,8 @@ module Aws::OpsWorks
     #   request parameter to get the next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClustersRequest AWS API Documentation
+    #
     class DescribeEcsClustersRequest < Struct.new(
       :ecs_cluster_arns,
       :stack_id,
@@ -2576,6 +2668,8 @@ module Aws::OpsWorks
     #   If the previous paginated request returned all of the remaining
     #   results, this parameter is set to `null`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClustersResult AWS API Documentation
     #
     class DescribeEcsClustersResult < Struct.new(
       :ecs_clusters,
@@ -2611,6 +2705,8 @@ module Aws::OpsWorks
     #   of every Elastic IP address.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIpsRequest AWS API Documentation
+    #
     class DescribeElasticIpsRequest < Struct.new(
       :instance_id,
       :stack_id,
@@ -2624,6 +2720,8 @@ module Aws::OpsWorks
     #   An `ElasticIps` object that describes the specified Elastic IP
     #   addresses.
     #   @return [Array<Types::ElasticIp>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIpsResult AWS API Documentation
     #
     class DescribeElasticIpsResult < Struct.new(
       :elastic_ips)
@@ -2648,6 +2746,8 @@ module Aws::OpsWorks
     #   instances for the specified layers.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancersRequest AWS API Documentation
+    #
     class DescribeElasticLoadBalancersRequest < Struct.new(
       :stack_id,
       :layer_ids)
@@ -2660,6 +2760,8 @@ module Aws::OpsWorks
     #   A list of `ElasticLoadBalancer` objects that describe the specified
     #   Elastic Load Balancing instances.
     #   @return [Array<Types::ElasticLoadBalancer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancersResult AWS API Documentation
     #
     class DescribeElasticLoadBalancersResult < Struct.new(
       :elastic_load_balancers)
@@ -2691,6 +2793,8 @@ module Aws::OpsWorks
     #   instances. Otherwise, it returns a description of every instance.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstancesRequest AWS API Documentation
+    #
     class DescribeInstancesRequest < Struct.new(
       :stack_id,
       :layer_id,
@@ -2703,6 +2807,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instances
     #   An array of `Instance` objects that describe the instances.
     #   @return [Array<Types::Instance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstancesResult AWS API Documentation
     #
     class DescribeInstancesResult < Struct.new(
       :instances)
@@ -2727,6 +2833,8 @@ module Aws::OpsWorks
     #   every layer in the specified stack.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayersRequest AWS API Documentation
+    #
     class DescribeLayersRequest < Struct.new(
       :stack_id,
       :layer_ids)
@@ -2738,6 +2846,8 @@ module Aws::OpsWorks
     # @!attribute [rw] layers
     #   An array of `Layer` objects that describe the layers.
     #   @return [Array<Types::Layer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayersResult AWS API Documentation
     #
     class DescribeLayersResult < Struct.new(
       :layers)
@@ -2755,6 +2865,8 @@ module Aws::OpsWorks
     #   An array of layer IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScalingRequest AWS API Documentation
+    #
     class DescribeLoadBasedAutoScalingRequest < Struct.new(
       :layer_ids)
       include Aws::Structure
@@ -2767,6 +2879,8 @@ module Aws::OpsWorks
     #   describe each layer's configuration.
     #   @return [Array<Types::LoadBasedAutoScalingConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScalingResult AWS API Documentation
+    #
     class DescribeLoadBasedAutoScalingResult < Struct.new(
       :load_based_auto_scaling_configurations)
       include Aws::Structure
@@ -2777,6 +2891,8 @@ module Aws::OpsWorks
     # @!attribute [rw] user_profile
     #   A `UserProfile` object that describes the user's SSH information.
     #   @return [Types::SelfUserProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeMyUserProfileResult AWS API Documentation
     #
     class DescribeMyUserProfileResult < Struct.new(
       :user_profile)
@@ -2804,6 +2920,8 @@ module Aws::OpsWorks
     #   The stack ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissionsRequest AWS API Documentation
+    #
     class DescribePermissionsRequest < Struct.new(
       :iam_user_arn,
       :stack_id)
@@ -2828,6 +2946,8 @@ module Aws::OpsWorks
     #     contains a single `Permission` object with permissions for the
     #     specified stack and IAM ARN.
     #   @return [Array<Types::Permission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissionsResult AWS API Documentation
     #
     class DescribePermissionsResult < Struct.new(
       :permissions)
@@ -2859,6 +2979,8 @@ module Aws::OpsWorks
     #   Otherwise, it returns a description of every array.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArraysRequest AWS API Documentation
+    #
     class DescribeRaidArraysRequest < Struct.new(
       :instance_id,
       :stack_id,
@@ -2871,6 +2993,8 @@ module Aws::OpsWorks
     # @!attribute [rw] raid_arrays
     #   A `RaidArrays` object that describes the specified RAID arrays.
     #   @return [Array<Types::RaidArray>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArraysResult AWS API Documentation
     #
     class DescribeRaidArraysResult < Struct.new(
       :raid_arrays)
@@ -2894,6 +3018,8 @@ module Aws::OpsWorks
     #   An array containing the ARNs of the instances to be described.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstancesRequest AWS API Documentation
+    #
     class DescribeRdsDbInstancesRequest < Struct.new(
       :stack_id,
       :rds_db_instance_arns)
@@ -2905,6 +3031,8 @@ module Aws::OpsWorks
     # @!attribute [rw] rds_db_instances
     #   An a array of `RdsDbInstance` objects that describe the instances.
     #   @return [Array<Types::RdsDbInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstancesResult AWS API Documentation
     #
     class DescribeRdsDbInstancesResult < Struct.new(
       :rds_db_instances)
@@ -2938,6 +3066,8 @@ module Aws::OpsWorks
     #   errors. Otherwise, it returns a description of every error.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrorsRequest AWS API Documentation
+    #
     class DescribeServiceErrorsRequest < Struct.new(
       :stack_id,
       :instance_id,
@@ -2951,6 +3081,8 @@ module Aws::OpsWorks
     #   An array of `ServiceError` objects that describe the specified
     #   service errors.
     #   @return [Array<Types::ServiceError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrorsResult AWS API Documentation
     #
     class DescribeServiceErrorsResult < Struct.new(
       :service_errors)
@@ -2968,6 +3100,8 @@ module Aws::OpsWorks
     #   The stack ID
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParametersRequest AWS API Documentation
+    #
     class DescribeStackProvisioningParametersRequest < Struct.new(
       :stack_id)
       include Aws::Structure
@@ -2983,6 +3117,8 @@ module Aws::OpsWorks
     # @!attribute [rw] parameters
     #   An embedded object that contains the provisioning parameters.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParametersResult AWS API Documentation
     #
     class DescribeStackProvisioningParametersResult < Struct.new(
       :agent_installer_url,
@@ -3001,6 +3137,8 @@ module Aws::OpsWorks
     #   The stack ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummaryRequest AWS API Documentation
+    #
     class DescribeStackSummaryRequest < Struct.new(
       :stack_id)
       include Aws::Structure
@@ -3011,6 +3149,8 @@ module Aws::OpsWorks
     # @!attribute [rw] stack_summary
     #   A `StackSummary` object that contains the results.
     #   @return [Types::StackSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummaryResult AWS API Documentation
     #
     class DescribeStackSummaryResult < Struct.new(
       :stack_summary)
@@ -3030,6 +3170,8 @@ module Aws::OpsWorks
     #   every stack.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacksRequest AWS API Documentation
+    #
     class DescribeStacksRequest < Struct.new(
       :stack_ids)
       include Aws::Structure
@@ -3040,6 +3182,8 @@ module Aws::OpsWorks
     # @!attribute [rw] stacks
     #   An array of `Stack` objects that describe the stacks.
     #   @return [Array<Types::Stack>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacksResult AWS API Documentation
     #
     class DescribeStacksResult < Struct.new(
       :stacks)
@@ -3057,6 +3201,8 @@ module Aws::OpsWorks
     #   An array of instance IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScalingRequest AWS API Documentation
+    #
     class DescribeTimeBasedAutoScalingRequest < Struct.new(
       :instance_ids)
       include Aws::Structure
@@ -3068,6 +3214,8 @@ module Aws::OpsWorks
     #   An array of `TimeBasedAutoScalingConfiguration` objects that
     #   describe the configuration for the specified instances.
     #   @return [Array<Types::TimeBasedAutoScalingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScalingResult AWS API Documentation
     #
     class DescribeTimeBasedAutoScalingResult < Struct.new(
       :time_based_auto_scaling_configurations)
@@ -3086,6 +3234,8 @@ module Aws::OpsWorks
     #   described.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeUserProfilesRequest AWS API Documentation
+    #
     class DescribeUserProfilesRequest < Struct.new(
       :iam_user_arns)
       include Aws::Structure
@@ -3096,6 +3246,8 @@ module Aws::OpsWorks
     # @!attribute [rw] user_profiles
     #   A `Users` object that describes the specified users.
     #   @return [Array<Types::UserProfile>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeUserProfilesResult AWS API Documentation
     #
     class DescribeUserProfilesResult < Struct.new(
       :user_profiles)
@@ -3135,6 +3287,8 @@ module Aws::OpsWorks
     #   a description of every volume.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumesRequest AWS API Documentation
+    #
     class DescribeVolumesRequest < Struct.new(
       :instance_id,
       :stack_id,
@@ -3148,6 +3302,8 @@ module Aws::OpsWorks
     # @!attribute [rw] volumes
     #   An array of volume IDs.
     #   @return [Array<Types::Volume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumesResult AWS API Documentation
     #
     class DescribeVolumesResult < Struct.new(
       :volumes)
@@ -3171,6 +3327,8 @@ module Aws::OpsWorks
     #   attached to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancerRequest AWS API Documentation
+    #
     class DetachElasticLoadBalancerRequest < Struct.new(
       :elastic_load_balancer_name,
       :layer_id)
@@ -3187,6 +3345,8 @@ module Aws::OpsWorks
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIpRequest AWS API Documentation
     #
     class DisassociateElasticIpRequest < Struct.new(
       :elastic_ip)
@@ -3242,6 +3402,8 @@ module Aws::OpsWorks
     #   Whether the volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EbsBlockDevice AWS API Documentation
+    #
     class EbsBlockDevice < Struct.new(
       :snapshot_id,
       :iops,
@@ -3268,6 +3430,8 @@ module Aws::OpsWorks
     # @!attribute [rw] registered_at
     #   The time and date that the cluster was registered with the stack.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EcsCluster AWS API Documentation
     #
     class EcsCluster < Struct.new(
       :ecs_cluster_arn,
@@ -3303,6 +3467,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instance_id
     #   The ID of the instance that the address is attached to.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ElasticIp AWS API Documentation
     #
     class ElasticIp < Struct.new(
       :ip,
@@ -3352,6 +3518,8 @@ module Aws::OpsWorks
     #   is managing traffic for.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ElasticLoadBalancer AWS API Documentation
+    #
     class ElasticLoadBalancer < Struct.new(
       :elastic_load_balancer_name,
       :region,
@@ -3397,6 +3565,8 @@ module Aws::OpsWorks
     #   for `Secure` is `false`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EnvironmentVariable AWS API Documentation
+    #
     class EnvironmentVariable < Struct.new(
       :key,
       :value,
@@ -3415,6 +3585,8 @@ module Aws::OpsWorks
     #   The layer ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestionRequest AWS API Documentation
+    #
     class GetHostnameSuggestionRequest < Struct.new(
       :layer_id)
       include Aws::Structure
@@ -3429,6 +3601,8 @@ module Aws::OpsWorks
     # @!attribute [rw] hostname
     #   The generated host name.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestionResult AWS API Documentation
     #
     class GetHostnameSuggestionResult < Struct.new(
       :layer_id,
@@ -3455,6 +3629,8 @@ module Aws::OpsWorks
     #   the time, he or she automatically will be logged out.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccessRequest AWS API Documentation
+    #
     class GrantAccessRequest < Struct.new(
       :instance_id,
       :valid_for_in_minutes)
@@ -3468,6 +3644,8 @@ module Aws::OpsWorks
     #   in to the instance by RDP clients, such as the Microsoft Remote
     #   Desktop Connection.
     #   @return [Types::TemporaryCredential]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccessResult AWS API Documentation
     #
     class GrantAccessResult < Struct.new(
       :temporary_credential)
@@ -3706,6 +3884,8 @@ module Aws::OpsWorks
     #   The instance's virtualization type: `paravirtual` or `hvm`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Instance AWS API Documentation
+    #
     class Instance < Struct.new(
       :agent_version,
       :ami_id,
@@ -3774,6 +3954,8 @@ module Aws::OpsWorks
     #   A signature that can be used to verify the document's accuracy and
     #   authenticity.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/InstanceIdentity AWS API Documentation
     #
     class InstanceIdentity < Struct.new(
       :document,
@@ -3858,6 +4040,8 @@ module Aws::OpsWorks
     # @!attribute [rw] unassigning
     #   The number of instances in the Unassigning state.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/InstancesCount AWS API Documentation
     #
     class InstancesCount < Struct.new(
       :assigning,
@@ -4021,6 +4205,8 @@ module Aws::OpsWorks
     #   event configuration.
     #   @return [Types::LifecycleEventConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Layer AWS API Documentation
+    #
     class Layer < Struct.new(
       :stack_id,
       :layer_id,
@@ -4063,6 +4249,8 @@ module Aws::OpsWorks
     #   event configuration.
     #   @return [Types::ShutdownEventConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LifecycleEventConfiguration AWS API Documentation
+    #
     class LifecycleEventConfiguration < Struct.new(
       :shutdown)
       include Aws::Structure
@@ -4089,6 +4277,8 @@ module Aws::OpsWorks
     #   configuration, which defines how and when AWS OpsWorks reduces the
     #   number of instances.
     #   @return [Types::AutoScalingThresholds]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LoadBasedAutoScalingConfiguration AWS API Documentation
     #
     class LoadBasedAutoScalingConfiguration < Struct.new(
       :layer_id,
@@ -4142,6 +4332,8 @@ module Aws::OpsWorks
     #
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Permission AWS API Documentation
     #
     class Permission < Struct.new(
       :stack_id,
@@ -4215,6 +4407,8 @@ module Aws::OpsWorks
     #   For PIOPS volumes, the IOPS per disk.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RaidArray AWS API Documentation
+    #
     class RaidArray < Struct.new(
       :raid_array_id,
       :instance_id,
@@ -4274,6 +4468,8 @@ module Aws::OpsWorks
     #   then register it again.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RdsDbInstance AWS API Documentation
+    #
     class RdsDbInstance < Struct.new(
       :rds_db_instance_arn,
       :db_instance_identifier,
@@ -4297,6 +4493,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstanceRequest AWS API Documentation
     #
     class RebootInstanceRequest < Struct.new(
       :instance_id)
@@ -4353,6 +4551,8 @@ module Aws::OpsWorks
     #   event.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Recipes AWS API Documentation
+    #
     class Recipes < Struct.new(
       :setup,
       :configure,
@@ -4378,6 +4578,8 @@ module Aws::OpsWorks
     #   The stack ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsClusterRequest AWS API Documentation
+    #
     class RegisterEcsClusterRequest < Struct.new(
       :ecs_cluster_arn,
       :stack_id)
@@ -4389,6 +4591,8 @@ module Aws::OpsWorks
     # @!attribute [rw] ecs_cluster_arn
     #   The cluster's ARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsClusterResult AWS API Documentation
     #
     class RegisterEcsClusterResult < Struct.new(
       :ecs_cluster_arn)
@@ -4411,6 +4615,8 @@ module Aws::OpsWorks
     #   The stack ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIpRequest AWS API Documentation
+    #
     class RegisterElasticIpRequest < Struct.new(
       :elastic_ip,
       :stack_id)
@@ -4422,6 +4628,8 @@ module Aws::OpsWorks
     # @!attribute [rw] elastic_ip
     #   The Elastic IP address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIpResult AWS API Documentation
     #
     class RegisterElasticIpResult < Struct.new(
       :elastic_ip)
@@ -4473,6 +4681,8 @@ module Aws::OpsWorks
     #   An InstanceIdentity object that contains the instance's identity.
     #   @return [Types::InstanceIdentity]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstanceRequest AWS API Documentation
+    #
     class RegisterInstanceRequest < Struct.new(
       :stack_id,
       :hostname,
@@ -4489,6 +4699,8 @@ module Aws::OpsWorks
     # @!attribute [rw] instance_id
     #   The registered instance's AWS OpsWorks ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstanceResult AWS API Documentation
     #
     class RegisterInstanceResult < Struct.new(
       :instance_id)
@@ -4521,6 +4733,8 @@ module Aws::OpsWorks
     #   The database password.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstanceRequest AWS API Documentation
+    #
     class RegisterRdsDbInstanceRequest < Struct.new(
       :stack_id,
       :rds_db_instance_arn,
@@ -4545,6 +4759,8 @@ module Aws::OpsWorks
     #   The stack ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolumeRequest AWS API Documentation
+    #
     class RegisterVolumeRequest < Struct.new(
       :ec2_volume_id,
       :stack_id)
@@ -4556,6 +4772,8 @@ module Aws::OpsWorks
     # @!attribute [rw] volume_id
     #   The volume ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolumeResult AWS API Documentation
     #
     class RegisterVolumeResult < Struct.new(
       :volume_id)
@@ -4575,6 +4793,8 @@ module Aws::OpsWorks
     # @!attribute [rw] version
     #   The operating system version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ReportedOs AWS API Documentation
     #
     class ReportedOs < Struct.new(
       :family,
@@ -4600,6 +4820,8 @@ module Aws::OpsWorks
     # @!attribute [rw] ssh_public_key
     #   The user's SSH public key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SelfUserProfile AWS API Documentation
     #
     class SelfUserProfile < Struct.new(
       :iam_user_arn,
@@ -4634,6 +4856,8 @@ module Aws::OpsWorks
     # @!attribute [rw] created_at
     #   When the error occurred.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ServiceError AWS API Documentation
     #
     class ServiceError < Struct.new(
       :service_error_id,
@@ -4692,6 +4916,8 @@ module Aws::OpsWorks
     #   instances.
     #   @return [Types::AutoScalingThresholds]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScalingRequest AWS API Documentation
+    #
     class SetLoadBasedAutoScalingRequest < Struct.new(
       :layer_id,
       :enable,
@@ -4749,6 +4975,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermissionRequest AWS API Documentation
+    #
     class SetPermissionRequest < Struct.new(
       :stack_id,
       :iam_user_arn,
@@ -4796,6 +5024,8 @@ module Aws::OpsWorks
     #   An `AutoScalingSchedule` with the instance schedule.
     #   @return [Types::WeeklyAutoScalingSchedule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScalingRequest AWS API Documentation
+    #
     class SetTimeBasedAutoScalingRequest < Struct.new(
       :instance_id,
       :auto_scaling_schedule)
@@ -4825,6 +5055,8 @@ module Aws::OpsWorks
     #
     #   [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ShutdownEventConfiguration AWS API Documentation
     #
     class ShutdownEventConfiguration < Struct.new(
       :execution_timeout,
@@ -4906,6 +5138,8 @@ module Aws::OpsWorks
     #   represent different versions that can potentially be deployed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Source AWS API Documentation
+    #
     class Source < Struct.new(
       :type,
       :url,
@@ -4939,6 +5173,8 @@ module Aws::OpsWorks
     #   Optional. Can be used to specify an intermediate certificate
     #   authority key or client authentication.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SslConfiguration AWS API Documentation
     #
     class SslConfiguration < Struct.new(
       :certificate,
@@ -5090,6 +5326,8 @@ module Aws::OpsWorks
     #   auto-update. or a version number for a fixed agent version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Stack AWS API Documentation
+    #
     class Stack < Struct.new(
       :stack_id,
       :name,
@@ -5136,6 +5374,8 @@ module Aws::OpsWorks
     #   for Linux stacks is 11.4.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StackConfigurationManager AWS API Documentation
+    #
     class StackConfigurationManager < Struct.new(
       :name,
       :version)
@@ -5169,6 +5409,8 @@ module Aws::OpsWorks
     #   status.
     #   @return [Types::InstancesCount]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StackSummary AWS API Documentation
+    #
     class StackSummary < Struct.new(
       :stack_id,
       :name,
@@ -5190,6 +5432,8 @@ module Aws::OpsWorks
     #   The instance ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstanceRequest AWS API Documentation
+    #
     class StartInstanceRequest < Struct.new(
       :instance_id)
       include Aws::Structure
@@ -5205,6 +5449,8 @@ module Aws::OpsWorks
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStackRequest AWS API Documentation
     #
     class StartStackRequest < Struct.new(
       :stack_id)
@@ -5222,6 +5468,8 @@ module Aws::OpsWorks
     #   The instance ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceRequest AWS API Documentation
+    #
     class StopInstanceRequest < Struct.new(
       :instance_id)
       include Aws::Structure
@@ -5237,6 +5485,8 @@ module Aws::OpsWorks
     # @!attribute [rw] stack_id
     #   The stack ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStackRequest AWS API Documentation
     #
     class StopStackRequest < Struct.new(
       :stack_id)
@@ -5265,6 +5515,8 @@ module Aws::OpsWorks
     #   The instance's AWS OpsWorks ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TemporaryCredential AWS API Documentation
+    #
     class TemporaryCredential < Struct.new(
       :username,
       :password,
@@ -5283,6 +5535,8 @@ module Aws::OpsWorks
     #   A `WeeklyAutoScalingSchedule` object with the instance schedule.
     #   @return [Types::WeeklyAutoScalingSchedule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TimeBasedAutoScalingConfiguration AWS API Documentation
+    #
     class TimeBasedAutoScalingConfiguration < Struct.new(
       :instance_id,
       :auto_scaling_schedule)
@@ -5300,6 +5554,8 @@ module Aws::OpsWorks
     #   The instance ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstanceRequest AWS API Documentation
+    #
     class UnassignInstanceRequest < Struct.new(
       :instance_id)
       include Aws::Structure
@@ -5315,6 +5571,8 @@ module Aws::OpsWorks
     # @!attribute [rw] volume_id
     #   The volume ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolumeRequest AWS API Documentation
     #
     class UnassignVolumeRequest < Struct.new(
       :volume_id)
@@ -5429,6 +5687,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
     #   @return [Array<Types::EnvironmentVariable>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateAppRequest AWS API Documentation
+    #
     class UpdateAppRequest < Struct.new(
       :app_id,
       :name,
@@ -5459,6 +5719,8 @@ module Aws::OpsWorks
     # @!attribute [rw] name
     #   The new name.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIpRequest AWS API Documentation
     #
     class UpdateElasticIpRequest < Struct.new(
       :elastic_ip,
@@ -5616,6 +5878,8 @@ module Aws::OpsWorks
     #   shown on the console. For a list of available agent version numbers,
     #   call DescribeAgentVersions.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstanceRequest AWS API Documentation
     #
     class UpdateInstanceRequest < Struct.new(
       :instance_id,
@@ -5789,6 +6053,8 @@ module Aws::OpsWorks
     # @!attribute [rw] lifecycle_event_configuration
     #   @return [Types::LifecycleEventConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayerRequest AWS API Documentation
+    #
     class UpdateLayerRequest < Struct.new(
       :layer_id,
       :name,
@@ -5820,6 +6086,8 @@ module Aws::OpsWorks
     #   The user's SSH public key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfileRequest AWS API Documentation
+    #
     class UpdateMyUserProfileRequest < Struct.new(
       :ssh_public_key)
       include Aws::Structure
@@ -5845,6 +6113,8 @@ module Aws::OpsWorks
     # @!attribute [rw] db_password
     #   The database password.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstanceRequest AWS API Documentation
     #
     class UpdateRdsDbInstanceRequest < Struct.new(
       :rds_db_instance_arn,
@@ -6138,6 +6408,8 @@ module Aws::OpsWorks
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStackRequest AWS API Documentation
+    #
     class UpdateStackRequest < Struct.new(
       :stack_id,
       :name,
@@ -6196,6 +6468,8 @@ module Aws::OpsWorks
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfileRequest AWS API Documentation
+    #
     class UpdateUserProfileRequest < Struct.new(
       :iam_user_arn,
       :ssh_username,
@@ -6224,6 +6498,8 @@ module Aws::OpsWorks
     # @!attribute [rw] mount_point
     #   The new mount point.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolumeRequest AWS API Documentation
     #
     class UpdateVolumeRequest < Struct.new(
       :volume_id,
@@ -6259,6 +6535,8 @@ module Aws::OpsWorks
     #
     #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UserProfile AWS API Documentation
     #
     class UserProfile < Struct.new(
       :iam_user_arn,
@@ -6337,6 +6615,8 @@ module Aws::OpsWorks
     #   For PIOPS volumes, the IOPS per disk.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Volume AWS API Documentation
+    #
     class Volume < Struct.new(
       :volume_id,
       :ec2_volume_id,
@@ -6401,6 +6681,8 @@ module Aws::OpsWorks
     # @!attribute [rw] iops
     #   For PIOPS volumes, the IOPS per disk.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/VolumeConfiguration AWS API Documentation
     #
     class VolumeConfiguration < Struct.new(
       :mount_point,
@@ -6486,6 +6768,8 @@ module Aws::OpsWorks
     # @!attribute [rw] sunday
     #   The schedule for Sunday.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/WeeklyAutoScalingSchedule AWS API Documentation
     #
     class WeeklyAutoScalingSchedule < Struct.new(
       :monday,

@@ -59,6 +59,8 @@ module Aws::WAFRegional
     #     request based on the remaining rules in the web ACL.
     #   @return [Types::WafAction]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ActivatedRule AWS API Documentation
+    #
     class ActivatedRule < Struct.new(
       :priority,
       :rule_id,
@@ -82,12 +84,16 @@ module Aws::WAFRegional
     #   The ARN (Amazon Resource Name) of the resource to be protected.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACLRequest AWS API Documentation
+    #
     class AssociateWebACLRequest < Struct.new(
       :web_acl_id,
       :resource_arn)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACLResponse AWS API Documentation
+    #
     class AssociateWebACLResponse < Aws::EmptyStructure; end
 
     # In a GetByteMatchSet request, `ByteMatchSet` is a complex type that
@@ -125,6 +131,8 @@ module Aws::WAFRegional
     #   settings.
     #   @return [Array<Types::ByteMatchTuple>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchSet AWS API Documentation
+    #
     class ByteMatchSet < Struct.new(
       :byte_match_set_id,
       :name,
@@ -149,6 +157,8 @@ module Aws::WAFRegional
     #   A friendly name or description of the ByteMatchSet. You can't
     #   change `Name` after you create a `ByteMatchSet`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchSetSummary AWS API Documentation
     #
     class ByteMatchSetSummary < Struct.new(
       :byte_match_set_id,
@@ -187,6 +197,8 @@ module Aws::WAFRegional
     #   values must exactly match the values in the `ByteMatchTuple` that
     #   you want to delete from the `ByteMatchSet`.
     #   @return [Types::ByteMatchTuple]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchSetUpdate AWS API Documentation
     #
     class ByteMatchSetUpdate < Struct.new(
       :action,
@@ -396,6 +408,8 @@ module Aws::WAFRegional
     #   part of the web request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ByteMatchTuple AWS API Documentation
+    #
     class ByteMatchTuple < Struct.new(
       :field_to_match,
       :target_string,
@@ -421,6 +435,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateByteMatchSetRequest AWS API Documentation
+    #
     class CreateByteMatchSetRequest < Struct.new(
       :name,
       :change_token)
@@ -436,6 +452,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateByteMatchSetResponse AWS API Documentation
     #
     class CreateByteMatchSetResponse < Struct.new(
       :byte_match_set,
@@ -460,6 +478,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSetRequest AWS API Documentation
+    #
     class CreateIPSetRequest < Struct.new(
       :name,
       :change_token)
@@ -475,6 +495,8 @@ module Aws::WAFRegional
     #   You can also use this value to query the status of the request. For
     #   more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateIPSetResponse AWS API Documentation
     #
     class CreateIPSetResponse < Struct.new(
       :ip_set,
@@ -507,6 +529,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleRequest AWS API Documentation
+    #
     class CreateRuleRequest < Struct.new(
       :name,
       :metric_name,
@@ -523,6 +547,8 @@ module Aws::WAFRegional
     #   You can also use this value to query the status of the request. For
     #   more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateRuleResponse AWS API Documentation
     #
     class CreateRuleResponse < Struct.new(
       :rule,
@@ -547,6 +573,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSetRequest AWS API Documentation
+    #
     class CreateSizeConstraintSetRequest < Struct.new(
       :name,
       :change_token)
@@ -563,6 +591,8 @@ module Aws::WAFRegional
     #   query the status of the request. For more information, see
     #   GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSizeConstraintSetResponse AWS API Documentation
     #
     class CreateSizeConstraintSetResponse < Struct.new(
       :size_constraint_set,
@@ -590,6 +620,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSetRequest AWS API Documentation
+    #
     class CreateSqlInjectionMatchSetRequest < Struct.new(
       :name,
       :change_token)
@@ -608,6 +640,8 @@ module Aws::WAFRegional
     #   query the status of the request. For more information, see
     #   GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateSqlInjectionMatchSetResponse AWS API Documentation
     #
     class CreateSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set,
@@ -649,6 +683,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACLRequest AWS API Documentation
+    #
     class CreateWebACLRequest < Struct.new(
       :name,
       :metric_name,
@@ -666,6 +702,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateWebACLResponse AWS API Documentation
     #
     class CreateWebACLResponse < Struct.new(
       :web_acl,
@@ -693,6 +731,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateXssMatchSetRequest AWS API Documentation
+    #
     class CreateXssMatchSetRequest < Struct.new(
       :name,
       :change_token)
@@ -710,6 +750,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/CreateXssMatchSetResponse AWS API Documentation
     #
     class CreateXssMatchSetResponse < Struct.new(
       :xss_match_set,
@@ -735,6 +777,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSetRequest AWS API Documentation
+    #
     class DeleteByteMatchSetRequest < Struct.new(
       :byte_match_set_id,
       :change_token)
@@ -746,6 +790,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteByteMatchSetResponse AWS API Documentation
     #
     class DeleteByteMatchSetResponse < Struct.new(
       :change_token)
@@ -769,6 +815,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteIPSetRequest AWS API Documentation
+    #
     class DeleteIPSetRequest < Struct.new(
       :ip_set_id,
       :change_token)
@@ -780,6 +828,8 @@ module Aws::WAFRegional
     #   You can also use this value to query the status of the request. For
     #   more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteIPSetResponse AWS API Documentation
     #
     class DeleteIPSetResponse < Struct.new(
       :change_token)
@@ -803,6 +853,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRuleRequest AWS API Documentation
+    #
     class DeleteRuleRequest < Struct.new(
       :rule_id,
       :change_token)
@@ -814,6 +866,8 @@ module Aws::WAFRegional
     #   You can also use this value to query the status of the request. For
     #   more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteRuleResponse AWS API Documentation
     #
     class DeleteRuleResponse < Struct.new(
       :change_token)
@@ -838,6 +892,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSetRequest AWS API Documentation
+    #
     class DeleteSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id,
       :change_token)
@@ -850,6 +906,8 @@ module Aws::WAFRegional
     #   query the status of the request. For more information, see
     #   GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSizeConstraintSetResponse AWS API Documentation
     #
     class DeleteSizeConstraintSetResponse < Struct.new(
       :change_token)
@@ -876,6 +934,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSqlInjectionMatchSetRequest AWS API Documentation
+    #
     class DeleteSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id,
       :change_token)
@@ -891,6 +951,8 @@ module Aws::WAFRegional
     #   query the status of the request. For more information, see
     #   GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteSqlInjectionMatchSetResponse AWS API Documentation
     #
     class DeleteSqlInjectionMatchSetResponse < Struct.new(
       :change_token)
@@ -914,6 +976,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteWebACLRequest AWS API Documentation
+    #
     class DeleteWebACLRequest < Struct.new(
       :web_acl_id,
       :change_token)
@@ -925,6 +989,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteWebACLResponse AWS API Documentation
     #
     class DeleteWebACLResponse < Struct.new(
       :change_token)
@@ -951,6 +1017,8 @@ module Aws::WAFRegional
     #   The value returned by the most recent call to GetChangeToken.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteXssMatchSetRequest AWS API Documentation
+    #
     class DeleteXssMatchSetRequest < Struct.new(
       :xss_match_set_id,
       :change_token)
@@ -964,6 +1032,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DeleteXssMatchSetResponse AWS API Documentation
     #
     class DeleteXssMatchSetResponse < Struct.new(
       :change_token)
@@ -982,11 +1052,15 @@ module Aws::WAFRegional
     #   ACL is being removed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLRequest AWS API Documentation
+    #
     class DisassociateWebACLRequest < Struct.new(
       :resource_arn)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/DisassociateWebACLResponse AWS API Documentation
+    #
     class DisassociateWebACLResponse < Aws::EmptyStructure; end
 
     # Specifies where in a web request to look for `TargetString`.
@@ -1037,6 +1111,8 @@ module Aws::WAFRegional
     #   The name of the header is not case sensitive.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/FieldToMatch AWS API Documentation
+    #
     class FieldToMatch < Struct.new(
       :type,
       :data)
@@ -1055,6 +1131,8 @@ module Aws::WAFRegional
     #   `ByteMatchSetId` is returned by CreateByteMatchSet and by
     #   ListByteMatchSets.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetByteMatchSetRequest AWS API Documentation
     #
     class GetByteMatchSetRequest < Struct.new(
       :byte_match_set_id)
@@ -1076,12 +1154,16 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Types::ByteMatchSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetByteMatchSetResponse AWS API Documentation
+    #
     class GetByteMatchSetResponse < Struct.new(
       :byte_match_set)
       include Aws::Structure
     end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenRequest AWS API Documentation
     #
     class GetChangeTokenRequest < Aws::EmptyStructure; end
 
@@ -1090,6 +1172,8 @@ module Aws::WAFRegional
     #   `GetChangeTokenStatus` request to get the current status of the
     #   request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenResponse AWS API Documentation
     #
     class GetChangeTokenResponse < Struct.new(
       :change_token)
@@ -1108,6 +1192,8 @@ module Aws::WAFRegional
     #   token was previously returned in the `GetChangeToken` response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatusRequest AWS API Documentation
+    #
     class GetChangeTokenStatusRequest < Struct.new(
       :change_token)
       include Aws::Structure
@@ -1116,6 +1202,8 @@ module Aws::WAFRegional
     # @!attribute [rw] change_token_status
     #   The status of the change token.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetChangeTokenStatusResponse AWS API Documentation
     #
     class GetChangeTokenStatusResponse < Struct.new(
       :change_token_status)
@@ -1134,6 +1222,8 @@ module Aws::WAFRegional
     #   returned by CreateIPSet and by ListIPSets.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetIPSetRequest AWS API Documentation
+    #
     class GetIPSetRequest < Struct.new(
       :ip_set_id)
       include Aws::Structure
@@ -1148,6 +1238,8 @@ module Aws::WAFRegional
     #   * `IPSetDescriptors`\: Contains an array of IPSetDescriptor objects.
     #     Each `IPSetDescriptor` object contains `Type` and `Value`
     #   @return [Types::IPSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetIPSetResponse AWS API Documentation
     #
     class GetIPSetResponse < Struct.new(
       :ip_set)
@@ -1166,6 +1258,8 @@ module Aws::WAFRegional
     #   by CreateRule and by ListRules.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRuleRequest AWS API Documentation
+    #
     class GetRuleRequest < Struct.new(
       :rule_id)
       include Aws::Structure
@@ -1181,6 +1275,8 @@ module Aws::WAFRegional
     #   * Predicate: Each `Predicate` object contains `DataId`, `Negated`,
     #     and `Type`
     #   @return [Types::Rule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetRuleResponse AWS API Documentation
     #
     class GetRuleResponse < Struct.new(
       :rule)
@@ -1232,6 +1328,8 @@ module Aws::WAFRegional
     #   them.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSampledRequestsRequest AWS API Documentation
+    #
     class GetSampledRequestsRequest < Struct.new(
       :web_acl_id,
       :rule_id,
@@ -1260,6 +1358,8 @@ module Aws::WAFRegional
     #   first 5,000 requests.
     #   @return [Types::TimeWindow]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSampledRequestsResponse AWS API Documentation
+    #
     class GetSampledRequestsResponse < Struct.new(
       :sampled_requests,
       :population_size,
@@ -1279,6 +1379,8 @@ module Aws::WAFRegional
     #   get. `SizeConstraintSetId` is returned by CreateSizeConstraintSet
     #   and by ListSizeConstraintSets.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSizeConstraintSetRequest AWS API Documentation
     #
     class GetSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id)
@@ -1300,6 +1402,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Types::SizeConstraintSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSizeConstraintSetResponse AWS API Documentation
+    #
     class GetSizeConstraintSetResponse < Struct.new(
       :size_constraint_set)
       include Aws::Structure
@@ -1319,6 +1423,8 @@ module Aws::WAFRegional
     #   want to get. `SqlInjectionMatchSetId` is returned by
     #   CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSqlInjectionMatchSetRequest AWS API Documentation
     #
     class GetSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id)
@@ -1341,6 +1447,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Types::SqlInjectionMatchSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetSqlInjectionMatchSetResponse AWS API Documentation
+    #
     class GetSqlInjectionMatchSetResponse < Struct.new(
       :sql_injection_match_set)
       include Aws::Structure
@@ -1358,6 +1466,8 @@ module Aws::WAFRegional
     #   web ACL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceRequest AWS API Documentation
+    #
     class GetWebACLForResourceRequest < Struct.new(
       :resource_arn)
       include Aws::Structure
@@ -1368,6 +1478,8 @@ module Aws::WAFRegional
     #   `GetWebACLForResource` request. If there is no associated resource,
     #   a null WebACLSummary is returned.
     #   @return [Types::WebACLSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLForResourceResponse AWS API Documentation
     #
     class GetWebACLForResourceResponse < Struct.new(
       :web_acl_summary)
@@ -1385,6 +1497,8 @@ module Aws::WAFRegional
     #   The `WebACLId` of the WebACL that you want to get. `WebACLId` is
     #   returned by CreateWebACL and by ListWebACLs.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLRequest AWS API Documentation
     #
     class GetWebACLRequest < Struct.new(
       :web_acl_id)
@@ -1406,6 +1520,8 @@ module Aws::WAFRegional
     #   * `Action`\: Contains `Type`
     #   @return [Types::WebACL]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetWebACLResponse AWS API Documentation
+    #
     class GetWebACLResponse < Struct.new(
       :web_acl)
       include Aws::Structure
@@ -1425,6 +1541,8 @@ module Aws::WAFRegional
     #   `XssMatchSetId` is returned by CreateXssMatchSet and by
     #   ListXssMatchSets.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetXssMatchSetRequest AWS API Documentation
     #
     class GetXssMatchSetRequest < Struct.new(
       :xss_match_set_id)
@@ -1447,6 +1565,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Types::XssMatchSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/GetXssMatchSetResponse AWS API Documentation
+    #
     class GetXssMatchSetResponse < Struct.new(
       :xss_match_set)
       include Aws::Structure
@@ -1465,6 +1585,8 @@ module Aws::WAFRegional
     # @!attribute [rw] value
     #   The value of one of the headers in the sampled web request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/HTTPHeader AWS API Documentation
     #
     class HTTPHeader < Struct.new(
       :name,
@@ -1521,6 +1643,8 @@ module Aws::WAFRegional
     #   header.
     #   @return [Array<Types::HTTPHeader>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/HTTPRequest AWS API Documentation
+    #
     class HTTPRequest < Struct.new(
       :client_ip,
       :country,
@@ -1573,6 +1697,8 @@ module Aws::WAFRegional
     #   * `x-forwarded-for`, if the viewer did use an HTTP proxy or a load
     #     balancer to send the request
     #   @return [Array<Types::IPSetDescriptor>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSet AWS API Documentation
     #
     class IPSet < Struct.new(
       :ip_set_id,
@@ -1628,6 +1754,8 @@ module Aws::WAFRegional
     #   [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSetDescriptor AWS API Documentation
+    #
     class IPSetDescriptor < Struct.new(
       :type,
       :value)
@@ -1645,6 +1773,8 @@ module Aws::WAFRegional
     #   A friendly name or description of the IPSet. You can't change the
     #   name of an `IPSet` after you create it.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSetSummary AWS API Documentation
     #
     class IPSetSummary < Struct.new(
       :ip_set_id,
@@ -1674,6 +1804,8 @@ module Aws::WAFRegional
     #   The IP address type (`IPV4` or `IPV6`) and the IP address range (in
     #   CIDR notation) that web requests originate from.
     #   @return [Types::IPSetDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/IPSetUpdate AWS API Documentation
     #
     class IPSetUpdate < Struct.new(
       :action,
@@ -1706,6 +1838,8 @@ module Aws::WAFRegional
     #   `ByteMatchSet` objects.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSetsRequest AWS API Documentation
+    #
     class ListByteMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
@@ -1724,6 +1858,8 @@ module Aws::WAFRegional
     # @!attribute [rw] byte_match_sets
     #   An array of ByteMatchSetSummary objects.
     #   @return [Array<Types::ByteMatchSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListByteMatchSetsResponse AWS API Documentation
     #
     class ListByteMatchSetsResponse < Struct.new(
       :next_marker,
@@ -1755,6 +1891,8 @@ module Aws::WAFRegional
     #   value that you can use to get another batch of `IPSet` objects.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSetsRequest AWS API Documentation
+    #
     class ListIPSetsRequest < Struct.new(
       :next_marker,
       :limit)
@@ -1772,6 +1910,8 @@ module Aws::WAFRegional
     # @!attribute [rw] ip_sets
     #   An array of IPSetSummary objects.
     #   @return [Array<Types::IPSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListIPSetsResponse AWS API Documentation
     #
     class ListIPSetsResponse < Struct.new(
       :next_marker,
@@ -1791,6 +1931,8 @@ module Aws::WAFRegional
     #   associated resources.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACLRequest AWS API Documentation
+    #
     class ListResourcesForWebACLRequest < Struct.new(
       :web_acl_id)
       include Aws::Structure
@@ -1801,6 +1943,8 @@ module Aws::WAFRegional
     #   with the specified web ACL. An array with zero elements is returned
     #   if there are no resources associated with the web ACL.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListResourcesForWebACLResponse AWS API Documentation
     #
     class ListResourcesForWebACLResponse < Struct.new(
       :resource_arns)
@@ -1831,6 +1975,8 @@ module Aws::WAFRegional
     #   you can use to get another batch of `Rules`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRulesRequest AWS API Documentation
+    #
     class ListRulesRequest < Struct.new(
       :next_marker,
       :limit)
@@ -1848,6 +1994,8 @@ module Aws::WAFRegional
     # @!attribute [rw] rules
     #   An array of RuleSummary objects.
     #   @return [Array<Types::RuleSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListRulesResponse AWS API Documentation
     #
     class ListRulesResponse < Struct.new(
       :next_marker,
@@ -1881,6 +2029,8 @@ module Aws::WAFRegional
     #   to get another batch of `SizeConstraintSet` objects.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSizeConstraintSetsRequest AWS API Documentation
+    #
     class ListSizeConstraintSetsRequest < Struct.new(
       :next_marker,
       :limit)
@@ -1899,6 +2049,8 @@ module Aws::WAFRegional
     # @!attribute [rw] size_constraint_sets
     #   An array of SizeConstraintSetSummary objects.
     #   @return [Array<Types::SizeConstraintSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSizeConstraintSetsResponse AWS API Documentation
     #
     class ListSizeConstraintSetsResponse < Struct.new(
       :next_marker,
@@ -1935,6 +2087,8 @@ module Aws::WAFRegional
     #   to get another batch of `Rules`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSetsRequest AWS API Documentation
+    #
     class ListSqlInjectionMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
@@ -1955,6 +2109,8 @@ module Aws::WAFRegional
     # @!attribute [rw] sql_injection_match_sets
     #   An array of SqlInjectionMatchSetSummary objects.
     #   @return [Array<Types::SqlInjectionMatchSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListSqlInjectionMatchSetsResponse AWS API Documentation
     #
     class ListSqlInjectionMatchSetsResponse < Struct.new(
       :next_marker,
@@ -1988,6 +2144,8 @@ module Aws::WAFRegional
     #   objects.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListWebACLsRequest AWS API Documentation
+    #
     class ListWebACLsRequest < Struct.new(
       :next_marker,
       :limit)
@@ -2005,6 +2163,8 @@ module Aws::WAFRegional
     # @!attribute [rw] web_acls
     #   An array of WebACLSummary objects.
     #   @return [Array<Types::WebACLSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListWebACLsResponse AWS API Documentation
     #
     class ListWebACLsResponse < Struct.new(
       :next_marker,
@@ -2039,6 +2199,8 @@ module Aws::WAFRegional
     #   `NextMarker` value that you can use to get another batch of `Rules`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSetsRequest AWS API Documentation
+    #
     class ListXssMatchSetsRequest < Struct.new(
       :next_marker,
       :limit)
@@ -2059,6 +2221,8 @@ module Aws::WAFRegional
     # @!attribute [rw] xss_match_sets
     #   An array of XssMatchSetSummary objects.
     #   @return [Array<Types::XssMatchSetSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/ListXssMatchSetsResponse AWS API Documentation
     #
     class ListXssMatchSetsResponse < Struct.new(
       :next_marker,
@@ -2106,6 +2270,8 @@ module Aws::WAFRegional
     #   `ByteMatchSetId` or `IPSetId`. The ID is returned by the
     #   corresponding `Create` or `List` command.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/Predicate AWS API Documentation
     #
     class Predicate < Struct.new(
       :negated,
@@ -2157,6 +2323,8 @@ module Aws::WAFRegional
     #   include in a `Rule`.
     #   @return [Array<Types::Predicate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/Rule AWS API Documentation
+    #
     class Rule < Struct.new(
       :rule_id,
       :name,
@@ -2182,6 +2350,8 @@ module Aws::WAFRegional
     #   A friendly name or description of the Rule. You can't change the
     #   name of a `Rule` after you create it.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleSummary AWS API Documentation
     #
     class RuleSummary < Struct.new(
       :rule_id,
@@ -2213,6 +2383,8 @@ module Aws::WAFRegional
     #   The ID of the `Predicate` (such as an `IPSet`) that you want to add
     #   to a `Rule`.
     #   @return [Types::Predicate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/RuleUpdate AWS API Documentation
     #
     class RuleUpdate < Struct.new(
       :action,
@@ -2246,6 +2418,8 @@ module Aws::WAFRegional
     #   The action for the `Rule` that the request matched: `ALLOW`,
     #   `BLOCK`, or `COUNT`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SampledHTTPRequest AWS API Documentation
     #
     class SampledHTTPRequest < Struct.new(
       :request,
@@ -2399,6 +2573,8 @@ module Aws::WAFRegional
     #   characters long.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraint AWS API Documentation
+    #
     class SizeConstraint < Struct.new(
       :field_to_match,
       :text_transformation,
@@ -2434,6 +2610,8 @@ module Aws::WAFRegional
     #   size of.
     #   @return [Array<Types::SizeConstraint>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraintSet AWS API Documentation
+    #
     class SizeConstraintSet < Struct.new(
       :size_constraint_set_id,
       :name,
@@ -2458,6 +2636,8 @@ module Aws::WAFRegional
     # @!attribute [rw] name
     #   The name of the `SizeConstraintSet`, if any.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraintSetSummary AWS API Documentation
     #
     class SizeConstraintSetSummary < Struct.new(
       :size_constraint_set_id,
@@ -2499,6 +2679,8 @@ module Aws::WAFRegional
     #   `SizeConstraint` is considered to match.
     #   @return [Types::SizeConstraint]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SizeConstraintSetUpdate AWS API Documentation
+    #
     class SizeConstraintSetUpdate < Struct.new(
       :action,
       :size_constraint)
@@ -2535,6 +2717,8 @@ module Aws::WAFRegional
     #   snippets of malicious SQL code.
     #   @return [Array<Types::SqlInjectionMatchTuple>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchSet AWS API Documentation
+    #
     class SqlInjectionMatchSet < Struct.new(
       :sql_injection_match_set_id,
       :name,
@@ -2560,6 +2744,8 @@ module Aws::WAFRegional
     # @!attribute [rw] name
     #   The name of the `SqlInjectionMatchSet`, if any, specified by `Id`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchSetSummary AWS API Documentation
     #
     class SqlInjectionMatchSetSummary < Struct.new(
       :sql_injection_match_set_id,
@@ -2597,6 +2783,8 @@ module Aws::WAFRegional
     #   for snippets of malicious SQL code and, if you want AWS WAF to
     #   inspect a header, the name of the header.
     #   @return [Types::SqlInjectionMatchTuple]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchSetUpdate AWS API Documentation
     #
     class SqlInjectionMatchSetUpdate < Struct.new(
       :action,
@@ -2700,6 +2888,8 @@ module Aws::WAFRegional
     #   transformations.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/SqlInjectionMatchTuple AWS API Documentation
+    #
     class SqlInjectionMatchTuple < Struct.new(
       :field_to_match,
       :text_transformation)
@@ -2742,6 +2932,8 @@ module Aws::WAFRegional
     #   `"2016-09-27T14:50Z"`. You can specify any time range in the
     #   previous three hours.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/TimeWindow AWS API Documentation
     #
     class TimeWindow < Struct.new(
       :start_time,
@@ -2794,6 +2986,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Array<Types::ByteMatchSetUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateByteMatchSetRequest AWS API Documentation
+    #
     class UpdateByteMatchSetRequest < Struct.new(
       :byte_match_set_id,
       :change_token,
@@ -2806,6 +3000,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateByteMatchSetResponse AWS API Documentation
     #
     class UpdateByteMatchSetResponse < Struct.new(
       :change_token)
@@ -2848,6 +3044,8 @@ module Aws::WAFRegional
     #   * IPSetDescriptor: Contains `Type` and `Value`
     #   @return [Array<Types::IPSetUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSetRequest AWS API Documentation
+    #
     class UpdateIPSetRequest < Struct.new(
       :ip_set_id,
       :change_token,
@@ -2860,6 +3058,8 @@ module Aws::WAFRegional
     #   You can also use this value to query the status of the request. For
     #   more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateIPSetResponse AWS API Documentation
     #
     class UpdateIPSetResponse < Struct.new(
       :change_token)
@@ -2905,6 +3105,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Array<Types::RuleUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRuleRequest AWS API Documentation
+    #
     class UpdateRuleRequest < Struct.new(
       :rule_id,
       :change_token,
@@ -2917,6 +3119,8 @@ module Aws::WAFRegional
     #   You can also use this value to query the status of the request. For
     #   more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateRuleResponse AWS API Documentation
     #
     class UpdateRuleResponse < Struct.new(
       :change_token)
@@ -2968,6 +3172,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Array<Types::SizeConstraintSetUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSizeConstraintSetRequest AWS API Documentation
+    #
     class UpdateSizeConstraintSetRequest < Struct.new(
       :size_constraint_set_id,
       :change_token,
@@ -2981,6 +3187,8 @@ module Aws::WAFRegional
     #   query the status of the request. For more information, see
     #   GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSizeConstraintSetResponse AWS API Documentation
     #
     class UpdateSizeConstraintSetResponse < Struct.new(
       :change_token)
@@ -3033,6 +3241,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Array<Types::SqlInjectionMatchSetUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSqlInjectionMatchSetRequest AWS API Documentation
+    #
     class UpdateSqlInjectionMatchSetRequest < Struct.new(
       :sql_injection_match_set_id,
       :change_token,
@@ -3048,6 +3258,8 @@ module Aws::WAFRegional
     #   query the status of the request. For more information, see
     #   GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateSqlInjectionMatchSetResponse AWS API Documentation
     #
     class UpdateSqlInjectionMatchSetResponse < Struct.new(
       :change_token)
@@ -3106,6 +3318,8 @@ module Aws::WAFRegional
     #   in any of the rules in a web ACL.
     #   @return [Types::WafAction]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACLRequest AWS API Documentation
+    #
     class UpdateWebACLRequest < Struct.new(
       :web_acl_id,
       :change_token,
@@ -3119,6 +3333,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateWebACLResponse AWS API Documentation
     #
     class UpdateWebACLResponse < Struct.new(
       :change_token)
@@ -3169,6 +3385,8 @@ module Aws::WAFRegional
     #   * FieldToMatch: Contains `Data` and `Type`
     #   @return [Array<Types::XssMatchSetUpdate>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateXssMatchSetRequest AWS API Documentation
+    #
     class UpdateXssMatchSetRequest < Struct.new(
       :xss_match_set_id,
       :change_token,
@@ -3183,6 +3401,8 @@ module Aws::WAFRegional
     #   request. You can also use this value to query the status of the
     #   request. For more information, see GetChangeTokenStatus.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/UpdateXssMatchSetResponse AWS API Documentation
     #
     class UpdateXssMatchSetResponse < Struct.new(
       :change_token)
@@ -3217,6 +3437,8 @@ module Aws::WAFRegional
     #     ACL. You can't specify `COUNT` for the default action for a
     #     `WebACL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WafAction AWS API Documentation
     #
     class WafAction < Struct.new(
       :type)
@@ -3265,6 +3487,8 @@ module Aws::WAFRegional
     #   priority of the `Rule`, and the ID of the `Rule`.
     #   @return [Array<Types::ActivatedRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACL AWS API Documentation
+    #
     class WebACL < Struct.new(
       :web_acl_id,
       :name,
@@ -3289,6 +3513,8 @@ module Aws::WAFRegional
     #   A friendly name or description of the WebACL. You can't change the
     #   name of a `WebACL` after you create it.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACLSummary AWS API Documentation
     #
     class WebACLSummary < Struct.new(
       :web_acl_id,
@@ -3325,6 +3551,8 @@ module Aws::WAFRegional
     #   web request matches the `Rule` (`ALLOW`, `BLOCK`, or `COUNT`).
     #   @return [Types::ActivatedRule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/WebACLUpdate AWS API Documentation
+    #
     class WebACLUpdate < Struct.new(
       :action,
       :activated_rule)
@@ -3359,6 +3587,8 @@ module Aws::WAFRegional
     #   cross-site scripting attacks.
     #   @return [Array<Types::XssMatchTuple>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchSet AWS API Documentation
+    #
     class XssMatchSet < Struct.new(
       :xss_match_set_id,
       :name,
@@ -3382,6 +3612,8 @@ module Aws::WAFRegional
     # @!attribute [rw] name
     #   The name of the `XssMatchSet`, if any, specified by `Id`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchSetSummary AWS API Documentation
     #
     class XssMatchSetSummary < Struct.new(
       :xss_match_set_id,
@@ -3417,6 +3649,8 @@ module Aws::WAFRegional
     #   for cross-site scripting attacks and, if you want AWS WAF to inspect
     #   a header, the name of the header.
     #   @return [Types::XssMatchTuple]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchSetUpdate AWS API Documentation
     #
     class XssMatchSetUpdate < Struct.new(
       :action,
@@ -3519,6 +3753,8 @@ module Aws::WAFRegional
     #   Specify `NONE` if you don't want to perform any text
     #   transformations.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/XssMatchTuple AWS API Documentation
     #
     class XssMatchTuple < Struct.new(
       :field_to_match,

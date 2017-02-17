@@ -168,6 +168,8 @@ module Aws::IAM
     #     client_id: "clientIDType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProvider AWS API Documentation
+    #
     # @overload add_client_id_to_open_id_connect_provider(params = {})
     # @param [Hash] params ({})
     def add_client_id_to_open_id_connect_provider(params = {}, options = {})
@@ -224,6 +226,8 @@ module Aws::IAM
     #     role_name: "roleNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfile AWS API Documentation
+    #
     # @overload add_role_to_instance_profile(params = {})
     # @param [Hash] params ({})
     def add_role_to_instance_profile(params = {}, options = {})
@@ -265,6 +269,8 @@ module Aws::IAM
     #     group_name: "groupNameType", # required
     #     user_name: "existingUserNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroup AWS API Documentation
     #
     # @overload add_user_to_group(params = {})
     # @param [Hash] params ({})
@@ -316,6 +322,8 @@ module Aws::IAM
     #     group_name: "groupNameType", # required
     #     policy_arn: "arnType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicy AWS API Documentation
     #
     # @overload attach_group_policy(params = {})
     # @param [Hash] params ({})
@@ -372,6 +380,8 @@ module Aws::IAM
     #     policy_arn: "arnType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicy AWS API Documentation
+    #
     # @overload attach_role_policy(params = {})
     # @param [Hash] params ({})
     def attach_role_policy(params = {}, options = {})
@@ -423,6 +433,8 @@ module Aws::IAM
     #     policy_arn: "arnType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicy AWS API Documentation
+    #
     # @overload attach_user_policy(params = {})
     # @param [Hash] params ({})
     def attach_user_policy(params = {}, options = {})
@@ -469,6 +481,8 @@ module Aws::IAM
     #     old_password: "passwordType", # required
     #     new_password: "passwordType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePassword AWS API Documentation
     #
     # @overload change_password(params = {})
     # @param [Hash] params ({})
@@ -530,6 +544,8 @@ module Aws::IAM
     #   resp.access_key.secret_access_key #=> String
     #   resp.access_key.create_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKey AWS API Documentation
+    #
     # @overload create_access_key(params = {})
     # @param [Hash] params ({})
     def create_access_key(params = {}, options = {})
@@ -564,6 +580,8 @@ module Aws::IAM
     #   resp = client.create_account_alias({
     #     account_alias: "accountAliasType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAlias AWS API Documentation
     #
     # @overload create_account_alias(params = {})
     # @param [Hash] params ({})
@@ -633,6 +651,8 @@ module Aws::IAM
     #   resp.group.group_id #=> String
     #   resp.group.arn #=> String
     #   resp.group.create_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroup AWS API Documentation
     #
     # @overload create_group(params = {})
     # @param [Hash] params ({})
@@ -709,6 +729,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].create_date #=> Time
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile AWS API Documentation
+    #
     # @overload create_instance_profile(params = {})
     # @param [Hash] params ({})
     def create_instance_profile(params = {}, options = {})
@@ -775,6 +797,8 @@ module Aws::IAM
     #   resp.login_profile.user_name #=> String
     #   resp.login_profile.create_date #=> Time
     #   resp.login_profile.password_reset_required #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfile AWS API Documentation
     #
     # @overload create_login_profile(params = {})
     # @param [Hash] params ({})
@@ -877,6 +901,8 @@ module Aws::IAM
     # @example Response structure
     #
     #   resp.open_id_connect_provider_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProvider AWS API Documentation
     #
     # @overload create_open_id_connect_provider(params = {})
     # @param [Hash] params ({})
@@ -985,6 +1011,8 @@ module Aws::IAM
     #   resp.policy.create_date #=> Time
     #   resp.policy.update_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicy AWS API Documentation
+    #
     # @overload create_policy(params = {})
     # @param [Hash] params ({})
     def create_policy(params = {}, options = {})
@@ -1069,6 +1097,8 @@ module Aws::IAM
     #   resp.policy_version.version_id #=> String
     #   resp.policy_version.is_default_version #=> Boolean
     #   resp.policy_version.create_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersion AWS API Documentation
     #
     # @overload create_policy_version(params = {})
     # @param [Hash] params ({})
@@ -1156,6 +1186,8 @@ module Aws::IAM
     #   resp.role.create_date #=> Time
     #   resp.role.assume_role_policy_document #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole AWS API Documentation
+    #
     # @overload create_role(params = {})
     # @param [Hash] params ({})
     def create_role(params = {}, options = {})
@@ -1235,6 +1267,8 @@ module Aws::IAM
     #
     #   resp.saml_provider_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProvider AWS API Documentation
+    #
     # @overload create_saml_provider(params = {})
     # @param [Hash] params ({})
     def create_saml_provider(params = {}, options = {})
@@ -1304,6 +1338,8 @@ module Aws::IAM
     #   resp.service_specific_credential.user_name #=> String
     #   resp.service_specific_credential.status #=> String, one of "Active", "Inactive"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredential AWS API Documentation
+    #
     # @overload create_service_specific_credential(params = {})
     # @param [Hash] params ({})
     def create_service_specific_credential(params = {}, options = {})
@@ -1371,6 +1407,8 @@ module Aws::IAM
     #   resp.user.arn #=> String
     #   resp.user.create_date #=> Time
     #   resp.user.password_last_used #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUser AWS API Documentation
     #
     # @overload create_user(params = {})
     # @param [Hash] params ({})
@@ -1455,6 +1493,8 @@ module Aws::IAM
     #   resp.virtual_mfa_device.user.password_last_used #=> Time
     #   resp.virtual_mfa_device.enable_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADevice AWS API Documentation
+    #
     # @overload create_virtual_mfa_device(params = {})
     # @param [Hash] params ({})
     def create_virtual_mfa_device(params = {}, options = {})
@@ -1507,6 +1547,8 @@ module Aws::IAM
     #     serial_number: "serialNumberType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADevice AWS API Documentation
+    #
     # @overload deactivate_mfa_device(params = {})
     # @param [Hash] params ({})
     def deactivate_mfa_device(params = {}, options = {})
@@ -1555,6 +1597,8 @@ module Aws::IAM
     #     access_key_id: "accessKeyIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKey AWS API Documentation
+    #
     # @overload delete_access_key(params = {})
     # @param [Hash] params ({})
     def delete_access_key(params = {}, options = {})
@@ -1590,6 +1634,8 @@ module Aws::IAM
     #     account_alias: "accountAliasType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAlias AWS API Documentation
+    #
     # @overload delete_account_alias(params = {})
     # @param [Hash] params ({})
     def delete_account_alias(params = {}, options = {})
@@ -1601,6 +1647,8 @@ module Aws::IAM
     # parameters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountPasswordPolicy AWS API Documentation
     #
     # @overload delete_account_password_policy(params = {})
     # @param [Hash] params ({})
@@ -1631,6 +1679,8 @@ module Aws::IAM
     #   resp = client.delete_group({
     #     group_name: "groupNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroup AWS API Documentation
     #
     # @overload delete_group(params = {})
     # @param [Hash] params ({})
@@ -1685,6 +1735,8 @@ module Aws::IAM
     #     policy_name: "policyNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicy AWS API Documentation
+    #
     # @overload delete_group_policy(params = {})
     # @param [Hash] params ({})
     def delete_group_policy(params = {}, options = {})
@@ -1727,6 +1779,8 @@ module Aws::IAM
     #     instance_profile_name: "instanceProfileNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfile AWS API Documentation
+    #
     # @overload delete_instance_profile(params = {})
     # @param [Hash] params ({})
     def delete_instance_profile(params = {}, options = {})
@@ -1764,6 +1818,8 @@ module Aws::IAM
     #     user_name: "userNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfile AWS API Documentation
+    #
     # @overload delete_login_profile(params = {})
     # @param [Hash] params ({})
     def delete_login_profile(params = {}, options = {})
@@ -1793,6 +1849,8 @@ module Aws::IAM
     #   resp = client.delete_open_id_connect_provider({
     #     open_id_connect_provider_arn: "arnType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProvider AWS API Documentation
     #
     # @overload delete_open_id_connect_provider(params = {})
     # @param [Hash] params ({})
@@ -1846,6 +1904,8 @@ module Aws::IAM
     #   resp = client.delete_policy({
     #     policy_arn: "arnType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicy AWS API Documentation
     #
     # @overload delete_policy(params = {})
     # @param [Hash] params ({})
@@ -1904,6 +1964,8 @@ module Aws::IAM
     #     version_id: "policyVersionIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersion AWS API Documentation
+    #
     # @overload delete_policy_version(params = {})
     # @param [Hash] params ({})
     def delete_policy_version(params = {}, options = {})
@@ -1943,6 +2005,8 @@ module Aws::IAM
     #   resp = client.delete_role({
     #     role_name: "roleNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRole AWS API Documentation
     #
     # @overload delete_role(params = {})
     # @param [Hash] params ({})
@@ -1997,6 +2061,8 @@ module Aws::IAM
     #     policy_name: "policyNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicy AWS API Documentation
+    #
     # @overload delete_role_policy(params = {})
     # @param [Hash] params ({})
     def delete_role_policy(params = {}, options = {})
@@ -2029,6 +2095,8 @@ module Aws::IAM
     #   resp = client.delete_saml_provider({
     #     saml_provider_arn: "arnType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProvider AWS API Documentation
     #
     # @overload delete_saml_provider(params = {})
     # @param [Hash] params ({})
@@ -2081,6 +2149,8 @@ module Aws::IAM
     #     ssh_public_key_id: "publicKeyIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKey AWS API Documentation
+    #
     # @overload delete_ssh_public_key(params = {})
     # @param [Hash] params ({})
     def delete_ssh_public_key(params = {}, options = {})
@@ -2130,6 +2200,8 @@ module Aws::IAM
     #     server_certificate_name: "serverCertificateNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificate AWS API Documentation
+    #
     # @overload delete_server_certificate(params = {})
     # @param [Hash] params ({})
     def delete_server_certificate(params = {}, options = {})
@@ -2173,6 +2245,8 @@ module Aws::IAM
     #     user_name: "userNameType",
     #     service_specific_credential_id: "serviceSpecificCredentialId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredential AWS API Documentation
     #
     # @overload delete_service_specific_credential(params = {})
     # @param [Hash] params ({})
@@ -2221,6 +2295,8 @@ module Aws::IAM
     #     certificate_id: "certificateIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificate AWS API Documentation
+    #
     # @overload delete_signing_certificate(params = {})
     # @param [Hash] params ({})
     def delete_signing_certificate(params = {}, options = {})
@@ -2250,6 +2326,8 @@ module Aws::IAM
     #   resp = client.delete_user({
     #     user_name: "existingUserNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUser AWS API Documentation
     #
     # @overload delete_user(params = {})
     # @param [Hash] params ({})
@@ -2304,6 +2382,8 @@ module Aws::IAM
     #     policy_name: "policyNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicy AWS API Documentation
+    #
     # @overload delete_user_policy(params = {})
     # @param [Hash] params ({})
     def delete_user_policy(params = {}, options = {})
@@ -2339,6 +2419,8 @@ module Aws::IAM
     #   resp = client.delete_virtual_mfa_device({
     #     serial_number: "serialNumberType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADevice AWS API Documentation
     #
     # @overload delete_virtual_mfa_device(params = {})
     # @param [Hash] params ({})
@@ -2390,6 +2472,8 @@ module Aws::IAM
     #     policy_arn: "arnType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicy AWS API Documentation
+    #
     # @overload detach_group_policy(params = {})
     # @param [Hash] params ({})
     def detach_group_policy(params = {}, options = {})
@@ -2440,6 +2524,8 @@ module Aws::IAM
     #     policy_arn: "arnType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicy AWS API Documentation
+    #
     # @overload detach_role_policy(params = {})
     # @param [Hash] params ({})
     def detach_role_policy(params = {}, options = {})
@@ -2489,6 +2575,8 @@ module Aws::IAM
     #     user_name: "userNameType", # required
     #     policy_arn: "arnType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicy AWS API Documentation
     #
     # @overload detach_user_policy(params = {})
     # @param [Hash] params ({})
@@ -2547,6 +2635,8 @@ module Aws::IAM
     #     authentication_code_2: "authenticationCodeType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADevice AWS API Documentation
+    #
     # @overload enable_mfa_device(params = {})
     # @param [Hash] params ({})
     def enable_mfa_device(params = {}, options = {})
@@ -2571,6 +2661,8 @@ module Aws::IAM
     #
     #   resp.state #=> String, one of "STARTED", "INPROGRESS", "COMPLETE"
     #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReport AWS API Documentation
     #
     # @overload generate_credential_report(params = {})
     # @param [Hash] params ({})
@@ -2612,6 +2704,8 @@ module Aws::IAM
     #   resp.access_key_last_used.last_used_date #=> Time
     #   resp.access_key_last_used.service_name #=> String
     #   resp.access_key_last_used.region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsed AWS API Documentation
     #
     # @overload get_access_key_last_used(params = {})
     # @param [Hash] params ({})
@@ -2746,6 +2840,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetails AWS API Documentation
+    #
     # @overload get_account_authorization_details(params = {})
     # @param [Hash] params ({})
     def get_account_authorization_details(params = {}, options = {})
@@ -2778,6 +2874,8 @@ module Aws::IAM
     #   resp.password_policy.password_reuse_prevention #=> Integer
     #   resp.password_policy.hard_expiry #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicy AWS API Documentation
+    #
     # @overload get_account_password_policy(params = {})
     # @param [Hash] params ({})
     def get_account_password_policy(params = {}, options = {})
@@ -2803,6 +2901,8 @@ module Aws::IAM
     #
     #   resp.summary_map #=> Hash
     #   resp.summary_map["summaryKeyType"] #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummary AWS API Documentation
     #
     # @overload get_account_summary(params = {})
     # @param [Hash] params ({})
@@ -2855,6 +2955,8 @@ module Aws::IAM
     #
     #   resp.context_key_names #=> Array
     #   resp.context_key_names[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicy AWS API Documentation
     #
     # @overload get_context_keys_for_custom_policy(params = {})
     # @param [Hash] params ({})
@@ -2933,6 +3035,8 @@ module Aws::IAM
     #   resp.context_key_names #=> Array
     #   resp.context_key_names[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicy AWS API Documentation
+    #
     # @overload get_context_keys_for_principal_policy(params = {})
     # @param [Hash] params ({})
     def get_context_keys_for_principal_policy(params = {}, options = {})
@@ -2959,6 +3063,8 @@ module Aws::IAM
     #   resp.content #=> String
     #   resp.report_format #=> String, one of "text/csv"
     #   resp.generated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReport AWS API Documentation
     #
     # @overload get_credential_report(params = {})
     # @param [Hash] params ({})
@@ -3031,6 +3137,8 @@ module Aws::IAM
     #   resp.users[0].password_last_used #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroup AWS API Documentation
     #
     # @overload get_group(params = {})
     # @param [Hash] params ({})
@@ -3106,6 +3214,8 @@ module Aws::IAM
     #   resp.policy_name #=> String
     #   resp.policy_document #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicy AWS API Documentation
+    #
     # @overload get_group_policy(params = {})
     # @param [Hash] params ({})
     def get_group_policy(params = {}, options = {})
@@ -3159,6 +3269,8 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].create_date #=> Time
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile AWS API Documentation
+    #
     # @overload get_instance_profile(params = {})
     # @param [Hash] params ({})
     def get_instance_profile(params = {}, options = {})
@@ -3197,6 +3309,8 @@ module Aws::IAM
     #   resp.login_profile.user_name #=> String
     #   resp.login_profile.create_date #=> Time
     #   resp.login_profile.password_reset_required #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfile AWS API Documentation
     #
     # @overload get_login_profile(params = {})
     # @param [Hash] params ({})
@@ -3241,6 +3355,8 @@ module Aws::IAM
     #   resp.thumbprint_list #=> Array
     #   resp.thumbprint_list[0] #=> String
     #   resp.create_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProvider AWS API Documentation
     #
     # @overload get_open_id_connect_provider(params = {})
     # @param [Hash] params ({})
@@ -3302,6 +3418,8 @@ module Aws::IAM
     #   resp.policy.description #=> String
     #   resp.policy.create_date #=> Time
     #   resp.policy.update_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicy AWS API Documentation
     #
     # @overload get_policy(params = {})
     # @param [Hash] params ({})
@@ -3380,6 +3498,8 @@ module Aws::IAM
     #   resp.policy_version.is_default_version #=> Boolean
     #   resp.policy_version.create_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersion AWS API Documentation
+    #
     # @overload get_policy_version(params = {})
     # @param [Hash] params ({})
     def get_policy_version(params = {}, options = {})
@@ -3435,6 +3555,8 @@ module Aws::IAM
     #   resp.role.arn #=> String
     #   resp.role.create_date #=> Time
     #   resp.role.assume_role_policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole AWS API Documentation
     #
     # @overload get_role(params = {})
     # @param [Hash] params ({})
@@ -3514,6 +3636,8 @@ module Aws::IAM
     #   resp.policy_name #=> String
     #   resp.policy_document #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicy AWS API Documentation
+    #
     # @overload get_role_policy(params = {})
     # @param [Hash] params ({})
     def get_role_policy(params = {}, options = {})
@@ -3560,6 +3684,8 @@ module Aws::IAM
     #   resp.saml_metadata_document #=> String
     #   resp.create_date #=> Time
     #   resp.valid_until #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProvider AWS API Documentation
     #
     # @overload get_saml_provider(params = {})
     # @param [Hash] params ({})
@@ -3630,6 +3756,8 @@ module Aws::IAM
     #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive"
     #   resp.ssh_public_key.upload_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKey AWS API Documentation
+    #
     # @overload get_ssh_public_key(params = {})
     # @param [Hash] params ({})
     def get_ssh_public_key(params = {}, options = {})
@@ -3683,6 +3811,8 @@ module Aws::IAM
     #   resp.server_certificate.certificate_body #=> String
     #   resp.server_certificate.certificate_chain #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificate AWS API Documentation
+    #
     # @overload get_server_certificate(params = {})
     # @param [Hash] params ({})
     def get_server_certificate(params = {}, options = {})
@@ -3728,6 +3858,8 @@ module Aws::IAM
     #   resp.user.arn #=> String
     #   resp.user.create_date #=> Time
     #   resp.user.password_last_used #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUser AWS API Documentation
     #
     # @overload get_user(params = {})
     # @param [Hash] params ({})
@@ -3802,6 +3934,8 @@ module Aws::IAM
     #   resp.user_name #=> String
     #   resp.policy_name #=> String
     #   resp.policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicy AWS API Documentation
     #
     # @overload get_user_policy(params = {})
     # @param [Hash] params ({})
@@ -3882,6 +4016,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeys AWS API Documentation
+    #
     # @overload list_access_keys(params = {})
     # @param [Hash] params ({})
     def list_access_keys(params = {}, options = {})
@@ -3934,6 +4070,8 @@ module Aws::IAM
     #   resp.account_aliases[0] #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliases AWS API Documentation
     #
     # @overload list_account_aliases(params = {})
     # @param [Hash] params ({})
@@ -4030,6 +4168,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPolicies AWS API Documentation
+    #
     # @overload list_attached_group_policies(params = {})
     # @param [Hash] params ({})
     def list_attached_group_policies(params = {}, options = {})
@@ -4125,6 +4265,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePolicies AWS API Documentation
+    #
     # @overload list_attached_role_policies(params = {})
     # @param [Hash] params ({})
     def list_attached_role_policies(params = {}, options = {})
@@ -4219,6 +4361,8 @@ module Aws::IAM
     #   resp.attached_policies[0].policy_arn #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPolicies AWS API Documentation
     #
     # @overload list_attached_user_policies(params = {})
     # @param [Hash] params ({})
@@ -4324,6 +4468,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicy AWS API Documentation
+    #
     # @overload list_entities_for_policy(params = {})
     # @param [Hash] params ({})
     def list_entities_for_policy(params = {}, options = {})
@@ -4398,6 +4544,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPolicies AWS API Documentation
+    #
     # @overload list_group_policies(params = {})
     # @param [Hash] params ({})
     def list_group_policies(params = {}, options = {})
@@ -4470,6 +4618,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroups AWS API Documentation
+    #
     # @overload list_groups(params = {})
     # @param [Hash] params ({})
     def list_groups(params = {}, options = {})
@@ -4536,6 +4686,8 @@ module Aws::IAM
     #   resp.groups[0].create_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUser AWS API Documentation
     #
     # @overload list_groups_for_user(params = {})
     # @param [Hash] params ({})
@@ -4622,6 +4774,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfiles AWS API Documentation
+    #
     # @overload list_instance_profiles(params = {})
     # @param [Hash] params ({})
     def list_instance_profiles(params = {}, options = {})
@@ -4703,6 +4857,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRole AWS API Documentation
+    #
     # @overload list_instance_profiles_for_role(params = {})
     # @param [Hash] params ({})
     def list_instance_profiles_for_role(params = {}, options = {})
@@ -4772,6 +4928,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevices AWS API Documentation
+    #
     # @overload list_mfa_devices(params = {})
     # @param [Hash] params ({})
     def list_mfa_devices(params = {}, options = {})
@@ -4790,6 +4948,8 @@ module Aws::IAM
     #
     #   resp.open_id_connect_provider_list #=> Array
     #   resp.open_id_connect_provider_list[0].arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProviders AWS API Documentation
     #
     # @overload list_open_id_connect_providers(params = {})
     # @param [Hash] params ({})
@@ -4900,6 +5060,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicies AWS API Documentation
+    #
     # @overload list_policies(params = {})
     # @param [Hash] params ({})
     def list_policies(params = {}, options = {})
@@ -4970,6 +5132,8 @@ module Aws::IAM
     #   resp.versions[0].create_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersions AWS API Documentation
     #
     # @overload list_policy_versions(params = {})
     # @param [Hash] params ({})
@@ -5044,6 +5208,8 @@ module Aws::IAM
     #   resp.policy_names[0] #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePolicies AWS API Documentation
     #
     # @overload list_role_policies(params = {})
     # @param [Hash] params ({})
@@ -5124,6 +5290,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRoles AWS API Documentation
+    #
     # @overload list_roles(params = {})
     # @param [Hash] params ({})
     def list_roles(params = {}, options = {})
@@ -5152,6 +5320,8 @@ module Aws::IAM
     #   resp.saml_provider_list[0].arn #=> String
     #   resp.saml_provider_list[0].valid_until #=> Time
     #   resp.saml_provider_list[0].create_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProviders AWS API Documentation
     #
     # @overload list_saml_providers(params = {})
     # @param [Hash] params ({})
@@ -5232,6 +5402,8 @@ module Aws::IAM
     #   resp.ssh_public_keys[0].upload_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeys AWS API Documentation
     #
     # @overload list_ssh_public_keys(params = {})
     # @param [Hash] params ({})
@@ -5316,6 +5488,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificates AWS API Documentation
+    #
     # @overload list_server_certificates(params = {})
     # @param [Hash] params ({})
     def list_server_certificates(params = {}, options = {})
@@ -5374,6 +5548,8 @@ module Aws::IAM
     #   resp.service_specific_credentials[0].create_date #=> Time
     #   resp.service_specific_credentials[0].service_specific_credential_id #=> String
     #   resp.service_specific_credentials[0].service_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentials AWS API Documentation
     #
     # @overload list_service_specific_credentials(params = {})
     # @param [Hash] params ({})
@@ -5452,6 +5628,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificates AWS API Documentation
+    #
     # @overload list_signing_certificates(params = {})
     # @param [Hash] params ({})
     def list_signing_certificates(params = {}, options = {})
@@ -5525,6 +5703,8 @@ module Aws::IAM
     #   resp.policy_names[0] #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPolicies AWS API Documentation
     #
     # @overload list_user_policies(params = {})
     # @param [Hash] params ({})
@@ -5601,6 +5781,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsers AWS API Documentation
+    #
     # @overload list_users(params = {})
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
@@ -5668,6 +5850,8 @@ module Aws::IAM
     #   resp.virtual_mfa_devices[0].enable_date #=> Time
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevices AWS API Documentation
     #
     # @overload list_virtual_mfa_devices(params = {})
     # @param [Hash] params ({})
@@ -5749,6 +5933,8 @@ module Aws::IAM
     #     policy_name: "policyNameType", # required
     #     policy_document: "policyDocumentType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicy AWS API Documentation
     #
     # @overload put_group_policy(params = {})
     # @param [Hash] params ({})
@@ -5839,6 +6025,8 @@ module Aws::IAM
     #     policy_document: "policyDocumentType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicy AWS API Documentation
+    #
     # @overload put_role_policy(params = {})
     # @param [Hash] params ({})
     def put_role_policy(params = {}, options = {})
@@ -5920,6 +6108,8 @@ module Aws::IAM
     #     policy_document: "policyDocumentType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicy AWS API Documentation
+    #
     # @overload put_user_policy(params = {})
     # @param [Hash] params ({})
     def put_user_policy(params = {}, options = {})
@@ -5959,6 +6149,8 @@ module Aws::IAM
     #     open_id_connect_provider_arn: "arnType", # required
     #     client_id: "clientIDType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProvider AWS API Documentation
     #
     # @overload remove_client_id_from_open_id_connect_provider(params = {})
     # @param [Hash] params ({})
@@ -6017,6 +6209,8 @@ module Aws::IAM
     #     role_name: "roleNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfile AWS API Documentation
+    #
     # @overload remove_role_from_instance_profile(params = {})
     # @param [Hash] params ({})
     def remove_role_from_instance_profile(params = {}, options = {})
@@ -6058,6 +6252,8 @@ module Aws::IAM
     #     group_name: "groupNameType", # required
     #     user_name: "existingUserNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroup AWS API Documentation
     #
     # @overload remove_user_from_group(params = {})
     # @param [Hash] params ({})
@@ -6116,6 +6312,8 @@ module Aws::IAM
     #   resp.service_specific_credential.service_specific_credential_id #=> String
     #   resp.service_specific_credential.user_name #=> String
     #   resp.service_specific_credential.status #=> String, one of "Active", "Inactive"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredential AWS API Documentation
     #
     # @overload reset_service_specific_credential(params = {})
     # @param [Hash] params ({})
@@ -6180,6 +6378,8 @@ module Aws::IAM
     #     authentication_code_2: "authenticationCodeType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADevice AWS API Documentation
+    #
     # @overload resync_mfa_device(params = {})
     # @param [Hash] params ({})
     def resync_mfa_device(params = {}, options = {})
@@ -6230,6 +6430,8 @@ module Aws::IAM
     #     policy_arn: "arnType", # required
     #     version_id: "policyVersionIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersion AWS API Documentation
     #
     # @overload set_default_policy_version(params = {})
     # @param [Hash] params ({})
@@ -6480,6 +6682,8 @@ module Aws::IAM
     #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicy AWS API Documentation
     #
     # @overload simulate_custom_policy(params = {})
     # @param [Hash] params ({})
@@ -6764,6 +6968,8 @@ module Aws::IAM
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicy AWS API Documentation
+    #
     # @overload simulate_principal_policy(params = {})
     # @param [Hash] params ({})
     def simulate_principal_policy(params = {}, options = {})
@@ -6825,6 +7031,8 @@ module Aws::IAM
     #     access_key_id: "accessKeyIdType", # required
     #     status: "Active", # required, accepts Active, Inactive
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKey AWS API Documentation
     #
     # @overload update_access_key(params = {})
     # @param [Hash] params ({})
@@ -6926,6 +7134,8 @@ module Aws::IAM
     #     hard_expiry: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicy AWS API Documentation
+    #
     # @overload update_account_password_policy(params = {})
     # @param [Hash] params ({})
     def update_account_password_policy(params = {}, options = {})
@@ -6977,6 +7187,8 @@ module Aws::IAM
     #     role_name: "roleNameType", # required
     #     policy_document: "policyDocumentType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicy AWS API Documentation
     #
     # @overload update_assume_role_policy(params = {})
     # @param [Hash] params ({})
@@ -7056,6 +7268,8 @@ module Aws::IAM
     #     new_group_name: "groupNameType",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroup AWS API Documentation
+    #
     # @overload update_group(params = {})
     # @param [Hash] params ({})
     def update_group(params = {}, options = {})
@@ -7116,6 +7330,8 @@ module Aws::IAM
     #     password_reset_required: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfile AWS API Documentation
+    #
     # @overload update_login_profile(params = {})
     # @param [Hash] params ({})
     def update_login_profile(params = {}, options = {})
@@ -7170,6 +7386,8 @@ module Aws::IAM
     #     thumbprint_list: ["thumbprintType"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprint AWS API Documentation
+    #
     # @overload update_open_id_connect_provider_thumbprint(params = {})
     # @param [Hash] params ({})
     def update_open_id_connect_provider_thumbprint(params = {}, options = {})
@@ -7220,6 +7438,8 @@ module Aws::IAM
     # @example Response structure
     #
     #   resp.saml_provider_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProvider AWS API Documentation
     #
     # @overload update_saml_provider(params = {})
     # @param [Hash] params ({})
@@ -7280,6 +7500,8 @@ module Aws::IAM
     #     ssh_public_key_id: "publicKeyIdType", # required
     #     status: "Active", # required, accepts Active, Inactive
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKey AWS API Documentation
     #
     # @overload update_ssh_public_key(params = {})
     # @param [Hash] params ({})
@@ -7367,6 +7589,8 @@ module Aws::IAM
     #     new_server_certificate_name: "serverCertificateNameType",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificate AWS API Documentation
+    #
     # @overload update_server_certificate(params = {})
     # @param [Hash] params ({})
     def update_server_certificate(params = {}, options = {})
@@ -7417,6 +7641,8 @@ module Aws::IAM
     #     service_specific_credential_id: "serviceSpecificCredentialId", # required
     #     status: "Active", # required, accepts Active, Inactive
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredential AWS API Documentation
     #
     # @overload update_service_specific_credential(params = {})
     # @param [Hash] params ({})
@@ -7473,6 +7699,8 @@ module Aws::IAM
     #     certificate_id: "certificateIdType", # required
     #     status: "Active", # required, accepts Active, Inactive
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificate AWS API Documentation
     #
     # @overload update_signing_certificate(params = {})
     # @param [Hash] params ({})
@@ -7552,6 +7780,8 @@ module Aws::IAM
     #     new_user_name: "userNameType",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUser AWS API Documentation
+    #
     # @overload update_user(params = {})
     # @param [Hash] params ({})
     def update_user(params = {}, options = {})
@@ -7619,6 +7849,8 @@ module Aws::IAM
     #   resp.ssh_public_key.ssh_public_key_body #=> String
     #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive"
     #   resp.ssh_public_key.upload_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKey AWS API Documentation
     #
     # @overload upload_ssh_public_key(params = {})
     # @param [Hash] params ({})
@@ -7763,6 +7995,8 @@ module Aws::IAM
     #   resp.server_certificate_metadata.upload_date #=> Time
     #   resp.server_certificate_metadata.expiration #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificate AWS API Documentation
+    #
     # @overload upload_server_certificate(params = {})
     # @param [Hash] params ({})
     def upload_server_certificate(params = {}, options = {})
@@ -7841,6 +8075,8 @@ module Aws::IAM
     #   resp.certificate.status #=> String, one of "Active", "Inactive"
     #   resp.certificate.upload_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificate AWS API Documentation
+    #
     # @overload upload_signing_certificate(params = {})
     # @param [Hash] params ({})
     def upload_signing_certificate(params = {}, options = {})
@@ -7861,7 +8097,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

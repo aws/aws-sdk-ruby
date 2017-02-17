@@ -236,6 +236,8 @@ module Aws::DirectConnect
     #   resp.partner_name #=> String
     #   resp.loa_issue_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
+    #
     # @overload allocate_connection_on_interconnect(params = {})
     # @param [Hash] params ({})
     def allocate_connection_on_interconnect(params = {}, options = {})
@@ -334,6 +336,8 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterface AWS API Documentation
     #
     # @overload allocate_private_virtual_interface(params = {})
     # @param [Hash] params ({})
@@ -444,6 +448,8 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterface AWS API Documentation
+    #
     # @overload allocate_public_virtual_interface(params = {})
     # @param [Hash] params ({})
     def allocate_public_virtual_interface(params = {}, options = {})
@@ -477,6 +483,8 @@ module Aws::DirectConnect
     # @example Response structure
     #
     #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnection AWS API Documentation
     #
     # @overload confirm_connection(params = {})
     # @param [Hash] params ({})
@@ -527,6 +535,8 @@ module Aws::DirectConnect
     #
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterface AWS API Documentation
+    #
     # @overload confirm_private_virtual_interface(params = {})
     # @param [Hash] params ({})
     def confirm_private_virtual_interface(params = {}, options = {})
@@ -561,6 +571,8 @@ module Aws::DirectConnect
     # @example Response structure
     #
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterface AWS API Documentation
     #
     # @overload confirm_public_virtual_interface(params = {})
     # @param [Hash] params ({})
@@ -642,6 +654,8 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeer AWS API Documentation
+    #
     # @overload create_bgp_peer(params = {})
     # @param [Hash] params ({})
     def create_bgp_peer(params = {}, options = {})
@@ -715,6 +729,8 @@ module Aws::DirectConnect
     #   resp.vlan #=> Integer
     #   resp.partner_name #=> String
     #   resp.loa_issue_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
     # @overload create_connection(params = {})
     # @param [Hash] params ({})
@@ -795,6 +811,8 @@ module Aws::DirectConnect
     #   resp.location #=> String
     #   resp.bandwidth #=> String
     #   resp.loa_issue_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
     # @overload create_interconnect(params = {})
     # @param [Hash] params ({})
@@ -883,6 +901,8 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].customer_address #=> String
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterface AWS API Documentation
     #
     # @overload create_private_virtual_interface(params = {})
     # @param [Hash] params ({})
@@ -981,6 +1001,8 @@ module Aws::DirectConnect
     #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterface AWS API Documentation
+    #
     # @overload create_public_virtual_interface(params = {})
     # @param [Hash] params ({})
     def create_public_virtual_interface(params = {}, options = {})
@@ -1051,6 +1073,8 @@ module Aws::DirectConnect
     #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeer AWS API Documentation
+    #
     # @overload delete_bgp_peer(params = {})
     # @param [Hash] params ({})
     def delete_bgp_peer(params = {}, options = {})
@@ -1104,6 +1128,8 @@ module Aws::DirectConnect
     #   resp.partner_name #=> String
     #   resp.loa_issue_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
+    #
     # @overload delete_connection(params = {})
     # @param [Hash] params ({})
     def delete_connection(params = {}, options = {})
@@ -1136,6 +1162,8 @@ module Aws::DirectConnect
     #
     #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnect AWS API Documentation
+    #
     # @overload delete_interconnect(params = {})
     # @param [Hash] params ({})
     def delete_interconnect(params = {}, options = {})
@@ -1165,6 +1193,8 @@ module Aws::DirectConnect
     # @example Response structure
     #
     #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterface AWS API Documentation
     #
     # @overload delete_virtual_interface(params = {})
     # @param [Hash] params ({})
@@ -1223,6 +1253,8 @@ module Aws::DirectConnect
     #   resp.loa.loa_content #=> String
     #   resp.loa.loa_content_type #=> String, one of "application/pdf"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoa AWS API Documentation
+    #
     # @overload describe_connection_loa(params = {})
     # @param [Hash] params ({})
     def describe_connection_loa(params = {}, options = {})
@@ -1265,6 +1297,8 @@ module Aws::DirectConnect
     #   resp.connections[0].vlan #=> Integer
     #   resp.connections[0].partner_name #=> String
     #   resp.connections[0].loa_issue_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
     # @overload describe_connections(params = {})
     # @param [Hash] params ({})
@@ -1310,6 +1344,8 @@ module Aws::DirectConnect
     #   resp.connections[0].vlan #=> Integer
     #   resp.connections[0].partner_name #=> String
     #   resp.connections[0].loa_issue_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
     # @overload describe_connections_on_interconnect(params = {})
     # @param [Hash] params ({})
@@ -1366,6 +1402,8 @@ module Aws::DirectConnect
     #   resp.loa.loa_content #=> String
     #   resp.loa.loa_content_type #=> String, one of "application/pdf"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoa AWS API Documentation
+    #
     # @overload describe_interconnect_loa(params = {})
     # @param [Hash] params ({})
     def describe_interconnect_loa(params = {}, options = {})
@@ -1404,6 +1442,8 @@ module Aws::DirectConnect
     #   resp.interconnects[0].bandwidth #=> String
     #   resp.interconnects[0].loa_issue_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
+    #
     # @overload describe_interconnects(params = {})
     # @param [Hash] params ({})
     def describe_interconnects(params = {}, options = {})
@@ -1424,6 +1464,8 @@ module Aws::DirectConnect
     #   resp.locations #=> Array
     #   resp.locations[0].location_code #=> String
     #   resp.locations[0].location_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLocations AWS API Documentation
     #
     # @overload describe_locations(params = {})
     # @param [Hash] params ({})
@@ -1456,6 +1498,8 @@ module Aws::DirectConnect
     #   resp.resource_tags[0].tags[0].key #=> String
     #   resp.resource_tags[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTags AWS API Documentation
+    #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
@@ -1483,6 +1527,8 @@ module Aws::DirectConnect
     #   resp.virtual_gateways #=> Array
     #   resp.virtual_gateways[0].virtual_gateway_id #=> String
     #   resp.virtual_gateways[0].virtual_gateway_state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualGateways AWS API Documentation
     #
     # @overload describe_virtual_gateways(params = {})
     # @param [Hash] params ({})
@@ -1559,6 +1605,8 @@ module Aws::DirectConnect
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
     #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfaces AWS API Documentation
+    #
     # @overload describe_virtual_interfaces(params = {})
     # @param [Hash] params ({})
     def describe_virtual_interfaces(params = {}, options = {})
@@ -1596,6 +1644,8 @@ module Aws::DirectConnect
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResource AWS API Documentation
+    #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
@@ -1619,6 +1669,8 @@ module Aws::DirectConnect
     #     resource_arn: "ResourceArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})

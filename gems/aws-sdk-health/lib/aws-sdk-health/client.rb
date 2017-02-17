@@ -225,6 +225,8 @@ module Aws::Health
     #   resp.entities[0].tags["tagKey"] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeAffectedEntities AWS API Documentation
+    #
     # @overload describe_affected_entities(params = {})
     # @param [Hash] params ({})
     def describe_affected_entities(params = {}, options = {})
@@ -256,6 +258,8 @@ module Aws::Health
     #   resp.entity_aggregates #=> Array
     #   resp.entity_aggregates[0].event_arn #=> String
     #   resp.entity_aggregates[0].count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEntityAggregates AWS API Documentation
     #
     # @overload describe_entity_aggregates(params = {})
     # @param [Hash] params ({})
@@ -339,6 +343,8 @@ module Aws::Health
     #   resp.event_aggregates[0].count #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventAggregates AWS API Documentation
+    #
     # @overload describe_event_aggregates(params = {})
     # @param [Hash] params ({})
     def describe_event_aggregates(params = {}, options = {})
@@ -398,6 +404,8 @@ module Aws::Health
     #   resp.failed_set[0].error_name #=> String
     #   resp.failed_set[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventDetails AWS API Documentation
+    #
     # @overload describe_event_details(params = {})
     # @param [Hash] params ({})
     def describe_event_details(params = {}, options = {})
@@ -452,6 +460,8 @@ module Aws::Health
     #   resp.event_types[0].code #=> String
     #   resp.event_types[0].category #=> String, one of "issue", "accountNotification", "scheduledChange"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEventTypes AWS API Documentation
     #
     # @overload describe_event_types(params = {})
     # @param [Hash] params ({})
@@ -549,6 +559,8 @@ module Aws::Health
     #   resp.events[0].status_code #=> String, one of "open", "closed", "upcoming"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeEvents AWS API Documentation
+    #
     # @overload describe_events(params = {})
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
@@ -569,7 +581,7 @@ module Aws::Health
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-health'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -96,6 +96,8 @@ module Aws::StorageGateway
     #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGatewayInput AWS API Documentation
+    #
     class ActivateGatewayInput < Struct.new(
       :activation_key,
       :gateway_name,
@@ -124,6 +126,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ActivateGatewayOutput AWS API Documentation
+    #
     class ActivateGatewayOutput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -145,6 +149,8 @@ module Aws::StorageGateway
     # @!attribute [rw] disk_ids
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCacheInput AWS API Documentation
+    #
     class AddCacheInput < Struct.new(
       :gateway_arn,
       :disk_ids)
@@ -155,6 +161,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddCacheOutput AWS API Documentation
     #
     class AddCacheOutput < Struct.new(
       :gateway_arn)
@@ -192,6 +200,8 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResourceInput AWS API Documentation
+    #
     class AddTagsToResourceInput < Struct.new(
       :resource_arn,
       :tags)
@@ -204,6 +214,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the resource you want to add tags
     #   to.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddTagsToResourceOutput AWS API Documentation
     #
     class AddTagsToResourceOutput < Struct.new(
       :resource_arn)
@@ -226,6 +238,8 @@ module Aws::StorageGateway
     # @!attribute [rw] disk_ids
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBufferInput AWS API Documentation
+    #
     class AddUploadBufferInput < Struct.new(
       :gateway_arn,
       :disk_ids)
@@ -236,6 +250,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddUploadBufferOutput AWS API Documentation
     #
     class AddUploadBufferOutput < Struct.new(
       :gateway_arn)
@@ -267,6 +283,8 @@ module Aws::StorageGateway
     #   length of 300. You can get the disk IDs from the ListLocalDisks API.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorageInput AWS API Documentation
+    #
     class AddWorkingStorageInput < Struct.new(
       :gateway_arn,
       :disk_ids)
@@ -280,6 +298,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/AddWorkingStorageOutput AWS API Documentation
     #
     class AddWorkingStorageOutput < Struct.new(
       :gateway_arn)
@@ -331,6 +351,8 @@ module Aws::StorageGateway
     # @!attribute [rw] created_date
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CachediSCSIVolume AWS API Documentation
+    #
     class CachediSCSIVolume < Struct.new(
       :volume_arn,
       :volume_id,
@@ -364,6 +386,8 @@ module Aws::StorageGateway
     #   cancel archiving for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchivalInput AWS API Documentation
+    #
     class CancelArchivalInput < Struct.new(
       :gateway_arn,
       :tape_arn)
@@ -376,6 +400,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the virtual tape for which
     #   archiving was canceled.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelArchivalOutput AWS API Documentation
     #
     class CancelArchivalOutput < Struct.new(
       :tape_arn)
@@ -402,6 +428,8 @@ module Aws::StorageGateway
     #   cancel retrieval for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrievalInput AWS API Documentation
+    #
     class CancelRetrievalInput < Struct.new(
       :gateway_arn,
       :tape_arn)
@@ -414,6 +442,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the virtual tape for which
     #   retrieval was canceled.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CancelRetrievalOutput AWS API Documentation
     #
     class CancelRetrievalOutput < Struct.new(
       :tape_arn)
@@ -444,6 +474,8 @@ module Aws::StorageGateway
     #   The secret key that the target must provide to participate in mutual
     #   CHAP with the initiator (e.g. Windows client).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ChapInfo AWS API Documentation
     #
     class ChapInfo < Struct.new(
       :target_arn,
@@ -494,6 +526,8 @@ module Aws::StorageGateway
     # @!attribute [rw] client_token
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeInput AWS API Documentation
+    #
     class CreateCachediSCSIVolumeInput < Struct.new(
       :gateway_arn,
       :volume_size_in_bytes,
@@ -510,6 +544,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] target_arn
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateCachediSCSIVolumeOutput AWS API Documentation
     #
     class CreateCachediSCSIVolumeOutput < Struct.new(
       :volume_arn,
@@ -578,6 +614,8 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
+    #
     class CreateNFSFileShareInput < Struct.new(
       :client_token,
       :nfs_file_share_defaults,
@@ -595,6 +633,8 @@ module Aws::StorageGateway
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the newly created file share.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareOutput AWS API Documentation
     #
     class CreateNFSFileShareOutput < Struct.new(
       :file_share_arn)
@@ -615,6 +655,8 @@ module Aws::StorageGateway
     # @!attribute [rw] snapshot_description
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointInput AWS API Documentation
+    #
     class CreateSnapshotFromVolumeRecoveryPointInput < Struct.new(
       :volume_arn,
       :snapshot_description)
@@ -629,6 +671,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] volume_recovery_point_time
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotFromVolumeRecoveryPointOutput AWS API Documentation
     #
     class CreateSnapshotFromVolumeRecoveryPointOutput < Struct.new(
       :snapshot_id,
@@ -663,6 +707,8 @@ module Aws::StorageGateway
     #   **Description** field
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotInput AWS API Documentation
+    #
     class CreateSnapshotInput < Struct.new(
       :volume_arn,
       :snapshot_description)
@@ -682,6 +728,8 @@ module Aws::StorageGateway
     #   Cloud API `DescribeSnapshots`) or creating a volume from a snapshot
     #   (CreateStorediSCSIVolume).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateSnapshotOutput AWS API Documentation
     #
     class CreateSnapshotOutput < Struct.new(
       :volume_arn,
@@ -766,6 +814,8 @@ module Aws::StorageGateway
     #   Valid Values: A valid IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeInput AWS API Documentation
+    #
     class CreateStorediSCSIVolumeInput < Struct.new(
       :gateway_arn,
       :disk_id,
@@ -790,6 +840,8 @@ module Aws::StorageGateway
     #   he Amazon Resource Name (ARN) of the volume target that includes the
     #   iSCSI name that initiators can use to connect to the target.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateStorediSCSIVolumeOutput AWS API Documentation
     #
     class CreateStorediSCSIVolumeOutput < Struct.new(
       :volume_arn,
@@ -827,6 +879,8 @@ module Aws::StorageGateway
     #   The barcode that you want to assign to the tape.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeInput AWS API Documentation
+    #
     class CreateTapeWithBarcodeInput < Struct.new(
       :gateway_arn,
       :tape_size_in_bytes,
@@ -840,6 +894,8 @@ module Aws::StorageGateway
     #   A unique Amazon Resource Name (ARN) that represents the virtual tape
     #   that was created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapeWithBarcodeOutput AWS API Documentation
     #
     class CreateTapeWithBarcodeOutput < Struct.new(
       :tape_arn)
@@ -898,6 +954,8 @@ module Aws::StorageGateway
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapesInput AWS API Documentation
+    #
     class CreateTapesInput < Struct.new(
       :gateway_arn,
       :tape_size_in_bytes,
@@ -913,6 +971,8 @@ module Aws::StorageGateway
     #   A list of unique Amazon Resource Names (ARNs) that represents the
     #   virtual tapes that were created.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateTapesOutput AWS API Documentation
     #
     class CreateTapesOutput < Struct.new(
       :tape_arns)
@@ -945,6 +1005,8 @@ module Aws::StorageGateway
     #   Valid Values: `Upload`, `Download`, `All`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimitInput AWS API Documentation
+    #
     class DeleteBandwidthRateLimitInput < Struct.new(
       :gateway_arn,
       :bandwidth_type)
@@ -958,6 +1020,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteBandwidthRateLimitOutput AWS API Documentation
     #
     class DeleteBandwidthRateLimitOutput < Struct.new(
       :gateway_arn)
@@ -988,6 +1052,8 @@ module Aws::StorageGateway
     #   The iSCSI initiator that connects to the target.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentialsInput AWS API Documentation
+    #
     class DeleteChapCredentialsInput < Struct.new(
       :target_arn,
       :initiator_name)
@@ -1003,6 +1069,8 @@ module Aws::StorageGateway
     # @!attribute [rw] initiator_name
     #   The iSCSI initiator that connects to the target.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteChapCredentialsOutput AWS API Documentation
     #
     class DeleteChapCredentialsOutput < Struct.new(
       :target_arn,
@@ -1023,6 +1091,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the file share to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareInput AWS API Documentation
+    #
     class DeleteFileShareInput < Struct.new(
       :file_share_arn)
       include Aws::Structure
@@ -1033,6 +1103,8 @@ module Aws::StorageGateway
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the deleted file share.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteFileShareOutput AWS API Documentation
     #
     class DeleteFileShareOutput < Struct.new(
       :file_share_arn)
@@ -1053,6 +1125,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGatewayInput AWS API Documentation
+    #
     class DeleteGatewayInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -1064,6 +1138,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteGatewayOutput AWS API Documentation
     #
     class DeleteGatewayOutput < Struct.new(
       :gateway_arn)
@@ -1080,6 +1156,8 @@ module Aws::StorageGateway
     # @!attribute [rw] volume_arn
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotScheduleInput AWS API Documentation
+    #
     class DeleteSnapshotScheduleInput < Struct.new(
       :volume_arn)
       include Aws::Structure
@@ -1087,6 +1165,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] volume_arn
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteSnapshotScheduleOutput AWS API Documentation
     #
     class DeleteSnapshotScheduleOutput < Struct.new(
       :volume_arn)
@@ -1107,6 +1187,8 @@ module Aws::StorageGateway
     #   the virtual tape shelf (VTS).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchiveInput AWS API Documentation
+    #
     class DeleteTapeArchiveInput < Struct.new(
       :tape_arn)
       include Aws::Structure
@@ -1118,6 +1200,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the virtual tape that was deleted
     #   from the virtual tape shelf (VTS).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeArchiveOutput AWS API Documentation
     #
     class DeleteTapeArchiveOutput < Struct.new(
       :tape_arn)
@@ -1144,6 +1228,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the virtual tape to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeInput AWS API Documentation
+    #
     class DeleteTapeInput < Struct.new(
       :gateway_arn,
       :tape_arn)
@@ -1155,6 +1241,8 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_arn
     #   The Amazon Resource Name (ARN) of the deleted virtual tape.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteTapeOutput AWS API Documentation
     #
     class DeleteTapeOutput < Struct.new(
       :tape_arn)
@@ -1175,6 +1263,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateway volumes.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolumeInput AWS API Documentation
+    #
     class DeleteVolumeInput < Struct.new(
       :volume_arn)
       include Aws::Structure
@@ -1186,6 +1276,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the storage volume that was
     #   deleted. It is the same ARN you provided in the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeleteVolumeOutput AWS API Documentation
     #
     class DeleteVolumeOutput < Struct.new(
       :volume_arn)
@@ -1205,6 +1297,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitInput AWS API Documentation
     #
     class DescribeBandwidthRateLimitInput < Struct.new(
       :gateway_arn)
@@ -1230,6 +1324,8 @@ module Aws::StorageGateway
     #   not set.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeBandwidthRateLimitOutput AWS API Documentation
+    #
     class DescribeBandwidthRateLimitOutput < Struct.new(
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
@@ -1248,6 +1344,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCacheInput AWS API Documentation
     #
     class DescribeCacheInput < Struct.new(
       :gateway_arn)
@@ -1277,6 +1375,8 @@ module Aws::StorageGateway
     # @!attribute [rw] cache_miss_percentage
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCacheOutput AWS API Documentation
+    #
     class DescribeCacheOutput < Struct.new(
       :gateway_arn,
       :disk_ids,
@@ -1298,6 +1398,8 @@ module Aws::StorageGateway
     # @!attribute [rw] volume_arns
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumesInput AWS API Documentation
+    #
     class DescribeCachediSCSIVolumesInput < Struct.new(
       :volume_arns)
       include Aws::Structure
@@ -1309,6 +1411,8 @@ module Aws::StorageGateway
     #   An array of objects where each object contains metadata about one
     #   cached volume.
     #   @return [Array<Types::CachediSCSIVolume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeCachediSCSIVolumesOutput AWS API Documentation
     #
     class DescribeCachediSCSIVolumesOutput < Struct.new(
       :cached_iscsi_volumes)
@@ -1330,6 +1434,8 @@ module Aws::StorageGateway
     #   DescribeStorediSCSIVolumes operation to return to retrieve the
     #   TargetARN for specified VolumeARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentialsInput AWS API Documentation
     #
     class DescribeChapCredentialsInput < Struct.new(
       :target_arn)
@@ -1360,6 +1466,8 @@ module Aws::StorageGateway
     #     volume.
     #   @return [Array<Types::ChapInfo>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeChapCredentialsOutput AWS API Documentation
+    #
     class DescribeChapCredentialsOutput < Struct.new(
       :chap_credentials)
       include Aws::Structure
@@ -1378,6 +1486,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationInput AWS API Documentation
     #
     class DescribeGatewayInformationInput < Struct.new(
       :gateway_arn)
@@ -1430,6 +1540,8 @@ module Aws::StorageGateway
     #   return a value in the response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformationOutput AWS API Documentation
+    #
     class DescribeGatewayInformationOutput < Struct.new(
       :gateway_arn,
       :gateway_id,
@@ -1456,6 +1568,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeInput AWS API Documentation
     #
     class DescribeMaintenanceStartTimeInput < Struct.new(
       :gateway_arn)
@@ -1498,6 +1612,8 @@ module Aws::StorageGateway
     # @!attribute [rw] timezone
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeMaintenanceStartTimeOutput AWS API Documentation
+    #
     class DescribeMaintenanceStartTimeOutput < Struct.new(
       :gateway_arn,
       :hour_of_day,
@@ -1521,6 +1637,8 @@ module Aws::StorageGateway
     #   share to be described.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileSharesInput AWS API Documentation
+    #
     class DescribeNFSFileSharesInput < Struct.new(
       :file_share_arn_list)
       include Aws::Structure
@@ -1531,6 +1649,8 @@ module Aws::StorageGateway
     # @!attribute [rw] nfs_file_share_info_list
     #   An array containing a description for each requested file share.
     #   @return [Array<Types::NFSFileShareInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileSharesOutput AWS API Documentation
     #
     class DescribeNFSFileSharesOutput < Struct.new(
       :nfs_file_share_info_list)
@@ -1552,6 +1672,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateway volumes.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleInput AWS API Documentation
+    #
     class DescribeSnapshotScheduleInput < Struct.new(
       :volume_arn)
       include Aws::Structure
@@ -1571,6 +1693,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] timezone
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeSnapshotScheduleOutput AWS API Documentation
     #
     class DescribeSnapshotScheduleOutput < Struct.new(
       :volume_arn,
@@ -1598,6 +1722,8 @@ module Aws::StorageGateway
     #   gateway.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumesInput AWS API Documentation
+    #
     class DescribeStorediSCSIVolumesInput < Struct.new(
       :volume_arns)
       include Aws::Structure
@@ -1605,6 +1731,8 @@ module Aws::StorageGateway
 
     # @!attribute [rw] stored_iscsi_volumes
     #   @return [Array<Types::StorediSCSIVolume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeStorediSCSIVolumesOutput AWS API Documentation
     #
     class DescribeStorediSCSIVolumesOutput < Struct.new(
       :stored_iscsi_volumes)
@@ -1637,6 +1765,8 @@ module Aws::StorageGateway
     #   the specified number.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchivesInput AWS API Documentation
+    #
     class DescribeTapeArchivesInput < Struct.new(
       :tape_arns,
       :marker,
@@ -1661,6 +1791,8 @@ module Aws::StorageGateway
     #   virtual tape shelf (VTS). If there are no more virtual tapes to
     #   describe, this field does not appear in the response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeArchivesOutput AWS API Documentation
     #
     class DescribeTapeArchivesOutput < Struct.new(
       :tape_archives,
@@ -1694,6 +1826,8 @@ module Aws::StorageGateway
     #   described be limited to the specified number.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPointsInput AWS API Documentation
+    #
     class DescribeTapeRecoveryPointsInput < Struct.new(
       :gateway_arn,
       :marker,
@@ -1721,6 +1855,8 @@ module Aws::StorageGateway
     #   tape recovery points in the list. If there are no more recovery
     #   points to describe, this field does not appear in the response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapeRecoveryPointsOutput AWS API Documentation
     #
     class DescribeTapeRecoveryPointsOutput < Struct.new(
       :gateway_arn,
@@ -1770,6 +1906,8 @@ module Aws::StorageGateway
     #    </note>
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapesInput AWS API Documentation
+    #
     class DescribeTapesInput < Struct.new(
       :gateway_arn,
       :tape_arns,
@@ -1792,6 +1930,8 @@ module Aws::StorageGateway
     #   results to be retrieved.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeTapesOutput AWS API Documentation
+    #
     class DescribeTapesOutput < Struct.new(
       :tapes,
       :marker)
@@ -1809,6 +1949,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBufferInput AWS API Documentation
     #
     class DescribeUploadBufferInput < Struct.new(
       :gateway_arn)
@@ -1828,6 +1970,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] upload_buffer_allocated_in_bytes
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeUploadBufferOutput AWS API Documentation
     #
     class DescribeUploadBufferOutput < Struct.new(
       :gateway_arn,
@@ -1875,6 +2019,8 @@ module Aws::StorageGateway
     #   specified number.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevicesInput AWS API Documentation
+    #
     class DescribeVTLDevicesInput < Struct.new(
       :gateway_arn,
       :vtl_device_arns,
@@ -1903,6 +2049,8 @@ module Aws::StorageGateway
     #   appear in the response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeVTLDevicesOutput AWS API Documentation
+    #
     class DescribeVTLDevicesOutput < Struct.new(
       :gateway_arn,
       :vtl_devices,
@@ -1923,6 +2071,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorageInput AWS API Documentation
     #
     class DescribeWorkingStorageInput < Struct.new(
       :gateway_arn)
@@ -1953,6 +2103,8 @@ module Aws::StorageGateway
     #   working storage is configured for the gateway, this field returns 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeWorkingStorageOutput AWS API Documentation
+    #
     class DescribeWorkingStorageOutput < Struct.new(
       :gateway_arn,
       :disk_ids,
@@ -1980,6 +2132,8 @@ module Aws::StorageGateway
     #   Indicates whether mutual CHAP is enabled for the iSCSI target.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DeviceiSCSIAttributes AWS API Documentation
+    #
     class DeviceiSCSIAttributes < Struct.new(
       :target_arn,
       :network_interface_id,
@@ -2002,6 +2156,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGatewayInput AWS API Documentation
+    #
     class DisableGatewayInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -2012,6 +2168,8 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_arn
     #   The unique Amazon Resource Name of the disabled gateway.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DisableGatewayOutput AWS API Documentation
     #
     class DisableGatewayOutput < Struct.new(
       :gateway_arn)
@@ -2038,6 +2196,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] disk_allocation_resource
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Disk AWS API Documentation
     #
     class Disk < Struct.new(
       :disk_id,
@@ -2069,6 +2229,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/FileShareInfo AWS API Documentation
     #
     class FileShareInfo < Struct.new(
       :file_share_arn,
@@ -2104,6 +2266,8 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_name
     #   The name of the gateway.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/GatewayInfo AWS API Documentation
     #
     class GatewayInfo < Struct.new(
       :gateway_id,
@@ -2142,6 +2306,8 @@ module Aws::StorageGateway
     #   from after a previous call to ListFileShares. Optional.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileSharesInput AWS API Documentation
+    #
     class ListFileSharesInput < Struct.new(
       :gateway_arn,
       :limit,
@@ -2165,6 +2331,8 @@ module Aws::StorageGateway
     # @!attribute [rw] file_share_info_list
     #   An array of information about the file gateway's file shares.
     #   @return [Array<Types::FileShareInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListFileSharesOutput AWS API Documentation
     #
     class ListFileSharesOutput < Struct.new(
       :marker,
@@ -2197,6 +2365,8 @@ module Aws::StorageGateway
     #   specified number of items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGatewaysInput AWS API Documentation
+    #
     class ListGatewaysInput < Struct.new(
       :marker,
       :limit)
@@ -2208,6 +2378,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] marker
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGatewaysOutput AWS API Documentation
     #
     class ListGatewaysOutput < Struct.new(
       :gateways,
@@ -2229,6 +2401,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksInput AWS API Documentation
+    #
     class ListLocalDisksInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -2241,6 +2415,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] disks
     #   @return [Array<Types::Disk>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListLocalDisksOutput AWS API Documentation
     #
     class ListLocalDisksOutput < Struct.new(
       :gateway_arn,
@@ -2274,6 +2450,8 @@ module Aws::StorageGateway
     #   number of items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResourceInput AWS API Documentation
+    #
     class ListTagsForResourceInput < Struct.new(
       :resource_arn,
       :marker,
@@ -2296,6 +2474,8 @@ module Aws::StorageGateway
     # @!attribute [rw] tags
     #   An array that contains the tags for the specified resource.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTagsForResourceOutput AWS API Documentation
     #
     class ListTagsForResourceOutput < Struct.new(
       :resource_arn,
@@ -2337,6 +2517,8 @@ module Aws::StorageGateway
     #   call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapesInput AWS API Documentation
+    #
     class ListTapesInput < Struct.new(
       :tape_arns,
       :marker,
@@ -2363,6 +2545,8 @@ module Aws::StorageGateway
     #   element does not appear in the response body.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListTapesOutput AWS API Documentation
+    #
     class ListTapesOutput < Struct.new(
       :tape_infos,
       :marker)
@@ -2383,6 +2567,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateway volumes for the gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiatorsInput AWS API Documentation
+    #
     class ListVolumeInitiatorsInput < Struct.new(
       :volume_arn)
       include Aws::Structure
@@ -2394,6 +2580,8 @@ module Aws::StorageGateway
     #   The host names and port numbers of all iSCSI initiators that are
     #   connected to the gateway.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeInitiatorsOutput AWS API Documentation
     #
     class ListVolumeInitiatorsOutput < Struct.new(
       :initiators)
@@ -2412,6 +2600,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPointsInput AWS API Documentation
+    #
     class ListVolumeRecoveryPointsInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -2424,6 +2614,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] volume_recovery_point_infos
     #   @return [Array<Types::VolumeRecoveryPointInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumeRecoveryPointsOutput AWS API Documentation
     #
     class ListVolumeRecoveryPointsOutput < Struct.new(
       :gateway_arn,
@@ -2462,6 +2654,8 @@ module Aws::StorageGateway
     #   specified number of items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesInput AWS API Documentation
+    #
     class ListVolumesInput < Struct.new(
       :gateway_arn,
       :marker,
@@ -2479,6 +2673,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] volume_infos
     #   @return [Array<Types::VolumeInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListVolumesOutput AWS API Documentation
     #
     class ListVolumesOutput < Struct.new(
       :gateway_arn,
@@ -2524,6 +2720,8 @@ module Aws::StorageGateway
     #   The default owner ID for files in the file share (unless the files
     #   have another owner ID specified). The default value is nfsnobody.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareDefaults AWS API Documentation
     #
     class NFSFileShareDefaults < Struct.new(
       :file_mode,
@@ -2593,6 +2791,8 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
+    #
     class NFSFileShareInfo < Struct.new(
       :nfs_file_share_defaults,
       :file_share_arn,
@@ -2627,6 +2827,8 @@ module Aws::StorageGateway
     #   *Currently not supported*.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NetworkInterface AWS API Documentation
+    #
     class NetworkInterface < Struct.new(
       :ipv_4_address,
       :mac_address,
@@ -2654,6 +2856,8 @@ module Aws::StorageGateway
     #   A tag is composed of a key/value pair.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResourceInput AWS API Documentation
+    #
     class RemoveTagsFromResourceInput < Struct.new(
       :resource_arn,
       :tag_keys)
@@ -2666,6 +2870,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the resource that the tags were
     #   removed from.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RemoveTagsFromResourceOutput AWS API Documentation
     #
     class RemoveTagsFromResourceOutput < Struct.new(
       :resource_arn)
@@ -2684,6 +2890,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCacheInput AWS API Documentation
+    #
     class ResetCacheInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -2693,6 +2901,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ResetCacheOutput AWS API Documentation
     #
     class ResetCacheOutput < Struct.new(
       :gateway_arn)
@@ -2723,6 +2933,8 @@ module Aws::StorageGateway
     #   gateway must be a gateway-VTL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchiveInput AWS API Documentation
+    #
     class RetrieveTapeArchiveInput < Struct.new(
       :tape_arn,
       :gateway_arn)
@@ -2734,6 +2946,8 @@ module Aws::StorageGateway
     # @!attribute [rw] tape_arn
     #   The Amazon Resource Name (ARN) of the retrieved virtual tape.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchiveOutput AWS API Documentation
     #
     class RetrieveTapeArchiveOutput < Struct.new(
       :tape_arn)
@@ -2760,6 +2974,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPointInput AWS API Documentation
+    #
     class RetrieveTapeRecoveryPointInput < Struct.new(
       :tape_arn,
       :gateway_arn)
@@ -2772,6 +2988,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the virtual tape for which the
     #   recovery point was retrieved.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeRecoveryPointOutput AWS API Documentation
     #
     class RetrieveTapeRecoveryPointOutput < Struct.new(
       :tape_arn)
@@ -2797,6 +3015,8 @@ module Aws::StorageGateway
     #   The password you want to set for your VM local console.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordInput AWS API Documentation
+    #
     class SetLocalConsolePasswordInput < Struct.new(
       :gateway_arn,
       :local_console_password)
@@ -2807,6 +3027,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/SetLocalConsolePasswordOutput AWS API Documentation
     #
     class SetLocalConsolePasswordOutput < Struct.new(
       :gateway_arn)
@@ -2827,6 +3049,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayInput AWS API Documentation
+    #
     class ShutdownGatewayInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -2838,6 +3062,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ShutdownGatewayOutput AWS API Documentation
     #
     class ShutdownGatewayOutput < Struct.new(
       :gateway_arn)
@@ -2858,6 +3084,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayInput AWS API Documentation
+    #
     class StartGatewayInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -2869,6 +3097,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StartGatewayOutput AWS API Documentation
     #
     class StartGatewayOutput < Struct.new(
       :gateway_arn)
@@ -2887,6 +3117,8 @@ module Aws::StorageGateway
     #   Human-readable text that provides detail about the error that
     #   occurred.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorageGatewayError AWS API Documentation
     #
     class StorageGatewayError < Struct.new(
       :error_code,
@@ -2951,6 +3183,8 @@ module Aws::StorageGateway
     # @!attribute [rw] created_date
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/StorediSCSIVolume AWS API Documentation
+    #
     class StorediSCSIVolume < Struct.new(
       :volume_arn,
       :volume_id,
@@ -2979,6 +3213,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] value
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -3018,6 +3254,8 @@ module Aws::StorageGateway
     #
     #   Range: 0 (not started) to 100 (complete).
     #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/Tape AWS API Documentation
     #
     class Tape < Struct.new(
       :tape_arn,
@@ -3066,6 +3304,8 @@ module Aws::StorageGateway
     #   The current state of the archived virtual tape.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeArchive AWS API Documentation
+    #
     class TapeArchive < Struct.new(
       :tape_arn,
       :tape_barcode,
@@ -3100,6 +3340,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeInfo AWS API Documentation
+    #
     class TapeInfo < Struct.new(
       :tape_arn,
       :tape_barcode,
@@ -3129,6 +3371,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] tape_status
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/TapeRecoveryPointInfo AWS API Documentation
     #
     class TapeRecoveryPointInfo < Struct.new(
       :tape_arn,
@@ -3166,6 +3410,8 @@ module Aws::StorageGateway
     #   The average download bandwidth rate limit in bits per second.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitInput AWS API Documentation
+    #
     class UpdateBandwidthRateLimitInput < Struct.new(
       :gateway_arn,
       :average_upload_rate_limit_in_bits_per_sec,
@@ -3180,6 +3426,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateBandwidthRateLimitOutput AWS API Documentation
     #
     class UpdateBandwidthRateLimitOutput < Struct.new(
       :gateway_arn)
@@ -3238,6 +3486,8 @@ module Aws::StorageGateway
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentialsInput AWS API Documentation
+    #
     class UpdateChapCredentialsInput < Struct.new(
       :target_arn,
       :secret_to_authenticate_initiator,
@@ -3257,6 +3507,8 @@ module Aws::StorageGateway
     #   The iSCSI initiator that connects to the target. This is the same
     #   initiator name specified in the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateChapCredentialsOutput AWS API Documentation
     #
     class UpdateChapCredentialsOutput < Struct.new(
       :target_arn,
@@ -3285,6 +3537,8 @@ module Aws::StorageGateway
     # @!attribute [rw] gateway_timezone
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationInput AWS API Documentation
+    #
     class UpdateGatewayInformationInput < Struct.new(
       :gateway_arn,
       :gateway_name,
@@ -3301,6 +3555,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] gateway_name
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewayInformationOutput AWS API Documentation
     #
     class UpdateGatewayInformationOutput < Struct.new(
       :gateway_arn,
@@ -3322,6 +3578,8 @@ module Aws::StorageGateway
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNowInput AWS API Documentation
+    #
     class UpdateGatewaySoftwareNowInput < Struct.new(
       :gateway_arn)
       include Aws::Structure
@@ -3333,6 +3591,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateGatewaySoftwareNowOutput AWS API Documentation
     #
     class UpdateGatewaySoftwareNowOutput < Struct.new(
       :gateway_arn)
@@ -3379,6 +3639,8 @@ module Aws::StorageGateway
     #   number from 0 to 6, where 0 represents Sunday and 6 Saturday.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeInput AWS API Documentation
+    #
     class UpdateMaintenanceStartTimeInput < Struct.new(
       :gateway_arn,
       :hour_of_day,
@@ -3394,6 +3656,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
     #   operation to return a list of gateways for your account and region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateMaintenanceStartTimeOutput AWS API Documentation
     #
     class UpdateMaintenanceStartTimeOutput < Struct.new(
       :gateway_arn)
@@ -3443,6 +3707,8 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
+    #
     class UpdateNFSFileShareInput < Struct.new(
       :file_share_arn,
       :kms_encrypted,
@@ -3457,6 +3723,8 @@ module Aws::StorageGateway
     # @!attribute [rw] file_share_arn
     #   The Amazon Resource Name (ARN) of the updated file share.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareOutput AWS API Documentation
     #
     class UpdateNFSFileShareOutput < Struct.new(
       :file_share_arn)
@@ -3504,6 +3772,8 @@ module Aws::StorageGateway
     #   description.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotScheduleInput AWS API Documentation
+    #
     class UpdateSnapshotScheduleInput < Struct.new(
       :volume_arn,
       :start_at,
@@ -3516,6 +3786,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] volume_arn
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateSnapshotScheduleOutput AWS API Documentation
     #
     class UpdateSnapshotScheduleOutput < Struct.new(
       :volume_arn)
@@ -3541,6 +3813,8 @@ module Aws::StorageGateway
     #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeInput AWS API Documentation
+    #
     class UpdateVTLDeviceTypeInput < Struct.new(
       :vtl_device_arn,
       :device_type)
@@ -3553,6 +3827,8 @@ module Aws::StorageGateway
     #   The Amazon Resource Name (ARN) of the medium changer you have
     #   selected.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateVTLDeviceTypeOutput AWS API Documentation
     #
     class UpdateVTLDeviceTypeOutput < Struct.new(
       :vtl_device_arn)
@@ -3578,6 +3854,8 @@ module Aws::StorageGateway
     # @!attribute [rw] device_iscsi_attributes
     #   A list of iSCSI information about a VTL device.
     #   @return [Types::DeviceiSCSIAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VTLDevice AWS API Documentation
     #
     class VTLDevice < Struct.new(
       :vtl_device_arn,
@@ -3633,6 +3911,8 @@ module Aws::StorageGateway
     #   hyphens (-).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeInfo AWS API Documentation
+    #
     class VolumeInfo < Struct.new(
       :volume_arn,
       :volume_id,
@@ -3654,6 +3934,8 @@ module Aws::StorageGateway
     #
     # @!attribute [rw] volume_recovery_point_time
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeRecoveryPointInfo AWS API Documentation
     #
     class VolumeRecoveryPointInfo < Struct.new(
       :volume_arn,
@@ -3684,6 +3966,8 @@ module Aws::StorageGateway
     # @!attribute [rw] chap_enabled
     #   Indicates whether mutual CHAP is enabled for the iSCSI target.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/VolumeiSCSIAttributes AWS API Documentation
     #
     class VolumeiSCSIAttributes < Struct.new(
       :target_arn,

@@ -21,6 +21,8 @@ module Aws::CodeCommit
     #   The names of the repositories to get information about.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositoriesInput AWS API Documentation
+    #
     class BatchGetRepositoriesInput < Struct.new(
       :repository_names)
       include Aws::Structure
@@ -37,6 +39,8 @@ module Aws::CodeCommit
     #   Returns a list of repository names for which information could not
     #   be found.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositoriesOutput AWS API Documentation
     #
     class BatchGetRepositoriesOutput < Struct.new(
       :repositories,
@@ -67,6 +71,8 @@ module Aws::CodeCommit
     #   * `120000` indicates a symlink
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BlobMetadata AWS API Documentation
+    #
     class BlobMetadata < Struct.new(
       :blob_id,
       :path,
@@ -83,6 +89,8 @@ module Aws::CodeCommit
     # @!attribute [rw] commit_id
     #   The ID of the last commit made to the branch.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchInfo AWS API Documentation
     #
     class BranchInfo < Struct.new(
       :branch_name,
@@ -130,6 +138,8 @@ module Aws::CodeCommit
     #   Any additional data associated with the specified commit.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Commit AWS API Documentation
+    #
     class Commit < Struct.new(
       :tree_id,
       :parents,
@@ -163,6 +173,8 @@ module Aws::CodeCommit
     # @!attribute [rw] commit_id
     #   The ID of the commit to point the new branch to.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranchInput AWS API Documentation
     #
     class CreateBranchInput < Struct.new(
       :repository_name,
@@ -211,6 +223,8 @@ module Aws::CodeCommit
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryInput AWS API Documentation
+    #
     class CreateRepositoryInput < Struct.new(
       :repository_name,
       :repository_description)
@@ -222,6 +236,8 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_metadata
     #   Information about the newly created repository.
     #   @return [Types::RepositoryMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepositoryOutput AWS API Documentation
     #
     class CreateRepositoryOutput < Struct.new(
       :repository_metadata)
@@ -241,6 +257,8 @@ module Aws::CodeCommit
     #   The name of the repository to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepositoryInput AWS API Documentation
+    #
     class DeleteRepositoryInput < Struct.new(
       :repository_name)
       include Aws::Structure
@@ -251,6 +269,8 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_id
     #   The ID of the repository that was deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepositoryOutput AWS API Documentation
     #
     class DeleteRepositoryOutput < Struct.new(
       :repository_id)
@@ -273,6 +293,8 @@ module Aws::CodeCommit
     #   Whether the change type of the difference is an addition (A),
     #   deletion (D), or modification (M).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/Difference AWS API Documentation
     #
     class Difference < Struct.new(
       :before_blob,
@@ -299,6 +321,8 @@ module Aws::CodeCommit
     #   The ID of the blob, which is its SHA-1 pointer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobInput AWS API Documentation
+    #
     class GetBlobInput < Struct.new(
       :repository_name,
       :blob_id)
@@ -310,6 +334,8 @@ module Aws::CodeCommit
     # @!attribute [rw] content
     #   The content of the blob, usually a file.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlobOutput AWS API Documentation
     #
     class GetBlobOutput < Struct.new(
       :content)
@@ -335,6 +361,8 @@ module Aws::CodeCommit
     #   The name of the branch for which you want to retrieve information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranchInput AWS API Documentation
+    #
     class GetBranchInput < Struct.new(
       :repository_name,
       :branch_name)
@@ -346,6 +374,8 @@ module Aws::CodeCommit
     # @!attribute [rw] branch
     #   The name of the branch.
     #   @return [Types::BranchInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranchOutput AWS API Documentation
     #
     class GetBranchOutput < Struct.new(
       :branch)
@@ -370,6 +400,8 @@ module Aws::CodeCommit
     #   The commit ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommitInput AWS API Documentation
+    #
     class GetCommitInput < Struct.new(
       :repository_name,
       :commit_id)
@@ -382,6 +414,8 @@ module Aws::CodeCommit
     #   A commit data type object that contains information about the
     #   specified commit.
     #   @return [Types::Commit]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommitOutput AWS API Documentation
     #
     class GetCommitOutput < Struct.new(
       :commit)
@@ -441,6 +475,8 @@ module Aws::CodeCommit
     #   next batch of the results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferencesInput AWS API Documentation
+    #
     class GetDifferencesInput < Struct.new(
       :repository_name,
       :before_commit_specifier,
@@ -463,6 +499,8 @@ module Aws::CodeCommit
     #   next batch of the results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferencesOutput AWS API Documentation
+    #
     class GetDifferencesOutput < Struct.new(
       :differences,
       :next_token)
@@ -482,6 +520,8 @@ module Aws::CodeCommit
     #   The name of the repository to get information about.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryInput AWS API Documentation
+    #
     class GetRepositoryInput < Struct.new(
       :repository_name)
       include Aws::Structure
@@ -492,6 +532,8 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_metadata
     #   Information about the repository.
     #   @return [Types::RepositoryMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryOutput AWS API Documentation
     #
     class GetRepositoryOutput < Struct.new(
       :repository_metadata)
@@ -511,6 +553,8 @@ module Aws::CodeCommit
     #   The name of the repository for which the trigger is configured.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggersInput AWS API Documentation
+    #
     class GetRepositoryTriggersInput < Struct.new(
       :repository_name)
       include Aws::Structure
@@ -525,6 +569,8 @@ module Aws::CodeCommit
     # @!attribute [rw] triggers
     #   The JSON block of configuration information for each trigger.
     #   @return [Array<Types::RepositoryTrigger>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggersOutput AWS API Documentation
     #
     class GetRepositoryTriggersOutput < Struct.new(
       :configuration_id,
@@ -550,6 +596,8 @@ module Aws::CodeCommit
     #   An enumeration token that allows the operation to batch the results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranchesInput AWS API Documentation
+    #
     class ListBranchesInput < Struct.new(
       :repository_name,
       :next_token)
@@ -565,6 +613,8 @@ module Aws::CodeCommit
     # @!attribute [rw] next_token
     #   An enumeration token that returns the batch of the results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranchesOutput AWS API Documentation
     #
     class ListBranchesOutput < Struct.new(
       :branches,
@@ -600,6 +650,8 @@ module Aws::CodeCommit
     #   operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositoriesInput AWS API Documentation
+    #
     class ListRepositoriesInput < Struct.new(
       :next_token,
       :sort_by,
@@ -619,6 +671,8 @@ module Aws::CodeCommit
     #   operations. When the client sends the token back to AWS CodeCommit,
     #   another page of 1,000 records is retrieved.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositoriesOutput AWS API Documentation
     #
     class ListRepositoriesOutput < Struct.new(
       :repositories,
@@ -653,6 +707,8 @@ module Aws::CodeCommit
     #   The JSON block of configuration information for each trigger.
     #   @return [Array<Types::RepositoryTrigger>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggersInput AWS API Documentation
+    #
     class PutRepositoryTriggersInput < Struct.new(
       :repository_name,
       :triggers)
@@ -664,6 +720,8 @@ module Aws::CodeCommit
     # @!attribute [rw] configuration_id
     #   The system-generated unique ID for the create or update operation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggersOutput AWS API Documentation
     #
     class PutRepositoryTriggersOutput < Struct.new(
       :configuration_id)
@@ -713,6 +771,8 @@ module Aws::CodeCommit
     #   The Amazon Resource Name (ARN) of the repository.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryMetadata AWS API Documentation
+    #
     class RepositoryMetadata < Struct.new(
       :account_id,
       :repository_id,
@@ -736,6 +796,8 @@ module Aws::CodeCommit
     # @!attribute [rw] repository_id
     #   The ID associated with the repository.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryNameIdPair AWS API Documentation
     #
     class RepositoryNameIdPair < Struct.new(
       :repository_name,
@@ -786,6 +848,8 @@ module Aws::CodeCommit
     #    </note>
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTrigger AWS API Documentation
+    #
     class RepositoryTrigger < Struct.new(
       :name,
       :destination_arn,
@@ -804,6 +868,8 @@ module Aws::CodeCommit
     # @!attribute [rw] failure_message
     #   Additional message information about the trigger that did not run.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTriggerExecutionFailure AWS API Documentation
     #
     class RepositoryTriggerExecutionFailure < Struct.new(
       :trigger,
@@ -837,6 +903,8 @@ module Aws::CodeCommit
     #   The list of triggers to test.
     #   @return [Array<Types::RepositoryTrigger>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggersInput AWS API Documentation
+    #
     class TestRepositoryTriggersInput < Struct.new(
       :repository_name,
       :triggers)
@@ -856,6 +924,8 @@ module Aws::CodeCommit
     #   provides the names of the triggers that could not be tested,
     #   separated by commas.
     #   @return [Array<Types::RepositoryTriggerExecutionFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggersOutput AWS API Documentation
     #
     class TestRepositoryTriggersOutput < Struct.new(
       :successful_executions,
@@ -880,6 +950,8 @@ module Aws::CodeCommit
     # @!attribute [rw] default_branch_name
     #   The name of the branch to set as the default.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranchInput AWS API Documentation
     #
     class UpdateDefaultBranchInput < Struct.new(
       :repository_name,
@@ -907,6 +979,8 @@ module Aws::CodeCommit
     #   Repository descriptions are limited to 1,000 characters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescriptionInput AWS API Documentation
+    #
     class UpdateRepositoryDescriptionInput < Struct.new(
       :repository_name,
       :repository_description)
@@ -931,6 +1005,8 @@ module Aws::CodeCommit
     #   The new name for the repository.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryNameInput AWS API Documentation
+    #
     class UpdateRepositoryNameInput < Struct.new(
       :old_name,
       :new_name)
@@ -951,6 +1027,8 @@ module Aws::CodeCommit
     # @!attribute [rw] date
     #   The date when the specified commit was pushed to the repository.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UserInfo AWS API Documentation
     #
     class UserInfo < Struct.new(
       :name,

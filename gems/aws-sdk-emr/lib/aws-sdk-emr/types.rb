@@ -97,6 +97,8 @@ module Aws::EMR
     #   Job flow in which to add the instance groups.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroupsInput AWS API Documentation
+    #
     class AddInstanceGroupsInput < Struct.new(
       :instance_groups,
       :job_flow_id)
@@ -112,6 +114,8 @@ module Aws::EMR
     # @!attribute [rw] instance_group_ids
     #   Instance group IDs of the newly created instance groups.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroupsOutput AWS API Documentation
     #
     class AddInstanceGroupsOutput < Struct.new(
       :job_flow_id,
@@ -154,6 +158,8 @@ module Aws::EMR
     #   A list of StepConfig to be executed by the job flow.
     #   @return [Array<Types::StepConfig>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowStepsInput AWS API Documentation
+    #
     class AddJobFlowStepsInput < Struct.new(
       :job_flow_id,
       :steps)
@@ -165,6 +171,8 @@ module Aws::EMR
     # @!attribute [rw] step_ids
     #   The identifiers of the list of steps added to the job flow.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowStepsOutput AWS API Documentation
     #
     class AddJobFlowStepsOutput < Struct.new(
       :step_ids)
@@ -198,6 +206,8 @@ module Aws::EMR
     #   optional value string with a maximum of 256 characters.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTagsInput AWS API Documentation
+    #
     class AddTagsInput < Struct.new(
       :resource_id,
       :tags)
@@ -205,6 +215,8 @@ module Aws::EMR
     end
 
     # This output indicates the result of adding tags to a resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
@@ -263,6 +275,8 @@ module Aws::EMR
     #   about third-party applications that third-party vendors use for
     #   testing purposes.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Application AWS API Documentation
     #
     class Application < Struct.new(
       :name,
@@ -331,6 +345,8 @@ module Aws::EMR
     #   policy.
     #   @return [Array<Types::ScalingRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicy AWS API Documentation
+    #
     class AutoScalingPolicy < Struct.new(
       :constraints,
       :rules)
@@ -358,6 +374,8 @@ module Aws::EMR
     #   policy.
     #   @return [Array<Types::ScalingRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicyDescription AWS API Documentation
+    #
     class AutoScalingPolicyDescription < Struct.new(
       :status,
       :constraints,
@@ -380,6 +398,8 @@ module Aws::EMR
     #   scaling policy state change.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicyStateChangeReason AWS API Documentation
+    #
     class AutoScalingPolicyStateChangeReason < Struct.new(
       :code,
       :message)
@@ -394,6 +414,8 @@ module Aws::EMR
     # @!attribute [rw] state_change_reason
     #   The reason for a change in status.
     #   @return [Types::AutoScalingPolicyStateChangeReason]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AutoScalingPolicyStatus AWS API Documentation
     #
     class AutoScalingPolicyStatus < Struct.new(
       :state,
@@ -422,6 +444,8 @@ module Aws::EMR
     #   The script run by the bootstrap action.
     #   @return [Types::ScriptBootstrapActionConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BootstrapActionConfig AWS API Documentation
+    #
     class BootstrapActionConfig < Struct.new(
       :name,
       :script_bootstrap_action)
@@ -433,6 +457,8 @@ module Aws::EMR
     # @!attribute [rw] bootstrap_action_config
     #   A description of the bootstrap action.
     #   @return [Types::BootstrapActionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/BootstrapActionDetail AWS API Documentation
     #
     class BootstrapActionDetail < Struct.new(
       :bootstrap_action_config)
@@ -447,6 +473,8 @@ module Aws::EMR
     #
     # @!attribute [rw] reason
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInfo AWS API Documentation
     #
     class CancelStepsInfo < Struct.new(
       :step_id,
@@ -475,6 +503,8 @@ module Aws::EMR
     #   their states for the specified cluster.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInput AWS API Documentation
+    #
     class CancelStepsInput < Struct.new(
       :cluster_id,
       :step_ids)
@@ -487,6 +517,8 @@ module Aws::EMR
     #   A list of CancelStepsInfo, which shows the status of specified
     #   cancel requests for each `StepID` specified.
     #   @return [Array<Types::CancelStepsInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsOutput AWS API Documentation
     #
     class CancelStepsOutput < Struct.new(
       :cancel_steps_info_list)
@@ -562,6 +594,8 @@ module Aws::EMR
     # @!attribute [rw] dimensions
     #   A CloudWatch metric dimension.
     #   @return [Array<Types::MetricDimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CloudWatchAlarmDefinition AWS API Documentation
     #
     class CloudWatchAlarmDefinition < Struct.new(
       :comparison_operator,
@@ -698,6 +732,8 @@ module Aws::EMR
     #   versions of Amazon EMR earlier than 5.1.0.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
+    #
     class Cluster < Struct.new(
       :id,
       :name,
@@ -732,6 +768,8 @@ module Aws::EMR
     #   The descriptive message for the state change reason.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterStateChangeReason AWS API Documentation
+    #
     class ClusterStateChangeReason < Struct.new(
       :code,
       :message)
@@ -752,6 +790,8 @@ module Aws::EMR
     #   A timeline that represents the status of a cluster over the lifetime
     #   of the cluster.
     #   @return [Types::ClusterTimeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterStatus AWS API Documentation
     #
     class ClusterStatus < Struct.new(
       :state,
@@ -784,6 +824,8 @@ module Aws::EMR
     #   billing rate.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterSummary AWS API Documentation
+    #
     class ClusterSummary < Struct.new(
       :id,
       :name,
@@ -806,6 +848,8 @@ module Aws::EMR
     #   The date and time when the cluster was terminated.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ClusterTimeline AWS API Documentation
+    #
     class ClusterTimeline < Struct.new(
       :creation_date_time,
       :ready_date_time,
@@ -826,6 +870,8 @@ module Aws::EMR
     # @!attribute [rw] args
     #   Arguments for Amazon EMR to pass to the command for execution.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Command AWS API Documentation
     #
     class Command < Struct.new(
       :name,
@@ -883,6 +929,8 @@ module Aws::EMR
     #   A set of properties supplied to the Configuration object.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Configuration AWS API Documentation
+    #
     class Configuration < Struct.new(
       :classification,
       :configurations,
@@ -906,6 +954,8 @@ module Aws::EMR
     #   The security configuration details in JSON format.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfigurationInput AWS API Documentation
+    #
     class CreateSecurityConfigurationInput < Struct.new(
       :name,
       :security_configuration)
@@ -919,6 +969,8 @@ module Aws::EMR
     # @!attribute [rw] creation_date_time
     #   The date and time the security configuration was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfigurationOutput AWS API Documentation
     #
     class CreateSecurityConfigurationOutput < Struct.new(
       :name,
@@ -937,11 +989,15 @@ module Aws::EMR
     #   The name of the security configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfigurationInput AWS API Documentation
+    #
     class DeleteSecurityConfigurationInput < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfigurationOutput AWS API Documentation
+    #
     class DeleteSecurityConfigurationOutput < Aws::EmptyStructure; end
 
     # This input determines which cluster to describe.
@@ -957,6 +1013,8 @@ module Aws::EMR
     #   The identifier of the cluster to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeClusterInput AWS API Documentation
+    #
     class DescribeClusterInput < Struct.new(
       :cluster_id)
       include Aws::Structure
@@ -967,6 +1025,8 @@ module Aws::EMR
     # @!attribute [rw] cluster
     #   This output contains the details for the requested cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeClusterOutput AWS API Documentation
     #
     class DescribeClusterOutput < Struct.new(
       :cluster)
@@ -1001,6 +1061,8 @@ module Aws::EMR
     #   Return only job flows whose state is contained in this list.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlowsInput AWS API Documentation
+    #
     class DescribeJobFlowsInput < Struct.new(
       :created_after,
       :created_before,
@@ -1014,6 +1076,8 @@ module Aws::EMR
     # @!attribute [rw] job_flows
     #   A list of job flows matching the parameters supplied.
     #   @return [Array<Types::JobFlowDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlowsOutput AWS API Documentation
     #
     class DescribeJobFlowsOutput < Struct.new(
       :job_flows)
@@ -1031,6 +1095,8 @@ module Aws::EMR
     #   The name of the security configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfigurationInput AWS API Documentation
+    #
     class DescribeSecurityConfigurationInput < Struct.new(
       :name)
       include Aws::Structure
@@ -1047,6 +1113,8 @@ module Aws::EMR
     # @!attribute [rw] creation_date_time
     #   The date and time the security configuration was created
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfigurationOutput AWS API Documentation
     #
     class DescribeSecurityConfigurationOutput < Struct.new(
       :name,
@@ -1073,6 +1141,8 @@ module Aws::EMR
     #   The identifier of the step to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStepInput AWS API Documentation
+    #
     class DescribeStepInput < Struct.new(
       :cluster_id,
       :step_id)
@@ -1084,6 +1154,8 @@ module Aws::EMR
     # @!attribute [rw] step
     #   The step details for the requested step identifier.
     #   @return [Types::Step]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStepOutput AWS API Documentation
     #
     class DescribeStepOutput < Struct.new(
       :step)
@@ -1102,6 +1174,8 @@ module Aws::EMR
     # @!attribute [rw] device
     #   The device name that is exposed to the instance, such as /dev/sdh.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsBlockDevice AWS API Documentation
     #
     class EbsBlockDevice < Struct.new(
       :volume_specification,
@@ -1135,6 +1209,8 @@ module Aws::EMR
     #   Number of EBS volumes with a specific volume configuration that will
     #   be associated with every instance in the instance group
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsBlockDeviceConfig AWS API Documentation
     #
     class EbsBlockDeviceConfig < Struct.new(
       :volume_specification,
@@ -1170,6 +1246,8 @@ module Aws::EMR
     #   Indicates whether an Amazon EBS volume is EBS-optimized.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsConfiguration AWS API Documentation
+    #
     class EbsConfiguration < Struct.new(
       :ebs_block_device_configs,
       :ebs_optimized)
@@ -1185,6 +1263,8 @@ module Aws::EMR
     # @!attribute [rw] volume_id
     #   The volume identifier of the EBS volume.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/EbsVolume AWS API Documentation
     #
     class EbsVolume < Struct.new(
       :device,
@@ -1244,6 +1324,8 @@ module Aws::EMR
     #   nodes.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Ec2InstanceAttributes AWS API Documentation
+    #
     class Ec2InstanceAttributes < Struct.new(
       :ec2_key_name,
       :ec2_subnet_id,
@@ -1276,6 +1358,8 @@ module Aws::EMR
     #   The path to the log file where the step failure root cause was
     #   originally recorded.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/FailureDetails AWS API Documentation
     #
     class FailureDetails < Struct.new(
       :reason,
@@ -1323,6 +1407,8 @@ module Aws::EMR
     #   function when executed.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/HadoopJarStepConfig AWS API Documentation
+    #
     class HadoopJarStepConfig < Struct.new(
       :properties,
       :jar,
@@ -1354,6 +1440,8 @@ module Aws::EMR
     #   The list of command line arguments to pass to the JAR file's main
     #   function for execution.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/HadoopStepConfig AWS API Documentation
     #
     class HadoopStepConfig < Struct.new(
       :jar,
@@ -1400,6 +1488,8 @@ module Aws::EMR
     # @!attribute [rw] ebs_volumes
     #   The list of EBS volumes that are attached to this instance.
     #   @return [Array<Types::EbsVolume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Instance AWS API Documentation
     #
     class Instance < Struct.new(
       :id,
@@ -1488,6 +1578,8 @@ module Aws::EMR
     #   EC2 instances in response to the value of a CloudWatch metric. See
     #   PutAutoScalingPolicy.
     #   @return [Types::AutoScalingPolicyDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroup AWS API Documentation
     #
     class InstanceGroup < Struct.new(
       :id,
@@ -1631,6 +1723,8 @@ module Aws::EMR
     #   PutAutoScalingPolicy.
     #   @return [Types::AutoScalingPolicy]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupConfig AWS API Documentation
+    #
     class InstanceGroupConfig < Struct.new(
       :name,
       :market,
@@ -1704,6 +1798,8 @@ module Aws::EMR
     #   The date/time the instance group was terminated.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupDetail AWS API Documentation
+    #
     class InstanceGroupDetail < Struct.new(
       :instance_group_id,
       :name,
@@ -1758,6 +1854,8 @@ module Aws::EMR
     #   Policy for customizing shrink operations.
     #   @return [Types::ShrinkPolicy]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupModifyConfig AWS API Documentation
+    #
     class InstanceGroupModifyConfig < Struct.new(
       :instance_group_id,
       :instance_count,
@@ -1775,6 +1873,8 @@ module Aws::EMR
     # @!attribute [rw] message
     #   The status change reason description.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupStateChangeReason AWS API Documentation
     #
     class InstanceGroupStateChangeReason < Struct.new(
       :code,
@@ -1795,6 +1895,8 @@ module Aws::EMR
     # @!attribute [rw] timeline
     #   The timeline of the instance group status over time.
     #   @return [Types::InstanceGroupTimeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupStatus AWS API Documentation
     #
     class InstanceGroupStatus < Struct.new(
       :state,
@@ -1817,6 +1919,8 @@ module Aws::EMR
     # @!attribute [rw] end_date_time
     #   The date and time when the instance group terminated.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceGroupTimeline AWS API Documentation
     #
     class InstanceGroupTimeline < Struct.new(
       :creation_date_time,
@@ -1852,6 +1956,8 @@ module Aws::EMR
     #   to be terminated.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceResizePolicy AWS API Documentation
+    #
     class InstanceResizePolicy < Struct.new(
       :instances_to_terminate,
       :instances_to_protect,
@@ -1868,6 +1974,8 @@ module Aws::EMR
     # @!attribute [rw] message
     #   The status change reason description.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceStateChangeReason AWS API Documentation
     #
     class InstanceStateChangeReason < Struct.new(
       :code,
@@ -1889,6 +1997,8 @@ module Aws::EMR
     #   The timeline of the instance status over time.
     #   @return [Types::InstanceTimeline]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceStatus AWS API Documentation
+    #
     class InstanceStatus < Struct.new(
       :state,
       :state_change_reason,
@@ -1909,6 +2019,8 @@ module Aws::EMR
     # @!attribute [rw] end_date_time
     #   The date and time when the instance was terminated.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTimeline AWS API Documentation
     #
     class InstanceTimeline < Struct.new(
       :creation_date_time,
@@ -2008,6 +2120,8 @@ module Aws::EMR
     #   versions of Amazon EMR earlier than 5.1.0.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowDetail AWS API Documentation
+    #
     class JobFlowDetail < Struct.new(
       :job_flow_id,
       :name,
@@ -2052,6 +2166,8 @@ module Aws::EMR
     # @!attribute [rw] last_state_change_reason
     #   Description of the job flow last changed state.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowExecutionStatusDetail AWS API Documentation
     #
     class JobFlowExecutionStatusDetail < Struct.new(
       :state,
@@ -2244,6 +2360,8 @@ module Aws::EMR
     #   nodes.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesConfig AWS API Documentation
+    #
     class JobFlowInstancesConfig < Struct.new(
       :master_instance_type,
       :slave_instance_type,
@@ -2332,6 +2450,8 @@ module Aws::EMR
     #   The Hadoop version for the job flow.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesDetail AWS API Documentation
+    #
     class JobFlowInstancesDetail < Struct.new(
       :master_instance_type,
       :master_public_dns_name,
@@ -2367,6 +2487,8 @@ module Aws::EMR
     #   The value part of the identified key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/KeyValue AWS API Documentation
+    #
     class KeyValue < Struct.new(
       :key,
       :value)
@@ -2392,6 +2514,8 @@ module Aws::EMR
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActionsInput AWS API Documentation
+    #
     class ListBootstrapActionsInput < Struct.new(
       :cluster_id,
       :marker)
@@ -2408,6 +2532,8 @@ module Aws::EMR
     #   The pagination token that indicates the next set of results to
     #   retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActionsOutput AWS API Documentation
     #
     class ListBootstrapActionsOutput < Struct.new(
       :bootstrap_actions,
@@ -2446,6 +2572,8 @@ module Aws::EMR
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClustersInput AWS API Documentation
+    #
     class ListClustersInput < Struct.new(
       :created_after,
       :created_before,
@@ -2465,6 +2593,8 @@ module Aws::EMR
     #   The pagination token that indicates the next set of results to
     #   retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClustersOutput AWS API Documentation
     #
     class ListClustersOutput < Struct.new(
       :clusters,
@@ -2491,6 +2621,8 @@ module Aws::EMR
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroupsInput AWS API Documentation
+    #
     class ListInstanceGroupsInput < Struct.new(
       :cluster_id,
       :marker)
@@ -2507,6 +2639,8 @@ module Aws::EMR
     #   The pagination token that indicates the next set of results to
     #   retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroupsOutput AWS API Documentation
     #
     class ListInstanceGroupsOutput < Struct.new(
       :instance_groups,
@@ -2550,6 +2684,8 @@ module Aws::EMR
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstancesInput AWS API Documentation
+    #
     class ListInstancesInput < Struct.new(
       :cluster_id,
       :instance_group_id,
@@ -2570,6 +2706,8 @@ module Aws::EMR
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstancesOutput AWS API Documentation
+    #
     class ListInstancesOutput < Struct.new(
       :instances,
       :marker)
@@ -2587,6 +2725,8 @@ module Aws::EMR
     #   The pagination token that indicates the set of results to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurationsInput AWS API Documentation
+    #
     class ListSecurityConfigurationsInput < Struct.new(
       :marker)
       include Aws::Structure
@@ -2602,6 +2742,8 @@ module Aws::EMR
     #   retrieve. Include the marker in the next ListSecurityConfiguration
     #   call to retrieve the next page of results, if required.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurationsOutput AWS API Documentation
     #
     class ListSecurityConfigurationsOutput < Struct.new(
       :security_configurations,
@@ -2639,6 +2781,8 @@ module Aws::EMR
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStepsInput AWS API Documentation
+    #
     class ListStepsInput < Struct.new(
       :cluster_id,
       :step_states,
@@ -2658,6 +2802,8 @@ module Aws::EMR
     #   The pagination token that indicates the next set of results to
     #   retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListStepsOutput AWS API Documentation
     #
     class ListStepsOutput < Struct.new(
       :steps,
@@ -2688,6 +2834,8 @@ module Aws::EMR
     # @!attribute [rw] value
     #   The dimension value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/MetricDimension AWS API Documentation
     #
     class MetricDimension < Struct.new(
       :key,
@@ -2727,6 +2875,8 @@ module Aws::EMR
     #   Instance groups to change.
     #   @return [Array<Types::InstanceGroupModifyConfig>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroupsInput AWS API Documentation
+    #
     class ModifyInstanceGroupsInput < Struct.new(
       :cluster_id,
       :instance_groups)
@@ -2745,6 +2895,8 @@ module Aws::EMR
     # @!attribute [rw] availability_zone
     #   The Amazon EC2 Availability Zone for the job flow.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PlacementType AWS API Documentation
     #
     class PlacementType < Struct.new(
       :availability_zone)
@@ -2811,6 +2963,8 @@ module Aws::EMR
     #   Specifies the definition of the automatic scaling policy.
     #   @return [Types::AutoScalingPolicy]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicyInput AWS API Documentation
+    #
     class PutAutoScalingPolicyInput < Struct.new(
       :cluster_id,
       :instance_group_id,
@@ -2831,6 +2985,8 @@ module Aws::EMR
     # @!attribute [rw] auto_scaling_policy
     #   The automatic scaling policy definition.
     #   @return [Types::AutoScalingPolicyDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicyOutput AWS API Documentation
     #
     class PutAutoScalingPolicyOutput < Struct.new(
       :cluster_id,
@@ -2857,12 +3013,16 @@ module Aws::EMR
     #   is applied.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyInput AWS API Documentation
+    #
     class RemoveAutoScalingPolicyInput < Struct.new(
       :cluster_id,
       :instance_group_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicyOutput AWS API Documentation
+    #
     class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
 
     # This input identifies a cluster and a list of tags to remove.
@@ -2884,6 +3044,8 @@ module Aws::EMR
     #   A list of tag keys to remove from a resource.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsInput AWS API Documentation
+    #
     class RemoveTagsInput < Struct.new(
       :resource_id,
       :tag_keys)
@@ -2891,6 +3053,8 @@ module Aws::EMR
     end
 
     # This output indicates the result of removing tags from a resource.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTagsOutput AWS API Documentation
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
@@ -3267,6 +3431,8 @@ module Aws::EMR
     #   earlier than 5.1.0.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
+    #
     class RunJobFlowInput < Struct.new(
       :name,
       :log_uri,
@@ -3295,6 +3461,8 @@ module Aws::EMR
     # @!attribute [rw] job_flow_id
     #   An unique identifier for the job flow.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowOutput AWS API Documentation
     #
     class RunJobFlowOutput < Struct.new(
       :job_flow_id)
@@ -3326,6 +3494,8 @@ module Aws::EMR
     #   triggered, and the periodicity of the adjustment.
     #   @return [Types::SimpleScalingPolicyConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingAction AWS API Documentation
+    #
     class ScalingAction < Struct.new(
       :market,
       :simple_scaling_policy_configuration)
@@ -3356,6 +3526,8 @@ module Aws::EMR
     #   which scaling activities are not allowed to grow. Scale-out
     #   activities will not add instances beyond this boundary.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingConstraints AWS API Documentation
     #
     class ScalingConstraints < Struct.new(
       :min_capacity,
@@ -3421,6 +3593,8 @@ module Aws::EMR
     #   scaling activity is triggered.
     #   @return [Types::ScalingTrigger]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingRule AWS API Documentation
+    #
     class ScalingRule < Struct.new(
       :name,
       :description,
@@ -3459,6 +3633,8 @@ module Aws::EMR
     #   activity begins.
     #   @return [Types::CloudWatchAlarmDefinition]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScalingTrigger AWS API Documentation
+    #
     class ScalingTrigger < Struct.new(
       :cloud_watch_alarm_definition)
       include Aws::Structure
@@ -3484,6 +3660,8 @@ module Aws::EMR
     #   script.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ScriptBootstrapActionConfig AWS API Documentation
+    #
     class ScriptBootstrapActionConfig < Struct.new(
       :path,
       :args)
@@ -3499,6 +3677,8 @@ module Aws::EMR
     # @!attribute [rw] creation_date_time
     #   The date and time the security configuration was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SecurityConfigurationSummary AWS API Documentation
     #
     class SecurityConfigurationSummary < Struct.new(
       :name,
@@ -3528,6 +3708,8 @@ module Aws::EMR
     #   API calls, user intervention, or job-flow error.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtectionInput AWS API Documentation
+    #
     class SetTerminationProtectionInput < Struct.new(
       :job_flow_ids,
       :termination_protected)
@@ -3556,6 +3738,8 @@ module Aws::EMR
     #   is set to False, only the IAM user that created a job flow can view
     #   and manage it.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput AWS API Documentation
     #
     class SetVisibleToAllUsersInput < Struct.new(
       :job_flow_ids,
@@ -3587,6 +3771,8 @@ module Aws::EMR
     #   Custom policy for requesting termination protection or termination
     #   of specific instances when shrinking an instance group.
     #   @return [Types::InstanceResizePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ShrinkPolicy AWS API Documentation
     #
     class ShrinkPolicy < Struct.new(
       :decommission_timeout,
@@ -3641,6 +3827,8 @@ module Aws::EMR
     #   default value is 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SimpleScalingPolicyConfiguration AWS API Documentation
+    #
     class SimpleScalingPolicyConfiguration < Struct.new(
       :adjustment_type,
       :scaling_adjustment,
@@ -3671,6 +3859,8 @@ module Aws::EMR
     # @!attribute [rw] status
     #   The current execution status details of the cluster step.
     #   @return [Types::StepStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Step AWS API Documentation
     #
     class Step < Struct.new(
       :id,
@@ -3714,6 +3904,8 @@ module Aws::EMR
     #   The JAR file used for the job flow step.
     #   @return [Types::HadoopJarStepConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepConfig AWS API Documentation
+    #
     class StepConfig < Struct.new(
       :name,
       :action_on_failure,
@@ -3730,6 +3922,8 @@ module Aws::EMR
     # @!attribute [rw] execution_status_detail
     #   The description of the step status.
     #   @return [Types::StepExecutionStatusDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepDetail AWS API Documentation
     #
     class StepDetail < Struct.new(
       :step_config,
@@ -3759,6 +3953,8 @@ module Aws::EMR
     #   A description of the step's current state.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepExecutionStatusDetail AWS API Documentation
+    #
     class StepExecutionStatusDetail < Struct.new(
       :state,
       :creation_date_time,
@@ -3778,6 +3974,8 @@ module Aws::EMR
     # @!attribute [rw] message
     #   The descriptive message for the state change reason.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepStateChangeReason AWS API Documentation
     #
     class StepStateChangeReason < Struct.new(
       :code,
@@ -3803,6 +4001,8 @@ module Aws::EMR
     # @!attribute [rw] timeline
     #   The timeline of the cluster step status over time.
     #   @return [Types::StepTimeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepStatus AWS API Documentation
     #
     class StepStatus < Struct.new(
       :state,
@@ -3836,6 +4036,8 @@ module Aws::EMR
     #   The current execution status details of the cluster step.
     #   @return [Types::StepStatus]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepSummary AWS API Documentation
+    #
     class StepSummary < Struct.new(
       :id,
       :name,
@@ -3859,6 +4061,8 @@ module Aws::EMR
     #   The date and time when the cluster step execution completed or
     #   failed.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepTimeline AWS API Documentation
     #
     class StepTimeline < Struct.new(
       :creation_date_time,
@@ -3886,6 +4090,8 @@ module Aws::EMR
     # @!attribute [rw] args
     #   The list of user-supplied arguments.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SupportedProductConfig AWS API Documentation
     #
     class SupportedProductConfig < Struct.new(
       :name,
@@ -3930,6 +4136,8 @@ module Aws::EMR
     #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -3948,6 +4156,8 @@ module Aws::EMR
     # @!attribute [rw] job_flow_ids
     #   A list of job flows to be shutdown.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlowsInput AWS API Documentation
     #
     class TerminateJobFlowsInput < Struct.new(
       :job_flow_ids)
@@ -3980,6 +4190,8 @@ module Aws::EMR
     #   The volume size, in gibibytes (GiB). This can be a number from 1 -
     #   1024. If the volume type is EBS-optimized, the minimum value is 10.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/VolumeSpecification AWS API Documentation
     #
     class VolumeSpecification < Struct.new(
       :volume_type,

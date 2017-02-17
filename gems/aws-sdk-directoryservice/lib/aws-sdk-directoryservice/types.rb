@@ -98,6 +98,8 @@ module Aws::DirectoryService
     #   not exposed publicly.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutesRequest AWS API Documentation
+    #
     class AddIpRoutesRequest < Struct.new(
       :directory_id,
       :ip_routes,
@@ -105,6 +107,8 @@ module Aws::DirectoryService
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutesResult AWS API Documentation
+    #
     class AddIpRoutesResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AddTagsToResourceRequest
@@ -128,12 +132,16 @@ module Aws::DirectoryService
     #   The tags to be assigned to the directory.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResourceRequest AWS API Documentation
+    #
     class AddTagsToResourceRequest < Struct.new(
       :resource_id,
       :tags)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddTagsToResourceResult AWS API Documentation
+    #
     class AddTagsToResourceResult < Aws::EmptyStructure; end
 
     # Represents a named directory attribute.
@@ -153,6 +161,8 @@ module Aws::DirectoryService
     # @!attribute [rw] value
     #   The value of the attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Attribute AWS API Documentation
     #
     class Attribute < Struct.new(
       :name,
@@ -177,12 +187,16 @@ module Aws::DirectoryService
     #   The identifier of the schema extension that will be canceled.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtensionRequest AWS API Documentation
+    #
     class CancelSchemaExtensionRequest < Struct.new(
       :directory_id,
       :schema_extension_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CancelSchemaExtensionResult AWS API Documentation
+    #
     class CancelSchemaExtensionResult < Aws::EmptyStructure; end
 
     # Contains information about a computer account in a directory.
@@ -199,6 +213,8 @@ module Aws::DirectoryService
     #   An array of Attribute objects containing the LDAP attributes that
     #   belong to the computer account.
     #   @return [Array<Types::Attribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Computer AWS API Documentation
     #
     class Computer < Struct.new(
       :computer_id,
@@ -227,6 +243,8 @@ module Aws::DirectoryService
     #   value is `Domain`, which will replicate the conditional forwarder to
     #   all of the domain controllers for your AWS directory.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConditionalForwarder AWS API Documentation
     #
     class ConditionalForwarder < Struct.new(
       :remote_domain_name,
@@ -280,6 +298,8 @@ module Aws::DirectoryService
     #   information for the operation.
     #   @return [Types::DirectoryConnectSettings]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryRequest AWS API Documentation
+    #
     class ConnectDirectoryRequest < Struct.new(
       :name,
       :short_name,
@@ -295,6 +315,8 @@ module Aws::DirectoryService
     # @!attribute [rw] directory_id
     #   The identifier of the new directory.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ConnectDirectoryResult AWS API Documentation
     #
     class ConnectDirectoryResult < Struct.new(
       :directory_id)
@@ -323,6 +345,8 @@ module Aws::DirectoryService
     #   exists.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAliasRequest AWS API Documentation
+    #
     class CreateAliasRequest < Struct.new(
       :directory_id,
       :alias)
@@ -338,6 +362,8 @@ module Aws::DirectoryService
     # @!attribute [rw] alias
     #   The alias for the directory.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateAliasResult AWS API Documentation
     #
     class CreateAliasResult < Struct.new(
       :directory_id,
@@ -388,6 +414,8 @@ module Aws::DirectoryService
     #   apply to the computer account.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputerRequest AWS API Documentation
+    #
     class CreateComputerRequest < Struct.new(
       :directory_id,
       :computer_name,
@@ -402,6 +430,8 @@ module Aws::DirectoryService
     # @!attribute [rw] computer
     #   A Computer object that represents the computer account.
     #   @return [Types::Computer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateComputerResult AWS API Documentation
     #
     class CreateComputerResult < Struct.new(
       :computer)
@@ -437,6 +467,8 @@ module Aws::DirectoryService
     #   RemoteDomainName.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarderRequest AWS API Documentation
+    #
     class CreateConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
@@ -445,6 +477,8 @@ module Aws::DirectoryService
     end
 
     # The result of a CreateConditinalForwarder request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateConditionalForwarderResult AWS API Documentation
     #
     class CreateConditionalForwarderResult < Aws::EmptyStructure; end
 
@@ -493,6 +527,8 @@ module Aws::DirectoryService
     #   for the operation.
     #   @return [Types::DirectoryVpcSettings]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryRequest AWS API Documentation
+    #
     class CreateDirectoryRequest < Struct.new(
       :name,
       :short_name,
@@ -508,6 +544,8 @@ module Aws::DirectoryService
     # @!attribute [rw] directory_id
     #   The identifier of the directory that was created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateDirectoryResult AWS API Documentation
     #
     class CreateDirectoryResult < Struct.new(
       :directory_id)
@@ -558,6 +596,8 @@ module Aws::DirectoryService
     #   CreateMicrosoftAD operation.
     #   @return [Types::DirectoryVpcSettings]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADRequest AWS API Documentation
+    #
     class CreateMicrosoftADRequest < Struct.new(
       :name,
       :short_name,
@@ -572,6 +612,8 @@ module Aws::DirectoryService
     # @!attribute [rw] directory_id
     #   The identifier of the directory that was created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateMicrosoftADResult AWS API Documentation
     #
     class CreateMicrosoftADResult < Struct.new(
       :directory_id)
@@ -596,6 +638,8 @@ module Aws::DirectoryService
     #   The descriptive name to apply to the snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshotRequest AWS API Documentation
+    #
     class CreateSnapshotRequest < Struct.new(
       :directory_id,
       :name)
@@ -607,6 +651,8 @@ module Aws::DirectoryService
     # @!attribute [rw] snapshot_id
     #   The identifier of the snapshot that was created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateSnapshotResult AWS API Documentation
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot_id)
@@ -664,6 +710,8 @@ module Aws::DirectoryService
     #   RemoteDomainName.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrustRequest AWS API Documentation
+    #
     class CreateTrustRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
@@ -679,6 +727,8 @@ module Aws::DirectoryService
     # @!attribute [rw] trust_id
     #   A unique identifier for the trust relationship that was created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/CreateTrustResult AWS API Documentation
     #
     class CreateTrustResult < Struct.new(
       :trust_id)
@@ -705,6 +755,8 @@ module Aws::DirectoryService
     #   which you are deleting the conditional forwarder.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarderRequest AWS API Documentation
+    #
     class DeleteConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name)
@@ -712,6 +764,8 @@ module Aws::DirectoryService
     end
 
     # The result of a DeleteConditionalForwarder request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteConditionalForwarderResult AWS API Documentation
     #
     class DeleteConditionalForwarderResult < Aws::EmptyStructure; end
 
@@ -728,6 +782,8 @@ module Aws::DirectoryService
     #   The identifier of the directory to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectoryRequest AWS API Documentation
+    #
     class DeleteDirectoryRequest < Struct.new(
       :directory_id)
       include Aws::Structure
@@ -738,6 +794,8 @@ module Aws::DirectoryService
     # @!attribute [rw] directory_id
     #   The directory identifier.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteDirectoryResult AWS API Documentation
     #
     class DeleteDirectoryResult < Struct.new(
       :directory_id)
@@ -757,6 +815,8 @@ module Aws::DirectoryService
     #   The identifier of the directory snapshot to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteSnapshotRequest AWS API Documentation
+    #
     class DeleteSnapshotRequest < Struct.new(
       :snapshot_id)
       include Aws::Structure
@@ -767,6 +827,8 @@ module Aws::DirectoryService
     # @!attribute [rw] snapshot_id
     #   The identifier of the directory snapshot that was deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteSnapshotResult AWS API Documentation
     #
     class DeleteSnapshotResult < Struct.new(
       :snapshot_id)
@@ -792,6 +854,8 @@ module Aws::DirectoryService
     #   Delete a conditional forwarder as part of a DeleteTrustRequest.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrustRequest AWS API Documentation
+    #
     class DeleteTrustRequest < Struct.new(
       :trust_id,
       :delete_associated_conditional_forwarder)
@@ -803,6 +867,8 @@ module Aws::DirectoryService
     # @!attribute [rw] trust_id
     #   The Trust ID of the trust relationship that was deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeleteTrustResult AWS API Documentation
     #
     class DeleteTrustResult < Struct.new(
       :trust_id)
@@ -830,6 +896,8 @@ module Aws::DirectoryService
     #   publisher.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicRequest AWS API Documentation
+    #
     class DeregisterEventTopicRequest < Struct.new(
       :directory_id,
       :topic_name)
@@ -837,6 +905,8 @@ module Aws::DirectoryService
     end
 
     # The result of a DeregisterEventTopic request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DeregisterEventTopicResult AWS API Documentation
     #
     class DeregisterEventTopicResult < Aws::EmptyStructure; end
 
@@ -861,6 +931,8 @@ module Aws::DirectoryService
     #   member is null, all conditional forwarders are returned.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwardersRequest AWS API Documentation
+    #
     class DescribeConditionalForwardersRequest < Struct.new(
       :directory_id,
       :remote_domain_names)
@@ -872,6 +944,8 @@ module Aws::DirectoryService
     # @!attribute [rw] conditional_forwarders
     #   The list of conditional forwarders that have been created.
     #   @return [Array<Types::ConditionalForwarder>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeConditionalForwardersResult AWS API Documentation
     #
     class DescribeConditionalForwardersResult < Struct.new(
       :conditional_forwarders)
@@ -909,6 +983,8 @@ module Aws::DirectoryService
     #   operation.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoriesRequest AWS API Documentation
+    #
     class DescribeDirectoriesRequest < Struct.new(
       :directory_ids,
       :next_token,
@@ -932,6 +1008,8 @@ module Aws::DirectoryService
     #   *NextToken* parameter in a subsequent call to DescribeDirectories to
     #   retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeDirectoriesResult AWS API Documentation
     #
     class DescribeDirectoriesResult < Struct.new(
       :directory_descriptions,
@@ -964,6 +1042,8 @@ module Aws::DirectoryService
     #   thrown.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopicsRequest AWS API Documentation
+    #
     class DescribeEventTopicsRequest < Struct.new(
       :directory_id,
       :topic_names)
@@ -976,6 +1056,8 @@ module Aws::DirectoryService
     #   A list of SNS topic names that receive status messages from the
     #   specified Directory ID.
     #   @return [Array<Types::EventTopic>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeEventTopicsResult AWS API Documentation
     #
     class DescribeEventTopicsResult < Struct.new(
       :event_topics)
@@ -1014,6 +1096,8 @@ module Aws::DirectoryService
     #   The maximum number of objects to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshotsRequest AWS API Documentation
+    #
     class DescribeSnapshotsRequest < Struct.new(
       :directory_id,
       :snapshot_ids,
@@ -1037,6 +1121,8 @@ module Aws::DirectoryService
     #   If not null, more results are available. Pass this value in the
     #   *NextToken* member of a subsequent call to DescribeSnapshots.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeSnapshotsResult AWS API Documentation
     #
     class DescribeSnapshotsResult < Struct.new(
       :snapshots,
@@ -1081,6 +1167,8 @@ module Aws::DirectoryService
     #   The maximum number of objects to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrustsRequest AWS API Documentation
+    #
     class DescribeTrustsRequest < Struct.new(
       :directory_id,
       :trust_ids,
@@ -1105,6 +1193,8 @@ module Aws::DirectoryService
     #   *NextToken* parameter in a subsequent call to DescribeTrusts to
     #   retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DescribeTrustsResult AWS API Documentation
     #
     class DescribeTrustsResult < Struct.new(
       :trusts,
@@ -1151,6 +1241,8 @@ module Aws::DirectoryService
     #   * Join computers to the domain
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryConnectSettings AWS API Documentation
+    #
     class DirectoryConnectSettings < Struct.new(
       :vpc_id,
       :subnet_ids,
@@ -1184,6 +1276,8 @@ module Aws::DirectoryService
     # @!attribute [rw] connect_ips
     #   The IP addresses of the AD Connector servers.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryConnectSettingsDescription AWS API Documentation
     #
     class DirectoryConnectSettingsDescription < Struct.new(
       :vpc_id,
@@ -1285,6 +1379,8 @@ module Aws::DirectoryService
     #   information, see EnableSso and DisableSso.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryDescription AWS API Documentation
+    #
     class DirectoryDescription < Struct.new(
       :directory_id,
       :name,
@@ -1346,6 +1442,8 @@ module Aws::DirectoryService
     #   Indicates if the connected directory limit has been reached.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryLimits AWS API Documentation
+    #
     class DirectoryLimits < Struct.new(
       :cloud_only_directories_limit,
       :cloud_only_directories_current_count,
@@ -1381,6 +1479,8 @@ module Aws::DirectoryService
     #   subnets.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryVpcSettings AWS API Documentation
+    #
     class DirectoryVpcSettings < Struct.new(
       :vpc_id,
       :subnet_ids)
@@ -1409,6 +1509,8 @@ module Aws::DirectoryService
     #   The list of Availability Zones that the directory is in.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DirectoryVpcSettingsDescription AWS API Documentation
+    #
     class DirectoryVpcSettingsDescription < Struct.new(
       :vpc_id,
       :subnet_ids,
@@ -1430,12 +1532,16 @@ module Aws::DirectoryService
     #   The identifier of the directory for which to disable MFA.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadiusRequest AWS API Documentation
+    #
     class DisableRadiusRequest < Struct.new(
       :directory_id)
       include Aws::Structure
     end
 
     # Contains the results of the DisableRadius operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableRadiusResult AWS API Documentation
     #
     class DisableRadiusResult < Aws::EmptyStructure; end
 
@@ -1473,6 +1579,8 @@ module Aws::DirectoryService
     #   information, see the *UserName* parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSsoRequest AWS API Documentation
+    #
     class DisableSsoRequest < Struct.new(
       :directory_id,
       :user_name,
@@ -1481,6 +1589,8 @@ module Aws::DirectoryService
     end
 
     # Contains the results of the DisableSso operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/DisableSsoResult AWS API Documentation
     #
     class DisableSsoResult < Aws::EmptyStructure; end
 
@@ -1512,6 +1622,8 @@ module Aws::DirectoryService
     #   server.
     #   @return [Types::RadiusSettings]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadiusRequest AWS API Documentation
+    #
     class EnableRadiusRequest < Struct.new(
       :directory_id,
       :radius_settings)
@@ -1519,6 +1631,8 @@ module Aws::DirectoryService
     end
 
     # Contains the results of the EnableRadius operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableRadiusResult AWS API Documentation
     #
     class EnableRadiusResult < Aws::EmptyStructure; end
 
@@ -1555,6 +1669,8 @@ module Aws::DirectoryService
     #   information, see the *UserName* parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoRequest AWS API Documentation
+    #
     class EnableSsoRequest < Struct.new(
       :directory_id,
       :user_name,
@@ -1563,6 +1679,8 @@ module Aws::DirectoryService
     end
 
     # Contains the results of the EnableSso operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EnableSsoResult AWS API Documentation
     #
     class EnableSsoResult < Aws::EmptyStructure; end
 
@@ -1592,6 +1710,8 @@ module Aws::DirectoryService
     #   The topic registration status.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/EventTopic AWS API Documentation
+    #
     class EventTopic < Struct.new(
       :directory_id,
       :topic_name,
@@ -1605,6 +1725,8 @@ module Aws::DirectoryService
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsRequest AWS API Documentation
+    #
     class GetDirectoryLimitsRequest < Aws::EmptyStructure; end
 
     # Contains the results of the GetDirectoryLimits operation.
@@ -1613,6 +1735,8 @@ module Aws::DirectoryService
     #   A DirectoryLimits object that contains the directory limits for the
     #   current region.
     #   @return [Types::DirectoryLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetDirectoryLimitsResult AWS API Documentation
     #
     class GetDirectoryLimitsResult < Struct.new(
       :directory_limits)
@@ -1632,6 +1756,8 @@ module Aws::DirectoryService
     #   Contains the identifier of the directory to obtain the limits for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimitsRequest AWS API Documentation
+    #
     class GetSnapshotLimitsRequest < Struct.new(
       :directory_id)
       include Aws::Structure
@@ -1643,6 +1769,8 @@ module Aws::DirectoryService
     #   A SnapshotLimits object that contains the manual snapshot limits for
     #   the specified directory.
     #   @return [Types::SnapshotLimits]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/GetSnapshotLimitsResult AWS API Documentation
     #
     class GetSnapshotLimitsResult < Struct.new(
       :snapshot_limits)
@@ -1670,6 +1798,8 @@ module Aws::DirectoryService
     # @!attribute [rw] description
     #   Description of the address block.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IpRoute AWS API Documentation
     #
     class IpRoute < Struct.new(
       :cidr_ip,
@@ -1702,6 +1832,8 @@ module Aws::DirectoryService
     # @!attribute [rw] description
     #   Description of the IpRouteInfo.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/IpRouteInfo AWS API Documentation
     #
     class IpRouteInfo < Struct.new(
       :directory_id,
@@ -1738,6 +1870,8 @@ module Aws::DirectoryService
     #   operation.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutesRequest AWS API Documentation
+    #
     class ListIpRoutesRequest < Struct.new(
       :directory_id,
       :next_token,
@@ -1754,6 +1888,8 @@ module Aws::DirectoryService
     #   *NextToken* parameter in a subsequent call to ListIpRoutes to
     #   retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListIpRoutesResult AWS API Documentation
     #
     class ListIpRoutesResult < Struct.new(
       :ip_routes_info,
@@ -1784,6 +1920,8 @@ module Aws::DirectoryService
     #   The maximum number of items to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensionsRequest AWS API Documentation
+    #
     class ListSchemaExtensionsRequest < Struct.new(
       :directory_id,
       :next_token,
@@ -1800,6 +1938,8 @@ module Aws::DirectoryService
     #   `NextToken` parameter in a subsequent call to `ListSchemaExtensions`
     #   to retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListSchemaExtensionsResult AWS API Documentation
     #
     class ListSchemaExtensionsResult < Struct.new(
       :schema_extensions_info,
@@ -1829,6 +1969,8 @@ module Aws::DirectoryService
     #   Reserved for future use.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListTagsForResourceRequest AWS API Documentation
+    #
     class ListTagsForResourceRequest < Struct.new(
       :resource_id,
       :next_token,
@@ -1843,6 +1985,8 @@ module Aws::DirectoryService
     # @!attribute [rw] next_token
     #   Reserved for future use.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/ListTagsForResourceResult AWS API Documentation
     #
     class ListTagsForResourceResult < Struct.new(
       :tags,
@@ -1905,6 +2049,8 @@ module Aws::DirectoryService
     #   Not currently used.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RadiusSettings AWS API Documentation
+    #
     class RadiusSettings < Struct.new(
       :radius_servers,
       :radius_port,
@@ -1937,6 +2083,8 @@ module Aws::DirectoryService
     #   Directory ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopicRequest AWS API Documentation
+    #
     class RegisterEventTopicRequest < Struct.new(
       :directory_id,
       :topic_name)
@@ -1944,6 +2092,8 @@ module Aws::DirectoryService
     end
 
     # The result of a RegisterEventTopic request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RegisterEventTopicResult AWS API Documentation
     #
     class RegisterEventTopicResult < Aws::EmptyStructure; end
 
@@ -1964,12 +2114,16 @@ module Aws::DirectoryService
     #   IP address blocks that you want to remove.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutesRequest AWS API Documentation
+    #
     class RemoveIpRoutesRequest < Struct.new(
       :directory_id,
       :cidr_ips)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveIpRoutesResult AWS API Documentation
+    #
     class RemoveIpRoutesResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RemoveTagsFromResourceRequest
@@ -1988,12 +2142,16 @@ module Aws::DirectoryService
     #   The tag key (name) of the tag to be removed.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResourceRequest AWS API Documentation
+    #
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_id,
       :tag_keys)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RemoveTagsFromResourceResult AWS API Documentation
+    #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
     # An object representing the inputs for the RestoreFromSnapshot
@@ -2010,12 +2168,16 @@ module Aws::DirectoryService
     #   The identifier of the snapshot to restore from.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshotRequest AWS API Documentation
+    #
     class RestoreFromSnapshotRequest < Struct.new(
       :snapshot_id)
       include Aws::Structure
     end
 
     # Contains the results of the RestoreFromSnapshot operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/RestoreFromSnapshotResult AWS API Documentation
     #
     class RestoreFromSnapshotResult < Aws::EmptyStructure; end
 
@@ -2050,6 +2212,8 @@ module Aws::DirectoryService
     # @!attribute [rw] end_date_time
     #   The date and time that the schema extension was completed.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SchemaExtensionInfo AWS API Documentation
     #
     class SchemaExtensionInfo < Struct.new(
       :directory_id,
@@ -2088,6 +2252,8 @@ module Aws::DirectoryService
     #   The date and time that the snapshot was taken.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Snapshot AWS API Documentation
+    #
     class Snapshot < Struct.new(
       :directory_id,
       :snapshot_id,
@@ -2111,6 +2277,8 @@ module Aws::DirectoryService
     # @!attribute [rw] manual_snapshots_limit_reached
     #   Indicates if the manual snapshot limit has been reached.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/SnapshotLimits AWS API Documentation
     #
     class SnapshotLimits < Struct.new(
       :manual_snapshots_limit,
@@ -2150,6 +2318,8 @@ module Aws::DirectoryService
     #   A description of the schema extension.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtensionRequest AWS API Documentation
+    #
     class StartSchemaExtensionRequest < Struct.new(
       :directory_id,
       :create_snapshot_before_schema_extension,
@@ -2161,6 +2331,8 @@ module Aws::DirectoryService
     # @!attribute [rw] schema_extension_id
     #   The identifier of the schema extension that will be applied.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/StartSchemaExtensionResult AWS API Documentation
     #
     class StartSchemaExtensionResult < Struct.new(
       :schema_extension_id)
@@ -2192,6 +2364,8 @@ module Aws::DirectoryService
     #   regex:
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -2244,6 +2418,8 @@ module Aws::DirectoryService
     #   The reason for the TrustState.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/Trust AWS API Documentation
+    #
     class Trust < Struct.new(
       :directory_id,
       :trust_id,
@@ -2284,6 +2460,8 @@ module Aws::DirectoryService
     #   the conditional forwarder.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderRequest AWS API Documentation
+    #
     class UpdateConditionalForwarderRequest < Struct.new(
       :directory_id,
       :remote_domain_name,
@@ -2292,6 +2470,8 @@ module Aws::DirectoryService
     end
 
     # The result of an UpdateConditionalForwarder request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateConditionalForwarderResult AWS API Documentation
     #
     class UpdateConditionalForwarderResult < Aws::EmptyStructure; end
 
@@ -2324,6 +2504,8 @@ module Aws::DirectoryService
     #   server.
     #   @return [Types::RadiusSettings]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadiusRequest AWS API Documentation
+    #
     class UpdateRadiusRequest < Struct.new(
       :directory_id,
       :radius_settings)
@@ -2331,6 +2513,8 @@ module Aws::DirectoryService
     end
 
     # Contains the results of the UpdateRadius operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/UpdateRadiusResult AWS API Documentation
     #
     class UpdateRadiusResult < Aws::EmptyStructure; end
 
@@ -2348,6 +2532,8 @@ module Aws::DirectoryService
     #   The unique Trust ID of the trust relationship to verify.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrustRequest AWS API Documentation
+    #
     class VerifyTrustRequest < Struct.new(
       :trust_id)
       include Aws::Structure
@@ -2358,6 +2544,8 @@ module Aws::DirectoryService
     # @!attribute [rw] trust_id
     #   The unique Trust ID of the trust relationship that was verified.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/VerifyTrustResult AWS API Documentation
     #
     class VerifyTrustResult < Struct.new(
       :trust_id)

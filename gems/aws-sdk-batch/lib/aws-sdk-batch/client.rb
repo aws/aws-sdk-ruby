@@ -166,6 +166,8 @@ module Aws::Batch
     #     reason: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJob AWS API Documentation
+    #
     # @overload cancel_job(params = {})
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
@@ -257,6 +259,8 @@ module Aws::Batch
     #   resp.compute_environment_name #=> String
     #   resp.compute_environment_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironment AWS API Documentation
+    #
     # @overload create_compute_environment(params = {})
     # @param [Hash] params ({})
     def create_compute_environment(params = {}, options = {})
@@ -321,6 +325,8 @@ module Aws::Batch
     #   resp.job_queue_name #=> String
     #   resp.job_queue_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueue AWS API Documentation
+    #
     # @overload create_job_queue(params = {})
     # @param [Hash] params ({})
     def create_job_queue(params = {}, options = {})
@@ -346,6 +352,8 @@ module Aws::Batch
     #   resp = client.delete_compute_environment({
     #     compute_environment: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironment AWS API Documentation
     #
     # @overload delete_compute_environment(params = {})
     # @param [Hash] params ({})
@@ -373,6 +381,8 @@ module Aws::Batch
     #     job_queue: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueue AWS API Documentation
+    #
     # @overload delete_job_queue(params = {})
     # @param [Hash] params ({})
     def delete_job_queue(params = {}, options = {})
@@ -393,6 +403,8 @@ module Aws::Batch
     #   resp = client.deregister_job_definition({
     #     job_definition: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinition AWS API Documentation
     #
     # @overload deregister_job_definition(params = {})
     # @param [Hash] params ({})
@@ -477,6 +489,8 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.spot_iam_fleet_role #=> String
     #   resp.compute_environments[0].service_role #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments AWS API Documentation
     #
     # @overload describe_compute_environments(params = {})
     # @param [Hash] params ({})
@@ -572,6 +586,8 @@ module Aws::Batch
     #   resp.job_definitions[0].container_properties.user #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitions AWS API Documentation
+    #
     # @overload describe_job_definitions(params = {})
     # @param [Hash] params ({})
     def describe_job_definitions(params = {}, options = {})
@@ -634,6 +650,8 @@ module Aws::Batch
     #   resp.job_queues[0].compute_environment_order[0].order #=> Integer
     #   resp.job_queues[0].compute_environment_order[0].compute_environment #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueues AWS API Documentation
     #
     # @overload describe_job_queues(params = {})
     # @param [Hash] params ({})
@@ -700,6 +718,8 @@ module Aws::Batch
     #   resp.jobs[0].container.reason #=> String
     #   resp.jobs[0].container.container_instance_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
+    #
     # @overload describe_jobs(params = {})
     # @param [Hash] params ({})
     def describe_jobs(params = {}, options = {})
@@ -760,6 +780,8 @@ module Aws::Batch
     #   resp.job_summary_list[0].job_id #=> String
     #   resp.job_summary_list[0].job_name #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs AWS API Documentation
     #
     # @overload list_jobs(params = {})
     # @param [Hash] params ({})
@@ -846,6 +868,8 @@ module Aws::Batch
     #   resp.job_definition_arn #=> String
     #   resp.revision #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinition AWS API Documentation
+    #
     # @overload register_job_definition(params = {})
     # @param [Hash] params ({})
     def register_job_definition(params = {}, options = {})
@@ -926,6 +950,8 @@ module Aws::Batch
     #   resp.job_name #=> String
     #   resp.job_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJob AWS API Documentation
+    #
     # @overload submit_job(params = {})
     # @param [Hash] params ({})
     def submit_job(params = {}, options = {})
@@ -954,6 +980,8 @@ module Aws::Batch
     #     job_id: "String", # required
     #     reason: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJob AWS API Documentation
     #
     # @overload terminate_job(params = {})
     # @param [Hash] params ({})
@@ -1004,6 +1032,8 @@ module Aws::Batch
     #
     #   resp.compute_environment_name #=> String
     #   resp.compute_environment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironment AWS API Documentation
     #
     # @overload update_compute_environment(params = {})
     # @param [Hash] params ({})
@@ -1057,6 +1087,8 @@ module Aws::Batch
     #
     #   resp.job_queue_name #=> String
     #   resp.job_queue_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueue AWS API Documentation
     #
     # @overload update_job_queue(params = {})
     # @param [Hash] params ({})

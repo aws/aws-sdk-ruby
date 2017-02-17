@@ -19,6 +19,8 @@ module Aws::CloudFormation
     #   The value that is associated with the account limit name.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/AccountLimit AWS API Documentation
+    #
     class AccountLimit < Struct.new(
       :name,
       :value)
@@ -38,6 +40,8 @@ module Aws::CloudFormation
     #   The name or the unique stack ID that is associated with the stack.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStackInput AWS API Documentation
+    #
     class CancelUpdateStackInput < Struct.new(
       :stack_name)
       include Aws::Structure
@@ -55,6 +59,8 @@ module Aws::CloudFormation
     #   A `ResourceChange` structure that describes the resource and action
     #   that AWS CloudFormation will perform.
     #   @return [Types::ResourceChange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Change AWS API Documentation
     #
     class Change < Struct.new(
       :type,
@@ -107,6 +113,8 @@ module Aws::CloudFormation
     # @!attribute [rw] description
     #   Descriptive information about the change set.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ChangeSetSummary AWS API Documentation
     #
     class ChangeSetSummary < Struct.new(
       :stack_id,
@@ -197,6 +205,8 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackInput AWS API Documentation
+    #
     class ContinueUpdateRollbackInput < Struct.new(
       :stack_name,
       :role_arn,
@@ -205,6 +215,8 @@ module Aws::CloudFormation
     end
 
     # The output for a ContinueUpdateRollback action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackOutput AWS API Documentation
     #
     class ContinueUpdateRollbackOutput < Aws::EmptyStructure; end
 
@@ -406,6 +418,8 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetInput AWS API Documentation
+    #
     class CreateChangeSetInput < Struct.new(
       :stack_name,
       :template_body,
@@ -433,6 +447,8 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_id
     #   The unique ID of the stack.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSetOutput AWS API Documentation
     #
     class CreateChangeSetOutput < Struct.new(
       :id,
@@ -654,6 +670,8 @@ module Aws::CloudFormation
     #   maximum number of 10 tags can be specified.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
+    #
     class CreateStackInput < Struct.new(
       :stack_name,
       :template_body,
@@ -677,6 +695,8 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_id
     #   Unique identifier of the stack.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackOutput AWS API Documentation
     #
     class CreateStackOutput < Struct.new(
       :stack_id)
@@ -703,6 +723,8 @@ module Aws::CloudFormation
     #   stack name or ID (ARN) that is associated with it.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSetInput AWS API Documentation
+    #
     class DeleteChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name)
@@ -710,6 +732,8 @@ module Aws::CloudFormation
     end
 
     # The output for the DeleteChangeSet action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSetOutput AWS API Documentation
     #
     class DeleteChangeSetOutput < Aws::EmptyStructure; end
 
@@ -750,6 +774,8 @@ module Aws::CloudFormation
     #   your user credentials.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput AWS API Documentation
+    #
     class DeleteStackInput < Struct.new(
       :stack_name,
       :retain_resources,
@@ -771,6 +797,8 @@ module Aws::CloudFormation
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimitsInput AWS API Documentation
+    #
     class DescribeAccountLimitsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -788,6 +816,8 @@ module Aws::CloudFormation
     #   next page of limits. If no additional page exists, this value is
     #   null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimitsOutput AWS API Documentation
     #
     class DescribeAccountLimitsOutput < Struct.new(
       :account_limits,
@@ -820,6 +850,8 @@ module Aws::CloudFormation
     #   A string (provided by the DescribeChangeSet response output) that
     #   identifies the next page of information that you want to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetInput AWS API Documentation
     #
     class DescribeChangeSetInput < Struct.new(
       :change_set_name,
@@ -909,6 +941,8 @@ module Aws::CloudFormation
     #   of changes. If there is no additional page, this value is null.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSetOutput AWS API Documentation
+    #
     class DescribeChangeSetOutput < Struct.new(
       :change_set_name,
       :change_set_id,
@@ -955,6 +989,8 @@ module Aws::CloudFormation
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsInput AWS API Documentation
+    #
     class DescribeStackEventsInput < Struct.new(
       :stack_name,
       :next_token)
@@ -972,6 +1008,8 @@ module Aws::CloudFormation
     #   next page of events. If no additional page exists, this value is
     #   null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEventsOutput AWS API Documentation
     #
     class DescribeStackEventsOutput < Struct.new(
       :stack_events,
@@ -1007,6 +1045,8 @@ module Aws::CloudFormation
     #   Default: There is no default value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceInput AWS API Documentation
+    #
     class DescribeStackResourceInput < Struct.new(
       :stack_name,
       :logical_resource_id)
@@ -1019,6 +1059,8 @@ module Aws::CloudFormation
     #   A `StackResourceDetail` structure containing the description of the
     #   specified resource in the specified stack.
     #   @return [Types::StackResourceDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourceOutput AWS API Documentation
     #
     class DescribeStackResourceOutput < Struct.new(
       :stack_resource_detail)
@@ -1073,6 +1115,8 @@ module Aws::CloudFormation
     #   Default: There is no default value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesInput AWS API Documentation
+    #
     class DescribeStackResourcesInput < Struct.new(
       :stack_name,
       :logical_resource_id,
@@ -1085,6 +1129,8 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_resources
     #   A list of `StackResource` structures.
     #   @return [Array<Types::StackResource>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResourcesOutput AWS API Documentation
     #
     class DescribeStackResourcesOutput < Struct.new(
       :stack_resources)
@@ -1118,6 +1164,8 @@ module Aws::CloudFormation
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacksInput AWS API Documentation
+    #
     class DescribeStacksInput < Struct.new(
       :stack_name,
       :next_token)
@@ -1135,6 +1183,8 @@ module Aws::CloudFormation
     #   next page of stacks. If no additional page exists, this value is
     #   null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacksOutput AWS API Documentation
     #
     class DescribeStacksOutput < Struct.new(
       :stacks,
@@ -1190,6 +1240,8 @@ module Aws::CloudFormation
     #   A list of `Parameter` structures that specify input parameters.
     #   @return [Array<Types::Parameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCostInput AWS API Documentation
+    #
     class EstimateTemplateCostInput < Struct.new(
       :template_body,
       :template_url,
@@ -1203,6 +1255,8 @@ module Aws::CloudFormation
     #   An AWS Simple Monthly Calculator URL with a query string that
     #   describes the resources required to run the template.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCostOutput AWS API Documentation
     #
     class EstimateTemplateCostOutput < Struct.new(
       :url)
@@ -1229,6 +1283,8 @@ module Aws::CloudFormation
     #   ID (ARN) that is associated with the change set you want to execute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetInput AWS API Documentation
+    #
     class ExecuteChangeSetInput < Struct.new(
       :change_set_name,
       :stack_name)
@@ -1236,6 +1292,8 @@ module Aws::CloudFormation
     end
 
     # The output for the ExecuteChangeSet action.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetOutput AWS API Documentation
     #
     class ExecuteChangeSetOutput < Aws::EmptyStructure; end
 
@@ -1259,6 +1317,8 @@ module Aws::CloudFormation
     #   stack's `Outputs` section.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Export AWS API Documentation
+    #
     class Export < Struct.new(
       :exporting_stack_id,
       :name,
@@ -1280,6 +1340,8 @@ module Aws::CloudFormation
     #   policy you want to get.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyInput AWS API Documentation
+    #
     class GetStackPolicyInput < Struct.new(
       :stack_name)
       include Aws::Structure
@@ -1296,6 +1358,8 @@ module Aws::CloudFormation
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicyOutput AWS API Documentation
     #
     class GetStackPolicyOutput < Struct.new(
       :stack_policy_body)
@@ -1342,6 +1406,8 @@ module Aws::CloudFormation
     #   specifies `Original`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateInput AWS API Documentation
+    #
     class GetTemplateInput < Struct.new(
       :stack_name,
       :change_set_name,
@@ -1370,6 +1436,8 @@ module Aws::CloudFormation
     #   CloudFormation finishes creating the change set, the `Processed`
     #   template becomes available.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateOutput AWS API Documentation
     #
     class GetTemplateOutput < Struct.new(
       :template_body,
@@ -1425,6 +1493,8 @@ module Aws::CloudFormation
     #   Conditional: You must specify only one of the following parameters:
     #   `StackName`, `TemplateBody`, or `TemplateURL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryInput AWS API Documentation
     #
     class GetTemplateSummaryInput < Struct.new(
       :template_body,
@@ -1485,6 +1555,8 @@ module Aws::CloudFormation
     #   A list of the transforms that are declared in the template.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummaryOutput AWS API Documentation
+    #
     class GetTemplateSummaryOutput < Struct.new(
       :parameters,
       :description,
@@ -1517,6 +1589,8 @@ module Aws::CloudFormation
     #   identifies the next page of change sets that you want to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsInput AWS API Documentation
+    #
     class ListChangeSetsInput < Struct.new(
       :stack_name,
       :next_token)
@@ -1534,6 +1608,8 @@ module Aws::CloudFormation
     #   If the output exceeds 1 MB, a string that identifies the next page
     #   of change sets. If there is no additional page, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSetsOutput AWS API Documentation
     #
     class ListChangeSetsOutput < Struct.new(
       :summaries,
@@ -1554,6 +1630,8 @@ module Aws::CloudFormation
     #   retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsInput AWS API Documentation
+    #
     class ListExportsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1568,6 +1646,8 @@ module Aws::CloudFormation
     #   identifies the next page of exports. If there is no additional page,
     #   this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExportsOutput AWS API Documentation
     #
     class ListExportsOutput < Struct.new(
       :exports,
@@ -1594,6 +1674,8 @@ module Aws::CloudFormation
     #   exported output value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsInput AWS API Documentation
+    #
     class ListImportsInput < Struct.new(
       :export_name,
       :next_token)
@@ -1609,6 +1691,8 @@ module Aws::CloudFormation
     #   A string that identifies the next page of exports. If there is no
     #   additional page, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImportsOutput AWS API Documentation
     #
     class ListImportsOutput < Struct.new(
       :imports,
@@ -1643,6 +1727,8 @@ module Aws::CloudFormation
     #   want to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResourcesInput AWS API Documentation
+    #
     class ListStackResourcesInput < Struct.new(
       :stack_name,
       :next_token)
@@ -1660,6 +1746,8 @@ module Aws::CloudFormation
     #   of stack resources. If no additional page exists, this value is
     #   null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResourcesOutput AWS API Documentation
     #
     class ListStackResourcesOutput < Struct.new(
       :stack_resource_summaries,
@@ -1689,6 +1777,8 @@ module Aws::CloudFormation
     #   of the Stack data type.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacksInput AWS API Documentation
+    #
     class ListStacksInput < Struct.new(
       :next_token,
       :stack_status_filter)
@@ -1707,6 +1797,8 @@ module Aws::CloudFormation
     #   next page of stacks. If no additional page exists, this value is
     #   null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacksOutput AWS API Documentation
     #
     class ListStacksOutput < Struct.new(
       :stack_summaries,
@@ -1727,6 +1819,8 @@ module Aws::CloudFormation
     # @!attribute [rw] description
     #   User defined description associated with the output.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Output AWS API Documentation
     #
     class Output < Struct.new(
       :output_key,
@@ -1762,6 +1856,8 @@ module Aws::CloudFormation
     #   not specify a parameter value.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Parameter AWS API Documentation
+    #
     class Parameter < Struct.new(
       :parameter_key,
       :parameter_value,
@@ -1777,6 +1873,8 @@ module Aws::CloudFormation
     # @!attribute [rw] allowed_values
     #   A list of values that are permitted for a parameter.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ParameterConstraints AWS API Documentation
     #
     class ParameterConstraints < Struct.new(
       :allowed_values)
@@ -1810,6 +1908,8 @@ module Aws::CloudFormation
     #   The criteria that AWS CloudFormation uses to validate parameter
     #   values.
     #   @return [Types::ParameterConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ParameterDeclaration AWS API Documentation
     #
     class ParameterDeclaration < Struct.new(
       :parameter_key,
@@ -1872,6 +1972,8 @@ module Aws::CloudFormation
     #   that describes the changes that AWS CloudFormation will make to the
     #   resource.
     #   @return [Array<Types::ResourceChangeDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChange AWS API Documentation
     #
     class ResourceChange < Struct.new(
       :action,
@@ -1954,6 +2056,8 @@ module Aws::CloudFormation
     #   given for `CausingEntity`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceChangeDetail AWS API Documentation
+    #
     class ResourceChangeDetail < Struct.new(
       :target,
       :evaluation,
@@ -1987,6 +2091,8 @@ module Aws::CloudFormation
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ResourceTargetDefinition AWS API Documentation
     #
     class ResourceTargetDefinition < Struct.new(
       :attribute,
@@ -2028,6 +2134,8 @@ module Aws::CloudFormation
     #   same region as the stack. You can specify either the
     #   `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicyInput AWS API Documentation
     #
     class SetStackPolicyInput < Struct.new(
       :stack_name,
@@ -2071,6 +2179,8 @@ module Aws::CloudFormation
     #   failure signal causes AWS CloudFormation to immediately fail the
     #   stack creation or update.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResourceInput AWS API Documentation
     #
     class SignalResourceInput < Struct.new(
       :stack_name,
@@ -2154,6 +2264,8 @@ module Aws::CloudFormation
     #   A list of `Tag`s that specify information about the stack.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Stack AWS API Documentation
+    #
     class Stack < Struct.new(
       :stack_id,
       :stack_name,
@@ -2222,6 +2334,8 @@ module Aws::CloudFormation
     #   BLOB of the properties used to create the resource.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent AWS API Documentation
+    #
     class StackEvent < Struct.new(
       :stack_id,
       :event_id,
@@ -2279,6 +2393,8 @@ module Aws::CloudFormation
     # @!attribute [rw] description
     #   User defined description associated with the resource.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResource AWS API Documentation
     #
     class StackResource < Struct.new(
       :stack_name,
@@ -2347,6 +2463,8 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-metadata.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceDetail AWS API Documentation
+    #
     class StackResourceDetail < Struct.new(
       :stack_name,
       :stack_id,
@@ -2393,6 +2511,8 @@ module Aws::CloudFormation
     #   Success/failure message associated with the resource.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackResourceSummary AWS API Documentation
+    #
     class StackResourceSummary < Struct.new(
       :logical_resource_id,
       :physical_resource_id,
@@ -2438,6 +2558,8 @@ module Aws::CloudFormation
     #   Success/Failure message associated with the stack status.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackSummary AWS API Documentation
+    #
     class StackSummary < Struct.new(
       :stack_id,
       :stack_name,
@@ -2472,6 +2594,8 @@ module Aws::CloudFormation
     #   specify a maximum of 256 characters for a tag value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -2496,6 +2620,8 @@ module Aws::CloudFormation
     # @!attribute [rw] description
     #   User defined description associated with the parameter.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/TemplateParameter AWS API Documentation
     #
     class TemplateParameter < Struct.new(
       :parameter_key,
@@ -2718,6 +2844,8 @@ module Aws::CloudFormation
     #   CloudFormation removes all associated tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput AWS API Documentation
+    #
     class UpdateStackInput < Struct.new(
       :stack_name,
       :template_body,
@@ -2741,6 +2869,8 @@ module Aws::CloudFormation
     # @!attribute [rw] stack_id
     #   Unique identifier of the stack.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackOutput AWS API Documentation
     #
     class UpdateStackOutput < Struct.new(
       :stack_id)
@@ -2784,6 +2914,8 @@ module Aws::CloudFormation
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplateInput AWS API Documentation
+    #
     class ValidateTemplateInput < Struct.new(
       :template_body,
       :template_url)
@@ -2823,6 +2955,8 @@ module Aws::CloudFormation
     # @!attribute [rw] declared_transforms
     #   A list of the transforms that are declared in the template.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplateOutput AWS API Documentation
     #
     class ValidateTemplateOutput < Struct.new(
       :parameters,

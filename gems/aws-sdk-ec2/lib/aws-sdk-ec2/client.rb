@@ -185,6 +185,8 @@ module Aws::EC2
     #
     #   resp.exchange_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptReservedInstancesExchangeQuote AWS API Documentation
+    #
     # @overload accept_reserved_instances_exchange_quote(params = {})
     # @param [Hash] params ({})
     def accept_reserved_instances_exchange_quote(params = {}, options = {})
@@ -244,6 +246,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.tags[0].value #=> String
     #   resp.vpc_peering_connection.vpc_peering_connection_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnection AWS API Documentation
+    #
     # @overload accept_vpc_peering_connection(params = {})
     # @param [Hash] params ({})
     def accept_vpc_peering_connection(params = {}, options = {})
@@ -290,6 +294,8 @@ module Aws::EC2
     #   resp.public_ip #=> String
     #   resp.domain #=> String, one of "vpc", "standard"
     #   resp.allocation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddress AWS API Documentation
     #
     # @overload allocate_address(params = {})
     # @param [Hash] params ({})
@@ -349,6 +355,8 @@ module Aws::EC2
     #   resp.host_ids #=> Array
     #   resp.host_ids[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHosts AWS API Documentation
+    #
     # @overload allocate_hosts(params = {})
     # @param [Hash] params ({})
     def allocate_hosts(params = {}, options = {})
@@ -401,6 +409,8 @@ module Aws::EC2
     #   resp.network_interface_id #=> String
     #   resp.assigned_ipv_6_addresses #=> Array
     #   resp.assigned_ipv_6_addresses[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6Addresses AWS API Documentation
     #
     # @overload assign_ipv_6_addresses(params = {})
     # @param [Hash] params ({})
@@ -457,6 +467,8 @@ module Aws::EC2
     #     secondary_private_ip_address_count: 1,
     #     allow_reassignment: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddresses AWS API Documentation
     #
     # @overload assign_private_ip_addresses(params = {})
     # @param [Hash] params ({})
@@ -551,6 +563,8 @@ module Aws::EC2
     #
     #   resp.association_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddress AWS API Documentation
+    #
     # @overload associate_address(params = {})
     # @param [Hash] params ({})
     def associate_address(params = {}, options = {})
@@ -597,6 +611,8 @@ module Aws::EC2
     #     dhcp_options_id: "String", # required
     #     vpc_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateDhcpOptions AWS API Documentation
     #
     # @overload associate_dhcp_options(params = {})
     # @param [Hash] params ({})
@@ -647,6 +663,8 @@ module Aws::EC2
     #
     #   resp.association_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateRouteTable AWS API Documentation
+    #
     # @overload associate_route_table(params = {})
     # @param [Hash] params ({})
     def associate_route_table(params = {}, options = {})
@@ -684,6 +702,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
     #   resp.ipv_6_cidr_block_association.association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlock AWS API Documentation
     #
     # @overload associate_subnet_cidr_block(params = {})
     # @param [Hash] params ({})
@@ -723,6 +743,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
     #   resp.ipv_6_cidr_block_association.association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlock AWS API Documentation
     #
     # @overload associate_vpc_cidr_block(params = {})
     # @param [Hash] params ({})
@@ -779,6 +801,8 @@ module Aws::EC2
     #
     #   resp.return #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachClassicLinkVpc AWS API Documentation
+    #
     # @overload attach_classic_link_vpc(params = {})
     # @param [Hash] params ({})
     def attach_classic_link_vpc(params = {}, options = {})
@@ -816,6 +840,8 @@ module Aws::EC2
     #     internet_gateway_id: "String", # required
     #     vpc_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachInternetGateway AWS API Documentation
     #
     # @overload attach_internet_gateway(params = {})
     # @param [Hash] params ({})
@@ -857,6 +883,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.attachment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterface AWS API Documentation
     #
     # @overload attach_network_interface(params = {})
     # @param [Hash] params ({})
@@ -948,6 +976,8 @@ module Aws::EC2
     #   resp.attach_time #=> Time
     #   resp.delete_on_termination #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolume AWS API Documentation
+    #
     # @overload attach_volume(params = {})
     # @param [Hash] params ({})
     def attach_volume(params = {}, options = {})
@@ -991,6 +1021,8 @@ module Aws::EC2
     #
     #   resp.vpc_attachment.vpc_id #=> String
     #   resp.vpc_attachment.state #=> String, one of "attaching", "attached", "detaching", "detached"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGateway AWS API Documentation
     #
     # @overload attach_vpn_gateway(params = {})
     # @param [Hash] params ({})
@@ -1109,6 +1141,8 @@ module Aws::EC2
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgress AWS API Documentation
     #
     # @overload authorize_security_group_egress(params = {})
     # @param [Hash] params ({})
@@ -1249,6 +1283,8 @@ module Aws::EC2
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngress AWS API Documentation
+    #
     # @overload authorize_security_group_ingress(params = {})
     # @param [Hash] params ({})
     def authorize_security_group_ingress(params = {}, options = {})
@@ -1330,6 +1366,8 @@ module Aws::EC2
     #   resp.bundle_task.bundle_task_error.code #=> String
     #   resp.bundle_task.bundle_task_error.message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstance AWS API Documentation
+    #
     # @overload bundle_instance(params = {})
     # @param [Hash] params ({})
     def bundle_instance(params = {}, options = {})
@@ -1376,6 +1414,8 @@ module Aws::EC2
     #   resp.bundle_task.bundle_task_error.code #=> String
     #   resp.bundle_task.bundle_task_error.message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTask AWS API Documentation
+    #
     # @overload cancel_bundle_task(params = {})
     # @param [Hash] params ({})
     def cancel_bundle_task(params = {}, options = {})
@@ -1418,6 +1458,8 @@ module Aws::EC2
     #     reason_message: "String",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionTask AWS API Documentation
+    #
     # @overload cancel_conversion_task(params = {})
     # @param [Hash] params ({})
     def cancel_conversion_task(params = {}, options = {})
@@ -1441,6 +1483,8 @@ module Aws::EC2
     #   resp = client.cancel_export_task({
     #     export_task_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTask AWS API Documentation
     #
     # @overload cancel_export_task(params = {})
     # @param [Hash] params ({})
@@ -1482,6 +1526,8 @@ module Aws::EC2
     #   resp.import_task_id #=> String
     #   resp.state #=> String
     #   resp.previous_state #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImportTask AWS API Documentation
     #
     # @overload cancel_import_task(params = {})
     # @param [Hash] params ({})
@@ -1534,6 +1580,8 @@ module Aws::EC2
     #   resp.reserved_instances_listings[0].tags[0].key #=> String
     #   resp.reserved_instances_listings[0].tags[0].value #=> String
     #   resp.reserved_instances_listings[0].client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListing AWS API Documentation
     #
     # @overload cancel_reserved_instances_listing(params = {})
     # @param [Hash] params ({})
@@ -1589,6 +1637,8 @@ module Aws::EC2
     #   resp.successful_fleet_requests[0].current_spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
     #   resp.successful_fleet_requests[0].previous_spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequests AWS API Documentation
+    #
     # @overload cancel_spot_fleet_requests(params = {})
     # @param [Hash] params ({})
     def cancel_spot_fleet_requests(params = {}, options = {})
@@ -1637,6 +1687,8 @@ module Aws::EC2
     #   resp.cancelled_spot_instance_requests[0].spot_instance_request_id #=> String
     #   resp.cancelled_spot_instance_requests[0].state #=> String, one of "active", "open", "closed", "cancelled", "completed"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequests AWS API Documentation
+    #
     # @overload cancel_spot_instance_requests(params = {})
     # @param [Hash] params ({})
     def cancel_spot_instance_requests(params = {}, options = {})
@@ -1678,6 +1730,8 @@ module Aws::EC2
     #
     #   resp.owner_id #=> String
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstance AWS API Documentation
     #
     # @overload confirm_product_instance(params = {})
     # @param [Hash] params ({})
@@ -1768,6 +1822,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.image_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImage AWS API Documentation
     #
     # @overload copy_image(params = {})
     # @param [Hash] params ({})
@@ -1926,6 +1982,8 @@ module Aws::EC2
     #
     #   resp.snapshot_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshot AWS API Documentation
+    #
     # @overload copy_snapshot(params = {})
     # @param [Hash] params ({})
     def copy_snapshot(params = {}, options = {})
@@ -2009,6 +2067,8 @@ module Aws::EC2
     #   resp.customer_gateway.tags #=> Array
     #   resp.customer_gateway.tags[0].key #=> String
     #   resp.customer_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGateway AWS API Documentation
     #
     # @overload create_customer_gateway(params = {})
     # @param [Hash] params ({})
@@ -2103,6 +2163,8 @@ module Aws::EC2
     #   resp.dhcp_options.tags[0].key #=> String
     #   resp.dhcp_options.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptions AWS API Documentation
+    #
     # @overload create_dhcp_options(params = {})
     # @param [Hash] params ({})
     def create_dhcp_options(params = {}, options = {})
@@ -2155,6 +2217,8 @@ module Aws::EC2
     #   resp.egress_only_internet_gateway.attachments[0].vpc_id #=> String
     #   resp.egress_only_internet_gateway.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGateway AWS API Documentation
     #
     # @overload create_egress_only_internet_gateway(params = {})
     # @param [Hash] params ({})
@@ -2228,6 +2292,8 @@ module Aws::EC2
     #   resp.unsuccessful[0].resource_id #=> String
     #   resp.unsuccessful[0].error.code #=> String
     #   resp.unsuccessful[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogs AWS API Documentation
     #
     # @overload create_flow_logs(params = {})
     # @param [Hash] params ({})
@@ -2314,6 +2380,8 @@ module Aws::EC2
     #
     #   resp.image_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImage AWS API Documentation
+    #
     # @overload create_image(params = {})
     # @param [Hash] params ({})
     def create_image(params = {}, options = {})
@@ -2376,6 +2444,8 @@ module Aws::EC2
     #   resp.export_task.export_to_s3_task.s3_bucket #=> String
     #   resp.export_task.export_to_s3_task.s3_key #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTask AWS API Documentation
+    #
     # @overload create_instance_export_task(params = {})
     # @param [Hash] params ({})
     def create_instance_export_task(params = {}, options = {})
@@ -2418,6 +2488,8 @@ module Aws::EC2
     #   resp.internet_gateway.tags #=> Array
     #   resp.internet_gateway.tags[0].key #=> String
     #   resp.internet_gateway.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInternetGateway AWS API Documentation
     #
     # @overload create_internet_gateway(params = {})
     # @param [Hash] params ({})
@@ -2474,6 +2546,8 @@ module Aws::EC2
     #   resp.key_name #=> String
     #   resp.key_fingerprint #=> String
     #   resp.key_material #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPair AWS API Documentation
     #
     # @overload create_key_pair(params = {})
     # @param [Hash] params ({})
@@ -2547,6 +2621,8 @@ module Aws::EC2
     #   resp.nat_gateway.provisioned_bandwidth.status #=> String
     #   resp.client_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGateway AWS API Documentation
+    #
     # @overload create_nat_gateway(params = {})
     # @param [Hash] params ({})
     def create_nat_gateway(params = {}, options = {})
@@ -2608,6 +2684,8 @@ module Aws::EC2
     #   resp.network_acl.tags #=> Array
     #   resp.network_acl.tags[0].key #=> String
     #   resp.network_acl.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAcl AWS API Documentation
     #
     # @overload create_network_acl(params = {})
     # @param [Hash] params ({})
@@ -2710,6 +2788,8 @@ module Aws::EC2
     #       to: 1,
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntry AWS API Documentation
     #
     # @overload create_network_acl_entry(params = {})
     # @param [Hash] params ({})
@@ -2853,6 +2933,8 @@ module Aws::EC2
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterface AWS API Documentation
+    #
     # @overload create_network_interface(params = {})
     # @param [Hash] params ({})
     def create_network_interface(params = {}, options = {})
@@ -2895,6 +2977,8 @@ module Aws::EC2
     #     group_name: "String", # required
     #     strategy: "cluster", # required, accepts cluster
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroup AWS API Documentation
     #
     # @overload create_placement_group(params = {})
     # @param [Hash] params ({})
@@ -3001,6 +3085,8 @@ module Aws::EC2
     #   resp.reserved_instances_listings[0].tags[0].value #=> String
     #   resp.reserved_instances_listings[0].client_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListing AWS API Documentation
+    #
     # @overload create_reserved_instances_listing(params = {})
     # @param [Hash] params ({})
     def create_reserved_instances_listing(params = {}, options = {})
@@ -3096,6 +3182,8 @@ module Aws::EC2
     #
     #   resp.return #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRoute AWS API Documentation
+    #
     # @overload create_route(params = {})
     # @param [Hash] params ({})
     def create_route(params = {}, options = {})
@@ -3160,6 +3248,8 @@ module Aws::EC2
     #   resp.route_table.tags[0].value #=> String
     #   resp.route_table.propagating_vgws #=> Array
     #   resp.route_table.propagating_vgws[0].gateway_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTable AWS API Documentation
     #
     # @overload create_route_table(params = {})
     # @param [Hash] params ({})
@@ -3247,6 +3337,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroup AWS API Documentation
     #
     # @overload create_security_group(params = {})
     # @param [Hash] params ({})
@@ -3345,6 +3437,8 @@ module Aws::EC2
     #   resp.kms_key_id #=> String
     #   resp.data_encryption_key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshot AWS API Documentation
+    #
     # @overload create_snapshot(params = {})
     # @param [Hash] params ({})
     def create_snapshot(params = {}, options = {})
@@ -3393,6 +3487,8 @@ module Aws::EC2
     #   resp.spot_datafeed_subscription.state #=> String, one of "Active", "Inactive"
     #   resp.spot_datafeed_subscription.fault.code #=> String
     #   resp.spot_datafeed_subscription.fault.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscription AWS API Documentation
     #
     # @overload create_spot_datafeed_subscription(params = {})
     # @param [Hash] params ({})
@@ -3494,6 +3590,8 @@ module Aws::EC2
     #   resp.subnet.tags[0].key #=> String
     #   resp.subnet.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnet AWS API Documentation
+    #
     # @overload create_subnet(params = {})
     # @param [Hash] params ({})
     def create_subnet(params = {}, options = {})
@@ -3545,6 +3643,8 @@ module Aws::EC2
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTags AWS API Documentation
     #
     # @overload create_tags(params = {})
     # @param [Hash] params ({})
@@ -3693,6 +3793,8 @@ module Aws::EC2
     #   resp.encrypted #=> Boolean
     #   resp.kms_key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolume AWS API Documentation
+    #
     # @overload create_volume(params = {})
     # @param [Hash] params ({})
     def create_volume(params = {}, options = {})
@@ -3786,6 +3888,8 @@ module Aws::EC2
     #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
     #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpc AWS API Documentation
+    #
     # @overload create_vpc(params = {})
     # @param [Hash] params ({})
     def create_vpc(params = {}, options = {})
@@ -3863,6 +3967,8 @@ module Aws::EC2
     #   resp.vpc_endpoint.creation_timestamp #=> Time
     #   resp.client_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpoint AWS API Documentation
+    #
     # @overload create_vpc_endpoint(params = {})
     # @param [Hash] params ({})
     def create_vpc_endpoint(params = {}, options = {})
@@ -3939,6 +4045,8 @@ module Aws::EC2
     #   resp.vpc_peering_connection.tags[0].key #=> String
     #   resp.vpc_peering_connection.tags[0].value #=> String
     #   resp.vpc_peering_connection.vpc_peering_connection_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnection AWS API Documentation
     #
     # @overload create_vpc_peering_connection(params = {})
     # @param [Hash] params ({})
@@ -4034,6 +4142,8 @@ module Aws::EC2
     #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
     #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnection AWS API Documentation
+    #
     # @overload create_vpn_connection(params = {})
     # @param [Hash] params ({})
     def create_vpn_connection(params = {}, options = {})
@@ -4069,6 +4179,8 @@ module Aws::EC2
     #     vpn_connection_id: "String", # required
     #     destination_cidr_block: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRoute AWS API Documentation
     #
     # @overload create_vpn_connection_route(params = {})
     # @param [Hash] params ({})
@@ -4126,6 +4238,8 @@ module Aws::EC2
     #   resp.vpn_gateway.tags[0].key #=> String
     #   resp.vpn_gateway.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGateway AWS API Documentation
+    #
     # @overload create_vpn_gateway(params = {})
     # @param [Hash] params ({})
     def create_vpn_gateway(params = {}, options = {})
@@ -4153,6 +4267,8 @@ module Aws::EC2
     #     dry_run: false,
     #     customer_gateway_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGateway AWS API Documentation
     #
     # @overload delete_customer_gateway(params = {})
     # @param [Hash] params ({})
@@ -4183,6 +4299,8 @@ module Aws::EC2
     #     dry_run: false,
     #     dhcp_options_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteDhcpOptions AWS API Documentation
     #
     # @overload delete_dhcp_options(params = {})
     # @param [Hash] params ({})
@@ -4217,6 +4335,8 @@ module Aws::EC2
     #
     #   resp.return_code #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGateway AWS API Documentation
+    #
     # @overload delete_egress_only_internet_gateway(params = {})
     # @param [Hash] params ({})
     def delete_egress_only_internet_gateway(params = {}, options = {})
@@ -4246,6 +4366,8 @@ module Aws::EC2
     #   resp.unsuccessful[0].error.code #=> String
     #   resp.unsuccessful[0].error.message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogs AWS API Documentation
+    #
     # @overload delete_flow_logs(params = {})
     # @param [Hash] params ({})
     def delete_flow_logs(params = {}, options = {})
@@ -4274,6 +4396,8 @@ module Aws::EC2
     #     internet_gateway_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGateway AWS API Documentation
+    #
     # @overload delete_internet_gateway(params = {})
     # @param [Hash] params ({})
     def delete_internet_gateway(params = {}, options = {})
@@ -4301,6 +4425,8 @@ module Aws::EC2
     #     dry_run: false,
     #     key_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPair AWS API Documentation
     #
     # @overload delete_key_pair(params = {})
     # @param [Hash] params ({})
@@ -4331,6 +4457,8 @@ module Aws::EC2
     #
     #   resp.nat_gateway_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNatGateway AWS API Documentation
+    #
     # @overload delete_nat_gateway(params = {})
     # @param [Hash] params ({})
     def delete_nat_gateway(params = {}, options = {})
@@ -4359,6 +4487,8 @@ module Aws::EC2
     #     dry_run: false,
     #     network_acl_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAcl AWS API Documentation
     #
     # @overload delete_network_acl(params = {})
     # @param [Hash] params ({})
@@ -4396,6 +4526,8 @@ module Aws::EC2
     #     egress: false, # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclEntry AWS API Documentation
+    #
     # @overload delete_network_acl_entry(params = {})
     # @param [Hash] params ({})
     def delete_network_acl_entry(params = {}, options = {})
@@ -4423,6 +4555,8 @@ module Aws::EC2
     #     dry_run: false,
     #     network_interface_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterface AWS API Documentation
     #
     # @overload delete_network_interface(params = {})
     # @param [Hash] params ({})
@@ -4458,6 +4592,8 @@ module Aws::EC2
     #     dry_run: false,
     #     group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePlacementGroup AWS API Documentation
     #
     # @overload delete_placement_group(params = {})
     # @param [Hash] params ({})
@@ -4496,6 +4632,8 @@ module Aws::EC2
     #     destination_ipv_6_cidr_block: "String",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRoute AWS API Documentation
+    #
     # @overload delete_route(params = {})
     # @param [Hash] params ({})
     def delete_route(params = {}, options = {})
@@ -4524,6 +4662,8 @@ module Aws::EC2
     #     dry_run: false,
     #     route_table_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteTable AWS API Documentation
     #
     # @overload delete_route_table(params = {})
     # @param [Hash] params ({})
@@ -4561,6 +4701,8 @@ module Aws::EC2
     #     group_name: "String",
     #     group_id: "String",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroup AWS API Documentation
     #
     # @overload delete_security_group(params = {})
     # @param [Hash] params ({})
@@ -4608,6 +4750,8 @@ module Aws::EC2
     #     snapshot_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshot AWS API Documentation
+    #
     # @overload delete_snapshot(params = {})
     # @param [Hash] params ({})
     def delete_snapshot(params = {}, options = {})
@@ -4630,6 +4774,8 @@ module Aws::EC2
     #   resp = client.delete_spot_datafeed_subscription({
     #     dry_run: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSpotDatafeedSubscription AWS API Documentation
     #
     # @overload delete_spot_datafeed_subscription(params = {})
     # @param [Hash] params ({})
@@ -4658,6 +4804,8 @@ module Aws::EC2
     #     dry_run: false,
     #     subnet_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSubnet AWS API Documentation
     #
     # @overload delete_subnet(params = {})
     # @param [Hash] params ({})
@@ -4707,6 +4855,8 @@ module Aws::EC2
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTags AWS API Documentation
+    #
     # @overload delete_tags(params = {})
     # @param [Hash] params ({})
     def delete_tags(params = {}, options = {})
@@ -4746,6 +4896,8 @@ module Aws::EC2
     #     volume_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVolume AWS API Documentation
+    #
     # @overload delete_volume(params = {})
     # @param [Hash] params ({})
     def delete_volume(params = {}, options = {})
@@ -4777,6 +4929,8 @@ module Aws::EC2
     #     dry_run: false,
     #     vpc_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpc AWS API Documentation
     #
     # @overload delete_vpc(params = {})
     # @param [Hash] params ({})
@@ -4816,6 +4970,8 @@ module Aws::EC2
     #   resp.unsuccessful[0].error.code #=> String
     #   resp.unsuccessful[0].error.message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpoints AWS API Documentation
+    #
     # @overload delete_vpc_endpoints(params = {})
     # @param [Hash] params ({})
     def delete_vpc_endpoints(params = {}, options = {})
@@ -4851,6 +5007,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcPeeringConnection AWS API Documentation
     #
     # @overload delete_vpc_peering_connection(params = {})
     # @param [Hash] params ({})
@@ -4889,6 +5047,8 @@ module Aws::EC2
     #     vpn_connection_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnection AWS API Documentation
+    #
     # @overload delete_vpn_connection(params = {})
     # @param [Hash] params ({})
     def delete_vpn_connection(params = {}, options = {})
@@ -4916,6 +5076,8 @@ module Aws::EC2
     #     vpn_connection_id: "String", # required
     #     destination_cidr_block: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRoute AWS API Documentation
     #
     # @overload delete_vpn_connection_route(params = {})
     # @param [Hash] params ({})
@@ -4948,6 +5110,8 @@ module Aws::EC2
     #     vpn_gateway_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnGateway AWS API Documentation
+    #
     # @overload delete_vpn_gateway(params = {})
     # @param [Hash] params ({})
     def delete_vpn_gateway(params = {}, options = {})
@@ -4977,6 +5141,8 @@ module Aws::EC2
     #     dry_run: false,
     #     image_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImage AWS API Documentation
     #
     # @overload deregister_image(params = {})
     # @param [Hash] params ({})
@@ -5032,6 +5198,8 @@ module Aws::EC2
     #   resp.account_attributes[0].attribute_name #=> String
     #   resp.account_attributes[0].attribute_values #=> Array
     #   resp.account_attributes[0].attribute_values[0].attribute_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountAttributes AWS API Documentation
     #
     # @overload describe_account_attributes(params = {})
     # @param [Hash] params ({})
@@ -5119,6 +5287,8 @@ module Aws::EC2
     #   resp.addresses[0].network_interface_owner_id #=> String
     #   resp.addresses[0].private_ip_address #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddresses AWS API Documentation
+    #
     # @overload describe_addresses(params = {})
     # @param [Hash] params ({})
     def describe_addresses(params = {}, options = {})
@@ -5187,6 +5357,8 @@ module Aws::EC2
     #   resp.availability_zones[0].region_name #=> String
     #   resp.availability_zones[0].messages #=> Array
     #   resp.availability_zones[0].messages[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZones AWS API Documentation
     #
     # @overload describe_availability_zones(params = {})
     # @param [Hash] params ({})
@@ -5275,6 +5447,8 @@ module Aws::EC2
     #   resp.bundle_tasks[0].progress #=> String
     #   resp.bundle_tasks[0].bundle_task_error.code #=> String
     #   resp.bundle_tasks[0].bundle_task_error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasks AWS API Documentation
     #
     # @overload describe_bundle_tasks(params = {})
     # @param [Hash] params ({})
@@ -5369,6 +5543,8 @@ module Aws::EC2
     #   resp.instances[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstances AWS API Documentation
+    #
     # @overload describe_classic_link_instances(params = {})
     # @param [Hash] params ({})
     def describe_classic_link_instances(params = {}, options = {})
@@ -5441,6 +5617,8 @@ module Aws::EC2
     #   resp.conversion_tasks[0].tags #=> Array
     #   resp.conversion_tasks[0].tags[0].key #=> String
     #   resp.conversion_tasks[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasks AWS API Documentation
     #
     # @overload describe_conversion_tasks(params = {})
     # @param [Hash] params ({})
@@ -5533,6 +5711,8 @@ module Aws::EC2
     #   resp.customer_gateways[0].tags[0].key #=> String
     #   resp.customer_gateways[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGateways AWS API Documentation
+    #
     # @overload describe_customer_gateways(params = {})
     # @param [Hash] params ({})
     def describe_customer_gateways(params = {}, options = {})
@@ -5615,6 +5795,8 @@ module Aws::EC2
     #   resp.dhcp_options[0].tags[0].key #=> String
     #   resp.dhcp_options[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptions AWS API Documentation
+    #
     # @overload describe_dhcp_options(params = {})
     # @param [Hash] params ({})
     def describe_dhcp_options(params = {}, options = {})
@@ -5666,6 +5848,8 @@ module Aws::EC2
     #   resp.egress_only_internet_gateways[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGateways AWS API Documentation
+    #
     # @overload describe_egress_only_internet_gateways(params = {})
     # @param [Hash] params ({})
     def describe_egress_only_internet_gateways(params = {}, options = {})
@@ -5701,6 +5885,8 @@ module Aws::EC2
     #   resp.export_tasks[0].export_to_s3_task.container_format #=> String, one of "ova"
     #   resp.export_tasks[0].export_to_s3_task.s3_bucket #=> String
     #   resp.export_tasks[0].export_to_s3_task.s3_key #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasks AWS API Documentation
     #
     # @overload describe_export_tasks(params = {})
     # @param [Hash] params ({})
@@ -5773,6 +5959,8 @@ module Aws::EC2
     #   resp.flow_logs[0].deliver_logs_error_message #=> String
     #   resp.flow_logs[0].deliver_logs_permission_arn #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogs AWS API Documentation
     #
     # @overload describe_flow_logs(params = {})
     # @param [Hash] params ({})
@@ -5865,6 +6053,8 @@ module Aws::EC2
     #   resp.offering_set[0].duration #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferings AWS API Documentation
+    #
     # @overload describe_host_reservation_offerings(params = {})
     # @param [Hash] params ({})
     def describe_host_reservation_offerings(params = {}, options = {})
@@ -5936,6 +6126,8 @@ module Aws::EC2
     #   resp.host_reservation_set[0].start #=> Time
     #   resp.host_reservation_set[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservations AWS API Documentation
     #
     # @overload describe_host_reservations(params = {})
     # @param [Hash] params ({})
@@ -6029,6 +6221,8 @@ module Aws::EC2
     #   resp.hosts[0].available_capacity.available_v_cpus #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
+    #
     # @overload describe_hosts(params = {})
     # @param [Hash] params ({})
     def describe_hosts(params = {}, options = {})
@@ -6073,6 +6267,8 @@ module Aws::EC2
     #   resp.statuses[0].resource #=> String
     #   resp.statuses[0].use_long_ids #=> Boolean
     #   resp.statuses[0].deadline #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormat AWS API Documentation
     #
     # @overload describe_id_format(params = {})
     # @param [Hash] params ({})
@@ -6124,6 +6320,8 @@ module Aws::EC2
     #   resp.statuses[0].resource #=> String
     #   resp.statuses[0].use_long_ids #=> Boolean
     #   resp.statuses[0].deadline #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormat AWS API Documentation
     #
     # @overload describe_identity_id_format(params = {})
     # @param [Hash] params ({})
@@ -6194,6 +6392,8 @@ module Aws::EC2
     #   resp.block_device_mappings[0].ebs.iops #=> Integer
     #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
     #   resp.block_device_mappings[0].no_device #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttribute AWS API Documentation
     #
     # @overload describe_image_attribute(params = {})
     # @param [Hash] params ({})
@@ -6387,6 +6587,8 @@ module Aws::EC2
     #   resp.images[0].tags[0].value #=> String
     #   resp.images[0].hypervisor #=> String, one of "ovm", "xen"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImages AWS API Documentation
+    #
     # @overload describe_images(params = {})
     # @param [Hash] params ({})
     def describe_images(params = {}, options = {})
@@ -6465,6 +6667,8 @@ module Aws::EC2
     #   resp.import_image_tasks[0].status #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasks AWS API Documentation
+    #
     # @overload describe_import_image_tasks(params = {})
     # @param [Hash] params ({})
     def describe_import_image_tasks(params = {}, options = {})
@@ -6530,6 +6734,8 @@ module Aws::EC2
     #   resp.import_snapshot_tasks[0].snapshot_task_detail.status #=> String
     #   resp.import_snapshot_tasks[0].description #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasks AWS API Documentation
     #
     # @overload describe_import_snapshot_tasks(params = {})
     # @param [Hash] params ({})
@@ -6611,6 +6817,8 @@ module Aws::EC2
     #   resp.groups #=> Array
     #   resp.groups[0].group_name #=> String
     #   resp.groups[0].group_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttribute AWS API Documentation
     #
     # @overload describe_instance_attribute(params = {})
     # @param [Hash] params ({})
@@ -6763,6 +6971,8 @@ module Aws::EC2
     #   resp.instance_statuses[0].instance_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
     #   resp.instance_statuses[0].instance_status.details[0].impaired_since #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatus AWS API Documentation
     #
     # @overload describe_instance_status(params = {})
     # @param [Hash] params ({})
@@ -7199,6 +7409,8 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].ena_support #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstances AWS API Documentation
+    #
     # @overload describe_instances(params = {})
     # @param [Hash] params ({})
     def describe_instances(params = {}, options = {})
@@ -7275,6 +7487,8 @@ module Aws::EC2
     #   resp.internet_gateways[0].tags[0].key #=> String
     #   resp.internet_gateways[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGateways AWS API Documentation
+    #
     # @overload describe_internet_gateways(params = {})
     # @param [Hash] params ({})
     def describe_internet_gateways(params = {}, options = {})
@@ -7331,6 +7545,8 @@ module Aws::EC2
     #   resp.key_pairs #=> Array
     #   resp.key_pairs[0].key_name #=> String
     #   resp.key_pairs[0].key_fingerprint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairs AWS API Documentation
     #
     # @overload describe_key_pairs(params = {})
     # @param [Hash] params ({})
@@ -7399,6 +7615,8 @@ module Aws::EC2
     #   resp.moving_address_statuses[0].public_ip #=> String
     #   resp.moving_address_statuses[0].move_status #=> String, one of "movingToVpc", "restoringToClassic"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddresses AWS API Documentation
     #
     # @overload describe_moving_addresses(params = {})
     # @param [Hash] params ({})
@@ -7476,6 +7694,8 @@ module Aws::EC2
     #   resp.nat_gateways[0].provisioned_bandwidth.provision_time #=> Time
     #   resp.nat_gateways[0].provisioned_bandwidth.status #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGateways AWS API Documentation
     #
     # @overload describe_nat_gateways(params = {})
     # @param [Hash] params ({})
@@ -7608,6 +7828,8 @@ module Aws::EC2
     #   resp.network_acls[0].tags[0].key #=> String
     #   resp.network_acls[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAcls AWS API Documentation
+    #
     # @overload describe_network_acls(params = {})
     # @param [Hash] params ({})
     def describe_network_acls(params = {}, options = {})
@@ -7661,6 +7883,8 @@ module Aws::EC2
     #   resp.attachment.status #=> String, one of "attaching", "attached", "detaching", "detached"
     #   resp.attachment.attach_time #=> Time
     #   resp.attachment.delete_on_termination #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttribute AWS API Documentation
     #
     # @overload describe_network_interface_attribute(params = {})
     # @param [Hash] params ({})
@@ -7866,6 +8090,8 @@ module Aws::EC2
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaces AWS API Documentation
+    #
     # @overload describe_network_interfaces(params = {})
     # @param [Hash] params ({})
     def describe_network_interfaces(params = {}, options = {})
@@ -7926,6 +8152,8 @@ module Aws::EC2
     #   resp.placement_groups[0].group_name #=> String
     #   resp.placement_groups[0].strategy #=> String, one of "cluster"
     #   resp.placement_groups[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroups AWS API Documentation
     #
     # @overload describe_placement_groups(params = {})
     # @param [Hash] params ({})
@@ -7997,6 +8225,8 @@ module Aws::EC2
     #   resp.prefix_lists[0].cidrs[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixLists AWS API Documentation
+    #
     # @overload describe_prefix_lists(params = {})
     # @param [Hash] params ({})
     def describe_prefix_lists(params = {}, options = {})
@@ -8052,6 +8282,8 @@ module Aws::EC2
     #   resp.regions #=> Array
     #   resp.regions[0].region_name #=> String
     #   resp.regions[0].endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegions AWS API Documentation
     #
     # @overload describe_regions(params = {})
     # @param [Hash] params ({})
@@ -8195,6 +8427,8 @@ module Aws::EC2
     #   resp.reserved_instances[0].offering_class #=> String, one of "standard", "convertible"
     #   resp.reserved_instances[0].scope #=> String, one of "Availability Zone", "Region"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstances AWS API Documentation
+    #
     # @overload describe_reserved_instances(params = {})
     # @param [Hash] params ({})
     def describe_reserved_instances(params = {}, options = {})
@@ -8287,6 +8521,8 @@ module Aws::EC2
     #   resp.reserved_instances_listings[0].tags[0].key #=> String
     #   resp.reserved_instances_listings[0].tags[0].value #=> String
     #   resp.reserved_instances_listings[0].client_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListings AWS API Documentation
     #
     # @overload describe_reserved_instances_listings(params = {})
     # @param [Hash] params ({})
@@ -8390,6 +8626,8 @@ module Aws::EC2
     #   resp.reserved_instances_modifications[0].status_message #=> String
     #   resp.reserved_instances_modifications[0].client_token #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModifications AWS API Documentation
     #
     # @overload describe_reserved_instances_modifications(params = {})
     # @param [Hash] params ({})
@@ -8584,6 +8822,8 @@ module Aws::EC2
     #   resp.reserved_instances_offerings[0].scope #=> String, one of "Availability Zone", "Region"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferings AWS API Documentation
+    #
     # @overload describe_reserved_instances_offerings(params = {})
     # @param [Hash] params ({})
     def describe_reserved_instances_offerings(params = {}, options = {})
@@ -8734,6 +8974,8 @@ module Aws::EC2
     #   resp.route_tables[0].propagating_vgws #=> Array
     #   resp.route_tables[0].propagating_vgws[0].gateway_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTables AWS API Documentation
+    #
     # @overload describe_route_tables(params = {})
     # @param [Hash] params ({})
     def describe_route_tables(params = {}, options = {})
@@ -8852,6 +9094,8 @@ module Aws::EC2
     #   resp.scheduled_instance_availability_set[0].min_term_duration_in_days #=> Integer
     #   resp.scheduled_instance_availability_set[0].max_term_duration_in_days #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailability AWS API Documentation
+    #
     # @overload describe_scheduled_instance_availability(params = {})
     # @param [Hash] params ({})
     def describe_scheduled_instance_availability(params = {}, options = {})
@@ -8944,6 +9188,8 @@ module Aws::EC2
     #   resp.scheduled_instance_set[0].term_end_date #=> Time
     #   resp.scheduled_instance_set[0].create_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstances AWS API Documentation
+    #
     # @overload describe_scheduled_instances(params = {})
     # @param [Hash] params ({})
     def describe_scheduled_instances(params = {}, options = {})
@@ -8981,6 +9227,8 @@ module Aws::EC2
     #   resp.security_group_reference_set[0].group_id #=> String
     #   resp.security_group_reference_set[0].referencing_vpc_id #=> String
     #   resp.security_group_reference_set[0].vpc_peering_connection_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferences AWS API Documentation
     #
     # @overload describe_security_group_references(params = {})
     # @param [Hash] params ({})
@@ -9133,6 +9381,8 @@ module Aws::EC2
     #   resp.security_groups[0].tags[0].key #=> String
     #   resp.security_groups[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroups AWS API Documentation
+    #
     # @overload describe_security_groups(params = {})
     # @param [Hash] params ({})
     def describe_security_groups(params = {}, options = {})
@@ -9185,6 +9435,8 @@ module Aws::EC2
     #   resp.product_codes #=> Array
     #   resp.product_codes[0].product_code_id #=> String
     #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttribute AWS API Documentation
     #
     # @overload describe_snapshot_attribute(params = {})
     # @param [Hash] params ({})
@@ -9371,6 +9623,8 @@ module Aws::EC2
     #   resp.snapshots[0].data_encryption_key_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshots AWS API Documentation
+    #
     # @overload describe_snapshots(params = {})
     # @param [Hash] params ({})
     def describe_snapshots(params = {}, options = {})
@@ -9410,6 +9664,8 @@ module Aws::EC2
     #   resp.spot_datafeed_subscription.state #=> String, one of "Active", "Inactive"
     #   resp.spot_datafeed_subscription.fault.code #=> String
     #   resp.spot_datafeed_subscription.fault.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotDatafeedSubscription AWS API Documentation
     #
     # @overload describe_spot_datafeed_subscription(params = {})
     # @param [Hash] params ({})
@@ -9461,6 +9717,8 @@ module Aws::EC2
     #   resp.active_instances[0].instance_id #=> String
     #   resp.active_instances[0].spot_instance_request_id #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstances AWS API Documentation
     #
     # @overload describe_spot_fleet_instances(params = {})
     # @param [Hash] params ({})
@@ -9532,6 +9790,8 @@ module Aws::EC2
     #   resp.history_records[0].event_information.event_sub_type #=> String
     #   resp.history_records[0].event_information.event_description #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistory AWS API Documentation
     #
     # @overload describe_spot_fleet_request_history(params = {})
     # @param [Hash] params ({})
@@ -9644,6 +9904,8 @@ module Aws::EC2
     #   resp.spot_fleet_request_configs[0].create_time #=> Time
     #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequests AWS API Documentation
     #
     # @overload describe_spot_fleet_requests(params = {})
     # @param [Hash] params ({})
@@ -9899,6 +10161,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].tags[0].value #=> String
     #   resp.spot_instance_requests[0].launched_availability_zone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequests AWS API Documentation
+    #
     # @overload describe_spot_instance_requests(params = {})
     # @param [Hash] params ({})
     def describe_spot_instance_requests(params = {}, options = {})
@@ -10009,6 +10273,8 @@ module Aws::EC2
     #   resp.spot_price_history[0].availability_zone #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistory AWS API Documentation
+    #
     # @overload describe_spot_price_history(params = {})
     # @param [Hash] params ({})
     def describe_spot_price_history(params = {}, options = {})
@@ -10091,6 +10357,8 @@ module Aws::EC2
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
     #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroups AWS API Documentation
     #
     # @overload describe_stale_security_groups(params = {})
     # @param [Hash] params ({})
@@ -10207,6 +10475,8 @@ module Aws::EC2
     #   resp.subnets[0].tags[0].key #=> String
     #   resp.subnets[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnets AWS API Documentation
+    #
     # @overload describe_subnets(params = {})
     # @param [Hash] params ({})
     def describe_subnets(params = {}, options = {})
@@ -10281,6 +10551,8 @@ module Aws::EC2
     #   resp.tags[0].value #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTags AWS API Documentation
+    #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
@@ -10331,6 +10603,8 @@ module Aws::EC2
     #   resp.product_codes #=> Array
     #   resp.product_codes[0].product_code_id #=> String
     #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttribute AWS API Documentation
     #
     # @overload describe_volume_attribute(params = {})
     # @param [Hash] params ({})
@@ -10492,6 +10766,8 @@ module Aws::EC2
     #   resp.volume_statuses[0].actions[0].event_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatus AWS API Documentation
+    #
     # @overload describe_volume_status(params = {})
     # @param [Hash] params ({})
     def describe_volume_status(params = {}, options = {})
@@ -10645,6 +10921,8 @@ module Aws::EC2
     #   resp.volumes[0].kms_key_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumes AWS API Documentation
+    #
     # @overload describe_volumes(params = {})
     # @param [Hash] params ({})
     def describe_volumes(params = {}, options = {})
@@ -10686,6 +10964,8 @@ module Aws::EC2
     #   resp.vpc_id #=> String
     #   resp.enable_dns_support.value #=> Boolean
     #   resp.enable_dns_hostnames.value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttribute AWS API Documentation
     #
     # @overload describe_vpc_attribute(params = {})
     # @param [Hash] params ({})
@@ -10755,6 +11035,8 @@ module Aws::EC2
     #   resp.vpcs[0].tags[0].key #=> String
     #   resp.vpcs[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLink AWS API Documentation
+    #
     # @overload describe_vpc_classic_link(params = {})
     # @param [Hash] params ({})
     def describe_vpc_classic_link(params = {}, options = {})
@@ -10806,6 +11088,8 @@ module Aws::EC2
     #   resp.vpcs[0].classic_link_dns_supported #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupport AWS API Documentation
+    #
     # @overload describe_vpc_classic_link_dns_support(params = {})
     # @param [Hash] params ({})
     def describe_vpc_classic_link_dns_support(params = {}, options = {})
@@ -10852,6 +11136,8 @@ module Aws::EC2
     #   resp.service_names #=> Array
     #   resp.service_names[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServices AWS API Documentation
     #
     # @overload describe_vpc_endpoint_services(params = {})
     # @param [Hash] params ({})
@@ -10927,6 +11213,8 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].route_table_ids[0] #=> String
     #   resp.vpc_endpoints[0].creation_timestamp #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpoints AWS API Documentation
     #
     # @overload describe_vpc_endpoints(params = {})
     # @param [Hash] params ({})
@@ -11040,6 +11328,8 @@ module Aws::EC2
     #   resp.vpc_peering_connections[0].tags[0].value #=> String
     #   resp.vpc_peering_connections[0].vpc_peering_connection_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnections AWS API Documentation
+    #
     # @overload describe_vpc_peering_connections(params = {})
     # @param [Hash] params ({})
     def describe_vpc_peering_connections(params = {}, options = {})
@@ -11136,6 +11426,8 @@ module Aws::EC2
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
     #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcs AWS API Documentation
     #
     # @overload describe_vpcs(params = {})
     # @param [Hash] params ({})
@@ -11253,6 +11545,8 @@ module Aws::EC2
     #   resp.vpn_connections[0].routes[0].source #=> String, one of "Static"
     #   resp.vpn_connections[0].routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnections AWS API Documentation
+    #
     # @overload describe_vpn_connections(params = {})
     # @param [Hash] params ({})
     def describe_vpn_connections(params = {}, options = {})
@@ -11349,6 +11643,8 @@ module Aws::EC2
     #   resp.vpn_gateways[0].tags[0].key #=> String
     #   resp.vpn_gateways[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGateways AWS API Documentation
+    #
     # @overload describe_vpn_gateways(params = {})
     # @param [Hash] params ({})
     def describe_vpn_gateways(params = {}, options = {})
@@ -11389,6 +11685,8 @@ module Aws::EC2
     #
     #   resp.return #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachClassicLinkVpc AWS API Documentation
+    #
     # @overload detach_classic_link_vpc(params = {})
     # @param [Hash] params ({})
     def detach_classic_link_vpc(params = {}, options = {})
@@ -11422,6 +11720,8 @@ module Aws::EC2
     #     vpc_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachInternetGateway AWS API Documentation
+    #
     # @overload detach_internet_gateway(params = {})
     # @param [Hash] params ({})
     def detach_internet_gateway(params = {}, options = {})
@@ -11452,6 +11752,8 @@ module Aws::EC2
     #     attachment_id: "String", # required
     #     force: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachNetworkInterface AWS API Documentation
     #
     # @overload detach_network_interface(params = {})
     # @param [Hash] params ({})
@@ -11532,6 +11834,8 @@ module Aws::EC2
     #   resp.attach_time #=> Time
     #   resp.delete_on_termination #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolume AWS API Documentation
+    #
     # @overload detach_volume(params = {})
     # @param [Hash] params ({})
     def detach_volume(params = {}, options = {})
@@ -11571,6 +11875,8 @@ module Aws::EC2
     #     vpc_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVpnGateway AWS API Documentation
+    #
     # @overload detach_vpn_gateway(params = {})
     # @param [Hash] params ({})
     def detach_vpn_gateway(params = {}, options = {})
@@ -11595,6 +11901,8 @@ module Aws::EC2
     #     route_table_id: "String", # required
     #     gateway_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagation AWS API Documentation
     #
     # @overload disable_vgw_route_propagation(params = {})
     # @param [Hash] params ({})
@@ -11630,6 +11938,8 @@ module Aws::EC2
     #
     #   resp.return #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLink AWS API Documentation
+    #
     # @overload disable_vpc_classic_link(params = {})
     # @param [Hash] params ({})
     def disable_vpc_classic_link(params = {}, options = {})
@@ -11663,6 +11973,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkDnsSupport AWS API Documentation
     #
     # @overload disable_vpc_classic_link_dns_support(params = {})
     # @param [Hash] params ({})
@@ -11707,6 +12019,8 @@ module Aws::EC2
     #     association_id: "String",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateAddress AWS API Documentation
+    #
     # @overload disassociate_address(params = {})
     # @param [Hash] params ({})
     def disassociate_address(params = {}, options = {})
@@ -11744,6 +12058,8 @@ module Aws::EC2
     #     association_id: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTable AWS API Documentation
+    #
     # @overload disassociate_route_table(params = {})
     # @param [Hash] params ({})
     def disassociate_route_table(params = {}, options = {})
@@ -11777,6 +12093,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
     #   resp.ipv_6_cidr_block_association.association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlock AWS API Documentation
     #
     # @overload disassociate_subnet_cidr_block(params = {})
     # @param [Hash] params ({})
@@ -11812,6 +12130,8 @@ module Aws::EC2
     #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
     #   resp.ipv_6_cidr_block_association.association_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlock AWS API Documentation
+    #
     # @overload disassociate_vpc_cidr_block(params = {})
     # @param [Hash] params ({})
     def disassociate_vpc_cidr_block(params = {}, options = {})
@@ -11836,6 +12156,8 @@ module Aws::EC2
     #     route_table_id: "String", # required
     #     gateway_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagation AWS API Documentation
     #
     # @overload enable_vgw_route_propagation(params = {})
     # @param [Hash] params ({})
@@ -11864,6 +12186,8 @@ module Aws::EC2
     #     dry_run: false,
     #     volume_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVolumeIO AWS API Documentation
     #
     # @overload enable_volume_io(params = {})
     # @param [Hash] params ({})
@@ -11909,6 +12233,8 @@ module Aws::EC2
     #
     #   resp.return #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLink AWS API Documentation
+    #
     # @overload enable_vpc_classic_link(params = {})
     # @param [Hash] params ({})
     def enable_vpc_classic_link(params = {}, options = {})
@@ -11944,6 +12270,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkDnsSupport AWS API Documentation
     #
     # @overload enable_vpc_classic_link_dns_support(params = {})
     # @param [Hash] params ({})
@@ -12001,6 +12329,8 @@ module Aws::EC2
     #   resp.timestamp #=> Time
     #   resp.output #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutput AWS API Documentation
+    #
     # @overload get_console_output(params = {})
     # @param [Hash] params ({})
     def get_console_output(params = {}, options = {})
@@ -12043,6 +12373,8 @@ module Aws::EC2
     #
     #   resp.instance_id #=> String
     #   resp.image_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleScreenshot AWS API Documentation
     #
     # @overload get_console_screenshot(params = {})
     # @param [Hash] params ({})
@@ -12095,6 +12427,8 @@ module Aws::EC2
     #   resp.total_hourly_price #=> String
     #   resp.currency_code #=> String, one of "USD"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreview AWS API Documentation
+    #
     # @overload get_host_reservation_purchase_preview(params = {})
     # @param [Hash] params ({})
     def get_host_reservation_purchase_preview(params = {}, options = {})
@@ -12146,6 +12480,8 @@ module Aws::EC2
     #   resp.instance_id #=> String
     #   resp.timestamp #=> Time
     #   resp.password_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordData AWS API Documentation
     #
     # @overload get_password_data(params = {})
     # @param [Hash] params ({})
@@ -12221,6 +12557,8 @@ module Aws::EC2
     #   resp.output_reserved_instances_will_expire_at #=> Time
     #   resp.is_valid_exchange #=> Boolean
     #   resp.validation_failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuote AWS API Documentation
     #
     # @overload get_reserved_instances_exchange_quote(params = {})
     # @param [Hash] params ({})
@@ -12361,6 +12699,8 @@ module Aws::EC2
     #   resp.status_message #=> String
     #   resp.status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImage AWS API Documentation
+    #
     # @overload import_image(params = {})
     # @param [Hash] params ({})
     def import_image(params = {}, options = {})
@@ -12479,6 +12819,8 @@ module Aws::EC2
     #   resp.conversion_task.tags[0].key #=> String
     #   resp.conversion_task.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstance AWS API Documentation
+    #
     # @overload import_instance(params = {})
     # @param [Hash] params ({})
     def import_instance(params = {}, options = {})
@@ -12530,6 +12872,8 @@ module Aws::EC2
     #
     #   resp.key_name #=> String
     #   resp.key_fingerprint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPair AWS API Documentation
     #
     # @overload import_key_pair(params = {})
     # @param [Hash] params ({})
@@ -12606,6 +12950,8 @@ module Aws::EC2
     #   resp.snapshot_task_detail.status_message #=> String
     #   resp.snapshot_task_detail.status #=> String
     #   resp.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshot AWS API Documentation
     #
     # @overload import_snapshot(params = {})
     # @param [Hash] params ({})
@@ -12697,6 +13043,8 @@ module Aws::EC2
     #   resp.conversion_task.tags[0].key #=> String
     #   resp.conversion_task.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolume AWS API Documentation
+    #
     # @overload import_volume(params = {})
     # @param [Hash] params ({})
     def import_volume(params = {}, options = {})
@@ -12739,6 +13087,8 @@ module Aws::EC2
     #   resp.unsuccessful[0].resource_id #=> String
     #   resp.unsuccessful[0].error.code #=> String
     #   resp.unsuccessful[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHosts AWS API Documentation
     #
     # @overload modify_hosts(params = {})
     # @param [Hash] params ({})
@@ -12786,6 +13136,8 @@ module Aws::EC2
     #     resource: "String", # required
     #     use_long_ids: false, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdFormat AWS API Documentation
     #
     # @overload modify_id_format(params = {})
     # @param [Hash] params ({})
@@ -12837,6 +13189,8 @@ module Aws::EC2
     #     use_long_ids: false, # required
     #     principal_arn: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormat AWS API Documentation
     #
     # @overload modify_identity_id_format(params = {})
     # @param [Hash] params ({})
@@ -12927,6 +13281,8 @@ module Aws::EC2
     #     },
     #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttribute AWS API Documentation
     #
     # @overload modify_image_attribute(params = {})
     # @param [Hash] params ({})
@@ -13099,6 +13455,8 @@ module Aws::EC2
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttribute AWS API Documentation
+    #
     # @overload modify_instance_attribute(params = {})
     # @param [Hash] params ({})
     def modify_instance_attribute(params = {}, options = {})
@@ -13156,6 +13514,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacement AWS API Documentation
     #
     # @overload modify_instance_placement(params = {})
     # @param [Hash] params ({})
@@ -13219,6 +13579,8 @@ module Aws::EC2
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttribute AWS API Documentation
+    #
     # @overload modify_network_interface_attribute(params = {})
     # @param [Hash] params ({})
     def modify_network_interface_attribute(params = {}, options = {})
@@ -13276,6 +13638,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.reserved_instances_modification_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstances AWS API Documentation
     #
     # @overload modify_reserved_instances(params = {})
     # @param [Hash] params ({})
@@ -13359,6 +13723,8 @@ module Aws::EC2
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttribute AWS API Documentation
+    #
     # @overload modify_snapshot_attribute(params = {})
     # @param [Hash] params ({})
     def modify_snapshot_attribute(params = {}, options = {})
@@ -13417,6 +13783,8 @@ module Aws::EC2
     #
     #   resp.return #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequest AWS API Documentation
+    #
     # @overload modify_spot_fleet_request(params = {})
     # @param [Hash] params ({})
     def modify_spot_fleet_request(params = {}, options = {})
@@ -13461,6 +13829,8 @@ module Aws::EC2
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttribute AWS API Documentation
+    #
     # @overload modify_subnet_attribute(params = {})
     # @param [Hash] params ({})
     def modify_subnet_attribute(params = {}, options = {})
@@ -13504,6 +13874,8 @@ module Aws::EC2
     #       value: false,
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeAttribute AWS API Documentation
     #
     # @overload modify_volume_attribute(params = {})
     # @param [Hash] params ({})
@@ -13550,6 +13922,8 @@ module Aws::EC2
     #       value: false,
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttribute AWS API Documentation
     #
     # @overload modify_vpc_attribute(params = {})
     # @param [Hash] params ({})
@@ -13603,6 +13977,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpoint AWS API Documentation
     #
     # @overload modify_vpc_endpoint(params = {})
     # @param [Hash] params ({})
@@ -13679,6 +14055,8 @@ module Aws::EC2
     #   resp.accepter_peering_connection_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
     #   resp.accepter_peering_connection_options.allow_dns_resolution_from_remote_vpc #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptions AWS API Documentation
+    #
     # @overload modify_vpc_peering_connection_options(params = {})
     # @param [Hash] params ({})
     def modify_vpc_peering_connection_options(params = {}, options = {})
@@ -13723,6 +14101,8 @@ module Aws::EC2
     #   resp.instance_monitorings[0].instance_id #=> String
     #   resp.instance_monitorings[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MonitorInstances AWS API Documentation
+    #
     # @overload monitor_instances(params = {})
     # @param [Hash] params ({})
     def monitor_instances(params = {}, options = {})
@@ -13764,6 +14144,8 @@ module Aws::EC2
     #
     #   resp.allocation_id #=> String
     #   resp.status #=> String, one of "MoveInProgress", "InVpc", "InClassic"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveAddressToVpc AWS API Documentation
     #
     # @overload move_address_to_vpc(params = {})
     # @param [Hash] params ({})
@@ -13842,6 +14224,8 @@ module Aws::EC2
     #   resp.currency_code #=> String, one of "USD"
     #   resp.client_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservation AWS API Documentation
+    #
     # @overload purchase_host_reservation(params = {})
     # @param [Hash] params ({})
     def purchase_host_reservation(params = {}, options = {})
@@ -13903,6 +14287,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.reserved_instances_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOffering AWS API Documentation
     #
     # @overload purchase_reserved_instances_offering(params = {})
     # @param [Hash] params ({})
@@ -13984,6 +14370,8 @@ module Aws::EC2
     #   resp.scheduled_instance_set[0].term_end_date #=> Time
     #   resp.scheduled_instance_set[0].create_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstances AWS API Documentation
+    #
     # @overload purchase_scheduled_instances(params = {})
     # @param [Hash] params ({})
     def purchase_scheduled_instances(params = {}, options = {})
@@ -14024,6 +14412,8 @@ module Aws::EC2
     #     dry_run: false,
     #     instance_ids: ["String"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RebootInstances AWS API Documentation
     #
     # @overload reboot_instances(params = {})
     # @param [Hash] params ({})
@@ -14175,6 +14565,8 @@ module Aws::EC2
     #
     #   resp.image_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImage AWS API Documentation
+    #
     # @overload register_image(params = {})
     # @param [Hash] params ({})
     def register_image(params = {}, options = {})
@@ -14212,6 +14604,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcPeeringConnection AWS API Documentation
     #
     # @overload reject_vpc_peering_connection(params = {})
     # @param [Hash] params ({})
@@ -14260,6 +14654,8 @@ module Aws::EC2
     #     allocation_id: "String",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseAddress AWS API Documentation
+    #
     # @overload release_address(params = {})
     # @param [Hash] params ({})
     def release_address(params = {}, options = {})
@@ -14303,6 +14699,8 @@ module Aws::EC2
     #   resp.unsuccessful[0].resource_id #=> String
     #   resp.unsuccessful[0].error.code #=> String
     #   resp.unsuccessful[0].error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseHosts AWS API Documentation
     #
     # @overload release_hosts(params = {})
     # @param [Hash] params ({})
@@ -14348,6 +14746,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.new_association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclAssociation AWS API Documentation
     #
     # @overload replace_network_acl_association(params = {})
     # @param [Hash] params ({})
@@ -14434,6 +14834,8 @@ module Aws::EC2
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclEntry AWS API Documentation
+    #
     # @overload replace_network_acl_entry(params = {})
     # @param [Hash] params ({})
     def replace_network_acl_entry(params = {}, options = {})
@@ -14505,6 +14907,8 @@ module Aws::EC2
     #     nat_gateway_id: "String",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRoute AWS API Documentation
+    #
     # @overload replace_route(params = {})
     # @param [Hash] params ({})
     def replace_route(params = {}, options = {})
@@ -14554,6 +14958,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.new_association_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteTableAssociation AWS API Documentation
     #
     # @overload replace_route_table_association(params = {})
     # @param [Hash] params ({})
@@ -14635,6 +15041,8 @@ module Aws::EC2
     #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
     #     description: "String",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReportInstanceStatus AWS API Documentation
     #
     # @overload report_instance_status(params = {})
     # @param [Hash] params ({})
@@ -14775,6 +15183,8 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.spot_fleet_request_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleet AWS API Documentation
     #
     # @overload request_spot_fleet(params = {})
     # @param [Hash] params ({})
@@ -15041,6 +15451,8 @@ module Aws::EC2
     #   resp.spot_instance_requests[0].tags[0].value #=> String
     #   resp.spot_instance_requests[0].launched_availability_zone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstances AWS API Documentation
+    #
     # @overload request_spot_instances(params = {})
     # @param [Hash] params ({})
     def request_spot_instances(params = {}, options = {})
@@ -15076,6 +15488,8 @@ module Aws::EC2
     #     image_id: "String", # required
     #     attribute: "launchPermission", # required, accepts launchPermission
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetImageAttribute AWS API Documentation
     #
     # @overload reset_image_attribute(params = {})
     # @param [Hash] params ({})
@@ -15125,6 +15539,8 @@ module Aws::EC2
     #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttribute AWS API Documentation
+    #
     # @overload reset_instance_attribute(params = {})
     # @param [Hash] params ({})
     def reset_instance_attribute(params = {}, options = {})
@@ -15156,6 +15572,8 @@ module Aws::EC2
     #     network_interface_id: "String", # required
     #     source_dest_check: "String",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetNetworkInterfaceAttribute AWS API Documentation
     #
     # @overload reset_network_interface_attribute(params = {})
     # @param [Hash] params ({})
@@ -15196,6 +15614,8 @@ module Aws::EC2
     #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetSnapshotAttribute AWS API Documentation
+    #
     # @overload reset_snapshot_attribute(params = {})
     # @param [Hash] params ({})
     def reset_snapshot_attribute(params = {}, options = {})
@@ -15234,6 +15654,8 @@ module Aws::EC2
     #
     #   resp.status #=> String, one of "MoveInProgress", "InVpc", "InClassic"
     #   resp.public_ip #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreAddressToClassic AWS API Documentation
     #
     # @overload restore_address_to_classic(params = {})
     # @param [Hash] params ({})
@@ -15343,6 +15765,8 @@ module Aws::EC2
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgress AWS API Documentation
     #
     # @overload revoke_security_group_egress(params = {})
     # @param [Hash] params ({})
@@ -15465,6 +15889,8 @@ module Aws::EC2
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngress AWS API Documentation
     #
     # @overload revoke_security_group_ingress(params = {})
     # @param [Hash] params ({})
@@ -15914,6 +16340,8 @@ module Aws::EC2
     #   resp.instances[0].sriov_net_support #=> String
     #   resp.instances[0].ena_support #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstances AWS API Documentation
+    #
     # @overload run_instances(params = {})
     # @param [Hash] params ({})
     def run_instances(params = {}, options = {})
@@ -16047,6 +16475,8 @@ module Aws::EC2
     #   resp.instance_id_set #=> Array
     #   resp.instance_id_set[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstances AWS API Documentation
+    #
     # @overload run_scheduled_instances(params = {})
     # @param [Hash] params ({})
     def run_scheduled_instances(params = {}, options = {})
@@ -16112,6 +16542,8 @@ module Aws::EC2
     #   resp.starting_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
     #   resp.starting_instances[0].previous_state.code #=> Integer
     #   resp.starting_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstances AWS API Documentation
     #
     # @overload start_instances(params = {})
     # @param [Hash] params ({})
@@ -16195,6 +16627,8 @@ module Aws::EC2
     #   resp.stopping_instances[0].previous_state.code #=> Integer
     #   resp.stopping_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstances AWS API Documentation
+    #
     # @overload stop_instances(params = {})
     # @param [Hash] params ({})
     def stop_instances(params = {}, options = {})
@@ -16268,6 +16702,8 @@ module Aws::EC2
     #   resp.terminating_instances[0].previous_state.code #=> Integer
     #   resp.terminating_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstances AWS API Documentation
+    #
     # @overload terminate_instances(params = {})
     # @param [Hash] params ({})
     def terminate_instances(params = {}, options = {})
@@ -16301,6 +16737,8 @@ module Aws::EC2
     #   resp.unassigned_ipv_6_addresses #=> Array
     #   resp.unassigned_ipv_6_addresses[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6Addresses AWS API Documentation
+    #
     # @overload unassign_ipv_6_addresses(params = {})
     # @param [Hash] params ({})
     def unassign_ipv_6_addresses(params = {}, options = {})
@@ -16327,6 +16765,8 @@ module Aws::EC2
     #     network_interface_id: "String", # required
     #     private_ip_addresses: ["String"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddresses AWS API Documentation
     #
     # @overload unassign_private_ip_addresses(params = {})
     # @param [Hash] params ({})
@@ -16368,6 +16808,8 @@ module Aws::EC2
     #   resp.instance_monitorings #=> Array
     #   resp.instance_monitorings[0].instance_id #=> String
     #   resp.instance_monitorings[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnmonitorInstances AWS API Documentation
     #
     # @overload unmonitor_instances(params = {})
     # @param [Hash] params ({})

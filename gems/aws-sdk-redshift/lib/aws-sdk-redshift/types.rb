@@ -15,6 +15,8 @@ module Aws::Redshift
     #   snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountWithRestoreAccess AWS API Documentation
+    #
     class AccountWithRestoreAccess < Struct.new(
       :account_id)
       include Aws::Structure
@@ -51,6 +53,8 @@ module Aws::Redshift
     #   Example: `111122223333`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngressMessage AWS API Documentation
+    #
     class AuthorizeClusterSecurityGroupIngressMessage < Struct.new(
       :cluster_security_group_name,
       :cidrip,
@@ -62,6 +66,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_security_group
     #   Describes a security group.
     #   @return [Types::ClusterSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeClusterSecurityGroupIngressResult AWS API Documentation
     #
     class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group)
@@ -93,6 +99,8 @@ module Aws::Redshift
     #   specified snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccessMessage AWS API Documentation
+    #
     class AuthorizeSnapshotAccessMessage < Struct.new(
       :snapshot_identifier,
       :snapshot_cluster_identifier,
@@ -104,6 +112,8 @@ module Aws::Redshift
     #   Describes a snapshot.
     #   @return [Types::Snapshot]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccessResult AWS API Documentation
+    #
     class AuthorizeSnapshotAccessResult < Struct.new(
       :snapshot)
       include Aws::Structure
@@ -114,6 +124,8 @@ module Aws::Redshift
     # @!attribute [rw] name
     #   The name of the availability zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :name)
@@ -332,6 +344,8 @@ module Aws::Redshift
     #   used by the cluster to access other AWS services.
     #   @return [Array<Types::ClusterIamRole>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Cluster AWS API Documentation
+    #
     class Cluster < Struct.new(
       :cluster_identifier,
       :node_type,
@@ -392,6 +406,8 @@ module Aws::Redshift
     #     with the cluster.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterIamRole AWS API Documentation
+    #
     class ClusterIamRole < Struct.new(
       :iam_role_arn,
       :apply_status)
@@ -411,6 +427,8 @@ module Aws::Redshift
     # @!attribute [rw] public_ip_address
     #   The public IP address of a node within a cluster.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterNode AWS API Documentation
     #
     class ClusterNode < Struct.new(
       :node_role,
@@ -438,6 +456,8 @@ module Aws::Redshift
     #   The list of tags for the cluster parameter group.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroup AWS API Documentation
+    #
     class ClusterParameterGroup < Struct.new(
       :parameter_group_name,
       :parameter_group_family,
@@ -462,6 +482,8 @@ module Aws::Redshift
     #   have been retrieved for the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupDetails AWS API Documentation
+    #
     class ClusterParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
@@ -477,6 +499,8 @@ module Aws::Redshift
     #   to a parameter group name-value pair, then the change could be
     #   pending a reboot of an associated cluster.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupNameMessage AWS API Documentation
     #
     class ClusterParameterGroupNameMessage < Struct.new(
       :parameter_group_name,
@@ -506,6 +530,8 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
     #   @return [Array<Types::ClusterParameterStatus>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupStatus AWS API Documentation
+    #
     class ClusterParameterGroupStatus < Struct.new(
       :parameter_group_name,
       :parameter_apply_status,
@@ -528,6 +554,8 @@ module Aws::Redshift
     #   A list of ClusterParameterGroup instances. Each instance describes
     #   one cluster parameter group.
     #   @return [Array<Types::ClusterParameterGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterGroupsMessage AWS API Documentation
     #
     class ClusterParameterGroupsMessage < Struct.new(
       :marker,
@@ -573,6 +601,8 @@ module Aws::Redshift
     #   database.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterParameterStatus AWS API Documentation
+    #
     class ClusterParameterStatus < Struct.new(
       :parameter_name,
       :parameter_apply_status,
@@ -605,6 +635,8 @@ module Aws::Redshift
     #   The list of tags for the cluster security group.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroup AWS API Documentation
+    #
     class ClusterSecurityGroup < Struct.new(
       :cluster_security_group_name,
       :description,
@@ -624,6 +656,8 @@ module Aws::Redshift
     #   The status of the cluster security group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupMembership AWS API Documentation
+    #
     class ClusterSecurityGroupMembership < Struct.new(
       :cluster_security_group_name,
       :status)
@@ -642,6 +676,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_security_groups
     #   A list of ClusterSecurityGroup instances.
     #   @return [Array<Types::ClusterSecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSecurityGroupMessage AWS API Documentation
     #
     class ClusterSecurityGroupMessage < Struct.new(
       :marker,
@@ -665,6 +701,8 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSnapshotCopyStatus AWS API Documentation
     #
     class ClusterSnapshotCopyStatus < Struct.new(
       :destination_region,
@@ -700,6 +738,8 @@ module Aws::Redshift
     #   The list of tags for the cluster subnet group.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroup AWS API Documentation
+    #
     class ClusterSubnetGroup < Struct.new(
       :cluster_subnet_group_name,
       :description,
@@ -725,6 +765,8 @@ module Aws::Redshift
     #   A list of ClusterSubnetGroup instances.
     #   @return [Array<Types::ClusterSubnetGroup>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterSubnetGroupMessage AWS API Documentation
+    #
     class ClusterSubnetGroupMessage < Struct.new(
       :marker,
       :cluster_subnet_groups)
@@ -745,6 +787,8 @@ module Aws::Redshift
     # @!attribute [rw] description
     #   The description of the cluster version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterVersion AWS API Documentation
     #
     class ClusterVersion < Struct.new(
       :cluster_version,
@@ -768,6 +812,8 @@ module Aws::Redshift
     #   A list of `Version` elements.
     #   @return [Array<Types::ClusterVersion>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterVersionsMessage AWS API Documentation
+    #
     class ClusterVersionsMessage < Struct.new(
       :marker,
       :cluster_versions)
@@ -789,6 +835,8 @@ module Aws::Redshift
     #   A list of `Cluster` objects, where each object describes one
     #   cluster.
     #   @return [Array<Types::Cluster>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClustersMessage AWS API Documentation
     #
     class ClustersMessage < Struct.new(
       :marker,
@@ -845,6 +893,8 @@ module Aws::Redshift
     #   * Must be unique for the AWS account that is making the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshotMessage AWS API Documentation
+    #
     class CopyClusterSnapshotMessage < Struct.new(
       :source_snapshot_identifier,
       :source_snapshot_cluster_identifier,
@@ -855,6 +905,8 @@ module Aws::Redshift
     # @!attribute [rw] snapshot
     #   Describes a snapshot.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CopyClusterSnapshotResult AWS API Documentation
     #
     class CopyClusterSnapshotResult < Struct.new(
       :snapshot)
@@ -1230,6 +1282,8 @@ module Aws::Redshift
     #   time.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
+    #
     class CreateClusterMessage < Struct.new(
       :db_name,
       :cluster_identifier,
@@ -1316,6 +1370,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroupMessage AWS API Documentation
+    #
     class CreateClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
       :parameter_group_family,
@@ -1328,6 +1384,8 @@ module Aws::Redshift
     #   Describes a parameter group.
     #   @return [Types::ClusterParameterGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterParameterGroupResult AWS API Documentation
+    #
     class CreateClusterParameterGroupResult < Struct.new(
       :cluster_parameter_group)
       include Aws::Structure
@@ -1336,6 +1394,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterResult AWS API Documentation
     #
     class CreateClusterResult < Struct.new(
       :cluster)
@@ -1380,6 +1440,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroupMessage AWS API Documentation
+    #
     class CreateClusterSecurityGroupMessage < Struct.new(
       :cluster_security_group_name,
       :description,
@@ -1390,6 +1452,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_security_group
     #   Describes a security group.
     #   @return [Types::ClusterSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSecurityGroupResult AWS API Documentation
     #
     class CreateClusterSecurityGroupResult < Struct.new(
       :cluster_security_group)
@@ -1435,6 +1499,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshotMessage AWS API Documentation
+    #
     class CreateClusterSnapshotMessage < Struct.new(
       :snapshot_identifier,
       :cluster_identifier,
@@ -1445,6 +1511,8 @@ module Aws::Redshift
     # @!attribute [rw] snapshot
     #   Describes a snapshot.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSnapshotResult AWS API Documentation
     #
     class CreateClusterSnapshotResult < Struct.new(
       :snapshot)
@@ -1495,6 +1563,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroupMessage AWS API Documentation
+    #
     class CreateClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name,
       :description,
@@ -1506,6 +1576,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_subnet_group
     #   Describes a subnet group.
     #   @return [Types::ClusterSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterSubnetGroupResult AWS API Documentation
     #
     class CreateClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
@@ -1599,6 +1671,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscriptionMessage AWS API Documentation
+    #
     class CreateEventSubscriptionMessage < Struct.new(
       :subscription_name,
       :sns_topic_arn,
@@ -1614,6 +1688,8 @@ module Aws::Redshift
     # @!attribute [rw] event_subscription
     #   Describes event subscriptions.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateEventSubscriptionResult AWS API Documentation
     #
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription)
@@ -1643,6 +1719,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificateMessage AWS API Documentation
+    #
     class CreateHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier,
       :tags)
@@ -1654,6 +1732,8 @@ module Aws::Redshift
     #   is stored in a secure Hardware Storage Module (HSM), and used by the
     #   Amazon Redshift cluster to encrypt data files.
     #   @return [Types::HsmClientCertificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmClientCertificateResult AWS API Documentation
     #
     class CreateHsmClientCertificateResult < Struct.new(
       :hsm_client_certificate)
@@ -1710,6 +1790,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfigurationMessage AWS API Documentation
+    #
     class CreateHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier,
       :description,
@@ -1727,6 +1809,8 @@ module Aws::Redshift
     #   require to connect to an HSM where they can store database
     #   encryption keys.
     #   @return [Types::HsmConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateHsmConfigurationResult AWS API Documentation
     #
     class CreateHsmConfigurationResult < Struct.new(
       :hsm_configuration)
@@ -1776,6 +1860,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrantMessage AWS API Documentation
+    #
     class CreateSnapshotCopyGrantMessage < Struct.new(
       :snapshot_copy_grant_name,
       :kms_key_id,
@@ -1796,6 +1882,8 @@ module Aws::Redshift
     #
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
     #   @return [Types::SnapshotCopyGrant]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateSnapshotCopyGrantResult AWS API Documentation
     #
     class CreateSnapshotCopyGrantResult < Struct.new(
       :snapshot_copy_grant)
@@ -1833,6 +1921,8 @@ module Aws::Redshift
     #   "Key"="version","Value"="1.0"`.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateTagsMessage AWS API Documentation
+    #
     class CreateTagsMessage < Struct.new(
       :resource_name,
       :tags)
@@ -1858,6 +1948,8 @@ module Aws::Redshift
     # @!attribute [rw] parameters
     #   The list of cluster default parameters.
     #   @return [Array<Types::Parameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DefaultClusterParameters AWS API Documentation
     #
     class DefaultClusterParameters < Struct.new(
       :parameter_group_family,
@@ -1917,6 +2009,8 @@ module Aws::Redshift
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterMessage AWS API Documentation
+    #
     class DeleteClusterMessage < Struct.new(
       :cluster_identifier,
       :skip_final_cluster_snapshot,
@@ -1941,6 +2035,8 @@ module Aws::Redshift
     #   * Cannot delete a default cluster parameter group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterParameterGroupMessage AWS API Documentation
+    #
     class DeleteClusterParameterGroupMessage < Struct.new(
       :parameter_group_name)
       include Aws::Structure
@@ -1949,6 +2045,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterResult AWS API Documentation
     #
     class DeleteClusterResult < Struct.new(
       :cluster)
@@ -1965,6 +2063,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_security_group_name
     #   The name of the cluster security group to be deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSecurityGroupMessage AWS API Documentation
     #
     class DeleteClusterSecurityGroupMessage < Struct.new(
       :cluster_security_group_name)
@@ -1995,6 +2095,8 @@ module Aws::Redshift
     #   Constraints: Must be the name of valid cluster.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshotMessage AWS API Documentation
+    #
     class DeleteClusterSnapshotMessage < Struct.new(
       :snapshot_identifier,
       :snapshot_cluster_identifier)
@@ -2004,6 +2106,8 @@ module Aws::Redshift
     # @!attribute [rw] snapshot
     #   Describes a snapshot.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSnapshotResult AWS API Documentation
     #
     class DeleteClusterSnapshotResult < Struct.new(
       :snapshot)
@@ -2020,6 +2124,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_subnet_group_name
     #   The name of the cluster subnet group name to be deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteClusterSubnetGroupMessage AWS API Documentation
     #
     class DeleteClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name)
@@ -2038,6 +2144,8 @@ module Aws::Redshift
     #   be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteEventSubscriptionMessage AWS API Documentation
+    #
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name)
       include Aws::Structure
@@ -2053,6 +2161,8 @@ module Aws::Redshift
     # @!attribute [rw] hsm_client_certificate_identifier
     #   The identifier of the HSM client certificate to be deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmClientCertificateMessage AWS API Documentation
     #
     class DeleteHsmClientCertificateMessage < Struct.new(
       :hsm_client_certificate_identifier)
@@ -2071,6 +2181,8 @@ module Aws::Redshift
     #   deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteHsmConfigurationMessage AWS API Documentation
+    #
     class DeleteHsmConfigurationMessage < Struct.new(
       :hsm_configuration_identifier)
       include Aws::Structure
@@ -2088,6 +2200,8 @@ module Aws::Redshift
     # @!attribute [rw] snapshot_copy_grant_name
     #   The name of the snapshot copy grant to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteSnapshotCopyGrantMessage AWS API Documentation
     #
     class DeleteSnapshotCopyGrantMessage < Struct.new(
       :snapshot_copy_grant_name)
@@ -2113,6 +2227,8 @@ module Aws::Redshift
     # @!attribute [rw] tag_keys
     #   The tag key that you want to delete.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeleteTagsMessage AWS API Documentation
     #
     class DeleteTagsMessage < Struct.new(
       :resource_name,
@@ -2179,6 +2295,8 @@ module Aws::Redshift
     #   both of these tag values associated with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParameterGroupsMessage AWS API Documentation
+    #
     class DescribeClusterParameterGroupsMessage < Struct.new(
       :parameter_group_name,
       :max_records,
@@ -2234,6 +2352,8 @@ module Aws::Redshift
     #   providing the returned marker value in the `Marker` parameter and
     #   retrying the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterParametersMessage AWS API Documentation
     #
     class DescribeClusterParametersMessage < Struct.new(
       :parameter_group_name,
@@ -2306,6 +2426,8 @@ module Aws::Redshift
     #   returns a response with the security groups that have either or both
     #   of these tag values associated with them.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSecurityGroupsMessage AWS API Documentation
     #
     class DescribeClusterSecurityGroupsMessage < Struct.new(
       :cluster_security_group_name,
@@ -2424,6 +2546,8 @@ module Aws::Redshift
     #   associated with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSnapshotsMessage AWS API Documentation
+    #
     class DescribeClusterSnapshotsMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
@@ -2496,6 +2620,8 @@ module Aws::Redshift
     #   of these tag values associated with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterSubnetGroupsMessage AWS API Documentation
+    #
     class DescribeClusterSubnetGroupsMessage < Struct.new(
       :cluster_subnet_group_name,
       :max_records,
@@ -2555,6 +2681,8 @@ module Aws::Redshift
     #   providing the returned marker value in the `Marker` parameter and
     #   retrying the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClusterVersionsMessage AWS API Documentation
     #
     class DescribeClusterVersionsMessage < Struct.new(
       :cluster_version,
@@ -2626,6 +2754,8 @@ module Aws::Redshift
     #   with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeClustersMessage AWS API Documentation
+    #
     class DescribeClustersMessage < Struct.new(
       :cluster_identifier,
       :max_records,
@@ -2670,6 +2800,8 @@ module Aws::Redshift
     #   retrying the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParametersMessage AWS API Documentation
+    #
     class DescribeDefaultClusterParametersMessage < Struct.new(
       :parameter_group_family,
       :max_records,
@@ -2681,6 +2813,8 @@ module Aws::Redshift
     #   Describes the default cluster parameters for a parameter group
     #   family.
     #   @return [Types::DefaultClusterParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDefaultClusterParametersResult AWS API Documentation
     #
     class DescribeDefaultClusterParametersResult < Struct.new(
       :default_cluster_parameters)
@@ -2701,6 +2835,8 @@ module Aws::Redshift
     #   Valid values: cluster, cluster-snapshot, cluster-parameter-group,
     #   and cluster-security-group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventCategoriesMessage AWS API Documentation
     #
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type)
@@ -2742,6 +2878,8 @@ module Aws::Redshift
     #   providing the returned marker value in the `Marker` parameter and
     #   retrying the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventSubscriptionsMessage AWS API Documentation
     #
     class DescribeEventSubscriptionsMessage < Struct.new(
       :subscription_name,
@@ -2860,6 +2998,8 @@ module Aws::Redshift
     #   in the `Marker` parameter and retrying the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeEventsMessage AWS API Documentation
+    #
     class DescribeEventsMessage < Struct.new(
       :source_identifier,
       :source_type,
@@ -2931,6 +3071,8 @@ module Aws::Redshift
     #   have either or both of these tag values associated with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmClientCertificatesMessage AWS API Documentation
+    #
     class DescribeHsmClientCertificatesMessage < Struct.new(
       :hsm_client_certificate_identifier,
       :max_records,
@@ -2999,6 +3141,8 @@ module Aws::Redshift
     #   these tag values associated with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeHsmConfigurationsMessage AWS API Documentation
+    #
     class DescribeHsmConfigurationsMessage < Struct.new(
       :hsm_configuration_identifier,
       :max_records,
@@ -3020,6 +3164,8 @@ module Aws::Redshift
     #
     #   Example: `examplecluster`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatusMessage AWS API Documentation
     #
     class DescribeLoggingStatusMessage < Struct.new(
       :cluster_identifier)
@@ -3073,6 +3219,8 @@ module Aws::Redshift
     #   retrying the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeOrderableClusterOptionsMessage AWS API Documentation
+    #
     class DescribeOrderableClusterOptionsMessage < Struct.new(
       :cluster_version,
       :node_type,
@@ -3116,6 +3264,8 @@ module Aws::Redshift
     #   retrying the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodeOfferingsMessage AWS API Documentation
+    #
     class DescribeReservedNodeOfferingsMessage < Struct.new(
       :reserved_node_offering_id,
       :max_records,
@@ -3157,6 +3307,8 @@ module Aws::Redshift
     #   in the `Marker` parameter and retrying the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeReservedNodesMessage AWS API Documentation
+    #
     class DescribeReservedNodesMessage < Struct.new(
       :reserved_node_id,
       :max_records,
@@ -3178,6 +3330,8 @@ module Aws::Redshift
     #   By default, resize operations for all clusters defined for an AWS
     #   account are returned.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeResizeMessage AWS API Documentation
     #
     class DescribeResizeMessage < Struct.new(
       :cluster_identifier)
@@ -3245,6 +3399,8 @@ module Aws::Redshift
     #   with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeSnapshotCopyGrantsMessage AWS API Documentation
+    #
     class DescribeSnapshotCopyGrantsMessage < Struct.new(
       :snapshot_copy_grant_name,
       :max_records,
@@ -3288,6 +3444,8 @@ module Aws::Redshift
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by the `MaxRecords` parameter.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTableRestoreStatusMessage AWS API Documentation
     #
     class DescribeTableRestoreStatusMessage < Struct.new(
       :cluster_identifier,
@@ -3385,6 +3543,8 @@ module Aws::Redshift
     #   with them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeTagsMessage AWS API Documentation
+    #
     class DescribeTagsMessage < Struct.new(
       :resource_name,
       :resource_type,
@@ -3408,6 +3568,8 @@ module Aws::Redshift
     #   Example: `examplecluster`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLoggingMessage AWS API Documentation
+    #
     class DisableLoggingMessage < Struct.new(
       :cluster_identifier)
       include Aws::Structure
@@ -3428,6 +3590,8 @@ module Aws::Redshift
     #   cross-region snapshot copy enabled.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopyMessage AWS API Documentation
+    #
     class DisableSnapshotCopyMessage < Struct.new(
       :cluster_identifier)
       include Aws::Structure
@@ -3436,6 +3600,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableSnapshotCopyResult AWS API Documentation
     #
     class DisableSnapshotCopyResult < Struct.new(
       :cluster)
@@ -3461,6 +3627,8 @@ module Aws::Redshift
     #   The list of tags for the EC2 security group.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EC2SecurityGroup AWS API Documentation
+    #
     class EC2SecurityGroup < Struct.new(
       :status,
       :ec2_security_group_name,
@@ -3478,6 +3646,8 @@ module Aws::Redshift
     # @!attribute [rw] status
     #   The status of the elastic IP (EIP) address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ElasticIpStatus AWS API Documentation
     #
     class ElasticIpStatus < Struct.new(
       :elastic_ip,
@@ -3533,6 +3703,8 @@ module Aws::Redshift
     #     * x7f or larger
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLoggingMessage AWS API Documentation
+    #
     class EnableLoggingMessage < Struct.new(
       :cluster_identifier,
       :bucket_name,
@@ -3583,6 +3755,8 @@ module Aws::Redshift
     #   KMS-encrypted cluster are copied to the destination region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopyMessage AWS API Documentation
+    #
     class EnableSnapshotCopyMessage < Struct.new(
       :cluster_identifier,
       :destination_region,
@@ -3594,6 +3768,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableSnapshotCopyResult AWS API Documentation
     #
     class EnableSnapshotCopyResult < Struct.new(
       :cluster)
@@ -3609,6 +3785,8 @@ module Aws::Redshift
     # @!attribute [rw] port
     #   The port that the database engine is listening on.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :address,
@@ -3650,6 +3828,8 @@ module Aws::Redshift
     #   The identifier of the event.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Event AWS API Documentation
+    #
     class Event < Struct.new(
       :source_identifier,
       :source_type,
@@ -3672,6 +3852,8 @@ module Aws::Redshift
     #   The events in the event category.
     #   @return [Array<Types::EventInfoMap>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventCategoriesMap AWS API Documentation
+    #
     class EventCategoriesMap < Struct.new(
       :source_type,
       :events)
@@ -3681,6 +3863,8 @@ module Aws::Redshift
     # @!attribute [rw] event_categories_map_list
     #   A list of event categories descriptions.
     #   @return [Array<Types::EventCategoriesMap>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventCategoriesMessage AWS API Documentation
     #
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list)
@@ -3706,6 +3890,8 @@ module Aws::Redshift
     #
     #   Values: ERROR, INFO
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventInfoMap AWS API Documentation
     #
     class EventInfoMap < Struct.new(
       :event_id,
@@ -3783,6 +3969,8 @@ module Aws::Redshift
     #   The list of tags for the event subscription.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventSubscription AWS API Documentation
+    #
     class EventSubscription < Struct.new(
       :customer_aws_id,
       :cust_subscription_id,
@@ -3811,6 +3999,8 @@ module Aws::Redshift
     #   A list of event subscriptions.
     #   @return [Array<Types::EventSubscription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventSubscriptionsMessage AWS API Documentation
+    #
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list)
@@ -3829,6 +4019,8 @@ module Aws::Redshift
     # @!attribute [rw] events
     #   A list of `Event` instances.
     #   @return [Array<Types::Event>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EventsMessage AWS API Documentation
     #
     class EventsMessage < Struct.new(
       :marker,
@@ -3853,6 +4045,8 @@ module Aws::Redshift
     #   The list of tags for the HSM client certificate.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificate AWS API Documentation
+    #
     class HsmClientCertificate < Struct.new(
       :hsm_client_certificate_identifier,
       :hsm_client_certificate_public_key,
@@ -3874,6 +4068,8 @@ module Aws::Redshift
     #   used by Amazon Redshift clusters to store and retrieve database
     #   encryption keys in an HSM.
     #   @return [Array<Types::HsmClientCertificate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmClientCertificateMessage AWS API Documentation
     #
     class HsmClientCertificateMessage < Struct.new(
       :marker,
@@ -3908,6 +4104,8 @@ module Aws::Redshift
     #   The list of tags for the HSM configuration.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfiguration AWS API Documentation
+    #
     class HsmConfiguration < Struct.new(
       :hsm_configuration_identifier,
       :description,
@@ -3929,6 +4127,8 @@ module Aws::Redshift
     # @!attribute [rw] hsm_configurations
     #   A list of `HsmConfiguration` objects.
     #   @return [Array<Types::HsmConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmConfigurationMessage AWS API Documentation
     #
     class HsmConfigurationMessage < Struct.new(
       :marker,
@@ -3956,6 +4156,8 @@ module Aws::Redshift
     #   Values: active, applying
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/HsmStatus AWS API Documentation
+    #
     class HsmStatus < Struct.new(
       :hsm_client_certificate_identifier,
       :hsm_configuration_identifier,
@@ -3976,6 +4178,8 @@ module Aws::Redshift
     # @!attribute [rw] tags
     #   The list of tags for the IP range.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/IPRange AWS API Documentation
     #
     class IPRange < Struct.new(
       :status,
@@ -4009,6 +4213,8 @@ module Aws::Redshift
     # @!attribute [rw] last_failure_message
     #   The message indicating that logs failed to be delivered.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LoggingStatus AWS API Documentation
     #
     class LoggingStatus < Struct.new(
       :logging_enabled,
@@ -4046,6 +4252,8 @@ module Aws::Redshift
     #   cluster in a single request.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesMessage AWS API Documentation
+    #
     class ModifyClusterIamRolesMessage < Struct.new(
       :cluster_identifier,
       :add_iam_roles,
@@ -4056,6 +4264,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterIamRolesResult AWS API Documentation
     #
     class ModifyClusterIamRolesResult < Struct.new(
       :cluster)
@@ -4322,6 +4532,8 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterMessage AWS API Documentation
+    #
     class ModifyClusterMessage < Struct.new(
       :cluster_identifier,
       :cluster_type,
@@ -4380,6 +4592,8 @@ module Aws::Redshift
     #   the name-value pairs in the wlm\_json\_configuration parameter.
     #   @return [Array<Types::Parameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterParameterGroupMessage AWS API Documentation
+    #
     class ModifyClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
       :parameters)
@@ -4389,6 +4603,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterResult AWS API Documentation
     #
     class ModifyClusterResult < Struct.new(
       :cluster)
@@ -4417,6 +4633,8 @@ module Aws::Redshift
     #   in a single request.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupMessage AWS API Documentation
+    #
     class ModifyClusterSubnetGroupMessage < Struct.new(
       :cluster_subnet_group_name,
       :description,
@@ -4427,6 +4645,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_subnet_group
     #   Describes a subnet group.
     #   @return [Types::ClusterSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyClusterSubnetGroupResult AWS API Documentation
     #
     class ModifyClusterSubnetGroupResult < Struct.new(
       :cluster_subnet_group)
@@ -4500,6 +4720,8 @@ module Aws::Redshift
     #   indicates the subscription is enabled
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscriptionMessage AWS API Documentation
+    #
     class ModifyEventSubscriptionMessage < Struct.new(
       :subscription_name,
       :sns_topic_arn,
@@ -4514,6 +4736,8 @@ module Aws::Redshift
     # @!attribute [rw] event_subscription
     #   Describes event subscriptions.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifyEventSubscriptionResult AWS API Documentation
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
@@ -4549,6 +4773,8 @@ module Aws::Redshift
     #   Constraints: Must be at least 1 and no more than 35.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriodMessage AWS API Documentation
+    #
     class ModifySnapshotCopyRetentionPeriodMessage < Struct.new(
       :cluster_identifier,
       :retention_period)
@@ -4558,6 +4784,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ModifySnapshotCopyRetentionPeriodResult AWS API Documentation
     #
     class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
       :cluster)
@@ -4582,6 +4810,8 @@ module Aws::Redshift
     #   A list of availability zones for the orderable cluster.
     #   @return [Array<Types::AvailabilityZone>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/OrderableClusterOption AWS API Documentation
+    #
     class OrderableClusterOption < Struct.new(
       :cluster_version,
       :cluster_type,
@@ -4605,6 +4835,8 @@ module Aws::Redshift
     #   the command. If the `Marker` field is empty, all response records
     #   have been retrieved for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/OrderableClusterOptionsMessage AWS API Documentation
     #
     class OrderableClusterOptionsMessage < Struct.new(
       :orderable_cluster_options,
@@ -4677,6 +4909,8 @@ module Aws::Redshift
     #   The earliest engine version to which the parameter can apply.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Parameter AWS API Documentation
+    #
     class Parameter < Struct.new(
       :parameter_name,
       :parameter_value,
@@ -4747,6 +4981,8 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PendingModifiedValues AWS API Documentation
+    #
     class PendingModifiedValues < Struct.new(
       :master_user_password,
       :node_type,
@@ -4779,6 +5015,8 @@ module Aws::Redshift
     #   Default: `1`
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOfferingMessage AWS API Documentation
+    #
     class PurchaseReservedNodeOfferingMessage < Struct.new(
       :reserved_node_offering_id,
       :node_count)
@@ -4790,6 +5028,8 @@ module Aws::Redshift
     #   DescribeReservedNodeOfferings API to obtain the available reserved
     #   node offerings.
     #   @return [Types::ReservedNode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/PurchaseReservedNodeOfferingResult AWS API Documentation
     #
     class PurchaseReservedNodeOfferingResult < Struct.new(
       :reserved_node)
@@ -4807,6 +5047,8 @@ module Aws::Redshift
     #   The cluster identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootClusterMessage AWS API Documentation
+    #
     class RebootClusterMessage < Struct.new(
       :cluster_identifier)
       include Aws::Structure
@@ -4815,6 +5057,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RebootClusterResult AWS API Documentation
     #
     class RebootClusterResult < Struct.new(
       :cluster)
@@ -4831,6 +5075,8 @@ module Aws::Redshift
     # @!attribute [rw] recurring_charge_frequency
     #   The frequency at which the recurring charge amount is applied.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RecurringCharge AWS API Documentation
     #
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
@@ -4903,6 +5149,8 @@ module Aws::Redshift
     #   The recurring charges for the reserved node.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNode AWS API Documentation
+    #
     class ReservedNode < Struct.new(
       :reserved_node_id,
       :reserved_node_offering_id,
@@ -4959,6 +5207,8 @@ module Aws::Redshift
     #   effect for heavy-utilization reserved nodes.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOffering AWS API Documentation
+    #
     class ReservedNodeOffering < Struct.new(
       :reserved_node_offering_id,
       :node_type,
@@ -4984,6 +5234,8 @@ module Aws::Redshift
     #   A list of `ReservedNodeOffering` objects.
     #   @return [Array<Types::ReservedNodeOffering>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodeOfferingsMessage AWS API Documentation
+    #
     class ReservedNodeOfferingsMessage < Struct.new(
       :marker,
       :reserved_node_offerings)
@@ -5002,6 +5254,8 @@ module Aws::Redshift
     # @!attribute [rw] reserved_nodes
     #   The list of `ReservedNode` objects.
     #   @return [Array<Types::ReservedNode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ReservedNodesMessage AWS API Documentation
     #
     class ReservedNodesMessage < Struct.new(
       :marker,
@@ -5049,6 +5303,8 @@ module Aws::Redshift
     #   Constraints: A maximum of 20 parameters can be reset in a single
     #   request.
     #   @return [Array<Types::Parameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResetClusterParameterGroupMessage AWS API Documentation
     #
     class ResetClusterParameterGroupMessage < Struct.new(
       :parameter_group_name,
@@ -5132,6 +5388,8 @@ module Aws::Redshift
     #   rate and the estimated amount of data remaining to be processed.
     #   Once the resize operation is complete, this value will be 0.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ResizeProgressMessage AWS API Documentation
     #
     class ResizeProgressMessage < Struct.new(
       :target_node_type,
@@ -5389,6 +5647,8 @@ module Aws::Redshift
     #   A cluster can have up to 10 IAM roles associated at any time.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
+    #
     class RestoreFromClusterSnapshotMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
@@ -5418,6 +5678,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotResult AWS API Documentation
     #
     class RestoreFromClusterSnapshotResult < Struct.new(
       :cluster)
@@ -5455,6 +5717,8 @@ module Aws::Redshift
     #   The estimate of the time remaining before the restore will complete.
     #   Returns 0 for a completed restore.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreStatus AWS API Documentation
     #
     class RestoreStatus < Struct.new(
       :status,
@@ -5518,6 +5782,8 @@ module Aws::Redshift
     #   The name of the table to create as a result of the current request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshotMessage AWS API Documentation
+    #
     class RestoreTableFromClusterSnapshotMessage < Struct.new(
       :cluster_identifier,
       :snapshot_identifier,
@@ -5533,6 +5799,8 @@ module Aws::Redshift
     # @!attribute [rw] table_restore_status
     #   Describes the status of a RestoreTableFromClusterSnapshot operation.
     #   @return [Types::TableRestoreStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreTableFromClusterSnapshotResult AWS API Documentation
     #
     class RestoreTableFromClusterSnapshotResult < Struct.new(
       :table_restore_status)
@@ -5577,6 +5845,8 @@ module Aws::Redshift
     #   Example: `111122223333`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngressMessage AWS API Documentation
+    #
     class RevokeClusterSecurityGroupIngressMessage < Struct.new(
       :cluster_security_group_name,
       :cidrip,
@@ -5588,6 +5858,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster_security_group
     #   Describes a security group.
     #   @return [Types::ClusterSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeClusterSecurityGroupIngressResult AWS API Documentation
     #
     class RevokeClusterSecurityGroupIngressResult < Struct.new(
       :cluster_security_group)
@@ -5620,6 +5892,8 @@ module Aws::Redshift
     #   restore the specified snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccessMessage AWS API Documentation
+    #
     class RevokeSnapshotAccessMessage < Struct.new(
       :snapshot_identifier,
       :snapshot_cluster_identifier,
@@ -5630,6 +5904,8 @@ module Aws::Redshift
     # @!attribute [rw] snapshot
     #   Describes a snapshot.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RevokeSnapshotAccessResult AWS API Documentation
     #
     class RevokeSnapshotAccessResult < Struct.new(
       :snapshot)
@@ -5651,6 +5927,8 @@ module Aws::Redshift
     #   enabled.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKeyMessage AWS API Documentation
+    #
     class RotateEncryptionKeyMessage < Struct.new(
       :cluster_identifier)
       include Aws::Structure
@@ -5659,6 +5937,8 @@ module Aws::Redshift
     # @!attribute [rw] cluster
     #   Describes a cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RotateEncryptionKeyResult AWS API Documentation
     #
     class RotateEncryptionKeyResult < Struct.new(
       :cluster)
@@ -5824,6 +6104,8 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Snapshot AWS API Documentation
+    #
     class Snapshot < Struct.new(
       :snapshot_identifier,
       :cluster_identifier,
@@ -5882,6 +6164,8 @@ module Aws::Redshift
     #   A list of tag instances.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrant AWS API Documentation
+    #
     class SnapshotCopyGrant < Struct.new(
       :snapshot_copy_grant_name,
       :kms_key_id,
@@ -5906,6 +6190,8 @@ module Aws::Redshift
     #   The list of `SnapshotCopyGrant` objects.
     #   @return [Array<Types::SnapshotCopyGrant>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotCopyGrantMessage AWS API Documentation
+    #
     class SnapshotCopyGrantMessage < Struct.new(
       :marker,
       :snapshot_copy_grants)
@@ -5927,6 +6213,8 @@ module Aws::Redshift
     #   A list of Snapshot instances.
     #   @return [Array<Types::Snapshot>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/SnapshotMessage AWS API Documentation
+    #
     class SnapshotMessage < Struct.new(
       :marker,
       :snapshots)
@@ -5946,6 +6234,8 @@ module Aws::Redshift
     # @!attribute [rw] subnet_status
     #   The status of the subnet.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
       :subnet_identifier,
@@ -6026,6 +6316,8 @@ module Aws::Redshift
     #   request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TableRestoreStatus AWS API Documentation
+    #
     class TableRestoreStatus < Struct.new(
       :table_restore_request_id,
       :status,
@@ -6053,6 +6345,8 @@ module Aws::Redshift
     #   DescribeTableRestoreStatus request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TableRestoreStatusMessage AWS API Documentation
+    #
     class TableRestoreStatusMessage < Struct.new(
       :table_restore_status_details,
       :marker)
@@ -6076,6 +6370,8 @@ module Aws::Redshift
     # @!attribute [rw] value
     #   The value for the resource tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -6126,6 +6422,8 @@ module Aws::Redshift
     #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/constructing-redshift-arn.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResource AWS API Documentation
+    #
     class TaggedResource < Struct.new(
       :tag,
       :resource_name,
@@ -6146,6 +6444,8 @@ module Aws::Redshift
     #   have been retrieved for the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/TaggedResourceListMessage AWS API Documentation
+    #
     class TaggedResourceListMessage < Struct.new(
       :tagged_resources,
       :marker)
@@ -6161,6 +6461,8 @@ module Aws::Redshift
     # @!attribute [rw] status
     #   The status of the VPC security group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/VpcSecurityGroupMembership AWS API Documentation
     #
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,

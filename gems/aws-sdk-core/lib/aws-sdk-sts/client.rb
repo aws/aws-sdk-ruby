@@ -392,6 +392,8 @@ module Aws::STS
     #   resp.assumed_role_user.arn #=> String
     #   resp.packed_policy_size #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRole AWS API Documentation
+    #
     # @overload assume_role(params = {})
     # @param [Hash] params ({})
     def assume_role(params = {}, options = {})
@@ -587,6 +589,8 @@ module Aws::STS
     #   resp.issuer #=> String
     #   resp.audience #=> String
     #   resp.name_qualifier #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAML AWS API Documentation
     #
     # @overload assume_role_with_saml(params = {})
     # @param [Hash] params ({})
@@ -822,6 +826,8 @@ module Aws::STS
     #   resp.provider #=> String
     #   resp.audience #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentity AWS API Documentation
+    #
     # @overload assume_role_with_web_identity(params = {})
     # @param [Hash] params ({})
     def assume_role_with_web_identity(params = {}, options = {})
@@ -887,6 +893,8 @@ module Aws::STS
     #
     #   resp.decoded_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessage AWS API Documentation
+    #
     # @overload decode_authorization_message(params = {})
     # @param [Hash] params ({})
     def decode_authorization_message(params = {}, options = {})
@@ -908,6 +916,8 @@ module Aws::STS
     #   resp.user_id #=> String
     #   resp.account #=> String
     #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentity AWS API Documentation
     #
     # @overload get_caller_identity(params = {})
     # @param [Hash] params ({})
@@ -1096,6 +1106,8 @@ module Aws::STS
     #   resp.federated_user.arn #=> String
     #   resp.packed_policy_size #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationToken AWS API Documentation
+    #
     # @overload get_federation_token(params = {})
     # @param [Hash] params ({})
     def get_federation_token(params = {}, options = {})
@@ -1215,6 +1227,8 @@ module Aws::STS
     #   resp.credentials.session_token #=> String
     #   resp.credentials.expiration #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionToken AWS API Documentation
+    #
     # @overload get_session_token(params = {})
     # @param [Hash] params ({})
     def get_session_token(params = {}, options = {})
@@ -1235,7 +1249,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.0.0.rc2'
+      context[:gem_version] = '3.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

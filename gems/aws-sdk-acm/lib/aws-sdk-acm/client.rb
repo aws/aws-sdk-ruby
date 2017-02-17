@@ -207,6 +207,8 @@ module Aws::ACM
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificate AWS API Documentation
+    #
     # @overload add_tags_to_certificate(params = {})
     # @param [Hash] params ({})
     def add_tags_to_certificate(params = {}, options = {})
@@ -246,6 +248,8 @@ module Aws::ACM
     #   resp = client.delete_certificate({
     #     certificate_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificate AWS API Documentation
     #
     # @overload delete_certificate(params = {})
     # @param [Hash] params ({})
@@ -316,6 +320,8 @@ module Aws::ACM
     #   resp.certificate.renewal_summary.domain_validation_options[0].validation_domain #=> String
     #   resp.certificate.renewal_summary.domain_validation_options[0].validation_status #=> String, one of "PENDING_VALIDATION", "SUCCESS", "FAILED"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificate AWS API Documentation
+    #
     # @overload describe_certificate(params = {})
     # @param [Hash] params ({})
     def describe_certificate(params = {}, options = {})
@@ -363,6 +369,8 @@ module Aws::ACM
     #
     #   resp.certificate #=> String
     #   resp.certificate_chain #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificate AWS API Documentation
     #
     # @overload get_certificate(params = {})
     # @param [Hash] params ({})
@@ -457,6 +465,8 @@ module Aws::ACM
     #
     #   resp.certificate_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificate AWS API Documentation
+    #
     # @overload import_certificate(params = {})
     # @param [Hash] params ({})
     def import_certificate(params = {}, options = {})
@@ -505,6 +515,8 @@ module Aws::ACM
     #   resp.certificate_summary_list[0].certificate_arn #=> String
     #   resp.certificate_summary_list[0].domain_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificates AWS API Documentation
+    #
     # @overload list_certificates(params = {})
     # @param [Hash] params ({})
     def list_certificates(params = {}, options = {})
@@ -545,6 +557,8 @@ module Aws::ACM
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificate AWS API Documentation
     #
     # @overload list_tags_for_certificate(params = {})
     # @param [Hash] params ({})
@@ -592,6 +606,8 @@ module Aws::ACM
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificate AWS API Documentation
     #
     # @overload remove_tags_from_certificate(params = {})
     # @param [Hash] params ({})
@@ -661,6 +677,8 @@ module Aws::ACM
     #
     #   resp.certificate_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificate AWS API Documentation
+    #
     # @overload request_certificate(params = {})
     # @param [Hash] params ({})
     def request_certificate(params = {}, options = {})
@@ -724,6 +742,8 @@ module Aws::ACM
     #     validation_domain: "DomainNameString", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmail AWS API Documentation
+    #
     # @overload resend_validation_email(params = {})
     # @param [Hash] params ({})
     def resend_validation_email(params = {}, options = {})
@@ -744,7 +764,7 @@ module Aws::ACM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

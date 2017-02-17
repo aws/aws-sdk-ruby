@@ -170,6 +170,8 @@ module Aws::AppStream
     #     stack_name: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleet AWS API Documentation
+    #
     # @overload associate_fleet(params = {})
     # @param [Hash] params ({})
     def associate_fleet(params = {}, options = {})
@@ -253,6 +255,8 @@ module Aws::AppStream
     #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
+    #
     # @overload create_fleet(params = {})
     # @param [Hash] params ({})
     def create_fleet(params = {}, options = {})
@@ -290,6 +294,8 @@ module Aws::AppStream
     #   resp.stack.description #=> String
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
     # @overload create_stack(params = {})
     # @param [Hash] params ({})
@@ -343,6 +349,8 @@ module Aws::AppStream
     #   resp.streaming_url #=> String
     #   resp.expires #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURL AWS API Documentation
+    #
     # @overload create_streaming_url(params = {})
     # @param [Hash] params ({})
     def create_streaming_url(params = {}, options = {})
@@ -362,6 +370,8 @@ module Aws::AppStream
     #   resp = client.delete_fleet({
     #     name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleet AWS API Documentation
     #
     # @overload delete_fleet(params = {})
     # @param [Hash] params ({})
@@ -384,6 +394,8 @@ module Aws::AppStream
     #   resp = client.delete_stack({
     #     name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStack AWS API Documentation
     #
     # @overload delete_stack(params = {})
     # @param [Hash] params ({})
@@ -439,6 +451,8 @@ module Aws::AppStream
     #   resp.fleets[0].fleet_errors[0].error_message #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets AWS API Documentation
+    #
     # @overload describe_fleets(params = {})
     # @param [Hash] params ({})
     def describe_fleets(params = {}, options = {})
@@ -486,6 +500,8 @@ module Aws::AppStream
     #   resp.images[0].applications[0].metadata #=> Hash
     #   resp.images[0].applications[0].metadata["String"] #=> String
     #   resp.images[0].created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
     #
     # @overload describe_images(params = {})
     # @param [Hash] params ({})
@@ -542,6 +558,8 @@ module Aws::AppStream
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
+    #
     # @overload describe_sessions(params = {})
     # @param [Hash] params ({})
     def describe_sessions(params = {}, options = {})
@@ -584,6 +602,8 @@ module Aws::AppStream
     #   resp.stacks[0].created_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
+    #
     # @overload describe_stacks(params = {})
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
@@ -608,6 +628,8 @@ module Aws::AppStream
     #     stack_name: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleet AWS API Documentation
+    #
     # @overload disassociate_fleet(params = {})
     # @param [Hash] params ({})
     def disassociate_fleet(params = {}, options = {})
@@ -627,6 +649,8 @@ module Aws::AppStream
     #   resp = client.expire_session({
     #     session_id: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSession AWS API Documentation
     #
     # @overload expire_session(params = {})
     # @param [Hash] params ({})
@@ -662,6 +686,8 @@ module Aws::AppStream
     #   resp.names[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleets AWS API Documentation
+    #
     # @overload list_associated_fleets(params = {})
     # @param [Hash] params ({})
     def list_associated_fleets(params = {}, options = {})
@@ -696,6 +722,8 @@ module Aws::AppStream
     #   resp.names[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacks AWS API Documentation
+    #
     # @overload list_associated_stacks(params = {})
     # @param [Hash] params ({})
     def list_associated_stacks(params = {}, options = {})
@@ -716,6 +744,8 @@ module Aws::AppStream
     #     name: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleet AWS API Documentation
+    #
     # @overload start_fleet(params = {})
     # @param [Hash] params ({})
     def start_fleet(params = {}, options = {})
@@ -735,6 +765,8 @@ module Aws::AppStream
     #   resp = client.stop_fleet({
     #     name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleet AWS API Documentation
     #
     # @overload stop_fleet(params = {})
     # @param [Hash] params ({})
@@ -825,6 +857,8 @@ module Aws::AppStream
     #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
     #   resp.fleet.fleet_errors[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
+    #
     # @overload update_fleet(params = {})
     # @param [Hash] params ({})
     def update_fleet(params = {}, options = {})
@@ -862,6 +896,8 @@ module Aws::AppStream
     #   resp.stack.description #=> String
     #   resp.stack.display_name #=> String
     #   resp.stack.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
     # @overload update_stack(params = {})
     # @param [Hash] params ({})

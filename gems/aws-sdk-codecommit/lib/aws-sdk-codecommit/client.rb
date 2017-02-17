@@ -194,6 +194,8 @@ module Aws::CodeCommit
     #   resp.repositories_not_found #=> Array
     #   resp.repositories_not_found[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BatchGetRepositories AWS API Documentation
+    #
     # @overload batch_get_repositories(params = {})
     # @param [Hash] params ({})
     def batch_get_repositories(params = {}, options = {})
@@ -227,6 +229,8 @@ module Aws::CodeCommit
     #     branch_name: "BranchName", # required
     #     commit_id: "CommitId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateBranch AWS API Documentation
     #
     # @overload create_branch(params = {})
     # @param [Hash] params ({})
@@ -288,6 +292,8 @@ module Aws::CodeCommit
     #   resp.repository_metadata.clone_url_ssh #=> String
     #   resp.repository_metadata.arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/CreateRepository AWS API Documentation
+    #
     # @overload create_repository(params = {})
     # @param [Hash] params ({})
     def create_repository(params = {}, options = {})
@@ -319,6 +325,8 @@ module Aws::CodeCommit
     #
     #   resp.repository_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/DeleteRepository AWS API Documentation
+    #
     # @overload delete_repository(params = {})
     # @param [Hash] params ({})
     def delete_repository(params = {}, options = {})
@@ -349,6 +357,8 @@ module Aws::CodeCommit
     # @example Response structure
     #
     #   resp.content #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBlob AWS API Documentation
     #
     # @overload get_blob(params = {})
     # @param [Hash] params ({})
@@ -382,6 +392,8 @@ module Aws::CodeCommit
     #
     #   resp.branch.branch_name #=> String
     #   resp.branch.commit_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetBranch AWS API Documentation
     #
     # @overload get_branch(params = {})
     # @param [Hash] params ({})
@@ -423,6 +435,8 @@ module Aws::CodeCommit
     #   resp.commit.committer.email #=> String
     #   resp.commit.committer.date #=> String
     #   resp.commit.additional_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetCommit AWS API Documentation
     #
     # @overload get_commit(params = {})
     # @param [Hash] params ({})
@@ -497,6 +511,8 @@ module Aws::CodeCommit
     #   resp.differences[0].change_type #=> String, one of "A", "M", "D"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetDifferences AWS API Documentation
+    #
     # @overload get_differences(params = {})
     # @param [Hash] params ({})
     def get_differences(params = {}, options = {})
@@ -541,6 +557,8 @@ module Aws::CodeCommit
     #   resp.repository_metadata.clone_url_ssh #=> String
     #   resp.repository_metadata.arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepository AWS API Documentation
+    #
     # @overload get_repository(params = {})
     # @param [Hash] params ({})
     def get_repository(params = {}, options = {})
@@ -576,6 +594,8 @@ module Aws::CodeCommit
     #   resp.triggers[0].events #=> Array
     #   resp.triggers[0].events[0] #=> String, one of "all", "updateReference", "createReference", "deleteReference"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/GetRepositoryTriggers AWS API Documentation
+    #
     # @overload get_repository_triggers(params = {})
     # @param [Hash] params ({})
     def get_repository_triggers(params = {}, options = {})
@@ -608,6 +628,8 @@ module Aws::CodeCommit
     #   resp.branches #=> Array
     #   resp.branches[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListBranches AWS API Documentation
     #
     # @overload list_branches(params = {})
     # @param [Hash] params ({})
@@ -652,6 +674,8 @@ module Aws::CodeCommit
     #   resp.repositories[0].repository_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/ListRepositories AWS API Documentation
+    #
     # @overload list_repositories(params = {})
     # @param [Hash] params ({})
     def list_repositories(params = {}, options = {})
@@ -691,6 +715,8 @@ module Aws::CodeCommit
     # @example Response structure
     #
     #   resp.configuration_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggers AWS API Documentation
     #
     # @overload put_repository_triggers(params = {})
     # @param [Hash] params ({})
@@ -738,6 +764,8 @@ module Aws::CodeCommit
     #   resp.failed_executions[0].trigger #=> String
     #   resp.failed_executions[0].failure_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/TestRepositoryTriggers AWS API Documentation
+    #
     # @overload test_repository_triggers(params = {})
     # @param [Hash] params ({})
     def test_repository_triggers(params = {}, options = {})
@@ -767,6 +795,8 @@ module Aws::CodeCommit
     #     repository_name: "RepositoryName", # required
     #     default_branch_name: "BranchName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateDefaultBranch AWS API Documentation
     #
     # @overload update_default_branch(params = {})
     # @param [Hash] params ({})
@@ -803,6 +833,8 @@ module Aws::CodeCommit
     #     repository_description: "RepositoryDescription",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryDescription AWS API Documentation
+    #
     # @overload update_repository_description(params = {})
     # @param [Hash] params ({})
     def update_repository_description(params = {}, options = {})
@@ -836,6 +868,8 @@ module Aws::CodeCommit
     #     new_name: "RepositoryName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/UpdateRepositoryName AWS API Documentation
+    #
     # @overload update_repository_name(params = {})
     # @param [Hash] params ({})
     def update_repository_name(params = {}, options = {})
@@ -856,7 +890,7 @@ module Aws::CodeCommit
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codecommit'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

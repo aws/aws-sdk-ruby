@@ -50,6 +50,8 @@ module Aws::CloudFront
     #   For more information, see ActiveTrustedSigners.
     #   @return [Array<Types::Signer>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ActiveTrustedSigners AWS API Documentation
+    #
     class ActiveTrustedSigners < Struct.new(
       :enabled,
       :quantity,
@@ -77,6 +79,8 @@ module Aws::CloudFront
     #   A complex type that contains the CNAME aliases, if any, that you
     #   want to associate with this distribution.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Aliases AWS API Documentation
     #
     class Aliases < Struct.new(
       :quantity,
@@ -138,6 +142,8 @@ module Aws::CloudFront
     #   Access-Control-Request-Headers, and Origin headers for the responses
     #   to be cached correctly.
     #   @return [Types::CachedMethods]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/AllowedMethods AWS API Documentation
     #
     class AllowedMethods < Struct.new(
       :quantity,
@@ -424,6 +430,8 @@ module Aws::CloudFront
     #   associations for a cache behavior.
     #   @return [Types::LambdaFunctionAssociations]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CacheBehavior AWS API Documentation
+    #
     class CacheBehavior < Struct.new(
       :path_pattern,
       :target_origin_id,
@@ -510,6 +518,8 @@ module Aws::CloudFront
     #   distribution. If `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::CacheBehavior>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CacheBehaviors AWS API Documentation
+    #
     class CacheBehaviors < Struct.new(
       :quantity,
       :items)
@@ -549,6 +559,8 @@ module Aws::CloudFront
     #   CloudFront to cache responses to.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CachedMethods AWS API Documentation
+    #
     class CachedMethods < Struct.new(
       :quantity,
       :items)
@@ -571,6 +583,8 @@ module Aws::CloudFront
     # @!attribute [rw] cloud_front_origin_access_identity_config
     #   The current configuration information for the identity.
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CloudFrontOriginAccessIdentity AWS API Documentation
     #
     class CloudFrontOriginAccessIdentity < Struct.new(
       :id,
@@ -613,6 +627,8 @@ module Aws::CloudFront
     # @!attribute [rw] comment
     #   Any comments you want to include about the origin access identity.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CloudFrontOriginAccessIdentityConfig AWS API Documentation
     #
     class CloudFrontOriginAccessIdentityConfig < Struct.new(
       :caller_reference,
@@ -666,6 +682,8 @@ module Aws::CloudFront
     #   access identity that was created by the current AWS account.
     #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CloudFrontOriginAccessIdentityList AWS API Documentation
+    #
     class CloudFrontOriginAccessIdentityList < Struct.new(
       :marker,
       :next_marker,
@@ -693,6 +711,8 @@ module Aws::CloudFront
     #   The comment for this origin access identity, as originally specified
     #   when created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CloudFrontOriginAccessIdentitySummary AWS API Documentation
     #
     class CloudFrontOriginAccessIdentitySummary < Struct.new(
       :id,
@@ -729,6 +749,8 @@ module Aws::CloudFront
     #   you want CloudFront to forward to the origin for this cache
     #   behavior.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CookieNames AWS API Documentation
     #
     class CookieNames < Struct.new(
       :quantity,
@@ -788,6 +810,8 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
     #   @return [Types::CookieNames]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CookiePreference AWS API Documentation
+    #
     class CookiePreference < Struct.new(
       :forward,
       :whitelisted_names)
@@ -810,6 +834,8 @@ module Aws::CloudFront
     #   The current configuration information for the identity.
     #   @return [Types::CloudFrontOriginAccessIdentityConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    #
     class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config)
       include Aws::Structure
@@ -830,6 +856,8 @@ module Aws::CloudFront
     # @!attribute [rw] etag
     #   The current version of the origin access identity created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -1032,6 +1060,8 @@ module Aws::CloudFront
     #   The distribution's configuration information.
     #   @return [Types::DistributionConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistributionRequest AWS API Documentation
+    #
     class CreateDistributionRequest < Struct.new(
       :distribution_config)
       include Aws::Structure
@@ -1052,6 +1082,8 @@ module Aws::CloudFront
     # @!attribute [rw] etag
     #   The current version of the distribution created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistributionResult AWS API Documentation
     #
     class CreateDistributionResult < Struct.new(
       :distribution,
@@ -1264,6 +1296,8 @@ module Aws::CloudFront
     #   The distribution's configuration information.
     #   @return [Types::DistributionConfigWithTags]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistributionWithTagsRequest AWS API Documentation
+    #
     class CreateDistributionWithTagsRequest < Struct.new(
       :distribution_config_with_tags)
       include Aws::Structure
@@ -1284,6 +1318,8 @@ module Aws::CloudFront
     # @!attribute [rw] etag
     #   The current version of the distribution created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistributionWithTagsResult AWS API Documentation
     #
     class CreateDistributionWithTagsResult < Struct.new(
       :distribution,
@@ -1316,6 +1352,8 @@ module Aws::CloudFront
     #   The batch information for the invalidation.
     #   @return [Types::InvalidationBatch]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateInvalidationRequest AWS API Documentation
+    #
     class CreateInvalidationRequest < Struct.new(
       :distribution_id,
       :invalidation_batch)
@@ -1332,6 +1370,8 @@ module Aws::CloudFront
     # @!attribute [rw] invalidation
     #   The invalidation's information.
     #   @return [Types::Invalidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateInvalidationResult AWS API Documentation
     #
     class CreateInvalidationResult < Struct.new(
       :location,
@@ -1375,6 +1415,8 @@ module Aws::CloudFront
     #   The streaming distribution's configuration information.
     #   @return [Types::StreamingDistributionConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistributionRequest AWS API Documentation
+    #
     class CreateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config)
       include Aws::Structure
@@ -1395,6 +1437,8 @@ module Aws::CloudFront
     # @!attribute [rw] etag
     #   The current version of the streaming distribution created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistributionResult AWS API Documentation
     #
     class CreateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -1449,6 +1493,8 @@ module Aws::CloudFront
     #   The streaming distribution's configuration information.
     #   @return [Types::StreamingDistributionConfigWithTags]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistributionWithTagsRequest AWS API Documentation
+    #
     class CreateStreamingDistributionWithTagsRequest < Struct.new(
       :streaming_distribution_config_with_tags)
       include Aws::Structure
@@ -1468,6 +1514,8 @@ module Aws::CloudFront
     #
     # @!attribute [rw] etag
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistributionWithTagsResult AWS API Documentation
     #
     class CreateStreamingDistributionWithTagsResult < Struct.new(
       :streaming_distribution,
@@ -1578,6 +1626,8 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CustomErrorResponse AWS API Documentation
+    #
     class CustomErrorResponse < Struct.new(
       :error_code,
       :response_page_path,
@@ -1629,6 +1679,8 @@ module Aws::CloudFront
     #   page and/or a caching duration.
     #   @return [Array<Types::CustomErrorResponse>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CustomErrorResponses AWS API Documentation
+    #
     class CustomErrorResponses < Struct.new(
       :quantity,
       :items)
@@ -1660,6 +1712,8 @@ module Aws::CloudFront
     #   for each custom header that you want CloudFront to forward to the
     #   origin. If Quantity is `0`, omit `Items`.
     #   @return [Array<Types::OriginCustomHeader>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CustomHeaders AWS API Documentation
     #
     class CustomHeaders < Struct.new(
       :quantity,
@@ -1698,6 +1752,8 @@ module Aws::CloudFront
     #   The SSL/TLS protocols that you want CloudFront to use when
     #   communicating with your origin over HTTPS.
     #   @return [Types::OriginSslProtocols]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CustomOriginConfig AWS API Documentation
     #
     class CustomOriginConfig < Struct.new(
       :http_port,
@@ -1918,6 +1974,8 @@ module Aws::CloudFront
     #   associations for a cache behavior.
     #   @return [Types::LambdaFunctionAssociations]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DefaultCacheBehavior AWS API Documentation
+    #
     class DefaultCacheBehavior < Struct.new(
       :target_origin_id,
       :forwarded_values,
@@ -1951,6 +2009,8 @@ module Aws::CloudFront
     #   The value of the `ETag` header you received from a previous `GET` or
     #   `PUT` request. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteCloudFrontOriginAccessIdentityRequest AWS API Documentation
     #
     class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id,
@@ -2019,6 +2079,8 @@ module Aws::CloudFront
     #   the distribution. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteDistributionRequest AWS API Documentation
+    #
     class DeleteDistributionRequest < Struct.new(
       :id,
       :if_match)
@@ -2043,6 +2105,8 @@ module Aws::CloudFront
     #   The value of the `ETag` header that you received when you disabled
     #   the streaming distribution. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteStreamingDistributionRequest AWS API Documentation
     #
     class DeleteStreamingDistributionRequest < Struct.new(
       :id,
@@ -2098,6 +2162,8 @@ module Aws::CloudFront
     #   `GET` request to the `/CloudFront API version/distribution
     #   ID/config` resource.
     #   @return [Types::DistributionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
       :id,
@@ -2551,6 +2617,8 @@ module Aws::CloudFront
     #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DistributionConfig AWS API Documentation
+    #
     class DistributionConfig < Struct.new(
       :caller_reference,
       :aliases,
@@ -2778,6 +2846,8 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DistributionConfigWithTags AWS API Documentation
+    #
     class DistributionConfigWithTags < Struct.new(
       :distribution_config,
       :tags)
@@ -2816,6 +2886,8 @@ module Aws::CloudFront
     #   A complex type that contains one `DistributionSummary` element for
     #   each distribution that was created by the current AWS account.
     #   @return [Array<Types::DistributionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DistributionList AWS API Documentation
     #
     class DistributionList < Struct.new(
       :marker,
@@ -2933,6 +3005,8 @@ module Aws::CloudFront
     #   address for your distribution.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DistributionSummary AWS API Documentation
+    #
     class DistributionSummary < Struct.new(
       :id,
       :arn,
@@ -3035,6 +3109,8 @@ module Aws::CloudFront
     #   cache behavior.
     #   @return [Types::QueryStringCacheKeys]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ForwardedValues AWS API Documentation
+    #
     class ForwardedValues < Struct.new(
       :query_string,
       :cookies,
@@ -3092,6 +3168,8 @@ module Aws::CloudFront
     #   the CloudFront console, which includes both country names and codes.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GeoRestriction AWS API Documentation
+    #
     class GeoRestriction < Struct.new(
       :restriction_type,
       :quantity,
@@ -3113,6 +3191,8 @@ module Aws::CloudFront
     #   The identity's ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentityConfigRequest AWS API Documentation
+    #
     class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -3128,6 +3208,8 @@ module Aws::CloudFront
     #   The current version of the configuration. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentityConfigResult AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
       :cloud_front_origin_access_identity_config,
@@ -3148,6 +3230,8 @@ module Aws::CloudFront
     #   The identity's ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    #
     class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -3163,6 +3247,8 @@ module Aws::CloudFront
     #   The current version of the origin access identity's information.
     #   For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class GetCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -3183,6 +3269,8 @@ module Aws::CloudFront
     #   The distribution's ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistributionConfigRequest AWS API Documentation
+    #
     class GetDistributionConfigRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -3198,6 +3286,8 @@ module Aws::CloudFront
     #   The current version of the configuration. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistributionConfigResult AWS API Documentation
     #
     class GetDistributionConfigResult < Struct.new(
       :distribution_config,
@@ -3218,6 +3308,8 @@ module Aws::CloudFront
     #   The distribution's ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistributionRequest AWS API Documentation
+    #
     class GetDistributionRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -3233,6 +3325,8 @@ module Aws::CloudFront
     #   The current version of the distribution's information. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistributionResult AWS API Documentation
     #
     class GetDistributionResult < Struct.new(
       :distribution,
@@ -3259,6 +3353,8 @@ module Aws::CloudFront
     #   `IDFDVBD632BHDS5`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetInvalidationRequest AWS API Documentation
+    #
     class GetInvalidationRequest < Struct.new(
       :distribution_id,
       :id)
@@ -3275,6 +3371,8 @@ module Aws::CloudFront
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html
     #   @return [Types::Invalidation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetInvalidationResult AWS API Documentation
     #
     class GetInvalidationResult < Struct.new(
       :invalidation)
@@ -3294,6 +3392,8 @@ module Aws::CloudFront
     #   The streaming distribution's ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistributionConfigRequest AWS API Documentation
+    #
     class GetStreamingDistributionConfigRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -3309,6 +3409,8 @@ module Aws::CloudFront
     #   The current version of the configuration. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistributionConfigResult AWS API Documentation
     #
     class GetStreamingDistributionConfigResult < Struct.new(
       :streaming_distribution_config,
@@ -3329,6 +3431,8 @@ module Aws::CloudFront
     #   The streaming distribution's ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistributionRequest AWS API Documentation
+    #
     class GetStreamingDistributionRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -3344,6 +3448,8 @@ module Aws::CloudFront
     #   The current version of the streaming distribution's information.
     #   For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistributionResult AWS API Documentation
     #
     class GetStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -3407,6 +3513,8 @@ module Aws::CloudFront
     #   cache behavior. If `Quantity` is `0`, omit `Items`.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Headers AWS API Documentation
+    #
     class Headers < Struct.new(
       :quantity,
       :items)
@@ -3432,6 +3540,8 @@ module Aws::CloudFront
     # @!attribute [rw] invalidation_batch
     #   The current invalidation information for the batch request.
     #   @return [Types::InvalidationBatch]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Invalidation AWS API Documentation
     #
     class Invalidation < Struct.new(
       :id,
@@ -3486,6 +3596,8 @@ module Aws::CloudFront
     #   `InvalidationBatchAlreadyExists` error.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/InvalidationBatch AWS API Documentation
+    #
     class InvalidationBatch < Struct.new(
       :paths,
       :caller_reference)
@@ -3532,6 +3644,8 @@ module Aws::CloudFront
     #   each invalidation batch created by the current AWS account.
     #   @return [Array<Types::InvalidationSummary>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/InvalidationList AWS API Documentation
+    #
     class InvalidationList < Struct.new(
       :marker,
       :next_marker,
@@ -3554,6 +3668,8 @@ module Aws::CloudFront
     # @!attribute [rw] status
     #   The status of an invalidation request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/InvalidationSummary AWS API Documentation
     #
     class InvalidationSummary < Struct.new(
       :id,
@@ -3579,6 +3695,8 @@ module Aws::CloudFront
     #
     #   For more information, see ActiveTrustedSigners.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/KeyPairIds AWS API Documentation
     #
     class KeyPairIds < Struct.new(
       :quantity,
@@ -3612,6 +3730,8 @@ module Aws::CloudFront
     #
     #   * `origin-response`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/LambdaFunctionAssociation AWS API Documentation
     #
     class LambdaFunctionAssociation < Struct.new(
       :lambda_function_arn,
@@ -3655,6 +3775,8 @@ module Aws::CloudFront
     #   `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<Types::LambdaFunctionAssociation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/LambdaFunctionAssociations AWS API Documentation
+    #
     class LambdaFunctionAssociations < Struct.new(
       :quantity,
       :items)
@@ -3685,6 +3807,8 @@ module Aws::CloudFront
     #   response body.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListCloudFrontOriginAccessIdentitiesRequest AWS API Documentation
+    #
     class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
       :marker,
       :max_items)
@@ -3696,6 +3820,8 @@ module Aws::CloudFront
     # @!attribute [rw] cloud_front_origin_access_identity_list
     #   The `CloudFrontOriginAccessIdentityList` type.
     #   @return [Types::CloudFrontOriginAccessIdentityList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListCloudFrontOriginAccessIdentitiesResult AWS API Documentation
     #
     class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
       :cloud_front_origin_access_identity_list)
@@ -3736,6 +3862,8 @@ module Aws::CloudFront
     #   web ACL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributionsByWebACLIdRequest AWS API Documentation
+    #
     class ListDistributionsByWebACLIdRequest < Struct.new(
       :marker,
       :max_items,
@@ -3749,6 +3877,8 @@ module Aws::CloudFront
     # @!attribute [rw] distribution_list
     #   The `DistributionList` type.
     #   @return [Types::DistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributionsByWebACLIdResult AWS API Documentation
     #
     class ListDistributionsByWebACLIdResult < Struct.new(
       :distribution_list)
@@ -3778,6 +3908,8 @@ module Aws::CloudFront
     #   The maximum number of distributions you want in the response body.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributionsRequest AWS API Documentation
+    #
     class ListDistributionsRequest < Struct.new(
       :marker,
       :max_items)
@@ -3789,6 +3921,8 @@ module Aws::CloudFront
     # @!attribute [rw] distribution_list
     #   The `DistributionList` type.
     #   @return [Types::DistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributionsResult AWS API Documentation
     #
     class ListDistributionsResult < Struct.new(
       :distribution_list)
@@ -3826,6 +3960,8 @@ module Aws::CloudFront
     #   response body.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListInvalidationsRequest AWS API Documentation
+    #
     class ListInvalidationsRequest < Struct.new(
       :distribution_id,
       :marker,
@@ -3838,6 +3974,8 @@ module Aws::CloudFront
     # @!attribute [rw] invalidation_list
     #   Information about invalidation batches.
     #   @return [Types::InvalidationList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListInvalidationsResult AWS API Documentation
     #
     class ListInvalidationsResult < Struct.new(
       :invalidation_list)
@@ -3862,6 +4000,8 @@ module Aws::CloudFront
     #   The value that you provided for the `MaxItems` request parameter.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListStreamingDistributionsRequest AWS API Documentation
+    #
     class ListStreamingDistributionsRequest < Struct.new(
       :marker,
       :max_items)
@@ -3873,6 +4013,8 @@ module Aws::CloudFront
     # @!attribute [rw] streaming_distribution_list
     #   The `StreamingDistributionList` type.
     #   @return [Types::StreamingDistributionList]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListStreamingDistributionsResult AWS API Documentation
     #
     class ListStreamingDistributionsResult < Struct.new(
       :streaming_distribution_list)
@@ -3892,6 +4034,8 @@ module Aws::CloudFront
     #   An ARN of a CloudFront resource.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListTagsForResourceRequest AWS API Documentation
+    #
     class ListTagsForResourceRequest < Struct.new(
       :resource)
       include Aws::Structure
@@ -3902,6 +4046,8 @@ module Aws::CloudFront
     # @!attribute [rw] tags
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListTagsForResourceResult AWS API Documentation
     #
     class ListTagsForResourceResult < Struct.new(
       :tags)
@@ -3953,6 +4099,8 @@ module Aws::CloudFront
     #   you still must include an empty `Prefix` element in the `Logging`
     #   element.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/LoggingConfig AWS API Documentation
     #
     class LoggingConfig < Struct.new(
       :enabled,
@@ -4095,6 +4243,8 @@ module Aws::CloudFront
     #   instead.
     #   @return [Types::CustomOriginConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Origin AWS API Documentation
+    #
     class Origin < Struct.new(
       :id,
       :domain_name,
@@ -4132,6 +4282,8 @@ module Aws::CloudFront
     #   field.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/OriginCustomHeader AWS API Documentation
+    #
     class OriginCustomHeader < Struct.new(
       :header_name,
       :header_value)
@@ -4159,6 +4311,8 @@ module Aws::CloudFront
     #   A list that contains allowed SSL/TLS protocols for this
     #   distribution.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/OriginSslProtocols AWS API Documentation
     #
     class OriginSslProtocols < Struct.new(
       :quantity,
@@ -4212,6 +4366,8 @@ module Aws::CloudFront
     #   A complex type that contains origins for this distribution.
     #   @return [Array<Types::Origin>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Origins AWS API Documentation
+    #
     class Origins < Struct.new(
       :quantity,
       :items)
@@ -4243,6 +4399,8 @@ module Aws::CloudFront
     #   invalidate.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Paths AWS API Documentation
+    #
     class Paths < Struct.new(
       :quantity,
       :items)
@@ -4267,6 +4425,8 @@ module Aws::CloudFront
     #   want CloudFront to use as a basis for caching for this cache
     #   behavior. If `Quantity` is 0, you can omit `Items`.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/QueryStringCacheKeys AWS API Documentation
     #
     class QueryStringCacheKeys < Struct.new(
       :quantity,
@@ -4293,6 +4453,8 @@ module Aws::CloudFront
     #   distributed. CloudFront determines the location of your users using
     #   `MaxMind` GeoIP databases.
     #   @return [Types::GeoRestriction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Restrictions AWS API Documentation
     #
     class Restrictions < Struct.new(
       :geo_restriction)
@@ -4340,6 +4502,8 @@ module Aws::CloudFront
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/S3Origin AWS API Documentation
     #
     class S3Origin < Struct.new(
       :domain_name,
@@ -4390,6 +4554,8 @@ module Aws::CloudFront
     #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/S3OriginConfig AWS API Documentation
+    #
     class S3OriginConfig < Struct.new(
       :origin_access_identity)
       include Aws::Structure
@@ -4412,6 +4578,8 @@ module Aws::CloudFront
     #   A complex type that lists the active CloudFront key pairs, if any,
     #   that are associated with `AwsAccountNumber`.
     #   @return [Types::KeyPairIds]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Signer AWS API Documentation
     #
     class Signer < Struct.new(
       :aws_account_number,
@@ -4468,6 +4636,8 @@ module Aws::CloudFront
     # @!attribute [rw] streaming_distribution_config
     #   The current configuration information for the RTMP distribution.
     #   @return [Types::StreamingDistributionConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/StreamingDistribution AWS API Documentation
     #
     class StreamingDistribution < Struct.new(
       :id,
@@ -4568,6 +4738,8 @@ module Aws::CloudFront
     #   requests for content.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/StreamingDistributionConfig AWS API Documentation
+    #
     class StreamingDistributionConfig < Struct.new(
       :caller_reference,
       :s3_origin,
@@ -4629,6 +4801,8 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/StreamingDistributionConfigWithTags AWS API Documentation
+    #
     class StreamingDistributionConfigWithTags < Struct.new(
       :streaming_distribution_config,
       :tags)
@@ -4668,6 +4842,8 @@ module Aws::CloudFront
     #   element for each distribution that was created by the current AWS
     #   account.
     #   @return [Array<Types::StreamingDistributionSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/StreamingDistributionList AWS API Documentation
     #
     class StreamingDistributionList < Struct.new(
       :marker,
@@ -4746,6 +4922,8 @@ module Aws::CloudFront
     #   content.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/StreamingDistributionSummary AWS API Documentation
+    #
     class StreamingDistributionSummary < Struct.new(
       :id,
       :arn,
@@ -4796,6 +4974,8 @@ module Aws::CloudFront
     #   in the `Logging` element.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/StreamingLoggingConfig AWS API Documentation
+    #
     class StreamingLoggingConfig < Struct.new(
       :enabled,
       :bucket,
@@ -4829,6 +5009,8 @@ module Aws::CloudFront
     #   characters `_ - . : / = + @`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -4847,6 +5029,8 @@ module Aws::CloudFront
     # @!attribute [rw] items
     #   A complex type that contains `Tag` key elements.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/TagKeys AWS API Documentation
     #
     class TagKeys < Struct.new(
       :items)
@@ -4878,6 +5062,8 @@ module Aws::CloudFront
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/TagResourceRequest AWS API Documentation
+    #
     class TagResourceRequest < Struct.new(
       :resource,
       :tags)
@@ -4901,6 +5087,8 @@ module Aws::CloudFront
     # @!attribute [rw] items
     #   A complex type that contains `Tag` elements.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/Tags AWS API Documentation
     #
     class Tags < Struct.new(
       :items)
@@ -4956,6 +5144,8 @@ module Aws::CloudFront
     #   cache behavior. If `Quantity` is `0`, you can omit `Items`.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/TrustedSigners AWS API Documentation
+    #
     class TrustedSigners < Struct.new(
       :enabled,
       :quantity,
@@ -4982,6 +5172,8 @@ module Aws::CloudFront
     # @!attribute [rw] tag_keys
     #   A complex type that contains zero or more `Tag` key elements.
     #   @return [Types::TagKeys]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UntagResourceRequest AWS API Documentation
     #
     class UntagResourceRequest < Struct.new(
       :resource,
@@ -5016,6 +5208,8 @@ module Aws::CloudFront
     #   identity's configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateCloudFrontOriginAccessIdentityRequest AWS API Documentation
+    #
     class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
       :cloud_front_origin_access_identity_config,
       :id,
@@ -5033,6 +5227,8 @@ module Aws::CloudFront
     #   The current version of the configuration. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateCloudFrontOriginAccessIdentityResult AWS API Documentation
     #
     class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
       :cloud_front_origin_access_identity,
@@ -5245,6 +5441,8 @@ module Aws::CloudFront
     #   distribution's configuration. For example: `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateDistributionRequest AWS API Documentation
+    #
     class UpdateDistributionRequest < Struct.new(
       :distribution_config,
       :id,
@@ -5262,6 +5460,8 @@ module Aws::CloudFront
     #   The current version of the configuration. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateDistributionResult AWS API Documentation
     #
     class UpdateDistributionResult < Struct.new(
       :distribution,
@@ -5317,6 +5517,8 @@ module Aws::CloudFront
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateStreamingDistributionRequest AWS API Documentation
+    #
     class UpdateStreamingDistributionRequest < Struct.new(
       :streaming_distribution_config,
       :id,
@@ -5334,6 +5536,8 @@ module Aws::CloudFront
     #   The current version of the configuration. For example:
     #   `E2QWRUHAPOMQZL`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateStreamingDistributionResult AWS API Documentation
     #
     class UpdateStreamingDistributionResult < Struct.new(
       :streaming_distribution,
@@ -5545,6 +5749,8 @@ module Aws::CloudFront
     #
     #    </note>
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ViewerCertificate AWS API Documentation
     #
     class ViewerCertificate < Struct.new(
       :cloud_front_default_certificate,

@@ -41,6 +41,8 @@ module Aws::IAM
     #   The date when the access key was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKey AWS API Documentation
+    #
     class AccessKey < Struct.new(
       :user_name,
       :access_key_id,
@@ -102,6 +104,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyLastUsed AWS API Documentation
+    #
     class AccessKeyLastUsed < Struct.new(
       :last_used_date,
       :service_name,
@@ -131,6 +135,8 @@ module Aws::IAM
     #   The date when the access key was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyMetadata AWS API Documentation
+    #
     class AccessKeyMetadata < Struct.new(
       :user_name,
       :access_key_id,
@@ -157,6 +163,8 @@ module Aws::IAM
     #   The client ID (also known as audience) to add to the IAM OpenID
     #   Connect provider resource.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProviderRequest AWS API Documentation
     #
     class AddClientIDToOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
@@ -198,6 +206,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfileRequest AWS API Documentation
+    #
     class AddRoleToInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :role_name)
@@ -238,6 +248,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroupRequest AWS API Documentation
+    #
     class AddUserToGroupRequest < Struct.new(
       :group_name,
       :user_name)
@@ -276,6 +288,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyRequest AWS API Documentation
     #
     class AttachGroupPolicyRequest < Struct.new(
       :group_name,
@@ -316,6 +330,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyRequest AWS API Documentation
+    #
     class AttachRolePolicyRequest < Struct.new(
       :role_name,
       :policy_arn)
@@ -355,6 +371,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyRequest AWS API Documentation
+    #
     class AttachUserPolicyRequest < Struct.new(
       :user_name,
       :policy_arn)
@@ -390,6 +408,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachedPolicy AWS API Documentation
     #
     class AttachedPolicy < Struct.new(
       :policy_name,
@@ -427,6 +447,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordRequest AWS API Documentation
     #
     class ChangePasswordRequest < Struct.new(
       :old_password,
@@ -468,6 +490,8 @@ module Aws::IAM
     #   `ContextKeyValues` parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ContextEntry AWS API Documentation
+    #
     class ContextEntry < Struct.new(
       :context_key_name,
       :context_key_values,
@@ -495,6 +519,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKeyRequest AWS API Documentation
+    #
     class CreateAccessKeyRequest < Struct.new(
       :user_name)
       include Aws::Structure
@@ -505,6 +531,8 @@ module Aws::IAM
     # @!attribute [rw] access_key
     #   A structure with details about the access key.
     #   @return [Types::AccessKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKeyResponse AWS API Documentation
     #
     class CreateAccessKeyResponse < Struct.new(
       :access_key)
@@ -530,6 +558,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAliasRequest AWS API Documentation
     #
     class CreateAccountAliasRequest < Struct.new(
       :account_alias)
@@ -580,6 +610,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupRequest AWS API Documentation
+    #
     class CreateGroupRequest < Struct.new(
       :path,
       :group_name)
@@ -591,6 +623,8 @@ module Aws::IAM
     # @!attribute [rw] group
     #   A structure containing details about the new group.
     #   @return [Types::Group]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupResponse AWS API Documentation
     #
     class CreateGroupResponse < Struct.new(
       :group)
@@ -638,6 +672,8 @@ module Aws::IAM
     #   [2]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileRequest AWS API Documentation
+    #
     class CreateInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :path)
@@ -649,6 +685,8 @@ module Aws::IAM
     # @!attribute [rw] instance_profile
     #   A structure containing details about the new instance profile.
     #   @return [Types::InstanceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileResponse AWS API Documentation
     #
     class CreateInstanceProfileResponse < Struct.new(
       :instance_profile)
@@ -701,6 +739,8 @@ module Aws::IAM
     #   sign-in.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileRequest AWS API Documentation
+    #
     class CreateLoginProfileRequest < Struct.new(
       :user_name,
       :password,
@@ -713,6 +753,8 @@ module Aws::IAM
     # @!attribute [rw] login_profile
     #   A structure containing the user name and password create date.
     #   @return [Types::LoginProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileResponse AWS API Documentation
     #
     class CreateLoginProfileResponse < Struct.new(
       :login_profile)
@@ -786,6 +828,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest AWS API Documentation
+    #
     class CreateOpenIDConnectProviderRequest < Struct.new(
       :url,
       :client_id_list,
@@ -801,6 +845,8 @@ module Aws::IAM
     #   provider that is created. For more information, see
     #   OpenIDConnectProviderListEntry.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderResponse AWS API Documentation
     #
     class CreateOpenIDConnectProviderResponse < Struct.new(
       :open_id_connect_provider_arn)
@@ -880,6 +926,8 @@ module Aws::IAM
     #   cannot be changed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyRequest AWS API Documentation
+    #
     class CreatePolicyRequest < Struct.new(
       :policy_name,
       :path,
@@ -893,6 +941,8 @@ module Aws::IAM
     # @!attribute [rw] policy
     #   A structure containing details about the new policy.
     #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyResponse AWS API Documentation
     #
     class CreatePolicyResponse < Struct.new(
       :policy)
@@ -953,6 +1003,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionRequest AWS API Documentation
+    #
     class CreatePolicyVersionRequest < Struct.new(
       :policy_arn,
       :policy_document,
@@ -965,6 +1017,8 @@ module Aws::IAM
     # @!attribute [rw] policy_version
     #   A structure containing details about the new policy version.
     #   @return [Types::PolicyVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionResponse AWS API Documentation
     #
     class CreatePolicyVersionResponse < Struct.new(
       :policy_version)
@@ -1032,6 +1086,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
+    #
     class CreateRoleRequest < Struct.new(
       :path,
       :role_name,
@@ -1044,6 +1100,8 @@ module Aws::IAM
     # @!attribute [rw] role
     #   A structure containing details about the new role.
     #   @return [Types::Role]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleResponse AWS API Documentation
     #
     class CreateRoleResponse < Struct.new(
       :role)
@@ -1087,6 +1145,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderRequest AWS API Documentation
+    #
     class CreateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
       :name)
@@ -1099,6 +1159,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the new SAML provider resource in
     #   IAM.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderResponse AWS API Documentation
     #
     class CreateSAMLProviderResponse < Struct.new(
       :saml_provider_arn)
@@ -1135,6 +1197,8 @@ module Aws::IAM
     #   can be accessed using these credentials.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialRequest AWS API Documentation
+    #
     class CreateServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_name)
@@ -1149,6 +1213,8 @@ module Aws::IAM
     #   available. It cannot be recovered later. Instead, you will have to
     #   reset the password with ResetServiceSpecificCredential.
     #   @return [Types::ServiceSpecificCredential]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialResponse AWS API Documentation
     #
     class CreateServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential)
@@ -1198,6 +1264,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest AWS API Documentation
+    #
     class CreateUserRequest < Struct.new(
       :path,
       :user_name)
@@ -1209,6 +1277,8 @@ module Aws::IAM
     # @!attribute [rw] user
     #   A structure with details about the new IAM user.
     #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserResponse AWS API Documentation
     #
     class CreateUserResponse < Struct.new(
       :user)
@@ -1257,6 +1327,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceRequest AWS API Documentation
+    #
     class CreateVirtualMFADeviceRequest < Struct.new(
       :path,
       :virtual_mfa_device_name)
@@ -1268,6 +1340,8 @@ module Aws::IAM
     # @!attribute [rw] virtual_mfa_device
     #   A structure containing details about the new virtual MFA device.
     #   @return [Types::VirtualMFADevice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceResponse AWS API Documentation
     #
     class CreateVirtualMFADeviceResponse < Struct.new(
       :virtual_mfa_device)
@@ -1309,6 +1383,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADeviceRequest AWS API Documentation
+    #
     class DeactivateMFADeviceRequest < Struct.new(
       :user_name,
       :serial_number)
@@ -1349,6 +1425,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKeyRequest AWS API Documentation
+    #
     class DeleteAccessKeyRequest < Struct.new(
       :user_name,
       :access_key_id)
@@ -1374,6 +1452,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasRequest AWS API Documentation
     #
     class DeleteAccountAliasRequest < Struct.new(
       :account_alias)
@@ -1415,6 +1495,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicyRequest AWS API Documentation
+    #
     class DeleteGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_name)
@@ -1441,6 +1523,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupRequest AWS API Documentation
+    #
     class DeleteGroupRequest < Struct.new(
       :group_name)
       include Aws::Structure
@@ -1465,6 +1549,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfileRequest AWS API Documentation
     #
     class DeleteInstanceProfileRequest < Struct.new(
       :instance_profile_name)
@@ -1491,6 +1577,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileRequest AWS API Documentation
+    #
     class DeleteLoginProfileRequest < Struct.new(
       :user_name)
       include Aws::Structure
@@ -1509,6 +1597,8 @@ module Aws::IAM
     #   provider resource ARNs by using the ListOpenIDConnectProviders
     #   action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderRequest AWS API Documentation
     #
     class DeleteOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn)
@@ -1532,6 +1622,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyRequest AWS API Documentation
     #
     class DeletePolicyRequest < Struct.new(
       :policy_arn)
@@ -1575,6 +1667,8 @@ module Aws::IAM
     #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionRequest AWS API Documentation
+    #
     class DeletePolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
@@ -1616,6 +1710,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyRequest AWS API Documentation
+    #
     class DeleteRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name)
@@ -1642,6 +1738,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleRequest AWS API Documentation
+    #
     class DeleteRoleRequest < Struct.new(
       :role_name)
       include Aws::Structure
@@ -1657,6 +1755,8 @@ module Aws::IAM
     # @!attribute [rw] saml_provider_arn
     #   The Amazon Resource Name (ARN) of the SAML provider to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProviderRequest AWS API Documentation
     #
     class DeleteSAMLProviderRequest < Struct.new(
       :saml_provider_arn)
@@ -1696,6 +1796,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKeyRequest AWS API Documentation
+    #
     class DeleteSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_id)
@@ -1721,6 +1823,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificateRequest AWS API Documentation
     #
     class DeleteServerCertificateRequest < Struct.new(
       :server_certificate_name)
@@ -1763,6 +1867,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredentialRequest AWS API Documentation
+    #
     class DeleteServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id)
@@ -1801,6 +1907,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificateRequest AWS API Documentation
     #
     class DeleteSigningCertificateRequest < Struct.new(
       :user_name,
@@ -1843,6 +1951,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyRequest AWS API Documentation
+    #
     class DeleteUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name)
@@ -1869,6 +1979,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserRequest AWS API Documentation
+    #
     class DeleteUserRequest < Struct.new(
       :user_name)
       include Aws::Structure
@@ -1894,6 +2006,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADeviceRequest AWS API Documentation
     #
     class DeleteVirtualMFADeviceRequest < Struct.new(
       :serial_number)
@@ -1932,6 +2046,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyRequest AWS API Documentation
     #
     class DetachGroupPolicyRequest < Struct.new(
       :group_name,
@@ -1972,6 +2088,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyRequest AWS API Documentation
+    #
     class DetachRolePolicyRequest < Struct.new(
       :role_name,
       :policy_arn)
@@ -2010,6 +2128,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyRequest AWS API Documentation
     #
     class DetachUserPolicyRequest < Struct.new(
       :user_name,
@@ -2065,6 +2185,8 @@ module Aws::IAM
     #
     #   The format for this parameter is a string of 6 digits.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceRequest AWS API Documentation
     #
     class EnableMFADeviceRequest < Struct.new(
       :user_name,
@@ -2129,6 +2251,8 @@ module Aws::IAM
     #   in EvalActionName on each resource.
     #   @return [Array<Types::ResourceSpecificResult>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EvaluationResult AWS API Documentation
+    #
     class EvaluationResult < Struct.new(
       :eval_action_name,
       :eval_resource_name,
@@ -2150,6 +2274,8 @@ module Aws::IAM
     # @!attribute [rw] description
     #   Information about the credential report.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReportResponse AWS API Documentation
     #
     class GenerateCredentialReportResponse < Struct.new(
       :state,
@@ -2176,6 +2302,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsedRequest AWS API Documentation
+    #
     class GetAccessKeyLastUsedRequest < Struct.new(
       :access_key_id)
       include Aws::Structure
@@ -2192,6 +2320,8 @@ module Aws::IAM
     # @!attribute [rw] access_key_last_used
     #   Contains information about the last time the access key was used.
     #   @return [Types::AccessKeyLastUsed]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsedResponse AWS API Documentation
     #
     class GetAccessKeyLastUsedResponse < Struct.new(
       :user_name,
@@ -2238,6 +2368,8 @@ module Aws::IAM
     #   received to indicate where the next call should start.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetailsRequest AWS API Documentation
+    #
     class GetAccountAuthorizationDetailsRequest < Struct.new(
       :filter,
       :max_items,
@@ -2280,6 +2412,8 @@ module Aws::IAM
     #   pagination request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetailsResponse AWS API Documentation
+    #
     class GetAccountAuthorizationDetailsResponse < Struct.new(
       :user_detail_list,
       :group_detail_list,
@@ -2297,6 +2431,8 @@ module Aws::IAM
     #   Contains information about the account password policy.
     #   @return [Types::PasswordPolicy]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicyResponse AWS API Documentation
+    #
     class GetAccountPasswordPolicyResponse < Struct.new(
       :password_policy)
       include Aws::Structure
@@ -2308,6 +2444,8 @@ module Aws::IAM
     #   A set of key value pairs containing information about IAM entity
     #   usage and IAM quotas.
     #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummaryResponse AWS API Documentation
     #
     class GetAccountSummaryResponse < Struct.new(
       :summary_map)
@@ -2339,6 +2477,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicyRequest AWS API Documentation
+    #
     class GetContextKeysForCustomPolicyRequest < Struct.new(
       :policy_input_list)
       include Aws::Structure
@@ -2350,6 +2490,8 @@ module Aws::IAM
     # @!attribute [rw] context_key_names
     #   The list of context keys that are referenced in the input policies.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPolicyResponse AWS API Documentation
     #
     class GetContextKeysForPolicyResponse < Struct.new(
       :context_key_names)
@@ -2399,6 +2541,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicyRequest AWS API Documentation
+    #
     class GetContextKeysForPrincipalPolicyRequest < Struct.new(
       :policy_source_arn,
       :policy_input_list)
@@ -2423,6 +2567,8 @@ module Aws::IAM
     #
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReportResponse AWS API Documentation
     #
     class GetCredentialReportResponse < Struct.new(
       :content,
@@ -2465,6 +2611,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyRequest AWS API Documentation
+    #
     class GetGroupPolicyRequest < Struct.new(
       :group_name,
       :policy_name)
@@ -2484,6 +2632,8 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyResponse AWS API Documentation
     #
     class GetGroupPolicyResponse < Struct.new(
       :group_name,
@@ -2534,6 +2684,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupRequest AWS API Documentation
+    #
     class GetGroupRequest < Struct.new(
       :group_name,
       :marker,
@@ -2567,6 +2719,8 @@ module Aws::IAM
     #   pagination request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupResponse AWS API Documentation
+    #
     class GetGroupResponse < Struct.new(
       :group,
       :users,
@@ -2595,6 +2749,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileRequest AWS API Documentation
+    #
     class GetInstanceProfileRequest < Struct.new(
       :instance_profile_name)
       include Aws::Structure
@@ -2605,6 +2761,8 @@ module Aws::IAM
     # @!attribute [rw] instance_profile
     #   A structure containing details about the instance profile.
     #   @return [Types::InstanceProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileResponse AWS API Documentation
     #
     class GetInstanceProfileResponse < Struct.new(
       :instance_profile)
@@ -2631,6 +2789,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileRequest AWS API Documentation
+    #
     class GetLoginProfileRequest < Struct.new(
       :user_name)
       include Aws::Structure
@@ -2642,6 +2802,8 @@ module Aws::IAM
     #   A structure containing the user name and password create date for
     #   the user.
     #   @return [Types::LoginProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileResponse AWS API Documentation
     #
     class GetLoginProfileResponse < Struct.new(
       :login_profile)
@@ -2667,6 +2829,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderRequest AWS API Documentation
     #
     class GetOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn)
@@ -2698,6 +2862,8 @@ module Aws::IAM
     #   created in the AWS account.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderResponse AWS API Documentation
+    #
     class GetOpenIDConnectProviderResponse < Struct.new(
       :url,
       :client_id_list,
@@ -2725,6 +2891,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyRequest AWS API Documentation
+    #
     class GetPolicyRequest < Struct.new(
       :policy_arn)
       include Aws::Structure
@@ -2735,6 +2903,8 @@ module Aws::IAM
     # @!attribute [rw] policy
     #   A structure containing details about the policy.
     #   @return [Types::Policy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyResponse AWS API Documentation
     #
     class GetPolicyResponse < Struct.new(
       :policy)
@@ -2774,6 +2944,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersionRequest AWS API Documentation
+    #
     class GetPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
@@ -2785,6 +2957,8 @@ module Aws::IAM
     # @!attribute [rw] policy_version
     #   A structure containing details about the policy version.
     #   @return [Types::PolicyVersion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersionResponse AWS API Documentation
     #
     class GetPolicyVersionResponse < Struct.new(
       :policy_version)
@@ -2825,6 +2999,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyRequest AWS API Documentation
+    #
     class GetRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name)
@@ -2844,6 +3020,8 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyResponse AWS API Documentation
     #
     class GetRolePolicyResponse < Struct.new(
       :role_name,
@@ -2872,6 +3050,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleRequest AWS API Documentation
+    #
     class GetRoleRequest < Struct.new(
       :role_name)
       include Aws::Structure
@@ -2882,6 +3062,8 @@ module Aws::IAM
     # @!attribute [rw] role
     #   A structure containing details about the IAM role.
     #   @return [Types::Role]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleResponse AWS API Documentation
     #
     class GetRoleResponse < Struct.new(
       :role)
@@ -2907,6 +3089,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderRequest AWS API Documentation
+    #
     class GetSAMLProviderRequest < Struct.new(
       :saml_provider_arn)
       include Aws::Structure
@@ -2926,6 +3110,8 @@ module Aws::IAM
     # @!attribute [rw] valid_until
     #   The expiration date and time for the SAML provider.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderResponse AWS API Documentation
     #
     class GetSAMLProviderResponse < Struct.new(
       :saml_metadata_document,
@@ -2974,6 +3160,8 @@ module Aws::IAM
     #   the public key in PEM format, use `PEM`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyRequest AWS API Documentation
+    #
     class GetSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_id,
@@ -2986,6 +3174,8 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key
     #   A structure containing details about the SSH public key.
     #   @return [Types::SSHPublicKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyResponse AWS API Documentation
     #
     class GetSSHPublicKeyResponse < Struct.new(
       :ssh_public_key)
@@ -3013,6 +3203,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificateRequest AWS API Documentation
+    #
     class GetServerCertificateRequest < Struct.new(
       :server_certificate_name)
       include Aws::Structure
@@ -3023,6 +3215,8 @@ module Aws::IAM
     # @!attribute [rw] server_certificate
     #   A structure containing details about the server certificate.
     #   @return [Types::ServerCertificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificateResponse AWS API Documentation
     #
     class GetServerCertificateResponse < Struct.new(
       :server_certificate)
@@ -3063,6 +3257,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyRequest AWS API Documentation
+    #
     class GetUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name)
@@ -3082,6 +3278,8 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyResponse AWS API Documentation
     #
     class GetUserPolicyResponse < Struct.new(
       :user_name,
@@ -3111,6 +3309,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserRequest AWS API Documentation
+    #
     class GetUserRequest < Struct.new(
       :user_name)
       include Aws::Structure
@@ -3121,6 +3321,8 @@ module Aws::IAM
     # @!attribute [rw] user
     #   A structure containing details about the IAM user.
     #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserResponse AWS API Documentation
     #
     class GetUserResponse < Struct.new(
       :user)
@@ -3178,6 +3380,8 @@ module Aws::IAM
     #
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Group AWS API Documentation
     #
     class Group < Struct.new(
       :path,
@@ -3246,6 +3450,8 @@ module Aws::IAM
     #   A list of the managed policies attached to the group.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GroupDetail AWS API Documentation
+    #
     class GroupDetail < Struct.new(
       :path,
       :group_name,
@@ -3310,6 +3516,8 @@ module Aws::IAM
     #   The role associated with the instance profile.
     #   @return [Array<Types::Role>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/InstanceProfile AWS API Documentation
+    #
     class InstanceProfile < Struct.new(
       :path,
       :instance_profile_name,
@@ -3362,6 +3570,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysRequest AWS API Documentation
+    #
     class ListAccessKeysRequest < Struct.new(
       :user_name,
       :marker,
@@ -3390,6 +3600,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysResponse AWS API Documentation
     #
     class ListAccessKeysResponse < Struct.new(
       :access_key_metadata,
@@ -3426,6 +3638,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesRequest AWS API Documentation
+    #
     class ListAccountAliasesRequest < Struct.new(
       :marker,
       :max_items)
@@ -3454,6 +3668,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesResponse AWS API Documentation
     #
     class ListAccountAliasesResponse < Struct.new(
       :account_aliases,
@@ -3523,6 +3739,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesRequest AWS API Documentation
+    #
     class ListAttachedGroupPoliciesRequest < Struct.new(
       :group_name,
       :path_prefix,
@@ -3553,6 +3771,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesResponse AWS API Documentation
     #
     class ListAttachedGroupPoliciesResponse < Struct.new(
       :attached_policies,
@@ -3622,6 +3842,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesRequest AWS API Documentation
+    #
     class ListAttachedRolePoliciesRequest < Struct.new(
       :role_name,
       :path_prefix,
@@ -3652,6 +3874,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesResponse AWS API Documentation
     #
     class ListAttachedRolePoliciesResponse < Struct.new(
       :attached_policies,
@@ -3721,6 +3945,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesRequest AWS API Documentation
+    #
     class ListAttachedUserPoliciesRequest < Struct.new(
       :user_name,
       :path_prefix,
@@ -3751,6 +3977,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesResponse AWS API Documentation
     #
     class ListAttachedUserPoliciesResponse < Struct.new(
       :attached_policies,
@@ -3829,6 +4057,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyRequest AWS API Documentation
+    #
     class ListEntitiesForPolicyRequest < Struct.new(
       :policy_arn,
       :entity_filter,
@@ -3867,6 +4097,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyResponse AWS API Documentation
     #
     class ListEntitiesForPolicyResponse < Struct.new(
       :policy_groups,
@@ -3919,6 +4151,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesRequest AWS API Documentation
+    #
     class ListGroupPoliciesRequest < Struct.new(
       :group_name,
       :marker,
@@ -3947,6 +4181,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesResponse AWS API Documentation
     #
     class ListGroupPoliciesResponse < Struct.new(
       :policy_names,
@@ -3997,6 +4233,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserRequest AWS API Documentation
+    #
     class ListGroupsForUserRequest < Struct.new(
       :user_name,
       :marker,
@@ -4025,6 +4263,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserResponse AWS API Documentation
     #
     class ListGroupsForUserResponse < Struct.new(
       :groups,
@@ -4080,6 +4320,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsRequest AWS API Documentation
+    #
     class ListGroupsRequest < Struct.new(
       :path_prefix,
       :marker,
@@ -4108,6 +4350,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsResponse AWS API Documentation
     #
     class ListGroupsResponse < Struct.new(
       :groups,
@@ -4158,6 +4402,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleRequest AWS API Documentation
+    #
     class ListInstanceProfilesForRoleRequest < Struct.new(
       :role_name,
       :marker,
@@ -4187,6 +4433,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleResponse AWS API Documentation
     #
     class ListInstanceProfilesForRoleResponse < Struct.new(
       :instance_profiles,
@@ -4242,6 +4490,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesRequest AWS API Documentation
+    #
     class ListInstanceProfilesRequest < Struct.new(
       :path_prefix,
       :marker,
@@ -4270,6 +4520,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesResponse AWS API Documentation
     #
     class ListInstanceProfilesResponse < Struct.new(
       :instance_profiles,
@@ -4320,6 +4572,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesRequest AWS API Documentation
+    #
     class ListMFADevicesRequest < Struct.new(
       :user_name,
       :marker,
@@ -4349,6 +4603,8 @@ module Aws::IAM
     #   pagination request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesResponse AWS API Documentation
+    #
     class ListMFADevicesResponse < Struct.new(
       :mfa_devices,
       :is_truncated,
@@ -4357,6 +4613,8 @@ module Aws::IAM
     end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersRequest AWS API Documentation
     #
     class ListOpenIDConnectProvidersRequest < Aws::EmptyStructure; end
 
@@ -4367,6 +4625,8 @@ module Aws::IAM
     #   The list of IAM OIDC provider resource objects defined in the AWS
     #   account.
     #   @return [Array<Types::OpenIDConnectProviderListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersResponse AWS API Documentation
     #
     class ListOpenIDConnectProvidersResponse < Struct.new(
       :open_id_connect_provider_list)
@@ -4439,6 +4699,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesRequest AWS API Documentation
+    #
     class ListPoliciesRequest < Struct.new(
       :scope,
       :only_attached,
@@ -4469,6 +4731,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesResponse AWS API Documentation
     #
     class ListPoliciesResponse < Struct.new(
       :policies,
@@ -4518,6 +4782,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsRequest AWS API Documentation
+    #
     class ListPolicyVersionsRequest < Struct.new(
       :policy_arn,
       :marker,
@@ -4553,6 +4819,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsResponse AWS API Documentation
     #
     class ListPolicyVersionsResponse < Struct.new(
       :versions,
@@ -4603,6 +4871,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesRequest AWS API Documentation
+    #
     class ListRolePoliciesRequest < Struct.new(
       :role_name,
       :marker,
@@ -4631,6 +4901,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesResponse AWS API Documentation
     #
     class ListRolePoliciesResponse < Struct.new(
       :policy_names,
@@ -4686,6 +4958,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesRequest AWS API Documentation
+    #
     class ListRolesRequest < Struct.new(
       :path_prefix,
       :marker,
@@ -4715,6 +4989,8 @@ module Aws::IAM
     #   pagination request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesResponse AWS API Documentation
+    #
     class ListRolesResponse < Struct.new(
       :roles,
       :is_truncated,
@@ -4724,6 +5000,8 @@ module Aws::IAM
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersRequest AWS API Documentation
+    #
     class ListSAMLProvidersRequest < Aws::EmptyStructure; end
 
     # Contains the response to a successful ListSAMLProviders request.
@@ -4732,6 +5010,8 @@ module Aws::IAM
     #   The list of SAML provider resource objects defined in IAM for this
     #   AWS account.
     #   @return [Array<Types::SAMLProviderListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersResponse AWS API Documentation
     #
     class ListSAMLProvidersResponse < Struct.new(
       :saml_provider_list)
@@ -4782,6 +5062,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysRequest AWS API Documentation
+    #
     class ListSSHPublicKeysRequest < Struct.new(
       :user_name,
       :marker,
@@ -4810,6 +5092,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysResponse AWS API Documentation
     #
     class ListSSHPublicKeysResponse < Struct.new(
       :ssh_public_keys,
@@ -4865,6 +5149,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesRequest AWS API Documentation
+    #
     class ListServerCertificatesRequest < Struct.new(
       :path_prefix,
       :marker,
@@ -4893,6 +5179,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesResponse AWS API Documentation
     #
     class ListServerCertificatesResponse < Struct.new(
       :server_certificate_metadata_list,
@@ -4930,6 +5218,8 @@ module Aws::IAM
     #   credentials for all services.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentialsRequest AWS API Documentation
+    #
     class ListServiceSpecificCredentialsRequest < Struct.new(
       :user_name,
       :service_name)
@@ -4940,6 +5230,8 @@ module Aws::IAM
     #   A list of structures that each contain details about a
     #   service-specific credential.
     #   @return [Array<Types::ServiceSpecificCredentialMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentialsResponse AWS API Documentation
     #
     class ListServiceSpecificCredentialsResponse < Struct.new(
       :service_specific_credentials)
@@ -4989,6 +5281,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesRequest AWS API Documentation
+    #
     class ListSigningCertificatesRequest < Struct.new(
       :user_name,
       :marker,
@@ -5017,6 +5311,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesResponse AWS API Documentation
     #
     class ListSigningCertificatesResponse < Struct.new(
       :certificates,
@@ -5067,6 +5363,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesRequest AWS API Documentation
+    #
     class ListUserPoliciesRequest < Struct.new(
       :user_name,
       :marker,
@@ -5095,6 +5393,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesResponse AWS API Documentation
     #
     class ListUserPoliciesResponse < Struct.new(
       :policy_names,
@@ -5150,6 +5450,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersRequest AWS API Documentation
+    #
     class ListUsersRequest < Struct.new(
       :path_prefix,
       :marker,
@@ -5178,6 +5480,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersResponse AWS API Documentation
     #
     class ListUsersResponse < Struct.new(
       :users,
@@ -5221,6 +5525,8 @@ module Aws::IAM
     #   call that tells the service where to continue from.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesRequest AWS API Documentation
+    #
     class ListVirtualMFADevicesRequest < Struct.new(
       :assignment_status,
       :marker,
@@ -5251,6 +5557,8 @@ module Aws::IAM
     #   pagination request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesResponse AWS API Documentation
+    #
     class ListVirtualMFADevicesResponse < Struct.new(
       :virtual_mfa_devices,
       :is_truncated,
@@ -5277,6 +5585,8 @@ module Aws::IAM
     #   sign-in.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LoginProfile AWS API Documentation
+    #
     class LoginProfile < Struct.new(
       :user_name,
       :create_date,
@@ -5301,6 +5611,8 @@ module Aws::IAM
     # @!attribute [rw] enable_date
     #   The date when the MFA device was enabled for the user.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MFADevice AWS API Documentation
     #
     class MFADevice < Struct.new(
       :user_name,
@@ -5414,6 +5726,8 @@ module Aws::IAM
     #   A list containing information about the versions of the policy.
     #   @return [Array<Types::PolicyVersion>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ManagedPolicyDetail AWS API Documentation
+    #
     class ManagedPolicyDetail < Struct.new(
       :policy_name,
       :policy_id,
@@ -5443,6 +5757,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry AWS API Documentation
     #
     class OpenIDConnectProviderListEntry < Struct.new(
       :arn)
@@ -5500,6 +5816,8 @@ module Aws::IAM
     #   Specifies whether IAM users are prevented from setting a new
     #   password after their password has expired.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PasswordPolicy AWS API Documentation
     #
     class PasswordPolicy < Struct.new(
       :minimum_password_length,
@@ -5610,6 +5928,8 @@ module Aws::IAM
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Policy AWS API Documentation
+    #
     class Policy < Struct.new(
       :policy_name,
       :policy_id,
@@ -5637,6 +5957,8 @@ module Aws::IAM
     # @!attribute [rw] policy_document
     #   The policy document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyDetail AWS API Documentation
     #
     class PolicyDetail < Struct.new(
       :policy_name,
@@ -5671,6 +5993,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyGroup AWS API Documentation
+    #
     class PolicyGroup < Struct.new(
       :group_name,
       :group_id)
@@ -5704,6 +6028,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyRole AWS API Documentation
+    #
     class PolicyRole < Struct.new(
       :role_name,
       :role_id)
@@ -5736,6 +6062,8 @@ module Aws::IAM
     #
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyUser AWS API Documentation
     #
     class PolicyUser < Struct.new(
       :user_name,
@@ -5786,6 +6114,8 @@ module Aws::IAM
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyVersion AWS API Documentation
+    #
     class PolicyVersion < Struct.new(
       :document,
       :version_id,
@@ -5807,6 +6137,8 @@ module Aws::IAM
     #   The column in the line containing the specified position in the
     #   document.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Position AWS API Documentation
     #
     class Position < Struct.new(
       :line,
@@ -5864,6 +6196,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicyRequest AWS API Documentation
     #
     class PutGroupPolicyRequest < Struct.new(
       :group_name,
@@ -5923,6 +6257,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyRequest AWS API Documentation
+    #
     class PutRolePolicyRequest < Struct.new(
       :role_name,
       :policy_name,
@@ -5981,6 +6317,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicyRequest AWS API Documentation
+    #
     class PutUserPolicyRequest < Struct.new(
       :user_name,
       :policy_name,
@@ -6014,6 +6352,8 @@ module Aws::IAM
     #   provider resource. For more information about client IDs, see
     #   CreateOpenIDConnectProvider.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProviderRequest AWS API Documentation
     #
     class RemoveClientIDFromOpenIDConnectProviderRequest < Struct.new(
       :open_id_connect_provider_arn,
@@ -6055,6 +6395,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfileRequest AWS API Documentation
+    #
     class RemoveRoleFromInstanceProfileRequest < Struct.new(
       :instance_profile_name,
       :role_name)
@@ -6094,6 +6436,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroupRequest AWS API Documentation
     #
     class RemoveUserFromGroupRequest < Struct.new(
       :group_name,
@@ -6136,6 +6480,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredentialRequest AWS API Documentation
+    #
     class ResetServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id)
@@ -6149,6 +6495,8 @@ module Aws::IAM
     #   This is the **only** time that you can access the password. You
     #   cannot recover the password later, but you can reset it again.
     #   @return [Types::ServiceSpecificCredential]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredentialResponse AWS API Documentation
     #
     class ResetServiceSpecificCredentialResponse < Struct.new(
       :service_specific_credential)
@@ -6199,6 +6547,8 @@ module Aws::IAM
     #   resource, both the resource-based policy and the caller's IAM
     #   policy must grant access.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResourceSpecificResult AWS API Documentation
     #
     class ResourceSpecificResult < Struct.new(
       :eval_resource_name,
@@ -6256,6 +6606,8 @@ module Aws::IAM
     #
     #   The format for this parameter is a sequence of six digits.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADeviceRequest AWS API Documentation
     #
     class ResyncMFADeviceRequest < Struct.new(
       :user_name,
@@ -6320,6 +6672,8 @@ module Aws::IAM
     # @!attribute [rw] assume_role_policy_document
     #   The policy that grants an entity permission to assume the role.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
     class Role < Struct.new(
       :path,
@@ -6399,6 +6753,8 @@ module Aws::IAM
     #   the role's access (permissions) policies.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail AWS API Documentation
+    #
     class RoleDetail < Struct.new(
       :path,
       :role_name,
@@ -6425,6 +6781,8 @@ module Aws::IAM
     # @!attribute [rw] create_date
     #   The date and time when the SAML provider was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SAMLProviderListEntry AWS API Documentation
     #
     class SAMLProviderListEntry < Struct.new(
       :arn,
@@ -6469,6 +6827,8 @@ module Aws::IAM
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SSHPublicKey AWS API Documentation
+    #
     class SSHPublicKey < Struct.new(
       :user_name,
       :ssh_public_key_id,
@@ -6508,6 +6868,8 @@ module Aws::IAM
     #   [1]: http://www.iso.org/iso/iso8601
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SSHPublicKeyMetadata AWS API Documentation
+    #
     class SSHPublicKeyMetadata < Struct.new(
       :user_name,
       :ssh_public_key_id,
@@ -6533,6 +6895,8 @@ module Aws::IAM
     # @!attribute [rw] certificate_chain
     #   The contents of the public key certificate chain.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificate AWS API Documentation
     #
     class ServerCertificate < Struct.new(
       :server_certificate_metadata,
@@ -6588,6 +6952,8 @@ module Aws::IAM
     #   The date on which the certificate is set to expire.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificateMetadata AWS API Documentation
+    #
     class ServerCertificateMetadata < Struct.new(
       :path,
       :server_certificate_name,
@@ -6639,6 +7005,8 @@ module Aws::IAM
     #   key is valid for API calls, while `Inactive` means it is not.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredential AWS API Documentation
+    #
     class ServiceSpecificCredential < Struct.new(
       :create_date,
       :service_name,
@@ -6684,6 +7052,8 @@ module Aws::IAM
     #   credential.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredentialMetadata AWS API Documentation
+    #
     class ServiceSpecificCredentialMetadata < Struct.new(
       :user_name,
       :status,
@@ -6725,6 +7095,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionRequest AWS API Documentation
+    #
     class SetDefaultPolicyVersionRequest < Struct.new(
       :policy_arn,
       :version_id)
@@ -6756,6 +7128,8 @@ module Aws::IAM
     # @!attribute [rw] upload_date
     #   The date when the signing certificate was uploaded.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SigningCertificate AWS API Documentation
     #
     class SigningCertificate < Struct.new(
       :user_name,
@@ -6959,6 +7333,8 @@ module Aws::IAM
     #   received to indicate where the next call should start.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicyRequest AWS API Documentation
+    #
     class SimulateCustomPolicyRequest < Struct.new(
       :policy_input_list,
       :action_names,
@@ -6995,6 +7371,8 @@ module Aws::IAM
     #   the value to use for the `Marker` parameter in a subsequent
     #   pagination request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePolicyResponse AWS API Documentation
     #
     class SimulatePolicyResponse < Struct.new(
       :evaluation_results,
@@ -7218,6 +7596,8 @@ module Aws::IAM
     #   received to indicate where the next call should start.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicyRequest AWS API Documentation
+    #
     class SimulatePrincipalPolicyRequest < Struct.new(
       :policy_source_arn,
       :policy_input_list,
@@ -7255,6 +7635,8 @@ module Aws::IAM
     # @!attribute [rw] end_position
     #   The row and column of the end of a `Statement` in an IAM policy.
     #   @return [Types::Position]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Statement AWS API Documentation
     #
     class Statement < Struct.new(
       :source_policy_id,
@@ -7303,6 +7685,8 @@ module Aws::IAM
     #   means the key can be used for API calls to AWS, while `Inactive`
     #   means the key cannot be used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyRequest AWS API Documentation
     #
     class UpdateAccessKeyRequest < Struct.new(
       :user_name,
@@ -7397,6 +7781,8 @@ module Aws::IAM
     #   Default value: false
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyRequest AWS API Documentation
+    #
     class UpdateAccountPasswordPolicyRequest < Struct.new(
       :minimum_password_length,
       :require_symbols,
@@ -7446,6 +7832,8 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicyRequest AWS API Documentation
     #
     class UpdateAssumeRolePolicyRequest < Struct.new(
       :role_name,
@@ -7506,6 +7894,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupRequest AWS API Documentation
+    #
     class UpdateGroupRequest < Struct.new(
       :group_name,
       :new_path,
@@ -7559,6 +7949,8 @@ module Aws::IAM
     #   specified IAM user to set a new password on next sign-in.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileRequest AWS API Documentation
+    #
     class UpdateLoginProfileRequest < Struct.new(
       :user_name,
       :password,
@@ -7594,6 +7986,8 @@ module Aws::IAM
     #   CreateOpenIDConnectProvider.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprintRequest AWS API Documentation
+    #
     class UpdateOpenIDConnectProviderThumbprintRequest < Struct.new(
       :open_id_connect_provider_arn,
       :thumbprint_list)
@@ -7628,6 +8022,8 @@ module Aws::IAM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest AWS API Documentation
+    #
     class UpdateSAMLProviderRequest < Struct.new(
       :saml_metadata_document,
       :saml_provider_arn)
@@ -7640,6 +8036,8 @@ module Aws::IAM
     #   The Amazon Resource Name (ARN) of the SAML provider that was
     #   updated.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderResponse AWS API Documentation
     #
     class UpdateSAMLProviderResponse < Struct.new(
       :saml_provider_arn)
@@ -7685,6 +8083,8 @@ module Aws::IAM
     #   can be used for authentication with an AWS CodeCommit repository.
     #   `Inactive` means the key cannot be used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyRequest AWS API Documentation
     #
     class UpdateSSHPublicKeyRequest < Struct.new(
       :user_name,
@@ -7746,6 +8146,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificateRequest AWS API Documentation
+    #
     class UpdateServerCertificateRequest < Struct.new(
       :server_certificate_name,
       :new_path,
@@ -7793,6 +8195,8 @@ module Aws::IAM
     #   The status to be assigned to the service-specific credential.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredentialRequest AWS API Documentation
+    #
     class UpdateServiceSpecificCredentialRequest < Struct.new(
       :user_name,
       :service_specific_credential_id,
@@ -7839,6 +8243,8 @@ module Aws::IAM
     #   certificate can be used for API calls to AWS, while `Inactive` means
     #   the certificate cannot be used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateRequest AWS API Documentation
     #
     class UpdateSigningCertificateRequest < Struct.new(
       :user_name,
@@ -7900,6 +8306,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserRequest AWS API Documentation
+    #
     class UpdateUserRequest < Struct.new(
       :user_name,
       :new_path,
@@ -7945,6 +8353,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKeyRequest AWS API Documentation
+    #
     class UploadSSHPublicKeyRequest < Struct.new(
       :user_name,
       :ssh_public_key_body)
@@ -7956,6 +8366,8 @@ module Aws::IAM
     # @!attribute [rw] ssh_public_key
     #   Contains information about the SSH public key.
     #   @return [Types::SSHPublicKey]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKeyResponse AWS API Documentation
     #
     class UploadSSHPublicKeyResponse < Struct.new(
       :ssh_public_key)
@@ -8062,6 +8474,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateRequest AWS API Documentation
+    #
     class UploadServerCertificateRequest < Struct.new(
       :path,
       :server_certificate_name,
@@ -8077,6 +8491,8 @@ module Aws::IAM
     #   The meta information of the uploaded server certificate without its
     #   certificate body, certificate chain, and private key.
     #   @return [Types::ServerCertificateMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateResponse AWS API Documentation
     #
     class UploadServerCertificateResponse < Struct.new(
       :server_certificate_metadata)
@@ -8120,6 +8536,8 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificateRequest AWS API Documentation
+    #
     class UploadSigningCertificateRequest < Struct.new(
       :user_name,
       :certificate_body)
@@ -8132,6 +8550,8 @@ module Aws::IAM
     # @!attribute [rw] certificate
     #   Information about the certificate.
     #   @return [Types::SigningCertificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificateResponse AWS API Documentation
     #
     class UploadSigningCertificateResponse < Struct.new(
       :certificate)
@@ -8214,6 +8634,8 @@ module Aws::IAM
     #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/User AWS API Documentation
+    #
     class User < Struct.new(
       :path,
       :user_name,
@@ -8286,6 +8708,8 @@ module Aws::IAM
     #   A list of the managed policies attached to the user.
     #   @return [Array<Types::AttachedPolicy>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail AWS API Documentation
+    #
     class UserDetail < Struct.new(
       :path,
       :user_name,
@@ -8329,6 +8753,8 @@ module Aws::IAM
     # @!attribute [rw] enable_date
     #   The date and time on which the virtual MFA device was enabled.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/VirtualMFADevice AWS API Documentation
     #
     class VirtualMFADevice < Struct.new(
       :serial_number,

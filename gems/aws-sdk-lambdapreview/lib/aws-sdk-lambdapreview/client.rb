@@ -239,6 +239,8 @@ module Aws::LambdaPreview
     #   resp.is_active #=> Boolean
     #   resp.status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/AddEventSource AWS API Documentation
+    #
     # @overload add_event_source(params = {})
     # @param [Hash] params ({})
     def add_event_source(params = {}, options = {})
@@ -261,6 +263,8 @@ module Aws::LambdaPreview
     #   resp = client.delete_function({
     #     function_name: "FunctionName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/DeleteFunction AWS API Documentation
     #
     # @overload delete_function(params = {})
     # @param [Hash] params ({})
@@ -309,6 +313,8 @@ module Aws::LambdaPreview
     #   resp.is_active #=> Boolean
     #   resp.status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetEventSource AWS API Documentation
+    #
     # @overload get_event_source(params = {})
     # @param [Hash] params ({})
     def get_event_source(params = {}, options = {})
@@ -355,6 +361,8 @@ module Aws::LambdaPreview
     #   resp.configuration.last_modified #=> Time
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetFunction AWS API Documentation
     #
     # @overload get_function(params = {})
     # @param [Hash] params ({})
@@ -410,6 +418,8 @@ module Aws::LambdaPreview
     #   resp.memory_size #=> Integer
     #   resp.last_modified #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetFunctionConfiguration AWS API Documentation
+    #
     # @overload get_function_configuration(params = {})
     # @param [Hash] params ({})
     def get_function_configuration(params = {}, options = {})
@@ -445,6 +455,8 @@ module Aws::LambdaPreview
     # @example Response structure
     #
     #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/InvokeAsync AWS API Documentation
     #
     # @overload invoke_async(params = {})
     # @param [Hash] params ({})
@@ -507,6 +519,8 @@ module Aws::LambdaPreview
     #   resp.event_sources[0].is_active #=> Boolean
     #   resp.event_sources[0].status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ListEventSources AWS API Documentation
+    #
     # @overload list_event_sources(params = {})
     # @param [Hash] params ({})
     def list_event_sources(params = {}, options = {})
@@ -559,6 +573,8 @@ module Aws::LambdaPreview
     #   resp.functions[0].memory_size #=> Integer
     #   resp.functions[0].last_modified #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ListFunctions AWS API Documentation
+    #
     # @overload list_functions(params = {})
     # @param [Hash] params ({})
     def list_functions(params = {}, options = {})
@@ -582,6 +598,8 @@ module Aws::LambdaPreview
     #   resp = client.remove_event_source({
     #     uuid: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/RemoveEventSource AWS API Documentation
     #
     # @overload remove_event_source(params = {})
     # @param [Hash] params ({})
@@ -668,6 +686,8 @@ module Aws::LambdaPreview
     #   resp.timeout #=> Integer
     #   resp.memory_size #=> Integer
     #   resp.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/UpdateFunctionConfiguration AWS API Documentation
     #
     # @overload update_function_configuration(params = {})
     # @param [Hash] params ({})
@@ -778,6 +798,8 @@ module Aws::LambdaPreview
     #   resp.timeout #=> Integer
     #   resp.memory_size #=> Integer
     #   resp.last_modified #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/UploadFunction AWS API Documentation
     #
     # @overload upload_function(params = {})
     # @param [Hash] params ({})

@@ -37,6 +37,8 @@ module Aws::SES
     #   characters ("\\r" or "\\n").
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/AddHeaderAction AWS API Documentation
+    #
     class AddHeaderAction < Struct.new(
       :header_name,
       :header_value)
@@ -72,6 +74,8 @@ module Aws::SES
     #   clients that can process HTML. You can include clickable links,
     #   formatted text, and much more in an HTML message.
     #   @return [Types::Content]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Body AWS API Documentation
     #
     class Body < Struct.new(
       :text,
@@ -138,6 +142,8 @@ module Aws::SES
     #   The email address of the sender of the bounced email. This is the
     #   address from which the bounce message will be sent.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BounceAction AWS API Documentation
     #
     class BounceAction < Struct.new(
       :topic_arn,
@@ -209,6 +215,8 @@ module Aws::SES
     #   either this parameter or `BounceType`.
     #   @return [Types::RecipientDsnFields]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/BouncedRecipientInfo AWS API Documentation
+    #
     class BouncedRecipientInfo < Struct.new(
       :recipient,
       :recipient_arn,
@@ -248,6 +256,8 @@ module Aws::SES
     #   The name of the rule set to clone.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSetRequest AWS API Documentation
+    #
     class CloneReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       :original_rule_set_name)
@@ -255,6 +265,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSetResponse AWS API Documentation
     #
     class CloneReceiptRuleSetResponse < Aws::EmptyStructure; end
 
@@ -287,6 +299,8 @@ module Aws::SES
     #   A list of dimensions upon which to categorize your emails when you
     #   publish email sending events to Amazon CloudWatch.
     #   @return [Array<Types::CloudWatchDimensionConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloudWatchDestination AWS API Documentation
     #
     class CloudWatchDestination < Struct.new(
       :dimension_configurations)
@@ -341,6 +355,8 @@ module Aws::SES
     #   * Contain less than 256 characters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloudWatchDimensionConfiguration AWS API Documentation
+    #
     class CloudWatchDimensionConfiguration < Struct.new(
       :dimension_name,
       :dimension_value_source,
@@ -374,6 +390,8 @@ module Aws::SES
     #   * Contain less than 64 characters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ConfigurationSet AWS API Documentation
+    #
     class ConfigurationSet < Struct.new(
       :name)
       include Aws::Structure
@@ -401,6 +419,8 @@ module Aws::SES
     # @!attribute [rw] charset
     #   The character set of the content.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Content AWS API Documentation
     #
     class Content < Struct.new(
       :data,
@@ -455,6 +475,8 @@ module Aws::SES
     #   configuration set.
     #   @return [Types::EventDestination]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestinationRequest AWS API Documentation
+    #
     class CreateConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination)
@@ -462,6 +484,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class CreateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
 
@@ -486,12 +510,16 @@ module Aws::SES
     #   A data structure that contains the name of the configuration set.
     #   @return [Types::ConfigurationSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetRequest AWS API Documentation
+    #
     class CreateConfigurationSetRequest < Struct.new(
       :configuration_set)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetResponse AWS API Documentation
     #
     class CreateConfigurationSetResponse < Aws::EmptyStructure; end
 
@@ -522,12 +550,16 @@ module Aws::SES
     #   or block mail from it.
     #   @return [Types::ReceiptFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilterRequest AWS API Documentation
+    #
     class CreateReceiptFilterRequest < Struct.new(
       :filter)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilterResponse AWS API Documentation
     #
     class CreateReceiptFilterResponse < Aws::EmptyStructure; end
 
@@ -607,6 +639,8 @@ module Aws::SES
     #   recipients, domains, enabled status, scan status, and TLS policy.
     #   @return [Types::ReceiptRule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleRequest AWS API Documentation
+    #
     class CreateReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :after,
@@ -615,6 +649,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleResponse AWS API Documentation
     #
     class CreateReceiptRuleResponse < Aws::EmptyStructure; end
 
@@ -644,12 +680,16 @@ module Aws::SES
     #   * Contain less than 64 characters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetRequest AWS API Documentation
+    #
     class CreateReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSetResponse AWS API Documentation
     #
     class CreateReceiptRuleSetResponse < Aws::EmptyStructure; end
 
@@ -680,6 +720,8 @@ module Aws::SES
     #   The name of the event destination to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestinationRequest AWS API Documentation
+    #
     class DeleteConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination_name)
@@ -687,6 +729,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class DeleteConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
 
@@ -709,12 +753,16 @@ module Aws::SES
     #   The name of the configuration set to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetRequest AWS API Documentation
+    #
     class DeleteConfigurationSetRequest < Struct.new(
       :configuration_set_name)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetResponse AWS API Documentation
     #
     class DeleteConfigurationSetResponse < Aws::EmptyStructure; end
 
@@ -749,6 +797,8 @@ module Aws::SES
     #   The name of the policy to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicyRequest AWS API Documentation
+    #
     class DeleteIdentityPolicyRequest < Struct.new(
       :identity,
       :policy_name)
@@ -756,6 +806,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicyResponse AWS API Documentation
     #
     class DeleteIdentityPolicyResponse < Aws::EmptyStructure; end
 
@@ -774,12 +826,16 @@ module Aws::SES
     #   Account.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityRequest AWS API Documentation
+    #
     class DeleteIdentityRequest < Struct.new(
       :identity)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityResponse AWS API Documentation
     #
     class DeleteIdentityResponse < Aws::EmptyStructure; end
 
@@ -802,12 +858,16 @@ module Aws::SES
     #   The name of the IP address filter to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilterRequest AWS API Documentation
+    #
     class DeleteReceiptFilterRequest < Struct.new(
       :filter_name)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilterResponse AWS API Documentation
     #
     class DeleteReceiptFilterResponse < Aws::EmptyStructure; end
 
@@ -836,6 +896,8 @@ module Aws::SES
     #   The name of the receipt rule to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleRequest AWS API Documentation
+    #
     class DeleteReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :rule_name)
@@ -843,6 +905,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleResponse AWS API Documentation
     #
     class DeleteReceiptRuleResponse < Aws::EmptyStructure; end
 
@@ -866,12 +930,16 @@ module Aws::SES
     #   The name of the receipt rule set to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSetRequest AWS API Documentation
+    #
     class DeleteReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSetResponse AWS API Documentation
     #
     class DeleteReceiptRuleSetResponse < Aws::EmptyStructure; end
 
@@ -889,6 +957,8 @@ module Aws::SES
     #   An email address to be removed from the list of verified addresses.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddressRequest AWS API Documentation
+    #
     class DeleteVerifiedEmailAddressRequest < Struct.new(
       :email_address)
       include Aws::Structure
@@ -905,6 +975,8 @@ module Aws::SES
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSetRequest AWS API Documentation
+    #
     class DescribeActiveReceiptRuleSetRequest < Aws::EmptyStructure; end
 
     # Represents the metadata and receipt rules for the receipt rule set
@@ -919,6 +991,8 @@ module Aws::SES
     # @!attribute [rw] rules
     #   The receipt rules that belong to the active rule set.
     #   @return [Array<Types::ReceiptRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSetResponse AWS API Documentation
     #
     class DescribeActiveReceiptRuleSetResponse < Struct.new(
       :metadata,
@@ -951,6 +1025,8 @@ module Aws::SES
     #   A list of configuration set attributes to return.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSetRequest AWS API Documentation
+    #
     class DescribeConfigurationSetRequest < Struct.new(
       :configuration_set_name,
       :configuration_set_attribute_names)
@@ -973,6 +1049,8 @@ module Aws::SES
     # @!attribute [rw] event_destinations
     #   A list of event destinations associated with the configuration set.
     #   @return [Array<Types::EventDestination>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSetResponse AWS API Documentation
     #
     class DescribeConfigurationSetResponse < Struct.new(
       :configuration_set,
@@ -1004,6 +1082,8 @@ module Aws::SES
     #   The name of the receipt rule.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleRequest AWS API Documentation
+    #
     class DescribeReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :rule_name)
@@ -1017,6 +1097,8 @@ module Aws::SES
     #   actions, recipients, domains, enabled status, scan status, and
     #   Transport Layer Security (TLS) policy.
     #   @return [Types::ReceiptRule]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleResponse AWS API Documentation
     #
     class DescribeReceiptRuleResponse < Struct.new(
       :rule)
@@ -1042,6 +1124,8 @@ module Aws::SES
     #   The name of the receipt rule set to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSetRequest AWS API Documentation
+    #
     class DescribeReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
       include Aws::Structure
@@ -1058,6 +1142,8 @@ module Aws::SES
     #   A list of the receipt rules that belong to the specified receipt
     #   rule set.
     #   @return [Array<Types::ReceiptRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSetResponse AWS API Documentation
     #
     class DescribeReceiptRuleSetResponse < Struct.new(
       :metadata,
@@ -1098,6 +1184,8 @@ module Aws::SES
     # @!attribute [rw] bcc_addresses
     #   The BCC: field(s) of the message.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Destination AWS API Documentation
     #
     class Destination < Struct.new(
       :to_addresses,
@@ -1179,6 +1267,8 @@ module Aws::SES
     #   destination.
     #   @return [Types::CloudWatchDestination]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/EventDestination AWS API Documentation
+    #
     class EventDestination < Struct.new(
       :name,
       :enabled,
@@ -1217,6 +1307,8 @@ module Aws::SES
     #   and must not contain newline characters ("\\r" or "\\n").
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ExtensionField AWS API Documentation
+    #
     class ExtensionField < Struct.new(
       :name,
       :value)
@@ -1246,6 +1338,8 @@ module Aws::SES
     #   domains, or both.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributesRequest AWS API Documentation
+    #
     class GetIdentityDkimAttributesRequest < Struct.new(
       :identities)
       include Aws::Structure
@@ -1259,6 +1353,8 @@ module Aws::SES
     # @!attribute [rw] dkim_attributes
     #   The DKIM attributes for an email address or a domain.
     #   @return [Hash<String,Types::IdentityDkimAttributes>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributesResponse AWS API Documentation
     #
     class GetIdentityDkimAttributesResponse < Struct.new(
       :dkim_attributes)
@@ -1284,6 +1380,8 @@ module Aws::SES
     #   A list of one or more identities.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributesRequest AWS API Documentation
+    #
     class GetIdentityMailFromDomainAttributesRequest < Struct.new(
       :identities)
       include Aws::Structure
@@ -1294,6 +1392,8 @@ module Aws::SES
     # @!attribute [rw] mail_from_domain_attributes
     #   A map of identities to custom MAIL FROM attributes.
     #   @return [Hash<String,Types::IdentityMailFromDomainAttributes>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributesResponse AWS API Documentation
     #
     class GetIdentityMailFromDomainAttributesResponse < Struct.new(
       :mail_from_domain_attributes)
@@ -1322,6 +1422,8 @@ module Aws::SES
     #   `arn:aws:ses:us-east-1:123456789012:identity/example.com`.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesRequest AWS API Documentation
+    #
     class GetIdentityNotificationAttributesRequest < Struct.new(
       :identities)
       include Aws::Structure
@@ -1332,6 +1434,8 @@ module Aws::SES
     # @!attribute [rw] notification_attributes
     #   A map of Identity to IdentityNotificationAttributes.
     #   @return [Hash<String,Types::IdentityNotificationAttributes>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributesResponse AWS API Documentation
     #
     class GetIdentityNotificationAttributesResponse < Struct.new(
       :notification_attributes)
@@ -1371,6 +1475,8 @@ module Aws::SES
     #   `ListIdentityPolicies`.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPoliciesRequest AWS API Documentation
+    #
     class GetIdentityPoliciesRequest < Struct.new(
       :identity,
       :policy_names)
@@ -1382,6 +1488,8 @@ module Aws::SES
     # @!attribute [rw] policies
     #   A map of policy names to policies.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPoliciesResponse AWS API Documentation
     #
     class GetIdentityPoliciesResponse < Struct.new(
       :policies)
@@ -1408,6 +1516,8 @@ module Aws::SES
     #   A list of identities.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributesRequest AWS API Documentation
+    #
     class GetIdentityVerificationAttributesRequest < Struct.new(
       :identities)
       include Aws::Structure
@@ -1419,6 +1529,8 @@ module Aws::SES
     # @!attribute [rw] verification_attributes
     #   A map of Identities to IdentityVerificationAttributes objects.
     #   @return [Hash<String,Types::IdentityVerificationAttributes>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributesResponse AWS API Documentation
     #
     class GetIdentityVerificationAttributesResponse < Struct.new(
       :verification_attributes)
@@ -1447,6 +1559,8 @@ module Aws::SES
     #   The number of emails sent during the previous 24 hours.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuotaResponse AWS API Documentation
+    #
     class GetSendQuotaResponse < Struct.new(
       :max_24_hour_send,
       :max_send_rate,
@@ -1461,6 +1575,8 @@ module Aws::SES
     #   A list of data points, each of which represents 15 minutes of
     #   activity.
     #   @return [Array<Types::SendDataPoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendStatisticsResponse AWS API Documentation
     #
     class GetSendStatisticsResponse < Struct.new(
       :send_data_points)
@@ -1499,6 +1615,8 @@ module Aws::SES
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityDkimAttributes AWS API Documentation
+    #
     class IdentityDkimAttributes < Struct.new(
       :dkim_enabled,
       :dkim_verification_status,
@@ -1534,6 +1652,8 @@ module Aws::SES
     #   The custom MAIL FROM setup states that result in this behavior are
     #   `Pending`, `Failed`, and `TemporaryFailure`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityMailFromDomainAttributes AWS API Documentation
     #
     class IdentityMailFromDomainAttributes < Struct.new(
       :mail_from_domain,
@@ -1595,6 +1715,8 @@ module Aws::SES
     #   not include headers in delivery notifications.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityNotificationAttributes AWS API Documentation
+    #
     class IdentityNotificationAttributes < Struct.new(
       :bounce_topic,
       :complaint_topic,
@@ -1617,6 +1739,8 @@ module Aws::SES
     #   The verification token for a domain identity. Null for email address
     #   identities.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/IdentityVerificationAttributes AWS API Documentation
     #
     class IdentityVerificationAttributes < Struct.new(
       :verification_status,
@@ -1653,6 +1777,8 @@ module Aws::SES
     #   The ARN of the Amazon Kinesis Firehose stream to which to publish
     #   email sending events.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/KinesisFirehoseDestination AWS API Documentation
     #
     class KinesisFirehoseDestination < Struct.new(
       :iam_role_arn,
@@ -1728,6 +1854,8 @@ module Aws::SES
     #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/LambdaAction AWS API Documentation
+    #
     class LambdaAction < Struct.new(
       :topic_arn,
       :function_arn,
@@ -1762,6 +1890,8 @@ module Aws::SES
     #   The number of configuration sets to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSetsRequest AWS API Documentation
+    #
     class ListConfigurationSetsRequest < Struct.new(
       :next_token,
       :max_items)
@@ -1786,6 +1916,8 @@ module Aws::SES
     #   available to be listed. Pass this token to successive calls of
     #   `ListConfigurationSets`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSetsResponse AWS API Documentation
     #
     class ListConfigurationSetsResponse < Struct.new(
       :configuration_sets,
@@ -1821,6 +1953,8 @@ module Aws::SES
     #   1-1000 inclusive.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentitiesRequest AWS API Documentation
+    #
     class ListIdentitiesRequest < Struct.new(
       :identity_type,
       :next_token,
@@ -1838,6 +1972,8 @@ module Aws::SES
     # @!attribute [rw] next_token
     #   The token used for pagination.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentitiesResponse AWS API Documentation
     #
     class ListIdentitiesResponse < Struct.new(
       :identities,
@@ -1872,6 +2008,8 @@ module Aws::SES
     #   To successfully call this API, you must own the identity.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPoliciesRequest AWS API Documentation
+    #
     class ListIdentityPoliciesRequest < Struct.new(
       :identity)
       include Aws::Structure
@@ -1883,6 +2021,8 @@ module Aws::SES
     # @!attribute [rw] policy_names
     #   A list of names of policies that apply to the specified identity.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPoliciesResponse AWS API Documentation
     #
     class ListIdentityPoliciesResponse < Struct.new(
       :policy_names)
@@ -1900,6 +2040,8 @@ module Aws::SES
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFiltersRequest AWS API Documentation
+    #
     class ListReceiptFiltersRequest < Aws::EmptyStructure; end
 
     # A list of IP address filters that exist under your AWS account.
@@ -1909,6 +2051,8 @@ module Aws::SES
     #   name, an IP address range, and whether to allow or block mail from
     #   it.
     #   @return [Array<Types::ReceiptFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFiltersResponse AWS API Documentation
     #
     class ListReceiptFiltersResponse < Struct.new(
       :filters)
@@ -1936,6 +2080,8 @@ module Aws::SES
     #   indicate the position in the receipt rule set list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSetsRequest AWS API Documentation
+    #
     class ListReceiptRuleSetsRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1956,6 +2102,8 @@ module Aws::SES
     #   time.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSetsResponse AWS API Documentation
+    #
     class ListReceiptRuleSetsResponse < Struct.new(
       :rule_sets,
       :next_token)
@@ -1968,6 +2116,8 @@ module Aws::SES
     # @!attribute [rw] verified_email_addresses
     #   A list of email addresses that have been verified.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddressesResponse AWS API Documentation
     #
     class ListVerifiedEmailAddressesResponse < Struct.new(
       :verified_email_addresses)
@@ -2004,6 +2154,8 @@ module Aws::SES
     # @!attribute [rw] body
     #   The message body.
     #   @return [Types::Body]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/Message AWS API Documentation
     #
     class Message < Struct.new(
       :subject,
@@ -2059,6 +2211,8 @@ module Aws::SES
     #   Additional X-headers to include in the DSN.
     #   @return [Array<Types::ExtensionField>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageDsn AWS API Documentation
+    #
     class MessageDsn < Struct.new(
       :reporting_mta,
       :arrival_date,
@@ -2102,6 +2256,8 @@ module Aws::SES
     #
     #   * Contain less than 256 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/MessageTag AWS API Documentation
     #
     class MessageTag < Struct.new(
       :name,
@@ -2155,6 +2311,8 @@ module Aws::SES
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicyRequest AWS API Documentation
+    #
     class PutIdentityPolicyRequest < Struct.new(
       :identity,
       :policy_name,
@@ -2163,6 +2321,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicyResponse AWS API Documentation
     #
     class PutIdentityPolicyResponse < Aws::EmptyStructure; end
 
@@ -2197,6 +2357,8 @@ module Aws::SES
     #
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RawMessage AWS API Documentation
     #
     class RawMessage < Struct.new(
       :data)
@@ -2289,6 +2451,8 @@ module Aws::SES
     #   Publishes the email content within a notification to Amazon SNS.
     #   @return [Types::SNSAction]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptAction AWS API Documentation
+    #
     class ReceiptAction < Struct.new(
       :s3_action,
       :bounce_action,
@@ -2338,6 +2502,8 @@ module Aws::SES
     #   whether to block or allow incoming mail from them.
     #   @return [Types::ReceiptIpFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptFilter AWS API Documentation
+    #
     class ReceiptFilter < Struct.new(
       :name,
       :ip_filter)
@@ -2379,6 +2545,8 @@ module Aws::SES
     #
     #   [1]: https://tools.ietf.org/html/rfc2317
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptIpFilter AWS API Documentation
     #
     class ReceiptIpFilter < Struct.new(
       :policy,
@@ -2490,6 +2658,8 @@ module Aws::SES
     #   scanned for spam and viruses. The default value is `false`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptRule AWS API Documentation
+    #
     class ReceiptRule < Struct.new(
       :name,
       :enabled,
@@ -2527,6 +2697,8 @@ module Aws::SES
     # @!attribute [rw] created_timestamp
     #   The date and time the receipt rule set was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReceiptRuleSetMetadata AWS API Documentation
     #
     class ReceiptRuleSetMetadata < Struct.new(
       :name,
@@ -2634,6 +2806,8 @@ module Aws::SES
     #   Additional X-headers to include in the DSN.
     #   @return [Array<Types::ExtensionField>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/RecipientDsnFields AWS API Documentation
+    #
     class RecipientDsnFields < Struct.new(
       :final_recipient,
       :action,
@@ -2670,6 +2844,8 @@ module Aws::SES
     #   order that you want to put them.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSetRequest AWS API Documentation
+    #
     class ReorderReceiptRuleSetRequest < Struct.new(
       :rule_set_name,
       :rule_names)
@@ -2677,6 +2853,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSetResponse AWS API Documentation
     #
     class ReorderReceiptRuleSetResponse < Aws::EmptyStructure; end
 
@@ -2781,6 +2959,8 @@ module Aws::SES
     #   [5]: http://alpha-docs-aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/S3Action AWS API Documentation
+    #
     class S3Action < Struct.new(
       :topic_arn,
       :bucket_name,
@@ -2840,6 +3020,8 @@ module Aws::SES
     #   encoding format. Base64 preserves all special characters. The
     #   default value is UTF-8.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SNSAction AWS API Documentation
     #
     class SNSAction < Struct.new(
       :topic_arn,
@@ -2930,6 +3112,8 @@ module Aws::SES
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceRequest AWS API Documentation
+    #
     class SendBounceRequest < Struct.new(
       :original_message_id,
       :bounce_sender,
@@ -2945,6 +3129,8 @@ module Aws::SES
     # @!attribute [rw] message_id
     #   The message ID of the bounce message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounceResponse AWS API Documentation
     #
     class SendBounceResponse < Struct.new(
       :message_id)
@@ -2973,6 +3159,8 @@ module Aws::SES
     # @!attribute [rw] rejects
     #   Number of emails rejected by Amazon SES.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendDataPoint AWS API Documentation
     #
     class SendDataPoint < Struct.new(
       :timestamp,
@@ -3134,6 +3322,8 @@ module Aws::SES
     #   using `SendEmail`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailRequest AWS API Documentation
+    #
     class SendEmailRequest < Struct.new(
       :source,
       :destination,
@@ -3152,6 +3342,8 @@ module Aws::SES
     # @!attribute [rw] message_id
     #   The unique message identifier returned from the `SendEmail` action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmailResponse AWS API Documentation
     #
     class SendEmailResponse < Struct.new(
       :message_id)
@@ -3327,6 +3519,8 @@ module Aws::SES
     #   using `SendRawEmail`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailRequest AWS API Documentation
+    #
     class SendRawEmailRequest < Struct.new(
       :source,
       :destinations,
@@ -3345,6 +3539,8 @@ module Aws::SES
     #   The unique message identifier returned from the `SendRawEmail`
     #   action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmailResponse AWS API Documentation
     #
     class SendRawEmailResponse < Struct.new(
       :message_id)
@@ -3371,12 +3567,16 @@ module Aws::SES
     #   to null disables all email receiving.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSetRequest AWS API Documentation
+    #
     class SetActiveReceiptRuleSetRequest < Struct.new(
       :rule_set_name)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSetResponse AWS API Documentation
     #
     class SetActiveReceiptRuleSetResponse < Aws::EmptyStructure; end
 
@@ -3405,6 +3605,8 @@ module Aws::SES
     #   to enable DKIM signing for this identity; `false` to disable it.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabledRequest AWS API Documentation
+    #
     class SetIdentityDkimEnabledRequest < Struct.new(
       :identity,
       :dkim_enabled)
@@ -3412,6 +3614,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabledResponse AWS API Documentation
     #
     class SetIdentityDkimEnabledResponse < Aws::EmptyStructure; end
 
@@ -3448,6 +3652,8 @@ module Aws::SES
     #   `Complaint` notification types.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledRequest AWS API Documentation
+    #
     class SetIdentityFeedbackForwardingEnabledRequest < Struct.new(
       :identity,
       :forwarding_enabled)
@@ -3455,6 +3661,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabledResponse AWS API Documentation
     #
     class SetIdentityFeedbackForwardingEnabledResponse < Aws::EmptyStructure; end
 
@@ -3497,6 +3705,8 @@ module Aws::SES
     #   use a particular Amazon SNS topic.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabledRequest AWS API Documentation
+    #
     class SetIdentityHeadersInNotificationsEnabledRequest < Struct.new(
       :identity,
       :notification_type,
@@ -3505,6 +3715,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabledResponse AWS API Documentation
     #
     class SetIdentityHeadersInNotificationsEnabledResponse < Aws::EmptyStructure; end
 
@@ -3557,6 +3769,8 @@ module Aws::SES
     #   `TemporaryFailure` states.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainRequest AWS API Documentation
+    #
     class SetIdentityMailFromDomainRequest < Struct.new(
       :identity,
       :mail_from_domain,
@@ -3565,6 +3779,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomainResponse AWS API Documentation
     #
     class SetIdentityMailFromDomainResponse < Aws::EmptyStructure; end
 
@@ -3604,6 +3820,8 @@ module Aws::SES
     #   `SnsTopic` is cleared and publishing is disabled.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicRequest AWS API Documentation
+    #
     class SetIdentityNotificationTopicRequest < Struct.new(
       :identity,
       :notification_type,
@@ -3612,6 +3830,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopicResponse AWS API Documentation
     #
     class SetIdentityNotificationTopicResponse < Aws::EmptyStructure; end
 
@@ -3647,6 +3867,8 @@ module Aws::SES
     #   receipt rule.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePositionRequest AWS API Documentation
+    #
     class SetReceiptRulePositionRequest < Struct.new(
       :rule_set_name,
       :rule_name,
@@ -3655,6 +3877,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePositionResponse AWS API Documentation
     #
     class SetReceiptRulePositionResponse < Aws::EmptyStructure; end
 
@@ -3693,6 +3917,8 @@ module Aws::SES
     #
     #   [1]: http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/StopAction AWS API Documentation
     #
     class StopAction < Struct.new(
       :scope,
@@ -3743,6 +3969,8 @@ module Aws::SES
     #   configuration set.
     #   @return [Types::EventDestination]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationRequest AWS API Documentation
+    #
     class UpdateConfigurationSetEventDestinationRequest < Struct.new(
       :configuration_set_name,
       :event_destination)
@@ -3750,6 +3978,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
 
@@ -3821,6 +4051,8 @@ module Aws::SES
     #   A data structure that contains the updated receipt rule information.
     #   @return [Types::ReceiptRule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleRequest AWS API Documentation
+    #
     class UpdateReceiptRuleRequest < Struct.new(
       :rule_set_name,
       :rule)
@@ -3828,6 +4060,8 @@ module Aws::SES
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRuleResponse AWS API Documentation
     #
     class UpdateReceiptRuleResponse < Aws::EmptyStructure; end
 
@@ -3849,6 +4083,8 @@ module Aws::SES
     # @!attribute [rw] domain
     #   The name of the domain to be verified for Easy DKIM signing.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkimRequest AWS API Documentation
     #
     class VerifyDomainDkimRequest < Struct.new(
       :domain)
@@ -3878,6 +4114,8 @@ module Aws::SES
     #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim-dns-records.html
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkimResponse AWS API Documentation
+    #
     class VerifyDomainDkimResponse < Struct.new(
       :dkim_tokens)
       include Aws::Structure
@@ -3903,6 +4141,8 @@ module Aws::SES
     #   The domain to be verified.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentityRequest AWS API Documentation
+    #
     class VerifyDomainIdentityRequest < Struct.new(
       :domain)
       include Aws::Structure
@@ -3915,6 +4155,8 @@ module Aws::SES
     #   A TXT record that must be placed in the DNS settings for the domain,
     #   in order to complete domain verification.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentityResponse AWS API Documentation
     #
     class VerifyDomainIdentityResponse < Struct.new(
       :verification_token)
@@ -3940,6 +4182,8 @@ module Aws::SES
     #   The email address to be verified.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailAddressRequest AWS API Documentation
+    #
     class VerifyEmailAddressRequest < Struct.new(
       :email_address)
       include Aws::Structure
@@ -3964,12 +4208,16 @@ module Aws::SES
     #   The email address to be verified.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentityRequest AWS API Documentation
+    #
     class VerifyEmailIdentityRequest < Struct.new(
       :email_address)
       include Aws::Structure
     end
 
     # An empty element returned on a successful request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentityResponse AWS API Documentation
     #
     class VerifyEmailIdentityResponse < Aws::EmptyStructure; end
 
@@ -4017,6 +4265,8 @@ module Aws::SES
     #
     #   [1]: http://docs.aws.amazon.com/workmail/latest/adminguide/organizations_overview.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/WorkmailAction AWS API Documentation
     #
     class WorkmailAction < Struct.new(
       :topic_arn,

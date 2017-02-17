@@ -29,6 +29,8 @@ module Aws::CloudHSM
     #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResourceRequest AWS API Documentation
+    #
     class AddTagsToResourceRequest < Struct.new(
       :resource_arn,
       :tag_list)
@@ -38,6 +40,8 @@ module Aws::CloudHSM
     # @!attribute [rw] status
     #   The status of the operation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResourceResponse AWS API Documentation
     #
     class AddTagsToResourceResponse < Struct.new(
       :status)
@@ -57,6 +61,8 @@ module Aws::CloudHSM
     #   The label of the new high-availability partition group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapgRequest AWS API Documentation
+    #
     class CreateHapgRequest < Struct.new(
       :label)
       include Aws::Structure
@@ -67,6 +73,8 @@ module Aws::CloudHSM
     # @!attribute [rw] hapg_arn
     #   The ARN of the high-availability partition group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapgResponse AWS API Documentation
     #
     class CreateHapgResponse < Struct.new(
       :hapg_arn)
@@ -131,6 +139,8 @@ module Aws::CloudHSM
     #   service only supports one syslog monitoring server.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsmRequest AWS API Documentation
+    #
     class CreateHsmRequest < Struct.new(
       :subnet_id,
       :ssh_key,
@@ -148,6 +158,8 @@ module Aws::CloudHSM
     # @!attribute [rw] hsm_arn
     #   The ARN of the HSM.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsmResponse AWS API Documentation
     #
     class CreateHsmResponse < Struct.new(
       :hsm_arn)
@@ -173,6 +185,8 @@ module Aws::CloudHSM
     #   installed on the HSMs used by this client.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClientRequest AWS API Documentation
+    #
     class CreateLunaClientRequest < Struct.new(
       :label,
       :certificate)
@@ -184,6 +198,8 @@ module Aws::CloudHSM
     # @!attribute [rw] client_arn
     #   The ARN of the client.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClientResponse AWS API Documentation
     #
     class CreateLunaClientResponse < Struct.new(
       :client_arn)
@@ -203,6 +219,8 @@ module Aws::CloudHSM
     #   The ARN of the high-availability partition group to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapgRequest AWS API Documentation
+    #
     class DeleteHapgRequest < Struct.new(
       :hapg_arn)
       include Aws::Structure
@@ -213,6 +231,8 @@ module Aws::CloudHSM
     # @!attribute [rw] status
     #   The status of the action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapgResponse AWS API Documentation
     #
     class DeleteHapgResponse < Struct.new(
       :status)
@@ -232,6 +252,8 @@ module Aws::CloudHSM
     #   The ARN of the HSM to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsmRequest AWS API Documentation
+    #
     class DeleteHsmRequest < Struct.new(
       :hsm_arn)
       include Aws::Structure
@@ -242,6 +264,8 @@ module Aws::CloudHSM
     # @!attribute [rw] status
     #   The status of the operation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsmResponse AWS API Documentation
     #
     class DeleteHsmResponse < Struct.new(
       :status)
@@ -259,6 +283,8 @@ module Aws::CloudHSM
     #   The ARN of the client to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClientRequest AWS API Documentation
+    #
     class DeleteLunaClientRequest < Struct.new(
       :client_arn)
       include Aws::Structure
@@ -267,6 +293,8 @@ module Aws::CloudHSM
     # @!attribute [rw] status
     #   The status of the action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClientResponse AWS API Documentation
     #
     class DeleteLunaClientResponse < Struct.new(
       :status)
@@ -285,6 +313,8 @@ module Aws::CloudHSM
     # @!attribute [rw] hapg_arn
     #   The ARN of the high-availability partition group to describe.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapgRequest AWS API Documentation
     #
     class DescribeHapgRequest < Struct.new(
       :hapg_arn)
@@ -331,6 +361,8 @@ module Aws::CloudHSM
     #   The state of the high-availability partition group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapgResponse AWS API Documentation
+    #
     class DescribeHapgResponse < Struct.new(
       :hapg_arn,
       :hapg_serial,
@@ -363,6 +395,8 @@ module Aws::CloudHSM
     #   The serial number of the HSM. Either the *HsmArn* or the
     #   *HsmSerialNumber* parameter must be specified.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsmRequest AWS API Documentation
     #
     class DescribeHsmRequest < Struct.new(
       :hsm_arn,
@@ -461,6 +495,8 @@ module Aws::CloudHSM
     #   The list of partitions on the HSM.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsmResponse AWS API Documentation
+    #
     class DescribeHsmResponse < Struct.new(
       :hsm_arn,
       :status,
@@ -502,6 +538,8 @@ module Aws::CloudHSM
     #   The certificate fingerprint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClientRequest AWS API Documentation
+    #
     class DescribeLunaClientRequest < Struct.new(
       :client_arn,
       :certificate_fingerprint)
@@ -527,6 +565,8 @@ module Aws::CloudHSM
     # @!attribute [rw] label
     #   The label of the client.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClientResponse AWS API Documentation
     #
     class DescribeLunaClientResponse < Struct.new(
       :client_arn,
@@ -559,6 +599,8 @@ module Aws::CloudHSM
     #   that are associated with the client.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfigRequest AWS API Documentation
+    #
     class GetConfigRequest < Struct.new(
       :client_arn,
       :client_version,
@@ -578,6 +620,8 @@ module Aws::CloudHSM
     #   The certificate file containing the server.pem files of the HSMs.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfigResponse AWS API Documentation
+    #
     class GetConfigResponse < Struct.new(
       :config_type,
       :config_file,
@@ -589,12 +633,16 @@ module Aws::CloudHSM
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZonesRequest AWS API Documentation
+    #
     class ListAvailableZonesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] az_list
     #   The list of Availability Zones that have available AWS CloudHSM
     #   capacity.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZonesResponse AWS API Documentation
     #
     class ListAvailableZonesResponse < Struct.new(
       :az_list)
@@ -613,6 +661,8 @@ module Aws::CloudHSM
     #   if this is the first call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsRequest AWS API Documentation
+    #
     class ListHapgsRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -626,6 +676,8 @@ module Aws::CloudHSM
     #   If not null, more results are available. Pass this value to
     #   ListHapgs to retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgsResponse AWS API Documentation
     #
     class ListHapgsResponse < Struct.new(
       :hapg_list,
@@ -645,6 +697,8 @@ module Aws::CloudHSM
     #   this is the first call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsRequest AWS API Documentation
+    #
     class ListHsmsRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -660,6 +714,8 @@ module Aws::CloudHSM
     #   If not null, more results are available. Pass this value to ListHsms
     #   to retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsmsResponse AWS API Documentation
     #
     class ListHsmsResponse < Struct.new(
       :hsm_list,
@@ -679,6 +735,8 @@ module Aws::CloudHSM
     #   null if this is the first call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClientsRequest AWS API Documentation
+    #
     class ListLunaClientsRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -692,6 +750,8 @@ module Aws::CloudHSM
     #   If not null, more results are available. Pass this to
     #   ListLunaClients to retrieve the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClientsResponse AWS API Documentation
     #
     class ListLunaClientsResponse < Struct.new(
       :client_list,
@@ -710,6 +770,8 @@ module Aws::CloudHSM
     #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResourceRequest AWS API Documentation
+    #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
       include Aws::Structure
@@ -718,6 +780,8 @@ module Aws::CloudHSM
     # @!attribute [rw] tag_list
     #   One or more tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tag_list)
@@ -746,6 +810,8 @@ module Aws::CloudHSM
     #   high-availability partition group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapgRequest AWS API Documentation
+    #
     class ModifyHapgRequest < Struct.new(
       :hapg_arn,
       :label,
@@ -756,6 +822,8 @@ module Aws::CloudHSM
     # @!attribute [rw] hapg_arn
     #   The ARN of the high-availability partition group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapgResponse AWS API Documentation
     #
     class ModifyHapgResponse < Struct.new(
       :hapg_arn)
@@ -807,6 +875,8 @@ module Aws::CloudHSM
     #   CloudHSM service only supports one syslog monitoring server.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsmRequest AWS API Documentation
+    #
     class ModifyHsmRequest < Struct.new(
       :hsm_arn,
       :subnet_id,
@@ -822,6 +892,8 @@ module Aws::CloudHSM
     # @!attribute [rw] hsm_arn
     #   The ARN of the HSM.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsmResponse AWS API Documentation
     #
     class ModifyHsmResponse < Struct.new(
       :hsm_arn)
@@ -844,6 +916,8 @@ module Aws::CloudHSM
     #   The new certificate for the client.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClientRequest AWS API Documentation
+    #
     class ModifyLunaClientRequest < Struct.new(
       :client_arn,
       :certificate)
@@ -853,6 +927,8 @@ module Aws::CloudHSM
     # @!attribute [rw] client_arn
     #   The ARN of the client.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClientResponse AWS API Documentation
     #
     class ModifyLunaClientResponse < Struct.new(
       :client_arn)
@@ -878,6 +954,8 @@ module Aws::CloudHSM
     #   value for an existing tag, use AddTagsToResource.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResourceRequest AWS API Documentation
+    #
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_arn,
       :tag_key_list)
@@ -887,6 +965,8 @@ module Aws::CloudHSM
     # @!attribute [rw] status
     #   The status of the operation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResourceResponse AWS API Documentation
     #
     class RemoveTagsFromResourceResponse < Struct.new(
       :status)
@@ -911,6 +991,8 @@ module Aws::CloudHSM
     # @!attribute [rw] value
     #   The value of the tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,

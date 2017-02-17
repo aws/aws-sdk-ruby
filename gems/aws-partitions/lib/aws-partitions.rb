@@ -245,6 +245,7 @@ module Aws
             'CognitoIdentityProvider' => 'cognito-idp',
             'CognitoSync' => 'cognito-sync',
             'ConfigService' => 'config',
+            'CostandUsageReportService' => 'cur',
             'DataPipeline' => 'datapipeline',
             'DatabaseMigrationService' => 'dms',
             'DeviceFarm' => 'devicefarm',

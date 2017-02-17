@@ -45,6 +45,8 @@ module Aws::Route53Domains
     #   Example value: 12.0
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/BillingRecord AWS API Documentation
+    #
     class BillingRecord < Struct.new(
       :domain_name,
       :operation,
@@ -82,6 +84,8 @@ module Aws::Route53Domains
     #   Reserved for future use.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailabilityRequest AWS API Documentation
+    #
     class CheckDomainAvailabilityRequest < Struct.new(
       :domain_name,
       :idn_lang_code)
@@ -116,6 +120,8 @@ module Aws::Route53Domains
     #     can return this response for a variety of reasons, for example,
     #     the registry is performing maintenance. Try again later.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailabilityResponse AWS API Documentation
     #
     class CheckDomainAvailabilityResponse < Struct.new(
       :availability)
@@ -357,6 +363,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Array<Types::ExtraParam>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ContactDetail AWS API Documentation
+    #
     class ContactDetail < Struct.new(
       :first_name,
       :last_name,
@@ -417,12 +425,16 @@ module Aws::Route53Domains
     #   '>
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomainRequest AWS API Documentation
+    #
     class DeleteTagsForDomainRequest < Struct.new(
       :domain_name,
       :tags_to_delete)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomainResponse AWS API Documentation
+    #
     class DeleteTagsForDomainResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisableDomainAutoRenewRequest
@@ -435,11 +447,15 @@ module Aws::Route53Domains
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenewRequest AWS API Documentation
+    #
     class DisableDomainAutoRenewRequest < Struct.new(
       :domain_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenewResponse AWS API Documentation
+    #
     class DisableDomainAutoRenewResponse < Aws::EmptyStructure; end
 
     # The DisableDomainTransferLock request includes the following element.
@@ -465,6 +481,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLockRequest AWS API Documentation
+    #
     class DisableDomainTransferLockRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -483,6 +501,8 @@ module Aws::Route53Domains
     #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLockResponse AWS API Documentation
+    #
     class DisableDomainTransferLockResponse < Struct.new(
       :operation_id)
       include Aws::Structure
@@ -493,6 +513,8 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] availability
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSuggestion AWS API Documentation
     #
     class DomainSuggestion < Struct.new(
       :domain_name,
@@ -530,6 +552,8 @@ module Aws::Route53Domains
     #   Type: Long
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSummary AWS API Documentation
+    #
     class DomainSummary < Struct.new(
       :domain_name,
       :auto_renew,
@@ -548,11 +572,15 @@ module Aws::Route53Domains
     # @!attribute [rw] domain_name
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenewRequest AWS API Documentation
+    #
     class EnableDomainAutoRenewRequest < Struct.new(
       :domain_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenewResponse AWS API Documentation
+    #
     class EnableDomainAutoRenewResponse < Aws::EmptyStructure; end
 
     # The EnableDomainTransferLock request includes the following element.
@@ -578,6 +606,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLockRequest AWS API Documentation
+    #
     class EnableDomainTransferLockRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -595,6 +625,8 @@ module Aws::Route53Domains
     #
     #   Constraints: Maximum 255 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLockResponse AWS API Documentation
     #
     class EnableDomainTransferLockResponse < Struct.new(
       :operation_id)
@@ -647,6 +679,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ExtraParam AWS API Documentation
+    #
     class ExtraParam < Struct.new(
       :name,
       :value)
@@ -671,6 +705,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatusRequest AWS API Documentation
+    #
     class GetContactReachabilityStatusRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -691,6 +727,8 @@ module Aws::Route53Domains
     #
     #   Valid values: `PENDING`, `DONE`, `EXPIRED`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatusResponse AWS API Documentation
     #
     class GetContactReachabilityStatusResponse < Struct.new(
       :domain_name,
@@ -720,6 +758,8 @@ module Aws::Route53Domains
     #
     #   Required: Yes
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailRequest AWS API Documentation
     #
     class GetDomainDetailRequest < Struct.new(
       :domain_name)
@@ -896,6 +936,8 @@ module Aws::Route53Domains
     #   [1]: https://www.icann.org/
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailResponse AWS API Documentation
+    #
     class GetDomainDetailResponse < Struct.new(
       :domain_name,
       :nameservers,
@@ -939,6 +981,8 @@ module Aws::Route53Domains
     # @!attribute [rw] only_available
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestionsRequest AWS API Documentation
+    #
     class GetDomainSuggestionsRequest < Struct.new(
       :domain_name,
       :suggestion_count,
@@ -948,6 +992,8 @@ module Aws::Route53Domains
 
     # @!attribute [rw] suggestions_list
     #   @return [Array<Types::DomainSuggestion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestionsResponse AWS API Documentation
     #
     class GetDomainSuggestionsResponse < Struct.new(
       :suggestions_list)
@@ -974,6 +1020,8 @@ module Aws::Route53Domains
     #
     #   Required: Yes
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetailRequest AWS API Documentation
     #
     class GetOperationDetailRequest < Struct.new(
       :operation_id)
@@ -1015,6 +1063,8 @@ module Aws::Route53Domains
     # @!attribute [rw] submitted_date
     #   The date when the request was submitted.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetailResponse AWS API Documentation
     #
     class GetOperationDetailResponse < Struct.new(
       :operation_id,
@@ -1067,6 +1117,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomainsRequest AWS API Documentation
+    #
     class ListDomainsRequest < Struct.new(
       :marker,
       :max_items)
@@ -1092,6 +1144,8 @@ module Aws::Route53Domains
     #
     #   Parent: `Operations`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomainsResponse AWS API Documentation
     #
     class ListDomainsResponse < Struct.new(
       :domains,
@@ -1137,6 +1191,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsRequest AWS API Documentation
+    #
     class ListOperationsRequest < Struct.new(
       :marker,
       :max_items)
@@ -1163,6 +1219,8 @@ module Aws::Route53Domains
     #   Parent: `Operations`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsResponse AWS API Documentation
+    #
     class ListOperationsResponse < Struct.new(
       :operations,
       :next_page_marker)
@@ -1181,6 +1239,8 @@ module Aws::Route53Domains
     # @!attribute [rw] domain_name
     #   The domain for which you want to get a list of tags.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomainRequest AWS API Documentation
     #
     class ListTagsForDomainRequest < Struct.new(
       :domain_name)
@@ -1208,6 +1268,8 @@ module Aws::Route53Domains
     #
     #     Type: String
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomainResponse AWS API Documentation
     #
     class ListTagsForDomainResponse < Struct.new(
       :tag_list)
@@ -1249,6 +1311,8 @@ module Aws::Route53Domains
     #   Parent: `Nameservers`
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Nameserver AWS API Documentation
+    #
     class Nameserver < Struct.new(
       :name,
       :glue_ips)
@@ -1282,6 +1346,8 @@ module Aws::Route53Domains
     # @!attribute [rw] submitted_date
     #   The date when the request was submitted.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/OperationSummary AWS API Documentation
     #
     class OperationSummary < Struct.new(
       :operation_id,
@@ -1499,6 +1565,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainRequest AWS API Documentation
+    #
     class RegisterDomainRequest < Struct.new(
       :domain_name,
       :idn_lang_code,
@@ -1525,6 +1593,8 @@ module Aws::Route53Domains
     #
     #   Constraints: Maximum 255 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainResponse AWS API Documentation
     #
     class RegisterDomainResponse < Struct.new(
       :operation_id)
@@ -1579,6 +1649,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomainRequest AWS API Documentation
+    #
     class RenewDomainRequest < Struct.new(
       :domain_name,
       :duration_in_years,
@@ -1588,6 +1660,8 @@ module Aws::Route53Domains
 
     # @!attribute [rw] operation_id
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomainResponse AWS API Documentation
     #
     class RenewDomainResponse < Struct.new(
       :operation_id)
@@ -1612,6 +1686,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmailRequest AWS API Documentation
+    #
     class ResendContactReachabilityEmailRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -1631,6 +1707,8 @@ module Aws::Route53Domains
     #   been verified, and false otherwise. If the email address has already
     #   been verified, we don't send another confirmation email.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmailResponse AWS API Documentation
     #
     class ResendContactReachabilityEmailResponse < Struct.new(
       :domain_name,
@@ -1662,6 +1740,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCodeRequest AWS API Documentation
+    #
     class RetrieveDomainAuthCodeRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -1674,6 +1754,8 @@ module Aws::Route53Domains
     #
     #   Type: String
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCodeResponse AWS API Documentation
     #
     class RetrieveDomainAuthCodeResponse < Struct.new(
       :auth_code)
@@ -1717,6 +1799,8 @@ module Aws::Route53Domains
     #
     #   Required: Yes
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -1958,6 +2042,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainRequest AWS API Documentation
+    #
     class TransferDomainRequest < Struct.new(
       :domain_name,
       :idn_lang_code,
@@ -1986,6 +2072,8 @@ module Aws::Route53Domains
     #
     #   Constraints: Maximum 255 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainResponse AWS API Documentation
     #
     class TransferDomainResponse < Struct.new(
       :operation_id)
@@ -2064,6 +2152,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacyRequest AWS API Documentation
+    #
     class UpdateDomainContactPrivacyRequest < Struct.new(
       :domain_name,
       :admin_privacy,
@@ -2085,6 +2175,8 @@ module Aws::Route53Domains
     #
     #   Constraints: Maximum 255 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacyResponse AWS API Documentation
     #
     class UpdateDomainContactPrivacyResponse < Struct.new(
       :operation_id)
@@ -2216,6 +2308,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [Types::ContactDetail]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactRequest AWS API Documentation
+    #
     class UpdateDomainContactRequest < Struct.new(
       :domain_name,
       :admin_contact,
@@ -2236,6 +2330,8 @@ module Aws::Route53Domains
     #
     #   Constraints: Maximum 255 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactResponse AWS API Documentation
     #
     class UpdateDomainContactResponse < Struct.new(
       :operation_id)
@@ -2286,6 +2382,8 @@ module Aws::Route53Domains
     #   Required: Yes
     #   @return [Array<Types::Nameserver>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameserversRequest AWS API Documentation
+    #
     class UpdateDomainNameserversRequest < Struct.new(
       :domain_name,
       :fi_auth_key,
@@ -2305,6 +2403,8 @@ module Aws::Route53Domains
     #
     #   Constraints: Maximum 255 characters.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameserversResponse AWS API Documentation
     #
     class UpdateDomainNameserversResponse < Struct.new(
       :operation_id)
@@ -2389,12 +2489,16 @@ module Aws::Route53Domains
     #     Required: Yes
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomainRequest AWS API Documentation
+    #
     class UpdateTagsForDomainRequest < Struct.new(
       :domain_name,
       :tags_to_update)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomainResponse AWS API Documentation
+    #
     class UpdateTagsForDomainResponse < Aws::EmptyStructure; end
 
     # The ViewBilling request includes the following elements.
@@ -2462,6 +2566,8 @@ module Aws::Route53Domains
     #   Required: No
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBillingRequest AWS API Documentation
+    #
     class ViewBillingRequest < Struct.new(
       :start,
       :end,
@@ -2490,6 +2596,8 @@ module Aws::Route53Domains
     #   Children: `DomainName`, `Operation`, `InvoiceId`, `BillDate` and
     #   `Price`
     #   @return [Array<Types::BillingRecord>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBillingResponse AWS API Documentation
     #
     class ViewBillingResponse < Struct.new(
       :next_page_marker,

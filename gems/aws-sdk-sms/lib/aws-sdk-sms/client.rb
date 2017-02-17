@@ -198,6 +198,8 @@ module Aws::SMS
     #
     #   resp.replication_job_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJob AWS API Documentation
+    #
     # @overload create_replication_job(params = {})
     # @param [Hash] params ({})
     def create_replication_job(params = {}, options = {})
@@ -221,6 +223,8 @@ module Aws::SMS
     #     replication_job_id: "ReplicationJobId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJob AWS API Documentation
+    #
     # @overload delete_replication_job(params = {})
     # @param [Hash] params ({})
     def delete_replication_job(params = {}, options = {})
@@ -233,6 +237,8 @@ module Aws::SMS
     # the Server Migration Service.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalog AWS API Documentation
     #
     # @overload delete_server_catalog(params = {})
     # @param [Hash] params ({})
@@ -255,6 +261,8 @@ module Aws::SMS
     #   resp = client.disassociate_connector({
     #     connector_id: "ConnectorId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnector AWS API Documentation
     #
     # @overload disassociate_connector(params = {})
     # @param [Hash] params ({})
@@ -300,6 +308,8 @@ module Aws::SMS
     #   resp.connector_list[0].mac_address #=> String
     #   resp.connector_list[0].associated_on #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectors AWS API Documentation
     #
     # @overload get_connectors(params = {})
     # @param [Hash] params ({})
@@ -366,6 +376,8 @@ module Aws::SMS
     #   resp.replication_job_list[0].replication_run_list[0].completed_time #=> Time
     #   resp.replication_job_list[0].replication_run_list[0].description #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobs AWS API Documentation
     #
     # @overload get_replication_jobs(params = {})
     # @param [Hash] params ({})
@@ -443,6 +455,8 @@ module Aws::SMS
     #   resp.replication_run_list[0].description #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRuns AWS API Documentation
+    #
     # @overload get_replication_runs(params = {})
     # @param [Hash] params ({})
     def get_replication_runs(params = {}, options = {})
@@ -492,6 +506,8 @@ module Aws::SMS
     #   resp.server_list[0].replication_job_terminated #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServers AWS API Documentation
+    #
     # @overload get_servers(params = {})
     # @param [Hash] params ({})
     def get_servers(params = {}, options = {})
@@ -506,6 +522,8 @@ module Aws::SMS
     # retrieve all of the servers.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalog AWS API Documentation
     #
     # @overload import_server_catalog(params = {})
     # @param [Hash] params ({})
@@ -540,6 +558,8 @@ module Aws::SMS
     # @example Response structure
     #
     #   resp.replication_run_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRun AWS API Documentation
     #
     # @overload start_on_demand_replication_run(params = {})
     # @param [Hash] params ({})
@@ -584,6 +604,8 @@ module Aws::SMS
     #     role_name: "RoleName",
     #     description: "Description",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJob AWS API Documentation
     #
     # @overload update_replication_job(params = {})
     # @param [Hash] params ({})

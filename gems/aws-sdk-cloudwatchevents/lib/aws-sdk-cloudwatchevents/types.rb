@@ -21,6 +21,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest AWS API Documentation
+    #
     class DeleteRuleRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -38,6 +40,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] name
     #   The name of the rule you want to describe details for.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleRequest AWS API Documentation
     #
     class DescribeRuleRequest < Struct.new(
       :name)
@@ -76,6 +80,8 @@ module Aws::CloudWatchEvents
     #   rule.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleResponse AWS API Documentation
+    #
     class DescribeRuleResponse < Struct.new(
       :name,
       :arn,
@@ -100,6 +106,8 @@ module Aws::CloudWatchEvents
     #   The name of the rule you want to disable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleRequest AWS API Documentation
+    #
     class DisableRuleRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -117,6 +125,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] name
     #   The name of the rule that you want to enable.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleRequest AWS API Documentation
     #
     class EnableRuleRequest < Struct.new(
       :name)
@@ -148,6 +158,8 @@ module Aws::CloudWatchEvents
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetRequest AWS API Documentation
+    #
     class ListRuleNamesByTargetRequest < Struct.new(
       :target_arn,
       :next_token,
@@ -164,6 +176,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] next_token
     #   Indicates that there are additional results to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetResponse AWS API Documentation
     #
     class ListRuleNamesByTargetResponse < Struct.new(
       :rule_names,
@@ -195,6 +209,8 @@ module Aws::CloudWatchEvents
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesRequest AWS API Documentation
+    #
     class ListRulesRequest < Struct.new(
       :name_prefix,
       :next_token,
@@ -211,6 +227,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] next_token
     #   Indicates that there are additional results to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesResponse AWS API Documentation
     #
     class ListRulesResponse < Struct.new(
       :rules,
@@ -242,6 +260,8 @@ module Aws::CloudWatchEvents
     #   The maximum number of results to return.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleRequest AWS API Documentation
+    #
     class ListTargetsByRuleRequest < Struct.new(
       :rule,
       :next_token,
@@ -258,6 +278,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] next_token
     #   Indicates that there are additional results to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleResponse AWS API Documentation
     #
     class ListTargetsByRuleResponse < Struct.new(
       :targets,
@@ -287,6 +309,8 @@ module Aws::CloudWatchEvents
     #   several parameters for the entry such as the source and type of the
     #   event, resources associated with the event, and so on.
     #   @return [Array<Types::PutEventsRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequest AWS API Documentation
     #
     class PutEventsRequest < Struct.new(
       :entries)
@@ -336,6 +360,8 @@ module Aws::CloudWatchEvents
     #   contents.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsRequestEntry AWS API Documentation
+    #
     class PutEventsRequestEntry < Struct.new(
       :time,
       :source,
@@ -358,6 +384,8 @@ module Aws::CloudWatchEvents
     #   identify the problem with the entry.
     #   @return [Array<Types::PutEventsResultEntry>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResponse AWS API Documentation
+    #
     class PutEventsResponse < Struct.new(
       :failed_entry_count,
       :entries)
@@ -379,6 +407,8 @@ module Aws::CloudWatchEvents
     #   The error message explaining why the event submission failed on this
     #   entry.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResultEntry AWS API Documentation
     #
     class PutEventsResultEntry < Struct.new(
       :event_id,
@@ -427,6 +457,8 @@ module Aws::CloudWatchEvents
     #   rule.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleRequest AWS API Documentation
+    #
     class PutRuleRequest < Struct.new(
       :name,
       :schedule_expression,
@@ -442,6 +474,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] rule_arn
     #   The Amazon Resource Name (ARN) that identifies the rule.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleResponse AWS API Documentation
     #
     class PutRuleResponse < Struct.new(
       :rule_arn)
@@ -473,6 +507,8 @@ module Aws::CloudWatchEvents
     #   List of targets you want to update or add to the rule.
     #   @return [Array<Types::Target>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsRequest AWS API Documentation
+    #
     class PutTargetsRequest < Struct.new(
       :rule,
       :targets)
@@ -488,6 +524,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] failed_entries
     #   An array of failed target entries.
     #   @return [Array<Types::PutTargetsResultEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResponse AWS API Documentation
     #
     class PutTargetsResponse < Struct.new(
       :failed_entry_count,
@@ -510,6 +548,8 @@ module Aws::CloudWatchEvents
     #   The error message explaining why the target submission failed on
     #   this entry.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResultEntry AWS API Documentation
     #
     class PutTargetsResultEntry < Struct.new(
       :target_id,
@@ -536,6 +576,8 @@ module Aws::CloudWatchEvents
     #   The list of target IDs to remove from the rule.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsRequest AWS API Documentation
+    #
     class RemoveTargetsRequest < Struct.new(
       :rule,
       :ids)
@@ -551,6 +593,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] failed_entries
     #   An array of failed target entries.
     #   @return [Array<Types::RemoveTargetsResultEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResponse AWS API Documentation
     #
     class RemoveTargetsResponse < Struct.new(
       :failed_entry_count,
@@ -575,6 +619,8 @@ module Aws::CloudWatchEvents
     #   The error message explaining why the target removal failed on this
     #   entry.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResultEntry AWS API Documentation
     #
     class RemoveTargetsResultEntry < Struct.new(
       :target_id,
@@ -615,6 +661,8 @@ module Aws::CloudWatchEvents
     #   The Amazon Resource Name (ARN) associated with the role that is used
     #   for target invocation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule AWS API Documentation
     #
     class Rule < Struct.new(
       :name,
@@ -682,6 +730,8 @@ module Aws::CloudWatchEvents
     #   [1]: http://goessner.net/articles/JsonPath/
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation
+    #
     class Target < Struct.new(
       :id,
       :arn,
@@ -708,6 +758,8 @@ module Aws::CloudWatchEvents
     #   The event in the JSON format to test against the event pattern.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternRequest AWS API Documentation
+    #
     class TestEventPatternRequest < Struct.new(
       :event_pattern,
       :event)
@@ -719,6 +771,8 @@ module Aws::CloudWatchEvents
     # @!attribute [rw] result
     #   Indicates whether the event matches the event pattern.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternResponse AWS API Documentation
     #
     class TestEventPatternResponse < Struct.new(
       :result)

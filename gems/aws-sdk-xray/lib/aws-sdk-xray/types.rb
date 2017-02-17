@@ -22,6 +22,8 @@ module Aws::XRay
     #   The type of the alias.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Alias AWS API Documentation
+    #
     class Alias < Struct.new(
       :name,
       :names,
@@ -43,6 +45,8 @@ module Aws::XRay
     # @!attribute [rw] string_value
     #   Value for a String annotation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/AnnotationValue AWS API Documentation
     #
     class AnnotationValue < Struct.new(
       :number_value,
@@ -81,6 +85,8 @@ module Aws::XRay
     # @!attribute [rw] other_count
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BackendConnectionErrors AWS API Documentation
+    #
     class BackendConnectionErrors < Struct.new(
       :timeout_count,
       :connection_refused_count,
@@ -107,6 +113,8 @@ module Aws::XRay
     #   Pagination token. Not used.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTracesRequest AWS API Documentation
+    #
     class BatchGetTracesRequest < Struct.new(
       :trace_ids,
       :next_token)
@@ -124,6 +132,8 @@ module Aws::XRay
     # @!attribute [rw] next_token
     #   Pagination token. Not used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTracesResult AWS API Documentation
     #
     class BatchGetTracesResult < Struct.new(
       :traces,
@@ -157,6 +167,8 @@ module Aws::XRay
     # @!attribute [rw] aliases
     #   Aliases for the edge.
     #   @return [Array<Types::Alias>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Edge AWS API Documentation
     #
     class Edge < Struct.new(
       :reference_id,
@@ -193,6 +205,8 @@ module Aws::XRay
     #   The aggregate response time of completed requests.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/EdgeStatistics AWS API Documentation
+    #
     class EdgeStatistics < Struct.new(
       :ok_count,
       :error_statistics,
@@ -220,6 +234,8 @@ module Aws::XRay
     #   status code.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorStatistics AWS API Documentation
+    #
     class ErrorStatistics < Struct.new(
       :throttle_count,
       :other_count,
@@ -239,6 +255,8 @@ module Aws::XRay
     #   The total number of requests that failed with a 5xx Server Error
     #   status code.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/FaultStatistics AWS API Documentation
     #
     class FaultStatistics < Struct.new(
       :other_count,
@@ -267,6 +285,8 @@ module Aws::XRay
     #   Pagination token. Not used.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraphRequest AWS API Documentation
+    #
     class GetServiceGraphRequest < Struct.new(
       :start_time,
       :end_time,
@@ -290,6 +310,8 @@ module Aws::XRay
     # @!attribute [rw] next_token
     #   Pagination token. Not used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraphResult AWS API Documentation
     #
     class GetServiceGraphResult < Struct.new(
       :start_time,
@@ -315,6 +337,8 @@ module Aws::XRay
     #   Pagination token. Not used.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraphRequest AWS API Documentation
+    #
     class GetTraceGraphRequest < Struct.new(
       :trace_ids,
       :next_token)
@@ -328,6 +352,8 @@ module Aws::XRay
     # @!attribute [rw] next_token
     #   Pagination token. Not used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraphResult AWS API Documentation
     #
     class GetTraceGraphResult < Struct.new(
       :services,
@@ -369,6 +395,8 @@ module Aws::XRay
     #   retrieve the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesRequest AWS API Documentation
+    #
     class GetTraceSummariesRequest < Struct.new(
       :start_time,
       :end_time,
@@ -399,6 +427,8 @@ module Aws::XRay
     #   time frame.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummariesResult AWS API Documentation
+    #
     class GetTraceSummariesResult < Struct.new(
       :trace_summaries,
       :approximate_time,
@@ -418,6 +448,8 @@ module Aws::XRay
     # @!attribute [rw] count
     #   The prevalence of the entry.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/HistogramEntry AWS API Documentation
     #
     class HistogramEntry < Struct.new(
       :value,
@@ -446,6 +478,8 @@ module Aws::XRay
     # @!attribute [rw] client_ip
     #   The IP address of the requestor.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Http AWS API Documentation
     #
     class Http < Struct.new(
       :http_url,
@@ -494,6 +528,8 @@ module Aws::XRay
     # @!attribute [rw] resource_arn
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecordsRequest AWS API Documentation
+    #
     class PutTelemetryRecordsRequest < Struct.new(
       :telemetry_records,
       :ec2_instance_id,
@@ -502,6 +538,8 @@ module Aws::XRay
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecordsResult AWS API Documentation
+    #
     class PutTelemetryRecordsResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutTraceSegmentsRequest
@@ -555,6 +593,8 @@ module Aws::XRay
     #     hexadecimal digits.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsRequest AWS API Documentation
+    #
     class PutTraceSegmentsRequest < Struct.new(
       :trace_segment_documents)
       include Aws::Structure
@@ -563,6 +603,8 @@ module Aws::XRay
     # @!attribute [rw] unprocessed_trace_segments
     #   Segments that failed processing.
     #   @return [Array<Types::UnprocessedTraceSegment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegmentsResult AWS API Documentation
     #
     class PutTraceSegmentsResult < Struct.new(
       :unprocessed_trace_segments)
@@ -578,6 +620,8 @@ module Aws::XRay
     # @!attribute [rw] document
     #   The segment document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Segment AWS API Documentation
     #
     class Segment < Struct.new(
       :id,
@@ -652,6 +696,8 @@ module Aws::XRay
     #   Histogram mapping the spread of trace durations
     #   @return [Array<Types::HistogramEntry>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Service AWS API Documentation
+    #
     class Service < Struct.new(
       :reference_id,
       :name,
@@ -679,6 +725,8 @@ module Aws::XRay
     #
     # @!attribute [rw] type
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ServiceId AWS API Documentation
     #
     class ServiceId < Struct.new(
       :name,
@@ -712,6 +760,8 @@ module Aws::XRay
     # @!attribute [rw] total_response_time
     #   The aggregate response time of completed requests.
     #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ServiceStatistics AWS API Documentation
     #
     class ServiceStatistics < Struct.new(
       :ok_count,
@@ -759,6 +809,8 @@ module Aws::XRay
     # @!attribute [rw] backend_connection_errors
     #   @return [Types::BackendConnectionErrors]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TelemetryRecord AWS API Documentation
+    #
     class TelemetryRecord < Struct.new(
       :timestamp,
       :segments_received_count,
@@ -785,6 +837,8 @@ module Aws::XRay
     #   Segment documents for the segments and subsegments that comprise the
     #   trace.
     #   @return [Array<Types::Segment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Trace AWS API Documentation
     #
     class Trace < Struct.new(
       :id,
@@ -845,6 +899,8 @@ module Aws::XRay
     #   Service IDs from the trace's segment documents.
     #   @return [Array<Types::ServiceId>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceSummary AWS API Documentation
+    #
     class TraceSummary < Struct.new(
       :id,
       :duration,
@@ -870,6 +926,8 @@ module Aws::XRay
     #   Services that the user's request hit.
     #   @return [Array<Types::ServiceId>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/TraceUser AWS API Documentation
+    #
     class TraceUser < Struct.new(
       :user_name,
       :service_ids)
@@ -890,6 +948,8 @@ module Aws::XRay
     #   The error message.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UnprocessedTraceSegment AWS API Documentation
+    #
     class UnprocessedTraceSegment < Struct.new(
       :id,
       :error_code,
@@ -906,6 +966,8 @@ module Aws::XRay
     # @!attribute [rw] service_ids
     #   Services to which the annotation applies.
     #   @return [Array<Types::ServiceId>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ValueWithServiceIds AWS API Documentation
     #
     class ValueWithServiceIds < Struct.new(
       :annotation_value,

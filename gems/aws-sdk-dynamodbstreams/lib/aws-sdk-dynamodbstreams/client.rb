@@ -210,6 +210,8 @@ module Aws::DynamoDBStreams
     #   resp.stream_description.shards[0].parent_shard_id #=> String
     #   resp.stream_description.last_evaluated_shard_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStream AWS API Documentation
+    #
     # @overload describe_stream(params = {})
     # @param [Hash] params ({})
     def describe_stream(params = {}, options = {})
@@ -272,6 +274,8 @@ module Aws::DynamoDBStreams
     #   resp.records[0].dynamodb.size_bytes #=> Integer
     #   resp.records[0].dynamodb.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.next_shard_iterator #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords AWS API Documentation
     #
     # @overload get_records(params = {})
     # @param [Hash] params ({})
@@ -338,6 +342,8 @@ module Aws::DynamoDBStreams
     #
     #   resp.shard_iterator #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIterator AWS API Documentation
+    #
     # @overload get_shard_iterator(params = {})
     # @param [Hash] params ({})
     def get_shard_iterator(params = {}, options = {})
@@ -385,6 +391,8 @@ module Aws::DynamoDBStreams
     #   resp.streams[0].table_name #=> String
     #   resp.streams[0].stream_label #=> String
     #   resp.last_evaluated_stream_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreams AWS API Documentation
     #
     # @overload list_streams(params = {})
     # @param [Hash] params ({})

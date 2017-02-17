@@ -33,12 +33,16 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareInput AWS API Documentation
+    #
     class AcceptPortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareOutput AWS API Documentation
+    #
     class AcceptPortfolioShareOutput < Aws::EmptyStructure; end
 
     # The access level to limit results.
@@ -66,6 +70,8 @@ module Aws::ServiceCatalog
     #   Specifies the user to which the access level applies. A value of
     #   `Self` is currently supported.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AccessLevelFilter AWS API Documentation
     #
     class AccessLevelFilter < Struct.new(
       :key,
@@ -108,6 +114,8 @@ module Aws::ServiceCatalog
     #   The principal type. Must be `IAM`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioInput AWS API Documentation
+    #
     class AssociatePrincipalWithPortfolioInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -116,6 +124,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolioOutput AWS API Documentation
+    #
     class AssociatePrincipalWithPortfolioOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass AssociateProductWithPortfolioInput
@@ -153,6 +163,8 @@ module Aws::ServiceCatalog
     #   The identifier of the source portfolio to use with this association.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolioInput AWS API Documentation
+    #
     class AssociateProductWithPortfolioInput < Struct.new(
       :accept_language,
       :product_id,
@@ -161,6 +173,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolioOutput AWS API Documentation
+    #
     class AssociateProductWithPortfolioOutput < Aws::EmptyStructure; end
 
     # Detailed constraint information.
@@ -181,6 +195,8 @@ module Aws::ServiceCatalog
     #   The owner of the constraint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail AWS API Documentation
+    #
     class ConstraintDetail < Struct.new(
       :constraint_id,
       :type,
@@ -199,6 +215,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] description
     #   The text description of the constraint.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintSummary AWS API Documentation
     #
     class ConstraintSummary < Struct.new(
       :type,
@@ -261,6 +279,8 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraintInput AWS API Documentation
+    #
     class CreateConstraintInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -283,6 +303,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] status
     #   The status of the current request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraintOutput AWS API Documentation
     #
     class CreateConstraintOutput < Struct.new(
       :constraint_detail,
@@ -346,6 +368,8 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioInput AWS API Documentation
+    #
     class CreatePortfolioInput < Struct.new(
       :accept_language,
       :display_name,
@@ -363,6 +387,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] tags
     #   Tags successfully associated with the new portfolio.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioOutput AWS API Documentation
     #
     class CreatePortfolioOutput < Struct.new(
       :portfolio_detail,
@@ -400,6 +426,8 @@ module Aws::ServiceCatalog
     #   The account ID with which to share the portfolio.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareInput AWS API Documentation
+    #
     class CreatePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -407,6 +435,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShareOutput AWS API Documentation
+    #
     class CreatePortfolioShareOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CreateProductInput
@@ -501,6 +531,8 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProductInput AWS API Documentation
+    #
     class CreateProductInput < Struct.new(
       :accept_language,
       :name,
@@ -528,6 +560,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] tags
     #   Tags successfully associated with the new product.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProductOutput AWS API Documentation
     #
     class CreateProductOutput < Struct.new(
       :product_view_detail,
@@ -583,6 +617,8 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifactInput AWS API Documentation
+    #
     class CreateProvisioningArtifactInput < Struct.new(
       :accept_language,
       :product_id,
@@ -603,6 +639,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] status
     #   The status of the current request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifactOutput AWS API Documentation
     #
     class CreateProvisioningArtifactOutput < Struct.new(
       :provisioning_artifact_detail,
@@ -636,12 +674,16 @@ module Aws::ServiceCatalog
     #   The identifier of the constraint to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraintInput AWS API Documentation
+    #
     class DeleteConstraintInput < Struct.new(
       :accept_language,
       :id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraintOutput AWS API Documentation
+    #
     class DeleteConstraintOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePortfolioInput
@@ -669,12 +711,16 @@ module Aws::ServiceCatalog
     #   The identifier of the portfolio for the delete request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioInput AWS API Documentation
+    #
     class DeletePortfolioInput < Struct.new(
       :accept_language,
       :id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioOutput AWS API Documentation
+    #
     class DeletePortfolioOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePortfolioShareInput
@@ -707,6 +753,8 @@ module Aws::ServiceCatalog
     #   The account ID associated with the share to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareInput AWS API Documentation
+    #
     class DeletePortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -714,6 +762,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShareOutput AWS API Documentation
+    #
     class DeletePortfolioShareOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProductInput
@@ -741,12 +791,16 @@ module Aws::ServiceCatalog
     #   The identifier of the product for the delete request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductInput AWS API Documentation
+    #
     class DeleteProductInput < Struct.new(
       :accept_language,
       :id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProductOutput AWS API Documentation
+    #
     class DeleteProductOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteProvisioningArtifactInput
@@ -779,6 +833,8 @@ module Aws::ServiceCatalog
     #   The identifier of the provisioning artifact for the delete request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactInput AWS API Documentation
+    #
     class DeleteProvisioningArtifactInput < Struct.new(
       :accept_language,
       :product_id,
@@ -786,6 +842,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactOutput AWS API Documentation
+    #
     class DeleteProvisioningArtifactOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeConstraintInput
@@ -813,6 +871,8 @@ module Aws::ServiceCatalog
     #   The identifier of the constraint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraintInput AWS API Documentation
+    #
     class DescribeConstraintInput < Struct.new(
       :accept_language,
       :id)
@@ -830,6 +890,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] status
     #   The status of the current request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraintOutput AWS API Documentation
     #
     class DescribeConstraintOutput < Struct.new(
       :constraint_detail,
@@ -863,6 +925,8 @@ module Aws::ServiceCatalog
     #   The identifier of the portfolio for which to retrieve information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioInput AWS API Documentation
+    #
     class DescribePortfolioInput < Struct.new(
       :accept_language,
       :id)
@@ -876,6 +940,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] tags
     #   Tags associated with the portfolio.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolioOutput AWS API Documentation
     #
     class DescribePortfolioOutput < Struct.new(
       :portfolio_detail,
@@ -908,6 +974,8 @@ module Aws::ServiceCatalog
     #   The identifier of the product for which to retrieve information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminInput AWS API Documentation
+    #
     class DescribeProductAsAdminInput < Struct.new(
       :accept_language,
       :id)
@@ -921,6 +989,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] tags
     #   Tags associated with the product.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdminOutput AWS API Documentation
     #
     class DescribeProductAsAdminOutput < Struct.new(
       :product_view_detail,
@@ -953,6 +1023,8 @@ module Aws::ServiceCatalog
     #   The `ProductId` of the product to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductInput AWS API Documentation
+    #
     class DescribeProductInput < Struct.new(
       :accept_language,
       :id)
@@ -968,6 +1040,8 @@ module Aws::ServiceCatalog
     #   The `ProvisioningArtifacts` parameter represent the ways the
     #   specified product can be provisioned.
     #   @return [Array<Types::ProvisioningArtifact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductOutput AWS API Documentation
     #
     class DescribeProductOutput < Struct.new(
       :product_view_summary,
@@ -1000,6 +1074,8 @@ module Aws::ServiceCatalog
     #   The `ProductViewId` of the product to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductViewInput AWS API Documentation
+    #
     class DescribeProductViewInput < Struct.new(
       :accept_language,
       :id)
@@ -1015,6 +1091,8 @@ module Aws::ServiceCatalog
     #   The `ProvisioningArtifacts` represent the ways in which the
     #   specified product can be provisioned.
     #   @return [Array<Types::ProvisioningArtifact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductViewOutput AWS API Documentation
     #
     class DescribeProductViewOutput < Struct.new(
       :product_view_summary,
@@ -1052,6 +1130,8 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactInput AWS API Documentation
+    #
     class DescribeProvisioningArtifactInput < Struct.new(
       :accept_language,
       :provisioning_artifact_id,
@@ -1070,6 +1150,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] status
     #   The status of the current request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifactOutput AWS API Documentation
     #
     class DescribeProvisioningArtifactOutput < Struct.new(
       :provisioning_artifact_detail,
@@ -1115,6 +1197,8 @@ module Aws::ServiceCatalog
     #   if there is more than one path for the specified product.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersInput AWS API Documentation
+    #
     class DescribeProvisioningParametersInput < Struct.new(
       :accept_language,
       :product_id,
@@ -1139,6 +1223,8 @@ module Aws::ServiceCatalog
     #   the product. For example, see the `Version` field of the
     #   CloudFormation template.
     #   @return [Array<Types::UsageInstruction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
       :provisioning_artifact_parameters,
@@ -1187,6 +1273,8 @@ module Aws::ServiceCatalog
     #   `NextPageToken` in the response is non-null.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecordInput AWS API Documentation
+    #
     class DescribeRecordInput < Struct.new(
       :accept_language,
       :id,
@@ -1210,6 +1298,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecordOutput AWS API Documentation
     #
     class DescribeRecordOutput < Struct.new(
       :record_detail,
@@ -1248,6 +1338,8 @@ module Aws::ServiceCatalog
     #   The ARN representing the principal (IAM user, role, or group).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioInput AWS API Documentation
+    #
     class DisassociatePrincipalFromPortfolioInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -1255,6 +1347,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolioOutput AWS API Documentation
+    #
     class DisassociatePrincipalFromPortfolioOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateProductFromPortfolioInput
@@ -1287,6 +1381,8 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolioInput AWS API Documentation
+    #
     class DisassociateProductFromPortfolioInput < Struct.new(
       :accept_language,
       :product_id,
@@ -1294,6 +1390,8 @@ module Aws::ServiceCatalog
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolioOutput AWS API Documentation
+    #
     class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure; end
 
     # Summary information about a path for a user to have access to a
@@ -1315,6 +1413,8 @@ module Aws::ServiceCatalog
     #   Corresponds to the name of the portfolio to which the user was
     #   assigned.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary AWS API Documentation
     #
     class LaunchPathSummary < Struct.new(
       :id,
@@ -1357,6 +1457,8 @@ module Aws::ServiceCatalog
     #   `NextPageToken` in the response is non-null.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesInput AWS API Documentation
+    #
     class ListAcceptedPortfolioSharesInput < Struct.new(
       :accept_language,
       :page_token,
@@ -1372,6 +1474,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioSharesOutput AWS API Documentation
     #
     class ListAcceptedPortfolioSharesOutput < Struct.new(
       :portfolio_details,
@@ -1422,6 +1526,8 @@ module Aws::ServiceCatalog
     #   the first page of size `PageSize`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolioInput AWS API Documentation
+    #
     class ListConstraintsForPortfolioInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -1439,6 +1545,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolioOutput AWS API Documentation
     #
     class ListConstraintsForPortfolioOutput < Struct.new(
       :constraint_details,
@@ -1485,6 +1593,8 @@ module Aws::ServiceCatalog
     #   the first page of size `PageSize`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPathsInput AWS API Documentation
+    #
     class ListLaunchPathsInput < Struct.new(
       :accept_language,
       :product_id,
@@ -1502,6 +1612,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPathsOutput AWS API Documentation
     #
     class ListLaunchPathsOutput < Struct.new(
       :launch_path_summaries,
@@ -1534,6 +1646,8 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccessInput AWS API Documentation
+    #
     class ListPortfolioAccessInput < Struct.new(
       :accept_language,
       :portfolio_id)
@@ -1548,6 +1662,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccessOutput AWS API Documentation
     #
     class ListPortfolioAccessOutput < Struct.new(
       :account_ids,
@@ -1593,6 +1709,8 @@ module Aws::ServiceCatalog
     #   `NextPageToken` in the response is non-null.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProductInput AWS API Documentation
+    #
     class ListPortfoliosForProductInput < Struct.new(
       :accept_language,
       :product_id,
@@ -1609,6 +1727,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProductOutput AWS API Documentation
     #
     class ListPortfoliosForProductOutput < Struct.new(
       :portfolio_details,
@@ -1649,6 +1769,8 @@ module Aws::ServiceCatalog
     #   `NextPageToken` in the response is non-null.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosInput AWS API Documentation
+    #
     class ListPortfoliosInput < Struct.new(
       :accept_language,
       :page_token,
@@ -1664,6 +1786,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosOutput AWS API Documentation
     #
     class ListPortfoliosOutput < Struct.new(
       :portfolio_details,
@@ -1709,6 +1833,8 @@ module Aws::ServiceCatalog
     #   the first page of size `PageSize`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolioInput AWS API Documentation
+    #
     class ListPrincipalsForPortfolioInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -1725,6 +1851,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolioOutput AWS API Documentation
     #
     class ListPrincipalsForPortfolioOutput < Struct.new(
       :principals,
@@ -1757,6 +1885,8 @@ module Aws::ServiceCatalog
     #   The product identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsInput AWS API Documentation
+    #
     class ListProvisioningArtifactsInput < Struct.new(
       :accept_language,
       :product_id)
@@ -1771,6 +1901,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsOutput AWS API Documentation
     #
     class ListProvisioningArtifactsOutput < Struct.new(
       :provisioning_artifact_details,
@@ -1828,6 +1960,8 @@ module Aws::ServiceCatalog
     #   the first page of size `PageSize`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistoryInput AWS API Documentation
+    #
     class ListRecordHistoryInput < Struct.new(
       :accept_language,
       :access_level_filter,
@@ -1846,6 +1980,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistoryOutput AWS API Documentation
     #
     class ListRecordHistoryOutput < Struct.new(
       :record_details,
@@ -1872,6 +2008,8 @@ module Aws::ServiceCatalog
     #   The filter value for `Key`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistorySearchFilter AWS API Documentation
+    #
     class ListRecordHistorySearchFilter < Struct.new(
       :key,
       :value)
@@ -1883,6 +2021,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] allowed_values
     #   The values that the administrator has allowed for the parameter.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ParameterConstraints AWS API Documentation
     #
     class ParameterConstraints < Struct.new(
       :allowed_values)
@@ -1915,6 +2055,8 @@ module Aws::ServiceCatalog
     #   The name of the portfolio provider.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/PortfolioDetail AWS API Documentation
+    #
     class PortfolioDetail < Struct.new(
       :id,
       :arn,
@@ -1935,6 +2077,8 @@ module Aws::ServiceCatalog
     #   The principal type. Must be `IAM`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Principal AWS API Documentation
+    #
     class Principal < Struct.new(
       :principal_arn,
       :principal_type)
@@ -1951,6 +2095,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] approximate_count
     #   An approximate count of the products that match the value.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewAggregationValue AWS API Documentation
     #
     class ProductViewAggregationValue < Struct.new(
       :value,
@@ -1975,6 +2121,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] created_time
     #   The UTC timestamp of the creation time.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewDetail AWS API Documentation
     #
     class ProductViewDetail < Struct.new(
       :product_view_summary,
@@ -2037,6 +2185,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] support_url
     #   The URL information to obtain support for this Product.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProductViewSummary AWS API Documentation
     #
     class ProductViewSummary < Struct.new(
       :id,
@@ -2133,6 +2283,8 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProductInput AWS API Documentation
+    #
     class ProvisionProductInput < Struct.new(
       :accept_language,
       :product_id,
@@ -2152,6 +2304,8 @@ module Aws::ServiceCatalog
     #   pointer to the ProvisionedProduct object of the request, and a list
     #   of any errors that the request encountered.
     #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProductOutput AWS API Documentation
     #
     class ProvisionProductOutput < Struct.new(
       :record_detail)
@@ -2199,6 +2353,8 @@ module Aws::ServiceCatalog
     #   ProvisionedProduct object.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail AWS API Documentation
+    #
     class ProvisionedProductDetail < Struct.new(
       :name,
       :arn,
@@ -2231,6 +2387,8 @@ module Aws::ServiceCatalog
     #   The UTC timestamp of the creation time.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact AWS API Documentation
+    #
     class ProvisioningArtifact < Struct.new(
       :id,
       :name,
@@ -2260,6 +2418,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] created_time
     #   The UTC timestamp of the creation time.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactDetail AWS API Documentation
     #
     class ProvisioningArtifactDetail < Struct.new(
       :id,
@@ -2299,6 +2459,8 @@ module Aws::ServiceCatalog
     #   The list of constraints that the administrator has put on the
     #   parameter.
     #   @return [Types::ParameterConstraints]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactParameter AWS API Documentation
     #
     class ProvisioningArtifactParameter < Struct.new(
       :parameter_key,
@@ -2340,6 +2502,8 @@ module Aws::ServiceCatalog
     #   The type of the provisioning artifact properties.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifactProperties AWS API Documentation
+    #
     class ProvisioningArtifactProperties < Struct.new(
       :name,
       :description,
@@ -2367,6 +2531,8 @@ module Aws::ServiceCatalog
     #   The value to use for provisioning. Any constraints on this value can
     #   be found in `ProvisioningArtifactParameter` for `Key`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningParameter AWS API Documentation
     #
     class ProvisioningParameter < Struct.new(
       :key,
@@ -2429,6 +2595,8 @@ module Aws::ServiceCatalog
     #   List of tags associated with this record.
     #   @return [Array<Types::RecordTag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordDetail AWS API Documentation
+    #
     class RecordDetail < Struct.new(
       :record_id,
       :provisioned_product_name,
@@ -2456,6 +2624,8 @@ module Aws::ServiceCatalog
     #   The text description of the error.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordError AWS API Documentation
+    #
     class RecordError < Struct.new(
       :code,
       :description)
@@ -2478,6 +2648,8 @@ module Aws::ServiceCatalog
     #   The text description of the output.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordOutput AWS API Documentation
+    #
     class RecordOutput < Struct.new(
       :output_key,
       :output_value,
@@ -2494,6 +2666,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] value
     #   The value for this tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordTag AWS API Documentation
     #
     class RecordTag < Struct.new(
       :key,
@@ -2526,12 +2700,16 @@ module Aws::ServiceCatalog
     #   The portfolio identifier.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareInput AWS API Documentation
+    #
     class RejectPortfolioShareInput < Struct.new(
       :accept_language,
       :portfolio_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShareOutput AWS API Documentation
+    #
     class RejectPortfolioShareOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ScanProvisionedProductsInput
@@ -2576,6 +2754,8 @@ module Aws::ServiceCatalog
     #   the first page of size `PageSize`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProductsInput AWS API Documentation
+    #
     class ScanProvisionedProductsInput < Struct.new(
       :accept_language,
       :access_level_filter,
@@ -2592,6 +2772,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProductsOutput AWS API Documentation
     #
     class ScanProvisionedProductsOutput < Struct.new(
       :provisioned_products,
@@ -2663,6 +2845,8 @@ module Aws::ServiceCatalog
     #   Access level of the source of the product.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdminInput AWS API Documentation
+    #
     class SearchProductsAsAdminInput < Struct.new(
       :accept_language,
       :portfolio_id,
@@ -2683,6 +2867,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdminOutput AWS API Documentation
     #
     class SearchProductsAsAdminOutput < Struct.new(
       :product_view_details,
@@ -2744,6 +2930,8 @@ module Aws::ServiceCatalog
     #   the first page of size `PageSize`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsInput AWS API Documentation
+    #
     class SearchProductsInput < Struct.new(
       :accept_language,
       :filters,
@@ -2766,6 +2954,8 @@ module Aws::ServiceCatalog
     #   The page token to use to retrieve the next page of results for this
     #   operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsOutput AWS API Documentation
     #
     class SearchProductsOutput < Struct.new(
       :product_view_summaries,
@@ -2794,6 +2984,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] value
     #   The esired value for this key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -2854,6 +3046,8 @@ module Aws::ServiceCatalog
     #   If no code is specified, "en" is used as the default.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductInput AWS API Documentation
+    #
     class TerminateProvisionedProductInput < Struct.new(
       :provisioned_product_name,
       :provisioned_product_id,
@@ -2869,6 +3063,8 @@ module Aws::ServiceCatalog
     #   request, a pointer to the ProvisionedProduct object that the request
     #   is modifying, and a list of any errors that the request encountered.
     #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProductOutput AWS API Documentation
     #
     class TerminateProvisionedProductOutput < Struct.new(
       :record_detail)
@@ -2905,6 +3101,8 @@ module Aws::ServiceCatalog
     #   The updated text description of the constraint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintInput AWS API Documentation
+    #
     class UpdateConstraintInput < Struct.new(
       :accept_language,
       :id,
@@ -2923,6 +3121,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] status
     #   The status of the current request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraintOutput AWS API Documentation
     #
     class UpdateConstraintOutput < Struct.new(
       :constraint_detail,
@@ -2988,6 +3188,8 @@ module Aws::ServiceCatalog
     #   portfolio.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioInput AWS API Documentation
+    #
     class UpdatePortfolioInput < Struct.new(
       :accept_language,
       :id,
@@ -3006,6 +3208,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] tags
     #   Tags associated with the portfolio.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolioOutput AWS API Documentation
     #
     class UpdatePortfolioOutput < Struct.new(
       :portfolio_detail,
@@ -3090,6 +3294,8 @@ module Aws::ServiceCatalog
     #   product.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductInput AWS API Documentation
+    #
     class UpdateProductInput < Struct.new(
       :accept_language,
       :id,
@@ -3112,6 +3318,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] tags
     #   Tags associated with the product.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProductOutput AWS API Documentation
     #
     class UpdateProductOutput < Struct.new(
       :product_view_detail,
@@ -3192,6 +3400,8 @@ module Aws::ServiceCatalog
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductInput AWS API Documentation
+    #
     class UpdateProvisionedProductInput < Struct.new(
       :accept_language,
       :provisioned_product_name,
@@ -3210,6 +3420,8 @@ module Aws::ServiceCatalog
     #   request, a pointer to the ProvisionedProduct object that the request
     #   is modifying, and a list of any errors that the request encountered.
     #   @return [Types::RecordDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProductOutput AWS API Documentation
     #
     class UpdateProvisionedProductOutput < Struct.new(
       :record_detail)
@@ -3256,6 +3468,8 @@ module Aws::ServiceCatalog
     #   The updated text description of the provisioning artifact.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactInput AWS API Documentation
+    #
     class UpdateProvisioningArtifactInput < Struct.new(
       :accept_language,
       :product_id,
@@ -3277,6 +3491,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] status
     #   The status of the current request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifactOutput AWS API Documentation
     #
     class UpdateProvisioningArtifactOutput < Struct.new(
       :provisioning_artifact_detail,
@@ -3314,6 +3530,8 @@ module Aws::ServiceCatalog
     #   `UpdateProvisioningParameter.Value`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningParameter AWS API Documentation
+    #
     class UpdateProvisioningParameter < Struct.new(
       :key,
       :value,
@@ -3330,6 +3548,8 @@ module Aws::ServiceCatalog
     # @!attribute [rw] value
     #   The usage instruction value for this type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UsageInstruction AWS API Documentation
     #
     class UsageInstruction < Struct.new(
       :type,

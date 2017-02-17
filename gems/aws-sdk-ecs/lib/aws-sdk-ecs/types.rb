@@ -49,6 +49,8 @@ module Aws::ECS
     #   resource or the full Amazon Resource Name (ARN).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Attribute AWS API Documentation
+    #
     class Attribute < Struct.new(
       :name,
       :value,
@@ -99,6 +101,8 @@ module Aws::ECS
     #   `ACTIVE` state. You can view these services with ListServices.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Cluster AWS API Documentation
+    #
     class Cluster < Struct.new(
       :cluster_arn,
       :cluster_name,
@@ -140,6 +144,8 @@ module Aws::ECS
     # @!attribute [rw] network_bindings
     #   The network bindings associated with the container.
     #   @return [Array<Types::NetworkBinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
       :container_arn,
@@ -752,6 +758,8 @@ module Aws::ECS
     #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #   @return [Types::LogConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerDefinition AWS API Documentation
+    #
     class ContainerDefinition < Struct.new(
       :name,
       :image,
@@ -866,6 +874,8 @@ module Aws::ECS
     #   PutAttributes operation.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
+    #
     class ContainerInstance < Struct.new(
       :container_instance_arn,
       :ec2_instance_id,
@@ -914,6 +924,8 @@ module Aws::ECS
     #   Docker image or the task definition.
     #   @return [Array<Types::KeyValuePair>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride AWS API Documentation
+    #
     class ContainerOverride < Struct.new(
       :name,
       :command,
@@ -935,6 +947,8 @@ module Aws::ECS
     #   allowed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterRequest AWS API Documentation
+    #
     class CreateClusterRequest < Struct.new(
       :cluster_name)
       include Aws::Structure
@@ -943,6 +957,8 @@ module Aws::ECS
     # @!attribute [rw] cluster
     #   The full description of your new cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateClusterResponse AWS API Documentation
     #
     class CreateClusterResponse < Struct.new(
       :cluster)
@@ -1077,6 +1093,8 @@ module Aws::ECS
     #   can specify a maximum of 5 strategy rules per service.
     #   @return [Array<Types::PlacementStrategy>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceRequest AWS API Documentation
+    #
     class CreateServiceRequest < Struct.new(
       :cluster,
       :service_name,
@@ -1094,6 +1112,8 @@ module Aws::ECS
     # @!attribute [rw] service
     #   The full description of your service following the create call.
     #   @return [Types::Service]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceResponse AWS API Documentation
     #
     class CreateServiceResponse < Struct.new(
       :service)
@@ -1129,6 +1149,8 @@ module Aws::ECS
     #   the target type.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributesRequest AWS API Documentation
+    #
     class DeleteAttributesRequest < Struct.new(
       :cluster,
       :attributes)
@@ -1139,6 +1161,8 @@ module Aws::ECS
     #   A list of attribute objects that were successfully deleted from your
     #   resource.
     #   @return [Array<Types::Attribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributesResponse AWS API Documentation
     #
     class DeleteAttributesResponse < Struct.new(
       :attributes)
@@ -1157,6 +1181,8 @@ module Aws::ECS
     #   delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteClusterRequest AWS API Documentation
+    #
     class DeleteClusterRequest < Struct.new(
       :cluster)
       include Aws::Structure
@@ -1165,6 +1191,8 @@ module Aws::ECS
     # @!attribute [rw] cluster
     #   The full description of the deleted cluster.
     #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteClusterResponse AWS API Documentation
     #
     class DeleteClusterResponse < Struct.new(
       :cluster)
@@ -1188,6 +1216,8 @@ module Aws::ECS
     #   The name of the service to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceRequest AWS API Documentation
+    #
     class DeleteServiceRequest < Struct.new(
       :cluster,
       :service)
@@ -1197,6 +1227,8 @@ module Aws::ECS
     # @!attribute [rw] service
     #   The full description of the deleted service.
     #   @return [Types::Service]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteServiceResponse AWS API Documentation
     #
     class DeleteServiceResponse < Struct.new(
       :service)
@@ -1245,6 +1277,8 @@ module Aws::ECS
     #   The Unix timestamp for when the service was last updated.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Deployment AWS API Documentation
+    #
     class Deployment < Struct.new(
       :id,
       :status,
@@ -1284,6 +1318,8 @@ module Aws::ECS
     #   `minimumHealthyPercent`/100, rounded up to the nearest integer
     #   value.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentConfiguration AWS API Documentation
     #
     class DeploymentConfiguration < Struct.new(
       :maximum_percent,
@@ -1332,6 +1368,8 @@ module Aws::ECS
     #   to the settings on the load balancer or target group.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstanceRequest AWS API Documentation
+    #
     class DeregisterContainerInstanceRequest < Struct.new(
       :cluster,
       :container_instance,
@@ -1342,6 +1380,8 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance that was deregistered.
     #   @return [Types::ContainerInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstanceResponse AWS API Documentation
     #
     class DeregisterContainerInstanceResponse < Struct.new(
       :container_instance)
@@ -1361,6 +1401,8 @@ module Aws::ECS
     #   specify a `revision`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinitionRequest AWS API Documentation
+    #
     class DeregisterTaskDefinitionRequest < Struct.new(
       :task_definition)
       include Aws::Structure
@@ -1369,6 +1411,8 @@ module Aws::ECS
     # @!attribute [rw] task_definition
     #   The full description of the deregistered task.
     #   @return [Types::TaskDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinitionResponse AWS API Documentation
     #
     class DeregisterTaskDefinitionResponse < Struct.new(
       :task_definition)
@@ -1388,6 +1432,8 @@ module Aws::ECS
     #   the default cluster is assumed.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersRequest AWS API Documentation
+    #
     class DescribeClustersRequest < Struct.new(
       :clusters)
       include Aws::Structure
@@ -1400,6 +1446,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersResponse AWS API Documentation
     #
     class DescribeClustersResponse < Struct.new(
       :clusters,
@@ -1426,6 +1474,8 @@ module Aws::ECS
     #   Resource Name (ARN) entries.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest AWS API Documentation
+    #
     class DescribeContainerInstancesRequest < Struct.new(
       :cluster,
       :container_instances)
@@ -1439,6 +1489,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesResponse AWS API Documentation
     #
     class DescribeContainerInstancesResponse < Struct.new(
       :container_instances,
@@ -1464,6 +1516,8 @@ module Aws::ECS
     #   describe in a single operation.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServicesRequest AWS API Documentation
+    #
     class DescribeServicesRequest < Struct.new(
       :cluster,
       :services)
@@ -1477,6 +1531,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServicesResponse AWS API Documentation
     #
     class DescribeServicesResponse < Struct.new(
       :services,
@@ -1498,6 +1554,8 @@ module Aws::ECS
     #   describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionRequest AWS API Documentation
+    #
     class DescribeTaskDefinitionRequest < Struct.new(
       :task_definition)
       include Aws::Structure
@@ -1506,6 +1564,8 @@ module Aws::ECS
     # @!attribute [rw] task_definition
     #   The full task definition description.
     #   @return [Types::TaskDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinitionResponse AWS API Documentation
     #
     class DescribeTaskDefinitionResponse < Struct.new(
       :task_definition)
@@ -1531,6 +1591,8 @@ module Aws::ECS
     #   (ARN) entries.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksRequest AWS API Documentation
+    #
     class DescribeTasksRequest < Struct.new(
       :cluster,
       :tasks)
@@ -1544,6 +1606,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksResponse AWS API Documentation
     #
     class DescribeTasksResponse < Struct.new(
       :tasks,
@@ -1573,6 +1637,8 @@ module Aws::ECS
     #   The cluster that the container instance belongs to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointRequest AWS API Documentation
+    #
     class DiscoverPollEndpointRequest < Struct.new(
       :container_instance,
       :cluster)
@@ -1586,6 +1652,8 @@ module Aws::ECS
     # @!attribute [rw] telemetry_endpoint
     #   The telemetry endpoint for the Amazon ECS agent.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointResponse AWS API Documentation
     #
     class DiscoverPollEndpointResponse < Struct.new(
       :endpoint,
@@ -1602,6 +1670,8 @@ module Aws::ECS
     # @!attribute [rw] reason
     #   The reason for the failure.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Failure AWS API Documentation
     #
     class Failure < Struct.new(
       :arn,
@@ -1629,6 +1699,8 @@ module Aws::ECS
     #   The IP address to use in the `/etc/hosts` entry.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostEntry AWS API Documentation
+    #
     class HostEntry < Struct.new(
       :hostname,
       :ip_address)
@@ -1655,6 +1727,8 @@ module Aws::ECS
     #   does exist, the contents of the source path folder are exported.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostVolumeProperties AWS API Documentation
+    #
     class HostVolumeProperties < Struct.new(
       :source_path)
       include Aws::Structure
@@ -1679,6 +1753,8 @@ module Aws::ECS
     #   The value of the key value pair. For environment variables, this is
     #   the value of the environment variable.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/KeyValuePair AWS API Documentation
     #
     class KeyValuePair < Struct.new(
       :name,
@@ -1742,6 +1818,8 @@ module Aws::ECS
     #   100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributesRequest AWS API Documentation
+    #
     class ListAttributesRequest < Struct.new(
       :cluster,
       :target_type,
@@ -1763,6 +1841,8 @@ module Aws::ECS
     #   results. This value is `null` when there are no more results to
     #   return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributesResponse AWS API Documentation
     #
     class ListAttributesResponse < Struct.new(
       :attributes,
@@ -1803,6 +1883,8 @@ module Aws::ECS
     #   results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClustersRequest AWS API Documentation
+    #
     class ListClustersRequest < Struct.new(
       :next_token,
       :max_results)
@@ -1820,6 +1902,8 @@ module Aws::ECS
     #   this value can be used to retrieve the next page of results. This
     #   value is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClustersResponse AWS API Documentation
     #
     class ListClustersResponse < Struct.new(
       :cluster_arns,
@@ -1890,6 +1974,8 @@ module Aws::ECS
     #   operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesRequest AWS API Documentation
+    #
     class ListContainerInstancesRequest < Struct.new(
       :cluster,
       :filter,
@@ -1912,6 +1998,8 @@ module Aws::ECS
     #   be used to retrieve the next page of results. This value is `null`
     #   when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesResponse AWS API Documentation
     #
     class ListContainerInstancesResponse < Struct.new(
       :container_instance_arns,
@@ -1959,6 +2047,8 @@ module Aws::ECS
     #   returns up to 10 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesRequest AWS API Documentation
+    #
     class ListServicesRequest < Struct.new(
       :cluster,
       :next_token,
@@ -1977,6 +2067,8 @@ module Aws::ECS
     #   this value can be used to retrieve the next page of results. This
     #   value is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServicesResponse AWS API Documentation
     #
     class ListServicesResponse < Struct.new(
       :service_arns,
@@ -2040,6 +2132,8 @@ module Aws::ECS
     #   to 100 results and a `nextToken` value if applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamiliesRequest AWS API Documentation
+    #
     class ListTaskDefinitionFamiliesRequest < Struct.new(
       :family_prefix,
       :status,
@@ -2060,6 +2154,8 @@ module Aws::ECS
     #   can be used to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamiliesResponse AWS API Documentation
     #
     class ListTaskDefinitionFamiliesResponse < Struct.new(
       :families,
@@ -2131,6 +2227,8 @@ module Aws::ECS
     #   `nextToken` value if applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionsRequest AWS API Documentation
+    #
     class ListTaskDefinitionsRequest < Struct.new(
       :family_prefix,
       :status,
@@ -2152,6 +2250,8 @@ module Aws::ECS
     #   results. This value is `null` when there are no more results to
     #   return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionsResponse AWS API Documentation
     #
     class ListTaskDefinitionsResponse < Struct.new(
       :task_definition_arns,
@@ -2246,6 +2346,8 @@ module Aws::ECS
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksRequest AWS API Documentation
+    #
     class ListTasksRequest < Struct.new(
       :cluster,
       :container_instance,
@@ -2269,6 +2371,8 @@ module Aws::ECS
     #   value can be used to retrieve the next page of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasksResponse AWS API Documentation
     #
     class ListTasksResponse < Struct.new(
       :task_arns,
@@ -2308,6 +2412,8 @@ module Aws::ECS
     #   definition. Your container instances must allow ingress traffic on
     #   the `hostPort` of the port mapping.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
       :target_group_arn,
@@ -2364,6 +2470,8 @@ module Aws::ECS
     #   following command: `sudo docker version | grep "Server API version"`
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LogConfiguration AWS API Documentation
+    #
     class LogConfiguration < Struct.new(
       :log_driver,
       :options)
@@ -2395,6 +2503,8 @@ module Aws::ECS
     #   volume. If this value is `false`, then the container can write to
     #   the volume. The default value is `false`.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/MountPoint AWS API Documentation
     #
     class MountPoint < Struct.new(
       :source_volume,
@@ -2435,6 +2545,8 @@ module Aws::ECS
     # @!attribute [rw] protocol
     #   The protocol used for the network binding.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NetworkBinding AWS API Documentation
     #
     class NetworkBinding < Struct.new(
       :bind_ip,
@@ -2479,6 +2591,8 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementConstraint AWS API Documentation
+    #
     class PlacementConstraint < Struct.new(
       :type,
       :expression)
@@ -2522,6 +2636,8 @@ module Aws::ECS
     #   strategy, valid values are `cpu` and `memory`. For the `random`
     #   placement strategy, this field is not used.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PlacementStrategy AWS API Documentation
     #
     class PlacementStrategy < Struct.new(
       :type,
@@ -2588,6 +2704,8 @@ module Aws::ECS
     #   `udp`. The default is `tcp`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PortMapping AWS API Documentation
+    #
     class PortMapping < Struct.new(
       :container_port,
       :host_port,
@@ -2622,6 +2740,8 @@ module Aws::ECS
     #   in a single call.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributesRequest AWS API Documentation
+    #
     class PutAttributesRequest < Struct.new(
       :cluster,
       :attributes)
@@ -2631,6 +2751,8 @@ module Aws::ECS
     # @!attribute [rw] attributes
     #   The attributes applied to your resource.
     #   @return [Array<Types::Attribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributesResponse AWS API Documentation
     #
     class PutAttributesResponse < Struct.new(
       :attributes)
@@ -2709,6 +2831,8 @@ module Aws::ECS
     #   supports.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceRequest AWS API Documentation
+    #
     class RegisterContainerInstanceRequest < Struct.new(
       :cluster,
       :instance_identity_document,
@@ -2723,6 +2847,8 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance that was registered.
     #   @return [Types::ContainerInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstanceResponse AWS API Documentation
     #
     class RegisterContainerInstanceResponse < Struct.new(
       :container_instance)
@@ -2882,6 +3008,8 @@ module Aws::ECS
     #   run time).
     #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionRequest AWS API Documentation
+    #
     class RegisterTaskDefinitionRequest < Struct.new(
       :family,
       :task_role_arn,
@@ -2895,6 +3023,8 @@ module Aws::ECS
     # @!attribute [rw] task_definition
     #   The full description of the registered task definition.
     #   @return [Types::TaskDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinitionResponse AWS API Documentation
     #
     class RegisterTaskDefinitionResponse < Struct.new(
       :task_definition)
@@ -2944,6 +3074,8 @@ module Aws::ECS
     #   When the `stringSetValue` type is set, the value of the resource
     #   must be a string type.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Resource AWS API Documentation
     #
     class Resource < Struct.new(
       :name,
@@ -3056,6 +3188,8 @@ module Aws::ECS
     #   a maximum of 5 strategy rules per task.
     #   @return [Array<Types::PlacementStrategy>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
+    #
     class RunTaskRequest < Struct.new(
       :cluster,
       :task_definition,
@@ -3076,6 +3210,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskResponse AWS API Documentation
     #
     class RunTaskResponse < Struct.new(
       :tasks,
@@ -3173,6 +3309,8 @@ module Aws::ECS
     #   placed.
     #   @return [Array<Types::PlacementStrategy>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Service AWS API Documentation
+    #
     class Service < Struct.new(
       :service_arn,
       :service_name,
@@ -3206,6 +3344,8 @@ module Aws::ECS
     # @!attribute [rw] message
     #   The event message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceEvent AWS API Documentation
     #
     class ServiceEvent < Struct.new(
       :id,
@@ -3293,6 +3433,8 @@ module Aws::ECS
     #   family:my-family-name).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskRequest AWS API Documentation
+    #
     class StartTaskRequest < Struct.new(
       :cluster,
       :task_definition,
@@ -3312,6 +3454,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTaskResponse AWS API Documentation
     #
     class StartTaskResponse < Struct.new(
       :tasks,
@@ -3347,6 +3491,8 @@ module Aws::ECS
     #   to 255 characters are allowed in this message.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskRequest AWS API Documentation
+    #
     class StopTaskRequest < Struct.new(
       :cluster,
       :task,
@@ -3357,6 +3503,8 @@ module Aws::ECS
     # @!attribute [rw] task
     #   The task that was stopped.
     #   @return [Types::Task]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTaskResponse AWS API Documentation
     #
     class StopTaskResponse < Struct.new(
       :task)
@@ -3413,6 +3561,8 @@ module Aws::ECS
     #   The network bindings of the container.
     #   @return [Array<Types::NetworkBinding>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeRequest AWS API Documentation
+    #
     class SubmitContainerStateChangeRequest < Struct.new(
       :cluster,
       :task,
@@ -3427,6 +3577,8 @@ module Aws::ECS
     # @!attribute [rw] acknowledgment
     #   Acknowledgement of the state change.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChangeResponse AWS API Documentation
     #
     class SubmitContainerStateChangeResponse < Struct.new(
       :acknowledgment)
@@ -3461,6 +3613,8 @@ module Aws::ECS
     #   The reason for the state change request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeRequest AWS API Documentation
+    #
     class SubmitTaskStateChangeRequest < Struct.new(
       :cluster,
       :task,
@@ -3472,6 +3626,8 @@ module Aws::ECS
     # @!attribute [rw] acknowledgment
     #   Acknowledgement of the state change.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChangeResponse AWS API Documentation
     #
     class SubmitTaskStateChangeResponse < Struct.new(
       :acknowledgment)
@@ -3552,6 +3708,8 @@ module Aws::ECS
     # @!attribute [rw] group
     #   The name of the task group associated with the task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Task AWS API Documentation
     #
     class Task < Struct.new(
       :task_arn,
@@ -3650,6 +3808,8 @@ module Aws::ECS
     #   An array of placement constraint objects to use for tasks.
     #   @return [Array<Types::TaskDefinitionPlacementConstraint>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinition AWS API Documentation
+    #
     class TaskDefinition < Struct.new(
       :task_definition_arn,
       :container_definitions,
@@ -3697,6 +3857,8 @@ module Aws::ECS
     #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskDefinitionPlacementConstraint AWS API Documentation
+    #
     class TaskDefinitionPlacementConstraint < Struct.new(
       :type,
       :expression)
@@ -3734,6 +3896,8 @@ module Aws::ECS
     #   permissions that are specified in this role.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TaskOverride AWS API Documentation
+    #
     class TaskOverride < Struct.new(
       :container_overrides,
       :task_role_arn)
@@ -3763,6 +3927,8 @@ module Aws::ECS
     #   The hard limit for the ulimit type.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Ulimit AWS API Documentation
+    #
     class Ulimit < Struct.new(
       :name,
       :soft_limit,
@@ -3790,6 +3956,8 @@ module Aws::ECS
     #   Amazon ECS container agent.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentRequest AWS API Documentation
+    #
     class UpdateContainerAgentRequest < Struct.new(
       :cluster,
       :container_instance)
@@ -3799,6 +3967,8 @@ module Aws::ECS
     # @!attribute [rw] container_instance
     #   The container instance for which the container agent was updated.
     #   @return [Types::ContainerInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgentResponse AWS API Documentation
     #
     class UpdateContainerAgentResponse < Struct.new(
       :container_instance)
@@ -3830,6 +4000,8 @@ module Aws::ECS
     #   instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateRequest AWS API Documentation
+    #
     class UpdateContainerInstancesStateRequest < Struct.new(
       :cluster,
       :container_instances,
@@ -3844,6 +4016,8 @@ module Aws::ECS
     # @!attribute [rw] failures
     #   Any failures associated with the call.
     #   @return [Array<Types::Failure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesStateResponse AWS API Documentation
     #
     class UpdateContainerInstancesStateResponse < Struct.new(
       :container_instances,
@@ -3895,6 +4069,8 @@ module Aws::ECS
     #   tasks.
     #   @return [Types::DeploymentConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceRequest AWS API Documentation
+    #
     class UpdateServiceRequest < Struct.new(
       :cluster,
       :service,
@@ -3907,6 +4083,8 @@ module Aws::ECS
     # @!attribute [rw] service
     #   The full description of your service following the update call.
     #   @return [Types::Service]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceResponse AWS API Documentation
     #
     class UpdateServiceResponse < Struct.new(
       :service)
@@ -3941,6 +4119,8 @@ module Aws::ECS
     # @!attribute [rw] docker_version
     #   The Docker version running on the container instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VersionInfo AWS API Documentation
     #
     class VersionInfo < Struct.new(
       :agent_version,
@@ -3977,6 +4157,8 @@ module Aws::ECS
     #   running.
     #   @return [Types::HostVolumeProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Volume AWS API Documentation
+    #
     class Volume < Struct.new(
       :name,
       :host)
@@ -4002,6 +4184,8 @@ module Aws::ECS
     #   volume. If this value is `false`, then the container can write to
     #   the volume. The default value is `false`.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/VolumeFrom AWS API Documentation
     #
     class VolumeFrom < Struct.new(
       :source_container,

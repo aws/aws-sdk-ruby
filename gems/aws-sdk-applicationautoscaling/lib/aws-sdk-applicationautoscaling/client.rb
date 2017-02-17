@@ -213,6 +213,8 @@ module Aws::ApplicationAutoScaling
     #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy AWS API Documentation
+    #
     # @overload delete_scaling_policy(params = {})
     # @param [Hash] params ({})
     def delete_scaling_policy(params = {}, options = {})
@@ -275,6 +277,8 @@ module Aws::ApplicationAutoScaling
     #     resource_id: "ResourceIdMaxLen1600", # required
     #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget AWS API Documentation
     #
     # @overload deregister_scalable_target(params = {})
     # @param [Hash] params ({})
@@ -372,6 +376,8 @@ module Aws::ApplicationAutoScaling
     #   resp.scalable_targets[0].role_arn #=> String
     #   resp.scalable_targets[0].creation_time #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargets AWS API Documentation
     #
     # @overload describe_scalable_targets(params = {})
     # @param [Hash] params ({})
@@ -473,6 +479,8 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_activities[0].status_message #=> String
     #   resp.scaling_activities[0].details #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivities AWS API Documentation
     #
     # @overload describe_scaling_activities(params = {})
     # @param [Hash] params ({})
@@ -585,6 +593,8 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPolicies AWS API Documentation
+    #
     # @overload describe_scaling_policies(params = {})
     # @param [Hash] params ({})
     def describe_scaling_policies(params = {}, options = {})
@@ -691,6 +701,8 @@ module Aws::ApplicationAutoScaling
     #
     #   resp.policy_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicy AWS API Documentation
+    #
     # @overload put_scaling_policy(params = {})
     # @param [Hash] params ({})
     def put_scaling_policy(params = {}, options = {})
@@ -775,6 +787,8 @@ module Aws::ApplicationAutoScaling
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTarget AWS API Documentation
     #
     # @overload register_scalable_target(params = {})
     # @param [Hash] params ({})

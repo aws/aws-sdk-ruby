@@ -53,6 +53,8 @@ module Aws::SSM
     #   The date the activation was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Activation AWS API Documentation
+    #
     class Activation < Struct.new(
       :activation_id,
       :description,
@@ -94,6 +96,8 @@ module Aws::SSM
     #   and we set the value to an empty string.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResourceRequest AWS API Documentation
+    #
     class AddTagsToResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
@@ -101,6 +105,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AddTagsToResourceResult AWS API Documentation
+    #
     class AddTagsToResourceResult < Aws::EmptyStructure; end
 
     # Describes an association of an SSM document and an instance.
@@ -139,6 +145,8 @@ module Aws::SSM
     #   A cron expression that specifies a schedule when the association
     #   runs.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Association AWS API Documentation
     #
     class Association < Struct.new(
       :name,
@@ -212,6 +220,8 @@ module Aws::SSM
     #   The last date on which the association was successfully run.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
+    #
     class AssociationDescription < Struct.new(
       :name,
       :instance_id,
@@ -248,6 +258,8 @@ module Aws::SSM
     #   The filter value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationFilter AWS API Documentation
+    #
     class AssociationFilter < Struct.new(
       :key,
       :value)
@@ -271,6 +283,8 @@ module Aws::SSM
     #   of them was successful, this would return the count of instances by
     #   status.
     #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationOverview AWS API Documentation
     #
     class AssociationOverview < Struct.new(
       :status,
@@ -306,6 +320,8 @@ module Aws::SSM
     # @!attribute [rw] additional_info
     #   A user-defined string.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationStatus AWS API Documentation
     #
     class AssociationStatus < Struct.new(
       :date,
@@ -362,6 +378,8 @@ module Aws::SSM
     #   set to Failed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecution AWS API Documentation
+    #
     class AutomationExecution < Struct.new(
       :automation_execution_id,
       :document_name,
@@ -396,6 +414,8 @@ module Aws::SSM
     #   The values used to limit the execution information associated with
     #   the filter's key.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionFilter AWS API Documentation
     #
     class AutomationExecutionFilter < Struct.new(
       :key,
@@ -443,6 +463,8 @@ module Aws::SSM
     #   The list of execution outputs as defined in the Automation document.
     #   @return [Hash<String,Array<String>>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AutomationExecutionMetadata AWS API Documentation
+    #
     class AutomationExecutionMetadata < Struct.new(
       :automation_execution_id,
       :document_name,
@@ -474,6 +496,8 @@ module Aws::SSM
     #   on which it was requested.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommandRequest AWS API Documentation
+    #
     class CancelCommandRequest < Struct.new(
       :command_id,
       :instance_ids)
@@ -482,6 +506,8 @@ module Aws::SSM
 
     # Whether or not the command was successfully canceled. There is no
     # guarantee that a request can be canceled.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CancelCommandResult AWS API Documentation
     #
     class CancelCommandResult < Aws::EmptyStructure; end
 
@@ -648,6 +674,8 @@ module Aws::SSM
     #   changes.
     #   @return [Types::NotificationConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Command AWS API Documentation
+    #
     class Command < Struct.new(
       :command_id,
       :document_name,
@@ -689,6 +717,8 @@ module Aws::SSM
     # @!attribute [rw] value
     #   The filter value. For example: June 30, 2015.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandFilter AWS API Documentation
     #
     class CommandFilter < Struct.new(
       :key,
@@ -821,6 +851,8 @@ module Aws::SSM
     #   Configurations for sending notifications about command status
     #   changes on a per instance basis.
     #   @return [Types::NotificationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandInvocation AWS API Documentation
     #
     class CommandInvocation < Struct.new(
       :command_id,
@@ -974,6 +1006,8 @@ module Aws::SSM
     #   `awsrunShellScript` is the name of the plugin.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandPlugin AWS API Documentation
+    #
     class CommandPlugin < Struct.new(
       :name,
       :status,
@@ -1027,6 +1061,8 @@ module Aws::SSM
     #   value is 24 hours.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationRequest AWS API Documentation
+    #
     class CreateActivationRequest < Struct.new(
       :description,
       :default_instance_name,
@@ -1046,6 +1082,8 @@ module Aws::SSM
     #   activation code functions like a password to validate the activation
     #   ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateActivationResult AWS API Documentation
     #
     class CreateActivationResult < Struct.new(
       :activation_id,
@@ -1086,6 +1124,8 @@ module Aws::SSM
     # @!attribute [rw] entries
     #   One or more associations.
     #   @return [Array<Types::CreateAssociationBatchRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequest AWS API Documentation
     #
     class CreateAssociationBatchRequest < Struct.new(
       :entries)
@@ -1150,6 +1190,8 @@ module Aws::SSM
     #   request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
+    #
     class CreateAssociationBatchRequestEntry < Struct.new(
       :name,
       :instance_id,
@@ -1168,6 +1210,8 @@ module Aws::SSM
     # @!attribute [rw] failed
     #   Information about the associations that failed.
     #   @return [Array<Types::FailedCreateAssociation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchResult AWS API Documentation
     #
     class CreateAssociationBatchResult < Struct.new(
       :successful,
@@ -1243,6 +1287,8 @@ module Aws::SSM
     #   "folder name" \} \}"`
     #   @return [Types::InstanceAssociationOutputLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
+    #
     class CreateAssociationRequest < Struct.new(
       :name,
       :document_version,
@@ -1257,6 +1303,8 @@ module Aws::SSM
     # @!attribute [rw] association_description
     #   Information about the association.
     #   @return [Types::AssociationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationResult AWS API Documentation
     #
     class CreateAssociationResult < Struct.new(
       :association_description)
@@ -1285,6 +1333,8 @@ module Aws::SSM
     #   Policy, Automation, and Command.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentRequest AWS API Documentation
+    #
     class CreateDocumentRequest < Struct.new(
       :content,
       :name,
@@ -1295,6 +1345,8 @@ module Aws::SSM
     # @!attribute [rw] document_description
     #   Information about the SSM document.
     #   @return [Types::DocumentDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentResult AWS API Documentation
     #
     class CreateDocumentResult < Struct.new(
       :document_description)
@@ -1343,6 +1395,8 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowRequest AWS API Documentation
+    #
     class CreateMaintenanceWindowRequest < Struct.new(
       :name,
       :schedule,
@@ -1356,6 +1410,8 @@ module Aws::SSM
     # @!attribute [rw] window_id
     #   The ID of the created Maintenance Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateMaintenanceWindowResult AWS API Documentation
     #
     class CreateMaintenanceWindowResult < Struct.new(
       :window_id)
@@ -1427,6 +1483,8 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaselineRequest AWS API Documentation
+    #
     class CreatePatchBaselineRequest < Struct.new(
       :name,
       :global_filters,
@@ -1441,6 +1499,8 @@ module Aws::SSM
     # @!attribute [rw] baseline_id
     #   The ID of the created patch baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreatePatchBaselineResult AWS API Documentation
     #
     class CreatePatchBaselineResult < Struct.new(
       :baseline_id)
@@ -1458,11 +1518,15 @@ module Aws::SSM
     #   The ID of the activation that you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivationRequest AWS API Documentation
+    #
     class DeleteActivationRequest < Struct.new(
       :activation_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteActivationResult AWS API Documentation
+    #
     class DeleteActivationResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteAssociationRequest
@@ -1486,6 +1550,8 @@ module Aws::SSM
     #   The association ID that you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociationRequest AWS API Documentation
+    #
     class DeleteAssociationRequest < Struct.new(
       :name,
       :instance_id,
@@ -1493,6 +1559,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteAssociationResult AWS API Documentation
+    #
     class DeleteAssociationResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteDocumentRequest
@@ -1506,11 +1574,15 @@ module Aws::SSM
     #   The name of the SSM document.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentRequest AWS API Documentation
+    #
     class DeleteDocumentRequest < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentResult AWS API Documentation
+    #
     class DeleteDocumentResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteMaintenanceWindowRequest
@@ -1524,6 +1596,8 @@ module Aws::SSM
     #   The ID of the Maintenance Window to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowRequest AWS API Documentation
+    #
     class DeleteMaintenanceWindowRequest < Struct.new(
       :window_id)
       include Aws::Structure
@@ -1532,6 +1606,8 @@ module Aws::SSM
     # @!attribute [rw] window_id
     #   The ID of the deleted Maintenance Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteMaintenanceWindowResult AWS API Documentation
     #
     class DeleteMaintenanceWindowResult < Struct.new(
       :window_id)
@@ -1549,11 +1625,15 @@ module Aws::SSM
     #   The name of the parameter to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameterRequest AWS API Documentation
+    #
     class DeleteParameterRequest < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteParameterResult AWS API Documentation
+    #
     class DeleteParameterResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeletePatchBaselineRequest
@@ -1567,6 +1647,8 @@ module Aws::SSM
     #   The ID of the patch baseline to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaselineRequest AWS API Documentation
+    #
     class DeletePatchBaselineRequest < Struct.new(
       :baseline_id)
       include Aws::Structure
@@ -1575,6 +1657,8 @@ module Aws::SSM
     # @!attribute [rw] baseline_id
     #   The ID of the deleted patch baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeletePatchBaselineResult AWS API Documentation
     #
     class DeletePatchBaselineResult < Struct.new(
       :baseline_id)
@@ -1593,11 +1677,15 @@ module Aws::SSM
     #   the activation process.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstanceRequest AWS API Documentation
+    #
     class DeregisterManagedInstanceRequest < Struct.new(
       :instance_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterManagedInstanceResult AWS API Documentation
+    #
     class DeregisterManagedInstanceResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterPatchBaselineForPatchGroupRequest
@@ -1617,6 +1705,8 @@ module Aws::SSM
     #   patch baseline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroupRequest AWS API Documentation
+    #
     class DeregisterPatchBaselineForPatchGroupRequest < Struct.new(
       :baseline_id,
       :patch_group)
@@ -1630,6 +1720,8 @@ module Aws::SSM
     # @!attribute [rw] patch_group
     #   The name of the patch group deregistered from the patch baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterPatchBaselineForPatchGroupResult AWS API Documentation
     #
     class DeregisterPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
@@ -1653,6 +1745,8 @@ module Aws::SSM
     #   The ID of the target definition to remove.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindowRequest AWS API Documentation
+    #
     class DeregisterTargetFromMaintenanceWindowRequest < Struct.new(
       :window_id,
       :window_target_id)
@@ -1666,6 +1760,8 @@ module Aws::SSM
     # @!attribute [rw] window_target_id
     #   The ID of the removed target definition.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTargetFromMaintenanceWindowResult AWS API Documentation
     #
     class DeregisterTargetFromMaintenanceWindowResult < Struct.new(
       :window_id,
@@ -1689,6 +1785,8 @@ module Aws::SSM
     #   The ID of the task to remove from the Maintenance Window.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindowRequest AWS API Documentation
+    #
     class DeregisterTaskFromMaintenanceWindowRequest < Struct.new(
       :window_id,
       :window_task_id)
@@ -1702,6 +1800,8 @@ module Aws::SSM
     # @!attribute [rw] window_task_id
     #   The ID of the task removed from the Maintenance Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterTaskFromMaintenanceWindowResult AWS API Documentation
     #
     class DeregisterTaskFromMaintenanceWindowResult < Struct.new(
       :window_id,
@@ -1726,6 +1826,8 @@ module Aws::SSM
     # @!attribute [rw] filter_values
     #   The filter values.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivationsFilter AWS API Documentation
     #
     class DescribeActivationsFilter < Struct.new(
       :filter_key,
@@ -1762,6 +1864,8 @@ module Aws::SSM
     #   results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivationsRequest AWS API Documentation
+    #
     class DescribeActivationsRequest < Struct.new(
       :filters,
       :max_results,
@@ -1777,6 +1881,8 @@ module Aws::SSM
     #   The token for the next set of items to return. Use this token to get
     #   the next set of results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeActivationsResult AWS API Documentation
     #
     class DescribeActivationsResult < Struct.new(
       :activation_list,
@@ -1805,6 +1911,8 @@ module Aws::SSM
     #   The association ID for which you want information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationRequest AWS API Documentation
+    #
     class DescribeAssociationRequest < Struct.new(
       :name,
       :instance_id,
@@ -1815,6 +1923,8 @@ module Aws::SSM
     # @!attribute [rw] association_description
     #   Information about the association.
     #   @return [Types::AssociationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociationResult AWS API Documentation
     #
     class DescribeAssociationResult < Struct.new(
       :association_description)
@@ -1850,6 +1960,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutionsRequest AWS API Documentation
+    #
     class DescribeAutomationExecutionsRequest < Struct.new(
       :filters,
       :max_results,
@@ -1866,6 +1978,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAutomationExecutionsResult AWS API Documentation
     #
     class DescribeAutomationExecutionsResult < Struct.new(
       :automation_execution_metadata_list,
@@ -1900,6 +2014,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatchesRequest AWS API Documentation
+    #
     class DescribeAvailablePatchesRequest < Struct.new(
       :filters,
       :max_results,
@@ -1915,6 +2031,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAvailablePatchesResult AWS API Documentation
     #
     class DescribeAvailablePatchesResult < Struct.new(
       :patches,
@@ -1939,6 +2057,8 @@ module Aws::SSM
     #   *Share*.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermissionRequest AWS API Documentation
+    #
     class DescribeDocumentPermissionRequest < Struct.new(
       :name,
       :permission_type)
@@ -1949,6 +2069,8 @@ module Aws::SSM
     #   The account IDs that have permission to use this document. The ID
     #   can be either an AWS account or *All*.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentPermissionResponse AWS API Documentation
     #
     class DescribeDocumentPermissionResponse < Struct.new(
       :account_ids)
@@ -1972,6 +2094,8 @@ module Aws::SSM
     #   specific version or the default version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentRequest AWS API Documentation
+    #
     class DescribeDocumentRequest < Struct.new(
       :name,
       :document_version)
@@ -1981,6 +2105,8 @@ module Aws::SSM
     # @!attribute [rw] document
     #   Information about the SSM document.
     #   @return [Types::DocumentDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeDocumentResult AWS API Documentation
     #
     class DescribeDocumentResult < Struct.new(
       :document)
@@ -2011,6 +2137,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociationsRequest AWS API Documentation
+    #
     class DescribeEffectiveInstanceAssociationsRequest < Struct.new(
       :instance_id,
       :max_results,
@@ -2026,6 +2154,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectiveInstanceAssociationsResult AWS API Documentation
     #
     class DescribeEffectiveInstanceAssociationsResult < Struct.new(
       :associations,
@@ -2055,6 +2185,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaselineRequest AWS API Documentation
+    #
     class DescribeEffectivePatchesForPatchBaselineRequest < Struct.new(
       :baseline_id,
       :max_results,
@@ -2070,6 +2202,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeEffectivePatchesForPatchBaselineResult AWS API Documentation
     #
     class DescribeEffectivePatchesForPatchBaselineResult < Struct.new(
       :effective_patches,
@@ -2101,6 +2235,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatusRequest AWS API Documentation
+    #
     class DescribeInstanceAssociationsStatusRequest < Struct.new(
       :instance_id,
       :max_results,
@@ -2116,6 +2252,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceAssociationsStatusResult AWS API Documentation
     #
     class DescribeInstanceAssociationsStatusResult < Struct.new(
       :instance_association_status_infos,
@@ -2164,6 +2302,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformationRequest AWS API Documentation
+    #
     class DescribeInstanceInformationRequest < Struct.new(
       :instance_information_filter_list,
       :filters,
@@ -2180,6 +2320,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstanceInformationResult AWS API Documentation
     #
     class DescribeInstanceInformationResult < Struct.new(
       :instance_information_list,
@@ -2227,6 +2369,8 @@ module Aws::SSM
     #   The maximum number of patches to return (per page).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroupRequest AWS API Documentation
+    #
     class DescribeInstancePatchStatesForPatchGroupRequest < Struct.new(
       :patch_group,
       :filters,
@@ -2243,6 +2387,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesForPatchGroupResult AWS API Documentation
     #
     class DescribeInstancePatchStatesForPatchGroupResult < Struct.new(
       :instance_patch_states,
@@ -2273,6 +2419,8 @@ module Aws::SSM
     #   The maximum number of instances to return (per page).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesRequest AWS API Documentation
+    #
     class DescribeInstancePatchStatesRequest < Struct.new(
       :instance_ids,
       :next_token,
@@ -2288,6 +2436,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchStatesResult AWS API Documentation
     #
     class DescribeInstancePatchStatesResult < Struct.new(
       :instance_patch_states,
@@ -2332,6 +2482,8 @@ module Aws::SSM
     #   The maximum number of patches to return (per page).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchesRequest AWS API Documentation
+    #
     class DescribeInstancePatchesRequest < Struct.new(
       :instance_id,
       :filters,
@@ -2363,6 +2515,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeInstancePatchesResult AWS API Documentation
     #
     class DescribeInstancePatchesResult < Struct.new(
       :patches,
@@ -2413,6 +2567,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTaskInvocationsRequest AWS API Documentation
+    #
     class DescribeMaintenanceWindowExecutionTaskInvocationsRequest < Struct.new(
       :window_execution_id,
       :task_id,
@@ -2430,6 +2586,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTaskInvocationsResult AWS API Documentation
     #
     class DescribeMaintenanceWindowExecutionTaskInvocationsResult < Struct.new(
       :window_execution_task_invocation_identities,
@@ -2475,6 +2633,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasksRequest AWS API Documentation
+    #
     class DescribeMaintenanceWindowExecutionTasksRequest < Struct.new(
       :window_execution_id,
       :filters,
@@ -2491,6 +2651,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionTasksResult AWS API Documentation
     #
     class DescribeMaintenanceWindowExecutionTasksResult < Struct.new(
       :window_execution_task_identities,
@@ -2540,6 +2702,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionsRequest AWS API Documentation
+    #
     class DescribeMaintenanceWindowExecutionsRequest < Struct.new(
       :window_id,
       :filters,
@@ -2556,6 +2720,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowExecutionsResult AWS API Documentation
     #
     class DescribeMaintenanceWindowExecutionsResult < Struct.new(
       :window_executions,
@@ -2599,6 +2765,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargetsRequest AWS API Documentation
+    #
     class DescribeMaintenanceWindowTargetsRequest < Struct.new(
       :window_id,
       :filters,
@@ -2615,6 +2783,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTargetsResult AWS API Documentation
     #
     class DescribeMaintenanceWindowTargetsResult < Struct.new(
       :targets,
@@ -2658,6 +2828,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasksRequest AWS API Documentation
+    #
     class DescribeMaintenanceWindowTasksRequest < Struct.new(
       :window_id,
       :filters,
@@ -2674,6 +2846,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowTasksResult AWS API Documentation
     #
     class DescribeMaintenanceWindowTasksResult < Struct.new(
       :tasks,
@@ -2711,6 +2885,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsRequest AWS API Documentation
+    #
     class DescribeMaintenanceWindowsRequest < Struct.new(
       :filters,
       :max_results,
@@ -2726,6 +2902,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeMaintenanceWindowsResult AWS API Documentation
     #
     class DescribeMaintenanceWindowsResult < Struct.new(
       :window_identities,
@@ -2763,6 +2941,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParametersRequest AWS API Documentation
+    #
     class DescribeParametersRequest < Struct.new(
       :filters,
       :max_results,
@@ -2778,6 +2958,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeParametersResult AWS API Documentation
     #
     class DescribeParametersResult < Struct.new(
       :parameters,
@@ -2816,6 +2998,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselinesRequest AWS API Documentation
+    #
     class DescribePatchBaselinesRequest < Struct.new(
       :filters,
       :max_results,
@@ -2831,6 +3015,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchBaselinesResult AWS API Documentation
     #
     class DescribePatchBaselinesResult < Struct.new(
       :baseline_identities,
@@ -2849,6 +3035,8 @@ module Aws::SSM
     #   The name of the patch group whose patch snapshot should be
     #   retrieved.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupStateRequest AWS API Documentation
     #
     class DescribePatchGroupStateRequest < Struct.new(
       :patch_group)
@@ -2882,6 +3070,8 @@ module Aws::SSM
     #   The number of instances with patches that aren’t applicable.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupStateResult AWS API Documentation
+    #
     class DescribePatchGroupStateResult < Struct.new(
       :instances,
       :instances_with_installed_patches,
@@ -2909,6 +3099,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupsRequest AWS API Documentation
+    #
     class DescribePatchGroupsRequest < Struct.new(
       :max_results,
       :next_token)
@@ -2929,6 +3121,8 @@ module Aws::SSM
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupsResult AWS API Documentation
+    #
     class DescribePatchGroupsResult < Struct.new(
       :mappings,
       :next_token)
@@ -2944,6 +3138,8 @@ module Aws::SSM
     # @!attribute [rw] default_version
     #   The default version of the document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDefaultVersionDescription AWS API Documentation
     #
     class DocumentDefaultVersionDescription < Struct.new(
       :name,
@@ -3023,6 +3219,8 @@ module Aws::SSM
     #   The default version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
+    #
     class DocumentDescription < Struct.new(
       :sha_1,
       :hash,
@@ -3060,6 +3258,8 @@ module Aws::SSM
     #   The value of the filter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentFilter AWS API Documentation
+    #
     class DocumentFilter < Struct.new(
       :key,
       :value)
@@ -3091,6 +3291,8 @@ module Aws::SSM
     # @!attribute [rw] schema_version
     #   The schema version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentIdentifier AWS API Documentation
     #
     class DocumentIdentifier < Struct.new(
       :name,
@@ -3125,6 +3327,8 @@ module Aws::SSM
     #   value are optional.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentParameter AWS API Documentation
+    #
     class DocumentParameter < Struct.new(
       :name,
       :type,
@@ -3150,6 +3354,8 @@ module Aws::SSM
     # @!attribute [rw] is_default_version
     #   An identifier for the default version of the document.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentVersionInfo AWS API Documentation
     #
     class DocumentVersionInfo < Struct.new(
       :name,
@@ -3178,6 +3384,8 @@ module Aws::SSM
     #   the date the patch was or will be approved.
     #   @return [Types::PatchStatus]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/EffectivePatch AWS API Documentation
+    #
     class EffectivePatch < Struct.new(
       :patch,
       :patch_status)
@@ -3197,6 +3405,8 @@ module Aws::SSM
     # @!attribute [rw] fault
     #   The source of the failure.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/FailedCreateAssociation AWS API Documentation
     #
     class FailedCreateAssociation < Struct.new(
       :entry,
@@ -3218,6 +3428,8 @@ module Aws::SSM
     #   when the execution of an Automation document is initiated.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecutionRequest AWS API Documentation
+    #
     class GetAutomationExecutionRequest < Struct.new(
       :automation_execution_id)
       include Aws::Structure
@@ -3227,6 +3439,8 @@ module Aws::SSM
     #   Detailed information about the current state of an automation
     #   execution.
     #   @return [Types::AutomationExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetAutomationExecutionResult AWS API Documentation
     #
     class GetAutomationExecutionResult < Struct.new(
       :automation_execution)
@@ -3257,6 +3471,8 @@ module Aws::SSM
     #   results. If the SSM document contains only one plugin, the name can
     #   be omitted and the details will be returned.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationRequest AWS API Documentation
     #
     class GetCommandInvocationRequest < Struct.new(
       :command_id,
@@ -3400,6 +3616,8 @@ module Aws::SSM
     #   the command has not finished executing, then this string is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationResult AWS API Documentation
+    #
     class GetCommandInvocationResult < Struct.new(
       :command_id,
       :instance_id,
@@ -3421,11 +3639,15 @@ module Aws::SSM
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaselineRequest AWS API Documentation
+    #
     class GetDefaultPatchBaselineRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] baseline_id
     #   The ID of the default patch baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDefaultPatchBaselineResult AWS API Documentation
     #
     class GetDefaultPatchBaselineResult < Struct.new(
       :baseline_id)
@@ -3449,6 +3671,8 @@ module Aws::SSM
     #   The user-defined snapshot ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstanceRequest AWS API Documentation
+    #
     class GetDeployablePatchSnapshotForInstanceRequest < Struct.new(
       :instance_id,
       :snapshot_id)
@@ -3467,6 +3691,8 @@ module Aws::SSM
     #   A pre-signed Amazon S3 URL that can be used to download the patch
     #   snapshot.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDeployablePatchSnapshotForInstanceResult AWS API Documentation
     #
     class GetDeployablePatchSnapshotForInstanceResult < Struct.new(
       :instance_id,
@@ -3491,6 +3717,8 @@ module Aws::SSM
     #   The document version for which you want information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentRequest AWS API Documentation
+    #
     class GetDocumentRequest < Struct.new(
       :name,
       :document_version)
@@ -3512,6 +3740,8 @@ module Aws::SSM
     # @!attribute [rw] document_type
     #   The document type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetDocumentResult AWS API Documentation
     #
     class GetDocumentResult < Struct.new(
       :name,
@@ -3561,6 +3791,8 @@ module Aws::SSM
     #   next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventoryRequest AWS API Documentation
+    #
     class GetInventoryRequest < Struct.new(
       :filters,
       :result_attributes,
@@ -3578,6 +3810,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventoryResult AWS API Documentation
     #
     class GetInventoryResult < Struct.new(
       :entities,
@@ -3609,6 +3843,8 @@ module Aws::SSM
     #   next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchemaRequest AWS API Documentation
+    #
     class GetInventorySchemaRequest < Struct.new(
       :type_name,
       :next_token,
@@ -3624,6 +3860,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetInventorySchemaResult AWS API Documentation
     #
     class GetInventorySchemaResult < Struct.new(
       :schemas,
@@ -3641,6 +3879,8 @@ module Aws::SSM
     # @!attribute [rw] window_execution_id
     #   The ID of the Maintenance Window execution that includes the task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionRequest AWS API Documentation
     #
     class GetMaintenanceWindowExecutionRequest < Struct.new(
       :window_execution_id)
@@ -3672,6 +3912,8 @@ module Aws::SSM
     #   The time the Maintenance Window finished executing.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionResult AWS API Documentation
+    #
     class GetMaintenanceWindowExecutionResult < Struct.new(
       :window_execution_id,
       :task_ids,
@@ -3698,6 +3940,8 @@ module Aws::SSM
     #   The ID of the specific task execution in the Maintenance Window task
     #   that should be retrieved.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskRequest AWS API Documentation
     #
     class GetMaintenanceWindowExecutionTaskRequest < Struct.new(
       :window_execution_id,
@@ -3766,6 +4010,8 @@ module Aws::SSM
     #   The time the task execution completed.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowExecutionTaskResult AWS API Documentation
+    #
     class GetMaintenanceWindowExecutionTaskResult < Struct.new(
       :window_execution_id,
       :task_execution_id,
@@ -3793,6 +4039,8 @@ module Aws::SSM
     # @!attribute [rw] window_id
     #   The ID of the desired Maintenance Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowRequest AWS API Documentation
     #
     class GetMaintenanceWindowRequest < Struct.new(
       :window_id)
@@ -3838,6 +4086,8 @@ module Aws::SSM
     #   The date the Maintenance Window was last modified.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetMaintenanceWindowResult AWS API Documentation
+    #
     class GetMaintenanceWindowResult < Struct.new(
       :window_id,
       :name,
@@ -3881,6 +4131,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistoryRequest AWS API Documentation
+    #
     class GetParameterHistoryRequest < Struct.new(
       :name,
       :with_decryption,
@@ -3897,6 +4149,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParameterHistoryResult AWS API Documentation
     #
     class GetParameterHistoryResult < Struct.new(
       :parameters,
@@ -3922,6 +4176,8 @@ module Aws::SSM
     #   StringList parameter types.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersRequest AWS API Documentation
+    #
     class GetParametersRequest < Struct.new(
       :names,
       :with_decryption)
@@ -3936,6 +4192,8 @@ module Aws::SSM
     #   A list of parameters that are not formatted correctly or do not run
     #   when executed.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetParametersResult AWS API Documentation
     #
     class GetParametersResult < Struct.new(
       :parameters,
@@ -3955,6 +4213,8 @@ module Aws::SSM
     #   retrieved.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroupRequest AWS API Documentation
+    #
     class GetPatchBaselineForPatchGroupRequest < Struct.new(
       :patch_group)
       include Aws::Structure
@@ -3968,6 +4228,8 @@ module Aws::SSM
     # @!attribute [rw] patch_group
     #   The name of the patch group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineForPatchGroupResult AWS API Documentation
     #
     class GetPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
@@ -3985,6 +4247,8 @@ module Aws::SSM
     # @!attribute [rw] baseline_id
     #   The ID of the patch baseline to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineRequest AWS API Documentation
     #
     class GetPatchBaselineRequest < Struct.new(
       :baseline_id)
@@ -4031,6 +4295,8 @@ module Aws::SSM
     #   A description of the patch baseline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetPatchBaselineResult AWS API Documentation
+    #
     class GetPatchBaselineResult < Struct.new(
       :baseline_id,
       :name,
@@ -4055,6 +4321,8 @@ module Aws::SSM
     #   The number of associations for the instance(s).
     #   @return [Hash<String,Integer>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAggregatedAssociationOverview AWS API Documentation
+    #
     class InstanceAggregatedAssociationOverview < Struct.new(
       :detailed_status,
       :instance_association_status_aggregated_count)
@@ -4074,6 +4342,8 @@ module Aws::SSM
     # @!attribute [rw] content
     #   The content of the association document for the instance(s).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociation AWS API Documentation
     #
     class InstanceAssociation < Struct.new(
       :association_id,
@@ -4101,6 +4371,8 @@ module Aws::SSM
     #   request.
     #   @return [Types::S3OutputLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationOutputLocation AWS API Documentation
+    #
     class InstanceAssociationOutputLocation < Struct.new(
       :s3_location)
       include Aws::Structure
@@ -4113,6 +4385,8 @@ module Aws::SSM
     #   The URL of Amazon S3 bucket where you want to store the results of
     #   this request.
     #   @return [Types::S3OutputUrl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationOutputUrl AWS API Documentation
     #
     class InstanceAssociationOutputUrl < Struct.new(
       :s3_output_url)
@@ -4161,6 +4435,8 @@ module Aws::SSM
     #   A URL for an Amazon S3 bucket where you want to store the results of
     #   this request.
     #   @return [Types::InstanceAssociationOutputUrl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceAssociationStatusInfo AWS API Documentation
     #
     class InstanceAssociationStatusInfo < Struct.new(
       :association_id,
@@ -4259,6 +4535,8 @@ module Aws::SSM
     #   Information about the association.
     #   @return [Types::InstanceAggregatedAssociationOverview]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformation AWS API Documentation
+    #
     class InstanceInformation < Struct.new(
       :instance_id,
       :ping_status,
@@ -4300,6 +4578,8 @@ module Aws::SSM
     #   The filter values.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformationFilter AWS API Documentation
+    #
     class InstanceInformationFilter < Struct.new(
       :key,
       :value_set)
@@ -4327,6 +4607,8 @@ module Aws::SSM
     # @!attribute [rw] values
     #   The filter values.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstanceInformationStringFilter AWS API Documentation
     #
     class InstanceInformationStringFilter < Struct.new(
       :key,
@@ -4403,6 +4685,8 @@ module Aws::SSM
     #   patch compliance state) or INSTALL (install missing patches).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchState AWS API Documentation
+    #
     class InstancePatchState < Struct.new(
       :instance_id,
       :patch_group,
@@ -4448,6 +4732,8 @@ module Aws::SSM
     #   Equal, NotEqual, LessThan or GreaterThan.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InstancePatchStateFilter AWS API Documentation
+    #
     class InstancePatchStateFilter < Struct.new(
       :key,
       :values,
@@ -4482,6 +4768,8 @@ module Aws::SSM
     #   The type of filter. Valid values include the following:
     #   "Equal"\|"NotEqual"\|"BeginWith"\|"LessThan"\|"GreaterThan"
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryFilter AWS API Documentation
     #
     class InventoryFilter < Struct.new(
       :key,
@@ -4535,6 +4823,8 @@ module Aws::SSM
     #   The inventory data of the inventory type.
     #   @return [Array<Hash<String,String>>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItem AWS API Documentation
+    #
     class InventoryItem < Struct.new(
       :type_name,
       :schema_version,
@@ -4554,6 +4844,8 @@ module Aws::SSM
     # @!attribute [rw] data_type
     #   The data type of the inventory item attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItemAttribute AWS API Documentation
     #
     class InventoryItemAttribute < Struct.new(
       :name,
@@ -4581,6 +4873,8 @@ module Aws::SSM
     #   attribute name.
     #   @return [Array<Types::InventoryItemAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryItemSchema AWS API Documentation
+    #
     class InventoryItemSchema < Struct.new(
       :type_name,
       :version,
@@ -4599,6 +4893,8 @@ module Aws::SSM
     # @!attribute [rw] data
     #   The data section in the inventory result entity json.
     #   @return [Hash<String,Types::InventoryResultItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryResultEntity AWS API Documentation
     #
     class InventoryResultEntity < Struct.new(
       :id,
@@ -4631,6 +4927,8 @@ module Aws::SSM
     #   Contains all the inventory data of the item type. Results include
     #   attribute names and values.
     #   @return [Array<Hash<String,String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InventoryResultItem AWS API Documentation
     #
     class InventoryResultItem < Struct.new(
       :type_name,
@@ -4671,6 +4969,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationsRequest AWS API Documentation
+    #
     class ListAssociationsRequest < Struct.new(
       :association_filter_list,
       :max_results,
@@ -4686,6 +4986,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationsResult AWS API Documentation
     #
     class ListAssociationsResult < Struct.new(
       :associations,
@@ -4739,6 +5041,8 @@ module Aws::SSM
     #   executions and any command output. By default this is set to False.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocationsRequest AWS API Documentation
+    #
     class ListCommandInvocationsRequest < Struct.new(
       :command_id,
       :instance_id,
@@ -4757,6 +5061,8 @@ module Aws::SSM
     #   (Optional) The token for the next set of items to return. (You
     #   received this token from a previous call.)
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandInvocationsResult AWS API Documentation
     #
     class ListCommandInvocationsResult < Struct.new(
       :command_invocations,
@@ -4804,6 +5110,8 @@ module Aws::SSM
     #   specific list of results.
     #   @return [Array<Types::CommandFilter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandsRequest AWS API Documentation
+    #
     class ListCommandsRequest < Struct.new(
       :command_id,
       :instance_id,
@@ -4821,6 +5129,8 @@ module Aws::SSM
     #   (Optional) The token for the next set of items to return. (You
     #   received this token from a previous call.)
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListCommandsResult AWS API Documentation
     #
     class ListCommandsResult < Struct.new(
       :commands,
@@ -4852,6 +5162,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersionsRequest AWS API Documentation
+    #
     class ListDocumentVersionsRequest < Struct.new(
       :name,
       :max_results,
@@ -4867,6 +5179,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentVersionsResult AWS API Documentation
     #
     class ListDocumentVersionsResult < Struct.new(
       :document_versions,
@@ -4904,6 +5218,8 @@ module Aws::SSM
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentsRequest AWS API Documentation
+    #
     class ListDocumentsRequest < Struct.new(
       :document_filter_list,
       :max_results,
@@ -4919,6 +5235,8 @@ module Aws::SSM
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListDocumentsResult AWS API Documentation
     #
     class ListDocumentsResult < Struct.new(
       :document_identifiers,
@@ -4967,6 +5285,8 @@ module Aws::SSM
     #   next set of results.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntriesRequest AWS API Documentation
+    #
     class ListInventoryEntriesRequest < Struct.new(
       :instance_id,
       :type_name,
@@ -5003,6 +5323,8 @@ module Aws::SSM
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListInventoryEntriesResult AWS API Documentation
+    #
     class ListInventoryEntriesResult < Struct.new(
       :type_name,
       :instance_id,
@@ -5029,6 +5351,8 @@ module Aws::SSM
     #   The resource ID for which you want to see a list of tags.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListTagsForResourceRequest AWS API Documentation
+    #
     class ListTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id)
@@ -5038,6 +5362,8 @@ module Aws::SSM
     # @!attribute [rw] tag_list
     #   A list of tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListTagsForResourceResult AWS API Documentation
     #
     class ListTagsForResourceResult < Struct.new(
       :tag_list)
@@ -5066,6 +5392,8 @@ module Aws::SSM
     # @!attribute [rw] s3_region
     #   The region where the Amazon S3 bucket is located.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/LoggingInfo AWS API Documentation
     #
     class LoggingInfo < Struct.new(
       :s3_bucket_name,
@@ -5100,6 +5428,8 @@ module Aws::SSM
     # @!attribute [rw] end_time
     #   The time the execution finished.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecution AWS API Documentation
     #
     class MaintenanceWindowExecution < Struct.new(
       :window_id,
@@ -5147,6 +5477,8 @@ module Aws::SSM
     # @!attribute [rw] task_type
     #   The type of executed task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskIdentity AWS API Documentation
     #
     class MaintenanceWindowExecutionTaskIdentity < Struct.new(
       :window_execution_id,
@@ -5216,6 +5548,8 @@ module Aws::SSM
     #   invocation was performed for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowExecutionTaskInvocationIdentity AWS API Documentation
+    #
     class MaintenanceWindowExecutionTaskInvocationIdentity < Struct.new(
       :window_execution_id,
       :task_execution_id,
@@ -5249,6 +5583,8 @@ module Aws::SSM
     #   The filter values.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowFilter AWS API Documentation
+    #
     class MaintenanceWindowFilter < Struct.new(
       :key,
       :values)
@@ -5277,6 +5613,8 @@ module Aws::SSM
     #   The number of hours before the end of the Maintenance Window that
     #   Systems Manager stops scheduling new tasks for execution.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowIdentity AWS API Documentation
     #
     class MaintenanceWindowIdentity < Struct.new(
       :window_id,
@@ -5313,6 +5651,8 @@ module Aws::SSM
     #   raised while running tasks for these targets in this Maintenance
     #   Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTarget AWS API Documentation
     #
     class MaintenanceWindowTarget < Struct.new(
       :window_id,
@@ -5377,6 +5717,8 @@ module Aws::SSM
     #   scheduled.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTask AWS API Documentation
+    #
     class MaintenanceWindowTask < Struct.new(
       :window_id,
       :window_task_id,
@@ -5405,6 +5747,8 @@ module Aws::SSM
     #   This field contains an array of 0 or more strings, each 1 to 255
     #   characters in length.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/MaintenanceWindowTaskParameterValueExpression AWS API Documentation
     #
     class MaintenanceWindowTaskParameterValueExpression < Struct.new(
       :values)
@@ -5443,6 +5787,8 @@ module Aws::SSM
     #   system removes access to the document.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermissionRequest AWS API Documentation
+    #
     class ModifyDocumentPermissionRequest < Struct.new(
       :name,
       :permission_type,
@@ -5451,6 +5797,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ModifyDocumentPermissionResponse AWS API Documentation
+    #
     class ModifyDocumentPermissionResponse < Aws::EmptyStructure; end
 
     # Configurations for sending notifications.
@@ -5489,6 +5837,8 @@ module Aws::SSM
     #   changes.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/NotificationConfig AWS API Documentation
+    #
     class NotificationConfig < Struct.new(
       :notification_arn,
       :notification_events,
@@ -5510,6 +5860,8 @@ module Aws::SSM
     # @!attribute [rw] value
     #   The parameter value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Parameter AWS API Documentation
     #
     class Parameter < Struct.new(
       :name,
@@ -5548,6 +5900,8 @@ module Aws::SSM
     # @!attribute [rw] value
     #   The parameter value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterHistory AWS API Documentation
     #
     class ParameterHistory < Struct.new(
       :name,
@@ -5589,6 +5943,8 @@ module Aws::SSM
     #   Description of the parameter actions.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParameterMetadata AWS API Documentation
+    #
     class ParameterMetadata < Struct.new(
       :name,
       :type,
@@ -5617,6 +5973,8 @@ module Aws::SSM
     # @!attribute [rw] values
     #   The filter values.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ParametersFilter AWS API Documentation
     #
     class ParametersFilter < Struct.new(
       :key,
@@ -5683,6 +6041,8 @@ module Aws::SSM
     #   The language of the patch if it’s language-specific.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Patch AWS API Documentation
+    #
     class Patch < Struct.new(
       :id,
       :release_date,
@@ -5717,6 +6077,8 @@ module Aws::SSM
     # @!attribute [rw] default_baseline
     #   Whether this is the default baseline.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchBaselineIdentity AWS API Documentation
     #
     class PatchBaselineIdentity < Struct.new(
       :baseline_id,
@@ -5756,6 +6118,8 @@ module Aws::SSM
     #   The date/time the patch was installed on the instance.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchComplianceData AWS API Documentation
+    #
     class PatchComplianceData < Struct.new(
       :title,
       :kb_id,
@@ -5785,6 +6149,8 @@ module Aws::SSM
     #   The value for the filter key.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter AWS API Documentation
+    #
     class PatchFilter < Struct.new(
       :key,
       :values)
@@ -5809,6 +6175,8 @@ module Aws::SSM
     #   The set of patch filters that make up the group.
     #   @return [Array<Types::PatchFilter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilterGroup AWS API Documentation
+    #
     class PatchFilterGroup < Struct.new(
       :patch_filters)
       include Aws::Structure
@@ -5824,6 +6192,8 @@ module Aws::SSM
     # @!attribute [rw] baseline_identity
     #   The patch baseline the patch group is registered with.
     #   @return [Types::PatchBaselineIdentity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchGroupPatchBaselineMapping AWS API Documentation
     #
     class PatchGroupPatchBaselineMapping < Struct.new(
       :patch_group,
@@ -5848,6 +6218,8 @@ module Aws::SSM
     # @!attribute [rw] values
     #   The value for the filter.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchOrchestratorFilter AWS API Documentation
     #
     class PatchOrchestratorFilter < Struct.new(
       :key,
@@ -5881,6 +6253,8 @@ module Aws::SSM
     #   the rule the patch is marked as approved in the patch baseline.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchRule AWS API Documentation
+    #
     class PatchRule < Struct.new(
       :patch_filter_group,
       :approve_after_days)
@@ -5912,6 +6286,8 @@ module Aws::SSM
     #   The rules that make up the rule group.
     #   @return [Array<Types::PatchRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchRuleGroup AWS API Documentation
+    #
     class PatchRuleGroup < Struct.new(
       :patch_rules)
       include Aws::Structure
@@ -5928,6 +6304,8 @@ module Aws::SSM
     #   The date the patch was approved (or will be approved if the status
     #   is PENDING\_APPROVAL).
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchStatus AWS API Documentation
     #
     class PatchStatus < Struct.new(
       :deployment_status,
@@ -5964,12 +6342,16 @@ module Aws::SSM
     #   The inventory items that you want to add or update on instances.
     #   @return [Array<Types::InventoryItem>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventoryRequest AWS API Documentation
+    #
     class PutInventoryRequest < Struct.new(
       :instance_id,
       :items)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutInventoryResult AWS API Documentation
+    #
     class PutInventoryResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutParameterRequest
@@ -6008,6 +6390,8 @@ module Aws::SSM
     #   Overwrite an existing parameter.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
+    #
     class PutParameterRequest < Struct.new(
       :name,
       :description,
@@ -6018,6 +6402,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterResult AWS API Documentation
+    #
     class PutParameterResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass RegisterDefaultPatchBaselineRequest
@@ -6032,6 +6418,8 @@ module Aws::SSM
     #   baseline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaselineRequest AWS API Documentation
+    #
     class RegisterDefaultPatchBaselineRequest < Struct.new(
       :baseline_id)
       include Aws::Structure
@@ -6040,6 +6428,8 @@ module Aws::SSM
     # @!attribute [rw] baseline_id
     #   The ID of the default patch baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultPatchBaselineResult AWS API Documentation
     #
     class RegisterDefaultPatchBaselineResult < Struct.new(
       :baseline_id)
@@ -6063,6 +6453,8 @@ module Aws::SSM
     #   baseline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroupRequest AWS API Documentation
+    #
     class RegisterPatchBaselineForPatchGroupRequest < Struct.new(
       :baseline_id,
       :patch_group)
@@ -6076,6 +6468,8 @@ module Aws::SSM
     # @!attribute [rw] patch_group
     #   The name of the patch group registered with the patch baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterPatchBaselineForPatchGroupResult AWS API Documentation
     #
     class RegisterPatchBaselineForPatchGroupResult < Struct.new(
       :baseline_id,
@@ -6128,6 +6522,8 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindowRequest AWS API Documentation
+    #
     class RegisterTargetWithMaintenanceWindowRequest < Struct.new(
       :window_id,
       :resource_type,
@@ -6140,6 +6536,8 @@ module Aws::SSM
     # @!attribute [rw] window_target_id
     #   The ID of the target definition in this Maintenance Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTargetWithMaintenanceWindowResult AWS API Documentation
     #
     class RegisterTargetWithMaintenanceWindowResult < Struct.new(
       :window_target_id)
@@ -6232,6 +6630,8 @@ module Aws::SSM
     #   not need to pass this option.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowRequest AWS API Documentation
+    #
     class RegisterTaskWithMaintenanceWindowRequest < Struct.new(
       :window_id,
       :targets,
@@ -6250,6 +6650,8 @@ module Aws::SSM
     # @!attribute [rw] window_task_id
     #   The id of the task in the Maintenance Window.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterTaskWithMaintenanceWindowResult AWS API Documentation
     #
     class RegisterTaskWithMaintenanceWindowResult < Struct.new(
       :window_task_id)
@@ -6277,6 +6679,8 @@ module Aws::SSM
     #   Tag keys that you want to remove from the specified resource.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResourceRequest AWS API Documentation
+    #
     class RemoveTagsFromResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
@@ -6284,6 +6688,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RemoveTagsFromResourceResult AWS API Documentation
+    #
     class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
     # The inventory item result attribute.
@@ -6299,6 +6705,8 @@ module Aws::SSM
     #   Name of the inventory item type. Valid value:
     #   “AWS:InstanceInformation”. Default Value: “AWS:InstanceInformation”.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResultAttribute AWS API Documentation
     #
     class ResultAttribute < Struct.new(
       :type_name)
@@ -6329,6 +6737,8 @@ module Aws::SSM
     #   The Amazon S3 bucket subfolder.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/S3OutputLocation AWS API Documentation
+    #
     class S3OutputLocation < Struct.new(
       :output_s3_region,
       :output_s3_bucket_name,
@@ -6343,6 +6753,8 @@ module Aws::SSM
     #   A URL for an Amazon S3 bucket where you want to store the results of
     #   this request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/S3OutputUrl AWS API Documentation
     #
     class S3OutputUrl < Struct.new(
       :output_url)
@@ -6491,6 +6903,8 @@ module Aws::SSM
     #   Configurations for sending notifications.
     #   @return [Types::NotificationConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandRequest AWS API Documentation
+    #
     class SendCommandRequest < Struct.new(
       :instance_ids,
       :targets,
@@ -6514,6 +6928,8 @@ module Aws::SSM
     #   The request as it was received by Systems Manager. Also provides the
     #   command ID which can be used future references to this request.
     #   @return [Types::Command]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/SendCommandResult AWS API Documentation
     #
     class SendCommandResult < Struct.new(
       :command)
@@ -6544,6 +6960,8 @@ module Aws::SSM
     #   parameters in the Automation document.
     #   @return [Hash<String,Array<String>>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionRequest AWS API Documentation
+    #
     class StartAutomationExecutionRequest < Struct.new(
       :document_name,
       :document_version,
@@ -6554,6 +6972,8 @@ module Aws::SSM
     # @!attribute [rw] automation_execution_id
     #   The unique ID of a newly scheduled automation execution.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartAutomationExecutionResult AWS API Documentation
     #
     class StartAutomationExecutionResult < Struct.new(
       :automation_execution_id)
@@ -6609,6 +7029,8 @@ module Aws::SSM
     #   If a step failed, this message explains why the execution failed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
+    #
     class StepExecution < Struct.new(
       :step_name,
       :action,
@@ -6634,11 +7056,15 @@ module Aws::SSM
     #   The execution ID of the Automation to stop.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecutionRequest AWS API Documentation
+    #
     class StopAutomationExecutionRequest < Struct.new(
       :automation_execution_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StopAutomationExecutionResult AWS API Documentation
+    #
     class StopAutomationExecutionResult < Aws::EmptyStructure; end
 
     # Metadata that you assign to your managed instances. Tags enable you to
@@ -6660,6 +7086,8 @@ module Aws::SSM
     # @!attribute [rw] value
     #   The value of the tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -6708,6 +7136,8 @@ module Aws::SSM
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
     #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation
     #
     class Target < Struct.new(
       :key,
@@ -6766,6 +7196,8 @@ module Aws::SSM
     #   "folder name" \} \}"`
     #   @return [Types::InstanceAssociationOutputLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
+    #
     class UpdateAssociationRequest < Struct.new(
       :association_id,
       :parameters,
@@ -6778,6 +7210,8 @@ module Aws::SSM
     # @!attribute [rw] association_description
     #   The description of the association that was updated.
     #   @return [Types::AssociationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationResult AWS API Documentation
     #
     class UpdateAssociationResult < Struct.new(
       :association_description)
@@ -6810,6 +7244,8 @@ module Aws::SSM
     #   The association status.
     #   @return [Types::AssociationStatus]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatusRequest AWS API Documentation
+    #
     class UpdateAssociationStatusRequest < Struct.new(
       :name,
       :instance_id,
@@ -6820,6 +7256,8 @@ module Aws::SSM
     # @!attribute [rw] association_description
     #   Information about the association.
     #   @return [Types::AssociationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatusResult AWS API Documentation
     #
     class UpdateAssociationStatusResult < Struct.new(
       :association_description)
@@ -6844,6 +7282,8 @@ module Aws::SSM
     #   version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersionRequest AWS API Documentation
+    #
     class UpdateDocumentDefaultVersionRequest < Struct.new(
       :name,
       :document_version)
@@ -6854,6 +7294,8 @@ module Aws::SSM
     #   The description of a custom document that you want to set as the
     #   default version.
     #   @return [Types::DocumentDefaultVersionDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentDefaultVersionResult AWS API Documentation
     #
     class UpdateDocumentDefaultVersionResult < Struct.new(
       :description)
@@ -6881,6 +7323,8 @@ module Aws::SSM
     #   The version of the document that you want to update.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentRequest AWS API Documentation
+    #
     class UpdateDocumentRequest < Struct.new(
       :content,
       :name,
@@ -6891,6 +7335,8 @@ module Aws::SSM
     # @!attribute [rw] document_description
     #   A description of the document that was updated.
     #   @return [Types::DocumentDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateDocumentResult AWS API Documentation
     #
     class UpdateDocumentResult < Struct.new(
       :document_description)
@@ -6941,6 +7387,8 @@ module Aws::SSM
     #   Whether the Maintenance Window is enabled.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowRequest AWS API Documentation
+    #
     class UpdateMaintenanceWindowRequest < Struct.new(
       :window_id,
       :name,
@@ -6983,6 +7431,8 @@ module Aws::SSM
     #   Whether the Maintenance Window is enabled.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateMaintenanceWindowResult AWS API Documentation
+    #
     class UpdateMaintenanceWindowResult < Struct.new(
       :window_id,
       :name,
@@ -7010,12 +7460,16 @@ module Aws::SSM
     #   The IAM role you want to assign or change.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleRequest AWS API Documentation
+    #
     class UpdateManagedInstanceRoleRequest < Struct.new(
       :instance_id,
       :iam_role)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateManagedInstanceRoleResult AWS API Documentation
+    #
     class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePatchBaselineRequest
@@ -7080,6 +7534,8 @@ module Aws::SSM
     #   A description of the patch baseline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaselineRequest AWS API Documentation
+    #
     class UpdatePatchBaselineRequest < Struct.new(
       :baseline_id,
       :name,
@@ -7126,6 +7582,8 @@ module Aws::SSM
     # @!attribute [rw] description
     #   A description of the Patch Baseline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdatePatchBaselineResult AWS API Documentation
     #
     class UpdatePatchBaselineResult < Struct.new(
       :baseline_id,

@@ -177,6 +177,8 @@ module Aws::Kinesis
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/AddTagsToStream AWS API Documentation
+    #
     # @overload add_tags_to_stream(params = {})
     # @param [Hash] params ({})
     def add_tags_to_stream(params = {}, options = {})
@@ -255,6 +257,8 @@ module Aws::Kinesis
     #     shard_count: 1, # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/CreateStream AWS API Documentation
+    #
     # @overload create_stream(params = {})
     # @param [Hash] params ({})
     def create_stream(params = {}, options = {})
@@ -285,6 +289,8 @@ module Aws::Kinesis
     #     stream_name: "StreamName", # required
     #     retention_period_hours: 1, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DecreaseStreamRetentionPeriod AWS API Documentation
     #
     # @overload decrease_stream_retention_period(params = {})
     # @param [Hash] params ({})
@@ -325,6 +331,8 @@ module Aws::Kinesis
     #     stream_name: "StreamName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DeleteStream AWS API Documentation
+    #
     # @overload delete_stream(params = {})
     # @param [Hash] params ({})
     def delete_stream(params = {}, options = {})
@@ -348,6 +356,8 @@ module Aws::Kinesis
     #
     #   resp.shard_limit #=> Integer
     #   resp.open_shard_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeLimits AWS API Documentation
     #
     # @overload describe_limits(params = {})
     # @param [Hash] params ({})
@@ -424,6 +434,8 @@ module Aws::Kinesis
     #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics #=> Array
     #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DescribeStream AWS API Documentation
+    #
     # @overload describe_stream(params = {})
     # @param [Hash] params ({})
     def describe_stream(params = {}, options = {})
@@ -488,6 +500,8 @@ module Aws::Kinesis
     #   resp.desired_shard_level_metrics #=> Array
     #   resp.desired_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DisableEnhancedMonitoring AWS API Documentation
+    #
     # @overload disable_enhanced_monitoring(params = {})
     # @param [Hash] params ({})
     def disable_enhanced_monitoring(params = {}, options = {})
@@ -551,6 +565,8 @@ module Aws::Kinesis
     #   resp.current_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
     #   resp.desired_shard_level_metrics #=> Array
     #   resp.desired_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/EnableEnhancedMonitoring AWS API Documentation
     #
     # @overload enable_enhanced_monitoring(params = {})
     # @param [Hash] params ({})
@@ -654,6 +670,8 @@ module Aws::Kinesis
     #   resp.records[0].partition_key #=> String
     #   resp.next_shard_iterator #=> String
     #   resp.millis_behind_latest #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecords AWS API Documentation
     #
     # @overload get_records(params = {})
     # @param [Hash] params ({})
@@ -770,6 +788,8 @@ module Aws::Kinesis
     #
     #   resp.shard_iterator #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIterator AWS API Documentation
+    #
     # @overload get_shard_iterator(params = {})
     # @param [Hash] params ({})
     def get_shard_iterator(params = {}, options = {})
@@ -806,6 +826,8 @@ module Aws::Kinesis
     #     stream_name: "StreamName", # required
     #     retention_period_hours: 1, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/IncreaseStreamRetentionPeriod AWS API Documentation
     #
     # @overload increase_stream_retention_period(params = {})
     # @param [Hash] params ({})
@@ -857,6 +879,8 @@ module Aws::Kinesis
     #   resp.stream_names[0] #=> String
     #   resp.has_more_streams #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListStreams AWS API Documentation
+    #
     # @overload list_streams(params = {})
     # @param [Hash] params ({})
     def list_streams(params = {}, options = {})
@@ -899,6 +923,8 @@ module Aws::Kinesis
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.has_more_tags #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/ListTagsForStream AWS API Documentation
     #
     # @overload list_tags_for_stream(params = {})
     # @param [Hash] params ({})
@@ -972,6 +998,8 @@ module Aws::Kinesis
     #     shard_to_merge: "ShardId", # required
     #     adjacent_shard_to_merge: "ShardId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/MergeShards AWS API Documentation
     #
     # @overload merge_shards(params = {})
     # @param [Hash] params ({})
@@ -1080,6 +1108,8 @@ module Aws::Kinesis
     #
     #   resp.shard_id #=> String
     #   resp.sequence_number #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecord AWS API Documentation
     #
     # @overload put_record(params = {})
     # @param [Hash] params ({})
@@ -1196,6 +1226,8 @@ module Aws::Kinesis
     #   resp.records[0].error_code #=> String
     #   resp.records[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecords AWS API Documentation
+    #
     # @overload put_records(params = {})
     # @param [Hash] params ({})
     def put_records(params = {}, options = {})
@@ -1223,6 +1255,8 @@ module Aws::Kinesis
     #     stream_name: "StreamName", # required
     #     tag_keys: ["TagKey"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/RemoveTagsFromStream AWS API Documentation
     #
     # @overload remove_tags_from_stream(params = {})
     # @param [Hash] params ({})
@@ -1315,6 +1349,8 @@ module Aws::Kinesis
     #     new_starting_hash_key: "HashKey", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SplitShard AWS API Documentation
+    #
     # @overload split_shard(params = {})
     # @param [Hash] params ({})
     def split_shard(params = {}, options = {})
@@ -1381,6 +1417,8 @@ module Aws::Kinesis
     #   resp.stream_name #=> String
     #   resp.current_shard_count #=> Integer
     #   resp.target_shard_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/UpdateShardCount AWS API Documentation
     #
     # @overload update_shard_count(params = {})
     # @param [Hash] params ({})

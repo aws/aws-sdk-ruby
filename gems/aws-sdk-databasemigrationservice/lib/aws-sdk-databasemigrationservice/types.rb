@@ -23,6 +23,8 @@ module Aws::DatabaseMigrationService
     #   The maximum allowed value for the quota.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AccountQuota AWS API Documentation
+    #
     class AccountQuota < Struct.new(
       :account_quota_name,
       :used,
@@ -53,17 +55,23 @@ module Aws::DatabaseMigrationService
     #   The tag to be assigned to the DMS resource.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResourceMessage AWS API Documentation
+    #
     class AddTagsToResourceMessage < Struct.new(
       :resource_arn,
       :tags)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AddTagsToResourceResponse AWS API Documentation
+    #
     class AddTagsToResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] name
     #   The name of the availability zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :name)
@@ -115,6 +123,8 @@ module Aws::DatabaseMigrationService
     #   The key length of the cryptographic algorithm being used.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Certificate AWS API Documentation
+    #
     class Certificate < Struct.new(
       :certificate_identifier,
       :certificate_creation_date,
@@ -156,6 +166,8 @@ module Aws::DatabaseMigrationService
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Connection AWS API Documentation
     #
     class Connection < Struct.new(
       :replication_instance_arn,
@@ -256,6 +268,8 @@ module Aws::DatabaseMigrationService
     #   The default value is none.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointMessage AWS API Documentation
+    #
     class CreateEndpointMessage < Struct.new(
       :endpoint_identifier,
       :endpoint_type,
@@ -276,6 +290,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] endpoint
     #   The endpoint that was created.
     #   @return [Types::Endpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateEndpointResponse AWS API Documentation
     #
     class CreateEndpointResponse < Struct.new(
       :endpoint)
@@ -406,6 +422,8 @@ module Aws::DatabaseMigrationService
     #   The default value is `true`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceMessage AWS API Documentation
+    #
     class CreateReplicationInstanceMessage < Struct.new(
       :replication_instance_identifier,
       :allocated_storage,
@@ -426,6 +444,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_instance
     #   The replication instance that was created.
     #   @return [Types::ReplicationInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationInstanceResponse AWS API Documentation
     #
     class CreateReplicationInstanceResponse < Struct.new(
       :replication_instance)
@@ -469,6 +489,8 @@ module Aws::DatabaseMigrationService
     #   The tag to be assigned to the subnet group.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroupMessage AWS API Documentation
+    #
     class CreateReplicationSubnetGroupMessage < Struct.new(
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
@@ -480,6 +502,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_subnet_group
     #   The replication subnet group that was created.
     #   @return [Types::ReplicationSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationSubnetGroupResponse AWS API Documentation
     #
     class CreateReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group)
@@ -561,6 +585,8 @@ module Aws::DatabaseMigrationService
     #   Tags to be added to the replication instance.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTaskMessage AWS API Documentation
+    #
     class CreateReplicationTaskMessage < Struct.new(
       :replication_task_identifier,
       :source_endpoint_arn,
@@ -578,6 +604,8 @@ module Aws::DatabaseMigrationService
     #   The replication task that was created.
     #   @return [Types::ReplicationTask]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/CreateReplicationTaskResponse AWS API Documentation
+    #
     class CreateReplicationTaskResponse < Struct.new(
       :replication_task)
       include Aws::Structure
@@ -594,6 +622,8 @@ module Aws::DatabaseMigrationService
     #   The Amazon Resource Name (ARN) of the deleted certificate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificateMessage AWS API Documentation
+    #
     class DeleteCertificateMessage < Struct.new(
       :certificate_arn)
       include Aws::Structure
@@ -602,6 +632,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] certificate
     #   The Secure Sockets Layer (SSL) certificate.
     #   @return [Types::Certificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteCertificateResponse AWS API Documentation
     #
     class DeleteCertificateResponse < Struct.new(
       :certificate)
@@ -620,6 +652,8 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpointMessage AWS API Documentation
+    #
     class DeleteEndpointMessage < Struct.new(
       :endpoint_arn)
       include Aws::Structure
@@ -628,6 +662,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] endpoint
     #   The endpoint that was deleted.
     #   @return [Types::Endpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteEndpointResponse AWS API Documentation
     #
     class DeleteEndpointResponse < Struct.new(
       :endpoint)
@@ -646,6 +682,8 @@ module Aws::DatabaseMigrationService
     #   deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstanceMessage AWS API Documentation
+    #
     class DeleteReplicationInstanceMessage < Struct.new(
       :replication_instance_arn)
       include Aws::Structure
@@ -654,6 +692,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_instance
     #   The replication instance that was deleted.
     #   @return [Types::ReplicationInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationInstanceResponse AWS API Documentation
     #
     class DeleteReplicationInstanceResponse < Struct.new(
       :replication_instance)
@@ -671,11 +711,15 @@ module Aws::DatabaseMigrationService
     #   The subnet group name of the replication instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroupMessage AWS API Documentation
+    #
     class DeleteReplicationSubnetGroupMessage < Struct.new(
       :replication_subnet_group_identifier)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationSubnetGroupResponse AWS API Documentation
+    #
     class DeleteReplicationSubnetGroupResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteReplicationTaskMessage
@@ -690,6 +734,8 @@ module Aws::DatabaseMigrationService
     #   deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskMessage AWS API Documentation
+    #
     class DeleteReplicationTaskMessage < Struct.new(
       :replication_task_arn)
       include Aws::Structure
@@ -699,6 +745,8 @@ module Aws::DatabaseMigrationService
     #   The deleted replication task.
     #   @return [Types::ReplicationTask]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DeleteReplicationTaskResponse AWS API Documentation
+    #
     class DeleteReplicationTaskResponse < Struct.new(
       :replication_task)
       include Aws::Structure
@@ -706,11 +754,15 @@ module Aws::DatabaseMigrationService
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributesMessage AWS API Documentation
+    #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_quotas
     #   Account quota information.
     #   @return [Array<Types::AccountQuota>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeAccountAttributesResponse AWS API Documentation
     #
     class DescribeAccountAttributesResponse < Struct.new(
       :account_quotas)
@@ -751,6 +803,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificatesMessage AWS API Documentation
+    #
     class DescribeCertificatesMessage < Struct.new(
       :filters,
       :max_records,
@@ -766,6 +820,8 @@ module Aws::DatabaseMigrationService
     #   The Secure Sockets Layer (SSL) certificates associated with the
     #   replication instance.
     #   @return [Array<Types::Certificate>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeCertificatesResponse AWS API Documentation
     #
     class DescribeCertificatesResponse < Struct.new(
       :marker,
@@ -810,6 +866,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnectionsMessage AWS API Documentation
+    #
     class DescribeConnectionsMessage < Struct.new(
       :filters,
       :max_records,
@@ -826,6 +884,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] connections
     #   A description of the connections.
     #   @return [Array<Types::Connection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeConnectionsResponse AWS API Documentation
     #
     class DescribeConnectionsResponse < Struct.new(
       :marker,
@@ -870,6 +930,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypesMessage AWS API Documentation
+    #
     class DescribeEndpointTypesMessage < Struct.new(
       :filters,
       :max_records,
@@ -886,6 +948,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] supported_endpoint_types
     #   The type of endpoints that are supported.
     #   @return [Array<Types::SupportedEndpointType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointTypesResponse AWS API Documentation
     #
     class DescribeEndpointTypesResponse < Struct.new(
       :marker,
@@ -931,6 +995,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointsMessage AWS API Documentation
+    #
     class DescribeEndpointsMessage < Struct.new(
       :filters,
       :max_records,
@@ -947,6 +1013,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] endpoints
     #   Endpoint description.
     #   @return [Array<Types::Endpoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeEndpointsResponse AWS API Documentation
     #
     class DescribeEndpointsResponse < Struct.new(
       :marker,
@@ -979,6 +1047,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstancesMessage AWS API Documentation
+    #
     class DescribeOrderableReplicationInstancesMessage < Struct.new(
       :max_records,
       :marker)
@@ -994,6 +1064,8 @@ module Aws::DatabaseMigrationService
     #   parameter is specified, the response includes only records beyond
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeOrderableReplicationInstancesResponse AWS API Documentation
     #
     class DescribeOrderableReplicationInstancesResponse < Struct.new(
       :orderable_replication_instances,
@@ -1013,6 +1085,8 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatusMessage AWS API Documentation
+    #
     class DescribeRefreshSchemasStatusMessage < Struct.new(
       :endpoint_arn)
       include Aws::Structure
@@ -1021,6 +1095,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] refresh_schemas_status
     #   The status of the schema.
     #   @return [Types::RefreshSchemasStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeRefreshSchemasStatusResponse AWS API Documentation
     #
     class DescribeRefreshSchemasStatusResponse < Struct.new(
       :refresh_schemas_status)
@@ -1066,6 +1142,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstancesMessage AWS API Documentation
+    #
     class DescribeReplicationInstancesMessage < Struct.new(
       :filters,
       :max_records,
@@ -1082,6 +1160,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_instances
     #   The replication instances described.
     #   @return [Array<Types::ReplicationInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstancesResponse AWS API Documentation
     #
     class DescribeReplicationInstancesResponse < Struct.new(
       :marker,
@@ -1124,6 +1204,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroupsMessage AWS API Documentation
+    #
     class DescribeReplicationSubnetGroupsMessage < Struct.new(
       :filters,
       :max_records,
@@ -1140,6 +1222,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_subnet_groups
     #   A description of the replication subnet groups.
     #   @return [Array<Types::ReplicationSubnetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationSubnetGroupsResponse AWS API Documentation
     #
     class DescribeReplicationSubnetGroupsResponse < Struct.new(
       :marker,
@@ -1185,6 +1269,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasksMessage AWS API Documentation
+    #
     class DescribeReplicationTasksMessage < Struct.new(
       :filters,
       :max_records,
@@ -1201,6 +1287,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_tasks
     #   A description of the replication tasks.
     #   @return [Array<Types::ReplicationTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationTasksResponse AWS API Documentation
     #
     class DescribeReplicationTasksResponse < Struct.new(
       :marker,
@@ -1239,6 +1327,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemasMessage AWS API Documentation
+    #
     class DescribeSchemasMessage < Struct.new(
       :endpoint_arn,
       :max_records,
@@ -1255,6 +1345,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] schemas
     #   The described schema.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeSchemasResponse AWS API Documentation
     #
     class DescribeSchemasResponse < Struct.new(
       :marker,
@@ -1292,6 +1384,8 @@ module Aws::DatabaseMigrationService
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatisticsMessage AWS API Documentation
+    #
     class DescribeTableStatisticsMessage < Struct.new(
       :replication_task_arn,
       :max_records,
@@ -1312,6 +1406,8 @@ module Aws::DatabaseMigrationService
     #   parameter is specified, the response includes only records beyond
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeTableStatisticsResponse AWS API Documentation
     #
     class DescribeTableStatisticsResponse < Struct.new(
       :replication_task_arn,
@@ -1387,6 +1483,8 @@ module Aws::DatabaseMigrationService
     #   The default value is none.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Endpoint AWS API Documentation
+    #
     class Endpoint < Struct.new(
       :endpoint_identifier,
       :endpoint_type,
@@ -1420,6 +1518,8 @@ module Aws::DatabaseMigrationService
     #   The filter value.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Filter AWS API Documentation
+    #
     class Filter < Struct.new(
       :name,
       :values)
@@ -1449,6 +1549,8 @@ module Aws::DatabaseMigrationService
     #   SSL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificateMessage AWS API Documentation
+    #
     class ImportCertificateMessage < Struct.new(
       :certificate_identifier,
       :certificate_pem,
@@ -1459,6 +1561,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] certificate
     #   The certificate to be uploaded.
     #   @return [Types::Certificate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ImportCertificateResponse AWS API Documentation
     #
     class ImportCertificateResponse < Struct.new(
       :certificate)
@@ -1477,6 +1581,8 @@ module Aws::DatabaseMigrationService
     #   AWS DMS resource.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResourceMessage AWS API Documentation
+    #
     class ListTagsForResourceMessage < Struct.new(
       :resource_arn)
       include Aws::Structure
@@ -1485,6 +1591,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] tag_list
     #   A list of tags for the resource.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tag_list)
@@ -1567,6 +1675,8 @@ module Aws::DatabaseMigrationService
     #   The default value is none.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointMessage AWS API Documentation
+    #
     class ModifyEndpointMessage < Struct.new(
       :endpoint_arn,
       :endpoint_identifier,
@@ -1586,6 +1696,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] endpoint
     #   The modified endpoint.
     #   @return [Types::Endpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyEndpointResponse AWS API Documentation
     #
     class ModifyEndpointResponse < Struct.new(
       :endpoint)
@@ -1690,6 +1802,8 @@ module Aws::DatabaseMigrationService
     #   lowercase string.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstanceMessage AWS API Documentation
+    #
     class ModifyReplicationInstanceMessage < Struct.new(
       :replication_instance_arn,
       :allocated_storage,
@@ -1708,6 +1822,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_instance
     #   The modified replication instance.
     #   @return [Types::ReplicationInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationInstanceResponse AWS API Documentation
     #
     class ModifyReplicationInstanceResponse < Struct.new(
       :replication_instance)
@@ -1735,6 +1851,8 @@ module Aws::DatabaseMigrationService
     #   A list of subnet IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroupMessage AWS API Documentation
+    #
     class ModifyReplicationSubnetGroupMessage < Struct.new(
       :replication_subnet_group_identifier,
       :replication_subnet_group_description,
@@ -1745,6 +1863,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_subnet_group
     #   The modified replication subnet group.
     #   @return [Types::ReplicationSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationSubnetGroupResponse AWS API Documentation
     #
     class ModifyReplicationSubnetGroupResponse < Struct.new(
       :replication_subnet_group)
@@ -1801,6 +1921,8 @@ module Aws::DatabaseMigrationService
     #   The start time for the Change Data Capture (CDC) operation.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTaskMessage AWS API Documentation
+    #
     class ModifyReplicationTaskMessage < Struct.new(
       :replication_task_arn,
       :replication_task_identifier,
@@ -1814,6 +1936,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_task
     #   The replication task that was modified.
     #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ModifyReplicationTaskResponse AWS API Documentation
     #
     class ModifyReplicationTaskResponse < Struct.new(
       :replication_task)
@@ -1856,6 +1980,8 @@ module Aws::DatabaseMigrationService
     #   replication instance.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/OrderableReplicationInstance AWS API Documentation
+    #
     class OrderableReplicationInstance < Struct.new(
       :engine_version,
       :replication_instance_class,
@@ -1884,6 +2010,8 @@ module Aws::DatabaseMigrationService
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasMessage AWS API Documentation
+    #
     class RefreshSchemasMessage < Struct.new(
       :endpoint_arn,
       :replication_instance_arn)
@@ -1893,6 +2021,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] refresh_schemas_status
     #   The status of the refreshed schema.
     #   @return [Types::RefreshSchemasStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasResponse AWS API Documentation
     #
     class RefreshSchemasResponse < Struct.new(
       :refresh_schemas_status)
@@ -1920,6 +2050,8 @@ module Aws::DatabaseMigrationService
     #   The last failure message for the schema.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasStatus AWS API Documentation
+    #
     class RefreshSchemasStatus < Struct.new(
       :endpoint_arn,
       :replication_instance_arn,
@@ -1946,12 +2078,16 @@ module Aws::DatabaseMigrationService
     #   The tag key (name) of the tag to be removed.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceMessage AWS API Documentation
+    #
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_arn,
       :tag_keys)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RemoveTagsFromResourceResponse AWS API Documentation
+    #
     class RemoveTagsFromResourceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] replication_instance_identifier
@@ -2066,6 +2202,8 @@ module Aws::DatabaseMigrationService
     #   Multi-AZ deployment.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstance AWS API Documentation
+    #
     class ReplicationInstance < Struct.new(
       :replication_instance_identifier,
       :replication_instance_class,
@@ -2114,6 +2252,8 @@ module Aws::DatabaseMigrationService
     #   The engine version number of the replication instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationPendingModifiedValues AWS API Documentation
+    #
     class ReplicationPendingModifiedValues < Struct.new(
       :replication_instance_class,
       :allocated_storage,
@@ -2141,6 +2281,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] subnets
     #   The subnets that are in the subnet group.
     #   @return [Array<Types::Subnet>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationSubnetGroup AWS API Documentation
     #
     class ReplicationSubnetGroup < Struct.new(
       :replication_subnet_group_identifier,
@@ -2219,6 +2361,8 @@ module Aws::DatabaseMigrationService
     #   and table errors.
     #   @return [Types::ReplicationTaskStats]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTask AWS API Documentation
+    #
     class ReplicationTask < Struct.new(
       :replication_task_identifier,
       :source_endpoint_arn,
@@ -2261,6 +2405,8 @@ module Aws::DatabaseMigrationService
     #   The number of errors that have occurred during this task.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationTaskStats AWS API Documentation
+    #
     class ReplicationTaskStats < Struct.new(
       :full_load_progress_percent,
       :elapsed_time_millis,
@@ -2293,6 +2439,8 @@ module Aws::DatabaseMigrationService
     #   The start time for the Change Data Capture (CDC) operation.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskMessage AWS API Documentation
+    #
     class StartReplicationTaskMessage < Struct.new(
       :replication_task_arn,
       :start_replication_task_type,
@@ -2303,6 +2451,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_task
     #   The replication task started.
     #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StartReplicationTaskResponse AWS API Documentation
     #
     class StartReplicationTaskResponse < Struct.new(
       :replication_task)
@@ -2321,6 +2471,8 @@ module Aws::DatabaseMigrationService
     #   stopped.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTaskMessage AWS API Documentation
+    #
     class StopReplicationTaskMessage < Struct.new(
       :replication_task_arn)
       include Aws::Structure
@@ -2329,6 +2481,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] replication_task
     #   The replication task stopped.
     #   @return [Types::ReplicationTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/StopReplicationTaskResponse AWS API Documentation
     #
     class StopReplicationTaskResponse < Struct.new(
       :replication_task)
@@ -2346,6 +2500,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] subnet_status
     #   The status of the subnet.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
       :subnet_identifier,
@@ -2366,6 +2522,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] endpoint_type
     #   The type of endpoint.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/SupportedEndpointType AWS API Documentation
     #
     class SupportedEndpointType < Struct.new(
       :engine_name,
@@ -2411,6 +2569,8 @@ module Aws::DatabaseMigrationService
     #   The state of the table.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TableStatistics AWS API Documentation
+    #
     class TableStatistics < Struct.new(
       :schema_name,
       :table_name,
@@ -2450,6 +2610,8 @@ module Aws::DatabaseMigrationService
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -2473,6 +2635,8 @@ module Aws::DatabaseMigrationService
     #   endpoint.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnectionMessage AWS API Documentation
+    #
     class TestConnectionMessage < Struct.new(
       :replication_instance_arn,
       :endpoint_arn)
@@ -2482,6 +2646,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] connection
     #   The connection tested.
     #   @return [Types::Connection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/TestConnectionResponse AWS API Documentation
     #
     class TestConnectionResponse < Struct.new(
       :connection)
@@ -2495,6 +2661,8 @@ module Aws::DatabaseMigrationService
     # @!attribute [rw] status
     #   The status of the VPC security group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/VpcSecurityGroupMembership AWS API Documentation
     #
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,

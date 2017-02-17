@@ -30,6 +30,8 @@ module Aws::EFS
     #   can't be changed after the file system has been created.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest AWS API Documentation
+    #
     class CreateFileSystemRequest < Struct.new(
       :creation_token,
       :performance_mode)
@@ -63,6 +65,8 @@ module Aws::EFS
     #   must be for the same VPC as subnet specified.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTargetRequest AWS API Documentation
+    #
     class CreateMountTargetRequest < Struct.new(
       :file_system_id,
       :subnet_id,
@@ -94,6 +98,8 @@ module Aws::EFS
     #   pair.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTagsRequest AWS API Documentation
+    #
     class CreateTagsRequest < Struct.new(
       :file_system_id,
       :tags)
@@ -111,6 +117,8 @@ module Aws::EFS
     #   ID of the file system you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystemRequest AWS API Documentation
+    #
     class DeleteFileSystemRequest < Struct.new(
       :file_system_id)
       include Aws::Structure
@@ -126,6 +134,8 @@ module Aws::EFS
     # @!attribute [rw] mount_target_id
     #   ID of the mount target to delete (String).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTargetRequest AWS API Documentation
     #
     class DeleteMountTargetRequest < Struct.new(
       :mount_target_id)
@@ -147,6 +157,8 @@ module Aws::EFS
     # @!attribute [rw] tag_keys
     #   List of tag keys to delete.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTagsRequest AWS API Documentation
     #
     class DeleteTagsRequest < Struct.new(
       :file_system_id,
@@ -189,6 +201,8 @@ module Aws::EFS
     #   retrieve (String).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsRequest AWS API Documentation
+    #
     class DescribeFileSystemsRequest < Struct.new(
       :max_items,
       :marker,
@@ -211,6 +225,8 @@ module Aws::EFS
     #   fetch the descriptions.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystemsResponse AWS API Documentation
+    #
     class DescribeFileSystemsResponse < Struct.new(
       :marker,
       :file_systems,
@@ -229,6 +245,8 @@ module Aws::EFS
     #   ID of the mount target whose security groups you want to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroupsRequest AWS API Documentation
+    #
     class DescribeMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id)
       include Aws::Structure
@@ -237,6 +255,8 @@ module Aws::EFS
     # @!attribute [rw] security_groups
     #   Array of security groups.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroupsResponse AWS API Documentation
     #
     class DescribeMountTargetSecurityGroupsResponse < Struct.new(
       :security_groups)
@@ -277,6 +297,8 @@ module Aws::EFS
     #   not included.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetsRequest AWS API Documentation
+    #
     class DescribeMountTargetsRequest < Struct.new(
       :max_items,
       :marker,
@@ -300,6 +322,8 @@ module Aws::EFS
     #   subsequent request, you can provide `Marker` in your request with
     #   this value to retrieve the next set of mount targets.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetsResponse AWS API Documentation
     #
     class DescribeMountTargetsResponse < Struct.new(
       :marker,
@@ -332,6 +356,8 @@ module Aws::EFS
     #   ID of the file system whose tag set you want to retrieve.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTagsRequest AWS API Documentation
+    #
     class DescribeTagsRequest < Struct.new(
       :max_items,
       :marker,
@@ -355,6 +381,8 @@ module Aws::EFS
     #   value of the `Marker` parameter in your next request to retrieve the
     #   next set of tags.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTagsResponse AWS API Documentation
     #
     class DescribeTagsResponse < Struct.new(
       :marker,
@@ -416,6 +444,8 @@ module Aws::EFS
     #   The `PerformanceMode` of the file system.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemDescription AWS API Documentation
+    #
     class FileSystemDescription < Struct.new(
       :owner_id,
       :creation_token,
@@ -450,6 +480,8 @@ module Aws::EFS
     #   1970-01-01T00:00:00Z.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/FileSystemSize AWS API Documentation
+    #
     class FileSystemSize < Struct.new(
       :value,
       :timestamp)
@@ -471,6 +503,8 @@ module Aws::EFS
     # @!attribute [rw] security_groups
     #   Array of up to five VPC security group IDs.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroupsRequest AWS API Documentation
     #
     class ModifyMountTargetSecurityGroupsRequest < Struct.new(
       :mount_target_id,
@@ -510,6 +544,8 @@ module Aws::EFS
     #   the mount target.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/MountTargetDescription AWS API Documentation
+    #
     class MountTargetDescription < Struct.new(
       :owner_id,
       :mount_target_id,
@@ -540,6 +576,8 @@ module Aws::EFS
     # @!attribute [rw] value
     #   Value of the tag key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,

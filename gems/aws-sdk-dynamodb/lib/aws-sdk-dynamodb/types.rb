@@ -33,6 +33,8 @@ module Aws::DynamoDB
     #   * `B` - the attribute is of type Binary
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeDefinition AWS API Documentation
+    #
     class AttributeDefinition < Struct.new(
       :attribute_name,
       :attribute_type)
@@ -138,6 +140,8 @@ module Aws::DynamoDB
     #
     #   `"BOOL": true`
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeValue AWS API Documentation
     #
     class AttributeValue < Struct.new(
       :s,
@@ -266,6 +270,8 @@ module Aws::DynamoDB
     #     types allowed are number and number set; no other data types can
     #     be specified.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/AttributeValueUpdate AWS API Documentation
     #
     class AttributeValueUpdate < Struct.new(
       :value,
@@ -406,6 +412,8 @@ module Aws::DynamoDB
     #     response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItemInput AWS API Documentation
+    #
     class BatchGetItemInput < Struct.new(
       :request_items,
       :return_consumed_capacity)
@@ -455,6 +463,8 @@ module Aws::DynamoDB
     #
     #   * `CapacityUnits` - The total number of capacity units consumed.
     #   @return [Array<Types::ConsumedCapacity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItemOutput AWS API Documentation
     #
     class BatchGetItemOutput < Struct.new(
       :responses,
@@ -551,6 +561,8 @@ module Aws::DynamoDB
     #   returned.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItemInput AWS API Documentation
+    #
     class BatchWriteItemInput < Struct.new(
       :request_items,
       :return_consumed_capacity,
@@ -633,6 +645,8 @@ module Aws::DynamoDB
     #   * `CapacityUnits` - The total number of capacity units consumed.
     #   @return [Array<Types::ConsumedCapacity>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItemOutput AWS API Documentation
+    #
     class BatchWriteItemOutput < Struct.new(
       :unprocessed_items,
       :item_collection_metrics,
@@ -646,6 +660,8 @@ module Aws::DynamoDB
     # @!attribute [rw] capacity_units
     #   The total number of capacity units consumed on a table or an index.
     #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Capacity AWS API Documentation
     #
     class Capacity < Struct.new(
       :capacity_units)
@@ -870,6 +886,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Condition AWS API Documentation
+    #
     class Condition < Struct.new(
       :attribute_value_list,
       :comparison_operator)
@@ -909,6 +927,8 @@ module Aws::DynamoDB
     #   The amount of throughput consumed on each global index affected by
     #   the operation.
     #   @return [Hash<String,Types::Capacity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ConsumedCapacity AWS API Documentation
     #
     class ConsumedCapacity < Struct.new(
       :table_name,
@@ -968,6 +988,8 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalSecondaryIndexAction AWS API Documentation
     #
     class CreateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
@@ -1217,6 +1239,8 @@ module Aws::DynamoDB
     #       the item are written to the stream.
     #   @return [Types::StreamSpecification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableInput AWS API Documentation
+    #
     class CreateTableInput < Struct.new(
       :attribute_definitions,
       :table_name,
@@ -1233,6 +1257,8 @@ module Aws::DynamoDB
     # @!attribute [rw] table_description
     #   Represents the properties of the table.
     #   @return [Types::TableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableOutput AWS API Documentation
     #
     class CreateTableOutput < Struct.new(
       :table_description)
@@ -1252,6 +1278,8 @@ module Aws::DynamoDB
     # @!attribute [rw] index_name
     #   The name of the global secondary index to be deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteGlobalSecondaryIndexAction AWS API Documentation
     #
     class DeleteGlobalSecondaryIndexAction < Struct.new(
       :index_name)
@@ -1473,6 +1501,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItemInput AWS API Documentation
+    #
     class DeleteItemInput < Struct.new(
       :table_name,
       :key,
@@ -1535,6 +1565,8 @@ module Aws::DynamoDB
     #     rely on the precision or accuracy of the estimate.
     #   @return [Types::ItemCollectionMetrics]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItemOutput AWS API Documentation
+    #
     class DeleteItemOutput < Struct.new(
       :attributes,
       :consumed_capacity,
@@ -1560,6 +1592,8 @@ module Aws::DynamoDB
     #   of the table's key schema.
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteRequest AWS API Documentation
+    #
     class DeleteRequest < Struct.new(
       :key)
       include Aws::Structure
@@ -1578,6 +1612,8 @@ module Aws::DynamoDB
     #   The name of the table to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTableInput AWS API Documentation
+    #
     class DeleteTableInput < Struct.new(
       :table_name)
       include Aws::Structure
@@ -1589,6 +1625,8 @@ module Aws::DynamoDB
     #   Represents the properties of a table.
     #   @return [Types::TableDescription]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTableOutput AWS API Documentation
+    #
     class DeleteTableOutput < Struct.new(
       :table_description)
       include Aws::Structure
@@ -1597,6 +1635,8 @@ module Aws::DynamoDB
     # Represents the input of a `DescribeLimits` operation. Has no content.
     #
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimitsInput AWS API Documentation
     #
     class DescribeLimitsInput < Aws::EmptyStructure; end
 
@@ -1626,6 +1666,8 @@ module Aws::DynamoDB
     #   secondary indexes (GSIs).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimitsOutput AWS API Documentation
+    #
     class DescribeLimitsOutput < Struct.new(
       :account_max_read_capacity_units,
       :account_max_write_capacity_units,
@@ -1647,6 +1689,8 @@ module Aws::DynamoDB
     #   The name of the table to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableInput AWS API Documentation
+    #
     class DescribeTableInput < Struct.new(
       :table_name)
       include Aws::Structure
@@ -1657,6 +1701,8 @@ module Aws::DynamoDB
     # @!attribute [rw] table
     #   The properties of the table.
     #   @return [Types::TableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableOutput AWS API Documentation
     #
     class DescribeTableOutput < Struct.new(
       :table)
@@ -1930,6 +1976,8 @@ module Aws::DynamoDB
     #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
     #   @return [Array<Types::AttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExpectedAttributeValue AWS API Documentation
+    #
     class ExpectedAttributeValue < Struct.new(
       :value,
       :exists,
@@ -2078,6 +2126,8 @@ module Aws::DynamoDB
     #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemInput AWS API Documentation
+    #
     class GetItemInput < Struct.new(
       :table_name,
       :key,
@@ -2109,6 +2159,8 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemOutput AWS API Documentation
     #
     class GetItemOutput < Struct.new(
       :item,
@@ -2183,6 +2235,8 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndex AWS API Documentation
     #
     class GlobalSecondaryIndex < Struct.new(
       :index_name,
@@ -2282,6 +2336,8 @@ module Aws::DynamoDB
     #   The Amazon Resource Name (ARN) that uniquely identifies the index.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexDescription AWS API Documentation
+    #
     class GlobalSecondaryIndexDescription < Struct.new(
       :index_name,
       :key_schema,
@@ -2362,6 +2418,8 @@ module Aws::DynamoDB
     #   The name of an existing global secondary index to be removed.
     #   @return [Types::DeleteGlobalSecondaryIndexAction]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexUpdate AWS API Documentation
+    #
     class GlobalSecondaryIndexUpdate < Struct.new(
       :update,
       :create,
@@ -2390,6 +2448,8 @@ module Aws::DynamoDB
     #   The estimate is subject to change over time; therefore, do not rely
     #   on the precision or accuracy of the estimate.
     #   @return [Array<Float>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ItemCollectionMetrics AWS API Documentation
     #
     class ItemCollectionMetrics < Struct.new(
       :item_collection_key,
@@ -2442,6 +2502,8 @@ module Aws::DynamoDB
     #
     #    </note>
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KeySchemaElement AWS API Documentation
     #
     class KeySchemaElement < Struct.new(
       :attribute_name,
@@ -2566,6 +2628,8 @@ module Aws::DynamoDB
     #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/KeysAndAttributes AWS API Documentation
+    #
     class KeysAndAttributes < Struct.new(
       :keys,
       :attributes_to_get,
@@ -2596,6 +2660,8 @@ module Aws::DynamoDB
     #   specified, the limit is 100.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTablesInput AWS API Documentation
+    #
     class ListTablesInput < Struct.new(
       :exclusive_start_table_name,
       :limit)
@@ -2623,6 +2689,8 @@ module Aws::DynamoDB
     #   retrieved.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTablesOutput AWS API Documentation
+    #
     class ListTablesOutput < Struct.new(
       :table_names,
       :last_evaluated_table_name)
@@ -2648,6 +2716,8 @@ module Aws::DynamoDB
     #   manner, this API fetches the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResourceInput AWS API Documentation
+    #
     class ListTagsOfResourceInput < Struct.new(
       :resource_arn,
       :next_token)
@@ -2663,6 +2733,8 @@ module Aws::DynamoDB
     #   displayed. To retrieve them, call ListTagsOfResource again, with
     #   NextToken set to this value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResourceOutput AWS API Documentation
     #
     class ListTagsOfResourceOutput < Struct.new(
       :tags,
@@ -2722,6 +2794,8 @@ module Aws::DynamoDB
     #   projected.
     #   @return [Types::Projection]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndex AWS API Documentation
+    #
     class LocalSecondaryIndex < Struct.new(
       :index_name,
       :key_schema,
@@ -2779,6 +2853,8 @@ module Aws::DynamoDB
     #   The Amazon Resource Name (ARN) that uniquely identifies the index.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndexDescription AWS API Documentation
+    #
     class LocalSecondaryIndexDescription < Struct.new(
       :index_name,
       :key_schema,
@@ -2823,6 +2899,8 @@ module Aws::DynamoDB
     #   20. If you project the same attribute into two different indexes,
     #   this counts as two distinct attributes when determining the total.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Projection AWS API Documentation
     #
     class Projection < Struct.new(
       :projection_type,
@@ -2871,6 +2949,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#ProvisionedThroughput
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughput AWS API Documentation
+    #
     class ProvisionedThroughput < Struct.new(
       :read_capacity_units,
       :write_capacity_units)
@@ -2914,6 +2994,8 @@ module Aws::DynamoDB
     #   The maximum number of writes consumed per second before DynamoDB
     #   returns a `ThrottlingException`.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputDescription AWS API Documentation
     #
     class ProvisionedThroughputDescription < Struct.new(
       :last_increase_date_time,
@@ -3154,6 +3236,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemInput AWS API Documentation
+    #
     class PutItemInput < Struct.new(
       :table_name,
       :item,
@@ -3216,6 +3300,8 @@ module Aws::DynamoDB
     #     rely on the precision or accuracy of the estimate.
     #   @return [Types::ItemCollectionMetrics]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemOutput AWS API Documentation
+    #
     class PutItemOutput < Struct.new(
       :attributes,
       :consumed_capacity,
@@ -3242,6 +3328,8 @@ module Aws::DynamoDB
     #   are present in the item which are part of an index key schema for
     #   the table, their types must match the index key schema.
     #   @return [Hash<String,Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutRequest AWS API Documentation
     #
     class PutRequest < Struct.new(
       :item)
@@ -3673,6 +3761,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryInput AWS API Documentation
+    #
     class QueryInput < Struct.new(
       :table_name,
       :index_name,
@@ -3756,6 +3846,8 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryOutput AWS API Documentation
     #
     class QueryOutput < Struct.new(
       :items,
@@ -4119,6 +4211,8 @@ module Aws::DynamoDB
     #   set to true, you will receive a `ValidationException`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanInput AWS API Documentation
+    #
     class ScanInput < Struct.new(
       :table_name,
       :index_name,
@@ -4200,6 +4294,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanOutput AWS API Documentation
+    #
     class ScanOutput < Struct.new(
       :items,
       :count,
@@ -4241,6 +4337,8 @@ module Aws::DynamoDB
     #   * `NEW_AND_OLD_IMAGES` - Both the new and the old item images of the
     #     item are written to the stream.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/StreamSpecification AWS API Documentation
     #
     class StreamSpecification < Struct.new(
       :stream_enabled,
@@ -4484,6 +4582,8 @@ module Aws::DynamoDB
     #   stream for this table.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TableDescription AWS API Documentation
+    #
     class TableDescription < Struct.new(
       :attribute_definitions,
       :table_name,
@@ -4537,6 +4637,8 @@ module Aws::DynamoDB
     #   The value of the tag. Tag values are case-sensitive and can be null.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -4565,6 +4667,8 @@ module Aws::DynamoDB
     #   The tags to be assigned to the Amazon DynamoDB resource.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResourceInput AWS API Documentation
+    #
     class TagResourceInput < Struct.new(
       :resource_arn,
       :tags)
@@ -4589,6 +4693,8 @@ module Aws::DynamoDB
     #   members of this list will be removed from the Amazon DynamoDB
     #   resource.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResourceInput AWS API Documentation
     #
     class UntagResourceInput < Struct.new(
       :resource_arn,
@@ -4625,6 +4731,8 @@ module Aws::DynamoDB
     #
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html
     #   @return [Types::ProvisionedThroughput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalSecondaryIndexAction AWS API Documentation
     #
     class UpdateGlobalSecondaryIndexAction < Struct.new(
       :index_name,
@@ -4968,6 +5076,8 @@ module Aws::DynamoDB
     #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html
     #   @return [Hash<String,Types::AttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemInput AWS API Documentation
+    #
     class UpdateItemInput < Struct.new(
       :table_name,
       :key,
@@ -5031,6 +5141,8 @@ module Aws::DynamoDB
     #     The estimate is subject to change over time; therefore, do not
     #     rely on the precision or accuracy of the estimate.
     #   @return [Types::ItemCollectionMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemOutput AWS API Documentation
     #
     class UpdateItemOutput < Struct.new(
       :attributes,
@@ -5138,6 +5250,8 @@ module Aws::DynamoDB
     #    </note>
     #   @return [Types::StreamSpecification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableInput AWS API Documentation
+    #
     class UpdateTableInput < Struct.new(
       :attribute_definitions,
       :table_name,
@@ -5152,6 +5266,8 @@ module Aws::DynamoDB
     # @!attribute [rw] table_description
     #   Represents the properties of the table.
     #   @return [Types::TableDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableOutput AWS API Documentation
     #
     class UpdateTableOutput < Struct.new(
       :table_description)
@@ -5186,6 +5302,8 @@ module Aws::DynamoDB
     # @!attribute [rw] delete_request
     #   A request to perform a `DeleteItem` operation.
     #   @return [Types::DeleteRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/WriteRequest AWS API Documentation
     #
     class WriteRequest < Struct.new(
       :put_request,

@@ -31,6 +31,8 @@ module Aws::Inspector
     #   findings.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindingsRequest AWS API Documentation
+    #
     class AddAttributesToFindingsRequest < Struct.new(
       :finding_arns,
       :attributes)
@@ -41,6 +43,8 @@ module Aws::Inspector
     #   Attribute details that cannot be described. An error code is
     #   provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindingsResponse AWS API Documentation
     #
     class AddAttributesToFindingsResponse < Struct.new(
       :failed_items)
@@ -59,6 +63,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_run_arn
     #   The ARN of the assessment run that has already been started.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentAlreadyRunningAssessment AWS API Documentation
     #
     class AgentAlreadyRunningAssessment < Struct.new(
       :agent_id,
@@ -88,6 +94,8 @@ module Aws::Inspector
     #   and **UNKNOWN**.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentFilter AWS API Documentation
+    #
     class AgentFilter < Struct.new(
       :agent_healths,
       :agent_health_codes)
@@ -104,6 +112,8 @@ module Aws::Inspector
     #   The Auto Scaling group for the EC2 instance where the agent is
     #   installed.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AgentPreview AWS API Documentation
     #
     class AgentPreview < Struct.new(
       :agent_id,
@@ -178,6 +188,8 @@ module Aws::Inspector
     #   once.
     #   @return [Array<Types::AssessmentRunNotification>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRun AWS API Documentation
+    #
     class AssessmentRun < Struct.new(
       :arn,
       :name,
@@ -228,6 +240,8 @@ module Aws::Inspector
     #   The Amazon Inspector application data metrics that are collected by
     #   the agent.
     #   @return [Array<Types::TelemetryMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunAgent AWS API Documentation
     #
     class AssessmentRunAgent < Struct.new(
       :agent_id,
@@ -313,6 +327,8 @@ module Aws::Inspector
     #   AssessmentRun data type.
     #   @return [Types::TimestampRange]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunFilter AWS API Documentation
+    #
     class AssessmentRunFilter < Struct.new(
       :name_pattern,
       :states,
@@ -350,6 +366,8 @@ module Aws::Inspector
     #   The status code of the SNS notification.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunNotification AWS API Documentation
+    #
     class AssessmentRunNotification < Struct.new(
       :date,
       :event,
@@ -369,6 +387,8 @@ module Aws::Inspector
     # @!attribute [rw] state
     #   The assessment run state.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRunStateChange AWS API Documentation
     #
     class AssessmentRunStateChange < Struct.new(
       :state_changed_at,
@@ -401,6 +421,8 @@ module Aws::Inspector
     #   The time at which UpdateAssessmentTarget is called.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTarget AWS API Documentation
+    #
     class AssessmentTarget < Struct.new(
       :arn,
       :name,
@@ -425,6 +447,8 @@ module Aws::Inspector
     #   must match the value of the **assessmentTargetName** property of the
     #   AssessmentTarget data type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTargetFilter AWS API Documentation
     #
     class AssessmentTargetFilter < Struct.new(
       :assessment_target_name_pattern)
@@ -466,6 +490,8 @@ module Aws::Inspector
     # @!attribute [rw] created_at
     #   The time at which the assessment template is created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTemplate AWS API Documentation
     #
     class AssessmentTemplate < Struct.new(
       :arn,
@@ -513,6 +539,8 @@ module Aws::Inspector
     #   type.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentTemplateFilter AWS API Documentation
+    #
     class AssessmentTemplateFilter < Struct.new(
       :name_pattern,
       :duration_range,
@@ -551,6 +579,8 @@ module Aws::Inspector
     #   generated.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssetAttributes AWS API Documentation
+    #
     class AssetAttributes < Struct.new(
       :schema_version,
       :agent_id,
@@ -580,6 +610,8 @@ module Aws::Inspector
     #   The value assigned to the attribute key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Attribute AWS API Documentation
+    #
     class Attribute < Struct.new(
       :key,
       :value)
@@ -604,6 +636,8 @@ module Aws::Inspector
     #   assessment target.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTargetRequest AWS API Documentation
+    #
     class CreateAssessmentTargetRequest < Struct.new(
       :assessment_target_name,
       :resource_group_arn)
@@ -613,6 +647,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_target_arn
     #   The ARN that specifies the assessment target that is created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTargetResponse AWS API Documentation
     #
     class CreateAssessmentTargetResponse < Struct.new(
       :assessment_target_arn)
@@ -663,6 +699,8 @@ module Aws::Inspector
     #   template.
     #   @return [Array<Types::Attribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplateRequest AWS API Documentation
+    #
     class CreateAssessmentTemplateRequest < Struct.new(
       :assessment_target_arn,
       :assessment_template_name,
@@ -675,6 +713,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_template_arn
     #   The ARN that specifies the assessment template that is created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplateResponse AWS API Documentation
     #
     class CreateAssessmentTemplateResponse < Struct.new(
       :assessment_template_arn)
@@ -701,6 +741,8 @@ module Aws::Inspector
     #   example,'\[\\\{"key":"Name","values":\["TestEC2Instance"\]\\}\]'.
     #   @return [Array<Types::ResourceGroupTag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroupRequest AWS API Documentation
+    #
     class CreateResourceGroupRequest < Struct.new(
       :resource_group_tags)
       include Aws::Structure
@@ -709,6 +751,8 @@ module Aws::Inspector
     # @!attribute [rw] resource_group_arn
     #   The ARN that specifies the resource group that is created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroupResponse AWS API Documentation
     #
     class CreateResourceGroupResponse < Struct.new(
       :resource_group_arn)
@@ -725,6 +769,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_run_arn
     #   The ARN that specifies the assessment run that you want to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRunRequest AWS API Documentation
     #
     class DeleteAssessmentRunRequest < Struct.new(
       :assessment_run_arn)
@@ -743,6 +789,8 @@ module Aws::Inspector
     #   delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTargetRequest AWS API Documentation
+    #
     class DeleteAssessmentTargetRequest < Struct.new(
       :assessment_target_arn)
       include Aws::Structure
@@ -760,6 +808,8 @@ module Aws::Inspector
     #   delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplateRequest AWS API Documentation
+    #
     class DeleteAssessmentTemplateRequest < Struct.new(
       :assessment_template_arn)
       include Aws::Structure
@@ -776,6 +826,8 @@ module Aws::Inspector
     #   The ARN that specifies the assessment run that you want to describe.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRunsRequest AWS API Documentation
+    #
     class DescribeAssessmentRunsRequest < Struct.new(
       :assessment_run_arns)
       include Aws::Structure
@@ -789,6 +841,8 @@ module Aws::Inspector
     #   Assessment run details that cannot be described. An error code is
     #   provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRunsResponse AWS API Documentation
     #
     class DescribeAssessmentRunsResponse < Struct.new(
       :assessment_runs,
@@ -808,6 +862,8 @@ module Aws::Inspector
     #   describe.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargetsRequest AWS API Documentation
+    #
     class DescribeAssessmentTargetsRequest < Struct.new(
       :assessment_target_arns)
       include Aws::Structure
@@ -821,6 +877,8 @@ module Aws::Inspector
     #   Assessment target details that cannot be described. An error code is
     #   provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargetsResponse AWS API Documentation
     #
     class DescribeAssessmentTargetsResponse < Struct.new(
       :assessment_targets,
@@ -838,6 +896,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_template_arns
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplatesRequest AWS API Documentation
+    #
     class DescribeAssessmentTemplatesRequest < Struct.new(
       :assessment_template_arns)
       include Aws::Structure
@@ -851,6 +911,8 @@ module Aws::Inspector
     #   Assessment template details that cannot be described. An error code
     #   is provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplatesResponse AWS API Documentation
     #
     class DescribeAssessmentTemplatesResponse < Struct.new(
       :assessment_templates,
@@ -872,6 +934,8 @@ module Aws::Inspector
     # @!attribute [rw] registered_at
     #   The date when the cross-account access role was registered.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeCrossAccountAccessRoleResponse AWS API Documentation
     #
     class DescribeCrossAccountAccessRoleResponse < Struct.new(
       :role_arn,
@@ -898,6 +962,8 @@ module Aws::Inspector
     #   finding.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindingsRequest AWS API Documentation
+    #
     class DescribeFindingsRequest < Struct.new(
       :finding_arns,
       :locale)
@@ -912,6 +978,8 @@ module Aws::Inspector
     #   Finding details that cannot be described. An error code is provided
     #   for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindingsResponse AWS API Documentation
     #
     class DescribeFindingsResponse < Struct.new(
       :findings,
@@ -930,6 +998,8 @@ module Aws::Inspector
     #   The ARN that specifies the resource group that you want to describe.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroupsRequest AWS API Documentation
+    #
     class DescribeResourceGroupsRequest < Struct.new(
       :resource_group_arns)
       include Aws::Structure
@@ -943,6 +1013,8 @@ module Aws::Inspector
     #   Resource group details that cannot be described. An error code is
     #   provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroupsResponse AWS API Documentation
     #
     class DescribeResourceGroupsResponse < Struct.new(
       :resource_groups,
@@ -967,6 +1039,8 @@ module Aws::Inspector
     #   into.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackagesRequest AWS API Documentation
+    #
     class DescribeRulesPackagesRequest < Struct.new(
       :rules_package_arns,
       :locale)
@@ -981,6 +1055,8 @@ module Aws::Inspector
     #   Rules package details that cannot be described. An error code is
     #   provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackagesResponse AWS API Documentation
     #
     class DescribeRulesPackagesResponse < Struct.new(
       :rules_packages,
@@ -1007,6 +1083,8 @@ module Aws::Inspector
     #   to 604800 seconds (1 week).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DurationRange AWS API Documentation
+    #
     class DurationRange < Struct.new(
       :min_seconds,
       :max_seconds)
@@ -1024,6 +1102,8 @@ module Aws::Inspector
     #   The time at which SubscribeToEvent is called.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/EventSubscription AWS API Documentation
+    #
     class EventSubscription < Struct.new(
       :event,
       :subscribed_at)
@@ -1040,6 +1120,8 @@ module Aws::Inspector
     #   Indicates whether you can immediately retry a request for this item
     #   for a specified resource.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/FailedItemDetails AWS API Documentation
     #
     class FailedItemDetails < Struct.new(
       :failure_code,
@@ -1123,6 +1205,8 @@ module Aws::Inspector
     # @!attribute [rw] updated_at
     #   The time when AddAttributesToFindings is called.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Finding AWS API Documentation
     #
     class Finding < Struct.new(
       :arn,
@@ -1222,6 +1306,8 @@ module Aws::Inspector
     #   The time range during which the finding is generated.
     #   @return [Types::TimestampRange]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/FindingFilter AWS API Documentation
+    #
     class FindingFilter < Struct.new(
       :agent_ids,
       :auto_scaling_groups,
@@ -1246,6 +1332,8 @@ module Aws::Inspector
     #   data that you want to obtain.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadataRequest AWS API Documentation
+    #
     class GetTelemetryMetadataRequest < Struct.new(
       :assessment_run_arn)
       include Aws::Structure
@@ -1254,6 +1342,8 @@ module Aws::Inspector
     # @!attribute [rw] telemetry_metadata
     #   Telemetry details.
     #   @return [Array<Types::TelemetryMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadataResponse AWS API Documentation
     #
     class GetTelemetryMetadataResponse < Struct.new(
       :telemetry_metadata)
@@ -1273,6 +1363,8 @@ module Aws::Inspector
     # @!attribute [rw] rules_package_arn
     #   The ARN of the rules package that is used to generate the finding.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/InspectorServiceAttributes AWS API Documentation
     #
     class InspectorServiceAttributes < Struct.new(
       :schema_version,
@@ -1322,6 +1414,8 @@ module Aws::Inspector
     #   value is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgentsRequest AWS API Documentation
+    #
     class ListAssessmentRunAgentsRequest < Struct.new(
       :assessment_run_arn,
       :filter,
@@ -1341,6 +1435,8 @@ module Aws::Inspector
     #   request. If there is no more data to be listed, this parameter is
     #   set to null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgentsResponse AWS API Documentation
     #
     class ListAssessmentRunAgentsResponse < Struct.new(
       :assessment_run_agents,
@@ -1406,6 +1502,8 @@ module Aws::Inspector
     #   value is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunsRequest AWS API Documentation
+    #
     class ListAssessmentRunsRequest < Struct.new(
       :assessment_template_arns,
       :filter,
@@ -1426,6 +1524,8 @@ module Aws::Inspector
     #   request. If there is no more data to be listed, this parameter is
     #   set to null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunsResponse AWS API Documentation
     #
     class ListAssessmentRunsResponse < Struct.new(
       :assessment_run_arns,
@@ -1467,6 +1567,8 @@ module Aws::Inspector
     #   is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargetsRequest AWS API Documentation
+    #
     class ListAssessmentTargetsRequest < Struct.new(
       :filter,
       :next_token,
@@ -1486,6 +1588,8 @@ module Aws::Inspector
     #   request. If there is no more data to be listed, this parameter is
     #   set to null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargetsResponse AWS API Documentation
     #
     class ListAssessmentTargetsResponse < Struct.new(
       :assessment_target_arns,
@@ -1538,6 +1642,8 @@ module Aws::Inspector
     #   is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplatesRequest AWS API Documentation
+    #
     class ListAssessmentTemplatesRequest < Struct.new(
       :assessment_target_arns,
       :filter,
@@ -1558,6 +1664,8 @@ module Aws::Inspector
     #   request. If there is no more data to be listed, this parameter is
     #   set to null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplatesResponse AWS API Documentation
     #
     class ListAssessmentTemplatesResponse < Struct.new(
       :assessment_template_arns,
@@ -1593,6 +1701,8 @@ module Aws::Inspector
     #   is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptionsRequest AWS API Documentation
+    #
     class ListEventSubscriptionsRequest < Struct.new(
       :resource_arn,
       :next_token,
@@ -1611,6 +1721,8 @@ module Aws::Inspector
     #   request. If there is no more data to be listed, this parameter is
     #   set to null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptionsResponse AWS API Documentation
     #
     class ListEventSubscriptionsResponse < Struct.new(
       :subscriptions,
@@ -1678,6 +1790,8 @@ module Aws::Inspector
     #   is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindingsRequest AWS API Documentation
+    #
     class ListFindingsRequest < Struct.new(
       :assessment_run_arns,
       :filter,
@@ -1697,6 +1811,8 @@ module Aws::Inspector
     #   request. If there is no more data to be listed, this parameter is
     #   set to null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindingsResponse AWS API Documentation
     #
     class ListFindingsResponse < Struct.new(
       :finding_arns,
@@ -1726,6 +1842,8 @@ module Aws::Inspector
     #   is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackagesRequest AWS API Documentation
+    #
     class ListRulesPackagesRequest < Struct.new(
       :next_token,
       :max_results)
@@ -1745,6 +1863,8 @@ module Aws::Inspector
     #   set to null.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackagesResponse AWS API Documentation
+    #
     class ListRulesPackagesResponse < Struct.new(
       :rules_package_arns,
       :next_token)
@@ -1763,6 +1883,8 @@ module Aws::Inspector
     #   to list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResourceRequest AWS API Documentation
+    #
     class ListTagsForResourceRequest < Struct.new(
       :resource_arn)
       include Aws::Structure
@@ -1771,6 +1893,8 @@ module Aws::Inspector
     # @!attribute [rw] tags
     #   A collection of key and value pairs.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
@@ -1804,6 +1928,8 @@ module Aws::Inspector
     #   is 500.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgentsRequest AWS API Documentation
+    #
     class PreviewAgentsRequest < Struct.new(
       :preview_agents_arn,
       :next_token,
@@ -1823,6 +1949,8 @@ module Aws::Inspector
     #   set to null.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgentsResponse AWS API Documentation
+    #
     class PreviewAgentsResponse < Struct.new(
       :agent_previews,
       :next_token)
@@ -1841,6 +1969,8 @@ module Aws::Inspector
     #   instances during the assessment run or when you call the
     #   PreviewAgents action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRoleRequest AWS API Documentation
     #
     class RegisterCrossAccountAccessRoleRequest < Struct.new(
       :role_arn)
@@ -1865,6 +1995,8 @@ module Aws::Inspector
     #   findings.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindingsRequest AWS API Documentation
+    #
     class RemoveAttributesFromFindingsRequest < Struct.new(
       :finding_arns,
       :attribute_keys)
@@ -1875,6 +2007,8 @@ module Aws::Inspector
     #   Attributes details that cannot be described. An error code is
     #   provided for each failed item.
     #   @return [Hash<String,Types::FailedItemDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindingsResponse AWS API Documentation
     #
     class RemoveAttributesFromFindingsResponse < Struct.new(
       :failed_items)
@@ -1898,6 +2032,8 @@ module Aws::Inspector
     # @!attribute [rw] created_at
     #   The time at which resource group is created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ResourceGroup AWS API Documentation
     #
     class ResourceGroup < Struct.new(
       :arn,
@@ -1924,6 +2060,8 @@ module Aws::Inspector
     # @!attribute [rw] value
     #   The value assigned to a tag key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ResourceGroupTag AWS API Documentation
     #
     class ResourceGroupTag < Struct.new(
       :key,
@@ -1954,6 +2092,8 @@ module Aws::Inspector
     # @!attribute [rw] description
     #   The description of the rules package.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RulesPackage AWS API Documentation
     #
     class RulesPackage < Struct.new(
       :arn,
@@ -1986,6 +2126,8 @@ module Aws::Inspector
     #   assessment template.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResourceRequest AWS API Documentation
+    #
     class SetTagsForResourceRequest < Struct.new(
       :resource_arn,
       :tags)
@@ -2011,6 +2153,8 @@ module Aws::Inspector
     #   assessment run.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRunRequest AWS API Documentation
+    #
     class StartAssessmentRunRequest < Struct.new(
       :assessment_template_arn,
       :assessment_run_name)
@@ -2020,6 +2164,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_run_arn
     #   The ARN of the assessment run that has been started.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRunResponse AWS API Documentation
     #
     class StartAssessmentRunResponse < Struct.new(
       :assessment_run_arn)
@@ -2036,6 +2182,8 @@ module Aws::Inspector
     # @!attribute [rw] assessment_run_arn
     #   The ARN of the assessment run that you want to stop.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRunRequest AWS API Documentation
     #
     class StopAssessmentRunRequest < Struct.new(
       :assessment_run_arn)
@@ -2064,6 +2212,8 @@ module Aws::Inspector
     #   The ARN of the SNS topic to which the SNS notifications are sent.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEventRequest AWS API Documentation
+    #
     class SubscribeToEventRequest < Struct.new(
       :resource_arn,
       :event,
@@ -2087,6 +2237,8 @@ module Aws::Inspector
     # @!attribute [rw] event_subscriptions
     #   The list of existing event subscriptions.
     #   @return [Array<Types::EventSubscription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Subscription AWS API Documentation
     #
     class Subscription < Struct.new(
       :resource_arn,
@@ -2115,6 +2267,8 @@ module Aws::Inspector
     #   A value assigned to a tag key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -2138,6 +2292,8 @@ module Aws::Inspector
     #   The data size of messages that the agent sends to the Amazon
     #   Inspector service.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/TelemetryMetadata AWS API Documentation
     #
     class TelemetryMetadata < Struct.new(
       :message_type,
@@ -2163,6 +2319,8 @@ module Aws::Inspector
     # @!attribute [rw] end_date
     #   The maximum value of the timestamp range.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/TimestampRange AWS API Documentation
     #
     class TimestampRange < Struct.new(
       :begin_date,
@@ -2192,6 +2350,8 @@ module Aws::Inspector
     #   The ARN of the SNS topic to which SNS notifications are sent.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEventRequest AWS API Documentation
+    #
     class UnsubscribeFromEventRequest < Struct.new(
       :resource_arn,
       :event,
@@ -2220,6 +2380,8 @@ module Aws::Inspector
     #   The ARN of the resource group that is used to specify the new
     #   resource group to associate with the assessment target.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTargetRequest AWS API Documentation
     #
     class UpdateAssessmentTargetRequest < Struct.new(
       :assessment_target_arn,

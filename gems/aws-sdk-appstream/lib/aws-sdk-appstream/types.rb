@@ -39,6 +39,8 @@ module Aws::AppStream
     #   Additional attributes that describes the application.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Application AWS API Documentation
+    #
     class Application < Struct.new(
       :name,
       :display_name,
@@ -66,12 +68,16 @@ module Aws::AppStream
     #   The name of the stack to which the fleet is associated.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetRequest AWS API Documentation
+    #
     class AssociateFleetRequest < Struct.new(
       :fleet_name,
       :stack_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetResult AWS API Documentation
+    #
     class AssociateFleetResult < Aws::EmptyStructure; end
 
     # The capacity configuration for the fleet.
@@ -86,6 +92,8 @@ module Aws::AppStream
     # @!attribute [rw] desired_instances
     #   The desired number of streaming instances.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacity AWS API Documentation
     #
     class ComputeCapacity < Struct.new(
       :desired_instances)
@@ -111,6 +119,8 @@ module Aws::AppStream
     #   The number of currently available instances that can be used to
     #   stream sessions.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacityStatus AWS API Documentation
     #
     class ComputeCapacityStatus < Struct.new(
       :desired,
@@ -180,6 +190,8 @@ module Aws::AppStream
     #   The display name of the fleet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
+    #
     class CreateFleetRequest < Struct.new(
       :name,
       :image_name,
@@ -196,6 +208,8 @@ module Aws::AppStream
     # @!attribute [rw] fleet
     #   The details for the created fleet.
     #   @return [Types::Fleet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetResult AWS API Documentation
     #
     class CreateFleetResult < Struct.new(
       :fleet)
@@ -223,6 +237,8 @@ module Aws::AppStream
     #   The name displayed to end users on the AppStream 2.0 portal.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
+    #
     class CreateStackRequest < Struct.new(
       :name,
       :description,
@@ -233,6 +249,8 @@ module Aws::AppStream
     # @!attribute [rw] stack
     #   The details for the created stack.
     #   @return [Types::Stack]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackResult AWS API Documentation
     #
     class CreateStackResult < Struct.new(
       :stack)
@@ -277,6 +295,8 @@ module Aws::AppStream
     #   The sessionContext of the streaming URL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLRequest AWS API Documentation
+    #
     class CreateStreamingURLRequest < Struct.new(
       :stack_name,
       :fleet_name,
@@ -296,6 +316,8 @@ module Aws::AppStream
     #   expires.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLResult AWS API Documentation
+    #
     class CreateStreamingURLResult < Struct.new(
       :streaming_url,
       :expires)
@@ -313,11 +335,15 @@ module Aws::AppStream
     #   The name of the fleet to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleetRequest AWS API Documentation
+    #
     class DeleteFleetRequest < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleetResult AWS API Documentation
+    #
     class DeleteFleetResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteStackRequest
@@ -331,11 +357,15 @@ module Aws::AppStream
     #   The name of the stack to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackRequest AWS API Documentation
+    #
     class DeleteStackRequest < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackResult AWS API Documentation
+    #
     class DeleteStackResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeFleetsRequest
@@ -356,6 +386,8 @@ module Aws::AppStream
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleetsRequest AWS API Documentation
+    #
     class DescribeFleetsRequest < Struct.new(
       :names,
       :next_token)
@@ -370,6 +402,8 @@ module Aws::AppStream
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleetsResult AWS API Documentation
     #
     class DescribeFleetsResult < Struct.new(
       :fleets,
@@ -388,6 +422,8 @@ module Aws::AppStream
     #   A specific list of images to describe.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesRequest AWS API Documentation
+    #
     class DescribeImagesRequest < Struct.new(
       :names)
       include Aws::Structure
@@ -396,6 +432,8 @@ module Aws::AppStream
     # @!attribute [rw] images
     #   The list of images.
     #   @return [Array<Types::Image>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult AWS API Documentation
     #
     class DescribeImagesResult < Struct.new(
       :images)
@@ -436,6 +474,8 @@ module Aws::AppStream
     #   maximum supported value is 50.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest AWS API Documentation
+    #
     class DescribeSessionsRequest < Struct.new(
       :stack_name,
       :fleet_name,
@@ -453,6 +493,8 @@ module Aws::AppStream
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsResult AWS API Documentation
     #
     class DescribeSessionsResult < Struct.new(
       :sessions,
@@ -478,6 +520,8 @@ module Aws::AppStream
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacksRequest AWS API Documentation
+    #
     class DescribeStacksRequest < Struct.new(
       :names,
       :next_token)
@@ -492,6 +536,8 @@ module Aws::AppStream
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacksResult AWS API Documentation
     #
     class DescribeStacksResult < Struct.new(
       :stacks,
@@ -515,12 +561,16 @@ module Aws::AppStream
     #   The name of the stack with which the fleet is associated.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetRequest AWS API Documentation
+    #
     class DisassociateFleetRequest < Struct.new(
       :fleet_name,
       :stack_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetResult AWS API Documentation
+    #
     class DisassociateFleetResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass ExpireSessionRequest
@@ -534,11 +584,15 @@ module Aws::AppStream
     #   The unique identifier of the streaming session to be stopped.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionRequest AWS API Documentation
+    #
     class ExpireSessionRequest < Struct.new(
       :session_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionResult AWS API Documentation
+    #
     class ExpireSessionResult < Aws::EmptyStructure; end
 
     # Contains the parameters for a fleet.
@@ -599,6 +653,8 @@ module Aws::AppStream
     #   The list of fleet errors is appended to this list.
     #   @return [Array<Types::FleetError>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
+    #
     class Fleet < Struct.new(
       :arn,
       :name,
@@ -625,6 +681,8 @@ module Aws::AppStream
     # @!attribute [rw] error_message
     #   The error message generated when the fleet has errors.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/FleetError AWS API Documentation
     #
     class FleetError < Struct.new(
       :error_code,
@@ -682,6 +740,8 @@ module Aws::AppStream
     #   The timestamp when the image was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
+    #
     class Image < Struct.new(
       :name,
       :arn,
@@ -707,6 +767,8 @@ module Aws::AppStream
     #   The state change reason message to the end user.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageStateChangeReason AWS API Documentation
+    #
     class ImageStateChangeReason < Struct.new(
       :code,
       :message)
@@ -730,6 +792,8 @@ module Aws::AppStream
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleetsRequest AWS API Documentation
+    #
     class ListAssociatedFleetsRequest < Struct.new(
       :stack_name,
       :next_token)
@@ -746,6 +810,8 @@ module Aws::AppStream
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleetsResult AWS API Documentation
     #
     class ListAssociatedFleetsResult < Struct.new(
       :names,
@@ -770,6 +836,8 @@ module Aws::AppStream
     #   this operation. If this value is null, it retrieves the first page.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacksRequest AWS API Documentation
+    #
     class ListAssociatedStacksRequest < Struct.new(
       :fleet_name,
       :next_token)
@@ -786,6 +854,8 @@ module Aws::AppStream
     #   The pagination token to use to retrieve the next page of results for
     #   this operation. If there are no more pages, this value is null.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacksResult AWS API Documentation
     #
     class ListAssociatedStacksResult < Struct.new(
       :names,
@@ -814,6 +884,8 @@ module Aws::AppStream
     # @!attribute [rw] state
     #   The current state of the streaming session.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
     #
     class Session < Struct.new(
       :id,
@@ -846,6 +918,8 @@ module Aws::AppStream
     #   The timestamp when the stack was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
+    #
     class Stack < Struct.new(
       :arn,
       :name,
@@ -866,11 +940,15 @@ module Aws::AppStream
     #   The name of the fleet to start.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleetRequest AWS API Documentation
+    #
     class StartFleetRequest < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleetResult AWS API Documentation
+    #
     class StartFleetResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StopFleetRequest
@@ -884,11 +962,15 @@ module Aws::AppStream
     #   The name of the fleet to stop.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetRequest AWS API Documentation
+    #
     class StopFleetRequest < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetResult AWS API Documentation
+    #
     class StopFleetResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateFleetRequest
@@ -954,6 +1036,8 @@ module Aws::AppStream
     #   The name displayed to end users on the AppStream 2.0 portal.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
+    #
     class UpdateFleetRequest < Struct.new(
       :image_name,
       :name,
@@ -971,6 +1055,8 @@ module Aws::AppStream
     # @!attribute [rw] fleet
     #   A list of fleet details.
     #   @return [Types::Fleet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetResult AWS API Documentation
     #
     class UpdateFleetResult < Struct.new(
       :fleet)
@@ -998,6 +1084,8 @@ module Aws::AppStream
     #   The name of the stack to update.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
+    #
     class UpdateStackRequest < Struct.new(
       :display_name,
       :description,
@@ -1008,6 +1096,8 @@ module Aws::AppStream
     # @!attribute [rw] stack
     #   A list of stack details.
     #   @return [Types::Stack]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackResult AWS API Documentation
     #
     class UpdateStackResult < Struct.new(
       :stack)
@@ -1027,6 +1117,8 @@ module Aws::AppStream
     #   The list of subnets to which a network interface is established from
     #   the fleet instance.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
       :subnet_ids)

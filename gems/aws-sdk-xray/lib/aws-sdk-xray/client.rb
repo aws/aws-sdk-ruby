@@ -178,6 +178,8 @@ module Aws::XRay
     #   resp.unprocessed_trace_ids[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/BatchGetTraces AWS API Documentation
+    #
     # @overload batch_get_traces(params = {})
     # @param [Hash] params ({})
     def batch_get_traces(params = {}, options = {})
@@ -264,6 +266,8 @@ module Aws::XRay
     #   resp.services[0].duration_histogram[0].count #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetServiceGraph AWS API Documentation
+    #
     # @overload get_service_graph(params = {})
     # @param [Hash] params ({})
     def get_service_graph(params = {}, options = {})
@@ -336,6 +340,8 @@ module Aws::XRay
     #   resp.services[0].duration_histogram[0].value #=> Float
     #   resp.services[0].duration_histogram[0].count #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceGraph AWS API Documentation
     #
     # @overload get_trace_graph(params = {})
     # @param [Hash] params ({})
@@ -426,6 +432,8 @@ module Aws::XRay
     #   resp.traces_processed_count #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetTraceSummaries AWS API Documentation
+    #
     # @overload get_trace_summaries(params = {})
     # @param [Hash] params ({})
     def get_trace_summaries(params = {}, options = {})
@@ -469,6 +477,8 @@ module Aws::XRay
     #     hostname: "String",
     #     resource_arn: "String",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTelemetryRecords AWS API Documentation
     #
     # @overload put_telemetry_records(params = {})
     # @param [Hash] params ({})
@@ -541,6 +551,8 @@ module Aws::XRay
     #   resp.unprocessed_trace_segments[0].id #=> String
     #   resp.unprocessed_trace_segments[0].error_code #=> String
     #   resp.unprocessed_trace_segments[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutTraceSegments AWS API Documentation
     #
     # @overload put_trace_segments(params = {})
     # @param [Hash] params ({})

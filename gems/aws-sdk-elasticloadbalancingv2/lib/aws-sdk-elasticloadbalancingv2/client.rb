@@ -172,6 +172,8 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTags AWS API Documentation
+    #
     # @overload add_tags(params = {})
     # @param [Hash] params ({})
     def add_tags(params = {}, options = {})
@@ -252,6 +254,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions #=> Array
     #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListener AWS API Documentation
     #
     # @overload create_listener(params = {})
     # @param [Hash] params ({})
@@ -355,6 +359,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancer AWS API Documentation
+    #
     # @overload create_load_balancer(params = {})
     # @param [Hash] params ({})
     def create_load_balancer(params = {}, options = {})
@@ -441,6 +447,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].type #=> String, one of "forward"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRule AWS API Documentation
     #
     # @overload create_rule(params = {})
     # @param [Hash] params ({})
@@ -556,6 +564,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroup AWS API Documentation
+    #
     # @overload create_target_group(params = {})
     # @param [Hash] params ({})
     def create_target_group(params = {}, options = {})
@@ -578,6 +588,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.delete_listener({
     #     listener_arn: "ListenerArn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteListener AWS API Documentation
     #
     # @overload delete_listener(params = {})
     # @param [Hash] params ({})
@@ -609,6 +621,8 @@ module Aws::ElasticLoadBalancingV2
     #     load_balancer_arn: "LoadBalancerArn", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteLoadBalancer AWS API Documentation
+    #
     # @overload delete_load_balancer(params = {})
     # @param [Hash] params ({})
     def delete_load_balancer(params = {}, options = {})
@@ -628,6 +642,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.delete_rule({
     #     rule_arn: "RuleArn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteRule AWS API Documentation
     #
     # @overload delete_rule(params = {})
     # @param [Hash] params ({})
@@ -651,6 +667,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp = client.delete_target_group({
     #     target_group_arn: "TargetGroupArn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroup AWS API Documentation
     #
     # @overload delete_target_group(params = {})
     # @param [Hash] params ({})
@@ -684,6 +702,8 @@ module Aws::ElasticLoadBalancingV2
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeregisterTargets AWS API Documentation
     #
     # @overload deregister_targets(params = {})
     # @param [Hash] params ({})
@@ -738,6 +758,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListeners AWS API Documentation
+    #
     # @overload describe_listeners(params = {})
     # @param [Hash] params ({})
     def describe_listeners(params = {}, options = {})
@@ -765,6 +787,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.attributes #=> Array
     #   resp.attributes[0].key #=> String
     #   resp.attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancerAttributes AWS API Documentation
     #
     # @overload describe_load_balancer_attributes(params = {})
     # @param [Hash] params ({})
@@ -827,6 +851,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].security_groups[0] #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers AWS API Documentation
+    #
     # @overload describe_load_balancers(params = {})
     # @param [Hash] params ({})
     def describe_load_balancers(params = {}, options = {})
@@ -867,6 +893,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].type #=> String, one of "forward"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRules AWS API Documentation
     #
     # @overload describe_rules(params = {})
     # @param [Hash] params ({})
@@ -915,6 +943,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.ssl_policies[0].name #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPolicies AWS API Documentation
+    #
     # @overload describe_ssl_policies(params = {})
     # @param [Hash] params ({})
     def describe_ssl_policies(params = {}, options = {})
@@ -945,6 +975,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.tag_descriptions[0].tags[0].key #=> String
     #   resp.tag_descriptions[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTags AWS API Documentation
+    #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
@@ -972,6 +1004,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.attributes #=> Array
     #   resp.attributes[0].key #=> String
     #   resp.attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupAttributes AWS API Documentation
     #
     # @overload describe_target_group_attributes(params = {})
     # @param [Hash] params ({})
@@ -1041,6 +1075,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroups AWS API Documentation
+    #
     # @overload describe_target_groups(params = {})
     # @param [Hash] params ({})
     def describe_target_groups(params = {}, options = {})
@@ -1081,6 +1117,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining"
     #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Elb.InternalError"
     #   resp.target_health_descriptions[0].target_health.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealth AWS API Documentation
     #
     # @overload describe_target_health(params = {})
     # @param [Hash] params ({})
@@ -1153,6 +1191,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
     #   resp.listeners[0].default_actions[0].target_group_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListener AWS API Documentation
+    #
     # @overload modify_listener(params = {})
     # @param [Hash] params ({})
     def modify_listener(params = {}, options = {})
@@ -1194,6 +1234,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.attributes #=> Array
     #   resp.attributes[0].key #=> String
     #   resp.attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyLoadBalancerAttributes AWS API Documentation
     #
     # @overload modify_load_balancer_attributes(params = {})
     # @param [Hash] params ({})
@@ -1253,6 +1295,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].type #=> String, one of "forward"
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRule AWS API Documentation
     #
     # @overload modify_rule(params = {})
     # @param [Hash] params ({})
@@ -1337,6 +1381,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.target_groups[0].load_balancer_arns #=> Array
     #   resp.target_groups[0].load_balancer_arns[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroup AWS API Documentation
+    #
     # @overload modify_target_group(params = {})
     # @param [Hash] params ({})
     def modify_target_group(params = {}, options = {})
@@ -1373,6 +1419,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.attributes #=> Array
     #   resp.attributes[0].key #=> String
     #   resp.attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributes AWS API Documentation
     #
     # @overload modify_target_group_attributes(params = {})
     # @param [Hash] params ({})
@@ -1416,6 +1464,8 @@ module Aws::ElasticLoadBalancingV2
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargets AWS API Documentation
+    #
     # @overload register_targets(params = {})
     # @param [Hash] params ({})
     def register_targets(params = {}, options = {})
@@ -1441,6 +1491,8 @@ module Aws::ElasticLoadBalancingV2
     #     resource_arns: ["ResourceArn"], # required
     #     tag_keys: ["TagKey"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTags AWS API Documentation
     #
     # @overload remove_tags(params = {})
     # @param [Hash] params ({})
@@ -1487,6 +1539,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.rules[0].actions[0].target_group_arn #=> String
     #   resp.rules[0].is_default #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePriorities AWS API Documentation
+    #
     # @overload set_rule_priorities(params = {})
     # @param [Hash] params ({})
     def set_rule_priorities(params = {}, options = {})
@@ -1519,6 +1573,8 @@ module Aws::ElasticLoadBalancingV2
     #
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroups AWS API Documentation
     #
     # @overload set_security_groups(params = {})
     # @param [Hash] params ({})
@@ -1554,6 +1610,8 @@ module Aws::ElasticLoadBalancingV2
     #   resp.availability_zones #=> Array
     #   resp.availability_zones[0].zone_name #=> String
     #   resp.availability_zones[0].subnet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnets AWS API Documentation
     #
     # @overload set_subnets(params = {})
     # @param [Hash] params ({})

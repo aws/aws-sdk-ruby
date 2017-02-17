@@ -65,6 +65,8 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnectRequest AWS API Documentation
+    #
     class AllocateConnectionOnInterconnectRequest < Struct.new(
       :bandwidth,
       :connection_name,
@@ -113,6 +115,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [Types::NewPrivateVirtualInterfaceAllocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePrivateVirtualInterfaceRequest AWS API Documentation
     #
     class AllocatePrivateVirtualInterfaceRequest < Struct.new(
       :connection_id,
@@ -165,6 +169,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [Types::NewPublicVirtualInterfaceAllocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocatePublicVirtualInterfaceRequest AWS API Documentation
     #
     class AllocatePublicVirtualInterfaceRequest < Struct.new(
       :connection_id,
@@ -234,6 +240,8 @@ module Aws::DirectConnect
     #   * **Down**\: The BGP peer is down.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/BGPPeer AWS API Documentation
+    #
     class BGPPeer < Struct.new(
       :asn,
       :auth_key,
@@ -261,6 +269,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionRequest AWS API Documentation
     #
     class ConfirmConnectionRequest < Struct.new(
       :connection_id)
@@ -296,6 +306,8 @@ module Aws::DirectConnect
     #   * **Rejected**\: A hosted connection in the 'Ordering' state will
     #     enter the 'Rejected' state if it is deleted by the end customer.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmConnectionResponse AWS API Documentation
     #
     class ConfirmConnectionResponse < Struct.new(
       :connection_state)
@@ -334,6 +346,8 @@ module Aws::DirectConnect
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceRequest AWS API Documentation
     #
     class ConfirmPrivateVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id,
@@ -377,6 +391,8 @@ module Aws::DirectConnect
     #     the virtual interface will enter the 'Rejected' state.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPrivateVirtualInterfaceResponse AWS API Documentation
+    #
     class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
       include Aws::Structure
@@ -399,6 +415,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceRequest AWS API Documentation
     #
     class ConfirmPublicVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id)
@@ -440,6 +458,8 @@ module Aws::DirectConnect
     #     'Confirming' state is deleted by the virtual interface owner,
     #     the virtual interface will enter the 'Rejected' state.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ConfirmPublicVirtualInterfaceResponse AWS API Documentation
     #
     class ConfirmPublicVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
@@ -538,6 +558,8 @@ module Aws::DirectConnect
     #   Connection.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
+    #
     class Connection < Struct.new(
       :owner_account,
       :connection_id,
@@ -557,6 +579,8 @@ module Aws::DirectConnect
     # @!attribute [rw] connections
     #   A list of connections.
     #   @return [Array<Types::Connection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connections AWS API Documentation
     #
     class Connections < Struct.new(
       :connections)
@@ -594,6 +618,8 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [Types::NewBGPPeer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerRequest AWS API Documentation
+    #
     class CreateBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :new_bgp_peer)
@@ -606,6 +632,8 @@ module Aws::DirectConnect
     #   A virtual interface (VLAN) transmits the traffic between the AWS
     #   Direct Connect location and the customer.
     #   @return [Types::VirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateBGPPeerResponse AWS API Documentation
     #
     class CreateBGPPeerResponse < Struct.new(
       :virtual_interface)
@@ -646,6 +674,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest AWS API Documentation
     #
     class CreateConnectionRequest < Struct.new(
       :location,
@@ -691,6 +721,8 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnectRequest AWS API Documentation
+    #
     class CreateInterconnectRequest < Struct.new(
       :interconnect_name,
       :bandwidth,
@@ -732,6 +764,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [Types::NewPrivateVirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePrivateVirtualInterfaceRequest AWS API Documentation
     #
     class CreatePrivateVirtualInterfaceRequest < Struct.new(
       :connection_id,
@@ -777,6 +811,8 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [Types::NewPublicVirtualInterface]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreatePublicVirtualInterfaceRequest AWS API Documentation
+    #
     class CreatePublicVirtualInterfaceRequest < Struct.new(
       :connection_id,
       :new_public_virtual_interface)
@@ -816,6 +852,8 @@ module Aws::DirectConnect
     #   Example: 192.168.1.2/30 or 2001:db8::2/125
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerRequest AWS API Documentation
+    #
     class DeleteBGPPeerRequest < Struct.new(
       :virtual_interface_id,
       :asn,
@@ -829,6 +867,8 @@ module Aws::DirectConnect
     #   A virtual interface (VLAN) transmits the traffic between the AWS
     #   Direct Connect location and the customer.
     #   @return [Types::VirtualInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteBGPPeerResponse AWS API Documentation
     #
     class DeleteBGPPeerResponse < Struct.new(
       :virtual_interface)
@@ -852,6 +892,8 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnectionRequest AWS API Documentation
+    #
     class DeleteConnectionRequest < Struct.new(
       :connection_id)
       include Aws::Structure
@@ -871,6 +913,8 @@ module Aws::DirectConnect
     #
     #   Example: dxcon-abc123
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnectRequest AWS API Documentation
     #
     class DeleteInterconnectRequest < Struct.new(
       :interconnect_id)
@@ -900,6 +944,8 @@ module Aws::DirectConnect
     #   * **Deleted**\: The interconnect has been deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteInterconnectResponse AWS API Documentation
+    #
     class DeleteInterconnectResponse < Struct.new(
       :interconnect_state)
       include Aws::Structure
@@ -921,6 +967,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceRequest AWS API Documentation
     #
     class DeleteVirtualInterfaceRequest < Struct.new(
       :virtual_interface_id)
@@ -963,6 +1011,8 @@ module Aws::DirectConnect
     #     the virtual interface will enter the 'Rejected' state.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteVirtualInterfaceResponse AWS API Documentation
+    #
     class DeleteVirtualInterfaceResponse < Struct.new(
       :virtual_interface_state)
       include Aws::Structure
@@ -1004,6 +1054,8 @@ module Aws::DirectConnect
     #   Default: application/pdf
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoaRequest AWS API Documentation
+    #
     class DescribeConnectionLoaRequest < Struct.new(
       :connection_id,
       :provider_name,
@@ -1017,6 +1069,8 @@ module Aws::DirectConnect
     #   A structure containing the Letter of Authorization - Connecting
     #   Facility Assignment (LOA-CFA) for a connection.
     #   @return [Types::Loa]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionLoaResponse AWS API Documentation
     #
     class DescribeConnectionLoaResponse < Struct.new(
       :loa)
@@ -1041,6 +1095,8 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnectRequest AWS API Documentation
+    #
     class DescribeConnectionsOnInterconnectRequest < Struct.new(
       :interconnect_id)
       include Aws::Structure
@@ -1062,6 +1118,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsRequest AWS API Documentation
     #
     class DescribeConnectionsRequest < Struct.new(
       :connection_id)
@@ -1102,6 +1160,8 @@ module Aws::DirectConnect
     #   Default: application/pdf
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoaRequest AWS API Documentation
+    #
     class DescribeInterconnectLoaRequest < Struct.new(
       :interconnect_id,
       :provider_name,
@@ -1115,6 +1175,8 @@ module Aws::DirectConnect
     #   A structure containing the Letter of Authorization - Connecting
     #   Facility Assignment (LOA-CFA) for a connection.
     #   @return [Types::Loa]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectLoaResponse AWS API Documentation
     #
     class DescribeInterconnectLoaResponse < Struct.new(
       :loa)
@@ -1136,6 +1198,8 @@ module Aws::DirectConnect
     #   Example: dxcon-abc123
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnectsRequest AWS API Documentation
+    #
     class DescribeInterconnectsRequest < Struct.new(
       :interconnect_id)
       include Aws::Structure
@@ -1154,6 +1218,8 @@ module Aws::DirectConnect
     #   The Amazon Resource Names (ARNs) of the Direct Connect resources.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTagsRequest AWS API Documentation
+    #
     class DescribeTagsRequest < Struct.new(
       :resource_arns)
       include Aws::Structure
@@ -1164,6 +1230,8 @@ module Aws::DirectConnect
     # @!attribute [rw] resource_tags
     #   Information about the tags.
     #   @return [Array<Types::ResourceTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeTagsResponse AWS API Documentation
     #
     class DescribeTagsResponse < Struct.new(
       :resource_tags)
@@ -1196,6 +1264,8 @@ module Aws::DirectConnect
     #
     #   Default: None
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeVirtualInterfacesRequest AWS API Documentation
     #
     class DescribeVirtualInterfacesRequest < Struct.new(
       :connection_id,
@@ -1279,6 +1349,8 @@ module Aws::DirectConnect
     #   Interconnect.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect AWS API Documentation
+    #
     class Interconnect < Struct.new(
       :interconnect_id,
       :interconnect_name,
@@ -1295,6 +1367,8 @@ module Aws::DirectConnect
     # @!attribute [rw] interconnects
     #   A list of interconnects.
     #   @return [Array<Types::Interconnect>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnects AWS API Documentation
     #
     class Interconnects < Struct.new(
       :interconnects)
@@ -1316,6 +1390,8 @@ module Aws::DirectConnect
     #   Default: application/pdf
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Loa AWS API Documentation
+    #
     class Loa < Struct.new(
       :loa_content,
       :loa_content_type)
@@ -1334,6 +1410,8 @@ module Aws::DirectConnect
     #   colocation partner name and the physical site of the lit building.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Location AWS API Documentation
+    #
     class Location < Struct.new(
       :location_code,
       :location_name)
@@ -1350,6 +1428,8 @@ module Aws::DirectConnect
     #   A list of colocation hubs where network providers have equipment.
     #   Most regions have multiple locations available.
     #   @return [Array<Types::Location>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Locations AWS API Documentation
     #
     class Locations < Struct.new(
       :locations)
@@ -1401,6 +1481,8 @@ module Aws::DirectConnect
     #
     #   Example: 192.168.1.2/30 or 2001:db8::2/125
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewBGPPeer AWS API Documentation
     #
     class NewBGPPeer < Struct.new(
       :asn,
@@ -1480,6 +1562,8 @@ module Aws::DirectConnect
     #   Example: vgw-123er56
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterface AWS API Documentation
+    #
     class NewPrivateVirtualInterface < Struct.new(
       :virtual_interface_name,
       :vlan,
@@ -1552,6 +1636,8 @@ module Aws::DirectConnect
     #
     #   Example: 192.168.1.2/30 or 2001:db8::2/125
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPrivateVirtualInterfaceAllocation AWS API Documentation
     #
     class NewPrivateVirtualInterfaceAllocation < Struct.new(
       :virtual_interface_name,
@@ -1634,6 +1720,8 @@ module Aws::DirectConnect
     #   A list of routes to be advertised to the AWS network in this region
     #   (public virtual interface).
     #   @return [Array<Types::RouteFilterPrefix>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterface AWS API Documentation
     #
     class NewPublicVirtualInterface < Struct.new(
       :virtual_interface_name,
@@ -1718,6 +1806,8 @@ module Aws::DirectConnect
     #   (public virtual interface).
     #   @return [Array<Types::RouteFilterPrefix>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/NewPublicVirtualInterfaceAllocation AWS API Documentation
+    #
     class NewPublicVirtualInterfaceAllocation < Struct.new(
       :virtual_interface_name,
       :vlan,
@@ -1739,6 +1829,8 @@ module Aws::DirectConnect
     # @!attribute [rw] tags
     #   The tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/ResourceTag AWS API Documentation
     #
     class ResourceTag < Struct.new(
       :resource_arn,
@@ -1765,6 +1857,8 @@ module Aws::DirectConnect
     #   Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/RouteFilterPrefix AWS API Documentation
+    #
     class RouteFilterPrefix < Struct.new(
       :cidr)
       include Aws::Structure
@@ -1787,6 +1881,8 @@ module Aws::DirectConnect
     # @!attribute [rw] value
     #   The value of the tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -1820,6 +1916,8 @@ module Aws::DirectConnect
     #   The list of tags to add.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceRequest AWS API Documentation
+    #
     class TagResourceRequest < Struct.new(
       :resource_arn,
       :tags)
@@ -1827,6 +1925,8 @@ module Aws::DirectConnect
     end
 
     # The response received when TagResource is called.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
@@ -1848,6 +1948,8 @@ module Aws::DirectConnect
     #   The list of tag keys to remove.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResourceRequest AWS API Documentation
+    #
     class UntagResourceRequest < Struct.new(
       :resource_arn,
       :tag_keys)
@@ -1855,6 +1957,8 @@ module Aws::DirectConnect
     end
 
     # The response received when UntagResource is called.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
@@ -1891,6 +1995,8 @@ module Aws::DirectConnect
     #     to send traffic over this gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualGateway AWS API Documentation
+    #
     class VirtualGateway < Struct.new(
       :virtual_gateway_id,
       :virtual_gateway_state)
@@ -1902,6 +2008,8 @@ module Aws::DirectConnect
     # @!attribute [rw] virtual_gateways
     #   A list of virtual private gateways.
     #   @return [Array<Types::VirtualGateway>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualGateways AWS API Documentation
     #
     class VirtualGateways < Struct.new(
       :virtual_gateways)
@@ -2045,6 +2153,8 @@ module Aws::DirectConnect
     #   A list of the BGP peers configured on this virtual interface.
     #   @return [Array<Types::BGPPeer>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterface AWS API Documentation
+    #
     class VirtualInterface < Struct.new(
       :owner_account,
       :virtual_interface_id,
@@ -2071,6 +2181,8 @@ module Aws::DirectConnect
     # @!attribute [rw] virtual_interfaces
     #   A list of virtual interfaces.
     #   @return [Array<Types::VirtualInterface>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/VirtualInterfaces AWS API Documentation
     #
     class VirtualInterfaces < Struct.new(
       :virtual_interfaces)

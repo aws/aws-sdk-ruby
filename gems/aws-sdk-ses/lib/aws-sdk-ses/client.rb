@@ -178,6 +178,8 @@ module Aws::SES
     #     original_rule_set_name: "ReceiptRuleSetName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CloneReceiptRuleSet AWS API Documentation
+    #
     # @overload clone_receipt_rule_set(params = {})
     # @param [Hash] params ({})
     def clone_receipt_rule_set(params = {}, options = {})
@@ -209,6 +211,8 @@ module Aws::SES
     #       name: "ConfigurationSetName", # required
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSet AWS API Documentation
     #
     # @overload create_configuration_set(params = {})
     # @param [Hash] params ({})
@@ -271,6 +275,8 @@ module Aws::SES
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateConfigurationSetEventDestination AWS API Documentation
+    #
     # @overload create_configuration_set_event_destination(params = {})
     # @param [Hash] params ({})
     def create_configuration_set_event_destination(params = {}, options = {})
@@ -307,6 +313,8 @@ module Aws::SES
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptFilter AWS API Documentation
     #
     # @overload create_receipt_filter(params = {})
     # @param [Hash] params ({})
@@ -392,6 +400,8 @@ module Aws::SES
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRule AWS API Documentation
+    #
     # @overload create_receipt_rule(params = {})
     # @param [Hash] params ({})
     def create_receipt_rule(params = {}, options = {})
@@ -428,6 +438,8 @@ module Aws::SES
     #     rule_set_name: "ReceiptRuleSetName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/CreateReceiptRuleSet AWS API Documentation
+    #
     # @overload create_receipt_rule_set(params = {})
     # @param [Hash] params ({})
     def create_receipt_rule_set(params = {}, options = {})
@@ -457,6 +469,8 @@ module Aws::SES
     #   resp = client.delete_configuration_set({
     #     configuration_set_name: "ConfigurationSetName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSet AWS API Documentation
     #
     # @overload delete_configuration_set(params = {})
     # @param [Hash] params ({})
@@ -494,6 +508,8 @@ module Aws::SES
     #     event_destination_name: "EventDestinationName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteConfigurationSetEventDestination AWS API Documentation
+    #
     # @overload delete_configuration_set_event_destination(params = {})
     # @param [Hash] params ({})
     def delete_configuration_set_event_destination(params = {}, options = {})
@@ -517,6 +533,8 @@ module Aws::SES
     #   resp = client.delete_identity({
     #     identity: "Identity", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentity AWS API Documentation
     #
     # @overload delete_identity(params = {})
     # @param [Hash] params ({})
@@ -565,6 +583,8 @@ module Aws::SES
     #     policy_name: "PolicyName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteIdentityPolicy AWS API Documentation
+    #
     # @overload delete_identity_policy(params = {})
     # @param [Hash] params ({})
     def delete_identity_policy(params = {}, options = {})
@@ -593,6 +613,8 @@ module Aws::SES
     #   resp = client.delete_receipt_filter({
     #     filter_name: "ReceiptFilterName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptFilter AWS API Documentation
     #
     # @overload delete_receipt_filter(params = {})
     # @param [Hash] params ({})
@@ -628,6 +650,8 @@ module Aws::SES
     #     rule_name: "ReceiptRuleName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRule AWS API Documentation
+    #
     # @overload delete_receipt_rule(params = {})
     # @param [Hash] params ({})
     def delete_receipt_rule(params = {}, options = {})
@@ -662,6 +686,8 @@ module Aws::SES
     #     rule_set_name: "ReceiptRuleSetName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteReceiptRuleSet AWS API Documentation
+    #
     # @overload delete_receipt_rule_set(params = {})
     # @param [Hash] params ({})
     def delete_receipt_rule_set(params = {}, options = {})
@@ -688,6 +714,8 @@ module Aws::SES
     #   resp = client.delete_verified_email_address({
     #     email_address: "Address", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DeleteVerifiedEmailAddress AWS API Documentation
     #
     # @overload delete_verified_email_address(params = {})
     # @param [Hash] params ({})
@@ -746,6 +774,8 @@ module Aws::SES
     #   resp.rules[0].actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
     #   resp.rules[0].scan_enabled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeActiveReceiptRuleSet AWS API Documentation
+    #
     # @overload describe_active_receipt_rule_set(params = {})
     # @param [Hash] params ({})
     def describe_active_receipt_rule_set(params = {}, options = {})
@@ -797,6 +827,8 @@ module Aws::SES
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_name #=> String
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "messageTag", "emailHeader"
     #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeConfigurationSet AWS API Documentation
     #
     # @overload describe_configuration_set(params = {})
     # @param [Hash] params ({})
@@ -863,6 +895,8 @@ module Aws::SES
     #   resp.rule.actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
     #   resp.rule.scan_enabled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRule AWS API Documentation
+    #
     # @overload describe_receipt_rule(params = {})
     # @param [Hash] params ({})
     def describe_receipt_rule(params = {}, options = {})
@@ -928,6 +962,8 @@ module Aws::SES
     #   resp.rules[0].actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
     #   resp.rules[0].scan_enabled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/DescribeReceiptRuleSet AWS API Documentation
+    #
     # @overload describe_receipt_rule_set(params = {})
     # @param [Hash] params ({})
     def describe_receipt_rule_set(params = {}, options = {})
@@ -984,6 +1020,8 @@ module Aws::SES
     #   resp.dkim_attributes["Identity"].dkim_tokens #=> Array
     #   resp.dkim_attributes["Identity"].dkim_tokens[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityDkimAttributes AWS API Documentation
+    #
     # @overload get_identity_dkim_attributes(params = {})
     # @param [Hash] params ({})
     def get_identity_dkim_attributes(params = {}, options = {})
@@ -1016,6 +1054,8 @@ module Aws::SES
     #   resp.mail_from_domain_attributes["Identity"].mail_from_domain #=> String
     #   resp.mail_from_domain_attributes["Identity"].mail_from_domain_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure"
     #   resp.mail_from_domain_attributes["Identity"].behavior_on_mx_failure #=> String, one of "UseDefaultValue", "RejectMessage"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityMailFromDomainAttributes AWS API Documentation
     #
     # @overload get_identity_mail_from_domain_attributes(params = {})
     # @param [Hash] params ({})
@@ -1063,6 +1103,8 @@ module Aws::SES
     #   resp.notification_attributes["Identity"].headers_in_bounce_notifications_enabled #=> Boolean
     #   resp.notification_attributes["Identity"].headers_in_complaint_notifications_enabled #=> Boolean
     #   resp.notification_attributes["Identity"].headers_in_delivery_notifications_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityNotificationAttributes AWS API Documentation
     #
     # @overload get_identity_notification_attributes(params = {})
     # @param [Hash] params ({})
@@ -1121,6 +1163,8 @@ module Aws::SES
     #   resp.policies #=> Hash
     #   resp.policies["PolicyName"] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityPolicies AWS API Documentation
+    #
     # @overload get_identity_policies(params = {})
     # @param [Hash] params ({})
     def get_identity_policies(params = {}, options = {})
@@ -1154,6 +1198,8 @@ module Aws::SES
     #   resp.verification_attributes["Identity"].verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
     #   resp.verification_attributes["Identity"].verification_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetIdentityVerificationAttributes AWS API Documentation
+    #
     # @overload get_identity_verification_attributes(params = {})
     # @param [Hash] params ({})
     def get_identity_verification_attributes(params = {}, options = {})
@@ -1176,6 +1222,8 @@ module Aws::SES
     #   resp.max_24_hour_send #=> Float
     #   resp.max_send_rate #=> Float
     #   resp.sent_last_24_hours #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendQuota AWS API Documentation
     #
     # @overload get_send_quota(params = {})
     # @param [Hash] params ({})
@@ -1204,6 +1252,8 @@ module Aws::SES
     #   resp.send_data_points[0].bounces #=> Integer
     #   resp.send_data_points[0].complaints #=> Integer
     #   resp.send_data_points[0].rejects #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetSendStatistics AWS API Documentation
     #
     # @overload get_send_statistics(params = {})
     # @param [Hash] params ({})
@@ -1251,6 +1301,8 @@ module Aws::SES
     #   resp.configuration_sets[0].name #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListConfigurationSets AWS API Documentation
+    #
     # @overload list_configuration_sets(params = {})
     # @param [Hash] params ({})
     def list_configuration_sets(params = {}, options = {})
@@ -1293,6 +1345,8 @@ module Aws::SES
     #   resp.identities #=> Array
     #   resp.identities[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentities AWS API Documentation
     #
     # @overload list_identities(params = {})
     # @param [Hash] params ({})
@@ -1345,6 +1399,8 @@ module Aws::SES
     #   resp.policy_names #=> Array
     #   resp.policy_names[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListIdentityPolicies AWS API Documentation
+    #
     # @overload list_identity_policies(params = {})
     # @param [Hash] params ({})
     def list_identity_policies(params = {}, options = {})
@@ -1373,6 +1429,8 @@ module Aws::SES
     #   resp.filters[0].name #=> String
     #   resp.filters[0].ip_filter.policy #=> String, one of "Block", "Allow"
     #   resp.filters[0].ip_filter.cidr #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptFilters AWS API Documentation
     #
     # @overload list_receipt_filters(params = {})
     # @param [Hash] params ({})
@@ -1417,6 +1475,8 @@ module Aws::SES
     #   resp.rule_sets[0].created_timestamp #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListReceiptRuleSets AWS API Documentation
+    #
     # @overload list_receipt_rule_sets(params = {})
     # @param [Hash] params ({})
     def list_receipt_rule_sets(params = {}, options = {})
@@ -1441,6 +1501,8 @@ module Aws::SES
     #
     #   resp.verified_email_addresses #=> Array
     #   resp.verified_email_addresses[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListVerifiedEmailAddresses AWS API Documentation
     #
     # @overload list_verified_email_addresses(params = {})
     # @param [Hash] params ({})
@@ -1501,6 +1563,8 @@ module Aws::SES
     #     policy: "Policy", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/PutIdentityPolicy AWS API Documentation
+    #
     # @overload put_identity_policy(params = {})
     # @param [Hash] params ({})
     def put_identity_policy(params = {}, options = {})
@@ -1540,6 +1604,8 @@ module Aws::SES
     #     rule_set_name: "ReceiptRuleSetName", # required
     #     rule_names: ["ReceiptRuleName"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ReorderReceiptRuleSet AWS API Documentation
     #
     # @overload reorder_receipt_rule_set(params = {})
     # @param [Hash] params ({})
@@ -1646,6 +1712,8 @@ module Aws::SES
     # @example Response structure
     #
     #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendBounce AWS API Documentation
     #
     # @overload send_bounce(params = {})
     # @param [Hash] params ({})
@@ -1825,6 +1893,8 @@ module Aws::SES
     # @example Response structure
     #
     #   resp.message_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendEmail AWS API Documentation
     #
     # @overload send_email(params = {})
     # @param [Hash] params ({})
@@ -2060,6 +2130,8 @@ module Aws::SES
     #
     #   resp.message_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SendRawEmail AWS API Documentation
+    #
     # @overload send_raw_email(params = {})
     # @param [Hash] params ({})
     def send_raw_email(params = {}, options = {})
@@ -2094,6 +2166,8 @@ module Aws::SES
     #   resp = client.set_active_receipt_rule_set({
     #     rule_set_name: "ReceiptRuleSetName",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetActiveReceiptRuleSet AWS API Documentation
     #
     # @overload set_active_receipt_rule_set(params = {})
     # @param [Hash] params ({})
@@ -2140,6 +2214,8 @@ module Aws::SES
     #     identity: "Identity", # required
     #     dkim_enabled: false, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityDkimEnabled AWS API Documentation
     #
     # @overload set_identity_dkim_enabled(params = {})
     # @param [Hash] params ({})
@@ -2191,6 +2267,8 @@ module Aws::SES
     #     forwarding_enabled: false, # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityFeedbackForwardingEnabled AWS API Documentation
+    #
     # @overload set_identity_feedback_forwarding_enabled(params = {})
     # @param [Hash] params ({})
     def set_identity_feedback_forwarding_enabled(params = {}, options = {})
@@ -2238,6 +2316,8 @@ module Aws::SES
     #     notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
     #     enabled: false, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityHeadersInNotificationsEnabled AWS API Documentation
     #
     # @overload set_identity_headers_in_notifications_enabled(params = {})
     # @param [Hash] params ({})
@@ -2300,6 +2380,8 @@ module Aws::SES
     #     behavior_on_mx_failure: "UseDefaultValue", # accepts UseDefaultValue, RejectMessage
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityMailFromDomain AWS API Documentation
+    #
     # @overload set_identity_mail_from_domain(params = {})
     # @param [Hash] params ({})
     def set_identity_mail_from_domain(params = {}, options = {})
@@ -2352,6 +2434,8 @@ module Aws::SES
     #     sns_topic: "NotificationTopic",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetIdentityNotificationTopic AWS API Documentation
+    #
     # @overload set_identity_notification_topic(params = {})
     # @param [Hash] params ({})
     def set_identity_notification_topic(params = {}, options = {})
@@ -2391,6 +2475,8 @@ module Aws::SES
     #     rule_name: "ReceiptRuleName", # required
     #     after: "ReceiptRuleName",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/SetReceiptRulePosition AWS API Documentation
     #
     # @overload set_receipt_rule_position(params = {})
     # @param [Hash] params ({})
@@ -2450,6 +2536,8 @@ module Aws::SES
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateConfigurationSetEventDestination AWS API Documentation
     #
     # @overload update_configuration_set_event_destination(params = {})
     # @param [Hash] params ({})
@@ -2528,6 +2616,8 @@ module Aws::SES
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/UpdateReceiptRule AWS API Documentation
+    #
     # @overload update_receipt_rule(params = {})
     # @param [Hash] params ({})
     def update_receipt_rule(params = {}, options = {})
@@ -2573,6 +2663,8 @@ module Aws::SES
     #   resp.dkim_tokens #=> Array
     #   resp.dkim_tokens[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainDkim AWS API Documentation
+    #
     # @overload verify_domain_dkim(params = {})
     # @param [Hash] params ({})
     def verify_domain_dkim(params = {}, options = {})
@@ -2601,6 +2693,8 @@ module Aws::SES
     #
     #   resp.verification_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyDomainIdentity AWS API Documentation
+    #
     # @overload verify_domain_identity(params = {})
     # @param [Hash] params ({})
     def verify_domain_identity(params = {}, options = {})
@@ -2628,6 +2722,8 @@ module Aws::SES
     #     email_address: "Address", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailAddress AWS API Documentation
+    #
     # @overload verify_email_address(params = {})
     # @param [Hash] params ({})
     def verify_email_address(params = {}, options = {})
@@ -2650,6 +2746,8 @@ module Aws::SES
     #   resp = client.verify_email_identity({
     #     email_address: "Address", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/VerifyEmailIdentity AWS API Documentation
     #
     # @overload verify_email_identity(params = {})
     # @param [Hash] params ({})

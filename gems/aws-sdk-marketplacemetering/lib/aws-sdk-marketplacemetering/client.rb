@@ -208,6 +208,8 @@ module Aws::MarketplaceMetering
     #   resp.unprocessed_records[0].dimension #=> String
     #   resp.unprocessed_records[0].quantity #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsage AWS API Documentation
+    #
     # @overload batch_meter_usage(params = {})
     # @param [Hash] params ({})
     def batch_meter_usage(params = {}, options = {})
@@ -260,6 +262,8 @@ module Aws::MarketplaceMetering
     #
     #   resp.metering_record_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsage AWS API Documentation
+    #
     # @overload meter_usage(params = {})
     # @param [Hash] params ({})
     def meter_usage(params = {}, options = {})
@@ -294,6 +298,8 @@ module Aws::MarketplaceMetering
     #
     #   resp.customer_identifier #=> String
     #   resp.product_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomer AWS API Documentation
     #
     # @overload resolve_customer(params = {})
     # @param [Hash] params ({})

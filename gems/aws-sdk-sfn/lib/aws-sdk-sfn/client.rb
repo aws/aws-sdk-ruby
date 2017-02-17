@@ -175,6 +175,8 @@ module Aws::SFN
     #   resp.activity_arn #=> String
     #   resp.creation_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivity AWS API Documentation
+    #
     # @overload create_activity(params = {})
     # @param [Hash] params ({})
     def create_activity(params = {}, options = {})
@@ -213,6 +215,8 @@ module Aws::SFN
     #   resp.state_machine_arn #=> String
     #   resp.creation_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachine AWS API Documentation
+    #
     # @overload create_state_machine(params = {})
     # @param [Hash] params ({})
     def create_state_machine(params = {}, options = {})
@@ -232,6 +236,8 @@ module Aws::SFN
     #   resp = client.delete_activity({
     #     activity_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivity AWS API Documentation
     #
     # @overload delete_activity(params = {})
     # @param [Hash] params ({})
@@ -254,6 +260,8 @@ module Aws::SFN
     #   resp = client.delete_state_machine({
     #     state_machine_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachine AWS API Documentation
     #
     # @overload delete_state_machine(params = {})
     # @param [Hash] params ({})
@@ -284,6 +292,8 @@ module Aws::SFN
     #   resp.activity_arn #=> String
     #   resp.name #=> String
     #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivity AWS API Documentation
     #
     # @overload describe_activity(params = {})
     # @param [Hash] params ({})
@@ -325,6 +335,8 @@ module Aws::SFN
     #   resp.input #=> String
     #   resp.output #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecution AWS API Documentation
+    #
     # @overload describe_execution(params = {})
     # @param [Hash] params ({})
     def describe_execution(params = {}, options = {})
@@ -360,6 +372,8 @@ module Aws::SFN
     #   resp.definition #=> String
     #   resp.role_arn #=> String
     #   resp.creation_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachine AWS API Documentation
     #
     # @overload describe_state_machine(params = {})
     # @param [Hash] params ({})
@@ -405,6 +419,8 @@ module Aws::SFN
     #
     #   resp.task_token #=> String
     #   resp.input #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTask AWS API Documentation
     #
     # @overload get_activity_task(params = {})
     # @param [Hash] params ({})
@@ -503,6 +519,8 @@ module Aws::SFN
     #   resp.events[0].state_exited_event_details.output #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistory AWS API Documentation
+    #
     # @overload get_execution_history(params = {})
     # @param [Hash] params ({})
     def get_execution_history(params = {}, options = {})
@@ -550,6 +568,8 @@ module Aws::SFN
     #   resp.activities[0].name #=> String
     #   resp.activities[0].creation_date #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivities AWS API Documentation
     #
     # @overload list_activities(params = {})
     # @param [Hash] params ({})
@@ -613,6 +633,8 @@ module Aws::SFN
     #   resp.executions[0].stop_date #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutions AWS API Documentation
+    #
     # @overload list_executions(params = {})
     # @param [Hash] params ({})
     def list_executions(params = {}, options = {})
@@ -661,6 +683,8 @@ module Aws::SFN
     #   resp.state_machines[0].creation_date #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachines AWS API Documentation
+    #
     # @overload list_state_machines(params = {})
     # @param [Hash] params ({})
     def list_state_machines(params = {}, options = {})
@@ -691,6 +715,8 @@ module Aws::SFN
     #     error: "Error",
     #     cause: "Cause",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailure AWS API Documentation
     #
     # @overload send_task_failure(params = {})
     # @param [Hash] params ({})
@@ -731,6 +757,8 @@ module Aws::SFN
     #     task_token: "TaskToken", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeat AWS API Documentation
+    #
     # @overload send_task_heartbeat(params = {})
     # @param [Hash] params ({})
     def send_task_heartbeat(params = {}, options = {})
@@ -757,6 +785,8 @@ module Aws::SFN
     #     task_token: "TaskToken", # required
     #     output: "Data", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccess AWS API Documentation
     #
     # @overload send_task_success(params = {})
     # @param [Hash] params ({})
@@ -795,6 +825,8 @@ module Aws::SFN
     #   resp.execution_arn #=> String
     #   resp.start_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecution AWS API Documentation
+    #
     # @overload start_execution(params = {})
     # @param [Hash] params ({})
     def start_execution(params = {}, options = {})
@@ -828,6 +860,8 @@ module Aws::SFN
     # @example Response structure
     #
     #   resp.stop_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecution AWS API Documentation
     #
     # @overload stop_execution(params = {})
     # @param [Hash] params ({})

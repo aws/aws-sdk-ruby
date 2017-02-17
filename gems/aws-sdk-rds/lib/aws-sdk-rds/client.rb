@@ -170,6 +170,8 @@ module Aws::RDS
     #     role_arn: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBCluster AWS API Documentation
+    #
     # @overload add_role_to_db_cluster(params = {})
     # @param [Hash] params ({})
     def add_role_to_db_cluster(params = {}, options = {})
@@ -230,6 +232,8 @@ module Aws::RDS
     #   resp.event_subscription.enabled #=> Boolean
     #   resp.event_subscription.event_subscription_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscription AWS API Documentation
+    #
     # @overload add_source_identifier_to_subscription(params = {})
     # @param [Hash] params ({})
     def add_source_identifier_to_subscription(params = {}, options = {})
@@ -274,6 +278,8 @@ module Aws::RDS
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResource AWS API Documentation
     #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
@@ -335,6 +341,8 @@ module Aws::RDS
     #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].opt_in_status #=> String
     #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].current_apply_date #=> Time
     #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceAction AWS API Documentation
     #
     # @overload apply_pending_maintenance_action(params = {})
     # @param [Hash] params ({})
@@ -420,6 +428,8 @@ module Aws::RDS
     #   resp.db_security_group.ip_ranges[0].cidrip #=> String
     #   resp.db_security_group.db_security_group_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngress AWS API Documentation
+    #
     # @overload authorize_db_security_group_ingress(params = {})
     # @param [Hash] params ({})
     def authorize_db_security_group_ingress(params = {}, options = {})
@@ -495,6 +505,8 @@ module Aws::RDS
     #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
     #   resp.db_cluster_parameter_group.description #=> String
     #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroup AWS API Documentation
     #
     # @overload copy_db_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -580,6 +592,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
+    #
     # @overload copy_db_cluster_snapshot(params = {})
     # @param [Hash] params ({})
     def copy_db_cluster_snapshot(params = {}, options = {})
@@ -650,6 +664,8 @@ module Aws::RDS
     #   resp.db_parameter_group.db_parameter_group_family #=> String
     #   resp.db_parameter_group.description #=> String
     #   resp.db_parameter_group.db_parameter_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroup AWS API Documentation
     #
     # @overload copy_db_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -912,6 +928,8 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
+    #
     # @overload copy_db_snapshot(params = {})
     # @param [Hash] params ({})
     def copy_db_snapshot(params = {}, options = {})
@@ -1013,6 +1031,8 @@ module Aws::RDS
     #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_group.vpc_id #=> String
     #   resp.option_group.option_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup AWS API Documentation
     #
     # @overload copy_option_group(params = {})
     # @param [Hash] params ({})
@@ -1294,6 +1314,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
+    #
     # @overload create_db_cluster(params = {})
     # @param [Hash] params ({})
     def create_db_cluster(params = {}, options = {})
@@ -1390,6 +1412,8 @@ module Aws::RDS
     #   resp.db_cluster_parameter_group.description #=> String
     #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroup AWS API Documentation
+    #
     # @overload create_db_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
     def create_db_cluster_parameter_group(params = {}, options = {})
@@ -1473,6 +1497,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
     # @overload create_db_cluster_snapshot(params = {})
     # @param [Hash] params ({})
@@ -2382,6 +2408,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
+    #
     # @overload create_db_instance(params = {})
     # @param [Hash] params ({})
     def create_db_instance(params = {}, options = {})
@@ -2687,6 +2715,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
+    #
     # @overload create_db_instance_read_replica(params = {})
     # @param [Hash] params ({})
     def create_db_instance_read_replica(params = {}, options = {})
@@ -2774,6 +2804,8 @@ module Aws::RDS
     #   resp.db_parameter_group.description #=> String
     #   resp.db_parameter_group.db_parameter_group_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroup AWS API Documentation
+    #
     # @overload create_db_parameter_group(params = {})
     # @param [Hash] params ({})
     def create_db_parameter_group(params = {}, options = {})
@@ -2838,6 +2870,8 @@ module Aws::RDS
     #   resp.db_security_group.ip_ranges[0].status #=> String
     #   resp.db_security_group.ip_ranges[0].cidrip #=> String
     #   resp.db_security_group.db_security_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroup AWS API Documentation
     #
     # @overload create_db_security_group(params = {})
     # @param [Hash] params ({})
@@ -2924,6 +2958,8 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
+    #
     # @overload create_db_snapshot(params = {})
     # @param [Hash] params ({})
     def create_db_snapshot(params = {}, options = {})
@@ -2981,6 +3017,8 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup AWS API Documentation
     #
     # @overload create_db_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -3106,6 +3144,8 @@ module Aws::RDS
     #   resp.event_subscription.enabled #=> Boolean
     #   resp.event_subscription.event_subscription_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscription AWS API Documentation
+    #
     # @overload create_event_subscription(params = {})
     # @param [Hash] params ({})
     def create_event_subscription(params = {}, options = {})
@@ -3193,6 +3233,8 @@ module Aws::RDS
     #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_group.vpc_id #=> String
     #   resp.option_group.option_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup AWS API Documentation
     #
     # @overload create_option_group(params = {})
     # @param [Hash] params ({})
@@ -3317,6 +3359,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
+    #
     # @overload delete_db_cluster(params = {})
     # @param [Hash] params ({})
     def delete_db_cluster(params = {}, options = {})
@@ -3353,6 +3397,8 @@ module Aws::RDS
     #   resp = client.delete_db_cluster_parameter_group({
     #     db_cluster_parameter_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroup AWS API Documentation
     #
     # @overload delete_db_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -3413,6 +3459,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
     # @overload delete_db_cluster_snapshot(params = {})
     # @param [Hash] params ({})
@@ -3605,6 +3653,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
+    #
     # @overload delete_db_instance(params = {})
     # @param [Hash] params ({})
     def delete_db_instance(params = {}, options = {})
@@ -3633,6 +3683,8 @@ module Aws::RDS
     #   resp = client.delete_db_parameter_group({
     #     db_parameter_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroup AWS API Documentation
     #
     # @overload delete_db_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -3672,6 +3724,8 @@ module Aws::RDS
     #   resp = client.delete_db_security_group({
     #     db_security_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroup AWS API Documentation
     #
     # @overload delete_db_security_group(params = {})
     # @param [Hash] params ({})
@@ -3731,6 +3785,8 @@ module Aws::RDS
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
+    #
     # @overload delete_db_snapshot(params = {})
     # @param [Hash] params ({})
     def delete_db_snapshot(params = {}, options = {})
@@ -3766,6 +3822,8 @@ module Aws::RDS
     #   resp = client.delete_db_subnet_group({
     #     db_subnet_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroup AWS API Documentation
     #
     # @overload delete_db_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -3805,6 +3863,8 @@ module Aws::RDS
     #   resp.event_subscription.enabled #=> Boolean
     #   resp.event_subscription.event_subscription_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscription AWS API Documentation
+    #
     # @overload delete_event_subscription(params = {})
     # @param [Hash] params ({})
     def delete_event_subscription(params = {}, options = {})
@@ -3828,6 +3888,8 @@ module Aws::RDS
     #   resp = client.delete_option_group({
     #     option_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroup AWS API Documentation
     #
     # @overload delete_option_group(params = {})
     # @param [Hash] params ({})
@@ -3853,6 +3915,8 @@ module Aws::RDS
     #   resp.account_quotas[0].account_quota_name #=> String
     #   resp.account_quotas[0].used #=> Integer
     #   resp.account_quotas[0].max #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributes AWS API Documentation
     #
     # @overload describe_account_attributes(params = {})
     # @param [Hash] params ({})
@@ -3925,6 +3989,8 @@ module Aws::RDS
     #   resp.certificates[0].valid_till #=> Time
     #   resp.certificates[0].certificate_arn #=> String
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificates AWS API Documentation
     #
     # @overload describe_certificates(params = {})
     # @param [Hash] params ({})
@@ -4003,6 +4069,8 @@ module Aws::RDS
     #   resp.db_cluster_parameter_groups[0].db_parameter_group_family #=> String
     #   resp.db_cluster_parameter_groups[0].description #=> String
     #   resp.db_cluster_parameter_groups[0].db_cluster_parameter_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroups AWS API Documentation
     #
     # @overload describe_db_cluster_parameter_groups(params = {})
     # @param [Hash] params ({})
@@ -4091,6 +4159,8 @@ module Aws::RDS
     #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameters AWS API Documentation
+    #
     # @overload describe_db_cluster_parameters(params = {})
     # @param [Hash] params ({})
     def describe_db_cluster_parameters(params = {}, options = {})
@@ -4133,6 +4203,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_name #=> String
     #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values #=> Array
     #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributes AWS API Documentation
     #
     # @overload describe_db_cluster_snapshot_attributes(params = {})
     # @param [Hash] params ({})
@@ -4294,6 +4366,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].kms_key_id #=> String
     #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots AWS API Documentation
+    #
     # @overload describe_db_cluster_snapshots(params = {})
     # @param [Hash] params ({})
     def describe_db_cluster_snapshots(params = {}, options = {})
@@ -4419,6 +4493,8 @@ module Aws::RDS
     #   resp.db_clusters[0].associated_roles[0].status #=> String
     #   resp.db_clusters[0].cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
+    #
     # @overload describe_db_clusters(params = {})
     # @param [Hash] params ({})
     def describe_db_clusters(params = {}, options = {})
@@ -4526,6 +4602,8 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].is_major_version_upgrade #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
     # @overload describe_db_engine_versions(params = {})
     # @param [Hash] params ({})
@@ -4692,6 +4770,8 @@ module Aws::RDS
     #   resp.db_instances[0].db_instance_arn #=> String
     #   resp.db_instances[0].timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
+    #
     # @overload describe_db_instances(params = {})
     # @param [Hash] params ({})
     def describe_db_instances(params = {}, options = {})
@@ -4769,6 +4849,8 @@ module Aws::RDS
     #   resp.describe_db_log_files[0].size #=> Integer
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFiles AWS API Documentation
+    #
     # @overload describe_db_log_files(params = {})
     # @param [Hash] params ({})
     def describe_db_log_files(params = {}, options = {})
@@ -4837,6 +4919,8 @@ module Aws::RDS
     #   resp.db_parameter_groups[0].db_parameter_group_family #=> String
     #   resp.db_parameter_groups[0].description #=> String
     #   resp.db_parameter_groups[0].db_parameter_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroups AWS API Documentation
     #
     # @overload describe_db_parameter_groups(params = {})
     # @param [Hash] params ({})
@@ -4920,6 +5004,8 @@ module Aws::RDS
     #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameters AWS API Documentation
+    #
     # @overload describe_db_parameters(params = {})
     # @param [Hash] params ({})
     def describe_db_parameters(params = {}, options = {})
@@ -4990,6 +5076,8 @@ module Aws::RDS
     #   resp.db_security_groups[0].ip_ranges[0].cidrip #=> String
     #   resp.db_security_groups[0].db_security_group_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroups AWS API Documentation
+    #
     # @overload describe_db_security_groups(params = {})
     # @param [Hash] params ({})
     def describe_db_security_groups(params = {}, options = {})
@@ -5031,6 +5119,8 @@ module Aws::RDS
     #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_name #=> String
     #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values #=> Array
     #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributes AWS API Documentation
     #
     # @overload describe_db_snapshot_attributes(params = {})
     # @param [Hash] params ({})
@@ -5189,6 +5279,8 @@ module Aws::RDS
     #   resp.db_snapshots[0].db_snapshot_arn #=> String
     #   resp.db_snapshots[0].timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
+    #
     # @overload describe_db_snapshots(params = {})
     # @param [Hash] params ({})
     def describe_db_snapshots(params = {}, options = {})
@@ -5260,6 +5352,8 @@ module Aws::RDS
     #   resp.db_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups AWS API Documentation
     #
     # @overload describe_db_subnet_groups(params = {})
     # @param [Hash] params ({})
@@ -5335,6 +5429,8 @@ module Aws::RDS
     #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
     #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParameters AWS API Documentation
+    #
     # @overload describe_engine_default_cluster_parameters(params = {})
     # @param [Hash] params ({})
     def describe_engine_default_cluster_parameters(params = {}, options = {})
@@ -5401,6 +5497,8 @@ module Aws::RDS
     #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
     #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParameters AWS API Documentation
+    #
     # @overload describe_engine_default_parameters(params = {})
     # @param [Hash] params ({})
     def describe_engine_default_parameters(params = {}, options = {})
@@ -5448,6 +5546,8 @@ module Aws::RDS
     #   resp.event_categories_map_list[0].source_type #=> String
     #   resp.event_categories_map_list[0].event_categories #=> Array
     #   resp.event_categories_map_list[0].event_categories[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategories AWS API Documentation
     #
     # @overload describe_event_categories(params = {})
     # @param [Hash] params ({})
@@ -5521,6 +5621,8 @@ module Aws::RDS
     #   resp.event_subscriptions_list[0].event_categories_list[0] #=> String
     #   resp.event_subscriptions_list[0].enabled #=> Boolean
     #   resp.event_subscriptions_list[0].event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptions AWS API Documentation
     #
     # @overload describe_event_subscriptions(params = {})
     # @param [Hash] params ({})
@@ -5646,6 +5748,8 @@ module Aws::RDS
     #   resp.events[0].date #=> Time
     #   resp.events[0].source_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEvents AWS API Documentation
+    #
     # @overload describe_events(params = {})
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
@@ -5728,6 +5832,8 @@ module Aws::RDS
     #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
     #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions AWS API Documentation
     #
     # @overload describe_option_group_options(params = {})
     # @param [Hash] params ({})
@@ -5826,6 +5932,8 @@ module Aws::RDS
     #   resp.option_groups_list[0].option_group_arn #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups AWS API Documentation
+    #
     # @overload describe_option_groups(params = {})
     # @param [Hash] params ({})
     def describe_option_groups(params = {}, options = {})
@@ -5915,6 +6023,8 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
+    #
     # @overload describe_orderable_db_instance_options(params = {})
     # @param [Hash] params ({})
     def describe_orderable_db_instance_options(params = {}, options = {})
@@ -5990,6 +6100,8 @@ module Aws::RDS
     #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].current_apply_date #=> Time
     #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].description #=> String
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribePendingMaintenanceActions AWS API Documentation
     #
     # @overload describe_pending_maintenance_actions(params = {})
     # @param [Hash] params ({})
@@ -6100,6 +6212,8 @@ module Aws::RDS
     #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_frequency #=> String
     #   resp.reserved_db_instances[0].reserved_db_instance_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstances AWS API Documentation
+    #
     # @overload describe_reserved_db_instances(params = {})
     # @param [Hash] params ({})
     def describe_reserved_db_instances(params = {}, options = {})
@@ -6199,6 +6313,8 @@ module Aws::RDS
     #   resp.reserved_db_instances_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_db_instances_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferings AWS API Documentation
+    #
     # @overload describe_reserved_db_instances_offerings(params = {})
     # @param [Hash] params ({})
     def describe_reserved_db_instances_offerings(params = {}, options = {})
@@ -6264,6 +6380,8 @@ module Aws::RDS
     #   resp.source_regions[0].region_name #=> String
     #   resp.source_regions[0].endpoint #=> String
     #   resp.source_regions[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegions AWS API Documentation
     #
     # @overload describe_source_regions(params = {})
     # @param [Hash] params ({})
@@ -6341,6 +6459,8 @@ module Aws::RDS
     #   resp.log_file_data #=> String
     #   resp.marker #=> String
     #   resp.additional_data_pending #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortion AWS API Documentation
     #
     # @overload download_db_log_file_portion(params = {})
     # @param [Hash] params ({})
@@ -6446,6 +6566,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
+    #
     # @overload failover_db_cluster(params = {})
     # @param [Hash] params ({})
     def failover_db_cluster(params = {}, options = {})
@@ -6495,6 +6617,8 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -6713,6 +6837,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
+    #
     # @overload modify_db_cluster(params = {})
     # @param [Hash] params ({})
     def modify_db_cluster(params = {}, options = {})
@@ -6784,6 +6910,8 @@ module Aws::RDS
     # @example Response structure
     #
     #   resp.db_cluster_parameter_group_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroup AWS API Documentation
     #
     # @overload modify_db_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -6863,6 +6991,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_name #=> String
     #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values #=> Array
     #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttribute AWS API Documentation
     #
     # @overload modify_db_cluster_snapshot_attribute(params = {})
     # @param [Hash] params ({})
@@ -7534,6 +7664,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
+    #
     # @overload modify_db_instance(params = {})
     # @param [Hash] params ({})
     def modify_db_instance(params = {}, options = {})
@@ -7625,6 +7757,8 @@ module Aws::RDS
     #
     #   resp.db_parameter_group_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroup AWS API Documentation
+    #
     # @overload modify_db_parameter_group(params = {})
     # @param [Hash] params ({})
     def modify_db_parameter_group(params = {}, options = {})
@@ -7701,6 +7835,8 @@ module Aws::RDS
     #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values #=> Array
     #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttribute AWS API Documentation
+    #
     # @overload modify_db_snapshot_attribute(params = {})
     # @param [Hash] params ({})
     def modify_db_snapshot_attribute(params = {}, options = {})
@@ -7749,6 +7885,8 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup AWS API Documentation
     #
     # @overload modify_db_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -7829,6 +7967,8 @@ module Aws::RDS
     #   resp.event_subscription.event_categories_list[0] #=> String
     #   resp.event_subscription.enabled #=> Boolean
     #   resp.event_subscription.event_subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscription AWS API Documentation
     #
     # @overload modify_event_subscription(params = {})
     # @param [Hash] params ({})
@@ -7926,6 +8066,8 @@ module Aws::RDS
     #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
     #   resp.option_group.vpc_id #=> String
     #   resp.option_group.option_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup AWS API Documentation
     #
     # @overload modify_option_group(params = {})
     # @param [Hash] params ({})
@@ -8098,6 +8240,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
+    #
     # @overload promote_read_replica(params = {})
     # @param [Hash] params ({})
     def promote_read_replica(params = {}, options = {})
@@ -8179,6 +8323,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
+    #
     # @overload promote_read_replica_db_cluster(params = {})
     # @param [Hash] params ({})
     def promote_read_replica_db_cluster(params = {}, options = {})
@@ -8243,6 +8389,8 @@ module Aws::RDS
     #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_frequency #=> String
     #   resp.reserved_db_instance.reserved_db_instance_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOffering AWS API Documentation
     #
     # @overload purchase_reserved_db_instances_offering(params = {})
     # @param [Hash] params ({})
@@ -8391,6 +8539,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
+    #
     # @overload reboot_db_instance(params = {})
     # @param [Hash] params ({})
     def reboot_db_instance(params = {}, options = {})
@@ -8422,6 +8572,8 @@ module Aws::RDS
     #     db_cluster_identifier: "String", # required
     #     role_arn: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBCluster AWS API Documentation
     #
     # @overload remove_role_from_db_cluster(params = {})
     # @param [Hash] params ({})
@@ -8468,6 +8620,8 @@ module Aws::RDS
     #   resp.event_subscription.enabled #=> Boolean
     #   resp.event_subscription.event_subscription_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscription AWS API Documentation
+    #
     # @overload remove_source_identifier_from_subscription(params = {})
     # @param [Hash] params ({})
     def remove_source_identifier_from_subscription(params = {}, options = {})
@@ -8504,6 +8658,8 @@ module Aws::RDS
     #     resource_name: "String", # required
     #     tag_keys: ["String"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})
@@ -8573,6 +8729,8 @@ module Aws::RDS
     # @example Response structure
     #
     #   resp.db_cluster_parameter_group_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroup AWS API Documentation
     #
     # @overload reset_db_cluster_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -8661,6 +8819,8 @@ module Aws::RDS
     # @example Response structure
     #
     #   resp.db_parameter_group_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroup AWS API Documentation
     #
     # @overload reset_db_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -8958,6 +9118,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
+    #
     # @overload restore_db_cluster_from_s3(params = {})
     # @param [Hash] params ({})
     def restore_db_cluster_from_s3(params = {}, options = {})
@@ -9136,6 +9298,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
     #
     # @overload restore_db_cluster_from_snapshot(params = {})
     # @param [Hash] params ({})
@@ -9328,6 +9492,8 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
     #   resp.db_cluster.cluster_create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
     #
     # @overload restore_db_cluster_to_point_in_time(params = {})
     # @param [Hash] params ({})
@@ -9665,6 +9831,8 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
     # @overload restore_db_instance_from_db_snapshot(params = {})
     # @param [Hash] params ({})
@@ -10009,6 +10177,8 @@ module Aws::RDS
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
+    #
     # @overload restore_db_instance_to_point_in_time(params = {})
     # @param [Hash] params ({})
     def restore_db_instance_to_point_in_time(params = {}, options = {})
@@ -10079,6 +10249,8 @@ module Aws::RDS
     #   resp.db_security_group.ip_ranges[0].status #=> String
     #   resp.db_security_group.ip_ranges[0].cidrip #=> String
     #   resp.db_security_group.db_security_group_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngress AWS API Documentation
     #
     # @overload revoke_db_security_group_ingress(params = {})
     # @param [Hash] params ({})

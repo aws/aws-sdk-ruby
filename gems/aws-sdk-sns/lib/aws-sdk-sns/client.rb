@@ -173,6 +173,8 @@ module Aws::SNS
     #     action_name: ["action"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermission AWS API Documentation
+    #
     # @overload add_permission(params = {})
     # @param [Hash] params ({})
     def add_permission(params = {}, options = {})
@@ -203,6 +205,8 @@ module Aws::SNS
     # @example Response structure
     #
     #   resp.is_opted_out #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CheckIfPhoneNumberIsOptedOut AWS API Documentation
     #
     # @overload check_if_phone_number_is_opted_out(params = {})
     # @param [Hash] params ({})
@@ -245,6 +249,8 @@ module Aws::SNS
     # @example Response structure
     #
     #   resp.subscription_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ConfirmSubscription AWS API Documentation
     #
     # @overload confirm_subscription(params = {})
     # @param [Hash] params ({})
@@ -327,6 +333,8 @@ module Aws::SNS
     #
     #   resp.platform_application_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformApplication AWS API Documentation
+    #
     # @overload create_platform_application(params = {})
     # @param [Hash] params ({})
     def create_platform_application(params = {}, options = {})
@@ -398,6 +406,8 @@ module Aws::SNS
     #
     #   resp.endpoint_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreatePlatformEndpoint AWS API Documentation
+    #
     # @overload create_platform_endpoint(params = {})
     # @param [Hash] params ({})
     def create_platform_endpoint(params = {}, options = {})
@@ -436,6 +446,8 @@ module Aws::SNS
     #
     #   resp.topic_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/CreateTopic AWS API Documentation
+    #
     # @overload create_topic(params = {})
     # @param [Hash] params ({})
     def create_topic(params = {}, options = {})
@@ -465,6 +477,8 @@ module Aws::SNS
     #     endpoint_arn: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteEndpoint AWS API Documentation
+    #
     # @overload delete_endpoint(params = {})
     # @param [Hash] params ({})
     def delete_endpoint(params = {}, options = {})
@@ -491,6 +505,8 @@ module Aws::SNS
     #     platform_application_arn: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeletePlatformApplication AWS API Documentation
+    #
     # @overload delete_platform_application(params = {})
     # @param [Hash] params ({})
     def delete_platform_application(params = {}, options = {})
@@ -513,6 +529,8 @@ module Aws::SNS
     #   resp = client.delete_topic({
     #     topic_arn: "topicARN", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/DeleteTopic AWS API Documentation
     #
     # @overload delete_topic(params = {})
     # @param [Hash] params ({})
@@ -547,6 +565,8 @@ module Aws::SNS
     #   resp.attributes #=> Hash
     #   resp.attributes["String"] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetEndpointAttributes AWS API Documentation
+    #
     # @overload get_endpoint_attributes(params = {})
     # @param [Hash] params ({})
     def get_endpoint_attributes(params = {}, options = {})
@@ -579,6 +599,8 @@ module Aws::SNS
     #
     #   resp.attributes #=> Hash
     #   resp.attributes["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetPlatformApplicationAttributes AWS API Documentation
     #
     # @overload get_platform_application_attributes(params = {})
     # @param [Hash] params ({})
@@ -619,6 +641,8 @@ module Aws::SNS
     #   resp.attributes #=> Hash
     #   resp.attributes["String"] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSMSAttributes AWS API Documentation
+    #
     # @overload get_sms_attributes(params = {})
     # @param [Hash] params ({})
     def get_sms_attributes(params = {}, options = {})
@@ -645,6 +669,8 @@ module Aws::SNS
     #
     #   resp.attributes #=> Hash
     #   resp.attributes["attributeName"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetSubscriptionAttributes AWS API Documentation
     #
     # @overload get_subscription_attributes(params = {})
     # @param [Hash] params ({})
@@ -673,6 +699,8 @@ module Aws::SNS
     #
     #   resp.attributes #=> Hash
     #   resp.attributes["attributeName"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/GetTopicAttributes AWS API Documentation
     #
     # @overload get_topic_attributes(params = {})
     # @param [Hash] params ({})
@@ -725,6 +753,8 @@ module Aws::SNS
     #   resp.endpoints[0].attributes["String"] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListEndpointsByPlatformApplication AWS API Documentation
+    #
     # @overload list_endpoints_by_platform_application(params = {})
     # @param [Hash] params ({})
     def list_endpoints_by_platform_application(params = {}, options = {})
@@ -764,6 +794,8 @@ module Aws::SNS
     #   resp.phone_numbers #=> Array
     #   resp.phone_numbers[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPhoneNumbersOptedOut AWS API Documentation
     #
     # @overload list_phone_numbers_opted_out(params = {})
     # @param [Hash] params ({})
@@ -810,6 +842,8 @@ module Aws::SNS
     #   resp.platform_applications[0].attributes["String"] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListPlatformApplications AWS API Documentation
+    #
     # @overload list_platform_applications(params = {})
     # @param [Hash] params ({})
     def list_platform_applications(params = {}, options = {})
@@ -845,6 +879,8 @@ module Aws::SNS
     #   resp.subscriptions[0].endpoint #=> String
     #   resp.subscriptions[0].topic_arn #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptions AWS API Documentation
     #
     # @overload list_subscriptions(params = {})
     # @param [Hash] params ({})
@@ -887,6 +923,8 @@ module Aws::SNS
     #   resp.subscriptions[0].topic_arn #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListSubscriptionsByTopic AWS API Documentation
+    #
     # @overload list_subscriptions_by_topic(params = {})
     # @param [Hash] params ({})
     def list_subscriptions_by_topic(params = {}, options = {})
@@ -919,6 +957,8 @@ module Aws::SNS
     #   resp.topics[0].topic_arn #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/ListTopics AWS API Documentation
+    #
     # @overload list_topics(params = {})
     # @param [Hash] params ({})
     def list_topics(params = {}, options = {})
@@ -941,6 +981,8 @@ module Aws::SNS
     #   resp = client.opt_in_phone_number({
     #     phone_number: "PhoneNumber", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/OptInPhoneNumber AWS API Documentation
     #
     # @overload opt_in_phone_number(params = {})
     # @param [Hash] params ({})
@@ -1091,6 +1133,8 @@ module Aws::SNS
     #
     #   resp.message_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Publish AWS API Documentation
+    #
     # @overload publish(params = {})
     # @param [Hash] params ({})
     def publish(params = {}, options = {})
@@ -1114,6 +1158,8 @@ module Aws::SNS
     #     topic_arn: "topicARN", # required
     #     label: "label", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/RemovePermission AWS API Documentation
     #
     # @overload remove_permission(params = {})
     # @param [Hash] params ({})
@@ -1161,6 +1207,8 @@ module Aws::SNS
     #       "String" => "String",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetEndpointAttributes AWS API Documentation
     #
     # @overload set_endpoint_attributes(params = {})
     # @param [Hash] params ({})
@@ -1230,6 +1278,8 @@ module Aws::SNS
     #       "String" => "String",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetPlatformApplicationAttributes AWS API Documentation
     #
     # @overload set_platform_application_attributes(params = {})
     # @param [Hash] params ({})
@@ -1342,6 +1392,8 @@ module Aws::SNS
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSMSAttributes AWS API Documentation
+    #
     # @overload set_sms_attributes(params = {})
     # @param [Hash] params ({})
     def set_sms_attributes(params = {}, options = {})
@@ -1374,6 +1426,8 @@ module Aws::SNS
     #     attribute_value: "attributeValue",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetSubscriptionAttributes AWS API Documentation
+    #
     # @overload set_subscription_attributes(params = {})
     # @param [Hash] params ({})
     def set_subscription_attributes(params = {}, options = {})
@@ -1404,6 +1458,8 @@ module Aws::SNS
     #     attribute_name: "attributeName", # required
     #     attribute_value: "attributeValue",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/SetTopicAttributes AWS API Documentation
     #
     # @overload set_topic_attributes(params = {})
     # @param [Hash] params ({})
@@ -1484,6 +1540,8 @@ module Aws::SNS
     #
     #   resp.subscription_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Subscribe AWS API Documentation
+    #
     # @overload subscribe(params = {})
     # @param [Hash] params ({})
     def subscribe(params = {}, options = {})
@@ -1509,6 +1567,8 @@ module Aws::SNS
     #   resp = client.unsubscribe({
     #     subscription_arn: "subscriptionARN", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/Unsubscribe AWS API Documentation
     #
     # @overload unsubscribe(params = {})
     # @param [Hash] params ({})

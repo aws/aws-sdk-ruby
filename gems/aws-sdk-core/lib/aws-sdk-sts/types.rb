@@ -147,6 +147,8 @@ module Aws::STS
     #   a sequence of six numeric digits.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest AWS API Documentation
+    #
     class AssumeRoleRequest < Struct.new(
       :role_arn,
       :role_session_name,
@@ -186,6 +188,8 @@ module Aws::STS
     #   form. The service rejects any policy with a packed size greater than
     #   100 percent, which means the policy exceeded the allowed space.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleResponse AWS API Documentation
     #
     class AssumeRoleResponse < Struct.new(
       :credentials,
@@ -285,6 +289,8 @@ module Aws::STS
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLRequest AWS API Documentation
+    #
     class AssumeRoleWithSAMLRequest < Struct.new(
       :role_arn,
       :principal_arn,
@@ -358,6 +364,8 @@ module Aws::STS
     #   `BASE64 ( SHA1 ( "https://example.com/saml" + "123456789012" +
     #   "/MySAMLIdP" ) )`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithSAMLResponse AWS API Documentation
     #
     class AssumeRoleWithSAMLResponse < Struct.new(
       :credentials,
@@ -477,6 +485,8 @@ module Aws::STS
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityRequest AWS API Documentation
+    #
     class AssumeRoleWithWebIdentityRequest < Struct.new(
       :role_arn,
       :role_session_name,
@@ -541,6 +551,8 @@ module Aws::STS
     #   application that requested the web identity token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleWithWebIdentityResponse AWS API Documentation
+    #
     class AssumeRoleWithWebIdentityResponse < Struct.new(
       :credentials,
       :subject_from_web_identity_token,
@@ -570,6 +582,8 @@ module Aws::STS
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumedRoleUser AWS API Documentation
+    #
     class AssumedRoleUser < Struct.new(
       :assumed_role_id,
       :arn)
@@ -596,6 +610,8 @@ module Aws::STS
     #   The date on which the current credentials expire.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/Credentials AWS API Documentation
+    #
     class Credentials < Struct.new(
       :access_key_id,
       :secret_access_key,
@@ -615,6 +631,8 @@ module Aws::STS
     #   The encoded message that was returned with the response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessageRequest AWS API Documentation
+    #
     class DecodeAuthorizationMessageRequest < Struct.new(
       :encoded_message)
       include Aws::Structure
@@ -627,6 +645,8 @@ module Aws::STS
     # @!attribute [rw] decoded_message
     #   An XML document that contains the decoded message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/DecodeAuthorizationMessageResponse AWS API Documentation
     #
     class DecodeAuthorizationMessageResponse < Struct.new(
       :decoded_message)
@@ -651,6 +671,8 @@ module Aws::STS
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/FederatedUser AWS API Documentation
+    #
     class FederatedUser < Struct.new(
       :federated_user_id,
       :arn)
@@ -658,6 +680,8 @@ module Aws::STS
     end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentityRequest AWS API Documentation
     #
     class GetCallerIdentityRequest < Aws::EmptyStructure; end
 
@@ -684,6 +708,8 @@ module Aws::STS
     # @!attribute [rw] arn
     #   The AWS ARN associated with the calling entity.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetCallerIdentityResponse AWS API Documentation
     #
     class GetCallerIdentityResponse < Struct.new(
       :user_id,
@@ -765,6 +791,8 @@ module Aws::STS
     #   hour.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenRequest AWS API Documentation
+    #
     class GetFederationTokenRequest < Struct.new(
       :name,
       :policy,
@@ -799,6 +827,8 @@ module Aws::STS
     #   The service rejects policies for which the packed size is greater
     #   than 100 percent of the allowed value.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetFederationTokenResponse AWS API Documentation
     #
     class GetFederationTokenResponse < Struct.new(
       :credentials,
@@ -854,6 +884,8 @@ module Aws::STS
     #   a sequence of six numeric digits.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenRequest AWS API Documentation
+    #
     class GetSessionTokenRequest < Struct.new(
       :duration_seconds,
       :serial_number,
@@ -875,6 +907,8 @@ module Aws::STS
     #   bytes, but that can vary. Also, future updates to AWS might require
     #   larger sizes.
     #   @return [Types::Credentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/GetSessionTokenResponse AWS API Documentation
     #
     class GetSessionTokenResponse < Struct.new(
       :credentials)

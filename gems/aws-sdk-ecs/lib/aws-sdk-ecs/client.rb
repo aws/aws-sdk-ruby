@@ -184,6 +184,8 @@ module Aws::ECS
     #   resp.cluster.pending_tasks_count #=> Integer
     #   resp.cluster.active_services_count #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateCluster AWS API Documentation
+    #
     # @overload create_cluster(params = {})
     # @param [Hash] params ({})
     def create_cluster(params = {}, options = {})
@@ -413,6 +415,8 @@ module Aws::ECS
     #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.service.placement_strategy[0].field #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
+    #
     # @overload create_service(params = {})
     # @param [Hash] params ({})
     def create_service(params = {}, options = {})
@@ -459,6 +463,8 @@ module Aws::ECS
     #   resp.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.attributes[0].target_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteAttributes AWS API Documentation
+    #
     # @overload delete_attributes(params = {})
     # @param [Hash] params ({})
     def delete_attributes(params = {}, options = {})
@@ -494,6 +500,8 @@ module Aws::ECS
     #   resp.cluster.running_tasks_count #=> Integer
     #   resp.cluster.pending_tasks_count #=> Integer
     #   resp.cluster.active_services_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCluster AWS API Documentation
     #
     # @overload delete_cluster(params = {})
     # @param [Hash] params ({})
@@ -577,6 +585,8 @@ module Aws::ECS
     #   resp.service.placement_strategy #=> Array
     #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.service.placement_strategy[0].field #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
     #
     # @overload delete_service(params = {})
     # @param [Hash] params ({})
@@ -680,6 +690,8 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].value #=> String
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance AWS API Documentation
     #
     # @overload deregister_container_instance(params = {})
     # @param [Hash] params ({})
@@ -787,6 +799,8 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
+    #
     # @overload deregister_task_definition(params = {})
     # @param [Hash] params ({})
     def deregister_task_definition(params = {}, options = {})
@@ -825,6 +839,8 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters AWS API Documentation
     #
     # @overload describe_clusters(params = {})
     # @param [Hash] params ({})
@@ -897,6 +913,8 @@ module Aws::ECS
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstances AWS API Documentation
+    #
     # @overload describe_container_instances(params = {})
     # @param [Hash] params ({})
     def describe_container_instances(params = {}, options = {})
@@ -968,6 +986,8 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServices AWS API Documentation
     #
     # @overload describe_services(params = {})
     # @param [Hash] params ({})
@@ -1072,6 +1092,8 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTaskDefinition AWS API Documentation
+    #
     # @overload describe_task_definition(params = {})
     # @param [Hash] params ({})
     def describe_task_definition(params = {}, options = {})
@@ -1142,6 +1164,8 @@ module Aws::ECS
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasks AWS API Documentation
+    #
     # @overload describe_tasks(params = {})
     # @param [Hash] params ({})
     def describe_tasks(params = {}, options = {})
@@ -1185,6 +1209,8 @@ module Aws::ECS
     #
     #   resp.endpoint #=> String
     #   resp.telemetry_endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpoint AWS API Documentation
     #
     # @overload discover_poll_endpoint(params = {})
     # @param [Hash] params ({})
@@ -1265,6 +1291,8 @@ module Aws::ECS
     #   resp.attributes[0].target_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListAttributes AWS API Documentation
+    #
     # @overload list_attributes(params = {})
     # @param [Hash] params ({})
     def list_attributes(params = {}, options = {})
@@ -1314,6 +1342,8 @@ module Aws::ECS
     #   resp.cluster_arns #=> Array
     #   resp.cluster_arns[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListClusters AWS API Documentation
     #
     # @overload list_clusters(params = {})
     # @param [Hash] params ({})
@@ -1399,6 +1429,8 @@ module Aws::ECS
     #   resp.container_instance_arns[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstances AWS API Documentation
+    #
     # @overload list_container_instances(params = {})
     # @param [Hash] params ({})
     def list_container_instances(params = {}, options = {})
@@ -1454,6 +1486,8 @@ module Aws::ECS
     #   resp.service_arns #=> Array
     #   resp.service_arns[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServices AWS API Documentation
     #
     # @overload list_services(params = {})
     # @param [Hash] params ({})
@@ -1531,6 +1565,8 @@ module Aws::ECS
     #   resp.families #=> Array
     #   resp.families[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitionFamilies AWS API Documentation
     #
     # @overload list_task_definition_families(params = {})
     # @param [Hash] params ({})
@@ -1610,6 +1646,8 @@ module Aws::ECS
     #   resp.task_definition_arns #=> Array
     #   resp.task_definition_arns[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTaskDefinitions AWS API Documentation
     #
     # @overload list_task_definitions(params = {})
     # @param [Hash] params ({})
@@ -1715,6 +1753,8 @@ module Aws::ECS
     #   resp.task_arns[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListTasks AWS API Documentation
+    #
     # @overload list_tasks(params = {})
     # @param [Hash] params ({})
     def list_tasks(params = {}, options = {})
@@ -1767,6 +1807,8 @@ module Aws::ECS
     #   resp.attributes[0].value #=> String
     #   resp.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.attributes[0].target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/PutAttributes AWS API Documentation
     #
     # @overload put_attributes(params = {})
     # @param [Hash] params ({})
@@ -1885,6 +1927,8 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].value #=> String
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance AWS API Documentation
     #
     # @overload register_container_instance(params = {})
     # @param [Hash] params ({})
@@ -2136,6 +2180,8 @@ module Aws::ECS
     #   resp.task_definition.placement_constraints[0].type #=> String, one of "memberOf"
     #   resp.task_definition.placement_constraints[0].expression #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterTaskDefinition AWS API Documentation
+    #
     # @overload register_task_definition(params = {})
     # @param [Hash] params ({})
     def register_task_definition(params = {}, options = {})
@@ -2294,6 +2340,8 @@ module Aws::ECS
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTask AWS API Documentation
+    #
     # @overload run_task(params = {})
     # @param [Hash] params ({})
     def run_task(params = {}, options = {})
@@ -2429,6 +2477,8 @@ module Aws::ECS
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StartTask AWS API Documentation
+    #
     # @overload start_task(params = {})
     # @param [Hash] params ({})
     def start_task(params = {}, options = {})
@@ -2509,6 +2559,8 @@ module Aws::ECS
     #   resp.task.stopped_at #=> Time
     #   resp.task.group #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
+    #
     # @overload stop_task(params = {})
     # @param [Hash] params ({})
     def stop_task(params = {}, options = {})
@@ -2573,6 +2625,8 @@ module Aws::ECS
     #
     #   resp.acknowledgment #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitContainerStateChange AWS API Documentation
+    #
     # @overload submit_container_state_change(params = {})
     # @param [Hash] params ({})
     def submit_container_state_change(params = {}, options = {})
@@ -2617,6 +2671,8 @@ module Aws::ECS
     # @example Response structure
     #
     #   resp.acknowledgment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SubmitTaskStateChange AWS API Documentation
     #
     # @overload submit_task_state_change(params = {})
     # @param [Hash] params ({})
@@ -2697,6 +2753,8 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].value #=> String
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent AWS API Documentation
     #
     # @overload update_container_agent(params = {})
     # @param [Hash] params ({})
@@ -2819,6 +2877,8 @@ module Aws::ECS
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerInstancesState AWS API Documentation
     #
     # @overload update_container_instances_state(params = {})
     # @param [Hash] params ({})
@@ -2983,6 +3043,8 @@ module Aws::ECS
     #   resp.service.placement_strategy[0].type #=> String, one of "random", "spread", "binpack"
     #   resp.service.placement_strategy[0].field #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
+    #
     # @overload update_service(params = {})
     # @param [Hash] params ({})
     def update_service(params = {}, options = {})
@@ -3003,7 +3065,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

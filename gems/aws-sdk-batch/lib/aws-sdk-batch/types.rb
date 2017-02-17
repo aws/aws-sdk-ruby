@@ -27,12 +27,16 @@ module Aws::Batch
     #   Batch activity logs.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobRequest AWS API Documentation
+    #
     class CancelJobRequest < Struct.new(
       :job_id,
       :reason)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobResponse AWS API Documentation
+    #
     class CancelJobResponse < Aws::EmptyStructure; end
 
     # An object representing an AWS Batch compute environment.
@@ -80,6 +84,8 @@ module Aws::Batch
     #   AWS Batch to make calls to AWS API operations on your behalf.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentDetail AWS API Documentation
+    #
     class ComputeEnvironmentDetail < Struct.new(
       :compute_environment_name,
       :compute_environment_arn,
@@ -114,6 +120,8 @@ module Aws::Batch
     # @!attribute [rw] compute_environment
     #   The Amazon Resource Name (ARN) of the compute environment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeEnvironmentOrder AWS API Documentation
     #
     class ComputeEnvironmentOrder < Struct.new(
       :order,
@@ -200,6 +208,8 @@ module Aws::Batch
     #   applied to a `SPOT` compute environment.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResource AWS API Documentation
+    #
     class ComputeResource < Struct.new(
       :type,
       :minv_cpus,
@@ -239,6 +249,8 @@ module Aws::Batch
     # @!attribute [rw] desiredv_cpus
     #   The desired number of EC2 vCPUS in the compute environment.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate AWS API Documentation
     #
     class ComputeResourceUpdate < Struct.new(
       :minv_cpus,
@@ -316,6 +328,8 @@ module Aws::Batch
     #   the container is running.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
+    #
     class ContainerDetail < Struct.new(
       :image,
       :vcpus,
@@ -373,6 +387,8 @@ module Aws::Batch
     #   or you can override the existing environment variables from the
     #   Docker image or the job definition.
     #   @return [Array<Types::KeyValuePair>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides AWS API Documentation
     #
     class ContainerOverrides < Struct.new(
       :vcpus,
@@ -585,6 +601,8 @@ module Aws::Batch
     #   [3]: https://docs.docker.com/engine/reference/run/
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerProperties AWS API Documentation
+    #
     class ContainerProperties < Struct.new(
       :image,
       :vcpus,
@@ -652,6 +670,8 @@ module Aws::Batch
     #   Batch to make calls to other AWS services on your behalf.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest AWS API Documentation
+    #
     class CreateComputeEnvironmentRequest < Struct.new(
       :compute_environment_name,
       :type,
@@ -668,6 +688,8 @@ module Aws::Batch
     # @!attribute [rw] compute_environment_arn
     #   The Amazon Resource Name (ARN) of the compute environment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentResponse AWS API Documentation
     #
     class CreateComputeEnvironmentResponse < Struct.new(
       :compute_environment_name,
@@ -717,6 +739,8 @@ module Aws::Batch
     #   environments with a job queue.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest AWS API Documentation
+    #
     class CreateJobQueueRequest < Struct.new(
       :job_queue_name,
       :state,
@@ -732,6 +756,8 @@ module Aws::Batch
     # @!attribute [rw] job_queue_arn
     #   The Amazon Resource Name (ARN) of the job queue.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueResponse AWS API Documentation
     #
     class CreateJobQueueResponse < Struct.new(
       :job_queue_name,
@@ -751,11 +777,15 @@ module Aws::Batch
     #   delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentRequest AWS API Documentation
+    #
     class DeleteComputeEnvironmentRequest < Struct.new(
       :compute_environment)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentResponse AWS API Documentation
+    #
     class DeleteComputeEnvironmentResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteJobQueueRequest
@@ -770,11 +800,15 @@ module Aws::Batch
     #   delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueRequest AWS API Documentation
+    #
     class DeleteJobQueueRequest < Struct.new(
       :job_queue)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueResponse AWS API Documentation
+    #
     class DeleteJobQueueResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterJobDefinitionRequest
@@ -789,11 +823,15 @@ module Aws::Batch
     #   (ARN) of the job definition to deregister.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionRequest AWS API Documentation
+    #
     class DeregisterJobDefinitionRequest < Struct.new(
       :job_definition)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionResponse AWS API Documentation
+    #
     class DeregisterJobDefinitionResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeComputeEnvironmentsRequest
@@ -838,6 +876,8 @@ module Aws::Batch
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsRequest AWS API Documentation
+    #
     class DescribeComputeEnvironmentsRequest < Struct.new(
       :compute_environments,
       :max_results,
@@ -856,6 +896,8 @@ module Aws::Batch
     #   be used to retrieve the next page of results. This value is `null`
     #   when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsResponse AWS API Documentation
     #
     class DescribeComputeEnvironmentsResponse < Struct.new(
       :compute_environments,
@@ -914,6 +956,8 @@ module Aws::Batch
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitionsRequest AWS API Documentation
+    #
     class DescribeJobDefinitionsRequest < Struct.new(
       :job_definitions,
       :max_results,
@@ -934,6 +978,8 @@ module Aws::Batch
     #   be used to retrieve the next page of results. This value is `null`
     #   when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitionsResponse AWS API Documentation
     #
     class DescribeJobDefinitionsResponse < Struct.new(
       :job_definitions,
@@ -981,6 +1027,8 @@ module Aws::Batch
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueuesRequest AWS API Documentation
+    #
     class DescribeJobQueuesRequest < Struct.new(
       :job_queues,
       :max_results,
@@ -1000,6 +1048,8 @@ module Aws::Batch
     #   return.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueuesResponse AWS API Documentation
+    #
     class DescribeJobQueuesResponse < Struct.new(
       :job_queues,
       :next_token)
@@ -1017,6 +1067,8 @@ module Aws::Batch
     #   A space-separated list of up to 100 job IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsRequest AWS API Documentation
+    #
     class DescribeJobsRequest < Struct.new(
       :jobs)
       include Aws::Structure
@@ -1025,6 +1077,8 @@ module Aws::Batch
     # @!attribute [rw] jobs
     #   The list of jobs.
     #   @return [Array<Types::JobDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsResponse AWS API Documentation
     #
     class DescribeJobsResponse < Struct.new(
       :jobs)
@@ -1054,6 +1108,8 @@ module Aws::Batch
     #   container instance, the Docker daemon creates it. If the location
     #   does exist, the contents of the source path folder are exported.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Host AWS API Documentation
     #
     class Host < Struct.new(
       :source_path)
@@ -1093,6 +1149,8 @@ module Aws::Batch
     #   An object with various properties specific to container-based jobs.
     #   @return [Types::ContainerProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDefinition AWS API Documentation
+    #
     class JobDefinition < Struct.new(
       :job_definition_name,
       :job_definition_arn,
@@ -1116,6 +1174,8 @@ module Aws::Batch
     # @!attribute [rw] job_id
     #   The job ID of the AWS Batch job associated with this dependency.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDependency AWS API Documentation
     #
     class JobDependency < Struct.new(
       :job_id)
@@ -1180,6 +1240,8 @@ module Aws::Batch
     #   associated with the job.
     #   @return [Types::ContainerDetail]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDetail AWS API Documentation
+    #
     class JobDetail < Struct.new(
       :job_name,
       :job_id,
@@ -1229,6 +1291,8 @@ module Aws::Batch
     #   selected for job placement in ascending order.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobQueueDetail AWS API Documentation
+    #
     class JobQueueDetail < Struct.new(
       :job_queue_name,
       :job_queue_arn,
@@ -1249,6 +1313,8 @@ module Aws::Batch
     # @!attribute [rw] job_name
     #   The name of the job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobSummary AWS API Documentation
     #
     class JobSummary < Struct.new(
       :job_id,
@@ -1275,6 +1341,8 @@ module Aws::Batch
     #   The value of the key value pair. For environment variables, this is
     #   the value of the environment variable.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/KeyValuePair AWS API Documentation
     #
     class KeyValuePair < Struct.new(
       :name,
@@ -1326,6 +1394,8 @@ module Aws::Batch
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest AWS API Documentation
+    #
     class ListJobsRequest < Struct.new(
       :job_queue,
       :job_status,
@@ -1344,6 +1414,8 @@ module Aws::Batch
     #   value can be used to retrieve the next page of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsResponse AWS API Documentation
     #
     class ListJobsResponse < Struct.new(
       :job_summary_list,
@@ -1376,6 +1448,8 @@ module Aws::Batch
     # @!attribute [rw] source_volume
     #   The name of the volume to mount.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/MountPoint AWS API Documentation
     #
     class MountPoint < Struct.new(
       :container_path,
@@ -1453,6 +1527,8 @@ module Aws::Batch
     #   This parameter is required if the `type` parameter is `container`.
     #   @return [Types::ContainerProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest AWS API Documentation
+    #
     class RegisterJobDefinitionRequest < Struct.new(
       :job_definition_name,
       :type,
@@ -1472,6 +1548,8 @@ module Aws::Batch
     # @!attribute [rw] revision
     #   The revision of the job definition.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionResponse AWS API Documentation
     #
     class RegisterJobDefinitionResponse < Struct.new(
       :job_definition_name,
@@ -1547,6 +1625,8 @@ module Aws::Batch
     #   `environment` override.
     #   @return [Types::ContainerOverrides]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest AWS API Documentation
+    #
     class SubmitJobRequest < Struct.new(
       :job_name,
       :job_queue,
@@ -1564,6 +1644,8 @@ module Aws::Batch
     # @!attribute [rw] job_id
     #   The unique identifier for the job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobResponse AWS API Documentation
     #
     class SubmitJobResponse < Struct.new(
       :job_name,
@@ -1590,12 +1672,16 @@ module Aws::Batch
     #   Batch activity logs.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobRequest AWS API Documentation
+    #
     class TerminateJobRequest < Struct.new(
       :job_id,
       :reason)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobResponse AWS API Documentation
+    #
     class TerminateJobResponse < Aws::EmptyStructure; end
 
     # The `ulimit` settings to pass to the container.
@@ -1620,6 +1706,8 @@ module Aws::Batch
     # @!attribute [rw] soft_limit
     #   The soft limit for the `ulimit` type.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Ulimit AWS API Documentation
     #
     class Ulimit < Struct.new(
       :hard_limit,
@@ -1664,6 +1752,8 @@ module Aws::Batch
     #   behalf.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest AWS API Documentation
+    #
     class UpdateComputeEnvironmentRequest < Struct.new(
       :compute_environment,
       :state,
@@ -1679,6 +1769,8 @@ module Aws::Batch
     # @!attribute [rw] compute_environment_arn
     #   The Amazon Resource Name (ARN) of the compute environment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentResponse AWS API Documentation
     #
     class UpdateComputeEnvironmentResponse < Struct.new(
       :compute_environment_name,
@@ -1725,6 +1817,8 @@ module Aws::Batch
     #   should execute a given job.
     #   @return [Array<Types::ComputeEnvironmentOrder>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueRequest AWS API Documentation
+    #
     class UpdateJobQueueRequest < Struct.new(
       :job_queue,
       :state,
@@ -1740,6 +1834,8 @@ module Aws::Batch
     # @!attribute [rw] job_queue_arn
     #   The Amazon Resource Name (ARN) of the job queue.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueResponse AWS API Documentation
     #
     class UpdateJobQueueResponse < Struct.new(
       :job_queue_name,
@@ -1774,6 +1870,8 @@ module Aws::Batch
     #   referenced in the `sourceVolume` parameter of container definition
     #   `mountPoints`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/Volume AWS API Documentation
     #
     class Volume < Struct.new(
       :host,

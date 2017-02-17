@@ -236,6 +236,8 @@ module Aws::KinesisAnalytics
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationInput AWS API Documentation
+    #
     # @overload add_application_input(params = {})
     # @param [Hash] params ({})
     def add_application_input(params = {}, options = {})
@@ -314,6 +316,8 @@ module Aws::KinesisAnalytics
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationOutput AWS API Documentation
     #
     # @overload add_application_output(params = {})
     # @param [Hash] params ({})
@@ -399,6 +403,8 @@ module Aws::KinesisAnalytics
     #       },
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationReferenceDataSource AWS API Documentation
     #
     # @overload add_application_reference_data_source(params = {})
     # @param [Hash] params ({})
@@ -573,6 +579,8 @@ module Aws::KinesisAnalytics
     #   resp.application_summary.application_arn #=> String
     #   resp.application_summary.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/CreateApplication AWS API Documentation
+    #
     # @overload create_application(params = {})
     # @param [Hash] params ({})
     def create_application(params = {}, options = {})
@@ -602,6 +610,8 @@ module Aws::KinesisAnalytics
     #     application_name: "ApplicationName", # required
     #     create_timestamp: Time.now, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplication AWS API Documentation
     #
     # @overload delete_application(params = {})
     # @param [Hash] params ({})
@@ -645,6 +655,8 @@ module Aws::KinesisAnalytics
     #     output_id: "Id", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationOutput AWS API Documentation
+    #
     # @overload delete_application_output(params = {})
     # @param [Hash] params ({})
     def delete_application_output(params = {}, options = {})
@@ -686,6 +698,8 @@ module Aws::KinesisAnalytics
     #     current_application_version_id: 1, # required
     #     reference_id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DeleteApplicationReferenceDataSource AWS API Documentation
     #
     # @overload delete_application_reference_data_source(params = {})
     # @param [Hash] params ({})
@@ -772,6 +786,8 @@ module Aws::KinesisAnalytics
     #   resp.application_detail.application_code #=> String
     #   resp.application_detail.application_version_id #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DescribeApplication AWS API Documentation
+    #
     # @overload describe_application(params = {})
     # @param [Hash] params ({})
     def describe_application(params = {}, options = {})
@@ -842,6 +858,8 @@ module Aws::KinesisAnalytics
     #   resp.raw_input_records #=> Array
     #   resp.raw_input_records[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/DiscoverInputSchema AWS API Documentation
+    #
     # @overload discover_input_schema(params = {})
     # @param [Hash] params ({})
     def discover_input_schema(params = {}, options = {})
@@ -893,6 +911,8 @@ module Aws::KinesisAnalytics
     #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
     #   resp.has_more_applications #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/ListApplications AWS API Documentation
+    #
     # @overload list_applications(params = {})
     # @param [Hash] params ({})
     def list_applications(params = {}, options = {})
@@ -942,6 +962,8 @@ module Aws::KinesisAnalytics
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StartApplication AWS API Documentation
+    #
     # @overload start_application(params = {})
     # @param [Hash] params ({})
     def start_application(params = {}, options = {})
@@ -969,6 +991,8 @@ module Aws::KinesisAnalytics
     #   resp = client.stop_application({
     #     application_name: "ApplicationName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/StopApplication AWS API Documentation
     #
     # @overload stop_application(params = {})
     # @param [Hash] params ({})
@@ -1097,6 +1121,8 @@ module Aws::KinesisAnalytics
     #       ],
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/UpdateApplication AWS API Documentation
     #
     # @overload update_application(params = {})
     # @param [Hash] params ({})

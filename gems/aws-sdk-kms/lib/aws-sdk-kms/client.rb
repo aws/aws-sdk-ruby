@@ -194,6 +194,8 @@ module Aws::KMS
     #
     #   resp.key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CancelKeyDeletion AWS API Documentation
+    #
     # @overload cancel_key_deletion(params = {})
     # @param [Hash] params ({})
     def cancel_key_deletion(params = {}, options = {})
@@ -239,6 +241,8 @@ module Aws::KMS
     #     alias_name: "AliasNameType", # required
     #     target_key_id: "KeyIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateAlias AWS API Documentation
     #
     # @overload create_alias(params = {})
     # @param [Hash] params ({})
@@ -372,6 +376,8 @@ module Aws::KMS
     #
     #   resp.grant_token #=> String
     #   resp.grant_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrant AWS API Documentation
     #
     # @overload create_grant(params = {})
     # @param [Hash] params ({})
@@ -507,6 +513,8 @@ module Aws::KMS
     #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKey AWS API Documentation
+    #
     # @overload create_key(params = {})
     # @param [Hash] params ({})
     def create_key(params = {}, options = {})
@@ -575,6 +583,8 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.plaintext #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decrypt AWS API Documentation
+    #
     # @overload decrypt(params = {})
     # @param [Hash] params ({})
     def decrypt(params = {}, options = {})
@@ -597,6 +607,8 @@ module Aws::KMS
     #   resp = client.delete_alias({
     #     alias_name: "AliasNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteAlias AWS API Documentation
     #
     # @overload delete_alias(params = {})
     # @param [Hash] params ({})
@@ -640,6 +652,8 @@ module Aws::KMS
     #   resp = client.delete_imported_key_material({
     #     key_id: "KeyIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DeleteImportedKeyMaterial AWS API Documentation
     #
     # @overload delete_imported_key_material(params = {})
     # @param [Hash] params ({})
@@ -702,6 +716,8 @@ module Aws::KMS
     #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DescribeKey AWS API Documentation
+    #
     # @overload describe_key(params = {})
     # @param [Hash] params ({})
     def describe_key(params = {}, options = {})
@@ -738,6 +754,8 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKey AWS API Documentation
+    #
     # @overload disable_key(params = {})
     # @param [Hash] params ({})
     def disable_key(params = {}, options = {})
@@ -764,6 +782,8 @@ module Aws::KMS
     #   resp = client.disable_key_rotation({
     #     key_id: "KeyIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DisableKeyRotation AWS API Documentation
     #
     # @overload disable_key_rotation(params = {})
     # @param [Hash] params ({})
@@ -792,6 +812,8 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKey AWS API Documentation
+    #
     # @overload enable_key(params = {})
     # @param [Hash] params ({})
     def enable_key(params = {}, options = {})
@@ -818,6 +840,8 @@ module Aws::KMS
     #   resp = client.enable_key_rotation({
     #     key_id: "KeyIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EnableKeyRotation AWS API Documentation
     #
     # @overload enable_key_rotation(params = {})
     # @param [Hash] params ({})
@@ -909,6 +933,8 @@ module Aws::KMS
     #
     #   resp.ciphertext_blob #=> String
     #   resp.key_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Encrypt AWS API Documentation
     #
     # @overload encrypt(params = {})
     # @param [Hash] params ({})
@@ -1041,6 +1067,8 @@ module Aws::KMS
     #   resp.plaintext #=> String
     #   resp.key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKey AWS API Documentation
+    #
     # @overload generate_data_key(params = {})
     # @param [Hash] params ({})
     def generate_data_key(params = {}, options = {})
@@ -1137,6 +1165,8 @@ module Aws::KMS
     #   resp.ciphertext_blob #=> String
     #   resp.key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyWithoutPlaintext AWS API Documentation
+    #
     # @overload generate_data_key_without_plaintext(params = {})
     # @param [Hash] params ({})
     def generate_data_key_without_plaintext(params = {}, options = {})
@@ -1162,6 +1192,8 @@ module Aws::KMS
     # @example Response structure
     #
     #   resp.plaintext #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandom AWS API Documentation
     #
     # @overload generate_random(params = {})
     # @param [Hash] params ({})
@@ -1202,6 +1234,8 @@ module Aws::KMS
     #
     #   resp.policy #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyPolicy AWS API Documentation
+    #
     # @overload get_key_policy(params = {})
     # @param [Hash] params ({})
     def get_key_policy(params = {}, options = {})
@@ -1235,6 +1269,8 @@ module Aws::KMS
     # @example Response structure
     #
     #   resp.key_rotation_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetKeyRotationStatus AWS API Documentation
     #
     # @overload get_key_rotation_status(params = {})
     # @param [Hash] params ({})
@@ -1313,6 +1349,8 @@ module Aws::KMS
     #   resp.import_token #=> String
     #   resp.public_key #=> String
     #   resp.parameters_valid_to #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetParametersForImport AWS API Documentation
     #
     # @overload get_parameters_for_import(params = {})
     # @param [Hash] params ({})
@@ -1397,6 +1435,8 @@ module Aws::KMS
     #     expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ImportKeyMaterial AWS API Documentation
+    #
     # @overload import_key_material(params = {})
     # @param [Hash] params ({})
     def import_key_material(params = {}, options = {})
@@ -1441,6 +1481,8 @@ module Aws::KMS
     #   resp.aliases[0].target_key_id #=> String
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliases AWS API Documentation
     #
     # @overload list_aliases(params = {})
     # @param [Hash] params ({})
@@ -1508,6 +1550,8 @@ module Aws::KMS
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrants AWS API Documentation
+    #
     # @overload list_grants(params = {})
     # @param [Hash] params ({})
     def list_grants(params = {}, options = {})
@@ -1564,6 +1608,8 @@ module Aws::KMS
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPolicies AWS API Documentation
+    #
     # @overload list_key_policies(params = {})
     # @param [Hash] params ({})
     def list_key_policies(params = {}, options = {})
@@ -1608,6 +1654,8 @@ module Aws::KMS
     #   resp.keys[0].key_arn #=> String
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeys AWS API Documentation
     #
     # @overload list_keys(params = {})
     # @param [Hash] params ({})
@@ -1683,6 +1731,8 @@ module Aws::KMS
     #   resp.grants[0].constraints.encryption_context_equals["EncryptionContextKey"] #=> String
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrants AWS API Documentation
     #
     # @overload list_retirable_grants(params = {})
     # @param [Hash] params ({})
@@ -1775,6 +1825,8 @@ module Aws::KMS
     #     bypass_policy_lockout_safety_check: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/PutKeyPolicy AWS API Documentation
+    #
     # @overload put_key_policy(params = {})
     # @param [Hash] params ({})
     def put_key_policy(params = {}, options = {})
@@ -1862,6 +1914,8 @@ module Aws::KMS
     #   resp.source_key_id #=> String
     #   resp.key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ReEncrypt AWS API Documentation
+    #
     # @overload re_encrypt(params = {})
     # @param [Hash] params ({})
     def re_encrypt(params = {}, options = {})
@@ -1917,6 +1971,8 @@ module Aws::KMS
     #     grant_id: "GrantIdType",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RetireGrant AWS API Documentation
+    #
     # @overload retire_grant(params = {})
     # @param [Hash] params ({})
     def retire_grant(params = {}, options = {})
@@ -1949,6 +2005,8 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #     grant_id: "GrantIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/RevokeGrant AWS API Documentation
     #
     # @overload revoke_grant(params = {})
     # @param [Hash] params ({})
@@ -2017,6 +2075,8 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.deletion_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ScheduleKeyDeletion AWS API Documentation
+    #
     # @overload schedule_key_deletion(params = {})
     # @param [Hash] params ({})
     def schedule_key_deletion(params = {}, options = {})
@@ -2067,6 +2127,8 @@ module Aws::KMS
     #     target_key_id: "KeyIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateAlias AWS API Documentation
+    #
     # @overload update_alias(params = {})
     # @param [Hash] params ({})
     def update_alias(params = {}, options = {})
@@ -2098,6 +2160,8 @@ module Aws::KMS
     #     description: "DescriptionType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UpdateKeyDescription AWS API Documentation
+    #
     # @overload update_key_description(params = {})
     # @param [Hash] params ({})
     def update_key_description(params = {}, options = {})
@@ -2118,7 +2182,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

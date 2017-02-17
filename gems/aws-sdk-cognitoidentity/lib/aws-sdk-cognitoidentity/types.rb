@@ -28,6 +28,8 @@ module Aws::CognitoIdentity
     #   The client ID for the Amazon Cognito Identity User Pool.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CognitoIdentityProvider AWS API Documentation
+    #
     class CognitoIdentityProvider < Struct.new(
       :provider_name,
       :client_id)
@@ -92,6 +94,8 @@ module Aws::CognitoIdentity
     #   your identity pool.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CreateIdentityPoolInput AWS API Documentation
+    #
     class CreateIdentityPoolInput < Struct.new(
       :identity_pool_name,
       :allow_unauthenticated_identities,
@@ -121,6 +125,8 @@ module Aws::CognitoIdentity
     #   The date at which these credentials will expire.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/Credentials AWS API Documentation
+    #
     class Credentials < Struct.new(
       :access_key_id,
       :secret_key,
@@ -142,6 +148,8 @@ module Aws::CognitoIdentity
     #   A list of 1-60 identities that you want to delete.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentitiesInput AWS API Documentation
+    #
     class DeleteIdentitiesInput < Struct.new(
       :identity_ids_to_delete)
       include Aws::Structure
@@ -153,6 +161,8 @@ module Aws::CognitoIdentity
     #   An array of UnprocessedIdentityId objects, each of which contains an
     #   ErrorCode and IdentityId.
     #   @return [Array<Types::UnprocessedIdentityId>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentitiesResponse AWS API Documentation
     #
     class DeleteIdentitiesResponse < Struct.new(
       :unprocessed_identity_ids)
@@ -172,6 +182,8 @@ module Aws::CognitoIdentity
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentityPoolInput AWS API Documentation
+    #
     class DeleteIdentityPoolInput < Struct.new(
       :identity_pool_id)
       include Aws::Structure
@@ -190,6 +202,8 @@ module Aws::CognitoIdentity
     #   A unique identifier in the format REGION:GUID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentityInput AWS API Documentation
+    #
     class DescribeIdentityInput < Struct.new(
       :identity_id)
       include Aws::Structure
@@ -207,6 +221,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentityPoolInput AWS API Documentation
     #
     class DescribeIdentityPoolInput < Struct.new(
       :identity_pool_id)
@@ -243,6 +259,8 @@ module Aws::CognitoIdentity
     #   role customization.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetCredentialsForIdentityInput AWS API Documentation
+    #
     class GetCredentialsForIdentityInput < Struct.new(
       :identity_id,
       :logins,
@@ -260,6 +278,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] credentials
     #   Credentials for the provided identity ID.
     #   @return [Types::Credentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetCredentialsForIdentityResponse AWS API Documentation
     #
     class GetCredentialsForIdentityResponse < Struct.new(
       :identity_id,
@@ -307,6 +327,8 @@ module Aws::CognitoIdentity
     #   * Digits: `www.digits.com`
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdInput AWS API Documentation
+    #
     class GetIdInput < Struct.new(
       :account_id,
       :identity_pool_id,
@@ -319,6 +341,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdResponse AWS API Documentation
     #
     class GetIdResponse < Struct.new(
       :identity_id)
@@ -337,6 +361,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] identity_pool_id
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRolesInput AWS API Documentation
     #
     class GetIdentityPoolRolesInput < Struct.new(
       :identity_pool_id)
@@ -360,6 +386,8 @@ module Aws::CognitoIdentity
     #   the identity provider, for example, "graph.facebook.com" or
     #   "cognito-idp-east-1.amazonaws.com/us-east-1\_abcdefghi:app\_client\_id".
     #   @return [Hash<String,Types::RoleMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRolesResponse AWS API Documentation
     #
     class GetIdentityPoolRolesResponse < Struct.new(
       :identity_pool_id,
@@ -415,6 +443,8 @@ module Aws::CognitoIdentity
     #   access your AWS resources for the token's duration.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentityInput AWS API Documentation
+    #
     class GetOpenIdTokenForDeveloperIdentityInput < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -433,6 +463,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] token
     #   An OpenID token.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentityResponse AWS API Documentation
     #
     class GetOpenIdTokenForDeveloperIdentityResponse < Struct.new(
       :identity_id,
@@ -464,6 +496,8 @@ module Aws::CognitoIdentity
     #   other OpenId Connect provider, always include the `id_token`.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenInput AWS API Documentation
+    #
     class GetOpenIdTokenInput < Struct.new(
       :identity_id,
       :logins)
@@ -480,6 +514,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] token
     #   An OpenID token, valid for 15 minutes.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenResponse AWS API Documentation
     #
     class GetOpenIdTokenResponse < Struct.new(
       :identity_id,
@@ -505,6 +541,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] last_modified_date
     #   Date on which the identity was last modified.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityDescription AWS API Documentation
     #
     class IdentityDescription < Struct.new(
       :identity_id,
@@ -571,6 +609,8 @@ module Aws::CognitoIdentity
     #   your identity pool.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPool AWS API Documentation
+    #
     class IdentityPool < Struct.new(
       :identity_pool_id,
       :identity_pool_name,
@@ -592,6 +632,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] identity_pool_name
     #   A string that you provide.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/IdentityPoolShortDescription AWS API Documentation
     #
     class IdentityPoolShortDescription < Struct.new(
       :identity_pool_id,
@@ -629,6 +671,8 @@ module Aws::CognitoIdentity
     #   identities in the response.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentitiesInput AWS API Documentation
+    #
     class ListIdentitiesInput < Struct.new(
       :identity_pool_id,
       :max_results,
@@ -650,6 +694,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] next_token
     #   A pagination token.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentitiesResponse AWS API Documentation
     #
     class ListIdentitiesResponse < Struct.new(
       :identity_pool_id,
@@ -676,6 +722,8 @@ module Aws::CognitoIdentity
     #   A pagination token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentityPoolsInput AWS API Documentation
+    #
     class ListIdentityPoolsInput < Struct.new(
       :max_results,
       :next_token)
@@ -691,6 +739,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] next_token
     #   A pagination token.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentityPoolsResponse AWS API Documentation
     #
     class ListIdentityPoolsResponse < Struct.new(
       :identity_pools,
@@ -739,6 +789,8 @@ module Aws::CognitoIdentity
     #   results starting from the 11th match.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/LookupDeveloperIdentityInput AWS API Documentation
+    #
     class LookupDeveloperIdentityInput < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -769,6 +821,8 @@ module Aws::CognitoIdentity
     #   response. This token can be used to call the API again and get
     #   results starting from the 11th match.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/LookupDeveloperIdentityResponse AWS API Documentation
     #
     class LookupDeveloperIdentityResponse < Struct.new(
       :identity_id,
@@ -808,6 +862,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] role_arn
     #   The role ARN.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MappingRule AWS API Documentation
     #
     class MappingRule < Struct.new(
       :claim,
@@ -852,6 +908,8 @@ module Aws::CognitoIdentity
     #   An identity pool ID in the format REGION:GUID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MergeDeveloperIdentitiesInput AWS API Documentation
+    #
     class MergeDeveloperIdentitiesInput < Struct.new(
       :source_user_identifier,
       :destination_user_identifier,
@@ -866,6 +924,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] identity_id
     #   A unique identifier in the format REGION:GUID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MergeDeveloperIdentitiesResponse AWS API Documentation
     #
     class MergeDeveloperIdentitiesResponse < Struct.new(
       :identity_id)
@@ -916,6 +976,8 @@ module Aws::CognitoIdentity
     #   is required.
     #   @return [Types::RulesConfigurationType]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/RoleMapping AWS API Documentation
+    #
     class RoleMapping < Struct.new(
       :type,
       :ambiguous_role_resolution,
@@ -946,6 +1008,8 @@ module Aws::CognitoIdentity
     #   Rules are evaluated in order. The first one to match specifies the
     #   role.
     #   @return [Array<Types::MappingRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/RulesConfigurationType AWS API Documentation
     #
     class RulesConfigurationType < Struct.new(
       :rules)
@@ -999,6 +1063,8 @@ module Aws::CognitoIdentity
     #   Up to 25 rules can be specified per identity provider.
     #   @return [Hash<String,Types::RoleMapping>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/SetIdentityPoolRolesInput AWS API Documentation
+    #
     class SetIdentityPoolRolesInput < Struct.new(
       :identity_pool_id,
       :roles,
@@ -1035,6 +1101,8 @@ module Aws::CognitoIdentity
     #   a user.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentityInput AWS API Documentation
+    #
     class UnlinkDeveloperIdentityInput < Struct.new(
       :identity_id,
       :identity_pool_id,
@@ -1069,6 +1137,8 @@ module Aws::CognitoIdentity
     #   Provider names to unlink from this identity.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkIdentityInput AWS API Documentation
+    #
     class UnlinkIdentityInput < Struct.new(
       :identity_id,
       :logins,
@@ -1086,6 +1156,8 @@ module Aws::CognitoIdentity
     # @!attribute [rw] error_code
     #   The error code indicating the type of error that occurred.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnprocessedIdentityId AWS API Documentation
     #
     class UnprocessedIdentityId < Struct.new(
       :identity_id,

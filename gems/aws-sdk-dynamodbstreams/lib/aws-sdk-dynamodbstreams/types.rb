@@ -57,6 +57,8 @@ module Aws::DynamoDBStreams
     #   A Boolean data type.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/AttributeValue AWS API Documentation
+    #
     class AttributeValue < Struct.new(
       :s,
       :n,
@@ -97,6 +99,8 @@ module Aws::DynamoDBStreams
     #   previous operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStreamInput AWS API Documentation
+    #
     class DescribeStreamInput < Struct.new(
       :stream_arn,
       :limit,
@@ -112,6 +116,8 @@ module Aws::DynamoDBStreams
     #   IDs within the stream, and the beginning and ending sequence numbers
     #   of stream records within the shards.
     #   @return [Types::StreamDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/DescribeStreamOutput AWS API Documentation
     #
     class DescribeStreamOutput < Struct.new(
       :stream_description)
@@ -139,6 +145,8 @@ module Aws::DynamoDBStreams
     #   limit is 1000.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecordsInput AWS API Documentation
+    #
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :limit)
@@ -157,6 +165,8 @@ module Aws::DynamoDBStreams
     #   reading stream records. If set to `null`, the shard has been closed
     #   and the requested iterator will not return any more data.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecordsOutput AWS API Documentation
     #
     class GetRecordsOutput < Struct.new(
       :records,
@@ -211,6 +221,8 @@ module Aws::DynamoDBStreams
     #   start reading.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIteratorInput AWS API Documentation
+    #
     class GetShardIteratorInput < Struct.new(
       :stream_arn,
       :shard_id,
@@ -226,6 +238,8 @@ module Aws::DynamoDBStreams
     #   sequentially. A shard iterator specifies this position using the
     #   sequence number of a stream record in a shard.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetShardIteratorOutput AWS API Documentation
     #
     class GetShardIteratorOutput < Struct.new(
       :shard_iterator)
@@ -263,6 +277,8 @@ module Aws::DynamoDBStreams
     #   value itself.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/KeySchemaElement AWS API Documentation
+    #
     class KeySchemaElement < Struct.new(
       :attribute_name,
       :key_type)
@@ -295,6 +311,8 @@ module Aws::DynamoDBStreams
     #   `LastEvaluatedStreamArn` in the previous operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreamsInput AWS API Documentation
+    #
     class ListStreamsInput < Struct.new(
       :table_name,
       :limit,
@@ -323,6 +341,8 @@ module Aws::DynamoDBStreams
     #   when you have reached the end of the result set is when
     #   `LastEvaluatedStreamArn` is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/ListStreamsOutput AWS API Documentation
     #
     class ListStreamsOutput < Struct.new(
       :streams,
@@ -373,6 +393,8 @@ module Aws::DynamoDBStreams
     #   DynamoDB-specific fields.
     #   @return [Types::StreamRecord]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Record AWS API Documentation
+    #
     class Record < Struct.new(
       :event_id,
       :event_name,
@@ -394,6 +416,8 @@ module Aws::DynamoDBStreams
     #   The last sequence number.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/SequenceNumberRange AWS API Documentation
+    #
     class SequenceNumberRange < Struct.new(
       :starting_sequence_number,
       :ending_sequence_number)
@@ -413,6 +437,8 @@ module Aws::DynamoDBStreams
     # @!attribute [rw] parent_shard_id
     #   The shard ID of the current shard's parent.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Shard AWS API Documentation
     #
     class Shard < Struct.new(
       :shard_id,
@@ -445,6 +471,8 @@ module Aws::DynamoDBStreams
     #
     #   * the *StreamLabel*
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Stream AWS API Documentation
     #
     class Stream < Struct.new(
       :stream_arn,
@@ -535,6 +563,8 @@ module Aws::DynamoDBStreams
     #   `LastEvaluatedShardId` is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/StreamDescription AWS API Documentation
+    #
     class StreamDescription < Struct.new(
       :stream_arn,
       :stream_label,
@@ -597,6 +627,8 @@ module Aws::DynamoDBStreams
     #   * `NEW_AND_OLD_IMAGES` - both the new and the old item images of the
     #     item.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/StreamRecord AWS API Documentation
     #
     class StreamRecord < Struct.new(
       :approximate_creation_date_time,

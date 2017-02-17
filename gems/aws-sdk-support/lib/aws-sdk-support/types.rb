@@ -33,6 +33,8 @@ module Aws::Support
     #   attachments per set, and the size limit is 5 MB per attachment.
     #   @return [Array<Types::Attachment>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetRequest AWS API Documentation
+    #
     class AddAttachmentsToSetRequest < Struct.new(
       :attachment_set_id,
       :attachments)
@@ -52,6 +54,8 @@ module Aws::Support
     # @!attribute [rw] expiry_time
     #   The time and date when the attachment set expires.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetResponse AWS API Documentation
     #
     class AddAttachmentsToSetResponse < Struct.new(
       :attachment_set_id,
@@ -91,6 +95,8 @@ module Aws::Support
     #   add to the case. Create the set by calling AddAttachmentsToSet
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCaseRequest AWS API Documentation
+    #
     class AddCommunicationToCaseRequest < Struct.new(
       :case_id,
       :communication_body,
@@ -105,6 +111,8 @@ module Aws::Support
     #   True if AddCommunicationToCase succeeds. Otherwise, returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddCommunicationToCaseResponse AWS API Documentation
     #
     class AddCommunicationToCaseResponse < Struct.new(
       :result)
@@ -130,6 +138,8 @@ module Aws::Support
     #   The content of the attachment file.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Attachment AWS API Documentation
+    #
     class Attachment < Struct.new(
       :file_name,
       :data)
@@ -147,6 +157,8 @@ module Aws::Support
     # @!attribute [rw] file_name
     #   The file name of the attachment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AttachmentDetails AWS API Documentation
     #
     class AttachmentDetails < Struct.new(
       :attachment_id,
@@ -256,6 +268,8 @@ module Aws::Support
     #   operations that take them.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CaseDetails AWS API Documentation
+    #
     class CaseDetails < Struct.new(
       :case_id,
       :display_id,
@@ -283,6 +297,8 @@ module Aws::Support
     # @!attribute [rw] name
     #   The category name for the support case.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Category AWS API Documentation
     #
     class Category < Struct.new(
       :code,
@@ -316,6 +332,8 @@ module Aws::Support
     # @!attribute [rw] attachment_set
     #   Information about the attachments to the case communication.
     #   @return [Array<Types::AttachmentDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Communication AWS API Documentation
     #
     class Communication < Struct.new(
       :case_id,
@@ -393,6 +411,8 @@ module Aws::Support
     #   set by using AddAttachmentsToSet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseRequest AWS API Documentation
+    #
     class CreateCaseRequest < Struct.new(
       :subject,
       :service_code,
@@ -415,6 +435,8 @@ module Aws::Support
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/CreateCaseResponse AWS API Documentation
+    #
     class CreateCaseResponse < Struct.new(
       :case_id)
       include Aws::Structure
@@ -432,6 +454,8 @@ module Aws::Support
     #   the DescribeCommunications operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentRequest AWS API Documentation
+    #
     class DescribeAttachmentRequest < Struct.new(
       :attachment_id)
       include Aws::Structure
@@ -443,6 +467,8 @@ module Aws::Support
     # @!attribute [rw] attachment
     #   The attachment content and file name.
     #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeAttachmentResponse AWS API Documentation
     #
     class DescribeAttachmentResponse < Struct.new(
       :attachment)
@@ -511,6 +537,8 @@ module Aws::Support
     #   DescribeCases results. The default is *true*.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCasesRequest AWS API Documentation
+    #
     class DescribeCasesRequest < Struct.new(
       :case_id_list,
       :display_id,
@@ -534,6 +562,8 @@ module Aws::Support
     # @!attribute [rw] next_token
     #   A resumption point for pagination.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCasesResponse AWS API Documentation
     #
     class DescribeCasesResponse < Struct.new(
       :cases,
@@ -578,6 +608,8 @@ module Aws::Support
     #   The maximum number of results to return before paginating.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunicationsRequest AWS API Documentation
+    #
     class DescribeCommunicationsRequest < Struct.new(
       :case_id,
       :before_time,
@@ -596,6 +628,8 @@ module Aws::Support
     # @!attribute [rw] next_token
     #   A resumption point for pagination.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeCommunicationsResponse AWS API Documentation
     #
     class DescribeCommunicationsResponse < Struct.new(
       :communications,
@@ -622,6 +656,8 @@ module Aws::Support
     #   operations that take them.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServicesRequest AWS API Documentation
+    #
     class DescribeServicesRequest < Struct.new(
       :service_code_list,
       :language)
@@ -633,6 +669,8 @@ module Aws::Support
     # @!attribute [rw] services
     #   A JSON-formatted list of AWS services.
     #   @return [Array<Types::Service>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeServicesResponse AWS API Documentation
     #
     class DescribeServicesResponse < Struct.new(
       :services)
@@ -653,6 +691,8 @@ module Aws::Support
     #   operations that take them.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevelsRequest AWS API Documentation
+    #
     class DescribeSeverityLevelsRequest < Struct.new(
       :language)
       include Aws::Structure
@@ -666,6 +706,8 @@ module Aws::Support
     #   severity levels are defined by your service level agreement with
     #   AWS.
     #   @return [Array<Types::SeverityLevel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeSeverityLevelsResponse AWS API Documentation
     #
     class DescribeSeverityLevelsResponse < Struct.new(
       :severity_levels)
@@ -685,6 +727,8 @@ module Aws::Support
     #   refreshed causes an `InvalidParameterValue` error.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatusesRequest AWS API Documentation
+    #
     class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
       :check_ids)
       include Aws::Structure
@@ -696,6 +740,8 @@ module Aws::Support
     # @!attribute [rw] statuses
     #   The refresh status of the specified Trusted Advisor checks.
     #   @return [Array<Types::TrustedAdvisorCheckRefreshStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckRefreshStatusesResponse AWS API Documentation
     #
     class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Struct.new(
       :statuses)
@@ -721,6 +767,8 @@ module Aws::Support
     #   operations that take them.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResultRequest AWS API Documentation
+    #
     class DescribeTrustedAdvisorCheckResultRequest < Struct.new(
       :check_id,
       :language)
@@ -733,6 +781,8 @@ module Aws::Support
     # @!attribute [rw] result
     #   The detailed results of the Trusted Advisor check.
     #   @return [Types::TrustedAdvisorCheckResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckResultResponse AWS API Documentation
     #
     class DescribeTrustedAdvisorCheckResultResponse < Struct.new(
       :result)
@@ -750,6 +800,8 @@ module Aws::Support
     #   The IDs of the Trusted Advisor checks.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummariesRequest AWS API Documentation
+    #
     class DescribeTrustedAdvisorCheckSummariesRequest < Struct.new(
       :check_ids)
       include Aws::Structure
@@ -761,6 +813,8 @@ module Aws::Support
     # @!attribute [rw] summaries
     #   The summary information for the requested Trusted Advisor checks.
     #   @return [Array<Types::TrustedAdvisorCheckSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorCheckSummariesResponse AWS API Documentation
     #
     class DescribeTrustedAdvisorCheckSummariesResponse < Struct.new(
       :summaries)
@@ -781,6 +835,8 @@ module Aws::Support
     #   operations that take them.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecksRequest AWS API Documentation
+    #
     class DescribeTrustedAdvisorChecksRequest < Struct.new(
       :language)
       include Aws::Structure
@@ -792,6 +848,8 @@ module Aws::Support
     # @!attribute [rw] checks
     #   Information about all available Trusted Advisor checks.
     #   @return [Array<Types::TrustedAdvisorCheckDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/DescribeTrustedAdvisorChecksResponse AWS API Documentation
     #
     class DescribeTrustedAdvisorChecksResponse < Struct.new(
       :checks)
@@ -807,6 +865,8 @@ module Aws::Support
     # @!attribute [rw] next_token
     #   A resumption point for pagination.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RecentCaseCommunications AWS API Documentation
     #
     class RecentCaseCommunications < Struct.new(
       :communications,
@@ -827,6 +887,8 @@ module Aws::Support
     #   refreshed causes an `InvalidParameterValue` error.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheckRequest AWS API Documentation
+    #
     class RefreshTrustedAdvisorCheckRequest < Struct.new(
       :check_id)
       include Aws::Structure
@@ -838,6 +900,8 @@ module Aws::Support
     #   The current refresh status for a check, including the amount of time
     #   until the check is eligible for refresh.
     #   @return [Types::TrustedAdvisorCheckRefreshStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/RefreshTrustedAdvisorCheckResponse AWS API Documentation
     #
     class RefreshTrustedAdvisorCheckResponse < Struct.new(
       :status)
@@ -857,6 +921,8 @@ module Aws::Support
     #   case-*12345678910-2013-c4c1d2bf33c5cf47*
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCaseRequest AWS API Documentation
+    #
     class ResolveCaseRequest < Struct.new(
       :case_id)
       include Aws::Structure
@@ -871,6 +937,8 @@ module Aws::Support
     # @!attribute [rw] final_case_status
     #   The status of the case after the ResolveCase request was processed.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/ResolveCaseResponse AWS API Documentation
     #
     class ResolveCaseResponse < Struct.new(
       :initial_case_status,
@@ -899,6 +967,8 @@ module Aws::Support
     #   call CreateCase.
     #   @return [Array<Types::Category>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/Service AWS API Documentation
+    #
     class Service < Struct.new(
       :code,
       :name,
@@ -920,6 +990,8 @@ module Aws::Support
     #   level code.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/SeverityLevel AWS API Documentation
+    #
     class SeverityLevel < Struct.new(
       :code,
       :name)
@@ -933,6 +1005,8 @@ module Aws::Support
     #   The summary information about cost savings for a Trusted Advisor
     #   check that is in the Cost Optimizing category.
     #   @return [Types::TrustedAdvisorCostOptimizingSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCategorySpecificSummary AWS API Documentation
     #
     class TrustedAdvisorCategorySpecificSummary < Struct.new(
       :cost_optimizing)
@@ -967,6 +1041,8 @@ module Aws::Support
     #   summary data.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckDescription AWS API Documentation
+    #
     class TrustedAdvisorCheckDescription < Struct.new(
       :id,
       :name,
@@ -992,6 +1068,8 @@ module Aws::Support
     #   The amount of time, in milliseconds, until the Trusted Advisor check
     #   is eligible for refresh.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckRefreshStatus AWS API Documentation
     #
     class TrustedAdvisorCheckRefreshStatus < Struct.new(
       :check_id,
@@ -1029,6 +1107,8 @@ module Aws::Support
     # @!attribute [rw] flagged_resources
     #   The details about each resource listed in the check result.
     #   @return [Array<Types::TrustedAdvisorResourceDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckResult AWS API Documentation
     #
     class TrustedAdvisorCheckResult < Struct.new(
       :check_id,
@@ -1070,6 +1150,8 @@ module Aws::Support
     #   Optimizing is the only category that is currently supported.
     #   @return [Types::TrustedAdvisorCategorySpecificSummary]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCheckSummary AWS API Documentation
+    #
     class TrustedAdvisorCheckSummary < Struct.new(
       :check_id,
       :timestamp,
@@ -1092,6 +1174,8 @@ module Aws::Support
     #   The estimated percentage of savings that might be realized if the
     #   recommended actions are taken.
     #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorCostOptimizingSummary AWS API Documentation
     #
     class TrustedAdvisorCostOptimizingSummary < Struct.new(
       :estimated_monthly_savings,
@@ -1129,6 +1213,8 @@ module Aws::Support
     #   UI shows just summary data.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorResourceDetail AWS API Documentation
+    #
     class TrustedAdvisorResourceDetail < Struct.new(
       :status,
       :region,
@@ -1160,6 +1246,8 @@ module Aws::Support
     #   The number of AWS resources ignored by Trusted Advisor because they
     #   were marked as suppressed by the user.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/TrustedAdvisorResourcesSummary AWS API Documentation
     #
     class TrustedAdvisorResourcesSummary < Struct.new(
       :resources_processed,

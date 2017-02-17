@@ -175,6 +175,8 @@ module Aws::WorkSpaces
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTags AWS API Documentation
+    #
     # @overload create_tags(params = {})
     # @param [Hash] params ({})
     def create_tags(params = {}, options = {})
@@ -255,6 +257,8 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspaces AWS API Documentation
+    #
     # @overload create_workspaces(params = {})
     # @param [Hash] params ({})
     def create_workspaces(params = {}, options = {})
@@ -278,6 +282,8 @@ module Aws::WorkSpaces
     #     resource_id: "NonEmptyString", # required
     #     tag_keys: ["NonEmptyString"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTags AWS API Documentation
     #
     # @overload delete_tags(params = {})
     # @param [Hash] params ({})
@@ -306,6 +312,8 @@ module Aws::WorkSpaces
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTags AWS API Documentation
     #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
@@ -369,6 +377,8 @@ module Aws::WorkSpaces
     #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundles AWS API Documentation
+    #
     # @overload describe_workspace_bundles(params = {})
     # @param [Hash] params ({})
     def describe_workspace_bundles(params = {}, options = {})
@@ -428,6 +438,8 @@ module Aws::WorkSpaces
     #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
     #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectories AWS API Documentation
     #
     # @overload describe_workspace_directories(params = {})
     # @param [Hash] params ({})
@@ -513,6 +525,8 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaces AWS API Documentation
+    #
     # @overload describe_workspaces(params = {})
     # @param [Hash] params ({})
     def describe_workspaces(params = {}, options = {})
@@ -549,6 +563,8 @@ module Aws::WorkSpaces
     #   resp.workspaces_connection_status[0].last_known_user_connection_timestamp #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatus AWS API Documentation
+    #
     # @overload describe_workspaces_connection_status(params = {})
     # @param [Hash] params ({})
     def describe_workspaces_connection_status(params = {}, options = {})
@@ -576,6 +592,8 @@ module Aws::WorkSpaces
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceProperties AWS API Documentation
     #
     # @overload modify_workspace_properties(params = {})
     # @param [Hash] params ({})
@@ -617,6 +635,8 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_id #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspaces AWS API Documentation
     #
     # @overload reboot_workspaces(params = {})
     # @param [Hash] params ({})
@@ -674,6 +694,8 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspaces AWS API Documentation
+    #
     # @overload rebuild_workspaces(params = {})
     # @param [Hash] params ({})
     def rebuild_workspaces(params = {}, options = {})
@@ -709,6 +731,8 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspaces AWS API Documentation
+    #
     # @overload start_workspaces(params = {})
     # @param [Hash] params ({})
     def start_workspaces(params = {}, options = {})
@@ -743,6 +767,8 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_id #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspaces AWS API Documentation
     #
     # @overload stop_workspaces(params = {})
     # @param [Hash] params ({})
@@ -788,6 +814,8 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_id #=> String
     #   resp.failed_requests[0].error_code #=> String
     #   resp.failed_requests[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspaces AWS API Documentation
     #
     # @overload terminate_workspaces(params = {})
     # @param [Hash] params ({})

@@ -172,6 +172,8 @@ module Aws::CognitoSync
     #
     #   resp.identity_pool_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublish AWS API Documentation
+    #
     # @overload bulk_publish(params = {})
     # @param [Hash] params ({})
     def bulk_publish(params = {}, options = {})
@@ -222,6 +224,8 @@ module Aws::CognitoSync
     #   resp.dataset.last_modified_by #=> String
     #   resp.dataset.data_storage #=> Integer
     #   resp.dataset.num_records #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDataset AWS API Documentation
     #
     # @overload delete_dataset(params = {})
     # @param [Hash] params ({})
@@ -275,6 +279,8 @@ module Aws::CognitoSync
     #   resp.dataset.data_storage #=> Integer
     #   resp.dataset.num_records #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDataset AWS API Documentation
+    #
     # @overload describe_dataset(params = {})
     # @param [Hash] params ({})
     def describe_dataset(params = {}, options = {})
@@ -310,6 +316,8 @@ module Aws::CognitoSync
     #   resp.identity_pool_usage.sync_sessions_count #=> Integer
     #   resp.identity_pool_usage.data_storage #=> Integer
     #   resp.identity_pool_usage.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsage AWS API Documentation
     #
     # @overload describe_identity_pool_usage(params = {})
     # @param [Hash] params ({})
@@ -353,6 +361,8 @@ module Aws::CognitoSync
     #   resp.identity_usage.dataset_count #=> Integer
     #   resp.identity_usage.data_storage #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsage AWS API Documentation
+    #
     # @overload describe_identity_usage(params = {})
     # @param [Hash] params ({})
     def describe_identity_usage(params = {}, options = {})
@@ -393,6 +403,8 @@ module Aws::CognitoSync
     #   resp.bulk_publish_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FAILED", "SUCCEEDED"
     #   resp.failure_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetails AWS API Documentation
+    #
     # @overload get_bulk_publish_details(params = {})
     # @param [Hash] params ({})
     def get_bulk_publish_details(params = {}, options = {})
@@ -424,6 +436,8 @@ module Aws::CognitoSync
     #
     #   resp.events #=> Hash
     #   resp.events["CognitoEventType"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEvents AWS API Documentation
     #
     # @overload get_cognito_events(params = {})
     # @param [Hash] params ({})
@@ -465,6 +479,8 @@ module Aws::CognitoSync
     #   resp.cognito_streams.stream_name #=> String
     #   resp.cognito_streams.role_arn #=> String
     #   resp.cognito_streams.streaming_status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfiguration AWS API Documentation
     #
     # @overload get_identity_pool_configuration(params = {})
     # @param [Hash] params ({})
@@ -525,6 +541,8 @@ module Aws::CognitoSync
     #   resp.count #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasets AWS API Documentation
+    #
     # @overload list_datasets(params = {})
     # @param [Hash] params ({})
     def list_datasets(params = {}, options = {})
@@ -568,6 +586,8 @@ module Aws::CognitoSync
     #   resp.max_results #=> Integer
     #   resp.count #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsage AWS API Documentation
     #
     # @overload list_identity_pool_usage(params = {})
     # @param [Hash] params ({})
@@ -654,6 +674,8 @@ module Aws::CognitoSync
     #   resp.dataset_deleted_after_requested_sync_count #=> Boolean
     #   resp.sync_session_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecords AWS API Documentation
+    #
     # @overload list_records(params = {})
     # @param [Hash] params ({})
     def list_records(params = {}, options = {})
@@ -697,6 +719,8 @@ module Aws::CognitoSync
     #
     #   resp.device_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDevice AWS API Documentation
+    #
     # @overload register_device(params = {})
     # @param [Hash] params ({})
     def register_device(params = {}, options = {})
@@ -729,6 +753,8 @@ module Aws::CognitoSync
     #       "CognitoEventType" => "LambdaFunctionArn",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEvents AWS API Documentation
     #
     # @overload set_cognito_events(params = {})
     # @param [Hash] params ({})
@@ -785,6 +811,8 @@ module Aws::CognitoSync
     #   resp.cognito_streams.role_arn #=> String
     #   resp.cognito_streams.streaming_status #=> String, one of "ENABLED", "DISABLED"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfiguration AWS API Documentation
+    #
     # @overload set_identity_pool_configuration(params = {})
     # @param [Hash] params ({})
     def set_identity_pool_configuration(params = {}, options = {})
@@ -823,6 +851,8 @@ module Aws::CognitoSync
     #     device_id: "DeviceId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDataset AWS API Documentation
+    #
     # @overload subscribe_to_dataset(params = {})
     # @param [Hash] params ({})
     def subscribe_to_dataset(params = {}, options = {})
@@ -860,6 +890,8 @@ module Aws::CognitoSync
     #     dataset_name: "DatasetName", # required
     #     device_id: "DeviceId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDataset AWS API Documentation
     #
     # @overload unsubscribe_from_dataset(params = {})
     # @param [Hash] params ({})
@@ -949,6 +981,8 @@ module Aws::CognitoSync
     #   resp.records[0].last_modified_date #=> Time
     #   resp.records[0].last_modified_by #=> String
     #   resp.records[0].device_last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecords AWS API Documentation
     #
     # @overload update_records(params = {})
     # @param [Hash] params ({})

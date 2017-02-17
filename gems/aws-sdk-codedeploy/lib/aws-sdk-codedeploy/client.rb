@@ -178,6 +178,8 @@ module Aws::CodeDeploy
     #     instance_names: ["InstanceName"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstances AWS API Documentation
+    #
     # @overload add_tags_to_on_premises_instances(params = {})
     # @param [Hash] params ({})
     def add_tags_to_on_premises_instances(params = {}, options = {})
@@ -243,6 +245,8 @@ module Aws::CodeDeploy
     #   resp.revisions[0].generic_revision_info.last_used_time #=> Time
     #   resp.revisions[0].generic_revision_info.register_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisions AWS API Documentation
+    #
     # @overload batch_get_application_revisions(params = {})
     # @param [Hash] params ({})
     def batch_get_application_revisions(params = {}, options = {})
@@ -272,6 +276,8 @@ module Aws::CodeDeploy
     #   resp.applications_info[0].application_name #=> String
     #   resp.applications_info[0].create_time #=> Time
     #   resp.applications_info[0].linked_to_git_hub #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplications AWS API Documentation
     #
     # @overload batch_get_applications(params = {})
     # @param [Hash] params ({})
@@ -342,6 +348,8 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].auto_rollback_configuration.events[0] #=> String, one of "DEPLOYMENT_FAILURE", "DEPLOYMENT_STOP_ON_ALARM", "DEPLOYMENT_STOP_ON_REQUEST"
     #   resp.error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
+    #
     # @overload batch_get_deployment_groups(params = {})
     # @param [Hash] params ({})
     def batch_get_deployment_groups(params = {}, options = {})
@@ -387,6 +395,8 @@ module Aws::CodeDeploy
     #   resp.instances_summary[0].lifecycle_events[0].end_time #=> Time
     #   resp.instances_summary[0].lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
     #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances AWS API Documentation
     #
     # @overload batch_get_deployment_instances(params = {})
     # @param [Hash] params ({})
@@ -447,6 +457,8 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].rollback_info.rollback_triggering_deployment_id #=> String
     #   resp.deployments_info[0].rollback_info.rollback_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
+    #
     # @overload batch_get_deployments(params = {})
     # @param [Hash] params ({})
     def batch_get_deployments(params = {}, options = {})
@@ -482,6 +494,8 @@ module Aws::CodeDeploy
     #   resp.instance_infos[0].tags[0].key #=> String
     #   resp.instance_infos[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstances AWS API Documentation
+    #
     # @overload batch_get_on_premises_instances(params = {})
     # @param [Hash] params ({})
     def batch_get_on_premises_instances(params = {}, options = {})
@@ -508,6 +522,8 @@ module Aws::CodeDeploy
     # @example Response structure
     #
     #   resp.application_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplication AWS API Documentation
     #
     # @overload create_application(params = {})
     # @param [Hash] params ({})
@@ -597,6 +613,8 @@ module Aws::CodeDeploy
     #
     #   resp.deployment_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeployment AWS API Documentation
+    #
     # @overload create_deployment(params = {})
     # @param [Hash] params ({})
     def create_deployment(params = {}, options = {})
@@ -647,6 +665,8 @@ module Aws::CodeDeploy
     # @example Response structure
     #
     #   resp.deployment_config_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfig AWS API Documentation
     #
     # @overload create_deployment_config(params = {})
     # @param [Hash] params ({})
@@ -765,6 +785,8 @@ module Aws::CodeDeploy
     #
     #   resp.deployment_group_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroup AWS API Documentation
+    #
     # @overload create_deployment_group(params = {})
     # @param [Hash] params ({})
     def create_deployment_group(params = {}, options = {})
@@ -785,6 +807,8 @@ module Aws::CodeDeploy
     #   resp = client.delete_application({
     #     application_name: "ApplicationName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplication AWS API Documentation
     #
     # @overload delete_application(params = {})
     # @param [Hash] params ({})
@@ -811,6 +835,8 @@ module Aws::CodeDeploy
     #   resp = client.delete_deployment_config({
     #     deployment_config_name: "DeploymentConfigName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfig AWS API Documentation
     #
     # @overload delete_deployment_config(params = {})
     # @param [Hash] params ({})
@@ -846,6 +872,8 @@ module Aws::CodeDeploy
     #   resp.hooks_not_cleaned_up[0].name #=> String
     #   resp.hooks_not_cleaned_up[0].hook #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroup AWS API Documentation
+    #
     # @overload delete_deployment_group(params = {})
     # @param [Hash] params ({})
     def delete_deployment_group(params = {}, options = {})
@@ -865,6 +893,8 @@ module Aws::CodeDeploy
     #   resp = client.deregister_on_premises_instance({
     #     instance_name: "InstanceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstance AWS API Documentation
     #
     # @overload deregister_on_premises_instance(params = {})
     # @param [Hash] params ({})
@@ -895,6 +925,8 @@ module Aws::CodeDeploy
     #   resp.application.application_name #=> String
     #   resp.application.create_time #=> Time
     #   resp.application.linked_to_git_hub #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplication AWS API Documentation
     #
     # @overload get_application(params = {})
     # @param [Hash] params ({})
@@ -956,6 +988,8 @@ module Aws::CodeDeploy
     #   resp.revision_info.last_used_time #=> Time
     #   resp.revision_info.register_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevision AWS API Documentation
+    #
     # @overload get_application_revision(params = {})
     # @param [Hash] params ({})
     def get_application_revision(params = {}, options = {})
@@ -1015,6 +1049,8 @@ module Aws::CodeDeploy
     #   resp.deployment_info.rollback_info.rollback_triggering_deployment_id #=> String
     #   resp.deployment_info.rollback_info.rollback_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment AWS API Documentation
+    #
     # @overload get_deployment(params = {})
     # @param [Hash] params ({})
     def get_deployment(params = {}, options = {})
@@ -1045,6 +1081,8 @@ module Aws::CodeDeploy
     #   resp.deployment_config_info.minimum_healthy_hosts.value #=> Integer
     #   resp.deployment_config_info.minimum_healthy_hosts.type #=> String, one of "HOST_COUNT", "FLEET_PERCENT"
     #   resp.deployment_config_info.create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfig AWS API Documentation
     #
     # @overload get_deployment_config(params = {})
     # @param [Hash] params ({})
@@ -1113,6 +1151,8 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.auto_rollback_configuration.events #=> Array
     #   resp.deployment_group_info.auto_rollback_configuration.events[0] #=> String, one of "DEPLOYMENT_FAILURE", "DEPLOYMENT_STOP_ON_ALARM", "DEPLOYMENT_STOP_ON_REQUEST"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
+    #
     # @overload get_deployment_group(params = {})
     # @param [Hash] params ({})
     def get_deployment_group(params = {}, options = {})
@@ -1155,6 +1195,8 @@ module Aws::CodeDeploy
     #   resp.instance_summary.lifecycle_events[0].end_time #=> Time
     #   resp.instance_summary.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance AWS API Documentation
+    #
     # @overload get_deployment_instance(params = {})
     # @param [Hash] params ({})
     def get_deployment_instance(params = {}, options = {})
@@ -1188,6 +1230,8 @@ module Aws::CodeDeploy
     #   resp.instance_info.tags #=> Array
     #   resp.instance_info.tags[0].key #=> String
     #   resp.instance_info.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstance AWS API Documentation
     #
     # @overload get_on_premises_instance(params = {})
     # @param [Hash] params ({})
@@ -1284,6 +1328,8 @@ module Aws::CodeDeploy
     #   resp.revisions[0].git_hub_location.commit_id #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisions AWS API Documentation
+    #
     # @overload list_application_revisions(params = {})
     # @param [Hash] params ({})
     def list_application_revisions(params = {}, options = {})
@@ -1314,6 +1360,8 @@ module Aws::CodeDeploy
     #   resp.applications #=> Array
     #   resp.applications[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplications AWS API Documentation
     #
     # @overload list_applications(params = {})
     # @param [Hash] params ({})
@@ -1346,6 +1394,8 @@ module Aws::CodeDeploy
     #   resp.deployment_configs_list #=> Array
     #   resp.deployment_configs_list[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigs AWS API Documentation
     #
     # @overload list_deployment_configs(params = {})
     # @param [Hash] params ({})
@@ -1385,6 +1435,8 @@ module Aws::CodeDeploy
     #   resp.deployment_groups #=> Array
     #   resp.deployment_groups[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroups AWS API Documentation
     #
     # @overload list_deployment_groups(params = {})
     # @param [Hash] params ({})
@@ -1439,6 +1491,8 @@ module Aws::CodeDeploy
     #   resp.instances_list #=> Array
     #   resp.instances_list[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstances AWS API Documentation
     #
     # @overload list_deployment_instances(params = {})
     # @param [Hash] params ({})
@@ -1505,6 +1559,8 @@ module Aws::CodeDeploy
     #   resp.deployments[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeployments AWS API Documentation
+    #
     # @overload list_deployments(params = {})
     # @param [Hash] params ({})
     def list_deployments(params = {}, options = {})
@@ -1562,6 +1618,8 @@ module Aws::CodeDeploy
     #   resp.instance_names[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstances AWS API Documentation
+    #
     # @overload list_on_premises_instances(params = {})
     # @param [Hash] params ({})
     def list_on_premises_instances(params = {}, options = {})
@@ -1606,6 +1664,8 @@ module Aws::CodeDeploy
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevision AWS API Documentation
+    #
     # @overload register_application_revision(params = {})
     # @param [Hash] params ({})
     def register_application_revision(params = {}, options = {})
@@ -1639,6 +1699,8 @@ module Aws::CodeDeploy
     #     iam_user_arn: "IamUserArn",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstance AWS API Documentation
+    #
     # @overload register_on_premises_instance(params = {})
     # @param [Hash] params ({})
     def register_on_premises_instance(params = {}, options = {})
@@ -1667,6 +1729,8 @@ module Aws::CodeDeploy
     #     ],
     #     instance_names: ["InstanceName"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstances AWS API Documentation
     #
     # @overload remove_tags_from_on_premises_instances(params = {})
     # @param [Hash] params ({})
@@ -1702,6 +1766,8 @@ module Aws::CodeDeploy
     #   resp.status #=> String, one of "Pending", "Succeeded"
     #   resp.status_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeployment AWS API Documentation
+    #
     # @overload stop_deployment(params = {})
     # @param [Hash] params ({})
     def stop_deployment(params = {}, options = {})
@@ -1725,6 +1791,8 @@ module Aws::CodeDeploy
     #     application_name: "ApplicationName",
     #     new_application_name: "ApplicationName",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplication AWS API Documentation
     #
     # @overload update_application(params = {})
     # @param [Hash] params ({})
@@ -1839,6 +1907,8 @@ module Aws::CodeDeploy
     #   resp.hooks_not_cleaned_up[0].name #=> String
     #   resp.hooks_not_cleaned_up[0].hook #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroup AWS API Documentation
+    #
     # @overload update_deployment_group(params = {})
     # @param [Hash] params ({})
     def update_deployment_group(params = {}, options = {})
@@ -1859,7 +1929,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

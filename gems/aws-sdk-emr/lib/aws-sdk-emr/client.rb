@@ -250,6 +250,8 @@ module Aws::EMR
     #   resp.instance_group_ids #=> Array
     #   resp.instance_group_ids[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceGroups AWS API Documentation
+    #
     # @overload add_instance_groups(params = {})
     # @param [Hash] params ({})
     def add_instance_groups(params = {}, options = {})
@@ -325,6 +327,8 @@ module Aws::EMR
     #   resp.step_ids #=> Array
     #   resp.step_ids[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddJobFlowSteps AWS API Documentation
+    #
     # @overload add_job_flow_steps(params = {})
     # @param [Hash] params ({})
     def add_job_flow_steps(params = {}, options = {})
@@ -364,6 +368,8 @@ module Aws::EMR
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddTags AWS API Documentation
     #
     # @overload add_tags(params = {})
     # @param [Hash] params ({})
@@ -405,6 +411,8 @@ module Aws::EMR
     #   resp.cancel_steps_info_list[0].status #=> String, one of "SUBMITTED", "FAILED"
     #   resp.cancel_steps_info_list[0].reason #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelSteps AWS API Documentation
+    #
     # @overload cancel_steps(params = {})
     # @param [Hash] params ({})
     def cancel_steps(params = {}, options = {})
@@ -438,6 +446,8 @@ module Aws::EMR
     #   resp.name #=> String
     #   resp.creation_date_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CreateSecurityConfiguration AWS API Documentation
+    #
     # @overload create_security_configuration(params = {})
     # @param [Hash] params ({})
     def create_security_configuration(params = {}, options = {})
@@ -457,6 +467,8 @@ module Aws::EMR
     #   resp = client.delete_security_configuration({
     #     name: "XmlString", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DeleteSecurityConfiguration AWS API Documentation
     #
     # @overload delete_security_configuration(params = {})
     # @param [Hash] params ({})
@@ -531,6 +543,8 @@ module Aws::EMR
     #   resp.cluster.security_configuration #=> String
     #   resp.cluster.auto_scaling_role #=> String
     #   resp.cluster.scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeCluster AWS API Documentation
     #
     # @overload describe_cluster(params = {})
     # @param [Hash] params ({})
@@ -654,6 +668,8 @@ module Aws::EMR
     #   resp.job_flows[0].auto_scaling_role #=> String
     #   resp.job_flows[0].scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeJobFlows AWS API Documentation
+    #
     # @overload describe_job_flows(params = {})
     # @param [Hash] params ({})
     def describe_job_flows(params = {}, options = {})
@@ -684,6 +700,8 @@ module Aws::EMR
     #   resp.name #=> String
     #   resp.security_configuration #=> String
     #   resp.creation_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeSecurityConfiguration AWS API Documentation
     #
     # @overload describe_security_configuration(params = {})
     # @param [Hash] params ({})
@@ -732,6 +750,8 @@ module Aws::EMR
     #   resp.step.status.timeline.start_date_time #=> Time
     #   resp.step.status.timeline.end_date_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeStep AWS API Documentation
+    #
     # @overload describe_step(params = {})
     # @param [Hash] params ({})
     def describe_step(params = {}, options = {})
@@ -769,6 +789,8 @@ module Aws::EMR
     #   resp.bootstrap_actions[0].args #=> Array
     #   resp.bootstrap_actions[0].args[0] #=> String
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListBootstrapActions AWS API Documentation
     #
     # @overload list_bootstrap_actions(params = {})
     # @param [Hash] params ({})
@@ -825,6 +847,8 @@ module Aws::EMR
     #   resp.clusters[0].status.timeline.end_date_time #=> Time
     #   resp.clusters[0].normalized_instance_hours #=> Integer
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListClusters AWS API Documentation
     #
     # @overload list_clusters(params = {})
     # @param [Hash] params ({})
@@ -913,6 +937,8 @@ module Aws::EMR
     #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceGroups AWS API Documentation
+    #
     # @overload list_instance_groups(params = {})
     # @param [Hash] params ({})
     def list_instance_groups(params = {}, options = {})
@@ -979,6 +1005,8 @@ module Aws::EMR
     #   resp.instances[0].ebs_volumes[0].volume_id #=> String
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstances AWS API Documentation
+    #
     # @overload list_instances(params = {})
     # @param [Hash] params ({})
     def list_instances(params = {}, options = {})
@@ -1012,6 +1040,8 @@ module Aws::EMR
     #   resp.security_configurations[0].name #=> String
     #   resp.security_configurations[0].creation_date_time #=> Time
     #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSecurityConfigurations AWS API Documentation
     #
     # @overload list_security_configurations(params = {})
     # @param [Hash] params ({})
@@ -1074,6 +1104,8 @@ module Aws::EMR
     #   resp.steps[0].status.timeline.end_date_time #=> Time
     #   resp.marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListSteps AWS API Documentation
+    #
     # @overload list_steps(params = {})
     # @param [Hash] params ({})
     def list_steps(params = {}, options = {})
@@ -1114,6 +1146,8 @@ module Aws::EMR
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceGroups AWS API Documentation
     #
     # @overload modify_instance_groups(params = {})
     # @param [Hash] params ({})
@@ -1218,6 +1252,8 @@ module Aws::EMR
     #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
     #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PutAutoScalingPolicy AWS API Documentation
+    #
     # @overload put_auto_scaling_policy(params = {})
     # @param [Hash] params ({})
     def put_auto_scaling_policy(params = {}, options = {})
@@ -1244,6 +1280,8 @@ module Aws::EMR
     #     cluster_id: "ClusterId", # required
     #     instance_group_id: "InstanceGroupId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveAutoScalingPolicy AWS API Documentation
     #
     # @overload remove_auto_scaling_policy(params = {})
     # @param [Hash] params ({})
@@ -1279,6 +1317,8 @@ module Aws::EMR
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["String"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RemoveTags AWS API Documentation
     #
     # @overload remove_tags(params = {})
     # @param [Hash] params ({})
@@ -1673,6 +1713,8 @@ module Aws::EMR
     #
     #   resp.job_flow_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlow AWS API Documentation
+    #
     # @overload run_job_flow(params = {})
     # @param [Hash] params ({})
     def run_job_flow(params = {}, options = {})
@@ -1724,6 +1766,8 @@ module Aws::EMR
     #     termination_protected: false, # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetTerminationProtection AWS API Documentation
+    #
     # @overload set_termination_protection(params = {})
     # @param [Hash] params ({})
     def set_termination_protection(params = {}, options = {})
@@ -1758,6 +1802,8 @@ module Aws::EMR
     #     visible_to_all_users: false, # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsers AWS API Documentation
+    #
     # @overload set_visible_to_all_users(params = {})
     # @param [Hash] params ({})
     def set_visible_to_all_users(params = {}, options = {})
@@ -1787,6 +1833,8 @@ module Aws::EMR
     #   resp = client.terminate_job_flows({
     #     job_flow_ids: ["XmlString"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/TerminateJobFlows AWS API Documentation
     #
     # @overload terminate_job_flows(params = {})
     # @param [Hash] params ({})

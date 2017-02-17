@@ -28,6 +28,7 @@ module Aws
   autoload :CognitoIdentityProvider, 'aws-sdk-cognitoidentityprovider'
   autoload :CognitoSync, 'aws-sdk-cognitosync'
   autoload :ConfigService, 'aws-sdk-configservice'
+  autoload :CostandUsageReportService, 'aws-sdk-costandusagereportservice'
   autoload :DataPipeline, 'aws-sdk-datapipeline'
   autoload :DatabaseMigrationService, 'aws-sdk-databasemigrationservice'
   autoload :DeviceFarm, 'aws-sdk-devicefarm'

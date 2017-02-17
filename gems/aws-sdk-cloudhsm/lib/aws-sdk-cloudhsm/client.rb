@@ -185,6 +185,8 @@ module Aws::CloudHSM
     #
     #   resp.status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResource AWS API Documentation
+    #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
     def add_tags_to_resource(params = {}, options = {})
@@ -212,6 +214,8 @@ module Aws::CloudHSM
     # @example Response structure
     #
     #   resp.hapg_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHapg AWS API Documentation
     #
     # @overload create_hapg(params = {})
     # @param [Hash] params ({})
@@ -290,6 +294,8 @@ module Aws::CloudHSM
     #
     #   resp.hsm_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsm AWS API Documentation
+    #
     # @overload create_hsm(params = {})
     # @param [Hash] params ({})
     def create_hsm(params = {}, options = {})
@@ -321,6 +327,8 @@ module Aws::CloudHSM
     #
     #   resp.client_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateLunaClient AWS API Documentation
+    #
     # @overload create_luna_client(params = {})
     # @param [Hash] params ({})
     def create_luna_client(params = {}, options = {})
@@ -346,6 +354,8 @@ module Aws::CloudHSM
     # @example Response structure
     #
     #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHapg AWS API Documentation
     #
     # @overload delete_hapg(params = {})
     # @param [Hash] params ({})
@@ -374,6 +384,8 @@ module Aws::CloudHSM
     #
     #   resp.status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsm AWS API Documentation
+    #
     # @overload delete_hsm(params = {})
     # @param [Hash] params ({})
     def delete_hsm(params = {}, options = {})
@@ -399,6 +411,8 @@ module Aws::CloudHSM
     # @example Response structure
     #
     #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteLunaClient AWS API Documentation
     #
     # @overload delete_luna_client(params = {})
     # @param [Hash] params ({})
@@ -445,6 +459,8 @@ module Aws::CloudHSM
     #   resp.partition_serial_list #=> Array
     #   resp.partition_serial_list[0] #=> String
     #   resp.state #=> String, one of "READY", "UPDATING", "DEGRADED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHapg AWS API Documentation
     #
     # @overload describe_hapg(params = {})
     # @param [Hash] params ({})
@@ -520,6 +536,8 @@ module Aws::CloudHSM
     #   resp.partitions #=> Array
     #   resp.partitions[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeHsm AWS API Documentation
+    #
     # @overload describe_hsm(params = {})
     # @param [Hash] params ({})
     def describe_hsm(params = {}, options = {})
@@ -557,6 +575,8 @@ module Aws::CloudHSM
     #   resp.certificate_fingerprint #=> String
     #   resp.last_modified_timestamp #=> String
     #   resp.label #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DescribeLunaClient AWS API Documentation
     #
     # @overload describe_luna_client(params = {})
     # @param [Hash] params ({})
@@ -598,6 +618,8 @@ module Aws::CloudHSM
     #   resp.config_file #=> String
     #   resp.config_cred #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/GetConfig AWS API Documentation
+    #
     # @overload get_config(params = {})
     # @param [Hash] params ({})
     def get_config(params = {}, options = {})
@@ -616,6 +638,8 @@ module Aws::CloudHSM
     #
     #   resp.az_list #=> Array
     #   resp.az_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListAvailableZones AWS API Documentation
     #
     # @overload list_available_zones(params = {})
     # @param [Hash] params ({})
@@ -651,6 +675,8 @@ module Aws::CloudHSM
     #   resp.hapg_list #=> Array
     #   resp.hapg_list[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHapgs AWS API Documentation
     #
     # @overload list_hapgs(params = {})
     # @param [Hash] params ({})
@@ -688,6 +714,8 @@ module Aws::CloudHSM
     #   resp.hsm_list[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListHsms AWS API Documentation
+    #
     # @overload list_hsms(params = {})
     # @param [Hash] params ({})
     def list_hsms(params = {}, options = {})
@@ -723,6 +751,8 @@ module Aws::CloudHSM
     #   resp.client_list[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListLunaClients AWS API Documentation
+    #
     # @overload list_luna_clients(params = {})
     # @param [Hash] params ({})
     def list_luna_clients(params = {}, options = {})
@@ -750,6 +780,8 @@ module Aws::CloudHSM
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -785,6 +817,8 @@ module Aws::CloudHSM
     # @example Response structure
     #
     #   resp.hapg_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHapg AWS API Documentation
     #
     # @overload modify_hapg(params = {})
     # @param [Hash] params ({})
@@ -845,6 +879,8 @@ module Aws::CloudHSM
     #
     #   resp.hsm_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsm AWS API Documentation
+    #
     # @overload modify_hsm(params = {})
     # @param [Hash] params ({})
     def modify_hsm(params = {}, options = {})
@@ -877,6 +913,8 @@ module Aws::CloudHSM
     # @example Response structure
     #
     #   resp.client_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyLunaClient AWS API Documentation
     #
     # @overload modify_luna_client(params = {})
     # @param [Hash] params ({})
@@ -913,6 +951,8 @@ module Aws::CloudHSM
     # @example Response structure
     #
     #   resp.status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})

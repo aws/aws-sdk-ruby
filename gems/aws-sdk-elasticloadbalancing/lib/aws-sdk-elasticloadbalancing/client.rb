@@ -177,6 +177,8 @@ module Aws::ElasticLoadBalancing
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTags AWS API Documentation
+    #
     # @overload add_tags(params = {})
     # @param [Hash] params ({})
     def add_tags(params = {}, options = {})
@@ -218,6 +220,8 @@ module Aws::ElasticLoadBalancing
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancer AWS API Documentation
+    #
     # @overload apply_security_groups_to_load_balancer(params = {})
     # @param [Hash] params ({})
     def apply_security_groups_to_load_balancer(params = {}, options = {})
@@ -258,6 +262,8 @@ module Aws::ElasticLoadBalancing
     #
     #   resp.subnets #=> Array
     #   resp.subnets[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnets AWS API Documentation
     #
     # @overload attach_load_balancer_to_subnets(params = {})
     # @param [Hash] params ({})
@@ -307,6 +313,8 @@ module Aws::ElasticLoadBalancing
     #   resp.health_check.unhealthy_threshold #=> Integer
     #   resp.health_check.healthy_threshold #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheck AWS API Documentation
+    #
     # @overload configure_health_check(params = {})
     # @param [Hash] params ({})
     def configure_health_check(params = {}, options = {})
@@ -355,6 +363,8 @@ module Aws::ElasticLoadBalancing
     #     policy_name: "PolicyName", # required
     #     cookie_name: "CookieName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicy AWS API Documentation
     #
     # @overload create_app_cookie_stickiness_policy(params = {})
     # @param [Hash] params ({})
@@ -410,6 +420,8 @@ module Aws::ElasticLoadBalancing
     #     policy_name: "PolicyName", # required
     #     cookie_expiration_period: 1,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicy AWS API Documentation
     #
     # @overload create_lb_cookie_stickiness_policy(params = {})
     # @param [Hash] params ({})
@@ -532,6 +544,8 @@ module Aws::ElasticLoadBalancing
     #
     #   resp.dns_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancer AWS API Documentation
+    #
     # @overload create_load_balancer(params = {})
     # @param [Hash] params ({})
     def create_load_balancer(params = {}, options = {})
@@ -573,6 +587,8 @@ module Aws::ElasticLoadBalancing
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListeners AWS API Documentation
     #
     # @overload create_load_balancer_listeners(params = {})
     # @param [Hash] params ({})
@@ -618,6 +634,8 @@ module Aws::ElasticLoadBalancing
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicy AWS API Documentation
+    #
     # @overload create_load_balancer_policy(params = {})
     # @param [Hash] params ({})
     def create_load_balancer_policy(params = {}, options = {})
@@ -647,6 +665,8 @@ module Aws::ElasticLoadBalancing
     #     load_balancer_name: "AccessPointName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancer AWS API Documentation
+    #
     # @overload delete_load_balancer(params = {})
     # @param [Hash] params ({})
     def delete_load_balancer(params = {}, options = {})
@@ -670,6 +690,8 @@ module Aws::ElasticLoadBalancing
     #     load_balancer_name: "AccessPointName", # required
     #     load_balancer_ports: [1], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListeners AWS API Documentation
     #
     # @overload delete_load_balancer_listeners(params = {})
     # @param [Hash] params ({})
@@ -695,6 +717,8 @@ module Aws::ElasticLoadBalancing
     #     load_balancer_name: "AccessPointName", # required
     #     policy_name: "PolicyName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicy AWS API Documentation
     #
     # @overload delete_load_balancer_policy(params = {})
     # @param [Hash] params ({})
@@ -743,6 +767,8 @@ module Aws::ElasticLoadBalancing
     #   resp.instances #=> Array
     #   resp.instances[0].instance_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterInstancesFromLoadBalancer AWS API Documentation
+    #
     # @overload deregister_instances_from_load_balancer(params = {})
     # @param [Hash] params ({})
     def deregister_instances_from_load_balancer(params = {}, options = {})
@@ -786,6 +812,8 @@ module Aws::ElasticLoadBalancing
     #   resp.instance_states[0].reason_code #=> String
     #   resp.instance_states[0].description #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeInstanceHealth AWS API Documentation
+    #
     # @overload describe_instance_health(params = {})
     # @param [Hash] params ({})
     def describe_instance_health(params = {}, options = {})
@@ -821,6 +849,8 @@ module Aws::ElasticLoadBalancing
     #   resp.load_balancer_attributes.additional_attributes #=> Array
     #   resp.load_balancer_attributes.additional_attributes[0].key #=> String
     #   resp.load_balancer_attributes.additional_attributes[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributes AWS API Documentation
     #
     # @overload describe_load_balancer_attributes(params = {})
     # @param [Hash] params ({})
@@ -864,6 +894,8 @@ module Aws::ElasticLoadBalancing
     #   resp.policy_descriptions[0].policy_attribute_descriptions #=> Array
     #   resp.policy_descriptions[0].policy_attribute_descriptions[0].attribute_name #=> String
     #   resp.policy_descriptions[0].policy_attribute_descriptions[0].attribute_value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicies AWS API Documentation
     #
     # @overload describe_load_balancer_policies(params = {})
     # @param [Hash] params ({})
@@ -910,6 +942,8 @@ module Aws::ElasticLoadBalancing
     #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].description #=> String
     #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].default_value #=> String
     #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].cardinality #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypes AWS API Documentation
     #
     # @overload describe_load_balancer_policy_types(params = {})
     # @param [Hash] params ({})
@@ -992,6 +1026,8 @@ module Aws::ElasticLoadBalancing
     #   resp.load_balancer_descriptions[0].scheme #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancers AWS API Documentation
+    #
     # @overload describe_load_balancers(params = {})
     # @param [Hash] params ({})
     def describe_load_balancers(params = {}, options = {})
@@ -1021,6 +1057,8 @@ module Aws::ElasticLoadBalancing
     #   resp.tag_descriptions[0].tags #=> Array
     #   resp.tag_descriptions[0].tags[0].key #=> String
     #   resp.tag_descriptions[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTags AWS API Documentation
     #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
@@ -1058,6 +1096,8 @@ module Aws::ElasticLoadBalancing
     #
     #   resp.subnets #=> Array
     #   resp.subnets[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnets AWS API Documentation
     #
     # @overload detach_load_balancer_from_subnets(params = {})
     # @param [Hash] params ({})
@@ -1105,6 +1145,8 @@ module Aws::ElasticLoadBalancing
     #   resp.availability_zones #=> Array
     #   resp.availability_zones[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DisableAvailabilityZonesForLoadBalancer AWS API Documentation
+    #
     # @overload disable_availability_zones_for_load_balancer(params = {})
     # @param [Hash] params ({})
     def disable_availability_zones_for_load_balancer(params = {}, options = {})
@@ -1147,6 +1189,8 @@ module Aws::ElasticLoadBalancing
     #
     #   resp.availability_zones #=> Array
     #   resp.availability_zones[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/EnableAvailabilityZonesForLoadBalancer AWS API Documentation
     #
     # @overload enable_availability_zones_for_load_balancer(params = {})
     # @param [Hash] params ({})
@@ -1237,6 +1281,8 @@ module Aws::ElasticLoadBalancing
     #   resp.load_balancer_attributes.additional_attributes[0].key #=> String
     #   resp.load_balancer_attributes.additional_attributes[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributes AWS API Documentation
+    #
     # @overload modify_load_balancer_attributes(params = {})
     # @param [Hash] params ({})
     def modify_load_balancer_attributes(params = {}, options = {})
@@ -1300,6 +1346,8 @@ module Aws::ElasticLoadBalancing
     #   resp.instances #=> Array
     #   resp.instances[0].instance_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterInstancesWithLoadBalancer AWS API Documentation
+    #
     # @overload register_instances_with_load_balancer(params = {})
     # @param [Hash] params ({})
     def register_instances_with_load_balancer(params = {}, options = {})
@@ -1328,6 +1376,8 @@ module Aws::ElasticLoadBalancing
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTags AWS API Documentation
     #
     # @overload remove_tags(params = {})
     # @param [Hash] params ({})
@@ -1366,6 +1416,8 @@ module Aws::ElasticLoadBalancing
     #     load_balancer_port: 1, # required
     #     ssl_certificate_id: "SSLCertificateId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificate AWS API Documentation
     #
     # @overload set_load_balancer_listener_ssl_certificate(params = {})
     # @param [Hash] params ({})
@@ -1418,6 +1470,8 @@ module Aws::ElasticLoadBalancing
     #     policy_names: ["PolicyName"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServer AWS API Documentation
+    #
     # @overload set_load_balancer_policies_for_backend_server(params = {})
     # @param [Hash] params ({})
     def set_load_balancer_policies_for_backend_server(params = {}, options = {})
@@ -1462,6 +1516,8 @@ module Aws::ElasticLoadBalancing
     #     load_balancer_port: 1, # required
     #     policy_names: ["PolicyName"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListener AWS API Documentation
     #
     # @overload set_load_balancer_policies_of_listener(params = {})
     # @param [Hash] params ({})

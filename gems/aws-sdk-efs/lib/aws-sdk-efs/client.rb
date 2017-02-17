@@ -247,6 +247,8 @@ module Aws::EFS
     #   resp.size_in_bytes.timestamp #=> Time
     #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystem AWS API Documentation
+    #
     # @overload create_file_system(params = {})
     # @param [Hash] params ({})
     def create_file_system(params = {}, options = {})
@@ -412,6 +414,8 @@ module Aws::EFS
     #   resp.ip_address #=> String
     #   resp.network_interface_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateMountTarget AWS API Documentation
+    #
     # @overload create_mount_target(params = {})
     # @param [Hash] params ({})
     def create_mount_target(params = {}, options = {})
@@ -450,6 +454,8 @@ module Aws::EFS
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateTags AWS API Documentation
+    #
     # @overload create_tags(params = {})
     # @param [Hash] params ({})
     def create_tags(params = {}, options = {})
@@ -487,6 +493,8 @@ module Aws::EFS
     #   resp = client.delete_file_system({
     #     file_system_id: "FileSystemId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteFileSystem AWS API Documentation
     #
     # @overload delete_file_system(params = {})
     # @param [Hash] params ({})
@@ -539,6 +547,8 @@ module Aws::EFS
     #     mount_target_id: "MountTargetId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteMountTarget AWS API Documentation
+    #
     # @overload delete_mount_target(params = {})
     # @param [Hash] params ({})
     def delete_mount_target(params = {}, options = {})
@@ -573,6 +583,8 @@ module Aws::EFS
     #     file_system_id: "FileSystemId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteTags AWS API Documentation
     #
     # @overload delete_tags(params = {})
     # @param [Hash] params ({})
@@ -662,6 +674,8 @@ module Aws::EFS
     #   resp.file_systems[0].performance_mode #=> String, one of "generalPurpose", "maxIO"
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeFileSystems AWS API Documentation
+    #
     # @overload describe_file_systems(params = {})
     # @param [Hash] params ({})
     def describe_file_systems(params = {}, options = {})
@@ -699,6 +713,8 @@ module Aws::EFS
     #
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargetSecurityGroups AWS API Documentation
     #
     # @overload describe_mount_target_security_groups(params = {})
     # @param [Hash] params ({})
@@ -764,6 +780,8 @@ module Aws::EFS
     #   resp.mount_targets[0].network_interface_id #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeMountTargets AWS API Documentation
+    #
     # @overload describe_mount_targets(params = {})
     # @param [Hash] params ({})
     def describe_mount_targets(params = {}, options = {})
@@ -813,6 +831,8 @@ module Aws::EFS
     #   resp.tags[0].value #=> String
     #   resp.next_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeTags AWS API Documentation
+    #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
@@ -853,6 +873,8 @@ module Aws::EFS
     #     security_groups: ["SecurityGroup"],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ModifyMountTargetSecurityGroups AWS API Documentation
+    #
     # @overload modify_mount_target_security_groups(params = {})
     # @param [Hash] params ({})
     def modify_mount_target_security_groups(params = {}, options = {})
@@ -873,7 +895,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

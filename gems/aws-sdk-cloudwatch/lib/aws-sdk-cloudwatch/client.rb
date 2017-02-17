@@ -157,6 +157,8 @@ module Aws::CloudWatch
     #     alarm_names: ["AlarmName"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarms AWS API Documentation
+    #
     # @overload delete_alarms(params = {})
     # @param [Hash] params ({})
     def delete_alarms(params = {}, options = {})
@@ -215,6 +217,8 @@ module Aws::CloudWatch
     #   resp.alarm_history_items[0].history_summary #=> String
     #   resp.alarm_history_items[0].history_data #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistory AWS API Documentation
     #
     # @overload describe_alarm_history(params = {})
     # @param [Hash] params ({})
@@ -294,6 +298,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].threshold #=> Float
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
     #
     # @overload describe_alarms(params = {})
     # @param [Hash] params ({})
@@ -382,6 +388,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].threshold #=> Float
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
+    #
     # @overload describe_alarms_for_metric(params = {})
     # @param [Hash] params ({})
     def describe_alarms_for_metric(params = {}, options = {})
@@ -404,6 +412,8 @@ module Aws::CloudWatch
     #     alarm_names: ["AlarmName"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActions AWS API Documentation
+    #
     # @overload disable_alarm_actions(params = {})
     # @param [Hash] params ({})
     def disable_alarm_actions(params = {}, options = {})
@@ -423,6 +433,8 @@ module Aws::CloudWatch
     #   resp = client.enable_alarm_actions({
     #     alarm_names: ["AlarmName"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActions AWS API Documentation
     #
     # @overload enable_alarm_actions(params = {})
     # @param [Hash] params ({})
@@ -583,6 +595,8 @@ module Aws::CloudWatch
     #   resp.datapoints[0].extended_statistics #=> Hash
     #   resp.datapoints[0].extended_statistics["ExtendedStatistic"] #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatistics AWS API Documentation
+    #
     # @overload get_metric_statistics(params = {})
     # @param [Hash] params ({})
     def get_metric_statistics(params = {}, options = {})
@@ -641,6 +655,8 @@ module Aws::CloudWatch
     #   resp.metrics[0].dimensions[0].name #=> String
     #   resp.metrics[0].dimensions[0].value #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetrics AWS API Documentation
     #
     # @overload list_metrics(params = {})
     # @param [Hash] params ({})
@@ -828,6 +844,8 @@ module Aws::CloudWatch
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
+    #
     # @overload put_metric_alarm(params = {})
     # @param [Hash] params ({})
     def put_metric_alarm(params = {}, options = {})
@@ -892,6 +910,8 @@ module Aws::CloudWatch
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricData AWS API Documentation
+    #
     # @overload put_metric_data(params = {})
     # @param [Hash] params ({})
     def put_metric_data(params = {}, options = {})
@@ -934,6 +954,8 @@ module Aws::CloudWatch
     #     state_reason: "StateReason", # required
     #     state_reason_data: "StateReasonData",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmState AWS API Documentation
     #
     # @overload set_alarm_state(params = {})
     # @param [Hash] params ({})

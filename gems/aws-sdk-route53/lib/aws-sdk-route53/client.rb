@@ -202,6 +202,8 @@ module Aws::Route53
     #   resp.change_info.submitted_at #=> Time
     #   resp.change_info.comment #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZone AWS API Documentation
+    #
     # @overload associate_vpc_with_hosted_zone(params = {})
     # @param [Hash] params ({})
     def associate_vpc_with_hosted_zone(params = {}, options = {})
@@ -374,6 +376,8 @@ module Aws::Route53
     #   resp.change_info.submitted_at #=> Time
     #   resp.change_info.comment #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSets AWS API Documentation
+    #
     # @overload change_resource_record_sets(params = {})
     # @param [Hash] params ({})
     def change_resource_record_sets(params = {}, options = {})
@@ -429,6 +433,8 @@ module Aws::Route53
     #     ],
     #     remove_tag_keys: ["TagKey"],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResource AWS API Documentation
     #
     # @overload change_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -554,6 +560,8 @@ module Aws::Route53
     #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].name #=> String
     #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].value #=> String
     #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheck AWS API Documentation
     #
     # @overload create_health_check(params = {})
     # @param [Hash] params ({})
@@ -701,6 +709,8 @@ module Aws::Route53
     #   resp.vpc.vpc_id #=> String
     #   resp.location #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZone AWS API Documentation
+    #
     # @overload create_hosted_zone(params = {})
     # @param [Hash] params ({})
     def create_hosted_zone(params = {}, options = {})
@@ -762,6 +772,8 @@ module Aws::Route53
     #   resp.delegation_set.name_servers[0] #=> String
     #   resp.location #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSet AWS API Documentation
+    #
     # @overload create_reusable_delegation_set(params = {})
     # @param [Hash] params ({})
     def create_reusable_delegation_set(params = {}, options = {})
@@ -816,6 +828,8 @@ module Aws::Route53
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
     #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicy AWS API Documentation
     #
     # @overload create_traffic_policy(params = {})
     # @param [Hash] params ({})
@@ -888,6 +902,8 @@ module Aws::Route53
     #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
     #   resp.location #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstance AWS API Documentation
+    #
     # @overload create_traffic_policy_instance(params = {})
     # @param [Hash] params ({})
     def create_traffic_policy_instance(params = {}, options = {})
@@ -946,6 +962,8 @@ module Aws::Route53
     #   resp.traffic_policy.comment #=> String
     #   resp.location #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersion AWS API Documentation
+    #
     # @overload create_traffic_policy_version(params = {})
     # @param [Hash] params ({})
     def create_traffic_policy_version(params = {}, options = {})
@@ -1001,6 +1019,8 @@ module Aws::Route53
     #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "ca-central-1", "cn-north-1"
     #   resp.vpc.vpc_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorization AWS API Documentation
+    #
     # @overload create_vpc_association_authorization(params = {})
     # @param [Hash] params ({})
     def create_vpc_association_authorization(params = {}, options = {})
@@ -1034,6 +1054,8 @@ module Aws::Route53
     #   resp = client.delete_health_check({
     #     health_check_id: "HealthCheckId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheck AWS API Documentation
     #
     # @overload delete_health_check(params = {})
     # @param [Hash] params ({})
@@ -1073,6 +1095,8 @@ module Aws::Route53
     #   resp.change_info.submitted_at #=> Time
     #   resp.change_info.comment #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZone AWS API Documentation
+    #
     # @overload delete_hosted_zone(params = {})
     # @param [Hash] params ({})
     def delete_hosted_zone(params = {}, options = {})
@@ -1101,6 +1125,8 @@ module Aws::Route53
     #     id: "ResourceId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSet AWS API Documentation
+    #
     # @overload delete_reusable_delegation_set(params = {})
     # @param [Hash] params ({})
     def delete_reusable_delegation_set(params = {}, options = {})
@@ -1127,6 +1153,8 @@ module Aws::Route53
     #     id: "TrafficPolicyId", # required
     #     version: 1, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicy AWS API Documentation
     #
     # @overload delete_traffic_policy(params = {})
     # @param [Hash] params ({})
@@ -1160,6 +1188,8 @@ module Aws::Route53
     #   resp = client.delete_traffic_policy_instance({
     #     id: "TrafficPolicyInstanceId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstance AWS API Documentation
     #
     # @overload delete_traffic_policy_instance(params = {})
     # @param [Hash] params ({})
@@ -1206,6 +1236,8 @@ module Aws::Route53
     #       vpc_id: "VPCId",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorization AWS API Documentation
     #
     # @overload delete_vpc_association_authorization(params = {})
     # @param [Hash] params ({})
@@ -1262,6 +1294,8 @@ module Aws::Route53
     #   resp.change_info.submitted_at #=> Time
     #   resp.change_info.comment #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZone AWS API Documentation
+    #
     # @overload disassociate_vpc_from_hosted_zone(params = {})
     # @param [Hash] params ({})
     def disassociate_vpc_from_hosted_zone(params = {}, options = {})
@@ -1301,6 +1335,8 @@ module Aws::Route53
     #   resp.change_info.submitted_at #=> Time
     #   resp.change_info.comment #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChange AWS API Documentation
+    #
     # @overload get_change(params = {})
     # @param [Hash] params ({})
     def get_change(params = {}, options = {})
@@ -1322,6 +1358,8 @@ module Aws::Route53
     #
     #   resp.checker_ip_ranges #=> Array
     #   resp.checker_ip_ranges[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRanges AWS API Documentation
     #
     # @overload get_checker_ip_ranges(params = {})
     # @param [Hash] params ({})
@@ -1389,6 +1427,8 @@ module Aws::Route53
     #   resp.geo_location_details.country_name #=> String
     #   resp.geo_location_details.subdivision_code #=> String
     #   resp.geo_location_details.subdivision_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocation AWS API Documentation
     #
     # @overload get_geo_location(params = {})
     # @param [Hash] params ({})
@@ -1458,6 +1498,8 @@ module Aws::Route53
     #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].name #=> String
     #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheck AWS API Documentation
+    #
     # @overload get_health_check(params = {})
     # @param [Hash] params ({})
     def get_health_check(params = {}, options = {})
@@ -1475,6 +1517,8 @@ module Aws::Route53
     # @example Response structure
     #
     #   resp.health_check_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCount AWS API Documentation
     #
     # @overload get_health_check_count(params = {})
     # @param [Hash] params ({})
@@ -1510,6 +1554,8 @@ module Aws::Route53
     #   resp.health_check_observations[0].ip_address #=> String
     #   resp.health_check_observations[0].status_report.status #=> String
     #   resp.health_check_observations[0].status_report.checked_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReason AWS API Documentation
     #
     # @overload get_health_check_last_failure_reason(params = {})
     # @param [Hash] params ({})
@@ -1605,6 +1651,8 @@ module Aws::Route53
     #   resp.health_check_observations[0].status_report.status #=> String
     #   resp.health_check_observations[0].status_report.checked_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatus AWS API Documentation
+    #
     # @overload get_health_check_status(params = {})
     # @param [Hash] params ({})
     def get_health_check_status(params = {}, options = {})
@@ -1648,6 +1696,8 @@ module Aws::Route53
     #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "ca-central-1", "cn-north-1"
     #   resp.vp_cs[0].vpc_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZone AWS API Documentation
+    #
     # @overload get_hosted_zone(params = {})
     # @param [Hash] params ({})
     def get_hosted_zone(params = {}, options = {})
@@ -1665,6 +1715,8 @@ module Aws::Route53
     # @example Response structure
     #
     #   resp.hosted_zone_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCount AWS API Documentation
     #
     # @overload get_hosted_zone_count(params = {})
     # @param [Hash] params ({})
@@ -1696,6 +1748,8 @@ module Aws::Route53
     #   resp.delegation_set.caller_reference #=> String
     #   resp.delegation_set.name_servers #=> Array
     #   resp.delegation_set.name_servers[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSet AWS API Documentation
     #
     # @overload get_reusable_delegation_set(params = {})
     # @param [Hash] params ({})
@@ -1735,6 +1789,8 @@ module Aws::Route53
     #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicy AWS API Documentation
     #
     # @overload get_traffic_policy(params = {})
     # @param [Hash] params ({})
@@ -1787,6 +1843,8 @@ module Aws::Route53
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
     #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstance AWS API Documentation
+    #
     # @overload get_traffic_policy_instance(params = {})
     # @param [Hash] params ({})
     def get_traffic_policy_instance(params = {}, options = {})
@@ -1807,6 +1865,8 @@ module Aws::Route53
     # @example Response structure
     #
     #   resp.traffic_policy_instance_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCount AWS API Documentation
     #
     # @overload get_traffic_policy_instance_count(params = {})
     # @param [Hash] params ({})
@@ -1902,6 +1962,8 @@ module Aws::Route53
     #   resp.next_country_code #=> String
     #   resp.next_subdivision_code #=> String
     #   resp.max_items #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocations AWS API Documentation
     #
     # @overload list_geo_locations(params = {})
     # @param [Hash] params ({})
@@ -2007,6 +2069,8 @@ module Aws::Route53
     #   resp.next_marker #=> String
     #   resp.max_items #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecks AWS API Documentation
+    #
     # @overload list_health_checks(params = {})
     # @param [Hash] params ({})
     def list_health_checks(params = {}, options = {})
@@ -2094,6 +2158,8 @@ module Aws::Route53
     #   resp.is_truncated #=> Boolean
     #   resp.next_marker #=> String
     #   resp.max_items #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZones AWS API Documentation
     #
     # @overload list_hosted_zones(params = {})
     # @param [Hash] params ({})
@@ -2228,6 +2294,8 @@ module Aws::Route53
     #   resp.next_dns_name #=> String
     #   resp.next_hosted_zone_id #=> String
     #   resp.max_items #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByName AWS API Documentation
     #
     # @overload list_hosted_zones_by_name(params = {})
     # @param [Hash] params ({})
@@ -2378,6 +2446,8 @@ module Aws::Route53
     #   resp.next_record_identifier #=> String
     #   resp.max_items #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSets AWS API Documentation
+    #
     # @overload list_resource_record_sets(params = {})
     # @param [Hash] params ({})
     def list_resource_record_sets(params = {}, options = {})
@@ -2435,6 +2505,8 @@ module Aws::Route53
     #   resp.next_marker #=> String
     #   resp.max_items #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSets AWS API Documentation
+    #
     # @overload list_reusable_delegation_sets(params = {})
     # @param [Hash] params ({})
     def list_reusable_delegation_sets(params = {}, options = {})
@@ -2480,6 +2552,8 @@ module Aws::Route53
     #   resp.resource_tag_set.tags #=> Array
     #   resp.resource_tag_set.tags[0].key #=> String
     #   resp.resource_tag_set.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2528,6 +2602,8 @@ module Aws::Route53
     #   resp.resource_tag_sets[0].tags #=> Array
     #   resp.resource_tag_sets[0].tags[0].key #=> String
     #   resp.resource_tag_sets[0].tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResources AWS API Documentation
     #
     # @overload list_tags_for_resources(params = {})
     # @param [Hash] params ({})
@@ -2619,6 +2695,8 @@ module Aws::Route53
     #   resp.is_truncated #=> Boolean
     #   resp.traffic_policy_id_marker #=> String
     #   resp.max_items #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicies AWS API Documentation
     #
     # @overload list_traffic_policies(params = {})
     # @param [Hash] params ({})
@@ -2758,6 +2836,8 @@ module Aws::Route53
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstances AWS API Documentation
+    #
     # @overload list_traffic_policy_instances(params = {})
     # @param [Hash] params ({})
     def list_traffic_policy_instances(params = {}, options = {})
@@ -2879,6 +2959,8 @@ module Aws::Route53
     #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZone AWS API Documentation
     #
     # @overload list_traffic_policy_instances_by_hosted_zone(params = {})
     # @param [Hash] params ({})
@@ -3037,6 +3119,8 @@ module Aws::Route53
     #   resp.is_truncated #=> Boolean
     #   resp.max_items #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicy AWS API Documentation
+    #
     # @overload list_traffic_policy_instances_by_policy(params = {})
     # @param [Hash] params ({})
     def list_traffic_policy_instances_by_policy(params = {}, options = {})
@@ -3137,6 +3221,8 @@ module Aws::Route53
     #   resp.traffic_policy_version_marker #=> String
     #   resp.max_items #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersions AWS API Documentation
+    #
     # @overload list_traffic_policy_versions(params = {})
     # @param [Hash] params ({})
     def list_traffic_policy_versions(params = {}, options = {})
@@ -3205,6 +3291,8 @@ module Aws::Route53
     #   resp.vp_cs #=> Array
     #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "ca-central-1", "cn-north-1"
     #   resp.vp_cs[0].vpc_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizations AWS API Documentation
     #
     # @overload list_vpc_association_authorizations(params = {})
     # @param [Hash] params ({})
@@ -3276,6 +3364,8 @@ module Aws::Route53
     #   resp.record_data[0] #=> String
     #   resp.response_code #=> String
     #   resp.protocol #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswer AWS API Documentation
     #
     # @overload test_dns_answer(params = {})
     # @param [Hash] params ({})
@@ -3608,6 +3698,8 @@ module Aws::Route53
     #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].name #=> String
     #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheck AWS API Documentation
+    #
     # @overload update_health_check(params = {})
     # @param [Hash] params ({})
     def update_health_check(params = {}, options = {})
@@ -3645,6 +3737,8 @@ module Aws::Route53
     #   resp.hosted_zone.config.comment #=> String
     #   resp.hosted_zone.config.private_zone #=> Boolean
     #   resp.hosted_zone.resource_record_set_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneComment AWS API Documentation
     #
     # @overload update_hosted_zone_comment(params = {})
     # @param [Hash] params ({})
@@ -3691,6 +3785,8 @@ module Aws::Route53
     #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
     #   resp.traffic_policy.document #=> String
     #   resp.traffic_policy.comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyComment AWS API Documentation
     #
     # @overload update_traffic_policy_comment(params = {})
     # @param [Hash] params ({})
@@ -3766,6 +3862,8 @@ module Aws::Route53
     #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
     #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstance AWS API Documentation
+    #
     # @overload update_traffic_policy_instance(params = {})
     # @param [Hash] params ({})
     def update_traffic_policy_instance(params = {}, options = {})
@@ -3786,7 +3884,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

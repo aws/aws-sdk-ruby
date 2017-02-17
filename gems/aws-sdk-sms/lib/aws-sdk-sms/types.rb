@@ -50,6 +50,8 @@ module Aws::SMS
     #   Timestamp of an operation
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Connector AWS API Documentation
+    #
     class Connector < Struct.new(
       :connector_id,
       :version,
@@ -103,6 +105,8 @@ module Aws::SMS
     #   The description for a Replication Job/Run.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJobRequest AWS API Documentation
+    #
     class CreateReplicationJobRequest < Struct.new(
       :server_id,
       :seed_replication_time,
@@ -116,6 +120,8 @@ module Aws::SMS
     # @!attribute [rw] replication_job_id
     #   The unique identifier for a Replication Job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/CreateReplicationJobResponse AWS API Documentation
     #
     class CreateReplicationJobResponse < Struct.new(
       :replication_job_id)
@@ -133,17 +139,25 @@ module Aws::SMS
     #   The unique identifier for a Replication Job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJobRequest AWS API Documentation
+    #
     class DeleteReplicationJobRequest < Struct.new(
       :replication_job_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteReplicationJobResponse AWS API Documentation
+    #
     class DeleteReplicationJobResponse < Aws::EmptyStructure; end
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalogRequest AWS API Documentation
+    #
     class DeleteServerCatalogRequest < Aws::EmptyStructure; end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DeleteServerCatalogResponse AWS API Documentation
+    #
     class DeleteServerCatalogResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DisassociateConnectorRequest
@@ -157,11 +171,15 @@ module Aws::SMS
     #   Unique Identifier for Connector
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnectorRequest AWS API Documentation
+    #
     class DisassociateConnectorRequest < Struct.new(
       :connector_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/DisassociateConnectorResponse AWS API Documentation
+    #
     class DisassociateConnectorResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass GetConnectorsRequest
@@ -181,6 +199,8 @@ module Aws::SMS
     #   empty, this will default to 50.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectorsRequest AWS API Documentation
+    #
     class GetConnectorsRequest < Struct.new(
       :next_token,
       :max_results)
@@ -194,6 +214,8 @@ module Aws::SMS
     # @!attribute [rw] next_token
     #   Pagination token to pass as input to API call
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetConnectorsResponse AWS API Documentation
     #
     class GetConnectorsResponse < Struct.new(
       :connector_list,
@@ -223,6 +245,8 @@ module Aws::SMS
     #   empty, this will default to 50.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobsRequest AWS API Documentation
+    #
     class GetReplicationJobsRequest < Struct.new(
       :replication_job_id,
       :next_token,
@@ -237,6 +261,8 @@ module Aws::SMS
     # @!attribute [rw] next_token
     #   Pagination token to pass as input to API call
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationJobsResponse AWS API Documentation
     #
     class GetReplicationJobsResponse < Struct.new(
       :replication_job_list,
@@ -266,6 +292,8 @@ module Aws::SMS
     #   empty, this will default to 50.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRunsRequest AWS API Documentation
+    #
     class GetReplicationRunsRequest < Struct.new(
       :replication_job_id,
       :next_token,
@@ -284,6 +312,8 @@ module Aws::SMS
     # @!attribute [rw] next_token
     #   Pagination token to pass as input to API call
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetReplicationRunsResponse AWS API Documentation
     #
     class GetReplicationRunsResponse < Struct.new(
       :replication_job,
@@ -309,6 +339,8 @@ module Aws::SMS
     #   empty, this will default to 50.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServersRequest AWS API Documentation
+    #
     class GetServersRequest < Struct.new(
       :next_token,
       :max_results)
@@ -331,6 +363,8 @@ module Aws::SMS
     #   Pagination token to pass as input to API call
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/GetServersResponse AWS API Documentation
+    #
     class GetServersResponse < Struct.new(
       :last_modified_on,
       :server_catalog_status,
@@ -341,8 +375,12 @@ module Aws::SMS
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalogRequest AWS API Documentation
+    #
     class ImportServerCatalogRequest < Aws::EmptyStructure; end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ImportServerCatalogResponse AWS API Documentation
+    #
     class ImportServerCatalogResponse < Aws::EmptyStructure; end
 
     # Object representing a Replication Job
@@ -406,6 +444,8 @@ module Aws::SMS
     #   List of Replication Runs
     #   @return [Array<Types::ReplicationRun>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationJob AWS API Documentation
+    #
     class ReplicationJob < Struct.new(
       :replication_job_id,
       :server_id,
@@ -458,6 +498,8 @@ module Aws::SMS
     #   The description for a Replication Job/Run.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/ReplicationRun AWS API Documentation
+    #
     class ReplicationRun < Struct.new(
       :replication_run_id,
       :state,
@@ -492,6 +534,8 @@ module Aws::SMS
     #   An indicator of the Replication Job being deleted or failed.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/Server AWS API Documentation
+    #
     class Server < Struct.new(
       :server_id,
       :server_type,
@@ -517,6 +561,8 @@ module Aws::SMS
     #   The description for a Replication Job/Run.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRunRequest AWS API Documentation
+    #
     class StartOnDemandReplicationRunRequest < Struct.new(
       :replication_job_id,
       :description)
@@ -526,6 +572,8 @@ module Aws::SMS
     # @!attribute [rw] replication_run_id
     #   The unique identifier for a Replication Run.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/StartOnDemandReplicationRunResponse AWS API Documentation
     #
     class StartOnDemandReplicationRunResponse < Struct.new(
       :replication_run_id)
@@ -571,6 +619,8 @@ module Aws::SMS
     #   The description for a Replication Job/Run.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJobRequest AWS API Documentation
+    #
     class UpdateReplicationJobRequest < Struct.new(
       :replication_job_id,
       :frequency,
@@ -581,6 +631,8 @@ module Aws::SMS
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/UpdateReplicationJobResponse AWS API Documentation
+    #
     class UpdateReplicationJobResponse < Aws::EmptyStructure; end
 
     # Object representing a VM server
@@ -605,6 +657,8 @@ module Aws::SMS
     #   Path to VM
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/VmServer AWS API Documentation
+    #
     class VmServer < Struct.new(
       :vm_server_address,
       :vm_name,
@@ -623,6 +677,8 @@ module Aws::SMS
     # @!attribute [rw] vm_id
     #   Unique Identifier for a VM
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sms-2016-10-24/VmServerAddress AWS API Documentation
     #
     class VmServerAddress < Struct.new(
       :vm_manager_id,

@@ -16,6 +16,8 @@ module Aws::SFN
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityFailedEventDetails AWS API Documentation
+    #
     class ActivityFailedEventDetails < Struct.new(
       :error,
       :cause)
@@ -34,6 +36,8 @@ module Aws::SFN
     #   The date the activity was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityListItem AWS API Documentation
+    #
     class ActivityListItem < Struct.new(
       :activity_arn,
       :name,
@@ -48,6 +52,8 @@ module Aws::SFN
     # @!attribute [rw] cause
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduleFailedEventDetails AWS API Documentation
     #
     class ActivityScheduleFailedEventDetails < Struct.new(
       :error,
@@ -72,6 +78,8 @@ module Aws::SFN
     #   task.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityScheduledEventDetails AWS API Documentation
+    #
     class ActivityScheduledEventDetails < Struct.new(
       :resource,
       :input,
@@ -85,6 +93,8 @@ module Aws::SFN
     #   are provided by the workers when calling GetActivityTask.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityStartedEventDetails AWS API Documentation
+    #
     class ActivityStartedEventDetails < Struct.new(
       :worker_name)
       include Aws::Structure
@@ -93,6 +103,8 @@ module Aws::SFN
     # @!attribute [rw] output
     #   The JSON data output by the activity task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivitySucceededEventDetails AWS API Documentation
     #
     class ActivitySucceededEventDetails < Struct.new(
       :output)
@@ -106,6 +118,8 @@ module Aws::SFN
     # @!attribute [rw] cause
     #   A more detailed explanation of the cause of the timeout.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ActivityTimedOutEventDetails AWS API Documentation
     #
     class ActivityTimedOutEventDetails < Struct.new(
       :error,
@@ -125,6 +139,8 @@ module Aws::SFN
     #   your AWS account and region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityInput AWS API Documentation
+    #
     class CreateActivityInput < Struct.new(
       :name)
       include Aws::Structure
@@ -137,6 +153,8 @@ module Aws::SFN
     # @!attribute [rw] creation_date
     #   The date the activity was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateActivityOutput AWS API Documentation
     #
     class CreateActivityOutput < Struct.new(
       :activity_arn,
@@ -167,6 +185,8 @@ module Aws::SFN
     #   machine.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineInput AWS API Documentation
+    #
     class CreateStateMachineInput < Struct.new(
       :name,
       :definition,
@@ -182,6 +202,8 @@ module Aws::SFN
     # @!attribute [rw] creation_date
     #   The date the state machine was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/CreateStateMachineOutput AWS API Documentation
     #
     class CreateStateMachineOutput < Struct.new(
       :state_machine_arn,
@@ -200,11 +222,15 @@ module Aws::SFN
     #   The Amazon Resource Name (ARN) of the activity to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivityInput AWS API Documentation
+    #
     class DeleteActivityInput < Struct.new(
       :activity_arn)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteActivityOutput AWS API Documentation
+    #
     class DeleteActivityOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteStateMachineInput
@@ -218,11 +244,15 @@ module Aws::SFN
     #   The Amazon Resource Name (ARN) of the state machine to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineInput AWS API Documentation
+    #
     class DeleteStateMachineInput < Struct.new(
       :state_machine_arn)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DeleteStateMachineOutput AWS API Documentation
+    #
     class DeleteStateMachineOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeActivityInput
@@ -235,6 +265,8 @@ module Aws::SFN
     # @!attribute [rw] activity_arn
     #   The Amazon Resource Name (ARN) of the activity to describe.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivityInput AWS API Documentation
     #
     class DescribeActivityInput < Struct.new(
       :activity_arn)
@@ -253,6 +285,8 @@ module Aws::SFN
     #   The date the activity was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeActivityOutput AWS API Documentation
+    #
     class DescribeActivityOutput < Struct.new(
       :activity_arn,
       :name,
@@ -270,6 +304,8 @@ module Aws::SFN
     # @!attribute [rw] execution_arn
     #   The Amazon Resource Name (ARN) of the execution to describe.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionInput AWS API Documentation
     #
     class DescribeExecutionInput < Struct.new(
       :execution_arn)
@@ -308,6 +344,8 @@ module Aws::SFN
     #   The JSON output data of the execution.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeExecutionOutput AWS API Documentation
+    #
     class DescribeExecutionOutput < Struct.new(
       :execution_arn,
       :state_machine_arn,
@@ -330,6 +368,8 @@ module Aws::SFN
     # @!attribute [rw] state_machine_arn
     #   The Amazon Resource Name (ARN) of the state machine to describe.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineInput AWS API Documentation
     #
     class DescribeStateMachineInput < Struct.new(
       :state_machine_arn)
@@ -361,6 +401,8 @@ module Aws::SFN
     #   The date the state machine was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/DescribeStateMachineOutput AWS API Documentation
+    #
     class DescribeStateMachineOutput < Struct.new(
       :state_machine_arn,
       :name,
@@ -379,6 +421,8 @@ module Aws::SFN
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionAbortedEventDetails AWS API Documentation
+    #
     class ExecutionAbortedEventDetails < Struct.new(
       :error,
       :cause)
@@ -392,6 +436,8 @@ module Aws::SFN
     # @!attribute [rw] cause
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionFailedEventDetails AWS API Documentation
     #
     class ExecutionFailedEventDetails < Struct.new(
       :error,
@@ -423,6 +469,8 @@ module Aws::SFN
     #   If the execution already ended, the date the execution stopped.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionListItem AWS API Documentation
+    #
     class ExecutionListItem < Struct.new(
       :execution_arn,
       :state_machine_arn,
@@ -442,6 +490,8 @@ module Aws::SFN
     #   AWS Lambda tasks.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionStartedEventDetails AWS API Documentation
+    #
     class ExecutionStartedEventDetails < Struct.new(
       :input,
       :role_arn)
@@ -451,6 +501,8 @@ module Aws::SFN
     # @!attribute [rw] output
     #   The JSON data output by the execution.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionSucceededEventDetails AWS API Documentation
     #
     class ExecutionSucceededEventDetails < Struct.new(
       :output)
@@ -464,6 +516,8 @@ module Aws::SFN
     # @!attribute [rw] cause
     #   A more detailed explanation of the cause of the timeout.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ExecutionTimedOutEventDetails AWS API Documentation
     #
     class ExecutionTimedOutEventDetails < Struct.new(
       :error,
@@ -490,6 +544,8 @@ module Aws::SFN
     #   logged in the execution history.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskInput AWS API Documentation
+    #
     class GetActivityTaskInput < Struct.new(
       :activity_arn,
       :worker_name)
@@ -506,6 +562,8 @@ module Aws::SFN
     # @!attribute [rw] input
     #   The JSON input data for the task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetActivityTaskOutput AWS API Documentation
     #
     class GetActivityTaskOutput < Struct.new(
       :task_token,
@@ -550,6 +608,8 @@ module Aws::SFN
     #   returned in a single call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryInput AWS API Documentation
+    #
     class GetExecutionHistoryInput < Struct.new(
       :execution_arn,
       :max_results,
@@ -570,6 +630,8 @@ module Aws::SFN
     #   The configured `maxResults` determines how many results can be
     #   returned in a single call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/GetExecutionHistoryOutput AWS API Documentation
     #
     class GetExecutionHistoryOutput < Struct.new(
       :events,
@@ -651,6 +713,8 @@ module Aws::SFN
     # @!attribute [rw] state_exited_event_details
     #   @return [Types::StateExitedEventDetails]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/HistoryEvent AWS API Documentation
+    #
     class HistoryEvent < Struct.new(
       :timestamp,
       :type,
@@ -686,6 +750,8 @@ module Aws::SFN
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionFailedEventDetails AWS API Documentation
+    #
     class LambdaFunctionFailedEventDetails < Struct.new(
       :error,
       :cause)
@@ -699,6 +765,8 @@ module Aws::SFN
     # @!attribute [rw] cause
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduleFailedEventDetails AWS API Documentation
     #
     class LambdaFunctionScheduleFailedEventDetails < Struct.new(
       :error,
@@ -718,6 +786,8 @@ module Aws::SFN
     #   The maximum allowed duration of the lambda function.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionScheduledEventDetails AWS API Documentation
+    #
     class LambdaFunctionScheduledEventDetails < Struct.new(
       :resource,
       :input,
@@ -733,6 +803,8 @@ module Aws::SFN
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionStartFailedEventDetails AWS API Documentation
+    #
     class LambdaFunctionStartFailedEventDetails < Struct.new(
       :error,
       :cause)
@@ -742,6 +814,8 @@ module Aws::SFN
     # @!attribute [rw] output
     #   The JSON data output by the lambda function.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionSucceededEventDetails AWS API Documentation
     #
     class LambdaFunctionSucceededEventDetails < Struct.new(
       :output)
@@ -755,6 +829,8 @@ module Aws::SFN
     # @!attribute [rw] cause
     #   A more detailed explanation of the cause of the timeout.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/LambdaFunctionTimedOutEventDetails AWS API Documentation
     #
     class LambdaFunctionTimedOutEventDetails < Struct.new(
       :error,
@@ -789,6 +865,8 @@ module Aws::SFN
     #   returned in a single call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivitiesInput AWS API Documentation
+    #
     class ListActivitiesInput < Struct.new(
       :max_results,
       :next_token)
@@ -807,6 +885,8 @@ module Aws::SFN
     #   The configured `maxResults` determines how many results can be
     #   returned in a single call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListActivitiesOutput AWS API Documentation
     #
     class ListActivitiesOutput < Struct.new(
       :activities,
@@ -853,6 +933,8 @@ module Aws::SFN
     #   returned in a single call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsInput AWS API Documentation
+    #
     class ListExecutionsInput < Struct.new(
       :state_machine_arn,
       :status_filter,
@@ -873,6 +955,8 @@ module Aws::SFN
     #   The configured `maxResults` determines how many results can be
     #   returned in a single call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListExecutionsOutput AWS API Documentation
     #
     class ListExecutionsOutput < Struct.new(
       :executions,
@@ -907,6 +991,8 @@ module Aws::SFN
     #   returned in a single call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachinesInput AWS API Documentation
+    #
     class ListStateMachinesInput < Struct.new(
       :max_results,
       :next_token)
@@ -924,6 +1010,8 @@ module Aws::SFN
     #   The configured `maxResults` determines how many results can be
     #   returned in a single call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/ListStateMachinesOutput AWS API Documentation
     #
     class ListStateMachinesOutput < Struct.new(
       :state_machines,
@@ -954,6 +1042,8 @@ module Aws::SFN
     #   A more detailed explanation of the cause of the failure.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailureInput AWS API Documentation
+    #
     class SendTaskFailureInput < Struct.new(
       :task_token,
       :error,
@@ -961,6 +1051,8 @@ module Aws::SFN
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskFailureOutput AWS API Documentation
+    #
     class SendTaskFailureOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SendTaskHeartbeatInput
@@ -976,11 +1068,15 @@ module Aws::SFN
     #   GetActivityTask::taskToken).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatInput AWS API Documentation
+    #
     class SendTaskHeartbeatInput < Struct.new(
       :task_token)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskHeartbeatOutput AWS API Documentation
+    #
     class SendTaskHeartbeatOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SendTaskSuccessInput
@@ -1001,12 +1097,16 @@ module Aws::SFN
     #   The JSON output of the task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccessInput AWS API Documentation
+    #
     class SendTaskSuccessInput < Struct.new(
       :task_token,
       :output)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/SendTaskSuccessOutput AWS API Documentation
+    #
     class SendTaskSuccessOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass StartExecutionInput
@@ -1031,6 +1131,8 @@ module Aws::SFN
     #   The JSON input data for the execution.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionInput AWS API Documentation
+    #
     class StartExecutionInput < Struct.new(
       :state_machine_arn,
       :name,
@@ -1046,6 +1148,8 @@ module Aws::SFN
     #   The date the execution was started.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StartExecutionOutput AWS API Documentation
+    #
     class StartExecutionOutput < Struct.new(
       :execution_arn,
       :start_date)
@@ -1060,6 +1164,8 @@ module Aws::SFN
     #   The JSON input data to the state.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateEnteredEventDetails AWS API Documentation
+    #
     class StateEnteredEventDetails < Struct.new(
       :name,
       :input)
@@ -1073,6 +1179,8 @@ module Aws::SFN
     # @!attribute [rw] output
     #   The JSON output data of the state.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateExitedEventDetails AWS API Documentation
     #
     class StateExitedEventDetails < Struct.new(
       :name,
@@ -1091,6 +1199,8 @@ module Aws::SFN
     # @!attribute [rw] creation_date
     #   The date the state machine was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StateMachineListItem AWS API Documentation
     #
     class StateMachineListItem < Struct.new(
       :state_machine_arn,
@@ -1121,6 +1231,8 @@ module Aws::SFN
     #   A more detailed explanation of the cause of the termination.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionInput AWS API Documentation
+    #
     class StopExecutionInput < Struct.new(
       :execution_arn,
       :error,
@@ -1131,6 +1243,8 @@ module Aws::SFN
     # @!attribute [rw] stop_date
     #   The date the execution was stopped.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/states-2016-11-23/StopExecutionOutput AWS API Documentation
     #
     class StopExecutionOutput < Struct.new(
       :stop_date)

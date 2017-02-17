@@ -26,6 +26,8 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Action AWS API Documentation
+    #
     class Action < Struct.new(
       :type,
       :target_group_arn)
@@ -55,6 +57,8 @@ module Aws::ElasticLoadBalancingV2
     #   The tags. Each resource can have a maximum of 10 tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsInput AWS API Documentation
+    #
     class AddTagsInput < Struct.new(
       :resource_arns,
       :tags)
@@ -62,6 +66,8 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Contains the output of AddTags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
@@ -74,6 +80,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :zone_name,
@@ -95,6 +103,8 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the certificate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Certificate AWS API Documentation
+    #
     class Certificate < Struct.new(
       :certificate_arn)
       include Aws::Structure
@@ -109,6 +119,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] priority
     #   The priority of the cipher.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Cipher AWS API Documentation
     #
     class Cipher < Struct.new(
       :name,
@@ -165,6 +177,8 @@ module Aws::ElasticLoadBalancingV2
     #   The default action for the listener.
     #   @return [Array<Types::Action>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerInput AWS API Documentation
+    #
     class CreateListenerInput < Struct.new(
       :load_balancer_arn,
       :protocol,
@@ -180,6 +194,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] listeners
     #   Information about the listener.
     #   @return [Array<Types::Listener>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateListenerOutput AWS API Documentation
     #
     class CreateListenerOutput < Struct.new(
       :listeners)
@@ -242,6 +258,8 @@ module Aws::ElasticLoadBalancingV2
     #   One or more tags to assign to the load balancer.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerInput AWS API Documentation
+    #
     class CreateLoadBalancerInput < Struct.new(
       :name,
       :subnets,
@@ -256,6 +274,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] load_balancers
     #   Information about the load balancer.
     #   @return [Array<Types::LoadBalancer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerOutput AWS API Documentation
     #
     class CreateLoadBalancerOutput < Struct.new(
       :load_balancers)
@@ -315,6 +335,8 @@ module Aws::ElasticLoadBalancingV2
     #   group.
     #   @return [Array<Types::Action>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleInput AWS API Documentation
+    #
     class CreateRuleInput < Struct.new(
       :listener_arn,
       :conditions,
@@ -328,6 +350,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] rules
     #   Information about the rule.
     #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateRuleOutput AWS API Documentation
     #
     class CreateRuleOutput < Struct.new(
       :rules)
@@ -414,6 +438,8 @@ module Aws::ElasticLoadBalancingV2
     #   target. The default is 200.
     #   @return [Types::Matcher]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupInput AWS API Documentation
+    #
     class CreateTargetGroupInput < Struct.new(
       :name,
       :protocol,
@@ -436,6 +462,8 @@ module Aws::ElasticLoadBalancingV2
     #   Information about the target group.
     #   @return [Array<Types::TargetGroup>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateTargetGroupOutput AWS API Documentation
+    #
     class CreateTargetGroupOutput < Struct.new(
       :target_groups)
       include Aws::Structure
@@ -454,12 +482,16 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the listener.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteListenerInput AWS API Documentation
+    #
     class DeleteListenerInput < Struct.new(
       :listener_arn)
       include Aws::Structure
     end
 
     # Contains the output of DeleteListener.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteListenerOutput AWS API Documentation
     #
     class DeleteListenerOutput < Aws::EmptyStructure; end
 
@@ -476,12 +508,16 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteLoadBalancerInput AWS API Documentation
+    #
     class DeleteLoadBalancerInput < Struct.new(
       :load_balancer_arn)
       include Aws::Structure
     end
 
     # Contains the output of DeleteLoadBalancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteLoadBalancerOutput AWS API Documentation
     #
     class DeleteLoadBalancerOutput < Aws::EmptyStructure; end
 
@@ -498,12 +534,16 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteRuleInput AWS API Documentation
+    #
     class DeleteRuleInput < Struct.new(
       :rule_arn)
       include Aws::Structure
     end
 
     # Contains the output of DeleteRule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteRuleOutput AWS API Documentation
     #
     class DeleteRuleOutput < Aws::EmptyStructure; end
 
@@ -520,12 +560,16 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroupInput AWS API Documentation
+    #
     class DeleteTargetGroupInput < Struct.new(
       :target_group_arn)
       include Aws::Structure
     end
 
     # Contains the output of DeleteTargetGroup.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroupOutput AWS API Documentation
     #
     class DeleteTargetGroupOutput < Aws::EmptyStructure; end
 
@@ -554,6 +598,8 @@ module Aws::ElasticLoadBalancingV2
     #   deregister it.
     #   @return [Array<Types::TargetDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeregisterTargetsInput AWS API Documentation
+    #
     class DeregisterTargetsInput < Struct.new(
       :target_group_arn,
       :targets)
@@ -561,6 +607,8 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Contains the output of DeregisterTargets.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeregisterTargetsOutput AWS API Documentation
     #
     class DeregisterTargetsOutput < Aws::EmptyStructure; end
 
@@ -593,6 +641,8 @@ module Aws::ElasticLoadBalancingV2
     #   The maximum number of results to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenersInput AWS API Documentation
+    #
     class DescribeListenersInput < Struct.new(
       :load_balancer_arn,
       :listener_arns,
@@ -611,6 +661,8 @@ module Aws::ElasticLoadBalancingV2
     #   The marker to use when requesting the next set of results. If there
     #   are no additional results, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeListenersOutput AWS API Documentation
     #
     class DescribeListenersOutput < Struct.new(
       :listeners,
@@ -631,6 +683,8 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the load balancer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancerAttributesInput AWS API Documentation
+    #
     class DescribeLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn)
       include Aws::Structure
@@ -641,6 +695,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] attributes
     #   Information about the load balancer attributes.
     #   @return [Array<Types::LoadBalancerAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancerAttributesOutput AWS API Documentation
     #
     class DescribeLoadBalancerAttributesOutput < Struct.new(
       :attributes)
@@ -676,6 +732,8 @@ module Aws::ElasticLoadBalancingV2
     #   The maximum number of results to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancersInput AWS API Documentation
+    #
     class DescribeLoadBalancersInput < Struct.new(
       :load_balancer_arns,
       :names,
@@ -694,6 +752,8 @@ module Aws::ElasticLoadBalancingV2
     #   The marker to use when requesting the next set of results. If there
     #   are no additional results, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancersOutput AWS API Documentation
     #
     class DescribeLoadBalancersOutput < Struct.new(
       :load_balancers,
@@ -719,6 +779,8 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Names (ARN) of the rules.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRulesInput AWS API Documentation
+    #
     class DescribeRulesInput < Struct.new(
       :listener_arn,
       :rule_arns)
@@ -730,6 +792,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] rules
     #   Information about the rules.
     #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeRulesOutput AWS API Documentation
     #
     class DescribeRulesOutput < Struct.new(
       :rules)
@@ -760,6 +824,8 @@ module Aws::ElasticLoadBalancingV2
     #   The maximum number of results to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPoliciesInput AWS API Documentation
+    #
     class DescribeSSLPoliciesInput < Struct.new(
       :names,
       :marker,
@@ -777,6 +843,8 @@ module Aws::ElasticLoadBalancingV2
     #   The marker to use when requesting the next set of results. If there
     #   are no additional results, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeSSLPoliciesOutput AWS API Documentation
     #
     class DescribeSSLPoliciesOutput < Struct.new(
       :ssl_policies,
@@ -797,6 +865,8 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Names (ARN) of the resources.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTagsInput AWS API Documentation
+    #
     class DescribeTagsInput < Struct.new(
       :resource_arns)
       include Aws::Structure
@@ -807,6 +877,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] tag_descriptions
     #   Information about the tags.
     #   @return [Array<Types::TagDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTagsOutput AWS API Documentation
     #
     class DescribeTagsOutput < Struct.new(
       :tag_descriptions)
@@ -826,6 +898,8 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the target group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupAttributesInput AWS API Documentation
+    #
     class DescribeTargetGroupAttributesInput < Struct.new(
       :target_group_arn)
       include Aws::Structure
@@ -836,6 +910,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] attributes
     #   Information about the target group attributes
     #   @return [Array<Types::TargetGroupAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupAttributesOutput AWS API Documentation
     #
     class DescribeTargetGroupAttributesOutput < Struct.new(
       :attributes)
@@ -876,6 +952,8 @@ module Aws::ElasticLoadBalancingV2
     #   The maximum number of results to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupsInput AWS API Documentation
+    #
     class DescribeTargetGroupsInput < Struct.new(
       :load_balancer_arn,
       :target_group_arns,
@@ -895,6 +973,8 @@ module Aws::ElasticLoadBalancingV2
     #   The marker to use when requesting the next set of results. If there
     #   are no additional results, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetGroupsOutput AWS API Documentation
     #
     class DescribeTargetGroupsOutput < Struct.new(
       :target_groups,
@@ -925,6 +1005,8 @@ module Aws::ElasticLoadBalancingV2
     #   The targets.
     #   @return [Array<Types::TargetDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealthInput AWS API Documentation
+    #
     class DescribeTargetHealthInput < Struct.new(
       :target_group_arn,
       :targets)
@@ -936,6 +1018,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] target_health_descriptions
     #   Information about the health of the targets.
     #   @return [Array<Types::TargetHealthDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeTargetHealthOutput AWS API Documentation
     #
     class DescribeTargetHealthOutput < Struct.new(
       :target_health_descriptions)
@@ -973,6 +1057,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] default_actions
     #   The default actions for the listener.
     #   @return [Array<Types::Action>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Listener AWS API Documentation
     #
     class Listener < Struct.new(
       :listener_arn,
@@ -1042,6 +1128,8 @@ module Aws::ElasticLoadBalancingV2
     #   The IDs of the security groups for the load balancer.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancer AWS API Documentation
+    #
     class LoadBalancer < Struct.new(
       :load_balancer_arn,
       :dns_name,
@@ -1094,6 +1182,8 @@ module Aws::ElasticLoadBalancingV2
     #   The value of the attribute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerAttribute AWS API Documentation
+    #
     class LoadBalancerAttribute < Struct.new(
       :key,
       :value)
@@ -1112,6 +1202,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] reason
     #   A description of the state.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancerState AWS API Documentation
     #
     class LoadBalancerState < Struct.new(
       :code,
@@ -1134,6 +1226,8 @@ module Aws::ElasticLoadBalancingV2
     #   values (for example, "200,202") or a range of values (for example,
     #   "200-299").
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Matcher AWS API Documentation
     #
     class Matcher < Struct.new(
       :http_code)
@@ -1188,6 +1282,8 @@ module Aws::ElasticLoadBalancingV2
     #   The default actions.
     #   @return [Array<Types::Action>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerInput AWS API Documentation
+    #
     class ModifyListenerInput < Struct.new(
       :listener_arn,
       :port,
@@ -1203,6 +1299,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] listeners
     #   Information about the modified listeners.
     #   @return [Array<Types::Listener>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyListenerOutput AWS API Documentation
     #
     class ModifyListenerOutput < Struct.new(
       :listeners)
@@ -1232,6 +1330,8 @@ module Aws::ElasticLoadBalancingV2
     #   The load balancer attributes.
     #   @return [Array<Types::LoadBalancerAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyLoadBalancerAttributesInput AWS API Documentation
+    #
     class ModifyLoadBalancerAttributesInput < Struct.new(
       :load_balancer_arn,
       :attributes)
@@ -1243,6 +1343,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] attributes
     #   Information about the load balancer attributes.
     #   @return [Array<Types::LoadBalancerAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyLoadBalancerAttributesOutput AWS API Documentation
     #
     class ModifyLoadBalancerAttributesOutput < Struct.new(
       :attributes)
@@ -1282,6 +1384,8 @@ module Aws::ElasticLoadBalancingV2
     #   The actions.
     #   @return [Array<Types::Action>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleInput AWS API Documentation
+    #
     class ModifyRuleInput < Struct.new(
       :rule_arn,
       :conditions,
@@ -1294,6 +1398,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] rules
     #   Information about the rule.
     #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyRuleOutput AWS API Documentation
     #
     class ModifyRuleOutput < Struct.new(
       :rules)
@@ -1323,6 +1429,8 @@ module Aws::ElasticLoadBalancingV2
     #   The attributes.
     #   @return [Array<Types::TargetGroupAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributesInput AWS API Documentation
+    #
     class ModifyTargetGroupAttributesInput < Struct.new(
       :target_group_arn,
       :attributes)
@@ -1334,6 +1442,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] attributes
     #   Information about the attributes.
     #   @return [Array<Types::TargetGroupAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupAttributesOutput AWS API Documentation
     #
     class ModifyTargetGroupAttributesOutput < Struct.new(
       :attributes)
@@ -1400,6 +1510,8 @@ module Aws::ElasticLoadBalancingV2
     #   target.
     #   @return [Types::Matcher]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupInput AWS API Documentation
+    #
     class ModifyTargetGroupInput < Struct.new(
       :target_group_arn,
       :health_check_protocol,
@@ -1418,6 +1530,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] target_groups
     #   Information about the target group.
     #   @return [Array<Types::TargetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/ModifyTargetGroupOutput AWS API Documentation
     #
     class ModifyTargetGroupOutput < Struct.new(
       :target_groups)
@@ -1450,6 +1564,8 @@ module Aws::ElasticLoadBalancingV2
     #   port.
     #   @return [Array<Types::TargetDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargetsInput AWS API Documentation
+    #
     class RegisterTargetsInput < Struct.new(
       :target_group_arn,
       :targets)
@@ -1457,6 +1573,8 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Contains the output of RegisterTargets.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargetsOutput AWS API Documentation
     #
     class RegisterTargetsOutput < Aws::EmptyStructure; end
 
@@ -1478,6 +1596,8 @@ module Aws::ElasticLoadBalancingV2
     #   The tag keys for the tags to remove.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTagsInput AWS API Documentation
+    #
     class RemoveTagsInput < Struct.new(
       :resource_arns,
       :tag_keys)
@@ -1485,6 +1605,8 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # Contains the output of RemoveTags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTagsOutput AWS API Documentation
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
@@ -1509,6 +1631,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] is_default
     #   Indicates whether this is the default rule.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Rule AWS API Documentation
     #
     class Rule < Struct.new(
       :rule_arn,
@@ -1550,6 +1674,8 @@ module Aws::ElasticLoadBalancingV2
     #   * ? (matches exactly 1 character)
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RuleCondition AWS API Documentation
+    #
     class RuleCondition < Struct.new(
       :field,
       :values)
@@ -1573,6 +1699,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] priority
     #   The rule priority.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RulePriorityPair AWS API Documentation
     #
     class RulePriorityPair < Struct.new(
       :rule_arn,
@@ -1598,6 +1726,8 @@ module Aws::ElasticLoadBalancingV2
     #   The rule priorities.
     #   @return [Array<Types::RulePriorityPair>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePrioritiesInput AWS API Documentation
+    #
     class SetRulePrioritiesInput < Struct.new(
       :rule_priorities)
       include Aws::Structure
@@ -1608,6 +1738,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] rules
     #   Information about the rules.
     #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetRulePrioritiesOutput AWS API Documentation
     #
     class SetRulePrioritiesOutput < Struct.new(
       :rules)
@@ -1632,6 +1764,8 @@ module Aws::ElasticLoadBalancingV2
     #   The IDs of the security groups.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroupsInput AWS API Documentation
+    #
     class SetSecurityGroupsInput < Struct.new(
       :load_balancer_arn,
       :security_groups)
@@ -1643,6 +1777,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups associated with the load balancer.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSecurityGroupsOutput AWS API Documentation
     #
     class SetSecurityGroupsOutput < Struct.new(
       :security_group_ids)
@@ -1668,6 +1804,8 @@ module Aws::ElasticLoadBalancingV2
     #   can add only one subnet per Availability Zone.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsInput AWS API Documentation
+    #
     class SetSubnetsInput < Struct.new(
       :load_balancer_arn,
       :subnets)
@@ -1679,6 +1817,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] availability_zones
     #   Information about the subnet and Availability Zone.
     #   @return [Array<Types::AvailabilityZone>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetSubnetsOutput AWS API Documentation
     #
     class SetSubnetsOutput < Struct.new(
       :availability_zones)
@@ -1698,6 +1838,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] name
     #   The name of the policy.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SslPolicy AWS API Documentation
     #
     class SslPolicy < Struct.new(
       :ssl_protocols,
@@ -1724,6 +1866,8 @@ module Aws::ElasticLoadBalancingV2
     #   The value of the tag.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -1739,6 +1883,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] tags
     #   Information about the tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TagDescription AWS API Documentation
     #
     class TagDescription < Struct.new(
       :resource_arn,
@@ -1763,6 +1909,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] port
     #   The port on which the target is listening.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetDescription AWS API Documentation
     #
     class TargetDescription < Struct.new(
       :id,
@@ -1834,6 +1982,8 @@ module Aws::ElasticLoadBalancingV2
     #   traffic to this target group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroup AWS API Documentation
+    #
     class TargetGroup < Struct.new(
       :target_group_arn,
       :target_group_name,
@@ -1887,6 +2037,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] value
     #   The value of the attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetGroupAttribute AWS API Documentation
     #
     class TargetGroupAttribute < Struct.new(
       :key,
@@ -1958,6 +2110,8 @@ module Aws::ElasticLoadBalancingV2
     #   If the state is `healthy`, a description is not provided.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetHealth AWS API Documentation
+    #
     class TargetHealth < Struct.new(
       :state,
       :reason,
@@ -1978,6 +2132,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] target_health
     #   The health information for the target.
     #   @return [Types::TargetHealth]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/TargetHealthDescription AWS API Documentation
     #
     class TargetHealthDescription < Struct.new(
       :target,

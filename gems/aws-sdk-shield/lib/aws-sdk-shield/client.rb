@@ -178,6 +178,8 @@ module Aws::Shield
     #
     #   resp.protection_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateProtection AWS API Documentation
+    #
     # @overload create_protection(params = {})
     # @param [Hash] params ({})
     def create_protection(params = {}, options = {})
@@ -188,6 +190,8 @@ module Aws::Shield
     # Activates AWS Shield Advanced for an account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/CreateSubscription AWS API Documentation
     #
     # @overload create_subscription(params = {})
     # @param [Hash] params ({})
@@ -209,6 +213,8 @@ module Aws::Shield
     #     protection_id: "ProtectionId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteProtection AWS API Documentation
+    #
     # @overload delete_protection(params = {})
     # @param [Hash] params ({})
     def delete_protection(params = {}, options = {})
@@ -219,6 +225,8 @@ module Aws::Shield
     # Removes AWS Shield Advanced from an account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DeleteSubscription AWS API Documentation
     #
     # @overload delete_subscription(params = {})
     # @param [Hash] params ({})
@@ -277,6 +285,8 @@ module Aws::Shield
     #   resp.attack.mitigations #=> Array
     #   resp.attack.mitigations[0].mitigation_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeAttack AWS API Documentation
+    #
     # @overload describe_attack(params = {})
     # @param [Hash] params ({})
     def describe_attack(params = {}, options = {})
@@ -306,6 +316,8 @@ module Aws::Shield
     #   resp.protection.name #=> String
     #   resp.protection.resource_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection AWS API Documentation
+    #
     # @overload describe_protection(params = {})
     # @param [Hash] params ({})
     def describe_protection(params = {}, options = {})
@@ -324,6 +336,8 @@ module Aws::Shield
     #
     #   resp.subscription.start_time #=> Time
     #   resp.subscription.time_commitment_in_seconds #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeSubscription AWS API Documentation
     #
     # @overload describe_subscription(params = {})
     # @param [Hash] params ({})
@@ -386,6 +400,8 @@ module Aws::Shield
     #   resp.attack_summaries[0].attack_vectors[0].vector_type #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListAttacks AWS API Documentation
+    #
     # @overload list_attacks(params = {})
     # @param [Hash] params ({})
     def list_attacks(params = {}, options = {})
@@ -422,6 +438,8 @@ module Aws::Shield
     #   resp.protections[0].name #=> String
     #   resp.protections[0].resource_arn #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections AWS API Documentation
     #
     # @overload list_protections(params = {})
     # @param [Hash] params ({})

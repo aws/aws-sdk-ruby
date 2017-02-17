@@ -169,6 +169,8 @@ module Aws::Snowball
     #     cluster_id: "ClusterId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelCluster AWS API Documentation
+    #
     # @overload cancel_cluster(params = {})
     # @param [Hash] params ({})
     def cancel_cluster(params = {}, options = {})
@@ -192,6 +194,8 @@ module Aws::Snowball
     #   resp = client.cancel_job({
     #     job_id: "JobId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJob AWS API Documentation
     #
     # @overload cancel_job(params = {})
     # @param [Hash] params ({})
@@ -236,6 +240,8 @@ module Aws::Snowball
     # @example Response structure
     #
     #   resp.address_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddress AWS API Documentation
     #
     # @overload create_address(params = {})
     # @param [Hash] params ({})
@@ -354,6 +360,8 @@ module Aws::Snowball
     # @example Response structure
     #
     #   resp.cluster_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateCluster AWS API Documentation
     #
     # @overload create_cluster(params = {})
     # @param [Hash] params ({})
@@ -494,6 +502,8 @@ module Aws::Snowball
     #
     #   resp.job_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJob AWS API Documentation
+    #
     # @overload create_job(params = {})
     # @param [Hash] params ({})
     def create_job(params = {}, options = {})
@@ -532,6 +542,8 @@ module Aws::Snowball
     #   resp.address.country #=> String
     #   resp.address.postal_code #=> String
     #   resp.address.phone_number #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress AWS API Documentation
     #
     # @overload describe_address(params = {})
     # @param [Hash] params ({})
@@ -583,6 +595,8 @@ module Aws::Snowball
     #   resp.addresses[0].phone_number #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses AWS API Documentation
+    #
     # @overload describe_addresses(params = {})
     # @param [Hash] params ({})
     def describe_addresses(params = {}, options = {})
@@ -630,6 +644,8 @@ module Aws::Snowball
     #   resp.cluster_metadata.notification.job_states_to_notify #=> Array
     #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
     # @overload describe_cluster(params = {})
     # @param [Hash] params ({})
@@ -730,6 +746,8 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].job_log_info.job_failure_log_uri #=> String
     #   resp.sub_job_metadata[0].cluster_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
+    #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
     def describe_job(params = {}, options = {})
@@ -775,6 +793,8 @@ module Aws::Snowball
     #
     #   resp.manifest_uri #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifest AWS API Documentation
+    #
     # @overload get_job_manifest(params = {})
     # @param [Hash] params ({})
     def get_job_manifest(params = {}, options = {})
@@ -814,6 +834,8 @@ module Aws::Snowball
     #
     #   resp.unlock_code #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCode AWS API Documentation
+    #
     # @overload get_job_unlock_code(params = {})
     # @param [Hash] params ({})
     def get_job_unlock_code(params = {}, options = {})
@@ -837,6 +859,8 @@ module Aws::Snowball
     #
     #   resp.snowball_limit #=> Integer
     #   resp.snowballs_in_use #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsage AWS API Documentation
     #
     # @overload get_snowball_usage(params = {})
     # @param [Hash] params ({})
@@ -886,6 +910,8 @@ module Aws::Snowball
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobs AWS API Documentation
+    #
     # @overload list_cluster_jobs(params = {})
     # @param [Hash] params ({})
     def list_cluster_jobs(params = {}, options = {})
@@ -925,6 +951,8 @@ module Aws::Snowball
     #   resp.cluster_list_entries[0].creation_date #=> Time
     #   resp.cluster_list_entries[0].description #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusters AWS API Documentation
     #
     # @overload list_clusters(params = {})
     # @param [Hash] params ({})
@@ -971,6 +999,8 @@ module Aws::Snowball
     #   resp.job_list_entries[0].creation_date #=> Time
     #   resp.job_list_entries[0].description #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobs AWS API Documentation
     #
     # @overload list_jobs(params = {})
     # @param [Hash] params ({})
@@ -1052,6 +1082,8 @@ module Aws::Snowball
     #       notify_all: false,
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateCluster AWS API Documentation
     #
     # @overload update_cluster(params = {})
     # @param [Hash] params ({})
@@ -1138,6 +1170,8 @@ module Aws::Snowball
     #     description: "String",
     #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob AWS API Documentation
     #
     # @overload update_job(params = {})
     # @param [Hash] params ({})

@@ -183,6 +183,8 @@ module Aws::CloudTrail
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/AddTags AWS API Documentation
+    #
     # @overload add_tags(params = {})
     # @param [Hash] params ({})
     def add_tags(params = {}, options = {})
@@ -327,6 +329,8 @@ module Aws::CloudTrail
     #   resp.cloud_watch_logs_role_arn #=> String
     #   resp.kms_key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrail AWS API Documentation
+    #
     # @overload create_trail(params = {})
     # @param [Hash] params ({})
     def create_trail(params = {}, options = {})
@@ -351,6 +355,8 @@ module Aws::CloudTrail
     #   resp = client.delete_trail({
     #     name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrail AWS API Documentation
     #
     # @overload delete_trail(params = {})
     # @param [Hash] params ({})
@@ -419,6 +425,8 @@ module Aws::CloudTrail
     #   resp.trail_list[0].kms_key_id #=> String
     #   resp.trail_list[0].has_custom_event_selectors #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails AWS API Documentation
+    #
     # @overload describe_trails(params = {})
     # @param [Hash] params ({})
     def describe_trails(params = {}, options = {})
@@ -485,6 +493,8 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].type #=> String
     #   resp.event_selectors[0].data_resources[0].values #=> Array
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventSelectors AWS API Documentation
     #
     # @overload get_event_selectors(params = {})
     # @param [Hash] params ({})
@@ -554,6 +564,8 @@ module Aws::CloudTrail
     #   resp.time_logging_started #=> String
     #   resp.time_logging_stopped #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrailStatus AWS API Documentation
+    #
     # @overload get_trail_status(params = {})
     # @param [Hash] params ({})
     def get_trail_status(params = {}, options = {})
@@ -608,6 +620,8 @@ module Aws::CloudTrail
     #   resp.public_key_list[0].fingerprint #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListPublicKeys AWS API Documentation
+    #
     # @overload list_public_keys(params = {})
     # @param [Hash] params ({})
     def list_public_keys(params = {}, options = {})
@@ -646,6 +660,8 @@ module Aws::CloudTrail
     #   resp.resource_tag_list[0].tags_list[0].key #=> String
     #   resp.resource_tag_list[0].tags_list[0].value #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListTags AWS API Documentation
     #
     # @overload list_tags(params = {})
     # @param [Hash] params ({})
@@ -739,6 +755,8 @@ module Aws::CloudTrail
     #   resp.events[0].resources[0].resource_name #=> String
     #   resp.events[0].cloud_trail_event #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/LookupEvents AWS API Documentation
     #
     # @overload lookup_events(params = {})
     # @param [Hash] params ({})
@@ -841,6 +859,8 @@ module Aws::CloudTrail
     #   resp.event_selectors[0].data_resources[0].values #=> Array
     #   resp.event_selectors[0].data_resources[0].values[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutEventSelectors AWS API Documentation
+    #
     # @overload put_event_selectors(params = {})
     # @param [Hash] params ({})
     def put_event_selectors(params = {}, options = {})
@@ -873,6 +893,8 @@ module Aws::CloudTrail
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RemoveTags AWS API Documentation
+    #
     # @overload remove_tags(params = {})
     # @param [Hash] params ({})
     def remove_tags(params = {}, options = {})
@@ -899,6 +921,8 @@ module Aws::CloudTrail
     #   resp = client.start_logging({
     #     name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLogging AWS API Documentation
     #
     # @overload start_logging(params = {})
     # @param [Hash] params ({})
@@ -930,6 +954,8 @@ module Aws::CloudTrail
     #   resp = client.stop_logging({
     #     name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StopLogging AWS API Documentation
     #
     # @overload stop_logging(params = {})
     # @param [Hash] params ({})
@@ -1088,6 +1114,8 @@ module Aws::CloudTrail
     #   resp.cloud_watch_logs_role_arn #=> String
     #   resp.kms_key_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrail AWS API Documentation
+    #
     # @overload update_trail(params = {})
     # @param [Hash] params ({})
     def update_trail(params = {}, options = {})
@@ -1108,7 +1136,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

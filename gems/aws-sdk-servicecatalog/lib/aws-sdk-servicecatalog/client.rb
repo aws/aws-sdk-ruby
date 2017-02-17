@@ -179,6 +179,8 @@ module Aws::ServiceCatalog
     #     portfolio_id: "Id", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShare AWS API Documentation
+    #
     # @overload accept_portfolio_share(params = {})
     # @param [Hash] params ({})
     def accept_portfolio_share(params = {}, options = {})
@@ -220,6 +222,8 @@ module Aws::ServiceCatalog
     #     principal_type: "IAM", # required, accepts IAM
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociatePrincipalWithPortfolio AWS API Documentation
+    #
     # @overload associate_principal_with_portfolio(params = {})
     # @param [Hash] params ({})
     def associate_principal_with_portfolio(params = {}, options = {})
@@ -260,6 +264,8 @@ module Aws::ServiceCatalog
     #     portfolio_id: "Id", # required
     #     source_portfolio_id: "Id",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AssociateProductWithPortfolio AWS API Documentation
     #
     # @overload associate_product_with_portfolio(params = {})
     # @param [Hash] params ({})
@@ -331,6 +337,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.owner #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateConstraint AWS API Documentation
     #
     # @overload create_constraint(params = {})
     # @param [Hash] params ({})
@@ -406,6 +414,8 @@ module Aws::ServiceCatalog
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolio AWS API Documentation
+    #
     # @overload create_portfolio(params = {})
     # @param [Hash] params ({})
     def create_portfolio(params = {}, options = {})
@@ -442,6 +452,8 @@ module Aws::ServiceCatalog
     #     portfolio_id: "Id", # required
     #     account_id: "AccountId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreatePortfolioShare AWS API Documentation
     #
     # @overload create_portfolio_share(params = {})
     # @param [Hash] params ({})
@@ -562,6 +574,8 @@ module Aws::ServiceCatalog
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProduct AWS API Documentation
+    #
     # @overload create_product(params = {})
     # @param [Hash] params ({})
     def create_product(params = {}, options = {})
@@ -631,6 +645,8 @@ module Aws::ServiceCatalog
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisioningArtifact AWS API Documentation
+    #
     # @overload create_provisioning_artifact(params = {})
     # @param [Hash] params ({})
     def create_provisioning_artifact(params = {}, options = {})
@@ -663,6 +679,8 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteConstraint AWS API Documentation
     #
     # @overload delete_constraint(params = {})
     # @param [Hash] params ({})
@@ -698,6 +716,8 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolio AWS API Documentation
     #
     # @overload delete_portfolio(params = {})
     # @param [Hash] params ({})
@@ -736,6 +756,8 @@ module Aws::ServiceCatalog
     #     account_id: "AccountId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeletePortfolioShare AWS API Documentation
+    #
     # @overload delete_portfolio_share(params = {})
     # @param [Hash] params ({})
     def delete_portfolio_share(params = {}, options = {})
@@ -770,6 +792,8 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProduct AWS API Documentation
     #
     # @overload delete_product(params = {})
     # @param [Hash] params ({})
@@ -811,6 +835,8 @@ module Aws::ServiceCatalog
     #     product_id: "Id", # required
     #     provisioning_artifact_id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifact AWS API Documentation
     #
     # @overload delete_provisioning_artifact(params = {})
     # @param [Hash] params ({})
@@ -857,6 +883,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.owner #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeConstraint AWS API Documentation
     #
     # @overload describe_constraint(params = {})
     # @param [Hash] params ({})
@@ -906,6 +934,8 @@ module Aws::ServiceCatalog
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribePortfolio AWS API Documentation
     #
     # @overload describe_portfolio(params = {})
     # @param [Hash] params ({})
@@ -965,6 +995,8 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifacts[0].description #=> String
     #   resp.provisioning_artifacts[0].created_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProduct AWS API Documentation
+    #
     # @overload describe_product(params = {})
     # @param [Hash] params ({})
     def describe_product(params = {}, options = {})
@@ -1021,6 +1053,8 @@ module Aws::ServiceCatalog
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductAsAdmin AWS API Documentation
     #
     # @overload describe_product_as_admin(params = {})
     # @param [Hash] params ({})
@@ -1080,6 +1114,8 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifacts[0].description #=> String
     #   resp.provisioning_artifacts[0].created_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProductView AWS API Documentation
+    #
     # @overload describe_product_view(params = {})
     # @param [Hash] params ({})
     def describe_product_view(params = {}, options = {})
@@ -1132,6 +1168,8 @@ module Aws::ServiceCatalog
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningArtifact AWS API Documentation
     #
     # @overload describe_provisioning_artifact(params = {})
     # @param [Hash] params ({})
@@ -1199,6 +1237,8 @@ module Aws::ServiceCatalog
     #   resp.usage_instructions #=> Array
     #   resp.usage_instructions[0].type #=> String
     #   resp.usage_instructions[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters AWS API Documentation
     #
     # @overload describe_provisioning_parameters(params = {})
     # @param [Hash] params ({})
@@ -1278,6 +1318,8 @@ module Aws::ServiceCatalog
     #   resp.record_outputs[0].description #=> String
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeRecord AWS API Documentation
+    #
     # @overload describe_record(params = {})
     # @param [Hash] params ({})
     def describe_record(params = {}, options = {})
@@ -1316,6 +1358,8 @@ module Aws::ServiceCatalog
     #     principal_arn: "PrincipalARN", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociatePrincipalFromPortfolio AWS API Documentation
+    #
     # @overload disassociate_principal_from_portfolio(params = {})
     # @param [Hash] params ({})
     def disassociate_principal_from_portfolio(params = {}, options = {})
@@ -1352,6 +1396,8 @@ module Aws::ServiceCatalog
     #     product_id: "Id", # required
     #     portfolio_id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DisassociateProductFromPortfolio AWS API Documentation
     #
     # @overload disassociate_product_from_portfolio(params = {})
     # @param [Hash] params ({})
@@ -1407,6 +1453,8 @@ module Aws::ServiceCatalog
     #   resp.portfolio_details[0].created_time #=> Time
     #   resp.portfolio_details[0].provider_name #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListAcceptedPortfolioShares AWS API Documentation
     #
     # @overload list_accepted_portfolio_shares(params = {})
     # @param [Hash] params ({})
@@ -1468,6 +1516,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_details[0].description #=> String
     #   resp.constraint_details[0].owner #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListConstraintsForPortfolio AWS API Documentation
     #
     # @overload list_constraints_for_portfolio(params = {})
     # @param [Hash] params ({})
@@ -1533,6 +1583,8 @@ module Aws::ServiceCatalog
     #   resp.launch_path_summaries[0].name #=> String
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListLaunchPaths AWS API Documentation
+    #
     # @overload list_launch_paths(params = {})
     # @param [Hash] params ({})
     def list_launch_paths(params = {}, options = {})
@@ -1575,6 +1627,8 @@ module Aws::ServiceCatalog
     #   resp.account_ids #=> Array
     #   resp.account_ids[0] #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolioAccess AWS API Documentation
     #
     # @overload list_portfolio_access(params = {})
     # @param [Hash] params ({})
@@ -1629,6 +1683,8 @@ module Aws::ServiceCatalog
     #   resp.portfolio_details[0].created_time #=> Time
     #   resp.portfolio_details[0].provider_name #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfolios AWS API Documentation
     #
     # @overload list_portfolios(params = {})
     # @param [Hash] params ({})
@@ -1688,6 +1744,8 @@ module Aws::ServiceCatalog
     #   resp.portfolio_details[0].provider_name #=> String
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPortfoliosForProduct AWS API Documentation
+    #
     # @overload list_portfolios_for_product(params = {})
     # @param [Hash] params ({})
     def list_portfolios_for_product(params = {}, options = {})
@@ -1742,6 +1800,8 @@ module Aws::ServiceCatalog
     #   resp.principals[0].principal_type #=> String, one of "IAM"
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListPrincipalsForPortfolio AWS API Documentation
+    #
     # @overload list_principals_for_portfolio(params = {})
     # @param [Hash] params ({})
     def list_principals_for_portfolio(params = {}, options = {})
@@ -1788,6 +1848,8 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
     #   resp.provisioning_artifact_details[0].created_time #=> Time
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifacts AWS API Documentation
     #
     # @overload list_provisioning_artifacts(params = {})
     # @param [Hash] params ({})
@@ -1869,6 +1931,8 @@ module Aws::ServiceCatalog
     #   resp.record_details[0].record_tags[0].key #=> String
     #   resp.record_details[0].record_tags[0].value #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListRecordHistory AWS API Documentation
     #
     # @overload list_record_history(params = {})
     # @param [Hash] params ({})
@@ -1980,6 +2044,8 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionProduct AWS API Documentation
+    #
     # @overload provision_product(params = {})
     # @param [Hash] params ({})
     def provision_product(params = {}, options = {})
@@ -2012,6 +2078,8 @@ module Aws::ServiceCatalog
     #     accept_language: "AcceptLanguage",
     #     portfolio_id: "Id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RejectPortfolioShare AWS API Documentation
     #
     # @overload reject_portfolio_share(params = {})
     # @param [Hash] params ({})
@@ -2078,6 +2146,8 @@ module Aws::ServiceCatalog
     #   resp.provisioned_products[0].idempotency_token #=> String
     #   resp.provisioned_products[0].last_record_id #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ScanProvisionedProducts AWS API Documentation
     #
     # @overload scan_provisioned_products(params = {})
     # @param [Hash] params ({})
@@ -2164,6 +2234,8 @@ module Aws::ServiceCatalog
     #   resp.product_view_aggregations["ProductViewAggregationType"][0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.product_view_aggregations["ProductViewAggregationType"][0].approximate_count #=> Integer
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProducts AWS API Documentation
     #
     # @overload search_products(params = {})
     # @param [Hash] params ({})
@@ -2256,6 +2328,8 @@ module Aws::ServiceCatalog
     #   resp.product_view_details[0].created_time #=> Time
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProductsAsAdmin AWS API Documentation
+    #
     # @overload search_products_as_admin(params = {})
     # @param [Hash] params ({})
     def search_products_as_admin(params = {}, options = {})
@@ -2344,6 +2418,8 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/TerminateProvisionedProduct AWS API Documentation
+    #
     # @overload terminate_provisioned_product(params = {})
     # @param [Hash] params ({})
     def terminate_provisioned_product(params = {}, options = {})
@@ -2393,6 +2469,8 @@ module Aws::ServiceCatalog
     #   resp.constraint_detail.owner #=> String
     #   resp.constraint_parameters #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateConstraint AWS API Documentation
     #
     # @overload update_constraint(params = {})
     # @param [Hash] params ({})
@@ -2469,6 +2547,8 @@ module Aws::ServiceCatalog
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdatePortfolio AWS API Documentation
     #
     # @overload update_portfolio(params = {})
     # @param [Hash] params ({})
@@ -2567,6 +2647,8 @@ module Aws::ServiceCatalog
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProduct AWS API Documentation
     #
     # @overload update_product(params = {})
     # @param [Hash] params ({})
@@ -2672,6 +2754,8 @@ module Aws::ServiceCatalog
     #   resp.record_detail.record_tags[0].key #=> String
     #   resp.record_detail.record_tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisionedProduct AWS API Documentation
+    #
     # @overload update_provisioned_product(params = {})
     # @param [Hash] params ({})
     def update_provisioned_product(params = {}, options = {})
@@ -2733,6 +2817,8 @@ module Aws::ServiceCatalog
     #   resp.info #=> Hash
     #   resp.info["ProvisioningArtifactInfoKey"] #=> String
     #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/UpdateProvisioningArtifact AWS API Documentation
     #
     # @overload update_provisioning_artifact(params = {})
     # @param [Hash] params ({})

@@ -162,6 +162,8 @@ module Aws::CloudFormation
     #     stack_name: "StackName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack AWS API Documentation
+    #
     # @overload cancel_update_stack(params = {})
     # @param [Hash] params ({})
     def cancel_update_stack(params = {}, options = {})
@@ -259,6 +261,8 @@ module Aws::CloudFormation
     #     role_arn: "RoleARN",
     #     resources_to_skip: ["ResourceToSkip"],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback AWS API Documentation
     #
     # @overload continue_update_rollback(params = {})
     # @param [Hash] params ({})
@@ -470,6 +474,8 @@ module Aws::CloudFormation
     #
     #   resp.id #=> String
     #   resp.stack_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet AWS API Documentation
     #
     # @overload create_change_set(params = {})
     # @param [Hash] params ({})
@@ -684,6 +690,8 @@ module Aws::CloudFormation
     #
     #   resp.stack_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStack AWS API Documentation
+    #
     # @overload create_stack(params = {})
     # @param [Hash] params ({})
     def create_stack(params = {}, options = {})
@@ -713,6 +721,8 @@ module Aws::CloudFormation
     #     change_set_name: "ChangeSetNameOrId", # required
     #     stack_name: "StackNameOrId",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteChangeSet AWS API Documentation
     #
     # @overload delete_change_set(params = {})
     # @param [Hash] params ({})
@@ -758,6 +768,8 @@ module Aws::CloudFormation
     #     role_arn: "RoleARN",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStack AWS API Documentation
+    #
     # @overload delete_stack(params = {})
     # @param [Hash] params ({})
     def delete_stack(params = {}, options = {})
@@ -789,6 +801,8 @@ module Aws::CloudFormation
     #   resp.account_limits[0].name #=> String
     #   resp.account_limits[0].value #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeAccountLimits AWS API Documentation
     #
     # @overload describe_account_limits(params = {})
     # @param [Hash] params ({})
@@ -884,6 +898,8 @@ module Aws::CloudFormation
     #   resp.changes[0].resource_change.details[0].causing_entity #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeChangeSet AWS API Documentation
+    #
     # @overload describe_change_set(params = {})
     # @param [Hash] params ({})
     def describe_change_set(params = {}, options = {})
@@ -946,6 +962,8 @@ module Aws::CloudFormation
     #   resp.stack_events[0].resource_properties #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents AWS API Documentation
+    #
     # @overload describe_stack_events(params = {})
     # @param [Hash] params ({})
     def describe_stack_events(params = {}, options = {})
@@ -998,6 +1016,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_detail.resource_status_reason #=> String
     #   resp.stack_resource_detail.description #=> String
     #   resp.stack_resource_detail.metadata #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResource AWS API Documentation
     #
     # @overload describe_stack_resource(params = {})
     # @param [Hash] params ({})
@@ -1093,6 +1113,8 @@ module Aws::CloudFormation
     #   resp.stack_resources[0].resource_status_reason #=> String
     #   resp.stack_resources[0].description #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackResources AWS API Documentation
+    #
     # @overload describe_stack_resources(params = {})
     # @param [Hash] params ({})
     def describe_stack_resources(params = {}, options = {})
@@ -1166,6 +1188,8 @@ module Aws::CloudFormation
     #   resp.stacks[0].tags[0].value #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStacks AWS API Documentation
+    #
     # @overload describe_stacks(params = {})
     # @param [Hash] params ({})
     def describe_stacks(params = {}, options = {})
@@ -1226,6 +1250,8 @@ module Aws::CloudFormation
     #
     #   resp.url #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/EstimateTemplateCost AWS API Documentation
+    #
     # @overload estimate_template_cost(params = {})
     # @param [Hash] params ({})
     def estimate_template_cost(params = {}, options = {})
@@ -1263,6 +1289,8 @@ module Aws::CloudFormation
     #     stack_name: "StackNameOrId",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet AWS API Documentation
+    #
     # @overload execute_change_set(params = {})
     # @param [Hash] params ({})
     def execute_change_set(params = {}, options = {})
@@ -1290,6 +1318,8 @@ module Aws::CloudFormation
     # @example Response structure
     #
     #   resp.stack_policy_body #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetStackPolicy AWS API Documentation
     #
     # @overload get_stack_policy(params = {})
     # @param [Hash] params ({})
@@ -1352,6 +1382,8 @@ module Aws::CloudFormation
     #   resp.template_body #=> String
     #   resp.stages_available #=> Array
     #   resp.stages_available[0] #=> String, one of "Original", "Processed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplate AWS API Documentation
     #
     # @overload get_template(params = {})
     # @param [Hash] params ({})
@@ -1448,6 +1480,8 @@ module Aws::CloudFormation
     #   resp.declared_transforms #=> Array
     #   resp.declared_transforms[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/GetTemplateSummary AWS API Documentation
+    #
     # @overload get_template_summary(params = {})
     # @param [Hash] params ({})
     def get_template_summary(params = {}, options = {})
@@ -1493,6 +1527,8 @@ module Aws::CloudFormation
     #   resp.summaries[0].description #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListChangeSets AWS API Documentation
+    #
     # @overload list_change_sets(params = {})
     # @param [Hash] params ({})
     def list_change_sets(params = {}, options = {})
@@ -1535,6 +1571,8 @@ module Aws::CloudFormation
     #   resp.exports[0].name #=> String
     #   resp.exports[0].value #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListExports AWS API Documentation
     #
     # @overload list_exports(params = {})
     # @param [Hash] params ({})
@@ -1581,6 +1619,8 @@ module Aws::CloudFormation
     #   resp.imports #=> Array
     #   resp.imports[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListImports AWS API Documentation
     #
     # @overload list_imports(params = {})
     # @param [Hash] params ({})
@@ -1632,6 +1672,8 @@ module Aws::CloudFormation
     #   resp.stack_resource_summaries[0].resource_status_reason #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackResources AWS API Documentation
+    #
     # @overload list_stack_resources(params = {})
     # @param [Hash] params ({})
     def list_stack_resources(params = {}, options = {})
@@ -1681,6 +1723,8 @@ module Aws::CloudFormation
     #   resp.stack_summaries[0].stack_status_reason #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStacks AWS API Documentation
+    #
     # @overload list_stacks(params = {})
     # @param [Hash] params ({})
     def list_stacks(params = {}, options = {})
@@ -1718,6 +1762,8 @@ module Aws::CloudFormation
     #     stack_policy_body: "StackPolicyBody",
     #     stack_policy_url: "StackPolicyURL",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SetStackPolicy AWS API Documentation
     #
     # @overload set_stack_policy(params = {})
     # @param [Hash] params ({})
@@ -1764,6 +1810,8 @@ module Aws::CloudFormation
     #     unique_id: "ResourceSignalUniqueId", # required
     #     status: "SUCCESS", # required, accepts SUCCESS, FAILURE
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/SignalResource AWS API Documentation
     #
     # @overload signal_resource(params = {})
     # @param [Hash] params ({})
@@ -1987,6 +2035,8 @@ module Aws::CloudFormation
     #
     #   resp.stack_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStack AWS API Documentation
+    #
     # @overload update_stack(params = {})
     # @param [Hash] params ({})
     def update_stack(params = {}, options = {})
@@ -2052,6 +2102,8 @@ module Aws::CloudFormation
     #   resp.capabilities_reason #=> String
     #   resp.declared_transforms #=> Array
     #   resp.declared_transforms[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ValidateTemplate AWS API Documentation
     #
     # @overload validate_template(params = {})
     # @param [Hash] params ({})

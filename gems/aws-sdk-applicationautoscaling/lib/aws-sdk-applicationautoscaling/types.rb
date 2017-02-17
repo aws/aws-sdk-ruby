@@ -18,6 +18,8 @@ module Aws::ApplicationAutoScaling
     #   The Amazon Resource Name (ARN) of the alarm.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/Alarm AWS API Documentation
+    #
     class Alarm < Struct.new(
       :alarm_name,
       :alarm_arn)
@@ -79,6 +81,8 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
+    #
     class DeleteScalingPolicyRequest < Struct.new(
       :policy_name,
       :service_namespace,
@@ -87,6 +91,8 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyResponse AWS API Documentation
+    #
     class DeleteScalingPolicyResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeregisterScalableTargetRequest
@@ -140,6 +146,8 @@ module Aws::ApplicationAutoScaling
     #     count of an EMR Instance Group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
+    #
     class DeregisterScalableTargetRequest < Struct.new(
       :service_namespace,
       :resource_id,
@@ -147,6 +155,8 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetResponse AWS API Documentation
+    #
     class DeregisterScalableTargetResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeScalableTargetsRequest
@@ -220,6 +230,8 @@ module Aws::ApplicationAutoScaling
     #   The token for the next set of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargetsRequest AWS API Documentation
+    #
     class DescribeScalableTargetsRequest < Struct.new(
       :service_namespace,
       :resource_ids,
@@ -237,6 +249,8 @@ module Aws::ApplicationAutoScaling
     #   The token required to get the next set of results. This value is
     #   `null` if there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalableTargetsResponse AWS API Documentation
     #
     class DescribeScalableTargetsResponse < Struct.new(
       :scalable_targets,
@@ -314,6 +328,8 @@ module Aws::ApplicationAutoScaling
     #   The token for the next set of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivitiesRequest AWS API Documentation
+    #
     class DescribeScalingActivitiesRequest < Struct.new(
       :service_namespace,
       :resource_id,
@@ -331,6 +347,8 @@ module Aws::ApplicationAutoScaling
     #   The token required to get the next set of results. This value is
     #   `null` if there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingActivitiesResponse AWS API Documentation
     #
     class DescribeScalingActivitiesResponse < Struct.new(
       :scaling_activities,
@@ -413,6 +431,8 @@ module Aws::ApplicationAutoScaling
     #   The token for the next set of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPoliciesRequest AWS API Documentation
+    #
     class DescribeScalingPoliciesRequest < Struct.new(
       :policy_names,
       :service_namespace,
@@ -431,6 +451,8 @@ module Aws::ApplicationAutoScaling
     #   The token required to get the next set of results. This value is
     #   `null` if there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DescribeScalingPoliciesResponse AWS API Documentation
     #
     class DescribeScalingPoliciesResponse < Struct.new(
       :scaling_policies,
@@ -520,6 +542,8 @@ module Aws::ApplicationAutoScaling
     #   StepScalingPolicyConfiguration and StepAdjustment.
     #   @return [Types::StepScalingPolicyConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicyRequest AWS API Documentation
+    #
     class PutScalingPolicyRequest < Struct.new(
       :policy_name,
       :service_namespace,
@@ -533,6 +557,8 @@ module Aws::ApplicationAutoScaling
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the resulting scaling policy.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/PutScalingPolicyResponse AWS API Documentation
     #
     class PutScalingPolicyResponse < Struct.new(
       :policy_arn)
@@ -612,6 +638,8 @@ module Aws::ApplicationAutoScaling
     #   update one.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetRequest AWS API Documentation
+    #
     class RegisterScalableTargetRequest < Struct.new(
       :service_namespace,
       :resource_id,
@@ -622,6 +650,8 @@ module Aws::ApplicationAutoScaling
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/RegisterScalableTargetResponse AWS API Documentation
+    #
     class RegisterScalableTargetResponse < Aws::EmptyStructure; end
 
     # Represents a scalable target.
@@ -684,6 +714,8 @@ module Aws::ApplicationAutoScaling
     # @!attribute [rw] creation_time
     #   The Unix timestamp for when the scalable target was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalableTarget AWS API Documentation
     #
     class ScalableTarget < Struct.new(
       :service_namespace,
@@ -772,6 +804,8 @@ module Aws::ApplicationAutoScaling
     #   The details about the scaling activity.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalingActivity AWS API Documentation
+    #
     class ScalingActivity < Struct.new(
       :activity_id,
       :service_namespace,
@@ -854,6 +888,8 @@ module Aws::ApplicationAutoScaling
     #   The Unix timestamp for when the scaling policy was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/ScalingPolicy AWS API Documentation
+    #
     class ScalingPolicy < Struct.new(
       :policy_arn,
       :policy_name,
@@ -933,6 +969,8 @@ module Aws::ApplicationAutoScaling
     #   a negative number removes from the current scalable dimension.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepAdjustment AWS API Documentation
+    #
     class StepAdjustment < Struct.new(
       :metric_interval_lower_bound,
       :metric_interval_upper_bound,
@@ -1007,6 +1045,8 @@ module Aws::ApplicationAutoScaling
     #   The aggregation type for the CloudWatch metrics. Valid values are
     #   `Minimum`, `Maximum`, and `Average`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/StepScalingPolicyConfiguration AWS API Documentation
     #
     class StepScalingPolicyConfiguration < Struct.new(
       :adjustment_type,

@@ -43,6 +43,8 @@ module Aws::CognitoIdentityProvider
     #   An array of custom attributes, such as Mutable and Name.
     #   @return [Array<Types::SchemaAttributeType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddCustomAttributesRequest AWS API Documentation
+    #
     class AddCustomAttributesRequest < Struct.new(
       :user_pool_id,
       :custom_attributes)
@@ -51,6 +53,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server for the request to add custom
     # attributes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddCustomAttributesResponse AWS API Documentation
     #
     class AddCustomAttributesResponse < Aws::EmptyStructure; end
 
@@ -74,6 +78,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] group_name
     #   The group name.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroupRequest AWS API Documentation
     #
     class AdminAddUserToGroupRequest < Struct.new(
       :user_pool_id,
@@ -100,6 +106,8 @@ module Aws::CognitoIdentityProvider
     #   The user name for which you want to confirm user registration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpRequest AWS API Documentation
+    #
     class AdminConfirmSignUpRequest < Struct.new(
       :user_pool_id,
       :username)
@@ -108,6 +116,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server for the request to confirm
     # registration.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUpResponse AWS API Documentation
     #
     class AdminConfirmSignUpResponse < Aws::EmptyStructure; end
 
@@ -142,6 +152,8 @@ module Aws::CognitoIdentityProvider
     #   The message template to be used for the welcome message to new
     #   users.
     #   @return [Types::MessageTemplateType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserConfigType AWS API Documentation
     #
     class AdminCreateUserConfigType < Struct.new(
       :allow_admin_create_user_only,
@@ -278,6 +290,8 @@ module Aws::CognitoIdentityProvider
     #   is "SMS". More than one value can be specified.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserRequest AWS API Documentation
+    #
     class AdminCreateUserRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -296,6 +310,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user
     #   The user returned in the request to create a new user.
     #   @return [Types::UserType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUserResponse AWS API Documentation
     #
     class AdminCreateUserResponse < Struct.new(
       :user)
@@ -328,6 +344,8 @@ module Aws::CognitoIdentityProvider
     #   to delete.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserAttributesRequest AWS API Documentation
+    #
     class AdminDeleteUserAttributesRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -337,6 +355,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response received from the server for a request to
     # delete user attributes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserAttributesResponse AWS API Documentation
     #
     class AdminDeleteUserAttributesResponse < Aws::EmptyStructure; end
 
@@ -358,6 +378,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] username
     #   The user name of the user you wish to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserRequest AWS API Documentation
     #
     class AdminDeleteUserRequest < Struct.new(
       :user_pool_id,
@@ -384,6 +406,8 @@ module Aws::CognitoIdentityProvider
     #   The user name of the user you wish to disable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUserRequest AWS API Documentation
+    #
     class AdminDisableUserRequest < Struct.new(
       :user_pool_id,
       :username)
@@ -392,6 +416,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response received from the server to disable the user
     # as an administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUserResponse AWS API Documentation
     #
     class AdminDisableUserResponse < Aws::EmptyStructure; end
 
@@ -414,6 +440,8 @@ module Aws::CognitoIdentityProvider
     #   The user name of the user you wish to ebable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserRequest AWS API Documentation
+    #
     class AdminEnableUserRequest < Struct.new(
       :user_pool_id,
       :username)
@@ -422,6 +450,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server for the request to enable a
     # user as an administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUserResponse AWS API Documentation
     #
     class AdminEnableUserResponse < Aws::EmptyStructure; end
 
@@ -447,6 +477,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] device_key
     #   The device key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminForgetDeviceRequest AWS API Documentation
     #
     class AdminForgetDeviceRequest < Struct.new(
       :user_pool_id,
@@ -478,6 +510,8 @@ module Aws::CognitoIdentityProvider
     #   The user name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDeviceRequest AWS API Documentation
+    #
     class AdminGetDeviceRequest < Struct.new(
       :device_key,
       :user_pool_id,
@@ -490,6 +524,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] device
     #   The device.
     #   @return [Types::DeviceType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDeviceResponse AWS API Documentation
     #
     class AdminGetDeviceResponse < Struct.new(
       :device)
@@ -514,6 +550,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] username
     #   The user name of the user you wish to retrieve.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserRequest AWS API Documentation
     #
     class AdminGetUserRequest < Struct.new(
       :user_pool_id,
@@ -561,6 +599,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] mfa_options
     #   Specifies the options for MFA (e.g., email or phone number).
     #   @return [Array<Types::MFAOptionType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUserResponse AWS API Documentation
     #
     class AdminGetUserResponse < Struct.new(
       :username,
@@ -610,6 +650,8 @@ module Aws::CognitoIdentityProvider
     #   The client app metadata.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthRequest AWS API Documentation
+    #
     class AdminInitiateAuthRequest < Struct.new(
       :user_pool_id,
       :client_id,
@@ -636,6 +678,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] authentication_result
     #   The result of the authentication response.
     #   @return [Types::AuthenticationResultType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuthResponse AWS API Documentation
     #
     class AdminInitiateAuthResponse < Struct.new(
       :challenge_name,
@@ -673,6 +717,8 @@ module Aws::CognitoIdentityProvider
     #   The pagination token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevicesRequest AWS API Documentation
+    #
     class AdminListDevicesRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -690,6 +736,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] pagination_token
     #   The pagination token.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevicesResponse AWS API Documentation
     #
     class AdminListDevicesResponse < Struct.new(
       :devices,
@@ -725,6 +773,8 @@ module Aws::CognitoIdentityProvider
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUserRequest AWS API Documentation
+    #
     class AdminListGroupsForUserRequest < Struct.new(
       :username,
       :user_pool_id,
@@ -742,6 +792,8 @@ module Aws::CognitoIdentityProvider
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUserResponse AWS API Documentation
     #
     class AdminListGroupsForUserResponse < Struct.new(
       :groups,
@@ -770,6 +822,8 @@ module Aws::CognitoIdentityProvider
     #   The group name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroupRequest AWS API Documentation
+    #
     class AdminRemoveUserFromGroupRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -797,6 +851,8 @@ module Aws::CognitoIdentityProvider
     #   The user name of the user whose password you wish to reset.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPasswordRequest AWS API Documentation
+    #
     class AdminResetUserPasswordRequest < Struct.new(
       :user_pool_id,
       :username)
@@ -805,6 +861,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server to reset a user password as an
     # administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPasswordResponse AWS API Documentation
     #
     class AdminResetUserPasswordResponse < Aws::EmptyStructure; end
 
@@ -844,6 +902,8 @@ module Aws::CognitoIdentityProvider
     #   The session.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeRequest AWS API Documentation
+    #
     class AdminRespondToAuthChallengeRequest < Struct.new(
       :user_pool_id,
       :client_id,
@@ -871,6 +931,8 @@ module Aws::CognitoIdentityProvider
     #   The result returned by the server in response to the authentication
     #   request.
     #   @return [Types::AuthenticationResultType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallengeResponse AWS API Documentation
     #
     class AdminRespondToAuthChallengeResponse < Struct.new(
       :challenge_name,
@@ -909,6 +971,8 @@ module Aws::CognitoIdentityProvider
     #   Specifies the options for MFA (e.g., email or phone number).
     #   @return [Array<Types::MFAOptionType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettingsRequest AWS API Documentation
+    #
     class AdminSetUserSettingsRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -918,6 +982,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server to set user settings as an
     # administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettingsResponse AWS API Documentation
     #
     class AdminSetUserSettingsResponse < Aws::EmptyStructure; end
 
@@ -949,6 +1015,8 @@ module Aws::CognitoIdentityProvider
     #   The status indicating whether a device has been remembered or not.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateDeviceStatusRequest AWS API Documentation
+    #
     class AdminUpdateDeviceStatusRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -959,6 +1027,8 @@ module Aws::CognitoIdentityProvider
 
     # The status response from the request to update the device, as an
     # administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateDeviceStatusResponse AWS API Documentation
     #
     class AdminUpdateDeviceStatusResponse < Aws::EmptyStructure; end
 
@@ -993,6 +1063,8 @@ module Aws::CognitoIdentityProvider
     #   An array of name-value pairs representing user attributes.
     #   @return [Array<Types::AttributeType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesRequest AWS API Documentation
+    #
     class AdminUpdateUserAttributesRequest < Struct.new(
       :user_pool_id,
       :username,
@@ -1002,6 +1074,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server for the request to update user
     # attributes as an administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributesResponse AWS API Documentation
     #
     class AdminUpdateUserAttributesResponse < Aws::EmptyStructure; end
 
@@ -1023,6 +1097,8 @@ module Aws::CognitoIdentityProvider
     #   The user name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutRequest AWS API Documentation
+    #
     class AdminUserGlobalSignOutRequest < Struct.new(
       :user_pool_id,
       :username)
@@ -1030,6 +1106,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # The global sign-out response, as an administrator.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOutResponse AWS API Documentation
     #
     class AdminUserGlobalSignOutResponse < Aws::EmptyStructure; end
 
@@ -1050,6 +1128,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] value
     #   The value of the attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AttributeType AWS API Documentation
     #
     class AttributeType < Struct.new(
       :name,
@@ -1082,6 +1162,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] new_device_metadata
     #   The new device metadata from an authentication result.
     #   @return [Types::NewDeviceMetadataType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AuthenticationResultType AWS API Documentation
     #
     class AuthenticationResultType < Struct.new(
       :access_token,
@@ -1116,6 +1198,8 @@ module Aws::CognitoIdentityProvider
     #   The access token in the change password request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordRequest AWS API Documentation
+    #
     class ChangePasswordRequest < Struct.new(
       :previous_password,
       :proposed_password,
@@ -1124,6 +1208,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # The response from the server to the change password request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePasswordResponse AWS API Documentation
     #
     class ChangePasswordResponse < Aws::EmptyStructure; end
 
@@ -1140,6 +1226,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] attribute_name
     #   The name of the attribute in the code delivery details type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CodeDeliveryDetailsType AWS API Documentation
     #
     class CodeDeliveryDetailsType < Struct.new(
       :destination,
@@ -1179,6 +1267,8 @@ module Aws::CognitoIdentityProvider
     #   The device name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmDeviceRequest AWS API Documentation
+    #
     class ConfirmDeviceRequest < Struct.new(
       :access_token,
       :device_key,
@@ -1193,6 +1283,8 @@ module Aws::CognitoIdentityProvider
     #   Indicates whether the user confirmation is necessary to confirm the
     #   device response.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmDeviceResponse AWS API Documentation
     #
     class ConfirmDeviceResponse < Struct.new(
       :user_confirmation_necessary)
@@ -1237,6 +1329,8 @@ module Aws::CognitoIdentityProvider
     #   forgotten password.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPasswordRequest AWS API Documentation
+    #
     class ConfirmForgotPasswordRequest < Struct.new(
       :client_id,
       :secret_hash,
@@ -1248,6 +1342,8 @@ module Aws::CognitoIdentityProvider
 
     # The response from the server that results from a user's request to
     # retrieve a forgotten password.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPasswordResponse AWS API Documentation
     #
     class ConfirmForgotPasswordResponse < Aws::EmptyStructure; end
 
@@ -1293,6 +1389,8 @@ module Aws::CognitoIdentityProvider
     #   **AliasExistsException** error.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpRequest AWS API Documentation
+    #
     class ConfirmSignUpRequest < Struct.new(
       :client_id,
       :secret_hash,
@@ -1304,6 +1402,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server for the registration
     # confirmation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUpResponse AWS API Documentation
     #
     class ConfirmSignUpResponse < Aws::EmptyStructure; end
 
@@ -1354,6 +1454,8 @@ module Aws::CognitoIdentityProvider
     #   The default `Precedence` value is null.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroupRequest AWS API Documentation
+    #
     class CreateGroupRequest < Struct.new(
       :group_name,
       :user_pool_id,
@@ -1366,6 +1468,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] group
     #   The group object for the group.
     #   @return [Types::GroupType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroupResponse AWS API Documentation
     #
     class CreateGroupResponse < Struct.new(
       :group)
@@ -1397,6 +1501,8 @@ module Aws::CognitoIdentityProvider
     #   import job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJobRequest AWS API Documentation
+    #
     class CreateUserImportJobRequest < Struct.new(
       :job_name,
       :user_pool_id,
@@ -1410,6 +1516,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_import_job
     #   The job object that represents the user import job.
     #   @return [Types::UserImportJobType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJobResponse AWS API Documentation
     #
     class CreateUserImportJobResponse < Struct.new(
       :user_import_job)
@@ -1461,6 +1569,8 @@ module Aws::CognitoIdentityProvider
     #   The explicit authentication flows.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientRequest AWS API Documentation
+    #
     class CreateUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_name,
@@ -1477,6 +1587,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_pool_client
     #   The user pool client that was just created.
     #   @return [Types::UserPoolClientType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClientResponse AWS API Documentation
     #
     class CreateUserPoolClientResponse < Struct.new(
       :user_pool_client)
@@ -1631,6 +1743,8 @@ module Aws::CognitoIdentityProvider
     #   attributes can be standard or custom attributes.
     #   @return [Array<Types::SchemaAttributeType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolRequest AWS API Documentation
+    #
     class CreateUserPoolRequest < Struct.new(
       :pool_name,
       :policies,
@@ -1658,6 +1772,8 @@ module Aws::CognitoIdentityProvider
     #   A container for the user pool details.
     #   @return [Types::UserPoolType]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolResponse AWS API Documentation
+    #
     class CreateUserPoolResponse < Struct.new(
       :user_pool)
       include Aws::Structure
@@ -1678,6 +1794,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_pool_id
     #   The user pool ID for the user pool.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroupRequest AWS API Documentation
     #
     class DeleteGroupRequest < Struct.new(
       :group_name,
@@ -1704,6 +1822,8 @@ module Aws::CognitoIdentityProvider
     #   The access token used in the request to delete user attributes.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributesRequest AWS API Documentation
+    #
     class DeleteUserAttributesRequest < Struct.new(
       :user_attribute_names,
       :access_token)
@@ -1711,6 +1831,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # Represents the response from the server to delete user attributes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributesResponse AWS API Documentation
     #
     class DeleteUserAttributesResponse < Aws::EmptyStructure; end
 
@@ -1733,6 +1855,8 @@ module Aws::CognitoIdentityProvider
     #   The ID of the client associated with the user pool.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClientRequest AWS API Documentation
+    #
     class DeleteUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id)
@@ -1752,6 +1876,8 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolRequest AWS API Documentation
+    #
     class DeleteUserPoolRequest < Struct.new(
       :user_pool_id)
       include Aws::Structure
@@ -1769,6 +1895,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] access_token
     #   The access token from a request to delete a user.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserRequest AWS API Documentation
     #
     class DeleteUserRequest < Struct.new(
       :access_token)
@@ -1794,6 +1922,8 @@ module Aws::CognitoIdentityProvider
     #   The job ID for the user import job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJobRequest AWS API Documentation
+    #
     class DescribeUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id)
@@ -1806,6 +1936,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_import_job
     #   The job object that represents the user import job.
     #   @return [Types::UserImportJobType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJobResponse AWS API Documentation
     #
     class DescribeUserImportJobResponse < Struct.new(
       :user_import_job)
@@ -1830,6 +1962,8 @@ module Aws::CognitoIdentityProvider
     #   The ID of the client associated with the user pool.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClientRequest AWS API Documentation
+    #
     class DescribeUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id)
@@ -1843,6 +1977,8 @@ module Aws::CognitoIdentityProvider
     #   The user pool client from a server response to describe the user
     #   pool client.
     #   @return [Types::UserPoolClientType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClientResponse AWS API Documentation
     #
     class DescribeUserPoolClientResponse < Struct.new(
       :user_pool_client)
@@ -1862,6 +1998,8 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool you want to describe.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolRequest AWS API Documentation
+    #
     class DescribeUserPoolRequest < Struct.new(
       :user_pool_id)
       include Aws::Structure
@@ -1873,6 +2011,8 @@ module Aws::CognitoIdentityProvider
     #   The container of metadata returned by the server to describe the
     #   pool.
     #   @return [Types::UserPoolType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolResponse AWS API Documentation
     #
     class DescribeUserPoolResponse < Struct.new(
       :user_pool)
@@ -1898,6 +2038,8 @@ module Aws::CognitoIdentityProvider
     #   If true, a device is only remembered on user prompt.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceConfigurationType AWS API Documentation
+    #
     class DeviceConfigurationType < Struct.new(
       :challenge_required_on_new_device,
       :device_only_remembered_on_user_prompt)
@@ -1921,6 +2063,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] salt
     #   The salt.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceSecretVerifierConfigType AWS API Documentation
     #
     class DeviceSecretVerifierConfigType < Struct.new(
       :password_verifier,
@@ -1950,6 +2094,8 @@ module Aws::CognitoIdentityProvider
     #   The date in which the device was last authenticated.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeviceType AWS API Documentation
+    #
     class DeviceType < Struct.new(
       :device_key,
       :device_attributes,
@@ -1977,6 +2123,8 @@ module Aws::CognitoIdentityProvider
     #   The REPLY-TO email address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailConfigurationType AWS API Documentation
+    #
     class EmailConfigurationType < Struct.new(
       :source_arn,
       :reply_to_email_address)
@@ -2000,6 +2148,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] device_key
     #   The device key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgetDeviceRequest AWS API Documentation
     #
     class ForgetDeviceRequest < Struct.new(
       :access_token,
@@ -2033,6 +2183,8 @@ module Aws::CognitoIdentityProvider
     #   a forgotten password.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPasswordRequest AWS API Documentation
+    #
     class ForgotPasswordRequest < Struct.new(
       :client_id,
       :secret_hash,
@@ -2047,6 +2199,8 @@ module Aws::CognitoIdentityProvider
     #   The code delivery details returned by the server in response to the
     #   request to reset a password.
     #   @return [Types::CodeDeliveryDetailsType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPasswordResponse AWS API Documentation
     #
     class ForgotPasswordResponse < Struct.new(
       :code_delivery_details)
@@ -2068,6 +2222,8 @@ module Aws::CognitoIdentityProvider
     #   into.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeaderRequest AWS API Documentation
+    #
     class GetCSVHeaderRequest < Struct.new(
       :user_pool_id)
       include Aws::Structure
@@ -2084,6 +2240,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] csv_header
     #   The header information for the .csv file for the user import job.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeaderResponse AWS API Documentation
     #
     class GetCSVHeaderResponse < Struct.new(
       :user_pool_id,
@@ -2109,6 +2267,8 @@ module Aws::CognitoIdentityProvider
     #   The access token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDeviceRequest AWS API Documentation
+    #
     class GetDeviceRequest < Struct.new(
       :device_key,
       :access_token)
@@ -2120,6 +2280,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] device
     #   The device.
     #   @return [Types::DeviceType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDeviceResponse AWS API Documentation
     #
     class GetDeviceResponse < Struct.new(
       :device)
@@ -2142,6 +2304,8 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetGroupRequest AWS API Documentation
+    #
     class GetGroupRequest < Struct.new(
       :group_name,
       :user_pool_id)
@@ -2151,6 +2315,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] group
     #   The group object for the group.
     #   @return [Types::GroupType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetGroupResponse AWS API Documentation
     #
     class GetGroupResponse < Struct.new(
       :group)
@@ -2177,6 +2343,8 @@ module Aws::CognitoIdentityProvider
     #   attribute verification code.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCodeRequest AWS API Documentation
+    #
     class GetUserAttributeVerificationCodeRequest < Struct.new(
       :access_token,
       :attribute_name)
@@ -2190,6 +2358,8 @@ module Aws::CognitoIdentityProvider
     #   The code delivery details returned by the server in response to the
     #   request to get the user attribute verification code.
     #   @return [Types::CodeDeliveryDetailsType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCodeResponse AWS API Documentation
     #
     class GetUserAttributeVerificationCodeResponse < Struct.new(
       :code_delivery_details)
@@ -2209,6 +2379,8 @@ module Aws::CognitoIdentityProvider
     #   The access token returned by the server response to get information
     #   about the user.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserRequest AWS API Documentation
     #
     class GetUserRequest < Struct.new(
       :access_token)
@@ -2231,6 +2403,8 @@ module Aws::CognitoIdentityProvider
     #   Specifies the options for MFA (e.g., email or phone number).
     #   @return [Array<Types::MFAOptionType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserResponse AWS API Documentation
+    #
     class GetUserResponse < Struct.new(
       :username,
       :user_attributes,
@@ -2251,12 +2425,16 @@ module Aws::CognitoIdentityProvider
     #   The access token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOutRequest AWS API Documentation
+    #
     class GlobalSignOutRequest < Struct.new(
       :access_token)
       include Aws::Structure
     end
 
     # The response to the request to sign out all devices.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOutResponse AWS API Documentation
     #
     class GlobalSignOutResponse < Aws::EmptyStructure; end
 
@@ -2306,6 +2484,8 @@ module Aws::CognitoIdentityProvider
     #   The date the group was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GroupType AWS API Documentation
+    #
     class GroupType < Struct.new(
       :group_name,
       :user_pool_id,
@@ -2349,6 +2529,8 @@ module Aws::CognitoIdentityProvider
     #   The client ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuthRequest AWS API Documentation
+    #
     class InitiateAuthRequest < Struct.new(
       :auth_flow,
       :auth_parameters,
@@ -2375,6 +2557,8 @@ module Aws::CognitoIdentityProvider
     #   The result returned by the server in response to the request to
     #   initiate authentication.
     #   @return [Types::AuthenticationResultType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuthResponse AWS API Documentation
     #
     class InitiateAuthResponse < Struct.new(
       :challenge_name,
@@ -2432,6 +2616,8 @@ module Aws::CognitoIdentityProvider
     #   Verifies the authentication challenge response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/LambdaConfigType AWS API Documentation
+    #
     class LambdaConfigType < Struct.new(
       :pre_sign_up,
       :custom_message,
@@ -2467,6 +2653,8 @@ module Aws::CognitoIdentityProvider
     #   The pagination token for the list request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesRequest AWS API Documentation
+    #
     class ListDevicesRequest < Struct.new(
       :access_token,
       :limit,
@@ -2483,6 +2671,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] pagination_token
     #   The pagination token for the list device response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevicesResponse AWS API Documentation
     #
     class ListDevicesResponse < Struct.new(
       :devices,
@@ -2513,6 +2703,8 @@ module Aws::CognitoIdentityProvider
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroupsRequest AWS API Documentation
+    #
     class ListGroupsRequest < Struct.new(
       :user_pool_id,
       :limit,
@@ -2529,6 +2721,8 @@ module Aws::CognitoIdentityProvider
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroupsResponse AWS API Documentation
     #
     class ListGroupsResponse < Struct.new(
       :groups,
@@ -2562,6 +2756,8 @@ module Aws::CognitoIdentityProvider
     #   import jobs in the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobsRequest AWS API Documentation
+    #
     class ListUserImportJobsRequest < Struct.new(
       :user_pool_id,
       :max_results,
@@ -2580,6 +2776,8 @@ module Aws::CognitoIdentityProvider
     #   An identifier that can be used to return the next set of user import
     #   jobs in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobsResponse AWS API Documentation
     #
     class ListUserImportJobsResponse < Struct.new(
       :user_import_jobs,
@@ -2614,6 +2812,8 @@ module Aws::CognitoIdentityProvider
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClientsRequest AWS API Documentation
+    #
     class ListUserPoolClientsRequest < Struct.new(
       :user_pool_id,
       :max_results,
@@ -2632,6 +2832,8 @@ module Aws::CognitoIdentityProvider
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClientsResponse AWS API Documentation
     #
     class ListUserPoolClientsResponse < Struct.new(
       :user_pool_clients,
@@ -2660,6 +2862,8 @@ module Aws::CognitoIdentityProvider
     #   listing the user pools.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolsRequest AWS API Documentation
+    #
     class ListUserPoolsRequest < Struct.new(
       :next_token,
       :max_results)
@@ -2677,6 +2881,8 @@ module Aws::CognitoIdentityProvider
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolsResponse AWS API Documentation
     #
     class ListUserPoolsResponse < Struct.new(
       :user_pools,
@@ -2712,6 +2918,8 @@ module Aws::CognitoIdentityProvider
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroupRequest AWS API Documentation
+    #
     class ListUsersInGroupRequest < Struct.new(
       :user_pool_id,
       :group_name,
@@ -2729,6 +2937,8 @@ module Aws::CognitoIdentityProvider
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroupResponse AWS API Documentation
     #
     class ListUsersInGroupResponse < Struct.new(
       :users,
@@ -2771,6 +2981,8 @@ module Aws::CognitoIdentityProvider
     #   The filter for the list users request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersRequest AWS API Documentation
+    #
     class ListUsersRequest < Struct.new(
       :user_pool_id,
       :attributes_to_get,
@@ -2791,6 +3003,8 @@ module Aws::CognitoIdentityProvider
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersResponse AWS API Documentation
     #
     class ListUsersResponse < Struct.new(
       :users,
@@ -2817,6 +3031,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] attribute_name
     #   The attribute name of the MFA option type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/MFAOptionType AWS API Documentation
     #
     class MFAOptionType < Struct.new(
       :delivery_medium,
@@ -2847,6 +3063,8 @@ module Aws::CognitoIdentityProvider
     #   The subject line for email messages.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/MessageTemplateType AWS API Documentation
+    #
     class MessageTemplateType < Struct.new(
       :sms_message,
       :email_message,
@@ -2863,6 +3081,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] device_group_key
     #   The device group key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NewDeviceMetadataType AWS API Documentation
     #
     class NewDeviceMetadataType < Struct.new(
       :device_key,
@@ -2888,6 +3108,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] max_value
     #   The maximum value of an attribute that is of the number data type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/NumberAttributeConstraintsType AWS API Documentation
     #
     class NumberAttributeConstraintsType < Struct.new(
       :min_value,
@@ -2935,6 +3157,8 @@ module Aws::CognitoIdentityProvider
     #   required users to use at least one symbol in their password.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/PasswordPolicyType AWS API Documentation
+    #
     class PasswordPolicyType < Struct.new(
       :minimum_length,
       :require_uppercase,
@@ -2970,6 +3194,8 @@ module Aws::CognitoIdentityProvider
     #   code.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCodeRequest AWS API Documentation
+    #
     class ResendConfirmationCodeRequest < Struct.new(
       :client_id,
       :secret_hash,
@@ -2984,6 +3210,8 @@ module Aws::CognitoIdentityProvider
     #   The code delivery details returned by the server in response to the
     #   request to resend the confirmation code.
     #   @return [Types::CodeDeliveryDetailsType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCodeResponse AWS API Documentation
     #
     class ResendConfirmationCodeResponse < Struct.new(
       :code_delivery_details)
@@ -3020,6 +3248,8 @@ module Aws::CognitoIdentityProvider
     #   The responses to the authentication challenge.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeRequest AWS API Documentation
+    #
     class RespondToAuthChallengeRequest < Struct.new(
       :client_id,
       :challenge_name,
@@ -3046,6 +3276,8 @@ module Aws::CognitoIdentityProvider
     #   The result returned by the server in response to the request to
     #   respond to the authentication challenge.
     #   @return [Types::AuthenticationResultType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallengeResponse AWS API Documentation
     #
     class RespondToAuthChallengeResponse < Struct.new(
       :challenge_name,
@@ -3107,6 +3339,8 @@ module Aws::CognitoIdentityProvider
     #   Specifies the constraints for an attribute of the string type.
     #   @return [Types::StringAttributeConstraintsType]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SchemaAttributeType AWS API Documentation
+    #
     class SchemaAttributeType < Struct.new(
       :name,
       :attribute_data_type,
@@ -3141,6 +3375,8 @@ module Aws::CognitoIdentityProvider
     #   Specifies the options for MFA (e.g., email or phone number).
     #   @return [Array<Types::MFAOptionType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettingsRequest AWS API Documentation
+    #
     class SetUserSettingsRequest < Struct.new(
       :access_token,
       :mfa_options)
@@ -3148,6 +3384,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # The response from the server for a set user settings request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettingsResponse AWS API Documentation
     #
     class SetUserSettingsResponse < Aws::EmptyStructure; end
 
@@ -3201,6 +3439,8 @@ module Aws::CognitoIdentityProvider
     #   The validation data in the request to register a user.
     #   @return [Array<Types::AttributeType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpRequest AWS API Documentation
+    #
     class SignUpRequest < Struct.new(
       :client_id,
       :secret_hash,
@@ -3222,6 +3462,8 @@ module Aws::CognitoIdentityProvider
     #   The code delivery details returned by the server response to the
     #   user registration request.
     #   @return [Types::CodeDeliveryDetailsType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUpResponse AWS API Documentation
     #
     class SignUpResponse < Struct.new(
       :user_confirmed,
@@ -3248,6 +3490,8 @@ module Aws::CognitoIdentityProvider
     #   The external ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsConfigurationType AWS API Documentation
+    #
     class SmsConfigurationType < Struct.new(
       :sns_caller_arn,
       :external_id)
@@ -3273,6 +3517,8 @@ module Aws::CognitoIdentityProvider
     #   The job ID for the user import job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJobRequest AWS API Documentation
+    #
     class StartUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id)
@@ -3285,6 +3531,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_import_job
     #   The job object that represents the user import job.
     #   @return [Types::UserImportJobType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJobResponse AWS API Documentation
     #
     class StartUserImportJobResponse < Struct.new(
       :user_import_job)
@@ -3310,6 +3558,8 @@ module Aws::CognitoIdentityProvider
     #   The job ID for the user import job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJobRequest AWS API Documentation
+    #
     class StopUserImportJobRequest < Struct.new(
       :user_pool_id,
       :job_id)
@@ -3322,6 +3572,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] user_import_job
     #   The job object that represents the user import job.
     #   @return [Types::UserImportJobType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJobResponse AWS API Documentation
     #
     class StopUserImportJobResponse < Struct.new(
       :user_import_job)
@@ -3346,6 +3598,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] max_length
     #   The maximum length of an attribute value of the string type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StringAttributeConstraintsType AWS API Documentation
     #
     class StringAttributeConstraintsType < Struct.new(
       :min_length,
@@ -3376,6 +3630,8 @@ module Aws::CognitoIdentityProvider
     #   The status of whether a device is remembered.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatusRequest AWS API Documentation
+    #
     class UpdateDeviceStatusRequest < Struct.new(
       :access_token,
       :device_key,
@@ -3384,6 +3640,8 @@ module Aws::CognitoIdentityProvider
     end
 
     # The response to the request to update the device status.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatusResponse AWS API Documentation
     #
     class UpdateDeviceStatusResponse < Aws::EmptyStructure; end
 
@@ -3421,6 +3679,8 @@ module Aws::CognitoIdentityProvider
     #   [CreateGroupRequest](API_CreateGroupRequeste.html).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroupRequest AWS API Documentation
+    #
     class UpdateGroupRequest < Struct.new(
       :group_name,
       :user_pool_id,
@@ -3433,6 +3693,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] group
     #   The group object for the group.
     #   @return [Types::GroupType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroupResponse AWS API Documentation
     #
     class UpdateGroupResponse < Struct.new(
       :group)
@@ -3462,6 +3724,8 @@ module Aws::CognitoIdentityProvider
     #   The access token for the request to update user attributes.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserAttributesRequest AWS API Documentation
+    #
     class UpdateUserAttributesRequest < Struct.new(
       :user_attributes,
       :access_token)
@@ -3475,6 +3739,8 @@ module Aws::CognitoIdentityProvider
     #   The code delivery details list from the server for the request to
     #   update user attributes.
     #   @return [Array<Types::CodeDeliveryDetailsType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserAttributesResponse AWS API Documentation
     #
     class UpdateUserAttributesResponse < Struct.new(
       :code_delivery_details_list)
@@ -3525,6 +3791,8 @@ module Aws::CognitoIdentityProvider
     #   Explicit authentication flows.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientRequest AWS API Documentation
+    #
     class UpdateUserPoolClientRequest < Struct.new(
       :user_pool_id,
       :client_id,
@@ -3543,6 +3811,8 @@ module Aws::CognitoIdentityProvider
     #   The user pool client value from the response from the server when an
     #   update user pool client request is made.
     #   @return [Types::UserPoolClientType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClientResponse AWS API Documentation
     #
     class UpdateUserPoolClientResponse < Struct.new(
       :user_pool_client)
@@ -3679,6 +3949,8 @@ module Aws::CognitoIdentityProvider
     #   The configuration for AdminCreateUser requests.
     #   @return [Types::AdminCreateUserConfigType]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolRequest AWS API Documentation
+    #
     class UpdateUserPoolRequest < Struct.new(
       :user_pool_id,
       :policies,
@@ -3699,6 +3971,8 @@ module Aws::CognitoIdentityProvider
 
     # Represents the response from the server when you make a request to
     # update the user pool.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolResponse AWS API Documentation
     #
     class UpdateUserPoolResponse < Aws::EmptyStructure; end
 
@@ -3780,6 +4054,8 @@ module Aws::CognitoIdentityProvider
     #   The message returned when the user import job is completed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserImportJobType AWS API Documentation
+    #
     class UserImportJobType < Struct.new(
       :job_name,
       :job_id,
@@ -3811,6 +4087,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] client_name
     #   The client name from the user pool client description.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientDescription AWS API Documentation
     #
     class UserPoolClientDescription < Struct.new(
       :client_id,
@@ -3862,6 +4140,8 @@ module Aws::CognitoIdentityProvider
     #   The explicit authentication flows.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolClientType AWS API Documentation
+    #
     class UserPoolClientType < Struct.new(
       :user_pool_id,
       :client_name,
@@ -3902,6 +4182,8 @@ module Aws::CognitoIdentityProvider
     #   The creation date in a user pool description.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolDescriptionType AWS API Documentation
+    #
     class UserPoolDescriptionType < Struct.new(
       :id,
       :name,
@@ -3930,6 +4212,8 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] password_policy
     #   A container with information about the user pool password policy.
     #   @return [Types::PasswordPolicyType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolPolicyType AWS API Documentation
     #
     class UserPoolPolicyType < Struct.new(
       :password_policy)
@@ -4047,6 +4331,8 @@ module Aws::CognitoIdentityProvider
     #   The configuration for AdminCreateUser requests.
     #   @return [Types::AdminCreateUserConfigType]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserPoolType AWS API Documentation
+    #
     class UserPoolType < Struct.new(
       :id,
       :name,
@@ -4114,6 +4400,8 @@ module Aws::CognitoIdentityProvider
     #   The MFA options for the user.
     #   @return [Array<Types::MFAOptionType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UserType AWS API Documentation
+    #
     class UserType < Struct.new(
       :username,
       :attributes,
@@ -4149,6 +4437,8 @@ module Aws::CognitoIdentityProvider
     #   The verification code in the request to verify user attributes.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttributeRequest AWS API Documentation
+    #
     class VerifyUserAttributeRequest < Struct.new(
       :access_token,
       :attribute_name,
@@ -4158,6 +4448,8 @@ module Aws::CognitoIdentityProvider
 
     # A container representing the response from the server from the request
     # to verify user attributes.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttributeResponse AWS API Documentation
     #
     class VerifyUserAttributeResponse < Aws::EmptyStructure; end
 

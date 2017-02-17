@@ -24,6 +24,8 @@ module Aws::DeviceFarm
     #   want to purchase.
     #   @return [Hash<String,Integer>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/AccountSettings AWS API Documentation
+    #
     class AccountSettings < Struct.new(
       :aws_account_number,
       :unmetered_devices,
@@ -105,6 +107,8 @@ module Aws::DeviceFarm
     #   GET request to download the artifact's file.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Artifact AWS API Documentation
+    #
     class Artifact < Struct.new(
       :arn,
       :name,
@@ -131,6 +135,8 @@ module Aws::DeviceFarm
     #   The clock speed of the device's CPU, expressed in hertz (Hz). For
     #   example, a 1.2 GHz CPU is expressed as 1200000000.
     #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CPU AWS API Documentation
     #
     class CPU < Struct.new(
       :frequency,
@@ -168,6 +174,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] skipped
     #   The number of skipped entities.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Counters AWS API Documentation
     #
     class Counters < Struct.new(
       :total,
@@ -214,6 +222,8 @@ module Aws::DeviceFarm
     #   The device pool's rules.
     #   @return [Array<Types::Rule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePoolRequest AWS API Documentation
+    #
     class CreateDevicePoolRequest < Struct.new(
       :project_arn,
       :name,
@@ -227,6 +237,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] device_pool
     #   The newly created device pool.
     #   @return [Types::DevicePool]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePoolResult AWS API Documentation
     #
     class CreateDevicePoolResult < Struct.new(
       :device_pool)
@@ -246,6 +258,8 @@ module Aws::DeviceFarm
     #   The project's name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectRequest AWS API Documentation
+    #
     class CreateProjectRequest < Struct.new(
       :name)
       include Aws::Structure
@@ -256,6 +270,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] project
     #   The newly created project.
     #   @return [Types::Project]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectResult AWS API Documentation
     #
     class CreateProjectResult < Struct.new(
       :project)
@@ -276,6 +292,8 @@ module Aws::DeviceFarm
     #   Returns the billing method for purposes of configuring a remote
     #   access session.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration AWS API Documentation
     #
     class CreateRemoteAccessSessionConfiguration < Struct.new(
       :billing_method)
@@ -314,6 +332,8 @@ module Aws::DeviceFarm
     #   The configuration information for the remote access session request.
     #   @return [Types::CreateRemoteAccessSessionConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionRequest AWS API Documentation
+    #
     class CreateRemoteAccessSessionRequest < Struct.new(
       :project_arn,
       :device_arn,
@@ -329,6 +349,8 @@ module Aws::DeviceFarm
     #   A container that describes the remote access session when the
     #   request to create a remote access session is sent.
     #   @return [Types::RemoteAccessSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionResult AWS API Documentation
     #
     class CreateRemoteAccessSessionResult < Struct.new(
       :remote_access_session)
@@ -411,6 +433,8 @@ module Aws::DeviceFarm
     #   "application/octet-stream").
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUploadRequest AWS API Documentation
+    #
     class CreateUploadRequest < Struct.new(
       :project_arn,
       :name,
@@ -424,6 +448,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] upload
     #   The newly created upload.
     #   @return [Types::Upload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUploadResult AWS API Documentation
     #
     class CreateUploadResult < Struct.new(
       :upload)
@@ -444,12 +470,16 @@ module Aws::DeviceFarm
     #   pool you wish to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePoolRequest AWS API Documentation
+    #
     class DeleteDevicePoolRequest < Struct.new(
       :arn)
       include Aws::Structure
     end
 
     # Represents the result of a delete device pool request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePoolResult AWS API Documentation
     #
     class DeleteDevicePoolResult < Aws::EmptyStructure; end
 
@@ -467,12 +497,16 @@ module Aws::DeviceFarm
     #   you wish to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProjectRequest AWS API Documentation
+    #
     class DeleteProjectRequest < Struct.new(
       :arn)
       include Aws::Structure
     end
 
     # Represents the result of a delete project request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProjectResult AWS API Documentation
     #
     class DeleteProjectResult < Aws::EmptyStructure; end
 
@@ -490,6 +524,8 @@ module Aws::DeviceFarm
     #   delete remote access.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSessionRequest AWS API Documentation
+    #
     class DeleteRemoteAccessSessionRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -497,6 +533,8 @@ module Aws::DeviceFarm
 
     # The response from the server when a request is made to delete the
     # remote access session.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSessionResult AWS API Documentation
     #
     class DeleteRemoteAccessSessionResult < Aws::EmptyStructure; end
 
@@ -513,12 +551,16 @@ module Aws::DeviceFarm
     #   The Amazon Resource Name (ARN) for the run you wish to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRunRequest AWS API Documentation
+    #
     class DeleteRunRequest < Struct.new(
       :arn)
       include Aws::Structure
     end
 
     # Represents the result of a delete run request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRunResult AWS API Documentation
     #
     class DeleteRunResult < Aws::EmptyStructure; end
 
@@ -536,12 +578,16 @@ module Aws::DeviceFarm
     #   you wish to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUploadRequest AWS API Documentation
+    #
     class DeleteUploadRequest < Struct.new(
       :arn)
       include Aws::Structure
     end
 
     # Represents the result of a delete upload request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUploadResult AWS API Documentation
     #
     class DeleteUploadResult < Aws::EmptyStructure; end
 
@@ -630,6 +676,8 @@ module Aws::DeviceFarm
     #   The name of the fleet to which this device belongs.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Device AWS API Documentation
+    #
     class Device < Struct.new(
       :arn,
       :name,
@@ -670,6 +718,8 @@ module Aws::DeviceFarm
     #   the resource to run tests.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceMinutes AWS API Documentation
+    #
     class DeviceMinutes < Struct.new(
       :total,
       :metered,
@@ -707,6 +757,8 @@ module Aws::DeviceFarm
     #   Information about the device pool's rules.
     #   @return [Array<Types::Rule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DevicePool AWS API Documentation
+    #
     class DevicePool < Struct.new(
       :arn,
       :name,
@@ -730,6 +782,8 @@ module Aws::DeviceFarm
     #   Information about the compatibility.
     #   @return [Array<Types::IncompatibilityMessage>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DevicePoolCompatibilityResult AWS API Documentation
+    #
     class DevicePoolCompatibilityResult < Struct.new(
       :device,
       :compatible,
@@ -741,6 +795,8 @@ module Aws::DeviceFarm
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettingsRequest AWS API Documentation
+    #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
 
     # Represents the account settings return values from the
@@ -749,6 +805,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] account_settings
     #   A container for account-level settings within AWS Device Farm.
     #   @return [Types::AccountSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettingsResult AWS API Documentation
     #
     class GetAccountSettingsResult < Struct.new(
       :account_settings)
@@ -812,6 +870,8 @@ module Aws::DeviceFarm
     #   * XCTEST\_UI: The XCode UI test type.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityRequest AWS API Documentation
+    #
     class GetDevicePoolCompatibilityRequest < Struct.new(
       :device_pool_arn,
       :app_arn,
@@ -828,6 +888,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] incompatible_devices
     #   Information about incompatible devices.
     #   @return [Array<Types::DevicePoolCompatibilityResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityResult AWS API Documentation
     #
     class GetDevicePoolCompatibilityResult < Struct.new(
       :compatible_devices,
@@ -848,6 +910,8 @@ module Aws::DeviceFarm
     #   The device pool's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolRequest AWS API Documentation
+    #
     class GetDevicePoolRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -858,6 +922,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] device_pool
     #   Represents a collection of device types.
     #   @return [Types::DevicePool]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolResult AWS API Documentation
     #
     class GetDevicePoolResult < Struct.new(
       :device_pool)
@@ -877,6 +943,8 @@ module Aws::DeviceFarm
     #   The device type's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceRequest AWS API Documentation
+    #
     class GetDeviceRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -887,6 +955,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] device
     #   Represents a device type that an app is tested against.
     #   @return [Types::Device]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceResult AWS API Documentation
     #
     class GetDeviceResult < Struct.new(
       :device)
@@ -906,6 +976,8 @@ module Aws::DeviceFarm
     #   The job's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJobRequest AWS API Documentation
+    #
     class GetJobRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -916,6 +988,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] job
     #   Represents a device.
     #   @return [Types::Job]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJobResult AWS API Documentation
     #
     class GetJobResult < Struct.new(
       :job)
@@ -938,6 +1012,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatusRequest AWS API Documentation
+    #
     class GetOfferingStatusRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -959,6 +1035,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatusResult AWS API Documentation
+    #
     class GetOfferingStatusResult < Struct.new(
       :current,
       :next_period,
@@ -979,6 +1057,8 @@ module Aws::DeviceFarm
     #   The project's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProjectRequest AWS API Documentation
+    #
     class GetProjectRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -990,6 +1070,8 @@ module Aws::DeviceFarm
     #   Represents an operating-system neutral workspace for running and
     #   managing tests.
     #   @return [Types::Project]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProjectResult AWS API Documentation
     #
     class GetProjectResult < Struct.new(
       :project)
@@ -1011,6 +1093,8 @@ module Aws::DeviceFarm
     #   which you want to get session information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSessionRequest AWS API Documentation
+    #
     class GetRemoteAccessSessionRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -1023,6 +1107,8 @@ module Aws::DeviceFarm
     #   A container that lists detailed information about the remote access
     #   session.
     #   @return [Types::RemoteAccessSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSessionResult AWS API Documentation
     #
     class GetRemoteAccessSessionResult < Struct.new(
       :remote_access_session)
@@ -1042,6 +1128,8 @@ module Aws::DeviceFarm
     #   The run's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRunRequest AWS API Documentation
+    #
     class GetRunRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -1053,6 +1141,8 @@ module Aws::DeviceFarm
     #   Represents an app on a set of devices with a specific test and
     #   configuration.
     #   @return [Types::Run]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRunResult AWS API Documentation
     #
     class GetRunResult < Struct.new(
       :run)
@@ -1072,6 +1162,8 @@ module Aws::DeviceFarm
     #   The suite's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuiteRequest AWS API Documentation
+    #
     class GetSuiteRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -1082,6 +1174,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] suite
     #   Represents a collection of one or more tests.
     #   @return [Types::Suite]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuiteResult AWS API Documentation
     #
     class GetSuiteResult < Struct.new(
       :suite)
@@ -1101,6 +1195,8 @@ module Aws::DeviceFarm
     #   The test's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestRequest AWS API Documentation
+    #
     class GetTestRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -1111,6 +1207,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] test
     #   Represents a condition that is evaluated.
     #   @return [Types::Test]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestResult AWS API Documentation
     #
     class GetTestResult < Struct.new(
       :test)
@@ -1130,6 +1228,8 @@ module Aws::DeviceFarm
     #   The upload's ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUploadRequest AWS API Documentation
+    #
     class GetUploadRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -1141,6 +1241,8 @@ module Aws::DeviceFarm
     #   An app or a set of one or more tests to upload or that have been
     #   uploaded.
     #   @return [Types::Upload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUploadResult AWS API Documentation
     #
     class GetUploadResult < Struct.new(
       :upload)
@@ -1166,6 +1268,8 @@ module Aws::DeviceFarm
     #
     #   * PLATFORM: The platform (for example, Android or iOS).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/IncompatibilityMessage AWS API Documentation
     #
     class IncompatibilityMessage < Struct.new(
       :message,
@@ -1195,6 +1299,8 @@ module Aws::DeviceFarm
     #   requesting information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSessionRequest AWS API Documentation
+    #
     class InstallToRemoteAccessSessionRequest < Struct.new(
       :remote_access_session_arn,
       :app_arn)
@@ -1208,6 +1314,8 @@ module Aws::DeviceFarm
     #   An app or a set of one or more tests to upload or that have been
     #   uploaded.
     #   @return [Types::Upload]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSessionResult AWS API Documentation
     #
     class InstallToRemoteAccessSessionResult < Struct.new(
       :app_upload)
@@ -1333,6 +1441,8 @@ module Aws::DeviceFarm
     #   Represents the total (metered or unmetered) minutes used by the job.
     #   @return [Types::DeviceMinutes]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Job AWS API Documentation
+    #
     class Job < Struct.new(
       :arn,
       :name,
@@ -1382,6 +1492,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifactsRequest AWS API Documentation
+    #
     class ListArtifactsRequest < Struct.new(
       :arn,
       :type,
@@ -1401,6 +1513,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifactsResult AWS API Documentation
     #
     class ListArtifactsResult < Struct.new(
       :artifacts,
@@ -1441,6 +1555,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePoolsRequest AWS API Documentation
+    #
     class ListDevicePoolsRequest < Struct.new(
       :arn,
       :type,
@@ -1460,6 +1576,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePoolsResult AWS API Documentation
     #
     class ListDevicePoolsResult < Struct.new(
       :device_pools,
@@ -1487,6 +1605,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesRequest AWS API Documentation
+    #
     class ListDevicesRequest < Struct.new(
       :arn,
       :next_token)
@@ -1505,6 +1625,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesResult AWS API Documentation
     #
     class ListDevicesResult < Struct.new(
       :devices,
@@ -1532,6 +1654,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobsRequest AWS API Documentation
+    #
     class ListJobsRequest < Struct.new(
       :arn,
       :next_token)
@@ -1550,6 +1674,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobsResult AWS API Documentation
     #
     class ListJobsResult < Struct.new(
       :jobs,
@@ -1572,6 +1698,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactionsRequest AWS API Documentation
+    #
     class ListOfferingTransactionsRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1589,6 +1717,8 @@ module Aws::DeviceFarm
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactionsResult AWS API Documentation
     #
     class ListOfferingTransactionsResult < Struct.new(
       :offering_transactions,
@@ -1611,6 +1741,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingsRequest AWS API Documentation
+    #
     class ListOfferingsRequest < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1627,6 +1759,8 @@ module Aws::DeviceFarm
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingsResult AWS API Documentation
     #
     class ListOfferingsResult < Struct.new(
       :offerings,
@@ -1656,6 +1790,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjectsRequest AWS API Documentation
+    #
     class ListProjectsRequest < Struct.new(
       :arn,
       :next_token)
@@ -1674,6 +1810,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjectsResult AWS API Documentation
     #
     class ListProjectsResult < Struct.new(
       :projects,
@@ -1703,6 +1841,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessionsRequest AWS API Documentation
+    #
     class ListRemoteAccessSessionsRequest < Struct.new(
       :arn,
       :next_token)
@@ -1722,6 +1862,8 @@ module Aws::DeviceFarm
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessionsResult AWS API Documentation
     #
     class ListRemoteAccessSessionsResult < Struct.new(
       :remote_access_sessions,
@@ -1750,6 +1892,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRunsRequest AWS API Documentation
+    #
     class ListRunsRequest < Struct.new(
       :arn,
       :next_token)
@@ -1768,6 +1912,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRunsResult AWS API Documentation
     #
     class ListRunsResult < Struct.new(
       :runs,
@@ -1796,6 +1942,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamplesRequest AWS API Documentation
+    #
     class ListSamplesRequest < Struct.new(
       :arn,
       :next_token)
@@ -1814,6 +1962,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamplesResult AWS API Documentation
     #
     class ListSamplesResult < Struct.new(
       :samples,
@@ -1841,6 +1991,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuitesRequest AWS API Documentation
+    #
     class ListSuitesRequest < Struct.new(
       :arn,
       :next_token)
@@ -1859,6 +2011,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuitesResult AWS API Documentation
     #
     class ListSuitesResult < Struct.new(
       :suites,
@@ -1886,6 +2040,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestsRequest AWS API Documentation
+    #
     class ListTestsRequest < Struct.new(
       :arn,
       :next_token)
@@ -1904,6 +2060,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestsResult AWS API Documentation
     #
     class ListTestsResult < Struct.new(
       :tests,
@@ -1930,6 +2088,8 @@ module Aws::DeviceFarm
     #   operation, which can be used to return the next set of items in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblemsRequest AWS API Documentation
     #
     class ListUniqueProblemsRequest < Struct.new(
       :arn,
@@ -1966,6 +2126,8 @@ module Aws::DeviceFarm
     #   the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblemsResult AWS API Documentation
+    #
     class ListUniqueProblemsResult < Struct.new(
       :unique_problems,
       :next_token)
@@ -1993,6 +2155,8 @@ module Aws::DeviceFarm
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploadsRequest AWS API Documentation
+    #
     class ListUploadsRequest < Struct.new(
       :arn,
       :next_token)
@@ -2011,6 +2175,8 @@ module Aws::DeviceFarm
     #   subsequent call to this operation to return the next set of items in
     #   the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploadsResult AWS API Documentation
     #
     class ListUploadsResult < Struct.new(
       :uploads,
@@ -2039,6 +2205,8 @@ module Aws::DeviceFarm
     #   The longitude.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Location AWS API Documentation
+    #
     class Location < Struct.new(
       :latitude,
       :longitude)
@@ -2056,6 +2224,8 @@ module Aws::DeviceFarm
     #   The currency code of a monetary amount. For example, `USD` means
     #   "U.S. dollars."
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/MonetaryAmount AWS API Documentation
     #
     class MonetaryAmount < Struct.new(
       :amount,
@@ -2085,6 +2255,8 @@ module Aws::DeviceFarm
     #   Specifies whether there are recurring charges for the offering.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Offering AWS API Documentation
+    #
     class Offering < Struct.new(
       :id,
       :description,
@@ -2112,6 +2284,8 @@ module Aws::DeviceFarm
     #   The date on which the offering is effective.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingStatus AWS API Documentation
+    #
     class OfferingStatus < Struct.new(
       :type,
       :offering,
@@ -2137,6 +2311,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] cost
     #   The cost of an offering transaction.
     #   @return [Types::MonetaryAmount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingTransaction AWS API Documentation
     #
     class OfferingTransaction < Struct.new(
       :offering_status,
@@ -2192,6 +2368,8 @@ module Aws::DeviceFarm
     #   A message about the problem's result.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Problem AWS API Documentation
+    #
     class Problem < Struct.new(
       :run,
       :job,
@@ -2213,6 +2391,8 @@ module Aws::DeviceFarm
     #   The problem detail's name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ProblemDetail AWS API Documentation
+    #
     class ProblemDetail < Struct.new(
       :arn,
       :name)
@@ -2233,6 +2413,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] created
     #   When the project was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Project AWS API Documentation
     #
     class Project < Struct.new(
       :arn,
@@ -2260,6 +2442,8 @@ module Aws::DeviceFarm
     #   request.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOfferingRequest AWS API Documentation
+    #
     class PurchaseOfferingRequest < Struct.new(
       :offering_id,
       :quantity)
@@ -2271,6 +2455,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] offering_transaction
     #   Represents the offering transaction for the purchase result.
     #   @return [Types::OfferingTransaction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOfferingResult AWS API Documentation
     #
     class PurchaseOfferingResult < Struct.new(
       :offering_transaction)
@@ -2310,6 +2496,8 @@ module Aws::DeviceFarm
     #   false.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Radios AWS API Documentation
+    #
     class Radios < Struct.new(
       :wifi,
       :bluetooth,
@@ -2327,6 +2515,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] frequency
     #   The frequency in which charges will recur.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RecurringCharge AWS API Documentation
     #
     class RecurringCharge < Struct.new(
       :cost,
@@ -2426,6 +2616,8 @@ module Aws::DeviceFarm
     #   The endpoint for the remote access sesssion.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RemoteAccessSession AWS API Documentation
+    #
     class RemoteAccessSession < Struct.new(
       :arn,
       :name,
@@ -2460,6 +2652,8 @@ module Aws::DeviceFarm
     #   The quantity requested in an offering renewal.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOfferingRequest AWS API Documentation
+    #
     class RenewOfferingRequest < Struct.new(
       :offering_id,
       :quantity)
@@ -2471,6 +2665,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] offering_transaction
     #   Represents the status of the offering transaction for the renewal.
     #   @return [Types::OfferingTransaction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOfferingResult AWS API Documentation
     #
     class RenewOfferingResult < Struct.new(
       :offering_transaction)
@@ -2487,6 +2683,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] height
     #   The screen resolution's height, expressed in pixels.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Resolution AWS API Documentation
     #
     class Resolution < Struct.new(
       :width,
@@ -2537,6 +2735,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] value
     #   The rule's value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Rule AWS API Documentation
     #
     class Rule < Struct.new(
       :attribute,
@@ -2686,6 +2886,8 @@ module Aws::DeviceFarm
     #   run.
     #   @return [Types::DeviceMinutes]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
+    #
     class Run < Struct.new(
       :arn,
       :name,
@@ -2762,6 +2964,8 @@ module Aws::DeviceFarm
     #   GET request to download the sample's file.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Sample AWS API Documentation
+    #
     class Sample < Struct.new(
       :arn,
       :type,
@@ -2824,6 +3028,8 @@ module Aws::DeviceFarm
     #   `unmetered`. If the parameter is not specified, the default value is
     #   `metered`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration AWS API Documentation
     #
     class ScheduleRunConfiguration < Struct.new(
       :extra_data_package_arn,
@@ -2897,6 +3103,8 @@ module Aws::DeviceFarm
     #   Information about the settings for the run to be scheduled.
     #   @return [Types::ScheduleRunConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunRequest AWS API Documentation
+    #
     class ScheduleRunRequest < Struct.new(
       :project_arn,
       :app_arn,
@@ -2912,6 +3120,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] run
     #   Information about the scheduled run.
     #   @return [Types::Run]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunResult AWS API Documentation
     #
     class ScheduleRunResult < Struct.new(
       :run)
@@ -2982,6 +3192,8 @@ module Aws::DeviceFarm
     #   fixture settings.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunTest AWS API Documentation
+    #
     class ScheduleRunTest < Struct.new(
       :type,
       :test_package_arn,
@@ -3004,6 +3216,8 @@ module Aws::DeviceFarm
     #   to stop.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSessionRequest AWS API Documentation
+    #
     class StopRemoteAccessSessionRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -3016,6 +3230,8 @@ module Aws::DeviceFarm
     #   A container representing the metadata from the service about the
     #   remote access session you are stopping.
     #   @return [Types::RemoteAccessSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSessionResult AWS API Documentation
     #
     class StopRemoteAccessSessionResult < Struct.new(
       :remote_access_session)
@@ -3036,6 +3252,8 @@ module Aws::DeviceFarm
     #   wish to stop.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRunRequest AWS API Documentation
+    #
     class StopRunRequest < Struct.new(
       :arn)
       include Aws::Structure
@@ -3047,6 +3265,8 @@ module Aws::DeviceFarm
     #   Represents an app on a set of devices with a specific test and
     #   configuration.
     #   @return [Types::Run]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRunResult AWS API Documentation
     #
     class StopRunResult < Struct.new(
       :run)
@@ -3168,6 +3388,8 @@ module Aws::DeviceFarm
     #   Represents the total (metered or unmetered) minutes used by the test
     #   suite.
     #   @return [Types::DeviceMinutes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Suite AWS API Documentation
     #
     class Suite < Struct.new(
       :arn,
@@ -3300,6 +3522,8 @@ module Aws::DeviceFarm
     #   test.
     #   @return [Types::DeviceMinutes]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Test AWS API Documentation
+    #
     class Test < Struct.new(
       :arn,
       :name,
@@ -3324,6 +3548,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] problems
     #   Information about the problems.
     #   @return [Array<Types::Problem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UniqueProblem AWS API Documentation
     #
     class UniqueProblem < Struct.new(
       :message,
@@ -3369,6 +3595,8 @@ module Aws::DeviceFarm
     #   for your request, the update will replace the existing rules.
     #   @return [Array<Types::Rule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolRequest AWS API Documentation
+    #
     class UpdateDevicePoolRequest < Struct.new(
       :arn,
       :name,
@@ -3382,6 +3610,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] device_pool
     #   Represents a collection of device types.
     #   @return [Types::DevicePool]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolResult AWS API Documentation
     #
     class UpdateDevicePoolResult < Struct.new(
       :device_pool)
@@ -3408,6 +3638,8 @@ module Aws::DeviceFarm
     #   updating.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectRequest AWS API Documentation
+    #
     class UpdateProjectRequest < Struct.new(
       :arn,
       :name)
@@ -3420,6 +3652,8 @@ module Aws::DeviceFarm
     #   Represents an operating-system neutral workspace for running and
     #   managing tests.
     #   @return [Types::Project]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectResult AWS API Documentation
     #
     class UpdateProjectResult < Struct.new(
       :project)
@@ -3518,6 +3752,8 @@ module Aws::DeviceFarm
     # @!attribute [rw] message
     #   A message about the upload's result.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Upload AWS API Documentation
     #
     class Upload < Struct.new(
       :arn,

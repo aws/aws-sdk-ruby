@@ -23,6 +23,8 @@ module Aws::CognitoSync
     #   Cognito. GUID generation is unique within a region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublishRequest AWS API Documentation
+    #
     class BulkPublishRequest < Struct.new(
       :identity_pool_id)
       include Aws::Structure
@@ -35,6 +37,8 @@ module Aws::CognitoSync
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
     #   Cognito. GUID generation is unique within a region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/BulkPublishResponse AWS API Documentation
     #
     class BulkPublishResponse < Struct.new(
       :identity_pool_id)
@@ -70,6 +74,8 @@ module Aws::CognitoSync
     #   DISABLED - Streaming of updates to identity pool is disabled. Bulk
     #   publish will also fail if StreamingStatus is DISABLED.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/CognitoStreams AWS API Documentation
     #
     class CognitoStreams < Struct.new(
       :stream_name,
@@ -116,6 +122,8 @@ module Aws::CognitoSync
     #   Number of records in this dataset.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/Dataset AWS API Documentation
+    #
     class Dataset < Struct.new(
       :identity_id,
       :dataset_name,
@@ -155,6 +163,8 @@ module Aws::CognitoSync
     #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDatasetRequest AWS API Documentation
+    #
     class DeleteDatasetRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -172,6 +182,8 @@ module Aws::CognitoSync
     #   is synced by dataset, and a dataset can hold up to 1MB of key-value
     #   pairs.
     #   @return [Types::Dataset]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DeleteDatasetResponse AWS API Documentation
     #
     class DeleteDatasetResponse < Struct.new(
       :dataset)
@@ -207,6 +219,8 @@ module Aws::CognitoSync
     #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDatasetRequest AWS API Documentation
+    #
     class DescribeDatasetRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -223,6 +237,8 @@ module Aws::CognitoSync
     #   are automatically created if they don't exist. Data is synced by
     #   dataset, and a dataset can hold up to 1MB of key-value pairs.
     #   @return [Types::Dataset]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeDatasetResponse AWS API Documentation
     #
     class DescribeDatasetResponse < Struct.new(
       :dataset)
@@ -244,6 +260,8 @@ module Aws::CognitoSync
     #   Cognito. GUID generation is unique within a region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsageRequest AWS API Documentation
+    #
     class DescribeIdentityPoolUsageRequest < Struct.new(
       :identity_pool_id)
       include Aws::Structure
@@ -254,6 +272,8 @@ module Aws::CognitoSync
     # @!attribute [rw] identity_pool_usage
     #   Information about the usage of the identity pool.
     #   @return [Types::IdentityPoolUsage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityPoolUsageResponse AWS API Documentation
     #
     class DescribeIdentityPoolUsageResponse < Struct.new(
       :identity_pool_usage)
@@ -282,6 +302,8 @@ module Aws::CognitoSync
     #   Cognito. GUID generation is unique within a region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsageRequest AWS API Documentation
+    #
     class DescribeIdentityUsageRequest < Struct.new(
       :identity_pool_id,
       :identity_id)
@@ -293,6 +315,8 @@ module Aws::CognitoSync
     # @!attribute [rw] identity_usage
     #   Usage information for the identity.
     #   @return [Types::IdentityUsage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/DescribeIdentityUsageResponse AWS API Documentation
     #
     class DescribeIdentityUsageResponse < Struct.new(
       :identity_usage)
@@ -313,6 +337,8 @@ module Aws::CognitoSync
     #   us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon
     #   Cognito. GUID generation is unique within a region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetailsRequest AWS API Documentation
     #
     class GetBulkPublishDetailsRequest < Struct.new(
       :identity_pool_id)
@@ -354,6 +380,8 @@ module Aws::CognitoSync
     #   message that caused the bulk publish to fail.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetBulkPublishDetailsResponse AWS API Documentation
+    #
     class GetBulkPublishDetailsResponse < Struct.new(
       :identity_pool_id,
       :bulk_publish_start_time,
@@ -376,6 +404,8 @@ module Aws::CognitoSync
     #   The Cognito Identity Pool ID for the request
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEventsRequest AWS API Documentation
+    #
     class GetCognitoEventsRequest < Struct.new(
       :identity_pool_id)
       include Aws::Structure
@@ -386,6 +416,8 @@ module Aws::CognitoSync
     # @!attribute [rw] events
     #   The Cognito Events returned from the GetCognitoEvents request
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetCognitoEventsResponse AWS API Documentation
     #
     class GetCognitoEventsResponse < Struct.new(
       :events)
@@ -408,6 +440,8 @@ module Aws::CognitoSync
     #   configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfigurationRequest AWS API Documentation
+    #
     class GetIdentityPoolConfigurationRequest < Struct.new(
       :identity_pool_id)
       include Aws::Structure
@@ -428,6 +462,8 @@ module Aws::CognitoSync
     # @!attribute [rw] cognito_streams
     #   Options to apply to this identity pool for Amazon Cognito streams.
     #   @return [Types::CognitoStreams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/GetIdentityPoolConfigurationResponse AWS API Documentation
     #
     class GetIdentityPoolConfigurationResponse < Struct.new(
       :identity_pool_id,
@@ -455,6 +491,8 @@ module Aws::CognitoSync
     # @!attribute [rw] last_modified_date
     #   Date on which the identity pool was last modified.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/IdentityPoolUsage AWS API Documentation
     #
     class IdentityPoolUsage < Struct.new(
       :identity_pool_id,
@@ -489,6 +527,8 @@ module Aws::CognitoSync
     # @!attribute [rw] data_storage
     #   Total data storage for this identity.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/IdentityUsage AWS API Documentation
     #
     class IdentityUsage < Struct.new(
       :identity_id,
@@ -531,6 +571,8 @@ module Aws::CognitoSync
     #   The maximum number of results to be returned.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasetsRequest AWS API Documentation
+    #
     class ListDatasetsRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -552,6 +594,8 @@ module Aws::CognitoSync
     # @!attribute [rw] next_token
     #   A pagination token for obtaining the next page of results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListDatasetsResponse AWS API Documentation
     #
     class ListDatasetsResponse < Struct.new(
       :datasets,
@@ -578,6 +622,8 @@ module Aws::CognitoSync
     #   The maximum number of results to be returned.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsageRequest AWS API Documentation
+    #
     class ListIdentityPoolUsageRequest < Struct.new(
       :next_token,
       :max_results)
@@ -601,6 +647,8 @@ module Aws::CognitoSync
     # @!attribute [rw] next_token
     #   A pagination token for obtaining the next page of results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListIdentityPoolUsageResponse AWS API Documentation
     #
     class ListIdentityPoolUsageResponse < Struct.new(
       :identity_pool_usages,
@@ -658,6 +706,8 @@ module Aws::CognitoSync
     #   A token containing a session ID, identity ID, and expiration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecordsRequest AWS API Documentation
+    #
     class ListRecordsRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -707,6 +757,8 @@ module Aws::CognitoSync
     #   A token containing a session ID, identity ID, and expiration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/ListRecordsResponse AWS API Documentation
+    #
     class ListRecordsResponse < Struct.new(
       :records,
       :next_token,
@@ -739,6 +791,8 @@ module Aws::CognitoSync
     #   developer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/PushSync AWS API Documentation
+    #
     class PushSync < Struct.new(
       :application_arns,
       :role_arn)
@@ -770,6 +824,8 @@ module Aws::CognitoSync
     # @!attribute [rw] device_last_modified_date
     #   The last modified date of the client device.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/Record AWS API Documentation
     #
     class Record < Struct.new(
       :key,
@@ -814,6 +870,8 @@ module Aws::CognitoSync
     #   The last modified date of the client device.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RecordPatch AWS API Documentation
+    #
     class RecordPatch < Struct.new(
       :op,
       :key,
@@ -853,6 +911,8 @@ module Aws::CognitoSync
     #   The push token.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDeviceRequest AWS API Documentation
+    #
     class RegisterDeviceRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -866,6 +926,8 @@ module Aws::CognitoSync
     # @!attribute [rw] device_id
     #   The unique ID generated for this device by Cognito.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/RegisterDeviceResponse AWS API Documentation
     #
     class RegisterDeviceResponse < Struct.new(
       :device_id)
@@ -893,6 +955,8 @@ module Aws::CognitoSync
     # @!attribute [rw] events
     #   The events to configure
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetCognitoEventsRequest AWS API Documentation
     #
     class SetCognitoEventsRequest < Struct.new(
       :identity_pool_id,
@@ -932,6 +996,8 @@ module Aws::CognitoSync
     #   Options to apply to this identity pool for Amazon Cognito streams.
     #   @return [Types::CognitoStreams]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfigurationRequest AWS API Documentation
+    #
     class SetIdentityPoolConfigurationRequest < Struct.new(
       :identity_pool_id,
       :push_sync,
@@ -954,6 +1020,8 @@ module Aws::CognitoSync
     # @!attribute [rw] cognito_streams
     #   Options to apply to this identity pool for Amazon Cognito streams.
     #   @return [Types::CognitoStreams]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SetIdentityPoolConfigurationResponse AWS API Documentation
     #
     class SetIdentityPoolConfigurationResponse < Struct.new(
       :identity_pool_id,
@@ -992,6 +1060,8 @@ module Aws::CognitoSync
     #   The unique ID generated for this device by Cognito.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDatasetRequest AWS API Documentation
+    #
     class SubscribeToDatasetRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -1001,6 +1071,8 @@ module Aws::CognitoSync
     end
 
     # Response to a SubscribeToDataset request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/SubscribeToDatasetResponse AWS API Documentation
     #
     class SubscribeToDatasetResponse < Aws::EmptyStructure; end
 
@@ -1034,6 +1106,8 @@ module Aws::CognitoSync
     #   The unique ID generated for this device by Cognito.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDatasetRequest AWS API Documentation
+    #
     class UnsubscribeFromDatasetRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -1043,6 +1117,8 @@ module Aws::CognitoSync
     end
 
     # Response to an UnsubscribeFromDataset request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UnsubscribeFromDatasetResponse AWS API Documentation
     #
     class UnsubscribeFromDatasetResponse < Aws::EmptyStructure; end
 
@@ -1106,6 +1182,8 @@ module Aws::CognitoSync
     #   yet implemented.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecordsRequest AWS API Documentation
+    #
     class UpdateRecordsRequest < Struct.new(
       :identity_pool_id,
       :identity_id,
@@ -1122,6 +1200,8 @@ module Aws::CognitoSync
     # @!attribute [rw] records
     #   A list of records that have been updated.
     #   @return [Array<Types::Record>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-sync-2014-06-30/UpdateRecordsResponse AWS API Documentation
     #
     class UpdateRecordsResponse < Struct.new(
       :records)

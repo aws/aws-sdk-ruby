@@ -30,6 +30,8 @@ module Aws::CloudWatch
     #   Data about the alarm, in JSON format.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmHistoryItem AWS API Documentation
+    #
     class AlarmHistoryItem < Struct.new(
       :alarm_name,
       :timestamp,
@@ -75,6 +77,8 @@ module Aws::CloudWatch
     #   The percentile statistic for the data point.
     #   @return [Hash<String,Float>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Datapoint AWS API Documentation
+    #
     class Datapoint < Struct.new(
       :timestamp,
       :sample_count,
@@ -97,6 +101,8 @@ module Aws::CloudWatch
     # @!attribute [rw] alarm_names
     #   The alarms to be deleted.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteAlarmsInput AWS API Documentation
     #
     class DeleteAlarmsInput < Struct.new(
       :alarm_names)
@@ -140,6 +146,8 @@ module Aws::CloudWatch
     #   data available.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistoryInput AWS API Documentation
+    #
     class DescribeAlarmHistoryInput < Struct.new(
       :alarm_name,
       :history_item_type,
@@ -158,6 +166,8 @@ module Aws::CloudWatch
     #   The token that marks the start of the next batch of returned
     #   results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmHistoryOutput AWS API Documentation
     #
     class DescribeAlarmHistoryOutput < Struct.new(
       :alarm_history_items,
@@ -215,6 +225,8 @@ module Aws::CloudWatch
     #   The unit for the metric.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetricInput AWS API Documentation
+    #
     class DescribeAlarmsForMetricInput < Struct.new(
       :metric_name,
       :namespace,
@@ -229,6 +241,8 @@ module Aws::CloudWatch
     # @!attribute [rw] metric_alarms
     #   The information for each alarm with the specified metric.
     #   @return [Array<Types::MetricAlarm>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetricOutput AWS API Documentation
     #
     class DescribeAlarmsForMetricOutput < Struct.new(
       :metric_alarms)
@@ -273,6 +287,8 @@ module Aws::CloudWatch
     #   data available.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsInput AWS API Documentation
+    #
     class DescribeAlarmsInput < Struct.new(
       :alarm_names,
       :alarm_name_prefix,
@@ -291,6 +307,8 @@ module Aws::CloudWatch
     #   The token that marks the start of the next batch of returned
     #   results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsOutput AWS API Documentation
     #
     class DescribeAlarmsOutput < Struct.new(
       :metric_alarms,
@@ -316,6 +334,8 @@ module Aws::CloudWatch
     #   The value representing the dimension measurement.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Dimension AWS API Documentation
+    #
     class Dimension < Struct.new(
       :name,
       :value)
@@ -340,6 +360,8 @@ module Aws::CloudWatch
     #   The value of the dimension to be matched.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DimensionFilter AWS API Documentation
+    #
     class DimensionFilter < Struct.new(
       :name,
       :value)
@@ -357,6 +379,8 @@ module Aws::CloudWatch
     #   The names of the alarms.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DisableAlarmActionsInput AWS API Documentation
+    #
     class DisableAlarmActionsInput < Struct.new(
       :alarm_names)
       include Aws::Structure
@@ -372,6 +396,8 @@ module Aws::CloudWatch
     # @!attribute [rw] alarm_names
     #   The names of the alarms.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/EnableAlarmActionsInput AWS API Documentation
     #
     class EnableAlarmActionsInput < Struct.new(
       :alarm_names)
@@ -482,6 +508,8 @@ module Aws::CloudWatch
     #   effect.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatisticsInput AWS API Documentation
+    #
     class GetMetricStatisticsInput < Struct.new(
       :namespace,
       :metric_name,
@@ -502,6 +530,8 @@ module Aws::CloudWatch
     # @!attribute [rw] datapoints
     #   The data points for the specified metric.
     #   @return [Array<Types::Datapoint>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatisticsOutput AWS API Documentation
     #
     class GetMetricStatisticsOutput < Struct.new(
       :label,
@@ -541,6 +571,8 @@ module Aws::CloudWatch
     #   data available.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsInput AWS API Documentation
+    #
     class ListMetricsInput < Struct.new(
       :namespace,
       :metric_name,
@@ -557,6 +589,8 @@ module Aws::CloudWatch
     #   The token that marks the start of the next batch of returned
     #   results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ListMetricsOutput AWS API Documentation
     #
     class ListMetricsOutput < Struct.new(
       :metrics,
@@ -577,6 +611,8 @@ module Aws::CloudWatch
     # @!attribute [rw] dimensions
     #   The dimensions for the metric.
     #   @return [Array<Types::Dimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Metric AWS API Documentation
     #
     class Metric < Struct.new(
       :namespace,
@@ -687,6 +723,8 @@ module Aws::CloudWatch
     #   the first operand.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
+    #
     class MetricAlarm < Struct.new(
       :alarm_name,
       :alarm_arn,
@@ -768,6 +806,8 @@ module Aws::CloudWatch
     # @!attribute [rw] unit
     #   The unit of the metric.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDatum AWS API Documentation
     #
     class MetricDatum < Struct.new(
       :metric_name,
@@ -927,6 +967,8 @@ module Aws::CloudWatch
     #   the first operand.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
+    #
     class PutMetricAlarmInput < Struct.new(
       :alarm_name,
       :alarm_description,
@@ -986,6 +1028,8 @@ module Aws::CloudWatch
     #   The data for the metric.
     #   @return [Array<Types::MetricDatum>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricDataInput AWS API Documentation
+    #
     class PutMetricDataInput < Struct.new(
       :namespace,
       :metric_data)
@@ -1020,6 +1064,8 @@ module Aws::CloudWatch
     #   The reason that this alarm is set to this specific state, in JSON
     #   format.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/SetAlarmStateInput AWS API Documentation
     #
     class SetAlarmStateInput < Struct.new(
       :alarm_name,
@@ -1056,6 +1102,8 @@ module Aws::CloudWatch
     # @!attribute [rw] maximum
     #   The maximum value of the sample set.
     #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StatisticSet AWS API Documentation
     #
     class StatisticSet < Struct.new(
       :sample_count,

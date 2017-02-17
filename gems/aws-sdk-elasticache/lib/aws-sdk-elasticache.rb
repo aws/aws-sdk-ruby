@@ -43,6 +43,6 @@ require_relative 'aws-sdk-elasticache/customizations'
 # @service
 module Aws::ElastiCache
 
-  GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc2'
 
 end

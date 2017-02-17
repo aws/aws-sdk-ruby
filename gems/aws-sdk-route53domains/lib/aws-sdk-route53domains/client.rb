@@ -188,6 +188,8 @@ module Aws::Route53Domains
     #
     #   resp.availability #=> String, one of "AVAILABLE", "AVAILABLE_RESERVED", "AVAILABLE_PREORDER", "UNAVAILABLE", "UNAVAILABLE_PREMIUM", "UNAVAILABLE_RESTRICTED", "RESERVED", "DONT_KNOW"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailability AWS API Documentation
+    #
     # @overload check_domain_availability(params = {})
     # @param [Hash] params ({})
     def check_domain_availability(params = {}, options = {})
@@ -238,6 +240,8 @@ module Aws::Route53Domains
     #     tags_to_delete: ["TagKey"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomain AWS API Documentation
+    #
     # @overload delete_tags_for_domain(params = {})
     # @param [Hash] params ({})
     def delete_tags_for_domain(params = {}, options = {})
@@ -257,6 +261,8 @@ module Aws::Route53Domains
     #   resp = client.disable_domain_auto_renew({
     #     domain_name: "DomainName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenew AWS API Documentation
     #
     # @overload disable_domain_auto_renew(params = {})
     # @param [Hash] params ({})
@@ -300,6 +306,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLock AWS API Documentation
+    #
     # @overload disable_domain_transfer_lock(params = {})
     # @param [Hash] params ({})
     def disable_domain_transfer_lock(params = {}, options = {})
@@ -331,6 +339,8 @@ module Aws::Route53Domains
     #   resp = client.enable_domain_auto_renew({
     #     domain_name: "DomainName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenew AWS API Documentation
     #
     # @overload enable_domain_auto_renew(params = {})
     # @param [Hash] params ({})
@@ -373,6 +383,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLock AWS API Documentation
+    #
     # @overload enable_domain_transfer_lock(params = {})
     # @param [Hash] params ({})
     def enable_domain_transfer_lock(params = {}, options = {})
@@ -413,6 +425,8 @@ module Aws::Route53Domains
     #
     #   resp.domain_name #=> String
     #   resp.status #=> String, one of "PENDING", "DONE", "EXPIRED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatus AWS API Documentation
     #
     # @overload get_contact_reachability_status(params = {})
     # @param [Hash] params ({})
@@ -540,6 +554,8 @@ module Aws::Route53Domains
     #   resp.status_list #=> Array
     #   resp.status_list[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetail AWS API Documentation
+    #
     # @overload get_domain_detail(params = {})
     # @param [Hash] params ({})
     def get_domain_detail(params = {}, options = {})
@@ -587,6 +603,8 @@ module Aws::Route53Domains
     #   resp.suggestions_list[0].domain_name #=> String
     #   resp.suggestions_list[0].availability #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestions AWS API Documentation
+    #
     # @overload get_domain_suggestions(params = {})
     # @param [Hash] params ({})
     def get_domain_suggestions(params = {}, options = {})
@@ -631,6 +649,8 @@ module Aws::Route53Domains
     #   resp.domain_name #=> String
     #   resp.type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK"
     #   resp.submitted_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetail AWS API Documentation
     #
     # @overload get_operation_detail(params = {})
     # @param [Hash] params ({})
@@ -692,6 +712,8 @@ module Aws::Route53Domains
     #   resp.domains[0].expiry #=> Time
     #   resp.next_page_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomains AWS API Documentation
+    #
     # @overload list_domains(params = {})
     # @param [Hash] params ({})
     def list_domains(params = {}, options = {})
@@ -748,6 +770,8 @@ module Aws::Route53Domains
     #   resp.operations[0].submitted_date #=> Time
     #   resp.next_page_marker #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperations AWS API Documentation
+    #
     # @overload list_operations(params = {})
     # @param [Hash] params ({})
     def list_operations(params = {}, options = {})
@@ -779,6 +803,8 @@ module Aws::Route53Domains
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomain AWS API Documentation
     #
     # @overload list_tags_for_domain(params = {})
     # @param [Hash] params ({})
@@ -1014,6 +1040,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomain AWS API Documentation
+    #
     # @overload register_domain(params = {})
     # @param [Hash] params ({})
     def register_domain(params = {}, options = {})
@@ -1082,6 +1110,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomain AWS API Documentation
+    #
     # @overload renew_domain(params = {})
     # @param [Hash] params ({})
     def renew_domain(params = {}, options = {})
@@ -1122,6 +1152,8 @@ module Aws::Route53Domains
     #   resp.email_address #=> String
     #   resp.is_already_verified #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmail AWS API Documentation
+    #
     # @overload resend_contact_reachability_email(params = {})
     # @param [Hash] params ({})
     def resend_contact_reachability_email(params = {}, options = {})
@@ -1159,6 +1191,8 @@ module Aws::Route53Domains
     # @example Response structure
     #
     #   resp.auth_code #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCode AWS API Documentation
     #
     # @overload retrieve_domain_auth_code(params = {})
     # @param [Hash] params ({})
@@ -1419,6 +1453,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomain AWS API Documentation
+    #
     # @overload transfer_domain(params = {})
     # @param [Hash] params ({})
     def transfer_domain(params = {}, options = {})
@@ -1558,6 +1594,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContact AWS API Documentation
+    #
     # @overload update_domain_contact(params = {})
     # @param [Hash] params ({})
     def update_domain_contact(params = {}, options = {})
@@ -1653,6 +1691,8 @@ module Aws::Route53Domains
     #
     #   resp.operation_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacy AWS API Documentation
+    #
     # @overload update_domain_contact_privacy(params = {})
     # @param [Hash] params ({})
     def update_domain_contact_privacy(params = {}, options = {})
@@ -1715,6 +1755,8 @@ module Aws::Route53Domains
     # @example Response structure
     #
     #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameservers AWS API Documentation
     #
     # @overload update_domain_nameservers(params = {})
     # @param [Hash] params ({})
@@ -1802,6 +1844,8 @@ module Aws::Route53Domains
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomain AWS API Documentation
+    #
     # @overload update_tags_for_domain(params = {})
     # @param [Hash] params ({})
     def update_tags_for_domain(params = {}, options = {})
@@ -1884,6 +1928,8 @@ module Aws::Route53Domains
     #   resp.billing_records[0].invoice_id #=> String
     #   resp.billing_records[0].bill_date #=> Time
     #   resp.billing_records[0].price #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBilling AWS API Documentation
     #
     # @overload view_billing(params = {})
     # @param [Hash] params ({})

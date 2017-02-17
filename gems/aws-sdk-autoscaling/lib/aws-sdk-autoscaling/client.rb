@@ -178,6 +178,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstances AWS API Documentation
+    #
     # @overload attach_instances(params = {})
     # @param [Hash] params ({})
     def attach_instances(params = {}, options = {})
@@ -213,6 +215,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     target_group_arns: ["XmlStringMaxLen511"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroups AWS API Documentation
     #
     # @overload attach_load_balancer_target_groups(params = {})
     # @param [Hash] params ({})
@@ -252,6 +256,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     load_balancer_names: ["XmlStringMaxLen255"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancers AWS API Documentation
     #
     # @overload attach_load_balancers(params = {})
     # @param [Hash] params ({})
@@ -321,6 +327,8 @@ module Aws::AutoScaling
     #     lifecycle_action_result: "LifecycleActionResult", # required
     #     instance_id: "XmlStringMaxLen19",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleAction AWS API Documentation
     #
     # @overload complete_lifecycle_action(params = {})
     # @param [Hash] params ({})
@@ -515,6 +523,8 @@ module Aws::AutoScaling
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroup AWS API Documentation
     #
     # @overload create_auto_scaling_group(params = {})
     # @param [Hash] params ({})
@@ -768,6 +778,8 @@ module Aws::AutoScaling
     #     placement_tenancy: "XmlStringMaxLen64",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfiguration AWS API Documentation
+    #
     # @overload create_launch_configuration(params = {})
     # @param [Hash] params ({})
     def create_launch_configuration(params = {}, options = {})
@@ -806,6 +818,8 @@ module Aws::AutoScaling
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTags AWS API Documentation
     #
     # @overload create_or_update_tags(params = {})
     # @param [Hash] params ({})
@@ -850,6 +864,8 @@ module Aws::AutoScaling
     #     force_delete: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroup AWS API Documentation
+    #
     # @overload delete_auto_scaling_group(params = {})
     # @param [Hash] params ({})
     def delete_auto_scaling_group(params = {}, options = {})
@@ -873,6 +889,8 @@ module Aws::AutoScaling
     #   resp = client.delete_launch_configuration({
     #     launch_configuration_name: "ResourceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLaunchConfiguration AWS API Documentation
     #
     # @overload delete_launch_configuration(params = {})
     # @param [Hash] params ({})
@@ -902,6 +920,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHook AWS API Documentation
+    #
     # @overload delete_lifecycle_hook(params = {})
     # @param [Hash] params ({})
     def delete_lifecycle_hook(params = {}, options = {})
@@ -926,6 +946,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     topic_arn: "ResourceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfiguration AWS API Documentation
     #
     # @overload delete_notification_configuration(params = {})
     # @param [Hash] params ({})
@@ -954,6 +976,8 @@ module Aws::AutoScaling
     #     policy_name: "ResourceName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicy AWS API Documentation
+    #
     # @overload delete_policy(params = {})
     # @param [Hash] params ({})
     def delete_policy(params = {}, options = {})
@@ -977,6 +1001,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     scheduled_action_name: "ResourceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledAction AWS API Documentation
     #
     # @overload delete_scheduled_action(params = {})
     # @param [Hash] params ({})
@@ -1005,6 +1031,8 @@ module Aws::AutoScaling
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTags AWS API Documentation
     #
     # @overload delete_tags(params = {})
     # @param [Hash] params ({})
@@ -1037,6 +1065,8 @@ module Aws::AutoScaling
     #   resp.number_of_auto_scaling_groups #=> Integer
     #   resp.number_of_launch_configurations #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimits AWS API Documentation
+    #
     # @overload describe_account_limits(params = {})
     # @param [Hash] params ({})
     def describe_account_limits(params = {}, options = {})
@@ -1054,6 +1084,8 @@ module Aws::AutoScaling
     #
     #   resp.adjustment_types #=> Array
     #   resp.adjustment_types[0].adjustment_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypes AWS API Documentation
     #
     # @overload describe_adjustment_types(params = {})
     # @param [Hash] params ({})
@@ -1134,6 +1166,8 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].new_instances_protected_from_scale_in #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingGroups AWS API Documentation
+    #
     # @overload describe_auto_scaling_groups(params = {})
     # @param [Hash] params ({})
     def describe_auto_scaling_groups(params = {}, options = {})
@@ -1180,6 +1214,8 @@ module Aws::AutoScaling
     #   resp.auto_scaling_instances[0].protected_from_scale_in #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstances AWS API Documentation
+    #
     # @overload describe_auto_scaling_instances(params = {})
     # @param [Hash] params ({})
     def describe_auto_scaling_instances(params = {}, options = {})
@@ -1197,6 +1233,8 @@ module Aws::AutoScaling
     #
     #   resp.auto_scaling_notification_types #=> Array
     #   resp.auto_scaling_notification_types[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypes AWS API Documentation
     #
     # @overload describe_auto_scaling_notification_types(params = {})
     # @param [Hash] params ({})
@@ -1267,6 +1305,8 @@ module Aws::AutoScaling
     #   resp.launch_configurations[0].placement_tenancy #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLaunchConfigurations AWS API Documentation
+    #
     # @overload describe_launch_configurations(params = {})
     # @param [Hash] params ({})
     def describe_launch_configurations(params = {}, options = {})
@@ -1284,6 +1324,8 @@ module Aws::AutoScaling
     #
     #   resp.lifecycle_hook_types #=> Array
     #   resp.lifecycle_hook_types[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypes AWS API Documentation
     #
     # @overload describe_lifecycle_hook_types(params = {})
     # @param [Hash] params ({})
@@ -1325,6 +1367,8 @@ module Aws::AutoScaling
     #   resp.lifecycle_hooks[0].global_timeout #=> Integer
     #   resp.lifecycle_hooks[0].default_result #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooks AWS API Documentation
+    #
     # @overload describe_lifecycle_hooks(params = {})
     # @param [Hash] params ({})
     def describe_lifecycle_hooks(params = {}, options = {})
@@ -1363,6 +1407,8 @@ module Aws::AutoScaling
     #   resp.load_balancer_target_groups[0].load_balancer_target_group_arn #=> String
     #   resp.load_balancer_target_groups[0].state #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroups AWS API Documentation
     #
     # @overload describe_load_balancer_target_groups(params = {})
     # @param [Hash] params ({})
@@ -1407,6 +1453,8 @@ module Aws::AutoScaling
     #   resp.load_balancers[0].state #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancers AWS API Documentation
+    #
     # @overload describe_load_balancers(params = {})
     # @param [Hash] params ({})
     def describe_load_balancers(params = {}, options = {})
@@ -1431,6 +1479,8 @@ module Aws::AutoScaling
     #   resp.metrics[0].metric #=> String
     #   resp.granularities #=> Array
     #   resp.granularities[0].granularity #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypes AWS API Documentation
     #
     # @overload describe_metric_collection_types(params = {})
     # @param [Hash] params ({})
@@ -1472,6 +1522,8 @@ module Aws::AutoScaling
     #   resp.notification_configurations[0].topic_arn #=> String
     #   resp.notification_configurations[0].notification_type #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurations AWS API Documentation
     #
     # @overload describe_notification_configurations(params = {})
     # @param [Hash] params ({})
@@ -1541,6 +1593,8 @@ module Aws::AutoScaling
     #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePolicies AWS API Documentation
+    #
     # @overload describe_policies(params = {})
     # @param [Hash] params ({})
     def describe_policies(params = {}, options = {})
@@ -1597,6 +1651,8 @@ module Aws::AutoScaling
     #   resp.activities[0].details #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivities AWS API Documentation
+    #
     # @overload describe_scaling_activities(params = {})
     # @param [Hash] params ({})
     def describe_scaling_activities(params = {}, options = {})
@@ -1615,6 +1671,8 @@ module Aws::AutoScaling
     #
     #   resp.processes #=> Array
     #   resp.processes[0].process_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingProcessTypes AWS API Documentation
     #
     # @overload describe_scaling_process_types(params = {})
     # @param [Hash] params ({})
@@ -1685,6 +1743,8 @@ module Aws::AutoScaling
     #   resp.scheduled_update_group_actions[0].desired_capacity #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActions AWS API Documentation
+    #
     # @overload describe_scheduled_actions(params = {})
     # @param [Hash] params ({})
     def describe_scheduled_actions(params = {}, options = {})
@@ -1741,6 +1801,8 @@ module Aws::AutoScaling
     #   resp.tags[0].propagate_at_launch #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTags AWS API Documentation
+    #
     # @overload describe_tags(params = {})
     # @param [Hash] params ({})
     def describe_tags(params = {}, options = {})
@@ -1758,6 +1820,8 @@ module Aws::AutoScaling
     #
     #   resp.termination_policy_types #=> Array
     #   resp.termination_policy_types[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypes AWS API Documentation
     #
     # @overload describe_termination_policy_types(params = {})
     # @param [Hash] params ({})
@@ -1822,6 +1886,8 @@ module Aws::AutoScaling
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstances AWS API Documentation
+    #
     # @overload detach_instances(params = {})
     # @param [Hash] params ({})
     def detach_instances(params = {}, options = {})
@@ -1846,6 +1912,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     target_group_arns: ["XmlStringMaxLen511"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroups AWS API Documentation
     #
     # @overload detach_load_balancer_target_groups(params = {})
     # @param [Hash] params ({})
@@ -1880,6 +1948,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     load_balancer_names: ["XmlStringMaxLen255"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancers AWS API Documentation
     #
     # @overload detach_load_balancers(params = {})
     # @param [Hash] params ({})
@@ -1921,6 +1991,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     metrics: ["XmlStringMaxLen255"],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollection AWS API Documentation
     #
     # @overload disable_metrics_collection(params = {})
     # @param [Hash] params ({})
@@ -1973,6 +2045,8 @@ module Aws::AutoScaling
     #     metrics: ["XmlStringMaxLen255"],
     #     granularity: "XmlStringMaxLen255", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollection AWS API Documentation
     #
     # @overload enable_metrics_collection(params = {})
     # @param [Hash] params ({})
@@ -2028,6 +2102,8 @@ module Aws::AutoScaling
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandby AWS API Documentation
     #
     # @overload enter_standby(params = {})
     # @param [Hash] params ({})
@@ -2090,6 +2166,8 @@ module Aws::AutoScaling
     #     breach_threshold: 1.0,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicy AWS API Documentation
+    #
     # @overload execute_policy(params = {})
     # @param [Hash] params ({})
     def execute_policy(params = {}, options = {})
@@ -2136,6 +2214,8 @@ module Aws::AutoScaling
     #   resp.activities[0].status_message #=> String
     #   resp.activities[0].progress #=> Integer
     #   resp.activities[0].details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandby AWS API Documentation
     #
     # @overload exit_standby(params = {})
     # @param [Hash] params ({})
@@ -2252,6 +2332,8 @@ module Aws::AutoScaling
     #     default_result: "LifecycleActionResult",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHook AWS API Documentation
+    #
     # @overload put_lifecycle_hook(params = {})
     # @param [Hash] params ({})
     def put_lifecycle_hook(params = {}, options = {})
@@ -2294,6 +2376,8 @@ module Aws::AutoScaling
     #     topic_arn: "ResourceName", # required
     #     notification_types: ["XmlStringMaxLen255"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfiguration AWS API Documentation
     #
     # @overload put_notification_configuration(params = {})
     # @param [Hash] params ({})
@@ -2421,6 +2505,8 @@ module Aws::AutoScaling
     #
     #   resp.policy_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicy AWS API Documentation
+    #
     # @overload put_scaling_policy(params = {})
     # @param [Hash] params ({})
     def put_scaling_policy(params = {}, options = {})
@@ -2496,6 +2582,8 @@ module Aws::AutoScaling
     #     desired_capacity: 1,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupAction AWS API Documentation
+    #
     # @overload put_scheduled_update_group_action(params = {})
     # @param [Hash] params ({})
     def put_scheduled_update_group_action(params = {}, options = {})
@@ -2560,6 +2648,8 @@ module Aws::AutoScaling
     #     instance_id: "XmlStringMaxLen19",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeat AWS API Documentation
+    #
     # @overload record_lifecycle_action_heartbeat(params = {})
     # @param [Hash] params ({})
     def record_lifecycle_action_heartbeat(params = {}, options = {})
@@ -2609,6 +2699,8 @@ module Aws::AutoScaling
     #     scaling_processes: ["XmlStringMaxLen255"],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ResumeProcesses AWS API Documentation
+    #
     # @overload resume_processes(params = {})
     # @param [Hash] params ({})
     def resume_processes(params = {}, options = {})
@@ -2648,6 +2740,8 @@ module Aws::AutoScaling
     #     desired_capacity: 1, # required
     #     honor_cooldown: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacity AWS API Documentation
     #
     # @overload set_desired_capacity(params = {})
     # @param [Hash] params ({})
@@ -2693,6 +2787,8 @@ module Aws::AutoScaling
     #     should_respect_grace_period: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealth AWS API Documentation
+    #
     # @overload set_instance_health(params = {})
     # @param [Hash] params ({})
     def set_instance_health(params = {}, options = {})
@@ -2728,6 +2824,8 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "ResourceName", # required
     #     protected_from_scale_in: false, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtection AWS API Documentation
     #
     # @overload set_instance_protection(params = {})
     # @param [Hash] params ({})
@@ -2783,6 +2881,8 @@ module Aws::AutoScaling
     #     scaling_processes: ["XmlStringMaxLen255"],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendProcesses AWS API Documentation
+    #
     # @overload suspend_processes(params = {})
     # @param [Hash] params ({})
     def suspend_processes(params = {}, options = {})
@@ -2826,6 +2926,8 @@ module Aws::AutoScaling
     #   resp.activity.status_message #=> String
     #   resp.activity.progress #=> Integer
     #   resp.activity.details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroup AWS API Documentation
     #
     # @overload terminate_instance_in_auto_scaling_group(params = {})
     # @param [Hash] params ({})
@@ -2967,6 +3069,8 @@ module Aws::AutoScaling
     #     termination_policies: ["XmlStringMaxLen1600"],
     #     new_instances_protected_from_scale_in: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroup AWS API Documentation
     #
     # @overload update_auto_scaling_group(params = {})
     # @param [Hash] params ({})

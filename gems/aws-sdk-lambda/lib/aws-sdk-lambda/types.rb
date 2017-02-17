@@ -39,6 +39,8 @@ module Aws::Lambda
     #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountLimit AWS API Documentation
+    #
     class AccountLimit < Struct.new(
       :total_code_size,
       :code_size_unzipped,
@@ -58,6 +60,8 @@ module Aws::Lambda
     # @!attribute [rw] function_count
     #   The number of your account's existing functions per region.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AccountUsage AWS API Documentation
     #
     class AccountUsage < Struct.new(
       :total_code_size,
@@ -164,6 +168,8 @@ module Aws::Lambda
     #   `arn:aws:lambda:aws-region:acct-id:function:function-name`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
+    #
     class AddPermissionRequest < Struct.new(
       :function_name,
       :statement_id,
@@ -181,6 +187,8 @@ module Aws::Lambda
     #   returns the same as a string using a backslash ("\\") as an escape
     #   character in the JSON.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionResponse AWS API Documentation
     #
     class AddPermissionResponse < Struct.new(
       :statement)
@@ -208,6 +216,8 @@ module Aws::Lambda
     # @!attribute [rw] description
     #   Alias description.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AliasConfiguration AWS API Documentation
     #
     class AliasConfiguration < Struct.new(
       :alias_arn,
@@ -242,6 +252,8 @@ module Aws::Lambda
     # @!attribute [rw] description
     #   Description of the alias.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateAliasRequest AWS API Documentation
     #
     class CreateAliasRequest < Struct.new(
       :function_name,
@@ -330,6 +342,8 @@ module Aws::Lambda
     #
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateEventSourceMappingRequest AWS API Documentation
     #
     class CreateEventSourceMappingRequest < Struct.new(
       :event_source_arn,
@@ -471,6 +485,8 @@ module Aws::Lambda
     #   use a default service key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
+    #
     class CreateFunctionRequest < Struct.new(
       :function_name,
       :runtime,
@@ -503,6 +519,8 @@ module Aws::Lambda
     #   topic you specify as your Dead Letter Queue (DLQ).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig AWS API Documentation
+    #
     class DeadLetterConfig < Struct.new(
       :target_arn)
       include Aws::Structure
@@ -525,6 +543,8 @@ module Aws::Lambda
     #   Name of the alias to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteAliasRequest AWS API Documentation
+    #
     class DeleteAliasRequest < Struct.new(
       :function_name,
       :name)
@@ -541,6 +561,8 @@ module Aws::Lambda
     # @!attribute [rw] uuid
     #   The event source mapping ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteEventSourceMappingRequest AWS API Documentation
     #
     class DeleteEventSourceMappingRequest < Struct.new(
       :uuid)
@@ -588,6 +610,8 @@ module Aws::Lambda
     #   function, including all of its versions and aliases.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest AWS API Documentation
+    #
     class DeleteFunctionRequest < Struct.new(
       :function_name,
       :qualifier)
@@ -611,6 +635,8 @@ module Aws::Lambda
     #   settings. The value you specify cannot contain a ",".
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment AWS API Documentation
+    #
     class Environment < Struct.new(
       :variables)
       include Aws::Structure
@@ -626,6 +652,8 @@ module Aws::Lambda
     # @!attribute [rw] message
     #   The message returned by the environment error object.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentError AWS API Documentation
     #
     class EnvironmentError < Struct.new(
       :error_code,
@@ -646,6 +674,8 @@ module Aws::Lambda
     #   The parent object that contains error information associated with
     #   your configuration settings.
     #   @return [Types::EnvironmentError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EnvironmentResponse AWS API Documentation
     #
     class EnvironmentResponse < Struct.new(
       :variables,
@@ -696,6 +726,8 @@ module Aws::Lambda
     #   The reason the event source mapping is in its current state. It is
     #   either user-requested or an AWS Lambda-initiated state transition.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EventSourceMappingConfiguration AWS API Documentation
     #
     class EventSourceMappingConfiguration < Struct.new(
       :uuid,
@@ -750,6 +782,8 @@ module Aws::Lambda
     #   upload.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCode AWS API Documentation
+    #
     class FunctionCode < Struct.new(
       :zip_file,
       :s3_bucket,
@@ -768,6 +802,8 @@ module Aws::Lambda
     #   The presigned URL you can use to download the function's .zip file
     #   that you previously uploaded. The URL is valid for up to 10 minutes.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionCodeLocation AWS API Documentation
     #
     class FunctionCodeLocation < Struct.new(
       :repository_type,
@@ -854,6 +890,8 @@ module Aws::Lambda
     #   the AWS Lambda default service key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
+    #
     class FunctionConfiguration < Struct.new(
       :function_name,
       :function_arn,
@@ -876,6 +914,8 @@ module Aws::Lambda
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest AWS API Documentation
+    #
     class GetAccountSettingsRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] account_limit
@@ -887,6 +927,8 @@ module Aws::Lambda
     #   Provides code size usage and function count associated with the
     #   current account and region.
     #   @return [Types::AccountUsage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsResponse AWS API Documentation
     #
     class GetAccountSettingsResponse < Struct.new(
       :account_limit,
@@ -912,6 +954,8 @@ module Aws::Lambda
     #   Name of the alias for which you want to retrieve information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAliasRequest AWS API Documentation
+    #
     class GetAliasRequest < Struct.new(
       :function_name,
       :name)
@@ -928,6 +972,8 @@ module Aws::Lambda
     # @!attribute [rw] uuid
     #   The AWS Lambda assigned ID of the event source mapping.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetEventSourceMappingRequest AWS API Documentation
     #
     class GetEventSourceMappingRequest < Struct.new(
       :uuid)
@@ -968,6 +1014,8 @@ module Aws::Lambda
     #   version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionConfigurationRequest AWS API Documentation
+    #
     class GetFunctionConfigurationRequest < Struct.new(
       :function_name,
       :qualifier)
@@ -1005,6 +1053,8 @@ module Aws::Lambda
     #   information about the `$LATEST` version of the Lambda function.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionRequest AWS API Documentation
+    #
     class GetFunctionRequest < Struct.new(
       :function_name,
       :qualifier)
@@ -1021,6 +1071,8 @@ module Aws::Lambda
     # @!attribute [rw] code
     #   The object for the Lambda function location.
     #   @return [Types::FunctionCodeLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse AWS API Documentation
     #
     class GetFunctionResponse < Struct.new(
       :configuration,
@@ -1059,6 +1111,8 @@ module Aws::Lambda
     #   apply to the unqualified function ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyRequest AWS API Documentation
+    #
     class GetPolicyRequest < Struct.new(
       :function_name,
       :qualifier)
@@ -1070,6 +1124,8 @@ module Aws::Lambda
     #   response returns the same as a string using a backslash ("\\") as
     #   an escape character in the JSON.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetPolicyResponse AWS API Documentation
     #
     class GetPolicyResponse < Struct.new(
       :policy)
@@ -1150,6 +1206,8 @@ module Aws::Lambda
     #   function ARN which results in invocation of the `$LATEST` version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationRequest AWS API Documentation
+    #
     class InvocationRequest < Struct.new(
       :function_name,
       :invocation_type,
@@ -1202,6 +1260,8 @@ module Aws::Lambda
     #   the message.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvocationResponse AWS API Documentation
+    #
     class InvocationResponse < Struct.new(
       :status_code,
       :function_error,
@@ -1226,6 +1286,8 @@ module Aws::Lambda
     #   JSON that you want to provide to your Lambda function as input.
     #   @return [IO]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncRequest AWS API Documentation
+    #
     class InvokeAsyncRequest < Struct.new(
       :function_name,
       :invoke_args)
@@ -1238,6 +1300,8 @@ module Aws::Lambda
     # @!attribute [rw] status
     #   It will be 202 upon success.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/InvokeAsyncResponse AWS API Documentation
     #
     class InvokeAsyncResponse < Struct.new(
       :status)
@@ -1276,6 +1340,8 @@ module Aws::Lambda
     #   in response. This parameter value must be greater than 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesRequest AWS API Documentation
+    #
     class ListAliasesRequest < Struct.new(
       :function_name,
       :function_version,
@@ -1291,6 +1357,8 @@ module Aws::Lambda
     # @!attribute [rw] aliases
     #   A list of aliases.
     #   @return [Array<Types::AliasConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListAliasesResponse AWS API Documentation
     #
     class ListAliasesResponse < Struct.new(
       :next_marker,
@@ -1339,6 +1407,8 @@ module Aws::Lambda
     #   return in response. This value must be greater than 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsRequest AWS API Documentation
+    #
     class ListEventSourceMappingsRequest < Struct.new(
       :event_source_arn,
       :function_name,
@@ -1356,6 +1426,8 @@ module Aws::Lambda
     # @!attribute [rw] event_source_mappings
     #   An array of `EventSourceMappingConfiguration` objects.
     #   @return [Array<Types::EventSourceMappingConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListEventSourceMappingsResponse AWS API Documentation
     #
     class ListEventSourceMappingsResponse < Struct.new(
       :next_marker,
@@ -1383,6 +1455,8 @@ module Aws::Lambda
     #   greater than 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsRequest AWS API Documentation
+    #
     class ListFunctionsRequest < Struct.new(
       :marker,
       :max_items)
@@ -1399,6 +1473,8 @@ module Aws::Lambda
     # @!attribute [rw] functions
     #   A list of Lambda functions.
     #   @return [Array<Types::FunctionConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionsResponse AWS API Documentation
     #
     class ListFunctionsResponse < Struct.new(
       :next_marker,
@@ -1438,6 +1514,8 @@ module Aws::Lambda
     #   be greater than 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionRequest AWS API Documentation
+    #
     class ListVersionsByFunctionRequest < Struct.new(
       :function_name,
       :marker,
@@ -1452,6 +1530,8 @@ module Aws::Lambda
     # @!attribute [rw] versions
     #   A list of Lambda function versions.
     #   @return [Array<Types::FunctionConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunctionResponse AWS API Documentation
     #
     class ListVersionsByFunctionResponse < Struct.new(
       :next_marker,
@@ -1490,6 +1570,8 @@ module Aws::Lambda
     #   The description for the version you are publishing. If not provided,
     #   AWS Lambda copies the description from the $LATEST version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersionRequest AWS API Documentation
     #
     class PublishVersionRequest < Struct.new(
       :function_name,
@@ -1531,6 +1613,8 @@ module Aws::Lambda
     #   associated with the unqualified function ARN.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/RemovePermissionRequest AWS API Documentation
+    #
     class RemovePermissionRequest < Struct.new(
       :function_name,
       :statement_id,
@@ -1564,6 +1648,8 @@ module Aws::Lambda
     # @!attribute [rw] description
     #   You can change the description of the alias using this parameter.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateAliasRequest AWS API Documentation
     #
     class UpdateAliasRequest < Struct.new(
       :function_name,
@@ -1619,6 +1705,8 @@ module Aws::Lambda
     #   The maximum number of stream records that can be sent to your Lambda
     #   function for a single invocation.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateEventSourceMappingRequest AWS API Documentation
     #
     class UpdateEventSourceMappingRequest < Struct.new(
       :uuid,
@@ -1685,6 +1773,8 @@ module Aws::Lambda
     #   This boolean parameter can be used to request AWS Lambda to update
     #   the Lambda function and publish a version as an atomic operation.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
     #
     class UpdateFunctionCodeRequest < Struct.new(
       :function_name,
@@ -1801,6 +1891,8 @@ module Aws::Lambda
     #   parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
+    #
     class UpdateFunctionConfigurationRequest < Struct.new(
       :function_name,
       :role,
@@ -1837,6 +1929,8 @@ module Aws::Lambda
     #   A list of one or more security groups IDs in your VPC.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfig AWS API Documentation
+    #
     class VpcConfig < Struct.new(
       :subnet_ids,
       :security_group_ids)
@@ -1856,6 +1950,8 @@ module Aws::Lambda
     # @!attribute [rw] vpc_id
     #   The VPC ID associated with you Lambda function.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/VpcConfigResponse AWS API Documentation
     #
     class VpcConfigResponse < Struct.new(
       :subnet_ids,

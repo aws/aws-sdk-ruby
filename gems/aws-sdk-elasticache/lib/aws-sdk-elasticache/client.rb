@@ -199,6 +199,8 @@ module Aws::ElastiCache
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResource AWS API Documentation
+    #
     # @overload add_tags_to_resource(params = {})
     # @param [Hash] params ({})
     def add_tags_to_resource(params = {}, options = {})
@@ -248,6 +250,8 @@ module Aws::ElastiCache
     #   resp.cache_security_group.ec2_security_groups[0].status #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngress AWS API Documentation
     #
     # @overload authorize_cache_security_group_ingress(params = {})
     # @param [Hash] params ({})
@@ -408,6 +412,8 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshot AWS API Documentation
     #
     # @overload copy_snapshot(params = {})
     # @param [Hash] params ({})
@@ -808,6 +814,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheCluster AWS API Documentation
+    #
     # @overload create_cache_cluster(params = {})
     # @param [Hash] params ({})
     def create_cache_cluster(params = {}, options = {})
@@ -849,6 +857,8 @@ module Aws::ElastiCache
     #   resp.cache_parameter_group.cache_parameter_group_name #=> String
     #   resp.cache_parameter_group.cache_parameter_group_family #=> String
     #   resp.cache_parameter_group.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroup AWS API Documentation
     #
     # @overload create_cache_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -902,6 +912,8 @@ module Aws::ElastiCache
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroup AWS API Documentation
+    #
     # @overload create_cache_security_group(params = {})
     # @param [Hash] params ({})
     def create_cache_security_group(params = {}, options = {})
@@ -949,6 +961,8 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets #=> Array
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroup AWS API Documentation
     #
     # @overload create_cache_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -1381,6 +1395,8 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_retention_limit #=> Integer
     #   resp.replication_group.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
+    #
     # @overload create_replication_group(params = {})
     # @param [Hash] params ({})
     def create_replication_group(params = {}, options = {})
@@ -1455,6 +1471,8 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshot AWS API Documentation
     #
     # @overload create_snapshot(params = {})
     # @param [Hash] params ({})
@@ -1544,6 +1562,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheCluster AWS API Documentation
+    #
     # @overload delete_cache_cluster(params = {})
     # @param [Hash] params ({})
     def delete_cache_cluster(params = {}, options = {})
@@ -1569,6 +1589,8 @@ module Aws::ElastiCache
     #   resp = client.delete_cache_parameter_group({
     #     cache_parameter_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroup AWS API Documentation
     #
     # @overload delete_cache_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -1599,6 +1621,8 @@ module Aws::ElastiCache
     #     cache_security_group_name: "String", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroup AWS API Documentation
+    #
     # @overload delete_cache_security_group(params = {})
     # @param [Hash] params ({})
     def delete_cache_security_group(params = {}, options = {})
@@ -1626,6 +1650,8 @@ module Aws::ElastiCache
     #   resp = client.delete_cache_subnet_group({
     #     cache_subnet_group_name: "String", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroup AWS API Documentation
     #
     # @overload delete_cache_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -1704,6 +1730,8 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_retention_limit #=> Integer
     #   resp.replication_group.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
+    #
     # @overload delete_replication_group(params = {})
     # @param [Hash] params ({})
     def delete_replication_group(params = {}, options = {})
@@ -1769,6 +1797,8 @@ module Aws::ElastiCache
     #   resp.snapshot.node_snapshots[0].cache_size #=> String
     #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshot AWS API Documentation
     #
     # @overload delete_snapshot(params = {})
     # @param [Hash] params ({})
@@ -1889,6 +1919,8 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].snapshot_retention_limit #=> Integer
     #   resp.cache_clusters[0].snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClusters AWS API Documentation
+    #
     # @overload describe_cache_clusters(params = {})
     # @param [Hash] params ({})
     def describe_cache_clusters(params = {}, options = {})
@@ -1967,6 +1999,8 @@ module Aws::ElastiCache
     #   resp.cache_engine_versions[0].cache_engine_description #=> String
     #   resp.cache_engine_versions[0].cache_engine_version_description #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersions AWS API Documentation
+    #
     # @overload describe_cache_engine_versions(params = {})
     # @param [Hash] params ({})
     def describe_cache_engine_versions(params = {}, options = {})
@@ -2017,6 +2051,8 @@ module Aws::ElastiCache
     #   resp.cache_parameter_groups[0].cache_parameter_group_name #=> String
     #   resp.cache_parameter_groups[0].cache_parameter_group_family #=> String
     #   resp.cache_parameter_groups[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroups AWS API Documentation
     #
     # @overload describe_cache_parameter_groups(params = {})
     # @param [Hash] params ({})
@@ -2093,6 +2129,8 @@ module Aws::ElastiCache
     #   resp.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].value #=> String
     #   resp.cache_node_type_specific_parameters[0].change_type #=> String, one of "immediate", "requires-reboot"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameters AWS API Documentation
+    #
     # @overload describe_cache_parameters(params = {})
     # @param [Hash] params ({})
     def describe_cache_parameters(params = {}, options = {})
@@ -2148,6 +2186,8 @@ module Aws::ElastiCache
     #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_owner_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroups AWS API Documentation
+    #
     # @overload describe_cache_security_groups(params = {})
     # @param [Hash] params ({})
     def describe_cache_security_groups(params = {}, options = {})
@@ -2201,6 +2241,8 @@ module Aws::ElastiCache
     #   resp.cache_subnet_groups[0].subnets #=> Array
     #   resp.cache_subnet_groups[0].subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroups AWS API Documentation
     #
     # @overload describe_cache_subnet_groups(params = {})
     # @param [Hash] params ({})
@@ -2272,6 +2314,8 @@ module Aws::ElastiCache
     #   resp.engine_defaults.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].cache_node_type #=> String
     #   resp.engine_defaults.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].value #=> String
     #   resp.engine_defaults.cache_node_type_specific_parameters[0].change_type #=> String, one of "immediate", "requires-reboot"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParameters AWS API Documentation
     #
     # @overload describe_engine_default_parameters(params = {})
     # @param [Hash] params ({})
@@ -2349,6 +2393,8 @@ module Aws::ElastiCache
     #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group", "replication-group"
     #   resp.events[0].message #=> String
     #   resp.events[0].date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEvents AWS API Documentation
     #
     # @overload describe_events(params = {})
     # @param [Hash] params ({})
@@ -2431,6 +2477,8 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].configuration_endpoint.port #=> Integer
     #   resp.replication_groups[0].snapshot_retention_limit #=> Integer
     #   resp.replication_groups[0].snapshot_window #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups AWS API Documentation
     #
     # @overload describe_replication_groups(params = {})
     # @param [Hash] params ({})
@@ -2570,6 +2618,8 @@ module Aws::ElastiCache
     #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodes AWS API Documentation
+    #
     # @overload describe_reserved_cache_nodes(params = {})
     # @param [Hash] params ({})
     def describe_reserved_cache_nodes(params = {}, options = {})
@@ -2701,6 +2751,8 @@ module Aws::ElastiCache
     #   resp.reserved_cache_nodes_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_cache_nodes_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesOfferings AWS API Documentation
+    #
     # @overload describe_reserved_cache_nodes_offerings(params = {})
     # @param [Hash] params ({})
     def describe_reserved_cache_nodes_offerings(params = {}, options = {})
@@ -2814,6 +2866,8 @@ module Aws::ElastiCache
     #   resp.snapshots[0].node_snapshots[0].cache_node_create_time #=> Time
     #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshots AWS API Documentation
+    #
     # @overload describe_snapshots(params = {})
     # @param [Hash] params ({})
     def describe_snapshots(params = {}, options = {})
@@ -2863,6 +2917,8 @@ module Aws::ElastiCache
     #   resp.scale_up_modifications #=> Array
     #   resp.scale_up_modifications[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModifications AWS API Documentation
+    #
     # @overload list_allowed_node_type_modifications(params = {})
     # @param [Hash] params ({})
     def list_allowed_node_type_modifications(params = {}, options = {})
@@ -2911,6 +2967,8 @@ module Aws::ElastiCache
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -3271,6 +3329,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheCluster AWS API Documentation
+    #
     # @overload modify_cache_cluster(params = {})
     # @param [Hash] params ({})
     def modify_cache_cluster(params = {}, options = {})
@@ -3310,6 +3370,8 @@ module Aws::ElastiCache
     # @example Response structure
     #
     #   resp.cache_parameter_group_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroup AWS API Documentation
     #
     # @overload modify_cache_parameter_group(params = {})
     # @param [Hash] params ({})
@@ -3355,6 +3417,8 @@ module Aws::ElastiCache
     #   resp.cache_subnet_group.subnets #=> Array
     #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
     #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroup AWS API Documentation
     #
     # @overload modify_cache_subnet_group(params = {})
     # @param [Hash] params ({})
@@ -3581,6 +3645,8 @@ module Aws::ElastiCache
     #   resp.replication_group.snapshot_retention_limit #=> Integer
     #   resp.replication_group.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
+    #
     # @overload modify_replication_group(params = {})
     # @param [Hash] params ({})
     def modify_replication_group(params = {}, options = {})
@@ -3639,6 +3705,8 @@ module Aws::ElastiCache
     #   resp.reserved_cache_node.recurring_charges #=> Array
     #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_amount #=> Float
     #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_frequency #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOffering AWS API Documentation
     #
     # @overload purchase_reserved_cache_nodes_offering(params = {})
     # @param [Hash] params ({})
@@ -3724,6 +3792,8 @@ module Aws::ElastiCache
     #   resp.cache_cluster.snapshot_retention_limit #=> Integer
     #   resp.cache_cluster.snapshot_window #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheCluster AWS API Documentation
+    #
     # @overload reboot_cache_cluster(params = {})
     # @param [Hash] params ({})
     def reboot_cache_cluster(params = {}, options = {})
@@ -3767,6 +3837,8 @@ module Aws::ElastiCache
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResource AWS API Documentation
     #
     # @overload remove_tags_from_resource(params = {})
     # @param [Hash] params ({})
@@ -3818,6 +3890,8 @@ module Aws::ElastiCache
     #
     #   resp.cache_parameter_group_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroup AWS API Documentation
+    #
     # @overload reset_cache_parameter_group(params = {})
     # @param [Hash] params ({})
     def reset_cache_parameter_group(params = {}, options = {})
@@ -3862,6 +3936,8 @@ module Aws::ElastiCache
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
     #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngress AWS API Documentation
+    #
     # @overload revoke_cache_security_group_ingress(params = {})
     # @param [Hash] params ({})
     def revoke_cache_security_group_ingress(params = {}, options = {})
@@ -3882,7 +3958,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

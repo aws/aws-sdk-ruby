@@ -168,6 +168,8 @@ module Aws::CloudWatchLogs
     #     task_id: "ExportTaskId", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CancelExportTask AWS API Documentation
+    #
     # @overload cancel_export_task(params = {})
     # @param [Hash] params ({})
     def cancel_export_task(params = {}, options = {})
@@ -238,6 +240,8 @@ module Aws::CloudWatchLogs
     #
     #   resp.task_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateExportTask AWS API Documentation
+    #
     # @overload create_export_task(params = {})
     # @param [Hash] params ({})
     def create_export_task(params = {}, options = {})
@@ -276,6 +280,8 @@ module Aws::CloudWatchLogs
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogGroup AWS API Documentation
+    #
     # @overload create_log_group(params = {})
     # @param [Hash] params ({})
     def create_log_group(params = {}, options = {})
@@ -311,6 +317,8 @@ module Aws::CloudWatchLogs
     #     log_stream_name: "LogStreamName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/CreateLogStream AWS API Documentation
+    #
     # @overload create_log_stream(params = {})
     # @param [Hash] params ({})
     def create_log_stream(params = {}, options = {})
@@ -333,6 +341,8 @@ module Aws::CloudWatchLogs
     #     destination_name: "DestinationName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteDestination AWS API Documentation
+    #
     # @overload delete_destination(params = {})
     # @param [Hash] params ({})
     def delete_destination(params = {}, options = {})
@@ -353,6 +363,8 @@ module Aws::CloudWatchLogs
     #   resp = client.delete_log_group({
     #     log_group_name: "LogGroupName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogGroup AWS API Documentation
     #
     # @overload delete_log_group(params = {})
     # @param [Hash] params ({})
@@ -379,6 +391,8 @@ module Aws::CloudWatchLogs
     #     log_stream_name: "LogStreamName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteLogStream AWS API Documentation
+    #
     # @overload delete_log_stream(params = {})
     # @param [Hash] params ({})
     def delete_log_stream(params = {}, options = {})
@@ -403,6 +417,8 @@ module Aws::CloudWatchLogs
     #     filter_name: "FilterName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteMetricFilter AWS API Documentation
+    #
     # @overload delete_metric_filter(params = {})
     # @param [Hash] params ({})
     def delete_metric_filter(params = {}, options = {})
@@ -425,6 +441,8 @@ module Aws::CloudWatchLogs
     #   resp = client.delete_retention_policy({
     #     log_group_name: "LogGroupName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteRetentionPolicy AWS API Documentation
     #
     # @overload delete_retention_policy(params = {})
     # @param [Hash] params ({})
@@ -449,6 +467,8 @@ module Aws::CloudWatchLogs
     #     log_group_name: "LogGroupName", # required
     #     filter_name: "FilterName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteSubscriptionFilter AWS API Documentation
     #
     # @overload delete_subscription_filter(params = {})
     # @param [Hash] params ({})
@@ -495,6 +515,8 @@ module Aws::CloudWatchLogs
     #   resp.destinations[0].arn #=> String
     #   resp.destinations[0].creation_time #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDestinations AWS API Documentation
     #
     # @overload describe_destinations(params = {})
     # @param [Hash] params ({})
@@ -552,6 +574,8 @@ module Aws::CloudWatchLogs
     #   resp.export_tasks[0].execution_info.completion_time #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeExportTasks AWS API Documentation
+    #
     # @overload describe_export_tasks(params = {})
     # @param [Hash] params ({})
     def describe_export_tasks(params = {}, options = {})
@@ -597,6 +621,8 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].arn #=> String
     #   resp.log_groups[0].stored_bytes #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
     #
     # @overload describe_log_groups(params = {})
     # @param [Hash] params ({})
@@ -670,6 +696,8 @@ module Aws::CloudWatchLogs
     #   resp.log_streams[0].stored_bytes #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogStreams AWS API Documentation
+    #
     # @overload describe_log_streams(params = {})
     # @param [Hash] params ({})
     def describe_log_streams(params = {}, options = {})
@@ -731,6 +759,8 @@ module Aws::CloudWatchLogs
     #   resp.metric_filters[0].log_group_name #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeMetricFilters AWS API Documentation
+    #
     # @overload describe_metric_filters(params = {})
     # @param [Hash] params ({})
     def describe_metric_filters(params = {}, options = {})
@@ -782,6 +812,8 @@ module Aws::CloudWatchLogs
     #   resp.subscription_filters[0].distribution #=> String, one of "Random", "ByLogStream"
     #   resp.subscription_filters[0].creation_time #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeSubscriptionFilters AWS API Documentation
     #
     # @overload describe_subscription_filters(params = {})
     # @param [Hash] params ({})
@@ -866,6 +898,8 @@ module Aws::CloudWatchLogs
     #   resp.searched_log_streams[0].searched_completely #=> Boolean
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/FilterLogEvents AWS API Documentation
+    #
     # @overload filter_log_events(params = {})
     # @param [Hash] params ({})
     def filter_log_events(params = {}, options = {})
@@ -938,6 +972,8 @@ module Aws::CloudWatchLogs
     #   resp.next_forward_token #=> String
     #   resp.next_backward_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetLogEvents AWS API Documentation
+    #
     # @overload get_log_events(params = {})
     # @param [Hash] params ({})
     def get_log_events(params = {}, options = {})
@@ -966,6 +1002,8 @@ module Aws::CloudWatchLogs
     #
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListTagsLogGroup AWS API Documentation
     #
     # @overload list_tags_log_group(params = {})
     # @param [Hash] params ({})
@@ -1019,6 +1057,8 @@ module Aws::CloudWatchLogs
     #   resp.destination.arn #=> String
     #   resp.destination.creation_time #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestination AWS API Documentation
+    #
     # @overload put_destination(params = {})
     # @param [Hash] params ({})
     def put_destination(params = {}, options = {})
@@ -1050,6 +1090,8 @@ module Aws::CloudWatchLogs
     #     destination_name: "DestinationName", # required
     #     access_policy: "AccessPolicy", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDestinationPolicy AWS API Documentation
     #
     # @overload put_destination_policy(params = {})
     # @param [Hash] params ({})
@@ -1124,6 +1166,8 @@ module Aws::CloudWatchLogs
     #   resp.rejected_log_events_info.too_old_log_event_end_index #=> Integer
     #   resp.rejected_log_events_info.expired_log_event_end_index #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutLogEvents AWS API Documentation
+    #
     # @overload put_log_events(params = {})
     # @param [Hash] params ({})
     def put_log_events(params = {}, options = {})
@@ -1170,6 +1214,8 @@ module Aws::CloudWatchLogs
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutMetricFilter AWS API Documentation
+    #
     # @overload put_metric_filter(params = {})
     # @param [Hash] params ({})
     def put_metric_filter(params = {}, options = {})
@@ -1197,6 +1243,8 @@ module Aws::CloudWatchLogs
     #     log_group_name: "LogGroupName", # required
     #     retention_in_days: 1, # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutRetentionPolicy AWS API Documentation
     #
     # @overload put_retention_policy(params = {})
     # @param [Hash] params ({})
@@ -1275,6 +1323,8 @@ module Aws::CloudWatchLogs
     #     distribution: "Random", # accepts Random, ByLogStream
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutSubscriptionFilter AWS API Documentation
+    #
     # @overload put_subscription_filter(params = {})
     # @param [Hash] params ({})
     def put_subscription_filter(params = {}, options = {})
@@ -1310,6 +1360,8 @@ module Aws::CloudWatchLogs
     #       "TagKey" => "TagValue",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagLogGroup AWS API Documentation
     #
     # @overload tag_log_group(params = {})
     # @param [Hash] params ({})
@@ -1350,6 +1402,8 @@ module Aws::CloudWatchLogs
     #   resp.matches[0].extracted_values #=> Hash
     #   resp.matches[0].extracted_values["Token"] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TestMetricFilter AWS API Documentation
+    #
     # @overload test_metric_filter(params = {})
     # @param [Hash] params ({})
     def test_metric_filter(params = {}, options = {})
@@ -1377,6 +1431,8 @@ module Aws::CloudWatchLogs
     #     tags: ["TagKey"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/UntagLogGroup AWS API Documentation
+    #
     # @overload untag_log_group(params = {})
     # @param [Hash] params ({})
     def untag_log_group(params = {}, options = {})
@@ -1397,7 +1453,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -42,6 +42,8 @@ module Aws::ElastiCache
     #   is a key-value pair. A tag key must be accompanied by a tag value.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AddTagsToResourceMessage AWS API Documentation
+    #
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
       :tags)
@@ -50,6 +52,8 @@ module Aws::ElastiCache
 
     # @!attribute [rw] scale_up_modifications
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage AWS API Documentation
     #
     class AllowedNodeTypeModificationsMessage < Struct.new(
       :scale_up_modifications)
@@ -83,6 +87,8 @@ module Aws::ElastiCache
     #   provide a valid AWS account number for this parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngressMessage AWS API Documentation
+    #
     class AuthorizeCacheSecurityGroupIngressMessage < Struct.new(
       :cache_security_group_name,
       :ec2_security_group_name,
@@ -100,6 +106,8 @@ module Aws::ElastiCache
     #   * `RevokeCacheSecurityGroupIngress`
     #   @return [Types::CacheSecurityGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AuthorizeCacheSecurityGroupIngressResult AWS API Documentation
+    #
     class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group)
       include Aws::Structure
@@ -110,6 +118,8 @@ module Aws::ElastiCache
     # @!attribute [rw] name
     #   The name of the Availability Zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :name)
@@ -302,6 +312,8 @@ module Aws::ElastiCache
     #   Example: `05:00-09:00`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheCluster AWS API Documentation
+    #
     class CacheCluster < Struct.new(
       :cache_cluster_id,
       :configuration_endpoint,
@@ -339,6 +351,8 @@ module Aws::ElastiCache
     #   information about one cache cluster.
     #   @return [Array<Types::CacheCluster>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheClusterMessage AWS API Documentation
+    #
     class CacheClusterMessage < Struct.new(
       :marker,
       :cache_clusters)
@@ -371,6 +385,8 @@ module Aws::ElastiCache
     #   The description of the cache engine version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheEngineVersion AWS API Documentation
+    #
     class CacheEngineVersion < Struct.new(
       :engine,
       :engine_version,
@@ -390,6 +406,8 @@ module Aws::ElastiCache
     #   A list of cache engine version details. Each element in the list
     #   contains detailed information about one cache engine version.
     #   @return [Array<Types::CacheEngineVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheEngineVersionMessage AWS API Documentation
     #
     class CacheEngineVersionMessage < Struct.new(
       :marker,
@@ -479,6 +497,8 @@ module Aws::ElastiCache
     #   The Availability Zone where this node was created and now resides.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNode AWS API Documentation
+    #
     class CacheNode < Struct.new(
       :cache_node_id,
       :cache_node_status,
@@ -541,6 +561,8 @@ module Aws::ElastiCache
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeTypeSpecificParameter AWS API Documentation
+    #
     class CacheNodeTypeSpecificParameter < Struct.new(
       :parameter_name,
       :description,
@@ -563,6 +585,8 @@ module Aws::ElastiCache
     # @!attribute [rw] value
     #   The value for the cache node type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheNodeTypeSpecificValue AWS API Documentation
     #
     class CacheNodeTypeSpecificValue < Struct.new(
       :cache_node_type,
@@ -588,6 +612,8 @@ module Aws::ElastiCache
     #   The description for this cache parameter group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroup AWS API Documentation
+    #
     class CacheParameterGroup < Struct.new(
       :cache_parameter_group_name,
       :cache_parameter_group_family,
@@ -611,6 +637,8 @@ module Aws::ElastiCache
     #   parameter.
     #   @return [Array<Types::CacheNodeTypeSpecificParameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupDetails AWS API Documentation
+    #
     class CacheParameterGroupDetails < Struct.new(
       :marker,
       :parameters,
@@ -627,6 +655,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_parameter_group_name
     #   The name of the cache parameter group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupNameMessage AWS API Documentation
     #
     class CacheParameterGroupNameMessage < Struct.new(
       :cache_parameter_group_name)
@@ -649,6 +679,8 @@ module Aws::ElastiCache
     #   0002, etc.).
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupStatus AWS API Documentation
+    #
     class CacheParameterGroupStatus < Struct.new(
       :cache_parameter_group_name,
       :parameter_apply_status,
@@ -666,6 +698,8 @@ module Aws::ElastiCache
     #   A list of cache parameter groups. Each element in the list contains
     #   detailed information about one cache parameter group.
     #   @return [Array<Types::CacheParameterGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheParameterGroupsMessage AWS API Documentation
     #
     class CacheParameterGroupsMessage < Struct.new(
       :marker,
@@ -698,6 +732,8 @@ module Aws::ElastiCache
     #   cache security group.
     #   @return [Array<Types::EC2SecurityGroup>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroup AWS API Documentation
+    #
     class CacheSecurityGroup < Struct.new(
       :owner_id,
       :cache_security_group_name,
@@ -719,6 +755,8 @@ module Aws::ElastiCache
     #   security groups assigned to a cache cluster are modified.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMembership AWS API Documentation
+    #
     class CacheSecurityGroupMembership < Struct.new(
       :cache_security_group_name,
       :status)
@@ -735,6 +773,8 @@ module Aws::ElastiCache
     #   A list of cache security groups. Each element in the list contains
     #   detailed information about one group.
     #   @return [Array<Types::CacheSecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSecurityGroupMessage AWS API Documentation
     #
     class CacheSecurityGroupMessage < Struct.new(
       :marker,
@@ -765,6 +805,8 @@ module Aws::ElastiCache
     #   A list of subnets associated with the cache subnet group.
     #   @return [Array<Types::Subnet>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroup AWS API Documentation
+    #
     class CacheSubnetGroup < Struct.new(
       :cache_subnet_group_name,
       :cache_subnet_group_description,
@@ -783,6 +825,8 @@ module Aws::ElastiCache
     #   A list of cache subnet groups. Each element in the list contains
     #   detailed information about one group.
     #   @return [Array<Types::CacheSubnetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CacheSubnetGroupMessage AWS API Documentation
     #
     class CacheSubnetGroupMessage < Struct.new(
       :marker,
@@ -830,6 +874,8 @@ module Aws::ElastiCache
     #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotMessage AWS API Documentation
+    #
     class CopySnapshotMessage < Struct.new(
       :source_snapshot_name,
       :target_snapshot_name,
@@ -841,6 +887,8 @@ module Aws::ElastiCache
     #   Represents a copy of an entire Redis cache cluster as of the time
     #   when the snapshot was taken.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CopySnapshotResult AWS API Documentation
     #
     class CopySnapshotResult < Struct.new(
       :snapshot)
@@ -1213,6 +1261,8 @@ module Aws::ElastiCache
     #   [1]: http://redis.io/commands/AUTH
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterMessage AWS API Documentation
+    #
     class CreateCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :replication_group_id,
@@ -1243,6 +1293,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_cluster
     #   Contains all of the attributes of a specific cache cluster.
     #   @return [Types::CacheCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheClusterResult AWS API Documentation
     #
     class CreateCacheClusterResult < Struct.new(
       :cache_cluster)
@@ -1276,6 +1328,8 @@ module Aws::ElastiCache
     #   A user-specified description for the cache parameter group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroupMessage AWS API Documentation
+    #
     class CreateCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
       :cache_parameter_group_family,
@@ -1286,6 +1340,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_parameter_group
     #   Represents the output of a `CreateCacheParameterGroup` operation.
     #   @return [Types::CacheParameterGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheParameterGroupResult AWS API Documentation
     #
     class CreateCacheParameterGroupResult < Struct.new(
       :cache_parameter_group)
@@ -1316,6 +1372,8 @@ module Aws::ElastiCache
     #   A description for the cache security group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroupMessage AWS API Documentation
+    #
     class CreateCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name,
       :description)
@@ -1331,6 +1389,8 @@ module Aws::ElastiCache
     #
     #   * `RevokeCacheSecurityGroupIngress`
     #   @return [Types::CacheSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSecurityGroupResult AWS API Documentation
     #
     class CreateCacheSecurityGroupResult < Struct.new(
       :cache_security_group)
@@ -1366,6 +1426,8 @@ module Aws::ElastiCache
     #   A list of VPC subnet IDs for the cache subnet group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroupMessage AWS API Documentation
+    #
     class CreateCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name,
       :cache_subnet_group_description,
@@ -1380,6 +1442,8 @@ module Aws::ElastiCache
     #
     #   * `ModifyCacheSubnetGroup`
     #   @return [Types::CacheSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateCacheSubnetGroupResult AWS API Documentation
     #
     class CreateCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group)
@@ -1784,6 +1848,8 @@ module Aws::ElastiCache
     #   [1]: http://redis.io/commands/AUTH
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupMessage AWS API Documentation
+    #
     class CreateReplicationGroupMessage < Struct.new(
       :replication_group_id,
       :replication_group_description,
@@ -1819,6 +1885,8 @@ module Aws::ElastiCache
     #   group.
     #   @return [Types::ReplicationGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroupResult AWS API Documentation
+    #
     class CreateReplicationGroupResult < Struct.new(
       :replication_group)
       include Aws::Structure
@@ -1849,6 +1917,8 @@ module Aws::ElastiCache
     #   A name for the snapshot being created.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotMessage AWS API Documentation
+    #
     class CreateSnapshotMessage < Struct.new(
       :replication_group_id,
       :cache_cluster_id,
@@ -1860,6 +1930,8 @@ module Aws::ElastiCache
     #   Represents a copy of an entire Redis cache cluster as of the time
     #   when the snapshot was taken.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateSnapshotResult AWS API Documentation
     #
     class CreateSnapshotResult < Struct.new(
       :snapshot)
@@ -1888,6 +1960,8 @@ module Aws::ElastiCache
     #   afterward.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheClusterMessage AWS API Documentation
+    #
     class DeleteCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :final_snapshot_identifier)
@@ -1897,6 +1971,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_cluster
     #   Contains all of the attributes of a specific cache cluster.
     #   @return [Types::CacheCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheClusterResult AWS API Documentation
     #
     class DeleteCacheClusterResult < Struct.new(
       :cache_cluster)
@@ -1921,6 +1997,8 @@ module Aws::ElastiCache
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheParameterGroupMessage AWS API Documentation
+    #
     class DeleteCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name)
       include Aws::Structure
@@ -1943,6 +2021,8 @@ module Aws::ElastiCache
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSecurityGroupMessage AWS API Documentation
+    #
     class DeleteCacheSecurityGroupMessage < Struct.new(
       :cache_security_group_name)
       include Aws::Structure
@@ -1963,6 +2043,8 @@ module Aws::ElastiCache
     #   Constraints: Must contain no more than 255 alphanumeric characters
     #   or hyphens.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteCacheSubnetGroupMessage AWS API Documentation
     #
     class DeleteCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name)
@@ -1998,6 +2080,8 @@ module Aws::ElastiCache
     #   immediately deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroupMessage AWS API Documentation
+    #
     class DeleteReplicationGroupMessage < Struct.new(
       :replication_group_id,
       :retain_primary_cluster,
@@ -2009,6 +2093,8 @@ module Aws::ElastiCache
     #   Contains all of the attributes of a specific Redis replication
     #   group.
     #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroupResult AWS API Documentation
     #
     class DeleteReplicationGroupResult < Struct.new(
       :replication_group)
@@ -2028,6 +2114,8 @@ module Aws::ElastiCache
     #   The name of the snapshot to be deleted.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshotMessage AWS API Documentation
+    #
     class DeleteSnapshotMessage < Struct.new(
       :snapshot_name)
       include Aws::Structure
@@ -2037,6 +2125,8 @@ module Aws::ElastiCache
     #   Represents a copy of an entire Redis cache cluster as of the time
     #   when the snapshot was taken.
     #   @return [Types::Snapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteSnapshotResult AWS API Documentation
     #
     class DeleteSnapshotResult < Struct.new(
       :snapshot)
@@ -2083,6 +2173,8 @@ module Aws::ElastiCache
     #   An optional flag that can be included in the DescribeCacheCluster
     #   request to retrieve information about the individual cache nodes.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClustersMessage AWS API Documentation
     #
     class DescribeCacheClustersMessage < Struct.new(
       :cache_cluster_id,
@@ -2155,6 +2247,8 @@ module Aws::ElastiCache
     #   engine or engine and major version combination is to be returned.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheEngineVersionsMessage AWS API Documentation
+    #
     class DescribeCacheEngineVersionsMessage < Struct.new(
       :engine,
       :engine_version,
@@ -2197,6 +2291,8 @@ module Aws::ElastiCache
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParameterGroupsMessage AWS API Documentation
     #
     class DescribeCacheParameterGroupsMessage < Struct.new(
       :cache_parameter_group_name,
@@ -2245,6 +2341,8 @@ module Aws::ElastiCache
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheParametersMessage AWS API Documentation
+    #
     class DescribeCacheParametersMessage < Struct.new(
       :cache_parameter_group_name,
       :source,
@@ -2286,6 +2384,8 @@ module Aws::ElastiCache
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSecurityGroupsMessage AWS API Documentation
+    #
     class DescribeCacheSecurityGroupsMessage < Struct.new(
       :cache_security_group_name,
       :max_records,
@@ -2325,6 +2425,8 @@ module Aws::ElastiCache
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheSubnetGroupsMessage AWS API Documentation
     #
     class DescribeCacheSubnetGroupsMessage < Struct.new(
       :cache_subnet_group_name,
@@ -2369,6 +2471,8 @@ module Aws::ElastiCache
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParametersMessage AWS API Documentation
+    #
     class DescribeEngineDefaultParametersMessage < Struct.new(
       :cache_parameter_group_family,
       :max_records,
@@ -2380,6 +2484,8 @@ module Aws::ElastiCache
     #   Represents the output of a `DescribeEngineDefaultParameters`
     #   operation.
     #   @return [Types::EngineDefaults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEngineDefaultParametersResult AWS API Documentation
     #
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults)
@@ -2443,6 +2549,8 @@ module Aws::ElastiCache
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeEventsMessage AWS API Documentation
+    #
     class DescribeEventsMessage < Struct.new(
       :source_identifier,
       :source_type,
@@ -2490,6 +2598,8 @@ module Aws::ElastiCache
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroupsMessage AWS API Documentation
     #
     class DescribeReplicationGroupsMessage < Struct.new(
       :replication_group_id,
@@ -2614,6 +2724,8 @@ module Aws::ElastiCache
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesMessage AWS API Documentation
     #
     class DescribeReservedCacheNodesMessage < Struct.new(
       :reserved_cache_node_id,
@@ -2741,6 +2853,8 @@ module Aws::ElastiCache
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReservedCacheNodesOfferingsMessage AWS API Documentation
+    #
     class DescribeReservedCacheNodesOfferingsMessage < Struct.new(
       :reserved_cache_nodes_offering_id,
       :cache_node_type,
@@ -2765,6 +2879,8 @@ module Aws::ElastiCache
     #   A list of snapshots. Each item in the list contains detailed
     #   information about one snapshot.
     #   @return [Array<Types::Snapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshotsListMessage AWS API Documentation
     #
     class DescribeSnapshotsListMessage < Struct.new(
       :marker,
@@ -2834,6 +2950,8 @@ module Aws::ElastiCache
     #   is included in the snapshot description.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeSnapshotsMessage AWS API Documentation
+    #
     class DescribeSnapshotsMessage < Struct.new(
       :replication_group_id,
       :cache_cluster_id,
@@ -2860,6 +2978,8 @@ module Aws::ElastiCache
     #   The AWS account ID of the Amazon EC2 security group owner.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EC2SecurityGroup AWS API Documentation
+    #
     class EC2SecurityGroup < Struct.new(
       :status,
       :ec2_security_group_name,
@@ -2877,6 +2997,8 @@ module Aws::ElastiCache
     # @!attribute [rw] port
     #   The port number that the cache engine is listening on.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Endpoint AWS API Documentation
     #
     class Endpoint < Struct.new(
       :address,
@@ -2909,6 +3031,8 @@ module Aws::ElastiCache
     #   parameter.
     #   @return [Array<Types::CacheNodeTypeSpecificParameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EngineDefaults AWS API Documentation
+    #
     class EngineDefaults < Struct.new(
       :cache_parameter_group_family,
       :marker,
@@ -2940,6 +3064,8 @@ module Aws::ElastiCache
     #   The date and time when the event occurred.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Event AWS API Documentation
+    #
     class Event < Struct.new(
       :source_identifier,
       :source_type,
@@ -2958,6 +3084,8 @@ module Aws::ElastiCache
     #   A list of events. Each element in the list contains detailed
     #   information about one event.
     #   @return [Array<Types::Event>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/EventsMessage AWS API Documentation
     #
     class EventsMessage < Struct.new(
       :marker,
@@ -2996,6 +3124,8 @@ module Aws::ElastiCache
     #   `ReplicationGroupId`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListAllowedNodeTypeModificationsMessage AWS API Documentation
+    #
     class ListAllowedNodeTypeModificationsMessage < Struct.new(
       :cache_cluster_id,
       :replication_group_id)
@@ -3024,6 +3154,8 @@ module Aws::ElastiCache
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ListTagsForResourceMessage AWS API Documentation
     #
     class ListTagsForResourceMessage < Struct.new(
       :resource_name)
@@ -3352,6 +3484,8 @@ module Aws::ElastiCache
     #   to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterMessage AWS API Documentation
+    #
     class ModifyCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :num_cache_nodes,
@@ -3376,6 +3510,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_cluster
     #   Contains all of the attributes of a specific cache cluster.
     #   @return [Types::CacheCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheClusterResult AWS API Documentation
     #
     class ModifyCacheClusterResult < Struct.new(
       :cache_cluster)
@@ -3407,6 +3543,8 @@ module Aws::ElastiCache
     #   arguments are optional. A maximum of 20 parameters may be modified
     #   per request.
     #   @return [Array<Types::ParameterNameValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheParameterGroupMessage AWS API Documentation
     #
     class ModifyCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
@@ -3443,6 +3581,8 @@ module Aws::ElastiCache
     #   The EC2 subnet IDs for the cache subnet group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroupMessage AWS API Documentation
+    #
     class ModifyCacheSubnetGroupMessage < Struct.new(
       :cache_subnet_group_name,
       :cache_subnet_group_description,
@@ -3457,6 +3597,8 @@ module Aws::ElastiCache
     #
     #   * `ModifyCacheSubnetGroup`
     #   @return [Types::CacheSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyCacheSubnetGroupResult AWS API Documentation
     #
     class ModifyCacheSubnetGroupResult < Struct.new(
       :cache_subnet_group)
@@ -3659,6 +3801,8 @@ module Aws::ElastiCache
     #   group to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
+    #
     class ModifyReplicationGroupMessage < Struct.new(
       :replication_group_id,
       :replication_group_description,
@@ -3684,6 +3828,8 @@ module Aws::ElastiCache
     #   Contains all of the attributes of a specific Redis replication
     #   group.
     #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupResult AWS API Documentation
     #
     class ModifyReplicationGroupResult < Struct.new(
       :replication_group)
@@ -3719,6 +3865,8 @@ module Aws::ElastiCache
     #   A list containing information about individual nodes within the node
     #   group (shard).
     #   @return [Array<Types::NodeGroupMember>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroup AWS API Documentation
     #
     class NodeGroup < Struct.new(
       :node_group_id,
@@ -3766,6 +3914,8 @@ module Aws::ElastiCache
     #   `ReplicaCount` or `ReplicasPerNodeGroup` if not specified.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupConfiguration AWS API Documentation
+    #
     class NodeGroupConfiguration < Struct.new(
       :slots,
       :replica_count,
@@ -3798,6 +3948,8 @@ module Aws::ElastiCache
     #   The role that is currently assigned to the node - `primary` or
     #   `replica`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeGroupMember AWS API Documentation
     #
     class NodeGroupMember < Struct.new(
       :cache_cluster_id,
@@ -3840,6 +3992,8 @@ module Aws::ElastiCache
     #   set was obtained for the snapshot.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NodeSnapshot AWS API Documentation
+    #
     class NodeSnapshot < Struct.new(
       :cache_cluster_id,
       :node_group_id,
@@ -3862,6 +4016,8 @@ module Aws::ElastiCache
     # @!attribute [rw] topic_status
     #   The current state of the topic.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/NotificationConfiguration AWS API Documentation
     #
     class NotificationConfiguration < Struct.new(
       :topic_arn,
@@ -3917,6 +4073,8 @@ module Aws::ElastiCache
     #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Clusters.Rebooting.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Parameter AWS API Documentation
+    #
     class Parameter < Struct.new(
       :parameter_name,
       :parameter_value,
@@ -3949,6 +4107,8 @@ module Aws::ElastiCache
     #   The value of the parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ParameterNameValue AWS API Documentation
+    #
     class ParameterNameValue < Struct.new(
       :parameter_name,
       :parameter_value)
@@ -3979,6 +4139,8 @@ module Aws::ElastiCache
     #   The cache node type that this cache cluster or replication group is
     #   scaled to.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PendingModifiedValues AWS API Documentation
     #
     class PendingModifiedValues < Struct.new(
       :num_cache_nodes,
@@ -4025,6 +4187,8 @@ module Aws::ElastiCache
     #   Default: `1`
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOfferingMessage AWS API Documentation
+    #
     class PurchaseReservedCacheNodesOfferingMessage < Struct.new(
       :reserved_cache_nodes_offering_id,
       :reserved_cache_node_id,
@@ -4036,6 +4200,8 @@ module Aws::ElastiCache
     #   Represents the output of a `PurchaseReservedCacheNodesOffering`
     #   operation.
     #   @return [Types::ReservedCacheNode]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/PurchaseReservedCacheNodesOfferingResult AWS API Documentation
     #
     class PurchaseReservedCacheNodesOfferingResult < Struct.new(
       :reserved_cache_node)
@@ -4063,6 +4229,8 @@ module Aws::ElastiCache
     #   specify all of the cache node IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheClusterMessage AWS API Documentation
+    #
     class RebootCacheClusterMessage < Struct.new(
       :cache_cluster_id,
       :cache_node_ids_to_reboot)
@@ -4072,6 +4240,8 @@ module Aws::ElastiCache
     # @!attribute [rw] cache_cluster
     #   Contains all of the attributes of a specific cache cluster.
     #   @return [Types::CacheCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RebootCacheClusterResult AWS API Documentation
     #
     class RebootCacheClusterResult < Struct.new(
       :cache_cluster)
@@ -4088,6 +4258,8 @@ module Aws::ElastiCache
     # @!attribute [rw] recurring_charge_frequency
     #   The frequency of the recurring charge.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RecurringCharge AWS API Documentation
     #
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
@@ -4123,6 +4295,8 @@ module Aws::ElastiCache
     #   A list of `TagKeys` identifying the tags you want removed from the
     #   named resource.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RemoveTagsFromResourceMessage AWS API Documentation
     #
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
@@ -4208,6 +4382,8 @@ module Aws::ElastiCache
     #   `redis`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
+    #
     class ReplicationGroup < Struct.new(
       :replication_group_id,
       :description,
@@ -4233,6 +4409,8 @@ module Aws::ElastiCache
     #   A list of replication groups. Each item in the list contains
     #   detailed information about one replication group.
     #   @return [Array<Types::ReplicationGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupMessage AWS API Documentation
     #
     class ReplicationGroupMessage < Struct.new(
       :marker,
@@ -4262,6 +4440,8 @@ module Aws::ElastiCache
     #
     #    </note>
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroupPendingModifiedValues AWS API Documentation
     #
     class ReplicationGroupPendingModifiedValues < Struct.new(
       :primary_cluster_id,
@@ -4366,6 +4546,8 @@ module Aws::ElastiCache
     #   The recurring price charged to run this reserved cache node.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNode AWS API Documentation
+    #
     class ReservedCacheNode < Struct.new(
       :reserved_cache_node_id,
       :reserved_cache_nodes_offering_id,
@@ -4392,6 +4574,8 @@ module Aws::ElastiCache
     #   A list of reserved cache nodes. Each element in the list contains
     #   detailed information about one node.
     #   @return [Array<Types::ReservedCacheNode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodeMessage AWS API Documentation
     #
     class ReservedCacheNodeMessage < Struct.new(
       :marker,
@@ -4479,6 +4663,8 @@ module Aws::ElastiCache
     #   The recurring price charged to run this reserved cache node.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodesOffering AWS API Documentation
+    #
     class ReservedCacheNodesOffering < Struct.new(
       :reserved_cache_nodes_offering_id,
       :cache_node_type,
@@ -4502,6 +4688,8 @@ module Aws::ElastiCache
     #   A list of reserved cache node offerings. Each element in the list
     #   contains detailed information about one offering.
     #   @return [Array<Types::ReservedCacheNodesOffering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReservedCacheNodesOfferingMessage AWS API Documentation
     #
     class ReservedCacheNodesOfferingMessage < Struct.new(
       :marker,
@@ -4544,6 +4732,8 @@ module Aws::ElastiCache
     #   least one parameter to reset.
     #   @return [Array<Types::ParameterNameValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ResetCacheParameterGroupMessage AWS API Documentation
+    #
     class ResetCacheParameterGroupMessage < Struct.new(
       :cache_parameter_group_name,
       :reset_all_parameters,
@@ -4576,6 +4766,8 @@ module Aws::ElastiCache
     #   provide a valid AWS account number for this parameter.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngressMessage AWS API Documentation
+    #
     class RevokeCacheSecurityGroupIngressMessage < Struct.new(
       :cache_security_group_name,
       :ec2_security_group_name,
@@ -4593,6 +4785,8 @@ module Aws::ElastiCache
     #   * `RevokeCacheSecurityGroupIngress`
     #   @return [Types::CacheSecurityGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/RevokeCacheSecurityGroupIngressResult AWS API Documentation
+    #
     class RevokeCacheSecurityGroupIngressResult < Struct.new(
       :cache_security_group)
       include Aws::Structure
@@ -4609,6 +4803,8 @@ module Aws::ElastiCache
     #   changes whenever a cache security group is modified, or when the
     #   cache security groups assigned to a cache cluster are modified.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/SecurityGroupMembership AWS API Documentation
     #
     class SecurityGroupMembership < Struct.new(
       :security_group_id,
@@ -4821,6 +5017,8 @@ module Aws::ElastiCache
     #   A list of the cache nodes in the source cache cluster.
     #   @return [Array<Types::NodeSnapshot>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Snapshot AWS API Documentation
+    #
     class Snapshot < Struct.new(
       :snapshot_name,
       :replication_group_id,
@@ -4861,6 +5059,8 @@ module Aws::ElastiCache
     #   The Availability Zone associated with the subnet.
     #   @return [Types::AvailabilityZone]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Subnet AWS API Documentation
+    #
     class Subnet < Struct.new(
       :subnet_identifier,
       :subnet_availability_zone)
@@ -4887,6 +5087,8 @@ module Aws::ElastiCache
     #   The tag's value. May not be null.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -4899,6 +5101,8 @@ module Aws::ElastiCache
     # @!attribute [rw] tag_list
     #   A list of cost allocation tags as key-value pairs.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TagListMessage AWS API Documentation
     #
     class TagListMessage < Struct.new(
       :tag_list)

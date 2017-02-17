@@ -187,6 +187,8 @@ module Aws::DataPipeline
     #     start_timestamp: Time.now,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipeline AWS API Documentation
+    #
     # @overload activate_pipeline(params = {})
     # @param [Hash] params ({})
     def activate_pipeline(params = {}, options = {})
@@ -215,6 +217,8 @@ module Aws::DataPipeline
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTags AWS API Documentation
     #
     # @overload add_tags(params = {})
     # @param [Hash] params ({})
@@ -280,6 +284,8 @@ module Aws::DataPipeline
     #
     #   resp.pipeline_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipeline AWS API Documentation
+    #
     # @overload create_pipeline(params = {})
     # @param [Hash] params ({})
     def create_pipeline(params = {}, options = {})
@@ -312,6 +318,8 @@ module Aws::DataPipeline
     #     cancel_active: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipeline AWS API Documentation
+    #
     # @overload deactivate_pipeline(params = {})
     # @param [Hash] params ({})
     def deactivate_pipeline(params = {}, options = {})
@@ -338,6 +346,8 @@ module Aws::DataPipeline
     #   resp = client.delete_pipeline({
     #     pipeline_id: "id", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipeline AWS API Documentation
     #
     # @overload delete_pipeline(params = {})
     # @param [Hash] params ({})
@@ -395,6 +405,8 @@ module Aws::DataPipeline
     #   resp.marker #=> String
     #   resp.has_more_results #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjects AWS API Documentation
+    #
     # @overload describe_objects(params = {})
     # @param [Hash] params ({})
     def describe_objects(params = {}, options = {})
@@ -442,6 +454,8 @@ module Aws::DataPipeline
     #   resp.pipeline_description_list[0].tags[0].key #=> String
     #   resp.pipeline_description_list[0].tags[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelines AWS API Documentation
+    #
     # @overload describe_pipelines(params = {})
     # @param [Hash] params ({})
     def describe_pipelines(params = {}, options = {})
@@ -477,6 +491,8 @@ module Aws::DataPipeline
     # @example Response structure
     #
     #   resp.evaluated_expression #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpression AWS API Documentation
     #
     # @overload evaluate_expression(params = {})
     # @param [Hash] params ({})
@@ -528,6 +544,8 @@ module Aws::DataPipeline
     #   resp.parameter_values[0].id #=> String
     #   resp.parameter_values[0].string_value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinition AWS API Documentation
+    #
     # @overload get_pipeline_definition(params = {})
     # @param [Hash] params ({})
     def get_pipeline_definition(params = {}, options = {})
@@ -563,6 +581,8 @@ module Aws::DataPipeline
     #   resp.pipeline_id_list[0].name #=> String
     #   resp.marker #=> String
     #   resp.has_more_results #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelines AWS API Documentation
     #
     # @overload list_pipelines(params = {})
     # @param [Hash] params ({})
@@ -638,6 +658,8 @@ module Aws::DataPipeline
     #   resp.task_object.objects["id"].fields[0].key #=> String
     #   resp.task_object.objects["id"].fields[0].string_value #=> String
     #   resp.task_object.objects["id"].fields[0].ref_value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTask AWS API Documentation
     #
     # @overload poll_for_task(params = {})
     # @param [Hash] params ({})
@@ -729,6 +751,8 @@ module Aws::DataPipeline
     #   resp.validation_warnings[0].warnings[0] #=> String
     #   resp.errored #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinition AWS API Documentation
+    #
     # @overload put_pipeline_definition(params = {})
     # @param [Hash] params ({})
     def put_pipeline_definition(params = {}, options = {})
@@ -795,6 +819,8 @@ module Aws::DataPipeline
     #   resp.marker #=> String
     #   resp.has_more_results #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjects AWS API Documentation
+    #
     # @overload query_objects(params = {})
     # @param [Hash] params ({})
     def query_objects(params = {}, options = {})
@@ -818,6 +844,8 @@ module Aws::DataPipeline
     #     pipeline_id: "id", # required
     #     tag_keys: ["string"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTags AWS API Documentation
     #
     # @overload remove_tags(params = {})
     # @param [Hash] params ({})
@@ -869,6 +897,8 @@ module Aws::DataPipeline
     #
     #   resp.canceled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgress AWS API Documentation
+    #
     # @overload report_task_progress(params = {})
     # @param [Hash] params ({})
     def report_task_progress(params = {}, options = {})
@@ -916,6 +946,8 @@ module Aws::DataPipeline
     #
     #   resp.terminate #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeat AWS API Documentation
+    #
     # @overload report_task_runner_heartbeat(params = {})
     # @param [Hash] params ({})
     def report_task_runner_heartbeat(params = {}, options = {})
@@ -951,6 +983,8 @@ module Aws::DataPipeline
     #     object_ids: ["id"], # required
     #     status: "string", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatus AWS API Documentation
     #
     # @overload set_status(params = {})
     # @param [Hash] params ({})
@@ -1003,6 +1037,8 @@ module Aws::DataPipeline
     #     error_message: "errorMessage",
     #     error_stack_trace: "string",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatus AWS API Documentation
     #
     # @overload set_task_status(params = {})
     # @param [Hash] params ({})
@@ -1080,6 +1116,8 @@ module Aws::DataPipeline
     #   resp.validation_warnings[0].warnings #=> Array
     #   resp.validation_warnings[0].warnings[0] #=> String
     #   resp.errored #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinition AWS API Documentation
     #
     # @overload validate_pipeline_definition(params = {})
     # @param [Hash] params ({})

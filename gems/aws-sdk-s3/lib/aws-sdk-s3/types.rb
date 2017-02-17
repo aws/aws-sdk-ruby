@@ -24,6 +24,8 @@ module Aws::S3
     #   Lifecycle to abort an Incomplete Multipart Upload.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortIncompleteMultipartUpload AWS API Documentation
+    #
     class AbortIncompleteMultipartUpload < Struct.new(
       :days_after_initiation)
       include Aws::Structure
@@ -33,6 +35,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadOutput AWS API Documentation
     #
     class AbortMultipartUploadOutput < Struct.new(
       :request_charged)
@@ -66,6 +70,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AbortMultipartUploadRequest AWS API Documentation
+    #
     class AbortMultipartUploadRequest < Struct.new(
       :bucket,
       :key,
@@ -84,6 +90,8 @@ module Aws::S3
     # @!attribute [rw] status
     #   The accelerate configuration of the bucket.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccelerateConfiguration AWS API Documentation
     #
     class AccelerateConfiguration < Struct.new(
       :status)
@@ -119,6 +127,8 @@ module Aws::S3
     # @!attribute [rw] owner
     #   @return [Types::Owner]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AccessControlPolicy AWS API Documentation
+    #
     class AccessControlPolicy < Struct.new(
       :grants,
       :owner)
@@ -145,6 +155,8 @@ module Aws::S3
     # @!attribute [rw] tags
     #   The list of tags to use when evaluating an AND predicate.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsAndOperator AWS API Documentation
     #
     class AnalyticsAndOperator < Struct.new(
       :prefix,
@@ -205,6 +217,8 @@ module Aws::S3
     #   different storage classes.
     #   @return [Types::StorageClassAnalysis]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsConfiguration AWS API Documentation
+    #
     class AnalyticsConfiguration < Struct.new(
       :id,
       :filter,
@@ -227,6 +241,8 @@ module Aws::S3
     # @!attribute [rw] s3_bucket_destination
     #   A destination signifying output to an S3 bucket.
     #   @return [Types::AnalyticsS3BucketDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsExportDestination AWS API Documentation
     #
     class AnalyticsExportDestination < Struct.new(
       :s3_bucket_destination)
@@ -267,6 +283,8 @@ module Aws::S3
     #   predicates.
     #   @return [Types::AnalyticsAndOperator]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsFilter AWS API Documentation
+    #
     class AnalyticsFilter < Struct.new(
       :prefix,
       :tag,
@@ -303,6 +321,8 @@ module Aws::S3
     #   this prefix.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/AnalyticsS3BucketDestination AWS API Documentation
+    #
     class AnalyticsS3BucketDestination < Struct.new(
       :format,
       :bucket_account_id,
@@ -318,6 +338,8 @@ module Aws::S3
     # @!attribute [rw] creation_date
     #   Date the bucket was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Bucket AWS API Documentation
     #
     class Bucket < Struct.new(
       :name,
@@ -381,6 +403,8 @@ module Aws::S3
     # @!attribute [rw] rules
     #   @return [Array<Types::LifecycleRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLifecycleConfiguration AWS API Documentation
+    #
     class BucketLifecycleConfiguration < Struct.new(
       :rules)
       include Aws::Structure
@@ -411,6 +435,8 @@ module Aws::S3
     # @!attribute [rw] logging_enabled
     #   @return [Types::LoggingEnabled]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/BucketLoggingStatus AWS API Documentation
+    #
     class BucketLoggingStatus < Struct.new(
       :logging_enabled)
       include Aws::Structure
@@ -433,6 +459,8 @@ module Aws::S3
     #
     # @!attribute [rw] cors_rules
     #   @return [Array<Types::CORSRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSConfiguration AWS API Documentation
     #
     class CORSConfiguration < Struct.new(
       :cors_rules)
@@ -475,6 +503,8 @@ module Aws::S3
     #   response for the specified resource.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CORSRule AWS API Documentation
+    #
     class CORSRule < Struct.new(
       :allowed_headers,
       :allowed_methods,
@@ -514,6 +544,8 @@ module Aws::S3
     # @!attribute [rw] invocation_role
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CloudFunctionConfiguration AWS API Documentation
+    #
     class CloudFunctionConfiguration < Struct.new(
       :id,
       :event,
@@ -525,6 +557,8 @@ module Aws::S3
 
     # @!attribute [rw] prefix
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CommonPrefix AWS API Documentation
     #
     class CommonPrefix < Struct.new(
       :prefix)
@@ -568,6 +602,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadOutput AWS API Documentation
     #
     class CompleteMultipartUploadOutput < Struct.new(
       :location,
@@ -620,6 +656,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompleteMultipartUploadRequest AWS API Documentation
+    #
     class CompleteMultipartUploadRequest < Struct.new(
       :bucket,
       :key,
@@ -644,6 +682,8 @@ module Aws::S3
     # @!attribute [rw] parts
     #   @return [Array<Types::CompletedPart>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedMultipartUpload AWS API Documentation
+    #
     class CompletedMultipartUpload < Struct.new(
       :parts)
       include Aws::Structure
@@ -665,6 +705,8 @@ module Aws::S3
     #   Part number that identifies the part. This is a positive integer
     #   between 1 and 10,000.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CompletedPart AWS API Documentation
     #
     class CompletedPart < Struct.new(
       :etag,
@@ -698,6 +740,8 @@ module Aws::S3
     #   not specified. If both conditions are specified, both must be true
     #   for the redirect to be applied.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Condition AWS API Documentation
     #
     class Condition < Struct.new(
       :http_error_code_returned_equals,
@@ -747,6 +791,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectOutput AWS API Documentation
     #
     class CopyObjectOutput < Struct.new(
       :copy_object_result,
@@ -967,6 +1013,8 @@ module Aws::S3
     #   encoded as URL Query parameters
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectRequest AWS API Documentation
+    #
     class CopyObjectRequest < Struct.new(
       :acl,
       :bucket,
@@ -1010,6 +1058,8 @@ module Aws::S3
     # @!attribute [rw] last_modified
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyObjectResult AWS API Documentation
+    #
     class CopyObjectResult < Struct.new(
       :etag,
       :last_modified)
@@ -1023,6 +1073,8 @@ module Aws::S3
     # @!attribute [rw] last_modified
     #   Date and time at which the object was uploaded.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CopyPartResult AWS API Documentation
     #
     class CopyPartResult < Struct.new(
       :etag,
@@ -1042,6 +1094,8 @@ module Aws::S3
     #   specify a region, the bucket will be created in US Standard.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketConfiguration AWS API Documentation
+    #
     class CreateBucketConfiguration < Struct.new(
       :location_constraint)
       include Aws::Structure
@@ -1049,6 +1103,8 @@ module Aws::S3
 
     # @!attribute [rw] location
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketOutput AWS API Documentation
     #
     class CreateBucketOutput < Struct.new(
       :location)
@@ -1102,6 +1158,8 @@ module Aws::S3
     # @!attribute [rw] grant_write_acp
     #   Allows grantee to write the ACL for the applicable bucket.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateBucketRequest AWS API Documentation
     #
     class CreateBucketRequest < Struct.new(
       :acl,
@@ -1164,6 +1222,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadOutput AWS API Documentation
     #
     class CreateMultipartUploadOutput < Struct.new(
       :abort_date,
@@ -1317,6 +1377,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/CreateMultipartUploadRequest AWS API Documentation
+    #
     class CreateMultipartUploadRequest < Struct.new(
       :acl,
       :bucket,
@@ -1364,6 +1426,8 @@ module Aws::S3
     #   element, you must set its value to true.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Delete AWS API Documentation
+    #
     class Delete < Struct.new(
       :objects,
       :quiet)
@@ -1387,6 +1451,8 @@ module Aws::S3
     #   The identifier used to represent an analytics configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketAnalyticsConfigurationRequest AWS API Documentation
+    #
     class DeleteBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
       :id)
@@ -1402,6 +1468,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketCorsRequest AWS API Documentation
     #
     class DeleteBucketCorsRequest < Struct.new(
       :bucket)
@@ -1425,6 +1493,8 @@ module Aws::S3
     #   The ID used to identify the inventory configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketInventoryConfigurationRequest AWS API Documentation
+    #
     class DeleteBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
       :id)
@@ -1440,6 +1510,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketLifecycleRequest AWS API Documentation
     #
     class DeleteBucketLifecycleRequest < Struct.new(
       :bucket)
@@ -1463,6 +1535,8 @@ module Aws::S3
     #   The ID used to identify the metrics configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketMetricsConfigurationRequest AWS API Documentation
+    #
     class DeleteBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
       :id)
@@ -1479,6 +1553,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketPolicyRequest AWS API Documentation
+    #
     class DeleteBucketPolicyRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -1493,6 +1569,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketReplicationRequest AWS API Documentation
     #
     class DeleteBucketReplicationRequest < Struct.new(
       :bucket)
@@ -1509,6 +1587,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketRequest AWS API Documentation
+    #
     class DeleteBucketRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -1524,6 +1604,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketTaggingRequest AWS API Documentation
+    #
     class DeleteBucketTaggingRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -1538,6 +1620,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteBucketWebsiteRequest AWS API Documentation
     #
     class DeleteBucketWebsiteRequest < Struct.new(
       :bucket)
@@ -1564,6 +1648,8 @@ module Aws::S3
     #   Date and time the object was last modified.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteMarkerEntry AWS API Documentation
+    #
     class DeleteMarkerEntry < Struct.new(
       :owner,
       :key,
@@ -1587,6 +1673,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectOutput AWS API Documentation
     #
     class DeleteObjectOutput < Struct.new(
       :delete_marker,
@@ -1630,6 +1718,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectRequest AWS API Documentation
+    #
     class DeleteObjectRequest < Struct.new(
       :bucket,
       :key,
@@ -1642,6 +1732,8 @@ module Aws::S3
     # @!attribute [rw] version_id
     #   The versionId of the object the tag-set was removed from.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingOutput AWS API Documentation
     #
     class DeleteObjectTaggingOutput < Struct.new(
       :version_id)
@@ -1667,6 +1759,8 @@ module Aws::S3
     #   The versionId of the object that the tag-set will be removed from.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectTaggingRequest AWS API Documentation
+    #
     class DeleteObjectTaggingRequest < Struct.new(
       :bucket,
       :key,
@@ -1684,6 +1778,8 @@ module Aws::S3
     #
     # @!attribute [rw] errors
     #   @return [Array<Types::Error>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectsOutput AWS API Documentation
     #
     class DeleteObjectsOutput < Struct.new(
       :deleted,
@@ -1730,6 +1826,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeleteObjectsRequest AWS API Documentation
+    #
     class DeleteObjectsRequest < Struct.new(
       :bucket,
       :delete,
@@ -1749,6 +1847,8 @@ module Aws::S3
     #
     # @!attribute [rw] delete_marker_version_id
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DeletedObject AWS API Documentation
     #
     class DeletedObject < Struct.new(
       :key,
@@ -1775,6 +1875,8 @@ module Aws::S3
     #   The class of storage used to store the object.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Destination AWS API Documentation
+    #
     class Destination < Struct.new(
       :bucket,
       :storage_class)
@@ -1792,6 +1894,8 @@ module Aws::S3
     #
     # @!attribute [rw] message
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Error AWS API Documentation
     #
     class Error < Struct.new(
       :key,
@@ -1811,6 +1915,8 @@ module Aws::S3
     # @!attribute [rw] key
     #   The object key name to use when a 4XX class error occurs.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ErrorDocument AWS API Documentation
     #
     class ErrorDocument < Struct.new(
       :key)
@@ -1844,6 +1950,8 @@ module Aws::S3
     # @!attribute [rw] value
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/FilterRule AWS API Documentation
+    #
     class FilterRule < Struct.new(
       :name,
       :value)
@@ -1853,6 +1961,8 @@ module Aws::S3
     # @!attribute [rw] status
     #   The accelerate configuration of the bucket.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationOutput AWS API Documentation
     #
     class GetBucketAccelerateConfigurationOutput < Struct.new(
       :status)
@@ -1871,6 +1981,8 @@ module Aws::S3
     #   retrieved.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAccelerateConfigurationRequest AWS API Documentation
+    #
     class GetBucketAccelerateConfigurationRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -1882,6 +1994,8 @@ module Aws::S3
     # @!attribute [rw] grants
     #   A list of grants.
     #   @return [Array<Types::Grant>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAclOutput AWS API Documentation
     #
     class GetBucketAclOutput < Struct.new(
       :owner,
@@ -1899,6 +2013,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAclRequest AWS API Documentation
+    #
     class GetBucketAclRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -1907,6 +2023,8 @@ module Aws::S3
     # @!attribute [rw] analytics_configuration
     #   The configuration and any analyses for the analytics filter.
     #   @return [Types::AnalyticsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfigurationOutput AWS API Documentation
     #
     class GetBucketAnalyticsConfigurationOutput < Struct.new(
       :analytics_configuration)
@@ -1930,6 +2048,8 @@ module Aws::S3
     #   The identifier used to represent an analytics configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketAnalyticsConfigurationRequest AWS API Documentation
+    #
     class GetBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
       :id)
@@ -1938,6 +2058,8 @@ module Aws::S3
 
     # @!attribute [rw] cors_rules
     #   @return [Array<Types::CORSRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCorsOutput AWS API Documentation
     #
     class GetBucketCorsOutput < Struct.new(
       :cors_rules)
@@ -1954,6 +2076,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketCorsRequest AWS API Documentation
+    #
     class GetBucketCorsRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -1962,6 +2086,8 @@ module Aws::S3
     # @!attribute [rw] inventory_configuration
     #   Specifies the inventory configuration.
     #   @return [Types::InventoryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationOutput AWS API Documentation
     #
     class GetBucketInventoryConfigurationOutput < Struct.new(
       :inventory_configuration)
@@ -1985,6 +2111,8 @@ module Aws::S3
     #   The ID used to identify the inventory configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketInventoryConfigurationRequest AWS API Documentation
+    #
     class GetBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
       :id)
@@ -1993,6 +2121,8 @@ module Aws::S3
 
     # @!attribute [rw] rules
     #   @return [Array<Types::LifecycleRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfigurationOutput AWS API Documentation
     #
     class GetBucketLifecycleConfigurationOutput < Struct.new(
       :rules)
@@ -2009,6 +2139,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleConfigurationRequest AWS API Documentation
+    #
     class GetBucketLifecycleConfigurationRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2016,6 +2148,8 @@ module Aws::S3
 
     # @!attribute [rw] rules
     #   @return [Array<Types::Rule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleOutput AWS API Documentation
     #
     class GetBucketLifecycleOutput < Struct.new(
       :rules)
@@ -2032,6 +2166,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLifecycleRequest AWS API Documentation
+    #
     class GetBucketLifecycleRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2039,6 +2175,8 @@ module Aws::S3
 
     # @!attribute [rw] location_constraint
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocationOutput AWS API Documentation
     #
     class GetBucketLocationOutput < Struct.new(
       :location_constraint)
@@ -2055,6 +2193,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLocationRequest AWS API Documentation
+    #
     class GetBucketLocationRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2062,6 +2202,8 @@ module Aws::S3
 
     # @!attribute [rw] logging_enabled
     #   @return [Types::LoggingEnabled]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLoggingOutput AWS API Documentation
     #
     class GetBucketLoggingOutput < Struct.new(
       :logging_enabled)
@@ -2078,6 +2220,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketLoggingRequest AWS API Documentation
+    #
     class GetBucketLoggingRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2086,6 +2230,8 @@ module Aws::S3
     # @!attribute [rw] metrics_configuration
     #   Specifies the metrics configuration.
     #   @return [Types::MetricsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfigurationOutput AWS API Documentation
     #
     class GetBucketMetricsConfigurationOutput < Struct.new(
       :metrics_configuration)
@@ -2109,6 +2255,8 @@ module Aws::S3
     #   The ID used to identify the metrics configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketMetricsConfigurationRequest AWS API Documentation
+    #
     class GetBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
       :id)
@@ -2126,6 +2274,8 @@ module Aws::S3
     #   Name of the bucket to get the notification configuration for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketNotificationConfigurationRequest AWS API Documentation
+    #
     class GetBucketNotificationConfigurationRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2134,6 +2284,8 @@ module Aws::S3
     # @!attribute [rw] policy
     #   The bucket policy as a JSON document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyOutput AWS API Documentation
     #
     class GetBucketPolicyOutput < Struct.new(
       :policy)
@@ -2150,6 +2302,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketPolicyRequest AWS API Documentation
+    #
     class GetBucketPolicyRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2159,6 +2313,8 @@ module Aws::S3
     #   Container for replication rules. You can add as many as 1,000 rules.
     #   Total replication configuration size can be up to 2 MB.
     #   @return [Types::ReplicationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplicationOutput AWS API Documentation
     #
     class GetBucketReplicationOutput < Struct.new(
       :replication_configuration)
@@ -2175,6 +2331,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketReplicationRequest AWS API Documentation
+    #
     class GetBucketReplicationRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2183,6 +2341,8 @@ module Aws::S3
     # @!attribute [rw] payer
     #   Specifies who pays for the download and request fees.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPaymentOutput AWS API Documentation
     #
     class GetBucketRequestPaymentOutput < Struct.new(
       :payer)
@@ -2199,6 +2359,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketRequestPaymentRequest AWS API Documentation
+    #
     class GetBucketRequestPaymentRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2206,6 +2368,8 @@ module Aws::S3
 
     # @!attribute [rw] tag_set
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTaggingOutput AWS API Documentation
     #
     class GetBucketTaggingOutput < Struct.new(
       :tag_set)
@@ -2221,6 +2385,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketTaggingRequest AWS API Documentation
     #
     class GetBucketTaggingRequest < Struct.new(
       :bucket)
@@ -2238,6 +2404,8 @@ module Aws::S3
     #   configured, this element is not returned.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioningOutput AWS API Documentation
+    #
     class GetBucketVersioningOutput < Struct.new(
       :status,
       :mfa_delete)
@@ -2253,6 +2421,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketVersioningRequest AWS API Documentation
     #
     class GetBucketVersioningRequest < Struct.new(
       :bucket)
@@ -2270,6 +2440,8 @@ module Aws::S3
     #
     # @!attribute [rw] routing_rules
     #   @return [Array<Types::RoutingRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsiteOutput AWS API Documentation
     #
     class GetBucketWebsiteOutput < Struct.new(
       :redirect_all_requests_to,
@@ -2289,6 +2461,8 @@ module Aws::S3
     # @!attribute [rw] bucket
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetBucketWebsiteRequest AWS API Documentation
+    #
     class GetBucketWebsiteRequest < Struct.new(
       :bucket)
       include Aws::Structure
@@ -2305,6 +2479,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclOutput AWS API Documentation
     #
     class GetObjectAclOutput < Struct.new(
       :owner,
@@ -2340,6 +2516,8 @@ module Aws::S3
     #   buckets can be found at
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectAclRequest AWS API Documentation
     #
     class GetObjectAclRequest < Struct.new(
       :bucket,
@@ -2484,6 +2662,8 @@ module Aws::S3
     # @!attribute [rw] tag_count
     #   The number of tags, if any, on the object.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectOutput AWS API Documentation
     #
     class GetObjectOutput < Struct.new(
       :body,
@@ -2637,6 +2817,8 @@ module Aws::S3
     #   object.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectRequest AWS API Documentation
+    #
     class GetObjectRequest < Struct.new(
       :bucket,
       :if_match,
@@ -2666,6 +2848,8 @@ module Aws::S3
     # @!attribute [rw] tag_set
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTaggingOutput AWS API Documentation
+    #
     class GetObjectTaggingOutput < Struct.new(
       :version_id,
       :tag_set)
@@ -2690,6 +2874,8 @@ module Aws::S3
     # @!attribute [rw] version_id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTaggingRequest AWS API Documentation
+    #
     class GetObjectTaggingRequest < Struct.new(
       :bucket,
       :key,
@@ -2704,6 +2890,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentOutput AWS API Documentation
     #
     class GetObjectTorrentOutput < Struct.new(
       :body,
@@ -2734,6 +2922,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectTorrentRequest AWS API Documentation
+    #
     class GetObjectTorrentRequest < Struct.new(
       :bucket,
       :key,
@@ -2751,6 +2941,8 @@ module Aws::S3
     # @!attribute [rw] tier
     #   Glacier retrieval tier at which the restore will be processed.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GlacierJobParameters AWS API Documentation
     #
     class GlacierJobParameters < Struct.new(
       :tier)
@@ -2777,6 +2969,8 @@ module Aws::S3
     # @!attribute [rw] permission
     #   Specifies the permission given to the grantee.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Grant AWS API Documentation
     #
     class Grant < Struct.new(
       :grantee,
@@ -2815,6 +3009,8 @@ module Aws::S3
     #   URI of the grantee group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Grantee AWS API Documentation
+    #
     class Grantee < Struct.new(
       :display_name,
       :email_address,
@@ -2833,6 +3029,8 @@ module Aws::S3
     #
     # @!attribute [rw] bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadBucketRequest AWS API Documentation
     #
     class HeadBucketRequest < Struct.new(
       :bucket)
@@ -2963,6 +3161,8 @@ module Aws::S3
     #   The count of parts this object has.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectOutput AWS API Documentation
+    #
     class HeadObjectOutput < Struct.new(
       :delete_marker,
       :accept_ranges,
@@ -3082,6 +3282,8 @@ module Aws::S3
     #   and the number of parts in this object.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectRequest AWS API Documentation
+    #
     class HeadObjectRequest < Struct.new(
       :bucket,
       :if_match,
@@ -3114,6 +3316,8 @@ module Aws::S3
     #   not be empty and must not include a slash character.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/IndexDocument AWS API Documentation
+    #
     class IndexDocument < Struct.new(
       :suffix)
       include Aws::Structure
@@ -3127,6 +3331,8 @@ module Aws::S3
     # @!attribute [rw] display_name
     #   Name of the Principal.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Initiator AWS API Documentation
     #
     class Initiator < Struct.new(
       :id,
@@ -3189,6 +3395,8 @@ module Aws::S3
     #   Specifies the schedule for generating inventory results.
     #   @return [Types::InventorySchedule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryConfiguration AWS API Documentation
+    #
     class InventoryConfiguration < Struct.new(
       :destination,
       :is_enabled,
@@ -3217,6 +3425,8 @@ module Aws::S3
     #   prefix (optional) where inventory results are published.
     #   @return [Types::InventoryS3BucketDestination]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryDestination AWS API Documentation
+    #
     class InventoryDestination < Struct.new(
       :s3_bucket_destination)
       include Aws::Structure
@@ -3233,6 +3443,8 @@ module Aws::S3
     #   The prefix that an object must have to be included in the inventory
     #   results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryFilter AWS API Documentation
     #
     class InventoryFilter < Struct.new(
       :prefix)
@@ -3266,6 +3478,8 @@ module Aws::S3
     #   The prefix that is prepended to all inventory results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventoryS3BucketDestination AWS API Documentation
+    #
     class InventoryS3BucketDestination < Struct.new(
       :account_id,
       :bucket,
@@ -3284,6 +3498,8 @@ module Aws::S3
     # @!attribute [rw] frequency
     #   Specifies how frequently inventory results are produced.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/InventorySchedule AWS API Documentation
     #
     class InventorySchedule < Struct.new(
       :frequency)
@@ -3335,6 +3551,8 @@ module Aws::S3
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LambdaFunctionConfiguration AWS API Documentation
+    #
     class LambdaFunctionConfiguration < Struct.new(
       :id,
       :lambda_function_arn,
@@ -3379,6 +3597,8 @@ module Aws::S3
     # @!attribute [rw] rules
     #   @return [Array<Types::Rule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleConfiguration AWS API Documentation
+    #
     class LifecycleConfiguration < Struct.new(
       :rules)
       include Aws::Structure
@@ -3409,6 +3629,8 @@ module Aws::S3
     #   expired; if set to false the policy takes no action. This cannot be
     #   specified with Days or Date in a Lifecycle Expiration Policy.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleExpiration AWS API Documentation
     #
     class LifecycleExpiration < Struct.new(
       :date,
@@ -3510,6 +3732,8 @@ module Aws::S3
     #   parts of the upload.
     #   @return [Types::AbortIncompleteMultipartUpload]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRule AWS API Documentation
+    #
     class LifecycleRule < Struct.new(
       :expiration,
       :id,
@@ -3547,6 +3771,8 @@ module Aws::S3
     #   All of these tags must exist in the object's tag set in order for
     #   the rule to apply.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRuleAndOperator AWS API Documentation
     #
     class LifecycleRuleAndOperator < Struct.new(
       :prefix,
@@ -3592,6 +3818,8 @@ module Aws::S3
     #   matching all of the predicates configured inside the And operator.
     #   @return [Types::LifecycleRuleAndOperator]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LifecycleRuleFilter AWS API Documentation
+    #
     class LifecycleRuleFilter < Struct.new(
       :prefix,
       :tag,
@@ -3621,6 +3849,8 @@ module Aws::S3
     #   The list of analytics configurations for a bucket.
     #   @return [Array<Types::AnalyticsConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurationsOutput AWS API Documentation
+    #
     class ListBucketAnalyticsConfigurationsOutput < Struct.new(
       :is_truncated,
       :continuation_token,
@@ -3646,6 +3876,8 @@ module Aws::S3
     #   The ContinuationToken that represents a placeholder from where this
     #   request should begin.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketAnalyticsConfigurationsRequest AWS API Documentation
     #
     class ListBucketAnalyticsConfigurationsRequest < Struct.new(
       :bucket,
@@ -3675,6 +3907,8 @@ module Aws::S3
     #   value that Amazon S3 understands.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurationsOutput AWS API Documentation
+    #
     class ListBucketInventoryConfigurationsOutput < Struct.new(
       :continuation_token,
       :inventory_configuration_list,
@@ -3702,6 +3936,8 @@ module Aws::S3
     #   truncated list response to continue the listing. The continuation
     #   token is an opaque value that Amazon S3 understands.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketInventoryConfigurationsRequest AWS API Documentation
     #
     class ListBucketInventoryConfigurationsRequest < Struct.new(
       :bucket,
@@ -3733,6 +3969,8 @@ module Aws::S3
     #   The list of metrics configurations for a bucket.
     #   @return [Array<Types::MetricsConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurationsOutput AWS API Documentation
+    #
     class ListBucketMetricsConfigurationsOutput < Struct.new(
       :is_truncated,
       :continuation_token,
@@ -3761,6 +3999,8 @@ module Aws::S3
     #   continuation token is an opaque value that Amazon S3 understands.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketMetricsConfigurationsRequest AWS API Documentation
+    #
     class ListBucketMetricsConfigurationsRequest < Struct.new(
       :bucket,
       :continuation_token)
@@ -3772,6 +4012,8 @@ module Aws::S3
     #
     # @!attribute [rw] owner
     #   @return [Types::Owner]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListBucketsOutput AWS API Documentation
     #
     class ListBucketsOutput < Struct.new(
       :buckets,
@@ -3834,6 +4076,8 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsOutput AWS API Documentation
     #
     class ListMultipartUploadsOutput < Struct.new(
       :bucket,
@@ -3902,6 +4146,8 @@ module Aws::S3
     #   upload-id-marker parameter is ignored.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListMultipartUploadsRequest AWS API Documentation
+    #
     class ListMultipartUploadsRequest < Struct.new(
       :bucket,
       :delimiter,
@@ -3963,6 +4209,8 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsOutput AWS API Documentation
     #
     class ListObjectVersionsOutput < Struct.new(
       :is_truncated,
@@ -4027,6 +4275,8 @@ module Aws::S3
     #   Specifies the object version you want to start listing from.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectVersionsRequest AWS API Documentation
+    #
     class ListObjectVersionsRequest < Struct.new(
       :bucket,
       :delimiter,
@@ -4079,6 +4329,8 @@ module Aws::S3
     #   Encoding type used by Amazon S3 to encode object keys in the
     #   response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsOutput AWS API Documentation
     #
     class ListObjectsOutput < Struct.new(
       :is_truncated,
@@ -4141,6 +4393,8 @@ module Aws::S3
     #   the list objects request. Bucket owners need not specify this
     #   parameter in their requests.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsRequest AWS API Documentation
     #
     class ListObjectsRequest < Struct.new(
       :bucket,
@@ -4214,6 +4468,8 @@ module Aws::S3
     #   S3 starts listing after this specified key. StartAfter can be any
     #   key in the bucket
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Output AWS API Documentation
     #
     class ListObjectsV2Output < Struct.new(
       :is_truncated,
@@ -4292,6 +4548,8 @@ module Aws::S3
     #   this parameter in their requests.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListObjectsV2Request AWS API Documentation
+    #
     class ListObjectsV2Request < Struct.new(
       :bucket,
       :delimiter,
@@ -4365,6 +4623,8 @@ module Aws::S3
     #   for the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsOutput AWS API Documentation
+    #
     class ListPartsOutput < Struct.new(
       :abort_date,
       :abort_rule_id,
@@ -4423,6 +4683,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ListPartsRequest AWS API Documentation
+    #
     class ListPartsRequest < Struct.new(
       :bucket,
       :key,
@@ -4471,6 +4733,8 @@ module Aws::S3
     #   files will be stored under.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/LoggingEnabled AWS API Documentation
+    #
     class LoggingEnabled < Struct.new(
       :target_bucket,
       :target_grants,
@@ -4498,6 +4762,8 @@ module Aws::S3
     # @!attribute [rw] tags
     #   The list of tags used when evaluating an AND predicate.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsAndOperator AWS API Documentation
     #
     class MetricsAndOperator < Struct.new(
       :prefix,
@@ -4537,6 +4803,8 @@ module Aws::S3
     #   will only include objects that meet the filter's criteria. A filter
     #   must be a prefix, a tag, or a conjunction (MetricsAndOperator).
     #   @return [Types::MetricsFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsConfiguration AWS API Documentation
     #
     class MetricsConfiguration < Struct.new(
       :id,
@@ -4579,6 +4847,8 @@ module Aws::S3
     #   for the filter to apply.
     #   @return [Types::MetricsAndOperator]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MetricsFilter AWS API Documentation
+    #
     class MetricsFilter < Struct.new(
       :prefix,
       :tag,
@@ -4608,6 +4878,8 @@ module Aws::S3
     # @!attribute [rw] initiator
     #   Identifies who initiated the multipart upload.
     #   @return [Types::Initiator]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/MultipartUpload AWS API Documentation
     #
     class MultipartUpload < Struct.new(
       :upload_id,
@@ -4644,6 +4916,8 @@ module Aws::S3
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionExpiration AWS API Documentation
+    #
     class NoncurrentVersionExpiration < Struct.new(
       :noncurrent_days)
       include Aws::Structure
@@ -4679,6 +4953,8 @@ module Aws::S3
     # @!attribute [rw] storage_class
     #   The class of storage used to store the object.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NoncurrentVersionTransition AWS API Documentation
     #
     class NoncurrentVersionTransition < Struct.new(
       :noncurrent_days,
@@ -4755,6 +5031,8 @@ module Aws::S3
     # @!attribute [rw] lambda_function_configurations
     #   @return [Array<Types::LambdaFunctionConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfiguration AWS API Documentation
+    #
     class NotificationConfiguration < Struct.new(
       :topic_configurations,
       :queue_configurations,
@@ -4796,6 +5074,8 @@ module Aws::S3
     # @!attribute [rw] cloud_function_configuration
     #   @return [Types::CloudFunctionConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationDeprecated AWS API Documentation
+    #
     class NotificationConfigurationDeprecated < Struct.new(
       :topic_configuration,
       :queue_configuration,
@@ -4829,6 +5109,8 @@ module Aws::S3
     #   Container for object key name prefix and suffix filtering rules.
     #   @return [Types::S3KeyFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/NotificationConfigurationFilter AWS API Documentation
+    #
     class NotificationConfigurationFilter < Struct.new(
       :key)
       include Aws::Structure
@@ -4852,6 +5134,8 @@ module Aws::S3
     #
     # @!attribute [rw] owner
     #   @return [Types::Owner]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Object AWS API Documentation
     #
     class Object < Struct.new(
       :key,
@@ -4878,6 +5162,8 @@ module Aws::S3
     # @!attribute [rw] version_id
     #   VersionId for the specific version of the object to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectIdentifier AWS API Documentation
     #
     class ObjectIdentifier < Struct.new(
       :key,
@@ -4916,6 +5202,8 @@ module Aws::S3
     # @!attribute [rw] owner
     #   @return [Types::Owner]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectVersion AWS API Documentation
+    #
     class ObjectVersion < Struct.new(
       :etag,
       :size,
@@ -4942,6 +5230,8 @@ module Aws::S3
     # @!attribute [rw] id
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Owner AWS API Documentation
+    #
     class Owner < Struct.new(
       :display_name,
       :id)
@@ -4964,6 +5254,8 @@ module Aws::S3
     # @!attribute [rw] size
     #   Size of the uploaded part data.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Part AWS API Documentation
     #
     class Part < Struct.new(
       :part_number,
@@ -4991,6 +5283,8 @@ module Aws::S3
     #   Specifies the Accelerate Configuration you want to set for the
     #   bucket.
     #   @return [Types::AccelerateConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAccelerateConfigurationRequest AWS API Documentation
     #
     class PutBucketAccelerateConfigurationRequest < Struct.new(
       :bucket,
@@ -5065,6 +5359,8 @@ module Aws::S3
     #   Allows grantee to write the ACL for the applicable bucket.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAclRequest AWS API Documentation
+    #
     class PutBucketAclRequest < Struct.new(
       :acl,
       :access_control_policy,
@@ -5131,6 +5427,8 @@ module Aws::S3
     #   The configuration and any analyses for the analytics filter.
     #   @return [Types::AnalyticsConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketAnalyticsConfigurationRequest AWS API Documentation
+    #
     class PutBucketAnalyticsConfigurationRequest < Struct.new(
       :bucket,
       :id,
@@ -5165,6 +5463,8 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketCorsRequest AWS API Documentation
     #
     class PutBucketCorsRequest < Struct.new(
       :bucket,
@@ -5213,6 +5513,8 @@ module Aws::S3
     # @!attribute [rw] inventory_configuration
     #   Specifies the inventory configuration.
     #   @return [Types::InventoryConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketInventoryConfigurationRequest AWS API Documentation
     #
     class PutBucketInventoryConfigurationRequest < Struct.new(
       :bucket,
@@ -5283,6 +5585,8 @@ module Aws::S3
     # @!attribute [rw] lifecycle_configuration
     #   @return [Types::BucketLifecycleConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleConfigurationRequest AWS API Documentation
+    #
     class PutBucketLifecycleConfigurationRequest < Struct.new(
       :bucket,
       :lifecycle_configuration)
@@ -5335,6 +5639,8 @@ module Aws::S3
     # @!attribute [rw] lifecycle_configuration
     #   @return [Types::LifecycleConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLifecycleRequest AWS API Documentation
+    #
     class PutBucketLifecycleRequest < Struct.new(
       :bucket,
       :content_md5,
@@ -5376,6 +5682,8 @@ module Aws::S3
     #
     # @!attribute [rw] content_md5
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketLoggingRequest AWS API Documentation
     #
     class PutBucketLoggingRequest < Struct.new(
       :bucket,
@@ -5422,6 +5730,8 @@ module Aws::S3
     # @!attribute [rw] metrics_configuration
     #   Specifies the metrics configuration.
     #   @return [Types::MetricsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketMetricsConfigurationRequest AWS API Documentation
     #
     class PutBucketMetricsConfigurationRequest < Struct.new(
       :bucket,
@@ -5499,6 +5809,8 @@ module Aws::S3
     #   the bucket.
     #   @return [Types::NotificationConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationConfigurationRequest AWS API Documentation
+    #
     class PutBucketNotificationConfigurationRequest < Struct.new(
       :bucket,
       :notification_configuration)
@@ -5543,6 +5855,8 @@ module Aws::S3
     # @!attribute [rw] notification_configuration
     #   @return [Types::NotificationConfigurationDeprecated]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketNotificationRequest AWS API Documentation
+    #
     class PutBucketNotificationRequest < Struct.new(
       :bucket,
       :content_md5,
@@ -5568,6 +5882,8 @@ module Aws::S3
     # @!attribute [rw] policy
     #   The bucket policy as a JSON document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketPolicyRequest AWS API Documentation
     #
     class PutBucketPolicyRequest < Struct.new(
       :bucket,
@@ -5609,6 +5925,8 @@ module Aws::S3
     #   Total replication configuration size can be up to 2 MB.
     #   @return [Types::ReplicationConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketReplicationRequest AWS API Documentation
+    #
     class PutBucketReplicationRequest < Struct.new(
       :bucket,
       :content_md5,
@@ -5635,6 +5953,8 @@ module Aws::S3
     #
     # @!attribute [rw] request_payment_configuration
     #   @return [Types::RequestPaymentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketRequestPaymentRequest AWS API Documentation
     #
     class PutBucketRequestPaymentRequest < Struct.new(
       :bucket,
@@ -5667,6 +5987,8 @@ module Aws::S3
     #
     # @!attribute [rw] tagging
     #   @return [Types::Tagging]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketTaggingRequest AWS API Documentation
     #
     class PutBucketTaggingRequest < Struct.new(
       :bucket,
@@ -5702,6 +6024,8 @@ module Aws::S3
     #
     # @!attribute [rw] versioning_configuration
     #   @return [Types::VersioningConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketVersioningRequest AWS API Documentation
     #
     class PutBucketVersioningRequest < Struct.new(
       :bucket,
@@ -5755,6 +6079,8 @@ module Aws::S3
     # @!attribute [rw] website_configuration
     #   @return [Types::WebsiteConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutBucketWebsiteRequest AWS API Documentation
+    #
     class PutBucketWebsiteRequest < Struct.new(
       :bucket,
       :content_md5,
@@ -5766,6 +6092,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclOutput AWS API Documentation
     #
     class PutObjectAclOutput < Struct.new(
       :request_charged)
@@ -5857,6 +6185,8 @@ module Aws::S3
     #   VersionId used to reference a specific version of the object.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectAclRequest AWS API Documentation
+    #
     class PutObjectAclRequest < Struct.new(
       :acl,
       :access_control_policy,
@@ -5914,6 +6244,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectOutput AWS API Documentation
     #
     class PutObjectOutput < Struct.new(
       :expiration,
@@ -6089,6 +6421,8 @@ module Aws::S3
     #   parameters
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectRequest AWS API Documentation
+    #
     class PutObjectRequest < Struct.new(
       :acl,
       :body,
@@ -6121,6 +6455,8 @@ module Aws::S3
 
     # @!attribute [rw] version_id
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingOutput AWS API Documentation
     #
     class PutObjectTaggingOutput < Struct.new(
       :version_id)
@@ -6159,6 +6495,8 @@ module Aws::S3
     #
     # @!attribute [rw] tagging
     #   @return [Types::Tagging]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/PutObjectTaggingRequest AWS API Documentation
     #
     class PutObjectTaggingRequest < Struct.new(
       :bucket,
@@ -6215,6 +6553,8 @@ module Aws::S3
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfiguration AWS API Documentation
+    #
     class QueueConfiguration < Struct.new(
       :id,
       :queue_arn,
@@ -6248,6 +6588,8 @@ module Aws::S3
     #
     # @!attribute [rw] queue
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/QueueConfigurationDeprecated AWS API Documentation
     #
     class QueueConfigurationDeprecated < Struct.new(
       :id,
@@ -6299,6 +6641,8 @@ module Aws::S3
     #   provided.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Redirect AWS API Documentation
+    #
     class Redirect < Struct.new(
       :host_name,
       :http_redirect_code,
@@ -6324,6 +6668,8 @@ module Aws::S3
     #   Protocol to use (http, https) when redirecting requests. The default
     #   is the protocol that is used in the original request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RedirectAllRequestsTo AWS API Documentation
     #
     class RedirectAllRequestsTo < Struct.new(
       :host_name,
@@ -6363,6 +6709,8 @@ module Aws::S3
     #   contain up to 1,000 rules.
     #   @return [Array<Types::ReplicationRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationConfiguration AWS API Documentation
+    #
     class ReplicationConfiguration < Struct.new(
       :role,
       :rules)
@@ -6400,6 +6748,8 @@ module Aws::S3
     # @!attribute [rw] destination
     #   @return [Types::Destination]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ReplicationRule AWS API Documentation
+    #
     class ReplicationRule < Struct.new(
       :id,
       :prefix,
@@ -6419,6 +6769,8 @@ module Aws::S3
     #   Specifies who pays for the download and request fees.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RequestPaymentConfiguration AWS API Documentation
+    #
     class RequestPaymentConfiguration < Struct.new(
       :payer)
       include Aws::Structure
@@ -6428,6 +6780,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectOutput AWS API Documentation
     #
     class RestoreObjectOutput < Struct.new(
       :request_charged)
@@ -6470,6 +6824,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreObjectRequest AWS API Documentation
+    #
     class RestoreObjectRequest < Struct.new(
       :bucket,
       :key,
@@ -6496,6 +6852,8 @@ module Aws::S3
     # @!attribute [rw] glacier_job_parameters
     #   Glacier related prameters pertaining to this job.
     #   @return [Types::GlacierJobParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RestoreRequest AWS API Documentation
     #
     class RestoreRequest < Struct.new(
       :days,
@@ -6534,6 +6892,8 @@ module Aws::S3
     #   event of an error, you can can specify a different error code to
     #   return.
     #   @return [Types::Redirect]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/RoutingRule AWS API Documentation
     #
     class RoutingRule < Struct.new(
       :condition,
@@ -6614,6 +6974,8 @@ module Aws::S3
     #   parts of the upload.
     #   @return [Types::AbortIncompleteMultipartUpload]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Rule AWS API Documentation
+    #
     class Rule < Struct.new(
       :expiration,
       :id,
@@ -6645,6 +7007,8 @@ module Aws::S3
     #   for the filter rule.
     #   @return [Array<Types::FilterRule>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/S3KeyFilter AWS API Documentation
+    #
     class S3KeyFilter < Struct.new(
       :filter_rules)
       include Aws::Structure
@@ -6671,6 +7035,8 @@ module Aws::S3
     #   A container used to describe how data related to the storage class
     #   analysis should be exported.
     #   @return [Types::StorageClassAnalysisDataExport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysis AWS API Documentation
     #
     class StorageClassAnalysis < Struct.new(
       :data_export)
@@ -6701,6 +7067,8 @@ module Aws::S3
     #   The place to store the data for an analysis.
     #   @return [Types::AnalyticsExportDestination]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/StorageClassAnalysisDataExport AWS API Documentation
+    #
     class StorageClassAnalysisDataExport < Struct.new(
       :output_schema_version,
       :destination)
@@ -6723,6 +7091,8 @@ module Aws::S3
     #   Value of the tag.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -6743,6 +7113,8 @@ module Aws::S3
     #
     # @!attribute [rw] tag_set
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Tagging AWS API Documentation
     #
     class Tagging < Struct.new(
       :tag_set)
@@ -6769,6 +7141,8 @@ module Aws::S3
     # @!attribute [rw] permission
     #   Logging permissions assigned to the Grantee for the bucket.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TargetGrant AWS API Documentation
     #
     class TargetGrant < Struct.new(
       :grantee,
@@ -6823,6 +7197,8 @@ module Aws::S3
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html
     #   @return [Types::NotificationConfigurationFilter]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfiguration AWS API Documentation
+    #
     class TopicConfiguration < Struct.new(
       :id,
       :topic_arn,
@@ -6859,6 +7235,8 @@ module Aws::S3
     #   the specified events for the bucket.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/TopicConfigurationDeprecated AWS API Documentation
+    #
     class TopicConfigurationDeprecated < Struct.new(
       :id,
       :events,
@@ -6889,6 +7267,8 @@ module Aws::S3
     # @!attribute [rw] storage_class
     #   The class of storage used to store the object.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/Transition AWS API Documentation
     #
     class Transition < Struct.new(
       :date,
@@ -6932,6 +7312,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyOutput AWS API Documentation
     #
     class UploadPartCopyOutput < Struct.new(
       :copy_source_version_id,
@@ -7061,6 +7443,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartCopyRequest AWS API Documentation
+    #
     class UploadPartCopyRequest < Struct.new(
       :bucket,
       :copy_source,
@@ -7113,6 +7497,8 @@ module Aws::S3
     #   If present, indicates that the requester was successfully charged
     #   for the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartOutput AWS API Documentation
     #
     class UploadPartOutput < Struct.new(
       :server_side_encryption,
@@ -7201,6 +7587,8 @@ module Aws::S3
     #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/UploadPartRequest AWS API Documentation
+    #
     class UploadPartRequest < Struct.new(
       :body,
       :bucket,
@@ -7234,6 +7622,8 @@ module Aws::S3
     # @!attribute [rw] status
     #   The versioning state of the bucket.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/VersioningConfiguration AWS API Documentation
     #
     class VersioningConfiguration < Struct.new(
       :mfa_delete,
@@ -7283,6 +7673,8 @@ module Aws::S3
     #
     # @!attribute [rw] routing_rules
     #   @return [Array<Types::RoutingRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/WebsiteConfiguration AWS API Documentation
     #
     class WebsiteConfiguration < Struct.new(
       :error_document,

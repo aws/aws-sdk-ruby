@@ -212,6 +212,8 @@ module Aws::WAF
     #   resp.byte_match_set.byte_match_tuples[0].positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateByteMatchSet AWS API Documentation
+    #
     # @overload create_byte_match_set(params = {})
     # @param [Hash] params ({})
     def create_byte_match_set(params = {}, options = {})
@@ -274,6 +276,8 @@ module Aws::WAF
     #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4", "IPV6"
     #   resp.ip_set.ip_set_descriptors[0].value #=> String
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateIPSet AWS API Documentation
     #
     # @overload create_ip_set(params = {})
     # @param [Hash] params ({})
@@ -361,6 +365,8 @@ module Aws::WAF
     #   resp.rule.predicates[0].data_id #=> String
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateRule AWS API Documentation
+    #
     # @overload create_rule(params = {})
     # @param [Hash] params ({})
     def create_rule(params = {}, options = {})
@@ -430,6 +436,8 @@ module Aws::WAF
     #   resp.size_constraint_set.size_constraints[0].size #=> Integer
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSizeConstraintSet AWS API Documentation
+    #
     # @overload create_size_constraint_set(params = {})
     # @param [Hash] params ({})
     def create_size_constraint_set(params = {}, options = {})
@@ -494,6 +502,8 @@ module Aws::WAF
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateSqlInjectionMatchSet AWS API Documentation
     #
     # @overload create_sql_injection_match_set(params = {})
     # @param [Hash] params ({})
@@ -586,6 +596,8 @@ module Aws::WAF
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateWebACL AWS API Documentation
+    #
     # @overload create_web_acl(params = {})
     # @param [Hash] params ({})
     def create_web_acl(params = {}, options = {})
@@ -648,6 +660,8 @@ module Aws::WAF
     #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/CreateXssMatchSet AWS API Documentation
+    #
     # @overload create_xss_match_set(params = {})
     # @param [Hash] params ({})
     def create_xss_match_set(params = {}, options = {})
@@ -695,6 +709,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteByteMatchSet AWS API Documentation
+    #
     # @overload delete_byte_match_set(params = {})
     # @param [Hash] params ({})
     def delete_byte_match_set(params = {}, options = {})
@@ -739,6 +755,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteIPSet AWS API Documentation
     #
     # @overload delete_ip_set(params = {})
     # @param [Hash] params ({})
@@ -785,6 +803,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteRule AWS API Documentation
     #
     # @overload delete_rule(params = {})
     # @param [Hash] params ({})
@@ -834,6 +854,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSizeConstraintSet AWS API Documentation
+    #
     # @overload delete_size_constraint_set(params = {})
     # @param [Hash] params ({})
     def delete_size_constraint_set(params = {}, options = {})
@@ -882,6 +904,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteSqlInjectionMatchSet AWS API Documentation
+    #
     # @overload delete_sql_injection_match_set(params = {})
     # @param [Hash] params ({})
     def delete_sql_injection_match_set(params = {}, options = {})
@@ -923,6 +947,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteWebACL AWS API Documentation
     #
     # @overload delete_web_acl(params = {})
     # @param [Hash] params ({})
@@ -972,6 +998,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/DeleteXssMatchSet AWS API Documentation
+    #
     # @overload delete_xss_match_set(params = {})
     # @param [Hash] params ({})
     def delete_xss_match_set(params = {}, options = {})
@@ -1007,6 +1035,8 @@ module Aws::WAF
     #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
     #   resp.byte_match_set.byte_match_tuples[0].positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetByteMatchSet AWS API Documentation
+    #
     # @overload get_byte_match_set(params = {})
     # @param [Hash] params ({})
     def get_byte_match_set(params = {}, options = {})
@@ -1037,6 +1067,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeToken AWS API Documentation
     #
     # @overload get_change_token(params = {})
     # @param [Hash] params ({})
@@ -1075,6 +1107,8 @@ module Aws::WAF
     #
     #   resp.change_token_status #=> String, one of "PROVISIONED", "PENDING", "INSYNC"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetChangeTokenStatus AWS API Documentation
+    #
     # @overload get_change_token_status(params = {})
     # @param [Hash] params ({})
     def get_change_token_status(params = {}, options = {})
@@ -1105,6 +1139,8 @@ module Aws::WAF
     #   resp.ip_set.ip_set_descriptors #=> Array
     #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4", "IPV6"
     #   resp.ip_set.ip_set_descriptors[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetIPSet AWS API Documentation
     #
     # @overload get_ip_set(params = {})
     # @param [Hash] params ({})
@@ -1139,6 +1175,8 @@ module Aws::WAF
     #   resp.rule.predicates[0].negated #=> Boolean
     #   resp.rule.predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
     #   resp.rule.predicates[0].data_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetRule AWS API Documentation
     #
     # @overload get_rule(params = {})
     # @param [Hash] params ({})
@@ -1224,6 +1262,8 @@ module Aws::WAF
     #   resp.time_window.start_time #=> Time
     #   resp.time_window.end_time #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSampledRequests AWS API Documentation
+    #
     # @overload get_sampled_requests(params = {})
     # @param [Hash] params ({})
     def get_sampled_requests(params = {}, options = {})
@@ -1259,6 +1299,8 @@ module Aws::WAF
     #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.size_constraint_set.size_constraints[0].size #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSizeConstraintSet AWS API Documentation
+    #
     # @overload get_size_constraint_set(params = {})
     # @param [Hash] params ({})
     def get_size_constraint_set(params = {}, options = {})
@@ -1292,6 +1334,8 @@ module Aws::WAF
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
     #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetSqlInjectionMatchSet AWS API Documentation
     #
     # @overload get_sql_injection_match_set(params = {})
     # @param [Hash] params ({})
@@ -1327,6 +1371,8 @@ module Aws::WAF
     #   resp.web_acl.rules[0].rule_id #=> String
     #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetWebACL AWS API Documentation
+    #
     # @overload get_web_acl(params = {})
     # @param [Hash] params ({})
     def get_web_acl(params = {}, options = {})
@@ -1359,6 +1405,8 @@ module Aws::WAF
     #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
     #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
     #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/GetXssMatchSet AWS API Documentation
     #
     # @overload get_xss_match_set(params = {})
     # @param [Hash] params ({})
@@ -1403,6 +1451,8 @@ module Aws::WAF
     #   resp.byte_match_sets[0].byte_match_set_id #=> String
     #   resp.byte_match_sets[0].name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListByteMatchSets AWS API Documentation
+    #
     # @overload list_byte_match_sets(params = {})
     # @param [Hash] params ({})
     def list_byte_match_sets(params = {}, options = {})
@@ -1445,6 +1495,8 @@ module Aws::WAF
     #   resp.ip_sets[0].ip_set_id #=> String
     #   resp.ip_sets[0].name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListIPSets AWS API Documentation
+    #
     # @overload list_ip_sets(params = {})
     # @param [Hash] params ({})
     def list_ip_sets(params = {}, options = {})
@@ -1486,6 +1538,8 @@ module Aws::WAF
     #   resp.rules #=> Array
     #   resp.rules[0].rule_id #=> String
     #   resp.rules[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListRules AWS API Documentation
     #
     # @overload list_rules(params = {})
     # @param [Hash] params ({})
@@ -1531,6 +1585,8 @@ module Aws::WAF
     #   resp.size_constraint_sets[0].size_constraint_set_id #=> String
     #   resp.size_constraint_sets[0].name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSizeConstraintSets AWS API Documentation
+    #
     # @overload list_size_constraint_sets(params = {})
     # @param [Hash] params ({})
     def list_size_constraint_sets(params = {}, options = {})
@@ -1575,6 +1631,8 @@ module Aws::WAF
     #   resp.sql_injection_match_sets[0].sql_injection_match_set_id #=> String
     #   resp.sql_injection_match_sets[0].name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListSqlInjectionMatchSets AWS API Documentation
+    #
     # @overload list_sql_injection_match_sets(params = {})
     # @param [Hash] params ({})
     def list_sql_injection_match_sets(params = {}, options = {})
@@ -1618,6 +1676,8 @@ module Aws::WAF
     #   resp.web_acls[0].web_acl_id #=> String
     #   resp.web_acls[0].name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListWebACLs AWS API Documentation
+    #
     # @overload list_web_acls(params = {})
     # @param [Hash] params ({})
     def list_web_acls(params = {}, options = {})
@@ -1659,6 +1719,8 @@ module Aws::WAF
     #   resp.xss_match_sets #=> Array
     #   resp.xss_match_sets[0].xss_match_set_id #=> String
     #   resp.xss_match_sets[0].name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/ListXssMatchSets AWS API Documentation
     #
     # @overload list_xss_match_sets(params = {})
     # @param [Hash] params ({})
@@ -1760,6 +1822,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateByteMatchSet AWS API Documentation
     #
     # @overload update_byte_match_set(params = {})
     # @param [Hash] params ({})
@@ -1866,6 +1930,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateIPSet AWS API Documentation
+    #
     # @overload update_ip_set(params = {})
     # @param [Hash] params ({})
     def update_ip_set(params = {}, options = {})
@@ -1957,6 +2023,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateRule AWS API Documentation
     #
     # @overload update_rule(params = {})
     # @param [Hash] params ({})
@@ -2066,6 +2134,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSizeConstraintSet AWS API Documentation
+    #
     # @overload update_size_constraint_set(params = {})
     # @param [Hash] params ({})
     def update_size_constraint_set(params = {}, options = {})
@@ -2162,6 +2232,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateSqlInjectionMatchSet AWS API Documentation
     #
     # @overload update_sql_injection_match_set(params = {})
     # @param [Hash] params ({})
@@ -2279,6 +2351,8 @@ module Aws::WAF
     #
     #   resp.change_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateWebACL AWS API Documentation
+    #
     # @overload update_web_acl(params = {})
     # @param [Hash] params ({})
     def update_web_acl(params = {}, options = {})
@@ -2371,6 +2445,8 @@ module Aws::WAF
     # @example Response structure
     #
     #   resp.change_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/waf-2015-08-24/UpdateXssMatchSet AWS API Documentation
     #
     # @overload update_xss_match_set(params = {})
     # @param [Hash] params ({})

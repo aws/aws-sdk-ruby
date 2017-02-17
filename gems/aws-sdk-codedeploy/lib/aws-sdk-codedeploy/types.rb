@@ -35,6 +35,8 @@ module Aws::CodeDeploy
     #   The names of the on-premises instances to which to add tags.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstancesInput AWS API Documentation
+    #
     class AddTagsToOnPremisesInstancesInput < Struct.new(
       :tags,
       :instance_names)
@@ -54,6 +56,8 @@ module Aws::CodeDeploy
     #   The name of the alarm. Maximum length is 255 characters. Each alarm
     #   name can be used only once in a list of alarms.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Alarm AWS API Documentation
     #
     class Alarm < Struct.new(
       :name)
@@ -96,6 +100,8 @@ module Aws::CodeDeploy
     #   10 alarms can be added to a deployment group.
     #   @return [Array<Types::Alarm>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AlarmConfiguration AWS API Documentation
+    #
     class AlarmConfiguration < Struct.new(
       :enabled,
       :ignore_poll_alarm_failure,
@@ -121,6 +127,8 @@ module Aws::CodeDeploy
     #   True if the user has authenticated with GitHub for the specified
     #   application; otherwise, false.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationInfo AWS API Documentation
     #
     class ApplicationInfo < Struct.new(
       :application_id,
@@ -151,6 +159,8 @@ module Aws::CodeDeploy
     #   The event type or types that trigger a rollback.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AutoRollbackConfiguration AWS API Documentation
+    #
     class AutoRollbackConfiguration < Struct.new(
       :enabled,
       :events)
@@ -166,6 +176,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] hook
     #   An Auto Scaling lifecycle event hook name.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AutoScalingGroup AWS API Documentation
     #
     class AutoScalingGroup < Struct.new(
       :name,
@@ -208,6 +220,8 @@ module Aws::CodeDeploy
     #   and location.
     #   @return [Array<Types::RevisionLocation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisionsInput AWS API Documentation
+    #
     class BatchGetApplicationRevisionsInput < Struct.new(
       :application_name,
       :revisions)
@@ -229,6 +243,8 @@ module Aws::CodeDeploy
     #   location.
     #   @return [Array<Types::RevisionInfo>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisionsOutput AWS API Documentation
+    #
     class BatchGetApplicationRevisionsOutput < Struct.new(
       :application_name,
       :error_message,
@@ -249,6 +265,8 @@ module Aws::CodeDeploy
     #   A list of application names separated by spaces.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationsInput AWS API Documentation
+    #
     class BatchGetApplicationsInput < Struct.new(
       :application_names)
       include Aws::Structure
@@ -259,6 +277,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] applications_info
     #   Information about the applications.
     #   @return [Array<Types::ApplicationInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationsOutput AWS API Documentation
     #
     class BatchGetApplicationsOutput < Struct.new(
       :applications_info)
@@ -284,6 +304,8 @@ module Aws::CodeDeploy
     #   The deployment groups' names.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsInput AWS API Documentation
+    #
     class BatchGetDeploymentGroupsInput < Struct.new(
       :application_name,
       :deployment_group_names)
@@ -299,6 +321,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] error_message
     #   Information about errors that may have occurred during the API call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsOutput AWS API Documentation
     #
     class BatchGetDeploymentGroupsOutput < Struct.new(
       :deployment_groups_info,
@@ -324,6 +348,8 @@ module Aws::CodeDeploy
     #   The unique IDs of instances in the deployment group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstancesInput AWS API Documentation
+    #
     class BatchGetDeploymentInstancesInput < Struct.new(
       :deployment_id,
       :instance_ids)
@@ -339,6 +365,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] error_message
     #   Information about errors that may have occurred during the API call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstancesOutput AWS API Documentation
     #
     class BatchGetDeploymentInstancesOutput < Struct.new(
       :instances_summary,
@@ -359,6 +387,8 @@ module Aws::CodeDeploy
     #   A list of deployment IDs, separated by spaces.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentsInput AWS API Documentation
+    #
     class BatchGetDeploymentsInput < Struct.new(
       :deployment_ids)
       include Aws::Structure
@@ -369,6 +399,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployments_info
     #   Information about the deployments.
     #   @return [Array<Types::DeploymentInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentsOutput AWS API Documentation
     #
     class BatchGetDeploymentsOutput < Struct.new(
       :deployments_info)
@@ -389,6 +421,8 @@ module Aws::CodeDeploy
     #   information.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstancesInput AWS API Documentation
+    #
     class BatchGetOnPremisesInstancesInput < Struct.new(
       :instance_names)
       include Aws::Structure
@@ -399,6 +433,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] instance_infos
     #   Information about the on-premises instances.
     #   @return [Array<Types::InstanceInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstancesOutput AWS API Documentation
     #
     class BatchGetOnPremisesInstancesOutput < Struct.new(
       :instance_infos)
@@ -419,6 +455,8 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplicationInput AWS API Documentation
+    #
     class CreateApplicationInput < Struct.new(
       :application_name)
       include Aws::Structure
@@ -429,6 +467,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] application_id
     #   A unique application ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplicationOutput AWS API Documentation
     #
     class CreateApplicationOutput < Struct.new(
       :application_id)
@@ -475,6 +515,8 @@ module Aws::CodeDeploy
     #   type of FLEET\_PERCENT and a value of 95.
     #   @return [Types::MinimumHealthyHosts]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfigInput AWS API Documentation
+    #
     class CreateDeploymentConfigInput < Struct.new(
       :deployment_config_name,
       :minimum_healthy_hosts)
@@ -486,6 +528,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_config_id
     #   A unique deployment configuration ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfigOutput AWS API Documentation
     #
     class CreateDeploymentConfigOutput < Struct.new(
       :deployment_config_id)
@@ -604,6 +648,8 @@ module Aws::CodeDeploy
     #   when a deployment group is created.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput AWS API Documentation
+    #
     class CreateDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name,
@@ -623,6 +669,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_group_id
     #   A unique deployment group ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupOutput AWS API Documentation
     #
     class CreateDeploymentGroupOutput < Struct.new(
       :deployment_group_id)
@@ -711,6 +759,8 @@ module Aws::CodeDeploy
     #   that are not running the latest application revision.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentInput AWS API Documentation
+    #
     class CreateDeploymentInput < Struct.new(
       :application_name,
       :deployment_group_name,
@@ -728,6 +778,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_id
     #   A unique deployment ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentOutput AWS API Documentation
     #
     class CreateDeploymentOutput < Struct.new(
       :deployment_id)
@@ -748,6 +800,8 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplicationInput AWS API Documentation
+    #
     class DeleteApplicationInput < Struct.new(
       :application_name)
       include Aws::Structure
@@ -766,6 +820,8 @@ module Aws::CodeDeploy
     #   The name of a deployment configuration associated with the
     #   applicable IAM user or AWS account.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigInput AWS API Documentation
     #
     class DeleteDeploymentConfigInput < Struct.new(
       :deployment_config_name)
@@ -792,6 +848,8 @@ module Aws::CodeDeploy
     #   application.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroupInput AWS API Documentation
+    #
     class DeleteDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name)
@@ -809,6 +867,8 @@ module Aws::CodeDeploy
     #   Scaling lifecycle event hooks from the Amazon EC2 instances in the
     #   Auto Scaling group.
     #   @return [Array<Types::AutoScalingGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroupOutput AWS API Documentation
     #
     class DeleteDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up)
@@ -833,6 +893,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] create_time
     #   The time at which the deployment configuration was created.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInfo AWS API Documentation
     #
     class DeploymentConfigInfo < Struct.new(
       :deployment_config_id,
@@ -893,6 +955,8 @@ module Aws::CodeDeploy
     #   Information about the automatic rollback configuration associated
     #   with the deployment group.
     #   @return [Types::AutoRollbackConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
     #
     class DeploymentGroupInfo < Struct.new(
       :application_name,
@@ -1005,6 +1069,8 @@ module Aws::CodeDeploy
     #   Information about a deployment rollback.
     #   @return [Types::RollbackInfo]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
+    #
     class DeploymentInfo < Struct.new(
       :application_name,
       :deployment_group_name,
@@ -1050,6 +1116,8 @@ module Aws::CodeDeploy
     #   The number of instances in the deployment in a skipped state.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentOverview AWS API Documentation
+    #
     class DeploymentOverview < Struct.new(
       :pending,
       :in_progress,
@@ -1071,6 +1139,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] instance_name
     #   The name of the on-premises instance to deregister.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstanceInput AWS API Documentation
     #
     class DeregisterOnPremisesInstanceInput < Struct.new(
       :instance_name)
@@ -1115,6 +1185,8 @@ module Aws::CodeDeploy
     #   diagnostic log.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Diagnostics AWS API Documentation
+    #
     class Diagnostics < Struct.new(
       :error_code,
       :script_name,
@@ -1151,6 +1223,8 @@ module Aws::CodeDeploy
     #
     #   * KEY\_AND\_VALUE: Key and value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagFilter AWS API Documentation
     #
     class EC2TagFilter < Struct.new(
       :key,
@@ -1208,6 +1282,8 @@ module Aws::CodeDeploy
     #   An accompanying error message.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ErrorInformation AWS API Documentation
+    #
     class ErrorInformation < Struct.new(
       :code,
       :message)
@@ -1236,6 +1312,8 @@ module Aws::CodeDeploy
     #   When the revision was registered with AWS CodeDeploy.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GenericRevisionInfo AWS API Documentation
+    #
     class GenericRevisionInfo < Struct.new(
       :description,
       :deployment_groups,
@@ -1259,6 +1337,8 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationInput AWS API Documentation
+    #
     class GetApplicationInput < Struct.new(
       :application_name)
       include Aws::Structure
@@ -1269,6 +1349,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] application
     #   Information about the application.
     #   @return [Types::ApplicationInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationOutput AWS API Documentation
     #
     class GetApplicationOutput < Struct.new(
       :application)
@@ -1307,6 +1389,8 @@ module Aws::CodeDeploy
     #   and location.
     #   @return [Types::RevisionLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevisionInput AWS API Documentation
+    #
     class GetApplicationRevisionInput < Struct.new(
       :application_name,
       :revision)
@@ -1327,6 +1411,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] revision_info
     #   General information about the revision.
     #   @return [Types::GenericRevisionInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevisionOutput AWS API Documentation
     #
     class GetApplicationRevisionOutput < Struct.new(
       :application_name,
@@ -1349,6 +1435,8 @@ module Aws::CodeDeploy
     #   applicable IAM user or AWS account.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfigInput AWS API Documentation
+    #
     class GetDeploymentConfigInput < Struct.new(
       :deployment_config_name)
       include Aws::Structure
@@ -1359,6 +1447,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_config_info
     #   Information about the deployment configuration.
     #   @return [Types::DeploymentConfigInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfigOutput AWS API Documentation
     #
     class GetDeploymentConfigOutput < Struct.new(
       :deployment_config_info)
@@ -1385,6 +1475,8 @@ module Aws::CodeDeploy
     #   application.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroupInput AWS API Documentation
+    #
     class GetDeploymentGroupInput < Struct.new(
       :application_name,
       :deployment_group_name)
@@ -1396,6 +1488,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_group_info
     #   Information about the deployment group.
     #   @return [Types::DeploymentGroupInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroupOutput AWS API Documentation
     #
     class GetDeploymentGroupOutput < Struct.new(
       :deployment_group_info)
@@ -1415,6 +1509,8 @@ module Aws::CodeDeploy
     #   A deployment ID associated with the applicable IAM user or AWS
     #   account.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInput AWS API Documentation
     #
     class GetDeploymentInput < Struct.new(
       :deployment_id)
@@ -1439,6 +1535,8 @@ module Aws::CodeDeploy
     #   The unique ID of an instance in the deployment group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstanceInput AWS API Documentation
+    #
     class GetDeploymentInstanceInput < Struct.new(
       :deployment_id,
       :instance_id)
@@ -1451,6 +1549,8 @@ module Aws::CodeDeploy
     #   Information about the instance.
     #   @return [Types::InstanceSummary]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstanceOutput AWS API Documentation
+    #
     class GetDeploymentInstanceOutput < Struct.new(
       :instance_summary)
       include Aws::Structure
@@ -1461,6 +1561,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_info
     #   Information about the deployment.
     #   @return [Types::DeploymentInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentOutput AWS API Documentation
     #
     class GetDeploymentOutput < Struct.new(
       :deployment_info)
@@ -1480,6 +1582,8 @@ module Aws::CodeDeploy
     #   The name of the on-premises instance about which to get information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstanceInput AWS API Documentation
+    #
     class GetOnPremisesInstanceInput < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -1490,6 +1594,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] instance_info
     #   Information about the on-premises instance.
     #   @return [Types::InstanceInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstanceOutput AWS API Documentation
     #
     class GetOnPremisesInstanceOutput < Struct.new(
       :instance_info)
@@ -1519,6 +1625,8 @@ module Aws::CodeDeploy
     #   The SHA1 commit ID of the GitHub commit that represents the bundled
     #   artifacts for the application revision.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GitHubLocation AWS API Documentation
     #
     class GitHubLocation < Struct.new(
       :repository,
@@ -1556,6 +1664,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] tags
     #   The tags currently associated with the on-premises instance.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceInfo AWS API Documentation
     #
     class InstanceInfo < Struct.new(
       :instance_name,
@@ -1603,6 +1713,8 @@ module Aws::CodeDeploy
     #   A list of lifecycle events for this instance.
     #   @return [Array<Types::LifecycleEvent>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceSummary AWS API Documentation
+    #
     class InstanceSummary < Struct.new(
       :deployment_id,
       :instance_id,
@@ -1646,6 +1758,8 @@ module Aws::CodeDeploy
     #
     #   * Unknown: The deployment lifecycle event is unknown.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LifecycleEvent AWS API Documentation
     #
     class LifecycleEvent < Struct.new(
       :lifecycle_event_name,
@@ -1734,6 +1848,8 @@ module Aws::CodeDeploy
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisionsInput AWS API Documentation
+    #
     class ListApplicationRevisionsInput < Struct.new(
       :application_name,
       :sort_by,
@@ -1758,6 +1874,8 @@ module Aws::CodeDeploy
     #   the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisionsOutput AWS API Documentation
+    #
     class ListApplicationRevisionsOutput < Struct.new(
       :revisions,
       :next_token)
@@ -1778,6 +1896,8 @@ module Aws::CodeDeploy
     #   can be used to return the next set of applications in the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationsInput AWS API Documentation
+    #
     class ListApplicationsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1795,6 +1915,8 @@ module Aws::CodeDeploy
     #   return the next set of applications, will also be returned. in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationsOutput AWS API Documentation
     #
     class ListApplicationsOutput < Struct.new(
       :applications,
@@ -1817,6 +1939,8 @@ module Aws::CodeDeploy
     #   deployment configurations in the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigsInput AWS API Documentation
+    #
     class ListDeploymentConfigsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1835,6 +1959,8 @@ module Aws::CodeDeploy
     #   configurations call to return the next set of deployment
     #   configurations in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigsOutput AWS API Documentation
     #
     class ListDeploymentConfigsOutput < Struct.new(
       :deployment_configs_list,
@@ -1863,6 +1989,8 @@ module Aws::CodeDeploy
     #   the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroupsInput AWS API Documentation
+    #
     class ListDeploymentGroupsInput < Struct.new(
       :application_name,
       :next_token)
@@ -1884,6 +2012,8 @@ module Aws::CodeDeploy
     #   returned. It can be used in a subsequent list deployment groups call
     #   to return the next set of deployment groups in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroupsOutput AWS API Documentation
     #
     class ListDeploymentGroupsOutput < Struct.new(
       :application_name,
@@ -1931,6 +2061,8 @@ module Aws::CodeDeploy
     #     state.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstancesInput AWS API Documentation
+    #
     class ListDeploymentInstancesInput < Struct.new(
       :deployment_id,
       :next_token,
@@ -1949,6 +2081,8 @@ module Aws::CodeDeploy
     #   returned. It can be used in a subsequent list deployment instances
     #   call to return the next set of deployment instances in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstancesOutput AWS API Documentation
     #
     class ListDeploymentInstancesOutput < Struct.new(
       :instances_list,
@@ -2009,6 +2143,8 @@ module Aws::CodeDeploy
     #   can be used to return the next set of deployments in the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentsInput AWS API Documentation
+    #
     class ListDeploymentsInput < Struct.new(
       :application_name,
       :deployment_group_name,
@@ -2029,6 +2165,8 @@ module Aws::CodeDeploy
     #   returned. It can be used in a subsequent list deployments call to
     #   return the next set of deployments in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentsOutput AWS API Documentation
     #
     class ListDeploymentsOutput < Struct.new(
       :deployments,
@@ -2074,6 +2212,8 @@ module Aws::CodeDeploy
     #   in the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstancesInput AWS API Documentation
+    #
     class ListOnPremisesInstancesInput < Struct.new(
       :registration_status,
       :tag_filters,
@@ -2092,6 +2232,8 @@ module Aws::CodeDeploy
     #   returned. It can be used in a subsequent list on-premises instances
     #   call to return the next set of on-premises instances in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstancesOutput AWS API Documentation
     #
     class ListOnPremisesInstancesOutput < Struct.new(
       :instance_names,
@@ -2145,6 +2287,8 @@ module Aws::CodeDeploy
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHosts AWS API Documentation
+    #
     class MinimumHealthyHosts < Struct.new(
       :value,
       :type)
@@ -2189,6 +2333,8 @@ module Aws::CodeDeploy
     #   type and location.
     #   @return [Types::RevisionLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevisionInput AWS API Documentation
+    #
     class RegisterApplicationRevisionInput < Struct.new(
       :application_name,
       :description,
@@ -2219,6 +2365,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] iam_user_arn
     #   The ARN of the IAM user to associate with the on-premises instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstanceInput AWS API Documentation
     #
     class RegisterOnPremisesInstanceInput < Struct.new(
       :instance_name,
@@ -2251,6 +2399,8 @@ module Aws::CodeDeploy
     #   The names of the on-premises instances from which to remove tags.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstancesInput AWS API Documentation
+    #
     class RemoveTagsFromOnPremisesInstancesInput < Struct.new(
       :tags,
       :instance_names)
@@ -2267,6 +2417,8 @@ module Aws::CodeDeploy
     #   Information about an application revision, including usage details
     #   and currently associated deployment groups.
     #   @return [Types::GenericRevisionInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionInfo AWS API Documentation
     #
     class RevisionInfo < Struct.new(
       :revision_location,
@@ -2312,6 +2464,8 @@ module Aws::CodeDeploy
     #   GitHub.
     #   @return [Types::GitHubLocation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionLocation AWS API Documentation
+    #
     class RevisionLocation < Struct.new(
       :revision_type,
       :s3_location,
@@ -2335,6 +2489,8 @@ module Aws::CodeDeploy
     #   example, whether the deployment can't be rolled back, is in
     #   progress, failed, or succeeded.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RollbackInfo AWS API Documentation
     #
     class RollbackInfo < Struct.new(
       :rollback_deployment_id,
@@ -2394,6 +2550,8 @@ module Aws::CodeDeploy
     #   of the object will be skipped.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/S3Location AWS API Documentation
+    #
     class S3Location < Struct.new(
       :bucket,
       :key,
@@ -2423,6 +2581,8 @@ module Aws::CodeDeploy
     #   application revision.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeploymentInput AWS API Documentation
+    #
     class StopDeploymentInput < Struct.new(
       :deployment_id,
       :auto_rollback_enabled)
@@ -2442,6 +2602,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] status_message
     #   An accompanying status message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeploymentOutput AWS API Documentation
     #
     class StopDeploymentOutput < Struct.new(
       :status,
@@ -2466,6 +2628,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] value
     #   The tag's value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -2502,6 +2666,8 @@ module Aws::CodeDeploy
     #   * KEY\_AND\_VALUE: Key and value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TagFilter AWS API Documentation
+    #
     class TagFilter < Struct.new(
       :key,
       :value,
@@ -2535,6 +2701,8 @@ module Aws::CodeDeploy
     #    </note>
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeRange AWS API Documentation
+    #
     class TimeRange < Struct.new(
       :start,
       :end)
@@ -2565,6 +2733,8 @@ module Aws::CodeDeploy
     #   The event type or types for which notifications are triggered.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TriggerConfig AWS API Documentation
+    #
     class TriggerConfig < Struct.new(
       :trigger_name,
       :trigger_target_arn,
@@ -2589,6 +2759,8 @@ module Aws::CodeDeploy
     # @!attribute [rw] new_application_name
     #   The new name to give the application.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplicationInput AWS API Documentation
     #
     class UpdateApplicationInput < Struct.new(
       :application_name,
@@ -2705,6 +2877,8 @@ module Aws::CodeDeploy
     #   changed when a deployment group is updated.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupInput AWS API Documentation
+    #
     class UpdateDeploymentGroupInput < Struct.new(
       :application_name,
       :current_deployment_group_name,
@@ -2730,6 +2904,8 @@ module Aws::CodeDeploy
     #   CodeDeploy could not remove some Auto Scaling lifecycle event hooks
     #   from the AWS account.
     #   @return [Array<Types::AutoScalingGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupOutput AWS API Documentation
     #
     class UpdateDeploymentGroupOutput < Struct.new(
       :hooks_not_cleaned_up)

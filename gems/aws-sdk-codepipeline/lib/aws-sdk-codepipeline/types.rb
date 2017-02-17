@@ -26,6 +26,8 @@ module Aws::CodePipeline
     #   The token for the session.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AWSSessionCredentials AWS API Documentation
+    #
     class AWSSessionCredentials < Struct.new(
       :access_key_id,
       :secret_access_key,
@@ -55,6 +57,8 @@ module Aws::CodePipeline
     #   returned this job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJobInput AWS API Documentation
+    #
     class AcknowledgeJobInput < Struct.new(
       :job_id,
       :nonce)
@@ -66,6 +70,8 @@ module Aws::CodePipeline
     # @!attribute [rw] status
     #   Whether the job worker has received the specified job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJobOutput AWS API Documentation
     #
     class AcknowledgeJobOutput < Struct.new(
       :status)
@@ -99,6 +105,8 @@ module Aws::CodePipeline
     #   details.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeThirdPartyJobInput AWS API Documentation
+    #
     class AcknowledgeThirdPartyJobInput < Struct.new(
       :job_id,
       :nonce,
@@ -112,6 +120,8 @@ module Aws::CodePipeline
     #   The status information for the third party job, if any.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeThirdPartyJobOutput AWS API Documentation
+    #
     class AcknowledgeThirdPartyJobOutput < Struct.new(
       :status)
       include Aws::Structure
@@ -122,6 +132,8 @@ module Aws::CodePipeline
     # @!attribute [rw] configuration
     #   The configuration data for the action.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionConfiguration AWS API Documentation
     #
     class ActionConfiguration < Struct.new(
       :configuration)
@@ -188,6 +200,8 @@ module Aws::CodePipeline
     #   The type of the configuration property.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionConfigurationProperty AWS API Documentation
+    #
     class ActionConfigurationProperty < Struct.new(
       :name,
       :required,
@@ -205,6 +219,8 @@ module Aws::CodePipeline
     # @!attribute [rw] name
     #   The name of the action within the context of a job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionContext AWS API Documentation
     #
     class ActionContext < Struct.new(
       :name)
@@ -272,6 +288,8 @@ module Aws::CodePipeline
     #   action. This is assumed through the roleArn for the pipeline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionDeclaration AWS API Documentation
+    #
     class ActionDeclaration < Struct.new(
       :name,
       :action_type_id,
@@ -326,6 +344,8 @@ module Aws::CodePipeline
     #   The details of an error returned by a URL external to AWS.
     #   @return [Types::ErrorDetails]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionExecution AWS API Documentation
+    #
     class ActionExecution < Struct.new(
       :status,
       :summary,
@@ -365,6 +385,8 @@ module Aws::CodePipeline
     #   created, in timestamp format.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionRevision AWS API Documentation
+    #
     class ActionRevision < Struct.new(
       :revision_id,
       :revision_change_id,
@@ -395,6 +417,8 @@ module Aws::CodePipeline
     #   A URL link for more information about the revision, such as a commit
     #   details page.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionState AWS API Documentation
     #
     class ActionState < Struct.new(
       :action_name,
@@ -428,6 +452,8 @@ module Aws::CodePipeline
     #   The details of the output artifact of the action, such as its commit
     #   ID.
     #   @return [Types::ArtifactDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionType AWS API Documentation
     #
     class ActionType < Struct.new(
       :id,
@@ -470,6 +496,8 @@ module Aws::CodePipeline
     # @!attribute [rw] version
     #   A string that identifies the action type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeId AWS API Documentation
     #
     class ActionTypeId < Struct.new(
       :category,
@@ -518,6 +546,8 @@ module Aws::CodePipeline
     #   configuration of the external action.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ActionTypeSettings AWS API Documentation
+    #
     class ActionTypeSettings < Struct.new(
       :third_party_configuration_url,
       :entity_url_template,
@@ -545,6 +575,8 @@ module Aws::CodePipeline
     #   request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ApprovalResult AWS API Documentation
+    #
     class ApprovalResult < Struct.new(
       :summary,
       :status)
@@ -566,6 +598,8 @@ module Aws::CodePipeline
     # @!attribute [rw] location
     #   The location of an artifact.
     #   @return [Types::ArtifactLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Artifact AWS API Documentation
     #
     class Artifact < Struct.new(
       :name,
@@ -592,6 +626,8 @@ module Aws::CodePipeline
     #   The maximum number of artifacts allowed for the action type.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactDetails AWS API Documentation
+    #
     class ArtifactDetails < Struct.new(
       :minimum_count,
       :maximum_count)
@@ -607,6 +643,8 @@ module Aws::CodePipeline
     # @!attribute [rw] s3_location
     #   The Amazon S3 bucket that contains the artifact.
     #   @return [Types::S3ArtifactLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactLocation AWS API Documentation
     #
     class ArtifactLocation < Struct.new(
       :type,
@@ -649,6 +687,8 @@ module Aws::CodePipeline
     #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
     #   commit details page.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactRevision AWS API Documentation
     #
     class ArtifactRevision < Struct.new(
       :name,
@@ -696,6 +736,8 @@ module Aws::CodePipeline
     #   undefined, the default key for Amazon S3 is used.
     #   @return [Types::EncryptionKey]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ArtifactStore AWS API Documentation
+    #
     class ArtifactStore < Struct.new(
       :type,
       :location,
@@ -720,6 +762,8 @@ module Aws::CodePipeline
     # @!attribute [rw] type
     #   Reserved for future use.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/BlockerDeclaration AWS API Documentation
     #
     class BlockerDeclaration < Struct.new(
       :name,
@@ -810,6 +854,8 @@ module Aws::CodePipeline
     #   Returns information about the details of an artifact.
     #   @return [Types::ArtifactDetails]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeInput AWS API Documentation
+    #
     class CreateCustomActionTypeInput < Struct.new(
       :category,
       :provider,
@@ -826,6 +872,8 @@ module Aws::CodePipeline
     # @!attribute [rw] action_type
     #   Returns information about the details of an action type.
     #   @return [Types::ActionType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionTypeOutput AWS API Documentation
     #
     class CreateCustomActionTypeOutput < Struct.new(
       :action_type)
@@ -895,6 +943,8 @@ module Aws::CodePipeline
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipelineInput AWS API Documentation
+    #
     class CreatePipelineInput < Struct.new(
       :pipeline)
       include Aws::Structure
@@ -906,6 +956,8 @@ module Aws::CodePipeline
     #   Represents the structure of actions and stages to be performed in
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipelineOutput AWS API Documentation
     #
     class CreatePipelineOutput < Struct.new(
       :pipeline)
@@ -941,6 +993,8 @@ module Aws::CodePipeline
     #   The summary of the most recent revision of the artifact.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CurrentRevision AWS API Documentation
+    #
     class CurrentRevision < Struct.new(
       :revision,
       :change_identifier,
@@ -975,6 +1029,8 @@ module Aws::CodePipeline
     #   The version of the custom action to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionTypeInput AWS API Documentation
+    #
     class DeleteCustomActionTypeInput < Struct.new(
       :category,
       :provider,
@@ -994,6 +1050,8 @@ module Aws::CodePipeline
     # @!attribute [rw] name
     #   The name of the pipeline to be deleted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeletePipelineInput AWS API Documentation
     #
     class DeletePipelineInput < Struct.new(
       :name)
@@ -1035,6 +1093,8 @@ module Aws::CodePipeline
     #   displayed in the pipeline console UI.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DisableStageTransitionInput AWS API Documentation
+    #
     class DisableStageTransitionInput < Struct.new(
       :pipeline_name,
       :stage_name,
@@ -1072,6 +1132,8 @@ module Aws::CodePipeline
     #   next stage (outbound).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransitionInput AWS API Documentation
+    #
     class EnableStageTransitionInput < Struct.new(
       :pipeline_name,
       :stage_name,
@@ -1101,6 +1163,8 @@ module Aws::CodePipeline
     #   be set to 'KMS'.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EncryptionKey AWS API Documentation
+    #
     class EncryptionKey < Struct.new(
       :id,
       :type)
@@ -1116,6 +1180,8 @@ module Aws::CodePipeline
     # @!attribute [rw] message
     #   The text of the error message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ErrorDetails AWS API Documentation
     #
     class ErrorDetails < Struct.new(
       :code,
@@ -1149,6 +1215,8 @@ module Aws::CodePipeline
     #   scale of zero to one hundred percent.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ExecutionDetails AWS API Documentation
+    #
     class ExecutionDetails < Struct.new(
       :summary,
       :external_execution_id,
@@ -1179,6 +1247,8 @@ module Aws::CodePipeline
     #   The external ID of the run of the action that failed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/FailureDetails AWS API Documentation
+    #
     class FailureDetails < Struct.new(
       :type,
       :message,
@@ -1199,6 +1269,8 @@ module Aws::CodePipeline
     #   The unique system-generated ID for the job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetailsInput AWS API Documentation
+    #
     class GetJobDetailsInput < Struct.new(
       :job_id)
       include Aws::Structure
@@ -1214,6 +1286,8 @@ module Aws::CodePipeline
     #
     #    </note>
     #   @return [Types::JobDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetailsOutput AWS API Documentation
     #
     class GetJobDetailsOutput < Struct.new(
       :job_details)
@@ -1240,6 +1314,8 @@ module Aws::CodePipeline
     #   execution details.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecutionInput AWS API Documentation
+    #
     class GetPipelineExecutionInput < Struct.new(
       :pipeline_name,
       :pipeline_execution_id)
@@ -1251,6 +1327,8 @@ module Aws::CodePipeline
     # @!attribute [rw] pipeline_execution
     #   Represents information about the execution of a pipeline.
     #   @return [Types::PipelineExecution]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecutionOutput AWS API Documentation
     #
     class GetPipelineExecutionOutput < Struct.new(
       :pipeline_execution)
@@ -1278,6 +1356,8 @@ module Aws::CodePipeline
     #   defaults to the most current version.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineInput AWS API Documentation
+    #
     class GetPipelineInput < Struct.new(
       :name,
       :version)
@@ -1290,6 +1370,8 @@ module Aws::CodePipeline
     #   Represents the structure of actions and stages to be performed in
     #   the pipeline.
     #   @return [Types::PipelineDeclaration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineOutput AWS API Documentation
     #
     class GetPipelineOutput < Struct.new(
       :pipeline)
@@ -1308,6 +1390,8 @@ module Aws::CodePipeline
     # @!attribute [rw] name
     #   The name of the pipeline about which you want to get information.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineStateInput AWS API Documentation
     #
     class GetPipelineStateInput < Struct.new(
       :name)
@@ -1343,6 +1427,8 @@ module Aws::CodePipeline
     #   format.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineStateOutput AWS API Documentation
+    #
     class GetPipelineStateOutput < Struct.new(
       :pipeline_name,
       :pipeline_version,
@@ -1372,6 +1458,8 @@ module Aws::CodePipeline
     #   details.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetThirdPartyJobDetailsInput AWS API Documentation
+    #
     class GetThirdPartyJobDetailsInput < Struct.new(
       :job_id,
       :client_token)
@@ -1384,6 +1472,8 @@ module Aws::CodePipeline
     #   The details of the job, including any protected values defined for
     #   the job.
     #   @return [Types::ThirdPartyJobDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetThirdPartyJobDetailsOutput AWS API Documentation
     #
     class GetThirdPartyJobDetailsOutput < Struct.new(
       :job_details)
@@ -1411,6 +1501,8 @@ module Aws::CodePipeline
     #   following actions.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/InputArtifact AWS API Documentation
+    #
     class InputArtifact < Struct.new(
       :name)
       include Aws::Structure
@@ -1435,6 +1527,8 @@ module Aws::CodePipeline
     # @!attribute [rw] account_id
     #   The ID of the AWS account to use when performing the job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/Job AWS API Documentation
     #
     class Job < Struct.new(
       :id,
@@ -1485,6 +1579,8 @@ module Aws::CodePipeline
     #   artifact store, such as an AWS Key Management Service (AWS KMS) key.
     #   @return [Types::EncryptionKey]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobData AWS API Documentation
+    #
     class JobData < Struct.new(
       :action_type_id,
       :action_configuration,
@@ -1511,6 +1607,8 @@ module Aws::CodePipeline
     # @!attribute [rw] account_id
     #   The AWS account ID associated with the job.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/JobDetails AWS API Documentation
     #
     class JobDetails < Struct.new(
       :id,
@@ -1540,6 +1638,8 @@ module Aws::CodePipeline
     #   the list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypesInput AWS API Documentation
+    #
     class ListActionTypesInput < Struct.new(
       :action_owner_filter,
       :next_token)
@@ -1558,6 +1658,8 @@ module Aws::CodePipeline
     #   action types call to return the next set of action types in the
     #   list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypesOutput AWS API Documentation
     #
     class ListActionTypesOutput < Struct.new(
       :action_types,
@@ -1580,6 +1682,8 @@ module Aws::CodePipeline
     #   list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelinesInput AWS API Documentation
+    #
     class ListPipelinesInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -1596,6 +1700,8 @@ module Aws::CodePipeline
     #   identifier is also returned which can be used in a subsequent list
     #   pipelines call to return the next set of pipelines in the list.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelinesOutput AWS API Documentation
     #
     class ListPipelinesOutput < Struct.new(
       :pipelines,
@@ -1625,6 +1731,8 @@ module Aws::CodePipeline
     #   Output artifact names must be unique within a pipeline.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OutputArtifact AWS API Documentation
+    #
     class OutputArtifact < Struct.new(
       :name)
       include Aws::Structure
@@ -1646,6 +1754,8 @@ module Aws::CodePipeline
     #   Represents the context of an action within the stage of a pipeline
     #   to a job worker.
     #   @return [Types::ActionContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineContext AWS API Documentation
     #
     class PipelineContext < Struct.new(
       :pipeline_name,
@@ -1742,6 +1852,8 @@ module Aws::CodePipeline
     #   pipeline is updated.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineDeclaration AWS API Documentation
+    #
     class PipelineDeclaration < Struct.new(
       :name,
       :role_arn,
@@ -1783,6 +1895,8 @@ module Aws::CodePipeline
     #   A list of ArtifactRevision objects included in a pipeline execution.
     #   @return [Array<Types::ArtifactRevision>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineExecution AWS API Documentation
+    #
     class PipelineExecution < Struct.new(
       :pipeline_name,
       :pipeline_version,
@@ -1810,6 +1924,8 @@ module Aws::CodePipeline
     #   The date and time of the last update to the pipeline, in timestamp
     #   format.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PipelineSummary AWS API Documentation
     #
     class PipelineSummary < Struct.new(
       :name,
@@ -1853,6 +1969,8 @@ module Aws::CodePipeline
     #   matches the mapped value will be returned.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobsInput AWS API Documentation
+    #
     class PollForJobsInput < Struct.new(
       :action_type_id,
       :max_batch_size,
@@ -1865,6 +1983,8 @@ module Aws::CodePipeline
     # @!attribute [rw] jobs
     #   Information about the jobs to take action on.
     #   @return [Array<Types::Job>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobsOutput AWS API Documentation
     #
     class PollForJobsOutput < Struct.new(
       :jobs)
@@ -1894,6 +2014,8 @@ module Aws::CodePipeline
     #   The maximum number of jobs to return in a poll for jobs call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobsInput AWS API Documentation
+    #
     class PollForThirdPartyJobsInput < Struct.new(
       :action_type_id,
       :max_batch_size)
@@ -1905,6 +2027,8 @@ module Aws::CodePipeline
     # @!attribute [rw] jobs
     #   Information about the jobs to take action on.
     #   @return [Array<Types::ThirdPartyJob>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobsOutput AWS API Documentation
     #
     class PollForThirdPartyJobsOutput < Struct.new(
       :jobs)
@@ -1945,6 +2069,8 @@ module Aws::CodePipeline
     #   Represents information about the version (or revision) of an action.
     #   @return [Types::ActionRevision]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutActionRevisionInput AWS API Documentation
+    #
     class PutActionRevisionInput < Struct.new(
       :pipeline_name,
       :stage_name,
@@ -1963,6 +2089,8 @@ module Aws::CodePipeline
     # @!attribute [rw] pipeline_execution_id
     #   The ID of the current workflow state of the pipeline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutActionRevisionOutput AWS API Documentation
     #
     class PutActionRevisionOutput < Struct.new(
       :new_revision,
@@ -2009,6 +2137,8 @@ module Aws::CodePipeline
     #   approval request corresponding to this token is still valid.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResultInput AWS API Documentation
+    #
     class PutApprovalResultInput < Struct.new(
       :pipeline_name,
       :stage_name,
@@ -2023,6 +2153,8 @@ module Aws::CodePipeline
     # @!attribute [rw] approved_at
     #   The timestamp showing when the approval or rejection was submitted.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResultOutput AWS API Documentation
     #
     class PutApprovalResultOutput < Struct.new(
       :approved_at)
@@ -2051,6 +2183,8 @@ module Aws::CodePipeline
     # @!attribute [rw] failure_details
     #   The details about the failure of a job.
     #   @return [Types::FailureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobFailureResultInput AWS API Documentation
     #
     class PutJobFailureResultInput < Struct.new(
       :job_id,
@@ -2104,6 +2238,8 @@ module Aws::CodePipeline
     #   taken by the job worker.
     #   @return [Types::ExecutionDetails]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResultInput AWS API Documentation
+    #
     class PutJobSuccessResultInput < Struct.new(
       :job_id,
       :current_revision,
@@ -2141,6 +2277,8 @@ module Aws::CodePipeline
     # @!attribute [rw] failure_details
     #   Represents information about failure details.
     #   @return [Types::FailureDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobFailureResultInput AWS API Documentation
     #
     class PutThirdPartyJobFailureResultInput < Struct.new(
       :job_id,
@@ -2201,6 +2339,8 @@ module Aws::CodePipeline
     #   as it passes through stages in the pipeline.
     #   @return [Types::ExecutionDetails]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobSuccessResultInput AWS API Documentation
+    #
     class PutThirdPartyJobSuccessResultInput < Struct.new(
       :job_id,
       :client_token,
@@ -2241,6 +2381,8 @@ module Aws::CodePipeline
     #   is FAILED\_ACTIONS.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecutionInput AWS API Documentation
+    #
     class RetryStageExecutionInput < Struct.new(
       :pipeline_name,
       :stage_name,
@@ -2254,6 +2396,8 @@ module Aws::CodePipeline
     # @!attribute [rw] pipeline_execution_id
     #   The ID of the current workflow execution in the failed stage.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecutionOutput AWS API Documentation
     #
     class RetryStageExecutionOutput < Struct.new(
       :pipeline_execution_id)
@@ -2271,6 +2415,8 @@ module Aws::CodePipeline
     #   identifies the object in the bucket.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/S3ArtifactLocation AWS API Documentation
+    #
     class S3ArtifactLocation < Struct.new(
       :bucket_name,
       :object_key)
@@ -2282,6 +2428,8 @@ module Aws::CodePipeline
     # @!attribute [rw] name
     #   The name of the stage.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageContext AWS API Documentation
     #
     class StageContext < Struct.new(
       :name)
@@ -2341,6 +2489,8 @@ module Aws::CodePipeline
     #   The actions included in a stage.
     #   @return [Array<Types::ActionDeclaration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageDeclaration AWS API Documentation
+    #
     class StageDeclaration < Struct.new(
       :name,
       :blockers,
@@ -2358,6 +2508,8 @@ module Aws::CodePipeline
     #   The status of the stage, or for a completed stage, the last status
     #   of the stage.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageExecution AWS API Documentation
     #
     class StageExecution < Struct.new(
       :pipeline_execution_id,
@@ -2385,6 +2537,8 @@ module Aws::CodePipeline
     #   ID and status.
     #   @return [Types::StageExecution]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StageState AWS API Documentation
+    #
     class StageState < Struct.new(
       :stage_name,
       :inbound_transition_state,
@@ -2406,6 +2560,8 @@ module Aws::CodePipeline
     #   The name of the pipeline to start.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecutionInput AWS API Documentation
+    #
     class StartPipelineExecutionInput < Struct.new(
       :name)
       include Aws::Structure
@@ -2417,6 +2573,8 @@ module Aws::CodePipeline
     #   The unique system-generated ID of the pipeline execution that was
     #   started.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecutionOutput AWS API Documentation
     #
     class StartPipelineExecutionOutput < Struct.new(
       :pipeline_execution_id)
@@ -2436,6 +2594,8 @@ module Aws::CodePipeline
     # @!attribute [rw] job_id
     #   The identifier used to identify the job in AWS CodePipeline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJob AWS API Documentation
     #
     class ThirdPartyJob < Struct.new(
       :client_id,
@@ -2490,6 +2650,8 @@ module Aws::CodePipeline
     #   KMS) key. This is optional and might not be present.
     #   @return [Types::EncryptionKey]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJobData AWS API Documentation
+    #
     class ThirdPartyJobData < Struct.new(
       :action_type_id,
       :action_configuration,
@@ -2519,6 +2681,8 @@ module Aws::CodePipeline
     #   this number in an AcknowledgeThirdPartyJob request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ThirdPartyJobDetails AWS API Documentation
+    #
     class ThirdPartyJobDetails < Struct.new(
       :id,
       :data,
@@ -2546,6 +2710,8 @@ module Aws::CodePipeline
     #   The user-specified reason why the transition between two stages of a
     #   pipeline was disabled.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/TransitionState AWS API Documentation
     #
     class TransitionState < Struct.new(
       :enabled,
@@ -2617,6 +2783,8 @@ module Aws::CodePipeline
     #   The name of the pipeline to be updated.
     #   @return [Types::PipelineDeclaration]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipelineInput AWS API Documentation
+    #
     class UpdatePipelineInput < Struct.new(
       :pipeline)
       include Aws::Structure
@@ -2627,6 +2795,8 @@ module Aws::CodePipeline
     # @!attribute [rw] pipeline
     #   The structure of the updated pipeline.
     #   @return [Types::PipelineDeclaration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipelineOutput AWS API Documentation
     #
     class UpdatePipelineOutput < Struct.new(
       :pipeline)

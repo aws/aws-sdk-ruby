@@ -197,6 +197,8 @@ module Aws::DeviceFarm
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
     #   resp.device_pool.rules[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePool AWS API Documentation
+    #
     # @overload create_device_pool(params = {})
     # @param [Hash] params ({})
     def create_device_pool(params = {}, options = {})
@@ -224,6 +226,8 @@ module Aws::DeviceFarm
     #   resp.project.arn #=> String
     #   resp.project.name #=> String
     #   resp.project.created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject AWS API Documentation
     #
     # @overload create_project(params = {})
     # @param [Hash] params ({})
@@ -298,6 +302,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_minutes.metered #=> Float
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSession AWS API Documentation
     #
     # @overload create_remote_access_session(params = {})
     # @param [Hash] params ({})
@@ -392,6 +398,8 @@ module Aws::DeviceFarm
     #   resp.upload.content_type #=> String
     #   resp.upload.message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUpload AWS API Documentation
+    #
     # @overload create_upload(params = {})
     # @param [Hash] params ({})
     def create_upload(params = {}, options = {})
@@ -413,6 +421,8 @@ module Aws::DeviceFarm
     #   resp = client.delete_device_pool({
     #     arn: "AmazonResourceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteDevicePool AWS API Documentation
     #
     # @overload delete_device_pool(params = {})
     # @param [Hash] params ({})
@@ -437,6 +447,8 @@ module Aws::DeviceFarm
     #     arn: "AmazonResourceName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteProject AWS API Documentation
+    #
     # @overload delete_project(params = {})
     # @param [Hash] params ({})
     def delete_project(params = {}, options = {})
@@ -457,6 +469,8 @@ module Aws::DeviceFarm
     #   resp = client.delete_remote_access_session({
     #     arn: "AmazonResourceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSession AWS API Documentation
     #
     # @overload delete_remote_access_session(params = {})
     # @param [Hash] params ({})
@@ -480,6 +494,8 @@ module Aws::DeviceFarm
     #     arn: "AmazonResourceName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRun AWS API Documentation
+    #
     # @overload delete_run(params = {})
     # @param [Hash] params ({})
     def delete_run(params = {}, options = {})
@@ -500,6 +516,8 @@ module Aws::DeviceFarm
     #   resp = client.delete_upload({
     #     arn: "AmazonResourceName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteUpload AWS API Documentation
     #
     # @overload delete_upload(params = {})
     # @param [Hash] params ({})
@@ -522,6 +540,8 @@ module Aws::DeviceFarm
     #   resp.account_settings.unmetered_devices["DevicePlatform"] #=> Integer
     #   resp.account_settings.unmetered_remote_access_devices #=> Hash
     #   resp.account_settings.unmetered_remote_access_devices["DevicePlatform"] #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings AWS API Documentation
     #
     # @overload get_account_settings(params = {})
     # @param [Hash] params ({})
@@ -568,6 +588,8 @@ module Aws::DeviceFarm
     #   resp.device.fleet_type #=> String
     #   resp.device.fleet_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevice AWS API Documentation
+    #
     # @overload get_device(params = {})
     # @param [Hash] params ({})
     def get_device(params = {}, options = {})
@@ -600,6 +622,8 @@ module Aws::DeviceFarm
     #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
     #   resp.device_pool.rules[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePool AWS API Documentation
     #
     # @overload get_device_pool(params = {})
     # @param [Hash] params ({})
@@ -717,6 +741,8 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
     #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility AWS API Documentation
+    #
     # @overload get_device_pool_compatibility(params = {})
     # @param [Hash] params ({})
     def get_device_pool_compatibility(params = {}, options = {})
@@ -781,6 +807,8 @@ module Aws::DeviceFarm
     #   resp.job.device_minutes.metered #=> Float
     #   resp.job.device_minutes.unmetered #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJob AWS API Documentation
+    #
     # @overload get_job(params = {})
     # @param [Hash] params ({})
     def get_job(params = {}, options = {})
@@ -841,6 +869,8 @@ module Aws::DeviceFarm
     #   resp.next_period["OfferingIdentifier"].effective_on #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatus AWS API Documentation
+    #
     # @overload get_offering_status(params = {})
     # @param [Hash] params ({})
     def get_offering_status(params = {}, options = {})
@@ -868,6 +898,8 @@ module Aws::DeviceFarm
     #   resp.project.arn #=> String
     #   resp.project.name #=> String
     #   resp.project.created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject AWS API Documentation
     #
     # @overload get_project(params = {})
     # @param [Hash] params ({})
@@ -928,6 +960,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSession AWS API Documentation
+    #
     # @overload get_remote_access_session(params = {})
     # @param [Hash] params ({})
     def get_remote_access_session(params = {}, options = {})
@@ -976,6 +1010,8 @@ module Aws::DeviceFarm
     #   resp.run.device_minutes.metered #=> Float
     #   resp.run.device_minutes.unmetered #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
+    #
     # @overload get_run(params = {})
     # @param [Hash] params ({})
     def get_run(params = {}, options = {})
@@ -1019,6 +1055,8 @@ module Aws::DeviceFarm
     #   resp.suite.device_minutes.total #=> Float
     #   resp.suite.device_minutes.metered #=> Float
     #   resp.suite.device_minutes.unmetered #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuite AWS API Documentation
     #
     # @overload get_suite(params = {})
     # @param [Hash] params ({})
@@ -1064,6 +1102,8 @@ module Aws::DeviceFarm
     #   resp.test.device_minutes.metered #=> Float
     #   resp.test.device_minutes.unmetered #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTest AWS API Documentation
+    #
     # @overload get_test(params = {})
     # @param [Hash] params ({})
     def get_test(params = {}, options = {})
@@ -1097,6 +1137,8 @@ module Aws::DeviceFarm
     #   resp.upload.metadata #=> String
     #   resp.upload.content_type #=> String
     #   resp.upload.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUpload AWS API Documentation
     #
     # @overload get_upload(params = {})
     # @param [Hash] params ({})
@@ -1139,6 +1181,8 @@ module Aws::DeviceFarm
     #   resp.app_upload.metadata #=> String
     #   resp.app_upload.content_type #=> String
     #   resp.app_upload.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSession AWS API Documentation
     #
     # @overload install_to_remote_access_session(params = {})
     # @param [Hash] params ({})
@@ -1190,6 +1234,8 @@ module Aws::DeviceFarm
     #   resp.artifacts[0].extension #=> String
     #   resp.artifacts[0].url #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifacts AWS API Documentation
     #
     # @overload list_artifacts(params = {})
     # @param [Hash] params ({})
@@ -1245,6 +1291,8 @@ module Aws::DeviceFarm
     #   resp.device_pools[0].rules[0].value #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePools AWS API Documentation
+    #
     # @overload list_device_pools(params = {})
     # @param [Hash] params ({})
     def list_device_pools(params = {}, options = {})
@@ -1298,6 +1346,8 @@ module Aws::DeviceFarm
     #   resp.devices[0].fleet_type #=> String
     #   resp.devices[0].fleet_name #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevices AWS API Documentation
     #
     # @overload list_devices(params = {})
     # @param [Hash] params ({})
@@ -1372,6 +1422,8 @@ module Aws::DeviceFarm
     #   resp.jobs[0].device_minutes.unmetered #=> Float
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobs AWS API Documentation
+    #
     # @overload list_jobs(params = {})
     # @param [Hash] params ({})
     def list_jobs(params = {}, options = {})
@@ -1423,6 +1475,8 @@ module Aws::DeviceFarm
     #   resp.offering_transactions[0].cost.currency_code #=> String, one of "USD"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactions AWS API Documentation
+    #
     # @overload list_offering_transactions(params = {})
     # @param [Hash] params ({})
     def list_offering_transactions(params = {}, options = {})
@@ -1467,6 +1521,8 @@ module Aws::DeviceFarm
     #   resp.offerings[0].recurring_charges[0].frequency #=> String, one of "MONTHLY"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferings AWS API Documentation
+    #
     # @overload list_offerings(params = {})
     # @param [Hash] params ({})
     def list_offerings(params = {}, options = {})
@@ -1505,6 +1561,8 @@ module Aws::DeviceFarm
     #   resp.projects[0].name #=> String
     #   resp.projects[0].created #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjects AWS API Documentation
     #
     # @overload list_projects(params = {})
     # @param [Hash] params ({})
@@ -1574,6 +1632,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_sessions[0].endpoint #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessions AWS API Documentation
+    #
     # @overload list_remote_access_sessions(params = {})
     # @param [Hash] params ({})
     def list_remote_access_sessions(params = {}, options = {})
@@ -1632,6 +1692,8 @@ module Aws::DeviceFarm
     #   resp.runs[0].device_minutes.unmetered #=> Float
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
+    #
     # @overload list_runs(params = {})
     # @param [Hash] params ({})
     def list_runs(params = {}, options = {})
@@ -1669,6 +1731,8 @@ module Aws::DeviceFarm
     #   resp.samples[0].type #=> String, one of "CPU", "MEMORY", "THREADS", "RX_RATE", "TX_RATE", "RX", "TX", "NATIVE_FRAMES", "NATIVE_FPS", "NATIVE_MIN_DRAWTIME", "NATIVE_AVG_DRAWTIME", "NATIVE_MAX_DRAWTIME", "OPENGL_FRAMES", "OPENGL_FPS", "OPENGL_MIN_DRAWTIME", "OPENGL_AVG_DRAWTIME", "OPENGL_MAX_DRAWTIME"
     #   resp.samples[0].url #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamples AWS API Documentation
     #
     # @overload list_samples(params = {})
     # @param [Hash] params ({})
@@ -1723,6 +1787,8 @@ module Aws::DeviceFarm
     #   resp.suites[0].device_minutes.unmetered #=> Float
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuites AWS API Documentation
+    #
     # @overload list_suites(params = {})
     # @param [Hash] params ({})
     def list_suites(params = {}, options = {})
@@ -1775,6 +1841,8 @@ module Aws::DeviceFarm
     #   resp.tests[0].device_minutes.metered #=> Float
     #   resp.tests[0].device_minutes.unmetered #=> Float
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTests AWS API Documentation
     #
     # @overload list_tests(params = {})
     # @param [Hash] params ({})
@@ -1843,6 +1911,8 @@ module Aws::DeviceFarm
     #   resp.unique_problems["ExecutionResult"][0].problems[0].message #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUniqueProblems AWS API Documentation
+    #
     # @overload list_unique_problems(params = {})
     # @param [Hash] params ({})
     def list_unique_problems(params = {}, options = {})
@@ -1886,6 +1956,8 @@ module Aws::DeviceFarm
     #   resp.uploads[0].content_type #=> String
     #   resp.uploads[0].message #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploads AWS API Documentation
     #
     # @overload list_uploads(params = {})
     # @param [Hash] params ({})
@@ -1937,6 +2009,8 @@ module Aws::DeviceFarm
     #   resp.offering_transaction.cost.amount #=> Float
     #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOffering AWS API Documentation
+    #
     # @overload purchase_offering(params = {})
     # @param [Hash] params ({})
     def purchase_offering(params = {}, options = {})
@@ -1985,6 +2059,8 @@ module Aws::DeviceFarm
     #   resp.offering_transaction.created_on #=> Time
     #   resp.offering_transaction.cost.amount #=> Float
     #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOffering AWS API Documentation
     #
     # @overload renew_offering(params = {})
     # @param [Hash] params ({})
@@ -2077,6 +2153,8 @@ module Aws::DeviceFarm
     #   resp.run.device_minutes.metered #=> Float
     #   resp.run.device_minutes.unmetered #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
+    #
     # @overload schedule_run(params = {})
     # @param [Hash] params ({})
     def schedule_run(params = {}, options = {})
@@ -2136,6 +2214,8 @@ module Aws::DeviceFarm
     #   resp.remote_access_session.device_minutes.unmetered #=> Float
     #   resp.remote_access_session.endpoint #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSession AWS API Documentation
+    #
     # @overload stop_remote_access_session(params = {})
     # @param [Hash] params ({})
     def stop_remote_access_session(params = {}, options = {})
@@ -2190,6 +2270,8 @@ module Aws::DeviceFarm
     #   resp.run.device_minutes.total #=> Float
     #   resp.run.device_minutes.metered #=> Float
     #   resp.run.device_minutes.unmetered #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
     # @overload stop_run(params = {})
     # @param [Hash] params ({})
@@ -2247,6 +2329,8 @@ module Aws::DeviceFarm
     #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
     #   resp.device_pool.rules[0].value #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePool AWS API Documentation
+    #
     # @overload update_device_pool(params = {})
     # @param [Hash] params ({})
     def update_device_pool(params = {}, options = {})
@@ -2281,6 +2365,8 @@ module Aws::DeviceFarm
     #   resp.project.arn #=> String
     #   resp.project.name #=> String
     #   resp.project.created #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject AWS API Documentation
     #
     # @overload update_project(params = {})
     # @param [Hash] params ({})

@@ -16,6 +16,8 @@ module Aws::RDS
     #   for the quota.
     #   @return [Array<Types::AccountQuota>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AccountAttributesMessage AWS API Documentation
+    #
     class AccountAttributesMessage < Struct.new(
       :account_quotas)
       include Aws::Structure
@@ -35,6 +37,8 @@ module Aws::RDS
     # @!attribute [rw] max
     #   The maximum allowed value for the quota.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AccountQuota AWS API Documentation
     #
     class AccountQuota < Struct.new(
       :account_quota_name,
@@ -60,6 +64,8 @@ module Aws::RDS
     #   Aurora DB cluster, for example
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddRoleToDBClusterMessage AWS API Documentation
     #
     class AddRoleToDBClusterMessage < Struct.new(
       :db_cluster_identifier,
@@ -101,6 +107,8 @@ module Aws::RDS
     #     be supplied.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscriptionMessage AWS API Documentation
+    #
     class AddSourceIdentifierToSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier)
@@ -111,6 +119,8 @@ module Aws::RDS
     #   Contains the results of a successful invocation of the
     #   DescribeEventSubscriptions action.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddSourceIdentifierToSubscriptionResult AWS API Documentation
     #
     class AddSourceIdentifierToSubscriptionResult < Struct.new(
       :event_subscription)
@@ -143,6 +153,8 @@ module Aws::RDS
     # @!attribute [rw] tags
     #   The tags to be assigned to the Amazon RDS resource.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AddTagsToResourceMessage AWS API Documentation
     #
     class AddTagsToResourceMessage < Struct.new(
       :resource_name,
@@ -191,6 +203,8 @@ module Aws::RDS
     #     requests.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceActionMessage AWS API Documentation
+    #
     class ApplyPendingMaintenanceActionMessage < Struct.new(
       :resource_identifier,
       :apply_action,
@@ -201,6 +215,8 @@ module Aws::RDS
     # @!attribute [rw] resource_pending_maintenance_actions
     #   Describes the pending maintenance actions for a resource.
     #   @return [Types::ResourcePendingMaintenanceActions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ApplyPendingMaintenanceActionResult AWS API Documentation
     #
     class ApplyPendingMaintenanceActionResult < Struct.new(
       :resource_pending_maintenance_actions)
@@ -249,6 +265,8 @@ module Aws::RDS
     #   `EC2SecurityGroupId` must be provided.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngressMessage AWS API Documentation
+    #
     class AuthorizeDBSecurityGroupIngressMessage < Struct.new(
       :db_security_group_name,
       :cidrip,
@@ -274,6 +292,8 @@ module Aws::RDS
     #   DescribeDBSecurityGroups action.
     #   @return [Types::DBSecurityGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AuthorizeDBSecurityGroupIngressResult AWS API Documentation
+    #
     class AuthorizeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group)
       include Aws::Structure
@@ -290,6 +310,8 @@ module Aws::RDS
     # @!attribute [rw] name
     #   The name of the availability zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :name)
@@ -322,6 +344,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the certificate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Certificate AWS API Documentation
+    #
     class Certificate < Struct.new(
       :certificate_identifier,
       :certificate_type,
@@ -345,6 +369,8 @@ module Aws::RDS
     #   specified by `MaxRecords` .
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CertificateMessage AWS API Documentation
+    #
     class CertificateMessage < Struct.new(
       :certificates,
       :marker)
@@ -361,6 +387,8 @@ module Aws::RDS
     # @!attribute [rw] character_set_description
     #   The description of the character set.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CharacterSet AWS API Documentation
     #
     class CharacterSet < Struct.new(
       :character_set_name,
@@ -429,6 +457,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroupMessage AWS API Documentation
+    #
     class CopyDBClusterParameterGroupMessage < Struct.new(
       :source_db_cluster_parameter_group_identifier,
       :target_db_cluster_parameter_group_identifier,
@@ -445,6 +475,8 @@ module Aws::RDS
     #   DeleteDBClusterParameterGroup action, and as a response element in
     #   the DescribeDBClusterParameterGroups action.
     #   @return [Types::DBClusterParameterGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterParameterGroupResult AWS API Documentation
     #
     class CopyDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
@@ -499,6 +531,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshotMessage AWS API Documentation
+    #
     class CopyDBClusterSnapshotMessage < Struct.new(
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
@@ -517,6 +551,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusterSnapshots action.
     #   @return [Types::DBClusterSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshotResult AWS API Documentation
     #
     class CopyDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
@@ -579,6 +615,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroupMessage AWS API Documentation
+    #
     class CopyDBParameterGroupMessage < Struct.new(
       :source_db_parameter_group_identifier,
       :target_db_parameter_group_identifier,
@@ -595,6 +633,8 @@ module Aws::RDS
     #   DeleteDBParameterGroup action, and as a response element in the
     #   DescribeDBParameterGroups action.
     #   @return [Types::DBParameterGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBParameterGroupResult AWS API Documentation
     #
     class CopyDBParameterGroupResult < Struct.new(
       :db_parameter_group)
@@ -757,6 +797,8 @@ module Aws::RDS
     # @!attribute [rw] destination_region
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshotMessage AWS API Documentation
+    #
     class CopyDBSnapshotMessage < Struct.new(
       :source_db_snapshot_identifier,
       :target_db_snapshot_identifier,
@@ -779,6 +821,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBSnapshots action.
     #   @return [Types::DBSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshotResult AWS API Documentation
     #
     class CopyDBSnapshotResult < Struct.new(
       :db_snapshot)
@@ -846,6 +890,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroupMessage AWS API Documentation
+    #
     class CopyOptionGroupMessage < Struct.new(
       :source_option_group_identifier,
       :target_option_group_identifier,
@@ -856,6 +902,8 @@ module Aws::RDS
 
     # @!attribute [rw] option_group
     #   @return [Types::OptionGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroupResult AWS API Documentation
     #
     class CopyOptionGroupResult < Struct.new(
       :option_group)
@@ -1092,6 +1140,8 @@ module Aws::RDS
     #   encryption key for each AWS region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterMessage AWS API Documentation
+    #
     class CreateDBClusterMessage < Struct.new(
       :availability_zones,
       :backup_retention_period,
@@ -1163,6 +1213,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroupMessage AWS API Documentation
+    #
     class CreateDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
@@ -1179,6 +1231,8 @@ module Aws::RDS
     #   DeleteDBClusterParameterGroup action, and as a response element in
     #   the DescribeDBClusterParameterGroups action.
     #   @return [Types::DBClusterParameterGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterParameterGroupResult AWS API Documentation
     #
     class CreateDBClusterParameterGroupResult < Struct.new(
       :db_cluster_parameter_group)
@@ -1204,6 +1258,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterResult AWS API Documentation
     #
     class CreateDBClusterResult < Struct.new(
       :db_cluster)
@@ -1258,6 +1314,8 @@ module Aws::RDS
     #   The tags to be assigned to the DB cluster snapshot.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshotMessage AWS API Documentation
+    #
     class CreateDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_identifier,
@@ -1276,6 +1334,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusterSnapshots action.
     #   @return [Types::DBClusterSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshotResult AWS API Documentation
     #
     class CreateDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
@@ -2129,6 +2189,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceMessage AWS API Documentation
+    #
     class CreateDBInstanceMessage < Struct.new(
       :db_name,
       :db_instance_identifier,
@@ -2382,6 +2444,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaMessage AWS API Documentation
+    #
     class CreateDBInstanceReadReplicaMessage < Struct.new(
       :db_instance_identifier,
       :source_db_instance_identifier,
@@ -2415,6 +2479,8 @@ module Aws::RDS
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaResult AWS API Documentation
+    #
     class CreateDBInstanceReadReplicaResult < Struct.new(
       :db_instance)
       include Aws::Structure
@@ -2433,6 +2499,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceResult AWS API Documentation
     #
     class CreateDBInstanceResult < Struct.new(
       :db_instance)
@@ -2485,6 +2553,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroupMessage AWS API Documentation
+    #
     class CreateDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :db_parameter_group_family,
@@ -2501,6 +2571,8 @@ module Aws::RDS
     #   DeleteDBParameterGroup action, and as a response element in the
     #   DescribeDBParameterGroups action.
     #   @return [Types::DBParameterGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBParameterGroupResult AWS API Documentation
     #
     class CreateDBParameterGroupResult < Struct.new(
       :db_parameter_group)
@@ -2546,6 +2618,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroupMessage AWS API Documentation
+    #
     class CreateDBSecurityGroupMessage < Struct.new(
       :db_security_group_name,
       :db_security_group_description,
@@ -2568,6 +2642,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBSecurityGroups action.
     #   @return [Types::DBSecurityGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSecurityGroupResult AWS API Documentation
     #
     class CreateDBSecurityGroupResult < Struct.new(
       :db_security_group)
@@ -2621,6 +2697,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshotMessage AWS API Documentation
+    #
     class CreateDBSnapshotMessage < Struct.new(
       :db_snapshot_identifier,
       :db_instance_identifier,
@@ -2639,6 +2717,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBSnapshots action.
     #   @return [Types::DBSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshotResult AWS API Documentation
     #
     class CreateDBSnapshotResult < Struct.new(
       :db_snapshot)
@@ -2682,6 +2762,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroupMessage AWS API Documentation
+    #
     class CreateDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
       :db_subnet_group_description,
@@ -2705,6 +2787,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBSubnetGroups action.
     #   @return [Types::DBSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroupResult AWS API Documentation
     #
     class CreateDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
@@ -2795,6 +2879,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscriptionMessage AWS API Documentation
+    #
     class CreateEventSubscriptionMessage < Struct.new(
       :subscription_name,
       :sns_topic_arn,
@@ -2810,6 +2896,8 @@ module Aws::RDS
     #   Contains the results of a successful invocation of the
     #   DescribeEventSubscriptions action.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateEventSubscriptionResult AWS API Documentation
     #
     class CreateEventSubscriptionResult < Struct.new(
       :event_subscription)
@@ -2864,6 +2952,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroupMessage AWS API Documentation
+    #
     class CreateOptionGroupMessage < Struct.new(
       :option_group_name,
       :engine_name,
@@ -2875,6 +2965,8 @@ module Aws::RDS
 
     # @!attribute [rw] option_group
     #   @return [Types::OptionGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroupResult AWS API Documentation
     #
     class CreateOptionGroupResult < Struct.new(
       :option_group)
@@ -3072,6 +3164,8 @@ module Aws::RDS
     #   Coordinated Time (UTC).
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
+    #
     class DBCluster < Struct.new(
       :allocated_storage,
       :availability_zones,
@@ -3136,6 +3230,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterMember AWS API Documentation
+    #
     class DBClusterMember < Struct.new(
       :db_instance_identifier,
       :is_cluster_writer,
@@ -3156,6 +3252,8 @@ module Aws::RDS
     #   Contains a list of DB clusters for the user.
     #   @return [Array<Types::DBCluster>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterMessage AWS API Documentation
+    #
     class DBClusterMessage < Struct.new(
       :marker,
       :db_clusters)
@@ -3171,6 +3269,8 @@ module Aws::RDS
     # @!attribute [rw] status
     #   Specifies the status of the DB cluster option group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterOptionGroupStatus AWS API Documentation
     #
     class DBClusterOptionGroupStatus < Struct.new(
       :db_cluster_option_group_name,
@@ -3203,6 +3303,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the DB cluster parameter group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroup AWS API Documentation
+    #
     class DBClusterParameterGroup < Struct.new(
       :db_cluster_parameter_group_name,
       :db_parameter_group_family,
@@ -3224,6 +3326,8 @@ module Aws::RDS
     #   the response includes only records beyond the marker, up to the
     #   value specified by `MaxRecords` .
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupDetails AWS API Documentation
     #
     class DBClusterParameterGroupDetails < Struct.new(
       :parameters,
@@ -3247,6 +3351,8 @@ module Aws::RDS
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupNameMessage AWS API Documentation
+    #
     class DBClusterParameterGroupNameMessage < Struct.new(
       :db_cluster_parameter_group_name)
       include Aws::Structure
@@ -3262,6 +3368,8 @@ module Aws::RDS
     # @!attribute [rw] db_cluster_parameter_groups
     #   A list of DB cluster parameter groups.
     #   @return [Array<Types::DBClusterParameterGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterParameterGroupsMessage AWS API Documentation
     #
     class DBClusterParameterGroupsMessage < Struct.new(
       :marker,
@@ -3291,6 +3399,8 @@ module Aws::RDS
     #     but the DB cluster is unable to assume the IAM role in order to
     #     access other AWS services on your behalf.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterRole AWS API Documentation
     #
     class DBClusterRole < Struct.new(
       :role_arn,
@@ -3388,6 +3498,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the DB cluster snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshot AWS API Documentation
+    #
     class DBClusterSnapshot < Struct.new(
       :availability_zones,
       :db_cluster_snapshot_identifier,
@@ -3436,6 +3548,8 @@ module Aws::RDS
     #   available for any AWS account to copy or restore.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotAttribute AWS API Documentation
+    #
     class DBClusterSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
@@ -3459,6 +3573,8 @@ module Aws::RDS
     #   snapshot.
     #   @return [Array<Types::DBClusterSnapshotAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotAttributesResult AWS API Documentation
+    #
     class DBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_identifier,
       :db_cluster_snapshot_attributes)
@@ -3478,6 +3594,8 @@ module Aws::RDS
     # @!attribute [rw] db_cluster_snapshots
     #   Provides a list of DB cluster snapshots for the user.
     #   @return [Array<Types::DBClusterSnapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterSnapshotMessage AWS API Documentation
     #
     class DBClusterSnapshotMessage < Struct.new(
       :marker,
@@ -3529,6 +3647,8 @@ module Aws::RDS
     #   parameter of the `CreateDBInstance` action.
     #   @return [Array<Types::Timezone>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
+    #
     class DBEngineVersion < Struct.new(
       :engine,
       :engine_version,
@@ -3554,6 +3674,8 @@ module Aws::RDS
     # @!attribute [rw] db_engine_versions
     #   A list of `DBEngineVersion` elements.
     #   @return [Array<Types::DBEngineVersion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersionMessage AWS API Documentation
     #
     class DBEngineVersionMessage < Struct.new(
       :marker,
@@ -3846,6 +3968,8 @@ module Aws::RDS
     #   Server DB instances that were created with a time zone specified.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstance AWS API Documentation
+    #
     class DBInstance < Struct.new(
       :db_instance_identifier,
       :db_instance_class,
@@ -3911,6 +4035,8 @@ module Aws::RDS
     #   A list of DBInstance instances.
     #   @return [Array<Types::DBInstance>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceMessage AWS API Documentation
+    #
     class DBInstanceMessage < Struct.new(
       :marker,
       :db_instances)
@@ -3937,6 +4063,8 @@ module Aws::RDS
     #   Details of the error if there is an error for the instance. If the
     #   instance is not in an error state, this value is blank.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBInstanceStatusInfo AWS API Documentation
     #
     class DBInstanceStatusInfo < Struct.new(
       :status_type,
@@ -3971,6 +4099,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the DB parameter group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroup AWS API Documentation
+    #
     class DBParameterGroup < Struct.new(
       :db_parameter_group_name,
       :db_parameter_group_family,
@@ -3992,6 +4122,8 @@ module Aws::RDS
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupDetails AWS API Documentation
+    #
     class DBParameterGroupDetails < Struct.new(
       :parameters,
       :marker)
@@ -4004,6 +4136,8 @@ module Aws::RDS
     # @!attribute [rw] db_parameter_group_name
     #   Provides the name of the DB parameter group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupNameMessage AWS API Documentation
     #
     class DBParameterGroupNameMessage < Struct.new(
       :db_parameter_group_name)
@@ -4034,6 +4168,8 @@ module Aws::RDS
     #   The status of parameter updates.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupStatus AWS API Documentation
+    #
     class DBParameterGroupStatus < Struct.new(
       :db_parameter_group_name,
       :parameter_apply_status)
@@ -4052,6 +4188,8 @@ module Aws::RDS
     # @!attribute [rw] db_parameter_groups
     #   A list of DBParameterGroup instances.
     #   @return [Array<Types::DBParameterGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBParameterGroupsMessage AWS API Documentation
     #
     class DBParameterGroupsMessage < Struct.new(
       :marker,
@@ -4101,6 +4239,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the DB security group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroup AWS API Documentation
+    #
     class DBSecurityGroup < Struct.new(
       :owner_id,
       :db_security_group_name,
@@ -4130,6 +4270,8 @@ module Aws::RDS
     #   The status of the DB security group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupMembership AWS API Documentation
+    #
     class DBSecurityGroupMembership < Struct.new(
       :db_security_group_name,
       :status)
@@ -4148,6 +4290,8 @@ module Aws::RDS
     # @!attribute [rw] db_security_groups
     #   A list of DBSecurityGroup instances.
     #   @return [Array<Types::DBSecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSecurityGroupMessage AWS API Documentation
     #
     class DBSecurityGroupMessage < Struct.new(
       :marker,
@@ -4277,6 +4421,8 @@ module Aws::RDS
     #   a time zone specified.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshot AWS API Documentation
+    #
     class DBSnapshot < Struct.new(
       :db_snapshot_identifier,
       :db_instance_identifier,
@@ -4331,6 +4477,8 @@ module Aws::RDS
     #   any AWS account to copy or restore.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotAttribute AWS API Documentation
+    #
     class DBSnapshotAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
@@ -4353,6 +4501,8 @@ module Aws::RDS
     #   The list of attributes and values for the manual DB snapshot.
     #   @return [Array<Types::DBSnapshotAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotAttributesResult AWS API Documentation
+    #
     class DBSnapshotAttributesResult < Struct.new(
       :db_snapshot_identifier,
       :db_snapshot_attributes)
@@ -4371,6 +4521,8 @@ module Aws::RDS
     # @!attribute [rw] db_snapshots
     #   A list of DBSnapshot instances.
     #   @return [Array<Types::DBSnapshot>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSnapshotMessage AWS API Documentation
     #
     class DBSnapshotMessage < Struct.new(
       :marker,
@@ -4416,6 +4568,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the DB subnet group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroup AWS API Documentation
+    #
     class DBSubnetGroup < Struct.new(
       :db_subnet_group_name,
       :db_subnet_group_description,
@@ -4438,6 +4592,8 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_groups
     #   A list of DBSubnetGroup instances.
     #   @return [Array<Types::DBSubnetGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBSubnetGroupMessage AWS API Documentation
     #
     class DBSubnetGroupMessage < Struct.new(
       :marker,
@@ -4499,6 +4655,8 @@ module Aws::RDS
     #   * Cannot end with a hyphen or contain two consecutive hyphens
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterMessage AWS API Documentation
+    #
     class DeleteDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :skip_final_snapshot,
@@ -4525,6 +4683,8 @@ module Aws::RDS
     #   * Cannot be associated with any DB clusters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterParameterGroupMessage AWS API Documentation
+    #
     class DeleteDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name)
       include Aws::Structure
@@ -4550,6 +4710,8 @@ module Aws::RDS
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterResult AWS API Documentation
+    #
     class DeleteDBClusterResult < Struct.new(
       :db_cluster)
       include Aws::Structure
@@ -4569,6 +4731,8 @@ module Aws::RDS
     #   the `available` state.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshotMessage AWS API Documentation
+    #
     class DeleteDBClusterSnapshotMessage < Struct.new(
       :db_cluster_snapshot_identifier)
       include Aws::Structure
@@ -4585,6 +4749,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusterSnapshots action.
     #   @return [Types::DBClusterSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshotResult AWS API Documentation
     #
     class DeleteDBClusterSnapshotResult < Struct.new(
       :db_cluster_snapshot)
@@ -4654,6 +4820,8 @@ module Aws::RDS
     #   * Cannot be specified when deleting a Read Replica.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceMessage AWS API Documentation
+    #
     class DeleteDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :skip_final_snapshot,
@@ -4674,6 +4842,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstanceResult AWS API Documentation
     #
     class DeleteDBInstanceResult < Struct.new(
       :db_instance)
@@ -4698,6 +4868,8 @@ module Aws::RDS
     #
     #   * Cannot be associated with any DB instances
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBParameterGroupMessage AWS API Documentation
     #
     class DeleteDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name)
@@ -4729,6 +4901,8 @@ module Aws::RDS
     #   * Must not be "Default"
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSecurityGroupMessage AWS API Documentation
+    #
     class DeleteDBSecurityGroupMessage < Struct.new(
       :db_security_group_name)
       include Aws::Structure
@@ -4748,6 +4922,8 @@ module Aws::RDS
     #   `available` state.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshotMessage AWS API Documentation
+    #
     class DeleteDBSnapshotMessage < Struct.new(
       :db_snapshot_identifier)
       include Aws::Structure
@@ -4764,6 +4940,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBSnapshots action.
     #   @return [Types::DBSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshotResult AWS API Documentation
     #
     class DeleteDBSnapshotResult < Struct.new(
       :db_snapshot)
@@ -4792,6 +4970,8 @@ module Aws::RDS
     #   Example: `mySubnetgroup`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroupMessage AWS API Documentation
+    #
     class DeleteDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name)
       include Aws::Structure
@@ -4809,6 +4989,8 @@ module Aws::RDS
     #   delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscriptionMessage AWS API Documentation
+    #
     class DeleteEventSubscriptionMessage < Struct.new(
       :subscription_name)
       include Aws::Structure
@@ -4818,6 +5000,8 @@ module Aws::RDS
     #   Contains the results of a successful invocation of the
     #   DescribeEventSubscriptions action.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteEventSubscriptionResult AWS API Documentation
     #
     class DeleteEventSubscriptionResult < Struct.new(
       :event_subscription)
@@ -4839,12 +5023,16 @@ module Aws::RDS
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteOptionGroupMessage AWS API Documentation
+    #
     class DeleteOptionGroupMessage < Struct.new(
       :option_group_name)
       include Aws::Structure
     end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeAccountAttributesMessage AWS API Documentation
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
 
@@ -4898,6 +5086,8 @@ module Aws::RDS
     #   response includes only records beyond the marker, up to the value
     #   specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCertificatesMessage AWS API Documentation
     #
     class DescribeCertificatesMessage < Struct.new(
       :certificate_identifier,
@@ -4956,6 +5146,8 @@ module Aws::RDS
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroupsMessage AWS API Documentation
     #
     class DescribeDBClusterParameterGroupsMessage < Struct.new(
       :db_cluster_parameter_group_name,
@@ -5021,6 +5213,8 @@ module Aws::RDS
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParametersMessage AWS API Documentation
+    #
     class DescribeDBClusterParametersMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :source,
@@ -5042,6 +5236,8 @@ module Aws::RDS
     #   attributes for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributesMessage AWS API Documentation
+    #
     class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
       :db_cluster_snapshot_identifier)
       include Aws::Structure
@@ -5056,6 +5252,8 @@ module Aws::RDS
     #   more information, see the ModifyDBClusterSnapshotAttribute API
     #   action.
     #   @return [Types::DBClusterSnapshotAttributesResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotAttributesResult AWS API Documentation
     #
     class DescribeDBClusterSnapshotAttributesResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
@@ -5187,6 +5385,8 @@ module Aws::RDS
     #   ModifyDBClusterSnapshotAttribute API action.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshotsMessage AWS API Documentation
+    #
     class DescribeDBClusterSnapshotsMessage < Struct.new(
       :db_cluster_identifier,
       :db_cluster_snapshot_identifier,
@@ -5257,6 +5457,8 @@ module Aws::RDS
     #   response includes only records beyond the marker, up to the value
     #   specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClustersMessage AWS API Documentation
     #
     class DescribeDBClustersMessage < Struct.new(
       :db_cluster_identifier,
@@ -5347,6 +5549,8 @@ module Aws::RDS
     #   list of supported time zones for each engine version.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersionsMessage AWS API Documentation
+    #
     class DescribeDBEngineVersionsMessage < Struct.new(
       :engine,
       :engine_version,
@@ -5422,6 +5626,8 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstancesMessage AWS API Documentation
+    #
     class DescribeDBInstancesMessage < Struct.new(
       :db_instance_identifier,
       :filters,
@@ -5443,6 +5649,8 @@ module Aws::RDS
     # @!attribute [rw] size
     #   The size, in bytes, of the log file for the specified DB instance.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesDetails AWS API Documentation
     #
     class DescribeDBLogFilesDetails < Struct.new(
       :log_file_name,
@@ -5514,6 +5722,8 @@ module Aws::RDS
     #   marker, up to MaxRecords.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesMessage AWS API Documentation
+    #
     class DescribeDBLogFilesMessage < Struct.new(
       :db_instance_identifier,
       :filename_contains,
@@ -5535,6 +5745,8 @@ module Aws::RDS
     #   A pagination token that can be used in a subsequent
     #   DescribeDBLogFiles request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBLogFilesResponse AWS API Documentation
     #
     class DescribeDBLogFilesResponse < Struct.new(
       :describe_db_log_files,
@@ -5590,6 +5802,8 @@ module Aws::RDS
     #   the response includes only records beyond the marker, up to the
     #   value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParameterGroupsMessage AWS API Documentation
     #
     class DescribeDBParameterGroupsMessage < Struct.new(
       :db_parameter_group_name,
@@ -5657,6 +5871,8 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBParametersMessage AWS API Documentation
+    #
     class DescribeDBParametersMessage < Struct.new(
       :db_parameter_group_name,
       :source,
@@ -5707,6 +5923,8 @@ module Aws::RDS
     #   value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSecurityGroupsMessage AWS API Documentation
+    #
     class DescribeDBSecurityGroupsMessage < Struct.new(
       :db_security_group_name,
       :filters,
@@ -5726,6 +5944,8 @@ module Aws::RDS
     #   The identifier for the DB snapshot to describe the attributes for.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributesMessage AWS API Documentation
+    #
     class DescribeDBSnapshotAttributesMessage < Struct.new(
       :db_snapshot_identifier)
       include Aws::Structure
@@ -5739,6 +5959,8 @@ module Aws::RDS
     #   accounts to copy or restore a manual DB snapshot. For more
     #   information, see the ModifyDBSnapshotAttribute API action.
     #   @return [Types::DBSnapshotAttributesResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotAttributesResult AWS API Documentation
     #
     class DescribeDBSnapshotAttributesResult < Struct.new(
       :db_snapshot_attributes_result)
@@ -5867,6 +6089,8 @@ module Aws::RDS
     #   ModifyDBSnapshotAttribute API.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshotsMessage AWS API Documentation
+    #
     class DescribeDBSnapshotsMessage < Struct.new(
       :db_instance_identifier,
       :db_snapshot_identifier,
@@ -5920,6 +6144,8 @@ module Aws::RDS
     #   specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroupsMessage AWS API Documentation
+    #
     class DescribeDBSubnetGroupsMessage < Struct.new(
       :db_subnet_group_name,
       :filters,
@@ -5970,6 +6196,8 @@ module Aws::RDS
     #   up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParametersMessage AWS API Documentation
+    #
     class DescribeEngineDefaultClusterParametersMessage < Struct.new(
       :db_parameter_group_family,
       :filters,
@@ -5982,6 +6210,8 @@ module Aws::RDS
     #   Contains the result of a successful invocation of the
     #   DescribeEngineDefaultParameters action.
     #   @return [Types::EngineDefaults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultClusterParametersResult AWS API Documentation
     #
     class DescribeEngineDefaultClusterParametersResult < Struct.new(
       :engine_defaults)
@@ -6029,6 +6259,8 @@ module Aws::RDS
     #   to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParametersMessage AWS API Documentation
+    #
     class DescribeEngineDefaultParametersMessage < Struct.new(
       :db_parameter_group_family,
       :filters,
@@ -6041,6 +6273,8 @@ module Aws::RDS
     #   Contains the result of a successful invocation of the
     #   DescribeEngineDefaultParameters action.
     #   @return [Types::EngineDefaults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEngineDefaultParametersResult AWS API Documentation
     #
     class DescribeEngineDefaultParametersResult < Struct.new(
       :engine_defaults)
@@ -6070,6 +6304,8 @@ module Aws::RDS
     # @!attribute [rw] filters
     #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventCategoriesMessage AWS API Documentation
     #
     class DescribeEventCategoriesMessage < Struct.new(
       :source_type,
@@ -6118,6 +6354,8 @@ module Aws::RDS
     #   specified, the response includes only records beyond the marker, up
     #   to the value specified by `MaxRecords` .
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventSubscriptionsMessage AWS API Documentation
     #
     class DescribeEventSubscriptionsMessage < Struct.new(
       :subscription_name,
@@ -6233,6 +6471,8 @@ module Aws::RDS
     #   `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeEventsMessage AWS API Documentation
+    #
     class DescribeEventsMessage < Struct.new(
       :source_identifier,
       :source_type,
@@ -6292,6 +6532,8 @@ module Aws::RDS
     #   parameter is specified, the response includes only records beyond
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptionsMessage AWS API Documentation
     #
     class DescribeOptionGroupOptionsMessage < Struct.new(
       :engine_name,
@@ -6356,6 +6598,8 @@ module Aws::RDS
     #   with a specific database engine version. If specified, then
     #   EngineName must also be specified.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupsMessage AWS API Documentation
     #
     class DescribeOptionGroupsMessage < Struct.new(
       :option_group_name,
@@ -6433,6 +6677,8 @@ module Aws::RDS
     #   to the value specified by `MaxRecords` .
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptionsMessage AWS API Documentation
+    #
     class DescribeOrderableDBInstanceOptionsMessage < Struct.new(
       :engine,
       :engine_version,
@@ -6497,6 +6743,8 @@ module Aws::RDS
     #
     #   Constraints: Minimum 20, maximum 100.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribePendingMaintenanceActionsMessage AWS API Documentation
     #
     class DescribePendingMaintenanceActionsMessage < Struct.new(
       :resource_identifier,
@@ -6588,6 +6836,8 @@ module Aws::RDS
     #   parameter is specified, the response includes only records beyond
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesMessage AWS API Documentation
     #
     class DescribeReservedDBInstancesMessage < Struct.new(
       :reserved_db_instance_id,
@@ -6683,6 +6933,8 @@ module Aws::RDS
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeReservedDBInstancesOfferingsMessage AWS API Documentation
+    #
     class DescribeReservedDBInstancesOfferingsMessage < Struct.new(
       :reserved_db_instances_offering_id,
       :db_instance_class,
@@ -6743,6 +6995,8 @@ module Aws::RDS
     #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeSourceRegionsMessage AWS API Documentation
+    #
     class DescribeSourceRegionsMessage < Struct.new(
       :region_name,
       :max_records,
@@ -6772,6 +7026,8 @@ module Aws::RDS
     #   Directory Service.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DomainMembership AWS API Documentation
+    #
     class DomainMembership < Struct.new(
       :domain,
       :status,
@@ -6796,6 +7052,8 @@ module Aws::RDS
     #   Boolean value that if true, indicates there is more data to be
     #   downloaded.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortionDetails AWS API Documentation
     #
     class DownloadDBLogFilePortionDetails < Struct.new(
       :log_file_data,
@@ -6864,6 +7122,8 @@ module Aws::RDS
     #     AdditionalDataPending response element returns false.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DownloadDBLogFilePortionMessage AWS API Documentation
+    #
     class DownloadDBLogFilePortionMessage < Struct.new(
       :db_instance_identifier,
       :log_file_name,
@@ -6898,6 +7158,8 @@ module Aws::RDS
     #   specified in the `EC2SecurityGroupName` field.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EC2SecurityGroup AWS API Documentation
+    #
     class EC2SecurityGroup < Struct.new(
       :status,
       :ec2_security_group_name,
@@ -6927,6 +7189,8 @@ module Aws::RDS
     #   hosted zone.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Endpoint AWS API Documentation
+    #
     class Endpoint < Struct.new(
       :address,
       :port,
@@ -6952,6 +7216,8 @@ module Aws::RDS
     # @!attribute [rw] parameters
     #   Contains a list of engine default parameters.
     #   @return [Array<Types::Parameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EngineDefaults AWS API Documentation
     #
     class EngineDefaults < Struct.new(
       :db_parameter_group_family,
@@ -6987,6 +7253,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the event.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Event AWS API Documentation
+    #
     class Event < Struct.new(
       :source_identifier,
       :source_type,
@@ -7008,6 +7276,8 @@ module Aws::RDS
     #   The event categories for the specified source type
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventCategoriesMap AWS API Documentation
+    #
     class EventCategoriesMap < Struct.new(
       :source_type,
       :event_categories)
@@ -7019,6 +7289,8 @@ module Aws::RDS
     # @!attribute [rw] event_categories_map_list
     #   A list of EventCategoriesMap data types.
     #   @return [Array<Types::EventCategoriesMap>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventCategoriesMessage AWS API Documentation
     #
     class EventCategoriesMessage < Struct.new(
       :event_categories_map_list)
@@ -7081,6 +7353,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the event subscription.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventSubscription AWS API Documentation
+    #
     class EventSubscription < Struct.new(
       :customer_aws_id,
       :cust_subscription_id,
@@ -7108,6 +7382,8 @@ module Aws::RDS
     #   A list of EventSubscriptions data types.
     #   @return [Array<Types::EventSubscription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventSubscriptionsMessage AWS API Documentation
+    #
     class EventSubscriptionsMessage < Struct.new(
       :marker,
       :event_subscriptions_list)
@@ -7126,6 +7402,8 @@ module Aws::RDS
     # @!attribute [rw] events
     #   A list of Event instances.
     #   @return [Array<Types::Event>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EventsMessage AWS API Documentation
     #
     class EventsMessage < Struct.new(
       :marker,
@@ -7161,6 +7439,8 @@ module Aws::RDS
     #   the DB cluster. For example, `mydbcluster-replica1`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBClusterMessage AWS API Documentation
+    #
     class FailoverDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :target_db_instance_identifier)
@@ -7187,6 +7467,8 @@ module Aws::RDS
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBClusterResult AWS API Documentation
+    #
     class FailoverDBClusterResult < Struct.new(
       :db_cluster)
       include Aws::Structure
@@ -7210,6 +7492,8 @@ module Aws::RDS
     #   This parameter is not currently supported.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Filter AWS API Documentation
+    #
     class Filter < Struct.new(
       :name,
       :values)
@@ -7227,6 +7511,8 @@ module Aws::RDS
     # @!attribute [rw] cidrip
     #   Specifies the IP range.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IPRange AWS API Documentation
     #
     class IPRange < Struct.new(
       :status,
@@ -7260,6 +7546,8 @@ module Aws::RDS
     # @!attribute [rw] filters
     #   This parameter is not currently supported.
     #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ListTagsForResourceMessage AWS API Documentation
     #
     class ListTagsForResourceMessage < Struct.new(
       :resource_name,
@@ -7430,6 +7718,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
+    #
     class ModifyDBClusterMessage < Struct.new(
       :db_cluster_identifier,
       :new_db_cluster_identifier,
@@ -7474,6 +7764,8 @@ module Aws::RDS
     #   A list of parameters in the DB cluster parameter group to modify.
     #   @return [Array<Types::Parameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterParameterGroupMessage AWS API Documentation
+    #
     class ModifyDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
       :parameters)
@@ -7499,6 +7791,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterResult AWS API Documentation
     #
     class ModifyDBClusterResult < Struct.new(
       :db_cluster)
@@ -7552,6 +7846,8 @@ module Aws::RDS
     #   snapshot.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttributeMessage AWS API Documentation
+    #
     class ModifyDBClusterSnapshotAttributeMessage < Struct.new(
       :db_cluster_snapshot_identifier,
       :attribute_name,
@@ -7569,6 +7865,8 @@ module Aws::RDS
     #   more information, see the ModifyDBClusterSnapshotAttribute API
     #   action.
     #   @return [Types::DBClusterSnapshotAttributesResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterSnapshotAttributeResult AWS API Documentation
     #
     class ModifyDBClusterSnapshotAttributeResult < Struct.new(
       :db_cluster_snapshot_attributes_result)
@@ -8175,6 +8473,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
+    #
     class ModifyDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :allocated_storage,
@@ -8224,6 +8524,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstanceResult AWS API Documentation
     #
     class ModifyDBInstanceResult < Struct.new(
       :db_instance)
@@ -8282,6 +8584,8 @@ module Aws::RDS
     #    </note>
     #   @return [Array<Types::Parameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroupMessage AWS API Documentation
+    #
     class ModifyDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :parameters)
@@ -8333,6 +8637,8 @@ module Aws::RDS
     #   attribute can still copy or restore the manual DB snapshot.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttributeMessage AWS API Documentation
+    #
     class ModifyDBSnapshotAttributeMessage < Struct.new(
       :db_snapshot_identifier,
       :attribute_name,
@@ -8349,6 +8655,8 @@ module Aws::RDS
     #   accounts to copy or restore a manual DB snapshot. For more
     #   information, see the ModifyDBSnapshotAttribute API action.
     #   @return [Types::DBSnapshotAttributesResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshotAttributeResult AWS API Documentation
     #
     class ModifyDBSnapshotAttributeResult < Struct.new(
       :db_snapshot_attributes_result)
@@ -8382,6 +8690,8 @@ module Aws::RDS
     #   The EC2 subnet IDs for the DB subnet group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroupMessage AWS API Documentation
+    #
     class ModifyDBSubnetGroupMessage < Struct.new(
       :db_subnet_group_name,
       :db_subnet_group_description,
@@ -8404,6 +8714,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBSubnetGroups action.
     #   @return [Types::DBSubnetGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroupResult AWS API Documentation
     #
     class ModifyDBSubnetGroupResult < Struct.new(
       :db_subnet_group)
@@ -8456,6 +8768,8 @@ module Aws::RDS
     #   A Boolean value; set to **true** to activate the subscription.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscriptionMessage AWS API Documentation
+    #
     class ModifyEventSubscriptionMessage < Struct.new(
       :subscription_name,
       :sns_topic_arn,
@@ -8469,6 +8783,8 @@ module Aws::RDS
     #   Contains the results of a successful invocation of the
     #   DescribeEventSubscriptions action.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyEventSubscriptionResult AWS API Documentation
     #
     class ModifyEventSubscriptionResult < Struct.new(
       :event_subscription)
@@ -8531,6 +8847,8 @@ module Aws::RDS
     #   the option group.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroupMessage AWS API Documentation
+    #
     class ModifyOptionGroupMessage < Struct.new(
       :option_group_name,
       :options_to_include,
@@ -8541,6 +8859,8 @@ module Aws::RDS
 
     # @!attribute [rw] option_group
     #   @return [Types::OptionGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroupResult AWS API Documentation
     #
     class ModifyOptionGroupResult < Struct.new(
       :option_group)
@@ -8586,6 +8906,8 @@ module Aws::RDS
     #   If the option requires access to a port, then this VPC security
     #   group allows access to the port.
     #   @return [Array<Types::VpcSecurityGroupMembership>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Option AWS API Documentation
     #
     class Option < Struct.new(
       :option_name,
@@ -8652,6 +8974,8 @@ module Aws::RDS
     #   The option settings to include in an option group.
     #   @return [Array<Types::OptionSetting>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionConfiguration AWS API Documentation
+    #
     class OptionConfiguration < Struct.new(
       :option_name,
       :port,
@@ -8703,6 +9027,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the option group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroup AWS API Documentation
+    #
     class OptionGroup < Struct.new(
       :option_group_name,
       :option_group_description,
@@ -8728,6 +9054,8 @@ module Aws::RDS
     #   `pending-maintenance-apply`, `pending-maintenance-removal`,
     #   `applying`, `removing`, and `failed`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupMembership AWS API Documentation
     #
     class OptionGroupMembership < Struct.new(
       :option_group_name,
@@ -8796,6 +9124,8 @@ module Aws::RDS
     #   The versions that are available for the option.
     #   @return [Array<Types::OptionVersion>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOption AWS API Documentation
+    #
     class OptionGroupOption < Struct.new(
       :name,
       :description,
@@ -8842,6 +9172,8 @@ module Aws::RDS
     #   be changed from the default value.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionSetting AWS API Documentation
+    #
     class OptionGroupOptionSetting < Struct.new(
       :setting_name,
       :setting_description,
@@ -8862,6 +9194,8 @@ module Aws::RDS
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOptionsMessage AWS API Documentation
+    #
     class OptionGroupOptionsMessage < Struct.new(
       :option_group_options,
       :marker)
@@ -8879,6 +9213,8 @@ module Aws::RDS
     #   parameter is specified, the response includes only records beyond
     #   the marker, up to the value specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroups AWS API Documentation
     #
     class OptionGroups < Struct.new(
       :option_groups_list,
@@ -8944,6 +9280,8 @@ module Aws::RDS
     #   Indicates if the option setting is part of a collection.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionSetting AWS API Documentation
+    #
     class OptionSetting < Struct.new(
       :name,
       :value,
@@ -8968,6 +9306,8 @@ module Aws::RDS
     #   True if the version is the default version of the option; otherwise,
     #   false.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionVersion AWS API Documentation
     #
     class OptionVersion < Struct.new(
       :version,
@@ -9032,6 +9372,8 @@ module Aws::RDS
     #   intervals from 1 to 60 seconds.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOption AWS API Documentation
+    #
     class OrderableDBInstanceOption < Struct.new(
       :engine,
       :engine_version,
@@ -9062,6 +9404,8 @@ module Aws::RDS
     #   the response includes only records beyond the marker, up to the
     #   value specified by `MaxRecords` .
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OrderableDBInstanceOptionsMessage AWS API Documentation
     #
     class OrderableDBInstanceOptionsMessage < Struct.new(
       :orderable_db_instance_options,
@@ -9133,6 +9477,8 @@ module Aws::RDS
     #   Indicates when to apply parameter updates.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Parameter AWS API Documentation
+    #
     class Parameter < Struct.new(
       :parameter_name,
       :parameter_value,
@@ -9187,6 +9533,8 @@ module Aws::RDS
     #   A description providing more detail about the maintenance action.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingMaintenanceAction AWS API Documentation
+    #
     class PendingMaintenanceAction < Struct.new(
       :action,
       :auto_applied_after_date,
@@ -9209,6 +9557,8 @@ module Aws::RDS
     #   specified, the response includes only records beyond the marker, up
     #   to a number of records specified by `MaxRecords`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingMaintenanceActionsMessage AWS API Documentation
     #
     class PendingMaintenanceActionsMessage < Struct.new(
       :pending_maintenance_actions,
@@ -9281,6 +9631,8 @@ module Aws::RDS
     #   The new DB subnet group for the DB instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PendingModifiedValues AWS API Documentation
+    #
     class PendingModifiedValues < Struct.new(
       :db_instance_class,
       :allocated_storage,
@@ -9320,6 +9672,8 @@ module Aws::RDS
     #   Example: `my-cluster-replica1`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBClusterMessage AWS API Documentation
+    #
     class PromoteReadReplicaDBClusterMessage < Struct.new(
       :db_cluster_identifier)
       include Aws::Structure
@@ -9344,6 +9698,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBClusterResult AWS API Documentation
     #
     class PromoteReadReplicaDBClusterResult < Struct.new(
       :db_cluster)
@@ -9415,6 +9771,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaMessage AWS API Documentation
+    #
     class PromoteReadReplicaMessage < Struct.new(
       :db_instance_identifier,
       :backup_retention_period,
@@ -9435,6 +9793,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaResult AWS API Documentation
     #
     class PromoteReadReplicaResult < Struct.new(
       :db_instance)
@@ -9478,6 +9838,8 @@ module Aws::RDS
     #   A list of tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOfferingMessage AWS API Documentation
+    #
     class PurchaseReservedDBInstancesOfferingMessage < Struct.new(
       :reserved_db_instances_offering_id,
       :reserved_db_instance_id,
@@ -9491,6 +9853,8 @@ module Aws::RDS
     #   DescribeReservedDBInstances and PurchaseReservedDBInstancesOffering
     #   actions.
     #   @return [Types::ReservedDBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PurchaseReservedDBInstancesOfferingResult AWS API Documentation
     #
     class PurchaseReservedDBInstancesOfferingResult < Struct.new(
       :reserved_db_instance)
@@ -9526,6 +9890,8 @@ module Aws::RDS
     #   configured for MultiAZ.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstanceMessage AWS API Documentation
+    #
     class RebootDBInstanceMessage < Struct.new(
       :db_instance_identifier,
       :force_failover)
@@ -9546,6 +9912,8 @@ module Aws::RDS
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstanceResult AWS API Documentation
+    #
     class RebootDBInstanceResult < Struct.new(
       :db_instance)
       include Aws::Structure
@@ -9562,6 +9930,8 @@ module Aws::RDS
     # @!attribute [rw] recurring_charge_frequency
     #   The frequency of the recurring charge.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RecurringCharge AWS API Documentation
     #
     class RecurringCharge < Struct.new(
       :recurring_charge_amount,
@@ -9586,6 +9956,8 @@ module Aws::RDS
     #   the Aurora DB cluster, for example
     #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveRoleFromDBClusterMessage AWS API Documentation
     #
     class RemoveRoleFromDBClusterMessage < Struct.new(
       :db_cluster_identifier,
@@ -9612,6 +9984,8 @@ module Aws::RDS
     #   security group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscriptionMessage AWS API Documentation
+    #
     class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
       :subscription_name,
       :source_identifier)
@@ -9622,6 +9996,8 @@ module Aws::RDS
     #   Contains the results of a successful invocation of the
     #   DescribeEventSubscriptions action.
     #   @return [Types::EventSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveSourceIdentifierFromSubscriptionResult AWS API Documentation
     #
     class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
       :event_subscription)
@@ -9649,6 +10025,8 @@ module Aws::RDS
     # @!attribute [rw] tag_keys
     #   The tag key (name) of the tag to be removed.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RemoveTagsFromResourceMessage AWS API Documentation
     #
     class RemoveTagsFromResourceMessage < Struct.new(
       :resource_name,
@@ -9720,6 +10098,8 @@ module Aws::RDS
     #   The Amazon Resource Name (ARN) for the reserved DB instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstance AWS API Documentation
+    #
     class ReservedDBInstance < Struct.new(
       :reserved_db_instance_id,
       :reserved_db_instances_offering_id,
@@ -9751,6 +10131,8 @@ module Aws::RDS
     # @!attribute [rw] reserved_db_instances
     #   A list of reserved DB instances.
     #   @return [Array<Types::ReservedDBInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstanceMessage AWS API Documentation
     #
     class ReservedDBInstanceMessage < Struct.new(
       :marker,
@@ -9801,6 +10183,8 @@ module Aws::RDS
     #   The recurring price charged to run this reserved DB instance.
     #   @return [Array<Types::RecurringCharge>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOffering AWS API Documentation
+    #
     class ReservedDBInstancesOffering < Struct.new(
       :reserved_db_instances_offering_id,
       :db_instance_class,
@@ -9827,6 +10211,8 @@ module Aws::RDS
     # @!attribute [rw] reserved_db_instances_offerings
     #   A list of reserved DB instance offerings.
     #   @return [Array<Types::ReservedDBInstancesOffering>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ReservedDBInstancesOfferingMessage AWS API Documentation
     #
     class ReservedDBInstancesOfferingMessage < Struct.new(
       :marker,
@@ -9872,6 +10258,8 @@ module Aws::RDS
     #   to the default values. You cannot use this parameter if the
     #   `ResetAllParameters` parameter is set to `true`.
     #   @return [Array<Types::Parameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBClusterParameterGroupMessage AWS API Documentation
     #
     class ResetDBClusterParameterGroupMessage < Struct.new(
       :db_cluster_parameter_group_name,
@@ -9948,6 +10336,8 @@ module Aws::RDS
     #   Valid Values (for Apply method): `pending-reboot`
     #   @return [Array<Types::Parameter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResetDBParameterGroupMessage AWS API Documentation
+    #
     class ResetDBParameterGroupMessage < Struct.new(
       :db_parameter_group_name,
       :reset_all_parameters,
@@ -9965,6 +10355,8 @@ module Aws::RDS
     #   A list that provides details about the pending maintenance actions
     #   for the resource.
     #   @return [Array<Types::PendingMaintenanceAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ResourcePendingMaintenanceActions AWS API Documentation
     #
     class ResourcePendingMaintenanceActions < Struct.new(
       :resource_identifier,
@@ -10229,6 +10621,8 @@ module Aws::RDS
     #   Amazon S3 bucket on your behalf.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
+    #
     class RestoreDBClusterFromS3Message < Struct.new(
       :availability_zones,
       :backup_retention_period,
@@ -10276,6 +10670,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Result AWS API Documentation
     #
     class RestoreDBClusterFromS3Result < Struct.new(
       :db_cluster)
@@ -10404,6 +10800,8 @@ module Aws::RDS
     #     cluster is encrypted using the specified encryption key.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
+    #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
       :availability_zones,
       :db_cluster_identifier,
@@ -10439,6 +10837,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotResult AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotResult < Struct.new(
       :db_cluster)
@@ -10575,6 +10975,8 @@ module Aws::RDS
     #   encrypted, then the restore request is rejected.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
+    #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
       :db_cluster_identifier,
       :source_db_cluster_identifier,
@@ -10608,6 +11010,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBClusters action.
     #   @return [Types::DBCluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeResult AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeResult < Struct.new(
       :db_cluster)
@@ -10850,6 +11254,8 @@ module Aws::RDS
     #   the Directory Service.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotMessage AWS API Documentation
+    #
     class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
       :db_instance_identifier,
       :db_snapshot_identifier,
@@ -10888,6 +11294,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshotResult AWS API Documentation
     #
     class RestoreDBInstanceFromDBSnapshotResult < Struct.new(
       :db_instance)
@@ -11147,6 +11555,8 @@ module Aws::RDS
     #   the Directory Service.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeMessage AWS API Documentation
+    #
     class RestoreDBInstanceToPointInTimeMessage < Struct.new(
       :source_db_instance_identifier,
       :target_db_instance_identifier,
@@ -11187,6 +11597,8 @@ module Aws::RDS
     #   This data type is used as a response element in the
     #   DescribeDBInstances action.
     #   @return [Types::DBInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTimeResult AWS API Documentation
     #
     class RestoreDBInstanceToPointInTimeResult < Struct.new(
       :db_instance)
@@ -11237,6 +11649,8 @@ module Aws::RDS
     #   `EC2SecurityGroupId` must be provided.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngressMessage AWS API Documentation
+    #
     class RevokeDBSecurityGroupIngressMessage < Struct.new(
       :db_security_group_name,
       :cidrip,
@@ -11262,6 +11676,8 @@ module Aws::RDS
     #   DescribeDBSecurityGroups action.
     #   @return [Types::DBSecurityGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RevokeDBSecurityGroupIngressResult AWS API Documentation
+    #
     class RevokeDBSecurityGroupIngressResult < Struct.new(
       :db_security_group)
       include Aws::Structure
@@ -11281,6 +11697,8 @@ module Aws::RDS
     # @!attribute [rw] status
     #   The status of the source region.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceRegion AWS API Documentation
     #
     class SourceRegion < Struct.new(
       :region_name,
@@ -11303,6 +11721,8 @@ module Aws::RDS
     #   Region that the current region can get a Read Replica or a DB
     #   snapshot from.
     #   @return [Array<Types::SourceRegion>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SourceRegionMessage AWS API Documentation
     #
     class SourceRegionMessage < Struct.new(
       :marker,
@@ -11330,6 +11750,8 @@ module Aws::RDS
     # @!attribute [rw] subnet_status
     #   Specifies the status of the subnet.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Subnet AWS API Documentation
     #
     class Subnet < Struct.new(
       :subnet_identifier,
@@ -11367,6 +11789,8 @@ module Aws::RDS
     #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -11376,6 +11800,8 @@ module Aws::RDS
     # @!attribute [rw] tag_list
     #   List of tags returned by the ListTagsForResource operation.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/TagListMessage AWS API Documentation
     #
     class TagListMessage < Struct.new(
       :tag_list)
@@ -11389,6 +11815,8 @@ module Aws::RDS
     # @!attribute [rw] timezone_name
     #   The name of the time zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Timezone AWS API Documentation
     #
     class Timezone < Struct.new(
       :timezone_name)
@@ -11422,6 +11850,8 @@ module Aws::RDS
     #   a major version.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
+    #
     class UpgradeTarget < Struct.new(
       :engine,
       :engine_version,
@@ -11441,6 +11871,8 @@ module Aws::RDS
     # @!attribute [rw] status
     #   The status of the VPC security group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/VpcSecurityGroupMembership AWS API Documentation
     #
     class VpcSecurityGroupMembership < Struct.new(
       :vpc_security_group_id,

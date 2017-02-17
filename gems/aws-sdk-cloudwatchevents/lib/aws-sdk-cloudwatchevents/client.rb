@@ -171,6 +171,8 @@ module Aws::CloudWatchEvents
     #     name: "RuleName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRule AWS API Documentation
+    #
     # @overload delete_rule(params = {})
     # @param [Hash] params ({})
     def delete_rule(params = {}, options = {})
@@ -209,6 +211,8 @@ module Aws::CloudWatchEvents
     #   resp.description #=> String
     #   resp.role_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRule AWS API Documentation
+    #
     # @overload describe_rule(params = {})
     # @param [Hash] params ({})
     def describe_rule(params = {}, options = {})
@@ -234,6 +238,8 @@ module Aws::CloudWatchEvents
     #     name: "RuleName", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRule AWS API Documentation
+    #
     # @overload disable_rule(params = {})
     # @param [Hash] params ({})
     def disable_rule(params = {}, options = {})
@@ -257,6 +263,8 @@ module Aws::CloudWatchEvents
     #   resp = client.enable_rule({
     #     name: "RuleName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRule AWS API Documentation
     #
     # @overload enable_rule(params = {})
     # @param [Hash] params ({})
@@ -302,6 +310,8 @@ module Aws::CloudWatchEvents
     #   resp.rule_names #=> Array
     #   resp.rule_names[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTarget AWS API Documentation
     #
     # @overload list_rule_names_by_target(params = {})
     # @param [Hash] params ({})
@@ -352,6 +362,8 @@ module Aws::CloudWatchEvents
     #   resp.rules[0].role_arn #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRules AWS API Documentation
+    #
     # @overload list_rules(params = {})
     # @param [Hash] params ({})
     def list_rules(params = {}, options = {})
@@ -392,6 +404,8 @@ module Aws::CloudWatchEvents
     #   resp.targets[0].input #=> String
     #   resp.targets[0].input_path #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRule AWS API Documentation
     #
     # @overload list_targets_by_rule(params = {})
     # @param [Hash] params ({})
@@ -434,6 +448,8 @@ module Aws::CloudWatchEvents
     #   resp.entries[0].event_id #=> String
     #   resp.entries[0].error_code #=> String
     #   resp.entries[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEvents AWS API Documentation
     #
     # @overload put_events(params = {})
     # @param [Hash] params ({})
@@ -501,6 +517,8 @@ module Aws::CloudWatchEvents
     # @example Response structure
     #
     #   resp.rule_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRule AWS API Documentation
     #
     # @overload put_rule(params = {})
     # @param [Hash] params ({})
@@ -578,6 +596,8 @@ module Aws::CloudWatchEvents
     #   resp.failed_entries[0].error_code #=> String
     #   resp.failed_entries[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargets AWS API Documentation
+    #
     # @overload put_targets(params = {})
     # @param [Hash] params ({})
     def put_targets(params = {}, options = {})
@@ -618,6 +638,8 @@ module Aws::CloudWatchEvents
     #   resp.failed_entries[0].error_code #=> String
     #   resp.failed_entries[0].error_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargets AWS API Documentation
+    #
     # @overload remove_targets(params = {})
     # @param [Hash] params ({})
     def remove_targets(params = {}, options = {})
@@ -653,6 +675,8 @@ module Aws::CloudWatchEvents
     # @example Response structure
     #
     #   resp.result #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPattern AWS API Documentation
     #
     # @overload test_event_pattern(params = {})
     # @param [Hash] params ({})

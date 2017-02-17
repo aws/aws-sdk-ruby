@@ -185,6 +185,8 @@ module Aws::Inspector
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindings AWS API Documentation
+    #
     # @overload add_attributes_to_findings(params = {})
     # @param [Hash] params ({})
     def add_attributes_to_findings(params = {}, options = {})
@@ -224,6 +226,8 @@ module Aws::Inspector
     # @example Response structure
     #
     #   resp.assessment_target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTarget AWS API Documentation
     #
     # @overload create_assessment_target(params = {})
     # @param [Hash] params ({})
@@ -280,6 +284,8 @@ module Aws::Inspector
     #
     #   resp.assessment_template_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateAssessmentTemplate AWS API Documentation
+    #
     # @overload create_assessment_template(params = {})
     # @param [Hash] params ({})
     def create_assessment_template(params = {}, options = {})
@@ -319,6 +325,8 @@ module Aws::Inspector
     #
     #   resp.resource_group_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/CreateResourceGroup AWS API Documentation
+    #
     # @overload create_resource_group(params = {})
     # @param [Hash] params ({})
     def create_resource_group(params = {}, options = {})
@@ -339,6 +347,8 @@ module Aws::Inspector
     #   resp = client.delete_assessment_run({
     #     assessment_run_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentRun AWS API Documentation
     #
     # @overload delete_assessment_run(params = {})
     # @param [Hash] params ({})
@@ -361,6 +371,8 @@ module Aws::Inspector
     #     assessment_target_arn: "Arn", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTarget AWS API Documentation
+    #
     # @overload delete_assessment_target(params = {})
     # @param [Hash] params ({})
     def delete_assessment_target(params = {}, options = {})
@@ -382,6 +394,8 @@ module Aws::Inspector
     #   resp = client.delete_assessment_template({
     #     assessment_template_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DeleteAssessmentTemplate AWS API Documentation
     #
     # @overload delete_assessment_template(params = {})
     # @param [Hash] params ({})
@@ -439,6 +453,8 @@ module Aws::Inspector
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentRuns AWS API Documentation
+    #
     # @overload describe_assessment_runs(params = {})
     # @param [Hash] params ({})
     def describe_assessment_runs(params = {}, options = {})
@@ -475,6 +491,8 @@ module Aws::Inspector
     #   resp.failed_items #=> Hash
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTargets AWS API Documentation
     #
     # @overload describe_assessment_targets(params = {})
     # @param [Hash] params ({})
@@ -516,6 +534,8 @@ module Aws::Inspector
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeAssessmentTemplates AWS API Documentation
+    #
     # @overload describe_assessment_templates(params = {})
     # @param [Hash] params ({})
     def describe_assessment_templates(params = {}, options = {})
@@ -537,6 +557,8 @@ module Aws::Inspector
     #   resp.role_arn #=> String
     #   resp.valid #=> Boolean
     #   resp.registered_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeCrossAccountAccessRole AWS API Documentation
     #
     # @overload describe_cross_account_access_role(params = {})
     # @param [Hash] params ({})
@@ -603,6 +625,8 @@ module Aws::Inspector
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeFindings AWS API Documentation
+    #
     # @overload describe_findings(params = {})
     # @param [Hash] params ({})
     def describe_findings(params = {}, options = {})
@@ -638,6 +662,8 @@ module Aws::Inspector
     #   resp.failed_items #=> Hash
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeResourceGroups AWS API Documentation
     #
     # @overload describe_resource_groups(params = {})
     # @param [Hash] params ({})
@@ -680,6 +706,8 @@ module Aws::Inspector
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/DescribeRulesPackages AWS API Documentation
+    #
     # @overload describe_rules_packages(params = {})
     # @param [Hash] params ({})
     def describe_rules_packages(params = {}, options = {})
@@ -710,6 +738,8 @@ module Aws::Inspector
     #   resp.telemetry_metadata[0].message_type #=> String
     #   resp.telemetry_metadata[0].count #=> Integer
     #   resp.telemetry_metadata[0].data_size #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetTelemetryMetadata AWS API Documentation
     #
     # @overload get_telemetry_metadata(params = {})
     # @param [Hash] params ({})
@@ -776,6 +806,8 @@ module Aws::Inspector
     #   resp.assessment_run_agents[0].telemetry_metadata[0].count #=> Integer
     #   resp.assessment_run_agents[0].telemetry_metadata[0].data_size #=> Integer
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRunAgents AWS API Documentation
     #
     # @overload list_assessment_run_agents(params = {})
     # @param [Hash] params ({})
@@ -851,6 +883,8 @@ module Aws::Inspector
     #   resp.assessment_run_arns[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentRuns AWS API Documentation
+    #
     # @overload list_assessment_runs(params = {})
     # @param [Hash] params ({})
     def list_assessment_runs(params = {}, options = {})
@@ -906,6 +940,8 @@ module Aws::Inspector
     #   resp.assessment_target_arns #=> Array
     #   resp.assessment_target_arns[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTargets AWS API Documentation
     #
     # @overload list_assessment_targets(params = {})
     # @param [Hash] params ({})
@@ -968,6 +1004,8 @@ module Aws::Inspector
     #   resp.assessment_template_arns[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListAssessmentTemplates AWS API Documentation
+    #
     # @overload list_assessment_templates(params = {})
     # @param [Hash] params ({})
     def list_assessment_templates(params = {}, options = {})
@@ -1017,6 +1055,8 @@ module Aws::Inspector
     #   resp.subscriptions[0].event_subscriptions[0].event #=> String, one of "ASSESSMENT_RUN_STARTED", "ASSESSMENT_RUN_COMPLETED", "ASSESSMENT_RUN_STATE_CHANGED", "FINDING_REPORTED", "OTHER"
     #   resp.subscriptions[0].event_subscriptions[0].subscribed_at #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListEventSubscriptions AWS API Documentation
     #
     # @overload list_event_subscriptions(params = {})
     # @param [Hash] params ({})
@@ -1094,6 +1134,8 @@ module Aws::Inspector
     #   resp.finding_arns[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListFindings AWS API Documentation
+    #
     # @overload list_findings(params = {})
     # @param [Hash] params ({})
     def list_findings(params = {}, options = {})
@@ -1133,6 +1175,8 @@ module Aws::Inspector
     #   resp.rules_package_arns[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListRulesPackages AWS API Documentation
+    #
     # @overload list_rules_packages(params = {})
     # @param [Hash] params ({})
     def list_rules_packages(params = {}, options = {})
@@ -1161,6 +1205,8 @@ module Aws::Inspector
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/ListTagsForResource AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -1207,6 +1253,8 @@ module Aws::Inspector
     #   resp.agent_previews[0].auto_scaling_group #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/PreviewAgents AWS API Documentation
+    #
     # @overload preview_agents(params = {})
     # @param [Hash] params ({})
     def preview_agents(params = {}, options = {})
@@ -1230,6 +1278,8 @@ module Aws::Inspector
     #   resp = client.register_cross_account_access_role({
     #     role_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RegisterCrossAccountAccessRole AWS API Documentation
     #
     # @overload register_cross_account_access_role(params = {})
     # @param [Hash] params ({})
@@ -1267,6 +1317,8 @@ module Aws::Inspector
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/RemoveAttributesFromFindings AWS API Documentation
+    #
     # @overload remove_attributes_from_findings(params = {})
     # @param [Hash] params ({})
     def remove_attributes_from_findings(params = {}, options = {})
@@ -1297,6 +1349,8 @@ module Aws::Inspector
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SetTagsForResource AWS API Documentation
     #
     # @overload set_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -1333,6 +1387,8 @@ module Aws::Inspector
     #
     #   resp.assessment_run_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StartAssessmentRun AWS API Documentation
+    #
     # @overload start_assessment_run(params = {})
     # @param [Hash] params ({})
     def start_assessment_run(params = {}, options = {})
@@ -1353,6 +1409,8 @@ module Aws::Inspector
     #   resp = client.stop_assessment_run({
     #     assessment_run_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/StopAssessmentRun AWS API Documentation
     #
     # @overload stop_assessment_run(params = {})
     # @param [Hash] params ({})
@@ -1384,6 +1442,8 @@ module Aws::Inspector
     #     topic_arn: "Arn", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/SubscribeToEvent AWS API Documentation
+    #
     # @overload subscribe_to_event(params = {})
     # @param [Hash] params ({})
     def subscribe_to_event(params = {}, options = {})
@@ -1413,6 +1473,8 @@ module Aws::Inspector
     #     event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
     #     topic_arn: "Arn", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UnsubscribeFromEvent AWS API Documentation
     #
     # @overload unsubscribe_from_event(params = {})
     # @param [Hash] params ({})
@@ -1444,6 +1506,8 @@ module Aws::Inspector
     #     resource_group_arn: "Arn", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/UpdateAssessmentTarget AWS API Documentation
+    #
     # @overload update_assessment_target(params = {})
     # @param [Hash] params ({})
     def update_assessment_target(params = {}, options = {})
@@ -1464,7 +1528,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

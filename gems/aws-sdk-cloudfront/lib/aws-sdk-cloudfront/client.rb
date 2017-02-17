@@ -181,6 +181,8 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    #
     # @overload create_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
     def create_cloud_front_origin_access_identity(params = {}, options = {})
@@ -519,6 +521,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.location #=> String
     #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistribution2016_11_25 AWS API Documentation
     #
     # @overload create_distribution(params = {})
     # @param [Hash] params ({})
@@ -868,6 +872,8 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistributionWithTags2016_11_25 AWS API Documentation
+    #
     # @overload create_distribution_with_tags(params = {})
     # @param [Hash] params ({})
     def create_distribution_with_tags(params = {}, options = {})
@@ -911,6 +917,8 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items #=> Array
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateInvalidation2016_11_25 AWS API Documentation
     #
     # @overload create_invalidation(params = {})
     # @param [Hash] params ({})
@@ -1025,6 +1033,8 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistribution2016_11_25 AWS API Documentation
+    #
     # @overload create_streaming_distribution(params = {})
     # @param [Hash] params ({})
     def create_streaming_distribution(params = {}, options = {})
@@ -1115,6 +1125,8 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistributionWithTags2016_11_25 AWS API Documentation
+    #
     # @overload create_streaming_distribution_with_tags(params = {})
     # @param [Hash] params ({})
     def create_streaming_distribution_with_tags(params = {}, options = {})
@@ -1140,6 +1152,8 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    #
     # @overload delete_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
     def delete_cloud_front_origin_access_identity(params = {}, options = {})
@@ -1164,6 +1178,8 @@ module Aws::CloudFront
     #     id: "string", # required
     #     if_match: "string",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteDistribution2016_11_25 AWS API Documentation
     #
     # @overload delete_distribution(params = {})
     # @param [Hash] params ({})
@@ -1233,6 +1249,8 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteStreamingDistribution2016_11_25 AWS API Documentation
+    #
     # @overload delete_streaming_distribution(params = {})
     # @param [Hash] params ({})
     def delete_streaming_distribution(params = {}, options = {})
@@ -1264,6 +1282,8 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    #
     # @overload get_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
     def get_cloud_front_origin_access_identity(params = {}, options = {})
@@ -1292,6 +1312,8 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_config.caller_reference #=> String
     #   resp.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentityConfig2016_11_25 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity_config(params = {})
     # @param [Hash] params ({})
@@ -1448,6 +1470,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistribution2016_11_25 AWS API Documentation
+    #
     # @overload get_distribution(params = {})
     # @param [Hash] params ({})
     def get_distribution(params = {}, options = {})
@@ -1590,6 +1614,8 @@ module Aws::CloudFront
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistributionConfig2016_11_25 AWS API Documentation
+    #
     # @overload get_distribution_config(params = {})
     # @param [Hash] params ({})
     def get_distribution_config(params = {}, options = {})
@@ -1626,6 +1652,8 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items #=> Array
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetInvalidation2016_11_25 AWS API Documentation
     #
     # @overload get_invalidation(params = {})
     # @param [Hash] params ({})
@@ -1683,6 +1711,8 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistribution2016_11_25 AWS API Documentation
+    #
     # @overload get_streaming_distribution(params = {})
     # @param [Hash] params ({})
     def get_streaming_distribution(params = {}, options = {})
@@ -1725,6 +1755,8 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistributionConfig2016_11_25 AWS API Documentation
     #
     # @overload get_streaming_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -1769,6 +1801,8 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_list.items[0].id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListCloudFrontOriginAccessIdentities2016_11_25 AWS API Documentation
     #
     # @overload list_cloud_front_origin_access_identities(params = {})
     # @param [Hash] params ({})
@@ -1922,6 +1956,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].web_acl_id #=> String
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributions2016_11_25 AWS API Documentation
     #
     # @overload list_distributions(params = {})
     # @param [Hash] params ({})
@@ -2085,6 +2121,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributionsByWebACLId2016_11_25 AWS API Documentation
+    #
     # @overload list_distributions_by_web_acl_id(params = {})
     # @param [Hash] params ({})
     def list_distributions_by_web_acl_id(params = {}, options = {})
@@ -2134,6 +2172,8 @@ module Aws::CloudFront
     #   resp.invalidation_list.items[0].id #=> String
     #   resp.invalidation_list.items[0].create_time #=> Time
     #   resp.invalidation_list.items[0].status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListInvalidations2016_11_25 AWS API Documentation
     #
     # @overload list_invalidations(params = {})
     # @param [Hash] params ({})
@@ -2187,6 +2227,8 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListStreamingDistributions2016_11_25 AWS API Documentation
+    #
     # @overload list_streaming_distributions(params = {})
     # @param [Hash] params ({})
     def list_streaming_distributions(params = {}, options = {})
@@ -2214,6 +2256,8 @@ module Aws::CloudFront
     #   resp.tags.items #=> Array
     #   resp.tags.items[0].key #=> String
     #   resp.tags.items[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListTagsForResource2016_11_25 AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2246,6 +2290,8 @@ module Aws::CloudFront
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/TagResource2016_11_25 AWS API Documentation
+    #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
@@ -2271,6 +2317,8 @@ module Aws::CloudFront
     #       items: ["TagKey"],
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UntagResource2016_11_25 AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -2314,6 +2362,8 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.caller_reference #=> String
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
     #
     # @overload update_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -2660,6 +2710,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateDistribution2016_11_25 AWS API Documentation
+    #
     # @overload update_distribution(params = {})
     # @param [Hash] params ({})
     def update_distribution(params = {}, options = {})
@@ -2747,6 +2799,8 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateStreamingDistribution2016_11_25 AWS API Documentation
     #
     # @overload update_streaming_distribution(params = {})
     # @param [Hash] params ({})

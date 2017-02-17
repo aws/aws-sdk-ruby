@@ -185,6 +185,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIp AWS API Documentation
+    #
     # @overload allocate_static_ip(params = {})
     # @param [Hash] params ({})
     def allocate_static_ip(params = {}, options = {})
@@ -227,6 +229,8 @@ module Aws::Lightsail
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIp AWS API Documentation
     #
     # @overload attach_static_ip(params = {})
     # @param [Hash] params ({})
@@ -275,6 +279,8 @@ module Aws::Lightsail
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPorts AWS API Documentation
+    #
     # @overload close_instance_public_ports(params = {})
     # @param [Hash] params ({})
     def close_instance_public_ports(params = {}, options = {})
@@ -320,6 +326,8 @@ module Aws::Lightsail
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomain AWS API Documentation
     #
     # @overload create_domain(params = {})
     # @param [Hash] params ({})
@@ -374,6 +382,8 @@ module Aws::Lightsail
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntry AWS API Documentation
+    #
     # @overload create_domain_entry(params = {})
     # @param [Hash] params ({})
     def create_domain_entry(params = {}, options = {})
@@ -418,6 +428,8 @@ module Aws::Lightsail
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshot AWS API Documentation
     #
     # @overload create_instance_snapshot(params = {})
     # @param [Hash] params ({})
@@ -503,6 +515,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstances AWS API Documentation
+    #
     # @overload create_instances(params = {})
     # @param [Hash] params ({})
     def create_instances(params = {}, options = {})
@@ -580,6 +594,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshot AWS API Documentation
+    #
     # @overload create_instances_from_snapshot(params = {})
     # @param [Hash] params ({})
     def create_instances_from_snapshot(params = {}, options = {})
@@ -631,6 +647,8 @@ module Aws::Lightsail
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPair AWS API Documentation
+    #
     # @overload create_key_pair(params = {})
     # @param [Hash] params ({})
     def create_key_pair(params = {}, options = {})
@@ -668,6 +686,8 @@ module Aws::Lightsail
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomain AWS API Documentation
     #
     # @overload delete_domain(params = {})
     # @param [Hash] params ({})
@@ -720,6 +740,8 @@ module Aws::Lightsail
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntry AWS API Documentation
+    #
     # @overload delete_domain_entry(params = {})
     # @param [Hash] params ({})
     def delete_domain_entry(params = {}, options = {})
@@ -759,6 +781,8 @@ module Aws::Lightsail
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstance AWS API Documentation
     #
     # @overload delete_instance(params = {})
     # @param [Hash] params ({})
@@ -800,6 +824,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshot AWS API Documentation
+    #
     # @overload delete_instance_snapshot(params = {})
     # @param [Hash] params ({})
     def delete_instance_snapshot(params = {}, options = {})
@@ -837,6 +863,8 @@ module Aws::Lightsail
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPair AWS API Documentation
     #
     # @overload delete_key_pair(params = {})
     # @param [Hash] params ({})
@@ -878,6 +906,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIp AWS API Documentation
+    #
     # @overload detach_static_ip(params = {})
     # @param [Hash] params ({})
     def detach_static_ip(params = {}, options = {})
@@ -896,6 +926,8 @@ module Aws::Lightsail
     #
     #   resp.public_key_base_64 #=> String
     #   resp.private_key_base_64 #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair AWS API Documentation
     #
     # @overload download_default_key_pair(params = {})
     # @param [Hash] params ({})
@@ -926,6 +958,8 @@ module Aws::Lightsail
     #   resp.active_names #=> Array
     #   resp.active_names[0] #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNames AWS API Documentation
     #
     # @overload get_active_names(params = {})
     # @param [Hash] params ({})
@@ -976,6 +1010,8 @@ module Aws::Lightsail
     #   resp.blueprints[0].license_url #=> String
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprints AWS API Documentation
+    #
     # @overload get_blueprints(params = {})
     # @param [Hash] params ({})
     def get_blueprints(params = {}, options = {})
@@ -1021,6 +1057,8 @@ module Aws::Lightsail
     #   resp.bundles[0].transfer_per_month_in_gb #=> Integer
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundles AWS API Documentation
+    #
     # @overload get_bundles(params = {})
     # @param [Hash] params ({})
     def get_bundles(params = {}, options = {})
@@ -1059,6 +1097,8 @@ module Aws::Lightsail
     #   resp.domain.domain_entries[0].type #=> String
     #   resp.domain.domain_entries[0].options #=> Hash
     #   resp.domain.domain_entries[0].options["DomainEntryOptionsKeys"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomain AWS API Documentation
     #
     # @overload get_domain(params = {})
     # @param [Hash] params ({})
@@ -1102,6 +1142,8 @@ module Aws::Lightsail
     #   resp.domains[0].domain_entries[0].options #=> Hash
     #   resp.domains[0].domain_entries[0].options["DomainEntryOptionsKeys"] #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomains AWS API Documentation
     #
     # @overload get_domains(params = {})
     # @param [Hash] params ({})
@@ -1174,6 +1216,8 @@ module Aws::Lightsail
     #   resp.instance.username #=> String
     #   resp.instance.ssh_key_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstance AWS API Documentation
+    #
     # @overload get_instance(params = {})
     # @param [Hash] params ({})
     def get_instance(params = {}, options = {})
@@ -1211,6 +1255,8 @@ module Aws::Lightsail
     #   resp.access_details.protocol #=> String, one of "ssh", "rdp"
     #   resp.access_details.instance_name #=> String
     #   resp.access_details.username #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetails AWS API Documentation
     #
     # @overload get_instance_access_details(params = {})
     # @param [Hash] params ({})
@@ -1272,6 +1318,8 @@ module Aws::Lightsail
     #   resp.metric_data[0].timestamp #=> Time
     #   resp.metric_data[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricData AWS API Documentation
+    #
     # @overload get_instance_metric_data(params = {})
     # @param [Hash] params ({})
     def get_instance_metric_data(params = {}, options = {})
@@ -1299,6 +1347,8 @@ module Aws::Lightsail
     #
     #   resp.port_states #=> Array
     #   resp.port_states[0] #=> String, one of "open", "closed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStates AWS API Documentation
     #
     # @overload get_instance_port_states(params = {})
     # @param [Hash] params ({})
@@ -1338,6 +1388,8 @@ module Aws::Lightsail
     #   resp.instance_snapshot.from_blueprint_id #=> String
     #   resp.instance_snapshot.from_bundle_id #=> String
     #   resp.instance_snapshot.size_in_gb #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshot AWS API Documentation
     #
     # @overload get_instance_snapshot(params = {})
     # @param [Hash] params ({})
@@ -1382,6 +1434,8 @@ module Aws::Lightsail
     #   resp.instance_snapshots[0].size_in_gb #=> Integer
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshots AWS API Documentation
+    #
     # @overload get_instance_snapshots(params = {})
     # @param [Hash] params ({})
     def get_instance_snapshots(params = {}, options = {})
@@ -1409,6 +1463,8 @@ module Aws::Lightsail
     #
     #   resp.state.code #=> Integer
     #   resp.state.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceState AWS API Documentation
     #
     # @overload get_instance_state(params = {})
     # @param [Hash] params ({})
@@ -1485,6 +1541,8 @@ module Aws::Lightsail
     #   resp.instances[0].ssh_key_name #=> String
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances AWS API Documentation
+    #
     # @overload get_instances(params = {})
     # @param [Hash] params ({})
     def get_instances(params = {}, options = {})
@@ -1517,6 +1575,8 @@ module Aws::Lightsail
     #   resp.key_pair.location.region_name #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2"
     #   resp.key_pair.resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.key_pair.fingerprint #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPair AWS API Documentation
     #
     # @overload get_key_pair(params = {})
     # @param [Hash] params ({})
@@ -1554,6 +1614,8 @@ module Aws::Lightsail
     #   resp.key_pairs[0].resource_type #=> String, one of "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc"
     #   resp.key_pairs[0].fingerprint #=> String
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairs AWS API Documentation
     #
     # @overload get_key_pairs(params = {})
     # @param [Hash] params ({})
@@ -1594,6 +1656,8 @@ module Aws::Lightsail
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperation AWS API Documentation
     #
     # @overload get_operation(params = {})
     # @param [Hash] params ({})
@@ -1642,6 +1706,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_details #=> String
     #   resp.next_page_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperations AWS API Documentation
+    #
     # @overload get_operations(params = {})
     # @param [Hash] params ({})
     def get_operations(params = {}, options = {})
@@ -1689,6 +1755,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_details #=> String
     #   resp.next_page_count #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResource AWS API Documentation
+    #
     # @overload get_operations_for_resource(params = {})
     # @param [Hash] params ({})
     def get_operations_for_resource(params = {}, options = {})
@@ -1724,6 +1792,8 @@ module Aws::Lightsail
     #   resp.regions[0].availability_zones[0].zone_name #=> String
     #   resp.regions[0].availability_zones[0].state #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegions AWS API Documentation
+    #
     # @overload get_regions(params = {})
     # @param [Hash] params ({})
     def get_regions(params = {}, options = {})
@@ -1758,6 +1828,8 @@ module Aws::Lightsail
     #   resp.static_ip.ip_address #=> String
     #   resp.static_ip.attached_to #=> String
     #   resp.static_ip.is_attached #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIp AWS API Documentation
     #
     # @overload get_static_ip(params = {})
     # @param [Hash] params ({})
@@ -1797,6 +1869,8 @@ module Aws::Lightsail
     #   resp.static_ips[0].attached_to #=> String
     #   resp.static_ips[0].is_attached #=> Boolean
     #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIps AWS API Documentation
     #
     # @overload get_static_ips(params = {})
     # @param [Hash] params ({})
@@ -1840,6 +1914,8 @@ module Aws::Lightsail
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPair AWS API Documentation
+    #
     # @overload import_key_pair(params = {})
     # @param [Hash] params ({})
     def import_key_pair(params = {}, options = {})
@@ -1857,6 +1933,8 @@ module Aws::Lightsail
     # @example Response structure
     #
     #   resp.is_peered #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeered AWS API Documentation
     #
     # @overload is_vpc_peered(params = {})
     # @param [Hash] params ({})
@@ -1905,6 +1983,8 @@ module Aws::Lightsail
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPorts AWS API Documentation
+    #
     # @overload open_instance_public_ports(params = {})
     # @param [Hash] params ({})
     def open_instance_public_ports(params = {}, options = {})
@@ -1933,6 +2013,8 @@ module Aws::Lightsail
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpc AWS API Documentation
     #
     # @overload peer_vpc(params = {})
     # @param [Hash] params ({})
@@ -1976,6 +2058,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstance AWS API Documentation
+    #
     # @overload reboot_instance(params = {})
     # @param [Hash] params ({})
     def reboot_instance(params = {}, options = {})
@@ -2014,6 +2098,8 @@ module Aws::Lightsail
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIp AWS API Documentation
     #
     # @overload release_static_ip(params = {})
     # @param [Hash] params ({})
@@ -2055,6 +2141,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstance AWS API Documentation
+    #
     # @overload start_instance(params = {})
     # @param [Hash] params ({})
     def start_instance(params = {}, options = {})
@@ -2094,6 +2182,8 @@ module Aws::Lightsail
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstance AWS API Documentation
+    #
     # @overload stop_instance(params = {})
     # @param [Hash] params ({})
     def stop_instance(params = {}, options = {})
@@ -2122,6 +2212,8 @@ module Aws::Lightsail
     #   resp.operation.status_changed_at #=> Time
     #   resp.operation.error_code #=> String
     #   resp.operation.error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpc AWS API Documentation
     #
     # @overload unpeer_vpc(params = {})
     # @param [Hash] params ({})
@@ -2174,6 +2266,8 @@ module Aws::Lightsail
     #   resp.operations[0].status_changed_at #=> Time
     #   resp.operations[0].error_code #=> String
     #   resp.operations[0].error_details #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntry AWS API Documentation
     #
     # @overload update_domain_entry(params = {})
     # @param [Hash] params ({})

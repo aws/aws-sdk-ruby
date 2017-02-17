@@ -244,6 +244,7 @@ to be backwards compatible.
 | AWS CodeDeploy                      | Aws::CodeDeploy                   | aws-sdk-codedeploy                   | 2014-10-06  |
 | AWS CodePipeline                    | Aws::CodePipeline                 | aws-sdk-codepipeline                 | 2015-07-09  |
 | AWS Config                          | Aws::ConfigService                | aws-sdk-configservice                | 2014-11-12  |
+| AWS Cost and Usage Report Service   | Aws::CostandUsageReportService    | aws-sdk-costandusagereportservice    | 2017-01-06  |
 | AWS Data Pipeline                   | Aws::DataPipeline                 | aws-sdk-datapipeline                 | 2012-10-29  |
 | AWS Database Migration Service      | Aws::DatabaseMigrationService     | aws-sdk-databasemigrationservice     | 2016-01-01  |
 | AWS Device Farm                     | Aws::DeviceFarm                   | aws-sdk-devicefarm                   | 2015-06-23  |
@@ -256,8 +257,8 @@ to be backwards compatible.
 | AWS IoT                             | Aws::IoT                          | aws-sdk-iot                          | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                 | aws-sdk-iotdataplane                 | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                          | aws-sdk-kms                          | 2014-11-01  |
-| AWS Lambda                          | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
 | AWS Lambda                          | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
+| AWS Lambda                          | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics | aws-sdk-marketplacecommerceanalytics | 2015-07-01  |
 | AWS OpsWorks                        | Aws::OpsWorks                     | aws-sdk-opsworks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | Aws::OpsWorksCM                   | aws-sdk-opsworkscm                   | 2016-11-01  |

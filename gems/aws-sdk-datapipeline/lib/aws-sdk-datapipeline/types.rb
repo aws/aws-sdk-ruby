@@ -37,6 +37,8 @@ module Aws::DataPipeline
     #   resumes from the last completed execution.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipelineInput AWS API Documentation
+    #
     class ActivatePipelineInput < Struct.new(
       :pipeline_id,
       :parameter_values,
@@ -45,6 +47,8 @@ module Aws::DataPipeline
     end
 
     # Contains the output of ActivatePipeline.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ActivatePipelineOutput AWS API Documentation
     #
     class ActivatePipelineOutput < Aws::EmptyStructure; end
 
@@ -71,6 +75,8 @@ module Aws::DataPipeline
     #   The tags to add, as key/value pairs.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTagsInput AWS API Documentation
+    #
     class AddTagsInput < Struct.new(
       :pipeline_id,
       :tags)
@@ -78,6 +84,8 @@ module Aws::DataPipeline
     end
 
     # Contains the output of AddTags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
@@ -135,6 +143,8 @@ module Aws::DataPipeline
     #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipelineInput AWS API Documentation
+    #
     class CreatePipelineInput < Struct.new(
       :name,
       :unique_id,
@@ -149,6 +159,8 @@ module Aws::DataPipeline
     #   The ID that AWS Data Pipeline assigns the newly created pipeline.
     #   For example, `df-06372391ZG65EXAMPLE`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/CreatePipelineOutput AWS API Documentation
     #
     class CreatePipelineOutput < Struct.new(
       :pipeline_id)
@@ -176,6 +188,8 @@ module Aws::DataPipeline
     #   objects finish.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipelineInput AWS API Documentation
+    #
     class DeactivatePipelineInput < Struct.new(
       :pipeline_id,
       :cancel_active)
@@ -183,6 +197,8 @@ module Aws::DataPipeline
     end
 
     # Contains the output of DeactivatePipeline.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeactivatePipelineOutput AWS API Documentation
     #
     class DeactivatePipelineOutput < Aws::EmptyStructure; end
 
@@ -198,6 +214,8 @@ module Aws::DataPipeline
     # @!attribute [rw] pipeline_id
     #   The ID of the pipeline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DeletePipelineInput AWS API Documentation
     #
     class DeletePipelineInput < Struct.new(
       :pipeline_id)
@@ -238,6 +256,8 @@ module Aws::DataPipeline
     #   previous call to retrieve the next set of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjectsInput AWS API Documentation
+    #
     class DescribeObjectsInput < Struct.new(
       :pipeline_id,
       :object_ids,
@@ -262,6 +282,8 @@ module Aws::DataPipeline
     #   Indicates whether there are more results to return.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribeObjectsOutput AWS API Documentation
+    #
     class DescribeObjectsOutput < Struct.new(
       :pipeline_objects,
       :marker,
@@ -284,6 +306,8 @@ module Aws::DataPipeline
     #   ListPipelines.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelinesInput AWS API Documentation
+    #
     class DescribePipelinesInput < Struct.new(
       :pipeline_ids)
       include Aws::Structure
@@ -294,6 +318,8 @@ module Aws::DataPipeline
     # @!attribute [rw] pipeline_description_list
     #   An array of descriptions for the specified pipelines.
     #   @return [Array<Types::PipelineDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/DescribePipelinesOutput AWS API Documentation
     #
     class DescribePipelinesOutput < Struct.new(
       :pipeline_description_list)
@@ -323,6 +349,8 @@ module Aws::DataPipeline
     #   The expression to evaluate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpressionInput AWS API Documentation
+    #
     class EvaluateExpressionInput < Struct.new(
       :pipeline_id,
       :object_id,
@@ -335,6 +363,8 @@ module Aws::DataPipeline
     # @!attribute [rw] evaluated_expression
     #   The evaluated expression.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/EvaluateExpressionOutput AWS API Documentation
     #
     class EvaluateExpressionOutput < Struct.new(
       :evaluated_expression)
@@ -366,6 +396,8 @@ module Aws::DataPipeline
     #   The field value, expressed as the identifier of another object.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Field AWS API Documentation
+    #
     class Field < Struct.new(
       :key,
       :string_value,
@@ -394,6 +426,8 @@ module Aws::DataPipeline
     #   activated.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinitionInput AWS API Documentation
+    #
     class GetPipelineDefinitionInput < Struct.new(
       :pipeline_id,
       :version)
@@ -413,6 +447,8 @@ module Aws::DataPipeline
     # @!attribute [rw] parameter_values
     #   The parameter values used in the pipeline definition.
     #   @return [Array<Types::ParameterValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/GetPipelineDefinitionOutput AWS API Documentation
     #
     class GetPipelineDefinitionOutput < Struct.new(
       :pipeline_objects,
@@ -453,6 +489,8 @@ module Aws::DataPipeline
     #   document.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/InstanceIdentity AWS API Documentation
+    #
     class InstanceIdentity < Struct.new(
       :document,
       :signature)
@@ -474,6 +512,8 @@ module Aws::DataPipeline
     #   continue to call `ListPipelines` with the marker value from the
     #   previous call to retrieve the next set of results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelinesInput AWS API Documentation
     #
     class ListPipelinesInput < Struct.new(
       :marker)
@@ -498,6 +538,8 @@ module Aws::DataPipeline
     #   Indicates whether there are more results that can be obtained by a
     #   subsequent call.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ListPipelinesOutput AWS API Documentation
     #
     class ListPipelinesOutput < Struct.new(
       :pipeline_id_list,
@@ -557,6 +599,8 @@ module Aws::DataPipeline
     #   The value that the actual field value will be compared with.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Operator AWS API Documentation
+    #
     class Operator < Struct.new(
       :type,
       :values)
@@ -580,6 +624,8 @@ module Aws::DataPipeline
     # @!attribute [rw] string_value
     #   The field value, expressed as a String.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ParameterAttribute AWS API Documentation
     #
     class ParameterAttribute < Struct.new(
       :key,
@@ -610,6 +656,8 @@ module Aws::DataPipeline
     #   The attributes of the parameter object.
     #   @return [Array<Types::ParameterAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ParameterObject AWS API Documentation
+    #
     class ParameterObject < Struct.new(
       :id,
       :attributes)
@@ -633,6 +681,8 @@ module Aws::DataPipeline
     # @!attribute [rw] string_value
     #   The field value, expressed as a String.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ParameterValue AWS API Documentation
     #
     class ParameterValue < Struct.new(
       :id,
@@ -670,6 +720,8 @@ module Aws::DataPipeline
     #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineDescription AWS API Documentation
+    #
     class PipelineDescription < Struct.new(
       :pipeline_id,
       :name,
@@ -689,6 +741,8 @@ module Aws::DataPipeline
     # @!attribute [rw] name
     #   The name of the pipeline.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineIdName AWS API Documentation
     #
     class PipelineIdName < Struct.new(
       :id,
@@ -726,6 +780,8 @@ module Aws::DataPipeline
     # @!attribute [rw] fields
     #   Key-value pairs that define the properties of the object.
     #   @return [Array<Types::Field>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PipelineObject AWS API Documentation
     #
     class PipelineObject < Struct.new(
       :id,
@@ -775,6 +831,8 @@ module Aws::DataPipeline
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
     #   @return [Types::InstanceIdentity]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTaskInput AWS API Documentation
+    #
     class PollForTaskInput < Struct.new(
       :worker_group,
       :hostname,
@@ -791,6 +849,8 @@ module Aws::DataPipeline
     #   The calling task runner uses `taskId` in subsequent calls to
     #   ReportTaskProgress and SetTaskStatus.
     #   @return [Types::TaskObject]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PollForTaskOutput AWS API Documentation
     #
     class PollForTaskOutput < Struct.new(
       :task_object)
@@ -853,6 +913,8 @@ module Aws::DataPipeline
     #   The parameter values used with the pipeline.
     #   @return [Array<Types::ParameterValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinitionInput AWS API Documentation
+    #
     class PutPipelineDefinitionInput < Struct.new(
       :pipeline_id,
       :pipeline_objects,
@@ -879,6 +941,8 @@ module Aws::DataPipeline
     #   pipeline and call `PutPipelineDefinition` to commit the corrected
     #   pipeline.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/PutPipelineDefinitionOutput AWS API Documentation
     #
     class PutPipelineDefinitionOutput < Struct.new(
       :validation_errors,
@@ -908,6 +972,8 @@ module Aws::DataPipeline
     #   List of selectors that define the query. An object must satisfy all
     #   of the selectors to match the query.
     #   @return [Array<Types::Selector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Query AWS API Documentation
     #
     class Query < Struct.new(
       :selectors)
@@ -965,6 +1031,8 @@ module Aws::DataPipeline
     #   in a single call. The default value is 100.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjectsInput AWS API Documentation
+    #
     class QueryObjectsInput < Struct.new(
       :pipeline_id,
       :query,
@@ -991,6 +1059,8 @@ module Aws::DataPipeline
     #   subsequent call.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/QueryObjectsOutput AWS API Documentation
+    #
     class QueryObjectsOutput < Struct.new(
       :ids,
       :marker,
@@ -1016,6 +1086,8 @@ module Aws::DataPipeline
     #   The keys of the tags to remove.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTagsInput AWS API Documentation
+    #
     class RemoveTagsInput < Struct.new(
       :pipeline_id,
       :tag_keys)
@@ -1023,6 +1095,8 @@ module Aws::DataPipeline
     end
 
     # Contains the output of RemoveTags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/RemoveTagsOutput AWS API Documentation
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
@@ -1052,6 +1126,8 @@ module Aws::DataPipeline
     #   ReportTaskProgressInput object.
     #   @return [Array<Types::Field>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgressInput AWS API Documentation
+    #
     class ReportTaskProgressInput < Struct.new(
       :task_id,
       :fields)
@@ -1065,6 +1141,8 @@ module Aws::DataPipeline
     #   task. The task runner does not need to call SetTaskStatus for
     #   canceled tasks.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskProgressOutput AWS API Documentation
     #
     class ReportTaskProgressOutput < Struct.new(
       :canceled)
@@ -1103,6 +1181,8 @@ module Aws::DataPipeline
     #   The public DNS name of the task runner.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeatInput AWS API Documentation
+    #
     class ReportTaskRunnerHeartbeatInput < Struct.new(
       :taskrunner_id,
       :worker_group,
@@ -1115,6 +1195,8 @@ module Aws::DataPipeline
     # @!attribute [rw] terminate
     #   Indicates whether the calling task runner should terminate.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ReportTaskRunnerHeartbeatOutput AWS API Documentation
     #
     class ReportTaskRunnerHeartbeatOutput < Struct.new(
       :terminate)
@@ -1147,6 +1229,8 @@ module Aws::DataPipeline
     #   a specified value.
     #   @return [Types::Operator]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Selector AWS API Documentation
+    #
     class Selector < Struct.new(
       :field_name,
       :operator)
@@ -1178,6 +1262,8 @@ module Aws::DataPipeline
     #   For components, use `PAUSE` or `RESUME`. For instances, use
     #   `TRY_CANCEL`, `RERUN`, or `MARK_FINISHED`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetStatusInput AWS API Documentation
     #
     class SetStatusInput < Struct.new(
       :pipeline_id,
@@ -1230,6 +1316,8 @@ module Aws::DataPipeline
     #   The web service does not parse this value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatusInput AWS API Documentation
+    #
     class SetTaskStatusInput < Struct.new(
       :task_id,
       :task_status,
@@ -1240,6 +1328,8 @@ module Aws::DataPipeline
     end
 
     # Contains the output of SetTaskStatus.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/SetTaskStatusOutput AWS API Documentation
     #
     class SetTaskStatusOutput < Aws::EmptyStructure; end
 
@@ -1280,6 +1370,8 @@ module Aws::DataPipeline
     #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -1307,6 +1399,8 @@ module Aws::DataPipeline
     #   Connection information for the location where the task runner will
     #   publish the output of the task.
     #   @return [Hash<String,Types::PipelineObject>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/TaskObject AWS API Documentation
     #
     class TaskObject < Struct.new(
       :task_id,
@@ -1372,6 +1466,8 @@ module Aws::DataPipeline
     #   The parameter values used with the pipeline.
     #   @return [Array<Types::ParameterValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinitionInput AWS API Documentation
+    #
     class ValidatePipelineDefinitionInput < Struct.new(
       :pipeline_id,
       :pipeline_objects,
@@ -1394,6 +1490,8 @@ module Aws::DataPipeline
     #   Indicates whether there were validation errors.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidatePipelineDefinitionOutput AWS API Documentation
+    #
     class ValidatePipelineDefinitionOutput < Struct.new(
       :validation_errors,
       :validation_warnings,
@@ -1413,6 +1511,8 @@ module Aws::DataPipeline
     #   A description of the validation error.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidationError AWS API Documentation
+    #
     class ValidationError < Struct.new(
       :id,
       :errors)
@@ -1430,6 +1530,8 @@ module Aws::DataPipeline
     # @!attribute [rw] warnings
     #   A description of the validation warning.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datapipeline-2012-10-29/ValidationWarning AWS API Documentation
     #
     class ValidationWarning < Struct.new(
       :id,

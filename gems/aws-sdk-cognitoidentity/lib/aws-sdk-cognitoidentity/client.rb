@@ -245,6 +245,8 @@ module Aws::CognitoIdentity
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CreateIdentityPool AWS API Documentation
+    #
     # @overload create_identity_pool(params = {})
     # @param [Hash] params ({})
     def create_identity_pool(params = {}, options = {})
@@ -276,6 +278,8 @@ module Aws::CognitoIdentity
     #   resp.unprocessed_identity_ids[0].identity_id #=> String
     #   resp.unprocessed_identity_ids[0].error_code #=> String, one of "AccessDenied", "InternalServerError"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentities AWS API Documentation
+    #
     # @overload delete_identities(params = {})
     # @param [Hash] params ({})
     def delete_identities(params = {}, options = {})
@@ -298,6 +302,8 @@ module Aws::CognitoIdentity
     #   resp = client.delete_identity_pool({
     #     identity_pool_id: "IdentityPoolId", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DeleteIdentityPool AWS API Documentation
     #
     # @overload delete_identity_pool(params = {})
     # @param [Hash] params ({})
@@ -334,6 +340,8 @@ module Aws::CognitoIdentity
     #   resp.logins[0] #=> String
     #   resp.creation_date #=> Time
     #   resp.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentity AWS API Documentation
     #
     # @overload describe_identity(params = {})
     # @param [Hash] params ({})
@@ -382,6 +390,8 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers[0].client_id #=> String
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/DescribeIdentityPool AWS API Documentation
     #
     # @overload describe_identity_pool(params = {})
     # @param [Hash] params ({})
@@ -433,6 +443,8 @@ module Aws::CognitoIdentity
     #   resp.credentials.secret_key #=> String
     #   resp.credentials.session_token #=> String
     #   resp.credentials.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetCredentialsForIdentity AWS API Documentation
     #
     # @overload get_credentials_for_identity(params = {})
     # @param [Hash] params ({})
@@ -488,6 +500,8 @@ module Aws::CognitoIdentity
     #
     #   resp.identity_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetId AWS API Documentation
+    #
     # @overload get_id(params = {})
     # @param [Hash] params ({})
     def get_id(params = {}, options = {})
@@ -527,6 +541,8 @@ module Aws::CognitoIdentity
     #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].match_type #=> String, one of "Equals", "Contains", "StartsWith", "NotEqual"
     #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].value #=> String
     #   resp.role_mappings["IdentityProviderName"].rules_configuration.rules[0].role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetIdentityPoolRoles AWS API Documentation
     #
     # @overload get_identity_pool_roles(params = {})
     # @param [Hash] params ({})
@@ -572,6 +588,8 @@ module Aws::CognitoIdentity
     #
     #   resp.identity_id #=> String
     #   resp.token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdToken AWS API Documentation
     #
     # @overload get_open_id_token(params = {})
     # @param [Hash] params ({})
@@ -648,6 +666,8 @@ module Aws::CognitoIdentity
     #   resp.identity_id #=> String
     #   resp.token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/GetOpenIdTokenForDeveloperIdentity AWS API Documentation
+    #
     # @overload get_open_id_token_for_developer_identity(params = {})
     # @param [Hash] params ({})
     def get_open_id_token_for_developer_identity(params = {}, options = {})
@@ -699,6 +719,8 @@ module Aws::CognitoIdentity
     #   resp.identities[0].last_modified_date #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentities AWS API Documentation
+    #
     # @overload list_identities(params = {})
     # @param [Hash] params ({})
     def list_identities(params = {}, options = {})
@@ -734,6 +756,8 @@ module Aws::CognitoIdentity
     #   resp.identity_pools[0].identity_pool_id #=> String
     #   resp.identity_pools[0].identity_pool_name #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/ListIdentityPools AWS API Documentation
     #
     # @overload list_identity_pools(params = {})
     # @param [Hash] params ({})
@@ -801,6 +825,8 @@ module Aws::CognitoIdentity
     #   resp.developer_user_identifier_list[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/LookupDeveloperIdentity AWS API Documentation
+    #
     # @overload lookup_developer_identity(params = {})
     # @param [Hash] params ({})
     def lookup_developer_identity(params = {}, options = {})
@@ -855,6 +881,8 @@ module Aws::CognitoIdentity
     # @example Response structure
     #
     #   resp.identity_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/MergeDeveloperIdentities AWS API Documentation
     #
     # @overload merge_developer_identities(params = {})
     # @param [Hash] params ({})
@@ -911,6 +939,8 @@ module Aws::CognitoIdentity
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/SetIdentityPoolRoles AWS API Documentation
+    #
     # @overload set_identity_pool_roles(params = {})
     # @param [Hash] params ({})
     def set_identity_pool_roles(params = {}, options = {})
@@ -950,6 +980,8 @@ module Aws::CognitoIdentity
     #     developer_user_identifier: "DeveloperUserIdentifier", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkDeveloperIdentity AWS API Documentation
+    #
     # @overload unlink_developer_identity(params = {})
     # @param [Hash] params ({})
     def unlink_developer_identity(params = {}, options = {})
@@ -985,6 +1017,8 @@ module Aws::CognitoIdentity
     #     },
     #     logins_to_remove: ["IdentityProviderName"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UnlinkIdentity AWS API Documentation
     #
     # @overload unlink_identity(params = {})
     # @param [Hash] params ({})
@@ -1070,6 +1104,8 @@ module Aws::CognitoIdentity
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/UpdateIdentityPool AWS API Documentation
+    #
     # @overload update_identity_pool(params = {})
     # @param [Hash] params ({})
     def update_identity_pool(params = {}, options = {})
@@ -1090,7 +1126,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

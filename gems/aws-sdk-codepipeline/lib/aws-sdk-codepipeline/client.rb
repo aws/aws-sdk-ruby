@@ -181,6 +181,8 @@ module Aws::CodePipeline
     #
     #   resp.status #=> String, one of "Created", "Queued", "Dispatched", "InProgress", "TimedOut", "Succeeded", "Failed"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeJob AWS API Documentation
+    #
     # @overload acknowledge_job(params = {})
     # @param [Hash] params ({})
     def acknowledge_job(params = {}, options = {})
@@ -219,6 +221,8 @@ module Aws::CodePipeline
     # @example Response structure
     #
     #   resp.status #=> String, one of "Created", "Queued", "Dispatched", "InProgress", "TimedOut", "Succeeded", "Failed"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/AcknowledgeThirdPartyJob AWS API Documentation
     #
     # @overload acknowledge_third_party_job(params = {})
     # @param [Hash] params ({})
@@ -330,6 +334,8 @@ module Aws::CodePipeline
     #   resp.action_type.output_artifact_details.minimum_count #=> Integer
     #   resp.action_type.output_artifact_details.maximum_count #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreateCustomActionType AWS API Documentation
+    #
     # @overload create_custom_action_type(params = {})
     # @param [Hash] params ({})
     def create_custom_action_type(params = {}, options = {})
@@ -431,6 +437,8 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.version #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/CreatePipeline AWS API Documentation
+    #
     # @overload create_pipeline(params = {})
     # @param [Hash] params ({})
     def create_pipeline(params = {}, options = {})
@@ -466,6 +474,8 @@ module Aws::CodePipeline
     #     version: "Version", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteCustomActionType AWS API Documentation
+    #
     # @overload delete_custom_action_type(params = {})
     # @param [Hash] params ({})
     def delete_custom_action_type(params = {}, options = {})
@@ -485,6 +495,8 @@ module Aws::CodePipeline
     #   resp = client.delete_pipeline({
     #     name: "PipelineName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeletePipeline AWS API Documentation
     #
     # @overload delete_pipeline(params = {})
     # @param [Hash] params ({})
@@ -526,6 +538,8 @@ module Aws::CodePipeline
     #     reason: "DisabledReason", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DisableStageTransition AWS API Documentation
+    #
     # @overload disable_stage_transition(params = {})
     # @param [Hash] params ({})
     def disable_stage_transition(params = {}, options = {})
@@ -560,6 +574,8 @@ module Aws::CodePipeline
     #     stage_name: "StageName", # required
     #     transition_type: "Inbound", # required, accepts Inbound, Outbound
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/EnableStageTransition AWS API Documentation
     #
     # @overload enable_stage_transition(params = {})
     # @param [Hash] params ({})
@@ -620,6 +636,8 @@ module Aws::CodePipeline
     #   resp.job_details.data.encryption_key.id #=> String
     #   resp.job_details.data.encryption_key.type #=> String, one of "KMS"
     #   resp.job_details.account_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetJobDetails AWS API Documentation
     #
     # @overload get_job_details(params = {})
     # @param [Hash] params ({})
@@ -682,6 +700,8 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.version #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipeline AWS API Documentation
+    #
     # @overload get_pipeline(params = {})
     # @param [Hash] params ({})
     def get_pipeline(params = {}, options = {})
@@ -725,6 +745,8 @@ module Aws::CodePipeline
     #   resp.pipeline_execution.artifact_revisions[0].revision_summary #=> String
     #   resp.pipeline_execution.artifact_revisions[0].created #=> Time
     #   resp.pipeline_execution.artifact_revisions[0].revision_url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineExecution AWS API Documentation
     #
     # @overload get_pipeline_execution(params = {})
     # @param [Hash] params ({})
@@ -784,6 +806,8 @@ module Aws::CodePipeline
     #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Succeeded"
     #   resp.created #=> Time
     #   resp.updated #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetPipelineState AWS API Documentation
     #
     # @overload get_pipeline_state(params = {})
     # @param [Hash] params ({})
@@ -852,6 +876,8 @@ module Aws::CodePipeline
     #   resp.job_details.data.encryption_key.type #=> String, one of "KMS"
     #   resp.job_details.nonce #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/GetThirdPartyJobDetails AWS API Documentation
+    #
     # @overload get_third_party_job_details(params = {})
     # @param [Hash] params ({})
     def get_third_party_job_details(params = {}, options = {})
@@ -908,6 +934,8 @@ module Aws::CodePipeline
     #   resp.action_types[0].output_artifact_details.maximum_count #=> Integer
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListActionTypes AWS API Documentation
+    #
     # @overload list_action_types(params = {})
     # @param [Hash] params ({})
     def list_action_types(params = {}, options = {})
@@ -940,6 +968,8 @@ module Aws::CodePipeline
     #   resp.pipelines[0].created #=> Time
     #   resp.pipelines[0].updated #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListPipelines AWS API Documentation
     #
     # @overload list_pipelines(params = {})
     # @param [Hash] params ({})
@@ -1022,6 +1052,8 @@ module Aws::CodePipeline
     #   resp.jobs[0].nonce #=> String
     #   resp.jobs[0].account_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForJobs AWS API Documentation
+    #
     # @overload poll_for_jobs(params = {})
     # @param [Hash] params ({})
     def poll_for_jobs(params = {}, options = {})
@@ -1064,6 +1096,8 @@ module Aws::CodePipeline
     #   resp.jobs #=> Array
     #   resp.jobs[0].client_id #=> String
     #   resp.jobs[0].job_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PollForThirdPartyJobs AWS API Documentation
     #
     # @overload poll_for_third_party_jobs(params = {})
     # @param [Hash] params ({})
@@ -1111,6 +1145,8 @@ module Aws::CodePipeline
     #
     #   resp.new_revision #=> Boolean
     #   resp.pipeline_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutActionRevision AWS API Documentation
     #
     # @overload put_action_revision(params = {})
     # @param [Hash] params ({})
@@ -1161,6 +1197,8 @@ module Aws::CodePipeline
     #
     #   resp.approved_at #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutApprovalResult AWS API Documentation
+    #
     # @overload put_approval_result(params = {})
     # @param [Hash] params ({})
     def put_approval_result(params = {}, options = {})
@@ -1190,6 +1228,8 @@ module Aws::CodePipeline
     #       external_execution_id: "ExecutionId",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobFailureResult AWS API Documentation
     #
     # @overload put_job_failure_result(params = {})
     # @param [Hash] params ({})
@@ -1241,6 +1281,8 @@ module Aws::CodePipeline
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutJobSuccessResult AWS API Documentation
+    #
     # @overload put_job_success_result(params = {})
     # @param [Hash] params ({})
     def put_job_success_result(params = {}, options = {})
@@ -1276,6 +1318,8 @@ module Aws::CodePipeline
     #       external_execution_id: "ExecutionId",
     #     },
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobFailureResult AWS API Documentation
     #
     # @overload put_third_party_job_failure_result(params = {})
     # @param [Hash] params ({})
@@ -1333,6 +1377,8 @@ module Aws::CodePipeline
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutThirdPartyJobSuccessResult AWS API Documentation
+    #
     # @overload put_third_party_job_success_result(params = {})
     # @param [Hash] params ({})
     def put_third_party_job_success_result(params = {}, options = {})
@@ -1375,6 +1421,8 @@ module Aws::CodePipeline
     #
     #   resp.pipeline_execution_id #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RetryStageExecution AWS API Documentation
+    #
     # @overload retry_stage_execution(params = {})
     # @param [Hash] params ({})
     def retry_stage_execution(params = {}, options = {})
@@ -1402,6 +1450,8 @@ module Aws::CodePipeline
     # @example Response structure
     #
     #   resp.pipeline_execution_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/StartPipelineExecution AWS API Documentation
     #
     # @overload start_pipeline_execution(params = {})
     # @param [Hash] params ({})
@@ -1505,6 +1555,8 @@ module Aws::CodePipeline
     #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
     #   resp.pipeline.stages[0].actions[0].role_arn #=> String
     #   resp.pipeline.version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/UpdatePipeline AWS API Documentation
     #
     # @overload update_pipeline(params = {})
     # @param [Hash] params ({})

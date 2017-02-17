@@ -92,6 +92,8 @@ module Aws::Snowball
     #   delivered to.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Address AWS API Documentation
+    #
     class Address < Struct.new(
       :address_id,
       :name,
@@ -121,11 +123,15 @@ module Aws::Snowball
     #   example `CID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelClusterRequest AWS API Documentation
+    #
     class CancelClusterRequest < Struct.new(
       :cluster_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelClusterResult AWS API Documentation
+    #
     class CancelClusterResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass CancelJobRequest
@@ -140,11 +146,15 @@ module Aws::Snowball
     #   example `JID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobRequest AWS API Documentation
+    #
     class CancelJobRequest < Struct.new(
       :job_id)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CancelJobResult AWS API Documentation
+    #
     class CancelJobResult < Aws::EmptyStructure; end
 
     # Contains a cluster's state, a cluster's ID, and other important
@@ -168,6 +178,8 @@ module Aws::Snowball
     #   Defines an optional description of the cluster, for example
     #   `Environmental Data Cluster-01`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterListEntry AWS API Documentation
     #
     class ClusterListEntry < Struct.new(
       :cluster_id,
@@ -261,6 +273,8 @@ module Aws::Snowball
     #   settings for this cluster.
     #   @return [Types::Notification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterMetadata AWS API Documentation
+    #
     class ClusterMetadata < Struct.new(
       :cluster_id,
       :description,
@@ -302,6 +316,8 @@ module Aws::Snowball
     #   The address that you want the Snowball shipped to.
     #   @return [Types::Address]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddressRequest AWS API Documentation
+    #
     class CreateAddressRequest < Struct.new(
       :address)
       include Aws::Structure
@@ -312,6 +328,8 @@ module Aws::Snowball
     #   this ID when you create a job to specify which address you want the
     #   Snowball for that job shipped to.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateAddressResult AWS API Documentation
     #
     class CreateAddressResult < Struct.new(
       :address_id)
@@ -429,6 +447,8 @@ module Aws::Snowball
     #   settings for this cluster.
     #   @return [Types::Notification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterRequest AWS API Documentation
+    #
     class CreateClusterRequest < Struct.new(
       :job_type,
       :resources,
@@ -445,6 +465,8 @@ module Aws::Snowball
     # @!attribute [rw] cluster_id
     #   The automatically generated ID for a cluster.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterResult AWS API Documentation
     #
     class CreateClusterResult < Struct.new(
       :cluster_id)
@@ -581,6 +603,8 @@ module Aws::Snowball
     #   the only supported appliance type for cluster jobs is `EDGE`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest AWS API Documentation
+    #
     class CreateJobRequest < Struct.new(
       :job_type,
       :resources,
@@ -600,6 +624,8 @@ module Aws::Snowball
     #   The automatically generated ID for a job, for example
     #   `JID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobResult AWS API Documentation
     #
     class CreateJobResult < Struct.new(
       :job_id)
@@ -630,6 +656,8 @@ module Aws::Snowball
     #   will be transferred have been listed.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DataTransfer AWS API Documentation
+    #
     class DataTransfer < Struct.new(
       :bytes_transferred,
       :objects_transferred,
@@ -649,6 +677,8 @@ module Aws::Snowball
     #   The automatically generated ID for a specific address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressRequest AWS API Documentation
+    #
     class DescribeAddressRequest < Struct.new(
       :address_id)
       include Aws::Structure
@@ -658,6 +688,8 @@ module Aws::Snowball
     #   The address that you want the Snowball or Snowballs associated with
     #   a specific job to be shipped to.
     #   @return [Types::Address]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressResult AWS API Documentation
     #
     class DescribeAddressResult < Struct.new(
       :address)
@@ -683,6 +715,8 @@ module Aws::Snowball
     #   returned addresses.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressesRequest AWS API Documentation
+    #
     class DescribeAddressesRequest < Struct.new(
       :max_results,
       :next_token)
@@ -698,6 +732,8 @@ module Aws::Snowball
     #   `NextToken` value in your next `DescribeAddresses` call, your list
     #   of returned addresses will start from this point in the array.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddressesResult AWS API Documentation
     #
     class DescribeAddressesResult < Struct.new(
       :addresses,
@@ -716,6 +752,8 @@ module Aws::Snowball
     #   The automatically generated ID for a cluster.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeClusterRequest AWS API Documentation
+    #
     class DescribeClusterRequest < Struct.new(
       :cluster_id)
       include Aws::Structure
@@ -725,6 +763,8 @@ module Aws::Snowball
     #   Information about a specific cluster, including shipping
     #   information, cluster status, and other important metadata.
     #   @return [Types::ClusterMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeClusterResult AWS API Documentation
     #
     class DescribeClusterResult < Struct.new(
       :cluster_metadata)
@@ -743,6 +783,8 @@ module Aws::Snowball
     #   `JID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJobRequest AWS API Documentation
+    #
     class DescribeJobRequest < Struct.new(
       :job_id)
       include Aws::Structure
@@ -758,6 +800,8 @@ module Aws::Snowball
     #   job), including shipping information, job status, and other
     #   important metadata.
     #   @return [Array<Types::JobMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJobResult AWS API Documentation
     #
     class DescribeJobResult < Struct.new(
       :job_metadata,
@@ -779,6 +823,8 @@ module Aws::Snowball
     #   is an AWS Lambda function's event trigger associated with this job.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/EventTriggerDefinition AWS API Documentation
+    #
     class EventTriggerDefinition < Struct.new(
       :event_resource_arn)
       include Aws::Structure
@@ -796,6 +842,8 @@ module Aws::Snowball
     #   example `JID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifestRequest AWS API Documentation
+    #
     class GetJobManifestRequest < Struct.new(
       :job_id)
       include Aws::Structure
@@ -805,6 +853,8 @@ module Aws::Snowball
     #   The Amazon S3 presigned URL for the manifest file associated with
     #   the specified `JobId` value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobManifestResult AWS API Documentation
     #
     class GetJobManifestResult < Struct.new(
       :manifest_uri)
@@ -823,6 +873,8 @@ module Aws::Snowball
     #   for example `JID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCodeRequest AWS API Documentation
+    #
     class GetJobUnlockCodeRequest < Struct.new(
       :job_id)
       include Aws::Structure
@@ -833,12 +885,16 @@ module Aws::Snowball
     #   can be accessed for up to 90 days after the job has been created.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetJobUnlockCodeResult AWS API Documentation
+    #
     class GetJobUnlockCodeResult < Struct.new(
       :unlock_code)
       include Aws::Structure
     end
 
     # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsageRequest AWS API Documentation
     #
     class GetSnowballUsageRequest < Aws::EmptyStructure; end
 
@@ -850,6 +906,8 @@ module Aws::Snowball
     # @!attribute [rw] snowballs_in_use
     #   The number of Snowballs that this account is currently using.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/GetSnowballUsageResult AWS API Documentation
     #
     class GetSnowballUsageResult < Struct.new(
       :snowball_limit,
@@ -896,6 +954,8 @@ module Aws::Snowball
     #   The optional description of this specific job, for example
     #   `Important Photos 2016-08-11`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobListEntry AWS API Documentation
     #
     class JobListEntry < Struct.new(
       :job_id,
@@ -945,6 +1005,8 @@ module Aws::Snowball
     #   A link to an Amazon S3 presigned URL where the job failure log is
     #   located.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobLogs AWS API Documentation
     #
     class JobLogs < Struct.new(
       :job_completion_report_uri,
@@ -1043,6 +1105,8 @@ module Aws::Snowball
     #   `CID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
+    #
     class JobMetadata < Struct.new(
       :job_id,
       :job_state,
@@ -1100,6 +1164,8 @@ module Aws::Snowball
     #   The Python-language Lambda functions for this job.
     #   @return [Array<Types::LambdaResource>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobResource AWS API Documentation
+    #
     class JobResource < Struct.new(
       :s3_resources,
       :lambda_resources)
@@ -1128,6 +1194,8 @@ module Aws::Snowball
     #   The key that ends an optional key range for an export job. Ranges
     #   are inclusive and UTF-8 binary sorted.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/KeyRange AWS API Documentation
     #
     class KeyRange < Struct.new(
       :begin_marker,
@@ -1160,6 +1228,8 @@ module Aws::Snowball
     #   LambdaResource objects associated with this job.
     #   @return [Array<Types::EventTriggerDefinition>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/LambdaResource AWS API Documentation
+    #
     class LambdaResource < Struct.new(
       :lambda_arn,
       :event_triggers)
@@ -1190,6 +1260,8 @@ module Aws::Snowball
     #   specifying `NextToken` as the starting point for your returned list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobsRequest AWS API Documentation
+    #
     class ListClusterJobsRequest < Struct.new(
       :cluster_id,
       :max_results,
@@ -1208,6 +1280,8 @@ module Aws::Snowball
     #   `NextToken` value in your next `ListClusterJobsResult` call, your
     #   list of returned jobs will start from this point in the array.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClusterJobsResult AWS API Documentation
     #
     class ListClusterJobsResult < Struct.new(
       :job_list_entries,
@@ -1233,6 +1307,8 @@ module Aws::Snowball
     #   specifying `NextToken` as the starting point for your returned list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClustersRequest AWS API Documentation
+    #
     class ListClustersRequest < Struct.new(
       :max_results,
       :next_token)
@@ -1249,6 +1325,8 @@ module Aws::Snowball
     #   `NextToken` value in your next `ClusterListEntry` call, your list of
     #   returned clusters will start from this point in the array.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListClustersResult AWS API Documentation
     #
     class ListClustersResult < Struct.new(
       :cluster_list_entries,
@@ -1274,6 +1352,8 @@ module Aws::Snowball
     #   specifying `NextToken` as the starting point for your returned list.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobsRequest AWS API Documentation
+    #
     class ListJobsRequest < Struct.new(
       :max_results,
       :next_token)
@@ -1291,6 +1371,8 @@ module Aws::Snowball
     #   `NextToken` value in your next `ListJobs` call, your returned
     #   `JobListEntry` objects will start from this point in the array.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ListJobsResult AWS API Documentation
     #
     class ListJobsResult < Struct.new(
       :job_list_entries,
@@ -1342,6 +1424,8 @@ module Aws::Snowball
     #   Any change in job state will trigger a notification for this job.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Notification AWS API Documentation
+    #
     class Notification < Struct.new(
       :sns_topic_arn,
       :job_states_to_notify,
@@ -1378,6 +1462,8 @@ module Aws::Snowball
     #   `EndMarker`, or both. Ranges are UTF-8 binary sorted.
     #   @return [Types::KeyRange]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/S3Resource AWS API Documentation
+    #
     class S3Resource < Struct.new(
       :bucket_arn,
       :key_range)
@@ -1400,6 +1486,8 @@ module Aws::Snowball
     #   For India, the carrier is Amazon Logistics. For all other regions,
     #   UPS is the carrier.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Shipment AWS API Documentation
     #
     class Shipment < Struct.new(
       :status,
@@ -1439,6 +1527,8 @@ module Aws::Snowball
     #   The `Status` and `TrackingNumber` values for a Snowball being
     #   returned to AWS for a particular job.
     #   @return [Types::Shipment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ShippingDetails AWS API Documentation
     #
     class ShippingDetails < Struct.new(
       :shipping_option,
@@ -1521,6 +1611,8 @@ module Aws::Snowball
     #   The new or updated Notification object.
     #   @return [Types::Notification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateClusterRequest AWS API Documentation
+    #
     class UpdateClusterRequest < Struct.new(
       :cluster_id,
       :role_arn,
@@ -1532,6 +1624,8 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateClusterResult AWS API Documentation
+    #
     class UpdateClusterResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateJobRequest
@@ -1615,6 +1709,8 @@ module Aws::Snowball
     #   object. The 50 TB Snowballs are only available in the US regions.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobRequest AWS API Documentation
+    #
     class UpdateJobRequest < Struct.new(
       :job_id,
       :role_arn,
@@ -1627,6 +1723,8 @@ module Aws::Snowball
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobResult AWS API Documentation
+    #
     class UpdateJobResult < Aws::EmptyStructure; end
 
   end

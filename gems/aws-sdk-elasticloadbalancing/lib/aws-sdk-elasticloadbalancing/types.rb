@@ -41,6 +41,8 @@ module Aws::ElasticLoadBalancing
     #   log is placed at the root level of the bucket.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AccessLog AWS API Documentation
+    #
     class AccessLog < Struct.new(
       :enabled,
       :s3_bucket_name,
@@ -68,6 +70,8 @@ module Aws::ElasticLoadBalancing
     #   balancer.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddAvailabilityZonesInput AWS API Documentation
+    #
     class AddAvailabilityZonesInput < Struct.new(
       :load_balancer_name,
       :availability_zones)
@@ -79,6 +83,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] availability_zones
     #   The updated list of Availability Zones for the load balancer.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddAvailabilityZonesOutput AWS API Documentation
     #
     class AddAvailabilityZonesOutput < Struct.new(
       :availability_zones)
@@ -109,6 +115,8 @@ module Aws::ElasticLoadBalancing
     #   The tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTagsInput AWS API Documentation
+    #
     class AddTagsInput < Struct.new(
       :load_balancer_names,
       :tags)
@@ -116,6 +124,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of AddTags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
 
@@ -137,6 +147,8 @@ module Aws::ElasticLoadBalancing
     #   This parameter is reserved.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AdditionalAttribute AWS API Documentation
+    #
     class AdditionalAttribute < Struct.new(
       :key,
       :value)
@@ -154,6 +166,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] cookie_name
     #   The name of the application cookie used for stickiness.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AppCookieStickinessPolicy AWS API Documentation
     #
     class AppCookieStickinessPolicy < Struct.new(
       :policy_name,
@@ -180,6 +194,8 @@ module Aws::ElasticLoadBalancing
     #   Note that you cannot specify the name of the security group.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancerInput AWS API Documentation
+    #
     class ApplySecurityGroupsToLoadBalancerInput < Struct.new(
       :load_balancer_name,
       :security_groups)
@@ -191,6 +207,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] security_groups
     #   The IDs of the security groups associated with the load balancer.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ApplySecurityGroupsToLoadBalancerOutput AWS API Documentation
     #
     class ApplySecurityGroupsToLoadBalancerOutput < Struct.new(
       :security_groups)
@@ -216,6 +234,8 @@ module Aws::ElasticLoadBalancing
     #   Availability Zone.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnetsInput AWS API Documentation
+    #
     class AttachLoadBalancerToSubnetsInput < Struct.new(
       :load_balancer_name,
       :subnets)
@@ -227,6 +247,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] subnets
     #   The IDs of the subnets attached to the load balancer.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/AttachLoadBalancerToSubnetsOutput AWS API Documentation
     #
     class AttachLoadBalancerToSubnetsOutput < Struct.new(
       :subnets)
@@ -242,6 +264,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] policy_names
     #   The names of the policies enabled for the EC2 instance.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/BackendServerDescription AWS API Documentation
     #
     class BackendServerDescription < Struct.new(
       :instance_port,
@@ -273,6 +297,8 @@ module Aws::ElasticLoadBalancing
     #   The configuration information.
     #   @return [Types::HealthCheck]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheckInput AWS API Documentation
+    #
     class ConfigureHealthCheckInput < Struct.new(
       :load_balancer_name,
       :health_check)
@@ -284,6 +310,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] health_check
     #   The updated health check.
     #   @return [Types::HealthCheck]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConfigureHealthCheckOutput AWS API Documentation
     #
     class ConfigureHealthCheckOutput < Struct.new(
       :health_check)
@@ -310,6 +338,8 @@ module Aws::ElasticLoadBalancing
     #   before deregistering the instances.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConnectionDraining AWS API Documentation
+    #
     class ConnectionDraining < Struct.new(
       :enabled,
       :timeout)
@@ -330,6 +360,8 @@ module Aws::ElasticLoadBalancing
     #   data has been sent over the connection) before it is closed by the
     #   load balancer.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ConnectionSettings AWS API Documentation
     #
     class ConnectionSettings < Struct.new(
       :idle_timeout)
@@ -432,6 +464,8 @@ module Aws::ElasticLoadBalancing
     #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAccessPointInput AWS API Documentation
+    #
     class CreateAccessPointInput < Struct.new(
       :load_balancer_name,
       :listeners,
@@ -448,6 +482,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] dns_name
     #   The DNS name of the load balancer.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAccessPointOutput AWS API Documentation
     #
     class CreateAccessPointOutput < Struct.new(
       :dns_name)
@@ -479,6 +515,8 @@ module Aws::ElasticLoadBalancing
     #   The name of the application cookie used for stickiness.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicyInput AWS API Documentation
+    #
     class CreateAppCookieStickinessPolicyInput < Struct.new(
       :load_balancer_name,
       :policy_name,
@@ -487,6 +525,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output for CreateAppCookieStickinessPolicy.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateAppCookieStickinessPolicyOutput AWS API Documentation
     #
     class CreateAppCookieStickinessPolicyOutput < Aws::EmptyStructure; end
 
@@ -518,6 +558,8 @@ module Aws::ElasticLoadBalancing
     #   the duration of the browser session.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicyInput AWS API Documentation
+    #
     class CreateLBCookieStickinessPolicyInput < Struct.new(
       :load_balancer_name,
       :policy_name,
@@ -526,6 +568,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output for CreateLBCookieStickinessPolicy.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLBCookieStickinessPolicyOutput AWS API Documentation
     #
     class CreateLBCookieStickinessPolicyOutput < Aws::EmptyStructure; end
 
@@ -555,6 +599,8 @@ module Aws::ElasticLoadBalancing
     #   The listeners.
     #   @return [Array<Types::Listener>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListenerInput AWS API Documentation
+    #
     class CreateLoadBalancerListenerInput < Struct.new(
       :load_balancer_name,
       :listeners)
@@ -562,6 +608,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the parameters for CreateLoadBalancerListener.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerListenerOutput AWS API Documentation
     #
     class CreateLoadBalancerListenerOutput < Aws::EmptyStructure; end
 
@@ -600,6 +648,8 @@ module Aws::ElasticLoadBalancing
     #   The policy attributes.
     #   @return [Array<Types::PolicyAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicyInput AWS API Documentation
+    #
     class CreateLoadBalancerPolicyInput < Struct.new(
       :load_balancer_name,
       :policy_name,
@@ -609,6 +659,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of CreateLoadBalancerPolicy.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CreateLoadBalancerPolicyOutput AWS API Documentation
     #
     class CreateLoadBalancerPolicyOutput < Aws::EmptyStructure; end
 
@@ -625,6 +677,8 @@ module Aws::ElasticLoadBalancing
     #   Specifies whether cross-zone load balancing is enabled for the load
     #   balancer.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/CrossZoneLoadBalancing AWS API Documentation
     #
     class CrossZoneLoadBalancing < Struct.new(
       :enabled)
@@ -644,12 +698,16 @@ module Aws::ElasticLoadBalancing
     #   The name of the load balancer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteAccessPointInput AWS API Documentation
+    #
     class DeleteAccessPointInput < Struct.new(
       :load_balancer_name)
       include Aws::Structure
     end
 
     # Contains the output of DeleteLoadBalancer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteAccessPointOutput AWS API Documentation
     #
     class DeleteAccessPointOutput < Aws::EmptyStructure; end
 
@@ -671,6 +729,8 @@ module Aws::ElasticLoadBalancing
     #   The client port numbers of the listeners.
     #   @return [Array<Integer>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListenerInput AWS API Documentation
+    #
     class DeleteLoadBalancerListenerInput < Struct.new(
       :load_balancer_name,
       :load_balancer_ports)
@@ -678,6 +738,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of DeleteLoadBalancerListeners.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerListenerOutput AWS API Documentation
     #
     class DeleteLoadBalancerListenerOutput < Aws::EmptyStructure; end
 
@@ -699,6 +761,8 @@ module Aws::ElasticLoadBalancing
     #   The name of the policy.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicyInput AWS API Documentation
+    #
     class DeleteLoadBalancerPolicyInput < Struct.new(
       :load_balancer_name,
       :policy_name)
@@ -706,6 +770,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of DeleteLoadBalancerPolicy.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeleteLoadBalancerPolicyOutput AWS API Documentation
     #
     class DeleteLoadBalancerPolicyOutput < Aws::EmptyStructure; end
 
@@ -731,6 +797,8 @@ module Aws::ElasticLoadBalancing
     #   The IDs of the instances.
     #   @return [Array<Types::Instance>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterEndPointsInput AWS API Documentation
+    #
     class DeregisterEndPointsInput < Struct.new(
       :load_balancer_name,
       :instances)
@@ -742,6 +810,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] instances
     #   The remaining instances registered with the load balancer.
     #   @return [Array<Types::Instance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DeregisterEndPointsOutput AWS API Documentation
     #
     class DeregisterEndPointsOutput < Struct.new(
       :instances)
@@ -773,6 +843,8 @@ module Aws::ElasticLoadBalancing
     #   from 1 to 400). The default is 400.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccessPointsInput AWS API Documentation
+    #
     class DescribeAccessPointsInput < Struct.new(
       :load_balancer_names,
       :marker,
@@ -790,6 +862,8 @@ module Aws::ElasticLoadBalancing
     #   The marker to use when requesting the next set of results. If there
     #   are no additional results, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccessPointsOutput AWS API Documentation
     #
     class DescribeAccessPointsOutput < Struct.new(
       :load_balancer_descriptions,
@@ -819,6 +893,8 @@ module Aws::ElasticLoadBalancing
     #   The IDs of the instances.
     #   @return [Array<Types::Instance>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeEndPointStateInput AWS API Documentation
+    #
     class DescribeEndPointStateInput < Struct.new(
       :load_balancer_name,
       :instances)
@@ -830,6 +906,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] instance_states
     #   Information about the health of the instances.
     #   @return [Array<Types::InstanceState>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeEndPointStateOutput AWS API Documentation
     #
     class DescribeEndPointStateOutput < Struct.new(
       :instance_states)
@@ -849,6 +927,8 @@ module Aws::ElasticLoadBalancing
     #   The name of the load balancer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributesInput AWS API Documentation
+    #
     class DescribeLoadBalancerAttributesInput < Struct.new(
       :load_balancer_name)
       include Aws::Structure
@@ -859,6 +939,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] load_balancer_attributes
     #   Information about the load balancer attributes.
     #   @return [Types::LoadBalancerAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerAttributesOutput AWS API Documentation
     #
     class DescribeLoadBalancerAttributesOutput < Struct.new(
       :load_balancer_attributes)
@@ -883,6 +965,8 @@ module Aws::ElasticLoadBalancing
     #   The names of the policies.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPoliciesInput AWS API Documentation
+    #
     class DescribeLoadBalancerPoliciesInput < Struct.new(
       :load_balancer_name,
       :policy_names)
@@ -894,6 +978,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] policy_descriptions
     #   Information about the policies.
     #   @return [Array<Types::PolicyDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPoliciesOutput AWS API Documentation
     #
     class DescribeLoadBalancerPoliciesOutput < Struct.new(
       :policy_descriptions)
@@ -914,6 +1000,8 @@ module Aws::ElasticLoadBalancing
     #   all policy types defined by Elastic Load Balancing.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypesInput AWS API Documentation
+    #
     class DescribeLoadBalancerPolicyTypesInput < Struct.new(
       :policy_type_names)
       include Aws::Structure
@@ -924,6 +1012,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] policy_type_descriptions
     #   Information about the policy types.
     #   @return [Array<Types::PolicyTypeDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeLoadBalancerPolicyTypesOutput AWS API Documentation
     #
     class DescribeLoadBalancerPolicyTypesOutput < Struct.new(
       :policy_type_descriptions)
@@ -943,6 +1033,8 @@ module Aws::ElasticLoadBalancing
     #   The names of the load balancers.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTagsInput AWS API Documentation
+    #
     class DescribeTagsInput < Struct.new(
       :load_balancer_names)
       include Aws::Structure
@@ -953,6 +1045,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] tag_descriptions
     #   Information about the tags.
     #   @return [Array<Types::TagDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeTagsOutput AWS API Documentation
     #
     class DescribeTagsOutput < Struct.new(
       :tag_descriptions)
@@ -977,6 +1071,8 @@ module Aws::ElasticLoadBalancing
     #   The IDs of the subnets.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnetsInput AWS API Documentation
+    #
     class DetachLoadBalancerFromSubnetsInput < Struct.new(
       :load_balancer_name,
       :subnets)
@@ -988,6 +1084,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] subnets
     #   The IDs of the remaining subnets for the load balancer.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DetachLoadBalancerFromSubnetsOutput AWS API Documentation
     #
     class DetachLoadBalancerFromSubnetsOutput < Struct.new(
       :subnets)
@@ -1051,6 +1149,8 @@ module Aws::ElasticLoadBalancing
     #   moving the instance to the `Healthy` state.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/HealthCheck AWS API Documentation
+    #
     class HealthCheck < Struct.new(
       :target,
       :interval,
@@ -1072,6 +1172,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] instance_id
     #   The instance ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Instance AWS API Documentation
     #
     class Instance < Struct.new(
       :instance_id)
@@ -1130,6 +1232,8 @@ module Aws::ElasticLoadBalancing
     #   * `Instance is in terminated state.`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/InstanceState AWS API Documentation
+    #
     class InstanceState < Struct.new(
       :instance_id,
       :state,
@@ -1150,6 +1254,8 @@ module Aws::ElasticLoadBalancing
     #   considered stale. If this parameter is not specified, the stickiness
     #   session lasts for the duration of the browser session.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LBCookieStickinessPolicy AWS API Documentation
     #
     class LBCookieStickinessPolicy < Struct.new(
       :policy_name,
@@ -1214,6 +1320,8 @@ module Aws::ElasticLoadBalancing
     #   The Amazon Resource Name (ARN) of the server certificate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Listener AWS API Documentation
+    #
     class Listener < Struct.new(
       :protocol,
       :load_balancer_port,
@@ -1240,6 +1348,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] policy_names
     #   The policies. If there are no policies enabled, the list is empty.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ListenerDescription AWS API Documentation
     #
     class ListenerDescription < Struct.new(
       :listener,
@@ -1333,6 +1443,8 @@ module Aws::ElasticLoadBalancing
     #   This parameter is reserved.
     #   @return [Array<Types::AdditionalAttribute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LoadBalancerAttributes AWS API Documentation
+    #
     class LoadBalancerAttributes < Struct.new(
       :cross_zone_load_balancing,
       :access_log,
@@ -1425,6 +1537,8 @@ module Aws::ElasticLoadBalancing
     #   that resolves to a private IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/LoadBalancerDescription AWS API Documentation
+    #
     class LoadBalancerDescription < Struct.new(
       :load_balancer_name,
       :dns_name,
@@ -1486,6 +1600,8 @@ module Aws::ElasticLoadBalancing
     #   The attributes of the load balancer.
     #   @return [Types::LoadBalancerAttributes]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributesInput AWS API Documentation
+    #
     class ModifyLoadBalancerAttributesInput < Struct.new(
       :load_balancer_name,
       :load_balancer_attributes)
@@ -1501,6 +1617,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] load_balancer_attributes
     #   The attributes for a load balancer.
     #   @return [Types::LoadBalancerAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributesOutput AWS API Documentation
     #
     class ModifyLoadBalancerAttributesOutput < Struct.new(
       :load_balancer_name,
@@ -1523,6 +1641,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] other_policies
     #   The policies other than the stickiness policies.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Policies AWS API Documentation
     #
     class Policies < Struct.new(
       :app_cookie_stickiness_policies,
@@ -1549,6 +1669,8 @@ module Aws::ElasticLoadBalancing
     #   The value of the attribute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttribute AWS API Documentation
+    #
     class PolicyAttribute < Struct.new(
       :attribute_name,
       :attribute_value)
@@ -1564,6 +1686,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] attribute_value
     #   The value of the attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttributeDescription AWS API Documentation
     #
     class PolicyAttributeDescription < Struct.new(
       :attribute_name,
@@ -1603,6 +1727,8 @@ module Aws::ElasticLoadBalancing
     #   * ONE\_OR\_MORE(1..*0) : Required. Multiple values are allowed
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyAttributeTypeDescription AWS API Documentation
+    #
     class PolicyAttributeTypeDescription < Struct.new(
       :attribute_name,
       :attribute_type,
@@ -1626,6 +1752,8 @@ module Aws::ElasticLoadBalancing
     #   The policy attributes.
     #   @return [Array<Types::PolicyAttributeDescription>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyDescription AWS API Documentation
+    #
     class PolicyDescription < Struct.new(
       :policy_name,
       :policy_type_name,
@@ -1647,6 +1775,8 @@ module Aws::ElasticLoadBalancing
     #   The description of the policy attributes associated with the
     #   policies defined by Elastic Load Balancing.
     #   @return [Array<Types::PolicyAttributeTypeDescription>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/PolicyTypeDescription AWS API Documentation
     #
     class PolicyTypeDescription < Struct.new(
       :policy_type_name,
@@ -1677,6 +1807,8 @@ module Aws::ElasticLoadBalancing
     #   The IDs of the instances.
     #   @return [Array<Types::Instance>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterEndPointsInput AWS API Documentation
+    #
     class RegisterEndPointsInput < Struct.new(
       :load_balancer_name,
       :instances)
@@ -1688,6 +1820,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] instances
     #   The updated list of instances for the load balancer.
     #   @return [Array<Types::Instance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RegisterEndPointsOutput AWS API Documentation
     #
     class RegisterEndPointsOutput < Struct.new(
       :instances)
@@ -1712,6 +1846,8 @@ module Aws::ElasticLoadBalancing
     #   The Availability Zones.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveAvailabilityZonesInput AWS API Documentation
+    #
     class RemoveAvailabilityZonesInput < Struct.new(
       :load_balancer_name,
       :availability_zones)
@@ -1723,6 +1859,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] availability_zones
     #   The remaining Availability Zones for the load balancer.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveAvailabilityZonesOutput AWS API Documentation
     #
     class RemoveAvailabilityZonesOutput < Struct.new(
       :availability_zones)
@@ -1752,6 +1890,8 @@ module Aws::ElasticLoadBalancing
     #   The list of tag keys to remove.
     #   @return [Array<Types::TagKeyOnly>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTagsInput AWS API Documentation
+    #
     class RemoveTagsInput < Struct.new(
       :load_balancer_names,
       :tags)
@@ -1759,6 +1899,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of RemoveTags.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/RemoveTagsOutput AWS API Documentation
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
 
@@ -1785,6 +1927,8 @@ module Aws::ElasticLoadBalancing
     #   The Amazon Resource Name (ARN) of the SSL certificate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificateInput AWS API Documentation
+    #
     class SetLoadBalancerListenerSSLCertificateInput < Struct.new(
       :load_balancer_name,
       :load_balancer_port,
@@ -1793,6 +1937,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of SetLoadBalancerListenerSSLCertificate.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerListenerSSLCertificateOutput AWS API Documentation
     #
     class SetLoadBalancerListenerSSLCertificateOutput < Aws::EmptyStructure; end
 
@@ -1820,6 +1966,8 @@ module Aws::ElasticLoadBalancing
     #   polices are removed from the EC2 instance.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServerInput AWS API Documentation
+    #
     class SetLoadBalancerPoliciesForBackendServerInput < Struct.new(
       :load_balancer_name,
       :instance_port,
@@ -1828,6 +1976,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of SetLoadBalancerPoliciesForBackendServer.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesForBackendServerOutput AWS API Documentation
     #
     class SetLoadBalancerPoliciesForBackendServerOutput < Aws::EmptyStructure; end
 
@@ -1856,6 +2006,8 @@ module Aws::ElasticLoadBalancing
     #   disabled. If the list is empty, all current policies are disabled.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListenerInput AWS API Documentation
+    #
     class SetLoadBalancerPoliciesOfListenerInput < Struct.new(
       :load_balancer_name,
       :load_balancer_port,
@@ -1864,6 +2016,8 @@ module Aws::ElasticLoadBalancing
     end
 
     # Contains the output of SetLoadBalancePoliciesOfListener.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SetLoadBalancerPoliciesOfListenerOutput AWS API Documentation
     #
     class SetLoadBalancerPoliciesOfListenerOutput < Aws::EmptyStructure; end
 
@@ -1876,6 +2030,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] group_name
     #   The name of the security group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/SourceSecurityGroup AWS API Documentation
     #
     class SourceSecurityGroup < Struct.new(
       :owner_alias,
@@ -1901,6 +2057,8 @@ module Aws::ElasticLoadBalancing
     #   The value of the tag.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -1916,6 +2074,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] tags
     #   The tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TagDescription AWS API Documentation
     #
     class TagDescription < Struct.new(
       :load_balancer_name,
@@ -1935,6 +2095,8 @@ module Aws::ElasticLoadBalancing
     # @!attribute [rw] key
     #   The name of the key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/TagKeyOnly AWS API Documentation
     #
     class TagKeyOnly < Struct.new(
       :key)

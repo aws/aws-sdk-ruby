@@ -40,6 +40,8 @@ module Aws::Route53
     #   healthy.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AlarmIdentifier AWS API Documentation
+    #
     class AlarmIdentifier < Struct.new(
       :region,
       :name)
@@ -330,6 +332,8 @@ module Aws::Route53
     #   [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AliasTarget AWS API Documentation
+    #
     class AliasTarget < Struct.new(
       :hosted_zone_id,
       :dns_name,
@@ -369,6 +373,8 @@ module Aws::Route53
     #   *Optional:* A comment about the association request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZoneRequest AWS API Documentation
+    #
     class AssociateVPCWithHostedZoneRequest < Struct.new(
       :hosted_zone_id,
       :vpc,
@@ -382,6 +388,8 @@ module Aws::Route53
     # @!attribute [rw] change_info
     #   A complex type that describes the changes made to your hosted zone.
     #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/AssociateVPCWithHostedZoneResponse AWS API Documentation
     #
     class AssociateVPCWithHostedZoneResponse < Struct.new(
       :change_info)
@@ -486,6 +494,8 @@ module Aws::Route53
     #   update.
     #   @return [Types::ResourceRecordSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Change AWS API Documentation
+    #
     class Change < Struct.new(
       :action,
       :resource_record_set)
@@ -541,6 +551,8 @@ module Aws::Route53
     #   Information about the changes to make to the record sets.
     #   @return [Array<Types::Change>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeBatch AWS API Documentation
+    #
     class ChangeBatch < Struct.new(
       :comment,
       :changes)
@@ -576,6 +588,8 @@ module Aws::Route53
     #   This element contains an ID that you use when performing a GetChange
     #   action to get detailed information about the change.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeInfo AWS API Documentation
     #
     class ChangeInfo < Struct.new(
       :id,
@@ -639,6 +653,8 @@ module Aws::Route53
     #   element.
     #   @return [Types::ChangeBatch]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSetsRequest AWS API Documentation
+    #
     class ChangeResourceRecordSetsRequest < Struct.new(
       :hosted_zone_id,
       :change_batch)
@@ -654,6 +670,8 @@ module Aws::Route53
     #   This element contains an ID that you use when performing a GetChange
     #   action to get detailed information about the change.
     #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeResourceRecordSetsResponse AWS API Documentation
     #
     class ChangeResourceRecordSetsResponse < Struct.new(
       :change_info)
@@ -705,6 +723,8 @@ module Aws::Route53
     #   specify up to 10 keys.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResourceRequest AWS API Documentation
+    #
     class ChangeTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
@@ -714,6 +734,8 @@ module Aws::Route53
     end
 
     # Empty response for the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeTagsForResourceResponse AWS API Documentation
     #
     class ChangeTagsForResourceResponse < Aws::EmptyStructure; end
 
@@ -767,6 +789,8 @@ module Aws::Route53
     #   http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
     #   in the *Amazon CloudWatch User Guide*.
     #   @return [Array<Types::Dimension>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CloudWatchAlarmConfiguration AWS API Documentation
     #
     class CloudWatchAlarmConfiguration < Struct.new(
       :evaluation_periods,
@@ -822,6 +846,8 @@ module Aws::Route53
     #   request.
     #   @return [Types::HealthCheckConfig]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckRequest AWS API Documentation
+    #
     class CreateHealthCheckRequest < Struct.new(
       :caller_reference,
       :health_check_config)
@@ -839,6 +865,8 @@ module Aws::Route53
     # @!attribute [rw] location
     #   The unique URL representing the new health check.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHealthCheckResponse AWS API Documentation
     #
     class CreateHealthCheckResponse < Struct.new(
       :health_check,
@@ -920,6 +948,8 @@ module Aws::Route53
     #   : `CreatedHostedZoneRequest`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneRequest AWS API Documentation
+    #
     class CreateHostedZoneRequest < Struct.new(
       :name,
       :vpc,
@@ -954,6 +984,8 @@ module Aws::Route53
     #   The unique URL representing the new hosted zone.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateHostedZoneResponse AWS API Documentation
+    #
     class CreateHostedZoneResponse < Struct.new(
       :hosted_zone,
       :change_info,
@@ -985,6 +1017,8 @@ module Aws::Route53
     #   as reusable, the ID for that hosted zone.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSetRequest AWS API Documentation
+    #
     class CreateReusableDelegationSetRequest < Struct.new(
       :caller_reference,
       :hosted_zone_id)
@@ -998,6 +1032,8 @@ module Aws::Route53
     # @!attribute [rw] location
     #   The unique URL representing the new reusable delegation set.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateReusableDelegationSetResponse AWS API Documentation
     #
     class CreateReusableDelegationSetResponse < Struct.new(
       :delegation_set,
@@ -1048,6 +1084,8 @@ module Aws::Route53
     #   resource record sets in the specified hosted zone.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstanceRequest AWS API Documentation
+    #
     class CreateTrafficPolicyInstanceRequest < Struct.new(
       :hosted_zone_id,
       :name,
@@ -1068,6 +1106,8 @@ module Aws::Route53
     # @!attribute [rw] location
     #   A unique URL that represents a new traffic policy instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyInstanceResponse AWS API Documentation
     #
     class CreateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance,
@@ -1105,6 +1145,8 @@ module Aws::Route53
     #   policy.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyRequest AWS API Documentation
+    #
     class CreateTrafficPolicyRequest < Struct.new(
       :name,
       :document,
@@ -1122,6 +1164,8 @@ module Aws::Route53
     # @!attribute [rw] location
     #   A unique URL that represents a new traffic policy.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyResponse AWS API Documentation
     #
     class CreateTrafficPolicyResponse < Struct.new(
       :traffic_policy,
@@ -1158,6 +1202,8 @@ module Aws::Route53
     #   request, if any.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersionRequest AWS API Documentation
+    #
     class CreateTrafficPolicyVersionRequest < Struct.new(
       :id,
       :document,
@@ -1176,6 +1222,8 @@ module Aws::Route53
     # @!attribute [rw] location
     #   A unique URL that represents a new traffic policy version.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateTrafficPolicyVersionResponse AWS API Documentation
     #
     class CreateTrafficPolicyVersionResponse < Struct.new(
       :traffic_policy,
@@ -1209,6 +1257,8 @@ module Aws::Route53
     #   you want to authorize associating with your hosted zone.
     #   @return [Types::VPC]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorizationRequest AWS API Documentation
+    #
     class CreateVPCAssociationAuthorizationRequest < Struct.new(
       :hosted_zone_id,
       :vpc)
@@ -1226,6 +1276,8 @@ module Aws::Route53
     # @!attribute [rw] vpc
     #   The VPC that you authorized associating with a hosted zone.
     #   @return [Types::VPC]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateVPCAssociationAuthorizationResponse AWS API Documentation
     #
     class CreateVPCAssociationAuthorizationResponse < Struct.new(
       :hosted_zone_id,
@@ -1253,6 +1305,8 @@ module Aws::Route53
     #   servers for the hosted zone.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DelegationSet AWS API Documentation
+    #
     class DelegationSet < Struct.new(
       :id,
       :caller_reference,
@@ -1274,12 +1328,16 @@ module Aws::Route53
     #   The ID of the health check that you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckRequest AWS API Documentation
+    #
     class DeleteHealthCheckRequest < Struct.new(
       :health_check_id)
       include Aws::Structure
     end
 
     # An empty element.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHealthCheckResponse AWS API Documentation
     #
     class DeleteHealthCheckResponse < Aws::EmptyStructure; end
 
@@ -1297,6 +1355,8 @@ module Aws::Route53
     #   The ID of the hosted zone you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZoneRequest AWS API Documentation
+    #
     class DeleteHostedZoneRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -1308,6 +1368,8 @@ module Aws::Route53
     #   A complex type that contains the ID, the status, and the date and
     #   time of your delete request.
     #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteHostedZoneResponse AWS API Documentation
     #
     class DeleteHostedZoneResponse < Struct.new(
       :change_info)
@@ -1327,12 +1389,16 @@ module Aws::Route53
     #   The ID of the reusable delegation set you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSetRequest AWS API Documentation
+    #
     class DeleteReusableDelegationSetRequest < Struct.new(
       :id)
       include Aws::Structure
     end
 
     # An empty element.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteReusableDelegationSetResponse AWS API Documentation
     #
     class DeleteReusableDelegationSetResponse < Aws::EmptyStructure; end
 
@@ -1354,12 +1420,16 @@ module Aws::Route53
     #   created the traffic policy instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstanceRequest AWS API Documentation
+    #
     class DeleteTrafficPolicyInstanceRequest < Struct.new(
       :id)
       include Aws::Structure
     end
 
     # An empty element.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyInstanceResponse AWS API Documentation
     #
     class DeleteTrafficPolicyInstanceResponse < Aws::EmptyStructure; end
 
@@ -1381,6 +1451,8 @@ module Aws::Route53
     #   The version number of the traffic policy that you want to delete.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyRequest AWS API Documentation
+    #
     class DeleteTrafficPolicyRequest < Struct.new(
       :id,
       :version)
@@ -1388,6 +1460,8 @@ module Aws::Route53
     end
 
     # An empty element.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteTrafficPolicyResponse AWS API Documentation
     #
     class DeleteTrafficPolicyResponse < Aws::EmptyStructure; end
 
@@ -1419,6 +1493,8 @@ module Aws::Route53
     #   VPC.
     #   @return [Types::VPC]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationRequest AWS API Documentation
+    #
     class DeleteVPCAssociationAuthorizationRequest < Struct.new(
       :hosted_zone_id,
       :vpc)
@@ -1426,6 +1502,8 @@ module Aws::Route53
     end
 
     # Empty response for the request.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteVPCAssociationAuthorizationResponse AWS API Documentation
     #
     class DeleteVPCAssociationAuthorizationResponse < Aws::EmptyStructure; end
 
@@ -1441,6 +1519,8 @@ module Aws::Route53
     #   For the metric that the CloudWatch alarm is associated with, the
     #   value of one dimension.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Dimension AWS API Documentation
     #
     class Dimension < Struct.new(
       :name,
@@ -1477,6 +1557,8 @@ module Aws::Route53
     #   *Optional:* A comment about the disassociation request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZoneRequest AWS API Documentation
+    #
     class DisassociateVPCFromHostedZoneRequest < Struct.new(
       :hosted_zone_id,
       :vpc,
@@ -1491,6 +1573,8 @@ module Aws::Route53
     #   A complex type that describes the changes made to the specified
     #   private hosted zone.
     #   @return [Types::ChangeInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DisassociateVPCFromHostedZoneResponse AWS API Documentation
     #
     class DisassociateVPCFromHostedZoneResponse < Struct.new(
       :change_info)
@@ -1525,6 +1609,8 @@ module Aws::Route53
     #   The code for the subdivision, for example, a state in the United
     #   States or a province in Canada.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoLocation AWS API Documentation
     #
     class GeoLocation < Struct.new(
       :continent_code,
@@ -1562,6 +1648,8 @@ module Aws::Route53
     #   States or a province in Canada.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GeoLocationDetails AWS API Documentation
+    #
     class GeoLocationDetails < Struct.new(
       :continent_code,
       :continent_name,
@@ -1587,6 +1675,8 @@ module Aws::Route53
     #   element when you submitted the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChangeRequest AWS API Documentation
+    #
     class GetChangeRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -1599,6 +1689,8 @@ module Aws::Route53
     #   batch.
     #   @return [Types::ChangeInfo]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetChangeResponse AWS API Documentation
+    #
     class GetChangeResponse < Struct.new(
       :change_info)
       include Aws::Structure
@@ -1608,6 +1700,8 @@ module Aws::Route53
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest AWS API Documentation
+    #
     class GetCheckerIpRangesRequest < Aws::EmptyStructure; end
 
     # A complex type that contains the `CheckerIpRanges` element.
@@ -1616,6 +1710,8 @@ module Aws::Route53
     #   A complex type that contains sorted list of IP ranges in CIDR format
     #   for Amazon Route 53 health checkers.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesResponse AWS API Documentation
     #
     class GetCheckerIpRangesResponse < Struct.new(
       :checker_ip_ranges)
@@ -1672,6 +1768,8 @@ module Aws::Route53
     #   [1]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocationRequest AWS API Documentation
+    #
     class GetGeoLocationRequest < Struct.new(
       :continent_code,
       :country_code,
@@ -1687,6 +1785,8 @@ module Aws::Route53
     #   and subdivision names for the specified geolocation code.
     #   @return [Types::GeoLocationDetails]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetGeoLocationResponse AWS API Documentation
+    #
     class GetGeoLocationResponse < Struct.new(
       :geo_location_details)
       include Aws::Structure
@@ -1697,6 +1797,8 @@ module Aws::Route53
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountRequest AWS API Documentation
+    #
     class GetHealthCheckCountRequest < Aws::EmptyStructure; end
 
     # A complex type that contains the response to a `healthcheckcount`
@@ -1705,6 +1807,8 @@ module Aws::Route53
     # @!attribute [rw] health_check_count
     #   The number of health checks associated with the current AWS account.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckCountResponse AWS API Documentation
     #
     class GetHealthCheckCountResponse < Struct.new(
       :health_check_count)
@@ -1740,6 +1844,8 @@ module Aws::Route53
     #   returned the ID in the response, in the `HealthCheckId` element.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReasonRequest AWS API Documentation
+    #
     class GetHealthCheckLastFailureReasonRequest < Struct.new(
       :health_check_id)
       include Aws::Structure
@@ -1752,6 +1858,8 @@ module Aws::Route53
     #   A list that contains one `Observation` element for each Amazon Route
     #   53 health checker that is reporting a last failure reason.
     #   @return [Array<Types::HealthCheckObservation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckLastFailureReasonResponse AWS API Documentation
     #
     class GetHealthCheckLastFailureReasonResponse < Struct.new(
       :health_check_observations)
@@ -1785,6 +1893,8 @@ module Aws::Route53
     #   can be up to 64 characters long.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckRequest AWS API Documentation
+    #
     class GetHealthCheckRequest < Struct.new(
       :health_check_id)
       include Aws::Structure
@@ -1797,6 +1907,8 @@ module Aws::Route53
     #   A complex type that contains information about one health check that
     #   is associated with the current AWS account.
     #   @return [Types::HealthCheck]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckResponse AWS API Documentation
     #
     class GetHealthCheckResponse < Struct.new(
       :health_check)
@@ -1879,6 +1991,8 @@ module Aws::Route53
     #   record sets, health check results will be unpredictable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatusRequest AWS API Documentation
+    #
     class GetHealthCheckStatusRequest < Struct.new(
       :health_check_id)
       include Aws::Structure
@@ -1893,6 +2007,8 @@ module Aws::Route53
     #   health check endpoint.
     #   @return [Array<Types::HealthCheckObservation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatusResponse AWS API Documentation
+    #
     class GetHealthCheckStatusResponse < Struct.new(
       :health_check_observations)
       include Aws::Structure
@@ -1903,6 +2019,8 @@ module Aws::Route53
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountRequest AWS API Documentation
+    #
     class GetHostedZoneCountRequest < Aws::EmptyStructure; end
 
     # A complex type that contains the response to a `hostedzonecount`
@@ -1912,6 +2030,8 @@ module Aws::Route53
     #   The total number of public and private hosted zones associated with
     #   the current AWS account.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneCountResponse AWS API Documentation
     #
     class GetHostedZoneCountResponse < Struct.new(
       :hosted_zone_count)
@@ -1931,6 +2051,8 @@ module Aws::Route53
     #   The ID of the hosted zone for which you want to get a list of the
     #   name servers in the delegation set.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneRequest AWS API Documentation
     #
     class GetHostedZoneRequest < Struct.new(
       :id)
@@ -1954,6 +2076,8 @@ module Aws::Route53
     #   the specified hosted zone.
     #   @return [Array<Types::VPC>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHostedZoneResponse AWS API Documentation
+    #
     class GetHostedZoneResponse < Struct.new(
       :hosted_zone,
       :delegation_set,
@@ -1975,6 +2099,8 @@ module Aws::Route53
     #   list of the name server.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetRequest AWS API Documentation
+    #
     class GetReusableDelegationSetRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -1988,6 +2114,8 @@ module Aws::Route53
     #   delegation set.
     #   @return [Types::DelegationSet]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetReusableDelegationSetResponse AWS API Documentation
+    #
     class GetReusableDelegationSetResponse < Struct.new(
       :delegation_set)
       include Aws::Structure
@@ -1998,6 +2126,8 @@ module Aws::Route53
     #
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountRequest AWS API Documentation
+    #
     class GetTrafficPolicyInstanceCountRequest < Aws::EmptyStructure; end
 
     # A complex type that contains information about the resource record
@@ -2007,6 +2137,8 @@ module Aws::Route53
     #   The number of traffic policy instances that are associated with the
     #   current AWS account.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceCountResponse AWS API Documentation
     #
     class GetTrafficPolicyInstanceCountResponse < Struct.new(
       :traffic_policy_instance_count)
@@ -2031,6 +2163,8 @@ module Aws::Route53
     #   information about.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceRequest AWS API Documentation
+    #
     class GetTrafficPolicyInstanceRequest < Struct.new(
       :id)
       include Aws::Structure
@@ -2043,6 +2177,8 @@ module Aws::Route53
     #   A complex type that contains settings for the traffic policy
     #   instance.
     #   @return [Types::TrafficPolicyInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyInstanceResponse AWS API Documentation
     #
     class GetTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance)
@@ -2070,6 +2206,8 @@ module Aws::Route53
     #   information about.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyRequest AWS API Documentation
+    #
     class GetTrafficPolicyRequest < Struct.new(
       :id,
       :version)
@@ -2082,6 +2220,8 @@ module Aws::Route53
     #   A complex type that contains settings for the specified traffic
     #   policy.
     #   @return [Types::TrafficPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetTrafficPolicyResponse AWS API Documentation
     #
     class GetTrafficPolicyResponse < Struct.new(
       :traffic_policy)
@@ -2118,6 +2258,8 @@ module Aws::Route53
     #   A complex type that contains information about the CloudWatch alarm
     #   that Amazon Route 53 is monitoring for this health check.
     #   @return [Types::CloudWatchAlarmConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheck AWS API Documentation
     #
     class HealthCheck < Struct.new(
       :id,
@@ -2452,6 +2594,8 @@ module Aws::Route53
     #     known status, the default status for the health check is healthy.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckConfig AWS API Documentation
+    #
     class HealthCheckConfig < Struct.new(
       :ip_address,
       :port,
@@ -2490,6 +2634,8 @@ module Aws::Route53
     #   one Amazon Route 53 health checker and the time of the failed health
     #   check.
     #   @return [Types::StatusReport]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HealthCheckObservation AWS API Documentation
     #
     class HealthCheckObservation < Struct.new(
       :region,
@@ -2531,6 +2677,8 @@ module Aws::Route53
     #   The number of resource record sets in the hosted zone.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZone AWS API Documentation
+    #
     class HostedZone < Struct.new(
       :id,
       :name,
@@ -2559,6 +2707,8 @@ module Aws::Route53
     # @!attribute [rw] private_zone
     #   A value that indicates whether this is a private hosted zone.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/HostedZoneConfig AWS API Documentation
     #
     class HostedZoneConfig < Struct.new(
       :comment,
@@ -2636,6 +2786,8 @@ module Aws::Route53
     #   the response is `true`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocationsRequest AWS API Documentation
+    #
     class ListGeoLocationsRequest < Struct.new(
       :start_continent_code,
       :start_country_code,
@@ -2684,6 +2836,8 @@ module Aws::Route53
     # @!attribute [rw] max_items
     #   The value that you specified for `MaxItems` in the request.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListGeoLocationsResponse AWS API Documentation
     #
     class ListGeoLocationsResponse < Struct.new(
       :geo_location_details_list,
@@ -2747,6 +2901,8 @@ module Aws::Route53
     #   * ListHealthChecksResponse$NextMarker is omitted.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksRequest AWS API Documentation
+    #
     class ListHealthChecksRequest < Struct.new(
       :marker,
       :max_items)
@@ -2788,6 +2944,8 @@ module Aws::Route53
     #   The value that you specified for the `maxitems` parameter in the
     #   call to `ListHealthChecks` that produced the current response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHealthChecksResponse AWS API Documentation
     #
     class ListHealthChecksResponse < Struct.new(
       :health_checks,
@@ -2898,6 +3056,8 @@ module Aws::Route53
     #   zones.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByNameRequest AWS API Documentation
+    #
     class ListHostedZonesByNameRequest < Struct.new(
       :dns_name,
       :hosted_zone_id,
@@ -2955,6 +3115,8 @@ module Aws::Route53
     #   The value that you specified for the `maxitems` parameter in the
     #   call to `ListHostedZonesByName` that produced the current response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesByNameResponse AWS API Documentation
     #
     class ListHostedZonesByNameResponse < Struct.new(
       :hosted_zones,
@@ -3034,6 +3196,8 @@ module Aws::Route53
     #   set, specify the ID of that reusable delegation set.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesRequest AWS API Documentation
+    #
     class ListHostedZonesRequest < Struct.new(
       :marker,
       :max_items,
@@ -3073,6 +3237,8 @@ module Aws::Route53
     #   The value that you specified for the `maxitems` parameter in the
     #   call to `ListHostedZones` that produced the current response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListHostedZonesResponse AWS API Documentation
     #
     class ListHostedZonesResponse < Struct.new(
       :hosted_zones,
@@ -3149,6 +3315,8 @@ module Aws::Route53
     #   `maxitems` resource record sets.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetsRequest AWS API Documentation
+    #
     class ListResourceRecordSetsRequest < Struct.new(
       :hosted_zone_id,
       :start_record_name,
@@ -3196,6 +3364,8 @@ module Aws::Route53
     #   The maximum number of records you requested.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListResourceRecordSetsResponse AWS API Documentation
+    #
     class ListResourceRecordSetsResponse < Struct.new(
       :resource_record_sets,
       :is_truncated,
@@ -3241,6 +3411,8 @@ module Aws::Route53
     #   request that produced the current response.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSetsRequest AWS API Documentation
+    #
     class ListReusableDelegationSetsRequest < Struct.new(
       :marker,
       :max_items)
@@ -3282,6 +3454,8 @@ module Aws::Route53
     #   response.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListReusableDelegationSetsResponse AWS API Documentation
+    #
     class ListReusableDelegationSetsResponse < Struct.new(
       :delegation_sets,
       :marker,
@@ -3314,6 +3488,8 @@ module Aws::Route53
     #   The ID of the resource for which you want to retrieve tags.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourceRequest AWS API Documentation
+    #
     class ListTagsForResourceRequest < Struct.new(
       :resource_type,
       :resource_id)
@@ -3327,6 +3503,8 @@ module Aws::Route53
     #   A `ResourceTagSet` containing tags associated with the specified
     #   resource.
     #   @return [Types::ResourceTagSet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourceResponse AWS API Documentation
     #
     class ListTagsForResourceResponse < Struct.new(
       :resource_tag_set)
@@ -3357,6 +3535,8 @@ module Aws::Route53
     #   resource for which you want to get a list of tags.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourcesRequest AWS API Documentation
+    #
     class ListTagsForResourcesRequest < Struct.new(
       :resource_type,
       :resource_ids)
@@ -3369,6 +3549,8 @@ module Aws::Route53
     #   A list of `ResourceTagSet`s containing tags associated with the
     #   specified resources.
     #   @return [Array<Types::ResourceTagSet>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTagsForResourcesResponse AWS API Documentation
     #
     class ListTagsForResourcesResponse < Struct.new(
       :resource_tag_sets)
@@ -3410,6 +3592,8 @@ module Aws::Route53
     #   `MaxItems` traffic policies.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPoliciesRequest AWS API Documentation
+    #
     class ListTrafficPoliciesRequest < Struct.new(
       :traffic_policy_id_marker,
       :max_items)
@@ -3443,6 +3627,8 @@ module Aws::Route53
     #   The value that you specified for the `MaxItems` parameter in the
     #   call to `ListTrafficPolicies` that produced the current response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPoliciesResponse AWS API Documentation
     #
     class ListTrafficPoliciesResponse < Struct.new(
       :traffic_policy_summaries,
@@ -3511,6 +3697,8 @@ module Aws::Route53
     #   instance in the next group of `MaxItems` traffic policy instances.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZoneRequest AWS API Documentation
+    #
     class ListTrafficPolicyInstancesByHostedZoneRequest < Struct.new(
       :hosted_zone_id,
       :traffic_policy_instance_name_marker,
@@ -3555,6 +3743,8 @@ module Aws::Route53
     #   call to `ListTrafficPolicyInstancesByHostedZone` that produced the
     #   current response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByHostedZoneResponse AWS API Documentation
     #
     class ListTrafficPolicyInstancesByHostedZoneResponse < Struct.new(
       :traffic_policy_instances,
@@ -3649,6 +3839,8 @@ module Aws::Route53
     #   instance in the next group of `MaxItems` traffic policy instances.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicyRequest AWS API Documentation
+    #
     class ListTrafficPolicyInstancesByPolicyRequest < Struct.new(
       :traffic_policy_id,
       :traffic_policy_version,
@@ -3700,6 +3892,8 @@ module Aws::Route53
     #   call to `ListTrafficPolicyInstancesByPolicy` that produced the
     #   current response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesByPolicyResponse AWS API Documentation
     #
     class ListTrafficPolicyInstancesByPolicyResponse < Struct.new(
       :traffic_policy_instances,
@@ -3777,6 +3971,8 @@ module Aws::Route53
     #   instance in the next group of `MaxItems` traffic policy instances.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesRequest AWS API Documentation
+    #
     class ListTrafficPolicyInstancesRequest < Struct.new(
       :hosted_zone_id_marker,
       :traffic_policy_instance_name_marker,
@@ -3826,6 +4022,8 @@ module Aws::Route53
     #   call to `ListTrafficPolicyInstances` that produced the current
     #   response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyInstancesResponse AWS API Documentation
     #
     class ListTrafficPolicyInstancesResponse < Struct.new(
       :traffic_policy_instances,
@@ -3880,6 +4078,8 @@ module Aws::Route53
     #   versions.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersionsRequest AWS API Documentation
+    #
     class ListTrafficPolicyVersionsRequest < Struct.new(
       :id,
       :traffic_policy_version_marker,
@@ -3918,6 +4118,8 @@ module Aws::Route53
     #   call to `ListTrafficPolicyVersions` that produced the current
     #   response.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListTrafficPolicyVersionsResponse AWS API Documentation
     #
     class ListTrafficPolicyVersionsResponse < Struct.new(
       :traffic_policies,
@@ -3958,6 +4160,8 @@ module Aws::Route53
     #   that you want Amazon Route 53 to return.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizationsRequest AWS API Documentation
+    #
     class ListVPCAssociationAuthorizationsRequest < Struct.new(
       :hosted_zone_id,
       :next_token,
@@ -3988,6 +4192,8 @@ module Aws::Route53
     #   The list of VPCs that are authorized to be associated with the
     #   specified hosted zone.
     #   @return [Array<Types::VPC>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListVPCAssociationAuthorizationsResponse AWS API Documentation
     #
     class ListVPCAssociationAuthorizationsResponse < Struct.new(
       :hosted_zone_id,
@@ -4028,6 +4234,8 @@ module Aws::Route53
     #
     #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecord AWS API Documentation
     #
     class ResourceRecord < Struct.new(
       :value)
@@ -4507,6 +4715,8 @@ module Aws::Route53
     #   longer in use.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceRecordSet AWS API Documentation
+    #
     class ResourceRecordSet < Struct.new(
       :name,
       :type,
@@ -4541,6 +4751,8 @@ module Aws::Route53
     #   The tags associated with the specified resource.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ResourceTagSet AWS API Documentation
+    #
     class ResourceTagSet < Struct.new(
       :resource_type,
       :resource_id,
@@ -4566,6 +4778,8 @@ module Aws::Route53
     #
     #   [1]: https://en.wikipedia.org/wiki/ISO_8601
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/StatusReport AWS API Documentation
     #
     class StatusReport < Struct.new(
       :status,
@@ -4613,6 +4827,8 @@ module Aws::Route53
     #   * **Edit a tag**\: `Value` is the new value that you want to assign
     #     the tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -4709,6 +4925,8 @@ module Aws::Route53
     #   from 192.0.2.0/24. The default value is 24 bits.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswerRequest AWS API Documentation
+    #
     class TestDNSAnswerRequest < Struct.new(
       :hosted_zone_id,
       :record_name,
@@ -4758,6 +4976,8 @@ module Aws::Route53
     #   either `UDP` or `TCP`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TestDNSAnswerResponse AWS API Documentation
+    #
     class TestDNSAnswerResponse < Struct.new(
       :nameserver,
       :record_name,
@@ -4805,6 +5025,8 @@ module Aws::Route53
     #   The comment that you specify in the `CreateTrafficPolicy` request,
     #   if any.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicy AWS API Documentation
     #
     class TrafficPolicy < Struct.new(
       :id,
@@ -4881,6 +5103,8 @@ module Aws::Route53
     #   record sets that it created for this traffic policy instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicyInstance AWS API Documentation
+    #
     class TrafficPolicyInstance < Struct.new(
       :id,
       :hosted_zone_id,
@@ -4921,6 +5145,8 @@ module Aws::Route53
     #   The number of traffic policies that are associated with the current
     #   AWS account.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/TrafficPolicySummary AWS API Documentation
     #
     class TrafficPolicySummary < Struct.new(
       :id,
@@ -5222,6 +5448,8 @@ module Aws::Route53
     #     known status, the default status for the health check is healthy.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheckRequest AWS API Documentation
+    #
     class UpdateHealthCheckRequest < Struct.new(
       :health_check_id,
       :health_check_version,
@@ -5245,6 +5473,8 @@ module Aws::Route53
     #   A complex type that contains information about one health check that
     #   is associated with the current AWS account.
     #   @return [Types::HealthCheck]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHealthCheckResponse AWS API Documentation
     #
     class UpdateHealthCheckResponse < Struct.new(
       :health_check)
@@ -5271,6 +5501,8 @@ module Aws::Route53
     #   `Comment` element, if any.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneCommentRequest AWS API Documentation
+    #
     class UpdateHostedZoneCommentRequest < Struct.new(
       :id,
       :comment)
@@ -5284,6 +5516,8 @@ module Aws::Route53
     #   A complex type that contains general information about the hosted
     #   zone.
     #   @return [Types::HostedZone]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateHostedZoneCommentResponse AWS API Documentation
     #
     class UpdateHostedZoneCommentResponse < Struct.new(
       :hosted_zone)
@@ -5316,6 +5550,8 @@ module Aws::Route53
     #   The new comment for the specified traffic policy and version.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyCommentRequest AWS API Documentation
+    #
     class UpdateTrafficPolicyCommentRequest < Struct.new(
       :id,
       :version,
@@ -5330,6 +5566,8 @@ module Aws::Route53
     #   A complex type that contains settings for the specified traffic
     #   policy.
     #   @return [Types::TrafficPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyCommentResponse AWS API Documentation
     #
     class UpdateTrafficPolicyCommentResponse < Struct.new(
       :traffic_policy)
@@ -5371,6 +5609,8 @@ module Aws::Route53
     #   instance.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstanceRequest AWS API Documentation
+    #
     class UpdateTrafficPolicyInstanceRequest < Struct.new(
       :id,
       :ttl,
@@ -5386,6 +5626,8 @@ module Aws::Route53
     #   A complex type that contains settings for the updated traffic policy
     #   instance.
     #   @return [Types::TrafficPolicyInstance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/UpdateTrafficPolicyInstanceResponse AWS API Documentation
     #
     class UpdateTrafficPolicyInstanceResponse < Struct.new(
       :traffic_policy_instance)
@@ -5411,6 +5653,8 @@ module Aws::Route53
     # @!attribute [rw] vpc_id
     #   The ID of an Amazon VPC.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/VPC AWS API Documentation
     #
     class VPC < Struct.new(
       :vpc_region,

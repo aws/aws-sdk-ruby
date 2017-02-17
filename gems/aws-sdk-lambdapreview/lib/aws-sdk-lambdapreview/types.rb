@@ -56,6 +56,8 @@ module Aws::LambdaPreview
     #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/AddEventSourceRequest AWS API Documentation
+    #
     class AddEventSourceRequest < Struct.new(
       :event_source,
       :function_name,
@@ -75,6 +77,8 @@ module Aws::LambdaPreview
     # @!attribute [rw] function_name
     #   The Lambda function to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/DeleteFunctionRequest AWS API Documentation
     #
     class DeleteFunctionRequest < Struct.new(
       :function_name)
@@ -130,6 +134,8 @@ module Aws::LambdaPreview
     #   processing events, it changes the status to "OK".
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/EventSourceConfiguration AWS API Documentation
+    #
     class EventSourceConfiguration < Struct.new(
       :uuid,
       :batch_size,
@@ -153,6 +159,8 @@ module Aws::LambdaPreview
     #   The presigned URL you can use to download the function's .zip file
     #   that you previously uploaded. The URL is valid for up to 10 minutes.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/FunctionCodeLocation AWS API Documentation
     #
     class FunctionCodeLocation < Struct.new(
       :repository_type,
@@ -217,6 +225,8 @@ module Aws::LambdaPreview
     #   The timestamp of the last time you updated the function.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/FunctionConfiguration AWS API Documentation
+    #
     class FunctionConfiguration < Struct.new(
       :function_name,
       :function_arn,
@@ -244,6 +254,8 @@ module Aws::LambdaPreview
     #   The AWS Lambda assigned ID of the event source mapping.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetEventSourceRequest AWS API Documentation
+    #
     class GetEventSourceRequest < Struct.new(
       :uuid)
       include Aws::Structure
@@ -261,6 +273,8 @@ module Aws::LambdaPreview
     #   configuration information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetFunctionConfigurationRequest AWS API Documentation
+    #
     class GetFunctionConfigurationRequest < Struct.new(
       :function_name)
       include Aws::Structure
@@ -277,6 +291,8 @@ module Aws::LambdaPreview
     #   The Lambda function name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetFunctionRequest AWS API Documentation
+    #
     class GetFunctionRequest < Struct.new(
       :function_name)
       include Aws::Structure
@@ -292,6 +308,8 @@ module Aws::LambdaPreview
     # @!attribute [rw] code
     #   The object for the Lambda function location.
     #   @return [Types::FunctionCodeLocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/GetFunctionResponse AWS API Documentation
     #
     class GetFunctionResponse < Struct.new(
       :configuration,
@@ -315,6 +333,8 @@ module Aws::LambdaPreview
     #   JSON that you want to provide to your Lambda function as input.
     #   @return [IO]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/InvokeAsyncRequest AWS API Documentation
+    #
     class InvokeAsyncRequest < Struct.new(
       :function_name,
       :invoke_args)
@@ -327,6 +347,8 @@ module Aws::LambdaPreview
     # @!attribute [rw] status
     #   It will be 202 upon success.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/InvokeAsyncResponse AWS API Documentation
     #
     class InvokeAsyncResponse < Struct.new(
       :status)
@@ -362,6 +384,8 @@ module Aws::LambdaPreview
     #   return in response. This value must be greater than 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ListEventSourcesRequest AWS API Documentation
+    #
     class ListEventSourcesRequest < Struct.new(
       :event_source_arn,
       :function_name,
@@ -379,6 +403,8 @@ module Aws::LambdaPreview
     # @!attribute [rw] event_sources
     #   An arrary of `EventSourceConfiguration` objects.
     #   @return [Array<Types::EventSourceConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ListEventSourcesResponse AWS API Documentation
     #
     class ListEventSourcesResponse < Struct.new(
       :next_marker,
@@ -406,6 +432,8 @@ module Aws::LambdaPreview
     #   greater than 0.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ListFunctionsRequest AWS API Documentation
+    #
     class ListFunctionsRequest < Struct.new(
       :marker,
       :max_items)
@@ -423,6 +451,8 @@ module Aws::LambdaPreview
     #   A list of Lambda functions.
     #   @return [Array<Types::FunctionConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/ListFunctionsResponse AWS API Documentation
+    #
     class ListFunctionsResponse < Struct.new(
       :next_marker,
       :functions)
@@ -439,6 +469,8 @@ module Aws::LambdaPreview
     # @!attribute [rw] uuid
     #   The event source mapping ID.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/RemoveEventSourceRequest AWS API Documentation
     #
     class RemoveEventSourceRequest < Struct.new(
       :uuid)
@@ -491,6 +523,8 @@ module Aws::LambdaPreview
     #   memory compared to an image processing function. The default value
     #   is 128 MB. The value must be a multiple of 64 MB.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
       :function_name,
@@ -575,6 +609,8 @@ module Aws::LambdaPreview
     #   compared to image processing function. The default value is 128 MB.
     #   The value must be a multiple of 64 MB.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2014-11-11/UploadFunctionRequest AWS API Documentation
     #
     class UploadFunctionRequest < Struct.new(
       :function_name,

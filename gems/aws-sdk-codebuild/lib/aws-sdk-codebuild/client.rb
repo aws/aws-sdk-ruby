@@ -212,6 +212,8 @@ module Aws::CodeBuild
     #   resp.builds_not_found #=> Array
     #   resp.builds_not_found[0] #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuilds AWS API Documentation
+    #
     # @overload batch_get_builds(params = {})
     # @param [Hash] params ({})
     def batch_get_builds(params = {}, options = {})
@@ -268,6 +270,8 @@ module Aws::CodeBuild
     #   resp.projects[0].last_modified #=> Time
     #   resp.projects_not_found #=> Array
     #   resp.projects_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjects AWS API Documentation
     #
     # @overload batch_get_projects(params = {})
     # @param [Hash] params ({})
@@ -395,6 +399,8 @@ module Aws::CodeBuild
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProject AWS API Documentation
+    #
     # @overload create_project(params = {})
     # @param [Hash] params ({})
     def create_project(params = {}, options = {})
@@ -414,6 +420,8 @@ module Aws::CodeBuild
     #   resp = client.delete_project({
     #     name: "NonEmptyString", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProject AWS API Documentation
     #
     # @overload delete_project(params = {})
     # @param [Hash] params ({})
@@ -458,6 +466,8 @@ module Aws::CodeBuild
     #   resp.ids #=> Array
     #   resp.ids[0] #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuilds AWS API Documentation
     #
     # @overload list_builds(params = {})
     # @param [Hash] params ({})
@@ -507,6 +517,8 @@ module Aws::CodeBuild
     #   resp.ids[0] #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProject AWS API Documentation
+    #
     # @overload list_builds_for_project(params = {})
     # @param [Hash] params ({})
     def list_builds_for_project(params = {}, options = {})
@@ -530,6 +542,8 @@ module Aws::CodeBuild
     #   resp.platforms[0].languages[0].images #=> Array
     #   resp.platforms[0].languages[0].images[0].name #=> String
     #   resp.platforms[0].languages[0].images[0].description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImages AWS API Documentation
     #
     # @overload list_curated_environment_images(params = {})
     # @param [Hash] params ({})
@@ -594,6 +608,8 @@ module Aws::CodeBuild
     #   resp.next_token #=> String
     #   resp.projects #=> Array
     #   resp.projects[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjects AWS API Documentation
     #
     # @overload list_projects(params = {})
     # @param [Hash] params ({})
@@ -701,6 +717,8 @@ module Aws::CodeBuild
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuild AWS API Documentation
+    #
     # @overload start_build(params = {})
     # @param [Hash] params ({})
     def start_build(params = {}, options = {})
@@ -762,6 +780,8 @@ module Aws::CodeBuild
     #   resp.build.timeout_in_minutes #=> Integer
     #   resp.build.build_complete #=> Boolean
     #   resp.build.initiator #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuild AWS API Documentation
     #
     # @overload stop_build(params = {})
     # @param [Hash] params ({})
@@ -896,6 +916,8 @@ module Aws::CodeBuild
     #   resp.project.created #=> Time
     #   resp.project.last_modified #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProject AWS API Documentation
+    #
     # @overload update_project(params = {})
     # @param [Hash] params ({})
     def update_project(params = {}, options = {})
@@ -916,7 +938,7 @@ module Aws::CodeBuild
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

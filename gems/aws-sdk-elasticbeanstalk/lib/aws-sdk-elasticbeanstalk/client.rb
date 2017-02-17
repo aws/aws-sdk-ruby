@@ -163,6 +163,8 @@ module Aws::ElasticBeanstalk
     #     environment_name: "EnvironmentName",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdate AWS API Documentation
+    #
     # @overload abort_environment_update(params = {})
     # @param [Hash] params ({})
     def abort_environment_update(params = {}, options = {})
@@ -205,6 +207,8 @@ module Aws::ElasticBeanstalk
     #   resp.action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
     #   resp.status #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ApplyEnvironmentManagedAction AWS API Documentation
+    #
     # @overload apply_environment_managed_action(params = {})
     # @param [Hash] params ({})
     def apply_environment_managed_action(params = {}, options = {})
@@ -232,6 +236,8 @@ module Aws::ElasticBeanstalk
     #
     #   resp.available #=> Boolean
     #   resp.fully_qualified_cname #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CheckDNSAvailability AWS API Documentation
     #
     # @overload check_dns_availability(params = {})
     # @param [Hash] params ({})
@@ -314,6 +320,8 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].environment_links[0].link_name #=> String
     #   resp.environments[0].environment_links[0].environment_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ComposeEnvironments AWS API Documentation
+    #
     # @overload compose_environments(params = {})
     # @param [Hash] params ({})
     def compose_environments(params = {}, options = {})
@@ -381,6 +389,8 @@ module Aws::ElasticBeanstalk
     #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
     #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
     #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplication AWS API Documentation
     #
     # @overload create_application(params = {})
     # @param [Hash] params ({})
@@ -501,6 +511,8 @@ module Aws::ElasticBeanstalk
     #   resp.application_version.date_created #=> Time
     #   resp.application_version.date_updated #=> Time
     #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersion AWS API Documentation
     #
     # @overload create_application_version(params = {})
     # @param [Hash] params ({})
@@ -627,6 +639,8 @@ module Aws::ElasticBeanstalk
     #   resp.option_settings[0].namespace #=> String
     #   resp.option_settings[0].option_name #=> String
     #   resp.option_settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateConfigurationTemplate AWS API Documentation
     #
     # @overload create_configuration_template(params = {})
     # @param [Hash] params ({})
@@ -812,6 +826,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironment AWS API Documentation
+    #
     # @overload create_environment(params = {})
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
@@ -830,6 +846,8 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.s3_bucket #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateStorageLocation AWS API Documentation
     #
     # @overload create_storage_location(params = {})
     # @param [Hash] params ({})
@@ -861,6 +879,8 @@ module Aws::ElasticBeanstalk
     #     application_name: "ApplicationName", # required
     #     terminate_env_by_force: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplication AWS API Documentation
     #
     # @overload delete_application(params = {})
     # @param [Hash] params ({})
@@ -897,6 +917,8 @@ module Aws::ElasticBeanstalk
     #     delete_source_bundle: false,
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteApplicationVersion AWS API Documentation
+    #
     # @overload delete_application_version(params = {})
     # @param [Hash] params ({})
     def delete_application_version(params = {}, options = {})
@@ -927,6 +949,8 @@ module Aws::ElasticBeanstalk
     #     application_name: "ApplicationName", # required
     #     template_name: "ConfigurationTemplateName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteConfigurationTemplate AWS API Documentation
     #
     # @overload delete_configuration_template(params = {})
     # @param [Hash] params ({})
@@ -960,6 +984,8 @@ module Aws::ElasticBeanstalk
     #     application_name: "ApplicationName", # required
     #     environment_name: "EnvironmentName", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeleteEnvironmentConfiguration AWS API Documentation
     #
     # @overload delete_environment_configuration(params = {})
     # @param [Hash] params ({})
@@ -1015,6 +1041,8 @@ module Aws::ElasticBeanstalk
     #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersions AWS API Documentation
+    #
     # @overload describe_application_versions(params = {})
     # @param [Hash] params ({})
     def describe_application_versions(params = {}, options = {})
@@ -1056,6 +1084,8 @@ module Aws::ElasticBeanstalk
     #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
     #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
     #   resp.applications[0].resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplications AWS API Documentation
     #
     # @overload describe_applications(params = {})
     # @param [Hash] params ({})
@@ -1131,6 +1161,8 @@ module Aws::ElasticBeanstalk
     #   resp.options[0].regex.pattern #=> String
     #   resp.options[0].regex.label #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationOptions AWS API Documentation
+    #
     # @overload describe_configuration_options(params = {})
     # @param [Hash] params ({})
     def describe_configuration_options(params = {}, options = {})
@@ -1202,6 +1234,8 @@ module Aws::ElasticBeanstalk
     #   resp.configuration_settings[0].option_settings[0].namespace #=> String
     #   resp.configuration_settings[0].option_settings[0].option_name #=> String
     #   resp.configuration_settings[0].option_settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettings AWS API Documentation
     #
     # @overload describe_configuration_settings(params = {})
     # @param [Hash] params ({})
@@ -1280,6 +1314,8 @@ module Aws::ElasticBeanstalk
     #   resp.instances_health.severe #=> Integer
     #   resp.refreshed_at #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentHealth AWS API Documentation
+    #
     # @overload describe_environment_health(params = {})
     # @param [Hash] params ({})
     def describe_environment_health(params = {}, options = {})
@@ -1328,6 +1364,8 @@ module Aws::ElasticBeanstalk
     #   resp.managed_action_history_items[0].finished_time #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActionHistory AWS API Documentation
+    #
     # @overload describe_environment_managed_action_history(params = {})
     # @param [Hash] params ({})
     def describe_environment_managed_action_history(params = {}, options = {})
@@ -1366,6 +1404,8 @@ module Aws::ElasticBeanstalk
     #   resp.managed_actions[0].action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
     #   resp.managed_actions[0].status #=> String, one of "Scheduled", "Pending", "Running", "Unknown"
     #   resp.managed_actions[0].window_start_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentManagedActions AWS API Documentation
     #
     # @overload describe_environment_managed_actions(params = {})
     # @param [Hash] params ({})
@@ -1417,6 +1457,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_resources.queues #=> Array
     #   resp.environment_resources.queues[0].name #=> String
     #   resp.environment_resources.queues[0].url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironmentResources AWS API Documentation
     #
     # @overload describe_environment_resources(params = {})
     # @param [Hash] params ({})
@@ -1501,6 +1543,8 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].environment_links #=> Array
     #   resp.environments[0].environment_links[0].link_name #=> String
     #   resp.environments[0].environment_links[0].environment_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEnvironments AWS API Documentation
     #
     # @overload describe_environments(params = {})
     # @param [Hash] params ({})
@@ -1597,6 +1641,8 @@ module Aws::ElasticBeanstalk
     #   resp.events[0].severity #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeEvents AWS API Documentation
+    #
     # @overload describe_events(params = {})
     # @param [Hash] params ({})
     def describe_events(params = {}, options = {})
@@ -1682,6 +1728,8 @@ module Aws::ElasticBeanstalk
     #   resp.refreshed_at #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeInstancesHealth AWS API Documentation
+    #
     # @overload describe_instances_health(params = {})
     # @param [Hash] params ({})
     def describe_instances_health(params = {}, options = {})
@@ -1704,6 +1752,8 @@ module Aws::ElasticBeanstalk
     #   resp.solution_stack_details[0].solution_stack_name #=> String
     #   resp.solution_stack_details[0].permitted_file_types #=> Array
     #   resp.solution_stack_details[0].permitted_file_types[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListAvailableSolutionStacks AWS API Documentation
     #
     # @overload list_available_solution_stacks(params = {})
     # @param [Hash] params ({})
@@ -1738,6 +1788,8 @@ module Aws::ElasticBeanstalk
     #     environment_id: "EnvironmentId",
     #     environment_name: "EnvironmentName",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RebuildEnvironment AWS API Documentation
     #
     # @overload rebuild_environment(params = {})
     # @param [Hash] params ({})
@@ -1798,6 +1850,8 @@ module Aws::ElasticBeanstalk
     #     info_type: "tail", # required, accepts tail, bundle
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RequestEnvironmentInfo AWS API Documentation
+    #
     # @overload request_environment_info(params = {})
     # @param [Hash] params ({})
     def request_environment_info(params = {}, options = {})
@@ -1830,6 +1884,8 @@ module Aws::ElasticBeanstalk
     #     environment_id: "EnvironmentId",
     #     environment_name: "EnvironmentName",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServer AWS API Documentation
     #
     # @overload restart_app_server(params = {})
     # @param [Hash] params ({})
@@ -1890,6 +1946,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_info[0].sample_timestamp #=> Time
     #   resp.environment_info[0].message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RetrieveEnvironmentInfo AWS API Documentation
+    #
     # @overload retrieve_environment_info(params = {})
     # @param [Hash] params ({})
     def retrieve_environment_info(params = {}, options = {})
@@ -1940,6 +1998,8 @@ module Aws::ElasticBeanstalk
     #     destination_environment_id: "EnvironmentId",
     #     destination_environment_name: "EnvironmentName",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/SwapEnvironmentCNAMEs AWS API Documentation
     #
     # @overload swap_environment_cnames(params = {})
     # @param [Hash] params ({})
@@ -2048,6 +2108,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/TerminateEnvironment AWS API Documentation
+    #
     # @overload terminate_environment(params = {})
     # @param [Hash] params ({})
     def terminate_environment(params = {}, options = {})
@@ -2101,6 +2163,8 @@ module Aws::ElasticBeanstalk
     #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
     #   resp.application.resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplication AWS API Documentation
+    #
     # @overload update_application(params = {})
     # @param [Hash] params ({})
     def update_application(params = {}, options = {})
@@ -2152,6 +2216,8 @@ module Aws::ElasticBeanstalk
     #   resp.resource_lifecycle_config.version_lifecycle_config.max_age_rule.enabled #=> Boolean
     #   resp.resource_lifecycle_config.version_lifecycle_config.max_age_rule.max_age_in_days #=> Integer
     #   resp.resource_lifecycle_config.version_lifecycle_config.max_age_rule.delete_source_from_s3 #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationResourceLifecycle AWS API Documentation
     #
     # @overload update_application_resource_lifecycle(params = {})
     # @param [Hash] params ({})
@@ -2209,6 +2275,8 @@ module Aws::ElasticBeanstalk
     #   resp.application_version.date_created #=> Time
     #   resp.application_version.date_updated #=> Time
     #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateApplicationVersion AWS API Documentation
     #
     # @overload update_application_version(params = {})
     # @param [Hash] params ({})
@@ -2309,6 +2377,8 @@ module Aws::ElasticBeanstalk
     #   resp.option_settings[0].namespace #=> String
     #   resp.option_settings[0].option_name #=> String
     #   resp.option_settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateConfigurationTemplate AWS API Documentation
     #
     # @overload update_configuration_template(params = {})
     # @param [Hash] params ({})
@@ -2480,6 +2550,8 @@ module Aws::ElasticBeanstalk
     #   resp.environment_links[0].link_name #=> String
     #   resp.environment_links[0].environment_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/UpdateEnvironment AWS API Documentation
+    #
     # @overload update_environment(params = {})
     # @param [Hash] params ({})
     def update_environment(params = {}, options = {})
@@ -2541,6 +2613,8 @@ module Aws::ElasticBeanstalk
     #   resp.messages[0].namespace #=> String
     #   resp.messages[0].option_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ValidateConfigurationSettings AWS API Documentation
+    #
     # @overload validate_configuration_settings(params = {})
     # @param [Hash] params ({})
     def validate_configuration_settings(params = {}, options = {})
@@ -2561,7 +2635,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -76,6 +76,8 @@ module Aws::SQS
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/acp-overview.html#PermissionTypes
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermissionRequest AWS API Documentation
+    #
     class AddPermissionRequest < Struct.new(
       :queue_url,
       :label,
@@ -102,6 +104,8 @@ module Aws::SQS
     # @!attribute [rw] message
     #   A message explaining why the action failed on this entry.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/BatchResultErrorEntry AWS API Documentation
     #
     class BatchResultErrorEntry < Struct.new(
       :id,
@@ -136,6 +140,8 @@ module Aws::SQS
     #   A list of receipt handles of the messages for which the visibility
     #   timeout must be changed.
     #   @return [Array<Types::ChangeMessageVisibilityBatchRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchRequest AWS API Documentation
     #
     class ChangeMessageVisibilityBatchRequest < Struct.new(
       :queue_url,
@@ -183,6 +189,8 @@ module Aws::SQS
     #   The new value (in seconds) for the message's visibility timeout.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchRequestEntry AWS API Documentation
+    #
     class ChangeMessageVisibilityBatchRequestEntry < Struct.new(
       :id,
       :receipt_handle,
@@ -202,6 +210,8 @@ module Aws::SQS
     #   A list of ` BatchResultErrorEntry ` items.
     #   @return [Array<Types::BatchResultErrorEntry>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchResult AWS API Documentation
+    #
     class ChangeMessageVisibilityBatchResult < Struct.new(
       :successful,
       :failed)
@@ -214,6 +224,8 @@ module Aws::SQS
     #   Represents a message whose visibility timeout has been changed
     #   successfully.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityBatchResultEntry AWS API Documentation
     #
     class ChangeMessageVisibilityBatchResultEntry < Struct.new(
       :id)
@@ -246,6 +258,8 @@ module Aws::SQS
     #   The new value for the message's visibility timeout (in seconds).
     #   Values values: `0` to `43200`. Maximum: 12 hours.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ChangeMessageVisibilityRequest AWS API Documentation
     #
     class ChangeMessageVisibilityRequest < Struct.new(
       :queue_url,
@@ -393,6 +407,8 @@ module Aws::SQS
     #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueueRequest AWS API Documentation
+    #
     class CreateQueueRequest < Struct.new(
       :queue_name,
       :attributes)
@@ -404,6 +420,8 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the created Amazon SQS queue.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/CreateQueueResult AWS API Documentation
     #
     class CreateQueueResult < Struct.new(
       :queue_url)
@@ -432,6 +450,8 @@ module Aws::SQS
     # @!attribute [rw] entries
     #   A list of receipt handles for the messages to be deleted.
     #   @return [Array<Types::DeleteMessageBatchRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequest AWS API Documentation
     #
     class DeleteMessageBatchRequest < Struct.new(
       :queue_url,
@@ -462,6 +482,8 @@ module Aws::SQS
     #   A receipt handle.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchRequestEntry AWS API Documentation
+    #
     class DeleteMessageBatchRequestEntry < Struct.new(
       :id,
       :receipt_handle)
@@ -480,6 +502,8 @@ module Aws::SQS
     #   A list of ` BatchResultErrorEntry ` items.
     #   @return [Array<Types::BatchResultErrorEntry>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchResult AWS API Documentation
+    #
     class DeleteMessageBatchResult < Struct.new(
       :successful,
       :failed)
@@ -491,6 +515,8 @@ module Aws::SQS
     # @!attribute [rw] id
     #   Represents a successfully deleted message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageBatchResultEntry AWS API Documentation
     #
     class DeleteMessageBatchResultEntry < Struct.new(
       :id)
@@ -515,6 +541,8 @@ module Aws::SQS
     #   The receipt handle associated with the message to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteMessageRequest AWS API Documentation
+    #
     class DeleteMessageRequest < Struct.new(
       :queue_url,
       :receipt_handle)
@@ -533,6 +561,8 @@ module Aws::SQS
     #
     #   Queue URLs are case-sensitive.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/DeleteQueueRequest AWS API Documentation
     #
     class DeleteQueueRequest < Struct.new(
       :queue_url)
@@ -634,6 +664,8 @@ module Aws::SQS
     #   [7]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesRequest AWS API Documentation
+    #
     class GetQueueAttributesRequest < Struct.new(
       :queue_url,
       :attribute_names)
@@ -645,6 +677,8 @@ module Aws::SQS
     # @!attribute [rw] attributes
     #   A map of attributes to their respective values.
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueAttributesResult AWS API Documentation
     #
     class GetQueueAttributesResult < Struct.new(
       :attributes)
@@ -671,6 +705,8 @@ module Aws::SQS
     #   The AWS account ID of the account that created the queue.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlRequest AWS API Documentation
+    #
     class GetQueueUrlRequest < Struct.new(
       :queue_name,
       :queue_owner_aws_account_id)
@@ -687,6 +723,8 @@ module Aws::SQS
     # @!attribute [rw] queue_url
     #   The URL of the queue.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/GetQueueUrlResult AWS API Documentation
     #
     class GetQueueUrlResult < Struct.new(
       :queue_url)
@@ -706,6 +744,8 @@ module Aws::SQS
     #   Queue URLs are case-sensitive.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesRequest AWS API Documentation
+    #
     class ListDeadLetterSourceQueuesRequest < Struct.new(
       :queue_url)
       include Aws::Structure
@@ -717,6 +757,8 @@ module Aws::SQS
     #   A list of source queue URLs that have the `RedrivePolicy` queue
     #   attribute configured with a dead letter queue.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListDeadLetterSourceQueuesResult AWS API Documentation
     #
     class ListDeadLetterSourceQueuesResult < Struct.new(
       :queue_urls)
@@ -737,6 +779,8 @@ module Aws::SQS
     #   Queue names are case-sensitive.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesRequest AWS API Documentation
+    #
     class ListQueuesRequest < Struct.new(
       :queue_name_prefix)
       include Aws::Structure
@@ -747,6 +791,8 @@ module Aws::SQS
     # @!attribute [rw] queue_urls
     #   A list of queue URLs, up to 1,000 entries.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ListQueuesResult AWS API Documentation
     #
     class ListQueuesResult < Struct.new(
       :queue_urls)
@@ -806,6 +852,8 @@ module Aws::SQS
     #
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
     #   @return [Hash<String,Types::MessageAttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/Message AWS API Documentation
     #
     class Message < Struct.new(
       :message_id,
@@ -874,6 +922,8 @@ module Aws::SQS
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-data-types-validation
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/MessageAttributeValue AWS API Documentation
+    #
     class MessageAttributeValue < Struct.new(
       :string_value,
       :binary_value,
@@ -896,6 +946,8 @@ module Aws::SQS
     #
     #   Queue URLs are case-sensitive.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/PurgeQueueRequest AWS API Documentation
     #
     class PurgeQueueRequest < Struct.new(
       :queue_url)
@@ -1102,6 +1154,8 @@ module Aws::SQS
     #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-receiverequestattemptid-request-parameter
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageRequest AWS API Documentation
+    #
     class ReceiveMessageRequest < Struct.new(
       :queue_url,
       :attribute_names,
@@ -1118,6 +1172,8 @@ module Aws::SQS
     # @!attribute [rw] messages
     #   A list of messages.
     #   @return [Array<Types::Message>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/ReceiveMessageResult AWS API Documentation
     #
     class ReceiveMessageResult < Struct.new(
       :messages)
@@ -1142,6 +1198,8 @@ module Aws::SQS
     #   The identification of the permission to remove. This is the label
     #   added using the ` AddPermission ` action.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/RemovePermissionRequest AWS API Documentation
     #
     class RemovePermissionRequest < Struct.new(
       :queue_url,
@@ -1183,6 +1241,8 @@ module Aws::SQS
     # @!attribute [rw] entries
     #   A list of ` SendMessageBatchRequestEntry ` items.
     #   @return [Array<Types::SendMessageBatchRequestEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequest AWS API Documentation
     #
     class SendMessageBatchRequest < Struct.new(
       :queue_url,
@@ -1348,6 +1408,8 @@ module Aws::SQS
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagegroupid-property
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchRequestEntry AWS API Documentation
+    #
     class SendMessageBatchRequestEntry < Struct.new(
       :id,
       :message_body,
@@ -1370,6 +1432,8 @@ module Aws::SQS
     #   A list of ` BatchResultErrorEntry ` items with error details about
     #   each message that can't be enqueued.
     #   @return [Array<Types::BatchResultErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchResult AWS API Documentation
     #
     class SendMessageBatchResult < Struct.new(
       :successful,
@@ -1419,6 +1483,8 @@ module Aws::SQS
     #   The length of `SequenceNumber` is 128 bits. As `SequenceNumber`
     #   continues to increase for a particular `MessageGroupId`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageBatchResultEntry AWS API Documentation
     #
     class SendMessageBatchResultEntry < Struct.new(
       :id,
@@ -1603,6 +1669,8 @@ module Aws::SQS
     #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagegroupid-property
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageRequest AWS API Documentation
+    #
     class SendMessageRequest < Struct.new(
       :queue_url,
       :message_body,
@@ -1656,6 +1724,8 @@ module Aws::SQS
     #   The length of `SequenceNumber` is 128 bits. `SequenceNumber`
     #   continues to increase for a particular `MessageGroupId`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SendMessageResult AWS API Documentation
     #
     class SendMessageResult < Struct.new(
       :md5_of_message_body,
@@ -1787,6 +1857,8 @@ module Aws::SQS
     #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
     #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/SetQueueAttributesRequest AWS API Documentation
     #
     class SetQueueAttributesRequest < Struct.new(
       :queue_url,

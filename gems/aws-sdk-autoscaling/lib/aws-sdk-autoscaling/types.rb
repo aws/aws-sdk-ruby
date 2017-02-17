@@ -20,6 +20,8 @@ module Aws::AutoScaling
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ActivitiesType AWS API Documentation
+    #
     class ActivitiesType < Struct.new(
       :activities,
       :next_token)
@@ -71,6 +73,8 @@ module Aws::AutoScaling
     #   The details about the activity.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Activity AWS API Documentation
+    #
     class Activity < Struct.new(
       :activity_id,
       :auto_scaling_group_name,
@@ -91,6 +95,8 @@ module Aws::AutoScaling
     #   A scaling activity.
     #   @return [Types::Activity]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ActivityType AWS API Documentation
+    #
     class ActivityType < Struct.new(
       :activity)
       include Aws::Structure
@@ -110,6 +116,8 @@ module Aws::AutoScaling
     #   `ExactCapacity`, and `PercentChangeInCapacity`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AdjustmentType AWS API Documentation
+    #
     class AdjustmentType < Struct.new(
       :adjustment_type)
       include Aws::Structure
@@ -124,6 +132,8 @@ module Aws::AutoScaling
     # @!attribute [rw] alarm_arn
     #   The Amazon Resource Name (ARN) of the alarm.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Alarm AWS API Documentation
     #
     class Alarm < Struct.new(
       :alarm_name,
@@ -149,12 +159,16 @@ module Aws::AutoScaling
     #   The name of the group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachInstancesQuery AWS API Documentation
+    #
     class AttachInstancesQuery < Struct.new(
       :instance_ids,
       :auto_scaling_group_name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsResultType AWS API Documentation
+    #
     class AttachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
 
     # Contains the parameters for AttachLoadBalancerTargetGroups.
@@ -175,6 +189,8 @@ module Aws::AutoScaling
     #   The Amazon Resource Names (ARN) of the target groups.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancerTargetGroupsType AWS API Documentation
+    #
     class AttachLoadBalancerTargetGroupsType < Struct.new(
       :auto_scaling_group_name,
       :target_group_arns)
@@ -182,6 +198,8 @@ module Aws::AutoScaling
     end
 
     # Contains the output of AttachLoadBalancers.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersResultType AWS API Documentation
     #
     class AttachLoadBalancersResultType < Aws::EmptyStructure; end
 
@@ -202,6 +220,8 @@ module Aws::AutoScaling
     # @!attribute [rw] load_balancer_names
     #   One or more load balancer names.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersType AWS API Documentation
     #
     class AttachLoadBalancersType < Struct.new(
       :auto_scaling_group_name,
@@ -316,6 +336,8 @@ module Aws::AutoScaling
     #   termination by Auto Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroup AWS API Documentation
+    #
     class AutoScalingGroup < Struct.new(
       :auto_scaling_group_name,
       :auto_scaling_group_arn,
@@ -367,6 +389,8 @@ module Aws::AutoScaling
     #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroupNamesType AWS API Documentation
+    #
     class AutoScalingGroupNamesType < Struct.new(
       :auto_scaling_group_names,
       :next_token,
@@ -384,6 +408,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroupsType AWS API Documentation
     #
     class AutoScalingGroupsType < Struct.new(
       :auto_scaling_groups,
@@ -430,6 +456,8 @@ module Aws::AutoScaling
     #   Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingInstanceDetails AWS API Documentation
+    #
     class AutoScalingInstanceDetails < Struct.new(
       :instance_id,
       :auto_scaling_group_name,
@@ -451,6 +479,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingInstancesType AWS API Documentation
     #
     class AutoScalingInstancesType < Struct.new(
       :auto_scaling_instances,
@@ -498,6 +528,8 @@ module Aws::AutoScaling
     #   instance if the instance fails the health check.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/BlockDeviceMapping AWS API Documentation
+    #
     class BlockDeviceMapping < Struct.new(
       :virtual_name,
       :device_name,
@@ -507,6 +539,8 @@ module Aws::AutoScaling
     end
 
     # Contains the output of CompleteLifecycleAction.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleActionAnswer AWS API Documentation
     #
     class CompleteLifecycleActionAnswer < Aws::EmptyStructure; end
 
@@ -546,6 +580,8 @@ module Aws::AutoScaling
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleActionType AWS API Documentation
     #
     class CompleteLifecycleActionType < Struct.new(
       :lifecycle_hook_name,
@@ -747,6 +783,8 @@ module Aws::AutoScaling
     #
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateAutoScalingGroupType AWS API Documentation
     #
     class CreateAutoScalingGroupType < Struct.new(
       :auto_scaling_group_name,
@@ -1022,6 +1060,8 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateLaunchConfigurationType AWS API Documentation
+    #
     class CreateLaunchConfigurationType < Struct.new(
       :launch_configuration_name,
       :image_id,
@@ -1065,6 +1105,8 @@ module Aws::AutoScaling
     #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CreateOrUpdateTagsType AWS API Documentation
+    #
     class CreateOrUpdateTagsType < Struct.new(
       :tags)
       include Aws::Structure
@@ -1091,6 +1133,8 @@ module Aws::AutoScaling
     #   associated with the group.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteAutoScalingGroupType AWS API Documentation
+    #
     class DeleteAutoScalingGroupType < Struct.new(
       :auto_scaling_group_name,
       :force_delete)
@@ -1098,6 +1142,8 @@ module Aws::AutoScaling
     end
 
     # Contains the output of DeleteLifecycleHook.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookAnswer AWS API Documentation
     #
     class DeleteLifecycleHookAnswer < Aws::EmptyStructure; end
 
@@ -1118,6 +1164,8 @@ module Aws::AutoScaling
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group for the lifecycle hook.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookType AWS API Documentation
     #
     class DeleteLifecycleHookType < Struct.new(
       :lifecycle_hook_name,
@@ -1144,6 +1192,8 @@ module Aws::AutoScaling
     #   Service (SNS) topic.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteNotificationConfigurationType AWS API Documentation
+    #
     class DeleteNotificationConfigurationType < Struct.new(
       :auto_scaling_group_name,
       :topic_arn)
@@ -1168,6 +1218,8 @@ module Aws::AutoScaling
     #   The name or Amazon Resource Name (ARN) of the policy.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeletePolicyType AWS API Documentation
+    #
     class DeletePolicyType < Struct.new(
       :auto_scaling_group_name,
       :policy_name)
@@ -1191,6 +1243,8 @@ module Aws::AutoScaling
     # @!attribute [rw] scheduled_action_name
     #   The name of the action to delete.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteScheduledActionType AWS API Documentation
     #
     class DeleteScheduledActionType < Struct.new(
       :auto_scaling_group_name,
@@ -1219,6 +1273,8 @@ module Aws::AutoScaling
     #   One or more tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteTagsType AWS API Documentation
+    #
     class DeleteTagsType < Struct.new(
       :tags)
       include Aws::Structure
@@ -1244,6 +1300,8 @@ module Aws::AutoScaling
     #   The current number of launch configurations for your AWS account.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAccountLimitsAnswer AWS API Documentation
+    #
     class DescribeAccountLimitsAnswer < Struct.new(
       :max_number_of_auto_scaling_groups,
       :max_number_of_launch_configurations,
@@ -1257,6 +1315,8 @@ module Aws::AutoScaling
     # @!attribute [rw] adjustment_types
     #   The policy adjustment types.
     #   @return [Array<Types::AdjustmentType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAdjustmentTypesAnswer AWS API Documentation
     #
     class DescribeAdjustmentTypesAnswer < Struct.new(
       :adjustment_types)
@@ -1289,6 +1349,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingInstancesType AWS API Documentation
+    #
     class DescribeAutoScalingInstancesType < Struct.new(
       :instance_ids,
       :max_records,
@@ -1302,6 +1364,8 @@ module Aws::AutoScaling
     #   The notification types.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeAutoScalingNotificationTypesAnswer AWS API Documentation
+    #
     class DescribeAutoScalingNotificationTypesAnswer < Struct.new(
       :auto_scaling_notification_types)
       include Aws::Structure
@@ -1313,6 +1377,8 @@ module Aws::AutoScaling
     #   The lifecycle hook types.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHookTypesAnswer AWS API Documentation
+    #
     class DescribeLifecycleHookTypesAnswer < Struct.new(
       :lifecycle_hook_types)
       include Aws::Structure
@@ -1323,6 +1389,8 @@ module Aws::AutoScaling
     # @!attribute [rw] lifecycle_hooks
     #   The lifecycle hooks for the specified group.
     #   @return [Array<Types::LifecycleHook>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooksAnswer AWS API Documentation
     #
     class DescribeLifecycleHooksAnswer < Struct.new(
       :lifecycle_hooks)
@@ -1347,6 +1415,8 @@ module Aws::AutoScaling
     #   The names of one or more lifecycle hooks. If you omit this
     #   parameter, all lifecycle hooks are described.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLifecycleHooksType AWS API Documentation
     #
     class DescribeLifecycleHooksType < Struct.new(
       :auto_scaling_group_name,
@@ -1378,6 +1448,8 @@ module Aws::AutoScaling
     #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroupsRequest AWS API Documentation
+    #
     class DescribeLoadBalancerTargetGroupsRequest < Struct.new(
       :auto_scaling_group_name,
       :next_token,
@@ -1395,6 +1467,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroupsResponse AWS API Documentation
     #
     class DescribeLoadBalancerTargetGroupsResponse < Struct.new(
       :load_balancer_target_groups,
@@ -1426,6 +1500,8 @@ module Aws::AutoScaling
     #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancersRequest AWS API Documentation
+    #
     class DescribeLoadBalancersRequest < Struct.new(
       :auto_scaling_group_name,
       :next_token,
@@ -1444,6 +1520,8 @@ module Aws::AutoScaling
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancersResponse AWS API Documentation
+    #
     class DescribeLoadBalancersResponse < Struct.new(
       :load_balancers,
       :next_token)
@@ -1459,6 +1537,8 @@ module Aws::AutoScaling
     # @!attribute [rw] granularities
     #   The granularities for the metrics.
     #   @return [Array<Types::MetricGranularityType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeMetricCollectionTypesAnswer AWS API Documentation
     #
     class DescribeMetricCollectionTypesAnswer < Struct.new(
       :metrics,
@@ -1476,6 +1556,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurationsAnswer AWS API Documentation
     #
     class DescribeNotificationConfigurationsAnswer < Struct.new(
       :notification_configurations,
@@ -1506,6 +1588,8 @@ module Aws::AutoScaling
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurationsType AWS API Documentation
     #
     class DescribeNotificationConfigurationsType < Struct.new(
       :auto_scaling_group_names,
@@ -1553,6 +1637,8 @@ module Aws::AutoScaling
     #   The maximum number of items to be returned with each call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePoliciesType AWS API Documentation
+    #
     class DescribePoliciesType < Struct.new(
       :auto_scaling_group_name,
       :policy_names,
@@ -1595,6 +1681,8 @@ module Aws::AutoScaling
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScalingActivitiesType AWS API Documentation
     #
     class DescribeScalingActivitiesType < Struct.new(
       :activity_ids,
@@ -1651,6 +1739,8 @@ module Aws::AutoScaling
     #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActionsType AWS API Documentation
+    #
     class DescribeScheduledActionsType < Struct.new(
       :auto_scaling_group_name,
       :scheduled_action_names,
@@ -1690,6 +1780,8 @@ module Aws::AutoScaling
     #   The maximum number of items to return with this call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTagsType AWS API Documentation
+    #
     class DescribeTagsType < Struct.new(
       :filters,
       :next_token,
@@ -1705,6 +1797,8 @@ module Aws::AutoScaling
     #   `ClosestToNextInstanceHour`, and `Default`).
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTerminationPolicyTypesAnswer AWS API Documentation
+    #
     class DescribeTerminationPolicyTypesAnswer < Struct.new(
       :termination_policy_types)
       include Aws::Structure
@@ -1716,6 +1810,8 @@ module Aws::AutoScaling
     #   The activities related to detaching the instances from the Auto
     #   Scaling group.
     #   @return [Array<Types::Activity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstancesAnswer AWS API Documentation
     #
     class DetachInstancesAnswer < Struct.new(
       :activities)
@@ -1746,6 +1842,8 @@ module Aws::AutoScaling
     #   value by the number of instances detached.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachInstancesQuery AWS API Documentation
+    #
     class DetachInstancesQuery < Struct.new(
       :instance_ids,
       :auto_scaling_group_name,
@@ -1753,6 +1851,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroupsResultType AWS API Documentation
+    #
     class DetachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DetachLoadBalancerTargetGroupsType
@@ -1771,6 +1871,8 @@ module Aws::AutoScaling
     #   The Amazon Resource Names (ARN) of the target groups.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancerTargetGroupsType AWS API Documentation
+    #
     class DetachLoadBalancerTargetGroupsType < Struct.new(
       :auto_scaling_group_name,
       :target_group_arns)
@@ -1778,6 +1880,8 @@ module Aws::AutoScaling
     end
 
     # Contains the output for DetachLoadBalancers.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersResultType AWS API Documentation
     #
     class DetachLoadBalancersResultType < Aws::EmptyStructure; end
 
@@ -1798,6 +1902,8 @@ module Aws::AutoScaling
     # @!attribute [rw] load_balancer_names
     #   One or more load balancer names.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersType AWS API Documentation
     #
     class DetachLoadBalancersType < Struct.new(
       :auto_scaling_group_name,
@@ -1839,6 +1945,8 @@ module Aws::AutoScaling
     #
     #   * `GroupTotalInstances`
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DisableMetricsCollectionQuery AWS API Documentation
     #
     class DisableMetricsCollectionQuery < Struct.new(
       :auto_scaling_group_name,
@@ -1915,6 +2023,8 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Ebs AWS API Documentation
+    #
     class Ebs < Struct.new(
       :snapshot_id,
       :volume_size,
@@ -1966,6 +2076,8 @@ module Aws::AutoScaling
     #   valid value is `1Minute`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnableMetricsCollectionQuery AWS API Documentation
+    #
     class EnableMetricsCollectionQuery < Struct.new(
       :auto_scaling_group_name,
       :metrics,
@@ -1999,6 +2111,8 @@ module Aws::AutoScaling
     #   The granularity of the metric. The only valid value is `1Minute`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnabledMetric AWS API Documentation
+    #
     class EnabledMetric < Struct.new(
       :metric,
       :granularity)
@@ -2010,6 +2124,8 @@ module Aws::AutoScaling
     # @!attribute [rw] activities
     #   The activities related to moving instances into `Standby` mode.
     #   @return [Array<Types::Activity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandbyAnswer AWS API Documentation
     #
     class EnterStandbyAnswer < Struct.new(
       :activities)
@@ -2042,6 +2158,8 @@ module Aws::AutoScaling
     #   desired capacity for the Auto Scaling group decrements by the number
     #   of instances moved to `Standby` mode.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/EnterStandbyQuery AWS API Documentation
     #
     class EnterStandbyQuery < Struct.new(
       :instance_ids,
@@ -2108,6 +2226,8 @@ module Aws::AutoScaling
     #   not supported otherwise.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExecutePolicyType AWS API Documentation
+    #
     class ExecutePolicyType < Struct.new(
       :auto_scaling_group_name,
       :policy_name,
@@ -2122,6 +2242,8 @@ module Aws::AutoScaling
     # @!attribute [rw] activities
     #   The activities related to moving instances out of `Standby` mode.
     #   @return [Array<Types::Activity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandbyAnswer AWS API Documentation
     #
     class ExitStandbyAnswer < Struct.new(
       :activities)
@@ -2145,6 +2267,8 @@ module Aws::AutoScaling
     # @!attribute [rw] auto_scaling_group_name
     #   The name of the Auto Scaling group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ExitStandbyQuery AWS API Documentation
     #
     class ExitStandbyQuery < Struct.new(
       :instance_ids,
@@ -2171,6 +2295,8 @@ module Aws::AutoScaling
     # @!attribute [rw] values
     #   The value of the filter.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Filter AWS API Documentation
     #
     class Filter < Struct.new(
       :name,
@@ -2209,6 +2335,8 @@ module Aws::AutoScaling
     #   Scaling when scaling in.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Instance AWS API Documentation
+    #
     class Instance < Struct.new(
       :instance_id,
       :availability_zone,
@@ -2231,6 +2359,8 @@ module Aws::AutoScaling
     # @!attribute [rw] enabled
     #   If `True`, instance monitoring is enabled.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceMonitoring AWS API Documentation
     #
     class InstanceMonitoring < Struct.new(
       :enabled)
@@ -2337,6 +2467,8 @@ module Aws::AutoScaling
     #   hardware and can only be launched into a VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfiguration AWS API Documentation
+    #
     class LaunchConfiguration < Struct.new(
       :launch_configuration_name,
       :launch_configuration_arn,
@@ -2373,6 +2505,8 @@ module Aws::AutoScaling
     #   The name of the launch configuration.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationNameType AWS API Documentation
+    #
     class LaunchConfigurationNameType < Struct.new(
       :launch_configuration_name)
       include Aws::Structure
@@ -2404,6 +2538,8 @@ module Aws::AutoScaling
     #   100.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationNamesType AWS API Documentation
+    #
     class LaunchConfigurationNamesType < Struct.new(
       :launch_configuration_names,
       :next_token,
@@ -2421,6 +2557,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationsType AWS API Documentation
     #
     class LaunchConfigurationsType < Struct.new(
       :launch_configurations,
@@ -2512,6 +2650,8 @@ module Aws::AutoScaling
     #   `CONTINUE`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LifecycleHook AWS API Documentation
+    #
     class LifecycleHook < Struct.new(
       :lifecycle_hook_name,
       :auto_scaling_group_name,
@@ -2563,6 +2703,8 @@ module Aws::AutoScaling
     #     load balancer.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerState AWS API Documentation
+    #
     class LoadBalancerState < Struct.new(
       :load_balancer_name,
       :state)
@@ -2604,6 +2746,8 @@ module Aws::AutoScaling
     #     target group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerTargetGroupState AWS API Documentation
+    #
     class LoadBalancerTargetGroupState < Struct.new(
       :load_balancer_target_group_arn,
       :state)
@@ -2632,6 +2776,8 @@ module Aws::AutoScaling
     #   * `GroupTotalInstances`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricCollectionType AWS API Documentation
+    #
     class MetricCollectionType < Struct.new(
       :metric)
       include Aws::Structure
@@ -2642,6 +2788,8 @@ module Aws::AutoScaling
     # @!attribute [rw] granularity
     #   The granularity. The only valid value is `1Minute`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/MetricGranularityType AWS API Documentation
     #
     class MetricGranularityType < Struct.new(
       :granularity)
@@ -2673,6 +2821,8 @@ module Aws::AutoScaling
     #   * `autoscaling:TEST_NOTIFICATION`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/NotificationConfiguration AWS API Documentation
+    #
     class NotificationConfiguration < Struct.new(
       :auto_scaling_group_name,
       :topic_arn,
@@ -2691,6 +2841,8 @@ module Aws::AutoScaling
     #   no additional items to return, the string is empty.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PoliciesType AWS API Documentation
+    #
     class PoliciesType < Struct.new(
       :scaling_policies,
       :next_token)
@@ -2702,6 +2854,8 @@ module Aws::AutoScaling
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the policy.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PolicyARNType AWS API Documentation
     #
     class PolicyARNType < Struct.new(
       :policy_arn)
@@ -2737,6 +2891,8 @@ module Aws::AutoScaling
     #   * `ScheduledActions`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ProcessType AWS API Documentation
+    #
     class ProcessType < Struct.new(
       :process_name)
       include Aws::Structure
@@ -2748,12 +2904,16 @@ module Aws::AutoScaling
     #   The names of the process types.
     #   @return [Array<Types::ProcessType>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ProcessesType AWS API Documentation
+    #
     class ProcessesType < Struct.new(
       :processes)
       include Aws::Structure
     end
 
     # Contains the output of PutLifecycleHook.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHookAnswer AWS API Documentation
     #
     class PutLifecycleHookAnswer < Aws::EmptyStructure; end
 
@@ -2834,6 +2994,8 @@ module Aws::AutoScaling
     #   value is `ABANDON`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHookType AWS API Documentation
+    #
     class PutLifecycleHookType < Struct.new(
       :lifecycle_hook_name,
       :auto_scaling_group_name,
@@ -2871,6 +3033,8 @@ module Aws::AutoScaling
     #   details about notification types supported by Auto Scaling, see
     #   DescribeAutoScalingNotificationTypes.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutNotificationConfigurationType AWS API Documentation
     #
     class PutNotificationConfigurationType < Struct.new(
       :auto_scaling_group_name,
@@ -2992,6 +3156,8 @@ module Aws::AutoScaling
     #   `SimpleScaling`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScalingPolicyType AWS API Documentation
+    #
     class PutScalingPolicyType < Struct.new(
       :auto_scaling_group_name,
       :policy_name,
@@ -3074,6 +3240,8 @@ module Aws::AutoScaling
     #   The number of EC2 instances that should be running in the group.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutScheduledUpdateGroupActionType AWS API Documentation
+    #
     class PutScheduledUpdateGroupActionType < Struct.new(
       :auto_scaling_group_name,
       :scheduled_action_name,
@@ -3088,6 +3256,8 @@ module Aws::AutoScaling
     end
 
     # Contains the output of RecordLifecycleActionHeartBeat.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatAnswer AWS API Documentation
     #
     class RecordLifecycleActionHeartbeatAnswer < Aws::EmptyStructure; end
 
@@ -3121,6 +3291,8 @@ module Aws::AutoScaling
     # @!attribute [rw] instance_id
     #   The ID of the instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatType AWS API Documentation
     #
     class RecordLifecycleActionHeartbeatType < Struct.new(
       :lifecycle_hook_name,
@@ -3197,6 +3369,8 @@ module Aws::AutoScaling
     #   The CloudWatch alarms related to the policy.
     #   @return [Array<Types::Alarm>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingPolicy AWS API Documentation
+    #
     class ScalingPolicy < Struct.new(
       :auto_scaling_group_name,
       :policy_name,
@@ -3249,6 +3423,8 @@ module Aws::AutoScaling
     #   * `AddToLoadBalancer`
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScalingProcessQuery AWS API Documentation
+    #
     class ScalingProcessQuery < Struct.new(
       :auto_scaling_group_name,
       :scaling_processes)
@@ -3265,6 +3441,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledActionsType AWS API Documentation
     #
     class ScheduledActionsType < Struct.new(
       :scheduled_update_group_actions,
@@ -3320,6 +3498,8 @@ module Aws::AutoScaling
     #   The number of instances you prefer to maintain in the group.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/ScheduledUpdateGroupAction AWS API Documentation
+    #
     class ScheduledUpdateGroupAction < Struct.new(
       :auto_scaling_group_name,
       :scheduled_action_name,
@@ -3362,6 +3542,8 @@ module Aws::AutoScaling
     #   set your Auto Scaling group to its new capacity.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetDesiredCapacityType AWS API Documentation
+    #
     class SetDesiredCapacityType < Struct.new(
       :auto_scaling_group_name,
       :desired_capacity,
@@ -3402,6 +3584,8 @@ module Aws::AutoScaling
     #   period for CreateAutoScalingGroup.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceHealthQuery AWS API Documentation
+    #
     class SetInstanceHealthQuery < Struct.new(
       :instance_id,
       :health_status,
@@ -3410,6 +3594,8 @@ module Aws::AutoScaling
     end
 
     # Contains the output of SetInstanceProtection.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionAnswer AWS API Documentation
     #
     class SetInstanceProtectionAnswer < Aws::EmptyStructure; end
 
@@ -3436,6 +3622,8 @@ module Aws::AutoScaling
     #   Indicates whether the instance is protected from termination by Auto
     #   Scaling when scaling in.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionQuery AWS API Documentation
     #
     class SetInstanceProtectionQuery < Struct.new(
       :instance_ids,
@@ -3509,6 +3697,8 @@ module Aws::AutoScaling
     #   number removes from the current capacity.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/StepAdjustment AWS API Documentation
+    #
     class StepAdjustment < Struct.new(
       :metric_interval_lower_bound,
       :metric_interval_upper_bound,
@@ -3526,6 +3716,8 @@ module Aws::AutoScaling
     # @!attribute [rw] suspension_reason
     #   The reason that the process was suspended.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SuspendedProcess AWS API Documentation
     #
     class SuspendedProcess < Struct.new(
       :process_name,
@@ -3568,6 +3760,8 @@ module Aws::AutoScaling
     #   launched in the group.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :resource_id,
       :resource_type,
@@ -3601,6 +3795,8 @@ module Aws::AutoScaling
     #   launched in the group.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TagDescription AWS API Documentation
+    #
     class TagDescription < Struct.new(
       :resource_id,
       :resource_type,
@@ -3620,6 +3816,8 @@ module Aws::AutoScaling
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TagsType AWS API Documentation
     #
     class TagsType < Struct.new(
       :tags,
@@ -3645,6 +3843,8 @@ module Aws::AutoScaling
     #   If `true`, terminating the instance also decrements the size of the
     #   Auto Scaling group.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/TerminateInstanceInAutoScalingGroupType AWS API Documentation
     #
     class TerminateInstanceInAutoScalingGroupType < Struct.new(
       :instance_id,
@@ -3773,6 +3973,8 @@ module Aws::AutoScaling
     #   Indicates whether newly launched instances are protected from
     #   termination by Auto Scaling when scaling in.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/UpdateAutoScalingGroupType AWS API Documentation
     #
     class UpdateAutoScalingGroupType < Struct.new(
       :auto_scaling_group_name,

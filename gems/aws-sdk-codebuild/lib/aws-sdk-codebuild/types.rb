@@ -19,6 +19,8 @@ module Aws::CodeBuild
     #   The IDs of the builds.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildsInput AWS API Documentation
+    #
     class BatchGetBuildsInput < Struct.new(
       :ids)
       include Aws::Structure
@@ -31,6 +33,8 @@ module Aws::CodeBuild
     # @!attribute [rw] builds_not_found
     #   The IDs of builds for which information could not be found.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetBuildsOutput AWS API Documentation
     #
     class BatchGetBuildsOutput < Struct.new(
       :builds,
@@ -49,6 +53,8 @@ module Aws::CodeBuild
     #   The names of the build projects.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjectsInput AWS API Documentation
+    #
     class BatchGetProjectsInput < Struct.new(
       :names)
       include Aws::Structure
@@ -62,6 +68,8 @@ module Aws::CodeBuild
     #   The names of build projects for which information could not be
     #   found.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchGetProjectsOutput AWS API Documentation
     #
     class BatchGetProjectsOutput < Struct.new(
       :projects,
@@ -159,6 +167,8 @@ module Aws::CodeBuild
     #     string `CodeBuild-Jenkins-Plugin`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Build AWS API Documentation
+    #
     class Build < Struct.new(
       :id,
       :arn,
@@ -208,6 +218,8 @@ module Aws::CodeBuild
     #
     #    </note>
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildArtifacts AWS API Documentation
     #
     class BuildArtifacts < Struct.new(
       :location,
@@ -282,6 +294,8 @@ module Aws::CodeBuild
     #   Additional information about a build phase, especially to help
     #   troubleshoot a failed build.
     #   @return [Array<Types::PhaseContext>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BuildPhase AWS API Documentation
     #
     class BuildPhase < Struct.new(
       :phase_type,
@@ -385,6 +399,8 @@ module Aws::CodeBuild
     #   CodeBuild build project tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectInput AWS API Documentation
+    #
     class CreateProjectInput < Struct.new(
       :name,
       :description,
@@ -402,6 +418,8 @@ module Aws::CodeBuild
     #   Information about the build project that was created.
     #   @return [Types::Project]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/CreateProjectOutput AWS API Documentation
+    #
     class CreateProjectOutput < Struct.new(
       :project)
       include Aws::Structure
@@ -418,11 +436,15 @@ module Aws::CodeBuild
     #   The name of the build project.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProjectInput AWS API Documentation
+    #
     class DeleteProjectInput < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/DeleteProjectOutput AWS API Documentation
+    #
     class DeleteProjectOutput < Aws::EmptyStructure; end
 
     # Information about a Docker image that is managed by AWS CodeBuild.
@@ -434,6 +456,8 @@ module Aws::CodeBuild
     # @!attribute [rw] description
     #   The description of the Docker image.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentImage AWS API Documentation
     #
     class EnvironmentImage < Struct.new(
       :name,
@@ -453,6 +477,8 @@ module Aws::CodeBuild
     #   programming language.
     #   @return [Array<Types::EnvironmentImage>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentLanguage AWS API Documentation
+    #
     class EnvironmentLanguage < Struct.new(
       :language,
       :images)
@@ -470,6 +496,8 @@ module Aws::CodeBuild
     #   The list of programming languages that are available for the
     #   specified platform.
     #   @return [Array<Types::EnvironmentLanguage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentPlatform AWS API Documentation
     #
     class EnvironmentPlatform < Struct.new(
       :platform,
@@ -495,6 +523,8 @@ module Aws::CodeBuild
     # @!attribute [rw] value
     #   The value of the environment variable.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/EnvironmentVariable AWS API Documentation
     #
     class EnvironmentVariable < Struct.new(
       :name,
@@ -533,6 +563,8 @@ module Aws::CodeBuild
     #   tokens are returned.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProjectInput AWS API Documentation
+    #
     class ListBuildsForProjectInput < Struct.new(
       :project_name,
       :sort_order,
@@ -551,6 +583,8 @@ module Aws::CodeBuild
     #   token*. To get the next batch of items in the list, call this
     #   operation again, adding the next token to the call.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsForProjectOutput AWS API Documentation
     #
     class ListBuildsForProjectOutput < Struct.new(
       :ids,
@@ -584,6 +618,8 @@ module Aws::CodeBuild
     #   tokens are returned.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsInput AWS API Documentation
+    #
     class ListBuildsInput < Struct.new(
       :sort_order,
       :next_token)
@@ -601,6 +637,8 @@ module Aws::CodeBuild
     #   operation again, adding the next token to the call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListBuildsOutput AWS API Documentation
+    #
     class ListBuildsOutput < Struct.new(
       :ids,
       :next_token)
@@ -609,12 +647,16 @@ module Aws::CodeBuild
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImagesInput AWS API Documentation
+    #
     class ListCuratedEnvironmentImagesInput < Aws::EmptyStructure; end
 
     # @!attribute [rw] platforms
     #   Information about supported platforms for Docker images that are
     #   managed by AWS CodeBuild.
     #   @return [Array<Types::EnvironmentPlatform>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListCuratedEnvironmentImagesOutput AWS API Documentation
     #
     class ListCuratedEnvironmentImagesOutput < Struct.new(
       :platforms)
@@ -668,6 +710,8 @@ module Aws::CodeBuild
     #   tokens are returned.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjectsInput AWS API Documentation
+    #
     class ListProjectsInput < Struct.new(
       :sort_by,
       :sort_order,
@@ -686,6 +730,8 @@ module Aws::CodeBuild
     #   The list of build project names, with each build project name
     #   representing a single build project.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ListProjectsOutput AWS API Documentation
     #
     class ListProjectsOutput < Struct.new(
       :next_token,
@@ -707,6 +753,8 @@ module Aws::CodeBuild
     #   The URL to an individual build log in Amazon CloudWatch Logs.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/LogsLocation AWS API Documentation
+    #
     class LogsLocation < Struct.new(
       :group_name,
       :stream_name,
@@ -725,6 +773,8 @@ module Aws::CodeBuild
     #   An explanation of the build phase's context. This explanation might
     #   include a command ID and an exit code.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/PhaseContext AWS API Documentation
     #
     class PhaseContext < Struct.new(
       :status_code,
@@ -795,6 +845,8 @@ module Aws::CodeBuild
     #   When the build project's settings were last modified, expressed in
     #   Unix time format.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Project AWS API Documentation
     #
     class Project < Struct.new(
       :name,
@@ -940,6 +992,8 @@ module Aws::CodeBuild
     #       file containing the build output.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectArtifacts AWS API Documentation
+    #
     class ProjectArtifacts < Struct.new(
       :type,
       :location,
@@ -993,6 +1047,8 @@ module Aws::CodeBuild
     #   A set of environment variables to make available to builds for this
     #   build project.
     #   @return [Array<Types::EnvironmentVariable>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectEnvironment AWS API Documentation
     #
     class ProjectEnvironment < Struct.new(
       :type,
@@ -1080,6 +1136,8 @@ module Aws::CodeBuild
     #   build project's source `type` value is `GITHUB`).
     #   @return [Types::SourceAuth]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/ProjectSource AWS API Documentation
+    #
     class ProjectSource < Struct.new(
       :type,
       :location,
@@ -1111,6 +1169,8 @@ module Aws::CodeBuild
     # @!attribute [rw] resource
     #   The resource value that applies to the specified authorization type.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/SourceAuth AWS API Documentation
     #
     class SourceAuth < Struct.new(
       :type,
@@ -1178,6 +1238,8 @@ module Aws::CodeBuild
     #   in the build project.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildInput AWS API Documentation
+    #
     class StartBuildInput < Struct.new(
       :project_name,
       :source_version,
@@ -1191,6 +1253,8 @@ module Aws::CodeBuild
     # @!attribute [rw] build
     #   Information about the build to be run.
     #   @return [Types::Build]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StartBuildOutput AWS API Documentation
     #
     class StartBuildOutput < Struct.new(
       :build)
@@ -1208,6 +1272,8 @@ module Aws::CodeBuild
     #   The ID of the build.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildInput AWS API Documentation
+    #
     class StopBuildInput < Struct.new(
       :id)
       include Aws::Structure
@@ -1216,6 +1282,8 @@ module Aws::CodeBuild
     # @!attribute [rw] build
     #   Information about the build.
     #   @return [Types::Build]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/StopBuildOutput AWS API Documentation
     #
     class StopBuildOutput < Struct.new(
       :build)
@@ -1242,6 +1310,8 @@ module Aws::CodeBuild
     # @!attribute [rw] value
     #   The tag's value.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,
@@ -1348,6 +1418,8 @@ module Aws::CodeBuild
     #   CodeBuild build project tags.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectInput AWS API Documentation
+    #
     class UpdateProjectInput < Struct.new(
       :name,
       :description,
@@ -1364,6 +1436,8 @@ module Aws::CodeBuild
     # @!attribute [rw] project
     #   Information about the build project that was changed.
     #   @return [Types::Project]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateProjectOutput AWS API Documentation
     #
     class UpdateProjectOutput < Struct.new(
       :project)

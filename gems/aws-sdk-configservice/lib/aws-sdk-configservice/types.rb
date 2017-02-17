@@ -36,6 +36,8 @@ module Aws::ConfigService
     #   of `NON_COMPLIANT`, up to a maximum number.
     #   @return [Types::ComplianceContributorCount]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Compliance AWS API Documentation
+    #
     class Compliance < Struct.new(
       :compliance_type,
       :compliance_contributor_count)
@@ -53,6 +55,8 @@ module Aws::ConfigService
     # @!attribute [rw] compliance
     #   Indicates whether the AWS Config rule is compliant.
     #   @return [Types::Compliance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceByConfigRule AWS API Documentation
     #
     class ComplianceByConfigRule < Struct.new(
       :config_rule_name,
@@ -78,6 +82,8 @@ module Aws::ConfigService
     #   Config rules that evaluated it.
     #   @return [Types::Compliance]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceByResource AWS API Documentation
+    #
     class ComplianceByResource < Struct.new(
       :resource_type,
       :resource_id,
@@ -96,6 +102,8 @@ module Aws::ConfigService
     # @!attribute [rw] cap_exceeded
     #   Indicates whether the maximum count is reached.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceContributorCount AWS API Documentation
     #
     class ComplianceContributorCount < Struct.new(
       :capped_count,
@@ -120,6 +128,8 @@ module Aws::ConfigService
     #   The time that AWS Config created the compliance summary.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceSummary AWS API Documentation
+    #
     class ComplianceSummary < Struct.new(
       :compliant_resource_count,
       :non_compliant_resource_count,
@@ -138,6 +148,8 @@ module Aws::ConfigService
     #   The number of AWS resources that are compliant or noncompliant, up
     #   to a maximum of 100 for each compliance.
     #   @return [Types::ComplianceSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceSummaryByResourceType AWS API Documentation
     #
     class ComplianceSummaryByResourceType < Struct.new(
       :resource_type,
@@ -171,6 +183,8 @@ module Aws::ConfigService
     # @!attribute [rw] next_delivery_time
     #   The time that the next delivery occurs.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigExportDeliveryInfo AWS API Documentation
     #
     class ConfigExportDeliveryInfo < Struct.new(
       :last_status,
@@ -305,6 +319,8 @@ module Aws::ConfigService
     #   erased and are no longer available.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRule AWS API Documentation
+    #
     class ConfigRule < Struct.new(
       :config_rule_name,
       :config_rule_arn,
@@ -381,6 +397,8 @@ module Aws::ConfigService
     #     resources against the rule.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigRuleEvaluationStatus AWS API Documentation
+    #
     class ConfigRuleEvaluationStatus < Struct.new(
       :config_rule_name,
       :config_rule_arn,
@@ -454,6 +472,8 @@ module Aws::ConfigService
     #   snapshots.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigSnapshotDeliveryProperties AWS API Documentation
+    #
     class ConfigSnapshotDeliveryProperties < Struct.new(
       :delivery_frequency)
       include Aws::Structure
@@ -485,6 +505,8 @@ module Aws::ConfigService
     # @!attribute [rw] last_status_change_time
     #   The time from the last status change.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigStreamDeliveryInfo AWS API Documentation
     #
     class ConfigStreamDeliveryInfo < Struct.new(
       :last_status,
@@ -585,6 +607,8 @@ module Aws::ConfigService
     #   `configuration` parameter.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationItem AWS API Documentation
+    #
     class ConfigurationItem < Struct.new(
       :version,
       :account_id,
@@ -639,6 +663,8 @@ module Aws::ConfigService
     #   configuration changes.
     #   @return [Types::RecordingGroup]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorder AWS API Documentation
+    #
     class ConfigurationRecorder < Struct.new(
       :name,
       :role_arn,
@@ -680,6 +706,8 @@ module Aws::ConfigService
     #   The time when the status was last changed.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorderStatus AWS API Documentation
+    #
     class ConfigurationRecorderStatus < Struct.new(
       :name,
       :last_start_time,
@@ -703,6 +731,8 @@ module Aws::ConfigService
     #   The name of the AWS Config rule that you want to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRuleRequest AWS API Documentation
+    #
     class DeleteConfigRuleRequest < Struct.new(
       :config_rule_name)
       include Aws::Structure
@@ -723,6 +753,8 @@ module Aws::ConfigService
     #   `DescribeConfigurationRecorders` action.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorderRequest AWS API Documentation
+    #
     class DeleteConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
       include Aws::Structure
@@ -742,6 +774,8 @@ module Aws::ConfigService
     #   The name of the delivery channel to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannelRequest AWS API Documentation
+    #
     class DeleteDeliveryChannelRequest < Struct.new(
       :delivery_channel_name)
       include Aws::Structure
@@ -759,6 +793,8 @@ module Aws::ConfigService
     #   evaluation results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResultsRequest AWS API Documentation
+    #
     class DeleteEvaluationResultsRequest < Struct.new(
       :config_rule_name)
       include Aws::Structure
@@ -766,6 +802,8 @@ module Aws::ConfigService
 
     # The output when you delete the evaluation results for the specified
     # Config rule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteEvaluationResultsResponse AWS API Documentation
     #
     class DeleteEvaluationResultsResponse < Aws::EmptyStructure; end
 
@@ -783,6 +821,8 @@ module Aws::ConfigService
     #   delivered.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshotRequest AWS API Documentation
+    #
     class DeliverConfigSnapshotRequest < Struct.new(
       :delivery_channel_name)
       include Aws::Structure
@@ -793,6 +833,8 @@ module Aws::ConfigService
     # @!attribute [rw] config_snapshot_id
     #   The ID of the snapshot that is being created.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshotResponse AWS API Documentation
     #
     class DeliverConfigSnapshotResponse < Struct.new(
       :config_snapshot_id)
@@ -905,6 +947,8 @@ module Aws::ConfigService
     #   your configuration snapshots, use the `PutDeliveryChannel` action.
     #   @return [Types::ConfigSnapshotDeliveryProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliveryChannel AWS API Documentation
+    #
     class DeliveryChannel < Struct.new(
       :name,
       :s3_bucket_name,
@@ -936,6 +980,8 @@ module Aws::ConfigService
     #   A list containing the status of the delivery of the configuration
     #   stream notification to the specified Amazon SNS topic.
     #   @return [Types::ConfigStreamDeliveryInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliveryChannelStatus AWS API Documentation
     #
     class DeliveryChannelStatus < Struct.new(
       :name,
@@ -971,6 +1017,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRuleRequest AWS API Documentation
+    #
     class DescribeComplianceByConfigRuleRequest < Struct.new(
       :config_rule_names,
       :compliance_types,
@@ -987,6 +1035,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRuleResponse AWS API Documentation
     #
     class DescribeComplianceByConfigRuleResponse < Struct.new(
       :compliance_by_config_rules,
@@ -1036,6 +1086,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResourceRequest AWS API Documentation
+    #
     class DescribeComplianceByResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
@@ -1054,6 +1106,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResourceResponse AWS API Documentation
     #
     class DescribeComplianceByResourceResponse < Struct.new(
       :compliance_by_resources,
@@ -1095,6 +1149,8 @@ module Aws::ConfigService
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatusRequest AWS API Documentation
+    #
     class DescribeConfigRuleEvaluationStatusRequest < Struct.new(
       :config_rule_names,
       :next_token,
@@ -1110,6 +1166,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatusResponse AWS API Documentation
     #
     class DescribeConfigRuleEvaluationStatusResponse < Struct.new(
       :config_rules_evaluation_status,
@@ -1136,6 +1194,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesRequest AWS API Documentation
+    #
     class DescribeConfigRulesRequest < Struct.new(
       :config_rule_names,
       :next_token)
@@ -1150,6 +1210,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesResponse AWS API Documentation
     #
     class DescribeConfigRulesResponse < Struct.new(
       :config_rules,
@@ -1172,6 +1234,8 @@ module Aws::ConfigService
     #   configuration recorders associated with the account.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatusRequest AWS API Documentation
+    #
     class DescribeConfigurationRecorderStatusRequest < Struct.new(
       :configuration_recorder_names)
       include Aws::Structure
@@ -1183,6 +1247,8 @@ module Aws::ConfigService
     # @!attribute [rw] configuration_recorders_status
     #   A list that contains status of the specified recorders.
     #   @return [Array<Types::ConfigurationRecorderStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatusResponse AWS API Documentation
     #
     class DescribeConfigurationRecorderStatusResponse < Struct.new(
       :configuration_recorders_status)
@@ -1202,6 +1268,8 @@ module Aws::ConfigService
     #   A list of configuration recorder names.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecordersRequest AWS API Documentation
+    #
     class DescribeConfigurationRecordersRequest < Struct.new(
       :configuration_recorder_names)
       include Aws::Structure
@@ -1213,6 +1281,8 @@ module Aws::ConfigService
     #   A list that contains the descriptions of the specified configuration
     #   recorders.
     #   @return [Array<Types::ConfigurationRecorder>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecordersResponse AWS API Documentation
     #
     class DescribeConfigurationRecordersResponse < Struct.new(
       :configuration_recorders)
@@ -1232,6 +1302,8 @@ module Aws::ConfigService
     #   A list of delivery channel names.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatusRequest AWS API Documentation
+    #
     class DescribeDeliveryChannelStatusRequest < Struct.new(
       :delivery_channel_names)
       include Aws::Structure
@@ -1242,6 +1314,8 @@ module Aws::ConfigService
     # @!attribute [rw] delivery_channels_status
     #   A list that contains the status of a specified delivery channel.
     #   @return [Array<Types::DeliveryChannelStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatusResponse AWS API Documentation
     #
     class DescribeDeliveryChannelStatusResponse < Struct.new(
       :delivery_channels_status)
@@ -1261,6 +1335,8 @@ module Aws::ConfigService
     #   A list of delivery channel names.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelsRequest AWS API Documentation
+    #
     class DescribeDeliveryChannelsRequest < Struct.new(
       :delivery_channel_names)
       include Aws::Structure
@@ -1272,6 +1348,8 @@ module Aws::ConfigService
     #   A list that contains the descriptions of the specified delivery
     #   channel.
     #   @return [Array<Types::DeliveryChannel>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelsResponse AWS API Documentation
     #
     class DescribeDeliveryChannelsResponse < Struct.new(
       :delivery_channels)
@@ -1329,6 +1407,8 @@ module Aws::ConfigService
     #   every 24 hours).
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Evaluation AWS API Documentation
+    #
     class Evaluation < Struct.new(
       :compliance_resource_type,
       :compliance_resource_id,
@@ -1375,6 +1455,8 @@ module Aws::ConfigService
     #   evaluated, and the event that triggered the evaluation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResult AWS API Documentation
+    #
     class EvaluationResult < Struct.new(
       :evaluation_result_identifier,
       :compliance_type,
@@ -1400,6 +1482,8 @@ module Aws::ConfigService
     #   event triggered the evaluation.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultIdentifier AWS API Documentation
+    #
     class EvaluationResultIdentifier < Struct.new(
       :evaluation_result_qualifier,
       :ordering_timestamp)
@@ -1420,6 +1504,8 @@ module Aws::ConfigService
     # @!attribute [rw] resource_id
     #   The ID of the evaluated AWS resource.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultQualifier AWS API Documentation
     #
     class EvaluationResultQualifier < Struct.new(
       :config_rule_name,
@@ -1461,6 +1547,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRuleRequest AWS API Documentation
+    #
     class GetComplianceDetailsByConfigRuleRequest < Struct.new(
       :config_rule_name,
       :compliance_types,
@@ -1478,6 +1566,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRuleResponse AWS API Documentation
     #
     class GetComplianceDetailsByConfigRuleResponse < Struct.new(
       :evaluation_results,
@@ -1517,6 +1607,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResourceRequest AWS API Documentation
+    #
     class GetComplianceDetailsByResourceRequest < Struct.new(
       :resource_type,
       :resource_id,
@@ -1535,6 +1627,8 @@ module Aws::ConfigService
     #   of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResourceResponse AWS API Documentation
+    #
     class GetComplianceDetailsByResourceResponse < Struct.new(
       :evaluation_results,
       :next_token)
@@ -1545,6 +1639,8 @@ module Aws::ConfigService
     #   The number of AWS Config rules that are compliant and the number
     #   that are noncompliant, up to a maximum of 25 for each.
     #   @return [Types::ComplianceSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRuleResponse AWS API Documentation
     #
     class GetComplianceSummaryByConfigRuleResponse < Struct.new(
       :compliance_summary)
@@ -1568,6 +1664,8 @@ module Aws::ConfigService
     #   an AWS account by specifying `AWS::::Account`.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceTypeRequest AWS API Documentation
+    #
     class GetComplianceSummaryByResourceTypeRequest < Struct.new(
       :resource_types)
       include Aws::Structure
@@ -1579,6 +1677,8 @@ module Aws::ConfigService
     #   request, the numbers are returned for each resource type. The
     #   maximum number returned is 100.
     #   @return [Array<Types::ComplianceSummaryByResourceType>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceTypeResponse AWS API Documentation
     #
     class GetComplianceSummaryByResourceTypeResponse < Struct.new(
       :compliance_summaries_by_resource_type)
@@ -1635,6 +1735,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistoryRequest AWS API Documentation
+    #
     class GetResourceConfigHistoryRequest < Struct.new(
       :resource_type,
       :resource_id,
@@ -1657,6 +1759,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistoryResponse AWS API Documentation
     #
     class GetResourceConfigHistoryResponse < Struct.new(
       :configuration_items,
@@ -1710,6 +1814,8 @@ module Aws::ConfigService
     #   get the next page of results in a paginated response.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResourcesRequest AWS API Documentation
+    #
     class ListDiscoveredResourcesRequest < Struct.new(
       :resource_type,
       :resource_ids,
@@ -1730,6 +1836,8 @@ module Aws::ConfigService
     #   The string that you use in a subsequent request to get the next page
     #   of results in a paginated response.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResourcesResponse AWS API Documentation
     #
     class ListDiscoveredResourcesResponse < Struct.new(
       :resource_identifiers,
@@ -1794,6 +1902,8 @@ module Aws::ConfigService
     #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #   @return [Types::ConfigRule]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleRequest AWS API Documentation
+    #
     class PutConfigRuleRequest < Struct.new(
       :config_rule)
       include Aws::Structure
@@ -1820,6 +1930,8 @@ module Aws::ConfigService
     #   The configuration recorder object that records each configuration
     #   change made to the resources.
     #   @return [Types::ConfigurationRecorder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorderRequest AWS API Documentation
     #
     class PutConfigurationRecorderRequest < Struct.new(
       :configuration_recorder)
@@ -1848,6 +1960,8 @@ module Aws::ConfigService
     #   configuration information to an Amazon S3 bucket, and to an Amazon
     #   SNS topic.
     #   @return [Types::DeliveryChannel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannelRequest AWS API Documentation
     #
     class PutDeliveryChannelRequest < Struct.new(
       :delivery_channel)
@@ -1883,6 +1997,8 @@ module Aws::ConfigService
     #   evaluation
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluationsRequest AWS API Documentation
+    #
     class PutEvaluationsRequest < Struct.new(
       :evaluations,
       :result_token)
@@ -1892,6 +2008,8 @@ module Aws::ConfigService
     # @!attribute [rw] failed_evaluations
     #   Requests that failed because of a client or server error.
     #   @return [Array<Types::Evaluation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluationsResponse AWS API Documentation
     #
     class PutEvaluationsResponse < Struct.new(
       :failed_evaluations)
@@ -1998,6 +2116,8 @@ module Aws::ConfigService
     #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RecordingGroup AWS API Documentation
+    #
     class RecordingGroup < Struct.new(
       :all_supported,
       :include_global_resource_types,
@@ -2022,6 +2142,8 @@ module Aws::ConfigService
     # @!attribute [rw] relationship_name
     #   The type of relationship with the related resource.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Relationship AWS API Documentation
     #
     class Relationship < Struct.new(
       :resource_type,
@@ -2050,6 +2172,8 @@ module Aws::ConfigService
     # @!attribute [rw] resource_deletion_time
     #   The time that the resource was deleted.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceIdentifier AWS API Documentation
     #
     class ResourceIdentifier < Struct.new(
       :resource_type,
@@ -2099,6 +2223,8 @@ module Aws::ConfigService
     #   evaluation for the rule. If you specify a resource ID, you must
     #   specify one resource type for `ComplianceResourceTypes`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Scope AWS API Documentation
     #
     class Scope < Struct.new(
       :compliance_resource_types,
@@ -2150,6 +2276,8 @@ module Aws::ConfigService
     #   Provides the source and type of the event that causes AWS Config to
     #   evaluate your AWS resources.
     #   @return [Array<Types::SourceDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Source AWS API Documentation
     #
     class Source < Struct.new(
       :owner,
@@ -2211,6 +2339,8 @@ module Aws::ConfigService
     #   `ScheduledNotification` value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SourceDetail AWS API Documentation
+    #
     class SourceDetail < Struct.new(
       :event_source,
       :message_type,
@@ -2230,6 +2360,8 @@ module Aws::ConfigService
     #   for.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationRequest AWS API Documentation
+    #
     class StartConfigRulesEvaluationRequest < Struct.new(
       :config_rule_names)
       include Aws::Structure
@@ -2237,6 +2369,8 @@ module Aws::ConfigService
 
     # The output when you start the evaluation for the specified Config
     # rule.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationResponse AWS API Documentation
     #
     class StartConfigRulesEvaluationResponse < Aws::EmptyStructure; end
 
@@ -2253,6 +2387,8 @@ module Aws::ConfigService
     #   The name of the recorder object that records each configuration
     #   change made to the resources.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorderRequest AWS API Documentation
     #
     class StartConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)
@@ -2272,6 +2408,8 @@ module Aws::ConfigService
     #   The name of the recorder object that records each configuration
     #   change made to the resources.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorderRequest AWS API Documentation
     #
     class StopConfigurationRecorderRequest < Struct.new(
       :configuration_recorder_name)

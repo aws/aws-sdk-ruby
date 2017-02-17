@@ -39,6 +39,8 @@ module Aws::ACM
     #   The key-value pair that defines the tag. The tag value is optional.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateRequest AWS API Documentation
+    #
     class AddTagsToCertificateRequest < Struct.new(
       :certificate_arn,
       :tags)
@@ -179,6 +181,8 @@ module Aws::ACM
     #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Types::RenewalSummary]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateDetail AWS API Documentation
+    #
     class CertificateDetail < Struct.new(
       :certificate_arn,
       :domain_name,
@@ -225,6 +229,8 @@ module Aws::ACM
     #   example.com, for the certificate.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary AWS API Documentation
+    #
     class CertificateSummary < Struct.new(
       :certificate_arn,
       :domain_name)
@@ -252,6 +258,8 @@ module Aws::ACM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateRequest AWS API Documentation
+    #
     class DeleteCertificateRequest < Struct.new(
       :certificate_arn)
       include Aws::Structure
@@ -278,6 +286,8 @@ module Aws::ACM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateRequest AWS API Documentation
+    #
     class DescribeCertificateRequest < Struct.new(
       :certificate_arn)
       include Aws::Structure
@@ -286,6 +296,8 @@ module Aws::ACM
     # @!attribute [rw] certificate
     #   Metadata about an ACM certificate.
     #   @return [Types::CertificateDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateResponse AWS API Documentation
     #
     class DescribeCertificateResponse < Struct.new(
       :certificate)
@@ -312,6 +324,8 @@ module Aws::ACM
     # @!attribute [rw] validation_status
     #   The validation status of the domain name.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidation AWS API Documentation
     #
     class DomainValidation < Struct.new(
       :domain_name,
@@ -356,6 +370,8 @@ module Aws::ACM
     #   * webmaster@example.com
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidationOption AWS API Documentation
+    #
     class DomainValidationOption < Struct.new(
       :domain_name,
       :validation_domain)
@@ -382,6 +398,8 @@ module Aws::ACM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateRequest AWS API Documentation
+    #
     class GetCertificateRequest < Struct.new(
       :certificate_arn)
       include Aws::Structure
@@ -396,6 +414,8 @@ module Aws::ACM
     #   The certificate chain that contains the root certificate issued by
     #   the certificate authority (CA).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateResponse AWS API Documentation
     #
     class GetCertificateResponse < Struct.new(
       :certificate,
@@ -449,6 +469,8 @@ module Aws::ACM
     #   The certificate chain. It must be PEM-encoded.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest AWS API Documentation
+    #
     class ImportCertificateRequest < Struct.new(
       :certificate_arn,
       :certificate,
@@ -464,6 +486,8 @@ module Aws::ACM
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateResponse AWS API Documentation
     #
     class ImportCertificateResponse < Struct.new(
       :certificate_arn)
@@ -499,6 +523,8 @@ module Aws::ACM
     #   retrieve additional items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesRequest AWS API Documentation
+    #
     class ListCertificatesRequest < Struct.new(
       :certificate_statuses,
       :next_token,
@@ -515,6 +541,8 @@ module Aws::ACM
     # @!attribute [rw] certificate_summary_list
     #   A list of ACM Certificates.
     #   @return [Array<Types::CertificateSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesResponse AWS API Documentation
     #
     class ListCertificatesResponse < Struct.new(
       :next_token,
@@ -543,6 +571,8 @@ module Aws::ACM
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateRequest AWS API Documentation
+    #
     class ListTagsForCertificateRequest < Struct.new(
       :certificate_arn)
       include Aws::Structure
@@ -551,6 +581,8 @@ module Aws::ACM
     # @!attribute [rw] tags
     #   The key-value pairs that define the applied tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateResponse AWS API Documentation
     #
     class ListTagsForCertificateResponse < Struct.new(
       :tags)
@@ -588,6 +620,8 @@ module Aws::ACM
     #   The key-value pair that defines the tag to remove.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificateRequest AWS API Documentation
+    #
     class RemoveTagsFromCertificateRequest < Struct.new(
       :certificate_arn,
       :tags)
@@ -621,6 +655,8 @@ module Aws::ACM
     #
     #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
     #   @return [Array<Types::DomainValidation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary AWS API Documentation
     #
     class RenewalSummary < Struct.new(
       :renewal_status,
@@ -673,6 +709,8 @@ module Aws::ACM
     #   validate your ownership of the domain.
     #   @return [Array<Types::DomainValidationOption>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest AWS API Documentation
+    #
     class RequestCertificateRequest < Struct.new(
       :domain_name,
       :subject_alternative_names,
@@ -687,6 +725,8 @@ module Aws::ACM
     #
     #   `arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012`
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateResponse AWS API Documentation
     #
     class RequestCertificateResponse < Struct.new(
       :certificate_arn)
@@ -740,6 +780,8 @@ module Aws::ACM
     #   * webmaster@subdomain.example.com
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailRequest AWS API Documentation
+    #
     class ResendValidationEmailRequest < Struct.new(
       :certificate_arn,
       :domain,
@@ -765,6 +807,8 @@ module Aws::ACM
     # @!attribute [rw] value
     #   The value of the tag.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Tag AWS API Documentation
     #
     class Tag < Struct.new(
       :key,

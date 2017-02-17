@@ -19,6 +19,8 @@ module Aws::Lightsail
     #   The name of the static IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIpRequest AWS API Documentation
+    #
     class AllocateStaticIpRequest < Struct.new(
       :static_ip_name)
       include Aws::Structure
@@ -28,6 +30,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the static
     #   IP address you allocated.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIpResult AWS API Documentation
     #
     class AllocateStaticIpResult < Struct.new(
       :operations)
@@ -50,6 +54,8 @@ module Aws::Lightsail
     #   The instance name to which you want to attach the static IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIpRequest AWS API Documentation
+    #
     class AttachStaticIpRequest < Struct.new(
       :static_ip_name,
       :instance_name)
@@ -60,6 +66,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about your API
     #   operations.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AttachStaticIpResult AWS API Documentation
     #
     class AttachStaticIpResult < Struct.new(
       :operations)
@@ -75,6 +83,8 @@ module Aws::Lightsail
     # @!attribute [rw] state
     #   The state of the Availability Zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AvailabilityZone AWS API Documentation
     #
     class AvailabilityZone < Struct.new(
       :zone_name,
@@ -132,6 +142,8 @@ module Aws::Lightsail
     # @!attribute [rw] license_url
     #   The end-user license agreement URL for the image or blueprint.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Blueprint AWS API Documentation
     #
     class Blueprint < Struct.new(
       :blueprint_id,
@@ -191,6 +203,8 @@ module Aws::Lightsail
     #   The data transfer rate per month in GB (e.g., `2000`).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Bundle AWS API Documentation
+    #
     class Bundle < Struct.new(
       :price,
       :cpu_count,
@@ -226,6 +240,8 @@ module Aws::Lightsail
     #   public ports.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPortsRequest AWS API Documentation
+    #
     class CloseInstancePublicPortsRequest < Struct.new(
       :port_info,
       :instance_name)
@@ -236,6 +252,8 @@ module Aws::Lightsail
     #   An array of key-value pairs that contains information about the
     #   operation.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CloseInstancePublicPortsResult AWS API Documentation
     #
     class CloseInstancePublicPortsResult < Struct.new(
       :operation)
@@ -268,6 +286,8 @@ module Aws::Lightsail
     #   entry request.
     #   @return [Types::DomainEntry]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntryRequest AWS API Documentation
+    #
     class CreateDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry)
@@ -278,6 +298,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the
     #   operation.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainEntryResult AWS API Documentation
     #
     class CreateDomainEntryResult < Struct.new(
       :operation)
@@ -303,6 +325,8 @@ module Aws::Lightsail
     #    </note>
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainRequest AWS API Documentation
+    #
     class CreateDomainRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -312,6 +336,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the domain
     #   resource you created.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDomainResult AWS API Documentation
     #
     class CreateDomainResult < Struct.new(
       :operation)
@@ -334,6 +360,8 @@ module Aws::Lightsail
     #   The Lightsail instance on which to base your snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshotRequest AWS API Documentation
+    #
     class CreateInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name,
       :instance_name)
@@ -344,6 +372,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your create instances snapshot request.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstanceSnapshotResult AWS API Documentation
     #
     class CreateInstanceSnapshotResult < Struct.new(
       :operations)
@@ -403,6 +433,8 @@ module Aws::Lightsail
     #   The name for your key pair.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshotRequest AWS API Documentation
+    #
     class CreateInstancesFromSnapshotRequest < Struct.new(
       :instance_names,
       :availability_zone,
@@ -417,6 +449,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your create instances from snapshot request.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesFromSnapshotResult AWS API Documentation
     #
     class CreateInstancesFromSnapshotResult < Struct.new(
       :operations)
@@ -484,6 +518,8 @@ module Aws::Lightsail
     #   The name of your key pair.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesRequest AWS API Documentation
+    #
     class CreateInstancesRequest < Struct.new(
       :instance_names,
       :availability_zone,
@@ -500,6 +536,8 @@ module Aws::Lightsail
     #   of your create instances request.
     #   @return [Array<Types::Operation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateInstancesResult AWS API Documentation
+    #
     class CreateInstancesResult < Struct.new(
       :operations)
       include Aws::Structure
@@ -515,6 +553,8 @@ module Aws::Lightsail
     # @!attribute [rw] key_pair_name
     #   The name for your new key pair.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPairRequest AWS API Documentation
     #
     class CreateKeyPairRequest < Struct.new(
       :key_pair_name)
@@ -538,6 +578,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your create key pair request.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateKeyPairResult AWS API Documentation
     #
     class CreateKeyPairResult < Struct.new(
       :key_pair,
@@ -572,6 +614,8 @@ module Aws::Lightsail
     #   entries.
     #   @return [Types::DomainEntry]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntryRequest AWS API Documentation
+    #
     class DeleteDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry)
@@ -582,6 +626,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your delete domain entry request.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainEntryResult AWS API Documentation
     #
     class DeleteDomainEntryResult < Struct.new(
       :operation)
@@ -599,6 +645,8 @@ module Aws::Lightsail
     #   The specific domain name to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainRequest AWS API Documentation
+    #
     class DeleteDomainRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -608,6 +656,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your delete domain request.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteDomainResult AWS API Documentation
     #
     class DeleteDomainResult < Struct.new(
       :operation)
@@ -625,6 +675,8 @@ module Aws::Lightsail
     #   The name of the instance to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceRequest AWS API Documentation
+    #
     class DeleteInstanceRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -634,6 +686,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your delete instance request.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceResult AWS API Documentation
     #
     class DeleteInstanceResult < Struct.new(
       :operations)
@@ -651,6 +705,8 @@ module Aws::Lightsail
     #   The name of the snapshot to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshotRequest AWS API Documentation
+    #
     class DeleteInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name)
       include Aws::Structure
@@ -660,6 +716,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your delete instance snapshot request.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteInstanceSnapshotResult AWS API Documentation
     #
     class DeleteInstanceSnapshotResult < Struct.new(
       :operations)
@@ -677,6 +735,8 @@ module Aws::Lightsail
     #   The name of the key pair to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPairRequest AWS API Documentation
+    #
     class DeleteKeyPairRequest < Struct.new(
       :key_pair_name)
       include Aws::Structure
@@ -686,6 +746,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your delete key pair request.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPairResult AWS API Documentation
     #
     class DeleteKeyPairResult < Struct.new(
       :operation)
@@ -703,6 +765,8 @@ module Aws::Lightsail
     #   The name of the static IP to detach from the instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIpRequest AWS API Documentation
+    #
     class DetachStaticIpRequest < Struct.new(
       :static_ip_name)
       include Aws::Structure
@@ -712,6 +776,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your detach static IP request.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DetachStaticIpResult AWS API Documentation
     #
     class DetachStaticIpResult < Struct.new(
       :operations)
@@ -780,6 +846,8 @@ module Aws::Lightsail
     #   The attachment state of the disk.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Disk AWS API Documentation
+    #
     class Disk < Struct.new(
       :name,
       :arn,
@@ -834,6 +902,8 @@ module Aws::Lightsail
     #   entries.
     #   @return [Array<Types::DomainEntry>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Domain AWS API Documentation
+    #
     class Domain < Struct.new(
       :name,
       :arn,
@@ -880,6 +950,8 @@ module Aws::Lightsail
     #   The options for the domain entry.
     #   @return [Hash<String,String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DomainEntry AWS API Documentation
+    #
     class DomainEntry < Struct.new(
       :id,
       :name,
@@ -891,6 +963,8 @@ module Aws::Lightsail
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPairRequest AWS API Documentation
+    #
     class DownloadDefaultKeyPairRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] public_key_base_64
@@ -900,6 +974,8 @@ module Aws::Lightsail
     # @!attribute [rw] private_key_base_64
     #   A base64-encoded RSA private key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPairResult AWS API Documentation
     #
     class DownloadDefaultKeyPairResult < Struct.new(
       :public_key_base_64,
@@ -919,6 +995,8 @@ module Aws::Lightsail
     #   request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNamesRequest AWS API Documentation
+    #
     class GetActiveNamesRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -932,6 +1010,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   active names request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetActiveNamesResult AWS API Documentation
     #
     class GetActiveNamesResult < Struct.new(
       :active_names,
@@ -957,6 +1037,8 @@ module Aws::Lightsail
     #   blueprints request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprintsRequest AWS API Documentation
+    #
     class GetBlueprintsRequest < Struct.new(
       :include_inactive,
       :page_token)
@@ -972,6 +1054,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   blueprints request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBlueprintsResult AWS API Documentation
     #
     class GetBlueprintsResult < Struct.new(
       :blueprints,
@@ -997,6 +1081,8 @@ module Aws::Lightsail
     #   bundles request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesRequest AWS API Documentation
+    #
     class GetBundlesRequest < Struct.new(
       :include_inactive,
       :page_token)
@@ -1012,6 +1098,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   active names request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBundlesResult AWS API Documentation
     #
     class GetBundlesResult < Struct.new(
       :bundles,
@@ -1030,6 +1118,8 @@ module Aws::Lightsail
     #   The domain name for which your want to return information about.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomainRequest AWS API Documentation
+    #
     class GetDomainRequest < Struct.new(
       :domain_name)
       include Aws::Structure
@@ -1039,6 +1129,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about your get
     #   domain request.
     #   @return [Types::Domain]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomainResult AWS API Documentation
     #
     class GetDomainResult < Struct.new(
       :domain)
@@ -1057,6 +1149,8 @@ module Aws::Lightsail
     #   domains request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomainsRequest AWS API Documentation
+    #
     class GetDomainsRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -1071,6 +1165,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   active names request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDomainsResult AWS API Documentation
     #
     class GetDomainsResult < Struct.new(
       :domains,
@@ -1094,6 +1190,8 @@ module Aws::Lightsail
     #   The protocol to use to connect to your instance. Defaults to `ssh`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetailsRequest AWS API Documentation
+    #
     class GetInstanceAccessDetailsRequest < Struct.new(
       :instance_name,
       :protocol)
@@ -1104,6 +1202,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about a get
     #   instance access request.
     #   @return [Types::InstanceAccessDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceAccessDetailsResult AWS API Documentation
     #
     class GetInstanceAccessDetailsResult < Struct.new(
       :access_details)
@@ -1151,6 +1251,8 @@ module Aws::Lightsail
     #   The instance statistics.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricDataRequest AWS API Documentation
+    #
     class GetInstanceMetricDataRequest < Struct.new(
       :instance_name,
       :metric_name,
@@ -1171,6 +1273,8 @@ module Aws::Lightsail
     #   of your get instance metric data request.
     #   @return [Array<Types::MetricDatapoint>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceMetricDataResult AWS API Documentation
+    #
     class GetInstanceMetricDataResult < Struct.new(
       :metric_name,
       :metric_data)
@@ -1188,6 +1292,8 @@ module Aws::Lightsail
     #   The name of the instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesRequest AWS API Documentation
+    #
     class GetInstancePortStatesRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -1196,6 +1302,8 @@ module Aws::Lightsail
     # @!attribute [rw] port_states
     #   Information about the port states resulting from your request.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesResult AWS API Documentation
     #
     class GetInstancePortStatesResult < Struct.new(
       :port_states)
@@ -1213,6 +1321,8 @@ module Aws::Lightsail
     #   The name of the instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceRequest AWS API Documentation
+    #
     class GetInstanceRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -1222,6 +1332,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the
     #   specified instance.
     #   @return [Types::Instance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceResult AWS API Documentation
     #
     class GetInstanceResult < Struct.new(
       :instance)
@@ -1239,6 +1351,8 @@ module Aws::Lightsail
     #   The name of the snapshot for which you are requesting information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshotRequest AWS API Documentation
+    #
     class GetInstanceSnapshotRequest < Struct.new(
       :instance_snapshot_name)
       include Aws::Structure
@@ -1248,6 +1362,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your get instance snapshot request.
     #   @return [Types::InstanceSnapshot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshotResult AWS API Documentation
     #
     class GetInstanceSnapshotResult < Struct.new(
       :instance_snapshot)
@@ -1266,6 +1382,8 @@ module Aws::Lightsail
     #   instance snapshots request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshotsRequest AWS API Documentation
+    #
     class GetInstanceSnapshotsRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -1280,6 +1398,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   instance snapshots request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceSnapshotsResult AWS API Documentation
     #
     class GetInstanceSnapshotsResult < Struct.new(
       :instance_snapshots,
@@ -1298,6 +1418,8 @@ module Aws::Lightsail
     #   The name of the instance to get state information about.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceStateRequest AWS API Documentation
+    #
     class GetInstanceStateRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -1306,6 +1428,8 @@ module Aws::Lightsail
     # @!attribute [rw] state
     #   The state of the instance.
     #   @return [Types::InstanceState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceStateResult AWS API Documentation
     #
     class GetInstanceStateResult < Struct.new(
       :state)
@@ -1324,6 +1448,8 @@ module Aws::Lightsail
     #   instances request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancesRequest AWS API Documentation
+    #
     class GetInstancesRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -1338,6 +1464,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   instances request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancesResult AWS API Documentation
     #
     class GetInstancesResult < Struct.new(
       :instances,
@@ -1356,6 +1484,8 @@ module Aws::Lightsail
     #   The name of the key pair for which you are requesting information.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairRequest AWS API Documentation
+    #
     class GetKeyPairRequest < Struct.new(
       :key_pair_name)
       include Aws::Structure
@@ -1365,6 +1495,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the key
     #   pair.
     #   @return [Types::KeyPair]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairResult AWS API Documentation
     #
     class GetKeyPairResult < Struct.new(
       :key_pair)
@@ -1383,6 +1515,8 @@ module Aws::Lightsail
     #   key pairs request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairsRequest AWS API Documentation
+    #
     class GetKeyPairsRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -1397,6 +1531,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   key pairs request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairsResult AWS API Documentation
     #
     class GetKeyPairsResult < Struct.new(
       :key_pairs,
@@ -1415,6 +1551,8 @@ module Aws::Lightsail
     #   A GUID used to identify the operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationRequest AWS API Documentation
+    #
     class GetOperationRequest < Struct.new(
       :operation_id)
       include Aws::Structure
@@ -1424,6 +1562,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the results
     #   of your get operation request.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationResult AWS API Documentation
     #
     class GetOperationResult < Struct.new(
       :operation)
@@ -1447,6 +1587,8 @@ module Aws::Lightsail
     #   operations for resource request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResourceRequest AWS API Documentation
+    #
     class GetOperationsForResourceRequest < Struct.new(
       :resource_name,
       :page_token)
@@ -1461,6 +1603,8 @@ module Aws::Lightsail
     # @!attribute [rw] next_page_count
     #   Returns the number of pages of results that remain.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsForResourceResult AWS API Documentation
     #
     class GetOperationsForResourceResult < Struct.new(
       :operations,
@@ -1480,6 +1624,8 @@ module Aws::Lightsail
     #   operations request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsRequest AWS API Documentation
+    #
     class GetOperationsRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -1494,6 +1640,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   operations request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetOperationsResult AWS API Documentation
     #
     class GetOperationsResult < Struct.new(
       :operations,
@@ -1514,6 +1662,8 @@ module Aws::Lightsail
     #   with a letter: e.g., `us-east-1a`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegionsRequest AWS API Documentation
+    #
     class GetRegionsRequest < Struct.new(
       :include_availability_zones)
       include Aws::Structure
@@ -1523,6 +1673,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about your get
     #   regions request.
     #   @return [Array<Types::Region>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRegionsResult AWS API Documentation
     #
     class GetRegionsResult < Struct.new(
       :regions)
@@ -1540,6 +1692,8 @@ module Aws::Lightsail
     #   The name of the static IP in Lightsail.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIpRequest AWS API Documentation
+    #
     class GetStaticIpRequest < Struct.new(
       :static_ip_name)
       include Aws::Structure
@@ -1549,6 +1703,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the
     #   requested static IP.
     #   @return [Types::StaticIp]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIpResult AWS API Documentation
     #
     class GetStaticIpResult < Struct.new(
       :static_ip)
@@ -1567,6 +1723,8 @@ module Aws::Lightsail
     #   static IPs request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIpsRequest AWS API Documentation
+    #
     class GetStaticIpsRequest < Struct.new(
       :page_token)
       include Aws::Structure
@@ -1581,6 +1739,8 @@ module Aws::Lightsail
     #   A token used for advancing to the next page of results from your get
     #   static IPs request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetStaticIpsResult AWS API Documentation
     #
     class GetStaticIpsResult < Struct.new(
       :static_ips,
@@ -1605,6 +1765,8 @@ module Aws::Lightsail
     #   A base64-encoded public key of the `ssh-rsa` type.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPairRequest AWS API Documentation
+    #
     class ImportKeyPairRequest < Struct.new(
       :key_pair_name,
       :public_key_base_64)
@@ -1615,6 +1777,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ImportKeyPairResult AWS API Documentation
     #
     class ImportKeyPairResult < Struct.new(
       :operation)
@@ -1703,6 +1867,8 @@ module Aws::Lightsail
     #   `LightsailDefaultKeyPair`).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Instance AWS API Documentation
+    #
     class Instance < Struct.new(
       :name,
       :arn,
@@ -1764,6 +1930,8 @@ module Aws::Lightsail
     #   instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceAccessDetails AWS API Documentation
+    #
     class InstanceAccessDetails < Struct.new(
       :cert_key,
       :expires_at,
@@ -1790,6 +1958,8 @@ module Aws::Lightsail
     #   The amount of RAM in GB on the instance (e.g., `1.0`).
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHardware AWS API Documentation
+    #
     class InstanceHardware < Struct.new(
       :cpu_count,
       :disks,
@@ -1808,6 +1978,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the ports
     #   on the instance.
     #   @return [Array<Types::InstancePortInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceNetworking AWS API Documentation
     #
     class InstanceNetworking < Struct.new(
       :monthly_transfer,
@@ -1845,6 +2017,8 @@ module Aws::Lightsail
     # @!attribute [rw] access_direction
     #   The access direction (`inbound` or `outbound`).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortInfo AWS API Documentation
     #
     class InstancePortInfo < Struct.new(
       :from_port,
@@ -1922,6 +2096,8 @@ module Aws::Lightsail
     #   The size in GB of the SSD.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceSnapshot AWS API Documentation
+    #
     class InstanceSnapshot < Struct.new(
       :name,
       :arn,
@@ -1949,6 +2125,8 @@ module Aws::Lightsail
     #   The state of the instance (e.g., `running` or `pending`).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceState AWS API Documentation
+    #
     class InstanceState < Struct.new(
       :code,
       :name)
@@ -1957,11 +2135,15 @@ module Aws::Lightsail
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeeredRequest AWS API Documentation
+    #
     class IsVpcPeeredRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] is_peered
     #   Returns `true` if the Lightsail VPC is peered; otherwise, `false`.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/IsVpcPeeredResult AWS API Documentation
     #
     class IsVpcPeeredResult < Struct.new(
       :is_peered)
@@ -2004,6 +2186,8 @@ module Aws::Lightsail
     #   The RSA fingerprint of the key pair.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/KeyPair AWS API Documentation
+    #
     class KeyPair < Struct.new(
       :name,
       :arn,
@@ -2045,6 +2229,8 @@ module Aws::Lightsail
     #   The unit.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/MetricDatapoint AWS API Documentation
+    #
     class MetricDatapoint < Struct.new(
       :average,
       :maximum,
@@ -2062,6 +2248,8 @@ module Aws::Lightsail
     # @!attribute [rw] gb_per_month_allocated
     #   The amount allocated per month (in GB).
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/MonthlyTransfer AWS API Documentation
     #
     class MonthlyTransfer < Struct.new(
       :gb_per_month_allocated)
@@ -2090,6 +2278,8 @@ module Aws::Lightsail
     #   ports.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPortsRequest AWS API Documentation
+    #
     class OpenInstancePublicPortsRequest < Struct.new(
       :port_info,
       :instance_name)
@@ -2100,6 +2290,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/OpenInstancePublicPortsResult AWS API Documentation
     #
     class OpenInstancePublicPortsResult < Struct.new(
       :operation)
@@ -2157,6 +2349,8 @@ module Aws::Lightsail
     #   The error details.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Operation AWS API Documentation
+    #
     class Operation < Struct.new(
       :id,
       :resource_name,
@@ -2175,12 +2369,16 @@ module Aws::Lightsail
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpcRequest AWS API Documentation
+    #
     class PeerVpcRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] operation
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PeerVpcResult AWS API Documentation
     #
     class PeerVpcResult < Struct.new(
       :operation)
@@ -2211,6 +2409,8 @@ module Aws::Lightsail
     #   The protocol.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PortInfo AWS API Documentation
+    #
     class PortInfo < Struct.new(
       :from_port,
       :to_port,
@@ -2229,6 +2429,8 @@ module Aws::Lightsail
     #   The name of the instance to reboot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstanceRequest AWS API Documentation
+    #
     class RebootInstanceRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -2238,6 +2440,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RebootInstanceResult AWS API Documentation
     #
     class RebootInstanceResult < Struct.new(
       :operations)
@@ -2267,6 +2471,8 @@ module Aws::Lightsail
     #   The Availability Zones.
     #   @return [Array<Types::AvailabilityZone>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Region AWS API Documentation
+    #
     class Region < Struct.new(
       :continent_code,
       :description,
@@ -2287,6 +2493,8 @@ module Aws::Lightsail
     #   The name of the static IP to delete.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIpRequest AWS API Documentation
+    #
     class ReleaseStaticIpRequest < Struct.new(
       :static_ip_name)
       include Aws::Structure
@@ -2296,6 +2504,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ReleaseStaticIpResult AWS API Documentation
     #
     class ReleaseStaticIpResult < Struct.new(
       :operations)
@@ -2311,6 +2521,8 @@ module Aws::Lightsail
     # @!attribute [rw] region_name
     #   The AWS Region name.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ResourceLocation AWS API Documentation
     #
     class ResourceLocation < Struct.new(
       :availability_zone,
@@ -2329,6 +2541,8 @@ module Aws::Lightsail
     #   The name of the instance (a virtual private server) to start.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstanceRequest AWS API Documentation
+    #
     class StartInstanceRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -2338,6 +2552,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstanceResult AWS API Documentation
     #
     class StartInstanceResult < Struct.new(
       :operations)
@@ -2388,6 +2604,8 @@ module Aws::Lightsail
     #   A Boolean value indicating whether the static IP is attached.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StaticIp AWS API Documentation
+    #
     class StaticIp < Struct.new(
       :name,
       :arn,
@@ -2412,6 +2630,8 @@ module Aws::Lightsail
     #   The name of the instance (a virtual private server) to stop.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstanceRequest AWS API Documentation
+    #
     class StopInstanceRequest < Struct.new(
       :instance_name)
       include Aws::Structure
@@ -2422,6 +2642,8 @@ module Aws::Lightsail
     #   operation.
     #   @return [Array<Types::Operation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StopInstanceResult AWS API Documentation
+    #
     class StopInstanceResult < Struct.new(
       :operations)
       include Aws::Structure
@@ -2429,12 +2651,16 @@ module Aws::Lightsail
 
     # @api private
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpcRequest AWS API Documentation
+    #
     class UnpeerVpcRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] operation
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UnpeerVpcResult AWS API Documentation
     #
     class UnpeerVpcResult < Struct.new(
       :operation)
@@ -2466,6 +2692,8 @@ module Aws::Lightsail
     #   entry.
     #   @return [Types::DomainEntry]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntryRequest AWS API Documentation
+    #
     class UpdateDomainEntryRequest < Struct.new(
       :domain_name,
       :domain_entry)
@@ -2476,6 +2704,8 @@ module Aws::Lightsail
     #   An array of key-value pairs containing information about the request
     #   operation.
     #   @return [Array<Types::Operation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDomainEntryResult AWS API Documentation
     #
     class UpdateDomainEntryResult < Struct.new(
       :operations)

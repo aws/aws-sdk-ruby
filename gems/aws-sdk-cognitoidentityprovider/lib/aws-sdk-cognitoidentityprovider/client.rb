@@ -187,6 +187,8 @@ module Aws::CognitoIdentityProvider
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AddCustomAttributes AWS API Documentation
+    #
     # @overload add_custom_attributes(params = {})
     # @param [Hash] params ({})
     def add_custom_attributes(params = {}, options = {})
@@ -217,6 +219,8 @@ module Aws::CognitoIdentityProvider
     #     group_name: "GroupNameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminAddUserToGroup AWS API Documentation
+    #
     # @overload admin_add_user_to_group(params = {})
     # @param [Hash] params ({})
     def admin_add_user_to_group(params = {}, options = {})
@@ -243,6 +247,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     username: "UsernameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminConfirmSignUp AWS API Documentation
     #
     # @overload admin_confirm_sign_up(params = {})
     # @param [Hash] params ({})
@@ -393,6 +399,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.user.mfa_options[0].attribute_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminCreateUser AWS API Documentation
+    #
     # @overload admin_create_user(params = {})
     # @param [Hash] params ({})
     def admin_create_user(params = {}, options = {})
@@ -418,6 +426,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     username: "UsernameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUser AWS API Documentation
     #
     # @overload admin_delete_user(params = {})
     # @param [Hash] params ({})
@@ -453,6 +463,8 @@ module Aws::CognitoIdentityProvider
     #     user_attribute_names: ["AttributeNameType"], # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDeleteUserAttributes AWS API Documentation
+    #
     # @overload admin_delete_user_attributes(params = {})
     # @param [Hash] params ({})
     def admin_delete_user_attributes(params = {}, options = {})
@@ -479,6 +491,8 @@ module Aws::CognitoIdentityProvider
     #     username: "UsernameType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminDisableUser AWS API Documentation
+    #
     # @overload admin_disable_user(params = {})
     # @param [Hash] params ({})
     def admin_disable_user(params = {}, options = {})
@@ -504,6 +518,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     username: "UsernameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminEnableUser AWS API Documentation
     #
     # @overload admin_enable_user(params = {})
     # @param [Hash] params ({})
@@ -534,6 +550,8 @@ module Aws::CognitoIdentityProvider
     #     username: "UsernameType", # required
     #     device_key: "DeviceKeyType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminForgetDevice AWS API Documentation
     #
     # @overload admin_forget_device(params = {})
     # @param [Hash] params ({})
@@ -576,6 +594,8 @@ module Aws::CognitoIdentityProvider
     #   resp.device.device_create_date #=> Time
     #   resp.device.device_last_modified_date #=> Time
     #   resp.device.device_last_authenticated_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetDevice AWS API Documentation
     #
     # @overload admin_get_device(params = {})
     # @param [Hash] params ({})
@@ -626,6 +646,8 @@ module Aws::CognitoIdentityProvider
     #   resp.mfa_options #=> Array
     #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.mfa_options[0].attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminGetUser AWS API Documentation
     #
     # @overload admin_get_user(params = {})
     # @param [Hash] params ({})
@@ -688,6 +710,8 @@ module Aws::CognitoIdentityProvider
     #   resp.authentication_result.new_device_metadata.device_key #=> String
     #   resp.authentication_result.new_device_metadata.device_group_key #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminInitiateAuth AWS API Documentation
+    #
     # @overload admin_initiate_auth(params = {})
     # @param [Hash] params ({})
     def admin_initiate_auth(params = {}, options = {})
@@ -736,6 +760,8 @@ module Aws::CognitoIdentityProvider
     #   resp.devices[0].device_last_modified_date #=> Time
     #   resp.devices[0].device_last_authenticated_date #=> Time
     #   resp.pagination_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListDevices AWS API Documentation
     #
     # @overload admin_list_devices(params = {})
     # @param [Hash] params ({})
@@ -788,6 +814,8 @@ module Aws::CognitoIdentityProvider
     #   resp.groups[0].creation_date #=> Time
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminListGroupsForUser AWS API Documentation
+    #
     # @overload admin_list_groups_for_user(params = {})
     # @param [Hash] params ({})
     def admin_list_groups_for_user(params = {}, options = {})
@@ -817,6 +845,8 @@ module Aws::CognitoIdentityProvider
     #     username: "UsernameType", # required
     #     group_name: "GroupNameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRemoveUserFromGroup AWS API Documentation
     #
     # @overload admin_remove_user_from_group(params = {})
     # @param [Hash] params ({})
@@ -856,6 +886,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     username: "UsernameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminResetUserPassword AWS API Documentation
     #
     # @overload admin_reset_user_password(params = {})
     # @param [Hash] params ({})
@@ -916,6 +948,8 @@ module Aws::CognitoIdentityProvider
     #   resp.authentication_result.new_device_metadata.device_key #=> String
     #   resp.authentication_result.new_device_metadata.device_group_key #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminRespondToAuthChallenge AWS API Documentation
+    #
     # @overload admin_respond_to_auth_challenge(params = {})
     # @param [Hash] params ({})
     def admin_respond_to_auth_challenge(params = {}, options = {})
@@ -953,6 +987,8 @@ module Aws::CognitoIdentityProvider
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminSetUserSettings AWS API Documentation
+    #
     # @overload admin_set_user_settings(params = {})
     # @param [Hash] params ({})
     def admin_set_user_settings(params = {}, options = {})
@@ -986,6 +1022,8 @@ module Aws::CognitoIdentityProvider
     #     device_key: "DeviceKeyType", # required
     #     device_remembered_status: "remembered", # accepts remembered, not_remembered
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateDeviceStatus AWS API Documentation
     #
     # @overload admin_update_device_status(params = {})
     # @param [Hash] params ({})
@@ -1024,6 +1062,8 @@ module Aws::CognitoIdentityProvider
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUpdateUserAttributes AWS API Documentation
+    #
     # @overload admin_update_user_attributes(params = {})
     # @param [Hash] params ({})
     def admin_update_user_attributes(params = {}, options = {})
@@ -1049,6 +1089,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     username: "UsernameType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/AdminUserGlobalSignOut AWS API Documentation
     #
     # @overload admin_user_global_sign_out(params = {})
     # @param [Hash] params ({})
@@ -1077,6 +1119,8 @@ module Aws::CognitoIdentityProvider
     #     proposed_password: "PasswordType", # required
     #     access_token: "TokenModelType",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ChangePassword AWS API Documentation
     #
     # @overload change_password(params = {})
     # @param [Hash] params ({})
@@ -1120,6 +1164,8 @@ module Aws::CognitoIdentityProvider
     #
     #   resp.user_confirmation_necessary #=> Boolean
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmDevice AWS API Documentation
+    #
     # @overload confirm_device(params = {})
     # @param [Hash] params ({})
     def confirm_device(params = {}, options = {})
@@ -1161,6 +1207,8 @@ module Aws::CognitoIdentityProvider
     #     confirmation_code: "ConfirmationCodeType", # required
     #     password: "PasswordType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmForgotPassword AWS API Documentation
     #
     # @overload confirm_forgot_password(params = {})
     # @param [Hash] params ({})
@@ -1207,6 +1255,8 @@ module Aws::CognitoIdentityProvider
     #     confirmation_code: "ConfirmationCodeType", # required
     #     force_alias_creation: false,
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ConfirmSignUp AWS API Documentation
     #
     # @overload confirm_sign_up(params = {})
     # @param [Hash] params ({})
@@ -1274,6 +1324,8 @@ module Aws::CognitoIdentityProvider
     #   resp.group.last_modified_date #=> Time
     #   resp.group.creation_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateGroup AWS API Documentation
+    #
     # @overload create_group(params = {})
     # @param [Hash] params ({})
     def create_group(params = {}, options = {})
@@ -1321,6 +1373,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserImportJob AWS API Documentation
     #
     # @overload create_user_import_job(params = {})
     # @param [Hash] params ({})
@@ -1521,6 +1575,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPool AWS API Documentation
+    #
     # @overload create_user_pool(params = {})
     # @param [Hash] params ({})
     def create_user_pool(params = {}, options = {})
@@ -1585,6 +1641,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.explicit_auth_flows #=> Array
     #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
+    #
     # @overload create_user_pool_client(params = {})
     # @param [Hash] params ({})
     def create_user_pool_client(params = {}, options = {})
@@ -1611,6 +1669,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteGroup AWS API Documentation
+    #
     # @overload delete_group(params = {})
     # @param [Hash] params ({})
     def delete_group(params = {}, options = {})
@@ -1630,6 +1690,8 @@ module Aws::CognitoIdentityProvider
     #   resp = client.delete_user({
     #     access_token: "TokenModelType",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUser AWS API Documentation
     #
     # @overload delete_user(params = {})
     # @param [Hash] params ({})
@@ -1656,6 +1718,8 @@ module Aws::CognitoIdentityProvider
     #     access_token: "TokenModelType",
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserAttributes AWS API Documentation
+    #
     # @overload delete_user_attributes(params = {})
     # @param [Hash] params ({})
     def delete_user_attributes(params = {}, options = {})
@@ -1675,6 +1739,8 @@ module Aws::CognitoIdentityProvider
     #   resp = client.delete_user_pool({
     #     user_pool_id: "UserPoolIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPool AWS API Documentation
     #
     # @overload delete_user_pool(params = {})
     # @param [Hash] params ({})
@@ -1700,6 +1766,8 @@ module Aws::CognitoIdentityProvider
     #     user_pool_id: "UserPoolIdType", # required
     #     client_id: "ClientIdType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DeleteUserPoolClient AWS API Documentation
     #
     # @overload delete_user_pool_client(params = {})
     # @param [Hash] params ({})
@@ -1743,6 +1811,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserImportJob AWS API Documentation
     #
     # @overload describe_user_import_job(params = {})
     # @param [Hash] params ({})
@@ -1823,6 +1893,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
     #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPool AWS API Documentation
+    #
     # @overload describe_user_pool(params = {})
     # @param [Hash] params ({})
     def describe_user_pool(params = {}, options = {})
@@ -1866,6 +1938,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.explicit_auth_flows #=> Array
     #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
+    #
     # @overload describe_user_pool_client(params = {})
     # @param [Hash] params ({})
     def describe_user_pool_client(params = {}, options = {})
@@ -1889,6 +1963,8 @@ module Aws::CognitoIdentityProvider
     #     access_token: "TokenModelType",
     #     device_key: "DeviceKeyType", # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgetDevice AWS API Documentation
     #
     # @overload forget_device(params = {})
     # @param [Hash] params ({})
@@ -1929,6 +2005,8 @@ module Aws::CognitoIdentityProvider
     #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.code_delivery_details.attribute_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ForgotPassword AWS API Documentation
+    #
     # @overload forgot_password(params = {})
     # @param [Hash] params ({})
     def forgot_password(params = {}, options = {})
@@ -1959,6 +2037,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_id #=> String
     #   resp.csv_header #=> Array
     #   resp.csv_header[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetCSVHeader AWS API Documentation
     #
     # @overload get_csv_header(params = {})
     # @param [Hash] params ({})
@@ -1995,6 +2075,8 @@ module Aws::CognitoIdentityProvider
     #   resp.device.device_create_date #=> Time
     #   resp.device.device_last_modified_date #=> Time
     #   resp.device.device_last_authenticated_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetDevice AWS API Documentation
     #
     # @overload get_device(params = {})
     # @param [Hash] params ({})
@@ -2034,6 +2116,8 @@ module Aws::CognitoIdentityProvider
     #   resp.group.last_modified_date #=> Time
     #   resp.group.creation_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetGroup AWS API Documentation
+    #
     # @overload get_group(params = {})
     # @param [Hash] params ({})
     def get_group(params = {}, options = {})
@@ -2068,6 +2152,8 @@ module Aws::CognitoIdentityProvider
     #   resp.mfa_options #=> Array
     #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.mfa_options[0].attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUser AWS API Documentation
     #
     # @overload get_user(params = {})
     # @param [Hash] params ({})
@@ -2104,6 +2190,8 @@ module Aws::CognitoIdentityProvider
     #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.code_delivery_details.attribute_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUserAttributeVerificationCode AWS API Documentation
+    #
     # @overload get_user_attribute_verification_code(params = {})
     # @param [Hash] params ({})
     def get_user_attribute_verification_code(params = {}, options = {})
@@ -2123,6 +2211,8 @@ module Aws::CognitoIdentityProvider
     #   resp = client.global_sign_out({
     #     access_token: "TokenModelType",
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GlobalSignOut AWS API Documentation
     #
     # @overload global_sign_out(params = {})
     # @param [Hash] params ({})
@@ -2179,6 +2269,8 @@ module Aws::CognitoIdentityProvider
     #   resp.authentication_result.new_device_metadata.device_key #=> String
     #   resp.authentication_result.new_device_metadata.device_group_key #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/InitiateAuth AWS API Documentation
+    #
     # @overload initiate_auth(params = {})
     # @param [Hash] params ({})
     def initiate_auth(params = {}, options = {})
@@ -2221,6 +2313,8 @@ module Aws::CognitoIdentityProvider
     #   resp.devices[0].device_last_modified_date #=> Time
     #   resp.devices[0].device_last_authenticated_date #=> Time
     #   resp.pagination_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListDevices AWS API Documentation
     #
     # @overload list_devices(params = {})
     # @param [Hash] params ({})
@@ -2268,6 +2362,8 @@ module Aws::CognitoIdentityProvider
     #   resp.groups[0].last_modified_date #=> Time
     #   resp.groups[0].creation_date #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListGroups AWS API Documentation
     #
     # @overload list_groups(params = {})
     # @param [Hash] params ({})
@@ -2321,6 +2417,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_jobs[0].completion_message #=> String
     #   resp.pagination_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserImportJobs AWS API Documentation
+    #
     # @overload list_user_import_jobs(params = {})
     # @param [Hash] params ({})
     def list_user_import_jobs(params = {}, options = {})
@@ -2363,6 +2461,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_clients[0].user_pool_id #=> String
     #   resp.user_pool_clients[0].client_name #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPoolClients AWS API Documentation
     #
     # @overload list_user_pool_clients(params = {})
     # @param [Hash] params ({})
@@ -2411,6 +2511,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pools[0].last_modified_date #=> Time
     #   resp.user_pools[0].creation_date #=> Time
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUserPools AWS API Documentation
     #
     # @overload list_user_pools(params = {})
     # @param [Hash] params ({})
@@ -2469,6 +2571,8 @@ module Aws::CognitoIdentityProvider
     #   resp.users[0].mfa_options[0].attribute_name #=> String
     #   resp.pagination_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsers AWS API Documentation
+    #
     # @overload list_users(params = {})
     # @param [Hash] params ({})
     def list_users(params = {}, options = {})
@@ -2524,6 +2628,8 @@ module Aws::CognitoIdentityProvider
     #   resp.users[0].mfa_options[0].attribute_name #=> String
     #   resp.next_token #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ListUsersInGroup AWS API Documentation
+    #
     # @overload list_users_in_group(params = {})
     # @param [Hash] params ({})
     def list_users_in_group(params = {}, options = {})
@@ -2563,6 +2669,8 @@ module Aws::CognitoIdentityProvider
     #   resp.code_delivery_details.destination #=> String
     #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.code_delivery_details.attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/ResendConfirmationCode AWS API Documentation
     #
     # @overload resend_confirmation_code(params = {})
     # @param [Hash] params ({})
@@ -2617,6 +2725,8 @@ module Aws::CognitoIdentityProvider
     #   resp.authentication_result.new_device_metadata.device_key #=> String
     #   resp.authentication_result.new_device_metadata.device_group_key #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/RespondToAuthChallenge AWS API Documentation
+    #
     # @overload respond_to_auth_challenge(params = {})
     # @param [Hash] params ({})
     def respond_to_auth_challenge(params = {}, options = {})
@@ -2648,6 +2758,8 @@ module Aws::CognitoIdentityProvider
     #       },
     #     ],
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SetUserSettings AWS API Documentation
     #
     # @overload set_user_settings(params = {})
     # @param [Hash] params ({})
@@ -2712,6 +2824,8 @@ module Aws::CognitoIdentityProvider
     #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.code_delivery_details.attribute_name #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SignUp AWS API Documentation
+    #
     # @overload sign_up(params = {})
     # @param [Hash] params ({})
     def sign_up(params = {}, options = {})
@@ -2754,6 +2868,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.skipped_users #=> Integer
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StartUserImportJob AWS API Documentation
     #
     # @overload start_user_import_job(params = {})
     # @param [Hash] params ({})
@@ -2798,6 +2914,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_import_job.failed_users #=> Integer
     #   resp.user_import_job.completion_message #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/StopUserImportJob AWS API Documentation
+    #
     # @overload stop_user_import_job(params = {})
     # @param [Hash] params ({})
     def stop_user_import_job(params = {}, options = {})
@@ -2825,6 +2943,8 @@ module Aws::CognitoIdentityProvider
     #     device_key: "DeviceKeyType", # required
     #     device_remembered_status: "remembered", # accepts remembered, not_remembered
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateDeviceStatus AWS API Documentation
     #
     # @overload update_device_status(params = {})
     # @param [Hash] params ({})
@@ -2879,6 +2999,8 @@ module Aws::CognitoIdentityProvider
     #   resp.group.last_modified_date #=> Time
     #   resp.group.creation_date #=> Time
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateGroup AWS API Documentation
+    #
     # @overload update_group(params = {})
     # @param [Hash] params ({})
     def update_group(params = {}, options = {})
@@ -2916,6 +3038,8 @@ module Aws::CognitoIdentityProvider
     #   resp.code_delivery_details_list[0].destination #=> String
     #   resp.code_delivery_details_list[0].delivery_medium #=> String, one of "SMS", "EMAIL"
     #   resp.code_delivery_details_list[0].attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserAttributes AWS API Documentation
     #
     # @overload update_user_attributes(params = {})
     # @param [Hash] params ({})
@@ -3041,6 +3165,8 @@ module Aws::CognitoIdentityProvider
     #     },
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPool AWS API Documentation
+    #
     # @overload update_user_pool(params = {})
     # @param [Hash] params ({})
     def update_user_pool(params = {}, options = {})
@@ -3105,6 +3231,8 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.explicit_auth_flows #=> Array
     #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
+    #
     # @overload update_user_pool_client(params = {})
     # @param [Hash] params ({})
     def update_user_pool_client(params = {}, options = {})
@@ -3133,6 +3261,8 @@ module Aws::CognitoIdentityProvider
     #     code: "ConfirmationCodeType", # required
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/VerifyUserAttribute AWS API Documentation
+    #
     # @overload verify_user_attribute(params = {})
     # @param [Hash] params ({})
     def verify_user_attribute(params = {}, options = {})
@@ -3153,7 +3283,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

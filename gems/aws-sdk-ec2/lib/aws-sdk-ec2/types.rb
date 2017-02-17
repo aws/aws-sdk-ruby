@@ -41,6 +41,8 @@ module Aws::EC2
     #   that you are purchasing in this exchange.
     #   @return [Array<Types::TargetConfigurationRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptReservedInstancesExchangeQuoteRequest AWS API Documentation
+    #
     class AcceptReservedInstancesExchangeQuoteRequest < Struct.new(
       :dry_run,
       :reserved_instance_ids,
@@ -53,6 +55,8 @@ module Aws::EC2
     # @!attribute [rw] exchange_id
     #   The ID of the successful exchange.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptReservedInstancesExchangeQuoteResult AWS API Documentation
     #
     class AcceptReservedInstancesExchangeQuoteResult < Struct.new(
       :exchange_id)
@@ -80,6 +84,8 @@ module Aws::EC2
     #   The ID of the VPC peering connection.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnectionRequest AWS API Documentation
+    #
     class AcceptVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id)
@@ -91,6 +97,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_peering_connection
     #   Information about the VPC peering connection.
     #   @return [Types::VpcPeeringConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AcceptVpcPeeringConnectionResult AWS API Documentation
     #
     class AcceptVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection)
@@ -107,6 +115,8 @@ module Aws::EC2
     #   One or more values for the account attribute.
     #   @return [Array<Types::AccountAttributeValue>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttribute AWS API Documentation
+    #
     class AccountAttribute < Struct.new(
       :attribute_name,
       :attribute_values)
@@ -118,6 +128,8 @@ module Aws::EC2
     # @!attribute [rw] attribute_value
     #   The value of the attribute.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AccountAttributeValue AWS API Documentation
     #
     class AccountAttributeValue < Struct.new(
       :attribute_value)
@@ -137,6 +149,8 @@ module Aws::EC2
     # @!attribute [rw] spot_instance_request_id
     #   The ID of the Spot instance request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ActiveInstance AWS API Documentation
     #
     class ActiveInstance < Struct.new(
       :instance_type,
@@ -182,6 +196,8 @@ module Aws::EC2
     #   The private IP address associated with the Elastic IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Address AWS API Documentation
+    #
     class Address < Struct.new(
       :instance_id,
       :public_ip,
@@ -218,6 +234,8 @@ module Aws::EC2
     #   Default: The address is for use with instances in EC2-Classic.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressRequest AWS API Documentation
+    #
     class AllocateAddressRequest < Struct.new(
       :dry_run,
       :domain)
@@ -239,6 +257,8 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID that AWS assigns to represent the allocation of
     #   the Elastic IP address for use with instances in a VPC.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateAddressResult AWS API Documentation
     #
     class AllocateAddressResult < Struct.new(
       :public_ip,
@@ -293,6 +313,8 @@ module Aws::EC2
     #   The Availability Zone for the Dedicated Hosts.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
+    #
     class AllocateHostsRequest < Struct.new(
       :auto_placement,
       :client_token,
@@ -308,6 +330,8 @@ module Aws::EC2
     #   The ID of the allocated Dedicated Host. This is used when you want
     #   to launch an instance onto a specific host.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsResult AWS API Documentation
     #
     class AllocateHostsResult < Struct.new(
       :host_ids)
@@ -340,6 +364,8 @@ module Aws::EC2
     #   addresses.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesRequest AWS API Documentation
+    #
     class AssignIpv6AddressesRequest < Struct.new(
       :network_interface_id,
       :ipv_6_addresses,
@@ -354,6 +380,8 @@ module Aws::EC2
     # @!attribute [rw] assigned_ipv_6_addresses
     #   The IPv6 addresses assigned to the network interface.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignIpv6AddressesResult AWS API Documentation
     #
     class AssignIpv6AddressesResult < Struct.new(
       :network_interface_id,
@@ -397,6 +425,8 @@ module Aws::EC2
     #   another network interface or instance to be reassigned to the
     #   specified network interface.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssignPrivateIpAddressesRequest AWS API Documentation
     #
     class AssignPrivateIpAddressesRequest < Struct.new(
       :network_interface_id,
@@ -466,6 +496,8 @@ module Aws::EC2
     #   Elastic IP address is already associated with another resource.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddressRequest AWS API Documentation
+    #
     class AssociateAddressRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -483,6 +515,8 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID that represents the association of the Elastic IP
     #   address with an instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateAddressResult AWS API Documentation
     #
     class AssociateAddressResult < Struct.new(
       :association_id)
@@ -515,6 +549,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateDhcpOptionsRequest AWS API Documentation
     #
     class AssociateDhcpOptionsRequest < Struct.new(
       :dry_run,
@@ -549,6 +585,8 @@ module Aws::EC2
     #   The ID of the route table.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateRouteTableRequest AWS API Documentation
+    #
     class AssociateRouteTableRequest < Struct.new(
       :dry_run,
       :subnet_id,
@@ -562,6 +600,8 @@ module Aws::EC2
     #   The route table association ID (needed to disassociate the route
     #   table).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateRouteTableResult AWS API Documentation
     #
     class AssociateRouteTableResult < Struct.new(
       :association_id)
@@ -585,6 +625,8 @@ module Aws::EC2
     #   prefix length.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockRequest AWS API Documentation
+    #
     class AssociateSubnetCidrBlockRequest < Struct.new(
       :subnet_id,
       :ipv_6_cidr_block)
@@ -598,6 +640,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::SubnetIpv6CidrBlockAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlockResult AWS API Documentation
     #
     class AssociateSubnetCidrBlockResult < Struct.new(
       :subnet_id,
@@ -623,6 +667,8 @@ module Aws::EC2
     #   size of the CIDR block.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockRequest AWS API Documentation
+    #
     class AssociateVpcCidrBlockRequest < Struct.new(
       :vpc_id,
       :amazon_provided_ipv_6_cidr_block)
@@ -636,6 +682,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::VpcIpv6CidrBlockAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateVpcCidrBlockResult AWS API Documentation
     #
     class AssociateVpcCidrBlockResult < Struct.new(
       :vpc_id,
@@ -676,6 +724,8 @@ module Aws::EC2
     #   specify security groups from a different VPC.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachClassicLinkVpcRequest AWS API Documentation
+    #
     class AttachClassicLinkVpcRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -690,6 +740,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachClassicLinkVpcResult AWS API Documentation
     #
     class AttachClassicLinkVpcResult < Struct.new(
       :return)
@@ -721,6 +773,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachInternetGatewayRequest AWS API Documentation
     #
     class AttachInternetGatewayRequest < Struct.new(
       :dry_run,
@@ -760,6 +814,8 @@ module Aws::EC2
     #   The index of the device for the network interface attachment.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceRequest AWS API Documentation
+    #
     class AttachNetworkInterfaceRequest < Struct.new(
       :dry_run,
       :network_interface_id,
@@ -773,6 +829,8 @@ module Aws::EC2
     # @!attribute [rw] attachment_id
     #   The ID of the network interface attachment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachNetworkInterfaceResult AWS API Documentation
     #
     class AttachNetworkInterfaceResult < Struct.new(
       :attachment_id)
@@ -812,6 +870,8 @@ module Aws::EC2
     #   or `xvdh`).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVolumeRequest AWS API Documentation
+    #
     class AttachVolumeRequest < Struct.new(
       :dry_run,
       :volume_id,
@@ -846,6 +906,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGatewayRequest AWS API Documentation
+    #
     class AttachVpnGatewayRequest < Struct.new(
       :dry_run,
       :vpn_gateway_id,
@@ -858,6 +920,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_attachment
     #   Information about the attachment.
     #   @return [Types::VpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttachVpnGatewayResult AWS API Documentation
     #
     class AttachVpnGatewayResult < Struct.new(
       :vpc_attachment)
@@ -877,6 +941,8 @@ module Aws::EC2
     #   The attribute value. The valid values are `true` or `false`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeBooleanValue AWS API Documentation
+    #
     class AttributeBooleanValue < Struct.new(
       :value)
       include Aws::Structure
@@ -894,6 +960,8 @@ module Aws::EC2
     # @!attribute [rw] value
     #   The attribute value. Note that the value is case-sensitive.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AttributeValue AWS API Documentation
     #
     class AttributeValue < Struct.new(
       :value)
@@ -997,6 +1065,8 @@ module Aws::EC2
     #   A set of IP permissions. You can't specify a destination security
     #   group and a CIDR IP address range.
     #   @return [Array<Types::IpPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupEgressRequest AWS API Documentation
     #
     class AuthorizeSecurityGroupEgressRequest < Struct.new(
       :dry_run,
@@ -1134,6 +1204,8 @@ module Aws::EC2
     #   single command.
     #   @return [Array<Types::IpPermission>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AuthorizeSecurityGroupIngressRequest AWS API Documentation
+    #
     class AuthorizeSecurityGroupIngressRequest < Struct.new(
       :dry_run,
       :group_name,
@@ -1166,6 +1238,8 @@ module Aws::EC2
     #   Any messages about the Availability Zone.
     #   @return [Array<Types::AvailabilityZoneMessage>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZone AWS API Documentation
+    #
     class AvailabilityZone < Struct.new(
       :zone_name,
       :state,
@@ -1179,6 +1253,8 @@ module Aws::EC2
     # @!attribute [rw] message
     #   The message about the Availability Zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailabilityZoneMessage AWS API Documentation
     #
     class AvailabilityZoneMessage < Struct.new(
       :message)
@@ -1196,6 +1272,8 @@ module Aws::EC2
     #   The number of vCPUs available on the Dedicated Host.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AvailableCapacity AWS API Documentation
+    #
     class AvailableCapacity < Struct.new(
       :available_instance_capacity,
       :available_v_cpus)
@@ -1211,6 +1289,8 @@ module Aws::EC2
     #
     # @!attribute [rw] value
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BlobAttributeValue AWS API Documentation
     #
     class BlobAttributeValue < Struct.new(
       :value)
@@ -1265,6 +1345,8 @@ module Aws::EC2
     #   of the AMI.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BlockDeviceMapping AWS API Documentation
+    #
     class BlockDeviceMapping < Struct.new(
       :virtual_name,
       :device_name,
@@ -1316,6 +1398,8 @@ module Aws::EC2
     #   EC2 returns an error.
     #   @return [Types::Storage]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstanceRequest AWS API Documentation
+    #
     class BundleInstanceRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -1328,6 +1412,8 @@ module Aws::EC2
     # @!attribute [rw] bundle_task
     #   Information about the bundle task.
     #   @return [Types::BundleTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleInstanceResult AWS API Documentation
     #
     class BundleInstanceResult < Struct.new(
       :bundle_task)
@@ -1368,6 +1454,8 @@ module Aws::EC2
     #   If the task fails, a description of the error.
     #   @return [Types::BundleTaskError]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleTask AWS API Documentation
+    #
     class BundleTask < Struct.new(
       :instance_id,
       :bundle_id,
@@ -1389,6 +1477,8 @@ module Aws::EC2
     # @!attribute [rw] message
     #   The error message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/BundleTaskError AWS API Documentation
     #
     class BundleTaskError < Struct.new(
       :code,
@@ -1417,6 +1507,8 @@ module Aws::EC2
     #   The ID of the bundle task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTaskRequest AWS API Documentation
+    #
     class CancelBundleTaskRequest < Struct.new(
       :dry_run,
       :bundle_id)
@@ -1428,6 +1520,8 @@ module Aws::EC2
     # @!attribute [rw] bundle_task
     #   Information about the bundle task.
     #   @return [Types::BundleTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelBundleTaskResult AWS API Documentation
     #
     class CancelBundleTaskResult < Struct.new(
       :bundle_task)
@@ -1460,6 +1554,8 @@ module Aws::EC2
     #   The reason for canceling the conversion task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelConversionRequest AWS API Documentation
+    #
     class CancelConversionRequest < Struct.new(
       :dry_run,
       :conversion_task_id,
@@ -1480,6 +1576,8 @@ module Aws::EC2
     #   The ID of the export task. This is the ID returned by
     #   `CreateInstanceExportTask`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelExportTaskRequest AWS API Documentation
     #
     class CancelExportTaskRequest < Struct.new(
       :export_task_id)
@@ -1512,6 +1610,8 @@ module Aws::EC2
     #   The reason for canceling the task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImportTaskRequest AWS API Documentation
+    #
     class CancelImportTaskRequest < Struct.new(
       :dry_run,
       :import_task_id,
@@ -1533,6 +1633,8 @@ module Aws::EC2
     #   The current state of the task being canceled.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelImportTaskResult AWS API Documentation
+    #
     class CancelImportTaskResult < Struct.new(
       :import_task_id,
       :state,
@@ -1553,6 +1655,8 @@ module Aws::EC2
     #   The ID of the Reserved Instance listing.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListingRequest AWS API Documentation
+    #
     class CancelReservedInstancesListingRequest < Struct.new(
       :reserved_instances_listing_id)
       include Aws::Structure
@@ -1563,6 +1667,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances_listings
     #   The Reserved Instance listing.
     #   @return [Array<Types::ReservedInstancesListing>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelReservedInstancesListingResult AWS API Documentation
     #
     class CancelReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings)
@@ -1579,6 +1685,8 @@ module Aws::EC2
     #   The description for the error code.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsError AWS API Documentation
+    #
     class CancelSpotFleetRequestsError < Struct.new(
       :code,
       :message)
@@ -1594,6 +1702,8 @@ module Aws::EC2
     # @!attribute [rw] error
     #   The error.
     #   @return [Types::CancelSpotFleetRequestsError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsErrorItem AWS API Documentation
     #
     class CancelSpotFleetRequestsErrorItem < Struct.new(
       :spot_fleet_request_id,
@@ -1628,6 +1738,8 @@ module Aws::EC2
     #   it is canceled successfully.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsRequest AWS API Documentation
+    #
     class CancelSpotFleetRequestsRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_ids,
@@ -1646,6 +1758,8 @@ module Aws::EC2
     #   Information about the Spot fleet requests that are successfully
     #   canceled.
     #   @return [Array<Types::CancelSpotFleetRequestsSuccessItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsResponse AWS API Documentation
     #
     class CancelSpotFleetRequestsResponse < Struct.new(
       :unsuccessful_fleet_requests,
@@ -1666,6 +1780,8 @@ module Aws::EC2
     # @!attribute [rw] previous_spot_fleet_request_state
     #   The previous state of the Spot fleet request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotFleetRequestsSuccessItem AWS API Documentation
     #
     class CancelSpotFleetRequestsSuccessItem < Struct.new(
       :spot_fleet_request_id,
@@ -1695,6 +1811,8 @@ module Aws::EC2
     #   One or more Spot instance request IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsRequest AWS API Documentation
+    #
     class CancelSpotInstanceRequestsRequest < Struct.new(
       :dry_run,
       :spot_instance_request_ids)
@@ -1706,6 +1824,8 @@ module Aws::EC2
     # @!attribute [rw] cancelled_spot_instance_requests
     #   One or more Spot instance requests.
     #   @return [Array<Types::CancelledSpotInstanceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelSpotInstanceRequestsResult AWS API Documentation
     #
     class CancelSpotInstanceRequestsResult < Struct.new(
       :cancelled_spot_instance_requests)
@@ -1722,6 +1842,8 @@ module Aws::EC2
     #   The state of the Spot instance request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelledSpotInstanceRequest AWS API Documentation
+    #
     class CancelledSpotInstanceRequest < Struct.new(
       :spot_instance_request_id,
       :state)
@@ -1737,6 +1859,8 @@ module Aws::EC2
     # @!attribute [rw] classic_link_dns_supported
     #   Indicates whether ClassicLink DNS support is enabled for the VPC.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLinkDnsSupport AWS API Documentation
     #
     class ClassicLinkDnsSupport < Struct.new(
       :vpc_id,
@@ -1761,6 +1885,8 @@ module Aws::EC2
     # @!attribute [rw] tags
     #   Any tags assigned to the instance.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClassicLinkInstance AWS API Documentation
     #
     class ClassicLinkInstance < Struct.new(
       :instance_id,
@@ -1798,6 +1924,8 @@ module Aws::EC2
     #   A user-defined comment about the disk upload.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientData AWS API Documentation
+    #
     class ClientData < Struct.new(
       :upload_start,
       :upload_end,
@@ -1832,6 +1960,8 @@ module Aws::EC2
     #   The ID of the instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstanceRequest AWS API Documentation
+    #
     class ConfirmProductInstanceRequest < Struct.new(
       :dry_run,
       :product_code,
@@ -1851,6 +1981,8 @@ module Aws::EC2
     #   product code is owned by the requester and associated with the
     #   specified instance.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConfirmProductInstanceResult AWS API Documentation
     #
     class ConfirmProductInstanceResult < Struct.new(
       :owner_id,
@@ -1890,6 +2022,8 @@ module Aws::EC2
     # @!attribute [rw] tags
     #   Any tags assigned to the task.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ConversionTask AWS API Documentation
     #
     class ConversionTask < Struct.new(
       :conversion_task_id,
@@ -1977,6 +2111,8 @@ module Aws::EC2
     #   must also be set.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageRequest AWS API Documentation
+    #
     class CopyImageRequest < Struct.new(
       :dry_run,
       :source_region,
@@ -1994,6 +2130,8 @@ module Aws::EC2
     # @!attribute [rw] image_id
     #   The ID of the new AMI.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyImageResult AWS API Documentation
     #
     class CopyImageResult < Struct.new(
       :image_id)
@@ -2098,6 +2236,8 @@ module Aws::EC2
     #   must also be set.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotRequest AWS API Documentation
+    #
     class CopySnapshotRequest < Struct.new(
       :dry_run,
       :source_region,
@@ -2115,6 +2255,8 @@ module Aws::EC2
     # @!attribute [rw] snapshot_id
     #   The ID of the new snapshot.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopySnapshotResult AWS API Documentation
     #
     class CopySnapshotResult < Struct.new(
       :snapshot_id)
@@ -2156,6 +2298,8 @@ module Aws::EC2
     #   Default: 65000
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayRequest AWS API Documentation
+    #
     class CreateCustomerGatewayRequest < Struct.new(
       :dry_run,
       :type,
@@ -2169,6 +2313,8 @@ module Aws::EC2
     # @!attribute [rw] customer_gateway
     #   Information about the customer gateway.
     #   @return [Types::CustomerGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCustomerGatewayResult AWS API Documentation
     #
     class CreateCustomerGatewayResult < Struct.new(
       :customer_gateway)
@@ -2201,6 +2347,8 @@ module Aws::EC2
     #   A DHCP configuration option.
     #   @return [Array<Types::NewDhcpConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptionsRequest AWS API Documentation
+    #
     class CreateDhcpOptionsRequest < Struct.new(
       :dry_run,
       :dhcp_configurations)
@@ -2212,6 +2360,8 @@ module Aws::EC2
     # @!attribute [rw] dhcp_options
     #   A set of DHCP options.
     #   @return [Types::DhcpOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateDhcpOptionsResult AWS API Documentation
     #
     class CreateDhcpOptionsResult < Struct.new(
       :dhcp_options)
@@ -2249,6 +2399,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayRequest AWS API Documentation
+    #
     class CreateEgressOnlyInternetGatewayRequest < Struct.new(
       :dry_run,
       :vpc_id,
@@ -2264,6 +2416,8 @@ module Aws::EC2
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateEgressOnlyInternetGatewayResult AWS API Documentation
     #
     class CreateEgressOnlyInternetGatewayResult < Struct.new(
       :egress_only_internet_gateway,
@@ -2318,6 +2472,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsRequest AWS API Documentation
+    #
     class CreateFlowLogsRequest < Struct.new(
       :resource_ids,
       :resource_type,
@@ -2343,6 +2499,8 @@ module Aws::EC2
     #   Information about the flow logs that could not be created
     #   successfully.
     #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFlowLogsResult AWS API Documentation
     #
     class CreateFlowLogsResult < Struct.new(
       :flow_log_ids,
@@ -2414,6 +2572,8 @@ module Aws::EC2
     #   Information about one or more block device mappings.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImageRequest AWS API Documentation
+    #
     class CreateImageRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -2429,6 +2589,8 @@ module Aws::EC2
     # @!attribute [rw] image_id
     #   The ID of the new AMI.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateImageResult AWS API Documentation
     #
     class CreateImageResult < Struct.new(
       :image_id)
@@ -2469,6 +2631,8 @@ module Aws::EC2
     #   The format and location for an instance export task.
     #   @return [Types::ExportToS3TaskSpecification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskRequest AWS API Documentation
+    #
     class CreateInstanceExportTaskRequest < Struct.new(
       :description,
       :instance_id,
@@ -2482,6 +2646,8 @@ module Aws::EC2
     # @!attribute [rw] export_task
     #   Information about the instance export task.
     #   @return [Types::ExportTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInstanceExportTaskResult AWS API Documentation
     #
     class CreateInstanceExportTaskResult < Struct.new(
       :export_task)
@@ -2504,6 +2670,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInternetGatewayRequest AWS API Documentation
+    #
     class CreateInternetGatewayRequest < Struct.new(
       :dry_run)
       include Aws::Structure
@@ -2514,6 +2682,8 @@ module Aws::EC2
     # @!attribute [rw] internet_gateway
     #   Information about the Internet gateway.
     #   @return [Types::InternetGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInternetGatewayResult AWS API Documentation
     #
     class CreateInternetGatewayResult < Struct.new(
       :internet_gateway)
@@ -2542,6 +2712,8 @@ module Aws::EC2
     #
     #   Constraints: Up to 255 ASCII characters
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPairRequest AWS API Documentation
     #
     class CreateKeyPairRequest < Struct.new(
       :dry_run,
@@ -2582,6 +2754,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayRequest AWS API Documentation
+    #
     class CreateNatGatewayRequest < Struct.new(
       :subnet_id,
       :allocation_id,
@@ -2600,6 +2774,8 @@ module Aws::EC2
     #   request. Only returned if a client token was provided in the
     #   request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNatGatewayResult AWS API Documentation
     #
     class CreateNatGatewayResult < Struct.new(
       :nat_gateway,
@@ -2691,6 +2867,8 @@ module Aws::EC2
     #   TCP or UDP protocols: The range of ports the rule applies to.
     #   @return [Types::PortRange]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclEntryRequest AWS API Documentation
+    #
     class CreateNetworkAclEntryRequest < Struct.new(
       :dry_run,
       :network_acl_id,
@@ -2726,6 +2904,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclRequest AWS API Documentation
+    #
     class CreateNetworkAclRequest < Struct.new(
       :dry_run,
       :vpc_id)
@@ -2737,6 +2917,8 @@ module Aws::EC2
     # @!attribute [rw] network_acl
     #   Information about the network ACL.
     #   @return [Types::NetworkAcl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkAclResult AWS API Documentation
     #
     class CreateNetworkAclResult < Struct.new(
       :network_acl)
@@ -2832,6 +3014,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceRequest AWS API Documentation
+    #
     class CreateNetworkInterfaceRequest < Struct.new(
       :subnet_id,
       :description,
@@ -2850,6 +3034,8 @@ module Aws::EC2
     # @!attribute [rw] network_interface
     #   Information about the network interface.
     #   @return [Types::NetworkInterface]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateNetworkInterfaceResult AWS API Documentation
     #
     class CreateNetworkInterfaceResult < Struct.new(
       :network_interface)
@@ -2883,6 +3069,8 @@ module Aws::EC2
     # @!attribute [rw] strategy
     #   The placement strategy.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreatePlacementGroupRequest AWS API Documentation
     #
     class CreatePlacementGroupRequest < Struct.new(
       :dry_run,
@@ -2935,6 +3123,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListingRequest AWS API Documentation
+    #
     class CreateReservedInstancesListingRequest < Struct.new(
       :reserved_instances_id,
       :instance_count,
@@ -2948,6 +3138,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances_listings
     #   Information about the Standard Reserved Instance listing.
     #   @return [Array<Types::ReservedInstancesListing>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateReservedInstancesListingResult AWS API Documentation
     #
     class CreateReservedInstancesListingResult < Struct.new(
       :reserved_instances_listings)
@@ -3020,6 +3212,8 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteRequest AWS API Documentation
+    #
     class CreateRouteRequest < Struct.new(
       :dry_run,
       :route_table_id,
@@ -3040,6 +3234,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteResult AWS API Documentation
     #
     class CreateRouteResult < Struct.new(
       :return)
@@ -3067,6 +3263,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableRequest AWS API Documentation
+    #
     class CreateRouteTableRequest < Struct.new(
       :dry_run,
       :vpc_id)
@@ -3078,6 +3276,8 @@ module Aws::EC2
     # @!attribute [rw] route_table
     #   Information about the route table.
     #   @return [Types::RouteTable]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateRouteTableResult AWS API Documentation
     #
     class CreateRouteTableResult < Struct.new(
       :route_table)
@@ -3129,6 +3329,8 @@ module Aws::EC2
     #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupRequest AWS API Documentation
+    #
     class CreateSecurityGroupRequest < Struct.new(
       :dry_run,
       :group_name,
@@ -3142,6 +3344,8 @@ module Aws::EC2
     # @!attribute [rw] group_id
     #   The ID of the security group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSecurityGroupResult AWS API Documentation
     #
     class CreateSecurityGroupResult < Struct.new(
       :group_id)
@@ -3173,6 +3377,8 @@ module Aws::EC2
     # @!attribute [rw] description
     #   A description for the snapshot.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSnapshotRequest AWS API Documentation
     #
     class CreateSnapshotRequest < Struct.new(
       :dry_run,
@@ -3207,6 +3413,8 @@ module Aws::EC2
     #   A prefix for the data feed file names.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionRequest AWS API Documentation
+    #
     class CreateSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run,
       :bucket,
@@ -3219,6 +3427,8 @@ module Aws::EC2
     # @!attribute [rw] spot_datafeed_subscription
     #   The Spot instance data feed subscription.
     #   @return [Types::SpotDatafeedSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSpotDatafeedSubscriptionResult AWS API Documentation
     #
     class CreateSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription)
@@ -3267,6 +3477,8 @@ module Aws::EC2
     #   subnet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetRequest AWS API Documentation
+    #
     class CreateSubnetRequest < Struct.new(
       :dry_run,
       :vpc_id,
@@ -3281,6 +3493,8 @@ module Aws::EC2
     # @!attribute [rw] subnet
     #   Information about the subnet.
     #   @return [Types::Subnet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetResult AWS API Documentation
     #
     class CreateSubnetResult < Struct.new(
       :subnet)
@@ -3320,6 +3534,8 @@ module Aws::EC2
     #   value, and we set the value to an empty string.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTagsRequest AWS API Documentation
+    #
     class CreateTagsRequest < Struct.new(
       :dry_run,
       :resources,
@@ -3347,6 +3563,8 @@ module Aws::EC2
     #   The specific group that is to be added or removed from a volume's
     #   list of create volume permissions.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermission AWS API Documentation
     #
     class CreateVolumePermission < Struct.new(
       :user_id,
@@ -3383,6 +3601,8 @@ module Aws::EC2
     #   Removes a specific AWS account ID or group from a volume's list of
     #   create volume permissions.
     #   @return [Array<Types::CreateVolumePermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumePermissionModifications AWS API Documentation
     #
     class CreateVolumePermissionModifications < Struct.new(
       :add,
@@ -3478,6 +3698,8 @@ module Aws::EC2
     #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest AWS API Documentation
+    #
     class CreateVolumeRequest < Struct.new(
       :dry_run,
       :size,
@@ -3542,6 +3764,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointRequest AWS API Documentation
+    #
     class CreateVpcEndpointRequest < Struct.new(
       :dry_run,
       :vpc_id,
@@ -3562,6 +3786,8 @@ module Aws::EC2
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpointResult AWS API Documentation
     #
     class CreateVpcEndpointResult < Struct.new(
       :vpc_endpoint,
@@ -3603,6 +3829,8 @@ module Aws::EC2
     #   Default: Your AWS account ID
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionRequest AWS API Documentation
+    #
     class CreateVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_id,
@@ -3616,6 +3844,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_peering_connection
     #   Information about the VPC peering connection.
     #   @return [Types::VpcPeeringConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcPeeringConnectionResult AWS API Documentation
     #
     class CreateVpcPeeringConnectionResult < Struct.new(
       :vpc_peering_connection)
@@ -3666,6 +3896,8 @@ module Aws::EC2
     #   size of the CIDR block.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcRequest AWS API Documentation
+    #
     class CreateVpcRequest < Struct.new(
       :dry_run,
       :cidr_block,
@@ -3679,6 +3911,8 @@ module Aws::EC2
     # @!attribute [rw] vpc
     #   Information about the VPC.
     #   @return [Types::Vpc]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcResult AWS API Documentation
     #
     class CreateVpcResult < Struct.new(
       :vpc)
@@ -3727,6 +3961,8 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Types::VpnConnectionOptionsSpecification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRequest AWS API Documentation
+    #
     class CreateVpnConnectionRequest < Struct.new(
       :dry_run,
       :type,
@@ -3741,6 +3977,8 @@ module Aws::EC2
     # @!attribute [rw] vpn_connection
     #   Information about the VPN connection.
     #   @return [Types::VpnConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionResult AWS API Documentation
     #
     class CreateVpnConnectionResult < Struct.new(
       :vpn_connection)
@@ -3765,6 +4003,8 @@ module Aws::EC2
     #   The CIDR block associated with the local subnet of the customer
     #   network.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnConnectionRouteRequest AWS API Documentation
     #
     class CreateVpnConnectionRouteRequest < Struct.new(
       :vpn_connection_id,
@@ -3798,6 +4038,8 @@ module Aws::EC2
     #   The Availability Zone for the virtual private gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGatewayRequest AWS API Documentation
+    #
     class CreateVpnGatewayRequest < Struct.new(
       :dry_run,
       :type,
@@ -3810,6 +4052,8 @@ module Aws::EC2
     # @!attribute [rw] vpn_gateway
     #   Information about the virtual private gateway.
     #   @return [Types::VpnGateway]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpnGatewayResult AWS API Documentation
     #
     class CreateVpnGatewayResult < Struct.new(
       :vpn_gateway)
@@ -3846,6 +4090,8 @@ module Aws::EC2
     #   Any tags assigned to the customer gateway.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CustomerGateway AWS API Documentation
+    #
     class CustomerGateway < Struct.new(
       :customer_gateway_id,
       :state,
@@ -3877,6 +4123,8 @@ module Aws::EC2
     #   The ID of the customer gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteCustomerGatewayRequest AWS API Documentation
+    #
     class DeleteCustomerGatewayRequest < Struct.new(
       :dry_run,
       :customer_gateway_id)
@@ -3904,6 +4152,8 @@ module Aws::EC2
     #   The ID of the DHCP options set.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteDhcpOptionsRequest AWS API Documentation
+    #
     class DeleteDhcpOptionsRequest < Struct.new(
       :dry_run,
       :dhcp_options_id)
@@ -3929,6 +4179,8 @@ module Aws::EC2
     #   The ID of the egress-only Internet gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGatewayRequest AWS API Documentation
+    #
     class DeleteEgressOnlyInternetGatewayRequest < Struct.new(
       :dry_run,
       :egress_only_internet_gateway_id)
@@ -3939,6 +4191,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteEgressOnlyInternetGatewayResult AWS API Documentation
     #
     class DeleteEgressOnlyInternetGatewayResult < Struct.new(
       :return_code)
@@ -3958,6 +4212,8 @@ module Aws::EC2
     #   One or more flow log IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogsRequest AWS API Documentation
+    #
     class DeleteFlowLogsRequest < Struct.new(
       :flow_log_ids)
       include Aws::Structure
@@ -3969,6 +4225,8 @@ module Aws::EC2
     #   Information about the flow logs that could not be deleted
     #   successfully.
     #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFlowLogsResult AWS API Documentation
     #
     class DeleteFlowLogsResult < Struct.new(
       :unsuccessful)
@@ -3995,6 +4253,8 @@ module Aws::EC2
     # @!attribute [rw] internet_gateway_id
     #   The ID of the Internet gateway.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteInternetGatewayRequest AWS API Documentation
     #
     class DeleteInternetGatewayRequest < Struct.new(
       :dry_run,
@@ -4023,6 +4283,8 @@ module Aws::EC2
     #   The name of the key pair.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteKeyPairRequest AWS API Documentation
+    #
     class DeleteKeyPairRequest < Struct.new(
       :dry_run,
       :key_name)
@@ -4042,6 +4304,8 @@ module Aws::EC2
     #   The ID of the NAT gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNatGatewayRequest AWS API Documentation
+    #
     class DeleteNatGatewayRequest < Struct.new(
       :nat_gateway_id)
       include Aws::Structure
@@ -4052,6 +4316,8 @@ module Aws::EC2
     # @!attribute [rw] nat_gateway_id
     #   The ID of the NAT gateway.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNatGatewayResult AWS API Documentation
     #
     class DeleteNatGatewayResult < Struct.new(
       :nat_gateway_id)
@@ -4089,6 +4355,8 @@ module Aws::EC2
     #   Indicates whether the rule is an egress rule.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclEntryRequest AWS API Documentation
+    #
     class DeleteNetworkAclEntryRequest < Struct.new(
       :dry_run,
       :network_acl_id,
@@ -4118,6 +4386,8 @@ module Aws::EC2
     #   The ID of the network ACL.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkAclRequest AWS API Documentation
+    #
     class DeleteNetworkAclRequest < Struct.new(
       :dry_run,
       :network_acl_id)
@@ -4145,6 +4415,8 @@ module Aws::EC2
     #   The ID of the network interface.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteNetworkInterfaceRequest AWS API Documentation
+    #
     class DeleteNetworkInterfaceRequest < Struct.new(
       :dry_run,
       :network_interface_id)
@@ -4171,6 +4443,8 @@ module Aws::EC2
     # @!attribute [rw] group_name
     #   The name of the placement group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeletePlacementGroupRequest AWS API Documentation
     #
     class DeletePlacementGroupRequest < Struct.new(
       :dry_run,
@@ -4211,6 +4485,8 @@ module Aws::EC2
     #   the CIDR for the route exactly.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteRequest AWS API Documentation
+    #
     class DeleteRouteRequest < Struct.new(
       :dry_run,
       :route_table_id,
@@ -4239,6 +4515,8 @@ module Aws::EC2
     # @!attribute [rw] route_table_id
     #   The ID of the route table.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteRouteTableRequest AWS API Documentation
     #
     class DeleteRouteTableRequest < Struct.new(
       :dry_run,
@@ -4273,6 +4551,8 @@ module Aws::EC2
     #   The ID of the security group. Required for a nondefault VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroupRequest AWS API Documentation
+    #
     class DeleteSecurityGroupRequest < Struct.new(
       :dry_run,
       :group_name,
@@ -4301,6 +4581,8 @@ module Aws::EC2
     #   The ID of the EBS snapshot.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSnapshotRequest AWS API Documentation
+    #
     class DeleteSnapshotRequest < Struct.new(
       :dry_run,
       :snapshot_id)
@@ -4322,6 +4604,8 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSpotDatafeedSubscriptionRequest AWS API Documentation
     #
     class DeleteSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run)
@@ -4348,6 +4632,8 @@ module Aws::EC2
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSubnetRequest AWS API Documentation
     #
     class DeleteSubnetRequest < Struct.new(
       :dry_run,
@@ -4390,6 +4676,8 @@ module Aws::EC2
     #   if its value is an empty string.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteTagsRequest AWS API Documentation
+    #
     class DeleteTagsRequest < Struct.new(
       :dry_run,
       :resources,
@@ -4418,6 +4706,8 @@ module Aws::EC2
     #   The ID of the volume.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVolumeRequest AWS API Documentation
+    #
     class DeleteVolumeRequest < Struct.new(
       :dry_run,
       :volume_id)
@@ -4445,6 +4735,8 @@ module Aws::EC2
     #   One or more endpoint IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsRequest AWS API Documentation
+    #
     class DeleteVpcEndpointsRequest < Struct.new(
       :dry_run,
       :vpc_endpoint_ids)
@@ -4456,6 +4748,8 @@ module Aws::EC2
     # @!attribute [rw] unsuccessful
     #   Information about the endpoints that were not successfully deleted.
     #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcEndpointsResult AWS API Documentation
     #
     class DeleteVpcEndpointsResult < Struct.new(
       :unsuccessful)
@@ -4483,6 +4777,8 @@ module Aws::EC2
     #   The ID of the VPC peering connection.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcPeeringConnectionRequest AWS API Documentation
+    #
     class DeleteVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id)
@@ -4495,6 +4791,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcPeeringConnectionResult AWS API Documentation
     #
     class DeleteVpcPeeringConnectionResult < Struct.new(
       :return)
@@ -4521,6 +4819,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcRequest AWS API Documentation
     #
     class DeleteVpcRequest < Struct.new(
       :dry_run,
@@ -4549,6 +4849,8 @@ module Aws::EC2
     #   The ID of the VPN connection.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRequest AWS API Documentation
+    #
     class DeleteVpnConnectionRequest < Struct.new(
       :dry_run,
       :vpn_connection_id)
@@ -4573,6 +4875,8 @@ module Aws::EC2
     #   The CIDR block associated with the local subnet of the customer
     #   network.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnConnectionRouteRequest AWS API Documentation
     #
     class DeleteVpnConnectionRouteRequest < Struct.new(
       :vpn_connection_id,
@@ -4601,6 +4905,8 @@ module Aws::EC2
     #   The ID of the virtual private gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpnGatewayRequest AWS API Documentation
+    #
     class DeleteVpnGatewayRequest < Struct.new(
       :dry_run,
       :vpn_gateway_id)
@@ -4627,6 +4933,8 @@ module Aws::EC2
     # @!attribute [rw] image_id
     #   The ID of the AMI.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeregisterImageRequest AWS API Documentation
     #
     class DeregisterImageRequest < Struct.new(
       :dry_run,
@@ -4655,6 +4963,8 @@ module Aws::EC2
     #   One or more account attribute names.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountAttributesRequest AWS API Documentation
+    #
     class DescribeAccountAttributesRequest < Struct.new(
       :dry_run,
       :attribute_names)
@@ -4666,6 +4976,8 @@ module Aws::EC2
     # @!attribute [rw] account_attributes
     #   Information about one or more account attributes.
     #   @return [Array<Types::AccountAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAccountAttributesResult AWS API Documentation
     #
     class DescribeAccountAttributesResult < Struct.new(
       :account_attributes)
@@ -4732,6 +5044,8 @@ module Aws::EC2
     #   Default: Describes all your Elastic IP addresses.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesRequest AWS API Documentation
+    #
     class DescribeAddressesRequest < Struct.new(
       :dry_run,
       :public_ips,
@@ -4745,6 +5059,8 @@ module Aws::EC2
     # @!attribute [rw] addresses
     #   Information about one or more Elastic IP addresses.
     #   @return [Array<Types::Address>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAddressesResult AWS API Documentation
     #
     class DescribeAddressesResult < Struct.new(
       :addresses)
@@ -4793,6 +5109,8 @@ module Aws::EC2
     #     `us-east-1a`).
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesRequest AWS API Documentation
+    #
     class DescribeAvailabilityZonesRequest < Struct.new(
       :dry_run,
       :zone_names,
@@ -4805,6 +5123,8 @@ module Aws::EC2
     # @!attribute [rw] availability_zones
     #   Information about one or more Availability Zones.
     #   @return [Array<Types::AvailabilityZone>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeAvailabilityZonesResult AWS API Documentation
     #
     class DescribeAvailabilityZonesResult < Struct.new(
       :availability_zones)
@@ -4868,6 +5188,8 @@ module Aws::EC2
     #   * `update-time` - The time of the most recent update for the task.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasksRequest AWS API Documentation
+    #
     class DescribeBundleTasksRequest < Struct.new(
       :dry_run,
       :bundle_ids,
@@ -4880,6 +5202,8 @@ module Aws::EC2
     # @!attribute [rw] bundle_tasks
     #   Information about one or more bundle tasks.
     #   @return [Array<Types::BundleTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeBundleTasksResult AWS API Documentation
     #
     class DescribeBundleTasksResult < Struct.new(
       :bundle_tasks)
@@ -4958,6 +5282,8 @@ module Aws::EC2
     #   items.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesRequest AWS API Documentation
+    #
     class DescribeClassicLinkInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids,
@@ -4977,6 +5303,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClassicLinkInstancesResult AWS API Documentation
     #
     class DescribeClassicLinkInstancesResult < Struct.new(
       :instances,
@@ -5005,6 +5333,8 @@ module Aws::EC2
     #   One or more conversion task IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasksRequest AWS API Documentation
+    #
     class DescribeConversionTasksRequest < Struct.new(
       :dry_run,
       :conversion_task_ids)
@@ -5016,6 +5346,8 @@ module Aws::EC2
     # @!attribute [rw] conversion_tasks
     #   Information about the conversion tasks.
     #   @return [Array<Types::ConversionTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeConversionTasksResult AWS API Documentation
     #
     class DescribeConversionTasksResult < Struct.new(
       :conversion_tasks)
@@ -5087,6 +5419,8 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGatewaysRequest AWS API Documentation
+    #
     class DescribeCustomerGatewaysRequest < Struct.new(
       :dry_run,
       :customer_gateway_ids,
@@ -5099,6 +5433,8 @@ module Aws::EC2
     # @!attribute [rw] customer_gateways
     #   Information about one or more customer gateways.
     #   @return [Array<Types::CustomerGateway>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCustomerGatewaysResult AWS API Documentation
     #
     class DescribeCustomerGatewaysResult < Struct.new(
       :customer_gateways)
@@ -5163,6 +5499,8 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsRequest AWS API Documentation
+    #
     class DescribeDhcpOptionsRequest < Struct.new(
       :dry_run,
       :dhcp_options_ids,
@@ -5175,6 +5513,8 @@ module Aws::EC2
     # @!attribute [rw] dhcp_options
     #   Information about one or more DHCP options sets.
     #   @return [Array<Types::DhcpOptions>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDhcpOptionsResult AWS API Documentation
     #
     class DescribeDhcpOptionsResult < Struct.new(
       :dhcp_options)
@@ -5214,6 +5554,8 @@ module Aws::EC2
     #   The token to retrieve the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysRequest AWS API Documentation
+    #
     class DescribeEgressOnlyInternetGatewaysRequest < Struct.new(
       :dry_run,
       :egress_only_internet_gateway_ids,
@@ -5229,6 +5571,8 @@ module Aws::EC2
     # @!attribute [rw] next_token
     #   The token to use to retrieve the next page of results.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeEgressOnlyInternetGatewaysResult AWS API Documentation
     #
     class DescribeEgressOnlyInternetGatewaysResult < Struct.new(
       :egress_only_internet_gateways,
@@ -5249,6 +5593,8 @@ module Aws::EC2
     #   One or more export task IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasksRequest AWS API Documentation
+    #
     class DescribeExportTasksRequest < Struct.new(
       :export_task_ids)
       include Aws::Structure
@@ -5259,6 +5605,8 @@ module Aws::EC2
     # @!attribute [rw] export_tasks
     #   Information about the export tasks.
     #   @return [Array<Types::ExportTask>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeExportTasksResult AWS API Documentation
     #
     class DescribeExportTasksResult < Struct.new(
       :export_tasks)
@@ -5315,6 +5663,8 @@ module Aws::EC2
     #   log IDs parameter in the same request.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsRequest AWS API Documentation
+    #
     class DescribeFlowLogsRequest < Struct.new(
       :flow_log_ids,
       :filter,
@@ -5333,6 +5683,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsResult AWS API Documentation
     #
     class DescribeFlowLogsResult < Struct.new(
       :flow_logs,
@@ -5401,6 +5753,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferingsRequest AWS API Documentation
+    #
     class DescribeHostReservationOfferingsRequest < Struct.new(
       :offering_id,
       :min_duration,
@@ -5419,6 +5773,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationOfferingsResult AWS API Documentation
     #
     class DescribeHostReservationOfferingsResult < Struct.new(
       :offering_set,
@@ -5469,6 +5825,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationsRequest AWS API Documentation
+    #
     class DescribeHostReservationsRequest < Struct.new(
       :host_reservation_id_set,
       :filter,
@@ -5485,6 +5843,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostReservationsResult AWS API Documentation
     #
     class DescribeHostReservationsResult < Struct.new(
       :host_reservation_set,
@@ -5549,6 +5909,8 @@ module Aws::EC2
     #   * `availability-zone` - The Availability Zone of the host.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostsRequest AWS API Documentation
+    #
     class DescribeHostsRequest < Struct.new(
       :host_ids,
       :next_token,
@@ -5567,6 +5929,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHostsResult AWS API Documentation
     #
     class DescribeHostsResult < Struct.new(
       :hosts,
@@ -5588,6 +5952,8 @@ module Aws::EC2
     #   `volume`
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormatRequest AWS API Documentation
+    #
     class DescribeIdFormatRequest < Struct.new(
       :resource)
       include Aws::Structure
@@ -5598,6 +5964,8 @@ module Aws::EC2
     # @!attribute [rw] statuses
     #   Information about the ID format for the resource.
     #   @return [Array<Types::IdFormat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdFormatResult AWS API Documentation
     #
     class DescribeIdFormatResult < Struct.new(
       :statuses)
@@ -5624,6 +5992,8 @@ module Aws::EC2
     #   root user.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatRequest AWS API Documentation
+    #
     class DescribeIdentityIdFormatRequest < Struct.new(
       :resource,
       :principal_arn)
@@ -5635,6 +6005,8 @@ module Aws::EC2
     # @!attribute [rw] statuses
     #   Information about the ID format for the resources.
     #   @return [Array<Types::IdFormat>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIdentityIdFormatResult AWS API Documentation
     #
     class DescribeIdentityIdFormatResult < Struct.new(
       :statuses)
@@ -5671,6 +6043,8 @@ module Aws::EC2
     #   error. If this happens, use DescribeImages to get information about
     #   the block device mapping for the AMI.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttributeRequest AWS API Documentation
     #
     class DescribeImageAttributeRequest < Struct.new(
       :dry_run,
@@ -5819,6 +6193,8 @@ module Aws::EC2
     #     `hvm`).
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesRequest AWS API Documentation
+    #
     class DescribeImagesRequest < Struct.new(
       :dry_run,
       :image_ids,
@@ -5833,6 +6209,8 @@ module Aws::EC2
     # @!attribute [rw] images
     #   Information about one or more images.
     #   @return [Array<Types::Image>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImagesResult AWS API Documentation
     #
     class DescribeImagesResult < Struct.new(
       :images)
@@ -5883,6 +6261,8 @@ module Aws::EC2
     #   values: active, completed, deleting, deleted.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasksRequest AWS API Documentation
+    #
     class DescribeImportImageTasksRequest < Struct.new(
       :dry_run,
       :import_task_ids,
@@ -5903,6 +6283,8 @@ module Aws::EC2
     #   The token to use to get the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportImageTasksResult AWS API Documentation
     #
     class DescribeImportImageTasksResult < Struct.new(
       :import_image_tasks,
@@ -5953,6 +6335,8 @@ module Aws::EC2
     #   One or more filters.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasksRequest AWS API Documentation
+    #
     class DescribeImportSnapshotTasksRequest < Struct.new(
       :dry_run,
       :import_task_ids,
@@ -5973,6 +6357,8 @@ module Aws::EC2
     #   The token to use to get the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImportSnapshotTasksResult AWS API Documentation
     #
     class DescribeImportSnapshotTasksResult < Struct.new(
       :import_snapshot_tasks,
@@ -6007,6 +6393,8 @@ module Aws::EC2
     #
     #   Note: The `enaSupport` attribute is not supported at this time.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttributeRequest AWS API Documentation
     #
     class DescribeInstanceAttributeRequest < Struct.new(
       :dry_run,
@@ -6112,6 +6500,8 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatusRequest AWS API Documentation
+    #
     class DescribeInstanceStatusRequest < Struct.new(
       :dry_run,
       :instance_ids,
@@ -6132,6 +6522,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceStatusResult AWS API Documentation
     #
     class DescribeInstanceStatusResult < Struct.new(
       :instance_statuses,
@@ -6453,6 +6845,8 @@ module Aws::EC2
     #   in the same call.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstancesRequest AWS API Documentation
+    #
     class DescribeInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids,
@@ -6472,6 +6866,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstancesResult AWS API Documentation
     #
     class DescribeInstancesResult < Struct.new(
       :reservations,
@@ -6538,6 +6934,8 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysRequest AWS API Documentation
+    #
     class DescribeInternetGatewaysRequest < Struct.new(
       :dry_run,
       :internet_gateway_ids,
@@ -6550,6 +6948,8 @@ module Aws::EC2
     # @!attribute [rw] internet_gateways
     #   Information about one or more Internet gateways.
     #   @return [Array<Types::InternetGateway>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInternetGatewaysResult AWS API Documentation
     #
     class DescribeInternetGatewaysResult < Struct.new(
       :internet_gateways)
@@ -6593,6 +6993,8 @@ module Aws::EC2
     #   * `key-name` - The name of the key pair.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairsRequest AWS API Documentation
+    #
     class DescribeKeyPairsRequest < Struct.new(
       :dry_run,
       :key_names,
@@ -6605,6 +7007,8 @@ module Aws::EC2
     # @!attribute [rw] key_pairs
     #   Information about one or more key pairs.
     #   @return [Array<Types::KeyPairInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairsResult AWS API Documentation
     #
     class DescribeKeyPairsResult < Struct.new(
       :key_pairs)
@@ -6663,6 +7067,8 @@ module Aws::EC2
     #   Default: If no value is provided, the default is 1000.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddressesRequest AWS API Documentation
+    #
     class DescribeMovingAddressesRequest < Struct.new(
       :dry_run,
       :public_ips,
@@ -6682,6 +7088,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeMovingAddressesResult AWS API Documentation
     #
     class DescribeMovingAddressesResult < Struct.new(
       :moving_address_statuses,
@@ -6737,6 +7145,8 @@ module Aws::EC2
     #   The token to retrieve the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysRequest AWS API Documentation
+    #
     class DescribeNatGatewaysRequest < Struct.new(
       :nat_gateway_ids,
       :filter,
@@ -6755,6 +7165,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGatewaysResult AWS API Documentation
     #
     class DescribeNatGatewaysResult < Struct.new(
       :nat_gateways,
@@ -6855,6 +7267,8 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the network ACL.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsRequest AWS API Documentation
+    #
     class DescribeNetworkAclsRequest < Struct.new(
       :dry_run,
       :network_acl_ids,
@@ -6867,6 +7281,8 @@ module Aws::EC2
     # @!attribute [rw] network_acls
     #   Information about one or more network ACLs.
     #   @return [Array<Types::NetworkAcl>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkAclsResult AWS API Documentation
     #
     class DescribeNetworkAclsResult < Struct.new(
       :network_acls)
@@ -6899,6 +7315,8 @@ module Aws::EC2
     #   The attribute of the network interface.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeRequest AWS API Documentation
+    #
     class DescribeNetworkInterfaceAttributeRequest < Struct.new(
       :dry_run,
       :network_interface_id,
@@ -6927,6 +7345,8 @@ module Aws::EC2
     # @!attribute [rw] attachment
     #   The attachment (if any) of the network interface.
     #   @return [Types::NetworkInterfaceAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeResult AWS API Documentation
     #
     class DescribeNetworkInterfaceAttributeResult < Struct.new(
       :network_interface_id,
@@ -7089,6 +7509,8 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the network interface.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesRequest AWS API Documentation
+    #
     class DescribeNetworkInterfacesRequest < Struct.new(
       :dry_run,
       :network_interface_ids,
@@ -7101,6 +7523,8 @@ module Aws::EC2
     # @!attribute [rw] network_interfaces
     #   Information about one or more network interfaces.
     #   @return [Array<Types::NetworkInterface>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfacesResult AWS API Documentation
     #
     class DescribeNetworkInterfacesResult < Struct.new(
       :network_interfaces)
@@ -7148,6 +7572,8 @@ module Aws::EC2
     #   * `strategy` - The strategy of the placement group (`cluster`).
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroupsRequest AWS API Documentation
+    #
     class DescribePlacementGroupsRequest < Struct.new(
       :dry_run,
       :group_names,
@@ -7160,6 +7586,8 @@ module Aws::EC2
     # @!attribute [rw] placement_groups
     #   One or more placement groups.
     #   @return [Array<Types::PlacementGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePlacementGroupsResult AWS API Documentation
     #
     class DescribePlacementGroupsResult < Struct.new(
       :placement_groups)
@@ -7217,6 +7645,8 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixListsRequest AWS API Documentation
+    #
     class DescribePrefixListsRequest < Struct.new(
       :dry_run,
       :prefix_list_ids,
@@ -7236,6 +7666,8 @@ module Aws::EC2
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribePrefixListsResult AWS API Documentation
     #
     class DescribePrefixListsResult < Struct.new(
       :prefix_lists,
@@ -7279,6 +7711,8 @@ module Aws::EC2
     #   * `region-name` - The name of the region (for example, `us-east-1`).
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsRequest AWS API Documentation
+    #
     class DescribeRegionsRequest < Struct.new(
       :dry_run,
       :region_names,
@@ -7291,6 +7725,8 @@ module Aws::EC2
     # @!attribute [rw] regions
     #   Information about one or more regions.
     #   @return [Array<Types::Region>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRegionsResult AWS API Documentation
     #
     class DescribeRegionsResult < Struct.new(
       :regions)
@@ -7335,6 +7771,8 @@ module Aws::EC2
     #   * `status-message` - The reason for the status.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListingsRequest AWS API Documentation
+    #
     class DescribeReservedInstancesListingsRequest < Struct.new(
       :reserved_instances_id,
       :reserved_instances_listing_id,
@@ -7347,6 +7785,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances_listings
     #   Information about the Reserved Instance listing.
     #   @return [Array<Types::ReservedInstancesListing>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesListingsResult AWS API Documentation
     #
     class DescribeReservedInstancesListingsResult < Struct.new(
       :reserved_instances_listings)
@@ -7422,6 +7862,8 @@ module Aws::EC2
     #     updated.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsRequest AWS API Documentation
+    #
     class DescribeReservedInstancesModificationsRequest < Struct.new(
       :reserved_instances_modification_ids,
       :next_token,
@@ -7439,6 +7881,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesModificationsResult AWS API Documentation
     #
     class DescribeReservedInstancesModificationsResult < Struct.new(
       :reserved_instances_modifications,
@@ -7604,6 +8048,8 @@ module Aws::EC2
     #   `convertible`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferingsRequest AWS API Documentation
+    #
     class DescribeReservedInstancesOfferingsRequest < Struct.new(
       :dry_run,
       :reserved_instances_offering_ids,
@@ -7633,6 +8079,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesOfferingsResult AWS API Documentation
     #
     class DescribeReservedInstancesOfferingsResult < Struct.new(
       :reserved_instances_offerings,
@@ -7745,6 +8193,8 @@ module Aws::EC2
     #   Describes whether the Reserved Instance is Standard or Convertible.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesRequest AWS API Documentation
+    #
     class DescribeReservedInstancesRequest < Struct.new(
       :dry_run,
       :reserved_instances_ids,
@@ -7759,6 +8209,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances
     #   A list of Reserved Instances.
     #   @return [Array<Types::ReservedInstances>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeReservedInstancesResult AWS API Documentation
     #
     class DescribeReservedInstancesResult < Struct.new(
       :reserved_instances)
@@ -7868,6 +8320,8 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the route table.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesRequest AWS API Documentation
+    #
     class DescribeRouteTablesRequest < Struct.new(
       :dry_run,
       :route_table_ids,
@@ -7880,6 +8334,8 @@ module Aws::EC2
     # @!attribute [rw] route_tables
     #   Information about one or more route tables.
     #   @return [Array<Types::RouteTable>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeRouteTablesResult AWS API Documentation
     #
     class DescribeRouteTablesResult < Struct.new(
       :route_tables)
@@ -7968,6 +8424,8 @@ module Aws::EC2
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailabilityRequest AWS API Documentation
+    #
     class DescribeScheduledInstanceAvailabilityRequest < Struct.new(
       :dry_run,
       :recurrence,
@@ -7990,6 +8448,8 @@ module Aws::EC2
     # @!attribute [rw] scheduled_instance_availability_set
     #   Information about the available Scheduled Instances.
     #   @return [Array<Types::ScheduledInstanceAvailability>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstanceAvailabilityResult AWS API Documentation
     #
     class DescribeScheduledInstanceAvailabilityResult < Struct.new(
       :next_token,
@@ -8059,6 +8519,8 @@ module Aws::EC2
     #   * `platform` - The platform (`Linux/UNIX` or `Windows`).
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstancesRequest AWS API Documentation
+    #
     class DescribeScheduledInstancesRequest < Struct.new(
       :dry_run,
       :scheduled_instance_ids,
@@ -8079,6 +8541,8 @@ module Aws::EC2
     # @!attribute [rw] scheduled_instance_set
     #   Information about the Scheduled Instances.
     #   @return [Array<Types::ScheduledInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeScheduledInstancesResult AWS API Documentation
     #
     class DescribeScheduledInstancesResult < Struct.new(
       :next_token,
@@ -8105,6 +8569,8 @@ module Aws::EC2
     #   One or more security group IDs in your account.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferencesRequest AWS API Documentation
+    #
     class DescribeSecurityGroupReferencesRequest < Struct.new(
       :dry_run,
       :group_id)
@@ -8114,6 +8580,8 @@ module Aws::EC2
     # @!attribute [rw] security_group_reference_set
     #   Information about the VPCs with the referencing security groups.
     #   @return [Array<Types::SecurityGroupReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferencesResult AWS API Documentation
     #
     class DescribeSecurityGroupReferencesResult < Struct.new(
       :security_group_reference_set)
@@ -8209,6 +8677,8 @@ module Aws::EC2
     #     created.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsRequest AWS API Documentation
+    #
     class DescribeSecurityGroupsRequest < Struct.new(
       :dry_run,
       :group_names,
@@ -8222,6 +8692,8 @@ module Aws::EC2
     # @!attribute [rw] security_groups
     #   Information about one or more security groups.
     #   @return [Array<Types::SecurityGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupsResult AWS API Documentation
     #
     class DescribeSecurityGroupsResult < Struct.new(
       :security_groups)
@@ -8254,6 +8726,8 @@ module Aws::EC2
     #   The snapshot attribute you would like to view.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeRequest AWS API Documentation
+    #
     class DescribeSnapshotAttributeRequest < Struct.new(
       :dry_run,
       :snapshot_id,
@@ -8274,6 +8748,8 @@ module Aws::EC2
     # @!attribute [rw] product_codes
     #   A list of product codes.
     #   @return [Array<Types::ProductCode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotAttributeResult AWS API Documentation
     #
     class DescribeSnapshotAttributeResult < Struct.new(
       :snapshot_id,
@@ -8393,6 +8869,8 @@ module Aws::EC2
     #   the same request.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotsRequest AWS API Documentation
+    #
     class DescribeSnapshotsRequest < Struct.new(
       :dry_run,
       :snapshot_ids,
@@ -8418,6 +8896,8 @@ module Aws::EC2
     #   return.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSnapshotsResult AWS API Documentation
+    #
     class DescribeSnapshotsResult < Struct.new(
       :snapshots,
       :next_token)
@@ -8440,6 +8920,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotDatafeedSubscriptionRequest AWS API Documentation
+    #
     class DescribeSpotDatafeedSubscriptionRequest < Struct.new(
       :dry_run)
       include Aws::Structure
@@ -8450,6 +8932,8 @@ module Aws::EC2
     # @!attribute [rw] spot_datafeed_subscription
     #   The Spot instance data feed subscription.
     #   @return [Types::SpotDatafeedSubscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotDatafeedSubscriptionResult AWS API Documentation
     #
     class DescribeSpotDatafeedSubscriptionResult < Struct.new(
       :spot_datafeed_subscription)
@@ -8490,6 +8974,8 @@ module Aws::EC2
     #   value.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesRequest AWS API Documentation
+    #
     class DescribeSpotFleetInstancesRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_id,
@@ -8513,6 +8999,8 @@ module Aws::EC2
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetInstancesResponse AWS API Documentation
     #
     class DescribeSpotFleetInstancesResponse < Struct.new(
       :spot_fleet_request_id,
@@ -8567,6 +9055,8 @@ module Aws::EC2
     #   value.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryRequest AWS API Documentation
+    #
     class DescribeSpotFleetRequestHistoryRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_id,
@@ -8606,6 +9096,8 @@ module Aws::EC2
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestHistoryResponse AWS API Documentation
     #
     class DescribeSpotFleetRequestHistoryResponse < Struct.new(
       :spot_fleet_request_id,
@@ -8650,6 +9142,8 @@ module Aws::EC2
     #   value.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsRequest AWS API Documentation
+    #
     class DescribeSpotFleetRequestsRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_ids,
@@ -8668,6 +9162,8 @@ module Aws::EC2
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotFleetRequestsResponse AWS API Documentation
     #
     class DescribeSpotFleetRequestsResponse < Struct.new(
       :spot_fleet_request_configs,
@@ -8832,6 +9328,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsRequest AWS API Documentation
+    #
     class DescribeSpotInstanceRequestsRequest < Struct.new(
       :dry_run,
       :spot_instance_request_ids,
@@ -8844,6 +9342,8 @@ module Aws::EC2
     # @!attribute [rw] spot_instance_requests
     #   One or more Spot instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotInstanceRequestsResult AWS API Documentation
     #
     class DescribeSpotInstanceRequestsResult < Struct.new(
       :spot_instance_requests)
@@ -8937,6 +9437,8 @@ module Aws::EC2
     #   The token for the next set of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryRequest AWS API Documentation
+    #
     class DescribeSpotPriceHistoryRequest < Struct.new(
       :dry_run,
       :start_time,
@@ -8960,6 +9462,8 @@ module Aws::EC2
     #   The token required to retrieve the next set of results. This value
     #   is `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSpotPriceHistoryResult AWS API Documentation
     #
     class DescribeSpotPriceHistoryResult < Struct.new(
       :spot_price_history,
@@ -8999,6 +9503,8 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroupsRequest AWS API Documentation
+    #
     class DescribeStaleSecurityGroupsRequest < Struct.new(
       :dry_run,
       :vpc_id,
@@ -9015,6 +9521,8 @@ module Aws::EC2
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroupsResult AWS API Documentation
     #
     class DescribeStaleSecurityGroupsResult < Struct.new(
       :stale_security_group_set,
@@ -9103,6 +9611,8 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC for the subnet.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsRequest AWS API Documentation
+    #
     class DescribeSubnetsRequest < Struct.new(
       :dry_run,
       :subnet_ids,
@@ -9115,6 +9625,8 @@ module Aws::EC2
     # @!attribute [rw] subnets
     #   Information about one or more subnets.
     #   @return [Array<Types::Subnet>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSubnetsResult AWS API Documentation
     #
     class DescribeSubnetsResult < Struct.new(
       :subnets)
@@ -9172,6 +9684,8 @@ module Aws::EC2
     #   The token to retrieve the next page of results.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTagsRequest AWS API Documentation
+    #
     class DescribeTagsRequest < Struct.new(
       :dry_run,
       :filters,
@@ -9190,6 +9704,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return..
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTagsResult AWS API Documentation
     #
     class DescribeTagsResult < Struct.new(
       :tags,
@@ -9223,6 +9739,8 @@ module Aws::EC2
     #   The instance attribute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeRequest AWS API Documentation
+    #
     class DescribeVolumeAttributeRequest < Struct.new(
       :dry_run,
       :volume_id,
@@ -9243,6 +9761,8 @@ module Aws::EC2
     # @!attribute [rw] product_codes
     #   A list of product codes.
     #   @return [Array<Types::ProductCode>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeResult AWS API Documentation
     #
     class DescribeVolumeAttributeResult < Struct.new(
       :volume_id,
@@ -9338,6 +9858,8 @@ module Aws::EC2
     #   parameter and the volume IDs parameter in the same request.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatusRequest AWS API Documentation
+    #
     class DescribeVolumeStatusRequest < Struct.new(
       :dry_run,
       :volume_ids,
@@ -9357,6 +9879,8 @@ module Aws::EC2
     #   The token to use to retrieve the next page of results. This value is
     #   `null` when there are no more results to return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeStatusResult AWS API Documentation
     #
     class DescribeVolumeStatusResult < Struct.new(
       :volume_statuses,
@@ -9473,6 +9997,8 @@ module Aws::EC2
     #   parameter and the volume IDs parameter in the same request.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesRequest AWS API Documentation
+    #
     class DescribeVolumesRequest < Struct.new(
       :dry_run,
       :volume_ids,
@@ -9495,6 +10021,8 @@ module Aws::EC2
     #   results. This value is `null` when there are no more results to
     #   return.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesResult AWS API Documentation
     #
     class DescribeVolumesResult < Struct.new(
       :volumes,
@@ -9528,6 +10056,8 @@ module Aws::EC2
     #   The VPC attribute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttributeRequest AWS API Documentation
+    #
     class DescribeVpcAttributeRequest < Struct.new(
       :dry_run,
       :vpc_id,
@@ -9553,6 +10083,8 @@ module Aws::EC2
     #   hostnames. If this attribute is `true`, instances in the VPC get DNS
     #   hostnames; otherwise, they do not.
     #   @return [Types::AttributeBooleanValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcAttributeResult AWS API Documentation
     #
     class DescribeVpcAttributeResult < Struct.new(
       :vpc_id,
@@ -9587,6 +10119,8 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupportRequest AWS API Documentation
+    #
     class DescribeVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_ids,
       :max_results,
@@ -9603,6 +10137,8 @@ module Aws::EC2
     # @!attribute [rw] next_token
     #   The token to use when requesting the next set of items.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkDnsSupportResult AWS API Documentation
     #
     class DescribeVpcClassicLinkDnsSupportResult < Struct.new(
       :vpcs,
@@ -9663,6 +10199,8 @@ module Aws::EC2
     #     filter is independent of the `tag-key` filter.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkRequest AWS API Documentation
+    #
     class DescribeVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_ids,
@@ -9675,6 +10213,8 @@ module Aws::EC2
     # @!attribute [rw] vpcs
     #   The ClassicLink status of one or more VPCs.
     #   @return [Array<Types::VpcClassicLink>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLinkResult AWS API Documentation
     #
     class DescribeVpcClassicLinkResult < Struct.new(
       :vpcs)
@@ -9713,6 +10253,8 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicesRequest AWS API Documentation
+    #
     class DescribeVpcEndpointServicesRequest < Struct.new(
       :dry_run,
       :max_results,
@@ -9730,6 +10272,8 @@ module Aws::EC2
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServicesResult AWS API Documentation
     #
     class DescribeVpcEndpointServicesResult < Struct.new(
       :service_names,
@@ -9793,6 +10337,8 @@ module Aws::EC2
     #   token from a prior call.)
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsRequest AWS API Documentation
+    #
     class DescribeVpcEndpointsRequest < Struct.new(
       :dry_run,
       :vpc_endpoint_ids,
@@ -9812,6 +10358,8 @@ module Aws::EC2
     #   The token to use when requesting the next set of items. If there are
     #   no additional items to return, the string is empty.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointsResult AWS API Documentation
     #
     class DescribeVpcEndpointsResult < Struct.new(
       :vpc_endpoints,
@@ -9899,6 +10447,8 @@ module Aws::EC2
     #     connection.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsRequest AWS API Documentation
+    #
     class DescribeVpcPeeringConnectionsRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_ids,
@@ -9911,6 +10461,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_peering_connections
     #   Information about the VPC peering connections.
     #   @return [Array<Types::VpcPeeringConnection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcPeeringConnectionsResult AWS API Documentation
     #
     class DescribeVpcPeeringConnectionsResult < Struct.new(
       :vpc_peering_connections)
@@ -9990,6 +10542,8 @@ module Aws::EC2
     #   * `vpc-id` - The ID of the VPC.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsRequest AWS API Documentation
+    #
     class DescribeVpcsRequest < Struct.new(
       :dry_run,
       :vpc_ids,
@@ -10002,6 +10556,8 @@ module Aws::EC2
     # @!attribute [rw] vpcs
     #   Information about one or more VPCs.
     #   @return [Array<Types::Vpc>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcsResult AWS API Documentation
     #
     class DescribeVpcsResult < Struct.new(
       :vpcs)
@@ -10086,6 +10642,8 @@ module Aws::EC2
     #     with the VPN connection.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnectionsRequest AWS API Documentation
+    #
     class DescribeVpnConnectionsRequest < Struct.new(
       :dry_run,
       :vpn_connection_ids,
@@ -10098,6 +10656,8 @@ module Aws::EC2
     # @!attribute [rw] vpn_connections
     #   Information about one or more VPN connections.
     #   @return [Array<Types::VpnConnection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnConnectionsResult AWS API Documentation
     #
     class DescribeVpnConnectionsResult < Struct.new(
       :vpn_connections)
@@ -10172,6 +10732,8 @@ module Aws::EC2
     #   * `vpn-gateway-id` - The ID of the virtual private gateway.
     #   @return [Array<Types::Filter>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGatewaysRequest AWS API Documentation
+    #
     class DescribeVpnGatewaysRequest < Struct.new(
       :dry_run,
       :vpn_gateway_ids,
@@ -10184,6 +10746,8 @@ module Aws::EC2
     # @!attribute [rw] vpn_gateways
     #   Information about one or more virtual private gateways.
     #   @return [Array<Types::VpnGateway>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpnGatewaysResult AWS API Documentation
     #
     class DescribeVpnGatewaysResult < Struct.new(
       :vpn_gateways)
@@ -10216,6 +10780,8 @@ module Aws::EC2
     #   The ID of the VPC to which the instance is linked.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachClassicLinkVpcRequest AWS API Documentation
+    #
     class DetachClassicLinkVpcRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -10229,6 +10795,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachClassicLinkVpcResult AWS API Documentation
     #
     class DetachClassicLinkVpcResult < Struct.new(
       :return)
@@ -10260,6 +10828,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_id
     #   The ID of the VPC.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachInternetGatewayRequest AWS API Documentation
     #
     class DetachInternetGatewayRequest < Struct.new(
       :dry_run,
@@ -10293,6 +10863,8 @@ module Aws::EC2
     # @!attribute [rw] force
     #   Specifies whether to force a detachment.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachNetworkInterfaceRequest AWS API Documentation
     #
     class DetachNetworkInterfaceRequest < Struct.new(
       :dry_run,
@@ -10344,6 +10916,8 @@ module Aws::EC2
     #   procedures.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVolumeRequest AWS API Documentation
+    #
     class DetachVolumeRequest < Struct.new(
       :dry_run,
       :volume_id,
@@ -10379,6 +10953,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DetachVpnGatewayRequest AWS API Documentation
+    #
     class DetachVpnGatewayRequest < Struct.new(
       :dry_run,
       :vpn_gateway_id,
@@ -10395,6 +10971,8 @@ module Aws::EC2
     # @!attribute [rw] values
     #   One or more values for the DHCP option.
     #   @return [Array<Types::AttributeValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DhcpConfiguration AWS API Documentation
     #
     class DhcpConfiguration < Struct.new(
       :key,
@@ -10415,6 +10993,8 @@ module Aws::EC2
     # @!attribute [rw] tags
     #   Any tags assigned to the DHCP options set.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DhcpOptions AWS API Documentation
     #
     class DhcpOptions < Struct.new(
       :dhcp_options_id,
@@ -10441,6 +11021,8 @@ module Aws::EC2
     #   The ID of the virtual private gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVgwRoutePropagationRequest AWS API Documentation
+    #
     class DisableVgwRoutePropagationRequest < Struct.new(
       :route_table_id,
       :gateway_id)
@@ -10460,6 +11042,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkDnsSupportRequest AWS API Documentation
+    #
     class DisableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id)
       include Aws::Structure
@@ -10471,6 +11055,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkDnsSupportResult AWS API Documentation
     #
     class DisableVpcClassicLinkDnsSupportResult < Struct.new(
       :return)
@@ -10498,6 +11084,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkRequest AWS API Documentation
+    #
     class DisableVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_id)
@@ -10510,6 +11098,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableVpcClassicLinkResult AWS API Documentation
     #
     class DisableVpcClassicLinkResult < Struct.new(
       :return)
@@ -10542,6 +11132,8 @@ module Aws::EC2
     #   \[EC2-VPC\] The association ID. Required for EC2-VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateAddressRequest AWS API Documentation
+    #
     class DisassociateAddressRequest < Struct.new(
       :dry_run,
       :public_ip,
@@ -10571,6 +11163,8 @@ module Aws::EC2
     #   route table and subnet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateRouteTableRequest AWS API Documentation
+    #
     class DisassociateRouteTableRequest < Struct.new(
       :dry_run,
       :association_id)
@@ -10588,6 +11182,8 @@ module Aws::EC2
     #   The association ID for the CIDR block.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlockRequest AWS API Documentation
+    #
     class DisassociateSubnetCidrBlockRequest < Struct.new(
       :association_id)
       include Aws::Structure
@@ -10600,6 +11196,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::SubnetIpv6CidrBlockAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSubnetCidrBlockResult AWS API Documentation
     #
     class DisassociateSubnetCidrBlockResult < Struct.new(
       :subnet_id,
@@ -10618,6 +11216,8 @@ module Aws::EC2
     #   The association ID for the CIDR block.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlockRequest AWS API Documentation
+    #
     class DisassociateVpcCidrBlockRequest < Struct.new(
       :association_id)
       include Aws::Structure
@@ -10630,6 +11230,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_cidr_block_association
     #   Information about the IPv6 CIDR block association.
     #   @return [Types::VpcIpv6CidrBlockAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateVpcCidrBlockResult AWS API Documentation
     #
     class DisassociateVpcCidrBlockResult < Struct.new(
       :vpc_id,
@@ -10665,6 +11267,8 @@ module Aws::EC2
     # @!attribute [rw] volume
     #   Information about the volume.
     #   @return [Types::VolumeDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImage AWS API Documentation
     #
     class DiskImage < Struct.new(
       :image,
@@ -10702,6 +11306,8 @@ module Aws::EC2
     # @!attribute [rw] checksum
     #   The checksum computed for the disk image.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDescription AWS API Documentation
     #
     class DiskImageDescription < Struct.new(
       :format,
@@ -10747,6 +11353,8 @@ module Aws::EC2
     #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageDetail AWS API Documentation
+    #
     class DiskImageDetail < Struct.new(
       :format,
       :bytes,
@@ -10763,6 +11371,8 @@ module Aws::EC2
     # @!attribute [rw] id
     #   The volume identifier.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DiskImageVolumeDescription AWS API Documentation
     #
     class DiskImageVolumeDescription < Struct.new(
       :size,
@@ -10839,6 +11449,8 @@ module Aws::EC2
     #   encryption.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
+    #
     class EbsBlockDevice < Struct.new(
       :snapshot_id,
       :volume_size,
@@ -10868,6 +11480,8 @@ module Aws::EC2
     #   Indicates whether the volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDevice AWS API Documentation
+    #
     class EbsInstanceBlockDevice < Struct.new(
       :volume_id,
       :status,
@@ -10895,6 +11509,8 @@ module Aws::EC2
     #   Indicates whether the volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsInstanceBlockDeviceSpecification AWS API Documentation
+    #
     class EbsInstanceBlockDeviceSpecification < Struct.new(
       :volume_id,
       :delete_on_termination)
@@ -10911,6 +11527,8 @@ module Aws::EC2
     #   Information about the attachment of the egress-only Internet
     #   gateway.
     #   @return [Array<Types::InternetGatewayAttachment>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EgressOnlyInternetGateway AWS API Documentation
     #
     class EgressOnlyInternetGateway < Struct.new(
       :egress_only_internet_gateway_id,
@@ -10935,6 +11553,8 @@ module Aws::EC2
     # @!attribute [rw] gateway_id
     #   The ID of the virtual private gateway.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVgwRoutePropagationRequest AWS API Documentation
     #
     class EnableVgwRoutePropagationRequest < Struct.new(
       :route_table_id,
@@ -10963,6 +11583,8 @@ module Aws::EC2
     #   The ID of the volume.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVolumeIORequest AWS API Documentation
+    #
     class EnableVolumeIORequest < Struct.new(
       :dry_run,
       :volume_id)
@@ -10982,6 +11604,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkDnsSupportRequest AWS API Documentation
+    #
     class EnableVpcClassicLinkDnsSupportRequest < Struct.new(
       :vpc_id)
       include Aws::Structure
@@ -10993,6 +11617,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkDnsSupportResult AWS API Documentation
     #
     class EnableVpcClassicLinkDnsSupportResult < Struct.new(
       :return)
@@ -11020,6 +11646,8 @@ module Aws::EC2
     #   The ID of the VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkRequest AWS API Documentation
+    #
     class EnableVpcClassicLinkRequest < Struct.new(
       :dry_run,
       :vpc_id)
@@ -11032,6 +11660,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableVpcClassicLinkResult AWS API Documentation
     #
     class EnableVpcClassicLinkResult < Struct.new(
       :return)
@@ -11106,6 +11736,8 @@ module Aws::EC2
     #   The description of the event.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EventInformation AWS API Documentation
+    #
     class EventInformation < Struct.new(
       :instance_id,
       :event_sub_type,
@@ -11139,6 +11771,8 @@ module Aws::EC2
     #   Information about the export task.
     #   @return [Types::ExportToS3Task]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportTask AWS API Documentation
+    #
     class ExportTask < Struct.new(
       :export_task_id,
       :description,
@@ -11169,6 +11803,8 @@ module Aws::EC2
     # @!attribute [rw] s3_key
     #   The encryption key for your S3 bucket.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3Task AWS API Documentation
     #
     class ExportToS3Task < Struct.new(
       :disk_image_format,
@@ -11210,6 +11846,8 @@ module Aws::EC2
     #   key s3prefix + exportTaskId + '.' + diskImageFormat.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportToS3TaskSpecification AWS API Documentation
+    #
     class ExportToS3TaskSpecification < Struct.new(
       :disk_image_format,
       :container_format,
@@ -11237,6 +11875,8 @@ module Aws::EC2
     # @!attribute [rw] values
     #   One or more filter values. Filter values are case-sensitive.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Filter AWS API Documentation
     #
     class Filter < Struct.new(
       :name,
@@ -11288,6 +11928,8 @@ module Aws::EC2
     #   The ARN of the IAM role that posts logs to CloudWatch Logs.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FlowLog AWS API Documentation
+    #
     class FlowLog < Struct.new(
       :creation_time,
       :flow_log_id,
@@ -11322,6 +11964,8 @@ module Aws::EC2
     #   The ID of the instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputRequest AWS API Documentation
+    #
     class GetConsoleOutputRequest < Struct.new(
       :dry_run,
       :instance_id)
@@ -11342,6 +11986,8 @@ module Aws::EC2
     #   The console output, Base64-encoded. If using a command line tool,
     #   the tool decodes the output for you.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleOutputResult AWS API Documentation
     #
     class GetConsoleOutputResult < Struct.new(
       :instance_id,
@@ -11377,6 +12023,8 @@ module Aws::EC2
     #   that's in standby or "sleep" mode.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleScreenshotRequest AWS API Documentation
+    #
     class GetConsoleScreenshotRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -11393,6 +12041,8 @@ module Aws::EC2
     # @!attribute [rw] image_data
     #   The data that comprises the image.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetConsoleScreenshotResult AWS API Documentation
     #
     class GetConsoleScreenshotResult < Struct.new(
       :instance_id,
@@ -11416,6 +12066,8 @@ module Aws::EC2
     #   The ID/s of the Dedicated Host/s that the reservation will be
     #   associated with.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreviewRequest AWS API Documentation
     #
     class GetHostReservationPurchasePreviewRequest < Struct.new(
       :offering_id,
@@ -11441,6 +12093,8 @@ module Aws::EC2
     #   amounts are specified. At this time, the only supported currency is
     #   `USD`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetHostReservationPurchasePreviewResult AWS API Documentation
     #
     class GetHostReservationPurchasePreviewResult < Struct.new(
       :purchase,
@@ -11471,6 +12125,8 @@ module Aws::EC2
     #   The ID of the Windows instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordDataRequest AWS API Documentation
+    #
     class GetPasswordDataRequest < Struct.new(
       :dry_run,
       :instance_id)
@@ -11490,6 +12146,8 @@ module Aws::EC2
     # @!attribute [rw] password_data
     #   The password of the instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetPasswordDataResult AWS API Documentation
     #
     class GetPasswordDataResult < Struct.new(
       :instance_id,
@@ -11529,6 +12187,8 @@ module Aws::EC2
     #   The configuration requirements of the Convertible Reserved Instances
     #   to exchange for your current Convertible Reserved Instances.
     #   @return [Array<Types::TargetConfigurationRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteRequest AWS API Documentation
     #
     class GetReservedInstancesExchangeQuoteRequest < Struct.new(
       :dry_run,
@@ -11576,6 +12236,8 @@ module Aws::EC2
     #   Describes the reason why the exchange cannot be completed.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetReservedInstancesExchangeQuoteResult AWS API Documentation
+    #
     class GetReservedInstancesExchangeQuoteResult < Struct.new(
       :reserved_instance_value_set,
       :reserved_instance_value_rollup,
@@ -11607,6 +12269,8 @@ module Aws::EC2
     #   The ID of the security group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GroupIdentifier AWS API Documentation
+    #
     class GroupIdentifier < Struct.new(
       :group_name,
       :group_id)
@@ -11635,6 +12299,8 @@ module Aws::EC2
     # @!attribute [rw] event_information
     #   Information about the event.
     #   @return [Types::EventInformation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecord AWS API Documentation
     #
     class HistoryRecord < Struct.new(
       :timestamp,
@@ -11691,6 +12357,8 @@ module Aws::EC2
     #   Host.
     #   @return [Types::AvailableCapacity]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
+    #
     class Host < Struct.new(
       :host_id,
       :auto_placement,
@@ -11714,6 +12382,8 @@ module Aws::EC2
     #   The instance type size (for example, `m3.medium`) of the running
     #   instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostInstance AWS API Documentation
     #
     class HostInstance < Struct.new(
       :instance_id,
@@ -11752,6 +12422,8 @@ module Aws::EC2
     #   The duration of the offering (in seconds).
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostOffering AWS API Documentation
+    #
     class HostOffering < Struct.new(
       :offering_id,
       :instance_family,
@@ -11781,6 +12453,8 @@ module Aws::EC2
     #   The instance type size that the Dedicated Host supports (for
     #   example, `m3.medium`).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostProperties AWS API Documentation
     #
     class HostProperties < Struct.new(
       :sockets,
@@ -11851,6 +12525,8 @@ module Aws::EC2
     #   The state of the reservation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HostReservation AWS API Documentation
+    #
     class HostReservation < Struct.new(
       :host_reservation_id,
       :host_id_set,
@@ -11878,6 +12554,8 @@ module Aws::EC2
     #   The ID of the instance profile.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfile AWS API Documentation
+    #
     class IamInstanceProfile < Struct.new(
       :arn,
       :id)
@@ -11901,6 +12579,8 @@ module Aws::EC2
     # @!attribute [rw] name
     #   The name of the instance profile.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IamInstanceProfileSpecification AWS API Documentation
     #
     class IamInstanceProfileSpecification < Struct.new(
       :arn,
@@ -11927,6 +12607,8 @@ module Aws::EC2
     #   type.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IcmpTypeCode AWS API Documentation
+    #
     class IcmpTypeCode < Struct.new(
       :type,
       :code)
@@ -11949,6 +12631,8 @@ module Aws::EC2
     #   longer IDs. If a deadline is not yet available for this resource
     #   type, this field is not returned.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IdFormat AWS API Documentation
     #
     class IdFormat < Struct.new(
       :resource,
@@ -12064,6 +12748,8 @@ module Aws::EC2
     #   The hypervisor type of the image.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Image AWS API Documentation
+    #
     class Image < Struct.new(
       :image_id,
       :image_location,
@@ -12127,6 +12813,8 @@ module Aws::EC2
     #   One or more block device mapping entries.
     #   @return [Array<Types::BlockDeviceMapping>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageAttribute AWS API Documentation
+    #
     class ImageAttribute < Struct.new(
       :image_id,
       :launch_permissions,
@@ -12182,6 +12870,8 @@ module Aws::EC2
     # @!attribute [rw] snapshot_id
     #   The ID of the EBS snapshot to be used for importing the snapshot.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageDiskContainer AWS API Documentation
     #
     class ImageDiskContainer < Struct.new(
       :description,
@@ -12290,6 +12980,8 @@ module Aws::EC2
     #   'vmimport'.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageRequest AWS API Documentation
+    #
     class ImportImageRequest < Struct.new(
       :dry_run,
       :description,
@@ -12349,6 +13041,8 @@ module Aws::EC2
     # @!attribute [rw] status
     #   A brief status of the task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageResult AWS API Documentation
     #
     class ImportImageResult < Struct.new(
       :import_task_id,
@@ -12415,6 +13109,8 @@ module Aws::EC2
     # @!attribute [rw] status
     #   A brief status for the import image task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportImageTask AWS API Documentation
     #
     class ImportImageTask < Struct.new(
       :import_task_id,
@@ -12514,6 +13210,8 @@ module Aws::EC2
     #   subnet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceLaunchSpecification AWS API Documentation
+    #
     class ImportInstanceLaunchSpecification < Struct.new(
       :architecture,
       :group_names,
@@ -12597,6 +13295,8 @@ module Aws::EC2
     #   The instance operating system.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceRequest AWS API Documentation
+    #
     class ImportInstanceRequest < Struct.new(
       :dry_run,
       :description,
@@ -12611,6 +13311,8 @@ module Aws::EC2
     # @!attribute [rw] conversion_task
     #   Information about the conversion task.
     #   @return [Types::ConversionTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceResult AWS API Documentation
     #
     class ImportInstanceResult < Struct.new(
       :conversion_task)
@@ -12634,6 +13336,8 @@ module Aws::EC2
     # @!attribute [rw] description
     #   A description of the task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceTaskDetails AWS API Documentation
     #
     class ImportInstanceTaskDetails < Struct.new(
       :volumes,
@@ -12673,6 +13377,8 @@ module Aws::EC2
     #   A description of the task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportInstanceVolumeDetailItem AWS API Documentation
+    #
     class ImportInstanceVolumeDetailItem < Struct.new(
       :bytes_converted,
       :availability_zone,
@@ -12711,6 +13417,8 @@ module Aws::EC2
     #   command line tools, base64 encoding is performed for you.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairRequest AWS API Documentation
+    #
     class ImportKeyPairRequest < Struct.new(
       :dry_run,
       :key_name,
@@ -12728,6 +13436,8 @@ module Aws::EC2
     #   The MD5 public key fingerprint as specified in section 4 of RFC
     #   4716.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPairResult AWS API Documentation
     #
     class ImportKeyPairResult < Struct.new(
       :key_name,
@@ -12790,6 +13500,8 @@ module Aws::EC2
     #   'vmimport'.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotRequest AWS API Documentation
+    #
     class ImportSnapshotRequest < Struct.new(
       :dry_run,
       :description,
@@ -12814,6 +13526,8 @@ module Aws::EC2
     #   A description of the import snapshot task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotResult AWS API Documentation
+    #
     class ImportSnapshotResult < Struct.new(
       :import_task_id,
       :snapshot_task_detail,
@@ -12834,6 +13548,8 @@ module Aws::EC2
     # @!attribute [rw] description
     #   A description of the import snapshot task.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportSnapshotTask AWS API Documentation
     #
     class ImportSnapshotTask < Struct.new(
       :import_task_id,
@@ -12884,6 +13600,8 @@ module Aws::EC2
     #   The volume size.
     #   @return [Types::VolumeDetail]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeRequest AWS API Documentation
+    #
     class ImportVolumeRequest < Struct.new(
       :dry_run,
       :availability_zone,
@@ -12898,6 +13616,8 @@ module Aws::EC2
     # @!attribute [rw] conversion_task
     #   Information about the conversion task.
     #   @return [Types::ConversionTask]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeResult AWS API Documentation
     #
     class ImportVolumeResult < Struct.new(
       :conversion_task)
@@ -12925,6 +13645,8 @@ module Aws::EC2
     # @!attribute [rw] volume
     #   The volume.
     #   @return [Types::DiskImageVolumeDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportVolumeTaskDetails AWS API Documentation
     #
     class ImportVolumeTaskDetails < Struct.new(
       :bytes_converted,
@@ -13121,6 +13843,8 @@ module Aws::EC2
     #   Specifies whether enhanced networking with ENA is enabled.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
+    #
     class Instance < Struct.new(
       :instance_id,
       :image_id,
@@ -13233,6 +13957,8 @@ module Aws::EC2
     #   The security groups associated with the instance.
     #   @return [Array<Types::GroupIdentifier>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttribute AWS API Documentation
+    #
     class InstanceAttribute < Struct.new(
       :instance_id,
       :instance_type,
@@ -13263,6 +13989,8 @@ module Aws::EC2
     #   Parameters used to automatically set up EBS volumes when the
     #   instance is launched.
     #   @return [Types::EbsInstanceBlockDevice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMapping AWS API Documentation
     #
     class InstanceBlockDeviceMapping < Struct.new(
       :device_name,
@@ -13303,6 +14031,8 @@ module Aws::EC2
     #   suppress the specified device included in the block device mapping.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceBlockDeviceMappingSpecification AWS API Documentation
+    #
     class InstanceBlockDeviceMappingSpecification < Struct.new(
       :device_name,
       :ebs,
@@ -13327,6 +14057,8 @@ module Aws::EC2
     #   Dedicated Host.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCapacity AWS API Documentation
+    #
     class InstanceCapacity < Struct.new(
       :instance_type,
       :available_capacity,
@@ -13345,6 +14077,8 @@ module Aws::EC2
     #   the `state`.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceCount AWS API Documentation
+    #
     class InstanceCount < Struct.new(
       :state,
       :instance_count)
@@ -13360,6 +14094,8 @@ module Aws::EC2
     # @!attribute [rw] target_environment
     #   The target virtualization environment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceExportDetails AWS API Documentation
     #
     class InstanceExportDetails < Struct.new(
       :instance_id,
@@ -13380,6 +14116,8 @@ module Aws::EC2
     #   The IPv6 address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceIpv6Address AWS API Documentation
+    #
     class InstanceIpv6Address < Struct.new(
       :ipv_6_address)
       include Aws::Structure
@@ -13394,6 +14132,8 @@ module Aws::EC2
     # @!attribute [rw] monitoring
     #   The monitoring for the instance.
     #   @return [Types::Monitoring]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMonitoring AWS API Documentation
     #
     class InstanceMonitoring < Struct.new(
       :instance_id,
@@ -13466,6 +14206,8 @@ module Aws::EC2
     #   One or more IPv6 addresses associated with the network interface.
     #   @return [Array<Types::InstanceIpv6Address>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterface AWS API Documentation
+    #
     class InstanceNetworkInterface < Struct.new(
       :network_interface_id,
       :subnet_id,
@@ -13500,6 +14242,8 @@ module Aws::EC2
     #   The ID of the owner of the Elastic IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAssociation AWS API Documentation
+    #
     class InstanceNetworkInterfaceAssociation < Struct.new(
       :public_ip,
       :public_dns_name,
@@ -13530,6 +14274,8 @@ module Aws::EC2
     #   Indicates whether the network interface is deleted when the instance
     #   is terminated.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceAttachment AWS API Documentation
     #
     class InstanceNetworkInterfaceAttachment < Struct.new(
       :attachment_id,
@@ -13645,6 +14391,8 @@ module Aws::EC2
     #   you've specified a minimum number of instances to launch.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceNetworkInterfaceSpecification AWS API Documentation
+    #
     class InstanceNetworkInterfaceSpecification < Struct.new(
       :network_interface_id,
       :device_index,
@@ -13681,6 +14429,8 @@ module Aws::EC2
     #   network interface.
     #   @return [Types::InstanceNetworkInterfaceAssociation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstancePrivateIpAddress AWS API Documentation
+    #
     class InstancePrivateIpAddress < Struct.new(
       :private_ip_address,
       :private_dns_name,
@@ -13712,6 +14462,8 @@ module Aws::EC2
     #   The current state of the instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceState AWS API Documentation
+    #
     class InstanceState < Struct.new(
       :code,
       :name)
@@ -13731,6 +14483,8 @@ module Aws::EC2
     # @!attribute [rw] previous_state
     #   The previous state of the instance.
     #   @return [Types::InstanceState]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStateChange AWS API Documentation
     #
     class InstanceStateChange < Struct.new(
       :instance_id,
@@ -13769,6 +14523,8 @@ module Aws::EC2
     #   the instance, such as impaired reachability.
     #   @return [Types::InstanceStatusSummary]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
+    #
     class InstanceStatus < Struct.new(
       :instance_id,
       :availability_zone,
@@ -13794,6 +14550,8 @@ module Aws::EC2
     #   launched and impaired, this is the time when the instance was
     #   launched.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusDetails AWS API Documentation
     #
     class InstanceStatusDetails < Struct.new(
       :name,
@@ -13824,6 +14582,8 @@ module Aws::EC2
     #   The latest scheduled end time for the event.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusEvent AWS API Documentation
+    #
     class InstanceStatusEvent < Struct.new(
       :code,
       :description,
@@ -13841,6 +14601,8 @@ module Aws::EC2
     # @!attribute [rw] details
     #   The system instance health or application instance health.
     #   @return [Array<Types::InstanceStatusDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatusSummary AWS API Documentation
     #
     class InstanceStatusSummary < Struct.new(
       :status,
@@ -13862,6 +14624,8 @@ module Aws::EC2
     #   Any tags assigned to the Internet gateway.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGateway AWS API Documentation
+    #
     class InternetGateway < Struct.new(
       :internet_gateway_id,
       :attachments,
@@ -13879,6 +14643,8 @@ module Aws::EC2
     # @!attribute [rw] state
     #   The current state of the attachment.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InternetGatewayAttachment AWS API Documentation
     #
     class InternetGatewayAttachment < Struct.new(
       :vpc_id,
@@ -13971,6 +14737,8 @@ module Aws::EC2
     #   instances associated with the security group.
     #   @return [Array<Types::PrefixListId>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpPermission AWS API Documentation
+    #
     class IpPermission < Struct.new(
       :ip_protocol,
       :from_port,
@@ -13997,6 +14765,8 @@ module Aws::EC2
     #   /32 prefix.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpRange AWS API Documentation
+    #
     class IpRange < Struct.new(
       :cidr_ip)
       include Aws::Structure
@@ -14007,6 +14777,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_cidr_block
     #   The IPv6 CIDR block.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6CidrBlock AWS API Documentation
     #
     class Ipv6CidrBlock < Struct.new(
       :ipv_6_cidr_block)
@@ -14028,6 +14800,8 @@ module Aws::EC2
     #   /128 prefix.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Ipv6Range AWS API Documentation
+    #
     class Ipv6Range < Struct.new(
       :cidr_ipv_6)
       include Aws::Structure
@@ -14046,6 +14820,8 @@ module Aws::EC2
     # @!attribute [rw] key_material
     #   An unencrypted PEM encoded RSA private key.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPair AWS API Documentation
     #
     class KeyPair < Struct.new(
       :key_name,
@@ -14066,6 +14842,8 @@ module Aws::EC2
     #   provide AWS the public key, this is the MD5 public key fingerprint
     #   as specified in section 4 of RFC4716.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPairInfo AWS API Documentation
     #
     class KeyPairInfo < Struct.new(
       :key_name,
@@ -14090,6 +14868,8 @@ module Aws::EC2
     # @!attribute [rw] group
     #   The name of the group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermission AWS API Documentation
     #
     class LaunchPermission < Struct.new(
       :user_id,
@@ -14126,6 +14906,8 @@ module Aws::EC2
     #   The AWS account ID to remove from the list of launch permissions for
     #   the AMI.
     #   @return [Array<Types::LaunchPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchPermissionModifications AWS API Documentation
     #
     class LaunchPermissionModifications < Struct.new(
       :add,
@@ -14213,6 +14995,8 @@ module Aws::EC2
     #   Describes the monitoring of an instance.
     #   @return [Types::RunInstancesMonitoringEnabled]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchSpecification AWS API Documentation
+    #
     class LaunchSpecification < Struct.new(
       :image_id,
       :key_name,
@@ -14250,6 +15034,8 @@ module Aws::EC2
     #   Specify whether to enable or disable auto-placement.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsRequest AWS API Documentation
+    #
     class ModifyHostsRequest < Struct.new(
       :host_ids,
       :auto_placement)
@@ -14266,6 +15052,8 @@ module Aws::EC2
     #   The IDs of the Dedicated Hosts that could not be modified. Check
     #   whether the setting you requested can be used.
     #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyHostsResult AWS API Documentation
     #
     class ModifyHostsResult < Struct.new(
       :successful,
@@ -14292,6 +15080,8 @@ module Aws::EC2
     #   Indicate whether the resource should use longer IDs (17-character
     #   IDs).
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdFormatRequest AWS API Documentation
     #
     class ModifyIdFormatRequest < Struct.new(
       :resource,
@@ -14325,6 +15115,8 @@ module Aws::EC2
     #   root user. Specify `all` to modify the ID format for all IAM users,
     #   IAM roles, and the root user of the account.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIdentityIdFormatRequest AWS API Documentation
     #
     class ModifyIdentityIdFormatRequest < Struct.new(
       :resource,
@@ -14411,6 +15203,8 @@ module Aws::EC2
     # @!attribute [rw] description
     #   A description for the AMI.
     #   @return [Types::AttributeValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyImageAttributeRequest AWS API Documentation
     #
     class ModifyImageAttributeRequest < Struct.new(
       :dry_run,
@@ -14598,6 +15392,8 @@ module Aws::EC2
     #   option with a PV instance can make it unreachable.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttributeRequest AWS API Documentation
+    #
     class ModifyInstanceAttributeRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -14647,6 +15443,8 @@ module Aws::EC2
     #   with.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementRequest AWS API Documentation
+    #
     class ModifyInstancePlacementRequest < Struct.new(
       :instance_id,
       :tenancy,
@@ -14660,6 +15458,8 @@ module Aws::EC2
     # @!attribute [rw] return
     #   Is `true` if the request succeeds, and an error otherwise.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstancePlacementResult AWS API Documentation
     #
     class ModifyInstancePlacementResult < Struct.new(
       :return)
@@ -14726,6 +15526,8 @@ module Aws::EC2
     #   interface attachment.
     #   @return [Types::NetworkInterfaceAttachmentChanges]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyNetworkInterfaceAttributeRequest AWS API Documentation
+    #
     class ModifyNetworkInterfaceAttributeRequest < Struct.new(
       :dry_run,
       :network_interface_id,
@@ -14773,6 +15575,8 @@ module Aws::EC2
     #   The configuration settings for the Reserved Instances to modify.
     #   @return [Array<Types::ReservedInstancesConfiguration>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstancesRequest AWS API Documentation
+    #
     class ModifyReservedInstancesRequest < Struct.new(
       :client_token,
       :reserved_instances_ids,
@@ -14785,6 +15589,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances_modification_id
     #   The ID for the modification.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyReservedInstancesResult AWS API Documentation
     #
     class ModifyReservedInstancesResult < Struct.new(
       :reserved_instances_modification_id)
@@ -14855,6 +15661,8 @@ module Aws::EC2
     #   A JSON representation of the snapshot attribute modification.
     #   @return [Types::CreateVolumePermissionModifications]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySnapshotAttributeRequest AWS API Documentation
+    #
     class ModifySnapshotAttributeRequest < Struct.new(
       :dry_run,
       :snapshot_id,
@@ -14891,6 +15699,8 @@ module Aws::EC2
     #   current size of the Spot fleet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestRequest AWS API Documentation
+    #
     class ModifySpotFleetRequestRequest < Struct.new(
       :spot_fleet_request_id,
       :target_capacity,
@@ -14903,6 +15713,8 @@ module Aws::EC2
     # @!attribute [rw] return
     #   Is `true` if the request succeeds, and an error otherwise.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestResponse AWS API Documentation
     #
     class ModifySpotFleetRequestResponse < Struct.new(
       :return)
@@ -14947,6 +15759,8 @@ module Aws::EC2
     #   created using version `2016-11-15` or later of the Amazon EC2 API.
     #   @return [Types::AttributeBooleanValue]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySubnetAttributeRequest AWS API Documentation
+    #
     class ModifySubnetAttributeRequest < Struct.new(
       :subnet_id,
       :map_public_ip_on_launch,
@@ -14982,6 +15796,8 @@ module Aws::EC2
     #   Indicates whether the volume should be auto-enabled for I/O
     #   operations.
     #   @return [Types::AttributeBooleanValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolumeAttributeRequest AWS API Documentation
     #
     class ModifyVolumeAttributeRequest < Struct.new(
       :dry_run,
@@ -15030,6 +15846,8 @@ module Aws::EC2
     #   the same request. Use separate requests for each attribute. You can
     #   only enable DNS hostnames if you've enabled DNS support.
     #   @return [Types::AttributeBooleanValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcAttributeRequest AWS API Documentation
     #
     class ModifyVpcAttributeRequest < Struct.new(
       :vpc_id,
@@ -15081,6 +15899,8 @@ module Aws::EC2
     #   One or more route table IDs to disassociate from the endpoint.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointRequest AWS API Documentation
+    #
     class ModifyVpcEndpointRequest < Struct.new(
       :dry_run,
       :vpc_endpoint_id,
@@ -15097,6 +15917,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointResult AWS API Documentation
     #
     class ModifyVpcEndpointResult < Struct.new(
       :return)
@@ -15140,6 +15962,8 @@ module Aws::EC2
     #   The VPC peering connection options for the accepter VPC.
     #   @return [Types::PeeringConnectionOptionsRequest]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptionsRequest AWS API Documentation
+    #
     class ModifyVpcPeeringConnectionOptionsRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id,
@@ -15157,6 +15981,8 @@ module Aws::EC2
     #   Information about the VPC peering connection options for the
     #   accepter VPC.
     #   @return [Types::PeeringConnectionOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcPeeringConnectionOptionsResult AWS API Documentation
     #
     class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
       :requester_peering_connection_options,
@@ -15185,6 +16011,8 @@ module Aws::EC2
     #   One or more instance IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MonitorInstancesRequest AWS API Documentation
+    #
     class MonitorInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids)
@@ -15197,6 +16025,8 @@ module Aws::EC2
     #   The monitoring information.
     #   @return [Array<Types::InstanceMonitoring>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MonitorInstancesResult AWS API Documentation
+    #
     class MonitorInstancesResult < Struct.new(
       :instance_monitorings)
       include Aws::Structure
@@ -15208,6 +16038,8 @@ module Aws::EC2
     #   Indicates whether detailed monitoring is enabled. Otherwise, basic
     #   monitoring is enabled.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Monitoring AWS API Documentation
     #
     class Monitoring < Struct.new(
       :state)
@@ -15235,6 +16067,8 @@ module Aws::EC2
     #   The Elastic IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveAddressToVpcRequest AWS API Documentation
+    #
     class MoveAddressToVpcRequest < Struct.new(
       :dry_run,
       :public_ip)
@@ -15250,6 +16084,8 @@ module Aws::EC2
     # @!attribute [rw] status
     #   The status of the move of the IP address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MoveAddressToVpcResult AWS API Documentation
     #
     class MoveAddressToVpcResult < Struct.new(
       :allocation_id,
@@ -15267,6 +16103,8 @@ module Aws::EC2
     #   The status of the Elastic IP address that's being moved to the
     #   EC2-VPC platform, or restored to the EC2-Classic platform.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/MovingAddressStatus AWS API Documentation
     #
     class MovingAddressStatus < Struct.new(
       :public_ip,
@@ -15363,6 +16201,8 @@ module Aws::EC2
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [Types::ProvisionedBandwidth]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGateway AWS API Documentation
+    #
     class NatGateway < Struct.new(
       :vpc_id,
       :subnet_id,
@@ -15396,6 +16236,8 @@ module Aws::EC2
     # @!attribute [rw] network_interface_id
     #   The ID of the network interface associated with the NAT gateway.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NatGatewayAddress AWS API Documentation
     #
     class NatGatewayAddress < Struct.new(
       :public_ip,
@@ -15431,6 +16273,8 @@ module Aws::EC2
     #   Any tags assigned to the network ACL.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAcl AWS API Documentation
+    #
     class NetworkAcl < Struct.new(
       :network_acl_id,
       :vpc_id,
@@ -15454,6 +16298,8 @@ module Aws::EC2
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAclAssociation AWS API Documentation
     #
     class NetworkAclAssociation < Struct.new(
       :network_acl_association_id,
@@ -15498,6 +16344,8 @@ module Aws::EC2
     # @!attribute [rw] port_range
     #   TCP or UDP protocols: The range of ports the rule applies to.
     #   @return [Types::PortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkAclEntry AWS API Documentation
     #
     class NetworkAclEntry < Struct.new(
       :rule_number,
@@ -15595,6 +16443,8 @@ module Aws::EC2
     #   The type of interface.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterface AWS API Documentation
+    #
     class NetworkInterface < Struct.new(
       :network_interface_id,
       :subnet_id,
@@ -15643,6 +16493,8 @@ module Aws::EC2
     #   The association ID.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAssociation AWS API Documentation
+    #
     class NetworkInterfaceAssociation < Struct.new(
       :public_ip,
       :public_dns_name,
@@ -15684,6 +16536,8 @@ module Aws::EC2
     #   is terminated.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachment AWS API Documentation
+    #
     class NetworkInterfaceAttachment < Struct.new(
       :attachment_id,
       :instance_id,
@@ -15714,6 +16568,8 @@ module Aws::EC2
     #   is terminated.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceAttachmentChanges AWS API Documentation
+    #
     class NetworkInterfaceAttachmentChanges < Struct.new(
       :attachment_id,
       :delete_on_termination)
@@ -15725,6 +16581,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_address
     #   The IPv6 address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfaceIpv6Address AWS API Documentation
     #
     class NetworkInterfaceIpv6Address < Struct.new(
       :ipv_6_address)
@@ -15751,6 +16609,8 @@ module Aws::EC2
     #   associated with the network interface.
     #   @return [Types::NetworkInterfaceAssociation]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkInterfacePrivateIpAddress AWS API Documentation
+    #
     class NetworkInterfacePrivateIpAddress < Struct.new(
       :private_ip_address,
       :private_dns_name,
@@ -15772,6 +16632,8 @@ module Aws::EC2
     #
     # @!attribute [rw] values
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NewDhcpConfiguration AWS API Documentation
     #
     class NewDhcpConfiguration < Struct.new(
       :key,
@@ -15797,6 +16659,8 @@ module Aws::EC2
     #   If true, enables a local VPC to resolve public DNS hostnames to
     #   private IP addresses when queried from instances in the peer VPC.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptions AWS API Documentation
     #
     class PeeringConnectionOptions < Struct.new(
       :allow_egress_from_local_classic_link_to_remote_vpc,
@@ -15832,6 +16696,8 @@ module Aws::EC2
     #   If true, enables a local VPC to resolve public DNS hostnames to
     #   private IP addresses when queried from instances in the peer VPC.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PeeringConnectionOptionsRequest AWS API Documentation
     #
     class PeeringConnectionOptionsRequest < Struct.new(
       :allow_egress_from_local_classic_link_to_remote_vpc,
@@ -15879,6 +16745,8 @@ module Aws::EC2
     #   parameter is not supported for the ImportInstance command.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Placement AWS API Documentation
+    #
     class Placement < Struct.new(
       :availability_zone,
       :group_name,
@@ -15901,6 +16769,8 @@ module Aws::EC2
     # @!attribute [rw] state
     #   The state of the placement group.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PlacementGroup AWS API Documentation
     #
     class PlacementGroup < Struct.new(
       :group_name,
@@ -15927,6 +16797,8 @@ module Aws::EC2
     #   The last port in the range.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PortRange AWS API Documentation
+    #
     class PortRange < Struct.new(
       :from,
       :to)
@@ -15947,6 +16819,8 @@ module Aws::EC2
     #   The IP address range of the AWS service.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixList AWS API Documentation
+    #
     class PrefixList < Struct.new(
       :prefix_list_id,
       :prefix_list_name,
@@ -15966,6 +16840,8 @@ module Aws::EC2
     # @!attribute [rw] prefix_list_id
     #   The ID of the prefix.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrefixListId AWS API Documentation
     #
     class PrefixListId < Struct.new(
       :prefix_list_id)
@@ -16003,6 +16879,8 @@ module Aws::EC2
     #   for months 2 and 1.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceSchedule AWS API Documentation
+    #
     class PriceSchedule < Struct.new(
       :term,
       :price,
@@ -16037,6 +16915,8 @@ module Aws::EC2
     #   time, the only supported currency is `USD`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PriceScheduleSpecification AWS API Documentation
+    #
     class PriceScheduleSpecification < Struct.new(
       :term,
       :price,
@@ -16053,6 +16933,8 @@ module Aws::EC2
     # @!attribute [rw] count
     #   The number of reservations available for the price.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PricingDetail AWS API Documentation
     #
     class PricingDetail < Struct.new(
       :price,
@@ -16079,6 +16961,8 @@ module Aws::EC2
     #   IPv4 address. Only one IPv4 address can be designated as primary.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PrivateIpAddressSpecification AWS API Documentation
+    #
     class PrivateIpAddressSpecification < Struct.new(
       :private_ip_address,
       :primary)
@@ -16095,6 +16979,8 @@ module Aws::EC2
     #   The type of product code.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProductCode AWS API Documentation
+    #
     class ProductCode < Struct.new(
       :product_code_id,
       :product_code_type)
@@ -16106,6 +16992,8 @@ module Aws::EC2
     # @!attribute [rw] gateway_id
     #   The ID of the virtual private gateway (VGW).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PropagatingVgw AWS API Documentation
     #
     class PropagatingVgw < Struct.new(
       :gateway_id)
@@ -16170,6 +17058,8 @@ module Aws::EC2
     #   [2]: https://console.aws.amazon.com/support/home?
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ProvisionedBandwidth AWS API Documentation
+    #
     class ProvisionedBandwidth < Struct.new(
       :provisioned,
       :requested,
@@ -16214,6 +17104,8 @@ module Aws::EC2
     # @!attribute [rw] duration
     #   The duration of the reservation's term in seconds.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Purchase AWS API Documentation
     #
     class Purchase < Struct.new(
       :host_reservation_id,
@@ -16273,6 +17165,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationRequest AWS API Documentation
+    #
     class PurchaseHostReservationRequest < Struct.new(
       :offering_id,
       :host_id_set,
@@ -16311,6 +17205,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseHostReservationResult AWS API Documentation
+    #
     class PurchaseHostReservationResult < Struct.new(
       :purchase,
       :total_upfront_price,
@@ -16337,6 +17233,8 @@ module Aws::EC2
     # @!attribute [rw] instance_count
     #   The number of instances.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseRequest AWS API Documentation
     #
     class PurchaseRequest < Struct.new(
       :purchase_token,
@@ -16380,6 +17278,8 @@ module Aws::EC2
     #   at unexpected prices.
     #   @return [Types::ReservedInstanceLimitPrice]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingRequest AWS API Documentation
+    #
     class PurchaseReservedInstancesOfferingRequest < Struct.new(
       :dry_run,
       :reserved_instances_offering_id,
@@ -16393,6 +17293,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances_id
     #   The IDs of the purchased Reserved Instances.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseReservedInstancesOfferingResult AWS API Documentation
     #
     class PurchaseReservedInstancesOfferingResult < Struct.new(
       :reserved_instances_id)
@@ -16438,6 +17340,8 @@ module Aws::EC2
     #   One or more purchase requests.
     #   @return [Array<Types::PurchaseRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesRequest AWS API Documentation
+    #
     class PurchaseScheduledInstancesRequest < Struct.new(
       :dry_run,
       :client_token,
@@ -16450,6 +17354,8 @@ module Aws::EC2
     # @!attribute [rw] scheduled_instance_set
     #   Information about the Scheduled Instances.
     #   @return [Array<Types::ScheduledInstance>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseScheduledInstancesResult AWS API Documentation
     #
     class PurchaseScheduledInstancesResult < Struct.new(
       :scheduled_instance_set)
@@ -16477,6 +17383,8 @@ module Aws::EC2
     #   One or more instance IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RebootInstancesRequest AWS API Documentation
+    #
     class RebootInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids)
@@ -16493,6 +17401,8 @@ module Aws::EC2
     #   The amount of the recurring charge.
     #   @return [Float]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RecurringCharge AWS API Documentation
+    #
     class RecurringCharge < Struct.new(
       :frequency,
       :amount)
@@ -16508,6 +17418,8 @@ module Aws::EC2
     # @!attribute [rw] endpoint
     #   The region service endpoint.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Region AWS API Documentation
     #
     class Region < Struct.new(
       :region_name,
@@ -16621,6 +17533,8 @@ module Aws::EC2
     #   with a PV AMI can make instances launched from the AMI unreachable.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
+    #
     class RegisterImageRequest < Struct.new(
       :dry_run,
       :image_location,
@@ -16642,6 +17556,8 @@ module Aws::EC2
     # @!attribute [rw] image_id
     #   The ID of the newly registered AMI.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageResult AWS API Documentation
     #
     class RegisterImageResult < Struct.new(
       :image_id)
@@ -16669,6 +17585,8 @@ module Aws::EC2
     #   The ID of the VPC peering connection.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcPeeringConnectionRequest AWS API Documentation
+    #
     class RejectVpcPeeringConnectionRequest < Struct.new(
       :dry_run,
       :vpc_peering_connection_id)
@@ -16681,6 +17599,8 @@ module Aws::EC2
     #   Returns `true` if the request succeeds; otherwise, it returns an
     #   error.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RejectVpcPeeringConnectionResult AWS API Documentation
     #
     class RejectVpcPeeringConnectionResult < Struct.new(
       :return)
@@ -16713,6 +17633,8 @@ module Aws::EC2
     #   \[EC2-VPC\] The allocation ID. Required for EC2-VPC.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseAddressRequest AWS API Documentation
+    #
     class ReleaseAddressRequest < Struct.new(
       :dry_run,
       :public_ip,
@@ -16733,6 +17655,8 @@ module Aws::EC2
     #   The IDs of the Dedicated Hosts you want to release.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseHostsRequest AWS API Documentation
+    #
     class ReleaseHostsRequest < Struct.new(
       :host_ids)
       include Aws::Structure
@@ -16748,6 +17672,8 @@ module Aws::EC2
     #   The IDs of the Dedicated Hosts that could not be released, including
     #   an error message.
     #   @return [Array<Types::UnsuccessfulItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReleaseHostsResult AWS API Documentation
     #
     class ReleaseHostsResult < Struct.new(
       :successful,
@@ -16782,6 +17708,8 @@ module Aws::EC2
     #   The ID of the new network ACL to associate with the subnet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclAssociationRequest AWS API Documentation
+    #
     class ReplaceNetworkAclAssociationRequest < Struct.new(
       :dry_run,
       :association_id,
@@ -16794,6 +17722,8 @@ module Aws::EC2
     # @!attribute [rw] new_association_id
     #   The ID of the new association.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclAssociationResult AWS API Documentation
     #
     class ReplaceNetworkAclAssociationResult < Struct.new(
       :new_association_id)
@@ -16882,6 +17812,8 @@ module Aws::EC2
     #   Required if specifying TCP (6) or UDP (17) for the protocol.
     #   @return [Types::PortRange]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceNetworkAclEntryRequest AWS API Documentation
+    #
     class ReplaceNetworkAclEntryRequest < Struct.new(
       :dry_run,
       :network_acl_id,
@@ -16961,6 +17893,8 @@ module Aws::EC2
     #   \[IPv4 traffic only\] The ID of a NAT gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteRequest AWS API Documentation
+    #
     class ReplaceRouteRequest < Struct.new(
       :dry_run,
       :route_table_id,
@@ -17001,6 +17935,8 @@ module Aws::EC2
     #   The ID of the new route table to associate with the subnet.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteTableAssociationRequest AWS API Documentation
+    #
     class ReplaceRouteTableAssociationRequest < Struct.new(
       :dry_run,
       :association_id,
@@ -17013,6 +17949,8 @@ module Aws::EC2
     # @!attribute [rw] new_association_id
     #   The ID of the new association.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceRouteTableAssociationResult AWS API Documentation
     #
     class ReplaceRouteTableAssociationResult < Struct.new(
       :new_association_id)
@@ -17090,6 +18028,8 @@ module Aws::EC2
     # @!attribute [rw] description
     #   Descriptive text about the health state of your instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReportInstanceStatusRequest AWS API Documentation
     #
     class ReportInstanceStatusRequest < Struct.new(
       :dry_run,
@@ -17208,6 +18148,8 @@ module Aws::EC2
     #   The configuration for the Spot fleet request.
     #   @return [Types::SpotFleetRequestConfigData]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetRequest AWS API Documentation
+    #
     class RequestSpotFleetRequest < Struct.new(
       :dry_run,
       :spot_fleet_request_config)
@@ -17219,6 +18161,8 @@ module Aws::EC2
     # @!attribute [rw] spot_fleet_request_id
     #   The ID of the Spot fleet request.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotFleetResponse AWS API Documentation
     #
     class RequestSpotFleetResponse < Struct.new(
       :spot_fleet_request_id)
@@ -17414,6 +18358,8 @@ module Aws::EC2
     #   Describes the launch specification for an instance.
     #   @return [Types::RequestSpotLaunchSpecification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesRequest AWS API Documentation
+    #
     class RequestSpotInstancesRequest < Struct.new(
       :dry_run,
       :spot_price,
@@ -17434,6 +18380,8 @@ module Aws::EC2
     # @!attribute [rw] spot_instance_requests
     #   One or more Spot instance requests.
     #   @return [Array<Types::SpotInstanceRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotInstancesResult AWS API Documentation
     #
     class RequestSpotInstancesResult < Struct.new(
       :spot_instance_requests)
@@ -17588,6 +18536,8 @@ module Aws::EC2
     # @!attribute [rw] security_group_ids
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestSpotLaunchSpecification AWS API Documentation
+    #
     class RequestSpotLaunchSpecification < Struct.new(
       :image_id,
       :key_name,
@@ -17631,6 +18581,8 @@ module Aws::EC2
     #   One or more instances.
     #   @return [Array<Types::Instance>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Reservation AWS API Documentation
+    #
     class Reservation < Struct.new(
       :reservation_id,
       :owner_id,
@@ -17654,6 +18606,8 @@ module Aws::EC2
     # @!attribute [rw] hourly_price
     #   The hourly rate of the reservation.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservationValue AWS API Documentation
     #
     class ReservationValue < Struct.new(
       :remaining_total_value,
@@ -17682,6 +18636,8 @@ module Aws::EC2
     #   time, the only supported currency is `USD`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceLimitPrice AWS API Documentation
+    #
     class ReservedInstanceLimitPrice < Struct.new(
       :amount,
       :currency_code)
@@ -17698,6 +18654,8 @@ module Aws::EC2
     #   The total value of the Convertible Reserved Instance that you are
     #   exchanging.
     #   @return [Types::ReservationValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstanceReservationValue AWS API Documentation
     #
     class ReservedInstanceReservationValue < Struct.new(
       :reserved_instance_id,
@@ -17781,6 +18739,8 @@ module Aws::EC2
     #   The scope of the Reserved Instance.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstances AWS API Documentation
+    #
     class ReservedInstances < Struct.new(
       :reserved_instances_id,
       :instance_type,
@@ -17839,6 +18799,8 @@ module Aws::EC2
     #   instances in a specific Availability Zone.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesConfiguration AWS API Documentation
+    #
     class ReservedInstancesConfiguration < Struct.new(
       :availability_zone,
       :platform,
@@ -17853,6 +18815,8 @@ module Aws::EC2
     # @!attribute [rw] reserved_instances_id
     #   The ID of the Reserved Instance.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesId AWS API Documentation
     #
     class ReservedInstancesId < Struct.new(
       :reserved_instances_id)
@@ -17907,6 +18871,8 @@ module Aws::EC2
     #
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesListing AWS API Documentation
     #
     class ReservedInstancesListing < Struct.new(
       :reserved_instances_listing_id,
@@ -17967,6 +18933,8 @@ module Aws::EC2
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModification AWS API Documentation
+    #
     class ReservedInstancesModification < Struct.new(
       :reserved_instances_modification_id,
       :reserved_instances_ids,
@@ -17992,6 +18960,8 @@ module Aws::EC2
     #   The target Reserved Instances configurations supplied as part of the
     #   modification request.
     #   @return [Types::ReservedInstancesConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesModificationResult AWS API Documentation
     #
     class ReservedInstancesModificationResult < Struct.new(
       :reserved_instances_id,
@@ -18070,6 +19040,8 @@ module Aws::EC2
     #   an Availability Zone.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReservedInstancesOffering AWS API Documentation
+    #
     class ReservedInstancesOffering < Struct.new(
       :reserved_instances_offering_id,
       :instance_type,
@@ -18116,6 +19088,8 @@ module Aws::EC2
     #   permission attribute).
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetImageAttributeRequest AWS API Documentation
+    #
     class ResetImageAttributeRequest < Struct.new(
       :dry_run,
       :image_id,
@@ -18153,6 +19127,8 @@ module Aws::EC2
     #   ModifyInstanceAttribute.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetInstanceAttributeRequest AWS API Documentation
+    #
     class ResetInstanceAttributeRequest < Struct.new(
       :dry_run,
       :instance_id,
@@ -18186,6 +19162,8 @@ module Aws::EC2
     #   The source/destination checking attribute. Resets the value to
     #   `true`.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetNetworkInterfaceAttributeRequest AWS API Documentation
     #
     class ResetNetworkInterfaceAttributeRequest < Struct.new(
       :dry_run,
@@ -18221,6 +19199,8 @@ module Aws::EC2
     #   to create volumes can be reset.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResetSnapshotAttributeRequest AWS API Documentation
+    #
     class ResetSnapshotAttributeRequest < Struct.new(
       :dry_run,
       :snapshot_id,
@@ -18249,6 +19229,8 @@ module Aws::EC2
     #   The Elastic IP address.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreAddressToClassicRequest AWS API Documentation
+    #
     class RestoreAddressToClassicRequest < Struct.new(
       :dry_run,
       :public_ip)
@@ -18264,6 +19246,8 @@ module Aws::EC2
     # @!attribute [rw] public_ip
     #   The Elastic IP address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreAddressToClassicResult AWS API Documentation
     #
     class RestoreAddressToClassicResult < Struct.new(
       :status,
@@ -18368,6 +19352,8 @@ module Aws::EC2
     #   A set of IP permissions. You can't specify a destination security
     #   group and a CIDR IP address range.
     #   @return [Array<Types::IpPermission>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupEgressRequest AWS API Documentation
     #
     class RevokeSecurityGroupEgressRequest < Struct.new(
       :dry_run,
@@ -18497,6 +19483,8 @@ module Aws::EC2
     #   and a CIDR IP address range.
     #   @return [Array<Types::IpPermission>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RevokeSecurityGroupIngressRequest AWS API Documentation
+    #
     class RevokeSecurityGroupIngressRequest < Struct.new(
       :dry_run,
       :group_name,
@@ -18572,6 +19560,8 @@ module Aws::EC2
     #   The ID of the egress-only Internet gateway.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Route AWS API Documentation
+    #
     class Route < Struct.new(
       :destination_cidr_block,
       :destination_prefix_list_id,
@@ -18614,6 +19604,8 @@ module Aws::EC2
     #   Any virtual private gateway (VGW) propagating routes.
     #   @return [Array<Types::PropagatingVgw>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTable AWS API Documentation
+    #
     class RouteTable < Struct.new(
       :route_table_id,
       :vpc_id,
@@ -18643,6 +19635,8 @@ module Aws::EC2
     #   Indicates whether this is the main route table.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RouteTableAssociation AWS API Documentation
+    #
     class RouteTableAssociation < Struct.new(
       :route_table_association_id,
       :route_table_id,
@@ -18664,6 +19658,8 @@ module Aws::EC2
     #   Indicates whether detailed monitoring is enabled. Otherwise, basic
     #   monitoring is enabled.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesMonitoringEnabled AWS API Documentation
     #
     class RunInstancesMonitoringEnabled < Struct.new(
       :enabled)
@@ -18976,6 +19972,8 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
+    #
     class RunInstancesRequest < Struct.new(
       :dry_run,
       :image_id,
@@ -19114,6 +20112,8 @@ module Aws::EC2
     #   purchased.
     #   @return [Types::ScheduledInstancesLaunchSpecification]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstancesRequest AWS API Documentation
+    #
     class RunScheduledInstancesRequest < Struct.new(
       :dry_run,
       :client_token,
@@ -19128,6 +20128,8 @@ module Aws::EC2
     # @!attribute [rw] instance_id_set
     #   The IDs of the newly launched instances.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunScheduledInstancesResult AWS API Documentation
     #
     class RunScheduledInstancesResult < Struct.new(
       :instance_id_set)
@@ -19177,6 +20179,8 @@ module Aws::EC2
     # @!attribute [rw] upload_policy_signature
     #   The signature of the JSON document.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/S3Storage AWS API Documentation
     #
     class S3Storage < Struct.new(
       :bucket,
@@ -19248,6 +20252,8 @@ module Aws::EC2
     # @!attribute [rw] create_date
     #   The date when the Scheduled Instance was purchased.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstance AWS API Documentation
     #
     class ScheduledInstance < Struct.new(
       :scheduled_instance_id,
@@ -19323,6 +20329,8 @@ module Aws::EC2
     #   The maximum term. The only possible value is 365 days.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceAvailability AWS API Documentation
+    #
     class ScheduledInstanceAvailability < Struct.new(
       :instance_type,
       :platform,
@@ -19365,6 +20373,8 @@ module Aws::EC2
     # @!attribute [rw] occurrence_unit
     #   The unit for `occurrenceDaySet` (`DayOfWeek` or `DayOfMonth`).
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceRecurrence AWS API Documentation
     #
     class ScheduledInstanceRecurrence < Struct.new(
       :frequency,
@@ -19417,6 +20427,8 @@ module Aws::EC2
     #   `DayOfWeek` with a weekly schedule. You can't specify this value
     #   with a daily schedule.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstanceRecurrenceRequest AWS API Documentation
     #
     class ScheduledInstanceRecurrenceRequest < Struct.new(
       :frequency,
@@ -19474,6 +20486,8 @@ module Aws::EC2
     #   Parameters used to set up EBS volumes automatically when the
     #   instance is launched.
     #   @return [Types::ScheduledInstancesEbs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesBlockDeviceMapping AWS API Documentation
     #
     class ScheduledInstancesBlockDeviceMapping < Struct.new(
       :device_name,
@@ -19547,6 +20561,8 @@ module Aws::EC2
     #   encrypted volumes only to instances that support them.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesEbs AWS API Documentation
+    #
     class ScheduledInstancesEbs < Struct.new(
       :snapshot_id,
       :volume_size,
@@ -19575,6 +20591,8 @@ module Aws::EC2
     #   The name.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesIamInstanceProfile AWS API Documentation
+    #
     class ScheduledInstancesIamInstanceProfile < Struct.new(
       :arn,
       :name)
@@ -19593,6 +20611,8 @@ module Aws::EC2
     # @!attribute [rw] ipv_6_address
     #   The IPv6 address.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesIpv6Address AWS API Documentation
     #
     class ScheduledInstancesIpv6Address < Struct.new(
       :ipv_6_address)
@@ -19734,6 +20754,8 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesLaunchSpecification AWS API Documentation
+    #
     class ScheduledInstancesLaunchSpecification < Struct.new(
       :image_id,
       :key_name,
@@ -19764,6 +20786,8 @@ module Aws::EC2
     # @!attribute [rw] enabled
     #   Indicates whether monitoring is enabled.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesMonitoring AWS API Documentation
     #
     class ScheduledInstancesMonitoring < Struct.new(
       :enabled)
@@ -19854,6 +20878,8 @@ module Aws::EC2
     #   IPv6 addresses are automatically selected from the subnet range.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesNetworkInterface AWS API Documentation
+    #
     class ScheduledInstancesNetworkInterface < Struct.new(
       :network_interface_id,
       :device_index,
@@ -19888,6 +20914,8 @@ module Aws::EC2
     #   The name of the placement group.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesPlacement AWS API Documentation
+    #
     class ScheduledInstancesPlacement < Struct.new(
       :availability_zone,
       :group_name)
@@ -19912,6 +20940,8 @@ module Aws::EC2
     #   Indicates whether this is a primary IPv4 address. Otherwise, this is
     #   a secondary IPv4 address.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScheduledInstancesPrivateIpAddressConfig AWS API Documentation
     #
     class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
       :private_ip_address,
@@ -19954,6 +20984,8 @@ module Aws::EC2
     #   Any tags assigned to the security group.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroup AWS API Documentation
+    #
     class SecurityGroup < Struct.new(
       :owner_id,
       :group_name,
@@ -19980,6 +21012,8 @@ module Aws::EC2
     # @!attribute [rw] vpc_peering_connection_id
     #   The ID of the VPC peering connection.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecurityGroupReference AWS API Documentation
     #
     class SecurityGroupReference < Struct.new(
       :group_id,
@@ -20010,6 +21044,8 @@ module Aws::EC2
     #   and at most three months in the future.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SlotDateTimeRangeRequest AWS API Documentation
+    #
     class SlotDateTimeRangeRequest < Struct.new(
       :earliest_time,
       :latest_time)
@@ -20036,6 +21072,8 @@ module Aws::EC2
     #   The latest date and time, in UTC, for the Scheduled Instance to
     #   start.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SlotStartTimeRangeRequest AWS API Documentation
     #
     class SlotStartTimeRangeRequest < Struct.new(
       :earliest_time,
@@ -20121,6 +21159,8 @@ module Aws::EC2
     #   DescribeSnapshots API operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Snapshot AWS API Documentation
+    #
     class Snapshot < Struct.new(
       :snapshot_id,
       :volume_id,
@@ -20181,6 +21221,8 @@ module Aws::EC2
     #   A brief status of the snapshot creation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDetail AWS API Documentation
+    #
     class SnapshotDetail < Struct.new(
       :disk_image_size,
       :description,
@@ -20229,6 +21271,8 @@ module Aws::EC2
     #   The S3 bucket for the disk image.
     #   @return [Types::UserBucket]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotDiskContainer AWS API Documentation
+    #
     class SnapshotDiskContainer < Struct.new(
       :description,
       :format,
@@ -20275,6 +21319,8 @@ module Aws::EC2
     #   A brief status for the import snapshot task.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SnapshotTaskDetail AWS API Documentation
+    #
     class SnapshotTaskDetail < Struct.new(
       :disk_image_size,
       :description,
@@ -20309,6 +21355,8 @@ module Aws::EC2
     # @!attribute [rw] fault
     #   The fault codes for the Spot instance request, if any.
     #   @return [Types::SpotInstanceStateFault]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotDatafeedSubscription AWS API Documentation
     #
     class SpotDatafeedSubscription < Struct.new(
       :owner_id,
@@ -20492,6 +21540,8 @@ module Aws::EC2
     #   Spot bid price by the value of `WeightedCapacity`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetLaunchSpecification AWS API Documentation
+    #
     class SpotFleetLaunchSpecification < Struct.new(
       :image_id,
       :key_name,
@@ -20528,6 +21578,8 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetMonitoring AWS API Documentation
+    #
     class SpotFleetMonitoring < Struct.new(
       :enabled)
       include Aws::Structure
@@ -20559,6 +21611,8 @@ module Aws::EC2
     #   size of the fleet is decreased, the status is `pending_termination`
     #   while Spot instances are terminating.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfig AWS API Documentation
     #
     class SpotFleetRequestConfig < Struct.new(
       :spot_fleet_request_id,
@@ -20739,6 +21793,8 @@ module Aws::EC2
     #   interrupted instances. Default: `maintain`.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotFleetRequestConfigData AWS API Documentation
+    #
     class SpotFleetRequestConfigData < Struct.new(
       :client_token,
       :spot_price,
@@ -20851,6 +21907,8 @@ module Aws::EC2
     #   The Availability Zone in which the bid is launched.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceRequest AWS API Documentation
+    #
     class SpotInstanceRequest < Struct.new(
       :spot_instance_request_id,
       :spot_price,
@@ -20883,6 +21941,8 @@ module Aws::EC2
     #   The message for the Spot instance state change.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStateFault AWS API Documentation
+    #
     class SpotInstanceStateFault < Struct.new(
       :code,
       :message)
@@ -20908,6 +21968,8 @@ module Aws::EC2
     # @!attribute [rw] message
     #   The description for the status code.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotInstanceStatus AWS API Documentation
     #
     class SpotInstanceStatus < Struct.new(
       :code,
@@ -20944,6 +22006,8 @@ module Aws::EC2
     #   hardware. The `host` tenancy is not supported for Spot instances.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPlacement AWS API Documentation
+    #
     class SpotPlacement < Struct.new(
       :availability_zone,
       :group_name,
@@ -20976,6 +22040,8 @@ module Aws::EC2
     # @!attribute [rw] availability_zone
     #   The Availability Zone.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotPrice AWS API Documentation
     #
     class SpotPrice < Struct.new(
       :instance_type,
@@ -21023,6 +22089,8 @@ module Aws::EC2
     #   connection.
     #   @return [Array<Types::UserIdGroupPair>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleIpPermission AWS API Documentation
+    #
     class StaleIpPermission < Struct.new(
       :from_port,
       :ip_protocol,
@@ -21060,6 +22128,8 @@ module Aws::EC2
     #   Information about the stale outbound rules in the security group.
     #   @return [Array<Types::StaleIpPermission>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StaleSecurityGroup AWS API Documentation
+    #
     class StaleSecurityGroup < Struct.new(
       :group_id,
       :group_name,
@@ -21096,6 +22166,8 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstancesRequest AWS API Documentation
+    #
     class StartInstancesRequest < Struct.new(
       :instance_ids,
       :additional_info,
@@ -21108,6 +22180,8 @@ module Aws::EC2
     # @!attribute [rw] starting_instances
     #   Information about one or more started instances.
     #   @return [Array<Types::InstanceStateChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartInstancesResult AWS API Documentation
     #
     class StartInstancesResult < Struct.new(
       :starting_instances)
@@ -21149,6 +22223,8 @@ module Aws::EC2
     #     found.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StateReason AWS API Documentation
+    #
     class StateReason < Struct.new(
       :code,
       :message)
@@ -21186,6 +22262,8 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesRequest AWS API Documentation
+    #
     class StopInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids,
@@ -21198,6 +22276,8 @@ module Aws::EC2
     # @!attribute [rw] stopping_instances
     #   Information about one or more stopped instances.
     #   @return [Array<Types::InstanceStateChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StopInstancesResult AWS API Documentation
     #
     class StopInstancesResult < Struct.new(
       :stopping_instances)
@@ -21222,6 +22302,8 @@ module Aws::EC2
     # @!attribute [rw] s3
     #   An Amazon S3 storage location.
     #   @return [Types::S3Storage]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Storage AWS API Documentation
     #
     class Storage < Struct.new(
       :s3)
@@ -21280,6 +22362,8 @@ module Aws::EC2
     #   Any tags assigned to the subnet.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Subnet AWS API Documentation
+    #
     class Subnet < Struct.new(
       :subnet_id,
       :state,
@@ -21305,6 +22389,8 @@ module Aws::EC2
     #   A message about the status of the CIDR block, if applicable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetCidrBlockState AWS API Documentation
+    #
     class SubnetCidrBlockState < Struct.new(
       :state,
       :status_message)
@@ -21324,6 +22410,8 @@ module Aws::EC2
     # @!attribute [rw] association_id
     #   The association ID for the CIDR block.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SubnetIpv6CidrBlockAssociation AWS API Documentation
     #
     class SubnetIpv6CidrBlockAssociation < Struct.new(
       :ipv_6_cidr_block,
@@ -21356,6 +22444,8 @@ module Aws::EC2
     #   255 Unicode characters.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -21380,6 +22470,8 @@ module Aws::EC2
     #   The tag value.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagDescription AWS API Documentation
+    #
     class TagDescription < Struct.new(
       :resource_id,
       :resource_type,
@@ -21399,6 +22491,8 @@ module Aws::EC2
     #   can be applied to. This parameter is reserved and cannot be
     #   specified in a request
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfiguration AWS API Documentation
     #
     class TargetConfiguration < Struct.new(
       :offering_id,
@@ -21426,6 +22520,8 @@ module Aws::EC2
     #   specified in a request
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetConfigurationRequest AWS API Documentation
+    #
     class TargetConfigurationRequest < Struct.new(
       :offering_id,
       :instance_count)
@@ -21444,6 +22540,8 @@ module Aws::EC2
     #   the exchange. This is the sum of the list value, remaining upfront
     #   price, and additional upfront cost of the exchange.
     #   @return [Types::ReservationValue]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetReservationValue AWS API Documentation
     #
     class TargetReservationValue < Struct.new(
       :target_configuration,
@@ -21475,6 +22573,8 @@ module Aws::EC2
     #   request into smaller batches.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstancesRequest AWS API Documentation
+    #
     class TerminateInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids)
@@ -21486,6 +22586,8 @@ module Aws::EC2
     # @!attribute [rw] terminating_instances
     #   Information about one or more terminated instances.
     #   @return [Array<Types::InstanceStateChange>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TerminateInstancesResult AWS API Documentation
     #
     class TerminateInstancesResult < Struct.new(
       :terminating_instances)
@@ -21508,6 +22610,8 @@ module Aws::EC2
     #   The IPv6 addresses to unassign from the network interface.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesRequest AWS API Documentation
+    #
     class UnassignIpv6AddressesRequest < Struct.new(
       :network_interface_id,
       :ipv_6_addresses)
@@ -21522,6 +22626,8 @@ module Aws::EC2
     #   The IPv6 addresses that have been unassigned from the network
     #   interface.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignIpv6AddressesResult AWS API Documentation
     #
     class UnassignIpv6AddressesResult < Struct.new(
       :network_interface_id,
@@ -21548,6 +22654,8 @@ module Aws::EC2
     #   interface. You can specify this option multiple times to unassign
     #   more than one IP address.
     #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnassignPrivateIpAddressesRequest AWS API Documentation
     #
     class UnassignPrivateIpAddressesRequest < Struct.new(
       :network_interface_id,
@@ -21576,6 +22684,8 @@ module Aws::EC2
     #   One or more instance IDs.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnmonitorInstancesRequest AWS API Documentation
+    #
     class UnmonitorInstancesRequest < Struct.new(
       :dry_run,
       :instance_ids)
@@ -21587,6 +22697,8 @@ module Aws::EC2
     # @!attribute [rw] instance_monitorings
     #   The monitoring information.
     #   @return [Array<Types::InstanceMonitoring>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnmonitorInstancesResult AWS API Documentation
     #
     class UnmonitorInstancesResult < Struct.new(
       :instance_monitorings)
@@ -21603,6 +22715,8 @@ module Aws::EC2
     # @!attribute [rw] error
     #   Information about the error.
     #   @return [Types::UnsuccessfulItemError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulItem AWS API Documentation
     #
     class UnsuccessfulItem < Struct.new(
       :resource_id,
@@ -21624,6 +22738,8 @@ module Aws::EC2
     # @!attribute [rw] message
     #   The error message accompanying the error code.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UnsuccessfulItemError AWS API Documentation
     #
     class UnsuccessfulItemError < Struct.new(
       :code,
@@ -21649,6 +22765,8 @@ module Aws::EC2
     #   The file name of the disk image.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserBucket AWS API Documentation
+    #
     class UserBucket < Struct.new(
       :s3_bucket,
       :s3_key)
@@ -21664,6 +22782,8 @@ module Aws::EC2
     # @!attribute [rw] s3_key
     #   The file name of the disk image.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserBucketDetails AWS API Documentation
     #
     class UserBucketDetails < Struct.new(
       :s3_bucket,
@@ -21685,6 +22805,8 @@ module Aws::EC2
     #   Base64-encoding is performed for you, and you can load the text from
     #   a file. Otherwise, you must provide Base64-encoded text.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserData AWS API Documentation
     #
     class UserData < Struct.new(
       :data)
@@ -21735,6 +22857,8 @@ module Aws::EC2
     #   The status of a VPC peering connection, if applicable.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UserIdGroupPair AWS API Documentation
+    #
     class UserIdGroupPair < Struct.new(
       :user_id,
       :group_name,
@@ -21767,6 +22891,8 @@ module Aws::EC2
     # @!attribute [rw] accepted_route_count
     #   The number of accepted routes.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VgwTelemetry AWS API Documentation
     #
     class VgwTelemetry < Struct.new(
       :outside_ip_address,
@@ -21849,6 +22975,8 @@ module Aws::EC2
     #   for the volume.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Volume AWS API Documentation
+    #
     class Volume < Struct.new(
       :volume_id,
       :size,
@@ -21891,6 +23019,8 @@ module Aws::EC2
     #   Indicates whether the EBS volume is deleted on instance termination.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeAttachment AWS API Documentation
+    #
     class VolumeAttachment < Struct.new(
       :volume_id,
       :instance_id,
@@ -21913,6 +23043,8 @@ module Aws::EC2
     # @!attribute [rw] size
     #   The size of the volume, in GiB.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeDetail AWS API Documentation
     #
     class VolumeDetail < Struct.new(
       :size)
@@ -21937,6 +23069,8 @@ module Aws::EC2
     #   The ID of the event associated with this operation.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusAction AWS API Documentation
+    #
     class VolumeStatusAction < Struct.new(
       :code,
       :description,
@@ -21954,6 +23088,8 @@ module Aws::EC2
     # @!attribute [rw] status
     #   The intended status of the volume status.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusDetails AWS API Documentation
     #
     class VolumeStatusDetails < Struct.new(
       :name,
@@ -21983,6 +23119,8 @@ module Aws::EC2
     #   The ID of this event.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusEvent AWS API Documentation
+    #
     class VolumeStatusEvent < Struct.new(
       :event_type,
       :description,
@@ -22001,6 +23139,8 @@ module Aws::EC2
     # @!attribute [rw] details
     #   The details of the volume status.
     #   @return [Array<Types::VolumeStatusDetails>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusInfo AWS API Documentation
     #
     class VolumeStatusInfo < Struct.new(
       :status,
@@ -22029,6 +23169,8 @@ module Aws::EC2
     # @!attribute [rw] actions
     #   The details of the operation.
     #   @return [Array<Types::VolumeStatusAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeStatusItem AWS API Documentation
     #
     class VolumeStatusItem < Struct.new(
       :volume_id,
@@ -22074,6 +23216,8 @@ module Aws::EC2
     #   Information about the IPv6 CIDR blocks associated with the VPC.
     #   @return [Array<Types::VpcIpv6CidrBlockAssociation>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Vpc AWS API Documentation
+    #
     class Vpc < Struct.new(
       :vpc_id,
       :state,
@@ -22096,6 +23240,8 @@ module Aws::EC2
     #   The current state of the attachment.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcAttachment AWS API Documentation
+    #
     class VpcAttachment < Struct.new(
       :vpc_id,
       :state)
@@ -22111,6 +23257,8 @@ module Aws::EC2
     # @!attribute [rw] status_message
     #   A message about the status of the CIDR block, if applicable.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcCidrBlockState AWS API Documentation
     #
     class VpcCidrBlockState < Struct.new(
       :state,
@@ -22131,6 +23279,8 @@ module Aws::EC2
     # @!attribute [rw] tags
     #   Any tags assigned to the VPC.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcClassicLink AWS API Documentation
     #
     class VpcClassicLink < Struct.new(
       :vpc_id,
@@ -22169,6 +23319,8 @@ module Aws::EC2
     #   The date and time the VPC endpoint was created.
     #   @return [Time]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
+    #
     class VpcEndpoint < Struct.new(
       :vpc_endpoint_id,
       :vpc_id,
@@ -22193,6 +23345,8 @@ module Aws::EC2
     # @!attribute [rw] association_id
     #   The association ID for the IPv6 CIDR block.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcIpv6CidrBlockAssociation AWS API Documentation
     #
     class VpcIpv6CidrBlockAssociation < Struct.new(
       :ipv_6_cidr_block,
@@ -22230,6 +23384,8 @@ module Aws::EC2
     #   The ID of the VPC peering connection.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnection AWS API Documentation
+    #
     class VpcPeeringConnection < Struct.new(
       :accepter_vpc_info,
       :expiration_time,
@@ -22257,6 +23413,8 @@ module Aws::EC2
     #   private IP addresses when queried from instances in a peer VPC.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionOptionsDescription AWS API Documentation
+    #
     class VpcPeeringConnectionOptionsDescription < Struct.new(
       :allow_egress_from_local_classic_link_to_remote_vpc,
       :allow_egress_from_local_vpc_to_remote_classic_link,
@@ -22274,6 +23432,8 @@ module Aws::EC2
     #   A message that provides more information about the status, if
     #   applicable.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionStateReason AWS API Documentation
     #
     class VpcPeeringConnectionStateReason < Struct.new(
       :code,
@@ -22303,6 +23463,8 @@ module Aws::EC2
     #   Information about the VPC peering connection options for the
     #   accepter or requester VPC.
     #   @return [Types::VpcPeeringConnectionOptionsDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcPeeringConnectionVpcInfo AWS API Documentation
     #
     class VpcPeeringConnectionVpcInfo < Struct.new(
       :cidr_block,
@@ -22360,6 +23522,8 @@ module Aws::EC2
     #   The static routes associated with the VPN connection.
     #   @return [Array<Types::VpnStaticRoute>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnection AWS API Documentation
+    #
     class VpnConnection < Struct.new(
       :vpn_connection_id,
       :state,
@@ -22381,6 +23545,8 @@ module Aws::EC2
     #   routes must be used for devices that don't support BGP.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptions AWS API Documentation
+    #
     class VpnConnectionOptions < Struct.new(
       :static_routes_only)
       include Aws::Structure
@@ -22399,6 +23565,8 @@ module Aws::EC2
     #   Indicates whether the VPN connection uses static routes only. Static
     #   routes must be used for devices that don't support BGP.
     #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnConnectionOptionsSpecification AWS API Documentation
     #
     class VpnConnectionOptionsSpecification < Struct.new(
       :static_routes_only)
@@ -22432,6 +23600,8 @@ module Aws::EC2
     #   Any tags assigned to the virtual private gateway.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnGateway AWS API Documentation
+    #
     class VpnGateway < Struct.new(
       :vpn_gateway_id,
       :state,
@@ -22456,6 +23626,8 @@ module Aws::EC2
     # @!attribute [rw] state
     #   The current state of the static route.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpnStaticRoute AWS API Documentation
     #
     class VpnStaticRoute < Struct.new(
       :destination_cidr_block,

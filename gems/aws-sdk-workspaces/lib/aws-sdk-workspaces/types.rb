@@ -14,6 +14,8 @@ module Aws::WorkSpaces
     #   The name of the compute type for the bundle.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ComputeType AWS API Documentation
+    #
     class ComputeType < Struct.new(
       :name)
       include Aws::Structure
@@ -42,6 +44,8 @@ module Aws::WorkSpaces
     #   The tags of the request.
     #   @return [Array<Types::Tag>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest AWS API Documentation
+    #
     class CreateTagsRequest < Struct.new(
       :resource_id,
       :tags)
@@ -49,6 +53,8 @@ module Aws::WorkSpaces
     end
 
     # The result of the CreateTags operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsResult AWS API Documentation
     #
     class CreateTagsResult < Aws::EmptyStructure; end
 
@@ -84,6 +90,8 @@ module Aws::WorkSpaces
     #   An array of structures that specify the WorkSpaces to create.
     #   @return [Array<Types::WorkspaceRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesRequest AWS API Documentation
+    #
     class CreateWorkspacesRequest < Struct.new(
       :workspaces)
       include Aws::Structure
@@ -105,6 +113,8 @@ module Aws::WorkSpaces
     #   DescribeWorkspaces with this identifier, no information will be
     #   returned.
     #   @return [Array<Types::Workspace>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateWorkspacesResult AWS API Documentation
     #
     class CreateWorkspacesResult < Struct.new(
       :failed_requests,
@@ -137,6 +147,8 @@ module Aws::WorkSpaces
     #   The WorkSpace user is an administrator on the WorkSpace.
     #   @return [Boolean]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultWorkspaceCreationProperties AWS API Documentation
+    #
     class DefaultWorkspaceCreationProperties < Struct.new(
       :enable_work_docs,
       :enable_internet_access,
@@ -164,6 +176,8 @@ module Aws::WorkSpaces
     #   The tag keys of the request.
     #   @return [Array<String>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTagsRequest AWS API Documentation
+    #
     class DeleteTagsRequest < Struct.new(
       :resource_id,
       :tag_keys)
@@ -171,6 +185,8 @@ module Aws::WorkSpaces
     end
 
     # The result of the DeleteTags operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTagsResult AWS API Documentation
     #
     class DeleteTagsResult < Aws::EmptyStructure; end
 
@@ -187,6 +203,8 @@ module Aws::WorkSpaces
     #   The resource ID of the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest AWS API Documentation
+    #
     class DescribeTagsRequest < Struct.new(
       :resource_id)
       include Aws::Structure
@@ -197,6 +215,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] tag_list
     #   The list of tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsResult AWS API Documentation
     #
     class DescribeTagsResult < Struct.new(
       :tag_list)
@@ -237,6 +257,8 @@ module Aws::WorkSpaces
     #   null if this is the first call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundlesRequest AWS API Documentation
+    #
     class DescribeWorkspaceBundlesRequest < Struct.new(
       :bundle_ids,
       :owner,
@@ -256,6 +278,8 @@ module Aws::WorkSpaces
     #   retrieve the next set of items. This token is valid for one day and
     #   must be used within that time frame.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceBundlesResult AWS API Documentation
     #
     class DescribeWorkspaceBundlesResult < Struct.new(
       :bundles,
@@ -284,6 +308,8 @@ module Aws::WorkSpaces
     #   null if this is the first call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesRequest AWS API Documentation
+    #
     class DescribeWorkspaceDirectoriesRequest < Struct.new(
       :directory_ids,
       :next_token)
@@ -303,6 +329,8 @@ module Aws::WorkSpaces
     #   retrieve the next set of items. This token is valid for one day and
     #   must be used within that time frame.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspaceDirectoriesResult AWS API Documentation
     #
     class DescribeWorkspaceDirectoriesResult < Struct.new(
       :directories,
@@ -326,6 +354,8 @@ module Aws::WorkSpaces
     #   The next token of the request.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusRequest AWS API Documentation
+    #
     class DescribeWorkspacesConnectionStatusRequest < Struct.new(
       :workspace_ids,
       :next_token)
@@ -339,6 +369,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] next_token
     #   The next token of the result.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesConnectionStatusResult AWS API Documentation
     #
     class DescribeWorkspacesConnectionStatusResult < Struct.new(
       :workspaces_connection_status,
@@ -398,6 +430,8 @@ module Aws::WorkSpaces
     #   null if this is the first call.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesRequest AWS API Documentation
+    #
     class DescribeWorkspacesRequest < Struct.new(
       :workspace_ids,
       :directory_id,
@@ -425,6 +459,8 @@ module Aws::WorkSpaces
     #   must be used within that time frame.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeWorkspacesResult AWS API Documentation
+    #
     class DescribeWorkspacesResult < Struct.new(
       :workspaces,
       :next_token)
@@ -445,6 +481,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] error_message
     #   The textual error message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedCreateWorkspaceRequest AWS API Documentation
     #
     class FailedCreateWorkspaceRequest < Struct.new(
       :workspace_request,
@@ -469,6 +507,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] error_message
     #   The textual error message.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedWorkspaceChangeRequest AWS API Documentation
     #
     class FailedWorkspaceChangeRequest < Struct.new(
       :workspace_id,
@@ -496,12 +536,16 @@ module Aws::WorkSpaces
     #   The WorkSpace properties of the request.
     #   @return [Types::WorkspaceProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesRequest AWS API Documentation
+    #
     class ModifyWorkspacePropertiesRequest < Struct.new(
       :workspace_id,
       :workspace_properties)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspacePropertiesResult AWS API Documentation
+    #
     class ModifyWorkspacePropertiesResult < Aws::EmptyStructure; end
 
     # Contains information used with the RebootWorkspaces operation to
@@ -517,6 +561,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace to reboot.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootRequest AWS API Documentation
     #
     class RebootRequest < Struct.new(
       :workspace_id)
@@ -540,6 +586,8 @@ module Aws::WorkSpaces
     #   An array of structures that specify the WorkSpaces to reboot.
     #   @return [Array<Types::RebootRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspacesRequest AWS API Documentation
+    #
     class RebootWorkspacesRequest < Struct.new(
       :reboot_workspace_requests)
       include Aws::Structure
@@ -551,6 +599,8 @@ module Aws::WorkSpaces
     #   An array of structures representing any WorkSpaces that could not be
     #   rebooted.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootWorkspacesResult AWS API Documentation
     #
     class RebootWorkspacesResult < Struct.new(
       :failed_requests)
@@ -570,6 +620,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace to rebuild.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildRequest AWS API Documentation
     #
     class RebuildRequest < Struct.new(
       :workspace_id)
@@ -593,6 +645,8 @@ module Aws::WorkSpaces
     #   An array of structures that specify the WorkSpaces to rebuild.
     #   @return [Array<Types::RebuildRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesRequest AWS API Documentation
+    #
     class RebuildWorkspacesRequest < Struct.new(
       :rebuild_workspace_requests)
       include Aws::Structure
@@ -604,6 +658,8 @@ module Aws::WorkSpaces
     #   An array of structures representing any WorkSpaces that could not be
     #   rebuilt.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebuildWorkspacesResult AWS API Documentation
     #
     class RebuildWorkspacesResult < Struct.new(
       :failed_requests)
@@ -622,6 +678,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] workspace_id
     #   The ID of the WorkSpace.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartRequest AWS API Documentation
     #
     class StartRequest < Struct.new(
       :workspace_id)
@@ -643,6 +701,8 @@ module Aws::WorkSpaces
     #   The requests.
     #   @return [Array<Types::StartRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesRequest AWS API Documentation
+    #
     class StartWorkspacesRequest < Struct.new(
       :start_workspace_requests)
       include Aws::Structure
@@ -651,6 +711,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] failed_requests
     #   The failed requests.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StartWorkspacesResult AWS API Documentation
     #
     class StartWorkspacesResult < Struct.new(
       :failed_requests)
@@ -669,6 +731,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] workspace_id
     #   The ID of the WorkSpace.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopRequest AWS API Documentation
     #
     class StopRequest < Struct.new(
       :workspace_id)
@@ -690,6 +754,8 @@ module Aws::WorkSpaces
     #   The requests.
     #   @return [Array<Types::StopRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesRequest AWS API Documentation
+    #
     class StopWorkspacesRequest < Struct.new(
       :stop_workspace_requests)
       include Aws::Structure
@@ -698,6 +764,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] failed_requests
     #   The failed requests.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/StopWorkspacesResult AWS API Documentation
     #
     class StopWorkspacesResult < Struct.new(
       :failed_requests)
@@ -722,6 +790,8 @@ module Aws::WorkSpaces
     #   The value of the tag.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Tag AWS API Documentation
+    #
     class Tag < Struct.new(
       :key,
       :value)
@@ -741,6 +811,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] workspace_id
     #   The identifier of the WorkSpace to terminate.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateRequest AWS API Documentation
     #
     class TerminateRequest < Struct.new(
       :workspace_id)
@@ -764,6 +836,8 @@ module Aws::WorkSpaces
     #   An array of structures that specify the WorkSpaces to terminate.
     #   @return [Array<Types::TerminateRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesRequest AWS API Documentation
+    #
     class TerminateWorkspacesRequest < Struct.new(
       :terminate_workspace_requests)
       include Aws::Structure
@@ -776,6 +850,8 @@ module Aws::WorkSpaces
     #   terminated.
     #   @return [Array<Types::FailedWorkspaceChangeRequest>]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/TerminateWorkspacesResult AWS API Documentation
+    #
     class TerminateWorkspacesResult < Struct.new(
       :failed_requests)
       include Aws::Structure
@@ -786,6 +862,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] capacity
     #   The amount of user storage for the bundle.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UserStorage AWS API Documentation
     #
     class UserStorage < Struct.new(
       :capacity)
@@ -854,6 +932,8 @@ module Aws::WorkSpaces
     #   Describes the properties of a WorkSpace.
     #   @return [Types::WorkspaceProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/Workspace AWS API Documentation
+    #
     class Workspace < Struct.new(
       :workspace_id,
       :directory_id,
@@ -900,6 +980,8 @@ module Aws::WorkSpaces
     #   A ComputeType object that specifies the compute type for the bundle.
     #   @return [Types::ComputeType]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceBundle AWS API Documentation
+    #
     class WorkspaceBundle < Struct.new(
       :bundle_id,
       :name,
@@ -928,6 +1010,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] last_known_user_connection_timestamp
     #   The timestamp of the last known user connection.
     #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceConnectionStatus AWS API Documentation
     #
     class WorkspaceConnectionStatus < Struct.new(
       :workspace_id,
@@ -996,6 +1080,8 @@ module Aws::WorkSpaces
     #   WorkSpaces in the directory.
     #   @return [Types::DefaultWorkspaceCreationProperties]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory AWS API Documentation
+    #
     class WorkspaceDirectory < Struct.new(
       :directory_id,
       :alias,
@@ -1032,6 +1118,8 @@ module Aws::WorkSpaces
     #   The time after a user logs off when WorkSpaces are automatically
     #   stopped. Configured in 60 minute intervals.
     #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceProperties AWS API Documentation
     #
     class WorkspaceProperties < Struct.new(
       :running_mode,
@@ -1102,6 +1190,8 @@ module Aws::WorkSpaces
     # @!attribute [rw] tags
     #   The tags of the WorkSpace request.
     #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceRequest AWS API Documentation
     #
     class WorkspaceRequest < Struct.new(
       :directory_id,

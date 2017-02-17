@@ -20,11 +20,15 @@ module Aws::Polly
     #   the region.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconInput AWS API Documentation
+    #
     class DeleteLexiconInput < Struct.new(
       :name)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconOutput AWS API Documentation
+    #
     class DeleteLexiconOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeVoicesInput
@@ -48,6 +52,8 @@ module Aws::Polly
     #   continue the listing.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoicesInput AWS API Documentation
+    #
     class DescribeVoicesInput < Struct.new(
       :language_code,
       :next_token)
@@ -63,6 +69,8 @@ module Aws::Polly
     #   listing of voices. `NextToken` is returned only if the response is
     #   truncated.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DescribeVoicesOutput AWS API Documentation
     #
     class DescribeVoicesOutput < Struct.new(
       :voices,
@@ -81,6 +89,8 @@ module Aws::Polly
     #   Name of the lexicon.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexiconInput AWS API Documentation
+    #
     class GetLexiconInput < Struct.new(
       :name)
       include Aws::Structure
@@ -96,6 +106,8 @@ module Aws::Polly
     #   language code, lexicon ARN, number of lexemes defined in the
     #   lexicon, and size of lexicon in bytes.
     #   @return [Types::LexiconAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/GetLexiconOutput AWS API Documentation
     #
     class GetLexiconOutput < Struct.new(
       :lexicon,
@@ -119,6 +131,8 @@ module Aws::Polly
     # @!attribute [rw] name
     #   Name of the lexicon.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Lexicon AWS API Documentation
     #
     class Lexicon < Struct.new(
       :content,
@@ -161,6 +175,8 @@ module Aws::Polly
     #   Total size of the lexicon, in characters.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconAttributes AWS API Documentation
+    #
     class LexiconAttributes < Struct.new(
       :alphabet,
       :language_code,
@@ -181,6 +197,8 @@ module Aws::Polly
     #   Provides lexicon metadata.
     #   @return [Types::LexiconAttributes]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/LexiconDescription AWS API Documentation
+    #
     class LexiconDescription < Struct.new(
       :name,
       :attributes)
@@ -200,6 +218,8 @@ module Aws::Polly
     #   lexicons.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexiconsInput AWS API Documentation
+    #
     class ListLexiconsInput < Struct.new(
       :next_token)
       include Aws::Structure
@@ -214,6 +234,8 @@ module Aws::Polly
     #   listing of lexicons. `NextToken` is returned only if the response is
     #   truncated.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListLexiconsOutput AWS API Documentation
     #
     class ListLexiconsOutput < Struct.new(
       :lexicons,
@@ -239,12 +261,16 @@ module Aws::Polly
     #   Content of the PLS lexicon as string data.
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconInput AWS API Documentation
+    #
     class PutLexiconInput < Struct.new(
       :name,
       :content)
       include Aws::Structure
     end
 
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput AWS API Documentation
+    #
     class PutLexiconOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass SynthesizeSpeechInput
@@ -307,6 +333,8 @@ module Aws::Polly
     #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
     #   @return [String]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechInput AWS API Documentation
+    #
     class SynthesizeSpeechInput < Struct.new(
       :lexicon_names,
       :output_format,
@@ -340,6 +368,8 @@ module Aws::Polly
     #   Number of characters synthesized.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/SynthesizeSpeechOutput AWS API Documentation
+    #
     class SynthesizeSpeechOutput < Struct.new(
       :audio_stream,
       :content_type,
@@ -371,6 +401,8 @@ module Aws::Polly
     #   a human readable voice name that you might display in your
     #   application.
     #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/Voice AWS API Documentation
     #
     class Voice < Struct.new(
       :gender,

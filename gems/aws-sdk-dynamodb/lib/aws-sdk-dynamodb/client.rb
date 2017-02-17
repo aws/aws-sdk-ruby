@@ -398,6 +398,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItem AWS API Documentation
+    #
     # @overload batch_get_item(params = {})
     # @param [Hash] params ({})
     def batch_get_item(params = {}, options = {})
@@ -594,6 +596,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
     #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
     #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItem AWS API Documentation
     #
     # @overload batch_write_item(params = {})
     # @param [Hash] params ({})
@@ -906,6 +910,8 @@ module Aws::DynamoDB
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTable AWS API Documentation
+    #
     # @overload create_table(params = {})
     # @param [Hash] params ({})
     def create_table(params = {}, options = {})
@@ -1148,6 +1154,8 @@ module Aws::DynamoDB
     #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
     #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItem AWS API Documentation
+    #
     # @overload delete_item(params = {})
     # @param [Hash] params ({})
     def delete_item(params = {}, options = {})
@@ -1244,6 +1252,8 @@ module Aws::DynamoDB
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTable AWS API Documentation
+    #
     # @overload delete_table(params = {})
     # @param [Hash] params ({})
     def delete_table(params = {}, options = {})
@@ -1334,6 +1344,8 @@ module Aws::DynamoDB
     #   resp.table_max_read_capacity_units #=> Integer
     #   resp.table_max_write_capacity_units #=> Integer
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeLimits AWS API Documentation
+    #
     # @overload describe_limits(params = {})
     # @param [Hash] params ({})
     def describe_limits(params = {}, options = {})
@@ -1419,6 +1431,8 @@ module Aws::DynamoDB
     #   resp.table.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
     #   resp.table.latest_stream_label #=> String
     #   resp.table.latest_stream_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTable AWS API Documentation
     #
     # @overload describe_table(params = {})
     # @param [Hash] params ({})
@@ -1582,6 +1596,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItem AWS API Documentation
+    #
     # @overload get_item(params = {})
     # @param [Hash] params ({})
     def get_item(params = {}, options = {})
@@ -1619,6 +1635,8 @@ module Aws::DynamoDB
     #   resp.table_names #=> Array
     #   resp.table_names[0] #=> String
     #   resp.last_evaluated_table_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTables AWS API Documentation
     #
     # @overload list_tables(params = {})
     # @param [Hash] params ({})
@@ -1664,6 +1682,8 @@ module Aws::DynamoDB
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
     #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResource AWS API Documentation
     #
     # @overload list_tags_of_resource(params = {})
     # @param [Hash] params ({})
@@ -1938,6 +1958,8 @@ module Aws::DynamoDB
     #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
     #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItem AWS API Documentation
     #
     # @overload put_item(params = {})
     # @param [Hash] params ({})
@@ -2399,6 +2421,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Query AWS API Documentation
+    #
     # @overload query(params = {})
     # @param [Hash] params ({})
     def query(params = {}, options = {})
@@ -2784,6 +2808,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes #=> Hash
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Scan AWS API Documentation
+    #
     # @overload scan(params = {})
     # @param [Hash] params ({})
     def scan(params = {}, options = {})
@@ -2824,6 +2850,8 @@ module Aws::DynamoDB
     #     ],
     #   })
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResource AWS API Documentation
+    #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
@@ -2858,6 +2886,8 @@ module Aws::DynamoDB
     #     resource_arn: "ResourceArnString", # required
     #     tag_keys: ["TagKeyString"], # required
     #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResource AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -3209,6 +3239,8 @@ module Aws::DynamoDB
     #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
     #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItem AWS API Documentation
+    #
     # @overload update_item(params = {})
     # @param [Hash] params ({})
     def update_item(params = {}, options = {})
@@ -3385,6 +3417,8 @@ module Aws::DynamoDB
     #   resp.table_description.latest_stream_label #=> String
     #   resp.table_description.latest_stream_arn #=> String
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTable AWS API Documentation
+    #
     # @overload update_table(params = {})
     # @param [Hash] params ({})
     def update_table(params = {}, options = {})
@@ -3405,7 +3439,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 
