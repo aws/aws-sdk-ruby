@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.11 (2017-02-17)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 * Issue - Aws::EmptyStructure - Due to an issue with how Ruby constants work, and with how Empty Structures are assigned to API response shapes, you could see incorrect response types for certain empty API responses depending on load order. With this change, all empty responses will be of the `Aws::EmptyStructure` type. This does not change the available methods or behavior of those responses.
