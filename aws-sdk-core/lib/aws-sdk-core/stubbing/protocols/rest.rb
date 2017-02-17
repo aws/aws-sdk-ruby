@@ -40,7 +40,7 @@ module Aws
 
         def build_body(api, operation, data)
           rules = operation.output
-          if head_operation(api, operation)
+          if head_operation(operation)
             ""
           elsif streaming?(rules)
             data[rules[:payload]]
@@ -70,12 +70,8 @@ module Aws
           end
         end
 
-        def head_operation(api, operation)
-          prefix_operation_pairs = {
-            "s3" => ["HeadObject", "HeadBucket"]
-          }
-          operations = prefix_operation_pairs[api.metadata["endpointPrefix"]]
-          operations && operations.include?(operation.name)
+        def head_operation(operation)
+          operation.http_method == "HEAD"
         end
 
       end
