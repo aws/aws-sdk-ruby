@@ -39,7 +39,8 @@ module Aws
         )
 
         start_flag = URI.parse(uri).query ? '&' : '?'
-        uri = "#{uri}#{start_flag}#{signed_content.map{ |k, v| "#{k}=#{v}" }.join('&').gsub("\n", '')}"
+        signature = signed_content.map{ |k, v| "#{k}=#{v}" }.join('&').gsub("\n", '')
+        uri = "#{uri}#{start_flag}#{signature}"
 
         if scheme == 'rtmp'
           rtmp_url(URI(uri))
