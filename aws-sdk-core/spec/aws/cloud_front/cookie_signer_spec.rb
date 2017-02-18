@@ -33,14 +33,20 @@ module Aws
             "http://abc.cloudfront.net/images/image.jpg",
             policy: policy.to_json
           )
-          expect(cookie.keys).to match_array(["CloudFront-Policy", "CloudFront-Signature", "CloudFront-Key-Pair-Id"])
+          expected = {'CloudFront-Policy' => 'eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaW1hZ2VzL2ltYWdlLmpwZyIsIkNvbmRpdGlvbiI6eyJJcEFkZHJlc3MiOnsiQVdTOlNvdXJjZUlwIjoiMTAuNTIuMTc2LjAvMjQifSwiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjEzNTcwMzQ0MDB9fX1dfQ__',
+                      'CloudFront-Signature' => 'n4V7xum3wA-w1PaCMyEMpWVXdfw-Yt8I26RpZJKc~Nk8yQh8LYOxewItGJXFq0BxnKuSEKoEVYVTFEteFAGKXwhkbC7K~JfL83aroPbRagjyG-V9Y5wMLccBAzMj5nHXxjvjlOu541VUR-RlR0KK106HT4-Hp1c~nyOmXs4R5mU_',
+                      'CloudFront-Key-Pair-Id' => 'CF_KEYPAIR_ID'}
+          expect(cookie).to eq(expected)
         end
         it 'can generate signed cookies with canned policy' do
           cookie = signer.signed_cookie(
             "https://abc.cloudfront.net/images/image.jpg?color=red",
             expires: expires
           )
-          expect(cookie.keys).to match_array(["CloudFront-Expires", "CloudFront-Signature", "CloudFront-Key-Pair-Id"])
+          expected = {'CloudFront-Expires' => '1357034400',
+                      'CloudFront-Signature' => 'GvrDx3aAG1u1sAQF68c~xD6LVORt36mRTvC2u5RwLjsvusXI0sJPxy3D0R8AQp4qFZlRehwh~mablw8DBNRFLQ81mazmbrUOhXbuepav5ZmCU-KgOmXtpMS49L7TLGUSfwSksDx1qriAtB4mS4iJaNt2mfo0C5G-vlt9qMftkJg_',
+                      'CloudFront-Key-Pair-Id' => 'CF_KEYPAIR_ID'}
+          expect(cookie).to eq(expected)
         end
       end
     end
