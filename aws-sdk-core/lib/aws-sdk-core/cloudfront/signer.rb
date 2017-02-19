@@ -25,35 +25,17 @@ module Aws
         @private_key = private_key(options)
       end
 
-      # create a signed Amazon CloudFront URL
-      # @param [String] url
-      # @option params [Time, DateTime, Date, String, Integer<timestamp>] :expires
-      # @option params [String<JSON>] :policy
-      def signed_url(url, params = {})
+      private
+
+      def scheme_and_uri(url)
         url_sections = url.split('://')
         if url_sections.length < 2
           raise ArgumentError, "Invaild URL:#{url}"
         end
-        # removing wildcard character to get real scheme
         scheme = url_sections[0].gsub('*', '')
         uri = "#{scheme}://#{url_sections[1]}"
-        signed_content = signature(
-          resource: resource(scheme, uri),
-          expires: time(params[:expires]),
-          policy: params[:policy]
-        )
-
-        start_flag = URI.parse(uri).query ? '&' : '?'
-        uri = "#{uri}#{start_flag}#{signed_content.map{ |k, v| "#{k}=#{v}" }.join('&').gsub("\n", '')}"
-
-        if scheme == 'rtmp'
-          rtmp_url(URI(uri))
-        else
-          uri
-        end
+        [scheme, uri]
       end
-
-      private
 
       def time(expires)
         case expires

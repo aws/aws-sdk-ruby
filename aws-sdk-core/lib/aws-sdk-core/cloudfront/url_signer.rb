@@ -25,13 +25,7 @@ module Aws
       # @option params [Time, DateTime, Date, String, Integer<timestamp>] :expires
       # @option params [String<JSON>] :policy
       def signed_url(url, params = {})
-        url_sections = url.split('://')
-        if url_sections.length < 2
-          raise ArgumentError, "Invaild URL:#{url}"
-        end
-        # removing wildcard character to get real scheme
-        scheme = url_sections[0].gsub('*', '')
-        uri = "#{scheme}://#{url_sections[1]}"
+        scheme, uri = scheme_and_uri(url)
         signed_content = signature(
           resource: resource(scheme, uri),
           expires: time(params[:expires]),
