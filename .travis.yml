@@ -6,6 +6,7 @@ rvm:
   - 2.1
   - 2.2
   - 2.3.0
+  - ruby-head
   - jruby
 
 sudo: false
@@ -25,6 +26,8 @@ matrix:
   include:
     - rvm: 2.3.0
       env: OLD_OJ=1
+  allow_failures:
+    - rvm: ruby-head
 
 notifications:
   webhooks:

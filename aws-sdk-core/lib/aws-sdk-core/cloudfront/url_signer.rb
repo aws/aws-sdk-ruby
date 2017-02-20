@@ -62,7 +62,7 @@ module Aws
         when Time then expires.to_i
         when DateTime, Date then expires.to_time.to_i
         when String then Time.parse(expires).to_i
-        when Integer, NIL then expires
+        when Integer, NilClass then expires
         else
           msg = "expected a time value for :expires, got `#{expires.class}'"
           raise ArgumentError, msg
