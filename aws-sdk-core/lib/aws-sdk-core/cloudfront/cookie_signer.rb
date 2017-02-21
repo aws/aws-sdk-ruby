@@ -13,7 +13,7 @@ module Aws
     #       key_pair_id: "cf-keypair-id",
     #       private_key_path: "./cf_private_key.pem"
     #     )
-    #     url = signer.signed_cookie(url,
+    #     cookies = signer.signed_cookie(url,
     #       policy: policy.to_json
     #     )
     #

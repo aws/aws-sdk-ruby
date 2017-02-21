@@ -7,14 +7,6 @@ require 'openssl'
 module Aws
   module CloudFront
 
-    # Allows you to create signed URLs for Amazon CloudFront resources
-    #
-    #     signer = Aws::CloudFront::UrlSigner.new
-    #     url = signer.signed_url(url,
-    #       key_pair_id: "cf-keypair-id",
-    #       private_key_path: "./cf_private_key.pem"
-    #     )
-    #
     module Signer
 
       # @option options [String] :key_pair_id
