@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudDirectory - Updated the documentation for Amazon CloudDirectory.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
 2.7.12 (2017-02-21)
 ------------------
 
