@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.13 (2017-02-22)
+------------------
+
 * Feature - Aws::CloudDirectory - Updated the documentation for Amazon CloudDirectory.
 
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
