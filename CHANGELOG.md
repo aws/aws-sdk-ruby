@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.15 (2017-02-24)
+------------------
+
 * Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
 
 2.7.14 (2017-02-23)
