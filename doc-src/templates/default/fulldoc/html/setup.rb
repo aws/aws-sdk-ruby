@@ -34,7 +34,7 @@ def class_list_children(children, options)
   out = ''
   children.compact.sort_by(&:path).each do |child|
     if child.is_a?(CodeObjects::NamespaceObject)
-      next if child.tag(:service) if skip_services
+      next if child.has_tag?(:service) if skip_services
       name = child.namespace.is_a?(CodeObjects::Proxy) ? child.path : child.name
       grand_children = run_verifier(child.children)
       is_parent = grand_children.any? {|o| o.is_a?(CodeObjects::NamespaceObject) }
@@ -43,7 +43,7 @@ def class_list_children(children, options)
       out << "<a class='toggle'></a> " if is_parent
       out << linkify(child, name)
       out << " &lt; #{child.superclass.name}" if child.is_a?(CodeObjects::ClassObject) && child.superclass
-      out << " (aws-sdk-#{name.downcase})" if child.tag(:service)
+      out << " (aws-sdk-#{name.downcase})" if child.has_tag?(:service)
       out << "<small class='search_info'>"
       out << child.namespace.title
       out << "</small>"

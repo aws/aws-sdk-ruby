@@ -1,4 +1,4 @@
---title 'AWS SDK for Ruby V2'
+--title 'AWS SDK for Ruby V3'
 --output-dir api-docs
 --template-path doc-src/templates
 --markup markdown
