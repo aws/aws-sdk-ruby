@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.7.16 (2017-02-27)
+------------------
+
 * Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
 
 * Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
