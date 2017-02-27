@@ -87,8 +87,10 @@ module Aws
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
+    MechanicalTurkRequester
     OpsWorks
     OpsWorksCM
+    Organizations
     Pinpoint
     Polly
     RDS

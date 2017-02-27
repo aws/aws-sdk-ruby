@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
+* Feature - Aws::MechanicalTurkRequester - Added support for a new service, Amazon Mechanical Turk Requester Service.
+
+* Feature - Aws::Organizations - Added support for a new service, AWS Organizations.
+
 2.7.15 (2017-02-24)
 ------------------
 
