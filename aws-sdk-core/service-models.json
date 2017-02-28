@@ -254,7 +254,7 @@
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
   },
-  "MechanicalTurkRequester": {
+  "MTurk": {
     "models": "mturk-requester/2017-01-17",
     "endpoint": "mturk-requester"
   },

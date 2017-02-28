@@ -87,7 +87,7 @@ module Aws
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
-    MechanicalTurkRequester
+    MTurk
     OpsWorks
     OpsWorksCM
     Organizations

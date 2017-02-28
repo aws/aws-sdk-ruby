@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::MTurk - Changed the module name of `Aws::MechanicalTurkRequester` to `Aws::MTurk`. Make sure to change any client references to the newer module name.
+
 2.7.16 (2017-02-27)
 ------------------
 
