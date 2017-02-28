@@ -322,7 +322,7 @@ to be backwards compatible.
 | Amazon Lex Runtime Service               | Lex                          | 2016-11-28  |
 | Amazon Lightsail                         | Lightsail                    | 2016-11-28  |
 | Amazon Machine Learning                  | MachineLearning              | 2014-12-12  |
-| Amazon Mechanical Turk Requester Service | MechanicalTurkRequester      | 2017-01-17  |
+| Amazon Mechanical Turk Requester Service | MTurk                        | 2017-01-17  |
 | Amazon Pinpoint                          | Pinpoint                     | 2016-12-01  |
 | Amazon Polly                             | Polly                        | 2016-06-10  |
 | Amazon Redshift                          | Redshift                     | 2012-12-01  |
