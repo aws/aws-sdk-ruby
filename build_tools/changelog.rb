@@ -32,6 +32,7 @@ module BuildTools
       lines = read.lines.to_a
       lines[0] = "#{version} (#{date})\n"
       write(lines.join)
+      add_unreleased_changes_section
     end
 
     # @option options [required, Symbol] :type
