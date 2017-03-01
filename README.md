@@ -246,99 +246,102 @@ to be backwards compatible.
 
 ## Supported Services
 
-| Service Name                        | Service Class                | API Version |
-| ----------------------------------- | ---------------------------- | ----------- |
-| AWS Application Discovery Service   | ApplicationDiscoveryService  | 2015-11-01  |
-| AWS Batch                           | Batch                        | 2016-08-10  |
-| AWS Budgets                         | Budgets                      | 2016-10-20  |
-| AWS Certificate Manager             | ACM                          | 2015-12-08  |
-| AWS CloudFormation                  | CloudFormation               | 2010-05-15  |
-| AWS CloudTrail                      | CloudTrail                   | 2013-11-01  |
-| AWS CodeBuild                       | CodeBuild                    | 2016-10-06  |
-| AWS CodeCommit                      | CodeCommit                   | 2015-04-13  |
-| AWS CodeDeploy                      | CodeDeploy                   | 2014-10-06  |
-| AWS CodePipeline                    | CodePipeline                 | 2015-07-09  |
-| AWS Config                          | ConfigService                | 2014-11-12  |
-| AWS Cost and Usage Report Service   | CostandUsageReportService    | 2017-01-06  |
-| AWS Data Pipeline                   | DataPipeline                 | 2012-10-29  |
-| AWS Database Migration Service      | DatabaseMigrationService     | 2016-01-01  |
-| AWS Device Farm                     | DeviceFarm                   | 2015-06-23  |
-| AWS Direct Connect                  | DirectConnect                | 2012-10-25  |
-| AWS Directory Service               | DirectoryService             | 2015-04-16  |
-| AWS Elastic Beanstalk               | ElasticBeanstalk             | 2010-12-01  |
-| AWS Health APIs and Notifications   | Health                       | 2016-08-04  |
-| AWS Identity and Access Management  | IAM                          | 2010-05-08  |
-| AWS Import/Export                   | ImportExport                 | 2010-06-01  |
-| AWS IoT                             | IoT                          | 2015-05-28  |
-| AWS IoT Data Plane                  | IoTDataPlane                 | 2015-05-28  |
-| AWS Key Management Service          | KMS                          | 2014-11-01  |
-| AWS Lambda                          | LambdaPreview                | 2014-11-11  |
-| AWS Lambda                          | Lambda                       | 2015-03-31  |
-| AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics | 2015-07-01  |
-| AWS OpsWorks                        | OpsWorks                     | 2013-02-18  |
-| AWS OpsWorks for Chef Automate      | OpsWorksCM                   | 2016-11-01  |
-| AWS Security Token Service          | STS                          | 2011-06-15  |
-| AWS Server Migration Service        | SMS                          | 2016-10-24  |
-| AWS Service Catalog                 | ServiceCatalog               | 2015-12-10  |
-| AWS Shield                          | Shield                       | 2016-06-02  |
-| AWS Step Functions                  | States                       | 2016-11-23  |
-| AWS Storage Gateway                 | StorageGateway               | 2013-06-30  |
-| AWS Support                         | Support                      | 2013-04-15  |
-| AWS WAF                             | WAF                          | 2015-08-24  |
-| AWS WAF Regional                    | WAFRegional                  | 2016-11-28  |
-| AWS X-Ray                           | XRay                         | 2016-04-12  |
-| AWSMarketplace Metering             | MarketplaceMetering          | 2016-01-14  |
-| Amazon API Gateway                  | APIGateway                   | 2015-07-09  |
-| Amazon AppStream                    | AppStream                    | 2016-12-01  |
-| Amazon CloudDirectory               | CloudDirectory               | 2016-05-10  |
-| Amazon CloudFront                   | CloudFront                   | 2016-11-25  |
-| Amazon CloudHSM                     | CloudHSM                     | 2014-05-30  |
-| Amazon CloudSearch                  | CloudSearch                  | 2013-01-01  |
-| Amazon CloudSearch Domain           | CloudSearchDomain            | 2013-01-01  |
-| Amazon CloudWatch                   | CloudWatch                   | 2010-08-01  |
-| Amazon CloudWatch Events            | CloudWatchEvents             | 2015-10-07  |
-| Amazon CloudWatch Logs              | CloudWatchLogs               | 2014-03-28  |
-| Amazon Cognito Identity             | CognitoIdentity              | 2014-06-30  |
-| Amazon Cognito Identity Provider    | CognitoIdentityProvider      | 2016-04-18  |
-| Amazon Cognito Sync                 | CognitoSync                  | 2014-06-30  |
-| Amazon DynamoDB                     | DynamoDB                     | 2012-08-10  |
-| Amazon DynamoDB Streams             | DynamoDBStreams              | 2012-08-10  |
-| Amazon EC2 Container Registry       | ECR                          | 2015-09-21  |
-| Amazon EC2 Container Service        | ECS                          | 2014-11-13  |
-| Amazon ElastiCache                  | ElastiCache                  | 2015-02-02  |
-| Amazon Elastic Compute Cloud        | EC2                          | 2016-11-15  |
-| Amazon Elastic File System          | EFS                          | 2015-02-01  |
-| Amazon Elastic MapReduce            | EMR                          | 2009-03-31  |
-| Amazon Elastic Transcoder           | ElasticTranscoder            | 2012-09-25  |
-| Amazon Elasticsearch Service        | ElasticsearchService         | 2015-01-01  |
-| Amazon GameLift                     | GameLift                     | 2015-10-01  |
-| Amazon Glacier                      | Glacier                      | 2012-06-01  |
-| Amazon Import/Export Snowball       | Snowball                     | 2016-06-30  |
-| Amazon Inspector                    | Inspector                    | 2016-02-16  |
-| Amazon Kinesis                      | Kinesis                      | 2013-12-02  |
-| Amazon Kinesis Analytics            | KinesisAnalytics             | 2015-08-14  |
-| Amazon Kinesis Firehose             | Firehose                     | 2015-08-04  |
-| Amazon Lightsail                    | Lightsail                    | 2016-11-28  |
-| Amazon Machine Learning             | MachineLearning              | 2014-12-12  |
-| Amazon Pinpoint                     | Pinpoint                     | 2016-12-01  |
-| Amazon Polly                        | Polly                        | 2016-06-10  |
-| Amazon Redshift                     | Redshift                     | 2012-12-01  |
-| Amazon Rekognition                  | Rekognition                  | 2016-06-27  |
-| Amazon Relational Database Service  | RDS                          | 2014-10-31  |
-| Amazon Route 53                     | Route53                      | 2013-04-01  |
-| Amazon Route 53 Domains             | Route53Domains               | 2014-05-15  |
-| Amazon Simple Email Service         | SES                          | 2010-12-01  |
-| Amazon Simple Notification Service  | SNS                          | 2010-03-31  |
-| Amazon Simple Queue Service         | SQS                          | 2012-11-05  |
-| Amazon Simple Storage Service       | S3                           | 2006-03-01  |
-| Amazon Simple Systems Manager (SSM) | SSM                          | 2014-11-06  |
-| Amazon Simple Workflow Service      | SWF                          | 2012-01-25  |
-| Amazon SimpleDB                     | SimpleDB                     | 2009-04-15  |
-| Amazon WorkSpaces                   | WorkSpaces                   | 2015-04-08  |
-| Application Auto Scaling            | ApplicationAutoScaling       | 2016-02-06  |
-| Auto Scaling                        | AutoScaling                  | 2011-01-01  |
-| Elastic Load Balancing              | ElasticLoadBalancing         | 2012-06-01  |
-| Elastic Load Balancing              | ElasticLoadBalancingV2       | 2015-12-01  |
+| Service Name                             | Service Class                | API Version |
+| ---------------------------------------- | ---------------------------- | ----------- |
+| AWS Application Discovery Service        | ApplicationDiscoveryService  | 2015-11-01  |
+| AWS Batch                                | Batch                        | 2016-08-10  |
+| AWS Budgets                              | Budgets                      | 2016-10-20  |
+| AWS Certificate Manager                  | ACM                          | 2015-12-08  |
+| AWS CloudFormation                       | CloudFormation               | 2010-05-15  |
+| AWS CloudTrail                           | CloudTrail                   | 2013-11-01  |
+| AWS CodeBuild                            | CodeBuild                    | 2016-10-06  |
+| AWS CodeCommit                           | CodeCommit                   | 2015-04-13  |
+| AWS CodeDeploy                           | CodeDeploy                   | 2014-10-06  |
+| AWS CodePipeline                         | CodePipeline                 | 2015-07-09  |
+| AWS Config                               | ConfigService                | 2014-11-12  |
+| AWS Cost and Usage Report Service        | CostandUsageReportService    | 2017-01-06  |
+| AWS Data Pipeline                        | DataPipeline                 | 2012-10-29  |
+| AWS Database Migration Service           | DatabaseMigrationService     | 2016-01-01  |
+| AWS Device Farm                          | DeviceFarm                   | 2015-06-23  |
+| AWS Direct Connect                       | DirectConnect                | 2012-10-25  |
+| AWS Directory Service                    | DirectoryService             | 2015-04-16  |
+| AWS Elastic Beanstalk                    | ElasticBeanstalk             | 2010-12-01  |
+| AWS Health APIs and Notifications        | Health                       | 2016-08-04  |
+| AWS Identity and Access Management       | IAM                          | 2010-05-08  |
+| AWS Import/Export                        | ImportExport                 | 2010-06-01  |
+| AWS IoT                                  | IoT                          | 2015-05-28  |
+| AWS IoT Data Plane                       | IoTDataPlane                 | 2015-05-28  |
+| AWS Key Management Service               | KMS                          | 2014-11-01  |
+| AWS Lambda                               | Lambda                       | 2015-03-31  |
+| AWS Lambda                               | LambdaPreview                | 2014-11-11  |
+| AWS Marketplace Commerce Analytics       | MarketplaceCommerceAnalytics | 2015-07-01  |
+| AWS OpsWorks                             | OpsWorks                     | 2013-02-18  |
+| AWS OpsWorks for Chef Automate           | OpsWorksCM                   | 2016-11-01  |
+| AWS Organizations                        | Organizations                | 2016-11-28  |
+| AWS Security Token Service               | STS                          | 2011-06-15  |
+| AWS Server Migration Service             | SMS                          | 2016-10-24  |
+| AWS Service Catalog                      | ServiceCatalog               | 2015-12-10  |
+| AWS Shield                               | Shield                       | 2016-06-02  |
+| AWS Step Functions                       | States                       | 2016-11-23  |
+| AWS Storage Gateway                      | StorageGateway               | 2013-06-30  |
+| AWS Support                              | Support                      | 2013-04-15  |
+| AWS WAF                                  | WAF                          | 2015-08-24  |
+| AWS WAF Regional                         | WAFRegional                  | 2016-11-28  |
+| AWS X-Ray                                | XRay                         | 2016-04-12  |
+| AWSMarketplace Metering                  | MarketplaceMetering          | 2016-01-14  |
+| Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
+| Amazon AppStream                         | AppStream                    | 2016-12-01  |
+| Amazon CloudDirectory                    | CloudDirectory               | 2016-05-10  |
+| Amazon CloudFront                        | CloudFront                   | 2016-11-25  |
+| Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
+| Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
+| Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
+| Amazon CloudWatch                        | CloudWatch                   | 2010-08-01  |
+| Amazon CloudWatch Events                 | CloudWatchEvents             | 2015-10-07  |
+| Amazon CloudWatch Logs                   | CloudWatchLogs               | 2014-03-28  |
+| Amazon Cognito Identity                  | CognitoIdentity              | 2014-06-30  |
+| Amazon Cognito Identity Provider         | CognitoIdentityProvider      | 2016-04-18  |
+| Amazon Cognito Sync                      | CognitoSync                  | 2014-06-30  |
+| Amazon DynamoDB                          | DynamoDB                     | 2012-08-10  |
+| Amazon DynamoDB Streams                  | DynamoDBStreams              | 2012-08-10  |
+| Amazon EC2 Container Registry            | ECR                          | 2015-09-21  |
+| Amazon EC2 Container Service             | ECS                          | 2014-11-13  |
+| Amazon ElastiCache                       | ElastiCache                  | 2015-02-02  |
+| Amazon Elastic Compute Cloud             | EC2                          | 2016-11-15  |
+| Amazon Elastic File System               | EFS                          | 2015-02-01  |
+| Amazon Elastic MapReduce                 | EMR                          | 2009-03-31  |
+| Amazon Elastic Transcoder                | ElasticTranscoder            | 2012-09-25  |
+| Amazon Elasticsearch Service             | ElasticsearchService         | 2015-01-01  |
+| Amazon GameLift                          | GameLift                     | 2015-10-01  |
+| Amazon Glacier                           | Glacier                      | 2012-06-01  |
+| Amazon Import/Export Snowball            | Snowball                     | 2016-06-30  |
+| Amazon Inspector                         | Inspector                    | 2016-02-16  |
+| Amazon Kinesis                           | Kinesis                      | 2013-12-02  |
+| Amazon Kinesis Analytics                 | KinesisAnalytics             | 2015-08-14  |
+| Amazon Kinesis Firehose                  | Firehose                     | 2015-08-04  |
+| Amazon Lex Runtime Service               | Lex                          | 2016-11-28  |
+| Amazon Lightsail                         | Lightsail                    | 2016-11-28  |
+| Amazon Machine Learning                  | MachineLearning              | 2014-12-12  |
+| Amazon Mechanical Turk Requester Service | MTurk                        | 2017-01-17  |
+| Amazon Pinpoint                          | Pinpoint                     | 2016-12-01  |
+| Amazon Polly                             | Polly                        | 2016-06-10  |
+| Amazon Redshift                          | Redshift                     | 2012-12-01  |
+| Amazon Rekognition                       | Rekognition                  | 2016-06-27  |
+| Amazon Relational Database Service       | RDS                          | 2014-10-31  |
+| Amazon Route 53                          | Route53                      | 2013-04-01  |
+| Amazon Route 53 Domains                  | Route53Domains               | 2014-05-15  |
+| Amazon Simple Email Service              | SES                          | 2010-12-01  |
+| Amazon Simple Notification Service       | SNS                          | 2010-03-31  |
+| Amazon Simple Queue Service              | SQS                          | 2012-11-05  |
+| Amazon Simple Storage Service            | S3                           | 2006-03-01  |
+| Amazon Simple Systems Manager (SSM)      | SSM                          | 2014-11-06  |
+| Amazon Simple Workflow Service           | SWF                          | 2012-01-25  |
+| Amazon SimpleDB                          | SimpleDB                     | 2009-04-15  |
+| Amazon WorkSpaces                        | WorkSpaces                   | 2015-04-08  |
+| Application Auto Scaling                 | ApplicationAutoScaling       | 2016-02-06  |
+| Auto Scaling                             | AutoScaling                  | 2011-01-01  |
+| Elastic Load Balancing                   | ElasticLoadBalancingV2       | 2015-12-01  |
+| Elastic Load Balancing                   | ElasticLoadBalancing         | 2012-06-01  |
 
 ## License
 

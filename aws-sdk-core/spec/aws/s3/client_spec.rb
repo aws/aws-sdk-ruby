@@ -580,6 +580,16 @@ module Aws
         end
       end
 
+      context 'metadata stubbing' do
+        it 'returns metadata from head operations' do
+          stub_client = S3::Client.new(stub_responses: {
+            head_object: { metadata: { 'custom_key' => 'abc' } }
+          })
+          resp = stub_client.head_object(bucket: "b", key: "k")
+          expect(resp.metadata).to eq({ 'custom_key' => 'abc' })
+        end
+      end
+
     end
   end
 end

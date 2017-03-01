@@ -10,6 +10,7 @@ coverage
 /vendor
 /release-notes.html
 /TODO
+*.DS_Store
 
 /developer_guide/output
 /developer_guide/tmp

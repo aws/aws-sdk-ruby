@@ -245,10 +245,11 @@ module Aws
       #   without any errors.
       #
       def upload_file(source, options = {})
+        uploading_options = options.dup
         uploader = FileUploader.new(
-          multipart_threshold: options.delete(:multipart_threshold),
+          multipart_threshold: uploading_options.delete(:multipart_threshold),
           client: client)
-        uploader.upload(source, options.merge(bucket: bucket_name, key: key))
+        uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
         true
       end
      

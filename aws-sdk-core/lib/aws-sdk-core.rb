@@ -1,5 +1,7 @@
 require 'jmespath'
 require 'seahorse'
+require_relative 'aws-sdk-core/structure'
+require_relative 'aws-sdk-core/empty_structure'
 
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',
@@ -8,6 +10,8 @@ Seahorse::Util.irregular_inflections({
   'ElastiCache' => 'elasticache',
   'iSCSI' => 'iscsi',
   'ACLs' => 'acls',
+  'HIT' => 'hit',
+  'URL' => 'url'
   #'SSEKMS' => 'sse_kms',
 })
 
@@ -78,12 +82,15 @@ module Aws
     KMS
     Lambda
     LambdaPreview
+    Lex
     Lightsail
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
+    MTurk
     OpsWorks
     OpsWorksCM
+    Organizations
     Pinpoint
     Polly
     RDS
@@ -132,7 +139,6 @@ module Aws
   autoload :Deprecations, 'aws-sdk-core/deprecations'
   autoload :EagerLoader, 'aws-sdk-core/eager_loader'
   autoload :ECSCredentials, 'aws-sdk-core/ecs_credentials'
-  autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
   autoload :IniParser, 'aws-sdk-core/ini_parser'
@@ -147,7 +153,6 @@ module Aws
   autoload :Service, 'aws-sdk-core/service'
   autoload :SharedConfig, 'aws-sdk-core/shared_config'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
-  autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
   autoload :TypeBuilder, 'aws-sdk-core/type_builder'
   autoload :VERSION, 'aws-sdk-core/version'
