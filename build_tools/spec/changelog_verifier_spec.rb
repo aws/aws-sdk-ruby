@@ -26,15 +26,17 @@ describe "ensures CHANGELOG.md has valid section ordering" do
 
   gem_paths.each do |path|
     file = File.open("#{path}CHANGELOG.md", 'r', encoding: 'UTF-8') { |f| f.read }
-    version = File.open("#{path}VERSION", 'r', encoding: 'UTF-8') { |f| f.read }.lines[0].strip
+    version_file = File.open("#{path}VERSION", 'r', encoding: 'UTF-8') { |f| f.read }
+    lines = file.lines.to_a
+    version = version_file.lines.to_a
 
     it "#{path}CHANGELOG.md starts with 'Unreleased Changes' section" do
-      expect(file.lines[0].strip).to eql("Unreleased Changes")
+      expect(lines[0].strip).to eql("Unreleased Changes")
     end
 
     first_version = file.lines.find {|l| l.match(/\d\.\d\.\d.*/) }
     it "#{path}CHANGLOG.md follows with current version section" do
-      expect(first_version).to match(version)
+      expect(first_version).to match(version[0].strip)
     end
   end
 
@@ -48,7 +50,7 @@ describe "ensures CHANGELOG.md has parsable entries" do
   log_paths.each do |path|
     it "#{path} has parsable changlog entries" do
       file = File.open(path,'r', encoding: 'UTF-8') { |f| f.read }
-      file.lines.each do |l|
+      file.lines.to_a.each do |l|
         next if l.strip.empty?
         next unless l.match(skip_pattern).nil?
         expect(l).to match(entry_pattern)
