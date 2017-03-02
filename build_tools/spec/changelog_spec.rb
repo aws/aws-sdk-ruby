@@ -26,6 +26,9 @@ LOG
     }
 
     let(:expected_version) { <<-LOG
+Unreleased Changes
+------------------
+
 foo.bar.baz (2017-02-08)
 ------------------
 
