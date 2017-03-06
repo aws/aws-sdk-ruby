@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Budgets - Updated the API for AWS Budgets.
+
+* Feature - Aws::CloudTrail - Updated the documentation, and API for AWS CloudTrail.
+
+* Feature - Aws::MTurk - Updated the API for Amazon Mechanical Turk.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks for Chef Automate.
+
 2.8.0 (2017-02-28)
 ------------------
 
