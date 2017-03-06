@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.8.1 (2017-03-06)
+------------------
+
 * Feature - Aws::Budgets - Updated the API for AWS Budgets.
 
 * Feature - Aws::CloudTrail - Updated the documentation, and API for AWS CloudTrail.
