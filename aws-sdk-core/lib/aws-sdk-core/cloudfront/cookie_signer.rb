@@ -20,7 +20,7 @@ module Aws
     class CookieSigner
       include Signer
 
-      # create a signed Amazon CloudFront URL
+      # create a set of signed Amazon CloudFront cookie parameters
       # @param [String] url
       # @option params [Time, DateTime, Date, String, Integer<timestamp>] :expires
       # @option params [String<JSON>] :policy
