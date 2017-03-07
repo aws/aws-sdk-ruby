@@ -186,6 +186,7 @@ module Aws
   module Plugins
     autoload :APIGatewayHeader, 'aws-sdk-core/plugins/api_gateway_header'
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
+    autoload :CSDSwitchToPost, 'aws-sdk-core/plugins/csd_switch_to_post'
     autoload :DynamoDBExtendedRetries, 'aws-sdk-core/plugins/dynamodb_extended_retries'
     autoload :DynamoDBSimpleAttributes, 'aws-sdk-core/plugins/dynamodb_simple_attributes'
     autoload :DynamoDBCRC32Validation, 'aws-sdk-core/plugins/dynamodb_crc32_validation'

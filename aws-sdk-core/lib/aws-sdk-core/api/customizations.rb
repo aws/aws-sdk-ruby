@@ -64,7 +64,8 @@ module Aws
       end
 
       plugins('cloudsearchdomain',
-        add: %w(Aws::Plugins::CSDConditionalSigning),
+        add: %w(Aws::Plugins::CSDConditionalSigning
+          Aws::Plugins::CSDSwitchToPost),
         remove: %w(Aws::Plugins::RegionalEndpoint),
       )
 
