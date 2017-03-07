@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Bugfix - Aws::Deploy - Restored paginators that were removed
+
+
 2.8.1 (2017-03-06)
 ------------------
 
