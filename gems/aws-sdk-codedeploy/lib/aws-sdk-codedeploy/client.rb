@@ -338,7 +338,7 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_name #=> String
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_target_arn #=> String
     #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_events #=> Array
-    #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_events[0] #=> String, one of "DeploymentStart", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop", "DeploymentRollback", "InstanceStart", "InstanceSuccess", "InstanceFailure"
+    #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_events[0] #=> String, one of "DeploymentStart", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop", "DeploymentRollback", "DeploymentReady", "InstanceStart", "InstanceSuccess", "InstanceFailure", "InstanceReady"
     #   resp.deployment_groups_info[0].alarm_configuration.enabled #=> Boolean
     #   resp.deployment_groups_info[0].alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.deployment_groups_info[0].alarm_configuration.alarms #=> Array
@@ -346,6 +346,15 @@ module Aws::CodeDeploy
     #   resp.deployment_groups_info[0].auto_rollback_configuration.enabled #=> Boolean
     #   resp.deployment_groups_info[0].auto_rollback_configuration.events #=> Array
     #   resp.deployment_groups_info[0].auto_rollback_configuration.events[0] #=> String, one of "DEPLOYMENT_FAILURE", "DEPLOYMENT_STOP_ON_ALARM", "DEPLOYMENT_STOP_ON_REQUEST"
+    #   resp.deployment_groups_info[0].deployment_style.deployment_type #=> String, one of "IN_PLACE", "BLUE_GREEN"
+    #   resp.deployment_groups_info[0].deployment_style.deployment_option #=> String, one of "WITH_TRAFFIC_CONTROL", "WITHOUT_TRAFFIC_CONTROL"
+    #   resp.deployment_groups_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
+    #   resp.deployment_groups_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
+    #   resp.deployment_groups_info[0].blue_green_deployment_configuration.deployment_ready_option.action_on_timeout #=> String, one of "CONTINUE_DEPLOYMENT", "STOP_DEPLOYMENT"
+    #   resp.deployment_groups_info[0].blue_green_deployment_configuration.deployment_ready_option.wait_time_in_minutes #=> Integer
+    #   resp.deployment_groups_info[0].blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
+    #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list #=> Array
+    #   resp.deployment_groups_info[0].load_balancer_info.elb_info_list[0].name #=> String
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroups AWS API Documentation
@@ -383,7 +392,7 @@ module Aws::CodeDeploy
     #   resp.instances_summary #=> Array
     #   resp.instances_summary[0].deployment_id #=> String
     #   resp.instances_summary[0].instance_id #=> String
-    #   resp.instances_summary[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.instances_summary[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
     #   resp.instances_summary[0].last_updated_at #=> Time
     #   resp.instances_summary[0].lifecycle_events #=> Array
     #   resp.instances_summary[0].lifecycle_events[0].lifecycle_event_name #=> String
@@ -394,6 +403,7 @@ module Aws::CodeDeploy
     #   resp.instances_summary[0].lifecycle_events[0].start_time #=> Time
     #   resp.instances_summary[0].lifecycle_events[0].end_time #=> Time
     #   resp.instances_summary[0].lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.instances_summary[0].instance_type #=> String, one of "Blue", "Green"
     #   resp.error_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstances AWS API Documentation
@@ -435,7 +445,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].revision.s3_location.e_tag #=> String
     #   resp.deployments_info[0].revision.git_hub_location.repository #=> String
     #   resp.deployments_info[0].revision.git_hub_location.commit_id #=> String
-    #   resp.deployments_info[0].status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped"
+    #   resp.deployments_info[0].status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployments_info[0].error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP"
     #   resp.deployments_info[0].error_information.message #=> String
     #   resp.deployments_info[0].create_time #=> Time
@@ -446,6 +456,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_overview.succeeded #=> Integer
     #   resp.deployments_info[0].deployment_overview.failed #=> Integer
     #   resp.deployments_info[0].deployment_overview.skipped #=> Integer
+    #   resp.deployments_info[0].deployment_overview.ready #=> Integer
     #   resp.deployments_info[0].description #=> String
     #   resp.deployments_info[0].creator #=> String, one of "user", "autoscaling", "codeDeployRollback"
     #   resp.deployments_info[0].ignore_application_stop_failures #=> Boolean
@@ -456,6 +467,23 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].rollback_info.rollback_deployment_id #=> String
     #   resp.deployments_info[0].rollback_info.rollback_triggering_deployment_id #=> String
     #   resp.deployments_info[0].rollback_info.rollback_message #=> String
+    #   resp.deployments_info[0].deployment_style.deployment_type #=> String, one of "IN_PLACE", "BLUE_GREEN"
+    #   resp.deployments_info[0].deployment_style.deployment_option #=> String, one of "WITH_TRAFFIC_CONTROL", "WITHOUT_TRAFFIC_CONTROL"
+    #   resp.deployments_info[0].target_instances.tag_filters #=> Array
+    #   resp.deployments_info[0].target_instances.tag_filters[0].key #=> String
+    #   resp.deployments_info[0].target_instances.tag_filters[0].value #=> String
+    #   resp.deployments_info[0].target_instances.tag_filters[0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
+    #   resp.deployments_info[0].target_instances.auto_scaling_groups #=> Array
+    #   resp.deployments_info[0].target_instances.auto_scaling_groups[0] #=> String
+    #   resp.deployments_info[0].instance_termination_wait_time_started #=> Boolean
+    #   resp.deployments_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
+    #   resp.deployments_info[0].blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
+    #   resp.deployments_info[0].blue_green_deployment_configuration.deployment_ready_option.action_on_timeout #=> String, one of "CONTINUE_DEPLOYMENT", "STOP_DEPLOYMENT"
+    #   resp.deployments_info[0].blue_green_deployment_configuration.deployment_ready_option.wait_time_in_minutes #=> Integer
+    #   resp.deployments_info[0].blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
+    #   resp.deployments_info[0].load_balancer_info.elb_info_list #=> Array
+    #   resp.deployments_info[0].load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployments_info[0].additional_deployment_status_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
     #
@@ -500,6 +528,34 @@ module Aws::CodeDeploy
     # @param [Hash] params ({})
     def batch_get_on_premises_instances(params = {}, options = {})
       req = build_request(:batch_get_on_premises_instances, params)
+      req.send_request(options)
+    end
+
+    # Starts the process of rerouting traffic from instances in the original
+    # environment to instances in thereplacement environment without waiting
+    # for a specified wait time to elapse. (Traffic rerouting, which is
+    # achieved by registering instances in the replacement environment with
+    # the load balancer, can start as soon as all instances have a status of
+    # Ready.)
+    #
+    # @option params [String] :deployment_id
+    #   The deployment ID of the blue/green deployment for which you want to
+    #   start rerouting traffic to the replacement environment.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.continue_deployment({
+    #     deployment_id: "DeploymentId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeployment AWS API Documentation
+    #
+    # @overload continue_deployment(params = {})
+    # @param [Hash] params ({})
+    def continue_deployment(params = {}, options = {})
+      req = build_request(:continue_deployment, params)
       req.send_request(options)
     end
 
@@ -568,6 +624,10 @@ module Aws::CodeDeploy
     #   deployment to that instance will stop, and the deployment to that
     #   instance will be considered to have failed.
     #
+    # @option params [Types::TargetInstances] :target_instances
+    #   Information about the instances that will belong to the replacement
+    #   environment in a blue/green deployment.
+    #
     # @option params [Types::AutoRollbackConfiguration] :auto_rollback_configuration
     #   Configuration information for an automatic rollback that is added when
     #   a deployment is created.
@@ -602,6 +662,16 @@ module Aws::CodeDeploy
     #     deployment_config_name: "DeploymentConfigName",
     #     description: "Description",
     #     ignore_application_stop_failures: false,
+    #     target_instances: {
+    #       tag_filters: [
+    #         {
+    #           key: "Key",
+    #           value: "Value",
+    #           type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #         },
+    #       ],
+    #       auto_scaling_groups: ["AutoScalingGroupName"],
+    #     },
     #     auto_rollback_configuration: {
     #       enabled: false,
     #       events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
@@ -733,6 +803,18 @@ module Aws::CodeDeploy
     #   Configuration information for an automatic rollback that is added when
     #   a deployment group is created.
     #
+    # @option params [Types::DeploymentStyle] :deployment_style
+    #   Information about the type of deployment, standard or blue/green, that
+    #   you want to run and whether to route deployment traffic behind a load
+    #   balancer.
+    #
+    # @option params [Types::BlueGreenDeploymentConfiguration] :blue_green_deployment_configuration
+    #   Information about blue/green deployment options for a deployment
+    #   group.
+    #
+    # @option params [Types::LoadBalancerInfo] :load_balancer_info
+    #   Information about the load balancer used in a blue/green deployment.
+    #
     # @return [Types::CreateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentGroupOutput#deployment_group_id #deployment_group_id} => String
@@ -763,7 +845,7 @@ module Aws::CodeDeploy
     #       {
     #         trigger_name: "TriggerName",
     #         trigger_target_arn: "TriggerTargetArn",
-    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
+    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
     #       },
     #     ],
     #     alarm_configuration: {
@@ -778,6 +860,30 @@ module Aws::CodeDeploy
     #     auto_rollback_configuration: {
     #       enabled: false,
     #       events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+    #     },
+    #     deployment_style: {
+    #       deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
+    #       deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
+    #     },
+    #     blue_green_deployment_configuration: {
+    #       terminate_blue_instances_on_deployment_success: {
+    #         action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
+    #         termination_wait_time_in_minutes: 1,
+    #       },
+    #       deployment_ready_option: {
+    #         action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
+    #         wait_time_in_minutes: 1,
+    #       },
+    #       green_fleet_provisioning_option: {
+    #         action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
+    #       },
+    #     },
+    #     load_balancer_info: {
+    #       elb_info_list: [
+    #         {
+    #           name: "ELBName",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1027,7 +1133,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.revision.s3_location.e_tag #=> String
     #   resp.deployment_info.revision.git_hub_location.repository #=> String
     #   resp.deployment_info.revision.git_hub_location.commit_id #=> String
-    #   resp.deployment_info.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped"
+    #   resp.deployment_info.status #=> String, one of "Created", "Queued", "InProgress", "Succeeded", "Failed", "Stopped", "Ready"
     #   resp.deployment_info.error_information.code #=> String, one of "DEPLOYMENT_GROUP_MISSING", "APPLICATION_MISSING", "REVISION_MISSING", "IAM_ROLE_MISSING", "IAM_ROLE_PERMISSIONS", "NO_EC2_SUBSCRIPTION", "OVER_MAX_INSTANCES", "NO_INSTANCES", "TIMEOUT", "HEALTH_CONSTRAINTS_INVALID", "HEALTH_CONSTRAINTS", "INTERNAL_ERROR", "THROTTLED", "ALARM_ACTIVE", "AGENT_ISSUE", "AUTO_SCALING_IAM_ROLE_PERMISSIONS", "AUTO_SCALING_CONFIGURATION", "MANUAL_STOP"
     #   resp.deployment_info.error_information.message #=> String
     #   resp.deployment_info.create_time #=> Time
@@ -1038,6 +1144,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_overview.succeeded #=> Integer
     #   resp.deployment_info.deployment_overview.failed #=> Integer
     #   resp.deployment_info.deployment_overview.skipped #=> Integer
+    #   resp.deployment_info.deployment_overview.ready #=> Integer
     #   resp.deployment_info.description #=> String
     #   resp.deployment_info.creator #=> String, one of "user", "autoscaling", "codeDeployRollback"
     #   resp.deployment_info.ignore_application_stop_failures #=> Boolean
@@ -1048,6 +1155,23 @@ module Aws::CodeDeploy
     #   resp.deployment_info.rollback_info.rollback_deployment_id #=> String
     #   resp.deployment_info.rollback_info.rollback_triggering_deployment_id #=> String
     #   resp.deployment_info.rollback_info.rollback_message #=> String
+    #   resp.deployment_info.deployment_style.deployment_type #=> String, one of "IN_PLACE", "BLUE_GREEN"
+    #   resp.deployment_info.deployment_style.deployment_option #=> String, one of "WITH_TRAFFIC_CONTROL", "WITHOUT_TRAFFIC_CONTROL"
+    #   resp.deployment_info.target_instances.tag_filters #=> Array
+    #   resp.deployment_info.target_instances.tag_filters[0].key #=> String
+    #   resp.deployment_info.target_instances.tag_filters[0].value #=> String
+    #   resp.deployment_info.target_instances.tag_filters[0].type #=> String, one of "KEY_ONLY", "VALUE_ONLY", "KEY_AND_VALUE"
+    #   resp.deployment_info.target_instances.auto_scaling_groups #=> Array
+    #   resp.deployment_info.target_instances.auto_scaling_groups[0] #=> String
+    #   resp.deployment_info.instance_termination_wait_time_started #=> Boolean
+    #   resp.deployment_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
+    #   resp.deployment_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
+    #   resp.deployment_info.blue_green_deployment_configuration.deployment_ready_option.action_on_timeout #=> String, one of "CONTINUE_DEPLOYMENT", "STOP_DEPLOYMENT"
+    #   resp.deployment_info.blue_green_deployment_configuration.deployment_ready_option.wait_time_in_minutes #=> Integer
+    #   resp.deployment_info.blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
+    #   resp.deployment_info.load_balancer_info.elb_info_list #=> Array
+    #   resp.deployment_info.load_balancer_info.elb_info_list[0].name #=> String
+    #   resp.deployment_info.additional_deployment_status_info #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment AWS API Documentation
     #
@@ -1142,7 +1266,7 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.trigger_configurations[0].trigger_name #=> String
     #   resp.deployment_group_info.trigger_configurations[0].trigger_target_arn #=> String
     #   resp.deployment_group_info.trigger_configurations[0].trigger_events #=> Array
-    #   resp.deployment_group_info.trigger_configurations[0].trigger_events[0] #=> String, one of "DeploymentStart", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop", "DeploymentRollback", "InstanceStart", "InstanceSuccess", "InstanceFailure"
+    #   resp.deployment_group_info.trigger_configurations[0].trigger_events[0] #=> String, one of "DeploymentStart", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop", "DeploymentRollback", "DeploymentReady", "InstanceStart", "InstanceSuccess", "InstanceFailure", "InstanceReady"
     #   resp.deployment_group_info.alarm_configuration.enabled #=> Boolean
     #   resp.deployment_group_info.alarm_configuration.ignore_poll_alarm_failure #=> Boolean
     #   resp.deployment_group_info.alarm_configuration.alarms #=> Array
@@ -1150,6 +1274,15 @@ module Aws::CodeDeploy
     #   resp.deployment_group_info.auto_rollback_configuration.enabled #=> Boolean
     #   resp.deployment_group_info.auto_rollback_configuration.events #=> Array
     #   resp.deployment_group_info.auto_rollback_configuration.events[0] #=> String, one of "DEPLOYMENT_FAILURE", "DEPLOYMENT_STOP_ON_ALARM", "DEPLOYMENT_STOP_ON_REQUEST"
+    #   resp.deployment_group_info.deployment_style.deployment_type #=> String, one of "IN_PLACE", "BLUE_GREEN"
+    #   resp.deployment_group_info.deployment_style.deployment_option #=> String, one of "WITH_TRAFFIC_CONTROL", "WITHOUT_TRAFFIC_CONTROL"
+    #   resp.deployment_group_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.action #=> String, one of "TERMINATE", "KEEP_ALIVE"
+    #   resp.deployment_group_info.blue_green_deployment_configuration.terminate_blue_instances_on_deployment_success.termination_wait_time_in_minutes #=> Integer
+    #   resp.deployment_group_info.blue_green_deployment_configuration.deployment_ready_option.action_on_timeout #=> String, one of "CONTINUE_DEPLOYMENT", "STOP_DEPLOYMENT"
+    #   resp.deployment_group_info.blue_green_deployment_configuration.deployment_ready_option.wait_time_in_minutes #=> Integer
+    #   resp.deployment_group_info.blue_green_deployment_configuration.green_fleet_provisioning_option.action #=> String, one of "DISCOVER_EXISTING", "COPY_AUTO_SCALING_GROUP"
+    #   resp.deployment_group_info.load_balancer_info.elb_info_list #=> Array
+    #   resp.deployment_group_info.load_balancer_info.elb_info_list[0].name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroup AWS API Documentation
     #
@@ -1183,7 +1316,7 @@ module Aws::CodeDeploy
     #
     #   resp.instance_summary.deployment_id #=> String
     #   resp.instance_summary.instance_id #=> String
-    #   resp.instance_summary.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.instance_summary.status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown", "Ready"
     #   resp.instance_summary.last_updated_at #=> Time
     #   resp.instance_summary.lifecycle_events #=> Array
     #   resp.instance_summary.lifecycle_events[0].lifecycle_event_name #=> String
@@ -1194,6 +1327,7 @@ module Aws::CodeDeploy
     #   resp.instance_summary.lifecycle_events[0].start_time #=> Time
     #   resp.instance_summary.lifecycle_events[0].end_time #=> Time
     #   resp.instance_summary.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+    #   resp.instance_summary.instance_type #=> String, one of "Blue", "Green"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstance AWS API Documentation
     #
@@ -1473,6 +1607,12 @@ module Aws::CodeDeploy
     #   * Unknown: Include those instance with deployments in an unknown
     #     state.
     #
+    # @option params [Array<String>] :instance_type_filter
+    #   The set of instances in a blue/green deployment, either those in the
+    #   original environment ("BLUE") or those in the replacement
+    #   environment ("GREEN"), for which you want to view instance
+    #   information.
+    #
     # @return [Types::ListDeploymentInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListDeploymentInstancesOutput#instances_list #instances_list} => Array&lt;String&gt;
@@ -1483,7 +1623,8 @@ module Aws::CodeDeploy
     #   resp = client.list_deployment_instances({
     #     deployment_id: "DeploymentId", # required
     #     next_token: "NextToken",
-    #     instance_status_filter: ["Pending"], # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown
+    #     instance_status_filter: ["Pending"], # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown, Ready
+    #     instance_type_filter: ["Blue"], # accepts Blue, Green
     #   })
     #
     # @example Response structure
@@ -1545,7 +1686,7 @@ module Aws::CodeDeploy
     #   resp = client.list_deployments({
     #     application_name: "ApplicationName",
     #     deployment_group_name: "DeploymentGroupName",
-    #     include_only_statuses: ["Created"], # accepts Created, Queued, InProgress, Succeeded, Failed, Stopped
+    #     include_only_statuses: ["Created"], # accepts Created, Queued, InProgress, Succeeded, Failed, Stopped, Ready
     #     create_time_range: {
     #       start: Time.now,
     #       end: Time.now,
@@ -1739,6 +1880,31 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
+    # In a blue/green deployment, overrides any specified wait time and
+    # starts terminating instances immediately after the traffic routing is
+    # completed.
+    #
+    # @option params [String] :deployment_id
+    #   The ID of the blue/green deployment for which you want to skip the
+    #   instance termination wait time.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.skip_wait_time_for_instance_termination({
+    #     deployment_id: "DeploymentId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTermination AWS API Documentation
+    #
+    # @overload skip_wait_time_for_instance_termination(params = {})
+    # @param [Hash] params ({})
+    def skip_wait_time_for_instance_termination(params = {}, options = {})
+      req = build_request(:skip_wait_time_for_instance_termination, params)
+      req.send_request(options)
+    end
+
     # Attempts to stop an ongoing deployment.
     #
     # @option params [required, String] :deployment_id
@@ -1852,6 +2018,18 @@ module Aws::CodeDeploy
     #   Information for an automatic rollback configuration that is added or
     #   changed when a deployment group is updated.
     #
+    # @option params [Types::DeploymentStyle] :deployment_style
+    #   Information about the type of deployment, either standard or
+    #   blue/green, you want to run and whether to route deployment traffic
+    #   behind a load balancer.
+    #
+    # @option params [Types::BlueGreenDeploymentConfiguration] :blue_green_deployment_configuration
+    #   Information about blue/green deployment options for a deployment
+    #   group.
+    #
+    # @option params [Types::LoadBalancerInfo] :load_balancer_info
+    #   Information about the load balancer used in a blue/green deployment.
+    #
     # @return [Types::UpdateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDeploymentGroupOutput#hooks_not_cleaned_up #hooks_not_cleaned_up} => Array&lt;Types::AutoScalingGroup&gt;
@@ -1883,7 +2061,7 @@ module Aws::CodeDeploy
     #       {
     #         trigger_name: "TriggerName",
     #         trigger_target_arn: "TriggerTargetArn",
-    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
+    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
     #       },
     #     ],
     #     alarm_configuration: {
@@ -1898,6 +2076,30 @@ module Aws::CodeDeploy
     #     auto_rollback_configuration: {
     #       enabled: false,
     #       events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+    #     },
+    #     deployment_style: {
+    #       deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
+    #       deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
+    #     },
+    #     blue_green_deployment_configuration: {
+    #       terminate_blue_instances_on_deployment_success: {
+    #         action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
+    #         termination_wait_time_in_minutes: 1,
+    #       },
+    #       deployment_ready_option: {
+    #         action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
+    #         wait_time_in_minutes: 1,
+    #       },
+    #       green_fleet_provisioning_option: {
+    #         action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
+    #       },
+    #     },
+    #     load_balancer_info: {
+    #       elb_info_list: [
+    #         {
+    #           name: "ELBName",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1929,7 +2131,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

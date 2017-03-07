@@ -298,6 +298,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].application_name #=> String
     #   resp.environments[0].version_label #=> String
     #   resp.environments[0].solution_stack_name #=> String
+    #   resp.environments[0].platform_arn #=> String
     #   resp.environments[0].template_name #=> String
     #   resp.environments[0].description #=> String
     #   resp.environments[0].endpoint_url #=> String
@@ -563,6 +564,9 @@ module Aws::ElasticBeanstalk
     #   parameter is specified, AWS Elastic Beanstalk uses the same solution
     #   stack as the source configuration template.
     #
+    # @option params [String] :platform_arn
+    #   The ARN of the custome platform.
+    #
     # @option params [Types::SourceConfiguration] :source_configuration
     #   If specified, AWS Elastic Beanstalk uses the configuration values from
     #   the specified configuration template to create a new configuration.
@@ -593,6 +597,7 @@ module Aws::ElasticBeanstalk
     # @return [Types::ConfigurationSettingsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigurationSettingsDescription#solution_stack_name #solution_stack_name} => String
+    #   * {Types::ConfigurationSettingsDescription#platform_arn #platform_arn} => String
     #   * {Types::ConfigurationSettingsDescription#application_name #application_name} => String
     #   * {Types::ConfigurationSettingsDescription#template_name #template_name} => String
     #   * {Types::ConfigurationSettingsDescription#description #description} => String
@@ -608,6 +613,7 @@ module Aws::ElasticBeanstalk
     #     application_name: "ApplicationName", # required
     #     template_name: "ConfigurationTemplateName", # required
     #     solution_stack_name: "SolutionStackName",
+    #     platform_arn: "PlatformArn",
     #     source_configuration: {
     #       application_name: "ApplicationName",
     #       template_name: "ConfigurationTemplateName",
@@ -627,6 +633,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.solution_stack_name #=> String
+    #   resp.platform_arn #=> String
     #   resp.application_name #=> String
     #   resp.template_name #=> String
     #   resp.description #=> String
@@ -711,21 +718,13 @@ module Aws::ElasticBeanstalk
     #   configuration template is found with this name, AWS Elastic Beanstalk
     #   returns an `InvalidParameterValue` error.
     #
-    #   Condition: You must specify either this parameter or a
-    #   `SolutionStackName`, but not both. If you specify both, AWS Elastic
-    #   Beanstalk returns an `InvalidParameterCombination` error. If you do
-    #   not specify either, AWS Elastic Beanstalk returns a
-    #   `MissingRequiredParameter` error.
-    #
     # @option params [String] :solution_stack_name
     #   This is an alternative to specifying a template name. If specified,
     #   AWS Elastic Beanstalk sets the configuration values to the default
     #   values associated with the specified solution stack.
     #
-    #   Condition: You must specify either this or a `TemplateName`, but not
-    #   both. If you specify both, AWS Elastic Beanstalk returns an
-    #   `InvalidParameterCombination` error. If you do not specify either, AWS
-    #   Elastic Beanstalk returns a `MissingRequiredParameter` error.
+    # @option params [String] :platform_arn
+    #   The ARN of the custom platform.
     #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
     #   If specified, AWS Elastic Beanstalk sets the specified configuration
@@ -744,6 +743,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#application_name #application_name} => String
     #   * {Types::EnvironmentDescription#version_label #version_label} => String
     #   * {Types::EnvironmentDescription#solution_stack_name #solution_stack_name} => String
+    #   * {Types::EnvironmentDescription#platform_arn #platform_arn} => String
     #   * {Types::EnvironmentDescription#template_name #template_name} => String
     #   * {Types::EnvironmentDescription#description #description} => String
     #   * {Types::EnvironmentDescription#endpoint_url #endpoint_url} => String
@@ -780,6 +780,7 @@ module Aws::ElasticBeanstalk
     #     version_label: "VersionLabel",
     #     template_name: "ConfigurationTemplateName",
     #     solution_stack_name: "SolutionStackName",
+    #     platform_arn: "PlatformArn",
     #     option_settings: [
     #       {
     #         resource_name: "ResourceName",
@@ -804,6 +805,7 @@ module Aws::ElasticBeanstalk
     #   resp.application_name #=> String
     #   resp.version_label #=> String
     #   resp.solution_stack_name #=> String
+    #   resp.platform_arn #=> String
     #   resp.template_name #=> String
     #   resp.description #=> String
     #   resp.endpoint_url #=> String
@@ -832,6 +834,71 @@ module Aws::ElasticBeanstalk
     # @param [Hash] params ({})
     def create_environment(params = {}, options = {})
       req = build_request(:create_environment, params)
+      req.send_request(options)
+    end
+
+    # Create a new version of your custom platform.
+    #
+    # @option params [required, String] :platform_name
+    #   The name of your custom platform.
+    #
+    # @option params [required, String] :platform_version
+    #   The number, such as 1.0.2, for the new platform version.
+    #
+    # @option params [required, Types::S3Location] :platform_definition_bundle
+    #   The location of the platform definition archive in Amazon S3.
+    #
+    # @option params [String] :environment_name
+    #   The name of the builder environment.
+    #
+    # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
+    #   The configuration option settings to apply to the builder environment.
+    #
+    # @return [Types::CreatePlatformVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePlatformVersionResult#platform_summary #platform_summary} => Types::PlatformSummary
+    #   * {Types::CreatePlatformVersionResult#builder #builder} => Types::Builder
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_platform_version({
+    #     platform_name: "PlatformName", # required
+    #     platform_version: "PlatformVersion", # required
+    #     platform_definition_bundle: { # required
+    #       s3_bucket: "S3Bucket",
+    #       s3_key: "S3Key",
+    #     },
+    #     environment_name: "EnvironmentName",
+    #     option_settings: [
+    #       {
+    #         resource_name: "ResourceName",
+    #         namespace: "OptionNamespace",
+    #         option_name: "ConfigurationOptionName",
+    #         value: "ConfigurationOptionValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.platform_summary.platform_arn #=> String
+    #   resp.platform_summary.platform_owner #=> String
+    #   resp.platform_summary.platform_status #=> String, one of "Creating", "Failed", "Ready", "Deleting", "Deleted"
+    #   resp.platform_summary.platform_category #=> String
+    #   resp.platform_summary.operating_system_name #=> String
+    #   resp.platform_summary.operating_system_version #=> String
+    #   resp.platform_summary.supported_tier_list #=> Array
+    #   resp.platform_summary.supported_tier_list[0] #=> String
+    #   resp.platform_summary.supported_addon_list #=> Array
+    #   resp.platform_summary.supported_addon_list[0] #=> String
+    #   resp.builder.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreatePlatformVersion AWS API Documentation
+    #
+    # @overload create_platform_version(params = {})
+    # @param [Hash] params ({})
+    def create_platform_version(params = {}, options = {})
+      req = build_request(:create_platform_version, params)
       req.send_request(options)
     end
 
@@ -994,6 +1061,43 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # Deletes the specified version of a custom platform.
+    #
+    # @option params [String] :platform_arn
+    #   The ARN of the version of the custom platform.
+    #
+    # @return [Types::DeletePlatformVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePlatformVersionResult#platform_summary #platform_summary} => Types::PlatformSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_platform_version({
+    #     platform_arn: "PlatformArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.platform_summary.platform_arn #=> String
+    #   resp.platform_summary.platform_owner #=> String
+    #   resp.platform_summary.platform_status #=> String, one of "Creating", "Failed", "Ready", "Deleting", "Deleted"
+    #   resp.platform_summary.platform_category #=> String
+    #   resp.platform_summary.operating_system_name #=> String
+    #   resp.platform_summary.operating_system_version #=> String
+    #   resp.platform_summary.supported_tier_list #=> Array
+    #   resp.platform_summary.supported_tier_list[0] #=> String
+    #   resp.platform_summary.supported_addon_list #=> Array
+    #   resp.platform_summary.supported_addon_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DeletePlatformVersion AWS API Documentation
+    #
+    # @overload delete_platform_version(params = {})
+    # @param [Hash] params ({})
+    def delete_platform_version(params = {}, options = {})
+      req = build_request(:delete_platform_version, params)
+      req.send_request(options)
+    end
+
     # Retrieve a list of application versions.
     #
     # @option params [String] :application_name
@@ -1118,6 +1222,9 @@ module Aws::ElasticBeanstalk
     #   The name of the solution stack whose configuration options you want to
     #   describe.
     #
+    # @option params [String] :platform_arn
+    #   The ARN of the custom platform.
+    #
     # @option params [Array<Types::OptionSpecification>] :options
     #   If specified, restricts the descriptions to only the specified
     #   options.
@@ -1125,6 +1232,7 @@ module Aws::ElasticBeanstalk
     # @return [Types::ConfigurationOptionsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigurationOptionsDescription#solution_stack_name #solution_stack_name} => String
+    #   * {Types::ConfigurationOptionsDescription#platform_arn #platform_arn} => String
     #   * {Types::ConfigurationOptionsDescription#options #options} => Array&lt;Types::ConfigurationOptionDescription&gt;
     #
     # @example Request syntax with placeholder values
@@ -1134,6 +1242,7 @@ module Aws::ElasticBeanstalk
     #     template_name: "ConfigurationTemplateName",
     #     environment_name: "EnvironmentName",
     #     solution_stack_name: "SolutionStackName",
+    #     platform_arn: "PlatformArn",
     #     options: [
     #       {
     #         resource_name: "ResourceName",
@@ -1146,6 +1255,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.solution_stack_name #=> String
+    #   resp.platform_arn #=> String
     #   resp.options #=> Array
     #   resp.options[0].namespace #=> String
     #   resp.options[0].name #=> String
@@ -1222,6 +1332,7 @@ module Aws::ElasticBeanstalk
     #
     #   resp.configuration_settings #=> Array
     #   resp.configuration_settings[0].solution_stack_name #=> String
+    #   resp.configuration_settings[0].platform_arn #=> String
     #   resp.configuration_settings[0].application_name #=> String
     #   resp.configuration_settings[0].template_name #=> String
     #   resp.configuration_settings[0].description #=> String
@@ -1522,6 +1633,7 @@ module Aws::ElasticBeanstalk
     #   resp.environments[0].application_name #=> String
     #   resp.environments[0].version_label #=> String
     #   resp.environments[0].solution_stack_name #=> String
+    #   resp.environments[0].platform_arn #=> String
     #   resp.environments[0].template_name #=> String
     #   resp.environments[0].description #=> String
     #   resp.environments[0].endpoint_url #=> String
@@ -1582,6 +1694,9 @@ module Aws::ElasticBeanstalk
     #   If specified, AWS Elastic Beanstalk restricts the returned
     #   descriptions to those associated with this environment.
     #
+    # @option params [String] :platform_arn
+    #   The ARN of the version of the custom platform.
+    #
     # @option params [String] :request_id
     #   If specified, AWS Elastic Beanstalk restricts the described events to
     #   include only those associated with this request ID.
@@ -1620,6 +1735,7 @@ module Aws::ElasticBeanstalk
     #     template_name: "ConfigurationTemplateName",
     #     environment_id: "EnvironmentId",
     #     environment_name: "EnvironmentName",
+    #     platform_arn: "PlatformArn",
     #     request_id: "RequestId",
     #     severity: "TRACE", # accepts TRACE, DEBUG, INFO, WARN, ERROR, FATAL
     #     start_time: Time.now,
@@ -1637,6 +1753,7 @@ module Aws::ElasticBeanstalk
     #   resp.events[0].version_label #=> String
     #   resp.events[0].template_name #=> String
     #   resp.events[0].environment_name #=> String
+    #   resp.events[0].platform_arn #=> String
     #   resp.events[0].request_id #=> String
     #   resp.events[0].severity #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
     #   resp.next_token #=> String
@@ -1737,7 +1854,61 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Returns a list of the available solution stack names.
+    # Describes the version of the platform.
+    #
+    # @option params [String] :platform_arn
+    #   The ARN of the version of the platform.
+    #
+    # @return [Types::DescribePlatformVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePlatformVersionResult#platform_description #platform_description} => Types::PlatformDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_platform_version({
+    #     platform_arn: "PlatformArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.platform_description.platform_arn #=> String
+    #   resp.platform_description.platform_owner #=> String
+    #   resp.platform_description.platform_name #=> String
+    #   resp.platform_description.platform_version #=> String
+    #   resp.platform_description.solution_stack_name #=> String
+    #   resp.platform_description.platform_status #=> String, one of "Creating", "Failed", "Ready", "Deleting", "Deleted"
+    #   resp.platform_description.date_created #=> Time
+    #   resp.platform_description.date_updated #=> Time
+    #   resp.platform_description.platform_category #=> String
+    #   resp.platform_description.description #=> String
+    #   resp.platform_description.maintainer #=> String
+    #   resp.platform_description.operating_system_name #=> String
+    #   resp.platform_description.operating_system_version #=> String
+    #   resp.platform_description.programming_languages #=> Array
+    #   resp.platform_description.programming_languages[0].name #=> String
+    #   resp.platform_description.programming_languages[0].version #=> String
+    #   resp.platform_description.frameworks #=> Array
+    #   resp.platform_description.frameworks[0].name #=> String
+    #   resp.platform_description.frameworks[0].version #=> String
+    #   resp.platform_description.custom_ami_list #=> Array
+    #   resp.platform_description.custom_ami_list[0].virtualization_type #=> String
+    #   resp.platform_description.custom_ami_list[0].image_id #=> String
+    #   resp.platform_description.supported_tier_list #=> Array
+    #   resp.platform_description.supported_tier_list[0] #=> String
+    #   resp.platform_description.supported_addon_list #=> Array
+    #   resp.platform_description.supported_addon_list[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribePlatformVersion AWS API Documentation
+    #
+    # @overload describe_platform_version(params = {})
+    # @param [Hash] params ({})
+    def describe_platform_version(params = {}, options = {})
+      req = build_request(:describe_platform_version, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of the available solution stack names, with the public
+    # version first and then in reverse chronological order.
     #
     # @return [Types::ListAvailableSolutionStacksResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1759,6 +1930,62 @@ module Aws::ElasticBeanstalk
     # @param [Hash] params ({})
     def list_available_solution_stacks(params = {}, options = {})
       req = build_request(:list_available_solution_stacks, params)
+      req.send_request(options)
+    end
+
+    # Lists the available platforms.
+    #
+    # @option params [Array<Types::PlatformFilter>] :filters
+    #   List only the platforms where the platform member value relates to one
+    #   of the supplied values.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of platform values returned in one call.
+    #
+    # @option params [String] :next_token
+    #   The starting index into the remaining list of platforms. Use the
+    #   `NextToken` value from a previous `ListPlatformVersion` call.
+    #
+    # @return [Types::ListPlatformVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPlatformVersionsResult#platform_summary_list #platform_summary_list} => Array&lt;Types::PlatformSummary&gt;
+    #   * {Types::ListPlatformVersionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_platform_versions({
+    #     filters: [
+    #       {
+    #         type: "PlatformFilterType",
+    #         operator: "PlatformFilterOperator",
+    #         values: ["PlatformFilterValue"],
+    #       },
+    #     ],
+    #     max_records: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.platform_summary_list #=> Array
+    #   resp.platform_summary_list[0].platform_arn #=> String
+    #   resp.platform_summary_list[0].platform_owner #=> String
+    #   resp.platform_summary_list[0].platform_status #=> String, one of "Creating", "Failed", "Ready", "Deleting", "Deleted"
+    #   resp.platform_summary_list[0].platform_category #=> String
+    #   resp.platform_summary_list[0].operating_system_name #=> String
+    #   resp.platform_summary_list[0].operating_system_version #=> String
+    #   resp.platform_summary_list[0].supported_tier_list #=> Array
+    #   resp.platform_summary_list[0].supported_tier_list[0] #=> String
+    #   resp.platform_summary_list[0].supported_addon_list #=> Array
+    #   resp.platform_summary_list[0].supported_addon_list[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ListPlatformVersions AWS API Documentation
+    #
+    # @overload list_platform_versions(params = {})
+    # @param [Hash] params ({})
+    def list_platform_versions(params = {}, options = {})
+      req = build_request(:list_platform_versions, params)
       req.send_request(options)
     end
 
@@ -2056,6 +2283,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#application_name #application_name} => String
     #   * {Types::EnvironmentDescription#version_label #version_label} => String
     #   * {Types::EnvironmentDescription#solution_stack_name #solution_stack_name} => String
+    #   * {Types::EnvironmentDescription#platform_arn #platform_arn} => String
     #   * {Types::EnvironmentDescription#template_name #template_name} => String
     #   * {Types::EnvironmentDescription#description #description} => String
     #   * {Types::EnvironmentDescription#endpoint_url #endpoint_url} => String
@@ -2086,6 +2314,7 @@ module Aws::ElasticBeanstalk
     #   resp.application_name #=> String
     #   resp.version_label #=> String
     #   resp.solution_stack_name #=> String
+    #   resp.platform_arn #=> String
     #   resp.template_name #=> String
     #   resp.description #=> String
     #   resp.endpoint_url #=> String
@@ -2330,6 +2559,7 @@ module Aws::ElasticBeanstalk
     # @return [Types::ConfigurationSettingsDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ConfigurationSettingsDescription#solution_stack_name #solution_stack_name} => String
+    #   * {Types::ConfigurationSettingsDescription#platform_arn #platform_arn} => String
     #   * {Types::ConfigurationSettingsDescription#application_name #application_name} => String
     #   * {Types::ConfigurationSettingsDescription#template_name #template_name} => String
     #   * {Types::ConfigurationSettingsDescription#description #description} => String
@@ -2365,6 +2595,7 @@ module Aws::ElasticBeanstalk
     # @example Response structure
     #
     #   resp.solution_stack_name #=> String
+    #   resp.platform_arn #=> String
     #   resp.application_name #=> String
     #   resp.template_name #=> String
     #   resp.description #=> String
@@ -2458,6 +2689,9 @@ module Aws::ElasticBeanstalk
     #   This specifies the platform version that the environment will run
     #   after the environment is updated.
     #
+    # @option params [String] :platform_arn
+    #   The ARN of the platform, if used.
+    #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
     #   If specified, AWS Elastic Beanstalk updates the configuration set
     #   associated with the running environment and sets the specified
@@ -2474,6 +2708,7 @@ module Aws::ElasticBeanstalk
     #   * {Types::EnvironmentDescription#application_name #application_name} => String
     #   * {Types::EnvironmentDescription#version_label #version_label} => String
     #   * {Types::EnvironmentDescription#solution_stack_name #solution_stack_name} => String
+    #   * {Types::EnvironmentDescription#platform_arn #platform_arn} => String
     #   * {Types::EnvironmentDescription#template_name #template_name} => String
     #   * {Types::EnvironmentDescription#description #description} => String
     #   * {Types::EnvironmentDescription#endpoint_url #endpoint_url} => String
@@ -2504,6 +2739,7 @@ module Aws::ElasticBeanstalk
     #     version_label: "VersionLabel",
     #     template_name: "ConfigurationTemplateName",
     #     solution_stack_name: "SolutionStackName",
+    #     platform_arn: "PlatformArn",
     #     option_settings: [
     #       {
     #         resource_name: "ResourceName",
@@ -2528,6 +2764,7 @@ module Aws::ElasticBeanstalk
     #   resp.application_name #=> String
     #   resp.version_label #=> String
     #   resp.solution_stack_name #=> String
+    #   resp.platform_arn #=> String
     #   resp.template_name #=> String
     #   resp.description #=> String
     #   resp.endpoint_url #=> String
@@ -2635,7 +2872,7 @@ module Aws::ElasticBeanstalk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

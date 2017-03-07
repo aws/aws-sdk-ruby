@@ -1113,6 +1113,7 @@ module Aws::Route53
           }
         )
         o.output = Shapes::ShapeRef.new(shape: CreateVPCAssociationAuthorizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
         o.errors << Shapes::ShapeRef.new(shape: TooManyVPCAssociationAuthorizations)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCId)
@@ -1189,6 +1190,7 @@ module Aws::Route53
           }
         )
         o.output = Shapes::ShapeRef.new(shape: DeleteVPCAssociationAuthorizationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModification)
         o.errors << Shapes::ShapeRef.new(shape: VPCAssociationAuthorizationNotFound)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
         o.errors << Shapes::ShapeRef.new(shape: InvalidVPCId)

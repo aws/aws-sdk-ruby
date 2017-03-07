@@ -504,6 +504,7 @@ module Aws::ConfigService
 
     PutEvaluationsRequest.add_member(:evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "Evaluations"))
     PutEvaluationsRequest.add_member(:result_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResultToken"))
+    PutEvaluationsRequest.add_member(:test_mode, Shapes::ShapeRef.new(shape: Boolean, location_name: "TestMode"))
     PutEvaluationsRequest.struct_class = Types::PutEvaluationsRequest
 
     PutEvaluationsResponse.add_member(:failed_evaluations, Shapes::ShapeRef.new(shape: Evaluations, location_name: "FailedEvaluations"))

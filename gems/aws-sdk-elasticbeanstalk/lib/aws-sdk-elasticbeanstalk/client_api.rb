@@ -11,6 +11,7 @@ module Aws::ElasticBeanstalk
 
     include Seahorse::Model
 
+    ARN = Shapes::StringShape.new(name: 'ARN')
     AbortEnvironmentUpdateMessage = Shapes::StructureShape.new(name: 'AbortEnvironmentUpdateMessage')
     AbortableOperationInProgress = Shapes::BooleanShape.new(name: 'AbortableOperationInProgress')
     ActionHistoryStatus = Shapes::StringShape.new(name: 'ActionHistoryStatus')
@@ -42,6 +43,7 @@ module Aws::ElasticBeanstalk
     BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     BoxedInt = Shapes::IntegerShape.new(name: 'BoxedInt')
     BuildConfiguration = Shapes::StructureShape.new(name: 'BuildConfiguration')
+    Builder = Shapes::StructureShape.new(name: 'Builder')
     CPUUtilization = Shapes::StructureShape.new(name: 'CPUUtilization')
     Cause = Shapes::StringShape.new(name: 'Cause')
     Causes = Shapes::ListShape.new(name: 'Causes')
@@ -74,14 +76,20 @@ module Aws::ElasticBeanstalk
     CreateApplicationVersionMessage = Shapes::StructureShape.new(name: 'CreateApplicationVersionMessage')
     CreateConfigurationTemplateMessage = Shapes::StructureShape.new(name: 'CreateConfigurationTemplateMessage')
     CreateEnvironmentMessage = Shapes::StructureShape.new(name: 'CreateEnvironmentMessage')
+    CreatePlatformVersionRequest = Shapes::StructureShape.new(name: 'CreatePlatformVersionRequest')
+    CreatePlatformVersionResult = Shapes::StructureShape.new(name: 'CreatePlatformVersionResult')
     CreateStorageLocationResultMessage = Shapes::StructureShape.new(name: 'CreateStorageLocationResultMessage')
     CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
+    CustomAmi = Shapes::StructureShape.new(name: 'CustomAmi')
+    CustomAmiList = Shapes::ListShape.new(name: 'CustomAmiList')
     DNSCname = Shapes::StringShape.new(name: 'DNSCname')
     DNSCnamePrefix = Shapes::StringShape.new(name: 'DNSCnamePrefix')
     DeleteApplicationMessage = Shapes::StructureShape.new(name: 'DeleteApplicationMessage')
     DeleteApplicationVersionMessage = Shapes::StructureShape.new(name: 'DeleteApplicationVersionMessage')
     DeleteConfigurationTemplateMessage = Shapes::StructureShape.new(name: 'DeleteConfigurationTemplateMessage')
     DeleteEnvironmentConfigurationMessage = Shapes::StructureShape.new(name: 'DeleteEnvironmentConfigurationMessage')
+    DeletePlatformVersionRequest = Shapes::StructureShape.new(name: 'DeletePlatformVersionRequest')
+    DeletePlatformVersionResult = Shapes::StructureShape.new(name: 'DeletePlatformVersionResult')
     DeleteSourceBundle = Shapes::BooleanShape.new(name: 'DeleteSourceBundle')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentTimestamp = Shapes::TimestampShape.new(name: 'DeploymentTimestamp')
@@ -100,6 +108,8 @@ module Aws::ElasticBeanstalk
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
     DescribeInstancesHealthRequest = Shapes::StructureShape.new(name: 'DescribeInstancesHealthRequest')
     DescribeInstancesHealthResult = Shapes::StructureShape.new(name: 'DescribeInstancesHealthResult')
+    DescribePlatformVersionRequest = Shapes::StructureShape.new(name: 'DescribePlatformVersionRequest')
+    DescribePlatformVersionResult = Shapes::StructureShape.new(name: 'DescribePlatformVersionResult')
     Description = Shapes::StringShape.new(name: 'Description')
     Ec2InstanceId = Shapes::StringShape.new(name: 'Ec2InstanceId')
     ElasticBeanstalkServiceException = Shapes::StructureShape.new(name: 'ElasticBeanstalkServiceException')
@@ -136,6 +146,7 @@ module Aws::ElasticBeanstalk
     FileTypeExtension = Shapes::StringShape.new(name: 'FileTypeExtension')
     ForceTerminate = Shapes::BooleanShape.new(name: 'ForceTerminate')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
+    ImageId = Shapes::StringShape.new(name: 'ImageId')
     IncludeDeleted = Shapes::BooleanShape.new(name: 'IncludeDeleted')
     IncludeDeletedBackTo = Shapes::TimestampShape.new(name: 'IncludeDeletedBackTo')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -153,6 +164,8 @@ module Aws::ElasticBeanstalk
     LaunchConfigurationList = Shapes::ListShape.new(name: 'LaunchConfigurationList')
     LaunchedAt = Shapes::TimestampShape.new(name: 'LaunchedAt')
     ListAvailableSolutionStacksResultMessage = Shapes::StructureShape.new(name: 'ListAvailableSolutionStacksResultMessage')
+    ListPlatformVersionsRequest = Shapes::StructureShape.new(name: 'ListPlatformVersionsRequest')
+    ListPlatformVersionsResult = Shapes::StructureShape.new(name: 'ListPlatformVersionsResult')
     Listener = Shapes::StructureShape.new(name: 'Listener')
     LoadAverage = Shapes::ListShape.new(name: 'LoadAverage')
     LoadAverageValue = Shapes::FloatShape.new(name: 'LoadAverageValue')
@@ -160,6 +173,7 @@ module Aws::ElasticBeanstalk
     LoadBalancerDescription = Shapes::StructureShape.new(name: 'LoadBalancerDescription')
     LoadBalancerList = Shapes::ListShape.new(name: 'LoadBalancerList')
     LoadBalancerListenersDescription = Shapes::ListShape.new(name: 'LoadBalancerListenersDescription')
+    Maintainer = Shapes::StringShape.new(name: 'Maintainer')
     ManagedAction = Shapes::StructureShape.new(name: 'ManagedAction')
     ManagedActionHistoryItem = Shapes::StructureShape.new(name: 'ManagedActionHistoryItem')
     ManagedActionHistoryItems = Shapes::ListShape.new(name: 'ManagedActionHistoryItems')
@@ -174,6 +188,8 @@ module Aws::ElasticBeanstalk
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
+    OperatingSystemName = Shapes::StringShape.new(name: 'OperatingSystemName')
+    OperatingSystemVersion = Shapes::StringShape.new(name: 'OperatingSystemVersion')
     OperationInProgressException = Shapes::StructureShape.new(name: 'OperationInProgressException')
     OptionNamespace = Shapes::StringShape.new(name: 'OptionNamespace')
     OptionRestrictionMaxLength = Shapes::IntegerShape.new(name: 'OptionRestrictionMaxLength')
@@ -182,6 +198,27 @@ module Aws::ElasticBeanstalk
     OptionRestrictionRegex = Shapes::StructureShape.new(name: 'OptionRestrictionRegex')
     OptionSpecification = Shapes::StructureShape.new(name: 'OptionSpecification')
     OptionsSpecifierList = Shapes::ListShape.new(name: 'OptionsSpecifierList')
+    PlatformArn = Shapes::StringShape.new(name: 'PlatformArn')
+    PlatformCategory = Shapes::StringShape.new(name: 'PlatformCategory')
+    PlatformDescription = Shapes::StructureShape.new(name: 'PlatformDescription')
+    PlatformFilter = Shapes::StructureShape.new(name: 'PlatformFilter')
+    PlatformFilterOperator = Shapes::StringShape.new(name: 'PlatformFilterOperator')
+    PlatformFilterType = Shapes::StringShape.new(name: 'PlatformFilterType')
+    PlatformFilterValue = Shapes::StringShape.new(name: 'PlatformFilterValue')
+    PlatformFilterValueList = Shapes::ListShape.new(name: 'PlatformFilterValueList')
+    PlatformFilters = Shapes::ListShape.new(name: 'PlatformFilters')
+    PlatformFramework = Shapes::StructureShape.new(name: 'PlatformFramework')
+    PlatformFrameworks = Shapes::ListShape.new(name: 'PlatformFrameworks')
+    PlatformMaxRecords = Shapes::IntegerShape.new(name: 'PlatformMaxRecords')
+    PlatformName = Shapes::StringShape.new(name: 'PlatformName')
+    PlatformOwner = Shapes::StringShape.new(name: 'PlatformOwner')
+    PlatformProgrammingLanguage = Shapes::StructureShape.new(name: 'PlatformProgrammingLanguage')
+    PlatformProgrammingLanguages = Shapes::ListShape.new(name: 'PlatformProgrammingLanguages')
+    PlatformStatus = Shapes::StringShape.new(name: 'PlatformStatus')
+    PlatformSummary = Shapes::StructureShape.new(name: 'PlatformSummary')
+    PlatformSummaryList = Shapes::ListShape.new(name: 'PlatformSummaryList')
+    PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
+    PlatformVersionStillReferencedException = Shapes::StructureShape.new(name: 'PlatformVersionStillReferencedException')
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueList = Shapes::ListShape.new(name: 'QueueList')
     RebuildEnvironmentMessage = Shapes::StructureShape.new(name: 'RebuildEnvironmentMessage')
@@ -214,6 +251,10 @@ module Aws::ElasticBeanstalk
     SourceType = Shapes::StringShape.new(name: 'SourceType')
     StatusCodes = Shapes::StructureShape.new(name: 'StatusCodes')
     String = Shapes::StringShape.new(name: 'String')
+    SupportedAddon = Shapes::StringShape.new(name: 'SupportedAddon')
+    SupportedAddonList = Shapes::ListShape.new(name: 'SupportedAddonList')
+    SupportedTier = Shapes::StringShape.new(name: 'SupportedTier')
+    SupportedTierList = Shapes::ListShape.new(name: 'SupportedTierList')
     SwapEnvironmentCNAMEsMessage = Shapes::StructureShape.new(name: 'SwapEnvironmentCNAMEsMessage')
     SystemStatus = Shapes::StructureShape.new(name: 'SystemStatus')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -232,6 +273,7 @@ module Aws::ElasticBeanstalk
     TooManyBucketsException = Shapes::StructureShape.new(name: 'TooManyBucketsException')
     TooManyConfigurationTemplatesException = Shapes::StructureShape.new(name: 'TooManyConfigurationTemplatesException')
     TooManyEnvironmentsException = Shapes::StructureShape.new(name: 'TooManyEnvironmentsException')
+    TooManyPlatformsException = Shapes::StructureShape.new(name: 'TooManyPlatformsException')
     Trigger = Shapes::StructureShape.new(name: 'Trigger')
     TriggerList = Shapes::ListShape.new(name: 'TriggerList')
     UpdateApplicationMessage = Shapes::StructureShape.new(name: 'UpdateApplicationMessage')
@@ -249,6 +291,7 @@ module Aws::ElasticBeanstalk
     VersionLabel = Shapes::StringShape.new(name: 'VersionLabel')
     VersionLabels = Shapes::ListShape.new(name: 'VersionLabels')
     VersionLabelsList = Shapes::ListShape.new(name: 'VersionLabelsList')
+    VirtualizationType = Shapes::StringShape.new(name: 'VirtualizationType')
 
     AbortEnvironmentUpdateMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     AbortEnvironmentUpdateMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
@@ -338,6 +381,9 @@ module Aws::ElasticBeanstalk
     BuildConfiguration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "TimeoutInMinutes"))
     BuildConfiguration.struct_class = Types::BuildConfiguration
 
+    Builder.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "ARN"))
+    Builder.struct_class = Types::Builder
+
     CPUUtilization.add_member(:user, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "User"))
     CPUUtilization.add_member(:nice, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Nice"))
     CPUUtilization.add_member(:system, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "System"))
@@ -387,10 +433,12 @@ module Aws::ElasticBeanstalk
     ConfigurationOptionSettingsList.member = Shapes::ShapeRef.new(shape: ConfigurationOptionSetting)
 
     ConfigurationOptionsDescription.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    ConfigurationOptionsDescription.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     ConfigurationOptionsDescription.add_member(:options, Shapes::ShapeRef.new(shape: ConfigurationOptionDescriptionsList, location_name: "Options"))
     ConfigurationOptionsDescription.struct_class = Types::ConfigurationOptionsDescription
 
     ConfigurationSettingsDescription.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    ConfigurationSettingsDescription.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     ConfigurationSettingsDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     ConfigurationSettingsDescription.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     ConfigurationSettingsDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -429,6 +477,7 @@ module Aws::ElasticBeanstalk
     CreateConfigurationTemplateMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     CreateConfigurationTemplateMessage.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, required: true, location_name: "TemplateName"))
     CreateConfigurationTemplateMessage.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    CreateConfigurationTemplateMessage.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     CreateConfigurationTemplateMessage.add_member(:source_configuration, Shapes::ShapeRef.new(shape: SourceConfiguration, location_name: "SourceConfiguration"))
     CreateConfigurationTemplateMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     CreateConfigurationTemplateMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
@@ -445,12 +494,30 @@ module Aws::ElasticBeanstalk
     CreateEnvironmentMessage.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     CreateEnvironmentMessage.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     CreateEnvironmentMessage.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    CreateEnvironmentMessage.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     CreateEnvironmentMessage.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
     CreateEnvironmentMessage.add_member(:options_to_remove, Shapes::ShapeRef.new(shape: OptionsSpecifierList, location_name: "OptionsToRemove"))
     CreateEnvironmentMessage.struct_class = Types::CreateEnvironmentMessage
 
+    CreatePlatformVersionRequest.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, required: true, location_name: "PlatformName"))
+    CreatePlatformVersionRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, required: true, location_name: "PlatformVersion"))
+    CreatePlatformVersionRequest.add_member(:platform_definition_bundle, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "PlatformDefinitionBundle"))
+    CreatePlatformVersionRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
+    CreatePlatformVersionRequest.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
+    CreatePlatformVersionRequest.struct_class = Types::CreatePlatformVersionRequest
+
+    CreatePlatformVersionResult.add_member(:platform_summary, Shapes::ShapeRef.new(shape: PlatformSummary, location_name: "PlatformSummary"))
+    CreatePlatformVersionResult.add_member(:builder, Shapes::ShapeRef.new(shape: Builder, location_name: "Builder"))
+    CreatePlatformVersionResult.struct_class = Types::CreatePlatformVersionResult
+
     CreateStorageLocationResultMessage.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
     CreateStorageLocationResultMessage.struct_class = Types::CreateStorageLocationResultMessage
+
+    CustomAmi.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: VirtualizationType, location_name: "VirtualizationType"))
+    CustomAmi.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
+    CustomAmi.struct_class = Types::CustomAmi
+
+    CustomAmiList.member = Shapes::ShapeRef.new(shape: CustomAmi)
 
     DeleteApplicationMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DeleteApplicationMessage.add_member(:terminate_env_by_force, Shapes::ShapeRef.new(shape: TerminateEnvForce, location_name: "TerminateEnvByForce"))
@@ -468,6 +535,12 @@ module Aws::ElasticBeanstalk
     DeleteEnvironmentConfigurationMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
     DeleteEnvironmentConfigurationMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, required: true, location_name: "EnvironmentName"))
     DeleteEnvironmentConfigurationMessage.struct_class = Types::DeleteEnvironmentConfigurationMessage
+
+    DeletePlatformVersionRequest.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
+    DeletePlatformVersionRequest.struct_class = Types::DeletePlatformVersionRequest
+
+    DeletePlatformVersionResult.add_member(:platform_summary, Shapes::ShapeRef.new(shape: PlatformSummary, location_name: "PlatformSummary"))
+    DeletePlatformVersionResult.struct_class = Types::DeletePlatformVersionResult
 
     Deployment.add_member(:version_label, Shapes::ShapeRef.new(shape: String, location_name: "VersionLabel"))
     Deployment.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NullableLong, location_name: "DeploymentId"))
@@ -488,6 +561,7 @@ module Aws::ElasticBeanstalk
     DescribeConfigurationOptionsMessage.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     DescribeConfigurationOptionsMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     DescribeConfigurationOptionsMessage.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    DescribeConfigurationOptionsMessage.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     DescribeConfigurationOptionsMessage.add_member(:options, Shapes::ShapeRef.new(shape: OptionsSpecifierList, location_name: "Options"))
     DescribeConfigurationOptionsMessage.struct_class = Types::DescribeConfigurationOptionsMessage
 
@@ -546,6 +620,7 @@ module Aws::ElasticBeanstalk
     DescribeEventsMessage.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     DescribeEventsMessage.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     DescribeEventsMessage.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
+    DescribeEventsMessage.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     DescribeEventsMessage.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     DescribeEventsMessage.add_member(:severity, Shapes::ShapeRef.new(shape: EventSeverity, location_name: "Severity"))
     DescribeEventsMessage.add_member(:start_time, Shapes::ShapeRef.new(shape: TimeFilterStart, location_name: "StartTime"))
@@ -565,11 +640,18 @@ module Aws::ElasticBeanstalk
     DescribeInstancesHealthResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeInstancesHealthResult.struct_class = Types::DescribeInstancesHealthResult
 
+    DescribePlatformVersionRequest.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
+    DescribePlatformVersionRequest.struct_class = Types::DescribePlatformVersionRequest
+
+    DescribePlatformVersionResult.add_member(:platform_description, Shapes::ShapeRef.new(shape: PlatformDescription, location_name: "PlatformDescription"))
+    DescribePlatformVersionResult.struct_class = Types::DescribePlatformVersionResult
+
     EnvironmentDescription.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     EnvironmentDescription.add_member(:environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "EnvironmentId"))
     EnvironmentDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
     EnvironmentDescription.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     EnvironmentDescription.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    EnvironmentDescription.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     EnvironmentDescription.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     EnvironmentDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     EnvironmentDescription.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: EndpointURL, location_name: "EndpointURL"))
@@ -636,6 +718,7 @@ module Aws::ElasticBeanstalk
     EventDescription.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     EventDescription.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     EventDescription.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
+    EventDescription.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     EventDescription.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "RequestId"))
     EventDescription.add_member(:severity, Shapes::ShapeRef.new(shape: EventSeverity, location_name: "Severity"))
     EventDescription.struct_class = Types::EventDescription
@@ -683,6 +766,15 @@ module Aws::ElasticBeanstalk
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stacks, Shapes::ShapeRef.new(shape: AvailableSolutionStackNamesList, location_name: "SolutionStacks"))
     ListAvailableSolutionStacksResultMessage.add_member(:solution_stack_details, Shapes::ShapeRef.new(shape: AvailableSolutionStackDetailsList, location_name: "SolutionStackDetails"))
     ListAvailableSolutionStacksResultMessage.struct_class = Types::ListAvailableSolutionStacksResultMessage
+
+    ListPlatformVersionsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: PlatformFilters, location_name: "Filters"))
+    ListPlatformVersionsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: PlatformMaxRecords, location_name: "MaxRecords"))
+    ListPlatformVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPlatformVersionsRequest.struct_class = Types::ListPlatformVersionsRequest
+
+    ListPlatformVersionsResult.add_member(:platform_summary_list, Shapes::ShapeRef.new(shape: PlatformSummaryList, location_name: "PlatformSummaryList"))
+    ListPlatformVersionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListPlatformVersionsResult.struct_class = Types::ListPlatformVersionsResult
 
     Listener.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "Protocol"))
     Listener.add_member(:port, Shapes::ShapeRef.new(shape: Integer, location_name: "Port"))
@@ -743,6 +835,59 @@ module Aws::ElasticBeanstalk
     OptionSpecification.struct_class = Types::OptionSpecification
 
     OptionsSpecifierList.member = Shapes::ShapeRef.new(shape: OptionSpecification)
+
+    PlatformDescription.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
+    PlatformDescription.add_member(:platform_owner, Shapes::ShapeRef.new(shape: PlatformOwner, location_name: "PlatformOwner"))
+    PlatformDescription.add_member(:platform_name, Shapes::ShapeRef.new(shape: PlatformName, location_name: "PlatformName"))
+    PlatformDescription.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "PlatformVersion"))
+    PlatformDescription.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    PlatformDescription.add_member(:platform_status, Shapes::ShapeRef.new(shape: PlatformStatus, location_name: "PlatformStatus"))
+    PlatformDescription.add_member(:date_created, Shapes::ShapeRef.new(shape: CreationDate, location_name: "DateCreated"))
+    PlatformDescription.add_member(:date_updated, Shapes::ShapeRef.new(shape: UpdateDate, location_name: "DateUpdated"))
+    PlatformDescription.add_member(:platform_category, Shapes::ShapeRef.new(shape: PlatformCategory, location_name: "PlatformCategory"))
+    PlatformDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    PlatformDescription.add_member(:maintainer, Shapes::ShapeRef.new(shape: Maintainer, location_name: "Maintainer"))
+    PlatformDescription.add_member(:operating_system_name, Shapes::ShapeRef.new(shape: OperatingSystemName, location_name: "OperatingSystemName"))
+    PlatformDescription.add_member(:operating_system_version, Shapes::ShapeRef.new(shape: OperatingSystemVersion, location_name: "OperatingSystemVersion"))
+    PlatformDescription.add_member(:programming_languages, Shapes::ShapeRef.new(shape: PlatformProgrammingLanguages, location_name: "ProgrammingLanguages"))
+    PlatformDescription.add_member(:frameworks, Shapes::ShapeRef.new(shape: PlatformFrameworks, location_name: "Frameworks"))
+    PlatformDescription.add_member(:custom_ami_list, Shapes::ShapeRef.new(shape: CustomAmiList, location_name: "CustomAmiList"))
+    PlatformDescription.add_member(:supported_tier_list, Shapes::ShapeRef.new(shape: SupportedTierList, location_name: "SupportedTierList"))
+    PlatformDescription.add_member(:supported_addon_list, Shapes::ShapeRef.new(shape: SupportedAddonList, location_name: "SupportedAddonList"))
+    PlatformDescription.struct_class = Types::PlatformDescription
+
+    PlatformFilter.add_member(:type, Shapes::ShapeRef.new(shape: PlatformFilterType, location_name: "Type"))
+    PlatformFilter.add_member(:operator, Shapes::ShapeRef.new(shape: PlatformFilterOperator, location_name: "Operator"))
+    PlatformFilter.add_member(:values, Shapes::ShapeRef.new(shape: PlatformFilterValueList, location_name: "Values"))
+    PlatformFilter.struct_class = Types::PlatformFilter
+
+    PlatformFilterValueList.member = Shapes::ShapeRef.new(shape: PlatformFilterValue)
+
+    PlatformFilters.member = Shapes::ShapeRef.new(shape: PlatformFilter)
+
+    PlatformFramework.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    PlatformFramework.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    PlatformFramework.struct_class = Types::PlatformFramework
+
+    PlatformFrameworks.member = Shapes::ShapeRef.new(shape: PlatformFramework)
+
+    PlatformProgrammingLanguage.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    PlatformProgrammingLanguage.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    PlatformProgrammingLanguage.struct_class = Types::PlatformProgrammingLanguage
+
+    PlatformProgrammingLanguages.member = Shapes::ShapeRef.new(shape: PlatformProgrammingLanguage)
+
+    PlatformSummary.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
+    PlatformSummary.add_member(:platform_owner, Shapes::ShapeRef.new(shape: PlatformOwner, location_name: "PlatformOwner"))
+    PlatformSummary.add_member(:platform_status, Shapes::ShapeRef.new(shape: PlatformStatus, location_name: "PlatformStatus"))
+    PlatformSummary.add_member(:platform_category, Shapes::ShapeRef.new(shape: PlatformCategory, location_name: "PlatformCategory"))
+    PlatformSummary.add_member(:operating_system_name, Shapes::ShapeRef.new(shape: OperatingSystemName, location_name: "OperatingSystemName"))
+    PlatformSummary.add_member(:operating_system_version, Shapes::ShapeRef.new(shape: OperatingSystemVersion, location_name: "OperatingSystemVersion"))
+    PlatformSummary.add_member(:supported_tier_list, Shapes::ShapeRef.new(shape: SupportedTierList, location_name: "SupportedTierList"))
+    PlatformSummary.add_member(:supported_addon_list, Shapes::ShapeRef.new(shape: SupportedAddonList, location_name: "SupportedAddonList"))
+    PlatformSummary.struct_class = Types::PlatformSummary
+
+    PlatformSummaryList.member = Shapes::ShapeRef.new(shape: PlatformSummary)
 
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Queue.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "URL"))
@@ -808,6 +953,10 @@ module Aws::ElasticBeanstalk
     StatusCodes.add_member(:status_5xx, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "Status5xx"))
     StatusCodes.struct_class = Types::StatusCodes
 
+    SupportedAddonList.member = Shapes::ShapeRef.new(shape: SupportedAddon)
+
+    SupportedTierList.member = Shapes::ShapeRef.new(shape: SupportedTier)
+
     SwapEnvironmentCNAMEsMessage.add_member(:source_environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "SourceEnvironmentId"))
     SwapEnvironmentCNAMEsMessage.add_member(:source_environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "SourceEnvironmentName"))
     SwapEnvironmentCNAMEsMessage.add_member(:destination_environment_id, Shapes::ShapeRef.new(shape: EnvironmentId, location_name: "DestinationEnvironmentId"))
@@ -864,6 +1013,7 @@ module Aws::ElasticBeanstalk
     UpdateEnvironmentMessage.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
     UpdateEnvironmentMessage.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))
     UpdateEnvironmentMessage.add_member(:solution_stack_name, Shapes::ShapeRef.new(shape: SolutionStackName, location_name: "SolutionStackName"))
+    UpdateEnvironmentMessage.add_member(:platform_arn, Shapes::ShapeRef.new(shape: PlatformArn, location_name: "PlatformArn"))
     UpdateEnvironmentMessage.add_member(:option_settings, Shapes::ShapeRef.new(shape: ConfigurationOptionSettingsList, location_name: "OptionSettings"))
     UpdateEnvironmentMessage.add_member(:options_to_remove, Shapes::ShapeRef.new(shape: OptionsSpecifierList, location_name: "OptionsToRemove"))
     UpdateEnvironmentMessage.struct_class = Types::UpdateEnvironmentMessage
@@ -980,6 +1130,17 @@ module Aws::ElasticBeanstalk
         o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
       end)
 
+      api.add_operation(:create_platform_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePlatformVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreatePlatformVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePlatformVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+        o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyPlatformsException)
+      end)
+
       api.add_operation(:create_storage_location, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateStorageLocation"
         o.http_method = "POST"
@@ -1027,6 +1188,18 @@ module Aws::ElasticBeanstalk
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentConfigurationMessage)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:delete_platform_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePlatformVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeletePlatformVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePlatformVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+        o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: PlatformVersionStillReferencedException)
       end)
 
       api.add_operation(:describe_application_versions, Seahorse::Model::Operation.new.tap do |o|
@@ -1132,12 +1305,32 @@ module Aws::ElasticBeanstalk
         o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
       end)
 
+      api.add_operation(:describe_platform_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribePlatformVersion"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribePlatformVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribePlatformVersionResult)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+        o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
+      end)
+
       api.add_operation(:list_available_solution_stacks, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListAvailableSolutionStacks"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: ListAvailableSolutionStacksResultMessage)
+      end)
+
+      api.add_operation(:list_platform_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPlatformVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListPlatformVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPlatformVersionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
+        o.errors << Shapes::ShapeRef.new(shape: ElasticBeanstalkServiceException)
       end)
 
       api.add_operation(:rebuild_environment, Seahorse::Model::Operation.new.tap do |o|

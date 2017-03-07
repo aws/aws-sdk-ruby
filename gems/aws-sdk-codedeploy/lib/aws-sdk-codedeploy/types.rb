@@ -441,6 +441,105 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about blue/green deployment options for a deployment
+    # group.
+    #
+    # @note When making an API call, you may pass BlueGreenDeploymentConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         terminate_blue_instances_on_deployment_success: {
+    #           action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
+    #           termination_wait_time_in_minutes: 1,
+    #         },
+    #         deployment_ready_option: {
+    #           action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
+    #           wait_time_in_minutes: 1,
+    #         },
+    #         green_fleet_provisioning_option: {
+    #           action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
+    #         },
+    #       }
+    #
+    # @!attribute [rw] terminate_blue_instances_on_deployment_success
+    #   Information about whether to terminate instances in the original
+    #   fleet during a blue/green deployment.
+    #   @return [Types::BlueInstanceTerminationOption]
+    #
+    # @!attribute [rw] deployment_ready_option
+    #   Information about the action to take when newly provisioned
+    #   instances are ready to receive traffic in a blue/green deployment.
+    #   @return [Types::DeploymentReadyOption]
+    #
+    # @!attribute [rw] green_fleet_provisioning_option
+    #   Information about how instances are provisioned for a replacement
+    #   environment in a blue/green deployment.
+    #   @return [Types::GreenFleetProvisioningOption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueGreenDeploymentConfiguration AWS API Documentation
+    #
+    class BlueGreenDeploymentConfiguration < Struct.new(
+      :terminate_blue_instances_on_deployment_success,
+      :deployment_ready_option,
+      :green_fleet_provisioning_option)
+      include Aws::Structure
+    end
+
+    # Information about whether instances in the original environment are
+    # terminated when a blue/green deployment is successful.
+    #
+    # @note When making an API call, you may pass BlueInstanceTerminationOption
+    #   data as a hash:
+    #
+    #       {
+    #         action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
+    #         termination_wait_time_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to take on instances in the original environment after a
+    #   successful blue/green deployment.
+    #
+    #   * TERMINATE: Instances are terminated after a specified wait time.
+    #
+    #   * KEEP\_ALIVE: Instances are left running after they are
+    #     deregistered from the load balancer and removed from the
+    #     deployment group.
+    #   @return [String]
+    #
+    # @!attribute [rw] termination_wait_time_in_minutes
+    #   The number of minutes to wait after a successful blue/green
+    #   deployment before terminating instances from the original
+    #   environment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueInstanceTerminationOption AWS API Documentation
+    #
+    class BlueInstanceTerminationOption < Struct.new(
+      :action,
+      :termination_wait_time_in_minutes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ContinueDeploymentInput
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "DeploymentId",
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The deployment ID of the blue/green deployment for which you want to
+    #   start rerouting traffic to the replacement environment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeploymentInput AWS API Documentation
+    #
+    class ContinueDeploymentInput < Struct.new(
+      :deployment_id)
+      include Aws::Structure
+    end
+
     # Represents the input of a create application operation.
     #
     # @note When making an API call, you may pass CreateApplicationInput
@@ -565,7 +664,7 @@ module Aws::CodeDeploy
     #           {
     #             trigger_name: "TriggerName",
     #             trigger_target_arn: "TriggerTargetArn",
-    #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
+    #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
     #           },
     #         ],
     #         alarm_configuration: {
@@ -580,6 +679,30 @@ module Aws::CodeDeploy
     #         auto_rollback_configuration: {
     #           enabled: false,
     #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+    #         },
+    #         deployment_style: {
+    #           deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
+    #           deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
+    #         },
+    #         blue_green_deployment_configuration: {
+    #           terminate_blue_instances_on_deployment_success: {
+    #             action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
+    #             termination_wait_time_in_minutes: 1,
+    #           },
+    #           deployment_ready_option: {
+    #             action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
+    #             wait_time_in_minutes: 1,
+    #           },
+    #           green_fleet_provisioning_option: {
+    #             action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
+    #           },
+    #         },
+    #         load_balancer_info: {
+    #           elb_info_list: [
+    #             {
+    #               name: "ELBName",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -648,6 +771,21 @@ module Aws::CodeDeploy
     #   when a deployment group is created.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @!attribute [rw] deployment_style
+    #   Information about the type of deployment, standard or blue/green,
+    #   that you want to run and whether to route deployment traffic behind
+    #   a load balancer.
+    #   @return [Types::DeploymentStyle]
+    #
+    # @!attribute [rw] blue_green_deployment_configuration
+    #   Information about blue/green deployment options for a deployment
+    #   group.
+    #   @return [Types::BlueGreenDeploymentConfiguration]
+    #
+    # @!attribute [rw] load_balancer_info
+    #   Information about the load balancer used in a blue/green deployment.
+    #   @return [Types::LoadBalancerInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput AWS API Documentation
     #
     class CreateDeploymentGroupInput < Struct.new(
@@ -660,7 +798,10 @@ module Aws::CodeDeploy
       :service_role_arn,
       :trigger_configurations,
       :alarm_configuration,
-      :auto_rollback_configuration)
+      :auto_rollback_configuration,
+      :deployment_style,
+      :blue_green_deployment_configuration,
+      :load_balancer_info)
       include Aws::Structure
     end
 
@@ -702,6 +843,16 @@ module Aws::CodeDeploy
     #         deployment_config_name: "DeploymentConfigName",
     #         description: "Description",
     #         ignore_application_stop_failures: false,
+    #         target_instances: {
+    #           tag_filters: [
+    #             {
+    #               key: "Key",
+    #               value: "Value",
+    #               type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #             },
+    #           ],
+    #           auto_scaling_groups: ["AutoScalingGroupName"],
+    #         },
     #         auto_rollback_configuration: {
     #           enabled: false,
     #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
@@ -749,6 +900,11 @@ module Aws::CodeDeploy
     #   that instance will be considered to have failed.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_instances
+    #   Information about the instances that will belong to the replacement
+    #   environment in a blue/green deployment.
+    #   @return [Types::TargetInstances]
+    #
     # @!attribute [rw] auto_rollback_configuration
     #   Configuration information for an automatic rollback that is added
     #   when a deployment is created.
@@ -768,6 +924,7 @@ module Aws::CodeDeploy
       :deployment_config_name,
       :description,
       :ignore_application_stop_failures,
+      :target_instances,
       :auto_rollback_configuration,
       :update_outdated_instances_only)
       include Aws::Structure
@@ -956,6 +1113,22 @@ module Aws::CodeDeploy
     #   with the deployment group.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @!attribute [rw] deployment_style
+    #   Information about the type of deployment, either standard or
+    #   blue/green, you want to run and whether to route deployment traffic
+    #   behind a load balancer.
+    #   @return [Types::DeploymentStyle]
+    #
+    # @!attribute [rw] blue_green_deployment_configuration
+    #   Information about blue/green deployment options for a deployment
+    #   group.
+    #   @return [Types::BlueGreenDeploymentConfiguration]
+    #
+    # @!attribute [rw] load_balancer_info
+    #   Information about the load balancer to use in a blue/green
+    #   deployment.
+    #   @return [Types::LoadBalancerInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
     #
     class DeploymentGroupInfo < Struct.new(
@@ -970,7 +1143,10 @@ module Aws::CodeDeploy
       :target_revision,
       :trigger_configurations,
       :alarm_configuration,
-      :auto_rollback_configuration)
+      :auto_rollback_configuration,
+      :deployment_style,
+      :blue_green_deployment_configuration,
+      :load_balancer_info)
       include Aws::Structure
     end
 
@@ -1069,6 +1245,39 @@ module Aws::CodeDeploy
     #   Information about a deployment rollback.
     #   @return [Types::RollbackInfo]
     #
+    # @!attribute [rw] deployment_style
+    #   Information about the type of deployment, either standard or
+    #   blue/green, you want to run and whether to route deployment traffic
+    #   behind a load balancer.
+    #   @return [Types::DeploymentStyle]
+    #
+    # @!attribute [rw] target_instances
+    #   Information about the instances that belong to the replacement
+    #   environment in a blue/green deployment.
+    #   @return [Types::TargetInstances]
+    #
+    # @!attribute [rw] instance_termination_wait_time_started
+    #   Indicates whether the wait period set for the termination of
+    #   instances in the original environment has started. Status is
+    #   'false' if the KEEP\_ALIVE option is specified; otherwise,
+    #   'true' as soon as the termination wait period starts.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] blue_green_deployment_configuration
+    #   Information about blue/green deployment options for this deployment.
+    #   @return [Types::BlueGreenDeploymentConfiguration]
+    #
+    # @!attribute [rw] load_balancer_info
+    #   Information about the load balancer used in this blue/green
+    #   deployment.
+    #   @return [Types::LoadBalancerInfo]
+    #
+    # @!attribute [rw] additional_deployment_status_info
+    #   Provides information about the results of a deployment, such as
+    #   whether instances in the original environment in a blue/green
+    #   deployment were not terminated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
     #
     class DeploymentInfo < Struct.new(
@@ -1088,7 +1297,13 @@ module Aws::CodeDeploy
       :ignore_application_stop_failures,
       :auto_rollback_configuration,
       :update_outdated_instances_only,
-      :rollback_info)
+      :rollback_info,
+      :deployment_style,
+      :target_instances,
+      :instance_termination_wait_time_started,
+      :blue_green_deployment_configuration,
+      :load_balancer_info,
+      :additional_deployment_status_info)
       include Aws::Structure
     end
 
@@ -1116,6 +1331,11 @@ module Aws::CodeDeploy
     #   The number of instances in the deployment in a skipped state.
     #   @return [Integer]
     #
+    # @!attribute [rw] ready
+    #   The number of instances in a replacement environment ready to
+    #   receive traffic in a blue/green deployment.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentOverview AWS API Documentation
     #
     class DeploymentOverview < Struct.new(
@@ -1123,7 +1343,77 @@ module Aws::CodeDeploy
       :in_progress,
       :succeeded,
       :failed,
-      :skipped)
+      :skipped,
+      :ready)
+      include Aws::Structure
+    end
+
+    # Information about how traffic is rerouted to instances in a
+    # replacement environment in a blue/green deployment.
+    #
+    # @note When making an API call, you may pass DeploymentReadyOption
+    #   data as a hash:
+    #
+    #       {
+    #         action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
+    #         wait_time_in_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] action_on_timeout
+    #   Information about when to reroute traffic from an original
+    #   environment to a replacement environment in a blue/green deployment.
+    #
+    #   * CONTINUE\_DEPLOYMENT: Register new instances with the load
+    #     balancer immediately after the new application revision is
+    #     installed on the instances in the replacement environment.
+    #
+    #   * STOP\_DEPLOYMENT: Do not register new instances with load balancer
+    #     unless traffic is rerouted manually. If traffic is not rerouted
+    #     manually before the end of the specified wait period, the
+    #     deployment status is changed to Stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] wait_time_in_minutes
+    #   The number of minutes to wait before the status of a blue/green
+    #   deployment changed to Stopped if rerouting is not started manually.
+    #   Applies only to the STOP\_DEPLOYMENT option for actionOnTimeout
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentReadyOption AWS API Documentation
+    #
+    class DeploymentReadyOption < Struct.new(
+      :action_on_timeout,
+      :wait_time_in_minutes)
+      include Aws::Structure
+    end
+
+    # Information about the type of deployment, either standard or
+    # blue/green, you want to run and whether to route deployment traffic
+    # behind a load balancer.
+    #
+    # @note When making an API call, you may pass DeploymentStyle
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
+    #         deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
+    #       }
+    #
+    # @!attribute [rw] deployment_type
+    #   Indicates whether to run a standard deployment or a blue/green
+    #   deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] deployment_option
+    #   Indicates whether to route deployment traffic behind a load
+    #   balancer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentStyle AWS API Documentation
+    #
+    class DeploymentStyle < Struct.new(
+      :deployment_type,
+      :deployment_option)
       include Aws::Structure
     end
 
@@ -1233,9 +1523,35 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about a load balancer in Elastic Load Balancing to use in
+    # a blue/green deployment.
+    #
+    # @note When making an API call, you may pass ELBInfo
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ELBName",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the load balancer that will be used to route traffic
+    #   from original instances to replacement instances in a blue/green
+    #   deployment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ELBInfo AWS API Documentation
+    #
+    class ELBInfo < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
     # Information about a deployment error.
     #
     # @!attribute [rw] code
+    #   For information about additional error codes, see [Error Codes for
+    #   AWS CodeDeploy][1] in the [AWS CodeDeploy User Guide][2].
+    #
     #   The error code:
     #
     #   * APPLICATION\_MISSING: The application was missing. This error code
@@ -1276,6 +1592,11 @@ module Aws::CodeDeploy
     #   * REVISION\_MISSING: The revision ID was missing. This error code
     #     will most likely be raised if the revision is deleted after the
     #     deployment is created but before it is started.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html
+    #   [2]: http://docs.aws.amazon.com/codedeploy/latest/userguide
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -1634,6 +1955,34 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about the instances that belong to the replacement
+    # environment in a blue/green deployment.
+    #
+    # @note When making an API call, you may pass GreenFleetProvisioningOption
+    #   data as a hash:
+    #
+    #       {
+    #         action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The method used to add instances to a replacement environment.
+    #
+    #   * DISCOVER\_EXISTING: Use instances that already exist or will be
+    #     created manually.
+    #
+    #   * COPY\_AUTO\_SCALING\_GROUP: Use settings from a specified Auto
+    #     Scaling group to define and create instances in a new Auto Scaling
+    #     group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GreenFleetProvisioningOption AWS API Documentation
+    #
+    class GreenFleetProvisioningOption < Struct.new(
+      :action)
+      include Aws::Structure
+    end
+
     # Information about an on-premises instance.
     #
     # @!attribute [rw] instance_name
@@ -1713,6 +2062,15 @@ module Aws::CodeDeploy
     #   A list of lifecycle events for this instance.
     #   @return [Array<Types::LifecycleEvent>]
     #
+    # @!attribute [rw] instance_type
+    #   Information about which environment an instance belongs to in a
+    #   blue/green deployment.
+    #
+    #   * BLUE: The instance is part of the original environment.
+    #
+    #   * GREEN: The instance is part of the replacement environment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InstanceSummary AWS API Documentation
     #
     class InstanceSummary < Struct.new(
@@ -1720,7 +2078,8 @@ module Aws::CodeDeploy
       :instance_id,
       :status,
       :last_updated_at,
-      :lifecycle_events)
+      :lifecycle_events,
+      :instance_type)
       include Aws::Structure
     end
 
@@ -2030,7 +2389,8 @@ module Aws::CodeDeploy
     #       {
     #         deployment_id: "DeploymentId", # required
     #         next_token: "NextToken",
-    #         instance_status_filter: ["Pending"], # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown
+    #         instance_status_filter: ["Pending"], # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown, Ready
+    #         instance_type_filter: ["Blue"], # accepts Blue, Green
     #       }
     #
     # @!attribute [rw] deployment_id
@@ -2061,12 +2421,20 @@ module Aws::CodeDeploy
     #     state.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] instance_type_filter
+    #   The set of instances in a blue/green deployment, either those in the
+    #   original environment ("BLUE") or those in the replacement
+    #   environment ("GREEN"), for which you want to view instance
+    #   information.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstancesInput AWS API Documentation
     #
     class ListDeploymentInstancesInput < Struct.new(
       :deployment_id,
       :next_token,
-      :instance_status_filter)
+      :instance_status_filter,
+      :instance_type_filter)
       include Aws::Structure
     end
 
@@ -2098,7 +2466,7 @@ module Aws::CodeDeploy
     #       {
     #         application_name: "ApplicationName",
     #         deployment_group_name: "DeploymentGroupName",
-    #         include_only_statuses: ["Created"], # accepts Created, Queued, InProgress, Succeeded, Failed, Stopped
+    #         include_only_statuses: ["Created"], # accepts Created, Queued, InProgress, Succeeded, Failed, Stopped, Ready
     #         create_time_range: {
     #           start: Time.now,
     #           end: Time.now,
@@ -2238,6 +2606,31 @@ module Aws::CodeDeploy
     class ListOnPremisesInstancesOutput < Struct.new(
       :instance_names,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Information about the load balancer used in a blue/green deployment.
+    #
+    # @note When making an API call, you may pass LoadBalancerInfo
+    #   data as a hash:
+    #
+    #       {
+    #         elb_info_list: [
+    #           {
+    #             name: "ELBName",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] elb_info_list
+    #   An array containing information about the load balancer in Elastic
+    #   Load Balancing to use in a blue/green deployment.
+    #   @return [Array<Types::ELBInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LoadBalancerInfo AWS API Documentation
+    #
+    class LoadBalancerInfo < Struct.new(
+      :elb_info_list)
       include Aws::Structure
     end
 
@@ -2415,7 +2808,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] generic_revision_info
     #   Information about an application revision, including usage details
-    #   and currently associated deployment groups.
+    #   and associated deployment groups.
     #   @return [Types::GenericRevisionInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionInfo AWS API Documentation
@@ -2561,6 +2954,25 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SkipWaitTimeForInstanceTerminationInput
+    #   data as a hash:
+    #
+    #       {
+    #         deployment_id: "DeploymentId",
+    #       }
+    #
+    # @!attribute [rw] deployment_id
+    #   The ID of the blue/green deployment for which you want to skip the
+    #   instance termination wait time.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTerminationInput AWS API Documentation
+    #
+    class SkipWaitTimeForInstanceTerminationInput < Struct.new(
+      :deployment_id)
+      include Aws::Structure
+    end
+
     # Represents the input of a stop deployment operation.
     #
     # @note When making an API call, you may pass StopDeploymentInput
@@ -2675,6 +3087,41 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
+    # Information about the instances to be used in the replacement
+    # environment in a blue/green deployment.
+    #
+    # @note When making an API call, you may pass TargetInstances
+    #   data as a hash:
+    #
+    #       {
+    #         tag_filters: [
+    #           {
+    #             key: "Key",
+    #             value: "Value",
+    #             type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
+    #           },
+    #         ],
+    #         auto_scaling_groups: ["AutoScalingGroupName"],
+    #       }
+    #
+    # @!attribute [rw] tag_filters
+    #   The tag filter key, type, and value used to identify Amazon EC2
+    #   instances in a replacement environment for a blue/green deployment.
+    #   @return [Array<Types::EC2TagFilter>]
+    #
+    # @!attribute [rw] auto_scaling_groups
+    #   The names of one or more Auto Scaling groups to identify a
+    #   replacement environment for a blue/green deployment.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TargetInstances AWS API Documentation
+    #
+    class TargetInstances < Struct.new(
+      :tag_filters,
+      :auto_scaling_groups)
+      include Aws::Structure
+    end
+
     # Information about a time range.
     #
     # @note When making an API call, you may pass TimeRange
@@ -2717,7 +3164,7 @@ module Aws::CodeDeploy
     #       {
     #         trigger_name: "TriggerName",
     #         trigger_target_arn: "TriggerTargetArn",
-    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
+    #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
     #       }
     #
     # @!attribute [rw] trigger_name
@@ -2798,7 +3245,7 @@ module Aws::CodeDeploy
     #           {
     #             trigger_name: "TriggerName",
     #             trigger_target_arn: "TriggerTargetArn",
-    #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
+    #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, DeploymentReady, InstanceStart, InstanceSuccess, InstanceFailure, InstanceReady
     #           },
     #         ],
     #         alarm_configuration: {
@@ -2813,6 +3260,30 @@ module Aws::CodeDeploy
     #         auto_rollback_configuration: {
     #           enabled: false,
     #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+    #         },
+    #         deployment_style: {
+    #           deployment_type: "IN_PLACE", # accepts IN_PLACE, BLUE_GREEN
+    #           deployment_option: "WITH_TRAFFIC_CONTROL", # accepts WITH_TRAFFIC_CONTROL, WITHOUT_TRAFFIC_CONTROL
+    #         },
+    #         blue_green_deployment_configuration: {
+    #           terminate_blue_instances_on_deployment_success: {
+    #             action: "TERMINATE", # accepts TERMINATE, KEEP_ALIVE
+    #             termination_wait_time_in_minutes: 1,
+    #           },
+    #           deployment_ready_option: {
+    #             action_on_timeout: "CONTINUE_DEPLOYMENT", # accepts CONTINUE_DEPLOYMENT, STOP_DEPLOYMENT
+    #             wait_time_in_minutes: 1,
+    #           },
+    #           green_fleet_provisioning_option: {
+    #             action: "DISCOVER_EXISTING", # accepts DISCOVER_EXISTING, COPY_AUTO_SCALING_GROUP
+    #           },
+    #         },
+    #         load_balancer_info: {
+    #           elb_info_list: [
+    #             {
+    #               name: "ELBName",
+    #             },
+    #           ],
     #         },
     #       }
     #
@@ -2877,6 +3348,21 @@ module Aws::CodeDeploy
     #   changed when a deployment group is updated.
     #   @return [Types::AutoRollbackConfiguration]
     #
+    # @!attribute [rw] deployment_style
+    #   Information about the type of deployment, either standard or
+    #   blue/green, you want to run and whether to route deployment traffic
+    #   behind a load balancer.
+    #   @return [Types::DeploymentStyle]
+    #
+    # @!attribute [rw] blue_green_deployment_configuration
+    #   Information about blue/green deployment options for a deployment
+    #   group.
+    #   @return [Types::BlueGreenDeploymentConfiguration]
+    #
+    # @!attribute [rw] load_balancer_info
+    #   Information about the load balancer used in a blue/green deployment.
+    #   @return [Types::LoadBalancerInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupInput AWS API Documentation
     #
     class UpdateDeploymentGroupInput < Struct.new(
@@ -2890,7 +3376,10 @@ module Aws::CodeDeploy
       :service_role_arn,
       :trigger_configurations,
       :alarm_configuration,
-      :auto_rollback_configuration)
+      :auto_rollback_configuration,
+      :deployment_style,
+      :blue_green_deployment_configuration,
+      :load_balancer_info)
       include Aws::Structure
     end
 

@@ -17,6 +17,7 @@ module Aws::CognitoIdentity
     #       {
     #         provider_name: "CognitoIdentityProviderName",
     #         client_id: "CognitoIdentityProviderClientId",
+    #         server_side_token_check: false,
     #       }
     #
     # @!attribute [rw] provider_name
@@ -28,11 +29,17 @@ module Aws::CognitoIdentity
     #   The client ID for the Amazon Cognito Identity User Pool.
     #   @return [String]
     #
+    # @!attribute [rw] server_side_token_check
+    #   TRUE if server-side token validation is enabled for the identity
+    #   provider’s token.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-identity-2014-06-30/CognitoIdentityProvider AWS API Documentation
     #
     class CognitoIdentityProvider < Struct.new(
       :provider_name,
-      :client_id)
+      :client_id,
+      :server_side_token_check)
       include Aws::Structure
     end
 
@@ -53,6 +60,7 @@ module Aws::CognitoIdentity
     #           {
     #             provider_name: "CognitoIdentityProviderName",
     #             client_id: "CognitoIdentityProviderClientId",
+    #             server_side_token_check: false,
     #           },
     #         ],
     #         saml_provider_arns: ["ARNString"],
@@ -570,6 +578,7 @@ module Aws::CognitoIdentity
     #           {
     #             provider_name: "CognitoIdentityProviderName",
     #             client_id: "CognitoIdentityProviderClientId",
+    #             server_side_token_check: false,
     #           },
     #         ],
     #         saml_provider_arns: ["ARNString"],

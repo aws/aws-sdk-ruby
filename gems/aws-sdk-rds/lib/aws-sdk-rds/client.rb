@@ -808,13 +808,8 @@ module Aws::RDS
     #   copy of the DB snapshot is encrypted with the same KMS key as the
     #   source DB snapshot.
     #
-    #   If you copy an encrypted DB snapshot from your AWS account, you can
-    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-    #   encryption key. If you don't specify a value for `KmsKeyId`, then the
-    #   copy of the DB snapshot is encrypted with the same KMS key as the
-    #   source DB snapshot. If you copy an encrypted snapshot to a different
-    #   AWS region, then you must specify a KMS key for the destination AWS
-    #   region.
+    #   If you copy an encrypted snapshot to a different AWS region, then you
+    #   must specify a KMS key for the destination AWS region.
     #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
     #   account, then you must specify a value for `KmsKeyId`.
@@ -874,8 +869,8 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [String] :destination_region
     #
@@ -1626,7 +1621,8 @@ module Aws::RDS
     #   Edition)
     #
     # @option params [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance.
+    #   The compute and memory capacity of the DB instance. Note that not all
+    #   instance classes are available in all regions for all DB engines.
     #
     #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
     #   | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge |
@@ -1981,19 +1977,119 @@ module Aws::RDS
     #
     #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
     #
-    #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
-    #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
-    #     us-west-2):** ` 5.5.42`
-    #
-    #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40b |
-    #     5.5.41`
-    #
-    #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
+    #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
     #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40 | 5.5.40a`
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
+    #
+    #   **Oracle Database Enterprise Edition (oracle-ee)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+    #
+    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
+    #     12.1.0.1.v5`
+    #
+    #   * **Version 12.1 (available in all AWS regions):** ` 12.1.0.2.v1`
+    #
+    #   * **Version 12.1 (available in all AWS regions except
+    #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
+    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
+    #
+    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
+    #     11.2.0.4.v3 | 11.2.0.4.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions except
+    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+    #     11.2.0.4.v8`
+    #
+    #   **Oracle Database Standard Edition (oracle-se)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+    #
+    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
+    #     12.1.0.1.v5`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
+    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
+    #
+    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
+    #     11.2.0.4.v3 | 11.2.0.4.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions except
+    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+    #     11.2.0.4.v8`
+    #
+    #   **Oracle Database Standard Edition One (oracle-se1)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+    #
+    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
+    #     12.1.0.1.v5`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
+    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
+    #
+    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
+    #     11.2.0.4.v3 | 11.2.0.4.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions except
+    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+    #     11.2.0.4.v8`
+    #
+    #   **Oracle Database Standard Edition Two (oracle-se2)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except
+    #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
+    #
+    #   ^
+    #
+    #   **PostgreSQL**
+    #
+    #   * **Version 9.6:** ` 9.6.1`
+    #
+    #   * **Version 9.5:** `9.5.4 | 9.5.2`
+    #
+    #   * **Version 9.4:** ` 9.4.9 | 9.4.7 | 9.4.5 | 9.4.4 | 9.4.1`
+    #
+    #   * **Version 9.3:** ` 9.3.14 | 9.3.12 | 9.3.10 | 9.3.9 | 9.3.6 | 9.3.5
+    #     | 9.3.3 | 9.3.2 | 9.3.1`
     #
     #
     #
@@ -2427,6 +2523,73 @@ module Aws::RDS
     #
     # The source DB instance must have backup retention enabled.
     #
+    # You can create an encrypted Read Replica in a different AWS Region
+    # than the source DB instance. In that case, the region where you call
+    # the `CreateDBInstanceReadReplica` action is the destination region of
+    # the encrypted Read Replica. The source DB instance must be encrypted.
+    #
+    # To create an encrypted Read Replica in another AWS Region, you must
+    # provide the following values:
+    #
+    # * `KmsKeyId` - The AWS Key Management System (KMS) key identifier for
+    #   the key to use to encrypt the Read Replica in the destination
+    #   region.
+    #
+    # * `PreSignedUrl` - A URL that contains a Signature Version 4 signed
+    #   request for the ` CreateDBInstanceReadReplica` API action in the AWS
+    #   region that contains the source DB instance. The `PreSignedUrl`
+    #   parameter must be used when encrypting a Read Replica from another
+    #   AWS region.
+    #
+    #   The presigned URL must be a valid request for the
+    #   `CreateDBInstanceReadReplica` API action that can be executed in the
+    #   source region that contains the encrypted DB instance. The presigned
+    #   URL request must contain the following parameter values:
+    #
+    #   * `DestinationRegion` - The AWS Region that the Read Replica is
+    #     created in. This region is the same one where the
+    #     `CreateDBInstanceReadReplica` action is called that contains this
+    #     presigned URL.
+    #
+    #     For example, if you create an encrypted Read Replica in the
+    #     us-east-1 region, and the source DB instance is in the west-2
+    #     region, then you call the `CreateDBInstanceReadReplica` action in
+    #     the us-east-1 region and provide a presigned URL that contains a
+    #     call to the `CreateDBInstanceReadReplica` action in the us-west-2
+    #     region. For this example, the `DestinationRegion` in the presigned
+    #     URL must be set to the us-east-1 region.
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the Read Replica in the destination region. This is the same
+    #     identifier for both the `CreateDBInstanceReadReplica` action that
+    #     is called in the destination region, and the action contained in
+    #     the presigned URL.
+    #
+    #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
+    #     encrypted Read Replica to be created. This identifier must be in
+    #     the Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you create an encrypted Read Replica from a DB
+    #     instance in the us-west-2 region, then your
+    #     `SourceDBInstanceIdentifier` would look like this example: `
+    #     arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-instance-20161115`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    # * `DBInstanceIdentifier` - The identifier for the encrypted Read
+    #   Replica in the destination region.
+    #
+    # * `SourceDBInstanceIdentifier` - The DB instance identifier for the
+    #   encrypted Read Replica. This identifier must be in the ARN format
+    #   for the source region and is the same value as the
+    #   `SourceDBInstanceIdentifier` in the presigned URL.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    # [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
     # @option params [required, String] :db_instance_identifier
     #   The DB instance identifier of the Read Replica. This identifier is the
     #   unique key that identifies a DB instance. This parameter is stored as
@@ -2444,8 +2607,8 @@ module Aws::RDS
     #   * Can specify a DB instance that is a MySQL Read Replica only if the
     #     source is running MySQL 5.6.
     #
-    #   * Can specify a DB instance that is a PostgreSQL Read Replica only if
-    #     the source is running PostgreSQL 9.3.5.
+    #   * Can specify a DB instance that is a PostgreSQL DB instance only if
+    #     the source is running PostgreSQL 9.3.5 or later.
     #
     #   * The specified DB instance must have automatic backups enabled, its
     #     backup retention period must be greater than 0.
@@ -2462,7 +2625,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
     #
     # @option params [String] :db_instance_class
-    #   The compute and memory capacity of the Read Replica.
+    #   The compute and memory capacity of the Read Replica. Note that not all
+    #   instance classes are available in all regions for all DB engines.
     #
     #   Valid Values: `db.m1.small | db.m1.medium | db.m1.large | db.m1.xlarge
     #   | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge | db.m3.medium |
@@ -2595,6 +2759,73 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
     #
+    # @option params [String] :kms_key_id
+    #   The AWS KMS key ID for an encrypted Read Replica. The KMS key ID is
+    #   the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
+    #   alias for the KMS encryption key.
+    #
+    #   If you create an unencrypted Read Replica and specify a value for the
+    #   `KmsKeyId` parameter, Amazon RDS encrypts the target Read Replica
+    #   using the specified KMS encryption key.
+    #
+    #   If you create an encrypted Read Replica from your AWS account, you can
+    #   specify a value for `KmsKeyId` to encrypt the Read Replica with a new
+    #   KMS encryption key. If you don't specify a value for `KmsKeyId`, then
+    #   the Read Replica is encrypted with the same KMS key as the source DB
+    #   instance.
+    #
+    #   If you create an encrypted Read Replica in a different AWS region,
+    #   then you must specify a KMS key for the destination AWS region. KMS
+    #   encryption keys are specific to the region that they are created in,
+    #   and you cannot use encryption keys from one region in another region.
+    #
+    # @option params [String] :pre_signed_url
+    #   The URL that contains a Signature Version 4 signed request for the `
+    #   CreateDBInstanceReadReplica` API action in the AWS region that
+    #   contains the source DB instance. The `PreSignedUrl` parameter must be
+    #   used when encrypting a Read Replica from another AWS region.
+    #
+    #   The presigned URL must be a valid request for the
+    #   `CreateDBInstanceReadReplica` API action that can be executed in the
+    #   source region that contains the encrypted DB instance. The presigned
+    #   URL request must contain the following parameter values:
+    #
+    #   * `DestinationRegion` - The AWS Region that the Read Replica is
+    #     created in. This region is the same one where the
+    #     `CreateDBInstanceReadReplica` action is called that contains this
+    #     presigned URL.
+    #
+    #     For example, if you create an encrypted Read Replica in the
+    #     us-east-1 region, and the source DB instance is in the west-2
+    #     region, then you call the `CreateDBInstanceReadReplica` action in
+    #     the us-east-1 region and provide a presigned URL that contains a
+    #     call to the `CreateDBInstanceReadReplica` action in the us-west-2
+    #     region. For this example, the `DestinationRegion` in the presigned
+    #     URL must be set to the us-east-1 region.
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the Read Replica in the destination region. This is the same
+    #     identifier for both the `CreateDBInstanceReadReplica` action that is
+    #     called in the destination region, and the action contained in the
+    #     presigned URL.
+    #
+    #   * `SourceDBInstanceIdentifier` - The DB instance identifier for the
+    #     encrypted Read Replica to be created. This identifier must be in the
+    #     Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you create an encrypted Read Replica from a DB instance
+    #     in the us-west-2 region, then your `SourceDBInstanceIdentifier`
+    #     would look like this example: `
+    #     arn:aws:rds:us-west-2:123456789012:instance:mysql-instance1-instance-20161115`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
+    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #
     # @return [Types::CreateDBInstanceReadReplicaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceReadReplicaResult#db_instance #db_instance} => Types::DBInstance
@@ -2622,6 +2853,8 @@ module Aws::RDS
     #     copy_tags_to_snapshot: false,
     #     monitoring_interval: 1,
     #     monitoring_role_arn: "String",
+    #     kms_key_id: "String",
+    #     pre_signed_url: "String",
     #   })
     #
     # @example Response structure
@@ -7098,7 +7331,8 @@ module Aws::RDS
     # @option params [String] :db_instance_class
     #   The new compute and memory capacity of the DB instance. To determine
     #   the instance classes that are available for a particular DB engine,
-    #   use the DescribeOrderableDBInstanceOptions action.
+    #   use the DescribeOrderableDBInstanceOptions action. Note that not all
+    #   instance classes are available in all regions for all DB engines.
     #
     #   Passing a value for this setting causes an outage during the change
     #   and is applied during the next maintenance window, unless
@@ -7763,6 +7997,67 @@ module Aws::RDS
     # @param [Hash] params ({})
     def modify_db_parameter_group(params = {}, options = {})
       req = build_request(:modify_db_parameter_group, params)
+      req.send_request(options)
+    end
+
+    # Updates a manual DB snapshot, which can be encrypted or not encrypted,
+    # with a new engine version. You can update the engine version to either
+    # a new major or minor engine version.
+    #
+    # Amazon RDS supports upgrading a MySQL DB snapshot from MySQL 5.1 to
+    # MySQL 5.5.
+    #
+    # @option params [required, String] :db_snapshot_identifier
+    #   The identifier of the DB snapshot to modify.
+    #
+    # @option params [String] :engine_version
+    #   The engine version to update the DB snapshot to.
+    #
+    # @return [Types::ModifyDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDBSnapshotResult#db_snapshot #db_snapshot} => Types::DBSnapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_snapshot({
+    #     db_snapshot_identifier: "String", # required
+    #     engine_version: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_snapshot.db_snapshot_identifier #=> String
+    #   resp.db_snapshot.db_instance_identifier #=> String
+    #   resp.db_snapshot.snapshot_create_time #=> Time
+    #   resp.db_snapshot.engine #=> String
+    #   resp.db_snapshot.allocated_storage #=> Integer
+    #   resp.db_snapshot.status #=> String
+    #   resp.db_snapshot.port #=> Integer
+    #   resp.db_snapshot.availability_zone #=> String
+    #   resp.db_snapshot.vpc_id #=> String
+    #   resp.db_snapshot.instance_create_time #=> Time
+    #   resp.db_snapshot.master_username #=> String
+    #   resp.db_snapshot.engine_version #=> String
+    #   resp.db_snapshot.license_model #=> String
+    #   resp.db_snapshot.snapshot_type #=> String
+    #   resp.db_snapshot.iops #=> Integer
+    #   resp.db_snapshot.option_group_name #=> String
+    #   resp.db_snapshot.percent_progress #=> Integer
+    #   resp.db_snapshot.source_region #=> String
+    #   resp.db_snapshot.source_db_snapshot_identifier #=> String
+    #   resp.db_snapshot.storage_type #=> String
+    #   resp.db_snapshot.tde_credential_arn #=> String
+    #   resp.db_snapshot.encrypted #=> Boolean
+    #   resp.db_snapshot.kms_key_id #=> String
+    #   resp.db_snapshot.db_snapshot_arn #=> String
+    #   resp.db_snapshot.timezone #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
+    #
+    # @overload modify_db_snapshot(params = {})
+    # @param [Hash] params ({})
+    def modify_db_snapshot(params = {}, options = {})
+      req = build_request(:modify_db_snapshot, params)
       req.send_request(options)
     end
 
@@ -10272,7 +10567,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

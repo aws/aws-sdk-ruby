@@ -650,7 +650,7 @@ module Aws::EC2
             acceptors: [
               {
                 "expected" => true,
-                "matcher" => "pathAll",
+                "matcher" => "path",
                 "state" => "success",
                 "argument" => "length(key_pairs[].key_name) > `0`"
               },
@@ -1185,6 +1185,49 @@ module Aws::EC2
 
       # @option (see Client#describe_vpcs)
       # @return (see Client#describe_vpcs)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class VpcPeeringConnectionDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_vpc_peering_connections,
+            acceptors: [
+              {
+                "expected" => "deleted",
+                "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "vpc_peering_connections[].status.code"
+              },
+              {
+                "matcher" => "error",
+                "expected" => "InvalidVpcPeeringConnectionID.NotFound",
+                "state" => "success"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_vpc_peering_connections)
+      # @return (see Client#describe_vpc_peering_connections)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

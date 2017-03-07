@@ -14,15 +14,21 @@ module Aws::DirectConnect
     ASN = Shapes::IntegerShape.new(name: 'ASN')
     AddressFamily = Shapes::StringShape.new(name: 'AddressFamily')
     AllocateConnectionOnInterconnectRequest = Shapes::StructureShape.new(name: 'AllocateConnectionOnInterconnectRequest')
+    AllocateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AllocateHostedConnectionRequest')
     AllocatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocatePrivateVirtualInterfaceRequest')
     AllocatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocatePublicVirtualInterfaceRequest')
     AmazonAddress = Shapes::StringShape.new(name: 'AmazonAddress')
+    AssociateConnectionWithLagRequest = Shapes::StructureShape.new(name: 'AssociateConnectionWithLagRequest')
+    AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
+    AssociateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AssociateVirtualInterfaceRequest')
+    AwsDevice = Shapes::StringShape.new(name: 'AwsDevice')
     BGPAuthKey = Shapes::StringShape.new(name: 'BGPAuthKey')
     BGPPeer = Shapes::StructureShape.new(name: 'BGPPeer')
     BGPPeerList = Shapes::ListShape.new(name: 'BGPPeerList')
     BGPPeerState = Shapes::StringShape.new(name: 'BGPPeerState')
     BGPStatus = Shapes::StringShape.new(name: 'BGPStatus')
     Bandwidth = Shapes::StringShape.new(name: 'Bandwidth')
+    BooleanFlag = Shapes::BooleanShape.new(name: 'BooleanFlag')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     ConfirmConnectionRequest = Shapes::StructureShape.new(name: 'ConfirmConnectionRequest')
     ConfirmConnectionResponse = Shapes::StructureShape.new(name: 'ConfirmConnectionResponse')
@@ -36,10 +42,12 @@ module Aws::DirectConnect
     ConnectionName = Shapes::StringShape.new(name: 'ConnectionName')
     ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
     Connections = Shapes::StructureShape.new(name: 'Connections')
+    Count = Shapes::IntegerShape.new(name: 'Count')
     CreateBGPPeerRequest = Shapes::StructureShape.new(name: 'CreateBGPPeerRequest')
     CreateBGPPeerResponse = Shapes::StructureShape.new(name: 'CreateBGPPeerResponse')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
     CreateInterconnectRequest = Shapes::StructureShape.new(name: 'CreateInterconnectRequest')
+    CreateLagRequest = Shapes::StructureShape.new(name: 'CreateLagRequest')
     CreatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePrivateVirtualInterfaceRequest')
     CreatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePublicVirtualInterfaceRequest')
     CustomerAddress = Shapes::StringShape.new(name: 'CustomerAddress')
@@ -48,20 +56,25 @@ module Aws::DirectConnect
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
     DeleteInterconnectRequest = Shapes::StructureShape.new(name: 'DeleteInterconnectRequest')
     DeleteInterconnectResponse = Shapes::StructureShape.new(name: 'DeleteInterconnectResponse')
+    DeleteLagRequest = Shapes::StructureShape.new(name: 'DeleteLagRequest')
     DeleteVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteVirtualInterfaceRequest')
     DeleteVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'DeleteVirtualInterfaceResponse')
     DescribeConnectionLoaRequest = Shapes::StructureShape.new(name: 'DescribeConnectionLoaRequest')
     DescribeConnectionLoaResponse = Shapes::StructureShape.new(name: 'DescribeConnectionLoaResponse')
     DescribeConnectionsOnInterconnectRequest = Shapes::StructureShape.new(name: 'DescribeConnectionsOnInterconnectRequest')
     DescribeConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeConnectionsRequest')
+    DescribeHostedConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeHostedConnectionsRequest')
     DescribeInterconnectLoaRequest = Shapes::StructureShape.new(name: 'DescribeInterconnectLoaRequest')
     DescribeInterconnectLoaResponse = Shapes::StructureShape.new(name: 'DescribeInterconnectLoaResponse')
     DescribeInterconnectsRequest = Shapes::StructureShape.new(name: 'DescribeInterconnectsRequest')
+    DescribeLagsRequest = Shapes::StructureShape.new(name: 'DescribeLagsRequest')
+    DescribeLoaRequest = Shapes::StructureShape.new(name: 'DescribeLoaRequest')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
     DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
     DescribeVirtualInterfacesRequest = Shapes::StructureShape.new(name: 'DescribeVirtualInterfacesRequest')
     DirectConnectClientException = Shapes::StructureShape.new(name: 'DirectConnectClientException')
     DirectConnectServerException = Shapes::StructureShape.new(name: 'DirectConnectServerException')
+    DisassociateConnectionFromLagRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionFromLagRequest')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Interconnect = Shapes::StructureShape.new(name: 'Interconnect')
@@ -70,6 +83,12 @@ module Aws::DirectConnect
     InterconnectName = Shapes::StringShape.new(name: 'InterconnectName')
     InterconnectState = Shapes::StringShape.new(name: 'InterconnectState')
     Interconnects = Shapes::StructureShape.new(name: 'Interconnects')
+    Lag = Shapes::StructureShape.new(name: 'Lag')
+    LagId = Shapes::StringShape.new(name: 'LagId')
+    LagList = Shapes::ListShape.new(name: 'LagList')
+    LagName = Shapes::StringShape.new(name: 'LagName')
+    LagState = Shapes::StringShape.new(name: 'LagState')
+    Lags = Shapes::StructureShape.new(name: 'Lags')
     Loa = Shapes::StructureShape.new(name: 'Loa')
     LoaContent = Shapes::BlobShape.new(name: 'LoaContent')
     LoaContentType = Shapes::StringShape.new(name: 'LoaContentType')
@@ -105,6 +124,7 @@ module Aws::DirectConnect
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateLagRequest = Shapes::StructureShape.new(name: 'UpdateLagRequest')
     VLAN = Shapes::IntegerShape.new(name: 'VLAN')
     VirtualGateway = Shapes::StructureShape.new(name: 'VirtualGateway')
     VirtualGatewayId = Shapes::StringShape.new(name: 'VirtualGatewayId')
@@ -126,6 +146,13 @@ module Aws::DirectConnect
     AllocateConnectionOnInterconnectRequest.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
     AllocateConnectionOnInterconnectRequest.struct_class = Types::AllocateConnectionOnInterconnectRequest
 
+    AllocateHostedConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    AllocateHostedConnectionRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, required: true, location_name: "ownerAccount"))
+    AllocateHostedConnectionRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
+    AllocateHostedConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "connectionName"))
+    AllocateHostedConnectionRequest.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
+    AllocateHostedConnectionRequest.struct_class = Types::AllocateHostedConnectionRequest
+
     AllocatePrivateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AllocatePrivateVirtualInterfaceRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, required: true, location_name: "ownerAccount"))
     AllocatePrivateVirtualInterfaceRequest.add_member(:new_private_virtual_interface_allocation, Shapes::ShapeRef.new(shape: NewPrivateVirtualInterfaceAllocation, required: true, location_name: "newPrivateVirtualInterfaceAllocation"))
@@ -135,6 +162,18 @@ module Aws::DirectConnect
     AllocatePublicVirtualInterfaceRequest.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, required: true, location_name: "ownerAccount"))
     AllocatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface_allocation, Shapes::ShapeRef.new(shape: NewPublicVirtualInterfaceAllocation, required: true, location_name: "newPublicVirtualInterfaceAllocation"))
     AllocatePublicVirtualInterfaceRequest.struct_class = Types::AllocatePublicVirtualInterfaceRequest
+
+    AssociateConnectionWithLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    AssociateConnectionWithLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
+    AssociateConnectionWithLagRequest.struct_class = Types::AssociateConnectionWithLagRequest
+
+    AssociateHostedConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    AssociateHostedConnectionRequest.add_member(:parent_connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "parentConnectionId"))
+    AssociateHostedConnectionRequest.struct_class = Types::AssociateHostedConnectionRequest
+
+    AssociateVirtualInterfaceRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
+    AssociateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    AssociateVirtualInterfaceRequest.struct_class = Types::AssociateVirtualInterfaceRequest
 
     BGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
     BGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
@@ -176,6 +215,8 @@ module Aws::DirectConnect
     Connection.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
     Connection.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerName, location_name: "partnerName"))
     Connection.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
+    Connection.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    Connection.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, location_name: "awsDevice"))
     Connection.struct_class = Types::Connection
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -193,12 +234,21 @@ module Aws::DirectConnect
     CreateConnectionRequest.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, required: true, location_name: "location"))
     CreateConnectionRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
     CreateConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "connectionName"))
+    CreateConnectionRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
     CreateInterconnectRequest.add_member(:interconnect_name, Shapes::ShapeRef.new(shape: InterconnectName, required: true, location_name: "interconnectName"))
     CreateInterconnectRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
     CreateInterconnectRequest.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, required: true, location_name: "location"))
+    CreateInterconnectRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
     CreateInterconnectRequest.struct_class = Types::CreateInterconnectRequest
+
+    CreateLagRequest.add_member(:number_of_connections, Shapes::ShapeRef.new(shape: Count, required: true, location_name: "numberOfConnections"))
+    CreateLagRequest.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, required: true, location_name: "location"))
+    CreateLagRequest.add_member(:connections_bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "connectionsBandwidth"))
+    CreateLagRequest.add_member(:lag_name, Shapes::ShapeRef.new(shape: LagName, required: true, location_name: "lagName"))
+    CreateLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
+    CreateLagRequest.struct_class = Types::CreateLagRequest
 
     CreatePrivateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     CreatePrivateVirtualInterfaceRequest.add_member(:new_private_virtual_interface, Shapes::ShapeRef.new(shape: NewPrivateVirtualInterface, required: true, location_name: "newPrivateVirtualInterface"))
@@ -225,6 +275,9 @@ module Aws::DirectConnect
     DeleteInterconnectResponse.add_member(:interconnect_state, Shapes::ShapeRef.new(shape: InterconnectState, location_name: "interconnectState"))
     DeleteInterconnectResponse.struct_class = Types::DeleteInterconnectResponse
 
+    DeleteLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
+    DeleteLagRequest.struct_class = Types::DeleteLagRequest
+
     DeleteVirtualInterfaceRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
     DeleteVirtualInterfaceRequest.struct_class = Types::DeleteVirtualInterfaceRequest
 
@@ -245,6 +298,9 @@ module Aws::DirectConnect
     DescribeConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
     DescribeConnectionsRequest.struct_class = Types::DescribeConnectionsRequest
 
+    DescribeHostedConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    DescribeHostedConnectionsRequest.struct_class = Types::DescribeHostedConnectionsRequest
+
     DescribeInterconnectLoaRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, required: true, location_name: "interconnectId"))
     DescribeInterconnectLoaRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
     DescribeInterconnectLoaRequest.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
@@ -256,6 +312,14 @@ module Aws::DirectConnect
     DescribeInterconnectsRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
     DescribeInterconnectsRequest.struct_class = Types::DescribeInterconnectsRequest
 
+    DescribeLagsRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    DescribeLagsRequest.struct_class = Types::DescribeLagsRequest
+
+    DescribeLoaRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    DescribeLoaRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+    DescribeLoaRequest.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
+    DescribeLoaRequest.struct_class = Types::DescribeLoaRequest
+
     DescribeTagsRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, required: true, location_name: "resourceArns"))
     DescribeTagsRequest.struct_class = Types::DescribeTagsRequest
 
@@ -266,6 +330,10 @@ module Aws::DirectConnect
     DescribeVirtualInterfacesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     DescribeVirtualInterfacesRequest.struct_class = Types::DescribeVirtualInterfacesRequest
 
+    DisassociateConnectionFromLagRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+    DisassociateConnectionFromLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
+    DisassociateConnectionFromLagRequest.struct_class = Types::DisassociateConnectionFromLagRequest
+
     Interconnect.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
     Interconnect.add_member(:interconnect_name, Shapes::ShapeRef.new(shape: InterconnectName, location_name: "interconnectName"))
     Interconnect.add_member(:interconnect_state, Shapes::ShapeRef.new(shape: InterconnectState, location_name: "interconnectState"))
@@ -273,12 +341,33 @@ module Aws::DirectConnect
     Interconnect.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, location_name: "location"))
     Interconnect.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "bandwidth"))
     Interconnect.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
+    Interconnect.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    Interconnect.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, location_name: "awsDevice"))
     Interconnect.struct_class = Types::Interconnect
 
     InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)
 
     Interconnects.add_member(:interconnects, Shapes::ShapeRef.new(shape: InterconnectList, location_name: "interconnects"))
     Interconnects.struct_class = Types::Interconnects
+
+    Lag.add_member(:connections_bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "connectionsBandwidth"))
+    Lag.add_member(:number_of_connections, Shapes::ShapeRef.new(shape: Count, location_name: "numberOfConnections"))
+    Lag.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, location_name: "lagId"))
+    Lag.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
+    Lag.add_member(:lag_name, Shapes::ShapeRef.new(shape: LagName, location_name: "lagName"))
+    Lag.add_member(:lag_state, Shapes::ShapeRef.new(shape: LagState, location_name: "lagState"))
+    Lag.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, location_name: "location"))
+    Lag.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
+    Lag.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
+    Lag.add_member(:aws_device, Shapes::ShapeRef.new(shape: AwsDevice, location_name: "awsDevice"))
+    Lag.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
+    Lag.add_member(:allows_hosted_connections, Shapes::ShapeRef.new(shape: BooleanFlag, location_name: "allowsHostedConnections"))
+    Lag.struct_class = Types::Lag
+
+    LagList.member = Shapes::ShapeRef.new(shape: Lag)
+
+    Lags.add_member(:lags, Shapes::ShapeRef.new(shape: LagList, location_name: "lags"))
+    Lags.struct_class = Types::Lags
 
     Loa.add_member(:loa_content, Shapes::ShapeRef.new(shape: LoaContent, location_name: "loaContent"))
     Loa.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
@@ -372,6 +461,11 @@ module Aws::DirectConnect
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
+    UpdateLagRequest.add_member(:lag_name, Shapes::ShapeRef.new(shape: LagName, location_name: "lagName"))
+    UpdateLagRequest.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
+    UpdateLagRequest.struct_class = Types::UpdateLagRequest
+
     VirtualGateway.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
     VirtualGateway.add_member(:virtual_gateway_state, Shapes::ShapeRef.new(shape: VirtualGatewayState, location_name: "virtualGatewayState"))
     VirtualGateway.struct_class = Types::VirtualGateway
@@ -430,6 +524,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:allocate_hosted_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AllocateHostedConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AllocateHostedConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:allocate_private_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AllocatePrivateVirtualInterface"
         o.http_method = "POST"
@@ -445,6 +549,36 @@ module Aws::DirectConnect
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AllocatePublicVirtualInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:associate_connection_with_lag, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateConnectionWithLag"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateConnectionWithLagRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:associate_hosted_connection, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateHostedConnection"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateHostedConnectionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:associate_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateVirtualInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateVirtualInterfaceRequest)
         o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
@@ -510,6 +644,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:create_lag, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLag"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLagRequest)
+        o.output = Shapes::ShapeRef.new(shape: Lag)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:create_private_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePrivateVirtualInterface"
         o.http_method = "POST"
@@ -560,6 +704,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:delete_lag, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLag"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLagRequest)
+        o.output = Shapes::ShapeRef.new(shape: Lag)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:delete_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteVirtualInterface"
         o.http_method = "POST"
@@ -600,6 +754,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:describe_hosted_connections, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeHostedConnections"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeHostedConnectionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connections)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:describe_interconnect_loa, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeInterconnectLoa"
         o.http_method = "POST"
@@ -616,6 +780,26 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeInterconnectsRequest)
         o.output = Shapes::ShapeRef.new(shape: Interconnects)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:describe_lags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: Lags)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:describe_loa, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLoa"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLoaRequest)
+        o.output = Shapes::ShapeRef.new(shape: Loa)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -660,6 +844,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:disassociate_connection_from_lag, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateConnectionFromLag"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateConnectionFromLagRequest)
+        o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -678,6 +872,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:update_lag, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLag"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLagRequest)
+        o.output = Shapes::ShapeRef.new(shape: Lag)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

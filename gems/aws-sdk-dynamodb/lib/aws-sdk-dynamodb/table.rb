@@ -432,7 +432,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -762,7 +762,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -1721,17 +1721,17 @@ module Aws::DynamoDB
     #     `NONE`, then nothing is returned. (This setting is the default for
     #     `ReturnValues`.)
     #
-    #   * `ALL_OLD` - If `UpdateItem` overwrote an attribute name-value pair,
-    #     then the content of the old item is returned.
+    #   * `ALL_OLD` - Returns all of the attributes of the item, as they
+    #     appeared before the UpdateItem operation.
     #
-    #   * `UPDATED_OLD` - The old versions of only the updated attributes are
-    #     returned.
+    #   * `UPDATED_OLD` - Returns only the updated attributes, as they
+    #     appeared before the UpdateItem operation.
     #
-    #   * `ALL_NEW` - All of the attributes of the new version of the item are
-    #     returned.
+    #   * `ALL_NEW` - Returns all of the attributes of the item, as they
+    #     appear after the UpdateItem operation.
     #
-    #   * `UPDATED_NEW` - The new versions of only the updated attributes are
-    #     returned.
+    #   * `UPDATED_NEW` - Returns only the updated attributes, as they appear
+    #     after the UpdateItem operation.
     #
     #   There is no additional cost associated with requesting a return value
     #   aside from the small network and processing overhead of receiving a
@@ -1857,7 +1857,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #

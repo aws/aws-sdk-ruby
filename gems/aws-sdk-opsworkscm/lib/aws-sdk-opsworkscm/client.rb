@@ -153,11 +153,40 @@ module Aws::OpsWorksCM
 
     # @!group API Operations
 
+    # Associates a new node with the Chef server. This command is an
+    # alternative to `knife bootstrap`. For more information about how to
+    # disassociate a node, see DisassociateNode.
+    #
+    # A node can can only be associated with servers that are in a `HEALTHY`
+    # state. Otherwise, an `InvalidStateException` is thrown. A
+    # `ResourceNotFoundException` is thrown when the server does not exist.
+    # A `ValidationException` is raised when parameters of the request are
+    # not valid. The AssociateNode API call can be integrated into Auto
+    # Scaling configurations, AWS Cloudformation templates, or the user data
+    # of a server's instance.
+    #
+    # Example: `aws opsworks-cm associate-node --server-name MyServer
+    # --node-name MyManagedNode --engine-attributes
+    # "Name=MyOrganization,Value=default"
+    # "Name=Chef_node_public_key,Value=Public_key_contents"`
+    #
     # @option params [required, String] :server_name
+    #   The name of the server with which to associate the node.
     #
     # @option params [required, String] :node_name
+    #   The name of the Chef client node.
     #
-    # @option params [Array<Types::EngineAttribute>] :engine_attributes
+    # @option params [required, Array<Types::EngineAttribute>] :engine_attributes
+    #   Engine attributes used for associating the node.
+    #
+    #   **Attributes accepted in a AssociateNode request:**
+    #
+    #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node is
+    #     associated. By default only one organization named `default` can
+    #     exist.
+    #
+    #   * `CHEF_NODE_PUBLIC_KEY`\: A PEM-formatted public key. This key is
+    #     required for the `chef-client` agent to access the Chef API.
     #
     # @return [Types::AssociateNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -168,10 +197,10 @@ module Aws::OpsWorksCM
     #   resp = client.associate_node({
     #     server_name: "ServerName", # required
     #     node_name: "NodeName", # required
-    #     engine_attributes: [
+    #     engine_attributes: [ # required
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
     #       },
     #     ],
     #   })
@@ -190,22 +219,21 @@ module Aws::OpsWorksCM
     end
 
     # Creates an application-level backup of a server. While the server is
-    # `BACKING_UP`, the server can not be modified and no additional backup
-    # can be created.
+    # in the `BACKING_UP` state, the server cannot be changed, and no
+    # additional backup can be created.
     #
-    # Backups can be created for `RUNNING`, `HEALTHY` and `UNHEALTHY`
-    # servers.
+    # Backups can be created for servers in `RUNNING`, `HEALTHY`, and
+    # `UNHEALTHY` states. By default, you can create a maximum of 50 manual
+    # backups.
     #
-    # This operation is asnychronous.
+    # This operation is asynchronous.
     #
-    # By default 50 manual backups can be created.
-    #
-    # A `LimitExceededException` is thrown then the maximum number of manual
-    # backup is reached. A `InvalidStateException` is thrown when the server
-    # is not in any of RUNNING, HEALTHY, UNHEALTHY. A
-    # `ResourceNotFoundException` is thrown when the server is not found. A
-    # `ValidationException` is thrown when parameters of the request are not
-    # valid.
+    # A `LimitExceededException` is thrown when the maximum number of manual
+    # backups is reached. An `InvalidStateException` is thrown when the
+    # server is not in any of the following states: RUNNING, HEALTHY, or
+    # UNHEALTHY. A `ResourceNotFoundException` is thrown when the server is
+    # not found. A `ValidationException` is thrown when parameters of the
+    # request are not valid.
     #
     # @option params [required, String] :server_name
     #   The name of the server that you want to back up.
@@ -262,31 +290,35 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Creates and immedately starts a new Server. The server can be used
-    # once it has reached the `HEALTHY` state.
+    # Creates and immedately starts a new server. The server is ready to use
+    # when it is in the `HEALTHY` state. By default, you can create a
+    # maximum of 10 servers.
     #
-    # This operation is asnychronous.
+    # This operation is asynchronous.
     #
-    # A `LimitExceededException` is thrown then the maximum number of server
-    # backup is reached. A `ResourceAlreadyExistsException` is raise when a
-    # server with the same name already exists in the account. A
-    # `ResourceNotFoundException` is thrown when a backupId is passed, but
-    # the backup does not exist. A `ValidationException` is thrown when
-    # parameters of the request are not valid.
+    # A `LimitExceededException` is thrown when you have created the maximum
+    # number of servers (10). A `ResourceAlreadyExistsException` is thrown
+    # when a server with the same name already exists in the account. A
+    # `ResourceNotFoundException` is thrown when you specify a backup ID
+    # that is not valid or is for a backup that does not exist. A
+    # `ValidationException` is thrown when parameters of the request are not
+    # valid.
     #
-    # By default 10 servers can be created. A `LimitExceededException` is
-    # raised when the limit is exceeded.
-    #
-    # When no security groups are provided by using `SecurityGroupIds`, AWS
-    # OpsWorks creates a new security group. This security group opens the
-    # Chef server to the world on TCP port 443. If a KeyName is present, SSH
-    # access is enabled. SSH is also open to the world on TCP port 22.
+    # If you do not specify a security group by adding the
+    # `SecurityGroupIds` parameter, AWS OpsWorks creates a new security
+    # group. The default security group opens the Chef server to the world
+    # on TCP port 443. If a KeyName is present, AWS OpsWorks enables SSH
+    # access. SSH is also open to the world on TCP port 22.
     #
     # By default, the Chef Server is accessible from any IP address. We
     # recommend that you update your security group rules to allow access
     # from known IP addresses and address ranges only. To edit security
     # group rules, open Security Groups in the navigation pane of the EC2
     # management console.
+    #
+    # @option params [Boolean] :associate_public_ip_address
+    #   Associate a public IP address with a server that you are launching.
+    #   Valid values are `true` or `false`. The default value is `true`.
     #
     # @option params [Boolean] :disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -304,15 +336,23 @@ module Aws::OpsWorksCM
     #   depend on the engine that you choose.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
-    #   Engine attributes on a specified server.
+    #   Optional engine attributes on a specified server.
     #
     #   **Attributes accepted in a createServer request:**
     #
     #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API.
+    #     stored by AWS OpsWorks for Chef. This private key is required to
+    #     access the Chef API. When no CHEF\_PIVOTAL\_KEY is set, one is
+    #     generated and returned in the response.
     #
-    #   ^
+    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the administrative
+    #     user in the Chef Automate GUI. The password length is a minimum of
+    #     eight characters, and a maximum of 32. The password can contain
+    #     letters, numbers, and special characters (!/@#$%^&amp;+=\_). The
+    #     password must contain at least one lower case letter, one upper case
+    #     letter, one number, and one special character. When no
+    #     CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is generated and
+    #     returned in the response.
     #
     # @option params [Integer] :backup_retention_count
     #   The number of automated backups that you want to keep. Whenever a new
@@ -323,25 +363,26 @@ module Aws::OpsWorksCM
     #   The name of the server. The server name must be unique within your AWS
     #   account, within each region. Server names must start with a letter;
     #   then letters, numbers, or hyphens (-) are allowed, up to a maximum of
-    #   32 characters.
+    #   40 characters.
     #
     # @option params [required, String] :instance_profile_arn
     #   The ARN of the instance profile that your Amazon EC2 instances use.
     #   Although the AWS OpsWorks console typically creates the instance
-    #   profile for you, in this release of AWS OpsWorks for Chef Automate,
-    #   run the service-role-creation.yaml AWS CloudFormation template,
-    #   located at
-    #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
-    #   This template creates a stack that includes the instance profile you
-    #   need.
+    #   profile for you, if you are using API commands instead, run the
+    #   service-role-creation.yaml AWS CloudFormation template, located at
+    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
+    #   This template creates a CloudFormation stack that includes the
+    #   instance profile you need.
     #
-    # @option params [String] :instance_type
+    # @option params [required, String] :instance_type
     #   The Amazon EC2 instance type to use. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `c3.large`.
+    #   the following format: `^([cm][34]|t2).*` For example, `m4.large`.
+    #   Valid values are `t2.medium`, `m4.large`, or `m4.2xlarge`.
     #
     # @option params [String] :key_pair
-    #   The Amazon EC2 key pair to set for the instance. You may specify this
-    #   parameter to connect to your instances by using SSH.
+    #   The Amazon EC2 key pair to set for the instance. This parameter is
+    #   optional; if desired, you may specify this parameter to connect to
+    #   your instances by using SSH.
     #
     # @option params [String] :preferred_maintenance_window
     #   The start time for a one-hour period each week during which AWS
@@ -357,8 +398,8 @@ module Aws::OpsWorksCM
     # @option params [String] :preferred_backup_window
     #   The start time for a one-hour period during which AWS OpsWorks for
     #   Chef Automate backs up application-level data on your server if
-    #   backups are enabled. Valid values must be specified in one of the
-    #   following formats:
+    #   automated backups are enabled. Valid values must be specified in one
+    #   of the following formats:
     #
     #   * `HH:MM` for daily backups
     #
@@ -385,12 +426,12 @@ module Aws::OpsWorksCM
     # @option params [required, String] :service_role_arn
     #   The service role that the AWS OpsWorks for Chef Automate service
     #   backend uses to work with your account. Although the AWS OpsWorks
-    #   console typically creates the service role for you, in this release of
-    #   AWS OpsWorks for Chef Automate, run the service-role-creation.yaml AWS
-    #   CloudFormation template, located at
+    #   management console typically creates the service role for you, if you
+    #   are using the AWS CLI or API commands, run the
+    #   service-role-creation.yaml AWS CloudFormation template, located at
     #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
-    #   This template creates a stack that includes the service role that you
-    #   need.
+    #   This template creates a CloudFormation stack that includes the service
+    #   role that you need.
     #
     # @option params [Array<String>] :subnet_ids
     #   The IDs of subnets in which to launch the server EC2 instance.
@@ -421,20 +462,21 @@ module Aws::OpsWorksCM
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_server({
+    #     associate_public_ip_address: false,
     #     disable_automated_backup: false,
     #     engine: "String",
     #     engine_model: "String",
     #     engine_version: "String",
     #     engine_attributes: [
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
     #       },
     #     ],
     #     backup_retention_count: 1,
     #     server_name: "ServerName", # required
     #     instance_profile_arn: "InstanceProfileArn", # required
-    #     instance_type: "String",
+    #     instance_type: "String", # required
     #     key_pair: "KeyPair",
     #     preferred_maintenance_window: "TimeWindowDefinition",
     #     preferred_backup_window: "TimeWindowDefinition",
@@ -446,9 +488,11 @@ module Aws::OpsWorksCM
     #
     # @example Response structure
     #
+    #   resp.server.associate_public_ip_address #=> Boolean
     #   resp.server.backup_retention_count #=> Integer
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
+    #   resp.server.cloud_formation_stack_arn #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -466,7 +510,7 @@ module Aws::OpsWorksCM
     #   resp.server.security_group_ids #=> Array
     #   resp.server.security_group_ids[0] #=> String
     #   resp.server.service_role_arn #=> String
-    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY"
+    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "RESTORING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY", "TERMINATED"
     #   resp.server.status_reason #=> String
     #   resp.server.subnet_ids #=> Array
     #   resp.server.subnet_ids[0] #=> String
@@ -482,13 +526,12 @@ module Aws::OpsWorksCM
     end
 
     # Deletes a backup. You can delete both manual and automated backups.
-    #
     # This operation is asynchronous.
     #
-    # A `InvalidStateException` is thrown then a backup is already deleting.
-    # A `ResourceNotFoundException` is thrown when the backup does not
-    # exist. A `ValidationException` is thrown when parameters of the
-    # request are not valid.
+    # An `InvalidStateException` is thrown when a backup deletion is already
+    # in progress. A `ResourceNotFoundException` is thrown when the backup
+    # does not exist. A `ValidationException` is thrown when parameters of
+    # the request are not valid.
     #
     # @option params [required, String] :backup_id
     #   The ID of the backup to delete. Run the DescribeBackups command to get
@@ -513,17 +556,17 @@ module Aws::OpsWorksCM
     end
 
     # Deletes the server and the underlying AWS CloudFormation stack
-    # (including the server's EC2 instance). The server status updated to
-    # `DELETING`. Once the server is successfully deleted, it will no longer
-    # be returned by `DescribeServer` requests. If the AWS CloudFormation
-    # stack cannot be deleted, the server cannot be deleted.
+    # (including the server's EC2 instance). When you run this command, the
+    # server state is updated to `DELETING`. After the server is deleted, it
+    # is no longer returned by `DescribeServer` requests. If the AWS
+    # CloudFormation stack cannot be deleted, the server cannot be deleted.
     #
     # This operation is asynchronous.
     #
-    # A `InvalidStateException` is thrown then a server is already deleting.
-    # A `ResourceNotFoundException` is thrown when the server does not
-    # exist. A `ValidationException` is raised when parameters of the
-    # request are invalid.
+    # An `InvalidStateException` is thrown when a server deletion is already
+    # in progress. A `ResourceNotFoundException` is thrown when the server
+    # does not exist. A `ValidationException` is raised when parameters of
+    # the request are not valid.
     #
     # @option params [required, String] :server_name
     #   The ID of the server to delete.
@@ -578,7 +621,7 @@ module Aws::OpsWorksCM
     #
     # A `ResourceNotFoundException` is thrown when the backup does not
     # exist. A `ValidationException` is raised when parameters of the
-    # request are invalid.
+    # request are not valid.
     #
     # @option params [String] :backup_id
     #   Describes a single backup.
@@ -664,7 +707,7 @@ module Aws::OpsWorksCM
     #
     # A `ResourceNotFoundException` is thrown when the server does not
     # exist. A `ValidationException` is raised when parameters of the
-    # request are invalid.
+    # request are not valid.
     #
     # @option params [required, String] :server_name
     #   The name of the server for which you want to view events.
@@ -717,9 +760,18 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
+    # Returns the current status of an existing association or
+    # disassociation request.
+    #
+    # A `ResourceNotFoundException` is thrown when no recent association or
+    # disassociation request with the specified token is found, or when the
+    # server does not exist. A `ValidationException` is raised when
+    # parameters of the request are not valid.
+    #
     # @option params [required, String] :node_association_status_token
     #
     # @option params [required, String] :server_name
+    #   The name of the server from which to disassociate the node.
     #
     # @return [Types::DescribeNodeAssociationStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -754,7 +806,7 @@ module Aws::OpsWorksCM
     #
     # A `ResourceNotFoundException` is thrown when the server does not
     # exist. A `ValidationException` is raised when parameters of the
-    # request are invalid.
+    # request are not valid.
     #
     # @option params [String] :server_name
     #   Describes the server with the specified ServerName.
@@ -792,9 +844,11 @@ module Aws::OpsWorksCM
     # @example Response structure
     #
     #   resp.servers #=> Array
+    #   resp.servers[0].associate_public_ip_address #=> Boolean
     #   resp.servers[0].backup_retention_count #=> Integer
     #   resp.servers[0].server_name #=> String
     #   resp.servers[0].created_at #=> Time
+    #   resp.servers[0].cloud_formation_stack_arn #=> String
     #   resp.servers[0].disable_automated_backup #=> Boolean
     #   resp.servers[0].endpoint #=> String
     #   resp.servers[0].engine #=> String
@@ -812,7 +866,7 @@ module Aws::OpsWorksCM
     #   resp.servers[0].security_group_ids #=> Array
     #   resp.servers[0].security_group_ids[0] #=> String
     #   resp.servers[0].service_role_arn #=> String
-    #   resp.servers[0].status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY"
+    #   resp.servers[0].status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "RESTORING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY", "TERMINATED"
     #   resp.servers[0].status_reason #=> String
     #   resp.servers[0].subnet_ids #=> Array
     #   resp.servers[0].subnet_ids[0] #=> String
@@ -828,11 +882,33 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
+    # Disassociates a node from a Chef server, and removes the node from the
+    # Chef server's managed nodes. After a node is disassociated, the node
+    # key pair is no longer valid for accessing the Chef API. For more
+    # information about how to associate a node, see AssociateNode.
+    #
+    # A node can can only be disassociated from a server that is in a
+    # `HEALTHY` state. Otherwise, an `InvalidStateException` is thrown. A
+    # `ResourceNotFoundException` is thrown when the server does not exist.
+    # A `ValidationException` is raised when parameters of the request are
+    # not valid.
+    #
     # @option params [required, String] :server_name
+    #   The name of the server from which to disassociate the node.
     #
     # @option params [required, String] :node_name
+    #   The name of the Chef client node.
     #
     # @option params [Array<Types::EngineAttribute>] :engine_attributes
+    #   Engine attributes used for disassociating the node.
+    #
+    #   **Attributes accepted in a DisassociateNode request:**
+    #
+    #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node was
+    #     associated. By default only one organization named `default` can
+    #     exist.
+    #
+    #   ^
     #
     # @return [Types::DisassociateNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -845,8 +921,8 @@ module Aws::OpsWorksCM
     #     node_name: "NodeName", # required
     #     engine_attributes: [
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
     #       },
     #     ],
     #   })
@@ -864,19 +940,19 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Restores a backup to a server that is in a `RUNNING`, `FAILED`, or
-    # `HEALTHY` state. When you run RestoreServer, the server's EC2
-    # instance is deleted, and a new EC2 instance is configured.
-    # RestoreServer maintains the existing server endpoint, so configuration
-    # management of all of the server's client devices should continue to
-    # work.
+    # Restores a backup to a server that is in a `CONNECTION_LOST`,
+    # `HEALTHY`, `RUNNING`, `UNHEALTHY`, or `TERMINATED` state. When you run
+    # RestoreServer, the server's EC2 instance is deleted, and a new EC2
+    # instance is configured. RestoreServer maintains the existing server
+    # endpoint, so configuration management of the server's client devices
+    # (nodes) should continue to work.
     #
     # This operation is asynchronous.
     #
-    # A `InvalidStateException` is thrown when the server is not in a valid
+    # An `InvalidStateException` is thrown when the server is not in a valid
     # state. A `ResourceNotFoundException` is thrown when the server does
     # not exist. A `ValidationException` is raised when parameters of the
-    # request are invalid.
+    # request are not valid.
     #
     # @option params [required, String] :backup_id
     #   The ID of the backup that you want to use to restore a server.
@@ -886,14 +962,14 @@ module Aws::OpsWorksCM
     #
     # @option params [String] :instance_type
     #   The type of the instance to create. Valid values must be specified in
-    #   the following format: `^([cm][34]|t2).*` For example, `c3.large`. If
-    #   you do not specify this parameter, RestoreServer uses the instance
-    #   type from the specified backup.
+    #   the following format: `^([cm][34]|t2).*` For example, `m4.large`.
+    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you do
+    #   not specify this parameter, RestoreServer uses the instance type from
+    #   the specified backup.
     #
     # @option params [String] :key_pair
     #   The name of the key pair to set on the new EC2 instance. This can be
-    #   helpful if any of the administrators who manage the server no longer
-    #   have the SSH key.
+    #   helpful if the administrator no longer has the SSH key.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -917,14 +993,14 @@ module Aws::OpsWorksCM
 
     # Manually starts server maintenance. This command can be useful if an
     # earlier maintenance attempt failed, and the underlying cause of
-    # maintenance failure has been resolved. The server will switch to
-    # `UNDER_MAINTENANCE` state, while maintenace is in progress.
+    # maintenance failure has been resolved. The server is in an
+    # `UNDER_MAINTENANCE` state while maintenance is in progress.
     #
-    # Maintenace can only be started for `HEALTHY` and `UNHEALTHY` servers.
-    # A `InvalidStateException` is thrown otherwise. A
+    # Maintenance can only be started on servers in `HEALTHY` and
+    # `UNHEALTHY` states. Otherwise, an `InvalidStateException` is thrown. A
     # `ResourceNotFoundException` is thrown when the server does not exist.
     # A `ValidationException` is raised when parameters of the request are
-    # invalid.
+    # not valid.
     #
     # @option params [required, String] :server_name
     #   The name of the server on which to run maintenance.
@@ -941,9 +1017,11 @@ module Aws::OpsWorksCM
     #
     # @example Response structure
     #
+    #   resp.server.associate_public_ip_address #=> Boolean
     #   resp.server.backup_retention_count #=> Integer
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
+    #   resp.server.cloud_formation_stack_arn #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -961,7 +1039,7 @@ module Aws::OpsWorksCM
     #   resp.server.security_group_ids #=> Array
     #   resp.server.security_group_ids[0] #=> String
     #   resp.server.service_role_arn #=> String
-    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY"
+    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "RESTORING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY", "TERMINATED"
     #   resp.server.status_reason #=> String
     #   resp.server.subnet_ids #=> Array
     #   resp.server.subnet_ids[0] #=> String
@@ -993,18 +1071,16 @@ module Aws::OpsWorksCM
     # @option params [String] :preferred_maintenance_window
     #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
     #
-    #   Time windows always use coordinated universal time (UTC).
-    #
-    #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
-    #   Sat, Sun.
+    #   Time windows always use coordinated universal time (UTC). Valid
+    #   strings for day of week (`DDD`) are: `Mon`, `Tue`, `Wed`, `Thr`,
+    #   `Fri`, `Sat`, or `Sun`.
     #
     # @option params [String] :preferred_backup_window
     #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
     #
-    #   Time windows always use coordinated universal time (UTC).
-    #
-    #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
-    #   Sat, Sun.
+    #   Time windows always use coordinated universal time (UTC). Valid
+    #   strings for day of week (`DDD`) are: `Mon`, `Tue`, `Wed`, `Thr`,
+    #   `Fri`, `Sat`, or `Sun`.
     #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1022,9 +1098,11 @@ module Aws::OpsWorksCM
     #
     # @example Response structure
     #
+    #   resp.server.associate_public_ip_address #=> Boolean
     #   resp.server.backup_retention_count #=> Integer
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
+    #   resp.server.cloud_formation_stack_arn #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1042,7 +1120,7 @@ module Aws::OpsWorksCM
     #   resp.server.security_group_ids #=> Array
     #   resp.server.security_group_ids[0] #=> String
     #   resp.server.service_role_arn #=> String
-    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY"
+    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "RESTORING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY", "TERMINATED"
     #   resp.server.status_reason #=> String
     #   resp.server.subnet_ids #=> Array
     #   resp.server.subnet_ids[0] #=> String
@@ -1057,22 +1135,18 @@ module Aws::OpsWorksCM
       req.send_request(options)
     end
 
-    # Updates engine specific attributes on a specified server. Server will
-    # enter the `MODIFYING` state when this operation is in progress. Only
-    # one update can take place at a time.
-    #
-    # This operation can be use to reset Chef Server main API key
-    # (`CHEF_PIVOTAL_KEY`).
+    # Updates engine-specific attributes on a specified server. The server
+    # enters the `MODIFYING` state when this operation is in progress. Only
+    # one update can occur at a time. You can use this command to reset the
+    # Chef server's private key (`CHEF_PIVOTAL_KEY`).
     #
     # This operation is asynchronous.
     #
-    #
-    #
-    # This operation can only be called for `HEALTHY` and `UNHEALTHY`
-    # servers. Otherwise a `InvalidStateException` is raised. A
+    # This operation can only be called for servers in `HEALTHY` or
+    # `UNHEALTHY` states. Otherwise, an `InvalidStateException` is raised. A
     # `ResourceNotFoundException` is thrown when the server does not exist.
     # A `ValidationException` is raised when parameters of the request are
-    # invalid.
+    # not valid.
     #
     # @option params [required, String] :server_name
     #   The name of the server to update.
@@ -1097,9 +1171,11 @@ module Aws::OpsWorksCM
     #
     # @example Response structure
     #
+    #   resp.server.associate_public_ip_address #=> Boolean
     #   resp.server.backup_retention_count #=> Integer
     #   resp.server.server_name #=> String
     #   resp.server.created_at #=> Time
+    #   resp.server.cloud_formation_stack_arn #=> String
     #   resp.server.disable_automated_backup #=> Boolean
     #   resp.server.endpoint #=> String
     #   resp.server.engine #=> String
@@ -1117,7 +1193,7 @@ module Aws::OpsWorksCM
     #   resp.server.security_group_ids #=> Array
     #   resp.server.security_group_ids[0] #=> String
     #   resp.server.service_role_arn #=> String
-    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY"
+    #   resp.server.status #=> String, one of "BACKING_UP", "CONNECTION_LOST", "CREATING", "DELETING", "MODIFYING", "FAILED", "HEALTHY", "RUNNING", "RESTORING", "SETUP", "UNDER_MAINTENANCE", "UNHEALTHY", "TERMINATED"
     #   resp.server.status_reason #=> String
     #   resp.server.subnet_ids #=> Array
     #   resp.server.subnet_ids[0] #=> String
@@ -1145,7 +1221,7 @@ module Aws::OpsWorksCM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-opsworkscm'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

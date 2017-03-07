@@ -429,7 +429,8 @@ module Aws::RDS
     #   Enterprise Edition) or from 20 to 4096 (Express Edition and Web
     #   Edition)
     # @option options [required, String] :db_instance_class
-    #   The compute and memory capacity of the DB instance.
+    #   The compute and memory capacity of the DB instance. Note that not all
+    #   instance classes are available in all regions for all DB engines.
     #
     #   Valid Values: `db.t1.micro | db.m1.small | db.m1.medium | db.m1.large
     #   | db.m1.xlarge | db.m2.xlarge |db.m2.2xlarge | db.m2.4xlarge |
@@ -770,19 +771,119 @@ module Aws::RDS
     #
     #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
     #
-    #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
-    #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
-    #     us-west-2):** ` 5.5.42`
-    #
-    #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40b |
-    #     5.5.41`
-    #
-    #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
+    #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
     #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40 | 5.5.40a`
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
+    #
+    #   **Oracle Database Enterprise Edition (oracle-ee)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+    #
+    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
+    #     12.1.0.1.v5`
+    #
+    #   * **Version 12.1 (available in all AWS regions):** ` 12.1.0.2.v1`
+    #
+    #   * **Version 12.1 (available in all AWS regions except
+    #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
+    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
+    #
+    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
+    #     11.2.0.4.v3 | 11.2.0.4.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions except
+    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+    #     11.2.0.4.v8`
+    #
+    #   **Oracle Database Standard Edition (oracle-se)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+    #
+    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
+    #     12.1.0.1.v5`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
+    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
+    #
+    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
+    #     11.2.0.4.v3 | 11.2.0.4.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions except
+    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+    #     11.2.0.4.v8`
+    #
+    #   **Oracle Database Standard Edition One (oracle-se1)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+    #
+    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
+    #     12.1.0.1.v5`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
+    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
+    #
+    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
+    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
+    #
+    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
+    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
+    #     11.2.0.4.v3 | 11.2.0.4.v4`
+    #
+    #   * **Version 11.2 (available in all AWS regions except
+    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+    #     11.2.0.4.v8`
+    #
+    #   **Oracle Database Standard Edition Two (oracle-se2)**
+    #
+    #   * **Version 12.1 (available in all AWS regions except
+    #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
+    #
+    #   ^
+    #
+    #   **PostgreSQL**
+    #
+    #   * **Version 9.6:** ` 9.6.1`
+    #
+    #   * **Version 9.5:** `9.5.4 | 9.5.2`
+    #
+    #   * **Version 9.4:** ` 9.4.9 | 9.4.7 | 9.4.5 | 9.4.4 | 9.4.1`
+    #
+    #   * **Version 9.3:** ` 9.3.14 | 9.3.12 | 9.3.10 | 9.3.9 | 9.3.6 | 9.3.5
+    #     | 9.3.3 | 9.3.2 | 9.3.1`
     #
     #
     #

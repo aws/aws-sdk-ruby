@@ -150,9 +150,9 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be a an alias name prefixed by "alias/",
-    #   a fully specified ARN to an alias, a fully specified ARN to a key,
-    #   or a globally unique identifier.
+    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
+    #   fully specified ARN to an alias, a fully specified ARN to a key, or
+    #   a globally unique identifier.
     #
     #   Examples:
     #
@@ -272,10 +272,10 @@ module Aws::CloudTrail
     end
 
     # The Amazon S3 objects that you specify in your event selectors for
-    # your trail to log data events. Data events are object level API
+    # your trail to log data events. Data events are object-level API
     # operations that access S3 objects, such as `GetObject`,
-    # `DeleteObject`, and `PutObject`. You can specify up to 50 S3 buckets
-    # and object prefixes for an event selector.
+    # `DeleteObject`, and `PutObject`. You can specify up to 250 S3 buckets
+    # and object prefixes for a trail.
     #
     # Example
     #
@@ -464,12 +464,12 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
-    # Use event selectors to specify the types of events that you want your
-    # trail to log. When an event occurs in your account, CloudTrail
-    # evaluates the event selector for all trails. For each trail, if the
-    # event matches any event selector, the trail processes and logs the
-    # event. If the event doesn't match any event selector, the trail
-    # doesn't log the event.
+    # Use event selectors to specify whether you want your trail to log
+    # management and/or data events. When an event occurs in your account,
+    # CloudTrail evaluates the event selector for all trails. For each
+    # trail, if the event matches any event selector, the trail processes
+    # and logs the event. If the event doesn't match any event selector,
+    # the trail doesn't log the event.
     #
     # You can configure up to five event selectors for a trail.
     #
@@ -507,20 +507,19 @@ module Aws::CloudTrail
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html#event-selector-for-management-events
+    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events
     #   @return [Boolean]
     #
     # @!attribute [rw] data_resources
     #   CloudTrail supports logging only data events for S3 objects. You can
-    #   specify up to 50 S3 buckets and object prefixes for an event
-    #   selector.
+    #   specify up to 250 S3 buckets and object prefixes for a trail.
     #
     #   For more information, see [Data Events][1] in the *AWS CloudTrail
     #   User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html#data-events-resources
+    #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events
     #   @return [Array<Types::DataResource>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation
@@ -1461,9 +1460,9 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be a an alias name prefixed by "alias/",
-    #   a fully specified ARN to an alias, a fully specified ARN to a key,
-    #   or a globally unique identifier.
+    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
+    #   fully specified ARN to an alias, a fully specified ARN to a key, or
+    #   a globally unique identifier.
     #
     #   Examples:
     #

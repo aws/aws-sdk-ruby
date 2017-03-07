@@ -413,6 +413,8 @@ module Aws::Rekognition
     #   resp.face_details[0].bounding_box.height #=> Float
     #   resp.face_details[0].bounding_box.left #=> Float
     #   resp.face_details[0].bounding_box.top #=> Float
+    #   resp.face_details[0].age_range.low #=> Integer
+    #   resp.face_details[0].age_range.high #=> Integer
     #   resp.face_details[0].smile.value #=> Boolean
     #   resp.face_details[0].smile.confidence #=> Float
     #   resp.face_details[0].eyeglasses.value #=> Boolean
@@ -660,6 +662,8 @@ module Aws::Rekognition
     #   resp.face_records[0].face_detail.bounding_box.height #=> Float
     #   resp.face_records[0].face_detail.bounding_box.left #=> Float
     #   resp.face_records[0].face_detail.bounding_box.top #=> Float
+    #   resp.face_records[0].face_detail.age_range.low #=> Integer
+    #   resp.face_records[0].face_detail.age_range.high #=> Integer
     #   resp.face_records[0].face_detail.smile.value #=> Boolean
     #   resp.face_records[0].face_detail.smile.confidence #=> Float
     #   resp.face_records[0].face_detail.eyeglasses.value #=> Boolean
@@ -984,7 +988,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

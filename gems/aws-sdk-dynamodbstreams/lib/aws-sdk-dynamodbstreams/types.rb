@@ -73,7 +73,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the input of a *DescribeStream* operation.
+    # Represents the input of a `DescribeStream` operation.
     #
     # @note When making an API call, you may pass DescribeStreamInput
     #   data as a hash:
@@ -108,7 +108,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the output of a *DescribeStream* operation.
+    # Represents the output of a `DescribeStream` operation.
     #
     # @!attribute [rw] stream_description
     #   A complete description of the stream, including its creation date
@@ -124,7 +124,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the input of a *GetRecords* operation.
+    # Represents the input of a `GetRecords` operation.
     #
     # @note When making an API call, you may pass GetRecordsInput
     #   data as a hash:
@@ -153,7 +153,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the output of a *GetRecords* operation.
+    # Represents the output of a `GetRecords` operation.
     #
     # @!attribute [rw] records
     #   The stream records from the shard, which were retrieved using the
@@ -174,7 +174,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the input of a *GetShardIterator* operation.
+    # Represents the input of a `GetShardIterator` operation.
     #
     # @note When making an API call, you may pass GetShardIteratorInput
     #   data as a hash:
@@ -231,7 +231,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the output of a *GetShardIterator* operation.
+    # Represents the output of a `GetShardIterator` operation.
     #
     # @!attribute [rw] shard_iterator
     #   The position in the shard from which to start reading stream records
@@ -246,15 +246,34 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
+    # Contains details about the type of identity that made the request.
+    #
+    # @!attribute [rw] principal_id
+    #   A unique identifier for the entity that made the call. For Time To
+    #   Live, the principalId is "dynamodb.amazonaws.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the identity. For Time To Live, the type is "Service".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Identity AWS API Documentation
+    #
+    class Identity < Struct.new(
+      :principal_id,
+      :type)
+      include Aws::Structure
+    end
+
     # Represents *a single element* of a key schema. A key schema specifies
     # the attributes that make up the primary key of a table, or the key
     # attributes of an index.
     #
-    # A *KeySchemaElement* represents exactly one attribute of the primary
+    # A `KeySchemaElement` represents exactly one attribute of the primary
     # key. For example, a simple primary key (partition key) would be
-    # represented by one *KeySchemaElement*. A composite primary key
-    # (partition key and sort key) would require one *KeySchemaElement* for
-    # the partition key, and another *KeySchemaElement* for the sort key.
+    # represented by one `KeySchemaElement`. A composite primary key
+    # (partition key and sort key) would require one `KeySchemaElement` for
+    # the partition key, and another `KeySchemaElement` for the sort key.
     #
     # <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
     # The term "hash attribute" derives from DynamoDB's usage of an
@@ -285,7 +304,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the input of a *ListStreams* operation.
+    # Represents the input of a `ListStreams` operation.
     #
     # @note When making an API call, you may pass ListStreamsInput
     #   data as a hash:
@@ -320,7 +339,7 @@ module Aws::DynamoDBStreams
       include Aws::Structure
     end
 
-    # Represents the output of a *ListStreams* operation.
+    # Represents the output of a `ListStreams` operation.
     #
     # @!attribute [rw] streams
     #   A list of stream descriptors associated with the current account and
@@ -371,27 +390,40 @@ module Aws::DynamoDBStreams
     #
     # @!attribute [rw] event_version
     #   The version number of the stream record format. This number is
-    #   updated whenever the structure of *Record* is modified.
+    #   updated whenever the structure of `Record` is modified.
     #
-    #   Client applications must not assume that *eventVersion* will remain
+    #   Client applications must not assume that `eventVersion` will remain
     #   at a particular value, as this number is subject to change at any
-    #   time. In general, *eventVersion* will only increase as the low-level
+    #   time. In general, `eventVersion` will only increase as the low-level
     #   DynamoDB Streams API evolves.
     #   @return [String]
     #
     # @!attribute [rw] event_source
     #   The AWS service from which the stream record originated. For
-    #   DynamoDB Streams, this is *aws:dynamodb*.
+    #   DynamoDB Streams, this is `aws:dynamodb`.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
-    #   The region in which the *GetRecords* request was received.
+    #   The region in which the `GetRecords` request was received.
     #   @return [String]
     #
     # @!attribute [rw] dynamodb
     #   The main body of the stream record, containing all of the
     #   DynamoDB-specific fields.
     #   @return [Types::StreamRecord]
+    #
+    # @!attribute [rw] user_identity
+    #   Items that are deleted by the Time to Live process after expiration
+    #   have the following fields:
+    #
+    #   * Records\[\].userIdentity.type
+    #
+    #     "Service"
+    #
+    #   * Records\[\].userIdentity.principalId
+    #
+    #     "dynamodb.amazonaws.com"
+    #   @return [Types::Identity]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Record AWS API Documentation
     #
@@ -401,7 +433,8 @@ module Aws::DynamoDBStreams
       :event_version,
       :event_source,
       :aws_region,
-      :dynamodb)
+      :dynamodb,
+      :user_identity)
       include Aws::Structure
     end
 
@@ -460,7 +493,7 @@ module Aws::DynamoDBStreams
     # @!attribute [rw] stream_label
     #   A timestamp, in ISO 8601 format, for this stream.
     #
-    #   Note that *LatestStreamLabel* is not a unique identifier for the
+    #   Note that `LatestStreamLabel` is not a unique identifier for the
     #   stream, because it is possible that a stream from another table
     #   might have the same timestamp. However, the combination of the
     #   following three elements is guaranteed to be unique:
@@ -469,7 +502,7 @@ module Aws::DynamoDBStreams
     #
     #   * the table name
     #
-    #   * the *StreamLabel*
+    #   * the `StreamLabel`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/Stream AWS API Documentation
@@ -490,7 +523,7 @@ module Aws::DynamoDBStreams
     # @!attribute [rw] stream_label
     #   A timestamp, in ISO 8601 format, for this stream.
     #
-    #   Note that *LatestStreamLabel* is not a unique identifier for the
+    #   Note that `LatestStreamLabel` is not a unique identifier for the
     #   stream, because it is possible that a stream from another table
     #   might have the same timestamp. However, the combination of the
     #   following three elements is guaranteed to be unique:
@@ -499,7 +532,7 @@ module Aws::DynamoDBStreams
     #
     #   * the table name
     #
-    #   * the *StreamLabel*
+    #   * the `StreamLabel`
     #   @return [String]
     #
     # @!attribute [rw] stream_status

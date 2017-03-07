@@ -34,8 +34,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for AddTags.
-    #
     # @note When making an API call, you may pass AddTagsInput
     #   data as a hash:
     #
@@ -65,8 +63,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of AddTags.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AddTagsOutput AWS API Documentation
     #
     class AddTagsOutput < Aws::EmptyStructure; end
@@ -128,8 +124,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateListener.
-    #
     # @note When making an API call, you may pass CreateListenerInput
     #   data as a hash:
     #
@@ -189,8 +183,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of CreateListener.
-    #
     # @!attribute [rw] listeners
     #   Information about the listener.
     #   @return [Array<Types::Listener>]
@@ -202,8 +194,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateLoadBalancer.
-    #
     # @note When making an API call, you may pass CreateLoadBalancerInput
     #   data as a hash:
     #
@@ -218,6 +208,7 @@ module Aws::ElasticLoadBalancingV2
     #             value: "TagValue",
     #           },
     #         ],
+    #         ip_address_type: "ipv4", # accepts ipv4, dualstack
     #       }
     #
     # @!attribute [rw] name
@@ -258,6 +249,13 @@ module Aws::ElasticLoadBalancingV2
     #   One or more tags to assign to the load balancer.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses used by the subnets for your load balancer.
+    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
+    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
+    #   `ipv4`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancerInput AWS API Documentation
     #
     class CreateLoadBalancerInput < Struct.new(
@@ -265,12 +263,11 @@ module Aws::ElasticLoadBalancingV2
       :subnets,
       :security_groups,
       :scheme,
-      :tags)
+      :tags,
+      :ip_address_type)
       include Aws::Structure
     end
 
-    # Contains the output of CreateLoadBalancer.
-    #
     # @!attribute [rw] load_balancers
     #   Information about the load balancer.
     #   @return [Array<Types::LoadBalancer>]
@@ -282,8 +279,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateRule.
-    #
     # @note When making an API call, you may pass CreateRuleInput
     #   data as a hash:
     #
@@ -311,8 +306,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] conditions
     #   A condition. Each condition has the field `path-pattern` and
     #   specifies one path pattern. A path pattern is case sensitive, can be
-    #   up to 255 characters in length, and can contain any of the following
-    #   characters:
+    #   up to 128 characters in length, and can contain any of the following
+    #   characters. Note that you can include up to three wildcard
+    #   characters in a path pattern.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -345,8 +341,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of CreateRule.
-    #
     # @!attribute [rw] rules
     #   Information about the rule.
     #   @return [Array<Types::Rule>]
@@ -358,8 +352,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateTargetGroup.
-    #
     # @note When making an API call, you may pass CreateTargetGroupInput
     #   data as a hash:
     #
@@ -456,8 +448,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of CreateTargetGroup.
-    #
     # @!attribute [rw] target_groups
     #   Information about the target group.
     #   @return [Array<Types::TargetGroup>]
@@ -469,8 +459,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteListener.
-    #
     # @note When making an API call, you may pass DeleteListenerInput
     #   data as a hash:
     #
@@ -489,14 +477,10 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteListener.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteListenerOutput AWS API Documentation
     #
     class DeleteListenerOutput < Aws::EmptyStructure; end
 
-    # Contains the parameters for DeleteLoadBalancer.
-    #
     # @note When making an API call, you may pass DeleteLoadBalancerInput
     #   data as a hash:
     #
@@ -515,14 +499,10 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteLoadBalancer.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteLoadBalancerOutput AWS API Documentation
     #
     class DeleteLoadBalancerOutput < Aws::EmptyStructure; end
 
-    # Contains the parameters for DeleteRule.
-    #
     # @note When making an API call, you may pass DeleteRuleInput
     #   data as a hash:
     #
@@ -541,14 +521,10 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteRule.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteRuleOutput AWS API Documentation
     #
     class DeleteRuleOutput < Aws::EmptyStructure; end
 
-    # Contains the parameters for DeleteTargetGroup.
-    #
     # @note When making an API call, you may pass DeleteTargetGroupInput
     #   data as a hash:
     #
@@ -567,14 +543,10 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DeleteTargetGroup.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeleteTargetGroupOutput AWS API Documentation
     #
     class DeleteTargetGroupOutput < Aws::EmptyStructure; end
 
-    # Contains the parameters for DeregisterTargets.
-    #
     # @note When making an API call, you may pass DeregisterTargetsInput
     #   data as a hash:
     #
@@ -606,14 +578,10 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DeregisterTargets.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DeregisterTargetsOutput AWS API Documentation
     #
     class DeregisterTargetsOutput < Aws::EmptyStructure; end
 
-    # Contains the parameters for DescribeListeners.
-    #
     # @note When making an API call, you may pass DescribeListenersInput
     #   data as a hash:
     #
@@ -651,8 +619,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeListeners.
-    #
     # @!attribute [rw] listeners
     #   Information about the listeners.
     #   @return [Array<Types::Listener>]
@@ -670,8 +636,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeLoadBalancerAttributes.
-    #
     # @note When making an API call, you may pass DescribeLoadBalancerAttributesInput
     #   data as a hash:
     #
@@ -690,8 +654,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLoadBalancerAttributes.
-    #
     # @!attribute [rw] attributes
     #   Information about the load balancer attributes.
     #   @return [Array<Types::LoadBalancerAttribute>]
@@ -703,8 +665,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeLoadBalancers.
-    #
     # @note When making an API call, you may pass DescribeLoadBalancersInput
     #   data as a hash:
     #
@@ -742,8 +702,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLoadBalancers.
-    #
     # @!attribute [rw] load_balancers
     #   Information about the load balancers.
     #   @return [Array<Types::LoadBalancer>]
@@ -761,8 +719,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeRules.
-    #
     # @note When making an API call, you may pass DescribeRulesInput
     #   data as a hash:
     #
@@ -787,8 +743,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeRules.
-    #
     # @!attribute [rw] rules
     #   Information about the rules.
     #   @return [Array<Types::Rule>]
@@ -800,8 +754,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeSSLPolicies.
-    #
     # @note When making an API call, you may pass DescribeSSLPoliciesInput
     #   data as a hash:
     #
@@ -833,8 +785,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeSSLPolicies.
-    #
     # @!attribute [rw] ssl_policies
     #   Information about the policies.
     #   @return [Array<Types::SslPolicy>]
@@ -852,8 +802,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeTags.
-    #
     # @note When making an API call, you may pass DescribeTagsInput
     #   data as a hash:
     #
@@ -872,8 +820,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTags.
-    #
     # @!attribute [rw] tag_descriptions
     #   Information about the tags.
     #   @return [Array<Types::TagDescription>]
@@ -885,8 +831,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeTargetGroupAttributes.
-    #
     # @note When making an API call, you may pass DescribeTargetGroupAttributesInput
     #   data as a hash:
     #
@@ -905,8 +849,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTargetGroupAttributes.
-    #
     # @!attribute [rw] attributes
     #   Information about the target group attributes
     #   @return [Array<Types::TargetGroupAttribute>]
@@ -918,8 +860,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeTargetGroups.
-    #
     # @note When making an API call, you may pass DescribeTargetGroupsInput
     #   data as a hash:
     #
@@ -963,8 +903,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTargetGroups.
-    #
     # @!attribute [rw] target_groups
     #   Information about the target groups.
     #   @return [Array<Types::TargetGroup>]
@@ -982,8 +920,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeTargetHealth.
-    #
     # @note When making an API call, you may pass DescribeTargetHealthInput
     #   data as a hash:
     #
@@ -1013,8 +949,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTargetHealth.
-    #
     # @!attribute [rw] target_health_descriptions
     #   Information about the health of the targets.
     #   @return [Array<Types::TargetHealthDescription>]
@@ -1128,6 +1062,12 @@ module Aws::ElasticLoadBalancingV2
     #   The IDs of the security groups for the load balancer.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses used by the subnets for your load balancer.
+    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
+    #   (for IPv4 and IPv6 addresses).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
@@ -1141,7 +1081,8 @@ module Aws::ElasticLoadBalancingV2
       :state,
       :type,
       :availability_zones,
-      :security_groups)
+      :security_groups,
+      :ip_address_type)
       include Aws::Structure
     end
 
@@ -1234,8 +1175,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyListener.
-    #
     # @note When making an API call, you may pass ModifyListenerInput
     #   data as a hash:
     #
@@ -1294,8 +1233,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyListener.
-    #
     # @!attribute [rw] listeners
     #   Information about the modified listeners.
     #   @return [Array<Types::Listener>]
@@ -1307,8 +1244,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyLoadBalancerAttributes.
-    #
     # @note When making an API call, you may pass ModifyLoadBalancerAttributesInput
     #   data as a hash:
     #
@@ -1338,8 +1273,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyLoadBalancerAttributes.
-    #
     # @!attribute [rw] attributes
     #   Information about the load balancer attributes.
     #   @return [Array<Types::LoadBalancerAttribute>]
@@ -1351,8 +1284,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyRules.
-    #
     # @note When making an API call, you may pass ModifyRuleInput
     #   data as a hash:
     #
@@ -1393,8 +1324,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyRules.
-    #
     # @!attribute [rw] rules
     #   Information about the rule.
     #   @return [Array<Types::Rule>]
@@ -1406,8 +1335,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyTargetGroupAttributes.
-    #
     # @note When making an API call, you may pass ModifyTargetGroupAttributesInput
     #   data as a hash:
     #
@@ -1437,8 +1364,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyTargetGroupAttributes.
-    #
     # @!attribute [rw] attributes
     #   Information about the attributes.
     #   @return [Array<Types::TargetGroupAttribute>]
@@ -1450,8 +1375,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for ModifyTargetGroup.
-    #
     # @note When making an API call, you may pass ModifyTargetGroupInput
     #   data as a hash:
     #
@@ -1525,8 +1448,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of ModifyTargetGroup.
-    #
     # @!attribute [rw] target_groups
     #   Information about the target group.
     #   @return [Array<Types::TargetGroup>]
@@ -1538,8 +1459,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for RegisterTargets.
-    #
     # @note When making an API call, you may pass RegisterTargetsInput
     #   data as a hash:
     #
@@ -1572,14 +1491,10 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of RegisterTargets.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RegisterTargetsOutput AWS API Documentation
     #
     class RegisterTargetsOutput < Aws::EmptyStructure; end
 
-    # Contains the parameters for RemoveTags.
-    #
     # @note When making an API call, you may pass RemoveTagsInput
     #   data as a hash:
     #
@@ -1604,8 +1519,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of RemoveTags.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/RemoveTagsOutput AWS API Documentation
     #
     class RemoveTagsOutput < Aws::EmptyStructure; end
@@ -1660,8 +1573,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] values
     #   The path pattern. You can specify a single path pattern.
     #
-    #   A path pattern is case sensitive, can be up to 255 characters in
-    #   length, and can contain any of the following characters:
+    #   A path pattern is case sensitive, can be up to 128 characters in
+    #   length, and can contain any of the following characters. Note that
+    #   you can include up to three wildcard characters in a path pattern.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -1708,8 +1622,43 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for SetRulePriorities.
+    # @note When making an API call, you may pass SetIpAddressTypeInput
+    #   data as a hash:
     #
+    #       {
+    #         load_balancer_arn: "LoadBalancerArn", # required
+    #         ip_address_type: "ipv4", # required, accepts ipv4, dualstack
+    #       }
+    #
+    # @!attribute [rw] load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type. The possible values are `ipv4` (for IPv4
+    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
+    #   load balancers must use `ipv4`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeInput AWS API Documentation
+    #
+    class SetIpAddressTypeInput < Struct.new(
+      :load_balancer_arn,
+      :ip_address_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ip_address_type
+    #   The IP address type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressTypeOutput AWS API Documentation
+    #
+    class SetIpAddressTypeOutput < Struct.new(
+      :ip_address_type)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SetRulePrioritiesInput
     #   data as a hash:
     #
@@ -1733,8 +1682,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of SetRulePriorities.
-    #
     # @!attribute [rw] rules
     #   Information about the rules.
     #   @return [Array<Types::Rule>]
@@ -1746,8 +1693,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for SetSecurityGroups.
-    #
     # @note When making an API call, you may pass SetSecurityGroupsInput
     #   data as a hash:
     #
@@ -1772,8 +1717,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of SetSecurityGroups.
-    #
     # @!attribute [rw] security_group_ids
     #   The IDs of the security groups associated with the load balancer.
     #   @return [Array<String>]
@@ -1785,8 +1728,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the parameters for SetSubnets.
-    #
     # @note When making an API call, you may pass SetSubnetsInput
     #   data as a hash:
     #
@@ -1812,8 +1753,6 @@ module Aws::ElasticLoadBalancingV2
       include Aws::Structure
     end
 
-    # Contains the output of SetSubnets.
-    #
     # @!attribute [rw] availability_zones
     #   Information about the subnet and Availability Zone.
     #   @return [Array<Types::AvailabilityZone>]

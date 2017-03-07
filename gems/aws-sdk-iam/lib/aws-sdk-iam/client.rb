@@ -6664,6 +6664,7 @@ module Aws::IAM
     #   resp.evaluation_results[0].matched_statements[0].end_position.column #=> Integer
     #   resp.evaluation_results[0].missing_context_values #=> Array
     #   resp.evaluation_results[0].missing_context_values[0] #=> String
+    #   resp.evaluation_results[0].organizations_decision_detail.allowed_by_organizations #=> Boolean
     #   resp.evaluation_results[0].eval_decision_details #=> Hash
     #   resp.evaluation_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
     #   resp.evaluation_results[0].resource_specific_results #=> Array
@@ -6949,6 +6950,7 @@ module Aws::IAM
     #   resp.evaluation_results[0].matched_statements[0].end_position.column #=> Integer
     #   resp.evaluation_results[0].missing_context_values #=> Array
     #   resp.evaluation_results[0].missing_context_values[0] #=> String
+    #   resp.evaluation_results[0].organizations_decision_detail.allowed_by_organizations #=> Boolean
     #   resp.evaluation_results[0].eval_decision_details #=> Hash
     #   resp.evaluation_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
     #   resp.evaluation_results[0].resource_specific_results #=> Array
@@ -7863,31 +7865,40 @@ module Aws::IAM
     # certificate entity includes a public key certificate, a private key,
     # and an optional certificate chain, which should all be PEM-encoded.
     #
+    # We recommend that you use [AWS Certificate Manager][1] to provision,
+    # manage, and deploy your server certificates. With ACM you can request
+    # a certificate, deploy it to AWS resources, and let ACM handle
+    # certificate renewals for you. Certificates provided by ACM are free.
+    # For more information about using ACM, see the [AWS Certificate Manager
+    # User Guide][2].
+    #
     # For more information about working with server certificates, including
     # a list of AWS services that can use the server certificates that you
-    # manage with IAM, go to [Working with Server Certificates][1] in the
+    # manage with IAM, go to [Working with Server Certificates][3] in the
     # *IAM User Guide*.
     #
     # For information about the number of server certificates you can
-    # upload, see [Limitations on IAM Entities and Objects][2] in the *IAM
+    # upload, see [Limitations on IAM Entities and Objects][4] in the *IAM
     # User Guide*.
     #
     # <note markdown="1"> Because the body of the public key certificate, private key, and the
     # certificate chain can be large, you should use POST rather than GET
     # when calling `UploadServerCertificate`. For information about setting
     # up signatures and authorization through the API, go to [Signing AWS
-    # API Requests][3] in the *AWS General Reference*. For general
+    # API Requests][5] in the *AWS General Reference*. For general
     # information about using the Query API with IAM, go to [Calling the API
-    # by Making HTTP Query Requests][4] in the *IAM User Guide*.
+    # by Making HTTP Query Requests][6] in the *IAM User Guide*.
     #
     #  </note>
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
-    # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
-    # [3]: http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
-    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html
+    # [1]: https://aws.amazon.com/certificate-manager/
+    # [2]: http://docs.aws.amazon.com/acm/latest/userguide/
+    # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+    # [4]: http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html
+    # [5]: http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html
+    # [6]: http://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html
     #
     # @option params [String] :path
     #   The path for the server certificate. For more information about paths,
@@ -8097,7 +8108,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

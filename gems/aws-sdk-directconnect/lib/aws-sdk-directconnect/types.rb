@@ -29,7 +29,7 @@ module Aws::DirectConnect
     #
     #   Default: None
     #
-    #   Values: 50M, 100M, 200M, 300M, 400M, or 500M
+    #   Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps
     #   @return [String]
     #
     # @!attribute [rw] connection_name
@@ -72,6 +72,74 @@ module Aws::DirectConnect
       :connection_name,
       :owner_account,
       :interconnect_id,
+      :vlan)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to theHostedConnection operation.
+    #
+    # @note When making an API call, you may pass AllocateHostedConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         owner_account: "OwnerAccount", # required
+    #         bandwidth: "Bandwidth", # required
+    #         connection_name: "ConnectionName", # required
+    #         vlan: 1, # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the interconnect or LAG on which the connection will be
+    #   provisioned.
+    #
+    #   Example: dxcon-456abc78 or dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The numeric account ID of the customer for whom the connection will
+    #   be provisioned.
+    #
+    #   Example: 123443215678
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] bandwidth
+    #   The bandwidth of the connection.
+    #
+    #   Example: `500Mbps`
+    #
+    #   Default: None
+    #
+    #   Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the provisioned connection.
+    #
+    #   Example: "`500M Connection to AWS`"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] vlan
+    #   The dedicated VLAN provisioned to the hosted connection.
+    #
+    #   Example: 101
+    #
+    #   Default: None
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnectionRequest AWS API Documentation
+    #
+    class AllocateHostedConnectionRequest < Struct.new(
+      :connection_id,
+      :owner_account,
+      :bandwidth,
+      :connection_name,
       :vlan)
       include Aws::Structure
     end
@@ -179,17 +247,123 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Container for the parameters to the AssociateConnectionWithLag
+    # operation.
+    #
+    # @note When making an API call, you may pass AssociateConnectionWithLagRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         lag_id: "LagId", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection.
+    #
+    #   Example: dxcon-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG with which to associate the connection.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLagRequest AWS API Documentation
+    #
+    class AssociateConnectionWithLagRequest < Struct.new(
+      :connection_id,
+      :lag_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the AssociateHostedConnection
+    # operation.
+    #
+    # @note When making an API call, you may pass AssociateHostedConnectionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         parent_connection_id: "ConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the hosted connection.
+    #
+    #   Example: dxcon-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_connection_id
+    #   The ID of the interconnect or the LAG.
+    #
+    #   Example: dxcon-abc123 or dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnectionRequest AWS API Documentation
+    #
+    class AssociateHostedConnectionRequest < Struct.new(
+      :connection_id,
+      :parent_connection_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the AssociateVirtualInterface
+    # operation.
+    #
+    # @note When making an API call, you may pass AssociateVirtualInterfaceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         virtual_interface_id: "VirtualInterfaceId", # required
+    #         connection_id: "ConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    #   Example: dxvif-123dfg56
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the LAG or connection with which to associate the virtual
+    #   interface.
+    #
+    #   Example: dxlag-abc123 or dxcon-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterfaceRequest AWS API Documentation
+    #
+    class AssociateVirtualInterfaceRequest < Struct.new(
+      :virtual_interface_id,
+      :connection_id)
+      include Aws::Structure
+    end
+
     # A structure containing information about a BGP peer.
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -263,7 +437,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -326,7 +502,7 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -380,7 +556,7 @@ module Aws::DirectConnect
     #   * **Down**\: A virtual interface that is BGP down.
     #
     #   * **Deleting**\: A virtual interface is in this state immediately
-    #     after calling *DeleteVirtualInterface* until it can no longer
+    #     after calling DeleteVirtualInterface until it can no longer
     #     forward traffic.
     #
     #   * **Deleted**\: A virtual interface that cannot forward traffic.
@@ -409,7 +585,7 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -448,7 +624,7 @@ module Aws::DirectConnect
     #   * **Down**\: A virtual interface that is BGP down.
     #
     #   * **Deleting**\: A virtual interface is in this state immediately
-    #     after calling *DeleteVirtualInterface* until it can no longer
+    #     after calling DeleteVirtualInterface until it can no longer
     #     forward traffic.
     #
     #   * **Deleted**\: A virtual interface that cannot forward traffic.
@@ -474,7 +650,9 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -554,9 +732,19 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] loa_issue_time
-    #   The time of the most recent call to DescribeConnectionLoa for this
-    #   Connection.
+    #   The time of the most recent call to DescribeLoa for this connection.
     #   @return [Time]
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device
+    #   The Direct Connection endpoint which the physical connection
+    #   terminates on.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Connection AWS API Documentation
     #
@@ -570,7 +758,9 @@ module Aws::DirectConnect
       :bandwidth,
       :vlan,
       :partner_name,
-      :loa_issue_time)
+      :loa_issue_time,
+      :lag_id,
+      :aws_device)
       include Aws::Structure
     end
 
@@ -649,6 +839,7 @@ module Aws::DirectConnect
     #         location: "LocationCode", # required
     #         bandwidth: "Bandwidth", # required
     #         connection_name: "ConnectionName", # required
+    #         lag_id: "LagId",
     #       }
     #
     # @!attribute [rw] location
@@ -675,12 +866,19 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [String]
     #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnectionRequest AWS API Documentation
     #
     class CreateConnectionRequest < Struct.new(
       :location,
       :bandwidth,
-      :connection_name)
+      :connection_name,
+      :lag_id)
       include Aws::Structure
     end
 
@@ -693,6 +891,7 @@ module Aws::DirectConnect
     #         interconnect_name: "InterconnectName", # required
     #         bandwidth: "Bandwidth", # required
     #         location: "LocationCode", # required
+    #         lag_id: "LagId",
     #       }
     #
     # @!attribute [rw] interconnect_name
@@ -721,12 +920,82 @@ module Aws::DirectConnect
     #   Default: None
     #   @return [String]
     #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnectRequest AWS API Documentation
     #
     class CreateInterconnectRequest < Struct.new(
       :interconnect_name,
       :bandwidth,
-      :location)
+      :location,
+      :lag_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the CreateLag operation.
+    #
+    # @note When making an API call, you may pass CreateLagRequest
+    #   data as a hash:
+    #
+    #       {
+    #         number_of_connections: 1, # required
+    #         location: "LocationCode", # required
+    #         connections_bandwidth: "Bandwidth", # required
+    #         lag_name: "LagName", # required
+    #         connection_id: "ConnectionId",
+    #       }
+    #
+    # @!attribute [rw] number_of_connections
+    #   The number of physical connections initially provisioned and bundled
+    #   by the LAG.
+    #
+    #   Default: None
+    #   @return [Integer]
+    #
+    # @!attribute [rw] location
+    #   The AWS Direct Connect location in which the LAG should be
+    #   allocated.
+    #
+    #   Example: EqSV5
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] connections_bandwidth
+    #   The bandwidth of the individual physical connections bundled by the
+    #   LAG.
+    #
+    #   Default: None
+    #
+    #   Available values: 1Gbps, 10Gbps
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_name
+    #   The name of the LAG.
+    #
+    #   Example: "`3x10G LAG to AWS`"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of an existing connection to migrate to the LAG.
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLagRequest AWS API Documentation
+    #
+    class CreateLagRequest < Struct.new(
+      :number_of_connections,
+      :location,
+      :connections_bandwidth,
+      :lag_name,
+      :connection_id)
       include Aws::Structure
     end
 
@@ -751,7 +1020,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -798,7 +1069,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -840,7 +1113,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
@@ -885,7 +1158,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -930,7 +1205,7 @@ module Aws::DirectConnect
     #     interconnect stays in the requested state until the Letter of
     #     Authorization (LOA) is sent to the customer.
     #
-    #   * **Pending**&gt;\: The interconnect has been approved, and is being
+    #   * **Pending**\: The interconnect has been approved, and is being
     #     initialized.
     #
     #   * **Available**\: The network link is up, and the interconnect is
@@ -951,6 +1226,30 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Container for the parameters to the DeleteLag operation.
+    #
+    # @note When making an API call, you may pass DeleteLagRequest
+    #   data as a hash:
+    #
+    #       {
+    #         lag_id: "LagId", # required
+    #       }
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG to delete.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLagRequest AWS API Documentation
+    #
+    class DeleteLagRequest < Struct.new(
+      :lag_id)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the DeleteVirtualInterface operation.
     #
     # @note When making an API call, you may pass DeleteVirtualInterfaceRequest
@@ -961,7 +1260,7 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -1000,7 +1299,7 @@ module Aws::DirectConnect
     #   * **Down**\: A virtual interface that is BGP down.
     #
     #   * **Deleting**\: A virtual interface is in this state immediately
-    #     after calling *DeleteVirtualInterface* until it can no longer
+    #     after calling DeleteVirtualInterface until it can no longer
     #     forward traffic.
     #
     #   * **Deleted**\: A virtual interface that cannot forward traffic.
@@ -1030,7 +1329,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1112,7 +1413,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1122,6 +1425,32 @@ module Aws::DirectConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsRequest AWS API Documentation
     #
     class DescribeConnectionsRequest < Struct.new(
+      :connection_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the DescribeHostedConnections
+    # operation.
+    #
+    # @note When making an API call, you may pass DescribeHostedConnectionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the interconnect or LAG on which the hosted connections
+    #   are provisioned.
+    #
+    #   Example: dxcon-abc123 or dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnectionsRequest AWS API Documentation
+    #
+    class DescribeHostedConnectionsRequest < Struct.new(
       :connection_id)
       include Aws::Structure
     end
@@ -1205,6 +1534,76 @@ module Aws::DirectConnect
       include Aws::Structure
     end
 
+    # Container for the parameters to the DescribeLags operation.
+    #
+    # @note When making an API call, you may pass DescribeLagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         lag_id: "LagId",
+    #       }
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLagsRequest AWS API Documentation
+    #
+    class DescribeLagsRequest < Struct.new(
+      :lag_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the DescribeLoa operation.
+    #
+    # @note When making an API call, you may pass DescribeLoaRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         provider_name: "ProviderName",
+    #         loa_content_type: "application/pdf", # accepts application/pdf
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of a connection, LAG, or interconnect for which to get the
+    #   LOA-CFA information.
+    #
+    #   Example: dxcon-abc123 or dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_name
+    #   The name of the service provider who establishes connectivity on
+    #   your behalf. If you supply this parameter, the LOA-CFA lists the
+    #   provider name alongside your company name as the requester of the
+    #   cross connect.
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] loa_content_type
+    #   A standard media type indicating the content type of the LOA-CFA
+    #   document. Currently, the only supported value is
+    #   "application/pdf".
+    #
+    #   Default: application/pdf
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoaRequest AWS API Documentation
+    #
+    class DescribeLoaRequest < Struct.new(
+      :connection_id,
+      :provider_name,
+      :loa_content_type)
+      include Aws::Structure
+    end
+
     # Container for the parameters to the DescribeTags operation.
     #
     # @note When making an API call, you may pass DescribeTagsRequest
@@ -1250,7 +1649,9 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1258,7 +1659,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -1270,6 +1671,41 @@ module Aws::DirectConnect
     class DescribeVirtualInterfacesRequest < Struct.new(
       :connection_id,
       :virtual_interface_id)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the DisassociateConnectionFromLag
+    # operation.
+    #
+    # @note When making an API call, you may pass DisassociateConnectionFromLagRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connection_id: "ConnectionId", # required
+    #         lag_id: "LagId", # required
+    #       }
+    #
+    # @!attribute [rw] connection_id
+    #   The ID of the connection to disassociate from the LAG.
+    #
+    #   Example: dxcon-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLagRequest AWS API Documentation
+    #
+    class DisassociateConnectionFromLagRequest < Struct.new(
+      :connection_id,
+      :lag_id)
       include Aws::Structure
     end
 
@@ -1306,7 +1742,7 @@ module Aws::DirectConnect
     #     interconnect stays in the requested state until the Letter of
     #     Authorization (LOA) is sent to the customer.
     #
-    #   * **Pending**&gt;\: The interconnect has been approved, and is being
+    #   * **Pending**\: The interconnect has been approved, and is being
     #     initialized.
     #
     #   * **Available**\: The network link is up, and the interconnect is
@@ -1349,6 +1785,17 @@ module Aws::DirectConnect
     #   Interconnect.
     #   @return [Time]
     #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_device
+    #   The Direct Connection endpoint which the physical connection
+    #   terminates on.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Interconnect AWS API Documentation
     #
     class Interconnect < Struct.new(
@@ -1358,7 +1805,9 @@ module Aws::DirectConnect
       :region,
       :location,
       :bandwidth,
-      :loa_issue_time)
+      :loa_issue_time,
+      :lag_id,
+      :aws_device)
       include Aws::Structure
     end
 
@@ -1372,6 +1821,129 @@ module Aws::DirectConnect
     #
     class Interconnects < Struct.new(
       :interconnects)
+      include Aws::Structure
+    end
+
+    # Describes a link aggregation group (LAG). A LAG is a connection that
+    # uses the Link Aggregation Control Protocol (LACP) to logically
+    # aggregate a bundle of physical connections. Like an interconnect, it
+    # can host other connections. All connections in a LAG must terminate on
+    # the same physical AWS Direct Connect endpoint, and must be the same
+    # bandwidth.
+    #
+    # @!attribute [rw] connections_bandwidth
+    #   The individual bandwidth of the physical connections bundled by the
+    #   LAG.
+    #
+    #   Available values: 1Gbps, 10Gbps
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_connections
+    #   The number of physical connections bundled by the LAG, up to a
+    #   maximum of 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account
+    #   The owner of the LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_name
+    #   The name of the LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_state
+    #   The state of the LAG.
+    #
+    #   * **Requested**\: The initial state of a LAG. The LAG stays in the
+    #     requested state until the Letter of Authorization (LOA) is
+    #     available.
+    #
+    #   * **Pending**\: The LAG has been approved, and is being initialized.
+    #
+    #   * **Available**\: The network link is established, and the LAG is
+    #     ready for use.
+    #
+    #   * **Down**\: The network link is down.
+    #
+    #   * **Deleting**\: The LAG is in the process of being deleted.
+    #
+    #   * **Deleted**\: The LAG has been deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   Where the connection is located.
+    #
+    #   Example: EqSV5
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The AWS region where the connection is located.
+    #
+    #   Example: us-east-1
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_links
+    #   The minimum number of physical connections that must be operational
+    #   for the LAG itself to be operational. If the number of operational
+    #   connections drops below this setting, the LAG state changes to
+    #   `down`. This value can help to ensure that a LAG is not overutilized
+    #   if a significant number of its bundled connections go down.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] aws_device
+    #   The AWS Direct Connection endpoint that hosts the LAG.
+    #   @return [String]
+    #
+    # @!attribute [rw] connections
+    #   A list of connections bundled by this LAG.
+    #   @return [Array<Types::Connection>]
+    #
+    # @!attribute [rw] allows_hosted_connections
+    #   Indicates whether the LAG can host other connections.
+    #
+    #   <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lag AWS API Documentation
+    #
+    class Lag < Struct.new(
+      :connections_bandwidth,
+      :number_of_connections,
+      :lag_id,
+      :owner_account,
+      :lag_name,
+      :lag_state,
+      :location,
+      :region,
+      :minimum_links,
+      :aws_device,
+      :connections,
+      :allows_hosted_connections)
+      include Aws::Structure
+    end
+
+    # A structure containing a list of LAGs.
+    #
+    # @!attribute [rw] lags
+    #   A list of LAGs.
+    #   @return [Array<Types::Lag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/Lags AWS API Documentation
+    #
+    class Lags < Struct.new(
+      :lags)
       include Aws::Structure
     end
 
@@ -1450,14 +2022,14 @@ module Aws::DirectConnect
     #       }
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -1523,14 +2095,14 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -1605,14 +2177,14 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -1684,14 +2256,14 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -1769,14 +2341,14 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -1962,6 +2534,49 @@ module Aws::DirectConnect
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
 
+    # Container for the parameters to the UpdateLag operation.
+    #
+    # @note When making an API call, you may pass UpdateLagRequest
+    #   data as a hash:
+    #
+    #       {
+    #         lag_id: "LagId", # required
+    #         lag_name: "LagName",
+    #         minimum_links: 1,
+    #       }
+    #
+    # @!attribute [rw] lag_id
+    #   The ID of the LAG to update.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] lag_name
+    #   The name for the LAG.
+    #
+    #   Example: "`3x10G LAG to AWS`"
+    #
+    #   Default: None
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_links
+    #   The minimum number of physical connections that must be operational
+    #   for the LAG itself to be operational.
+    #
+    #   Default: None
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLagRequest AWS API Documentation
+    #
+    class UpdateLagRequest < Struct.new(
+      :lag_id,
+      :lag_name,
+      :minimum_links)
+      include Aws::Structure
+    end
+
     # You can create one or more AWS Direct Connect private virtual
     # interfaces linking to your virtual private gateway.
     #
@@ -2024,7 +2639,7 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -2040,7 +2655,9 @@ module Aws::DirectConnect
     #   @return [String]
     #
     # @!attribute [rw] connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -2067,14 +2684,14 @@ module Aws::DirectConnect
     #   @return [Integer]
     #
     # @!attribute [rw] asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
     #   @return [Integer]
     #
     # @!attribute [rw] auth_key
-    #   Authentication key for BGP configuration.
+    #   The authentication key for BGP configuration.
     #
     #   Example: asdf34example
     #   @return [String]
@@ -2122,7 +2739,7 @@ module Aws::DirectConnect
     #   * **Down**\: A virtual interface that is BGP down.
     #
     #   * **Deleting**\: A virtual interface is in this state immediately
-    #     after calling *DeleteVirtualInterface* until it can no longer
+    #     after calling DeleteVirtualInterface until it can no longer
     #     forward traffic.
     #
     #   * **Deleted**\: A virtual interface that cannot forward traffic.

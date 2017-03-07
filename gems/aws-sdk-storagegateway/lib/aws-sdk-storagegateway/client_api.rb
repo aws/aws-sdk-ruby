@@ -112,6 +112,7 @@ module Aws::StorageGateway
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     FileShareARN = Shapes::StringShape.new(name: 'FileShareARN')
     FileShareARNList = Shapes::ListShape.new(name: 'FileShareARNList')
+    FileShareClientList = Shapes::ListShape.new(name: 'FileShareClientList')
     FileShareId = Shapes::StringShape.new(name: 'FileShareId')
     FileShareInfo = Shapes::StructureShape.new(name: 'FileShareInfo')
     FileShareInfoList = Shapes::ListShape.new(name: 'FileShareInfoList')
@@ -127,6 +128,7 @@ module Aws::StorageGateway
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     Gateways = Shapes::ListShape.new(name: 'Gateways')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
+    IPV4AddressCIDR = Shapes::StringShape.new(name: 'IPV4AddressCIDR')
     Initiator = Shapes::StringShape.new(name: 'Initiator')
     Initiators = Shapes::ListShape.new(name: 'Initiators')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -352,6 +354,7 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
     CreateNFSFileShareInput.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, required: true, location_name: "LocationARN"))
     CreateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    CreateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -620,6 +623,8 @@ module Aws::StorageGateway
 
     FileShareARNList.member = Shapes::ShapeRef.new(shape: FileShareARN)
 
+    FileShareClientList.member = Shapes::ShapeRef.new(shape: IPV4AddressCIDR)
+
     FileShareInfo.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
     FileShareInfo.add_member(:file_share_id, Shapes::ShapeRef.new(shape: FileShareId, location_name: "FileShareId"))
     FileShareInfo.add_member(:file_share_status, Shapes::ShapeRef.new(shape: FileShareStatus, location_name: "FileShareStatus"))
@@ -725,6 +730,7 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
     NFSFileShareInfo.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
     NFSFileShareInfo.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    NFSFileShareInfo.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -895,6 +901,7 @@ module Aws::StorageGateway
     UpdateNFSFileShareInput.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
     UpdateNFSFileShareInput.add_member(:nfs_file_share_defaults, Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
     UpdateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
+    UpdateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
     UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
 
     UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))

@@ -21,6 +21,7 @@ module Aws::CognitoIdentity
     CognitoIdentityProviderClientId = Shapes::StringShape.new(name: 'CognitoIdentityProviderClientId')
     CognitoIdentityProviderList = Shapes::ListShape.new(name: 'CognitoIdentityProviderList')
     CognitoIdentityProviderName = Shapes::StringShape.new(name: 'CognitoIdentityProviderName')
+    CognitoIdentityProviderTokenCheck = Shapes::BooleanShape.new(name: 'CognitoIdentityProviderTokenCheck')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CreateIdentityPoolInput = Shapes::StructureShape.new(name: 'CreateIdentityPoolInput')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
@@ -105,6 +106,7 @@ module Aws::CognitoIdentity
 
     CognitoIdentityProvider.add_member(:provider_name, Shapes::ShapeRef.new(shape: CognitoIdentityProviderName, location_name: "ProviderName"))
     CognitoIdentityProvider.add_member(:client_id, Shapes::ShapeRef.new(shape: CognitoIdentityProviderClientId, location_name: "ClientId"))
+    CognitoIdentityProvider.add_member(:server_side_token_check, Shapes::ShapeRef.new(shape: CognitoIdentityProviderTokenCheck, location_name: "ServerSideTokenCheck", metadata: {"box"=>true}))
     CognitoIdentityProvider.struct_class = Types::CognitoIdentityProvider
 
     CognitoIdentityProviderList.member = Shapes::ShapeRef.new(shape: CognitoIdentityProvider)

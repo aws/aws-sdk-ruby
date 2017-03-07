@@ -1982,6 +1982,7 @@ module Aws::ConfigService
     #           },
     #         ],
     #         result_token: "String", # required
+    #         test_mode: false,
     #       }
     #
     # @!attribute [rw] evaluations
@@ -1997,11 +1998,24 @@ module Aws::ConfigService
     #   evaluation
     #   @return [String]
     #
+    # @!attribute [rw] test_mode
+    #   Use this parameter to specify a test run for `PutEvaluations`. You
+    #   can verify whether your AWS Lambda function will deliver evaluation
+    #   results to AWS Config. No updates occur to your existing
+    #   evaluations, and evaluation results are not sent to AWS Config.
+    #
+    #   <note markdown="1"> When `TestMode` is `true`, `PutEvaluations` doesn't require a valid
+    #   value for the `ResultToken` parameter, but the value cannot be null.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluationsRequest AWS API Documentation
     #
     class PutEvaluationsRequest < Struct.new(
       :evaluations,
-      :result_token)
+      :result_token,
+      :test_mode)
       include Aws::Structure
     end
 

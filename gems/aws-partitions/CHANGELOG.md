@@ -1,3 +1,17 @@
+Unreleased Changes
+------------------
+
+1.3.0 (2017-03-07)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Organizations`.
+
+* Feature - Added support for enumerating regions for `Aws::MTurk`.
+
+* Feature - Added support for enumerating regions for `Aws::LexRuntimeService`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudDirectory`.
+
 1.2.0 (2017-01-24)
 ------------------
 

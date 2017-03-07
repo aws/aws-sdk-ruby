@@ -41,12 +41,15 @@ module Aws::EC2
     AssociateAddressRequest = Shapes::StructureShape.new(name: 'AssociateAddressRequest')
     AssociateAddressResult = Shapes::StructureShape.new(name: 'AssociateAddressResult')
     AssociateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'AssociateDhcpOptionsRequest')
+    AssociateIamInstanceProfileRequest = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileRequest')
+    AssociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'AssociateIamInstanceProfileResult')
     AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
     AssociateRouteTableResult = Shapes::StructureShape.new(name: 'AssociateRouteTableResult')
     AssociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockRequest')
     AssociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockResult')
     AssociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockRequest')
     AssociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockResult')
+    AssociationIdList = Shapes::ListShape.new(name: 'AssociationIdList')
     AttachClassicLinkVpcRequest = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcRequest')
     AttachClassicLinkVpcResult = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcResult')
     AttachInternetGatewayRequest = Shapes::StructureShape.new(name: 'AttachInternetGatewayRequest')
@@ -69,6 +72,7 @@ module Aws::EC2
     AvailableCapacity = Shapes::StructureShape.new(name: 'AvailableCapacity')
     AvailableInstanceCapacityList = Shapes::ListShape.new(name: 'AvailableInstanceCapacityList')
     BatchState = Shapes::StringShape.new(name: 'BatchState')
+    BillingProductList = Shapes::ListShape.new(name: 'BillingProductList')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     BlobAttributeValue = Shapes::StructureShape.new(name: 'BlobAttributeValue')
     BlockDeviceMapping = Shapes::StructureShape.new(name: 'BlockDeviceMapping')
@@ -236,6 +240,8 @@ module Aws::EC2
     DescribeHostReservationsResult = Shapes::StructureShape.new(name: 'DescribeHostReservationsResult')
     DescribeHostsRequest = Shapes::StructureShape.new(name: 'DescribeHostsRequest')
     DescribeHostsResult = Shapes::StructureShape.new(name: 'DescribeHostsResult')
+    DescribeIamInstanceProfileAssociationsRequest = Shapes::StructureShape.new(name: 'DescribeIamInstanceProfileAssociationsRequest')
+    DescribeIamInstanceProfileAssociationsResult = Shapes::StructureShape.new(name: 'DescribeIamInstanceProfileAssociationsResult')
     DescribeIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeIdFormatRequest')
     DescribeIdFormatResult = Shapes::StructureShape.new(name: 'DescribeIdFormatResult')
     DescribeIdentityIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeIdentityIdFormatRequest')
@@ -316,6 +322,8 @@ module Aws::EC2
     DescribeVolumeAttributeResult = Shapes::StructureShape.new(name: 'DescribeVolumeAttributeResult')
     DescribeVolumeStatusRequest = Shapes::StructureShape.new(name: 'DescribeVolumeStatusRequest')
     DescribeVolumeStatusResult = Shapes::StructureShape.new(name: 'DescribeVolumeStatusResult')
+    DescribeVolumesModificationsRequest = Shapes::StructureShape.new(name: 'DescribeVolumesModificationsRequest')
+    DescribeVolumesModificationsResult = Shapes::StructureShape.new(name: 'DescribeVolumesModificationsResult')
     DescribeVolumesRequest = Shapes::StructureShape.new(name: 'DescribeVolumesRequest')
     DescribeVolumesResult = Shapes::StructureShape.new(name: 'DescribeVolumesResult')
     DescribeVpcAttributeRequest = Shapes::StructureShape.new(name: 'DescribeVpcAttributeRequest')
@@ -355,6 +363,8 @@ module Aws::EC2
     DisableVpcClassicLinkRequest = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkRequest')
     DisableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkResult')
     DisassociateAddressRequest = Shapes::StructureShape.new(name: 'DisassociateAddressRequest')
+    DisassociateIamInstanceProfileRequest = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileRequest')
+    DisassociateIamInstanceProfileResult = Shapes::StructureShape.new(name: 'DisassociateIamInstanceProfileResult')
     DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
     DisassociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockRequest')
     DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
@@ -431,6 +441,9 @@ module Aws::EC2
     HostTenancy = Shapes::StringShape.new(name: 'HostTenancy')
     HypervisorType = Shapes::StringShape.new(name: 'HypervisorType')
     IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
+    IamInstanceProfileAssociation = Shapes::StructureShape.new(name: 'IamInstanceProfileAssociation')
+    IamInstanceProfileAssociationSet = Shapes::ListShape.new(name: 'IamInstanceProfileAssociationSet')
+    IamInstanceProfileAssociationState = Shapes::StringShape.new(name: 'IamInstanceProfileAssociationState')
     IamInstanceProfileSpecification = Shapes::StructureShape.new(name: 'IamInstanceProfileSpecification')
     IcmpTypeCode = Shapes::StructureShape.new(name: 'IcmpTypeCode')
     IdFormat = Shapes::StructureShape.new(name: 'IdFormat')
@@ -475,6 +488,7 @@ module Aws::EC2
     InstanceCount = Shapes::StructureShape.new(name: 'InstanceCount')
     InstanceCountList = Shapes::ListShape.new(name: 'InstanceCountList')
     InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
+    InstanceHealthStatus = Shapes::StringShape.new(name: 'InstanceHealthStatus')
     InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
     InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
     InstanceIpv6Address = Shapes::StructureShape.new(name: 'InstanceIpv6Address')
@@ -549,6 +563,8 @@ module Aws::EC2
     ModifySpotFleetRequestResponse = Shapes::StructureShape.new(name: 'ModifySpotFleetRequestResponse')
     ModifySubnetAttributeRequest = Shapes::StructureShape.new(name: 'ModifySubnetAttributeRequest')
     ModifyVolumeAttributeRequest = Shapes::StructureShape.new(name: 'ModifyVolumeAttributeRequest')
+    ModifyVolumeRequest = Shapes::StructureShape.new(name: 'ModifyVolumeRequest')
+    ModifyVolumeResult = Shapes::StructureShape.new(name: 'ModifyVolumeResult')
     ModifyVpcAttributeRequest = Shapes::StructureShape.new(name: 'ModifyVpcAttributeRequest')
     ModifyVpcEndpointRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointRequest')
     ModifyVpcEndpointResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointResult')
@@ -659,6 +675,8 @@ module Aws::EC2
     ReleaseAddressRequest = Shapes::StructureShape.new(name: 'ReleaseAddressRequest')
     ReleaseHostsRequest = Shapes::StructureShape.new(name: 'ReleaseHostsRequest')
     ReleaseHostsResult = Shapes::StructureShape.new(name: 'ReleaseHostsResult')
+    ReplaceIamInstanceProfileAssociationRequest = Shapes::StructureShape.new(name: 'ReplaceIamInstanceProfileAssociationRequest')
+    ReplaceIamInstanceProfileAssociationResult = Shapes::StructureShape.new(name: 'ReplaceIamInstanceProfileAssociationResult')
     ReplaceNetworkAclAssociationRequest = Shapes::StructureShape.new(name: 'ReplaceNetworkAclAssociationRequest')
     ReplaceNetworkAclAssociationResult = Shapes::StructureShape.new(name: 'ReplaceNetworkAclAssociationResult')
     ReplaceNetworkAclEntryRequest = Shapes::StructureShape.new(name: 'ReplaceNetworkAclEntryRequest')
@@ -850,6 +868,9 @@ module Aws::EC2
     VolumeDetail = Shapes::StructureShape.new(name: 'VolumeDetail')
     VolumeIdStringList = Shapes::ListShape.new(name: 'VolumeIdStringList')
     VolumeList = Shapes::ListShape.new(name: 'VolumeList')
+    VolumeModification = Shapes::StructureShape.new(name: 'VolumeModification')
+    VolumeModificationList = Shapes::ListShape.new(name: 'VolumeModificationList')
+    VolumeModificationState = Shapes::StringShape.new(name: 'VolumeModificationState')
     VolumeState = Shapes::StringShape.new(name: 'VolumeState')
     VolumeStatusAction = Shapes::StructureShape.new(name: 'VolumeStatusAction')
     VolumeStatusActionsList = Shapes::ListShape.new(name: 'VolumeStatusActionsList')
@@ -931,6 +952,7 @@ module Aws::EC2
     ActiveInstance.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
     ActiveInstance.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     ActiveInstance.add_member(:spot_instance_request_id, Shapes::ShapeRef.new(shape: String, location_name: "spotInstanceRequestId"))
+    ActiveInstance.add_member(:instance_health, Shapes::ShapeRef.new(shape: InstanceHealthStatus, location_name: "instanceHealth"))
     ActiveInstance.struct_class = Types::ActiveInstance
 
     ActiveInstanceSet.member = Shapes::ShapeRef.new(shape: ActiveInstance, location_name: "item")
@@ -1000,6 +1022,13 @@ module Aws::EC2
     AssociateDhcpOptionsRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
     AssociateDhcpOptionsRequest.struct_class = Types::AssociateDhcpOptionsRequest
 
+    AssociateIamInstanceProfileRequest.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfileSpecification, required: true, location_name: "IamInstanceProfile"))
+    AssociateIamInstanceProfileRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
+    AssociateIamInstanceProfileRequest.struct_class = Types::AssociateIamInstanceProfileRequest
+
+    AssociateIamInstanceProfileResult.add_member(:iam_instance_profile_association, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociation, location_name: "iamInstanceProfileAssociation"))
+    AssociateIamInstanceProfileResult.struct_class = Types::AssociateIamInstanceProfileResult
+
     AssociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AssociateRouteTableRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
     AssociateRouteTableRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "routeTableId"))
@@ -1023,6 +1052,8 @@ module Aws::EC2
     AssociateVpcCidrBlockResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
     AssociateVpcCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
     AssociateVpcCidrBlockResult.struct_class = Types::AssociateVpcCidrBlockResult
+
+    AssociationIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "AssociationId")
 
     AttachClassicLinkVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     AttachClassicLinkVpcRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
@@ -1108,6 +1139,8 @@ module Aws::EC2
     AvailableCapacity.struct_class = Types::AvailableCapacity
 
     AvailableInstanceCapacityList.member = Shapes::ShapeRef.new(shape: InstanceCapacity, location_name: "item")
+
+    BillingProductList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     BlobAttributeValue.add_member(:value, Shapes::ShapeRef.new(shape: Blob, location_name: "value"))
     BlobAttributeValue.struct_class = Types::BlobAttributeValue
@@ -1799,6 +1832,16 @@ module Aws::EC2
     DescribeHostsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeHostsResult.struct_class = Types::DescribeHostsResult
 
+    DescribeIamInstanceProfileAssociationsRequest.add_member(:association_ids, Shapes::ShapeRef.new(shape: AssociationIdList, location_name: "AssociationId"))
+    DescribeIamInstanceProfileAssociationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIamInstanceProfileAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    DescribeIamInstanceProfileAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIamInstanceProfileAssociationsRequest.struct_class = Types::DescribeIamInstanceProfileAssociationsRequest
+
+    DescribeIamInstanceProfileAssociationsResult.add_member(:iam_instance_profile_associations, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociationSet, location_name: "iamInstanceProfileAssociationSet"))
+    DescribeIamInstanceProfileAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIamInstanceProfileAssociationsResult.struct_class = Types::DescribeIamInstanceProfileAssociationsResult
+
     DescribeIdFormatRequest.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "Resource"))
     DescribeIdFormatRequest.struct_class = Types::DescribeIdFormatRequest
 
@@ -2204,6 +2247,17 @@ module Aws::EC2
     DescribeVolumeStatusResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     DescribeVolumeStatusResult.struct_class = Types::DescribeVolumeStatusResult
 
+    DescribeVolumesModificationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeVolumesModificationsRequest.add_member(:volume_ids, Shapes::ShapeRef.new(shape: VolumeIdStringList, location_name: "VolumeId"))
+    DescribeVolumesModificationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeVolumesModificationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeVolumesModificationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeVolumesModificationsRequest.struct_class = Types::DescribeVolumesModificationsRequest
+
+    DescribeVolumesModificationsResult.add_member(:volumes_modifications, Shapes::ShapeRef.new(shape: VolumeModificationList, location_name: "volumeModificationSet"))
+    DescribeVolumesModificationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    DescribeVolumesModificationsResult.struct_class = Types::DescribeVolumesModificationsResult
+
     DescribeVolumesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DescribeVolumesRequest.add_member(:volume_ids, Shapes::ShapeRef.new(shape: VolumeIdStringList, location_name: "VolumeId"))
     DescribeVolumesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -2362,6 +2416,12 @@ module Aws::EC2
     DisassociateAddressRequest.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "PublicIp"))
     DisassociateAddressRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "AssociationId"))
     DisassociateAddressRequest.struct_class = Types::DisassociateAddressRequest
+
+    DisassociateIamInstanceProfileRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssociationId"))
+    DisassociateIamInstanceProfileRequest.struct_class = Types::DisassociateIamInstanceProfileRequest
+
+    DisassociateIamInstanceProfileResult.add_member(:iam_instance_profile_association, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociation, location_name: "iamInstanceProfileAssociation"))
+    DisassociateIamInstanceProfileResult.struct_class = Types::DisassociateIamInstanceProfileResult
 
     DisassociateRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     DisassociateRouteTableRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "associationId"))
@@ -2630,6 +2690,15 @@ module Aws::EC2
     IamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     IamInstanceProfile.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     IamInstanceProfile.struct_class = Types::IamInstanceProfile
+
+    IamInstanceProfileAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+    IamInstanceProfileAssociation.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    IamInstanceProfileAssociation.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfile, location_name: "iamInstanceProfile"))
+    IamInstanceProfileAssociation.add_member(:state, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociationState, location_name: "state"))
+    IamInstanceProfileAssociation.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "timestamp"))
+    IamInstanceProfileAssociation.struct_class = Types::IamInstanceProfileAssociation
+
+    IamInstanceProfileAssociationSet.member = Shapes::ShapeRef.new(shape: IamInstanceProfileAssociation, location_name: "item")
 
     IamInstanceProfileSpecification.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     IamInstanceProfileSpecification.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -3208,6 +3277,16 @@ module Aws::EC2
     ModifyVolumeAttributeRequest.add_member(:auto_enable_io, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "AutoEnableIO"))
     ModifyVolumeAttributeRequest.struct_class = Types::ModifyVolumeAttributeRequest
 
+    ModifyVolumeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VolumeId"))
+    ModifyVolumeRequest.add_member(:size, Shapes::ShapeRef.new(shape: Integer, location_name: "Size"))
+    ModifyVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "VolumeType"))
+    ModifyVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
+    ModifyVolumeRequest.struct_class = Types::ModifyVolumeRequest
+
+    ModifyVolumeResult.add_member(:volume_modification, Shapes::ShapeRef.new(shape: VolumeModification, location_name: "volumeModification"))
+    ModifyVolumeResult.struct_class = Types::ModifyVolumeResult
+
     ModifyVpcAttributeRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "vpcId"))
     ModifyVpcAttributeRequest.add_member(:enable_dns_support, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableDnsSupport"))
     ModifyVpcAttributeRequest.add_member(:enable_dns_hostnames, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "EnableDnsHostnames"))
@@ -3557,6 +3636,7 @@ module Aws::EC2
     RegisterImageRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: ArchitectureValues, location_name: "architecture"))
     RegisterImageRequest.add_member(:kernel_id, Shapes::ShapeRef.new(shape: String, location_name: "kernelId"))
     RegisterImageRequest.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
+    RegisterImageRequest.add_member(:billing_products, Shapes::ShapeRef.new(shape: BillingProductList, location_name: "BillingProduct"))
     RegisterImageRequest.add_member(:root_device_name, Shapes::ShapeRef.new(shape: String, location_name: "rootDeviceName"))
     RegisterImageRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingRequestList, location_name: "BlockDeviceMapping"))
     RegisterImageRequest.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: String, location_name: "virtualizationType"))
@@ -3585,6 +3665,13 @@ module Aws::EC2
     ReleaseHostsResult.add_member(:successful, Shapes::ShapeRef.new(shape: ResponseHostIdList, location_name: "successful"))
     ReleaseHostsResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: UnsuccessfulItemList, location_name: "unsuccessful"))
     ReleaseHostsResult.struct_class = Types::ReleaseHostsResult
+
+    ReplaceIamInstanceProfileAssociationRequest.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfileSpecification, required: true, location_name: "IamInstanceProfile"))
+    ReplaceIamInstanceProfileAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "AssociationId"))
+    ReplaceIamInstanceProfileAssociationRequest.struct_class = Types::ReplaceIamInstanceProfileAssociationRequest
+
+    ReplaceIamInstanceProfileAssociationResult.add_member(:iam_instance_profile_association, Shapes::ShapeRef.new(shape: IamInstanceProfileAssociation, location_name: "iamInstanceProfileAssociation"))
+    ReplaceIamInstanceProfileAssociationResult.struct_class = Types::ReplaceIamInstanceProfileAssociationResult
 
     ReplaceNetworkAclAssociationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     ReplaceNetworkAclAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "associationId"))
@@ -4192,6 +4279,7 @@ module Aws::EC2
     SpotFleetRequestConfigData.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: AllocationStrategy, location_name: "allocationStrategy"))
     SpotFleetRequestConfigData.add_member(:fulfilled_capacity, Shapes::ShapeRef.new(shape: Double, location_name: "fulfilledCapacity"))
     SpotFleetRequestConfigData.add_member(:type, Shapes::ShapeRef.new(shape: FleetType, location_name: "type"))
+    SpotFleetRequestConfigData.add_member(:replace_unhealthy_instances, Shapes::ShapeRef.new(shape: Boolean, location_name: "replaceUnhealthyInstances"))
     SpotFleetRequestConfigData.struct_class = Types::SpotFleetRequestConfigData
 
     SpotFleetRequestConfigSet.member = Shapes::ShapeRef.new(shape: SpotFleetRequestConfig, location_name: "item")
@@ -4451,6 +4539,22 @@ module Aws::EC2
 
     VolumeList.member = Shapes::ShapeRef.new(shape: Volume, location_name: "item")
 
+    VolumeModification.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
+    VolumeModification.add_member(:modification_state, Shapes::ShapeRef.new(shape: VolumeModificationState, location_name: "modificationState"))
+    VolumeModification.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+    VolumeModification.add_member(:target_size, Shapes::ShapeRef.new(shape: Integer, location_name: "targetSize"))
+    VolumeModification.add_member(:target_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "targetIops"))
+    VolumeModification.add_member(:target_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "targetVolumeType"))
+    VolumeModification.add_member(:original_size, Shapes::ShapeRef.new(shape: Integer, location_name: "originalSize"))
+    VolumeModification.add_member(:original_iops, Shapes::ShapeRef.new(shape: Integer, location_name: "originalIops"))
+    VolumeModification.add_member(:original_volume_type, Shapes::ShapeRef.new(shape: VolumeType, location_name: "originalVolumeType"))
+    VolumeModification.add_member(:progress, Shapes::ShapeRef.new(shape: Long, location_name: "progress"))
+    VolumeModification.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
+    VolumeModification.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
+    VolumeModification.struct_class = Types::VolumeModification
+
+    VolumeModificationList.member = Shapes::ShapeRef.new(shape: VolumeModification, location_name: "item")
+
     VolumeStatusAction.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     VolumeStatusAction.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     VolumeStatusAction.add_member(:event_type, Shapes::ShapeRef.new(shape: String, location_name: "eventType"))
@@ -4683,6 +4787,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateDhcpOptionsRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:associate_iam_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateIamInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateIamInstanceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateIamInstanceProfileResult)
       end)
 
       api.add_operation(:associate_route_table, Seahorse::Model::Operation.new.tap do |o|
@@ -5397,6 +5509,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeHostsResult)
       end)
 
+      api.add_operation(:describe_iam_instance_profile_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIamInstanceProfileAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIamInstanceProfileAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIamInstanceProfileAssociationsResult)
+      end)
+
       api.add_operation(:describe_id_format, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIdFormat"
         o.http_method = "POST"
@@ -5511,6 +5631,12 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeNatGatewaysRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeNatGatewaysResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:describe_network_acls, Seahorse::Model::Operation.new.tap do |o|
@@ -5792,6 +5918,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:describe_volumes_modifications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVolumesModifications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVolumesModificationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVolumesModificationsResult)
+      end)
+
       api.add_operation(:describe_vpc_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeVpcAttribute"
         o.http_method = "POST"
@@ -5934,6 +6068,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateAddressRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+      end)
+
+      api.add_operation(:disassociate_iam_instance_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateIamInstanceProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateIamInstanceProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateIamInstanceProfileResult)
       end)
 
       api.add_operation(:disassociate_route_table, Seahorse::Model::Operation.new.tap do |o|
@@ -6160,6 +6302,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
       end)
 
+      api.add_operation(:modify_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVolumeResult)
+      end)
+
       api.add_operation(:modify_volume_attribute, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ModifyVolumeAttribute"
         o.http_method = "POST"
@@ -6270,6 +6420,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ReleaseHostsRequest)
         o.output = Shapes::ShapeRef.new(shape: ReleaseHostsResult)
+      end)
+
+      api.add_operation(:replace_iam_instance_profile_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ReplaceIamInstanceProfileAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ReplaceIamInstanceProfileAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ReplaceIamInstanceProfileAssociationResult)
       end)
 
       api.add_operation(:replace_network_acl_association, Seahorse::Model::Operation.new.tap do |o|

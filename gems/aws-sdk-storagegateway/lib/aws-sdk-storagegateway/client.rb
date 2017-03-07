@@ -628,6 +628,10 @@ module Aws::StorageGateway
     #   this field is not populated, the default value S3\_STANDARD is used.
     #   Optional.
     #
+    # @option params [Array<String>] :client_list
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
+    #
     # @return [Types::CreateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -648,6 +652,7 @@ module Aws::StorageGateway
     #     role: "Role", # required
     #     location_arn: "LocationARN", # required
     #     default_storage_class: "StorageClass",
+    #     client_list: ["IPV4AddressCIDR"],
     #   })
     #
     # @example Response structure
@@ -1603,6 +1608,8 @@ module Aws::StorageGateway
     #   resp.nfs_file_share_info_list[0].role #=> String
     #   resp.nfs_file_share_info_list[0].location_arn #=> String
     #   resp.nfs_file_share_info_list[0].default_storage_class #=> String
+    #   resp.nfs_file_share_info_list[0].client_list #=> Array
+    #   resp.nfs_file_share_info_list[0].client_list[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeNFSFileShares AWS API Documentation
     #
@@ -3029,6 +3036,10 @@ module Aws::StorageGateway
     #   If this field is not populated, the default value S3\_STANDARD is
     #   used. Optional.
     #
+    # @option params [Array<String>] :client_list
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
+    #
     # @return [Types::UpdateNFSFileShareOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateNFSFileShareOutput#file_share_arn #file_share_arn} => String
@@ -3046,6 +3057,7 @@ module Aws::StorageGateway
     #       owner_id: 1,
     #     },
     #     default_storage_class: "StorageClass",
+    #     client_list: ["IPV4AddressCIDR"],
     #   })
     #
     # @example Response structure
@@ -3165,7 +3177,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

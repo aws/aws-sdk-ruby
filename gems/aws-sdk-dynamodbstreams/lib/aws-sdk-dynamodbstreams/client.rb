@@ -157,7 +157,7 @@ module Aws::DynamoDBStreams
     # the stream, its Amazon Resource Name (ARN), the composition of its
     # shards, and its corresponding DynamoDB table.
     #
-    # <note markdown="1"> You can call *DescribeStream* at a maximum rate of 10 times per
+    # <note markdown="1"> You can call `DescribeStream` at a maximum rate of 10 times per
     # second.
     #
     #  </note>
@@ -273,6 +273,8 @@ module Aws::DynamoDBStreams
     #   resp.records[0].dynamodb.sequence_number #=> String
     #   resp.records[0].dynamodb.size_bytes #=> Integer
     #   resp.records[0].dynamodb.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
+    #   resp.records[0].user_identity.principal_id #=> String
+    #   resp.records[0].user_identity.type #=> String
     #   resp.next_shard_iterator #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/streams-dynamodb-2012-08-10/GetRecords AWS API Documentation
@@ -353,9 +355,9 @@ module Aws::DynamoDBStreams
 
     # Returns an array of stream ARNs associated with the current account
     # and endpoint. If the `TableName` parameter is present, then
-    # *ListStreams* will return only the streams ARNs for that table.
+    # `ListStreams` will return only the streams ARNs for that table.
     #
-    # <note markdown="1"> You can call *ListStreams* at a maximum rate of 5 times per second.
+    # <note markdown="1"> You can call `ListStreams` at a maximum rate of 5 times per second.
     #
     #  </note>
     #
@@ -414,7 +416,7 @@ module Aws::DynamoDBStreams
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodbstreams'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

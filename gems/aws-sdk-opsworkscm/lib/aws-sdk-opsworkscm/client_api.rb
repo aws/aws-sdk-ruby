@@ -45,6 +45,8 @@ module Aws::OpsWorksCM
     DisassociateNodeRequest = Shapes::StructureShape.new(name: 'DisassociateNodeRequest')
     DisassociateNodeResponse = Shapes::StructureShape.new(name: 'DisassociateNodeResponse')
     EngineAttribute = Shapes::StructureShape.new(name: 'EngineAttribute')
+    EngineAttributeName = Shapes::StringShape.new(name: 'EngineAttributeName')
+    EngineAttributeValue = Shapes::StringShape.new(name: 'EngineAttributeValue')
     EngineAttributes = Shapes::ListShape.new(name: 'EngineAttributes')
     InstanceProfileArn = Shapes::StringShape.new(name: 'InstanceProfileArn')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -90,7 +92,7 @@ module Aws::OpsWorksCM
 
     AssociateNodeRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
     AssociateNodeRequest.add_member(:node_name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "NodeName"))
-    AssociateNodeRequest.add_member(:engine_attributes, Shapes::ShapeRef.new(shape: EngineAttributes, location_name: "EngineAttributes"))
+    AssociateNodeRequest.add_member(:engine_attributes, Shapes::ShapeRef.new(shape: EngineAttributes, required: true, location_name: "EngineAttributes"))
     AssociateNodeRequest.struct_class = Types::AssociateNodeRequest
 
     AssociateNodeResponse.add_member(:node_association_status_token, Shapes::ShapeRef.new(shape: NodeAssociationStatusToken, location_name: "NodeAssociationStatusToken"))
@@ -109,8 +111,8 @@ module Aws::OpsWorksCM
     Backup.add_member(:key_pair, Shapes::ShapeRef.new(shape: String, location_name: "KeyPair"))
     Backup.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: TimeWindowDefinition, location_name: "PreferredBackupWindow"))
     Backup.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: TimeWindowDefinition, location_name: "PreferredMaintenanceWindow"))
-    Backup.add_member(:s3_data_size, Shapes::ShapeRef.new(shape: Integer, location_name: "S3DataSize"))
-    Backup.add_member(:s3_data_url, Shapes::ShapeRef.new(shape: String, location_name: "S3DataUrl"))
+    Backup.add_member(:s3_data_size, Shapes::ShapeRef.new(shape: Integer, deprecated: true, location_name: "S3DataSize"))
+    Backup.add_member(:s3_data_url, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "S3DataUrl"))
     Backup.add_member(:s3_log_url, Shapes::ShapeRef.new(shape: String, location_name: "S3LogUrl"))
     Backup.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: Strings, location_name: "SecurityGroupIds"))
     Backup.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, location_name: "ServerName"))
@@ -131,6 +133,7 @@ module Aws::OpsWorksCM
     CreateBackupResponse.add_member(:backup, Shapes::ShapeRef.new(shape: Backup, location_name: "Backup"))
     CreateBackupResponse.struct_class = Types::CreateBackupResponse
 
+    CreateServerRequest.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
     CreateServerRequest.add_member(:disable_automated_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableAutomatedBackup"))
     CreateServerRequest.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
     CreateServerRequest.add_member(:engine_model, Shapes::ShapeRef.new(shape: String, location_name: "EngineModel"))
@@ -139,7 +142,7 @@ module Aws::OpsWorksCM
     CreateServerRequest.add_member(:backup_retention_count, Shapes::ShapeRef.new(shape: BackupRetentionCountDefinition, location_name: "BackupRetentionCount"))
     CreateServerRequest.add_member(:server_name, Shapes::ShapeRef.new(shape: ServerName, required: true, location_name: "ServerName"))
     CreateServerRequest.add_member(:instance_profile_arn, Shapes::ShapeRef.new(shape: InstanceProfileArn, required: true, location_name: "InstanceProfileArn"))
-    CreateServerRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "InstanceType"))
+    CreateServerRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceType"))
     CreateServerRequest.add_member(:key_pair, Shapes::ShapeRef.new(shape: KeyPair, location_name: "KeyPair"))
     CreateServerRequest.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: TimeWindowDefinition, location_name: "PreferredMaintenanceWindow"))
     CreateServerRequest.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: TimeWindowDefinition, location_name: "PreferredBackupWindow"))
@@ -210,8 +213,8 @@ module Aws::OpsWorksCM
     DisassociateNodeResponse.add_member(:node_association_status_token, Shapes::ShapeRef.new(shape: NodeAssociationStatusToken, location_name: "NodeAssociationStatusToken"))
     DisassociateNodeResponse.struct_class = Types::DisassociateNodeResponse
 
-    EngineAttribute.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
-    EngineAttribute.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+    EngineAttribute.add_member(:name, Shapes::ShapeRef.new(shape: EngineAttributeName, location_name: "Name"))
+    EngineAttribute.add_member(:value, Shapes::ShapeRef.new(shape: EngineAttributeValue, location_name: "Value"))
     EngineAttribute.struct_class = Types::EngineAttribute
 
     EngineAttributes.member = Shapes::ShapeRef.new(shape: EngineAttribute)
@@ -224,9 +227,11 @@ module Aws::OpsWorksCM
 
     RestoreServerResponse.struct_class = Types::RestoreServerResponse
 
+    Server.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
     Server.add_member(:backup_retention_count, Shapes::ShapeRef.new(shape: Integer, location_name: "BackupRetentionCount"))
     Server.add_member(:server_name, Shapes::ShapeRef.new(shape: String, location_name: "ServerName"))
     Server.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    Server.add_member(:cloud_formation_stack_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudFormationStackArn"))
     Server.add_member(:disable_automated_backup, Shapes::ShapeRef.new(shape: Boolean, location_name: "DisableAutomatedBackup"))
     Server.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
     Server.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))

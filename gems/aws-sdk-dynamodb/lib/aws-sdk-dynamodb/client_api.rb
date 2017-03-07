@@ -57,6 +57,8 @@ module Aws::DynamoDB
     DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
     DescribeTableInput = Shapes::StructureShape.new(name: 'DescribeTableInput')
     DescribeTableOutput = Shapes::StructureShape.new(name: 'DescribeTableOutput')
+    DescribeTimeToLiveInput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveInput')
+    DescribeTimeToLiveOutput = Shapes::StructureShape.new(name: 'DescribeTimeToLiveOutput')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpectedAttributeMap = Shapes::MapShape.new(name: 'ExpectedAttributeMap')
     ExpectedAttributeValue = Shapes::StructureShape.new(name: 'ExpectedAttributeValue')
@@ -157,6 +159,11 @@ module Aws::DynamoDB
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValueString = Shapes::StringShape.new(name: 'TagValueString')
+    TimeToLiveAttributeName = Shapes::StringShape.new(name: 'TimeToLiveAttributeName')
+    TimeToLiveDescription = Shapes::StructureShape.new(name: 'TimeToLiveDescription')
+    TimeToLiveEnabled = Shapes::BooleanShape.new(name: 'TimeToLiveEnabled')
+    TimeToLiveSpecification = Shapes::StructureShape.new(name: 'TimeToLiveSpecification')
+    TimeToLiveStatus = Shapes::StringShape.new(name: 'TimeToLiveStatus')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateExpression = Shapes::StringShape.new(name: 'UpdateExpression')
     UpdateGlobalSecondaryIndexAction = Shapes::StructureShape.new(name: 'UpdateGlobalSecondaryIndexAction')
@@ -164,6 +171,8 @@ module Aws::DynamoDB
     UpdateItemOutput = Shapes::StructureShape.new(name: 'UpdateItemOutput')
     UpdateTableInput = Shapes::StructureShape.new(name: 'UpdateTableInput')
     UpdateTableOutput = Shapes::StructureShape.new(name: 'UpdateTableOutput')
+    UpdateTimeToLiveInput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveInput')
+    UpdateTimeToLiveOutput = Shapes::StructureShape.new(name: 'UpdateTimeToLiveOutput')
     WriteRequest = Shapes::StructureShape.new(name: 'WriteRequest')
     WriteRequests = Shapes::ListShape.new(name: 'WriteRequests')
 
@@ -305,6 +314,12 @@ module Aws::DynamoDB
 
     DescribeTableOutput.add_member(:table, Shapes::ShapeRef.new(shape: TableDescription, location_name: "Table"))
     DescribeTableOutput.struct_class = Types::DescribeTableOutput
+
+    DescribeTimeToLiveInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    DescribeTimeToLiveInput.struct_class = Types::DescribeTimeToLiveInput
+
+    DescribeTimeToLiveOutput.add_member(:time_to_live_description, Shapes::ShapeRef.new(shape: TimeToLiveDescription, location_name: "TimeToLiveDescription"))
+    DescribeTimeToLiveOutput.struct_class = Types::DescribeTimeToLiveOutput
 
     ExpectedAttributeMap.key = Shapes::ShapeRef.new(shape: AttributeName)
     ExpectedAttributeMap.value = Shapes::ShapeRef.new(shape: ExpectedAttributeValue)
@@ -572,6 +587,14 @@ module Aws::DynamoDB
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
 
+    TimeToLiveDescription.add_member(:time_to_live_status, Shapes::ShapeRef.new(shape: TimeToLiveStatus, location_name: "TimeToLiveStatus"))
+    TimeToLiveDescription.add_member(:attribute_name, Shapes::ShapeRef.new(shape: TimeToLiveAttributeName, location_name: "AttributeName"))
+    TimeToLiveDescription.struct_class = Types::TimeToLiveDescription
+
+    TimeToLiveSpecification.add_member(:enabled, Shapes::ShapeRef.new(shape: TimeToLiveEnabled, required: true, location_name: "Enabled"))
+    TimeToLiveSpecification.add_member(:attribute_name, Shapes::ShapeRef.new(shape: TimeToLiveAttributeName, required: true, location_name: "AttributeName"))
+    TimeToLiveSpecification.struct_class = Types::TimeToLiveSpecification
+
     UntagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "ResourceArn"))
     UntagResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceInput.struct_class = Types::UntagResourceInput
@@ -608,6 +631,13 @@ module Aws::DynamoDB
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
     UpdateTableOutput.struct_class = Types::UpdateTableOutput
+
+    UpdateTimeToLiveInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
+    UpdateTimeToLiveInput.add_member(:time_to_live_specification, Shapes::ShapeRef.new(shape: TimeToLiveSpecification, required: true, location_name: "TimeToLiveSpecification"))
+    UpdateTimeToLiveInput.struct_class = Types::UpdateTimeToLiveInput
+
+    UpdateTimeToLiveOutput.add_member(:time_to_live_specification, Shapes::ShapeRef.new(shape: TimeToLiveSpecification, location_name: "TimeToLiveSpecification"))
+    UpdateTimeToLiveOutput.struct_class = Types::UpdateTimeToLiveOutput
 
     WriteRequest.add_member(:put_request, Shapes::ShapeRef.new(shape: PutRequest, location_name: "PutRequest"))
     WriteRequest.add_member(:delete_request, Shapes::ShapeRef.new(shape: DeleteRequest, location_name: "DeleteRequest"))
@@ -709,6 +739,16 @@ module Aws::DynamoDB
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeTableInput)
         o.output = Shapes::ShapeRef.new(shape: DescribeTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_time_to_live, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeTimeToLive"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeTimeToLiveInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeTimeToLiveOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
@@ -839,6 +879,18 @@ module Aws::DynamoDB
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateTableInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateTableOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:update_time_to_live, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTimeToLive"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTimeToLiveInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTimeToLiveOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

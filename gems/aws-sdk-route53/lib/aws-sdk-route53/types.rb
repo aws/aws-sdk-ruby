@@ -26,8 +26,8 @@ module Aws::Route53
     #   health check is healthy.
     #
     #   For the current list of CloudWatch regions, see [Amazon
-    #   CloudWatch][1] in *AWS Regions and Endpoints* in the *Amazon Web
-    #   Services General Reference*.
+    #   CloudWatch][1] in the *AWS Regions and Endpoints* chapter of the
+    #   *Amazon Web Services General Reference*.
     #
     #
     #
@@ -51,7 +51,7 @@ module Aws::Route53
     # *Alias resource record sets only:* Information about the CloudFront
     # distribution, Elastic Beanstalk environment, ELB load balancer, Amazon
     # S3 bucket, or Amazon Route 53 resource record set that you're
-    # redirecting queries to. The Elastic Beanstalk environment must have a
+    # redirecting queries to. An Elastic Beanstalk environment must have a
     # regionalized subdomain.
     #
     # When creating resource record sets for a private hosted zone, note the
@@ -82,9 +82,9 @@ module Aws::Route53
     #
     # @!attribute [rw] hosted_zone_id
     #   *Alias resource records sets only*\: The value used depends on where
-    #   the queries are routed:
+    #   you want to route traffic:
     #
-    #   A CloudFront distribution
+    #   CloudFront distribution
     #
     #   : Specify `Z2FDTNDATAQYW2`.
     #
@@ -98,40 +98,43 @@ module Aws::Route53
     #   : Specify the hosted zone ID for the region in which you created the
     #     environment. The environment must have a regionalized subdomain.
     #     For a list of regions and the corresponding hosted zone IDs, see
-    #     [AWS Elastic Beanstalk][1] in the Regions and Endpoints chapter of
-    #     the *Amazon Web Services General Reference*.
+    #     [AWS Elastic Beanstalk][1] in the "AWS Regions and Endpoints"
+    #     chapter of the *Amazon Web Services General Reference*.
     #
     #   ELB load balancer
     #
     #   : Specify the value of the hosted zone ID for the load balancer. Use
     #     the following methods to get the hosted zone ID:
     #
-    #     * AWS Management Console: Go to the Amazon EC2 page, click **Load
-    #       Balancers** in the navigation pane, select the load balancer,
-    #       and get the value of the **Hosted zone** field on the
-    #       **Description** tab. Use the same process to get the value of
-    #       **DNS name**. (You specify the value of **DNS name** for
-    #       AliasTarget$DNSName.)
+    #     * [Elastic Load Balancing][2] table in the "AWS Regions and
+    #       Endpoints" chapter of the *Amazon Web Services General
+    #       Reference*\: Use the value in the "Amazon Route 53 Hosted Zone
+    #       ID" column that corresponds with the region that you created
+    #       your load balancer in.
     #
-    #     * *Elastic Load Balancing API*\: Use `DescribeLoadBalancers` to
-    #       get the value of `CanonicalHostedZoneNameId` and `DNSName`. (You
-    #       specify the value of `DNSName` for AliasTarget$DNSName.) For
-    #       more information, see the applicable guide:
+    #     * **AWS Management Console**\: Go to the Amazon EC2 page, click
+    #       **Load Balancers** in the navigation pane, select the load
+    #       balancer, and get the value of the **Hosted zone** field on the
+    #       **Description** tab.
     #
-    #       * Classic Load Balancer: [DescribeLoadBalancers][2]
+    #     * **Elastic Load Balancing API**\: Use `DescribeLoadBalancers` to
+    #       get the value of `CanonicalHostedZoneNameId`. For more
+    #       information, see the applicable guide:
     #
-    #       * Application Load Balancer: [DescribeLoadBalancers][3]
+    #       * Classic Load Balancer: [DescribeLoadBalancers][3]
     #
-    #     * AWS CLI: Use ` describe-load-balancers ` to get the value of
-    #       `CanonicalHostedZoneNameID` and `DNSName`. (You specify the
-    #       value of `DNSName` for AliasTarget$DNSName.)
+    #       * Application Load Balancer: [DescribeLoadBalancers][4]
+    #
+    #     * **AWS CLI**\: Use ` describe-load-balancers ` to get the value
+    #       of `CanonicalHostedZoneNameID`.
     #
     #   An Amazon S3 bucket configured as a static website
     #
     #   : Specify the hosted zone ID for the region that you created the
-    #     bucket in. For more information about valid values, see the table
-    #     [Amazon Simple Storage Service Website Endpoints][4] in the
-    #     *Amazon Web Services General Reference*.
+    #     bucket in. For more information about valid values, see the
+    #     [Amazon Simple Storage Service Website Endpoints][5] table in the
+    #     "AWS Regions and Endpoints" chapter of the *Amazon Web Services
+    #     General Reference*.
     #
     #   Another Amazon Route 53 resource record set in your hosted zone
     #
@@ -142,17 +145,20 @@ module Aws::Route53
     #
     #
     #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region
-    #   [2]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
-    #   [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
-    #   [4]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#elb_region
+    #   [3]: http://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html
+    #   [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
+    #   [5]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
     #   @return [String]
     #
     # @!attribute [rw] dns_name
     #   *Alias resource record sets only:* The value that you specify
     #   depends on where you want to route queries:
     #
-    #   * **A CloudFront distribution:** Specify the domain name that
-    #     CloudFront assigned when you created your distribution.
+    #   CloudFront distribution
+    #
+    #   : Specify the domain name that CloudFront assigned when you created
+    #     your distribution.
     #
     #     Your CloudFront distribution must include an alternate domain name
     #     that matches the name of the resource record set. For example, if
@@ -162,10 +168,11 @@ module Aws::Route53
     #     Alternate Domain Names (CNAMEs)][1] in the *Amazon CloudFront
     #     Developer Guide*.
     #
-    #   * **Elastic Beanstalk environment**\: Specify the `CNAME` attribute
-    #     for the environment. (The environment must have a regionalized
-    #     domain name.) You can use the following methods to get the value
-    #     of the CNAME attribute:
+    #   Elastic Beanstalk environment
+    #
+    #   : Specify the `CNAME` attribute for the environment. (The
+    #     environment must have a regionalized domain name.) You can use the
+    #     following methods to get the value of the CNAME attribute:
     #
     #     * *AWS Management Console*\: For information about how to get the
     #       value by using the console, see [Using Custom Domains with AWS
@@ -182,49 +189,44 @@ module Aws::Route53
     #       [describe-environments][4] in the *AWS Command Line Interface
     #       Reference*.
     #
-    #   * **An ELB load balancer:** Specify the DNS name that is associated
-    #     with the load balancer. Get the DNS name by using the AWS
-    #     Management Console, the ELB API, or the AWS CLI. Use the same
-    #     method to get values for `HostedZoneId` and `DNSName`. If you get
-    #     one value from the console and the other value from the API or the
-    #     CLI, creating the resource record set will fail.
+    #   ELB load balancer
     #
-    #     * *AWS Management Console*\: Go to the EC2 page, click **Load
+    #   : Specify the DNS name that is associated with the load balancer.
+    #     Get the DNS name by using the AWS Management Console, the ELB API,
+    #     or the AWS CLI.
+    #
+    #     * **AWS Management Console**\: Go to the EC2 page, choose **Load
     #       Balancers** in the navigation pane, choose the load balancer,
     #       choose the **Description** tab, and get the value of the **DNS
     #       name** field. (If you're routing traffic to a Classic Load
-    #       Balancer, get the value that begins with **dualstack**.) Use the
-    #       same process to get the value of the **Hosted zone** field. See
-    #       AliasTarget$HostedZoneId.
+    #       Balancer, get the value that begins with **dualstack**.)
     #
-    #     * *Elastic Load Balancing API*\: Use `DescribeLoadBalancers` to
-    #       get the value of `DNSName` and `CanonicalHostedZoneNameId`. (You
-    #       specify the value of `CanonicalHostedZoneNameId` for
-    #       AliasTarget$HostedZoneId.) For more information, see the
+    #     * **Elastic Load Balancing API**\: Use `DescribeLoadBalancers` to
+    #       get the value of `DNSName`. For more information, see the
     #       applicable guide:
     #
     #       * Classic Load Balancer: [DescribeLoadBalancers][5]
     #
     #       * Application Load Balancer: [DescribeLoadBalancers][6]
     #
-    #     * *AWS CLI*\: Use ` describe-load-balancers ` to get the value of
-    #       `DNSName` and `CanonicalHostedZoneNameId`. (You specify the
-    #       value of `CanonicalHostedZoneNameId` for
-    #       AliasTarget$HostedZoneId.)
+    #     * **AWS CLI**\: Use ` describe-load-balancers ` to get the value
+    #       of `DNSName`.
     #
-    #   * **An Amazon S3 bucket that is configured as a static website:**
-    #     Specify the domain name of the Amazon S3 website endpoint in which
+    #   Amazon S3 bucket that is configured as a static website
+    #
+    #   : Specify the domain name of the Amazon S3 website endpoint in which
     #     you created the bucket, for example,
-    #     `s3-website-us-east-1.amazonaws.com`. For more information about
+    #     `s3-website-us-east-2.amazonaws.com`. For more information about
     #     valid values, see the table [Amazon Simple Storage Service (S3)
     #     Website Endpoints][7] in the *Amazon Web Services General
     #     Reference*. For more information about using S3 buckets for
     #     websites, see [Getting Started with Amazon Route 53][8] in the
     #     *Amazon Route 53 Developer Guide.*
     #
-    #   * **Another Amazon Route 53 resource record set**\: Specify the
-    #     value of the `Name` element for a resource record set in the
-    #     current hosted zone.
+    #   Another Amazon Route 53 resource record set
+    #
+    #   : Specify the value of the `Name` element for a resource record set
+    #     in the current hosted zone.
     #
     #
     #
@@ -785,9 +787,12 @@ module Aws::Route53
     #   For the metric that the CloudWatch alarm is associated with, a
     #   complex type that contains information about the dimensions for the
     #   metric.For information, see [Amazon CloudWatch Namespaces,
-    #   Dimensions, and Metrics Reference](
-    #   http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
-    #   in the *Amazon CloudWatch User Guide*.
+    #   Dimensions, and Metrics Reference][1] in the *Amazon CloudWatch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
     #   @return [Array<Types::Dimension>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CloudWatchAlarmConfiguration AWS API Documentation
@@ -1266,7 +1271,7 @@ module Aws::Route53
     end
 
     # A complex type that contains the response information from a
-    # CreateVPCAssociationAuthorization request.
+    # `CreateVPCAssociationAuthorization` request.
     #
     # @!attribute [rw] hosted_zone_id
     #   The ID of the hosted zone that you authorized associating a VPC
@@ -1696,19 +1701,13 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # Empty request.
-    #
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesRequest AWS API Documentation
     #
     class GetCheckerIpRangesRequest < Aws::EmptyStructure; end
 
-    # A complex type that contains the `CheckerIpRanges` element.
-    #
     # @!attribute [rw] checker_ip_ranges
-    #   A complex type that contains sorted list of IP ranges in CIDR format
-    #   for Amazon Route 53 health checkers.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetCheckerIpRangesResponse AWS API Documentation
@@ -1926,69 +1925,16 @@ module Aws::Route53
     #       }
     #
     # @!attribute [rw] health_check_id
-    #   If you want Amazon Route 53 to return this resource record set in
-    #   response to a DNS query only when a health check is passing, include
-    #   the `HealthCheckId` element and specify the ID of the applicable
+    #   The ID for the health check for which you want the current status.
+    #   When you created the health check, `CreateHealthCheck` returned the
+    #   ID in the response, in the `HealthCheckId` element.
+    #
+    #   <note markdown="1"> If you want to check the status of a calculated health check, you
+    #   must use the Amazon Route 53 console or the CloudWatch console. You
+    #   can't use `GetHealthCheckStatus` to get the status of a calculated
     #   health check.
     #
-    #   Amazon Route 53 determines whether a resource record set is healthy
-    #   by periodically sending a request to the endpoint that is specified
-    #   in the health check. If that endpoint returns an HTTP status code of
-    #   2xx or 3xx, the endpoint is healthy. If the endpoint returns an HTTP
-    #   status code of 400 or greater, or if the endpoint doesn't respond
-    #   for a certain amount of time, Amazon Route 53 considers the endpoint
-    #   unhealthy and also considers the resource record set unhealthy.
-    #
-    #   The `HealthCheckId` element is only useful when Amazon Route 53 is
-    #   choosing between two or more resource record sets to respond to a
-    #   DNS query, and you want Amazon Route 53 to base the choice in part
-    #   on the status of a health check. Configuring health checks only
-    #   makes sense in the following configurations:
-    #
-    #   * You're checking the health of the resource record sets in a
-    #     weighted, latency, geolocation, or failover resource record set,
-    #     and you specify health check IDs for all of the resource record
-    #     sets. If the health check for one resource record set specifies an
-    #     endpoint that is not healthy, Amazon Route 53 stops responding to
-    #     queries using the value for that resource record set.
-    #
-    #   * You set `EvaluateTargetHealth` to `true` for the resource record
-    #     sets in an alias, weighted alias, latency alias, geolocation
-    #     alias, or failover alias resource record set, and you specify
-    #     health check IDs for all of the resource record sets that are
-    #     referenced by the alias resource record sets. For more information
-    #     about this configuration, see `EvaluateTargetHealth`.
-    #
-    #     Amazon Route 53 doesn't check the health of the endpoint
-    #     specified in the resource record set, for example, the endpoint
-    #     specified by the IP address in the `Value` element. When you add a
-    #     `HealthCheckId` element to a resource record set, Amazon Route 53
-    #     checks the health of the endpoint that you specified in the health
-    #     check.
-    #
-    #   For geolocation resource record sets, if an endpoint is unhealthy,
-    #   Amazon Route 53 looks for a resource record set for the larger,
-    #   associated geographic region. For example, suppose you have resource
-    #   record sets for a state in the United States, for the United States,
-    #   for North America, and for all locations. If the endpoint for the
-    #   state resource record set is unhealthy, Amazon Route 53 checks the
-    #   resource record sets for the United States, for North America, and
-    #   for all locations (a resource record set for which the value of
-    #   CountryCode is `*`), in that order, until it finds a resource record
-    #   set for which the endpoint is healthy.
-    #
-    #   If your health checks specify the endpoint only by domain name, we
-    #   recommend that you create a separate health check for each endpoint.
-    #   For example, create a health check for each HTTP server that is
-    #   serving content for www.example.com. For the value of
-    #   `FullyQualifiedDomainName`, specify the domain name of the server
-    #   (such as `us-east-1-www.example.com`), not the name of the resource
-    #   record sets (example.com).
-    #
-    #   In this configuration, if you create a health check for which the
-    #   value of `FullyQualifiedDomainName` matches the name of the resource
-    #   record sets and then associate the health check with those resource
-    #   record sets, health check results will be unpredictable.
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/GetHealthCheckStatusRequest AWS API Documentation
@@ -2121,8 +2067,8 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # To retrieve a count of all your traffic policy instances, send a `GET`
-    # request to the `/2013-04-01/trafficpolicyinstancecount` resource.
+    # Request to get the number of traffic policy instances that are
+    # associated with the current AWS account.
     #
     # @api private
     #
@@ -2306,6 +2252,17 @@ module Aws::Route53
     #   returned by DNS, Amazon Route 53 then checks the health of the
     #   endpoint.
     #
+    #   Use one of the following formats for the value of `IPAddress`\:
+    #
+    #   * **IPv4 address**\: four values between 0 and 255, separated by
+    #     periods (.), for example, `192.0.2.44`.
+    #
+    #   * **IPv6 address**\: eight groups of four hexadecimal values,
+    #     separated by colons (:), for example,
+    #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`. You can also shorten
+    #     IPv6 addresses as described in RFC 5952, for example,
+    #     `2001:db8:85a3::abcd:1:2345`.
+    #
     #   If the endpoint is an EC2 instance, we recommend that you create an
     #   Elastic IP address, associate it with your EC2 instance, and specify
     #   the Elastic IP address for `IPAddress`. This ensures that the IP
@@ -2451,7 +2408,7 @@ module Aws::Route53
     #   health check for each endpoint. For example, create a health check
     #   for each HTTP server that is serving content for www.example.com.
     #   For the value of `FullyQualifiedDomainName`, specify the domain name
-    #   of the server (such as us-east-1-www.example.com), not the name of
+    #   of the server (such as us-east-2-www.example.com), not the name of
     #   the resource record sets (www.example.com).
     #
     #   In this configuration, if you create a health check for which the
@@ -2479,11 +2436,14 @@ module Aws::Route53
     # @!attribute [rw] request_interval
     #   The number of seconds between the time that Amazon Route 53 gets a
     #   response from your endpoint and the time that it sends the next
-    #   health-check request. Each Amazon Route 53 health checker makes
+    #   health check request. Each Amazon Route 53 health checker makes
     #   requests at this interval.
     #
     #   You can't change the value of `RequestInterval` after you create a
     #   health check.
+    #
+    #   If you don't specify a value for `RequestInterval`, the default
+    #   value is `30` seconds.
     #   @return [Integer]
     #
     # @!attribute [rw] failure_threshold
@@ -2492,6 +2452,9 @@ module Aws::Route53
     #   endpoint from unhealthy to healthy or vice versa. For more
     #   information, see [How Amazon Route 53 Determines Whether an Endpoint
     #   Is Healthy][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    #   If you don't specify a value for `FailureThreshold`, the default
+    #   value is three health checks.
     #
     #
     #
@@ -2566,9 +2529,19 @@ module Aws::Route53
     #   @return [Boolean]
     #
     # @!attribute [rw] regions
-    #   A complex type that contains one Region element for each region from
-    #   which you want Amazon Route 53 health checkers to check the
+    #   A complex type that contains one `Region` element for each region
+    #   from which you want Amazon Route 53 health checkers to check the
     #   specified endpoint.
+    #
+    #   If you don't specify any regions, Amazon Route 53 health checkers
+    #   automatically performs checks from all of the regions that are
+    #   listed under **Valid Values**.
+    #
+    #   If you update a health check to remove a region that has been
+    #   performing health checks, Amazon Route 53 will briefly continue to
+    #   perform checks from that region to ensure that some health checkers
+    #   are always checking the endpoint (for example, if you replace three
+    #   regions with four different regions).
     #   @return [Array<String>]
     #
     # @!attribute [rw] alarm_identifier
@@ -3905,8 +3878,8 @@ module Aws::Route53
       include Aws::Structure
     end
 
-    # A complex type that contains the information about the request to list
-    # your traffic policy instances.
+    # A request to get information about the traffic policy instances that
+    # you created by using the current AWS account.
     #
     # @note When making an API call, you may pass ListTrafficPolicyInstancesRequest
     #   data as a hash:
@@ -4204,7 +4177,7 @@ module Aws::Route53
 
     # Information specific to the resource record.
     #
-    # <note markdown="1"> If you are creating an alias resource record set, omit
+    # <note markdown="1"> If you're creating an alias resource record set, omit
     # `ResourceRecord`.
     #
     #  </note>
@@ -4226,7 +4199,7 @@ module Aws::Route53
     #   You can specify more than one value for all record types except
     #   `CNAME` and `SOA`.
     #
-    #   <note markdown="1"> If you are creating an alias resource record set, omit `Value`.
+    #   <note markdown="1"> If you're creating an alias resource record set, omit `Value`.
     #
     #    </note>
     #
@@ -4446,7 +4419,7 @@ module Aws::Route53
     #   * You can only create one latency resource record set for each
     #     Amazon EC2 Region.
     #
-    #   * You are not required to create latency resource record sets for
+    #   * You aren't required to create latency resource record sets for
     #     all Amazon EC2 Regions. Amazon Route 53 will choose the region
     #     with the best latency from among the regions for which you create
     #     latency resource record sets.
@@ -4585,7 +4558,7 @@ module Aws::Route53
     # @!attribute [rw] resource_records
     #   Information about the resource records to act upon.
     #
-    #   <note markdown="1"> If you are creating an alias resource record set, omit
+    #   <note markdown="1"> If you're creating an alias resource record set, omit
     #   `ResourceRecords`.
     #
     #    </note>
@@ -4595,7 +4568,7 @@ module Aws::Route53
     #   *Alias resource record sets only:* Information about the CloudFront
     #   distribution, AWS Elastic Beanstalk environment, ELB load balancer,
     #   Amazon S3 bucket, or Amazon Route 53 resource record set to which
-    #   you are redirecting queries. The AWS Elastic Beanstalk environment
+    #   you're redirecting queries. The AWS Elastic Beanstalk environment
     #   must have a regionalized subdomain.
     #
     #   If you're creating resource records sets for a private hosted zone,
@@ -4634,8 +4607,8 @@ module Aws::Route53
     #   * By determining the current state of a CloudWatch alarm (CloudWatch
     #     metric health checks)
     #
-    #   For information about how Amazon Route 53 determines whether a
-    #   health check is healthy, see CreateHealthCheck.
+    #   For more information, see [How Amazon Route 53 Determines Whether an
+    #   Endpoint Is Healthy][1].
     #
     #   The `HealthCheckId` element is only useful when Amazon Route 53 is
     #   choosing between two or more resource record sets to respond to a
@@ -4643,18 +4616,19 @@ module Aws::Route53
     #   on the status of a health check. Configuring health checks only
     #   makes sense in the following configurations:
     #
-    #   * You're checking the health of the resource record sets in a
-    #     weighted, latency, geolocation, or failover resource record set,
-    #     and you specify health check IDs for all of the resource record
-    #     sets. If the health check for one resource record set specifies an
-    #     endpoint that is not healthy, Amazon Route 53 stops responding to
-    #     queries using the value for that resource record set.
+    #   * You're checking the health of the resource record sets in a group
+    #     of weighted, latency, geolocation, or failover resource record
+    #     sets, and you specify health check IDs for all of the resource
+    #     record sets. If the health check for one resource record set
+    #     specifies an endpoint that is not healthy, Amazon Route 53 stops
+    #     responding to queries using the value for that resource record
+    #     set.
     #
     #   * You set `EvaluateTargetHealth` to true for the resource record
-    #     sets in an alias, weighted alias, latency alias, geolocation
-    #     alias, or failover alias resource record set, and you specify
-    #     health check IDs for all of the resource record sets that are
-    #     referenced by the alias resource record sets.
+    #     sets in a group of alias, weighted alias, latency alias,
+    #     geolocation alias, or failover alias resource record sets, and you
+    #     specify health check IDs for all of the resource record sets that
+    #     are referenced by the alias resource record sets.
     #
     #   Amazon Route 53 doesn't check the health of the endpoint specified
     #   in the resource record set, for example, the endpoint specified by
@@ -4679,7 +4653,7 @@ module Aws::Route53
     #   For example, create a health check for each `HTTP` server that is
     #   serving content for `www.example.com`. For the value of
     #   `FullyQualifiedDomainName`, specify the domain name of the server
-    #   (such as `us-east-1-www.example.com`), not the name of the resource
+    #   (such as `us-east-2-www.example.com`), not the name of the resource
     #   record sets (example.com).
     #
     #   n this configuration, if you create a health check for which the
@@ -4690,14 +4664,15 @@ module Aws::Route53
     #   For more information, see the following topics in the *Amazon Route
     #   53 Developer Guide*\:
     #
-    #   * [Amazon Route 53 Health Checks and DNS Failover][1]
+    #   * [Amazon Route 53 Health Checks and DNS Failover][2]
     #
-    #   * [Configuring Failover in a Private Hosted Zone][2]
+    #   * [Configuring Failover in a Private Hosted Zone][3]
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
-    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
+    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+    #   [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html
     #   @return [String]
     #
     # @!attribute [rw] traffic_policy_instance_id
@@ -5219,6 +5194,17 @@ module Aws::Route53
     #   that is returned by DNS, Amazon Route 53 then checks the health of
     #   the endpoint.
     #
+    #   Use one of the following formats for the value of `IPAddress`\:
+    #
+    #   * **IPv4 address**\: four values between 0 and 255, separated by
+    #     periods (.), for example, `192.0.2.44`.
+    #
+    #   * **IPv6 address**\: eight groups of four hexadecimal values,
+    #     separated by colons (:), for example,
+    #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`. You can also shorten
+    #     IPv6 addresses as described in RFC 5952, for example,
+    #     `2001:db8:85a3::abcd:1:2345`.
+    #
     #   If the endpoint is an EC2 instance, we recommend that you create an
     #   Elastic IP address, associate it with your EC2 instance, and specify
     #   the Elastic IP address for `IPAddress`. This ensures that the IP
@@ -5328,7 +5314,7 @@ module Aws::Route53
     #   health check for each endpoint. For example, create a health check
     #   for each HTTP server that is serving content for www.example.com.
     #   For the value of `FullyQualifiedDomainName`, specify the domain name
-    #   of the server (such as `us-east-1-www.example.com`), not the name of
+    #   of the server (such as `us-east-2-www.example.com`), not the name of
     #   the resource record sets (www.example.com).
     #
     #   In this configuration, if the value of `FullyQualifiedDomainName`
@@ -5357,6 +5343,9 @@ module Aws::Route53
     #   endpoint from unhealthy to healthy or vice versa. For more
     #   information, see [How Amazon Route 53 Determines Whether an Endpoint
     #   Is Healthy][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    #   If you don't specify a value for `FailureThreshold`, the default
+    #   value is three health checks.
     #
     #
     #

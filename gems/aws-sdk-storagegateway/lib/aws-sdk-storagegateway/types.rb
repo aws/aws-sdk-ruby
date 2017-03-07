@@ -572,6 +572,7 @@ module Aws::StorageGateway
     #         role: "Role", # required
     #         location_arn: "LocationARN", # required
     #         default_storage_class: "StorageClass",
+    #         client_list: ["IPV4AddressCIDR"],
     #       }
     #
     # @!attribute [rw] client_token
@@ -614,6 +615,11 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] client_list
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -624,7 +630,8 @@ module Aws::StorageGateway
       :kms_key,
       :role,
       :location_arn,
-      :default_storage_class)
+      :default_storage_class,
+      :client_list)
       include Aws::Structure
     end
 
@@ -2791,6 +2798,11 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] client_list
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -2804,7 +2816,8 @@ module Aws::StorageGateway
       :path,
       :role,
       :location_arn,
-      :default_storage_class)
+      :default_storage_class,
+      :client_list)
       include Aws::Structure
     end
 
@@ -3680,6 +3693,7 @@ module Aws::StorageGateway
     #           owner_id: 1,
     #         },
     #         default_storage_class: "StorageClass",
+    #         client_list: ["IPV4AddressCIDR"],
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -3707,6 +3721,11 @@ module Aws::StorageGateway
     #   S3\_STANDARD is used. Optional.
     #   @return [String]
     #
+    # @!attribute [rw] client_list
+    #   The list of clients that are allowed to access the file gateway. The
+    #   list must contain either valid IP addresses or valid CIDR blocks.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
     #
     class UpdateNFSFileShareInput < Struct.new(
@@ -3714,7 +3733,8 @@ module Aws::StorageGateway
       :kms_encrypted,
       :kms_key,
       :nfs_file_share_defaults,
-      :default_storage_class)
+      :default_storage_class,
+      :client_list)
       include Aws::Structure
     end
 

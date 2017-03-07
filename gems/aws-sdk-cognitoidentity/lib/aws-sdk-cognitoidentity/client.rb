@@ -224,6 +224,7 @@ module Aws::CognitoIdentity
     #       {
     #         provider_name: "CognitoIdentityProviderName",
     #         client_id: "CognitoIdentityProviderClientId",
+    #         server_side_token_check: false,
     #       },
     #     ],
     #     saml_provider_arns: ["ARNString"],
@@ -242,6 +243,7 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers #=> Array
     #   resp.cognito_identity_providers[0].provider_name #=> String
     #   resp.cognito_identity_providers[0].client_id #=> String
+    #   resp.cognito_identity_providers[0].server_side_token_check #=> Boolean
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
     #
@@ -388,6 +390,7 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers #=> Array
     #   resp.cognito_identity_providers[0].provider_name #=> String
     #   resp.cognito_identity_providers[0].client_id #=> String
+    #   resp.cognito_identity_providers[0].server_side_token_check #=> Boolean
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
     #
@@ -1083,6 +1086,7 @@ module Aws::CognitoIdentity
     #       {
     #         provider_name: "CognitoIdentityProviderName",
     #         client_id: "CognitoIdentityProviderClientId",
+    #         server_side_token_check: false,
     #       },
     #     ],
     #     saml_provider_arns: ["ARNString"],
@@ -1101,6 +1105,7 @@ module Aws::CognitoIdentity
     #   resp.cognito_identity_providers #=> Array
     #   resp.cognito_identity_providers[0].provider_name #=> String
     #   resp.cognito_identity_providers[0].client_id #=> String
+    #   resp.cognito_identity_providers[0].server_side_token_check #=> Boolean
     #   resp.saml_provider_arns #=> Array
     #   resp.saml_provider_arns[0] #=> String
     #
@@ -1126,7 +1131,7 @@ module Aws::CognitoIdentity
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentity'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

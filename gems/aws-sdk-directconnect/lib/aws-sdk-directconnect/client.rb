@@ -153,6 +153,8 @@ module Aws::DirectConnect
 
     # @!group API Operations
 
+    # Deprecated in favor of AllocateHostedConnection.
+    #
     # Creates a hosted connection on an interconnect.
     #
     # Allocates a VLAN number and a specified amount of bandwidth for use by
@@ -169,7 +171,7 @@ module Aws::DirectConnect
     #
     #   Default: None
     #
-    #   Values: 50M, 100M, 200M, 300M, 400M, or 500M
+    #   Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps
     #
     # @option params [required, String] :connection_name
     #   Name of the provisioned connection.
@@ -212,6 +214,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#vlan #vlan} => Integer
     #   * {Types::Connection#partner_name #partner_name} => String
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -235,6 +239,8 @@ module Aws::DirectConnect
     #   resp.vlan #=> Integer
     #   resp.partner_name #=> String
     #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateConnectionOnInterconnect AWS API Documentation
     #
@@ -245,16 +251,111 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Provisions a private virtual interface to be owned by a different
+    # Creates a hosted connection on an interconnect or a link aggregation
+    # group (LAG).
+    #
+    # Allocates a VLAN number and a specified amount of bandwidth for use by
+    # a hosted connection on the given interconnect or LAG.
+    #
+    # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the interconnect or LAG on which the connection will be
+    #   provisioned.
+    #
+    #   Example: dxcon-456abc78 or dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :owner_account
+    #   The numeric account ID of the customer for whom the connection will be
+    #   provisioned.
+    #
+    #   Example: 123443215678
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :bandwidth
+    #   The bandwidth of the connection.
+    #
+    #   Example: `500Mbps`
+    #
+    #   Default: None
+    #
+    #   Values: 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps
+    #
+    # @option params [required, String] :connection_name
+    #   The name of the provisioned connection.
+    #
+    #   Example: "`500M Connection to AWS`"
+    #
+    #   Default: None
+    #
+    # @option params [required, Integer] :vlan
+    #   The dedicated VLAN provisioned to the hosted connection.
+    #
+    #   Example: 101
+    #
+    #   Default: None
+    #
+    # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connection#owner_account #owner_account} => String
+    #   * {Types::Connection#connection_id #connection_id} => String
+    #   * {Types::Connection#connection_name #connection_name} => String
+    #   * {Types::Connection#connection_state #connection_state} => String
+    #   * {Types::Connection#region #region} => String
+    #   * {Types::Connection#location #location} => String
+    #   * {Types::Connection#bandwidth #bandwidth} => String
+    #   * {Types::Connection#vlan #vlan} => Integer
+    #   * {Types::Connection#partner_name #partner_name} => String
+    #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.allocate_hosted_connection({
+    #     connection_id: "ConnectionId", # required
+    #     owner_account: "OwnerAccount", # required
+    #     bandwidth: "Bandwidth", # required
+    #     connection_name: "ConnectionName", # required
+    #     vlan: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_account #=> String
+    #   resp.connection_id #=> String
+    #   resp.connection_name #=> String
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.region #=> String
+    #   resp.location #=> String
+    #   resp.bandwidth #=> String
+    #   resp.vlan #=> Integer
+    #   resp.partner_name #=> String
+    #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AllocateHostedConnection AWS API Documentation
+    #
+    # @overload allocate_hosted_connection(params = {})
+    # @param [Hash] params ({})
+    def allocate_hosted_connection(params = {}, options = {})
+      req = build_request(:allocate_hosted_connection, params)
+      req.send_request(options)
+    end
+
+    # Provisions a private virtual interface to be owned by another AWS
     # customer.
     #
-    # The owner of a connection calls this function to provision a private
-    # virtual interface which will be owned by another AWS customer.
-    #
-    # Virtual interfaces created using this function must be confirmed by
-    # the virtual interface owner by calling ConfirmPrivateVirtualInterface.
-    # Until this step has been completed, the virtual interface will be in
-    # 'Confirming' state, and will not be available for handling traffic.
+    # Virtual interfaces created using this action must be confirmed by the
+    # virtual interface owner by using the ConfirmPrivateVirtualInterface
+    # action. Until then, the virtual interface will be in 'Confirming'
+    # state, and will not be available for handling traffic.
     #
     # @option params [required, String] :connection_id
     #   The connection ID on which the private virtual interface is
@@ -457,6 +558,253 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Associates an existing connection with a link aggregation group (LAG).
+    # The connection is interrupted and re-established as a member of the
+    # LAG (connectivity to AWS will be interrupted). The connection must be
+    # hosted on the same AWS Direct Connect endpoint as the LAG, and its
+    # bandwidth must match the bandwidth for the LAG. You can reassociate a
+    # connection that's currently associated with a different LAG; however,
+    # if removing the connection will cause the original LAG to fall below
+    # its setting for minimum number of operational connections, the request
+    # fails.
+    #
+    # Virtual interfaces that are directly associated with the connection
+    # are not automatically migrated. You can delete them or associate them
+    # with the target LAG using AssociateVirtualInterface. If the connection
+    # was originally associated with a different LAG, the virtual interfaces
+    # remain associated with the original LAG.
+    #
+    # For interconnects, hosted connections are not automatically migrated.
+    # You can delete them, or the owner of the physical connection can
+    # associate them with the target LAG using AssociateHostedConnection.
+    # After all hosted connections have been migrated, the interconnect can
+    # be migrated into the LAG. If the interconnect is already associated
+    # with a LAG, the hosted connections remain associated with the original
+    # LAG.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection.
+    #
+    #   Example: dxcon-abc123
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :lag_id
+    #   The ID of the LAG with which to associate the connection.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connection#owner_account #owner_account} => String
+    #   * {Types::Connection#connection_id #connection_id} => String
+    #   * {Types::Connection#connection_name #connection_name} => String
+    #   * {Types::Connection#connection_state #connection_state} => String
+    #   * {Types::Connection#region #region} => String
+    #   * {Types::Connection#location #location} => String
+    #   * {Types::Connection#bandwidth #bandwidth} => String
+    #   * {Types::Connection#vlan #vlan} => Integer
+    #   * {Types::Connection#partner_name #partner_name} => String
+    #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_connection_with_lag({
+    #     connection_id: "ConnectionId", # required
+    #     lag_id: "LagId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_account #=> String
+    #   resp.connection_id #=> String
+    #   resp.connection_name #=> String
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.region #=> String
+    #   resp.location #=> String
+    #   resp.bandwidth #=> String
+    #   resp.vlan #=> Integer
+    #   resp.partner_name #=> String
+    #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateConnectionWithLag AWS API Documentation
+    #
+    # @overload associate_connection_with_lag(params = {})
+    # @param [Hash] params ({})
+    def associate_connection_with_lag(params = {}, options = {})
+      req = build_request(:associate_connection_with_lag, params)
+      req.send_request(options)
+    end
+
+    # Associates a hosted connection and its virtual interfaces with a link
+    # aggregation group (LAG) or interconnect. If the target interconnect or
+    # LAG has an existing hosted connection with a conflicting VLAN number
+    # or IP address, the operation fails. This action temporarily interrupts
+    # the hosted connection's connectivity to AWS as it is being migrated.
+    #
+    # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the hosted connection.
+    #
+    #   Example: dxcon-abc123
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :parent_connection_id
+    #   The ID of the interconnect or the LAG.
+    #
+    #   Example: dxcon-abc123 or dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connection#owner_account #owner_account} => String
+    #   * {Types::Connection#connection_id #connection_id} => String
+    #   * {Types::Connection#connection_name #connection_name} => String
+    #   * {Types::Connection#connection_state #connection_state} => String
+    #   * {Types::Connection#region #region} => String
+    #   * {Types::Connection#location #location} => String
+    #   * {Types::Connection#bandwidth #bandwidth} => String
+    #   * {Types::Connection#vlan #vlan} => Integer
+    #   * {Types::Connection#partner_name #partner_name} => String
+    #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_hosted_connection({
+    #     connection_id: "ConnectionId", # required
+    #     parent_connection_id: "ConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_account #=> String
+    #   resp.connection_id #=> String
+    #   resp.connection_name #=> String
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.region #=> String
+    #   resp.location #=> String
+    #   resp.bandwidth #=> String
+    #   resp.vlan #=> Integer
+    #   resp.partner_name #=> String
+    #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateHostedConnection AWS API Documentation
+    #
+    # @overload associate_hosted_connection(params = {})
+    # @param [Hash] params ({})
+    def associate_hosted_connection(params = {}, options = {})
+      req = build_request(:associate_hosted_connection, params)
+      req.send_request(options)
+    end
+
+    # Associates a virtual interface with a specified link aggregation group
+    # (LAG) or connection. Connectivity to AWS is temporarily interrupted as
+    # the virtual interface is being migrated. If the target connection or
+    # LAG has an associated virtual interface with a conflicting VLAN number
+    # or a conflicting IP address, the operation fails.
+    #
+    # Virtual interfaces associated with a hosted connection cannot be
+    # associated with a LAG; hosted connections must be migrated along with
+    # their virtual interfaces using AssociateHostedConnection.
+    #
+    # Hosted virtual interfaces (an interface for which the owner of the
+    # connection is not the owner of physical connection) can only be
+    # reassociated by the owner of the physical connection.
+    #
+    # @option params [required, String] :virtual_interface_id
+    #   The ID of the virtual interface.
+    #
+    #   Example: dxvif-123dfg56
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the LAG or connection with which to associate the virtual
+    #   interface.
+    #
+    #   Example: dxlag-abc123 or dxcon-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VirtualInterface#owner_account #owner_account} => String
+    #   * {Types::VirtualInterface#virtual_interface_id #virtual_interface_id} => String
+    #   * {Types::VirtualInterface#location #location} => String
+    #   * {Types::VirtualInterface#connection_id #connection_id} => String
+    #   * {Types::VirtualInterface#virtual_interface_type #virtual_interface_type} => String
+    #   * {Types::VirtualInterface#virtual_interface_name #virtual_interface_name} => String
+    #   * {Types::VirtualInterface#vlan #vlan} => Integer
+    #   * {Types::VirtualInterface#asn #asn} => Integer
+    #   * {Types::VirtualInterface#auth_key #auth_key} => String
+    #   * {Types::VirtualInterface#amazon_address #amazon_address} => String
+    #   * {Types::VirtualInterface#customer_address #customer_address} => String
+    #   * {Types::VirtualInterface#address_family #address_family} => String
+    #   * {Types::VirtualInterface#virtual_interface_state #virtual_interface_state} => String
+    #   * {Types::VirtualInterface#customer_router_config #customer_router_config} => String
+    #   * {Types::VirtualInterface#virtual_gateway_id #virtual_gateway_id} => String
+    #   * {Types::VirtualInterface#route_filter_prefixes #route_filter_prefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+    #   * {Types::VirtualInterface#bgp_peers #bgp_peers} => Array&lt;Types::BGPPeer&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_virtual_interface({
+    #     virtual_interface_id: "VirtualInterfaceId", # required
+    #     connection_id: "ConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_account #=> String
+    #   resp.virtual_interface_id #=> String
+    #   resp.location #=> String
+    #   resp.connection_id #=> String
+    #   resp.virtual_interface_type #=> String
+    #   resp.virtual_interface_name #=> String
+    #   resp.vlan #=> Integer
+    #   resp.asn #=> Integer
+    #   resp.auth_key #=> String
+    #   resp.amazon_address #=> String
+    #   resp.customer_address #=> String
+    #   resp.address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.customer_router_config #=> String
+    #   resp.virtual_gateway_id #=> String
+    #   resp.route_filter_prefixes #=> Array
+    #   resp.route_filter_prefixes[0].cidr #=> String
+    #   resp.bgp_peers #=> Array
+    #   resp.bgp_peers[0].asn #=> Integer
+    #   resp.bgp_peers[0].auth_key #=> String
+    #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+    #   resp.bgp_peers[0].amazon_address #=> String
+    #   resp.bgp_peers[0].customer_address #=> String
+    #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+    #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/AssociateVirtualInterface AWS API Documentation
+    #
+    # @overload associate_virtual_interface(params = {})
+    # @param [Hash] params ({})
+    def associate_virtual_interface(params = {}, options = {})
+      req = build_request(:associate_virtual_interface, params)
+      req.send_request(options)
+    end
+
     # Confirm the creation of a hosted connection on an interconnect.
     #
     # Upon creation, the hosted connection is initially in the 'Ordering'
@@ -464,7 +812,9 @@ module Aws::DirectConnect
     # ConfirmConnection to confirm creation of the hosted connection.
     #
     # @option params [required, String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -501,7 +851,7 @@ module Aws::DirectConnect
     # gateway, and will be available for handling traffic.
     #
     # @option params [required, String] :virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -552,7 +902,7 @@ module Aws::DirectConnect
     # traffic.
     #
     # @option params [required, String] :virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -675,6 +1025,12 @@ module Aws::DirectConnect
     # multiple regions, but a connection in one region does not provide
     # connectivity to other regions.
     #
+    # You can automatically add the new connection to a link aggregation
+    # group (LAG) by specifying a LAG ID in the request. This ensures that
+    # the new connection is allocated on the same AWS Direct Connect
+    # endpoint that hosts the specified LAG. If there are no available ports
+    # on the endpoint, the request fails and no connection will be created.
+    #
     # @option params [required, String] :location
     #   Where the connection is located.
     #
@@ -696,6 +1052,11 @@ module Aws::DirectConnect
     #
     #   Default: None
     #
+    # @option params [String] :lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #
     # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Connection#owner_account #owner_account} => String
@@ -708,6 +1069,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#vlan #vlan} => Integer
     #   * {Types::Connection#partner_name #partner_name} => String
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -715,6 +1078,7 @@ module Aws::DirectConnect
     #     location: "LocationCode", # required
     #     bandwidth: "Bandwidth", # required
     #     connection_name: "ConnectionName", # required
+    #     lag_id: "LagId",
     #   })
     #
     # @example Response structure
@@ -729,6 +1093,8 @@ module Aws::DirectConnect
     #   resp.vlan #=> Integer
     #   resp.partner_name #=> String
     #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateConnection AWS API Documentation
     #
@@ -750,6 +1116,13 @@ module Aws::DirectConnect
     # Direct Connect location over a standard 1 Gbps or 10 Gbps Ethernet
     # fiber-optic cable. One end is connected to the partner's router, the
     # other to an AWS Direct Connect router.
+    #
+    # You can automatically add the new interconnect to a link aggregation
+    # group (LAG) by specifying a LAG ID in the request. This ensures that
+    # the new interconnect is allocated on the same AWS Direct Connect
+    # endpoint that hosts the specified LAG. If there are no available ports
+    # on the endpoint, the request fails and no interconnect will be
+    # created.
     #
     # For each end customer, the AWS Direct Connect partner provisions a
     # connection on their interconnect by calling
@@ -784,6 +1157,11 @@ module Aws::DirectConnect
     #
     #   Default: None
     #
+    # @option params [String] :lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-fg5678gh
+    #
     # @return [Types::Interconnect] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Interconnect#interconnect_id #interconnect_id} => String
@@ -793,6 +1171,8 @@ module Aws::DirectConnect
     #   * {Types::Interconnect#location #location} => String
     #   * {Types::Interconnect#bandwidth #bandwidth} => String
     #   * {Types::Interconnect#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Interconnect#lag_id #lag_id} => String
+    #   * {Types::Interconnect#aws_device #aws_device} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -800,6 +1180,7 @@ module Aws::DirectConnect
     #     interconnect_name: "InterconnectName", # required
     #     bandwidth: "Bandwidth", # required
     #     location: "LocationCode", # required
+    #     lag_id: "LagId",
     #   })
     #
     # @example Response structure
@@ -811,6 +1192,8 @@ module Aws::DirectConnect
     #   resp.location #=> String
     #   resp.bandwidth #=> String
     #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateInterconnect AWS API Documentation
     #
@@ -821,13 +1204,137 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Creates a new link aggregation group (LAG) with the specified number
+    # of bundled physical connections between the customer network and a
+    # specific AWS Direct Connect location. A LAG is a logical interface
+    # that uses the Link Aggregation Control Protocol (LACP) to aggregate
+    # multiple 1 gigabit or 10 gigabit interfaces, allowing you to treat
+    # them as a single interface.
+    #
+    # All connections in a LAG must use the same bandwidth (for example, 10
+    # Gbps), and must terminate at the same AWS Direct Connect endpoint.
+    #
+    # You can have up to 10 connections per LAG. Regardless of this limit,
+    # if you request more connections for the LAG than AWS Direct Connect
+    # can allocate on a single endpoint, no LAG is created.
+    #
+    # You can specify an existing physical connection or interconnect to
+    # include in the LAG (which counts towards the total number of
+    # connections). Doing so interrupts the current physical connection or
+    # hosted connections, and re-establishes them as a member of the LAG.
+    # The LAG will be created on the same AWS Direct Connect endpoint to
+    # which the connection terminates. Any virtual interfaces associated
+    # with the connection are automatically disassociated and re-associated
+    # with the LAG. The connection ID does not change.
+    #
+    # If the AWS account used to create a LAG is a registered AWS Direct
+    # Connect partner, the LAG is automatically enabled to host
+    # sub-connections. For a LAG owned by a partner, any associated virtual
+    # interfaces cannot be directly configured.
+    #
+    # @option params [required, Integer] :number_of_connections
+    #   The number of physical connections initially provisioned and bundled
+    #   by the LAG.
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :location
+    #   The AWS Direct Connect location in which the LAG should be allocated.
+    #
+    #   Example: EqSV5
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :connections_bandwidth
+    #   The bandwidth of the individual physical connections bundled by the
+    #   LAG.
+    #
+    #   Default: None
+    #
+    #   Available values: 1Gbps, 10Gbps
+    #
+    # @option params [required, String] :lag_name
+    #   The name of the LAG.
+    #
+    #   Example: "`3x10G LAG to AWS`"
+    #
+    #   Default: None
+    #
+    # @option params [String] :connection_id
+    #   The ID of an existing connection to migrate to the LAG.
+    #
+    #   Default: None
+    #
+    # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Lag#connections_bandwidth #connections_bandwidth} => String
+    #   * {Types::Lag#number_of_connections #number_of_connections} => Integer
+    #   * {Types::Lag#lag_id #lag_id} => String
+    #   * {Types::Lag#owner_account #owner_account} => String
+    #   * {Types::Lag#lag_name #lag_name} => String
+    #   * {Types::Lag#lag_state #lag_state} => String
+    #   * {Types::Lag#location #location} => String
+    #   * {Types::Lag#region #region} => String
+    #   * {Types::Lag#minimum_links #minimum_links} => Integer
+    #   * {Types::Lag#aws_device #aws_device} => String
+    #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_lag({
+    #     number_of_connections: 1, # required
+    #     location: "LocationCode", # required
+    #     connections_bandwidth: "Bandwidth", # required
+    #     lag_name: "LagName", # required
+    #     connection_id: "ConnectionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections_bandwidth #=> String
+    #   resp.number_of_connections #=> Integer
+    #   resp.lag_id #=> String
+    #   resp.owner_account #=> String
+    #   resp.lag_name #=> String
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.location #=> String
+    #   resp.region #=> String
+    #   resp.minimum_links #=> Integer
+    #   resp.aws_device #=> String
+    #   resp.connections #=> Array
+    #   resp.connections[0].owner_account #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].connection_name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].region #=> String
+    #   resp.connections[0].location #=> String
+    #   resp.connections[0].bandwidth #=> String
+    #   resp.connections[0].vlan #=> Integer
+    #   resp.connections[0].partner_name #=> String
+    #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
+    #   resp.allows_hosted_connections #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/CreateLag AWS API Documentation
+    #
+    # @overload create_lag(params = {})
+    # @param [Hash] params ({})
+    def create_lag(params = {}, options = {})
+      req = build_request(:create_lag, params)
+      req.send_request(options)
+    end
+
     # Creates a new private virtual interface. A virtual interface is the
     # VLAN that transports AWS Direct Connect traffic. A private virtual
     # interface supports sending traffic to a single virtual private cloud
     # (VPC).
     #
     # @option params [required, String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -922,7 +1429,9 @@ module Aws::DirectConnect
     # not supported.
     #
     # @option params [required, String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1023,7 +1532,7 @@ module Aws::DirectConnect
     #   Default: None
     #
     # @option params [Integer] :asn
-    #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+    #   The autonomous system (AS) number for Border Gateway Protocol (BGP)
     #   configuration.
     #
     #   Example: 65000
@@ -1090,7 +1599,9 @@ module Aws::DirectConnect
     # circuits that connect you to the AWS Direct Connect location.
     #
     # @option params [required, String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1108,6 +1619,8 @@ module Aws::DirectConnect
     #   * {Types::Connection#vlan #vlan} => Integer
     #   * {Types::Connection#partner_name #partner_name} => String
     #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1127,6 +1640,8 @@ module Aws::DirectConnect
     #   resp.vlan #=> Integer
     #   resp.partner_name #=> String
     #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteConnection AWS API Documentation
     #
@@ -1171,10 +1686,77 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Deletes a link aggregation group (LAG). You cannot delete a LAG if it
+    # has active virtual interfaces or hosted connections.
+    #
+    # @option params [required, String] :lag_id
+    #   The ID of the LAG to delete.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Lag#connections_bandwidth #connections_bandwidth} => String
+    #   * {Types::Lag#number_of_connections #number_of_connections} => Integer
+    #   * {Types::Lag#lag_id #lag_id} => String
+    #   * {Types::Lag#owner_account #owner_account} => String
+    #   * {Types::Lag#lag_name #lag_name} => String
+    #   * {Types::Lag#lag_state #lag_state} => String
+    #   * {Types::Lag#location #location} => String
+    #   * {Types::Lag#region #region} => String
+    #   * {Types::Lag#minimum_links #minimum_links} => Integer
+    #   * {Types::Lag#aws_device #aws_device} => String
+    #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_lag({
+    #     lag_id: "LagId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections_bandwidth #=> String
+    #   resp.number_of_connections #=> Integer
+    #   resp.lag_id #=> String
+    #   resp.owner_account #=> String
+    #   resp.lag_name #=> String
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.location #=> String
+    #   resp.region #=> String
+    #   resp.minimum_links #=> Integer
+    #   resp.aws_device #=> String
+    #   resp.connections #=> Array
+    #   resp.connections[0].owner_account #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].connection_name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].region #=> String
+    #   resp.connections[0].location #=> String
+    #   resp.connections[0].bandwidth #=> String
+    #   resp.connections[0].vlan #=> Integer
+    #   resp.connections[0].partner_name #=> String
+    #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
+    #   resp.allows_hosted_connections #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DeleteLag AWS API Documentation
+    #
+    # @overload delete_lag(params = {})
+    # @param [Hash] params ({})
+    def delete_lag(params = {}, options = {})
+      req = build_request(:delete_lag, params)
+      req.send_request(options)
+    end
+
     # Deletes a virtual interface.
     #
     # @option params [required, String] :virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -1203,6 +1785,8 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Deprecated in favor of DescribeLoa.
+    #
     # Returns the LOA-CFA for a Connection.
     #
     # The Letter of Authorization - Connecting Facility Assignment (LOA-CFA)
@@ -1216,7 +1800,9 @@ module Aws::DirectConnect
     # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
     #
     # @option params [required, String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1268,7 +1854,9 @@ module Aws::DirectConnect
     # connection.
     #
     # @option params [String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
@@ -1297,6 +1885,8 @@ module Aws::DirectConnect
     #   resp.connections[0].vlan #=> Integer
     #   resp.connections[0].partner_name #=> String
     #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnections AWS API Documentation
     #
@@ -1307,7 +1897,9 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
-    # Return a list of connections that have been provisioned on the given
+    # Deprecated in favor of DescribeHostedConnections.
+    #
+    # Returns a list of connections that have been provisioned on the given
     # interconnect.
     #
     # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
@@ -1344,6 +1936,8 @@ module Aws::DirectConnect
     #   resp.connections[0].vlan #=> Integer
     #   resp.connections[0].partner_name #=> String
     #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeConnectionsOnInterconnect AWS API Documentation
     #
@@ -1354,6 +1948,58 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Returns a list of hosted connections that have been provisioned on the
+    # given interconnect or link aggregation group (LAG).
+    #
+    # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the interconnect or LAG on which the hosted connections are
+    #   provisioned.
+    #
+    #   Example: dxcon-abc123 or dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_hosted_connections({
+    #     connection_id: "ConnectionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections #=> Array
+    #   resp.connections[0].owner_account #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].connection_name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].region #=> String
+    #   resp.connections[0].location #=> String
+    #   resp.connections[0].bandwidth #=> String
+    #   resp.connections[0].vlan #=> Integer
+    #   resp.connections[0].partner_name #=> String
+    #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeHostedConnections AWS API Documentation
+    #
+    # @overload describe_hosted_connections(params = {})
+    # @param [Hash] params ({})
+    def describe_hosted_connections(params = {}, options = {})
+      req = build_request(:describe_hosted_connections, params)
+      req.send_request(options)
+    end
+
+    # Deprecated in favor of DescribeLoa.
+    #
     # Returns the LOA-CFA for an Interconnect.
     #
     # The Letter of Authorization - Connecting Facility Assignment (LOA-CFA)
@@ -1441,6 +2087,8 @@ module Aws::DirectConnect
     #   resp.interconnects[0].location #=> String
     #   resp.interconnects[0].bandwidth #=> String
     #   resp.interconnects[0].loa_issue_time #=> Time
+    #   resp.interconnects[0].lag_id #=> String
+    #   resp.interconnects[0].aws_device #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeInterconnects AWS API Documentation
     #
@@ -1448,6 +2096,127 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def describe_interconnects(params = {}, options = {})
       req = build_request(:describe_interconnects, params)
+      req.send_request(options)
+    end
+
+    # Describes the link aggregation groups (LAGs) in your account.
+    #
+    # If a LAG ID is provided, only information about the specified LAG is
+    # returned.
+    #
+    # @option params [String] :lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::Lags] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Lags#lags #lags} => Array&lt;Types::Lag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_lags({
+    #     lag_id: "LagId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.lags #=> Array
+    #   resp.lags[0].connections_bandwidth #=> String
+    #   resp.lags[0].number_of_connections #=> Integer
+    #   resp.lags[0].lag_id #=> String
+    #   resp.lags[0].owner_account #=> String
+    #   resp.lags[0].lag_name #=> String
+    #   resp.lags[0].lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.lags[0].location #=> String
+    #   resp.lags[0].region #=> String
+    #   resp.lags[0].minimum_links #=> Integer
+    #   resp.lags[0].aws_device #=> String
+    #   resp.lags[0].connections #=> Array
+    #   resp.lags[0].connections[0].owner_account #=> String
+    #   resp.lags[0].connections[0].connection_id #=> String
+    #   resp.lags[0].connections[0].connection_name #=> String
+    #   resp.lags[0].connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.lags[0].connections[0].region #=> String
+    #   resp.lags[0].connections[0].location #=> String
+    #   resp.lags[0].connections[0].bandwidth #=> String
+    #   resp.lags[0].connections[0].vlan #=> Integer
+    #   resp.lags[0].connections[0].partner_name #=> String
+    #   resp.lags[0].connections[0].loa_issue_time #=> Time
+    #   resp.lags[0].connections[0].lag_id #=> String
+    #   resp.lags[0].connections[0].aws_device #=> String
+    #   resp.lags[0].allows_hosted_connections #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLags AWS API Documentation
+    #
+    # @overload describe_lags(params = {})
+    # @param [Hash] params ({})
+    def describe_lags(params = {}, options = {})
+      req = build_request(:describe_lags, params)
+      req.send_request(options)
+    end
+
+    # Returns the LOA-CFA for a connection, interconnect, or link
+    # aggregation group (LAG).
+    #
+    # The Letter of Authorization - Connecting Facility Assignment (LOA-CFA)
+    # is a document that is used when establishing your cross connect to AWS
+    # at the colocation facility. For more information, see [Requesting
+    # Cross Connects at AWS Direct Connect Locations][1] in the AWS Direct
+    # Connect user guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of a connection, LAG, or interconnect for which to get the
+    #   LOA-CFA information.
+    #
+    #   Example: dxcon-abc123 or dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @option params [String] :provider_name
+    #   The name of the service provider who establishes connectivity on your
+    #   behalf. If you supply this parameter, the LOA-CFA lists the provider
+    #   name alongside your company name as the requester of the cross
+    #   connect.
+    #
+    #   Default: None
+    #
+    # @option params [String] :loa_content_type
+    #   A standard media type indicating the content type of the LOA-CFA
+    #   document. Currently, the only supported value is "application/pdf".
+    #
+    #   Default: application/pdf
+    #
+    # @return [Types::Loa] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Loa#loa_content #loa_content} => String
+    #   * {Types::Loa#loa_content_type #loa_content_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_loa({
+    #     connection_id: "ConnectionId", # required
+    #     provider_name: "ProviderName",
+    #     loa_content_type: "application/pdf", # accepts application/pdf
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.loa_content #=> String
+    #   resp.loa_content_type #=> String, one of "application/pdf"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DescribeLoa AWS API Documentation
+    #
+    # @overload describe_loa(params = {})
+    # @param [Hash] params ({})
+    def describe_loa(params = {}, options = {})
+      req = build_request(:describe_loa, params)
       req.send_request(options)
     end
 
@@ -1538,28 +2307,25 @@ module Aws::DirectConnect
     end
 
     # Displays all virtual interfaces for an AWS account. Virtual interfaces
-    # deleted fewer than 15 minutes before DescribeVirtualInterfaces is
-    # called are also returned. If a connection ID is included then only
-    # virtual interfaces associated with this connection will be returned.
-    # If a virtual interface ID is included then only a single virtual
-    # interface will be returned.
+    # deleted fewer than 15 minutes before you make the request are also
+    # returned. If you specify a connection ID, only the virtual interfaces
+    # associated with the connection are returned. If you specify a virtual
+    # interface ID, then only a single virtual interface is returned.
     #
     # A virtual interface (VLAN) transmits the traffic between the AWS
     # Direct Connect location and the customer.
     #
-    # If a connection ID is provided, only virtual interfaces provisioned on
-    # the specified connection will be returned. If a virtual interface ID
-    # is provided, only this particular virtual interface will be returned.
-    #
     # @option params [String] :connection_id
-    #   ID of the connection.
+    #   The ID of the connection. This field is also used as the ID type for
+    #   operations that use multiple connection types (LAG, interconnect,
+    #   and/or connection).
     #
     #   Example: dxcon-fg5678gh
     #
     #   Default: None
     #
     # @option params [String] :virtual_interface_id
-    #   ID of the virtual interface.
+    #   The ID of the virtual interface.
     #
     #   Example: dxvif-123dfg56
     #
@@ -1611,6 +2377,80 @@ module Aws::DirectConnect
     # @param [Hash] params ({})
     def describe_virtual_interfaces(params = {}, options = {})
       req = build_request(:describe_virtual_interfaces, params)
+      req.send_request(options)
+    end
+
+    # Disassociates a connection from a link aggregation group (LAG). The
+    # connection is interrupted and re-established as a standalone
+    # connection (the connection is not deleted; to delete the connection,
+    # use the DeleteConnection request). If the LAG has associated virtual
+    # interfaces or hosted connections, they remain associated with the LAG.
+    # A disassociated connection owned by an AWS Direct Connect partner is
+    # automatically converted to an interconnect.
+    #
+    # If disassociating the connection will cause the LAG to fall below its
+    # setting for minimum number of operational connections, the request
+    # fails, except when it's the last member of the LAG. If all
+    # connections are disassociated, the LAG continues to exist as an empty
+    # LAG with no physical connections.
+    #
+    # @option params [required, String] :connection_id
+    #   The ID of the connection to disassociate from the LAG.
+    #
+    #   Example: dxcon-abc123
+    #
+    #   Default: None
+    #
+    # @option params [required, String] :lag_id
+    #   The ID of the LAG.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Connection#owner_account #owner_account} => String
+    #   * {Types::Connection#connection_id #connection_id} => String
+    #   * {Types::Connection#connection_name #connection_name} => String
+    #   * {Types::Connection#connection_state #connection_state} => String
+    #   * {Types::Connection#region #region} => String
+    #   * {Types::Connection#location #location} => String
+    #   * {Types::Connection#bandwidth #bandwidth} => String
+    #   * {Types::Connection#vlan #vlan} => Integer
+    #   * {Types::Connection#partner_name #partner_name} => String
+    #   * {Types::Connection#loa_issue_time #loa_issue_time} => Time
+    #   * {Types::Connection#lag_id #lag_id} => String
+    #   * {Types::Connection#aws_device #aws_device} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_connection_from_lag({
+    #     connection_id: "ConnectionId", # required
+    #     lag_id: "LagId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.owner_account #=> String
+    #   resp.connection_id #=> String
+    #   resp.connection_name #=> String
+    #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.region #=> String
+    #   resp.location #=> String
+    #   resp.bandwidth #=> String
+    #   resp.vlan #=> Integer
+    #   resp.partner_name #=> String
+    #   resp.loa_issue_time #=> Time
+    #   resp.lag_id #=> String
+    #   resp.aws_device #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/DisassociateConnectionFromLag AWS API Documentation
+    #
+    # @overload disassociate_connection_from_lag(params = {})
+    # @param [Hash] params ({})
+    def disassociate_connection_from_lag(params = {}, options = {})
+      req = build_request(:disassociate_connection_from_lag, params)
       req.send_request(options)
     end
 
@@ -1679,6 +2519,102 @@ module Aws::DirectConnect
       req.send_request(options)
     end
 
+    # Updates the attributes of a link aggregation group (LAG).
+    #
+    # You can update the following attributes:
+    #
+    # * The name of the LAG.
+    #
+    # * The value for the minimum number of connections that must be
+    #   operational for the LAG itself to be operational.
+    #
+    # When you create a LAG, the default value for the minimum number of
+    # operational connections is zero (0). If you update this value, and the
+    # number of operational connections falls below the specified value, the
+    # LAG will automatically go down to avoid overutilization of the
+    # remaining connections. Adjusting this value should be done with care
+    # as it could force the LAG down if the value is set higher than the
+    # current number of operational connections.
+    #
+    # @option params [required, String] :lag_id
+    #   The ID of the LAG to update.
+    #
+    #   Example: dxlag-abc123
+    #
+    #   Default: None
+    #
+    # @option params [String] :lag_name
+    #   The name for the LAG.
+    #
+    #   Example: "`3x10G LAG to AWS`"
+    #
+    #   Default: None
+    #
+    # @option params [Integer] :minimum_links
+    #   The minimum number of physical connections that must be operational
+    #   for the LAG itself to be operational.
+    #
+    #   Default: None
+    #
+    # @return [Types::Lag] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::Lag#connections_bandwidth #connections_bandwidth} => String
+    #   * {Types::Lag#number_of_connections #number_of_connections} => Integer
+    #   * {Types::Lag#lag_id #lag_id} => String
+    #   * {Types::Lag#owner_account #owner_account} => String
+    #   * {Types::Lag#lag_name #lag_name} => String
+    #   * {Types::Lag#lag_state #lag_state} => String
+    #   * {Types::Lag#location #location} => String
+    #   * {Types::Lag#region #region} => String
+    #   * {Types::Lag#minimum_links #minimum_links} => Integer
+    #   * {Types::Lag#aws_device #aws_device} => String
+    #   * {Types::Lag#connections #connections} => Array&lt;Types::Connection&gt;
+    #   * {Types::Lag#allows_hosted_connections #allows_hosted_connections} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_lag({
+    #     lag_id: "LagId", # required
+    #     lag_name: "LagName",
+    #     minimum_links: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connections_bandwidth #=> String
+    #   resp.number_of_connections #=> Integer
+    #   resp.lag_id #=> String
+    #   resp.owner_account #=> String
+    #   resp.lag_name #=> String
+    #   resp.lag_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+    #   resp.location #=> String
+    #   resp.region #=> String
+    #   resp.minimum_links #=> Integer
+    #   resp.aws_device #=> String
+    #   resp.connections #=> Array
+    #   resp.connections[0].owner_account #=> String
+    #   resp.connections[0].connection_id #=> String
+    #   resp.connections[0].connection_name #=> String
+    #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+    #   resp.connections[0].region #=> String
+    #   resp.connections[0].location #=> String
+    #   resp.connections[0].bandwidth #=> String
+    #   resp.connections[0].vlan #=> Integer
+    #   resp.connections[0].partner_name #=> String
+    #   resp.connections[0].loa_issue_time #=> Time
+    #   resp.connections[0].lag_id #=> String
+    #   resp.connections[0].aws_device #=> String
+    #   resp.allows_hosted_connections #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/directconnect-2012-10-25/UpdateLag AWS API Documentation
+    #
+    # @overload update_lag(params = {})
+    # @param [Hash] params ({})
+    def update_lag(params = {}, options = {})
+      req = build_request(:update_lag, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1692,7 +2628,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

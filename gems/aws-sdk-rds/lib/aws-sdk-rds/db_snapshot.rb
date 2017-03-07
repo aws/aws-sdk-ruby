@@ -299,13 +299,8 @@ module Aws::RDS
     #   copy of the DB snapshot is encrypted with the same KMS key as the
     #   source DB snapshot.
     #
-    #   If you copy an encrypted DB snapshot from your AWS account, you can
-    #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-    #   encryption key. If you don't specify a value for `KmsKeyId`, then the
-    #   copy of the DB snapshot is encrypted with the same KMS key as the
-    #   source DB snapshot. If you copy an encrypted snapshot to a different
-    #   AWS region, then you must specify a KMS key for the destination AWS
-    #   region.
+    #   If you copy an encrypted snapshot to a different AWS region, then you
+    #   must specify a KMS key for the destination AWS region.
     #
     #   If you copy an encrypted DB snapshot that is shared from another AWS
     #   account, then you must specify a value for `KmsKeyId`.
@@ -362,8 +357,8 @@ module Aws::RDS
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
-    #   [2]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [String] :destination_region
     # @return [DBSnapshot]
     def copy(options = {})

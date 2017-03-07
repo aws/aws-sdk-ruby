@@ -266,13 +266,13 @@ module Aws::ElasticLoadBalancingV2
 
     # Creates an Application Load Balancer.
     #
-    # To create listeners for your load balancer, use CreateListener. You
-    # can add security groups, subnets, and tags when you create your load
-    # balancer, or you can add them later using SetSecurityGroups,
-    # SetSubnets, and AddTags.
+    # When you create a load balancer, you can specify security groups,
+    # subnets, IP address type, and tags. Otherwise, you could do so later
+    # using SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags.
     #
-    # To describe your current load balancers, see DescribeLoadBalancers.
-    # When you are finished with a load balancer, you can delete it using
+    # To create listeners for your load balancer, use CreateListener. To
+    # describe your current load balancers, see DescribeLoadBalancers. When
+    # you are finished with a load balancer, you can delete it using
     # DeleteLoadBalancer.
     #
     # You can create up to 20 load balancers per region per account. You can
@@ -321,6 +321,12 @@ module Aws::ElasticLoadBalancingV2
     # @option params [Array<Types::Tag>] :tags
     #   One or more tags to assign to the load balancer.
     #
+    # @option params [String] :ip_address_type
+    #   The type of IP addresses used by the subnets for your load balancer.
+    #   The possible values are `ipv4` (for IPv4 addresses) and `dualstack`
+    #   (for IPv4 and IPv6 addresses). Internal load balancers must use
+    #   `ipv4`.
+    #
     # @return [Types::CreateLoadBalancerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoadBalancerOutput#load_balancers #load_balancers} => Array&lt;Types::LoadBalancer&gt;
@@ -338,6 +344,7 @@ module Aws::ElasticLoadBalancingV2
     #         value: "TagValue",
     #       },
     #     ],
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack
     #   })
     #
     # @example Response structure
@@ -358,6 +365,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].subnet_id #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
+    #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/CreateLoadBalancer AWS API Documentation
     #
@@ -390,8 +398,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [required, Array<Types::RuleCondition>] :conditions
     #   A condition. Each condition has the field `path-pattern` and specifies
-    #   one path pattern. A path pattern is case sensitive, can be up to 255
-    #   characters in length, and can contain any of the following characters:
+    #   one path pattern. A path pattern is case sensitive, can be up to 128
+    #   characters in length, and can contain any of the following characters.
+    #   Note that you can include up to three wildcard characters in a path
+    #   pattern.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -849,6 +859,7 @@ module Aws::ElasticLoadBalancingV2
     #   resp.load_balancers[0].availability_zones[0].subnet_id #=> String
     #   resp.load_balancers[0].security_groups #=> Array
     #   resp.load_balancers[0].security_groups[0] #=> String
+    #   resp.load_balancers[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.next_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeLoadBalancers AWS API Documentation
@@ -1438,7 +1449,7 @@ module Aws::ElasticLoadBalancingV2
     #
     # The target must be in the virtual private cloud (VPC) that you
     # specified for the target group. If the target is an EC2 instance, it
-    # can't be in the `stopped` or `running` state when you register it.
+    # must be in the `running` state when you register it.
     #
     # To remove a target from a target group, use DeregisterTargets.
     #
@@ -1498,6 +1509,41 @@ module Aws::ElasticLoadBalancingV2
     # @param [Hash] params ({})
     def remove_tags(params = {}, options = {})
       req = build_request(:remove_tags, params)
+      req.send_request(options)
+    end
+
+    # Sets the type of IP addresses used by the subnets of the specified
+    # Application Load Balancer.
+    #
+    # @option params [required, String] :load_balancer_arn
+    #   The Amazon Resource Name (ARN) of the load balancer.
+    #
+    # @option params [required, String] :ip_address_type
+    #   The IP address type. The possible values are `ipv4` (for IPv4
+    #   addresses) and `dualstack` (for IPv4 and IPv6 addresses). Internal
+    #   load balancers must use `ipv4`.
+    #
+    # @return [Types::SetIpAddressTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SetIpAddressTypeOutput#ip_address_type #ip_address_type} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.set_ip_address_type({
+    #     load_balancer_arn: "LoadBalancerArn", # required
+    #     ip_address_type: "ipv4", # required, accepts ipv4, dualstack
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ip_address_type #=> String, one of "ipv4", "dualstack"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/SetIpAddressType AWS API Documentation
+    #
+    # @overload set_ip_address_type(params = {})
+    # @param [Hash] params ({})
+    def set_ip_address_type(params = {}, options = {})
+      req = build_request(:set_ip_address_type, params)
       req.send_request(options)
     end
 
@@ -1633,7 +1679,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

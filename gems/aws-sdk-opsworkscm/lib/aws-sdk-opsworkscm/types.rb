@@ -13,12 +13,12 @@ module Aws::OpsWorksCM
     # @!attribute [rw] name
     #   The attribute name. The following are supported attribute names.
     #
-    #   * *ServerLimit:* The number of servers that currently existing /
-    #     maximal allowed. By default 10 servers can be created.
+    #   * *ServerLimit:* The number of current servers/maximum number of
+    #     servers allowed. By default, you can have a maximum of 10 servers.
     #
-    #   * *ManualBackupLimit:* The number of manual backups that currently
-    #     exist / are maximal allowed. By default 50 manual backups can be
-    #     created.
+    #   * *ManualBackupLimit:* The number of current manual backups/maximum
+    #     number of backups allowed. By default, you can have a maximum of
+    #     50 manual backups saved.
     #   @return [String]
     #
     # @!attribute [rw] maximum
@@ -26,8 +26,8 @@ module Aws::OpsWorksCM
     #   @return [Integer]
     #
     # @!attribute [rw] used
-    #   The current usage, such as the current number of servers associated
-    #   with the account.
+    #   The current usage, such as the current number of servers that are
+    #   associated with the account.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AccountAttribute AWS API Documentation
@@ -45,21 +45,33 @@ module Aws::OpsWorksCM
     #       {
     #         server_name: "ServerName", # required
     #         node_name: "NodeName", # required
-    #         engine_attributes: [
+    #         engine_attributes: [ # required
     #           {
-    #             name: "String",
-    #             value: "String",
+    #             name: "EngineAttributeName",
+    #             value: "EngineAttributeValue",
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] server_name
+    #   The name of the server with which to associate the node.
     #   @return [String]
     #
     # @!attribute [rw] node_name
+    #   The name of the Chef client node.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
+    #   Engine attributes used for associating the node.
+    #
+    #   **Attributes accepted in a AssociateNode request:**
+    #
+    #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node is
+    #     associated. By default only one organization named `default` can
+    #     exist.
+    #
+    #   * `CHEF_NODE_PUBLIC_KEY`\: A PEM-formatted public key. This key is
+    #     required for the `chef-client` agent to access the Chef API.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeRequest AWS API Documentation
@@ -72,6 +84,9 @@ module Aws::OpsWorksCM
     end
 
     # @!attribute [rw] node_association_status_token
+    #   Contains a token which can be passed to the
+    #   `DescribeNodeAssociationStatus` API call to get the status of the
+    #   association request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/AssociateNodeResponse AWS API Documentation
@@ -149,12 +164,11 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] s3_data_size
-    #   The size of the backup, in bytes. The size is returned by the
-    #   instance in the command results.
+    #   This field is deprecated and is no longer used.
     #   @return [Integer]
     #
     # @!attribute [rw] s3_data_url
-    #   The Amazon S3 URL of the backup's tar.gz file.
+    #   This field is deprecated and is no longer used.
     #   @return [String]
     #
     # @!attribute [rw] s3_log_url
@@ -267,20 +281,21 @@ module Aws::OpsWorksCM
     #   data as a hash:
     #
     #       {
+    #         associate_public_ip_address: false,
     #         disable_automated_backup: false,
     #         engine: "String",
     #         engine_model: "String",
     #         engine_version: "String",
     #         engine_attributes: [
     #           {
-    #             name: "String",
-    #             value: "String",
+    #             name: "EngineAttributeName",
+    #             value: "EngineAttributeValue",
     #           },
     #         ],
     #         backup_retention_count: 1,
     #         server_name: "ServerName", # required
     #         instance_profile_arn: "InstanceProfileArn", # required
-    #         instance_type: "String",
+    #         instance_type: "String", # required
     #         key_pair: "KeyPair",
     #         preferred_maintenance_window: "TimeWindowDefinition",
     #         preferred_backup_window: "TimeWindowDefinition",
@@ -289,6 +304,11 @@ module Aws::OpsWorksCM
     #         subnet_ids: ["String"],
     #         backup_id: "BackupId",
     #       }
+    #
+    # @!attribute [rw] associate_public_ip_address
+    #   Associate a public IP address with a server that you are launching.
+    #   Valid values are `true` or `false`. The default value is `true`.
+    #   @return [Boolean]
     #
     # @!attribute [rw] disable_automated_backup
     #   Enable or disable scheduled backups. Valid values are `true` or
@@ -310,15 +330,23 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
-    #   Engine attributes on a specified server.
+    #   Optional engine attributes on a specified server.
     #
     #   **Attributes accepted in a createServer request:**
     #
     #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-    #     stored by AWS OpsWorks for Chef Automate. This private key is
-    #     required to access the Chef API.
+    #     stored by AWS OpsWorks for Chef. This private key is required to
+    #     access the Chef API. When no CHEF\_PIVOTAL\_KEY is set, one is
+    #     generated and returned in the response.
     #
-    #   ^
+    #   * `CHEF_DELIVERY_ADMIN_PASSWORD`\: The password for the
+    #     administrative user in the Chef Automate GUI. The password length
+    #     is a minimum of eight characters, and a maximum of 32. The
+    #     password can contain letters, numbers, and special characters
+    #     (!/@#$%^&amp;+=\_). The password must contain at least one lower
+    #     case letter, one upper case letter, one number, and one special
+    #     character. When no CHEF\_DELIVERY\_ADMIN\_PASSWORD is set, one is
+    #     generated and returned in the response.
     #   @return [Array<Types::EngineAttribute>]
     #
     # @!attribute [rw] backup_retention_count
@@ -331,28 +359,29 @@ module Aws::OpsWorksCM
     #   The name of the server. The server name must be unique within your
     #   AWS account, within each region. Server names must start with a
     #   letter; then letters, numbers, or hyphens (-) are allowed, up to a
-    #   maximum of 32 characters.
+    #   maximum of 40 characters.
     #   @return [String]
     #
     # @!attribute [rw] instance_profile_arn
     #   The ARN of the instance profile that your Amazon EC2 instances use.
     #   Although the AWS OpsWorks console typically creates the instance
-    #   profile for you, in this release of AWS OpsWorks for Chef Automate,
-    #   run the service-role-creation.yaml AWS CloudFormation template,
-    #   located at
-    #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
-    #   This template creates a stack that includes the instance profile you
-    #   need.
+    #   profile for you, if you are using API commands instead, run the
+    #   service-role-creation.yaml AWS CloudFormation template, located at
+    #   https://s3.amazonaws.com/opsworks-cm-us-east-1-prod-default-assets/misc/opsworks-cm-roles.yaml.
+    #   This template creates a CloudFormation stack that includes the
+    #   instance profile you need.
     #   @return [String]
     #
     # @!attribute [rw] instance_type
     #   The Amazon EC2 instance type to use. Valid values must be specified
-    #   in the following format: `^([cm][34]|t2).*` For example, `c3.large`.
+    #   in the following format: `^([cm][34]|t2).*` For example, `m4.large`.
+    #   Valid values are `t2.medium`, `m4.large`, or `m4.2xlarge`.
     #   @return [String]
     #
     # @!attribute [rw] key_pair
-    #   The Amazon EC2 key pair to set for the instance. You may specify
-    #   this parameter to connect to your instances by using SSH.
+    #   The Amazon EC2 key pair to set for the instance. This parameter is
+    #   optional; if desired, you may specify this parameter to connect to
+    #   your instances by using SSH.
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -370,8 +399,8 @@ module Aws::OpsWorksCM
     # @!attribute [rw] preferred_backup_window
     #   The start time for a one-hour period during which AWS OpsWorks for
     #   Chef Automate backs up application-level data on your server if
-    #   backups are enabled. Valid values must be specified in one of the
-    #   following formats:
+    #   automated backups are enabled. Valid values must be specified in one
+    #   of the following formats:
     #
     #   * `HH:MM` for daily backups
     #
@@ -400,12 +429,12 @@ module Aws::OpsWorksCM
     # @!attribute [rw] service_role_arn
     #   The service role that the AWS OpsWorks for Chef Automate service
     #   backend uses to work with your account. Although the AWS OpsWorks
-    #   console typically creates the service role for you, in this release
-    #   of AWS OpsWorks for Chef Automate, run the
+    #   management console typically creates the service role for you, if
+    #   you are using the AWS CLI or API commands, run the
     #   service-role-creation.yaml AWS CloudFormation template, located at
     #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
-    #   This template creates a stack that includes the service role that
-    #   you need.
+    #   This template creates a CloudFormation stack that includes the
+    #   service role that you need.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -436,6 +465,7 @@ module Aws::OpsWorksCM
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
+      :associate_public_ip_address,
       :disable_automated_backup,
       :engine,
       :engine_model,
@@ -679,6 +709,7 @@ module Aws::OpsWorksCM
     #   @return [String]
     #
     # @!attribute [rw] server_name
+    #   The name of the server from which to disassociate the node.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusRequest AWS API Documentation
@@ -690,6 +721,16 @@ module Aws::OpsWorksCM
     end
 
     # @!attribute [rw] node_association_status
+    #   The status of the association or disassociation request.
+    #
+    #   **Possible values:**
+    #
+    #   * `SUCCESS`\: The association or disassociation succeeded.
+    #
+    #   * `FAILED`\: The association or disassociation failed.
+    #
+    #   * `IN_PROGRESS`\: The association or disassociation is still in
+    #     progress.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DescribeNodeAssociationStatusResponse AWS API Documentation
@@ -773,19 +814,30 @@ module Aws::OpsWorksCM
     #         node_name: "NodeName", # required
     #         engine_attributes: [
     #           {
-    #             name: "String",
-    #             value: "String",
+    #             name: "EngineAttributeName",
+    #             value: "EngineAttributeValue",
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] server_name
+    #   The name of the server from which to disassociate the node.
     #   @return [String]
     #
     # @!attribute [rw] node_name
+    #   The name of the Chef client node.
     #   @return [String]
     #
     # @!attribute [rw] engine_attributes
+    #   Engine attributes used for disassociating the node.
+    #
+    #   **Attributes accepted in a DisassociateNode request:**
+    #
+    #   * `CHEF_ORGANIZATION`\: The Chef organization with which the node
+    #     was associated. By default only one organization named `default`
+    #     can exist.
+    #
+    #   ^
     #   @return [Array<Types::EngineAttribute>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNodeRequest AWS API Documentation
@@ -798,6 +850,9 @@ module Aws::OpsWorksCM
     end
 
     # @!attribute [rw] node_association_status_token
+    #   Contains a token which can be passed to the
+    #   `DescribeNodeAssociationStatus` API call to get the status of the
+    #   disassociation request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/DisassociateNodeResponse AWS API Documentation
@@ -807,14 +862,14 @@ module Aws::OpsWorksCM
       include Aws::Structure
     end
 
-    # A name/value pair that is specific to the engine of the server.
+    # A name and value pair that is specific to the engine of the server.
     #
     # @note When making an API call, you may pass EngineAttribute
     #   data as a hash:
     #
     #       {
-    #         name: "String",
-    #         value: "String",
+    #         name: "EngineAttributeName",
+    #         value: "EngineAttributeValue",
     #       }
     #
     # @!attribute [rw] name
@@ -853,15 +908,15 @@ module Aws::OpsWorksCM
     #
     # @!attribute [rw] instance_type
     #   The type of the instance to create. Valid values must be specified
-    #   in the following format: `^([cm][34]|t2).*` For example, `c3.large`.
-    #   If you do not specify this parameter, RestoreServer uses the
-    #   instance type from the specified backup.
+    #   in the following format: `^([cm][34]|t2).*` For example, `m4.large`.
+    #   Valid values are `t2.medium`, `m4.large`, and `m4.2xlarge`. If you
+    #   do not specify this parameter, RestoreServer uses the instance type
+    #   from the specified backup.
     #   @return [String]
     #
     # @!attribute [rw] key_pair
     #   The name of the key pair to set on the new EC2 instance. This can be
-    #   helpful if any of the administrators who manage the server no longer
-    #   have the SSH key.
+    #   helpful if the administrator no longer has the SSH key.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/RestoreServerRequest AWS API Documentation
@@ -880,6 +935,10 @@ module Aws::OpsWorksCM
 
     # Describes a configuration management server.
     #
+    # @!attribute [rw] associate_public_ip_address
+    #   Associate a public IP address with a server that you are launching.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] backup_retention_count
     #   The number of automated backups to keep.
     #   @return [Integer]
@@ -891,6 +950,11 @@ module Aws::OpsWorksCM
     # @!attribute [rw] created_at
     #   Time stamp of server creation. Example `2016-07-29T13:38:47.520Z`
     #   @return [Time]
+    #
+    # @!attribute [rw] cloud_formation_stack_arn
+    #   The ARN of the CloudFormation stack that was used to create the
+    #   server.
+    #   @return [String]
     #
     # @!attribute [rw] disable_automated_backup
     #   Disables automated backups. The number of stored backups is
@@ -978,7 +1042,7 @@ module Aws::OpsWorksCM
     # @!attribute [rw] status
     #   The server's status. This field displays the states of actions in
     #   progress, such as creating, running, or backing up the server, as
-    #   well as server health.
+    #   well as the server's health state.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
@@ -998,9 +1062,11 @@ module Aws::OpsWorksCM
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/Server AWS API Documentation
     #
     class Server < Struct.new(
+      :associate_public_ip_address,
       :backup_retention_count,
       :server_name,
       :created_at,
+      :cloud_formation_stack_arn,
       :disable_automated_backup,
       :endpoint,
       :engine,
@@ -1148,19 +1214,17 @@ module Aws::OpsWorksCM
     # @!attribute [rw] preferred_maintenance_window
     #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
     #
-    #   Time windows always use coordinated universal time (UTC).
-    #
-    #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
-    #   Sat, Sun.
+    #   Time windows always use coordinated universal time (UTC). Valid
+    #   strings for day of week (`DDD`) are: `Mon`, `Tue`, `Wed`, `Thr`,
+    #   `Fri`, `Sat`, or `Sun`.
     #   @return [String]
     #
     # @!attribute [rw] preferred_backup_window
     #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
     #
-    #   Time windows always use coordinated universal time (UTC).
-    #
-    #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
-    #   Sat, Sun.
+    #   Time windows always use coordinated universal time (UTC). Valid
+    #   strings for day of week (`DDD`) are: `Mon`, `Tue`, `Wed`, `Thr`,
+    #   `Fri`, `Sat`, or `Sun`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opsworkscm-2016-11-01/UpdateServerRequest AWS API Documentation

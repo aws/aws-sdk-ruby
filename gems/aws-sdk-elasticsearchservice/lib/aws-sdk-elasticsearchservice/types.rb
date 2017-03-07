@@ -62,6 +62,29 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # List of limits that are specific to a given InstanceType and for each
+    # of it's ` InstanceRole ` .
+    #
+    # @!attribute [rw] limit_name
+    #   Name of Additional Limit is specific to a given InstanceType and for
+    #   each of it's ` InstanceRole ` etc.
+    #    Attributes and their details:
+    #    * MaximumNumberOfDataNodesSupported
+    #   ` ESPartitionInstanceType `*
+    #   MaximumNumberOfDataNodesWithoutMasterNode
+    #   ` ESPartitionInstanceType `
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_values
+    #   Value for given ` AdditionalLimit$LimitName ` .
+    #   @return [Array<String>]
+    #
+    class AdditionalLimit < Struct.new(
+      :limit_name,
+      :limit_values)
+      include Aws::Structure
+    end
+
     # Status of the advanced options for the specified Elasticsearch domain.
     # Currently, the following advanced options are available:
     #
@@ -101,11 +124,11 @@ module Aws::ElasticsearchService
     #         domain_name: "DomainName", # required
     #         elasticsearch_version: "ElasticsearchVersionString",
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
     #         },
     #         ebs_options: {
@@ -326,6 +349,55 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Container for the parameters to `
+    # DescribeElasticsearchInstanceTypeLimits ` operation.
+    #
+    # @note When making an API call, you may pass DescribeElasticsearchInstanceTypeLimitsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName",
+    #         instance_type: "m3.medium.elasticsearch", # required, accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
+    #         elasticsearch_version: "ElasticsearchVersionString", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   DomainName represents the name of the Domain that we are trying to
+    #   modify. This should be present only if we are querying for
+    #   Elasticsearch ` Limits ` for existing domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type for an Elasticsearch cluster for which
+    #   Elasticsearch ` Limits ` are needed.
+    #   @return [String]
+    #
+    # @!attribute [rw] elasticsearch_version
+    #   Version of Elasticsearch for which ` Limits ` are needed.
+    #   @return [String]
+    #
+    class DescribeElasticsearchInstanceTypeLimitsRequest < Struct.new(
+      :domain_name,
+      :instance_type,
+      :elasticsearch_version)
+      include Aws::Structure
+    end
+
+    # Container for the parameters received from `
+    # DescribeElasticsearchInstanceTypeLimits ` operation.
+    #
+    # @!attribute [rw] limits_by_role
+    #   Map of Role of the Instance and Limits that are applicable. Role
+    #   performed by given Instance in Elasticsearch can be one of the
+    #   following: * Data: If the given InstanceType is used as Data node
+    #   * Master: If the given InstanceType is used as Master node
+    #   @return [Hash<String,Types::Limits>]
+    #
+    class DescribeElasticsearchInstanceTypeLimitsResponse < Struct.new(
+      :limits_by_role)
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   Specifies the `DomainName`.
     #   @return [String]
@@ -401,11 +473,11 @@ module Aws::ElasticsearchService
     #   data as a hash:
     #
     #       {
-    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+    #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
     #         instance_count: 1,
     #         dedicated_master_enabled: false,
     #         zone_awareness_enabled: false,
-    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+    #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
     #         dedicated_master_count: 1,
     #       }
     #
@@ -627,6 +699,64 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # InstanceCountLimits represents the limits on number of instances that
+    # be created in Amazon Elasticsearch for given InstanceType.
+    #
+    # @!attribute [rw] minimum_instance_count
+    #   Minimum number of Instances that can be instantiated for given
+    #   InstanceType.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_instance_count
+    #   Maximum number of Instances that can be instantiated for given
+    #   InstanceType.
+    #   @return [Integer]
+    #
+    class InstanceCountLimits < Struct.new(
+      :minimum_instance_count,
+      :maximum_instance_count)
+      include Aws::Structure
+    end
+
+    # InstanceLimits represents the list of instance related attributes that
+    # are available for given InstanceType.
+    #
+    # @!attribute [rw] instance_count_limits
+    #   InstanceCountLimits represents the limits on number of instances
+    #   that be created in Amazon Elasticsearch for given InstanceType.
+    #   @return [Types::InstanceCountLimits]
+    #
+    class InstanceLimits < Struct.new(
+      :instance_count_limits)
+      include Aws::Structure
+    end
+
+    # Limits for given InstanceType and for each of it's role.
+    #  Limits contains following ` StorageTypes, ` ` InstanceLimits ` and `
+    # AdditionalLimits `
+    #
+    # @!attribute [rw] storage_types
+    #   StorageType represents the list of storage related types and
+    #   attributes that are available for given InstanceType.
+    #   @return [Array<Types::StorageType>]
+    #
+    # @!attribute [rw] instance_limits
+    #   InstanceLimits represents the list of instance related attributes
+    #   that are available for given InstanceType.
+    #   @return [Types::InstanceLimits]
+    #
+    # @!attribute [rw] additional_limits
+    #   List of additional limits that are specific to a given InstanceType
+    #   and for each of it's ` InstanceRole ` .
+    #   @return [Array<Types::AdditionalLimit>]
+    #
+    class Limits < Struct.new(
+      :storage_types,
+      :instance_limits,
+      :additional_limits)
+      include Aws::Structure
+    end
+
     # The result of a `ListDomainNames` operation. Contains the names of all
     # Elasticsearch domains owned by this account.
     #
@@ -636,6 +766,122 @@ module Aws::ElasticsearchService
     #
     class ListDomainNamesResponse < Struct.new(
       :domain_names)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the ` ListElasticsearchInstanceTypes `
+    # operation.
+    #
+    # @note When making an API call, you may pass ListElasticsearchInstanceTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         elasticsearch_version: "ElasticsearchVersionString", # required
+    #         domain_name: "DomainName",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] elasticsearch_version
+    #   Version of Elasticsearch for which list of supported elasticsearch
+    #   instance types are needed.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   DomainName represents the name of the Domain that we are trying to
+    #   modify. This should be present only if we are querying for list of
+    #   available Elasticsearch instance types when modifying existing
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. Value
+    #   provided must be greater than 30 else it wont be honored.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken should be sent in case if earlier API call produced result
+    #   containing NextToken. It is used for pagination.
+    #   @return [String]
+    #
+    class ListElasticsearchInstanceTypesRequest < Struct.new(
+      :elasticsearch_version,
+      :domain_name,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters returned by `
+    # ListElasticsearchInstanceTypes ` operation.
+    #
+    # @!attribute [rw] elasticsearch_instance_types
+    #   List of instance types supported by Amazon Elasticsearch service for
+    #   given ` ElasticsearchVersion `
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   In case if there are more results available NextToken would be
+    #   present, make further request to the same API with received
+    #   NextToken to paginate remaining results.
+    #   @return [String]
+    #
+    class ListElasticsearchInstanceTypesResponse < Struct.new(
+      :elasticsearch_instance_types,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the ` ListElasticsearchVersions `
+    # operation. Use ` MaxResults ` to control the maximum number of results
+    # to
+    # retrieve in a single call.
+    #
+    #  Use ` NextToken ` in response to retrieve more results. If the
+    # received response does not contain a NextToken, then there are no more
+    # results to retrieve.
+    #
+    # @note When making an API call, you may pass ListElasticsearchVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Set this value to limit the number of results returned. Value
+    #   provided must be greater than 10 else it wont be honored.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Paginated APIs accepts NextToken input to returns next page results
+    #   and provides a NextToken output in the response which can be used by
+    #   the client to retrieve more results.
+    #   @return [String]
+    #
+    class ListElasticsearchVersionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # Container for the parameters for response received from `
+    # ListElasticsearchVersions ` operation.
+    #
+    # @!attribute [rw] elasticsearch_versions
+    #   List of supported elastic search versions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   Paginated APIs accepts NextToken input to returns next page results
+    #   and provides a NextToken output in the response which can be used by
+    #   the client to retrieve more results.
+    #   @return [String]
+    #
+    class ListElasticsearchVersionsResponse < Struct.new(
+      :elasticsearch_versions,
+      :next_token)
       include Aws::Structure
     end
 
@@ -770,6 +1016,58 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # StorageTypes represents the list of storage related types and their
+    # attributes that are available for given InstanceType.
+    #
+    # @!attribute [rw] storage_type_name
+    #   Type of the storage. List of available storage options: 1.  instance
+    #   2.  ebs
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_sub_type_name
+    #   SubType of the given storage type. List of available sub-storage
+    #   options: For "instance" storageType we wont have any
+    #   storageSubType, in case of "ebs" storageType we will have
+    #   following valid storageSubTypes 1.  standard
+    #   2.  gp2
+    #   3.  io1
+    #
+    #    Refer `VolumeType` for more information regarding above EBS storage
+    #   options.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_type_limits
+    #   List of limits that are applicable for given storage type.
+    #   @return [Array<Types::StorageTypeLimit>]
+    #
+    class StorageType < Struct.new(
+      :storage_type_name,
+      :storage_sub_type_name,
+      :storage_type_limits)
+      include Aws::Structure
+    end
+
+    # Limits that are applicable for given storage type.
+    #
+    # @!attribute [rw] limit_name
+    #   Name of storage limits that are applicable for given storage type.
+    #   If ` StorageType ` is ebs, following storage options are applicable
+    #   1.  MinimumVolumeSize
+    #   2.  MaximumVolumeSize
+    #   3.  MaximumIops
+    #   4.  MinimumIops
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_values
+    #   Values for the ` StorageTypeLimit$LimitName ` .
+    #   @return [Array<String>]
+    #
+    class StorageTypeLimit < Struct.new(
+      :limit_name,
+      :limit_values)
+      include Aws::Structure
+    end
+
     # Specifies a key value pair for a resource tag.
     #
     # @note When making an API call, you may pass Tag
@@ -808,11 +1106,11 @@ module Aws::ElasticsearchService
     #       {
     #         domain_name: "DomainName", # required
     #         elasticsearch_cluster_config: {
-    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+    #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
     #           instance_count: 1,
     #           dedicated_master_enabled: false,
     #           zone_awareness_enabled: false,
-    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+    #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch, d2.xlarge.elasticsearch, d2.2xlarge.elasticsearch, d2.4xlarge.elasticsearch, d2.8xlarge.elasticsearch, c4.large.elasticsearch, c4.xlarge.elasticsearch, c4.2xlarge.elasticsearch, c4.4xlarge.elasticsearch, c4.8xlarge.elasticsearch, r4.large.elasticsearch, r4.xlarge.elasticsearch, r4.2xlarge.elasticsearch, r4.4xlarge.elasticsearch, r4.8xlarge.elasticsearch, r4.16xlarge.elasticsearch
     #           dedicated_master_count: 1,
     #         },
     #         ebs_options: {

@@ -205,6 +205,7 @@ module Aws::IAM
     OpenIDConnectProviderListEntry = Shapes::StructureShape.new(name: 'OpenIDConnectProviderListEntry')
     OpenIDConnectProviderListType = Shapes::ListShape.new(name: 'OpenIDConnectProviderListType')
     OpenIDConnectProviderUrlType = Shapes::StringShape.new(name: 'OpenIDConnectProviderUrlType')
+    OrganizationsDecisionDetail = Shapes::StructureShape.new(name: 'OrganizationsDecisionDetail')
     PasswordPolicy = Shapes::StructureShape.new(name: 'PasswordPolicy')
     PasswordPolicyViolationException = Shapes::StructureShape.new(name: 'PasswordPolicyViolationException')
     Policy = Shapes::StructureShape.new(name: 'Policy')
@@ -634,6 +635,7 @@ module Aws::IAM
     EvaluationResult.add_member(:eval_decision, Shapes::ShapeRef.new(shape: PolicyEvaluationDecisionType, required: true, location_name: "EvalDecision"))
     EvaluationResult.add_member(:matched_statements, Shapes::ShapeRef.new(shape: StatementListType, location_name: "MatchedStatements"))
     EvaluationResult.add_member(:missing_context_values, Shapes::ShapeRef.new(shape: ContextKeyNamesResultListType, location_name: "MissingContextValues"))
+    EvaluationResult.add_member(:organizations_decision_detail, Shapes::ShapeRef.new(shape: OrganizationsDecisionDetail, location_name: "OrganizationsDecisionDetail"))
     EvaluationResult.add_member(:eval_decision_details, Shapes::ShapeRef.new(shape: EvalDecisionDetailsType, location_name: "EvalDecisionDetails"))
     EvaluationResult.add_member(:resource_specific_results, Shapes::ShapeRef.new(shape: ResourceSpecificResultListType, location_name: "ResourceSpecificResults"))
     EvaluationResult.struct_class = Types::EvaluationResult
@@ -1089,6 +1091,9 @@ module Aws::IAM
     OpenIDConnectProviderListEntry.struct_class = Types::OpenIDConnectProviderListEntry
 
     OpenIDConnectProviderListType.member = Shapes::ShapeRef.new(shape: OpenIDConnectProviderListEntry)
+
+    OrganizationsDecisionDetail.add_member(:allowed_by_organizations, Shapes::ShapeRef.new(shape: booleanType, location_name: "AllowedByOrganizations"))
+    OrganizationsDecisionDetail.struct_class = Types::OrganizationsDecisionDetail
 
     PasswordPolicy.add_member(:minimum_password_length, Shapes::ShapeRef.new(shape: minimumPasswordLengthType, location_name: "MinimumPasswordLength"))
     PasswordPolicy.add_member(:require_symbols, Shapes::ShapeRef.new(shape: booleanType, location_name: "RequireSymbols"))

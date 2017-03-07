@@ -8,6 +8,27 @@
 module Aws::Rekognition
   module Types
 
+    # Structure containing the estimated age range, in years, for a face.
+    #
+    # Rekognition estimates an age-range for faces detected in the input
+    # image. Estimated age ranges can overlap; a face of a 5 year old may
+    # have an estimated range of 4-6 whilst the face of a 6 year old may
+    # have an estimated range of 4-8.
+    #
+    # @!attribute [rw] low
+    #   The lowest estimated age.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] high
+    #   The highest estimated age.
+    #   @return [Integer]
+    #
+    class AgeRange < Struct.new(
+      :low,
+      :high)
+      include Aws::Structure
+    end
+
     # Indicates whether or not the face has a beard, and the confidence
     # level in the determination.
     #
@@ -574,6 +595,11 @@ module Aws::Rekognition
     #   Bounding box of the face.
     #   @return [Types::BoundingBox]
     #
+    # @!attribute [rw] age_range
+    #   The estimated age range, in years, for the face. Low represents the
+    #   lowest estimated age and High represents the highest estimated age.
+    #   @return [Types::AgeRange]
+    #
     # @!attribute [rw] smile
     #   Indicates whether or not the face is smiling, and the confidence
     #   level in the determination.
@@ -638,6 +664,7 @@ module Aws::Rekognition
     #
     class FaceDetail < Struct.new(
       :bounding_box,
+      :age_range,
       :smile,
       :eyeglasses,
       :sunglasses,

@@ -1,3 +1,17 @@
+Unreleased Changes
+------------------
+
+3.0.0.rc4 (2017-03-07)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-organizations` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-mturk` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lexruntimeservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-clouddirectory` gem.
+
 3.0.0.rc3 (2017-01-24)
 ------------------
 

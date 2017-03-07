@@ -270,7 +270,7 @@ module Aws::CloudTrail
     #
     # @option params [String] :kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be a an alias name prefixed by "alias/", a
+    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
     #   fully specified ARN to an alias, a fully specified ARN to a key, or a
     #   globally unique identifier.
     #
@@ -445,12 +445,12 @@ module Aws::CloudTrail
     # * If your event selector includes read-only events, write-only events,
     #   or all.
     #
-    # For more information, see [Configuring Event Selectors for Trails][1]
-    # in the *AWS CloudTrail User Guide*.
+    # For more information, see [Logging Data and Management Events for
+    # Trails ][1] in the *AWS CloudTrail User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html
+    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     #
     # @option params [String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -680,6 +680,8 @@ module Aws::CloudTrail
     #
     # * Event name
     #
+    # * Event source
+    #
     # * Resource name
     #
     # * Resource type
@@ -766,11 +768,12 @@ module Aws::CloudTrail
     end
 
     # Configures an event selector for your trail. Use event selectors to
-    # specify the type of events that you want your trail to log. When an
-    # event occurs in your account, CloudTrail evaluates the event selectors
-    # in all trails. For each trail, if the event matches any event
-    # selector, the trail processes and logs the event. If the event
-    # doesn't match any event selector, the trail doesn't log the event.
+    # specify whether you want your trail to log management and/or data
+    # events. When an event occurs in your account, CloudTrail evaluates the
+    # event selectors in all trails. For each trail, if the event matches
+    # any event selector, the trail processes and logs the event. If the
+    # event doesn't match any event selector, the trail doesn't log the
+    # event.
     #
     # Example
     #
@@ -794,12 +797,12 @@ module Aws::CloudTrail
     # `InvalidHomeRegionException` is thrown.
     #
     # You can configure up to five event selectors for each trail. For more
-    # information, see [Configuring Event Selectors for Trails][1] in the
-    # *AWS CloudTrail User Guide*.
+    # information, see [Logging Data and Management Events for Trails ][1]
+    # in the *AWS CloudTrail User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html
+    # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     #
     # @option params [String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
@@ -1055,7 +1058,7 @@ module Aws::CloudTrail
     #
     # @option params [String] :kms_key_id
     #   Specifies the KMS key ID to use to encrypt the logs delivered by
-    #   CloudTrail. The value can be a an alias name prefixed by "alias/", a
+    #   CloudTrail. The value can be an alias name prefixed by "alias/", a
     #   fully specified ARN to an alias, a fully specified ARN to a key, or a
     #   globally unique identifier.
     #
@@ -1136,7 +1139,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

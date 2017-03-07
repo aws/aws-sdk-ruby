@@ -1348,6 +1348,17 @@ module Aws::ConfigService
     #   An encrypted token that associates an evaluation with an AWS Config
     #   rule. Identifies the rule and the event that triggered the evaluation
     #
+    # @option params [Boolean] :test_mode
+    #   Use this parameter to specify a test run for `PutEvaluations`. You can
+    #   verify whether your AWS Lambda function will deliver evaluation
+    #   results to AWS Config. No updates occur to your existing evaluations,
+    #   and evaluation results are not sent to AWS Config.
+    #
+    #   <note markdown="1"> When `TestMode` is `true`, `PutEvaluations` doesn't require a valid
+    #   value for the `ResultToken` parameter, but the value cannot be null.
+    #
+    #    </note>
+    #
     # @return [Types::PutEvaluationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEvaluationsResponse#failed_evaluations #failed_evaluations} => Array&lt;Types::Evaluation&gt;
@@ -1365,6 +1376,7 @@ module Aws::ConfigService
     #       },
     #     ],
     #     result_token: "String", # required
+    #     test_mode: false,
     #   })
     #
     # @example Response structure
@@ -1508,7 +1520,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

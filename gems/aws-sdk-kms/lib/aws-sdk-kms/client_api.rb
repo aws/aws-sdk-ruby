@@ -101,6 +101,8 @@ module Aws::KMS
     ListKeyPoliciesResponse = Shapes::StructureShape.new(name: 'ListKeyPoliciesResponse')
     ListKeysRequest = Shapes::StructureShape.new(name: 'ListKeysRequest')
     ListKeysResponse = Shapes::StructureShape.new(name: 'ListKeysResponse')
+    ListResourceTagsRequest = Shapes::StructureShape.new(name: 'ListResourceTagsRequest')
+    ListResourceTagsResponse = Shapes::StructureShape.new(name: 'ListResourceTagsResponse')
     ListRetirableGrantsRequest = Shapes::StructureShape.new(name: 'ListRetirableGrantsRequest')
     MalformedPolicyDocumentException = Shapes::StructureShape.new(name: 'MalformedPolicyDocumentException')
     MarkerType = Shapes::StringShape.new(name: 'MarkerType')
@@ -120,7 +122,15 @@ module Aws::KMS
     RevokeGrantRequest = Shapes::StructureShape.new(name: 'RevokeGrantRequest')
     ScheduleKeyDeletionRequest = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionRequest')
     ScheduleKeyDeletionResponse = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionResponse')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagException = Shapes::StructureShape.new(name: 'TagException')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagKeyType = Shapes::StringShape.new(name: 'TagKeyType')
+    TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagValueType = Shapes::StringShape.new(name: 'TagValueType')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAliasRequest = Shapes::StructureShape.new(name: 'UpdateAliasRequest')
     UpdateKeyDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateKeyDescriptionRequest')
     WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
@@ -160,6 +170,7 @@ module Aws::KMS
     CreateKeyRequest.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageType, location_name: "KeyUsage"))
     CreateKeyRequest.add_member(:origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "Origin"))
     CreateKeyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
+    CreateKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateKeyRequest.struct_class = Types::CreateKeyRequest
 
     CreateKeyResponse.add_member(:key_metadata, Shapes::ShapeRef.new(shape: KeyMetadata, location_name: "KeyMetadata"))
@@ -353,6 +364,16 @@ module Aws::KMS
     ListKeysResponse.add_member(:truncated, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Truncated"))
     ListKeysResponse.struct_class = Types::ListKeysResponse
 
+    ListResourceTagsRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    ListResourceTagsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
+    ListResourceTagsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
+    ListResourceTagsRequest.struct_class = Types::ListResourceTagsRequest
+
+    ListResourceTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ListResourceTagsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "NextMarker"))
+    ListResourceTagsResponse.add_member(:truncated, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Truncated"))
+    ListResourceTagsResponse.struct_class = Types::ListResourceTagsResponse
+
     ListRetirableGrantsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListRetirableGrantsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
     ListRetirableGrantsRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "RetiringPrincipal"))
@@ -394,6 +415,22 @@ module Aws::KMS
     ScheduleKeyDeletionResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
     ScheduleKeyDeletionResponse.add_member(:deletion_date, Shapes::ShapeRef.new(shape: DateType, location_name: "DeletionDate"))
     ScheduleKeyDeletionResponse.struct_class = Types::ScheduleKeyDeletionResponse
+
+    Tag.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKeyType, required: true, location_name: "TagKey"))
+    Tag.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValueType, required: true, location_name: "TagValue"))
+    Tag.struct_class = Types::Tag
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKeyType)
+
+    TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TagResourceRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    UntagResourceRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, required: true, location_name: "AliasName"))
     UpdateAliasRequest.add_member(:target_key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "TargetKeyId"))
@@ -474,6 +511,7 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagException)
       end)
 
       api.add_operation(:decrypt, Seahorse::Model::Operation.new.tap do |o|
@@ -781,6 +819,18 @@ module Aws::KMS
         )
       end)
 
+      api.add_operation(:list_resource_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResourceTags"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResourceTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResourceTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
+      end)
+
       api.add_operation(:list_retirable_grants, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRetirableGrants"
         o.http_method = "POST"
@@ -866,6 +916,33 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TagException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: TagException)
       end)
 
       api.add_operation(:update_alias, Seahorse::Model::Operation.new.tap do |o|

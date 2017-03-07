@@ -1408,7 +1408,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -1706,6 +1706,34 @@ module Aws::DynamoDB
     #
     class DescribeTableOutput < Struct.new(
       :table)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeTimeToLiveInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to be described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLiveInput AWS API Documentation
+    #
+    class DescribeTimeToLiveInput < Struct.new(
+      :table_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_to_live_description
+    #   @return [Types::TimeToLiveDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLiveOutput AWS API Documentation
+    #
+    class DescribeTimeToLiveOutput < Struct.new(
+      :time_to_live_description)
       include Aws::Structure
     end
 
@@ -3143,7 +3171,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -4675,6 +4703,54 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The description of the Time to Live (TTL) status on the specified
+    # table.
+    #
+    # @!attribute [rw] time_to_live_status
+    #   The Time to Live status for the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the Time to Live attribute for items in the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TimeToLiveDescription AWS API Documentation
+    #
+    class TimeToLiveDescription < Struct.new(
+      :time_to_live_status,
+      :attribute_name)
+      include Aws::Structure
+    end
+
+    # Represents the settings used to enable or disable Time to Live for the
+    # specified table.
+    #
+    # @note When making an API call, you may pass TimeToLiveSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         attribute_name: "TimeToLiveAttributeName", # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether Time To Live is to be enabled (true) or disabled
+    #   (false) on the table.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the Time to Live attribute used to store the expiration
+    #   time for items in the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TimeToLiveSpecification AWS API Documentation
+    #
+    class TimeToLiveSpecification < Struct.new(
+      :enabled,
+      :attribute_name)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceInput
     #   data as a hash:
     #
@@ -4831,17 +4907,17 @@ module Aws::DynamoDB
     #     `NONE`, then nothing is returned. (This setting is the default for
     #     `ReturnValues`.)
     #
-    #   * `ALL_OLD` - If `UpdateItem` overwrote an attribute name-value
-    #     pair, then the content of the old item is returned.
+    #   * `ALL_OLD` - Returns all of the attributes of the item, as they
+    #     appeared before the UpdateItem operation.
     #
-    #   * `UPDATED_OLD` - The old versions of only the updated attributes
-    #     are returned.
+    #   * `UPDATED_OLD` - Returns only the updated attributes, as they
+    #     appeared before the UpdateItem operation.
     #
-    #   * `ALL_NEW` - All of the attributes of the new version of the item
-    #     are returned.
+    #   * `ALL_NEW` - Returns all of the attributes of the item, as they
+    #     appear after the UpdateItem operation.
     #
-    #   * `UPDATED_NEW` - The new versions of only the updated attributes
-    #     are returned.
+    #   * `UPDATED_NEW` - Returns only the updated attributes, as they
+    #     appear after the UpdateItem operation.
     #
     #   There is no additional cost associated with requesting a return
     #   value aside from the small network and processing overhead of
@@ -4983,7 +5059,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -5271,6 +5347,47 @@ module Aws::DynamoDB
     #
     class UpdateTableOutput < Struct.new(
       :table_description)
+      include Aws::Structure
+    end
+
+    # Represents the input of an `UpdateTimeToLive` operation.
+    #
+    # @note When making an API call, you may pass UpdateTimeToLiveInput
+    #   data as a hash:
+    #
+    #       {
+    #         table_name: "TableName", # required
+    #         time_to_live_specification: { # required
+    #           enabled: false, # required
+    #           attribute_name: "TimeToLiveAttributeName", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table to be configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_to_live_specification
+    #   Represents the settings used to enable or disable Time to Live for
+    #   the specified table.
+    #   @return [Types::TimeToLiveSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLiveInput AWS API Documentation
+    #
+    class UpdateTimeToLiveInput < Struct.new(
+      :table_name,
+      :time_to_live_specification)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] time_to_live_specification
+    #   Represents the output of an `UpdateTimeToLive` operation.
+    #   @return [Types::TimeToLiveSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLiveOutput AWS API Documentation
+    #
+    class UpdateTimeToLiveOutput < Struct.new(
+      :time_to_live_specification)
       include Aws::Structure
     end
 

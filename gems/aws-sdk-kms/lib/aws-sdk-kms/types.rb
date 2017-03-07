@@ -268,6 +268,12 @@ module Aws::KMS
     #         key_usage: "ENCRYPT_DECRYPT", # accepts ENCRYPT_DECRYPT
     #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
     #         bypass_policy_lockout_safety_check: false,
+    #         tags: [
+    #           {
+    #             tag_key: "TagKeyType", # required
+    #             tag_value: "TagValueType", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] policy
@@ -277,14 +283,14 @@ module Aws::KMS
     #   `BypassPolicyLockoutSafetyCheck` to true, the policy must meet the
     #   following criteria:
     #
-    #   * It must allow the principal making the `CreateKey` request to make
-    #     a subsequent PutKeyPolicy request on the CMK. This reduces the
-    #     likelihood that the CMK becomes unmanageable. For more
+    #   * It must allow the principal that is making the `CreateKey` request
+    #     to make a subsequent PutKeyPolicy request on the CMK. This reduces
+    #     the likelihood that the CMK becomes unmanageable. For more
     #     information, refer to the scenario in the [Default Key Policy][1]
     #     section in the *AWS Key Management Service Developer Guide*.
     #
-    #   * The principal(s) specified in the key policy must exist and be
-    #     visible to AWS KMS. When you create a new AWS principal (for
+    #   * The principals that are specified in the key policy must exist and
+    #     be visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
     #     before specifying the new principal in a key policy because the
     #     new principal might not immediately be visible to AWS KMS. For
@@ -348,8 +354,8 @@ module Aws::KMS
     #   Guide*.
     #
     #   Use this parameter only when you include a policy in the request and
-    #   you intend to prevent the principal making the request from making a
-    #   subsequent PutKeyPolicy request on the CMK.
+    #   you intend to prevent the principal that is making the request from
+    #   making a subsequent PutKeyPolicy request on the CMK.
     #
     #   The default value is false.
     #
@@ -358,6 +364,16 @@ module Aws::KMS
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   @return [Boolean]
     #
+    # @!attribute [rw] tags
+    #   One or more tags. Each tag consists of a tag key and a tag value.
+    #   Tag keys and tag values are both required, but tag values can be
+    #   empty (null) strings.
+    #
+    #   Use this parameter to tag the CMK when it is created. Alternately,
+    #   you can omit this parameter and instead tag the CMK after it is
+    #   created using TagResource.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateKeyRequest AWS API Documentation
     #
     class CreateKeyRequest < Struct.new(
@@ -365,7 +381,8 @@ module Aws::KMS
       :description,
       :key_usage,
       :origin,
-      :bypass_policy_lockout_safety_check)
+      :bypass_policy_lockout_safety_check,
+      :tags)
       include Aws::Structure
     end
 
@@ -1413,9 +1430,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] limit
-    #   When paginating results, specify the maximum number of items to
-    #   return in the response. If additional items exist beyond the number
-    #   you specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to
@@ -1423,10 +1440,9 @@ module Aws::KMS
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesRequest AWS API Documentation
@@ -1442,16 +1458,15 @@ module Aws::KMS
     #   @return [Array<Types::AliasListEntry>]
     #
     # @!attribute [rw] next_marker
-    #   When `Truncated` is true, this value is present and contains the
-    #   value to use for the `Marker` parameter in a subsequent pagination
-    #   request.
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] truncated
-    #   A flag that indicates whether there are more items in the list. If
-    #   your results were truncated, you can use the `Marker` parameter to
-    #   make a subsequent pagination request to retrieve more items in the
-    #   list.
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To
+    #   retrieve more items, pass the value of the `NextMarker` element in
+    #   this response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListAliasesResponse AWS API Documentation
@@ -1473,9 +1488,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] limit
-    #   When paginating results, specify the maximum number of items to
-    #   return in the response. If additional items exist beyond the number
-    #   you specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to
@@ -1483,10 +1498,9 @@ module Aws::KMS
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -1514,16 +1528,15 @@ module Aws::KMS
     #   @return [Array<Types::GrantListEntry>]
     #
     # @!attribute [rw] next_marker
-    #   When `Truncated` is true, this value is present and contains the
-    #   value to use for the `Marker` parameter in a subsequent pagination
-    #   request.
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] truncated
-    #   A flag that indicates whether there are more items in the list. If
-    #   your results were truncated, you can use the `Marker` parameter to
-    #   make a subsequent pagination request to retrieve more items in the
-    #   list.
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To
+    #   retrieve more items, pass the value of the `NextMarker` element in
+    #   this response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsResponse AWS API Documentation
@@ -1556,9 +1569,9 @@ module Aws::KMS
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   When paginating results, specify the maximum number of items to
-    #   return in the response. If additional items exist beyond the number
-    #   you specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 1000, inclusive. If you do not include a value, it defaults to
@@ -1568,10 +1581,9 @@ module Aws::KMS
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesRequest AWS API Documentation
@@ -1589,16 +1601,15 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_marker
-    #   When `Truncated` is true, this value is present and contains the
-    #   value to use for the `Marker` parameter in a subsequent pagination
-    #   request.
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] truncated
-    #   A flag that indicates whether there are more items in the list. If
-    #   your results were truncated, you can use the `Marker` parameter to
-    #   make a subsequent pagination request to retrieve more items in the
-    #   list.
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To
+    #   retrieve more items, pass the value of the `NextMarker` element in
+    #   this response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeyPoliciesResponse AWS API Documentation
@@ -1619,9 +1630,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] limit
-    #   When paginating results, specify the maximum number of items to
-    #   return in the response. If additional items exist beyond the number
-    #   you specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 1000, inclusive. If you do not include a value, it defaults to
@@ -1629,10 +1640,9 @@ module Aws::KMS
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysRequest AWS API Documentation
@@ -1648,22 +1658,95 @@ module Aws::KMS
     #   @return [Array<Types::KeyListEntry>]
     #
     # @!attribute [rw] next_marker
-    #   When `Truncated` is true, this value is present and contains the
-    #   value to use for the `Marker` parameter in a subsequent pagination
-    #   request.
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] truncated
-    #   A flag that indicates whether there are more items in the list. If
-    #   your results were truncated, you can use the `Marker` parameter to
-    #   make a subsequent pagination request to retrieve more items in the
-    #   list.
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To
+    #   retrieve more items, pass the value of the `NextMarker` element in
+    #   this response to the `Marker` parameter in a subsequent request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListKeysResponse AWS API Documentation
     #
     class ListKeysResponse < Struct.new(
       :keys,
+      :next_marker,
+      :truncated)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListResourceTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KeyIdType", # required
+    #         limit: 1,
+    #         marker: "MarkerType",
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   A unique identifier for the CMK whose tags you are listing. You can
+    #   use the unique key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   Examples:
+    #
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
+    #
+    #   This value is optional. If you include a value, it must be between 1
+    #   and 50, inclusive. If you do not include a value, it defaults to 50.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
+    #
+    #   Do not attempt to construct this value. Use only the value of
+    #   `NextMarker` from the truncated response you just received.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsRequest AWS API Documentation
+    #
+    class ListResourceTagsRequest < Struct.new(
+      :key_id,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   A list of tags. Each tag consists of a tag key and a tag value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] next_marker
+    #   When `Truncated` is true, this element is present and contains the
+    #   value to use for the `Marker` parameter in a subsequent request.
+    #
+    #   Do not assume or infer any information from this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] truncated
+    #   A flag that indicates whether there are more items in the list. When
+    #   this value is true, the list in this response is truncated. To
+    #   retrieve more items, pass the value of the `NextMarker` element in
+    #   this response to the `Marker` parameter in a subsequent request.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTagsResponse AWS API Documentation
+    #
+    class ListResourceTagsResponse < Struct.new(
+      :tags,
       :next_marker,
       :truncated)
       include Aws::Structure
@@ -1679,9 +1762,9 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] limit
-    #   When paginating results, specify the maximum number of items to
-    #   return in the response. If additional items exist beyond the number
-    #   you specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to
@@ -1689,10 +1772,9 @@ module Aws::KMS
     #   @return [Integer]
     #
     # @!attribute [rw] marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #   @return [String]
     #
     # @!attribute [rw] retiring_principal
@@ -1754,14 +1836,15 @@ module Aws::KMS
     #   If you do not set `BypassPolicyLockoutSafetyCheck` to true, the
     #   policy must meet the following criteria:
     #
-    #   * It must allow the principal making the `PutKeyPolicy` request to
-    #     make a subsequent `PutKeyPolicy` request on the CMK. This reduces
-    #     the likelihood that the CMK becomes unmanageable. For more
-    #     information, refer to the scenario in the [Default Key Policy][1]
-    #     section in the *AWS Key Management Service Developer Guide*.
+    #   * It must allow the principal that is making the `PutKeyPolicy`
+    #     request to make a subsequent `PutKeyPolicy` request on the CMK.
+    #     This reduces the likelihood that the CMK becomes unmanageable. For
+    #     more information, refer to the scenario in the [Default Key
+    #     Policy][1] section in the *AWS Key Management Service Developer
+    #     Guide*.
     #
-    #   * The principal(s) specified in the key policy must exist and be
-    #     visible to AWS KMS. When you create a new AWS principal (for
+    #   * The principals that are specified in the key policy must exist and
+    #     be visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
     #     before specifying the new principal in a key policy because the
     #     new principal might not immediately be visible to AWS KMS. For
@@ -1789,8 +1872,8 @@ module Aws::KMS
     #   Guide*.
     #
     #   Use this parameter only when you intend to prevent the principal
-    #   making the request from making a subsequent `PutKeyPolicy` request
-    #   on the CMK.
+    #   that is making the request from making a subsequent `PutKeyPolicy`
+    #   request on the CMK.
     #
     #   The default value is false.
     #
@@ -2024,6 +2107,101 @@ module Aws::KMS
     class ScheduleKeyDeletionResponse < Struct.new(
       :key_id,
       :deletion_date)
+      include Aws::Structure
+    end
+
+    # A key-value pair. A tag consists of a tag key and a tag value. Tag
+    # keys and tag values are both required, but tag values can be empty
+    # (null) strings.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         tag_key: "TagKeyType", # required
+    #         tag_value: "TagValueType", # required
+    #       }
+    #
+    # @!attribute [rw] tag_key
+    #   The key of the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The value of the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Tag AWS API Documentation
+    #
+    class Tag < Struct.new(
+      :tag_key,
+      :tag_value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KeyIdType", # required
+    #         tags: [ # required
+    #           {
+    #             tag_key: "TagKeyType", # required
+    #             tag_value: "TagValueType", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   A unique identifier for the CMK you are tagging. You can use the
+    #   unique key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   Examples:
+    #
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   One or more tags. Each tag consists of a tag key and a tag value.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :key_id,
+      :tags)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         key_id: "KeyIdType", # required
+    #         tag_keys: ["TagKeyType"], # required
+    #       }
+    #
+    # @!attribute [rw] key_id
+    #   A unique identifier for the CMK from which you are removing tags.
+    #   You can use the unique key ID or the Amazon Resource Name (ARN) of
+    #   the CMK. Examples:
+    #
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   One or more tag keys. Specify only the tag keys, not the tag values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :key_id,
+      :tag_keys)
       include Aws::Structure
     end
 

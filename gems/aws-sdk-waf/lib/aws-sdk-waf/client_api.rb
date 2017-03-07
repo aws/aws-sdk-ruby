@@ -66,6 +66,7 @@ module Aws::WAF
     GetIPSetResponse = Shapes::StructureShape.new(name: 'GetIPSetResponse')
     GetRuleRequest = Shapes::StructureShape.new(name: 'GetRuleRequest')
     GetRuleResponse = Shapes::StructureShape.new(name: 'GetRuleResponse')
+    GetSampledRequestsMaxItems = Shapes::IntegerShape.new(name: 'GetSampledRequestsMaxItems')
     GetSampledRequestsRequest = Shapes::StructureShape.new(name: 'GetSampledRequestsRequest')
     GetSampledRequestsResponse = Shapes::StructureShape.new(name: 'GetSampledRequestsResponse')
     GetSizeConstraintSetRequest = Shapes::StructureShape.new(name: 'GetSizeConstraintSetRequest')
@@ -97,7 +98,6 @@ module Aws::WAF
     ListByteMatchSetsResponse = Shapes::StructureShape.new(name: 'ListByteMatchSetsResponse')
     ListIPSetsRequest = Shapes::StructureShape.new(name: 'ListIPSetsRequest')
     ListIPSetsResponse = Shapes::StructureShape.new(name: 'ListIPSetsResponse')
-    ListMaxItems = Shapes::IntegerShape.new(name: 'ListMaxItems')
     ListRulesRequest = Shapes::StructureShape.new(name: 'ListRulesRequest')
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListSizeConstraintSetsRequest = Shapes::StructureShape.new(name: 'ListSizeConstraintSetsRequest')
@@ -369,7 +369,7 @@ module Aws::WAF
     GetSampledRequestsRequest.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "WebAclId"))
     GetSampledRequestsRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "RuleId"))
     GetSampledRequestsRequest.add_member(:time_window, Shapes::ShapeRef.new(shape: TimeWindow, required: true, location_name: "TimeWindow"))
-    GetSampledRequestsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: ListMaxItems, required: true, location_name: "MaxItems"))
+    GetSampledRequestsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: GetSampledRequestsMaxItems, required: true, location_name: "MaxItems"))
     GetSampledRequestsRequest.struct_class = Types::GetSampledRequestsRequest
 
     GetSampledRequestsResponse.add_member(:sampled_requests, Shapes::ShapeRef.new(shape: SampledHTTPRequests, location_name: "SampledRequests"))

@@ -26,6 +26,7 @@ module Aws::DynamoDBStreams
     GetRecordsOutput = Shapes::StructureShape.new(name: 'GetRecordsOutput')
     GetShardIteratorInput = Shapes::StructureShape.new(name: 'GetShardIteratorInput')
     GetShardIteratorOutput = Shapes::StructureShape.new(name: 'GetShardIteratorOutput')
+    Identity = Shapes::StructureShape.new(name: 'Identity')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     KeySchema = Shapes::ListShape.new(name: 'KeySchema')
     KeySchemaAttributeName = Shapes::StringShape.new(name: 'KeySchemaAttributeName')
@@ -107,6 +108,10 @@ module Aws::DynamoDBStreams
     GetShardIteratorOutput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, location_name: "ShardIterator"))
     GetShardIteratorOutput.struct_class = Types::GetShardIteratorOutput
 
+    Identity.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "PrincipalId"))
+    Identity.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
+    Identity.struct_class = Types::Identity
+
     KeySchema.member = Shapes::ShapeRef.new(shape: KeySchemaElement)
 
     KeySchemaElement.add_member(:attribute_name, Shapes::ShapeRef.new(shape: KeySchemaAttributeName, required: true, location_name: "AttributeName"))
@@ -135,6 +140,7 @@ module Aws::DynamoDBStreams
     Record.add_member(:event_source, Shapes::ShapeRef.new(shape: String, location_name: "eventSource"))
     Record.add_member(:aws_region, Shapes::ShapeRef.new(shape: String, location_name: "awsRegion"))
     Record.add_member(:dynamodb, Shapes::ShapeRef.new(shape: StreamRecord, location_name: "dynamodb"))
+    Record.add_member(:user_identity, Shapes::ShapeRef.new(shape: Identity, location_name: "userIdentity"))
     Record.struct_class = Types::Record
 
     RecordList.member = Shapes::ShapeRef.new(shape: Record)

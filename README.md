@@ -257,11 +257,12 @@ to be backwards compatible.
 | AWS IoT                             | Aws::IoT                          | aws-sdk-iot                          | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                 | aws-sdk-iotdataplane                 | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                          | aws-sdk-kms                          | 2014-11-01  |
-| AWS Lambda                          | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
 | AWS Lambda                          | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
+| AWS Lambda                          | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics | aws-sdk-marketplacecommerceanalytics | 2015-07-01  |
 | AWS OpsWorks                        | Aws::OpsWorks                     | aws-sdk-opsworks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | Aws::OpsWorksCM                   | aws-sdk-opsworkscm                   | 2016-11-01  |
+| AWS Organizations                   | Aws::Organizations                | aws-sdk-organizations                | 2016-11-28  |
 | AWS Security Token Service          | Aws::STS                          | aws-sdk-core                         | 2011-06-15  |
 | AWS Server Migration Service        | Aws::SMS                          | aws-sdk-sms                          | 2016-10-24  |
 | AWS Service Catalog                 | Aws::ServiceCatalog               | aws-sdk-servicecatalog               | 2015-12-10  |
@@ -275,6 +276,7 @@ to be backwards compatible.
 | AWSMarketplace Metering             | Aws::MarketplaceMetering          | aws-sdk-marketplacemetering          | 2016-01-14  |
 | Amazon API Gateway                  | Aws::APIGateway                   | aws-sdk-apigateway                   | 2015-07-09  |
 | Amazon AppStream                    | Aws::AppStream                    | aws-sdk-appstream                    | 2016-12-01  |
+| Amazon CloudDirectory               | Aws::CloudDirectory               | aws-sdk-clouddirectory               | 2016-05-10  |
 | Amazon CloudFront                   | Aws::CloudFront                   | aws-sdk-cloudfront                   | 2016-11-25  |
 | Amazon CloudHSM                     | Aws::CloudHSM                     | aws-sdk-cloudhsm                     | 2014-05-30  |
 | Amazon CloudSearch                  | Aws::CloudSearch                  | aws-sdk-cloudsearch                  | 2013-01-01  |
@@ -302,8 +304,10 @@ to be backwards compatible.
 | Amazon Kinesis                      | Aws::Kinesis                      | aws-sdk-kinesis                      | 2013-12-02  |
 | Amazon Kinesis Analytics            | Aws::KinesisAnalytics             | aws-sdk-kinesisanalytics             | 2015-08-14  |
 | Amazon Kinesis Firehose             | Aws::Firehose                     | aws-sdk-firehose                     | 2015-08-04  |
+| Amazon Lex Runtime Service          | Aws::LexRuntimeService            | aws-sdk-lexruntimeservice            | 2016-11-28  |
 | Amazon Lightsail                    | Aws::Lightsail                    | aws-sdk-lightsail                    | 2016-11-28  |
 | Amazon Machine Learning             | Aws::MachineLearning              | aws-sdk-machinelearning              | 2014-12-12  |
+| Amazon Mechanical Turk              | Aws::MTurk                        | aws-sdk-mturk                        | 2017-01-17  |
 | Amazon Pinpoint                     | Aws::Pinpoint                     | aws-sdk-pinpoint                     | 2016-12-01  |
 | Amazon Polly                        | Aws::Polly                        | aws-sdk-polly                        | 2016-06-10  |
 | Amazon Redshift                     | Aws::Redshift                     | aws-sdk-redshift                     | 2012-12-01  |

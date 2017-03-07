@@ -2232,6 +2232,12 @@ module Aws::IAM
     #   GetContextKeysForCustomPolicy or GetContextKeysForPrincipalPolicy.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] organizations_decision_detail
+    #   A structure that details how AWS Organizations and its service
+    #   control policies affect the results of the simulation. Only applies
+    #   if the simulated user's account is part of an organization.
+    #   @return [Types::OrganizationsDecisionDetail]
+    #
     # @!attribute [rw] eval_decision_details
     #   Additional details about the results of the evaluation decision.
     #   When there are both IAM policies and resource policies, this
@@ -2259,6 +2265,7 @@ module Aws::IAM
       :eval_decision,
       :matched_statements,
       :missing_context_values,
+      :organizations_decision_detail,
       :eval_decision_details,
       :resource_specific_results)
       include Aws::Structure
@@ -5762,6 +5769,22 @@ module Aws::IAM
     #
     class OpenIDConnectProviderListEntry < Struct.new(
       :arn)
+      include Aws::Structure
+    end
+
+    # Contains information about AWS Organizations's affect on a policy
+    # simulation.
+    #
+    # @!attribute [rw] allowed_by_organizations
+    #   Specifies whether the simulated action is allowed by the AWS
+    #   Organizations service control policies that impact the simulated
+    #   user's account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationsDecisionDetail AWS API Documentation
+    #
+    class OrganizationsDecisionDetail < Struct.new(
+      :allowed_by_organizations)
       include Aws::Structure
     end
 

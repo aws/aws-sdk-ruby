@@ -410,14 +410,14 @@ module Aws::KMS
     #   `BypassPolicyLockoutSafetyCheck` to true, the policy must meet the
     #   following criteria:
     #
-    #   * It must allow the principal making the `CreateKey` request to make a
-    #     subsequent PutKeyPolicy request on the CMK. This reduces the
-    #     likelihood that the CMK becomes unmanageable. For more information,
-    #     refer to the scenario in the [Default Key Policy][1] section in the
-    #     *AWS Key Management Service Developer Guide*.
+    #   * It must allow the principal that is making the `CreateKey` request
+    #     to make a subsequent PutKeyPolicy request on the CMK. This reduces
+    #     the likelihood that the CMK becomes unmanageable. For more
+    #     information, refer to the scenario in the [Default Key Policy][1]
+    #     section in the *AWS Key Management Service Developer Guide*.
     #
-    #   * The principal(s) specified in the key policy must exist and be
-    #     visible to AWS KMS. When you create a new AWS principal (for
+    #   * The principals that are specified in the key policy must exist and
+    #     be visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
     #     before specifying the new principal in a key policy because the new
     #     principal might not immediately be visible to AWS KMS. For more
@@ -475,14 +475,23 @@ module Aws::KMS
     #   Guide*.
     #
     #   Use this parameter only when you include a policy in the request and
-    #   you intend to prevent the principal making the request from making a
-    #   subsequent PutKeyPolicy request on the CMK.
+    #   you intend to prevent the principal that is making the request from
+    #   making a subsequent PutKeyPolicy request on the CMK.
     #
     #   The default value is false.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   One or more tags. Each tag consists of a tag key and a tag value. Tag
+    #   keys and tag values are both required, but tag values can be empty
+    #   (null) strings.
+    #
+    #   Use this parameter to tag the CMK when it is created. Alternately, you
+    #   can omit this parameter and instead tag the CMK after it is created
+    #   using TagResource.
     #
     # @return [Types::CreateKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -496,6 +505,12 @@ module Aws::KMS
     #     key_usage: "ENCRYPT_DECRYPT", # accepts ENCRYPT_DECRYPT
     #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
     #     bypass_policy_lockout_safety_check: false,
+    #     tags: [
+    #       {
+    #         tag_key: "TagKeyType", # required
+    #         tag_value: "TagValueType", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1447,18 +1462,17 @@ module Aws::KMS
     # Lists all of the key aliases in the account.
     #
     # @option params [Integer] :limit
-    #   When paginating results, specify the maximum number of items to return
-    #   in the response. If additional items exist beyond the number you
-    #   specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to 50.
     #
     # @option params [String] :marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #
     # @return [Types::ListAliasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1494,18 +1508,17 @@ module Aws::KMS
     # List the grants for a specified key.
     #
     # @option params [Integer] :limit
-    #   When paginating results, specify the maximum number of items to return
-    #   in the response. If additional items exist beyond the number you
-    #   specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to 50.
     #
     # @option params [String] :marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #
     # @option params [required, String] :key_id
     #   A unique identifier for the customer master key. This value can be a
@@ -1571,9 +1584,9 @@ module Aws::KMS
     #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
     #
     # @option params [Integer] :limit
-    #   When paginating results, specify the maximum number of items to return
-    #   in the response. If additional items exist beyond the number you
-    #   specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 1000, inclusive. If you do not include a value, it defaults to
@@ -1582,10 +1595,9 @@ module Aws::KMS
     #   Currently only 1 policy can be attached to a key.
     #
     # @option params [String] :marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #
     # @return [Types::ListKeyPoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1620,19 +1632,18 @@ module Aws::KMS
     # Lists the customer master keys.
     #
     # @option params [Integer] :limit
-    #   When paginating results, specify the maximum number of items to return
-    #   in the response. If additional items exist beyond the number you
-    #   specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 1000, inclusive. If you do not include a value, it defaults to
     #   100.
     #
     # @option params [String] :marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #
     # @return [Types::ListKeysResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1664,6 +1675,66 @@ module Aws::KMS
       req.send_request(options)
     end
 
+    # Returns a list of all tags for the specified customer master key
+    # (CMK).
+    #
+    # @option params [required, String] :key_id
+    #   A unique identifier for the CMK whose tags you are listing. You can
+    #   use the unique key ID or the Amazon Resource Name (ARN) of the CMK.
+    #   Examples:
+    #
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    # @option params [Integer] :limit
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
+    #
+    #   This value is optional. If you include a value, it must be between 1
+    #   and 50, inclusive. If you do not include a value, it defaults to 50.
+    #
+    # @option params [String] :marker
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
+    #
+    #   Do not attempt to construct this value. Use only the value of
+    #   `NextMarker` from the truncated response you just received.
+    #
+    # @return [Types::ListResourceTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListResourceTagsResponse#tags #tags} => Array&lt;Types::Tag&gt;
+    #   * {Types::ListResourceTagsResponse#next_marker #next_marker} => String
+    #   * {Types::ListResourceTagsResponse#truncated #truncated} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_resource_tags({
+    #     key_id: "KeyIdType", # required
+    #     limit: 1,
+    #     marker: "MarkerType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Array
+    #   resp.tags[0].tag_key #=> String
+    #   resp.tags[0].tag_value #=> String
+    #   resp.next_marker #=> String
+    #   resp.truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListResourceTags AWS API Documentation
+    #
+    # @overload list_resource_tags(params = {})
+    # @param [Hash] params ({})
+    def list_resource_tags(params = {}, options = {})
+      req = build_request(:list_resource_tags, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all grants for which the grant's
     # `RetiringPrincipal` matches the one specified.
     #
@@ -1671,18 +1742,17 @@ module Aws::KMS
     # retire a grant, use RetireGrant.
     #
     # @option params [Integer] :limit
-    #   When paginating results, specify the maximum number of items to return
-    #   in the response. If additional items exist beyond the number you
-    #   specify, the `Truncated` element in the response is set to true.
+    #   Use this parameter to specify the maximum number of items to return.
+    #   When this value is present, AWS KMS does not return more than the
+    #   specified number of items, but it might return fewer.
     #
     #   This value is optional. If you include a value, it must be between 1
     #   and 100, inclusive. If you do not include a value, it defaults to 50.
     #
     # @option params [String] :marker
-    #   Use this parameter only when paginating results and only in a
-    #   subsequent request after you receive a response with truncated
-    #   results. Set it to the value of `NextMarker` from the response you
-    #   just received.
+    #   Use this parameter in a subsequent request after you receive a
+    #   response with truncated results. Set it to the value of `NextMarker`
+    #   from the truncated response you just received.
     #
     # @option params [required, String] :retiring_principal
     #   The retiring principal for which to list grants.
@@ -1772,14 +1842,14 @@ module Aws::KMS
     #   If you do not set `BypassPolicyLockoutSafetyCheck` to true, the policy
     #   must meet the following criteria:
     #
-    #   * It must allow the principal making the `PutKeyPolicy` request to
-    #     make a subsequent `PutKeyPolicy` request on the CMK. This reduces
-    #     the likelihood that the CMK becomes unmanageable. For more
+    #   * It must allow the principal that is making the `PutKeyPolicy`
+    #     request to make a subsequent `PutKeyPolicy` request on the CMK. This
+    #     reduces the likelihood that the CMK becomes unmanageable. For more
     #     information, refer to the scenario in the [Default Key Policy][1]
     #     section in the *AWS Key Management Service Developer Guide*.
     #
-    #   * The principal(s) specified in the key policy must exist and be
-    #     visible to AWS KMS. When you create a new AWS principal (for
+    #   * The principals that are specified in the key policy must exist and
+    #     be visible to AWS KMS. When you create a new AWS principal (for
     #     example, an IAM user or role), you might need to enforce a delay
     #     before specifying the new principal in a key policy because the new
     #     principal might not immediately be visible to AWS KMS. For more
@@ -1804,9 +1874,9 @@ module Aws::KMS
     #   Policy][1] section in the *AWS Key Management Service Developer
     #   Guide*.
     #
-    #   Use this parameter only when you intend to prevent the principal
-    #   making the request from making a subsequent `PutKeyPolicy` request on
-    #   the CMK.
+    #   Use this parameter only when you intend to prevent the principal that
+    #   is making the request from making a subsequent `PutKeyPolicy` request
+    #   on the CMK.
     #
     #   The default value is false.
     #
@@ -2084,6 +2154,92 @@ module Aws::KMS
       req.send_request(options)
     end
 
+    # Adds or overwrites one or more tags for the specified customer master
+    # key (CMK).
+    #
+    # Each tag consists of a tag key and a tag value. Tag keys and tag
+    # values are both required, but tag values can be empty (null) strings.
+    #
+    # You cannot use the same tag key more than once per CMK. For example,
+    # consider a CMK with one tag whose tag key is `Purpose` and tag value
+    # is `Test`. If you send a `TagResource` request for this CMK with a tag
+    # key of `Purpose` and a tag value of `Prod`, it does not create a
+    # second tag. Instead, the original tag is overwritten with the new tag
+    # value.
+    #
+    # @option params [required, String] :key_id
+    #   A unique identifier for the CMK you are tagging. You can use the
+    #   unique key ID or the Amazon Resource Name (ARN) of the CMK. Examples:
+    #
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    # @option params [required, Array<Types::Tag>] :tags
+    #   One or more tags. Each tag consists of a tag key and a tag value.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     key_id: "KeyIdType", # required
+    #     tags: [ # required
+    #       {
+    #         tag_key: "TagKeyType", # required
+    #         tag_value: "TagValueType", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes the specified tag or tags from the specified customer master
+    # key (CMK).
+    #
+    # To remove a tag, you specify the tag key for each tag to remove. You
+    # do not specify the tag value. To overwrite the tag value for an
+    # existing tag, use TagResource.
+    #
+    # @option params [required, String] :key_id
+    #   A unique identifier for the CMK from which you are removing tags. You
+    #   can use the unique key ID or the Amazon Resource Name (ARN) of the
+    #   CMK. Examples:
+    #
+    #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   One or more tag keys. Specify only the tag keys, not the tag values.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     key_id: "KeyIdType", # required
+    #     tag_keys: ["TagKeyType"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an alias to map it to a different key.
     #
     # An alias is not a property of a key. Therefore, an alias can be mapped
@@ -2182,7 +2338,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

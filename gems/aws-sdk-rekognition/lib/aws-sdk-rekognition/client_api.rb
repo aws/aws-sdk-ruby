@@ -12,6 +12,7 @@ module Aws::Rekognition
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AgeRange = Shapes::StructureShape.new(name: 'AgeRange')
     Attribute = Shapes::StringShape.new(name: 'Attribute')
     Attributes = Shapes::ListShape.new(name: 'Attributes')
     Beard = Shapes::StructureShape.new(name: 'Beard')
@@ -100,6 +101,10 @@ module Aws::Rekognition
     Sunglasses = Shapes::StructureShape.new(name: 'Sunglasses')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     UInteger = Shapes::IntegerShape.new(name: 'UInteger')
+
+    AgeRange.add_member(:low, Shapes::ShapeRef.new(shape: UInteger, location_name: "Low"))
+    AgeRange.add_member(:high, Shapes::ShapeRef.new(shape: UInteger, location_name: "High"))
+    AgeRange.struct_class = Types::AgeRange
 
     Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
@@ -197,6 +202,7 @@ module Aws::Rekognition
     Face.struct_class = Types::Face
 
     FaceDetail.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    FaceDetail.add_member(:age_range, Shapes::ShapeRef.new(shape: AgeRange, location_name: "AgeRange"))
     FaceDetail.add_member(:smile, Shapes::ShapeRef.new(shape: Smile, location_name: "Smile"))
     FaceDetail.add_member(:eyeglasses, Shapes::ShapeRef.new(shape: Eyeglasses, location_name: "Eyeglasses"))
     FaceDetail.add_member(:sunglasses, Shapes::ShapeRef.new(shape: Sunglasses, location_name: "Sunglasses"))

@@ -14,6 +14,8 @@ module Aws::ElasticsearchService
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessPoliciesStatus = Shapes::StructureShape.new(name: 'AccessPoliciesStatus')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
+    AdditionalLimit = Shapes::StructureShape.new(name: 'AdditionalLimit')
+    AdditionalLimitList = Shapes::ListShape.new(name: 'AdditionalLimitList')
     AdvancedOptions = Shapes::MapShape.new(name: 'AdvancedOptions')
     AdvancedOptionsStatus = Shapes::StructureShape.new(name: 'AdvancedOptionsStatus')
     BaseException = Shapes::StructureShape.new(name: 'BaseException')
@@ -28,6 +30,8 @@ module Aws::ElasticsearchService
     DescribeElasticsearchDomainResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainResponse')
     DescribeElasticsearchDomainsRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainsRequest')
     DescribeElasticsearchDomainsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainsResponse')
+    DescribeElasticsearchInstanceTypeLimitsRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsRequest')
+    DescribeElasticsearchInstanceTypeLimitsResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchInstanceTypeLimitsResponse')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DomainId = Shapes::StringShape.new(name: 'DomainId')
     DomainInfo = Shapes::StructureShape.new(name: 'DomainInfo')
@@ -42,16 +46,34 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig = Shapes::StructureShape.new(name: 'ElasticsearchDomainConfig')
     ElasticsearchDomainStatus = Shapes::StructureShape.new(name: 'ElasticsearchDomainStatus')
     ElasticsearchDomainStatusList = Shapes::ListShape.new(name: 'ElasticsearchDomainStatusList')
+    ElasticsearchInstanceTypeList = Shapes::ListShape.new(name: 'ElasticsearchInstanceTypeList')
+    ElasticsearchVersionList = Shapes::ListShape.new(name: 'ElasticsearchVersionList')
     ElasticsearchVersionStatus = Shapes::StructureShape.new(name: 'ElasticsearchVersionStatus')
     ElasticsearchVersionString = Shapes::StringShape.new(name: 'ElasticsearchVersionString')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    InstanceCountLimits = Shapes::StructureShape.new(name: 'InstanceCountLimits')
+    InstanceLimits = Shapes::StructureShape.new(name: 'InstanceLimits')
+    InstanceRole = Shapes::StringShape.new(name: 'InstanceRole')
     IntegerClass = Shapes::IntegerShape.new(name: 'IntegerClass')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidTypeException = Shapes::StructureShape.new(name: 'InvalidTypeException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    LimitName = Shapes::StringShape.new(name: 'LimitName')
+    LimitValue = Shapes::StringShape.new(name: 'LimitValue')
+    LimitValueList = Shapes::ListShape.new(name: 'LimitValueList')
+    Limits = Shapes::StructureShape.new(name: 'Limits')
+    LimitsByRole = Shapes::MapShape.new(name: 'LimitsByRole')
     ListDomainNamesResponse = Shapes::StructureShape.new(name: 'ListDomainNamesResponse')
+    ListElasticsearchInstanceTypesRequest = Shapes::StructureShape.new(name: 'ListElasticsearchInstanceTypesRequest')
+    ListElasticsearchInstanceTypesResponse = Shapes::StructureShape.new(name: 'ListElasticsearchInstanceTypesResponse')
+    ListElasticsearchVersionsRequest = Shapes::StructureShape.new(name: 'ListElasticsearchVersionsRequest')
+    ListElasticsearchVersionsResponse = Shapes::StructureShape.new(name: 'ListElasticsearchVersionsResponse')
     ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
     ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
+    MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
+    MinimumInstanceCount = Shapes::IntegerShape.new(name: 'MinimumInstanceCount')
+    NextToken = Shapes::StringShape.new(name: 'NextToken')
     OptionState = Shapes::StringShape.new(name: 'OptionState')
     OptionStatus = Shapes::StructureShape.new(name: 'OptionStatus')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
@@ -61,6 +83,12 @@ module Aws::ElasticsearchService
     ServiceUrl = Shapes::StringShape.new(name: 'ServiceUrl')
     SnapshotOptions = Shapes::StructureShape.new(name: 'SnapshotOptions')
     SnapshotOptionsStatus = Shapes::StructureShape.new(name: 'SnapshotOptionsStatus')
+    StorageSubTypeName = Shapes::StringShape.new(name: 'StorageSubTypeName')
+    StorageType = Shapes::StructureShape.new(name: 'StorageType')
+    StorageTypeLimit = Shapes::StructureShape.new(name: 'StorageTypeLimit')
+    StorageTypeLimitList = Shapes::ListShape.new(name: 'StorageTypeLimitList')
+    StorageTypeList = Shapes::ListShape.new(name: 'StorageTypeList')
+    StorageTypeName = Shapes::StringShape.new(name: 'StorageTypeName')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -81,6 +109,12 @@ module Aws::ElasticsearchService
     AddTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ARN"))
     AddTagsRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
     AddTagsRequest.struct_class = Types::AddTagsRequest
+
+    AdditionalLimit.add_member(:limit_name, Shapes::ShapeRef.new(shape: LimitName, location_name: "LimitName"))
+    AdditionalLimit.add_member(:limit_values, Shapes::ShapeRef.new(shape: LimitValueList, location_name: "LimitValues"))
+    AdditionalLimit.struct_class = Types::AdditionalLimit
+
+    AdditionalLimitList.member = Shapes::ShapeRef.new(shape: AdditionalLimit)
 
     AdvancedOptions.key = Shapes::ShapeRef.new(shape: String)
     AdvancedOptions.value = Shapes::ShapeRef.new(shape: String)
@@ -124,6 +158,14 @@ module Aws::ElasticsearchService
 
     DescribeElasticsearchDomainsResponse.add_member(:domain_status_list, Shapes::ShapeRef.new(shape: ElasticsearchDomainStatusList, required: true, location_name: "DomainStatusList"))
     DescribeElasticsearchDomainsResponse.struct_class = Types::DescribeElasticsearchDomainsResponse
+
+    DescribeElasticsearchInstanceTypeLimitsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
+    DescribeElasticsearchInstanceTypeLimitsRequest.add_member(:instance_type, Shapes::ShapeRef.new(shape: ESPartitionInstanceType, required: true, location: "uri", location_name: "InstanceType"))
+    DescribeElasticsearchInstanceTypeLimitsRequest.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location: "uri", location_name: "ElasticsearchVersion"))
+    DescribeElasticsearchInstanceTypeLimitsRequest.struct_class = Types::DescribeElasticsearchInstanceTypeLimitsRequest
+
+    DescribeElasticsearchInstanceTypeLimitsResponse.add_member(:limits_by_role, Shapes::ShapeRef.new(shape: LimitsByRole, location_name: "LimitsByRole"))
+    DescribeElasticsearchInstanceTypeLimitsResponse.struct_class = Types::DescribeElasticsearchInstanceTypeLimitsResponse
 
     DomainInfo.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     DomainInfo.struct_class = Types::DomainInfo
@@ -179,12 +221,51 @@ module Aws::ElasticsearchService
 
     ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
 
+    ElasticsearchInstanceTypeList.member = Shapes::ShapeRef.new(shape: ESPartitionInstanceType)
+
+    ElasticsearchVersionList.member = Shapes::ShapeRef.new(shape: ElasticsearchVersionString)
+
     ElasticsearchVersionStatus.add_member(:options, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location_name: "Options"))
     ElasticsearchVersionStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     ElasticsearchVersionStatus.struct_class = Types::ElasticsearchVersionStatus
 
+    InstanceCountLimits.add_member(:minimum_instance_count, Shapes::ShapeRef.new(shape: MinimumInstanceCount, location_name: "MinimumInstanceCount"))
+    InstanceCountLimits.add_member(:maximum_instance_count, Shapes::ShapeRef.new(shape: MaximumInstanceCount, location_name: "MaximumInstanceCount"))
+    InstanceCountLimits.struct_class = Types::InstanceCountLimits
+
+    InstanceLimits.add_member(:instance_count_limits, Shapes::ShapeRef.new(shape: InstanceCountLimits, location_name: "InstanceCountLimits"))
+    InstanceLimits.struct_class = Types::InstanceLimits
+
+    LimitValueList.member = Shapes::ShapeRef.new(shape: LimitValue)
+
+    Limits.add_member(:storage_types, Shapes::ShapeRef.new(shape: StorageTypeList, location_name: "StorageTypes"))
+    Limits.add_member(:instance_limits, Shapes::ShapeRef.new(shape: InstanceLimits, location_name: "InstanceLimits"))
+    Limits.add_member(:additional_limits, Shapes::ShapeRef.new(shape: AdditionalLimitList, location_name: "AdditionalLimits"))
+    Limits.struct_class = Types::Limits
+
+    LimitsByRole.key = Shapes::ShapeRef.new(shape: InstanceRole)
+    LimitsByRole.value = Shapes::ShapeRef.new(shape: Limits)
+
     ListDomainNamesResponse.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainInfoList, location_name: "DomainNames"))
     ListDomainNamesResponse.struct_class = Types::ListDomainNamesResponse
+
+    ListElasticsearchInstanceTypesRequest.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location: "uri", location_name: "ElasticsearchVersion"))
+    ListElasticsearchInstanceTypesRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location: "querystring", location_name: "domainName"))
+    ListElasticsearchInstanceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListElasticsearchInstanceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListElasticsearchInstanceTypesRequest.struct_class = Types::ListElasticsearchInstanceTypesRequest
+
+    ListElasticsearchInstanceTypesResponse.add_member(:elasticsearch_instance_types, Shapes::ShapeRef.new(shape: ElasticsearchInstanceTypeList, location_name: "ElasticsearchInstanceTypes"))
+    ListElasticsearchInstanceTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListElasticsearchInstanceTypesResponse.struct_class = Types::ListElasticsearchInstanceTypesResponse
+
+    ListElasticsearchVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListElasticsearchVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListElasticsearchVersionsRequest.struct_class = Types::ListElasticsearchVersionsRequest
+
+    ListElasticsearchVersionsResponse.add_member(:elasticsearch_versions, Shapes::ShapeRef.new(shape: ElasticsearchVersionList, location_name: "ElasticsearchVersions"))
+    ListElasticsearchVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListElasticsearchVersionsResponse.struct_class = Types::ListElasticsearchVersionsResponse
 
     ListTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "arn"))
     ListTagsRequest.struct_class = Types::ListTagsRequest
@@ -209,6 +290,19 @@ module Aws::ElasticsearchService
     SnapshotOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: SnapshotOptions, required: true, location_name: "Options"))
     SnapshotOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     SnapshotOptionsStatus.struct_class = Types::SnapshotOptionsStatus
+
+    StorageType.add_member(:storage_type_name, Shapes::ShapeRef.new(shape: StorageTypeName, location_name: "StorageTypeName"))
+    StorageType.add_member(:storage_sub_type_name, Shapes::ShapeRef.new(shape: StorageSubTypeName, location_name: "StorageSubTypeName"))
+    StorageType.add_member(:storage_type_limits, Shapes::ShapeRef.new(shape: StorageTypeLimitList, location_name: "StorageTypeLimits"))
+    StorageType.struct_class = Types::StorageType
+
+    StorageTypeLimit.add_member(:limit_name, Shapes::ShapeRef.new(shape: LimitName, location_name: "LimitName"))
+    StorageTypeLimit.add_member(:limit_values, Shapes::ShapeRef.new(shape: LimitValueList, location_name: "LimitValues"))
+    StorageTypeLimit.struct_class = Types::StorageTypeLimit
+
+    StorageTypeLimitList.member = Shapes::ShapeRef.new(shape: StorageTypeLimit)
+
+    StorageTypeList.member = Shapes::ShapeRef.new(shape: StorageType)
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -316,6 +410,20 @@ module Aws::ElasticsearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:describe_elasticsearch_instance_type_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeElasticsearchInstanceTypeLimits"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/instanceTypeLimits/{ElasticsearchVersion}/{InstanceType}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeElasticsearchInstanceTypeLimitsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeElasticsearchInstanceTypeLimitsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:list_domain_names, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDomainNames"
         o.http_method = "GET"
@@ -324,6 +432,42 @@ module Aws::ElasticsearchService
         o.output = Shapes::ShapeRef.new(shape: ListDomainNamesResponse)
         o.errors << Shapes::ShapeRef.new(shape: BaseException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_elasticsearch_instance_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListElasticsearchInstanceTypes"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/instanceTypes/{ElasticsearchVersion}"
+        o.input = Shapes::ShapeRef.new(shape: ListElasticsearchInstanceTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListElasticsearchInstanceTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_elasticsearch_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListElasticsearchVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/versions"
+        o.input = Shapes::ShapeRef.new(shape: ListElasticsearchVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListElasticsearchVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|

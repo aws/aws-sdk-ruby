@@ -83,6 +83,7 @@ module Aws::ElasticLoadBalancingV2
     InvalidSecurityGroupException = Shapes::StructureShape.new(name: 'InvalidSecurityGroupException')
     InvalidSubnetException = Shapes::StructureShape.new(name: 'InvalidSubnetException')
     InvalidTargetException = Shapes::StructureShape.new(name: 'InvalidTargetException')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
     ListOfString = Shapes::ListShape.new(name: 'ListOfString')
     Listener = Shapes::StructureShape.new(name: 'Listener')
@@ -143,6 +144,8 @@ module Aws::ElasticLoadBalancingV2
     SSLPolicyNotFoundException = Shapes::StructureShape.new(name: 'SSLPolicyNotFoundException')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
+    SetIpAddressTypeInput = Shapes::StructureShape.new(name: 'SetIpAddressTypeInput')
+    SetIpAddressTypeOutput = Shapes::StructureShape.new(name: 'SetIpAddressTypeOutput')
     SetRulePrioritiesInput = Shapes::StructureShape.new(name: 'SetRulePrioritiesInput')
     SetRulePrioritiesOutput = Shapes::StructureShape.new(name: 'SetRulePrioritiesOutput')
     SetSecurityGroupsInput = Shapes::StructureShape.new(name: 'SetSecurityGroupsInput')
@@ -245,6 +248,7 @@ module Aws::ElasticLoadBalancingV2
     CreateLoadBalancerInput.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
     CreateLoadBalancerInput.add_member(:scheme, Shapes::ShapeRef.new(shape: LoadBalancerSchemeEnum, location_name: "Scheme"))
     CreateLoadBalancerInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateLoadBalancerInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     CreateLoadBalancerInput.struct_class = Types::CreateLoadBalancerInput
 
     CreateLoadBalancerOutput.add_member(:load_balancers, Shapes::ShapeRef.new(shape: LoadBalancers, location_name: "LoadBalancers"))
@@ -400,6 +404,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancer.add_member(:type, Shapes::ShapeRef.new(shape: LoadBalancerTypeEnum, location_name: "Type"))
     LoadBalancer.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
     LoadBalancer.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, location_name: "SecurityGroups"))
+    LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerArns.member = Shapes::ShapeRef.new(shape: LoadBalancerArn)
@@ -506,6 +511,13 @@ module Aws::ElasticLoadBalancingV2
     Rules.member = Shapes::ShapeRef.new(shape: Rule)
 
     SecurityGroups.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
+
+    SetIpAddressTypeInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, required: true, location_name: "LoadBalancerArn"))
+    SetIpAddressTypeInput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, required: true, location_name: "IpAddressType"))
+    SetIpAddressTypeInput.struct_class = Types::SetIpAddressTypeInput
+
+    SetIpAddressTypeOutput.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    SetIpAddressTypeOutput.struct_class = Types::SetIpAddressTypeOutput
 
     SetRulePrioritiesInput.add_member(:rule_priorities, Shapes::ShapeRef.new(shape: RulePriorityList, required: true, location_name: "RulePriorities"))
     SetRulePrioritiesInput.struct_class = Types::SetRulePrioritiesInput
@@ -924,6 +936,17 @@ module Aws::ElasticLoadBalancingV2
         o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: RuleNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+      end)
+
+      api.add_operation(:set_ip_address_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SetIpAddressType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: SetIpAddressTypeInput)
+        o.output = Shapes::ShapeRef.new(shape: SetIpAddressTypeOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetException)
       end)
 
       api.add_operation(:set_rule_priorities, Seahorse::Model::Operation.new.tap do |o|

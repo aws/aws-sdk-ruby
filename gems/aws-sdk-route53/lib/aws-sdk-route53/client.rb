@@ -217,6 +217,8 @@ module Aws::Route53
     # `/2013-04-01/hostedzone/Amazon Route 53 hosted Zone ID/rrset`
     # resource.
     #
+    # **Change Batches and Transactional Changes**
+    #
     # The request body must include a document with a
     # `ChangeResourceRecordSetsRequest` element. The request body contains a
     # list of change items, known as a change batch. Change batches are
@@ -239,7 +241,9 @@ module Aws::Route53
     # attempt to delete the same change batch more than once, Amazon Route
     # 53 returns an `InvalidChangeBatch` error.
     #
-    # <note markdown="1"> To create resource record sets for complex routing configurations, use
+    # **Traffic Flow**
+    #
+    # To create resource record sets for complex routing configurations, use
     # either the traffic flow visual editor in the Amazon Route 53 console
     # or the API actions for traffic policies and traffic policy instances.
     # Save the configuration as a traffic policy, then associate the traffic
@@ -250,7 +254,7 @@ module Aws::Route53
     # [Using Traffic Flow to Route DNS Traffic][1] in the *Amazon Route 53
     # Developer Guide*.
     #
-    #  </note>
+    # **Create, Delete, and Upsert**
     #
     # Use `ChangeResourceRecordsSetsRequest` to perform the following
     # actions:
@@ -265,41 +269,21 @@ module Aws::Route53
     #   creates it. If a resource set does exist, Amazon Route 53 updates it
     #   with the values in the request.
     #
-    # The values that you need to include in the request depend on the type
-    # of resource record set that you're creating, deleting, or updating:
+    # **Syntaxes for Creating, Updating, and Deleting Resource Record Sets**
     #
-    # **Basic resource record sets (excluding alias, failover, geolocation,
-    # latency, and weighted resource record sets)**
+    # The syntax for a request depends on the type of resource record set
+    # that you want to create, delete, or update, such as weighted, alias,
+    # or failover. The XML elements in your request must appear in the order
+    # listed in the syntax.
     #
-    # * `Name`
+    # For an example for each type of resource record set, see "Examples."
     #
-    # * `Type`
+    # Don't refer to the syntax in the "Parameter Syntax" section, which
+    # includes all of the elements for every kind of resource record set
+    # that you can create, delete, or update by using
+    # `ChangeResourceRecordSets`.
     #
-    # * `TTL`
-    #
-    # **Failover, geolocation, latency, or weighted resource record sets
-    # (excluding alias resource record sets)**
-    #
-    # * `Name`
-    #
-    # * `Type`
-    #
-    # * `TTL`
-    #
-    # * `SetIdentifier`
-    #
-    # **Alias resource record sets (including failover alias, geolocation
-    # alias, latency alias, and weighted alias resource record sets)**
-    #
-    # * `Name`
-    #
-    # * `Type`
-    #
-    # * `AliasTarget` (includes `DNSName`, `EvaluateTargetHealth`, and
-    #   `HostedZoneId`)
-    #
-    # * `SetIdentifier` (for failover, geolocation, latency, and weighted
-    #   resource record sets)
+    # **Change Propagation to Amazon Route 53 DNS Servers**
     #
     # When you submit a `ChangeResourceRecordSets` request, Amazon Route 53
     # propagates your changes to all of the Amazon Route 53 authoritative
@@ -307,7 +291,9 @@ module Aws::Route53
     # status of `PENDING`. When propagation is complete, `GetChange` returns
     # a status of `INSYNC`. Changes generally propagate to all Amazon Route
     # 53 name servers in a few minutes. In rare circumstances, propagation
-    # can take up to 30 minutes. For more information, see GetChange
+    # can take up to 30 minutes. For more information, see GetChange.
+    #
+    # **Limits on ChangeResourceRecordSets Requests**
     #
     # For information about the limits on a `ChangeResourceRecordSets`
     # request, see [Limits][2] in the *Amazon Route 53 Developer Guide*.
@@ -453,7 +439,7 @@ module Aws::Route53
     # For information about adding health checks to resource record sets,
     # see ResourceRecordSet$HealthCheckId in ChangeResourceRecordSets.
     #
-    # If you are registering EC2 instances with an Elastic Load Balancing
+    # If you're registering EC2 instances with an Elastic Load Balancing
     # (ELB) load balancer, do not create Amazon Route 53 health checks for
     # the EC2 instances. When you register an EC2 instance with a load
     # balancer, you configure settings for an ELB health check, which
@@ -1344,11 +1330,14 @@ module Aws::Route53
       req.send_request(options)
     end
 
-    # Retrieves a list of the IP ranges used by Amazon Route 53 health
-    # checkers to check the health of your resources. Send a `GET` request
-    # to the `/Amazon Route 53 API version/checkeripranges` resource. Use
-    # these IP addresses to configure router and firewall rules to allow
-    # health checkers to check the health of your resources.
+    # `GetCheckerIpRanges` still works, but we recommend that you download
+    # ip-ranges.json, which includes IP address ranges for all AWS services.
+    # For more information, see [IP Address Ranges of Amazon Route 53
+    # Servers][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html
     #
     # @return [Types::GetCheckerIpRangesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1569,69 +1558,16 @@ module Aws::Route53
     # this call to get a health check's current status.
     #
     # @option params [required, String] :health_check_id
-    #   If you want Amazon Route 53 to return this resource record set in
-    #   response to a DNS query only when a health check is passing, include
-    #   the `HealthCheckId` element and specify the ID of the applicable
-    #   health check.
+    #   The ID for the health check for which you want the current status.
+    #   When you created the health check, `CreateHealthCheck` returned the ID
+    #   in the response, in the `HealthCheckId` element.
     #
-    #   Amazon Route 53 determines whether a resource record set is healthy by
-    #   periodically sending a request to the endpoint that is specified in
-    #   the health check. If that endpoint returns an HTTP status code of 2xx
-    #   or 3xx, the endpoint is healthy. If the endpoint returns an HTTP
-    #   status code of 400 or greater, or if the endpoint doesn't respond for
-    #   a certain amount of time, Amazon Route 53 considers the endpoint
-    #   unhealthy and also considers the resource record set unhealthy.
+    #   <note markdown="1"> If you want to check the status of a calculated health check, you must
+    #   use the Amazon Route 53 console or the CloudWatch console. You can't
+    #   use `GetHealthCheckStatus` to get the status of a calculated health
+    #   check.
     #
-    #   The `HealthCheckId` element is only useful when Amazon Route 53 is
-    #   choosing between two or more resource record sets to respond to a DNS
-    #   query, and you want Amazon Route 53 to base the choice in part on the
-    #   status of a health check. Configuring health checks only makes sense
-    #   in the following configurations:
-    #
-    #   * You're checking the health of the resource record sets in a
-    #     weighted, latency, geolocation, or failover resource record set, and
-    #     you specify health check IDs for all of the resource record sets. If
-    #     the health check for one resource record set specifies an endpoint
-    #     that is not healthy, Amazon Route 53 stops responding to queries
-    #     using the value for that resource record set.
-    #
-    #   * You set `EvaluateTargetHealth` to `true` for the resource record
-    #     sets in an alias, weighted alias, latency alias, geolocation alias,
-    #     or failover alias resource record set, and you specify health check
-    #     IDs for all of the resource record sets that are referenced by the
-    #     alias resource record sets. For more information about this
-    #     configuration, see `EvaluateTargetHealth`.
-    #
-    #     Amazon Route 53 doesn't check the health of the endpoint specified
-    #     in the resource record set, for example, the endpoint specified by
-    #     the IP address in the `Value` element. When you add a
-    #     `HealthCheckId` element to a resource record set, Amazon Route 53
-    #     checks the health of the endpoint that you specified in the health
-    #     check.
-    #
-    #   For geolocation resource record sets, if an endpoint is unhealthy,
-    #   Amazon Route 53 looks for a resource record set for the larger,
-    #   associated geographic region. For example, suppose you have resource
-    #   record sets for a state in the United States, for the United States,
-    #   for North America, and for all locations. If the endpoint for the
-    #   state resource record set is unhealthy, Amazon Route 53 checks the
-    #   resource record sets for the United States, for North America, and for
-    #   all locations (a resource record set for which the value of
-    #   CountryCode is `*`), in that order, until it finds a resource record
-    #   set for which the endpoint is healthy.
-    #
-    #   If your health checks specify the endpoint only by domain name, we
-    #   recommend that you create a separate health check for each endpoint.
-    #   For example, create a health check for each HTTP server that is
-    #   serving content for www.example.com. For the value of
-    #   `FullyQualifiedDomainName`, specify the domain name of the server
-    #   (such as `us-east-1-www.example.com`), not the name of the resource
-    #   record sets (example.com).
-    #
-    #   In this configuration, if you create a health check for which the
-    #   value of `FullyQualifiedDomainName` matches the name of the resource
-    #   record sets and then associate the health check with those resource
-    #   record sets, health check results will be unpredictable.
+    #    </note>
     #
     # @return [Types::GetHealthCheckStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3420,6 +3356,17 @@ module Aws::Route53
     #   that is returned by DNS, Amazon Route 53 then checks the health of the
     #   endpoint.
     #
+    #   Use one of the following formats for the value of `IPAddress`\:
+    #
+    #   * **IPv4 address**\: four values between 0 and 255, separated by
+    #     periods (.), for example, `192.0.2.44`.
+    #
+    #   * **IPv6 address**\: eight groups of four hexadecimal values,
+    #     separated by colons (:), for example,
+    #     `2001:0db8:85a3:0000:0000:abcd:0001:2345`. You can also shorten IPv6
+    #     addresses as described in RFC 5952, for example,
+    #     `2001:db8:85a3::abcd:1:2345`.
+    #
     #   If the endpoint is an EC2 instance, we recommend that you create an
     #   Elastic IP address, associate it with your EC2 instance, and specify
     #   the Elastic IP address for `IPAddress`. This ensures that the IP
@@ -3526,7 +3473,7 @@ module Aws::Route53
     #   health check for each endpoint. For example, create a health check for
     #   each HTTP server that is serving content for www.example.com. For the
     #   value of `FullyQualifiedDomainName`, specify the domain name of the
-    #   server (such as `us-east-1-www.example.com`), not the name of the
+    #   server (such as `us-east-2-www.example.com`), not the name of the
     #   resource record sets (www.example.com).
     #
     #   In this configuration, if the value of `FullyQualifiedDomainName`
@@ -3553,6 +3500,9 @@ module Aws::Route53
     #   from unhealthy to healthy or vice versa. For more information, see
     #   [How Amazon Route 53 Determines Whether an Endpoint Is Healthy][1] in
     #   the *Amazon Route 53 Developer Guide*.
+    #
+    #   If you don't specify a value for `FailureThreshold`, the default
+    #   value is three health checks.
     #
     #
     #
@@ -3884,7 +3834,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

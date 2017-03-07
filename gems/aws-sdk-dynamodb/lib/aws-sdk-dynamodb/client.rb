@@ -1016,7 +1016,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -1441,6 +1441,36 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Gives a description of the Time to Live (TTL) status on the specified
+    # table.
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to be described.
+    #
+    # @return [Types::DescribeTimeToLiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTimeToLiveOutput#time_to_live_description #time_to_live_description} => Types::TimeToLiveDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_time_to_live({
+    #     table_name: "TableName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.time_to_live_description.time_to_live_status #=> String, one of "ENABLING", "DISABLING", "ENABLED", "DISABLED"
+    #   resp.time_to_live_description.attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLive AWS API Documentation
+    #
+    # @overload describe_time_to_live(params = {})
+    # @param [Hash] params ({})
+    def describe_time_to_live(params = {}, options = {})
+      req = build_request(:describe_time_to_live, params)
+      req.send_request(options)
+    end
+
     # The `GetItem` operation returns a set of attributes for the item with
     # the given primary key. If there is no matching item, `GetItem` does
     # not return any data and there will be no `Item` element in the
@@ -1821,7 +1851,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -2954,17 +2984,17 @@ module Aws::DynamoDB
     #     `NONE`, then nothing is returned. (This setting is the default for
     #     `ReturnValues`.)
     #
-    #   * `ALL_OLD` - If `UpdateItem` overwrote an attribute name-value pair,
-    #     then the content of the old item is returned.
+    #   * `ALL_OLD` - Returns all of the attributes of the item, as they
+    #     appeared before the UpdateItem operation.
     #
-    #   * `UPDATED_OLD` - The old versions of only the updated attributes are
-    #     returned.
+    #   * `UPDATED_OLD` - Returns only the updated attributes, as they
+    #     appeared before the UpdateItem operation.
     #
-    #   * `ALL_NEW` - All of the attributes of the new version of the item are
-    #     returned.
+    #   * `ALL_NEW` - Returns all of the attributes of the item, as they
+    #     appear after the UpdateItem operation.
     #
-    #   * `UPDATED_NEW` - The new versions of only the updated attributes are
-    #     returned.
+    #   * `UPDATED_NEW` - Returns only the updated attributes, as they appear
+    #     after the UpdateItem operation.
     #
     #   There is no additional cost associated with requesting a return value
     #   aside from the small network and processing overhead of receiving a
@@ -3094,7 +3124,7 @@ module Aws::DynamoDB
     #
     #     These function names are case-sensitive.
     #
-    #   * Comparison operators: ` = | <> | < | > | <= | >= | BETWEEN | IN`
+    #   * Comparison operators: `= | <> | < | > | <= | >= | BETWEEN | IN `
     #
     #   * Logical operators: `AND | OR | NOT`
     #
@@ -3426,6 +3456,78 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Specify the lifetime of individual table items. The database
+    # automatically removes the item at the expiration of the item. The
+    # UpdateTimeToLive method will enable or disable TTL for the specified
+    # table. A successful `UpdateTimeToLive` call returns the current
+    # `TimeToLiveSpecification`; it may take up to one hour for the change
+    # to fully process.
+    #
+    # TTL compares the current time in epoch time format to the time stored
+    # in the TTL attribute of an item. If the epoch time value stored in the
+    # attribute is less than the current time, the item is marked as expired
+    # and subsequently deleted.
+    #
+    # <note markdown="1"> The epoch time format is the number of seconds elapsed since 12:00:00
+    # AM January 1st, 1970 UTC.
+    #
+    #  </note>
+    #
+    # DynamoDB deletes expired items on a best-effort basis to ensure
+    # availability of throughput for other data operations.
+    #
+    # DynamoDB typically deletes expired items within two days of
+    # expiration. The exact duration within which an item gets deleted after
+    # expiration is specific to the nature of the workload. Items that have
+    # expired and not been deleted will still show up in reads, queries, and
+    # scans.
+    #
+    # As items are deleted, they are removed from any Local Secondary Index
+    # and Global Secondary Index immediately in the same eventually
+    # consistent way as a standard delete operation.
+    #
+    # For more information, see [Time To Live][1] in the Amazon DynamoDB
+    # Developer Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html
+    #
+    # @option params [required, String] :table_name
+    #   The name of the table to be configured.
+    #
+    # @option params [required, Types::TimeToLiveSpecification] :time_to_live_specification
+    #   Represents the settings used to enable or disable Time to Live for the
+    #   specified table.
+    #
+    # @return [Types::UpdateTimeToLiveOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTimeToLiveOutput#time_to_live_specification #time_to_live_specification} => Types::TimeToLiveSpecification
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_time_to_live({
+    #     table_name: "TableName", # required
+    #     time_to_live_specification: { # required
+    #       enabled: false, # required
+    #       attribute_name: "TimeToLiveAttributeName", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.time_to_live_specification.enabled #=> Boolean
+    #   resp.time_to_live_specification.attribute_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLive AWS API Documentation
+    #
+    # @overload update_time_to_live(params = {})
+    # @param [Hash] params ({})
+    def update_time_to_live(params = {}, options = {})
+      req = build_request(:update_time_to_live, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3439,7 +3541,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 
