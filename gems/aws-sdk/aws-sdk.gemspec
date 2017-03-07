@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-cognitoidentityprovider', '1.0.0.rc2')
   spec.add_dependency('aws-sdk-cognitosync', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-configservice', '1.0.0.rc4')
-  spec.add_dependency('aws-sdk-costandusagereportservice', '1.0.0.rc2')
+  spec.add_dependency('aws-sdk-costandusagereportservice', '1.0.0.rc3')
   spec.add_dependency('aws-sdk-datapipeline', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-databasemigrationservice', '1.0.0.rc2')
   spec.add_dependency('aws-sdk-devicefarm', '1.0.0.rc1')
