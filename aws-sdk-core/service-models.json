@@ -366,6 +366,10 @@
     "models": "waf-regional/2016-11-28",
     "endpoint": "waf-regional"
   },
+  "WorkDocs": {
+    "models": "workdocs/2016-05-01",
+    "endpoint": "workdocs"
+  },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",
     "endpoint": "workspaces"
