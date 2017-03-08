@@ -26,7 +26,10 @@ module Aws
       #   to presign.
       #
       # @option params [Integer] :expires_in (900) The number of seconds
-      #   before the presigned URL expires. Defaults to 15 minutes.
+      #   before the presigned URL expires. Defaults to 15 minutes. As signature
+      #   version 4 has a maximum expiry time of one week for presigned URLs,
+      #   attempts to set this value to greater than one week (604800) will
+      #   raise an exception.
       #
       # @option params [Boolean] :secure (true) When `false`, a HTTP URL
       #   is returned instead of the default HTTPS URL.

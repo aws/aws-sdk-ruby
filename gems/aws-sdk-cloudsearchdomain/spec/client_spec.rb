@@ -26,7 +26,7 @@ module Aws
         expect(resp.context.http_request.headers['Authorization']).to be(nil)
       end
 
-      it 'signs reqeusts when credentials given' do
+      it 'signs requests when credentials given' do
         creds = Credentials.new('akid', 'secret')
         endpoint = 'https://domain.us-west-1.amazonaws.com'
         csd = Client.new(endpoint: endpoint, credentials: creds)
@@ -54,6 +54,19 @@ module Aws
         expect {
           csd.search(query:'test')
         }.to raise_error(Errors::RequestEntityTooLarge)
+      end
+
+      it 'use `POST` for #search operation' do
+        creds = Credentials.new('akid', 'secret')
+        endpoint = 'https://domain.us-west-1.amazonaws.com'
+        csd = Client.new(endpoint: endpoint, credentials: creds)
+        csd.handle(NoSendHandler, step: :send)
+        resp = csd.search(query: 'query')
+        expect(resp.context.http_request.http_method).to eql('POST')
+        expect(resp.context.http_request.endpoint.query).to be_nil
+        expect(resp.context.http_request.body_contents).to eql('format=sdk&pretty=true&q=query')
+        expect(resp.context.http_request.headers['Content-Type']).to eql('application/x-www-form-urlencoded')
+        expect(resp.context.http_request.headers['Content-Length']).to eql('30')
       end
 
     end

@@ -1,6 +1,118 @@
 Unreleased Changes
 ------------------
 
+2.8.2 (2017-03-08)
+------------------
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.8.1 (2017-03-06)
+------------------
+
+* Feature - Aws::Budgets - Updated the API for AWS Budgets.
+
+* Feature - Aws::CloudTrail - Updated the documentation, and API for AWS CloudTrail.
+
+* Feature - Aws::MTurk - Updated the API for Amazon Mechanical Turk.
+
+* Feature - Aws::OpsWorksCM - Updated the API, and documentation for AWS OpsWorks for Chef Automate.
+
+2.8.0 (2017-02-28)
+------------------
+
+* Issue - Aws::MTurk - Changed the module name of `Aws::MechanicalTurkRequester` to `Aws::MTurk`. Make sure to change any client references to the newer module name.
+
+2.7.16 (2017-02-27)
+------------------
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
+* Feature - Aws::WAFRegional - Updated the API, and documentation for AWS WAF Regional.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
+* Feature - Aws::MechanicalTurkRequester - Added support for a new service, Amazon Mechanical Turk Requester Service.
+
+* Feature - Aws::Organizations - Added support for a new service, AWS Organizations.
+
+2.7.15 (2017-02-24)
+------------------
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+2.7.14 (2017-02-23)
+------------------
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+2.7.13 (2017-02-22)
+------------------
+
+* Feature - Aws::CloudDirectory - Updated the documentation for Amazon CloudDirectory.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+2.7.12 (2017-02-21)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+2.7.11 (2017-02-17)
+------------------
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Issue - Aws::EmptyStructure - Due to an issue with how Ruby constants work, and with how Empty Structures are assigned to API response shapes, you could see incorrect response types for certain empty API responses depending on load order. With this change, all empty responses will be of the `Aws::EmptyStructure` type. This does not change the available methods or behavior of those responses.
+
+2.7.10 (2017-02-16)
+------------------
+
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+2.7.9 (2017-02-15)
+------------------
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+2.7.8 (2017-02-14)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, documentation, and waiters for Amazon Elastic Compute Cloud.
+
+2.7.7 (2017-02-10)
+------------------
+
+* Issue - Updated set of valid endpoints.
+
+2.7.6 (2017-02-10)
+------------------
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+2.7.5 (2017-02-09)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, documentation, and waiters for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+2.7.4 (2017-02-08)
+------------------
+
+* Feature - Aws::Glacier - Updated the documentation for Amazon Glacier.
+
+* Feature - Aws::Lex - Added support for a new service, Amazon Lex Runtime Service.
+
 2.7.3 (2017-01-26)
 ------------------
 

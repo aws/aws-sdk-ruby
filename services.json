@@ -46,7 +46,8 @@
     "models": "cloudsearchdomain/2013-01-01",
     "partitionsKey": null,
     "addPlugins": [
-      "Aws::CloudSearchDomain::Plugins::ConditionalSigning"
+      "Aws::CloudSearchDomain::Plugins::ConditionalSigning",
+      "Aws::CloudSearchDomain::Plugins::SwitchToPost"
     ],
     "removePlugins": [
       "Aws::Plugins::RegionalEndpoint"

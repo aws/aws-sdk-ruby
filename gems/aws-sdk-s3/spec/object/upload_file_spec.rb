@@ -51,6 +51,19 @@ module Aws
           end
         }
 
+        describe 'accepts options without mutating them' do
+
+          it 'uploads objects with custom options' do
+            options = {}.freeze
+            expect(client).to receive(:put_object).with(
+              bucket: 'bucket',
+              key: 'key',
+              body: one_meg_file)
+            object.upload_file(one_meg_file, options)
+          end
+
+        end
+
         describe 'small objects' do
 
           it 'uploads small objects using Client#put_object' do
