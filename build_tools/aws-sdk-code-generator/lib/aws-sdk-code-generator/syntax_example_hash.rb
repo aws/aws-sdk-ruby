@@ -57,6 +57,7 @@ module AwsSdkCodeGenerator
     def struct(struct_shape, i, visited)
       lines = ['{']
       struct_shape['members'].each_pair do |member_name, member_ref|
+        next if member_ref['documented'] === false
         lines << struct_member(struct_shape, member_name, member_ref, i, visited)
       end
       lines << "#{i}}"

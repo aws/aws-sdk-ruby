@@ -96,7 +96,8 @@ module BuildTools
         CopyDBClusterSnapshotMessage
         CreateDBClusterMessage
       ).each do |shape_name|
-        api['shapes'][shape_name]['members']['DestinationRegion'] = {"shape" => "String"}
+        api['shapes'][shape_name]['members']['DestinationRegion'] = {"shape" => "String", "documented" => false }
+        api['shapes'][shape_name]['members']['SourceRegion'] = {"shape" => "String"}
       end
     end
 

@@ -66,6 +66,7 @@ module AwsSdkCodeGenerator
       if operation['input']
         shape = Api.shape(operation['input'], api)
         shape['members'].map do |member_name, member_ref|
+          next if member_ref['documented'] === false
           docstring = Api.docstring(member_ref, api)
           if member_ref['idempotencyToken']
             docstring = docstring.to_s + "<p><b>A suitable default value is auto-generated.** You should normally not need to pass this option.</b></p>"
