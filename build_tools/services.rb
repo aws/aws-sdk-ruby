@@ -9,17 +9,13 @@ module BuildTools
 
     # @option options [String] :manifest_path (MANIFEST_PATH)
     def initialize(options = {})
-      @services = manifest(options).inject({}) do |hash, (name, config)|
-        service = build_service(name, config)
-        hash[service.identifier] = service
-        hash
-      end
+      @manifest_path = options.fetch(:manifest_path, MANIFEST_PATH)
     end
 
     # @param [String] identifier
     def [](identifier)
-      if @services.key?(identifier)
-        @services[identifier]
+      if services.key?(identifier)
+        services[identifier]
       else
         raise ArgumentError, "unknown service #{identifier.inspect}"
       end
@@ -27,14 +23,24 @@ module BuildTools
     alias service []
 
     def each(&block)
-      @services.values.each(&block)
+      services.values.each(&block)
     end
 
     private
 
-    def manifest(options)
-      manifest_path = options.fetch(:manifest_path, MANIFEST_PATH)
-      JSON.load(File.read(manifest_path))
+    def services
+      # WARNING: not thread-safe
+      @services ||= begin
+        manifest.inject({}) do |hash, (name, config)|
+          service = build_service(name, config)
+          hash[service.identifier] = service
+          hash
+        end
+      end
+    end
+
+    def manifest
+      JSON.load(File.read(@manifest_path))
     end
 
     def build_service(svc_name, config)
