@@ -115,6 +115,7 @@ module Aws
     SWF
     WAF
     WAFRegional
+    WorkDocs
     WorkSpaces
     XRay
   )
