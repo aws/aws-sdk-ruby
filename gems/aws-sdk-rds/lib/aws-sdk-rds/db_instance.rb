@@ -1314,6 +1314,7 @@ module Aws::RDS
     #     monitoring_role_arn: "String",
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
+    #     source_region: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -1507,6 +1508,10 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # @option options [String] :destination_region
+    # @option options [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
     # @return [DBInstance]
     def create_read_replica(options = {})
       options = options.merge(source_db_instance_identifier: @id)

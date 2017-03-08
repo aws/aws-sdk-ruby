@@ -409,7 +409,7 @@ module Aws::MTurk
 
     ListHITsForQualificationTypeResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListHITsForQualificationTypeResponse.add_member(:num_results, Shapes::ShapeRef.new(shape: Integer, location_name: "NumResults"))
-    ListHITsForQualificationTypeResponse.add_member(:hi_ts, Shapes::ShapeRef.new(shape: HITList, location_name: "HITs"))
+    ListHITsForQualificationTypeResponse.add_member(:hits, Shapes::ShapeRef.new(shape: HITList, location_name: "HITs"))
     ListHITsForQualificationTypeResponse.struct_class = Types::ListHITsForQualificationTypeResponse
 
     ListHITsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -418,7 +418,7 @@ module Aws::MTurk
 
     ListHITsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListHITsResponse.add_member(:num_results, Shapes::ShapeRef.new(shape: Integer, location_name: "NumResults"))
-    ListHITsResponse.add_member(:hi_ts, Shapes::ShapeRef.new(shape: HITList, location_name: "HITs"))
+    ListHITsResponse.add_member(:hits, Shapes::ShapeRef.new(shape: HITList, location_name: "HITs"))
     ListHITsResponse.struct_class = Types::ListHITsResponse
 
     ListQualificationRequestsRequest.add_member(:qualification_type_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "QualificationTypeId"))
@@ -467,7 +467,7 @@ module Aws::MTurk
 
     ListReviewableHITsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListReviewableHITsResponse.add_member(:num_results, Shapes::ShapeRef.new(shape: Integer, location_name: "NumResults"))
-    ListReviewableHITsResponse.add_member(:hi_ts, Shapes::ShapeRef.new(shape: HITList, location_name: "HITs"))
+    ListReviewableHITsResponse.add_member(:hits, Shapes::ShapeRef.new(shape: HITList, location_name: "HITs"))
     ListReviewableHITsResponse.struct_class = Types::ListReviewableHITsResponse
 
     ListWorkerBlocksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -919,7 +919,7 @@ module Aws::MTurk
         )
       end)
 
-      api.add_operation(:list_hi_ts, Seahorse::Model::Operation.new.tap do |o|
+      api.add_operation(:list_hits, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHITs"
         o.http_method = "POST"
         o.http_request_uri = "/"
@@ -935,7 +935,7 @@ module Aws::MTurk
         )
       end)
 
-      api.add_operation(:list_hi_ts_for_qualification_type, Seahorse::Model::Operation.new.tap do |o|
+      api.add_operation(:list_hits_for_qualification_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListHITsForQualificationType"
         o.http_method = "POST"
         o.http_request_uri = "/"
@@ -999,7 +999,7 @@ module Aws::MTurk
         )
       end)
 
-      api.add_operation(:list_reviewable_hi_ts, Seahorse::Model::Operation.new.tap do |o|
+      api.add_operation(:list_reviewable_hits, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListReviewableHITs"
         o.http_method = "POST"
         o.http_request_uri = "/"

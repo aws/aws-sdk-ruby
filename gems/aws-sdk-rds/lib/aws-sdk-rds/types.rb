@@ -489,12 +489,16 @@ module Aws::RDS
     #       {
     #         source_db_cluster_snapshot_identifier: "String", # required
     #         target_db_cluster_snapshot_identifier: "String", # required
+    #         kms_key_id: "String",
+    #         pre_signed_url: "String",
+    #         copy_tags: false,
     #         tags: [
     #           {
     #             key: "String",
     #             value: "String",
     #           },
     #         ],
+    #         source_region: "String",
     #       }
     #
     # @!attribute [rw] source_db_cluster_snapshot_identifier
@@ -527,16 +531,98 @@ module Aws::RDS
     #   Example: `my-cluster-snapshot2`
     #   @return [String]
     #
+    # @!attribute [rw] kms_key_id
+    #   The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key
+    #   ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS
+    #   key alias for the KMS encryption key.
+    #
+    #   If you copy an unencrypted DB cluster snapshot and specify a value
+    #   for the `KmsKeyId` parameter, Amazon RDS encrypts the target DB
+    #   cluster snapshot using the specified KMS encryption key.
+    #
+    #   If you copy an encrypted DB cluster snapshot from your AWS account,
+    #   you can specify a value for `KmsKeyId` to encrypt the copy with a
+    #   new KMS encryption key. If you don't specify a value for
+    #   `KmsKeyId`, then the copy of the DB cluster snapshot is encrypted
+    #   with the same KMS key as the source DB cluster snapshot.
+    #
+    #   If you copy an encrypted DB cluster snapshot that is shared from
+    #   another AWS account, then you must specify a value for `KmsKeyId`.
+    #
+    #   To copy an encrypted DB cluster snapshot to another region, you must
+    #   set `KmsKeyId` to the KMS key ID you want to use to encrypt the copy
+    #   of the DB cluster snapshot in the destination region. KMS encryption
+    #   keys are specific to the region that they are created in, and you
+    #   cannot use encryption keys from one region in another region.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_signed_url
+    #   The URL that contains a Signature Version 4 signed request for the
+    #   `CopyDBClusterSnapshot` API action in the AWS region that contains
+    #   the source DB cluster snapshot to copy. The `PreSignedUrl` parameter
+    #   must be used when copying an encrypted DB cluster snapshot from
+    #   another AWS region.
+    #
+    #   The pre-signed URL must be a valid request for the
+    #   `CopyDBSClusterSnapshot` API action that can be executed in the
+    #   source region that contains the encrypted DB cluster snapshot to be
+    #   copied. The pre-signed URL request must contain the following
+    #   parameter values:
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the copy of the DB cluster snapshot in the destination region.
+    #     This is the same identifier for both the `CopyDBClusterSnapshot`
+    #     action that is called in the destination region, and the action
+    #     contained in the pre-signed URL.
+    #
+    #   * `DestinationRegion` - The name of the region that the DB cluster
+    #     snapshot will be created in.
+    #
+    #   * `SourceDBClusterSnapshotIdentifier` - The DB cluster snapshot
+    #     identifier for the encrypted DB cluster snapshot to be copied.
+    #     This identifier must be in the Amazon Resource Name (ARN) format
+    #     for the source region. For example, if you are copying an
+    #     encrypted DB cluster snapshot from the us-west-2 region, then your
+    #     `SourceDBClusterSnapshotIdentifier` looks like the following
+    #     example:
+    #     `arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   @return [String]
+    #
+    # @!attribute [rw] copy_tags
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   A list of tags.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] destination_region
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshotMessage AWS API Documentation
     #
     class CopyDBClusterSnapshotMessage < Struct.new(
       :source_db_cluster_snapshot_identifier,
       :target_db_cluster_snapshot_identifier,
-      :tags)
+      :kms_key_id,
+      :pre_signed_url,
+      :copy_tags,
+      :tags,
+      :destination_region,
+      :source_region)
       include Aws::Structure
     end
 
@@ -656,7 +742,7 @@ module Aws::RDS
     #         ],
     #         copy_tags: false,
     #         pre_signed_url: "String",
-    #         destination_region: "String",
+    #         source_region: "String",
     #       }
     #
     # @!attribute [rw] source_db_snapshot_identifier
@@ -792,6 +878,11 @@ module Aws::RDS
     # @!attribute [rw] destination_region
     #   @return [String]
     #
+    # @!attribute [rw] source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshotMessage AWS API Documentation
     #
     class CopyDBSnapshotMessage < Struct.new(
@@ -801,7 +892,8 @@ module Aws::RDS
       :tags,
       :copy_tags,
       :pre_signed_url,
-      :destination_region)
+      :destination_region,
+      :source_region)
       include Aws::Structure
     end
 
@@ -934,6 +1026,8 @@ module Aws::RDS
     #         ],
     #         storage_encrypted: false,
     #         kms_key_id: "String",
+    #         pre_signed_url: "String",
+    #         source_region: "String",
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -1126,13 +1220,67 @@ module Aws::RDS
     #   encryption key. If you are creating a DB cluster with the same AWS
     #   account that owns the KMS encryption key used to encrypt the new DB
     #   cluster, then you can use the KMS key alias instead of the ARN for
-    #   the KM encryption key.
+    #   the KMS encryption key.
     #
     #   If the `StorageEncrypted` parameter is true, and you do not specify
     #   a value for the `KmsKeyId` parameter, then Amazon RDS will use your
     #   default encryption key. AWS KMS creates the default encryption key
     #   for your AWS account. Your AWS account has a different default
     #   encryption key for each AWS region.
+    #
+    #   If you create a Read Replica of an encrypted DB cluster in another
+    #   region, you must set `KmsKeyId` to a KMS key ID that is valid in the
+    #   destination region. This key is used to encrypt the Read Replica in
+    #   that region.
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_signed_url
+    #   A URL that contains a Signature Version 4 signed request for the
+    #   `CreateDBCluster` action to be called in the source region where the
+    #   DB cluster will be replicated from. You only need to specify
+    #   `PreSignedUrl` when you are performing cross-region replication from
+    #   an encrypted DB cluster.
+    #
+    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
+    #   API action that can be executed in the source region that contains
+    #   the encrypted DB cluster to be copied.
+    #
+    #   The pre-signed URL request must contain the following parameter
+    #   values:
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the copy of the DB cluster in the destination region. This should
+    #     refer to the same KMS key for both the `CreateDBCluster` action
+    #     that is called in the destination region, and the action contained
+    #     in the pre-signed URL.
+    #
+    #   * `DestinationRegion` - The name of the region that Aurora Read
+    #     Replica will be created in.
+    #
+    #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
+    #     encrypted DB cluster to be copied. This identifier must be in the
+    #     Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you are copying an encrypted DB cluster from the
+    #     us-west-2 region, then your `ReplicationSourceIdentifier` would
+    #     look like Example:
+    #     `arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature
+    #   Version 4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterMessage AWS API Documentation
@@ -1157,7 +1305,10 @@ module Aws::RDS
       :replication_source_identifier,
       :tags,
       :storage_encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :pre_signed_url,
+      :destination_region,
+      :source_region)
       include Aws::Structure
     end
 
@@ -2356,6 +2507,7 @@ module Aws::RDS
     #         monitoring_role_arn: "String",
     #         kms_key_id: "String",
     #         pre_signed_url: "String",
+    #         source_region: "String",
     #       }
     #
     # @!attribute [rw] db_instance_identifier
@@ -2615,6 +2767,14 @@ module Aws::RDS
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #   @return [String]
     #
+    # @!attribute [rw] destination_region
+    #   @return [String]
+    #
+    # @!attribute [rw] source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplicaMessage AWS API Documentation
     #
     class CreateDBInstanceReadReplicaMessage < Struct.new(
@@ -2634,7 +2794,9 @@ module Aws::RDS
       :monitoring_interval,
       :monitoring_role_arn,
       :kms_key_id,
-      :pre_signed_url)
+      :pre_signed_url,
+      :destination_region,
+      :source_region)
       include Aws::Structure
     end
 

@@ -1559,7 +1559,7 @@ module Aws::MTurk
     #   equivalent to the number of HITs being returned by this call.
     #   @return [Integer]
     #
-    # @!attribute [rw] hi_ts
+    # @!attribute [rw] hits
     #   The list of HIT elements returned by the query.
     #   @return [Array<Types::HIT>]
     #
@@ -1568,7 +1568,7 @@ module Aws::MTurk
     class ListHITsForQualificationTypeResponse < Struct.new(
       :next_token,
       :num_results,
-      :hi_ts)
+      :hits)
       include Aws::Structure
     end
 
@@ -1607,7 +1607,7 @@ module Aws::MTurk
     #   equivalent to the number of HITs being returned by this call.
     #   @return [Integer]
     #
-    # @!attribute [rw] hi_ts
+    # @!attribute [rw] hits
     #   The list of HIT elements returned by the query.
     #   @return [Array<Types::HIT>]
     #
@@ -1616,7 +1616,7 @@ module Aws::MTurk
     class ListHITsResponse < Struct.new(
       :next_token,
       :num_results,
-      :hi_ts)
+      :hits)
       include Aws::Structure
     end
 
@@ -1907,7 +1907,7 @@ module Aws::MTurk
     #   equivalent to the number of HITs being returned by this call.
     #   @return [Integer]
     #
-    # @!attribute [rw] hi_ts
+    # @!attribute [rw] hits
     #   The list of HIT elements returned by the query.
     #   @return [Array<Types::HIT>]
     #
@@ -1916,7 +1916,7 @@ module Aws::MTurk
     class ListReviewableHITsResponse < Struct.new(
       :next_token,
       :num_results,
-      :hi_ts)
+      :hits)
       include Aws::Structure
     end
 

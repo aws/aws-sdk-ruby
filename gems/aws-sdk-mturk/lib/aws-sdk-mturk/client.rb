@@ -1600,11 +1600,11 @@ module Aws::MTurk
     #
     #   * {Types::ListHITsResponse#next_token #next_token} => String
     #   * {Types::ListHITsResponse#num_results #num_results} => Integer
-    #   * {Types::ListHITsResponse#hi_ts #hi_ts} => Array&lt;Types::HIT&gt;
+    #   * {Types::ListHITsResponse#hits #hits} => Array&lt;Types::HIT&gt;
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.list_hi_ts({
+    #   resp = client.list_hits({
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -1613,43 +1613,43 @@ module Aws::MTurk
     #
     #   resp.next_token #=> String
     #   resp.num_results #=> Integer
-    #   resp.hi_ts #=> Array
-    #   resp.hi_ts[0].hit_id #=> String
-    #   resp.hi_ts[0].hit_type_id #=> String
-    #   resp.hi_ts[0].hit_group_id #=> String
-    #   resp.hi_ts[0].hit_layout_id #=> String
-    #   resp.hi_ts[0].creation_time #=> Time
-    #   resp.hi_ts[0].title #=> String
-    #   resp.hi_ts[0].description #=> String
-    #   resp.hi_ts[0].question #=> String
-    #   resp.hi_ts[0].keywords #=> String
-    #   resp.hi_ts[0].hit_status #=> String, one of "Assignable", "Unassignable", "Reviewable", "Reviewing", "Disposed"
-    #   resp.hi_ts[0].max_assignments #=> Integer
-    #   resp.hi_ts[0].reward #=> String
-    #   resp.hi_ts[0].auto_approval_delay_in_seconds #=> Integer
-    #   resp.hi_ts[0].expiration #=> Time
-    #   resp.hi_ts[0].assignment_duration_in_seconds #=> Integer
-    #   resp.hi_ts[0].requester_annotation #=> String
-    #   resp.hi_ts[0].qualification_requirements #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].qualification_type_id #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].comparator #=> String, one of "LessThan", "LessThanOrEqualTo", "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn"
-    #   resp.hi_ts[0].qualification_requirements[0].integer_values #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].integer_values[0] #=> Integer
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values[0].country #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values[0].subdivision #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].required_to_preview #=> Boolean
-    #   resp.hi_ts[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
-    #   resp.hi_ts[0].number_of_assignments_pending #=> Integer
-    #   resp.hi_ts[0].number_of_assignments_available #=> Integer
-    #   resp.hi_ts[0].number_of_assignments_completed #=> Integer
+    #   resp.hits #=> Array
+    #   resp.hits[0].hit_id #=> String
+    #   resp.hits[0].hit_type_id #=> String
+    #   resp.hits[0].hit_group_id #=> String
+    #   resp.hits[0].hit_layout_id #=> String
+    #   resp.hits[0].creation_time #=> Time
+    #   resp.hits[0].title #=> String
+    #   resp.hits[0].description #=> String
+    #   resp.hits[0].question #=> String
+    #   resp.hits[0].keywords #=> String
+    #   resp.hits[0].hit_status #=> String, one of "Assignable", "Unassignable", "Reviewable", "Reviewing", "Disposed"
+    #   resp.hits[0].max_assignments #=> Integer
+    #   resp.hits[0].reward #=> String
+    #   resp.hits[0].auto_approval_delay_in_seconds #=> Integer
+    #   resp.hits[0].expiration #=> Time
+    #   resp.hits[0].assignment_duration_in_seconds #=> Integer
+    #   resp.hits[0].requester_annotation #=> String
+    #   resp.hits[0].qualification_requirements #=> Array
+    #   resp.hits[0].qualification_requirements[0].qualification_type_id #=> String
+    #   resp.hits[0].qualification_requirements[0].comparator #=> String, one of "LessThan", "LessThanOrEqualTo", "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn"
+    #   resp.hits[0].qualification_requirements[0].integer_values #=> Array
+    #   resp.hits[0].qualification_requirements[0].integer_values[0] #=> Integer
+    #   resp.hits[0].qualification_requirements[0].locale_values #=> Array
+    #   resp.hits[0].qualification_requirements[0].locale_values[0].country #=> String
+    #   resp.hits[0].qualification_requirements[0].locale_values[0].subdivision #=> String
+    #   resp.hits[0].qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hits[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
+    #   resp.hits[0].number_of_assignments_pending #=> Integer
+    #   resp.hits[0].number_of_assignments_available #=> Integer
+    #   resp.hits[0].number_of_assignments_completed #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITs AWS API Documentation
     #
-    # @overload list_hi_ts(params = {})
+    # @overload list_hits(params = {})
     # @param [Hash] params ({})
-    def list_hi_ts(params = {}, options = {})
-      req = build_request(:list_hi_ts, params)
+    def list_hits(params = {}, options = {})
+      req = build_request(:list_hits, params)
       req.send_request(options)
     end
 
@@ -1671,11 +1671,11 @@ module Aws::MTurk
     #
     #   * {Types::ListHITsForQualificationTypeResponse#next_token #next_token} => String
     #   * {Types::ListHITsForQualificationTypeResponse#num_results #num_results} => Integer
-    #   * {Types::ListHITsForQualificationTypeResponse#hi_ts #hi_ts} => Array&lt;Types::HIT&gt;
+    #   * {Types::ListHITsForQualificationTypeResponse#hits #hits} => Array&lt;Types::HIT&gt;
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.list_hi_ts_for_qualification_type({
+    #   resp = client.list_hits_for_qualification_type({
     #     qualification_type_id: "EntityId", # required
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -1685,43 +1685,43 @@ module Aws::MTurk
     #
     #   resp.next_token #=> String
     #   resp.num_results #=> Integer
-    #   resp.hi_ts #=> Array
-    #   resp.hi_ts[0].hit_id #=> String
-    #   resp.hi_ts[0].hit_type_id #=> String
-    #   resp.hi_ts[0].hit_group_id #=> String
-    #   resp.hi_ts[0].hit_layout_id #=> String
-    #   resp.hi_ts[0].creation_time #=> Time
-    #   resp.hi_ts[0].title #=> String
-    #   resp.hi_ts[0].description #=> String
-    #   resp.hi_ts[0].question #=> String
-    #   resp.hi_ts[0].keywords #=> String
-    #   resp.hi_ts[0].hit_status #=> String, one of "Assignable", "Unassignable", "Reviewable", "Reviewing", "Disposed"
-    #   resp.hi_ts[0].max_assignments #=> Integer
-    #   resp.hi_ts[0].reward #=> String
-    #   resp.hi_ts[0].auto_approval_delay_in_seconds #=> Integer
-    #   resp.hi_ts[0].expiration #=> Time
-    #   resp.hi_ts[0].assignment_duration_in_seconds #=> Integer
-    #   resp.hi_ts[0].requester_annotation #=> String
-    #   resp.hi_ts[0].qualification_requirements #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].qualification_type_id #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].comparator #=> String, one of "LessThan", "LessThanOrEqualTo", "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn"
-    #   resp.hi_ts[0].qualification_requirements[0].integer_values #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].integer_values[0] #=> Integer
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values[0].country #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values[0].subdivision #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].required_to_preview #=> Boolean
-    #   resp.hi_ts[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
-    #   resp.hi_ts[0].number_of_assignments_pending #=> Integer
-    #   resp.hi_ts[0].number_of_assignments_available #=> Integer
-    #   resp.hi_ts[0].number_of_assignments_completed #=> Integer
+    #   resp.hits #=> Array
+    #   resp.hits[0].hit_id #=> String
+    #   resp.hits[0].hit_type_id #=> String
+    #   resp.hits[0].hit_group_id #=> String
+    #   resp.hits[0].hit_layout_id #=> String
+    #   resp.hits[0].creation_time #=> Time
+    #   resp.hits[0].title #=> String
+    #   resp.hits[0].description #=> String
+    #   resp.hits[0].question #=> String
+    #   resp.hits[0].keywords #=> String
+    #   resp.hits[0].hit_status #=> String, one of "Assignable", "Unassignable", "Reviewable", "Reviewing", "Disposed"
+    #   resp.hits[0].max_assignments #=> Integer
+    #   resp.hits[0].reward #=> String
+    #   resp.hits[0].auto_approval_delay_in_seconds #=> Integer
+    #   resp.hits[0].expiration #=> Time
+    #   resp.hits[0].assignment_duration_in_seconds #=> Integer
+    #   resp.hits[0].requester_annotation #=> String
+    #   resp.hits[0].qualification_requirements #=> Array
+    #   resp.hits[0].qualification_requirements[0].qualification_type_id #=> String
+    #   resp.hits[0].qualification_requirements[0].comparator #=> String, one of "LessThan", "LessThanOrEqualTo", "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn"
+    #   resp.hits[0].qualification_requirements[0].integer_values #=> Array
+    #   resp.hits[0].qualification_requirements[0].integer_values[0] #=> Integer
+    #   resp.hits[0].qualification_requirements[0].locale_values #=> Array
+    #   resp.hits[0].qualification_requirements[0].locale_values[0].country #=> String
+    #   resp.hits[0].qualification_requirements[0].locale_values[0].subdivision #=> String
+    #   resp.hits[0].qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hits[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
+    #   resp.hits[0].number_of_assignments_pending #=> Integer
+    #   resp.hits[0].number_of_assignments_available #=> Integer
+    #   resp.hits[0].number_of_assignments_completed #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListHITsForQualificationType AWS API Documentation
     #
-    # @overload list_hi_ts_for_qualification_type(params = {})
+    # @overload list_hits_for_qualification_type(params = {})
     # @param [Hash] params ({})
-    def list_hi_ts_for_qualification_type(params = {}, options = {})
-      req = build_request(:list_hi_ts_for_qualification_type, params)
+    def list_hits_for_qualification_type(params = {}, options = {})
+      req = build_request(:list_hits_for_qualification_type, params)
       req.send_request(options)
     end
 
@@ -1988,11 +1988,11 @@ module Aws::MTurk
     #
     #   * {Types::ListReviewableHITsResponse#next_token #next_token} => String
     #   * {Types::ListReviewableHITsResponse#num_results #num_results} => Integer
-    #   * {Types::ListReviewableHITsResponse#hi_ts #hi_ts} => Array&lt;Types::HIT&gt;
+    #   * {Types::ListReviewableHITsResponse#hits #hits} => Array&lt;Types::HIT&gt;
     #
     # @example Request syntax with placeholder values
     #
-    #   resp = client.list_reviewable_hi_ts({
+    #   resp = client.list_reviewable_hits({
     #     hit_type_id: "EntityId",
     #     status: "Reviewable", # accepts Reviewable, Reviewing
     #     next_token: "PaginationToken",
@@ -2003,43 +2003,43 @@ module Aws::MTurk
     #
     #   resp.next_token #=> String
     #   resp.num_results #=> Integer
-    #   resp.hi_ts #=> Array
-    #   resp.hi_ts[0].hit_id #=> String
-    #   resp.hi_ts[0].hit_type_id #=> String
-    #   resp.hi_ts[0].hit_group_id #=> String
-    #   resp.hi_ts[0].hit_layout_id #=> String
-    #   resp.hi_ts[0].creation_time #=> Time
-    #   resp.hi_ts[0].title #=> String
-    #   resp.hi_ts[0].description #=> String
-    #   resp.hi_ts[0].question #=> String
-    #   resp.hi_ts[0].keywords #=> String
-    #   resp.hi_ts[0].hit_status #=> String, one of "Assignable", "Unassignable", "Reviewable", "Reviewing", "Disposed"
-    #   resp.hi_ts[0].max_assignments #=> Integer
-    #   resp.hi_ts[0].reward #=> String
-    #   resp.hi_ts[0].auto_approval_delay_in_seconds #=> Integer
-    #   resp.hi_ts[0].expiration #=> Time
-    #   resp.hi_ts[0].assignment_duration_in_seconds #=> Integer
-    #   resp.hi_ts[0].requester_annotation #=> String
-    #   resp.hi_ts[0].qualification_requirements #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].qualification_type_id #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].comparator #=> String, one of "LessThan", "LessThanOrEqualTo", "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn"
-    #   resp.hi_ts[0].qualification_requirements[0].integer_values #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].integer_values[0] #=> Integer
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values #=> Array
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values[0].country #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].locale_values[0].subdivision #=> String
-    #   resp.hi_ts[0].qualification_requirements[0].required_to_preview #=> Boolean
-    #   resp.hi_ts[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
-    #   resp.hi_ts[0].number_of_assignments_pending #=> Integer
-    #   resp.hi_ts[0].number_of_assignments_available #=> Integer
-    #   resp.hi_ts[0].number_of_assignments_completed #=> Integer
+    #   resp.hits #=> Array
+    #   resp.hits[0].hit_id #=> String
+    #   resp.hits[0].hit_type_id #=> String
+    #   resp.hits[0].hit_group_id #=> String
+    #   resp.hits[0].hit_layout_id #=> String
+    #   resp.hits[0].creation_time #=> Time
+    #   resp.hits[0].title #=> String
+    #   resp.hits[0].description #=> String
+    #   resp.hits[0].question #=> String
+    #   resp.hits[0].keywords #=> String
+    #   resp.hits[0].hit_status #=> String, one of "Assignable", "Unassignable", "Reviewable", "Reviewing", "Disposed"
+    #   resp.hits[0].max_assignments #=> Integer
+    #   resp.hits[0].reward #=> String
+    #   resp.hits[0].auto_approval_delay_in_seconds #=> Integer
+    #   resp.hits[0].expiration #=> Time
+    #   resp.hits[0].assignment_duration_in_seconds #=> Integer
+    #   resp.hits[0].requester_annotation #=> String
+    #   resp.hits[0].qualification_requirements #=> Array
+    #   resp.hits[0].qualification_requirements[0].qualification_type_id #=> String
+    #   resp.hits[0].qualification_requirements[0].comparator #=> String, one of "LessThan", "LessThanOrEqualTo", "GreaterThan", "GreaterThanOrEqualTo", "EqualTo", "NotEqualTo", "Exists", "DoesNotExist", "In", "NotIn"
+    #   resp.hits[0].qualification_requirements[0].integer_values #=> Array
+    #   resp.hits[0].qualification_requirements[0].integer_values[0] #=> Integer
+    #   resp.hits[0].qualification_requirements[0].locale_values #=> Array
+    #   resp.hits[0].qualification_requirements[0].locale_values[0].country #=> String
+    #   resp.hits[0].qualification_requirements[0].locale_values[0].subdivision #=> String
+    #   resp.hits[0].qualification_requirements[0].required_to_preview #=> Boolean
+    #   resp.hits[0].hit_review_status #=> String, one of "NotReviewed", "MarkedForReview", "ReviewedAppropriate", "ReviewedInappropriate"
+    #   resp.hits[0].number_of_assignments_pending #=> Integer
+    #   resp.hits[0].number_of_assignments_available #=> Integer
+    #   resp.hits[0].number_of_assignments_completed #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/ListReviewableHITs AWS API Documentation
     #
-    # @overload list_reviewable_hi_ts(params = {})
+    # @overload list_reviewable_hits(params = {})
     # @param [Hash] params ({})
-    def list_reviewable_hi_ts(params = {}, options = {})
-      req = build_request(:list_reviewable_hi_ts, params)
+    def list_reviewable_hits(params = {}, options = {})
+      req = build_request(:list_reviewable_hits, params)
       req.send_request(options)
     end
 
@@ -2635,7 +2635,7 @@ module Aws::MTurk
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mturk'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

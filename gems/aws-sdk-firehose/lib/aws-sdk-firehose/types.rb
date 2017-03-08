@@ -222,7 +222,7 @@ module Aws::Firehose
     #         },
     #         redshift_destination_configuration: {
     #           role_arn: "RoleARN", # required
-    #           cluster_jdbcurl: "ClusterJDBCURL", # required
+    #           cluster_jdbc_url: "ClusterJDBCURL", # required
     #           copy_command: { # required
     #             data_table_name: "DataTableName", # required
     #             data_table_columns: "DataTableColumns",
@@ -1610,7 +1610,7 @@ module Aws::Firehose
     #
     #       {
     #         role_arn: "RoleARN", # required
-    #         cluster_jdbcurl: "ClusterJDBCURL", # required
+    #         cluster_jdbc_url: "ClusterJDBCURL", # required
     #         copy_command: { # required
     #           data_table_name: "DataTableName", # required
     #           data_table_columns: "DataTableColumns",
@@ -1689,7 +1689,7 @@ module Aws::Firehose
     #   The ARN of the AWS credentials.
     #   @return [String]
     #
-    # @!attribute [rw] cluster_jdbcurl
+    # @!attribute [rw] cluster_jdbc_url
     #   The database connection string.
     #   @return [String]
     #
@@ -1741,7 +1741,7 @@ module Aws::Firehose
     #
     class RedshiftDestinationConfiguration < Struct.new(
       :role_arn,
-      :cluster_jdbcurl,
+      :cluster_jdbc_url,
       :copy_command,
       :username,
       :password,
@@ -1760,7 +1760,7 @@ module Aws::Firehose
     #   The ARN of the AWS credentials.
     #   @return [String]
     #
-    # @!attribute [rw] cluster_jdbcurl
+    # @!attribute [rw] cluster_jdbc_url
     #   The database connection string.
     #   @return [String]
     #
@@ -1801,7 +1801,7 @@ module Aws::Firehose
     #
     class RedshiftDestinationDescription < Struct.new(
       :role_arn,
-      :cluster_jdbcurl,
+      :cluster_jdbc_url,
       :copy_command,
       :username,
       :retry_options,
@@ -1820,7 +1820,7 @@ module Aws::Firehose
     #
     #       {
     #         role_arn: "RoleARN",
-    #         cluster_jdbcurl: "ClusterJDBCURL",
+    #         cluster_jdbc_url: "ClusterJDBCURL",
     #         copy_command: {
     #           data_table_name: "DataTableName", # required
     #           data_table_columns: "DataTableColumns",
@@ -1899,7 +1899,7 @@ module Aws::Firehose
     #   The ARN of the AWS credentials.
     #   @return [String]
     #
-    # @!attribute [rw] cluster_jdbcurl
+    # @!attribute [rw] cluster_jdbc_url
     #   The database connection string.
     #   @return [String]
     #
@@ -1949,7 +1949,7 @@ module Aws::Firehose
     #
     class RedshiftDestinationUpdate < Struct.new(
       :role_arn,
-      :cluster_jdbcurl,
+      :cluster_jdbc_url,
       :copy_command,
       :username,
       :password,
@@ -2297,7 +2297,7 @@ module Aws::Firehose
     #         },
     #         redshift_destination_update: {
     #           role_arn: "RoleARN",
-    #           cluster_jdbcurl: "ClusterJDBCURL",
+    #           cluster_jdbc_url: "ClusterJDBCURL",
     #           copy_command: {
     #             data_table_name: "DataTableName", # required
     #             data_table_columns: "DataTableColumns",

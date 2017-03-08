@@ -319,7 +319,7 @@ module Aws::Firehose
     #     },
     #     redshift_destination_configuration: {
     #       role_arn: "RoleARN", # required
-    #       cluster_jdbcurl: "ClusterJDBCURL", # required
+    #       cluster_jdbc_url: "ClusterJDBCURL", # required
     #       copy_command: { # required
     #         data_table_name: "DataTableName", # required
     #         data_table_columns: "DataTableColumns",
@@ -577,7 +577,7 @@ module Aws::Firehose
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.log_group_name #=> String
     #   resp.delivery_stream_description.destinations[0].extended_s3_destination_description.s3_backup_description.cloud_watch_logging_options.log_stream_name #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.role_arn #=> String
-    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cluster_jdbcurl #=> String
+    #   resp.delivery_stream_description.destinations[0].redshift_destination_description.cluster_jdbc_url #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.copy_command.data_table_name #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.copy_command.data_table_columns #=> String
     #   resp.delivery_stream_description.destinations[0].redshift_destination_description.copy_command.copy_options #=> String
@@ -1031,7 +1031,7 @@ module Aws::Firehose
     #     },
     #     redshift_destination_update: {
     #       role_arn: "RoleARN",
-    #       cluster_jdbcurl: "ClusterJDBCURL",
+    #       cluster_jdbc_url: "ClusterJDBCURL",
     #       copy_command: {
     #         data_table_name: "DataTableName", # required
     #         data_table_columns: "DataTableColumns",
@@ -1183,7 +1183,7 @@ module Aws::Firehose
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-firehose'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

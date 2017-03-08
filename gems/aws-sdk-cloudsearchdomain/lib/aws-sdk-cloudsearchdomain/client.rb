@@ -20,6 +20,7 @@ require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-cloudsearchdomain/plugins/conditional_signing.rb'
+require 'aws-sdk-cloudsearchdomain/plugins/switch_to_post.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:cloudsearchdomain)
 
@@ -47,6 +48,7 @@ module Aws::CloudSearchDomain
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::CloudSearchDomain::Plugins::ConditionalSigning)
+    add_plugin(Aws::CloudSearchDomain::Plugins::SwitchToPost)
 
     # @option options [required, Aws::CredentialProvider] :credentials
     #   Your AWS credentials. This can be an instance of any one of the
@@ -729,7 +731,7 @@ module Aws::CloudSearchDomain
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudsearchdomain'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -307,7 +307,7 @@ module Aws::Firehose
     Record.struct_class = Types::Record
 
     RedshiftDestinationConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
-    RedshiftDestinationConfiguration.add_member(:cluster_jdbcurl, Shapes::ShapeRef.new(shape: ClusterJDBCURL, required: true, location_name: "ClusterJDBCURL"))
+    RedshiftDestinationConfiguration.add_member(:cluster_jdbc_url, Shapes::ShapeRef.new(shape: ClusterJDBCURL, required: true, location_name: "ClusterJDBCURL"))
     RedshiftDestinationConfiguration.add_member(:copy_command, Shapes::ShapeRef.new(shape: CopyCommand, required: true, location_name: "CopyCommand"))
     RedshiftDestinationConfiguration.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
     RedshiftDestinationConfiguration.add_member(:password, Shapes::ShapeRef.new(shape: Password, required: true, location_name: "Password"))
@@ -320,7 +320,7 @@ module Aws::Firehose
     RedshiftDestinationConfiguration.struct_class = Types::RedshiftDestinationConfiguration
 
     RedshiftDestinationDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
-    RedshiftDestinationDescription.add_member(:cluster_jdbcurl, Shapes::ShapeRef.new(shape: ClusterJDBCURL, required: true, location_name: "ClusterJDBCURL"))
+    RedshiftDestinationDescription.add_member(:cluster_jdbc_url, Shapes::ShapeRef.new(shape: ClusterJDBCURL, required: true, location_name: "ClusterJDBCURL"))
     RedshiftDestinationDescription.add_member(:copy_command, Shapes::ShapeRef.new(shape: CopyCommand, required: true, location_name: "CopyCommand"))
     RedshiftDestinationDescription.add_member(:username, Shapes::ShapeRef.new(shape: Username, required: true, location_name: "Username"))
     RedshiftDestinationDescription.add_member(:retry_options, Shapes::ShapeRef.new(shape: RedshiftRetryOptions, location_name: "RetryOptions"))
@@ -332,7 +332,7 @@ module Aws::Firehose
     RedshiftDestinationDescription.struct_class = Types::RedshiftDestinationDescription
 
     RedshiftDestinationUpdate.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
-    RedshiftDestinationUpdate.add_member(:cluster_jdbcurl, Shapes::ShapeRef.new(shape: ClusterJDBCURL, location_name: "ClusterJDBCURL"))
+    RedshiftDestinationUpdate.add_member(:cluster_jdbc_url, Shapes::ShapeRef.new(shape: ClusterJDBCURL, location_name: "ClusterJDBCURL"))
     RedshiftDestinationUpdate.add_member(:copy_command, Shapes::ShapeRef.new(shape: CopyCommand, location_name: "CopyCommand"))
     RedshiftDestinationUpdate.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
     RedshiftDestinationUpdate.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))

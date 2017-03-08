@@ -324,6 +324,8 @@ module Aws::RDS
     #     ],
     #     storage_encrypted: false,
     #     kms_key_id: "String",
+    #     pre_signed_url: "String",
+    #     source_region: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -464,13 +466,61 @@ module Aws::RDS
     #   encryption key. If you are creating a DB cluster with the same AWS
     #   account that owns the KMS encryption key used to encrypt the new DB
     #   cluster, then you can use the KMS key alias instead of the ARN for the
-    #   KM encryption key.
+    #   KMS encryption key.
     #
     #   If the `StorageEncrypted` parameter is true, and you do not specify a
     #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
     #   default encryption key. AWS KMS creates the default encryption key for
     #   your AWS account. Your AWS account has a different default encryption
     #   key for each AWS region.
+    #
+    #   If you create a Read Replica of an encrypted DB cluster in another
+    #   region, you must set `KmsKeyId` to a KMS key ID that is valid in the
+    #   destination region. This key is used to encrypt the Read Replica in
+    #   that region.
+    # @option options [String] :pre_signed_url
+    #   A URL that contains a Signature Version 4 signed request for the
+    #   `CreateDBCluster` action to be called in the source region where the
+    #   DB cluster will be replicated from. You only need to specify
+    #   `PreSignedUrl` when you are performing cross-region replication from
+    #   an encrypted DB cluster.
+    #
+    #   The pre-signed URL must be a valid request for the `CreateDBCluster`
+    #   API action that can be executed in the source region that contains the
+    #   encrypted DB cluster to be copied.
+    #
+    #   The pre-signed URL request must contain the following parameter
+    #   values:
+    #
+    #   * `KmsKeyId` - The KMS key identifier for the key to use to encrypt
+    #     the copy of the DB cluster in the destination region. This should
+    #     refer to the same KMS key for both the `CreateDBCluster` action that
+    #     is called in the destination region, and the action contained in the
+    #     pre-signed URL.
+    #
+    #   * `DestinationRegion` - The name of the region that Aurora Read
+    #     Replica will be created in.
+    #
+    #   * `ReplicationSourceIdentifier` - The DB cluster identifier for the
+    #     encrypted DB cluster to be copied. This identifier must be in the
+    #     Amazon Resource Name (ARN) format for the source region. For
+    #     example, if you are copying an encrypted DB cluster from the
+    #     us-west-2 region, then your `ReplicationSourceIdentifier` would look
+    #     like Example:
+    #     `arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1`.
+    #
+    #   To learn how to generate a Signature Version 4 signed request, see [
+    #   Authenticating Requests: Using Query Parameters (AWS Signature Version
+    #   4)][1] and [ Signature Version 4 Signing Process][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+    #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # @option options [String] :destination_region
+    # @option options [String] :source_region
+    #   The source region of the snapshot. This is only needed when the
+    #   shapshot is encrypted and in a different region.
     # @return [DBCluster]
     def create(options = {})
       options = options.merge(db_cluster_identifier: @id)
