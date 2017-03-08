@@ -152,6 +152,10 @@ module Aws
           {"shape" => "String"}
         api['shapes']['CreateDBInstanceReadReplicaMessage']['members']['DestinationRegion'] =
           {"shape" => "String"}
+        api['shapes']['CopyDBClusterSnapshotMessage']['members']['DestinationRegion'] =
+          {"shape" => "String"}
+        api['shapes']['CreateDBClusterMessage']['members']['DestinationRegion'] =
+          {"shape" => "String"}
       end
 
       doc('rds') do |docs|
@@ -160,6 +164,14 @@ module Aws
           "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
           " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
         docs['shapes']['String']['refs']['CreateDBInstanceReadReplicaMessage$SourceRegion'] =
+          "<p>The region which you are copying an encrypted snapshot from.</p>" +
+          "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
+          " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
+        docs['shapes']['String']['refs']['CopyDBClusterSnapshotMessage$SourceRegion'] =
+          "<p>The region which you are copying an encrypted snapshot from.</p>" +
+          "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
+          " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
+        docs['shapes']['String']['refs']['CreateDBClusterMessage$SourceRegion'] =
           "<p>The region which you are copying an encrypted snapshot from.</p>" +
           "<p>This is a required paramter that allows SDK to compute a pre-signed Url and" +
           " populate <code>PreSignedURL</code> parameter on your behalf.</p>"
