@@ -38,6 +38,8 @@ module AwsSdkCodeGenerator
       'iSCSI' => 'iscsi',
       'ACLs' => 'acls',
       'Md5s' => 'md5s',
+      'HIT' => 'hit',
+      'URL' => 'url',
       #'SSEKMS' => 'sse_kms',
     })
 

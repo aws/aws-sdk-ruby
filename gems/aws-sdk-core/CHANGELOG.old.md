@@ -1,6 +1,89 @@
 Unreleased Changes
 ------------------
 
+2.7.3 (2017-01-26)
+------------------
+
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::CloudDirectory - Added support for a new service, Amazon CloudDirectory.
+
+2.7.2 (2017-01-25)
+------------------
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.7.1 (2017-01-24)
+------------------
+
+* Feature - Aws::CodeBuild - Updated the documentation, and API for AWS CodeBuild.
+
+* Feature - Aws::CodeCommit - Updated the API, and documentation for AWS CodeCommit.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+2.7.0 (2017-01-20)
+------------------
+
+2.6.50 (2017-01-20)
+------------------
+
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::Health - Updated the documentation for AWS Health APIs and Notifications.
+
+2.6.49 (2017-01-19)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+2.6.48 (2017-01-18)
+------------------
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws:: - Updated the API for Amazon Relational Database Service.
+
+2.6.47 (2017-01-17)
+------------------
+
+* Feature - Aws:: - Updated the API for Amazon DynamoDB.
+
+* Feature - Aws::DynamoDB - Updated the API, and documentation for Amazon DynamoDB.
+
+* Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
+
+* Feature - Aws::Polly - Updated the documentation for Amazon Polly.
+
+* Feature - Aws::Rekognition - Updated the documentation, and API for Amazon Rekognition.
+
+* Feature - Aws::Route53 - Updated the API for Amazon Route 53.
+
+2.6.46 (2017-01-16)
+------------------
+
+2.6.45 (2017-01-16)
+------------------
+
+* Feature - Aws:: - Added support for the new 2011-12-05 API version of Amazon DynamoDB.
+
+* Issue - Aws::CloudFront::UrlSigner - Fixed an issue where failures could occur
+  when the `UrlSigner` was used in a Rails environment with more than one query
+  parameter. See 
+  [related GitHub issue #1386](https://github.com/aws/aws-sdk-ruby/issues/1386).
+
 2.6.44 (2017-01-04)
 ------------------
 

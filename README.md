@@ -34,6 +34,23 @@ use a major version when expressing a dependency on `aws-sdk`.
 gem 'aws-sdk', '~> 2'
 ```
 
+##Getting Help
+
+Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
+
+* Ask a question on StackOverflow and [tag it](http://stackoverflow.com/questions/tagged/aws-sdk-ruby) with `aws-sdk-ruby`
+* Come join the AWS SDK for Ruby [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
+* Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home), if it turns out that you may have found a bug, please open an issue
+* If in doubt as to whether your issue is a question about how to use AWS or a potential SDK issue, feel free to open a GitHub issue on this repo.
+
+##Opening Issues
+
+If you encounter a bug with `aws-sdk-ruby` we would like to hear about it. Search the existing issues and try to make sure your problem doesn’t already exist before opening a new issue. It’s helpful if you include the version of `aws-sdk-ruby`, ruby version and OS you’re using. Please include a stack trace and reduced repro case when appropriate, too.
+
+The GitHub issues are intended for bug reports and feature requests. For help and questions with using `aws-sdk-ruby` please make use of the resources listed in the Getting Help section.
+
+[`FEATURE_REQUEST.md`](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE\_REQUESTS.md) in particular is a good way to signal your interest in a feature or issue. There are limited resources available for handling issues and by keeping the list of open issues lean we can respond in a timely manner.
+
 ## Configuration
 
 You need to configure `:credentials` and a `:region` to make API calls. It is recommended that you provide these via your environment. This makes it easier to rotate credentials and it keeps your secrets out of source control.

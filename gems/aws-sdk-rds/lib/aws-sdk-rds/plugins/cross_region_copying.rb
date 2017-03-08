@@ -55,7 +55,12 @@ module Aws
         handler(
           Handler,
           step: :initialize,
-          operations: [:copy_db_snapshot]
+          operations: [
+            :copy_db_snapshot,
+            :create_db_instance_read_replica,
+            :copy_db_cluster_snapshot,
+            :create_db_cluster
+          ]
         )
 
       end

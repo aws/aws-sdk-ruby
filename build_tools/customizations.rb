@@ -90,13 +90,27 @@ module BuildTools
     end
 
     api('RDS') do |api|
-      api['shapes']['CopyDBSnapshotMessage']['members']['DestinationRegion'] = {"shape" => "String"}
+      %w(
+        CopyDBSnapshotMessage
+        CreateDBInstanceReadReplicaMessage
+        CopyDBClusterSnapshotMessage
+        CreateDBClusterMessage
+      ).each do |shape_name|
+        api['shapes'][shape_name]['members']['DestinationRegion'] = {"shape" => "String"}
+      end
     end
 
-    #doc('RDS') do |docs|
-    #  docs['shapes']['String']['refs']['CopyDBSnapshotMessage$SourceRegion'] =
-    #    "<p>The region which you are copying a snapshot from. If the snapshot is encrypted, this parameter is required.</p>"
-    #end
+    doc('RDS') do |docs|
+      %w(
+        CopyDBSnapshotMessage
+        CreateDBInstanceReadReplicaMessage
+        CopyDBClusterSnapshotMessage
+        CreateDBClusterMessage
+      ).each do |shape_name|
+        docs['shapes']['String']['refs']["#{shape_name}$SourceRegion"] =
+          "<p>The source region of the snapshot. This is only needed when the shapshot is encrypted and in a different region.</p>"
+      end
+    end
 
     api('Route53') do |api|
       api['shapes']['PageMaxItems']['type'] = 'integer'
