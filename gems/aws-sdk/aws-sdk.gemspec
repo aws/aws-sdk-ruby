@@ -88,7 +88,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-rekognition', '1.0.0.rc4')
   spec.add_dependency('aws-sdk-route53', '1.0.0.rc3')
   spec.add_dependency('aws-sdk-route53domains', '1.0.0.rc1')
-  spec.add_dependency('aws-sdk-s3', '1.0.0.rc2')
+  spec.add_dependency('aws-sdk-s3', '1.0.0.rc3')
   spec.add_dependency('aws-sdk-ses', '1.0.0.rc1')
   spec.add_dependency('aws-sdk-sfn', '1.0.0.rc2')
   spec.add_dependency('aws-sdk-sms', '1.0.0.rc1')
