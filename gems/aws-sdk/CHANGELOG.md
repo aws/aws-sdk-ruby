@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc5 (2017-03-09)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workdocs` gem.
+
 3.0.0.rc4 (2017-03-07)
 ------------------
 

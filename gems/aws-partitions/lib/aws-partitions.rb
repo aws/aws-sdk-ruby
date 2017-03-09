@@ -311,6 +311,7 @@ module Aws
             'Support' => 'support',
             'WAF' => 'waf',
             'WAFRegional' => 'waf-regional',
+            'WorkDocs' => 'workdocs',
             'WorkSpaces' => 'workspaces',
             'XRay' => 'xray',
           }

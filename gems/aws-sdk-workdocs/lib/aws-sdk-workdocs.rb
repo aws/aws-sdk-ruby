@@ -5,16 +5,18 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'aws-sdk-core'
+require 'aws-sigv4'
 
-require_relative 'aws-sdk-sts/types'
-require_relative 'aws-sdk-sts/client_api'
-require_relative 'aws-sdk-sts/client'
-require_relative 'aws-sdk-sts/errors'
-require_relative 'aws-sdk-sts/resource'
-require_relative 'aws-sdk-sts/customizations'
+require_relative 'aws-sdk-workdocs/types'
+require_relative 'aws-sdk-workdocs/client_api'
+require_relative 'aws-sdk-workdocs/client'
+require_relative 'aws-sdk-workdocs/errors'
+require_relative 'aws-sdk-workdocs/resource'
+require_relative 'aws-sdk-workdocs/customizations'
 
-# This module provides support for AWS Security Token Service. This module is available in the
-# `aws-sdk-core` gem.
+# This module provides support for Amazon WorkDocs. This module is available in the
+# `aws-sdk-workdocs` gem.
 #
 # # Client
 #
@@ -26,20 +28,20 @@ require_relative 'aws-sdk-sts/customizations'
 #
 # # Errors
 #
-# Errors returned from AWS Security Token Service all
+# Errors returned from Amazon WorkDocs all
 # extend {Errors::ServiceError}.
 #
 #     begin
 #       # do stuff
-#     rescue Aws::STS::Errors::ServiceError
+#     rescue Aws::WorkDocs::Errors::ServiceError
 #       # rescues all service API errors
 #     end
 #
 # See {Errors} for more information.
 #
 # @service
-module Aws::STS
+module Aws::WorkDocs
 
-  GEM_VERSION = '3.0.0.rc6'
+  GEM_VERSION = '1.0.0.rc1'
 
 end

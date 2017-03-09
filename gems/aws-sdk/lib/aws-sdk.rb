@@ -95,6 +95,7 @@ module Aws
   autoload :Support, 'aws-sdk-support'
   autoload :WAF, 'aws-sdk-waf'
   autoload :WAFRegional, 'aws-sdk-wafregional'
+  autoload :WorkDocs, 'aws-sdk-workdocs'
   autoload :WorkSpaces, 'aws-sdk-workspaces'
   autoload :XRay, 'aws-sdk-xray'
   # end service gems

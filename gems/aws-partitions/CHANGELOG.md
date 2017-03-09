@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2017-03-09)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkDocs`.
+
 1.4.0 (2017-03-08)
 ------------------
 
