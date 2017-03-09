@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+2.8.3 (2017-03-08)
+------------------
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::WorkDocs - Added support for a new service, Amazon WorkDocs.
+
 2.8.2 (2017-03-08)
 ------------------
 

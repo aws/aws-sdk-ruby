@@ -157,6 +157,14 @@ module Aws
           {"shape" => "String"}
         api['shapes']['CreateDBClusterMessage']['members']['DestinationRegion'] =
           {"shape" => "String"}
+        api['shapes']['CopyDBSnapshotMessage']['members']['SourceRegion'] =
+          {"shape" => "String"}
+        api['shapes']['CreateDBInstanceReadReplicaMessage']['members']['SourceRegion'] =
+          {"shape" => "String"}
+        api['shapes']['CopyDBClusterSnapshotMessage']['members']['SourceRegion'] =
+          {"shape" => "String"}
+        api['shapes']['CreateDBClusterMessage']['members']['SourceRegion'] =
+          {"shape" => "String"}
       end
 
       doc('rds') do |docs|
