@@ -1,0 +1,1656 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::WorkDocs
+  module Types
+
+    # @note When making an API call, you may pass AbortDocumentVersionUploadRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The ID of the version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUploadRequest AWS API Documentation
+    #
+    class AbortDocumentVersionUploadRequest < Struct.new(
+      :document_id,
+      :version_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ActivateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "IdType", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserRequest AWS API Documentation
+    #
+    class ActivateUserRequest < Struct.new(
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user
+    #   The user information.
+    #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ActivateUserResponse AWS API Documentation
+    #
+    class ActivateUserResponse < Struct.new(
+      :user)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass AddResourcePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceIdType", # required
+    #         principals: [ # required
+    #           {
+    #             id: "IdType", # required
+    #             type: "USER", # required, accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
+    #             role: "VIEWER", # required, accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] principals
+    #   The users, groups, or organization being granted permission.
+    #   @return [Array<Types::SharePrincipal>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissionsRequest AWS API Documentation
+    #
+    class AddResourcePermissionsRequest < Struct.new(
+      :resource_id,
+      :principals)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] share_results
+    #   The share results.
+    #   @return [Array<Types::ShareResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AddResourcePermissionsResponse AWS API Documentation
+    #
+    class AddResourcePermissionsResponse < Struct.new(
+      :share_results)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "ResourceNameType",
+    #         parent_folder_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the new folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_id
+    #   The ID of the parent folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolderRequest AWS API Documentation
+    #
+    class CreateFolderRequest < Struct.new(
+      :name,
+      :parent_folder_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   The metadata of the folder.
+    #   @return [Types::FolderMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateFolderResponse AWS API Documentation
+    #
+    class CreateFolderResponse < Struct.new(
+      :metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateNotificationSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "IdType", # required
+    #         endpoint: "SubscriptionEndPointType", # required
+    #         protocol: "HTTPS", # required, accepts HTTPS
+    #         subscription_type: "ALL", # required, accepts ALL
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   The endpoint to receive the notifications. If the protocol is HTTPS,
+    #   the endpoint is a URL that begins with "https://".
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol to use. The supported value is https, which delivers
+    #   JSON-encoded messasges using HTTPS POST.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscription_type
+    #   The notification type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscriptionRequest AWS API Documentation
+    #
+    class CreateNotificationSubscriptionRequest < Struct.new(
+      :organization_id,
+      :endpoint,
+      :protocol,
+      :subscription_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscription
+    #   The subscription.
+    #   @return [Types::Subscription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateNotificationSubscriptionResponse AWS API Documentation
+    #
+    class CreateNotificationSubscriptionResponse < Struct.new(
+      :subscription)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "IdType",
+    #         username: "UsernameType", # required
+    #         given_name: "UserAttributeValueType", # required
+    #         surname: "UserAttributeValueType", # required
+    #         password: "PasswordType", # required
+    #         time_zone_id: "TimeZoneIdType",
+    #         storage_rule: {
+    #           storage_allocated_in_bytes: 1,
+    #           storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
+    #         },
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The login name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] given_name
+    #   The given name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] surname
+    #   The surname of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] password
+    #   The password of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] time_zone_id
+    #   The time zone ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_rule
+    #   The amount of storage for the user.
+    #   @return [Types::StorageRuleType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserRequest AWS API Documentation
+    #
+    class CreateUserRequest < Struct.new(
+      :organization_id,
+      :username,
+      :given_name,
+      :surname,
+      :password,
+      :time_zone_id,
+      :storage_rule)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user
+    #   The user information.
+    #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/CreateUserResponse AWS API Documentation
+    #
+    class CreateUserResponse < Struct.new(
+      :user)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeactivateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "IdType", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeactivateUserRequest AWS API Documentation
+    #
+    class DeactivateUserRequest < Struct.new(
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteDocumentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteDocumentRequest AWS API Documentation
+    #
+    class DeleteDocumentRequest < Struct.new(
+      :document_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFolderContentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         folder_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderContentsRequest AWS API Documentation
+    #
+    class DeleteFolderContentsRequest < Struct.new(
+      :folder_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         folder_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteFolderRequest AWS API Documentation
+    #
+    class DeleteFolderRequest < Struct.new(
+      :folder_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteNotificationSubscriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         subscription_id: "IdType", # required
+    #         organization_id: "IdType", # required
+    #       }
+    #
+    # @!attribute [rw] subscription_id
+    #   The ID of the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteNotificationSubscriptionRequest AWS API Documentation
+    #
+    class DeleteNotificationSubscriptionRequest < Struct.new(
+      :subscription_id,
+      :organization_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "IdType", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DeleteUserRequest AWS API Documentation
+    #
+    class DeleteUserRequest < Struct.new(
+      :user_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeDocumentVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #         marker: "PageMarkerType",
+    #         limit: 1,
+    #         include: "FieldNamesType",
+    #         fields: "FieldNamesType",
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of versions to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] include
+    #   A comma-separated list of values. Specify "INITIALIZED" to include
+    #   incomplete versions.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   Specify "SOURCE" to include initialized versions and a URL for the
+    #   source document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersionsRequest AWS API Documentation
+    #
+    class DescribeDocumentVersionsRequest < Struct.new(
+      :document_id,
+      :marker,
+      :limit,
+      :include,
+      :fields)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] document_versions
+    #   The document versions.
+    #   @return [Array<Types::DocumentVersionMetadata>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeDocumentVersionsResponse AWS API Documentation
+    #
+    class DescribeDocumentVersionsResponse < Struct.new(
+      :document_versions,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFolderContentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         folder_id: "ResourceIdType", # required
+    #         sort: "DATE", # accepts DATE, NAME
+    #         order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         limit: 1,
+    #         marker: "PageMarkerType",
+    #         type: "ALL", # accepts ALL, DOCUMENT, FOLDER
+    #         include: "FieldNamesType",
+    #       }
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   The sorting criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order for the contents of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of items.
+    #   @return [String]
+    #
+    # @!attribute [rw] include
+    #   The contents to include. Specify "INITIALIZED" to include
+    #   initialized documents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContentsRequest AWS API Documentation
+    #
+    class DescribeFolderContentsRequest < Struct.new(
+      :folder_id,
+      :sort,
+      :order,
+      :limit,
+      :marker,
+      :type,
+      :include)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] folders
+    #   The sub-folders in the specified folder.
+    #   @return [Array<Types::FolderMetadata>]
+    #
+    # @!attribute [rw] documents
+    #   The documents in the specified folder.
+    #   @return [Array<Types::DocumentMetadata>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeFolderContentsResponse AWS API Documentation
+    #
+    class DescribeFolderContentsResponse < Struct.new(
+      :folders,
+      :documents,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeNotificationSubscriptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "IdType", # required
+    #         marker: "PageMarkerType",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptionsRequest AWS API Documentation
+    #
+    class DescribeNotificationSubscriptionsRequest < Struct.new(
+      :organization_id,
+      :marker,
+      :limit)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] subscriptions
+    #   The subscriptions.
+    #   @return [Array<Types::Subscription>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeNotificationSubscriptionsResponse AWS API Documentation
+    #
+    class DescribeNotificationSubscriptionsResponse < Struct.new(
+      :subscriptions,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeResourcePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceIdType", # required
+    #         limit: 1,
+    #         marker: "PageMarkerType",
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return with this call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissionsRequest AWS API Documentation
+    #
+    class DescribeResourcePermissionsRequest < Struct.new(
+      :resource_id,
+      :limit,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] principals
+    #   The principals.
+    #   @return [Array<Types::Principal>]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeResourcePermissionsResponse AWS API Documentation
+    #
+    class DescribeResourcePermissionsResponse < Struct.new(
+      :principals,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "IdType",
+    #         user_ids: "UserIdsType",
+    #         query: "SearchQueryType",
+    #         include: "ALL", # accepts ALL, ACTIVE_PENDING
+    #         order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #         sort: "USER_NAME", # accepts USER_NAME, FULL_NAME, STORAGE_LIMIT, USER_STATUS, STORAGE_USED
+    #         marker: "PageMarkerType",
+    #         limit: 1,
+    #         fields: "FieldNamesType",
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_ids
+    #   The IDs of the users.
+    #   @return [String]
+    #
+    # @!attribute [rw] query
+    #   A query to filter users by user name.
+    #   @return [String]
+    #
+    # @!attribute [rw] include
+    #   The state of the users. Specify "ALL" to include inactive users.
+    #   @return [String]
+    #
+    # @!attribute [rw] order
+    #   The order for the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort
+    #   The sorting criteria.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fields
+    #   A comma-separated list of values. Specify "STORAGE\_METADATA" to
+    #   include the user storage quota and utilization information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersRequest AWS API Documentation
+    #
+    class DescribeUsersRequest < Struct.new(
+      :organization_id,
+      :user_ids,
+      :query,
+      :include,
+      :order,
+      :sort,
+      :marker,
+      :limit,
+      :fields)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   The users.
+    #   @return [Array<Types::User>]
+    #
+    # @!attribute [rw] total_number_of_users
+    #   The total number of users included in the results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DescribeUsersResponse AWS API Documentation
+    #
+    class DescribeUsersResponse < Struct.new(
+      :users,
+      :total_number_of_users,
+      :marker)
+      include Aws::Structure
+    end
+
+    # Describes the document.
+    #
+    # @!attribute [rw] id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_id
+    #   The ID of the creator.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_id
+    #   The ID of the parent folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the document was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_timestamp
+    #   The time when the document was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] latest_version_metadata
+    #   The latest version of the document.
+    #   @return [Types::DocumentVersionMetadata]
+    #
+    # @!attribute [rw] resource_state
+    #   The resource state.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DocumentMetadata AWS API Documentation
+    #
+    class DocumentMetadata < Struct.new(
+      :id,
+      :creator_id,
+      :parent_folder_id,
+      :created_timestamp,
+      :modified_timestamp,
+      :latest_version_metadata,
+      :resource_state)
+      include Aws::Structure
+    end
+
+    # Describes a version of a document.
+    #
+    # @!attribute [rw] id
+    #   The ID of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the version.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The content type of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] size
+    #   The size of the document, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] signature
+    #   The signature of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time stamp when the document was first uploaded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_timestamp
+    #   The time stamp when the document was last uploaded.
+    #   @return [Time]
+    #
+    # @!attribute [rw] content_created_timestamp
+    #   The time stamp when the content of the document was originally
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] content_modified_timestamp
+    #   The time stamp when the content of the document was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] creator_id
+    #   The ID of the creator.
+    #   @return [String]
+    #
+    # @!attribute [rw] thumbnail
+    #   The thumbnail of the document.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] source
+    #   The source of the document.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/DocumentVersionMetadata AWS API Documentation
+    #
+    class DocumentVersionMetadata < Struct.new(
+      :id,
+      :name,
+      :content_type,
+      :size,
+      :signature,
+      :status,
+      :created_timestamp,
+      :modified_timestamp,
+      :content_created_timestamp,
+      :content_modified_timestamp,
+      :creator_id,
+      :thumbnail,
+      :source)
+      include Aws::Structure
+    end
+
+    # Describes a folder.
+    #
+    # @!attribute [rw] id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] creator_id
+    #   The ID of the creator.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_id
+    #   The ID of the parent folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the folder was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_timestamp
+    #   The time when the folder was updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] resource_state
+    #   The resource state of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] signature
+    #   The unique identifier created from the subfolders and documents of
+    #   the folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/FolderMetadata AWS API Documentation
+    #
+    class FolderMetadata < Struct.new(
+      :id,
+      :name,
+      :creator_id,
+      :parent_folder_id,
+      :created_timestamp,
+      :modified_timestamp,
+      :resource_state,
+      :signature)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDocumentPathRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "IdType", # required
+    #         limit: 1,
+    #         fields: "FieldNamesType",
+    #         marker: "PageMarkerType",
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of levels in the hierarchy to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fields
+    #   A comma-separated list of values. Specify "NAME" to include the
+    #   names of the parent folders.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   This value is not supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPathRequest AWS API Documentation
+    #
+    class GetDocumentPathRequest < Struct.new(
+      :document_id,
+      :limit,
+      :fields,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] path
+    #   The path information.
+    #   @return [Types::ResourcePath]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentPathResponse AWS API Documentation
+    #
+    class GetDocumentPathResponse < Struct.new(
+      :path)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDocumentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document object.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentRequest AWS API Documentation
+    #
+    class GetDocumentRequest < Struct.new(
+      :document_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   The document object.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentResponse AWS API Documentation
+    #
+    class GetDocumentResponse < Struct.new(
+      :metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetDocumentVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #         fields: "FieldNamesType",
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   A comma-separated list of values. Specify "SOURCE" to include a
+    #   URL for the source document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionRequest AWS API Documentation
+    #
+    class GetDocumentVersionRequest < Struct.new(
+      :document_id,
+      :version_id,
+      :fields)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   The version metadata.
+    #   @return [Types::DocumentVersionMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetDocumentVersionResponse AWS API Documentation
+    #
+    class GetDocumentVersionResponse < Struct.new(
+      :metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFolderPathRequest
+    #   data as a hash:
+    #
+    #       {
+    #         folder_id: "IdType", # required
+    #         limit: 1,
+    #         fields: "FieldNamesType",
+    #         marker: "PageMarkerType",
+    #       }
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of levels in the hierarchy to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fields
+    #   A comma-separated list of values. Specify "NAME" to include the
+    #   names of the parent folders.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   This value is not supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPathRequest AWS API Documentation
+    #
+    class GetFolderPathRequest < Struct.new(
+      :folder_id,
+      :limit,
+      :fields,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] path
+    #   The path information.
+    #   @return [Types::ResourcePath]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderPathResponse AWS API Documentation
+    #
+    class GetFolderPathResponse < Struct.new(
+      :path)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         folder_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderRequest AWS API Documentation
+    #
+    class GetFolderRequest < Struct.new(
+      :folder_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   The metadata of the folder.
+    #   @return [Types::FolderMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/GetFolderResponse AWS API Documentation
+    #
+    class GetFolderResponse < Struct.new(
+      :metadata)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass InitiateDocumentVersionUploadRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "ResourceIdType",
+    #         name: "ResourceNameType",
+    #         content_created_timestamp: Time.now,
+    #         content_modified_timestamp: Time.now,
+    #         content_type: "DocumentContentType",
+    #         document_size_in_bytes: 1,
+    #         parent_folder_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_created_timestamp
+    #   The time stamp when the content of the document was originally
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] content_modified_timestamp
+    #   The time stamp when the content of the document was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] content_type
+    #   The content type of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_size_in_bytes
+    #   The size of the document, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parent_folder_id
+    #   The ID of the parent folder.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUploadRequest AWS API Documentation
+    #
+    class InitiateDocumentVersionUploadRequest < Struct.new(
+      :id,
+      :name,
+      :content_created_timestamp,
+      :content_modified_timestamp,
+      :content_type,
+      :document_size_in_bytes,
+      :parent_folder_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata
+    #   The document metadata.
+    #   @return [Types::DocumentMetadata]
+    #
+    # @!attribute [rw] upload_metadata
+    #   The upload metadata.
+    #   @return [Types::UploadMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/InitiateDocumentVersionUploadResponse AWS API Documentation
+    #
+    class InitiateDocumentVersionUploadResponse < Struct.new(
+      :metadata,
+      :upload_metadata)
+      include Aws::Structure
+    end
+
+    # Describes the permissions.
+    #
+    # @!attribute [rw] role
+    #   The role of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/PermissionInfo AWS API Documentation
+    #
+    class PermissionInfo < Struct.new(
+      :role,
+      :type)
+      include Aws::Structure
+    end
+
+    # Describes a resource.
+    #
+    # @!attribute [rw] id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] roles
+    #   The permission information for the resource.
+    #   @return [Array<Types::PermissionInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Principal AWS API Documentation
+    #
+    class Principal < Struct.new(
+      :id,
+      :type,
+      :roles)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveAllResourcePermissionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceIdType", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveAllResourcePermissionsRequest AWS API Documentation
+    #
+    class RemoveAllResourcePermissionsRequest < Struct.new(
+      :resource_id)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RemoveResourcePermissionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "ResourceIdType", # required
+    #         principal_id: "IdType", # required
+    #         principal_type: "USER", # accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_id
+    #   The principal ID of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] principal_type
+    #   The principal type of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/RemoveResourcePermissionRequest AWS API Documentation
+    #
+    class RemoveResourcePermissionRequest < Struct.new(
+      :resource_id,
+      :principal_id,
+      :principal_type)
+      include Aws::Structure
+    end
+
+    # Describes the path information of a resource.
+    #
+    # @!attribute [rw] components
+    #   The components of the resource path.
+    #   @return [Array<Types::ResourcePathComponent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourcePath AWS API Documentation
+    #
+    class ResourcePath < Struct.new(
+      :components)
+      include Aws::Structure
+    end
+
+    # Describes the resource path.
+    #
+    # @!attribute [rw] id
+    #   The ID of the resource path.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ResourcePathComponent AWS API Documentation
+    #
+    class ResourcePathComponent < Struct.new(
+      :id,
+      :name)
+      include Aws::Structure
+    end
+
+    # Describes the recipient type and ID, if available.
+    #
+    # @note When making an API call, you may pass SharePrincipal
+    #   data as a hash:
+    #
+    #       {
+    #         id: "IdType", # required
+    #         type: "USER", # required, accepts USER, GROUP, INVITE, ANONYMOUS, ORGANIZATION
+    #         role: "VIEWER", # required, accepts VIEWER, CONTRIBUTOR, OWNER, COOWNER
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the recipient.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role of the recipient.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/SharePrincipal AWS API Documentation
+    #
+    class SharePrincipal < Struct.new(
+      :id,
+      :type,
+      :role)
+      include Aws::Structure
+    end
+
+    # Describes the share results of a resource.
+    #
+    # @!attribute [rw] principal_id
+    #   The ID of the principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The role.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_id
+    #   The ID of the resource that was shared.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/ShareResult AWS API Documentation
+    #
+    class ShareResult < Struct.new(
+      :principal_id,
+      :role,
+      :status,
+      :share_id,
+      :status_message)
+      include Aws::Structure
+    end
+
+    # Describes the storage for a user.
+    #
+    # @note When making an API call, you may pass StorageRuleType
+    #   data as a hash:
+    #
+    #       {
+    #         storage_allocated_in_bytes: 1,
+    #         storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
+    #       }
+    #
+    # @!attribute [rw] storage_allocated_in_bytes
+    #   The amount of storage allocated, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_type
+    #   The type of storage.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/StorageRuleType AWS API Documentation
+    #
+    class StorageRuleType < Struct.new(
+      :storage_allocated_in_bytes,
+      :storage_type)
+      include Aws::Structure
+    end
+
+    # Describes a subscription.
+    #
+    # @!attribute [rw] subscription_id
+    #   The ID of the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_point
+    #   The endpoint of the subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol of the subscription.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/Subscription AWS API Documentation
+    #
+    class Subscription < Struct.new(
+      :subscription_id,
+      :end_point,
+      :protocol)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateDocumentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #         name: "ResourceNameType",
+    #         parent_folder_id: "ResourceIdType",
+    #         resource_state: "ACTIVE", # accepts ACTIVE, RESTORING, RECYCLING, RECYCLED
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_id
+    #   The ID of the parent folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_state
+    #   The resource state of the document. Note that only ACTIVE and
+    #   RECYCLED are supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentRequest AWS API Documentation
+    #
+    class UpdateDocumentRequest < Struct.new(
+      :document_id,
+      :name,
+      :parent_folder_id,
+      :resource_state)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateDocumentVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         document_id: "ResourceIdType", # required
+    #         version_id: "DocumentVersionIdType", # required
+    #         version_status: "ACTIVE", # accepts ACTIVE
+    #       }
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   The version ID of the document.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_status
+    #   The status of the version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateDocumentVersionRequest AWS API Documentation
+    #
+    class UpdateDocumentVersionRequest < Struct.new(
+      :document_id,
+      :version_id,
+      :version_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFolderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         folder_id: "ResourceIdType", # required
+    #         name: "ResourceNameType",
+    #         parent_folder_id: "ResourceIdType",
+    #         resource_state: "ACTIVE", # accepts ACTIVE, RESTORING, RECYCLING, RECYCLED
+    #       }
+    #
+    # @!attribute [rw] folder_id
+    #   The ID of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_folder_id
+    #   The ID of the parent folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_state
+    #   The resource state of the folder. Note that only ACTIVE and RECYCLED
+    #   are accepted values from the API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateFolderRequest AWS API Documentation
+    #
+    class UpdateFolderRequest < Struct.new(
+      :folder_id,
+      :name,
+      :parent_folder_id,
+      :resource_state)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "IdType", # required
+    #         given_name: "UserAttributeValueType",
+    #         surname: "UserAttributeValueType",
+    #         type: "USER", # accepts USER, ADMIN
+    #         storage_rule: {
+    #           storage_allocated_in_bytes: 1,
+    #           storage_type: "UNLIMITED", # accepts UNLIMITED, QUOTA
+    #         },
+    #         time_zone_id: "TimeZoneIdType",
+    #         locale: "en", # accepts en, fr, ko, de, es, ja, ru, zh_CN, zh_TW, pt_BR, default
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] given_name
+    #   The given name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] surname
+    #   The surname of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_rule
+    #   The amount of storage for the user.
+    #   @return [Types::StorageRuleType]
+    #
+    # @!attribute [rw] time_zone_id
+    #   The time zone ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUserRequest AWS API Documentation
+    #
+    class UpdateUserRequest < Struct.new(
+      :user_id,
+      :given_name,
+      :surname,
+      :type,
+      :storage_rule,
+      :time_zone_id,
+      :locale)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user
+    #   The user information.
+    #   @return [Types::User]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UpdateUserResponse AWS API Documentation
+    #
+    class UpdateUserResponse < Struct.new(
+      :user)
+      include Aws::Structure
+    end
+
+    # Describes the upload.
+    #
+    # @!attribute [rw] upload_url
+    #   The URL of the upload.
+    #   @return [String]
+    #
+    # @!attribute [rw] signed_headers
+    #   The signed headers.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UploadMetadata AWS API Documentation
+    #
+    class UploadMetadata < Struct.new(
+      :upload_url,
+      :signed_headers)
+      include Aws::Structure
+    end
+
+    # Describes a user.
+    #
+    # @!attribute [rw] id
+    #   The ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The login name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] given_name
+    #   The given name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] surname
+    #   The surname of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization.
+    #   @return [String]
+    #
+    # @!attribute [rw] root_folder_id
+    #   The ID of the root folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] recycle_bin_folder_id
+    #   The ID of the recycle bin folder.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of user.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The time when the user was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] modified_timestamp
+    #   The time when the user was modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] time_zone_id
+    #   The time zone ID of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale
+    #   The locale of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage
+    #   The storage for the user.
+    #   @return [Types::UserStorageMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/User AWS API Documentation
+    #
+    class User < Struct.new(
+      :id,
+      :username,
+      :email_address,
+      :given_name,
+      :surname,
+      :organization_id,
+      :root_folder_id,
+      :recycle_bin_folder_id,
+      :status,
+      :type,
+      :created_timestamp,
+      :modified_timestamp,
+      :time_zone_id,
+      :locale,
+      :storage)
+      include Aws::Structure
+    end
+
+    # Describes the storage for a user.
+    #
+    # @!attribute [rw] storage_utilized_in_bytes
+    #   The amount of storage utilized, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_rule
+    #   The storage for a user.
+    #   @return [Types::StorageRuleType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/UserStorageMetadata AWS API Documentation
+    #
+    class UserStorageMetadata < Struct.new(
+      :storage_utilized_in_bytes,
+      :storage_rule)
+      include Aws::Structure
+    end
+
+  end
+end

@@ -347,6 +347,9 @@
   "WAFRegional": {
     "models": "waf-regional/2016-11-28"
   },
+  "WorkDocs": {
+    "models": "workdocs/2016-05-01"
+  },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"
   },

@@ -339,11 +339,12 @@ to be backwards compatible.
 | Amazon Simple Systems Manager (SSM) | Aws::SSM                          | aws-sdk-ssm                          | 2014-11-06  |
 | Amazon Simple Workflow Service      | Aws::SWF                          | aws-sdk-swf                          | 2012-01-25  |
 | Amazon SimpleDB                     | Aws::SimpleDB                     | aws-sdk-simpledb                     | 2009-04-15  |
+| Amazon WorkDocs                     | Aws::WorkDocs                     | aws-sdk-workdocs                     | 2016-05-01  |
 | Amazon WorkSpaces                   | Aws::WorkSpaces                   | aws-sdk-workspaces                   | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling       | aws-sdk-applicationautoscaling       | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                  | aws-sdk-autoscaling                  | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancingV2       | aws-sdk-elasticloadbalancingv2       | 2015-12-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancing         | aws-sdk-elasticloadbalancing         | 2012-06-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancingV2       | aws-sdk-elasticloadbalancingv2       | 2015-12-01  |
 
 ## License
 
