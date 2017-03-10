@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.8.5 (2017-03-10)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API for AWS CodeDeploy.
 
 * Feature - Aws::EMR - Updated the API, documentation, and waiters for Amazon Elastic MapReduce.
