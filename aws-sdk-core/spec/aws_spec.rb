@@ -138,4 +138,23 @@ module Aws
     end
 
   end
+
+  describe '.empty_connection_pools!' do
+    it 'close any existing sessions' do
+      expect_any_instance_of(
+        Seahorse::Client::NetHttp::ConnectionPool::ExtendedSession
+      ).to receive(:finish)
+
+      Aws.empty_connection_pools!
+    end
+
+    it 'clears any pool' do
+      # ConnectionPool maintains its pool as a hash in a instance variable
+      expect_any_instance_of(
+        Hash
+      ).to receive(:clear)
+
+      Aws.empty_connection_pools!
+    end
+  end
 end
