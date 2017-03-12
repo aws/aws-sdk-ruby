@@ -140,10 +140,10 @@ module Aws
   end
 
   describe '.empty_connection_pools!' do
-    it 'close any existing sessions' do
+    it 'closes any existing sessions' do
       expect_any_instance_of(
         Seahorse::Client::NetHttp::ConnectionPool::ExtendedSession
-      ).to receive(:finish)
+      ).to receive(:finish).at_least(:once)
 
       Aws.empty_connection_pools!
     end
