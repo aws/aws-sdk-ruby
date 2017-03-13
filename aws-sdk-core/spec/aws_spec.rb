@@ -141,20 +141,16 @@ module Aws
 
   describe '.empty_connection_pools!' do
     it 'closes any existing sessions' do
-      expect_any_instance_of(
-        Seahorse::Client::NetHttp::ConnectionPool::ExtendedSession
-      ).to receive(:finish).at_least(:once)
+      endpoint = "http://example.com"
+      conn_pool = Seahorse::Client::NetHttp::ConnectionPool.for({})
+      session = conn_pool.send(:start_session, endpoint)
+      conn_pool.instance_variable_get(:@pool)[endpoint] = [session]
+
+      expect(conn_pool.size).to eq(1)
 
       Aws.empty_connection_pools!
-    end
 
-    it 'clears any pool' do
-      # ConnectionPool maintains its pool as a hash in a instance variable
-      expect_any_instance_of(
-        Hash
-      ).to receive(:clear)
-
-      Aws.empty_connection_pools!
+      expect(conn_pool.size).to eq(0)
     end
   end
 end
