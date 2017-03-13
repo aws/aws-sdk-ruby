@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.8.6 (2017-03-13)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
 
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
