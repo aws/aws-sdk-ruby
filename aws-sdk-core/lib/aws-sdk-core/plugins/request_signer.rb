@@ -94,7 +94,7 @@ module Aws
           require_credentials(context)
           if signer = SIGNERS[context.config.signature_version]
             require_credentials(context)
-            signer.sign(context)
+            signer.sign(apply_authtype(context))
           end
         end
 
@@ -120,6 +120,13 @@ module Aws
           else
             false
           end
+        end
+
+        def apply_authtype(context)
+          return context unless context.operation['authtype'].eql? "v4-unsigned-payload"
+          return context if context.http_request.endpoint.scheme.eql? 'http'
+          context.http_request.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD'
+          context
         end
 
       end
