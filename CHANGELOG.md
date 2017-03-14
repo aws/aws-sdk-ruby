@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.8.7 (2017-03-14)
+------------------
+
 * Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
 
 2.8.6 (2017-03-13)
