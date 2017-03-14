@@ -182,3 +182,8 @@ When(/^I download the file with mode "([^"]*)" with (\d+)M chunk size$/) do |mod
 
   @object.download_file(@download_file_dest, mode: mode, chunk_size: (mb.to_i * 1024 *1024))
 end
+
+Then(/^this test file has been cleaned up$/) do
+  File.unlink(@download_file_dest)
+  expect(File.exist?(@download_file_dest)).to be(false)
+end
