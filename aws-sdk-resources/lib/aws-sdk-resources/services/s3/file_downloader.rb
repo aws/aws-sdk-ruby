@@ -100,57 +100,69 @@ module Aws
         end
       end
 
-      def concatenate_files(files)
-        File.open(@path, 'w', encoding: 'UTF-8') do |obj|
-          sort_files(files).each do |file|
-            File.open(file, 'r', encoding: 'UTF-8') do |f|
-              obj.write(f.read)
-            end
-            File.unlink(file)
+      def concatenate_files(fileparts)
+        begin
+          concatenate_parts(fileparts)
+        ensure
+          fileparts.each do |part|
+            File.unlink(part) if File.exists?(part)
           end
+        end
+      end
+
+      def concatenate_parts(fileparts)
+        File.open(@path, 'w', encoding: 'UTF-8') do |output_path|
+          sort_files(fileparts).each do |part|
+            File.open(part, 'r', encoding: 'UTF-8') { |f| output_path.write(f.read) }
+          end
+        end
+      end
+
+      def file_batches(chunks, mode)
+        batches = []
+        dir = Dir.tmpdir
+        chunks = (1..chunks) if mode.eql? 'part_number'
+        chunks.each_slice(@thread_count) do |slice|
+          batches << map_files(slice, dir, mode)
+        end
+        batches
+      end
+
+      def map_files(slice, dir, mode)
+        case mode
+        when 'range'
+          slice.inject({}) {|h, chunk| h[chunk] = File.join(dir, chunk); h}
+        when 'part_number'
+          slice.inject({}) {|h, part| h[part] = File.join(dir, "part_number=#{part}"); h}
         end
       end
 
       def get_range(chunks)
-        count = 0
-        threads = []
-        file_chunks = []
-        dir = Dir.tmpdir
-        while count < chunks.size
-          remains_count = chunks.size - count
-          cnt = @thread_count < remains_count ? @thread_count : remains_count
-          cnt.times do
-            threads << Thread.new(chunks.shift) do |chunk|
-              resp = @client.get_object(bucket: @bucket, key: @key, range: chunk)
-              file_chunks << file = File.join(dir, chunk)
-              File.open(file, 'w', encoding: 'UTF-8') do |f|
-                f.write(resp.body.read)
-              end
-            end
-          end
-          threads.each(&:join)
-          count += cnt
-        end
-        concatenate_files(file_chunks)
+        thread_batches(chunks, 'range')
       end
 
       def get_part(parts)
-        threads = []
-        file_parts = []
-        dir = Dir.tmpdir
-        parts.times do |i|
-        # partNumber starts from 1
-          part = i + 1
-          threads << Thread.new(part) do
-            resp = @client.get_object(bucket: @bucket, key: @key, part_number: part)
-            file_parts << file = File.join(dir, 'part_number=' + part.to_s)
-            File.open(file, 'w', encoding: 'UTF-8') do |f|
-              f.write(resp.body.read)
+        thread_batches(parts, 'part_number')
+      end
+
+      def thread_batches(chunks, param)
+        batches = file_batches(chunks, param)
+        batches.each do |batch|
+          threads = []
+          batch.each do |chunk, file|
+            threads << Thread.new do
+              resp = @client.get_object(
+                :bucket => @bucket,
+                :key => @key,
+                param.to_sym => chunk
+              )
+              File.open(file, 'w', encoding: 'UTF-8') {|f| f.write(resp.body.read)}
             end
           end
+          threads.each(&:join)
         end
-        threads.each(&:join)
-        concatenate_files(file_parts)
+        parts = batches.inject([]) {|a, batch| a.push(*batch.values); a}
+        concatenate_files(parts)
       end
 
       def single_request
