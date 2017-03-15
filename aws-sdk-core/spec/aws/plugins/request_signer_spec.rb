@@ -109,7 +109,7 @@ module Aws
                 'output' => {
                   'shape' => 'StreamingFooResponse'
                 },
-                'authtype'=> 'v4-unsigned-payload'
+                'authtype'=> 'v4-unsigned-body'
               },
               'NonStreamingBar' => {
                 'name' => 'NonStreamingBar',
