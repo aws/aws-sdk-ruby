@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+2.8.7 (2017-03-14)
+------------------
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+2.8.6 (2017-03-13)
+------------------
+
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+2.8.5 (2017-03-10)
+------------------
+
+* Feature - Aws::CodeDeploy - Updated the API for AWS CodeDeploy.
+
+* Feature - Aws::EMR - Updated the API, documentation, and waiters for Amazon Elastic MapReduce.
+
+2.8.4 (2017-03-09)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
 2.8.3 (2017-03-08)
 ------------------
 
