@@ -123,9 +123,10 @@ module Aws
         end
 
         def apply_authtype(context)
-          return context unless context.operation['authtype'].eql? "v4-unsigned-body"
-          return context if context.http_request.endpoint.scheme.eql? 'http'
-          context.http_request.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD'
+          if context.operation['authtype'].eql?('v4-unsigned-body') &&
+            context.http_request.endpoint.scheme.eql?('https')
+            context.http_request.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD'
+          end
           context
         end
 

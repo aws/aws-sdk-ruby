@@ -181,6 +181,16 @@ module Aws
           klass
         }
 
+        let(:datetime) { '20120101T10:11:12Z' }
+        let(:now) { Time.now }
+        let(:utc) { now.utc }
+
+        before(:each) {
+          allow(Time).to receive(:now).and_return(now)
+          allow(now).to receive(:utc).and_return(utc)
+          allow(utc).to receive(:strftime).and_return(datetime)
+        }
+
         it `unsigns payload for operations has 'v4-unsigned-payload' for 'authtype'` do
           plugin.add_options(config)
           client = klass.new(
@@ -194,6 +204,7 @@ module Aws
           resp = client.streaming_foo(foo_name: 'foo')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
+          expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=a0ca9d2f46f3bc5af23c4569d40607722f4eb50c068159de5328f4f9a452df4d')
         end
 
         it `signs payload for operations without 'v4-unsigned-payload' for 'authtype'` do
@@ -209,6 +220,7 @@ module Aws
           resp = client.non_streaming_bar(bar_name: 'bar')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+          expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=d5c221749c8109dfaf0a072509e963b495dd0ffdd307db006be1e1c6db607f8f')
         end
 
         it `signs payload for HTTP request even when 'v4-unsigned-payload' is set` do
@@ -224,6 +236,7 @@ module Aws
           resp = client.streaming_foo(foo_name: 'foo')
           req = resp.context.http_request
           expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+          expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=d5c221749c8109dfaf0a072509e963b495dd0ffdd307db006be1e1c6db607f8f')
         end
 
       end
