@@ -411,6 +411,9 @@ module Aws
     # there are no race conditions between the parent process and its children
     # for the pooled TCP connections.
     #
+    # Child processes that make multi-threaded calls to the SDK should block on
+    # this call before beginning work.
+    #
     # @return [nil]
     def empty_connection_pools!
       Seahorse::Client::NetHttp::ConnectionPool.pools.each do |pool|
