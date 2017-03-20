@@ -111,10 +111,8 @@ module Aws
       end
 
       def concatenate_parts(fileparts)
-        File.open(@path, 'w', encoding: 'UTF-8') do |output_path|
-          sort_files(fileparts).each do |part|
-            File.open(part, 'r', encoding: 'UTF-8') { |f| output_path.write(f.read) }
-          end
+        File.open(@path, 'wb')do |output_path|
+          sort_files(fileparts).each {|part| IO.copy_stream(part, output_path)}
         end
       end
 
@@ -154,9 +152,9 @@ module Aws
               resp = @client.get_object(
                 :bucket => @bucket,
                 :key => @key,
-                param.to_sym => chunk
+                param.to_sym => chunk,
+                :response_target => file
               )
-              File.open(file, 'w', encoding: 'UTF-8') {|f| f.write(resp.body.read)}
             end
           end
           threads.each(&:join)
