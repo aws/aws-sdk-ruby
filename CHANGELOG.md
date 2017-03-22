@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+2.8.9 (2017-03-21)
+------------------
+
+2.8.8 (2017-03-20)
+------------------
+
+* Feature - Aws::CodeBuild - Updated the documentation for AWS CodeBuild.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
 2.8.7 (2017-03-14)
 ------------------
 
