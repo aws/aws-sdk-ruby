@@ -4,8 +4,16 @@ Unreleased Changes
 2.8.10 (2017-03-22)
 ------------------
 
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for AWS Elastic Load Balancing.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
 2.8.9 (2017-03-21)
 ------------------
+
+* Feature - Aws::Rekognition - Updated the documentation for AWS Rekognition.
 
 2.8.8 (2017-03-20)
 ------------------
