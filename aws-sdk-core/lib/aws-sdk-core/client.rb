@@ -17,6 +17,7 @@ module Aws
       'Aws::Plugins::ResponsePaging',
       'Aws::Plugins::StubResponses',
       'Aws::Plugins::IdempotencyToken',
+      'Aws::Plugins::JsonvalueConverter'
     ]
 
     # @api private

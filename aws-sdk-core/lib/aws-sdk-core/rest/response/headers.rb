@@ -1,5 +1,6 @@
 require 'time'
 require 'base64'
+require 'json'
 
 module Aws
   module Rest
@@ -63,7 +64,7 @@ module Aws
         end
 
         def extract_json_trait(value)
-          Base64.decode64(value)
+          JSON.parse(Base64.decode64(value))
         end
 
       end

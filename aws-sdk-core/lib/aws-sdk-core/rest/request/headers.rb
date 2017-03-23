@@ -44,8 +44,8 @@ module Aws
           end
         end
 
-        # With complex headers hash provided as json string,
-        # base64 encode value to aviod weird characters
+        # With complex headers value in json syntax,
+        # base64 encodes value to aviod weird characters
         # causing potential issues in headers
         def apply_json_trait(value)
           Base64.strict_encode64(value)

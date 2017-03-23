@@ -635,7 +635,7 @@
           "name": "OperationName"
         },
         "result": {
-          "Attr": "{\"Foo\":\"Bar\"}"
+          "Attr": {"Foo":"Bar"}
         },
         "response": {
           "status_code": 200,
