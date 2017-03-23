@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
 2.8.10 (2017-03-22)
 ------------------
 
