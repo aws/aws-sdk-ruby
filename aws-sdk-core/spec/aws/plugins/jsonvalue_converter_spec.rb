@@ -90,7 +90,7 @@ module Aws
         bool = true
         time = Time.now
         resp = client.foo(
-          foo_hash: hash, 
+          foo_hash: hash,
           foo_array: array,
           foo_num: num,
           foo_str: str,
