@@ -69,6 +69,12 @@ module Seahorse
             expect(response.body_contents).to eq(response.body.read)
           end
 
+          it 'raises error when the body cannot be rewind' do
+            response = Response.new
+            response.body = Client::BlockIO.new
+            expect{ response.body_contents }.to raise_error(RuntimeError)
+          end
+
         end
 
       end
