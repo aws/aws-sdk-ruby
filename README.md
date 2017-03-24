@@ -32,7 +32,7 @@ use a major version when expressing a dependency on `aws-sdk`.
 gem 'aws-sdk', '~> 2'
 ```
 
-##Getting Help
+## Getting Help
 
 Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
 
@@ -41,7 +41,7 @@ Please use these community resources for getting help. We use the GitHub issues 
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home), if it turns out that you may have found a bug, please open an issue
 * If in doubt as to whether your issue is a question about how to use AWS or a potential SDK issue, feel free to open a GitHub issue on this repo.
 
-##Opening Issues
+## Opening Issues
 
 If you encounter a bug with `aws-sdk-ruby` we would like to hear about it. Search the existing issues and try to make sure your problem doesn’t already exist before opening a new issue. It’s helpful if you include the version of `aws-sdk-ruby`, ruby version and OS you’re using. Please include a stack trace and reduced repro case when appropriate, too.
 
