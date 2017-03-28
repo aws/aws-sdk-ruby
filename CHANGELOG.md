@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.8.14 (2017-03-28)
+------------------
+
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
 
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
