@@ -123,7 +123,6 @@ module Aws
                 'output' => {
                   'shape' => 'NonStreamingBarResponse'
                 },
-                'authtype': 'none'
               }
             },
             'shapes' => {
