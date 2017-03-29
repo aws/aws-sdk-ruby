@@ -49,7 +49,7 @@ module Aws
             docstring << "\n\n This parameter will be auto-filled on your behalf"\
               " with a random UUIDv4 when no value is provided.\n" if ref['idempotencyToken']
             docstring << "\n\n SDK automatically handles json encoding and base64 encoding"\
-              " for you when the required value is provided according to the description.\n" if ref['jsonvalue']
+              " for you when the required value (Hash, Array, etc.) is provided according to the description.\n" if ref['jsonvalue']
             docstring += ref.documentation.to_s.lines.map { |line| "  #{line}" }.join
             tag(docstring)
           end
