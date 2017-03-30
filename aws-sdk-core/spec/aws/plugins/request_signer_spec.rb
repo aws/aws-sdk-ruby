@@ -89,6 +89,156 @@ module Aws
         end
 
       end
+
+      describe 'apply authtype trait' do
+
+        let(:dummy_credentials) { Aws::Credentials.new('akid', 'secret') }
+        let(:klass) {
+          klass = Class.new(Seahorse::Client::Base)
+          klass.set_api(Api::Builder.build(
+            'operations' => {
+              'StreamingFoo' => {
+                'name' => 'StreamingFoo',
+                'http' => {
+                  'method' => 'POST',
+                  'requestUri' => '/foo/{fooName}'
+                },
+                'input' => {
+                  'shape' => 'StreamingFooRequest'
+                },
+                'output' => {
+                  'shape' => 'StreamingFooResponse'
+                },
+                'authtype'=> 'v4-unsigned-body'
+              },
+              'NonStreamingBar' => {
+                'name' => 'NonStreamingBar',
+                'http' => {
+                  'method' => 'POST',
+                  'requestUri' => '/bar/{barName}'
+                },
+                'input' => {
+                  'shape' => 'NonStreamingBarRequest'
+                },
+                'output' => {
+                  'shape' => 'NonStreamingBarResponse'
+                },
+              }
+            },
+            'shapes' => {
+              'FooName' => {
+                'type' => 'string'
+              },
+              'BarName' => {
+                'type' => 'string'
+              },
+              'Boolean' => {
+                'type' => 'boolean'
+              },
+              'StreamingFooRequest' => {
+                'type' => 'structure',
+                'members' => {
+                  'fooName' => {
+                    'shape' => 'FooName',
+                    'location' => 'uri',
+                    'locationName' => 'fooName'
+                  }
+                }
+              },
+              'NonStreamingBarRequest' => {
+                'type' => 'structure',
+                'members' => {
+                  'barName' => {
+                    'shape' => 'BarName',
+                    'location' => 'uri',
+                    'locationName' => 'barName'
+                  }
+                }
+              },
+              'StreamingFooResponse' => {
+                'type' => 'structure',
+                'members' => {
+                  'Return' => {
+                    'shape' => 'Boolean',
+                    'locationName' => 'return'
+                  }
+                }
+              },
+              'NonStreamingBarResponse' => {
+                'type' => 'structure',
+                'members' => {
+                  'Return' => {
+                    'shape' => 'Boolean',
+                    'locationName' => 'return'
+                  }
+                }
+              }
+            }
+          ))
+          klass.add_plugin(RegionalEndpoint)
+          klass.add_plugin(RequestSigner)
+          klass
+        }
+
+        let(:datetime) { '20120101T10:11:12Z' }
+        let(:now) { Time.now }
+        let(:utc) { now.utc }
+
+        before(:each) {
+          allow(Time).to receive(:now).and_return(now)
+          allow(now).to receive(:utc).and_return(utc)
+          allow(utc).to receive(:strftime).and_return(datetime)
+        }
+
+        it `unsigns payload for operations has 'v4-unsigned-payload' for 'authtype'` do
+          plugin.add_options(config)
+          client = klass.new(
+            signature_version: 'v4',
+            endpoint: 'https://domain.region.amazonaws.com',
+            credentials: dummy_credentials,
+            region: 'region',
+            sigv4_name: 'svc_name'
+          )
+          stub_request(:get, "https://domain.region.amazonaws.com/")
+          resp = client.streaming_foo(foo_name: 'foo')
+          req = resp.context.http_request
+          expect(req.headers['x-amz-content-sha256']).to eq('UNSIGNED-PAYLOAD')
+          expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=a0ca9d2f46f3bc5af23c4569d40607722f4eb50c068159de5328f4f9a452df4d')
+        end
+
+        it `signs payload for operations without 'v4-unsigned-payload' for 'authtype'` do
+          plugin.add_options(config)
+          client = klass.new(
+            signature_version: 'v4',
+            endpoint: 'https://domain.region.amazonaws.com',
+            credentials: dummy_credentials,
+            region: 'region',
+            sigv4_name: 'svc_name'
+          )
+          stub_request(:get, "https://domain.region.amazonaws.com/")
+          resp = client.non_streaming_bar(bar_name: 'bar')
+          req = resp.context.http_request
+          expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+          expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=d5c221749c8109dfaf0a072509e963b495dd0ffdd307db006be1e1c6db607f8f')
+        end
+
+        it `signs payload for HTTP request even when 'v4-unsigned-payload' is set` do
+          plugin.add_options(config)
+          client = klass.new(
+            signature_version: 'v4',
+            endpoint: 'http://domain.region.amazonaws.com',
+            credentials: dummy_credentials,
+            region: 'region',
+            sigv4_name: 'svc_name'
+          )
+          stub_request(:get, "http://domain.region.amazonaws.com/")
+          resp = client.streaming_foo(foo_name: 'foo')
+          req = resp.context.http_request
+          expect(req.headers['x-amz-content-sha256']).not_to eq('UNSIGNED-PAYLOAD')
+          expect(req.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/region/svc_name/aws4_request, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=d5c221749c8109dfaf0a072509e963b495dd0ffdd307db006be1e1c6db607f8f')
+        end
+
+      end
     end
   end
 end

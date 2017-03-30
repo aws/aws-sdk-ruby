@@ -46,11 +46,11 @@ module Aws
             req = ref.required ? 'required,' : ''
             type = input_type(ref)
             docstring = "@option #{@optname} [#{req}#{type}] :#{name}\n"
+            docstring << "\n\n This parameter will be auto-filled on your behalf"\
+              " with a random UUIDv4 when no value is provided.\n" if ref['idempotencyToken']
+            docstring << "\n\n SDK automatically handles json encoding and base64 encoding"\
+              " for you when the required value (Hash, Array, etc.) is provided according to the description.\n" if ref['jsonvalue']
             docstring += ref.documentation.to_s.lines.map { |line| "  #{line}" }.join
-            if ref['idempotencyToken']
-              docstring << "\n\n  This parameter will be auto-filled on your behalf"\
-                " with a random UUIDv4 when no value is provided.\n"
-            end
             tag(docstring)
           end
         end
