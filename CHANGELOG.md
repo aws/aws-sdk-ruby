@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.0 (2017-03-31)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, and waiters for AWS CloudFormation.
 
 * Feature - Aws::ConfigService - Updated the documentation for AWS Config.
