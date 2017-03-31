@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the API, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the documentation for AWS Config.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::CloudFront - Added support for the new 2017-03-25 API version of Amazon CloudFront.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Added support for a new service, AWS Resource Groups Tagging API.
+
 2.8.14 (2017-03-28)
 ------------------
 
