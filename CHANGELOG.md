@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.1 (2017-03-31)
+------------------
+
 * Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
 
 2.9.0 (2017-03-31)
