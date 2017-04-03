@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Nokogiri - Removed the version lock on Nokogiri. See the [Nokogiri CHANGELOG](https://github.com/sparklemotion/nokogiri/blob/master/CHANGELOG.md) for details. Keep in mind that Nokogiri 1.7.1 requires Ruby version 2.1.0 or greater. Customers of Ruby 1.8, 1.9, and 2.0 will not be able to upgrade without version locking Nokogiri and should review for any issues with running on an older version. 
+
+Version 1 of the AWS SDK for Ruby remains end of life - future releases will only address security issues.
+
 1.66.0 (2015-09-04)
 ------------------
 
