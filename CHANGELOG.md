@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.3 (2017-04-04)
+------------------
+
 * Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
 
 * Issue - Aws::DynamoDB - Fixed a bug where SimpleAttributes could be applied twice under certain circumstances.
