@@ -47,6 +47,35 @@ module Aws
           expect(resp.data.item).to eq('id' => 'guid')
         end
 
+        it 'avoids double-marshaling of structs' do
+          batch = {
+            "TableName" => [
+              {
+                put_request: {
+                  item: {"attr-1-name" => "attr-1-value"}
+                }
+              }
+            ]
+          }
+          stub = DynamoDB::Client.new(
+            stub_responses: {
+              batch_write_item: { unprocessed_items: batch }
+            }
+          )
+          wr = DynamoDB::Types::WriteRequest.new
+          pr = DynamoDB::Types::PutRequest.new
+          pr.item = { "attr-1-name" => "attr-1-value" }
+          wr.put_request = pr
+          expected = {
+            "TableName"=>[wr]
+          }
+          resp1 = stub.batch_write_item(request_items: batch)
+          expect(resp1.unprocessed_items).to eq(expected)
+          stub.batch_write_item(request_items: resp1.unprocessed_items)
+          # Expect no mutation.
+          expect(resp1.unprocessed_items).to eq(expected)
+        end
+
       end
 
       describe 'CRC32' do
