@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
 * Issue - Aws::DynamoDB - Fixed a bug where SimpleAttributes could be applied twice under certain circumstances.
 
   Resolves [GitHub Issue #1406](https://github.com/aws/aws-sdk-ruby/issues/1406).
