@@ -11,6 +11,7 @@ module Aws
   module S3
 
     autoload :Presigner, 'aws-sdk-core/s3/presigner'
+    autoload :PresignedRequest, 'aws-sdk-core/s3/presigned_request'
     autoload :BucketRegionCache, 'aws-sdk-core/s3/bucket_region_cache'
 
     # A cache of discovered bucket regions. You can call `#bucket_added`

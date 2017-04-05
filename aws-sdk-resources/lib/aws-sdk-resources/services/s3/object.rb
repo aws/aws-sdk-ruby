@@ -192,6 +192,51 @@ module Aws
         ))
       end
 
+      # Returns Aws::S3::PresignedRequest object that provides both presigned
+      # url and signed headers hash.
+      #
+      #     r = s3.bucket('bucket-name').object('obj-key').presigned_request(
+      #       :put,
+      #       acl: 'public-read'
+      #     )
+      #     # =>  #<Aws::S3::PresignedRequest ...
+      #
+      #     r.uri
+      #     # => #<URI::HTTPS https://...&X-Amz-SignedHeaders=host%3Bx-amz-acl
+      #
+      #     r.headers
+      #     # => {"x-amz-acl"=>"public-read"}
+      #
+      # @param [Symbol] http_method
+      #   The HTTP method to generate a presigned URL for. Valid values
+      #   are `:get`, `:put`, `:head`, and `:delete`.
+      #
+      # @option params [Integer<Seconds>] :expires_in (900)
+      #   How long the presigned URL should be valid for. Defaults
+      #   to 15 minutes (900 seconds).
+      #
+      # @option params [Boolean] :secure (true) When `false`, a HTTP URL
+      #   is returned instead of the default HTTPS URL.
+      #
+      # @option params [Boolean] :virtual_host (false) When
+      #   `true`, the bucket name will be used as the hostname.
+      #   This will cause the returned URL to be 'http' and not
+      #   'https'.
+      #
+      # @option options [Hash] :headers ({}) Customized headers to
+      #   be signed and sent along with the request.
+      #
+      # @option options [Time] :time (Time.now) Time of the signature.
+      #   You should only set this value for testing.
+      #
+      def presigned_request(http_method, params = {})
+        PresignedRequest.new("#{http_method.downcase}_object", params.merge(
+          client: client,
+          bucket: bucket_name,
+          key: key
+        ))
+      end
+
       # Returns the public (un-signed) URL for this object.
       #
       #     s3.bucket('bucket-name').object('obj-key').public_url

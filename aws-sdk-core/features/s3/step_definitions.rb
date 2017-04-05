@@ -280,3 +280,34 @@ end
 Then(/^the location constraint should be "([^"]*)"$/) do |lc|
   expect(@response.location_constraint).to eq(lc)
 end
+
+When(/^I create a (non-secure )?presigned request for "([^"]*)" with( the hash and)?:$/) do |non_secure, method, hash, params|
+  params = symbolized_params(params)
+  params[:bucket] = @bucket_name
+  params[:secure] = false if non_secure
+  params[:headers] = @custom_headers if hash
+  presigned_request = Aws::S3::PresignedRequest.new(method.to_sym, params)
+  @uri = presigned_request.uri
+  @headers = presigned_request.headers
+end
+
+When(/^I send an HTTP put request with uri headers and body "([^"]*)"$/) do |body|
+  http = Net::HTTP.new(@uri.host)
+  req = Net::HTTP::Put.new(@uri.request_uri, @headers)
+  req.body = body
+  @resp = http.request(req)
+end
+
+When(/^I send an HTTP "([^"]*)" request with uri and headers$/) do |method|
+  http = Net::HTTP.new(@uri.host)
+  req = Net::HTTP.const_get(method.capitalize).new(@uri.request_uri, @headers)
+  @resp = http.request(req)
+end
+
+Then(/^Signed headers should be:$/) do |table|
+  table.rows_hash.each {|k, v| expect(@headers[k]).to eq(v)}
+end
+
+Given(/^I have a custom header hash to sign:$/) do |hash|
+  @custom_headers = hash.rows_hash.inject({}) {|h, (k, v)| h[k] = v; h}
+end
