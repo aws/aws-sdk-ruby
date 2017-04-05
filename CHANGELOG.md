@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.4 (2017-04-05)
+------------------
+
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
 
 2.9.3 (2017-04-04)
