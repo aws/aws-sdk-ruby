@@ -44,6 +44,14 @@ module Aws
         object.presigned_url(http_method, params)
       end
 
+      # @param (see Object#presigned_request)
+      # @options (see Object#presigned_request)
+      # @return (see Object#presigned_request)
+      # @see Object#presigned_request
+      def presigned_request(http_method, params = {})
+        object.presigned_request(http_method, params)
+      end
+
       # @param (see Object#public_url)
       # @options (see Object#public_url)
       # @return (see Object#public_url)
