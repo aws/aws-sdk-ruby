@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
 * Feature - Aws - Added `Aws.empty_connection_pools!` feature to allow for manual clearing of connection pools. This may be helpful for applications where a conneciton pool is shared across processes.
 
   Resolves [GitHub Issue #1438](https://github.com/aws/aws-sdk-ruby/issues/1438).
