@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.5 (2017-04-06)
+------------------
+
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
 
 * Feature - Aws - Added `Aws.empty_connection_pools!` feature to allow for manual clearing of connection pools. This may be helpful for applications where a conneciton pool is shared across processes.
