@@ -25,13 +25,12 @@ module Aws
   SERVICE_MODULE_NAMES = %w(
     ACM
     APIGateway
+    AppStream
     ApplicationAutoScaling
     ApplicationDiscoveryService
-    AppStream
     AutoScaling
     Batch
     Budgets
-    CodeBuild
     CloudDirectory
     CloudFormation
     CloudFront
@@ -42,6 +41,7 @@ module Aws
     CloudWatch
     CloudWatchEvents
     CloudWatchLogs
+    CodeBuild
     CodeCommit
     CodeDeploy
     CodePipeline
@@ -50,8 +50,8 @@ module Aws
     CognitoSync
     ConfigService
     CostandUsageReportService
-    DatabaseMigrationService
     DataPipeline
+    DatabaseMigrationService
     DeviceFarm
     DirectConnect
     DirectoryService
@@ -61,13 +61,13 @@ module Aws
     ECR
     ECS
     EFS
+    EMR
     ElastiCache
     ElasticBeanstalk
     ElasticLoadBalancing
     ElasticLoadBalancingV2
-    ElasticsearchService
     ElasticTranscoder
-    EMR
+    ElasticsearchService
     Firehose
     GameLift
     Glacier
@@ -77,42 +77,43 @@ module Aws
     Inspector
     IoT
     IoTDataPlane
+    KMS
     Kinesis
     KinesisAnalytics
-    KMS
     Lambda
     LambdaPreview
     Lex
     Lightsail
+    MTurk
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
-    MTurk
     OpsWorks
     OpsWorksCM
     Organizations
     Pinpoint
     Polly
     RDS
-    Rekognition
     Redshift
+    Rekognition
+    ResourceGroupsTaggingAPI
     Route53
     Route53Domains
     S3
-    ServiceCatalog
     SES
-    Shield
-    SimpleDB
     SMS
     SNS
-    Snowball
     SQS
     SSM
+    STS
+    SWF
+    ServiceCatalog
+    Shield
+    SimpleDB
+    Snowball
     States
     StorageGateway
-    STS
     Support
-    SWF
     WAF
     WAFRegional
     WorkDocs

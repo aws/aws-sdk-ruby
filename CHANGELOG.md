@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+2.9.4 (2017-04-05)
+------------------
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+2.9.3 (2017-04-04)
+------------------
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Issue - Aws::DynamoDB - Fixed a bug where SimpleAttributes could be applied twice under certain circumstances.
+
+  Resolves [GitHub Issue #1406](https://github.com/aws/aws-sdk-ruby/issues/1406).
+
+2.9.2 (2017-04-03)
+------------------
+
+* Feature - Aws::Lex - Updated the API, and documentation for Amazon Lex Runtime Service.
+
+2.9.1 (2017-03-31)
+------------------
+
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
+2.9.0 (2017-03-31)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the documentation for AWS Config.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::CloudFront - Added support for the new 2017-03-25 API version of Amazon CloudFront.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Added support for a new service, AWS Resource Groups Tagging API.
+
 2.8.14 (2017-03-28)
 ------------------
 

@@ -272,12 +272,13 @@ to be backwards compatible.
 | AWS IoT                             | IoT                          | 2015-05-28  |
 | AWS IoT Data Plane                  | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service          | KMS                          | 2014-11-01  |
-| AWS Lambda                          | Lambda                       | 2015-03-31  |
 | AWS Lambda                          | LambdaPreview                | 2014-11-11  |
+| AWS Lambda                          | Lambda                       | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics | 2015-07-01  |
 | AWS OpsWorks                        | OpsWorks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | OpsWorksCM                   | 2016-11-01  |
 | AWS Organizations                   | Organizations                | 2016-11-28  |
+| AWS Resource Groups Tagging API     | ResourceGroupsTaggingAPI     | 2017-01-26  |
 | AWS Security Token Service          | STS                          | 2011-06-15  |
 | AWS Server Migration Service        | SMS                          | 2016-10-24  |
 | AWS Service Catalog                 | ServiceCatalog               | 2015-12-10  |
@@ -292,7 +293,7 @@ to be backwards compatible.
 | Amazon API Gateway                  | APIGateway                   | 2015-07-09  |
 | Amazon AppStream                    | AppStream                    | 2016-12-01  |
 | Amazon CloudDirectory               | CloudDirectory               | 2016-05-10  |
-| Amazon CloudFront                   | CloudFront                   | 2016-11-25  |
+| Amazon CloudFront                   | CloudFront                   | 2017-03-25  |
 | Amazon CloudHSM                     | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                  | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain           | CloudSearchDomain            | 2013-01-01  |

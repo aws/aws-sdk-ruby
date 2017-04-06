@@ -7,6 +7,10 @@
     "models": "apigateway/2015-07-09",
     "endpoint": "apigateway"
   },
+  "AppStream": {
+    "models": "appstream/2016-12-01",
+    "endpoint": "appstream2"
+  },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
     "endpoint": "application-autoscaling"
@@ -14,10 +18,6 @@
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01",
     "endpoint": "discovery"
-  },
-  "AppStream": {
-    "models": "appstream/2016-12-01",
-    "endpoint": "appstream2"
   },
   "AutoScaling": {
     "models": "autoscaling/2011-01-01",
@@ -31,10 +31,6 @@
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
   },
-  "CodeBuild": {
-    "models": "codebuild/2016-10-06",
-    "endpoint": "codebuild"
-  },
   "CloudDirectory": {
     "models": "clouddirectory/2016-05-10",
     "endpoint": "clouddirectory"
@@ -44,7 +40,7 @@
     "endpoint": "cloudformation"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-11-25",
+    "models": "cloudfront/2017-03-25",
     "endpoint": "cloudfront"
   },
   "CloudHSM": {
@@ -73,6 +69,10 @@
   "CloudWatchLogs": {
     "models": "logs/2014-03-28",
     "endpoint": "logs"
+  },
+  "CodeBuild": {
+    "models": "codebuild/2016-10-06",
+    "endpoint": "codebuild"
   },
   "CodeCommit": {
     "models": "codecommit/2015-04-13",
@@ -106,13 +106,13 @@
     "models": "cur/2017-01-06",
     "endpoint": "cur"
   },
-  "DatabaseMigrationService": {
-    "models": "dms/2016-01-01",
-    "endpoint": "dms"
-  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29",
     "endpoint": "datapipeline"
+  },
+  "DatabaseMigrationService": {
+    "models": "dms/2016-01-01",
+    "endpoint": "dms"
   },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23",
@@ -150,6 +150,10 @@
     "models": "elasticfilesystem/2015-02-01",
     "endpoint": "elasticfilesystem"
   },
+  "EMR": {
+    "models": "elasticmapreduce/2009-03-31",
+    "endpoint": "elasticmapreduce"
+  },
   "ElastiCache": {
     "models": "elasticache/2015-02-02",
     "endpoint": "elasticache"
@@ -166,17 +170,13 @@
     "models": "elasticloadbalancingv2/2015-12-01",
     "endpoint": "elasticloadbalancing"
   },
-  "ElasticsearchService": {
-    "models": "es/2015-01-01",
-    "endpoint": "es"
-  },
   "ElasticTranscoder": {
     "models": "elastictranscoder/2012-09-25",
     "endpoint": "elastictranscoder"
   },
-  "EMR": {
-    "models": "elasticmapreduce/2009-03-31",
-    "endpoint": "elasticmapreduce"
+  "ElasticsearchService": {
+    "models": "es/2015-01-01",
+    "endpoint": "es"
   },
   "Firehose": {
     "models": "firehose/2015-08-04",
@@ -214,6 +214,10 @@
     "models": "iot-data/2015-05-28",
     "endpoint": "data.iot"
   },
+  "KMS": {
+    "models": "kms/2014-11-01",
+    "endpoint": "kms"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02",
     "endpoint": "kinesis"
@@ -221,10 +225,6 @@
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14",
     "endpoint": "kinesisanalytics"
-  },
-  "KMS": {
-    "models": "kms/2014-11-01",
-    "endpoint": "kms"
   },
   "Lambda": {
     "models": "lambda/2015-03-31",
@@ -242,6 +242,10 @@
     "models": "lightsail/2016-11-28",
     "endpoint": "lightsail"
   },
+  "MTurk": {
+    "models": "mturk-requester/2017-01-17",
+    "endpoint": "mturk-requester"
+  },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
     "endpoint": "machinelearning"
@@ -253,10 +257,6 @@
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"
-  },
-  "MTurk": {
-    "models": "mturk-requester/2017-01-17",
-    "endpoint": "mturk-requester"
   },
   "OpsWorks": {
     "models": "opsworks/2013-02-18",
@@ -282,13 +282,17 @@
     "models": "rds/2014-10-31",
     "endpoint": "rds"
   },
+  "Redshift": {
+    "models": "redshift/2012-12-01",
+    "endpoint": "redshift"
+  },
   "Rekognition": {
     "models": "rekognition/2016-06-27",
     "endpoint": "rekognition"
   },
-  "Redshift": {
-    "models": "redshift/2012-12-01",
-    "endpoint": "redshift"
+  "ResourceGroupsTaggingAPI": {
+    "models": "resourcegroupstaggingapi/2017-01-26",
+    "endpoint": "tagging"
   },
   "Route53": {
     "models": "route53/2013-04-01",
@@ -302,21 +306,9 @@
     "models": "s3/2006-03-01",
     "endpoint": "s3"
   },
-  "ServiceCatalog": {
-    "models": "servicecatalog/2015-12-10",
-    "endpoint": "servicecatalog"
-  },
   "SES": {
     "models": "email/2010-12-01",
     "endpoint": "email"
-  },
-  "Shield": {
-    "models": "shield/2016-06-02",
-    "endpoint": "shield"
-  },
-  "SimpleDB": {
-    "models": "sdb/2009-04-15",
-    "endpoint": "sdb"
   },
   "SMS": {
     "models": "sms/2016-10-24",
@@ -326,10 +318,6 @@
     "models": "sns/2010-03-31",
     "endpoint": "sns"
   },
-  "Snowball": {
-    "models": "snowball/2016-06-30",
-    "endpoint": "snowball"
-  },
   "SQS": {
     "models": "sqs/2012-11-05",
     "endpoint": "sqs"
@@ -337,6 +325,30 @@
   "SSM": {
     "models": "ssm/2014-11-06",
     "endpoint": "ssm"
+  },
+  "STS": {
+    "models": "sts/2011-06-15",
+    "endpoint": "sts"
+  },
+  "SWF": {
+    "models": "swf/2012-01-25",
+    "endpoint": "swf"
+  },
+  "ServiceCatalog": {
+    "models": "servicecatalog/2015-12-10",
+    "endpoint": "servicecatalog"
+  },
+  "Shield": {
+    "models": "shield/2016-06-02",
+    "endpoint": "shield"
+  },
+  "SimpleDB": {
+    "models": "sdb/2009-04-15",
+    "endpoint": "sdb"
+  },
+  "Snowball": {
+    "models": "snowball/2016-06-30",
+    "endpoint": "snowball"
   },
   "States": {
     "models": "states/2016-11-23",
@@ -346,17 +358,9 @@
     "models": "storagegateway/2013-06-30",
     "endpoint": "storagegateway"
   },
-  "STS": {
-    "models": "sts/2011-06-15",
-    "endpoint": "sts"
-  },
   "Support": {
     "models": "support/2013-04-15",
     "endpoint": "support"
-  },
-  "SWF": {
-    "models": "swf/2012-01-25",
-    "endpoint": "swf"
   },
   "WAF": {
     "models": "waf/2015-08-24",
