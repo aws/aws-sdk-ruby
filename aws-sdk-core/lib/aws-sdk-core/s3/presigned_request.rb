@@ -122,25 +122,24 @@ module Aws
         params.inject(headers) {|h, (k, v)| h["x-amz-#{k.to_s.gsub(/_/, '-')}"] = v; h}
       end
 
+      # Build url from endpoint
       def build_url(uri)
-        # build url from endpoint
         uri = scheme(uri) unless @virtual_host
         if @virtual_host
-          uri = virtual_host(uri)
-          uri.path = "/#{@key}"
+          virtual_host(uri)
         elsif @client.config.force_path_style
           uri.path = "/#{@bucket}/#{@key}"
+          uri
         else
           # bucket DNS
-          uri = dns(uri)
+          dns(uri)
         end
-        uri
       end
 
       def virtual_host(uri)
-        uri = http_scheme(uri)
         uri.host = @bucket
-        uri
+        uri.path = "/#{@key}"
+        http_scheme(uri)
       end
 
       def dns(uri)
