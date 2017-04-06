@@ -123,15 +123,16 @@ module Aws
       end
 
       def build_url(uri)
+        # build url from endpoint
+        uri = scheme(uri) unless @virtual_host
         if @virtual_host
           uri = virtual_host(uri)
           uri.path = "/#{@key}"
         elsif @client.config.force_path_style
-          uri = scheme(uri)
           uri.path = "/#{@bucket}/#{@key}"
         else
+          # bucket DNS
           uri = dns(uri)
-          uri.path = "/#{@key}"
         end
         uri
       end
@@ -142,18 +143,22 @@ module Aws
         uri
       end
 
-      def dns(endpoint)
-        return endpoint unless Aws::Plugins::S3BucketDns.dns_compatible?(@bucket, @secure) 
-        endpoint.host = "#{@bucket}.#{endpoint.host}"
-        scheme(endpoint)
+      def dns(uri)
+        if Aws::Plugins::S3BucketDns.dns_compatible?(@bucket, @secure)
+          uri.host = "#{@bucket}.#{uri.host}"
+          uri.path = "/#{@key}"
+        else
+          uri.path = "/#{@bucket}/#{@key}"
+        end
+        uri
       end
 
-      def scheme(url)
-        return url if @secure.nil?
+      def scheme(uri)
+        return uri if @secure.nil?
         if @secure
-          https_scheme(url)
+          https_scheme(uri)
         else
-          http_scheme(url)
+          http_scheme(uri)
         end
       end
 
