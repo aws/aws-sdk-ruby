@@ -138,4 +138,19 @@ module Aws
     end
 
   end
+
+  describe '.empty_connection_pools!' do
+    it 'closes any existing sessions' do
+      endpoint = "http://example.com"
+      conn_pool = Seahorse::Client::NetHttp::ConnectionPool.for({})
+      session = conn_pool.send(:start_session, endpoint)
+      conn_pool.instance_variable_get(:@pool)[endpoint] = [session]
+
+      expect(conn_pool.size).to eq(1)
+
+      Aws.empty_connection_pools!
+
+      expect(conn_pool.size).to eq(0)
+    end
+  end
 end

@@ -405,6 +405,24 @@ module Aws
       ))
     end
 
+    # Close any long-lived connections maintained by the SDK's internal
+    # connection pool.
+    #
+    # Applications that rely heavily on the `fork()` system call on POSIX systems
+    # should call this method in the child process directly after fork to ensure
+    # there are no race conditions between the parent process and its children
+    # for the pooled TCP connections.
+    #
+    # Child processes that make multi-threaded calls to the SDK should block on
+    # this call before beginning work.
+    #
+    # @return [nil]
+    def empty_connection_pools!
+      Seahorse::Client::NetHttp::ConnectionPool.pools.each do |pool|
+        pool.empty!
+      end
+    end
+
     # Loads modules that are normally loaded with Ruby's `autoload`.
     # This can avoid thread-safety issues that some Ruby versions have
     # with `autoload`.
