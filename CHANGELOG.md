@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.6 (2017-04-07)
+------------------
+
 * Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
 
 2.9.5 (2017-04-06)
