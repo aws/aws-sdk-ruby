@@ -142,7 +142,7 @@ module Aws
       end
 
       def endpoint_and_headers(req, secure, virtual_host)
-        req.handlers.remove(Plugins::S3BucketDns::Handler) if @virtual_host
+        req.handlers.remove(Plugins::S3BucketDns::Handler) if virtual_host
         req.handlers.remove(Plugins::S3RequestSigner::SigningHandler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handle(step: :send) do |context|
