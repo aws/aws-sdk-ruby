@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.7 (2017-04-11)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
