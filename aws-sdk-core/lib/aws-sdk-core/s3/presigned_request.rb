@@ -30,12 +30,10 @@ module Aws
       # @api private
       ONE_WEEK = 60 * 60 * 24 * 7
 
+      # TODO
       # @param [Symbol] method Symbolized method name of the operation you
       #   want to presign.
       #
-      # @option params [Client] :client Optionally provide an existing
-      #   S3 client
-      #  
       # @option params [Integer<Seconds>] :expires_in (900)
       #   How long the presigned URL should be valid for. Defaults
       #   to 15 minutes (900 seconds).
@@ -54,14 +52,22 @@ module Aws
       # @option options [Time] :time (Time.now) Time of the signature.
       #   You should only set this value for testing.
       def initialize(method, params = {})
-        @bucket, @key = bucket_and_key(params)
-        @client = params.delete(:client) || Aws::S3::Client.new
-        @http_method = method[/[^_]+/].upcase
+        bucket_and_key(params)
+        @credentials, @region = credentials_and_region(params)
+        client = Aws::S3::Client.new(region: @region, credentials: @credentials)
+
+        @http_method = Aws::S3::Client.api.operation(method).http_method
         @time = params.delete(:time) || Time.now
         @expires = expires_in(params)
-        @virtual_host = !!params.delete(:virtual_host)
-        @secure = params.delete(:secure)
-        @headers = build_headers(params)
+        virtual_host = !!params.delete(:virtual_host)
+        secure = params.delete(:secure)
+        # build customize or whitelist headers when presents
+        headers = build_headers(params.delete(:headers) || {})
+
+        req = client.build_request(method, params)
+        endpoint_and_headers(req, secure, virtual_host)
+        @endpoint, req_headers = req.send_request.data
+        @headers = headers.merge(req_headers)
       end
 
       # Returns the presigned URL for the S3 operation
@@ -70,7 +76,7 @@ module Aws
       def uri
         v4_signer.presign_url(
           http_method: @http_method,
-          url: build_url(@client.config.endpoint),
+          url: @endpoint,
           headers: @headers,
           body_digest: 'UNSIGNED-PAYLOAD',
           expires_in: @expires,
@@ -82,28 +88,28 @@ module Aws
       #
       # @return [Hash] headers
       attr_reader :headers
+=begin
+      def headers
+        signature = v4_signer.sign_request(
+          http_method: @http_method,
+          url: @endpoint,
+          headers: @headers,
+          body: ''
+        )
+        signature.headers.merge(@headers)
+      end
+=end
 
       private
 
       def v4_signer
         Aws::Sigv4::Signer.new(
           service: 's3',
-          region: @client.config.region,
-          credentials_provider: @client.config.credentials,
-          apply_checksum_header: @client.config.compute_checksums,
+          region: @region,
+          credentials_provider: @credentials,
           uri_escape_path: false,
           unsigned_headers: Aws::Signers::V4::BLACKLIST_HEADERS - @headers.keys
         )
-      end
-
-      def bucket_and_key(params)
-        if params[:bucket].nil? or params[:bucket] == ''
-          raise ArgumentError, ":bucket must not be blank"
-        end
-        if params[:key].nil? or params[:key] == ''
-          raise ArgumentError, ":key must not be blank"
-        end
-        [ params.delete(:bucket), params.delete(:key) ]
       end
 
       def expires_in(params)
@@ -116,63 +122,45 @@ module Aws
         end
       end
 
-      def build_headers(params)
-        h = params.delete(:headers) || {}
-        headers = h.inject({}) {|h, (k, v)| h["x-amz-#{k.to_s.gsub(/_/, '-')}"] = v; h}
-        params.inject(headers) {|h, (k, v)| h["x-amz-#{k.to_s.gsub(/_/, '-')}"] = v; h}
+      def bucket_and_key(params)
+        bucket = params.fetch(:bucket)
+        key = params.fetch(:key)
+        raise ArgumentError, 'bucket must not be blank' if bucket == ''
+        raise ArgumentError, 'key must not be blank' if key == ''
       end
 
-      # Build url from endpoint
-      def build_url(uri)
-        uri = scheme(uri) unless @virtual_host
-        if @virtual_host
-          virtual_host(uri)
-        elsif @client.config.force_path_style
-          uri.path = "/#{@bucket}/#{@key}"
-          uri
-        else
-          # bucket DNS
-          dns(uri)
+      def credentials_and_region(params)
+        credentials = params.delete(:credentials)
+        region = params.delete(:region)
+        raise ArgumentError, ':credentials must be provided for a presigned request' if credentials.nil?
+        raise ArgumentError, ':region must be provided for a presigned request' if region.nil?
+        [credentials, region]
+      end
+
+      def build_headers(hash)
+        hash.inject({}) {|h, (k, v)| h["x-amz-#{k.to_s.gsub(/_/, '-')}"] = v; h}
+      end
+
+      def endpoint_and_headers(req, secure, virtual_host)
+        req.handlers.remove(Plugins::S3BucketDns::Handler) if @virtual_host
+        req.handlers.remove(Plugins::S3RequestSigner::SigningHandler)
+        req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
+        req.handle(step: :send) do |context|
+          headers = context.http_request.headers.inject({}) do |h, (k, v)|
+            h[k] = v unless k.match(/x-amz-/).nil?
+            h
+          end
+          endpoint = context.http_request.endpoint
+          if secure == false || virtual_host
+            endpoint.scheme = 'http'
+            endpoint.port = 80
+          end
+          if virtual_host
+            endpoint.host = context.params[:bucket]
+            endpoint.path.sub!("/#{context.params[:bucket]}", '')
+          end
+          Seahorse::Client::Response.new(context: context, data: [endpoint, headers])
         end
-      end
-
-      def virtual_host(uri)
-        uri.host = @bucket
-        uri.path = "/#{@key}"
-        http_scheme(uri)
-      end
-
-      def dns(uri)
-        if Aws::Plugins::S3BucketDns.dns_compatible?(@bucket, @secure)
-          uri.host = "#{@bucket}.#{uri.host}"
-          uri.path = "/#{@key}"
-        else
-          uri.path = "/#{@bucket}/#{@key}"
-        end
-        uri
-      end
-
-      def scheme(uri)
-        return uri if @secure.nil?
-        if @secure
-          https_scheme(uri)
-        else
-          http_scheme(uri)
-        end
-      end
-
-      def http_scheme(uri)
-        return uri if uri.scheme == 'http'
-        uri.scheme = 'http'
-        uri.port = 80
-        uri
-      end
-
-      def https_scheme(uri)
-        return uri if uri.scheme == 'https'
-        uri.scheme = 'https'
-        uri.port = 443
-        uri
       end
 
     end

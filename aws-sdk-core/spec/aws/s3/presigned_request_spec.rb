@@ -5,24 +5,17 @@ module Aws
     describe PresignedRequest do
 
       before (:each) do
-        Aws.config[:s3] = {
-          region: 'us-east-1',
-          credentials: Credentials.new(
-            "AKIAIOSFODNN7EXAMPLE",
-            "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
-          retry_limit: 0
-        }
-
         allow(Time).to receive(:now).and_return(now)
         allow(now).to receive(:utc).and_return(utc)
         allow(utc).to receive(:strftime).and_return(datetime)
       end
 
-      after(:each) do
-        Aws.config = {}
-      end
-
-      let(:client) { Aws::S3::Client.new }
+      let(:region) {'us-east-1'}
+      let(:credentials) {
+        Credentials.new(
+          "AKIAIOSFODNN7EXAMPLE",
+          "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY")
+      }
 
       let(:now) { double('now') }
       let(:utc) { double('utc-time') }
@@ -30,37 +23,39 @@ module Aws
 
       describe '#initialize' do
 
-        it 'accepts an injected S3 client' do
-          req = PresignedRequest.new(
-            :put_object,
-            bucket: 'bucket',
-            key: 'key',
-            client: client
-          )
-          expect(req.class).to eq(Aws::S3::PresignedRequest)
-        end
-
-        it 'can be constructed without a client' do
-          req = PresignedRequest.new(
-            :put_object,
-            bucket: 'bucket',
-            key: 'key'
-          )
-          expect(req.class).to eq(Aws::S3::PresignedRequest)
+        it 'raises error when missing :region or :credentials' do
+          expect {
+            req = PresignedRequest.new(
+              :put_object,
+              credentials: credentials,
+              bucket: 'bucket',
+              key: 'key'
+            )
+          }.to raise_error(ArgumentError)
+          expect {
+            req = PresignedRequest.new(
+              :put_object,
+              region: region,
+              bucket: 'bucket',
+              key: 'key'
+            )
+          }.to raise_error(ArgumentError)
         end
 
         it 'raises error when missing valid :bucket or :key' do
           expect {
             req = PresignedRequest.new(
               :put_object,
-              client: client,
+              region: region,
+              credentials: credentials,
               key: 'key'
             )
-          }.to raise_error(ArgumentError, /bucket must not be blank/)
+          }.to raise_error(KeyError)
           expect {
             req = PresignedRequest.new(
               :put_object,
-              client: client,
+              region: region,
+              credentials: credentials,
               bucket: 'bucket',
               key: ''
             )
@@ -70,8 +65,9 @@ module Aws
         it 'raises when expires_in length is over 1 week' do
           expect {
             req = PresignedRequest.new(
-              :get_bucket,
-              client: client,
+              :get_object,
+              region: region,
+              credentials: credentials,
               bucket: 'bucket',
               key: 'key',
               expires_in: (7 * 86400) + 1 
@@ -96,8 +92,9 @@ module Aws
             "7d157751f604d404"
 
           req = PresignedRequest.new(
-            :get_bucket,
-            client: client,
+            :get_object,
+            region: region,
+            credentials: credentials,
             bucket: bucket,
             key: key,
             expires_in: 86400
@@ -105,21 +102,11 @@ module Aws
           expect(req.uri.to_s).to eq(expected_url)
         end
 
-        it 'uses the correct :endpoint scheme' do
-          client.config.endpoint = URI("http://example.com")
-          req = PresignedRequest.new(
-            :get_bucket,
-            client: client,
-            bucket: 'bucket',
-            key: 'key'
-          )
-          expect(req.uri.to_s).to match(/^http:/) 
-        end
-
         it 'can generate http (non-secure) urls' do
           req = PresignedRequest.new(
-            :get_bucket,
-            client: client,
+            :get_object,
+            region: region,
+            credentials: credentials,
             bucket: 'bucket',
             key: 'key',
             secure: false
@@ -129,8 +116,9 @@ module Aws
 
         it 'can generate virtual host style urls' do
           req = PresignedRequest.new(
-            :get_bucket,
-            client: client,
+            :get_object,
+            region: region,
+            credentials: credentials,
             bucket: 'virtual.hosted.com',
             key: 'foo',
             virtual_host: true
@@ -140,8 +128,9 @@ module Aws
 
         it 'returns same url when called twice' do
           req = PresignedRequest.new(
-            :get_bucket,
-            client: client,
+            :get_object,
+            region: region,
+            credentials: credentials,
             bucket: 'virtual.hosted.com',
             key: 'foo',
             virtual_host: true
@@ -157,11 +146,15 @@ module Aws
 
         it 'allows overwrite blacklist headers in Sigv4' do
           req = PresignedRequest.new(
-            :put_bucket,
-            client: client,
+            :put_object,
+            region: region,
+            credentials: credentials,
             bucket: 'bucket',
             key: 'key',
-            cache_control: 'max-age=20000'
+            cache_control: 'max-age=20000',
+            headers: {
+              cache_control: 'max-age=20000',
+            }
           )
           expect(req.headers['x-amz-cache-control']).to eq('max-age=20000')
           expect(req.uri.to_s).to match(/.*X-Amz-SignedHeaders=host%3Bx-amz-cache-control.*/)
@@ -169,8 +162,9 @@ module Aws
 
         it 'allows customize header signing' do
           req = PresignedRequest.new(
-            :put_bucket,
-            client: client,
+            :put_object,
+            region: region,
+            credentials: credentials,
             bucket: 'bucket',
             key: 'key',
             headers: {

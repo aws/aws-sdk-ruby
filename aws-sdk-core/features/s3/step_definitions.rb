@@ -286,6 +286,8 @@ When(/^I create a (non-secure )?presigned request for "([^"]*)" with( the hash a
   params[:bucket] = @bucket_name
   params[:secure] = false if non_secure
   params[:headers] = @custom_headers if hash
+  params[:region] = @client.config.region
+  params[:credentials] = @client.config.credentials
   presigned_request = Aws::S3::PresignedRequest.new(method.to_sym, params)
   @uri = presigned_request.uri
   @headers = presigned_request.headers
@@ -308,6 +310,6 @@ Then(/^Signed headers should be:$/) do |table|
   table.rows_hash.each {|k, v| expect(@headers[k]).to eq(v)}
 end
 
-Given(/^I have a custom header hash to sign:$/) do |hash|
+Given(/^I have a header hash to sign:$/) do |hash|
   @custom_headers = hash.rows_hash.inject({}) {|h, (k, v)| h[k] = v; h}
 end

@@ -29,7 +29,7 @@ Feature: Enhanced presigned request interface
 
   @headers
   Scenario: Presigning a put object request with custom headers
-    Given I have a custom header hash to sign:
+    Given I have a header hash to sign:
       | foo | bar |
     When I create a presigned request for "put_object" with the hash and:
       | key     | test        |
@@ -42,7 +42,9 @@ Feature: Enhanced presigned request interface
 
   @headers
   Scenario: Presigning a put object request with whitelist headers
-    When I create a presigned request for "put_object" with:
+    Given I have a header hash to sign:
+      | cache-control | max-age=20000 |
+    When I create a presigned request for "put_object" with the hash and:
       | key           | test          |
       | cache-control | max-age=20000 |
     And I send an HTTP "put" request with uri and headers 
