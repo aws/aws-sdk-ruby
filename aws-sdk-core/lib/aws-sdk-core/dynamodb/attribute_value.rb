@@ -51,6 +51,7 @@ module Aws
         private
 
         def format_set(set)
+          return { l: [] } if set.empty?
           case set.first
           when String, Symbol then { ss: set.map(&:to_s) }
           when STRINGY_TEST then { ss: set.map(&:to_str) }
