@@ -231,8 +231,8 @@ module AWS
       #   or a range (like 20..21).
       #
       # @param [Mixed] sources One or more CIDR IP addresses,
-      #   security groups, or load balancers.  Security groups
-      #   can be specified as hashes.
+      #   security groups, load balancers, or prefix list IDs.
+      #   Security groups can be specified as hashes.
       #
       #   A security group hash must provide either `:group_id` or
       #   `:group_name` for the security group.  If the security group
@@ -279,8 +279,9 @@ module AWS
       # @overload authorize_egress(*sources, options = {})
       #
       #   @param [Mixed] sources One or more CIDR IP addresses,
-      #     security groups or load balancers.  See {#authorize_ingress}
-      #     for more information on accepted formats for sources.
+      #     security groups, load balancers, or prefix list IDs.  See
+      #     {#authorize_ingress} for more information on accepted formats
+      #     for sources.
       #
       #   @param [Hash] options
       #
@@ -364,10 +365,11 @@ module AWS
         opts[:from_port] = ports.first.to_i
         opts[:to_port] = ports.last.to_i
 
-        ips, groups = parse_sources(sources)
+        ips, groups, prefix_list_ids = parse_sources(sources)
 
         opts[:ip_ranges] = ips unless ips.empty?
         opts[:user_id_group_pairs] = groups unless groups.empty?
+        opts[:prefix_list_ids] = prefix_list_ids unless prefix_list_ids.empty?
 
         opts
 
@@ -407,10 +409,11 @@ module AWS
             opts[:to_port] = ports.last.to_i
           end
 
-          ips, groups = parse_sources(args)
+          ips, groups, prefix_list_ids = parse_sources(args)
 
           opts[:ip_ranges] = ips unless ips.empty?
           opts[:user_id_group_pairs] = groups unless groups.empty?
+          opts[:prefix_list_ids] = prefix_list_ids unless prefix_list_ids.empty?
 
           opts
 
@@ -423,15 +426,23 @@ module AWS
 
         ips = []
         groups = []
+        prefix_list_ids = []
 
         sources.each do |source|
           case source
 
           when String
-            ips << { :cidr_ip => source }
+            if source.start_with?('pl-')
+              prefix_list_ids << { :prefix_list_id => source }
+            else
+              ips << { :cidr_ip => source }
+            end
 
           when SecurityGroup
             groups << { :group_id => source.id, :user_id => source.owner_id }
+
+          when PrefixList
+            prefix_list_ids << { :prefix_list_id => source.id }
 
           when ELB::LoadBalancer
             groups << source.source_security_group
@@ -458,9 +469,9 @@ module AWS
           end
         end
 
-        ips << { :cidr_ip => '0.0.0.0/0' } if ips.empty? and groups.empty?
+        ips << { :cidr_ip => '0.0.0.0/0' } if ips.empty? and groups.empty? and prefix_list_ids.empty?
 
-        [ips, groups]
+        [ips, groups, prefix_list_ids]
 
       end
 

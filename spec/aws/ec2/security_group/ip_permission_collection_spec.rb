@@ -54,7 +54,10 @@ module AWS
                 :groups => [
                   { :group_id => 'grp1-id', :user_id => 'grp1-user-id' },
                   { :group_id => 'grp2-id', :user_id => 'grp2-user-id' },
-                ]
+                ],
+                :prefix_list_ids => [
+                  { :prefix_list_id => 'pl-abc' },
+                ],
               },
             ]
           end
@@ -113,7 +116,8 @@ module AWS
                     { :cidr_ip => '1.1.1.1/1' },
                     { :cidr_ip => '2.2.2.2/2' },
                   ],
-                  :groups => []
+                  :groups => [],
+                  :prefix_list_ids => [],
                 },
               ]
             end

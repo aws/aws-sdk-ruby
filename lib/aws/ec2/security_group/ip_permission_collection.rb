@@ -41,11 +41,12 @@ module AWS
           list_method += '_egress' if egress?
 
           security_group.send(list_method).each do |p|
-
             # egress permissions don't always have ports
             ports = p[:from_port] ? [p[:from_port], p[:to_port]] : nil
 
-            ip_ranges = p[:ip_ranges].collect{|ip| ip[:cidr_ip] }
+            ip_ranges = p[:ip_ranges].collect{ |ip| ip[:cidr_ip] }
+
+            prefix_list_ids = p[:prefix_list_ids].collect{ |id| id[:prefix_list_id] }
 
             groups = p[:groups].collect do |group|
               SecurityGroup.new(group[:group_id],
@@ -56,6 +57,7 @@ module AWS
 
             permission = IpPermission.new(security_group, p[:ip_protocol], ports,
               :ip_ranges => ip_ranges,
+              :prefix_list_ids => prefix_list_ids,
               :groups => groups,
               :egress => egress?,
               :config => config)

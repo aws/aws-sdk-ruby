@@ -103,6 +103,19 @@ module AWS
 
         end
 
+        context '#prefix_list_ids' do
+
+          it 'defaults to []' do
+            ip_permission.prefix_list_ids.should == []
+          end
+
+          it 'returns whatever it received as an array' do
+            IpPermission.new(group, :tcp, 80, :prefix_list_ids => ['pl-123']).
+              prefix_list_ids.should == ['pl-123']
+          end
+
+        end
+
         context '#egress?' do
 
           it 'defaults to false' do
@@ -130,13 +143,17 @@ module AWS
                   :user_id_group_pairs => [
                     { :group_id => 'other-id', :user_id => 'abc' },
                   ],
+                  :prefix_list_ids => [
+                    { :prefix_list_id => 'pl-123' },
+                  ],
                 }
               ])
 
             other_group = SecurityGroup.new('other-id', :owner_id => 'abc')
             p = IpPermission.new(group, :tcp, 80,
               :ip_ranges => ['1.1.1.1/1', '2.2.2.2/2'],
-              :groups => other_group)
+              :groups => other_group,
+              :prefix_list_ids => ['pl-123'])
             p.authorize
 
           end
@@ -155,17 +172,20 @@ module AWS
             port_range = 80..80
             ips = ['1.1.1.1', '2.2.2.2']
             groups = [sg2, sg3]
+            prefix_list_ids = ['pl-aaa', 'pl-bbb']
             egress = true
 
             p1 = IpPermission.new(sg1, protocol, port_range,
               :ip_ranges => ips,
               :groups => groups,
+              :prefix_list_ids => prefix_list_ids,
               :egress => egress,
               :config => config)
 
             p2 = IpPermission.new(sg1, protocol, port_range,
               :ip_ranges => ips.reverse,
               :groups => groups.reverse,
+              :prefix_list_ids => prefix_list_ids.reverse,
               :egress => egress,
               :config => config)
 
@@ -193,13 +213,17 @@ module AWS
                   :user_id_group_pairs => [
                     { :group_id => 'other-id', :user_id => 'abc' },
                   ],
+                  :prefix_list_ids => [
+                    { :prefix_list_id => 'pl-1b' },
+                  ],
                 }
               ])
 
             other_group = SecurityGroup.new('other-id', :owner_id => 'abc')
             p = IpPermission.new(group, :tcp, 80,
               :ip_ranges => ['1.1.1.1/1', '2.2.2.2/2'],
-              :groups => other_group)
+              :groups => other_group,
+              :prefix_list_ids => ['pl-1b'])
             p.revoke
 
           end
