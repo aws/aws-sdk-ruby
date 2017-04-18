@@ -6,6 +6,7 @@ module Aws
     describe Object do
 
       let(:client) { S3::Client.new(stub_responses: true) }
+      let(:tmpdir) { Dir.tmpdir }
       
       describe '#download_file' do
 
@@ -39,6 +40,7 @@ module Aws
         let(:single_part_file) { Tempfile.new('single-part-file') }
 
         before(:each) do
+          allow(Dir).to receive(:tmpdir).and_return(tmpdir)
           allow(client).to receive(:head_object).with(
               bucket: 'bucket',
               key: 'small',
@@ -125,7 +127,7 @@ module Aws
         it 'cleans up downloaded files parts when error occurs' do
           mock_client = Aws::S3::Client.new(stub_responses: {
             head_object: {content_length: 20 * one_meg, parts_count: 4},
-            get_object: [ {body: 'data'}, Timeout::Error]
+            get_object: [ {body: 'data'}, {body: 'data'}, Timeout::Error]
           })
           obj = S3::Object.new(
             bucket_name: 'bucket',
@@ -136,6 +138,10 @@ module Aws
           expect {
             obj.download_file(path)
           }.to raise_error(Timeout::Error)
+          Dir.glob(tmpdir + '/*').each do |file|
+            expect(file).not_to match(/part_number=/)
+            expect(file).not_to match(/bytes=/)
+          end
         end
       end
     end

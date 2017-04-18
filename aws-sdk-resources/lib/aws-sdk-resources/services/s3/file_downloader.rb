@@ -152,25 +152,23 @@ module Aws
         parts = batches.flat_map(&:values)
         batches.each do |batch|
           threads = []
-          batch.each do |chunk, file|
-            threads << Thread.new do
-              begin
+          begin
+            batch.each do |chunk, file|
+              threads << Thread.new do
                 resp = @client.get_object(
                   :bucket => @bucket,
                   :key => @key,
                   param.to_sym => chunk,
                   :response_target => file
                 )
-              rescue => error
-                # clear file parts once failed
-                clean_up_parts(parts)
-                raise error
               end
-              # TODO
-              Thread.current.abort_on_exception = true
             end
+            threads.each(&:join)
+          rescue => error
+            # clear file parts once failed
+            clean_up_parts(parts)
+            raise error
           end
-          threads.each(&:join)
         end
         concatenate_files(parts)
       end
