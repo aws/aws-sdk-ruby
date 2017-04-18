@@ -33,7 +33,7 @@ module Aws
         when "get_range"
           if @chunk_size
             resp = @client.head_object(bucket: @bucket, key: @key)
-            get_range(construct_chunks(resp.content_length))
+            multithreaded_get_by_ranges(construct_chunks(resp.content_length))
           else
             msg = "In :get_range mode, :chunk_size must be provided"
             raise ArgumentError, msg
@@ -53,7 +53,7 @@ module Aws
         if file_size < MIN_CHUNK_SIZE
           single_request
         elsif resp.parts_count.nil? || resp.parts_count <= 1
-          get_range(construct_chunks(file_size))
+          multithreaded_get_by_ranges(construct_chunks(file_size))
         else
           compute_mode(file_size, resp.parts_count)
         end
@@ -63,9 +63,9 @@ module Aws
         chunk_size = compute_chunk(file_size)
         part_size = (file_size.to_f / count.to_f).ceil
         if chunk_size < part_size
-          get_range(construct_chunks(file_size))
+          multithreaded_get_by_ranges(construct_chunks(file_size))
         else
-          get_part(count)
+          multithreaded_get_by_parts(count)
         end
       end
 
@@ -104,9 +104,7 @@ module Aws
         begin
           concatenate_parts(fileparts)
         ensure
-          fileparts.each do |part|
-            File.unlink(part) if File.exists?(part)
-          end
+          clean_up_parts(fileparts)
         end
       end
 
@@ -135,31 +133,44 @@ module Aws
         end
       end
 
-      def get_range(chunks)
+      def clean_up_parts(parts)
+        parts.each do |filename|
+          File.unlink(filename) if File.exists?(filename)
+        end
+      end
+
+      def multithreaded_get_by_ranges(chunks)
         thread_batches(chunks, 'range')
       end
 
-      def get_part(parts)
+      def multithreaded_get_by_parts(parts)
         thread_batches(parts, 'part_number')
       end
 
       def thread_batches(chunks, param)
         batches = file_batches(chunks, param)
+        parts = batches.inject([]) {|a, batch| a.push(*batch.values); a}
         batches.each do |batch|
           threads = []
           batch.each do |chunk, file|
-            threads << Thread.new do
-              resp = @client.get_object(
-                :bucket => @bucket,
-                :key => @key,
-                param.to_sym => chunk,
-                :response_target => file
-              )
+            threads << thread = Thread.new do
+              begin
+                resp = @client.get_object(
+                  :bucket => @bucket,
+                  :key => @key,
+                  param.to_sym => chunk,
+                  :response_target => file
+                )
+              rescue => error
+                # clear file parts once failed
+                clean_up_parts(parts)
+                raise error
+              end
+              thread.abort_on_exception = true
             end
           end
           threads.each(&:join)
         end
-        parts = batches.inject([]) {|a, batch| a.push(*batch.values); a}
         concatenate_files(parts)
       end
 

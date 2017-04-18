@@ -115,6 +115,22 @@ module Aws
             large_obj.download_file(path, chunk_size: 50 * one_meg )
           }.to raise_error(ArgumentError, ":chunk_size shouldn't exceed total file size.")
         end
+
+        it 'cleans up downloaded files parts when error occurs' do
+          mock_client = Aws::S3::Client.new(stub_responses: {
+            head_object: {content_length: 20 * one_meg, parts_count: 4},
+            get_object: [ {body: 'data'}, Timeout::Error]
+          })
+          obj = S3::Object.new(
+            bucket_name: 'bucket',
+            key: 'large',
+            client: mock_client
+          )
+          obj.upload_file(large_file)
+          expect {
+            obj.download_file(path)
+          }.to raise_error(Timeout::Error)
+        end
       end
     end
   end
