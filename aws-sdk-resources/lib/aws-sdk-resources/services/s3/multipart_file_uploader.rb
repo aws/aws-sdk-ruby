@@ -74,6 +74,8 @@ module Aws
 
       def upload_part_thread(queue)
         Thread.new do
+          Thread.current.abort_on_exception = true
+
           begin
             completed = []
             while part = queue.shift
