@@ -44,14 +44,20 @@ module Aws
               key: 'small',
               part_number: 1
             ).and_return(
-              client.stub_data(:head_object, content_length: one_meg, parts_count: 1)
+              client.stub_data(:head_object, content_length: one_meg, parts_count: nil)
             )
           allow(client).to receive(:head_object).with(
               bucket: 'bucket',
               key: 'large',
               part_number: 1
             ).and_return(
-              client.stub_data(:head_object, content_length: 20 * one_meg, parts_count: 4)
+              client.stub_data(:head_object, content_length: 5 * one_meg, parts_count: 4)
+            )
+          allow(client).to receive(:head_object).with(
+              bucket: 'bucket',
+              key: 'large',
+            ).and_return(
+              client.stub_data(:head_object, content_length: 20 * one_meg)
             )
           allow(client).to receive(:head_object).with(
               bucket: 'bucket',

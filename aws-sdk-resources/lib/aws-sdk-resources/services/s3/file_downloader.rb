@@ -49,13 +49,16 @@ module Aws
 
       def multipart_download
         resp = @client.head_object(bucket: @bucket, key: @key, part_number: 1)
-        file_size = resp.content_length
-        if file_size < MIN_CHUNK_SIZE
-          single_request
-        elsif resp.parts_count.nil? || resp.parts_count <= 1
-          multithreaded_get_by_ranges(construct_chunks(file_size))
+        count = resp.parts_count
+        if count.nil? || count <= 1
+          resp.content_length  < MIN_CHUNK_SIZE ?
+            single_request :
+            multithreaded_get_by_ranges(construct_chunks(resp.content_length))
         else
-          compute_mode(file_size, resp.parts_count)
+          resp = @client.head_object(bucket: @bucket, key: @key)
+          resp.content_length  < MIN_CHUNK_SIZE ?
+            single_request :
+            compute_mode(resp.content_length, count)
         end
       end
  
@@ -149,11 +152,11 @@ module Aws
 
       def thread_batches(chunks, param)
         batches = file_batches(chunks, param)
-        parts = batches.inject([]) {|a, batch| a.push(*batch.values); a}
+        parts = batches.flat_map(&:values)
         batches.each do |batch|
           threads = []
           batch.each do |chunk, file|
-            threads << thread = Thread.new do
+            threads << Thread.new do
               begin
                 resp = @client.get_object(
                   :bucket => @bucket,
@@ -166,7 +169,8 @@ module Aws
                 clean_up_parts(parts)
                 raise error
               end
-              thread.abort_on_exception = true
+              # TODO
+              Thread.current.abort_on_exception = true
             end
           end
           threads.each(&:join)
