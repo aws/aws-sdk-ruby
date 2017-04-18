@@ -37,12 +37,15 @@ module Aws
       # @option options [required,String] :key
       # @return [void]
       def upload(source, options = {})
-        if File.size(source) < MIN_PART_SIZE
-          raise ArgumentError, FILE_TOO_SMALL
-        else
-          upload_id = initiate_upload(options)
+        raise ArgumentError, FILE_TOO_SMALL if File.size(source) < MIN_PART_SIZE
+
+        upload_id = initiate_upload(options)
+        begin
           parts = upload_parts(upload_id, source, options)
           complete_upload(upload_id, parts, options)
+        rescue => error
+          abort_upload(upload_id, options, error)
+          raise error
         end
       end
 
@@ -61,29 +64,50 @@ module Aws
       end
 
       def upload_parts(upload_id, source, options)
-        pending = PartList.new(compute_parts(upload_id, source, options))
-        completed = PartList.new
-        errors = upload_in_threads(pending, completed)
-        if errors.empty?
-          completed.to_a.sort_by { |part| part[:part_number] }
-        else
-          abort_upload(upload_id, options, errors)
+        queue = PartList.new(compute_parts(upload_id, source, options))
+        threads = []
+        @thread_count.times do
+          threads << upload_part_thread(queue)
+        end
+        threads.map(&:value).flatten.sort_by { |part| part[:part_number] }
+      end
+
+      def upload_part_thread(queue)
+        Thread.new do
+          begin
+            completed = []
+            while part = queue.shift
+              completed << upload_part(part)
+            end
+            completed
+          rescue => error
+            # keep other threads from uploading other parts
+            queue.clear!
+            raise error
+          end
         end
       end
 
-      def abort_upload(upload_id, options, errors)
+      def upload_part(part)
+        resp = @client.upload_part(part)
+        part[:body].close
+
+        { etag: resp.etag, part_number: part[:part_number] }
+      end
+
+      def abort_upload(upload_id, options, error)
         @client.abort_multipart_upload(
           bucket: options[:bucket],
           key: options[:key],
           upload_id: upload_id
         )
-        msg = "multipart upload failed: #{errors.map(&:message).join("; ")}"
-        raise MultipartUploadError.new(msg, errors)
-      rescue MultipartUploadError => error
-        raise error
-      rescue => error
-        msg = "failed to abort multipart upload: #{error.message}"
-        raise MultipartUploadError.new(msg, errors + [error])
+        msg = "multipart upload failed: #{error.message}"
+        raise MultipartUploadError.new(msg, [error])
+      rescue MultipartUploadError => exception
+        raise exception
+      rescue => exception
+        msg = "failed to abort multipart upload: #{exception.message}"
+        raise MultipartUploadError.new(msg, [error, exception])
       end
 
       def compute_parts(upload_id, source, options)
@@ -120,29 +144,6 @@ module Aws
           hash[key] = options[key] if options.key?(key)
           hash
         end
-      end
-
-      def upload_in_threads(pending, completed)
-        threads = []
-        @thread_count.times do
-          thread = Thread.new do
-            begin
-              while part = pending.shift
-                resp = @client.upload_part(part)
-                part[:body].close
-                completed.push(etag: resp.etag, part_number: part[:part_number])
-              end
-              nil
-            rescue => error
-              # keep other threads from uploading other parts
-              pending.clear!
-              error
-            end
-          end
-          thread.abort_on_exception = true
-          threads << thread
-        end
-        threads.map(&:value).compact
       end
 
       def compute_default_part_size(source_size)
