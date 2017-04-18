@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
 2.9.7 (2017-04-11)
 ------------------
 
