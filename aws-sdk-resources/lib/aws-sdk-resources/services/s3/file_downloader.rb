@@ -51,12 +51,13 @@ module Aws
         resp = @client.head_object(bucket: @bucket, key: @key, part_number: 1)
         count = resp.parts_count
         if count.nil? || count <= 1
-          resp.content_length  < MIN_CHUNK_SIZE ?
+          resp.content_length < MIN_CHUNK_SIZE ?
             single_request :
             multithreaded_get_by_ranges(construct_chunks(resp.content_length))
         else
+          # partNumber is an option
           resp = @client.head_object(bucket: @bucket, key: @key)
-          resp.content_length  < MIN_CHUNK_SIZE ?
+          resp.content_length < MIN_CHUNK_SIZE ?
             single_request :
             compute_mode(resp.content_length, count)
         end
@@ -78,11 +79,7 @@ module Aws
         chunks = []
         while offset <= file_size
           progress = offset + default_chunk_size
-          if progress < file_size
-            chunks << "bytes=#{offset}-#{progress}"
-          else
-            chunks << "bytes=#{offset}-#{file_size}"
-          end
+          chunks << "bytes=#{offset}-#{progress < file_size ? progress : file_size}"
           offset = progress + 1
         end
         chunks
