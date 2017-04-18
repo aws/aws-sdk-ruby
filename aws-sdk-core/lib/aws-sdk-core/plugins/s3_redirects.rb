@@ -2,7 +2,7 @@ module Aws
   module Plugins
 
     # @seahorse.client.option [Boolean] :follow_redirects (true)
-    #   When `true`, this client will follow 307 redirects returned
+    #   When `true`, this client will follow 307 or 302 redirects returned
     #   by Amazon S3.
     class S3Redirects < Seahorse::Client::Plugin
 
@@ -13,7 +13,8 @@ module Aws
 
         def call(context)
           response = @handler.call(context)
-          if context.http_response.status_code == 307
+          status_code = context.http_response.status_code
+          if status_code == 307 || status_code == 302
             endpoint = context.http_response.headers['location']
             context.http_request.endpoint = endpoint
             context.http_response.body.truncate(0)
