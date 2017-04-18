@@ -52,7 +52,7 @@ Feature: Managed file download
   # to download in 1 request, this avoids the HEAD object request
   # penalty, especially useful for small objects.
   @mode
-  Scenario: Download a large object using part numbers
+  Scenario: Download a large object using single_request
     Given I have a 1M file
     And I upload the file
     When I download the file with mode "single_request"
