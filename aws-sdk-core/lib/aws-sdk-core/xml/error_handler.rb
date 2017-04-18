@@ -1,4 +1,4 @@
-require 'cgi'
+require 'cgi/util'
 
 module Aws
   module Xml

@@ -1,5 +1,3 @@
-require 'cgi'
-
 module Seahorse
   module Client
     module Plugins

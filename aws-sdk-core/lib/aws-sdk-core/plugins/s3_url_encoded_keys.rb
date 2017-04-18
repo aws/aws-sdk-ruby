@@ -1,4 +1,5 @@
 require 'uri'
+require 'cgi/util'
 
 module Aws
   module Plugins
