@@ -797,7 +797,7 @@
         "DescribeScalingActivitiesType$MaxRecords": "<p>The maximum number of items to return with this call.</p>",
         "DescribeScheduledActionsType$MaxRecords": "<p>The maximum number of items to return with this call.</p>",
         "DescribeTagsType$MaxRecords": "<p>The maximum number of items to return with this call.</p>",
-        "LaunchConfigurationNamesType$MaxRecords": "<p>The maximum number of items to return with this call. The default is 100.</p>"
+        "LaunchConfigurationNamesType$MaxRecords": "<p>The maximum number of items to return with this call. The default is 50.</p>"
       }
     },
     "MetricCollectionType": {
