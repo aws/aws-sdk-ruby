@@ -45,6 +45,7 @@ module Aws
     CodeCommit
     CodeDeploy
     CodePipeline
+    CodeStar
     CognitoIdentity
     CognitoIdentityProvider
     CognitoSync
@@ -83,6 +84,7 @@ module Aws
     Lambda
     LambdaPreview
     Lex
+    LexModelBuildingService
     Lightsail
     MTurk
     MachineLearning

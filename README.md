@@ -258,6 +258,7 @@ to be backwards compatible.
 | AWS CodeCommit                      | CodeCommit                   | 2015-04-13  |
 | AWS CodeDeploy                      | CodeDeploy                   | 2014-10-06  |
 | AWS CodePipeline                    | CodePipeline                 | 2015-07-09  |
+| AWS CodeStar                        | CodeStar                     | 2017-04-19  |
 | AWS Config                          | ConfigService                | 2014-11-12  |
 | AWS Cost and Usage Report Service   | CostandUsageReportService    | 2017-01-06  |
 | AWS Data Pipeline                   | DataPipeline                 | 2012-10-29  |
@@ -320,6 +321,7 @@ to be backwards compatible.
 | Amazon Kinesis                      | Kinesis                      | 2013-12-02  |
 | Amazon Kinesis Analytics            | KinesisAnalytics             | 2015-08-14  |
 | Amazon Kinesis Firehose             | Firehose                     | 2015-08-04  |
+| Amazon Lex Model Building Service   | LexModelBuildingService      | 2017-04-19  |
 | Amazon Lex Runtime Service          | Lex                          | 2016-11-28  |
 | Amazon Lightsail                    | Lightsail                    | 2016-11-28  |
 | Amazon Machine Learning             | MachineLearning              | 2014-12-12  |

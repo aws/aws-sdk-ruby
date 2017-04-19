@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::CodeStar - Added support for a new service, AWS CodeStar.
+
+* Feature - Aws::LexModelBuildingService - Added support for a new service, Amazon Lex Model Building Service.
+
 2.9.8 (2017-04-18)
 ------------------
 

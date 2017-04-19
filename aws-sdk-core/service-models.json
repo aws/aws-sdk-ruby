@@ -86,6 +86,10 @@
     "models": "codepipeline/2015-07-09",
     "endpoint": "codepipeline"
   },
+  "CodeStar": {
+    "models": "codestar/2017-04-19",
+    "endpoint": "codestar"
+  },
   "CognitoIdentity": {
     "models": "cognito-identity/2014-06-30",
     "endpoint": "cognito-identity"
@@ -237,6 +241,10 @@
   "Lex": {
     "models": "runtime.lex/2016-11-28",
     "endpoint": "runtime.lex"
+  },
+  "LexModelBuildingService": {
+    "models": "lex-models/2017-04-19",
+    "endpoint": "models.lex"
   },
   "Lightsail": {
     "models": "lightsail/2016-11-28",
