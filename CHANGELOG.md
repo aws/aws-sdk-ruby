@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::DirectConnect - Updated the documentation for AWS Direct Connect.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the waiters for Elastic Load Balancing.
+
+* Feature - Aws::KMS - Updated the documentation for AWS Key Management Service.
+
+* Feature - Aws::Route53 - Updated the documentation for Amazon Route 53.
+
+* Feature - Aws::Route53Domains - Updated the API, and documentation for Amazon Route 53 Domains.
+
 2.9.9 (2017-04-19)
 ------------------
 
