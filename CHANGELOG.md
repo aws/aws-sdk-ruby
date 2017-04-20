@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.10 (2017-04-20)
+------------------
+
 * Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
 
 * Feature - Aws::DirectConnect - Updated the documentation for AWS Direct Connect.
