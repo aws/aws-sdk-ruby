@@ -1,6 +1,170 @@
 Unreleased Changes
 ------------------
 
+2.9.9 (2017-04-19)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IAM - Updated the API, and documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::Polly - Updated the API, and documentation for Amazon Polly.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
+* Feature - Aws::CodeStar - Added support for a new service, AWS CodeStar.
+
+* Feature - Aws::LexModelBuildingService - Added support for a new service, Amazon Lex Model Building Service.
+
+2.9.8 (2017-04-18)
+------------------
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+2.9.7 (2017-04-11)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::OpsWorks - Updated the API, and documentation for AWS OpsWorks.
+
+2.9.6 (2017-04-07)
+------------------
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
+2.9.5 (2017-04-06)
+------------------
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
+* Feature - Aws - Added `Aws.empty_connection_pools!` feature to allow for manual clearing of connection pools. This may be helpful for applications where a conneciton pool is shared across processes.
+
+  Resolves [GitHub Issue #1438](https://github.com/aws/aws-sdk-ruby/issues/1438).
+
+2.9.4 (2017-04-05)
+------------------
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+2.9.3 (2017-04-04)
+------------------
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Issue - Aws::DynamoDB - Fixed a bug where SimpleAttributes could be applied twice under certain circumstances.
+
+  Resolves [GitHub Issue #1406](https://github.com/aws/aws-sdk-ruby/issues/1406).
+
+2.9.2 (2017-04-03)
+------------------
+
+* Feature - Aws::Lex - Updated the API, and documentation for Amazon Lex Runtime Service.
+
+2.9.1 (2017-03-31)
+------------------
+
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
+2.9.0 (2017-03-31)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the documentation for AWS Config.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::CloudFront - Added support for the new 2017-03-25 API version of Amazon CloudFront.
+
+* Feature - Aws::ResourceGroupsTaggingAPI - Added support for a new service, AWS Resource Groups Tagging API.
+
+2.8.14 (2017-03-28)
+------------------
+
+* Feature - Aws::Batch - Updated the API, and documentation for AWS Batch.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+2.8.13 (2017-03-28)
+------------------
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+2.8.12 (2017-03-27)
+------------------
+
+2.8.11 (2017-03-23)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
+2.8.10 (2017-03-22)
+------------------
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for AWS Elastic Load Balancing.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+2.8.9 (2017-03-21)
+------------------
+
+* Feature - Aws::Rekognition - Updated the documentation for AWS Rekognition.
+
+2.8.8 (2017-03-20)
+------------------
+
+* Feature - Aws::CodeBuild - Updated the documentation for AWS CodeBuild.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+2.8.7 (2017-03-14)
+------------------
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+2.8.6 (2017-03-13)
+------------------
+
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::CloudWatchEvents - Updated the API, and documentation for Amazon CloudWatch Events.
+
+2.8.5 (2017-03-10)
+------------------
+
+* Feature - Aws::CodeDeploy - Updated the API for AWS CodeDeploy.
+
+* Feature - Aws::EMR - Updated the API, documentation, and waiters for Amazon Elastic MapReduce.
+
+2.8.4 (2017-03-09)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
+
+2.8.3 (2017-03-08)
+------------------
+
+* Feature - Aws::Organizations - Updated the documentation for AWS Organizations.
+
+* Feature - Aws::WorkDocs - Added support for a new service, Amazon WorkDocs.
+
 2.8.2 (2017-03-08)
 ------------------
 

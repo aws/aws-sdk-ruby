@@ -162,10 +162,9 @@ their types specified, e.g. `{ s: 'abc' }` instead of simply
           def structure(ref, values)
             shape = ref.shape
             if values.is_a?(Struct)
-              values.members.each do |key|
-                values[key] = translate(shape.member(key), values[key])
+              values.members.each.with_object(values.class.new) do |key, st|
+                st[key] = translate(shape.member(key), values[key])
               end
-              values
             elsif values.is_a?(Hash)
               values.each.with_object({}) do |(key, value), hash|
                 hash[key] = translate(shape.member(key), value)

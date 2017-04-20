@@ -1,4 +1,5 @@
 require 'thread'
+require 'cgi/util'
 
 module Aws
   module S3

@@ -96,7 +96,7 @@ module Aws
 
         # @api private
         def apply_signature(options = {})
-          context = options[:context]
+          context = apply_authtype(options[:context])
           signer = options[:signer] || context.config.sigv4_signer
           req = context.http_request
 
@@ -125,6 +125,14 @@ module Aws
           context[:string_to_sign] = signature.string_to_sign
         end
 
+        # @api private
+        def apply_authtype(context)
+          if context.operation['authtype'].eql?('v4-unsigned-body') &&
+            context.http_request.endpoint.scheme.eql?('https')
+            context.http_request.headers['X-Amz-Content-Sha256'] = 'UNSIGNED-PAYLOAD'
+          end
+          context
+        end
       end
     end
   end

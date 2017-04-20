@@ -49,6 +49,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
         'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
         'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
+        'Aws::Plugins::JsonvalueConverter' => "#{core_plugins}/jsonvalue_converter.rb",
       }
     end
 

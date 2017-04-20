@@ -1,6 +1,7 @@
 # AWS SDK for Ruby - Version 3
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-ruby.svg)](https://codeclimate.com/github/aws/aws-sdk-ruby) [![Dependency Status](https://www.versioneye.com/ruby/aws-sdk/badge.svg)](https://www.versioneye.com/ruby/aws-sdk)
+[![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-ruby.svg)](https://codeclimate.com/github/aws/aws-sdk-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-ruby/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-ruby?branch=master)
+[![Dependency Status](https://www.versioneye.com/ruby/aws-sdk/badge.svg)](https://www.versioneye.com/ruby/aws-sdk)
 
 This is version 3 of the `aws-sdk` gem. Versions 1 and 2 can be found in
 these branches:
@@ -34,7 +35,7 @@ use a major version when expressing a dependency on `aws-sdk`.
 gem 'aws-sdk', '~> 2'
 ```
 
-##Getting Help
+## Getting Help
 
 Please use these community resources for getting help. We use the GitHub issues for tracking bugs and feature requests and have limited bandwidth to address them.
 
@@ -43,7 +44,7 @@ Please use these community resources for getting help. We use the GitHub issues 
 * Open a support ticket with [AWS Support](https://console.aws.amazon.com/support/home), if it turns out that you may have found a bug, please open an issue
 * If in doubt as to whether your issue is a question about how to use AWS or a potential SDK issue, feel free to open a GitHub issue on this repo.
 
-##Opening Issues
+## Opening Issues
 
 If you encounter a bug with `aws-sdk-ruby` we would like to hear about it. Search the existing issues and try to make sure your problem doesn’t already exist before opening a new issue. It’s helpful if you include the version of `aws-sdk-ruby`, ruby version and OS you’re using. Please include a stack trace and reduced repro case when appropriate, too.
 

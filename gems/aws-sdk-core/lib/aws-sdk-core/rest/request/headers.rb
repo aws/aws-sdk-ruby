@@ -1,4 +1,5 @@
 require 'time'
+require 'base64'
 
 module Aws
   module Rest
@@ -28,6 +29,7 @@ module Aws
         private
 
         def apply_header_value(headers, ref, value)
+          value = apply_json_trait(value) if ref['jsonvalue']
           headers[ref.location_name] =
             case ref.shape
             when TimestampShape then value.utc.httpdate
@@ -40,6 +42,13 @@ module Aws
           values.each_pair do |name, value|
             headers["#{prefix}#{name}"] = value.to_s
           end
+        end
+
+        # With complex headers value in json syntax,
+        # base64 encodes value to aviod weird characters
+        # causing potential issues in headers
+        def apply_json_trait(value)
+          Base64.strict_encode64(value)
         end
 
       end

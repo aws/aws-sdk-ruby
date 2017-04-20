@@ -1,4 +1,6 @@
 require 'time'
+require 'base64'
+require 'json'
 
 module Aws
   module Rest
@@ -31,6 +33,7 @@ module Aws
         end
 
         def cast_value(ref, value)
+          value = extract_json_trait(value) if ref['jsonvalue']
           case ref.shape
           when StringShape then value
           when IntegerShape then value.to_i
@@ -58,6 +61,10 @@ module Aws
               data[name][match[1]] = header_value
             end
           end
+        end
+
+        def extract_json_trait(value)
+          JSON.parse(Base64.decode64(value))
         end
 
       end

@@ -1,6 +1,7 @@
 require 'set'
 require 'time'
 require 'openssl'
+require 'cgi/util'
 require 'webrick/httputils'
 require 'aws-sdk-core/query'
 
