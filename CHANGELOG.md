@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::S3 - Added Multipart Download Helper feature to support different mode(:auto, :single_request, :get_range) in downloading large objects with `#download_file` in multipart when possible.
+* Feature - Aws::S3 - Added Multipart Download Helper feature to support different mode (`:auto`, `:single_request`, `:get_range`) in downloading large objects with `#download_file` in multipart when possible.
 
 2.9.11 (2017-04-21)
 ------------------
