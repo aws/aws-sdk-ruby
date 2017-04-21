@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.11 (2017-04-21)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::Kinesis - Updated the API, documentation, and waiters for Amazon Kinesis.
