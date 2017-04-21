@@ -217,20 +217,6 @@ to the `Aws::S3::Resource` interface.
 
 See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
 
-### Add Multipart Download Helper(s)
-
-The SDK already has a multipart upload helper for Amazon S3, but doing a GET request
-for very large objects can be problematic using the client directly. Byte ranged
-requests allow the user to circumvent the issue, but this could be distilled
-into a high level helper class that manages multipart downloads in this manner.
-
-See [related GitHub issue #990](https://github.com/aws/aws-sdk-ruby/issues/990)
-for an example related to Amazon S3.
-
-See [related GitHub issue #987](https://github.com/aws/aws-sdk-ruby/issues/987)
-for an example related to the Amazon RDS client (similar, not identical,
-pattern).
-
 ### Add accelerate endpoint support to presigned POST requests
 
 The presigned POST utility does not support pre-signing Amazon S3 acclerated
