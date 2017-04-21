@@ -100,17 +100,15 @@ module Aws
         end
       end
 
-      def concatenate_files(fileparts)
-        begin
-          concatenate_parts(fileparts)
-        ensure
-          clean_up_parts(fileparts)
-        end
-      end
-
       def concatenate_parts(fileparts)
         File.open(@path, 'wb')do |output_path|
           sort_files(fileparts).each {|part| IO.copy_stream(part, output_path)}
+        end
+      end
+
+      def clean_up_parts(parts)
+        parts.each do |filename|
+          File.unlink(filename) if File.exists?(filename)
         end
       end
 
@@ -133,12 +131,6 @@ module Aws
         end
       end
 
-      def clean_up_parts(parts)
-        parts.each do |filename|
-          File.unlink(filename) if File.exists?(filename)
-        end
-      end
-
       def multithreaded_get_by_ranges(chunks)
         thread_batches(chunks, 'range')
       end
@@ -150,9 +142,9 @@ module Aws
       def thread_batches(chunks, param)
         batches = file_batches(chunks, param)
         parts = batches.flat_map(&:values)
-        batches.each do |batch|
-          threads = []
-          begin
+        begin
+          batches.each do |batch|
+            threads = []
             batch.each do |chunk, file|
               threads << Thread.new do
                 resp = @client.get_object(
@@ -164,13 +156,11 @@ module Aws
               end
             end
             threads.each(&:join)
-          rescue => error
-            # clear file parts once failed
-            clean_up_parts(parts)
-            raise error
           end
+          concatenate_parts(parts)
+        ensure
+          clean_up_parts(parts)
         end
-        concatenate_files(parts)
       end
 
       def single_request
