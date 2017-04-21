@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['lib/**/*.rb']
 
   spec.add_dependency('aws-sdk-core', '3.0.0.rc1')
-  spec.add_dependency('aws-sdk-kms', '1.0.0.rc3')
+  spec.add_dependency('aws-sdk-kms', '1.0.0.rc4')
   spec.add_dependency('aws-sigv4', '~> 1.0')
 
 end

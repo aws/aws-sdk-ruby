@@ -10,6 +10,30 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Support for CLI Profile Environment Variable
+
+While the SDKs generally use `AWS_PROFILE` as the environment variable source of
+the shared config/credentials profile, the CLI promotes the
+`AWS_DEFAULT_PROFILE` environment variable. Request is to also support that as a
+secondary source.
+
+See [related GitHub issue #1452](https://github.com/aws/aws-sdk-ruby/issues/1452).
+
+### Add Region Detection from EC2 Metadata
+
+We use instance metadata for credentials, feature request is to also use it for
+region resolution.
+
+See [related GitHub issue #1455](https://github.com/aws/aws-sdk-ruby/issues/1455).
+
+### AssumeRole MFA Integration with SharedConfig
+
+`Aws::AssumeRoleCredentials` allows for MFA support, but does not pull
+non-token values from SharedConfig in this case. Could be implemented as a new
+method.
+
+See [related GitHub issue #1480](https://github.com/aws/aws-sdk-ruby/issues/1480).
+
 ### Lazy Building of Resource Objects from Raw Responses
 
 There are performance/memory questions around some very large responses (such
@@ -192,20 +216,6 @@ do this in the resource interface. This is a feature request to add that support
 to the `Aws::S3::Resource` interface.
 
 See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
-
-### Add Multipart Download Helper(s)
-
-The SDK already has a multipart upload helper for Amazon S3, but doing a GET request
-for very large objects can be problematic using the client directly. Byte ranged
-requests allow the user to circumvent the issue, but this could be distilled
-into a high level helper class that manages multipart downloads in this manner.
-
-See [related GitHub issue #990](https://github.com/aws/aws-sdk-ruby/issues/990)
-for an example related to Amazon S3.
-
-See [related GitHub issue #987](https://github.com/aws/aws-sdk-ruby/issues/987)
-for an example related to the Amazon RDS client (similar, not identical,
-pattern).
 
 ### Add accelerate endpoint support to presigned POST requests
 

@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added Multipart Download Helper feature to support different mode (`:auto`, `:single_request`, `:get_range`) in downloading large objects with `#download_file` in multipart when possible.
+
+2.9.11 (2017-04-21)
+------------------
+
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::Kinesis - Updated the API, documentation, and waiters for Amazon Kinesis.
+
+2.9.10 (2017-04-20)
+------------------
+
+* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+
+* Feature - Aws::DirectConnect - Updated the documentation for AWS Direct Connect.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the waiters for Elastic Load Balancing.
+
+* Feature - Aws::KMS - Updated the documentation for AWS Key Management Service.
+
+* Feature - Aws::Route53 - Updated the documentation for Amazon Route 53.
+
+* Feature - Aws::Route53Domains - Updated the API, and documentation for Amazon Route 53 Domains.
+
 2.9.9 (2017-04-19)
 ------------------
 
