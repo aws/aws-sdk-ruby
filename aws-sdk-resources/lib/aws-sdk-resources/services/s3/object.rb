@@ -252,7 +252,39 @@ module Aws
         uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
         true
       end
-
+     
+      # Downloads a file in S3 to a path on disk.
+      #
+      #     # small files (< 5MB) are downloaded in a single API call
+      #     obj.download_file('/path/to/file')
+      #
+      # Files larger than 5MB are downloaded using multipart method
+      #
+      #     # large files are split into parts
+      #     # and the parts are downloaded in parallel
+      #     obj.download_file('/path/to/very_large_file')
+      # 
+      # @param [String] destination Where to download the file to
+      #
+      # @option options [String] mode `auto`, `single_request`, `get_range`
+      #  `single_request` mode forces only 1 GET request is made in download,
+      #  `get_range` mode allows `chunk_size` parameter to configured in
+      #  customizing each range size in multipart_download,
+      #  By default, `auto` mode is enabled, which performs multipart_download
+      #
+      # @option options [String] chunk_size required in get_range mode
+      #
+      # @option options [String] thread_count Customize threads used in multipart
+      #   download, if not provided, 10 is default value
+      #
+      # @return [Boolean] Returns `true` when the file is downloaded
+      #   without any errors.
+      def download_file(destination, options = {})
+        downloader = FileDownloader.new(client: client)
+        downloader.download(
+          destination, options.merge(bucket: bucket_name, key: key))
+        true
+      end
     end
   end
 end

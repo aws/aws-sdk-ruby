@@ -59,6 +59,11 @@ module Aws
         object_summary.upload_file('source', opt_name: 'opt-value')
       end
 
+      it 'delegates #download_file to #object' do
+        expect(object).to receive(:download_file).with('destination', opt_name: 'opt-value')
+        object_summary.download_file('destination', opt_name: 'opt-value')
+      end
+
     end
   end
 end

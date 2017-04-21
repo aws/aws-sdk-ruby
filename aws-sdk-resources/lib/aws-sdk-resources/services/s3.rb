@@ -9,6 +9,7 @@ module Aws
     autoload :Encryption, 'aws-sdk-resources/services/s3/encryption'
     autoload :FilePart, 'aws-sdk-resources/services/s3/file_part'
     autoload :FileUploader, 'aws-sdk-resources/services/s3/file_uploader'
+    autoload :FileDownloader, 'aws-sdk-resources/services/s3/file_downloader'
     autoload :MultipartFileUploader, 'aws-sdk-resources/services/s3/multipart_file_uploader'
     autoload :MultipartUploadError, 'aws-sdk-resources/services/s3/multipart_upload_error'
     autoload :ObjectCopier, 'aws-sdk-resources/services/s3/object_copier'

@@ -1,4 +1,6 @@
 require 'base64'
+require 'tempfile'
+require 'fileutils'
 require 'net/https'
 require 'net/http/post/multipart'
 require 'uri'
@@ -28,6 +30,11 @@ end
 
 When(/^I upload the file to the "(.*?)" object$/) do |key|
   @bucket.object(key).upload_file(@file)
+end
+
+When(/^I upload the file$/) do
+  @object = @bucket.object(@file.path)
+  @object.upload_file(@file)
 end
 
 When(/^I upload the file to the "(.*?)" object with SSE\/CPK$/) do |key|
@@ -136,4 +143,47 @@ Then(/^I should be able to multipart copy the object$/) do
   target_object = target_bucket.object("test object-copy")
   target_object.copy_from("#{@bucket_name}/test object", multipart_copy: true)
   expect(ApiCallTracker.called_operations).to include(:create_multiparty_upload)
+end
+
+Given(/^I have a (\d+)M file$/) do |mb|
+  @file = Tempfile.new('randomfile')
+  File.open(@file, 'wb') {
+    |f| f.write(Random.new.bytes(mb.to_i * 1024 * 1024))}
+end
+
+Given(/^I upload the file using put_object$/) do
+  @object = @s3.bucket(@bucket_name).object(@file.path)
+  @object.put(body: @file)
+end
+
+Then(/^(\d+) (\w+) requests? should have been made$/) do |expected_count, method_name|
+  expect(
+    ApiCallTracker.called_operations.count { |name| method_name.to_sym == name }
+  ).to eq(expected_count.to_i)
+end
+
+Then(/^the downloaded file should match the uploaded file$/) do
+  expect(FileUtils.compare_file(@file.path, @download_file_dest)).to be(true)
+end
+
+When(/^I download the file with mode "([^"]*)"$/) do |mode|
+  # create a temp directory for download
+  tempfile = Tempfile.new("sample")
+  @download_file_dest = tempfile.path
+  tempfile.unlink
+
+  @object.download_file(@download_file_dest, mode: mode)
+end
+
+When(/^I download the file with mode "([^"]*)" with (\d+)M chunk size$/) do |mode, mb|
+  tempfile = Tempfile.new("sample")
+  @download_file_dest = tempfile.path
+  tempfile.unlink
+
+  @object.download_file(@download_file_dest, mode: mode, chunk_size: (mb.to_i * 1024 *1024))
+end
+
+Then(/^this test file has been cleaned up$/) do
+  File.unlink(@download_file_dest)
+  expect(File.exist?(@download_file_dest)).to be(false)
 end
