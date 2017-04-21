@@ -3,7 +3,7 @@ require 'tempfile'
 require 'time'
 require 'uri'
 require 'set'
-require 'cgi'
+require 'cgi/util'
 
 module Aws
   module Sigv4
