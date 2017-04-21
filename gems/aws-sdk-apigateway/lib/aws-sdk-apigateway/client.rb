@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
@@ -46,6 +47,7 @@ module Aws::APIGateway
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
     add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
@@ -528,30 +530,36 @@ module Aws::APIGateway
     # Creates a new domain name.
     #
     # @option params [required, String] :domain_name
-    #   The name of the DomainName resource.
+    #   (Required) The name of the DomainName resource.
     #
-    # @option params [required, String] :certificate_name
-    #   The name of the certificate.
+    # @option params [String] :certificate_name
+    #   The user-friendly name of the certificate.
     #
-    # @option params [required, String] :certificate_body
-    #   The body of the server certificate provided by your certificate
-    #   authority.
+    # @option params [String] :certificate_body
+    #   \[Deprecated\] The body of the server certificate provided by your
+    #   certificate authority.
     #
-    # @option params [required, String] :certificate_private_key
-    #   Your certificate's private key.
+    # @option params [String] :certificate_private_key
+    #   \[Deprecated\] Your certificate's private key.
     #
-    # @option params [required, String] :certificate_chain
-    #   The intermediate certificates and optionally the root certificate, one
-    #   after the other without any blank lines. If you include the root
-    #   certificate, your certificate chain must start with intermediate
-    #   certificates and end with the root certificate. Use the intermediate
-    #   certificates that were provided by your certificate authority. Do not
-    #   include any intermediaries that are not in the chain of trust path.
+    # @option params [String] :certificate_chain
+    #   \[Deprecated\] The intermediate certificates and optionally the root
+    #   certificate, one after the other without any blank lines. If you
+    #   include the root certificate, your certificate chain must start with
+    #   intermediate certificates and end with the root certificate. Use the
+    #   intermediate certificates that were provided by your certificate
+    #   authority. Do not include any intermediaries that are not in the chain
+    #   of trust path.
+    #
+    # @option params [String] :certificate_arn
+    #   The reference to an AWS-managed certificate. AWS Certificate Manager
+    #   is the only supported source.
     #
     # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
     #   * {Types::DomainName#certificate_name #certificate_name} => String
+    #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #
@@ -559,16 +567,18 @@ module Aws::APIGateway
     #
     #   resp = client.create_domain_name({
     #     domain_name: "String", # required
-    #     certificate_name: "String", # required
-    #     certificate_body: "String", # required
-    #     certificate_private_key: "String", # required
-    #     certificate_chain: "String", # required
+    #     certificate_name: "String",
+    #     certificate_body: "String",
+    #     certificate_private_key: "String",
+    #     certificate_chain: "String",
+    #     certificate_arn: "String",
     #   })
     #
     # @example Response structure
     #
     #   resp.domain_name #=> String
     #   resp.certificate_name #=> String
+    #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
     #   resp.distribution_domain_name #=> String
     #
@@ -634,6 +644,54 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Creates a ReqeustValidator of a given RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   \[Required\] The identifier of the RestApi for which the
+    #   RequestValidator is created.
+    #
+    # @option params [String] :name
+    #   The name of the to-be-created RequestValidator.
+    #
+    # @option params [Boolean] :validate_request_body
+    #   A Boolean flag to indicate whether to validate request body according
+    #   to the configured model schema for the method (`true`) or not
+    #   (`false`).
+    #
+    # @option params [Boolean] :validate_request_parameters
+    #   A Boolean flag to indicate whether to validate request parameters,
+    #   `true`, or not `false`.
+    #
+    # @return [Types::RequestValidator] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RequestValidator#id #id} => String
+    #   * {Types::RequestValidator#name #name} => String
+    #   * {Types::RequestValidator#validate_request_body #validate_request_body} => Boolean
+    #   * {Types::RequestValidator#validate_request_parameters #validate_request_parameters} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_request_validator({
+    #     rest_api_id: "String", # required
+    #     name: "String",
+    #     validate_request_body: false,
+    #     validate_request_parameters: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.validate_request_body #=> Boolean
+    #   resp.validate_request_parameters #=> Boolean
+    #
+    # @overload create_request_validator(params = {})
+    # @param [Hash] params ({})
+    def create_request_validator(params = {}, options = {})
+      req = build_request(:create_request_validator, params)
+      req.send_request(options)
+    end
+
     # Creates a Resource resource.
     #
     # @option params [required, String] :rest_api_id
@@ -672,6 +730,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].authorization_type #=> String
     #   resp.resource_methods["String"].authorizer_id #=> String
     #   resp.resource_methods["String"].api_key_required #=> Boolean
+    #   resp.resource_methods["String"].request_validator_id #=> String
     #   resp.resource_methods["String"].operation_name #=> String
     #   resp.resource_methods["String"].request_parameters #=> Hash
     #   resp.resource_methods["String"].request_parameters["String"] #=> Boolean
@@ -1311,6 +1370,31 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Deletes a RequestValidator of a given RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   \[Required\] The identifier of the RestApi from which the given
+    #   RequestValidator is deleted.
+    #
+    # @option params [required, String] :request_validator_id
+    #   \[Required\] The identifier of the RequestValidator to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_request_validator({
+    #     rest_api_id: "String", # required
+    #     request_validator_id: "String", # required
+    #   })
+    #
+    # @overload delete_request_validator(params = {})
+    # @param [Hash] params ({})
+    def delete_request_validator(params = {}, options = {})
+      req = build_request(:delete_request_validator, params)
+      req.send_request(options)
+    end
+
     # Deletes a Resource resource.
     #
     # @option params [required, String] :rest_api_id
@@ -1585,7 +1669,7 @@ module Aws::APIGateway
     # Gets information about the current ApiKeys resource.
     #
     # @option params [String] :position
-    #   The position of the current ApiKeys resource to get information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
     #   The maximum number of ApiKeys to get information about.
@@ -1712,11 +1796,10 @@ module Aws::APIGateway
     #   The RestApi identifier for the Authorizers resource.
     #
     # @option params [String] :position
-    #   If not all Authorizer resources in the response were present, the
-    #   position will specify where to start the next page of results.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   Limit the number of Authorizer resources in the response.
+    #   The maximum number of returned results per page.
     #
     # @return [Types::Authorizers] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1797,13 +1880,11 @@ module Aws::APIGateway
     #   The domain name of a BasePathMapping resource.
     #
     # @option params [String] :position
-    #   The position of the current BasePathMapping resource in the collection
-    #   to get information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of BasePathMapping resources in the collection to
-    #   get information about. The default limit is 25. It should be an
-    #   integer between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #
     # @return [Types::BasePathMappings] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1870,13 +1951,11 @@ module Aws::APIGateway
     # Gets a collection of ClientCertificate resources.
     #
     # @option params [String] :position
-    #   The position of the current ClientCertificate resource in the
-    #   collection to get information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of ClientCertificate resources in the collection to
-    #   get information about. The default limit is 25. It should be an
-    #   integer between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #
     # @return [Types::ClientCertificates] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1916,6 +1995,19 @@ module Aws::APIGateway
     # @option params [required, String] :deployment_id
     #   The identifier of the Deployment resource to get information about.
     #
+    # @option params [Array<String>] :embed
+    #   A query parameter to retrieve the specified embedded resources of the
+    #   returned Deployment resource in the response. In a REST API call, this
+    #   `embed` parameter value is a list of comma-separated strings, as in
+    #   `GET
+    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=var1,var2`.
+    #   The SDK and other platform-dependent libraries might use a different
+    #   format for the list. Currently, this request supports only retrieval
+    #   of the embedded API summary this way. Hence, the parameter value must
+    #   be a single-valued list containing only the `"apisummary"` string. For
+    #   example, `GET
+    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=apisummary`.
+    #
     # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Deployment#id #id} => String
@@ -1928,6 +2020,7 @@ module Aws::APIGateway
     #   resp = client.get_deployment({
     #     rest_api_id: "String", # required
     #     deployment_id: "String", # required
+    #     embed: ["String"],
     #   })
     #
     # @example Response structure
@@ -1954,13 +2047,11 @@ module Aws::APIGateway
     #   Deployment resources to get information about.
     #
     # @option params [String] :position
-    #   The position of the current Deployment resource in the collection to
-    #   get information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of Deployment resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #
     # @return [Types::Deployments] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2045,11 +2136,10 @@ module Aws::APIGateway
     #   The path of API entities of the to-be-retrieved documentation parts.
     #
     # @option params [String] :position
-    #   The position of the to-be-retrieved documentation part in the
-    #   DocumentationParts collection.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The size of the paged results.
+    #   The maximum number of returned results per page.
     #
     # @return [Types::DocumentationParts] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2125,11 +2215,10 @@ module Aws::APIGateway
     #   documentation versions.
     #
     # @option params [String] :position
-    #   The position of the returned `DocumentationVersion` in the
-    #   DocumentationVersions collection.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The page size of the returned documentation versions.
+    #   The maximum number of returned results per page.
     #
     # @return [Types::DocumentationVersions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2169,6 +2258,7 @@ module Aws::APIGateway
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
     #   * {Types::DomainName#certificate_name #certificate_name} => String
+    #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #
@@ -2182,6 +2272,7 @@ module Aws::APIGateway
     #
     #   resp.domain_name #=> String
     #   resp.certificate_name #=> String
+    #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
     #   resp.distribution_domain_name #=> String
     #
@@ -2195,12 +2286,11 @@ module Aws::APIGateway
     # Represents a collection of DomainName resources.
     #
     # @option params [String] :position
-    #   The position of the current domain names to get information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of DomainName resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #
     # @return [Types::DomainNames] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2220,6 +2310,7 @@ module Aws::APIGateway
     #   resp.items #=> Array
     #   resp.items[0].domain_name #=> String
     #   resp.items[0].certificate_name #=> String
+    #   resp.items[0].certificate_arn #=> String
     #   resp.items[0].certificate_upload_date #=> Time
     #   resp.items[0].distribution_domain_name #=> String
     #
@@ -2417,6 +2508,7 @@ module Aws::APIGateway
     #   * {Types::Method#authorization_type #authorization_type} => String
     #   * {Types::Method#authorizer_id #authorizer_id} => String
     #   * {Types::Method#api_key_required #api_key_required} => Boolean
+    #   * {Types::Method#request_validator_id #request_validator_id} => String
     #   * {Types::Method#operation_name #operation_name} => String
     #   * {Types::Method#request_parameters #request_parameters} => Hash&lt;String,Boolean&gt;
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
@@ -2437,6 +2529,7 @@ module Aws::APIGateway
     #   resp.authorization_type #=> String
     #   resp.authorizer_id #=> String
     #   resp.api_key_required #=> Boolean
+    #   resp.request_validator_id #=> String
     #   resp.operation_name #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> Boolean
@@ -2602,13 +2695,11 @@ module Aws::APIGateway
     #   The RestApi identifier.
     #
     # @option params [String] :position
-    #   The position of the next set of results in the Models resource to get
-    #   information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of models in the collection to get information
-    #   about. The default limit is 25. It should be an integer between 1 -
-    #   500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #
     # @return [Types::Models] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2640,6 +2731,84 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Gets a RequestValidator of a given RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   \[Required\] The identifier of the RestApi to which the specified
+    #   RequestValidator belongs.
+    #
+    # @option params [required, String] :request_validator_id
+    #   \[Required\] The identifier of the RequestValidator to be retrieved.
+    #
+    # @return [Types::RequestValidator] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RequestValidator#id #id} => String
+    #   * {Types::RequestValidator#name #name} => String
+    #   * {Types::RequestValidator#validate_request_body #validate_request_body} => Boolean
+    #   * {Types::RequestValidator#validate_request_parameters #validate_request_parameters} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_request_validator({
+    #     rest_api_id: "String", # required
+    #     request_validator_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.validate_request_body #=> Boolean
+    #   resp.validate_request_parameters #=> Boolean
+    #
+    # @overload get_request_validator(params = {})
+    # @param [Hash] params ({})
+    def get_request_validator(params = {}, options = {})
+      req = build_request(:get_request_validator, params)
+      req.send_request(options)
+    end
+
+    # Gets the RequestValidators collection of a given RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   \[Required\] The identifier of a RestApi to which the
+    #   RequestValidators collection belongs.
+    #
+    # @option params [String] :position
+    #   The current pagination position in the paged result set.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of returned results per page.
+    #
+    # @return [Types::RequestValidators] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RequestValidators#position #position} => String
+    #   * {Types::RequestValidators#items #items} => Array&lt;Types::RequestValidator&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_request_validators({
+    #     rest_api_id: "String", # required
+    #     position: "String",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.position #=> String
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].validate_request_body #=> Boolean
+    #   resp.items[0].validate_request_parameters #=> Boolean
+    #
+    # @overload get_request_validators(params = {})
+    # @param [Hash] params ({})
+    def get_request_validators(params = {}, options = {})
+      req = build_request(:get_request_validators, params)
+      req.send_request(options)
+    end
+
     # Lists information about a resource.
     #
     # @option params [required, String] :rest_api_id
@@ -2647,6 +2816,15 @@ module Aws::APIGateway
     #
     # @option params [required, String] :resource_id
     #   The identifier for the Resource resource.
+    #
+    # @option params [Array<String>] :embed
+    #   A query parameter to retrieve the specified resources embedded in the
+    #   returned Resource representation in the response. This `embed`
+    #   parameter value is a list of comma-separated strings. Currently, the
+    #   request supports only retrieval of the embedded Method resources this
+    #   way. The query parameter value must be a single-valued list and
+    #   contain the `"methods"` string. For example, `GET
+    #   /restapis/\{restapi_id\}/resources/\{resource_id\}?embed=methods`.
     #
     # @return [Types::Resource] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2661,6 +2839,7 @@ module Aws::APIGateway
     #   resp = client.get_resource({
     #     rest_api_id: "String", # required
     #     resource_id: "String", # required
+    #     embed: ["String"],
     #   })
     #
     # @example Response structure
@@ -2674,6 +2853,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].authorization_type #=> String
     #   resp.resource_methods["String"].authorizer_id #=> String
     #   resp.resource_methods["String"].api_key_required #=> Boolean
+    #   resp.resource_methods["String"].request_validator_id #=> String
     #   resp.resource_methods["String"].operation_name #=> String
     #   resp.resource_methods["String"].request_parameters #=> Hash
     #   resp.resource_methods["String"].request_parameters["String"] #=> Boolean
@@ -2720,13 +2900,20 @@ module Aws::APIGateway
     #   The RestApi identifier for the Resource.
     #
     # @option params [String] :position
-    #   The position of the next set of results in the current Resources
-    #   resource to get information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of Resource resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
+    #
+    # @option params [Array<String>] :embed
+    #   A query parameter used to retrieve the specified resources embedded in
+    #   the returned Resources resource in the response. This `embed`
+    #   parameter value is a list of comma-separated strings. Currently, the
+    #   request supports only retrieval of the embedded Method resources this
+    #   way. The query parameter value must be a single-valued list and
+    #   contain the `"methods"` string. For example, `GET
+    #   /restapis/\{restapi_id\}/resources?embed=methods`.
     #
     # @return [Types::Resources] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2739,6 +2926,7 @@ module Aws::APIGateway
     #     rest_api_id: "String", # required
     #     position: "String",
     #     limit: 1,
+    #     embed: ["String"],
     #   })
     #
     # @example Response structure
@@ -2754,6 +2942,7 @@ module Aws::APIGateway
     #   resp.items[0].resource_methods["String"].authorization_type #=> String
     #   resp.items[0].resource_methods["String"].authorizer_id #=> String
     #   resp.items[0].resource_methods["String"].api_key_required #=> Boolean
+    #   resp.items[0].resource_methods["String"].request_validator_id #=> String
     #   resp.items[0].resource_methods["String"].operation_name #=> String
     #   resp.items[0].resource_methods["String"].request_parameters #=> Hash
     #   resp.items[0].resource_methods["String"].request_parameters["String"] #=> Boolean
@@ -2837,13 +3026,11 @@ module Aws::APIGateway
     # Lists the RestApis resources for your collection.
     #
     # @option params [String] :position
-    #   The position of the current RestApis resource in the collection to get
-    #   information about.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of RestApi resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #
     # @return [Types::RestApis] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2963,10 +3150,10 @@ module Aws::APIGateway
     end
 
     # @option params [String] :position
-    #   The position of the last fetched element in the SdkTypes collection.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of SdkType instances to be returned.
+    #   The maximum number of returned results per page.
     #
     # @return [Types::SdkTypes] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3133,10 +3320,10 @@ module Aws::APIGateway
     #   The ending date (e.g., 2016-12-31) of the usage data.
     #
     # @option params [String] :position
-    #   Position
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   The maximum number of results to be returned.
+    #   The maximum number of returned results per page.
     #
     # @return [Types::Usage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3266,12 +3453,10 @@ module Aws::APIGateway
     #   plan customer.
     #
     # @option params [String] :position
-    #   A query parameter specifying the zero-based index specifying the
-    #   position of a usage plan key.
+    #   The current pagination position in the paged result set.
     #
     # @option params [Integer] :limit
-    #   A query parameter specifying the maximum number usage plan keys
-    #   returned by the GET request.
+    #   The maximum number of returned results per page.
     #
     # @option params [String] :name_query
     #   A query parameter specifying the name of the to-be-returned usage plan
@@ -3310,14 +3495,13 @@ module Aws::APIGateway
     # Gets all the usage plans of the caller's account.
     #
     # @option params [String] :position
-    #   The zero-based array index specifying the position of the
-    #   to-be-retrieved UsagePlan resource.
+    #   The current pagination position in the paged result set.
     #
     # @option params [String] :key_id
     #   The identifier of the API key associated with the usage plans.
     #
     # @option params [Integer] :limit
-    #   The number of UsagePlan resources to be returned as the result.
+    #   The maximum number of returned results per page.
     #
     # @return [Types::UsagePlans] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3758,7 +3942,10 @@ module Aws::APIGateway
     #   Specifies the method request's HTTP method type.
     #
     # @option params [required, String] :authorization_type
-    #   Specifies the type of authorization used for the method.
+    #   The method's authorization type. Valid values are `NONE` for open
+    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using a
+    #   custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito user
+    #   pool.
     #
     # @option params [String] :authorizer_id
     #   Specifies the identifier of an Authorizer to use on this Method, if
@@ -3793,12 +3980,17 @@ module Aws::APIGateway
     #   Request models are represented as a key/value map, with a content type
     #   as the key and a Model name as the value.
     #
+    # @option params [String] :request_validator_id
+    #   The identifier of a RequestValidator for validating the method
+    #   request.
+    #
     # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Method#http_method #http_method} => String
     #   * {Types::Method#authorization_type #authorization_type} => String
     #   * {Types::Method#authorizer_id #authorizer_id} => String
     #   * {Types::Method#api_key_required #api_key_required} => Boolean
+    #   * {Types::Method#request_validator_id #request_validator_id} => String
     #   * {Types::Method#operation_name #operation_name} => String
     #   * {Types::Method#request_parameters #request_parameters} => Hash&lt;String,Boolean&gt;
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
@@ -3821,6 +4013,7 @@ module Aws::APIGateway
     #     request_models: {
     #       "String" => "String",
     #     },
+    #     request_validator_id: "String",
     #   })
     #
     # @example Response structure
@@ -3829,6 +4022,7 @@ module Aws::APIGateway
     #   resp.authorization_type #=> String
     #   resp.authorizer_id #=> String
     #   resp.api_key_required #=> Boolean
+    #   resp.request_validator_id #=> String
     #   resp.operation_name #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> Boolean
@@ -4584,6 +4778,7 @@ module Aws::APIGateway
     #
     #   * {Types::DomainName#domain_name #domain_name} => String
     #   * {Types::DomainName#certificate_name #certificate_name} => String
+    #   * {Types::DomainName#certificate_arn #certificate_arn} => String
     #   * {Types::DomainName#certificate_upload_date #certificate_upload_date} => Time
     #   * {Types::DomainName#distribution_domain_name #distribution_domain_name} => String
     #
@@ -4605,6 +4800,7 @@ module Aws::APIGateway
     #
     #   resp.domain_name #=> String
     #   resp.certificate_name #=> String
+    #   resp.certificate_arn #=> String
     #   resp.certificate_upload_date #=> Time
     #   resp.distribution_domain_name #=> String
     #
@@ -4773,6 +4969,7 @@ module Aws::APIGateway
     #   * {Types::Method#authorization_type #authorization_type} => String
     #   * {Types::Method#authorizer_id #authorizer_id} => String
     #   * {Types::Method#api_key_required #api_key_required} => Boolean
+    #   * {Types::Method#request_validator_id #request_validator_id} => String
     #   * {Types::Method#operation_name #operation_name} => String
     #   * {Types::Method#request_parameters #request_parameters} => Hash&lt;String,Boolean&gt;
     #   * {Types::Method#request_models #request_models} => Hash&lt;String,String&gt;
@@ -4801,6 +4998,7 @@ module Aws::APIGateway
     #   resp.authorization_type #=> String
     #   resp.authorizer_id #=> String
     #   resp.api_key_required #=> Boolean
+    #   resp.request_validator_id #=> String
     #   resp.operation_name #=> String
     #   resp.request_parameters #=> Hash
     #   resp.request_parameters["String"] #=> Boolean
@@ -4947,6 +5145,55 @@ module Aws::APIGateway
       req.send_request(options)
     end
 
+    # Updates a RequestValidator of a given RestApi.
+    #
+    # @option params [required, String] :rest_api_id
+    #   \[Required\] The identifier of the RestApi for which the given
+    #   RequestValidator is updated.
+    #
+    # @option params [required, String] :request_validator_id
+    #   \[Required\] The identifier of RequestValidator to be updated.
+    #
+    # @option params [Array<Types::PatchOperation>] :patch_operations
+    #   A list of update operations to be applied to the specified resource
+    #   and in the order specified in this list.
+    #
+    # @return [Types::RequestValidator] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RequestValidator#id #id} => String
+    #   * {Types::RequestValidator#name #name} => String
+    #   * {Types::RequestValidator#validate_request_body #validate_request_body} => Boolean
+    #   * {Types::RequestValidator#validate_request_parameters #validate_request_parameters} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_request_validator({
+    #     rest_api_id: "String", # required
+    #     request_validator_id: "String", # required
+    #     patch_operations: [
+    #       {
+    #         op: "add", # accepts add, remove, replace, move, copy, test
+    #         path: "String",
+    #         value: "String",
+    #         from: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.validate_request_body #=> Boolean
+    #   resp.validate_request_parameters #=> Boolean
+    #
+    # @overload update_request_validator(params = {})
+    # @param [Hash] params ({})
+    def update_request_validator(params = {}, options = {})
+      req = build_request(:update_request_validator, params)
+      req.send_request(options)
+    end
+
     # Changes information about a Resource resource.
     #
     # @option params [required, String] :rest_api_id
@@ -4993,6 +5240,7 @@ module Aws::APIGateway
     #   resp.resource_methods["String"].authorization_type #=> String
     #   resp.resource_methods["String"].authorizer_id #=> String
     #   resp.resource_methods["String"].api_key_required #=> Boolean
+    #   resp.resource_methods["String"].request_validator_id #=> String
     #   resp.resource_methods["String"].operation_name #=> String
     #   resp.resource_methods["String"].request_parameters #=> Hash
     #   resp.resource_methods["String"].request_parameters["String"] #=> Boolean
@@ -5284,7 +5532,7 @@ module Aws::APIGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apigateway'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

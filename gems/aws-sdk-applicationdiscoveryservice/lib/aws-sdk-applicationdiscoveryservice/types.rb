@@ -8,19 +8,19 @@
 module Aws::ApplicationDiscoveryService
   module Types
 
-    # Information about agents or Connectors that were instructed to start
-    # collecting data. Information includes the agent/Connector ID, a
-    # description of the operation, and whether or not the agent/Connector
+    # Information about agents or connectors that were instructed to start
+    # collecting data. Information includes the agent/connector ID, a
+    # description of the operation, and whether the agent/connector
     # configuration was updated.
     #
     # @!attribute [rw] agent_id
-    #   The agent/Connector ID.
+    #   The agent/connector ID.
     #   @return [String]
     #
     # @!attribute [rw] operation_succeeded
     #   Information about the status of the `StartDataCollection` and
     #   `StopDataCollection` operations. The system has recorded the data
-    #   collection operation. The agent/Connector receives this command the
+    #   collection operation. The agent/connector receives this command the
     #   next time it polls for a new command.
     #   @return [Boolean]
     #
@@ -79,7 +79,7 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     #
     # @!attribute [rw] registered_time
-    #   Agent's first registration time stamp in UTC.
+    #   Agent's first registration timestamp in UTC.
     #   @return [String]
     #
     class AgentInfo < Struct.new(
@@ -96,14 +96,14 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # Network details about the host where the agent/Connector resides.
+    # Network details about the host where the agent/connector resides.
     #
     # @!attribute [rw] ip_address
-    #   The IP address for the host where the agent/Connector resides.
+    #   The IP address for the host where the agent/connector resides.
     #   @return [String]
     #
     # @!attribute [rw] mac_address
-    #   The MAC address for the host where the agent/Connector resides.
+    #   The MAC address for the host where the agent/connector resides.
     #   @return [String]
     #
     class AgentNetworkInfo < Struct.new(
@@ -142,21 +142,21 @@ module Aws::ApplicationDiscoveryService
     # categorize IT assets.
     #
     # @!attribute [rw] configuration_type
-    #   A type of IT asset that you want to tag.
+    #   A type of IT asset to tag.
     #   @return [String]
     #
     # @!attribute [rw] configuration_id
-    #   The configuration ID for the item you want to tag. You can specify a
-    #   list of keys and values.
+    #   The configuration ID for the item to tag. You can specify a list of
+    #   keys and values.
     #   @return [String]
     #
     # @!attribute [rw] key
-    #   A type of tag to filter on. For example, *serverType*.
+    #   A type of tag on which to filter. For example, *serverType*.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A value to filter on. For example *key = serverType* and *value =
-    #   web server*.
+    #   A value on which to filter. For example *key = serverType* and
+    #   *value = web server*.
     #   @return [String]
     #
     # @!attribute [rw] time_of_creation
@@ -397,14 +397,6 @@ module Aws::ApplicationDiscoveryService
     #   *key*-*value* format. For example:
     #
     #   `\{"key": "collectionStatus", "value": "STARTED"\}`
-    #
-    #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Managing AWS Application Discovery Service
-    #   Agents and the AWS Application Discovery Connector ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/managing-agent.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -495,10 +487,9 @@ module Aws::ApplicationDiscoveryService
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to get the next set of results. For example, if you
-    #   specified 100 IDs for
-    #   `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you will get
+    #   A token to get the next set of results. For example, if you specify
+    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
+    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
     #   results in a set of 10. Use the token in the query to get the next
     #   set of 10.
     #   @return [String]
@@ -517,15 +508,70 @@ module Aws::ApplicationDiscoveryService
     #   @return [Array<Types::ExportInfo>]
     #
     # @!attribute [rw] next_token
-    #   A token to get the next set of results. For example, if you
-    #   specified 100 IDs for
-    #   `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you will get
+    #   A token to get the next set of results. For example, if you specify
+    #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
+    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
     #   results in a set of 10. Use the token in the query to get the next
     #   set of 10.
     #   @return [String]
     #
     class DescribeExportConfigurationsResponse < Struct.new(
+      :exports_info,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeExportTasksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_ids: ["ConfigurationsExportId"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] export_ids
+    #   One or more unique identifiers used to query the status of an export
+    #   request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of volume results returned by
+    #   `DescribeExportTasks` in paginated output. When this parameter is
+    #   used, `DescribeExportTasks` only returns `maxResults` results in a
+    #   single page along with a `nextToken` response element.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeExportTasks` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is null when there are no more results to return.
+    #   @return [String]
+    #
+    class DescribeExportTasksRequest < Struct.new(
+      :export_ids,
+      :max_results,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] exports_info
+    #   Contains one or more sets of export request details. When the status
+    #   of a request is `SUCCEEDED`, the response includes a URL for an
+    #   Amazon S3 bucket where you can view the data in a CSV file.
+    #   @return [Array<Types::ExportInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future `DescribeExportTasks`
+    #   request. When the results of a `DescribeExportTasks` request exceed
+    #   `maxResults`, this value can be used to retrieve the next page of
+    #   results. This value is null when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    class DescribeExportTasksResponse < Struct.new(
       :exports_info,
       :next_token)
       include Aws::Structure
@@ -549,14 +595,6 @@ module Aws::ApplicationDiscoveryService
     #   You can filter the list using a *key*-*value* format. You can
     #   separate these items by using logical operators. Allowed filters
     #   include `tagKey`, `tagValue`, and `configurationId`.
-    #
-    #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Managing AWS Application Discovery Service
-    #   Agents and the AWS Application Discovery Connector ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/managing-agents.html
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] max_results
@@ -602,12 +640,12 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] application_configuration_id
-    #   Configuration ID of an application from which each item will be
+    #   Configuration ID of an application from which each item is
     #   disassociated.
     #   @return [String]
     #
     # @!attribute [rw] configuration_ids
-    #   Configuration ID of each item be be disassociated from an
+    #   Configuration ID of each item to be disassociated from an
     #   application.
     #   @return [Array<String>]
     #
@@ -652,7 +690,7 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     #
     # @!attribute [rw] export_request_time
-    #   The time the configuration data export was initiated.
+    #   The time that the configuration data export was initiated.
     #   @return [Time]
     #
     class ExportInfo < Struct.new(
@@ -666,13 +704,12 @@ module Aws::ApplicationDiscoveryService
 
     # A filter that can use conditional operators.
     #
-    # for a complete list of filters and guidance for using them with the
-    # Application Discovery Service, see [Querying Discovered Configuration
-    # Items][1].
+    # For more information about filters, see [Querying Discovered
+    # Configuration Items][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html
+    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html
     #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
@@ -688,9 +725,9 @@ module Aws::ApplicationDiscoveryService
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   A string value that you want to filter on. For example, if you
-    #   choose the `destinationServer.osVersion` filter name, you could
-    #   specify `Ubuntu` for the value.
+    #   A string value on which to filter. For example, if you choose the
+    #   `destinationServer.osVersion` filter name, you could specify
+    #   `Ubuntu` for the value.
     #   @return [Array<String>]
     #
     # @!attribute [rw] condition
@@ -715,19 +752,19 @@ module Aws::ApplicationDiscoveryService
     class GetDiscoverySummaryRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] servers
-    #   Number of servers discovered.
+    #   The number of servers discovered.
     #   @return [Integer]
     #
     # @!attribute [rw] applications
-    #   Number of applications discovered.
+    #   The number of applications discovered.
     #   @return [Integer]
     #
     # @!attribute [rw] servers_mapped_to_applications
-    #   Number of servers mapped to applications.
+    #   The number of servers mapped to applications.
     #   @return [Integer]
     #
     # @!attribute [rw] servers_mappedto_tags
-    #   Number of servers mapped to tags.
+    #   The number of servers mapped to tags.
     #   @return [Integer]
     #
     # @!attribute [rw] agent_summary
@@ -772,7 +809,7 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] configuration_type
-    #   A valid configuration identified by the Discovery Service.
+    #   A valid configuration identified by Application Discovery Service.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -786,7 +823,7 @@ module Aws::ApplicationDiscoveryService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#ListConfigurations
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -804,11 +841,11 @@ module Aws::ApplicationDiscoveryService
     # @!attribute [rw] order_by
     #   Certain filter criteria return output that can be sorted in
     #   ascending or descending order. For a list of output characteristics
-    #   for each filter, see [Querying Discovered Configuration Items][1].
+    #   for each filter, see [Using the ListConfigurations Action][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#ListConfigurations
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
     #   @return [Array<Types::OrderByElement>]
     #
     class ListConfigurationsRequest < Struct.new(
@@ -914,23 +951,23 @@ module Aws::ApplicationDiscoveryService
     # Details about neighboring servers.
     #
     # @!attribute [rw] source_server_id
-    #   ID of server that opened the network connection.
+    #   The ID of the server that opened the network connection.
     #   @return [String]
     #
     # @!attribute [rw] destination_server_id
-    #   ID of the server that accepted the networker connection.
+    #   The ID of the server that accepted the network connection.
     #   @return [String]
     #
     # @!attribute [rw] destination_port
-    #   Destination network port for the connection.
+    #   The destination network port for the connection.
     #   @return [Integer]
     #
     # @!attribute [rw] transport_protocol
-    #   Network protocol used for the connection.
+    #   The network protocol used for the connection.
     #   @return [String]
     #
     # @!attribute [rw] connections_count
-    #   Number of open network connections with the neighboring server.
+    #   The number of open network connections with the neighboring server.
     #   @return [Integer]
     #
     class NeighborConnectionDetail < Struct.new(
@@ -942,7 +979,7 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # Field and direction for ordered output.
+    # A field and direction for ordered output.
     #
     # @note When making an API call, you may pass OrderByElement
     #   data as a hash:
@@ -953,7 +990,7 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] field_name
-    #   Field to order on.
+    #   The field on which to order.
     #   @return [String]
     #
     # @!attribute [rw] sort_order
@@ -974,15 +1011,14 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] agent_ids
-    #   The IDs of the agents or Connectors that you want to start
-    #   collecting data. If you send a request to an agent/Connector ID that
-    #   you do not have permission to contact, according to your AWS
-    #   account, the service does not throw an exception. Instead, it
-    #   returns the error in the *Description* field. If you send a request
-    #   to multiple agents/Connectors and you do not have permission to
-    #   contact some of those agents/Connectors, the system does not throw
-    #   an exception. Instead, the system shows `Failed` in the
-    #   *Description* field.
+    #   The IDs of the agents or connectors from which to start collecting
+    #   data. If you send a request to an agent/connector ID that you do not
+    #   have permission to contact, according to your AWS account, the
+    #   service does not throw an exception. Instead, it returns the error
+    #   in the *Description* field. If you send a request to multiple
+    #   agents/connectors and you do not have permission to contact some of
+    #   those agents/connectors, the system does not throw an exception.
+    #   Instead, the system shows `Failed` in the *Description* field.
     #   @return [Array<String>]
     #
     class StartDataCollectionByAgentIdsRequest < Struct.new(
@@ -991,14 +1027,40 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agents_configuration_status
-    #   Information about agents or the Connector that were instructed to
-    #   start collecting data. Information includes the agent/Connector ID,
-    #   a description of the operation performed, and whether or not the
-    #   agent/Connector configuration was updated.
+    #   Information about agents or the connector that were instructed to
+    #   start collecting data. Information includes the agent/connector ID,
+    #   a description of the operation performed, and whether the
+    #   agent/connector configuration was updated.
     #   @return [Array<Types::AgentConfigurationStatus>]
     #
     class StartDataCollectionByAgentIdsResponse < Struct.new(
       :agents_configuration_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartExportTaskRequest
+    #   data as a hash:
+    #
+    #       {
+    #         export_data_format: ["CSV"], # accepts CSV, GRAPHML
+    #       }
+    #
+    # @!attribute [rw] export_data_format
+    #   The file format for the returned export data. Default value is
+    #   `CSV`.
+    #   @return [Array<String>]
+    #
+    class StartExportTaskRequest < Struct.new(
+      :export_data_format)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_id
+    #   A unique identifier used to query the status of an export request.
+    #   @return [String]
+    #
+    class StartExportTaskResponse < Struct.new(
+      :export_id)
       include Aws::Structure
     end
 
@@ -1010,7 +1072,7 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] agent_ids
-    #   The IDs of the agents or Connectors that you want to stop collecting
+    #   The IDs of the agents or connectors from which to stop collecting
     #   data.
     #   @return [Array<String>]
     #
@@ -1020,10 +1082,10 @@ module Aws::ApplicationDiscoveryService
     end
 
     # @!attribute [rw] agents_configuration_status
-    #   Information about agents or the Connector that were instructed to
-    #   stop collecting data. Information includes the agent/Connector ID, a
-    #   description of the operation performed, and whether or not the
-    #   agent/Connector configuration was updated.
+    #   Information about the agents or connector that were instructed to
+    #   stop collecting data. Information includes the agent/connector ID, a
+    #   description of the operation performed, and whether the
+    #   agent/connector configuration was updated.
     #   @return [Array<Types::AgentConfigurationStatus>]
     #
     class StopDataCollectionByAgentIdsResponse < Struct.new(
@@ -1042,11 +1104,11 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] key
-    #   A type of tag to filter on.
+    #   The type of tag on which to filter.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   A value for a tag key to filter on.
+    #   A value for a tag key on which to filter.
     #   @return [String]
     #
     class Tag < Struct.new(
@@ -1055,7 +1117,7 @@ module Aws::ApplicationDiscoveryService
       include Aws::Structure
     end
 
-    # The name of a tag filter. Valid names are: `tagKey`, `tagValue`,
+    # The tag filter. Valid names are: `tagKey`, `tagValue`,
     # `configurationId`.
     #
     # @note When making an API call, you may pass TagFilter
@@ -1067,11 +1129,11 @@ module Aws::ApplicationDiscoveryService
     #       }
     #
     # @!attribute [rw] name
-    #   A name of a tag filter.
+    #   A name of the tag filter.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   Values of a tag filter.
+    #   Values for the tag filter.
     #   @return [Array<String>]
     #
     class TagFilter < Struct.new(

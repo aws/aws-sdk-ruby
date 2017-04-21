@@ -131,6 +131,17 @@ module Aws::EC2
     #       name: "String",
     #     },
     #     ebs_optimized: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -301,6 +312,10 @@ module Aws::EC2
     #   usage charges apply when using an EBS-optimized instance.
     #
     #   Default: `false`
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the resources during launch. You can tag
+    #   instances and volumes. The specified tags are applied to all instances
+    #   or volumes that are created during launch.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []
@@ -665,6 +680,17 @@ module Aws::EC2
     #     iops: 1,
     #     encrypted: false,
     #     kms_key_id: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     # @param [Hash] options ({})
     # @option options [Boolean] :dry_run
@@ -723,6 +749,8 @@ module Aws::EC2
     #   then the CMK ID. For example,
     #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
+    # @option options [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the volume during creation.
     # @return [Volume]
     def create_volume(options = {})
       resp = @client.create_volume(options)
@@ -914,7 +942,9 @@ module Aws::EC2
     # @option options [String] :ramdisk_id
     #   The ID of the RAM disk.
     # @option options [Array<String>] :billing_products
-    #   The billing product codes.
+    #   The billing product codes. Your account must be authorized to specify
+    #   billing product codes. Otherwise, you can use the AWS Marketplace to
+    #   bill for the use of an AMI.
     # @option options [String] :root_device_name
     #   The name of the root device (for example, `/dev/sda1`, or
     #   `/dev/xvda`).
@@ -1282,18 +1312,6 @@ module Aws::EC2
     #
     #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
     #
-    #   * `association.public-ip` - The address of the Elastic IP address
-    #     (IPv4) bound to the network interface.
-    #
-    #   * `association.ip-owner-id` - The owner of the Elastic IP address
-    #     (IPv4) associated with the network interface.
-    #
-    #   * `association.allocation-id` - The allocation ID returned when you
-    #     allocated the Elastic IP address (IPv4) for your network interface.
-    #
-    #   * `association.association-id` - The association ID returned when the
-    #     network interface was associated with an IPv4 address.
-    #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -1383,6 +1401,20 @@ module Aws::EC2
     #
     #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
     #     of the private IPv4 address associated with the network interface.
+    #
+    #   * `network-interface.association.public-ip` - The address of the
+    #     Elastic IP address (IPv4) bound to the network interface.
+    #
+    #   * `network-interface.association.ip-owner-id` - The owner of the
+    #     Elastic IP address (IPv4) associated with the network interface.
+    #
+    #   * `network-interface.association.allocation-id` - The allocation ID
+    #     returned when you allocated the Elastic IP address (IPv4) for your
+    #     network interface.
+    #
+    #   * `network-interface.association.association-id` - The association ID
+    #     returned when the network interface was associated with an IPv4
+    #     address.
     #
     #   * `network-interface.attachment.attachment-id` - The ID of the
     #     interface attachment.
@@ -2071,7 +2103,8 @@ module Aws::EC2
     #     association.
     #
     #   * `association.main` - Indicates whether the route table is the main
-    #     route table for the VPC (`true` \| `false`).
+    #     route table for the VPC (`true` \| `false`). Route tables that do
+    #     not have an association ID are not returned in the response.
     #
     #   * `route-table-id` - The ID of the route table.
     #

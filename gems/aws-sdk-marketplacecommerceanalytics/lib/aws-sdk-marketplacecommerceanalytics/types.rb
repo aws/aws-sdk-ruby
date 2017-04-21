@@ -14,7 +14,7 @@ module Aws::MarketplaceCommerceAnalytics
     #   data as a hash:
     #
     #       {
-    #         data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue
+    #         data_set_type: "customer_subscriber_hourly_monthly_subscriptions", # required, accepts customer_subscriber_hourly_monthly_subscriptions, customer_subscriber_annual_subscriptions, daily_business_usage_by_instance_type, daily_business_fees, daily_business_free_trial_conversions, daily_business_new_instances, daily_business_new_product_subscribers, daily_business_canceled_product_subscribers, monthly_revenue_billing_and_revenue_data, monthly_revenue_annual_subscriptions, disbursed_amount_by_product, disbursed_amount_by_product_with_uncollected_funds, disbursed_amount_by_instance_hours, disbursed_amount_by_customer_geo, disbursed_amount_by_age_of_uncollected_funds, disbursed_amount_by_age_of_disbursed_funds, customer_profile_by_industry, customer_profile_by_revenue, customer_profile_by_geography, sales_compensation_billed_revenue, us_sales_and_use_tax_records
     #         data_set_publication_date: Time.now, # required
     #         role_name_arn: "RoleNameArn", # required
     #         destination_s3_bucket_name: "DestinationS3BucketName", # required
@@ -73,6 +73,8 @@ module Aws::MarketplaceCommerceAnalytics
     #     Pacific Time since 2015-10-01.
     #   * *sales\_compensation\_billed\_revenue* - Available monthly on the
     #     4th day of the month by 5:00 PM Pacific Time since 2016-12.
+    #   * *us\_sales\_and\_use\_tax\_records* - Available monthly on the
+    #     15th day of the month by 5:00 PM Pacific Time since 2017-02-15.
     #   @return [String]
     #
     # @!attribute [rw] data_set_publication_date

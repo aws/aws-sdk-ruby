@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -45,6 +46,7 @@ module Aws::ElastiCache
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -143,7 +145,7 @@ module Aws::ElastiCache
 
     # @!group API Operations
 
-    # Adds up to 10 cost allocation tags to the named resource. A cost
+    # Adds up to 50 cost allocation tags to the named resource. A cost
     # allocation tag is a key-value pair where the key and value are
     # case-sensitive. You can use cost allocation tags to categorize and
     # track your AWS costs.
@@ -823,9 +825,24 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
-    # Creates a new cache parameter group. A cache parameter group is a
-    # collection of parameters that you apply to all of the nodes in a cache
-    # cluster.
+    # Creates a new Amazon ElastiCache cache parameter group. An ElastiCache
+    # cache parameter group is a collection of parameters and their values
+    # that are applied to all of the nodes in any cache cluster or
+    # replication group using the CacheParameterGroup.
+    #
+    # A newly created CacheParameterGroup is an exact duplicate of the
+    # default parameter group for the CacheParameterGroupFamily. To
+    # customize the newly created CacheParameterGroup you can change the
+    # values of specific parameters. For more information, see:
+    #
+    # * [ModifyCacheParameterGroup][1] in the ElastiCache API Reference.
+    #
+    # * [Parameters and Parameter Groups][2] in the ElastiCache User Guide.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html
+    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ParameterGroups.html
     #
     # @option params [required, String] :cache_parameter_group_name
     #   A user-specified name for the cache parameter group.
@@ -989,11 +1006,19 @@ module Aws::ElastiCache
     # When a Redis (cluster mode disabled) replication group has been
     # successfully created, you can add one or more read replicas to it, up
     # to a total of 5 read replicas. You cannot alter a Redis (cluster mode
-    # enabled) replication group after it has been created.
+    # enabled) replication group after it has been created. However, if you
+    # need to increase or decrease the number of node groups (console:
+    # shards), you can avail yourself of ElastiCache for Redis' enhanced
+    # backup and restore. For more information, see [Restoring From a Backup
+    # with Cluster Resizing][1] in the *ElastiCache User Guide*.
     #
     # <note markdown="1"> This operation is valid for Redis only.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/backups-restoring.html
     #
     # @option params [required, String] :replication_group_id
     #   The replication group identifier. This parameter is stored as a
@@ -1046,8 +1071,10 @@ module Aws::ElastiCache
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
     #
-    #   If `Multi-AZ` is `enabled`, the value of this parameter must be at
-    #   least 2.
+    #   If `AutomaticFailoverEnabled` is `true`, the value of this parameter
+    #   must be at least 2. If `AutomaticFailoverEnabled` is `false` you can
+    #   omit this parameter (it will default to 1), or you can explicitly set
+    #   it to a value between 2 and 6.
     #
     #   The maximum permitted value for `NumCacheClusters` is 6 (primary plus
     #   5 replicas).
@@ -1091,7 +1118,8 @@ module Aws::ElastiCache
     #
     #   If you're creating a Redis (cluster mode disabled) or a Redis
     #   (cluster mode enabled) replication group, you can use this parameter
-    #   to configure one node group (shard) or you can omit this parameter.
+    #   to individually configure each node group (shard), or you can omit
+    #   this parameter.
     #
     # @option params [String] :cache_node_type
     #   The compute and memory capacity of the nodes in the node group
@@ -1208,10 +1236,12 @@ module Aws::ElastiCache
     # @option params [Array<String>] :snapshot_arns
     #   A list of Amazon Resource Names (ARN) that uniquely identify the Redis
     #   RDB snapshot files stored in Amazon S3. The snapshot files are used to
-    #   populate the replication group. The Amazon S3 object name in the ARN
-    #   cannot contain any commas. The list must match the number of node
-    #   groups (shards) in the replication group, which means you cannot
-    #   repartition.
+    #   populate the new replication group. The Amazon S3 object name in the
+    #   ARN cannot contain any commas. The new replication group will have the
+    #   number of node groups (console: shards) specified by the parameter
+    #   *NumNodeGroups* or the number of node groups configured by
+    #   *NodeGroupConfiguration* regardless of the number of ARNs specified
+    #   here.
     #
     #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
     #
@@ -1394,6 +1424,8 @@ module Aws::ElastiCache
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
     #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/CreateReplicationGroup AWS API Documentation
     #
@@ -1729,6 +1761,8 @@ module Aws::ElastiCache
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
     #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DeleteReplicationGroup AWS API Documentation
     #
@@ -1811,23 +1845,23 @@ module Aws::ElastiCache
     # cluster identifier is specified, or about a specific cache cluster if
     # a cache cluster identifier is supplied.
     #
-    # By default, abbreviated information about the cache clusters are
-    # returned. You can use the optional `ShowDetails` flag to retrieve
-    # detailed information about the cache nodes associated with the cache
-    # clusters. These details include the DNS address and port for the cache
-    # node endpoint.
+    # By default, abbreviated information about the cache clusters is
+    # returned. You can use the optional *ShowCacheNodeInfo* flag to
+    # retrieve detailed information about the cache nodes associated with
+    # the cache clusters. These details include the DNS address and port for
+    # the cache node endpoint.
     #
-    # If the cluster is in the CREATING state, only cluster-level
+    # If the cluster is in the *creating* state, only cluster-level
     # information is displayed until all of the nodes are successfully
     # provisioned.
     #
-    # If the cluster is in the DELETING state, only cluster-level
+    # If the cluster is in the *deleting* state, only cluster-level
     # information is displayed.
     #
     # If cache nodes are currently being added to the cache cluster, node
     # endpoint information and creation time for the additional nodes are
     # not displayed until they are completely provisioned. When the cache
-    # cluster state is `available`, the cluster is ready for use.
+    # cluster state is *available*, the cluster is ready for use.
     #
     # If cache nodes are currently being removed from the cache cluster, no
     # endpoint information for the removed nodes is displayed.
@@ -1854,8 +1888,14 @@ module Aws::ElastiCache
     #   the value specified by `MaxRecords`.
     #
     # @option params [Boolean] :show_cache_node_info
-    #   An optional flag that can be included in the DescribeCacheCluster
+    #   An optional flag that can be included in the `DescribeCacheCluster`
     #   request to retrieve information about the individual cache nodes.
+    #
+    # @option params [Boolean] :show_cache_clusters_not_in_replication_groups
+    #   An optional flag that can be included in the `DescribeCacheCluster`
+    #   request to show only nodes (API/CLI: clusters) that are not members of
+    #   a replication group. In practice, this mean Memcached and single node
+    #   Redis clusters.
     #
     # @return [Types::CacheClusterMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1869,6 +1909,7 @@ module Aws::ElastiCache
     #     max_records: 1,
     #     marker: "String",
     #     show_cache_node_info: false,
+    #     show_cache_clusters_not_in_replication_groups: false,
     #   })
     #
     # @example Response structure
@@ -2345,12 +2386,16 @@ module Aws::ElastiCache
     #   The beginning of the time interval to retrieve events for, specified
     #   in ISO 8601 format.
     #
+    #   **Example:** 2017-03-30T07:03:49.555Z
+    #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
     #   The end of the time interval for which to retrieve events, specified
     #   in ISO 8601 format.
     #
+    #   **Example:** 2017-03-30T07:03:49.555Z
+    #
     # @option params [Integer] :duration
-    #   The number of minutes' worth of events to retrieve.
+    #   The number of minutes worth of events to retrieve.
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more
@@ -2477,6 +2522,8 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].configuration_endpoint.port #=> Integer
     #   resp.replication_groups[0].snapshot_retention_limit #=> Integer
     #   resp.replication_groups[0].snapshot_window #=> String
+    #   resp.replication_groups[0].cluster_enabled #=> Boolean
+    #   resp.replication_groups[0].cache_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeReplicationGroups AWS API Documentation
     #
@@ -2931,7 +2978,7 @@ module Aws::ElastiCache
     # case-sensitive and the value is optional. You can use cost allocation
     # tags to categorize and track your AWS costs.
     #
-    # You can have a maximum of 10 cost allocation tags on an ElastiCache
+    # You can have a maximum of 50 cost allocation tags on an ElastiCache
     # resource. For more information, see [Using Cost Allocation Tags in
     # Amazon ElastiCache][1].
     #
@@ -3590,6 +3637,9 @@ module Aws::ElastiCache
     #   A valid cache node type that you want to scale this replication group
     #   to.
     #
+    # @option params [String] :node_group_id
+    #   The name of the Node Group (called shard in the console).
+    #
     # @return [Types::ModifyReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyReplicationGroupResult#replication_group #replication_group} => Types::ReplicationGroup
@@ -3614,6 +3664,7 @@ module Aws::ElastiCache
     #     snapshot_retention_limit: 1,
     #     snapshot_window: "String",
     #     cache_node_type: "String",
+    #     node_group_id: "String",
     #   })
     #
     # @example Response structure
@@ -3644,6 +3695,8 @@ module Aws::ElastiCache
     #   resp.replication_group.configuration_endpoint.port #=> Integer
     #   resp.replication_group.snapshot_retention_limit #=> Integer
     #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroup AWS API Documentation
     #
@@ -3945,6 +3998,121 @@ module Aws::ElastiCache
       req.send_request(options)
     end
 
+    # Represents the input of a `TestFailover` operation which test
+    # automatic failover on a specified node group (called shard in the
+    # console) in a replication group (called cluster in the console).
+    #
+    # **Note the following**
+    #
+    # * A customer can use this operation to test automatic failover on up
+    #   to 5 shards (called node groups in the ElastiCache API and AWS CLI)
+    #   in any rolling 24-hour period.
+    #
+    # * If calling this operation on shards in different clusters (called
+    #   replication groups in the API and CLI), the calls can be made
+    #   concurrently.
+    #
+    #
+    #
+    # * If calling this operation multiple times on different shards in the
+    #   same Redis (cluster mode enabled) replication group, the first node
+    #   replacement must complete before a subsequent call can be made.
+    #
+    # * To determine whether the node replacement is complete you can check
+    #   Events using the Amazon ElastiCache console, the AWS CLI, or the
+    #   ElastiCache API. Look for the following automatic failover related
+    #   events, listed here in order of occurrance:
+    #
+    #   1.  Replication group message: `Test Failover API called for node
+    #       group <node-group-id>`
+    #
+    #   2.  Cache cluster message: `Failover from master node
+    #       <primary-node-id> to replica node <node-id> completed`
+    #
+    #   3.  Replication group message: `Failover from master node
+    #       <primary-node-id> to replica node <node-id> completed`
+    #
+    #   4.  Cache cluster message: `Recovering cache nodes <node-id>`
+    #
+    #   5.  Cache cluster message: `Finished recovery for cache nodes
+    #       <node-id>`
+    #
+    #   For more information see:
+    #
+    #   * [Viewing ElastiCache Events][1] in the *ElastiCache User Guide*
+    #
+    #   * [DescribeEvents][2] in the ElastiCache API Reference
+    #
+    # Also see, [Testing Multi-AZ with Automatic Failover][3] in the
+    # *ElastiCache User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/ECEvents.Viewing.html
+    # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html
+    # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/AutoFailover.html#auto-failover-test
+    #
+    # @option params [required, String] :replication_group_id
+    #   The name of the replication group (console: cluster) whose automatic
+    #   failover is being tested by this operation.
+    #
+    # @option params [required, String] :node_group_id
+    #   The name of the node group (called shard in the console) in this
+    #   replication group on which automatic failover is to be tested. You may
+    #   test automatic failover on up to 5 node groups in any rolling 24-hour
+    #   period.
+    #
+    # @return [Types::TestFailoverResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TestFailoverResult#replication_group #replication_group} => Types::ReplicationGroup
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.test_failover({
+    #     replication_group_id: "String", # required
+    #     node_group_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replication_group.replication_group_id #=> String
+    #   resp.replication_group.description #=> String
+    #   resp.replication_group.status #=> String
+    #   resp.replication_group.pending_modified_values.primary_cluster_id #=> String
+    #   resp.replication_group.pending_modified_values.automatic_failover_status #=> String, one of "enabled", "disabled"
+    #   resp.replication_group.member_clusters #=> Array
+    #   resp.replication_group.member_clusters[0] #=> String
+    #   resp.replication_group.node_groups #=> Array
+    #   resp.replication_group.node_groups[0].node_group_id #=> String
+    #   resp.replication_group.node_groups[0].status #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].primary_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].slots #=> String
+    #   resp.replication_group.node_groups[0].node_group_members #=> Array
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_cluster_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].cache_node_id #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.address #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].read_endpoint.port #=> Integer
+    #   resp.replication_group.node_groups[0].node_group_members[0].preferred_availability_zone #=> String
+    #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
+    #   resp.replication_group.snapshotting_cluster_id #=> String
+    #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+    #   resp.replication_group.configuration_endpoint.address #=> String
+    #   resp.replication_group.configuration_endpoint.port #=> Integer
+    #   resp.replication_group.snapshot_retention_limit #=> Integer
+    #   resp.replication_group.snapshot_window #=> String
+    #   resp.replication_group.cluster_enabled #=> Boolean
+    #   resp.replication_group.cache_node_type #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailover AWS API Documentation
+    #
+    # @overload test_failover(params = {})
+    # @param [Hash] params ({})
+    def test_failover(params = {}, options = {})
+      req = build_request(:test_failover, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3958,7 +4126,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

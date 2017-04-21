@@ -66,10 +66,10 @@ module Aws::StorageGateway
     #   Gateway, see [Regions and Endpoints][1] in the *Amazon Web Services
     #   Glossary*.
     #
-    #   Valid Values: "us-east-1", "us-west-1", "us-west-2",
-    #   "eu-west-1", "eu-central-1", "ap-northeast-1",
-    #   "ap-northeast-2", "ap-southeast-1", "ap-southeast-2",
-    #   "sa-east-1"
+    #   Valid Values: "us-east-1", "us-east-2", "us-west-1",
+    #   "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1",
+    #   "eu-west-2", "ap-northeast-1", "ap-northeast-2",
+    #   "ap-southeast-1", "ap-southeast-2", "sa-east-1"
     #
     #
     #
@@ -80,18 +80,20 @@ module Aws::StorageGateway
     #   A value that defines the type of gateway to activate. The type
     #   specified is critical to all later functions of the gateway and
     #   cannot be changed after activation. The default value is `STORED`.
+    #
+    #   Valid Values: "STORED", "CACHED", "VTL", "FILE\_S3"
     #   @return [String]
     #
     # @!attribute [rw] tape_drive_type
-    #   The value that indicates the type of tape drive to use for
-    #   gateway-VTL. This field is optional.
+    #   The value that indicates the type of tape drive to use for tape
+    #   gateway. This field is optional.
     #
     #   Valid Values: "IBM-ULT3580-TD5"
     #   @return [String]
     #
     # @!attribute [rw] medium_changer_type
-    #   The value that indicates the type of medium changer to use for
-    #   gateway-VTL. This field is optional.
+    #   The value that indicates the type of medium changer to use for tape
+    #   gateway. This field is optional.
     #
     #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
     #   @return [String]
@@ -573,6 +575,8 @@ module Aws::StorageGateway
     #         location_arn: "LocationARN", # required
     #         default_storage_class: "StorageClass",
     #         client_list: ["IPV4AddressCIDR"],
+    #         squash: "Squash",
+    #         read_only: false,
     #       }
     #
     # @!attribute [rw] client_token
@@ -620,6 +624,18 @@ module Aws::StorageGateway
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] squash
+    #   Maps a user to anonymous user. Valid options: "RootSquash" - Only
+    #   root is mapped to anonymous user, "NoSquash" - No one is mapped to
+    #   anonymous user or "AllSquash" - Everyone is mapped to anonymous
+    #   user.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Sets the write status of a file share. "true", if the write status
+    #   is read-only; otherwise "false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/CreateNFSFileShareInput AWS API Documentation
     #
     class CreateNFSFileShareInput < Struct.new(
@@ -631,7 +647,9 @@ module Aws::StorageGateway
       :role,
       :location_arn,
       :default_storage_class,
-      :client_list)
+      :client_list,
+      :squash,
+      :read_only)
       include Aws::Structure
     end
 
@@ -2694,7 +2712,8 @@ module Aws::StorageGateway
     # Amazon S3 objects in S3 buckets don't, by default, have Unix file
     # permissions assigned to them. Upon discovery in an S3 bucket by
     # Storage Gateway, the S3 objects that represent files and folders are
-    # assigned these default Unix permissions.
+    # assigned these default Unix permissions. This operation is only
+    # supported in file gateways.
     #
     # @note When making an API call, you may pass NFSFileShareDefaults
     #   data as a hash:
@@ -2740,14 +2759,15 @@ module Aws::StorageGateway
 
     # The Unix file permissions and ownership information assigned, by
     # default, to native S3 objects when Storage Gateway discovers them in
-    # S3 buckets.
+    # S3 buckets. This operation is only supported in file gateways.
     #
     # @!attribute [rw] nfs_file_share_defaults
     #   Describes file share default values. Files and folders stored as
     #   Amazon S3 objects in S3 buckets don't, by default, have Unix file
     #   permissions assigned to them. Upon discovery in an S3 bucket by
     #   Storage Gateway, the S3 objects that represent files and folders are
-    #   assigned these default Unix permissions.
+    #   assigned these default Unix permissions. This operation is only
+    #   supported in file gateways.
     #   @return [Types::NFSFileShareDefaults]
     #
     # @!attribute [rw] file_share_arn
@@ -2803,6 +2823,18 @@ module Aws::StorageGateway
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] squash
+    #   Indicates the user mapped to anonymous user. Valid options:
+    #   "RootSquash" - Only root is mapped to anonymous user, "NoSquash"
+    #   - No one is mapped to anonymous user or "AllSquash" - Everyone is
+    #   mapped to anonymous user.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Indicates whether the write status of a file share is read-only.
+    #   "true", if write status is read-only; otherwise "false".
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/NFSFileShareInfo AWS API Documentation
     #
     class NFSFileShareInfo < Struct.new(
@@ -2817,7 +2849,9 @@ module Aws::StorageGateway
       :role,
       :location_arn,
       :default_storage_class,
-      :client_list)
+      :client_list,
+      :squash,
+      :read_only)
       include Aws::Structure
     end
 
@@ -2846,6 +2880,35 @@ module Aws::StorageGateway
       :ipv_4_address,
       :mac_address,
       :ipv_6_address)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RefreshCacheInput
+    #   data as a hash:
+    #
+    #       {
+    #         file_share_arn: "FileShareARN", # required
+    #       }
+    #
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheInput AWS API Documentation
+    #
+    class RefreshCacheInput < Struct.new(
+      :file_share_arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] file_share_arn
+    #   The Amazon Resource Name (ARN) of the file share.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RefreshCacheOutput AWS API Documentation
+    #
+    class RefreshCacheOutput < Struct.new(
+      :file_share_arn)
       include Aws::Structure
     end
 
@@ -2943,7 +3006,7 @@ module Aws::StorageGateway
     #   of gateways for your account and region.
     #
     #   You retrieve archived virtual tapes to only one gateway and the
-    #   gateway must be a gateway-VTL.
+    #   gateway must be a tape gateway.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/RetrieveTapeArchiveInput AWS API Documentation
@@ -3307,7 +3370,7 @@ module Aws::StorageGateway
     #   @return [Time]
     #
     # @!attribute [rw] retrieved_to
-    #   The Amazon Resource Name (ARN) of the gateway-VTL that the virtual
+    #   The Amazon Resource Name (ARN) of the tape gateway that the virtual
     #   tape is being retrieved to.
     #
     #   The virtual tape is retrieved from the virtual tape shelf (VTS).
@@ -3694,6 +3757,8 @@ module Aws::StorageGateway
     #         },
     #         default_storage_class: "StorageClass",
     #         client_list: ["IPV4AddressCIDR"],
+    #         squash: "Squash",
+    #         read_only: false,
     #       }
     #
     # @!attribute [rw] file_share_arn
@@ -3726,6 +3791,18 @@ module Aws::StorageGateway
     #   list must contain either valid IP addresses or valid CIDR blocks.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] squash
+    #   Indicates the user mapped to anonymous user. Valid options:
+    #   "RootSquash" - Only root is mapped to anonymous user, "NoSquash"
+    #   - No one is mapped to anonymous user or "AllSquash" - Everyone is
+    #   mapped to anonymous user.
+    #   @return [String]
+    #
+    # @!attribute [rw] read_only
+    #   Sets the write status of a file share. "true", if the write status
+    #   is read-only; otherwise "false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/UpdateNFSFileShareInput AWS API Documentation
     #
     class UpdateNFSFileShareInput < Struct.new(
@@ -3734,7 +3811,9 @@ module Aws::StorageGateway
       :kms_key,
       :nfs_file_share_defaults,
       :default_storage_class,
-      :client_list)
+      :client_list,
+      :squash,
+      :read_only)
       include Aws::Structure
     end
 
@@ -3855,7 +3934,7 @@ module Aws::StorageGateway
       include Aws::Structure
     end
 
-    # Represents a device object associated with a gateway-VTL.
+    # Represents a device object associated with a tape gateway.
     #
     # @!attribute [rw] vtl_device_arn
     #   Specifies the unique Amazon Resource Name (ARN) of the device (tape

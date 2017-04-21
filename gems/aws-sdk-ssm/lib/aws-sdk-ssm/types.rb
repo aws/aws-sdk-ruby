@@ -109,7 +109,8 @@ module Aws::SSM
     #
     class AddTagsToResourceResult < Aws::EmptyStructure; end
 
-    # Describes an association of an SSM document and an instance.
+    # Describes an association of a Systems Manager document and an
+    # instance.
     #
     # @!attribute [rw] name
     #   The name of the SSM document.
@@ -518,7 +519,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_name
-    #   The name of the SSM document requested for execution.
+    #   The name of the document requested for execution.
     #   @return [String]
     #
     # @!attribute [rw] comment
@@ -533,8 +534,8 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] parameters
-    #   The parameter values to be inserted in the SSM document when
-    #   executing the command.
+    #   The parameter values to be inserted in the document when executing
+    #   the command.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] instance_ids
@@ -543,7 +544,7 @@ module Aws::SSM
     #
     # @!attribute [rw] targets
     #   An array of search criteria that targets instances using a
-    #   `Key`;`Value` combination that you specify. `Targets` is required if
+    #   `Key`,`Value` combination that you specify. `Targets` is required if
     #   you don't provide one or more instance IDs in the call.
     #   @return [Array<Types::Target>]
     #
@@ -560,9 +561,8 @@ module Aws::SSM
     #   more information than `Status` because it includes states resulting
     #   from error and concurrency control parameters. `StatusDetails` can
     #   show different results than `Status`. For more information about
-    #   these statuses, see [Monitor Commands][1] (Linux) or [Monitor
-    #   Commands][2] (Windows). `StatusDetails` can be one of the following
-    #   values:
+    #   these statuses, see [Run Command Status][1]. `StatusDetails` can be
+    #   one of the following values:
     #
     #   * Pending – The command has not been sent to any instances.
     #
@@ -598,8 +598,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-commands.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
     #   @return [String]
     #
     # @!attribute [rw] output_s3_region
@@ -624,13 +623,11 @@ module Aws::SSM
     #   command at the same time. You can specify a number of instances,
     #   such as 10, or a percentage of instances, such as 10%. The default
     #   value is 50. For more information about how to use `MaxConcurrency`,
-    #   see [Executing a Command Using Amazon EC2 Run Command][1] (Linux) or
-    #   [Executing a Command Using Amazon EC2 Run Command][2] (Windows).
+    #   see [Executing a Command Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -638,14 +635,12 @@ module Aws::SSM
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
     #   default value is 50. For more information about how to use
-    #   `MaxErrors`, see [Executing a Command Using Amazon EC2 Run
-    #   Command][1] (Linux) or [Executing a Command Using Amazon EC2 Run
-    #   Command][2] (Windows).
+    #   `MaxErrors`, see [Executing a Command Using Systems Manager Run
+    #   Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] target_count
@@ -770,8 +765,8 @@ module Aws::SSM
     #   information than `Status` because it includes states resulting from
     #   error and concurrency control parameters. `StatusDetails` can show
     #   different results than `Status`. For more information about these
-    #   statuses, see [Monitor Commands][1] (Linux) or [Monitor Commands][2]
-    #   (Windows). `StatusDetails` can be one of the following values:
+    #   statuses, see [Run Command Status][1]. `StatusDetails` can be one of
+    #   the following values:
     #
     #   * Pending – The command has not been sent to the instance.
     #
@@ -814,8 +809,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-commands.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
     #   @return [String]
     #
     # @!attribute [rw] trace_output
@@ -891,9 +885,8 @@ module Aws::SSM
     #   more information than `Status` because it includes states resulting
     #   from error and concurrency control parameters. `StatusDetails` can
     #   show different results than `Status`. For more information about
-    #   these statuses, see [Monitor Commands][1] (Linux) or [Monitor
-    #   Commands][2] (Windows). `StatusDetails` can be one of the following
-    #   values:
+    #   these statuses, see [Run Command Status][1]. `StatusDetails` can be
+    #   one of the following values:
     #
     #   * Pending – The command has not been sent to the instance.
     #
@@ -936,8 +929,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-commands.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
     #   @return [String]
     #
     # @!attribute [rw] response_code
@@ -1132,7 +1124,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes the association of an SSM document and an instance.
+    # Describes the association of a Systems Manager document and an
+    # instance.
     #
     # @note When making an API call, you may pass CreateAssociationBatchRequestEntry
     #   data as a hash:
@@ -1246,7 +1239,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_version
@@ -1325,7 +1318,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   A name for the SSM document.
+    #   A name for the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] document_type
@@ -1343,7 +1336,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] document_description
-    #   Information about the SSM document.
+    #   Information about the Systems Manager document.
     #   @return [Types::DocumentDescription]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateDocumentResult AWS API Documentation
@@ -1539,7 +1532,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -1571,7 +1564,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the SSM document.
+    #   The name of the document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeleteDocumentRequest AWS API Documentation
@@ -3180,7 +3173,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] created_date
-    #   The date when the SSM document was created.
+    #   The date when the document was created.
     #   @return [Time]
     #
     # @!attribute [rw] status
@@ -3304,8 +3297,8 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Parameters specified in the SSM document that execute on the server
-    # when the command is run.
+    # Parameters specified in a System Manager document that execute on the
+    # server when the command is run.
     #
     # @!attribute [rw] name
     #   The name of the parameter.
@@ -3468,8 +3461,8 @@ module Aws::SSM
     #
     # @!attribute [rw] plugin_name
     #   (Optional) The name of the plugin for which you want detailed
-    #   results. If the SSM document contains only one plugin, the name can
-    #   be omitted and the details will be returned.
+    #   results. If the document contains only one plugin, the name can be
+    #   omitted and the details will be returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationRequest AWS API Documentation
@@ -3496,8 +3489,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_name
-    #   The name of the SSM document that was executed. For example,
-    #   AWS-RunShellScript is an SSM document.
+    #   The name of the document that was executed. For example,
+    #   AWS-RunShellScript.
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
@@ -3539,9 +3532,9 @@ module Aws::SSM
     #   `StatusDetails` includes more information than `Status` because it
     #   includes states resulting from error and concurrency control
     #   parameters. `StatusDetails` can show different results than
-    #   `Status`. For more information about these statuses, see [Monitor
-    #   Commands][1] (Linux) or [Monitor Commands][2] (Windows).
-    #   `StatusDetails` can be one of the following values:
+    #   `Status`. For more information about these statuses, see [Run
+    #   Command Status][1]. `StatusDetails` can be one of the following
+    #   values:
     #
     #   * Pending – The command has not been sent to the instance.
     #
@@ -3590,8 +3583,7 @@ module Aws::SSM
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-commands.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-about-status.html
     #   @return [String]
     #
     # @!attribute [rw] standard_output_content
@@ -4185,7 +4177,7 @@ module Aws::SSM
     end
 
     # @!attribute [rw] parameters
-    #   A list of parameters used by the AWS account.
+    #   A list of details for a parameter.
     #   @return [Array<Types::Parameter>]
     #
     # @!attribute [rw] invalid_parameters
@@ -4459,7 +4451,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] ping_status
-    #   Connection status of the SSM agent.
+    #   Connection status of the SSM Agent.
     #   @return [String]
     #
     # @!attribute [rw] last_ping_date_time
@@ -4467,11 +4459,11 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] agent_version
-    #   The version of the SSM agent running on your Linux instance.
+    #   The version of the SSM Agent running on your Linux instance.
     #   @return [String]
     #
     # @!attribute [rw] is_latest_version
-    #   Indicates whether latest version of the SSM agent is running on your
+    #   Indicates whether latest version of the SSM Agent is running on your
     #   instance.
     #   @return [Boolean]
     #
@@ -5822,12 +5814,12 @@ module Aws::SSM
     #   The different events for which you can receive notifications. These
     #   events include the following: All (events), InProgress, Success,
     #   TimedOut, Cancelled, Failed. To learn more about these events, see
-    #   [Monitoring Commands][1] in the <i>Amazon Elastic Compute Cloud User
-    #   Guide </i>.
+    #   [Setting Up Events and Notifications][1] in the *Amazon EC2 Systems
+    #   Manager User Guide*.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-commands.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_type
@@ -6387,7 +6379,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] overwrite
-    #   Overwrite an existing parameter.
+    #   Overwrite an existing parameter. If not specified, will default to
+    #   "false".
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PutParameterRequest AWS API Documentation
@@ -6564,8 +6557,8 @@ module Aws::SSM
     #           },
     #         },
     #         priority: 1,
-    #         max_concurrency: "VelocityConstraint", # required
-    #         max_errors: "VelocityConstraint", # required
+    #         max_concurrency: "MaxConcurrency", # required
+    #         max_errors: "MaxErrors", # required
     #         logging_info: {
     #           s3_bucket_name: "S3BucketName", # required
     #           s3_key_prefix: "S3KeyPrefix",
@@ -6783,8 +6776,8 @@ module Aws::SSM
     #         output_s3_region: "S3Region",
     #         output_s3_bucket_name: "S3BucketName",
     #         output_s3_key_prefix: "S3KeyPrefix",
-    #         max_concurrency: "VelocityConstraint",
-    #         max_errors: "VelocityConstraint",
+    #         max_concurrency: "MaxConcurrency",
+    #         max_errors: "MaxErrors",
     #         service_role_arn: "ServiceRole",
     #         notification_config: {
     #           notification_arn: "NotificationArn",
@@ -6800,21 +6793,19 @@ module Aws::SSM
     #
     # @!attribute [rw] targets
     #   (Optional) An array of search criteria that targets instances using
-    #   a `Key`;`Value` combination that you specify. `Targets` is required
+    #   a `Key`,`Value` combination that you specify. `Targets` is required
     #   if you don't provide one or more instance IDs in the call. For more
     #   information about how to use `Targets`, see [Executing a Command
-    #   Using Amazon EC2 Run Command][1] (Linux) or [Executing a Command
-    #   Using Amazon EC2 Run Command][2] (Windows).
+    #   Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] document_name
-    #   Required. The name of the SSM document to execute. This can be an
-    #   SSM public document or a custom document.
+    #   Required. The name of the Systems Manager document to execute. This
+    #   can be a public document or a custom document.
     #   @return [String]
     #
     # @!attribute [rw] document_hash
@@ -6845,8 +6836,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The required and optional parameters specified in the SSM document
-    #   being executed.
+    #   The required and optional parameters specified in the document being
+    #   executed.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] output_s3_region
@@ -6870,13 +6861,11 @@ module Aws::SSM
     #   execute the command at the same time. You can specify a number such
     #   as “10” or a percentage such as “10%”. The default value is 50. For
     #   more information about how to use `MaxConcurrency`, see [Executing a
-    #   Command Using Amazon EC2 Run Command][1] (Linux) or [Executing a
-    #   Command Using Amazon EC2 Run Command][2] (Windows).
+    #   Command Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -6885,14 +6874,12 @@ module Aws::SSM
     #   `MaxErrors`, the systems stops sending the command to additional
     #   targets. You can specify a number like “10” or a percentage like
     #   “10%”. The default value is 50. For more information about how to
-    #   use `MaxErrors`, see [Executing a Command Using Amazon EC2 Run
-    #   Command][1] (Linux) or [Executing a Command Using Amazon EC2 Run
-    #   Command][2] (Windows).
+    #   use `MaxErrors`, see [Executing a Command Using Systems Manager Run
+    #   Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] service_role_arn
@@ -7096,7 +7083,7 @@ module Aws::SSM
     end
 
     # An array of search criteria that targets instances using a
-    # `Key`;`Value` combination that you specify. `Targets` is required if
+    # `Key`,`Value` combination that you specify. `Targets` is required if
     # you don't provide one or more instance IDs in the call.
     #
     # @note When making an API call, you may pass Target
@@ -7110,31 +7097,26 @@ module Aws::SSM
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target instances
     #   that meet the criteria. `Key` can be `tag:<Amazon EC2 tag>` or
-    #   `name:<Amazon EC2 instance ID>`. For example, `tag:ServerRole` or
-    #   `name:0123456789012345`. For more information about how to send
-    #   commands that target instances using `Key`;`Value` parameters, see
-    #   [Executing a Command Using Amazon EC2 Run Command][1] (Linux) or
-    #   [Executing a Command Using Amazon EC2 Run Command][2] (Windows).
+    #   `InstanceIds`. For more information about how to send commands that
+    #   target instances using `Key`,`Value` parameters, see [Executing a
+    #   Command Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [String]
     #
     # @!attribute [rw] values
     #   User-defined criteria that maps to `Key`. For example, if you
     #   specified `tag:ServerRole`, you could specify `value:WebServer` to
     #   execute a command on instances that include Amazon EC2 tags of
-    #   ServerRole;WebServer. For more information about how to send
-    #   commands that target instances using `Key`;`Value` parameters, see
-    #   [Executing a Command Using Amazon EC2 Run Command][1] (Linux) or
-    #   [Executing a Command Using Amazon EC2 Run Command][2] (Windows).
+    #   ServerRole,WebServer. For more information about how to send
+    #   commands that target instances using `Key`,`Value` parameters, see
+    #   [Executing a Command Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Target AWS API Documentation

@@ -55,11 +55,15 @@ module Aws::ApplicationDiscoveryService
     DescribeConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationsResponse')
     DescribeExportConfigurationsRequest = Shapes::StructureShape.new(name: 'DescribeExportConfigurationsRequest')
     DescribeExportConfigurationsResponse = Shapes::StructureShape.new(name: 'DescribeExportConfigurationsResponse')
+    DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
+    DescribeExportTasksResponse = Shapes::StructureShape.new(name: 'DescribeExportTasksResponse')
     DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
     DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
     DisassociateConfigurationItemsFromApplicationRequest = Shapes::StructureShape.new(name: 'DisassociateConfigurationItemsFromApplicationRequest')
     DisassociateConfigurationItemsFromApplicationResponse = Shapes::StructureShape.new(name: 'DisassociateConfigurationItemsFromApplicationResponse')
     ExportConfigurationsResponse = Shapes::StructureShape.new(name: 'ExportConfigurationsResponse')
+    ExportDataFormat = Shapes::StringShape.new(name: 'ExportDataFormat')
+    ExportDataFormats = Shapes::ListShape.new(name: 'ExportDataFormats')
     ExportIds = Shapes::ListShape.new(name: 'ExportIds')
     ExportInfo = Shapes::StructureShape.new(name: 'ExportInfo')
     ExportRequestTime = Shapes::TimestampShape.new(name: 'ExportRequestTime')
@@ -92,6 +96,8 @@ module Aws::ApplicationDiscoveryService
     ServerInternalErrorException = Shapes::StructureShape.new(name: 'ServerInternalErrorException')
     StartDataCollectionByAgentIdsRequest = Shapes::StructureShape.new(name: 'StartDataCollectionByAgentIdsRequest')
     StartDataCollectionByAgentIdsResponse = Shapes::StructureShape.new(name: 'StartDataCollectionByAgentIdsResponse')
+    StartExportTaskRequest = Shapes::StructureShape.new(name: 'StartExportTaskRequest')
+    StartExportTaskResponse = Shapes::StructureShape.new(name: 'StartExportTaskResponse')
     StopDataCollectionByAgentIdsRequest = Shapes::StructureShape.new(name: 'StopDataCollectionByAgentIdsRequest')
     StopDataCollectionByAgentIdsResponse = Shapes::StructureShape.new(name: 'StopDataCollectionByAgentIdsResponse')
     String = Shapes::StringShape.new(name: 'String')
@@ -231,6 +237,15 @@ module Aws::ApplicationDiscoveryService
     DescribeExportConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeExportConfigurationsResponse.struct_class = Types::DescribeExportConfigurationsResponse
 
+    DescribeExportTasksRequest.add_member(:export_ids, Shapes::ShapeRef.new(shape: ExportIds, location_name: "exportIds"))
+    DescribeExportTasksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
+    DescribeExportTasksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeExportTasksRequest.struct_class = Types::DescribeExportTasksRequest
+
+    DescribeExportTasksResponse.add_member(:exports_info, Shapes::ShapeRef.new(shape: ExportsInfo, location_name: "exportsInfo"))
+    DescribeExportTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeExportTasksResponse.struct_class = Types::DescribeExportTasksResponse
+
     DescribeTagsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: TagFilters, location_name: "filters"))
     DescribeTagsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
     DescribeTagsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -248,6 +263,8 @@ module Aws::ApplicationDiscoveryService
 
     ExportConfigurationsResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
     ExportConfigurationsResponse.struct_class = Types::ExportConfigurationsResponse
+
+    ExportDataFormats.member = Shapes::ShapeRef.new(shape: ExportDataFormat)
 
     ExportIds.member = Shapes::ShapeRef.new(shape: ConfigurationsExportId)
 
@@ -322,6 +339,12 @@ module Aws::ApplicationDiscoveryService
 
     StartDataCollectionByAgentIdsResponse.add_member(:agents_configuration_status, Shapes::ShapeRef.new(shape: AgentConfigurationStatusList, location_name: "agentsConfigurationStatus"))
     StartDataCollectionByAgentIdsResponse.struct_class = Types::StartDataCollectionByAgentIdsResponse
+
+    StartExportTaskRequest.add_member(:export_data_format, Shapes::ShapeRef.new(shape: ExportDataFormats, location_name: "exportDataFormat"))
+    StartExportTaskRequest.struct_class = Types::StartExportTaskRequest
+
+    StartExportTaskResponse.add_member(:export_id, Shapes::ShapeRef.new(shape: ConfigurationsExportId, location_name: "exportId"))
+    StartExportTaskResponse.struct_class = Types::StartExportTaskResponse
 
     StopDataCollectionByAgentIdsRequest.add_member(:agent_ids, Shapes::ShapeRef.new(shape: AgentIds, required: true, location_name: "agentIds"))
     StopDataCollectionByAgentIdsRequest.struct_class = Types::StopDataCollectionByAgentIdsRequest
@@ -453,10 +476,23 @@ module Aws::ApplicationDiscoveryService
         o.name = "DescribeExportConfigurations"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeExportConfigurationsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeExportConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExportTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExportTasksRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExportTasksResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
@@ -491,6 +527,7 @@ module Aws::ApplicationDiscoveryService
         o.name = "ExportConfigurations"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.output = Shapes::ShapeRef.new(shape: ExportConfigurationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
@@ -547,6 +584,19 @@ module Aws::ApplicationDiscoveryService
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+      end)
+
+      api.add_operation(:start_export_task, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExportTask"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartExportTaskRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartExportTaskResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:stop_data_collection_by_agent_ids, Seahorse::Model::Operation.new.tap do |o|

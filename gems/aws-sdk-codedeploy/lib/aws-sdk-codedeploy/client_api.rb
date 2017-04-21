@@ -1152,6 +1152,11 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: BucketNameFilterRequiredException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeployedStateFilterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -1161,6 +1166,11 @@ module Aws::CodeDeploy
         o.input = Shapes::ShapeRef.new(shape: ListApplicationsInput)
         o.output = Shapes::ShapeRef.new(shape: ListApplicationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_deployment_configs, Seahorse::Model::Operation.new.tap do |o|
@@ -1170,6 +1180,11 @@ module Aws::CodeDeploy
         o.input = Shapes::ShapeRef.new(shape: ListDeploymentConfigsInput)
         o.output = Shapes::ShapeRef.new(shape: ListDeploymentConfigsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_deployment_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1182,6 +1197,11 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidApplicationNameException)
         o.errors << Shapes::ShapeRef.new(shape: ApplicationDoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_deployment_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -1197,6 +1217,11 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceTypeException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_deployments, Seahorse::Model::Operation.new.tap do |o|
@@ -1214,6 +1239,11 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidTimeRangeException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_on_premises_instances, Seahorse::Model::Operation.new.tap do |o|

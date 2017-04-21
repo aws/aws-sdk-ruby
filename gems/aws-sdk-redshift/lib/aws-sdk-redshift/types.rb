@@ -15,10 +15,17 @@ module Aws::Redshift
     #   snapshot.
     #   @return [String]
     #
+    # @!attribute [rw] account_alias
+    #   The identifier of an AWS support account authorized to restore a
+    #   snapshot. For AWS support, the identifier is
+    #   `amazon-redshift-support`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AccountWithRestoreAccess AWS API Documentation
     #
     class AccountWithRestoreAccess < Struct.new(
-      :account_id)
+      :account_id,
+      :account_alias)
       include Aws::Structure
     end
 
@@ -97,6 +104,9 @@ module Aws::Redshift
     # @!attribute [rw] account_with_restore_access
     #   The identifier of the AWS customer account authorized to restore the
     #   specified snapshot.
+    #
+    #   To share a snapshot with AWS support, specify
+    #   amazon-redshift-support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeSnapshotAccessMessage AWS API Documentation
@@ -380,6 +390,35 @@ module Aws::Redshift
       :kms_key_id,
       :enhanced_vpc_routing,
       :iam_roles)
+      include Aws::Structure
+    end
+
+    # Temporary credentials with authorization to log in to an Amazon
+    # Redshift database.
+    #
+    # @!attribute [rw] db_user
+    #   A database user name that is authorized to log on to the database
+    #   `DbName` using the password `DbPassword`. If the `DbGroups`
+    #   parameter is specifed, `DbUser` is added to the listed groups for
+    #   the current session. The user name is prefixed with `IAM:` for an
+    #   existing user name or `IAMA:` if the user was auto-created.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_password
+    #   A temporary password that authorizes the user name returned by
+    #   `DbUser` to log on to the database `DbName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time `DbPassword` expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/ClusterCredentials AWS API Documentation
+    #
+    class ClusterCredentials < Struct.new(
+      :db_user,
+      :db_password,
+      :expiration)
       include Aws::Structure
     end
 
@@ -4025,6 +4064,110 @@ module Aws::Redshift
     class EventsMessage < Struct.new(
       :marker,
       :events)
+      include Aws::Structure
+    end
+
+    # The request parameters to get cluster credentials.
+    #
+    # @note When making an API call, you may pass GetClusterCredentialsMessage
+    #   data as a hash:
+    #
+    #       {
+    #         db_user: "String", # required
+    #         db_name: "String",
+    #         cluster_identifier: "String", # required
+    #         duration_seconds: 1,
+    #         auto_create: false,
+    #         db_groups: ["String"],
+    #       }
+    #
+    # @!attribute [rw] db_user
+    #   The name of a database user. If a user name matching `DbUser` exists
+    #   in the database, the temporary user credentials have the same
+    #   permissions as the existing user. If `DbUser` doesn't exist in the
+    #   database and `Autocreate` is `True`, a new user is created using the
+    #   value for `DbUser` with PUBLIC permissions. If a database user
+    #   matching the value for `DbUser` doesn't exist and `Autocreate` is
+    #   `False`, then the command succeeds but the connection attempt will
+    #   fail because the user doesn't exist in the database.
+    #
+    #   For more information, see [CREATE USER][1] in the Amazon Redshift
+    #   Database Developer Guide.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 128 alphanumeric characters or hyphens
+    #
+    #   * Must contain only lowercase letters.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Must not contain a colon ( : ) or slash ( / ).
+    #
+    #   * Cannot be a reserved word. A list of reserved words can be found
+    #     in [Reserved Words][2] in the Amazon Redshift Database Developer
+    #     Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #   @return [String]
+    #
+    # @!attribute [rw] db_name
+    #   The name of a database that `DbUser` is authorized to log on to. If
+    #   `DbName` is not specified, `DbUser` can log in to any existing
+    #   database.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 64 alphanumeric characters or hyphens
+    #
+    #   * Must contain only lowercase letters.
+    #
+    #   * Cannot be a reserved word. A list of reserved words can be found
+    #     in [Reserved Words][1] in the Amazon Redshift Database Developer
+    #     Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The unique identifier of the cluster that contains the database for
+    #   which your are requesting credentials. This parameter is case
+    #   sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The number of seconds until the returned temporary password expires.
+    #
+    #   Constraint: minimum 900, maximum 3600.
+    #
+    #   Default: 900
+    #   @return [Integer]
+    #
+    # @!attribute [rw] auto_create
+    #   Create a database user with the name specified for `DbUser` if one
+    #   does not exist.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] db_groups
+    #   A list of the names of existing database groups that `DbUser` will
+    #   join for the current session. If not specified, the new user is
+    #   added only to PUBLIC.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentialsMessage AWS API Documentation
+    #
+    class GetClusterCredentialsMessage < Struct.new(
+      :db_user,
+      :db_name,
+      :cluster_identifier,
+      :duration_seconds,
+      :auto_create,
+      :db_groups)
       include Aws::Structure
     end
 

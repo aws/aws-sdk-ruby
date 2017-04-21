@@ -31,6 +31,12 @@ module Aws::OpsWorks
     ChefConfiguration = Shapes::StructureShape.new(name: 'ChefConfiguration')
     CloneStackRequest = Shapes::StructureShape.new(name: 'CloneStackRequest')
     CloneStackResult = Shapes::StructureShape.new(name: 'CloneStackResult')
+    CloudWatchLogsConfiguration = Shapes::StructureShape.new(name: 'CloudWatchLogsConfiguration')
+    CloudWatchLogsEncoding = Shapes::StringShape.new(name: 'CloudWatchLogsEncoding')
+    CloudWatchLogsInitialPosition = Shapes::StringShape.new(name: 'CloudWatchLogsInitialPosition')
+    CloudWatchLogsLogStream = Shapes::StructureShape.new(name: 'CloudWatchLogsLogStream')
+    CloudWatchLogsLogStreams = Shapes::ListShape.new(name: 'CloudWatchLogsLogStreams')
+    CloudWatchLogsTimeZone = Shapes::StringShape.new(name: 'CloudWatchLogsTimeZone')
     Command = Shapes::StructureShape.new(name: 'Command')
     Commands = Shapes::ListShape.new(name: 'Commands')
     CreateAppRequest = Shapes::StructureShape.new(name: 'CreateAppRequest')
@@ -297,6 +303,25 @@ module Aws::OpsWorks
     CloneStackResult.add_member(:stack_id, Shapes::ShapeRef.new(shape: String, location_name: "StackId"))
     CloneStackResult.struct_class = Types::CloneStackResult
 
+    CloudWatchLogsConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    CloudWatchLogsConfiguration.add_member(:log_streams, Shapes::ShapeRef.new(shape: CloudWatchLogsLogStreams, location_name: "LogStreams"))
+    CloudWatchLogsConfiguration.struct_class = Types::CloudWatchLogsConfiguration
+
+    CloudWatchLogsLogStream.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, location_name: "LogGroupName"))
+    CloudWatchLogsLogStream.add_member(:datetime_format, Shapes::ShapeRef.new(shape: String, location_name: "DatetimeFormat"))
+    CloudWatchLogsLogStream.add_member(:time_zone, Shapes::ShapeRef.new(shape: CloudWatchLogsTimeZone, location_name: "TimeZone"))
+    CloudWatchLogsLogStream.add_member(:file, Shapes::ShapeRef.new(shape: String, location_name: "File"))
+    CloudWatchLogsLogStream.add_member(:file_fingerprint_lines, Shapes::ShapeRef.new(shape: String, location_name: "FileFingerprintLines"))
+    CloudWatchLogsLogStream.add_member(:multi_line_start_pattern, Shapes::ShapeRef.new(shape: String, location_name: "MultiLineStartPattern"))
+    CloudWatchLogsLogStream.add_member(:initial_position, Shapes::ShapeRef.new(shape: CloudWatchLogsInitialPosition, location_name: "InitialPosition"))
+    CloudWatchLogsLogStream.add_member(:encoding, Shapes::ShapeRef.new(shape: CloudWatchLogsEncoding, location_name: "Encoding"))
+    CloudWatchLogsLogStream.add_member(:buffer_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "BufferDuration"))
+    CloudWatchLogsLogStream.add_member(:batch_count, Shapes::ShapeRef.new(shape: Integer, location_name: "BatchCount"))
+    CloudWatchLogsLogStream.add_member(:batch_size, Shapes::ShapeRef.new(shape: Integer, location_name: "BatchSize"))
+    CloudWatchLogsLogStream.struct_class = Types::CloudWatchLogsLogStream
+
+    CloudWatchLogsLogStreams.member = Shapes::ShapeRef.new(shape: CloudWatchLogsLogStream)
+
     Command.add_member(:command_id, Shapes::ShapeRef.new(shape: String, location_name: "CommandId"))
     Command.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceId"))
     Command.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, location_name: "DeploymentId"))
@@ -368,6 +393,7 @@ module Aws::OpsWorks
     CreateLayerRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     CreateLayerRequest.add_member(:shortname, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Shortname"))
     CreateLayerRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: LayerAttributes, location_name: "Attributes"))
+    CreateLayerRequest.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogsConfiguration, location_name: "CloudWatchLogsConfiguration"))
     CreateLayerRequest.add_member(:custom_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomInstanceProfileArn"))
     CreateLayerRequest.add_member(:custom_json, Shapes::ShapeRef.new(shape: String, location_name: "CustomJson"))
     CreateLayerRequest.add_member(:custom_security_group_ids, Shapes::ShapeRef.new(shape: Strings, location_name: "CustomSecurityGroupIds"))
@@ -772,6 +798,7 @@ module Aws::OpsWorks
     Layer.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Layer.add_member(:shortname, Shapes::ShapeRef.new(shape: String, location_name: "Shortname"))
     Layer.add_member(:attributes, Shapes::ShapeRef.new(shape: LayerAttributes, location_name: "Attributes"))
+    Layer.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogsConfiguration, location_name: "CloudWatchLogsConfiguration"))
     Layer.add_member(:custom_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomInstanceProfileArn"))
     Layer.add_member(:custom_json, Shapes::ShapeRef.new(shape: String, location_name: "CustomJson"))
     Layer.add_member(:custom_security_group_ids, Shapes::ShapeRef.new(shape: Strings, location_name: "CustomSecurityGroupIds"))
@@ -1059,6 +1086,7 @@ module Aws::OpsWorks
     UpdateLayerRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     UpdateLayerRequest.add_member(:shortname, Shapes::ShapeRef.new(shape: String, location_name: "Shortname"))
     UpdateLayerRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: LayerAttributes, location_name: "Attributes"))
+    UpdateLayerRequest.add_member(:cloud_watch_logs_configuration, Shapes::ShapeRef.new(shape: CloudWatchLogsConfiguration, location_name: "CloudWatchLogsConfiguration"))
     UpdateLayerRequest.add_member(:custom_instance_profile_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomInstanceProfileArn"))
     UpdateLayerRequest.add_member(:custom_json, Shapes::ShapeRef.new(shape: String, location_name: "CustomJson"))
     UpdateLayerRequest.add_member(:custom_security_group_ids, Shapes::ShapeRef.new(shape: Strings, location_name: "CustomSecurityGroupIds"))

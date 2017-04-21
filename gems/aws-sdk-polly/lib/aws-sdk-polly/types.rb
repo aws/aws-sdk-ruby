@@ -278,8 +278,9 @@ module Aws::Polly
     #
     #       {
     #         lexicon_names: ["LexiconName"],
-    #         output_format: "mp3", # required, accepts mp3, ogg_vorbis, pcm
+    #         output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
     #         sample_rate: "SampleRate",
+    #         speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #         text: "Text", # required
     #         text_type: "ssml", # accepts ssml, text
     #         voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz
@@ -297,7 +298,9 @@ module Aws::Polly
     #   @return [Array<String>]
     #
     # @!attribute [rw] output_format
-    #   The audio format in which the resulting stream will be encoded.
+    #   The format in which the returned output will be encoded. For audio
+    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks,
+    #   this will be json.
     #   @return [String]
     #
     # @!attribute [rw] sample_rate
@@ -309,6 +312,10 @@ module Aws::Polly
     #   Valid values for `pcm` are "8000" and "16000" The default value
     #   is "16000".
     #   @return [String]
+    #
+    # @!attribute [rw] speech_mark_types
+    #   The type of speech marks returned for the input text.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] text
     #   Input text to synthesize. If you specify `ssml` as the `TextType`,
@@ -339,6 +346,7 @@ module Aws::Polly
       :lexicon_names,
       :output_format,
       :sample_rate,
+      :speech_mark_types,
       :text,
       :text_type,
       :voice_id)
@@ -362,6 +370,9 @@ module Aws::Polly
     #   * If you request `pcm` as the `OutputFormat`, the `ContentType`
     #     returned is audio/pcm in a signed 16-bit, 1 channel (mono),
     #     little-endian format.
+    #
+    #   * If you request `json` as the `OutputFormat`, the `ContentType`
+    #     returned is audio/json.
     #   @return [String]
     #
     # @!attribute [rw] request_characters

@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::ApplicationDiscoveryService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -313,14 +315,6 @@ module Aws::ApplicationDiscoveryService
     #
     #   `\{"key": "collectionStatus", "value": "STARTED"\}`
     #
-    #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Managing AWS Application Discovery Service
-    #   Agents and the AWS Application Discovery Connector ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/managing-agent.html
-    #
     # @option params [Integer] :max_results
     #   The total number of agents/Connectors to return in a single page of
     #   output. The maximum value is 100.
@@ -383,12 +377,12 @@ module Aws::ApplicationDiscoveryService
     # includes a list of attributes about the server, such as host name,
     # operating system, and number of network cards.
     #
-    # For a complete list of outputs for each asset type, see [Querying
-    # Discovered Configuration Items][1].
+    # For a complete list of outputs for each asset type, see [Using the
+    # DescribeConfigurations Action][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#DescribeConfigurations
+    # [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#DescribeConfigurations
     #
     # @option params [required, Array<String>] :configuration_ids
     #   One or more configuration IDs.
@@ -416,6 +410,8 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Deprecated. Use `DescribeExportTasks` instead.
+    #
     # Retrieves the status of a given export process. You can retrieve
     # status from a maximum of 100 processes.
     #
@@ -427,9 +423,9 @@ module Aws::ApplicationDiscoveryService
     #   the query.
     #
     # @option params [String] :next_token
-    #   A token to get the next set of results. For example, if you specified
+    #   A token to get the next set of results. For example, if you specify
     #   100 IDs for `DescribeExportConfigurationsRequest$exportIds` but set
-    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you will get
+    #   `DescribeExportConfigurationsRequest$maxResults` to 10, you get
     #   results in a set of 10. Use the token in the query to get the next set
     #   of 10.
     #
@@ -463,6 +459,56 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Retrieve status of one or more export tasks. You can retrieve the
+    # status of up to 100 export tasks.
+    #
+    # @option params [Array<String>] :export_ids
+    #   One or more unique identifiers used to query the status of an export
+    #   request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of volume results returned by `DescribeExportTasks`
+    #   in paginated output. When this parameter is used,
+    #   `DescribeExportTasks` only returns `maxResults` results in a single
+    #   page along with a `nextToken` response element.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeExportTasks` request where `maxResults` was used and the
+    #   results exceeded the value of that parameter. Pagination continues
+    #   from the end of the previous results that returned the `nextToken`
+    #   value. This value is null when there are no more results to return.
+    #
+    # @return [Types::DescribeExportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeExportTasksResponse#exports_info #exports_info} => Array&lt;Types::ExportInfo&gt;
+    #   * {Types::DescribeExportTasksResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_export_tasks({
+    #     export_ids: ["ConfigurationsExportId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.exports_info #=> Array
+    #   resp.exports_info[0].export_id #=> String
+    #   resp.exports_info[0].export_status #=> String, one of "FAILED", "SUCCEEDED", "IN_PROGRESS"
+    #   resp.exports_info[0].status_message #=> String
+    #   resp.exports_info[0].configurations_download_url #=> String
+    #   resp.exports_info[0].export_request_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload describe_export_tasks(params = {})
+    # @param [Hash] params ({})
+    def describe_export_tasks(params = {}, options = {})
+      req = build_request(:describe_export_tasks, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of configuration items that are tagged with a
     # specific tag. Or retrieves a list of all tags assigned to a specific
     # configuration item.
@@ -471,14 +517,6 @@ module Aws::ApplicationDiscoveryService
     #   You can filter the list using a *key*-*value* format. You can separate
     #   these items by using logical operators. Allowed filters include
     #   `tagKey`, `tagValue`, and `configurationId`.
-    #
-    #   For a complete list of filter options and guidance about using them
-    #   with this action, see [Managing AWS Application Discovery Service
-    #   Agents and the AWS Application Discovery Connector ][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/managing-agents.html
     #
     # @option params [Integer] :max_results
     #   The total number of items to return in a single page of output. The
@@ -526,11 +564,11 @@ module Aws::ApplicationDiscoveryService
     # Disassociates one or more configuration items from an application.
     #
     # @option params [required, String] :application_configuration_id
-    #   Configuration ID of an application from which each item will be
+    #   Configuration ID of an application from which each item is
     #   disassociated.
     #
     # @option params [required, Array<String>] :configuration_ids
-    #   Configuration ID of each item be be disassociated from an application.
+    #   Configuration ID of each item to be disassociated from an application.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -548,10 +586,12 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
+    # Deprecated. Use `StartExportTask` instead.
+    #
     # Exports all discovered configuration data to an Amazon S3 bucket or an
     # application that enables you to view and evaluate the data. Data
     # includes tags and tag associations, processes, connections, servers,
-    # and system performance. This API returns an export ID which you can
+    # and system performance. This API returns an export ID that you can
     # query using the *DescribeExportConfigurations* API. The system imposes
     # a limit of two configuration exports in six hours.
     #
@@ -609,12 +649,12 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of configuration items according to criteria you
-    # specify in a filter. The filter criteria identify relationship
+    # Retrieves a list of configuration items according to criteria that you
+    # specify in a filter. The filter criteria identifies the relationship
     # requirements.
     #
     # @option params [required, String] :configuration_type
-    #   A valid configuration identified by the Discovery Service.
+    #   A valid configuration identified by Application Discovery Service.
     #
     # @option params [Array<Types::Filter>] :filters
     #   You can filter the request using various logical operators and a
@@ -627,7 +667,7 @@ module Aws::ApplicationDiscoveryService
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#ListConfigurations
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
     #
     # @option params [Integer] :max_results
     #   The total number of items to return. The maximum value is 100.
@@ -642,11 +682,11 @@ module Aws::ApplicationDiscoveryService
     # @option params [Array<Types::OrderByElement>] :order_by
     #   Certain filter criteria return output that can be sorted in ascending
     #   or descending order. For a list of output characteristics for each
-    #   filter, see [Querying Discovered Configuration Items][1].
+    #   filter, see [Using the ListConfigurations Action][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/querying-configuration-items.html#ListConfigurations
+    #   [1]: http://docs.aws.amazon.com/application-discovery/latest/APIReference/discovery-api-queries.html#ListConfigurations
     #
     # @return [Types::ListConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -688,7 +728,7 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Retrieves a list of servers which are one network hop away from a
+    # Retrieves a list of servers that are one network hop away from a
     # specified server.
     #
     # @option params [required, String] :configuration_id
@@ -746,16 +786,16 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Instructs the specified agents or Connectors to start collecting data.
+    # Instructs the specified agents or connectors to start collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
-    #   The IDs of the agents or Connectors that you want to start collecting
-    #   data. If you send a request to an agent/Connector ID that you do not
+    #   The IDs of the agents or connectors from which to start collecting
+    #   data. If you send a request to an agent/connector ID that you do not
     #   have permission to contact, according to your AWS account, the service
     #   does not throw an exception. Instead, it returns the error in the
     #   *Description* field. If you send a request to multiple
-    #   agents/Connectors and you do not have permission to contact some of
-    #   those agents/Connectors, the system does not throw an exception.
+    #   agents/connectors and you do not have permission to contact some of
+    #   those agents/connectors, the system does not throw an exception.
     #   Instead, the system shows `Failed` in the *Description* field.
     #
     # @return [Types::StartDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -782,10 +822,37 @@ module Aws::ApplicationDiscoveryService
       req.send_request(options)
     end
 
-    # Instructs the specified agents or Connectors to stop collecting data.
+    # Export the configuration data about discovered configuration items and
+    # relationships to an S3 bucket in a specified format.
+    #
+    # @option params [Array<String>] :export_data_format
+    #   The file format for the returned export data. Default value is `CSV`.
+    #
+    # @return [Types::StartExportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartExportTaskResponse#export_id #export_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_export_task({
+    #     export_data_format: ["CSV"], # accepts CSV, GRAPHML
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.export_id #=> String
+    #
+    # @overload start_export_task(params = {})
+    # @param [Hash] params ({})
+    def start_export_task(params = {}, options = {})
+      req = build_request(:start_export_task, params)
+      req.send_request(options)
+    end
+
+    # Instructs the specified agents or connectors to stop collecting data.
     #
     # @option params [required, Array<String>] :agent_ids
-    #   The IDs of the agents or Connectors that you want to stop collecting
+    #   The IDs of the agents or connectors from which to stop collecting
     #   data.
     #
     # @return [Types::StopDataCollectionByAgentIdsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -853,7 +920,7 @@ module Aws::ApplicationDiscoveryService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

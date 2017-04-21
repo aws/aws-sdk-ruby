@@ -535,7 +535,7 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         trail_name: "String",
+    #         trail_name: "String", # required
     #       }
     #
     # @!attribute [rw] trail_name
@@ -995,8 +995,8 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         trail_name: "String",
-    #         event_selectors: [
+    #         trail_name: "String", # required
+    #         event_selectors: [ # required
     #           {
     #             read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
     #             include_management_events: false,

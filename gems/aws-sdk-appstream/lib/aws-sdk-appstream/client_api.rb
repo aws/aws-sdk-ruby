@@ -16,9 +16,12 @@ module Aws::AppStream
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssociateFleetRequest = Shapes::StructureShape.new(name: 'AssociateFleetRequest')
     AssociateFleetResult = Shapes::StructureShape.new(name: 'AssociateFleetResult')
+    AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
     ComputeCapacity = Shapes::StructureShape.new(name: 'ComputeCapacity')
     ComputeCapacityStatus = Shapes::StructureShape.new(name: 'ComputeCapacityStatus')
+    ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
     CreateFleetResult = Shapes::StructureShape.new(name: 'CreateFleetResult')
     CreateStackRequest = Shapes::StructureShape.new(name: 'CreateStackRequest')
@@ -56,6 +59,7 @@ module Aws::AppStream
     ImageStateChangeReason = Shapes::StructureShape.new(name: 'ImageStateChangeReason')
     ImageStateChangeReasonCode = Shapes::StringShape.new(name: 'ImageStateChangeReasonCode')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InvalidParameterCombinationException = Shapes::StructureShape.new(name: 'InvalidParameterCombinationException')
     InvalidRoleException = Shapes::StructureShape.new(name: 'InvalidRoleException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListAssociatedFleetsRequest = Shapes::StructureShape.new(name: 'ListAssociatedFleetsRequest')
@@ -127,6 +131,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:disconnect_timeout_in_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "DisconnectTimeoutInSeconds"))
     CreateFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     CreateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    CreateFleetRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -181,6 +186,7 @@ module Aws::AppStream
     DescribeSessionsRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "UserId"))
     DescribeSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeSessionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "Limit"))
+    DescribeSessionsRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
     DescribeSessionsRequest.struct_class = Types::DescribeSessionsRequest
 
     DescribeSessionsResult.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionList, location_name: "Sessions"))
@@ -219,6 +225,7 @@ module Aws::AppStream
     Fleet.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     Fleet.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
     Fleet.add_member(:fleet_errors, Shapes::ShapeRef.new(shape: FleetErrors, location_name: "FleetErrors"))
+    Fleet.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     Fleet.struct_class = Types::Fleet
 
     FleetError.add_member(:error_code, Shapes::ShapeRef.new(shape: FleetErrorCode, location_name: "ErrorCode"))
@@ -235,6 +242,7 @@ module Aws::AppStream
     Image.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "DisplayName"))
     Image.add_member(:state, Shapes::ShapeRef.new(shape: ImageState, location_name: "State"))
     Image.add_member(:visibility, Shapes::ShapeRef.new(shape: VisibilityType, location_name: "Visibility"))
+    Image.add_member(:image_builder_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "ImageBuilderSupported"))
     Image.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
     Image.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     Image.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: ImageStateChangeReason, location_name: "StateChangeReason"))
@@ -272,6 +280,7 @@ module Aws::AppStream
     Session.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     Session.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     Session.add_member(:state, Shapes::ShapeRef.new(shape: SessionState, required: true, location_name: "State"))
+    Session.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AuthenticationType, location_name: "AuthenticationType"))
     Session.struct_class = Types::Session
 
     SessionList.member = Shapes::ShapeRef.new(shape: Session)
@@ -309,6 +318,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:delete_vpc_config, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteVpcConfig"))
     UpdateFleetRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
     UpdateFleetRequest.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
+    UpdateFleetRequest.add_member(:enable_default_internet_access, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableDefaultInternetAccess"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -349,6 +359,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: AssociateFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -362,6 +373,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -372,6 +384,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: CreateStackResult)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:create_streaming_url, Seahorse::Model::Operation.new.tap do |o|
@@ -383,6 +396,7 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:delete_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -393,6 +407,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: DeleteFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_stack, Seahorse::Model::Operation.new.tap do |o|
@@ -403,6 +418,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: DeleteStackResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:describe_fleets, Seahorse::Model::Operation.new.tap do |o|
@@ -429,6 +445,7 @@ module Aws::AppStream
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeSessionsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeSessionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)
 
       api.add_operation(:describe_stacks, Seahorse::Model::Operation.new.tap do |o|
@@ -448,6 +465,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: DisassociateFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:expire_session, Seahorse::Model::Operation.new.tap do |o|
@@ -481,7 +499,9 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: StartFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: StartFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:stop_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -491,6 +511,7 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: StopFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: StopFleetResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -503,6 +524,9 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotAvailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_stack, Seahorse::Model::Operation.new.tap do |o|

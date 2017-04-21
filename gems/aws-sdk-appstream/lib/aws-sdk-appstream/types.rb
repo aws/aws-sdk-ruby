@@ -149,6 +149,7 @@ module Aws::AppStream
     #         disconnect_timeout_in_seconds: 1,
     #         description: "Description",
     #         display_name: "DisplayName",
+    #         enable_default_internet_access: false,
     #       }
     #
     # @!attribute [rw] name
@@ -190,6 +191,10 @@ module Aws::AppStream
     #   The display name of the fleet.
     #   @return [String]
     #
+    # @!attribute [rw] enable_default_internet_access
+    #   Enable/Disable default Internet access from fleet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -201,7 +206,8 @@ module Aws::AppStream
       :max_user_duration_in_seconds,
       :disconnect_timeout_in_seconds,
       :description,
-      :display_name)
+      :display_name,
+      :enable_default_internet_access)
       include Aws::Structure
     end
 
@@ -449,6 +455,7 @@ module Aws::AppStream
     #         user_id: "UserId",
     #         next_token: "String",
     #         limit: 1,
+    #         authentication_type: "API", # accepts API, SAML
     #       }
     #
     # @!attribute [rw] stack_name
@@ -474,6 +481,13 @@ module Aws::AppStream
     #   maximum supported value is 50.
     #   @return [Integer]
     #
+    # @!attribute [rw] authentication_type
+    #   The authentication method of the user. It can be `API` for a user
+    #   authenticated using a streaming url or `SAML` for a SAML federated
+    #   user. If an authentication type is not provided, the operation
+    #   defaults to users authenticated using a streaming url.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest AWS API Documentation
     #
     class DescribeSessionsRequest < Struct.new(
@@ -481,7 +495,8 @@ module Aws::AppStream
       :fleet_name,
       :user_id,
       :next_token,
-      :limit)
+      :limit,
+      :authentication_type)
       include Aws::Structure
     end
 
@@ -653,6 +668,11 @@ module Aws::AppStream
     #   The list of fleet errors is appended to this list.
     #   @return [Array<Types::FleetError>]
     #
+    # @!attribute [rw] enable_default_internet_access
+    #   Default Internet access from the fleet. True (Enabled), False
+    #   (Disabled).
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -668,7 +688,8 @@ module Aws::AppStream
       :state,
       :vpc_config,
       :created_time,
-      :fleet_errors)
+      :fleet_errors,
+      :enable_default_internet_access)
       include Aws::Structure
     end
 
@@ -720,6 +741,10 @@ module Aws::AppStream
     #   private.
     #   @return [String]
     #
+    # @!attribute [rw] image_builder_supported
+    #   Indicates whether an image builder can be launched from this image.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] platform
     #   The operating system platform of the image.
     #   @return [String]
@@ -749,6 +774,7 @@ module Aws::AppStream
       :display_name,
       :state,
       :visibility,
+      :image_builder_supported,
       :platform,
       :description,
       :state_change_reason,
@@ -885,6 +911,12 @@ module Aws::AppStream
     #   The current state of the streaming session.
     #   @return [String]
     #
+    # @!attribute [rw] authentication_type
+    #   The authentication method of the user for whom the session was
+    #   created. It can be `API` for a user authenticated using a streaming
+    #   url or `SAML` for a SAML federated user.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session AWS API Documentation
     #
     class Session < Struct.new(
@@ -892,7 +924,8 @@ module Aws::AppStream
       :user_id,
       :stack_name,
       :fleet_name,
-      :state)
+      :state,
+      :authentication_type)
       include Aws::Structure
     end
 
@@ -991,6 +1024,7 @@ module Aws::AppStream
     #         delete_vpc_config: false,
     #         description: "Description",
     #         display_name: "DisplayName",
+    #         enable_default_internet_access: false,
     #       }
     #
     # @!attribute [rw] image_name
@@ -1036,6 +1070,10 @@ module Aws::AppStream
     #   The name displayed to end users on the AppStream 2.0 portal.
     #   @return [String]
     #
+    # @!attribute [rw] enable_default_internet_access
+    #   Enable/Disable default Internet access from fleet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -1048,7 +1086,8 @@ module Aws::AppStream
       :disconnect_timeout_in_seconds,
       :delete_vpc_config,
       :description,
-      :display_name)
+      :display_name,
+      :enable_default_internet_access)
       include Aws::Structure
     end
 
@@ -1104,7 +1143,7 @@ module Aws::AppStream
       include Aws::Structure
     end
 
-    # The VPC in which the fleet is launched.
+    # VPC configuration information.
     #
     # @note When making an API call, you may pass VpcConfig
     #   data as a hash:

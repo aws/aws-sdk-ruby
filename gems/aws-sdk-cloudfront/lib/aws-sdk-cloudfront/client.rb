@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 
@@ -45,6 +46,7 @@ module Aws::CloudFront
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestXml)
 
@@ -181,7 +183,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
     #
     # @overload create_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -190,7 +192,7 @@ module Aws::CloudFront
       req.send_request(options)
     end
 
-    # Creates a new web distribution. Send a `GET` request to the
+    # Creates a new web distribution. Send a `POST` request to the
     # `/CloudFront API version/distribution`/`distribution ID` resource.
     #
     # @option params [required, Types::DistributionConfig] :distribution_config
@@ -239,6 +241,8 @@ module Aws::CloudFront
     #                 quantity: 1, # required
     #                 items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #               },
+    #               origin_read_timeout: 1,
+    #               origin_keepalive_timeout: 1,
     #             },
     #           },
     #         ],
@@ -425,6 +429,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -522,7 +528,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistribution2017_03_25 AWS API Documentation
     #
     # @overload create_distribution(params = {})
     # @param [Hash] params ({})
@@ -580,6 +586,8 @@ module Aws::CloudFront
     #                   quantity: 1, # required
     #                   items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #                 },
+    #                 origin_read_timeout: 1,
+    #                 origin_keepalive_timeout: 1,
     #               },
     #             },
     #           ],
@@ -775,6 +783,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -872,7 +882,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateDistributionWithTags2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTags2017_03_25 AWS API Documentation
     #
     # @overload create_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -918,7 +928,7 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateInvalidation2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidation2017_03_25 AWS API Documentation
     #
     # @overload create_invalidation(params = {})
     # @param [Hash] params ({})
@@ -1033,7 +1043,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistribution2017_03_25 AWS API Documentation
     #
     # @overload create_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1125,7 +1135,7 @@ module Aws::CloudFront
     #   resp.location #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/CreateStreamingDistributionWithTags2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTags2017_03_25 AWS API Documentation
     #
     # @overload create_streaming_distribution_with_tags(params = {})
     # @param [Hash] params ({})
@@ -1152,7 +1162,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
     #
     # @overload delete_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1179,7 +1189,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistribution2017_03_25 AWS API Documentation
     #
     # @overload delete_distribution(params = {})
     # @param [Hash] params ({})
@@ -1249,7 +1259,7 @@ module Aws::CloudFront
     #     if_match: "string",
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/DeleteStreamingDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistribution2017_03_25 AWS API Documentation
     #
     # @overload delete_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1282,7 +1292,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -1313,7 +1323,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetCloudFrontOriginAccessIdentityConfig2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfig2017_03_25 AWS API Documentation
     #
     # @overload get_cloud_front_origin_access_identity_config(params = {})
     # @param [Hash] params ({})
@@ -1374,6 +1384,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -1470,7 +1482,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistribution2017_03_25 AWS API Documentation
     #
     # @overload get_distribution(params = {})
     # @param [Hash] params ({})
@@ -1518,6 +1530,8 @@ module Aws::CloudFront
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -1614,7 +1628,7 @@ module Aws::CloudFront
     #   resp.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetDistributionConfig2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfig2017_03_25 AWS API Documentation
     #
     # @overload get_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -1653,7 +1667,7 @@ module Aws::CloudFront
     #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
     #   resp.invalidation.invalidation_batch.caller_reference #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetInvalidation2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidation2017_03_25 AWS API Documentation
     #
     # @overload get_invalidation(params = {})
     # @param [Hash] params ({})
@@ -1711,7 +1725,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistribution2017_03_25 AWS API Documentation
     #
     # @overload get_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -1756,7 +1770,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/GetStreamingDistributionConfig2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfig2017_03_25 AWS API Documentation
     #
     # @overload get_streaming_distribution_config(params = {})
     # @param [Hash] params ({})
@@ -1802,7 +1816,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
     #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListCloudFrontOriginAccessIdentities2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentities2017_03_25 AWS API Documentation
     #
     # @overload list_cloud_front_origin_access_identities(params = {})
     # @param [Hash] params ({})
@@ -1866,6 +1880,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -1957,7 +1973,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributions2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributions2017_03_25 AWS API Documentation
     #
     # @overload list_distributions(params = {})
     # @param [Hash] params ({})
@@ -2030,6 +2046,8 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution_list.items[0].origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution_list.items[0].default_cache_behavior.target_origin_id #=> String
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -2121,7 +2139,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
     #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListDistributionsByWebACLId2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLId2017_03_25 AWS API Documentation
     #
     # @overload list_distributions_by_web_acl_id(params = {})
     # @param [Hash] params ({})
@@ -2173,7 +2191,7 @@ module Aws::CloudFront
     #   resp.invalidation_list.items[0].create_time #=> Time
     #   resp.invalidation_list.items[0].status #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListInvalidations2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidations2017_03_25 AWS API Documentation
     #
     # @overload list_invalidations(params = {})
     # @param [Hash] params ({})
@@ -2227,7 +2245,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
     #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListStreamingDistributions2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributions2017_03_25 AWS API Documentation
     #
     # @overload list_streaming_distributions(params = {})
     # @param [Hash] params ({})
@@ -2257,7 +2275,7 @@ module Aws::CloudFront
     #   resp.tags.items[0].key #=> String
     #   resp.tags.items[0].value #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/ListTagsForResource2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResource2017_03_25 AWS API Documentation
     #
     # @overload list_tags_for_resource(params = {})
     # @param [Hash] params ({})
@@ -2290,7 +2308,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/TagResource2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResource2017_03_25 AWS API Documentation
     #
     # @overload tag_resource(params = {})
     # @param [Hash] params ({})
@@ -2318,7 +2336,7 @@ module Aws::CloudFront
     #     },
     #   })
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UntagResource2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResource2017_03_25 AWS API Documentation
     #
     # @overload untag_resource(params = {})
     # @param [Hash] params ({})
@@ -2363,7 +2381,7 @@ module Aws::CloudFront
     #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateCloudFrontOriginAccessIdentity2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentity2017_03_25 AWS API Documentation
     #
     # @overload update_cloud_front_origin_access_identity(params = {})
     # @param [Hash] params ({})
@@ -2426,6 +2444,8 @@ module Aws::CloudFront
     #                 quantity: 1, # required
     #                 items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #               },
+    #               origin_read_timeout: 1,
+    #               origin_keepalive_timeout: 1,
     #             },
     #           },
     #         ],
@@ -2614,6 +2634,8 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
     #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_read_timeout #=> Integer
+    #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_keepalive_timeout #=> Integer
     #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
     #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
@@ -2710,7 +2732,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistribution2017_03_25 AWS API Documentation
     #
     # @overload update_distribution(params = {})
     # @param [Hash] params ({})
@@ -2800,7 +2822,7 @@ module Aws::CloudFront
     #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
     #   resp.etag #=> String
     #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2016-11-25/UpdateStreamingDistribution2016_11_25 AWS API Documentation
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistribution2017_03_25 AWS API Documentation
     #
     # @overload update_streaming_distribution(params = {})
     # @param [Hash] params ({})
@@ -2822,7 +2844,7 @@ module Aws::CloudFront
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

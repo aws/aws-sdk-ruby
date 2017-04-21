@@ -11,6 +11,7 @@ module Aws::ElastiCache
 
     include Seahorse::Model
 
+    APICallRateForCustomerExceededFault = Shapes::StructureShape.new(name: 'APICallRateForCustomerExceededFault')
     AZMode = Shapes::StringShape.new(name: 'AZMode')
     AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
     AllowedNodeTypeModificationsMessage = Shapes::StructureShape.new(name: 'AllowedNodeTypeModificationsMessage')
@@ -142,6 +143,7 @@ module Aws::ElastiCache
     NodeGroupList = Shapes::ListShape.new(name: 'NodeGroupList')
     NodeGroupMember = Shapes::StructureShape.new(name: 'NodeGroupMember')
     NodeGroupMemberList = Shapes::ListShape.new(name: 'NodeGroupMemberList')
+    NodeGroupNotFoundFault = Shapes::StructureShape.new(name: 'NodeGroupNotFoundFault')
     NodeGroupsPerReplicationGroupQuotaExceededFault = Shapes::StructureShape.new(name: 'NodeGroupsPerReplicationGroupQuotaExceededFault')
     NodeQuotaForClusterExceededFault = Shapes::StructureShape.new(name: 'NodeQuotaForClusterExceededFault')
     NodeQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'NodeQuotaForCustomerExceededFault')
@@ -204,6 +206,9 @@ module Aws::ElastiCache
     TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
     TagNotFoundFault = Shapes::StructureShape.new(name: 'TagNotFoundFault')
     TagQuotaPerResourceExceeded = Shapes::StructureShape.new(name: 'TagQuotaPerResourceExceeded')
+    TestFailoverMessage = Shapes::StructureShape.new(name: 'TestFailoverMessage')
+    TestFailoverNotAvailableFault = Shapes::StructureShape.new(name: 'TestFailoverNotAvailableFault')
+    TestFailoverResult = Shapes::StructureShape.new(name: 'TestFailoverResult')
 
     AddTagsToResourceMessage.add_member(:resource_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceName"))
     AddTagsToResourceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
@@ -490,6 +495,7 @@ module Aws::ElastiCache
     DescribeCacheClustersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeCacheClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeCacheClustersMessage.add_member(:show_cache_node_info, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowCacheNodeInfo"))
+    DescribeCacheClustersMessage.add_member(:show_cache_clusters_not_in_replication_groups, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowCacheClustersNotInReplicationGroups"))
     DescribeCacheClustersMessage.struct_class = Types::DescribeCacheClustersMessage
 
     DescribeCacheEngineVersionsMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
@@ -664,6 +670,7 @@ module Aws::ElastiCache
     ModifyReplicationGroupMessage.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ModifyReplicationGroupMessage.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
     ModifyReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
+    ModifyReplicationGroupMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
     ModifyReplicationGroupMessage.struct_class = Types::ModifyReplicationGroupMessage
 
     ModifyReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
@@ -775,6 +782,8 @@ module Aws::ElastiCache
     ReplicationGroup.add_member(:configuration_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ConfigurationEndpoint"))
     ReplicationGroup.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
     ReplicationGroup.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
+    ReplicationGroup.add_member(:cluster_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ClusterEnabled"))
+    ReplicationGroup.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
     ReplicationGroup.struct_class = Types::ReplicationGroup
 
     ReplicationGroupList.member = Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup")
@@ -890,6 +899,13 @@ module Aws::ElastiCache
 
     TagListMessage.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     TagListMessage.struct_class = Types::TagListMessage
+
+    TestFailoverMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationGroupId"))
+    TestFailoverMessage.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "NodeGroupId"))
+    TestFailoverMessage.struct_class = Types::TestFailoverMessage
+
+    TestFailoverResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
+    TestFailoverResult.struct_class = Types::TestFailoverResult
 
 
     # @api private
@@ -1460,6 +1476,22 @@ module Aws::ElastiCache
         o.errors << Shapes::ShapeRef.new(shape: CacheSecurityGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCacheSecurityGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
+      end)
+
+      api.add_operation(:test_failover, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TestFailover"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TestFailoverMessage)
+        o.output = Shapes::ShapeRef.new(shape: TestFailoverResult)
+        o.errors << Shapes::ShapeRef.new(shape: APICallRateForCustomerExceededFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: NodeGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: TestFailoverNotAvailableFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
       end)

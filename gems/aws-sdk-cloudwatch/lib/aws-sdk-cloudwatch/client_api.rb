@@ -42,6 +42,7 @@ module Aws::CloudWatch
     DisableAlarmActionsInput = Shapes::StructureShape.new(name: 'DisableAlarmActionsInput')
     EnableAlarmActionsInput = Shapes::StructureShape.new(name: 'EnableAlarmActionsInput')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    EvaluateLowSampleCountPercentile = Shapes::StringShape.new(name: 'EvaluateLowSampleCountPercentile')
     EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
     ExtendedStatistic = Shapes::StringShape.new(name: 'ExtendedStatistic')
     ExtendedStatistics = Shapes::ListShape.new(name: 'ExtendedStatistics')
@@ -87,6 +88,7 @@ module Aws::CloudWatch
     Statistics = Shapes::ListShape.new(name: 'Statistics')
     Threshold = Shapes::FloatShape.new(name: 'Threshold')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
 
     AlarmHistoryItem.add_member(:alarm_name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "AlarmName"))
     AlarmHistoryItem.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -225,6 +227,8 @@ module Aws::CloudWatch
     MetricAlarm.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: EvaluationPeriods, location_name: "EvaluationPeriods"))
     MetricAlarm.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, location_name: "Threshold"))
     MetricAlarm.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, location_name: "ComparisonOperator"))
+    MetricAlarm.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
+    MetricAlarm.add_member(:evaluate_low_sample_count_percentile, Shapes::ShapeRef.new(shape: EvaluateLowSampleCountPercentile, location_name: "EvaluateLowSampleCountPercentile"))
     MetricAlarm.struct_class = Types::MetricAlarm
 
     MetricAlarms.member = Shapes::ShapeRef.new(shape: MetricAlarm)
@@ -257,6 +261,8 @@ module Aws::CloudWatch
     PutMetricAlarmInput.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: EvaluationPeriods, required: true, location_name: "EvaluationPeriods"))
     PutMetricAlarmInput.add_member(:threshold, Shapes::ShapeRef.new(shape: Threshold, required: true, location_name: "Threshold"))
     PutMetricAlarmInput.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
+    PutMetricAlarmInput.add_member(:treat_missing_data, Shapes::ShapeRef.new(shape: TreatMissingData, location_name: "TreatMissingData"))
+    PutMetricAlarmInput.add_member(:evaluate_low_sample_count_percentile, Shapes::ShapeRef.new(shape: EvaluateLowSampleCountPercentile, location_name: "EvaluateLowSampleCountPercentile"))
     PutMetricAlarmInput.struct_class = Types::PutMetricAlarmInput
 
     PutMetricDataInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))

@@ -169,6 +169,16 @@ module Aws::CloudWatch
       data.comparison_operator
     end
 
+    # @return [String]
+    def treat_missing_data
+      data.treat_missing_data
+    end
+
+    # @return [String]
+    def evaluate_low_sample_count_percentile
+      data.evaluate_low_sample_count_percentile
+    end
+
     # @!endgroup
 
     # @return [Client]

@@ -299,7 +299,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :attribute
-    #   The attribute of the network interface.
+    #   The attribute of the network interface. This parameter is required.
     # @return [Types::DescribeNetworkInterfaceAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(network_interface_id: @id)

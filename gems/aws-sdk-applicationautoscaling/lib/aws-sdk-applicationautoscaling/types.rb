@@ -31,9 +31,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "ResourceIdMaxLen1600", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #       }
     #
     # @!attribute [rw] policy_name
@@ -65,6 +65,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -79,6 +82,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicyRequest AWS API Documentation
@@ -99,9 +105,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #       }
     #
     # @!attribute [rw] service_namespace
@@ -129,6 +135,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -144,6 +153,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTargetRequest AWS API Documentation
@@ -163,9 +175,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_ids: ["ResourceIdMaxLen1600"],
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -197,6 +209,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] scalable_dimension
@@ -213,6 +228,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -262,9 +280,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -296,6 +314,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -311,6 +332,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -361,9 +385,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_names: ["ResourceIdMaxLen1600"],
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_id: "ResourceIdMaxLen1600",
-    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #         max_results: 1,
     #         next_token: "XmlString",
     #       }
@@ -399,6 +423,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -414,6 +441,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -465,9 +495,9 @@ module Aws::ApplicationAutoScaling
     #
     #       {
     #         policy_name: "PolicyName", # required
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #         policy_type: "StepScaling", # accepts StepScaling
     #         step_scaling_policy_configuration: {
     #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -513,6 +543,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -527,6 +560,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
@@ -569,9 +605,9 @@ module Aws::ApplicationAutoScaling
     #   data as a hash:
     #
     #       {
-    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #         service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #         resource_id: "ResourceIdMaxLen1600", # required
-    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #         min_capacity: 1,
     #         max_capacity: 1,
     #         role_arn: "ResourceIdMaxLen1600",
@@ -602,6 +638,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -617,6 +656,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -681,6 +723,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -696,6 +741,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] min_capacity
@@ -759,6 +807,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -773,6 +824,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -856,6 +910,9 @@ module Aws::ApplicationAutoScaling
     #   * EMR cluster - The resource type is `instancegroup` and the unique
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
+    #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
     #   @return [String]
     #
     # @!attribute [rw] scalable_dimension
@@ -870,6 +927,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance
     #     count of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #   @return [String]
     #
     # @!attribute [rw] policy_type

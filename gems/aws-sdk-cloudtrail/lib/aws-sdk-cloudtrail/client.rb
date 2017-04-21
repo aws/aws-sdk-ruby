@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::CloudTrail
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -452,7 +454,7 @@ module Aws::CloudTrail
     #
     # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     #
-    # @option params [String] :trail_name
+    # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
     #
@@ -480,7 +482,7 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_event_selectors({
-    #     trail_name: "String",
+    #     trail_name: "String", # required
     #   })
     #
     # @example Response structure
@@ -804,7 +806,7 @@ module Aws::CloudTrail
     #
     # [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html
     #
-    # @option params [String] :trail_name
+    # @option params [required, String] :trail_name
     #   Specifies the name of the trail or trail ARN. If you specify a trail
     #   name, the string must meet the following requirements:
     #
@@ -824,7 +826,7 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
     #
-    # @option params [Array<Types::EventSelector>] :event_selectors
+    # @option params [required, Array<Types::EventSelector>] :event_selectors
     #   Specifies the settings for your event selectors. You can configure up
     #   to five event selectors for a trail.
     #
@@ -836,8 +838,8 @@ module Aws::CloudTrail
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_event_selectors({
-    #     trail_name: "String",
-    #     event_selectors: [
+    #     trail_name: "String", # required
+    #     event_selectors: [ # required
     #       {
     #         read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
     #         include_management_events: false,
@@ -1139,7 +1141,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

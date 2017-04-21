@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -45,6 +46,7 @@ module Aws::IAM
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -177,7 +179,9 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Adds the specified IAM role to the specified instance profile.
+    # Adds the specified IAM role to the specified instance profile. An
+    # instance profile can contain only one role, and this limit cannot be
+    # increased.
     #
     # <note markdown="1"> The caller of this API must be granted the `PassRole` permission on
     # the IAM role by a permission policy.
@@ -211,7 +215,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -332,13 +336,16 @@ module Aws::IAM
       req.send_request(options)
     end
 
-    # Attaches the specified managed policy to the specified IAM role.
+    # Attaches the specified managed policy to the specified IAM role. When
+    # you attach a managed policy to a role, the managed policy becomes part
+    # of the role's permission (access) policy.
     #
-    # When you attach a managed policy to a role, the managed policy becomes
-    # part of the role's permission (access) policy. You cannot use a
-    # managed policy as the role's trust policy. The role's trust policy
-    # is created at the same time as the role, using CreateRole. You can
-    # update a role's trust policy using UpdateAssumeRolePolicy.
+    # <note markdown="1"> You cannot use a managed policy as the role's trust policy. The
+    # role's trust policy is created at the same time as the role, using
+    # CreateRole. You can update a role's trust policy using
+    # UpdateAssumeRolePolicy.
+    #
+    #  </note>
     #
     # Use this API to attach a *managed* policy to a role. To embed an
     # inline policy in a role, use PutRolePolicy. For more information about
@@ -355,7 +362,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -728,6 +735,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].arn #=> String
     #   resp.instance_profile.roles[0].create_date #=> Time
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
+    #   resp.instance_profile.roles[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfile AWS API Documentation
     #
@@ -1142,8 +1150,10 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-. Role names are not distinguished by case. For example, you
-    #   cannot create roles named both "PRODROLE" and "prodrole".
+    #   \_+=,.@-
+    #
+    #   Role names are not distinguished by case. For example, you cannot
+    #   create roles named both "PRODROLE" and "prodrole".
     #
     #
     #
@@ -1165,6 +1175,9 @@ module Aws::IAM
     #
     #   [1]: http://wikipedia.org/wiki/regex
     #
+    # @option params [String] :description
+    #   A customer-provided description of the role.
+    #
     # @return [Types::CreateRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRoleResponse#role #role} => Types::Role
@@ -1175,6 +1188,7 @@ module Aws::IAM
     #     path: "pathType",
     #     role_name: "roleNameType", # required
     #     assume_role_policy_document: "policyDocumentType", # required
+    #     description: "roleDescriptionType",
     #   })
     #
     # @example Response structure
@@ -1185,6 +1199,7 @@ module Aws::IAM
     #   resp.role.arn #=> String
     #   resp.role.create_date #=> Time
     #   resp.role.assume_role_policy_document #=> String
+    #   resp.role.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRole AWS API Documentation
     #
@@ -1273,6 +1288,68 @@ module Aws::IAM
     # @param [Hash] params ({})
     def create_saml_provider(params = {}, options = {})
       req = build_request(:create_saml_provider, params)
+      req.send_request(options)
+    end
+
+    # Creates an IAM role that is linked to a specific AWS service. The
+    # service controls the attached policies and when the role can be
+    # deleted. This helps ensure that the service is not broken by an
+    # unexpectedly changed or deleted role, which could put your AWS
+    # resources into an unknown state. Allowing the service to control the
+    # role helps improve service stability and proper cleanup when a service
+    # and its role are no longer needed.
+    #
+    # The name of the role is autogenerated by combining the string that you
+    # specify for the `AWSServiceName` parameter with the string that you
+    # specify for the `CustomSuffix` parameter. The resulting name must be
+    # unique in your account or the request fails.
+    #
+    # To attach a policy to this service-linked role, you must make the
+    # request using the AWS service that depends on this role.
+    #
+    # @option params [required, String] :aws_service_name
+    #   The AWS service to which this role is attached. You use a string
+    #   similar to a URL but without the http:// in front. For example:
+    #   `elasticbeanstalk.amazonaws.com`
+    #
+    # @option params [String] :description
+    #   The description of the role.
+    #
+    # @option params [String] :custom_suffix
+    #   A string that you provide, which is combined with the service name to
+    #   form the complete role name. If you make multiple requests for the
+    #   same service, then you must supply a different `CustomSuffix` for each
+    #   request. Otherwise the request fails with a duplicate role name error.
+    #   For example, you could add `-1` or `-debug` to the suffix.
+    #
+    # @return [Types::CreateServiceLinkedRoleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServiceLinkedRoleResponse#role #role} => Types::Role
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_service_linked_role({
+    #     aws_service_name: "groupNameType", # required
+    #     description: "roleDescriptionType",
+    #     custom_suffix: "customSuffixType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role.path #=> String
+    #   resp.role.role_name #=> String
+    #   resp.role.role_id #=> String
+    #   resp.role.arn #=> String
+    #   resp.role.create_date #=> Time
+    #   resp.role.assume_role_policy_document #=> String
+    #   resp.role.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRole AWS API Documentation
+    #
+    # @overload create_service_linked_role(params = {})
+    # @param [Hash] params ({})
+    def create_service_linked_role(params = {}, options = {})
+      req = build_request(:create_service_linked_role, params)
       req.send_request(options)
     end
 
@@ -1532,7 +1609,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   =,.@:/-
     #
     #
     #
@@ -1992,7 +2069,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -2034,7 +2111,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -2406,7 +2483,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   =,.@:/-
     #
     #
     #
@@ -2499,7 +2576,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -2608,7 +2685,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   =,.@:/-
     #
     #
     #
@@ -2619,10 +2696,32 @@ module Aws::IAM
     #
     #   The format for this parameter is a string of 6 digits.
     #
+    #   Submit your request immediately after generating the authentication
+    #   codes. If you generate the codes and then wait too long to submit the
+    #   request, the MFA device successfully associates with the user but the
+    #   MFA device becomes out of sync. This happens because time-based
+    #   one-time passwords (TOTP) expire after a short period of time. If this
+    #   happens, you can [resync the device][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
+    #
     # @option params [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
     #   The format for this parameter is a string of 6 digits.
+    #
+    #   Submit your request immediately after generating the authentication
+    #   codes. If you generate the codes and then wait too long to submit the
+    #   request, the MFA device successfully associates with the user but the
+    #   MFA device becomes out of sync. This happens because time-based
+    #   one-time passwords (TOTP) expire after a short period of time. If this
+    #   happens, you can [resync the device][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2815,6 +2914,7 @@ module Aws::IAM
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].arn #=> String
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].create_date #=> Time
     #   resp.role_detail_list[0].instance_profile_list[0].roles[0].assume_role_policy_document #=> String
+    #   resp.role_detail_list[0].instance_profile_list[0].roles[0].description #=> String
     #   resp.role_detail_list[0].role_policy_list #=> Array
     #   resp.role_detail_list[0].role_policy_list[0].policy_name #=> String
     #   resp.role_detail_list[0].role_policy_list[0].policy_document #=> String
@@ -3268,6 +3368,7 @@ module Aws::IAM
     #   resp.instance_profile.roles[0].arn #=> String
     #   resp.instance_profile.roles[0].create_date #=> Time
     #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
+    #   resp.instance_profile.roles[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfile AWS API Documentation
     #
@@ -3531,7 +3632,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -3555,6 +3656,7 @@ module Aws::IAM
     #   resp.role.arn #=> String
     #   resp.role.create_date #=> Time
     #   resp.role.assume_role_policy_document #=> String
+    #   resp.role.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRole AWS API Documentation
     #
@@ -3599,7 +3701,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -4202,7 +4304,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -4771,6 +4873,7 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].arn #=> String
     #   resp.instance_profiles[0].roles[0].create_date #=> Time
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
+    #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -4801,7 +4904,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -4854,6 +4957,7 @@ module Aws::IAM
     #   resp.instance_profiles[0].roles[0].arn #=> String
     #   resp.instance_profiles[0].roles[0].create_date #=> Time
     #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
+    #   resp.instance_profiles[0].roles[0].description #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -5164,7 +5268,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -5287,6 +5391,7 @@ module Aws::IAM
     #   resp.roles[0].arn #=> String
     #   resp.roles[0].create_date #=> Time
     #   resp.roles[0].assume_role_policy_document #=> String
+    #   resp.roles[0].description #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.marker #=> String
     #
@@ -5982,7 +6087,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -6165,7 +6270,7 @@ module Aws::IAM
     # Make sure you do not have any Amazon EC2 instances running with the
     # role you are about to remove from the instance profile. Removing a
     # role from an instance profile that is associated with a running
-    # instance break any applications running on the instance.
+    # instance might break any applications running on the instance.
     #
     # For more information about IAM roles, go to [Working with Roles][1].
     # For more information about instance profiles, go to [About Instance
@@ -6194,7 +6299,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -7160,7 +7265,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -7394,6 +7499,44 @@ module Aws::IAM
     # @param [Hash] params ({})
     def update_open_id_connect_provider_thumbprint(params = {}, options = {})
       req = build_request(:update_open_id_connect_provider_thumbprint, params)
+      req.send_request(options)
+    end
+
+    # Modifies the description of a role.
+    #
+    # @option params [required, String] :role_name
+    #   The name of the role that you want to modify.
+    #
+    # @option params [required, String] :description
+    #   The new description that you want to apply to the specified role.
+    #
+    # @return [Types::UpdateRoleDescriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateRoleDescriptionResponse#role #role} => Types::Role
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_role_description({
+    #     role_name: "roleNameType", # required
+    #     description: "roleDescriptionType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role.path #=> String
+    #   resp.role.role_name #=> String
+    #   resp.role.role_id #=> String
+    #   resp.role.arn #=> String
+    #   resp.role.create_date #=> Time
+    #   resp.role.assume_role_policy_document #=> String
+    #   resp.role.description #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescription AWS API Documentation
+    #
+    # @overload update_role_description(params = {})
+    # @param [Hash] params ({})
+    def update_role_description(params = {}, options = {})
+      req = build_request(:update_role_description, params)
       req.send_request(options)
     end
 
@@ -8108,7 +8251,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

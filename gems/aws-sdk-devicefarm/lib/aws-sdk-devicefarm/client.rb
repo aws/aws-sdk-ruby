@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::DeviceFarm
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -179,8 +181,8 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [ # required
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
-    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
     #     ],
@@ -193,8 +195,8 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
-    #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePool AWS API Documentation
@@ -206,10 +208,108 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Creates a network profile.
+    #
+    # @option params [required, String] :project_arn
+    #   The Amazon Resource Name (ARN) of the project for which you want to
+    #   create a network profile.
+    #
+    # @option params [required, String] :name
+    #   The name you wish to specify for the new network profile.
+    #
+    # @option params [String] :description
+    #   The description of the network profile.
+    #
+    # @option params [String] :type
+    #   The type of network profile you wish to create. Valid values are
+    #   listed below.
+    #
+    # @option params [Integer] :uplink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #
+    # @option params [Integer] :downlink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #
+    # @option params [Integer] :uplink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :downlink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :uplink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :downlink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :uplink_loss_percent
+    #   Proportion of transmitted packets that fail to arrive from 0 to 100
+    #   percent.
+    #
+    # @option params [Integer] :downlink_loss_percent
+    #   Proportion of received packets that fail to arrive from 0 to 100
+    #   percent.
+    #
+    # @return [Types::CreateNetworkProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNetworkProfileResult#network_profile #network_profile} => Types::NetworkProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_network_profile({
+    #     project_arn: "AmazonResourceName", # required
+    #     name: "Name", # required
+    #     description: "Message",
+    #     type: "CURATED", # accepts CURATED, PRIVATE
+    #     uplink_bandwidth_bits: 1,
+    #     downlink_bandwidth_bits: 1,
+    #     uplink_delay_ms: 1,
+    #     downlink_delay_ms: 1,
+    #     uplink_jitter_ms: 1,
+    #     downlink_jitter_ms: 1,
+    #     uplink_loss_percent: 1,
+    #     downlink_loss_percent: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile.arn #=> String
+    #   resp.network_profile.name #=> String
+    #   resp.network_profile.description #=> String
+    #   resp.network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.network_profile.uplink_delay_ms #=> Integer
+    #   resp.network_profile.downlink_delay_ms #=> Integer
+    #   resp.network_profile.uplink_jitter_ms #=> Integer
+    #   resp.network_profile.downlink_jitter_ms #=> Integer
+    #   resp.network_profile.uplink_loss_percent #=> Integer
+    #   resp.network_profile.downlink_loss_percent #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfile AWS API Documentation
+    #
+    # @overload create_network_profile(params = {})
+    # @param [Hash] params ({})
+    def create_network_profile(params = {}, options = {})
+      req = build_request(:create_network_profile, params)
+      req.send_request(options)
+    end
+
     # Creates a new project.
     #
     # @option params [required, String] :name
     #   The project's name.
+    #
+    # @option params [Integer] :default_job_timeout_minutes
+    #   Sets the execution timeout value (in minutes) for a project. All test
+    #   runs in this project will use the specified execution timeout value
+    #   unless overridden when scheduling a run.
     #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -219,12 +319,14 @@ module Aws::DeviceFarm
     #
     #   resp = client.create_project({
     #     name: "Name", # required
+    #     default_job_timeout_minutes: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.project.arn #=> String
     #   resp.project.name #=> String
+    #   resp.project.default_job_timeout_minutes #=> Integer
     #   resp.project.created #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProject AWS API Documentation
@@ -431,6 +533,29 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Deletes a network profile.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the network profile you want to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_network_profile({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfile AWS API Documentation
+    #
+    # @overload delete_network_profile(params = {})
+    # @param [Hash] params ({})
+    def delete_network_profile(params = {}, options = {})
+      req = build_request(:delete_network_profile, params)
+      req.send_request(options)
+    end
+
     # Deletes an AWS Device Farm project, given the project ARN.
     #
     # **Note** Deleting this resource does not stop an in-progress run.
@@ -540,6 +665,12 @@ module Aws::DeviceFarm
     #   resp.account_settings.unmetered_devices["DevicePlatform"] #=> Integer
     #   resp.account_settings.unmetered_remote_access_devices #=> Hash
     #   resp.account_settings.unmetered_remote_access_devices["DevicePlatform"] #=> Integer
+    #   resp.account_settings.max_job_timeout_minutes #=> Integer
+    #   resp.account_settings.trial_minutes.total #=> Float
+    #   resp.account_settings.trial_minutes.remaining #=> Float
+    #   resp.account_settings.max_slots #=> Hash
+    #   resp.account_settings.max_slots["String"] #=> Integer
+    #   resp.account_settings.default_job_timeout_minutes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettings AWS API Documentation
     #
@@ -619,8 +750,8 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
-    #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePool AWS API Documentation
@@ -675,6 +806,9 @@ module Aws::DeviceFarm
     #
     #   * XCTEST\_UI: The XCode UI test type.
     #
+    # @option params [Types::ScheduleRunTest] :test
+    #   Information about the uploaded test to be run against the device pool.
+    #
     # @return [Types::GetDevicePoolCompatibilityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDevicePoolCompatibilityResult#compatible_devices #compatible_devices} => Array&lt;Types::DevicePoolCompatibilityResult&gt;
@@ -686,6 +820,14 @@ module Aws::DeviceFarm
     #     device_pool_arn: "AmazonResourceName", # required
     #     app_arn: "AmazonResourceName",
     #     test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #     test: {
+    #       type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #       test_package_arn: "AmazonResourceName",
+    #       filter: "Filter",
+    #       parameters: {
+    #         "String" => "String",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -714,7 +856,7 @@ module Aws::DeviceFarm
     #   resp.compatible_devices[0].compatible #=> Boolean
     #   resp.compatible_devices[0].incompatibility_messages #=> Array
     #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
+    #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
     #   resp.incompatible_devices #=> Array
     #   resp.incompatible_devices[0].device.arn #=> String
     #   resp.incompatible_devices[0].device.name #=> String
@@ -739,7 +881,7 @@ module Aws::DeviceFarm
     #   resp.incompatible_devices[0].compatible #=> Boolean
     #   resp.incompatible_devices[0].incompatibility_messages #=> Array
     #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
-    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
+    #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibility AWS API Documentation
     #
@@ -813,6 +955,46 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def get_job(params = {}, options = {})
       req = build_request(:get_job, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a network profile.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the network profile you want to
+    #   return information about.
+    #
+    # @return [Types::GetNetworkProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNetworkProfileResult#network_profile #network_profile} => Types::NetworkProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_network_profile({
+    #     arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile.arn #=> String
+    #   resp.network_profile.name #=> String
+    #   resp.network_profile.description #=> String
+    #   resp.network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.network_profile.uplink_delay_ms #=> Integer
+    #   resp.network_profile.downlink_delay_ms #=> Integer
+    #   resp.network_profile.uplink_jitter_ms #=> Integer
+    #   resp.network_profile.downlink_jitter_ms #=> Integer
+    #   resp.network_profile.uplink_loss_percent #=> Integer
+    #   resp.network_profile.downlink_loss_percent #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfile AWS API Documentation
+    #
+    # @overload get_network_profile(params = {})
+    # @param [Hash] params ({})
+    def get_network_profile(params = {}, options = {})
+      req = build_request(:get_network_profile, params)
       req.send_request(options)
     end
 
@@ -897,6 +1079,7 @@ module Aws::DeviceFarm
     #
     #   resp.project.arn #=> String
     #   resp.project.name #=> String
+    #   resp.project.default_job_timeout_minutes #=> Integer
     #   resp.project.created #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProject AWS API Documentation
@@ -1009,6 +1192,18 @@ module Aws::DeviceFarm
     #   resp.run.device_minutes.total #=> Float
     #   resp.run.device_minutes.metered #=> Float
     #   resp.run.device_minutes.unmetered #=> Float
+    #   resp.run.network_profile.arn #=> String
+    #   resp.run.network_profile.name #=> String
+    #   resp.run.network_profile.description #=> String
+    #   resp.run.network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.run.network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.run.network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.run.network_profile.uplink_delay_ms #=> Integer
+    #   resp.run.network_profile.downlink_delay_ms #=> Integer
+    #   resp.run.network_profile.uplink_jitter_ms #=> Integer
+    #   resp.run.network_profile.downlink_jitter_ms #=> Integer
+    #   resp.run.network_profile.uplink_loss_percent #=> Integer
+    #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRun AWS API Documentation
     #
@@ -1286,8 +1481,8 @@ module Aws::DeviceFarm
     #   resp.device_pools[0].description #=> String
     #   resp.device_pools[0].type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pools[0].rules #=> Array
-    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
-    #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
+    #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pools[0].rules[0].value #=> String
     #   resp.next_token #=> String
     #
@@ -1431,6 +1626,99 @@ module Aws::DeviceFarm
       req.send_request(options)
     end
 
+    # Returns the list of available network profiles.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the project for which you want to
+    #   list network profiles.
+    #
+    # @option params [String] :type
+    #   The type of network profile you wish to return information about.
+    #   Valid values are listed below.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListNetworkProfilesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNetworkProfilesResult#network_profiles #network_profiles} => Array&lt;Types::NetworkProfile&gt;
+    #   * {Types::ListNetworkProfilesResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_network_profiles({
+    #     arn: "AmazonResourceName", # required
+    #     type: "CURATED", # accepts CURATED, PRIVATE
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profiles #=> Array
+    #   resp.network_profiles[0].arn #=> String
+    #   resp.network_profiles[0].name #=> String
+    #   resp.network_profiles[0].description #=> String
+    #   resp.network_profiles[0].type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.network_profiles[0].uplink_bandwidth_bits #=> Integer
+    #   resp.network_profiles[0].downlink_bandwidth_bits #=> Integer
+    #   resp.network_profiles[0].uplink_delay_ms #=> Integer
+    #   resp.network_profiles[0].downlink_delay_ms #=> Integer
+    #   resp.network_profiles[0].uplink_jitter_ms #=> Integer
+    #   resp.network_profiles[0].downlink_jitter_ms #=> Integer
+    #   resp.network_profiles[0].uplink_loss_percent #=> Integer
+    #   resp.network_profiles[0].downlink_loss_percent #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfiles AWS API Documentation
+    #
+    # @overload list_network_profiles(params = {})
+    # @param [Hash] params ({})
+    def list_network_profiles(params = {}, options = {})
+      req = build_request(:list_network_profiles, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of offering promotions. Each offering promotion record
+    # contains the ID and description of the promotion. The API returns a
+    # `NotEligible` error if the caller is not permitted to invoke the
+    # operation. Contact
+    # [aws-devicefarm-support@amazon.com](mailto:aws-devicefarm-support@amazon.com)
+    # if you believe that you should be able to invoke this operation.
+    #
+    # @option params [String] :next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #
+    # @return [Types::ListOfferingPromotionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOfferingPromotionsResult#offering_promotions #offering_promotions} => Array&lt;Types::OfferingPromotion&gt;
+    #   * {Types::ListOfferingPromotionsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_offering_promotions({
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.offering_promotions #=> Array
+    #   resp.offering_promotions[0].id #=> String
+    #   resp.offering_promotions[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotions AWS API Documentation
+    #
+    # @overload list_offering_promotions(params = {})
+    # @param [Hash] params ({})
+    def list_offering_promotions(params = {}, options = {})
+      req = build_request(:list_offering_promotions, params)
+      req.send_request(options)
+    end
+
     # Returns a list of all historical purchases, renewals, and system
     # renewal transactions for an AWS account. The list is paginated and
     # ordered by a descending timestamp (most recent transactions are
@@ -1470,6 +1758,7 @@ module Aws::DeviceFarm
     #   resp.offering_transactions[0].offering_status.quantity #=> Integer
     #   resp.offering_transactions[0].offering_status.effective_on #=> Time
     #   resp.offering_transactions[0].transaction_id #=> String
+    #   resp.offering_transactions[0].offering_promotion_id #=> String
     #   resp.offering_transactions[0].created_on #=> Time
     #   resp.offering_transactions[0].cost.amount #=> Float
     #   resp.offering_transactions[0].cost.currency_code #=> String, one of "USD"
@@ -1559,6 +1848,7 @@ module Aws::DeviceFarm
     #   resp.projects #=> Array
     #   resp.projects[0].arn #=> String
     #   resp.projects[0].name #=> String
+    #   resp.projects[0].default_job_timeout_minutes #=> Integer
     #   resp.projects[0].created #=> Time
     #   resp.next_token #=> String
     #
@@ -1690,6 +1980,18 @@ module Aws::DeviceFarm
     #   resp.runs[0].device_minutes.total #=> Float
     #   resp.runs[0].device_minutes.metered #=> Float
     #   resp.runs[0].device_minutes.unmetered #=> Float
+    #   resp.runs[0].network_profile.arn #=> String
+    #   resp.runs[0].network_profile.name #=> String
+    #   resp.runs[0].network_profile.description #=> String
+    #   resp.runs[0].network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.runs[0].network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.runs[0].network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.runs[0].network_profile.uplink_delay_ms #=> Integer
+    #   resp.runs[0].network_profile.downlink_delay_ms #=> Integer
+    #   resp.runs[0].network_profile.uplink_jitter_ms #=> Integer
+    #   resp.runs[0].network_profile.downlink_jitter_ms #=> Integer
+    #   resp.runs[0].network_profile.uplink_loss_percent #=> Integer
+    #   resp.runs[0].network_profile.downlink_loss_percent #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRuns AWS API Documentation
@@ -1980,6 +2282,9 @@ module Aws::DeviceFarm
     #   The number of device slots you wish to purchase in an offering
     #   request.
     #
+    # @option params [String] :offering_promotion_id
+    #   The ID of the offering promotion to be applied to the purchase.
+    #
     # @return [Types::PurchaseOfferingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PurchaseOfferingResult#offering_transaction #offering_transaction} => Types::OfferingTransaction
@@ -1989,6 +2294,7 @@ module Aws::DeviceFarm
     #   resp = client.purchase_offering({
     #     offering_id: "OfferingIdentifier",
     #     quantity: 1,
+    #     offering_promotion_id: "OfferingPromotionIdentifier",
     #   })
     #
     # @example Response structure
@@ -2005,6 +2311,7 @@ module Aws::DeviceFarm
     #   resp.offering_transaction.offering_status.quantity #=> Integer
     #   resp.offering_transaction.offering_status.effective_on #=> Time
     #   resp.offering_transaction.transaction_id #=> String
+    #   resp.offering_transaction.offering_promotion_id #=> String
     #   resp.offering_transaction.created_on #=> Time
     #   resp.offering_transaction.cost.amount #=> Float
     #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
@@ -2056,6 +2363,7 @@ module Aws::DeviceFarm
     #   resp.offering_transaction.offering_status.quantity #=> Integer
     #   resp.offering_transaction.offering_status.effective_on #=> Time
     #   resp.offering_transaction.transaction_id #=> String
+    #   resp.offering_transaction.offering_promotion_id #=> String
     #   resp.offering_transaction.created_on #=> Time
     #   resp.offering_transaction.cost.amount #=> Float
     #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
@@ -2088,6 +2396,10 @@ module Aws::DeviceFarm
     #
     # @option params [Types::ScheduleRunConfiguration] :configuration
     #   Information about the settings for the run to be scheduled.
+    #
+    # @option params [Types::ExecutionConfiguration] :execution_configuration
+    #   Specifies configuration information about a test run, such as the
+    #   execution timeout (in minutes).
     #
     # @return [Types::ScheduleRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2125,6 +2437,11 @@ module Aws::DeviceFarm
     #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED", # accepts METERED, UNMETERED
     #     },
+    #     execution_configuration: {
+    #       job_timeout_minutes: 1,
+    #       accounts_cleanup: false,
+    #       app_packages_cleanup: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -2152,6 +2469,18 @@ module Aws::DeviceFarm
     #   resp.run.device_minutes.total #=> Float
     #   resp.run.device_minutes.metered #=> Float
     #   resp.run.device_minutes.unmetered #=> Float
+    #   resp.run.network_profile.arn #=> String
+    #   resp.run.network_profile.name #=> String
+    #   resp.run.network_profile.description #=> String
+    #   resp.run.network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.run.network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.run.network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.run.network_profile.uplink_delay_ms #=> Integer
+    #   resp.run.network_profile.downlink_delay_ms #=> Integer
+    #   resp.run.network_profile.uplink_jitter_ms #=> Integer
+    #   resp.run.network_profile.downlink_jitter_ms #=> Integer
+    #   resp.run.network_profile.uplink_loss_percent #=> Integer
+    #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRun AWS API Documentation
     #
@@ -2270,6 +2599,18 @@ module Aws::DeviceFarm
     #   resp.run.device_minutes.total #=> Float
     #   resp.run.device_minutes.metered #=> Float
     #   resp.run.device_minutes.unmetered #=> Float
+    #   resp.run.network_profile.arn #=> String
+    #   resp.run.network_profile.name #=> String
+    #   resp.run.network_profile.description #=> String
+    #   resp.run.network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.run.network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.run.network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.run.network_profile.uplink_delay_ms #=> Integer
+    #   resp.run.network_profile.downlink_delay_ms #=> Integer
+    #   resp.run.network_profile.uplink_jitter_ms #=> Integer
+    #   resp.run.network_profile.downlink_jitter_ms #=> Integer
+    #   resp.run.network_profile.uplink_loss_percent #=> Integer
+    #   resp.run.network_profile.downlink_loss_percent #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRun AWS API Documentation
     #
@@ -2311,8 +2652,8 @@ module Aws::DeviceFarm
     #     description: "Message",
     #     rules: [
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
-    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       },
     #     ],
@@ -2325,8 +2666,8 @@ module Aws::DeviceFarm
     #   resp.device_pool.description #=> String
     #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
     #   resp.device_pool.rules #=> Array
-    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
-    #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
+    #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED", "APPIUM_VERSION"
+    #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN", "CONTAINS"
     #   resp.device_pool.rules[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePool AWS API Documentation
@@ -2335,6 +2676,101 @@ module Aws::DeviceFarm
     # @param [Hash] params ({})
     def update_device_pool(params = {}, options = {})
       req = build_request(:update_device_pool, params)
+      req.send_request(options)
+    end
+
+    # Updates the network profile with specific settings.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the project that you wish to update
+    #   network profile settings.
+    #
+    # @option params [String] :name
+    #   The name of the network profile about which you are returning
+    #   information.
+    #
+    # @option params [String] :description
+    #   The descriptoin of the network profile about which you are returning
+    #   information.
+    #
+    # @option params [String] :type
+    #   The type of network profile you wish to return information about.
+    #   Valid values are listed below.
+    #
+    # @option params [Integer] :uplink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #
+    # @option params [Integer] :downlink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #
+    # @option params [Integer] :uplink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :downlink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :uplink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :downlink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as an
+    #   integer from 0 to 2000.
+    #
+    # @option params [Integer] :uplink_loss_percent
+    #   Proportion of transmitted packets that fail to arrive from 0 to 100
+    #   percent.
+    #
+    # @option params [Integer] :downlink_loss_percent
+    #   Proportion of received packets that fail to arrive from 0 to 100
+    #   percent.
+    #
+    # @return [Types::UpdateNetworkProfileResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNetworkProfileResult#network_profile #network_profile} => Types::NetworkProfile
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_network_profile({
+    #     arn: "AmazonResourceName", # required
+    #     name: "Name",
+    #     description: "Message",
+    #     type: "CURATED", # accepts CURATED, PRIVATE
+    #     uplink_bandwidth_bits: 1,
+    #     downlink_bandwidth_bits: 1,
+    #     uplink_delay_ms: 1,
+    #     downlink_delay_ms: 1,
+    #     uplink_jitter_ms: 1,
+    #     downlink_jitter_ms: 1,
+    #     uplink_loss_percent: 1,
+    #     downlink_loss_percent: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.network_profile.arn #=> String
+    #   resp.network_profile.name #=> String
+    #   resp.network_profile.description #=> String
+    #   resp.network_profile.type #=> String, one of "CURATED", "PRIVATE"
+    #   resp.network_profile.uplink_bandwidth_bits #=> Integer
+    #   resp.network_profile.downlink_bandwidth_bits #=> Integer
+    #   resp.network_profile.uplink_delay_ms #=> Integer
+    #   resp.network_profile.downlink_delay_ms #=> Integer
+    #   resp.network_profile.uplink_jitter_ms #=> Integer
+    #   resp.network_profile.downlink_jitter_ms #=> Integer
+    #   resp.network_profile.uplink_loss_percent #=> Integer
+    #   resp.network_profile.downlink_loss_percent #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfile AWS API Documentation
+    #
+    # @overload update_network_profile(params = {})
+    # @param [Hash] params ({})
+    def update_network_profile(params = {}, options = {})
+      req = build_request(:update_network_profile, params)
       req.send_request(options)
     end
 
@@ -2349,6 +2785,10 @@ module Aws::DeviceFarm
     #   A string representing the new name of the project that you are
     #   updating.
     #
+    # @option params [Integer] :default_job_timeout_minutes
+    #   The number of minutes a test run in the project will execute before it
+    #   times out.
+    #
     # @return [Types::UpdateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateProjectResult#project #project} => Types::Project
@@ -2358,12 +2798,14 @@ module Aws::DeviceFarm
     #   resp = client.update_project({
     #     arn: "AmazonResourceName", # required
     #     name: "Name",
+    #     default_job_timeout_minutes: 1,
     #   })
     #
     # @example Response structure
     #
     #   resp.project.arn #=> String
     #   resp.project.name #=> String
+    #   resp.project.default_job_timeout_minutes #=> Integer
     #   resp.project.created #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProject AWS API Documentation
@@ -2388,7 +2830,7 @@ module Aws::DeviceFarm
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devicefarm'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

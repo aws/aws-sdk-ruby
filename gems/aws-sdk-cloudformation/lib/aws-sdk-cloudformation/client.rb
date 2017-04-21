@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -45,6 +46,7 @@ module Aws::CloudFormation
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -2125,7 +2127,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -2191,12 +2193,13 @@ module Aws::CloudFormation
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name           | params             | :delay   | :max_attempts |
-    # | --------------------- | ------------------ | -------- | ------------- |
-    # | stack_create_complete | {#describe_stacks} | 30       | 120           |
-    # | stack_delete_complete | {#describe_stacks} | 30       | 120           |
-    # | stack_exists          | {#describe_stacks} | 5        | 20            |
-    # | stack_update_complete | {#describe_stacks} | 30       | 120           |
+    # | waiter_name                | params                 | :delay   | :max_attempts |
+    # | -------------------------- | ---------------------- | -------- | ------------- |
+    # | change_set_create_complete | {#describe_change_set} | 30       | 120           |
+    # | stack_create_complete      | {#describe_stacks}     | 30       | 120           |
+    # | stack_delete_complete      | {#describe_stacks}     | 30       | 120           |
+    # | stack_exists               | {#describe_stacks}     | 5        | 20            |
+    # | stack_update_complete      | {#describe_stacks}     | 30       | 120           |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -2247,6 +2250,7 @@ module Aws::CloudFormation
 
     def waiters
       {
+        change_set_create_complete: Waiters::ChangeSetCreateComplete,
         stack_create_complete: Waiters::StackCreateComplete,
         stack_delete_complete: Waiters::StackDeleteComplete,
         stack_exists: Waiters::StackExists,

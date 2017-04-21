@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc6 (2017-04-21)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-resourcegroupstaggingapi` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lexmodelbuildingservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-codestar` gem.
+
 3.0.0.rc5 (2017-03-09)
 ------------------
 

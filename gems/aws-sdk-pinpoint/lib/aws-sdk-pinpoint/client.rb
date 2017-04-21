@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -45,6 +46,7 @@ module Aws::Pinpoint
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -148,6 +150,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteCampaignRequest] :write_campaign_request
+    #   Used to create a campaign.
     #
     # @return [Types::CreateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -435,6 +438,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteSegmentRequest] :write_segment_request
+    #   Segment definition.
     #
     # @return [Types::CreateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -486,6 +490,12 @@ module Aws::Pinpoint
     #             values: ["__string"],
     #           },
     #         },
+    #         user_attributes: {
+    #           "__string" => {
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"],
+    #           },
+    #         },
     #       },
     #       name: "__string",
     #     },
@@ -519,6 +529,10 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.user_attributes #=> Hash
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
     #   resp.segment_response.import_definition.external_id #=> String
     #   resp.segment_response.import_definition.format #=> String, one of "CSV", "JSON"
@@ -687,6 +701,37 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Deletes the event stream for an app.
+    #
+    # @option params [required, String] :application_id
+    #   Application Id.
+    #
+    # @return [Types::DeleteEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteEventStreamResponse#event_stream #event_stream} => Types::EventStream
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_stream({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_stream.application_id #=> String
+    #   resp.event_stream.destination_stream_arn #=> String
+    #   resp.event_stream.external_id #=> String
+    #   resp.event_stream.last_modified_date #=> String
+    #   resp.event_stream.last_updated_by #=> String
+    #   resp.event_stream.role_arn #=> String
+    #
+    # @overload delete_event_stream(params = {})
+    # @param [Hash] params ({})
+    def delete_event_stream(params = {}, options = {})
+      req = build_request(:delete_event_stream, params)
+      req.send_request(options)
+    end
+
     # Deletes the GCM channel for an app.
     #
     # @option params [required, String] :application_id
@@ -765,6 +810,10 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.user_attributes #=> Hash
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
     #   resp.segment_response.import_definition.external_id #=> String
     #   resp.segment_response.import_definition.format #=> String, one of "CSV", "JSON"
@@ -998,6 +1047,8 @@ module Aws::Pinpoint
     #   resp.activities_response.item[0].start #=> String
     #   resp.activities_response.item[0].state #=> String
     #   resp.activities_response.item[0].successful_endpoint_count #=> Integer
+    #   resp.activities_response.item[0].timezones_completed_count #=> Integer
+    #   resp.activities_response.item[0].timezones_total_count #=> Integer
     #   resp.activities_response.item[0].total_endpoint_count #=> Integer
     #   resp.activities_response.item[0].treatment_id #=> String
     #
@@ -1008,7 +1059,7 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Returns information about your campaign versions.
+    # Returns information about a specific version of a campaign.
     #
     # @option params [required, String] :application_id
     #
@@ -1426,16 +1477,47 @@ module Aws::Pinpoint
     #   resp.endpoint_response.metrics["__string"] #=> Float
     #   resp.endpoint_response.opt_out #=> String
     #   resp.endpoint_response.request_id #=> String
-    #   resp.endpoint_response.shard_id #=> String
     #   resp.endpoint_response.user.user_attributes #=> Hash
     #   resp.endpoint_response.user.user_attributes["__string"] #=> Array
     #   resp.endpoint_response.user.user_attributes["__string"][0] #=> String
     #   resp.endpoint_response.user.user_id #=> String
+    #   resp.endpoint_response.shard_id #=> String
     #
     # @overload get_endpoint(params = {})
     # @param [Hash] params ({})
     def get_endpoint(params = {}, options = {})
       req = build_request(:get_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Returns the event stream for an app.
+    #
+    # @option params [required, String] :application_id
+    #   Application Id.
+    #
+    # @return [Types::GetEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventStreamResponse#event_stream #event_stream} => Types::EventStream
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_stream({
+    #     application_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_stream.application_id #=> String
+    #   resp.event_stream.destination_stream_arn #=> String
+    #   resp.event_stream.external_id #=> String
+    #   resp.event_stream.last_modified_date #=> String
+    #   resp.event_stream.last_updated_by #=> String
+    #   resp.event_stream.role_arn #=> String
+    #
+    # @overload get_event_stream(params = {})
+    # @param [Hash] params ({})
+    def get_event_stream(params = {}, options = {})
+      req = build_request(:get_event_stream, params)
       req.send_request(options)
     end
 
@@ -1618,6 +1700,10 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.user_attributes #=> Hash
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
     #   resp.segment_response.import_definition.external_id #=> String
     #   resp.segment_response.import_definition.format #=> String, one of "CSV", "JSON"
@@ -1740,6 +1826,10 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.user_attributes #=> Hash
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
     #   resp.segment_response.import_definition.external_id #=> String
     #   resp.segment_response.import_definition.format #=> String, one of "CSV", "JSON"
@@ -1810,6 +1900,10 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segments_response.item[0].dimensions.location.country.values #=> Array
     #   resp.segments_response.item[0].dimensions.location.country.values[0] #=> String
+    #   resp.segments_response.item[0].dimensions.user_attributes #=> Hash
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].id #=> String
     #   resp.segments_response.item[0].import_definition.external_id #=> String
     #   resp.segments_response.item[0].import_definition.format #=> String, one of "CSV", "JSON"
@@ -1878,6 +1972,10 @@ module Aws::Pinpoint
     #   resp.segments_response.item[0].dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segments_response.item[0].dimensions.location.country.values #=> Array
     #   resp.segments_response.item[0].dimensions.location.country.values[0] #=> String
+    #   resp.segments_response.item[0].dimensions.user_attributes #=> Hash
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segments_response.item[0].dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segments_response.item[0].id #=> String
     #   resp.segments_response.item[0].import_definition.external_id #=> String
     #   resp.segments_response.item[0].import_definition.format #=> String, one of "CSV", "JSON"
@@ -1897,9 +1995,49 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Use to create or update the event stream for an app.
+    #
+    # @option params [required, String] :application_id
+    #   Application Id.
+    #
+    # @option params [required, Types::WriteEventStream] :write_event_stream
+    #   Write event stream wrapper.
+    #
+    # @return [Types::PutEventStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutEventStreamResponse#event_stream #event_stream} => Types::EventStream
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_event_stream({
+    #     application_id: "__string", # required
+    #     write_event_stream: { # required
+    #       destination_stream_arn: "__string",
+    #       external_id: "__string",
+    #       role_arn: "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_stream.application_id #=> String
+    #   resp.event_stream.destination_stream_arn #=> String
+    #   resp.event_stream.external_id #=> String
+    #   resp.event_stream.last_modified_date #=> String
+    #   resp.event_stream.last_updated_by #=> String
+    #   resp.event_stream.role_arn #=> String
+    #
+    # @overload put_event_stream(params = {})
+    # @param [Hash] params ({})
+    def put_event_stream(params = {}, options = {})
+      req = build_request(:put_event_stream, params)
+      req.send_request(options)
+    end
+
     # Use to update the APNs channel for an app.
     #
     # @option params [required, Types::APNSChannelRequest] :apns_channel_request
+    #   Apple Push Notification Service channel definition.
     #
     # @option params [required, String] :application_id
     #
@@ -1940,6 +2078,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::WriteApplicationSettingsRequest] :write_application_settings_request
+    #   Creating application setting request
     #
     # @return [Types::UpdateApplicationSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1984,6 +2123,7 @@ module Aws::Pinpoint
     # @option params [required, String] :campaign_id
     #
     # @option params [required, Types::WriteCampaignRequest] :write_campaign_request
+    #   Used to create a campaign.
     #
     # @return [Types::UpdateCampaignResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2217,6 +2357,7 @@ module Aws::Pinpoint
     # @option params [required, String] :endpoint_id
     #
     # @option params [required, Types::EndpointRequest] :endpoint_request
+    #   Endpoint update request
     #
     # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2279,11 +2420,12 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
-    # Use to update your endpoints.
+    # Use to update a batch of endpoints.
     #
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::EndpointBatchRequest] :endpoint_batch_request
+    #   Endpoint batch update request.
     #
     # @return [Types::UpdateEndpointsBatchResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2355,6 +2497,7 @@ module Aws::Pinpoint
     # @option params [required, String] :application_id
     #
     # @option params [required, Types::GCMChannelRequest] :gcm_channel_request
+    #   Google Cloud Messaging credentials
     #
     # @return [Types::UpdateGcmChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2395,6 +2538,7 @@ module Aws::Pinpoint
     # @option params [required, String] :segment_id
     #
     # @option params [required, Types::WriteSegmentRequest] :write_segment_request
+    #   Segment definition.
     #
     # @return [Types::UpdateSegmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2447,6 +2591,12 @@ module Aws::Pinpoint
     #             values: ["__string"],
     #           },
     #         },
+    #         user_attributes: {
+    #           "__string" => {
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"],
+    #           },
+    #         },
     #       },
     #       name: "__string",
     #     },
@@ -2480,6 +2630,10 @@ module Aws::Pinpoint
     #   resp.segment_response.dimensions.location.country.dimension_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
     #   resp.segment_response.dimensions.location.country.values #=> Array
     #   resp.segment_response.dimensions.location.country.values[0] #=> String
+    #   resp.segment_response.dimensions.user_attributes #=> Hash
+    #   resp.segment_response.dimensions.user_attributes["__string"].attribute_type #=> String, one of "INCLUSIVE", "EXCLUSIVE"
+    #   resp.segment_response.dimensions.user_attributes["__string"].values #=> Array
+    #   resp.segment_response.dimensions.user_attributes["__string"].values[0] #=> String
     #   resp.segment_response.id #=> String
     #   resp.segment_response.import_definition.external_id #=> String
     #   resp.segment_response.import_definition.format #=> String, one of "CSV", "JSON"
@@ -2511,7 +2665,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

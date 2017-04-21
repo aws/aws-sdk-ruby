@@ -149,11 +149,15 @@ module Aws::GameLift
     NonZeroAndMaxString = Shapes::StringShape.new(name: 'NonZeroAndMaxString')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
+    PlacedPlayerSession = Shapes::StructureShape.new(name: 'PlacedPlayerSession')
+    PlacedPlayerSessionList = Shapes::ListShape.new(name: 'PlacedPlayerSessionList')
     PlayerData = Shapes::StringShape.new(name: 'PlayerData')
     PlayerDataMap = Shapes::MapShape.new(name: 'PlayerDataMap')
     PlayerIdList = Shapes::ListShape.new(name: 'PlayerIdList')
     PlayerLatency = Shapes::StructureShape.new(name: 'PlayerLatency')
     PlayerLatencyList = Shapes::ListShape.new(name: 'PlayerLatencyList')
+    PlayerLatencyPolicy = Shapes::StructureShape.new(name: 'PlayerLatencyPolicy')
+    PlayerLatencyPolicyList = Shapes::ListShape.new(name: 'PlayerLatencyPolicyList')
     PlayerSession = Shapes::StructureShape.new(name: 'PlayerSession')
     PlayerSessionCreationPolicy = Shapes::StringShape.new(name: 'PlayerSessionCreationPolicy')
     PlayerSessionId = Shapes::StringShape.new(name: 'PlayerSessionId')
@@ -277,6 +281,7 @@ module Aws::GameLift
     CreateGameSessionInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     CreateGameSessionInput.add_member(:creator_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "CreatorId"))
     CreateGameSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: IdStringModel, location_name: "GameSessionId"))
+    CreateGameSessionInput.add_member(:idempotency_token, Shapes::ShapeRef.new(shape: IdStringModel, location_name: "IdempotencyToken"))
     CreateGameSessionInput.struct_class = Types::CreateGameSessionInput
 
     CreateGameSessionOutput.add_member(:game_session, Shapes::ShapeRef.new(shape: GameSession, location_name: "GameSession"))
@@ -284,6 +289,7 @@ module Aws::GameLift
 
     CreateGameSessionQueueInput.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, required: true, location_name: "Name"))
     CreateGameSessionQueueInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutInSeconds"))
+    CreateGameSessionQueueInput.add_member(:player_latency_policies, Shapes::ShapeRef.new(shape: PlayerLatencyPolicyList, location_name: "PlayerLatencyPolicies"))
     CreateGameSessionQueueInput.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
     CreateGameSessionQueueInput.struct_class = Types::CreateGameSessionQueueInput
 
@@ -565,15 +571,21 @@ module Aws::GameLift
     GameSessionPlacement.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
     GameSessionPlacement.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaximumPlayerSessionCount"))
     GameSessionPlacement.add_member(:game_session_name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionName"))
+    GameSessionPlacement.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
     GameSessionPlacement.add_member(:game_session_arn, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionArn"))
     GameSessionPlacement.add_member(:game_session_region, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionRegion"))
     GameSessionPlacement.add_member(:player_latencies, Shapes::ShapeRef.new(shape: PlayerLatencyList, location_name: "PlayerLatencies"))
     GameSessionPlacement.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     GameSessionPlacement.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    GameSessionPlacement.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+    GameSessionPlacement.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
+    GameSessionPlacement.add_member(:placed_player_sessions, Shapes::ShapeRef.new(shape: PlacedPlayerSessionList, location_name: "PlacedPlayerSessions"))
     GameSessionPlacement.struct_class = Types::GameSessionPlacement
 
     GameSessionQueue.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, location_name: "Name"))
+    GameSessionQueue.add_member(:game_session_queue_arn, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionQueueArn"))
     GameSessionQueue.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutInSeconds"))
+    GameSessionQueue.add_member(:player_latency_policies, Shapes::ShapeRef.new(shape: PlayerLatencyPolicyList, location_name: "PlayerLatencyPolicies"))
     GameSessionQueue.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
     GameSessionQueue.struct_class = Types::GameSessionQueue
 
@@ -657,6 +669,12 @@ module Aws::GameLift
     ListFleetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
     ListFleetsOutput.struct_class = Types::ListFleetsOutput
 
+    PlacedPlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
+    PlacedPlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
+    PlacedPlayerSession.struct_class = Types::PlacedPlayerSession
+
+    PlacedPlayerSessionList.member = Shapes::ShapeRef.new(shape: PlacedPlayerSession)
+
     PlayerDataMap.key = Shapes::ShapeRef.new(shape: NonZeroAndMaxString)
     PlayerDataMap.value = Shapes::ShapeRef.new(shape: PlayerData)
 
@@ -668,6 +686,12 @@ module Aws::GameLift
     PlayerLatency.struct_class = Types::PlayerLatency
 
     PlayerLatencyList.member = Shapes::ShapeRef.new(shape: PlayerLatency)
+
+    PlayerLatencyPolicy.add_member(:maximum_individual_player_latency_milliseconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaximumIndividualPlayerLatencyMilliseconds"))
+    PlayerLatencyPolicy.add_member(:policy_duration_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "PolicyDurationSeconds"))
+    PlayerLatencyPolicy.struct_class = Types::PlayerLatencyPolicy
+
+    PlayerLatencyPolicyList.member = Shapes::ShapeRef.new(shape: PlayerLatencyPolicy)
 
     PlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
     PlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
@@ -834,6 +858,7 @@ module Aws::GameLift
 
     UpdateGameSessionQueueInput.add_member(:name, Shapes::ShapeRef.new(shape: GameSessionQueueName, required: true, location_name: "Name"))
     UpdateGameSessionQueueInput.add_member(:timeout_in_seconds, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TimeoutInSeconds"))
+    UpdateGameSessionQueueInput.add_member(:player_latency_policies, Shapes::ShapeRef.new(shape: PlayerLatencyPolicyList, location_name: "PlayerLatencyPolicies"))
     UpdateGameSessionQueueInput.add_member(:destinations, Shapes::ShapeRef.new(shape: GameSessionQueueDestinationList, location_name: "Destinations"))
     UpdateGameSessionQueueInput.struct_class = Types::UpdateGameSessionQueueInput
 

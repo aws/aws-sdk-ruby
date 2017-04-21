@@ -36,6 +36,8 @@ module Aws::Pinpoint
     DeleteApnsChannelResponse = Shapes::StructureShape.new(name: 'DeleteApnsChannelResponse')
     DeleteCampaignRequest = Shapes::StructureShape.new(name: 'DeleteCampaignRequest')
     DeleteCampaignResponse = Shapes::StructureShape.new(name: 'DeleteCampaignResponse')
+    DeleteEventStreamRequest = Shapes::StructureShape.new(name: 'DeleteEventStreamRequest')
+    DeleteEventStreamResponse = Shapes::StructureShape.new(name: 'DeleteEventStreamResponse')
     DeleteGcmChannelRequest = Shapes::StructureShape.new(name: 'DeleteGcmChannelRequest')
     DeleteGcmChannelResponse = Shapes::StructureShape.new(name: 'DeleteGcmChannelResponse')
     DeleteSegmentRequest = Shapes::StructureShape.new(name: 'DeleteSegmentRequest')
@@ -49,6 +51,7 @@ module Aws::Pinpoint
     EndpointRequest = Shapes::StructureShape.new(name: 'EndpointRequest')
     EndpointResponse = Shapes::StructureShape.new(name: 'EndpointResponse')
     EndpointUser = Shapes::StructureShape.new(name: 'EndpointUser')
+    EventStream = Shapes::StructureShape.new(name: 'EventStream')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     Format = Shapes::StringShape.new(name: 'Format')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
@@ -70,6 +73,8 @@ module Aws::Pinpoint
     GetCampaignsResponse = Shapes::StructureShape.new(name: 'GetCampaignsResponse')
     GetEndpointRequest = Shapes::StructureShape.new(name: 'GetEndpointRequest')
     GetEndpointResponse = Shapes::StructureShape.new(name: 'GetEndpointResponse')
+    GetEventStreamRequest = Shapes::StructureShape.new(name: 'GetEventStreamRequest')
+    GetEventStreamResponse = Shapes::StructureShape.new(name: 'GetEventStreamResponse')
     GetGcmChannelRequest = Shapes::StructureShape.new(name: 'GetGcmChannelRequest')
     GetGcmChannelResponse = Shapes::StructureShape.new(name: 'GetGcmChannelResponse')
     GetImportJobRequest = Shapes::StructureShape.new(name: 'GetImportJobRequest')
@@ -108,6 +113,8 @@ module Aws::Pinpoint
     MessageConfiguration = Shapes::StructureShape.new(name: 'MessageConfiguration')
     MethodNotAllowedException = Shapes::StructureShape.new(name: 'MethodNotAllowedException')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    PutEventStreamRequest = Shapes::StructureShape.new(name: 'PutEventStreamRequest')
+    PutEventStreamResponse = Shapes::StructureShape.new(name: 'PutEventStreamResponse')
     QuietTime = Shapes::StructureShape.new(name: 'QuietTime')
     RecencyDimension = Shapes::StructureShape.new(name: 'RecencyDimension')
     RecencyType = Shapes::StringShape.new(name: 'RecencyType')
@@ -139,12 +146,14 @@ module Aws::Pinpoint
     UpdateSegmentResponse = Shapes::StructureShape.new(name: 'UpdateSegmentResponse')
     WriteApplicationSettingsRequest = Shapes::StructureShape.new(name: 'WriteApplicationSettingsRequest')
     WriteCampaignRequest = Shapes::StructureShape.new(name: 'WriteCampaignRequest')
+    WriteEventStream = Shapes::StructureShape.new(name: 'WriteEventStream')
     WriteSegmentRequest = Shapes::StructureShape.new(name: 'WriteSegmentRequest')
     WriteTreatmentResource = Shapes::StructureShape.new(name: 'WriteTreatmentResource')
     __boolean = Shapes::BooleanShape.new(name: '__boolean')
     __double = Shapes::FloatShape.new(name: '__double')
     __integer = Shapes::IntegerShape.new(name: '__integer')
     __string = Shapes::StringShape.new(name: '__string')
+    __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
 
     APNSChannelRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: __string, location_name: "Certificate"))
     APNSChannelRequest.add_member(:private_key, Shapes::ShapeRef.new(shape: __string, location_name: "PrivateKey"))
@@ -172,6 +181,8 @@ module Aws::Pinpoint
     ActivityResponse.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "Start"))
     ActivityResponse.add_member(:state, Shapes::ShapeRef.new(shape: __string, location_name: "State"))
     ActivityResponse.add_member(:successful_endpoint_count, Shapes::ShapeRef.new(shape: __integer, location_name: "SuccessfulEndpointCount"))
+    ActivityResponse.add_member(:timezones_completed_count, Shapes::ShapeRef.new(shape: __integer, location_name: "TimezonesCompletedCount"))
+    ActivityResponse.add_member(:timezones_total_count, Shapes::ShapeRef.new(shape: __integer, location_name: "TimezonesTotalCount"))
     ActivityResponse.add_member(:total_endpoint_count, Shapes::ShapeRef.new(shape: __integer, location_name: "TotalEndpointCount"))
     ActivityResponse.add_member(:treatment_id, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentId"))
     ActivityResponse.struct_class = Types::ActivityResponse
@@ -268,6 +279,14 @@ module Aws::Pinpoint
     DeleteCampaignResponse[:payload] = :campaign_response
     DeleteCampaignResponse[:payload_member] = DeleteCampaignResponse.member(:campaign_response)
 
+    DeleteEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    DeleteEventStreamRequest.struct_class = Types::DeleteEventStreamRequest
+
+    DeleteEventStreamResponse.add_member(:event_stream, Shapes::ShapeRef.new(shape: EventStream, required: true, location_name: "EventStream"))
+    DeleteEventStreamResponse.struct_class = Types::DeleteEventStreamResponse
+    DeleteEventStreamResponse[:payload] = :event_stream
+    DeleteEventStreamResponse[:payload_member] = DeleteEventStreamResponse.member(:event_stream)
+
     DeleteGcmChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     DeleteGcmChannelRequest.struct_class = Types::DeleteGcmChannelRequest
 
@@ -347,13 +366,21 @@ module Aws::Pinpoint
     EndpointResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: MapOf__double, location_name: "Metrics"))
     EndpointResponse.add_member(:opt_out, Shapes::ShapeRef.new(shape: __string, location_name: "OptOut"))
     EndpointResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "RequestId"))
-    EndpointResponse.add_member(:shard_id, Shapes::ShapeRef.new(shape: __string, location_name: "ShardId"))
     EndpointResponse.add_member(:user, Shapes::ShapeRef.new(shape: EndpointUser, location_name: "User"))
+    EndpointResponse.add_member(:shard_id, Shapes::ShapeRef.new(shape: __string, location_name: "ShardId"))
     EndpointResponse.struct_class = Types::EndpointResponse
 
     EndpointUser.add_member(:user_attributes, Shapes::ShapeRef.new(shape: MapOfListOf__string, location_name: "UserAttributes"))
     EndpointUser.add_member(:user_id, Shapes::ShapeRef.new(shape: __string, location_name: "UserId"))
     EndpointUser.struct_class = Types::EndpointUser
+
+    EventStream.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApplicationId"))
+    EventStream.add_member(:destination_stream_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationStreamArn"))
+    EventStream.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "ExternalId"))
+    EventStream.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: __string, location_name: "LastModifiedDate"))
+    EventStream.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: __string, location_name: "LastUpdatedBy"))
+    EventStream.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    EventStream.struct_class = Types::EventStream
 
     GCMChannelRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
     GCMChannelRequest.struct_class = Types::GCMChannelRequest
@@ -444,6 +471,14 @@ module Aws::Pinpoint
     GetEndpointResponse.struct_class = Types::GetEndpointResponse
     GetEndpointResponse[:payload] = :endpoint_response
     GetEndpointResponse[:payload_member] = GetEndpointResponse.member(:endpoint_response)
+
+    GetEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    GetEventStreamRequest.struct_class = Types::GetEventStreamRequest
+
+    GetEventStreamResponse.add_member(:event_stream, Shapes::ShapeRef.new(shape: EventStream, required: true, location_name: "EventStream"))
+    GetEventStreamResponse.struct_class = Types::GetEventStreamResponse
+    GetEventStreamResponse[:payload] = :event_stream
+    GetEventStreamResponse[:payload_member] = GetEventStreamResponse.member(:event_stream)
 
     GetGcmChannelRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
     GetGcmChannelRequest.struct_class = Types::GetGcmChannelRequest
@@ -607,6 +642,17 @@ module Aws::Pinpoint
     MessageConfiguration.add_member(:gcm_message, Shapes::ShapeRef.new(shape: Message, location_name: "GCMMessage"))
     MessageConfiguration.struct_class = Types::MessageConfiguration
 
+    PutEventStreamRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "application-id"))
+    PutEventStreamRequest.add_member(:write_event_stream, Shapes::ShapeRef.new(shape: WriteEventStream, required: true, location_name: "WriteEventStream"))
+    PutEventStreamRequest.struct_class = Types::PutEventStreamRequest
+    PutEventStreamRequest[:payload] = :write_event_stream
+    PutEventStreamRequest[:payload_member] = PutEventStreamRequest.member(:write_event_stream)
+
+    PutEventStreamResponse.add_member(:event_stream, Shapes::ShapeRef.new(shape: EventStream, required: true, location_name: "EventStream"))
+    PutEventStreamResponse.struct_class = Types::PutEventStreamResponse
+    PutEventStreamResponse[:payload] = :event_stream
+    PutEventStreamResponse[:payload_member] = PutEventStreamResponse.member(:event_stream)
+
     QuietTime.add_member(:end, Shapes::ShapeRef.new(shape: __string, location_name: "End"))
     QuietTime.add_member(:start, Shapes::ShapeRef.new(shape: __string, location_name: "Start"))
     QuietTime.struct_class = Types::QuietTime
@@ -637,6 +683,7 @@ module Aws::Pinpoint
     SegmentDimensions.add_member(:behavior, Shapes::ShapeRef.new(shape: SegmentBehaviors, location_name: "Behavior"))
     SegmentDimensions.add_member(:demographic, Shapes::ShapeRef.new(shape: SegmentDemographics, location_name: "Demographic"))
     SegmentDimensions.add_member(:location, Shapes::ShapeRef.new(shape: SegmentLocation, location_name: "Location"))
+    SegmentDimensions.add_member(:user_attributes, Shapes::ShapeRef.new(shape: MapOfAttributeDimension, location_name: "UserAttributes"))
     SegmentDimensions.struct_class = Types::SegmentDimensions
 
     SegmentImportResource.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "ExternalId"))
@@ -775,6 +822,11 @@ module Aws::Pinpoint
     WriteCampaignRequest.add_member(:treatment_name, Shapes::ShapeRef.new(shape: __string, location_name: "TreatmentName"))
     WriteCampaignRequest.struct_class = Types::WriteCampaignRequest
 
+    WriteEventStream.add_member(:destination_stream_arn, Shapes::ShapeRef.new(shape: __string, location_name: "DestinationStreamArn"))
+    WriteEventStream.add_member(:external_id, Shapes::ShapeRef.new(shape: __string, location_name: "ExternalId"))
+    WriteEventStream.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoleArn"))
+    WriteEventStream.struct_class = Types::WriteEventStream
+
     WriteSegmentRequest.add_member(:dimensions, Shapes::ShapeRef.new(shape: SegmentDimensions, location_name: "Dimensions"))
     WriteSegmentRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
     WriteSegmentRequest.struct_class = Types::WriteSegmentRequest
@@ -863,6 +915,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/campaigns/{campaign-id}"
         o.input = Shapes::ShapeRef.new(shape: DeleteCampaignRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteCampaignResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:delete_event_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEventStream"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/apps/{application-id}/eventstream"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEventStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEventStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
@@ -1011,6 +1077,20 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_event_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventStream"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/apps/{application-id}/eventstream"
+        o.input = Shapes::ShapeRef.new(shape: GetEventStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventStreamResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:get_gcm_channel, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetGcmChannel"
         o.http_method = "GET"
@@ -1115,6 +1195,20 @@ module Aws::Pinpoint
         o.http_request_uri = "/v1/apps/{application-id}/segments"
         o.input = Shapes::ShapeRef.new(shape: GetSegmentsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSegmentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:put_event_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEventStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apps/{application-id}/eventstream"
+        o.input = Shapes::ShapeRef.new(shape: PutEventStreamRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEventStreamResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

@@ -42,6 +42,7 @@ module Aws::Polly
     LexiconSizeExceededException = Shapes::StructureShape.new(name: 'LexiconSizeExceededException')
     ListLexiconsInput = Shapes::StructureShape.new(name: 'ListLexiconsInput')
     ListLexiconsOutput = Shapes::StructureShape.new(name: 'ListLexiconsOutput')
+    MarksNotSupportedForFormatException = Shapes::StructureShape.new(name: 'MarksNotSupportedForFormatException')
     MaxLexemeLengthExceededException = Shapes::StructureShape.new(name: 'MaxLexemeLengthExceededException')
     MaxLexiconsNumberExceededException = Shapes::StructureShape.new(name: 'MaxLexiconsNumberExceededException')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -52,6 +53,9 @@ module Aws::Polly
     SampleRate = Shapes::StringShape.new(name: 'SampleRate')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
     Size = Shapes::IntegerShape.new(name: 'Size')
+    SpeechMarkType = Shapes::StringShape.new(name: 'SpeechMarkType')
+    SpeechMarkTypeList = Shapes::ListShape.new(name: 'SpeechMarkTypeList')
+    SsmlMarksNotSupportedForTextTypeException = Shapes::StructureShape.new(name: 'SsmlMarksNotSupportedForTextTypeException')
     SynthesizeSpeechInput = Shapes::StructureShape.new(name: 'SynthesizeSpeechInput')
     SynthesizeSpeechOutput = Shapes::StructureShape.new(name: 'SynthesizeSpeechOutput')
     Text = Shapes::StringShape.new(name: 'Text')
@@ -117,9 +121,12 @@ module Aws::Polly
 
     PutLexiconOutput.struct_class = Types::PutLexiconOutput
 
+    SpeechMarkTypeList.member = Shapes::ShapeRef.new(shape: SpeechMarkType)
+
     SynthesizeSpeechInput.add_member(:lexicon_names, Shapes::ShapeRef.new(shape: LexiconNameList, location_name: "LexiconNames"))
     SynthesizeSpeechInput.add_member(:output_format, Shapes::ShapeRef.new(shape: OutputFormat, required: true, location_name: "OutputFormat"))
     SynthesizeSpeechInput.add_member(:sample_rate, Shapes::ShapeRef.new(shape: SampleRate, location_name: "SampleRate"))
+    SynthesizeSpeechInput.add_member(:speech_mark_types, Shapes::ShapeRef.new(shape: SpeechMarkTypeList, location_name: "SpeechMarkTypes"))
     SynthesizeSpeechInput.add_member(:text, Shapes::ShapeRef.new(shape: Text, required: true, location_name: "Text"))
     SynthesizeSpeechInput.add_member(:text_type, Shapes::ShapeRef.new(shape: TextType, location_name: "TextType"))
     SynthesizeSpeechInput.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location_name: "VoiceId"))
@@ -220,6 +227,8 @@ module Aws::Polly
         o.errors << Shapes::ShapeRef.new(shape: InvalidSsmlException)
         o.errors << Shapes::ShapeRef.new(shape: LexiconNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: MarksNotSupportedForFormatException)
+        o.errors << Shapes::ShapeRef.new(shape: SsmlMarksNotSupportedForTextTypeException)
       end)
     end
 

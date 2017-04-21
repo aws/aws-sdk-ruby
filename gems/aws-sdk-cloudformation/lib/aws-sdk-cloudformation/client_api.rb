@@ -810,6 +810,11 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListExportsInput)
         o.output = Shapes::ShapeRef.new(shape: ListExportsOutput)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|
@@ -818,6 +823,11 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListImportsInput)
         o.output = Shapes::ShapeRef.new(shape: ListImportsOutput)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_stack_resources, Seahorse::Model::Operation.new.tap do |o|

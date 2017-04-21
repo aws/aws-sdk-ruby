@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::DirectConnect
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -568,19 +570,15 @@ module Aws::DirectConnect
     # its setting for minimum number of operational connections, the request
     # fails.
     #
-    # Virtual interfaces that are directly associated with the connection
-    # are not automatically migrated. You can delete them or associate them
-    # with the target LAG using AssociateVirtualInterface. If the connection
-    # was originally associated with a different LAG, the virtual interfaces
-    # remain associated with the original LAG.
+    # Any virtual interfaces that are directly associated with the
+    # connection are automatically re-associated with the LAG. If the
+    # connection was originally associated with a different LAG, the virtual
+    # interfaces remain associated with the original LAG.
     #
-    # For interconnects, hosted connections are not automatically migrated.
-    # You can delete them, or the owner of the physical connection can
-    # associate them with the target LAG using AssociateHostedConnection.
-    # After all hosted connections have been migrated, the interconnect can
-    # be migrated into the LAG. If the interconnect is already associated
-    # with a LAG, the hosted connections remain associated with the original
-    # LAG.
+    # For interconnects, any hosted connections are automatically
+    # re-associated with the LAG. If the interconnect was originally
+    # associated with a different LAG, the hosted connections remain
+    # associated with the original LAG.
     #
     # @option params [required, String] :connection_id
     #   The ID of the connection.
@@ -2628,7 +2626,7 @@ module Aws::DirectConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-directconnect'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

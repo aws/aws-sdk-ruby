@@ -130,6 +130,8 @@ module Aws::EC2
     CreateEgressOnlyInternetGatewayResult = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayResult')
     CreateFlowLogsRequest = Shapes::StructureShape.new(name: 'CreateFlowLogsRequest')
     CreateFlowLogsResult = Shapes::StructureShape.new(name: 'CreateFlowLogsResult')
+    CreateFpgaImageRequest = Shapes::StructureShape.new(name: 'CreateFpgaImageRequest')
+    CreateFpgaImageResult = Shapes::StructureShape.new(name: 'CreateFpgaImageResult')
     CreateImageRequest = Shapes::StructureShape.new(name: 'CreateImageRequest')
     CreateImageResult = Shapes::StructureShape.new(name: 'CreateImageResult')
     CreateInstanceExportTaskRequest = Shapes::StructureShape.new(name: 'CreateInstanceExportTaskRequest')
@@ -815,6 +817,7 @@ module Aws::EC2
     StopInstancesRequest = Shapes::StructureShape.new(name: 'StopInstancesRequest')
     StopInstancesResult = Shapes::StructureShape.new(name: 'StopInstancesResult')
     Storage = Shapes::StructureShape.new(name: 'Storage')
+    StorageLocation = Shapes::StructureShape.new(name: 'StorageLocation')
     String = Shapes::StringShape.new(name: 'String')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetCidrBlockState = Shapes::StructureShape.new(name: 'SubnetCidrBlockState')
@@ -829,6 +832,8 @@ module Aws::EC2
     TagDescription = Shapes::StructureShape.new(name: 'TagDescription')
     TagDescriptionList = Shapes::ListShape.new(name: 'TagDescriptionList')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagSpecification = Shapes::StructureShape.new(name: 'TagSpecification')
+    TagSpecificationList = Shapes::ListShape.new(name: 'TagSpecificationList')
     TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
     TargetConfigurationRequest = Shapes::StructureShape.new(name: 'TargetConfigurationRequest')
     TargetConfigurationRequestSet = Shapes::ListShape.new(name: 'TargetConfigurationRequestSet')
@@ -1355,6 +1360,18 @@ module Aws::EC2
     CreateFlowLogsResult.add_member(:unsuccessful, Shapes::ShapeRef.new(shape: UnsuccessfulItemSet, location_name: "unsuccessful"))
     CreateFlowLogsResult.struct_class = Types::CreateFlowLogsResult
 
+    CreateFpgaImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateFpgaImageRequest.add_member(:input_storage_location, Shapes::ShapeRef.new(shape: StorageLocation, required: true, location_name: "InputStorageLocation"))
+    CreateFpgaImageRequest.add_member(:logs_storage_location, Shapes::ShapeRef.new(shape: StorageLocation, location_name: "LogsStorageLocation"))
+    CreateFpgaImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CreateFpgaImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CreateFpgaImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+    CreateFpgaImageRequest.struct_class = Types::CreateFpgaImageRequest
+
+    CreateFpgaImageResult.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))
+    CreateFpgaImageResult.add_member(:fpga_image_global_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageGlobalId"))
+    CreateFpgaImageResult.struct_class = Types::CreateFpgaImageResult
+
     CreateImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
     CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
@@ -1518,6 +1535,7 @@ module Aws::EC2
     CreateVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: Integer, location_name: "Iops"))
     CreateVolumeRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     CreateVolumeRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
+    CreateVolumeRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVolumeRequest.struct_class = Types::CreateVolumeRequest
 
     CreateVpcEndpointRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4008,6 +4026,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "networkInterface"))
     RunInstancesRequest.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfileSpecification, location_name: "iamInstanceProfile"))
     RunInstancesRequest.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsOptimized"))
+    RunInstancesRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -4374,6 +4393,10 @@ module Aws::EC2
     Storage.add_member(:s3, Shapes::ShapeRef.new(shape: S3Storage, location_name: "S3"))
     Storage.struct_class = Types::Storage
 
+    StorageLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: String, location_name: "Bucket"))
+    StorageLocation.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
+    StorageLocation.struct_class = Types::StorageLocation
+
     Subnet.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
     Subnet.add_member(:state, Shapes::ShapeRef.new(shape: SubnetState, location_name: "state"))
     Subnet.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
@@ -4415,6 +4438,12 @@ module Aws::EC2
     TagDescriptionList.member = Shapes::ShapeRef.new(shape: TagDescription, location_name: "item")
 
     TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "item")
+
+    TagSpecification.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    TagSpecification.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tag"))
+    TagSpecification.struct_class = Types::TagSpecification
+
+    TagSpecificationList.member = Shapes::ShapeRef.new(shape: TagSpecification, location_name: "item")
 
     TargetConfiguration.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
     TargetConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
@@ -4995,6 +5024,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateFlowLogsRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFlowLogsResult)
+      end)
+
+      api.add_operation(:create_fpga_image, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFpgaImage"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateFpgaImageRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFpgaImageResult)
       end)
 
       api.add_operation(:create_image, Seahorse::Model::Operation.new.tap do |o|

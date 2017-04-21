@@ -155,7 +155,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] attached_object_identifier
-    #   Attached ObjectIdentifier, which is the child ObjectIdentifier.
+    #   Attached `ObjectIdentifier`, which is the child `ObjectIdentifier`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachObjectResponse AWS API Documentation
@@ -240,7 +240,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] attached_object_identifier
-    #   The ObjectIdentifier of the object that was attached to the index.
+    #   The `ObjectIdentifier` of the object that was attached to the index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AttachToIndexResponse AWS API Documentation
@@ -415,7 +415,7 @@ module Aws::CloudDirectory
     # Represents the output batch AttachObject response operation.
     #
     # @!attribute [rw] attached_object_identifier
-    #   The ObjectIdentifier of the object that has been attached.
+    #   The `ObjectIdentifier` of the object that has been attached.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchAttachObjectResponse AWS API Documentation
@@ -498,7 +498,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a CreateObject response operation.
+    # Represents the output of a `CreateObject` response operation.
     #
     # @!attribute [rw] object_identifier
     #   ID associated with the object.
@@ -511,7 +511,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a DeleteObject operation.
+    # Represents the output of a `DeleteObject` operation.
     #
     # @note When making an API call, you may pass BatchDeleteObject
     #   data as a hash:
@@ -533,13 +533,13 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a DeleteObject response operation.
+    # Represents the output of a `DeleteObject` response operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDeleteObjectResponse AWS API Documentation
     #
     class BatchDeleteObjectResponse < Aws::EmptyStructure; end
 
-    # Represents the output of a DetachObject operation.
+    # Represents the output of a `DetachObject` operation.
     #
     # @note When making an API call, you may pass BatchDetachObject
     #   data as a hash:
@@ -578,10 +578,10 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a DetachObject response operation.
+    # Represents the output of a `DetachObject` response operation.
     #
     # @!attribute [rw] detached_object_identifier
-    #   The ObjectIdentifier of the detached object.
+    #   The `ObjectIdentifier` of the detached object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchDetachObjectResponse AWS API Documentation
@@ -591,7 +591,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a ListObjectAttributes operation.
+    # Represents the output of a `ListObjectAttributes` operation.
     #
     # @note When making an API call, you may pass BatchListObjectAttributes
     #   data as a hash:
@@ -602,6 +602,10 @@ module Aws::CloudDirectory
     #         },
     #         next_token: "NextToken",
     #         max_results: 1,
+    #         facet_filter: {
+    #           schema_arn: "Arn",
+    #           facet_name: "FacetName",
+    #         },
     #       }
     #
     # @!attribute [rw] object_reference
@@ -609,7 +613,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -617,24 +621,30 @@ module Aws::CloudDirectory
     #   approximate number.
     #   @return [Integer]
     #
+    # @!attribute [rw] facet_filter
+    #   Used to filter the list of object attributes associated with a
+    #   certain facet.
+    #   @return [Types::SchemaFacet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectAttributes AWS API Documentation
     #
     class BatchListObjectAttributes < Struct.new(
       :object_reference,
       :next_token,
-      :max_results)
+      :max_results,
+      :facet_filter)
       include Aws::Structure
     end
 
-    # Represents the output of a ListObjectAttributes response operation.
+    # Represents the output of a `ListObjectAttributes` response operation.
     #
     # @!attribute [rw] attributes
-    #   Attributes map associated with the object. AttributeArn is the key;
-    #   attribute value is the value.
+    #   Attributes map associated with the object. `AttributeArn` is the
+    #   key; attribute value is the value.
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectAttributesResponse AWS API Documentation
@@ -645,7 +655,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a ListObjectChildren operation.
+    # Represents the output of a `ListObjectChildren` operation.
     #
     # @note When making an API call, you may pass BatchListObjectChildren
     #   data as a hash:
@@ -663,7 +673,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -680,15 +690,15 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a ListObjectChildren response operation.
+    # Represents the output of a `ListObjectChildren` response operation.
     #
     # @!attribute [rw] children
-    #   Children structure, which is a map with key as the LinkName and
-    #   ObjectIdentifier as the value.
+    #   Children structure, which is a map with key as the `LinkName` and
+    #   `ObjectIdentifier` as the value.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchListObjectChildrenResponse AWS API Documentation
@@ -703,7 +713,7 @@ module Aws::CloudDirectory
     # message.
     #
     # @!attribute [rw] type
-    #   Type of exception, such as InvalidArnException.
+    #   Type of exception, such as `InvalidArnException`.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -718,7 +728,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a BatchRead operation.
+    # Represents the output of a `BatchRead` operation.
     #
     # @note When making an API call, you may pass BatchReadOperation
     #   data as a hash:
@@ -730,6 +740,10 @@ module Aws::CloudDirectory
     #           },
     #           next_token: "NextToken",
     #           max_results: 1,
+    #           facet_filter: {
+    #             schema_arn: "Arn",
+    #             facet_name: "FacetName",
+    #           },
     #         },
     #         list_object_children: {
     #           object_reference: { # required
@@ -757,7 +771,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a BatchRead response operation.
+    # Represents the output of a `BatchRead` response operation.
     #
     # @!attribute [rw] successful_response
     #   Identifies which operation in a batch has succeeded.
@@ -788,6 +802,10 @@ module Aws::CloudDirectory
     #               },
     #               next_token: "NextToken",
     #               max_results: 1,
+    #               facet_filter: {
+    #                 schema_arn: "Arn",
+    #                 facet_name: "FacetName",
+    #               },
     #             },
     #             list_object_children: {
     #               object_reference: { # required
@@ -835,7 +853,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a BatchRead success response operation.
+    # Represents the output of a `BatchRead` success response operation.
     #
     # @!attribute [rw] list_object_attributes
     #   Lists all attributes associated with an object.
@@ -891,7 +909,7 @@ module Aws::CloudDirectory
     #
     class BatchRemoveFacetFromObjectResponse < Aws::EmptyStructure; end
 
-    # Represents the output of a BatchUpdate operation.
+    # Represents the output of a `BatchUpdate` operation.
     #
     # @note When making an API call, you may pass BatchUpdateObjectAttributes
     #   data as a hash:
@@ -937,7 +955,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a BatchUpdate response operation.
+    # Represents the output of a `BatchUpdate` response operation.
     #
     # @!attribute [rw] object_identifier
     #   ID associated with the object.
@@ -950,7 +968,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a BatchWrite operation.
+    # Represents the output of a `BatchWrite` operation.
     #
     # @note When making an API call, you may pass BatchWriteOperation
     #   data as a hash:
@@ -1107,7 +1125,7 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Represents the output of a BatchWrite response operation.
+    # Represents the output of a `BatchWrite` response operation.
     #
     # @!attribute [rw] create_object
     #   Creates an object in a Directory.
@@ -1496,7 +1514,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] object_identifier
-    #   The ObjectIdentifier of the index created by this operation.
+    #   The `ObjectIdentifier` of the index created by this operation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/CreateIndexResponse AWS API Documentation
@@ -1768,7 +1786,8 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] detached_object_identifier
-    #   The ObjectIdentifier of the object that was detached from the index.
+    #   The `ObjectIdentifier` of the object that was detached from the
+    #   index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachFromIndexResponse AWS API Documentation
@@ -1813,7 +1832,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] detached_object_identifier
-    #   The ObjectIdentifier that was detached from the object.
+    #   The `ObjectIdentifier` that was detached from the object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/DetachObjectResponse AWS API Documentation
@@ -1875,8 +1894,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the directory. Can be either Enabled, Disabled, or
-    #   Deleted.
+    #   The state of the directory. Can be either `Enabled`, `Disabled`, or
+    #   `Deleted`.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -1951,8 +1970,8 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # A structure that contains Name, ARN, Attributes, Rules, and
-    # ObjectTypes.
+    # A structure that contains `Name`, `ARN`, `Attributes`, Rules, and
+    # `ObjectTypes`.
     #
     # @!attribute [rw] name
     #   The name of the Facet.
@@ -2028,7 +2047,7 @@ module Aws::CloudDirectory
     #   @return [Types::FacetAttributeReference]
     #
     # @!attribute [rw] required_behavior
-    #   The required behavior of the FacetAttribute.
+    #   The required behavior of the `FacetAttribute`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/FacetAttribute AWS API Documentation
@@ -2287,7 +2306,7 @@ module Aws::CloudDirectory
     #   @return [Array<Types::SchemaFacet>]
     #
     # @!attribute [rw] object_identifier
-    #   The ObjectIdentifier of the specified object.
+    #   The `ObjectIdentifier` of the specified object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectInformationResponse AWS API Documentation
@@ -2339,7 +2358,7 @@ module Aws::CloudDirectory
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] object_identifier
-    #   The ObjectIdentifier of the object attached to the index.
+    #   The `ObjectIdentifier` of the object attached to the index.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/IndexAttachment AWS API Documentation
@@ -2745,6 +2764,10 @@ module Aws::CloudDirectory
     #         next_token: "NextToken",
     #         max_results: 1,
     #         consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #         facet_filter: {
+    #           schema_arn: "Arn",
+    #           facet_name: "FacetName",
+    #         },
     #       }
     #
     # @!attribute [rw] directory_arn
@@ -2758,7 +2781,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2772,6 +2795,11 @@ module Aws::CloudDirectory
     #   that same object.
     #   @return [String]
     #
+    # @!attribute [rw] facet_filter
+    #   Used to filter the list of object attributes associated with a
+    #   certain facet.
+    #   @return [Types::SchemaFacet]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesRequest AWS API Documentation
     #
     class ListObjectAttributesRequest < Struct.new(
@@ -2779,7 +2807,8 @@ module Aws::CloudDirectory
       :object_reference,
       :next_token,
       :max_results,
-      :consistency_level)
+      :consistency_level,
+      :facet_filter)
       include Aws::Structure
     end
 
@@ -2789,7 +2818,7 @@ module Aws::CloudDirectory
     #   @return [Array<Types::AttributeKeyAndValue>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectAttributesResponse AWS API Documentation
@@ -2824,7 +2853,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2851,17 +2880,73 @@ module Aws::CloudDirectory
 
     # @!attribute [rw] children
     #   Children structure, which is a map with key as the LinkName and
-    #   ObjectIdentifier as the value.
+    #   `ObjectIdentifier` as the value.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectChildrenResponse AWS API Documentation
     #
     class ListObjectChildrenResponse < Struct.new(
       :children,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListObjectParentPathsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         directory_arn: "Arn", # required
+    #         object_reference: { # required
+    #           selector: "SelectorObjectReference",
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] directory_arn
+    #   The ARN of the directory to which the parent path applies.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_reference
+    #   Reference that identifies the object whose parent paths are listed.
+    #   @return [Types::ObjectReference]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of items to be retrieved in a single call. This is an
+    #   approximate number.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsRequest AWS API Documentation
+    #
+    class ListObjectParentPathsRequest < Struct.new(
+      :directory_arn,
+      :object_reference,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] path_to_object_identifiers_list
+    #   Returns the path to the `ObjectIdentifiers` associated with the
+    #   directory.
+    #   @return [Array<Types::PathToObjectIdentifiers>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPathsResponse AWS API Documentation
+    #
+    class ListObjectParentPathsResponse < Struct.new(
+      :path_to_object_identifiers_list,
       :next_token)
       include Aws::Structure
     end
@@ -2890,7 +2975,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2916,12 +3001,12 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] parents
-    #   Parent structure, which is a map with key as the ObjectIdentifier
+    #   Parent structure, which is a map with key as the `ObjectIdentifier`
     #   and LinkName as the value.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentsResponse AWS API Documentation
@@ -2956,7 +3041,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2982,11 +3067,11 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] attached_policy_ids
-    #   List of policy ObjectIdentifiers, that are attached to the object.
+    #   List of policy `ObjectIdentifiers`, that are attached to the object.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectPoliciesResponse AWS API Documentation
@@ -3020,7 +3105,7 @@ module Aws::CloudDirectory
     #   @return [Types::ObjectReference]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3046,11 +3131,11 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] object_identifiers
-    #   List of ObjectIdentifiers to which the policy is attached.
+    #   List of `ObjectIdentifiers` to which the policy is attached.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListPolicyAttachmentsResponse AWS API Documentation
@@ -3115,8 +3200,8 @@ module Aws::CloudDirectory
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Next token used for pagination. This is for future use. Currently
-    #   pagination is not supported for tagging.
+    #   The pagination token. This is for future use. Currently pagination
+    #   is not supported for tagging.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -3192,12 +3277,12 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] policy_to_path_list
-    #   Provides list of path to policies. Policies contain PolicyId,
-    #   ObjectIdentifier, and PolicyType.
+    #   Provides list of path to policies. Policies contain `PolicyId`,
+    #   `ObjectIdentifier`, and `PolicyType`.
     #   @return [Array<Types::PolicyToPath>]
     #
     # @!attribute [rw] next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/LookupPolicyResponse AWS API Documentation
@@ -3339,7 +3424,7 @@ module Aws::CloudDirectory
     #   Allows you to specify an object. You can identify an object in one
     #   of the following ways:
     #
-    #   * *$ObjectIdentifier* - Identifies the object by ObjectIdentifier
+    #   * *$ObjectIdentifier* - Identifies the object by `ObjectIdentifier`
     #
     #   * */some/path* - Identifies the object based on path
     #
@@ -3353,19 +3438,39 @@ module Aws::CloudDirectory
       include Aws::Structure
     end
 
-    # Contains the PolicyType, PolicyId, and the ObjectIdentifier to which
-    # it is attached.
+    # Returns the path to the `ObjectIdentifiers` associated with the
+    # directory.
+    #
+    # @!attribute [rw] path
+    #   The path used to identify the object starting from directory root.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_identifiers
+    #   Lists `ObjectIdentifiers` starting from directory root to the object
+    #   in the request.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PathToObjectIdentifiers AWS API Documentation
+    #
+    class PathToObjectIdentifiers < Struct.new(
+      :path,
+      :object_identifiers)
+      include Aws::Structure
+    end
+
+    # Contains the `PolicyType`, `PolicyId`, and the `ObjectIdentifier` to
+    # which it is attached.
     #
     # @!attribute [rw] policy_id
-    #   The ID of PolicyAttachment.
+    #   The ID of `PolicyAttachment`.
     #   @return [String]
     #
     # @!attribute [rw] object_identifier
-    #   The ObjectIdentifier associated with PolicyAttachment.
+    #   The `ObjectIdentifier` associated with `PolicyAttachment`.
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The type of policy that can be associated with PolicyAttachment.
+    #   The type of policy that can be associated with `PolicyAttachment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/PolicyAttachment AWS API Documentation
@@ -3877,7 +3982,7 @@ module Aws::CloudDirectory
     end
 
     # @!attribute [rw] object_identifier
-    #   ObjectIdentifier of the updated object.
+    #   `ObjectIdentifier` of the updated object.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/UpdateObjectAttributesResponse AWS API Documentation

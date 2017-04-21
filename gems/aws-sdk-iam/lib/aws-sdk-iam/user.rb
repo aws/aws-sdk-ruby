@@ -395,7 +395,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =/:,.@-
+    #   =,.@:/-
     #
     #
     #
@@ -404,10 +404,32 @@ module Aws::IAM
     #   An authentication code emitted by the device.
     #
     #   The format for this parameter is a string of 6 digits.
+    #
+    #   Submit your request immediately after generating the authentication
+    #   codes. If you generate the codes and then wait too long to submit the
+    #   request, the MFA device successfully associates with the user but the
+    #   MFA device becomes out of sync. This happens because time-based
+    #   one-time passwords (TOTP) expire after a short period of time. If this
+    #   happens, you can [resync the device][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @option options [required, String] :authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
     #   The format for this parameter is a string of 6 digits.
+    #
+    #   Submit your request immediately after generating the authentication
+    #   codes. If you generate the codes and then wait too long to submit the
+    #   request, the MFA device successfully associates with the user but the
+    #   MFA device becomes out of sync. This happens because time-based
+    #   one-time passwords (TOTP) expire after a short period of time. If this
+    #   happens, you can [resync the device][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     # @return [MfaDevice]
     def enable_mfa(options = {})
       options = options.merge(user_name: @name)

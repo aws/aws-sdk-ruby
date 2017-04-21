@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -45,6 +46,7 @@ module Aws::CloudWatch
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -297,6 +299,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_periods #=> Integer
     #   resp.metric_alarms[0].threshold #=> Float
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.metric_alarms[0].treat_missing_data #=> String
+    #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarms AWS API Documentation
@@ -387,6 +391,8 @@ module Aws::CloudWatch
     #   resp.metric_alarms[0].evaluation_periods #=> Integer
     #   resp.metric_alarms[0].threshold #=> Float
     #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+    #   resp.metric_alarms[0].treat_missing_data #=> String
+    #   resp.metric_alarms[0].evaluate_low_sample_count_percentile #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DescribeAlarmsForMetric AWS API Documentation
     #
@@ -474,6 +480,15 @@ module Aws::CloudWatch
     # number of values aggregated by CloudWatch is larger than the number of
     # data points returned.
     #
+    # CloudWatch needs raw data points to calculate percentile statistics.
+    # If you publish data using a statistic set instead, you cannot retrieve
+    # percentile statistics for this data unless one of the following
+    # conditions is true:
+    #
+    # * The SampleCount of the statistic set is 1
+    #
+    # * The Min and the Max of the statistic set are equal
+    #
     # For a list of metrics and dimensions supported by AWS services, see
     # the [Amazon CloudWatch Metrics and Dimensions Reference][1] in the
     # *Amazon CloudWatch User Guide*.
@@ -489,16 +504,20 @@ module Aws::CloudWatch
     #   The name of the metric, with or without spaces.
     #
     # @option params [Array<Types::Dimension>] :dimensions
-    #   The dimensions. CloudWatch treats each unique combination of
-    #   dimensions as a separate metric. You can't retrieve statistics using
-    #   combinations of dimensions that were not specially published. You must
-    #   specify the same dimensions that were used when the metrics were
-    #   created. For an example, see [Dimension Combinations][1] in the
-    #   *Amazon CloudWatch User Guide*.
+    #   The dimensions. If the metric contains multiple dimensions, you must
+    #   include a value for each dimension. CloudWatch treats each unique
+    #   combination of dimensions as a separate metric. You can't retrieve
+    #   statistics using combinations of dimensions that were not specially
+    #   published. You must specify the same dimensions that were used when
+    #   the metrics were created. For an example, see [Dimension
+    #   Combinations][1] in the *Amazon CloudWatch User Guide*. For more
+    #   information on specifying dimensions, see [Publishing Metrics][2] in
+    #   the *Amazon CloudWatch User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+    #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp that determines the first data point to return. Note
@@ -816,6 +835,33 @@ module Aws::CloudWatch
     #   and threshold. The specified statistic value is used as the first
     #   operand.
     #
+    # @option params [String] :treat_missing_data
+    #   Sets how this alarm is to handle missing data points. If
+    #   `TreatMissingData` is omitted, the default behavior of `missing` is
+    #   used. For more information, see [Configuring How CloudWatch Alarms
+    #   Treats Missing Data][1].
+    #
+    #   Valid Values: `breaching | notBreaching | ignore | missing`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
+    #
+    # @option params [String] :evaluate_low_sample_count_percentile
+    #   Used only for alarms based on percentiles. If you specify `ignore`,
+    #   the alarm state will not change during periods with too few data
+    #   points to be statistically significant. If you specify `evaluate` or
+    #   omit this parameter, the alarm will always be evaluated and possibly
+    #   change state no matter how many data points are available. For more
+    #   information, see [Percentile-Based CloudWatch Alarms and Low Data
+    #   Samples][1].
+    #
+    #   Valid Values: `evaluate | ignore`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -842,6 +888,8 @@ module Aws::CloudWatch
     #     evaluation_periods: 1, # required
     #     threshold: 1.0, # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     treat_missing_data: "TreatMissingData",
+    #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarm AWS API Documentation
@@ -859,8 +907,8 @@ module Aws::CloudWatch
     # Amazon CloudWatch creates a metric, it can take up to fifteen minutes
     # for the metric to appear in calls to ListMetrics.
     #
-    # Each `PutMetricData` request is limited to 8 KB in size for HTTP GET
-    # requests and is limited to 40 KB in size for HTTP POST requests.
+    # Each `PutMetricData` request is limited to 40 KB in size for HTTP POST
+    # requests.
     #
     # Although the `Value` parameter accepts numbers of type `Double`,
     # Amazon CloudWatch rejects values that are either too small or too
@@ -868,9 +916,27 @@ module Aws::CloudWatch
     # (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
     # (e.g., NaN, +Infinity, -Infinity) are not supported.
     #
+    # You can use up to 10 dimensions per metric to further clarify what
+    # data the metric collects. For more information on specifying
+    # dimensions, see [Publishing Metrics][1] in the *Amazon CloudWatch User
+    # Guide*.
+    #
     # Data points with time stamps from 24 hours ago or longer can take at
     # least 48 hours to become available for GetMetricStatistics from the
     # time they are submitted.
+    #
+    # CloudWatch needs raw data points to calculate percentile statistics.
+    # If you publish data using a statistic set instead, you cannot retrieve
+    # percentile statistics for this data unless one of the following
+    # conditions is true:
+    #
+    # * The SampleCount of the statistic set is 1
+    #
+    # * The Min and the Max of the statistic set are equal
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     #
     # @option params [required, String] :namespace
     #   The namespace for the metric data.
@@ -977,7 +1043,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -45,6 +46,7 @@ module Aws::CloudDirectory
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -240,7 +242,7 @@ module Aws::CloudDirectory
     #
     # 1.  Using the path
     #
-    # 2.  Using ObjectIdentifier
+    # 2.  Using `ObjectIdentifier`
     #
     # @option params [required, String] :directory_arn
     #   ARN associated with the Directory where both objects reside. For more
@@ -391,6 +393,10 @@ module Aws::CloudDirectory
     #           },
     #           next_token: "NextToken",
     #           max_results: 1,
+    #           facet_filter: {
+    #             schema_arn: "Arn",
+    #             facet_name: "FacetName",
+    #           },
     #         },
     #         list_object_children: {
     #           object_reference: { # required
@@ -1689,7 +1695,7 @@ module Aws::CloudDirectory
     #   Reference that identifies the object whose attributes will be listed.
     #
     # @option params [String] :next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   Maximum number of items to be retrieved in a single call. This is an
@@ -1699,6 +1705,10 @@ module Aws::CloudDirectory
     #   Represents the manner and timing in which the successful write or
     #   update of an object is reflected in a subsequent read operation of
     #   that same object.
+    #
+    # @option params [Types::SchemaFacet] :facet_filter
+    #   Used to filter the list of object attributes associated with a certain
+    #   facet.
     #
     # @return [Types::ListObjectAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1715,6 +1725,10 @@ module Aws::CloudDirectory
     #     next_token: "NextToken",
     #     max_results: 1,
     #     consistency_level: "SERIALIZABLE", # accepts SERIALIZABLE, EVENTUAL
+    #     facet_filter: {
+    #       schema_arn: "Arn",
+    #       facet_name: "FacetName",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1751,7 +1765,7 @@ module Aws::CloudDirectory
     #   listed.
     #
     # @option params [String] :next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   Maximum number of items to be retrieved in a single call. This is an
@@ -1794,6 +1808,68 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
+    # Retrieves all available parent paths for any object type such as node,
+    # leaf node, policy node, and index node objects. For more information
+    # about objects, see [Directory Structure][1].
+    #
+    # Use this API to evaluate all parents for an object. The call returns
+    # all objects from the root of the directory up to the requested object.
+    # The API returns the number of paths based on user-defined
+    # `MaxResults`, in case there are multiple paths to the parent. The
+    # order of the paths and nodes returned is consistent among multiple API
+    # calls unless the objects are deleted or moved. Paths not leading to
+    # directory root are ignored from the target object.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_key_concepts.html#dirstructure
+    #
+    # @option params [required, String] :directory_arn
+    #   The ARN of the directory to which the parent path applies.
+    #
+    # @option params [required, Types::ObjectReference] :object_reference
+    #   Reference that identifies the object whose parent paths are listed.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of items to be retrieved in a single call. This is an
+    #   approximate number.
+    #
+    # @return [Types::ListObjectParentPathsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListObjectParentPathsResponse#path_to_object_identifiers_list #path_to_object_identifiers_list} => Array&lt;Types::PathToObjectIdentifiers&gt;
+    #   * {Types::ListObjectParentPathsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_object_parent_paths({
+    #     directory_arn: "Arn", # required
+    #     object_reference: { # required
+    #       selector: "SelectorObjectReference",
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.path_to_object_identifiers_list #=> Array
+    #   resp.path_to_object_identifiers_list[0].path #=> String
+    #   resp.path_to_object_identifiers_list[0].object_identifiers #=> Array
+    #   resp.path_to_object_identifiers_list[0].object_identifiers[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/ListObjectParentPaths AWS API Documentation
+    #
+    # @overload list_object_parent_paths(params = {})
+    # @param [Hash] params ({})
+    def list_object_parent_paths(params = {}, options = {})
+      req = build_request(:list_object_parent_paths, params)
+      req.send_request(options)
+    end
+
     # Lists parent objects associated with a given object in pagination
     # fashion.
     #
@@ -1806,7 +1882,7 @@ module Aws::CloudDirectory
     #   being listed.
     #
     # @option params [String] :next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   Maximum number of items to be retrieved in a single call. This is an
@@ -1860,7 +1936,7 @@ module Aws::CloudDirectory
     #   listed.
     #
     # @option params [String] :next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   Maximum number of items to be retrieved in a single call. This is an
@@ -1903,7 +1979,7 @@ module Aws::CloudDirectory
       req.send_request(options)
     end
 
-    # Returns all of the ObjectIdentifiers to which a given policy is
+    # Returns all of the `ObjectIdentifiers` to which a given policy is
     # attached.
     #
     # @option params [required, String] :directory_arn
@@ -1914,7 +1990,7 @@ module Aws::CloudDirectory
     #   Reference that identifies the policy object.
     #
     # @option params [String] :next_token
-    #   Token used for pagination.
+    #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   Maximum number of items to be retrieved in a single call. This is an
@@ -2000,8 +2076,8 @@ module Aws::CloudDirectory
     #   ARN of the resource. Tagging is only supported for directories.
     #
     # @option params [String] :next_token
-    #   Next token used for pagination. This is for future use. Currently
-    #   pagination is not supported for tagging.
+    #   The pagination token. This is for future use. Currently pagination is
+    #   not supported for tagging.
     #
     # @option params [Integer] :max_results
     #   The MaxResults parameter sets the maximum number of results returned
@@ -2040,10 +2116,10 @@ module Aws::CloudDirectory
     # Lists all policies from the root of the Directory to the object
     # specified. If there are no policies present, an empty list is
     # returned. If policies are present, and if some objects don't have the
-    # policies attached, it returns the objectIdentifier for such objects.
-    # If policies are present, it returns objectIdentifier, policyId, and
-    # policyType. Paths that don't lead to the root from the target object
-    # are ignored.
+    # policies attached, it returns the `ObjectIdentifier` for such objects.
+    # If policies are present, it returns `ObjectIdentifier`, `policyId`,
+    # and `policyType`. Paths that don't lead to the root from the target
+    # object are ignored.
     #
     # @option params [required, String] :directory_arn
     #   ARN associated with the Directory. For more information, see arns.
@@ -2265,11 +2341,11 @@ module Aws::CloudDirectory
 
     # Does the following:
     #
-    # 1.  Adds new Attributes, Rules, or ObjectTypes.
+    # 1.  Adds new `Attributes`, `Rules`, or `ObjectTypes`.
     #
-    # 2.  Updates existing Attributes, Rules, or ObjectTypes.
+    # 2.  Updates existing `Attributes`, `Rules`, or `ObjectTypes`.
     #
-    # 3.  Deletes existing Attributes, Rules, or ObjectTypes.
+    # 3.  Deletes existing `Attributes`, `Rules`, or `ObjectTypes`.
     #
     # @option params [required, String] :schema_arn
     #   ARN associated with the Facet. For more information, see arns.
@@ -2439,7 +2515,7 @@ module Aws::CloudDirectory
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-clouddirectory'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

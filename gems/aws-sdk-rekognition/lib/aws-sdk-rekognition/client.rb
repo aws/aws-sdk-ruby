@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::Rekognition
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -378,14 +380,17 @@ module Aws::Rekognition
     #   an S3 object.
     #
     # @option params [Array<String>] :attributes
-    #   A list of facial attributes you would like to be returned. By default,
-    #   the API returns subset of facial attributes.
+    #   A list of facial attributes you want to be returned. This can be the
+    #   default list of attributes or all attributes. If you don't specify a
+    #   value for `Attributes` or if you specify `["DEFAULT"]`, the API
+    #   returns the following subset of facial attributes: `BoundingBox`,
+    #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned but the operation will
+    #   take longer to complete.
     #
-    #   For example, you can specify the value as, \["ALL"\] or
-    #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\], the
-    #   service uses a logical AND operator to determine which attributes to
-    #   return (in this case, it is all attributes). If you specify all
-    #   attributes, Amazon Rekognition performs additional detection.
+    #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
+    #   AND operator to determine which attributes to return (in this case,
+    #   all attributes).
     #
     # @return [Types::DetectFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -518,7 +523,7 @@ module Aws::Rekognition
     #   Amazon Rekognition doesn't return any labels with confidence lower
     #   than this specified value.
     #
-    #   If `minConfidence` is not specified, the operation returns labels with
+    #   If `MinConfidence` is not specified, the operation returns labels with
     #   a confidence values greater than or equal to 50 percent.
     #
     # @return [Types::DetectLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -552,6 +557,74 @@ module Aws::Rekognition
     # @param [Hash] params ({})
     def detect_labels(params = {}, options = {})
       req = build_request(:detect_labels, params)
+      req.send_request(options)
+    end
+
+    # Detects explicit or suggestive adult content in a specified .jpeg or
+    # .png image. Use `DetectModerationLabels` to moderate images depending
+    # on your requirements. For example, you might want to filter images
+    # that contain nudity, but not images containing suggestive content.
+    #
+    # To filter images, use the labels returned by `DetectModerationLabels`
+    # to determine which types of content are appropriate. For information
+    # about moderation labels, see howitworks-moderateimage.
+    #
+    # @option params [required, Types::Image] :image
+    #   Provides the source image either as bytes or an S3 object.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   You may need to Base64-encode the image bytes depending on the
+    #   language you are using and whether or not you are using the AWS SDK.
+    #   For more information, see example4.
+    #
+    #   If you use the Amazon CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   manage-access-resource-policies.
+    #
+    # @option params [Float] :min_confidence
+    #   Specifies the minimum confidence level for the labels to return.
+    #   Amazon Rekognition doesn't return any labels with a confidence level
+    #   lower than this specified value.
+    #
+    #   If you don't specify `MinConfidence`, the operation returns labels
+    #   with confidence values greater than or equal to 50 percent.
+    #
+    # @return [Types::DetectModerationLabelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectModerationLabelsResponse#moderation_labels #moderation_labels} => Array&lt;Types::ModerationLabel&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_moderation_labels({
+    #     image: { # required
+    #       bytes: "data",
+    #       s3_object: {
+    #         bucket: "S3Bucket",
+    #         name: "S3ObjectName",
+    #         version: "S3ObjectVersion",
+    #       },
+    #     },
+    #     min_confidence: 1.0,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.moderation_labels #=> Array
+    #   resp.moderation_labels[0].confidence #=> Float
+    #   resp.moderation_labels[0].name #=> String
+    #   resp.moderation_labels[0].parent_name #=> String
+    #
+    # @overload detect_moderation_labels(params = {})
+    # @param [Hash] params ({})
+    def detect_moderation_labels(params = {}, options = {})
+      req = build_request(:detect_moderation_labels, params)
       req.send_request(options)
     end
 
@@ -590,8 +663,8 @@ module Aws::Rekognition
     # `rekognition:IndexFaces` action.
     #
     # @option params [required, String] :collection_id
-    #   ID of an existing collection to which you want to add the faces that
-    #   are detected in the input images.
+    #   The ID of an existing collection to which you want to add the faces
+    #   that are detected in the input images.
     #
     # @option params [required, Types::Image] :image
     #   Provides the source image either as bytes or an S3 object.
@@ -616,15 +689,17 @@ module Aws::Rekognition
     #   ID you want to assign to all the faces detected in the image.
     #
     # @option params [Array<String>] :detection_attributes
-    #   (Optional) Returns detailed attributes of indexed faces. By default,
-    #   the operation returns a subset of the facial attributes.
+    #   A list of facial attributes that you want to be returned. This can be
+    #   the default list of attributes or all attributes. If you don't
+    #   specify a value for `Attributes` or if you specify `["DEFAULT"]`, the
+    #   API returns the following subset of facial attributes: `BoundingBox`,
+    #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned but the operation will
+    #   take longer to complete.
     #
-    #   For example, you can specify the value as, \["ALL"\] or
-    #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\], Amazon
-    #   Rekognition uses the logical AND operator to determine which
-    #   attributes to return (in this case, it is all attributes). If you
-    #   specify all attributes, the service performs additional detection, in
-    #   addition to the default.
+    #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a logical
+    #   AND operator to determine which attributes to return (in this case,
+    #   all attributes).
     #
     # @return [Types::IndexFacesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -988,7 +1063,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

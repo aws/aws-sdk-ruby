@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -45,6 +46,7 @@ module Aws::Polly
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -381,7 +383,9 @@ module Aws::Polly
     #   [1]: http://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html
     #
     # @option params [required, String] :output_format
-    #   The audio format in which the resulting stream will be encoded.
+    #   The format in which the returned output will be encoded. For audio
+    #   stream, this will be mp3, ogg\_vorbis, or pcm. For speech marks, this
+    #   will be json.
     #
     # @option params [String] :sample_rate
     #   The audio frequency specified in Hz.
@@ -391,6 +395,9 @@ module Aws::Polly
     #
     #   Valid values for `pcm` are "8000" and "16000" The default value is
     #   "16000".
+    #
+    # @option params [Array<String>] :speech_mark_types
+    #   The type of speech marks returned for the input text.
     #
     # @option params [required, String] :text
     #   Input text to synthesize. If you specify `ssml` as the `TextType`,
@@ -422,8 +429,9 @@ module Aws::Polly
     #
     #   resp = client.synthesize_speech({
     #     lexicon_names: ["LexiconName"],
-    #     output_format: "mp3", # required, accepts mp3, ogg_vorbis, pcm
+    #     output_format: "json", # required, accepts json, mp3, ogg_vorbis, pcm
     #     sample_rate: "SampleRate",
+    #     speech_mark_types: ["sentence"], # accepts sentence, ssml, viseme, word
     #     text: "Text", # required
     #     text_type: "ssml", # accepts ssml, text
     #     voice_id: "Geraint", # required, accepts Geraint, Gwyneth, Mads, Naja, Hans, Marlene, Nicole, Russell, Amy, Brian, Emma, Raveena, Ivy, Joanna, Joey, Justin, Kendra, Kimberly, Salli, Conchita, Enrique, Miguel, Penelope, Chantal, Celine, Mathieu, Dora, Karl, Carla, Giorgio, Mizuki, Liv, Lotte, Ruben, Ewa, Jacek, Jan, Maja, Ricardo, Vitoria, Cristiano, Ines, Carmen, Maxim, Tatyana, Astrid, Filiz
@@ -457,7 +465,7 @@ module Aws::Polly
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

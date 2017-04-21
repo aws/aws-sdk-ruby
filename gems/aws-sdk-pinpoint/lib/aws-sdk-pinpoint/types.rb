@@ -8,6 +8,8 @@
 module Aws::Pinpoint
   module Types
 
+    # Apple Push Notification Service channel definition.
+    #
     # @note When making an API call, you may pass APNSChannelRequest
     #   data as a hash:
     #
@@ -30,7 +32,10 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Apple Distribution Push Notification Service channel definition.
+    #
     # @!attribute [rw] application_id
+    #   The ID of the application to which the channel applies.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -38,6 +43,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] id
+    #   The unique channel ID.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
@@ -72,6 +78,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Activities for campaign.
+    #
     # @!attribute [rw] item
     #   List of campaign activities
     #   @return [Array<Types::ActivityResponse>]
@@ -81,6 +89,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Activity definition
+    #
     # @!attribute [rw] application_id
     #   The ID of the application to which the campaign applies.
     #   @return [String]
@@ -121,6 +131,14 @@ module Aws::Pinpoint
     #   delivered messages.
     #   @return [Integer]
     #
+    # @!attribute [rw] timezones_completed_count
+    #   The total number of timezones completed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timezones_total_count
+    #   The total number of unique timezones present in the segment.
+    #   @return [Integer]
+    #
     # @!attribute [rw] total_endpoint_count
     #   The total number of endpoints to which the campaign attempts to
     #   deliver messages.
@@ -140,11 +158,15 @@ module Aws::Pinpoint
       :start,
       :state,
       :successful_endpoint_count,
+      :timezones_completed_count,
+      :timezones_total_count,
       :total_endpoint_count,
       :treatment_id)
       include Aws::Structure
     end
 
+    # Application settings.
+    #
     # @!attribute [rw] application_id
     #   The unique ID for the application.
     #   @return [String]
@@ -173,6 +195,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Custom attibute dimension
+    #
     # @note When making an API call, you may pass AttributeDimension
     #   data as a hash:
     #
@@ -182,6 +206,9 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] attribute_type
+    #   The type of dimension: INCLUSIVE – Endpoints that match the criteria
+    #   are included in the segment. EXCLUSIVE – Endpoints that match the
+    #   criteria are excluded from the segment.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -193,6 +220,9 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Campaign Limits are used to limit the number of messages that can be
+    # sent to a user.
+    #
     # @note When making an API call, you may pass CampaignLimits
     #   data as a hash:
     #
@@ -215,6 +245,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Campaign definition
+    #
     # @!attribute [rw] additional_treatments
     #   Treatments that are defined in addition to the default treatment.
     #   @return [Array<Types::TreatmentResource>]
@@ -318,7 +350,12 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # State of the Campaign
+    #
     # @!attribute [rw] campaign_status
+    #   The status of the campaign, or the status of a treatment that
+    #   belongs to an A/B test campaign. Valid values: SCHEDULED, EXECUTING,
+    #   PENDING\_NEXT\_RUN, COMPLETED, PAUSED
     #   @return [String]
     #
     class CampaignState < Struct.new(
@@ -326,6 +363,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # List of available campaigns.
+    #
     # @!attribute [rw] item
     #   A list of campaigns.
     #   @return [Array<Types::CampaignResponse>]
@@ -465,6 +504,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] write_campaign_request
+    #   Used to create a campaign.
     #   @return [Types::WriteCampaignRequest]
     #
     class CreateCampaignRequest < Struct.new(
@@ -474,6 +514,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaign_response
+    #   Campaign definition
     #   @return [Types::CampaignResponse]
     #
     class CreateCampaignResponse < Struct.new(
@@ -565,6 +606,12 @@ module Aws::Pinpoint
     #                 values: ["__string"],
     #               },
     #             },
+    #             user_attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #             },
     #           },
     #           name: "__string",
     #         },
@@ -574,6 +621,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] write_segment_request
+    #   Segment definition.
     #   @return [Types::WriteSegmentRequest]
     #
     class CreateSegmentRequest < Struct.new(
@@ -583,6 +631,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segment_response
+    #   Segment definition.
     #   @return [Types::SegmentResponse]
     #
     class CreateSegmentResponse < Struct.new(
@@ -606,6 +655,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] apns_channel_response
+    #   Apple Distribution Push Notification Service channel definition.
     #   @return [Types::APNSChannelResponse]
     #
     class DeleteApnsChannelResponse < Struct.new(
@@ -634,10 +684,36 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaign_response
+    #   Campaign definition
     #   @return [Types::CampaignResponse]
     #
     class DeleteCampaignResponse < Struct.new(
       :campaign_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteEventStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   Application Id.
+    #   @return [String]
+    #
+    class DeleteEventStreamRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream
+    #   Model for an event publishing subscription export.
+    #   @return [Types::EventStream]
+    #
+    class DeleteEventStreamResponse < Struct.new(
+      :event_stream)
       include Aws::Structure
     end
 
@@ -657,6 +733,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] gcm_channel_response
+    #   Google Cloud Messaging channel definition
     #   @return [Types::GCMChannelResponse]
     #
     class DeleteGcmChannelResponse < Struct.new(
@@ -685,6 +762,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segment_response
+    #   Segment definition.
     #   @return [Types::SegmentResponse]
     #
     class DeleteSegmentResponse < Struct.new(
@@ -692,6 +770,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Endpoint update request
+    #
     # @note When making an API call, you may pass EndpointBatchItem
     #   data as a hash:
     #
@@ -736,13 +816,15 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] address
-    #   The address or token of the endpoint.
+    #   The address or token of the endpoint as provided by your push
+    #   provider (e.g. DeviceToken or RegistrationId).
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
+    #   The channel type. Valid values: APNS, GCM
     #   @return [String]
     #
     # @!attribute [rw] demographic
@@ -760,6 +842,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] id
+    #   The unique Id for the Endpoint in the batch.
     #   @return [String]
     #
     # @!attribute [rw] location
@@ -800,6 +883,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Endpoint batch update request.
+    #
     # @note When making an API call, you may pass EndpointBatchRequest
     #   data as a hash:
     #
@@ -856,6 +941,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Endpoint demographic data
+    #
     # @note When making an API call, you may pass EndpointDemographic
     #   data as a hash:
     #
@@ -917,6 +1004,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Endpoint location data
+    #
     # @note When making an API call, you may pass EndpointLocation
     #   data as a hash:
     #
@@ -966,6 +1055,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Endpoint update request
+    #
     # @note When making an API call, you may pass EndpointRequest
     #   data as a hash:
     #
@@ -1009,13 +1100,15 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] address
-    #   The address or token of the endpoint.
+    #   The address or token of the endpoint as provided by your push
+    #   provider (e.g. DeviceToken or RegistrationId).
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
+    #   The channel type. Valid values: APNS, GCM
     #   @return [String]
     #
     # @!attribute [rw] demographic
@@ -1069,8 +1162,11 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Endpoint response
+    #
     # @!attribute [rw] address
-    #   The address or token of the endpoint.
+    #   The address or token of the endpoint as provided by your push
+    #   provider (e.g. DeviceToken or RegistrationId).
     #   @return [String]
     #
     # @!attribute [rw] application_id
@@ -1081,6 +1177,7 @@ module Aws::Pinpoint
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] channel_type
+    #   The channel type. Valid values: APNS, GCM
     #   @return [String]
     #
     # @!attribute [rw] cohort_id
@@ -1132,14 +1229,14 @@ module Aws::Pinpoint
     #   The unique ID for the most recent request to update the endpoint.
     #   @return [String]
     #
-    # @!attribute [rw] shard_id
-    #   The ShardId of endpoint
-    #   @return [String]
-    #
     # @!attribute [rw] user
     #   Custom user-specific attributes that your app reports to Amazon
     #   Pinpoint.
     #   @return [Types::EndpointUser]
+    #
+    # @!attribute [rw] shard_id
+    #   The ShardId of endpoint
+    #   @return [String]
     #
     class EndpointResponse < Struct.new(
       :address,
@@ -1156,11 +1253,13 @@ module Aws::Pinpoint
       :metrics,
       :opt_out,
       :request_id,
-      :shard_id,
-      :user)
+      :user,
+      :shard_id)
       include Aws::Structure
     end
 
+    # Endpoint user specific custom userAttributes
+    #
     # @note When making an API call, you may pass EndpointUser
     #   data as a hash:
     #
@@ -1184,6 +1283,50 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Model for an event publishing subscription export.
+    #
+    # @!attribute [rw] application_id
+    #   The ID of the application from which events should be published.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_stream_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream or
+    #   Firehose delivery stream to which you want to publish events.
+    #   Firehose ARN:
+    #   arn:aws:firehose:REGION:ACCOUNT\_ID:deliverystream/STREAM\_NAME
+    #   Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT\_ID:stream/STREAM\_NAME
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID assigned the IAM role that authorizes Amazon
+    #   Pinpoint to publish to the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The date the event stream was last updated in ISO 8601 format.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_by
+    #   The IAM user who last modified the event stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role that authorizes Amazon Pinpoint to publish events to
+    #   the stream in your account.
+    #   @return [String]
+    #
+    class EventStream < Struct.new(
+      :application_id,
+      :destination_stream_arn,
+      :external_id,
+      :last_modified_date,
+      :last_updated_by,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Google Cloud Messaging credentials
+    #
     # @note When making an API call, you may pass GCMChannelRequest
     #   data as a hash:
     #
@@ -1200,7 +1343,10 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Google Cloud Messaging channel definition
+    #
     # @!attribute [rw] application_id
+    #   The ID of the application to which the channel applies.
     #   @return [String]
     #
     # @!attribute [rw] creation_date
@@ -1212,6 +1358,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] id
+    #   The unique channel ID.
     #   @return [String]
     #
     # @!attribute [rw] is_archived
@@ -1263,6 +1410,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] apns_channel_response
+    #   Apple Distribution Push Notification Service channel definition.
     #   @return [Types::APNSChannelResponse]
     #
     class GetApnsChannelResponse < Struct.new(
@@ -1286,6 +1434,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] application_settings_resource
+    #   Application settings.
     #   @return [Types::ApplicationSettingsResource]
     #
     class GetApplicationSettingsResponse < Struct.new(
@@ -1324,6 +1473,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] activities_response
+    #   Activities for campaign.
     #   @return [Types::ActivitiesResponse]
     #
     class GetCampaignActivitiesResponse < Struct.new(
@@ -1352,6 +1502,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaign_response
+    #   Campaign definition
     #   @return [Types::CampaignResponse]
     #
     class GetCampaignResponse < Struct.new(
@@ -1385,6 +1536,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaign_response
+    #   Campaign definition
     #   @return [Types::CampaignResponse]
     #
     class GetCampaignVersionResponse < Struct.new(
@@ -1423,6 +1575,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaigns_response
+    #   List of available campaigns.
     #   @return [Types::CampaignsResponse]
     #
     class GetCampaignVersionsResponse < Struct.new(
@@ -1456,6 +1609,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaigns_response
+    #   List of available campaigns.
     #   @return [Types::CampaignsResponse]
     #
     class GetCampaignsResponse < Struct.new(
@@ -1484,10 +1638,36 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] endpoint_response
+    #   Endpoint response
     #   @return [Types::EndpointResponse]
     #
     class GetEndpointResponse < Struct.new(
       :endpoint_response)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEventStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   Application Id.
+    #   @return [String]
+    #
+    class GetEventStreamRequest < Struct.new(
+      :application_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream
+    #   Model for an event publishing subscription export.
+    #   @return [Types::EventStream]
+    #
+    class GetEventStreamResponse < Struct.new(
+      :event_stream)
       include Aws::Structure
     end
 
@@ -1507,6 +1687,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] gcm_channel_response
+    #   Google Cloud Messaging channel definition
     #   @return [Types::GCMChannelResponse]
     #
     class GetGcmChannelResponse < Struct.new(
@@ -1568,6 +1749,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] import_jobs_response
+    #   Import job list.
     #   @return [Types::ImportJobsResponse]
     #
     class GetImportJobsResponse < Struct.new(
@@ -1606,6 +1788,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] import_jobs_response
+    #   Import job list.
     #   @return [Types::ImportJobsResponse]
     #
     class GetSegmentImportJobsResponse < Struct.new(
@@ -1634,6 +1817,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segment_response
+    #   Segment definition.
     #   @return [Types::SegmentResponse]
     #
     class GetSegmentResponse < Struct.new(
@@ -1667,6 +1851,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segment_response
+    #   Segment definition.
     #   @return [Types::SegmentResponse]
     #
     class GetSegmentVersionResponse < Struct.new(
@@ -1705,6 +1890,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segments_response
+    #   Segments in your account.
     #   @return [Types::SegmentsResponse]
     #
     class GetSegmentVersionsResponse < Struct.new(
@@ -1738,6 +1924,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segments_response
+    #   Segments in your account.
     #   @return [Types::SegmentsResponse]
     #
     class GetSegmentsResponse < Struct.new(
@@ -1769,6 +1956,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] format
+    #   The format of the files that contain the endpoint definitions. Valid
+    #   values: CSV, JSON
     #   @return [String]
     #
     # @!attribute [rw] register_endpoints
@@ -1822,6 +2011,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] format
+    #   The format of the files that contain the endpoint definitions. Valid
+    #   values: CSV, JSON
     #   @return [String]
     #
     # @!attribute [rw] register_endpoints
@@ -1899,6 +2090,9 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] job_status
+    #   The status of the import job. Valid values: CREATED, INITIALIZING,
+    #   PROCESSING, COMPLETING, COMPLETED, FAILING, FAILED The job status is
+    #   FAILED if one or more pieces failed to import.
     #   @return [String]
     #
     # @!attribute [rw] total_failures
@@ -1937,6 +2131,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Import job list.
+    #
     # @!attribute [rw] item
     #   A list of import jobs for the application.
     #   @return [Array<Types::ImportJobResponse>]
@@ -1968,6 +2164,13 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] action
+    #   The action that occurs if the user taps a push notification
+    #   delivered by the campaign: OPEN\_APP – Your app launches, or it
+    #   becomes the foreground app if it has been sent to the background.
+    #   This is the default action. DEEP\_LINK – Uses deep linking features
+    #   in iOS and Android to open your app and display a designated user
+    #   interface within the app. URL – The default mobile browser on the
+    #   user's device launches and opens a web page at the URL you specify.
     #   @return [String]
     #
     # @!attribute [rw] body
@@ -2021,10 +2224,14 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Simple message object.
+    #
     # @!attribute [rw] message
+    #   The error message returned from the API.
     #   @return [String]
     #
     # @!attribute [rw] request_id
+    #   The unique message body ID.
     #   @return [String]
     #
     class MessageBody < Struct.new(
@@ -2033,6 +2240,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Message configuration for a campaign.
+    #
     # @note When making an API call, you may pass MessageConfiguration
     #   data as a hash:
     #
@@ -2093,6 +2302,43 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutEventStreamRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         write_event_stream: { # required
+    #           destination_stream_arn: "__string",
+    #           external_id: "__string",
+    #           role_arn: "__string",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] application_id
+    #   Application Id.
+    #   @return [String]
+    #
+    # @!attribute [rw] write_event_stream
+    #   Write event stream wrapper.
+    #   @return [Types::WriteEventStream]
+    #
+    class PutEventStreamRequest < Struct.new(
+      :application_id,
+      :write_event_stream)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_stream
+    #   Model for an event publishing subscription export.
+    #   @return [Types::EventStream]
+    #
+    class PutEventStreamResponse < Struct.new(
+      :event_stream)
+      include Aws::Structure
+    end
+
+    # Quiet Time
+    #
     # @note When making an API call, you may pass QuietTime
     #   data as a hash:
     #
@@ -2115,6 +2361,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Define how a segment based on recency of use.
+    #
     # @note When making an API call, you may pass RecencyDimension
     #   data as a hash:
     #
@@ -2124,9 +2372,15 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] duration
+    #   The length of time during which users have been active or inactive
+    #   with your app. Valid values: HR\_24, DAY\_7, DAY\_14, DAY\_30
     #   @return [String]
     #
     # @!attribute [rw] recency_type
+    #   The recency dimension type: ACTIVE – Users who have used your app
+    #   within the specified duration are included in the segment. INACTIVE
+    #   – Users who have not used your app within the specified duration are
+    #   included in the segment.
     #   @return [String]
     #
     class RecencyDimension < Struct.new(
@@ -2135,6 +2389,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Shcedule that defines when a campaign is run.
+    #
     # @note When making an API call, you may pass Schedule
     #   data as a hash:
     #
@@ -2155,6 +2411,8 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] frequency
+    #   How often the campaign delivers messages. Valid values: ONCE,
+    #   HOURLY, DAILY, WEEKLY, MONTHLY
     #   @return [String]
     #
     # @!attribute [rw] is_local_time
@@ -2188,6 +2446,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Segment behavior dimensions
+    #
     # @note When making an API call, you may pass SegmentBehaviors
     #   data as a hash:
     #
@@ -2207,6 +2467,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Segment demographic dimensions
+    #
     # @note When making an API call, you may pass SegmentDemographics
     #   data as a hash:
     #
@@ -2262,6 +2524,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Segment dimensions
+    #
     # @note When making an API call, you may pass SegmentDimensions
     #   data as a hash:
     #
@@ -2306,6 +2570,12 @@ module Aws::Pinpoint
     #             values: ["__string"],
     #           },
     #         },
+    #         user_attributes: {
+    #           "__string" => {
+    #             attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #             values: ["__string"],
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] attributes
@@ -2324,20 +2594,29 @@ module Aws::Pinpoint
     #   The segment location attributes.
     #   @return [Types::SegmentLocation]
     #
+    # @!attribute [rw] user_attributes
+    #   Custom segment user attributes.
+    #   @return [Hash<String,Types::AttributeDimension>]
+    #
     class SegmentDimensions < Struct.new(
       :attributes,
       :behavior,
       :demographic,
-      :location)
+      :location,
+      :user_attributes)
       include Aws::Structure
     end
 
+    # Segment import definition.
+    #
     # @!attribute [rw] external_id
     #   A unique, custom ID assigned to the IAM role that restricts who can
     #   assume the role.
     #   @return [String]
     #
     # @!attribute [rw] format
+    #   The format of the endpoint files that were imported to create this
+    #   segment. Valid values: CSV, JSON
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -2364,6 +2643,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Segment location dimensions
+    #
     # @note When making an API call, you may pass SegmentLocation
     #   data as a hash:
     #
@@ -2383,6 +2664,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Segment definition.
+    #
     # @!attribute [rw] application_id
     #   The ID of the application to which the segment applies.
     #   @return [String]
@@ -2412,6 +2695,14 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] segment_type
+    #   The segment type: DIMENSIONAL – A dynamic segment built from
+    #   selection criteria based on endpoint data reported by your app. You
+    #   create this type of segment by using the segment builder in the
+    #   Amazon Pinpoint console or by making a POST request to the segments
+    #   resource. IMPORT – A static segment built from an imported set of
+    #   endpoint definitions. You create this type of segment by importing a
+    #   segment in the Amazon Pinpoint console or by making a POST request
+    #   to the jobs/import resource.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2431,6 +2722,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Segments in your account.
+    #
     # @!attribute [rw] item
     #   The list of segments.
     #   @return [Array<Types::SegmentResponse>]
@@ -2446,6 +2739,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Dimension specification of a segment.
+    #
     # @note When making an API call, you may pass SetDimension
     #   data as a hash:
     #
@@ -2455,6 +2750,9 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] dimension_type
+    #   The type of dimension: INCLUSIVE – Endpoints that match the criteria
+    #   are included in the segment. EXCLUSIVE – Endpoints that match the
+    #   criteria are excluded from the segment.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2466,6 +2764,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Treatment resource
+    #
     # @!attribute [rw] id
     #   The unique treatment ID.
     #   @return [String]
@@ -2517,6 +2817,7 @@ module Aws::Pinpoint
     #       }
     #
     # @!attribute [rw] apns_channel_request
+    #   Apple Push Notification Service channel definition.
     #   @return [Types::APNSChannelRequest]
     #
     # @!attribute [rw] application_id
@@ -2529,6 +2830,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] apns_channel_response
+    #   Apple Distribution Push Notification Service channel definition.
     #   @return [Types::APNSChannelResponse]
     #
     class UpdateApnsChannelResponse < Struct.new(
@@ -2557,6 +2859,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] write_application_settings_request
+    #   Creating application setting request
     #   @return [Types::WriteApplicationSettingsRequest]
     #
     class UpdateApplicationSettingsRequest < Struct.new(
@@ -2566,6 +2869,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] application_settings_resource
+    #   Application settings.
     #   @return [Types::ApplicationSettingsResource]
     #
     class UpdateApplicationSettingsResponse < Struct.new(
@@ -2701,6 +3005,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] write_campaign_request
+    #   Used to create a campaign.
     #   @return [Types::WriteCampaignRequest]
     #
     class UpdateCampaignRequest < Struct.new(
@@ -2711,6 +3016,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] campaign_response
+    #   Campaign definition
     #   @return [Types::CampaignResponse]
     #
     class UpdateCampaignResponse < Struct.new(
@@ -2771,6 +3077,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_request
+    #   Endpoint update request
     #   @return [Types::EndpointRequest]
     #
     class UpdateEndpointRequest < Struct.new(
@@ -2781,6 +3088,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] message_body
+    #   Simple message object.
     #   @return [Types::MessageBody]
     #
     class UpdateEndpointResponse < Struct.new(
@@ -2842,6 +3150,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] endpoint_batch_request
+    #   Endpoint batch update request.
     #   @return [Types::EndpointBatchRequest]
     #
     class UpdateEndpointsBatchRequest < Struct.new(
@@ -2851,6 +3160,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] message_body
+    #   Simple message object.
     #   @return [Types::MessageBody]
     #
     class UpdateEndpointsBatchResponse < Struct.new(
@@ -2872,6 +3182,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] gcm_channel_request
+    #   Google Cloud Messaging credentials
     #   @return [Types::GCMChannelRequest]
     #
     class UpdateGcmChannelRequest < Struct.new(
@@ -2881,6 +3192,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] gcm_channel_response
+    #   Google Cloud Messaging channel definition
     #   @return [Types::GCMChannelResponse]
     #
     class UpdateGcmChannelResponse < Struct.new(
@@ -2936,6 +3248,12 @@ module Aws::Pinpoint
     #                 values: ["__string"],
     #               },
     #             },
+    #             user_attributes: {
+    #               "__string" => {
+    #                 attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #                 values: ["__string"],
+    #               },
+    #             },
     #           },
     #           name: "__string",
     #         },
@@ -2948,6 +3266,7 @@ module Aws::Pinpoint
     #   @return [String]
     #
     # @!attribute [rw] write_segment_request
+    #   Segment definition.
     #   @return [Types::WriteSegmentRequest]
     #
     class UpdateSegmentRequest < Struct.new(
@@ -2958,6 +3277,7 @@ module Aws::Pinpoint
     end
 
     # @!attribute [rw] segment_response
+    #   Segment definition.
     #   @return [Types::SegmentResponse]
     #
     class UpdateSegmentResponse < Struct.new(
@@ -2965,6 +3285,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Creating application setting request
+    #
     # @note When making an API call, you may pass WriteApplicationSettingsRequest
     #   data as a hash:
     #
@@ -2997,6 +3319,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Used to create a campaign.
+    #
     # @note When making an API call, you may pass WriteCampaignRequest
     #   data as a hash:
     #
@@ -3180,6 +3504,44 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Request to save an EventStream.
+    #
+    # @note When making an API call, you may pass WriteEventStream
+    #   data as a hash:
+    #
+    #       {
+    #         destination_stream_arn: "__string",
+    #         external_id: "__string",
+    #         role_arn: "__string",
+    #       }
+    #
+    # @!attribute [rw] destination_stream_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream or
+    #   Firehose delivery stream to which you want to publish events.
+    #   Firehose ARN:
+    #   arn:aws:firehose:REGION:ACCOUNT\_ID:deliverystream/STREAM\_NAME
+    #   Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT\_ID:stream/STREAM\_NAME
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID assigned the IAM role that authorizes Amazon
+    #   Pinpoint to publish to the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The IAM role that authorizes Amazon Pinpoint to publish events to
+    #   the stream in your account.
+    #   @return [String]
+    #
+    class WriteEventStream < Struct.new(
+      :destination_stream_arn,
+      :external_id,
+      :role_arn)
+      include Aws::Structure
+    end
+
+    # Segment definition.
+    #
     # @note When making an API call, you may pass WriteSegmentRequest
     #   data as a hash:
     #
@@ -3225,6 +3587,12 @@ module Aws::Pinpoint
     #               values: ["__string"],
     #             },
     #           },
+    #           user_attributes: {
+    #             "__string" => {
+    #               attribute_type: "INCLUSIVE", # accepts INCLUSIVE, EXCLUSIVE
+    #               values: ["__string"],
+    #             },
+    #           },
     #         },
     #         name: "__string",
     #       }
@@ -3243,6 +3611,8 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # Used to create a campaign treatment.
+    #
     # @note When making an API call, you may pass WriteTreatmentResource
     #   data as a hash:
     #

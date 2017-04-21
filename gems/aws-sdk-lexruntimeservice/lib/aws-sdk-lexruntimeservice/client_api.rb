@@ -11,8 +11,10 @@ module Aws::LexRuntimeService
 
     include Seahorse::Model
 
+    Accept = Shapes::StringShape.new(name: 'Accept')
     BadGatewayException = Shapes::StructureShape.new(name: 'BadGatewayException')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    BlobStream = Shapes::BlobShape.new(name: 'BlobStream')
     BotAlias = Shapes::StringShape.new(name: 'BotAlias')
     BotName = Shapes::StringShape.new(name: 'BotName')
     Button = Shapes::StructureShape.new(name: 'Button')
@@ -24,19 +26,25 @@ module Aws::LexRuntimeService
     DialogState = Shapes::StringShape.new(name: 'DialogState')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GenericAttachment = Shapes::StructureShape.new(name: 'GenericAttachment')
+    HttpContentType = Shapes::StringShape.new(name: 'HttpContentType')
     IntentName = Shapes::StringShape.new(name: 'IntentName')
     InternalFailureException = Shapes::StructureShape.new(name: 'InternalFailureException')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LoopDetectedException = Shapes::StructureShape.new(name: 'LoopDetectedException')
+    NotAcceptableException = Shapes::StructureShape.new(name: 'NotAcceptableException')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    PostContentRequest = Shapes::StructureShape.new(name: 'PostContentRequest')
+    PostContentResponse = Shapes::StructureShape.new(name: 'PostContentResponse')
     PostTextRequest = Shapes::StructureShape.new(name: 'PostTextRequest')
     PostTextResponse = Shapes::StructureShape.new(name: 'PostTextResponse')
+    RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResponseCard = Shapes::StructureShape.new(name: 'ResponseCard')
     String = Shapes::StringShape.new(name: 'String')
     StringMap = Shapes::MapShape.new(name: 'StringMap')
     StringUrlWithLength = Shapes::StringShape.new(name: 'StringUrlWithLength')
     StringWithLength = Shapes::StringShape.new(name: 'StringWithLength')
     Text = Shapes::StringShape.new(name: 'Text')
+    UnsupportedMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedMediaTypeException')
     UserId = Shapes::StringShape.new(name: 'UserId')
     genericAttachmentList = Shapes::ListShape.new(name: 'genericAttachmentList')
     listOfButtons = Shapes::ListShape.new(name: 'listOfButtons')
@@ -51,6 +59,30 @@ module Aws::LexRuntimeService
     GenericAttachment.add_member(:image_url, Shapes::ShapeRef.new(shape: StringUrlWithLength, location_name: "imageUrl"))
     GenericAttachment.add_member(:buttons, Shapes::ShapeRef.new(shape: listOfButtons, location_name: "buttons"))
     GenericAttachment.struct_class = Types::GenericAttachment
+
+    PostContentRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
+    PostContentRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
+    PostContentRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    PostContentRequest.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
+    PostContentRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: HttpContentType, required: true, location: "header", location_name: "Content-Type"))
+    PostContentRequest.add_member(:accept, Shapes::ShapeRef.new(shape: Accept, location: "header", location_name: "Accept"))
+    PostContentRequest.add_member(:input_stream, Shapes::ShapeRef.new(shape: BlobStream, required: true, location_name: "inputStream"))
+    PostContentRequest.struct_class = Types::PostContentRequest
+    PostContentRequest[:payload] = :input_stream
+    PostContentRequest[:payload_member] = PostContentRequest.member(:input_stream)
+
+    PostContentResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: HttpContentType, location: "header", location_name: "Content-Type"))
+    PostContentResponse.add_member(:intent_name, Shapes::ShapeRef.new(shape: IntentName, location: "header", location_name: "x-amz-lex-intent-name"))
+    PostContentResponse.add_member(:slots, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slots", metadata: {"jsonvalue"=>true}))
+    PostContentResponse.add_member(:session_attributes, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-session-attributes", metadata: {"jsonvalue"=>true}))
+    PostContentResponse.add_member(:message, Shapes::ShapeRef.new(shape: Text, location: "header", location_name: "x-amz-lex-message"))
+    PostContentResponse.add_member(:dialog_state, Shapes::ShapeRef.new(shape: DialogState, location: "header", location_name: "x-amz-lex-dialog-state"))
+    PostContentResponse.add_member(:slot_to_elicit, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-slot-to-elicit"))
+    PostContentResponse.add_member(:input_transcript, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amz-lex-input-transcript"))
+    PostContentResponse.add_member(:audio_stream, Shapes::ShapeRef.new(shape: BlobStream, location_name: "audioStream"))
+    PostContentResponse.struct_class = Types::PostContentResponse
+    PostContentResponse[:payload] = :audio_stream
+    PostContentResponse[:payload_member] = PostContentResponse.member(:audio_stream)
 
     PostTextRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     PostTextRequest.add_member(:bot_alias, Shapes::ShapeRef.new(shape: BotAlias, required: true, location: "uri", location_name: "botAlias"))
@@ -94,6 +126,26 @@ module Aws::LexRuntimeService
         "signatureVersion" => "v4",
         "signingName" => "lex",
       }
+
+      api.add_operation(:post_content, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PostContent"
+        o.http_method = "POST"
+        o.http_request_uri = "/bot/{botName}/alias/{botAlias}/user/{userId}/content"
+        o['authtype'] = "v4-unsigned-body"
+        o.input = Shapes::ShapeRef.new(shape: PostContentRequest)
+        o.output = Shapes::ShapeRef.new(shape: PostContentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMediaTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: NotAcceptableException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: BadGatewayException)
+        o.errors << Shapes::ShapeRef.new(shape: LoopDetectedException)
+      end)
 
       api.add_operation(:post_text, Seahorse::Model::Operation.new.tap do |o|
         o.name = "PostText"

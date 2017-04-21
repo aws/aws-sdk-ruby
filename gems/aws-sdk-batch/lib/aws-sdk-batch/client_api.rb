@@ -11,6 +11,9 @@ module Aws::Batch
 
     include Seahorse::Model
 
+    AttemptContainerDetail = Shapes::StructureShape.new(name: 'AttemptContainerDetail')
+    AttemptDetail = Shapes::StructureShape.new(name: 'AttemptDetail')
+    AttemptDetails = Shapes::ListShape.new(name: 'AttemptDetails')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CEState = Shapes::StringShape.new(name: 'CEState')
     CEStatus = Shapes::StringShape.new(name: 'CEStatus')
@@ -72,6 +75,7 @@ module Aws::Batch
     ParametersMap = Shapes::MapShape.new(name: 'ParametersMap')
     RegisterJobDefinitionRequest = Shapes::StructureShape.new(name: 'RegisterJobDefinitionRequest')
     RegisterJobDefinitionResponse = Shapes::StructureShape.new(name: 'RegisterJobDefinitionResponse')
+    RetryStrategy = Shapes::StructureShape.new(name: 'RetryStrategy')
     ServerException = Shapes::StructureShape.new(name: 'ServerException')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -88,6 +92,20 @@ module Aws::Batch
     UpdateJobQueueResponse = Shapes::StructureShape.new(name: 'UpdateJobQueueResponse')
     Volume = Shapes::StructureShape.new(name: 'Volume')
     Volumes = Shapes::ListShape.new(name: 'Volumes')
+
+    AttemptContainerDetail.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
+    AttemptContainerDetail.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
+    AttemptContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
+    AttemptContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    AttemptContainerDetail.struct_class = Types::AttemptContainerDetail
+
+    AttemptDetail.add_member(:container, Shapes::ShapeRef.new(shape: AttemptContainerDetail, location_name: "container"))
+    AttemptDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, location_name: "startedAt"))
+    AttemptDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
+    AttemptDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    AttemptDetail.struct_class = Types::AttemptDetail
+
+    AttemptDetails.member = Shapes::ShapeRef.new(shape: AttemptDetail)
 
     CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     CancelJobRequest.add_member(:reason, Shapes::ShapeRef.new(shape: String, required: true, location_name: "reason"))
@@ -119,6 +137,7 @@ module Aws::Batch
     ComputeResource.add_member(:maxv_cpus, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "maxvCpus"))
     ComputeResource.add_member(:desiredv_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "desiredvCpus"))
     ComputeResource.add_member(:instance_types, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "instanceTypes"))
+    ComputeResource.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     ComputeResource.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "subnets"))
     ComputeResource.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "securityGroupIds"))
     ComputeResource.add_member(:ec2_key_pair, Shapes::ShapeRef.new(shape: String, location_name: "ec2KeyPair"))
@@ -148,6 +167,7 @@ module Aws::Batch
     ContainerDetail.add_member(:exit_code, Shapes::ShapeRef.new(shape: Integer, location_name: "exitCode"))
     ContainerDetail.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
     ContainerDetail.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
+    ContainerDetail.add_member(:task_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskArn"))
     ContainerDetail.struct_class = Types::ContainerDetail
 
     ContainerOverrides.add_member(:vcpus, Shapes::ShapeRef.new(shape: Integer, location_name: "vcpus"))
@@ -252,6 +272,7 @@ module Aws::Batch
     JobDefinition.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     JobDefinition.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
     JobDefinition.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
+    JobDefinition.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     JobDefinition.add_member(:container_properties, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "containerProperties"))
     JobDefinition.struct_class = Types::JobDefinition
 
@@ -266,8 +287,10 @@ module Aws::Batch
     JobDetail.add_member(:job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobId"))
     JobDetail.add_member(:job_queue, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobQueue"))
     JobDetail.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, required: true, location_name: "status"))
+    JobDetail.add_member(:attempts, Shapes::ShapeRef.new(shape: AttemptDetails, location_name: "attempts"))
     JobDetail.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     JobDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Long, location_name: "createdAt"))
+    JobDetail.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     JobDetail.add_member(:started_at, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "startedAt"))
     JobDetail.add_member(:stopped_at, Shapes::ShapeRef.new(shape: Long, location_name: "stoppedAt"))
     JobDetail.add_member(:depends_on, Shapes::ShapeRef.new(shape: JobDependencyList, location_name: "dependsOn"))
@@ -323,12 +346,16 @@ module Aws::Batch
     RegisterJobDefinitionRequest.add_member(:type, Shapes::ShapeRef.new(shape: JobDefinitionType, required: true, location_name: "type"))
     RegisterJobDefinitionRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     RegisterJobDefinitionRequest.add_member(:container_properties, Shapes::ShapeRef.new(shape: ContainerProperties, location_name: "containerProperties"))
+    RegisterJobDefinitionRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     RegisterJobDefinitionRequest.struct_class = Types::RegisterJobDefinitionRequest
 
     RegisterJobDefinitionResponse.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionName"))
     RegisterJobDefinitionResponse.add_member(:job_definition_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinitionArn"))
     RegisterJobDefinitionResponse.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "revision"))
     RegisterJobDefinitionResponse.struct_class = Types::RegisterJobDefinitionResponse
+
+    RetryStrategy.add_member(:attempts, Shapes::ShapeRef.new(shape: Integer, location_name: "attempts"))
+    RetryStrategy.struct_class = Types::RetryStrategy
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -338,6 +365,7 @@ module Aws::Batch
     SubmitJobRequest.add_member(:job_definition, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobDefinition"))
     SubmitJobRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "parameters"))
     SubmitJobRequest.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
+    SubmitJobRequest.add_member(:retry_strategy, Shapes::ShapeRef.new(shape: RetryStrategy, location_name: "retryStrategy"))
     SubmitJobRequest.struct_class = Types::SubmitJobRequest
 
     SubmitJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "jobName"))

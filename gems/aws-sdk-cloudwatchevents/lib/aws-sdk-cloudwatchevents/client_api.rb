@@ -11,12 +11,14 @@ module Aws::CloudWatchEvents
 
     include Seahorse::Model
 
+    Arn = Shapes::StringShape.new(name: 'Arn')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
     DescribeRuleRequest = Shapes::StructureShape.new(name: 'DescribeRuleRequest')
     DescribeRuleResponse = Shapes::StructureShape.new(name: 'DescribeRuleResponse')
     DisableRuleRequest = Shapes::StructureShape.new(name: 'DisableRuleRequest')
+    EcsParameters = Shapes::StructureShape.new(name: 'EcsParameters')
     EnableRuleRequest = Shapes::StructureShape.new(name: 'EnableRuleRequest')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -25,11 +27,15 @@ module Aws::CloudWatchEvents
     EventResource = Shapes::StringShape.new(name: 'EventResource')
     EventResourceList = Shapes::ListShape.new(name: 'EventResourceList')
     EventTime = Shapes::TimestampShape.new(name: 'EventTime')
+    InputTransformer = Shapes::StructureShape.new(name: 'InputTransformer')
+    InputTransformerPathKey = Shapes::StringShape.new(name: 'InputTransformerPathKey')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalException = Shapes::StructureShape.new(name: 'InternalException')
     InvalidEventPatternException = Shapes::StructureShape.new(name: 'InvalidEventPatternException')
+    KinesisParameters = Shapes::StructureShape.new(name: 'KinesisParameters')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     LimitMax100 = Shapes::IntegerShape.new(name: 'LimitMax100')
+    LimitMin1 = Shapes::IntegerShape.new(name: 'LimitMin1')
     ListRuleNamesByTargetRequest = Shapes::StructureShape.new(name: 'ListRuleNamesByTargetRequest')
     ListRuleNamesByTargetResponse = Shapes::StructureShape.new(name: 'ListRuleNamesByTargetResponse')
     ListRulesRequest = Shapes::StructureShape.new(name: 'ListRulesRequest')
@@ -62,6 +68,12 @@ module Aws::CloudWatchEvents
     RuleNameList = Shapes::ListShape.new(name: 'RuleNameList')
     RuleResponseList = Shapes::ListShape.new(name: 'RuleResponseList')
     RuleState = Shapes::StringShape.new(name: 'RuleState')
+    RunCommandParameters = Shapes::StructureShape.new(name: 'RunCommandParameters')
+    RunCommandTarget = Shapes::StructureShape.new(name: 'RunCommandTarget')
+    RunCommandTargetKey = Shapes::StringShape.new(name: 'RunCommandTargetKey')
+    RunCommandTargetValue = Shapes::StringShape.new(name: 'RunCommandTargetValue')
+    RunCommandTargetValues = Shapes::ListShape.new(name: 'RunCommandTargetValues')
+    RunCommandTargets = Shapes::ListShape.new(name: 'RunCommandTargets')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     String = Shapes::StringShape.new(name: 'String')
     Target = Shapes::StructureShape.new(name: 'Target')
@@ -71,8 +83,11 @@ module Aws::CloudWatchEvents
     TargetInput = Shapes::StringShape.new(name: 'TargetInput')
     TargetInputPath = Shapes::StringShape.new(name: 'TargetInputPath')
     TargetList = Shapes::ListShape.new(name: 'TargetList')
+    TargetPartitionKeyPath = Shapes::StringShape.new(name: 'TargetPartitionKeyPath')
     TestEventPatternRequest = Shapes::StructureShape.new(name: 'TestEventPatternRequest')
     TestEventPatternResponse = Shapes::StructureShape.new(name: 'TestEventPatternResponse')
+    TransformerInput = Shapes::StringShape.new(name: 'TransformerInput')
+    TransformerPaths = Shapes::MapShape.new(name: 'TransformerPaths')
 
     DeleteRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     DeleteRuleRequest.struct_class = Types::DeleteRuleRequest
@@ -92,10 +107,21 @@ module Aws::CloudWatchEvents
     DisableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     DisableRuleRequest.struct_class = Types::DisableRuleRequest
 
+    EcsParameters.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "TaskDefinitionArn"))
+    EcsParameters.add_member(:task_count, Shapes::ShapeRef.new(shape: LimitMin1, location_name: "TaskCount"))
+    EcsParameters.struct_class = Types::EcsParameters
+
     EnableRuleRequest.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "Name"))
     EnableRuleRequest.struct_class = Types::EnableRuleRequest
 
     EventResourceList.member = Shapes::ShapeRef.new(shape: EventResource)
+
+    InputTransformer.add_member(:input_paths_map, Shapes::ShapeRef.new(shape: TransformerPaths, location_name: "InputPathsMap"))
+    InputTransformer.add_member(:input_template, Shapes::ShapeRef.new(shape: TransformerInput, required: true, location_name: "InputTemplate"))
+    InputTransformer.struct_class = Types::InputTransformer
+
+    KinesisParameters.add_member(:partition_key_path, Shapes::ShapeRef.new(shape: TargetPartitionKeyPath, required: true, location_name: "PartitionKeyPath"))
+    KinesisParameters.struct_class = Types::KinesisParameters
 
     ListRuleNamesByTargetRequest.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "TargetArn"))
     ListRuleNamesByTargetRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -201,10 +227,26 @@ module Aws::CloudWatchEvents
 
     RuleResponseList.member = Shapes::ShapeRef.new(shape: Rule)
 
+    RunCommandParameters.add_member(:run_command_targets, Shapes::ShapeRef.new(shape: RunCommandTargets, required: true, location_name: "RunCommandTargets"))
+    RunCommandParameters.struct_class = Types::RunCommandParameters
+
+    RunCommandTarget.add_member(:key, Shapes::ShapeRef.new(shape: RunCommandTargetKey, required: true, location_name: "Key"))
+    RunCommandTarget.add_member(:values, Shapes::ShapeRef.new(shape: RunCommandTargetValues, required: true, location_name: "Values"))
+    RunCommandTarget.struct_class = Types::RunCommandTarget
+
+    RunCommandTargetValues.member = Shapes::ShapeRef.new(shape: RunCommandTargetValue)
+
+    RunCommandTargets.member = Shapes::ShapeRef.new(shape: RunCommandTarget)
+
     Target.add_member(:id, Shapes::ShapeRef.new(shape: TargetId, required: true, location_name: "Id"))
     Target.add_member(:arn, Shapes::ShapeRef.new(shape: TargetArn, required: true, location_name: "Arn"))
+    Target.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     Target.add_member(:input, Shapes::ShapeRef.new(shape: TargetInput, location_name: "Input"))
     Target.add_member(:input_path, Shapes::ShapeRef.new(shape: TargetInputPath, location_name: "InputPath"))
+    Target.add_member(:input_transformer, Shapes::ShapeRef.new(shape: InputTransformer, location_name: "InputTransformer"))
+    Target.add_member(:kinesis_parameters, Shapes::ShapeRef.new(shape: KinesisParameters, location_name: "KinesisParameters"))
+    Target.add_member(:run_command_parameters, Shapes::ShapeRef.new(shape: RunCommandParameters, location_name: "RunCommandParameters"))
+    Target.add_member(:ecs_parameters, Shapes::ShapeRef.new(shape: EcsParameters, location_name: "EcsParameters"))
     Target.struct_class = Types::Target
 
     TargetIdList.member = Shapes::ShapeRef.new(shape: TargetId)
@@ -217,6 +259,9 @@ module Aws::CloudWatchEvents
 
     TestEventPatternResponse.add_member(:result, Shapes::ShapeRef.new(shape: Boolean, location_name: "Result"))
     TestEventPatternResponse.struct_class = Types::TestEventPatternResponse
+
+    TransformerPaths.key = Shapes::ShapeRef.new(shape: InputTransformerPathKey)
+    TransformerPaths.value = Shapes::ShapeRef.new(shape: TargetInputPath)
 
 
     # @api private

@@ -8,6 +8,70 @@
 module Aws::Batch
   module Types
 
+    # An object representing the details of a container that is part of a
+    # job attempt.
+    #
+    # @!attribute [rw] container_instance_arn
+    #   The Amazon Resource Name (ARN) of the Amazon ECS container instance
+    #   that hosts the job attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_arn
+    #   The Amazon Resource Name (ARN) of the Amazon ECS task that is
+    #   associated with the job attempt.
+    #   @return [String]
+    #
+    # @!attribute [rw] exit_code
+    #   The exit code for the job attempt. A non-zero exit code is
+    #   considered a failure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reason
+    #   A short (255 max characters) human-readable string to provide
+    #   additional details about a running or stopped container.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptContainerDetail AWS API Documentation
+    #
+    class AttemptContainerDetail < Struct.new(
+      :container_instance_arn,
+      :task_arn,
+      :exit_code,
+      :reason)
+      include Aws::Structure
+    end
+
+    # An object representing a job attempt.
+    #
+    # @!attribute [rw] container
+    #   Details about the container in this job attempt.
+    #   @return [Types::AttemptContainerDetail]
+    #
+    # @!attribute [rw] started_at
+    #   The Unix timestamp for when the attempt was started (when the task
+    #   transitioned from the `PENDING` state to the `RUNNING` state).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stopped_at
+    #   The Unix timestamp for when the attempt was stopped (when the task
+    #   transitioned from the `RUNNING` state to the `STOPPED` state).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status_reason
+    #   A short, human-readable string to provide additional details about
+    #   the current status of the job attempt.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptDetail AWS API Documentation
+    #
+    class AttemptDetail < Struct.new(
+      :container,
+      :started_at,
+      :stopped_at,
+      :status_reason)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelJobRequest
     #   data as a hash:
     #
@@ -140,6 +204,7 @@ module Aws::Batch
     #         maxv_cpus: 1, # required
     #         desiredv_cpus: 1,
     #         instance_types: ["String"], # required
+    #         image_id: "String",
     #         subnets: ["String"], # required
     #         security_group_ids: ["String"], # required
     #         ec2_key_pair: "String",
@@ -170,6 +235,11 @@ module Aws::Batch
     # @!attribute [rw] instance_types
     #   The instances types that may launched.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] image_id
+    #   The Amazon Machine Image (AMI) ID used for instances launched in the
+    #   compute environment.
+    #   @return [String]
     #
     # @!attribute [rw] subnets
     #   The VPC subnets into which the compute resources are launched.
@@ -216,6 +286,7 @@ module Aws::Batch
       :maxv_cpus,
       :desiredv_cpus,
       :instance_types,
+      :image_id,
       :subnets,
       :security_group_ids,
       :ec2_key_pair,
@@ -328,6 +399,11 @@ module Aws::Batch
     #   the container is running.
     #   @return [String]
     #
+    # @!attribute [rw] task_arn
+    #   The Amazon Resource Name (ARN) of the Amazon ECS task that is
+    #   associated with the container job.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerDetail AWS API Documentation
     #
     class ContainerDetail < Struct.new(
@@ -345,7 +421,8 @@ module Aws::Batch
       :user,
       :exit_code,
       :reason,
-      :container_instance_arn)
+      :container_instance_arn,
+      :task_arn)
       include Aws::Structure
     end
 
@@ -632,6 +709,7 @@ module Aws::Batch
     #           maxv_cpus: 1, # required
     #           desiredv_cpus: 1,
     #           instance_types: ["String"], # required
+    #           image_id: "String",
     #           subnets: ["String"], # required
     #           security_group_ids: ["String"], # required
     #           ec2_key_pair: "String",
@@ -1145,6 +1223,11 @@ module Aws::Batch
     #   corresponding parameter defaults from the job definition.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed jobs that are submitted with
+    #   this job definition.
+    #   @return [Types::RetryStrategy]
+    #
     # @!attribute [rw] container_properties
     #   An object with various properties specific to container-based jobs.
     #   @return [Types::ContainerProperties]
@@ -1158,6 +1241,7 @@ module Aws::Batch
       :status,
       :type,
       :parameters,
+      :retry_strategy,
       :container_properties)
       include Aws::Structure
     end
@@ -1201,6 +1285,10 @@ module Aws::Batch
     #   The current status for the job.
     #   @return [String]
     #
+    # @!attribute [rw] attempts
+    #   A list of job attempts associated with this job.
+    #   @return [Array<Types::AttemptDetail>]
+    #
     # @!attribute [rw] status_reason
     #   A short, human-readable string to provide additional details about
     #   the current status of the job.
@@ -1210,6 +1298,10 @@ module Aws::Batch
     #   The Unix timestamp for when the job was created (when the task
     #   entered the `PENDING` state).
     #   @return [Integer]
+    #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for this job if an attempt fails.
+    #   @return [Types::RetryStrategy]
     #
     # @!attribute [rw] started_at
     #   The Unix timestamp for when the job was started (when the task
@@ -1247,8 +1339,10 @@ module Aws::Batch
       :job_id,
       :job_queue,
       :status,
+      :attempts,
       :status_reason,
       :created_at,
+      :retry_strategy,
       :started_at,
       :stopped_at,
       :depends_on,
@@ -1423,8 +1517,8 @@ module Aws::Batch
       include Aws::Structure
     end
 
-    # Details on a volume mount point that is used in a job's container
-    # properties.
+    # Details on a Docker volume mount point that is used in a job's
+    # container properties.
     #
     # @note When making an API call, you may pass MountPoint
     #   data as a hash:
@@ -1505,6 +1599,9 @@ module Aws::Batch
     #           ],
     #           user: "String",
     #         },
+    #         retry_strategy: {
+    #           attempts: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_definition_name
@@ -1527,13 +1624,20 @@ module Aws::Batch
     #   This parameter is required if the `type` parameter is `container`.
     #   @return [Types::ContainerProperties]
     #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed jobs that are submitted with
+    #   this job definition. Any retry strategy that is specified during a
+    #   SubmitJob operation overrides the retry strategy defined here.
+    #   @return [Types::RetryStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest AWS API Documentation
     #
     class RegisterJobDefinitionRequest < Struct.new(
       :job_definition_name,
       :type,
       :parameters,
-      :container_properties)
+      :container_properties,
+      :retry_strategy)
       include Aws::Structure
     end
 
@@ -1555,6 +1659,29 @@ module Aws::Batch
       :job_definition_name,
       :job_definition_arn,
       :revision)
+      include Aws::Structure
+    end
+
+    # The retry strategy associated with a job.
+    #
+    # @note When making an API call, you may pass RetryStrategy
+    #   data as a hash:
+    #
+    #       {
+    #         attempts: 1,
+    #       }
+    #
+    # @!attribute [rw] attempts
+    #   The number of times to move a job to the `RUNNABLE` status. You may
+    #   specify between 1 and 10 attempts. If `attempts` is greater than
+    #   one, the job is retried if it fails until it has moved to `RUNNABLE`
+    #   that many times.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RetryStrategy AWS API Documentation
+    #
+    class RetryStrategy < Struct.new(
+      :attempts)
       include Aws::Structure
     end
 
@@ -1584,10 +1711,15 @@ module Aws::Batch
     #             },
     #           ],
     #         },
+    #         retry_strategy: {
+    #           attempts: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] job_name
-    #   The name of the job.
+    #   The name of the job. A name must be 1 to 128 characters in length.
+    #
+    #   Pattern: ^\[a-zA-Z0-9\_\]+$
     #   @return [String]
     #
     # @!attribute [rw] job_queue
@@ -1596,8 +1728,8 @@ module Aws::Batch
     #   @return [String]
     #
     # @!attribute [rw] depends_on
-    #   A list of job names or IDs on which this job depends. A job can
-    #   depend upon a maximum of 100 jobs.
+    #   A list of job IDs on which this job depends. A job can depend upon a
+    #   maximum of 100 jobs.
     #   @return [Array<Types::JobDependency>]
     #
     # @!attribute [rw] job_definition
@@ -1625,6 +1757,12 @@ module Aws::Batch
     #   `environment` override.
     #   @return [Types::ContainerOverrides]
     #
+    # @!attribute [rw] retry_strategy
+    #   The retry strategy to use for failed jobs from this SubmitJob
+    #   operation. When a retry strategy is specified here, it overrides the
+    #   retry strategy defined in the job definition.
+    #   @return [Types::RetryStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest AWS API Documentation
     #
     class SubmitJobRequest < Struct.new(
@@ -1633,7 +1771,8 @@ module Aws::Batch
       :depends_on,
       :job_definition,
       :parameters,
-      :container_overrides)
+      :container_overrides,
+      :retry_strategy)
       include Aws::Structure
     end
 

@@ -88,6 +88,8 @@ module Aws::Lambda
     ListEventSourceMappingsResponse = Shapes::StructureShape.new(name: 'ListEventSourceMappingsResponse')
     ListFunctionsRequest = Shapes::StructureShape.new(name: 'ListFunctionsRequest')
     ListFunctionsResponse = Shapes::StructureShape.new(name: 'ListFunctionsResponse')
+    ListTagsRequest = Shapes::StructureShape.new(name: 'ListTagsRequest')
+    ListTagsResponse = Shapes::StructureShape.new(name: 'ListTagsResponse')
     ListVersionsByFunctionRequest = Shapes::StructureShape.new(name: 'ListVersionsByFunctionRequest')
     ListVersionsByFunctionResponse = Shapes::StructureShape.new(name: 'ListVersionsByFunctionResponse')
     LogType = Shapes::StringShape.new(name: 'LogType')
@@ -118,11 +120,20 @@ module Aws::Lambda
     SubnetIPAddressLimitReachedException = Shapes::StructureShape.new(name: 'SubnetIPAddressLimitReachedException')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::MapShape.new(name: 'Tags')
     ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
     Timeout = Shapes::IntegerShape.new(name: 'Timeout')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    TracingConfig = Shapes::StructureShape.new(name: 'TracingConfig')
+    TracingConfigResponse = Shapes::StructureShape.new(name: 'TracingConfigResponse')
+    TracingMode = Shapes::StringShape.new(name: 'TracingMode')
     UnsupportedMediaTypeException = Shapes::StructureShape.new(name: 'UnsupportedMediaTypeException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UpdateAliasRequest = Shapes::StructureShape.new(name: 'UpdateAliasRequest')
     UpdateEventSourceMappingRequest = Shapes::StructureShape.new(name: 'UpdateEventSourceMappingRequest')
     UpdateFunctionCodeRequest = Shapes::StructureShape.new(name: 'UpdateFunctionCodeRequest')
@@ -190,6 +201,8 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     CreateFunctionRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     CreateFunctionRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
+    CreateFunctionRequest.add_member(:tracing_config, Shapes::ShapeRef.new(shape: TracingConfig, location_name: "TracingConfig"))
+    CreateFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
@@ -258,6 +271,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     FunctionConfiguration.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentResponse, location_name: "Environment"))
     FunctionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
+    FunctionConfiguration.add_member(:tracing_config, Shapes::ShapeRef.new(shape: TracingConfigResponse, location_name: "TracingConfig"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
@@ -285,6 +299,7 @@ module Aws::Lambda
 
     GetFunctionResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "Configuration"))
     GetFunctionResponse.add_member(:code, Shapes::ShapeRef.new(shape: FunctionCodeLocation, location_name: "Code"))
+    GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
     GetPolicyRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -349,6 +364,12 @@ module Aws::Lambda
     ListFunctionsResponse.add_member(:functions, Shapes::ShapeRef.new(shape: FunctionList, location_name: "Functions"))
     ListFunctionsResponse.struct_class = Types::ListFunctionsResponse
 
+    ListTagsRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    ListTagsRequest.struct_class = Types::ListTagsRequest
+
+    ListTagsResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ListTagsResponse.struct_class = Types::ListTagsResponse
+
     ListVersionsByFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     ListVersionsByFunctionRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "Marker"))
     ListVersionsByFunctionRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxListItems, location: "querystring", location_name: "MaxItems"))
@@ -371,6 +392,25 @@ module Aws::Lambda
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+    TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    Tags.key = Shapes::ShapeRef.new(shape: TagKey)
+    Tags.value = Shapes::ShapeRef.new(shape: TagValue)
+
+    TracingConfig.add_member(:mode, Shapes::ShapeRef.new(shape: TracingMode, location_name: "Mode"))
+    TracingConfig.struct_class = Types::TracingConfig
+
+    TracingConfigResponse.add_member(:mode, Shapes::ShapeRef.new(shape: TracingMode, location_name: "Mode"))
+    TracingConfigResponse.struct_class = Types::TracingConfigResponse
+
+    UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: FunctionArn, required: true, location: "uri", location_name: "ARN"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
     UpdateAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location: "uri", location_name: "Name"))
@@ -403,6 +443,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "Runtime"))
     UpdateFunctionConfigurationRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
     UpdateFunctionConfigurationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
+    UpdateFunctionConfigurationRequest.add_member(:tracing_config, Shapes::ShapeRef.new(shape: TracingConfig, location_name: "TracingConfig"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
@@ -672,6 +713,18 @@ module Aws::Lambda
         )
       end)
 
+      api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTags"
+        o.http_method = "GET"
+        o.http_request_uri = "/2017-03-31/tags/{ARN}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:list_versions_by_function, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListVersionsByFunction"
         o.http_method = "GET"
@@ -702,6 +755,30 @@ module Aws::Lambda
         o.http_method = "DELETE"
         o.http_request_uri = "/2015-03-31/functions/{FunctionName}/policy/{StatementId}"
         o.input = Shapes::ShapeRef.new(shape: RemovePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/2017-03-31/tags/{ARN}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/2017-03-31/tags/{ARN}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

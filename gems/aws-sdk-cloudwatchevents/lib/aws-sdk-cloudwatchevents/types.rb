@@ -8,8 +8,6 @@
 module Aws::CloudWatchEvents
   module Types
 
-    # Container for the parameters to the DeleteRule operation.
-    #
     # @note When making an API call, you may pass DeleteRuleRequest
     #   data as a hash:
     #
@@ -18,7 +16,7 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the rule to be deleted.
+    #   The name of the rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest AWS API Documentation
@@ -28,8 +26,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the DescribeRule operation.
-    #
     # @note When making an API call, you may pass DescribeRuleRequest
     #   data as a hash:
     #
@@ -38,7 +34,7 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the rule you want to describe details for.
+    #   The name of the rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DescribeRuleRequest AWS API Documentation
@@ -48,14 +44,12 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the DescribeRule operation.
-    #
     # @!attribute [rw] name
-    #   The rule's name.
+    #   The name of the rule.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) associated with the rule.
+    #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
@@ -72,7 +66,7 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The rule's description.
+    #   The description of the rule.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
@@ -93,8 +87,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the DisableRule operation.
-    #
     # @note When making an API call, you may pass DisableRuleRequest
     #   data as a hash:
     #
@@ -103,7 +95,7 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the rule you want to disable.
+    #   The name of the rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DisableRuleRequest AWS API Documentation
@@ -113,8 +105,35 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the EnableRule operation.
+    # The custom parameters to be used when the target is an Amazon ECS
+    # cluster.
     #
+    # @note When making an API call, you may pass EcsParameters
+    #   data as a hash:
+    #
+    #       {
+    #         task_definition_arn: "Arn", # required
+    #         task_count: 1,
+    #       }
+    #
+    # @!attribute [rw] task_definition_arn
+    #   The ARN of the task definition to use if the event target is an
+    #   Amazon ECS cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_count
+    #   The number of tasks to create based on the `TaskDefinition`. The
+    #   default is one.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EcsParameters AWS API Documentation
+    #
+    class EcsParameters < Struct.new(
+      :task_definition_arn,
+      :task_count)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass EnableRuleRequest
     #   data as a hash:
     #
@@ -123,7 +142,7 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the rule that you want to enable.
+    #   The name of the rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/EnableRuleRequest AWS API Documentation
@@ -133,8 +152,67 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the ListRuleNamesByTarget operation.
+    # Contains the parameters needed for you to provide custom input to a
+    # target based on one or more pieces of data extracted from the event.
     #
+    # @note When making an API call, you may pass InputTransformer
+    #   data as a hash:
+    #
+    #       {
+    #         input_paths_map: {
+    #           "InputTransformerPathKey" => "TargetInputPath",
+    #         },
+    #         input_template: "TransformerInput", # required
+    #       }
+    #
+    # @!attribute [rw] input_paths_map
+    #   Map of JSON paths to be extracted from the event. These are
+    #   key-value pairs, where each value is a JSON path.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] input_template
+    #   Input template where you can use the values of the keys from
+    #   `InputPathsMap` to customize the data sent to the target.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/InputTransformer AWS API Documentation
+    #
+    class InputTransformer < Struct.new(
+      :input_paths_map,
+      :input_template)
+      include Aws::Structure
+    end
+
+    # This object enables you to specify a JSON path to extract from the
+    # event and use as the partition key for the Amazon Kinesis stream, so
+    # that you can control the shard to which the event goes. If you do not
+    # include this parameter, the default is to use the `eventId` as the
+    # partition key.
+    #
+    # @note When making an API call, you may pass KinesisParameters
+    #   data as a hash:
+    #
+    #       {
+    #         partition_key_path: "TargetPartitionKeyPath", # required
+    #       }
+    #
+    # @!attribute [rw] partition_key_path
+    #   The JSON path to be extracted from the event and used as the
+    #   partition key. For more information, see [Amazon Kinesis Streams Key
+    #   Concepts][1] in the *Amazon Kinesis Streams Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/streams/latest/dev/key-concepts.html#partition-key
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/KinesisParameters AWS API Documentation
+    #
+    class KinesisParameters < Struct.new(
+      :partition_key_path)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRuleNamesByTargetRequest
     #   data as a hash:
     #
@@ -145,13 +223,12 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) of the target resource that you want
-    #   to list the rules for.
+    #   The Amazon Resource Name (ARN) of the target resource.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token returned by a previous call to indicate that there is more
-    #   data available.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -167,14 +244,13 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the ListRuleNamesByTarget operation.
-    #
     # @!attribute [rw] rule_names
-    #   List of rules names that can invoke the given target.
+    #   The names of the rules that can invoke the given target.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
-    #   Indicates that there are additional results to retrieve.
+    #   Indicates whether there are additional results to retrieve. If there
+    #   are no more results, the value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRuleNamesByTargetResponse AWS API Documentation
@@ -185,8 +261,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the ListRules operation.
-    #
     # @note When making an API call, you may pass ListRulesRequest
     #   data as a hash:
     #
@@ -201,8 +275,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token returned by a previous call to indicate that there is more
-    #   data available.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -218,14 +292,13 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the ListRules operation.
-    #
     # @!attribute [rw] rules
-    #   List of rules matching the specified criteria.
+    #   The rules that match the specified criteria.
     #   @return [Array<Types::Rule>]
     #
     # @!attribute [rw] next_token
-    #   Indicates that there are additional results to retrieve.
+    #   Indicates whether there are additional results to retrieve. If there
+    #   are no more results, the value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListRulesResponse AWS API Documentation
@@ -236,8 +309,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the ListTargetsByRule operation.
-    #
     # @note When making an API call, you may pass ListTargetsByRuleRequest
     #   data as a hash:
     #
@@ -248,12 +319,12 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] rule
-    #   The name of the rule whose targets you want to list.
+    #   The name of the rule.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   The token returned by a previous call to indicate that there is more
-    #   data available.
+    #   The token returned by a previous call to retrieve the next set of
+    #   results.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -269,14 +340,13 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the ListTargetsByRule operation.
-    #
     # @!attribute [rw] targets
-    #   Lists the targets assigned to the rule.
+    #   The targets assigned to the rule.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] next_token
-    #   Indicates that there are additional results to retrieve.
+    #   Indicates whether there are additional results to retrieve. If there
+    #   are no more results, the value is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/ListTargetsByRuleResponse AWS API Documentation
@@ -287,8 +357,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the PutEvents operation.
-    #
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
     #
@@ -317,7 +385,7 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Contains information about the event to be used in PutEvents.
+    # Represents an event to be submitted.
     #
     # @note When making an API call, you may pass PutEventsRequestEntry
     #   data as a hash:
@@ -331,8 +399,8 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] time
-    #   Timestamp of event, per [RFC3339][1]. If no timestamp is provided,
-    #   the timestamp of the PutEvents call will be used.
+    #   The timestamp of the event, per [RFC3339][1]. If no timestamp is
+    #   provided, the timestamp of the PutEvents call is used.
     #
     #
     #
@@ -356,7 +424,7 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] detail
     #   In the JSON sense, an object containing fields, which may also
-    #   contain nested sub-objects. No constraints are imposed on its
+    #   contain nested subobjects. No constraints are imposed on its
     #   contents.
     #   @return [String]
     #
@@ -371,17 +439,15 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the PutEvents operation.
-    #
     # @!attribute [rw] failed_entry_count
     #   The number of failed entries.
     #   @return [Integer]
     #
     # @!attribute [rw] entries
-    #   A list of successfully and unsuccessfully ingested events results.
-    #   If the ingestion was successful, the entry will have the event ID in
-    #   it. If not, then the ErrorCode and ErrorMessage can be used to
-    #   identify the problem with the entry.
+    #   The successfully and unsuccessfully ingested events results. If the
+    #   ingestion was successful, the entry has the event ID in it.
+    #   Otherwise, you can use the error code and error message to identify
+    #   the problem with the entry.
     #   @return [Array<Types::PutEventsResultEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResponse AWS API Documentation
@@ -392,20 +458,18 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # A PutEventsResult contains a list of PutEventsResultEntry.
+    # Represents an event that failed to be submitted.
     #
     # @!attribute [rw] event_id
-    #   The ID of the event submitted to Amazon CloudWatch Events.
+    #   The ID of the event.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code representing why the event submission failed on this
-    #   entry.
+    #   The error code that indicates why the event submission failed.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message explaining why the event submission failed on this
-    #   entry.
+    #   The error message that explains why the event submission failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutEventsResultEntry AWS API Documentation
@@ -417,8 +481,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the PutRule operation.
-    #
     # @note When making an API call, you may pass PutRuleRequest
     #   data as a hash:
     #
@@ -469,10 +531,8 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the PutRule operation.
-    #
     # @!attribute [rw] rule_arn
-    #   The Amazon Resource Name (ARN) that identifies the rule.
+    #   The Amazon Resource Name (ARN) of the rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutRuleResponse AWS API Documentation
@@ -482,8 +542,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the PutTargets operation.
-    #
     # @note When making an API call, you may pass PutTargetsRequest
     #   data as a hash:
     #
@@ -493,18 +551,40 @@ module Aws::CloudWatchEvents
     #           {
     #             id: "TargetId", # required
     #             arn: "TargetArn", # required
+    #             role_arn: "RoleArn",
     #             input: "TargetInput",
     #             input_path: "TargetInputPath",
+    #             input_transformer: {
+    #               input_paths_map: {
+    #                 "InputTransformerPathKey" => "TargetInputPath",
+    #               },
+    #               input_template: "TransformerInput", # required
+    #             },
+    #             kinesis_parameters: {
+    #               partition_key_path: "TargetPartitionKeyPath", # required
+    #             },
+    #             run_command_parameters: {
+    #               run_command_targets: [ # required
+    #                 {
+    #                   key: "RunCommandTargetKey", # required
+    #                   values: ["RunCommandTargetValue"], # required
+    #                 },
+    #               ],
+    #             },
+    #             ecs_parameters: {
+    #               task_definition_arn: "Arn", # required
+    #               task_count: 1,
+    #             },
     #           },
     #         ],
     #       }
     #
     # @!attribute [rw] rule
-    #   The name of the rule you want to add targets to.
+    #   The name of the rule.
     #   @return [String]
     #
     # @!attribute [rw] targets
-    #   List of targets you want to update or add to the rule.
+    #   The targets to update or add to the rule.
     #   @return [Array<Types::Target>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsRequest AWS API Documentation
@@ -515,14 +595,12 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the PutTargets operation.
-    #
     # @!attribute [rw] failed_entry_count
     #   The number of failed entries.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_entries
-    #   An array of failed target entries.
+    #   The failed target entries.
     #   @return [Array<Types::PutTargetsResultEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResponse AWS API Documentation
@@ -533,20 +611,18 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # A PutTargetsResult contains a list of PutTargetsResultEntry.
+    # Represents a target that failed to be added to a rule.
     #
     # @!attribute [rw] target_id
-    #   The ID of the target submitted to Amazon CloudWatch Events.
+    #   The ID of the target.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code representing why the target submission failed on this
-    #   entry.
+    #   The error code that indicates why the target addition failed.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message explaining why the target submission failed on
-    #   this entry.
+    #   The error message that explains why the target addition failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/PutTargetsResultEntry AWS API Documentation
@@ -558,8 +634,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Container for the parameters to the RemoveTargets operation.
-    #
     # @note When making an API call, you may pass RemoveTargetsRequest
     #   data as a hash:
     #
@@ -569,11 +643,11 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] rule
-    #   The name of the rule you want to remove targets from.
+    #   The name of the rule.
     #   @return [String]
     #
     # @!attribute [rw] ids
-    #   The list of target IDs to remove from the rule.
+    #   The IDs of the targets to remove from the rule.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsRequest AWS API Documentation
@@ -584,14 +658,12 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the RemoveTargets operation.
-    #
     # @!attribute [rw] failed_entry_count
     #   The number of failed entries.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_entries
-    #   An array of failed target entries.
+    #   The failed target entries.
     #   @return [Array<Types::RemoveTargetsResultEntry>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResponse AWS API Documentation
@@ -602,22 +674,18 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The ID of the target requested to be removed from the rule by Amazon
-    # CloudWatch Events.
+    # Represents a target that failed to be removed from a rule.
     #
     # @!attribute [rw] target_id
-    #   The ID of the target requested to be removed by Amazon CloudWatch
-    #   Events.
+    #   The ID of the target.
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code representing why the target removal failed on this
-    #   entry.
+    #   The error code that indicates why the target removal failed.
     #   @return [String]
     #
     # @!attribute [rw] error_message
-    #   The error message explaining why the target removal failed on this
-    #   entry.
+    #   The error message that explains why the target removal failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RemoveTargetsResultEntry AWS API Documentation
@@ -629,11 +697,10 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Contains information about a rule in Amazon CloudWatch Events. A
-    # ListRulesResult contains a list of Rules.
+    # Contains information about a rule in Amazon CloudWatch Events.
     #
     # @!attribute [rw] name
-    #   The rule's name.
+    #   The name of the rule.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -645,7 +712,7 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The rule's state.
+    #   The state of the rule.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -658,8 +725,8 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) associated with the role that is used
-    #   for target invocation.
+    #   The Amazon Resource Name (ARN) of the role that is used for target
+    #   invocation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Rule AWS API Documentation
@@ -675,22 +742,67 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # Targets are the resources that can be invoked when a rule is
-    # triggered. For example, AWS Lambda functions, Amazon Kinesis streams,
-    # and built-in targets.
+    # This parameter contains the criteria (either InstanceIds or a tag)
+    # used to specify which EC2 instances are to be sent the command.
     #
-    # **Input** and **InputPath** are mutually-exclusive and optional
-    # parameters of a target. When a rule is triggered due to a matched
-    # event, if for a target:
+    # @note When making an API call, you may pass RunCommandParameters
+    #   data as a hash:
     #
-    # * Neither **Input** nor **InputPath** is specified, then the entire
-    #   event is passed to the target in JSON form.
-    # * **InputPath** is specified in the form of JSONPath (e.g.
-    #   **$.detail**), then only the part of the event specified in the path
-    #   is passed to the target (e.g. only the detail part of the event is
-    #   passed).
-    # * **Input** is specified in the form of a valid JSON, then the matched
-    #   event is overridden with this constant.
+    #       {
+    #         run_command_targets: [ # required
+    #           {
+    #             key: "RunCommandTargetKey", # required
+    #             values: ["RunCommandTargetValue"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] run_command_targets
+    #   Currently, we support including only one RunCommandTarget block,
+    #   which specifies either an array of InstanceIds or a tag.
+    #   @return [Array<Types::RunCommandTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RunCommandParameters AWS API Documentation
+    #
+    class RunCommandParameters < Struct.new(
+      :run_command_targets)
+      include Aws::Structure
+    end
+
+    # Information about the EC2 instances that are to be sent the command,
+    # specified as key-value pairs. Each `RunCommandTarget` block can
+    # include only one key, but this key may specify multiple values.
+    #
+    # @note When making an API call, you may pass RunCommandTarget
+    #   data as a hash:
+    #
+    #       {
+    #         key: "RunCommandTargetKey", # required
+    #         values: ["RunCommandTargetValue"], # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   Can be either `tag:` *tag-key* or `InstanceIds`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   If `Key` is `tag:` *tag-key*, `Values` is a list of tag values. If
+    #   `Key` is `InstanceIds`, `Values` is a list of Amazon EC2 instance
+    #   IDs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/RunCommandTarget AWS API Documentation
+    #
+    class RunCommandTarget < Struct.new(
+      :key,
+      :values)
+      include Aws::Structure
+    end
+
+    # Targets are the resources to be invoked when a rule is triggered.
+    # Target types include EC2 instances, AWS Lambda functions, Amazon
+    # Kinesis streams, Amazon ECS tasks, AWS Step Functions state machines,
+    # Run Command, and built-in targets.
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -698,22 +810,50 @@ module Aws::CloudWatchEvents
     #       {
     #         id: "TargetId", # required
     #         arn: "TargetArn", # required
+    #         role_arn: "RoleArn",
     #         input: "TargetInput",
     #         input_path: "TargetInputPath",
+    #         input_transformer: {
+    #           input_paths_map: {
+    #             "InputTransformerPathKey" => "TargetInputPath",
+    #           },
+    #           input_template: "TransformerInput", # required
+    #         },
+    #         kinesis_parameters: {
+    #           partition_key_path: "TargetPartitionKeyPath", # required
+    #         },
+    #         run_command_parameters: {
+    #           run_command_targets: [ # required
+    #             {
+    #               key: "RunCommandTargetKey", # required
+    #               values: ["RunCommandTargetValue"], # required
+    #             },
+    #           ],
+    #         },
+    #         ecs_parameters: {
+    #           task_definition_arn: "Arn", # required
+    #           task_count: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] id
-    #   The unique target assignment ID.
+    #   The ID of the target.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) associated of the target.
+    #   The Amazon Resource Name (ARN) of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role to be used for this
+    #   target when the rule is triggered. If one rule triggers multiple
+    #   targets, you can use a different IAM role for each target.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   Valid JSON text passed to the target. For more information about
-    #   JSON text, see [The JavaScript Object Notation (JSON) Data
-    #   Interchange Format][1].
+    #   Valid JSON text passed to the target. In this case, nothing from the
+    #   event itself is passed to the target. For more information, see [The
+    #   JavaScript Object Notation (JSON) Data Interchange Format][1].
     #
     #
     #
@@ -730,18 +870,50 @@ module Aws::CloudWatchEvents
     #   [1]: http://goessner.net/articles/JsonPath/
     #   @return [String]
     #
+    # @!attribute [rw] input_transformer
+    #   Settings to enable you to provide custom input to a target based on
+    #   certain event data. You can extract one or more key-value pairs from
+    #   the event and then use that data to send customized input to the
+    #   target.
+    #   @return [Types::InputTransformer]
+    #
+    # @!attribute [rw] kinesis_parameters
+    #   The custom parameter you can use to control shard assignment, when
+    #   the target is an Amazon Kinesis stream. If you do not include this
+    #   parameter, the default is to use the `eventId` as the partition key.
+    #   @return [Types::KinesisParameters]
+    #
+    # @!attribute [rw] run_command_parameters
+    #   Parameters used when you are using the rule to invoke Amazon EC2 Run
+    #   Command.
+    #   @return [Types::RunCommandParameters]
+    #
+    # @!attribute [rw] ecs_parameters
+    #   Contains the Amazon ECS task definition and task count to be used,
+    #   if the event target is an Amazon ECS task. For more information
+    #   about Amazon ECS tasks, see [Task Definitions ][1] in the *Amazon
+    #   EC2 Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+    #   @return [Types::EcsParameters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/Target AWS API Documentation
     #
     class Target < Struct.new(
       :id,
       :arn,
+      :role_arn,
       :input,
-      :input_path)
+      :input_path,
+      :input_transformer,
+      :kinesis_parameters,
+      :run_command_parameters,
+      :ecs_parameters)
       include Aws::Structure
     end
 
-    # Container for the parameters to the TestEventPattern operation.
-    #
     # @note When making an API call, you may pass TestEventPatternRequest
     #   data as a hash:
     #
@@ -751,11 +923,11 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern you want to test.
+    #   The event pattern.
     #   @return [String]
     #
     # @!attribute [rw] event
-    #   The event in the JSON format to test against the event pattern.
+    #   The event, in JSON format, to test against the event pattern.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/TestEventPatternRequest AWS API Documentation
@@ -766,8 +938,6 @@ module Aws::CloudWatchEvents
       include Aws::Structure
     end
 
-    # The result of the TestEventPattern operation.
-    #
     # @!attribute [rw] result
     #   Indicates whether the event matches the event pattern.
     #   @return [Boolean]

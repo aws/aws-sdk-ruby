@@ -12,6 +12,8 @@ module Aws::EMR
     include Seahorse::Model
 
     ActionOnFailure = Shapes::StringShape.new(name: 'ActionOnFailure')
+    AddInstanceFleetInput = Shapes::StructureShape.new(name: 'AddInstanceFleetInput')
+    AddInstanceFleetOutput = Shapes::StructureShape.new(name: 'AddInstanceFleetOutput')
     AddInstanceGroupsInput = Shapes::StructureShape.new(name: 'AddInstanceGroupsInput')
     AddInstanceGroupsOutput = Shapes::StructureShape.new(name: 'AddInstanceGroupsOutput')
     AddJobFlowStepsInput = Shapes::StructureShape.new(name: 'AddJobFlowStepsInput')
@@ -83,6 +85,20 @@ module Aws::EMR
     HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
     HadoopStepConfig = Shapes::StructureShape.new(name: 'HadoopStepConfig')
     Instance = Shapes::StructureShape.new(name: 'Instance')
+    InstanceCollectionType = Shapes::StringShape.new(name: 'InstanceCollectionType')
+    InstanceFleet = Shapes::StructureShape.new(name: 'InstanceFleet')
+    InstanceFleetConfig = Shapes::StructureShape.new(name: 'InstanceFleetConfig')
+    InstanceFleetConfigList = Shapes::ListShape.new(name: 'InstanceFleetConfigList')
+    InstanceFleetId = Shapes::StringShape.new(name: 'InstanceFleetId')
+    InstanceFleetList = Shapes::ListShape.new(name: 'InstanceFleetList')
+    InstanceFleetModifyConfig = Shapes::StructureShape.new(name: 'InstanceFleetModifyConfig')
+    InstanceFleetProvisioningSpecifications = Shapes::StructureShape.new(name: 'InstanceFleetProvisioningSpecifications')
+    InstanceFleetState = Shapes::StringShape.new(name: 'InstanceFleetState')
+    InstanceFleetStateChangeReason = Shapes::StructureShape.new(name: 'InstanceFleetStateChangeReason')
+    InstanceFleetStateChangeReasonCode = Shapes::StringShape.new(name: 'InstanceFleetStateChangeReasonCode')
+    InstanceFleetStatus = Shapes::StructureShape.new(name: 'InstanceFleetStatus')
+    InstanceFleetTimeline = Shapes::StructureShape.new(name: 'InstanceFleetTimeline')
+    InstanceFleetType = Shapes::StringShape.new(name: 'InstanceFleetType')
     InstanceGroup = Shapes::StructureShape.new(name: 'InstanceGroup')
     InstanceGroupConfig = Shapes::StructureShape.new(name: 'InstanceGroupConfig')
     InstanceGroupConfigList = Shapes::ListShape.new(name: 'InstanceGroupConfigList')
@@ -111,6 +127,10 @@ module Aws::EMR
     InstanceStatus = Shapes::StructureShape.new(name: 'InstanceStatus')
     InstanceTimeline = Shapes::StructureShape.new(name: 'InstanceTimeline')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
+    InstanceTypeConfig = Shapes::StructureShape.new(name: 'InstanceTypeConfig')
+    InstanceTypeConfigList = Shapes::ListShape.new(name: 'InstanceTypeConfigList')
+    InstanceTypeSpecification = Shapes::StructureShape.new(name: 'InstanceTypeSpecification')
+    InstanceTypeSpecificationList = Shapes::ListShape.new(name: 'InstanceTypeSpecificationList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -128,6 +148,8 @@ module Aws::EMR
     ListBootstrapActionsOutput = Shapes::StructureShape.new(name: 'ListBootstrapActionsOutput')
     ListClustersInput = Shapes::StructureShape.new(name: 'ListClustersInput')
     ListClustersOutput = Shapes::StructureShape.new(name: 'ListClustersOutput')
+    ListInstanceFleetsInput = Shapes::StructureShape.new(name: 'ListInstanceFleetsInput')
+    ListInstanceFleetsOutput = Shapes::StructureShape.new(name: 'ListInstanceFleetsOutput')
     ListInstanceGroupsInput = Shapes::StructureShape.new(name: 'ListInstanceGroupsInput')
     ListInstanceGroupsOutput = Shapes::StructureShape.new(name: 'ListInstanceGroupsOutput')
     ListInstancesInput = Shapes::StructureShape.new(name: 'ListInstancesInput')
@@ -140,6 +162,7 @@ module Aws::EMR
     MarketType = Shapes::StringShape.new(name: 'MarketType')
     MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
     MetricDimensionList = Shapes::ListShape.new(name: 'MetricDimensionList')
+    ModifyInstanceFleetInput = Shapes::StructureShape.new(name: 'ModifyInstanceFleetInput')
     ModifyInstanceGroupsInput = Shapes::StructureShape.new(name: 'ModifyInstanceGroupsInput')
     NewSupportedProductsList = Shapes::ListShape.new(name: 'NewSupportedProductsList')
     NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
@@ -167,6 +190,8 @@ module Aws::EMR
     SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
     ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
     SimpleScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'SimpleScalingPolicyConfiguration')
+    SpotProvisioningSpecification = Shapes::StructureShape.new(name: 'SpotProvisioningSpecification')
+    SpotProvisioningTimeoutAction = Shapes::StringShape.new(name: 'SpotProvisioningTimeoutAction')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepConfig = Shapes::StructureShape.new(name: 'StepConfig')
@@ -195,9 +220,19 @@ module Aws::EMR
     TerminateJobFlowsInput = Shapes::StructureShape.new(name: 'TerminateJobFlowsInput')
     Unit = Shapes::StringShape.new(name: 'Unit')
     VolumeSpecification = Shapes::StructureShape.new(name: 'VolumeSpecification')
+    WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
     XmlString = Shapes::StringShape.new(name: 'XmlString')
     XmlStringList = Shapes::ListShape.new(name: 'XmlStringList')
     XmlStringMaxLen256 = Shapes::StringShape.new(name: 'XmlStringMaxLen256')
+    XmlStringMaxLen256List = Shapes::ListShape.new(name: 'XmlStringMaxLen256List')
+
+    AddInstanceFleetInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "ClusterId"))
+    AddInstanceFleetInput.add_member(:instance_fleet, Shapes::ShapeRef.new(shape: InstanceFleetConfig, required: true, location_name: "InstanceFleet"))
+    AddInstanceFleetInput.struct_class = Types::AddInstanceFleetInput
+
+    AddInstanceFleetOutput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ClusterId"))
+    AddInstanceFleetOutput.add_member(:instance_fleet_id, Shapes::ShapeRef.new(shape: InstanceFleetId, location_name: "InstanceFleetId"))
+    AddInstanceFleetOutput.struct_class = Types::AddInstanceFleetOutput
 
     AddInstanceGroupsInput.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroupConfigList, required: true, location_name: "InstanceGroups"))
     AddInstanceGroupsInput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
@@ -285,6 +320,7 @@ module Aws::EMR
     Cluster.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: ClusterStatus, location_name: "Status"))
     Cluster.add_member(:ec2_instance_attributes, Shapes::ShapeRef.new(shape: Ec2InstanceAttributes, location_name: "Ec2InstanceAttributes"))
+    Cluster.add_member(:instance_collection_type, Shapes::ShapeRef.new(shape: InstanceCollectionType, location_name: "InstanceCollectionType"))
     Cluster.add_member(:log_uri, Shapes::ShapeRef.new(shape: String, location_name: "LogUri"))
     Cluster.add_member(:requested_ami_version, Shapes::ShapeRef.new(shape: String, location_name: "RequestedAmiVersion"))
     Cluster.add_member(:running_ami_version, Shapes::ShapeRef.new(shape: String, location_name: "RunningAmiVersion"))
@@ -412,7 +448,9 @@ module Aws::EMR
 
     Ec2InstanceAttributes.add_member(:ec2_key_name, Shapes::ShapeRef.new(shape: String, location_name: "Ec2KeyName"))
     Ec2InstanceAttributes.add_member(:ec2_subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "Ec2SubnetId"))
+    Ec2InstanceAttributes.add_member(:requested_ec2_subnet_ids, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "RequestedEc2SubnetIds"))
     Ec2InstanceAttributes.add_member(:ec2_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "Ec2AvailabilityZone"))
+    Ec2InstanceAttributes.add_member(:requested_ec2_availability_zones, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "RequestedEc2AvailabilityZones"))
     Ec2InstanceAttributes.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "IamInstanceProfile"))
     Ec2InstanceAttributes.add_member(:emr_managed_master_security_group, Shapes::ShapeRef.new(shape: String, location_name: "EmrManagedMasterSecurityGroup"))
     Ec2InstanceAttributes.add_member(:emr_managed_slave_security_group, Shapes::ShapeRef.new(shape: String, location_name: "EmrManagedSlaveSecurityGroup"))
@@ -446,8 +484,57 @@ module Aws::EMR
     Instance.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "PrivateIpAddress"))
     Instance.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
     Instance.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: String, location_name: "InstanceGroupId"))
+    Instance.add_member(:instance_fleet_id, Shapes::ShapeRef.new(shape: InstanceFleetId, location_name: "InstanceFleetId"))
+    Instance.add_member(:market, Shapes::ShapeRef.new(shape: MarketType, location_name: "Market"))
+    Instance.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
     Instance.add_member(:ebs_volumes, Shapes::ShapeRef.new(shape: EbsVolumeList, location_name: "EbsVolumes"))
     Instance.struct_class = Types::Instance
+
+    InstanceFleet.add_member(:id, Shapes::ShapeRef.new(shape: InstanceFleetId, location_name: "Id"))
+    InstanceFleet.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
+    InstanceFleet.add_member(:status, Shapes::ShapeRef.new(shape: InstanceFleetStatus, location_name: "Status"))
+    InstanceFleet.add_member(:instance_fleet_type, Shapes::ShapeRef.new(shape: InstanceFleetType, location_name: "InstanceFleetType"))
+    InstanceFleet.add_member(:target_on_demand_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetOnDemandCapacity"))
+    InstanceFleet.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
+    InstanceFleet.add_member(:provisioned_on_demand_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ProvisionedOnDemandCapacity"))
+    InstanceFleet.add_member(:provisioned_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ProvisionedSpotCapacity"))
+    InstanceFleet.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: InstanceTypeSpecificationList, location_name: "InstanceTypeSpecifications"))
+    InstanceFleet.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: InstanceFleetProvisioningSpecifications, location_name: "LaunchSpecifications"))
+    InstanceFleet.struct_class = Types::InstanceFleet
+
+    InstanceFleetConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
+    InstanceFleetConfig.add_member(:instance_fleet_type, Shapes::ShapeRef.new(shape: InstanceFleetType, required: true, location_name: "InstanceFleetType"))
+    InstanceFleetConfig.add_member(:target_on_demand_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetOnDemandCapacity"))
+    InstanceFleetConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
+    InstanceFleetConfig.add_member(:instance_type_configs, Shapes::ShapeRef.new(shape: InstanceTypeConfigList, location_name: "InstanceTypeConfigs"))
+    InstanceFleetConfig.add_member(:launch_specifications, Shapes::ShapeRef.new(shape: InstanceFleetProvisioningSpecifications, location_name: "LaunchSpecifications"))
+    InstanceFleetConfig.struct_class = Types::InstanceFleetConfig
+
+    InstanceFleetConfigList.member = Shapes::ShapeRef.new(shape: InstanceFleetConfig)
+
+    InstanceFleetList.member = Shapes::ShapeRef.new(shape: InstanceFleet)
+
+    InstanceFleetModifyConfig.add_member(:instance_fleet_id, Shapes::ShapeRef.new(shape: InstanceFleetId, required: true, location_name: "InstanceFleetId"))
+    InstanceFleetModifyConfig.add_member(:target_on_demand_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetOnDemandCapacity"))
+    InstanceFleetModifyConfig.add_member(:target_spot_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "TargetSpotCapacity"))
+    InstanceFleetModifyConfig.struct_class = Types::InstanceFleetModifyConfig
+
+    InstanceFleetProvisioningSpecifications.add_member(:spot_specification, Shapes::ShapeRef.new(shape: SpotProvisioningSpecification, required: true, location_name: "SpotSpecification"))
+    InstanceFleetProvisioningSpecifications.struct_class = Types::InstanceFleetProvisioningSpecifications
+
+    InstanceFleetStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: InstanceFleetStateChangeReasonCode, location_name: "Code"))
+    InstanceFleetStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    InstanceFleetStateChangeReason.struct_class = Types::InstanceFleetStateChangeReason
+
+    InstanceFleetStatus.add_member(:state, Shapes::ShapeRef.new(shape: InstanceFleetState, location_name: "State"))
+    InstanceFleetStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: InstanceFleetStateChangeReason, location_name: "StateChangeReason"))
+    InstanceFleetStatus.add_member(:timeline, Shapes::ShapeRef.new(shape: InstanceFleetTimeline, location_name: "Timeline"))
+    InstanceFleetStatus.struct_class = Types::InstanceFleetStatus
+
+    InstanceFleetTimeline.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationDateTime"))
+    InstanceFleetTimeline.add_member(:ready_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ReadyDateTime"))
+    InstanceFleetTimeline.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndDateTime"))
+    InstanceFleetTimeline.struct_class = Types::InstanceFleetTimeline
 
     InstanceGroup.add_member(:id, Shapes::ShapeRef.new(shape: InstanceGroupId, location_name: "Id"))
     InstanceGroup.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -547,6 +634,27 @@ module Aws::EMR
     InstanceTimeline.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "EndDateTime"))
     InstanceTimeline.struct_class = Types::InstanceTimeline
 
+    InstanceTypeConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "InstanceType"))
+    InstanceTypeConfig.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "WeightedCapacity"))
+    InstanceTypeConfig.add_member(:bid_price, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "BidPrice"))
+    InstanceTypeConfig.add_member(:bid_price_as_percentage_of_on_demand_price, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "BidPriceAsPercentageOfOnDemandPrice"))
+    InstanceTypeConfig.add_member(:ebs_configuration, Shapes::ShapeRef.new(shape: EbsConfiguration, location_name: "EbsConfiguration"))
+    InstanceTypeConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
+    InstanceTypeConfig.struct_class = Types::InstanceTypeConfig
+
+    InstanceTypeConfigList.member = Shapes::ShapeRef.new(shape: InstanceTypeConfig)
+
+    InstanceTypeSpecification.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "InstanceType"))
+    InstanceTypeSpecification.add_member(:weighted_capacity, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "WeightedCapacity"))
+    InstanceTypeSpecification.add_member(:bid_price, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "BidPrice"))
+    InstanceTypeSpecification.add_member(:bid_price_as_percentage_of_on_demand_price, Shapes::ShapeRef.new(shape: NonNegativeDouble, location_name: "BidPriceAsPercentageOfOnDemandPrice"))
+    InstanceTypeSpecification.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
+    InstanceTypeSpecification.add_member(:ebs_block_devices, Shapes::ShapeRef.new(shape: EbsBlockDeviceList, location_name: "EbsBlockDevices"))
+    InstanceTypeSpecification.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EbsOptimized"))
+    InstanceTypeSpecification.struct_class = Types::InstanceTypeSpecification
+
+    InstanceTypeSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceTypeSpecification)
+
     JobFlowDetail.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "JobFlowId"))
     JobFlowDetail.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
     JobFlowDetail.add_member(:log_uri, Shapes::ShapeRef.new(shape: XmlString, location_name: "LogUri"))
@@ -579,12 +687,14 @@ module Aws::EMR
     JobFlowInstancesConfig.add_member(:slave_instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "SlaveInstanceType"))
     JobFlowInstancesConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
     JobFlowInstancesConfig.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroupConfigList, location_name: "InstanceGroups"))
+    JobFlowInstancesConfig.add_member(:instance_fleets, Shapes::ShapeRef.new(shape: InstanceFleetConfigList, location_name: "InstanceFleets"))
     JobFlowInstancesConfig.add_member(:ec2_key_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Ec2KeyName"))
     JobFlowInstancesConfig.add_member(:placement, Shapes::ShapeRef.new(shape: PlacementType, location_name: "Placement"))
     JobFlowInstancesConfig.add_member(:keep_job_flow_alive_when_no_steps, Shapes::ShapeRef.new(shape: Boolean, location_name: "KeepJobFlowAliveWhenNoSteps"))
     JobFlowInstancesConfig.add_member(:termination_protected, Shapes::ShapeRef.new(shape: Boolean, location_name: "TerminationProtected"))
     JobFlowInstancesConfig.add_member(:hadoop_version, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "HadoopVersion"))
     JobFlowInstancesConfig.add_member(:ec2_subnet_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Ec2SubnetId"))
+    JobFlowInstancesConfig.add_member(:ec2_subnet_ids, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "Ec2SubnetIds"))
     JobFlowInstancesConfig.add_member(:emr_managed_master_security_group, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "EmrManagedMasterSecurityGroup"))
     JobFlowInstancesConfig.add_member(:emr_managed_slave_security_group, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "EmrManagedSlaveSecurityGroup"))
     JobFlowInstancesConfig.add_member(:service_access_security_group, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ServiceAccessSecurityGroup"))
@@ -631,6 +741,14 @@ module Aws::EMR
     ListClustersOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListClustersOutput.struct_class = Types::ListClustersOutput
 
+    ListInstanceFleetsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    ListInstanceFleetsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListInstanceFleetsInput.struct_class = Types::ListInstanceFleetsInput
+
+    ListInstanceFleetsOutput.add_member(:instance_fleets, Shapes::ShapeRef.new(shape: InstanceFleetList, location_name: "InstanceFleets"))
+    ListInstanceFleetsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    ListInstanceFleetsOutput.struct_class = Types::ListInstanceFleetsOutput
+
     ListInstanceGroupsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     ListInstanceGroupsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListInstanceGroupsInput.struct_class = Types::ListInstanceGroupsInput
@@ -642,6 +760,8 @@ module Aws::EMR
     ListInstancesInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
     ListInstancesInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, location_name: "InstanceGroupId"))
     ListInstancesInput.add_member(:instance_group_types, Shapes::ShapeRef.new(shape: InstanceGroupTypeList, location_name: "InstanceGroupTypes"))
+    ListInstancesInput.add_member(:instance_fleet_id, Shapes::ShapeRef.new(shape: InstanceFleetId, location_name: "InstanceFleetId"))
+    ListInstancesInput.add_member(:instance_fleet_type, Shapes::ShapeRef.new(shape: InstanceFleetType, location_name: "InstanceFleetType"))
     ListInstancesInput.add_member(:instance_states, Shapes::ShapeRef.new(shape: InstanceStateList, location_name: "InstanceStates"))
     ListInstancesInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
     ListInstancesInput.struct_class = Types::ListInstancesInput
@@ -673,13 +793,18 @@ module Aws::EMR
 
     MetricDimensionList.member = Shapes::ShapeRef.new(shape: MetricDimension)
 
+    ModifyInstanceFleetInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+    ModifyInstanceFleetInput.add_member(:instance_fleet, Shapes::ShapeRef.new(shape: InstanceFleetModifyConfig, required: true, location_name: "InstanceFleet"))
+    ModifyInstanceFleetInput.struct_class = Types::ModifyInstanceFleetInput
+
     ModifyInstanceGroupsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     ModifyInstanceGroupsInput.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroupModifyConfigList, location_name: "InstanceGroups"))
     ModifyInstanceGroupsInput.struct_class = Types::ModifyInstanceGroupsInput
 
     NewSupportedProductsList.member = Shapes::ShapeRef.new(shape: SupportedProductConfig)
 
-    PlacementType.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "AvailabilityZone"))
+    PlacementType.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlString, location_name: "AvailabilityZone"))
+    PlacementType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: XmlStringMaxLen256List, location_name: "AvailabilityZones"))
     PlacementType.struct_class = Types::PlacementType
 
     PutAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
@@ -776,6 +901,11 @@ module Aws::EMR
     SimpleScalingPolicyConfiguration.add_member(:cool_down, Shapes::ShapeRef.new(shape: Integer, location_name: "CoolDown"))
     SimpleScalingPolicyConfiguration.struct_class = Types::SimpleScalingPolicyConfiguration
 
+    SpotProvisioningSpecification.add_member(:timeout_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "TimeoutDurationMinutes"))
+    SpotProvisioningSpecification.add_member(:timeout_action, Shapes::ShapeRef.new(shape: SpotProvisioningTimeoutAction, required: true, location_name: "TimeoutAction"))
+    SpotProvisioningSpecification.add_member(:block_duration_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "BlockDurationMinutes"))
+    SpotProvisioningSpecification.struct_class = Types::SpotProvisioningSpecification
+
     Step.add_member(:id, Shapes::ShapeRef.new(shape: StepId, location_name: "Id"))
     Step.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     Step.add_member(:config, Shapes::ShapeRef.new(shape: HadoopStepConfig, location_name: "Config"))
@@ -858,6 +988,8 @@ module Aws::EMR
 
     XmlStringList.member = Shapes::ShapeRef.new(shape: XmlString)
 
+    XmlStringMaxLen256List.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen256)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -873,6 +1005,16 @@ module Aws::EMR
         "targetPrefix" => "ElasticMapReduce",
         "timestampFormat" => "unixTimestamp",
       }
+
+      api.add_operation(:add_instance_fleet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddInstanceFleet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AddInstanceFleetInput)
+        o.output = Shapes::ShapeRef.new(shape: AddInstanceFleetOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
 
       api.add_operation(:add_instance_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddInstanceGroups"
@@ -1002,6 +1144,21 @@ module Aws::EMR
         )
       end)
 
+      api.add_operation(:list_instance_fleets, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListInstanceFleets"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListInstanceFleetsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListInstanceFleetsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "marker" => "marker"
+          }
+        )
+      end)
+
       api.add_operation(:list_instance_groups, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListInstanceGroups"
         o.http_method = "POST"
@@ -1055,6 +1212,16 @@ module Aws::EMR
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:modify_instance_fleet, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceFleet"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceFleetInput)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
 
       api.add_operation(:modify_instance_groups, Seahorse::Model::Operation.new.tap do |o|

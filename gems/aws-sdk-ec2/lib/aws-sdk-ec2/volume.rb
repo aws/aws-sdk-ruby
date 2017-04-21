@@ -274,7 +274,7 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :attribute
-    #   The instance attribute.
+    #   The attribute of the volume. This parameter is required.
     # @return [Types::DescribeVolumeAttributeResult]
     def describe_attribute(options = {})
       options = options.merge(volume_id: @id)

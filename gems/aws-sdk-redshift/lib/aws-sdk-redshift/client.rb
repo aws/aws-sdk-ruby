@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -45,6 +46,7 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -253,6 +255,8 @@ module Aws::Redshift
     #   The identifier of the AWS customer account authorized to restore the
     #   specified snapshot.
     #
+    #   To share a snapshot with AWS support, specify amazon-redshift-support.
+    #
     # @return [Types::AuthorizeSnapshotAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AuthorizeSnapshotAccessResult#snapshot #snapshot} => Types::Snapshot
@@ -286,6 +290,7 @@ module Aws::Redshift
     #   resp.snapshot.encrypted_with_hsm #=> Boolean
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshot.accounts_with_restore_access[0].account_alias #=> String
     #   resp.snapshot.owner_account #=> String
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
@@ -399,6 +404,7 @@ module Aws::Redshift
     #   resp.snapshot.encrypted_with_hsm #=> Boolean
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshot.accounts_with_restore_access[0].account_alias #=> String
     #   resp.snapshot.owner_account #=> String
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
@@ -1097,6 +1103,7 @@ module Aws::Redshift
     #   resp.snapshot.encrypted_with_hsm #=> Boolean
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshot.accounts_with_restore_access[0].account_alias #=> String
     #   resp.snapshot.owner_account #=> String
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
@@ -1859,6 +1866,7 @@ module Aws::Redshift
     #   resp.snapshot.encrypted_with_hsm #=> Boolean
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshot.accounts_with_restore_access[0].account_alias #=> String
     #   resp.snapshot.owner_account #=> String
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
@@ -2474,6 +2482,7 @@ module Aws::Redshift
     #   resp.snapshots[0].encrypted_with_hsm #=> Boolean
     #   resp.snapshots[0].accounts_with_restore_access #=> Array
     #   resp.snapshots[0].accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshots[0].accounts_with_restore_access[0].account_alias #=> String
     #   resp.snapshots[0].owner_account #=> String
     #   resp.snapshots[0].total_backup_size_in_mega_bytes #=> Float
     #   resp.snapshots[0].actual_incremental_backup_size_in_mega_bytes #=> Float
@@ -4299,6 +4308,134 @@ module Aws::Redshift
       req.send_request(options)
     end
 
+    # Returns a database user name and temporary password with temporary
+    # authorization to log in to an Amazon Redshift database. The action
+    # returns the database user name prefixed with `IAM:` if `AutoCreate` is
+    # `False` or `IAMA:` if `AutoCreate` is `True`. You can optionally
+    # specify one or more database user groups that the user will join at
+    # log in. By default, the temporary credentials expire in 900 seconds.
+    # You can optionally specify a duration between 900 seconds (15 minutes)
+    # and 3600 seconds (60 minutes). For more information, see Generating
+    # IAM Database User Credentials in the Amazon Redshift Cluster
+    # Management Guide.
+    #
+    # The IAM user or role that executes GetClusterCredentials must have an
+    # IAM policy attached that allows the `redshift:GetClusterCredentials`
+    # action with access to the `dbuser` resource on the cluster. The user
+    # name specified for `dbuser` in the IAM policy and the user name
+    # specified for the `DbUser` parameter must match.
+    #
+    # If the `DbGroups` parameter is specified, the IAM policy must allow
+    # the `redshift:JoinGroup` action with access to the listed `dbgroups`.
+    #
+    # In addition, if the `AutoCreate` parameter is set to `True`, then the
+    # policy must include the `redshift:CreateClusterUser` privilege.
+    #
+    # If the `DbName` parameter is specified, the IAM policy must allow
+    # access to the resource `dbname` for the specified database name.
+    #
+    # @option params [required, String] :db_user
+    #   The name of a database user. If a user name matching `DbUser` exists
+    #   in the database, the temporary user credentials have the same
+    #   permissions as the existing user. If `DbUser` doesn't exist in the
+    #   database and `Autocreate` is `True`, a new user is created using the
+    #   value for `DbUser` with PUBLIC permissions. If a database user
+    #   matching the value for `DbUser` doesn't exist and `Autocreate` is
+    #   `False`, then the command succeeds but the connection attempt will
+    #   fail because the user doesn't exist in the database.
+    #
+    #   For more information, see [CREATE USER][1] in the Amazon Redshift
+    #   Database Developer Guide.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 128 alphanumeric characters or hyphens
+    #
+    #   * Must contain only lowercase letters.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Must not contain a colon ( : ) or slash ( / ).
+    #
+    #   * Cannot be a reserved word. A list of reserved words can be found in
+    #     [Reserved Words][2] in the Amazon Redshift Database Developer Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html
+    #   [2]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #
+    # @option params [String] :db_name
+    #   The name of a database that `DbUser` is authorized to log on to. If
+    #   `DbName` is not specified, `DbUser` can log in to any existing
+    #   database.
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 64 alphanumeric characters or hyphens
+    #
+    #   * Must contain only lowercase letters.
+    #
+    #   * Cannot be a reserved word. A list of reserved words can be found in
+    #     [Reserved Words][1] in the Amazon Redshift Database Developer Guide.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The unique identifier of the cluster that contains the database for
+    #   which your are requesting credentials. This parameter is case
+    #   sensitive.
+    #
+    # @option params [Integer] :duration_seconds
+    #   The number of seconds until the returned temporary password expires.
+    #
+    #   Constraint: minimum 900, maximum 3600.
+    #
+    #   Default: 900
+    #
+    # @option params [Boolean] :auto_create
+    #   Create a database user with the name specified for `DbUser` if one
+    #   does not exist.
+    #
+    # @option params [Array<String>] :db_groups
+    #   A list of the names of existing database groups that `DbUser` will
+    #   join for the current session. If not specified, the new user is added
+    #   only to PUBLIC.
+    #
+    # @return [Types::ClusterCredentials] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClusterCredentials#db_user #db_user} => String
+    #   * {Types::ClusterCredentials#db_password #db_password} => String
+    #   * {Types::ClusterCredentials#expiration #expiration} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_cluster_credentials({
+    #     db_user: "String", # required
+    #     db_name: "String",
+    #     cluster_identifier: "String", # required
+    #     duration_seconds: 1,
+    #     auto_create: false,
+    #     db_groups: ["String"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_user #=> String
+    #   resp.db_password #=> String
+    #   resp.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/GetClusterCredentials AWS API Documentation
+    #
+    # @overload get_cluster_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_cluster_credentials(params = {}, options = {})
+      req = build_request(:get_cluster_credentials, params)
+      req.send_request(options)
+    end
+
     # Modifies the settings for a cluster. For example, you can add another
     # security or parameter group, update the preferred maintenance window,
     # or change the master user password. Resetting a cluster password or
@@ -5841,6 +5978,7 @@ module Aws::Redshift
     #   resp.snapshot.encrypted_with_hsm #=> Boolean
     #   resp.snapshot.accounts_with_restore_access #=> Array
     #   resp.snapshot.accounts_with_restore_access[0].account_id #=> String
+    #   resp.snapshot.accounts_with_restore_access[0].account_alias #=> String
     #   resp.snapshot.owner_account #=> String
     #   resp.snapshot.total_backup_size_in_mega_bytes #=> Float
     #   resp.snapshot.actual_incremental_backup_size_in_mega_bytes #=> Float
@@ -5978,7 +6116,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

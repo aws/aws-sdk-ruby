@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -211,6 +213,9 @@ module Aws::AppStream
     # @option params [String] :display_name
     #   The display name of the fleet.
     #
+    # @option params [Boolean] :enable_default_internet_access
+    #   Enable/Disable default Internet access from fleet.
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -231,6 +236,7 @@ module Aws::AppStream
     #     disconnect_timeout_in_seconds: 1,
     #     description: "Description",
     #     display_name: "DisplayName",
+    #     enable_default_internet_access: false,
     #   })
     #
     # @example Response structure
@@ -254,6 +260,7 @@ module Aws::AppStream
     #   resp.fleet.fleet_errors #=> Array
     #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
     #   resp.fleet.fleet_errors[0].error_message #=> String
+    #   resp.fleet.enable_default_internet_access #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -449,6 +456,7 @@ module Aws::AppStream
     #   resp.fleets[0].fleet_errors #=> Array
     #   resp.fleets[0].fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
     #   resp.fleets[0].fleet_errors[0].error_message #=> String
+    #   resp.fleets[0].enable_default_internet_access #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleets AWS API Documentation
@@ -486,6 +494,7 @@ module Aws::AppStream
     #   resp.images[0].display_name #=> String
     #   resp.images[0].state #=> String, one of "PENDING", "AVAILABLE", "FAILED", "DELETING"
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE"
+    #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].platform #=> String, one of "WINDOWS"
     #   resp.images[0].description #=> String
     #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE"
@@ -513,7 +522,9 @@ module Aws::AppStream
     # Describes the streaming sessions for a stack and a fleet. If a user ID
     # is provided, this operation returns streaming sessions for only that
     # user. Pass this value for the `nextToken` parameter in a subsequent
-    # call to this operation to retrieve the next set of items.
+    # call to this operation to retrieve the next set of items. If an
+    # authentication type is not provided, the operation defaults to users
+    # authenticated using a streaming url.
     #
     # @option params [required, String] :stack_name
     #   The name of the stack for which to list sessions.
@@ -533,6 +544,12 @@ module Aws::AppStream
     #   The size of each page of results. The default value is 20 and the
     #   maximum supported value is 50.
     #
+    # @option params [String] :authentication_type
+    #   The authentication method of the user. It can be `API` for a user
+    #   authenticated using a streaming url or `SAML` for a SAML federated
+    #   user. If an authentication type is not provided, the operation
+    #   defaults to users authenticated using a streaming url.
+    #
     # @return [Types::DescribeSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeSessionsResult#sessions #sessions} => Array&lt;Types::Session&gt;
@@ -546,6 +563,7 @@ module Aws::AppStream
     #     user_id: "UserId",
     #     next_token: "String",
     #     limit: 1,
+    #     authentication_type: "API", # accepts API, SAML
     #   })
     #
     # @example Response structure
@@ -556,6 +574,7 @@ module Aws::AppStream
     #   resp.sessions[0].stack_name #=> String
     #   resp.sessions[0].fleet_name #=> String
     #   resp.sessions[0].state #=> String, one of "ACTIVE", "PENDING", "EXPIRED"
+    #   resp.sessions[0].authentication_type #=> String, one of "API", "SAML"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessions AWS API Documentation
@@ -776,8 +795,10 @@ module Aws::AppStream
     end
 
     # Updates an existing fleet. All the attributes except the fleet name
-    # can be updated in the **STOPPED** state. Only **ComputeCapacity** and
-    # **ImageName** can be updated in any other state.
+    # can be updated in the **STOPPED** state. When a fleet is in the
+    # **RUNNING** state, only `DisplayName` and `ComputeCapacity` can be
+    # updated. A fleet cannot be updated in a status of **STARTING** or
+    # **STOPPING**.
     #
     # @option params [String] :image_name
     #   The image name from which a fleet is created.
@@ -812,6 +833,9 @@ module Aws::AppStream
     # @option params [String] :display_name
     #   The name displayed to end users on the AppStream 2.0 portal.
     #
+    # @option params [Boolean] :enable_default_internet_access
+    #   Enable/Disable default Internet access from fleet.
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -833,6 +857,7 @@ module Aws::AppStream
     #     delete_vpc_config: false,
     #     description: "Description",
     #     display_name: "DisplayName",
+    #     enable_default_internet_access: false,
     #   })
     #
     # @example Response structure
@@ -856,6 +881,7 @@ module Aws::AppStream
     #   resp.fleet.fleet_errors #=> Array
     #   resp.fleet.fleet_errors[0].error_code #=> String, one of "IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION", "IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION", "NETWORK_INTERFACE_LIMIT_EXCEEDED", "INTERNAL_SERVICE_ERROR", "IAM_SERVICE_ROLE_IS_MISSING", "SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES", "IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION", "SUBNET_NOT_FOUND", "IMAGE_NOT_FOUND", "INVALID_SUBNET_CONFIGURATION"
     #   resp.fleet.fleet_errors[0].error_message #=> String
+    #   resp.fleet.enable_default_internet_access #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -919,7 +945,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

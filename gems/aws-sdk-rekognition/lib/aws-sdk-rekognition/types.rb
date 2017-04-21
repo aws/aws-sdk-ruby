@@ -367,14 +367,17 @@ module Aws::Rekognition
     #   @return [Types::Image]
     #
     # @!attribute [rw] attributes
-    #   A list of facial attributes you would like to be returned. By
-    #   default, the API returns subset of facial attributes.
+    #   A list of facial attributes you want to be returned. This can be the
+    #   default list of attributes or all attributes. If you don't specify
+    #   a value for `Attributes` or if you specify `["DEFAULT"]`, the API
+    #   returns the following subset of facial attributes: `BoundingBox`,
+    #   `Confidence`, `Pose`, `Quality` and `Landmarks`. If you provide
+    #   `["ALL"]`, all facial attributes are returned but the operation will
+    #   take longer to complete.
     #
-    #   For example, you can specify the value as, \["ALL"\] or
-    #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\], the
-    #   service uses a logical AND operator to determine which attributes to
-    #   return (in this case, it is all attributes). If you specify all
-    #   attributes, Amazon Rekognition performs additional detection.
+    #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a
+    #   logical AND operator to determine which attributes to return (in
+    #   this case, all attributes).
     #   @return [Array<String>]
     #
     class DetectFacesRequest < Struct.new(
@@ -443,7 +446,7 @@ module Aws::Rekognition
     #   Amazon Rekognition doesn't return any labels with confidence lower
     #   than this specified value.
     #
-    #   If `minConfidence` is not specified, the operation returns labels
+    #   If `MinConfidence` is not specified, the operation returns labels
     #   with a confidence values greater than or equal to 50 percent.
     #   @return [Float]
     #
@@ -476,6 +479,68 @@ module Aws::Rekognition
     class DetectLabelsResponse < Struct.new(
       :labels,
       :orientation_correction)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectModerationLabelsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image: { # required
+    #           bytes: "data",
+    #           s3_object: {
+    #             bucket: "S3Bucket",
+    #             name: "S3ObjectName",
+    #             version: "S3ObjectVersion",
+    #           },
+    #         },
+    #         min_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] image
+    #   Provides the source image either as bytes or an S3 object.
+    #
+    #   The region for the S3 bucket containing the S3 object must match the
+    #   region you use for Amazon Rekognition operations.
+    #
+    #   You may need to Base64-encode the image bytes depending on the
+    #   language you are using and whether or not you are using the AWS SDK.
+    #   For more information, see example4.
+    #
+    #   If you use the Amazon CLI to call Amazon Rekognition operations,
+    #   passing image bytes using the Bytes property is not supported. You
+    #   must first upload the image to an Amazon S3 bucket and then call the
+    #   operation using the S3Object property.
+    #
+    #   For Amazon Rekognition to process an S3 object, the user must have
+    #   permission to access the S3 object. For more information, see
+    #   manage-access-resource-policies.
+    #   @return [Types::Image]
+    #
+    # @!attribute [rw] min_confidence
+    #   Specifies the minimum confidence level for the labels to return.
+    #   Amazon Rekognition doesn't return any labels with a confidence
+    #   level lower than this specified value.
+    #
+    #   If you don't specify `MinConfidence`, the operation returns labels
+    #   with confidence values greater than or equal to 50 percent.
+    #   @return [Float]
+    #
+    class DetectModerationLabelsRequest < Struct.new(
+      :image,
+      :min_confidence)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] moderation_labels
+    #   A list of labels for explicit or suggestive adult content found in
+    #   the image. The list includes the top-level label and each child
+    #   label detected in the image. This is useful for filtering specific
+    #   categories of content.
+    #   @return [Array<Types::ModerationLabel>]
+    #
+    class DetectModerationLabelsResponse < Struct.new(
+      :moderation_labels)
       include Aws::Structure
     end
 
@@ -781,15 +846,18 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Identifies image brightness and sharpness.
+    # Identifies face image brightness and sharpness.
     #
     # @!attribute [rw] brightness
     #   Value representing brightness of the face. The service returns a
-    #   value between 0 and 1 (inclusive).
+    #   value between 0 and 100 (inclusive). A higher value indicates a
+    #   brighter face image.
     #   @return [Float]
     #
     # @!attribute [rw] sharpness
-    #   Value representing sharpness of the face.
+    #   Value representing sharpness of the face. The service returns a
+    #   value between 0 and 100 (inclusive). A higher value indicates a
+    #   sharper face image.
     #   @return [Float]
     #
     class ImageQuality < Struct.new(
@@ -816,8 +884,8 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] collection_id
-    #   ID of an existing collection to which you want to add the faces that
-    #   are detected in the input images.
+    #   The ID of an existing collection to which you want to add the faces
+    #   that are detected in the input images.
     #   @return [String]
     #
     # @!attribute [rw] image
@@ -845,15 +913,17 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] detection_attributes
-    #   (Optional) Returns detailed attributes of indexed faces. By default,
-    #   the operation returns a subset of the facial attributes.
+    #   A list of facial attributes that you want to be returned. This can
+    #   be the default list of attributes or all attributes. If you don't
+    #   specify a value for `Attributes` or if you specify `["DEFAULT"]`,
+    #   the API returns the following subset of facial attributes:
+    #   `BoundingBox`, `Confidence`, `Pose`, `Quality` and `Landmarks`. If
+    #   you provide `["ALL"]`, all facial attributes are returned but the
+    #   operation will take longer to complete.
     #
-    #   For example, you can specify the value as, \["ALL"\] or
-    #   \["DEFAULT"\]. If you provide both, \["ALL", "DEFAULT"\],
-    #   Amazon Rekognition uses the logical AND operator to determine which
-    #   attributes to return (in this case, it is all attributes). If you
-    #   specify all attributes, the service performs additional detection,
-    #   in addition to the default.
+    #   If you provide both, `["ALL", "DEFAULT"]`, the service uses a
+    #   logical AND operator to determine which attributes to return (in
+    #   this case, all attributes).
     #   @return [Array<String>]
     #
     class IndexFacesRequest < Struct.new(
@@ -1014,6 +1084,36 @@ module Aws::Rekognition
     class ListFacesResponse < Struct.new(
       :faces,
       :next_token)
+      include Aws::Structure
+    end
+
+    # Provides information about a single type of moderated content found in
+    # an image. Each type of moderated content has a label within a
+    # hierarchical taxonomy. For more information, see
+    # howitworks-moderateimage.
+    #
+    # @!attribute [rw] confidence
+    #   Specifies the confidence that Amazon Rekognition has that the label
+    #   has been correctly identified.
+    #
+    #   If you don't specify the `MinConfidence` parameter in the call to
+    #   `DetectModerationLabels`, the operation returns labels with a
+    #   confidence value greater than or equal to 50 percent.
+    #   @return [Float]
+    #
+    # @!attribute [rw] name
+    #   The label name for the type of content detected in the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] parent_name
+    #   The name for the parent label. Labels at the top-level of the
+    #   hierarchy have the parent label `""`.
+    #   @return [String]
+    #
+    class ModerationLabel < Struct.new(
+      :confidence,
+      :name,
+      :parent_name)
       include Aws::Structure
     end
 

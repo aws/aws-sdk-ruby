@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -45,6 +46,7 @@ module Aws::Batch
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -176,7 +178,7 @@ module Aws::Batch
     end
 
     # Creates an AWS Batch compute environment. You can create `MANAGED` or
-    # `UNMANAGED`compute environments.
+    # `UNMANAGED` compute environments.
     #
     # In a managed compute environment, AWS Batch manages the compute
     # resources within the environment, based on the compute resources that
@@ -241,6 +243,7 @@ module Aws::Batch
     #       maxv_cpus: 1, # required
     #       desiredv_cpus: 1,
     #       instance_types: ["String"], # required
+    #       image_id: "String",
     #       subnets: ["String"], # required
     #       security_group_ids: ["String"], # required
     #       ec2_key_pair: "String",
@@ -477,6 +480,7 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.desiredv_cpus #=> Integer
     #   resp.compute_environments[0].compute_resources.instance_types #=> Array
     #   resp.compute_environments[0].compute_resources.instance_types[0] #=> String
+    #   resp.compute_environments[0].compute_resources.image_id #=> String
     #   resp.compute_environments[0].compute_resources.subnets #=> Array
     #   resp.compute_environments[0].compute_resources.subnets[0] #=> String
     #   resp.compute_environments[0].compute_resources.security_group_ids #=> Array
@@ -561,6 +565,7 @@ module Aws::Batch
     #   resp.job_definitions[0].type #=> String
     #   resp.job_definitions[0].parameters #=> Hash
     #   resp.job_definitions[0].parameters["String"] #=> String
+    #   resp.job_definitions[0].retry_strategy.attempts #=> Integer
     #   resp.job_definitions[0].container_properties.image #=> String
     #   resp.job_definitions[0].container_properties.vcpus #=> Integer
     #   resp.job_definitions[0].container_properties.memory #=> Integer
@@ -682,8 +687,17 @@ module Aws::Batch
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].job_queue #=> String
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "PENDING", "RUNNABLE", "STARTING", "RUNNING", "SUCCEEDED", "FAILED"
+    #   resp.jobs[0].attempts #=> Array
+    #   resp.jobs[0].attempts[0].container.container_instance_arn #=> String
+    #   resp.jobs[0].attempts[0].container.task_arn #=> String
+    #   resp.jobs[0].attempts[0].container.exit_code #=> Integer
+    #   resp.jobs[0].attempts[0].container.reason #=> String
+    #   resp.jobs[0].attempts[0].started_at #=> Integer
+    #   resp.jobs[0].attempts[0].stopped_at #=> Integer
+    #   resp.jobs[0].attempts[0].status_reason #=> String
     #   resp.jobs[0].status_reason #=> String
     #   resp.jobs[0].created_at #=> Integer
+    #   resp.jobs[0].retry_strategy.attempts #=> Integer
     #   resp.jobs[0].started_at #=> Integer
     #   resp.jobs[0].stopped_at #=> Integer
     #   resp.jobs[0].depends_on #=> Array
@@ -717,6 +731,7 @@ module Aws::Batch
     #   resp.jobs[0].container.exit_code #=> Integer
     #   resp.jobs[0].container.reason #=> String
     #   resp.jobs[0].container.container_instance_arn #=> String
+    #   resp.jobs[0].container.task_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobs AWS API Documentation
     #
@@ -808,6 +823,11 @@ module Aws::Batch
     #   An object with various properties specific for container-based jobs.
     #   This parameter is required if the `type` parameter is `container`.
     #
+    # @option params [Types::RetryStrategy] :retry_strategy
+    #   The retry strategy to use for failed jobs that are submitted with this
+    #   job definition. Any retry strategy that is specified during a
+    #   SubmitJob operation overrides the retry strategy defined here.
+    #
     # @return [Types::RegisterJobDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterJobDefinitionResponse#job_definition_name #job_definition_name} => String
@@ -860,6 +880,9 @@ module Aws::Batch
     #       ],
     #       user: "String",
     #     },
+    #     retry_strategy: {
+    #       attempts: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -881,15 +904,17 @@ module Aws::Batch
     # during SubmitJob override parameters defined in the job definition.
     #
     # @option params [required, String] :job_name
-    #   The name of the job.
+    #   The name of the job. A name must be 1 to 128 characters in length.
+    #
+    #   Pattern: ^\[a-zA-Z0-9\_\]+$
     #
     # @option params [required, String] :job_queue
     #   The job queue into which the job will be submitted. You can specify
     #   either the name or the Amazon Resource Name (ARN) of the queue.
     #
     # @option params [Array<Types::JobDependency>] :depends_on
-    #   A list of job names or IDs on which this job depends. A job can depend
-    #   upon a maximum of 100 jobs.
+    #   A list of job IDs on which this job depends. A job can depend upon a
+    #   maximum of 100 jobs.
     #
     # @option params [required, String] :job_definition
     #   The job definition used by this job. This value can be either a
@@ -912,6 +937,11 @@ module Aws::Batch
     #   variables (that are specified in the job definition or Docker image)
     #   on a container or add new environment variables to it with an
     #   `environment` override.
+    #
+    # @option params [Types::RetryStrategy] :retry_strategy
+    #   The retry strategy to use for failed jobs from this SubmitJob
+    #   operation. When a retry strategy is specified here, it overrides the
+    #   retry strategy defined in the job definition.
     #
     # @return [Types::SubmitJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -942,6 +972,9 @@ module Aws::Batch
     #           value: "String",
     #         },
     #       ],
+    #     },
+    #     retry_strategy: {
+    #       attempts: 1,
     #     },
     #   })
     #
@@ -1110,7 +1143,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -45,6 +46,7 @@ module Aws::ElasticLoadBalancingV2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -291,9 +293,9 @@ module Aws::ElasticLoadBalancingV2
     # @option params [required, String] :name
     #   The name of the load balancer.
     #
-    #   This name must be unique within your AWS account, can have a maximum
-    #   of 32 characters, must contain only alphanumeric characters or
-    #   hyphens, and must not begin or end with a hyphen.
+    #   This name must be unique per region per account, can have a maximum of
+    #   32 characters, must contain only alphanumeric characters or hyphens,
+    #   and must not begin or end with a hyphen.
     #
     # @option params [required, Array<String>] :subnets
     #   The IDs of the subnets to attach to the load balancer. You can specify
@@ -397,11 +399,25 @@ module Aws::ElasticLoadBalancingV2
     #   The Amazon Resource Name (ARN) of the listener.
     #
     # @option params [required, Array<Types::RuleCondition>] :conditions
-    #   A condition. Each condition has the field `path-pattern` and specifies
-    #   one path pattern. A path pattern is case sensitive, can be up to 128
-    #   characters in length, and can contain any of the following characters.
-    #   Note that you can include up to three wildcard characters in a path
-    #   pattern.
+    #   A condition. Each condition specifies a field name and a single value.
+    #
+    #   If the field name is `host-header`, you can specify a single host name
+    #   (for example, my.example.com). A host name is case insensitive, can be
+    #   up to 128 characters in length, and can contain any of the following
+    #   characters. Note that you can include up to three wildcard characters.
+    #
+    #   * A-Z, a-z, 0-9
+    #
+    #   * \- .
+    #
+    #   * * (matches 0 or more characters)
+    #
+    #   * ? (matches exactly 1 character)
+    #
+    #   If the field name is `path-pattern`, you can specify a single path
+    #   pattern. A path pattern is case sensitive, can be up to 128 characters
+    #   in length, and can contain any of the following characters. Note that
+    #   you can include up to three wildcard characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -488,6 +504,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @option params [required, String] :name
     #   The name of the target group.
+    #
+    #   This name must be unique per region per account, can have a maximum of
+    #   32 characters, must contain only alphanumeric characters or hyphens,
+    #   and must not begin or end with a hyphen.
     #
     # @option params [required, String] :protocol
     #   The protocol to use for routing traffic to the targets.
@@ -815,7 +835,8 @@ module Aws::ElasticLoadBalancingV2
     # DescribeLoadBalancerAttributes.
     #
     # @option params [Array<String>] :load_balancer_arns
-    #   The Amazon Resource Names (ARN) of the load balancers.
+    #   The Amazon Resource Names (ARN) of the load balancers. You can specify
+    #   up to 20 load balancers in a single call.
     #
     # @option params [Array<String>] :names
     #   The names of the load balancers.
@@ -917,8 +938,12 @@ module Aws::ElasticLoadBalancingV2
     # Describes the specified policies or all policies used for SSL
     # negotiation.
     #
-    # Note that the only supported policy at this time is
-    # ELBSecurityPolicy-2015-05.
+    # For more information, see [Security Policies][1] in the *Application
+    # Load Balancers Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<String>] :names
     #   The names of the policies.
@@ -963,7 +988,8 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
-    # Describes the tags for the specified resources.
+    # Describes the tags for the specified resources. You can describe the
+    # tags for one or more Application Load Balancers and target groups.
     #
     # @option params [required, Array<String>] :resource_arns
     #   The Amazon Resource Names (ARN) of the resources.
@@ -1143,7 +1169,8 @@ module Aws::ElasticLoadBalancingV2
     # Any properties that you do not specify retain their current values.
     # However, changing the protocol from HTTPS to HTTP removes the security
     # policy and SSL certificate properties. If you change the protocol from
-    # HTTP to HTTPS, you must add the security policy.
+    # HTTP to HTTPS, you must add the security policy and server
+    # certificate.
     #
     # @option params [required, String] :listener_arn
     #   The Amazon Resource Name (ARN) of the listener.
@@ -1155,8 +1182,13 @@ module Aws::ElasticLoadBalancingV2
     #   The protocol for connections from clients to the load balancer.
     #
     # @option params [String] :ssl_policy
-    #   The security policy that defines which ciphers and protocols are
-    #   supported.
+    #   The security policy that defines which protocols and ciphers are
+    #   supported. For more information, see [Security Policies][1] in the
+    #   *Application Load Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #
     # @option params [Array<Types::Certificate>] :certificates
     #   The SSL server certificate.
@@ -1679,14 +1711,131 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
+    end
+
+    # Polls an API operation until a resource enters a desired state.
+    #
+    # ## Basic Usage
+    #
+    # A waiter will call an API operation until:
+    #
+    # * It is successful
+    # * It enters a terminal state
+    # * It makes the maximum number of attempts
+    #
+    # In between attempts, the waiter will sleep.
+    #
+    #     # polls in a loop, sleeping between attempts
+    #     client.waiter_until(waiter_name, params)
+    #
+    # ## Configuration
+    #
+    # You can configure the maximum number of polling attempts, and the
+    # delay (in seconds) between each polling attempt. You can pass
+    # configuration as the final arguments hash.
+    #
+    #     # poll for ~25 seconds
+    #     client.wait_until(waiter_name, params, {
+    #       max_attempts: 5,
+    #       delay: 5,
+    #     })
+    #
+    # ## Callbacks
+    #
+    # You can be notified before each polling attempt and before each
+    # delay. If you throw `:success` or `:failure` from these callbacks,
+    # it will terminate the waiter.
+    #
+    #     started_at = Time.now
+    #     client.wait_until(waiter_name, params, {
+    #
+    #       # disable max attempts
+    #       max_attempts: nil,
+    #
+    #       # poll for 1 hour, instead of a number of attempts
+    #       before_wait: -> (attempts, response) do
+    #         throw :failure if Time.now - started_at > 3600
+    #       end
+    #     })
+    #
+    # ## Handling Errors
+    #
+    # When a waiter is unsuccessful, it will raise an error.
+    # All of the failure errors extend from
+    # {Aws::Waiters::Errors::WaiterFailed}.
+    #
+    #     begin
+    #       client.wait_until(...)
+    #     rescue Aws::Waiters::Errors::WaiterFailed
+    #       # resource did not enter the desired state in time
+    #     end
+    #
+    # ## Valid Waiters
+    #
+    # The following table lists the valid waiter names, the operations they call,
+    # and the default `:delay` and `:max_attempts` values.
+    #
+    # | waiter_name             | params                     | :delay   | :max_attempts |
+    # | ----------------------- | -------------------------- | -------- | ------------- |
+    # | load_balancer_available | {#describe_load_balancers} | 15       | 40            |
+    # | load_balancer_exists    | {#describe_load_balancers} | 15       | 40            |
+    # | load_balancers_deleted  | {#describe_load_balancers} | 15       | 40            |
+    #
+    # @raise [Errors::FailureStateError] Raised when the waiter terminates
+    #   because the waiter has entered a state that it will not transition
+    #   out of, preventing success.
+    #
+    # @raise [Errors::TooManyAttemptsError] Raised when the configured
+    #   maximum number of attempts have been made, and the waiter is not
+    #   yet successful.
+    #
+    # @raise [Errors::UnexpectedError] Raised when an error is encounted
+    #   while polling for a resource that is not expected.
+    #
+    # @raise [Errors::NoSuchWaiterError] Raised when you request to wait
+    #   for an unknown state.
+    #
+    # @return [Boolean] Returns `true` if the waiter was successful.
+    # @param [Symbol] waiter_name
+    # @param [Hash] params ({})
+    # @param [Hash] options ({})
+    # @option options [Integer] :max_attempts
+    # @option options [Integer] :delay
+    # @option options [Proc] :before_attempt
+    # @option options [Proc] :before_wait
+    def wait_until(waiter_name, params = {}, options = {})
+      w = waiter(waiter_name, options)
+      yield(w.waiter) if block_given? # deprecated
+      w.wait(params)
     end
 
     # @api private
     # @deprecated
     def waiter_names
-      []
+      waiters.keys
+    end
+
+    private
+
+    # @param [Symbol] waiter_name
+    # @param [Hash] options ({})
+    def waiter(waiter_name, options = {})
+      waiter_class = waiters[waiter_name]
+      if waiter_class
+        waiter_class.new(options.merge(client: self))
+      else
+        raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+      end
+    end
+
+    def waiters
+      {
+        load_balancer_available: Waiters::LoadBalancerAvailable,
+        load_balancer_exists: Waiters::LoadBalancerExists,
+        load_balancers_deleted: Waiters::LoadBalancersDeleted
+      }
     end
 
     class << self

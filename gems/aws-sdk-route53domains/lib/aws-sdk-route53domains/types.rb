@@ -8,39 +8,34 @@
 module Aws::Route53Domains
   module Types
 
-    # @!attribute [rw] domain_name
-    #   The name of a domain.
+    # Information for one billing record.
     #
-    #   Type: String
+    # @!attribute [rw] domain_name
+    #   The name of the domain that the billing record applies to. If the
+    #   domain name contains characters other than a-z, 0-9, and - (hyphen),
+    #   such as an internationalized domain name, then this value is in
+    #   Punycode. For more information, see [DNS Domain Name Format][1] in
+    #   the *Amazon Route 53 Developer Guidezzz*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html
     #   @return [String]
     #
     # @!attribute [rw] operation
     #   The operation that you were charged for.
-    #
-    #   Type: String
-    #
-    #   Valid values: * `REGISTER_DOMAIN`
-    #   * `TRANSFER_IN_DOMAIN`
-    #   * `RENEW_DOMAIN`
-    #   * `CHANGE_DOMAIN_OWNER`
     #   @return [String]
     #
     # @!attribute [rw] invoice_id
     #   The ID of the invoice that is associated with the billing record.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] bill_date
     #   The date that the operation was billed, in Unix format.
-    #
-    #   Type: Double
     #   @return [Time]
     #
     # @!attribute [rw] price
     #   The price that you were charged for the operation, in US dollars.
-    #
-    #   Type: Double
     #
     #   Example value: 12.0
     #   @return [Float]
@@ -67,17 +62,11 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
+    #   The name of the domain that you want to get availability for.
     #
     #   Constraints: The domain name can contain only the letters a through
     #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
     #   Names are not supported.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] idn_lang_code
@@ -101,24 +90,49 @@ module Aws::Route53Domains
     #
     #    </note>
     #
-    #   Type: String
-    #
     #   Valid values:
     #
-    #   * `AVAILABLE` – The domain name is available.
-    #   * `AVAILABLE_RESERVED` – The domain name is reserved under specific
-    #     conditions.
-    #   * `AVAILABLE_PREORDER` – The domain name is available and can be
-    #     preordered.
-    #   * `UNAVAILABLE` – The domain name is not available.
-    #   * `UNAVAILABLE_PREMIUM` – The domain name is not available.
-    #   * `UNAVAILABLE_RESTRICTED` – The domain name is forbidden.
-    #   * `RESERVED` – The domain name has been reserved for another person
-    #     or organization.
-    #   * `DONT_KNOW` – The TLD registry didn't reply with a definitive
-    #     answer about whether the domain name is available. Amazon Route 53
-    #     can return this response for a variety of reasons, for example,
-    #     the registry is performing maintenance. Try again later.
+    #   AVAILABLE
+    #
+    #   : The domain name is available.
+    #
+    #   AVAILABLE\_RESERVED
+    #
+    #   : The domain name is reserved under specific conditions.
+    #
+    #   AVAILABLE\_PREORDER
+    #
+    #   : The domain name is available and can be preordered.
+    #
+    #   DONT\_KNOW
+    #
+    #   : The TLD registry didn't reply with a definitive answer about
+    #     whether the domain name is available. Amazon Route 53 can return
+    #     this response for a variety of reasons, for example, the registry
+    #     is performing maintenance. Try again later.
+    #
+    #   PENDING
+    #
+    #   : The TLD registry didn't return a response in the expected amount
+    #     of time. When the response is delayed, it usually takes just a few
+    #     extra seconds. You can resubmit the request immediately.
+    #
+    #   RESERVED
+    #
+    #   : The domain name has been reserved for another person or
+    #     organization.
+    #
+    #   UNAVAILABLE
+    #
+    #   : The domain name is not available.
+    #
+    #   UNAVAILABLE\_PREMIUM
+    #
+    #   : The domain name is not available.
+    #
+    #   UNAVAILABLE\_RESTRICTED
+    #
+    #   : The domain name is forbidden.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailabilityResponse AWS API Documentation
@@ -157,30 +171,10 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] first_name
     #   First name of contact.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] last_name
     #   Last name of contact.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] contact_type
@@ -188,179 +182,60 @@ module Aws::Route53Domains
     #   public organization. If you choose an option other than `PERSON`,
     #   you must enter an organization name, and you can't enable privacy
     #   protection for the contact.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Valid values: `PERSON` \| `COMPANY` \| `ASSOCIATION` \|
-    #   `PUBLIC_BODY`
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] organization_name
     #   Name of the organization for contact types other than `PERSON`.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters. Contact type must not be
-    #   `PERSON`.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] address_line_1
     #   First line of the contact's address.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] address_line_2
     #   Second line of contact's address, if any.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] city
     #   The city of the contact's address.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] state
     #   The state or province of the contact's city.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] country_code
     #   Code for the country of the contact's address.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] zip_code
     #   The zip or postal code of the contact's address.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] phone_number
     #   The phone number of the contact.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Constraints: Phone number must be specified in the format
-    #   "+\[country dialing code\].\[number including any area code>\]".
-    #   For example, a US phone number might appear as `"+1.1234567890"`.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
+    #   "+\[country dialing code\].\[number including any area
+    #   code&gt;\]". For example, a US phone number might appear as
+    #   `"+1.1234567890"`.
     #   @return [String]
     #
     # @!attribute [rw] email
     #   Email address of the contact.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 254 characters.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] fax
     #   Fax number of the contact.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Constraints: Phone number must be specified in the format
     #   "+\[country dialing code\].\[number including any area code\]".
     #   For example, a US phone number might appear as `"+1.1234567890"`.
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] extra_params
     #   A list of name-value pairs for parameters required by certain
     #   top-level domains.
-    #
-    #   Type: Complex
-    #
-    #   Default: None
-    #
-    #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
-    #
-    #   Children: `Name`, `Value`
-    #
-    #   Required: No
     #   @return [Array<Types::ExtraParam>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ContactDetail AWS API Documentation
@@ -395,34 +270,10 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] domain_name
     #   The domain for which you want to delete one or more tags.
-    #
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Hyphens are allowed only
-    #   when they're surrounded by letters, numbers, or other hyphens. You
-    #   can't specify a hyphen at the beginning or end of a label. To
-    #   specify an Internationalized Domain Name, you must convert the name
-    #   to Punycode.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] tags_to_delete
     #   A list of tag keys to delete.
-    #
-    #   Type: A list that contains the keys of the tags that you want to
-    #   delete.
-    #
-    #   Default: None
-    #
-    #   Required: No
-    #
-    #   '>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DeleteTagsForDomainRequest AWS API Documentation
@@ -445,6 +296,8 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
+    #   The name of the domain that you want to disable automatic renewal
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainAutoRenewRequest AWS API Documentation
@@ -468,17 +321,8 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to remove the transfer lock
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLockRequest AWS API Documentation
@@ -493,12 +337,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DisableDomainTransferLockResponse AWS API Documentation
@@ -508,10 +346,63 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # Information about one suggested domain name.
+    #
     # @!attribute [rw] domain_name
+    #   A suggested domain name.
     #   @return [String]
     #
     # @!attribute [rw] availability
+    #   Whether the domain name is available for registering.
+    #
+    #   <note markdown="1"> You can register only the domains that are designated as
+    #   `AVAILABLE`.
+    #
+    #    </note>
+    #
+    #   Valid values:
+    #
+    #   AVAILABLE
+    #
+    #   : The domain name is available.
+    #
+    #   AVAILABLE\_RESERVED
+    #
+    #   : The domain name is reserved under specific conditions.
+    #
+    #   AVAILABLE\_PREORDER
+    #
+    #   : The domain name is available and can be preordered.
+    #
+    #   DONT\_KNOW
+    #
+    #   : The TLD registry didn't reply with a definitive answer about
+    #     whether the domain name is available. Amazon Route 53 can return
+    #     this response for a variety of reasons, for example, the registry
+    #     is performing maintenance. Try again later.
+    #
+    #   PENDING
+    #
+    #   : The TLD registry didn't return a response in the expected amount
+    #     of time. When the response is delayed, it usually takes just a few
+    #     extra seconds. You can resubmit the request immediately.
+    #
+    #   RESERVED
+    #
+    #   : The domain name has been reserved for another person or
+    #     organization.
+    #
+    #   UNAVAILABLE
+    #
+    #   : The domain name is not available.
+    #
+    #   UNAVAILABLE\_PREMIUM
+    #
+    #   : The domain name is not available.
+    #
+    #   UNAVAILABLE\_RESTRICTED
+    #
+    #   : The domain name is forbidden.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSuggestion AWS API Documentation
@@ -522,34 +413,24 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # @!attribute [rw] domain_name
-    #   The name of a domain.
+    # Summary information about one domain.
     #
-    #   Type: String
+    # @!attribute [rw] domain_name
+    #   The name of the domain that the summary information applies to.
     #   @return [String]
     #
     # @!attribute [rw] auto_renew
     #   Indicates whether the domain is automatically renewed upon
     #   expiration.
-    #
-    #   Type: Boolean
-    #
-    #   Valid values: `True` \| `False`
     #   @return [Boolean]
     #
     # @!attribute [rw] transfer_lock
     #   Indicates whether a domain is locked from unauthorized transfer to
     #   another party.
-    #
-    #   Type: Boolean
-    #
-    #   Valid values: `True` \| `False`
     #   @return [Boolean]
     #
     # @!attribute [rw] expiry
     #   Expiration date of the domain in Coordinated Universal Time (UTC).
-    #
-    #   Type: Long
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSummary AWS API Documentation
@@ -570,6 +451,8 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
+    #   The name of the domain that you want to enable automatic renewal
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainAutoRenewRequest AWS API Documentation
@@ -583,7 +466,7 @@ module Aws::Route53Domains
     #
     class EnableDomainAutoRenewResponse < Aws::EmptyStructure; end
 
-    # The EnableDomainTransferLock request includes the following element.
+    # A request to set the transfer lock for the specified domain.
     #
     # @note When making an API call, you may pass EnableDomainTransferLockRequest
     #   data as a hash:
@@ -593,17 +476,7 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to set the transfer lock for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLockRequest AWS API Documentation
@@ -618,12 +491,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/EnableDomainTransferLockResponse AWS API Documentation
@@ -645,38 +512,11 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] name
     #   Name of the additional parameter required by the top-level domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Valid values: `DUNS_NUMBER` \| `BRAND_NUMBER` \| `BIRTH_DEPARTMENT`
-    #   \| `BIRTH_DATE_IN_YYYY_MM_DD` \| `BIRTH_COUNTRY` \| `BIRTH_CITY` \|
-    #   `DOCUMENT_NUMBER` \| `AU_ID_NUMBER` \| `AU_ID_TYPE` \|
-    #   `CA_LEGAL_TYPE` \| `CA_BUSINESS_ENTITY_TYPE` \|`ES_IDENTIFICATION`
-    #   \| `ES_IDENTIFICATION_TYPE` \| `ES_LEGAL_FORM` \|
-    #   `FI_BUSINESS_NUMBER` \| `FI_ID_NUMBER` \| `IT_PIN` \|
-    #   `RU_PASSPORT_DATA` \| `SE_ID_NUMBER` \| `SG_ID_NUMBER` \|
-    #   `VAT_NUMBER`
-    #
-    #   Parent: `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] value
     #   Values corresponding to the additional parameter names required by
     #   some top-level domains.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 2048 characters.
-    #
-    #   Parent: `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ExtraParam AWS API Documentation
@@ -697,12 +537,6 @@ module Aws::Route53Domains
     # @!attribute [rw] domain_name
     #   The name of the domain for which you want to know whether the
     #   registrant contact has confirmed that the email address is valid.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatusRequest AWS API Documentation
@@ -717,15 +551,22 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Whether the registrant contact has responded. `PENDING` indicates
-    #   that we sent the confirmation email and haven't received a response
-    #   yet, `DONE` indicates that we sent the email and got confirmation
-    #   from the registrant contact, and `EXPIRED` indicates that the time
-    #   limit expired before the registrant contact responded.
+    #   Whether the registrant contact has responded. Values include the
+    #   following:
     #
-    #   Type: String
+    #   PENDING
     #
-    #   Valid values: `PENDING`, `DONE`, `EXPIRED`
+    #   : We sent the confirmation email and haven't received a response
+    #     yet.
+    #
+    #   DONE
+    #
+    #   : We sent the email and got confirmation from the registrant
+    #     contact.
+    #
+    #   EXPIRED
+    #
+    #   : The time limit expired before the registrant contact responded.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetContactReachabilityStatusResponse AWS API Documentation
@@ -746,17 +587,8 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to get detailed information
+    #   about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainDetailRequest AWS API Documentation
@@ -770,54 +602,27 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] domain_name
     #   The name of a domain.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] nameservers
     #   The name of the domain.
-    #
-    #   Type: String
     #   @return [Array<Types::Nameserver>]
     #
     # @!attribute [rw] auto_renew
     #   Specifies whether the domain registration is set to renew
     #   automatically.
-    #
-    #   Type: Boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_contact
     #   Provides details about the domain administrative contact.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] registrant_contact
     #   Provides details about the domain registrant.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] tech_contact
     #   Provides details about the domain technical contact.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] admin_privacy
@@ -825,8 +630,6 @@ module Aws::Route53Domains
     #   concealed from WHOIS queries. If the value is `true`, WHOIS ("who
     #   is") queries will return contact information for our registrar
     #   partner, Gandi, instead of the contact information that you enter.
-    #
-    #   Type: Boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] registrant_privacy
@@ -834,8 +637,6 @@ module Aws::Route53Domains
     #   concealed from WHOIS queries. If the value is `true`, WHOIS ("who
     #   is") queries will return contact information for our registrar
     #   partner, Gandi, instead of the contact information that you enter.
-    #
-    #   Type: Boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] tech_privacy
@@ -843,29 +644,21 @@ module Aws::Route53Domains
     #   concealed from WHOIS queries. If the value is `true`, WHOIS ("who
     #   is") queries will return contact information for our registrar
     #   partner, Gandi, instead of the contact information that you enter.
-    #
-    #   Type: Boolean
     #   @return [Boolean]
     #
     # @!attribute [rw] registrar_name
     #   Name of the registrar of the domain as identified in the registry.
     #   Amazon Route 53 domains are registered by registrar Gandi. The value
     #   is `"GANDI SAS"`.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] who_is_server
     #   The fully qualified name of the WHOIS server that can answer the
     #   WHOIS query for the domain.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] registrar_url
     #   Web address of the registrar.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] abuse_contact_email
@@ -873,14 +666,10 @@ module Aws::Route53Domains
     #   a domain, to report that the domain is being used to send spam, to
     #   report that someone is cybersquatting on a domain name, or report
     #   some other type of abuse.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] abuse_contact_phone
     #   Phone number for reporting abuse.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] registry_domain_id
@@ -905,8 +694,6 @@ module Aws::Route53Domains
     # @!attribute [rw] reseller
     #   Reseller of the domain. Domains registered or transferred using
     #   Amazon Route 53 domains will have `"Amazon"` as the reseller.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] dns_sec
@@ -928,8 +715,6 @@ module Aws::Route53Domains
     #   what each code means, go to the [ICANN website][1] and search for
     #   `epp status codes`. (Search on the ICANN website; web searches
     #   sometimes return an old version of the document.)
-    #
-    #   Type: Array of String
     #
     #
     #
@@ -973,12 +758,29 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
+    #   A domain name that you want to use as the basis for a list of
+    #   possible domain names. The domain name must contain a top-level
+    #   domain (TLD), such as .com, that Amazon Route 53 supports. For a
+    #   list of TLDs, see [Domains that You Can Register with Amazon Route
+    #   53][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #   @return [String]
     #
     # @!attribute [rw] suggestion_count
+    #   The number of suggested domain names that you want Amazon Route 53
+    #   to return.
     #   @return [Integer]
     #
     # @!attribute [rw] only_available
+    #   If `OnlyAvailable` is `true`, Amazon Route 53 returns only domain
+    #   names that are available. If `OnlyAvailable` is `false`, Amazon
+    #   Route 53 returns domain names without checking whether they're
+    #   available to be registered. To determine whether the domain is
+    #   available, you can call `checkDomainAvailability` for each
+    #   suggestion.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestionsRequest AWS API Documentation
@@ -991,6 +793,9 @@ module Aws::Route53Domains
     end
 
     # @!attribute [rw] suggestions_list
+    #   A list of possible domain names. If you specified `true` for
+    #   `OnlyAvailable` in the request, the list contains only domains that
+    #   are available for registration.
     #   @return [Array<Types::DomainSuggestion>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestionsResponse AWS API Documentation
@@ -1013,12 +818,6 @@ module Aws::Route53Domains
     #   The identifier for the operation for which you want to get the
     #   status. Amazon Route 53 returned the identifier in the response to
     #   the original request.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetOperationDetailRequest AWS API Documentation
@@ -1032,32 +831,22 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] operation_id
     #   The identifier for the operation.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The current status of the requested operation in the system.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] message
     #   Detailed information on the status including possible errors.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] domain_name
     #   The name of a domain.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] type
     #   The type of operation that was requested.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] submitted_date
@@ -1095,26 +884,14 @@ module Aws::Route53Domains
     #   request that includes the value of `NextPageMarker` in the `Marker`
     #   element.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Constraints: The marker must match the value specified in the
     #   previous request.
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] max_items
     #   Number of domains to be returned.
     #
-    #   Type: Integer
-    #
     #   Default: 20
-    #
-    #   Constraints: A numeral between 1 and 100.
-    #
-    #   Required: No
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomainsRequest AWS API Documentation
@@ -1129,20 +906,12 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] domains
     #   A summary of domains.
-    #
-    #   Type: Complex type containing a list of domain summaries.
-    #
-    #   Children: `AutoRenew`, `DomainName`, `Expiry`, `TransferLock`
     #   @return [Array<Types::DomainSummary>]
     #
     # @!attribute [rw] next_page_marker
     #   If there are more domains than you specified for `MaxItems` in the
     #   request, submit another request and include the value of
     #   `NextPageMarker` in the value of `Marker`.
-    #
-    #   Type: String
-    #
-    #   Parent: `Operations`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListDomainsResponse AWS API Documentation
@@ -1171,24 +940,12 @@ module Aws::Route53Domains
     #   `NextPageMarker` from the previous response, and submit another
     #   request that includes the value of `NextPageMarker` in the `Marker`
     #   element.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] max_items
     #   Number of domains to be returned.
     #
-    #   Type: Integer
-    #
     #   Default: 20
-    #
-    #   Constraints: A value between 1 and 100.
-    #
-    #   Required: No
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsRequest AWS API Documentation
@@ -1203,20 +960,12 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] operations
     #   Lists summaries of the operations.
-    #
-    #   Type: Complex type containing a list of operation summaries
-    #
-    #   Children: `OperationId`, `Status`, `SubmittedDate`, `Type`
     #   @return [Array<Types::OperationSummary>]
     #
     # @!attribute [rw] next_page_marker
     #   If there are more operations than you specified for `MaxItems` in
     #   the request, submit another request and include the value of
     #   `NextPageMarker` in the value of `Marker`.
-    #
-    #   Type: String
-    #
-    #   Parent: `Operations`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListOperationsResponse AWS API Documentation
@@ -1251,22 +1000,6 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] tag_list
     #   A list of the tags that are associated with the specified domain.
-    #
-    #   Type: A complex type containing a list of tags
-    #
-    #   Each tag includes the following elements.
-    #
-    #   * Key
-    #
-    #     The key (name) of a tag.
-    #
-    #     Type: String
-    #
-    #   * Value
-    #
-    #     The value of a tag.
-    #
-    #     Type: String
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListTagsForDomainResponse AWS API Documentation
@@ -1289,11 +1022,7 @@ module Aws::Route53Domains
     # @!attribute [rw] name
     #   The fully qualified host name of the name server.
     #
-    #   Type: String
-    #
-    #   Constraint: Maximum 255 characterss
-    #
-    #   Parent: `Nameservers`
+    #   Constraint: Maximum 255 characters
     #   @return [String]
     #
     # @!attribute [rw] glue_ips
@@ -1303,12 +1032,8 @@ module Aws::Route53Domains
     #   server for the domain is ns.example.com, you need to specify the IP
     #   address for ns.example.com.
     #
-    #   Type: List of IP addresses.
-    #
     #   Constraints: The list can contain only one IPv4 and one IPv6
     #   address.
-    #
-    #   Parent: `Nameservers`
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Nameserver AWS API Documentation
@@ -1323,24 +1048,14 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] operation_id
     #   Identifier returned to track the requested action.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] status
     #   The current status of the requested operation in the system.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @!attribute [rw] type
     #   Type of the action requested.
-    #
-    #   Type: String
-    #
-    #   Valid values: `REGISTER_DOMAIN` \| `DELETE_DOMAIN` \|
-    #   `TRANSFER_IN_DOMAIN` \| `UPDATE_DOMAIN_CONTACT` \|
-    #   `UPDATE_NAMESERVER` \| `CHANGE_PRIVACY_PROTECTION` \| `DOMAIN_LOCK`
     #   @return [String]
     #
     # @!attribute [rw] submitted_date
@@ -1436,17 +1151,11 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
+    #   The domain name that you want to register.
     #
     #   Constraints: The domain name can contain only the letters a through
     #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
     #   Names are not supported.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] idn_lang_code
@@ -1454,17 +1163,17 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] duration_in_years
-    #   The number of years the domain will be registered. Domains are
-    #   registered for a minimum of one year. The maximum period depends on
-    #   the top-level domain.
-    #
-    #   Type: Integer
+    #   The number of years that you want to register the domain for.
+    #   Domains are registered for a minimum of one year. The maximum period
+    #   depends on the top-level domain. For the range of valid values for
+    #   your domain, see [Domains that You Can Register with Amazon Route
+    #   53][1] in the *Amazon Route 53 Developer Guide*.
     #
     #   Default: 1
     #
-    #   Valid values: Integer from 1 to 10
     #
-    #   Required: Yes
+    #
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #   @return [Integer]
     #
     # @!attribute [rw] auto_renew
@@ -1472,97 +1181,46 @@ module Aws::Route53Domains
     #   or not (`false`). Autorenewal only takes effect after the account is
     #   charged.
     #
-    #   Type: Boolean
-    #
-    #   Valid values: `true` \| `false`
-    #
     #   Default: `true`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] registrant_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] tech_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @!attribute [rw] privacy_protect_registrant_contact
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @!attribute [rw] privacy_protect_tech_contact
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainRequest AWS API Documentation
@@ -1586,12 +1244,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainResponse AWS API Documentation
@@ -1614,39 +1266,26 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
+    #   The name of the domain that you want to renew.
     #   @return [String]
     #
     # @!attribute [rw] duration_in_years
     #   The number of years that you want to renew the domain for. The
     #   maximum number of years depends on the top-level domain. For the
     #   range of valid values for your domain, see [Domains that You Can
-    #   Register with Amazon Route 53][1] in the Amazon Route 53
-    #   documentation.
-    #
-    #   Type: Integer
+    #   Register with Amazon Route 53][1] in the *Amazon Route 53 Developer
+    #   Guide*.
     #
     #   Default: 1
     #
-    #   Valid values: Integer from 1 to 10
-    #
-    #   Required: No
     #
     #
-    #
-    #   [1]: http://docs.aws.amazon.com/console/route53/domain-tld-list
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #   @return [Integer]
     #
     # @!attribute [rw] current_expiry_year
     #   The year when the registration for the domain is set to expire. This
     #   value must match the current expiration date for the domain.
-    #
-    #   Type: Integer
-    #
-    #   Default: None
-    #
-    #   Valid values: Integer
-    #
-    #   Required: Yes
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomainRequest AWS API Documentation
@@ -1659,6 +1298,8 @@ module Aws::Route53Domains
     end
 
     # @!attribute [rw] operation_id
+    #   The identifier for tracking the progress of the request. To use this
+    #   ID to query the operation status, use GetOperationDetail.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomainResponse AWS API Documentation
@@ -1678,12 +1319,6 @@ module Aws::Route53Domains
     # @!attribute [rw] domain_name
     #   The name of the domain for which you want Amazon Route 53 to resend
     #   a confirmation email to the registrant contact.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmailRequest AWS API Documentation
@@ -1703,9 +1338,9 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] is_already_verified
-    #   True if the email address for the registrant contact has already
-    #   been verified, and false otherwise. If the email address has already
-    #   been verified, we don't send another confirmation email.
+    #   `True` if the email address for the registrant contact has already
+    #   been verified, and `false` otherwise. If the email address has
+    #   already been verified, we don't send another confirmation email.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ResendContactReachabilityEmailResponse AWS API Documentation
@@ -1717,7 +1352,9 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # The RetrieveDomainAuthCode request includes the following element.
+    # A request for the authorization code for the specified domain. To
+    # transfer a domain to another registrar, you provide this value to the
+    # new registrar.
     #
     # @note When making an API call, you may pass RetrieveDomainAuthCodeRequest
     #   data as a hash:
@@ -1727,17 +1364,8 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to get an authorization code
+    #   for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCodeRequest AWS API Documentation
@@ -1751,8 +1379,6 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] auth_code
     #   The authorization code for the domain.
-    #
-    #   Type: String
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RetrieveDomainAuthCodeResponse AWS API Documentation
@@ -1775,29 +1401,17 @@ module Aws::Route53Domains
     # @!attribute [rw] key
     #   The key (name) of a tag.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Valid values: A-Z, a-z, 0-9, space, ".:/=+\\-@"
     #
     #   Constraints: Each key can be 1-128 characters long.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The value of a tag.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Valid values: A-Z, a-z, 0-9, space, ".:/=+\\-@"
     #
     #   Constraints: Each value can be 0-256 characters long.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Tag AWS API Documentation
@@ -1894,17 +1508,11 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
+    #   The name of the domain that you want to transfer to Amazon Route 53.
     #
     #   Constraints: The domain name can contain only the letters a through
     #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
     #   Names are not supported.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] idn_lang_code
@@ -1912,36 +1520,20 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] duration_in_years
-    #   The number of years the domain will be registered. Domains are
-    #   registered for a minimum of one year. The maximum period depends on
-    #   the top-level domain.
-    #
-    #   Type: Integer
+    #   The number of years that you want to register the domain for.
+    #   Domains are registered for a minimum of one year. The maximum period
+    #   depends on the top-level domain.
     #
     #   Default: 1
-    #
-    #   Valid values: Integer from 1 to 10
-    #
-    #   Required: Yes
     #   @return [Integer]
     #
     # @!attribute [rw] nameservers
     #   Contains details for the host and glue IP addresses.
-    #
-    #   Type: Complex
-    #
-    #   Children: `GlueIps`, `Name`
-    #
-    #   Required: No
     #   @return [Array<Types::Nameserver>]
     #
     # @!attribute [rw] auth_code
     #   The authorization code for the domain. You get this value from the
     #   current registrar.
-    #
-    #   Type: String
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] auto_renew
@@ -1949,97 +1541,46 @@ module Aws::Route53Domains
     #   not (false). Autorenewal only takes effect after the account is
     #   charged.
     #
-    #   Type: Boolean
-    #
-    #   Valid values: `true` \| `false`
-    #
     #   Default: true
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @!attribute [rw] admin_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] registrant_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] tech_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @!attribute [rw] privacy_protect_registrant_contact
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @!attribute [rw] privacy_protect_tech_contact
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainRequest AWS API Documentation
@@ -2065,12 +1606,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainResponse AWS API Documentation
@@ -2094,62 +1629,29 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to update the privacy setting
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] admin_privacy
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
-    #
-    #   Default: None
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #   @return [Boolean]
     #
     # @!attribute [rw] registrant_privacy
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
-    #
-    #   Default: None
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #   @return [Boolean]
     #
     # @!attribute [rw] tech_privacy
     #   Whether you want to conceal contact information from WHOIS queries.
-    #   If you specify true, WHOIS ("who is") queries will return contact
-    #   information for our registrar partner, Gandi, instead of the contact
-    #   information that you enter.
-    #
-    #   Type: Boolean
-    #
-    #   Default: None
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
+    #   If you specify `true`, WHOIS ("who is") queries will return
+    #   contact information for our registrar partner, Gandi, instead of the
+    #   contact information that you enter.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacyRequest AWS API Documentation
@@ -2168,12 +1670,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactPrivacyResponse AWS API Documentation
@@ -2256,56 +1752,20 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to update contact information
+    #   for.
     #   @return [String]
     #
     # @!attribute [rw] admin_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] registrant_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] tech_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`,
-    #   `ExtraParams`
-    #
-    #   Required: Yes
     #   @return [Types::ContactDetail]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactRequest AWS API Documentation
@@ -2323,12 +1783,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainContactResponse AWS API Documentation
@@ -2338,7 +1792,15 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # The UpdateDomainNameserver request includes the following elements.
+    # Replaces the current set of name servers for the domain with the
+    # specified set of name servers. If you use Amazon Route 53 as your DNS
+    # service, specify the four name servers in the delegation set for the
+    # hosted zone for the domain.
+    #
+    # If successful, this operation returns an operation ID that you can use
+    # to track the progress and completion of the action. If the request is
+    # not completed successfully, the domain registrant will be notified by
+    # email.
     #
     # @note When making an API call, you may pass UpdateDomainNameserversRequest
     #   data as a hash:
@@ -2355,17 +1817,7 @@ module Aws::Route53Domains
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to change name servers for.
     #   @return [String]
     #
     # @!attribute [rw] fi_auth_key
@@ -2374,12 +1826,6 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] nameservers
     #   A list of new name servers for the domain.
-    #
-    #   Type: Complex
-    #
-    #   Children: `Name`, `GlueIps`
-    #
-    #   Required: Yes
     #   @return [Array<Types::Nameserver>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameserversRequest AWS API Documentation
@@ -2396,12 +1842,6 @@ module Aws::Route53Domains
     # @!attribute [rw] operation_id
     #   Identifier for tracking the progress of the request. To use this ID
     #   to query the operation status, use GetOperationDetail.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: Maximum 255 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateDomainNameserversResponse AWS API Documentation
@@ -2428,65 +1868,12 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] domain_name
     #   The domain for which you want to add or update tags.
-    #
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through
-    #   z, the numbers 0 through 9, and hyphen (-). Hyphens are allowed only
-    #   when they're surrounded by letters, numbers, or other hyphens. You
-    #   can't specify a hyphen at the beginning or end of a label. To
-    #   specify an Internationalized Domain Name, you must convert the name
-    #   to Punycode.
-    #
-    #   Required: Yes
     #   @return [String]
     #
     # @!attribute [rw] tags_to_update
     #   A list of the tag keys and values that you want to add or update. If
     #   you specify a key that already exists, the corresponding value will
     #   be replaced.
-    #
-    #   Type: A complex type containing a list of tags
-    #
-    #   Default: None
-    #
-    #   Required: No
-    #
-    #   '> Each tag includes the following elements:
-    #
-    #   * Key
-    #
-    #     The key (name) of a tag.
-    #
-    #     Type: String
-    #
-    #     Default: None
-    #
-    #     Valid values: Unicode characters including alphanumeric, space,
-    #     and ".:/=+\\-@"
-    #
-    #     Constraints: Each key can be 1-128 characters long.
-    #
-    #     Required: Yes
-    #
-    #   * Value
-    #
-    #     The value of a tag.
-    #
-    #     Type: String
-    #
-    #     Default: None
-    #
-    #     Valid values: Unicode characters including alphanumeric, space,
-    #     and ".:/=+\\-@"
-    #
-    #     Constraints: Each value can be 0-256 characters long.
-    #
-    #     Required: Yes
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/UpdateTagsForDomainRequest AWS API Documentation
@@ -2516,23 +1903,11 @@ module Aws::Route53Domains
     # @!attribute [rw] start
     #   The beginning date and time for the time period for which you want a
     #   list of billing records. Specify the date in Unix time format.
-    #
-    #   Type: Double
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #   @return [Time]
     #
     # @!attribute [rw] end
     #   The end date and time for the time period for which you want a list
     #   of billing records. Specify the date in Unix time format.
-    #
-    #   Type: Double
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #   @return [Time]
     #
     # @!attribute [rw] marker
@@ -2544,26 +1919,14 @@ module Aws::Route53Domains
     #   from the previous response, and submit another request that includes
     #   the value of `NextPageMarker` in the `Marker` element.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Constraints: The marker must match the value of `NextPageMarker`
     #   that was returned in the previous response.
-    #
-    #   Required: No
     #   @return [String]
     #
     # @!attribute [rw] max_items
     #   The number of billing records to be returned.
     #
-    #   Type: Integer
-    #
     #   Default: 20
-    #
-    #   Constraints: A value between 1 and 100.
-    #
-    #   Required: No
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBillingRequest AWS API Documentation
@@ -2582,19 +1945,10 @@ module Aws::Route53Domains
     #   If there are more billing records than you specified for `MaxItems`
     #   in the request, submit another request and include the value of
     #   `NextPageMarker` in the value of `Marker`.
-    #
-    #   Type: String
-    #
-    #   Parent: `BillingRecords`
     #   @return [String]
     #
     # @!attribute [rw] billing_records
     #   A summary of billing records.
-    #
-    #   Type: Complex type containing a list of billing record summaries.
-    #
-    #   Children: `DomainName`, `Operation`, `InvoiceId`, `BillDate` and
-    #   `Price`
     #   @return [Array<Types::BillingRecord>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ViewBillingResponse AWS API Documentation

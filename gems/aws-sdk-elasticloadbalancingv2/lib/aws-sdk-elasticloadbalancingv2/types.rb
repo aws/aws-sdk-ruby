@@ -214,7 +214,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute [rw] name
     #   The name of the load balancer.
     #
-    #   This name must be unique within your AWS account, can have a maximum
+    #   This name must be unique per region per account, can have a maximum
     #   of 32 characters, must contain only alphanumeric characters or
     #   hyphens, and must not begin or end with a hyphen.
     #   @return [String]
@@ -304,11 +304,28 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] conditions
-    #   A condition. Each condition has the field `path-pattern` and
-    #   specifies one path pattern. A path pattern is case sensitive, can be
-    #   up to 128 characters in length, and can contain any of the following
+    #   A condition. Each condition specifies a field name and a single
+    #   value.
+    #
+    #   If the field name is `host-header`, you can specify a single host
+    #   name (for example, my.example.com). A host name is case insensitive,
+    #   can be up to 128 characters in length, and can contain any of the
+    #   following characters. Note that you can include up to three wildcard
+    #   characters.
+    #
+    #   * A-Z, a-z, 0-9
+    #
+    #   * \- .
+    #
+    #   * * (matches 0 or more characters)
+    #
+    #   * ? (matches exactly 1 character)
+    #
+    #   If the field name is `path-pattern`, you can specify a single path
+    #   pattern. A path pattern is case sensitive, can be up to 128
+    #   characters in length, and can contain any of the following
     #   characters. Note that you can include up to three wildcard
-    #   characters in a path pattern.
+    #   characters.
     #
     #   * A-Z, a-z, 0-9
     #
@@ -374,6 +391,10 @@ module Aws::ElasticLoadBalancingV2
     #
     # @!attribute [rw] name
     #   The name of the target group.
+    #
+    #   This name must be unique per region per account, can have a maximum
+    #   of 32 characters, must contain only alphanumeric characters or
+    #   hyphens, and must not begin or end with a hyphen.
     #   @return [String]
     #
     # @!attribute [rw] protocol
@@ -676,7 +697,8 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] load_balancer_arns
-    #   The Amazon Resource Names (ARN) of the load balancers.
+    #   The Amazon Resource Names (ARN) of the load balancers. You can
+    #   specify up to 20 load balancers in a single call.
     #   @return [Array<String>]
     #
     # @!attribute [rw] names
@@ -1163,9 +1185,9 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] http_code
-    #   The HTTP codes. The default value is 200. You can specify multiple
-    #   values (for example, "200,202") or a range of values (for example,
-    #   "200-299").
+    #   The HTTP codes. You can specify values between 200 and 499. The
+    #   default value is 200. You can specify multiple values (for example,
+    #   "200,202") or a range of values (for example, "200-299").
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Matcher AWS API Documentation
@@ -1209,8 +1231,13 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     #
     # @!attribute [rw] ssl_policy
-    #   The security policy that defines which ciphers and protocols are
-    #   supported.
+    #   The security policy that defines which protocols and ciphers are
+    #   supported. For more information, see [Security Policies][1] in the
+    #   *Application Load Balancers Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies
     #   @return [String]
     #
     # @!attribute [rw] certificates
@@ -1567,15 +1594,32 @@ module Aws::ElasticLoadBalancingV2
     #       }
     #
     # @!attribute [rw] field
-    #   The only possible value is `path-pattern`.
+    #   The name of the field. The possible values are `host-header` and
+    #   `path-pattern`.
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The path pattern. You can specify a single path pattern.
+    #   The condition value.
     #
-    #   A path pattern is case sensitive, can be up to 128 characters in
-    #   length, and can contain any of the following characters. Note that
-    #   you can include up to three wildcard characters in a path pattern.
+    #   If the field name is `host-header`, you can specify a single host
+    #   name (for example, my.example.com). A host name is case insensitive,
+    #   can be up to 128 characters in length, and can contain any of the
+    #   following characters. Note that you can include up to three wildcard
+    #   characters.
+    #
+    #   * A-Z, a-z, 0-9
+    #
+    #   * \- .
+    #
+    #   * * (matches 0 or more characters)
+    #
+    #   * ? (matches exactly 1 character)
+    #
+    #   If the field name is `path-pattern`, you can specify a single path
+    #   pattern (for example, /img/*). A path pattern is case sensitive,
+    #   can be up to 128 characters in length, and can contain any of the
+    #   following characters. Note that you can include up to three wildcard
+    #   characters.
     #
     #   * A-Z, a-z, 0-9
     #

@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::EMR
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -153,6 +155,89 @@ module Aws::EMR
 
     # @!group API Operations
 
+    # Adds an instance fleet to a running cluster.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :cluster_id
+    #   The unique identifier of the cluster.
+    #
+    # @option params [required, Types::InstanceFleetConfig] :instance_fleet
+    #   Specifies the configuration of the instance fleet.
+    #
+    # @return [Types::AddInstanceFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddInstanceFleetOutput#cluster_id #cluster_id} => String
+    #   * {Types::AddInstanceFleetOutput#instance_fleet_id #instance_fleet_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_instance_fleet({
+    #     cluster_id: "XmlStringMaxLen256", # required
+    #     instance_fleet: { # required
+    #       name: "XmlStringMaxLen256",
+    #       instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
+    #       target_on_demand_capacity: 1,
+    #       target_spot_capacity: 1,
+    #       instance_type_configs: [
+    #         {
+    #           instance_type: "InstanceType", # required
+    #           weighted_capacity: 1,
+    #           bid_price: "XmlStringMaxLen256",
+    #           bid_price_as_percentage_of_on_demand_price: 1.0,
+    #           ebs_configuration: {
+    #             ebs_block_device_configs: [
+    #               {
+    #                 volume_specification: { # required
+    #                   volume_type: "String", # required
+    #                   iops: 1,
+    #                   size_in_gb: 1, # required
+    #                 },
+    #                 volumes_per_instance: 1,
+    #               },
+    #             ],
+    #             ebs_optimized: false,
+    #           },
+    #           configurations: [
+    #             {
+    #               classification: "String",
+    #               configurations: {
+    #                 # recursive ConfigurationList
+    #               },
+    #               properties: {
+    #                 "String" => "String",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       launch_specifications: {
+    #         spot_specification: { # required
+    #           timeout_duration_minutes: 1, # required
+    #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #           block_duration_minutes: 1,
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_id #=> String
+    #   resp.instance_fleet_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleet AWS API Documentation
+    #
+    # @overload add_instance_fleet(params = {})
+    # @param [Hash] params ({})
+    def add_instance_fleet(params = {}, options = {})
+      req = build_request(:add_instance_fleet, params)
+      req.send_request(options)
+    end
+
     # Adds one or more instance groups to a running cluster.
     #
     # @option params [required, Array<Types::InstanceGroupConfig>] :instance_groups
@@ -259,19 +344,19 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # AddJobFlowSteps adds new steps to a running job flow. A maximum of 256
+    # AddJobFlowSteps adds new steps to a running cluster. A maximum of 256
     # steps are allowed in each job flow.
     #
-    # If your job flow is long-running (such as a Hive data warehouse) or
+    # If your cluster is long-running (such as a Hive data warehouse) or
     # complex, you may require more than 256 steps to process your data. You
     # can bypass the 256-step limitation in various ways, including using
-    # the SSH shell to connect to the master node and submitting queries
-    # directly to the software running on the master node, such as Hive and
-    # Hadoop. For more information on how to do this, see [Add More than 256
-    # Steps to a Job Flow][1] in the *Amazon EMR Developer's Guide*.
+    # SSH to connect to the master node and submitting queries directly to
+    # the software running on the master node, such as Hive and Hadoop. For
+    # more information on how to do this, see [Add More than 256 Steps to a
+    # Cluster][1] in the *Amazon EMR Management Guide*.
     #
     # A step specifies the location of a JAR file stored either on the
-    # master node of the job flow or in Amazon S3. Each step is performed by
+    # master node of the cluster or in Amazon S3. Each step is performed by
     # the main function of the main class of the JAR file. The main class
     # can be specified either in the manifest of the JAR or by using the
     # MainFunction parameter of the step.
@@ -281,12 +366,12 @@ module Aws::EMR
     # and all Hadoop jobs started while the step was running must have
     # completed and run successfully.
     #
-    # You can only add steps to a job flow that is in one of the following
+    # You can only add steps to a cluster that is in one of the following
     # states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html
+    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/AddMoreThan256Steps.html
     #
     # @option params [required, String] :job_flow_id
     #   A string that uniquely identifies the job flow. This identifier is
@@ -506,7 +591,11 @@ module Aws::EMR
     #   resp.cluster.status.timeline.end_date_time #=> Time
     #   resp.cluster.ec2_instance_attributes.ec2_key_name #=> String
     #   resp.cluster.ec2_instance_attributes.ec2_subnet_id #=> String
+    #   resp.cluster.ec2_instance_attributes.requested_ec2_subnet_ids #=> Array
+    #   resp.cluster.ec2_instance_attributes.requested_ec2_subnet_ids[0] #=> String
     #   resp.cluster.ec2_instance_attributes.ec2_availability_zone #=> String
+    #   resp.cluster.ec2_instance_attributes.requested_ec2_availability_zones #=> Array
+    #   resp.cluster.ec2_instance_attributes.requested_ec2_availability_zones[0] #=> String
     #   resp.cluster.ec2_instance_attributes.iam_instance_profile #=> String
     #   resp.cluster.ec2_instance_attributes.emr_managed_master_security_group #=> String
     #   resp.cluster.ec2_instance_attributes.emr_managed_slave_security_group #=> String
@@ -515,6 +604,7 @@ module Aws::EMR
     #   resp.cluster.ec2_instance_attributes.additional_master_security_groups[0] #=> String
     #   resp.cluster.ec2_instance_attributes.additional_slave_security_groups #=> Array
     #   resp.cluster.ec2_instance_attributes.additional_slave_security_groups[0] #=> String
+    #   resp.cluster.instance_collection_type #=> String, one of "INSTANCE_FLEET", "INSTANCE_GROUP"
     #   resp.cluster.log_uri #=> String
     #   resp.cluster.requested_ami_version #=> String
     #   resp.cluster.running_ami_version #=> String
@@ -637,6 +727,8 @@ module Aws::EMR
     #   resp.job_flows[0].instances.ec2_key_name #=> String
     #   resp.job_flows[0].instances.ec2_subnet_id #=> String
     #   resp.job_flows[0].instances.placement.availability_zone #=> String
+    #   resp.job_flows[0].instances.placement.availability_zones #=> Array
+    #   resp.job_flows[0].instances.placement.availability_zones[0] #=> String
     #   resp.job_flows[0].instances.keep_job_flow_alive_when_no_steps #=> Boolean
     #   resp.job_flows[0].instances.termination_protected #=> Boolean
     #   resp.job_flows[0].instances.hadoop_version #=> String
@@ -857,6 +949,78 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # Lists all available details about the instance fleets in a cluster.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :cluster_id
+    #   The unique identifier of the cluster.
+    #
+    # @option params [String] :marker
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #
+    # @return [Types::ListInstanceFleetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListInstanceFleetsOutput#instance_fleets #instance_fleets} => Array&lt;Types::InstanceFleet&gt;
+    #   * {Types::ListInstanceFleetsOutput#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_instance_fleets({
+    #     cluster_id: "ClusterId", # required
+    #     marker: "Marker",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_fleets #=> Array
+    #   resp.instance_fleets[0].id #=> String
+    #   resp.instance_fleets[0].name #=> String
+    #   resp.instance_fleets[0].status.state #=> String, one of "PROVISIONING", "BOOTSTRAPPING", "RUNNING", "RESIZING", "SUSPENDED", "TERMINATING", "TERMINATED"
+    #   resp.instance_fleets[0].status.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "VALIDATION_ERROR", "INSTANCE_FAILURE", "CLUSTER_TERMINATED"
+    #   resp.instance_fleets[0].status.state_change_reason.message #=> String
+    #   resp.instance_fleets[0].status.timeline.creation_date_time #=> Time
+    #   resp.instance_fleets[0].status.timeline.ready_date_time #=> Time
+    #   resp.instance_fleets[0].status.timeline.end_date_time #=> Time
+    #   resp.instance_fleets[0].instance_fleet_type #=> String, one of "MASTER", "CORE", "TASK"
+    #   resp.instance_fleets[0].target_on_demand_capacity #=> Integer
+    #   resp.instance_fleets[0].target_spot_capacity #=> Integer
+    #   resp.instance_fleets[0].provisioned_on_demand_capacity #=> Integer
+    #   resp.instance_fleets[0].provisioned_spot_capacity #=> Integer
+    #   resp.instance_fleets[0].instance_type_specifications #=> Array
+    #   resp.instance_fleets[0].instance_type_specifications[0].instance_type #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].weighted_capacity #=> Integer
+    #   resp.instance_fleets[0].instance_type_specifications[0].bid_price #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].bid_price_as_percentage_of_on_demand_price #=> Float
+    #   resp.instance_fleets[0].instance_type_specifications[0].configurations #=> Array
+    #   resp.instance_fleets[0].instance_type_specifications[0].configurations[0].classification #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].configurations[0].configurations #=> Types::ConfigurationList
+    #   resp.instance_fleets[0].instance_type_specifications[0].configurations[0].properties #=> Hash
+    #   resp.instance_fleets[0].instance_type_specifications[0].configurations[0].properties["String"] #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices #=> Array
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.volume_type #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.iops #=> Integer
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].volume_specification.size_in_gb #=> Integer
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_block_devices[0].device #=> String
+    #   resp.instance_fleets[0].instance_type_specifications[0].ebs_optimized #=> Boolean
+    #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_duration_minutes #=> Integer
+    #   resp.instance_fleets[0].launch_specifications.spot_specification.timeout_action #=> String, one of "SWITCH_TO_ON_DEMAND", "TERMINATE_CLUSTER"
+    #   resp.instance_fleets[0].launch_specifications.spot_specification.block_duration_minutes #=> Integer
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleets AWS API Documentation
+    #
+    # @overload list_instance_fleets(params = {})
+    # @param [Hash] params ({})
+    def list_instance_fleets(params = {}, options = {})
+      req = build_request(:list_instance_fleets, params)
+      req.send_request(options)
+    end
+
     # Provides all available details about the instance groups in a cluster.
     #
     # @option params [required, String] :cluster_id
@@ -961,6 +1125,13 @@ module Aws::EMR
     # @option params [Array<String>] :instance_group_types
     #   The type of instance group for which to list the instances.
     #
+    # @option params [String] :instance_fleet_id
+    #   The unique identifier of the instance fleet.
+    #
+    # @option params [String] :instance_fleet_type
+    #   The node type of the instance fleet. For example MASTER, CORE, or
+    #   TASK.
+    #
     # @option params [Array<String>] :instance_states
     #   A list of instance states that will filter the instances returned with
     #   this request.
@@ -980,6 +1151,8 @@ module Aws::EMR
     #     cluster_id: "ClusterId", # required
     #     instance_group_id: "InstanceGroupId",
     #     instance_group_types: ["MASTER"], # accepts MASTER, CORE, TASK
+    #     instance_fleet_id: "InstanceFleetId",
+    #     instance_fleet_type: "MASTER", # accepts MASTER, CORE, TASK
     #     instance_states: ["AWAITING_FULFILLMENT"], # accepts AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING, TERMINATED
     #     marker: "Marker",
     #   })
@@ -1000,6 +1173,9 @@ module Aws::EMR
     #   resp.instances[0].status.timeline.ready_date_time #=> Time
     #   resp.instances[0].status.timeline.end_date_time #=> Time
     #   resp.instances[0].instance_group_id #=> String
+    #   resp.instances[0].instance_fleet_id #=> String
+    #   resp.instances[0].market #=> String, one of "ON_DEMAND", "SPOT"
+    #   resp.instances[0].instance_type #=> String
     #   resp.instances[0].ebs_volumes #=> Array
     #   resp.instances[0].ebs_volumes[0].device #=> String
     #   resp.instances[0].ebs_volumes[0].volume_id #=> String
@@ -1110,6 +1286,44 @@ module Aws::EMR
     # @param [Hash] params ({})
     def list_steps(params = {}, options = {})
       req = build_request(:list_steps, params)
+      req.send_request(options)
+    end
+
+    # Modifies the target On-Demand and target Spot capacities for the
+    # instance fleet with the specified InstanceFleetID within the cluster
+    # specified using ClusterID. The call either succeeds or fails
+    # atomically.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :cluster_id
+    #   The unique identifier of the cluster.
+    #
+    # @option params [required, Types::InstanceFleetModifyConfig] :instance_fleet
+    #   The unique identifier of the instance fleet.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_fleet({
+    #     cluster_id: "ClusterId", # required
+    #     instance_fleet: { # required
+    #       instance_fleet_id: "InstanceFleetId", # required
+    #       target_on_demand_capacity: 1,
+    #       target_spot_capacity: 1,
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleet AWS API Documentation
+    #
+    # @overload modify_instance_fleet(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_fleet(params = {}, options = {})
+      req = build_request(:modify_instance_fleet, params)
       req.send_request(options)
     end
 
@@ -1327,32 +1541,38 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # RunJobFlow creates and starts running a new job flow. The job flow
-    # will run the steps specified. After the job flow completes, the
-    # cluster is stopped and the HDFS partition is lost. To prevent loss of
-    # data, configure the last step of the job flow to store results in
-    # Amazon S3. If the JobFlowInstancesConfig `KeepJobFlowAliveWhenNoSteps`
-    # parameter is set to `TRUE`, the job flow will transition to the
-    # WAITING state rather than shutting down after the steps have
-    # completed.
+    # RunJobFlow creates and starts running a new cluster (job flow). The
+    # cluster runs the steps specified. After the steps complete, the
+    # cluster stops and the HDFS partition is lost. To prevent loss of data,
+    # configure the last step of the job flow to store results in Amazon S3.
+    # If the JobFlowInstancesConfig `KeepJobFlowAliveWhenNoSteps` parameter
+    # is set to `TRUE`, the cluster transitions to the WAITING state rather
+    # than shutting down after the steps have completed.
     #
     # For additional protection, you can set the JobFlowInstancesConfig
-    # `TerminationProtected` parameter to `TRUE` to lock the job flow and
+    # `TerminationProtected` parameter to `TRUE` to lock the cluster and
     # prevent it from being terminated by API call, user intervention, or in
     # the event of a job flow error.
     #
     # A maximum of 256 steps are allowed in each job flow.
     #
-    # If your job flow is long-running (such as a Hive data warehouse) or
+    # If your cluster is long-running (such as a Hive data warehouse) or
     # complex, you may require more than 256 steps to process your data. You
     # can bypass the 256-step limitation in various ways, including using
     # the SSH shell to connect to the master node and submitting queries
     # directly to the software running on the master node, such as Hive and
     # Hadoop. For more information on how to do this, see [Add More than 256
-    # Steps to a Job Flow][1] in the *Amazon EMR Management Guide*.
+    # Steps to a Cluster][1] in the *Amazon EMR Management Guide*.
     #
-    # For long running job flows, we recommend that you periodically store
+    # For long running clusters, we recommend that you periodically store
     # your results.
+    #
+    # <note markdown="1"> The instance fleets configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow
+    # request can contain InstanceFleets parameters or InstanceGroups
+    # parameters, but not both.
+    #
+    #  </note>
     #
     #
     #
@@ -1411,15 +1631,14 @@ module Aws::EMR
     #   2.x AMIs, use amiVersion instead instead of ReleaseLabel.
     #
     # @option params [required, Types::JobFlowInstancesConfig] :instances
-    #   A specification of the number and type of Amazon EC2 instances on
-    #   which to run the job flow.
+    #   A specification of the number and type of Amazon EC2 instances.
     #
     # @option params [Array<Types::StepConfig>] :steps
-    #   A list of steps to be executed by the job flow.
+    #   A list of steps to run.
     #
     # @option params [Array<Types::BootstrapActionConfig>] :bootstrap_actions
-    #   A list of bootstrap actions that will be run before Hadoop is started
-    #   on the cluster nodes.
+    #   A list of bootstrap actions to run before Hadoop starts on the cluster
+    #   nodes.
     #
     # @option params [Array<String>] :supported_products
     #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
@@ -1427,9 +1646,9 @@ module Aws::EMR
     #
     #    </note>
     #
-    #   A list of strings that indicates third-party software to use with the
-    #   job flow. For more information, see [Use Third Party Applications with
-    #   Amazon EMR][1]. Currently supported values are:
+    #   A list of strings that indicates third-party software to use. For more
+    #   information, see [Use Third Party Applications with Amazon EMR][1].
+    #   Currently supported values are:
     #
     #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
     #
@@ -1448,9 +1667,9 @@ module Aws::EMR
     #   A list of strings that indicates third-party software to use with the
     #   job flow that accepts a user argument list. EMR accepts and forwards
     #   the argument list to the corresponding installation script as
-    #   bootstrap action arguments. For more information, see [Launch a Job
-    #   Flow on the MapR Distribution for Hadoop][1]. Currently supported
-    #   values are:
+    #   bootstrap action arguments. For more information, see "Launch a Job
+    #   Flow on the MapR Distribution for Hadoop" in the [Amazon EMR
+    #   Developer Guide][1]. Supported values are:
     #
     #   * "mapr-m3" - launch the cluster using MapR M3 Edition.
     #
@@ -1474,7 +1693,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #
     # @option params [Array<Types::Application>] :applications
     #   <note markdown="1"> Amazon EMR releases 4.x or later.
@@ -1494,11 +1713,11 @@ module Aws::EMR
     #   creating.
     #
     # @option params [Boolean] :visible_to_all_users
-    #   Whether the job flow is visible to all IAM users of the AWS account
-    #   associated with the job flow. If this value is set to `true`, all IAM
+    #   Whether the cluster is visible to all IAM users of the AWS account
+    #   associated with the cluster. If this value is set to `true`, all IAM
     #   users of that AWS account can view and (if they have the proper policy
-    #   permissions set) manage the job flow. If it is set to `false`, only
-    #   the IAM user that created the job flow can view and manage it.
+    #   permissions set) manage the cluster. If it is set to `false`, only the
+    #   IAM user that created the cluster can view and manage it.
     #
     # @option params [String] :job_flow_role
     #   Also called instance profile and EC2 role. An IAM role for an EMR
@@ -1627,14 +1846,63 @@ module Aws::EMR
     #           },
     #         },
     #       ],
+    #       instance_fleets: [
+    #         {
+    #           name: "XmlStringMaxLen256",
+    #           instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
+    #           target_on_demand_capacity: 1,
+    #           target_spot_capacity: 1,
+    #           instance_type_configs: [
+    #             {
+    #               instance_type: "InstanceType", # required
+    #               weighted_capacity: 1,
+    #               bid_price: "XmlStringMaxLen256",
+    #               bid_price_as_percentage_of_on_demand_price: 1.0,
+    #               ebs_configuration: {
+    #                 ebs_block_device_configs: [
+    #                   {
+    #                     volume_specification: { # required
+    #                       volume_type: "String", # required
+    #                       iops: 1,
+    #                       size_in_gb: 1, # required
+    #                     },
+    #                     volumes_per_instance: 1,
+    #                   },
+    #                 ],
+    #                 ebs_optimized: false,
+    #               },
+    #               configurations: [
+    #                 {
+    #                   classification: "String",
+    #                   configurations: {
+    #                     # recursive ConfigurationList
+    #                   },
+    #                   properties: {
+    #                     "String" => "String",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           launch_specifications: {
+    #             spot_specification: { # required
+    #               timeout_duration_minutes: 1, # required
+    #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #               block_duration_minutes: 1,
+    #             },
+    #           },
+    #         },
+    #       ],
     #       ec2_key_name: "XmlStringMaxLen256",
     #       placement: {
-    #         availability_zone: "XmlString", # required
+    #         availability_zone: "XmlString",
+    #         availability_zones: ["XmlStringMaxLen256"],
     #       },
     #       keep_job_flow_alive_when_no_steps: false,
     #       termination_protected: false,
     #       hadoop_version: "XmlStringMaxLen256",
     #       ec2_subnet_id: "XmlStringMaxLen256",
+    #       ec2_subnet_ids: ["XmlStringMaxLen256"],
     #       emr_managed_master_security_group: "XmlStringMaxLen256",
     #       emr_managed_slave_security_group: "XmlStringMaxLen256",
     #       service_access_security_group: "XmlStringMaxLen256",
@@ -1722,38 +1990,38 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # SetTerminationProtection locks a job flow so the EC2 instances in the
-    # cluster cannot be terminated by user intervention, an API call, or in
-    # the event of a job-flow error. The cluster still terminates upon
-    # successful completion of the job flow. Calling
-    # SetTerminationProtection on a job flow is analogous to calling the
-    # Amazon EC2 DisableAPITermination API on all of the EC2 instances in a
+    # SetTerminationProtection locks a cluster (job flow) so the EC2
+    # instances in the cluster cannot be terminated by user intervention, an
+    # API call, or in the event of a job-flow error. The cluster still
+    # terminates upon successful completion of the job flow. Calling
+    # `SetTerminationProtection` on a cluster is similar to calling the
+    # Amazon EC2 `DisableAPITermination` API on all EC2 instances in a
     # cluster.
     #
-    # SetTerminationProtection is used to prevent accidental termination of
-    # a job flow and to ensure that in the event of an error, the instances
-    # will persist so you can recover any data stored in their ephemeral
-    # instance storage.
+    # `SetTerminationProtection` is used to prevent accidental termination
+    # of a cluster and to ensure that in the event of an error, the
+    # instances persist so that you can recover any data stored in their
+    # ephemeral instance storage.
     #
-    # To terminate a job flow that has been locked by setting
-    # SetTerminationProtection to `true`, you must first unlock the job flow
-    # by a subsequent call to SetTerminationProtection in which you set the
-    # value to `false`.
+    # To terminate a cluster that has been locked by setting
+    # `SetTerminationProtection` to `true`, you must first unlock the job
+    # flow by a subsequent call to `SetTerminationProtection` in which you
+    # set the value to `false`.
     #
-    # For more information, see[Protecting a Job Flow from Termination][1]
-    # in the *Amazon EMR Guide.*
+    # For more information, see[Managing Cluster Termination][1] in the
+    # *Amazon EMR Management Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/UsingEMR_TerminationProtection.html
+    # [1]: http://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
     #
     # @option params [required, Array<String>] :job_flow_ids
-    #   A list of strings that uniquely identify the job flows to protect.
-    #   This identifier is returned by RunJobFlow and can also be obtained
-    #   from DescribeJobFlows .
+    #   A list of strings that uniquely identify the clusters to protect. This
+    #   identifier is returned by RunJobFlow and can also be obtained from
+    #   DescribeJobFlows .
     #
     # @option params [required, Boolean] :termination_protected
-    #   A Boolean that indicates whether to protect the job flow and prevent
+    #   A Boolean that indicates whether to protect the cluster and prevent
     #   the Amazon EC2 instances in the cluster from shutting down due to API
     #   calls, user intervention, or job-flow error.
     #
@@ -1776,22 +2044,23 @@ module Aws::EMR
     end
 
     # Sets whether all AWS Identity and Access Management (IAM) users under
-    # your account can access the specified job flows. This action works on
-    # running job flows. You can also set the visibility of a job flow when
-    # you launch it using the `VisibleToAllUsers` parameter of RunJobFlow.
-    # The SetVisibleToAllUsers action can be called only by an IAM user who
-    # created the job flow or the AWS account that owns the job flow.
+    # your account can access the specified clusters (job flows). This
+    # action works on running clusters. You can also set the visibility of a
+    # cluster when you launch it using the `VisibleToAllUsers` parameter of
+    # RunJobFlow. The SetVisibleToAllUsers action can be called only by an
+    # IAM user who created the cluster or the AWS account that owns the
+    # cluster.
     #
     # @option params [required, Array<String>] :job_flow_ids
     #   Identifiers of the job flows to receive the new visibility setting.
     #
     # @option params [required, Boolean] :visible_to_all_users
-    #   Whether the specified job flows are visible to all IAM users of the
-    #   AWS account associated with the job flow. If this value is set to
-    #   True, all IAM users of that AWS account can view and, if they have the
-    #   proper IAM policy permissions set, manage the job flows. If it is set
-    #   to False, only the IAM user that created a job flow can view and
-    #   manage it.
+    #   Whether the specified clusters are visible to all IAM users of the AWS
+    #   account associated with the cluster. If this value is set to True, all
+    #   IAM users of that AWS account can view and, if they have the proper
+    #   IAM policy permissions set, manage the clusters. If it is set to
+    #   False, only the IAM user that created a cluster can view and manage
+    #   it.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1811,15 +2080,15 @@ module Aws::EMR
       req.send_request(options)
     end
 
-    # TerminateJobFlows shuts a list of job flows down. When a job flow is
-    # shut down, any step not yet completed is canceled and the EC2
-    # instances on which the job flow is running are stopped. Any log files
-    # not already saved are uploaded to Amazon S3 if a LogUri was specified
-    # when the job flow was created.
+    # TerminateJobFlows shuts a list of clusters (job flows) down. When a
+    # job flow is shut down, any step not yet completed is canceled and the
+    # EC2 instances on which the cluster is running are stopped. Any log
+    # files not already saved are uploaded to Amazon S3 if a LogUri was
+    # specified when the cluster was created.
     #
-    # The maximum number of JobFlows allowed is 10. The call to
-    # TerminateJobFlows is asynchronous. Depending on the configuration of
-    # the job flow, it may take up to 1-5 minutes for the job flow to
+    # The maximum number of clusters allowed is 10. The call to
+    # `TerminateJobFlows` is asynchronous. Depending on the configuration of
+    # the cluster, it may take up to 1-5 minutes for the cluster to
     # completely terminate and release allocated resources, such as Amazon
     # EC2 instances.
     #
@@ -1856,7 +2125,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1922,10 +2191,11 @@ module Aws::EMR
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params              | :delay   | :max_attempts |
-    # | --------------- | ------------------- | -------- | ------------- |
-    # | cluster_running | {#describe_cluster} | 30       | 60            |
-    # | step_complete   | {#describe_step}    | 30       | 60            |
+    # | waiter_name        | params              | :delay   | :max_attempts |
+    # | ------------------ | ------------------- | -------- | ------------- |
+    # | cluster_running    | {#describe_cluster} | 30       | 60            |
+    # | cluster_terminated | {#describe_cluster} | 30       | 60            |
+    # | step_complete      | {#describe_step}    | 30       | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -1977,6 +2247,7 @@ module Aws::EMR
     def waiters
       {
         cluster_running: Waiters::ClusterRunning,
+        cluster_terminated: Waiters::ClusterTerminated,
         step_complete: Waiters::StepComplete
       }
     end

@@ -8,6 +8,90 @@
 module Aws::EMR
   module Types
 
+    # @note When making an API call, you may pass AddInstanceFleetInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "XmlStringMaxLen256", # required
+    #         instance_fleet: { # required
+    #           name: "XmlStringMaxLen256",
+    #           instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
+    #           target_on_demand_capacity: 1,
+    #           target_spot_capacity: 1,
+    #           instance_type_configs: [
+    #             {
+    #               instance_type: "InstanceType", # required
+    #               weighted_capacity: 1,
+    #               bid_price: "XmlStringMaxLen256",
+    #               bid_price_as_percentage_of_on_demand_price: 1.0,
+    #               ebs_configuration: {
+    #                 ebs_block_device_configs: [
+    #                   {
+    #                     volume_specification: { # required
+    #                       volume_type: "String", # required
+    #                       iops: 1,
+    #                       size_in_gb: 1, # required
+    #                     },
+    #                     volumes_per_instance: 1,
+    #                   },
+    #                 ],
+    #                 ebs_optimized: false,
+    #               },
+    #               configurations: [
+    #                 {
+    #                   classification: "String",
+    #                   configurations: {
+    #                     # recursive ConfigurationList
+    #                   },
+    #                   properties: {
+    #                     "String" => "String",
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #           launch_specifications: {
+    #             spot_specification: { # required
+    #               timeout_duration_minutes: 1, # required
+    #               timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #               block_duration_minutes: 1,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_fleet
+    #   Specifies the configuration of the instance fleet.
+    #   @return [Types::InstanceFleetConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleetInput AWS API Documentation
+    #
+    class AddInstanceFleetInput < Struct.new(
+      :cluster_id,
+      :instance_fleet)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_fleet_id
+    #   The unique identifier of the instance fleet.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/AddInstanceFleetOutput AWS API Documentation
+    #
+    class AddInstanceFleetOutput < Struct.new(
+      :cluster_id,
+      :instance_fleet_id)
+      include Aws::Structure
+    end
+
     # Input to an AddInstanceGroups call.
     #
     # @note When making an API call, you may pass AddInstanceGroupsInput
@@ -225,15 +309,15 @@ module Aws::EMR
     # indicates the software to use with the cluster and accepts a user
     # argument list. Amazon EMR accepts and forwards the argument list to
     # the corresponding installation script as bootstrap action argument.
-    # For more information, see [Launch a Job Flow on the MapR Distribution
-    # for Hadoop][1]. Currently supported values are:
+    # For more information, see [Using the MapR Distribution for Hadoop][1].
+    # Currently supported values are:
     #
-    # * "mapr-m3" - launch the job flow using MapR M3 Edition.
+    # * "mapr-m3" - launch the cluster using MapR M3 Edition.
     #
-    # * "mapr-m5" - launch the job flow using MapR M5 Edition.
+    # * "mapr-m5" - launch the cluster using MapR M5 Edition.
     #
     # * "mapr" with the user arguments specifying "--edition,m3" or
-    #   "--edition,m5" - launch the job flow using MapR M3 or M5 Edition,
+    #   "--edition,m5" - launch the cluster using MapR M3 or M5 Edition,
     #   respectively.
     #
     # <note markdown="1"> In Amazon EMR releases 4.0 and greater, the only accepted parameter is
@@ -244,7 +328,7 @@ module Aws::EMR
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html
+    # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-mapr.html
     #
     # @note When making an API call, you may pass Application
     #   data as a hash:
@@ -390,7 +474,7 @@ module Aws::EMR
     #   status.`USER_REQUEST` indicates that the scaling policy status was
     #   changed by a user. `PROVISION_FAILURE` indicates that the status
     #   change was because the policy failed to provision. `CLEANUP_FAILURE`
-    #   indicates something unclean happened.--&gt;
+    #   indicates an error.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -409,6 +493,7 @@ module Aws::EMR
     # The status of an automatic scaling policy.
     #
     # @!attribute [rw] state
+    #   Indicates the status of the automatic scaling policy.
     #   @return [String]
     #
     # @!attribute [rw] state_change_reason
@@ -452,7 +537,8 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Reports the configuration of a bootstrap action in a job flow.
+    # Reports the configuration of a bootstrap action in a cluster (job
+    # flow).
     #
     # @!attribute [rw] bootstrap_action_config
     #   A description of the bootstrap action.
@@ -465,13 +551,20 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # Specification of the status of a CancelSteps request. Available only
+    # in Amazon EMR version 4.8.0 and later, excluding version 5.0.0.
+    #
     # @!attribute [rw] step_id
+    #   The encrypted StepId of a step.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of a CancelSteps Request. The value may be SUBMITTED or
+    #   FAILED.
     #   @return [String]
     #
     # @!attribute [rw] reason
+    #   The reason for the failure if the CancelSteps request fails.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/CancelStepsInfo AWS API Documentation
@@ -630,6 +723,18 @@ module Aws::EMR
     #   and so on.
     #   @return [Types::Ec2InstanceAttributes]
     #
+    # @!attribute [rw] instance_collection_type
+    #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    #   versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #    </note>
+    #
+    #   The instance group configuration of the cluster. A value of
+    #   `INSTANCE_GROUP` indicates a uniform instance group configuration. A
+    #   value of `INSTANCE_FLEET` indicates an instance fleets
+    #   configuration.
+    #   @return [String]
+    #
     # @!attribute [rw] log_uri
     #   The path to the Amazon S3 location where logs for this cluster are
     #   stored.
@@ -660,13 +765,13 @@ module Aws::EMR
     #   @return [Boolean]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Indicates whether the job flow is visible to all IAM users of the
-    #   AWS account associated with the job flow. If this value is set to
-    #   `true`, all IAM users of that AWS account can view and manage the
-    #   job flow if they have the proper policy permissions set. If this
-    #   value is `false`, only the IAM user that created the cluster can
-    #   view and manage it. This value can be changed using the
-    #   SetVisibleToAllUsers action.
+    #   Indicates whether the cluster is visible to all IAM users of the AWS
+    #   account associated with the cluster. If this value is set to `true`,
+    #   all IAM users of that AWS account can view and manage the cluster if
+    #   they have the proper policy permissions set. If this value is
+    #   `false`, only the IAM user that created the cluster can view and
+    #   manage it. This value can be changed using the SetVisibleToAllUsers
+    #   action.
     #   @return [Boolean]
     #
     # @!attribute [rw] applications
@@ -683,7 +788,7 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] normalized_instance_hours
-    #   An approximation of the cost of the job flow, represented in
+    #   An approximation of the cost of the cluster, represented in
     #   m1.small/hours. This value is incremented one time for every hour an
     #   m1.small instance runs. Larger instances are weighted more, so an
     #   EC2 instance that is roughly four times more expensive would result
@@ -739,6 +844,7 @@ module Aws::EMR
       :name,
       :status,
       :ec2_instance_attributes,
+      :instance_collection_type,
       :log_uri,
       :requested_ami_version,
       :running_ami_version,
@@ -815,7 +921,7 @@ module Aws::EMR
     #   @return [Types::ClusterStatus]
     #
     # @!attribute [rw] normalized_instance_hours
-    #   An approximation of the cost of the job flow, represented in
+    #   An approximation of the cost of the cluster, represented in
     #   m1.small/hours. This value is incremented one time for every hour an
     #   m1.small instance runs. Larger instances are weighted more, so an
     #   EC2 instance that is roughly four times more expensive would result
@@ -884,12 +990,17 @@ module Aws::EMR
     #
     #  </note>
     #
-    # Specifies a hardware and software configuration of the EMR cluster.
-    # This includes configurations for applications and software bundled
-    # with Amazon EMR. The Configuration object is a JSON object which is
-    # defined by a classification and a set of properties. Configurations
-    # can be nested, so a configuration may have its own Configuration
-    # objects listed.
+    # An optional configuration specification to be used when provisioning
+    # cluster instances, which can include configurations for applications
+    # and software bundled with Amazon EMR. A configuration consists of a
+    # classification, properties, and optional nested configurations. A
+    # classification refers to an application-specific configuration file.
+    # Properties are the settings you want to change in that file. For more
+    # information, see [Configuring Applications][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html
     #
     # @note When making an API call, you may pass Configuration
     #   data as a hash:
@@ -913,20 +1024,16 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] classification
-    #   The classification of a configuration. For more information see,
-    #   [Amazon EMR Configurations][1].
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/API/EmrConfigurations.html
+    #   The classification within a configuration.
     #   @return [String]
     #
     # @!attribute [rw] configurations
-    #   A list of configurations you apply to this configuration object.
+    #   A list of additional configurations to apply within a configuration
+    #   object.
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] properties
-    #   A set of properties supplied to the Configuration object.
+    #   A set of properties specified within a configuration classification.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Configuration AWS API Documentation
@@ -1282,23 +1389,43 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
-    #   To launch the job flow in Amazon VPC, set this parameter to the
-    #   identifier of the Amazon VPC subnet where you want the job flow to
-    #   launch. If you do not specify this value, the job flow is launched
-    #   in the normal AWS cloud, outside of a VPC.
+    #   To launch the cluster in Amazon VPC, set this parameter to the
+    #   identifier of the Amazon VPC subnet where you want the cluster to
+    #   launch. If you do not specify this value, the cluster is launched in
+    #   the normal AWS cloud, outside of a VPC.
     #
     #   Amazon VPC currently does not support cluster compute quadruple
     #   extra large (cc1.4xlarge) instances. Thus, you cannot specify the
-    #   cc1.4xlarge instance type for nodes of a job flow launched in a VPC.
+    #   cc1.4xlarge instance type for nodes of a cluster launched in a VPC.
     #   @return [String]
+    #
+    # @!attribute [rw] requested_ec2_subnet_ids
+    #   Applies to clusters configured with the instance fleets option.
+    #   Specifies the unique identifier of one or more Amazon EC2 subnets in
+    #   which to launch EC2 cluster instances. Amazon EMR chooses the EC2
+    #   subnet with the best performance and cost characteristics from among
+    #   the list of RequestedEc2SubnetIds and launches all cluster instances
+    #   within that subnet. If this value is not specified, and the account
+    #   supports EC2-Classic networks, the cluster launches instances in the
+    #   EC2-Classic network and uses Requested
+    #   @return [Array<String>]
     #
     # @!attribute [rw] ec2_availability_zone
     #   The Availability Zone in which the cluster will run.
     #   @return [String]
     #
+    # @!attribute [rw] requested_ec2_availability_zones
+    #   Applies to clusters configured with the The list of availability
+    #   zones to choose from. The service will choose the availability zone
+    #   with the best mix of available capacity and lowest cost to launch
+    #   the cluster. If you do not specify this value, the cluster is
+    #   launched in any availability zone that the customer account has
+    #   access to.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] iam_instance_profile
-    #   The IAM role that was specified when the job flow was launched. The
-    #   EC2 instances of the job flow assume this role.
+    #   The IAM role that was specified when the cluster was launched. The
+    #   EC2 instances of the cluster assume this role.
     #   @return [String]
     #
     # @!attribute [rw] emr_managed_master_security_group
@@ -1329,7 +1456,9 @@ module Aws::EMR
     class Ec2InstanceAttributes < Struct.new(
       :ec2_key_name,
       :ec2_subnet_id,
+      :requested_ec2_subnet_ids,
       :ec2_availability_zone,
+      :requested_ec2_availability_zones,
       :iam_instance_profile,
       :emr_managed_master_security_group,
       :emr_managed_slave_security_group,
@@ -1485,6 +1614,20 @@ module Aws::EMR
     #   The identifier of the instance group to which this instance belongs.
     #   @return [String]
     #
+    # @!attribute [rw] instance_fleet_id
+    #   The unique identifier of the instance fleet to which an EC2 instance
+    #   belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] market
+    #   The instance purchasing option. Valid values are `ON_DEMAND` or
+    #   `SPOT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The EC2 instance type, for example `m3.xlarge`.
+    #   @return [String]
+    #
     # @!attribute [rw] ebs_volumes
     #   The list of EBS volumes that are attached to this instance.
     #   @return [Array<Types::EbsVolume>]
@@ -1500,7 +1643,416 @@ module Aws::EMR
       :private_ip_address,
       :status,
       :instance_group_id,
+      :instance_fleet_id,
+      :market,
+      :instance_type,
       :ebs_volumes)
+      include Aws::Structure
+    end
+
+    # Describes an instance fleet, which is a group of EC2 instances that
+    # host a particular node type (master, core, or task) in an Amazon EMR
+    # cluster. Instance fleets can consist of a mix of instance types and
+    # On-Demand and Spot instances, which are provisioned to meet a defined
+    # target capacity.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the instance fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A friendly name for the instance fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the instance fleet.
+    #   @return [Types::InstanceFleetStatus]
+    #
+    # @!attribute [rw] instance_fleet_type
+    #   The node type that the instance fleet hosts. Valid values are
+    #   MASTER, CORE, or TASK.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_on_demand_capacity
+    #   The target capacity of On-Demand units for the instance fleet, which
+    #   determines how many On-Demand instances to provision. When the
+    #   instance fleet launches, Amazon EMR tries to provision On-Demand
+    #   instances as specified by InstanceTypeConfig. Each instance
+    #   configuration has a specified `WeightedCapacity`. When an On-Demand
+    #   instance is provisioned, the `WeightedCapacity` units count toward
+    #   the target capacity. Amazon EMR provisions instances until the
+    #   target capacity is totally fulfilled, even if this results in an
+    #   overage. For example, if there are 2 units remaining to fulfill
+    #   capacity, and Amazon EMR can only provision an instance with a
+    #   `WeightedCapacity` of 5 units, the instance is provisioned, and the
+    #   target capacity is exceeded by 3 units. You can use
+    #   InstanceFleet$ProvisionedOnDemandCapacity to determine the Spot
+    #   capacity units that have been provisioned for the instance fleet.
+    #
+    #   <note markdown="1"> If not specified or set to 0, only Spot instances are provisioned
+    #   for the instance fleet using `TargetSpotCapacity`. At least one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
+    #   than 0. For a master instance fleet, only one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` can be specified,
+    #   and its value must be 1.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_spot_capacity
+    #   The target capacity of Spot units for the instance fleet, which
+    #   determines how many Spot instances to provision. When the instance
+    #   fleet launches, Amazon EMR tries to provision Spot instances as
+    #   specified by InstanceTypeConfig. Each instance configuration has a
+    #   specified `WeightedCapacity`. When a Spot instance is provisioned,
+    #   the `WeightedCapacity` units count toward the target capacity.
+    #   Amazon EMR provisions instances until the target capacity is totally
+    #   fulfilled, even if this results in an overage. For example, if there
+    #   are 2 units remaining to fulfill capacity, and Amazon EMR can only
+    #   provision an instance with a `WeightedCapacity` of 5 units, the
+    #   instance is provisioned, and the target capacity is exceeded by 3
+    #   units. You can use InstanceFleet$ProvisionedSpotCapacity to
+    #   determine the Spot capacity units that have been provisioned for the
+    #   instance fleet.
+    #
+    #   <note markdown="1"> If not specified or set to 0, only On-Demand instances are
+    #   provisioned for the instance fleet. At least one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
+    #   than 0. For a master instance fleet, only one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` can be specified,
+    #   and its value must be 1.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_on_demand_capacity
+    #   The number of On-Demand units that have been provisioned for the
+    #   instance fleet to fulfill `TargetOnDemandCapacity`. This provisioned
+    #   capacity might be less than or greater than
+    #   `TargetOnDemandCapacity`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] provisioned_spot_capacity
+    #   The number of Spot units that have been provisioned for this
+    #   instance fleet to fulfill `TargetSpotCapacity`. This provisioned
+    #   capacity might be less than or greater than `TargetSpotCapacity`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type_specifications
+    #   The specification for the instance types that comprise an instance
+    #   fleet. Up to five unique instance specifications may be defined for
+    #   each instance fleet.
+    #   @return [Array<Types::InstanceTypeSpecification>]
+    #
+    # @!attribute [rw] launch_specifications
+    #   Describes the launch specification for an instance fleet.
+    #   @return [Types::InstanceFleetProvisioningSpecifications]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleet AWS API Documentation
+    #
+    class InstanceFleet < Struct.new(
+      :id,
+      :name,
+      :status,
+      :instance_fleet_type,
+      :target_on_demand_capacity,
+      :target_spot_capacity,
+      :provisioned_on_demand_capacity,
+      :provisioned_spot_capacity,
+      :instance_type_specifications,
+      :launch_specifications)
+      include Aws::Structure
+    end
+
+    # The configuration that defines an instance fleet.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass InstanceFleetConfig
+    #   data as a hash:
+    #
+    #       {
+    #         name: "XmlStringMaxLen256",
+    #         instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
+    #         target_on_demand_capacity: 1,
+    #         target_spot_capacity: 1,
+    #         instance_type_configs: [
+    #           {
+    #             instance_type: "InstanceType", # required
+    #             weighted_capacity: 1,
+    #             bid_price: "XmlStringMaxLen256",
+    #             bid_price_as_percentage_of_on_demand_price: 1.0,
+    #             ebs_configuration: {
+    #               ebs_block_device_configs: [
+    #                 {
+    #                   volume_specification: { # required
+    #                     volume_type: "String", # required
+    #                     iops: 1,
+    #                     size_in_gb: 1, # required
+    #                   },
+    #                   volumes_per_instance: 1,
+    #                 },
+    #               ],
+    #               ebs_optimized: false,
+    #             },
+    #             configurations: [
+    #               {
+    #                 classification: "String",
+    #                 configurations: {
+    #                   # recursive ConfigurationList
+    #                 },
+    #                 properties: {
+    #                   "String" => "String",
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         launch_specifications: {
+    #           spot_specification: { # required
+    #             timeout_duration_minutes: 1, # required
+    #             timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #             block_duration_minutes: 1,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The friendly name of the instance fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_fleet_type
+    #   The node type that the instance fleet hosts. Valid values are
+    #   MASTER,CORE,and TASK.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_on_demand_capacity
+    #   The target capacity of On-Demand units for the instance fleet, which
+    #   determines how many On-Demand instances to provision. When the
+    #   instance fleet launches, Amazon EMR tries to provision On-Demand
+    #   instances as specified by InstanceTypeConfig. Each instance
+    #   configuration has a specified `WeightedCapacity`. When an On-Demand
+    #   instance is provisioned, the `WeightedCapacity` units count toward
+    #   the target capacity. Amazon EMR provisions instances until the
+    #   target capacity is totally fulfilled, even if this results in an
+    #   overage. For example, if there are 2 units remaining to fulfill
+    #   capacity, and Amazon EMR can only provision an instance with a
+    #   `WeightedCapacity` of 5 units, the instance is provisioned, and the
+    #   target capacity is exceeded by 3 units.
+    #
+    #   <note markdown="1"> If not specified or set to 0, only Spot instances are provisioned
+    #   for the instance fleet using `TargetSpotCapacity`. At least one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
+    #   than 0. For a master instance fleet, only one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` can be specified,
+    #   and its value must be 1.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_spot_capacity
+    #   The target capacity of Spot units for the instance fleet, which
+    #   determines how many Spot instances to provision. When the instance
+    #   fleet launches, Amazon EMR tries to provision Spot instances as
+    #   specified by InstanceTypeConfig. Each instance configuration has a
+    #   specified `WeightedCapacity`. When a Spot instance is provisioned,
+    #   the `WeightedCapacity` units count toward the target capacity.
+    #   Amazon EMR provisions instances until the target capacity is totally
+    #   fulfilled, even if this results in an overage. For example, if there
+    #   are 2 units remaining to fulfill capacity, and Amazon EMR can only
+    #   provision an instance with a `WeightedCapacity` of 5 units, the
+    #   instance is provisioned, and the target capacity is exceeded by 3
+    #   units.
+    #
+    #   <note markdown="1"> If not specified or set to 0, only On-Demand instances are
+    #   provisioned for the instance fleet. At least one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` should be greater
+    #   than 0. For a master instance fleet, only one of
+    #   `TargetSpotCapacity` and `TargetOnDemandCapacity` can be specified,
+    #   and its value must be 1.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] instance_type_configs
+    #   The instance type configurations that define the EC2 instances in
+    #   the instance fleet.
+    #   @return [Array<Types::InstanceTypeConfig>]
+    #
+    # @!attribute [rw] launch_specifications
+    #   The launch specification for the instance fleet.
+    #   @return [Types::InstanceFleetProvisioningSpecifications]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetConfig AWS API Documentation
+    #
+    class InstanceFleetConfig < Struct.new(
+      :name,
+      :instance_fleet_type,
+      :target_on_demand_capacity,
+      :target_spot_capacity,
+      :instance_type_configs,
+      :launch_specifications)
+      include Aws::Structure
+    end
+
+    # Configuration parameters for an instance fleet modification request.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass InstanceFleetModifyConfig
+    #   data as a hash:
+    #
+    #       {
+    #         instance_fleet_id: "InstanceFleetId", # required
+    #         target_on_demand_capacity: 1,
+    #         target_spot_capacity: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_fleet_id
+    #   A unique identifier for the instance fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_on_demand_capacity
+    #   The target capacity of On-Demand units for the instance fleet. For
+    #   more information see InstanceFleetConfig$TargetOnDemandCapacity.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_spot_capacity
+    #   The target capacity of Spot units for the instance fleet. For more
+    #   information, see InstanceFleetConfig$TargetSpotCapacity.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetModifyConfig AWS API Documentation
+    #
+    class InstanceFleetModifyConfig < Struct.new(
+      :instance_fleet_id,
+      :target_on_demand_capacity,
+      :target_spot_capacity)
+      include Aws::Structure
+    end
+
+    # The launch specification for Spot instances in the fleet, which
+    # determines the defined duration and provisioning timeout behavior.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass InstanceFleetProvisioningSpecifications
+    #   data as a hash:
+    #
+    #       {
+    #         spot_specification: { # required
+    #           timeout_duration_minutes: 1, # required
+    #           timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #           block_duration_minutes: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] spot_specification
+    #   The launch specification for Spot instances in the fleet, which
+    #   determines the defined duration and provisioning timeout behavior.
+    #   @return [Types::SpotProvisioningSpecification]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetProvisioningSpecifications AWS API Documentation
+    #
+    class InstanceFleetProvisioningSpecifications < Struct.new(
+      :spot_specification)
+      include Aws::Structure
+    end
+
+    # Provides status change reason details for the instance fleet.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] code
+    #   A code corresponding to the reason the state change occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   An explanatory message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetStateChangeReason AWS API Documentation
+    #
+    class InstanceFleetStateChangeReason < Struct.new(
+      :code,
+      :message)
+      include Aws::Structure
+    end
+
+    # The status of the instance fleet.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] state
+    #   A code representing the instance fleet status.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_change_reason
+    #   Provides status change reason details for the instance fleet.
+    #   @return [Types::InstanceFleetStateChangeReason]
+    #
+    # @!attribute [rw] timeline
+    #   Provides historical timestamps for the instance fleet, including the
+    #   time of creation, the time it became ready to run jobs, and the time
+    #   of termination.
+    #   @return [Types::InstanceFleetTimeline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetStatus AWS API Documentation
+    #
+    class InstanceFleetStatus < Struct.new(
+      :state,
+      :state_change_reason,
+      :timeline)
+      include Aws::Structure
+    end
+
+    # Provides historical timestamps for the instance fleet, including the
+    # time of creation, the time it became ready to run jobs, and the time
+    # of termination.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] creation_date_time
+    #   The time and date the instance fleet was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ready_date_time
+    #   The time and date the instance fleet was ready to run jobs.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   The time and date the instance fleet terminated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceFleetTimeline AWS API Documentation
+    #
+    class InstanceFleetTimeline < Struct.new(
+      :creation_date_time,
+      :ready_date_time,
+      :end_date_time)
       include Aws::Structure
     end
 
@@ -2029,7 +2581,160 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # A description of a job flow.
+    # An instance type configuration for each instance type in an instance
+    # fleet, which determines the EC2 instances Amazon EMR attempts to
+    # provision to fulfill On-Demand and Spot target capacities. There can
+    # be a maximum of 5 instance type configurations in a fleet.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass InstanceTypeConfig
+    #   data as a hash:
+    #
+    #       {
+    #         instance_type: "InstanceType", # required
+    #         weighted_capacity: 1,
+    #         bid_price: "XmlStringMaxLen256",
+    #         bid_price_as_percentage_of_on_demand_price: 1.0,
+    #         ebs_configuration: {
+    #           ebs_block_device_configs: [
+    #             {
+    #               volume_specification: { # required
+    #                 volume_type: "String", # required
+    #                 iops: 1,
+    #                 size_in_gb: 1, # required
+    #               },
+    #               volumes_per_instance: 1,
+    #             },
+    #           ],
+    #           ebs_optimized: false,
+    #         },
+    #         configurations: [
+    #           {
+    #             classification: "String",
+    #             configurations: {
+    #               # recursive ConfigurationList
+    #             },
+    #             properties: {
+    #               "String" => "String",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] instance_type
+    #   An EC2 instance type, such as `m3.xlarge`.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units that a provisioned instance of this type
+    #   provides toward fulfilling the target capacities defined in
+    #   InstanceFleetConfig. This value is 1 for a master instance fleet,
+    #   and must be greater than 0 for core and task instance fleets.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bid_price
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD. If neither `BidPrice` nor
+    #   `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   @return [String]
+    #
+    # @!attribute [rw] bid_price_as_percentage_of_on_demand_price
+    #   The bid price, as a percentage of On-Demand price, for each EC2 Spot
+    #   instance as defined by `InstanceType`. Expressed as a number between
+    #   0 and 1000 (for example, 20 specifies 20%). If neither `BidPrice`
+    #   nor `BidPriceAsPercentageOfOnDemandPrice` is provided,
+    #   `BidPriceAsPercentageOfOnDemandPrice` defaults to 100%.
+    #   @return [Float]
+    #
+    # @!attribute [rw] ebs_configuration
+    #   The configuration of Amazon Elastic Block Storage (EBS) attached to
+    #   each instance as defined by `InstanceType`.
+    #   @return [Types::EbsConfiguration]
+    #
+    # @!attribute [rw] configurations
+    #   A configuration classification that applies when provisioning
+    #   cluster instances, which can include configurations for applications
+    #   and software that run on the cluster.
+    #   @return [Array<Types::Configuration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeConfig AWS API Documentation
+    #
+    class InstanceTypeConfig < Struct.new(
+      :instance_type,
+      :weighted_capacity,
+      :bid_price,
+      :bid_price_as_percentage_of_on_demand_price,
+      :ebs_configuration,
+      :configurations)
+      include Aws::Structure
+    end
+
+    # The configuration specification for each instance type in an instance
+    # fleet.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] instance_type
+    #   The EC2 instance type, for example `m3.xlarge`.
+    #   @return [String]
+    #
+    # @!attribute [rw] weighted_capacity
+    #   The number of units that a provisioned instance of this type
+    #   provides toward fulfilling the target capacities defined in
+    #   InstanceFleetConfig. Capacity values represent performance
+    #   characteristics such as vCPUs, memory, or I/O. If not specified, the
+    #   default value is 1.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bid_price
+    #   The bid price for each EC2 Spot instance type as defined by
+    #   `InstanceType`. Expressed in USD.
+    #   @return [String]
+    #
+    # @!attribute [rw] bid_price_as_percentage_of_on_demand_price
+    #   The bid price, as a percentage of On-Demand price, for each EC2 Spot
+    #   instance as defined by `InstanceType`. Expressed as a number (for
+    #   example, 20 specifies 20%).
+    #   @return [Float]
+    #
+    # @!attribute [rw] configurations
+    #   A configuration classification that applies when provisioning
+    #   cluster instances, which can include configurations for applications
+    #   and software bundled with Amazon EMR.
+    #   @return [Array<Types::Configuration>]
+    #
+    # @!attribute [rw] ebs_block_devices
+    #   The configuration of Amazon Elastic Block Storage (EBS) attached to
+    #   each instance as defined by `InstanceType`.
+    #   @return [Array<Types::EbsBlockDevice>]
+    #
+    # @!attribute [rw] ebs_optimized
+    #   Evaluates to `TRUE` when the specified `InstanceType` is
+    #   EBS-optimized.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/InstanceTypeSpecification AWS API Documentation
+    #
+    class InstanceTypeSpecification < Struct.new(
+      :instance_type,
+      :weighted_capacity,
+      :bid_price,
+      :bid_price_as_percentage_of_on_demand_price,
+      :configurations,
+      :ebs_block_devices,
+      :ebs_optimized)
+      include Aws::Structure
+    end
+
+    # A description of a cluster (job flow).
     #
     # @!attribute [rw] job_flow_id
     #   The job flow identifier.
@@ -2077,11 +2782,11 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Specifies whether the job flow is visible to all IAM users of the
-    #   AWS account associated with the job flow. If this value is set to
-    #   `true`, all IAM users of that AWS account can view and (if they have
-    #   the proper policy permissions set) manage the job flow. If it is set
-    #   to `false`, only the IAM user that created the job flow can view and
+    #   Specifies whether the cluster is visible to all IAM users of the AWS
+    #   account associated with the cluster. If this value is set to `true`,
+    #   all IAM users of that AWS account can view and (if they have the
+    #   proper policy permissions set) manage the cluster. If it is set to
+    #   `false`, only the IAM user that created the cluster can view and
     #   manage it. This value can be changed using the SetVisibleToAllUsers
     #   action.
     #   @return [Boolean]
@@ -2140,7 +2845,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Describes the status of the job flow.
+    # Describes the status of the cluster (job flow).
     #
     # @!attribute [rw] state
     #   The state of the job flow.
@@ -2179,11 +2884,12 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # A description of the Amazon EC2 instance running the job flow. A valid
-    # JobFlowInstancesConfig must contain at least InstanceGroups, which is
-    # the recommended configuration. However, a valid alternative is to have
+    # A description of the Amazon EC2 instance on which the cluster (job
+    # flow) runs. A valid JobFlowInstancesConfig must contain either
+    # InstanceGroups or InstanceFleets, which is the recommended
+    # configuration. They cannot be used together. You may also have
     # MasterInstanceType, SlaveInstanceType, and InstanceCount (all three
-    # must be present).
+    # must be present), but we don't recommend this configuration.
     #
     # @note When making an API call, you may pass JobFlowInstancesConfig
     #   data as a hash:
@@ -2264,14 +2970,63 @@ module Aws::EMR
     #             },
     #           },
     #         ],
+    #         instance_fleets: [
+    #           {
+    #             name: "XmlStringMaxLen256",
+    #             instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
+    #             target_on_demand_capacity: 1,
+    #             target_spot_capacity: 1,
+    #             instance_type_configs: [
+    #               {
+    #                 instance_type: "InstanceType", # required
+    #                 weighted_capacity: 1,
+    #                 bid_price: "XmlStringMaxLen256",
+    #                 bid_price_as_percentage_of_on_demand_price: 1.0,
+    #                 ebs_configuration: {
+    #                   ebs_block_device_configs: [
+    #                     {
+    #                       volume_specification: { # required
+    #                         volume_type: "String", # required
+    #                         iops: 1,
+    #                         size_in_gb: 1, # required
+    #                       },
+    #                       volumes_per_instance: 1,
+    #                     },
+    #                   ],
+    #                   ebs_optimized: false,
+    #                 },
+    #                 configurations: [
+    #                   {
+    #                     classification: "String",
+    #                     configurations: {
+    #                       # recursive ConfigurationList
+    #                     },
+    #                     properties: {
+    #                       "String" => "String",
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #             launch_specifications: {
+    #               spot_specification: { # required
+    #                 timeout_duration_minutes: 1, # required
+    #                 timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #                 block_duration_minutes: 1,
+    #               },
+    #             },
+    #           },
+    #         ],
     #         ec2_key_name: "XmlStringMaxLen256",
     #         placement: {
-    #           availability_zone: "XmlString", # required
+    #           availability_zone: "XmlString",
+    #           availability_zones: ["XmlStringMaxLen256"],
     #         },
     #         keep_job_flow_alive_when_no_steps: false,
     #         termination_protected: false,
     #         hadoop_version: "XmlStringMaxLen256",
     #         ec2_subnet_id: "XmlStringMaxLen256",
+    #         ec2_subnet_ids: ["XmlStringMaxLen256"],
     #         emr_managed_master_security_group: "XmlStringMaxLen256",
     #         emr_managed_slave_security_group: "XmlStringMaxLen256",
     #         service_access_security_group: "XmlStringMaxLen256",
@@ -2288,12 +3043,22 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] instance_count
-    #   The number of EC2 instances used to execute the job flow.
+    #   The number of EC2 instances in the cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] instance_groups
-    #   Configuration for the job flow's instance groups.
+    #   Configuration for the instance groups in a cluster.
     #   @return [Array<Types::InstanceGroupConfig>]
+    #
+    # @!attribute [rw] instance_fleets
+    #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    #   versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #    </note>
+    #
+    #   Describes the EC2 instances and instance configurations for clusters
+    #   that use the instance fleet configuration.
+    #   @return [Array<Types::InstanceFleetConfig>]
     #
     # @!attribute [rw] ec2_key_name
     #   The name of the EC2 key pair that can be used to ssh to the master
@@ -2301,22 +3066,22 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] placement
-    #   The Availability Zone the job flow will run in.
+    #   The Availability Zone in which the cluster runs.
     #   @return [Types::PlacementType]
     #
     # @!attribute [rw] keep_job_flow_alive_when_no_steps
-    #   Specifies whether the job flow should be kept alive after completing
-    #   all steps.
+    #   Specifies whether the cluster should remain available after
+    #   completing all steps.
     #   @return [Boolean]
     #
     # @!attribute [rw] termination_protected
-    #   Specifies whether to lock the job flow to prevent the Amazon EC2
+    #   Specifies whether to lock the cluster to prevent the Amazon EC2
     #   instances from being terminated by API call, user intervention, or
-    #   in the event of a job flow error.
+    #   in the event of a job-flow error.
     #   @return [Boolean]
     #
     # @!attribute [rw] hadoop_version
-    #   The Hadoop version for the job flow. Valid inputs are "0.18"
+    #   The Hadoop version for the cluster. Valid inputs are "0.18"
     #   (deprecated), "0.20" (deprecated), "0.20.205" (deprecated),
     #   "1.0.3", "2.2.0", or "2.4.0". If you do not set this value,
     #   the default of 0.18 is used, unless the AmiVersion parameter is set
@@ -2325,17 +3090,30 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
-    #   To launch the job flow in Amazon Virtual Private Cloud (Amazon VPC),
-    #   set this parameter to the identifier of the Amazon VPC subnet where
-    #   you want the job flow to launch. If you do not specify this value,
-    #   the job flow is launched in the normal Amazon Web Services cloud,
-    #   outside of an Amazon VPC.
+    #   Applies to clusters that use the uniform instance group
+    #   configuration. To launch the cluster in Amazon Virtual Private Cloud
+    #   (Amazon VPC), set this parameter to the identifier of the Amazon VPC
+    #   subnet where you want the cluster to launch. If you do not specify
+    #   this value, the cluster launches in the normal Amazon Web Services
+    #   cloud, outside of an Amazon VPC, if the account launching the
+    #   cluster supports EC2 Classic networks in the region where the
+    #   cluster launches.
     #
     #   Amazon VPC currently does not support cluster compute quadruple
     #   extra large (cc1.4xlarge) instances. Thus you cannot specify the
-    #   cc1.4xlarge instance type for nodes of a job flow launched in a
-    #   Amazon VPC.
+    #   cc1.4xlarge instance type for clusters launched in an Amazon VPC.
     #   @return [String]
+    #
+    # @!attribute [rw] ec2_subnet_ids
+    #   Applies to clusters that use the instance fleet configuration. When
+    #   multiple EC2 subnet IDs are specified, Amazon EMR evaluates them and
+    #   launches instances in the optimal subnet.
+    #
+    #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    #   versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @!attribute [rw] emr_managed_master_security_group
     #   The identifier of the Amazon EC2 security group for the master node.
@@ -2367,12 +3145,14 @@ module Aws::EMR
       :slave_instance_type,
       :instance_count,
       :instance_groups,
+      :instance_fleets,
       :ec2_key_name,
       :placement,
       :keep_job_flow_alive_when_no_steps,
       :termination_protected,
       :hadoop_version,
       :ec2_subnet_id,
+      :ec2_subnet_ids,
       :emr_managed_master_security_group,
       :emr_managed_slave_security_group,
       :service_access_security_group,
@@ -2381,7 +3161,8 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Specify the type of Amazon EC2 instances to run the job flow on.
+    # Specify the type of Amazon EC2 instances that the cluster (job flow)
+    # runs on.
     #
     # @!attribute [rw] master_instance_type
     #   The Amazon EC2 master node instance type.
@@ -2407,11 +3188,11 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] instance_groups
-    #   Details about the job flow's instance groups.
+    #   Details about the instance groups in a cluster.
     #   @return [Array<Types::InstanceGroupDetail>]
     #
     # @!attribute [rw] normalized_instance_hours
-    #   An approximation of the cost of the job flow, represented in
+    #   An approximation of the cost of the cluster, represented in
     #   m1.small/hours. This value is incremented one time for every hour
     #   that an m1.small runs. Larger instances are weighted more, so an
     #   Amazon EC2 instance that is roughly four times more expensive would
@@ -2422,32 +3203,31 @@ module Aws::EMR
     #
     # @!attribute [rw] ec2_key_name
     #   The name of an Amazon EC2 key pair that can be used to ssh to the
-    #   master node of job flow.
+    #   master node.
     #   @return [String]
     #
     # @!attribute [rw] ec2_subnet_id
-    #   For job flows launched within Amazon Virtual Private Cloud, this
-    #   value specifies the identifier of the subnet where the job flow was
-    #   launched.
+    #   For clusters launched within Amazon Virtual Private Cloud, this is
+    #   the identifier of the subnet where the cluster was launched.
     #   @return [String]
     #
     # @!attribute [rw] placement
-    #   The Amazon EC2 Availability Zone for the job flow.
+    #   The Amazon EC2 Availability Zone for the cluster.
     #   @return [Types::PlacementType]
     #
     # @!attribute [rw] keep_job_flow_alive_when_no_steps
-    #   Specifies whether the job flow should terminate after completing all
-    #   steps.
+    #   Specifies whether the cluster should remain available after
+    #   completing all steps.
     #   @return [Boolean]
     #
     # @!attribute [rw] termination_protected
     #   Specifies whether the Amazon EC2 instances in the cluster are
     #   protected from termination by API calls, user intervention, or in
-    #   the event of a job flow error.
+    #   the event of a job-flow error.
     #   @return [Boolean]
     #
     # @!attribute [rw] hadoop_version
-    #   The Hadoop version for the job flow.
+    #   The Hadoop version for the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/JobFlowInstancesDetail AWS API Documentation
@@ -2602,6 +3382,48 @@ module Aws::EMR
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListInstanceFleetsInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #         marker: "Marker",
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleetsInput AWS API Documentation
+    #
+    class ListInstanceFleetsInput < Struct.new(
+      :cluster_id,
+      :marker)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_fleets
+    #   The list of instance fleets for the cluster and given filters.
+    #   @return [Array<Types::InstanceFleet>]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ListInstanceFleetsOutput AWS API Documentation
+    #
+    class ListInstanceFleetsOutput < Struct.new(
+      :instance_fleets,
+      :marker)
+      include Aws::Structure
+    end
+
     # This input determines which instance groups to retrieve.
     #
     # @note When making an API call, you may pass ListInstanceGroupsInput
@@ -2657,6 +3479,8 @@ module Aws::EMR
     #         cluster_id: "ClusterId", # required
     #         instance_group_id: "InstanceGroupId",
     #         instance_group_types: ["MASTER"], # accepts MASTER, CORE, TASK
+    #         instance_fleet_id: "InstanceFleetId",
+    #         instance_fleet_type: "MASTER", # accepts MASTER, CORE, TASK
     #         instance_states: ["AWAITING_FULFILLMENT"], # accepts AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING, TERMINATED
     #         marker: "Marker",
     #       }
@@ -2674,6 +3498,15 @@ module Aws::EMR
     #   The type of instance group for which to list the instances.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] instance_fleet_id
+    #   The unique identifier of the instance fleet.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_fleet_type
+    #   The node type of the instance fleet. For example MASTER, CORE, or
+    #   TASK.
+    #   @return [String]
+    #
     # @!attribute [rw] instance_states
     #   A list of instance states that will filter the instances returned
     #   with this request.
@@ -2690,6 +3523,8 @@ module Aws::EMR
       :cluster_id,
       :instance_group_id,
       :instance_group_types,
+      :instance_fleet_id,
+      :instance_fleet_type,
       :instance_states,
       :marker)
       include Aws::Structure
@@ -2812,12 +3647,10 @@ module Aws::EMR
     end
 
     # A CloudWatch dimension, which is specified using a `Key` (known as a
-    # `Name` in CloudWatch), Value pair. By default, Amazon EMR uses one
+    # `Name` in CloudWatch), `Value` pair. By default, Amazon EMR uses one
     # dimension whose `Key` is `JobFlowID` and `Value` is a variable
-    # representing the cluster ID, which is `$\{emr:cluster_id\}`. This
-    # enables the rule to bootstrap when the cluster ID becomes available,
-    # and also enables a single automatic scaling policy to be reused for
-    # multiple clusters and instance groups.
+    # representing the cluster ID, which is `$\{emr.clusterId\}`. This
+    # enables the rule to bootstrap when the cluster ID becomes available.
     #
     # @note When making an API call, you may pass MetricDimension
     #   data as a hash:
@@ -2840,6 +3673,34 @@ module Aws::EMR
     class MetricDimension < Struct.new(
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyInstanceFleetInput
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_id: "ClusterId", # required
+    #         instance_fleet: { # required
+    #           instance_fleet_id: "InstanceFleetId", # required
+    #           target_on_demand_capacity: 1,
+    #           target_spot_capacity: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_id
+    #   The unique identifier of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_fleet
+    #   The unique identifier of the instance fleet.
+    #   @return [Types::InstanceFleetModifyConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/ModifyInstanceFleetInput AWS API Documentation
+    #
+    class ModifyInstanceFleetInput < Struct.new(
+      :cluster_id,
+      :instance_fleet)
       include Aws::Structure
     end
 
@@ -2883,23 +3744,40 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # The Amazon EC2 location for the job flow.
+    # The Amazon EC2 Availability Zone configuration of the cluster (job
+    # flow).
     #
     # @note When making an API call, you may pass PlacementType
     #   data as a hash:
     #
     #       {
-    #         availability_zone: "XmlString", # required
+    #         availability_zone: "XmlString",
+    #         availability_zones: ["XmlStringMaxLen256"],
     #       }
     #
     # @!attribute [rw] availability_zone
-    #   The Amazon EC2 Availability Zone for the job flow.
+    #   The Amazon EC2 Availability Zone for the cluster. `AvailabilityZone`
+    #   is used for uniform instance groups, while `AvailabilityZones`
+    #   (plural) is used for instance fleets.
     #   @return [String]
+    #
+    # @!attribute [rw] availability_zones
+    #   When multiple Availability Zones are specified, Amazon EMR evaluates
+    #   them and launches instances in the optimal Availability Zone.
+    #   `AvailabilityZones` is used for instance fleets, while
+    #   `AvailabilityZone` (singular) is used for uniform instance groups.
+    #
+    #   <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    #   versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #    </note>
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/PlacementType AWS API Documentation
     #
     class PlacementType < Struct.new(
-      :availability_zone)
+      :availability_zone,
+      :availability_zones)
       include Aws::Structure
     end
 
@@ -3145,14 +4023,63 @@ module Aws::EMR
     #               },
     #             },
     #           ],
+    #           instance_fleets: [
+    #             {
+    #               name: "XmlStringMaxLen256",
+    #               instance_fleet_type: "MASTER", # required, accepts MASTER, CORE, TASK
+    #               target_on_demand_capacity: 1,
+    #               target_spot_capacity: 1,
+    #               instance_type_configs: [
+    #                 {
+    #                   instance_type: "InstanceType", # required
+    #                   weighted_capacity: 1,
+    #                   bid_price: "XmlStringMaxLen256",
+    #                   bid_price_as_percentage_of_on_demand_price: 1.0,
+    #                   ebs_configuration: {
+    #                     ebs_block_device_configs: [
+    #                       {
+    #                         volume_specification: { # required
+    #                           volume_type: "String", # required
+    #                           iops: 1,
+    #                           size_in_gb: 1, # required
+    #                         },
+    #                         volumes_per_instance: 1,
+    #                       },
+    #                     ],
+    #                     ebs_optimized: false,
+    #                   },
+    #                   configurations: [
+    #                     {
+    #                       classification: "String",
+    #                       configurations: {
+    #                         # recursive ConfigurationList
+    #                       },
+    #                       properties: {
+    #                         "String" => "String",
+    #                       },
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #               launch_specifications: {
+    #                 spot_specification: { # required
+    #                   timeout_duration_minutes: 1, # required
+    #                   timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #                   block_duration_minutes: 1,
+    #                 },
+    #               },
+    #             },
+    #           ],
     #           ec2_key_name: "XmlStringMaxLen256",
     #           placement: {
-    #             availability_zone: "XmlString", # required
+    #             availability_zone: "XmlString",
+    #             availability_zones: ["XmlStringMaxLen256"],
     #           },
     #           keep_job_flow_alive_when_no_steps: false,
     #           termination_protected: false,
     #           hadoop_version: "XmlStringMaxLen256",
     #           ec2_subnet_id: "XmlStringMaxLen256",
+    #           ec2_subnet_ids: ["XmlStringMaxLen256"],
     #           emr_managed_master_security_group: "XmlStringMaxLen256",
     #           emr_managed_slave_security_group: "XmlStringMaxLen256",
     #           service_access_security_group: "XmlStringMaxLen256",
@@ -3287,17 +4214,16 @@ module Aws::EMR
     #   @return [String]
     #
     # @!attribute [rw] instances
-    #   A specification of the number and type of Amazon EC2 instances on
-    #   which to run the job flow.
+    #   A specification of the number and type of Amazon EC2 instances.
     #   @return [Types::JobFlowInstancesConfig]
     #
     # @!attribute [rw] steps
-    #   A list of steps to be executed by the job flow.
+    #   A list of steps to run.
     #   @return [Array<Types::StepConfig>]
     #
     # @!attribute [rw] bootstrap_actions
-    #   A list of bootstrap actions that will be run before Hadoop is
-    #   started on the cluster nodes.
+    #   A list of bootstrap actions to run before Hadoop starts on the
+    #   cluster nodes.
     #   @return [Array<Types::BootstrapActionConfig>]
     #
     # @!attribute [rw] supported_products
@@ -3306,9 +4232,9 @@ module Aws::EMR
     #
     #    </note>
     #
-    #   A list of strings that indicates third-party software to use with
-    #   the job flow. For more information, see [Use Third Party
-    #   Applications with Amazon EMR][1]. Currently supported values are:
+    #   A list of strings that indicates third-party software to use. For
+    #   more information, see [Use Third Party Applications with Amazon
+    #   EMR][1]. Currently supported values are:
     #
     #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
     #
@@ -3328,9 +4254,9 @@ module Aws::EMR
     #   A list of strings that indicates third-party software to use with
     #   the job flow that accepts a user argument list. EMR accepts and
     #   forwards the argument list to the corresponding installation script
-    #   as bootstrap action arguments. For more information, see [Launch a
-    #   Job Flow on the MapR Distribution for Hadoop][1]. Currently
-    #   supported values are:
+    #   as bootstrap action arguments. For more information, see "Launch a
+    #   Job Flow on the MapR Distribution for Hadoop" in the [Amazon EMR
+    #   Developer Guide][1]. Supported values are:
     #
     #   * "mapr-m3" - launch the cluster using MapR M3 Edition.
     #
@@ -3354,7 +4280,7 @@ module Aws::EMR
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html
+    #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf
     #   @return [Array<Types::SupportedProductConfig>]
     #
     # @!attribute [rw] applications
@@ -3377,12 +4303,11 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Whether the job flow is visible to all IAM users of the AWS account
-    #   associated with the job flow. If this value is set to `true`, all
-    #   IAM users of that AWS account can view and (if they have the proper
-    #   policy permissions set) manage the job flow. If it is set to
-    #   `false`, only the IAM user that created the job flow can view and
-    #   manage it.
+    #   Whether the cluster is visible to all IAM users of the AWS account
+    #   associated with the cluster. If this value is set to `true`, all IAM
+    #   users of that AWS account can view and (if they have the proper
+    #   policy permissions set) manage the cluster. If it is set to `false`,
+    #   only the IAM user that created the cluster can view and manage it.
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -3697,13 +4622,13 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] job_flow_ids
-    #   A list of strings that uniquely identify the job flows to protect.
+    #   A list of strings that uniquely identify the clusters to protect.
     #   This identifier is returned by RunJobFlow and can also be obtained
     #   from DescribeJobFlows .
     #   @return [Array<String>]
     #
     # @!attribute [rw] termination_protected
-    #   A Boolean that indicates whether to protect the job flow and prevent
+    #   A Boolean that indicates whether to protect the cluster and prevent
     #   the Amazon EC2 instances in the cluster from shutting down due to
     #   API calls, user intervention, or job-flow error.
     #   @return [Boolean]
@@ -3731,12 +4656,12 @@ module Aws::EMR
     #   @return [Array<String>]
     #
     # @!attribute [rw] visible_to_all_users
-    #   Whether the specified job flows are visible to all IAM users of the
-    #   AWS account associated with the job flow. If this value is set to
+    #   Whether the specified clusters are visible to all IAM users of the
+    #   AWS account associated with the cluster. If this value is set to
     #   True, all IAM users of that AWS account can view and, if they have
-    #   the proper IAM policy permissions set, manage the job flows. If it
-    #   is set to False, only the IAM user that created a job flow can view
-    #   and manage it.
+    #   the proper IAM policy permissions set, manage the clusters. If it is
+    #   set to False, only the IAM user that created a cluster can view and
+    #   manage it.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SetVisibleToAllUsersInput AWS API Documentation
@@ -3803,7 +4728,7 @@ module Aws::EMR
     #   `ScalingAdjustment`, which should be expressed as an integer.
     #   `PERCENT_CHANGE_IN_CAPACITY` indicates the instance count increments
     #   or decrements by the percentage specified by `ScalingAdjustment`,
-    #   which should be expressed as a decimal, for example, 0.20 indicates
+    #   which should be expressed as a decimal. For example, 0.20 indicates
     #   an increase in 20% increments of cluster capacity. `EXACT_CAPACITY`
     #   indicates the scaling activity results in an instance group with the
     #   number of EC2 instances specified by `ScalingAdjustment`, which
@@ -3833,6 +4758,61 @@ module Aws::EMR
       :adjustment_type,
       :scaling_adjustment,
       :cool_down)
+      include Aws::Structure
+    end
+
+    # The launch specification for Spot instances in the instance fleet,
+    # which determines the defined duration and provisioning timeout
+    # behavior.
+    #
+    # <note markdown="1"> The instance fleet configuration is available only in Amazon EMR
+    # versions 4.8.0 and later, excluding 5.0.x versions.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass SpotProvisioningSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         timeout_duration_minutes: 1, # required
+    #         timeout_action: "SWITCH_TO_ON_DEMAND", # required, accepts SWITCH_TO_ON_DEMAND, TERMINATE_CLUSTER
+    #         block_duration_minutes: 1,
+    #       }
+    #
+    # @!attribute [rw] timeout_duration_minutes
+    #   The spot provisioning timeout period in minutes. If Spot instances
+    #   are not provisioned within this time period, the `TimeOutAction` is
+    #   taken. Minimum value is 5 and maximum value is 1440. The timeout
+    #   applies only during initial provisioning, when the cluster is first
+    #   created.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] timeout_action
+    #   The action to take when `TargetSpotCapacity` has not been fulfilled
+    #   when the `TimeoutDurationMinutes` has expired. Spot instances are
+    #   not uprovisioned within the Spot provisioining timeout. Valid values
+    #   are `TERMINATE_CLUSTER` and `SWITCH_TO_ON_DEMAND` to fulfill the
+    #   remaining capacity.
+    #   @return [String]
+    #
+    # @!attribute [rw] block_duration_minutes
+    #   The defined duration for Spot instances (also known as Spot blocks)
+    #   in minutes. When specified, the Spot instance does not terminate
+    #   before the defined duration expires, and defined duration pricing
+    #   for Spot instances applies. Valid values are 60, 120, 180, 240, 300,
+    #   or 360. The duration period starts as soon as a Spot instance
+    #   receives its instance ID. At the end of the duration, Amazon EC2
+    #   marks the Spot instance for termination and provides a Spot instance
+    #   termination notice, which gives the instance a two-minute warning
+    #   before it terminates.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/SpotProvisioningSpecification AWS API Documentation
+    #
+    class SpotProvisioningSpecification < Struct.new(
+      :timeout_duration_minutes,
+      :timeout_action,
+      :block_duration_minutes)
       include Aws::Structure
     end
 
@@ -3871,7 +4851,7 @@ module Aws::EMR
       include Aws::Structure
     end
 
-    # Specification of a job flow step.
+    # Specification of a cluster (job flow) step.
     #
     # @note When making an API call, you may pass StepConfig
     #   data as a hash:
@@ -3893,15 +4873,15 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the job flow step.
+    #   The name of the step.
     #   @return [String]
     #
     # @!attribute [rw] action_on_failure
-    #   The action to take if the job flow step fails.
+    #   The action to take if the step fails.
     #   @return [String]
     #
     # @!attribute [rw] hadoop_jar_step
-    #   The JAR file used for the job flow step.
+    #   The JAR file used for the step.
     #   @return [Types::HadoopJarStepConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/StepConfig AWS API Documentation
@@ -3934,7 +4914,7 @@ module Aws::EMR
     # The execution state of a step.
     #
     # @!attribute [rw] state
-    #   The state of the job flow step.
+    #   The state of the step.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time

@@ -162,8 +162,8 @@ module Aws::OpsWorks
       data.use_custom_cookbooks
     end
 
-    # Whether the stack automatically associates the AWS OpsWorks built-in
-    # security groups with the stack's layers.
+    # Whether the stack automatically associates the AWS OpsWorks Stacks
+    # built-in security groups with the stack's layers.
     # @return [Boolean]
     def use_opsworks_security_groups
       data.use_opsworks_security_groups
@@ -260,6 +260,24 @@ module Aws::OpsWorks
     #     attributes: {
     #       "EcsClusterArn" => "String",
     #     },
+    #     cloud_watch_logs_configuration: {
+    #       enabled: false,
+    #       log_streams: [
+    #         {
+    #           log_group_name: "String",
+    #           datetime_format: "String",
+    #           time_zone: "LOCAL", # accepts LOCAL, UTC
+    #           file: "String",
+    #           file_fingerprint_lines: "String",
+    #           multi_line_start_pattern: "String",
+    #           initial_position: "start_of_file", # accepts start_of_file, end_of_file
+    #           encoding: "ascii", # accepts ascii, big5, big5hkscs, cp037, cp424, cp437, cp500, cp720, cp737, cp775, cp850, cp852, cp855, cp856, cp857, cp858, cp860, cp861, cp862, cp863, cp864, cp865, cp866, cp869, cp874, cp875, cp932, cp949, cp950, cp1006, cp1026, cp1140, cp1250, cp1251, cp1252, cp1253, cp1254, cp1255, cp1256, cp1257, cp1258, euc_jp, euc_jis_2004, euc_jisx0213, euc_kr, gb2312, gbk, gb18030, hz, iso2022_jp, iso2022_jp_1, iso2022_jp_2, iso2022_jp_2004, iso2022_jp_3, iso2022_jp_ext, iso2022_kr, latin_1, iso8859_2, iso8859_3, iso8859_4, iso8859_5, iso8859_6, iso8859_7, iso8859_8, iso8859_9, iso8859_10, iso8859_13, iso8859_14, iso8859_15, iso8859_16, johab, koi8_r, koi8_u, mac_cyrillic, mac_greek, mac_iceland, mac_latin2, mac_roman, mac_turkish, ptcp154, shift_jis, shift_jis_2004, shift_jisx0213, utf_32, utf_32_be, utf_32_le, utf_16, utf_16_be, utf_16_le, utf_7, utf_8, utf_8_sig
+    #           buffer_duration: 1,
+    #           batch_count: 1,
+    #           batch_size: 1,
+    #         },
+    #       ],
+    #     },
     #     custom_instance_profile_arn: "String",
     #     custom_json: "String",
     #     custom_security_group_ids: ["String"],
@@ -302,14 +320,14 @@ module Aws::OpsWorks
     #   The layer name, which is used by the console.
     # @option options [required, String] :shortname
     #   For custom layers only, use this parameter to specify the layer's
-    #   short name, which is used internally by AWS OpsWorks and by Chef
-    #   recipes. The short name is also used as the name for the directory
-    #   where your app files are installed. It can have a maximum of 200
-    #   characters, which are limited to the alphanumeric characters, '-',
-    #   '\_', and '.'.
+    #   short name, which is used internally by AWS OpsWorks Stacks and by
+    #   Chef recipes. The short name is also used as the name for the
+    #   directory where your app files are installed. It can have a maximum of
+    #   200 characters, which are limited to the alphanumeric characters,
+    #   '-', '\_', and '.'.
     #
-    #   The built-in layers' short names are defined by AWS OpsWorks. For
-    #   more information, see the [Layer Reference][1].
+    #   The built-in layers' short names are defined by AWS OpsWorks Stacks.
+    #   For more information, see the [Layer Reference][1].
     #
     #
     #
@@ -320,6 +338,9 @@ module Aws::OpsWorks
     #
     #   To create a cluster layer, set the `EcsClusterArn` attribute to the
     #   cluster's ARN.
+    # @option options [Types::CloudWatchLogsConfiguration] :cloud_watch_logs_configuration
+    #   Specifies CloudWatch Logs configuration options for the layer. For
+    #   more information, see CloudWatchLogsLogStream.
     # @option options [String] :custom_instance_profile_arn
     #   The ARN of an IAM profile to be used for the layer's EC2 instances.
     #   For more information about IAM ARNs, see [Using Identifiers][1].

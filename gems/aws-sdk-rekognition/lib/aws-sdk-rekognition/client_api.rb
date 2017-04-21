@@ -37,6 +37,8 @@ module Aws::Rekognition
     DetectFacesResponse = Shapes::StructureShape.new(name: 'DetectFacesResponse')
     DetectLabelsRequest = Shapes::StructureShape.new(name: 'DetectLabelsRequest')
     DetectLabelsResponse = Shapes::StructureShape.new(name: 'DetectLabelsResponse')
+    DetectModerationLabelsRequest = Shapes::StructureShape.new(name: 'DetectModerationLabelsRequest')
+    DetectModerationLabelsResponse = Shapes::StructureShape.new(name: 'DetectModerationLabelsResponse')
     Emotion = Shapes::StructureShape.new(name: 'Emotion')
     EmotionName = Shapes::StringShape.new(name: 'EmotionName')
     Emotions = Shapes::ListShape.new(name: 'Emotions')
@@ -78,6 +80,8 @@ module Aws::Rekognition
     ListFacesRequest = Shapes::StructureShape.new(name: 'ListFacesRequest')
     ListFacesResponse = Shapes::StructureShape.new(name: 'ListFacesResponse')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
+    ModerationLabel = Shapes::StructureShape.new(name: 'ModerationLabel')
+    ModerationLabels = Shapes::ListShape.new(name: 'ModerationLabels')
     MouthOpen = Shapes::StructureShape.new(name: 'MouthOpen')
     Mustache = Shapes::StructureShape.new(name: 'Mustache')
     OrientationCorrection = Shapes::StringShape.new(name: 'OrientationCorrection')
@@ -179,6 +183,13 @@ module Aws::Rekognition
     DetectLabelsResponse.add_member(:labels, Shapes::ShapeRef.new(shape: Labels, location_name: "Labels"))
     DetectLabelsResponse.add_member(:orientation_correction, Shapes::ShapeRef.new(shape: OrientationCorrection, location_name: "OrientationCorrection"))
     DetectLabelsResponse.struct_class = Types::DetectLabelsResponse
+
+    DetectModerationLabelsRequest.add_member(:image, Shapes::ShapeRef.new(shape: Image, required: true, location_name: "Image"))
+    DetectModerationLabelsRequest.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    DetectModerationLabelsRequest.struct_class = Types::DetectModerationLabelsRequest
+
+    DetectModerationLabelsResponse.add_member(:moderation_labels, Shapes::ShapeRef.new(shape: ModerationLabels, location_name: "ModerationLabels"))
+    DetectModerationLabelsResponse.struct_class = Types::DetectModerationLabelsResponse
 
     Emotion.add_member(:type, Shapes::ShapeRef.new(shape: EmotionName, location_name: "Type"))
     Emotion.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -287,6 +298,13 @@ module Aws::Rekognition
     ListFacesResponse.add_member(:faces, Shapes::ShapeRef.new(shape: FaceList, location_name: "Faces"))
     ListFacesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListFacesResponse.struct_class = Types::ListFacesResponse
+
+    ModerationLabel.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    ModerationLabel.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    ModerationLabel.add_member(:parent_name, Shapes::ShapeRef.new(shape: String, location_name: "ParentName"))
+    ModerationLabel.struct_class = Types::ModerationLabel
+
+    ModerationLabels.member = Shapes::ShapeRef.new(shape: ModerationLabel)
 
     MouthOpen.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
     MouthOpen.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
@@ -438,6 +456,21 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
+      end)
+
+      api.add_operation(:detect_moderation_labels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectModerationLabels"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DetectModerationLabelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectModerationLabelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidS3ObjectException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ImageTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
       end)
 
       api.add_operation(:index_faces, Seahorse::Model::Operation.new.tap do |o|

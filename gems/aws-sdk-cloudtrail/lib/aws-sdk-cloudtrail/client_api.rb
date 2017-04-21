@@ -173,7 +173,7 @@ module Aws::CloudTrail
 
     EventsList.member = Shapes::ShapeRef.new(shape: Event)
 
-    GetEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, location_name: "TrailName"))
+    GetEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
     GetEventSelectorsRequest.struct_class = Types::GetEventSelectorsRequest
 
     GetEventSelectorsResponse.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))
@@ -244,8 +244,8 @@ module Aws::CloudTrail
 
     PublicKeyList.member = Shapes::ShapeRef.new(shape: PublicKey)
 
-    PutEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, location_name: "TrailName"))
-    PutEventSelectorsRequest.add_member(:event_selectors, Shapes::ShapeRef.new(shape: EventSelectors, location_name: "EventSelectors"))
+    PutEventSelectorsRequest.add_member(:trail_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TrailName"))
+    PutEventSelectorsRequest.add_member(:event_selectors, Shapes::ShapeRef.new(shape: EventSelectors, required: true, location_name: "EventSelectors"))
     PutEventSelectorsRequest.struct_class = Types::PutEventSelectorsRequest
 
     PutEventSelectorsResponse.add_member(:trail_arn, Shapes::ShapeRef.new(shape: String, location_name: "TrailARN"))

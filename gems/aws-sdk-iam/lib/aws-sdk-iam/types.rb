@@ -75,7 +75,7 @@ module Aws::IAM
     #
     # @!attribute [rw] service_name
     #   The name of the AWS service with which this access key was most
-    #   recently used. This field is null when:
+    #   recently used. This field displays "N/A" when:
     #
     #   * The user does not have an access key.
     #
@@ -87,7 +87,7 @@ module Aws::IAM
     #
     # @!attribute [rw] region
     #   The AWS region where this access key was most recently used. This
-    #   field is null when:
+    #   field is displays "N/A" when:
     #
     #   * The user does not have an access key.
     #
@@ -199,7 +199,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -312,7 +312,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1032,6 +1032,7 @@ module Aws::IAM
     #         path: "pathType",
     #         role_name: "roleNameType", # required
     #         assume_role_policy_document: "policyDocumentType", # required
+    #         description: "roleDescriptionType",
     #       }
     #
     # @!attribute [rw] path
@@ -1060,9 +1061,10 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-. Role names are not distinguished by case. For
-    #   example, you cannot create roles named both "PRODROLE" and
-    #   "prodrole".
+    #   characters: \_+=,.@-
+    #
+    #   Role names are not distinguished by case. For example, you cannot
+    #   create roles named both "PRODROLE" and "prodrole".
     #
     #
     #
@@ -1086,12 +1088,17 @@ module Aws::IAM
     #   [1]: http://wikipedia.org/wiki/regex
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A customer-provided description of the role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest AWS API Documentation
     #
     class CreateRoleRequest < Struct.new(
       :path,
       :role_name,
-      :assume_role_policy_document)
+      :assume_role_policy_document,
+      :description)
       include Aws::Structure
     end
 
@@ -1164,6 +1171,54 @@ module Aws::IAM
     #
     class CreateSAMLProviderResponse < Struct.new(
       :saml_provider_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateServiceLinkedRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_service_name: "groupNameType", # required
+    #         description: "roleDescriptionType",
+    #         custom_suffix: "customSuffixType",
+    #       }
+    #
+    # @!attribute [rw] aws_service_name
+    #   The AWS service to which this role is attached. You use a string
+    #   similar to a URL but without the http:// in front. For example:
+    #   `elasticbeanstalk.amazonaws.com`
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the role.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_suffix
+    #   A string that you provide, which is combined with the service name
+    #   to form the complete role name. If you make multiple requests for
+    #   the same service, then you must supply a different `CustomSuffix`
+    #   for each request. Otherwise the request fails with a duplicate role
+    #   name error. For example, you could add `-1` or `-debug` to the
+    #   suffix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleRequest AWS API Documentation
+    #
+    class CreateServiceLinkedRoleRequest < Struct.new(
+      :aws_service_name,
+      :description,
+      :custom_suffix)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role
+    #   A Role object that contains details about the newly created role.
+    #   @return [Types::Role]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleResponse AWS API Documentation
+    #
+    class CreateServiceLinkedRoleResponse < Struct.new(
+      :role)
       include Aws::Structure
     end
 
@@ -1376,7 +1431,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =/:,.@-
+    #   characters: =,.@:/-
     #
     #
     #
@@ -1690,7 +1745,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -1731,7 +1786,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2000,7 +2055,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =/:,.@-
+    #   characters: =,.@:/-
     #
     #
     #
@@ -2070,7 +2125,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -2167,7 +2222,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =/:,.@-
+    #   characters: =,.@:/-
     #
     #
     #
@@ -2178,12 +2233,34 @@ module Aws::IAM
     #   An authentication code emitted by the device.
     #
     #   The format for this parameter is a string of 6 digits.
+    #
+    #   Submit your request immediately after generating the authentication
+    #   codes. If you generate the codes and then wait too long to submit
+    #   the request, the MFA device successfully associates with the user
+    #   but the MFA device becomes out of sync. This happens because
+    #   time-based one-time passwords (TOTP) expire after a short period of
+    #   time. If this happens, you can [resync the device][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #   @return [String]
     #
     # @!attribute [rw] authentication_code_2
     #   A subsequent authentication code emitted by the device.
     #
     #   The format for this parameter is a string of 6 digits.
+    #
+    #   Submit your request immediately after generating the authentication
+    #   codes. If you generate the codes and then wait too long to submit
+    #   the request, the MFA device successfully associates with the user
+    #   but the MFA device becomes out of sync. This happens because
+    #   time-based one-time passwords (TOTP) expire after a short period of
+    #   time. If this happens, you can [resync the device][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_sync.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceRequest AWS API Documentation
@@ -2435,7 +2512,8 @@ module Aws::IAM
     # request.
     #
     # @!attribute [rw] password_policy
-    #   Contains information about the account password policy.
+    #   A structure that contains details about the account's password
+    #   policy.
     #   @return [Types::PasswordPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicyResponse AWS API Documentation
@@ -2986,7 +3064,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3050,7 +3128,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -3805,7 +3883,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4382,7 +4460,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -4851,7 +4929,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6244,7 +6322,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6411,7 +6489,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -6640,15 +6718,8 @@ module Aws::IAM
       include Aws::Structure
     end
 
-    # Contains information about an IAM role.
-    #
-    # This data type is used as a response element in the following actions:
-    #
-    # * CreateRole
-    #
-    # * GetRole
-    #
-    # * ListRoles
+    # Contains information about an IAM role. This structure is returned as
+    # a response element in several APIs that interact with roles.
     #
     # @!attribute [rw] path
     #   The path to the role. For more information about paths, see [IAM
@@ -6676,7 +6747,7 @@ module Aws::IAM
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) specifying the role. For more
     #   information about ARNs and how to use them in policies, see [IAM
-    #   Identifiers][1] in the *Using IAM* guide.
+    #   Identifiers][1] in the *IAM User Guide* guide.
     #
     #
     #
@@ -6696,6 +6767,10 @@ module Aws::IAM
     #   The policy that grants an entity permission to assume the role.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   A description of the role that you provide.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role AWS API Documentation
     #
     class Role < Struct.new(
@@ -6704,7 +6779,8 @@ module Aws::IAM
       :role_id,
       :arn,
       :create_date,
-      :assume_role_policy_document)
+      :assume_role_policy_document,
+      :description)
       include Aws::Structure
     end
 
@@ -7833,7 +7909,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following
-    #   characters: =,.@-
+    #   characters: \_+=,.@-
     #
     #
     #
@@ -8014,6 +8090,41 @@ module Aws::IAM
     class UpdateOpenIDConnectProviderThumbprintRequest < Struct.new(
       :open_id_connect_provider_arn,
       :thumbprint_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateRoleDescriptionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "roleNameType", # required
+    #         description: "roleDescriptionType", # required
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description that you want to apply to the specified role.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescriptionRequest AWS API Documentation
+    #
+    class UpdateRoleDescriptionRequest < Struct.new(
+      :role_name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role
+    #   A structure that contains details about the modified role.
+    #   @return [Types::Role]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescriptionResponse AWS API Documentation
+    #
+    class UpdateRoleDescriptionResponse < Struct.new(
+      :role)
       include Aws::Structure
     end
 
@@ -8770,7 +8881,7 @@ module Aws::IAM
     #   @return [String]
     #
     # @!attribute [rw] user
-    #   The user to whom the MFA device is assigned.
+    #   The IAM user associated with this virtual MFA device.
     #   @return [Types::User]
     #
     # @!attribute [rw] enable_date

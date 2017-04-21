@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -47,6 +48,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
@@ -196,9 +198,8 @@ module Aws::EC2
 
     # Accept a VPC peering connection request. To accept a request, the VPC
     # peering connection must be in the `pending-acceptance` state, and you
-    # must be the owner of the peer VPC. Use the
-    # `DescribeVpcPeeringConnections` request to view your outstanding VPC
-    # peering connection requests.
+    # must be the owner of the peer VPC. Use DescribeVpcPeeringConnections
+    # to view your outstanding VPC peering connection requests.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -487,13 +488,18 @@ module Aws::EC2
     # \[EC2-Classic, VPC in an EC2-VPC-only account\] If the Elastic IP
     # address is already associated with a different instance, it is
     # disassociated from that instance and associated with the specified
-    # instance.
+    # instance. If you associate an Elastic IP address with an instance that
+    # has an existing Elastic IP address, the existing address is
+    # disassociated from the instance, but remains allocated to your
+    # account.
     #
     # \[VPC in an EC2-Classic account\] If you don't specify a private IP
     # address, the Elastic IP address is associated with the primary IP
     # address. If the Elastic IP address is already associated with a
     # different instance or a network interface, you get an error unless you
-    # allow reassociation.
+    # allow reassociation. You cannot associate an Elastic IP address with
+    # an instance or network interface that has an existing Elastic IP
+    # address.
     #
     # This is an idempotent operation. If you perform the operation more
     # than once, Amazon EC2 doesn't return an error, and you may be charged
@@ -1027,9 +1033,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Attaches a virtual private gateway to a VPC. For more information, see
-    # [Adding a Hardware Virtual Private Gateway to Your VPC][1] in the
-    # *Amazon Virtual Private Cloud User Guide*.
+    # Attaches a virtual private gateway to a VPC. You can attach one
+    # virtual private gateway to one VPC at a time.
+    #
+    # For more information, see [Adding a Hardware Virtual Private Gateway
+    # to Your VPC][1] in the *Amazon Virtual Private Cloud User Guide*.
     #
     #
     #
@@ -2133,16 +2141,16 @@ module Aws::EC2
     #   specified in `domain-name`, you must set `domain-name-servers` to a
     #   custom DNS server.
     #
-    # * `domain-name` - If you're using AmazonProvidedDNS in "us-east-1",
-    #   specify "ec2.internal". If you're using AmazonProvidedDNS in
-    #   another region, specify "region.compute.internal" (for example,
-    #   "ap-northeast-1.compute.internal"). Otherwise, specify a domain
-    #   name (for example, "MyCompany.com"). This value is used to
-    #   complete unqualified DNS hostnames. **Important**\: Some Linux
-    #   operating systems accept multiple domain names separated by spaces.
-    #   However, Windows and other Linux operating systems treat the value
-    #   as a single domain, which results in unexpected behavior. If your
-    #   DHCP options set is associated with a VPC that has instances with
+    # * `domain-name` - If you're using AmazonProvidedDNS in `us-east-1`,
+    #   specify `ec2.internal`. If you're using AmazonProvidedDNS in
+    #   another region, specify `region.compute.internal` (for example,
+    #   `ap-northeast-1.compute.internal`). Otherwise, specify a domain name
+    #   (for example, `MyCompany.com`). This value is used to complete
+    #   unqualified DNS hostnames. **Important**\: Some Linux operating
+    #   systems accept multiple domain names separated by spaces. However,
+    #   Windows and other Linux operating systems treat the value as a
+    #   single domain, which results in unexpected behavior. If your DHCP
+    #   options set is associated with a VPC that has instances with
     #   multiple operating systems, specify only one domain name.
     #
     # * `ntp-servers` - The IP addresses of up to four Network Time Protocol
@@ -2341,6 +2349,85 @@ module Aws::EC2
     # @param [Hash] params ({})
     def create_flow_logs(params = {}, options = {})
       req = build_request(:create_flow_logs, params)
+      req.send_request(options)
+    end
+
+    # Creates an Amazon FPGA Image (AFI) from the specified design
+    # checkpoint (DCP).
+    #
+    # The create operation is asynchronous. To verify that the AFI is ready
+    # for use, check the output logs.
+    #
+    # An AFI contains the FPGA bitstream that is ready to download to an
+    # FPGA. You can securely deploy an AFI on one or more FPGA-accelerated
+    # instances. For more information, see the [AWS FPGA Hardware
+    # Development Kit][1].
+    #
+    #
+    #
+    # [1]: https://github.com/aws/aws-fpga/
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, Types::StorageLocation] :input_storage_location
+    #   The location of the encrypted design checkpoint in Amazon S3. The
+    #   input must be a tarball.
+    #
+    # @option params [Types::StorageLocation] :logs_storage_location
+    #   The location in Amazon S3 for the output logs.
+    #
+    # @option params [String] :description
+    #   A description for the AFI.
+    #
+    # @option params [String] :name
+    #   A name for the AFI.
+    #
+    # @option params [String] :client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreateFpgaImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFpgaImageResult#fpga_image_id #fpga_image_id} => String
+    #   * {Types::CreateFpgaImageResult#fpga_image_global_id #fpga_image_global_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_fpga_image({
+    #     dry_run: false,
+    #     input_storage_location: { # required
+    #       bucket: "String",
+    #       key: "String",
+    #     },
+    #     logs_storage_location: {
+    #       bucket: "String",
+    #       key: "String",
+    #     },
+    #     description: "String",
+    #     name: "String",
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fpga_image_id #=> String
+    #   resp.fpga_image_global_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImage AWS API Documentation
+    #
+    # @overload create_fpga_image(params = {})
+    # @param [Hash] params ({})
+    def create_fpga_image(params = {}, options = {})
+      req = build_request(:create_fpga_image, params)
       req.send_request(options)
     end
 
@@ -3554,7 +3641,7 @@ module Aws::EC2
     # If you've associated an IPv6 CIDR block with your VPC, you can create
     # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
     #
-    # AWS reserves both the first four and the last IP address in each
+    # AWS reserves both the first four and the last IPv4 address in each
     # subnet's CIDR block. They're not available for use.
     #
     # If you add more than one subnet to a VPC, they're set up in a star
@@ -3711,14 +3798,18 @@ module Aws::EC2
     # [Amazon EBS Encryption][2] in the *Amazon Elastic Compute Cloud User
     # Guide*.
     #
-    # For more information, see [Creating or Restoring an Amazon EBS
-    # Volume][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    # You can tag your volumes during creation. For more information, see
+    # [Tagging Your Amazon EC2 Resources][3].
+    #
+    # For more information, see [Creating an Amazon EBS Volume][4] in the
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
     # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html
-    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html
+    # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+    # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -3784,6 +3875,9 @@ module Aws::EC2
     #   arn:aws:kms:*us-east-1*\:*012345678910*\:key/*abcd1234-a123-456a-a12b-a123b4cd56ef*.
     #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the volume during creation.
+    #
     # @return [Types::Volume] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Volume#volume_id #volume_id} => String
@@ -3810,6 +3904,17 @@ module Aws::EC2
     #     iops: 1,
     #     encrypted: false,
     #     kms_key_id: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4027,8 +4132,8 @@ module Aws::EC2
     # the peering connection. The VPC peering connection request expires
     # after 7 days, after which it cannot be accepted or rejected.
     #
-    # A `CreateVpcPeeringConnection` request between VPCs with overlapping
-    # CIDR blocks results in the VPC peering connection having a status of
+    # If you try to create a VPC peering connection between VPCs that have
+    # overlapping CIDR blocks, the VPC peering connection status goes to
     # `failed`.
     #
     # @option params [Boolean] :dry_run
@@ -7120,18 +7225,6 @@ module Aws::EC2
     #
     #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
     #
-    #   * `association.public-ip` - The address of the Elastic IP address
-    #     (IPv4) bound to the network interface.
-    #
-    #   * `association.ip-owner-id` - The owner of the Elastic IP address
-    #     (IPv4) associated with the network interface.
-    #
-    #   * `association.allocation-id` - The allocation ID returned when you
-    #     allocated the Elastic IP address (IPv4) for your network interface.
-    #
-    #   * `association.association-id` - The association ID returned when the
-    #     network interface was associated with an IPv4 address.
-    #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -7221,6 +7314,20 @@ module Aws::EC2
     #
     #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
     #     of the private IPv4 address associated with the network interface.
+    #
+    #   * `network-interface.association.public-ip` - The address of the
+    #     Elastic IP address (IPv4) bound to the network interface.
+    #
+    #   * `network-interface.association.ip-owner-id` - The owner of the
+    #     Elastic IP address (IPv4) associated with the network interface.
+    #
+    #   * `network-interface.association.allocation-id` - The allocation ID
+    #     returned when you allocated the Elastic IP address (IPv4) for your
+    #     network interface.
+    #
+    #   * `network-interface.association.association-id` - The association ID
+    #     returned when the network interface was associated with an IPv4
+    #     address.
     #
     #   * `network-interface.attachment.attachment-id` - The ID of the
     #     interface attachment.
@@ -7952,7 +8059,7 @@ module Aws::EC2
     #   The ID of the network interface.
     #
     # @option params [String] :attribute
-    #   The attribute of the network interface.
+    #   The attribute of the network interface. This parameter is required.
     #
     # @return [Types::DescribeNetworkInterfaceAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8827,6 +8934,9 @@ module Aws::EC2
     #   Instance with a tenancy of `dedicated` is applied to instances that
     #   run in a VPC on single-tenant hardware (i.e., Dedicated Instances).
     #
+    #   **Important:** The `host` value cannot be used with this parameter.
+    #   Use the `default` or `dedicated` values only.
+    #
     #   Default: `default`
     #
     # @option params [String] :offering_type
@@ -8971,7 +9081,8 @@ module Aws::EC2
     #     association.
     #
     #   * `association.main` - Indicates whether the route table is the main
-    #     route table for the VPC (`true` \| `false`).
+    #     route table for the VPC (`true` \| `false`). Route tables that do
+    #     not have an association ID are not returned in the response.
     #
     #   * `route-table-id` - The ID of the route table.
     #
@@ -10684,7 +10795,7 @@ module Aws::EC2
     #   The ID of the volume.
     #
     # @option params [String] :attribute
-    #   The instance attribute.
+    #   The attribute of the volume. This parameter is required.
     #
     # @return [Types::DescribeVolumeAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11242,8 +11353,8 @@ module Aws::EC2
     # its private IP address when addressed from an instance in the VPC to
     # which it's linked. Similarly, the DNS hostname of an instance in a
     # VPC resolves to its private IP address when addressed from a linked
-    # EC2-Classic instance. For more information about ClassicLink, see
-    # [ClassicLink][1] in the Amazon Elastic Compute Cloud User Guide.
+    # EC2-Classic instance. For more information, see [ClassicLink][1] in
+    # the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -11889,7 +12000,7 @@ module Aws::EC2
 
     # Detaches an Internet gateway from a VPC, disabling connectivity
     # between the Internet and the VPC. The VPC must not contain any running
-    # instances with Elastic IP addresses.
+    # instances with Elastic IP addresses or public IPv4 addresses.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12144,7 +12255,7 @@ module Aws::EC2
     # resolve to public IP addresses when addressed between a linked
     # EC2-Classic instance and instances in the VPC to which it's linked.
     # For more information about ClassicLink, see [ClassicLink][1] in the
-    # Amazon Elastic Compute Cloud User Guide.
+    # *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
@@ -12431,8 +12542,8 @@ module Aws::EC2
     # VPC's route tables have existing routes for address ranges within the
     # `10.0.0.0/8` IP address range, excluding local routes for VPCs in the
     # `10.0.0.0/16` and `10.1.0.0/16` IP address ranges. For more
-    # information, see [ClassicLink][1] in the Amazon Elastic Compute Cloud
-    # User Guide.
+    # information, see [ClassicLink][1] in the *Amazon Elastic Compute Cloud
+    # User Guide*.
     #
     #
     #
@@ -14793,8 +14904,8 @@ module Aws::EC2
     #
     # You can also use `RegisterImage` to create an Amazon EBS-backed Linux
     # AMI from a snapshot of a root device volume. You specify the snapshot
-    # using the block device mapping. For more information, see [Launching
-    # an Instance from a Snapshot][2] in the *Amazon Elastic Compute Cloud
+    # using the block device mapping. For more information, see [Launching a
+    # Linux Instance from a Backup][2] in the *Amazon Elastic Compute Cloud
     # User Guide*.
     #
     # You can't register an image where a secondary (non-root) snapshot has
@@ -14816,7 +14927,7 @@ module Aws::EC2
     #
     #
     # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_LaunchingInstanceFromSnapshot.html
+    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -14850,7 +14961,9 @@ module Aws::EC2
     #   The ID of the RAM disk.
     #
     # @option params [Array<String>] :billing_products
-    #   The billing product codes.
+    #   The billing product codes. Your account must be authorized to specify
+    #   billing product codes. Otherwise, you can use the AWS Marketplace to
+    #   bill for the use of an AMI.
     #
     # @option params [String] :root_device_name
     #   The name of the root device (for example, `/dev/sda1`, or
@@ -16337,10 +16450,10 @@ module Aws::EC2
     # 100 instances each instead of 1 launch request for 500 instances.
     #
     # An instance is ready for you to use when it's in the `running` state.
-    # You can check the state of your instance using DescribeInstances.
-    # After launch, you can apply tags to your running instance (requires a
-    # resource ID). For more information, see CreateTags and [Tagging Your
-    # Amazon EC2 Resources][4].
+    # You can check the state of your instance using DescribeInstances. You
+    # can tag instances and EBS volumes during launch, after launch, or
+    # both. For more information, see CreateTags and [Tagging Your Amazon
+    # EC2 Resources][4].
     #
     # Linux instances have access to the public key of the key pair at boot.
     # You can use this key to provide secure access to the instance. Amazon
@@ -16555,6 +16668,11 @@ module Aws::EC2
     #
     #   Default: `false`
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to apply to the resources during launch. You can tag
+    #   instances and volumes. The specified tags are applied to all instances
+    #   or volumes that are created during launch.
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Reservation#reservation_id #reservation_id} => String
@@ -16644,6 +16762,17 @@ module Aws::EC2
     #       name: "String",
     #     },
     #     ebs_optimized: false,
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -17233,7 +17362,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

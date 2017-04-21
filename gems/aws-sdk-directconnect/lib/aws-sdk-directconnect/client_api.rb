@@ -518,6 +518,7 @@ module Aws::DirectConnect
         o.name = "AllocateConnectionOnInterconnect"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AllocateConnectionOnInterconnectRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
@@ -728,6 +729,7 @@ module Aws::DirectConnect
         o.name = "DescribeConnectionLoa"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeConnectionLoaRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeConnectionLoaResponse)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
@@ -748,6 +750,7 @@ module Aws::DirectConnect
         o.name = "DescribeConnectionsOnInterconnect"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeConnectionsOnInterconnectRequest)
         o.output = Shapes::ShapeRef.new(shape: Connections)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
@@ -768,6 +771,7 @@ module Aws::DirectConnect
         o.name = "DescribeInterconnectLoa"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeInterconnectLoaRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInterconnectLoaResponse)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)

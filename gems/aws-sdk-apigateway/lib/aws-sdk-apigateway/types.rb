@@ -117,15 +117,11 @@ module Aws::APIGateway
     #   @return [Boolean]
     #
     # @!attribute [rw] created_date
-    #   The date when the API Key was created, in [ISO 8601 format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the API Key was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_date
-    #   When the API Key was last updated, in ISO 8601 format.
+    #   The timestamp when the API Key was last updated.
     #   @return [Time]
     #
     # @!attribute [rw] stage_keys
@@ -430,21 +426,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] created_date
-    #   The date when the client certificate was created, in [ISO 8601
-    #   format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the client certificate was created.
     #   @return [Time]
     #
     # @!attribute [rw] expiration_date
-    #   The date when the client certificate will expire, in [ISO 8601
-    #   format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the client certificate will expire.
     #   @return [Time]
     #
     class ClientCertificate < Struct.new(
@@ -806,37 +792,43 @@ module Aws::APIGateway
     #
     #       {
     #         domain_name: "String", # required
-    #         certificate_name: "String", # required
-    #         certificate_body: "String", # required
-    #         certificate_private_key: "String", # required
-    #         certificate_chain: "String", # required
+    #         certificate_name: "String",
+    #         certificate_body: "String",
+    #         certificate_private_key: "String",
+    #         certificate_chain: "String",
+    #         certificate_arn: "String",
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The name of the DomainName resource.
+    #   (Required) The name of the DomainName resource.
     #   @return [String]
     #
     # @!attribute [rw] certificate_name
-    #   The name of the certificate.
+    #   The user-friendly name of the certificate.
     #   @return [String]
     #
     # @!attribute [rw] certificate_body
-    #   The body of the server certificate provided by your certificate
-    #   authority.
+    #   \[Deprecated\] The body of the server certificate provided by your
+    #   certificate authority.
     #   @return [String]
     #
     # @!attribute [rw] certificate_private_key
-    #   Your certificate's private key.
+    #   \[Deprecated\] Your certificate's private key.
     #   @return [String]
     #
     # @!attribute [rw] certificate_chain
-    #   The intermediate certificates and optionally the root certificate,
-    #   one after the other without any blank lines. If you include the root
-    #   certificate, your certificate chain must start with intermediate
-    #   certificates and end with the root certificate. Use the intermediate
-    #   certificates that were provided by your certificate authority. Do
-    #   not include any intermediaries that are not in the chain of trust
-    #   path.
+    #   \[Deprecated\] The intermediate certificates and optionally the root
+    #   certificate, one after the other without any blank lines. If you
+    #   include the root certificate, your certificate chain must start with
+    #   intermediate certificates and end with the root certificate. Use the
+    #   intermediate certificates that were provided by your certificate
+    #   authority. Do not include any intermediaries that are not in the
+    #   chain of trust path.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The reference to an AWS-managed certificate. AWS Certificate Manager
+    #   is the only supported source.
     #   @return [String]
     #
     class CreateDomainNameRequest < Struct.new(
@@ -844,7 +836,8 @@ module Aws::APIGateway
       :certificate_name,
       :certificate_body,
       :certificate_private_key,
-      :certificate_chain)
+      :certificate_chain,
+      :certificate_arn)
       include Aws::Structure
     end
 
@@ -892,6 +885,46 @@ module Aws::APIGateway
       :description,
       :schema,
       :content_type)
+      include Aws::Structure
+    end
+
+    # Creates a RequestValidator of a given RestApi.
+    #
+    # @note When making an API call, you may pass CreateRequestValidatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         name: "String",
+    #         validate_request_body: false,
+    #         validate_request_parameters: false,
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   \[Required\] The identifier of the RestApi for which the
+    #   RequestValidator is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the to-be-created RequestValidator.
+    #   @return [String]
+    #
+    # @!attribute [rw] validate_request_body
+    #   A Boolean flag to indicate whether to validate request body
+    #   according to the configured model schema for the method (`true`) or
+    #   not (`false`).
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validate_request_parameters
+    #   A Boolean flag to indicate whether to validate request parameters,
+    #   `true`, or not `false`.
+    #   @return [Boolean]
+    #
+    class CreateRequestValidatorRequest < Struct.new(
+      :rest_api_id,
+      :name,
+      :validate_request_body,
+      :validate_request_parameters)
       include Aws::Structure
     end
 
@@ -1457,6 +1490,31 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # Deletes a specified RequestValidator of a given RestApi.
+    #
+    # @note When making an API call, you may pass DeleteRequestValidatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         request_validator_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   \[Required\] The identifier of the RestApi from which the given
+    #   RequestValidator is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_validator_id
+    #   \[Required\] The identifier of the RequestValidator to be deleted.
+    #   @return [String]
+    #
+    class DeleteRequestValidatorRequest < Struct.new(
+      :rest_api_id,
+      :request_validator_id)
+      include Aws::Structure
+    end
+
     # Request to delete a Resource.
     #
     # @note When making an API call, you may pass DeleteResourceRequest
@@ -1761,8 +1819,8 @@ module Aws::APIGateway
     #   `AUTHORIZER`, `MODEL`, `RESOURCE`, `METHOD`, `PATH_PARAMETER`,
     #   `QUERY_PARAMETER`, `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`,
     #   `RESPONSE_HEADER`, and `RESPONSE_BODY`. Content inheritance does not
-    #   apply to any entity of the `API`, `AUTHROZER`, `MODEL`, or
-    #   `RESOURCE` type.
+    #   apply to any entity of the `API`, `AUTHROZER`, `METHOD`, `MODEL`,
+    #   `REQUEST_BODY`, or `RESOURCE` type.
     #   @return [String]
     #
     # @!attribute [rw] path
@@ -1925,12 +1983,13 @@ module Aws::APIGateway
     #   The name of the certificate.
     #   @return [String]
     #
+    # @!attribute [rw] certificate_arn
+    #   The reference to an AWS-managed certificate. AWS Certificate Manager
+    #   is the only supported source.
+    #   @return [String]
+    #
     # @!attribute [rw] certificate_upload_date
-    #   The date when the certificate was uploaded, in [ISO 8601 format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the certificate was uploaded.
     #   @return [Time]
     #
     # @!attribute [rw] distribution_domain_name
@@ -1945,6 +2004,7 @@ module Aws::APIGateway
     class DomainName < Struct.new(
       :domain_name,
       :certificate_name,
+      :certificate_arn,
       :certificate_upload_date,
       :distribution_domain_name)
       include Aws::Structure
@@ -2109,8 +2169,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] position
-    #   The position of the current ApiKeys resource to get information
-    #   about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
@@ -2180,12 +2239,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   If not all Authorizer resources in the response were present, the
-    #   position will specify where to start the next page of results.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   Limit the number of Authorizer resources in the response.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     class GetAuthorizersRequest < Struct.new(
@@ -2239,14 +2297,12 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The position of the current BasePathMapping resource in the
-    #   collection to get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of BasePathMapping resources in the collection to
-    #   get information about. The default limit is 25. It should be an
-    #   integer between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
     #
     class GetBasePathMappingsRequest < Struct.new(
@@ -2287,14 +2343,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] position
-    #   The position of the current ClientCertificate resource in the
-    #   collection to get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of ClientCertificate resources in the collection
-    #   to get information about. The default limit is 25. It should be an
-    #   integer between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
     #
     class GetClientCertificatesRequest < Struct.new(
@@ -2312,6 +2366,7 @@ module Aws::APIGateway
     #       {
     #         rest_api_id: "String", # required
     #         deployment_id: "String", # required
+    #         embed: ["String"],
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -2323,9 +2378,24 @@ module Aws::APIGateway
     #   The identifier of the Deployment resource to get information about.
     #   @return [String]
     #
+    # @!attribute [rw] embed
+    #   A query parameter to retrieve the specified embedded resources of
+    #   the returned Deployment resource in the response. In a REST API
+    #   call, this `embed` parameter value is a list of comma-separated
+    #   strings, as in `GET
+    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=var1,var2`.
+    #   The SDK and other platform-dependent libraries might use a different
+    #   format for the list. Currently, this request supports only retrieval
+    #   of the embedded API summary this way. Hence, the parameter value
+    #   must be a single-valued list containing only the `"apisummary"`
+    #   string. For example, `GET
+    #   /restapis/\{restapi_id\}/deployments/\{deployment_id\}?embed=apisummary`.
+    #   @return [Array<String>]
+    #
     class GetDeploymentRequest < Struct.new(
       :rest_api_id,
-      :deployment_id)
+      :deployment_id,
+      :embed)
       include Aws::Structure
     end
 
@@ -2347,14 +2417,12 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The position of the current Deployment resource in the collection to
-    #   get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of Deployment resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
     #
     class GetDeploymentsRequest < Struct.new(
@@ -2423,12 +2491,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The position of the to-be-retrieved documentation part in the
-    #   DocumentationParts collection.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The size of the paged results.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     class GetDocumentationPartsRequest < Struct.new(
@@ -2484,12 +2551,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The position of the returned `DocumentationVersion` in the
-    #   DocumentationVersions collection.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The page size of the returned documentation versions.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     class GetDocumentationVersionsRequest < Struct.new(
@@ -2528,13 +2594,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] position
-    #   The position of the current domain names to get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of DomainName resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
     #
     class GetDomainNamesRequest < Struct.new(
@@ -2803,17 +2868,71 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The position of the next set of results in the Models resource to
-    #   get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of models in the collection to get information
-    #   about. The default limit is 25. It should be an integer between 1 -
-    #   500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
     #
     class GetModelsRequest < Struct.new(
+      :rest_api_id,
+      :position,
+      :limit)
+      include Aws::Structure
+    end
+
+    # Gets a RequestValidator of a given RestApi.
+    #
+    # @note When making an API call, you may pass GetRequestValidatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         request_validator_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   \[Required\] The identifier of the RestApi to which the specified
+    #   RequestValidator belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_validator_id
+    #   \[Required\] The identifier of the RequestValidator to be retrieved.
+    #   @return [String]
+    #
+    class GetRequestValidatorRequest < Struct.new(
+      :rest_api_id,
+      :request_validator_id)
+      include Aws::Structure
+    end
+
+    # Gets the RequestValidators collection of a given RestApi.
+    #
+    # @note When making an API call, you may pass GetRequestValidatorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         position: "String",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   \[Required\] The identifier of a RestApi to which the
+    #   RequestValidators collection belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   The current pagination position in the paged result set.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of returned results per page.
+    #   @return [Integer]
+    #
+    class GetRequestValidatorsRequest < Struct.new(
       :rest_api_id,
       :position,
       :limit)
@@ -2828,6 +2947,7 @@ module Aws::APIGateway
     #       {
     #         rest_api_id: "String", # required
     #         resource_id: "String", # required
+    #         embed: ["String"],
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -2838,9 +2958,20 @@ module Aws::APIGateway
     #   The identifier for the Resource resource.
     #   @return [String]
     #
+    # @!attribute [rw] embed
+    #   A query parameter to retrieve the specified resources embedded in
+    #   the returned Resource representation in the response. This `embed`
+    #   parameter value is a list of comma-separated strings. Currently, the
+    #   request supports only retrieval of the embedded Method resources
+    #   this way. The query parameter value must be a single-valued list and
+    #   contain the `"methods"` string. For example, `GET
+    #   /restapis/\{restapi_id\}/resources/\{resource_id\}?embed=methods`.
+    #   @return [Array<String>]
+    #
     class GetResourceRequest < Struct.new(
       :rest_api_id,
-      :resource_id)
+      :resource_id,
+      :embed)
       include Aws::Structure
     end
 
@@ -2853,6 +2984,7 @@ module Aws::APIGateway
     #         rest_api_id: "String", # required
     #         position: "String",
     #         limit: 1,
+    #         embed: ["String"],
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -2860,20 +2992,29 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   The position of the next set of results in the current Resources
-    #   resource to get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of Resource resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
+    #
+    # @!attribute [rw] embed
+    #   A query parameter used to retrieve the specified resources embedded
+    #   in the returned Resources resource in the response. This `embed`
+    #   parameter value is a list of comma-separated strings. Currently, the
+    #   request supports only retrieval of the embedded Method resources
+    #   this way. The query parameter value must be a single-valued list and
+    #   contain the `"methods"` string. For example, `GET
+    #   /restapis/\{restapi_id\}/resources?embed=methods`.
+    #   @return [Array<String>]
     #
     class GetResourcesRequest < Struct.new(
       :rest_api_id,
       :position,
-      :limit)
+      :limit,
+      :embed)
       include Aws::Structure
     end
 
@@ -2907,14 +3048,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] position
-    #   The position of the current RestApis resource in the collection to
-    #   get information about.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of RestApi resources in the collection to get
-    #   information about. The default limit is 25. It should be an integer
-    #   between 1 - 500.
+    #   The maximum number of returned results per page. The value is 25 by
+    #   default and could be between 1 - 500.
     #   @return [Integer]
     #
     class GetRestApisRequest < Struct.new(
@@ -2995,11 +3134,11 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] position
-    #   The position of the last fetched element in the SdkTypes collection.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of SdkType instances to be returned.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     class GetSdkTypesRequest < Struct.new(
@@ -3105,13 +3244,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   A query parameter specifying the zero-based index specifying the
-    #   position of a usage plan key.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   A query parameter specifying the maximum number usage plan keys
-    #   returned by the GET request.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     # @!attribute [rw] name_query
@@ -3157,8 +3294,7 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] position
-    #   The zero-based array index specifying the position of the
-    #   to-be-retrieved UsagePlan resource.
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] key_id
@@ -3166,7 +3302,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The number of UsagePlan resources to be returned as the result.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     class GetUsagePlansRequest < Struct.new(
@@ -3208,11 +3344,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] position
-    #   Position
+    #   The current pagination position in the paged result set.
     #   @return [String]
     #
     # @!attribute [rw] limit
-    #   The maximum number of results to be returned.
+    #   The maximum number of returned results per page.
     #   @return [Integer]
     #
     class GetUsageRequest < Struct.new(
@@ -3652,7 +3788,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] authorization_type
-    #   The method's authorization type.
+    #   The method's authorization type. Valid values are `NONE` for open
+    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
+    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
+    #   user pool.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -3664,6 +3803,10 @@ module Aws::APIGateway
     #   A boolean flag specifying whether a valid ApiKey is required to
     #   invoke this method.
     #   @return [Boolean]
+    #
+    # @!attribute [rw] request_validator_id
+    #   The identifier of a RequestValidator for request validation.
+    #   @return [String]
     #
     # @!attribute [rw] operation_name
     #   A human-friendly operation identifier for the method. For example,
@@ -3772,6 +3915,7 @@ module Aws::APIGateway
       :authorization_type,
       :authorizer_id,
       :api_key_required,
+      :request_validator_id,
       :operation_name,
       :request_parameters,
       :request_models,
@@ -3943,7 +4087,10 @@ module Aws::APIGateway
     # time.
     #
     # @!attribute [rw] authorization_type
-    #   Specifies the type of authorization used for the method.
+    #   The method's authorization type. Valid values are `NONE` for open
+    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
+    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
+    #   user pool.
     #   @return [String]
     #
     # @!attribute [rw] api_key_required
@@ -4081,7 +4228,14 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The new target value of the update operation.
+    #   The new target value of the update operation. When using AWS CLI to
+    #   update a property of a JSON value, enclose the JSON object with a
+    #   pair of single quotes in a Linux shell, e.g., '\\\{"a": ...\\}'.
+    #   In a Windows shell, see [Using JSON for Parameters][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json
     #   @return [String]
     #
     # @!attribute [rw] from
@@ -4342,6 +4496,7 @@ module Aws::APIGateway
     #         request_models: {
     #           "String" => "String",
     #         },
+    #         request_validator_id: "String",
     #       }
     #
     # @!attribute [rw] rest_api_id
@@ -4357,7 +4512,10 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] authorization_type
-    #   Specifies the type of authorization used for the method.
+    #   The method's authorization type. Valid values are `NONE` for open
+    #   access, `AWS_IAM` for using AWS IAM permissions, `CUSTOM` for using
+    #   a custom authorizer, or `COGNITO_USER_POOLS` for using a Cognito
+    #   user pool.
     #   @return [String]
     #
     # @!attribute [rw] authorizer_id
@@ -4398,6 +4556,11 @@ module Aws::APIGateway
     #   type as the key and a Model name as the value.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] request_validator_id
+    #   The identifier of a RequestValidator for validating the method
+    #   request.
+    #   @return [String]
+    #
     class PutMethodRequest < Struct.new(
       :rest_api_id,
       :resource_id,
@@ -4407,7 +4570,8 @@ module Aws::APIGateway
       :api_key_required,
       :operation_name,
       :request_parameters,
-      :request_models)
+      :request_models,
+      :request_validator_id)
       include Aws::Structure
     end
 
@@ -4562,6 +4726,83 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
+    # A set of validation rules for incoming Method requests.
+    #
+    # <div class="remarks" markdown="1">
+    # In Swagger, a RequestValidator of an API is defined by the
+    # [x-amazon-apigateway-request-validators.requestValidator][1] object.
+    # It the referenced using the [x-amazon-apigateway-request-validator][2]
+    # property.
+    #
+    # </div>
+    #
+    # <div class="seeAlso">
+    # [Enable Basic Request Validation in API Gateway][3]
+    # </div>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.requestValidator.html
+    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validator
+    # [3]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
+    #
+    # @!attribute [rw] id
+    #   The identifier of this RequestValidator.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of this RequestValidator
+    #   @return [String]
+    #
+    # @!attribute [rw] validate_request_body
+    #   A Boolean flag to indicate whether to validate a request body
+    #   according to the configured Model schema.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] validate_request_parameters
+    #   A Boolean flag to indicate whether to validate request parameters
+    #   (`true`) or not (`false`).
+    #   @return [Boolean]
+    #
+    class RequestValidator < Struct.new(
+      :id,
+      :name,
+      :validate_request_body,
+      :validate_request_parameters)
+      include Aws::Structure
+    end
+
+    # A collection of RequestValidator resources of a given RestApi.
+    #
+    # <div class="remarks" markdown="1">
+    # In Swagger, the RequestValidators of an API is defined by the
+    # [x-amazon-apigateway-request-validators][1] extension.
+    #
+    # </div>
+    #
+    # <div class="seeAlso">
+    # [Enable Basic Request Validation in API Gateway][2]
+    # </div>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-swagger-extensions.html#api-gateway-swagger-extensions-request-validators.html
+    # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-method-request-validation.html
+    #
+    # @!attribute [rw] position
+    #   @return [String]
+    #
+    # @!attribute [rw] items
+    #   The current page of RequestValidator resources in the
+    #   RequestValidators collection.
+    #   @return [Array<Types::RequestValidator>]
+    #
+    class RequestValidators < Struct.new(
+      :position,
+      :items)
+      include Aws::Structure
+    end
+
     # Represents an API resource.
     #
     # <div class="seeAlso">
@@ -4603,7 +4844,7 @@ module Aws::APIGateway
     #
     #   ##### Request
     #
-    #       GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160608T031827Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160608/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+    #       GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20170223T031827Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20170223/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
     #
     #   ##### Response
     #
@@ -4674,11 +4915,7 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] created_date
-    #   The date when the API was created, in [ISO 8601 format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the API was created.
     #   @return [Time]
     #
     # @!attribute [rw] version
@@ -4887,21 +5124,11 @@ module Aws::APIGateway
     #   @return [String]
     #
     # @!attribute [rw] created_date
-    #   The date and time that the stage was created, in [ISO 8601
-    #   format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the stage was created.
     #   @return [Time]
     #
     # @!attribute [rw] last_updated_date
-    #   The date and time that information about the stage was last updated,
-    #   in [ISO 8601 format][1].
-    #
-    #
-    #
-    #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
+    #   The timestamp when the stage last updated.
     #   @return [Time]
     #
     class Stage < Struct.new(
@@ -5781,6 +6008,45 @@ module Aws::APIGateway
     class UpdateModelRequest < Struct.new(
       :rest_api_id,
       :model_name,
+      :patch_operations)
+      include Aws::Structure
+    end
+
+    # Updates a RequestValidator of a given RestApi.
+    #
+    # @note When making an API call, you may pass UpdateRequestValidatorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         rest_api_id: "String", # required
+    #         request_validator_id: "String", # required
+    #         patch_operations: [
+    #           {
+    #             op: "add", # accepts add, remove, replace, move, copy, test
+    #             path: "String",
+    #             value: "String",
+    #             from: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] rest_api_id
+    #   \[Required\] The identifier of the RestApi for which the given
+    #   RequestValidator is updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_validator_id
+    #   \[Required\] The identifier of RequestValidator to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] patch_operations
+    #   A list of update operations to be applied to the specified resource
+    #   and in the order specified in this list.
+    #   @return [Array<Types::PatchOperation>]
+    #
+    class UpdateRequestValidatorRequest < Struct.new(
+      :rest_api_id,
+      :request_validator_id,
       :patch_operations)
       include Aws::Structure
     end

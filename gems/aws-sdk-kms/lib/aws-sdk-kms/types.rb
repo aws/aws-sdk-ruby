@@ -179,13 +179,10 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] constraints
-    #   The conditions under which the operations permitted by the grant are
-    #   allowed.
-    #
-    #   You can use this value to allow the operations permitted by the
-    #   grant only when a specified encryption context is present. For more
-    #   information, see [Encryption Context][1] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   A structure that you can use to allow certain operations in the
+    #   grant only when the desired encryption context is present. For more
+    #   information about encryption context, see [Encryption Context][1] in
+    #   the *AWS Key Management Service Developer Guide*.
     #
     #
     #
@@ -961,7 +958,7 @@ module Aws::KMS
     end
 
     # @!attribute [rw] plaintext
-    #   The unpredictable byte string.
+    #   The random byte string.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateRandomResponse AWS API Documentation
@@ -1130,13 +1127,19 @@ module Aws::KMS
       include Aws::Structure
     end
 
-    # A structure for specifying the conditions under which the operations
-    # permitted by the grant are allowed.
-    #
-    # You can use this structure to allow the operations permitted by the
-    # grant only when a specified encryption context is present. For more
+    # A structure that you can use to allow certain operations in the grant
+    # only when the desired encryption context is present. For more
     # information about encryption context, see [Encryption Context][1] in
     # the *AWS Key Management Service Developer Guide*.
+    #
+    # Grant constraints apply only to operations that accept encryption
+    # context as input. For example, the ` DescribeKey ` operation does not
+    # accept encryption context as input. A grant that allows the
+    # `DescribeKey` operation does so regardless of the grant constraints.
+    # In constrast, the ` Encrypt ` operation accepts encryption context as
+    # input. A grant that allows the `Encrypt` operation does so only when
+    # the encryption context of the `Encrypt` operation satisfies the grant
+    # constraints.
     #
     #
     #
@@ -1155,20 +1158,20 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] encryption_context_subset
-    #   Contains a list of key-value pairs, a subset of which must be
-    #   present in the encryption context of a subsequent operation
-    #   permitted by the grant. When a subsequent operation permitted by the
-    #   grant includes an encryption context that matches this list or is a
-    #   subset of this list, the grant allows the operation. Otherwise, the
-    #   operation is not allowed.
+    #   A list of key-value pairs, all of which must be present in the
+    #   encryption context of certain subsequent operations that the grant
+    #   allows. When certain subsequent operations allowed by the grant
+    #   include encryption context that matches this list or is a superset
+    #   of this list, the grant allows the operation. Otherwise, the grant
+    #   does not allow the operation.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] encryption_context_equals
-    #   Contains a list of key-value pairs that must be present in the
-    #   encryption context of a subsequent operation permitted by the grant.
-    #   When a subsequent operation permitted by the grant includes an
+    #   A list of key-value pairs that must be present in the encryption
+    #   context of certain subsequent operations that the grant allows. When
+    #   certain subsequent operations allowed by the grant include
     #   encryption context that matches this list, the grant allows the
-    #   operation. Otherwise, the operation is not allowed.
+    #   operation. Otherwise, the grant does not allow the operation.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantConstraints AWS API Documentation
@@ -1217,7 +1220,8 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] constraints
-    #   The conditions under which the grant's operations are allowed.
+    #   A list of key-value pairs that must be present in the encryption
+    #   context of certain subsequent operations that the grant allows.
     #   @return [Types::GrantConstraints]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantListEntry AWS API Documentation

@@ -152,7 +152,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #
@@ -187,7 +187,7 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-
+    #   \_+=,.@-
     #
     #
     #

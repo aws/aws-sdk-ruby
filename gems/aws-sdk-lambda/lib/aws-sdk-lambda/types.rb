@@ -12,8 +12,8 @@ module Aws::Lambda
     # current account and region.
     #
     # @!attribute [rw] total_code_size
-    #   Maximum size, in megabytes, of a code package you can upload per
-    #   region. The default size is 75 GB.
+    #   Maximum size, in bytes, of a code package you can upload per region.
+    #   The default size is 75 GB.
     #   @return [Integer]
     #
     # @!attribute [rw] code_size_unzipped
@@ -93,7 +93,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -119,27 +119,26 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] source_arn
-    #   This is optional; however, when granting Amazon S3 permission to
-    #   invoke your function, you should specify this field with the Amazon
-    #   Resource Name (ARN) as its value. This ensures that only events
-    #   generated from the specified source can invoke the function.
+    #   This is optional; however, when granting permission to invoke your
+    #   function, you should specify this field with the Amazon Resource
+    #   Name (ARN) as its value. This ensures that only events generated
+    #   from the specified source can invoke the function.
     #
-    #   If you add a permission for the Amazon S3 principal without
-    #   providing the source ARN, any AWS account that creates a mapping to
-    #   your function ARN can send events to invoke your Lambda function
-    #   from Amazon S3.
+    #   If you add a permission without providing the source ARN, any AWS
+    #   account that creates a mapping to your function ARN can send events
+    #   to invoke your Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] source_account
-    #   This parameter is used for S3, SES, CloudWatch Logs and CloudWatch
-    #   Rules only. The AWS account ID (without a hyphen) of the source
-    #   owner. For example, if the `SourceArn` identifies a bucket, then
-    #   this is the bucket owner's account ID. You can use this additional
-    #   condition to ensure the bucket you specify is owned by a specific
-    #   account (it is possible the bucket owner deleted the bucket and some
-    #   other AWS account created the bucket). You can also use this
-    #   condition to specify all sources (that is, you don't specify the
-    #   `SourceArn`) owned by a specific account.
+    #   This parameter is used for S3 and SES. The AWS account ID (without a
+    #   hyphen) of the source owner. For example, if the `SourceArn`
+    #   identifies a bucket, then this is the bucket owner's account ID.
+    #   You can use this additional condition to ensure the bucket you
+    #   specify is owned by a specific account (it is possible the bucket
+    #   owner deleted the bucket and some other AWS account created the
+    #   bucket). You can also use this condition to specify all sources
+    #   (that is, you don't specify the `SourceArn`) owned by a specific
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] event_source_token
@@ -239,6 +238,9 @@ module Aws::Lambda
     #
     # @!attribute [rw] function_name
     #   Name of the Lambda function for which you want to create an alias.
+    #   Note that the length constraint applies only to the ARN. If you
+    #   specify only the function name, it is limited to 64 characters in
+    #   length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -300,7 +302,7 @@ module Aws::Lambda
     #   the account ID qualifier (for example, `account-id:Thumbnail`).
     #
     #   Note that the length constraint applies only to the ARN. If you
-    #   specify only the function name, it is limited to 64 character in
+    #   specify only the function name, it is limited to 64 characters in
     #   length.
     #
     #
@@ -360,7 +362,7 @@ module Aws::Lambda
     #
     #       {
     #         function_name: "FunctionName", # required
-    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
+    #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, nodejs4.3-edge
     #         role: "RoleArn", # required
     #         handler: "Handler", # required
     #         code: { # required
@@ -386,25 +388,35 @@ module Aws::Lambda
     #           },
     #         },
     #         kms_key_arn: "KMSKeyArn",
+    #         tracing_config: {
+    #           mode: "Active", # accepts Active, PassThrough
+    #         },
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
     #   The name you want to assign to the function you are uploading. The
     #   function names appear in the console and are returned in the
     #   ListFunctions API. Function names are used to specify functions to
-    #   other AWS Lambda API operations, such as Invoke.
+    #   other AWS Lambda API operations, such as Invoke. Note that the
+    #   length constraint applies only to the ARN. If you specify only the
+    #   function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] runtime
     #   The runtime environment for the Lambda function you are uploading.
     #
-    #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
-    #   use earlier runtime (v0.10.42), set the value to "nodejs".
+    #   To use the Python runtime v3.6, set the value to "python3.6". To
+    #   use the Python runtime v2.7, set the value to "python2.7". To use
+    #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
+    #   the Node.js runtime v4.3, set the value to "nodejs4.3".
     #
     #   <note markdown="1"> You can no longer create functions using the v0.10.42 runtime
     #   version as of November, 2016. Existing functions will be supported
-    #   until early 2017, but we recommend you migrate them to nodejs4.3
-    #   runtime version as soon as possible.
+    #   until early 2017, but we recommend you migrate them to either
+    #   nodejs6.10 or nodejs4.3 runtime version as soon as possible.
     #
     #    </note>
     #   @return [String]
@@ -470,8 +482,8 @@ module Aws::Lambda
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target Amazon Resource Name
-    #   (ARN) of an Amazon SQS queue or Amazon SNS topic.
+    #   The parent object that contains the target ARN (Amazon Resource
+    #   Name) of an Amazon SQS queue or Amazon SNS topic.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -484,6 +496,14 @@ module Aws::Lambda
     #   function's environment variables. If not provided, AWS Lambda will
     #   use a default service key.
     #   @return [String]
+    #
+    # @!attribute [rw] tracing_config
+    #   The parent object that contains your function's tracing settings.
+    #   @return [Types::TracingConfig]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags (key-value pairs) assigned to the new function.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
@@ -500,11 +520,13 @@ module Aws::Lambda
       :vpc_config,
       :dead_letter_config,
       :environment,
-      :kms_key_arn)
+      :kms_key_arn,
+      :tracing_config,
+      :tags)
       include Aws::Structure
     end
 
-    # The parent object that contains the target Amazon Resource Name (ARN)
+    # The parent object that contains the target ARN (Amazon Resource Name)
     # of an Amazon SQS queue or Amazon SNS topic.
     #
     # @note When making an API call, you may pass DeadLetterConfig
@@ -537,6 +559,9 @@ module Aws::Lambda
     # @!attribute [rw] function_name
     #   The Lambda function name for which the alias is created. Deleting an
     #   alias does not delete the function version to which it is pointing.
+    #   Note that the length constraint applies only to the ARN. If you
+    #   specify only the function name, it is limited to 64 characters in
+    #   length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -589,7 +614,7 @@ module Aws::Lambda
     #   name with the account ID qualifier (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -814,7 +839,9 @@ module Aws::Lambda
     # A complex type that describes function metadata.
     #
     # @!attribute [rw] function_name
-    #   The name of the function.
+    #   The name of the function. Note that the length constraint applies
+    #   only to the ARN. If you specify only the function name, it is
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] function_arn
@@ -823,9 +850,6 @@ module Aws::Lambda
     #
     # @!attribute [rw] runtime
     #   The runtime environment for the Lambda function.
-    #
-    #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
-    #   use earlier runtime (v0.10.42), set the value to "nodejs".
     #   @return [String]
     #
     # @!attribute [rw] role
@@ -875,8 +899,8 @@ module Aws::Lambda
     #   @return [Types::VpcConfigResponse]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target Amazon Resource Name
-    #   (ARN) of an Amazon SQS queue or Amazon SNS topic.
+    #   The parent object that contains the target ARN (Amazon Resource
+    #   Name) of an Amazon SQS queue or Amazon SNS topic.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] environment
@@ -889,6 +913,10 @@ module Aws::Lambda
     #   function's environment variables. If empty, it means you are using
     #   the AWS Lambda default service key.
     #   @return [String]
+    #
+    # @!attribute [rw] tracing_config
+    #   The parent object that contains your function's tracing settings.
+    #   @return [Types::TracingConfigResponse]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
@@ -908,7 +936,8 @@ module Aws::Lambda
       :vpc_config,
       :dead_letter_config,
       :environment,
-      :kms_key_arn)
+      :kms_key_arn,
+      :tracing_config)
       include Aws::Structure
     end
 
@@ -947,7 +976,9 @@ module Aws::Lambda
     # @!attribute [rw] function_name
     #   Function name for which the alias is created. An alias is a
     #   subresource that exists only in the context of an existing Lambda
-    #   function so you must specify the function name.
+    #   function so you must specify the function name. Note that the length
+    #   constraint applies only to the ARN. If you specify only the function
+    #   name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -998,7 +1029,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -1039,7 +1070,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -1072,11 +1103,16 @@ module Aws::Lambda
     #   The object for the Lambda function location.
     #   @return [Types::FunctionCodeLocation]
     #
+    # @!attribute [rw] tags
+    #   Returns the list of tags associated with the function.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionResponse AWS API Documentation
     #
     class GetFunctionResponse < Struct.new(
       :configuration,
-      :code)
+      :code,
+      :tags)
       include Aws::Structure
     end
 
@@ -1100,7 +1136,7 @@ module Aws::Lambda
     #   name with the account ID qualifier (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] qualifier
@@ -1153,7 +1189,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] invocation_type
@@ -1279,7 +1315,9 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The Lambda function name.
+    #   The Lambda function name. Note that the length constraint applies
+    #   only to the ARN. If you specify only the function name, it is
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] invoke_args
@@ -1319,7 +1357,9 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   Lambda function name for which the alias is created.
+    #   Lambda function name for which the alias is created. Note that the
+    #   length constraint applies only to the ARN. If you specify only the
+    #   function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] function_version
@@ -1393,7 +1433,7 @@ module Aws::Lambda
     #   name with the account ID qualifier (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -1482,6 +1522,35 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "FunctionArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   The ARN (Amazon Resource Name) of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsRequest AWS API Documentation
+    #
+    class ListTagsRequest < Struct.new(
+      :resource)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags assigned to the function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListTagsResponse AWS API Documentation
+    #
+    class ListTagsResponse < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListVersionsByFunctionRequest
     #   data as a hash:
     #
@@ -1499,7 +1568,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] marker
@@ -1556,7 +1625,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] code_sha_256
@@ -1599,7 +1668,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] statement_id
@@ -1622,6 +1691,96 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "FunctionArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   The ARN (Amazon Resource Name) of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags (key-value pairs) you are assigning to the Lambda
+    #   function.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource,
+      :tags)
+      include Aws::Structure
+    end
+
+    # The parent object that contains your function's tracing settings.
+    #
+    # @note When making an API call, you may pass TracingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         mode: "Active", # accepts Active, PassThrough
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   Can be either PassThrough or Active. If PassThrough, Lambda will
+    #   only trace the request from an upstream service if it contains a
+    #   tracing header with "sampled=1". If Active, Lambda will respect
+    #   any tracing header it receives from an upstream service. If no
+    #   tracing header is received, Lambda will call X-Ray for a tracing
+    #   decision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfig AWS API Documentation
+    #
+    class TracingConfig < Struct.new(
+      :mode)
+      include Aws::Structure
+    end
+
+    # Parent object of the tracing information associated with your Lambda
+    # function.
+    #
+    # @!attribute [rw] mode
+    #   The tracing mode associated with your Lambda function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/TracingConfigResponse AWS API Documentation
+    #
+    class TracingConfigResponse < Struct.new(
+      :mode)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "FunctionArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   The ARN (Amazon Resource Name) of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The list of tag keys to be deleted from the function.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource,
+      :tag_keys)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateAliasRequest
     #   data as a hash:
     #
@@ -1633,7 +1792,9 @@ module Aws::Lambda
     #       }
     #
     # @!attribute [rw] function_name
-    #   The function name for which the alias is created.
+    #   The function name for which the alias is created. Note that the
+    #   length constraint applies only to the ARN. If you specify only the
+    #   function name, it is limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1680,7 +1841,9 @@ module Aws::Lambda
     #   can specify Amazon Resource Name (ARN) of the function (for example,
     #   `arn:aws:lambda:us-west-2:account-id:function:ThumbNail`). AWS
     #   Lambda also allows you to specify a partial ARN (for example,
-    #   `account-id:Thumbnail`).
+    #   `account-id:Thumbnail`). Note that the length constraint applies
+    #   only to the ARN. If you specify only the function name, it is
+    #   limited to 64 characters in length.
     #
     #   If you are using versioning, you can also provide a qualified
     #   function ARN (ARN that is qualified with function version or alias
@@ -1737,7 +1900,7 @@ module Aws::Lambda
     #   Lambda also allows you to specify a partial ARN (for example,
     #   `account-id:Thumbnail`). Note that the length constraint applies
     #   only to the ARN. If you specify only the function name, it is
-    #   limited to 64 character in length.
+    #   limited to 64 characters in length.
     #   @return [String]
     #
     # @!attribute [rw] zip_file
@@ -1805,11 +1968,14 @@ module Aws::Lambda
     #             "EnvironmentVariableName" => "EnvironmentVariableValue",
     #           },
     #         },
-    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
+    #         runtime: "nodejs", # accepts nodejs, nodejs4.3, nodejs6.10, java8, python2.7, python3.6, dotnetcore1.0, nodejs4.3-edge
     #         dead_letter_config: {
     #           target_arn: "ResourceArn",
     #         },
     #         kms_key_arn: "KMSKeyArn",
+    #         tracing_config: {
+    #           mode: "Active", # accepts Active, PassThrough
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
@@ -1870,8 +2036,12 @@ module Aws::Lambda
     # @!attribute [rw] runtime
     #   The runtime environment for the Lambda function.
     #
-    #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
-    #   use earlier runtime (v0.10.42), set the value to "nodejs".
+    #   To use the Python runtime v3.6, set the value to "python3.6". To
+    #   use the Python runtime v2.7, set the value to "python2.7". To use
+    #   the Node.js runtime v6.10, set the value to "nodejs6.10". To use
+    #   the Node.js runtime v4.3, set the value to "nodejs4.3". To use the
+    #   Python runtime v3.6, set the value to "python3.6". To use the
+    #   Python runtime v2.7, set the value to "python2.7".
     #
     #   <note markdown="1"> You can no longer downgrade to the v0.10.42 runtime version. This
     #   version will no longer be supported as of early 2017.
@@ -1880,8 +2050,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] dead_letter_config
-    #   The parent object that contains the target Amazon Resource Name
-    #   (ARN) of an Amazon SQS queue or Amazon SNS topic.
+    #   The parent object that contains the target ARN (Amazon Resource
+    #   Name) of an Amazon SQS queue or Amazon SNS topic.
     #   @return [Types::DeadLetterConfig]
     #
     # @!attribute [rw] kms_key_arn
@@ -1890,6 +2060,10 @@ module Aws::Lambda
     #   Lambda default service key, pass in an empty string ("") for this
     #   parameter.
     #   @return [String]
+    #
+    # @!attribute [rw] tracing_config
+    #   The parent object that contains your function's tracing settings.
+    #   @return [Types::TracingConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
@@ -1904,7 +2078,8 @@ module Aws::Lambda
       :environment,
       :runtime,
       :dead_letter_config,
-      :kms_key_arn)
+      :kms_key_arn,
+      :tracing_config)
       include Aws::Structure
     end
 

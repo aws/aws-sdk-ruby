@@ -39,6 +39,7 @@ module Aws::APIGateway
     CreateDocumentationVersionRequest = Shapes::StructureShape.new(name: 'CreateDocumentationVersionRequest')
     CreateDomainNameRequest = Shapes::StructureShape.new(name: 'CreateDomainNameRequest')
     CreateModelRequest = Shapes::StructureShape.new(name: 'CreateModelRequest')
+    CreateRequestValidatorRequest = Shapes::StructureShape.new(name: 'CreateRequestValidatorRequest')
     CreateResourceRequest = Shapes::StructureShape.new(name: 'CreateResourceRequest')
     CreateRestApiRequest = Shapes::StructureShape.new(name: 'CreateRestApiRequest')
     CreateStageRequest = Shapes::StructureShape.new(name: 'CreateStageRequest')
@@ -57,6 +58,7 @@ module Aws::APIGateway
     DeleteMethodRequest = Shapes::StructureShape.new(name: 'DeleteMethodRequest')
     DeleteMethodResponseRequest = Shapes::StructureShape.new(name: 'DeleteMethodResponseRequest')
     DeleteModelRequest = Shapes::StructureShape.new(name: 'DeleteModelRequest')
+    DeleteRequestValidatorRequest = Shapes::StructureShape.new(name: 'DeleteRequestValidatorRequest')
     DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
     DeleteRestApiRequest = Shapes::StructureShape.new(name: 'DeleteRestApiRequest')
     DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
@@ -104,6 +106,8 @@ module Aws::APIGateway
     GetModelRequest = Shapes::StructureShape.new(name: 'GetModelRequest')
     GetModelTemplateRequest = Shapes::StructureShape.new(name: 'GetModelTemplateRequest')
     GetModelsRequest = Shapes::StructureShape.new(name: 'GetModelsRequest')
+    GetRequestValidatorRequest = Shapes::StructureShape.new(name: 'GetRequestValidatorRequest')
+    GetRequestValidatorsRequest = Shapes::StructureShape.new(name: 'GetRequestValidatorsRequest')
     GetResourceRequest = Shapes::StructureShape.new(name: 'GetResourceRequest')
     GetResourcesRequest = Shapes::StructureShape.new(name: 'GetResourcesRequest')
     GetRestApiRequest = Shapes::StructureShape.new(name: 'GetRestApiRequest')
@@ -139,6 +143,7 @@ module Aws::APIGateway
     ListOfLong = Shapes::ListShape.new(name: 'ListOfLong')
     ListOfModel = Shapes::ListShape.new(name: 'ListOfModel')
     ListOfPatchOperation = Shapes::ListShape.new(name: 'ListOfPatchOperation')
+    ListOfRequestValidator = Shapes::ListShape.new(name: 'ListOfRequestValidator')
     ListOfResource = Shapes::ListShape.new(name: 'ListOfResource')
     ListOfRestApi = Shapes::ListShape.new(name: 'ListOfRestApi')
     ListOfSdkConfigurationProperty = Shapes::ListShape.new(name: 'ListOfSdkConfigurationProperty')
@@ -181,6 +186,8 @@ module Aws::APIGateway
     PutRestApiRequest = Shapes::StructureShape.new(name: 'PutRestApiRequest')
     QuotaPeriodType = Shapes::StringShape.new(name: 'QuotaPeriodType')
     QuotaSettings = Shapes::StructureShape.new(name: 'QuotaSettings')
+    RequestValidator = Shapes::StructureShape.new(name: 'RequestValidator')
+    RequestValidators = Shapes::StructureShape.new(name: 'RequestValidators')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     Resources = Shapes::StructureShape.new(name: 'Resources')
     RestApi = Shapes::StructureShape.new(name: 'RestApi')
@@ -219,6 +226,7 @@ module Aws::APIGateway
     UpdateMethodRequest = Shapes::StructureShape.new(name: 'UpdateMethodRequest')
     UpdateMethodResponseRequest = Shapes::StructureShape.new(name: 'UpdateMethodResponseRequest')
     UpdateModelRequest = Shapes::StructureShape.new(name: 'UpdateModelRequest')
+    UpdateRequestValidatorRequest = Shapes::StructureShape.new(name: 'UpdateRequestValidatorRequest')
     UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
     UpdateRestApiRequest = Shapes::StructureShape.new(name: 'UpdateRestApiRequest')
     UpdateStageRequest = Shapes::StructureShape.new(name: 'UpdateStageRequest')
@@ -344,10 +352,11 @@ module Aws::APIGateway
     CreateDocumentationVersionRequest.struct_class = Types::CreateDocumentationVersionRequest
 
     CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domainName"))
-    CreateDomainNameRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "certificateName"))
-    CreateDomainNameRequest.add_member(:certificate_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "certificateBody"))
-    CreateDomainNameRequest.add_member(:certificate_private_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "certificatePrivateKey"))
-    CreateDomainNameRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: String, required: true, location_name: "certificateChain"))
+    CreateDomainNameRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "certificateName"))
+    CreateDomainNameRequest.add_member(:certificate_body, Shapes::ShapeRef.new(shape: String, location_name: "certificateBody"))
+    CreateDomainNameRequest.add_member(:certificate_private_key, Shapes::ShapeRef.new(shape: String, location_name: "certificatePrivateKey"))
+    CreateDomainNameRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: String, location_name: "certificateChain"))
+    CreateDomainNameRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "certificateArn"))
     CreateDomainNameRequest.struct_class = Types::CreateDomainNameRequest
 
     CreateModelRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -356,6 +365,12 @@ module Aws::APIGateway
     CreateModelRequest.add_member(:schema, Shapes::ShapeRef.new(shape: String, location_name: "schema"))
     CreateModelRequest.add_member(:content_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "contentType"))
     CreateModelRequest.struct_class = Types::CreateModelRequest
+
+    CreateRequestValidatorRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    CreateRequestValidatorRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    CreateRequestValidatorRequest.add_member(:validate_request_body, Shapes::ShapeRef.new(shape: Boolean, location_name: "validateRequestBody"))
+    CreateRequestValidatorRequest.add_member(:validate_request_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "validateRequestParameters"))
+    CreateRequestValidatorRequest.struct_class = Types::CreateRequestValidatorRequest
 
     CreateResourceRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     CreateResourceRequest.add_member(:parent_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "parent_id"))
@@ -446,6 +461,10 @@ module Aws::APIGateway
     DeleteModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "model_name"))
     DeleteModelRequest.struct_class = Types::DeleteModelRequest
 
+    DeleteRequestValidatorRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    DeleteRequestValidatorRequest.add_member(:request_validator_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "requestvalidator_id"))
+    DeleteRequestValidatorRequest.struct_class = Types::DeleteRequestValidatorRequest
+
     DeleteResourceRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     DeleteResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
     DeleteResourceRequest.struct_class = Types::DeleteResourceRequest
@@ -505,6 +524,7 @@ module Aws::APIGateway
 
     DomainName.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "domainName"))
     DomainName.add_member(:certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "certificateName"))
+    DomainName.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "certificateArn"))
     DomainName.add_member(:certificate_upload_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "certificateUploadDate"))
     DomainName.add_member(:distribution_domain_name, Shapes::ShapeRef.new(shape: String, location_name: "distributionDomainName"))
     DomainName.struct_class = Types::DomainName
@@ -571,6 +591,7 @@ module Aws::APIGateway
 
     GetDeploymentRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     GetDeploymentRequest.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "deployment_id"))
+    GetDeploymentRequest.add_member(:embed, Shapes::ShapeRef.new(shape: ListOfString, location: "querystring", location_name: "embed"))
     GetDeploymentRequest.struct_class = Types::GetDeploymentRequest
 
     GetDeploymentsRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -649,13 +670,24 @@ module Aws::APIGateway
     GetModelsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
     GetModelsRequest.struct_class = Types::GetModelsRequest
 
+    GetRequestValidatorRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    GetRequestValidatorRequest.add_member(:request_validator_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "requestvalidator_id"))
+    GetRequestValidatorRequest.struct_class = Types::GetRequestValidatorRequest
+
+    GetRequestValidatorsRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    GetRequestValidatorsRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+    GetRequestValidatorsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetRequestValidatorsRequest.struct_class = Types::GetRequestValidatorsRequest
+
     GetResourceRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     GetResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
+    GetResourceRequest.add_member(:embed, Shapes::ShapeRef.new(shape: ListOfString, location: "querystring", location_name: "embed"))
     GetResourceRequest.struct_class = Types::GetResourceRequest
 
     GetResourcesRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     GetResourcesRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
     GetResourcesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+    GetResourcesRequest.add_member(:embed, Shapes::ShapeRef.new(shape: ListOfString, location: "querystring", location_name: "embed"))
     GetResourcesRequest.struct_class = Types::GetResourcesRequest
 
     GetRestApiRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -780,6 +812,8 @@ module Aws::APIGateway
 
     ListOfPatchOperation.member = Shapes::ShapeRef.new(shape: PatchOperation)
 
+    ListOfRequestValidator.member = Shapes::ShapeRef.new(shape: RequestValidator)
+
     ListOfResource.member = Shapes::ShapeRef.new(shape: Resource)
 
     ListOfRestApi.member = Shapes::ShapeRef.new(shape: RestApi)
@@ -834,6 +868,7 @@ module Aws::APIGateway
     Method.add_member(:authorization_type, Shapes::ShapeRef.new(shape: String, location_name: "authorizationType"))
     Method.add_member(:authorizer_id, Shapes::ShapeRef.new(shape: String, location_name: "authorizerId"))
     Method.add_member(:api_key_required, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "apiKeyRequired"))
+    Method.add_member(:request_validator_id, Shapes::ShapeRef.new(shape: String, location_name: "requestValidatorId"))
     Method.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, location_name: "operationName"))
     Method.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToBoolean, location_name: "requestParameters"))
     Method.add_member(:request_models, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestModels"))
@@ -916,6 +951,7 @@ module Aws::APIGateway
     PutMethodRequest.add_member(:operation_name, Shapes::ShapeRef.new(shape: String, location_name: "operationName"))
     PutMethodRequest.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToBoolean, location_name: "requestParameters"))
     PutMethodRequest.add_member(:request_models, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestModels"))
+    PutMethodRequest.add_member(:request_validator_id, Shapes::ShapeRef.new(shape: String, location_name: "requestValidatorId"))
     PutMethodRequest.struct_class = Types::PutMethodRequest
 
     PutMethodResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -939,6 +975,16 @@ module Aws::APIGateway
     QuotaSettings.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, location_name: "offset"))
     QuotaSettings.add_member(:period, Shapes::ShapeRef.new(shape: QuotaPeriodType, location_name: "period"))
     QuotaSettings.struct_class = Types::QuotaSettings
+
+    RequestValidator.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    RequestValidator.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    RequestValidator.add_member(:validate_request_body, Shapes::ShapeRef.new(shape: Boolean, location_name: "validateRequestBody"))
+    RequestValidator.add_member(:validate_request_parameters, Shapes::ShapeRef.new(shape: Boolean, location_name: "validateRequestParameters"))
+    RequestValidator.struct_class = Types::RequestValidator
+
+    RequestValidators.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+    RequestValidators.add_member(:items, Shapes::ShapeRef.new(shape: ListOfRequestValidator, location_name: "item"))
+    RequestValidators.struct_class = Types::RequestValidators
 
     Resource.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     Resource.add_member(:parent_id, Shapes::ShapeRef.new(shape: String, location_name: "parentId"))
@@ -1122,6 +1168,11 @@ module Aws::APIGateway
     UpdateModelRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
     UpdateModelRequest.struct_class = Types::UpdateModelRequest
 
+    UpdateRequestValidatorRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+    UpdateRequestValidatorRequest.add_member(:request_validator_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "requestvalidator_id"))
+    UpdateRequestValidatorRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+    UpdateRequestValidatorRequest.struct_class = Types::UpdateRequestValidatorRequest
+
     UpdateResourceRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
     UpdateResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "resource_id"))
     UpdateResourceRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
@@ -1293,6 +1344,19 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:create_request_validator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateRequestValidator"
+        o.http_method = "POST"
+        o.http_request_uri = "/restapis/{restapi_id}/requestvalidators"
+        o.input = Shapes::ShapeRef.new(shape: CreateRequestValidatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: RequestValidator)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
@@ -1515,6 +1579,19 @@ module Aws::APIGateway
         o.http_method = "DELETE"
         o.http_request_uri = "/restapis/{restapi_id}/models/{model_name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_request_validator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteRequestValidator"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteRequestValidatorRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1938,6 +2015,29 @@ module Aws::APIGateway
             "position" => "position"
           }
         )
+      end)
+
+      api.add_operation(:get_request_validator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRequestValidator"
+        o.http_method = "GET"
+        o.http_request_uri = "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}"
+        o.input = Shapes::ShapeRef.new(shape: GetRequestValidatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: RequestValidator)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:get_request_validators, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRequestValidators"
+        o.http_method = "GET"
+        o.http_request_uri = "/restapis/{restapi_id}/requestvalidators"
+        o.input = Shapes::ShapeRef.new(shape: GetRequestValidatorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RequestValidators)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2442,6 +2542,18 @@ module Aws::APIGateway
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:update_request_validator, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRequestValidator"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/restapis/{restapi_id}/requestvalidators/{requestvalidator_id}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRequestValidatorRequest)
+        o.output = Shapes::ShapeRef.new(shape: RequestValidator)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 

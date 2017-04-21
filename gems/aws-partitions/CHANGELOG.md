@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2017-04-21)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ResourceGroupsTaggingAPI`.
+
+* Feature - Added support for enumerating regions for `Aws::LexModelBuildingService`.
+
+* Feature - Added support for enumerating regions for `Aws::CodeStar`.
+
 1.5.0 (2017-03-09)
 ------------------
 

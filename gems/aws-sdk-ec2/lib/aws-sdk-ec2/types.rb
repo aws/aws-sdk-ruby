@@ -151,8 +151,8 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_health
-    #   The health status of the instance. If the status of both the
-    #   instance status check and the system status check is `impaired`, the
+    #   The health status of the instance. If the status of either the
+    #   instance status check or the system status check is `impaired`, the
     #   health status of the instance is `unhealthy`. Otherwise, the health
     #   status is `healthy`.
     #   @return [String]
@@ -2555,6 +2555,86 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFpgaImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         input_storage_location: { # required
+    #           bucket: "String",
+    #           key: "String",
+    #         },
+    #         logs_storage_location: {
+    #           bucket: "String",
+    #           key: "String",
+    #         },
+    #         description: "String",
+    #         name: "String",
+    #         client_token: "String",
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] input_storage_location
+    #   The location of the encrypted design checkpoint in Amazon S3. The
+    #   input must be a tarball.
+    #   @return [Types::StorageLocation]
+    #
+    # @!attribute [rw] logs_storage_location
+    #   The location in Amazon S3 for the output logs.
+    #   @return [Types::StorageLocation]
+    #
+    # @!attribute [rw] description
+    #   A description for the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A name for the AFI.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensuring
+    #   Idempotency][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImageRequest AWS API Documentation
+    #
+    class CreateFpgaImageRequest < Struct.new(
+      :dry_run,
+      :input_storage_location,
+      :logs_storage_location,
+      :description,
+      :name,
+      :client_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fpga_image_id
+    #   The FPGA image identifier (AFI ID).
+    #   @return [String]
+    #
+    # @!attribute [rw] fpga_image_global_id
+    #   The global FPGA image identifier (AGFI ID).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFpgaImageResult AWS API Documentation
+    #
+    class CreateFpgaImageResult < Struct.new(
+      :fpga_image_id,
+      :fpga_image_global_id)
+      include Aws::Structure
+    end
+
     # Contains the parameters for CreateImage.
     #
     # @note When making an API call, you may pass CreateImageRequest
@@ -3670,6 +3750,17 @@ module Aws::EC2
     #         iops: 1,
     #         encrypted: false,
     #         kms_key_id: "String",
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -3744,6 +3835,10 @@ module Aws::EC2
     #   If a `KmsKeyId` is specified, the `Encrypted` flag must also be set.
     #   @return [String]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the volume during creation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVolumeRequest AWS API Documentation
     #
     class CreateVolumeRequest < Struct.new(
@@ -3754,7 +3849,8 @@ module Aws::EC2
       :volume_type,
       :iops,
       :encrypted,
-      :kms_key_id)
+      :kms_key_id,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -6681,19 +6777,6 @@ module Aws::EC2
     #
     #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
     #
-    #   * `association.public-ip` - The address of the Elastic IP address
-    #     (IPv4) bound to the network interface.
-    #
-    #   * `association.ip-owner-id` - The owner of the Elastic IP address
-    #     (IPv4) associated with the network interface.
-    #
-    #   * `association.allocation-id` - The allocation ID returned when you
-    #     allocated the Elastic IP address (IPv4) for your network
-    #     interface.
-    #
-    #   * `association.association-id` - The association ID returned when
-    #     the network interface was associated with an IPv4 address.
-    #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -6788,6 +6871,20 @@ module Aws::EC2
     #   * `network-interface.addresses.association.ip-owner-id` - The owner
     #     ID of the private IPv4 address associated with the network
     #     interface.
+    #
+    #   * `network-interface.association.public-ip` - The address of the
+    #     Elastic IP address (IPv4) bound to the network interface.
+    #
+    #   * `network-interface.association.ip-owner-id` - The owner of the
+    #     Elastic IP address (IPv4) associated with the network interface.
+    #
+    #   * `network-interface.association.allocation-id` - The allocation ID
+    #     returned when you allocated the Elastic IP address (IPv4) for your
+    #     network interface.
+    #
+    #   * `network-interface.association.association-id` - The association
+    #     ID returned when the network interface was associated with an IPv4
+    #     address.
     #
     #   * `network-interface.attachment.attachment-id` - The ID of the
     #     interface attachment.
@@ -7423,7 +7520,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] attribute
-    #   The attribute of the network interface.
+    #   The attribute of the network interface. This parameter is required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNetworkInterfaceAttributeRequest AWS API Documentation
@@ -8107,6 +8204,9 @@ module Aws::EC2
     #   Instance with a tenancy of `dedicated` is applied to instances that
     #   run in a VPC on single-tenant hardware (i.e., Dedicated Instances).
     #
+    #   **Important:** The `host` value cannot be used with this parameter.
+    #   Use the `default` or `dedicated` values only.
+    #
     #   Default: `default`
     #   @return [String]
     #
@@ -8370,7 +8470,8 @@ module Aws::EC2
     #     association.
     #
     #   * `association.main` - Indicates whether the route table is the main
-    #     route table for the VPC (`true` \| `false`).
+    #     route table for the VPC (`true` \| `false`). Route tables that do
+    #     not have an association ID are not returned in the response.
     #
     #   * `route-table-id` - The ID of the route table.
     #
@@ -9847,7 +9948,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] attribute
-    #   The instance attribute.
+    #   The attribute of the volume. This parameter is required.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumeAttributeRequest AWS API Documentation
@@ -17826,7 +17927,9 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] billing_products
-    #   The billing product codes.
+    #   The billing product codes. Your account must be authorized to
+    #   specify billing product codes. Otherwise, you can use the AWS
+    #   Marketplace to bill for the use of an AMI.
     #   @return [Array<String>]
     #
     # @!attribute [rw] root_device_name
@@ -20120,6 +20223,17 @@ module Aws::EC2
     #           name: "String",
     #         },
     #         ebs_optimized: false,
+    #         tag_specifications: [
+    #           {
+    #             resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #             tags: [
+    #               {
+    #                 key: "String",
+    #                 value: "String",
+    #               },
+    #             ],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -20342,6 +20456,12 @@ module Aws::EC2
     #   Default: `false`
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the resources during launch. You can tag
+    #   instances and volumes. The specified tags are applied to all
+    #   instances or volumes that are created during launch.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -20369,7 +20489,8 @@ module Aws::EC2
       :additional_info,
       :network_interfaces,
       :iam_instance_profile,
-      :ebs_optimized)
+      :ebs_optimized,
+      :tag_specifications)
       include Aws::Structure
     end
 
@@ -22689,6 +22810,32 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a storage location in Amazon S3.
+    #
+    # @note When making an API call, you may pass StorageLocation
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "String",
+    #         key: "String",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StorageLocation AWS API Documentation
+    #
+    class StorageLocation < Struct.new(
+      :bucket,
+      :key)
+      include Aws::Structure
+    end
+
     # Describes a subnet.
     #
     # @!attribute [rw] subnet_id
@@ -22856,6 +23003,38 @@ module Aws::EC2
       :resource_type,
       :key,
       :value)
+      include Aws::Structure
+    end
+
+    # The tags to apply to a resource when the resource is being created.
+    #
+    # @note When making an API call, you may pass TagSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "customer-gateway", # accepts customer-gateway, dhcp-options, image, instance, internet-gateway, network-acl, network-interface, reserved-instances, route-table, snapshot, spot-instances-request, subnet, security-group, volume, vpc, vpn-connection, vpn-gateway
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to tag. Currently, the resource types that
+    #   support tagging on creation are `instance` and `volume`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TagSpecification AWS API Documentation
+    #
+    class TagSpecification < Struct.new(
+      :resource_type,
+      :tags)
       include Aws::Structure
     end
 

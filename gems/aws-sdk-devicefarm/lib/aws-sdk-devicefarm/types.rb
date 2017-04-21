@@ -24,12 +24,38 @@ module Aws::DeviceFarm
     #   want to purchase.
     #   @return [Hash<String,Integer>]
     #
+    # @!attribute [rw] max_job_timeout_minutes
+    #   The maximum number of minutes a test run will execute before it
+    #   times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] trial_minutes
+    #   Information about an AWS account's usage of free trial device
+    #   minutes.
+    #   @return [Types::TrialMinutes]
+    #
+    # @!attribute [rw] max_slots
+    #   The maximum number of device slots that the AWS account can
+    #   purchase. Each maximum is expressed as an `offering-id:number` pair,
+    #   where the `offering-id` represents one of the IDs returned by the
+    #   `ListOfferings` command.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] default_job_timeout_minutes
+    #   The default number of minutes (at the account level) a test run will
+    #   execute before it times out. Default value is 60 minutes.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
       :aws_account_number,
       :unmetered_devices,
-      :unmetered_remote_access_devices)
+      :unmetered_remote_access_devices,
+      :max_job_timeout_minutes,
+      :trial_minutes,
+      :max_slots,
+      :default_job_timeout_minutes)
       include Aws::Structure
     end
 
@@ -199,8 +225,8 @@ module Aws::DeviceFarm
     #         description: "Message",
     #         rules: [ # required
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
-    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
+    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #             value: "String",
     #           },
     #         ],
@@ -245,6 +271,112 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         project_arn: "AmazonResourceName", # required
+    #         name: "Name", # required
+    #         description: "Message",
+    #         type: "CURATED", # accepts CURATED, PRIVATE
+    #         uplink_bandwidth_bits: 1,
+    #         downlink_bandwidth_bits: 1,
+    #         uplink_delay_ms: 1,
+    #         downlink_delay_ms: 1,
+    #         uplink_jitter_ms: 1,
+    #         downlink_jitter_ms: 1,
+    #         uplink_loss_percent: 1,
+    #         downlink_loss_percent: 1,
+    #       }
+    #
+    # @!attribute [rw] project_arn
+    #   The Amazon Resource Name (ARN) of the project for which you want to
+    #   create a network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name you wish to specify for the new network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of network profile you wish to create. Valid values are
+    #   listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] uplink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as
+    #   an integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as
+    #   an integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_loss_percent
+    #   Proportion of transmitted packets that fail to arrive from 0 to 100
+    #   percent.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_loss_percent
+    #   Proportion of received packets that fail to arrive from 0 to 100
+    #   percent.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfileRequest AWS API Documentation
+    #
+    class CreateNetworkProfileRequest < Struct.new(
+      :project_arn,
+      :name,
+      :description,
+      :type,
+      :uplink_bandwidth_bits,
+      :downlink_bandwidth_bits,
+      :uplink_delay_ms,
+      :downlink_delay_ms,
+      :uplink_jitter_ms,
+      :downlink_jitter_ms,
+      :uplink_loss_percent,
+      :downlink_loss_percent)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profile
+    #   The network profile that is returned by the create network profile
+    #   request.
+    #   @return [Types::NetworkProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfileResult AWS API Documentation
+    #
+    class CreateNetworkProfileResult < Struct.new(
+      :network_profile)
+      include Aws::Structure
+    end
+
     # Represents a request to the create project operation.
     #
     # @note When making an API call, you may pass CreateProjectRequest
@@ -252,16 +384,24 @@ module Aws::DeviceFarm
     #
     #       {
     #         name: "Name", # required
+    #         default_job_timeout_minutes: 1,
     #       }
     #
     # @!attribute [rw] name
     #   The project's name.
     #   @return [String]
     #
+    # @!attribute [rw] default_job_timeout_minutes
+    #   Sets the execution timeout value (in minutes) for a project. All
+    #   test runs in this project will use the specified execution timeout
+    #   value unless overridden when scheduling a run.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectRequest AWS API Documentation
     #
     class CreateProjectRequest < Struct.new(
-      :name)
+      :name,
+      :default_job_timeout_minutes)
       include Aws::Structure
     end
 
@@ -483,6 +623,29 @@ module Aws::DeviceFarm
     #
     class DeleteDevicePoolResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network profile you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfileRequest AWS API Documentation
+    #
+    class DeleteNetworkProfileRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfileResult AWS API Documentation
+    #
+    class DeleteNetworkProfileResult < Aws::EmptyStructure; end
+
     # Represents a request to the delete project operation.
     #
     # @note When making an API call, you may pass DeleteProjectRequest
@@ -638,8 +801,7 @@ module Aws::DeviceFarm
     #   @return [Types::CPU]
     #
     # @!attribute [rw] resolution
-    #   Represents the screen resolution of a device in height and width,
-    #   expressed in pixels.
+    #   The resolution of the device.
     #   @return [Types::Resolution]
     #
     # @!attribute [rw] heap_size
@@ -771,7 +933,8 @@ module Aws::DeviceFarm
     # Represents a device pool compatibility result.
     #
     # @!attribute [rw] device
-    #   Represents a device type that an app is tested against.
+    #   The device (phone or tablet) that you wish to return information
+    #   about.
     #   @return [Types::Device]
     #
     # @!attribute [rw] compatible
@@ -791,6 +954,41 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Represents configuration information about a test run, such as the
+    # execution timeout (in minutes).
+    #
+    # @note When making an API call, you may pass ExecutionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         job_timeout_minutes: 1,
+    #         accounts_cleanup: false,
+    #         app_packages_cleanup: false,
+    #       }
+    #
+    # @!attribute [rw] job_timeout_minutes
+    #   The number of minutes a test run will execute before it times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] accounts_cleanup
+    #   True if account cleanup is enabled at the beginning of the test;
+    #   otherwise, false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] app_packages_cleanup
+    #   True if app package cleanup is enabled at the beginning of the test;
+    #   otherwise, false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ExecutionConfiguration AWS API Documentation
+    #
+    class ExecutionConfiguration < Struct.new(
+      :job_timeout_minutes,
+      :accounts_cleanup,
+      :app_packages_cleanup)
+      include Aws::Structure
+    end
+
     # Represents the request sent to retrieve the account settings.
     #
     # @api private
@@ -803,7 +1001,7 @@ module Aws::DeviceFarm
     # `GetAccountSettings` request.
     #
     # @!attribute [rw] account_settings
-    #   A container for account-level settings within AWS Device Farm.
+    #   The account settings.
     #   @return [Types::AccountSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetAccountSettingsResult AWS API Documentation
@@ -822,6 +1020,14 @@ module Aws::DeviceFarm
     #         device_pool_arn: "AmazonResourceName", # required
     #         app_arn: "AmazonResourceName",
     #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #         test: {
+    #           type: "BUILTIN_FUZZ", # required, accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
+    #           test_package_arn: "AmazonResourceName",
+    #           filter: "Filter",
+    #           parameters: {
+    #             "String" => "String",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] device_pool_arn
@@ -870,12 +1076,18 @@ module Aws::DeviceFarm
     #   * XCTEST\_UI: The XCode UI test type.
     #   @return [String]
     #
+    # @!attribute [rw] test
+    #   Information about the uploaded test to be run against the device
+    #   pool.
+    #   @return [Types::ScheduleRunTest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityRequest AWS API Documentation
     #
     class GetDevicePoolCompatibilityRequest < Struct.new(
       :device_pool_arn,
       :app_arn,
-      :test_type)
+      :test_type,
+      :test)
       include Aws::Structure
     end
 
@@ -920,7 +1132,7 @@ module Aws::DeviceFarm
     # Represents the result of a get device pool request.
     #
     # @!attribute [rw] device_pool
-    #   Represents a collection of device types.
+    #   An object containing information about the requested device pool.
     #   @return [Types::DevicePool]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolResult AWS API Documentation
@@ -953,7 +1165,7 @@ module Aws::DeviceFarm
     # Represents the result of a get device request.
     #
     # @!attribute [rw] device
-    #   Represents a device type that an app is tested against.
+    #   An object containing information about the requested device.
     #   @return [Types::Device]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceResult AWS API Documentation
@@ -986,13 +1198,43 @@ module Aws::DeviceFarm
     # Represents the result of a get job request.
     #
     # @!attribute [rw] job
-    #   Represents a device.
+    #   An object containing information about the requested job.
     #   @return [Types::Job]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJobResult AWS API Documentation
     #
     class GetJobResult < Struct.new(
       :job)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network profile you want to
+    #   return information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfileRequest AWS API Documentation
+    #
+    class GetNetworkProfileRequest < Struct.new(
+      :arn)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profile
+    #   The network profile.
+    #   @return [Types::NetworkProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfileResult AWS API Documentation
+    #
+    class GetNetworkProfileResult < Struct.new(
+      :network_profile)
       include Aws::Structure
     end
 
@@ -1067,8 +1309,7 @@ module Aws::DeviceFarm
     # Represents the result of a get project request.
     #
     # @!attribute [rw] project
-    #   Represents an operating-system neutral workspace for running and
-    #   managing tests.
+    #   The project you wish to get information about.
     #   @return [Types::Project]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProjectResult AWS API Documentation
@@ -1138,8 +1379,7 @@ module Aws::DeviceFarm
     # Represents the result of a get run request.
     #
     # @!attribute [rw] run
-    #   Represents an app on a set of devices with a specific test and
-    #   configuration.
+    #   The run you wish to get results from.
     #   @return [Types::Run]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRunResult AWS API Documentation
@@ -1172,7 +1412,7 @@ module Aws::DeviceFarm
     # Represents the result of a get suite request.
     #
     # @!attribute [rw] suite
-    #   Represents a collection of one or more tests.
+    #   A collection of one or more tests.
     #   @return [Types::Suite]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuiteResult AWS API Documentation
@@ -1205,7 +1445,7 @@ module Aws::DeviceFarm
     # Represents the result of a get test request.
     #
     # @!attribute [rw] test
-    #   Represents a condition that is evaluated.
+    #   A test condition that is evaluated.
     #   @return [Types::Test]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestResult AWS API Documentation
@@ -1267,6 +1507,11 @@ module Aws::DeviceFarm
     #   * MANUFACTURER: The manufacturer.
     #
     #   * PLATFORM: The platform (for example, Android or iOS).
+    #
+    #   * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
+    #     access.
+    #
+    #   * APPIUM\_VERSION: The Appium version for the test.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/IncompatibilityMessage AWS API Documentation
@@ -1311,8 +1556,7 @@ module Aws::DeviceFarm
     # request to install to a remote access session.
     #
     # @!attribute [rw] app_upload
-    #   An app or a set of one or more tests to upload or that have been
-    #   uploaded.
+    #   An app to upload or that has been uploaded.
     #   @return [Types::Upload]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSessionResult AWS API Documentation
@@ -1434,7 +1678,7 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] device
-    #   Represents a device type that an app is tested against.
+    #   The device (phone or tablet).
     #   @return [Types::Device]
     #
     # @!attribute [rw] device_minutes
@@ -1679,6 +1923,95 @@ module Aws::DeviceFarm
     #
     class ListJobsResult < Struct.new(
       :jobs,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListNetworkProfilesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #         type: "CURATED", # accepts CURATED, PRIVATE
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project for which you want to
+    #   list network profiles.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of network profile you wish to return information about.
+    #   Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfilesRequest AWS API Documentation
+    #
+    class ListNetworkProfilesRequest < Struct.new(
+      :arn,
+      :type,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profiles
+    #   A list of the available network profiles.
+    #   @return [Array<Types::NetworkProfile>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfilesResult AWS API Documentation
+    #
+    class ListNetworkProfilesResult < Struct.new(
+      :network_profiles,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListOfferingPromotionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   An identifier that was returned from the previous call to this
+    #   operation, which can be used to return the next set of items in the
+    #   list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotionsRequest AWS API Documentation
+    #
+    class ListOfferingPromotionsRequest < Struct.new(
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] offering_promotions
+    #   Information about the offering promotions.
+    #   @return [Array<Types::OfferingPromotion>]
+    #
+    # @!attribute [rw] next_token
+    #   An identifier to be used in the next call to this operation, to
+    #   return the next set of items in the list.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotionsResult AWS API Documentation
+    #
+    class ListOfferingPromotionsResult < Struct.new(
+      :offering_promotions,
       :next_token)
       include Aws::Structure
     end
@@ -2233,6 +2566,83 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # An array of settings that describes characteristics of a network
+    # profile.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the network profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of network profile. Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] uplink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as
+    #   an integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as
+    #   an integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_loss_percent
+    #   Proportion of transmitted packets that fail to arrive from 0 to 100
+    #   percent.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_loss_percent
+    #   Proportion of received packets that fail to arrive from 0 to 100
+    #   percent.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/NetworkProfile AWS API Documentation
+    #
+    class NetworkProfile < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :type,
+      :uplink_bandwidth_bits,
+      :downlink_bandwidth_bits,
+      :uplink_delay_ms,
+      :downlink_delay_ms,
+      :uplink_jitter_ms,
+      :downlink_jitter_ms,
+      :uplink_loss_percent,
+      :downlink_loss_percent)
+      include Aws::Structure
+    end
+
     # Represents the metadata of a device offering.
     #
     # @!attribute [rw] id
@@ -2263,6 +2673,24 @@ module Aws::DeviceFarm
       :type,
       :platform,
       :recurring_charges)
+      include Aws::Structure
+    end
+
+    # Represents information about an offering promotion.
+    #
+    # @!attribute [rw] id
+    #   The ID of the offering promotion.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A string describing the offering promotion.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingPromotion AWS API Documentation
+    #
+    class OfferingPromotion < Struct.new(
+      :id,
+      :description)
       include Aws::Structure
     end
 
@@ -2304,6 +2732,10 @@ module Aws::DeviceFarm
     #   The transaction ID of the offering transaction.
     #   @return [String]
     #
+    # @!attribute [rw] offering_promotion_id
+    #   The ID that corresponds to a device offering promotion.
+    #   @return [String]
+    #
     # @!attribute [rw] created_on
     #   The date on which an offering transaction was created.
     #   @return [Time]
@@ -2317,6 +2749,7 @@ module Aws::DeviceFarm
     class OfferingTransaction < Struct.new(
       :offering_status,
       :transaction_id,
+      :offering_promotion_id,
       :created_on,
       :cost)
       include Aws::Structure
@@ -2410,6 +2843,11 @@ module Aws::DeviceFarm
     #   The project's name.
     #   @return [String]
     #
+    # @!attribute [rw] default_job_timeout_minutes
+    #   The default number of minutes (at the project level) a test run will
+    #   execute before it times out. Default value is 60 minutes.
+    #   @return [Integer]
+    #
     # @!attribute [rw] created
     #   When the project was created.
     #   @return [Time]
@@ -2419,6 +2857,7 @@ module Aws::DeviceFarm
     class Project < Struct.new(
       :arn,
       :name,
+      :default_job_timeout_minutes,
       :created)
       include Aws::Structure
     end
@@ -2431,6 +2870,7 @@ module Aws::DeviceFarm
     #       {
     #         offering_id: "OfferingIdentifier",
     #         quantity: 1,
+    #         offering_promotion_id: "OfferingPromotionIdentifier",
     #       }
     #
     # @!attribute [rw] offering_id
@@ -2442,11 +2882,16 @@ module Aws::DeviceFarm
     #   request.
     #   @return [Integer]
     #
+    # @!attribute [rw] offering_promotion_id
+    #   The ID of the offering promotion to be applied to the purchase.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOfferingRequest AWS API Documentation
     #
     class PurchaseOfferingRequest < Struct.new(
       :offering_id,
-      :quantity)
+      :quantity,
+      :offering_promotion_id)
       include Aws::Structure
     end
 
@@ -2593,7 +3038,7 @@ module Aws::DeviceFarm
     #   @return [Time]
     #
     # @!attribute [rw] device
-    #   Represents a device type that an app is tested against.
+    #   The device (phone or tablet) used in the remote access session.
     #   @return [Types::Device]
     #
     # @!attribute [rw] billing_method
@@ -2607,9 +3052,8 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] device_minutes
-    #   Represents the total (metered or unmetered) minutes used by the
-    #   resource to run tests. Contains the sum of minutes consumed by all
-    #   children.
+    #   The number of minutes a device is used in a remote access sesssion
+    #   (including setup and teardown minutes).
     #   @return [Types::DeviceMinutes]
     #
     # @!attribute [rw] endpoint
@@ -2698,8 +3142,8 @@ module Aws::DeviceFarm
     #   data as a hash:
     #
     #       {
-    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
-    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
+    #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #         value: "String",
     #       }
     #
@@ -2716,6 +3160,11 @@ module Aws::DeviceFarm
     #   * MANUFACTURER: The manufacturer.
     #
     #   * PLATFORM: The platform (for example, Android or iOS).
+    #
+    #   * REMOTE\_ACCESS\_ENABLED: Whether the device is enabled for remote
+    #     access.
+    #
+    #   * APPIUM\_VERSION: The Appium version for the test.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -2730,6 +3179,8 @@ module Aws::DeviceFarm
     #   * LESS\_THAN: The less-than operator.
     #
     #   * NOT\_IN: The not-in operator.
+    #
+    #   * CONTAINS: The contains operator.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -2886,6 +3337,10 @@ module Aws::DeviceFarm
     #   run.
     #   @return [Types::DeviceMinutes]
     #
+    # @!attribute [rw] network_profile
+    #   The network profile being used for a test run.
+    #   @return [Types::NetworkProfile]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Run AWS API Documentation
     #
     class Run < Struct.new(
@@ -2903,7 +3358,8 @@ module Aws::DeviceFarm
       :total_jobs,
       :completed_jobs,
       :billing_method,
-      :device_minutes)
+      :device_minutes,
+      :network_profile)
       include Aws::Structure
     end
 
@@ -3077,6 +3533,11 @@ module Aws::DeviceFarm
     #           auxiliary_apps: ["AmazonResourceName"],
     #           billing_method: "METERED", # accepts METERED, UNMETERED
     #         },
+    #         execution_configuration: {
+    #           job_timeout_minutes: 1,
+    #           accounts_cleanup: false,
+    #           app_packages_cleanup: false,
+    #         },
     #       }
     #
     # @!attribute [rw] project_arn
@@ -3103,6 +3564,11 @@ module Aws::DeviceFarm
     #   Information about the settings for the run to be scheduled.
     #   @return [Types::ScheduleRunConfiguration]
     #
+    # @!attribute [rw] execution_configuration
+    #   Specifies configuration information about a test run, such as the
+    #   execution timeout (in minutes).
+    #   @return [Types::ExecutionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunRequest AWS API Documentation
     #
     class ScheduleRunRequest < Struct.new(
@@ -3111,7 +3577,8 @@ module Aws::DeviceFarm
       :device_pool_arn,
       :name,
       :test,
-      :configuration)
+      :configuration,
+      :execution_configuration)
       include Aws::Structure
     end
 
@@ -3188,8 +3655,85 @@ module Aws::DeviceFarm
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   The test's parameters, such as test framework parameters and
-    #   fixture settings.
+    #   The test's parameters, such as the following test framework
+    #   parameters and fixture settings:
+    #
+    #   For Calabash tests:
+    #
+    #   * profile: A cucumber profile, for example, "my\_profile\_name".
+    #
+    #   * tags: You can limit execution to features or scenarios that have
+    #     (or don't have) certain tags, for example, "@smoke" or
+    #     "@smoke,~@wip".
+    #
+    #   For Appium tests (all types):
+    #
+    #   * appium\_version: The Appium version. Currently supported values
+    #     are "1.4.16", "1.6.3", "latest", and "default".
+    #
+    #     * “latest” will run the latest Appium version supported by Device
+    #       Farm (1.6.3).
+    #
+    #     * For “default”, Device Farm will choose a compatible version of
+    #       Appium for the device. The current behavior is to run 1.4.16 on
+    #       Android devices and iOS 9 and earlier, 1.6.3 for iOS 10 and
+    #       later.
+    #
+    #     * This behavior is subject to change.
+    #
+    #   For Fuzz tests (Android only):
+    #
+    #   * event\_count: The number of events, between 1 and 10000, that the
+    #     UI fuzz test should perform.
+    #
+    #   * throttle: The time, in ms, between 0 and 1000, that the UI fuzz
+    #     test should wait between events.
+    #
+    #   * seed: A seed to use for randomizing the UI fuzz test. Using the
+    #     same seed value between tests ensures identical event sequences.
+    #
+    #   For Explorer tests:
+    #
+    #   * username: A username to use if the Explorer encounters a login
+    #     form. If not supplied, no username will be inserted.
+    #
+    #   * password: A password to use if the Explorer encounters a login
+    #     form. If not supplied, no password will be inserted.
+    #
+    #   For Instrumentation:
+    #
+    #   * filter: A test filter string. Examples:
+    #
+    #     * Running a single test case: "com.android.abc.Test1"
+    #
+    #     * Running a single test: "com.android.abc.Test1#smoke"
+    #
+    #     * Running multiple tests:
+    #       "com.android.abc.Test1,com.android.abc.Test2"
+    #
+    #   For XCTest and XCTestUI:
+    #
+    #   * filter: A test filter string. Examples:
+    #
+    #     * Running a single test class: "LoginTests"
+    #
+    #     * Running a multiple test classes: "LoginTests,SmokeTests"
+    #
+    #     * Running a single test: "LoginTests/testValid"
+    #
+    #     * Running multiple tests:
+    #       "LoginTests/testValid,LoginTests/testInvalid"
+    #
+    #   For UIAutomator:
+    #
+    #   * filter: A test filter string. Examples:
+    #
+    #     * Running a single test case: "com.android.abc.Test1"
+    #
+    #     * Running a single test: "com.android.abc.Test1#smoke"
+    #
+    #     * Running multiple tests:
+    #       "com.android.abc.Test1,com.android.abc.Test2"
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunTest AWS API Documentation
@@ -3262,8 +3806,7 @@ module Aws::DeviceFarm
     # Represents the results of your stop run attempt.
     #
     # @!attribute [rw] run
-    #   Represents an app on a set of devices with a specific test and
-    #   configuration.
+    #   The run that was stopped.
     #   @return [Types::Run]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRunResult AWS API Documentation
@@ -3539,6 +4082,26 @@ module Aws::DeviceFarm
       include Aws::Structure
     end
 
+    # Represents information about free trial device minutes for an AWS
+    # account.
+    #
+    # @!attribute [rw] total
+    #   The total number of free trial minutes that the account started
+    #   with.
+    #   @return [Float]
+    #
+    # @!attribute [rw] remaining
+    #   The number of free trial minutes remaining in the account.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TrialMinutes AWS API Documentation
+    #
+    class TrialMinutes < Struct.new(
+      :total,
+      :remaining)
+      include Aws::Structure
+    end
+
     # A collection of one or more problems, grouped by their result.
     #
     # @!attribute [rw] message
@@ -3568,8 +4131,8 @@ module Aws::DeviceFarm
     #         description: "Message",
     #         rules: [
     #           {
-    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
-    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
+    #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED, APPIUM_VERSION
+    #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN, CONTAINS
     #             value: "String",
     #           },
     #         ],
@@ -3608,13 +4171,120 @@ module Aws::DeviceFarm
     # Represents the result of an update device pool request.
     #
     # @!attribute [rw] device_pool
-    #   Represents a collection of device types.
+    #   The device pool you just updated.
     #   @return [Types::DevicePool]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolResult AWS API Documentation
     #
     class UpdateDevicePoolResult < Struct.new(
       :device_pool)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateNetworkProfileRequest
+    #   data as a hash:
+    #
+    #       {
+    #         arn: "AmazonResourceName", # required
+    #         name: "Name",
+    #         description: "Message",
+    #         type: "CURATED", # accepts CURATED, PRIVATE
+    #         uplink_bandwidth_bits: 1,
+    #         downlink_bandwidth_bits: 1,
+    #         uplink_delay_ms: 1,
+    #         downlink_delay_ms: 1,
+    #         uplink_jitter_ms: 1,
+    #         downlink_jitter_ms: 1,
+    #         uplink_loss_percent: 1,
+    #         downlink_loss_percent: 1,
+    #       }
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the project that you wish to
+    #   update network profile settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the network profile about which you are returning
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The descriptoin of the network profile about which you are returning
+    #   information.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of network profile you wish to return information about.
+    #   Valid values are listed below.
+    #   @return [String]
+    #
+    # @!attribute [rw] uplink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_bandwidth_bits
+    #   The data throughput rate in bits per second, as an integer from 0 to
+    #   104857600.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_delay_ms
+    #   Delay time for all packets to destination in milliseconds as an
+    #   integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as
+    #   an integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_jitter_ms
+    #   Time variation in the delay of received packets in milliseconds as
+    #   an integer from 0 to 2000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] uplink_loss_percent
+    #   Proportion of transmitted packets that fail to arrive from 0 to 100
+    #   percent.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] downlink_loss_percent
+    #   Proportion of received packets that fail to arrive from 0 to 100
+    #   percent.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfileRequest AWS API Documentation
+    #
+    class UpdateNetworkProfileRequest < Struct.new(
+      :arn,
+      :name,
+      :description,
+      :type,
+      :uplink_bandwidth_bits,
+      :downlink_bandwidth_bits,
+      :uplink_delay_ms,
+      :downlink_delay_ms,
+      :uplink_jitter_ms,
+      :downlink_jitter_ms,
+      :uplink_loss_percent,
+      :downlink_loss_percent)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] network_profile
+    #   A list of the available network profiles.
+    #   @return [Types::NetworkProfile]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfileResult AWS API Documentation
+    #
+    class UpdateNetworkProfileResult < Struct.new(
+      :network_profile)
       include Aws::Structure
     end
 
@@ -3626,6 +4296,7 @@ module Aws::DeviceFarm
     #       {
     #         arn: "AmazonResourceName", # required
     #         name: "Name",
+    #         default_job_timeout_minutes: 1,
     #       }
     #
     # @!attribute [rw] arn
@@ -3638,19 +4309,24 @@ module Aws::DeviceFarm
     #   updating.
     #   @return [String]
     #
+    # @!attribute [rw] default_job_timeout_minutes
+    #   The number of minutes a test run in the project will execute before
+    #   it times out.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectRequest AWS API Documentation
     #
     class UpdateProjectRequest < Struct.new(
       :arn,
-      :name)
+      :name,
+      :default_job_timeout_minutes)
       include Aws::Structure
     end
 
     # Represents the result of an update project request.
     #
     # @!attribute [rw] project
-    #   Represents an operating-system neutral workspace for running and
-    #   managing tests.
+    #   The project you wish to update.
     #   @return [Types::Project]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectResult AWS API Documentation

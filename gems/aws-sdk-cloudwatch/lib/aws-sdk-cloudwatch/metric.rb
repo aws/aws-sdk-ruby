@@ -103,16 +103,20 @@ module Aws::CloudWatch
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Dimension>] :dimensions
-    #   The dimensions. CloudWatch treats each unique combination of
-    #   dimensions as a separate metric. You can't retrieve statistics using
-    #   combinations of dimensions that were not specially published. You must
-    #   specify the same dimensions that were used when the metrics were
-    #   created. For an example, see [Dimension Combinations][1] in the
-    #   *Amazon CloudWatch User Guide*.
+    #   The dimensions. If the metric contains multiple dimensions, you must
+    #   include a value for each dimension. CloudWatch treats each unique
+    #   combination of dimensions as a separate metric. You can't retrieve
+    #   statistics using combinations of dimensions that were not specially
+    #   published. You must specify the same dimensions that were used when
+    #   the metrics were created. For an example, see [Dimension
+    #   Combinations][1] in the *Amazon CloudWatch User Guide*. For more
+    #   information on specifying dimensions, see [Publishing Metrics][2] in
+    #   the *Amazon CloudWatch User Guide*.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
+    #   [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
     # @option options [required, Time,DateTime,Date,Integer,String] :start_time
     #   The time stamp that determines the first data point to return. Note
     #   that start times are evaluated relative to the time that CloudWatch
@@ -196,6 +200,8 @@ module Aws::CloudWatch
     #     evaluation_periods: 1, # required
     #     threshold: 1.0, # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+    #     treat_missing_data: "TreatMissingData",
+    #     evaluate_low_sample_count_percentile: "EvaluateLowSampleCountPercentile",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :alarm_name
@@ -281,6 +287,31 @@ module Aws::CloudWatch
     #   The arithmetic operation to use when comparing the specified statistic
     #   and threshold. The specified statistic value is used as the first
     #   operand.
+    # @option options [String] :treat_missing_data
+    #   Sets how this alarm is to handle missing data points. If
+    #   `TreatMissingData` is omitted, the default behavior of `missing` is
+    #   used. For more information, see [Configuring How CloudWatch Alarms
+    #   Treats Missing Data][1].
+    #
+    #   Valid Values: `breaching | notBreaching | ignore | missing`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
+    # @option options [String] :evaluate_low_sample_count_percentile
+    #   Used only for alarms based on percentiles. If you specify `ignore`,
+    #   the alarm state will not change during periods with too few data
+    #   points to be statistically significant. If you specify `evaluate` or
+    #   omit this parameter, the alarm will always be evaluated and possibly
+    #   change state no matter how many data points are available. For more
+    #   information, see [Percentile-Based CloudWatch Alarms and Low Data
+    #   Samples][1].
+    #
+    #   Valid Values: `evaluate | ignore`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#percentiles-with-low-samples
     # @return [Alarm]
     def put_alarm(options = {})
       options = options.merge(

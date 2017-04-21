@@ -13,8 +13,10 @@ module Aws::DeviceFarm
 
     AWSAccountNumber = Shapes::StringShape.new(name: 'AWSAccountNumber')
     AccountSettings = Shapes::StructureShape.new(name: 'AccountSettings')
+    AccountsCleanup = Shapes::BooleanShape.new(name: 'AccountsCleanup')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AmazonResourceNames = Shapes::ListShape.new(name: 'AmazonResourceNames')
+    AppPackagesCleanup = Shapes::BooleanShape.new(name: 'AppPackagesCleanup')
     ArgumentException = Shapes::StructureShape.new(name: 'ArgumentException')
     Artifact = Shapes::StructureShape.new(name: 'Artifact')
     ArtifactCategory = Shapes::StringShape.new(name: 'ArtifactCategory')
@@ -27,6 +29,8 @@ module Aws::DeviceFarm
     Counters = Shapes::StructureShape.new(name: 'Counters')
     CreateDevicePoolRequest = Shapes::StructureShape.new(name: 'CreateDevicePoolRequest')
     CreateDevicePoolResult = Shapes::StructureShape.new(name: 'CreateDevicePoolResult')
+    CreateNetworkProfileRequest = Shapes::StructureShape.new(name: 'CreateNetworkProfileRequest')
+    CreateNetworkProfileResult = Shapes::StructureShape.new(name: 'CreateNetworkProfileResult')
     CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
     CreateProjectResult = Shapes::StructureShape.new(name: 'CreateProjectResult')
     CreateRemoteAccessSessionConfiguration = Shapes::StructureShape.new(name: 'CreateRemoteAccessSessionConfiguration')
@@ -38,6 +42,8 @@ module Aws::DeviceFarm
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DeleteDevicePoolRequest = Shapes::StructureShape.new(name: 'DeleteDevicePoolRequest')
     DeleteDevicePoolResult = Shapes::StructureShape.new(name: 'DeleteDevicePoolResult')
+    DeleteNetworkProfileRequest = Shapes::StructureShape.new(name: 'DeleteNetworkProfileRequest')
+    DeleteNetworkProfileResult = Shapes::StructureShape.new(name: 'DeleteNetworkProfileResult')
     DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
     DeleteProjectResult = Shapes::StructureShape.new(name: 'DeleteProjectResult')
     DeleteRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'DeleteRemoteAccessSessionRequest')
@@ -58,6 +64,7 @@ module Aws::DeviceFarm
     DevicePools = Shapes::ListShape.new(name: 'DevicePools')
     Devices = Shapes::ListShape.new(name: 'Devices')
     Double = Shapes::FloatShape.new(name: 'Double')
+    ExecutionConfiguration = Shapes::StructureShape.new(name: 'ExecutionConfiguration')
     ExecutionResult = Shapes::StringShape.new(name: 'ExecutionResult')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     Filter = Shapes::StringShape.new(name: 'Filter')
@@ -71,6 +78,8 @@ module Aws::DeviceFarm
     GetDeviceResult = Shapes::StructureShape.new(name: 'GetDeviceResult')
     GetJobRequest = Shapes::StructureShape.new(name: 'GetJobRequest')
     GetJobResult = Shapes::StructureShape.new(name: 'GetJobResult')
+    GetNetworkProfileRequest = Shapes::StructureShape.new(name: 'GetNetworkProfileRequest')
+    GetNetworkProfileResult = Shapes::StructureShape.new(name: 'GetNetworkProfileResult')
     GetOfferingStatusRequest = Shapes::StructureShape.new(name: 'GetOfferingStatusRequest')
     GetOfferingStatusResult = Shapes::StructureShape.new(name: 'GetOfferingStatusResult')
     GetProjectRequest = Shapes::StructureShape.new(name: 'GetProjectRequest')
@@ -92,6 +101,7 @@ module Aws::DeviceFarm
     InstallToRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionResult')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     Job = Shapes::StructureShape.new(name: 'Job')
+    JobTimeoutMinutes = Shapes::IntegerShape.new(name: 'JobTimeoutMinutes')
     Jobs = Shapes::ListShape.new(name: 'Jobs')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListArtifactsRequest = Shapes::StructureShape.new(name: 'ListArtifactsRequest')
@@ -102,6 +112,10 @@ module Aws::DeviceFarm
     ListDevicesResult = Shapes::StructureShape.new(name: 'ListDevicesResult')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
     ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
+    ListNetworkProfilesRequest = Shapes::StructureShape.new(name: 'ListNetworkProfilesRequest')
+    ListNetworkProfilesResult = Shapes::StructureShape.new(name: 'ListNetworkProfilesResult')
+    ListOfferingPromotionsRequest = Shapes::StructureShape.new(name: 'ListOfferingPromotionsRequest')
+    ListOfferingPromotionsResult = Shapes::StructureShape.new(name: 'ListOfferingPromotionsResult')
     ListOfferingTransactionsRequest = Shapes::StructureShape.new(name: 'ListOfferingTransactionsRequest')
     ListOfferingTransactionsResult = Shapes::StructureShape.new(name: 'ListOfferingTransactionsResult')
     ListOfferingsRequest = Shapes::StructureShape.new(name: 'ListOfferingsRequest')
@@ -124,14 +138,21 @@ module Aws::DeviceFarm
     ListUploadsResult = Shapes::StructureShape.new(name: 'ListUploadsResult')
     Location = Shapes::StructureShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaxSlotMap = Shapes::MapShape.new(name: 'MaxSlotMap')
     Message = Shapes::StringShape.new(name: 'Message')
     Metadata = Shapes::StringShape.new(name: 'Metadata')
     MonetaryAmount = Shapes::StructureShape.new(name: 'MonetaryAmount')
     Name = Shapes::StringShape.new(name: 'Name')
+    NetworkProfile = Shapes::StructureShape.new(name: 'NetworkProfile')
+    NetworkProfileType = Shapes::StringShape.new(name: 'NetworkProfileType')
+    NetworkProfiles = Shapes::ListShape.new(name: 'NetworkProfiles')
     NotEligibleException = Shapes::StructureShape.new(name: 'NotEligibleException')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Offering = Shapes::StructureShape.new(name: 'Offering')
     OfferingIdentifier = Shapes::StringShape.new(name: 'OfferingIdentifier')
+    OfferingPromotion = Shapes::StructureShape.new(name: 'OfferingPromotion')
+    OfferingPromotionIdentifier = Shapes::StringShape.new(name: 'OfferingPromotionIdentifier')
+    OfferingPromotions = Shapes::ListShape.new(name: 'OfferingPromotions')
     OfferingStatus = Shapes::StructureShape.new(name: 'OfferingStatus')
     OfferingStatusMap = Shapes::MapShape.new(name: 'OfferingStatusMap')
     OfferingTransaction = Shapes::StructureShape.new(name: 'OfferingTransaction')
@@ -140,6 +161,7 @@ module Aws::DeviceFarm
     OfferingType = Shapes::StringShape.new(name: 'OfferingType')
     Offerings = Shapes::ListShape.new(name: 'Offerings')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    PercentInteger = Shapes::IntegerShape.new(name: 'PercentInteger')
     Problem = Shapes::StructureShape.new(name: 'Problem')
     ProblemDetail = Shapes::StructureShape.new(name: 'ProblemDetail')
     Problems = Shapes::ListShape.new(name: 'Problems')
@@ -182,12 +204,15 @@ module Aws::DeviceFarm
     TestType = Shapes::StringShape.new(name: 'TestType')
     Tests = Shapes::ListShape.new(name: 'Tests')
     TransactionIdentifier = Shapes::StringShape.new(name: 'TransactionIdentifier')
+    TrialMinutes = Shapes::StructureShape.new(name: 'TrialMinutes')
     URL = Shapes::StringShape.new(name: 'URL')
     UniqueProblem = Shapes::StructureShape.new(name: 'UniqueProblem')
     UniqueProblems = Shapes::ListShape.new(name: 'UniqueProblems')
     UniqueProblemsByExecutionResultMap = Shapes::MapShape.new(name: 'UniqueProblemsByExecutionResultMap')
     UpdateDevicePoolRequest = Shapes::StructureShape.new(name: 'UpdateDevicePoolRequest')
     UpdateDevicePoolResult = Shapes::StructureShape.new(name: 'UpdateDevicePoolResult')
+    UpdateNetworkProfileRequest = Shapes::StructureShape.new(name: 'UpdateNetworkProfileRequest')
+    UpdateNetworkProfileResult = Shapes::StructureShape.new(name: 'UpdateNetworkProfileResult')
     UpdateProjectRequest = Shapes::StructureShape.new(name: 'UpdateProjectRequest')
     UpdateProjectResult = Shapes::StructureShape.new(name: 'UpdateProjectResult')
     Upload = Shapes::StructureShape.new(name: 'Upload')
@@ -198,6 +223,10 @@ module Aws::DeviceFarm
     AccountSettings.add_member(:aws_account_number, Shapes::ShapeRef.new(shape: AWSAccountNumber, location_name: "awsAccountNumber"))
     AccountSettings.add_member(:unmetered_devices, Shapes::ShapeRef.new(shape: PurchasedDevicesMap, location_name: "unmeteredDevices"))
     AccountSettings.add_member(:unmetered_remote_access_devices, Shapes::ShapeRef.new(shape: PurchasedDevicesMap, location_name: "unmeteredRemoteAccessDevices"))
+    AccountSettings.add_member(:max_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "maxJobTimeoutMinutes"))
+    AccountSettings.add_member(:trial_minutes, Shapes::ShapeRef.new(shape: TrialMinutes, location_name: "trialMinutes"))
+    AccountSettings.add_member(:max_slots, Shapes::ShapeRef.new(shape: MaxSlotMap, location_name: "maxSlots"))
+    AccountSettings.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     AccountSettings.struct_class = Types::AccountSettings
 
     AmazonResourceNames.member = Shapes::ShapeRef.new(shape: AmazonResourceName)
@@ -234,7 +263,25 @@ module Aws::DeviceFarm
     CreateDevicePoolResult.add_member(:device_pool, Shapes::ShapeRef.new(shape: DevicePool, location_name: "devicePool"))
     CreateDevicePoolResult.struct_class = Types::CreateDevicePoolResult
 
+    CreateNetworkProfileRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
+    CreateNetworkProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateNetworkProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    CreateNetworkProfileRequest.add_member(:type, Shapes::ShapeRef.new(shape: NetworkProfileType, location_name: "type"))
+    CreateNetworkProfileRequest.add_member(:uplink_bandwidth_bits, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkBandwidthBits"))
+    CreateNetworkProfileRequest.add_member(:downlink_bandwidth_bits, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkBandwidthBits"))
+    CreateNetworkProfileRequest.add_member(:uplink_delay_ms, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkDelayMs"))
+    CreateNetworkProfileRequest.add_member(:downlink_delay_ms, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkDelayMs"))
+    CreateNetworkProfileRequest.add_member(:uplink_jitter_ms, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkJitterMs"))
+    CreateNetworkProfileRequest.add_member(:downlink_jitter_ms, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkJitterMs"))
+    CreateNetworkProfileRequest.add_member(:uplink_loss_percent, Shapes::ShapeRef.new(shape: PercentInteger, location_name: "uplinkLossPercent"))
+    CreateNetworkProfileRequest.add_member(:downlink_loss_percent, Shapes::ShapeRef.new(shape: PercentInteger, location_name: "downlinkLossPercent"))
+    CreateNetworkProfileRequest.struct_class = Types::CreateNetworkProfileRequest
+
+    CreateNetworkProfileResult.add_member(:network_profile, Shapes::ShapeRef.new(shape: NetworkProfile, location_name: "networkProfile"))
+    CreateNetworkProfileResult.struct_class = Types::CreateNetworkProfileResult
+
     CreateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    CreateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     CreateProjectRequest.struct_class = Types::CreateProjectRequest
 
     CreateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -265,6 +312,11 @@ module Aws::DeviceFarm
     DeleteDevicePoolRequest.struct_class = Types::DeleteDevicePoolRequest
 
     DeleteDevicePoolResult.struct_class = Types::DeleteDevicePoolResult
+
+    DeleteNetworkProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    DeleteNetworkProfileRequest.struct_class = Types::DeleteNetworkProfileRequest
+
+    DeleteNetworkProfileResult.struct_class = Types::DeleteNetworkProfileResult
 
     DeleteProjectRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
@@ -328,6 +380,11 @@ module Aws::DeviceFarm
 
     Devices.member = Shapes::ShapeRef.new(shape: Device)
 
+    ExecutionConfiguration.add_member(:job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "jobTimeoutMinutes"))
+    ExecutionConfiguration.add_member(:accounts_cleanup, Shapes::ShapeRef.new(shape: AccountsCleanup, location_name: "accountsCleanup"))
+    ExecutionConfiguration.add_member(:app_packages_cleanup, Shapes::ShapeRef.new(shape: AppPackagesCleanup, location_name: "appPackagesCleanup"))
+    ExecutionConfiguration.struct_class = Types::ExecutionConfiguration
+
     GetAccountSettingsRequest.struct_class = Types::GetAccountSettingsRequest
 
     GetAccountSettingsResult.add_member(:account_settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "accountSettings"))
@@ -336,6 +393,7 @@ module Aws::DeviceFarm
     GetDevicePoolCompatibilityRequest.add_member(:device_pool_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "devicePoolArn"))
     GetDevicePoolCompatibilityRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "appArn"))
     GetDevicePoolCompatibilityRequest.add_member(:test_type, Shapes::ShapeRef.new(shape: TestType, location_name: "testType"))
+    GetDevicePoolCompatibilityRequest.add_member(:test, Shapes::ShapeRef.new(shape: ScheduleRunTest, location_name: "test"))
     GetDevicePoolCompatibilityRequest.struct_class = Types::GetDevicePoolCompatibilityRequest
 
     GetDevicePoolCompatibilityResult.add_member(:compatible_devices, Shapes::ShapeRef.new(shape: DevicePoolCompatibilityResults, location_name: "compatibleDevices"))
@@ -359,6 +417,12 @@ module Aws::DeviceFarm
 
     GetJobResult.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "job"))
     GetJobResult.struct_class = Types::GetJobResult
+
+    GetNetworkProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    GetNetworkProfileRequest.struct_class = Types::GetNetworkProfileRequest
+
+    GetNetworkProfileResult.add_member(:network_profile, Shapes::ShapeRef.new(shape: NetworkProfile, location_name: "networkProfile"))
+    GetNetworkProfileResult.struct_class = Types::GetNetworkProfileResult
 
     GetOfferingStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     GetOfferingStatusRequest.struct_class = Types::GetOfferingStatusRequest
@@ -467,6 +531,22 @@ module Aws::DeviceFarm
     ListJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListJobsResult.struct_class = Types::ListJobsResult
 
+    ListNetworkProfilesRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    ListNetworkProfilesRequest.add_member(:type, Shapes::ShapeRef.new(shape: NetworkProfileType, location_name: "type"))
+    ListNetworkProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListNetworkProfilesRequest.struct_class = Types::ListNetworkProfilesRequest
+
+    ListNetworkProfilesResult.add_member(:network_profiles, Shapes::ShapeRef.new(shape: NetworkProfiles, location_name: "networkProfiles"))
+    ListNetworkProfilesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListNetworkProfilesResult.struct_class = Types::ListNetworkProfilesResult
+
+    ListOfferingPromotionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListOfferingPromotionsRequest.struct_class = Types::ListOfferingPromotionsRequest
+
+    ListOfferingPromotionsResult.add_member(:offering_promotions, Shapes::ShapeRef.new(shape: OfferingPromotions, location_name: "offeringPromotions"))
+    ListOfferingPromotionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListOfferingPromotionsResult.struct_class = Types::ListOfferingPromotionsResult
+
     ListOfferingTransactionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListOfferingTransactionsRequest.struct_class = Types::ListOfferingTransactionsRequest
 
@@ -549,9 +629,28 @@ module Aws::DeviceFarm
     Location.add_member(:longitude, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "longitude"))
     Location.struct_class = Types::Location
 
+    MaxSlotMap.key = Shapes::ShapeRef.new(shape: String)
+    MaxSlotMap.value = Shapes::ShapeRef.new(shape: Integer)
+
     MonetaryAmount.add_member(:amount, Shapes::ShapeRef.new(shape: Double, location_name: "amount"))
     MonetaryAmount.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     MonetaryAmount.struct_class = Types::MonetaryAmount
+
+    NetworkProfile.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
+    NetworkProfile.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    NetworkProfile.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    NetworkProfile.add_member(:type, Shapes::ShapeRef.new(shape: NetworkProfileType, location_name: "type"))
+    NetworkProfile.add_member(:uplink_bandwidth_bits, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkBandwidthBits"))
+    NetworkProfile.add_member(:downlink_bandwidth_bits, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkBandwidthBits"))
+    NetworkProfile.add_member(:uplink_delay_ms, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkDelayMs"))
+    NetworkProfile.add_member(:downlink_delay_ms, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkDelayMs"))
+    NetworkProfile.add_member(:uplink_jitter_ms, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkJitterMs"))
+    NetworkProfile.add_member(:downlink_jitter_ms, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkJitterMs"))
+    NetworkProfile.add_member(:uplink_loss_percent, Shapes::ShapeRef.new(shape: PercentInteger, location_name: "uplinkLossPercent"))
+    NetworkProfile.add_member(:downlink_loss_percent, Shapes::ShapeRef.new(shape: PercentInteger, location_name: "downlinkLossPercent"))
+    NetworkProfile.struct_class = Types::NetworkProfile
+
+    NetworkProfiles.member = Shapes::ShapeRef.new(shape: NetworkProfile)
 
     Offering.add_member(:id, Shapes::ShapeRef.new(shape: OfferingIdentifier, location_name: "id"))
     Offering.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
@@ -559,6 +658,12 @@ module Aws::DeviceFarm
     Offering.add_member(:platform, Shapes::ShapeRef.new(shape: DevicePlatform, location_name: "platform"))
     Offering.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringCharges, location_name: "recurringCharges"))
     Offering.struct_class = Types::Offering
+
+    OfferingPromotion.add_member(:id, Shapes::ShapeRef.new(shape: OfferingPromotionIdentifier, location_name: "id"))
+    OfferingPromotion.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    OfferingPromotion.struct_class = Types::OfferingPromotion
+
+    OfferingPromotions.member = Shapes::ShapeRef.new(shape: OfferingPromotion)
 
     OfferingStatus.add_member(:type, Shapes::ShapeRef.new(shape: OfferingTransactionType, location_name: "type"))
     OfferingStatus.add_member(:offering, Shapes::ShapeRef.new(shape: Offering, location_name: "offering"))
@@ -571,6 +676,7 @@ module Aws::DeviceFarm
 
     OfferingTransaction.add_member(:offering_status, Shapes::ShapeRef.new(shape: OfferingStatus, location_name: "offeringStatus"))
     OfferingTransaction.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdentifier, location_name: "transactionId"))
+    OfferingTransaction.add_member(:offering_promotion_id, Shapes::ShapeRef.new(shape: OfferingPromotionIdentifier, location_name: "offeringPromotionId"))
     OfferingTransaction.add_member(:created_on, Shapes::ShapeRef.new(shape: DateTime, location_name: "createdOn"))
     OfferingTransaction.add_member(:cost, Shapes::ShapeRef.new(shape: MonetaryAmount, location_name: "cost"))
     OfferingTransaction.struct_class = Types::OfferingTransaction
@@ -596,6 +702,7 @@ module Aws::DeviceFarm
 
     Project.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
     Project.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    Project.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     Project.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
     Project.struct_class = Types::Project
 
@@ -603,6 +710,7 @@ module Aws::DeviceFarm
 
     PurchaseOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: OfferingIdentifier, location_name: "offeringId"))
     PurchaseOfferingRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "quantity"))
+    PurchaseOfferingRequest.add_member(:offering_promotion_id, Shapes::ShapeRef.new(shape: OfferingPromotionIdentifier, location_name: "offeringPromotionId"))
     PurchaseOfferingRequest.struct_class = Types::PurchaseOfferingRequest
 
     PurchaseOfferingResult.add_member(:offering_transaction, Shapes::ShapeRef.new(shape: OfferingTransaction, location_name: "offeringTransaction"))
@@ -672,6 +780,7 @@ module Aws::DeviceFarm
     Run.add_member(:completed_jobs, Shapes::ShapeRef.new(shape: Integer, location_name: "completedJobs"))
     Run.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
     Run.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
+    Run.add_member(:network_profile, Shapes::ShapeRef.new(shape: NetworkProfile, location_name: "networkProfile"))
     Run.struct_class = Types::Run
 
     Runs.member = Shapes::ShapeRef.new(shape: Run)
@@ -698,6 +807,7 @@ module Aws::DeviceFarm
     ScheduleRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
     ScheduleRunRequest.add_member(:test, Shapes::ShapeRef.new(shape: ScheduleRunTest, required: true, location_name: "test"))
     ScheduleRunRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ScheduleRunConfiguration, location_name: "configuration"))
+    ScheduleRunRequest.add_member(:execution_configuration, Shapes::ShapeRef.new(shape: ExecutionConfiguration, location_name: "executionConfiguration"))
     ScheduleRunRequest.struct_class = Types::ScheduleRunRequest
 
     ScheduleRunResult.add_member(:run, Shapes::ShapeRef.new(shape: Run, location_name: "run"))
@@ -754,6 +864,10 @@ module Aws::DeviceFarm
 
     Tests.member = Shapes::ShapeRef.new(shape: Test)
 
+    TrialMinutes.add_member(:total, Shapes::ShapeRef.new(shape: Double, location_name: "total"))
+    TrialMinutes.add_member(:remaining, Shapes::ShapeRef.new(shape: Double, location_name: "remaining"))
+    TrialMinutes.struct_class = Types::TrialMinutes
+
     UniqueProblem.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     UniqueProblem.add_member(:problems, Shapes::ShapeRef.new(shape: Problems, location_name: "problems"))
     UniqueProblem.struct_class = Types::UniqueProblem
@@ -772,8 +886,26 @@ module Aws::DeviceFarm
     UpdateDevicePoolResult.add_member(:device_pool, Shapes::ShapeRef.new(shape: DevicePool, location_name: "devicePool"))
     UpdateDevicePoolResult.struct_class = Types::UpdateDevicePoolResult
 
+    UpdateNetworkProfileRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+    UpdateNetworkProfileRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateNetworkProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: Message, location_name: "description"))
+    UpdateNetworkProfileRequest.add_member(:type, Shapes::ShapeRef.new(shape: NetworkProfileType, location_name: "type"))
+    UpdateNetworkProfileRequest.add_member(:uplink_bandwidth_bits, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkBandwidthBits"))
+    UpdateNetworkProfileRequest.add_member(:downlink_bandwidth_bits, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkBandwidthBits"))
+    UpdateNetworkProfileRequest.add_member(:uplink_delay_ms, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkDelayMs"))
+    UpdateNetworkProfileRequest.add_member(:downlink_delay_ms, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkDelayMs"))
+    UpdateNetworkProfileRequest.add_member(:uplink_jitter_ms, Shapes::ShapeRef.new(shape: Long, location_name: "uplinkJitterMs"))
+    UpdateNetworkProfileRequest.add_member(:downlink_jitter_ms, Shapes::ShapeRef.new(shape: Long, location_name: "downlinkJitterMs"))
+    UpdateNetworkProfileRequest.add_member(:uplink_loss_percent, Shapes::ShapeRef.new(shape: PercentInteger, location_name: "uplinkLossPercent"))
+    UpdateNetworkProfileRequest.add_member(:downlink_loss_percent, Shapes::ShapeRef.new(shape: PercentInteger, location_name: "downlinkLossPercent"))
+    UpdateNetworkProfileRequest.struct_class = Types::UpdateNetworkProfileRequest
+
+    UpdateNetworkProfileResult.add_member(:network_profile, Shapes::ShapeRef.new(shape: NetworkProfile, location_name: "networkProfile"))
+    UpdateNetworkProfileResult.struct_class = Types::UpdateNetworkProfileResult
+
     UpdateProjectRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
     UpdateProjectRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateProjectRequest.add_member(:default_job_timeout_minutes, Shapes::ShapeRef.new(shape: JobTimeoutMinutes, location_name: "defaultJobTimeoutMinutes"))
     UpdateProjectRequest.struct_class = Types::UpdateProjectRequest
 
     UpdateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
@@ -813,6 +945,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CreateDevicePoolRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDevicePoolResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:create_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateNetworkProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -861,6 +1005,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDevicePoolRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDevicePoolResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:delete_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNetworkProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -969,6 +1125,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetJobRequest)
         o.output = Shapes::ShapeRef.new(shape: GetJobResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:get_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetNetworkProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1143,6 +1311,31 @@ module Aws::DeviceFarm
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_network_profiles, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNetworkProfiles"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListNetworkProfilesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListNetworkProfilesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:list_offering_promotions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOfferingPromotions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListOfferingPromotionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOfferingPromotionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: NotEligibleException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
       end)
 
       api.add_operation(:list_offering_transactions, Seahorse::Model::Operation.new.tap do |o|
@@ -1381,6 +1574,18 @@ module Aws::DeviceFarm
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDevicePoolRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDevicePoolResult)
+        o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+      end)
+
+      api.add_operation(:update_network_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNetworkProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNetworkProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNetworkProfileResult)
         o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)

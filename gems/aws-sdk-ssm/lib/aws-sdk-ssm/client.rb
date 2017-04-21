@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::SSM
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -172,7 +174,7 @@ module Aws::SSM
     # characters.
     #
     # For more information about tags, see [Tagging Your Amazon EC2
-    # Resources][1] in the Amazon EC2 User Guide.
+    # Resources][1] in the *Amazon EC2 User Guide*.
     #
     #
     #
@@ -247,13 +249,12 @@ module Aws::SSM
     # so that you can manage these resources using Run Command. An
     # on-premises server or virtual machine that has been registered with
     # EC2 is called a managed instance. For more information about
-    # activations, see [Setting Up Managed Instances (Linux)][1] or [Setting
-    # Up Managed Instances (Windows)][2] in the Amazon EC2 User Guide.
+    # activations, see [Setting Up Systems Manager in Hybrid
+    # Environments][1].
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managed-instances.html
-    # [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/managed-instances.html
+    # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html
     #
     # @option params [String] :description
     #   A user-defined description of the resource that you want to register
@@ -305,11 +306,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Associates the specified SSM document with the specified instances or
-    # targets.
+    # Associates the specified Systems Manager document with the specified
+    # instances or targets.
     #
-    # When you associate an SSM document with one or more instances using
-    # instance IDs or tags, the SSM agent running on the instance processes
+    # When you associate a document with one or more instances using
+    # instance IDs or tags, the SSM Agent running on the instance processes
     # the document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
@@ -317,7 +318,7 @@ module Aws::SSM
     # exception.
     #
     # @option params [required, String] :name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #
     # @option params [String] :document_version
     #   The document version you want to associate with the target(s). Can be
@@ -419,11 +420,11 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Associates the specified SSM document with the specified instances or
-    # targets.
+    # Associates the specified Systems Manager document with the specified
+    # instances or targets.
     #
-    # When you associate an SSM document with one or more instances using
-    # instance IDs or tags, the SSM agent running on the instance processes
+    # When you associate a document with one or more instances using
+    # instance IDs or tags, the SSM Agent running on the instance processes
     # the document and configures the instance as specified.
     #
     # If you associate a document with an instance that already has an
@@ -524,16 +525,16 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Creates an SSM document.
+    # Creates a Systems Manager document.
     #
-    # After you create an SSM document, you can use CreateAssociation to
+    # After you create a document, you can use CreateAssociation to
     # associate it with one or more running instances.
     #
     # @option params [required, String] :content
     #   A valid JSON string.
     #
     # @option params [required, String] :name
-    #   A name for the SSM document.
+    #   A name for the Systems Manager document.
     #
     # @option params [String] :document_type
     #   The type of document to create. Valid document types include: Policy,
@@ -739,16 +740,17 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Disassociates the specified SSM document from the specified instance.
+    # Disassociates the specified Systems Manager document from the
+    # specified instance.
     #
-    # When you disassociate an SSM document from an instance, it does not
-    # change the configuration of the instance. To change the configuration
-    # state of an instance after you disassociate a document, you must
-    # create a new document with the desired configuration and associate it
-    # with the instance.
+    # When you disassociate a document from an instance, it does not change
+    # the configuration of the instance. To change the configuration state
+    # of an instance after you disassociate a document, you must create a
+    # new document with the desired configuration and associate it with the
+    # instance.
     #
     # @option params [String] :name
-    #   The name of the SSM document.
+    #   The name of the Systems Manager document.
     #
     # @option params [String] :instance_id
     #   The ID of the instance.
@@ -775,15 +777,15 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Deletes the SSM document and all instance associations to the
-    # document.
+    # Deletes the Systems Manager document and all instance associations to
+    # the document.
     #
-    # Before you delete the SSM document, we recommend that you use
+    # Before you delete the document, we recommend that you use
     # DeleteAssociation to disassociate all instances that are associated
     # with the document.
     #
     # @option params [required, String] :name
-    #   The name of the SSM document.
+    #   The name of the document.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -883,7 +885,7 @@ module Aws::SSM
     # Removes the server or virtual machine from the list of registered
     # servers. You can reregister the instance again at any time. If you
     # don’t plan to use Run Command on the server, we suggest uninstalling
-    # the SSM agent first.
+    # the SSM Agent first.
     #
     # @option params [required, String] :instance_id
     #   The ID assigned to the managed instance when you registered it using
@@ -1067,7 +1069,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes the associations for the specified SSM document or instance.
+    # Describes the associations for the specified Systems Manager document
+    # or instance.
     #
     # @option params [String] :name
     #   The name of the SSM document.
@@ -1296,10 +1299,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Describes the permissions for an SSM document. If you created the
-    # document, you are the owner. If a document is shared, it can either be
-    # shared privately (by specifying a user’s AWS account ID) or publicly
-    # (*All*).
+    # Describes the permissions for a Systems Manager document. If you
+    # created the document, you are the owner. If a document is shared, it
+    # can either be shared privately (by specifying a user’s AWS account ID)
+    # or publicly (*All*).
     #
     # @option params [required, String] :name
     #   The name of the document for which you are the owner.
@@ -1485,7 +1488,7 @@ module Aws::SSM
 
     # Describes one or more of your instances. You can use this to get
     # information about instances like the operating system platform, the
-    # SSM agent version (Linux), status etc. If you specify one or more
+    # SSM Agent version (Linux), status etc. If you specify one or more
     # instance IDs, it returns information for those instances. If you do
     # not specify instance IDs, it returns information for all your
     # instances. If you specify an instance ID that is not valid or an
@@ -2383,8 +2386,8 @@ module Aws::SSM
     #
     # @option params [String] :plugin_name
     #   (Optional) The name of the plugin for which you want detailed results.
-    #   If the SSM document contains only one plugin, the name can be omitted
-    #   and the details will be returned.
+    #   If the document contains only one plugin, the name can be omitted and
+    #   the details will be returned.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2845,7 +2848,7 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Get a list of parameters used by the AWS account.&gt;
+    # Get details of a parameter.
     #
     # @option params [required, Array<String>] :names
     #   Names of the parameters for which you want to query information.
@@ -2973,7 +2976,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Lists the associations for the specified SSM document or instance.
+    # Lists the associations for the specified Systems Manager document or
+    # instance.
     #
     # @option params [Array<Types::AssociationFilter>] :association_filter_list
     #   One or more filters. Use a filter to return a more specific list of
@@ -3411,10 +3415,10 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Share a document publicly or privately. If you share a document
-    # privately, you must specify the AWS user account IDs for those people
-    # who can use the document. If you share a document publicly, you must
-    # specify *All* as the account ID.
+    # Shares a Systems Manager document publicly or privately. If you share
+    # a document privately, you must specify the AWS user account IDs for
+    # those people who can use the document. If you share a document
+    # publicly, you must specify *All* as the account ID.
     #
     # @option params [required, String] :name
     #   The name of the document that you want to share.
@@ -3513,7 +3517,8 @@ module Aws::SSM
     #   The parameter key ID that you want to add to the system.
     #
     # @option params [Boolean] :overwrite
-    #   Overwrite an existing parameter.
+    #   Overwrite an existing parameter. If not specified, will default to
+    #   "false".
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3725,8 +3730,8 @@ module Aws::SSM
     #       },
     #     },
     #     priority: 1,
-    #     max_concurrency: "VelocityConstraint", # required
-    #     max_errors: "VelocityConstraint", # required
+    #     max_concurrency: "MaxConcurrency", # required
+    #     max_errors: "MaxErrors", # required
     #     logging_info: {
     #       s3_bucket_name: "S3BucketName", # required
     #       s3_key_prefix: "S3KeyPrefix",
@@ -3786,20 +3791,18 @@ module Aws::SSM
     #
     # @option params [Array<Types::Target>] :targets
     #   (Optional) An array of search criteria that targets instances using a
-    #   `Key`;`Value` combination that you specify. `Targets` is required if
+    #   `Key`,`Value` combination that you specify. `Targets` is required if
     #   you don't provide one or more instance IDs in the call. For more
     #   information about how to use `Targets`, see [Executing a Command Using
-    #   Amazon EC2 Run Command][1] (Linux) or [Executing a Command Using
-    #   Amazon EC2 Run Command][2] (Windows).
+    #   Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #
     # @option params [required, String] :document_name
-    #   Required. The name of the SSM document to execute. This can be an SSM
-    #   public document or a custom document.
+    #   Required. The name of the Systems Manager document to execute. This
+    #   can be a public document or a custom document.
     #
     # @option params [String] :document_hash
     #   The Sha256 or Sha1 hash created by the system when the document was
@@ -3825,8 +3828,8 @@ module Aws::SSM
     #   description of what the command should do.
     #
     # @option params [Hash<String,Array>] :parameters
-    #   The required and optional parameters specified in the SSM document
-    #   being executed.
+    #   The required and optional parameters specified in the document being
+    #   executed.
     #
     # @option params [String] :output_s3_region
     #   (Optional) The region where the Amazon Simple Storage Service (Amazon
@@ -3846,13 +3849,11 @@ module Aws::SSM
     #   the command at the same time. You can specify a number such as “10” or
     #   a percentage such as “10%”. The default value is 50. For more
     #   information about how to use `MaxConcurrency`, see [Executing a
-    #   Command Using Amazon EC2 Run Command][1] (Linux) or [Executing a
-    #   Command Using Amazon EC2 Run Command][2] (Windows).
+    #   Command Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed without the command failing. When
@@ -3860,13 +3861,11 @@ module Aws::SSM
     #   systems stops sending the command to additional targets. You can
     #   specify a number like “10” or a percentage like “10%”. The default
     #   value is 50. For more information about how to use `MaxErrors`, see
-    #   [Executing a Command Using Amazon EC2 Run Command][1] (Linux) or
-    #   [Executing a Command Using Amazon EC2 Run Command][2] (Windows).
+    #   [Executing a Command Using Systems Manager Run Command][1].
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
-    #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+    #   [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html
     #
     # @option params [String] :service_role_arn
     #   The IAM role that Systems Manager uses to send notifications.
@@ -3899,8 +3898,8 @@ module Aws::SSM
     #     output_s3_region: "S3Region",
     #     output_s3_bucket_name: "S3BucketName",
     #     output_s3_key_prefix: "S3KeyPrefix",
-    #     max_concurrency: "VelocityConstraint",
-    #     max_errors: "VelocityConstraint",
+    #     max_concurrency: "MaxConcurrency",
+    #     max_errors: "MaxErrors",
     #     service_role_arn: "ServiceRole",
     #     notification_config: {
     #       notification_arn: "NotificationArn",
@@ -4102,8 +4101,8 @@ module Aws::SSM
       req.send_request(options)
     end
 
-    # Updates the status of the SSM document associated with the specified
-    # instance.
+    # Updates the status of the Systems Manager document associated with the
+    # specified instance.
     #
     # @option params [required, String] :name
     #   The name of the SSM document.
@@ -4468,7 +4467,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

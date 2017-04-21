@@ -491,6 +491,7 @@ module Aws::GameLift
     #         ],
     #         creator_id: "NonZeroAndMaxString",
     #         game_session_id: "IdStringModel",
+    #         idempotency_token: "IdStringModel",
     #       }
     #
     # @!attribute [rw] fleet_id
@@ -521,18 +522,29 @@ module Aws::GameLift
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] creator_id
-    #   $player-id; or entity creating the game session. This ID is used to
-    #   enforce a resource protection policy (if one exists) that limits the
-    #   number of concurrent active game sessions one player can have.
+    #   Unique identifier for a player or entity creating the game session.
+    #   This ID is used to enforce a resource protection policy (if one
+    #   exists) that limits the number of concurrent active game sessions
+    #   one player can have.
     #   @return [String]
     #
     # @!attribute [rw] game_session_id
-    #   Custom string to include in the game session ID, with a maximum
-    #   length of 48 characters. A game session ID has the following format:
-    #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/&lt;fleet
-    #   ID&gt;/&lt;game session ID&gt;". If provided, the custom string is
-    #   used for the game session ID string. This value cannot be updated
-    #   once a game session is created.
+    #   *This parameter is no longer preferred. Please use
+    #   `IdempotencyToken` instead.* Custom string that uniquely identifies
+    #   a request for a new game session. Maximum token length is 48
+    #   characters. If provided, this string is included in the new game
+    #   session's ID. (A game session ID has the following format:
+    #   `arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string
+    #   or idempotency token>`.)
+    #   @return [String]
+    #
+    # @!attribute [rw] idempotency_token
+    #   Custom string that uniquely identifies a request for a new game
+    #   session. Maximum token length is 48 characters. If provided, this
+    #   string is included in the new game session's ID. (A game session ID
+    #   has the following format:
+    #   `arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string
+    #   or idempotency token>`.)
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateGameSessionInput AWS API Documentation
@@ -544,7 +556,8 @@ module Aws::GameLift
       :name,
       :game_properties,
       :creator_id,
-      :game_session_id)
+      :game_session_id,
+      :idempotency_token)
       include Aws::Structure
     end
 
@@ -561,12 +574,20 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass CreateGameSessionQueueInput
     #   data as a hash:
     #
     #       {
     #         name: "GameSessionQueueName", # required
     #         timeout_in_seconds: 1,
+    #         player_latency_policies: [
+    #           {
+    #             maximum_individual_player_latency_milliseconds: 1,
+    #             policy_duration_seconds: 1,
+    #           },
+    #         ],
     #         destinations: [
     #           {
     #             destination_arn: "ArnStringModel",
@@ -585,6 +606,21 @@ module Aws::GameLift
     #   session placement changes to a TIMED\_OUT status.
     #   @return [Integer]
     #
+    # @!attribute [rw] player_latency_policies
+    #   Collection of latency policies to apply when processing game
+    #   sessions placement requests with player latency information.
+    #   Multiple policies are evaluated in order of the maximum latency
+    #   value, starting with the lowest latency values. With just one
+    #   policy, it is enforced at the start of the game session placement
+    #   for the duration period. With multiple policies, each policy is
+    #   enforced consecutively for its duration period. For example, a queue
+    #   might enforce a 60-second policy followed by a 120-second policy,
+    #   and then no policy for the remainder of the placement. A player
+    #   latency policy must set a value for
+    #   MaximumIndividualPlayerLatencyMilliseconds; if none is set, this API
+    #   requests will fail.
+    #   @return [Array<Types::PlayerLatencyPolicy>]
+    #
     # @!attribute [rw] destinations
     #   List of fleets that can be used to fulfill game session placement
     #   requests in the queue. Fleets are identified by either a fleet ARN
@@ -597,10 +633,13 @@ module Aws::GameLift
     class CreateGameSessionQueueInput < Struct.new(
       :name,
       :timeout_in_seconds,
+      :player_latency_policies,
       :destinations)
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] game_session_queue
     #   Object that describes the newly created game session queue.
     #   @return [Types::GameSessionQueue]
@@ -771,6 +810,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass DeleteGameSessionQueueInput
     #   data as a hash:
     #
@@ -1306,6 +1347,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass DescribeGameSessionPlacementInput
     #   data as a hash:
     #
@@ -1324,6 +1367,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] game_session_placement
     #   Object that describes the requested game session placement.
     #   @return [Types::GameSessionPlacement]
@@ -1335,6 +1380,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass DescribeGameSessionQueuesInput
     #   data as a hash:
     #
@@ -1370,6 +1417,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] game_session_queues
     #   Collection of objects that describes the requested game session
     #   queues.
@@ -1408,7 +1457,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] game_session_id
-    #   Unique identifier for the game session to retrieve.
+    #   Unique identifier for the game session to retrieve. You can use
+    #   either a `GameSessionId` or `GameSessionArn` value.
     #   @return [String]
     #
     # @!attribute [rw] alias_id
@@ -2129,9 +2179,8 @@ module Aws::GameLift
     #
     # @!attribute [rw] game_session_id
     #   Unique identifier for the game session. A game session ID has the
-    #   following format:
-    #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/&lt;fleet
-    #   ID&gt;/&lt;game session ID&gt;".
+    #   following format: `arn:aws:gamelift:<region>::gamesession/<fleet
+    #   ID>/<custom ID string or idempotency token>`.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -2176,13 +2225,13 @@ module Aws::GameLift
     #   @return [Array<Types::GameProperty>]
     #
     # @!attribute [rw] ip_address
-    #   IP address of the game session. To connect to a Amazon GameLift
-    #   server process, an app needs both the IP address and port number.
+    #   IP address of the game session. To connect to a Amazon GameLift game
+    #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
     # @!attribute [rw] port
     #   Port number for the game session. To connect to a Amazon GameLift
-    #   server process, an app needs both the IP address and port number.
+    #   game server, an app needs both the IP address and port number.
     #   @return [Integer]
     #
     # @!attribute [rw] player_session_creation_policy
@@ -2270,7 +2319,7 @@ module Aws::GameLift
     #     requested) have been successfully created. Values for
     #     *GameSessionArn* and *GameSessionRegion* are available.
     #
-    #   * **CANCELLED** – The placement request was cancelled with a call to
+    #   * **CANCELLED** – The placement request was canceled with a call to
     #     StopGameSessionPlacement.
     #
     #   * **TIMED\_OUT** – A new game session was not successfully created
@@ -2294,21 +2343,27 @@ module Aws::GameLift
     #   names do not need to be unique.
     #   @return [String]
     #
+    # @!attribute [rw] game_session_id
+    #   Unique identifier for the game session. This value is set once the
+    #   new game session is placed (placement status is Fulfilled).
+    #   @return [String]
+    #
     # @!attribute [rw] game_session_arn
     #   Identifier for the game session created by this placement request.
-    #   This value exists only if the game session placement status is
-    #   Completed. This identifier is unique across all regions.
+    #   This value is set once the new game session is placed (placement
+    #   status is Fulfilled). This identifier is unique across all regions.
+    #   You can use this value as a `GameSessionId` value as needed.
     #   @return [String]
     #
     # @!attribute [rw] game_session_region
     #   Name of the region where the game session created by this placement
-    #   request is running. This value exists only if the game session
-    #   placement status is Completed.
+    #   request is running. This value is set once the new game session is
+    #   placed (placement status is Fulfilled).
     #   @return [String]
     #
     # @!attribute [rw] player_latencies
     #   Set of values, expressed in milliseconds, indicating the amount of
-    #   latency that players experience when connected to AWS regions.
+    #   latency that players are experiencing when connected to AWS regions.
     #   @return [Array<Types::PlayerLatency>]
     #
     # @!attribute [rw] start_time
@@ -2318,9 +2373,33 @@ module Aws::GameLift
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   Time stamp indicating when this request was completed, cancelled, or
+    #   Time stamp indicating when this request was completed, canceled, or
     #   timed out.
     #   @return [Time]
+    #
+    # @!attribute [rw] ip_address
+    #   IP address of the game session. To connect to a Amazon GameLift game
+    #   server, an app needs both the IP address and port number. This value
+    #   is set once the new game session is placed (placement status is
+    #   Fulfilled).
+    #   @return [String]
+    #
+    # @!attribute [rw] port
+    #   Port number for the game session. To connect to a Amazon GameLift
+    #   game server, an app needs both the IP address and port number. This
+    #   value is set once the new game session is placed (placement status
+    #   is Fulfilled).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] placed_player_sessions
+    #   Collection of information on player sessions created in response to
+    #   the game session placement request. These player sessions are
+    #   created only once a new game session is successfully placed
+    #   (placement status is Fulfilled). This information includes the
+    #   player ID (as provided in the placement request) and the
+    #   corresponding player session ID. Retrieve full player sessions by
+    #   calling DescribePlayerSessions with the player session ID.
+    #   @return [Array<Types::PlacedPlayerSession>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/GameSessionPlacement AWS API Documentation
     #
@@ -2331,20 +2410,38 @@ module Aws::GameLift
       :game_properties,
       :maximum_player_session_count,
       :game_session_name,
+      :game_session_id,
       :game_session_arn,
       :game_session_region,
       :player_latencies,
       :start_time,
-      :end_time)
+      :end_time,
+      :ip_address,
+      :port,
+      :placed_player_sessions)
       include Aws::Structure
     end
 
-    # Configuration of a queue used to process game session placement
-    # requests. The queue configuration identifies the fleets that new game
-    # session can be placed on, given available resources, and the length of
-    # time a request can remain in the queue waiting for placement.
+    # Configuration of a queue that is used to process game session
+    # placement requests. The queue configuration identifies several game
+    # features:
     #
-    # Queue-related operations include:
+    # * The destinations where a new game session can potentially be hosted.
+    #   Amazon GameLift tries these destinations in an order based on either
+    #   the queue's default order or player latency information, if
+    #   provided in a placement request. With latency information, Amazon
+    #   GameLift can place game sessions where the majority of players are
+    #   reporting the lowest possible latency.
+    #
+    # * The length of time that placement requests can wait in the queue
+    #   before timing out.
+    #
+    # * A set of optional latency policies that protect individual players
+    #   from high latencies, preventing game sessions from being placed
+    #   where any individual player is reporting latency higher than a
+    #   policy's maximum.
+    #
+    # Queue-related operations include the following:
     #
     # * CreateGameSessionQueue
     #
@@ -2359,11 +2456,33 @@ module Aws::GameLift
     #   unique within each region.
     #   @return [String]
     #
+    # @!attribute [rw] game_session_queue_arn
+    #   Amazon Resource Name ([ARN][1]) that is assigned to a game session
+    #   queue and uniquely identifies it. Format is
+    #   `arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   @return [String]
+    #
     # @!attribute [rw] timeout_in_seconds
     #   Maximum time, in seconds, that a new game session placement request
     #   remains in the queue. When a request exceeds this time, the game
     #   session placement changes to a TIMED\_OUT status.
     #   @return [Integer]
+    #
+    # @!attribute [rw] player_latency_policies
+    #   Collection of latency policies to apply when processing game
+    #   sessions placement requests with player latency information.
+    #   Multiple policies are evaluated in order of the maximum latency
+    #   value, starting with the lowest latency values. With just one
+    #   policy, it is enforced at the start of the game session placement
+    #   for the duration period. With multiple policies, each policy is
+    #   enforced consecutively for its duration period. For example, a queue
+    #   might enforce a 60-second policy followed by a 120-second policy,
+    #   and then no policy for the remainder of the placement.
+    #   @return [Array<Types::PlayerLatencyPolicy>]
     #
     # @!attribute [rw] destinations
     #   List of fleets that can be used to fulfill game session placement
@@ -2376,14 +2495,16 @@ module Aws::GameLift
     #
     class GameSessionQueue < Struct.new(
       :name,
+      :game_session_queue_arn,
       :timeout_in_seconds,
+      :player_latency_policies,
       :destinations)
       include Aws::Structure
     end
 
     # Fleet designated in a game session queue. Requests for new game
     # sessions in the queue are fulfilled by starting a new game session on
-    # any destination listed for a queue.
+    # any destination configured for a queue.
     #
     # @note When making an API call, you may pass GameSessionQueueDestination
     #   data as a hash:
@@ -2438,6 +2559,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass GetInstanceAccessInput
     #   data as a hash:
     #
@@ -2466,6 +2589,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] instance_access
     #   Object that contains connection information for a fleet instance,
     #   including IP address and access credentials.
@@ -2848,6 +2973,28 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Information about a player session that was created as part of a
+    # StartGameSessionPlacement request. This object contains only the
+    # player ID and player session ID. To retrieve full details on a player
+    # session, call DescribePlayerSessions with the player session ID.
+    #
+    # @!attribute [rw] player_id
+    #   Unique identifier for a player that is associated with this player
+    #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] player_session_id
+    #   Unique identifier for a player session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlacedPlayerSession AWS API Documentation
+    #
+    class PlacedPlayerSession < Struct.new(
+      :player_id,
+      :player_session_id)
+      include Aws::Structure
+    end
+
     # Regional latency information for a player, used when requesting a new
     # game session with StartGameSessionPlacement. This value indicates the
     # amount of time lag that exists when the player is connected to a fleet
@@ -2883,6 +3030,48 @@ module Aws::GameLift
       :player_id,
       :region_identifier,
       :latency_in_milliseconds)
+      include Aws::Structure
+    end
+
+    # Queue setting that determines the highest latency allowed for
+    # individual players when placing a game session. When a latency policy
+    # is in force, a game session cannot be placed at any destination in a
+    # region where a player is reporting latency higher than the cap.
+    # Latency policies are only enforced when the placement request contains
+    # player latency information.
+    #
+    # Latency policy-related operations include:
+    #
+    # * CreateGameSessionQueue
+    #
+    # * UpdateGameSessionQueue
+    #
+    # * StartGameSessionPlacement
+    #
+    # @note When making an API call, you may pass PlayerLatencyPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         maximum_individual_player_latency_milliseconds: 1,
+    #         policy_duration_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] maximum_individual_player_latency_milliseconds
+    #   The maximum latency value that is allowed for any player, in
+    #   milliseconds. All policies must have a value set for this property.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_duration_seconds
+    #   The length of time, in seconds, that the policy is enforced while
+    #   placing a new game session. A null value for this property means
+    #   that the policy is enforced until the queue times out.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/PlayerLatencyPolicy AWS API Documentation
+    #
+    class PlayerLatencyPolicy < Struct.new(
+      :maximum_individual_player_latency_milliseconds,
+      :policy_duration_seconds)
       include Aws::Structure
     end
 
@@ -2951,8 +3140,8 @@ module Aws::GameLift
     #   @return [String]
     #
     # @!attribute [rw] ip_address
-    #   Game session IP address. All player sessions reference the game
-    #   session location.
+    #   IP address of the game session. To connect to a Amazon GameLift game
+    #   server, an app needs both the IP address and port number.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -3637,6 +3826,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass StartGameSessionPlacementInput
     #   data as a hash:
     #
@@ -3669,7 +3860,7 @@ module Aws::GameLift
     # @!attribute [rw] placement_id
     #   Unique identifier to assign to the new game session placement. This
     #   value is developer-defined. The value must be unique across all
-    #   regions and cannot be reused unless you are resubmitting a cancelled
+    #   regions and cannot be reused unless you are resubmitting a canceled
     #   or timed-out placement request.
     #   @return [String]
     #
@@ -3695,10 +3886,9 @@ module Aws::GameLift
     #
     # @!attribute [rw] player_latencies
     #   Set of values, expressed in milliseconds, indicating the amount of
-    #   latency that players experience when connected to AWS regions. This
-    #   information is relevant when requesting player sessions. Latency
-    #   information provided for player IDs not included in
-    #   *DesiredPlayerSessions* are ignored.
+    #   latency that players are experiencing when connected to AWS regions.
+    #   This information is used to try to place the new game session where
+    #   it can offer the best possible gameplay experience for the players.
     #   @return [Array<Types::PlayerLatency>]
     #
     # @!attribute [rw] desired_player_sessions
@@ -3718,6 +3908,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] game_session_placement
     #   Object that describes the newly created game session placement. This
     #   object includes all the information provided in the request, as well
@@ -3731,6 +3923,8 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass StopGameSessionPlacementInput
     #   data as a hash:
     #
@@ -3749,9 +3943,11 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] game_session_placement
-    #   Object that describes the cancelled game session placement, with
-    #   cancelled status and an end time stamp.
+    #   Object that describes the canceled game session placement, with
+    #   Cancelled status and an end time stamp.
     #   @return [Types::GameSessionPlacement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacementOutput AWS API Documentation
@@ -4114,12 +4310,20 @@ module Aws::GameLift
       include Aws::Structure
     end
 
+    # Represents the input for a request action.
+    #
     # @note When making an API call, you may pass UpdateGameSessionQueueInput
     #   data as a hash:
     #
     #       {
     #         name: "GameSessionQueueName", # required
     #         timeout_in_seconds: 1,
+    #         player_latency_policies: [
+    #           {
+    #             maximum_individual_player_latency_milliseconds: 1,
+    #             policy_duration_seconds: 1,
+    #           },
+    #         ],
     #         destinations: [
     #           {
     #             destination_arn: "ArnStringModel",
@@ -4138,11 +4342,25 @@ module Aws::GameLift
     #   session placement changes to a TIMED\_OUT status.
     #   @return [Integer]
     #
+    # @!attribute [rw] player_latency_policies
+    #   Collection of latency policies to apply when processing game
+    #   sessions placement requests with player latency information.
+    #   Multiple policies are evaluated in order of the maximum latency
+    #   value, starting with the lowest latency values. With just one
+    #   policy, it is enforced at the start of the game session placement
+    #   for the duration period. With multiple policies, each policy is
+    #   enforced consecutively for its duration period. For example, a queue
+    #   might enforce a 60-second policy followed by a 120-second policy,
+    #   and then no policy for the remainder of the placement. When updating
+    #   policies, provide a complete collection of policies.
+    #   @return [Array<Types::PlayerLatencyPolicy>]
+    #
     # @!attribute [rw] destinations
     #   List of fleets that can be used to fulfill game session placement
     #   requests in the queue. Fleets are identified by either a fleet ARN
     #   or a fleet alias ARN. Destinations are listed in default preference
-    #   order.
+    #   order. When updating this list, provide a complete list of
+    #   destinations.
     #   @return [Array<Types::GameSessionQueueDestination>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateGameSessionQueueInput AWS API Documentation
@@ -4150,10 +4368,13 @@ module Aws::GameLift
     class UpdateGameSessionQueueInput < Struct.new(
       :name,
       :timeout_in_seconds,
+      :player_latency_policies,
       :destinations)
       include Aws::Structure
     end
 
+    # Represents the returned data in response to a request action.
+    #
     # @!attribute [rw] game_session_queue
     #   Object that describes the newly updated game session queue.
     #   @return [Types::GameSessionQueue]

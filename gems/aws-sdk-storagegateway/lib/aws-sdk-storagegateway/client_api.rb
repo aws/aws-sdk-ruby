@@ -169,6 +169,8 @@ module Aws::StorageGateway
     PermissionMode = Shapes::StringShape.new(name: 'PermissionMode')
     PositiveIntObject = Shapes::IntegerShape.new(name: 'PositiveIntObject')
     RecurrenceInHours = Shapes::IntegerShape.new(name: 'RecurrenceInHours')
+    RefreshCacheInput = Shapes::StructureShape.new(name: 'RefreshCacheInput')
+    RefreshCacheOutput = Shapes::StructureShape.new(name: 'RefreshCacheOutput')
     RegionId = Shapes::StringShape.new(name: 'RegionId')
     RemoveTagsFromResourceInput = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceInput')
     RemoveTagsFromResourceOutput = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceOutput')
@@ -187,6 +189,7 @@ module Aws::StorageGateway
     ShutdownGatewayOutput = Shapes::StructureShape.new(name: 'ShutdownGatewayOutput')
     SnapshotDescription = Shapes::StringShape.new(name: 'SnapshotDescription')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
+    Squash = Shapes::StringShape.new(name: 'Squash')
     StartGatewayInput = Shapes::StructureShape.new(name: 'StartGatewayInput')
     StartGatewayOutput = Shapes::StructureShape.new(name: 'StartGatewayOutput')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
@@ -355,6 +358,8 @@ module Aws::StorageGateway
     CreateNFSFileShareInput.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, required: true, location_name: "LocationARN"))
     CreateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
     CreateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
+    CreateNFSFileShareInput.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
+    CreateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     CreateNFSFileShareInput.struct_class = Types::CreateNFSFileShareInput
 
     CreateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -731,6 +736,8 @@ module Aws::StorageGateway
     NFSFileShareInfo.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationARN, location_name: "LocationARN"))
     NFSFileShareInfo.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
     NFSFileShareInfo.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
+    NFSFileShareInfo.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
+    NFSFileShareInfo.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     NFSFileShareInfo.struct_class = Types::NFSFileShareInfo
 
     NFSFileShareInfoList.member = Shapes::ShapeRef.new(shape: NFSFileShareInfo)
@@ -739,6 +746,12 @@ module Aws::StorageGateway
     NetworkInterface.add_member(:mac_address, Shapes::ShapeRef.new(shape: string, location_name: "MacAddress"))
     NetworkInterface.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: string, location_name: "Ipv6Address"))
     NetworkInterface.struct_class = Types::NetworkInterface
+
+    RefreshCacheInput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, required: true, location_name: "FileShareARN"))
+    RefreshCacheInput.struct_class = Types::RefreshCacheInput
+
+    RefreshCacheOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
+    RefreshCacheOutput.struct_class = Types::RefreshCacheOutput
 
     RemoveTagsFromResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location_name: "ResourceARN"))
     RemoveTagsFromResourceInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
@@ -902,6 +915,8 @@ module Aws::StorageGateway
     UpdateNFSFileShareInput.add_member(:nfs_file_share_defaults, Shapes::ShapeRef.new(shape: NFSFileShareDefaults, location_name: "NFSFileShareDefaults"))
     UpdateNFSFileShareInput.add_member(:default_storage_class, Shapes::ShapeRef.new(shape: StorageClass, location_name: "DefaultStorageClass"))
     UpdateNFSFileShareInput.add_member(:client_list, Shapes::ShapeRef.new(shape: FileShareClientList, location_name: "ClientList"))
+    UpdateNFSFileShareInput.add_member(:squash, Shapes::ShapeRef.new(shape: Squash, location_name: "Squash"))
+    UpdateNFSFileShareInput.add_member(:read_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "ReadOnly"))
     UpdateNFSFileShareInput.struct_class = Types::UpdateNFSFileShareInput
 
     UpdateNFSFileShareOutput.add_member(:file_share_arn, Shapes::ShapeRef.new(shape: FileShareARN, location_name: "FileShareARN"))
@@ -1475,6 +1490,16 @@ module Aws::StorageGateway
             "marker" => "marker"
           }
         )
+      end)
+
+      api.add_operation(:refresh_cache, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RefreshCache"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RefreshCacheInput)
+        o.output = Shapes::ShapeRef.new(shape: RefreshCacheOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:remove_tags_from_resource, Seahorse::Model::Operation.new.tap do |o|

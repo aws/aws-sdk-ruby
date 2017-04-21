@@ -50,7 +50,16 @@ module Aws::ElastiCache
       include Aws::Structure
     end
 
+    # Represents the allowed node types you can use to modify your cache
+    # cluster or replication group.
+    #
     # @!attribute [rw] scale_up_modifications
+    #   A string list, each element of which specifies a cache node type
+    #   which you can use to scale your cache cluster or replication group.
+    #
+    #   When scaling up a Redis cluster or replication group using
+    #   `ModifyCacheCluster` or `ModifyReplicationGroup`, use a value from
+    #   this list for the `CacheNodeType` parameter.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/AllowedNodeTypeModificationsMessage AWS API Documentation
@@ -134,8 +143,12 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] configuration_endpoint
-    #   Represents the information required for client programs to connect
-    #   to a cache node.
+    #   Represents a Memcached cluster endpoint which, if Automatic
+    #   Discovery is enabled on the cluster, can be used by an application
+    #   to connect to any node in the cluster. The configuration endpoint
+    #   will always have `.cfg` in it.
+    #
+    #   Example: `mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211`
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] client_download_landing_page
@@ -1553,8 +1566,10 @@ module Aws::ElastiCache
     #   This parameter is not used if there is more than one node group
     #   (shard). You should use `ReplicasPerNodeGroup` instead.
     #
-    #   If `Multi-AZ` is `enabled`, the value of this parameter must be at
-    #   least 2.
+    #   If `AutomaticFailoverEnabled` is `true`, the value of this parameter
+    #   must be at least 2. If `AutomaticFailoverEnabled` is `false` you can
+    #   omit this parameter (it will default to 1), or you can explicitly
+    #   set it to a value between 2 and 6.
     #
     #   The maximum permitted value for `NumCacheClusters` is 6 (primary
     #   plus 5 replicas).
@@ -1602,7 +1617,8 @@ module Aws::ElastiCache
     #
     #   If you're creating a Redis (cluster mode disabled) or a Redis
     #   (cluster mode enabled) replication group, you can use this parameter
-    #   to configure one node group (shard) or you can omit this parameter.
+    #   to individually configure each node group (shard), or you can omit
+    #   this parameter.
     #   @return [Array<Types::NodeGroupConfiguration>]
     #
     # @!attribute [rw] cache_node_type
@@ -1728,10 +1744,12 @@ module Aws::ElastiCache
     # @!attribute [rw] snapshot_arns
     #   A list of Amazon Resource Names (ARN) that uniquely identify the
     #   Redis RDB snapshot files stored in Amazon S3. The snapshot files are
-    #   used to populate the replication group. The Amazon S3 object name in
-    #   the ARN cannot contain any commas. The list must match the number of
-    #   node groups (shards) in the replication group, which means you
-    #   cannot repartition.
+    #   used to populate the new replication group. The Amazon S3 object
+    #   name in the ARN cannot contain any commas. The new replication group
+    #   will have the number of node groups (console: shards) specified by
+    #   the parameter *NumNodeGroups* or the number of node groups
+    #   configured by *NodeGroupConfiguration* regardless of the number of
+    #   ARNs specified here.
     #
     #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
     #
@@ -2143,6 +2161,7 @@ module Aws::ElastiCache
     #         max_records: 1,
     #         marker: "String",
     #         show_cache_node_info: false,
+    #         show_cache_clusters_not_in_replication_groups: false,
     #       }
     #
     # @!attribute [rw] cache_cluster_id
@@ -2170,8 +2189,15 @@ module Aws::ElastiCache
     #   @return [String]
     #
     # @!attribute [rw] show_cache_node_info
-    #   An optional flag that can be included in the DescribeCacheCluster
+    #   An optional flag that can be included in the `DescribeCacheCluster`
     #   request to retrieve information about the individual cache nodes.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] show_cache_clusters_not_in_replication_groups
+    #   An optional flag that can be included in the `DescribeCacheCluster`
+    #   request to show only nodes (API/CLI: clusters) that are not members
+    #   of a replication group. In practice, this mean Memcached and single
+    #   node Redis clusters.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/DescribeCacheClustersMessage AWS API Documentation
@@ -2180,7 +2206,8 @@ module Aws::ElastiCache
       :cache_cluster_id,
       :max_records,
       :marker,
-      :show_cache_node_info)
+      :show_cache_node_info,
+      :show_cache_clusters_not_in_replication_groups)
       include Aws::Structure
     end
 
@@ -2520,15 +2547,19 @@ module Aws::ElastiCache
     # @!attribute [rw] start_time
     #   The beginning of the time interval to retrieve events for, specified
     #   in ISO 8601 format.
+    #
+    #   **Example:** 2017-03-30T07:03:49.555Z
     #   @return [Time]
     #
     # @!attribute [rw] end_time
     #   The end of the time interval for which to retrieve events, specified
     #   in ISO 8601 format.
+    #
+    #   **Example:** 2017-03-30T07:03:49.555Z
     #   @return [Time]
     #
     # @!attribute [rw] duration
-    #   The number of minutes' worth of events to retrieve.
+    #   The number of minutes worth of events to retrieve.
     #   @return [Integer]
     #
     # @!attribute [rw] max_records
@@ -3628,6 +3659,7 @@ module Aws::ElastiCache
     #         snapshot_retention_limit: 1,
     #         snapshot_window: "String",
     #         cache_node_type: "String",
+    #         node_group_id: "String",
     #       }
     #
     # @!attribute [rw] replication_group_id
@@ -3801,6 +3833,10 @@ module Aws::ElastiCache
     #   group to.
     #   @return [String]
     #
+    # @!attribute [rw] node_group_id
+    #   The name of the Node Group (called shard in the console).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ModifyReplicationGroupMessage AWS API Documentation
     #
     class ModifyReplicationGroupMessage < Struct.new(
@@ -3820,7 +3856,8 @@ module Aws::ElastiCache
       :auto_minor_version_upgrade,
       :snapshot_retention_limit,
       :snapshot_window,
-      :cache_node_type)
+      :cache_node_type,
+      :node_group_id)
       include Aws::Structure
     end
 
@@ -3892,8 +3929,8 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] slots
-    #   A string that specifies the keyspaces as a series of comma separated
-    #   values. Keyspaces are 0 to 16,383. The string is in the format
+    #   A string that specifies the keyspace for a particular node group.
+    #   Keyspaces range from 0 to 16,383. The string is in the format
     #   `startkey-endkey`.
     #
     #   Example: `"0-3999"`
@@ -4382,6 +4419,19 @@ module Aws::ElastiCache
     #   `redis`.
     #   @return [String]
     #
+    # @!attribute [rw] cluster_enabled
+    #   A flag indicating whether or not this replication group is cluster
+    #   enabled; i.e., whether its data can be partitioned across multiple
+    #   shards (API/CLI: node groups).
+    #
+    #   Valid values: `true` \| `false`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cache_node_type
+    #   The name of the compute and memory capacity node type for each node
+    #   in the replication group.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/ReplicationGroup AWS API Documentation
     #
     class ReplicationGroup < Struct.new(
@@ -4395,7 +4445,9 @@ module Aws::ElastiCache
       :automatic_failover,
       :configuration_endpoint,
       :snapshot_retention_limit,
-      :snapshot_window)
+      :snapshot_window,
+      :cluster_enabled,
+      :cache_node_type)
       include Aws::Structure
     end
 
@@ -5080,11 +5132,11 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] key
-    #   The key for the tag.
+    #   The key for the tag. May not be null.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   The tag's value. May not be null.
+    #   The tag's value. May be null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/Tag AWS API Documentation
@@ -5096,7 +5148,7 @@ module Aws::ElastiCache
     end
 
     # Represents the output from the `AddTagsToResource`,
-    # `ListTagsOnResource`, and `RemoveTagsFromResource` operations.
+    # `ListTagsForResource`, and `RemoveTagsFromResource` operations.
     #
     # @!attribute [rw] tag_list
     #   A list of cost allocation tags as key-value pairs.
@@ -5106,6 +5158,46 @@ module Aws::ElastiCache
     #
     class TagListMessage < Struct.new(
       :tag_list)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TestFailoverMessage
+    #   data as a hash:
+    #
+    #       {
+    #         replication_group_id: "String", # required
+    #         node_group_id: "String", # required
+    #       }
+    #
+    # @!attribute [rw] replication_group_id
+    #   The name of the replication group (console: cluster) whose automatic
+    #   failover is being tested by this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_group_id
+    #   The name of the node group (called shard in the console) in this
+    #   replication group on which automatic failover is to be tested. You
+    #   may test automatic failover on up to 5 node groups in any rolling
+    #   24-hour period.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailoverMessage AWS API Documentation
+    #
+    class TestFailoverMessage < Struct.new(
+      :replication_group_id,
+      :node_group_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_group
+    #   Contains all of the attributes of a specific Redis replication
+    #   group.
+    #   @return [Types::ReplicationGroup]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticache-2015-02-02/TestFailoverResult AWS API Documentation
+    #
+    class TestFailoverResult < Struct.new(
+      :replication_group)
       include Aws::Structure
     end
 

@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::ConfigService
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -1149,9 +1151,9 @@ module Aws::ConfigService
     # key. This key is part of the `Source` object, which is part of the
     # `ConfigRule` object.
     #
-    # If you are adding a new AWS managed Config rule, specify the rule's
+    # If you are adding an AWS managed Config rule, specify the rule's
     # identifier for the `SourceIdentifier` key. To reference AWS managed
-    # Config rule identifiers, see [Using AWS Managed Config Rules][1].
+    # Config rule identifiers, see [About AWS Managed Config Rules][1].
     #
     # For any new rule that you add, specify the `ConfigRuleName` in the
     # `ConfigRule` object. Do not specify the `ConfigRuleArn` or the
@@ -1178,28 +1180,7 @@ module Aws::ConfigService
     # [3]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
     #
     # @option params [required, Types::ConfigRule] :config_rule
-    #   An AWS Config rule represents an AWS Lambda function that you create
-    #   for a custom rule or a predefined function for an AWS managed rule.
-    #   The function evaluates configuration items to assess whether your AWS
-    #   resources comply with your desired configurations. This function can
-    #   run when AWS Config detects a configuration change to an AWS resource
-    #   and at a periodic frequency that you choose (for example, every 24
-    #   hours).
-    #
-    #   <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule that
-    #   triggers evaluations for your resources when AWS Config delivers the
-    #   configuration snapshot. For more information, see
-    #   ConfigSnapshotDeliveryProperties.
-    #
-    #    </note>
-    #
-    #   For more information about developing and using AWS Config rules, see
-    #   [Evaluating AWS Resource Configurations with AWS Config][1] in the
-    #   *AWS Config Developer Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    #   The rule that you want to add to your account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1520,7 +1501,7 @@ module Aws::ConfigService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-configservice'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

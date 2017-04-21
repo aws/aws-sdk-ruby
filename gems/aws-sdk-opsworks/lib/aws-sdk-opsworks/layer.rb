@@ -63,14 +63,20 @@ module Aws::OpsWorks
     # The layer attributes.
     #
     # For the `HaproxyStatsPassword`, `MysqlRootPassword`, and
-    # `GangliaPassword` attributes, AWS OpsWorks returns
+    # `GangliaPassword` attributes, AWS OpsWorks Stacks returns
     # `*****FILTERED*****` instead of the actual value
     #
-    # For an ECS Cluster layer, AWS OpsWorks the `EcsClusterArn` attribute
-    # is set to the cluster's ARN.
+    # For an ECS Cluster layer, AWS OpsWorks Stacks the `EcsClusterArn`
+    # attribute is set to the cluster's ARN.
     # @return [Hash<String,String>]
     def attributes
       data.attributes
+    end
+
+    # The Amazon CloudWatch Logs configuration settings for the layer.
+    # @return [Types::CloudWatchLogsConfiguration]
+    def cloud_watch_logs_configuration
+      data.cloud_watch_logs_configuration
     end
 
     # The ARN of the default IAM profile to be used for the layer's EC2
@@ -148,14 +154,14 @@ module Aws::OpsWorks
       data.auto_assign_public_ips
     end
 
-    # AWS OpsWorks supports five lifecycle events: **setup**,
+    # AWS OpsWorks Stacks supports five lifecycle events: **setup**,
     # **configuration**, **deploy**, **undeploy**, and **shutdown**. For
-    # each layer, AWS OpsWorks runs a set of standard recipes for each
-    # event. In addition, you can provide custom recipes for any or all
-    # layers and events. AWS OpsWorks runs custom event recipes after the
-    # standard recipes. `LayerCustomRecipes` specifies the custom recipes
-    # for a particular layer to be run in response to each of the five
-    # events.
+    # each layer, AWS OpsWorks Stacks runs a set of standard recipes for
+    # each event. In addition, you can provide custom recipes for any or all
+    # layers and events. AWS OpsWorks Stacks runs custom event recipes after
+    # the standard recipes. `LayerCustomRecipes` specifies the custom
+    # recipes for a particular layer to be run in response to each of the
+    # five events.
     #
     # To specify a recipe, use the cookbook's directory name in the
     # repository followed by two colons and the recipe name, which is the

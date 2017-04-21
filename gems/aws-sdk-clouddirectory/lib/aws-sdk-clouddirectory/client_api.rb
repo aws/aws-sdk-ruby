@@ -166,6 +166,8 @@ module Aws::CloudDirectory
     ListObjectAttributesResponse = Shapes::StructureShape.new(name: 'ListObjectAttributesResponse')
     ListObjectChildrenRequest = Shapes::StructureShape.new(name: 'ListObjectChildrenRequest')
     ListObjectChildrenResponse = Shapes::StructureShape.new(name: 'ListObjectChildrenResponse')
+    ListObjectParentPathsRequest = Shapes::StructureShape.new(name: 'ListObjectParentPathsRequest')
+    ListObjectParentPathsResponse = Shapes::StructureShape.new(name: 'ListObjectParentPathsResponse')
     ListObjectParentsRequest = Shapes::StructureShape.new(name: 'ListObjectParentsRequest')
     ListObjectParentsResponse = Shapes::StructureShape.new(name: 'ListObjectParentsResponse')
     ListObjectPoliciesRequest = Shapes::StructureShape.new(name: 'ListObjectPoliciesRequest')
@@ -197,6 +199,8 @@ module Aws::CloudDirectory
     ObjectReference = Shapes::StructureShape.new(name: 'ObjectReference')
     ObjectType = Shapes::StringShape.new(name: 'ObjectType')
     PathString = Shapes::StringShape.new(name: 'PathString')
+    PathToObjectIdentifiers = Shapes::StructureShape.new(name: 'PathToObjectIdentifiers')
+    PathToObjectIdentifiersList = Shapes::ListShape.new(name: 'PathToObjectIdentifiersList')
     PolicyAttachment = Shapes::StructureShape.new(name: 'PolicyAttachment')
     PolicyAttachmentList = Shapes::ListShape.new(name: 'PolicyAttachmentList')
     PolicyToPath = Shapes::StructureShape.new(name: 'PolicyToPath')
@@ -347,6 +351,7 @@ module Aws::CloudDirectory
     BatchListObjectAttributes.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
     BatchListObjectAttributes.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     BatchListObjectAttributes.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    BatchListObjectAttributes.add_member(:facet_filter, Shapes::ShapeRef.new(shape: SchemaFacet, location_name: "FacetFilter"))
     BatchListObjectAttributes.struct_class = Types::BatchListObjectAttributes
 
     BatchListObjectAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeKeyAndValueList, location_name: "Attributes"))
@@ -684,6 +689,7 @@ module Aws::CloudDirectory
     ListObjectAttributesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListObjectAttributesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
     ListObjectAttributesRequest.add_member(:consistency_level, Shapes::ShapeRef.new(shape: ConsistencyLevel, location: "header", location_name: "x-amz-consistency-level"))
+    ListObjectAttributesRequest.add_member(:facet_filter, Shapes::ShapeRef.new(shape: SchemaFacet, location_name: "FacetFilter"))
     ListObjectAttributesRequest.struct_class = Types::ListObjectAttributesRequest
 
     ListObjectAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: AttributeKeyAndValueList, location_name: "Attributes"))
@@ -700,6 +706,16 @@ module Aws::CloudDirectory
     ListObjectChildrenResponse.add_member(:children, Shapes::ShapeRef.new(shape: LinkNameToObjectIdentifierMap, location_name: "Children"))
     ListObjectChildrenResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListObjectChildrenResponse.struct_class = Types::ListObjectChildrenResponse
+
+    ListObjectParentPathsRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
+    ListObjectParentPathsRequest.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
+    ListObjectParentPathsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListObjectParentPathsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: NumberResults, location_name: "MaxResults"))
+    ListObjectParentPathsRequest.struct_class = Types::ListObjectParentPathsRequest
+
+    ListObjectParentPathsResponse.add_member(:path_to_object_identifiers_list, Shapes::ShapeRef.new(shape: PathToObjectIdentifiersList, location_name: "PathToObjectIdentifiersList"))
+    ListObjectParentPathsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListObjectParentPathsResponse.struct_class = Types::ListObjectParentPathsResponse
 
     ListObjectParentsRequest.add_member(:directory_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "header", location_name: "x-amz-data-partition"))
     ListObjectParentsRequest.add_member(:object_reference, Shapes::ShapeRef.new(shape: ObjectReference, required: true, location_name: "ObjectReference"))
@@ -784,6 +800,12 @@ module Aws::CloudDirectory
 
     ObjectReference.add_member(:selector, Shapes::ShapeRef.new(shape: SelectorObjectReference, location_name: "Selector"))
     ObjectReference.struct_class = Types::ObjectReference
+
+    PathToObjectIdentifiers.add_member(:path, Shapes::ShapeRef.new(shape: PathString, location_name: "Path"))
+    PathToObjectIdentifiers.add_member(:object_identifiers, Shapes::ShapeRef.new(shape: ObjectIdentifierList, location_name: "ObjectIdentifiers"))
+    PathToObjectIdentifiers.struct_class = Types::PathToObjectIdentifiers
+
+    PathToObjectIdentifiersList.member = Shapes::ShapeRef.new(shape: PathToObjectIdentifiers)
 
     PolicyAttachment.add_member(:policy_id, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "PolicyId"))
     PolicyAttachment.add_member(:object_identifier, Shapes::ShapeRef.new(shape: ObjectIdentifier, location_name: "ObjectIdentifier"))
@@ -956,6 +978,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: LinkNameAlreadyInUseException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAttachmentException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
       end)
 
       api.add_operation(:attach_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1128,6 +1151,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: DirectoryDeletedException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
       end)
 
       api.add_operation(:delete_facet, Seahorse::Model::Operation.new.tap do |o|
@@ -1244,6 +1268,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
       end)
 
       api.add_operation(:enable_directory, Seahorse::Model::Operation.new.tap do |o|
@@ -1258,6 +1283,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
       end)
 
       api.add_operation(:get_directory, Seahorse::Model::Operation.new.tap do |o|
@@ -1493,6 +1519,7 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: FacetValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1518,6 +1545,29 @@ module Aws::CloudDirectory
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: NotNodeException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_object_parent_paths, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListObjectParentPaths"
+        o.http_method = "POST"
+        o.http_request_uri = "/amazonclouddirectory/2017-01-11/object/parentpaths"
+        o.input = Shapes::ShapeRef.new(shape: ListObjectParentPathsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListObjectParentPathsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        o.errors << Shapes::ShapeRef.new(shape: RetryableConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectoryNotEnabledException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

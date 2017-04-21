@@ -321,6 +321,7 @@ module Aws::IAM
     #     path: "pathType",
     #     role_name: "roleNameType", # required
     #     assume_role_policy_document: "policyDocumentType", # required
+    #     description: "roleDescriptionType",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :path
@@ -347,8 +348,10 @@ module Aws::IAM
     #   This parameter allows (per its [regex pattern][1]) a string of
     #   characters consisting of upper and lowercase alphanumeric characters
     #   with no spaces. You can also include any of the following characters:
-    #   =,.@-. Role names are not distinguished by case. For example, you
-    #   cannot create roles named both "PRODROLE" and "prodrole".
+    #   \_+=,.@-
+    #
+    #   Role names are not distinguished by case. For example, you cannot
+    #   create roles named both "PRODROLE" and "prodrole".
     #
     #
     #
@@ -368,6 +371,8 @@ module Aws::IAM
     #
     #
     #   [1]: http://wikipedia.org/wiki/regex
+    # @option options [String] :description
+    #   A customer-provided description of the role.
     # @return [Role]
     def create_role(options = {})
       resp = @client.create_role(options)

@@ -12,6 +12,7 @@ require_relative 'aws-sdk-elasticloadbalancingv2/types'
 require_relative 'aws-sdk-elasticloadbalancingv2/client_api'
 require_relative 'aws-sdk-elasticloadbalancingv2/client'
 require_relative 'aws-sdk-elasticloadbalancingv2/errors'
+require_relative 'aws-sdk-elasticloadbalancingv2/waiters'
 require_relative 'aws-sdk-elasticloadbalancingv2/resource'
 require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 
@@ -42,6 +43,6 @@ require_relative 'aws-sdk-elasticloadbalancingv2/customizations'
 # @service
 module Aws::ElasticLoadBalancingV2
 
-  GEM_VERSION = '1.0.0.rc2'
+  GEM_VERSION = '1.0.0.rc3'
 
 end

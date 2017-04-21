@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::KMS
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -310,13 +312,10 @@ module Aws::KMS
     #   A list of operations that the grant permits.
     #
     # @option params [Types::GrantConstraints] :constraints
-    #   The conditions under which the operations permitted by the grant are
-    #   allowed.
-    #
-    #   You can use this value to allow the operations permitted by the grant
-    #   only when a specified encryption context is present. For more
-    #   information, see [Encryption Context][1] in the *AWS Key Management
-    #   Service Developer Guide*.
+    #   A structure that you can use to allow certain operations in the grant
+    #   only when the desired encryption context is present. For more
+    #   information about encryption context, see [Encryption Context][1] in
+    #   the *AWS Key Management Service Developer Guide*.
     #
     #
     #
@@ -994,8 +993,8 @@ module Aws::KMS
     #     plaintext data key from memory.
     #
     # To return only an encrypted copy of the data key, use
-    # GenerateDataKeyWithoutPlaintext. To return an arbitrary unpredictable
-    # byte string, use GenerateRandom.
+    # GenerateDataKeyWithoutPlaintext. To return a random byte string that
+    # is cryptographically secure, use GenerateRandom.
     #
     # If you use the optional `EncryptionContext` field, you must store at
     # least enough information to be able to reconstruct the full encryption
@@ -1189,7 +1188,14 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Generates an unpredictable byte string.
+    # Returns a random byte string that is cryptographically secure.
+    #
+    # For more information about entropy and random number generation, see
+    # the [AWS Key Management Service Cryptographic Details][1] whitepaper.
+    #
+    #
+    #
+    # [1]: https://d0.awsstatic.com/whitepapers/KMS-Cryptographic-Details.pdf
     #
     # @option params [Integer] :number_of_bytes
     #   The length of the byte string.
@@ -2338,7 +2344,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

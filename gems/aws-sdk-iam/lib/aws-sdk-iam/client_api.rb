@@ -52,6 +52,8 @@ module Aws::IAM
     CreateRoleResponse = Shapes::StructureShape.new(name: 'CreateRoleResponse')
     CreateSAMLProviderRequest = Shapes::StructureShape.new(name: 'CreateSAMLProviderRequest')
     CreateSAMLProviderResponse = Shapes::StructureShape.new(name: 'CreateSAMLProviderResponse')
+    CreateServiceLinkedRoleRequest = Shapes::StructureShape.new(name: 'CreateServiceLinkedRoleRequest')
+    CreateServiceLinkedRoleResponse = Shapes::StructureShape.new(name: 'CreateServiceLinkedRoleResponse')
     CreateServiceSpecificCredentialRequest = Shapes::StructureShape.new(name: 'CreateServiceSpecificCredentialRequest')
     CreateServiceSpecificCredentialResponse = Shapes::StructureShape.new(name: 'CreateServiceSpecificCredentialResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
@@ -264,6 +266,7 @@ module Aws::IAM
     SimulationPolicyListType = Shapes::ListShape.new(name: 'SimulationPolicyListType')
     Statement = Shapes::StructureShape.new(name: 'Statement')
     StatementListType = Shapes::ListShape.new(name: 'StatementListType')
+    UnmodifiableEntityException = Shapes::StructureShape.new(name: 'UnmodifiableEntityException')
     UnrecognizedPublicKeyEncodingException = Shapes::StructureShape.new(name: 'UnrecognizedPublicKeyEncodingException')
     UpdateAccessKeyRequest = Shapes::StructureShape.new(name: 'UpdateAccessKeyRequest')
     UpdateAccountPasswordPolicyRequest = Shapes::StructureShape.new(name: 'UpdateAccountPasswordPolicyRequest')
@@ -271,6 +274,8 @@ module Aws::IAM
     UpdateGroupRequest = Shapes::StructureShape.new(name: 'UpdateGroupRequest')
     UpdateLoginProfileRequest = Shapes::StructureShape.new(name: 'UpdateLoginProfileRequest')
     UpdateOpenIDConnectProviderThumbprintRequest = Shapes::StructureShape.new(name: 'UpdateOpenIDConnectProviderThumbprintRequest')
+    UpdateRoleDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateRoleDescriptionRequest')
+    UpdateRoleDescriptionResponse = Shapes::StructureShape.new(name: 'UpdateRoleDescriptionResponse')
     UpdateSAMLProviderRequest = Shapes::StructureShape.new(name: 'UpdateSAMLProviderRequest')
     UpdateSAMLProviderResponse = Shapes::StructureShape.new(name: 'UpdateSAMLProviderResponse')
     UpdateSSHPublicKeyRequest = Shapes::StructureShape.new(name: 'UpdateSSHPublicKeyRequest')
@@ -308,6 +313,7 @@ module Aws::IAM
     credentialReportExpiredExceptionMessage = Shapes::StringShape.new(name: 'credentialReportExpiredExceptionMessage')
     credentialReportNotPresentExceptionMessage = Shapes::StringShape.new(name: 'credentialReportNotPresentExceptionMessage')
     credentialReportNotReadyExceptionMessage = Shapes::StringShape.new(name: 'credentialReportNotReadyExceptionMessage')
+    customSuffixType = Shapes::StringShape.new(name: 'customSuffixType')
     dateType = Shapes::TimestampShape.new(name: 'dateType')
     deleteConflictMessage = Shapes::StringShape.new(name: 'deleteConflictMessage')
     duplicateCertificateMessage = Shapes::StringShape.new(name: 'duplicateCertificateMessage')
@@ -359,6 +365,7 @@ module Aws::IAM
     publicKeyFingerprintType = Shapes::StringShape.new(name: 'publicKeyFingerprintType')
     publicKeyIdType = Shapes::StringShape.new(name: 'publicKeyIdType')
     publicKeyMaterialType = Shapes::StringShape.new(name: 'publicKeyMaterialType')
+    roleDescriptionType = Shapes::StringShape.new(name: 'roleDescriptionType')
     roleDetailListType = Shapes::ListShape.new(name: 'roleDetailListType')
     roleListType = Shapes::ListShape.new(name: 'roleListType')
     roleNameType = Shapes::StringShape.new(name: 'roleNameType')
@@ -378,6 +385,7 @@ module Aws::IAM
     summaryValueType = Shapes::IntegerShape.new(name: 'summaryValueType')
     thumbprintListType = Shapes::ListShape.new(name: 'thumbprintListType')
     thumbprintType = Shapes::StringShape.new(name: 'thumbprintType')
+    unmodifiableEntityMessage = Shapes::StringShape.new(name: 'unmodifiableEntityMessage')
     unrecognizedPublicKeyEncodingMessage = Shapes::StringShape.new(name: 'unrecognizedPublicKeyEncodingMessage')
     userDetailListType = Shapes::ListShape.new(name: 'userDetailListType')
     userListType = Shapes::ListShape.new(name: 'userListType')
@@ -507,6 +515,7 @@ module Aws::IAM
     CreateRoleRequest.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
     CreateRoleRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
     CreateRoleRequest.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, required: true, location_name: "AssumeRolePolicyDocument"))
+    CreateRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     CreateRoleRequest.struct_class = Types::CreateRoleRequest
 
     CreateRoleResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "Role"))
@@ -518,6 +527,14 @@ module Aws::IAM
 
     CreateSAMLProviderResponse.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, location_name: "SAMLProviderArn"))
     CreateSAMLProviderResponse.struct_class = Types::CreateSAMLProviderResponse
+
+    CreateServiceLinkedRoleRequest.add_member(:aws_service_name, Shapes::ShapeRef.new(shape: groupNameType, required: true, location_name: "AWSServiceName"))
+    CreateServiceLinkedRoleRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
+    CreateServiceLinkedRoleRequest.add_member(:custom_suffix, Shapes::ShapeRef.new(shape: customSuffixType, location_name: "CustomSuffix"))
+    CreateServiceLinkedRoleRequest.struct_class = Types::CreateServiceLinkedRoleRequest
+
+    CreateServiceLinkedRoleResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    CreateServiceLinkedRoleResponse.struct_class = Types::CreateServiceLinkedRoleResponse
 
     CreateServiceSpecificCredentialRequest.add_member(:user_name, Shapes::ShapeRef.new(shape: userNameType, required: true, location_name: "UserName"))
     CreateServiceSpecificCredentialRequest.add_member(:service_name, Shapes::ShapeRef.new(shape: serviceName, required: true, location_name: "ServiceName"))
@@ -1208,6 +1225,7 @@ module Aws::IAM
     Role.add_member(:arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "Arn"))
     Role.add_member(:create_date, Shapes::ShapeRef.new(shape: dateType, required: true, location_name: "CreateDate"))
     Role.add_member(:assume_role_policy_document, Shapes::ShapeRef.new(shape: policyDocumentType, location_name: "AssumeRolePolicyDocument"))
+    Role.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, location_name: "Description"))
     Role.struct_class = Types::Role
 
     RoleDetail.add_member(:path, Shapes::ShapeRef.new(shape: pathType, location_name: "Path"))
@@ -1360,6 +1378,13 @@ module Aws::IAM
     UpdateOpenIDConnectProviderThumbprintRequest.add_member(:open_id_connect_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "OpenIDConnectProviderArn"))
     UpdateOpenIDConnectProviderThumbprintRequest.add_member(:thumbprint_list, Shapes::ShapeRef.new(shape: thumbprintListType, required: true, location_name: "ThumbprintList"))
     UpdateOpenIDConnectProviderThumbprintRequest.struct_class = Types::UpdateOpenIDConnectProviderThumbprintRequest
+
+    UpdateRoleDescriptionRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: roleNameType, required: true, location_name: "RoleName"))
+    UpdateRoleDescriptionRequest.add_member(:description, Shapes::ShapeRef.new(shape: roleDescriptionType, required: true, location_name: "Description"))
+    UpdateRoleDescriptionRequest.struct_class = Types::UpdateRoleDescriptionRequest
+
+    UpdateRoleDescriptionResponse.add_member(:role, Shapes::ShapeRef.new(shape: Role, location_name: "Role"))
+    UpdateRoleDescriptionResponse.struct_class = Types::UpdateRoleDescriptionResponse
 
     UpdateSAMLProviderRequest.add_member(:saml_metadata_document, Shapes::ShapeRef.new(shape: SAMLMetadataDocumentType, required: true, location_name: "SAMLMetadataDocument"))
     UpdateSAMLProviderRequest.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: arnType, required: true, location_name: "SAMLProviderArn"))
@@ -1524,6 +1549,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1559,6 +1585,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1691,6 +1718,7 @@ module Aws::IAM
         o.input = Shapes::ShapeRef.new(shape: CreateRoleRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRoleResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
@@ -1705,6 +1733,18 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:create_service_linked_role, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServiceLinkedRole"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateServiceLinkedRoleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateServiceLinkedRoleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1880,6 +1920,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: DeleteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -1891,6 +1932,7 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2003,6 +2045,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2686,6 +2729,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2720,6 +2764,7 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2834,6 +2879,7 @@ module Aws::IAM
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 
@@ -2870,6 +2916,17 @@ module Aws::IAM
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:update_role_description, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRoleDescription"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRoleDescriptionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateRoleDescriptionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: UnmodifiableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
       end)
 

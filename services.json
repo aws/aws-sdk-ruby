@@ -34,7 +34,7 @@
     "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-11-25"
+    "models": "cloudfront/2017-03-25"
   },
   "CloudHSM": {
     "models": "cloudhsm/2014-05-30"
@@ -76,6 +76,9 @@
   },
   "CodePipeline": {
     "models": "codepipeline/2015-07-09"
+  },
+  "CodeStar": {
+    "models": "codestar/2017-04-19"
   },
   "CognitoIdentity": {
     "models": "cognito-identity/2014-06-30"
@@ -206,6 +209,9 @@
   "LambdaPreview": {
     "models": "lambda/2014-11-11"
   },
+  "LexModelBuildingService": {
+    "models": "lex-models/2017-04-19"
+  },
   "LexRuntimeService": {
     "models": "runtime.lex/2016-11-28"
   },
@@ -256,6 +262,9 @@
   },
   "Rekognition": {
     "models": "rekognition/2016-06-27"
+  },
+  "ResourceGroupsTaggingAPI": {
+    "models": "resourcegroupstaggingapi/2017-01-26"
   },
   "Route53": {
     "models": "route53/2013-04-01",

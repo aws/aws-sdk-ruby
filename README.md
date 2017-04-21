@@ -261,6 +261,7 @@ to be backwards compatible.
 | AWS CodeCommit                      | Aws::CodeCommit                   | aws-sdk-codecommit                   | 2015-04-13  |
 | AWS CodeDeploy                      | Aws::CodeDeploy                   | aws-sdk-codedeploy                   | 2014-10-06  |
 | AWS CodePipeline                    | Aws::CodePipeline                 | aws-sdk-codepipeline                 | 2015-07-09  |
+| AWS CodeStar                        | Aws::CodeStar                     | aws-sdk-codestar                     | 2017-04-19  |
 | AWS Config                          | Aws::ConfigService                | aws-sdk-configservice                | 2014-11-12  |
 | AWS Cost and Usage Report Service   | Aws::CostandUsageReportService    | aws-sdk-costandusagereportservice    | 2017-01-06  |
 | AWS Data Pipeline                   | Aws::DataPipeline                 | aws-sdk-datapipeline                 | 2012-10-29  |
@@ -275,12 +276,13 @@ to be backwards compatible.
 | AWS IoT                             | Aws::IoT                          | aws-sdk-iot                          | 2015-05-28  |
 | AWS IoT Data Plane                  | Aws::IoTDataPlane                 | aws-sdk-iotdataplane                 | 2015-05-28  |
 | AWS Key Management Service          | Aws::KMS                          | aws-sdk-kms                          | 2014-11-01  |
-| AWS Lambda                          | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
 | AWS Lambda                          | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
+| AWS Lambda                          | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
 | AWS Marketplace Commerce Analytics  | Aws::MarketplaceCommerceAnalytics | aws-sdk-marketplacecommerceanalytics | 2015-07-01  |
 | AWS OpsWorks                        | Aws::OpsWorks                     | aws-sdk-opsworks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | Aws::OpsWorksCM                   | aws-sdk-opsworkscm                   | 2016-11-01  |
 | AWS Organizations                   | Aws::Organizations                | aws-sdk-organizations                | 2016-11-28  |
+| AWS Resource Groups Tagging API     | Aws::ResourceGroupsTaggingAPI     | aws-sdk-resourcegroupstaggingapi     | 2017-01-26  |
 | AWS Security Token Service          | Aws::STS                          | aws-sdk-core                         | 2011-06-15  |
 | AWS Server Migration Service        | Aws::SMS                          | aws-sdk-sms                          | 2016-10-24  |
 | AWS Service Catalog                 | Aws::ServiceCatalog               | aws-sdk-servicecatalog               | 2015-12-10  |
@@ -295,7 +297,7 @@ to be backwards compatible.
 | Amazon API Gateway                  | Aws::APIGateway                   | aws-sdk-apigateway                   | 2015-07-09  |
 | Amazon AppStream                    | Aws::AppStream                    | aws-sdk-appstream                    | 2016-12-01  |
 | Amazon CloudDirectory               | Aws::CloudDirectory               | aws-sdk-clouddirectory               | 2016-05-10  |
-| Amazon CloudFront                   | Aws::CloudFront                   | aws-sdk-cloudfront                   | 2016-11-25  |
+| Amazon CloudFront                   | Aws::CloudFront                   | aws-sdk-cloudfront                   | 2017-03-25  |
 | Amazon CloudHSM                     | Aws::CloudHSM                     | aws-sdk-cloudhsm                     | 2014-05-30  |
 | Amazon CloudSearch                  | Aws::CloudSearch                  | aws-sdk-cloudsearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain           | Aws::CloudSearchDomain            | aws-sdk-cloudsearchdomain            | 2013-01-01  |
@@ -322,6 +324,7 @@ to be backwards compatible.
 | Amazon Kinesis                      | Aws::Kinesis                      | aws-sdk-kinesis                      | 2013-12-02  |
 | Amazon Kinesis Analytics            | Aws::KinesisAnalytics             | aws-sdk-kinesisanalytics             | 2015-08-14  |
 | Amazon Kinesis Firehose             | Aws::Firehose                     | aws-sdk-firehose                     | 2015-08-04  |
+| Amazon Lex Model Building Service   | Aws::LexModelBuildingService      | aws-sdk-lexmodelbuildingservice      | 2017-04-19  |
 | Amazon Lex Runtime Service          | Aws::LexRuntimeService            | aws-sdk-lexruntimeservice            | 2016-11-28  |
 | Amazon Lightsail                    | Aws::Lightsail                    | aws-sdk-lightsail                    | 2016-11-28  |
 | Amazon Machine Learning             | Aws::MachineLearning              | aws-sdk-machinelearning              | 2014-12-12  |
@@ -344,8 +347,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | Aws::WorkSpaces                   | aws-sdk-workspaces                   | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling       | aws-sdk-applicationautoscaling       | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                  | aws-sdk-autoscaling                  | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancing         | aws-sdk-elasticloadbalancing         | 2012-06-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancingV2       | aws-sdk-elasticloadbalancingv2       | 2015-12-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancing         | aws-sdk-elasticloadbalancing         | 2012-06-01  |
 
 ## License
 

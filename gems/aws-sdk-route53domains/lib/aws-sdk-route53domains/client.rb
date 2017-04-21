@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::Route53Domains
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -158,17 +160,11 @@ module Aws::Route53Domains
     # another request to determine the availability of the domain name.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
+    #   The name of the domain that you want to get availability for.
     #
     #   Constraints: The domain name can contain only the letters a through z,
     #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
     #   Names are not supported.
-    #
-    #   Required: Yes
     #
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
@@ -205,31 +201,8 @@ module Aws::Route53Domains
     # @option params [required, String] :domain_name
     #   The domain for which you want to delete one or more tags.
     #
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Hyphens are allowed only when
-    #   they're surrounded by letters, numbers, or other hyphens. You can't
-    #   specify a hyphen at the beginning or end of a label. To specify an
-    #   Internationalized Domain Name, you must convert the name to Punycode.
-    #
-    #   Required: Yes
-    #
     # @option params [required, Array<String>] :tags_to_delete
     #   A list of tag keys to delete.
-    #
-    #   Type: A list that contains the keys of the tags that you want to
-    #   delete.
-    #
-    #   Default: None
-    #
-    #   Required: No
-    #
-    #   '>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -253,6 +226,7 @@ module Aws::Route53Domains
     # the specified domain.
     #
     # @option params [required, String] :domain_name
+    #   The name of the domain that you want to disable automatic renewal for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -280,17 +254,7 @@ module Aws::Route53Domains
     # successfully, the domain registrant will be notified by email.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to remove the transfer lock for.
     #
     # @return [Types::DisableDomainTransferLockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -331,6 +295,7 @@ module Aws::Route53Domains
     # [1]: http://wiki.gandi.net/en/domains/renew#renewal_restoration_and_deletion_times
     #
     # @option params [required, String] :domain_name
+    #   The name of the domain that you want to enable automatic renewal for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -357,17 +322,7 @@ module Aws::Route53Domains
     # email.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to set the transfer lock for.
     #
     # @return [Types::EnableDomainTransferLockResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -404,12 +359,6 @@ module Aws::Route53Domains
     #   The name of the domain for which you want to know whether the
     #   registrant contact has confirmed that the email address is valid.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: Yes
-    #
     # @return [Types::GetContactReachabilityStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetContactReachabilityStatusResponse#domain_name #domain_name} => String
@@ -435,21 +384,13 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
-    # This operation returns detailed information about the domain. The
-    # domain's contact information is also returned as part of the output.
+    # This operation returns detailed information about a specified domain
+    # that is associated with the current AWS account. Contact information
+    # for the domain is also returned as part of the output.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to get detailed information
+    #   about.
     #
     # @return [Types::GetDomainDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -567,23 +508,27 @@ module Aws::Route53Domains
     # names given a string, which can either be a domain name or simply a
     # word or phrase (without spaces).
     #
-    # Parameters: * DomainName (string): The basis for your domain
-    # suggestion search, a
-    #   string with (or without) top-level domain specified.
-    # * SuggestionCount (int): The number of domain suggestions to be
-    #   returned, maximum 50, minimum 1.
-    # * OnlyAvailable (bool): If true, availability check will be performed
-    #   on suggestion results, and only available domains will be returned.
-    #   If false, suggestions will be returned without checking whether the
-    #   domain is actually available, and caller will have to call
-    #   checkDomainAvailability for each suggestion to determine
-    #   availability for registration.
-    #
     # @option params [required, String] :domain_name
+    #   A domain name that you want to use as the basis for a list of possible
+    #   domain names. The domain name must contain a top-level domain (TLD),
+    #   such as .com, that Amazon Route 53 supports. For a list of TLDs, see
+    #   [Domains that You Can Register with Amazon Route 53][1] in the *Amazon
+    #   Route 53 Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [required, Integer] :suggestion_count
+    #   The number of suggested domain names that you want Amazon Route 53 to
+    #   return.
     #
     # @option params [required, Boolean] :only_available
+    #   If `OnlyAvailable` is `true`, Amazon Route 53 returns only domain
+    #   names that are available. If `OnlyAvailable` is `false`, Amazon Route
+    #   53 returns domain names without checking whether they're available to
+    #   be registered. To determine whether the domain is available, you can
+    #   call `checkDomainAvailability` for each suggestion.
     #
     # @return [Types::GetDomainSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -619,12 +564,6 @@ module Aws::Route53Domains
     #   The identifier for the operation for which you want to get the status.
     #   Amazon Route 53 returned the identifier in the response to the
     #   original request.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #
     # @return [Types::GetOperationDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -671,25 +610,13 @@ module Aws::Route53Domains
     #   request that includes the value of `NextPageMarker` in the `Marker`
     #   element.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Constraints: The marker must match the value specified in the previous
     #   request.
-    #
-    #   Required: No
     #
     # @option params [Integer] :max_items
     #   Number of domains to be returned.
     #
-    #   Type: Integer
-    #
     #   Default: 20
-    #
-    #   Constraints: A numeral between 1 and 100.
-    #
-    #   Required: No
     #
     # @return [Types::ListDomainsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -732,22 +659,10 @@ module Aws::Route53Domains
     #   the previous response, and submit another request that includes the
     #   value of `NextPageMarker` in the `Marker` element.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: No
-    #
     # @option params [Integer] :max_items
     #   Number of domains to be returned.
     #
-    #   Type: Integer
-    #
     #   Default: 20
-    #
-    #   Constraints: A value between 1 and 100.
-    #
-    #   Required: No
     #
     # @return [Types::ListOperationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -823,16 +738,20 @@ module Aws::Route53Domains
     #   domain. Amazon Route 53 assigns four name servers to your hosted
     #   zone and automatically updates your domain registration with the
     #   names of these name servers.
+    #
     # * Enables autorenew, so your domain registration will renew
     #   automatically each year. We'll notify you in advance of the renewal
     #   date so you can choose whether to renew the registration.
+    #
     # * Optionally enables privacy protection, so WHOIS queries return
     #   contact information for our registrar partner, Gandi, instead of the
     #   information you entered for registrant, admin, and tech contacts.
+    #
     # * If registration is successful, returns an operation ID that you can
     #   use to track the progress and completion of the action. If the
     #   request is not completed successfully, the domain registrant is
     #   notified by email.
+    #
     # * Charges your AWS account an amount based on the top-level domain.
     #   For more information, see [Amazon Route 53 Pricing][1].
     #
@@ -841,121 +760,67 @@ module Aws::Route53Domains
     # [1]: http://aws.amazon.com/route53/pricing/
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
+    #   The domain name that you want to register.
     #
     #   Constraints: The domain name can contain only the letters a through z,
     #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
     #   Names are not supported.
     #
-    #   Required: Yes
-    #
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
     #
     # @option params [required, Integer] :duration_in_years
-    #   The number of years the domain will be registered. Domains are
-    #   registered for a minimum of one year. The maximum period depends on
-    #   the top-level domain.
-    #
-    #   Type: Integer
+    #   The number of years that you want to register the domain for. Domains
+    #   are registered for a minimum of one year. The maximum period depends
+    #   on the top-level domain. For the range of valid values for your
+    #   domain, see [Domains that You Can Register with Amazon Route 53][1] in
+    #   the *Amazon Route 53 Developer Guide*.
     #
     #   Default: 1
     #
-    #   Valid values: Integer from 1 to 10
     #
-    #   Required: Yes
+    #
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [Boolean] :auto_renew
     #   Indicates whether the domain will be automatically renewed (`true`) or
     #   not (`false`). Autorenewal only takes effect after the account is
     #   charged.
     #
-    #   Type: Boolean
-    #
-    #   Valid values: `true` \| `false`
-    #
     #   Default: `true`
-    #
-    #   Required: No
     #
     # @option params [required, Types::ContactDetail] :admin_contact
     #   Provides detailed contact information.
     #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
-    #
     # @option params [required, Types::ContactDetail] :registrant_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
     #
     # @option params [required, Types::ContactDetail] :tech_contact
     #   Provides detailed contact information.
     #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
-    #
     # @option params [Boolean] :privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
     #
-    #   Type: Boolean
-    #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @option params [Boolean] :privacy_protect_registrant_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
     #
-    #   Type: Boolean
-    #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @option params [Boolean] :privacy_protect_tech_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
     #
-    #   Type: Boolean
-    #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @return [Types::RegisterDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1056,43 +921,30 @@ module Aws::Route53Domains
     # expiration date. Some TLD registries delete domains before the
     # expiration date if you haven't renewed far enough in advance. For
     # more information about renewing domain registration, see [Renewing
-    # Registration for a Domain][1] in the Amazon Route 53 documentation.
+    # Registration for a Domain][1] in the Amazon Route 53 Developer Guide.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/console/route53/domain-renew
+    # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-renew.html
     #
     # @option params [required, String] :domain_name
+    #   The name of the domain that you want to renew.
     #
     # @option params [Integer] :duration_in_years
     #   The number of years that you want to renew the domain for. The maximum
     #   number of years depends on the top-level domain. For the range of
     #   valid values for your domain, see [Domains that You Can Register with
-    #   Amazon Route 53][1] in the Amazon Route 53 documentation.
-    #
-    #   Type: Integer
+    #   Amazon Route 53][1] in the *Amazon Route 53 Developer Guide*.
     #
     #   Default: 1
     #
-    #   Valid values: Integer from 1 to 10
-    #
-    #   Required: No
     #
     #
-    #
-    #   [1]: http://docs.aws.amazon.com/console/route53/domain-tld-list
+    #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
     #
     # @option params [required, Integer] :current_expiry_year
     #   The year when the registration for the domain is set to expire. This
     #   value must match the current expiration date for the domain.
-    #
-    #   Type: Integer
-    #
-    #   Default: None
-    #
-    #   Valid values: Integer
-    #
-    #   Required: Yes
     #
     # @return [Types::RenewDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1128,12 +980,6 @@ module Aws::Route53Domains
     #   The name of the domain for which you want Amazon Route 53 to resend a
     #   confirmation email to the registrant contact.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Required: Yes
-    #
     # @return [Types::ResendContactReachabilityEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ResendContactReachabilityEmailResponse#domain_name #domain_name} => String
@@ -1166,17 +1012,7 @@ module Aws::Route53Domains
     # registrar.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to get an authorization code for.
     #
     # @return [Types::RetrieveDomainAuthCodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1207,8 +1043,8 @@ module Aws::Route53Domains
     #
     # For transfer requirements, a detailed procedure, and information about
     # viewing the status of a domain transfer, see [Transferring
-    # Registration for a Domain to Amazon Route 53][1] in the Amazon Route
-    # 53 Developer Guide.
+    # Registration for a Domain to Amazon Route 53][1] in the *Amazon Route
+    # 53 Developer Guide*.
     #
     # If the registrar for your domain is also the DNS service provider for
     # the domain, we highly recommend that you consider transferring your
@@ -1218,7 +1054,10 @@ module Aws::Route53Domains
     # the registration, the previous registrar will not renew your domain
     # registration and could end your DNS service at any time.
     #
-    # <note>Caution! If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.</note>
+    # If the registrar for your domain is also the DNS service provider for
+    # the domain and you don't transfer DNS service to another provider,
+    # your website, email, and the web applications associated with the
+    # domain might become unavailable.
     #
     # If the transfer is successful, this method returns an operation ID
     # that you can use to track the progress and completion of the action.
@@ -1230,138 +1069,68 @@ module Aws::Route53Domains
     # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
+    #   The name of the domain that you want to transfer to Amazon Route 53.
     #
     #   Constraints: The domain name can contain only the letters a through z,
     #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
     #   Names are not supported.
     #
-    #   Required: Yes
-    #
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
     #
     # @option params [required, Integer] :duration_in_years
-    #   The number of years the domain will be registered. Domains are
-    #   registered for a minimum of one year. The maximum period depends on
-    #   the top-level domain.
-    #
-    #   Type: Integer
+    #   The number of years that you want to register the domain for. Domains
+    #   are registered for a minimum of one year. The maximum period depends
+    #   on the top-level domain.
     #
     #   Default: 1
-    #
-    #   Valid values: Integer from 1 to 10
-    #
-    #   Required: Yes
     #
     # @option params [Array<Types::Nameserver>] :nameservers
     #   Contains details for the host and glue IP addresses.
     #
-    #   Type: Complex
-    #
-    #   Children: `GlueIps`, `Name`
-    #
-    #   Required: No
-    #
     # @option params [String] :auth_code
     #   The authorization code for the domain. You get this value from the
     #   current registrar.
-    #
-    #   Type: String
-    #
-    #   Required: Yes
     #
     # @option params [Boolean] :auto_renew
     #   Indicates whether the domain will be automatically renewed (true) or
     #   not (false). Autorenewal only takes effect after the account is
     #   charged.
     #
-    #   Type: Boolean
-    #
-    #   Valid values: `true` \| `false`
-    #
     #   Default: true
-    #
-    #   Required: No
     #
     # @option params [required, Types::ContactDetail] :admin_contact
     #   Provides detailed contact information.
     #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
-    #
     # @option params [required, Types::ContactDetail] :registrant_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
     #
     # @option params [required, Types::ContactDetail] :tech_contact
     #   Provides detailed contact information.
     #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
-    #
     # @option params [Boolean] :privacy_protect_admin_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
     #
-    #   Type: Boolean
-    #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @option params [Boolean] :privacy_protect_registrant_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
     #
-    #   Type: Boolean
-    #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @option params [Boolean] :privacy_protect_tech_contact
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
     #
-    #   Type: Boolean
-    #
     #   Default: `true`
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @return [Types::TransferDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1472,50 +1241,17 @@ module Aws::Route53Domains
     # notified by email.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to update contact information
+    #   for.
     #
     # @option params [Types::ContactDetail] :admin_contact
     #   Provides detailed contact information.
     #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
-    #
     # @option params [Types::ContactDetail] :registrant_contact
     #   Provides detailed contact information.
     #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
-    #
     # @option params [Types::ContactDetail] :tech_contact
     #   Provides detailed contact information.
-    #
-    #   Type: Complex
-    #
-    #   Children: `FirstName`, `MiddleName`, `LastName`, `ContactType`,
-    #   `OrganizationName`, `AddressLine1`, `AddressLine2`, `City`, `State`,
-    #   `CountryCode`, `ZipCode`, `PhoneNumber`, `Email`, `Fax`, `ExtraParams`
-    #
-    #   Required: Yes
     #
     # @return [Types::UpdateDomainContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1620,59 +1356,26 @@ module Aws::Route53Domains
     # [1]: http://www.gandi.net/domain/whois/?currency=USD&amp;amp;lang=en
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to update the privacy setting
+    #   for.
     #
     # @option params [Boolean] :admin_privacy
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
-    #
-    #   Type: Boolean
-    #
-    #   Default: None
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @option params [Boolean] :registrant_privacy
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
-    #
-    #   Type: Boolean
-    #
-    #   Default: None
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @option params [Boolean] :tech_privacy
     #   Whether you want to conceal contact information from WHOIS queries. If
-    #   you specify true, WHOIS ("who is") queries will return contact
+    #   you specify `true`, WHOIS ("who is") queries will return contact
     #   information for our registrar partner, Gandi, instead of the contact
     #   information that you enter.
-    #
-    #   Type: Boolean
-    #
-    #   Default: None
-    #
-    #   Valid values: `true` \| `false`
-    #
-    #   Required: No
     #
     # @return [Types::UpdateDomainContactPrivacyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1711,29 +1414,13 @@ module Aws::Route53Domains
     # email.
     #
     # @option params [required, String] :domain_name
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Internationalized Domain
-    #   Names are not supported.
-    #
-    #   Required: Yes
+    #   The name of the domain that you want to change name servers for.
     #
     # @option params [String] :fi_auth_key
     #   The authorization key for .fi domains
     #
     # @option params [required, Array<Types::Nameserver>] :nameservers
     #   A list of new name servers for the domain.
-    #
-    #   Type: Complex
-    #
-    #   Children: `Name`, `GlueIps`
-    #
-    #   Required: Yes
     #
     # @return [Types::UpdateDomainNameserversResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1773,62 +1460,10 @@ module Aws::Route53Domains
     # @option params [required, String] :domain_name
     #   The domain for which you want to add or update tags.
     #
-    #   The name of a domain.
-    #
-    #   Type: String
-    #
-    #   Default: None
-    #
-    #   Constraints: The domain name can contain only the letters a through z,
-    #   the numbers 0 through 9, and hyphen (-). Hyphens are allowed only when
-    #   they're surrounded by letters, numbers, or other hyphens. You can't
-    #   specify a hyphen at the beginning or end of a label. To specify an
-    #   Internationalized Domain Name, you must convert the name to Punycode.
-    #
-    #   Required: Yes
-    #
     # @option params [Array<Types::Tag>] :tags_to_update
     #   A list of the tag keys and values that you want to add or update. If
     #   you specify a key that already exists, the corresponding value will be
     #   replaced.
-    #
-    #   Type: A complex type containing a list of tags
-    #
-    #   Default: None
-    #
-    #   Required: No
-    #
-    #   '> Each tag includes the following elements:
-    #
-    #   * Key
-    #
-    #     The key (name) of a tag.
-    #
-    #     Type: String
-    #
-    #     Default: None
-    #
-    #     Valid values: Unicode characters including alphanumeric, space, and
-    #     ".:/=+\\-@"
-    #
-    #     Constraints: Each key can be 1-128 characters long.
-    #
-    #     Required: Yes
-    #
-    #   * Value
-    #
-    #     The value of a tag.
-    #
-    #     Type: String
-    #
-    #     Default: None
-    #
-    #     Valid values: Unicode characters including alphanumeric, space, and
-    #     ".:/=+\\-@"
-    #
-    #     Constraints: Each value can be 0-256 characters long.
-    #
-    #     Required: Yes
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1853,28 +1488,16 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
-    # This operation returns all the domain-related billing records for the
-    # current AWS account for a specified period
+    # Returns all the domain-related billing records for the current AWS
+    # account for a specified period
     #
     # @option params [Time,DateTime,Date,Integer,String] :start
     #   The beginning date and time for the time period for which you want a
     #   list of billing records. Specify the date in Unix time format.
     #
-    #   Type: Double
-    #
-    #   Default: None
-    #
-    #   Required: Yes
-    #
     # @option params [Time,DateTime,Date,Integer,String] :end
     #   The end date and time for the time period for which you want a list of
     #   billing records. Specify the date in Unix time format.
-    #
-    #   Type: Double
-    #
-    #   Default: None
-    #
-    #   Required: Yes
     #
     # @option params [String] :marker
     #   For an initial request for a list of billing records, omit this
@@ -1885,25 +1508,13 @@ module Aws::Route53Domains
     #   from the previous response, and submit another request that includes
     #   the value of `NextPageMarker` in the `Marker` element.
     #
-    #   Type: String
-    #
-    #   Default: None
-    #
     #   Constraints: The marker must match the value of `NextPageMarker` that
     #   was returned in the previous response.
-    #
-    #   Required: No
     #
     # @option params [Integer] :max_items
     #   The number of billing records to be returned.
     #
-    #   Type: Integer
-    #
     #   Default: 20
-    #
-    #   Constraints: A value between 1 and 100.
-    #
-    #   Required: No
     #
     # @return [Types::ViewBillingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1951,7 +1562,7 @@ module Aws::Route53Domains
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

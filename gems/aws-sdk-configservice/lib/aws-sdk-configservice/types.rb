@@ -295,9 +295,14 @@ module Aws::ConfigService
     #     frequency.
     #
     #   * Your custom rule is triggered when AWS Config delivers the
-    #     configuration snapshot.
+    #     configuration snapshot. For more information, see
+    #     ConfigSnapshotDeliveryProperties.
     #
-    #   For more information, see ConfigSnapshotDeliveryProperties.
+    #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
+    #   hours. To change the frequency, specify a valid value for the
+    #   `MaximumExecutionFrequency` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] config_rule_state
@@ -899,52 +904,8 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] config_snapshot_delivery_properties
-    #   Provides options for how often AWS Config delivers configuration
-    #   snapshots to the Amazon S3 bucket in your delivery channel.
-    #
-    #   <note markdown="1"> If you want to create a rule that triggers evaluations for your
-    #   resources when AWS Config delivers the configuration snapshot, see
-    #   the following:
-    #
-    #    </note>
-    #
-    #   The frequency for a rule that triggers evaluations for your
-    #   resources when AWS Config delivers the configuration snapshot is set
-    #   by one of two values, depending on which is less frequent:
-    #
-    #   * The value for the `deliveryFrequency` parameter within the
-    #     delivery channel configuration, which sets how often AWS Config
-    #     delivers configuration snapshots. This value also sets how often
-    #     AWS Config invokes evaluations for Config rules.
-    #
-    #   * The value for the `MaximumExecutionFrequency` parameter, which
-    #     sets the maximum frequency with which AWS Config invokes
-    #     evaluations for the rule. For more information, see ConfigRule.
-    #
-    #   If the `deliveryFrequency` value is less frequent than the
-    #   `MaximumExecutionFrequency` value for a rule, AWS Config invokes the
-    #   rule only as often as the `deliveryFrequency` value.
-    #
-    #   1.  For example, you want your rule to run evaluations when AWS
-    #       Config delivers the configuration snapshot.
-    #
-    #   2.  You specify the `MaximumExecutionFrequency` value for
-    #       `Six_Hours`.
-    #
-    #   3.  You then specify the delivery channel `deliveryFrequency` value
-    #       for `TwentyFour_Hours`.
-    #
-    #   4.  Because the value for `deliveryFrequency` is less frequent than
-    #       `MaximumExecutionFrequency`, AWS Config invokes evaluations for
-    #       the rule every 24 hours.
-    #
-    #   You should set the `MaximumExecutionFrequency` value to be at least
-    #   as frequent as the `deliveryFrequency` value. You can view the
-    #   `deliveryFrequency` value by using the `DescribeDeliveryChannnels`
-    #   action.
-    #
-    #   To update the `deliveryFrequency` with which AWS Config delivers
-    #   your configuration snapshots, use the `PutDeliveryChannel` action.
+    #   The options for how often AWS Config delivers configuration
+    #   snapshots to the Amazon S3 bucket.
     #   @return [Types::ConfigSnapshotDeliveryProperties]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliveryChannel AWS API Documentation
@@ -1878,28 +1839,7 @@ module Aws::ConfigService
     #       }
     #
     # @!attribute [rw] config_rule
-    #   An AWS Config rule represents an AWS Lambda function that you create
-    #   for a custom rule or a predefined function for an AWS managed rule.
-    #   The function evaluates configuration items to assess whether your
-    #   AWS resources comply with your desired configurations. This function
-    #   can run when AWS Config detects a configuration change to an AWS
-    #   resource and at a periodic frequency that you choose (for example,
-    #   every 24 hours).
-    #
-    #   <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule
-    #   that triggers evaluations for your resources when AWS Config
-    #   delivers the configuration snapshot. For more information, see
-    #   ConfigSnapshotDeliveryProperties.
-    #
-    #    </note>
-    #
-    #   For more information about developing and using AWS Config rules,
-    #   see [Evaluating AWS Resource Configurations with AWS Config][1] in
-    #   the *AWS Config Developer Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html
+    #   The rule that you want to add to your account.
     #   @return [Types::ConfigRule]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleRequest AWS API Documentation
@@ -2347,10 +2287,16 @@ module Aws::ConfigService
     #   @return [String]
     #
     # @!attribute [rw] maximum_execution_frequency
-    #   The frequency that you want AWS Config to run evaluations for a rule
-    #   that is triggered periodically. If you specify a value for
+    #   The frequency that you want AWS Config to run evaluations for a
+    #   custom rule with a periodic trigger. If you specify a value for
     #   `MaximumExecutionFrequency`, then `MessageType` must use the
     #   `ScheduledNotification` value.
+    #
+    #   <note markdown="1"> By default, rules with a periodic trigger are evaluated every 24
+    #   hours. To change the frequency, specify a valid value for the
+    #   `MaximumExecutionFrequency` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/SourceDetail AWS API Documentation

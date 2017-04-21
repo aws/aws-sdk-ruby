@@ -18,6 +18,7 @@ require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
+require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -45,6 +46,7 @@ module Aws::ApplicationAutoScaling
     add_plugin(Aws::Plugins::ResponsePaging)
     add_plugin(Aws::Plugins::StubResponses)
     add_plugin(Aws::Plugins::IdempotencyToken)
+    add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -189,6 +191,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -202,15 +207,18 @@ module Aws::ApplicationAutoScaling
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
     #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_scaling_policy({
     #     policy_name: "ResourceIdMaxLen1600", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeleteScalingPolicy AWS API Documentation
@@ -254,6 +262,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -268,14 +279,17 @@ module Aws::ApplicationAutoScaling
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
     #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/application-autoscaling-2016-02-06/DeregisterScalableTarget AWS API Documentation
@@ -322,6 +336,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -336,6 +353,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -358,9 +378,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scalable_targets({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_ids: ["ResourceIdMaxLen1600"],
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -368,9 +388,9 @@ module Aws::ApplicationAutoScaling
     # @example Response structure
     #
     #   resp.scalable_targets #=> Array
-    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2"
+    #   resp.scalable_targets[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream"
     #   resp.scalable_targets[0].resource_id #=> String
-    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount"
+    #   resp.scalable_targets[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity"
     #   resp.scalable_targets[0].min_capacity #=> Integer
     #   resp.scalable_targets[0].max_capacity #=> Integer
     #   resp.scalable_targets[0].role_arn #=> String
@@ -422,6 +442,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -435,6 +458,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -457,9 +483,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_scaling_activities({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -468,9 +494,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp.scaling_activities #=> Array
     #   resp.scaling_activities[0].activity_id #=> String
-    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2"
+    #   resp.scaling_activities[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream"
     #   resp.scaling_activities[0].resource_id #=> String
-    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount"
+    #   resp.scaling_activities[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity"
     #   resp.scaling_activities[0].description #=> String
     #   resp.scaling_activities[0].cause #=> String
     #   resp.scaling_activities[0].start_time #=> Time
@@ -527,6 +553,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property. If you specify a scalable
@@ -540,6 +569,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #
     # @option params [Integer] :max_results
     #   The maximum number of scalable target results. This value can be
@@ -563,9 +595,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.describe_scaling_policies({
     #     policy_names: ["ResourceIdMaxLen1600"],
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_id: "ResourceIdMaxLen1600",
-    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #     max_results: 1,
     #     next_token: "XmlString",
     #   })
@@ -575,9 +607,9 @@ module Aws::ApplicationAutoScaling
     #   resp.scaling_policies #=> Array
     #   resp.scaling_policies[0].policy_arn #=> String
     #   resp.scaling_policies[0].policy_name #=> String
-    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2"
+    #   resp.scaling_policies[0].service_namespace #=> String, one of "ecs", "elasticmapreduce", "ec2", "appstream"
     #   resp.scaling_policies[0].resource_id #=> String
-    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount"
+    #   resp.scaling_policies[0].scalable_dimension #=> String, one of "ecs:service:DesiredCount", "ec2:spot-fleet-request:TargetCapacity", "elasticmapreduce:instancegroup:InstanceCount", "appstream:fleet:DesiredCapacity"
     #   resp.scaling_policies[0].policy_type #=> String, one of "StepScaling"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.adjustment_type #=> String, one of "ChangeInCapacity", "PercentChangeInCapacity", "ExactCapacity"
     #   resp.scaling_policies[0].step_scaling_policy_configuration.step_adjustments #=> Array
@@ -646,6 +678,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension. This string consists of the service namespace,
     #   resource type, and scaling property.
@@ -658,6 +693,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #
     # @option params [String] :policy_type
     #   The policy type. If you are creating a new policy, this parameter is
@@ -678,9 +716,9 @@ module Aws::ApplicationAutoScaling
     #
     #   resp = client.put_scaling_policy({
     #     policy_name: "PolicyName", # required
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #     policy_type: "StepScaling", # accepts StepScaling
     #     step_scaling_policy_configuration: {
     #       adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -746,6 +784,9 @@ module Aws::ApplicationAutoScaling
     #     identifier is the cluster ID and instance group ID. Example:
     #     `instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0`.
     #
+    #   * AppStream 2.0 fleet - The resource type is `fleet` and the unique
+    #     identifier is the fleet name. Example: `fleet/sample-fleet`.
+    #
     # @option params [required, String] :scalable_dimension
     #   The scalable dimension associated with the scalable target. This
     #   string consists of the service namespace, resource type, and scaling
@@ -759,6 +800,9 @@ module Aws::ApplicationAutoScaling
     #
     #   * `elasticmapreduce:instancegroup:InstanceCount` - The instance count
     #     of an EMR Instance Group.
+    #
+    #   * `appstream:fleet:DesiredCapacity` - The desired capacity of an
+    #     AppStream 2.0 fleet.
     #
     # @option params [Integer] :min_capacity
     #   The minimum value to scale to in response to a scale in event. This
@@ -780,9 +824,9 @@ module Aws::ApplicationAutoScaling
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_scalable_target({
-    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2
+    #     service_namespace: "ecs", # required, accepts ecs, elasticmapreduce, ec2, appstream
     #     resource_id: "ResourceIdMaxLen1600", # required
-    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount
+    #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity, elasticmapreduce:instancegroup:InstanceCount, appstream:fleet:DesiredCapacity
     #     min_capacity: 1,
     #     max_capacity: 1,
     #     role_arn: "ResourceIdMaxLen1600",
@@ -810,7 +854,7 @@ module Aws::ApplicationAutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-applicationautoscaling'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 

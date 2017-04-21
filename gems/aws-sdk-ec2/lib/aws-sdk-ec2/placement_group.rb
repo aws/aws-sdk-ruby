@@ -130,18 +130,6 @@ module Aws::EC2
     #
     #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
     #
-    #   * `association.public-ip` - The address of the Elastic IP address
-    #     (IPv4) bound to the network interface.
-    #
-    #   * `association.ip-owner-id` - The owner of the Elastic IP address
-    #     (IPv4) associated with the network interface.
-    #
-    #   * `association.allocation-id` - The allocation ID returned when you
-    #     allocated the Elastic IP address (IPv4) for your network interface.
-    #
-    #   * `association.association-id` - The association ID returned when the
-    #     network interface was associated with an IPv4 address.
-    #
     #   * `availability-zone` - The Availability Zone of the instance.
     #
     #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -231,6 +219,20 @@ module Aws::EC2
     #
     #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
     #     of the private IPv4 address associated with the network interface.
+    #
+    #   * `network-interface.association.public-ip` - The address of the
+    #     Elastic IP address (IPv4) bound to the network interface.
+    #
+    #   * `network-interface.association.ip-owner-id` - The owner of the
+    #     Elastic IP address (IPv4) associated with the network interface.
+    #
+    #   * `network-interface.association.allocation-id` - The allocation ID
+    #     returned when you allocated the Elastic IP address (IPv4) for your
+    #     network interface.
+    #
+    #   * `network-interface.association.association-id` - The association ID
+    #     returned when the network interface was associated with an IPv4
+    #     address.
     #
     #   * `network-interface.attachment.attachment-id` - The ID of the
     #     interface attachment.

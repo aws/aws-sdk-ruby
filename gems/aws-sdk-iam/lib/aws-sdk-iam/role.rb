@@ -56,7 +56,7 @@ module Aws::IAM
 
     # The Amazon Resource Name (ARN) specifying the role. For more
     # information about ARNs and how to use them in policies, see [IAM
-    # Identifiers][1] in the *Using IAM* guide.
+    # Identifiers][1] in the *IAM User Guide* guide.
     #
     #
     #
@@ -81,6 +81,12 @@ module Aws::IAM
     # @return [String]
     def assume_role_policy_document
       data.assume_role_policy_document
+    end
+
+    # A description of the role that you provide.
+    # @return [String]
+    def description
+      data.description
     end
 
     # @!endgroup
