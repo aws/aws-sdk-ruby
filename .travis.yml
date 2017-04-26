@@ -25,6 +25,8 @@ matrix:
   include:
     - rvm: 2.3.0
       env: OLD_OJ=1
+    - rvm: 2.3.0
+      env: OLD_OX=1
 
 notifications:
   webhooks:
