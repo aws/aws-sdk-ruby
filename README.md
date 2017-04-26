@@ -330,7 +330,7 @@ to be backwards compatible.
 | Amazon Polly                        | Polly                        | 2016-06-10  |
 | Amazon Redshift                     | Redshift                     | 2012-12-01  |
 | Amazon Rekognition                  | Rekognition                  | 2016-06-27  |
-| Amazon Relational Database Service  | RDS                          | 2014-10-31  |
+| Amazon Relational Database Service  | RDS                          | 2014-09-01  |
 | Amazon Route 53                     | Route53                      | 2013-04-01  |
 | Amazon Route 53 Domains             | Route53Domains               | 2014-05-15  |
 | Amazon Simple Email Service         | SES                          | 2010-12-01  |
