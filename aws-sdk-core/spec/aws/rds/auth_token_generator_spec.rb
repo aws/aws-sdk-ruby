@@ -32,7 +32,7 @@ module Aws
               user_name: 'user'
             )
           }.to raise_error(
-            KeyError, 'key not found: :endpoint'
+            KeyError
           )
           expect {
             generator.auth_token(
@@ -40,7 +40,7 @@ module Aws
               endpoint: 'prod-instance.us-east-1.rds.amazonaws.com:3306'
             )
           }.to raise_error(
-            KeyError, 'key not found: :user_name'
+            KeyError
           )
           expect {
             generator.auth_token(
@@ -48,7 +48,7 @@ module Aws
               user_name: 'user'
             )
           }.to raise_error(
-            KeyError, 'key not found: :region'
+            KeyError
           )
         end
 
