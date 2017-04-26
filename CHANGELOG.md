@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Aws::S3 - Added Multipart Download Helper feature to support different mode (`:auto`, `:single_request`, `:get_range`) in downloading large objects with `#download_file` in multipart when possible.
 
+* Issue - Aws::Xml::Parser::OxEngine - Made parser option for `ox` explicit to work around a breaking behavior change in the `ox` gem.
+
 2.9.11 (2017-04-21)
 ------------------
 
