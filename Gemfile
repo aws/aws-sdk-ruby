@@ -10,10 +10,16 @@ if !ENV['PURE_RUBY']
   else
     gem 'oj'
   end
+
+  # Ox after 2.4.12 has a change in default behavior. Test both.
+  if ENV['OLD_OX']
+    gem 'ox', '2.4.12'
+  else
+    gem 'ox'
+  end
 end
 
 gem 'json', '1.8.3' if RUBY_VERSION == '1.9.3'
-gem 'ox' unless ENV['PURE_RUBY']
 gem 'libxml-ruby' unless ENV['PURE_RUBY']
 # nokogiri dropped support for Ruby <= 2.0.0 in version 1.7.0
 gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
