@@ -287,7 +287,7 @@
     "endpoint": "polly"
   },
   "RDS": {
-    "models": "rds/2014-09-01",
+    "models": "rds/2014-10-31",
     "endpoint": "rds"
   },
   "Redshift": {
