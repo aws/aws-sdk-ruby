@@ -17,7 +17,7 @@ module Aws
           expect {
             AuthTokenGenerator.new
           }.to raise_error(
-            KeyError, 'key not found: :credentials'
+            KeyError
           )
         end
 
