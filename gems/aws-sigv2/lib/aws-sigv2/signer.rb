@@ -1,7 +1,7 @@
 require 'openssl'
 require 'base64'
 require 'uri'
-require 'cgi/util'
+require 'cgi'
 
 module Aws
   module Sigv2
