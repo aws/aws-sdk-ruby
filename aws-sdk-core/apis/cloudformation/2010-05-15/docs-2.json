@@ -188,6 +188,17 @@
         "DescribeChangeSetOutput$Changes": "<p>A list of <code>Change</code> structures that describes the resources AWS CloudFormation changes if you execute the change set.</p>"
       }
     },
+    "ClientRequestToken": {
+      "base": null,
+      "refs": {
+        "CancelUpdateStackInput$ClientRequestToken": "<p>A unique identifier for this request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to cancel an update on a stack with the same name.</p>",
+        "ContinueUpdateRollbackInput$ClientRequestToken": "<p>A unique identifier for this request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to continue the rollback to a stack with the same name.</p>",
+        "CreateStackInput$ClientRequestToken": "<p>A unique identifier for this request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to create a stack with the same name.</p>",
+        "DeleteStackInput$ClientRequestToken": "<p>A unique identifier for this request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to delete a stack with the same name.</p>",
+        "ExecuteChangeSetInput$ExportingClientRequestToken": "<p>A unique identifier for this request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to execute a change set to update a stack with the same name.</p>",
+        "UpdateStackInput$ClientRequestToken": "<p>A unique identifier for this request. Specify this token if you plan to retry requests so that AWS CloudFormation knows that you're not attempting to update a stack with the same name. </p>"
+      }
+    },
     "ClientToken": {
       "base": null,
       "refs": {
