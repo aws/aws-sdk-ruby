@@ -21,7 +21,6 @@ group :test do
   gem 'multipart-post'
 
   # faster xml libraries
-  gem 'ox' unless ENV['PURE_RUBY']
   gem 'libxml-ruby' unless ENV['PURE_RUBY']
   gem 'nokogiri', '1.6.8.1' unless ENV['PURE_RUBY']
   gem 'oga'
@@ -33,6 +32,13 @@ group :test do
       gem 'oj', '1.3.0'
     else
       gem 'oj'
+    end
+
+    # Ox after 2.4.12 has a change in default behavior. Test both.
+    if ENV['OLD_OX']
+      gem 'ox', '2.4.12'
+    else
+      gem 'ox'
     end
   end
 
