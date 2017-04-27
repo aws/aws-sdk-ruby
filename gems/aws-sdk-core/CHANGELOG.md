@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Revert 'cgi/util' change that breaks Ruby 2.4
+
 3.0.0.rc8 (2017-04-21)
 ------------------
 

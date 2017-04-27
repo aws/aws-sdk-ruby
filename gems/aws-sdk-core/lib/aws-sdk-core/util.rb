@@ -1,4 +1,4 @@
-require 'cgi/util'
+require 'cgi'
 
 module Aws
   # @api private
