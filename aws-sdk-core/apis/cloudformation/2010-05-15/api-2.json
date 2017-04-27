@@ -366,7 +366,8 @@
       "type":"structure",
       "required":["StackName"],
       "members":{
-        "StackName":{"shape":"StackName"}
+        "StackName":{"shape":"StackName"},
+        "ClientRequestToken":{"shape":"ClientRequestToken"}
       }
     },
     "Capabilities":{
@@ -479,6 +480,11 @@
       "type":"list",
       "member":{"shape":"Change"}
     },
+    "ClientRequestToken":{
+      "type":"string",
+      "max":128,
+      "min":1
+    },
     "ClientToken":{
       "type":"string",
       "max":128,
@@ -489,6 +495,7 @@
       "required":["StackName"],
       "members":{
         "StackName":{"shape":"StackNameOrId"},
+        "ClientRequestToken":{"shape":"ClientRequestToken"},
         "RoleARN":{"shape":"RoleARN"},
         "ResourcesToSkip":{"shape":"ResourcesToSkip"}
       }
@@ -536,6 +543,7 @@
         "TemplateBody":{"shape":"TemplateBody"},
         "TemplateURL":{"shape":"TemplateURL"},
         "Parameters":{"shape":"Parameters"},
+        "ClientRequestToken":{"shape":"ClientRequestToken"},
         "DisableRollback":{"shape":"DisableRollback"},
         "TimeoutInMinutes":{"shape":"TimeoutMinutes"},
         "NotificationARNs":{"shape":"NotificationARNs"},
@@ -573,6 +581,7 @@
       "required":["StackName"],
       "members":{
         "StackName":{"shape":"StackName"},
+        "ClientRequestToken":{"shape":"ClientRequestToken"},
         "RetainResources":{"shape":"RetainResources"},
         "RoleARN":{"shape":"RoleARN"}
       }
@@ -712,6 +721,7 @@
       "required":["ChangeSetName"],
       "members":{
         "ChangeSetName":{"shape":"ChangeSetNameOrId"},
+        "ClientRequestToken":{"shape":"ClientRequestToken"},
         "StackName":{"shape":"StackNameOrId"}
       }
     },
@@ -1389,6 +1399,7 @@
         "StackPolicyDuringUpdateURL":{"shape":"StackPolicyDuringUpdateURL"},
         "Parameters":{"shape":"Parameters"},
         "Capabilities":{"shape":"Capabilities"},
+        "ClientRequestToken":{"shape":"ClientRequestToken"},
         "ResourceTypes":{"shape":"ResourceTypes"},
         "RoleARN":{"shape":"RoleARN"},
         "StackPolicyBody":{"shape":"StackPolicyBody"},
