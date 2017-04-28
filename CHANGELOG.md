@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.13 (2017-04-28)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
