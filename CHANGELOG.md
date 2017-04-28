@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.14 (2017-04-28)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, and waiters for AWS CloudFormation.
 
 2.9.13 (2017-04-28)
