@@ -128,6 +128,18 @@ JSON
           client = Aws::S3::Client.new(profile: "ar_from_self", region: "us-east-1")
           expect(client.config.credentials.access_key_id).to eq("AR_AKID")
         end
+
+        it 'will assume a role from config using source credentials in shared credentials' do
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/foo",
+            "ACCESS_KEY_1", # from 'creds_from_sc'
+            "AR_AKID",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          client = Aws::S3::Client.new(profile: "creds_from_sc", region: "us-east-1")
+          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        end
       end
     end
 
