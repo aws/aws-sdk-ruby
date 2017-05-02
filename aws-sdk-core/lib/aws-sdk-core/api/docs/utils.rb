@@ -117,7 +117,7 @@ module Aws
             Seahorse::Model::Shapes::StringShape === ref.shape &&
             ref.shape.enum
           then
-            docs = "#{docs}<p>Possible values:</p><ul>"
+            docs = "#{docs} <p>Possible values:</p><ul>"
             docs += ref.shape.enum.map { |v| "<li><tt>#{v}</tt></li>" }.join
             docs += "</ul>"
             docs
