@@ -52,6 +52,13 @@ module Aws
             }.to raise_error(ArgumentError, /invalid endpoint/)
           end
 
+          it 'does not raise an error for fake sqs queue urls' do
+            url = 'http://localhost:4567/test_queue'
+            client = Client.new(stub_responses:true)
+            expect {
+              client.send(method, params.merge(queue_url: url))
+            }.to_not raise_error
+          end
         end
       end
     end
