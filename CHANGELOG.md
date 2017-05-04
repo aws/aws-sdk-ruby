@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.15 (2017-05-04)
+------------------
+
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
 
 * Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
