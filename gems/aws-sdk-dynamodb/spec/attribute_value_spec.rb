@@ -71,7 +71,12 @@ module Aws
           # supports integers, floats, and big decimals
           expect(value.marshal(123)).to eq(n: '123')
           expect(value.marshal(12.34)).to eq(n: '12.34')
-          expect(value.marshal(BigDecimal.new("0.1E125"))).to eq(n: "0.1E125")
+
+          # Ruby 2.4 changed the casing of BigDecimal's to_s value.
+          # We need to check in a case insensitive manner
+          big_decimal_value = value.marshal(BigDecimal.new("0.1E125"))
+          expect(big_decimal_value.keys).to eq([:n])
+          expect(big_decimal_value[:n]).to match(/0.1E125/i)
         end
 
         it 'converts strings to :s' do

@@ -7,16 +7,18 @@ group :test do
 
   gem 'rspec'
   gem 'cucumber'
-  # webmock depends on addressable, but the latest version of addressable
-  # has a dependency on ~> 2.0 of public_suffix which is not compatible
-  # with Ruby 1.9.3
-  gem 'addressable', '2.4.0'
-  # webmock dropped support for Ruby 1.9.3 after version 2.2.0
-  gem 'webmock', '2.2.0'
-  # webmock depends on addressable, but the latest version of addressable
-  # has a dependency on ~> 2.0 of public_suffix which is not compatible
-  # with Ruby 1.9.3
-  gem 'addressable', '2.4.0'
+
+  if RUBY_VERSION == '1.9.3'
+    # webmock depends on addressable, but the latest version of addressable
+    # has a dependency on ~> 2.0 of public_suffix which is not compatible
+    # with Ruby 1.9.3
+    gem 'addressable', '2.4.0'
+    # webmock dropped support for Ruby 1.9.3 after version 2.2.0
+    gem 'webmock', '2.2.0'
+  else
+    gem 'addressable'
+    gem 'webmock'
+  end
   gem 'json-schema'
   gem 'multipart-post'
 
