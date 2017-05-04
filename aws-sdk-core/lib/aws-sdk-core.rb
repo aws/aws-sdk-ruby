@@ -89,6 +89,7 @@ module Aws
     MTurk
     MachineLearning
     MarketplaceCommerceAnalytics
+    MarketplaceEntitlementService
     MarketplaceMetering
     OpsWorks
     OpsWorksCM

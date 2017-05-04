@@ -262,6 +262,10 @@
     "models": "marketplacecommerceanalytics/2015-07-01",
     "endpoint": "marketplacecommerceanalytics"
   },
+  "MarketplaceEntitlementService": {
+    "models": "entitlement.marketplace/2017-01-11",
+    "endpoint": "entitlement.marketplace"
+  },
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14",
     "endpoint": "metering.marketplace"

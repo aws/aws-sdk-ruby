@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::MarketplaceEntitlementService - Added support for a new service, AWS Marketplace Entitlement Service.
+
 2.9.14 (2017-04-28)
 ------------------
 
