@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Preview Gem `aws-sdk-lexruntimeservice` is deprecated, use `aws-sdk-lex` instead.
+
 1.0.0.rc2 (2017-04-21)
 ------------------
 

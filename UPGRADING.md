@@ -19,6 +19,10 @@
   at runtime. Each service is now defined in a seperate gem, e.g.
   `aws-sdk-s3`, `aws-sdk-ec2`, etc.
 
+* Preview Gem `aws-sdk-sfn` is deprecated, use `aws-sdk-states` instead.
+
+* Preview Gem `aws-sdk-lexruntimeservice` is deprecated, use `aws-sdk-lex` instead.
+
 ## `aws-sdk-core` - v2.5.0
 
 * Due to customer requests, and an analysis of the tradeoffs, we're changing the

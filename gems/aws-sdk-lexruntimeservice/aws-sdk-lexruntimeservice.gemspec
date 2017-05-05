@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-lexruntimeservice'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - Amazon Lex Runtime Service'
-  spec.description   = 'Official AWS Ruby gem for Amazon Lex Runtime Service. This gem is part of the AWS SDK for Ruby.'
+  spec.description   = 'This gem is deprecated, please use `aws-sdk-lex` instead. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

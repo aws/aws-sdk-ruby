@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Preview Gem `aws-sdk-sfn` is deprecated, use `aws-sdk-states` instead.
+
 1.0.0.rc3 (2017-04-21)
 ------------------
 
