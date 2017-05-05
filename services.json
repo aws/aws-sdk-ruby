@@ -212,9 +212,6 @@
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19"
   },
-  "LexRuntimeService": {
-    "models": "runtime.lex/2016-11-28"
-  },
   "Lightsail": {
     "models": "lightsail/2016-11-28"
   },
@@ -302,9 +299,6 @@
   },
   "SES": {
     "models": "email/2010-12-01"
-  },
-  "SFN": {
-    "models": "states/2016-11-23"
   },
   "SMS": {
     "models": "sms/2016-10-24"
