@@ -244,10 +244,11 @@ module Aws::RDS
     #
     #   Default: `true`
     # @option options [Array<Types::Parameter>] :parameters
-    #   An array of parameter names, values, and the apply method for the
-    #   parameter update. At least one parameter name, value, and apply method
-    #   must be supplied; subsequent arguments are optional. A maximum of 20
-    #   parameters can be modified in a single request.
+    #   To reset the entire DB parameter group, specify the `DBParameterGroup`
+    #   name and `ResetAllParameters` parameters. To reset specific
+    #   parameters, provide a list of the following: `ParameterName` and
+    #   `ApplyMethod`. A maximum of 20 parameters can be modified in a single
+    #   request.
     #
     #   **MySQL**
     #

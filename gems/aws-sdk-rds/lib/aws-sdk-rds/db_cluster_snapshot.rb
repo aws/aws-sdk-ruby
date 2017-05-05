@@ -143,6 +143,21 @@ module Aws::RDS
       data.db_cluster_snapshot_arn
     end
 
+    # If the DB cluster snapshot was copied from a source DB cluster
+    # snapshot, the Amazon Resource Name (ARN) for the source DB cluster
+    # snapshot; otherwise, a null value.
+    # @return [String]
+    def source_db_cluster_snapshot_arn
+      data.source_db_cluster_snapshot_arn
+    end
+
+    # True if mapping of AWS Identity and Access Management (IAM) accounts
+    # to database accounts is enabled; otherwise false.
+    # @return [Boolean]
+    def iam_database_authentication_enabled
+      data.iam_database_authentication_enabled
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -300,6 +315,8 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     # @option options [Boolean] :copy_tags
+    #   True to copy all tags from the source DB cluster snapshot to the
+    #   target DB cluster snapshot; otherwise false. The default is false.
     # @option options [Array<Types::Tag>] :tags
     #   A list of tags.
     # @option options [String] :destination_region
@@ -353,6 +370,7 @@ module Aws::RDS
     #       },
     #     ],
     #     kms_key_id: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :availability_zones
@@ -419,6 +437,12 @@ module Aws::RDS
     #
     #   * If the DB cluster snapshot is not encrypted, then the restored DB
     #     cluster is encrypted using the specified encryption key.
+    # @option options [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(snapshot_identifier: @snapshot_id)

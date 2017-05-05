@@ -34,16 +34,26 @@ module Aws::CloudFormation
     #
     #       {
     #         stack_name: "StackName", # required
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] stack_name
     #   The name or the unique stack ID that is associated with the stack.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `CancelUpdateStack` request. Specify
+    #   this token if you plan to retry requests so that AWS CloudFormation
+    #   knows that you're not attempting to cancel an update on a stack
+    #   with the same name. You might retry `CancelUpdateStack` requests to
+    #   ensure that AWS CloudFormation successfully received them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStackInput AWS API Documentation
     #
     class CancelUpdateStackInput < Struct.new(
-      :stack_name)
+      :stack_name,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -138,6 +148,7 @@ module Aws::CloudFormation
     #         stack_name: "StackNameOrId", # required
     #         role_arn: "RoleARN",
     #         resources_to_skip: ["ResourceToSkip"],
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] stack_name
@@ -195,22 +206,32 @@ module Aws::CloudFormation
     #   necessary to skip the dependent resources.
     #
     #   To specify resources in a nested stack, use the following format:
-    #   `NestedStackName.ResourceLogicalID`. You can specify a nested stack
-    #   resource (the logical ID of an `AWS::CloudFormation::Stack`
-    #   resource) only if it's in one of the following states:
-    #   `DELETE_IN_PROGRESS`, `DELETE_COMPLETE`, or `DELETE_FAILED`.
+    #   `NestedStackName.ResourceLogicalID`. If the `ResourceLogicalID` is a
+    #   stack resource (`Type: AWS::CloudFormation::Stack`), it must be in
+    #   one of the following states: `DELETE_IN_PROGRESS`,
+    #   `DELETE_COMPLETE`, or `DELETE_FAILED`.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
     #   @return [Array<String>]
     #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `ContinueUpdateRollback` request.
+    #   Specify this token if you plan to retry requests so that AWS
+    #   CloudFormation knows that you're not attempting to continue the
+    #   rollback to a stack with the same name. You might retry
+    #   `ContinueUpdateRollback` requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollbackInput AWS API Documentation
     #
     class ContinueUpdateRollbackInput < Struct.new(
       :stack_name,
       :role_arn,
-      :resources_to_skip)
+      :resources_to_skip,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -487,6 +508,7 @@ module Aws::CloudFormation
     #             value: "TagValue",
     #           },
     #         ],
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] stack_name
@@ -552,12 +574,8 @@ module Aws::CloudFormation
     #
     # @!attribute [rw] notification_arns
     #   The Simple Notification Service (SNS) topic ARNs to publish stack
-    #   related events. You can find your SNS topic ARNs using the [SNS
-    #   console][1] or your Command Line Interface (CLI).
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/sns
+    #   related events. You can find your SNS topic ARNs using the SNS
+    #   console or your Command Line Interface (CLI).
     #   @return [Array<String>]
     #
     # @!attribute [rw] capabilities
@@ -670,6 +688,14 @@ module Aws::CloudFormation
     #   maximum number of 10 tags can be specified.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `CreateStack` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to create a stack with the same name.
+    #   You might retry `CreateStack` requests to ensure that AWS
+    #   CloudFormation successfully received them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateStackInput AWS API Documentation
     #
     class CreateStackInput < Struct.new(
@@ -686,7 +712,8 @@ module Aws::CloudFormation
       :on_failure,
       :stack_policy_body,
       :stack_policy_url,
-      :tags)
+      :tags,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -746,6 +773,7 @@ module Aws::CloudFormation
     #         stack_name: "StackName", # required
     #         retain_resources: ["LogicalResourceId"],
     #         role_arn: "RoleARN",
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] stack_name
@@ -774,12 +802,21 @@ module Aws::CloudFormation
     #   your user credentials.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `DeleteStack` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to delete a stack with the same name.
+    #   You might retry `DeleteStack` requests to ensure that AWS
+    #   CloudFormation successfully received them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStackInput AWS API Documentation
     #
     class DeleteStackInput < Struct.new(
       :stack_name,
       :retain_resources,
-      :role_arn)
+      :role_arn,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -1271,6 +1308,7 @@ module Aws::CloudFormation
     #       {
     #         change_set_name: "ChangeSetNameOrId", # required
     #         stack_name: "StackNameOrId",
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] change_set_name
@@ -1283,11 +1321,21 @@ module Aws::CloudFormation
     #   ID (ARN) that is associated with the change set you want to execute.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `ExecuteChangeSet` request. Specify
+    #   this token if you plan to retry requests so that AWS CloudFormation
+    #   knows that you're not attempting to execute a change set to update
+    #   a stack with the same name. You might retry `ExecuteChangeSet`
+    #   requests to ensure that AWS CloudFormation successfully received
+    #   them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSetInput AWS API Documentation
     #
     class ExecuteChangeSetInput < Struct.new(
       :change_set_name,
-      :stack_name)
+      :stack_name,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -2334,6 +2382,14 @@ module Aws::CloudFormation
     #   BLOB of the properties used to create the resource.
     #   @return [String]
     #
+    # @!attribute [rw] client_request_token
+    #   The token passed to the operation that generated this event.
+    #
+    #   For example, if you execute a `CreateStack` operation with the token
+    #   `token1`, then all the `StackEvents` generated by that operation
+    #   will have `ClientRequestToken` set as `token1`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/StackEvent AWS API Documentation
     #
     class StackEvent < Struct.new(
@@ -2346,7 +2402,8 @@ module Aws::CloudFormation
       :timestamp,
       :resource_status,
       :resource_status_reason,
-      :resource_properties)
+      :resource_properties,
+      :client_request_token)
       include Aws::Structure
     end
 
@@ -2662,6 +2719,7 @@ module Aws::CloudFormation
     #             value: "TagValue",
     #           },
     #         ],
+    #         client_request_token: "ClientRequestToken",
     #       }
     #
     # @!attribute [rw] stack_name
@@ -2673,8 +2731,9 @@ module Aws::CloudFormation
     #   byte and a maximum length of 51,200 bytes. (For more information, go
     #   to [Template Anatomy][1] in the AWS CloudFormation User Guide.)
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     #
     #
@@ -2687,8 +2746,9 @@ module Aws::CloudFormation
     #   information, go to [Template Anatomy][1] in the AWS CloudFormation
     #   User Guide.
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     #
     #
@@ -2698,6 +2758,10 @@ module Aws::CloudFormation
     # @!attribute [rw] use_previous_template
     #   Reuse the existing template that is associated with the stack that
     #   you are updating.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] stack_policy_during_update_body
@@ -2844,6 +2908,14 @@ module Aws::CloudFormation
     #   CloudFormation removes all associated tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for this `UpdateStack` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to update a stack with the same name.
+    #   You might retry `UpdateStack` requests to ensure that AWS
+    #   CloudFormation successfully received them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/UpdateStackInput AWS API Documentation
     #
     class UpdateStackInput < Struct.new(
@@ -2860,7 +2932,8 @@ module Aws::CloudFormation
       :stack_policy_body,
       :stack_policy_url,
       :notification_arns,
-      :tags)
+      :tags,
+      :client_request_token)
       include Aws::Structure
     end
 

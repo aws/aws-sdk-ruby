@@ -657,7 +657,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] variables
     #   The key-value pairs that represent your environment's configuration
-    #   settings. The value you specify cannot contain a ",".
+    #   settings.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Environment AWS API Documentation
@@ -1889,6 +1889,7 @@ module Aws::Lambda
     #         s3_key: "S3Key",
     #         s3_object_version: "S3ObjectVersion",
     #         publish: false,
+    #         dry_run: false,
     #       }
     #
     # @!attribute [rw] function_name
@@ -1937,6 +1938,16 @@ module Aws::Lambda
     #   the Lambda function and publish a version as an atomic operation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] dry_run
+    #   This boolean parameter can be used to test your request to AWS
+    #   Lambda to update the Lambda function and publish a version as an
+    #   atomic operation. It will do all necessary computation and
+    #   validation of your code but will not upload it or a publish a
+    #   version. Each time this operation is invoked, the `CodeSha256` hash
+    #   value the provided code will also be computed and returned in the
+    #   response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCodeRequest AWS API Documentation
     #
     class UpdateFunctionCodeRequest < Struct.new(
@@ -1945,7 +1956,8 @@ module Aws::Lambda
       :s3_bucket,
       :s3_key,
       :s3_object_version,
-      :publish)
+      :publish,
+      :dry_run)
       include Aws::Structure
     end
 

@@ -209,6 +209,9 @@
   "LambdaPreview": {
     "models": "lambda/2014-11-11"
   },
+  "Lex": {
+    "models": "runtime.lex/2016-11-28"
+  },
   "LexModelBuildingService": {
     "models": "lex-models/2017-04-19"
   },
@@ -226,6 +229,9 @@
   },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01"
+  },
+  "MarketplaceEntitlementService": {
+    "models": "entitlement.marketplace/2017-01-11"
   },
   "MarketplaceMetering": {
     "models": "meteringmarketplace/2016-01-14"
@@ -337,6 +343,9 @@
   },
   "Snowball": {
     "models": "snowball/2016-06-30"
+  },
+  "States": {
+    "models": "states/2016-11-23"
   },
   "StorageGateway": {
     "models": "storagegateway/2013-06-30"

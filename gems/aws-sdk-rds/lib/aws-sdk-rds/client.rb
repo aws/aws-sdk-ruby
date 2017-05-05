@@ -598,6 +598,9 @@ module Aws::RDS
     #   The identifier of the DB cluster snapshot to copy. This parameter is
     #   not case-sensitive.
     #
+    #   You cannot copy an encrypted, shared DB cluster snapshot from one AWS
+    #   region to another.
+    #
     #   Constraints:
     #
     #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
@@ -606,7 +609,20 @@ module Aws::RDS
     #
     #   * Cannot end with a hyphen or contain two consecutive hyphens.
     #
+    #   * Must specify a valid system snapshot in the "available" state.
+    #
+    #   * If the source snapshot is in the same region as the copy, specify a
+    #     valid DB snapshot identifier.
+    #
+    #   * If the source snapshot is in a different region than the copy,
+    #     specify a valid DB cluster snapshot ARN. For more information, go to
+    #     [ Copying a DB Snapshot or DB Cluster Snapshot][1].
+    #
     #   Example: `my-cluster-snapshot1`
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html
     #
     # @option params [required, String] :target_db_cluster_snapshot_identifier
     #   The identifier of the new DB cluster snapshot to create from the
@@ -687,6 +703,8 @@ module Aws::RDS
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
     # @option params [Boolean] :copy_tags
+    #   True to copy all tags from the source DB cluster snapshot to the
+    #   target DB cluster snapshot; otherwise false. The default is false.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags.
@@ -737,6 +755,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBClusterSnapshot AWS API Documentation
     #
@@ -827,7 +847,7 @@ module Aws::RDS
     # `SourceDBSnapshotIdentifier` must be the Amazon Resource Name (ARN) of
     # the shared DB snapshot.
     #
-    # You can copy an encrypted DB snapshot from another AWS Region. In that
+    # You can copy an encrypted DB snapshot from another AWS region. In that
     # case, the region where you call the `CopyDBSnapshot` action is the
     # destination region for the encrypted DB snapshot to be copied to. To
     # copy an encrypted DB snapshot from another region, you must provide
@@ -886,14 +906,13 @@ module Aws::RDS
     #   `SourceDBSnapshotIdentifier` in the presigned URL.
     #
     # For more information on copying encrypted snapshots from one region to
-    # another, see [ Copying an Encrypted DB Snapshot to Another Region][3]
-    # in the Amazon RDS User Guide.
+    # another, see [ Copying a DB Snapshot][3] in the Amazon RDS User Guide.
     #
     #
     #
     # [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     # [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-    # [3]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Encrypted.CrossRegion
+    # [3]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot
     #
     # @option params [required, String] :source_db_snapshot_identifier
     #   The identifier for the source DB snapshot.
@@ -913,7 +932,7 @@ module Aws::RDS
     #
     #   * If the source snapshot is in a different region than the copy,
     #     specify a valid DB snapshot ARN. For more information, go to [
-    #     Copying a DB Snapshot][1].
+    #     Copying a DB Snapshot or DB Cluster Snapshot][1].
     #
     #   Example: `rds:mydb-2012-04-02-00-01`
     #
@@ -1005,8 +1024,8 @@ module Aws::RDS
     #     encrypted snapshot to be copied. This identifier must be in the
     #     Amazon Resource Name (ARN) format for the source region. For
     #     example, if you are copying an encrypted DB snapshot from the
-    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` would look
-    #     like Example:
+    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` looks like
+    #     the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see [
@@ -1070,6 +1089,7 @@ module Aws::RDS
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
+    #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyDBSnapshot AWS API Documentation
     #
@@ -1422,6 +1442,13 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -1459,6 +1486,7 @@ module Aws::RDS
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
+    #     enable_iam_database_authentication: false,
     #     source_region: "String",
     #   })
     #
@@ -1508,6 +1536,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCluster AWS API Documentation
@@ -1693,6 +1722,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBClusterSnapshot AWS API Documentation
     #
@@ -1799,6 +1830,12 @@ module Aws::RDS
     #
     #   Type: Integer
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Aurora cluster volumes automatically grow as the
+    #   amount of data in your database increases, though you are only charged
+    #   for the space that you use in an Aurora cluster volume.
+    #
     #   **MySQL**
     #
     #   Constraints: Must be an integer from 5 to 6144.
@@ -1843,7 +1880,30 @@ module Aws::RDS
     #   Not every database engine is available for every AWS region.
     #
     # @option params [String] :master_username
-    #   The name of master user for the client DB instance.
+    #   The name for the master database user.
+    #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. You specify the name for the master database user when
+    #   you create your DB cluster.
+    #
+    #   **MariaDB**
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 16 alphanumeric characters.
+    #
+    #   * Cannot be a reserved word for the chosen database engine.
+    #
+    #   **Microsoft SQL Server**
+    #
+    #   Constraints:
+    #
+    #   * Must be 1 to 128 alphanumeric characters.
+    #
+    #   * First character must be a letter.
+    #
+    #   * Cannot be a reserved word for the chosen database engine.
     #
     #   **MySQL**
     #
@@ -1855,31 +1915,11 @@ module Aws::RDS
     #
     #   * Cannot be a reserved word for the chosen database engine.
     #
-    #   **MariaDB**
-    #
-    #   Constraints:
-    #
-    #   * Must be 1 to 16 alphanumeric characters.
-    #
-    #   * Cannot be a reserved word for the chosen database engine.
-    #
-    #   Type: String
-    #
     #   **Oracle**
     #
     #   Constraints:
     #
     #   * Must be 1 to 30 alphanumeric characters.
-    #
-    #   * First character must be a letter.
-    #
-    #   * Cannot be a reserved word for the chosen database engine.
-    #
-    #   **SQL Server**
-    #
-    #   Constraints:
-    #
-    #   * Must be 1 to 128 alphanumeric characters.
     #
     #   * First character must be a letter.
     #
@@ -1899,13 +1939,20 @@ module Aws::RDS
     #   The password for the master database user. Can be any printable ASCII
     #   character except "/", """, or "@".
     #
-    #   Type: String
+    #   **Amazon Aurora**
     #
-    #   **MySQL**
+    #   Not applicable. You specify the password for the master database user
+    #   when you create your DB cluster.
+    #
+    #   **MariaDB**
     #
     #   Constraints: Must contain from 8 to 41 characters.
     #
-    #   **MariaDB**
+    #   **Microsoft SQL Server**
+    #
+    #   Constraints: Must contain from 8 to 128 characters.
+    #
+    #   **MySQL**
     #
     #   Constraints: Must contain from 8 to 41 characters.
     #
@@ -1913,17 +1960,9 @@ module Aws::RDS
     #
     #   Constraints: Must contain from 8 to 30 characters.
     #
-    #   **SQL Server**
-    #
-    #   Constraints: Must contain from 8 to 128 characters.
-    #
     #   **PostgreSQL**
     #
     #   Constraints: Must contain from 8 to 128 characters.
-    #
-    #   **Amazon Aurora**
-    #
-    #   Constraints: Must contain from 8 to 41 characters.
     #
     # @option params [Array<String>] :db_security_groups
     #   A list of DB security groups to associate with this DB instance.
@@ -2013,7 +2052,7 @@ module Aws::RDS
     #
     #   Default: A 30-minute window selected at random from an 8-hour block of
     #   time per region. To see the time blocks available, see [ Adjusting the
-    #   Preferred Maintenance Window][2] in the *Amazon RDS User Guide.*
+    #   Preferred DB Instance Maintenance Window][2].
     #
     #   Constraints:
     #
@@ -2028,7 +2067,7 @@ module Aws::RDS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.BackingUpAndRestoringAmazonRDSInstances.html
-    #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    #   [2]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow
     #
     # @option params [Integer] :port
     #   The port number on which the database accepts connections.
@@ -2182,119 +2221,10 @@ module Aws::RDS
     #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
     #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
     #
-    #   **Oracle Database Enterprise Edition (oracle-ee)**
-    #
-    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
-    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
-    #
-    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
-    #     12.1.0.1.v5`
-    #
-    #   * **Version 12.1 (available in all AWS regions):** ` 12.1.0.2.v1`
-    #
-    #   * **Version 12.1 (available in all AWS regions except
-    #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-    #
-    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-    #
-    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-    #
-    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-    #
-    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
-    #     11.2.0.4.v3 | 11.2.0.4.v4`
-    #
-    #   * **Version 11.2 (available in all AWS regions except
-    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
-    #     11.2.0.4.v8`
-    #
-    #   **Oracle Database Standard Edition (oracle-se)**
-    #
-    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
-    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
-    #
-    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
-    #     12.1.0.1.v5`
-    #
-    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-    #
-    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-    #
-    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-    #
-    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
-    #     11.2.0.4.v3 | 11.2.0.4.v4`
-    #
-    #   * **Version 11.2 (available in all AWS regions except
-    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
-    #     11.2.0.4.v8`
-    #
-    #   **Oracle Database Standard Edition One (oracle-se1)**
-    #
-    #   * **Version 12.1 (available in all AWS regions except ap-south-1,
-    #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
-    #
-    #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
-    #     12.1.0.1.v5`
-    #
-    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-    #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-    #
-    #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-    #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-    #
-    #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-    #
-    #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
-    #     11.2.0.4.v3 | 11.2.0.4.v4`
-    #
-    #   * **Version 11.2 (available in all AWS regions except
-    #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
-    #     11.2.0.4.v8`
-    #
-    #   **Oracle Database Standard Edition Two (oracle-se2)**
-    #
-    #   * **Version 12.1 (available in all AWS regions except
-    #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-    #
-    #   ^
-    #
-    #   **PostgreSQL**
-    #
-    #   * **Version 9.6:** ` 9.6.1`
-    #
-    #   * **Version 9.5:** `9.5.4 | 9.5.2`
-    #
-    #   * **Version 9.4:** ` 9.4.9 | 9.4.7 | 9.4.5 | 9.4.4 | 9.4.1`
-    #
-    #   * **Version 9.3:** ` 9.3.14 | 9.3.12 | 9.3.10 | 9.3.9 | 9.3.6 | 9.3.5
-    #     | 9.3.3 | 9.3.2 | 9.3.1`
-    #
-    #
-    #
     #   **Oracle 12c**
+    #
+    #   * `12.1.0.2.v7` (supported for EE in all AWS regions, and SE2 in all
+    #     AWS regions except us-gov-west-1)
     #
     #   * `12.1.0.2.v6` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
@@ -2314,27 +2244,9 @@ module Aws::RDS
     #   * `12.1.0.2.v1` (supported for EE in all AWS regions, and SE2 in all
     #     AWS regions except us-gov-west-1)
     #
-    #
-    #
-    #   * `12.1.0.1.v6` (supported for EE, SE1, and SE, in all AWS regions
-    #     except ap-south-1, ap-northeast-2)
-    #
-    #   * `12.1.0.1.v5` (supported for EE, SE1, and SE, in all AWS regions
-    #     except ap-south-1, ap-northeast-2)
-    #
-    #   * `12.1.0.1.v4` (supported for EE, SE1, and SE, in all AWS regions
-    #     except ap-south-1, ap-northeast-2)
-    #
-    #   * `12.1.0.1.v3` (supported for EE, SE1, and SE, in all AWS regions
-    #     except ap-south-1, ap-northeast-2)
-    #
-    #   * `12.1.0.1.v2` (supported for EE, SE1, and SE, in all AWS regions
-    #     except ap-south-1, ap-northeast-2)
-    #
-    #   * `12.1.0.1.v1` (supported for EE, SE1, and SE, in all AWS regions
-    #     except ap-south-1, ap-northeast-2)
-    #
     #   **Oracle 11g**
+    #
+    #   * `11.2.0.4.v11` (supported for EE, SE1, and SE, in all AWS regions)
     #
     #   * `11.2.0.4.v10` (supported for EE, SE1, and SE, in all AWS regions)
     #
@@ -2356,50 +2268,14 @@ module Aws::RDS
     #
     #   **PostgreSQL**
     #
-    #   * **Version 9.5 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-    #     us-west-2):** ` 9.5.4`
+    #   * **Version 9.6:** ` 9.6.1`
     #
-    #   * **Version 9.5 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-east-2, us-west-1,
-    #     us-west-2):** ` 9.5.2`
+    #   * **Version 9.5:** `9.5.4 | 9.5.2`
     #
-    #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-    #     us-west-2):** ` 9.4.9`
+    #   * **Version 9.4:** ` 9.4.9 | 9.4.7 | 9.4.5 | 9.4.4 | 9.4.1`
     #
-    #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-    #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-east-2, us-west-1,
-    #     us-west-2):** ` 9.4.7`
-    #
-    #   * **Version 9.4 (available in all AWS regions):** ` 9.4.5`
-    #
-    #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
-    #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
-    #     us-west-2):** ` 9.4.4`
-    #
-    #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
-    #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
-    #     eu-west-1, sa-east-1, us-east-1, us-east-2, us-gov-west-1,
-    #     us-west-1, us-west-2):** ` 9.4.1`
-    #
-    #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 9.3.10 | 9.3.3
-    #     | 9.3.5 | 9.3.6 | 9.3.9`
-    #
-    #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-    #     us-gov-west-1, us-west-1, us-west-2):** ` 9.3.1 | 9.3.2`
-    #
-    #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
-    #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-    #     us-east-1, us-west-1, us-west-2):** ` 9.3.12 | 9.3.14`
+    #   * **Version 9.3:** ` 9.3.14 | 9.3.12 | 9.3.10 | 9.3.9 | 9.3.6 | 9.3.5
+    #     | 9.3.3 | 9.3.2 | 9.3.1`
     #
     # @option params [Boolean] :auto_minor_version_upgrade
     #   Indicates that minor engine upgrades will be applied automatically to
@@ -2526,15 +2402,15 @@ module Aws::RDS
     #   The ARN for the IAM role that permits RDS to send enhanced monitoring
     #   metrics to CloudWatch Logs. For example,
     #   `arn:aws:iam:123456789012:role/emaccess`. For information on creating
-    #   a monitoring role, go to [To create an IAM role for Amazon RDS
-    #   Enhanced Monitoring][1].
+    #   a monitoring role, go to [Setting Up and Enabling Enhanced
+    #   Monitoring][1].
     #
     #   If `MonitoringInterval` is set to a value other than 0, then you must
     #   supply a `MonitoringRoleArn` value.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.html#USER_Monitoring.OS.IAMRole
+    #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html#USER_Monitoring.OS.Enabling
     #
     # @option params [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
@@ -2561,6 +2437,19 @@ module Aws::RDS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+    #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts; otherwise false.
+    #
+    #   You can enable IAM database authentication for the following database
+    #   engines
+    #
+    #   * For MySQL 5.6, minor version 5.6.34 or higher
+    #
+    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   Default: `false`
     #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2612,6 +2501,7 @@ module Aws::RDS
     #     domain_iam_role_name: "String",
     #     promotion_tier: 1,
     #     timezone: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -2704,6 +2594,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -2716,6 +2607,12 @@ module Aws::RDS
 
     # Creates a DB instance for a DB instance running MySQL, MariaDB, or
     # PostgreSQL that acts as a Read Replica of a source DB instance.
+    #
+    # <note markdown="1"> Amazon Aurora does not support this action. You must call the
+    # `CreateDBInstance` action to create a DB instance for an Aurora DB
+    # cluster.
+    #
+    #  </note>
     #
     # All Read Replica DB instances are created as Single-AZ deployments
     # with backups disabled. All other DB instance attributes (including DB
@@ -3027,6 +2924,21 @@ module Aws::RDS
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts; otherwise false.
+    #
+    #   You can enable IAM database authentication for the following database
+    #   engines
+    #
+    #   * For MySQL 5.6, minor version 5.6.34 or higher
+    #
+    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * Aurora 5.6 or higher.
+    #
+    #   Default: `false`
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -3060,6 +2972,7 @@ module Aws::RDS
     #     monitoring_role_arn: "String",
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
+    #     enable_iam_database_authentication: false,
     #     source_region: "String",
     #   })
     #
@@ -3153,6 +3066,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -3396,6 +3310,7 @@ module Aws::RDS
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
+    #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSnapshot AWS API Documentation
     #
@@ -3796,6 +3711,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBCluster AWS API Documentation
@@ -3898,6 +3814,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
     #   resp.db_cluster_snapshot.kms_key_id #=> String
     #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBClusterSnapshot AWS API Documentation
     #
@@ -4091,6 +4009,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -4223,6 +4142,7 @@ module Aws::RDS
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
+    #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSnapshot AWS API Documentation
     #
@@ -4804,6 +4724,8 @@ module Aws::RDS
     #   resp.db_cluster_snapshots[0].storage_encrypted #=> Boolean
     #   resp.db_cluster_snapshots[0].kms_key_id #=> String
     #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshots[0].source_db_cluster_snapshot_arn #=> String
+    #   resp.db_cluster_snapshots[0].iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterSnapshots AWS API Documentation
     #
@@ -4930,6 +4852,7 @@ module Aws::RDS
     #   resp.db_clusters[0].associated_roles #=> Array
     #   resp.db_clusters[0].associated_roles[0].role_arn #=> String
     #   resp.db_clusters[0].associated_roles[0].status #=> String
+    #   resp.db_clusters[0].iam_database_authentication_enabled #=> Boolean
     #   resp.db_clusters[0].cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusters AWS API Documentation
@@ -5208,6 +5131,7 @@ module Aws::RDS
     #   resp.db_instances[0].promotion_tier #=> Integer
     #   resp.db_instances[0].db_instance_arn #=> String
     #   resp.db_instances[0].timezone #=> String
+    #   resp.db_instances[0].iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBInstances AWS API Documentation
     #
@@ -5717,6 +5641,7 @@ module Aws::RDS
     #   resp.db_snapshots[0].kms_key_id #=> String
     #   resp.db_snapshots[0].db_snapshot_arn #=> String
     #   resp.db_snapshots[0].timezone #=> String
+    #   resp.db_snapshots[0].iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSnapshots AWS API Documentation
     #
@@ -6460,6 +6385,7 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].storage_type #=> String
     #   resp.orderable_db_instance_options[0].supports_iops #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
+    #   resp.orderable_db_instance_options[0].supports_iam_database_authentication #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -7003,6 +6929,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/FailoverDBCluster AWS API Documentation
@@ -7137,7 +7064,7 @@ module Aws::RDS
     #   The name of the DB cluster parameter group to use for the DB cluster.
     #
     # @option params [Array<String>] :vpc_security_group_ids
-    #   A lst of VPC security groups that the DB cluster will belong to.
+    #   A list of VPC security groups that the DB cluster will belong to.
     #
     # @option params [Integer] :port
     #   The port number on which the DB cluster accepts connections.
@@ -7208,6 +7135,13 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
+    #
     # @return [Types::ModifyDBClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBClusterResult#db_cluster #db_cluster} => Types::DBCluster
@@ -7226,6 +7160,7 @@ module Aws::RDS
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -7274,6 +7209,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCluster AWS API Documentation
@@ -7369,13 +7305,14 @@ module Aws::RDS
     # the manual DB cluster snapshot public, which means that it can be
     # copied or restored by all AWS accounts. Do not add the `all` value for
     # any manual DB cluster snapshots that contain private information that
-    # you don't want available to all AWS accounts.
+    # you don't want available to all AWS accounts. If a manual DB cluster
+    # snapshot is encrypted, it can be shared, but only by specifying a list
+    # of authorized AWS account IDs for the `ValuesToAdd` parameter. You
+    # can't use `all` as a value for that parameter in this case.
     #
     # To view which AWS accounts have access to copy or restore a manual DB
     # cluster snapshot, or whether a manual DB cluster snapshot public or
     # private, use the DescribeDBClusterSnapshotAttributes API action.
-    #
-    # If a manual DB cluster snapshot is encrypted, it cannot be shared.
     #
     # @option params [required, String] :db_cluster_snapshot_identifier
     #   The identifier for the DB cluster snapshot to modify the attributes
@@ -7972,6 +7909,19 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts; otherwise false.
+    #
+    #   You can enable IAM database authentication for the following database
+    #   engines
+    #
+    #   * For MySQL 5.6, minor version 5.6.34 or higher
+    #
+    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   Default: `false`
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -8011,6 +7961,7 @@ module Aws::RDS
     #     monitoring_role_arn: "String",
     #     domain_iam_role_name: "String",
     #     promotion_tier: 1,
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -8103,6 +8054,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -8257,6 +8209,7 @@ module Aws::RDS
     #   resp.db_snapshot.kms_key_id #=> String
     #   resp.db_snapshot.db_snapshot_arn #=> String
     #   resp.db_snapshot.timezone #=> String
+    #   resp.db_snapshot.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSnapshot AWS API Documentation
     #
@@ -8277,13 +8230,14 @@ module Aws::RDS
     # manual DB snapshot public, which means it can be copied or restored by
     # all AWS accounts. Do not add the `all` value for any manual DB
     # snapshots that contain private information that you don't want
-    # available to all AWS accounts.
+    # available to all AWS accounts. If the manual DB snapshot is encrypted,
+    # it can be shared, but only by specifying a list of authorized AWS
+    # account IDs for the `ValuesToAdd` parameter. You can't use `all` as a
+    # value for that parameter in this case.
     #
     # To view which AWS accounts have access to copy or restore a manual DB
     # snapshot, or whether a manual DB snapshot public or private, use the
     # DescribeDBSnapshotAttributes API action.
-    #
-    # If the manual DB snapshot is encrypted, it cannot be shared.
     #
     # @option params [required, String] :db_snapshot_identifier
     #   The identifier for the DB snapshot to modify the attributes for.
@@ -8740,6 +8694,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -8822,6 +8777,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplicaDBCluster AWS API Documentation
@@ -9039,6 +8995,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -9058,7 +9015,7 @@ module Aws::RDS
     # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Authorizing.AWSServices.html
     #
     # @option params [required, String] :db_cluster_identifier
-    #   The name of the DB cluster to disassociate the IAM role rom.
+    #   The name of the DB cluster to disassociate the IAM role from.
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the IAM role to disassociate from
@@ -9241,7 +9198,7 @@ module Aws::RDS
     end
 
     # Modifies the parameters of a DB parameter group to the engine/system
-    # default value. To reset specific parameters submit a list of the
+    # default value. To reset specific parameters, provide a list of the
     # following: `ParameterName` and `ApplyMethod`. To reset the entire DB
     # parameter group, specify the `DBParameterGroup` name and
     # `ResetAllParameters` parameters. When resetting the entire group,
@@ -9267,10 +9224,11 @@ module Aws::RDS
     #   Default: `true`
     #
     # @option params [Array<Types::Parameter>] :parameters
-    #   An array of parameter names, values, and the apply method for the
-    #   parameter update. At least one parameter name, value, and apply method
-    #   must be supplied; subsequent arguments are optional. A maximum of 20
-    #   parameters can be modified in a single request.
+    #   To reset the entire DB parameter group, specify the `DBParameterGroup`
+    #   name and `ResetAllParameters` parameters. To reset specific
+    #   parameters, provide a list of the following: `ParameterName` and
+    #   `ApplyMethod`. A maximum of 20 parameters can be modified in a single
+    #   request.
     #
     #   **MySQL**
     #
@@ -9334,7 +9292,11 @@ module Aws::RDS
     # bucket. Amazon RDS must be authorized to access the Amazon S3 bucket
     # and the data must be created using the Percona XtraBackup utility as
     # described in [Migrating Data from MySQL by Using an Amazon S3
-    # Bucket](AmazonRDS/latest/UserGuide/Aurora.Migrate.MySQL.html#Aurora.Migrate.MySQL.S3).
+    # Bucket][1].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.MySQL.html#Aurora.Migrate.MySQL.S3
     #
     # @option params [Array<String>] :availability_zones
     #   A list of EC2 Availability Zones that instances in the restored DB
@@ -9505,6 +9467,13 @@ module Aws::RDS
     #   your AWS account. Your AWS account has a different default encryption
     #   key for each AWS region.
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
+    #
     # @option params [required, String] :source_engine
     #   The identifier for the database engine that was backed up to create
     #   the files stored in the Amazon S3 bucket.
@@ -9564,6 +9533,7 @@ module Aws::RDS
     #     ],
     #     storage_encrypted: false,
     #     kms_key_id: "String",
+    #     enable_iam_database_authentication: false,
     #     source_engine: "String", # required
     #     source_engine_version: "String", # required
     #     s3_bucket_name: "String", # required
@@ -9617,6 +9587,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3 AWS API Documentation
@@ -9726,6 +9697,13 @@ module Aws::RDS
     #   * If the DB cluster snapshot is not encrypted, then the restored DB
     #     cluster is encrypted using the specified encryption key.
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
+    #
     # @return [Types::RestoreDBClusterFromSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterFromSnapshotResult#db_cluster #db_cluster} => Types::DBCluster
@@ -9750,6 +9728,7 @@ module Aws::RDS
     #       },
     #     ],
     #     kms_key_id: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -9798,6 +9777,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshot AWS API Documentation
@@ -9922,6 +9902,13 @@ module Aws::RDS
     #   If `DBClusterIdentifier` refers to a DB cluster that is note
     #   encrypted, then the restore request is rejected.
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
+    #
     # @return [Types::RestoreDBClusterToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBClusterToPointInTimeResult#db_cluster #db_cluster} => Types::DBCluster
@@ -9944,6 +9931,7 @@ module Aws::RDS
     #       },
     #     ],
     #     kms_key_id: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -9992,6 +9980,7 @@ module Aws::RDS
     #   resp.db_cluster.associated_roles #=> Array
     #   resp.db_cluster.associated_roles[0].role_arn #=> String
     #   resp.db_cluster.associated_roles[0].status #=> String
+    #   resp.db_cluster.iam_database_authentication_enabled #=> Boolean
     #   resp.db_cluster.cluster_create_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTime AWS API Documentation
@@ -10207,6 +10196,21 @@ module Aws::RDS
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts; otherwise false.
+    #
+    #   You can enable IAM database authentication for the following database
+    #   engines
+    #
+    #   * For MySQL 5.6, minor version 5.6.34 or higher
+    #
+    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * Aurora 5.6 or higher.
+    #
+    #   Default: `false`
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -10240,6 +10244,7 @@ module Aws::RDS
     #     domain: "String",
     #     copy_tags_to_snapshot: false,
     #     domain_iam_role_name: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -10332,6 +10337,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -10550,6 +10556,21 @@ module Aws::RDS
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
     #
+    # @option params [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts; otherwise false.
+    #
+    #   You can enable IAM database authentication for the following database
+    #   engines
+    #
+    #   * For MySQL 5.6, minor version 5.6.34 or higher
+    #
+    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * Aurora 5.6 or higher.
+    #
+    #   Default: `false`
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -10585,6 +10606,7 @@ module Aws::RDS
     #     tde_credential_password: "String",
     #     domain: "String",
     #     domain_iam_role_name: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     #
     # @example Response structure
@@ -10677,6 +10699,7 @@ module Aws::RDS
     #   resp.db_instance.promotion_tier #=> Integer
     #   resp.db_instance.db_instance_arn #=> String
     #   resp.db_instance.timezone #=> String
+    #   resp.db_instance.iam_database_authentication_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -10773,7 +10796,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -35,6 +35,7 @@ module Aws::CloudFormation
     ChangeSource = Shapes::StringShape.new(name: 'ChangeSource')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     Changes = Shapes::ListShape.new(name: 'Changes')
+    ClientRequestToken = Shapes::StringShape.new(name: 'ClientRequestToken')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ContinueUpdateRollbackInput = Shapes::StructureShape.new(name: 'ContinueUpdateRollbackInput')
     ContinueUpdateRollbackOutput = Shapes::StructureShape.new(name: 'ContinueUpdateRollbackOutput')
@@ -171,6 +172,7 @@ module Aws::CloudFormation
     TemplateURL = Shapes::StringShape.new(name: 'TemplateURL')
     TimeoutMinutes = Shapes::IntegerShape.new(name: 'TimeoutMinutes')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    TokenAlreadyExistsException = Shapes::StructureShape.new(name: 'TokenAlreadyExistsException')
     TransformName = Shapes::StringShape.new(name: 'TransformName')
     TransformsList = Shapes::ListShape.new(name: 'TransformsList')
     UpdateStackInput = Shapes::StructureShape.new(name: 'UpdateStackInput')
@@ -191,6 +193,7 @@ module Aws::CloudFormation
     AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
 
     CancelUpdateStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
+    CancelUpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     CancelUpdateStackInput.struct_class = Types::CancelUpdateStackInput
 
     Capabilities.member = Shapes::ShapeRef.new(shape: Capability)
@@ -217,6 +220,7 @@ module Aws::CloudFormation
     ContinueUpdateRollbackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
     ContinueUpdateRollbackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
     ContinueUpdateRollbackInput.add_member(:resources_to_skip, Shapes::ShapeRef.new(shape: ResourcesToSkip, location_name: "ResourcesToSkip"))
+    ContinueUpdateRollbackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     ContinueUpdateRollbackInput.struct_class = Types::ContinueUpdateRollbackInput
 
     ContinueUpdateRollbackOutput.struct_class = Types::ContinueUpdateRollbackOutput
@@ -255,6 +259,7 @@ module Aws::CloudFormation
     CreateStackInput.add_member(:stack_policy_body, Shapes::ShapeRef.new(shape: StackPolicyBody, location_name: "StackPolicyBody"))
     CreateStackInput.add_member(:stack_policy_url, Shapes::ShapeRef.new(shape: StackPolicyURL, location_name: "StackPolicyURL"))
     CreateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     CreateStackInput.struct_class = Types::CreateStackInput
 
     CreateStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -269,6 +274,7 @@ module Aws::CloudFormation
     DeleteStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
     DeleteStackInput.add_member(:retain_resources, Shapes::ShapeRef.new(shape: RetainResources, location_name: "RetainResources"))
     DeleteStackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+    DeleteStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     DeleteStackInput.struct_class = Types::DeleteStackInput
 
     DescribeAccountLimitsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -341,6 +347,7 @@ module Aws::CloudFormation
 
     ExecuteChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, required: true, location_name: "ChangeSetName"))
     ExecuteChangeSetInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, location_name: "StackName"))
+    ExecuteChangeSetInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     ExecuteChangeSetInput.struct_class = Types::ExecuteChangeSetInput
 
     ExecuteChangeSetOutput.struct_class = Types::ExecuteChangeSetOutput
@@ -521,6 +528,7 @@ module Aws::CloudFormation
     StackEvent.add_member(:resource_status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "ResourceStatus"))
     StackEvent.add_member(:resource_status_reason, Shapes::ShapeRef.new(shape: ResourceStatusReason, location_name: "ResourceStatusReason"))
     StackEvent.add_member(:resource_properties, Shapes::ShapeRef.new(shape: ResourceProperties, location_name: "ResourceProperties"))
+    StackEvent.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     StackEvent.struct_class = Types::StackEvent
 
     StackEvents.member = Shapes::ShapeRef.new(shape: StackEvent)
@@ -608,6 +616,7 @@ module Aws::CloudFormation
     UpdateStackInput.add_member(:stack_policy_url, Shapes::ShapeRef.new(shape: StackPolicyURL, location_name: "StackPolicyURL"))
     UpdateStackInput.add_member(:notification_arns, Shapes::ShapeRef.new(shape: NotificationARNs, location_name: "NotificationARNs"))
     UpdateStackInput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    UpdateStackInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, location_name: "ClientRequestToken"))
     UpdateStackInput.struct_class = Types::UpdateStackInput
 
     UpdateStackOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
@@ -644,6 +653,7 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: CancelUpdateStackInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
       end)
 
       api.add_operation(:continue_update_rollback, Seahorse::Model::Operation.new.tap do |o|
@@ -652,6 +662,7 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ContinueUpdateRollbackInput)
         o.output = Shapes::ShapeRef.new(shape: ContinueUpdateRollbackOutput)
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
       end)
 
       api.add_operation(:create_change_set, Seahorse::Model::Operation.new.tap do |o|
@@ -673,6 +684,7 @@ module Aws::CloudFormation
         o.output = Shapes::ShapeRef.new(shape: CreateStackOutput)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapabilitiesException)
       end)
 
@@ -691,6 +703,7 @@ module Aws::CloudFormation
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteStackInput)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
       end)
 
       api.add_operation(:describe_account_limits, Seahorse::Model::Operation.new.tap do |o|
@@ -769,6 +782,7 @@ module Aws::CloudFormation
         o.errors << Shapes::ShapeRef.new(shape: InvalidChangeSetStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapabilitiesException)
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
       end)
 
       api.add_operation(:get_stack_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -879,6 +893,7 @@ module Aws::CloudFormation
         o.input = Shapes::ShapeRef.new(shape: UpdateStackInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateStackOutput)
         o.errors << Shapes::ShapeRef.new(shape: InsufficientCapabilitiesException)
+        o.errors << Shapes::ShapeRef.new(shape: TokenAlreadyExistsException)
       end)
 
       api.add_operation(:validate_template, Seahorse::Model::Operation.new.tap do |o|

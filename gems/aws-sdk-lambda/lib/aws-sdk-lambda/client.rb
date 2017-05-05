@@ -2114,6 +2114,14 @@ module Aws::Lambda
     #   This boolean parameter can be used to request AWS Lambda to update the
     #   Lambda function and publish a version as an atomic operation.
     #
+    # @option params [Boolean] :dry_run
+    #   This boolean parameter can be used to test your request to AWS Lambda
+    #   to update the Lambda function and publish a version as an atomic
+    #   operation. It will do all necessary computation and validation of your
+    #   code but will not upload it or a publish a version. Each time this
+    #   operation is invoked, the `CodeSha256` hash value the provided code
+    #   will also be computed and returned in the response.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -2143,6 +2151,7 @@ module Aws::Lambda
     #     s3_key: "S3Key",
     #     s3_object_version: "S3ObjectVersion",
     #     publish: false,
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2371,7 +2380,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

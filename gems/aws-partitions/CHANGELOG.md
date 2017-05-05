@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2017-05-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::States`.
+
+* Feature - Added support for enumerating regions for `Aws::MarketplaceEntitlementService`.
+
+* Feature - Added support for enumerating regions for `Aws::Lex`.
+
 1.6.0 (2017-04-21)
 ------------------
 

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc9 (2017-05-05)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Added support for Ruby 2.4
 
 * Issue - Revert 'cgi/util' change that breaks Ruby 2.4

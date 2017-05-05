@@ -237,6 +237,7 @@ module Aws::ECS
     ContainerInstance.add_member(:pending_tasks_count, Shapes::ShapeRef.new(shape: Integer, location_name: "pendingTasksCount"))
     ContainerInstance.add_member(:agent_update_status, Shapes::ShapeRef.new(shape: AgentUpdateStatus, location_name: "agentUpdateStatus"))
     ContainerInstance.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+    ContainerInstance.add_member(:registered_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "registeredAt"))
     ContainerInstance.struct_class = Types::ContainerInstance
 
     ContainerInstances.member = Shapes::ShapeRef.new(shape: ContainerInstance)

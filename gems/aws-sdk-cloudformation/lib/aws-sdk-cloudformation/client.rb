@@ -156,12 +156,20 @@ module Aws::CloudFormation
     # @option params [required, String] :stack_name
     #   The name or the unique stack ID that is associated with the stack.
     #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `CancelUpdateStack` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to cancel an update on a stack with the
+    #   same name. You might retry `CancelUpdateStack` requests to ensure that
+    #   AWS CloudFormation successfully received them.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.cancel_update_stack({
     #     stack_name: "StackName", # required
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CancelUpdateStack AWS API Documentation
@@ -245,14 +253,21 @@ module Aws::CloudFormation
     #   to skip the dependent resources.
     #
     #   To specify resources in a nested stack, use the following format:
-    #   `NestedStackName.ResourceLogicalID`. You can specify a nested stack
-    #   resource (the logical ID of an `AWS::CloudFormation::Stack` resource)
-    #   only if it's in one of the following states: `DELETE_IN_PROGRESS`,
-    #   `DELETE_COMPLETE`, or `DELETE_FAILED`.
+    #   `NestedStackName.ResourceLogicalID`. If the `ResourceLogicalID` is a
+    #   stack resource (`Type: AWS::CloudFormation::Stack`), it must be in one
+    #   of the following states: `DELETE_IN_PROGRESS`, `DELETE_COMPLETE`, or
+    #   `DELETE_FAILED`.
     #
     #
     #
     #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `ContinueUpdateRollback` request. Specify
+    #   this token if you plan to retry requests so that AWS CloudFormation
+    #   knows that you're not attempting to continue the rollback to a stack
+    #   with the same name. You might retry `ContinueUpdateRollback` requests
+    #   to ensure that AWS CloudFormation successfully received them.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -262,6 +277,7 @@ module Aws::CloudFormation
     #     stack_name: "StackNameOrId", # required
     #     role_arn: "RoleARN",
     #     resources_to_skip: ["ResourceToSkip"],
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ContinueUpdateRollback AWS API Documentation
@@ -273,21 +289,28 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Creates a list of changes for a stack. AWS CloudFormation generates
-    # the change set by comparing the template's information with the
-    # information that you submit. A change set can help you understand
-    # which resources AWS CloudFormation will change, and how it will change
-    # them, before you update your stack. Change sets allow you to check
-    # before making a change to avoid deleting or replacing critical
-    # resources.
+    # Creates a list of changes that will be applied to a stack so that you
+    # can review the changes before executing them. You can create a change
+    # set for a stack that doesn't exist or an existing stack. If you
+    # create a change set for a stack that doesn't exist, the change set
+    # shows all of the resources that AWS CloudFormation will create. If you
+    # create a change set for an existing stack, AWS CloudFormation compares
+    # the stack's information with the information that you submit in the
+    # change set and lists the differences. Use change sets to understand
+    # which resources AWS CloudFormation will create or change, and how it
+    # will change resources in an existing stack, before you create or
+    # update a stack.
     #
-    # AWS CloudFormation doesn't make any changes to the stack when you
-    # create a change set. To make the specified changes, you must execute
-    # the change set by using the ExecuteChangeSet action.
+    # To create a change set for a stack that doesn't exist, for the
+    # `ChangeSetType` parameter, specify `CREATE`. To create a change set
+    # for an existing stack, specify `UPDATE` for the `ChangeSetType`
+    # parameter. After the `CreateChangeSet` call successfully completes,
+    # AWS CloudFormation starts creating the change set. To check the status
+    # of the change set or to review it, use the DescribeChangeSet action.
     #
-    # After the call successfully completes, AWS CloudFormation starts
-    # creating the change set. To check the status of the change set, use
-    # the DescribeChangeSet action.
+    # When you are satisfied with the changes the change set will make,
+    # execute the change set by using the ExecuteChangeSet action. AWS
+    # CloudFormation doesn't make changes until you execute the change set.
     #
     # @option params [required, String] :stack_name
     #   The name or the unique ID of the stack for which you are creating a
@@ -547,12 +570,8 @@ module Aws::CloudFormation
     #
     # @option params [Array<String>] :notification_arns
     #   The Simple Notification Service (SNS) topic ARNs to publish stack
-    #   related events. You can find your SNS topic ARNs using the [SNS
-    #   console][1] or your Command Line Interface (CLI).
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/sns
+    #   related events. You can find your SNS topic ARNs using the SNS console
+    #   or your Command Line Interface (CLI).
     #
     # @option params [Array<String>] :capabilities
     #   A list of values that you must specify before AWS CloudFormation can
@@ -654,6 +673,13 @@ module Aws::CloudFormation
     #   propagates these tags to the resources created in the stack. A maximum
     #   number of 10 tags can be specified.
     #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `CreateStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to create a stack with the same name. You might
+    #   retry `CreateStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #
     # @return [Types::CreateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackOutput#stack_id #stack_id} => String
@@ -686,6 +712,7 @@ module Aws::CloudFormation
     #         value: "TagValue",
     #       },
     #     ],
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @example Response structure
@@ -760,6 +787,13 @@ module Aws::CloudFormation
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
     #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `DeleteStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to delete a stack with the same name. You might
+    #   retry `DeleteStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -768,6 +802,7 @@ module Aws::CloudFormation
     #     stack_name: "StackName", # required
     #     retain_resources: ["LogicalResourceId"],
     #     role_arn: "RoleARN",
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DeleteStack AWS API Documentation
@@ -962,6 +997,7 @@ module Aws::CloudFormation
     #   resp.stack_events[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
     #   resp.stack_events[0].resource_status_reason #=> String
     #   resp.stack_events[0].resource_properties #=> String
+    #   resp.stack_events[0].client_request_token #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackEvents AWS API Documentation
@@ -1282,6 +1318,13 @@ module Aws::CloudFormation
     #   If you specified the name of a change set, specify the stack name or
     #   ID (ARN) that is associated with the change set you want to execute.
     #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `ExecuteChangeSet` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to execute a change set to update a stack
+    #   with the same name. You might retry `ExecuteChangeSet` requests to
+    #   ensure that AWS CloudFormation successfully received them.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1289,6 +1332,7 @@ module Aws::CloudFormation
     #   resp = client.execute_change_set({
     #     change_set_name: "ChangeSetNameOrId", # required
     #     stack_name: "StackNameOrId",
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ExecuteChangeSet AWS API Documentation
@@ -1845,8 +1889,9 @@ module Aws::CloudFormation
     #   and a maximum length of 51,200 bytes. (For more information, go to
     #   [Template Anatomy][1] in the AWS CloudFormation User Guide.)
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     #
     #
@@ -1857,8 +1902,9 @@ module Aws::CloudFormation
     #   template that is located in an Amazon S3 bucket. For more information,
     #   go to [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     #
     #
@@ -1867,6 +1913,10 @@ module Aws::CloudFormation
     # @option params [Boolean] :use_previous_template
     #   Reuse the existing template that is associated with the stack that you
     #   are updating.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     # @option params [String] :stack_policy_during_update_body
     #   Structure containing the temporary overriding stack policy body. You
@@ -1999,6 +2049,13 @@ module Aws::CloudFormation
     #   modify the stack's tags. If you specify an empty value, AWS
     #   CloudFormation removes all associated tags.
     #
+    # @option params [String] :client_request_token
+    #   A unique identifier for this `UpdateStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to update a stack with the same name. You might
+    #   retry `UpdateStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
+    #
     # @return [Types::UpdateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackOutput#stack_id #stack_id} => String
@@ -2031,6 +2088,7 @@ module Aws::CloudFormation
     #         value: "TagValue",
     #       },
     #     ],
+    #     client_request_token: "ClientRequestToken",
     #   })
     #
     # @example Response structure
@@ -2127,7 +2185,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

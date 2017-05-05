@@ -32,6 +32,7 @@ module Aws::Snowball
     #         country: "String",
     #         postal_code: "String",
     #         phone_number: "String",
+    #         is_restricted: false,
     #       }
     #
     # @!attribute [rw] address_id
@@ -71,12 +72,11 @@ module Aws::Snowball
     #   @return [String]
     #
     # @!attribute [rw] prefecture_or_district
-    #   The prefecture or district that the appliance will be shipped to.
+    #   This field is no longer used and the value is ignored.
     #   @return [String]
     #
     # @!attribute [rw] landmark
-    #   The landmark identifying the address that the appliance will be
-    #   shipped to.
+    #   This field is no longer used and the value is ignored.
     #   @return [String]
     #
     # @!attribute [rw] country
@@ -91,6 +91,11 @@ module Aws::Snowball
     #   The phone number associated with an address that a Snowball is to be
     #   delivered to.
     #   @return [String]
+    #
+    # @!attribute [rw] is_restricted
+    #   If the address you are creating is a primary address, then set this
+    #   option to true. This field is not supported in most regions.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/Address AWS API Documentation
     #
@@ -107,7 +112,8 @@ module Aws::Snowball
       :landmark,
       :country,
       :postal_code,
-      :phone_number)
+      :phone_number,
+      :is_restricted)
       include Aws::Structure
     end
 
@@ -273,6 +279,12 @@ module Aws::Snowball
     #   settings for this cluster.
     #   @return [Types::Notification]
     #
+    # @!attribute [rw] forwarding_address_id
+    #   The ID of the address that you want a cluster shipped to, after it
+    #   will be shipped to its primary address. This field is not supported
+    #   in most regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/ClusterMetadata AWS API Documentation
     #
     class ClusterMetadata < Struct.new(
@@ -287,7 +299,8 @@ module Aws::Snowball
       :resources,
       :address_id,
       :shipping_option,
-      :notification)
+      :notification,
+      :forwarding_address_id)
       include Aws::Structure
     end
 
@@ -309,6 +322,7 @@ module Aws::Snowball
     #           country: "String",
     #           postal_code: "String",
     #           phone_number: "String",
+    #           is_restricted: false,
     #         },
     #       }
     #
@@ -373,6 +387,7 @@ module Aws::Snowball
     #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
+    #         forwarding_address_id: "AddressId",
     #       }
     #
     # @!attribute [rw] job_type
@@ -447,6 +462,11 @@ module Aws::Snowball
     #   settings for this cluster.
     #   @return [Types::Notification]
     #
+    # @!attribute [rw] forwarding_address_id
+    #   The forwarding address ID for a cluster. This field is not supported
+    #   in most regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateClusterRequest AWS API Documentation
     #
     class CreateClusterRequest < Struct.new(
@@ -458,7 +478,8 @@ module Aws::Snowball
       :role_arn,
       :snowball_type,
       :shipping_option,
-      :notification)
+      :notification,
+      :forwarding_address_id)
       include Aws::Structure
     end
 
@@ -512,6 +533,7 @@ module Aws::Snowball
     #         },
     #         cluster_id: "ClusterId",
     #         snowball_type: "STANDARD", # accepts STANDARD, EDGE
+    #         forwarding_address_id: "AddressId",
     #       }
     #
     # @!attribute [rw] job_type
@@ -603,6 +625,11 @@ module Aws::Snowball
     #   the only supported appliance type for cluster jobs is `EDGE`.
     #   @return [String]
     #
+    # @!attribute [rw] forwarding_address_id
+    #   The forwarding address ID for a job. This field is not supported in
+    #   most regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -616,7 +643,8 @@ module Aws::Snowball
       :shipping_option,
       :notification,
       :cluster_id,
-      :snowball_type)
+      :snowball_type,
+      :forwarding_address_id)
       include Aws::Structure
     end
 
@@ -1054,13 +1082,21 @@ module Aws::Snowball
     # @!attribute [rw] kms_key_arn
     #   The Amazon Resource Name (ARN) for the AWS Key Management Service
     #   (AWS KMS) key associated with this job. This ARN was created using
-    #   the `CreateKey` API action in AWS KMS.
+    #   the [CreateKey][1] API action in AWS KMS.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
     #   @return [String]
     #
     # @!attribute [rw] role_arn
     #   The role ARN associated with this job. This ARN was created using
-    #   the `CreateRole` API action in AWS Identity and Access Management
+    #   the [CreateRole][1] API action in AWS Identity and Access Management
     #   (IAM).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #   @return [String]
     #
     # @!attribute [rw] address_id
@@ -1105,6 +1141,12 @@ module Aws::Snowball
     #   `CID123e4567-e89b-12d3-a456-426655440000`.
     #   @return [String]
     #
+    # @!attribute [rw] forwarding_address_id
+    #   The ID of the address that you want a job shipped to, after it will
+    #   be shipped to its primary address. This field is not supported in
+    #   most regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/JobMetadata AWS API Documentation
     #
     class JobMetadata < Struct.new(
@@ -1123,7 +1165,8 @@ module Aws::Snowball
       :notification,
       :data_transfer_progress,
       :job_log_info,
-      :cluster_id)
+      :cluster_id,
+      :forwarding_address_id)
       include Aws::Structure
     end
 
@@ -1474,8 +1517,7 @@ module Aws::Snowball
     # outbound shipment.
     #
     # @!attribute [rw] status
-    #   Status information for a shipment. Valid statuses include `NEW`,
-    #   `IN_TRANSIT`, and `DELIVERED`.
+    #   Status information for a shipment.
     #   @return [String]
     #
     # @!attribute [rw] tracking_number
@@ -1572,6 +1614,7 @@ module Aws::Snowball
     #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #           notify_all: false,
     #         },
+    #         forwarding_address_id: "AddressId",
     #       }
     #
     # @!attribute [rw] cluster_id
@@ -1611,6 +1654,11 @@ module Aws::Snowball
     #   The new or updated Notification object.
     #   @return [Types::Notification]
     #
+    # @!attribute [rw] forwarding_address_id
+    #   The updated ID for the forwarding address for a cluster. This field
+    #   is not supported in most regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateClusterRequest AWS API Documentation
     #
     class UpdateClusterRequest < Struct.new(
@@ -1620,7 +1668,8 @@ module Aws::Snowball
       :resources,
       :address_id,
       :shipping_option,
-      :notification)
+      :notification,
+      :forwarding_address_id)
       include Aws::Structure
     end
 
@@ -1664,6 +1713,7 @@ module Aws::Snowball
     #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #         description: "String",
     #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
+    #         forwarding_address_id: "AddressId",
     #       }
     #
     # @!attribute [rw] job_id
@@ -1673,7 +1723,7 @@ module Aws::Snowball
     #
     # @!attribute [rw] role_arn
     #   The new role Amazon Resource Name (ARN) that you want to associate
-    #   with this job. To create a role ARN, use the [CreateRole][1] AWS
+    #   with this job. To create a role ARN, use the [CreateRole][1]AWS
     #   Identity and Access Management (IAM) API action.
     #
     #
@@ -1709,6 +1759,11 @@ module Aws::Snowball
     #   object. The 50 TB Snowballs are only available in the US regions.
     #   @return [String]
     #
+    # @!attribute [rw] forwarding_address_id
+    #   The updated ID for the forwarding address for a job. This field is
+    #   not supported in most regions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJobRequest AWS API Documentation
     #
     class UpdateJobRequest < Struct.new(
@@ -1719,7 +1774,8 @@ module Aws::Snowball
       :address_id,
       :shipping_option,
       :description,
-      :snowball_capacity_preference)
+      :snowball_capacity_preference,
+      :forwarding_address_id)
       include Aws::Structure
     end
 

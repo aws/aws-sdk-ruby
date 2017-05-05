@@ -216,25 +216,27 @@ module Aws::ECS
     # your service's tasks that must remain in the `RUNNING` state during a
     # deployment, as a percentage of the `desiredCount` (rounded up to the
     # nearest integer). This parameter enables you to deploy without using
-    # additional cluster capacity. For example, if `desiredCount` is four
-    # tasks and the minimum is 50%, the scheduler can stop two existing
-    # tasks to free up cluster capacity before starting two new tasks. Tasks
-    # for services that do not use a load balancer are considered healthy if
-    # they are in the `RUNNING` state. Tasks for services that use a load
-    # balancer are considered healthy if they are in the `RUNNING` state and
-    # the container instance they are hosted on is reported as healthy by
-    # the load balancer. The default value is 50% in the console and 100%
-    # for the AWS CLI, the AWS SDKs, and the APIs.
+    # additional cluster capacity. For example, if your service has a
+    # `desiredCount` of four tasks and a `minimumHealthyPercent` of 50%, the
+    # scheduler can stop two existing tasks to free up cluster capacity
+    # before starting two new tasks. Tasks for services that *do not* use a
+    # load balancer are considered healthy if they are in the `RUNNING`
+    # state. Tasks for services that *do* use a load balancer are considered
+    # healthy if they are in the `RUNNING` state and the container instance
+    # they are hosted on is reported as healthy by the load balancer. The
+    # default value for `minimumHealthyPercent` is 50% in the console and
+    # 100% for the AWS CLI, the AWS SDKs, and the APIs.
     #
     # The `maximumPercent` parameter represents an upper limit on the number
     # of your service's tasks that are allowed in the `RUNNING` or
     # `PENDING` state during a deployment, as a percentage of the
     # `desiredCount` (rounded down to the nearest integer). This parameter
-    # enables you to define the deployment batch size. For example, if
-    # `desiredCount` is four tasks and the maximum is 200%, the scheduler
-    # can start four new tasks before stopping the four older tasks
-    # (provided that the cluster resources required to do this are
-    # available). The default value is 200%.
+    # enables you to define the deployment batch size. For example, if your
+    # service has a `desiredCount` of four tasks and a `maximumPercent`
+    # value of 200%, the scheduler can start four new tasks before stopping
+    # the four older tasks (provided that the cluster resources required to
+    # do this are available). The default value for `maximumPercent` is
+    # 200%.
     #
     # When the service scheduler launches new tasks, it determines task
     # placement in your cluster using the following logic:
@@ -245,7 +247,8 @@ module Aws::ECS
     #
     # * By default, the service scheduler attempts to balance tasks across
     #   Availability Zones in this manner (although you can choose a
-    #   different placement strategy):
+    #   different placement strategy) with the `placementStrategy`
+    #   parameter):
     #
     #   * Sort the valid container instances by the fewest number of running
     #     tasks for this service in the same Availability Zone as the
@@ -430,7 +433,7 @@ module Aws::ECS
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
-    #   contains the resource to apply attributes. If you do not specify a
+    #   contains the resource to delete attributes. If you do not specify a
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<Types::Attribute>] :attributes
@@ -532,8 +535,9 @@ module Aws::ECS
     #  </note>
     #
     # @option params [String] :cluster
-    #   The name of the cluster that hosts the service to delete. If you do
-    #   not specify a cluster, the default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   hosts the service to delete. If you do not specify a cluster, the
+    #   default cluster is assumed.
     #
     # @option params [required, String] :service
     #   The name of the service to delete.
@@ -692,6 +696,7 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].value #=> String
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
+    #   resp.container_instance.registered_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance AWS API Documentation
     #
@@ -714,6 +719,13 @@ module Aws::ECS
     # reference an `INACTIVE` task definition (although there may be up to a
     # 10 minute window following deregistration where these restrictions
     # have not yet taken effect).
+    #
+    # <note markdown="1"> At this time, `INACTIVE` task definitions remain discoverable in your
+    # account indefinitely; however, this behavior is subject to change in
+    # the future, so you should not rely on `INACTIVE` task definitions
+    # persisting beyond the life cycle of any associated tasks and services.
+    #
+    #  </note>
     #
     # @option params [required, String] :task_definition
     #   The `family` and `revision` (`family:revision`) or full Amazon
@@ -813,9 +825,9 @@ module Aws::ECS
     # Describes one or more of your clusters.
     #
     # @option params [Array<String>] :clusters
-    #   A space-separated list of up to 100 cluster names or full cluster
-    #   Amazon Resource Name (ARN) entries. If you do not specify a cluster,
-    #   the default cluster is assumed.
+    #   A list of up to 100 cluster names or full cluster Amazon Resource Name
+    #   (ARN) entries. If you do not specify a cluster, the default cluster is
+    #   assumed.
     #
     # @return [Types::DescribeClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -861,8 +873,8 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
-    #   A space-separated list of container instance IDs or full Amazon
-    #   Resource Name (ARN) entries.
+    #   A list of container instance IDs or full Amazon Resource Name (ARN)
+    #   entries.
     #
     # @return [Types::DescribeContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -911,6 +923,7 @@ module Aws::ECS
     #   resp.container_instances[0].attributes[0].value #=> String
     #   resp.container_instances[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instances[0].attributes[0].target_id #=> String
+    #   resp.container_instances[0].registered_at #=> Time
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -927,8 +940,9 @@ module Aws::ECS
     # Describes the specified services running in your cluster.
     #
     # @option params [String] :cluster
-    #   The name of the cluster that hosts the service to describe. If you do
-    #   not specify a cluster, the default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN)the cluster that
+    #   hosts the service to describe. If you do not specify a cluster, the
+    #   default cluster is assumed.
     #
     # @option params [required, Array<String>] :services
     #   A list of services to describe. You may specify up to 10 services to
@@ -1111,7 +1125,7 @@ module Aws::ECS
     #   default cluster is assumed.
     #
     # @option params [required, Array<String>] :tasks
-    #   A space-separated list of task IDs or full Amazon Resource Name (ARN)
+    #   A list of up to 100 task IDs or full Amazon Resource Name (ARN)
     #   entries.
     #
     # @return [Types::DescribeTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1193,7 +1207,8 @@ module Aws::ECS
     #   `.
     #
     # @option params [String] :cluster
-    #   The cluster that the container instance belongs to.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster that
+    #   the container instance belongs to.
     #
     # @return [Types::DiscoverPollEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1223,7 +1238,7 @@ module Aws::ECS
 
     # Lists the attributes for Amazon ECS resources within a specified
     # target type and cluster. When you specify a target type and cluster,
-    # `LisAttributes` returns a list of attribute objects, one for each
+    # `ListAttributes` returns a list of attribute objects, one for each
     # attribute on each resource. You can filter the list of results to a
     # single attribute name to only return results that have that name. You
     # can also filter the results by attribute name and value, for example,
@@ -1404,11 +1419,11 @@ module Aws::ECS
     #   `nextToken` value if applicable.
     #
     # @option params [String] :status
-    #   The container instance status with which to filter the
-    #   `ListContainerInstances` results. Specifying a container instance
-    #   status of `DRAINING` limits the results to container instances that
-    #   have been set to drain with the UpdateContainerInstancesState
-    #   operation.
+    #   Filters the container instances by status. For example, if you specify
+    #   the `DRAINING` status, the results include only container instances
+    #   that have been set to `DRAINING` using UpdateContainerInstancesState.
+    #   If you do not specify this parameter, the default is to include
+    #   container instances set to `ACTIVE` and `DRAINING`.
     #
     # @return [Types::ListContainerInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1929,6 +1944,7 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].value #=> String
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
+    #   resp.container_instance.registered_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance AWS API Documentation
     #
@@ -2492,10 +2508,21 @@ module Aws::ECS
     #
     # When StopTask is called on a task, the equivalent of `docker stop` is
     # issued to the containers running in the task. This results in a
-    # `SIGTERM` and a 30-second timeout, after which `SIGKILL` is sent and
-    # the containers are forcibly stopped. If the container handles the
-    # `SIGTERM` gracefully and exits within 30 seconds from receiving it, no
-    # `SIGKILL` is sent.
+    # `SIGTERM` and a default 30-second timeout, after which `SIGKILL` is
+    # sent and the containers are forcibly stopped. If the container handles
+    # the `SIGTERM` gracefully and exits within 30 seconds from receiving
+    # it, no `SIGKILL` is sent.
+    #
+    # <note markdown="1"> The default 30-second timeout can be configured on the Amazon ECS
+    # container agent with the `ECS_CONTAINER_STOP_TIMEOUT` variable. For
+    # more information, see [Amazon ECS Container Agent Configuration][1] in
+    # the *Amazon EC2 Container Service Developer Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -2755,6 +2782,7 @@ module Aws::ECS
     #   resp.container_instance.attributes[0].value #=> String
     #   resp.container_instance.attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instance.attributes[0].target_id #=> String
+    #   resp.container_instance.registered_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent AWS API Documentation
     #
@@ -2821,8 +2849,8 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
-    #   A space-separated list of container instance IDs or full Amazon
-    #   Resource Name (ARN) entries.
+    #   A list of container instance IDs or full Amazon Resource Name (ARN)
+    #   entries.
     #
     # @option params [required, String] :status
     #   The container instance state with which to update the container
@@ -2876,6 +2904,7 @@ module Aws::ECS
     #   resp.container_instances[0].attributes[0].value #=> String
     #   resp.container_instances[0].attributes[0].target_type #=> String, one of "container-instance"
     #   resp.container_instances[0].attributes[0].target_id #=> String
+    #   resp.container_instances[0].registered_at #=> Time
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -3067,7 +3096,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

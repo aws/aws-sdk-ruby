@@ -31,7 +31,10 @@ module Aws::RDS
     end
     alias :db_cluster_identifier :id
 
-    # Specifies the allocated storage size in gigabytes (GB).
+    # For all database engines except Amazon Aurora, `AllocatedStorage`
+    # specifies the allocated storage size in gigabytes (GB). For Aurora,
+    # `AllocatedStorage` always returns 1, because Aurora DB cluster storage
+    # size is not fixed, but instead automatically adjusts as needed.
     # @return [Integer]
     def allocated_storage
       data.allocated_storage
@@ -117,7 +120,7 @@ module Aws::RDS
     # If a failover occurs, and the Aurora Replica that you are connected to
     # is promoted to be the primary instance, your connection will be
     # dropped. To continue sending your read workload to other Aurora
-    # Replicas in the cluster, you can then recoonect to the reader
+    # Replicas in the cluster, you can then reconnect to the reader
     # endpoint.
     # @return [String]
     def reader_endpoint
@@ -253,6 +256,13 @@ module Aws::RDS
       data.associated_roles
     end
 
+    # True if mapping of AWS Identity and Access Management (IAM) accounts
+    # to database accounts is enabled; otherwise false.
+    # @return [Boolean]
+    def iam_database_authentication_enabled
+      data.iam_database_authentication_enabled
+    end
+
     # Specifies the time when the DB cluster was created, in Universal
     # Coordinated Time (UTC).
     # @return [Time]
@@ -325,6 +335,7 @@ module Aws::RDS
     #     storage_encrypted: false,
     #     kms_key_id: "String",
     #     pre_signed_url: "String",
+    #     enable_iam_database_authentication: false,
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -517,6 +528,12 @@ module Aws::RDS
     #
     #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
     #   [2]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+    # @option options [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
     # @option options [String] :destination_region
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -652,6 +669,7 @@ module Aws::RDS
     #     option_group_name: "String",
     #     preferred_backup_window: "String",
     #     preferred_maintenance_window: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :new_db_cluster_identifier
@@ -697,7 +715,7 @@ module Aws::RDS
     # @option options [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to use for the DB cluster.
     # @option options [Array<String>] :vpc_security_group_ids
-    #   A lst of VPC security groups that the DB cluster will belong to.
+    #   A list of VPC security groups that the DB cluster will belong to.
     # @option options [Integer] :port
     #   The port number on which the DB cluster accepts connections.
     #
@@ -762,6 +780,12 @@ module Aws::RDS
     #
     #
     #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+    # @option options [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
     # @return [DBCluster]
     def modify(options = {})
       options = options.merge(db_cluster_identifier: @id)
@@ -790,6 +814,7 @@ module Aws::RDS
     #       },
     #     ],
     #     kms_key_id: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_cluster_identifier
@@ -869,6 +894,12 @@ module Aws::RDS
     #
     #   If `DBClusterIdentifier` refers to a DB cluster that is note
     #   encrypted, then the restore request is rejected.
+    # @option options [Boolean] :enable_iam_database_authentication
+    #   A Boolean value that is true to enable mapping of AWS Identity and
+    #   Access Management (IAM) accounts to database accounts, and otherwise
+    #   false.
+    #
+    #   Default: `false`
     # @return [DBCluster]
     def restore(options = {})
       options = options.merge(source_db_cluster_identifier: @id)

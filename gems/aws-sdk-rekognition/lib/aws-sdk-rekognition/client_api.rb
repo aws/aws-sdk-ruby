@@ -471,6 +471,7 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidImageFormatException)
       end)
 
       api.add_operation(:index_faces, Seahorse::Model::Operation.new.tap do |o|

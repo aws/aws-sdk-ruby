@@ -206,9 +206,8 @@ module Aws::Snowball
       req.send_request(options)
     end
 
-    # Creates an address for a Snowball to be shipped to.
-    #
-    # Addresses are validated at the time of creation. The address you
+    # Creates an address for a Snowball to be shipped to. In most regions,
+    # addresses are validated at the time of creation. The address you
     # provide must be located within the serviceable area of your region. If
     # the address is invalid or unsupported, then an exception is thrown.
     #
@@ -236,6 +235,7 @@ module Aws::Snowball
     #       country: "String",
     #       postal_code: "String",
     #       phone_number: "String",
+    #       is_restricted: false,
     #     },
     #   })
     #
@@ -317,6 +317,10 @@ module Aws::Snowball
     #   The Amazon Simple Notification Service (Amazon SNS) notification
     #   settings for this cluster.
     #
+    # @option params [String] :forwarding_address_id
+    #   The forwarding address ID for a cluster. This field is not supported
+    #   in most regions.
+    #
     # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClusterResult#cluster_id #cluster_id} => String
@@ -357,6 +361,7 @@ module Aws::Snowball
     #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
+    #     forwarding_address_id: "AddressId",
     #   })
     #
     # @example Response structure
@@ -377,7 +382,7 @@ module Aws::Snowball
     # policies and permissions in place to create a job for Snowball. If
     # you're creating a job for a node in a cluster, you only need to
     # provide the `clusterId` value; the other job attributes are inherited
-    # from the cluster. .
+    # from the cluster.
     #
     # @option params [String] :job_type
     #   Defines the type of job that you're creating.
@@ -456,6 +461,10 @@ module Aws::Snowball
     #   The type of AWS Snowball appliance to use for this job. Currently, the
     #   only supported appliance type for cluster jobs is `EDGE`.
     #
+    # @option params [String] :forwarding_address_id
+    #   The forwarding address ID for a job. This field is not supported in
+    #   most regions.
+    #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobResult#job_id #job_id} => String
@@ -498,6 +507,7 @@ module Aws::Snowball
     #     },
     #     cluster_id: "ClusterId",
     #     snowball_type: "STANDARD", # accepts STANDARD, EDGE
+    #     forwarding_address_id: "AddressId",
     #   })
     #
     # @example Response structure
@@ -544,6 +554,7 @@ module Aws::Snowball
     #   resp.address.country #=> String
     #   resp.address.postal_code #=> String
     #   resp.address.phone_number #=> String
+    #   resp.address.is_restricted #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddress AWS API Documentation
     #
@@ -595,6 +606,7 @@ module Aws::Snowball
     #   resp.addresses[0].country #=> String
     #   resp.addresses[0].postal_code #=> String
     #   resp.addresses[0].phone_number #=> String
+    #   resp.addresses[0].is_restricted #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeAddresses AWS API Documentation
@@ -646,6 +658,7 @@ module Aws::Snowball
     #   resp.cluster_metadata.notification.job_states_to_notify #=> Array
     #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
     #   resp.cluster_metadata.notification.notify_all #=> Boolean
+    #   resp.cluster_metadata.forwarding_address_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
@@ -657,7 +670,7 @@ module Aws::Snowball
     end
 
     # Returns information about a specific job including shipping
-    # information, job status, and other important metadata. .
+    # information, job status, and other important metadata.
     #
     # @option params [required, String] :job_id
     #   The automatically generated ID for a job, for example
@@ -711,6 +724,7 @@ module Aws::Snowball
     #   resp.job_metadata.job_log_info.job_success_log_uri #=> String
     #   resp.job_metadata.job_log_info.job_failure_log_uri #=> String
     #   resp.job_metadata.cluster_id #=> String
+    #   resp.job_metadata.forwarding_address_id #=> String
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -747,6 +761,7 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].job_log_info.job_success_log_uri #=> String
     #   resp.sub_job_metadata[0].job_log_info.job_failure_log_uri #=> String
     #   resp.sub_job_metadata[0].cluster_id #=> String
+    #   resp.sub_job_metadata[0].forwarding_address_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -1047,6 +1062,10 @@ module Aws::Snowball
     # @option params [Types::Notification] :notification
     #   The new or updated Notification object.
     #
+    # @option params [String] :forwarding_address_id
+    #   The updated ID for the forwarding address for a cluster. This field is
+    #   not supported in most regions.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1083,6 +1102,7 @@ module Aws::Snowball
     #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
     #       notify_all: false,
     #     },
+    #     forwarding_address_id: "AddressId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateCluster AWS API Documentation
@@ -1105,7 +1125,7 @@ module Aws::Snowball
     #
     # @option params [String] :role_arn
     #   The new role Amazon Resource Name (ARN) that you want to associate
-    #   with this job. To create a role ARN, use the [CreateRole][1] AWS
+    #   with this job. To create a role ARN, use the [CreateRole][1]AWS
     #   Identity and Access Management (IAM) API action.
     #
     #
@@ -1133,6 +1153,10 @@ module Aws::Snowball
     # @option params [String] :snowball_capacity_preference
     #   The updated `SnowballCapacityPreference` of this job's JobMetadata
     #   object. The 50 TB Snowballs are only available in the US regions.
+    #
+    # @option params [String] :forwarding_address_id
+    #   The updated ID for the forwarding address for a job. This field is not
+    #   supported in most regions.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1171,6 +1195,7 @@ module Aws::Snowball
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
     #     description: "String",
     #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
+    #     forwarding_address_id: "AddressId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/UpdateJob AWS API Documentation
@@ -1195,7 +1220,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

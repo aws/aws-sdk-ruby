@@ -189,6 +189,13 @@ module Aws::RDS
       data.timezone
     end
 
+    # True if mapping of AWS Identity and Access Management (IAM) accounts
+    # to database accounts is enabled; otherwise false.
+    # @return [Boolean]
+    def iam_database_authentication_enabled
+      data.iam_database_authentication_enabled
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -347,8 +354,8 @@ module Aws::RDS
     #     encrypted snapshot to be copied. This identifier must be in the
     #     Amazon Resource Name (ARN) format for the source region. For
     #     example, if you are copying an encrypted DB snapshot from the
-    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` would look
-    #     like Example:
+    #     us-west-2 region, then your `SourceDBSnapshotIdentifier` looks like
+    #     the following example:
     #     `arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115`.
     #
     #   To learn how to generate a Signature Version 4 signed request, see [
@@ -419,6 +426,7 @@ module Aws::RDS
     #     domain: "String",
     #     copy_tags_to_snapshot: false,
     #     domain_iam_role_name: "String",
+    #     enable_iam_database_authentication: false,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -569,6 +577,20 @@ module Aws::RDS
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
+    # @option options [Boolean] :enable_iam_database_authentication
+    #   True to enable mapping of AWS Identity and Access Management (IAM)
+    #   accounts to database accounts; otherwise false.
+    #
+    #   You can enable IAM database authentication for the following database
+    #   engines
+    #
+    #   * For MySQL 5.6, minor version 5.6.34 or higher
+    #
+    #   * For MySQL 5.7, minor version 5.7.16 or higher
+    #
+    #   * Aurora 5.6 or higher.
+    #
+    #   Default: `false`
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

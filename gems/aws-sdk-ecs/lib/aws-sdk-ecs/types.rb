@@ -841,9 +841,17 @@ module Aws::ECS
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] status
-    #   The status of the container instance. The valid values are `ACTIVE`
-    #   or `INACTIVE`. `ACTIVE` indicates that the container instance can
-    #   accept tasks.
+    #   The status of the container instance. The valid values are `ACTIVE`,
+    #   `INACTIVE`, or `DRAINING`. `ACTIVE` indicates that the container
+    #   instance can accept tasks. `DRAINING` indicates that new tasks are
+    #   not placed on the container instance and any service tasks running
+    #   on the container instance are removed if possible. For more
+    #   information, see [Container Instance Draining][1] in the *Amazon EC2
+    #   Container Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-instance-draining.html
     #   @return [String]
     #
     # @!attribute [rw] agent_connected
@@ -874,6 +882,10 @@ module Aws::ECS
     #   PutAttributes operation.
     #   @return [Array<Types::Attribute>]
     #
+    # @!attribute [rw] registered_at
+    #   The Unix timestamp for when the container instance was registered.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
     #
     class ContainerInstance < Struct.new(
@@ -888,7 +900,8 @@ module Aws::ECS
       :running_tasks_count,
       :pending_tasks_count,
       :agent_update_status,
-      :attributes)
+      :attributes,
+      :registered_at)
       include Aws::Structure
     end
 
@@ -909,19 +922,22 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the container that receives the override.
+    #   The name of the container that receives the override. This parameter
+    #   is required if a command or environment variable is specified.
     #   @return [String]
     #
     # @!attribute [rw] command
     #   The command to send to the container that overrides the default
-    #   command from the Docker image or the task definition.
+    #   command from the Docker image or the task definition. You must also
+    #   specify a container name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] environment
     #   The environment variables to send to the container. You can add new
     #   environment variables, which are added to the container at launch,
     #   or you can override the existing environment variables from the
-    #   Docker image or the task definition.
+    #   Docker image or the task definition. You must also specify a
+    #   container name.
     #   @return [Array<Types::KeyValuePair>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerOverride AWS API Documentation
@@ -1137,7 +1153,7 @@ module Aws::ECS
     #
     # @!attribute [rw] cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster
-    #   that contains the resource to apply attributes. If you do not
+    #   that contains the resource to delete attributes. If you do not
     #   specify a cluster, the default cluster is assumed.
     #   @return [String]
     #
@@ -1208,8 +1224,9 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] cluster
-    #   The name of the cluster that hosts the service to delete. If you do
-    #   not specify a cluster, the default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that hosts the service to delete. If you do not specify a cluster,
+    #   the default cluster is assumed.
     #   @return [String]
     #
     # @!attribute [rw] service
@@ -1427,9 +1444,9 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] clusters
-    #   A space-separated list of up to 100 cluster names or full cluster
-    #   Amazon Resource Name (ARN) entries. If you do not specify a cluster,
-    #   the default cluster is assumed.
+    #   A list of up to 100 cluster names or full cluster Amazon Resource
+    #   Name (ARN) entries. If you do not specify a cluster, the default
+    #   cluster is assumed.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClustersRequest AWS API Documentation
@@ -1470,8 +1487,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] container_instances
-    #   A space-separated list of container instance IDs or full Amazon
-    #   Resource Name (ARN) entries.
+    #   A list of container instance IDs or full Amazon Resource Name (ARN)
+    #   entries.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeContainerInstancesRequest AWS API Documentation
@@ -1507,8 +1524,9 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] cluster
-    #   The name of the cluster that hosts the service to describe. If you
-    #   do not specify a cluster, the default cluster is assumed.
+    #   The short name or full Amazon Resource Name (ARN)the cluster that
+    #   hosts the service to describe. If you do not specify a cluster, the
+    #   default cluster is assumed.
     #   @return [String]
     #
     # @!attribute [rw] services
@@ -1587,8 +1605,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] tasks
-    #   A space-separated list of task IDs or full Amazon Resource Name
-    #   (ARN) entries.
+    #   A list of up to 100 task IDs or full Amazon Resource Name (ARN)
+    #   entries.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeTasksRequest AWS API Documentation
@@ -1634,7 +1652,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] cluster
-    #   The cluster that the container instance belongs to.
+    #   The short name or full Amazon Resource Name (ARN) of the cluster
+    #   that the container instance belongs to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DiscoverPollEndpointRequest AWS API Documentation
@@ -1967,11 +1986,12 @@ module Aws::ECS
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   The container instance status with which to filter the
-    #   `ListContainerInstances` results. Specifying a container instance
-    #   status of `DRAINING` limits the results to container instances that
-    #   have been set to drain with the UpdateContainerInstancesState
-    #   operation.
+    #   Filters the container instances by status. For example, if you
+    #   specify the `DRAINING` status, the results include only container
+    #   instances that have been set to `DRAINING` using
+    #   UpdateContainerInstancesState. If you do not specify this parameter,
+    #   the default is to include container instances set to `ACTIVE` and
+    #   `DRAINING`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListContainerInstancesRequest AWS API Documentation
@@ -2398,7 +2418,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_name
-    #   The name of the load balancer.
+    #   The name of a Classic load balancer.
     #   @return [String]
     #
     # @!attribute [rw] container_name
@@ -3991,8 +4011,8 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] container_instances
-    #   A space-separated list of container instance IDs or full Amazon
-    #   Resource Name (ARN) entries.
+    #   A list of container instance IDs or full Amazon Resource Name (ARN)
+    #   entries.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status
@@ -4165,7 +4185,8 @@ module Aws::ECS
       include Aws::Structure
     end
 
-    # Details on a data volume from another container.
+    # Details on a data volume from another container in the same task
+    # definition.
     #
     # @note When making an API call, you may pass VolumeFrom
     #   data as a hash:
@@ -4176,7 +4197,8 @@ module Aws::ECS
     #       }
     #
     # @!attribute [rw] source_container
-    #   The name of the container to mount volumes from.
+    #   The name of another container within the same task definition to
+    #   mount volumes from.
     #   @return [String]
     #
     # @!attribute [rw] read_only

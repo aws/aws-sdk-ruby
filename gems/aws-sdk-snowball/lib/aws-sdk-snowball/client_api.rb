@@ -52,6 +52,7 @@ module Aws::Snowball
     InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
     InvalidInputCombinationException = Shapes::StructureShape.new(name: 'InvalidInputCombinationException')
     InvalidJobStateException = Shapes::StructureShape.new(name: 'InvalidJobStateException')
+    InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidResourceException = Shapes::StructureShape.new(name: 'InvalidResourceException')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobListEntry = Shapes::StructureShape.new(name: 'JobListEntry')
@@ -108,6 +109,7 @@ module Aws::Snowball
     Address.add_member(:country, Shapes::ShapeRef.new(shape: String, location_name: "Country"))
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: String, location_name: "PostalCode"))
     Address.add_member(:phone_number, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumber"))
+    Address.add_member(:is_restricted, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsRestricted"))
     Address.struct_class = Types::Address
 
     AddressList.member = Shapes::ShapeRef.new(shape: Address)
@@ -142,6 +144,7 @@ module Aws::Snowball
     ClusterMetadata.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
     ClusterMetadata.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
     ClusterMetadata.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+    ClusterMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     ClusterMetadata.struct_class = Types::ClusterMetadata
 
     CreateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
@@ -159,6 +162,7 @@ module Aws::Snowball
     CreateClusterRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
     CreateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, required: true, location_name: "ShippingOption"))
     CreateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+    CreateClusterRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
@@ -175,6 +179,7 @@ module Aws::Snowball
     CreateJobRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
     CreateJobRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
     CreateJobRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
+    CreateJobRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -268,6 +273,7 @@ module Aws::Snowball
     JobMetadata.add_member(:data_transfer_progress, Shapes::ShapeRef.new(shape: DataTransfer, location_name: "DataTransferProgress"))
     JobMetadata.add_member(:job_log_info, Shapes::ShapeRef.new(shape: JobLogs, location_name: "JobLogInfo"))
     JobMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
+    JobMetadata.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     JobMetadata.struct_class = Types::JobMetadata
 
     JobMetadataList.member = Shapes::ShapeRef.new(shape: JobMetadata)
@@ -340,6 +346,7 @@ module Aws::Snowball
     UpdateClusterRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
     UpdateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
     UpdateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+    UpdateClusterRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
 
     UpdateClusterResult.struct_class = Types::UpdateClusterResult
@@ -352,6 +359,7 @@ module Aws::Snowball
     UpdateJobRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
     UpdateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     UpdateJobRequest.add_member(:snowball_capacity_preference, Shapes::ShapeRef.new(shape: SnowballCapacity, location_name: "SnowballCapacityPreference"))
+    UpdateJobRequest.add_member(:forwarding_address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "ForwardingAddressId"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateJobResult.struct_class = Types::UpdateJobResult
@@ -442,6 +450,7 @@ module Aws::Snowball
         o.input = Shapes::ShapeRef.new(shape: DescribeAddressesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAddressesResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -503,6 +512,7 @@ module Aws::Snowball
         o.input = Shapes::ShapeRef.new(shape: ListClusterJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClusterJobsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -511,6 +521,7 @@ module Aws::Snowball
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClustersResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
       end)
 
       api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -519,6 +530,7 @@ module Aws::Snowball
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListJobsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

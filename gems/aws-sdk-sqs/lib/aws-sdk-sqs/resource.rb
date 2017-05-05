@@ -47,27 +47,28 @@ module Aws::SQS
     #   The following lists the names, descriptions, and values of the special
     #   request parameters that the `CreateQueue` action uses:
     #
-    #   * `DelaySeconds` - The number of seconds for which the delivery of all
-    #     messages in the queue is delayed. Valid values: An integer from 0 to
-    #     900 seconds (15 minutes). The default is 0 (zero).
+    #   * `DelaySeconds` - The length of time, in seconds, for which the
+    #     delivery of all messages in the queue is delayed. Valid values: An
+    #     integer from 0 to 900 seconds (15 minutes). The default is 0 (zero).
     #
     #   * `MaximumMessageSize` - The limit of how many bytes a message can
     #     contain before Amazon SQS rejects it. Valid values: An integer from
     #     1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default is
     #     262,144 (256 KiB).
     #
-    #   * `MessageRetentionPeriod` - The number of seconds for which Amazon
-    #     SQS retains a message. Valid values: An integer from 60 seconds (1
-    #     minute) to 1,209,600 seconds (14 days). The default is 345,600 (4
-    #     days).
+    #   * `MessageRetentionPeriod` - The length of time, in seconds, for which
+    #     Amazon SQS retains a message. Valid values: An integer from 60
+    #     seconds (1 minute) to 1,209,600 seconds (14 days). The default is
+    #     345,600 (4 days).
     #
     #   * `Policy` - The queue's policy. A valid AWS policy. For more
     #     information about policy structure, see [Overview of AWS IAM
     #     Policies][1] in the *Amazon IAM User Guide*.
     #
-    #   * `ReceiveMessageWaitTimeSeconds` - The number of seconds for which a
-    #     ` ReceiveMessage ` action waits for a message to arrive. Valid
-    #     values: An integer from 0 to 20 (seconds). The default is 0 (zero).
+    #   * `ReceiveMessageWaitTimeSeconds` - The length of time, in seconds,
+    #     for which a ` ReceiveMessage ` action waits for a message to arrive.
+    #     Valid values: An integer from 0 to 20 (seconds). The default is 0
+    #     (zero).
     #
     #   * `RedrivePolicy` - The parameters for the dead letter queue
     #     functionality of the source queue. For more information about the
@@ -85,20 +86,39 @@ module Aws::SQS
     #     For more information about the visibility timeout, see [Visibility
     #     Timeout][3] in the *Amazon SQS Developer Guide*.
     #
+    #   The following attributes apply only to [server-side-encryption][4]\:
+    #
+    #   * `KmsMasterKeyId` - The ID of an AWS-managed customer master key
+    #     (CMK) for Amazon SQS or a custom CMK. For more information, see [Key
+    #     Terms][5]. While the alias of the AWS-managed CMK for Amazon SQS is
+    #     always `alias/aws/sqs`, the alias of a custom CMK can, for example,
+    #     be `alias/aws/sqs`. For more examples, see [KeyId][6] in the *AWS
+    #     Key Management Service API Reference*.
+    #
+    #   * `KmsDataKeyReusePeriodSeconds` - The length of time, in seconds, for
+    #     which Amazon SQS can reuse a [data key][7] to encrypt or decrypt
+    #     messages before calling AWS KMS again. An integer representing
+    #     seconds, between 60 seconds (1 minute) and 86,400 seconds (24
+    #     hours). The default is 300 (5 minutes). A shorter time period
+    #     provides better security but results in more calls to KMS which
+    #     incur charges after Free Tier. For more information, see [How Does
+    #     the Data Key Reuse Period Work?][8].
+    #
     #   The following attributes apply only to [FIFO (first-in-first-out)
-    #   queues][4]\:
+    #   queues][9]\:
     #
-    #   * `FifoQueue` - Designates a queue as FIFO. You can provide this
-    #     attribute only during queue creation. You can't change it for an
-    #     existing queue. When you set this attribute, you must provide a
-    #     `MessageGroupId` explicitly.
+    #   * `FifoQueue` - Designates a queue as FIFO. Valid values: `true`,
+    #     `false`. You can provide this attribute only during queue creation.
+    #     You can't change it for an existing queue. When you set this
+    #     attribute, you must also provide the `MessageGroupId` for your
+    #     messages explicitly.
     #
-    #     For more information, see [FIFO Queue Logic][5] in the *Amazon SQS
+    #     For more information, see [FIFO Queue Logic][10] in the *Amazon SQS
     #     Developer Guide*.
     #
     #   * `ContentBasedDeduplication` - Enables content-based deduplication.
-    #     For more information, see [Exactly-Once Processing][6] in the
-    #     *Amazon SQS Developer Guide*.
+    #     Valid values: `true`, `false`. For more information, see
+    #     [Exactly-Once Processing][11] in the *Amazon SQS Developer Guide*.
     #
     #     * Every message must have a unique `MessageDeduplicationId`,
     #
@@ -121,9 +141,6 @@ module Aws::SQS
     #       identical content sent within the deduplication interval are
     #       treated as duplicates and only one copy of the message is
     #       delivered.
-    #
-    #     * You can also use `ContentBasedDeduplication` for messages with
-    #       identical content to be treated as duplicates.
     #
     #     * If you send one message with `ContentBasedDeduplication` enabled
     #       and then another message with a `MessageDeduplicationId` that is
@@ -151,9 +168,14 @@ module Aws::SQS
     #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
     #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
     #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
-    #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
-    #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
-    #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+    #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html
+    #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms
+    #   [6]: http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters
+    #   [7]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys
+    #   [8]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work
+    #   [9]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+    #   [10]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
+    #   [11]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
     # @return [Queue]
     def create_queue(options = {})
       resp = @client.create_queue(options)

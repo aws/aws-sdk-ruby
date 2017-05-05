@@ -49,6 +49,7 @@ module Aws::CloudFormation
     #         value: "TagValue",
     #       },
     #     ],
+    #     client_request_token: "ClientRequestToken",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :stack_name
@@ -102,12 +103,8 @@ module Aws::CloudFormation
     #   the stack will be rolled back.
     # @option options [Array<String>] :notification_arns
     #   The Simple Notification Service (SNS) topic ARNs to publish stack
-    #   related events. You can find your SNS topic ARNs using the [SNS
-    #   console][1] or your Command Line Interface (CLI).
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/sns
+    #   related events. You can find your SNS topic ARNs using the SNS console
+    #   or your Command Line Interface (CLI).
     # @option options [Array<String>] :capabilities
     #   A list of values that you must specify before AWS CloudFormation can
     #   create certain stacks. Some stack templates might include resources
@@ -201,6 +198,12 @@ module Aws::CloudFormation
     #   Key-value pairs to associate with this stack. AWS CloudFormation also
     #   propagates these tags to the resources created in the stack. A maximum
     #   number of 10 tags can be specified.
+    # @option options [String] :client_request_token
+    #   A unique identifier for this `CreateStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to create a stack with the same name. You might
+    #   retry `CreateStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
     # @return [Stack]
     def create_stack(options = {})
       resp = @client.create_stack(options)

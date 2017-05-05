@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc7 (2017-05-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-states` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-marketplaceentitlementservice` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-lex` gem.
+
 3.0.0.rc6 (2017-04-21)
 ------------------
 

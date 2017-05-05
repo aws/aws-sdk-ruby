@@ -199,8 +199,16 @@ module Aws::CloudFormation
 
     # @example Request syntax with placeholder values
     #
-    #   stack.cancel_update()
+    #   stack.cancel_update({
+    #     client_request_token: "ClientRequestToken",
+    #   })
     # @param [Hash] options ({})
+    # @option options [String] :client_request_token
+    #   A unique identifier for this `CancelUpdateStack` request. Specify this
+    #   token if you plan to retry requests so that AWS CloudFormation knows
+    #   that you're not attempting to cancel an update on a stack with the
+    #   same name. You might retry `CancelUpdateStack` requests to ensure that
+    #   AWS CloudFormation successfully received them.
     # @return [EmptyStructure]
     def cancel_update(options = {})
       options = options.merge(stack_name: @name)
@@ -235,6 +243,7 @@ module Aws::CloudFormation
     #         value: "TagValue",
     #       },
     #     ],
+    #     client_request_token: "ClientRequestToken",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :template_body
@@ -279,12 +288,8 @@ module Aws::CloudFormation
     #   the stack will be rolled back.
     # @option options [Array<String>] :notification_arns
     #   The Simple Notification Service (SNS) topic ARNs to publish stack
-    #   related events. You can find your SNS topic ARNs using the [SNS
-    #   console][1] or your Command Line Interface (CLI).
-    #
-    #
-    #
-    #   [1]: https://console.aws.amazon.com/sns
+    #   related events. You can find your SNS topic ARNs using the SNS console
+    #   or your Command Line Interface (CLI).
     # @option options [Array<String>] :capabilities
     #   A list of values that you must specify before AWS CloudFormation can
     #   create certain stacks. Some stack templates might include resources
@@ -378,6 +383,12 @@ module Aws::CloudFormation
     #   Key-value pairs to associate with this stack. AWS CloudFormation also
     #   propagates these tags to the resources created in the stack. A maximum
     #   number of 10 tags can be specified.
+    # @option options [String] :client_request_token
+    #   A unique identifier for this `CreateStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to create a stack with the same name. You might
+    #   retry `CreateStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
     # @return [Types::CreateStackOutput]
     def create(options = {})
       options = options.merge(stack_name: @name)
@@ -390,6 +401,7 @@ module Aws::CloudFormation
     #   stack.delete({
     #     retain_resources: ["LogicalResourceId"],
     #     role_arn: "RoleARN",
+    #     client_request_token: "ClientRequestToken",
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :retain_resources
@@ -410,6 +422,12 @@ module Aws::CloudFormation
     #   was previously associated with the stack. If no role is available, AWS
     #   CloudFormation uses a temporary session that is generated from your
     #   user credentials.
+    # @option options [String] :client_request_token
+    #   A unique identifier for this `DeleteStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to delete a stack with the same name. You might
+    #   retry `DeleteStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
     # @return [EmptyStructure]
     def delete(options = {})
       options = options.merge(stack_name: @name)
@@ -444,6 +462,7 @@ module Aws::CloudFormation
     #         value: "TagValue",
     #       },
     #     ],
+    #     client_request_token: "ClientRequestToken",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :template_body
@@ -451,8 +470,9 @@ module Aws::CloudFormation
     #   and a maximum length of 51,200 bytes. (For more information, go to
     #   [Template Anatomy][1] in the AWS CloudFormation User Guide.)
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     #
     #
@@ -462,8 +482,9 @@ module Aws::CloudFormation
     #   template that is located in an Amazon S3 bucket. For more information,
     #   go to [Template Anatomy][1] in the AWS CloudFormation User Guide.
     #
-    #   Conditional: You must specify either the `TemplateBody` or the
-    #   `TemplateURL` parameter, but not both.
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     #
     #
     #
@@ -471,6 +492,10 @@ module Aws::CloudFormation
     # @option options [Boolean] :use_previous_template
     #   Reuse the existing template that is associated with the stack that you
     #   are updating.
+    #
+    #   Conditional: You must specify only one of the following parameters:
+    #   `TemplateBody`, `TemplateURL`, or set the `UsePreviousTemplate` to
+    #   `true`.
     # @option options [String] :stack_policy_during_update_body
     #   Structure containing the temporary overriding stack policy body. You
     #   can specify either the `StackPolicyDuringUpdateBody` or the
@@ -592,6 +617,12 @@ module Aws::CloudFormation
     #   If you don't specify this parameter, AWS CloudFormation doesn't
     #   modify the stack's tags. If you specify an empty value, AWS
     #   CloudFormation removes all associated tags.
+    # @option options [String] :client_request_token
+    #   A unique identifier for this `UpdateStack` request. Specify this token
+    #   if you plan to retry requests so that AWS CloudFormation knows that
+    #   you're not attempting to update a stack with the same name. You might
+    #   retry `UpdateStack` requests to ensure that AWS CloudFormation
+    #   successfully received them.
     # @return [Types::UpdateStackOutput]
     def update(options = {})
       options = options.merge(stack_name: @name)
