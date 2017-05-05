@@ -77,7 +77,7 @@ module Aws
             response_target: path
           ).exactly(1).times
 
-          small_obj.put(small_file)
+          small_obj.put(body: small_file)
           small_obj.download_file(path)
         end
 
@@ -99,7 +99,7 @@ module Aws
             part_number: 1
           ).exactly(1).times
 
-          single_obj.put(single_part_file)
+          single_obj.put(body: single_part_file)
           single_obj.download_file(path)
         end
 
