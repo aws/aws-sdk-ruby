@@ -31,7 +31,6 @@ module BuildTools
       date = options.fetch(:date, Time.now.strftime('%Y-%m-%d'))
       lines = read.lines.to_a
       lines[0] = "#{version} (#{date})\n"
-      puts lines.inspect
       write(lines.join)
       add_unreleased_changes_section
     end
