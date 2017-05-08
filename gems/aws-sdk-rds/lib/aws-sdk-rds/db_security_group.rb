@@ -82,7 +82,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_db_security_groups(db_security_group_name: @name)
-      @data = resp.dbsecuritygroups[0]
+      @data = resp.db_security_groups[0]
       self
     end
     alias :reload :load

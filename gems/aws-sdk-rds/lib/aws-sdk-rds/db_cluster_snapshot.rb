@@ -173,7 +173,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_db_cluster_snapshots(db_cluster_snapshot_identifier: @snapshot_id)
-      @data = resp.dbclustersnapshots[0]
+      @data = resp.db_cluster_snapshots[0]
       self
     end
     alias :reload :load

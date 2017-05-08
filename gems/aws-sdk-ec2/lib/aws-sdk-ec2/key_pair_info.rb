@@ -55,7 +55,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_key_pairs(key_names: [@name])
-      @data = resp.keypairs[0]
+      @data = resp.key_pairs[0]
       self
     end
     alias :reload :load

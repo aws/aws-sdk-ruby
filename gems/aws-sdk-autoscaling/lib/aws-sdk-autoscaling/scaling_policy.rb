@@ -131,7 +131,7 @@ module Aws::AutoScaling
     # @return [self]
     def load
       resp = @client.describe_policies(policy_names: [@name])
-      @data = resp.scalingpolicies[0]
+      @data = resp.scaling_policies[0]
       self
     end
     alias :reload :load

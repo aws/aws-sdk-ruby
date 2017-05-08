@@ -76,7 +76,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_db_subnet_groups(db_subnet_group_name: @name)
-      @data = resp.dbsubnetgroups[0]
+      @data = resp.db_subnet_groups[0]
       self
     end
     alias :reload :load

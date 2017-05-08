@@ -85,7 +85,7 @@ module Aws::IAM
         policy_arn: @arn,
         version_id: @version_id
       )
-      @data = resp.policyversion
+      @data = resp.policy_version
       self
     end
     alias :reload :load

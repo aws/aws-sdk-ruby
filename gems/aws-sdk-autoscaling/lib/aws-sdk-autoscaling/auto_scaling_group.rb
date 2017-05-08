@@ -177,7 +177,7 @@ module Aws::AutoScaling
     # @return [self]
     def load
       resp = @client.describe_auto_scaling_groups(auto_scaling_group_names: [@name])
-      @data = resp.autoscalinggroups[0]
+      @data = resp.auto_scaling_groups[0]
       self
     end
     alias :reload :load

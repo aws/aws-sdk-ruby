@@ -64,7 +64,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_route_tables(route_table_ids: [@id])
-      @data = resp.routetables[0]
+      @data = resp.route_tables[0]
       self
     end
     alias :reload :load

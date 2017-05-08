@@ -67,7 +67,7 @@ module Aws::EC2
         name: "association.association-id",
         values: [@id]
       }])
-      @data = resp.networkinterfaces[0].association
+      @data = resp.network_interfaces[0].association
       self
     end
     alias :reload :load

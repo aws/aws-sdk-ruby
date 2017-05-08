@@ -105,7 +105,7 @@ module Aws::AutoScaling
     # @return [self]
     def load
       resp = @client.describe_scheduled_actions(scheduled_action_names: [@name])
-      @data = resp.scheduledupdategroupactions[0]
+      @data = resp.scheduled_update_group_actions[0]
       self
     end
     alias :reload :load

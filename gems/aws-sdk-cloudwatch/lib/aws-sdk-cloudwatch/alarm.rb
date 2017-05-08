@@ -194,7 +194,7 @@ module Aws::CloudWatch
     # @return [self]
     def load
       resp = @client.describe_alarms(alarm_names: [@name])
-      @data = resp.metricalarms[0]
+      @data = resp.metric_alarms[0]
       self
     end
     alias :reload :load

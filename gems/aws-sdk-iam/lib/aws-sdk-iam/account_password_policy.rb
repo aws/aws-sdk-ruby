@@ -101,7 +101,7 @@ module Aws::IAM
     # @return [self]
     def load
       resp = @client.get_account_password_policy
-      @data = resp.passwordpolicy
+      @data = resp.password_policy
       self
     end
     alias :reload :load

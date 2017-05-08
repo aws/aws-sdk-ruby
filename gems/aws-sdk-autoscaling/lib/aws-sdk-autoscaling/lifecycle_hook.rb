@@ -131,7 +131,7 @@ module Aws::AutoScaling
         auto_scaling_group_name: @group_name,
         lifecycle_hook_names: [@name]
       )
-      @data = resp.lifecyclehooks[0]
+      @data = resp.lifecycle_hooks[0]
       self
     end
     alias :reload :load

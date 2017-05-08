@@ -57,36 +57,7 @@ self
         if path == '@'
           'data'
         else
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          # TODO : fix this before COMMIT!
-          #Underscore.underscore_jmespath(path)
-          path.downcase
+          Underscore.underscore_jmespath(path)
         end
       end
 

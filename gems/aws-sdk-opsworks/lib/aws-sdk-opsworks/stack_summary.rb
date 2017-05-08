@@ -76,7 +76,7 @@ module Aws::OpsWorks
     # @return [self]
     def load
       resp = @client.describe_stack_summary(stack_id: @stack_id)
-      @data = resp.stacksummary
+      @data = resp.stack_summary
       self
     end
     alias :reload :load

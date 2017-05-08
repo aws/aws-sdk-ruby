@@ -66,7 +66,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_db_cluster_parameter_groups(db_cluster_parameter_group_name: @name)
-      @data = resp.dbclusterparametergroups[0]
+      @data = resp.db_cluster_parameter_groups[0]
       self
     end
     alias :reload :load

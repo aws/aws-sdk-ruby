@@ -51,7 +51,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_event_categories(source_type: @name)
-      @data = resp.eventcategoriesmaplist[0]
+      @data = resp.event_categories_map_list[0]
       self
     end
     alias :reload :load

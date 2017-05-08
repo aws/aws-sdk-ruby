@@ -58,7 +58,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_placement_groups(group_names: [@name])
-      @data = resp.placementgroups[0]
+      @data = resp.placement_groups[0]
       self
     end
     alias :reload :load

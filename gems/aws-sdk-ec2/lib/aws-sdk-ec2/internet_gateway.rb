@@ -58,7 +58,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_internet_gateways(internet_gateway_ids: [@id])
-      @data = resp.internetgateways[0]
+      @data = resp.internet_gateways[0]
       self
     end
     alias :reload :load

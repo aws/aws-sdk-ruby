@@ -79,7 +79,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_vpc_peering_connections(vpc_peering_connection_ids: [@id])
-      @data = resp.vpcpeeringconnections[0]
+      @data = resp.vpc_peering_connections[0]
       self
     end
     alias :reload :load

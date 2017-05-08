@@ -176,7 +176,7 @@ module Aws::AutoScaling
     # @return [self]
     def load
       resp = @client.describe_launch_configurations(launch_configuration_names: [@name])
-      @data = resp.launchconfigurations[0]
+      @data = resp.launch_configurations[0]
       self
     end
     alias :reload :load

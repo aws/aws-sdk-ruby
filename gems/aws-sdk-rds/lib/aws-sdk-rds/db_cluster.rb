@@ -285,7 +285,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_db_clusters(db_cluster_identifier: @id)
-      @data = resp.dbclusters[0]
+      @data = resp.db_clusters[0]
       self
     end
     alias :reload :load

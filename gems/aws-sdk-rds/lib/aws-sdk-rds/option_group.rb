@@ -96,7 +96,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_option_groups(option_group_name: @name)
-      @data = resp.optiongroupslist[0]
+      @data = resp.option_groups_list[0]
       self
     end
     alias :reload :load

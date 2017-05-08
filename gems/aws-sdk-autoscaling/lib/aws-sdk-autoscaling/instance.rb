@@ -94,7 +94,7 @@ module Aws::AutoScaling
     # @return [self]
     def load
       resp = @client.describe_auto_scaling_instances(instance_ids: [@id])
-      @data = resp.autoscalinginstances[0]
+      @data = resp.auto_scaling_instances[0]
       self
     end
     alias :reload :load

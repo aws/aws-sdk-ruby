@@ -155,7 +155,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_network_interfaces(network_interface_ids: [@id])
-      @data = resp.networkinterfaces[0]
+      @data = resp.network_interfaces[0]
       self
     end
     alias :reload :load

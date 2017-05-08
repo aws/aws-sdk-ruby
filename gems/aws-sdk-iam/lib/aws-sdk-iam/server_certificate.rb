@@ -64,7 +64,7 @@ module Aws::IAM
     # @return [self]
     def load
       resp = @client.get_server_certificate(server_certificate_name: @name)
-      @data = resp.servercertificate
+      @data = resp.server_certificate
       self
     end
     alias :reload :load

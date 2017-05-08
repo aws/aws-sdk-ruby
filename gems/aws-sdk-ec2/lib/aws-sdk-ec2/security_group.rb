@@ -89,7 +89,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_security_groups(group_ids: [@id])
-      @data = resp.securitygroups[0]
+      @data = resp.security_groups[0]
       self
     end
     alias :reload :load

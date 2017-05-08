@@ -105,7 +105,7 @@ module Aws::RDS
         engine: @engine_name,
         engine_version: @version
       )
-      @data = resp.dbengineversions[0]
+      @data = resp.db_engine_versions[0]
       self
     end
     alias :reload :load

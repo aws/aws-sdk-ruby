@@ -58,7 +58,7 @@ module Aws::IAM
     # @return [self]
     def load
       resp = @client.get_login_profile(user_name: @user_name)
-      @data = resp.loginprofile
+      @data = resp.login_profile
       self
     end
     alias :reload :load

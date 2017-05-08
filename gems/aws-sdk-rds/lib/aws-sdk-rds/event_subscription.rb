@@ -113,7 +113,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_event_subscriptions(subscription_name: @name)
-      @data = resp.eventsubscriptionslist[0]
+      @data = resp.event_subscriptions_list[0]
       self
     end
     alias :reload :load

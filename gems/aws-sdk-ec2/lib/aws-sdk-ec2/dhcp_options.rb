@@ -58,7 +58,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_dhcp_options(dhcp_options_ids: [@id])
-      @data = resp.dhcpoptions[0]
+      @data = resp.dhcp_options[0]
       self
     end
     alias :reload :load

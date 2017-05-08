@@ -130,7 +130,7 @@ module Aws::RDS
     # @return [self]
     def load
       resp = @client.describe_reserved_db_instances(reserved_db_instance_id: @id)
-      @data = resp.reserveddbinstances[0]
+      @data = resp.reserved_db_instances[0]
       self
     end
     alias :reload :load

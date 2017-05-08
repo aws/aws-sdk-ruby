@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix resource model load path
+
 1.0.0.rc2 (2017-04-21)
 ------------------
 

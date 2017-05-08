@@ -76,7 +76,7 @@ module Aws::EC2
     # @return [self]
     def load
       resp = @client.describe_network_acls(network_acl_ids: [@id])
-      @data = resp.networkacls[0]
+      @data = resp.network_acls[0]
       self
     end
     alias :reload :load

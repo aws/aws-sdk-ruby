@@ -70,7 +70,7 @@ module Aws::Glacier
         account_id: @account_id,
         vault_name: @vault_name
       )
-      @data = resp.vaultnotificationconfig
+      @data = resp.vault_notification_config
       self
     end
     alias :reload :load

@@ -117,7 +117,7 @@ module Aws::CloudFormation
         logical_resource_id: @logical_id,
         stack_name: @stack_name
       )
-      @data = resp.stackresourcedetail
+      @data = resp.stack_resource_detail
       self
     end
     alias :reload :load
