@@ -1444,11 +1444,7 @@
     },
     "Route": {
       "identifiers": [
-        { "name": "RouteTableId" },
-        {
-          "name": "DestinationCidrBlock",
-          "memberName": "DestinationCidrBlock"
-        }
+        { "name": "RouteTableId" }
       ],
       "shape": "Route",
       "actions": {
@@ -1456,8 +1452,7 @@
           "request": {
             "operation": "DeleteRoute",
             "params": [
-              { "target": "RouteTableId", "source": "identifier", "name": "RouteTableId" },
-              { "target": "DestinationCidrBlock", "source": "identifier", "name": "DestinationCidrBlock" }
+              { "target": "RouteTableId", "source": "identifier", "name": "RouteTableId" }
             ]
           }
         },
@@ -1465,8 +1460,7 @@
           "request": {
             "operation": "ReplaceRoute",
             "params": [
-              { "target": "RouteTableId", "source": "identifier", "name": "RouteTableId" },
-              { "target": "DestinationCidrBlock", "source": "identifier", "name": "DestinationCidrBlock" }
+              { "target": "RouteTableId", "source": "identifier", "name": "RouteTableId" }
             ]
           }
         }
@@ -1524,8 +1518,7 @@
           "resource": {
             "type": "Route",
             "identifiers": [
-              { "target": "RouteTableId", "source": "identifier", "name": "Id" },
-              { "target": "DestinationCidrBlock", "source": "requestParameter", "path": "DestinationCidrBlock" }
+              { "target": "RouteTableId", "source": "identifier", "name": "Id" }
             ]
           }
         },
@@ -1568,8 +1561,7 @@
           "resource": {
             "type": "Route",
             "identifiers": [
-              { "target": "RouteTableId", "source": "identifier", "name": "Id" },
-              { "target": "DestinationCidrBlock", "source": "data", "path": "Routes[].DestinationCidrBlock" }
+              { "target": "RouteTableId", "source": "identifier", "name": "Id" }
             ],
             "path": "Routes[]"
           }
