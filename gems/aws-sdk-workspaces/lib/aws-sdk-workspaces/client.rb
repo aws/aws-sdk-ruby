@@ -574,7 +574,7 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Modifies the WorkSpace properties, including the RunningMode and
+    # Modifies the WorkSpace properties, including the running mode and
     # AutoStop time.
     #
     # @option params [required, String] :workspace_id
@@ -705,9 +705,8 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Starts the specified WorkSpaces. The API only works with WorkSpaces
-    # that have RunningMode configured as AutoStop and the State set to
-    # “STOPPED.”
+    # Starts the specified WorkSpaces. The WorkSpaces must have a running
+    # mode of AutoStop and a state of STOPPED.
     #
     # @option params [required, Array<Types::StartRequest>] :start_workspace_requests
     #   The requests.
@@ -742,9 +741,9 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
-    # Stops the specified WorkSpaces. The API only works with WorkSpaces
-    # that have RunningMode configured as AutoStop and the State set to
-    # AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+    # Stops the specified WorkSpaces. The WorkSpaces must have a running
+    # mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or
+    # ERROR.
     #
     # @option params [required, Array<Types::StopRequest>] :stop_workspace_requests
     #   The requests.
@@ -839,7 +838,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.0.0.rc2'
+      context[:gem_version] = '1.0.0.rc3'
       Seahorse::Client::Request.new(handlers, context)
     end
 

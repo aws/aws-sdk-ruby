@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.0.0.rc7 (2017-05-09)
+------------------
+
+* Feature - API update.
+
 * Issue - Fix resource model load path
 
 1.0.0.rc6 (2017-05-05)

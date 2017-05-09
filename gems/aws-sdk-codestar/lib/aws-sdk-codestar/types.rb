@@ -80,37 +80,19 @@ module Aws::CodeStar
     #       }
     #
     # @!attribute [rw] name
-    #   The friendly name for the project. This friendly name serves as the
-    #   basis for the names for resources associated with the project, such
-    #   as a repository name in AWS CodeCommit. The name is limited to 100
-    #   characters and cannot contain certain restricted symbols. For more
-    #   information, see [Limits][1] in the AWS CodeStar User Guide.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/codestar/latest/userguide/limits.html
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] id
-    #   The ID for the AWS CodeStar project. Project IDs must be unique
-    #   within an AWS account. Project IDs cannot exceed 15 characters and
-    #   cannot contain capital letters and other restricted symbols. For
-    #   more information, see [Limits][1] in the AWS CodeStar User Guide.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/codestar/latest/userguide/limits.html
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Optional. The description for the project.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   A user- or system-generated token that identifies the entity that
-    #   requested project creation. This token can be used to repeat the
-    #   request. It can also be used to identify which user or system made
-    #   the request in DescribeProject and ListProjects.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectRequest AWS API Documentation
@@ -124,23 +106,19 @@ module Aws::CodeStar
     end
 
     # @!attribute [rw] id
-    #   The ID for the project.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   The Amazon Resource Name (ARN) for the project.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
-    #   The user- or system-generated token from the initial request that
-    #   can be used to repeat the request. It can also be used to identify
-    #   which user or system made the request in DescribeProject and
-    #   ListProjects.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] project_template_id
-    #   The ID for the AWS CodeStar project template used to create the
-    #   project.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/CreateProjectResult AWS API Documentation

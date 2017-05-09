@@ -205,38 +205,20 @@ module Aws::CodeStar
       req.send_request(options)
     end
 
-    # Creates a project in AWS CodeStar with minimal structure and no
-    # resources.
+    # Reserved for future use. To create a project, use the AWS CodeStar
+    # console.
     #
     # @option params [required, String] :name
-    #   The friendly name for the project. This friendly name serves as the
-    #   basis for the names for resources associated with the project, such as
-    #   a repository name in AWS CodeCommit. The name is limited to 100
-    #   characters and cannot contain certain restricted symbols. For more
-    #   information, see [Limits][1] in the AWS CodeStar User Guide.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/codestar/latest/userguide/limits.html
+    #   Reserved for future use.
     #
     # @option params [required, String] :id
-    #   The ID for the AWS CodeStar project. Project IDs must be unique within
-    #   an AWS account. Project IDs cannot exceed 15 characters and cannot
-    #   contain capital letters and other restricted symbols. For more
-    #   information, see [Limits][1] in the AWS CodeStar User Guide.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/codestar/latest/userguide/limits.html
+    #   Reserved for future use.
     #
     # @option params [String] :description
-    #   Optional. The description for the project.
+    #   Reserved for future use.
     #
     # @option params [String] :client_request_token
-    #   A user- or system-generated token that identifies the entity that
-    #   requested project creation. This token can be used to repeat the
-    #   request. It can also be used to identify which user or system made the
-    #   request in DescribeProject and ListProjects.
+    #   Reserved for future use.
     #
     # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -839,7 +821,7 @@ module Aws::CodeStar
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codestar'
-      context[:gem_version] = '1.0.0.rc1'
+      context[:gem_version] = '1.0.0.rc2'
       Seahorse::Client::Request.new(handlers, context)
     end
 
