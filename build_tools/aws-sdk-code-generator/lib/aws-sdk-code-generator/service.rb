@@ -28,7 +28,7 @@ module AwsSdkCodeGenerator
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
       @gem_dependencies = {
-        'aws-sdk-core' => '3.0.0.rc1'
+        'aws-sdk-core' => '3.0.0.rc9'
       }.merge(options[:gem_dependencies] || {})
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
