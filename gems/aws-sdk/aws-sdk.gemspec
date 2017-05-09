@@ -92,7 +92,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-resourcegroupstaggingapi', '1.0.0.rc2')
   spec.add_dependency('aws-sdk-route53', '1.0.0.rc5')
   spec.add_dependency('aws-sdk-route53domains', '1.0.0.rc3')
-  spec.add_dependency('aws-sdk-s3', '1.0.0.rc6')
+  spec.add_dependency('aws-sdk-s3', '1.0.0.rc7')
   spec.add_dependency('aws-sdk-ses', '1.0.0.rc3')
   spec.add_dependency('aws-sdk-sms', '1.0.0.rc3')
   spec.add_dependency('aws-sdk-sns', '1.0.0.rc3')

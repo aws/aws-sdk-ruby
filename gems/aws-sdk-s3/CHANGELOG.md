@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.0.0.rc7 (2017-05-09)
+------------------
+
 * Issue - Correct dependency on `aws-sdk-kms` gem.
 
 1.0.0.rc6 (2017-05-09)
