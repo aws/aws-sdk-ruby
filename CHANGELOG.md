@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.16 (2017-05-09)
+------------------
+
 * Feature - Aws::CodeStar - Updated the documentation for AWS CodeStar.
 
 * Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
