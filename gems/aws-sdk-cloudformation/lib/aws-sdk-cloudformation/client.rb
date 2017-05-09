@@ -2185,7 +2185,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

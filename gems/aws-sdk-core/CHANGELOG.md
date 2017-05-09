@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc11 (2017-05-09)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 3.0.0.rc10 (2017-05-09)
 ------------------
 

@@ -42,6 +42,6 @@ require_relative 'aws-sdk-cognitoidentity/customizations'
 # @service
 module Aws::CognitoIdentity
 
-  GEM_VERSION = '1.0.0.rc4'
+  GEM_VERSION = '1.0.0.rc6'
 
 end

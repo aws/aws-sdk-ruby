@@ -43,6 +43,6 @@ require_relative 'aws-sdk-ses/customizations'
 # @service
 module Aws::SES
 
-  GEM_VERSION = '1.0.0.rc2'
+  GEM_VERSION = '1.0.0.rc4'
 
 end

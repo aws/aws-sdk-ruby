@@ -42,6 +42,6 @@ require_relative 'aws-sdk-elasticbeanstalk/customizations'
 # @service
 module Aws::ElasticBeanstalk
 
-  GEM_VERSION = '1.0.0.rc5'
+  GEM_VERSION = '1.0.0.rc7'
 
 end

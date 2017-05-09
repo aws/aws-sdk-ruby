@@ -42,6 +42,6 @@ require_relative 'aws-sdk-acm/customizations'
 # @service
 module Aws::ACM
 
-  GEM_VERSION = '1.0.0.rc3'
+  GEM_VERSION = '1.0.0.rc5'
 
 end
