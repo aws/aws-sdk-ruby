@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancing - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::LexModelBuildingService - Updated the API, and documentation for Amazon Lex Model Building Service.
+
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
 2.9.16 (2017-05-09)
 ------------------
 
