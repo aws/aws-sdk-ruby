@@ -10,6 +10,7 @@ module Aws
       let(:service_name) { 'SERVICE' }
       let(:region) { 'REGION' }
       let(:endpoint) { URI.parse('https://domain.com') }
+      let(:whitelist) { ['cache-control', 'mno'] }
       let(:signer) { V4.new(credentials, service_name, region) }
       let(:sign) { signer.sign(http_request) }
       let(:http_request) do
@@ -133,6 +134,15 @@ module Aws
           expect(signer.signed_headers(http_request)).to eq('abc;mno;xyz')
         end
 
+        it 'ignores certain headers unless providing headers via :whitelist_headers' do
+          http_request.headers = {} 
+          http_request.headers['Mno'] = '3'
+          http_request.headers['Cache-Control'] = '4'
+          http_request.headers['User-Agent'] = '5'
+          new_signer = V4.new(credentials, service_name, region, whitelist)
+          expect(new_signer.signed_headers(http_request)).to eq('cache-control;mno');
+        end
+
       end
 
       context '#canonical_headers' do
@@ -158,6 +168,13 @@ xyz:1
         it 'leaves whitespace in quoted values in-tact' do
           http_request.headers['Abc'] = '"a  b  c"'
           expect(signer.canonical_headers(http_request)).to eq('abc:"a  b  c"')
+        end
+
+        it 'ignores certain headers unless providing headers via :whitelist_headers' do
+          http_request.headers = {} 
+          http_request.headers['Cache-Control'] = '4'
+          new_signer = V4.new(credentials, service_name, region, whitelist)
+          expect(new_signer.canonical_headers(http_request)).to eq('cache-control:4');
         end
 
       end

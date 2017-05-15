@@ -40,10 +40,12 @@ module Aws
       #   the endpoint prefix.
       # @param [String] region The region (e.g. 'us-west-1') the request
       #   will be made to.
-      def initialize(credentials, service_name, region)
+      # @param [Array] whitelist headers provided to escape blacklist check
+      def initialize(credentials, service_name, region, whitelist_headers = [])
         @service_name = service_name
         @credentials = credentials.credentials
         @region = EndpointProvider.signing_region(region, service_name)
+        @blacklist = BLACKLIST_HEADERS - whitelist_headers
       end
 
       # @param [Seahorse::Client::Http::Request] req
@@ -183,7 +185,7 @@ module Aws
       def signed_headers(request)
         request.headers.keys.inject([]) do |signed_headers, header_key|
           header_key = header_key.downcase
-          unless BLACKLIST_HEADERS.include?(header_key)
+          unless @blacklist.include?(header_key)
             signed_headers << header_key
           end
           signed_headers
@@ -194,7 +196,7 @@ module Aws
         headers = []
         request.headers.each_pair do |k,v|
           k = k.downcase
-          headers << [k,v] unless BLACKLIST_HEADERS.include?(k)
+          headers << [k,v] unless @blacklist.include?(k)
         end
         headers = headers.sort_by(&:first)
         headers.map{|k,v| "#{k}:#{canonical_header_value(v.to_s)}" }.join("\n")
