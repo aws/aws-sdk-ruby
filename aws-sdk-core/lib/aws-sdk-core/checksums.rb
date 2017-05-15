@@ -46,7 +46,8 @@ module Aws
         end
         io2.rewind
 
-        while chunk = io2.read(CHUNK_SIZE)
+        chunk = ""
+        while io2.read(CHUNK_SIZE, chunk)
           digest.update(chunk)
         end
       ensure

@@ -81,7 +81,7 @@ module Aws
           body = StringIO.new('.' * size)
           expect(body).to receive(:read).
             exactly(6).times.
-            with(1024 * 1024). # read the object in 1MB chunks
+            with(1024 * 1024, kind_of(String)). # read the object in 1MB chunks, using buffer
             and_call_original
           expect(body).to receive(:rewind).twice.and_call_original
 
