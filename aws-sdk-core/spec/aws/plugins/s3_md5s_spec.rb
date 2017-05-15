@@ -49,13 +49,10 @@ module Aws
           )
         end
 
-        it 'computes the md5 of files without loading them into memory' do
+        it 'computes the md5 for Tempfile objects' do
           body = Tempfile.new('tempfile')
           body.write('.' * 5 * 1024 * 1024)
           body.flush
-
-          expect(body).not_to receive(:read)
-          expect(body).not_to receive(:rewind)
 
           context.http_request.body = body
           handlers.add(NoSendHandler, step: :send)
@@ -65,14 +62,28 @@ module Aws
           )
         end
 
-        it 'computes the md5 in in memory for non-file IO objects' do
+        it 'computes the md5 for File objects' do
+          body = Tempfile.new('tempfile')
+          body.write('.' * 5 * 1024 * 1024)
+          body.flush
+          file = body.to_io
+
+          context.http_request.body = file
+          handlers.add(NoSendHandler, step: :send)
+          handlers.to_stack.call(context)
+          expect(context.http_request.headers['Content-Md5']).to(
+            eq("+kDD2/74SZx+Rz+/Dw7I1Q==")
+          )
+        end
+
+        it 'computes the md5 for non-file IO objects with memory efficiency' do
           size = 5 * 1024 * 1024
           body = StringIO.new('.' * size)
           expect(body).to receive(:read).
             exactly(6).times.
             with(1024 * 1024). # read the object in 1MB chunks
             and_call_original
-          expect(body).to receive(:rewind).and_call_original
+          expect(body).to receive(:rewind).twice.and_call_original
 
           context.http_request.body = body
           handlers.add(NoSendHandler, step: :send)

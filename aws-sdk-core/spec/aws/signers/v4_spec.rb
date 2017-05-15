@@ -68,17 +68,6 @@ module Aws
             Digest::SHA256.hexdigest('abc'))
         end
 
-        it 'computes the checksum of files without loading them into memory' do
-          body = Tempfile.new('tempfile')
-          body.write('abc')
-          body.flush
-          expect(body).not_to receive(:read)
-          expect(body).not_to receive(:rewind)
-          http_request.body = body
-          expect(sign.headers['X-Amz-Content-Sha256']).to eq(
-            Digest::SHA256.hexdigest('abc'))
-        end
-
         it 'reads non-file IO objects into  memory to compute checksusm' do
           body = StringIO.new('abc')
           http_request.body = body
