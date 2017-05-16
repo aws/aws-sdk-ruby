@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.19 (2017-05-16)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
