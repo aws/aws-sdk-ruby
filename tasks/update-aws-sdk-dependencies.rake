@@ -1,7 +1,7 @@
 # updates list of service gems dependend on by the aws-sdk gem
 task 'update-aws-sdk-dependencies' do
 
-  # update the gemspec
+  # update the aws-sdk.gemspec
   BuildTools.replace_lines(
     filename: "#{$GEMS_DIR}/aws-sdk/aws-sdk.gemspec",
     start: /# service gems/,
@@ -26,4 +26,13 @@ task 'update-aws-sdk-dependencies' do
     }
   )
 
+  # update the aws-sdk-resources.gemspec
+  version_path = "#{$GEMS_DIR}/aws-sdk/VERSION"
+  version = File.read(version_path).strip
+  BuildTools.replace_lines(
+    filename: "#{$GEMS_DIR}/aws-sdk-resources/aws-sdk-resources.gemspec",
+    start: /# gem dependency/,
+    stop: /# end gem dependency/,
+    new_lines: "  spec.add_dependency('aws-sdk', '#{version}')\n"
+  )
 end
