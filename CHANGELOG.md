@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the documentation, API, and resource interfaces for Auto Scaling.
+
+* Feature - Aws::CloudWatchEvents - Updated the documentation for Amazon CloudWatch Events.
+
+* Feature - Aws::CloudWatchLogs - Updated the documentation, and API for Amazon CloudWatch Logs.
+
+* Feature - Aws::Polly - Updated the API for Amazon Polly.
+
 2.9.19 (2017-05-16)
 ------------------
 
