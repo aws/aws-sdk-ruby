@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.21 (2017-05-18)
+------------------
+
 * Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
 
 * Feature - Aws::Athena - Added support for a new service, Amazon Athena.
