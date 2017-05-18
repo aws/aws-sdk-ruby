@@ -248,6 +248,7 @@ module Aws
         uploading_options = options.dup
         uploader = FileUploader.new(
           multipart_threshold: uploading_options.delete(:multipart_threshold),
+          thread_count: uploading_options.delete(:thread_count),
           client: client)
         uploader.upload(source, uploading_options.merge(bucket: bucket_name, key: key))
         true
