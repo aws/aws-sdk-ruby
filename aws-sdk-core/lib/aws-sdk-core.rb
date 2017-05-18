@@ -28,6 +28,7 @@ module Aws
     AppStream
     ApplicationAutoScaling
     ApplicationDiscoveryService
+    Athena
     AutoScaling
     Batch
     Budgets

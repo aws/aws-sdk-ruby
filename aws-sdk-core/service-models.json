@@ -19,6 +19,10 @@
     "models": "discovery/2015-11-01",
     "endpoint": "discovery"
   },
+  "Athena": {
+    "models": "athena/2017-05-18",
+    "endpoint": "athena"
+  },
   "AutoScaling": {
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"

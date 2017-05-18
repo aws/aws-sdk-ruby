@@ -294,6 +294,7 @@ to be backwards compatible.
 | AWSMarketplace Metering             | MarketplaceMetering           | 2016-01-14  |
 | Amazon API Gateway                  | APIGateway                    | 2015-07-09  |
 | Amazon AppStream                    | AppStream                     | 2016-12-01  |
+| Amazon Athena                       | Athena                        | 2017-05-18  |
 | Amazon CloudDirectory               | CloudDirectory                | 2016-05-10  |
 | Amazon CloudFront                   | CloudFront                    | 2017-03-25  |
 | Amazon CloudHSM                     | CloudHSM                      | 2014-05-30  |
@@ -345,8 +346,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | WorkSpaces                    | 2015-04-08  |
 | Application Auto Scaling            | ApplicationAutoScaling        | 2016-02-06  |
 | Auto Scaling                        | AutoScaling                   | 2011-01-01  |
-| Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
 | Elastic Load Balancing              | ElasticLoadBalancingV2        | 2015-12-01  |
+| Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
 
 ## License
 
