@@ -33,6 +33,7 @@ module Aws
           'RequestLimitExceeded',                   # ec2
           'BandwidthLimitExceeded',                 # cloud search
           'LimitExceededException',                 # kinesis
+          'TooManyRequestsException',               # batch
         ])
 
         CHECKSUM_ERRORS = Set.new([
