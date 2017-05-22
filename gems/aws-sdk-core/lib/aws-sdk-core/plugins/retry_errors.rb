@@ -36,6 +36,7 @@ errors from expired credentials.
           'RequestLimitExceeded',                   # ec2
           'BandwidthLimitExceeded',                 # cloud search
           'LimitExceededException',                 # kinesis
+          'TooManyRequestsException',               # batch
         ])
 
         CHECKSUM_ERRORS = Set.new([

@@ -17,11 +17,12 @@ module Aws
           ua = "aws-sdk-ruby3/#{CORE_GEM_VERSION}"
 
           begin
-            ua += " #{RUBY_ENGINE}"
+            ua += " #{RUBY_ENGINE}/#{RUBY_VERSION}"
           rescue
+            ua += " RUBY_ENGINE_NA/#{RUBY_VERSION}"
           end
 
-          ua += " #{RUBY_VERSION}/#{RUBY_PLATFORM}"
+          ua += " #{RUBY_PLATFORM}"
 
           if context[:gem_name] && context[:gem_version]
             ua += " #{context[:gem_name]}/#{context[:gem_version]}"

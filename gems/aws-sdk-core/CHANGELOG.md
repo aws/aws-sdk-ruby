@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Update throttling error pool of retry
+
+* Feature - Update `User-Agent` format
+
 3.0.0.rc11 (2017-05-09)
 ------------------
 
