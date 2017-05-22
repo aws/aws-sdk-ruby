@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.22 (2017-05-22)
+------------------
+
 * Feature - Aws::ResourceGroupsTaggingAPI - Updated the API, and documentation for AWS Resource Groups Tagging API.
 
 2.9.21 (2017-05-18)
