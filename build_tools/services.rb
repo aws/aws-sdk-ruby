@@ -104,6 +104,9 @@ module BuildTools
     end
 
     def gem_dependencies(api, dependencies)
+      core_version = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
+      dependencies['aws-sdk-core'] = "~> #{core_version}"
+
       case api['metadata']['signatureVersion']
       when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
       when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'

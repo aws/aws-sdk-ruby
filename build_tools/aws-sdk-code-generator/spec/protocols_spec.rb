@@ -63,6 +63,7 @@ def client_for(suite, test_case, n)
         },
         'shapes' => suite['shapes'],
       },
+      gem_dependencies: { 'aws-sdk-core' => '3.0.0' },
       gem_version: '1.0.0',
     )
     code = AwsSdkCodeGenerator::CodeBuilder.new(
