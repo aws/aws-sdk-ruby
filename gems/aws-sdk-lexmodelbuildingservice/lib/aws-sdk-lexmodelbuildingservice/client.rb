@@ -421,10 +421,8 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
-    # Deletes a bot. If you specify a bot version in the request, the API
-    # deletes only the specified bot version. If you don't specify a
-    # version, the API deletes all versions of the bot, including the
-    # `$LATEST` version.
+    # Deletes all versions of the bot, including the `$LATEST` version. To
+    # delete a specific version of the bot, use the operation.
     #
     # If a bot has an alias, you can't delete it. Instead, the `DeleteBot`
     # operation returns a `ResourceInUseException` exception that includes a
@@ -438,16 +436,12 @@ module Aws::LexModelBuildingService
     # @option params [required, String] :name
     #   The name of the bot. The name is case sensitive.
     #
-    # @option params [String] :version
-    #   The version of the bot.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_bot({
     #     name: "BotName", # required
-    #     version: "Version",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBot AWS API Documentation
@@ -529,10 +523,40 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
-    # Deletes an intent. If you specify a version in the request, the API
-    # deletes only the specified version of the intent. If you don't
-    # specify a version in the request, the API deletes all of the versions
-    # of the intent, including the `$LATEST` version.
+    # Deletes a specific version of a bot. To delete all versions of a bot,
+    # use the operation.
+    #
+    # This operation requires permissions for the `lex:DeleteBotVersion`
+    # action.
+    #
+    # @option params [required, String] :name
+    #   The name of the bot.
+    #
+    # @option params [required, String] :version
+    #   The version of the bot to delete. You cannot delete the `$LATEST`
+    #   version of the bot. To delete the `$LATEST` version, use the
+    #   operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_bot_version({
+    #     name: "BotName", # required
+    #     version: "NumericalVersion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersion AWS API Documentation
+    #
+    # @overload delete_bot_version(params = {})
+    # @param [Hash] params ({})
+    def delete_bot_version(params = {}, options = {})
+      req = build_request(:delete_bot_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes all versions of the intent, including the `$LATEST` version.
+    # To delete a specific version of the intent, use the operation.
     #
     # You can delete a version of an intent only if it is not referenced. To
     # delete an intent that is referred to in one or more bots (see
@@ -552,16 +576,12 @@ module Aws::LexModelBuildingService
     # @option params [required, String] :name
     #   The name of the intent. The name is case sensitive.
     #
-    # @option params [String] :version
-    #   The version of the intent.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_intent({
     #     name: "IntentName", # required
-    #     version: "Version",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntent AWS API Documentation
@@ -573,21 +593,52 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
-    # Deletes a slot type. If you specify a version in the request, the API
-    # deletes the specific version. If you don't specify a version in the
-    # request, the API deletes all versions of the slot type, including the
-    # `$LATEST` version.
+    # Deletes a specific version of an intent. To delete all versions of a
+    # intent, use the operation.
+    #
+    # This operation requires permissions for the `lex:DeleteIntentVersion`
+    # action.
+    #
+    # @option params [required, String] :name
+    #   The name of the intent.
+    #
+    # @option params [required, String] :version
+    #   The version of the intent to delete. You cannot delete the `$LATEST`
+    #   version of the intent. To delete the `$LATEST` version, use the
+    #   operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_intent_version({
+    #     name: "IntentName", # required
+    #     version: "NumericalVersion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersion AWS API Documentation
+    #
+    # @overload delete_intent_version(params = {})
+    # @param [Hash] params ({})
+    def delete_intent_version(params = {}, options = {})
+      req = build_request(:delete_intent_version, params)
+      req.send_request(options)
+    end
+
+    # Deletes all versions of the slot type, including the `$LATEST`
+    # version. To delete a specific version of the slot type, use the
+    # operation.
     #
     # You can delete a version of a slot type only if it is not referenced.
     # To delete a slot type that is referred to in one or more intents, you
     # must remove those references first.
     #
-    # <note markdown="1"> If you get the `SlotTypeInUse` exception, the exception provides an
-    # example reference that shows the intent where the slot type is
-    # referenced. To remove the reference to the slot type, either update
-    # the intent or delete it. If you get the same exception when you
-    # attempt to delete the intent again, repeat until the intent has no
-    # references and the `DeleteSlotType` call is successful.
+    # <note markdown="1"> If you get the `ResourceInUseException` exception, the exception
+    # provides an example reference that shows the intent where the slot
+    # type is referenced. To remove the reference to the slot type, either
+    # update the intent or delete it. If you get the same exception when you
+    # attempt to delete the slot type again, repeat until the slot type has
+    # no references and the `DeleteSlotType` call is successful.
     #
     #  </note>
     #
@@ -597,16 +648,12 @@ module Aws::LexModelBuildingService
     # @option params [required, String] :name
     #   The name of the slot type. The name is case sensitive.
     #
-    # @option params [String] :version
-    #   The version of the slot type.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_slot_type({
     #     name: "SlotTypeName", # required
-    #     version: "Version",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotType AWS API Documentation
@@ -618,12 +665,48 @@ module Aws::LexModelBuildingService
       req.send_request(options)
     end
 
+    # Deletes a specific version of a slot type. To delete all versions of a
+    # slot type, use the operation.
+    #
+    # This operation requires permissions for the
+    # `lex:DeleteSlotTypeVersion` action.
+    #
+    # @option params [required, String] :name
+    #   The name of the slot type.
+    #
+    # @option params [required, String] :version
+    #   The version of the slot type to delete. You cannot delete the
+    #   `$LATEST` version of the slot type. To delete the `$LATEST` version,
+    #   use the operation.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_slot_type_version({
+    #     name: "SlotTypeName", # required
+    #     version: "NumericalVersion", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersion AWS API Documentation
+    #
+    # @overload delete_slot_type_version(params = {})
+    # @param [Hash] params ({})
+    def delete_slot_type_version(params = {}, options = {})
+      req = build_request(:delete_slot_type_version, params)
+      req.send_request(options)
+    end
+
     # Deletes stored utterances.
     #
-    # When you create or update a bot using the operation, configure your
-    # bot to store user utterances by setting `privacySetting` to
-    # `STORE_UTTERANCES`. Use `DeleteUtterances` to remove the stored
-    # utterances for a specific user .
+    # Amazon Lex stores the utterances that users send to your bot unless
+    # the `childDirected` field in the bot is set to `true`. Utterances are
+    # stored for 15 days for use with the operation, and then stored
+    # indefinately for use in improving the ability of your bot to respond
+    # to user input.
+    #
+    # Use the `DeleteStoredUtterances` operation to manually delete stored
+    # utterances for a specific user.
     #
     # This operation requires permissions for the `lex:DeleteUtterances`
     # action.
@@ -729,6 +812,8 @@ module Aws::LexModelBuildingService
     # Returns information about an Amazon Lex bot alias. For more
     # information about aliases, see versioning-aliases.
     #
+    # This operation requires permissions for the `lex:GetBotAlias` action.
+    #
     # @option params [required, String] :name
     #   The name of the bot alias. The name is case sensitive.
     #
@@ -772,6 +857,9 @@ module Aws::LexModelBuildingService
     end
 
     # Returns a list of aliases for a specified Amazon Lex bot.
+    #
+    # This operation requires permissions for the `lex:GetBotAliases`
+    # action.
     #
     # @option params [required, String] :bot_name
     #   The name of the bot.
@@ -829,6 +917,9 @@ module Aws::LexModelBuildingService
     # Returns information about the association between an Amazon Lex bot
     # and a messaging platform.
     #
+    # This operation requires permissions for the
+    # `lex:GetBotChannelAssociation` action.
+    #
     # @option params [required, String] :name
     #   The name of the association between the bot and the channel. The name
     #   is case sensitive.
@@ -880,6 +971,9 @@ module Aws::LexModelBuildingService
 
     # Returns a list of all of the channels associated with the specified
     # bot.
+    #
+    # The `GetBotChannelAssociations` operation requires permissions for the
+    # `lex:GetBotChannelAssociations` action.
     #
     # @option params [required, String] :bot_name
     #   The name of the Amazon Lex bot in the association.
@@ -950,6 +1044,9 @@ module Aws::LexModelBuildingService
     #
     # The `GetBotVersions` operation always returns at least one version,
     # the `$LATEST` version.
+    #
+    # This operation requires permissions for the `lex:GetBotVersions`
+    # action.
     #
     # @option params [required, String] :name
     #   The name of the bot for which versions should be returned.
@@ -1331,6 +1428,9 @@ module Aws::LexModelBuildingService
     # The `GetIntentVersions` operation always returns at least one version,
     # the `$LATEST` version.
     #
+    # This operation requires permissions for the `lex:GetIntentVersions`
+    # action.
+    #
     # @option params [required, String] :name
     #   The name of the intent for which versions should be returned.
     #
@@ -1493,6 +1593,9 @@ module Aws::LexModelBuildingService
     # The `GetSlotTypeVersions` operation always returns at least one
     # version, the `$LATEST` version.
     #
+    # This operation requires permissions for the `lex:GetSlotTypeVersions`
+    # action.
+    #
     # @option params [required, String] :name
     #   The name of the slot type for which versions should be returned.
     #
@@ -1610,9 +1713,16 @@ module Aws::LexModelBuildingService
     # about the old version and the new so that you can compare the
     # performance across the two versions.
     #
-    # You can request information for up to 5 versions in each request. The
-    # response contains information about a maximum of 100 utterances for
-    # each version.
+    # Data is available for the last 15 days. You can request information
+    # for up to 5 versions in each request. The response contains
+    # information about a maximum of 100 utterances for each version.
+    #
+    # If the bot's `childDirected` field is set to `true`, utterances for
+    # the bot are not stored and cannot be retrieved with the
+    # `GetUtterancesView` operation. For more information, see .
+    #
+    # This operation requires permissions for the `lex:GetUtterancesView`
+    # action.
     #
     # @option params [required, String] :bot_name
     #   The name of the bot for which utterance information should be
@@ -1661,9 +1771,9 @@ module Aws::LexModelBuildingService
     end
 
     # Creates an Amazon Lex conversational bot or replaces an existing bot.
-    # When you create or update an intent you only required to specify a
-    # name. You can use this to add intents later, or to remove intents from
-    # an existing bot. When you create a bot with a name only, the bot is
+    # When you create or update a bot you only required to specify a name.
+    # You can use this to add intents later, or to remove intents from an
+    # existing bot. When you create a bot with a name only, the bot is
     # created or updated but Amazon Lex returns the ` response FAILED. You
     # can build the bot after you add one or more intents. For more
     # information about Amazon Lex bots, see how-it-works. </p> If you
@@ -2008,7 +2118,6 @@ module Aws::LexModelBuildingService
     # For more information, see how-it-works.
     #
     # This operation requires permissions for the `lex:PutIntent` action.
-    # For more information, see auth-and-access-control.
     #
     # @option params [required, String] :name
     #   The name of the intent. The name is *not* case sensitive.
@@ -2418,7 +2527,7 @@ module Aws::LexModelBuildingService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelbuildingservice'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

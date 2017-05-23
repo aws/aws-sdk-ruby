@@ -5,9 +5,9 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-require 'aws-sdk-core'
 require 'aws-sdk-kms'
 require 'aws-sigv4'
+require 'aws-sdk-core'
 
 require_relative 'aws-sdk-s3/types'
 require_relative 'aws-sdk-s3/client_api'
@@ -61,6 +61,6 @@ require_relative 'aws-sdk-s3/customizations'
 # @service
 module Aws::S3
 
-  GEM_VERSION = '1.0.0.rc6'
+  GEM_VERSION = '1.0.0.rc8'
 
 end

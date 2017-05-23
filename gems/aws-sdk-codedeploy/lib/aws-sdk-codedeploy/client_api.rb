@@ -120,6 +120,7 @@ module Aws::CodeDeploy
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorInformation = Shapes::StructureShape.new(name: 'ErrorInformation')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FileExistsBehavior = Shapes::StringShape.new(name: 'FileExistsBehavior')
     GenericRevisionInfo = Shapes::StructureShape.new(name: 'GenericRevisionInfo')
     GetApplicationInput = Shapes::StructureShape.new(name: 'GetApplicationInput')
     GetApplicationOutput = Shapes::StructureShape.new(name: 'GetApplicationOutput')
@@ -175,9 +176,11 @@ module Aws::CodeDeploy
     InvalidDeploymentConfigNameException = Shapes::StructureShape.new(name: 'InvalidDeploymentConfigNameException')
     InvalidDeploymentGroupNameException = Shapes::StructureShape.new(name: 'InvalidDeploymentGroupNameException')
     InvalidDeploymentIdException = Shapes::StructureShape.new(name: 'InvalidDeploymentIdException')
+    InvalidDeploymentInstanceTypeException = Shapes::StructureShape.new(name: 'InvalidDeploymentInstanceTypeException')
     InvalidDeploymentStatusException = Shapes::StructureShape.new(name: 'InvalidDeploymentStatusException')
     InvalidDeploymentStyleException = Shapes::StructureShape.new(name: 'InvalidDeploymentStyleException')
     InvalidEC2TagException = Shapes::StructureShape.new(name: 'InvalidEC2TagException')
+    InvalidFileExistsBehaviorException = Shapes::StructureShape.new(name: 'InvalidFileExistsBehaviorException')
     InvalidIamSessionArnException = Shapes::StructureShape.new(name: 'InvalidIamSessionArnException')
     InvalidIamUserArnException = Shapes::StructureShape.new(name: 'InvalidIamUserArnException')
     InvalidInstanceNameException = Shapes::StructureShape.new(name: 'InvalidInstanceNameException')
@@ -411,6 +414,7 @@ module Aws::CodeDeploy
     CreateDeploymentInput.add_member(:target_instances, Shapes::ShapeRef.new(shape: TargetInstances, location_name: "targetInstances"))
     CreateDeploymentInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
     CreateDeploymentInput.add_member(:update_outdated_instances_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateOutdatedInstancesOnly"))
+    CreateDeploymentInput.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
     CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
     CreateDeploymentOutput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
@@ -462,6 +466,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:deployment_group_name, Shapes::ShapeRef.new(shape: DeploymentGroupName, location_name: "deploymentGroupName"))
     DeploymentInfo.add_member(:deployment_config_name, Shapes::ShapeRef.new(shape: DeploymentConfigName, location_name: "deploymentConfigName"))
     DeploymentInfo.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
+    DeploymentInfo.add_member(:previous_revision, Shapes::ShapeRef.new(shape: RevisionLocation, location_name: "previousRevision"))
     DeploymentInfo.add_member(:revision, Shapes::ShapeRef.new(shape: RevisionLocation, location_name: "revision"))
     DeploymentInfo.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentStatus, location_name: "status"))
     DeploymentInfo.add_member(:error_information, Shapes::ShapeRef.new(shape: ErrorInformation, location_name: "errorInformation"))
@@ -481,6 +486,7 @@ module Aws::CodeDeploy
     DeploymentInfo.add_member(:blue_green_deployment_configuration, Shapes::ShapeRef.new(shape: BlueGreenDeploymentConfiguration, location_name: "blueGreenDeploymentConfiguration"))
     DeploymentInfo.add_member(:load_balancer_info, Shapes::ShapeRef.new(shape: LoadBalancerInfo, location_name: "loadBalancerInfo"))
     DeploymentInfo.add_member(:additional_deployment_status_info, Shapes::ShapeRef.new(shape: AdditionalDeploymentStatusInfo, location_name: "additionalDeploymentStatusInfo"))
+    DeploymentInfo.add_member(:file_exists_behavior, Shapes::ShapeRef.new(shape: FileExistsBehavior, location_name: "fileExistsBehavior"))
     DeploymentInfo.struct_class = Types::DeploymentInfo
 
     DeploymentOverview.add_member(:pending, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "Pending"))
@@ -959,6 +965,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetInstancesException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidAutoRollbackConfigException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidLoadBalancerInfoException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidFileExistsBehaviorException)
       end)
 
       api.add_operation(:create_deployment_config, Seahorse::Model::Operation.new.tap do |o|
@@ -1217,6 +1224,7 @@ module Aws::CodeDeploy
         o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceStatusException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceTypeException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentInstanceTypeException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"

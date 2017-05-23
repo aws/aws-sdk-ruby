@@ -726,7 +726,7 @@ module Aws::CodeDeploy
     #   the deployment or the deployment group.
     #
     #   For more information about the predefined deployment configurations
-    #   in AWS CodeDeploy, see see [Working with Deployment Groups in AWS
+    #   in AWS CodeDeploy, see [Working with Deployment Groups in AWS
     #   CodeDeploy][1] in the AWS CodeDeploy User Guide.
     #
     #
@@ -735,11 +735,14 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] ec2_tag_filters
-    #   The Amazon EC2 tags on which to filter.
+    #   The Amazon EC2 tags on which to filter. The deployment group will
+    #   include EC2 instances with any of the specified tags.
     #   @return [Array<Types::EC2TagFilter>]
     #
     # @!attribute [rw] on_premises_instance_tag_filters
-    #   The on-premises instance tags on which to filter.
+    #   The on-premises instance tags on which to filter. The deployment
+    #   group will include on-premises instances with any of the specified
+    #   tags.
     #   @return [Array<Types::TagFilter>]
     #
     # @!attribute [rw] auto_scaling_groups
@@ -772,7 +775,7 @@ module Aws::CodeDeploy
     #   @return [Types::AutoRollbackConfiguration]
     #
     # @!attribute [rw] deployment_style
-    #   Information about the type of deployment, standard or blue/green,
+    #   Information about the type of deployment, in-place or blue/green,
     #   that you want to run and whether to route deployment traffic behind
     #   a load balancer.
     #   @return [Types::DeploymentStyle]
@@ -783,7 +786,7 @@ module Aws::CodeDeploy
     #   @return [Types::BlueGreenDeploymentConfiguration]
     #
     # @!attribute [rw] load_balancer_info
-    #   Information about the load balancer used in a blue/green deployment.
+    #   Information about the load balancer used in a deployment.
     #   @return [Types::LoadBalancerInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupInput AWS API Documentation
@@ -858,6 +861,7 @@ module Aws::CodeDeploy
     #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
     #         },
     #         update_outdated_instances_only: false,
+    #         file_exists_behavior: "DISALLOW", # accepts DISALLOW, OVERWRITE, RETAIN
     #       }
     #
     # @!attribute [rw] application_name
@@ -915,6 +919,24 @@ module Aws::CodeDeploy
     #   that are not running the latest application revision.
     #   @return [Boolean]
     #
+    # @!attribute [rw] file_exists_behavior
+    #   Information about how AWS CodeDeploy handles files that already
+    #   exist in a deployment target location but weren't part of the
+    #   previous successful deployment.
+    #
+    #   The fileExistsBehavior parameter takes any of the following values:
+    #
+    #   * DISALLOW: The deployment fails. This is also the default behavior
+    #     if no option is specified.
+    #
+    #   * OVERWRITE: The version of the file from the application revision
+    #     currently being deployed replaces the version already on the
+    #     instance.
+    #
+    #   * RETAIN: The version of the file already on the instance is kept
+    #     and used as part of the new deployment.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentInput AWS API Documentation
     #
     class CreateDeploymentInput < Struct.new(
@@ -926,7 +948,8 @@ module Aws::CodeDeploy
       :ignore_application_stop_failures,
       :target_instances,
       :auto_rollback_configuration,
-      :update_outdated_instances_only)
+      :update_outdated_instances_only,
+      :file_exists_behavior)
       include Aws::Structure
     end
 
@@ -1114,7 +1137,7 @@ module Aws::CodeDeploy
     #   @return [Types::AutoRollbackConfiguration]
     #
     # @!attribute [rw] deployment_style
-    #   Information about the type of deployment, either standard or
+    #   Information about the type of deployment, either in-place or
     #   blue/green, you want to run and whether to route deployment traffic
     #   behind a load balancer.
     #   @return [Types::DeploymentStyle]
@@ -1125,8 +1148,7 @@ module Aws::CodeDeploy
     #   @return [Types::BlueGreenDeploymentConfiguration]
     #
     # @!attribute [rw] load_balancer_info
-    #   Information about the load balancer to use in a blue/green
-    #   deployment.
+    #   Information about the load balancer to use in a deployment.
     #   @return [Types::LoadBalancerInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentGroupInfo AWS API Documentation
@@ -1167,6 +1189,11 @@ module Aws::CodeDeploy
     # @!attribute [rw] deployment_id
     #   The deployment ID.
     #   @return [String]
+    #
+    # @!attribute [rw] previous_revision
+    #   Information about the application revision that was deployed to the
+    #   deployment group before the most recent successful deployment.
+    #   @return [Types::RevisionLocation]
     #
     # @!attribute [rw] revision
     #   Information about the location of stored application artifacts and
@@ -1246,7 +1273,7 @@ module Aws::CodeDeploy
     #   @return [Types::RollbackInfo]
     #
     # @!attribute [rw] deployment_style
-    #   Information about the type of deployment, either standard or
+    #   Information about the type of deployment, either in-place or
     #   blue/green, you want to run and whether to route deployment traffic
     #   behind a load balancer.
     #   @return [Types::DeploymentStyle]
@@ -1268,14 +1295,29 @@ module Aws::CodeDeploy
     #   @return [Types::BlueGreenDeploymentConfiguration]
     #
     # @!attribute [rw] load_balancer_info
-    #   Information about the load balancer used in this blue/green
-    #   deployment.
+    #   Information about the load balancer used in the deployment.
     #   @return [Types::LoadBalancerInfo]
     #
     # @!attribute [rw] additional_deployment_status_info
     #   Provides information about the results of a deployment, such as
     #   whether instances in the original environment in a blue/green
     #   deployment were not terminated.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_exists_behavior
+    #   Information about how AWS CodeDeploy handles files that already
+    #   exist in a deployment target location but weren't part of the
+    #   previous successful deployment.
+    #
+    #   * DISALLOW: The deployment fails. This is also the default behavior
+    #     if no option is specified.
+    #
+    #   * OVERWRITE: The version of the file from the application revision
+    #     currently being deployed replaces the version already on the
+    #     instance.
+    #
+    #   * RETAIN: The version of the file already on the instance is kept
+    #     and used as part of the new deployment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
@@ -1285,6 +1327,7 @@ module Aws::CodeDeploy
       :deployment_group_name,
       :deployment_config_name,
       :deployment_id,
+      :previous_revision,
       :revision,
       :status,
       :error_information,
@@ -1303,7 +1346,8 @@ module Aws::CodeDeploy
       :instance_termination_wait_time_started,
       :blue_green_deployment_configuration,
       :load_balancer_info,
-      :additional_deployment_status_info)
+      :additional_deployment_status_info,
+      :file_exists_behavior)
       include Aws::Structure
     end
 
@@ -1387,7 +1431,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about the type of deployment, either standard or
+    # Information about the type of deployment, either in-place or
     # blue/green, you want to run and whether to route deployment traffic
     # behind a load balancer.
     #
@@ -1400,7 +1444,7 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] deployment_type
-    #   Indicates whether to run a standard deployment or a blue/green
+    #   Indicates whether to run an in-place deployment or a blue/green
     #   deployment.
     #   @return [String]
     #
@@ -1485,7 +1529,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about a tag filter.
+    # Information about an EC2 tag filter.
     #
     # @note When making an API call, you may pass EC2TagFilter
     #   data as a hash:
@@ -1524,7 +1568,7 @@ module Aws::CodeDeploy
     end
 
     # Information about a load balancer in Elastic Load Balancing to use in
-    # a blue/green deployment.
+    # a deployment.
     #
     # @note When making an API call, you may pass ELBInfo
     #   data as a hash:
@@ -1534,9 +1578,12 @@ module Aws::CodeDeploy
     #       }
     #
     # @!attribute [rw] name
-    #   The name of the load balancer that will be used to route traffic
-    #   from original instances to replacement instances in a blue/green
-    #   deployment.
+    #   For blue/green deployments, the name of the load balancer that will
+    #   be used to route traffic from original instances to replacement
+    #   instances in a blue/green deployment. For in-place deployments, the
+    #   name of the load balancer that instances are deregistered from so
+    #   they are not serving traffic during a deployment, and then
+    #   re-registered with after the deployment completes.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ELBInfo AWS API Documentation
@@ -2609,7 +2656,7 @@ module Aws::CodeDeploy
       include Aws::Structure
     end
 
-    # Information about the load balancer used in a blue/green deployment.
+    # Information about the load balancer used in a deployment.
     #
     # @note When making an API call, you may pass LoadBalancerInfo
     #   data as a hash:
@@ -2624,7 +2671,7 @@ module Aws::CodeDeploy
     #
     # @!attribute [rw] elb_info_list
     #   An array containing information about the load balancer in Elastic
-    #   Load Balancing to use in a blue/green deployment.
+    #   Load Balancing to use in a deployment.
     #   @return [Array<Types::ELBInfo>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LoadBalancerInfo AWS API Documentation
@@ -2678,6 +2725,13 @@ module Aws::CodeDeploy
     #   succeeds.
     #
     #    </note>
+    #
+    #   For more information, see [AWS CodeDeploy Instance Health][1] in the
+    #   *AWS CodeDeploy User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/MinimumHealthyHosts AWS API Documentation
@@ -3349,7 +3403,7 @@ module Aws::CodeDeploy
     #   @return [Types::AutoRollbackConfiguration]
     #
     # @!attribute [rw] deployment_style
-    #   Information about the type of deployment, either standard or
+    #   Information about the type of deployment, either in-place or
     #   blue/green, you want to run and whether to route deployment traffic
     #   behind a load balancer.
     #   @return [Types::DeploymentStyle]
@@ -3360,7 +3414,7 @@ module Aws::CodeDeploy
     #   @return [Types::BlueGreenDeploymentConfiguration]
     #
     # @!attribute [rw] load_balancer_info
-    #   Information about the load balancer used in a blue/green deployment.
+    #   Information about the load balancer used in a deployment.
     #   @return [Types::LoadBalancerInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupInput AWS API Documentation

@@ -494,7 +494,12 @@ module Aws::CloudWatchEvents
     #   "rate(5 minutes)".
     #
     # @option params [String] :event_pattern
-    #   The event pattern.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #
     # @option params [String] :state
     #   Indicates whether the rule is enabled or disabled.
@@ -579,9 +584,17 @@ module Aws::CloudWatchEvents
     #   JSONPaths are extracted from the event and used as values in a
     #   template that you specify as the input to the target.
     #
+    # When you specify `Input`, `InputPath`, or `InputTransformer`, you must
+    # use JSON dot notation, not bracket notation.
+    #
     # When you add targets to a rule and the associated rule triggers soon
     # after, new or updated targets might not be immediately invoked. Please
     # allow a short period of time for changes to take effect.
+    #
+    # This action can partially fail if too many requests are made at the
+    # same time. If that happens, `FailedEntryCount` is non-zero in the
+    # response and each entry in `FailedEntries` provides the ID of the
+    # failed target and the error code.
     #
     #
     #
@@ -658,6 +671,11 @@ module Aws::CloudWatchEvents
     # targets might continue to be invoked. Please allow a short period of
     # time for changes to take effect.
     #
+    # This action can partially fail if too many requests are made at the
+    # same time. If that happens, `FailedEntryCount` is non-zero in the
+    # response and each entry in `FailedEntries` provides the ID of the
+    # failed target and the error code.
+    #
     # @option params [required, String] :rule
     #   The name of the rule.
     #
@@ -702,7 +720,12 @@ module Aws::CloudWatchEvents
     # event you want to match.
     #
     # @option params [required, String] :event_pattern
-    #   The event pattern.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #
     # @option params [required, String] :event
     #   The event, in JSON format, to test against the event pattern.
@@ -744,7 +767,7 @@ module Aws::CloudWatchEvents
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevents'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

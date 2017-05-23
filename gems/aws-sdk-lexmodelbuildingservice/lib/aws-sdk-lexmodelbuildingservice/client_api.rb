@@ -49,8 +49,11 @@ module Aws::LexModelBuildingService
     DeleteBotAliasRequest = Shapes::StructureShape.new(name: 'DeleteBotAliasRequest')
     DeleteBotChannelAssociationRequest = Shapes::StructureShape.new(name: 'DeleteBotChannelAssociationRequest')
     DeleteBotRequest = Shapes::StructureShape.new(name: 'DeleteBotRequest')
+    DeleteBotVersionRequest = Shapes::StructureShape.new(name: 'DeleteBotVersionRequest')
     DeleteIntentRequest = Shapes::StructureShape.new(name: 'DeleteIntentRequest')
+    DeleteIntentVersionRequest = Shapes::StructureShape.new(name: 'DeleteIntentVersionRequest')
     DeleteSlotTypeRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeRequest')
+    DeleteSlotTypeVersionRequest = Shapes::StructureShape.new(name: 'DeleteSlotTypeVersionRequest')
     DeleteUtterancesRequest = Shapes::StructureShape.new(name: 'DeleteUtterancesRequest')
     Description = Shapes::StringShape.new(name: 'Description')
     EnumerationValue = Shapes::StructureShape.new(name: 'EnumerationValue')
@@ -112,6 +115,7 @@ module Aws::LexModelBuildingService
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    NumericalVersion = Shapes::StringShape.new(name: 'NumericalVersion')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Priority = Shapes::IntegerShape.new(name: 'Priority')
     ProcessBehavior = Shapes::StringShape.new(name: 'ProcessBehavior')
@@ -274,16 +278,25 @@ module Aws::LexModelBuildingService
     DeleteBotChannelAssociationRequest.struct_class = Types::DeleteBotChannelAssociationRequest
 
     DeleteBotRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
-    DeleteBotRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     DeleteBotRequest.struct_class = Types::DeleteBotRequest
 
+    DeleteBotVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "name"))
+    DeleteBotVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location: "uri", location_name: "version"))
+    DeleteBotVersionRequest.struct_class = Types::DeleteBotVersionRequest
+
     DeleteIntentRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
-    DeleteIntentRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     DeleteIntentRequest.struct_class = Types::DeleteIntentRequest
 
+    DeleteIntentVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: IntentName, required: true, location: "uri", location_name: "name"))
+    DeleteIntentVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location: "uri", location_name: "version"))
+    DeleteIntentVersionRequest.struct_class = Types::DeleteIntentVersionRequest
+
     DeleteSlotTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
-    DeleteSlotTypeRequest.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
     DeleteSlotTypeRequest.struct_class = Types::DeleteSlotTypeRequest
+
+    DeleteSlotTypeVersionRequest.add_member(:name, Shapes::ShapeRef.new(shape: SlotTypeName, required: true, location: "uri", location_name: "name"))
+    DeleteSlotTypeVersionRequest.add_member(:version, Shapes::ShapeRef.new(shape: NumericalVersion, required: true, location: "uri", location_name: "version"))
+    DeleteSlotTypeVersionRequest.struct_class = Types::DeleteSlotTypeVersionRequest
 
     DeleteUtterancesRequest.add_member(:bot_name, Shapes::ShapeRef.new(shape: BotName, required: true, location: "uri", location_name: "botName"))
     DeleteUtterancesRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
@@ -763,6 +776,20 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:delete_bot_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteBotVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/bots/{name}/versions/{version}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteBotVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:delete_intent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteIntent"
         o.http_method = "DELETE"
@@ -777,11 +804,39 @@ module Aws::LexModelBuildingService
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
+      api.add_operation(:delete_intent_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteIntentVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/intents/{name}/versions/{version}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteIntentVersionRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:delete_slot_type, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteSlotType"
         o.http_method = "DELETE"
         o.http_request_uri = "/slottypes/{name}"
         o.input = Shapes::ShapeRef.new(shape: DeleteSlotTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:delete_slot_type_version, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSlotTypeVersion"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/slottypes/{name}/version/{version}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSlotTypeVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

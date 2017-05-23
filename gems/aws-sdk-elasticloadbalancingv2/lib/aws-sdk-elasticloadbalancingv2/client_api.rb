@@ -48,6 +48,8 @@ module Aws::ElasticLoadBalancingV2
     DeleteTargetGroupOutput = Shapes::StructureShape.new(name: 'DeleteTargetGroupOutput')
     DeregisterTargetsInput = Shapes::StructureShape.new(name: 'DeregisterTargetsInput')
     DeregisterTargetsOutput = Shapes::StructureShape.new(name: 'DeregisterTargetsOutput')
+    DescribeAccountLimitsInput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsInput')
+    DescribeAccountLimitsOutput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsOutput')
     DescribeListenersInput = Shapes::StructureShape.new(name: 'DescribeListenersInput')
     DescribeListenersOutput = Shapes::StructureShape.new(name: 'DescribeListenersOutput')
     DescribeLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'DescribeLoadBalancerAttributesInput')
@@ -85,6 +87,8 @@ module Aws::ElasticLoadBalancingV2
     InvalidTargetException = Shapes::StructureShape.new(name: 'InvalidTargetException')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IsDefault = Shapes::BooleanShape.new(name: 'IsDefault')
+    Limit = Shapes::StructureShape.new(name: 'Limit')
+    Limits = Shapes::ListShape.new(name: 'Limits')
     ListOfString = Shapes::ListShape.new(name: 'ListOfString')
     Listener = Shapes::StructureShape.new(name: 'Listener')
     ListenerArn = Shapes::StringShape.new(name: 'ListenerArn')
@@ -108,6 +112,7 @@ module Aws::ElasticLoadBalancingV2
     LoadBalancers = Shapes::ListShape.new(name: 'LoadBalancers')
     Marker = Shapes::StringShape.new(name: 'Marker')
     Matcher = Shapes::StructureShape.new(name: 'Matcher')
+    Max = Shapes::StringShape.new(name: 'Max')
     ModifyListenerInput = Shapes::StructureShape.new(name: 'ModifyListenerInput')
     ModifyListenerOutput = Shapes::StructureShape.new(name: 'ModifyListenerOutput')
     ModifyLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesInput')
@@ -118,6 +123,7 @@ module Aws::ElasticLoadBalancingV2
     ModifyTargetGroupAttributesOutput = Shapes::StructureShape.new(name: 'ModifyTargetGroupAttributesOutput')
     ModifyTargetGroupInput = Shapes::StructureShape.new(name: 'ModifyTargetGroupInput')
     ModifyTargetGroupOutput = Shapes::StructureShape.new(name: 'ModifyTargetGroupOutput')
+    Name = Shapes::StringShape.new(name: 'Name')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Path = Shapes::StringShape.new(name: 'Path')
@@ -306,6 +312,14 @@ module Aws::ElasticLoadBalancingV2
 
     DeregisterTargetsOutput.struct_class = Types::DeregisterTargetsOutput
 
+    DescribeAccountLimitsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeAccountLimitsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    DescribeAccountLimitsInput.struct_class = Types::DescribeAccountLimitsInput
+
+    DescribeAccountLimitsOutput.add_member(:limits, Shapes::ShapeRef.new(shape: Limits, location_name: "Limits"))
+    DescribeAccountLimitsOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
+    DescribeAccountLimitsOutput.struct_class = Types::DescribeAccountLimitsOutput
+
     DescribeListenersInput.add_member(:load_balancer_arn, Shapes::ShapeRef.new(shape: LoadBalancerArn, location_name: "LoadBalancerArn"))
     DescribeListenersInput.add_member(:listener_arns, Shapes::ShapeRef.new(shape: ListenerArns, location_name: "ListenerArns"))
     DescribeListenersInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
@@ -377,6 +391,12 @@ module Aws::ElasticLoadBalancingV2
 
     DescribeTargetHealthOutput.add_member(:target_health_descriptions, Shapes::ShapeRef.new(shape: TargetHealthDescriptions, location_name: "TargetHealthDescriptions"))
     DescribeTargetHealthOutput.struct_class = Types::DescribeTargetHealthOutput
+
+    Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
+    Limit.struct_class = Types::Limit
+
+    Limits.member = Shapes::ShapeRef.new(shape: Limit)
 
     ListOfString.member = Shapes::ShapeRef.new(shape: StringValue)
 
@@ -747,6 +767,14 @@ module Aws::ElasticLoadBalancingV2
         o.output = Shapes::ShapeRef.new(shape: DeregisterTargetsOutput)
         o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidTargetException)
+      end)
+
+      api.add_operation(:describe_account_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountLimits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountLimitsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountLimitsOutput)
       end)
 
       api.add_operation(:describe_listeners, Seahorse::Model::Operation.new.tap do |o|

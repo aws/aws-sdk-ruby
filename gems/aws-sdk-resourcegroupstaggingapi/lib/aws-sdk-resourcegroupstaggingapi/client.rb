@@ -181,7 +181,12 @@ module Aws::ResourceGroupsTaggingAPI
     #   single request, the response returns all resources that are associated
     #   with at least one or possibly more of the specified filters.
     #
-    # @option params [required, Integer] :tags_per_page
+    # @option params [Integer] :resources_per_page
+    #   A limit that restricts the number of resources returned by
+    #   GetResources in paginated output. You can set ResourcesPerPage to a
+    #   minimum of 1 item and the maximum of 50 items.
+    #
+    # @option params [Integer] :tags_per_page
     #   A limit that restricts the number of tags (key and value pairs)
     #   returned by GetResources in paginated output. A resource with no tags
     #   is counted as having one tag (one key and value pair).
@@ -242,7 +247,8 @@ module Aws::ResourceGroupsTaggingAPI
     #         values: ["TagValue"],
     #       },
     #     ],
-    #     tags_per_page: 1, # required
+    #     resources_per_page: 1,
+    #     tags_per_page: 1,
     #     resource_type_filters: ["AmazonResourceType"],
     #   })
     #
@@ -479,7 +485,7 @@ module Aws::ResourceGroupsTaggingAPI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-resourcegroupstaggingapi'
-      context[:gem_version] = '1.0.0.rc3'
+      context[:gem_version] = '1.0.0.rc4'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -42,6 +42,6 @@ require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 # @service
 module Aws::ApplicationDiscoveryService
 
-  GEM_VERSION = '1.0.0.rc5'
+  GEM_VERSION = '1.0.0.rc6'
 
 end

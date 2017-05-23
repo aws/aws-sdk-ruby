@@ -45,7 +45,8 @@ module Aws::ResourceGroupsTaggingAPI
     #             values: ["TagValue"],
     #           },
     #         ],
-    #         tags_per_page: 1, # required
+    #         resources_per_page: 1,
+    #         tags_per_page: 1,
     #         resource_type_filters: ["AmazonResourceType"],
     #       }
     #
@@ -69,6 +70,12 @@ module Aws::ResourceGroupsTaggingAPI
     #   associated with at least one or possibly more of the specified
     #   filters.
     #   @return [Array<Types::TagFilter>]
+    #
+    # @!attribute [rw] resources_per_page
+    #   A limit that restricts the number of resources returned by
+    #   GetResources in paginated output. You can set ResourcesPerPage to a
+    #   minimum of 1 item and the maximum of 50 items.
+    #   @return [Integer]
     #
     # @!attribute [rw] tags_per_page
     #   A limit that restricts the number of tags (key and value pairs)
@@ -124,6 +131,7 @@ module Aws::ResourceGroupsTaggingAPI
     class GetResourcesInput < Struct.new(
       :pagination_token,
       :tag_filters,
+      :resources_per_page,
       :tags_per_page,
       :resource_type_filters)
       include Aws::Structure

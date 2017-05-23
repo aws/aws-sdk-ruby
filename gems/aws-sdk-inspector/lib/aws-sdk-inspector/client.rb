@@ -429,7 +429,7 @@ module Aws::Inspector
     #   resp.assessment_runs[0].arn #=> String
     #   resp.assessment_runs[0].name #=> String
     #   resp.assessment_runs[0].assessment_template_arn #=> String
-    #   resp.assessment_runs[0].state #=> String, one of "CREATED", "START_DATA_COLLECTION_PENDING", "START_DATA_COLLECTION_IN_PROGRESS", "COLLECTING_DATA", "STOP_DATA_COLLECTION_PENDING", "DATA_COLLECTED", "EVALUATING_RULES", "FAILED", "COMPLETED", "COMPLETED_WITH_ERRORS"
+    #   resp.assessment_runs[0].state #=> String, one of "CREATED", "START_DATA_COLLECTION_PENDING", "START_DATA_COLLECTION_IN_PROGRESS", "COLLECTING_DATA", "STOP_DATA_COLLECTION_PENDING", "DATA_COLLECTED", "START_EVALUATING_RULES_PENDING", "EVALUATING_RULES", "FAILED", "ERROR", "COMPLETED", "COMPLETED_WITH_ERRORS"
     #   resp.assessment_runs[0].duration_in_seconds #=> Integer
     #   resp.assessment_runs[0].rules_package_arns #=> Array
     #   resp.assessment_runs[0].rules_package_arns[0] #=> String
@@ -443,7 +443,7 @@ module Aws::Inspector
     #   resp.assessment_runs[0].data_collected #=> Boolean
     #   resp.assessment_runs[0].state_changes #=> Array
     #   resp.assessment_runs[0].state_changes[0].state_changed_at #=> Time
-    #   resp.assessment_runs[0].state_changes[0].state #=> String, one of "CREATED", "START_DATA_COLLECTION_PENDING", "START_DATA_COLLECTION_IN_PROGRESS", "COLLECTING_DATA", "STOP_DATA_COLLECTION_PENDING", "DATA_COLLECTED", "EVALUATING_RULES", "FAILED", "COMPLETED", "COMPLETED_WITH_ERRORS"
+    #   resp.assessment_runs[0].state_changes[0].state #=> String, one of "CREATED", "START_DATA_COLLECTION_PENDING", "START_DATA_COLLECTION_IN_PROGRESS", "COLLECTING_DATA", "STOP_DATA_COLLECTION_PENDING", "DATA_COLLECTED", "START_EVALUATING_RULES_PENDING", "EVALUATING_RULES", "FAILED", "ERROR", "COMPLETED", "COMPLETED_WITH_ERRORS"
     #   resp.assessment_runs[0].notifications #=> Array
     #   resp.assessment_runs[0].notifications[0].date #=> Time
     #   resp.assessment_runs[0].notifications[0].event #=> String, one of "ASSESSMENT_RUN_STARTED", "ASSESSMENT_RUN_COMPLETED", "ASSESSMENT_RUN_STATE_CHANGED", "FINDING_REPORTED", "OTHER"
@@ -451,6 +451,8 @@ module Aws::Inspector
     #   resp.assessment_runs[0].notifications[0].error #=> Boolean
     #   resp.assessment_runs[0].notifications[0].sns_topic_arn #=> String
     #   resp.assessment_runs[0].notifications[0].sns_publish_status_code #=> String, one of "SUCCESS", "TOPIC_DOES_NOT_EXIST", "ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.assessment_runs[0].finding_counts #=> Hash
+    #   resp.assessment_runs[0].finding_counts["Severity"] #=> Integer
     #   resp.failed_items #=> Hash
     #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
     #   resp.failed_items["Arn"].retryable #=> Boolean
@@ -717,6 +719,53 @@ module Aws::Inspector
       req.send_request(options)
     end
 
+    # Produces an assessment report that includes detailed and comprehensive
+    # results of a specified assessment run.
+    #
+    # @option params [required, String] :assessment_run_arn
+    #   The ARN that specifies the assessment run for which you want to
+    #   generate a report.
+    #
+    # @option params [required, String] :report_file_format
+    #   Specifies the file format (html or pdf) of the assessment report that
+    #   you want to generate.
+    #
+    # @option params [required, String] :report_type
+    #   Specifies the type of the assessment report that you want to generate.
+    #   There are two types of assessment reports: a finding report and a full
+    #   report. For more information, see [Assessment Reports][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
+    #
+    # @return [Types::GetAssessmentReportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAssessmentReportResponse#status #status} => String
+    #   * {Types::GetAssessmentReportResponse#url #url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_assessment_report({
+    #     assessment_run_arn: "Arn", # required
+    #     report_file_format: "HTML", # required, accepts HTML, PDF
+    #     report_type: "FINDING", # required, accepts FINDING, FULL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "WORK_IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReport AWS API Documentation
+    #
+    # @overload get_assessment_report(params = {})
+    # @param [Hash] params ({})
+    def get_assessment_report(params = {}, options = {})
+      req = build_request(:get_assessment_report, params)
+      req.send_request(options)
+    end
+
     # Information about the data that is collected for the specified
     # assessment run.
     #
@@ -856,7 +905,7 @@ module Aws::Inspector
     #     assessment_template_arns: ["Arn"],
     #     filter: {
     #       name_pattern: "NamePattern",
-    #       states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, EVALUATING_RULES, FAILED, COMPLETED, COMPLETED_WITH_ERRORS
+    #       states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, START_EVALUATING_RULES_PENDING, EVALUATING_RULES, FAILED, ERROR, COMPLETED, COMPLETED_WITH_ERRORS
     #       duration_range: {
     #         min_seconds: 1,
     #         max_seconds: 1,
@@ -1530,7 +1579,7 @@ module Aws::Inspector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-inspector'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

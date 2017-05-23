@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['lib/**/*.rb']
 
   # gem dependency
-  spec.add_dependency('aws-sdk', '3.0.0.rc7')
+  spec.add_dependency('aws-sdk', '3.0.0.rc8')
   # end gem dependency
 
 end

@@ -153,7 +153,7 @@ module Aws::ElasticLoadBalancing
     # updates its value.
     #
     # For more information, see [Tag Your Classic Load Balancer][1] in the
-    # *Classic Load Balancers Guide*.
+    # *Classic Load Balancer Guide*.
     #
     #
     #
@@ -193,7 +193,7 @@ module Aws::ElasticLoadBalancing
     # the previously associated security groups.
     #
     # For more information, see [Security Groups for Load Balancers in a
-    # VPC][1] in the *Classic Load Balancers Guide*.
+    # VPC][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -236,7 +236,7 @@ module Aws::ElasticLoadBalancing
     #
     # The load balancer evenly distributes requests across all registered
     # subnets. For more information, see [Add or Remove Subnets for Your
-    # Load Balancer in a VPC][1] in the *Classic Load Balancers Guide*.
+    # Load Balancer in a VPC][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -278,7 +278,7 @@ module Aws::ElasticLoadBalancing
     # state of your EC2 instances.
     #
     # For more information, see [Configure Health Checks for Your Load
-    # Balancer][1] in the *Classic Load Balancers Guide*.
+    # Balancer][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -339,7 +339,7 @@ module Aws::ElasticLoadBalancing
     # session stops being sticky until a new application cookie is issued.
     #
     # For more information, see [Application-Controlled Session
-    # Stickiness][1] in the *Classic Load Balancers Guide*.
+    # Stickiness][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -393,7 +393,7 @@ module Aws::ElasticLoadBalancing
     # configuration.
     #
     # For more information, see [Duration-Based Session Stickiness][1] in
-    # the *Classic Load Balancers Guide*.
+    # the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -432,7 +432,7 @@ module Aws::ElasticLoadBalancing
       req.send_request(options)
     end
 
-    # Creates a Classic load balancer.
+    # Creates a Classic Load Balancer.
     #
     # You can add listeners, security groups, subnets, and tags when you
     # create your load balancer, or you can add them later using
@@ -446,7 +446,7 @@ module Aws::ElasticLoadBalancing
     # You can create up to 20 load balancers per region per account. You can
     # request an increase for the number of load balancers for your account.
     # For more information, see [Limits for Your Classic Load Balancer][1]
-    # in the *Classic Load Balancers Guide*.
+    # in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -464,7 +464,7 @@ module Aws::ElasticLoadBalancing
     #   The listeners.
     #
     #   For more information, see [Listeners for Your Classic Load
-    #   Balancer][1] in the *Classic Load Balancers Guide*.
+    #   Balancer][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -507,7 +507,7 @@ module Aws::ElasticLoadBalancing
     #   A list of tags to assign to the load balancer.
     #
     #   For more information about tagging your load balancer, see [Tag Your
-    #   Classic Load Balancer][1] in the *Classic Load Balancers Guide*.
+    #   Classic Load Balancer][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -561,7 +561,7 @@ module Aws::ElasticLoadBalancing
     # properties of the existing listener.
     #
     # For more information, see [Listeners for Your Classic Load
-    # Balancer][1] in the *Classic Load Balancers Guide*.
+    # Balancer][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -737,7 +737,7 @@ module Aws::ElasticLoadBalancing
     # deregistered from the load balancer.
     #
     # For more information, see [Register or De-Register EC2 Instances][1]
-    # in the *Classic Load Balancers Guide*.
+    # in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -775,6 +775,51 @@ module Aws::ElasticLoadBalancing
     # @param [Hash] params ({})
     def deregister_instances_from_load_balancer(params = {}, options = {})
       req = build_request(:deregister_instances_from_load_balancer, params)
+      req.send_request(options)
+    end
+
+    # Describes the current Elastic Load Balancing resource limits for your
+    # AWS account.
+    #
+    # For more information, see [Limits for Your Classic Load Balancer][1]
+    # in the *Classic Load Balancer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return with this call.
+    #
+    # @return [Types::DescribeAccountLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountLimitsOutput#limits #limits} => Array&lt;Types::Limit&gt;
+    #   * {Types::DescribeAccountLimitsOutput#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_limits({
+    #     marker: "Marker",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limits #=> Array
+    #   resp.limits[0].name #=> String
+    #   resp.limits[0].max #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimits AWS API Documentation
+    #
+    # @overload describe_account_limits(params = {})
+    # @param [Hash] params ({})
+    def describe_account_limits(params = {}, options = {})
+      req = build_request(:describe_account_limits, params)
       req.send_request(options)
     end
 
@@ -1119,7 +1164,7 @@ module Aws::ElasticLoadBalancing
     # Availability Zones.
     #
     # For more information, see [Add or Remove Availability Zones][1] in the
-    # *Classic Load Balancers Guide*.
+    # *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1163,7 +1208,7 @@ module Aws::ElasticLoadBalancing
     # registered Availability Zones that contain instances.
     #
     # For more information, see [Add or Remove Availability Zones][1] in the
-    # *Classic Load Balancers Guide*.
+    # *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1209,7 +1254,7 @@ module Aws::ElasticLoadBalancing
     # `ConnectionSettings` by specifying an idle connection timeout value
     # for your load balancer.
     #
-    # For more information, see the following in the *Classic Load Balancers
+    # For more information, see the following in the *Classic Load Balancer
     # Guide*\:
     #
     # * [Cross-Zone Load Balancing][1]
@@ -1231,7 +1276,7 @@ module Aws::ElasticLoadBalancing
     #   The name of the load balancer.
     #
     # @option params [required, Types::LoadBalancerAttributes] :load_balancer_attributes
-    #   The attributes of the load balancer.
+    #   The attributes for the load balancer.
     #
     # @return [Types::ModifyLoadBalancerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1316,7 +1361,7 @@ module Aws::ElasticLoadBalancing
     # DeregisterInstancesFromLoadBalancer.
     #
     # For more information, see [Register or De-Register EC2 Instances][1]
-    # in the *Classic Load Balancers Guide*.
+    # in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1394,7 +1439,7 @@ module Aws::ElasticLoadBalancing
     #
     # For more information about updating your SSL certificate, see [Replace
     # the SSL Certificate for Your Load Balancer][1] in the *Classic Load
-    # Balancers Guide*.
+    # Balancer Guide*.
     #
     #
     #
@@ -1443,8 +1488,8 @@ module Aws::ElasticLoadBalancing
     #
     # For more information about enabling back-end instance authentication,
     # see [Configure Back-end Instance Authentication][1] in the *Classic
-    # Load Balancers Guide*. For more information about Proxy Protocol, see
-    # [Configure Proxy Protocol Support][2] in the *Classic Load Balancers
+    # Load Balancer Guide*. For more information about Proxy Protocol, see
+    # [Configure Proxy Protocol Support][2] in the *Classic Load Balancer
     # Guide*.
     #
     #
@@ -1490,7 +1535,7 @@ module Aws::ElasticLoadBalancing
     # For more information about setting policies, see [Update the SSL
     # Negotiation Configuration][1], [Duration-Based Session Stickiness][2],
     # and [Application-Controlled Session Stickiness][3] in the *Classic
-    # Load Balancers Guide*.
+    # Load Balancer Guide*.
     #
     #
     #
@@ -1541,7 +1586,7 @@ module Aws::ElasticLoadBalancing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancing'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

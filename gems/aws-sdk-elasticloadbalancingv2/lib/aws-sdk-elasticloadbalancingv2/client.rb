@@ -742,6 +742,51 @@ module Aws::ElasticLoadBalancingV2
       req.send_request(options)
     end
 
+    # Describes the current Elastic Load Balancing resource limits for your
+    # AWS account.
+    #
+    # For more information, see [Limits for Your Application Load
+    # Balancer][1] in the *Application Load Balancer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+    #
+    # @option params [String] :marker
+    #   The marker for the next set of results. (You received this marker from
+    #   a previous call.)
+    #
+    # @option params [Integer] :page_size
+    #   The maximum number of results to return with this call.
+    #
+    # @return [Types::DescribeAccountLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeAccountLimitsOutput#limits #limits} => Array&lt;Types::Limit&gt;
+    #   * {Types::DescribeAccountLimitsOutput#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_account_limits({
+    #     marker: "Marker",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.limits #=> Array
+    #   resp.limits[0].name #=> String
+    #   resp.limits[0].max #=> String
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeAccountLimits AWS API Documentation
+    #
+    # @overload describe_account_limits(params = {})
+    # @param [Hash] params ({})
+    def describe_account_limits(params = {}, options = {})
+      req = build_request(:describe_account_limits, params)
+      req.send_request(options)
+    end
+
     # Describes the specified listeners or the listeners for the specified
     # Application Load Balancer. You must specify either a load balancer or
     # one or more listeners.
@@ -1711,7 +1756,7 @@ module Aws::ElasticLoadBalancingV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticloadbalancingv2'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

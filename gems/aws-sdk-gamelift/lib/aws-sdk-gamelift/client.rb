@@ -327,13 +327,18 @@ module Aws::GameLift
     # through several statuses; once it reaches the `ACTIVE` status, it can
     # begin hosting game sessions.
     #
-    # To create a new fleet, provide a fleet name, an EC2 instance type, and
-    # a build ID of the game build to deploy. You can also configure the new
-    # fleet with the following settings: (1) a runtime configuration
-    # describing what server processes to run on each instance in the fleet
-    # (required to create fleet), (2) access permissions for inbound
-    # traffic, (3) fleet-wide game session protection, and (4) the location
-    # of default log files for Amazon GameLift to upload and store.
+    # To create a new fleet, you must specify the following: (1) fleet name,
+    # (2) build ID of an uploaded game build, (3) an EC2 instance type, and
+    # (4) a runtime configuration that describes which server processes to
+    # run on each instance in the fleet. (Although the runtime configuration
+    # is not a required parameter, the fleet cannot be successfully created
+    # without it.) You can also configure the new fleet with the following
+    # settings: fleet description, access permissions for inbound traffic,
+    # fleet-wide game session protection, and resource creation limit. If
+    # you use Amazon CloudWatch for metrics, you can add the new fleet to a
+    # metric group, which allows you to view aggregated metrics for a set of
+    # fleets. Once you specify a metric group, the new fleet's metrics are
+    # included in the metric group's data.
     #
     # If the CreateFleet call is successful, Amazon GameLift performs the
     # following tasks:
@@ -463,6 +468,12 @@ module Aws::GameLift
     #   Policy that limits the number of game sessions an individual player
     #   can create over a span of time for this fleet.
     #
+    # @option params [Array<String>] :metric_groups
+    #   Names of metric groups to add this fleet to. Use an existing metric
+    #   group name to add this fleet to the group, or use a new name to create
+    #   a new metric group. Currently, a fleet can only be included in one
+    #   metric group at a time.
+    #
     # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetOutput#fleet_attributes #fleet_attributes} => Types::FleetAttributes
@@ -494,11 +505,14 @@ module Aws::GameLift
     #           concurrent_executions: 1, # required
     #         },
     #       ],
+    #       max_concurrent_game_session_activations: 1,
+    #       game_session_activation_timeout_seconds: 1,
     #     },
     #     resource_creation_limit_policy: {
     #       new_game_sessions_per_creator: 1,
     #       policy_period_in_minutes: 1,
     #     },
+    #     metric_groups: ["MetricGroup"],
     #   })
     #
     # @example Response structure
@@ -519,6 +533,8 @@ module Aws::GameLift
     #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
+    #   resp.fleet_attributes.metric_groups #=> Array
+    #   resp.fleet_attributes.metric_groups[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleet AWS API Documentation
     #
@@ -1204,6 +1220,8 @@ module Aws::GameLift
     #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
     #   resp.fleet_attributes[0].resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
     #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
+    #   resp.fleet_attributes[0].metric_groups #=> Array
+    #   resp.fleet_attributes[0].metric_groups[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeFleetAttributes AWS API Documentation
@@ -1902,6 +1920,8 @@ module Aws::GameLift
     #   resp.runtime_configuration.server_processes[0].launch_path #=> String
     #   resp.runtime_configuration.server_processes[0].parameters #=> String
     #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+    #   resp.runtime_configuration.max_concurrent_game_session_activations #=> Integer
+    #   resp.runtime_configuration.game_session_activation_timeout_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeRuntimeConfiguration AWS API Documentation
     #
@@ -1978,7 +1998,7 @@ module Aws::GameLift
     #   resp.scaling_policies[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
     #   resp.scaling_policies[0].threshold #=> Float
     #   resp.scaling_policies[0].evaluation_periods #=> Integer
-    #   resp.scaling_policies[0].metric_name #=> String, one of "ActivatingGameSessions", "ActiveGameSessions", "ActiveInstances", "AvailablePlayerSessions", "CurrentPlayerSessions", "IdleInstances", "QueueDepth", "WaitTime"
+    #   resp.scaling_policies[0].metric_name #=> String, one of "ActivatingGameSessions", "ActiveGameSessions", "ActiveInstances", "AvailableGameSessions", "AvailablePlayerSessions", "CurrentPlayerSessions", "IdleInstances", "PercentAvailableGameSessions", "PercentIdleInstances", "QueueDepth", "WaitTime"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/DescribeScalingPolicies AWS API Documentation
@@ -2388,7 +2408,7 @@ module Aws::GameLift
     #     threshold: 1.0, # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     evaluation_periods: 1, # required
-    #     metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances, QueueDepth, WaitTime
+    #     metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailableGameSessions, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances, PercentAvailableGameSessions, PercentIdleInstances, QueueDepth, WaitTime
     #   })
     #
     # @example Response structure
@@ -2653,14 +2673,16 @@ module Aws::GameLift
     # CreateGameSessionQueue). When processing a placement request, Amazon
     # GameLift searches for available resources on the queue's
     # destinations, scanning each until it finds resources or the placement
-    # request times out. A game session placement request can also request
-    # player sessions. When a new game session is successfully created,
-    # Amazon GameLift creates a player session for each player included in
-    # the request.
+    # request times out.
+    #
+    # A game session placement request can also request player sessions.
+    # When a new game session is successfully created, Amazon GameLift
+    # creates a player session for each player included in the request.
     #
     # When placing a game session, by default Amazon GameLift tries each
     # fleet in the order they are listed in the queue configuration.
     # Ideally, a queue's destinations are listed in preference order.
+    #
     # Alternatively, when requesting a game session with players, you can
     # also provide latency data for each player in relevant regions. Latency
     # data indicates the performance lag a player experiences when connected
@@ -2670,19 +2692,26 @@ module Aws::GameLift
     # GameLift calculates each region's average lag for all players and
     # reorders to get the best game play across all players.
     #
-    # To place a new game session request, specify the queue name and a set
-    # of game session properties and settings. Also provide a unique ID
-    # (such as a UUID) for the placement. You'll use this ID to track the
-    # status of the placement request. Optionally, provide a set of IDs and
-    # player data for each player you want to join to the new game session.
-    # To optimize game play for the players, also provide latency data for
-    # all players. If successful, a new game session placement is created.
+    # To place a new game session request, specify the following:
+    #
+    # * The queue name and a set of game session properties and settings
+    #
+    # * A unique ID (such as a UUID) for the placement. You use this ID to
+    #   track the status of the placement request
+    #
+    # * (Optional) A set of IDs and player data for each player you want to
+    #   join to the new game session
+    #
+    # * Latency data for all players (if you want to optimize game play for
+    #   the players)
+    #
+    # If successful, a new game session placement is created.
+    #
     # To track the status of a placement request, call
     # DescribeGameSessionPlacement and check the request's status. If the
-    # status is Fulfilled, a new game session has been created and a game
+    # status is `Fulfilled`, a new game session has been created and a game
     # session ARN and region are referenced. If the placement request times
-    # out, you have the option of resubmitting the request or retrying it
-    # with a different queue.
+    # out, you can resubmit the request or retry it with a different queue.
     #
     # @option params [required, String] :placement_id
     #   Unique identifier to assign to the new game session placement. This
@@ -2965,6 +2994,13 @@ module Aws::GameLift
     #   Policy that limits the number of game sessions an individual player
     #   can create over a span of time.
     #
+    # @option params [Array<String>] :metric_groups
+    #   Names of metric groups to include this fleet with. A fleet metric
+    #   group is used in Amazon CloudWatch to aggregate metrics from multiple
+    #   fleets. Use an existing metric group name to add this fleet to the
+    #   group, or use a new name to create a new metric group. Currently, a
+    #   fleet can only be included in one metric group at a time.
+    #
     # @return [Types::UpdateFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetAttributesOutput#fleet_id #fleet_id} => String
@@ -2980,6 +3016,7 @@ module Aws::GameLift
     #       new_game_sessions_per_creator: 1,
     #       policy_period_in_minutes: 1,
     #     },
+    #     metric_groups: ["MetricGroup"],
     #   })
     #
     # @example Response structure
@@ -3310,6 +3347,8 @@ module Aws::GameLift
     #           concurrent_executions: 1, # required
     #         },
     #       ],
+    #       max_concurrent_game_session_activations: 1,
+    #       game_session_activation_timeout_seconds: 1,
     #     },
     #   })
     #
@@ -3319,6 +3358,8 @@ module Aws::GameLift
     #   resp.runtime_configuration.server_processes[0].launch_path #=> String
     #   resp.runtime_configuration.server_processes[0].parameters #=> String
     #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+    #   resp.runtime_configuration.max_concurrent_game_session_activations #=> Integer
+    #   resp.runtime_configuration.game_session_activation_timeout_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateRuntimeConfiguration AWS API Documentation
     #
@@ -3342,7 +3383,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

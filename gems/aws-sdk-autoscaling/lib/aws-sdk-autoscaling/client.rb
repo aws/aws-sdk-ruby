@@ -153,7 +153,7 @@ module Aws::AutoScaling
     # of instances being attached plus the desired capacity of the group
     # exceeds the maximum size of the group, the operation fails.
     #
-    # If there is a Classic load balancer attached to your Auto Scaling
+    # If there is a Classic Load Balancer attached to your Auto Scaling
     # group, the instances are also registered with the load balancer. If
     # there are target groups attached to your Auto Scaling group, the
     # instances are also registered with the target groups.
@@ -227,10 +227,10 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Attaches one or more Classic load balancers to the specified Auto
+    # Attaches one or more Classic Load Balancers to the specified Auto
     # Scaling group.
     #
-    # To attach an Application load balancer instead, see
+    # To attach an Application Load Balancer instead, see
     # AttachLoadBalancerTargetGroups.
     #
     # To describe the load balancers for an Auto Scaling group, use
@@ -386,7 +386,9 @@ module Aws::AutoScaling
     # @option params [Integer] :desired_capacity
     #   The number of EC2 instances that should be running in the group. This
     #   number must be greater than or equal to the minimum size of the group
-    #   and less than or equal to the maximum size of the group.
+    #   and less than or equal to the maximum size of the group. If you do not
+    #   specify a desired capacity, the default is the minimum size of the
+    #   group.
     #
     # @option params [Integer] :default_cooldown
     #   The amount of time, in seconds, after a scaling activity completes
@@ -404,8 +406,8 @@ module Aws::AutoScaling
     #   optional if you specify one or more subnets.
     #
     # @option params [Array<String>] :load_balancer_names
-    #   One or more Classic load balancers. To specify an Application load
-    #   balancer, use `TargetGroupARNs` instead.
+    #   One or more Classic Load Balancers. To specify an Application Load
+    #   Balancer, use `TargetGroupARNs` instead.
     #
     #   For more information, see [Using a Load Balancer With an Auto Scaling
     #   Group][1] in the *Auto Scaling User Guide*.
@@ -554,8 +556,12 @@ module Aws::AutoScaling
     #
     # @option params [String] :image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    #   instances. For more information, see [Finding an AMI][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   instances.
+    #
+    #   If you do not specify `InstanceId`, you must specify `ImageId`.
+    #
+    #   For more information, see [Finding an AMI][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -617,10 +623,12 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
     #
     # @option params [String] :instance_id
-    #   The ID of the instance to use to create the launch configuration.
+    #   The ID of the instance to use to create the launch configuration. The
+    #   new launch configuration derives attributes from the instance, with
+    #   the exception of the block device mapping.
     #
-    #   The new launch configuration derives attributes from the instance,
-    #   with the exception of the block device mapping.
+    #   If you do not specify `InstanceId`, you must specify both `ImageId`
+    #   and `InstanceType`.
     #
     #   To create a launch configuration with a block device mapping or
     #   override any other instance attributes, specify them as part of the
@@ -634,9 +642,12 @@ module Aws::AutoScaling
     #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
     #
     # @option params [String] :instance_type
-    #   The instance type of the EC2 instance. For information about available
-    #   instance types, see [ Available Instance Types][1] in the *Amazon
-    #   Elastic Compute Cloud User Guide.*
+    #   The instance type of the EC2 instance.
+    #
+    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
+    #
+    #   For information about available instance types, see [Available
+    #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
     #
     #
     #
@@ -659,7 +670,7 @@ module Aws::AutoScaling
     #
     # @option params [Types::InstanceMonitoring] :instance_monitoring
     #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
-    #   the Auto Scaling instances.
+    #   the Auto Scaling instances. The default is `true`.
     #
     # @option params [String] :spot_price
     #   The maximum hourly price to be paid for any Spot Instance launched to
@@ -1107,7 +1118,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::AutoScalingGroupsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1185,7 +1197,8 @@ module Aws::AutoScaling
     #   ID that does not exist, it is ignored with no error.
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1256,8 +1269,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call. The default is
-    #   100.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::LaunchConfigurationsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1388,7 +1401,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::DescribeLoadBalancerTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1421,8 +1435,8 @@ module Aws::AutoScaling
 
     # Describes the load balancers for the specified Auto Scaling group.
     #
-    # Note that this operation describes only Classic load balancers. If you
-    # have Application load balancers, use DescribeLoadBalancerTargetGroups
+    # Note that this operation describes only Classic Load Balancers. If you
+    # have Application Load Balancers, use DescribeLoadBalancerTargetGroups
     # instead.
     #
     # @option params [required, String] :auto_scaling_group_name
@@ -1433,7 +1447,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::DescribeLoadBalancersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1502,7 +1517,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::DescribeNotificationConfigurationsAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1555,7 +1571,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to be returned with each call.
+    #   The maximum number of items to be returned with each call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::PoliciesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1618,7 +1635,8 @@ module Aws::AutoScaling
     #   The name of the group.
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 100.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1712,7 +1730,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::ScheduledActionsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1773,7 +1792,8 @@ module Aws::AutoScaling
     #   token from a previous call.)
     #
     # @option params [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #
     # @return [Types::TagsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1834,13 +1854,13 @@ module Aws::AutoScaling
 
     # Removes one or more instances from the specified Auto Scaling group.
     #
-    # After the instances are detached, you can manage them independently
-    # from the rest of the Auto Scaling group.
+    # After the instances are detached, you can manage them independent of
+    # the Auto Scaling group.
     #
     # If you do not specify the option to decrement the desired capacity,
     # Auto Scaling launches instances to replace the ones that are detached.
     #
-    # If there is a Classic load balancer attached to the Auto Scaling
+    # If there is a Classic Load Balancer attached to the Auto Scaling
     # group, the instances are deregistered from the load balancer. If there
     # are target groups attached to the Auto Scaling group, the instances
     # are deregistered from the target groups.
@@ -1924,11 +1944,11 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Detaches one or more Classic load balancers from the specified Auto
+    # Detaches one or more Classic Load Balancers from the specified Auto
     # Scaling group.
     #
-    # Note that this operation detaches only Classic load balancers. If you
-    # have Application load balancers, use DetachLoadBalancerTargetGroups
+    # Note that this operation detaches only Classic Load Balancers. If you
+    # have Application Load Balancers, use DetachLoadBalancerTargetGroups
     # instead.
     #
     # When you detach a load balancer, it enters the `Removing` state while
@@ -2057,14 +2077,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Moves the specified instances into `Standby` mode.
+    # Moves the specified instances into the standby state.
     #
-    # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-    # Scaling User Guide*.
+    # For more information, see [Temporarily Removing Instances from Your
+    # Auto Scaling Group][1] in the *Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
     #
     # @option params [Array<String>] :instance_ids
     #   One or more instances to move into `Standby` mode. You must specify at
@@ -2177,14 +2197,14 @@ module Aws::AutoScaling
       req.send_request(options)
     end
 
-    # Moves the specified instances out of `Standby` mode.
+    # Moves the specified instances out of the standby state.
     #
-    # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-    # Scaling User Guide*.
+    # For more information, see [Temporarily Removing Instances from Your
+    # Auto Scaling Group][1] in the *Auto Scaling User Guide*.
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
+    # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-enter-exit-standby.html
     #
     # @option params [Array<String>] :instance_ids
     #   One or more instance IDs. You must specify at least one instance ID.
@@ -2940,16 +2960,15 @@ module Aws::AutoScaling
 
     # Updates the configuration for the specified Auto Scaling group.
     #
+    # The new settings take effect on any scaling activities after this call
+    # returns. Scaling activities that are currently in progress aren't
+    # affected.
+    #
     # To update an Auto Scaling group with a launch configuration with
-    # `InstanceMonitoring` set to `False`, you must first disable the
+    # `InstanceMonitoring` set to `false`, you must first disable the
     # collection of group metrics. Otherwise, you will get an error. If you
     # have previously enabled the collection of group metrics, you can
     # disable it using DisableMetricsCollection.
-    #
-    # The new settings are registered upon the completion of this call. Any
-    # launch configuration settings take effect on any triggers after this
-    # call returns. Scaling activities that are currently in progress
-    # aren't affected.
     #
     # Note the following:
     #
@@ -3094,7 +3113,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

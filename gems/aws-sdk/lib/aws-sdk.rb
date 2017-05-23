@@ -8,6 +8,7 @@ module Aws
   autoload :AppStream, 'aws-sdk-appstream'
   autoload :ApplicationAutoScaling, 'aws-sdk-applicationautoscaling'
   autoload :ApplicationDiscoveryService, 'aws-sdk-applicationdiscoveryservice'
+  autoload :Athena, 'aws-sdk-athena'
   autoload :AutoScaling, 'aws-sdk-autoscaling'
   autoload :Batch, 'aws-sdk-batch'
   autoload :Budgets, 'aws-sdk-budgets'

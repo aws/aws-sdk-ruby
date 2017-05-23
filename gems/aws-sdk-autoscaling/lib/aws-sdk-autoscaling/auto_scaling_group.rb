@@ -843,7 +843,8 @@ module Aws::AutoScaling
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
     # @option options [Integer] :max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     # @return [LoadBalancer::Collection]
     def load_balancers(options = {})
       batches = Enumerator.new do |y|
@@ -986,7 +987,6 @@ module Aws::AutoScaling
           key: t.key,
           resource_id: t.resource_id,
           resource_type: t.resource_type,
-          data: t,
           client: @client
         )
       end

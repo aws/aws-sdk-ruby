@@ -146,10 +146,10 @@ module Aws::KMS
     #
     #   To specify the principal, use the [Amazon Resource Name (ARN)][1] of
     #   an AWS principal. Valid AWS principals include AWS accounts (root),
-    #   IAM users, federated users, and assumed role users. For examples of
-    #   the ARN syntax to use for specifying a principal, see [AWS Identity
-    #   and Access Management (IAM)][2] in the Example ARNs section of the
-    #   *AWS General Reference*.
+    #   IAM users, IAM roles, federated users, and assumed role users. For
+    #   examples of the ARN syntax to use for specifying a principal, see
+    #   [AWS Identity and Access Management (IAM)][2] in the Example ARNs
+    #   section of the *AWS General Reference*.
     #
     #
     #

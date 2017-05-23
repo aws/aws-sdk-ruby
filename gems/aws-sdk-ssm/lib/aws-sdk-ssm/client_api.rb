@@ -221,6 +221,7 @@ module Aws::SSM
     ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
     FailedCreateAssociation = Shapes::StructureShape.new(name: 'FailedCreateAssociation')
     FailedCreateAssociationList = Shapes::ListShape.new(name: 'FailedCreateAssociationList')
+    FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
     Fault = Shapes::StringShape.new(name: 'Fault')
     GetAutomationExecutionRequest = Shapes::StructureShape.new(name: 'GetAutomationExecutionRequest')
     GetAutomationExecutionResult = Shapes::StructureShape.new(name: 'GetAutomationExecutionResult')
@@ -1191,6 +1192,11 @@ module Aws::SSM
 
     FailedCreateAssociationList.member = Shapes::ShapeRef.new(shape: FailedCreateAssociation, location_name: "FailedCreateAssociationEntry")
 
+    FailureDetails.add_member(:failure_stage, Shapes::ShapeRef.new(shape: String, location_name: "FailureStage"))
+    FailureDetails.add_member(:failure_type, Shapes::ShapeRef.new(shape: String, location_name: "FailureType"))
+    FailureDetails.add_member(:details, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Details"))
+    FailureDetails.struct_class = Types::FailureDetails
+
     GetAutomationExecutionRequest.add_member(:automation_execution_id, Shapes::ShapeRef.new(shape: AutomationExecutionId, required: true, location_name: "AutomationExecutionId"))
     GetAutomationExecutionRequest.struct_class = Types::GetAutomationExecutionRequest
 
@@ -1922,6 +1928,7 @@ module Aws::SSM
     StepExecution.add_member(:outputs, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Outputs"))
     StepExecution.add_member(:response, Shapes::ShapeRef.new(shape: String, location_name: "Response"))
     StepExecution.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
+    StepExecution.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
     StepExecution.struct_class = Types::StepExecution
 
     StepExecutionList.member = Shapes::ShapeRef.new(shape: StepExecution)
@@ -1952,6 +1959,8 @@ module Aws::SSM
     UpdateAssociationRequest.add_member(:document_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "DocumentVersion"))
     UpdateAssociationRequest.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpression, location_name: "ScheduleExpression"))
     UpdateAssociationRequest.add_member(:output_location, Shapes::ShapeRef.new(shape: InstanceAssociationOutputLocation, location_name: "OutputLocation"))
+    UpdateAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
+    UpdateAssociationRequest.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
     UpdateAssociationRequest.struct_class = Types::UpdateAssociationRequest
 
     UpdateAssociationResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
@@ -2913,6 +2922,8 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
         o.errors << Shapes::ShapeRef.new(shape: InvalidUpdate)
         o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTarget)
       end)
 
       api.add_operation(:update_association_status, Seahorse::Model::Operation.new.tap do |o|

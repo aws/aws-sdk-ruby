@@ -117,6 +117,8 @@ module Aws::Lightsail
     InstanceNetworking = Shapes::StructureShape.new(name: 'InstanceNetworking')
     InstancePortInfo = Shapes::StructureShape.new(name: 'InstancePortInfo')
     InstancePortInfoList = Shapes::ListShape.new(name: 'InstancePortInfoList')
+    InstancePortState = Shapes::StructureShape.new(name: 'InstancePortState')
+    InstancePortStateList = Shapes::ListShape.new(name: 'InstancePortStateList')
     InstanceSnapshot = Shapes::StructureShape.new(name: 'InstanceSnapshot')
     InstanceSnapshotList = Shapes::ListShape.new(name: 'InstanceSnapshotList')
     InstanceSnapshotState = Shapes::StringShape.new(name: 'InstanceSnapshotState')
@@ -151,8 +153,10 @@ module Aws::Lightsail
     Port = Shapes::IntegerShape.new(name: 'Port')
     PortAccessType = Shapes::StringShape.new(name: 'PortAccessType')
     PortInfo = Shapes::StructureShape.new(name: 'PortInfo')
+    PortInfoList = Shapes::ListShape.new(name: 'PortInfoList')
     PortState = Shapes::StringShape.new(name: 'PortState')
-    PortStateList = Shapes::ListShape.new(name: 'PortStateList')
+    PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
+    PutInstancePublicPortsResult = Shapes::StructureShape.new(name: 'PutInstancePublicPortsResult')
     RebootInstanceRequest = Shapes::StructureShape.new(name: 'RebootInstanceRequest')
     RebootInstanceResult = Shapes::StructureShape.new(name: 'RebootInstanceResult')
     Region = Shapes::StructureShape.new(name: 'Region')
@@ -433,7 +437,7 @@ module Aws::Lightsail
     GetInstancePortStatesRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     GetInstancePortStatesRequest.struct_class = Types::GetInstancePortStatesRequest
 
-    GetInstancePortStatesResult.add_member(:port_states, Shapes::ShapeRef.new(shape: PortStateList, location_name: "portStates"))
+    GetInstancePortStatesResult.add_member(:port_states, Shapes::ShapeRef.new(shape: InstancePortStateList, location_name: "portStates"))
     GetInstancePortStatesResult.struct_class = Types::GetInstancePortStatesResult
 
     GetInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
@@ -580,6 +584,14 @@ module Aws::Lightsail
 
     InstancePortInfoList.member = Shapes::ShapeRef.new(shape: InstancePortInfo)
 
+    InstancePortState.add_member(:from_port, Shapes::ShapeRef.new(shape: Port, location_name: "fromPort"))
+    InstancePortState.add_member(:to_port, Shapes::ShapeRef.new(shape: Port, location_name: "toPort"))
+    InstancePortState.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
+    InstancePortState.add_member(:state, Shapes::ShapeRef.new(shape: PortState, location_name: "state"))
+    InstancePortState.struct_class = Types::InstancePortState
+
+    InstancePortStateList.member = Shapes::ShapeRef.new(shape: InstancePortState)
+
     InstanceSnapshot.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     InstanceSnapshot.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "arn"))
     InstanceSnapshot.add_member(:support_code, Shapes::ShapeRef.new(shape: string, location_name: "supportCode"))
@@ -666,7 +678,14 @@ module Aws::Lightsail
     PortInfo.add_member(:protocol, Shapes::ShapeRef.new(shape: NetworkProtocol, location_name: "protocol"))
     PortInfo.struct_class = Types::PortInfo
 
-    PortStateList.member = Shapes::ShapeRef.new(shape: PortState)
+    PortInfoList.member = Shapes::ShapeRef.new(shape: PortInfo)
+
+    PutInstancePublicPortsRequest.add_member(:port_infos, Shapes::ShapeRef.new(shape: PortInfoList, required: true, location_name: "portInfos"))
+    PutInstancePublicPortsRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    PutInstancePublicPortsRequest.struct_class = Types::PutInstancePublicPortsRequest
+
+    PutInstancePublicPortsResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
+    PutInstancePublicPortsResult.struct_class = Types::PutInstancePublicPortsResult
 
     RebootInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
     RebootInstanceRequest.struct_class = Types::RebootInstanceRequest
@@ -1353,6 +1372,21 @@ module Aws::Lightsail
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: PeerVpcRequest)
         o.output = Shapes::ShapeRef.new(shape: PeerVpcResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:put_instance_public_ports, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutInstancePublicPorts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutInstancePublicPortsRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutInstancePublicPortsResult)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

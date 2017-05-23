@@ -5,8 +5,8 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-require 'aws-sdk-core'
 require 'aws-sigv4'
+require 'aws-sdk-core'
 
 require_relative 'aws-sdk-ec2/types'
 require_relative 'aws-sdk-ec2/client_api'
@@ -65,6 +65,6 @@ require_relative 'aws-sdk-ec2/customizations'
 # @service
 module Aws::EC2
 
-  GEM_VERSION = '1.0.0.rc6'
+  GEM_VERSION = '1.0.0.rc7'
 
 end

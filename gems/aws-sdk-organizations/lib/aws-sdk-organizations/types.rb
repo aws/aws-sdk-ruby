@@ -70,6 +70,17 @@ module Aws::Organizations
     #   [1]: http://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns
     #   @return [String]
     #
+    # @!attribute [rw] email
+    #   The email address associated with the AWS account.
+    #
+    #   The [regex pattern][1] for this parameter is a string of characters
+    #   that represents a standard Internet email address.
+    #
+    #
+    #
+    #   [1]: http://wikipedia.org/wiki/regex
+    #   @return [String]
+    #
     # @!attribute [rw] name
     #   The friendly name of the account.
     #
@@ -98,6 +109,7 @@ module Aws::Organizations
     class Account < Struct.new(
       :id,
       :arn,
+      :email,
       :name,
       :status,
       :joined_method,
@@ -286,6 +298,10 @@ module Aws::Organizations
     #   [Activating Access to the Billing and Cost Management Console][1] in
     #   the *AWS Billing and Cost Management User Guide*.
     #
+    #   If you do not specify this parameter, the value defaults to ALLOW,
+    #   and IAM users and roles with the required permissions can access
+    #   billing information for the new account.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
@@ -366,6 +382,23 @@ module Aws::Organizations
     #
     # @!attribute [rw] failure_reason
     #   If the request failed, a description of the reason for the failure.
+    #
+    #   * ACCOUNT\_LIMIT\_EXCEEDED: The account could not be created because
+    #     you have reached the limit on the number of accounts in your
+    #     organization.
+    #
+    #   * EMAIL\_ALREADY\_EXISTS: The account could not be created because
+    #     another AWS account with that email address already exists.
+    #
+    #   * INVALID\_ADDRESS: The account could not be created because the
+    #     address you provided is not valid.
+    #
+    #   * INVALID\_EMAIL: The account could not be created because the email
+    #     address you provided is not valid.
+    #
+    #   * INTERNAL\_FAILURE: The account could not be created because of an
+    #     internal failure. Try again later. If the problem persists,
+    #     contact Customer Support.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccountStatus AWS API Documentation

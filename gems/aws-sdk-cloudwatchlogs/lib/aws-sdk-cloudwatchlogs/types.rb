@@ -459,6 +459,13 @@ module Aws::CloudWatchLogs
     #
     #   If you order the results by event time, you cannot specify the
     #   `logStreamNamePrefix` parameter.
+    #
+    #   lastEventTimestamp represents the time of the most recent log event
+    #   in the log stream in CloudWatch Logs. This number is expressed as
+    #   the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   lastEventTimeStamp updates on an eventual consistency basis. It
+    #   typically updates in less than an hour from ingestion, but may take
+    #   longer in some rare situations.
     #   @return [String]
     #
     # @!attribute [rw] descending
@@ -656,7 +663,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The creation time of the destination.
+    #   The creation time of the destination, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/Destination AWS API Documentation
@@ -732,11 +740,13 @@ module Aws::CloudWatchLogs
     # Represents the status of an export task.
     #
     # @!attribute [rw] creation_time
-    #   The creation time of the export task.
+    #   The creation time of the export task, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] completion_time
-    #   The completion time of the export task.
+    #   The completion time of the export task, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ExportTaskExecutionInfo AWS API Documentation
@@ -876,7 +886,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] ingestion_time
-    #   The time the event was ingested.
+    #   The time the event was ingested, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] event_id
@@ -1044,7 +1055,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The creation time of the log group.
+    #   The creation time of the log group, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] retention_in_days
@@ -1085,7 +1097,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The creation time of the stream.
+    #   The creation time of the stream, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] first_event_timestamp
@@ -1094,12 +1107,16 @@ module Aws::CloudWatchLogs
     #   @return [Integer]
     #
     # @!attribute [rw] last_event_timestamp
-    #   The time of the last event, expressed as the number of milliseconds
-    #   since Jan 1, 1970 00:00:00 UTC.
+    #   the time of the most recent log event in the log stream in
+    #   CloudWatch Logs. This number is expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC. lastEventTime updates
+    #   on an eventual consistency basis. It typically updates in less than
+    #   an hour from ingestion, but may take longer in some rare situations.
     #   @return [Integer]
     #
     # @!attribute [rw] last_ingestion_time
-    #   The ingestion time.
+    #   The ingestion time, expressed as the number of milliseconds since
+    #   Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] upload_sequence_token
@@ -1148,7 +1165,8 @@ module Aws::CloudWatchLogs
     #   @return [Array<Types::MetricTransformation>]
     #
     # @!attribute [rw] creation_time
-    #   The creation time of the metric filter.
+    #   The creation time of the metric filter, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @!attribute [rw] log_group_name
@@ -1242,7 +1260,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] ingestion_time
-    #   The time the event was ingested.
+    #   The time the event was ingested, expressed as the number of
+    #   milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/OutputLogEvent AWS API Documentation
@@ -1467,7 +1486,11 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] filter_name
-    #   A name for the subscription filter.
+    #   A name for the subscription filter. If you are updating an existing
+    #   filter, you must specify the correct name in `filterName`.
+    #   Otherwise, the call will fail because you cannot associate a second
+    #   filter with a log group. To find the name of the filter currently
+    #   associated with a log group, use DescribeSubscriptionFilters.
     #   @return [String]
     #
     # @!attribute [rw] filter_pattern
@@ -1588,7 +1611,8 @@ module Aws::CloudWatchLogs
     #   @return [String]
     #
     # @!attribute [rw] creation_time
-    #   The creation time of the subscription filter.
+    #   The creation time of the subscription filter, expressed as the
+    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/SubscriptionFilter AWS API Documentation

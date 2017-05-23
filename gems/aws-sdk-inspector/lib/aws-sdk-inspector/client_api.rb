@@ -36,6 +36,7 @@ module Aws::Inspector
     AssessmentRunAgentList = Shapes::ListShape.new(name: 'AssessmentRunAgentList')
     AssessmentRunDuration = Shapes::IntegerShape.new(name: 'AssessmentRunDuration')
     AssessmentRunFilter = Shapes::StructureShape.new(name: 'AssessmentRunFilter')
+    AssessmentRunFindingCounts = Shapes::MapShape.new(name: 'AssessmentRunFindingCounts')
     AssessmentRunInProgressArnList = Shapes::ListShape.new(name: 'AssessmentRunInProgressArnList')
     AssessmentRunInProgressException = Shapes::StructureShape.new(name: 'AssessmentRunInProgressException')
     AssessmentRunList = Shapes::ListShape.new(name: 'AssessmentRunList')
@@ -97,9 +98,12 @@ module Aws::Inspector
     FailedItems = Shapes::MapShape.new(name: 'FailedItems')
     FilterRulesPackageArnList = Shapes::ListShape.new(name: 'FilterRulesPackageArnList')
     Finding = Shapes::StructureShape.new(name: 'Finding')
+    FindingCount = Shapes::IntegerShape.new(name: 'FindingCount')
     FindingFilter = Shapes::StructureShape.new(name: 'FindingFilter')
     FindingId = Shapes::StringShape.new(name: 'FindingId')
     FindingList = Shapes::ListShape.new(name: 'FindingList')
+    GetAssessmentReportRequest = Shapes::StructureShape.new(name: 'GetAssessmentReportRequest')
+    GetAssessmentReportResponse = Shapes::StructureShape.new(name: 'GetAssessmentReportResponse')
     GetTelemetryMetadataRequest = Shapes::StructureShape.new(name: 'GetTelemetryMetadataRequest')
     GetTelemetryMetadataResponse = Shapes::StructureShape.new(name: 'GetTelemetryMetadataResponse')
     Hostname = Shapes::StringShape.new(name: 'Hostname')
@@ -152,6 +156,9 @@ module Aws::Inspector
     RegisterCrossAccountAccessRoleRequest = Shapes::StructureShape.new(name: 'RegisterCrossAccountAccessRoleRequest')
     RemoveAttributesFromFindingsRequest = Shapes::StructureShape.new(name: 'RemoveAttributesFromFindingsRequest')
     RemoveAttributesFromFindingsResponse = Shapes::StructureShape.new(name: 'RemoveAttributesFromFindingsResponse')
+    ReportFileFormat = Shapes::StringShape.new(name: 'ReportFileFormat')
+    ReportStatus = Shapes::StringShape.new(name: 'ReportStatus')
+    ReportType = Shapes::StringShape.new(name: 'ReportType')
     ResourceGroup = Shapes::StructureShape.new(name: 'ResourceGroup')
     ResourceGroupList = Shapes::ListShape.new(name: 'ResourceGroupList')
     ResourceGroupTag = Shapes::StructureShape.new(name: 'ResourceGroupTag')
@@ -181,7 +188,9 @@ module Aws::Inspector
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampRange = Shapes::StructureShape.new(name: 'TimestampRange')
     UnsubscribeFromEventRequest = Shapes::StructureShape.new(name: 'UnsubscribeFromEventRequest')
+    UnsupportedFeatureException = Shapes::StructureShape.new(name: 'UnsupportedFeatureException')
     UpdateAssessmentTargetRequest = Shapes::StructureShape.new(name: 'UpdateAssessmentTargetRequest')
+    Url = Shapes::StringShape.new(name: 'Url')
     UserAttributeKeyList = Shapes::ListShape.new(name: 'UserAttributeKeyList')
     UserAttributeList = Shapes::ListShape.new(name: 'UserAttributeList')
     Version = Shapes::StringShape.new(name: 'Version')
@@ -233,6 +242,7 @@ module Aws::Inspector
     AssessmentRun.add_member(:data_collected, Shapes::ShapeRef.new(shape: Bool, required: true, location_name: "dataCollected"))
     AssessmentRun.add_member(:state_changes, Shapes::ShapeRef.new(shape: AssessmentRunStateChangeList, required: true, location_name: "stateChanges"))
     AssessmentRun.add_member(:notifications, Shapes::ShapeRef.new(shape: AssessmentRunNotificationList, required: true, location_name: "notifications"))
+    AssessmentRun.add_member(:finding_counts, Shapes::ShapeRef.new(shape: AssessmentRunFindingCounts, required: true, location_name: "findingCounts"))
     AssessmentRun.struct_class = Types::AssessmentRun
 
     AssessmentRunAgent.add_member(:agent_id, Shapes::ShapeRef.new(shape: AgentId, required: true, location_name: "agentId"))
@@ -254,6 +264,9 @@ module Aws::Inspector
     AssessmentRunFilter.add_member(:completion_time_range, Shapes::ShapeRef.new(shape: TimestampRange, location_name: "completionTimeRange"))
     AssessmentRunFilter.add_member(:state_change_time_range, Shapes::ShapeRef.new(shape: TimestampRange, location_name: "stateChangeTimeRange"))
     AssessmentRunFilter.struct_class = Types::AssessmentRunFilter
+
+    AssessmentRunFindingCounts.key = Shapes::ShapeRef.new(shape: Severity)
+    AssessmentRunFindingCounts.value = Shapes::ShapeRef.new(shape: FindingCount)
 
     AssessmentRunInProgressArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
@@ -456,6 +469,15 @@ module Aws::Inspector
     FindingFilter.struct_class = Types::FindingFilter
 
     FindingList.member = Shapes::ShapeRef.new(shape: Finding)
+
+    GetAssessmentReportRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
+    GetAssessmentReportRequest.add_member(:report_file_format, Shapes::ShapeRef.new(shape: ReportFileFormat, required: true, location_name: "reportFileFormat"))
+    GetAssessmentReportRequest.add_member(:report_type, Shapes::ShapeRef.new(shape: ReportType, required: true, location_name: "reportType"))
+    GetAssessmentReportRequest.struct_class = Types::GetAssessmentReportRequest
+
+    GetAssessmentReportResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReportStatus, required: true, location_name: "status"))
+    GetAssessmentReportResponse.add_member(:url, Shapes::ShapeRef.new(shape: Url, location_name: "url"))
+    GetAssessmentReportResponse.struct_class = Types::GetAssessmentReportResponse
 
     GetTelemetryMetadataRequest.add_member(:assessment_run_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "assessmentRunArn"))
     GetTelemetryMetadataRequest.struct_class = Types::GetTelemetryMetadataRequest
@@ -819,6 +841,20 @@ module Aws::Inspector
         o.output = Shapes::ShapeRef.new(shape: DescribeRulesPackagesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:get_assessment_report, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAssessmentReport"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetAssessmentReportRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAssessmentReportResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+        o.errors << Shapes::ShapeRef.new(shape: AssessmentRunInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
       end)
 
       api.add_operation(:get_telemetry_metadata, Seahorse::Model::Operation.new.tap do |o|

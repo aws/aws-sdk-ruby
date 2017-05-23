@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc8 (2017-05-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-athena` gem.
+
 3.0.0.rc7 (2017-05-05)
 ------------------
 

@@ -321,7 +321,7 @@ module Aws::LexModelBuildingService
     #   @return [String]
     #
     # @!attribute [rw] checksum
-    #   Checksum identifying the version of the boat that was created.
+    #   Checksum identifying the version of the bot that was created.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -638,20 +638,40 @@ module Aws::LexModelBuildingService
     #
     #       {
     #         name: "BotName", # required
-    #         version: "Version",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the bot. The name is case sensitive.
     #   @return [String]
     #
-    # @!attribute [rw] version
-    #   The version of the bot.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotRequest AWS API Documentation
     #
     class DeleteBotRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBotVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "BotName", # required
+    #         version: "NumericalVersion", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the bot.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the bot to delete. You cannot delete the `$LATEST`
+    #   version of the bot. To delete the `$LATEST` version, use the
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteBotVersionRequest AWS API Documentation
+    #
+    class DeleteBotVersionRequest < Struct.new(
       :name,
       :version)
       include Aws::Structure
@@ -662,20 +682,40 @@ module Aws::LexModelBuildingService
     #
     #       {
     #         name: "IntentName", # required
-    #         version: "Version",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the intent. The name is case sensitive.
     #   @return [String]
     #
-    # @!attribute [rw] version
-    #   The version of the intent.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentRequest AWS API Documentation
     #
     class DeleteIntentRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteIntentVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "IntentName", # required
+    #         version: "NumericalVersion", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the intent to delete. You cannot delete the `$LATEST`
+    #   version of the intent. To delete the `$LATEST` version, use the
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteIntentVersionRequest AWS API Documentation
+    #
+    class DeleteIntentVersionRequest < Struct.new(
       :name,
       :version)
       include Aws::Structure
@@ -686,20 +726,40 @@ module Aws::LexModelBuildingService
     #
     #       {
     #         name: "SlotTypeName", # required
-    #         version: "Version",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the slot type. The name is case sensitive.
     #   @return [String]
     #
-    # @!attribute [rw] version
-    #   The version of the slot type.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeRequest AWS API Documentation
     #
     class DeleteSlotTypeRequest < Struct.new(
+      :name)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteSlotTypeVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "SlotTypeName", # required
+    #         version: "NumericalVersion", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the slot type.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the slot type to delete. You cannot delete the
+    #   `$LATEST` version of the slot type. To delete the `$LATEST` version,
+    #   use the operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/DeleteSlotTypeVersionRequest AWS API Documentation
+    #
+    class DeleteSlotTypeVersionRequest < Struct.new(
       :name,
       :version)
       include Aws::Structure
@@ -3080,12 +3140,12 @@ module Aws::LexModelBuildingService
     #   @return [Types::Prompt]
     #
     # @!attribute [rw] priority
-    #   Specifies the order in which to elicit slot values from the user.
-    #   For example, if the intent has two slots with priorities 1 and 2,
-    #   AWS Amazon Lex first elicits a value for the slot with priority 1.
+    #   Directs Lex the order in which to elicit this slot value from the
+    #   user. For example, if the intent has two slots with priorities 1 and
+    #   2, AWS Lex first elicits a value for the slot with priority 1.
     #
-    #   If multiple slots share the same priority, the order in which Amazon
-    #   Lex elicits values is arbitrary.
+    #   If multiple slots share the same priority, the order in which Lex
+    #   elicits values is arbitrary.
     #   @return [Integer]
     #
     # @!attribute [rw] sample_utterances

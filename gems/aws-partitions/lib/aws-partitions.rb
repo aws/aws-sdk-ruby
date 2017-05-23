@@ -226,6 +226,7 @@ module Aws
             'AppStream' => 'appstream2',
             'ApplicationAutoScaling' => 'application-autoscaling',
             'ApplicationDiscoveryService' => 'discovery',
+            'Athena' => 'athena',
             'AutoScaling' => 'autoscaling',
             'Batch' => 'batch',
             'Budgets' => 'budgets',

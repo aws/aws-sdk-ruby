@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.0.0.rc12 (2017-05-23)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
 * Feature - Update throttling error pool of retry
 
 * Feature - Update `User-Agent` format

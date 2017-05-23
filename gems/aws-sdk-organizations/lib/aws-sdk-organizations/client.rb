@@ -402,13 +402,14 @@ module Aws::Organizations
     # organization that contains an account that is created with this
     # operation.
     #
-    # <note markdown="1"> When you create a member account with this operation, the account is
-    # created with the **IAM User and Role Access to Billing Information**
-    # switch enabled. This allows IAM users and roles that are granted
-    # appropriate permissions to view billing information. If this is
-    # disabled, then only the account root user can access billing
-    # information. For information about how to disable this for an account,
-    # see [Granting Access to Your Billing Information and Tools][2].
+    # <note markdown="1"> When you create a member account with this operation, you can choose
+    # whether to create the account with the **IAM User and Role Access to
+    # Billing Information** switch enabled. If you enable it, IAM users and
+    # roles that have appropriate permissions can view billing information
+    # for the account. If you disable this, then only the account root user
+    # can access billing information. For information about how to disable
+    # this for an account, see [Granting Access to Your Billing Information
+    # and Tools][2].
     #
     #  </note>
     #
@@ -465,6 +466,10 @@ module Aws::Organizations
     #   the Billing and Cost Management Console][1] in the *AWS Billing and
     #   Cost Management User Guide*.
     #
+    #   If you do not specify this parameter, the value defaults to ALLOW, and
+    #   IAM users and roles with the required permissions can access billing
+    #   information for the new account.
+    #
     #
     #
     #   [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate
@@ -490,7 +495,7 @@ module Aws::Organizations
     #   resp.create_account_status.requested_timestamp #=> Time
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "INTERNAL_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/CreateAccount AWS API Documentation
     #
@@ -895,6 +900,7 @@ module Aws::Organizations
     #
     #   resp.account.id #=> String
     #   resp.account.arn #=> String
+    #   resp.account.email #=> String
     #   resp.account.name #=> String
     #   resp.account.status #=> String, one of "ACTIVE", "SUSPENDED"
     #   resp.account.joined_method #=> String, one of "INVITED", "CREATED"
@@ -946,7 +952,7 @@ module Aws::Organizations
     #   resp.create_account_status.requested_timestamp #=> Time
     #   resp.create_account_status.completed_timestamp #=> Time
     #   resp.create_account_status.account_id #=> String
-    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INTERNAL_FAILURE"
+    #   resp.create_account_status.failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "INTERNAL_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/DescribeCreateAccountStatus AWS API Documentation
     #
@@ -1512,6 +1518,7 @@ module Aws::Organizations
     #   resp.accounts #=> Array
     #   resp.accounts[0].id #=> String
     #   resp.accounts[0].arn #=> String
+    #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
@@ -1574,6 +1581,7 @@ module Aws::Organizations
     #   resp.accounts #=> Array
     #   resp.accounts[0].id #=> String
     #   resp.accounts[0].arn #=> String
+    #   resp.accounts[0].email #=> String
     #   resp.accounts[0].name #=> String
     #   resp.accounts[0].status #=> String, one of "ACTIVE", "SUSPENDED"
     #   resp.accounts[0].joined_method #=> String, one of "INVITED", "CREATED"
@@ -1714,7 +1722,7 @@ module Aws::Organizations
     #   resp.create_account_statuses[0].requested_timestamp #=> Time
     #   resp.create_account_statuses[0].completed_timestamp #=> Time
     #   resp.create_account_statuses[0].account_id #=> String
-    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INTERNAL_FAILURE"
+    #   resp.create_account_statuses[0].failure_reason #=> String, one of "ACCOUNT_LIMIT_EXCEEDED", "EMAIL_ALREADY_EXISTS", "INVALID_ADDRESS", "INVALID_EMAIL", "INTERNAL_FAILURE"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/ListCreateAccountStatus AWS API Documentation
@@ -2551,7 +2559,7 @@ module Aws::Organizations
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-organizations'
-      context[:gem_version] = '1.0.0.rc4'
+      context[:gem_version] = '1.0.0.rc5'
       Seahorse::Client::Request.new(handlers, context)
     end
 

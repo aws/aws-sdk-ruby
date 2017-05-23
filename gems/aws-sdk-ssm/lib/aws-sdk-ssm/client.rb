@@ -156,15 +156,17 @@ module Aws::SSM
     # @!group API Operations
 
     # Adds or overwrites one or more tags for the specified resource. Tags
-    # are metadata that you assign to your managed instances. Tags enable
-    # you to categorize your managed instances in different ways, for
-    # example, by purpose, owner, or environment. Each tag consists of a key
-    # and an optional value, both of which you define. For example, you
-    # could define a set of tags for your account's managed instances that
-    # helps you track each instance's owner and stack level. For example:
-    # Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
-    # Value=Production, Pre-Production, or Test. Each resource can have a
-    # maximum of 10 tags.
+    # are metadata that you assign to your managed instances, Maintenance
+    # Windows, or Parameter Store parameters. Tags enable you to categorize
+    # your resources in different ways, for example, by purpose, owner, or
+    # environment. Each tag consists of a key and an optional value, both of
+    # which you define. For example, you could define a set of tags for your
+    # account's managed instances that helps you track each instance's
+    # owner and stack level. For example: Key=Owner and Value=DbAdmin,
+    # SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production,
+    # or Test.
+    #
+    # Each resource can have a maximum of 10 tags.
     #
     # We recommend that you devise a set of tag keys that meets your needs
     # for each resource type. Using a consistent set of tag keys makes it
@@ -257,7 +259,7 @@ module Aws::SSM
     # [1]: http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-managedinstances.html
     #
     # @option params [String] :description
-    #   A user-defined description of the resource that you want to register
+    #   A userdefined description of the resource that you want to register
     #   with Amazon EC2.
     #
     # @option params [String] :default_instance_name
@@ -331,26 +333,15 @@ module Aws::SSM
     #   The parameters for the documents runtime configuration.
     #
     # @option params [Array<Types::Target>] :targets
-    #   The targets (either instances or tags) for the association. Instances
-    #   are specified using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+    #   The targets (either instances or tags) for the association.
     #
     # @option params [String] :schedule_expression
     #   A cron expression when the association will be applied to the
-    #   target(s). Supported expressions are every half, 1, 2, 4, 8 or 12
-    #   hour(s); every specified day and time of the week. For example: cron(0
-    #   0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 *
-    #   ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run
-    #   every Sunday at 10 a.m.
+    #   target(s).
     #
     # @option params [Types::InstanceAssociationOutputLocation] :output_location
     #   An Amazon S3 bucket where you want to store the output details of the
-    #   request. For example:
-    #
-    #   `"\{ "S3Location": \{ "OutputS3Region": "<region>",
-    #   "OutputS3BucketName": "bucket name", "OutputS3KeyPrefix":
-    #   "folder name" \} \}"`
+    #   request.
     #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -659,7 +650,7 @@ module Aws::SSM
     #   A description of the patch baseline.
     #
     # @option params [String] :client_token
-    #   Caller-provided idempotency token.
+    #   User-provided idempotency token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -884,7 +875,7 @@ module Aws::SSM
 
     # Removes the server or virtual machine from the list of registered
     # servers. You can reregister the instance again at any time. If you
-    # don’t plan to use Run Command on the server, we suggest uninstalling
+    # don't plan to use Run Command on the server, we suggest uninstalling
     # the SSM Agent first.
     #
     # @option params [required, String] :instance_id
@@ -1301,8 +1292,8 @@ module Aws::SSM
 
     # Describes the permissions for a Systems Manager document. If you
     # created the document, you are the owner. If a document is shared, it
-    # can either be shared privately (by specifying a user’s AWS account ID)
-    # or publicly (*All*).
+    # can either be shared privately (by specifying a user's AWS account
+    # ID) or publicly (*All*).
     #
     # @option params [required, String] :name
     #   The name of the document for which you are the owner.
@@ -1633,11 +1624,11 @@ module Aws::SSM
     # @option params [Array<Types::InstancePatchStateFilter>] :filters
     #   Each entry in the array is a structure containing:
     #
-    #   Key (string 1 ≤ length ≤ 200)
+    #   Key (string between 1 and 200 characters)
     #
     #   Values (array containing a single string)
     #
-    #   Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)
+    #   Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1704,9 +1695,9 @@ module Aws::SSM
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Each entry in the array is a structure containing:
     #
-    #   Key (string, 1 ≤ length ≤ 128)
+    #   Key (string, between 1 and 128 characters)
     #
-    #   Values (array of strings 1 ≤ length ≤ 256)
+    #   Values (array of strings, each string between 1 and 256 characters)
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -1896,12 +1887,12 @@ module Aws::SSM
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Each entry in the array is a structure containing:
     #
-    #   Key (string, 1 ≤ length ≤ 128)
+    #   Key (string, between 1 and 128 characters)
     #
-    #   Values (array of strings 1 ≤ length ≤ 256)
+    #   Values (array of strings, each string is between 1 and 256 characters)
     #
-    #   The supported Keys are `ExecutedBefore` and `ExecutedAfter` with the
-    #   value being a date/time string such as 2016-11-04T05:00:00Z.
+    #   The supported Keys are ExecutedBefore and ExecutedAfter with the value
+    #   being a date/time string such as 2016-11-04T05:00:00Z.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -1958,8 +1949,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters that can be used to narrow down the scope of the
-    #   returned window targets. The supported filter keys are `Type`,
-    #   `WindowTargetId` and `OwnerInformation`.
+    #   returned window targets. The supported filter keys are Type,
+    #   WindowTargetId and OwnerInformation.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -2018,8 +2009,8 @@ module Aws::SSM
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned tasks.
-    #   The supported filter keys are `WindowTaskId`, `TaskArn`, `Priority`,
-    #   and `TaskType`.
+    #   The supported filter keys are WindowTaskId, TaskArn, Priority, and
+    #   TaskType.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -2085,7 +2076,7 @@ module Aws::SSM
     #
     # @option params [Array<Types::MaintenanceWindowFilter>] :filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are `Name` and `Enabled`.
+    #   Maintenance Windows. Supported filter keys are Name and Enabled.
     #
     # @option params [Integer] :max_results
     #   The maximum number of items to return for this call. The call also
@@ -2191,9 +2182,10 @@ module Aws::SSM
     # @option params [Array<Types::PatchOrchestratorFilter>] :filters
     #   Each element in the array is a structure containing:
     #
-    #   Key: (string, “NAME\_PREFIX” or “OWNER”)
+    #   Key: (string, "NAME\_PREFIX" or "OWNER")
     #
-    #   Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)
+    #   Value: (array of strings, exactly 1 entry, between 1 and 255
+    #   characters)
     #
     # @option params [Integer] :max_results
     #   The maximum number of patch baselines to return (per page).
@@ -2321,7 +2313,7 @@ module Aws::SSM
     #
     # @option params [required, String] :automation_execution_id
     #   The unique identifier for an existing automation execution to examine.
-    #   The execution ID is returned by `StartAutomationExecution` when the
+    #   The execution ID is returned by StartAutomationExecution when the
     #   execution of an Automation document is initiated.
     #
     # @return [Types::GetAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2356,6 +2348,11 @@ module Aws::SSM
     #   resp.automation_execution.step_executions[0].outputs["AutomationParameterKey"][0] #=> String
     #   resp.automation_execution.step_executions[0].response #=> String
     #   resp.automation_execution.step_executions[0].failure_message #=> String
+    #   resp.automation_execution.step_executions[0].failure_details.failure_stage #=> String
+    #   resp.automation_execution.step_executions[0].failure_details.failure_type #=> String
+    #   resp.automation_execution.step_executions[0].failure_details.details #=> Hash
+    #   resp.automation_execution.step_executions[0].failure_details.details["AutomationParameterKey"] #=> Array
+    #   resp.automation_execution.step_executions[0].failure_details.details["AutomationParameterKey"][0] #=> String
     #   resp.automation_execution.parameters #=> Hash
     #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
     #   resp.automation_execution.parameters["AutomationParameterKey"][0] #=> String
@@ -3786,14 +3783,16 @@ module Aws::SSM
     # Executes commands on one or more remote instances.
     #
     # @option params [Array<String>] :instance_ids
-    #   Required. The instance IDs where the command should execute. You can
-    #   specify a maximum of 50 IDs.
+    #   The instance IDs where the command should execute. You can specify a
+    #   maximum of 50 IDs. If you prefer not to list individual instance IDs,
+    #   you can instead send commands to a fleet of instances using the
+    #   Targets parameter, which accepts EC2 tags.
     #
     # @option params [Array<Types::Target>] :targets
     #   (Optional) An array of search criteria that targets instances using a
-    #   `Key`,`Value` combination that you specify. `Targets` is required if
-    #   you don't provide one or more instance IDs in the call. For more
-    #   information about how to use `Targets`, see [Executing a Command Using
+    #   Key,Value combination that you specify. Targets is required if you
+    #   don't provide one or more instance IDs in the call. For more
+    #   information about how to use Targets, see [Executing a Command Using
     #   Systems Manager Run Command][1].
     #
     #
@@ -3846,10 +3845,10 @@ module Aws::SSM
     #
     # @option params [String] :max_concurrency
     #   (Optional) The maximum number of instances that are allowed to execute
-    #   the command at the same time. You can specify a number such as “10” or
-    #   a percentage such as “10%”. The default value is 50. For more
-    #   information about how to use `MaxConcurrency`, see [Executing a
-    #   Command Using Systems Manager Run Command][1].
+    #   the command at the same time. You can specify a number such as 10 or a
+    #   percentage such as 10%. The default value is 50. For more information
+    #   about how to use MaxConcurrency, see [Executing a Command Using
+    #   Systems Manager Run Command][1].
     #
     #
     #
@@ -3857,11 +3856,11 @@ module Aws::SSM
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed without the command failing. When
-    #   the command fails one more time beyond the value of `MaxErrors`, the
+    #   the command fails one more time beyond the value of MaxErrors, the
     #   systems stops sending the command to additional targets. You can
-    #   specify a number like “10” or a percentage like “10%”. The default
-    #   value is 50. For more information about how to use `MaxErrors`, see
-    #   [Executing a Command Using Systems Manager Run Command][1].
+    #   specify a number like 10 or a percentage like 10%. The default value
+    #   is 50. For more information about how to use MaxErrors, see [Executing
+    #   a Command Using Systems Manager Run Command][1].
     #
     #
     #
@@ -4026,19 +4025,17 @@ module Aws::SSM
     #
     # @option params [String] :schedule_expression
     #   The cron expression used to schedule the association that you want to
-    #   update. Supported expressions are every half, 1, 2, 4, 8 or 12
-    #   hour(s); every specified day and time of the week. For example: cron(0
-    #   0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 *
-    #   ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run
-    #   every Sunday at 10 a.m.
+    #   update.
     #
     # @option params [Types::InstanceAssociationOutputLocation] :output_location
     #   An Amazon S3 bucket where you want to store the results of this
     #   request.
     #
-    #   `"\{ "S3Location": \{ "OutputS3Region": "<region>",
-    #   "OutputS3BucketName": "bucket name", "OutputS3KeyPrefix":
-    #   "folder name" \} \}"`
+    # @option params [String] :name
+    #   The name of the association document.
+    #
+    # @option params [Array<Types::Target>] :targets
+    #   The targets of the association.
     #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4060,6 +4057,13 @@ module Aws::SSM
     #         output_s3_key_prefix: "S3KeyPrefix",
     #       },
     #     },
+    #     name: "DocumentName",
+    #     targets: [
+    #       {
+    #         key: "TargetKey",
+    #         values: ["TargetValue"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4467,7 +4471,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

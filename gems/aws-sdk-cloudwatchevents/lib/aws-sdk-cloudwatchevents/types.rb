@@ -53,7 +53,12 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression
@@ -167,7 +172,8 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] input_paths_map
     #   Map of JSON paths to be extracted from the event. These are
-    #   key-value pairs, where each value is a JSON path.
+    #   key-value pairs, where each value is a JSON path. You must use JSON
+    #   dot notation, not bracket notation.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] input_template
@@ -503,7 +509,12 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -618,7 +629,9 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code that indicates why the target addition failed.
+    #   The error code that indicates why the target addition failed. If the
+    #   value is `ConcurrentModificationException`, too many requests were
+    #   made at the same time.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -681,7 +694,9 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] error_code
-    #   The error code that indicates why the target removal failed.
+    #   The error code that indicates why the target removal failed. If the
+    #   value is `ConcurrentModificationException`, too many requests were
+    #   made at the same time.
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -708,7 +723,12 @@ module Aws::CloudWatchEvents
     #   @return [String]
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern of the rule.
+    #   The event pattern of the rule. For more information, see [Events and
+    #   Event Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -852,7 +872,8 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] input
     #   Valid JSON text passed to the target. In this case, nothing from the
-    #   event itself is passed to the target. For more information, see [The
+    #   event itself is passed to the target. You must use JSON dot
+    #   notation, not bracket notation. For more information, see [The
     #   JavaScript Object Notation (JSON) Data Interchange Format][1].
     #
     #
@@ -862,8 +883,9 @@ module Aws::CloudWatchEvents
     #
     # @!attribute [rw] input_path
     #   The value of the JSONPath that is used for extracting part of the
-    #   matched event when passing it to the target. For more information
-    #   about JSON paths, see [JSONPath][1].
+    #   matched event when passing it to the target. You must use JSON dot
+    #   notation, not bracket notation. For more information about JSON
+    #   paths, see [JSONPath][1].
     #
     #
     #
@@ -923,7 +945,12 @@ module Aws::CloudWatchEvents
     #       }
     #
     # @!attribute [rw] event_pattern
-    #   The event pattern.
+    #   The event pattern. For more information, see [Events and Event
+    #   Patterns][1] in the *Amazon CloudWatch Events User Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/events/CloudWatchEventsandEventPatterns.html
     #   @return [String]
     #
     # @!attribute [rw] event

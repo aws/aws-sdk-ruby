@@ -409,7 +409,7 @@ module Aws::ElasticLoadBalancing
     #   The listeners.
     #
     #   For more information, see [Listeners for Your Classic Load
-    #   Balancer][1] in the *Classic Load Balancers Guide*.
+    #   Balancer][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -457,7 +457,7 @@ module Aws::ElasticLoadBalancing
     #   A list of tags to assign to the load balancer.
     #
     #   For more information about tagging your load balancer, see [Tag Your
-    #   Classic Load Balancer][1] in the *Classic Load Balancers Guide*.
+    #   Classic Load Balancer][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -871,6 +871,48 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeAccountLimitsInput
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "Marker",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimitsInput AWS API Documentation
+    #
+    class DescribeAccountLimitsInput < Struct.new(
+      :marker,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limits
+    #   Information about the limits.
+    #   @return [Array<Types::Limit>]
+    #
+    # @!attribute [rw] next_marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/DescribeAccountLimitsOutput AWS API Documentation
+    #
+    class DescribeAccountLimitsOutput < Struct.new(
+      :limits,
+      :next_marker)
+      include Aws::Structure
+    end
+
     # Contains the parameters for DescribeInstanceHealth.
     #
     # @note When making an API call, you may pass DescribeEndPointStateInput
@@ -1263,11 +1305,34 @@ module Aws::ElasticLoadBalancing
       include Aws::Structure
     end
 
+    # Information about an Elastic Load Balancing resource limit for your
+    # AWS account.
+    #
+    # @!attribute [rw] name
+    #   The name of the limit. The possible values are:
+    #
+    #   * classic-listeners
+    #
+    #   * classic-load-balancers
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   The maximum value of the limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/Limit AWS API Documentation
+    #
+    class Limit < Struct.new(
+      :name,
+      :max)
+      include Aws::Structure
+    end
+
     # Information about a listener.
     #
     # For information about the protocols and the ports supported by Elastic
     # Load Balancing, see [Listeners for Your Classic Load Balancer][1] in
-    # the *Classic Load Balancers Guide*.
+    # the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1334,15 +1399,7 @@ module Aws::ElasticLoadBalancing
     # The policies enabled for a listener.
     #
     # @!attribute [rw] listener
-    #   Information about a listener.
-    #
-    #   For information about the protocols and the ports supported by
-    #   Elastic Load Balancing, see [Listeners for Your Classic Load
-    #   Balancer][1] in the *Classic Load Balancers Guide*.
-    #
-    #
-    #
-    #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
+    #   The listener.
     #   @return [Types::Listener]
     #
     # @!attribute [rw] policy_names
@@ -1392,7 +1449,7 @@ module Aws::ElasticLoadBalancing
     #   across all instances regardless of the Availability Zones.
     #
     #   For more information, see [Configure Cross-Zone Load Balancing][1]
-    #   in the *Classic Load Balancers Guide*.
+    #   in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1405,7 +1462,7 @@ module Aws::ElasticLoadBalancing
     #   you specify.
     #
     #   For more information, see [Enable Access Logs][1] in the *Classic
-    #   Load Balancers Guide*.
+    #   Load Balancer Guide*.
     #
     #
     #
@@ -1418,7 +1475,7 @@ module Aws::ElasticLoadBalancing
     #   unhealthy instance.
     #
     #   For more information, see [Configure Connection Draining][1] in the
-    #   *Classic Load Balancers Guide*.
+    #   *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1432,7 +1489,7 @@ module Aws::ElasticLoadBalancing
     #   By default, Elastic Load Balancing maintains a 60-second idle
     #   connection timeout for both front-end and back-end connections of
     #   your load balancer. For more information, see [Configure Idle
-    #   Connection Timeout][1] in the *Classic Load Balancers Guide*.
+    #   Connection Timeout][1] in the *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1468,7 +1525,7 @@ module Aws::ElasticLoadBalancing
     #   The DNS name of the load balancer.
     #
     #   For more information, see [Configure a Custom Domain Name][1] in the
-    #   *Classic Load Balancers Guide*.
+    #   *Classic Load Balancer Guide*.
     #
     #
     #
@@ -1597,7 +1654,7 @@ module Aws::ElasticLoadBalancing
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_attributes
-    #   The attributes of the load balancer.
+    #   The attributes for the load balancer.
     #   @return [Types::LoadBalancerAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributesInput AWS API Documentation
@@ -1615,7 +1672,7 @@ module Aws::ElasticLoadBalancing
     #   @return [String]
     #
     # @!attribute [rw] load_balancer_attributes
-    #   The attributes for a load balancer.
+    #   Information about the load balancer attributes.
     #   @return [Types::LoadBalancerAttributes]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancing-2012-06-01/ModifyLoadBalancerAttributesOutput AWS API Documentation

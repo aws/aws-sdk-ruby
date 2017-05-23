@@ -270,8 +270,8 @@ module Aws::SSM
     # Information about the association.
     #
     # @!attribute [rw] status
-    #   The status of the association. Status can be: `Pending`, `Success`,
-    #   or `Failed`.
+    #   The status of the association. Status can be: Pending, Success, or
+    #   Failed.
     #   @return [String]
     #
     # @!attribute [rw] detailed_status
@@ -367,7 +367,7 @@ module Aws::SSM
     #
     # @!attribute [rw] parameters
     #   The key-value map of execution parameters, which were supplied when
-    #   calling `StartAutomationExecution`.
+    #   calling StartAutomationExecution.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] outputs
@@ -543,9 +543,9 @@ module Aws::SSM
     #   @return [Array<String>]
     #
     # @!attribute [rw] targets
-    #   An array of search criteria that targets instances using a
-    #   `Key`,`Value` combination that you specify. `Targets` is required if
-    #   you don't provide one or more instance IDs in the call.
+    #   An array of search criteria that targets instances using a Key,Value
+    #   combination that you specify. Targets is required if you don't
+    #   provide one or more instance IDs in the call.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] requested_date_time
@@ -557,41 +557,41 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status_details
-    #   A detailed status of the command execution. `StatusDetails` includes
-    #   more information than `Status` because it includes states resulting
-    #   from error and concurrency control parameters. `StatusDetails` can
-    #   show different results than `Status`. For more information about
-    #   these statuses, see [Run Command Status][1]. `StatusDetails` can be
-    #   one of the following values:
+    #   A detailed status of the command execution. StatusDetails includes
+    #   more information than Status because it includes states resulting
+    #   from error and concurrency control parameters. StatusDetails can
+    #   show different results than Status. For more information about these
+    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
+    #   the following values:
     #
-    #   * Pending – The command has not been sent to any instances.
+    #   * Pending: The command has not been sent to any instances.
     #
-    #   * In Progress – The command has been sent to at least one instance
+    #   * In Progress: The command has been sent to at least one instance
     #     but has not reached a final state on all instances.
     #
-    #   * Success – The command successfully executed on all invocations.
+    #   * Success: The command successfully executed on all invocations.
     #     This is a terminal state.
     #
-    #   * Delivery Timed Out – The value of `MaxErrors` or more command
-    #     invocations shows a status of `Delivery Timed Out`. This is a
+    #   * Delivery Timed Out: The value of MaxErrors or more command
+    #     invocations shows a status of Delivery Timed Out. This is a
     #     terminal state.
     #
-    #   * Execution Timed Out – The value of `MaxErrors` or more command
-    #     invocations shows a status of `Execution Timed Out`. This is a
+    #   * Execution Timed Out: The value of MaxErrors or more command
+    #     invocations shows a status of Execution Timed Out. This is a
     #     terminal state.
     #
-    #   * Failed – The value of `MaxErrors` or more command invocations
-    #     shows a status of `Failed`. This is a terminal state.
+    #   * Failed: The value of MaxErrors or more command invocations shows a
+    #     status of Failed. This is a terminal state.
     #
-    #   * Incomplete – The command was attempted on all instances and one or
-    #     more invocations does not have a value of `Success` but not enough
-    #     invocations failed for the status to be `Failed`. This is a
-    #     terminal state.
+    #   * Incomplete: The command was attempted on all instances and one or
+    #     more invocations does not have a value of Success but not enough
+    #     invocations failed for the status to be Failed. This is a terminal
+    #     state.
     #
-    #   * Canceled – The command was terminated before it was completed.
-    #     This is a terminal state.
+    #   * Canceled: The command was terminated before it was completed. This
+    #     is a terminal state.
     #
-    #   * Rate Exceeded – The number of instances targeted by the command
+    #   * Rate Exceeded: The number of instances targeted by the command
     #     exceeded the account limit for pending invocations. The system has
     #     canceled the command before executing it on any instance. This is
     #     a terminal state.
@@ -622,7 +622,7 @@ module Aws::SSM
     #   The maximum number of instances that are allowed to execute the
     #   command at the same time. You can specify a number of instances,
     #   such as 10, or a percentage of instances, such as 10%. The default
-    #   value is 50. For more information about how to use `MaxConcurrency`,
+    #   value is 50. For more information about how to use MaxConcurrency,
     #   see [Executing a Command Using Systems Manager Run Command][1].
     #
     #
@@ -635,7 +635,7 @@ module Aws::SSM
     #   the command to additional targets. You can specify a number of
     #   errors, such as 10, or a percentage or errors, such as 10%. The
     #   default value is 50. For more information about how to use
-    #   `MaxErrors`, see [Executing a Command Using Systems Manager Run
+    #   MaxErrors, see [Executing a Command Using Systems Manager Run
     #   Command][1].
     #
     #
@@ -649,14 +649,14 @@ module Aws::SSM
     #
     # @!attribute [rw] completed_count
     #   The number of targets for which the command invocation reached a
-    #   terminal state. Terminal states include the following: `Success`,
-    #   `Failed`, `Execution Timed Out`, `Delivery Timed Out`, `Canceled`,
-    #   `Terminated`, or `Undeliverable`.
+    #   terminal state. Terminal states include the following: Success,
+    #   Failed, Execution Timed Out, Delivery Timed Out, Canceled,
+    #   Terminated, or Undeliverable.
     #   @return [Integer]
     #
     # @!attribute [rw] error_count
-    #   The number of targets for which the status is `Failed` or `Execution
-    #   Timed Out`.
+    #   The number of targets for which the status is Failed or Execution
+    #   Timed Out.
     #   @return [Integer]
     #
     # @!attribute [rw] service_role
@@ -738,7 +738,7 @@ module Aws::SSM
     #
     # @!attribute [rw] instance_name
     #   The name of the invocation target. For Amazon EC2 instances this is
-    #   the value for the `aws:Name` tag. For on-premises instances, this is
+    #   the value for the aws:Name tag. For on-premises instances, this is
     #   the name of the instance.
     #   @return [String]
     #
@@ -761,49 +761,49 @@ module Aws::SSM
     #
     # @!attribute [rw] status_details
     #   A detailed status of the command execution for each invocation (each
-    #   instance targeted by the command). `StatusDetails` includes more
-    #   information than `Status` because it includes states resulting from
-    #   error and concurrency control parameters. `StatusDetails` can show
-    #   different results than `Status`. For more information about these
-    #   statuses, see [Run Command Status][1]. `StatusDetails` can be one of
+    #   instance targeted by the command). StatusDetails includes more
+    #   information than Status because it includes states resulting from
+    #   error and concurrency control parameters. StatusDetails can show
+    #   different results than Status. For more information about these
+    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
     #   the following values:
     #
-    #   * Pending – The command has not been sent to the instance.
+    #   * Pending: The command has not been sent to the instance.
     #
-    #   * In Progress – The command has been sent to the instance but has
-    #     not reached a terminal state.
+    #   * In Progress: The command has been sent to the instance but has not
+    #     reached a terminal state.
     #
-    #   * Success – The execution of the command or plugin was successfully
+    #   * Success: The execution of the command or plugin was successfully
     #     completed. This is a terminal state.
     #
-    #   * Delivery Timed Out – The command was not delivered to the instance
+    #   * Delivery Timed Out: The command was not delivered to the instance
     #     before the delivery timeout expired. Delivery timeouts do not
-    #     count against the parent command’s `MaxErrors` limit, but they do
-    #     contribute to whether the parent command status is `Success` or
-    #     `Incomplete`. This is a terminal state.
+    #     count against the parent command's MaxErrors limit, but they do
+    #     contribute to whether the parent command status is Success or
+    #     Incomplete. This is a terminal state.
     #
-    #   * Execution Timed Out – Command execution started on the instance,
+    #   * Execution Timed Out: Command execution started on the instance,
     #     but the execution was not complete before the execution timeout
-    #     expired. Execution timeouts count against the `MaxErrors` limit of
+    #     expired. Execution timeouts count against the MaxErrors limit of
     #     the parent command. This is a terminal state.
     #
-    #   * Failed – The command was not successful on the instance. For a
+    #   * Failed: The command was not successful on the instance. For a
     #     plugin, this indicates that the result code was not zero. For a
     #     command invocation, this indicates that the result code for one or
     #     more plugins was not zero. Invocation failures count against the
-    #     `MaxErrors` limit of the parent command. This is a terminal state.
+    #     MaxErrors limit of the parent command. This is a terminal state.
     #
-    #   * Canceled – The command was terminated before it was completed.
-    #     This is a terminal state.
+    #   * Canceled: The command was terminated before it was completed. This
+    #     is a terminal state.
     #
-    #   * Undeliverable – The command can't be delivered to the instance.
+    #   * Undeliverable: The command can't be delivered to the instance.
     #     The instance might not exist or might not be responding.
     #     Undeliverable invocations don't count against the parent
-    #     command’s `MaxErrors` limit and don't contribute to whether the
-    #     parent command status is `Success` or `Incomplete`. This is a
-    #     terminal state.
+    #     command's MaxErrors limit and don't contribute to whether the
+    #     parent command status is Success or Incomplete. This is a terminal
+    #     state.
     #
-    #   * Terminated – The parent command exceeded its `MaxErrors` limit and
+    #   * Terminated: The parent command exceeded its MaxErrors limit and
     #     subsequent command invocations were canceled by the system. This
     #     is a terminal state.
     #
@@ -817,17 +817,17 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] standard_output_url
-    #   The URL to the plugin’s StdOut file in Amazon S3, if the Amazon S3
+    #   The URL to the plugin's StdOut file in Amazon S3, if the Amazon S3
     #   bucket was defined for the parent command. For an invocation,
-    #   `StandardOutputUrl` is populated if there is just one plugin defined
+    #   StandardOutputUrl is populated if there is just one plugin defined
     #   for the command, and the Amazon S3 bucket was defined for the
     #   command.
     #   @return [String]
     #
     # @!attribute [rw] standard_error_url
-    #   The URL to the plugin’s StdErr file in Amazon S3, if the Amazon S3
+    #   The URL to the plugin's StdErr file in Amazon S3, if the Amazon S3
     #   bucket was defined for the parent command. For an invocation,
-    #   `StandardErrorUrl` is populated if there is just one plugin defined
+    #   StandardErrorUrl is populated if there is just one plugin defined
     #   for the command, and the Amazon S3 bucket was defined for the
     #   command.
     #   @return [String]
@@ -881,49 +881,49 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] status_details
-    #   A detailed status of the plugin execution. `StatusDetails` includes
-    #   more information than `Status` because it includes states resulting
-    #   from error and concurrency control parameters. `StatusDetails` can
-    #   show different results than `Status`. For more information about
-    #   these statuses, see [Run Command Status][1]. `StatusDetails` can be
-    #   one of the following values:
+    #   A detailed status of the plugin execution. StatusDetails includes
+    #   more information than Status because it includes states resulting
+    #   from error and concurrency control parameters. StatusDetails can
+    #   show different results than Status. For more information about these
+    #   statuses, see [Run Command Status][1]. StatusDetails can be one of
+    #   the following values:
     #
-    #   * Pending – The command has not been sent to the instance.
+    #   * Pending: The command has not been sent to the instance.
     #
-    #   * In Progress – The command has been sent to the instance but has
-    #     not reached a terminal state.
+    #   * In Progress: The command has been sent to the instance but has not
+    #     reached a terminal state.
     #
-    #   * Success – The execution of the command or plugin was successfully
+    #   * Success: The execution of the command or plugin was successfully
     #     completed. This is a terminal state.
     #
-    #   * Delivery Timed Out – The command was not delivered to the instance
+    #   * Delivery Timed Out: The command was not delivered to the instance
     #     before the delivery timeout expired. Delivery timeouts do not
-    #     count against the parent command’s `MaxErrors` limit, but they do
-    #     contribute to whether the parent command status is `Success` or
-    #     `Incomplete`. This is a terminal state.
+    #     count against the parent command's MaxErrors limit, but they do
+    #     contribute to whether the parent command status is Success or
+    #     Incomplete. This is a terminal state.
     #
-    #   * Execution Timed Out – Command execution started on the instance,
+    #   * Execution Timed Out: Command execution started on the instance,
     #     but the execution was not complete before the execution timeout
-    #     expired. Execution timeouts count against the `MaxErrors` limit of
+    #     expired. Execution timeouts count against the MaxErrors limit of
     #     the parent command. This is a terminal state.
     #
-    #   * Failed – The command was not successful on the instance. For a
+    #   * Failed: The command was not successful on the instance. For a
     #     plugin, this indicates that the result code was not zero. For a
     #     command invocation, this indicates that the result code for one or
     #     more plugins was not zero. Invocation failures count against the
-    #     `MaxErrors` limit of the parent command. This is a terminal state.
+    #     MaxErrors limit of the parent command. This is a terminal state.
     #
-    #   * Canceled – The command was terminated before it was completed.
-    #     This is a terminal state.
+    #   * Canceled: The command was terminated before it was completed. This
+    #     is a terminal state.
     #
-    #   * Undeliverable – The command can't be delivered to the instance.
+    #   * Undeliverable: The command can't be delivered to the instance.
     #     The instance might not exist, or it might not be responding.
     #     Undeliverable invocations don't count against the parent
-    #     command’s `MaxErrors` limit, and they don't contribute to whether
-    #     the parent command status is `Success` or `Incomplete`. This is a
+    #     command's MaxErrors limit, and they don't contribute to whether
+    #     the parent command status is Success or Incomplete. This is a
     #     terminal state.
     #
-    #   * Terminated – The parent command exceeded its `MaxErrors` limit and
+    #   * Terminated: The parent command exceeded its MaxErrors limit and
     #     subsequent command invocations were canceled by the system. This
     #     is a terminal state.
     #
@@ -969,16 +969,16 @@ module Aws::SSM
     #   be stored. This was requested when issuing the command. For example,
     #   in the following response:
     #
-    #   `test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript`
+    #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
     #
-    #   `test_folder` is the name of the Amazon S3 bucket;
+    #   test\_folder is the name of the Amazon S3 bucket;
     #
-    #   `ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix` is the name of the S3
+    #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
     #
-    #   `i-1234567876543` is the instance ID;
+    #   i-1234567876543 is the instance ID;
     #
-    #   `awsrunShellScript` is the name of the plugin.
+    #   awsrunShellScript is the name of the plugin.
     #   @return [String]
     #
     # @!attribute [rw] output_s3_key_prefix
@@ -986,16 +986,16 @@ module Aws::SSM
     #   command executions should be stored. This was requested when issuing
     #   the command. For example, in the following response:
     #
-    #   `test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript`
+    #   test\_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
     #
-    #   `test_folder` is the name of the Amazon S3 bucket;
+    #   test\_folder is the name of the Amazon S3 bucket;
     #
-    #   `ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix` is the name of the S3
+    #   ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3
     #   prefix;
     #
-    #   `i-1234567876543` is the instance ID;
+    #   i-1234567876543 is the instance ID;
     #
-    #   `awsrunShellScript` is the name of the plugin.
+    #   awsrunShellScript is the name of the plugin.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CommandPlugin AWS API Documentation
@@ -1028,7 +1028,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] description
-    #   A user-defined description of the resource that you want to register
+    #   A userdefined description of the resource that you want to register
     #   with Amazon EC2.
     #   @return [String]
     #
@@ -1257,27 +1257,16 @@ module Aws::SSM
     #
     # @!attribute [rw] targets
     #   The targets (either instances or tags) for the association.
-    #   Instances are specified using
-    #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
-    #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
     #   @return [Array<Types::Target>]
     #
     # @!attribute [rw] schedule_expression
     #   A cron expression when the association will be applied to the
-    #   target(s). Supported expressions are every half, 1, 2, 4, 8 or 12
-    #   hour(s); every specified day and time of the week. For example:
-    #   cron(0 0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0
-    #   0/4 1/1 * ? *) to run every four hours; and cron(0 0 10 ? * SUN
-    #   *) to run every Sunday at 10 a.m.
+    #   target(s).
     #   @return [String]
     #
     # @!attribute [rw] output_location
     #   An Amazon S3 bucket where you want to store the output details of
-    #   the request. For example:
-    #
-    #   `"\{ "S3Location": \{ "OutputS3Region": "<region>",
-    #   "OutputS3BucketName": "bucket name", "OutputS3KeyPrefix":
-    #   "folder name" \} \}"`
+    #   the request.
     #   @return [Types::InstanceAssociationOutputLocation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
@@ -1470,7 +1459,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Caller-provided idempotency token.
+    #   User-provided idempotency token.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -2346,11 +2335,11 @@ module Aws::SSM
     # @!attribute [rw] filters
     #   Each entry in the array is a structure containing:
     #
-    #   Key (string 1 ≤ length ≤ 200)
+    #   Key (string between 1 and 200 characters)
     #
     #   Values (array containing a single string)
     #
-    #   Type (string “Equal”, “NotEqual”, “LessThan”, “GreaterThan”)
+    #   Type (string "Equal", "NotEqual", "LessThan", "GreaterThan")
     #   @return [Array<Types::InstancePatchStateFilter>]
     #
     # @!attribute [rw] next_token
@@ -2461,9 +2450,9 @@ module Aws::SSM
     # @!attribute [rw] filters
     #   Each entry in the array is a structure containing:
     #
-    #   Key (string, 1 ≤ length ≤ 128)
+    #   Key (string, between 1 and 128 characters)
     #
-    #   Values (array of strings 1 ≤ length ≤ 256)
+    #   Values (array of strings, each string between 1 and 256 characters)
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
     # @!attribute [rw] next_token
@@ -2496,8 +2485,8 @@ module Aws::SSM
     #
     #   Severity (string)
     #
-    #   State (string – “INSTALLED”, “INSTALLED\_OTHER”, “MISSING”,
-    #   “NOT\_APPLICABLE”, “FAILED”)
+    #   State (string: "INSTALLED", "INSTALLED OTHER", "MISSING",
+    #   "NOT APPLICABLE", "FAILED")
     #
     #   InstalledTime (DateTime)
     #
@@ -2676,11 +2665,12 @@ module Aws::SSM
     # @!attribute [rw] filters
     #   Each entry in the array is a structure containing:
     #
-    #   Key (string, 1 ≤ length ≤ 128)
+    #   Key (string, between 1 and 128 characters)
     #
-    #   Values (array of strings 1 ≤ length ≤ 256)
+    #   Values (array of strings, each string is between 1 and 256
+    #   characters)
     #
-    #   The supported Keys are `ExecutedBefore` and `ExecutedAfter` with the
+    #   The supported Keys are ExecutedBefore and ExecutedAfter with the
     #   value being a date/time string such as 2016-11-04T05:00:00Z.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
@@ -2743,8 +2733,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters that can be used to narrow down the scope of the
-    #   returned window targets. The supported filter keys are `Type`,
-    #   `WindowTargetId` and `OwnerInformation`.
+    #   returned window targets. The supported filter keys are Type,
+    #   WindowTargetId and OwnerInformation.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
     # @!attribute [rw] max_results
@@ -2806,8 +2796,8 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
-    #   tasks. The supported filter keys are `WindowTaskId`, `TaskArn`,
-    #   `Priority`, and `TaskType`.
+    #   tasks. The supported filter keys are WindowTaskId, TaskArn,
+    #   Priority, and TaskType.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
     # @!attribute [rw] max_results
@@ -2864,7 +2854,7 @@ module Aws::SSM
     #
     # @!attribute [rw] filters
     #   Optional filters used to narrow down the scope of the returned
-    #   Maintenance Windows. Supported filter keys are `Name` and `Enabled`.
+    #   Maintenance Windows. Supported filter keys are Name and Enabled.
     #   @return [Array<Types::MaintenanceWindowFilter>]
     #
     # @!attribute [rw] max_results
@@ -2977,9 +2967,10 @@ module Aws::SSM
     # @!attribute [rw] filters
     #   Each element in the array is a structure containing:
     #
-    #   Key: (string, “NAME\_PREFIX” or “OWNER”)
+    #   Key: (string, "NAME\_PREFIX" or "OWNER")
     #
-    #   Value: (array of strings, exactly 1 entry, 1 ≤ length ≤ 255)
+    #   Value: (array of strings, exactly 1 entry, between 1 and 255
+    #   characters)
     #   @return [Array<Types::PatchOrchestratorFilter>]
     #
     # @!attribute [rw] max_results
@@ -3045,7 +3036,7 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_installed_other_patches
-    #   The number of instances with patches installed that aren’t defined
+    #   The number of instances with patches installed that aren't defined
     #   in the patch baseline.
     #   @return [Integer]
     #
@@ -3060,7 +3051,7 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] instances_with_not_applicable_patches
-    #   The number of instances with patches that aren’t applicable.
+    #   The number of instances with patches that aren't applicable.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribePatchGroupStateResult AWS API Documentation
@@ -3103,7 +3094,7 @@ module Aws::SSM
     # @!attribute [rw] mappings
     #   Each entry in the array contains:
     #
-    #   PatchGroup: string (1 ≤ length ≤ 256, Regex:
+    #   PatchGroup: string (between 1 and 256 characters, Regex:
     #   ^(\[\\p\\\{L\\}\\p\\\{Z\\}\\p\\\{N\\}\_.:/=+\\-@\]*)$)
     #
     #   PatchBaselineIdentity: A PatchBaselineIdentity element.
@@ -3305,8 +3296,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of parameter. The type can be either “String” or
-    #   “StringList”.
+    #   The type of parameter. The type can be either String or StringList.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -3408,6 +3398,32 @@ module Aws::SSM
       include Aws::Structure
     end
 
+    # Information about an Automation failure.
+    #
+    # @!attribute [rw] failure_stage
+    #   The stage of the Automation execution when the failure occurred. The
+    #   stages include the following: InputValidation, PreVerification,
+    #   Invocation, PostVerification.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_type
+    #   The type of Automation failure. Failure types include the following:
+    #   Action, Permission, Throttling, Verification, Internal.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   Detailed information about the Automation step failure.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/FailureDetails AWS API Documentation
+    #
+    class FailureDetails < Struct.new(
+      :failure_stage,
+      :failure_type,
+      :details)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetAutomationExecutionRequest
     #   data as a hash:
     #
@@ -3417,7 +3433,7 @@ module Aws::SSM
     #
     # @!attribute [rw] automation_execution_id
     #   The unique identifier for an existing automation execution to
-    #   examine. The execution ID is returned by `StartAutomationExecution`
+    #   examine. The execution ID is returned by StartAutomationExecution
     #   when the execution of an Automation document is initiated.
     #   @return [String]
     #
@@ -3500,7 +3516,7 @@ module Aws::SSM
     #
     # @!attribute [rw] response_code
     #   The error level response code for the plugin script. If the response
-    #   code is `-1`, then the command has not started executing on the
+    #   code is -1, then the command has not started executing on the
     #   instance, or it was not received by the instance.
     #   @return [Integer]
     #
@@ -3512,7 +3528,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] execution_elapsed_time
-    #   Duration since `ExecutionStartDateTime`.
+    #   Duration since ExecutionStartDateTime.
     #   @return [String]
     #
     # @!attribute [rw] execution_end_date_time
@@ -3524,60 +3540,59 @@ module Aws::SSM
     #
     # @!attribute [rw] status
     #   The status of the parent command for this invocation. This status
-    #   can be different than `StatusDetails`.
+    #   can be different than StatusDetails.
     #   @return [String]
     #
     # @!attribute [rw] status_details
     #   A detailed status of the command execution for an invocation.
-    #   `StatusDetails` includes more information than `Status` because it
+    #   StatusDetails includes more information than Status because it
     #   includes states resulting from error and concurrency control
-    #   parameters. `StatusDetails` can show different results than
-    #   `Status`. For more information about these statuses, see [Run
-    #   Command Status][1]. `StatusDetails` can be one of the following
-    #   values:
+    #   parameters. StatusDetails can show different results than Status.
+    #   For more information about these statuses, see [Run Command
+    #   Status][1]. StatusDetails can be one of the following values:
     #
-    #   * Pending – The command has not been sent to the instance.
+    #   * Pending: The command has not been sent to the instance.
     #
-    #   * In Progress – The command has been sent to the instance but has
-    #     not reached a terminal state.
+    #   * In Progress: The command has been sent to the instance but has not
+    #     reached a terminal state.
     #
-    #   * Delayed – The system attempted to send the command to the target,
+    #   * Delayed: The system attempted to send the command to the target,
     #     but the target was not available. The instance might not be
     #     available because of network issues, the instance was stopped,
     #     etc. The system will try to deliver the command again.
     #
-    #   * Success – The command or plugin was executed successfully. This is
+    #   * Success: The command or plugin was executed successfully. This is
     #     a terminal state.
     #
-    #   * Delivery Timed Out – The command was not delivered to the instance
+    #   * Delivery Timed Out: The command was not delivered to the instance
     #     before the delivery timeout expired. Delivery timeouts do not
-    #     count against the parent command’s `MaxErrors` limit, but they do
-    #     contribute to whether the parent command status is `Success` or
-    #     `Incomplete`. This is a terminal state.
+    #     count against the parent command's MaxErrors limit, but they do
+    #     contribute to whether the parent command status is Success or
+    #     Incomplete. This is a terminal state.
     #
-    #   * Execution Timed Out – The command started to execute on the
+    #   * Execution Timed Out: The command started to execute on the
     #     instance, but the execution was not complete before the timeout
-    #     expired. Execution timeouts count against the `MaxErrors` limit of
+    #     expired. Execution timeouts count against the MaxErrors limit of
     #     the parent command. This is a terminal state.
     #
-    #   * Failed – The command wasn't executed successfully on the
-    #     instance. For a plugin, this indicates that the result code was
-    #     not zero. For a command invocation, this indicates that the result
-    #     code for one or more plugins was not zero. Invocation failures
-    #     count against the `MaxErrors` limit of the parent command. This is
-    #     a terminal state.
-    #
-    #   * Canceled – The command was terminated before it was completed.
-    #     This is a terminal state.
-    #
-    #   * Undeliverable – The command can't be delivered to the instance.
-    #     The instance might not exist or might not be responding.
-    #     Undeliverable invocations don't count against the parent
-    #     command’s `MaxErrors` limit and don't contribute to whether the
-    #     parent command status is `Success` or `Incomplete`. This is a
+    #   * Failed: The command wasn't executed successfully on the instance.
+    #     For a plugin, this indicates that the result code was not zero.
+    #     For a command invocation, this indicates that the result code for
+    #     one or more plugins was not zero. Invocation failures count
+    #     against the MaxErrors limit of the parent command. This is a
     #     terminal state.
     #
-    #   * Terminated – The parent command exceeded its `MaxErrors` limit and
+    #   * Canceled: The command was terminated before it was completed. This
+    #     is a terminal state.
+    #
+    #   * Undeliverable: The command can't be delivered to the instance.
+    #     The instance might not exist or might not be responding.
+    #     Undeliverable invocations don't count against the parent
+    #     command's MaxErrors limit and don't contribute to whether the
+    #     parent command status is Success or Incomplete. This is a terminal
+    #     state.
+    #
+    #   * Terminated: The parent command exceeded its MaxErrors limit and
     #     subsequent command invocations were canceled by the system. This
     #     is a terminal state.
     #
@@ -3588,8 +3603,8 @@ module Aws::SSM
     #
     # @!attribute [rw] standard_output_content
     #   The first 24,000 characters written by the plugin to stdout. If the
-    #   command has not finished executing, if `ExecutionStatus` is neither
-    #   `Succeeded` nor `Failed`, then this string is empty.
+    #   command has not finished executing, if ExecutionStatus is neither
+    #   Succeeded nor Failed, then this string is empty.
     #   @return [String]
     #
     # @!attribute [rw] standard_output_url
@@ -3966,9 +3981,10 @@ module Aws::SSM
     #   The parameters passed to the task when it was executed. The map has
     #   the following format:
     #
-    #   Key: string, 1 ≤ length ≤ 255
+    #   Key: string, between 1 and 255 characters
     #
-    #   Value: an array of strings where each string 1 ≤ length ≤ 255
+    #   Value: an array of strings, each string is between 1 and 255
+    #   characters
     #   @return [Array<Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>>]
     #
     # @!attribute [rw] priority
@@ -4592,8 +4608,8 @@ module Aws::SSM
     # @!attribute [rw] key
     #   The filter key name to describe your instances. For example:
     #
-    #   "InstanceIds"\|"AgentVersion"\|"PingStatus"\|"PlatformTypes"\|"ActivationIds"\|"IamRole"\|"ResourceType"\|”AssociationStatus”\|”Tag
-    #   Key”
+    #   "InstanceIds"\|"AgentVersion"\|"PingStatus"\|"PlatformTypes"\|"ActivationIds"\|"IamRole"\|"ResourceType"\|"AssociationStatus"\|"Tag
+    #   Key"
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -4648,7 +4664,7 @@ module Aws::SSM
     #
     # @!attribute [rw] missing_count
     #   The number of patches from the patch baseline that are applicable
-    #   for the instance but aren’t currently installed.
+    #   for the instance but aren't currently installed.
     #   @return [Integer]
     #
     # @!attribute [rw] failed_count
@@ -4658,8 +4674,9 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] not_applicable_count
-    #   The number of patches from the patch baseline that aren’t applicable
-    #   for the instance and hence aren’t installed on the instance.
+    #   The number of patches from the patch baseline that aren't
+    #   applicable for the instance and hence aren't installed on the
+    #   instance.
     #   @return [Integer]
     #
     # @!attribute [rw] operation_start_time
@@ -4790,10 +4807,10 @@ module Aws::SSM
     #
     # @!attribute [rw] type_name
     #   The name of the inventory type. Default inventory item type names
-    #   start with `AWS`. Custom inventory type names will start with
-    #   `Custom`. Default inventory item types include the following:
-    #   `AWS:AWSComponent`, `AWS:Application`, `AWS:InstanceInformation`,
-    #   `AWS:Network`, and `AWS:WindowsUpdate`.
+    #   start with AWS. Custom inventory type names will start with Custom.
+    #   Default inventory item types include the following:
+    #   AWS:AWSComponent, AWS:Application, AWS:InstanceInformation,
+    #   AWS:Network, and AWS:WindowsUpdate.
     #   @return [String]
     #
     # @!attribute [rw] schema_version
@@ -4807,8 +4824,8 @@ module Aws::SSM
     # @!attribute [rw] content_hash
     #   MD5 hash of the inventory item type contents. The content hash is
     #   used to determine whether to update inventory information. The
-    #   `PutInventory` API does not update the inventory item type contents
-    #   if the MD5 hash has not changed since last update.
+    #   PutInventory API does not update the inventory item type contents if
+    #   the MD5 hash has not changed since last update.
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -4850,10 +4867,10 @@ module Aws::SSM
     #
     # @!attribute [rw] type_name
     #   The name of the inventory type. Default inventory item type names
-    #   start with `AWS`. Custom inventory type names will start with
-    #   `Custom`. Default inventory item types include the following:
-    #   `AWS:AWSComponent`, `AWS:Application`, `AWS:InstanceInformation`,
-    #   `AWS:Network`, and `AWS:WindowsUpdate`.
+    #   start with AWS. Custom inventory type names will start with Custom.
+    #   Default inventory item types include the following:
+    #   AWS:AWSComponent, AWS:Application, AWS:InstanceInformation,
+    #   AWS:Network, and AWS:WindowsUpdate.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -4911,8 +4928,8 @@ module Aws::SSM
     # @!attribute [rw] content_hash
     #   MD5 hash of the inventory item type contents. The content hash is
     #   used to determine whether to update inventory information. The
-    #   `PutInventory` API does not update the inventory item type contents
-    #   if the MD5 hash has not changed since last update.
+    #   PutInventory API does not update the inventory item type contents if
+    #   the MD5 hash has not changed since last update.
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -6030,7 +6047,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] language
-    #   The language of the patch if it’s language-specific.
+    #   The language of the patch if it's language-specific.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Patch AWS API Documentation
@@ -6696,7 +6713,7 @@ module Aws::SSM
     #
     # @!attribute [rw] type_name
     #   Name of the inventory item type. Valid value:
-    #   “AWS:InstanceInformation”. Default Value: “AWS:InstanceInformation”.
+    #   AWS:InstanceInformation. Default Value: AWS:InstanceInformation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ResultAttribute AWS API Documentation
@@ -6787,16 +6804,18 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] instance_ids
-    #   Required. The instance IDs where the command should execute. You can
-    #   specify a maximum of 50 IDs.
+    #   The instance IDs where the command should execute. You can specify a
+    #   maximum of 50 IDs. If you prefer not to list individual instance
+    #   IDs, you can instead send commands to a fleet of instances using the
+    #   Targets parameter, which accepts EC2 tags.
     #   @return [Array<String>]
     #
     # @!attribute [rw] targets
     #   (Optional) An array of search criteria that targets instances using
-    #   a `Key`,`Value` combination that you specify. `Targets` is required
-    #   if you don't provide one or more instance IDs in the call. For more
-    #   information about how to use `Targets`, see [Executing a Command
-    #   Using Systems Manager Run Command][1].
+    #   a Key,Value combination that you specify. Targets is required if you
+    #   don't provide one or more instance IDs in the call. For more
+    #   information about how to use Targets, see [Executing a Command Using
+    #   Systems Manager Run Command][1].
     #
     #
     #
@@ -6859,8 +6878,8 @@ module Aws::SSM
     # @!attribute [rw] max_concurrency
     #   (Optional) The maximum number of instances that are allowed to
     #   execute the command at the same time. You can specify a number such
-    #   as “10” or a percentage such as “10%”. The default value is 50. For
-    #   more information about how to use `MaxConcurrency`, see [Executing a
+    #   as 10 or a percentage such as 10%. The default value is 50. For more
+    #   information about how to use MaxConcurrency, see [Executing a
     #   Command Using Systems Manager Run Command][1].
     #
     #
@@ -6870,12 +6889,11 @@ module Aws::SSM
     #
     # @!attribute [rw] max_errors
     #   The maximum number of errors allowed without the command failing.
-    #   When the command fails one more time beyond the value of
-    #   `MaxErrors`, the systems stops sending the command to additional
-    #   targets. You can specify a number like “10” or a percentage like
-    #   “10%”. The default value is 50. For more information about how to
-    #   use `MaxErrors`, see [Executing a Command Using Systems Manager Run
-    #   Command][1].
+    #   When the command fails one more time beyond the value of MaxErrors,
+    #   the systems stops sending the command to additional targets. You can
+    #   specify a number like 10 or a percentage like 10%. The default value
+    #   is 50. For more information about how to use MaxErrors, see
+    #   [Executing a Command Using Systems Manager Run Command][1].
     #
     #
     #
@@ -6981,7 +6999,7 @@ module Aws::SSM
     #
     # @!attribute [rw] execution_start_time
     #   If a step has begun execution, this contains the time the step
-    #   started. If the step is in `Pending` status, this field is not
+    #   started. If the step is in Pending status, this field is not
     #   populated.
     #   @return [Time]
     #
@@ -6992,8 +7010,8 @@ module Aws::SSM
     #   @return [Time]
     #
     # @!attribute [rw] step_status
-    #   The execution status for this step. Valid values include: `Pending`,
-    #   `InProgress`, `Success`, `Cancelled`, `Failed`, and `TimedOut`.
+    #   The execution status for this step. Valid values include: Pending,
+    #   InProgress, Success, Cancelled, Failed, and TimedOut.
     #   @return [String]
     #
     # @!attribute [rw] response_code
@@ -7016,6 +7034,10 @@ module Aws::SSM
     #   If a step failed, this message explains why the execution failed.
     #   @return [String]
     #
+    # @!attribute [rw] failure_details
+    #   Information about the Automation failure.
+    #   @return [Types::FailureDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StepExecution AWS API Documentation
     #
     class StepExecution < Struct.new(
@@ -7028,7 +7050,8 @@ module Aws::SSM
       :inputs,
       :outputs,
       :response,
-      :failure_message)
+      :failure_message,
+      :failure_details)
       include Aws::Structure
     end
 
@@ -7082,9 +7105,9 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # An array of search criteria that targets instances using a
-    # `Key`,`Value` combination that you specify. `Targets` is required if
-    # you don't provide one or more instance IDs in the call.
+    # An array of search criteria that targets instances using a Key,Value
+    # combination that you specify. Targets is required if you don't
+    # provide one or more instance IDs in the call.
     #
     # @note When making an API call, you may pass Target
     #   data as a hash:
@@ -7096,9 +7119,9 @@ module Aws::SSM
     #
     # @!attribute [rw] key
     #   User-defined criteria for sending commands that target instances
-    #   that meet the criteria. `Key` can be `tag:<Amazon EC2 tag>` or
-    #   `InstanceIds`. For more information about how to send commands that
-    #   target instances using `Key`,`Value` parameters, see [Executing a
+    #   that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or
+    #   InstanceIds. For more information about how to send commands that
+    #   target instances using Key,Value parameters, see [Executing a
     #   Command Using Systems Manager Run Command][1].
     #
     #
@@ -7107,11 +7130,11 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   User-defined criteria that maps to `Key`. For example, if you
-    #   specified `tag:ServerRole`, you could specify `value:WebServer` to
+    #   User-defined criteria that maps to Key. For example, if you
+    #   specified tag:ServerRole, you could specify value:WebServer to
     #   execute a command on instances that include Amazon EC2 tags of
     #   ServerRole,WebServer. For more information about how to send
-    #   commands that target instances using `Key`,`Value` parameters, see
+    #   commands that target instances using Key,Value parameters, see
     #   [Executing a Command Using Systems Manager Run Command][1].
     #
     #
@@ -7144,6 +7167,13 @@ module Aws::SSM
     #             output_s3_key_prefix: "S3KeyPrefix",
     #           },
     #         },
+    #         name: "DocumentName",
+    #         targets: [
+    #           {
+    #             key: "TargetKey",
+    #             values: ["TargetValue"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] association_id
@@ -7162,21 +7192,21 @@ module Aws::SSM
     #
     # @!attribute [rw] schedule_expression
     #   The cron expression used to schedule the association that you want
-    #   to update. Supported expressions are every half, 1, 2, 4, 8 or 12
-    #   hour(s); every specified day and time of the week. For example:
-    #   cron(0 0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0
-    #   0/4 1/1 * ? *) to run every four hours; and cron(0 0 10 ? * SUN
-    #   *) to run every Sunday at 10 a.m.
+    #   to update.
     #   @return [String]
     #
     # @!attribute [rw] output_location
     #   An Amazon S3 bucket where you want to store the results of this
     #   request.
-    #
-    #   `"\{ "S3Location": \{ "OutputS3Region": "<region>",
-    #   "OutputS3BucketName": "bucket name", "OutputS3KeyPrefix":
-    #   "folder name" \} \}"`
     #   @return [Types::InstanceAssociationOutputLocation]
+    #
+    # @!attribute [rw] name
+    #   The name of the association document.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The targets of the association.
+    #   @return [Array<Types::Target>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
@@ -7185,7 +7215,9 @@ module Aws::SSM
       :parameters,
       :document_version,
       :schedule_expression,
-      :output_location)
+      :output_location,
+      :name,
+      :targets)
       include Aws::Structure
     end
 

@@ -8,8 +8,6 @@
 module Aws::AutoScaling
   module Types
 
-    # Contains the output of DescribeScalingActivities.
-    #
     # @!attribute [rw] activities
     #   The scaling activities. Activities are sorted by start time.
     #   Activities still in progress are described first.
@@ -89,8 +87,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of TerminateInstancesInAutoScalingGroup.
-    #
     # @!attribute [rw] activity
     #   A scaling activity.
     #   @return [Types::Activity]
@@ -141,8 +137,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for AttachInstances.
-    #
     # @note When making an API call, you may pass AttachInstancesQuery
     #   data as a hash:
     #
@@ -171,8 +165,6 @@ module Aws::AutoScaling
     #
     class AttachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
 
-    # Contains the parameters for AttachLoadBalancerTargetGroups.
-    #
     # @note When making an API call, you may pass AttachLoadBalancerTargetGroupsType
     #   data as a hash:
     #
@@ -197,14 +189,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of AttachLoadBalancers.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AttachLoadBalancersResultType AWS API Documentation
     #
     class AttachLoadBalancersResultType < Aws::EmptyStructure; end
 
-    # Contains the parameters for AttachLoadBalancers.
-    #
     # @note When making an API call, you may pass AttachLoadBalancersType
     #   data as a hash:
     #
@@ -364,8 +352,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeAutoScalingGroups.
-    #
     # @note When making an API call, you may pass AutoScalingGroupNamesType
     #   data as a hash:
     #
@@ -386,7 +372,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/AutoScalingGroupNamesType AWS API Documentation
@@ -398,8 +385,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output for DescribeAutoScalingGroups.
-    #
     # @!attribute [rw] auto_scaling_groups
     #   The groups.
     #   @return [Array<Types::AutoScalingGroup>]
@@ -448,7 +433,9 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] launch_configuration_name
-    #   The launch configuration associated with the instance.
+    #   The launch configuration used to launch the instance. This value is
+    #   not available if you attached the instance to the Auto Scaling
+    #   group.
     #   @return [String]
     #
     # @!attribute [rw] protected_from_scale_in
@@ -469,8 +456,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeAutoScalingInstances.
-    #
     # @!attribute [rw] auto_scaling_instances
     #   The instances.
     #   @return [Array<Types::AutoScalingInstanceDetails>]
@@ -538,14 +523,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of CompleteLifecycleAction.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/CompleteLifecycleActionAnswer AWS API Documentation
     #
     class CompleteLifecycleActionAnswer < Aws::EmptyStructure; end
 
-    # Contains the parameters for CompleteLifecycleAction.
-    #
     # @note When making an API call, you may pass CompleteLifecycleActionType
     #   data as a hash:
     #
@@ -592,8 +573,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateAutoScalingGroup.
-    #
     # @note When making an API call, you may pass CreateAutoScalingGroupType
     #   data as a hash:
     #
@@ -664,7 +643,9 @@ module Aws::AutoScaling
     # @!attribute [rw] desired_capacity
     #   The number of EC2 instances that should be running in the group.
     #   This number must be greater than or equal to the minimum size of the
-    #   group and less than or equal to the maximum size of the group.
+    #   group and less than or equal to the maximum size of the group. If
+    #   you do not specify a desired capacity, the default is the minimum
+    #   size of the group.
     #   @return [Integer]
     #
     # @!attribute [rw] default_cooldown
@@ -685,8 +666,8 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] load_balancer_names
-    #   One or more Classic load balancers. To specify an Application load
-    #   balancer, use `TargetGroupARNs` instead.
+    #   One or more Classic Load Balancers. To specify an Application Load
+    #   Balancer, use `TargetGroupARNs` instead.
     #
     #   For more information, see [Using a Load Balancer With an Auto
     #   Scaling Group][1] in the *Auto Scaling User Guide*.
@@ -807,8 +788,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateLaunchConfiguration.
-    #
     # @note When making an API call, you may pass CreateLaunchConfigurationType
     #   data as a hash:
     #
@@ -856,8 +835,12 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] image_id
     #   The ID of the Amazon Machine Image (AMI) to use to launch your EC2
-    #   instances. For more information, see [Finding an AMI][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide*.
+    #   instances.
+    #
+    #   If you do not specify `InstanceId`, you must specify `ImageId`.
+    #
+    #   For more information, see [Finding an AMI][1] in the *Amazon Elastic
+    #   Compute Cloud User Guide*.
     #
     #
     #
@@ -927,9 +910,11 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] instance_id
     #   The ID of the instance to use to create the launch configuration.
-    #
     #   The new launch configuration derives attributes from the instance,
     #   with the exception of the block device mapping.
+    #
+    #   If you do not specify `InstanceId`, you must specify both `ImageId`
+    #   and `InstanceType`.
     #
     #   To create a launch configuration with a block device mapping or
     #   override any other instance attributes, specify them as part of the
@@ -944,9 +929,12 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type of the EC2 instance. For information about
-    #   available instance types, see [ Available Instance Types][1] in the
-    #   *Amazon Elastic Compute Cloud User Guide.*
+    #   The instance type of the EC2 instance.
+    #
+    #   If you do not specify `InstanceId`, you must specify `InstanceType`.
+    #
+    #   For information about available instance types, see [Available
+    #   Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide.*
     #
     #
     #
@@ -973,7 +961,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] instance_monitoring
     #   Enables detailed monitoring (`true`) or basic monitoring (`false`)
-    #   for the Auto Scaling instances.
+    #   for the Auto Scaling instances. The default is `true`.
     #   @return [Types::InstanceMonitoring]
     #
     # @!attribute [rw] spot_price
@@ -1084,8 +1072,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for CreateOrUpdateTags.
-    #
     # @note When making an API call, you may pass CreateOrUpdateTagsType
     #   data as a hash:
     #
@@ -1112,8 +1098,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteAutoScalingGroup.
-    #
     # @note When making an API call, you may pass DeleteAutoScalingGroupType
     #   data as a hash:
     #
@@ -1141,14 +1125,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DeleteLifecycleHook.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DeleteLifecycleHookAnswer AWS API Documentation
     #
     class DeleteLifecycleHookAnswer < Aws::EmptyStructure; end
 
-    # Contains the parameters for DeleteLifecycleHook.
-    #
     # @note When making an API call, you may pass DeleteLifecycleHookType
     #   data as a hash:
     #
@@ -1173,8 +1153,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteNotificationConfiguration.
-    #
     # @note When making an API call, you may pass DeleteNotificationConfigurationType
     #   data as a hash:
     #
@@ -1200,8 +1178,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DeletePolicy.
-    #
     # @note When making an API call, you may pass DeletePolicyType
     #   data as a hash:
     #
@@ -1226,8 +1202,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteScheduledAction.
-    #
     # @note When making an API call, you may pass DeleteScheduledActionType
     #   data as a hash:
     #
@@ -1252,8 +1226,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteTags.
-    #
     # @note When making an API call, you may pass DeleteTagsType
     #   data as a hash:
     #
@@ -1280,8 +1252,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeAccountLimits.
-    #
     # @!attribute [rw] max_number_of_auto_scaling_groups
     #   The maximum number of groups allowed for your AWS account. The
     #   default limit is 20 per region.
@@ -1310,8 +1280,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeAdjustmentTypes.
-    #
     # @!attribute [rw] adjustment_types
     #   The policy adjustment types.
     #   @return [Array<Types::AdjustmentType>]
@@ -1323,8 +1291,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeAutoScalingInstances.
-    #
     # @note When making an API call, you may pass DescribeAutoScalingInstancesType
     #   data as a hash:
     #
@@ -1341,7 +1307,8 @@ module Aws::AutoScaling
     #   @return [Array<String>]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1358,8 +1325,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeAutoScalingNotificationTypes.
-    #
     # @!attribute [rw] auto_scaling_notification_types
     #   The notification types.
     #   @return [Array<String>]
@@ -1371,8 +1336,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLifecycleHookTypes.
-    #
     # @!attribute [rw] lifecycle_hook_types
     #   The lifecycle hook types.
     #   @return [Array<String>]
@@ -1384,8 +1347,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLifecycleHooks.
-    #
     # @!attribute [rw] lifecycle_hooks
     #   The lifecycle hooks for the specified group.
     #   @return [Array<Types::LifecycleHook>]
@@ -1397,8 +1358,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeLifecycleHooks.
-    #
     # @note When making an API call, you may pass DescribeLifecycleHooksType
     #   data as a hash:
     #
@@ -1424,8 +1383,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeLoadBalancerTargetGroups.
-    #
     # @note When making an API call, you may pass DescribeLoadBalancerTargetGroupsRequest
     #   data as a hash:
     #
@@ -1445,7 +1402,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancerTargetGroupsRequest AWS API Documentation
@@ -1457,8 +1415,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLoadBalancerTargetGroups.
-    #
     # @!attribute [rw] load_balancer_target_groups
     #   Information about the target groups.
     #   @return [Array<Types::LoadBalancerTargetGroupState>]
@@ -1476,8 +1432,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeLoadBalancers.
-    #
     # @note When making an API call, you may pass DescribeLoadBalancersRequest
     #   data as a hash:
     #
@@ -1497,7 +1451,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeLoadBalancersRequest AWS API Documentation
@@ -1509,8 +1464,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLoadBalancers.
-    #
     # @!attribute [rw] load_balancers
     #   The load balancers.
     #   @return [Array<Types::LoadBalancerState>]
@@ -1528,8 +1481,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeMetricsCollectionTypes.
-    #
     # @!attribute [rw] metrics
     #   One or more metrics.
     #   @return [Array<Types::MetricCollectionType>]
@@ -1546,8 +1497,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output from DescribeNotificationConfigurations.
-    #
     # @!attribute [rw] notification_configurations
     #   The notification configurations.
     #   @return [Array<Types::NotificationConfiguration>]
@@ -1565,8 +1514,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeNotificationConfigurations.
-    #
     # @note When making an API call, you may pass DescribeNotificationConfigurationsType
     #   data as a hash:
     #
@@ -1586,7 +1533,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurationsType AWS API Documentation
@@ -1598,8 +1546,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribePolicies.
-    #
     # @note When making an API call, you may pass DescribePoliciesType
     #   data as a hash:
     #
@@ -1634,7 +1580,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to be returned with each call.
+    #   The maximum number of items to be returned with each call. The
+    #   default value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePoliciesType AWS API Documentation
@@ -1648,8 +1595,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeScalingActivities.
-    #
     # @note When making an API call, you may pass DescribeScalingActivitiesType
     #   data as a hash:
     #
@@ -1674,7 +1619,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -1692,8 +1638,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeScheduledActions.
-    #
     # @note When making an API call, you may pass DescribeScheduledActionsType
     #   data as a hash:
     #
@@ -1736,7 +1680,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActionsType AWS API Documentation
@@ -1751,8 +1696,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeTags.
-    #
     # @note When making an API call, you may pass DescribeTagsType
     #   data as a hash:
     #
@@ -1777,7 +1720,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTagsType AWS API Documentation
@@ -1789,8 +1733,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTerminationPolicyTypes.
-    #
     # @!attribute [rw] termination_policy_types
     #   The termination policies supported by Auto Scaling
     #   (`OldestInstance`, `OldestLaunchConfiguration`, `NewestInstance`,
@@ -1804,8 +1746,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DetachInstances.
-    #
     # @!attribute [rw] activities
     #   The activities related to detaching the instances from the Auto
     #   Scaling group.
@@ -1818,8 +1758,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DetachInstances.
-    #
     # @note When making an API call, you may pass DetachInstancesQuery
     #   data as a hash:
     #
@@ -1879,14 +1817,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output for DetachLoadBalancers.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DetachLoadBalancersResultType AWS API Documentation
     #
     class DetachLoadBalancersResultType < Aws::EmptyStructure; end
 
-    # Contains the parameters for DetachLoadBalancers.
-    #
     # @note When making an API call, you may pass DetachLoadBalancersType
     #   data as a hash:
     #
@@ -1911,8 +1845,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DisableMetricsCollection.
-    #
     # @note When making an API call, you may pass DisableMetricsCollectionQuery
     #   data as a hash:
     #
@@ -2035,8 +1967,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for EnableMetricsCollection.
-    #
     # @note When making an API call, you may pass EnableMetricsCollectionQuery
     #   data as a hash:
     #
@@ -2119,8 +2049,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of EnterStandby.
-    #
     # @!attribute [rw] activities
     #   The activities related to moving instances into `Standby` mode.
     #   @return [Array<Types::Activity>]
@@ -2132,8 +2060,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for EnteStandby.
-    #
     # @note When making an API call, you may pass EnterStandbyQuery
     #   data as a hash:
     #
@@ -2168,8 +2094,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for ExecutePolicy.
-    #
     # @note When making an API call, you may pass ExecutePolicyType
     #   data as a hash:
     #
@@ -2237,8 +2161,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for ExitStandby.
-    #
     # @!attribute [rw] activities
     #   The activities related to moving instances out of `Standby` mode.
     #   @return [Array<Types::Activity>]
@@ -2250,8 +2172,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for ExitStandby.
-    #
     # @note When making an API call, you may pass ExitStandbyQuery
     #   data as a hash:
     #
@@ -2347,7 +2267,8 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes whether instance monitoring is enabled.
+    # Describes whether detailed monitoring is enabled for the Auto Scaling
+    # instances.
     #
     # @note When making an API call, you may pass InstanceMonitoring
     #   data as a hash:
@@ -2357,7 +2278,8 @@ module Aws::AutoScaling
     #       }
     #
     # @!attribute [rw] enabled
-    #   If `True`, instance monitoring is enabled.
+    #   If `true`, detailed monitoring is enabled. Otherwise, basic
+    #   monitoring is enabled.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceMonitoring AWS API Documentation
@@ -2492,8 +2414,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DeleteLaunchConfiguration.
-    #
     # @note When making an API call, you may pass LaunchConfigurationNameType
     #   data as a hash:
     #
@@ -2512,8 +2432,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for DescribeLaunchConfigurations.
-    #
     # @note When making an API call, you may pass LaunchConfigurationNamesType
     #   data as a hash:
     #
@@ -2534,8 +2452,8 @@ module Aws::AutoScaling
     #   @return [String]
     #
     # @!attribute [rw] max_records
-    #   The maximum number of items to return with this call. The default is
-    #   100.
+    #   The maximum number of items to return with this call. The default
+    #   value is 50 and the maximum value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LaunchConfigurationNamesType AWS API Documentation
@@ -2547,8 +2465,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeLaunchConfigurations.
-    #
     # @!attribute [rw] launch_configurations
     #   The launch configurations.
     #   @return [Array<Types::LaunchConfiguration>]
@@ -2665,7 +2581,7 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes the state of a Classic load balancer.
+    # Describes the state of a Classic Load Balancer.
     #
     # If you specify a load balancer when creating the Auto Scaling group,
     # the state of the load balancer is `InService`.
@@ -2830,8 +2746,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribePolicies.
-    #
     # @!attribute [rw] scaling_policies
     #   The scaling policies.
     #   @return [Array<Types::ScalingPolicy>]
@@ -2849,8 +2763,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of PutScalingPolicy.
-    #
     # @!attribute [rw] policy_arn
     #   The Amazon Resource Name (ARN) of the policy.
     #   @return [String]
@@ -2898,8 +2810,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeScalingProcessTypes.
-    #
     # @!attribute [rw] processes
     #   The names of the process types.
     #   @return [Array<Types::ProcessType>]
@@ -2911,14 +2821,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of PutLifecycleHook.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutLifecycleHookAnswer AWS API Documentation
     #
     class PutLifecycleHookAnswer < Aws::EmptyStructure; end
 
-    # Contains the parameters for PutLifecycleHook.
-    #
     # @note When making an API call, you may pass PutLifecycleHookType
     #   data as a hash:
     #
@@ -3008,8 +2914,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for PutNotificationConfiguration.
-    #
     # @note When making an API call, you may pass PutNotificationConfigurationType
     #   data as a hash:
     #
@@ -3043,8 +2947,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for PutScalingPolicy.
-    #
     # @note When making an API call, you may pass PutScalingPolicyType
     #   data as a hash:
     #
@@ -3173,8 +3075,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for PutScheduledUpdateGroupAction.
-    #
     # @note When making an API call, you may pass PutScheduledUpdateGroupActionType
     #   data as a hash:
     #
@@ -3255,14 +3155,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of RecordLifecycleActionHeartBeat.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/RecordLifecycleActionHeartbeatAnswer AWS API Documentation
     #
     class RecordLifecycleActionHeartbeatAnswer < Aws::EmptyStructure; end
 
-    # Contains the parameters for RecordLifecycleActionHeartbeat.
-    #
     # @note When making an API call, you may pass RecordLifecycleActionHeartbeatType
     #   data as a hash:
     #
@@ -3347,7 +3243,7 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] cooldown
     #   The amount of time, in seconds, after a scaling activity completes
-    #   before any further trigger-related scaling activities can start.
+    #   before any further dynamic scaling activities can start.
     #   @return [Integer]
     #
     # @!attribute [rw] step_adjustments
@@ -3388,8 +3284,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for SuspendProcesses and ResumeProcesses.
-    #
     # @note When making an API call, you may pass ScalingProcessQuery
     #   data as a hash:
     #
@@ -3431,8 +3325,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeScheduledActions.
-    #
     # @!attribute [rw] scheduled_update_group_actions
     #   The scheduled actions.
     #   @return [Array<Types::ScheduledUpdateGroupAction>]
@@ -3514,8 +3406,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for SetDesiredCapacity.
-    #
     # @note When making an API call, you may pass SetDesiredCapacityType
     #   data as a hash:
     #
@@ -3551,8 +3441,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for SetInstanceHealth.
-    #
     # @note When making an API call, you may pass SetInstanceHealthQuery
     #   data as a hash:
     #
@@ -3593,14 +3481,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of SetInstanceProtection.
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/SetInstanceProtectionAnswer AWS API Documentation
     #
     class SetInstanceProtectionAnswer < Aws::EmptyStructure; end
 
-    # Contains the parameters for SetInstanceProtection.
-    #
     # @note When making an API call, you may pass SetInstanceProtectionQuery
     #   data as a hash:
     #
@@ -3806,8 +3690,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the output of DescribeTags.
-    #
     # @!attribute [rw] tags
     #   One or more tags.
     #   @return [Array<Types::TagDescription>]
@@ -3825,8 +3707,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for TerminateInstanceInAutoScalingGroup.
-    #
     # @note When making an API call, you may pass TerminateInstanceInAutoScalingGroupType
     #   data as a hash:
     #
@@ -3852,8 +3732,6 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Contains the parameters for UpdateAutoScalingGroup.
-    #
     # @note When making an API call, you may pass UpdateAutoScalingGroupType
     #   data as a hash:
     #

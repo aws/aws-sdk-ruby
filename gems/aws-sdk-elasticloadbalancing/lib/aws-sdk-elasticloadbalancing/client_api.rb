@@ -75,6 +75,8 @@ module Aws::ElasticLoadBalancing
     DeregisterEndPointsOutput = Shapes::StructureShape.new(name: 'DeregisterEndPointsOutput')
     DescribeAccessPointsInput = Shapes::StructureShape.new(name: 'DescribeAccessPointsInput')
     DescribeAccessPointsOutput = Shapes::StructureShape.new(name: 'DescribeAccessPointsOutput')
+    DescribeAccountLimitsInput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsInput')
+    DescribeAccountLimitsOutput = Shapes::StructureShape.new(name: 'DescribeAccountLimitsOutput')
     DescribeEndPointStateInput = Shapes::StructureShape.new(name: 'DescribeEndPointStateInput')
     DescribeEndPointStateOutput = Shapes::StructureShape.new(name: 'DescribeEndPointStateOutput')
     DescribeLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'DescribeLoadBalancerAttributesInput')
@@ -112,6 +114,8 @@ module Aws::ElasticLoadBalancing
     InvalidSubnetException = Shapes::StructureShape.new(name: 'InvalidSubnetException')
     LBCookieStickinessPolicies = Shapes::ListShape.new(name: 'LBCookieStickinessPolicies')
     LBCookieStickinessPolicy = Shapes::StructureShape.new(name: 'LBCookieStickinessPolicy')
+    Limit = Shapes::StructureShape.new(name: 'Limit')
+    Limits = Shapes::ListShape.new(name: 'Limits')
     Listener = Shapes::StructureShape.new(name: 'Listener')
     ListenerDescription = Shapes::StructureShape.new(name: 'ListenerDescription')
     ListenerDescriptions = Shapes::ListShape.new(name: 'ListenerDescriptions')
@@ -125,8 +129,10 @@ module Aws::ElasticLoadBalancing
     LoadBalancerNamesMax20 = Shapes::ListShape.new(name: 'LoadBalancerNamesMax20')
     LoadBalancerScheme = Shapes::StringShape.new(name: 'LoadBalancerScheme')
     Marker = Shapes::StringShape.new(name: 'Marker')
+    Max = Shapes::StringShape.new(name: 'Max')
     ModifyLoadBalancerAttributesInput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesInput')
     ModifyLoadBalancerAttributesOutput = Shapes::StructureShape.new(name: 'ModifyLoadBalancerAttributesOutput')
+    Name = Shapes::StringShape.new(name: 'Name')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     Policies = Shapes::StructureShape.new(name: 'Policies')
     PolicyAttribute = Shapes::StructureShape.new(name: 'PolicyAttribute')
@@ -329,6 +335,14 @@ module Aws::ElasticLoadBalancing
     DescribeAccessPointsOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
     DescribeAccessPointsOutput.struct_class = Types::DescribeAccessPointsOutput
 
+    DescribeAccountLimitsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+    DescribeAccountLimitsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
+    DescribeAccountLimitsInput.struct_class = Types::DescribeAccountLimitsInput
+
+    DescribeAccountLimitsOutput.add_member(:limits, Shapes::ShapeRef.new(shape: Limits, location_name: "Limits"))
+    DescribeAccountLimitsOutput.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "NextMarker"))
+    DescribeAccountLimitsOutput.struct_class = Types::DescribeAccountLimitsOutput
+
     DescribeEndPointStateInput.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: AccessPointName, required: true, location_name: "LoadBalancerName"))
     DescribeEndPointStateInput.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, location_name: "Instances"))
     DescribeEndPointStateInput.struct_class = Types::DescribeEndPointStateInput
@@ -393,6 +407,12 @@ module Aws::ElasticLoadBalancing
     LBCookieStickinessPolicy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "PolicyName"))
     LBCookieStickinessPolicy.add_member(:cookie_expiration_period, Shapes::ShapeRef.new(shape: CookieExpirationPeriod, location_name: "CookieExpirationPeriod"))
     LBCookieStickinessPolicy.struct_class = Types::LBCookieStickinessPolicy
+
+    Limit.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    Limit.add_member(:max, Shapes::ShapeRef.new(shape: Max, location_name: "Max"))
+    Limit.struct_class = Types::Limit
+
+    Limits.member = Shapes::ShapeRef.new(shape: Limit)
 
     Listener.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
     Listener.add_member(:load_balancer_port, Shapes::ShapeRef.new(shape: AccessPointPort, required: true, location_name: "LoadBalancerPort"))
@@ -721,6 +741,14 @@ module Aws::ElasticLoadBalancing
         o.output = Shapes::ShapeRef.new(shape: DeregisterEndPointsOutput)
         o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException)
+      end)
+
+      api.add_operation(:describe_account_limits, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountLimits"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountLimitsInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountLimitsOutput)
       end)
 
       api.add_operation(:describe_instance_health, Seahorse::Model::Operation.new.tap do |o|

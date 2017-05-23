@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2017-05-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Athena`.
+
 1.7.0 (2017-05-05)
 ------------------
 

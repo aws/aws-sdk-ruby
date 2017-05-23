@@ -656,6 +656,13 @@ module Aws::CloudWatchLogs
     #   If you order the results by event time, you cannot specify the
     #   `logStreamNamePrefix` parameter.
     #
+    #   lastEventTimestamp represents the time of the most recent log event in
+    #   the log stream in CloudWatch Logs. This number is expressed as the
+    #   number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+    #   lastEventTimeStamp updates on an eventual consistency basis. It
+    #   typically updates in less than an hour from ingestion, but may take
+    #   longer in some rare situations.
+    #
     # @option params [Boolean] :descending
     #   If the value is true, results are returned in descending order. If the
     #   value is to false, results are returned in ascending order. The
@@ -1274,12 +1281,19 @@ module Aws::CloudWatchLogs
     #   subscription filter, for same-account delivery.
     #
     # There can only be one subscription filter associated with a log group.
+    # If you are updating an existing filter, you must specify the correct
+    # name in `filterName`. Otherwise, the call will fail because you cannot
+    # associate a second filter with a log group.
     #
     # @option params [required, String] :log_group_name
     #   The name of the log group.
     #
     # @option params [required, String] :filter_name
-    #   A name for the subscription filter.
+    #   A name for the subscription filter. If you are updating an existing
+    #   filter, you must specify the correct name in `filterName`. Otherwise,
+    #   the call will fail because you cannot associate a second filter with a
+    #   log group. To find the name of the filter currently associated with a
+    #   log group, use DescribeSubscriptionFilters.
     #
     # @option params [required, String] :filter_pattern
     #   A filter pattern for subscribing to a filtered stream of log events.
@@ -1455,7 +1469,7 @@ module Aws::CloudWatchLogs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.0.0.rc5'
+      context[:gem_version] = '1.0.0.rc6'
       Seahorse::Client::Request.new(handlers, context)
     end
 

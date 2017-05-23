@@ -66,7 +66,8 @@ module Aws::AutoScaling
       data.health_status
     end
 
-    # The launch configuration associated with the instance.
+    # The launch configuration used to launch the instance. This value is
+    # not available if you attached the instance to the Auto Scaling group.
     # @return [String]
     def launch_configuration_name
       data.launch_configuration_name

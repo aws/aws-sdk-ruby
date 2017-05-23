@@ -439,6 +439,14 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].deployment_group_name #=> String
     #   resp.deployments_info[0].deployment_config_name #=> String
     #   resp.deployments_info[0].deployment_id #=> String
+    #   resp.deployments_info[0].previous_revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployments_info[0].previous_revision.s3_location.bucket #=> String
+    #   resp.deployments_info[0].previous_revision.s3_location.key #=> String
+    #   resp.deployments_info[0].previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployments_info[0].previous_revision.s3_location.version #=> String
+    #   resp.deployments_info[0].previous_revision.s3_location.e_tag #=> String
+    #   resp.deployments_info[0].previous_revision.git_hub_location.repository #=> String
+    #   resp.deployments_info[0].previous_revision.git_hub_location.commit_id #=> String
     #   resp.deployments_info[0].revision.revision_type #=> String, one of "S3", "GitHub"
     #   resp.deployments_info[0].revision.s3_location.bucket #=> String
     #   resp.deployments_info[0].revision.s3_location.key #=> String
@@ -486,6 +494,7 @@ module Aws::CodeDeploy
     #   resp.deployments_info[0].load_balancer_info.elb_info_list #=> Array
     #   resp.deployments_info[0].load_balancer_info.elb_info_list[0].name #=> String
     #   resp.deployments_info[0].additional_deployment_status_info #=> String
+    #   resp.deployments_info[0].file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeployments AWS API Documentation
     #
@@ -533,12 +542,12 @@ module Aws::CodeDeploy
       req.send_request(options)
     end
 
-    # Starts the process of rerouting traffic from instances in the original
-    # environment to instances in thereplacement environment without waiting
-    # for a specified wait time to elapse. (Traffic rerouting, which is
-    # achieved by registering instances in the replacement environment with
-    # the load balancer, can start as soon as all instances have a status of
-    # Ready.)
+    # For a blue/green deployment, starts the process of rerouting traffic
+    # from instances in the original environment to instances in the
+    # replacement environment without waiting for a specified wait time to
+    # elapse. (Traffic rerouting, which is achieved by registering instances
+    # in the replacement environment with the load balancer, can start as
+    # soon as all instances have a status of Ready.)
     #
     # @option params [String] :deployment_id
     #   The deployment ID of the blue/green deployment for which you want to
@@ -638,6 +647,23 @@ module Aws::CodeDeploy
     #   Indicates whether to deploy to all instances or only to instances that
     #   are not running the latest application revision.
     #
+    # @option params [String] :file_exists_behavior
+    #   Information about how AWS CodeDeploy handles files that already exist
+    #   in a deployment target location but weren't part of the previous
+    #   successful deployment.
+    #
+    #   The fileExistsBehavior parameter takes any of the following values:
+    #
+    #   * DISALLOW: The deployment fails. This is also the default behavior if
+    #     no option is specified.
+    #
+    #   * OVERWRITE: The version of the file from the application revision
+    #     currently being deployed replaces the version already on the
+    #     instance.
+    #
+    #   * RETAIN: The version of the file already on the instance is kept and
+    #     used as part of the new deployment.
+    #
     # @return [Types::CreateDeploymentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDeploymentOutput#deployment_id #deployment_id} => String
@@ -679,6 +705,7 @@ module Aws::CodeDeploy
     #       events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
     #     },
     #     update_outdated_instances_only: false,
+    #     file_exists_behavior: "DISALLOW", # accepts DISALLOW, OVERWRITE, RETAIN
     #   })
     #
     # @example Response structure
@@ -768,7 +795,7 @@ module Aws::CodeDeploy
     #   the deployment group.
     #
     #   For more information about the predefined deployment configurations in
-    #   AWS CodeDeploy, see see [Working with Deployment Groups in AWS
+    #   AWS CodeDeploy, see [Working with Deployment Groups in AWS
     #   CodeDeploy][1] in the AWS CodeDeploy User Guide.
     #
     #
@@ -776,10 +803,12 @@ module Aws::CodeDeploy
     #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html
     #
     # @option params [Array<Types::EC2TagFilter>] :ec2_tag_filters
-    #   The Amazon EC2 tags on which to filter.
+    #   The Amazon EC2 tags on which to filter. The deployment group will
+    #   include EC2 instances with any of the specified tags.
     #
     # @option params [Array<Types::TagFilter>] :on_premises_instance_tag_filters
-    #   The on-premises instance tags on which to filter.
+    #   The on-premises instance tags on which to filter. The deployment group
+    #   will include on-premises instances with any of the specified tags.
     #
     # @option params [Array<String>] :auto_scaling_groups
     #   A list of associated Auto Scaling groups.
@@ -806,7 +835,7 @@ module Aws::CodeDeploy
     #   a deployment group is created.
     #
     # @option params [Types::DeploymentStyle] :deployment_style
-    #   Information about the type of deployment, standard or blue/green, that
+    #   Information about the type of deployment, in-place or blue/green, that
     #   you want to run and whether to route deployment traffic behind a load
     #   balancer.
     #
@@ -815,7 +844,7 @@ module Aws::CodeDeploy
     #   group.
     #
     # @option params [Types::LoadBalancerInfo] :load_balancer_info
-    #   Information about the load balancer used in a blue/green deployment.
+    #   Information about the load balancer used in a deployment.
     #
     # @return [Types::CreateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1127,6 +1156,14 @@ module Aws::CodeDeploy
     #   resp.deployment_info.deployment_group_name #=> String
     #   resp.deployment_info.deployment_config_name #=> String
     #   resp.deployment_info.deployment_id #=> String
+    #   resp.deployment_info.previous_revision.revision_type #=> String, one of "S3", "GitHub"
+    #   resp.deployment_info.previous_revision.s3_location.bucket #=> String
+    #   resp.deployment_info.previous_revision.s3_location.key #=> String
+    #   resp.deployment_info.previous_revision.s3_location.bundle_type #=> String, one of "tar", "tgz", "zip"
+    #   resp.deployment_info.previous_revision.s3_location.version #=> String
+    #   resp.deployment_info.previous_revision.s3_location.e_tag #=> String
+    #   resp.deployment_info.previous_revision.git_hub_location.repository #=> String
+    #   resp.deployment_info.previous_revision.git_hub_location.commit_id #=> String
     #   resp.deployment_info.revision.revision_type #=> String, one of "S3", "GitHub"
     #   resp.deployment_info.revision.s3_location.bucket #=> String
     #   resp.deployment_info.revision.s3_location.key #=> String
@@ -1174,6 +1211,7 @@ module Aws::CodeDeploy
     #   resp.deployment_info.load_balancer_info.elb_info_list #=> Array
     #   resp.deployment_info.load_balancer_info.elb_info_list[0].name #=> String
     #   resp.deployment_info.additional_deployment_status_info #=> String
+    #   resp.deployment_info.file_exists_behavior #=> String, one of "DISALLOW", "OVERWRITE", "RETAIN"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeployment AWS API Documentation
     #
@@ -2021,7 +2059,7 @@ module Aws::CodeDeploy
     #   changed when a deployment group is updated.
     #
     # @option params [Types::DeploymentStyle] :deployment_style
-    #   Information about the type of deployment, either standard or
+    #   Information about the type of deployment, either in-place or
     #   blue/green, you want to run and whether to route deployment traffic
     #   behind a load balancer.
     #
@@ -2030,7 +2068,7 @@ module Aws::CodeDeploy
     #   group.
     #
     # @option params [Types::LoadBalancerInfo] :load_balancer_info
-    #   Information about the load balancer used in a blue/green deployment.
+    #   Information about the load balancer used in a deployment.
     #
     # @return [Types::UpdateDeploymentGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2133,7 +2171,7 @@ module Aws::CodeDeploy
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codedeploy'
-      context[:gem_version] = '1.0.0.rc6'
+      context[:gem_version] = '1.0.0.rc7'
       Seahorse::Client::Request.new(handlers, context)
     end
 

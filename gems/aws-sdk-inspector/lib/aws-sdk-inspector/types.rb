@@ -188,6 +188,10 @@ module Aws::Inspector
     #   once.
     #   @return [Array<Types::AssessmentRunNotification>]
     #
+    # @!attribute [rw] finding_counts
+    #   Provides a total count of generated findings per severity.
+    #   @return [Hash<String,Integer>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AssessmentRun AWS API Documentation
     #
     class AssessmentRun < Struct.new(
@@ -204,7 +208,8 @@ module Aws::Inspector
       :state_changed_at,
       :data_collected,
       :state_changes,
-      :notifications)
+      :notifications,
+      :finding_counts)
       include Aws::Structure
     end
 
@@ -261,7 +266,7 @@ module Aws::Inspector
     #
     #       {
     #         name_pattern: "NamePattern",
-    #         states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, EVALUATING_RULES, FAILED, COMPLETED, COMPLETED_WITH_ERRORS
+    #         states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, START_EVALUATING_RULES_PENDING, EVALUATING_RULES, FAILED, ERROR, COMPLETED, COMPLETED_WITH_ERRORS
     #         duration_range: {
     #           min_seconds: 1,
     #           max_seconds: 1,
@@ -351,6 +356,7 @@ module Aws::Inspector
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   The message included in the notification.
     #   @return [String]
     #
     # @!attribute [rw] error
@@ -1320,6 +1326,64 @@ module Aws::Inspector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetAssessmentReportRequest
+    #   data as a hash:
+    #
+    #       {
+    #         assessment_run_arn: "Arn", # required
+    #         report_file_format: "HTML", # required, accepts HTML, PDF
+    #         report_type: "FINDING", # required, accepts FINDING, FULL
+    #       }
+    #
+    # @!attribute [rw] assessment_run_arn
+    #   The ARN that specifies the assessment run for which you want to
+    #   generate a report.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_file_format
+    #   Specifies the file format (html or pdf) of the assessment report
+    #   that you want to generate.
+    #   @return [String]
+    #
+    # @!attribute [rw] report_type
+    #   Specifies the type of the assessment report that you want to
+    #   generate. There are two types of assessment reports: a finding
+    #   report and a full report. For more information, see [Assessment
+    #   Reports][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_reports.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReportRequest AWS API Documentation
+    #
+    class GetAssessmentReportRequest < Struct.new(
+      :assessment_run_arn,
+      :report_file_format,
+      :report_type)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   Specifies the status of the request to generate an assessment
+    #   report.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   Specifies the URL where you can find the generated assessment
+    #   report. This parameter is only returned if the report is
+    #   successfully generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/GetAssessmentReportResponse AWS API Documentation
+    #
+    class GetAssessmentReportResponse < Struct.new(
+      :status,
+      :url)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTelemetryMetadataRequest
     #   data as a hash:
     #
@@ -1451,7 +1515,7 @@ module Aws::Inspector
     #         assessment_template_arns: ["Arn"],
     #         filter: {
     #           name_pattern: "NamePattern",
-    #           states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, EVALUATING_RULES, FAILED, COMPLETED, COMPLETED_WITH_ERRORS
+    #           states: ["CREATED"], # accepts CREATED, START_DATA_COLLECTION_PENDING, START_DATA_COLLECTION_IN_PROGRESS, COLLECTING_DATA, STOP_DATA_COLLECTION_PENDING, DATA_COLLECTED, START_EVALUATING_RULES_PENDING, EVALUATING_RULES, FAILED, ERROR, COMPLETED, COMPLETED_WITH_ERRORS
     #           duration_range: {
     #             min_seconds: 1,
     #             max_seconds: 1,

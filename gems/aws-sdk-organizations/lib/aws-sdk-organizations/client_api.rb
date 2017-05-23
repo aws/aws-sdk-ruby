@@ -205,6 +205,7 @@ module Aws::Organizations
 
     Account.add_member(:id, Shapes::ShapeRef.new(shape: AccountId, location_name: "Id"))
     Account.add_member(:arn, Shapes::ShapeRef.new(shape: AccountArn, location_name: "Arn"))
+    Account.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
     Account.add_member(:name, Shapes::ShapeRef.new(shape: AccountName, location_name: "Name"))
     Account.add_member(:status, Shapes::ShapeRef.new(shape: AccountStatus, location_name: "Status"))
     Account.add_member(:joined_method, Shapes::ShapeRef.new(shape: AccountJoinedMethod, location_name: "JoinedMethod"))
@@ -953,6 +954,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_accounts_for_parent, Seahorse::Model::Operation.new.tap do |o|
@@ -967,6 +974,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ParentNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_children, Seahorse::Model::Operation.new.tap do |o|
@@ -981,6 +994,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ParentNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_create_account_status, Seahorse::Model::Operation.new.tap do |o|
@@ -994,6 +1013,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_handshakes_for_account, Seahorse::Model::Operation.new.tap do |o|
@@ -1006,6 +1031,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_handshakes_for_organization, Seahorse::Model::Operation.new.tap do |o|
@@ -1019,6 +1050,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_organizational_units_for_parent, Seahorse::Model::Operation.new.tap do |o|
@@ -1033,6 +1070,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ParentNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_parents, Seahorse::Model::Operation.new.tap do |o|
@@ -1047,6 +1090,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -1060,6 +1109,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_policies_for_target, Seahorse::Model::Operation.new.tap do |o|
@@ -1074,6 +1129,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TargetNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_roots, Seahorse::Model::Operation.new.tap do |o|
@@ -1087,6 +1148,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_targets_for_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1101,6 +1168,12 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:move_account, Seahorse::Model::Operation.new.tap do |o|

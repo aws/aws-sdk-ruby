@@ -32,6 +32,7 @@ module Aws::ResourceGroupsTaggingAPI
     ResourceTagMapping = Shapes::StructureShape.new(name: 'ResourceTagMapping')
     ResourceTagMappingList = Shapes::ListShape.new(name: 'ResourceTagMappingList')
     ResourceTypeFilterList = Shapes::ListShape.new(name: 'ResourceTypeFilterList')
+    ResourcesPerPage = Shapes::IntegerShape.new(name: 'ResourcesPerPage')
     StatusCode = Shapes::IntegerShape.new(name: 'StatusCode')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagFilter = Shapes::StructureShape.new(name: 'TagFilter')
@@ -61,7 +62,8 @@ module Aws::ResourceGroupsTaggingAPI
 
     GetResourcesInput.add_member(:pagination_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "PaginationToken"))
     GetResourcesInput.add_member(:tag_filters, Shapes::ShapeRef.new(shape: TagFilterList, location_name: "TagFilters"))
-    GetResourcesInput.add_member(:tags_per_page, Shapes::ShapeRef.new(shape: TagsPerPage, required: true, location_name: "TagsPerPage"))
+    GetResourcesInput.add_member(:resources_per_page, Shapes::ShapeRef.new(shape: ResourcesPerPage, location_name: "ResourcesPerPage"))
+    GetResourcesInput.add_member(:tags_per_page, Shapes::ShapeRef.new(shape: TagsPerPage, location_name: "TagsPerPage"))
     GetResourcesInput.add_member(:resource_type_filters, Shapes::ShapeRef.new(shape: ResourceTypeFilterList, location_name: "ResourceTypeFilters"))
     GetResourcesInput.struct_class = Types::GetResourcesInput
 
@@ -156,6 +158,12 @@ module Aws::ResourceGroupsTaggingAPI
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "resources_per_page",
+          tokens: {
+            "pagination_token" => "pagination_token"
+          }
+        )
       end)
 
       api.add_operation(:get_tag_keys, Seahorse::Model::Operation.new.tap do |o|
@@ -168,6 +176,11 @@ module Aws::ResourceGroupsTaggingAPI
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "pagination_token" => "pagination_token"
+          }
+        )
       end)
 
       api.add_operation(:get_tag_values, Seahorse::Model::Operation.new.tap do |o|
@@ -180,6 +193,11 @@ module Aws::ResourceGroupsTaggingAPI
         o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: PaginationTokenExpiredException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "pagination_token" => "pagination_token"
+          }
+        )
       end)
 
       api.add_operation(:tag_resources, Seahorse::Model::Operation.new.tap do |o|

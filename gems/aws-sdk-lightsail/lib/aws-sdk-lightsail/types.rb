@@ -77,7 +77,8 @@ module Aws::Lightsail
     # Describes an Availability Zone.
     #
     # @!attribute [rw] zone_name
-    #   The name of the Availability Zone.
+    #   The name of the Availability Zone. The format is `us-east-1a`
+    #   (case-sensitive).
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -398,7 +399,14 @@ module Aws::Lightsail
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone where you want to create your instances. Use
-    #   the following formatting: `us-east-1a` (case sensitive).
+    #   the following formatting: `us-east-1a` (case sensitive). You can get
+    #   a list of availability zones by using the [get regions][1]
+    #   operation. Be sure to add the `include availability zones` parameter
+    #   to your request.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html
     #   @return [String]
     #
     # @!attribute [rw] instance_snapshot_name
@@ -478,7 +486,14 @@ module Aws::Lightsail
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone in which to create your instance. Use the
-    #   following format: `us-east-1a` (case sensitive).
+    #   following format: `us-east-1a` (case sensitive). You can get a list
+    #   of availability zones by using the [get regions][1] operation. Be
+    #   sure to add the `include availability zones` parameter to your
+    #   request.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html
     #   @return [String]
     #
     # @!attribute [rw] custom_image_name
@@ -1301,7 +1316,7 @@ module Aws::Lightsail
 
     # @!attribute [rw] port_states
     #   Information about the port states resulting from your request.
-    #   @return [Array<String>]
+    #   @return [Array<Types::InstancePortState>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancePortStatesResult AWS API Documentation
     #
@@ -1998,7 +2013,29 @@ module Aws::Lightsail
     #   @return [Integer]
     #
     # @!attribute [rw] protocol
-    #   The protocol.
+    #   The protocol being used. Can be one of the following.
+    #
+    #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
+    #     ordered, and error-checked delivery of streamed data between
+    #     applications running on hosts communicating by an IP network. If
+    #     you have an application that doesn't require reliable data stream
+    #     service, use UDP instead.
+    #
+    #   * `all` - All transport layer protocol types. For more general
+    #     information, see [Transport layer][1] on Wikipedia.
+    #
+    #   * `udp` - With User Datagram Protocol (UDP), computer applications
+    #     can send messages (or datagrams) to other hosts on an Internet
+    #     Protocol (IP) network. Prior communications are not required to
+    #     set up transmission channels or data paths. Applications that
+    #     don't require reliable data stream service can use UDP, which
+    #     provides a connectionless datagram service that emphasizes reduced
+    #     latency over reliability. If you do require reliable data stream
+    #     service, use TCP instead.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Transport_layer
     #   @return [String]
     #
     # @!attribute [rw] access_from
@@ -2028,6 +2065,56 @@ module Aws::Lightsail
       :access_type,
       :common_name,
       :access_direction)
+      include Aws::Structure
+    end
+
+    # Describes the port state.
+    #
+    # @!attribute [rw] from_port
+    #   The first port in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to_port
+    #   The last port in the range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol being used. Can be one of the following.
+    #
+    #   * `tcp` - Transmission Control Protocol (TCP) provides reliable,
+    #     ordered, and error-checked delivery of streamed data between
+    #     applications running on hosts communicating by an IP network. If
+    #     you have an application that doesn't require reliable data stream
+    #     service, use UDP instead.
+    #
+    #   * `all` - All transport layer protocol types. For more general
+    #     information, see [Transport layer][1] on Wikipedia.
+    #
+    #   * `udp` - With User Datagram Protocol (UDP), computer applications
+    #     can send messages (or datagrams) to other hosts on an Internet
+    #     Protocol (IP) network. Prior communications are not required to
+    #     set up transmission channels or data paths. Applications that
+    #     don't require reliable data stream service can use UDP, which
+    #     provides a connectionless datagram service that emphasizes reduced
+    #     latency over reliability. If you do require reliable data stream
+    #     service, use TCP instead.
+    #
+    #
+    #
+    #   [1]: https://en.wikipedia.org/wiki/Transport_layer
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   Specifies whether the instance port is `open` or `closed`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstancePortState AWS API Documentation
+    #
+    class InstancePortState < Struct.new(
+      :from_port,
+      :to_port,
+      :protocol,
+      :state)
       include Aws::Structure
     end
 
@@ -2418,6 +2505,47 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutInstancePublicPortsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         port_infos: [ # required
+    #           {
+    #             from_port: 1,
+    #             to_port: 1,
+    #             protocol: "tcp", # accepts tcp, all, udp
+    #           },
+    #         ],
+    #         instance_name: "ResourceName", # required
+    #       }
+    #
+    # @!attribute [rw] port_infos
+    #   Specifies information about the public port(s).
+    #   @return [Array<Types::PortInfo>]
+    #
+    # @!attribute [rw] instance_name
+    #   The Lightsail instance name of the public port(s) you are setting.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPortsRequest AWS API Documentation
+    #
+    class PutInstancePublicPortsRequest < Struct.new(
+      :port_infos,
+      :instance_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] operation
+    #   Describes metadata about the operation you just executed.
+    #   @return [Types::Operation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PutInstancePublicPortsResult AWS API Documentation
+    #
+    class PutInstancePublicPortsResult < Struct.new(
+      :operation)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RebootInstanceRequest
     #   data as a hash:
     #
@@ -2468,7 +2596,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] availability_zones
-    #   The Availability Zones.
+    #   The Availability Zones. Follows the format `us-east-1a`
+    #   (case-sensitive).
     #   @return [Array<Types::AvailabilityZone>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Region AWS API Documentation
@@ -2515,7 +2644,8 @@ module Aws::Lightsail
     # Describes the resource location.
     #
     # @!attribute [rw] availability_zone
-    #   The Availability Zone.
+    #   The Availability Zone. Follows the format `us-east-1a`
+    #   (case-sensitive).
     #   @return [String]
     #
     # @!attribute [rw] region_name

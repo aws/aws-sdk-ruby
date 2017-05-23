@@ -337,11 +337,14 @@ module Aws::GameLift
     #               concurrent_executions: 1, # required
     #             },
     #           ],
+    #           max_concurrent_game_session_activations: 1,
+    #           game_session_activation_timeout_seconds: 1,
     #         },
     #         resource_creation_limit_policy: {
     #           new_game_sessions_per_creator: 1,
     #           policy_period_in_minutes: 1,
     #         },
+    #         metric_groups: ["MetricGroup"],
     #       }
     #
     # @!attribute [rw] name
@@ -443,6 +446,13 @@ module Aws::GameLift
     #   can create over a span of time for this fleet.
     #   @return [Types::ResourceCreationLimitPolicy]
     #
+    # @!attribute [rw] metric_groups
+    #   Names of metric groups to add this fleet to. Use an existing metric
+    #   group name to add this fleet to the group, or use a new name to
+    #   create a new metric group. Currently, a fleet can only be included
+    #   in one metric group at a time.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/CreateFleetInput AWS API Documentation
     #
     class CreateFleetInput < Struct.new(
@@ -456,7 +466,8 @@ module Aws::GameLift
       :ec2_inbound_permissions,
       :new_game_session_protection_policy,
       :runtime_configuration,
-      :resource_creation_limit_policy)
+      :resource_creation_limit_policy,
+      :metric_groups)
       include Aws::Structure
     end
 
@@ -2049,6 +2060,14 @@ module Aws::GameLift
     #   player can create over a span of time.
     #   @return [Types::ResourceCreationLimitPolicy]
     #
+    # @!attribute [rw] metric_groups
+    #   Names of metric groups that this fleet is included in. In Amazon
+    #   CloudWatch, you can view metrics for an individual fleet or
+    #   aggregated metrics for a fleets that are in a fleet metric group.
+    #   Currently, a fleet can be included in only one metric group at a
+    #   time.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes AWS API Documentation
     #
     class FleetAttributes < Struct.new(
@@ -2065,7 +2084,8 @@ module Aws::GameLift
       :log_paths,
       :new_game_session_protection_policy,
       :operating_system,
-      :resource_creation_limit_policy)
+      :resource_creation_limit_policy,
+      :metric_groups)
       include Aws::Structure
     end
 
@@ -2463,7 +2483,7 @@ module Aws::GameLift
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+    #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_seconds
@@ -3184,7 +3204,7 @@ module Aws::GameLift
     #         threshold: 1.0, # required
     #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #         evaluation_periods: 1, # required
-    #         metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances, QueueDepth, WaitTime
+    #         metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailableGameSessions, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances, PercentAvailableGameSessions, PercentIdleInstances, QueueDepth, WaitTime
     #       }
     #
     # @!attribute [rw] name
@@ -3474,17 +3494,35 @@ module Aws::GameLift
     #             concurrent_executions: 1, # required
     #           },
     #         ],
+    #         max_concurrent_game_session_activations: 1,
+    #         game_session_activation_timeout_seconds: 1,
     #       }
     #
     # @!attribute [rw] server_processes
-    #   Collection of server process configurations describing what server
-    #   processes to run on each instance in a fleet
+    #   Collection of server process configurations that describe which
+    #   server processes to run on each instance in a fleet.
     #   @return [Array<Types::ServerProcess>]
+    #
+    # @!attribute [rw] max_concurrent_game_session_activations
+    #   Maximum number of game sessions with status ACTIVATING to allow on
+    #   an instance simultaneously. This setting limits the amount of
+    #   instance resources that can be used for new game activations at any
+    #   one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] game_session_activation_timeout_seconds
+    #   Maximum amount of time (in seconds) that a game session can remain
+    #   in status ACTIVATING. If the game session is not active before the
+    #   timeout, activation is terminated and the game session status is
+    #   changed to TERMINATED.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RuntimeConfiguration AWS API Documentation
     #
     class RuntimeConfiguration < Struct.new(
-      :server_processes)
+      :server_processes,
+      :max_concurrent_game_session_activations,
+      :game_session_activation_timeout_seconds)
       include Aws::Structure
     end
 
@@ -4076,6 +4114,7 @@ module Aws::GameLift
     #           new_game_sessions_per_creator: 1,
     #           policy_period_in_minutes: 1,
     #         },
+    #         metric_groups: ["MetricGroup"],
     #       }
     #
     # @!attribute [rw] fleet_id
@@ -4108,6 +4147,15 @@ module Aws::GameLift
     #   can create over a span of time.
     #   @return [Types::ResourceCreationLimitPolicy]
     #
+    # @!attribute [rw] metric_groups
+    #   Names of metric groups to include this fleet with. A fleet metric
+    #   group is used in Amazon CloudWatch to aggregate metrics from
+    #   multiple fleets. Use an existing metric group name to add this fleet
+    #   to the group, or use a new name to create a new metric group.
+    #   Currently, a fleet can only be included in one metric group at a
+    #   time.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/UpdateFleetAttributesInput AWS API Documentation
     #
     class UpdateFleetAttributesInput < Struct.new(
@@ -4115,7 +4163,8 @@ module Aws::GameLift
       :name,
       :description,
       :new_game_session_protection_policy,
-      :resource_creation_limit_policy)
+      :resource_creation_limit_policy,
+      :metric_groups)
       include Aws::Structure
     end
 
@@ -4401,6 +4450,8 @@ module Aws::GameLift
     #               concurrent_executions: 1, # required
     #             },
     #           ],
+    #           max_concurrent_game_session_activations: 1,
+    #           game_session_activation_timeout_seconds: 1,
     #         },
     #       }
     #

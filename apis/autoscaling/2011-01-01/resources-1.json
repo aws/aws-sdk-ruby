@@ -569,8 +569,7 @@
                                 "source": "data",
                                 "path": "Tags[].ResourceType"
                             }
-                        ],
-                        "path": "Tags[]"
+                        ]
                     }
                 }
             },
@@ -1512,20 +1511,10 @@
                             "target": "Filters[0].Values[0]",
                             "source": "identifier",
                             "name": "Key"
-                        },
-                        {
-                            "target": "Filters[1].Name",
-                            "source": "identifier",
-                            "name": "ResourceType"
-                        },
-                        {
-                            "target": "Filters[1].Values[0]",
-                            "source": "identifier",
-                            "name": "ResourceId"
                         }
                     ]
                 },
-                "path": "Tags[0]"
+                "path": "Tags[]"
             },
             "actions": {
                 "Create": {

@@ -603,6 +603,48 @@ module Aws::ElasticLoadBalancingV2
     #
     class DeregisterTargetsOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeAccountLimitsInput
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "Marker",
+    #         page_size: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   The marker for the next set of results. (You received this marker
+    #   from a previous call.)
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The maximum number of results to return with this call.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeAccountLimitsInput AWS API Documentation
+    #
+    class DescribeAccountLimitsInput < Struct.new(
+      :marker,
+      :page_size)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] limits
+    #   Information about the limits.
+    #   @return [Array<Types::Limit>]
+    #
+    # @!attribute [rw] next_marker
+    #   The marker to use when requesting the next set of results. If there
+    #   are no additional results, the string is empty.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/DescribeAccountLimitsOutput AWS API Documentation
+    #
+    class DescribeAccountLimitsOutput < Struct.new(
+      :limits,
+      :next_marker)
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeListenersInput
     #   data as a hash:
     #
@@ -979,6 +1021,35 @@ module Aws::ElasticLoadBalancingV2
     #
     class DescribeTargetHealthOutput < Struct.new(
       :target_health_descriptions)
+      include Aws::Structure
+    end
+
+    # Information about an Elastic Load Balancing resource limit for your
+    # AWS account.
+    #
+    # @!attribute [rw] name
+    #   The name of the limit. The possible values are:
+    #
+    #   * application-load-balancers
+    #
+    #   * listeners-per-application-load-balancer
+    #
+    #   * rules-per-application-load-balancer
+    #
+    #   * target-groups
+    #
+    #   * targets-per-application-load-balancer
+    #   @return [String]
+    #
+    # @!attribute [rw] max
+    #   The maximum value of the limit.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/Limit AWS API Documentation
+    #
+    class Limit < Struct.new(
+      :name,
+      :max)
       include Aws::Structure
     end
 

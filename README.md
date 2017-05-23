@@ -297,6 +297,7 @@ to be backwards compatible.
 | AWSMarketplace Metering             | Aws::MarketplaceMetering           | aws-sdk-marketplacemetering           | 2016-01-14  |
 | Amazon API Gateway                  | Aws::APIGateway                    | aws-sdk-apigateway                    | 2015-07-09  |
 | Amazon AppStream                    | Aws::AppStream                     | aws-sdk-appstream                     | 2016-12-01  |
+| Amazon Athena                       | Aws::Athena                        | aws-sdk-athena                        | 2017-05-18  |
 | Amazon CloudDirectory               | Aws::CloudDirectory                | aws-sdk-clouddirectory                | 2016-05-10  |
 | Amazon CloudFront                   | Aws::CloudFront                    | aws-sdk-cloudfront                    | 2017-03-25  |
 | Amazon CloudHSM                     | Aws::CloudHSM                      | aws-sdk-cloudhsm                      | 2014-05-30  |
@@ -348,8 +349,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | Aws::WorkSpaces                    | aws-sdk-workspaces                    | 2015-04-08  |
 | Application Auto Scaling            | Aws::ApplicationAutoScaling        | aws-sdk-applicationautoscaling        | 2016-02-06  |
 | Auto Scaling                        | Aws::AutoScaling                   | aws-sdk-autoscaling                   | 2011-01-01  |
-| Elastic Load Balancing              | Aws::ElasticLoadBalancing          | aws-sdk-elasticloadbalancing          | 2012-06-01  |
 | Elastic Load Balancing              | Aws::ElasticLoadBalancingV2        | aws-sdk-elasticloadbalancingv2        | 2015-12-01  |
+| Elastic Load Balancing              | Aws::ElasticLoadBalancing          | aws-sdk-elasticloadbalancing          | 2012-06-01  |
 
 ## License
 
