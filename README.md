@@ -12,27 +12,55 @@ these branches:
 ## Links of Interest
 
 * [Developer Guide](http://docs.aws.amazon.com/sdk-for-ruby/latest/DeveloperGuide/aws-ruby-sdk-about-ruby-sdk.html)
+* [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/ruby/)
 * [API Docs](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
 
-## NameError: uninitialized constant AWS
+## Upgrading from Version 2
 
-If you receive this error, you likely have upgraded to version 2 of the
-`aws-sdk` gem unintentionally. Version 2 uses the `Aws` namespace, not `AWS`.
-This allows version 1 and version 2 to be used in the same application.
+Version 3 modularizes the monolithic SDK into service specific gems. Aside from gem packaging differences, version 3 interfaces are backwards compatible with version 2.
 
-* [Additional Information](http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2)
-* [Migration Guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md)
+1. If you depend on `aws-sdk`, you do not need to change anything.
+2. If you depend on `aws-sdk-resources`, you do not need to change anything. However in version 3 each service gem contains its own resource interfaces, thus it's highly recommended to switch your dependency to one of following options.
+3. If you depend on `aws-sdk-core`, you need to replace these with a dependency on one of the following options.
+
+### Options
+
+1. If you want to have every AWS service gems in your project, simply switch to `aws-sdk`
+
+```ruby
+aws-sdk ~> 3.0
+```
+
+2. If you want to specific several AWS service gems in your project, you need do as following:
+
+```ruby
+aws-sdk-s3 ~> 1.0
+aws-sdk-ec2 ~> 1.0
+...
+```
+
+### Addtional Information
+
+* [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
+* [Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
+* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 
 ## Installation
 
-The AWS SDK for Ruby is available as the `aws-sdk` gem from RubyGems. Please
-use a major version when expressing a dependency on `aws-sdk`.
+The AWS SDK for Ruby is available from RubyGems. `aws-sdk` gem contains every available AWS service gem support. Please use a major version when expressing a dependency on `aws-sdk`.
 
 ```ruby
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '~> 3'
+```
+
+With version 3 modularization, you can also pick the specific AWS service gem to install. Please use a major version when expressing a dependency on service gems
+
+```ruby
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
 ```
 
 ## Getting Help
@@ -112,7 +140,7 @@ creds = JSON.load(File.read('secrets.json'))
 Aws.config[:credentials] = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
 ```
 
-## API Clients (aws-sdk-core gem)
+## API Clients
 
 Construct a service client to make API calls. Each client provides a 1-to-1
 mapping of methods to API operations. Refer to the
@@ -185,11 +213,11 @@ that are triggered before each polling attempt and before waiting.
 See the API documentation for more examples and for a list of supported
 waiters per service.
 
-## Resource Interfaces (aws-sdk-resources gem)
+## Resource Interfaces
 
 Resource interfaces are object oriented classes that represent actual
 resources in AWS. Resource interfaces built on top of API clients and provide
-additional functionality.
+additional functionality. Each service gem contains its own resource interface.
 
 ```ruby
 s3 = Aws::S3::Resource.new
@@ -214,7 +242,7 @@ obj.delete
 
 ## REPL - AWS Interactive Console
 
-The `aws-sdk-core` gem ships with a REPL that provides a simple way to test
+The `aws-sdk` gem ships with a REPL that provides a simple way to test
 the Ruby SDK. You can access the REPL by running `aws.rb` from the command line.
 
 ```ruby
