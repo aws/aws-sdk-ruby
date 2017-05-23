@@ -3,10 +3,9 @@
 [![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-ruby.svg)](https://codeclimate.com/github/aws/aws-sdk-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-ruby/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-ruby?branch=master)
 [![Dependency Status](https://www.versioneye.com/ruby/aws-sdk/badge.svg)](https://www.versioneye.com/ruby/aws-sdk)
 
-This is version 3 of the `aws-sdk` gem. Versions 1 and 2 can be found in
+This is version 3 of the `aws-sdk` gem. Version 2 can be found in
 these branches:
 
-* [aws-sdk-v1 branch](https://github.com/aws/aws-sdk-ruby/tree/aws-sdk-v1).
 * [aws-sdk-v2 branch](https://github.com/aws/aws-sdk-ruby/tree/aws-sdk-v2).
 
 ## Links of Interest
@@ -56,7 +55,7 @@ The AWS SDK for Ruby is available from RubyGems. `aws-sdk` gem contains every av
 gem 'aws-sdk', '~> 3'
 ```
 
-With version 3 modularization, you can also pick the specific AWS service gem to install. Please use a major version when expressing a dependency on service gems
+With version 3 modularization, you can also pick the specific AWS service gem to install. Please use a major version when expressing a dependency on service gems.
 
 ```ruby
 gem 'aws-sdk-s3', '~> 1'
