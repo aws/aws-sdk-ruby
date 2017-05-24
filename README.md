@@ -18,7 +18,7 @@ This is version 3 of the `aws-sdk` gem. Version 2 can be found at branch:
 
 ## Upgrading Guide
 
-Version 3 modularizes the monolithic SDK into service specific gems. Aside from gem packaging differences, version 3 interfaces are backwards compatible with version 2. Upgrading guide is provided for both version 1 and version 2.
+Version 3 modularizes the monolithic SDK into service specific gems. Aside from gem packaging differences, version 3 interfaces are backwards compatible with version 2. Following guide contains instructions for both version 1 and version 2 SDK.
 
 ### Upgrade from version 2
 
@@ -31,24 +31,22 @@ Version 3 modularizes the monolithic SDK into service specific gems. Aside from 
 1. If you want to keep every AWS service gems in your project, simply keep/switch to `aws-sdk`
 
 ```ruby
-aws-sdk ~> 3.0
-```
-Similarly for `require` statement
+# Gemfile
+gem 'aws-sdk', '~> 3'
 
-```ruby
+# or in code
 require 'aws-sdk'
 ```
 
 2. If you want to choose several AWS service gems in your project specifically, try following:
 
 ```ruby
-aws-sdk-s3 ~> 1.0
-aws-sdk-ec2 ~> 1.0
+# Gemfile
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
 ...
-```
-Similarly for `require` statement
 
-```ruby
+# or in code
 require 'aws-sdk-s3'
 require 'aws-sdk-ec2'
 ...
@@ -58,7 +56,7 @@ require 'aws-sdk-ec2'
 
 If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/). There could be dependency changes you need to make.
 
-1. With `aws-sdk` (version 1) and `aws-sdk-resources` (version 2) coexist in your project, you **must** make changes in your dependency. 
+1. With `aws-sdk` (version 1) and `aws-sdk-resources` (version 2) coexist in your project, you **must** make changes in your dependency.
 
 If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specifiy each service gem used in your project:
 
@@ -88,7 +86,7 @@ gem 'aws-sdk', '~> 3'
 require 'aws-sdk-v1'
 require 'aws-sdk'
 
-# Or using separate service gems
+# or using separate service gems
 # Gemfile
 gem 'aws-sdk-v1'
 gem 'aws-sdk-s3', '~> 1'
@@ -109,7 +107,7 @@ Addtional information for migrating from Version 1 to Version 2, please follow [
 ### Addtional Information
 
 * [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
-* [Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
+* [V2 to V3 Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
 * [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 
 ## Installation
