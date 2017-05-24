@@ -83,7 +83,6 @@ module Aws
           uri.host = context.params[:bucket]
           uri.path.sub!("/#{context.params[:bucket]}", '')
           uri.scheme = 'http'
-          uri.port = 80
           @handler.call(context)
         end
       end

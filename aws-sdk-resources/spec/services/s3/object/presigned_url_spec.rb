@@ -31,7 +31,7 @@ module Aws
           })
 
           url = obj.presigned_url(:get, virtual_host: true)
-          expect(url).to match(/^http:\/\/my\.bucket\.com(:80)?\//)
+          expect(url).to match(/^http:\/\/my\.bucket\.com\//)
         end
 
         it 'rejects empty keys' do
