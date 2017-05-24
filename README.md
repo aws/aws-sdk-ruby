@@ -58,7 +58,7 @@ If you are using SDK version 1 and version 2 together in your application guided
 
 1. With `aws-sdk` (version 1) and `aws-sdk-resources` (version 2) coexist in your project, you **must** make changes in your dependency.
 
-If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specifiy each service gem used in your project:
+If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specify each service gem used in your project:
 
 ```ruby
 # Gemfile
@@ -74,7 +74,7 @@ require 'aws-sdk-ec2'
 ...
 ```
 
-Otherwise, you can use `aws-sdk-v1` for SDK version 1 and have the freedom to choice whether using `aws-sdk` version 3 for all AWS service gems or specific service gems as you wish:
+Otherwise, you can use `aws-sdk-v1` for SDK version 1 and have the freedom to choose using `aws-sdk` version 3 for all AWS service gems or using specific service gems:
 
 ```ruby
 # Using `aws-sdk` v3
@@ -102,7 +102,7 @@ require 'aws-sdk-ec2'
 
 2. With `aws-sdk-v1` (version 1) and `aws-sdk` (version 2) coexist in your project, you can simply update `aws-sdk` to `~>3` or using separate service gems as described in version 2 upgrade options.
 
-Addtional information for migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
+For addtional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
 
 ### Addtional Information
 
