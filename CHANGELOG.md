@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.24 (2017-05-24)
+------------------
+
 * Feature - Aws::IAM - Updated the API for AWS Identity and Access Management.
 
 * Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
