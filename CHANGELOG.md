@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Updated the API for AWS Identity and Access Management.
+
+* Feature - Aws::StorageGateway - Updated the API, and documentation for AWS Storage Gateway.
+
+* Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
+
 2.9.23 (2017-05-23)
 ------------------
 
