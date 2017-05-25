@@ -73,7 +73,7 @@ If you are using SDK version 1 and version 2 together in your application guided
 
 1. With `aws-sdk` (version 1) and `aws-sdk-resources` (version 2) coexist in your project, you **must** make changes in your dependency.
 
-If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specify each service gem used in your project:
+  * If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specify each service gem used in your project:
 
 ```ruby
 # Gemfile
@@ -89,7 +89,7 @@ require 'aws-sdk-ec2'
 ...
 ```
 
-Otherwise, you can use `aws-sdk-v1` for SDK version 1 and have the freedom to choose using `aws-sdk` version 3 for all AWS service gems or using specific service gems:
+  * Otherwise, you can use `aws-sdk-v1` for SDK version 1 and have the freedom to choose using `aws-sdk` version 3 for all AWS service gems or using specific service gems:
 
 ```ruby
 # Using `aws-sdk` v3
