@@ -3,37 +3,127 @@
 [![Gitter](https://badges.gitter.im/aws/aws-sdk-ruby.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-ruby.svg)](https://codeclimate.com/github/aws/aws-sdk-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-ruby/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-ruby?branch=master)
 [![Dependency Status](https://www.versioneye.com/ruby/aws-sdk/badge.svg)](https://www.versioneye.com/ruby/aws-sdk)
 
-This is version 3 of the `aws-sdk` gem. Versions 1 and 2 can be found in
-these branches:
+This is version 3 of the `aws-sdk` gem. Version 2 can be found at branch:
 
-* [aws-sdk-v1 branch](https://github.com/aws/aws-sdk-ruby/tree/aws-sdk-v1).
 * [aws-sdk-v2 branch](https://github.com/aws/aws-sdk-ruby/tree/aws-sdk-v2).
 
 ## Links of Interest
 
 * [Developer Guide](http://docs.aws.amazon.com/sdk-for-ruby/latest/DeveloperGuide/aws-ruby-sdk-about-ruby-sdk.html)
+* [AWS Developer Blog](https://aws.amazon.com/blogs/developer/category/ruby/)
 * [API Docs](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
 
-## NameError: uninitialized constant AWS
-
-If you receive this error, you likely have upgraded to version 2 of the
-`aws-sdk` gem unintentionally. Version 2 uses the `Aws` namespace, not `AWS`.
-This allows version 1 and version 2 to be used in the same application.
-
-* [Additional Information](http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2)
-* [Migration Guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md)
-
 ## Installation
 
-The AWS SDK for Ruby is available as the `aws-sdk` gem from RubyGems. Please
-use a major version when expressing a dependency on `aws-sdk`.
+The AWS SDK for Ruby is available from RubyGems. `aws-sdk` gem contains every available AWS service gem support. Please use a major version when expressing a dependency on `aws-sdk`.
 
 ```ruby
-gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '~> 3'
 ```
+
+With version 3 modularization, you can also pick the specific AWS service gem to install. Please use a major version when expressing a dependency on service gems.
+
+```ruby
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
+```
+
+## Upgrading Guide
+
+Version 3 modularizes the monolithic SDK into service specific gems. Aside from gem packaging differences, version 3 interfaces are backwards compatible with version 2. Following guide contains instructions for both version 1 and version 2 SDK.
+
+### Upgrade from version 2
+
+1. If you depend on `aws-sdk` or `aws-sdk-resources`, you don't need to change anything. Meanwhile we recommend you to revisit following options to explore modularization benefits.
+
+2. If you depend on `aws-sdk-core`, you **must** replace this dependency with one of following options. This is because `aws-sdk-core` now only contains shared utilities.
+
+#### Options
+
+1. If you want to keep every AWS service gems in your project, simply keep/switch to `aws-sdk`
+
+```ruby
+# Gemfile
+gem 'aws-sdk', '~> 3'
+
+# or in code
+require 'aws-sdk'
+```
+
+2. If you want to choose several AWS service gems in your project specifically, try following:
+
+```ruby
+# Gemfile
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
+...
+
+# or in code
+require 'aws-sdk-s3'
+require 'aws-sdk-ec2'
+...
+```
+
+### Upgrade from version 1
+
+If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/). There could be dependency changes you need to make.
+
+1. With `aws-sdk` (version 1) and `aws-sdk-resources` (version 2) coexist in your project, you **must** make changes in your dependency.
+
+  * If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specify each service gem used in your project:
+
+```ruby
+# Gemfile
+gem 'aws-sdk', '~> 1'
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
+...
+
+# in code
+require 'aws-sdk'
+require 'aws-sdk-s3'
+require 'aws-sdk-ec2'
+...
+```
+
+  * Otherwise, you can use `aws-sdk-v1` for SDK version 1 and have the freedom to choose using `aws-sdk` version 3 for all AWS service gems or using specific service gems:
+
+```ruby
+# Using `aws-sdk` v3
+# Gemfile
+gem 'aws-sdk-v1'
+gem 'aws-sdk', '~> 3'
+
+# in code
+require 'aws-sdk-v1'
+require 'aws-sdk'
+
+# or using separate service gems
+# Gemfile
+gem 'aws-sdk-v1'
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sdk-ec2', '~> 1'
+...
+
+# in code
+require 'aws-sdk-v1'
+require 'aws-sdk-s3'
+require 'aws-sdk-ec2'
+...
+```
+
+2. With `aws-sdk-v1` (version 1) and `aws-sdk` (version 2) coexist in your project, you can simply update `aws-sdk` to `~>3` or using separate service gems as described in version 2 upgrade options.
+
+For addtional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
+
+### Addtional Information
+
+* [Introduction Blog](https://aws.amazon.com/blogs/developer/aws-sdk-for-ruby-modularization-version-3-2/)
+* [V2 to V3 Upgrade Blog Guide](https://aws.amazon.com/blogs/developer/upgrading-from-version-2-to-version-3-of-the-aws-sdk-for-ruby-2/)
+* [Upgrade Release Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 
 ## Getting Help
 
@@ -112,7 +202,7 @@ creds = JSON.load(File.read('secrets.json'))
 Aws.config[:credentials] = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
 ```
 
-## API Clients (aws-sdk-core gem)
+## API Clients
 
 Construct a service client to make API calls. Each client provides a 1-to-1
 mapping of methods to API operations. Refer to the
@@ -185,11 +275,11 @@ that are triggered before each polling attempt and before waiting.
 See the API documentation for more examples and for a list of supported
 waiters per service.
 
-## Resource Interfaces (aws-sdk-resources gem)
+## Resource Interfaces
 
 Resource interfaces are object oriented classes that represent actual
 resources in AWS. Resource interfaces built on top of API clients and provide
-additional functionality.
+additional functionality. Each service gem contains its own resource interface.
 
 ```ruby
 s3 = Aws::S3::Resource.new
@@ -214,7 +304,7 @@ obj.delete
 
 ## REPL - AWS Interactive Console
 
-The `aws-sdk-core` gem ships with a REPL that provides a simple way to test
+The `aws-sdk` gem ships with a REPL that provides a simple way to test
 the Ruby SDK. You can access the REPL by running `aws.rb` from the command line.
 
 ```ruby
