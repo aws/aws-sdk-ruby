@@ -23,6 +23,7 @@ module Aws
       expect(creds.access_key_id).to eq('ACCESS_KEY_0')
       expect(creds.secret_access_key).to eq('SECRET_KEY_0')
       expect(creds.session_token).to eq('TOKEN_0')
+      expect(creds.region).to eq('REGION_0')
     end
 
     it 'supports fetching profiles from ENV' do
@@ -31,6 +32,7 @@ module Aws
       expect(creds.access_key_id).to eq('ACCESS_KEY_2')
       expect(creds.secret_access_key).to eq('SECRET_KEY_2')
       expect(creds.session_token).to eq('TOKEN_2')
+      expect(creds.region).to eq(nil)
     end
 
     it 'supports a manually specified profile' do
@@ -41,6 +43,7 @@ module Aws
       expect(creds.access_key_id).to eq('ACCESS_KEY_1')
       expect(creds.secret_access_key).to eq('SECRET_KEY_1')
       expect(creds.session_token).to eq('TOKEN_1')
+      expect(creds.region).to eq(nil)
     end
 
     it 'raises when a profile does not exist' do
