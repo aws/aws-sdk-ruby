@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.25 (2017-05-25)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
