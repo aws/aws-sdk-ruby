@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.26 (2017-05-30)
+------------------
+
 * Feature - Aws::CloudDirectory - Updated the API, and documentation for Amazon CloudDirectory.
 
 * Feature - Aws::S3 - Updated the documentation, and API for Amazon Simple Storage Service.
