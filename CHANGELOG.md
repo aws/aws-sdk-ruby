@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the API, and documentation for Elastic Load Balancing.
+
+* Feature - Aws::LexModelBuildingService - Updated the documentation for Amazon Lex Model Building Service.
+
 2.9.27 (2017-05-31)
 ------------------
 
