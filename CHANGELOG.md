@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::WorkDocs - Updated the API, and documentation for Amazon WorkDocs.
+
 2.9.28 (2017-06-01)
 ------------------
 
