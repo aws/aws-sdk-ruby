@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
+
+* Feature - Aws::AutoScaling - Updated the resource interfaces for Auto Scaling.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
 2.9.29 (2017-06-02)
 ------------------
 
