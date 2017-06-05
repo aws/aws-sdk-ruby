@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.30 (2017-06-05)
+------------------
+
 * Feature - Aws::AppStream - Updated the API, and documentation for Amazon AppStream.
 
 * Feature - Aws::AutoScaling - Updated the resource interfaces for Auto Scaling.
