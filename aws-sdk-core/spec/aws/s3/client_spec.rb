@@ -46,7 +46,7 @@ module Aws
           end
           resp = s3.list_buckets
           expect(resp.context[:request_id]).to eq('BE9C18E622969B17')
-          expect(resp.context[:host_id]).to eq('H0vUEO2f4PyWtNjgcb3TSdyHaie8j4IgnuKIW2rw0nS41rawnLDzkf+PKXmmt/uEi4bzvNMr72o=')
+          expect(resp.context[:s3_host_id]).to eq('H0vUEO2f4PyWtNjgcb3TSdyHaie8j4IgnuKIW2rw0nS41rawnLDzkf+PKXmmt/uEi4bzvNMr72o=')
         end
 
       end

@@ -13,7 +13,7 @@ module Aws
         def call(context)
           response = @handler.call(context)
           h = context.http_response.headers
-          context[:host_id] = h['x-amz-id-2']
+          context[:s3_host_id] = h['x-amz-id-2']
           response
         end
 
