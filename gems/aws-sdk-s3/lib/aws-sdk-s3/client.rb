@@ -25,6 +25,7 @@ require 'aws-sdk-s3/plugins/dualstack.rb'
 require 'aws-sdk-s3/plugins/bucket_dns.rb'
 require 'aws-sdk-s3/plugins/expect_100_continue.rb'
 require 'aws-sdk-s3/plugins/http_200_errors.rb'
+require 'aws-sdk-s3/plugins/s3_host_id.rb'
 require 'aws-sdk-s3/plugins/get_bucket_location_fix.rb'
 require 'aws-sdk-s3/plugins/location_constraint.rb'
 require 'aws-sdk-s3/plugins/md5s.rb'
@@ -65,6 +66,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::BucketDns)
     add_plugin(Aws::S3::Plugins::Expect100Continue)
     add_plugin(Aws::S3::Plugins::Http200Errors)
+    add_plugin(Aws::S3::Plugins::S3HostId)
     add_plugin(Aws::S3::Plugins::GetBucketLocationFix)
     add_plugin(Aws::S3::Plugins::LocationConstraint)
     add_plugin(Aws::S3::Plugins::Md5s)

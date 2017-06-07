@@ -296,6 +296,7 @@
       "Aws::S3::Plugins::BucketDns",
       "Aws::S3::Plugins::Expect100Continue",
       "Aws::S3::Plugins::Http200Errors",
+      "Aws::S3::Plugins::S3HostId",
       "Aws::S3::Plugins::GetBucketLocationFix",
       "Aws::S3::Plugins::LocationConstraint",
       "Aws::S3::Plugins::Md5s",
