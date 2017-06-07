@@ -29,6 +29,28 @@ module Aws
         }.to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
+      describe 'request ids' do
+
+        it 'populates request id and host id in the response context' do
+          s3 = Client.new(stub_responses: true)
+          s3.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {
+                "x-amz-id-2" => "H0vUEO2f4PyWtNjgcb3TSdyHaie8j4IgnuKIW2rw0nS41rawnLDzkf+PKXmmt/uEi4bzvNMr72o=",
+                "x-amz-request-id"=> "BE9C18E622969B17"
+              },
+              body: ''
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = s3.list_buckets
+          expect(resp.context[:request_id]).to eq('BE9C18E622969B17')
+          expect(resp.context[:host_id]).to eq('H0vUEO2f4PyWtNjgcb3TSdyHaie8j4IgnuKIW2rw0nS41rawnLDzkf+PKXmmt/uEi4bzvNMr72o=')
+        end
+
+      end
+
       describe 'endpoints' do
 
         it 'preserves custom endpoints' do
