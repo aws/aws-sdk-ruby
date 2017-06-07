@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
+
+* Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
+
+* Feature - Aws::IoT - Updated the API for AWS IoT.
+
 2.9.31 (2017-06-05)
 ------------------
 
