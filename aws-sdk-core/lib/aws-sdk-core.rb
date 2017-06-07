@@ -73,6 +73,7 @@ module Aws
     Firehose
     GameLift
     Glacier
+    Greengrass
     Health
     IAM
     ImportExport

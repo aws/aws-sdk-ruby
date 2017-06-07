@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeBuild - Updated the API, and documentation for AWS CodeBuild.
+
+* Feature - Aws::Greengrass - Added support for a new service, AWS Greengrass.
+
 2.9.32 (2017-06-07)
 ------------------
 

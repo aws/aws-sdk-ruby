@@ -198,6 +198,10 @@
     "models": "glacier/2012-06-01",
     "endpoint": "glacier"
   },
+  "Greengrass": {
+    "models": "greengrass/2017-06-07",
+    "endpoint": "greengrass"
+  },
   "Health": {
     "models": "health/2016-08-04",
     "endpoint": "health"
