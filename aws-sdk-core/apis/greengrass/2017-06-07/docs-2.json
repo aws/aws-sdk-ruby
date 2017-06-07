@@ -380,7 +380,7 @@
     "SubscriptionDefinitionVersion" : {
       "base" : "Information on subscription definition version",
       "refs" : {
-        "GetSubscriptionDefinitionVersionResponse$Definition" : "Information on the definition",
+        "GetSubscriptionDefinitionVersionResponse$Definition" : "Information on the definition"
       }
     },
     "UpdateConnectivityInfoRequest" : {

@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
+
+* Feature - Aws::Greengrass - Updated the documentation for AWS Greengrass.
+
 2.9.33 (2017-06-07)
 ------------------
 
