@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.32 (2017-06-07)
+------------------
+
 * Feature - Aws::ACM - Updated the documentation for AWS Certificate Manager.
 
 * Feature - Aws::CloudFront - Updated the documentation for Amazon CloudFront.
