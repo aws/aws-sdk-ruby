@@ -106,7 +106,7 @@ module BuildTools
     def gem_dependencies(api, dependencies)
       version_file = File.read("#{$GEMS_DIR}/aws-sdk-core/VERSION").rstrip
       core_version = version_file.match(/^\d+\.\d+\.\d+$/) ?
-        "~> #{version_file.split('.')[0]}" :
+        "#{version_file.split('.')[0]}" :
         version_file
       dependencies['aws-sdk-core'] = "~> #{core_version}"
 
