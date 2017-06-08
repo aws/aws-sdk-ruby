@@ -28,7 +28,10 @@ task 'update-aws-sdk-dependencies' do
 
   # update the aws-sdk-resources.gemspec
   version_path = "#{$GEMS_DIR}/aws-sdk/VERSION"
-  version = File.read(version_path).strip
+  version_file = File.read(version_path).strip
+  version = version_file.match(/^\d+\.\d+\.\d+$/) ?
+    "~> #{version_file.split('.')[0]}" :
+    version_file
   BuildTools.replace_lines(
     filename: "#{$GEMS_DIR}/aws-sdk-resources/aws-sdk-resources.gemspec",
     start: /# gem dependency/,
