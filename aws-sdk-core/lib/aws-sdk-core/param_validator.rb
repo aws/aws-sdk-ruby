@@ -39,7 +39,7 @@ module Aws
       # ensure required members are present
       if @validate_required
         shape.required.each do |member_name|
-          if values[member_name].nil?
+          if values[member_name].nil? && values[member_name.to_s].nil?
             param = "#{context}[#{member_name.inspect}]"
             errors << "missing required parameter #{param}"
           end

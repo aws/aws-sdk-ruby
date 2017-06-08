@@ -52,7 +52,7 @@ module Aws
         validate({})
       end
 
-      it 'raises an error when a required paramter is missing' do
+      it 'raises an error when a required parameter is missing' do
         shapes['StructureShape']['required'] = %w(String)
         validate({}, 'missing required parameter params[:string]')
       end
@@ -64,6 +64,11 @@ module Aws
       it 'accepts members that pass validation' do
         shapes['StructureShape']['required'] = %w(String)
         validate(string: 'abc')
+      end
+
+      it 'accepts members with string keys that pass validation' do
+        shapes['StructureShape']['required'] = %w(String)
+        validate('string' => 'abc')
       end
 
       it 'aggregates errors for members' do
