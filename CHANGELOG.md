@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Pinpoint - Updated the API, and documentation for Amazon Pinpoint.
+
+* Feature - Aws::Rekognition - Updated the API, and documentation for Amazon Rekognition.
+
 2.9.35 (2017-06-07)
 ------------------
 
