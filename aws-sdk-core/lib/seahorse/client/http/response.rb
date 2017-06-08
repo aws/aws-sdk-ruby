@@ -42,6 +42,10 @@ module Seahorse
 
         # @return [String]
         def body_contents
+          unless body.respond_to?(:rewind)
+            msg = "#{body} is received, yet a StringIO object is expected for response body."
+            raise RuntimeError, msg
+          end
           body.rewind
           contents = body.read
           body.rewind
