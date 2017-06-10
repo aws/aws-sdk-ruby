@@ -35,6 +35,13 @@ module Aws
 
         let(:context) { Seahorse::Client::RequestContext.new }
 
+        let(:tempfile_1mb) do
+          Tempfile.new('tempfile').tap do |file|
+            file.write('.' * 5 * 1024 * 1024)
+            file.flush
+          end
+        end
+
         before(:each) do
           plugin.add_options(config)
           plugin.add_handlers(handlers, config.build!)
@@ -50,9 +57,7 @@ module Aws
         end
 
         it 'computes the md5 for Tempfile objects' do
-          body = Tempfile.new('tempfile')
-          body.write('.' * 5 * 1024 * 1024)
-          body.flush
+          body = tempfile_1mb
 
           context.http_request.body = body
           handlers.add(NoSendHandler, step: :send)
@@ -63,10 +68,7 @@ module Aws
         end
 
         it 'computes the md5 for File objects with memory efficiency' do
-          body = Tempfile.new('tempfile')
-          body.write('.' * 5 * 1024 * 1024)
-          body.flush
-          file = body.to_io
+          file = tempfile_1mb.to_io
 
           expect(file).to receive(:dup).and_return(file)
           expect(file).to receive(:read).
@@ -83,10 +85,7 @@ module Aws
         end
 
         it 'computes the md5 using binmode for IO objects' do
-          body = Tempfile.new('tempfile')
-          body.write('.' * 5 * 1024 * 1024)
-          body.flush
-          file = body.to_io
+          file = tempfile_1mb.to_io
 
           # Confirm dup(2) which allows tokKeep original IO object to retain their
           # original binmode state
