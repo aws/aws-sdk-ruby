@@ -82,6 +82,25 @@ module Aws
           )
         end
 
+        it 'computes the md5 using binmode for IO objects' do
+          body = Tempfile.new('tempfile')
+          body.write('.' * 5 * 1024 * 1024)
+          body.flush
+          file = body.to_io
+
+          # Confirm dup(2) which allows tokKeep original IO object to retain their
+          # original binmode state
+          expect(file).to receive(:dup).and_return(file)
+          expect(file).to receive(:binmode).and_call_original
+
+          context.http_request.body = file
+          handlers.add(NoSendHandler, step: :send)
+          handlers.to_stack.call(context)
+          expect(context.http_request.headers['Content-Md5']).to(
+            eq("+kDD2/74SZx+Rz+/Dw7I1Q==")
+          )
+        end
+
         it 'computes the md5 for non-file IO objects' do
           size = 5 * 1024 * 1024
           body = StringIO.new('.' * size)
