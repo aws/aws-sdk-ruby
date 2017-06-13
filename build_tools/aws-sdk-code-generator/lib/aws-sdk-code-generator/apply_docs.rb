@@ -25,9 +25,17 @@ module AwsSdkCodeGenerator
           ref_shape, ref_member = ref.split('$')
           case @api['shapes'][ref_shape]['type']
           when 'structure'
-            @api['shapes'][ref_shape]['members'][ref_member]['documentation'] = ref_docs
+            shape = @api['shapes'][ref_shape]
+            if shape
+              member = shape['members'][ref_member]
+              member['documentation'] = ref_docs if member
+            end
           when 'list', 'map'
-            @api['shapes'][ref_shape][ref_member]['documentation'] = ref_docs
+            shape = @api['shapes'][ref_shape]
+            if shape
+              member = shape[ref_member]
+              member['documentation'] = ref_docs if member
+            end
           end
         end
       end
