@@ -77,7 +77,7 @@ module AwsSdkCodeGenerator
         when 'list' then "Array<#{ruby_type(shape['member'], api)}>"
         when 'long' then 'Integer'
         when 'map' then "Hash<String,#{ruby_type(shape['value'], api)}>"
-        when 'string' then 'String'
+        when 'string' then streaming?(shape_ref, api) ? 'IO' : 'String'
         when 'structure' then "Types::#{shape_ref['shape']}"
         when 'timestamp' then 'Time'
         else

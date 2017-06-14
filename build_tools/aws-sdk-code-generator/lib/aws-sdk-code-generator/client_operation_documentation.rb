@@ -93,6 +93,14 @@ module AwsSdkCodeGenerator
         shape_name = operation.fetch('output').fetch('shape')
         type = "Types::#{shape_name}"
         _, shape = Api.resolve(shape_name, api)
+        # add rest body streaming if qualified
+        unless shape['payload'].nil?
+          _, member_shape = Api.resolve(shape['payload'], api)
+          unless member_shape.nil?
+            member_shape['streaming'] = member_shape['type'] == 'blob' ||
+              member_shape['type'] == 'string'
+          end
+        end
         methods = shape['members'].map do |member_name, member_ref|
           member_type = Docstring.escape_html(Api.ruby_type(member_ref, api))
           method_name = Underscore.underscore(member_name)
