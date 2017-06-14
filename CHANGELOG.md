@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::CloudDirectory - Updated the documentation for Amazon CloudDirectory.
+
 2.9.39 (2017-06-13)
 ------------------
 
