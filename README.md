@@ -69,53 +69,7 @@ require 'aws-sdk-ec2'
 
 ### Upgrade from version 1
 
-If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/). There could be dependency changes you need to make.
-
-1. With `aws-sdk` (version 1) and `aws-sdk-resources` (version 2) coexist in your project, you **must** make changes in your dependency.
-
-  * If you want to keep `gem 'aws-sdk', '~> 1'` dependency, instead of using `aws-sdk-resources`, you **must** specify each service gem used in your project:
-
-```ruby
-# Gemfile
-gem 'aws-sdk', '~> 1'
-gem 'aws-sdk-s3', '~> 1'
-gem 'aws-sdk-ec2', '~> 1'
-...
-
-# in code
-require 'aws-sdk'
-require 'aws-sdk-s3'
-require 'aws-sdk-ec2'
-...
-```
-
-  * Otherwise, you can use `aws-sdk-v1` for SDK version 1 and have the freedom to choose using `aws-sdk` version 3 for all AWS service gems or using specific service gems:
-
-```ruby
-# Using `aws-sdk` v3
-# Gemfile
-gem 'aws-sdk-v1'
-gem 'aws-sdk', '~> 3'
-
-# in code
-require 'aws-sdk-v1'
-require 'aws-sdk'
-
-# or using separate service gems
-# Gemfile
-gem 'aws-sdk-v1'
-gem 'aws-sdk-s3', '~> 1'
-gem 'aws-sdk-ec2', '~> 1'
-...
-
-# in code
-require 'aws-sdk-v1'
-require 'aws-sdk-s3'
-require 'aws-sdk-ec2'
-...
-```
-
-2. With `aws-sdk-v1` (version 1) and `aws-sdk` (version 2) coexist in your project, you can simply update `aws-sdk` to `~>3` or using separate service gems as described in version 2 upgrade options.
+If you are using SDK version 1 and version 2 together in your application guided by our official [blog post](https://aws.amazon.com/blogs/developer/upcoming-stable-release-of-aws-sdk-for-ruby-version-2/), then you might have either `aws-sdk ~> 2` or `aws-sdk-resources ~> 2` exists in your project, you can simply update it to `~> 3` or using separate service gems as described in version 2 upgrade options.
 
 For addtional information of migrating from Version 1 to Version 2, please follow [V1 to V2 migration guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md).
 
