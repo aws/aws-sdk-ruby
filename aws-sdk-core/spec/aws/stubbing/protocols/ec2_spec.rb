@@ -64,8 +64,6 @@ module Aws
                   <requestId>stubbed-request-id</requestId>
                   <reservationSet>
                       <item>
-                          <reservationId>reservation-id</reservationId>
-                          <ownerId>owner-id</ownerId>
                           <groupSet>
                               <item>
                                   <groupName>group-name</groupName>
@@ -74,8 +72,8 @@ module Aws
                           </groupSet>
                           <instancesSet>
                               <item>
-                                  <instanceId>i-12345678</instanceId>
                                   <imageId>ami-12345678</imageId>
+                                  <instanceId>i-12345678</instanceId>
                                   <instanceState>
                                       <code>16</code>
                                       <name>running</name>
@@ -92,6 +90,8 @@ module Aws
                                   </tagSet>
                               </item>
                           </instancesSet>
+                          <ownerId>owner-id</ownerId>
+                          <reservationId>reservation-id</reservationId>
                       </item>
                   </reservationSet>
               </DescribeInstancesResponse>
