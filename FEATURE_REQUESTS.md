@@ -26,7 +26,11 @@ region resolution.
 
 See [related GitHub issue #1455](https://github.com/aws/aws-sdk-ruby/issues/1455).
 
-### AssumeRole MFA Integration with SharedConfig
+### AssumeRole Integration with SharedConfig
+
+Support AssumeRole Integration with SharedConfig.
+
+See [related GitHub issue #1504](https://github.com/aws/aws-sdk-ruby/issues/1504).
 
 `Aws::AssumeRoleCredentials` allows for MFA support, but does not pull
 non-token values from SharedConfig in this case. Could be implemented as a new
@@ -259,6 +263,12 @@ See [related GitHub issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#i
 The `#predict` operation of `Aws::MachineLearning::Client` accepts a map of string-to-strings. When a user wishes to provide a boolean value, the API expects the boolean to be "1" or "0". It would be helpful if a plugin were added that converted the boolean values of the record map from `true` and `false` to their expected string formats.
 
 See [related GitHub issue #878](https://github.com/aws/aws-sdk-ruby/issues/878).
+
+### Aws::Route53 `#list_resource_record_sets` domain name octal
+
+If domain name value contains asterisks, the `#list_resource_record_sets` operation of `Aws::Route53::Client` returns octal in domain name, which is different from [public documentation](http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html?shortFooter=true#domain-name-format-asterisk). SDK could have an optional flag utility for converting this for user.
+
+See [related Github issue #1468](https://github.com/aws/aws-sdk-ruby/issues/1468).
 
 ### Support Raw credential objects from AWS API responses in config
 
