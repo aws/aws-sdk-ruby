@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.9.42 (2017-06-16)
+------------------
+
 * Feature - Aws::XRay - Updated the API, and documentation for AWS X-Ray.
 
 2.9.41 (2017-06-15)
