@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Organizations - Updated the API, and documentation for AWS Organizations.
+
 2.9.42 (2017-06-16)
 ------------------
 
