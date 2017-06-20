@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WorkDocs - Updated the API, and documentation for Amazon WorkDocs.
+
 2.9.43 (2017-06-19)
 ------------------
 
