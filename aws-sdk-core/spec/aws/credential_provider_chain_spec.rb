@@ -92,6 +92,26 @@ module Aws
       expect(credentials.credentials.session_token).to eq('TOKEN_0')
     end
 
+
+    it 'hydrates profile from ENV with AWS_PROFILE when available' do
+      mock_path = File.join(
+        File.dirname(__FILE__), '..', 'fixtures', 'credentials',
+        'mock_shared_credentials')
+      path = File.join('HOME', '.aws', 'credentials')
+      allow(Dir).to receive(:home).and_return('HOME')
+      allow(File).to receive(:exist?).with(path).and_return(true)
+      allow(File).to receive(:readable?).with(path).and_return(true)
+      allow(File).to receive(:read).with(path).and_return(File.read(mock_path))
+
+      env['AWS_PROFILE'] = 'fooprofile'
+      creds = CredentialProviderChain.new.resolve
+      expect(creds.profile_name).to eq('fooprofile')
+      expect(credentials.set?).to be(true)
+      expect(credentials.credentials.access_key_id).to eq('ACCESS_KEY_1')
+      expect(credentials.credentials.secret_access_key).to eq('SECRET_KEY_1')
+      expect(credentials.credentials.session_token).to eq('TOKEN_1')
+    end
+
     it 'hydrates credentials from the instance profile service' do
       path = '/latest/meta-data/iam/security-credentials/'
       resp = <<-JSON.strip
