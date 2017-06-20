@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.0 (2017-06-20)
+------------------
+
 * Issue - Aws::CredentialProviderChain - Fetching `AWS_PROFILE` environment variable before using `default` profile.
 
 2.9.44 (2017-06-20)
