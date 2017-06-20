@@ -76,6 +76,19 @@ module Aws
     #     Aws::S3::Resource.new.buckets.map(&:name)
     #     #=> ['my-bucket']
     #
+    # ## Dynamic Stubbing
+    #
+    # In addition to creating static stubs, it's also possible to generate
+    # stubs dynamically based on the parameters with which operations were
+    # called, by passing a `Proc` object:
+    #
+    #     s3 = Aws::S3::Resource.new(stub_responses: true)
+    #     s3.client.stub_responses(:put_object, -> (context) {
+    #       s3.client.stub_responses(:get_object, content_type: context.params[:content_type])
+    #     })
+    #
+    # The yielded object is an instance of {Seahorse::Client::RequestContext}.
+    #
     # ## Stubbing Errors
     #
     # When stubbing is enabled, the SDK will default to generate
