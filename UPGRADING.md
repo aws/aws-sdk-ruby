@@ -1,5 +1,23 @@
 # Upgrade Notes
 
+## `aws-sdk-core` - v2.10.0
+
+* This update respects the `AWS_PROFILE` environment variable when using the
+  default credential provider chain. Before, due to a logic bug, the default
+  credential provider chain would use the `'default'` profile, even if the
+  `AWS_PROFILE` environment variable was set. Directly constructing credentials
+  using the `Aws::SharedConfig` or `Aws::SharedCredentials` classes did not
+  have this issue.
+
+  After this change, you could see a change in default behavior when
+  constructing clients if you have the `AWS_PROFILE` environment variable set
+  and use the default credential provider chain to construct your client. If
+  this is the case for you, you should ensure that the `AWS_PROFILE` environment
+  variable is set to the correct value for your use case, or you should
+  construct credential objects directly during client construction. If the
+  `AWS_PROFILE` environment variable is not set in your runtime environment, you
+  are not affected by this change.
+
 ## `aws-sdk-core` - v2.5.0
 
 * Due to customer requests, and an analysis of the tradeoffs, we're changing the
