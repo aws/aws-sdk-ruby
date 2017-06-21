@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.1 (2017-06-21)
+------------------
+
 * Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
 
 * Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
