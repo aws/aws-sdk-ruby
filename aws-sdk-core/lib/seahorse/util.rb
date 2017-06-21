@@ -13,11 +13,12 @@ module Seahorse
       # @param [String] string
       # @return [String] Returns the underscored version of the given string.
       def underscore(string)
-        string.
-          gsub(@irregular_regex) { |word| '_' + @irregular_inflections[word] }.
-          gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2').
-          scan(/[a-z0-9]+|\d+|[A-Z0-9]+[a-z]*/).
-          join('_').downcase
+        new_string = string.dup
+        new_string.gsub!(@irregular_regex) { |word| "_#{@irregular_inflections[word]}" }
+        new_string.gsub!(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2'.freeze)
+        new_string = new_string.scan(/[a-z0-9]+|\d+|[A-Z0-9]+[a-z]*/).join('_'.freeze)
+        new_string.downcase!
+        new_string
       end
 
       def uri_escape(string)
