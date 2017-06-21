@@ -308,6 +308,7 @@ to be backwards compatible.
 | Amazon Cognito Identity Provider    | CognitoIdentityProvider       | 2016-04-18  |
 | Amazon Cognito Sync                 | CognitoSync                   | 2014-06-30  |
 | Amazon DynamoDB                     | DynamoDB                      | 2012-08-10  |
+| Amazon DynamoDB Accelerator (DAX)   | DAX                           | 2017-04-19  |
 | Amazon DynamoDB Streams             | DynamoDBStreams               | 2012-08-10  |
 | Amazon EC2 Container Registry       | ECR                           | 2015-09-21  |
 | Amazon EC2 Container Service        | ECS                           | 2014-11-13  |
@@ -347,8 +348,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                   | WorkSpaces                    | 2015-04-08  |
 | Application Auto Scaling            | ApplicationAutoScaling        | 2016-02-06  |
 | Auto Scaling                        | AutoScaling                   | 2011-01-01  |
-| Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
 | Elastic Load Balancing              | ElasticLoadBalancingV2        | 2015-12-01  |
+| Elastic Load Balancing              | ElasticLoadBalancing          | 2012-06-01  |
 
 ## License
 

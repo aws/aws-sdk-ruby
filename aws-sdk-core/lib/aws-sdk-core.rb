@@ -52,6 +52,7 @@ module Aws
     CognitoSync
     ConfigService
     CostandUsageReportService
+    DAX
     DataPipeline
     DatabaseMigrationService
     DeviceFarm

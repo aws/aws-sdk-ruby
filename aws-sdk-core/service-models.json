@@ -114,6 +114,10 @@
     "models": "cur/2017-01-06",
     "endpoint": "cur"
   },
+  "DAX": {
+    "models": "dax/2017-04-19",
+    "endpoint": "dax"
+  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29",
     "endpoint": "datapipeline"
