@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.10.2 (2017-06-22)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
