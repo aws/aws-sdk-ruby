@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Now `aws-sdk-resources` gem contains all service gems.
+
 3.0.0.rc1 (2017-05-23)
 ------------------
 
