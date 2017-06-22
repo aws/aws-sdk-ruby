@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::ElasticLoadBalancing - Updated the waiters for Elastic Load Balancing.
+
+* Feature - Aws::Lightsail - Updated the API, and documentation for Amazon Lightsail.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
 2.10.1 (2017-06-21)
 ------------------
 
