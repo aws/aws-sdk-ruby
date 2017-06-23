@@ -6,10 +6,12 @@ module AwsSdkCodeGenerator
     # @option options [required, Hash] :api
     # @option options [Array<Hash>] :examples
     def initialize(options)
+      @name = options.fetch(:name)
       @method_name = options.fetch(:method_name)
       @operation = options.fetch(:operation)
       @api = options.fetch(:api)
-      @examples = options.fetch(:examples, [])
+      @client_examples = options.fetch(:client_examples, [])
+      @examples = options.fetch(:examples)
     end
 
     # @return [String]
@@ -24,6 +26,9 @@ module AwsSdkCodeGenerator
     # @return [Array<Hash>]
     attr_reader :examples
 
+    # @return [Array<Hash>]
+    attr_reader :client_examples
+
     # @return [String]
     def to_str
       Docstring.join_docstrings([
@@ -32,7 +37,8 @@ module AwsSdkCodeGenerator
         option_tags(operation, api),
         return_tag(operation, api),
         generated_examples(operation, api),
-        given_examples(examples),
+        shared_examples(examples, operation, api),
+        given_examples(client_examples),
         request_syntax_example(method_name, operation, api),
         response_structure_example(operation, api),
         see_also_tag(operation, api),
@@ -112,12 +118,48 @@ module AwsSdkCodeGenerator
       end
     end
 
+    def shared_examples(examples, operation, api)
+      return if examples.nil? || examples['examples'][@name].nil?
+      begin # skip broken/nil examples
+        example_block = []
+        examples['examples'][@name].each do |example|
+          comments = example['comments']
+          input = SharedExample.new(
+            example['input'],
+            method_name,
+            operation,
+            api,
+            (comments.nil? ? '' : comments['input'])).to_str_input
+          parts = []
+          parts << "#\n"
+          parts << "# @example Example: #{example['title']}\n#\n"
+          parts << "#   # #{example['description']}\n#\n"
+          parts += input.lines.map { |line| "#   " + line }
+          if example['output']
+            output = SharedExample.new(
+              example['output'],
+              method_name,
+              operation,
+              api,
+              (comments.nil? ? '' : comments['output'])).to_str_output
+            parts << "\n#\n#   resp.to_h outputs the following:\n"
+            parts += output.lines.map { |line| "#   " + line }
+          end
+          example_block << parts.join
+        end
+        example_block.join("\n")
+      rescue
+        puts "Invalid example for operation: #{@name}"
+        nil
+      end
+    end
+
     def generated_examples(operation, api)
       nil
     end
 
-    def given_examples(examples)
-      examples.map do |example|
+    def given_examples(client_examples)
+      client_examples.map do |example|
         name = example[:name]
         code = example[:code]
         "# @example #{name}\n" + Docstring.block_comment(code, gap: '   ')
