@@ -277,3 +277,7 @@ See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009
 ### Add a helper for parsing DynamoDB stream events
 
 See [related GitHub issue #1212](https://github.com/aws/aws-sdk-ruby/issues/1212).
+
+### Enhance documentation for Dynamodb `:simple_attributes` at shared examples
+
+See [related Github issue #1501](https://github.com/aws/aws-sdk-ruby/issues/1501).
